@@ -2940,8 +2940,8 @@ public:
             return 0;
 
         uint32_t fbe_string_size = (uint32_t)size;
-        assert(((fbe_string_offset > 0) && ((_buffer.offset() + fbe_offset() + 4 + fbe_string_size) <= _buffer.size())) && "Model is broken!");
-        if ((fbe_string_offset == 0) || ((_buffer.offset() + fbe_offset() + 4 + fbe_string_size) > _buffer.size()))
+        assert(((_buffer.offset() + fbe_offset() + 4 + fbe_string_size) <= _buffer.size()) && "Model is broken!");
+        if ((_buffer.offset() + fbe_offset() + 4 + fbe_string_size) > _buffer.size())
             return 4;
 
         *((uint32_t*)(_buffer.data() + _buffer.offset() + fbe_offset())) = fbe_string_size;

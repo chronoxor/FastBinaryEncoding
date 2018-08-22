@@ -15788,7 +15788,7 @@ public:
         , StructMapModel(this->_buffer)
         , StructHashModel(this->_buffer)
         , StructHashExModel(this->_buffer)
-    { final(true); }
+    { this->final(true); }
     FinalSender(const FinalSender&) = default;
     FinalSender(FinalSender&&) noexcept = default;
     virtual ~FinalSender() = default;
@@ -16024,7 +16024,7 @@ class FinalReceiver : public virtual FBE::Receiver<TBuffer>
 public:
     FinalReceiver()
         : proto::FinalReceiver<TBuffer>(this->_buffer)
-    { final(true); }
+    { this->final(true); }
     FinalReceiver(const FinalReceiver&) = default;
     FinalReceiver(FinalReceiver&&) noexcept = default;
     virtual ~FinalReceiver() = default;

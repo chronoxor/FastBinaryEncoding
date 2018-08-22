@@ -4543,7 +4543,7 @@ class FinalSender : public virtual FBE::Sender<TBuffer>
 public:
     FinalSender()
         : EnumsModel(this->_buffer)
-    { final(true); }
+    { this->final(true); }
     FinalSender(const FinalSender&) = default;
     FinalSender(FinalSender&&) noexcept = default;
     virtual ~FinalSender() = default;
@@ -4585,7 +4585,7 @@ template <class TBuffer>
 class FinalReceiver : public virtual FBE::Receiver<TBuffer>
 {
 public:
-    FinalReceiver() { final(true); }
+    FinalReceiver() { this->final(true); }
     FinalReceiver(const FinalReceiver&) = default;
     FinalReceiver(FinalReceiver&&) noexcept = default;
     virtual ~FinalReceiver() = default;
