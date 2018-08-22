@@ -60,7 +60,8 @@ if(MSVC)
   # C4702: unreachable code
   set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} /wd4005 /wd4065 /wd4127 /wd4244 /wd4505 /wd4702")
 else()
-  set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS}")
+  # error: ISO C++17 does not allow ‘register’ storage class specifier
+  set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} -Wno-register")
 endif()
 add_executable(fbec ${SOURCE_FILES} ${FLEX_lexer_OUTPUTS} ${BISON_parser_OUTPUTS})
 target_include_directories(fbec PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")

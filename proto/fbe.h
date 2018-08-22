@@ -1021,7 +1021,7 @@ public:
         uint64_t ulMant;
         ulMant = (uint64_t)(int64_t)dValue;
         dValue -= (int64_t)ulMant; // difference between input & integer
-        if ((dValue > 0.5) || (dValue == 0.5) && ((ulMant & 1) != 0))
+        if ((dValue > 0.5) || ((dValue == 0.5) && ((ulMant & 1) != 0)))
             ulMant++;
 
         if (ulMant == 0)
