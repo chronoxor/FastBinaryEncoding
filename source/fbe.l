@@ -156,6 +156,8 @@ int yyerror(const std::string& msg)
     return yyerror(msg.c_str());
 }
 
+extern int yyparse();
+
 int main(int argc, char** argv)
 {
     auto parser = optparse::OptionParser().version("1.0.0.0");
