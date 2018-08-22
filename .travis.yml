@@ -19,6 +19,8 @@ matrix:
             - graphviz
             - binutils-dev
             - uuid-dev
+            - flex
+            - bison
     - os: linux
       compiler: clang
       env: OS=linux COMPILER=clang CLANG_VERSION=6.0
@@ -35,6 +37,8 @@ matrix:
             - graphviz
             - binutils-dev
             - uuid-dev
+            - flex
+            - bison
     - os: osx
       compiler: clang
       env: OS=osx COMPILER=clang
@@ -64,6 +68,8 @@ before_install:
   - if [ "$OS" == "osx" ]; then brew update; fi
   - if [ "$OS" == "osx" ]; then brew install doxygen; fi
   - if [ "$OS" == "osx" ]; then brew install graphviz; fi
+  - if [ "$OS" == "osx" ]; then brew install flex; fi
+  - if [ "$OS" == "osx" ]; then brew install bison; fi
 
 # Build scripts
 script: 
