@@ -2088,9 +2088,9 @@ class EnumInt64 {
 // noinspection PointlessArithmeticExpressionJS
 EnumInt64.ENUM_VALUE_0 = new EnumInt64(0 + 0)
 // noinspection PointlessArithmeticExpressionJS
-EnumInt64.ENUM_VALUE_1 = new EnumInt64(-9223372036854775808 + 0)
+EnumInt64.ENUM_VALUE_1 = new EnumInt64(-9223372036854775807 + 0)
 // noinspection PointlessArithmeticExpressionJS
-EnumInt64.ENUM_VALUE_2 = new EnumInt64(-9223372036854775808 + 1)
+EnumInt64.ENUM_VALUE_2 = new EnumInt64(-9223372036854775807 + 1)
 // noinspection PointlessArithmeticExpressionJS
 EnumInt64.ENUM_VALUE_3 = new EnumInt64(9223372036854775806 + 0)
 // noinspection PointlessArithmeticExpressionJS

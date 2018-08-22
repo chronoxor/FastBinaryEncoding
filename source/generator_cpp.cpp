@@ -7522,13 +7522,13 @@ void GeneratorCpp::GenerateReceiver(const std::shared_ptr<Package>& p, bool fina
     else
         WriteLineIndent(receiver + "() {" + std::string(final ? " this->final(true); " : "") + "}");
     WriteLineIndent(receiver + "(const " + receiver + "&) = default;");
-    WriteLineIndent(receiver + "(" + receiver + "&&) noexcept = default;");
+    WriteLineIndent(receiver + "(" + receiver + "&&) = default;");
     WriteLineIndent("virtual ~" + receiver + "() = default;");
 
     // Generate receiver operators
     WriteLine();
     WriteLineIndent(receiver + "& operator=(const " + receiver + "&) = default;");
-    WriteLineIndent(receiver + "& operator=(" + receiver + "&&) noexcept = default;");
+    WriteLineIndent(receiver + "& operator=(" + receiver + "&&) = default;");
 
     // Generate receiver handlers
     if (p->body)
