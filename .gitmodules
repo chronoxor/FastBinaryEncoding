@@ -22,3 +22,7 @@
 	path = modules/CppCommon
 	url = https://github.com/chronoxor/CppCommon.git
 	branch = master
+[submodule "modules/rapidjson"]
+	path = modules/rapidjson
+	url = https://github.com/miloyip/rapidjson.git
+	branch = master
