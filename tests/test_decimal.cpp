@@ -8,7 +8,7 @@
 
 bool Compare(FBE::decimal_t value1, double value2)
 {
-	return (fabs((double)value1 - value2) <= (0.000000000001 * fmin(fabs((double)value1), fabs(value2))));
+    return (fabs((double)value1 - value2) <= (0.000000000001 * fmin(fabs((double)value1), fabs(value2))));
 }
 
 FBE::decimal_t VerifyDecimal(uint32_t low, uint32_t mid, uint32_t high, bool negative, uint8_t scale)
@@ -25,23 +25,23 @@ FBE::decimal_t VerifyDecimal(uint32_t low, uint32_t mid, uint32_t high, bool neg
 
     FBE::FieldModel<FBE::ReadBuffer, FBE::decimal_t> model(buffer, 0);
     FBE::decimal_t value1;
-	FBE::decimal_t value2;
+    FBE::decimal_t value2;
     model.get(value1);
     model.set(value1);
-	model.get(value2);
-	if (!Compare(value1, value2))
-		throw std::exception("Invalid decimal serialization!");
+    model.get(value2);
+    if (!Compare(value1, value2))
+        throw std::logic_error("Invalid decimal serialization!");
 
-	FBE::FinalModel<FBE::ReadBuffer, FBE::decimal_t> final_model(buffer, 0);
-	FBE::decimal_t value3;
-	FBE::decimal_t value4;
-	if (final_model.get(value3) != 16)
-		throw std::exception("Invalid decimal final serialization!");
-	final_model.set(value3);
-	if (final_model.get(value4) != 16)
-		throw std::exception("Invalid decimal final serialization!");
-	if (!Compare(value3, value4))
-		throw std::exception("Invalid decimal final serialization!");
+    FBE::FinalModel<FBE::ReadBuffer, FBE::decimal_t> final_model(buffer, 0);
+    FBE::decimal_t value3;
+    FBE::decimal_t value4;
+    if (final_model.get(value3) != 16)
+        throw std::logic_error("Invalid decimal final serialization!");
+    final_model.set(value3);
+    if (final_model.get(value4) != 16)
+        throw std::logic_error("Invalid decimal final serialization!");
+    if (!Compare(value3, value4))
+        throw std::logic_error("Invalid decimal final serialization!");
 
     return value1;
 }

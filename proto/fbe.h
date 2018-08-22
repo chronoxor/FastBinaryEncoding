@@ -25,10 +25,12 @@
 #if defined(__clang__)
 #include <experimental/optional>
 #define stdoptional std::experimental::optional
+#define stdmakeoptional std::experimental::make_optional
 #define stdnullopt std::experimental::nullopt
 #else
 #include <optional>
 #define stdoptional std::optional
+#define stdmakeoptional std::make_optional
 #define stdnullopt std::nullopt
 #endif
 
@@ -3733,11 +3735,11 @@ public:
     Receiver() : Receiver(nullptr) {}
     Receiver(const std::shared_ptr<TBuffer>& buffer) : _logging(false), _final(false) { _buffer = buffer ? buffer : std::make_shared<TBuffer>(); }
     Receiver(const Receiver&) = default;
-    Receiver(Receiver&&) noexcept = default;
+    Receiver(Receiver&&) = default;
     virtual ~Receiver() = default;
 
     Receiver& operator=(const Receiver&) = default;
-    Receiver& operator=(Receiver&&) noexcept = default;
+    Receiver& operator=(Receiver&&) = default;
 
     // Get the receiver buffer
     TBuffer& buffer() noexcept { return *_buffer; }
