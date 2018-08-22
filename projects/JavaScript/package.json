@@ -1,0 +1,41 @@
+{
+  "name": "fbe",
+  "version": "1.0.0",
+  "author": "Ivan Shynkarenka",
+  "description": "Fast Binary Encoding for JavaScript",
+  "homepage": "https://github.com/chronoxor/FastBinaryEncoding#readme",
+  "license": "MIT",
+  "main": "index.js",
+  "directories": {
+    "proto": "proto",
+    "tests": "tests"
+  },
+  "bugs": {
+    "url": "https://github.com/chronoxor/FastBinaryEncoding/issues"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "keywords": [
+    "fbe"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chronoxor/FastBinaryEncoding.git"
+  },
+  "dependencies": {
+    "airtap": "0.0.9",
+    "assert": "^1.4.1",
+    "benchmark": "^2.1.4",
+    "pm2": "^3.0.0",
+    "standard": "*",
+    "tape": "^4.9.1"
+  },
+  "scripts": {
+    "tests": "npm run tests-standard && npm run tests-node && npm run tests-browser",
+    "tests-browser": "airtap -- tests/*.js",
+    "tests-browser-local": "airtap --local -- tests/*.js",
+    "tests-node": "tape tests/*.js",
+    "tests-standard": "standard"
+  }
+}
