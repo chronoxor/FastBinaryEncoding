@@ -51,6 +51,8 @@ add_flex_bison_dependency(lexer parser)
 
 # Compiler
 file(GLOB_RECURSE SOURCE_FILES "source/*.cpp")
+list(APPEND SOURCE_FILES ${FLEX_lexer_OUTPUTS})
+list(APPEND SOURCE_FILES ${BISON_parser_OUTPUTS})
 if(MSVC)
   # C4005: 'identifier' : macro redefinition
   # C4065: switch statement contains 'default' but no 'case' labels
@@ -63,7 +65,7 @@ else()
   # error: ISO C++17 does not allow ‘register’ storage class specifier
   set_source_files_properties(${SOURCE_FILES} PROPERTIES COMPILE_FLAGS "${PEDANTIC_COMPILE_FLAGS} -Wno-deprecated-register")
 endif()
-add_executable(fbec ${SOURCE_FILES} ${FLEX_lexer_OUTPUTS} ${BISON_parser_OUTPUTS})
+add_executable(fbec ${SOURCE_FILES})
 target_include_directories(fbec PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
 target_link_libraries(fbec ${LINKLIBS} cpp-optparse)
 set_target_properties(fbec PROPERTIES FOLDER compiler)
