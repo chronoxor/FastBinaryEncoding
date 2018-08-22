@@ -24,14 +24,14 @@
 
 #if defined(__clang__)
 #include <experimental/optional>
-#define stdoptional std::experimental::optional
-#define stdmakeoptional std::experimental::make_optional
-#define stdnullopt std::experimental::nullopt
+#define std_optional std::experimental::optional
+#define std_make_optional std::experimental::make_optional
+#define std_nullopt std::experimental::nullopt
 #else
 #include <optional>
-#define stdoptional std::optional
-#define stdmakeoptional std::make_optional
-#define stdnullopt std::nullopt
+#define std_optional std::optional
+#define std_make_optional std::make_optional
+#define std_nullopt std::nullopt
 #endif
 
 #if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__)
@@ -1562,7 +1562,7 @@ private:
 
 // Fast Binary Encoding field model class optional specialization
 template <class TBuffer, typename T>
-class FieldModel<TBuffer, stdoptional<T>>
+class FieldModel<TBuffer, std_optional<T>>
 {
 public:
     FieldModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset), value(buffer, 0) {}
@@ -1647,7 +1647,7 @@ public:
     }
 
     // Get the optional value
-    void get(stdoptional<T>& opt, const stdoptional<T>& defaults = stdnullopt) const noexcept
+    void get(std_optional<T>& opt, const std_optional<T>& defaults = std_nullopt) const noexcept
     {
         opt = defaults;
 
@@ -1693,7 +1693,7 @@ public:
     }
 
     // Set the optional value
-    void set(const stdoptional<T>& opt)
+    void set(const std_optional<T>& opt)
     {
         size_t fbe_begin = set_begin((bool)opt);
         if (fbe_begin == 0)
@@ -2999,13 +2999,13 @@ private:
 
 // Fast Binary Encoding final model class optional specialization
 template <class TBuffer, typename T>
-class FinalModel<TBuffer, stdoptional<T>>
+class FinalModel<TBuffer, std_optional<T>>
 {
 public:
     FinalModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset), value(buffer, 0) {}
 
     // Get the allocation size
-    size_t fbe_allocation_size(const stdoptional<T>& opt) const noexcept { return 1 + (opt ? value.fbe_allocation_size(opt.value()) : 0); }
+    size_t fbe_allocation_size(const std_optional<T>& opt) const noexcept { return 1 + (opt ? value.fbe_allocation_size(opt.value()) : 0); }
 
     // Get the field offset
     size_t fbe_offset() const noexcept { return _offset; }
@@ -3047,9 +3047,9 @@ public:
     }
 
     // Get the optional value
-    size_t get(stdoptional<T>& opt) const noexcept
+    size_t get(std_optional<T>& opt) const noexcept
     {
-        opt = stdnullopt;
+        opt = std_nullopt;
 
         assert(((_buffer.offset() + fbe_offset() + 1) <= _buffer.size()) && "Model is broken!");
         if ((_buffer.offset() + fbe_offset() + 1) > _buffer.size())
@@ -3067,7 +3067,7 @@ public:
     }
 
     // Set the optional value
-    size_t set(const stdoptional<T>& opt)
+    size_t set(const std_optional<T>& opt)
     {
         assert(((_buffer.offset() + fbe_offset() + 1) <= _buffer.size()) && "Model is broken!");
         if ((_buffer.offset() + fbe_offset() + 1) > _buffer.size())
@@ -4253,9 +4253,9 @@ struct ValueWriter<TOutputStream, char[N]>
 };
 
 template <class TOutputStream, typename T>
-struct ValueWriter<TOutputStream, stdoptional<T>>
+struct ValueWriter<TOutputStream, std_optional<T>>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const stdoptional<T>& value, bool scope = true)
+    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const std_optional<T>& value, bool scope = true)
     {
         if (value)
             return ValueWriter<TOutputStream, T>::to_json(writer, value.value(), true);
@@ -4809,11 +4809,11 @@ struct ValueReader<TJson, char[N]>
 };
 
 template <class TJson, typename T>
-struct ValueReader<TJson, stdoptional<T>>
+struct ValueReader<TJson, std_optional<T>>
 {
-    static bool from_json(const TJson& json, stdoptional<T>& value)
+    static bool from_json(const TJson& json, std_optional<T>& value)
     {
-        value = stdnullopt;
+        value = std_nullopt;
 
         // Empty optional value
         if (json.IsNull())

@@ -10,7 +10,7 @@
 TEST_CASE("Serialization: domain", "[FBE]")
 {
     // Create a new account with some orders
-    proto::Account account1 = { 1, "Test", proto::State::good, { "USD", 1000.0 }, stdmakeoptional<proto::Balance>({ "EUR", 100.0 }), {} };
+    proto::Account account1 = { 1, "Test", proto::State::good, { "USD", 1000.0 }, std_make_optional<proto::Balance>({ "EUR", 100.0 }), {} };
     account1.orders.emplace_back(1, "EURUSD", proto::OrderSide::buy, proto::OrderType::market, 1.23456, 1000.0);
     account1.orders.emplace_back(2, "EURUSD", proto::OrderSide::sell, proto::OrderType::limit, 1.0, 100.0);
     account1.orders.emplace_back(3, "EURUSD", proto::OrderSide::buy, proto::OrderType::stop, 1.5, 10.0);
@@ -759,23 +759,23 @@ TEST_CASE("Serialization: struct array", "[FBE]")
     struct1.f1[0] = (uint8_t)48;
     struct1.f1[1] = (uint8_t)65;
     struct1.f2[0] = (uint8_t)97;
-    struct1.f2[1] = stdnullopt;
+    struct1.f2[1] = std_nullopt;
     struct1.f3[0] = std::vector<uint8_t>(3, 48);
     struct1.f3[1] = std::vector<uint8_t>(3, 65);
     struct1.f4[0] = std::vector<uint8_t>(3, 97);
-    struct1.f4[1] = stdnullopt;
+    struct1.f4[1] = std_nullopt;
     struct1.f5[0] = test::EnumSimple::ENUM_VALUE_1;
     struct1.f5[1] = test::EnumSimple::ENUM_VALUE_2;
     struct1.f6[0] = test::EnumSimple::ENUM_VALUE_1;
-    struct1.f6[1] = stdnullopt;
+    struct1.f6[1] = std_nullopt;
     struct1.f7[0] = test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2;
     struct1.f7[1] = test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2 | test::FlagsSimple::FLAG_VALUE_3;
     struct1.f8[0] = test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2;
-    struct1.f8[1] = stdnullopt;
+    struct1.f8[1] = std_nullopt;
     struct1.f9[0] = test::StructSimple();
     struct1.f9[1] = test::StructSimple();
     struct1.f10[0] = test::StructSimple();
-    struct1.f10[1] = stdnullopt;
+    struct1.f10[1] = std_nullopt;
 
     // Serialize the struct to the FBE stream
     FBE::test::StructArrayModel<FBE::WriteBuffer> writer;
@@ -807,7 +807,7 @@ TEST_CASE("Serialization: struct array", "[FBE]")
     REQUIRE(struct2.f1[1] == 65);
     REQUIRE(struct2.f2.size() == 2);
     REQUIRE(struct2.f2[0] == 97);
-    REQUIRE(struct2.f2[1] == stdnullopt);
+    REQUIRE(struct2.f2[1] == std_nullopt);
     REQUIRE(struct2.f3.size() == 2);
     REQUIRE(struct2.f3[0].size() == 3);
     REQUIRE(struct2.f3[0][0] == 48);
@@ -823,19 +823,19 @@ TEST_CASE("Serialization: struct array", "[FBE]")
     REQUIRE(struct2.f4[0].value()[0] == 97);
     REQUIRE(struct2.f4[0].value()[1] == 97);
     REQUIRE(struct2.f4[0].value()[2] == 97);
-    REQUIRE(struct2.f4[1] == stdnullopt);
+    REQUIRE(struct2.f4[1] == std_nullopt);
     REQUIRE(struct2.f5.size() == 2);
     REQUIRE(struct2.f5[0] == test::EnumSimple::ENUM_VALUE_1);
     REQUIRE(struct2.f5[1] == test::EnumSimple::ENUM_VALUE_2);
     REQUIRE(struct2.f6.size() == 2);
     REQUIRE(struct2.f6[0] == test::EnumSimple::ENUM_VALUE_1);
-    REQUIRE(struct2.f6[1] == stdnullopt);
+    REQUIRE(struct2.f6[1] == std_nullopt);
     REQUIRE(struct2.f7.size() == 2);
     REQUIRE(struct2.f7[0] == (test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2));
     REQUIRE(struct2.f7[1] == (test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2 | test::FlagsSimple::FLAG_VALUE_3));
     REQUIRE(struct2.f8.size() == 2);
     REQUIRE(struct2.f8[0] == (test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2));
-    REQUIRE(struct2.f8[1] == stdnullopt);
+    REQUIRE(struct2.f8[1] == std_nullopt);
     REQUIRE(struct2.f9.size() == 2);
     REQUIRE(struct2.f9[0].f2 == true);
     REQUIRE(struct2.f9[0].f12 == 255);
@@ -848,7 +848,7 @@ TEST_CASE("Serialization: struct array", "[FBE]")
     REQUIRE(struct2.f10[0].value().f2 == true);
     REQUIRE(struct2.f10[0].value().f12 == 255);
     REQUIRE(struct2.f10[0].value().f32 == "Initial string!");
-    REQUIRE(struct2.f10[1] == stdnullopt);
+    REQUIRE(struct2.f10[1] == std_nullopt);
 }
 
 TEST_CASE("Serialization: struct vector", "[FBE]")
@@ -858,23 +858,23 @@ TEST_CASE("Serialization: struct vector", "[FBE]")
     struct1.f1.emplace_back((uint8_t)48);
     struct1.f1.emplace_back((uint8_t)65);
     struct1.f2.emplace_back((uint8_t)97);
-    struct1.f2.emplace_back(stdnullopt);
+    struct1.f2.emplace_back(std_nullopt);
     struct1.f3.emplace_back(std::vector<uint8_t>(3, 48));
     struct1.f3.emplace_back(std::vector<uint8_t>(3, 65));
     struct1.f4.emplace_back(std::vector<uint8_t>(3, 97));
-    struct1.f4.emplace_back(stdnullopt);
+    struct1.f4.emplace_back(std_nullopt);
     struct1.f5.emplace_back(test::EnumSimple::ENUM_VALUE_1);
     struct1.f5.emplace_back(test::EnumSimple::ENUM_VALUE_2);
     struct1.f6.emplace_back(test::EnumSimple::ENUM_VALUE_1);
-    struct1.f6.emplace_back(stdnullopt);
+    struct1.f6.emplace_back(std_nullopt);
     struct1.f7.emplace_back(test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2);
     struct1.f7.emplace_back(test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2 | test::FlagsSimple::FLAG_VALUE_3);
     struct1.f8.emplace_back(test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2);
-    struct1.f8.emplace_back(stdnullopt);
+    struct1.f8.emplace_back(std_nullopt);
     struct1.f9.emplace_back(test::StructSimple());
     struct1.f9.emplace_back(test::StructSimple());
     struct1.f10.emplace_back(test::StructSimple());
-    struct1.f10.emplace_back(stdnullopt);
+    struct1.f10.emplace_back(std_nullopt);
 
     // Serialize the struct to the FBE stream
     FBE::test::StructVectorModel<FBE::WriteBuffer> writer;
@@ -906,7 +906,7 @@ TEST_CASE("Serialization: struct vector", "[FBE]")
     REQUIRE(struct2.f1[1] == 65);
     REQUIRE(struct2.f2.size() == 2);
     REQUIRE(struct2.f2[0] == 97);
-    REQUIRE(struct2.f2[1] == stdnullopt);
+    REQUIRE(struct2.f2[1] == std_nullopt);
     REQUIRE(struct2.f3.size() == 2);
     REQUIRE(struct2.f3[0].size() == 3);
     REQUIRE(struct2.f3[0][0] == 48);
@@ -922,19 +922,19 @@ TEST_CASE("Serialization: struct vector", "[FBE]")
     REQUIRE(struct2.f4[0].value()[0] == 97);
     REQUIRE(struct2.f4[0].value()[1] == 97);
     REQUIRE(struct2.f4[0].value()[2] == 97);
-    REQUIRE(struct2.f4[1] == stdnullopt);
+    REQUIRE(struct2.f4[1] == std_nullopt);
     REQUIRE(struct2.f5.size() == 2);
     REQUIRE(struct2.f5[0] == test::EnumSimple::ENUM_VALUE_1);
     REQUIRE(struct2.f5[1] == test::EnumSimple::ENUM_VALUE_2);
     REQUIRE(struct2.f6.size() == 2);
     REQUIRE(struct2.f6[0] == test::EnumSimple::ENUM_VALUE_1);
-    REQUIRE(struct2.f6[1] == stdnullopt);
+    REQUIRE(struct2.f6[1] == std_nullopt);
     REQUIRE(struct2.f7.size() == 2);
     REQUIRE(struct2.f7[0] == (test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2));
     REQUIRE(struct2.f7[1] == (test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2 | test::FlagsSimple::FLAG_VALUE_3));
     REQUIRE(struct2.f8.size() == 2);
     REQUIRE(struct2.f8[0] == (test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2));
-    REQUIRE(struct2.f8[1] == stdnullopt);
+    REQUIRE(struct2.f8[1] == std_nullopt);
     REQUIRE(struct2.f9.size() == 2);
     REQUIRE(struct2.f9[0].f2 == true);
     REQUIRE(struct2.f9[0].f12 == 255);
@@ -947,7 +947,7 @@ TEST_CASE("Serialization: struct vector", "[FBE]")
     REQUIRE(struct2.f10[0].value().f2 == true);
     REQUIRE(struct2.f10[0].value().f12 == 255);
     REQUIRE(struct2.f10[0].value().f32 == "Initial string!");
-    REQUIRE(struct2.f10[1] == stdnullopt);
+    REQUIRE(struct2.f10[1] == std_nullopt);
 }
 
 TEST_CASE("Serialization: struct list", "[FBE]")
@@ -957,23 +957,23 @@ TEST_CASE("Serialization: struct list", "[FBE]")
     struct1.f1.emplace_back((uint8_t)48);
     struct1.f1.emplace_back((uint8_t)65);
     struct1.f2.emplace_back((uint8_t)97);
-    struct1.f2.emplace_back(stdnullopt);
+    struct1.f2.emplace_back(std_nullopt);
     struct1.f3.emplace_back(std::vector<uint8_t>(3, 48));
     struct1.f3.emplace_back(std::vector<uint8_t>(3, 65));
     struct1.f4.emplace_back(std::vector<uint8_t>(3, 97));
-    struct1.f4.emplace_back(stdnullopt);
+    struct1.f4.emplace_back(std_nullopt);
     struct1.f5.emplace_back(test::EnumSimple::ENUM_VALUE_1);
     struct1.f5.emplace_back(test::EnumSimple::ENUM_VALUE_2);
     struct1.f6.emplace_back(test::EnumSimple::ENUM_VALUE_1);
-    struct1.f6.emplace_back(stdnullopt);
+    struct1.f6.emplace_back(std_nullopt);
     struct1.f7.emplace_back(test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2);
     struct1.f7.emplace_back(test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2 | test::FlagsSimple::FLAG_VALUE_3);
     struct1.f8.emplace_back(test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2);
-    struct1.f8.emplace_back(stdnullopt);
+    struct1.f8.emplace_back(std_nullopt);
     struct1.f9.emplace_back(test::StructSimple());
     struct1.f9.emplace_back(test::StructSimple());
     struct1.f10.emplace_back(test::StructSimple());
-    struct1.f10.emplace_back(stdnullopt);
+    struct1.f10.emplace_back(std_nullopt);
 
     // Serialize the struct to the FBE stream
     FBE::test::StructListModel<FBE::WriteBuffer> writer;
@@ -1005,7 +1005,7 @@ TEST_CASE("Serialization: struct list", "[FBE]")
     REQUIRE(struct2.f1.back() == 65);
     REQUIRE(struct2.f2.size() == 2);
     REQUIRE(struct2.f2.front() == 97);
-    REQUIRE(struct2.f2.back() == stdnullopt);
+    REQUIRE(struct2.f2.back() == std_nullopt);
     REQUIRE(struct2.f3.size() == 2);
     REQUIRE(struct2.f3.front().size() == 3);
     REQUIRE(struct2.f3.front()[0] == 48);
@@ -1021,19 +1021,19 @@ TEST_CASE("Serialization: struct list", "[FBE]")
     REQUIRE(struct2.f4.front().value()[0] == 97);
     REQUIRE(struct2.f4.front().value()[1] == 97);
     REQUIRE(struct2.f4.front().value()[2] == 97);
-    REQUIRE(struct2.f4.back() == stdnullopt);
+    REQUIRE(struct2.f4.back() == std_nullopt);
     REQUIRE(struct2.f5.size() == 2);
     REQUIRE(struct2.f5.front() == test::EnumSimple::ENUM_VALUE_1);
     REQUIRE(struct2.f5.back() == test::EnumSimple::ENUM_VALUE_2);
     REQUIRE(struct2.f6.size() == 2);
     REQUIRE(struct2.f6.front() == test::EnumSimple::ENUM_VALUE_1);
-    REQUIRE(struct2.f6.back() == stdnullopt);
+    REQUIRE(struct2.f6.back() == std_nullopt);
     REQUIRE(struct2.f7.size() == 2);
     REQUIRE(struct2.f7.front() == (test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2));
     REQUIRE(struct2.f7.back() == (test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2 | test::FlagsSimple::FLAG_VALUE_3));
     REQUIRE(struct2.f8.size() == 2);
     REQUIRE(struct2.f8.front() == (test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2));
-    REQUIRE(struct2.f8.back() == stdnullopt);
+    REQUIRE(struct2.f8.back() == std_nullopt);
     REQUIRE(struct2.f9.size() == 2);
     REQUIRE(struct2.f9.front().f2 == true);
     REQUIRE(struct2.f9.front().f12 == 255);
@@ -1046,7 +1046,7 @@ TEST_CASE("Serialization: struct list", "[FBE]")
     REQUIRE(struct2.f10.front().value().f2 == true);
     REQUIRE(struct2.f10.front().value().f12 == 255);
     REQUIRE(struct2.f10.front().value().f32 == "Initial string!");
-    REQUIRE(struct2.f10.back() == stdnullopt);
+    REQUIRE(struct2.f10.back() == std_nullopt);
 }
 
 TEST_CASE("Serialization: struct set", "[FBE]")
@@ -1114,19 +1114,19 @@ TEST_CASE("Serialization: struct map", "[FBE]")
     struct1.f1.emplace(10, (uint8_t)48);
     struct1.f1.emplace(20, (uint8_t)65);
     struct1.f2.emplace(10, (uint8_t)97);
-    struct1.f2.emplace(20, stdnullopt);
+    struct1.f2.emplace(20, std_nullopt);
     struct1.f3.emplace(10, std::vector<uint8_t>(3, 48));
     struct1.f3.emplace(20, std::vector<uint8_t>(3, 65));
     struct1.f4.emplace(10, std::vector<uint8_t>(3, 97));
-    struct1.f4.emplace(20, stdnullopt);
+    struct1.f4.emplace(20, std_nullopt);
     struct1.f5.emplace(10, test::EnumSimple::ENUM_VALUE_1);
     struct1.f5.emplace(20, test::EnumSimple::ENUM_VALUE_2);
     struct1.f6.emplace(10, test::EnumSimple::ENUM_VALUE_1);
-    struct1.f6.emplace(20, stdnullopt);
+    struct1.f6.emplace(20, std_nullopt);
     struct1.f7.emplace(10, test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2);
     struct1.f7.emplace(20, test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2 | test::FlagsSimple::FLAG_VALUE_3);
     struct1.f8.emplace(10, test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2);
-    struct1.f8.emplace(20, stdnullopt);
+    struct1.f8.emplace(20, std_nullopt);
     test::StructSimple s1;
     s1.uid = 48;
     struct1.f9.emplace(10, s1);
@@ -1134,7 +1134,7 @@ TEST_CASE("Serialization: struct map", "[FBE]")
     s2.uid = 65;
     struct1.f9.emplace(20, s2);
     struct1.f10.emplace(10, s1);
-    struct1.f10.emplace(20, stdnullopt);
+    struct1.f10.emplace(20, std_nullopt);
 
     // Serialize the struct to the FBE stream
     FBE::test::StructMapModel<FBE::WriteBuffer> writer;
@@ -1166,31 +1166,31 @@ TEST_CASE("Serialization: struct map", "[FBE]")
     REQUIRE(struct2.f1.find(20)->second == 65);
     REQUIRE(struct2.f2.size() == 2);
     REQUIRE(struct2.f2.find(10)->second == 97);
-    REQUIRE(struct2.f2.find(20)->second == stdnullopt);
+    REQUIRE(struct2.f2.find(20)->second == std_nullopt);
     REQUIRE(struct2.f3.size() == 2);
     REQUIRE(struct2.f3.find(10)->second.size() == 3);
     REQUIRE(struct2.f3.find(20)->second.size() == 3);
     REQUIRE(struct2.f4.size() == 2);
     REQUIRE(struct2.f4.find(10)->second.value().size() == 3);
-    REQUIRE(struct2.f4.find(20)->second == stdnullopt);
+    REQUIRE(struct2.f4.find(20)->second == std_nullopt);
     REQUIRE(struct2.f5.size() == 2);
     REQUIRE(struct2.f5.find(10)->second == test::EnumSimple::ENUM_VALUE_1);
     REQUIRE(struct2.f5.find(20)->second == test::EnumSimple::ENUM_VALUE_2);
     REQUIRE(struct2.f6.size() == 2);
     REQUIRE(struct2.f6.find(10)->second == test::EnumSimple::ENUM_VALUE_1);
-    REQUIRE(struct2.f6.find(20)->second == stdnullopt);
+    REQUIRE(struct2.f6.find(20)->second == std_nullopt);
     REQUIRE(struct2.f7.size() == 2);
     REQUIRE(struct2.f7.find(10)->second == (test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2));
     REQUIRE(struct2.f7.find(20)->second == (test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2 | test::FlagsSimple::FLAG_VALUE_3));
     REQUIRE(struct2.f8.size() == 2);
     REQUIRE(struct2.f8.find(10)->second == (test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2));
-    REQUIRE(struct2.f8.find(20)->second == stdnullopt);
+    REQUIRE(struct2.f8.find(20)->second == std_nullopt);
     REQUIRE(struct2.f9.size() == 2);
     REQUIRE(struct2.f9.find(10)->second.uid == 48);
     REQUIRE(struct2.f9.find(20)->second.uid == 65);
     REQUIRE(struct2.f10.size() == 2);
     REQUIRE(struct2.f10.find(10)->second.value().uid == 48);
-    REQUIRE(struct2.f10.find(20)->second == stdnullopt);
+    REQUIRE(struct2.f10.find(20)->second == std_nullopt);
 }
 
 TEST_CASE("Serialization: struct hash", "[FBE]")
@@ -1200,19 +1200,19 @@ TEST_CASE("Serialization: struct hash", "[FBE]")
     struct1.f1.emplace("10", (uint8_t)48);
     struct1.f1.emplace("20", (uint8_t)65);
     struct1.f2.emplace("10", (uint8_t)97);
-    struct1.f2.emplace("20", stdnullopt);
+    struct1.f2.emplace("20", std_nullopt);
     struct1.f3.emplace("10", std::vector<uint8_t>(3, 48));
     struct1.f3.emplace("20", std::vector<uint8_t>(3, 65));
     struct1.f4.emplace("10", std::vector<uint8_t>(3, 97));
-    struct1.f4.emplace("20", stdnullopt);
+    struct1.f4.emplace("20", std_nullopt);
     struct1.f5.emplace("10", test::EnumSimple::ENUM_VALUE_1);
     struct1.f5.emplace("20", test::EnumSimple::ENUM_VALUE_2);
     struct1.f6.emplace("10", test::EnumSimple::ENUM_VALUE_1);
-    struct1.f6.emplace("20", stdnullopt);
+    struct1.f6.emplace("20", std_nullopt);
     struct1.f7.emplace("10", test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2);
     struct1.f7.emplace("20", test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2 | test::FlagsSimple::FLAG_VALUE_3);
     struct1.f8.emplace("10", test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2);
-    struct1.f8.emplace("20", stdnullopt);
+    struct1.f8.emplace("20", std_nullopt);
     test::StructSimple s1;
     s1.uid = 48;
     struct1.f9.emplace("10", s1);
@@ -1220,7 +1220,7 @@ TEST_CASE("Serialization: struct hash", "[FBE]")
     s2.uid = 65;
     struct1.f9.emplace("20", s2);
     struct1.f10.emplace("10", s1);
-    struct1.f10.emplace("20", stdnullopt);
+    struct1.f10.emplace("20", std_nullopt);
 
     // Serialize the struct to the FBE stream
     FBE::test::StructHashModel<FBE::WriteBuffer> writer;
@@ -1252,31 +1252,31 @@ TEST_CASE("Serialization: struct hash", "[FBE]")
     REQUIRE(struct2.f1.find("20")->second == 65);
     REQUIRE(struct2.f2.size() == 2);
     REQUIRE(struct2.f2.find("10")->second == 97);
-    REQUIRE(struct2.f2.find("20")->second == stdnullopt);
+    REQUIRE(struct2.f2.find("20")->second == std_nullopt);
     REQUIRE(struct2.f3.size() == 2);
     REQUIRE(struct2.f3.find("10")->second.size() == 3);
     REQUIRE(struct2.f3.find("20")->second.size() == 3);
     REQUIRE(struct2.f4.size() == 2);
     REQUIRE(struct2.f4.find("10")->second.value().size() == 3);
-    REQUIRE(struct2.f4.find("20")->second == stdnullopt);
+    REQUIRE(struct2.f4.find("20")->second == std_nullopt);
     REQUIRE(struct2.f5.size() == 2);
     REQUIRE(struct2.f5.find("10")->second == test::EnumSimple::ENUM_VALUE_1);
     REQUIRE(struct2.f5.find("20")->second == test::EnumSimple::ENUM_VALUE_2);
     REQUIRE(struct2.f6.size() == 2);
     REQUIRE(struct2.f6.find("10")->second == test::EnumSimple::ENUM_VALUE_1);
-    REQUIRE(struct2.f6.find("20")->second == stdnullopt);
+    REQUIRE(struct2.f6.find("20")->second == std_nullopt);
     REQUIRE(struct2.f7.size() == 2);
     REQUIRE(struct2.f7.find("10")->second == (test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2));
     REQUIRE(struct2.f7.find("20")->second == (test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2 | test::FlagsSimple::FLAG_VALUE_3));
     REQUIRE(struct2.f8.size() == 2);
     REQUIRE(struct2.f8.find("10")->second == (test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2));
-    REQUIRE(struct2.f8.find("20")->second == stdnullopt);
+    REQUIRE(struct2.f8.find("20")->second == std_nullopt);
     REQUIRE(struct2.f9.size() == 2);
     REQUIRE(struct2.f9.find("10")->second.uid == 48);
     REQUIRE(struct2.f9.find("20")->second.uid == 65);
     REQUIRE(struct2.f10.size() == 2);
     REQUIRE(struct2.f10.find("10")->second.value().uid == 48);
-    REQUIRE(struct2.f10.find("20")->second == stdnullopt);
+    REQUIRE(struct2.f10.find("20")->second == std_nullopt);
 }
 
 TEST_CASE("Serialization: struct hash extended", "[FBE]")
@@ -1290,7 +1290,7 @@ TEST_CASE("Serialization: struct hash extended", "[FBE]")
     s2.uid = 65;
     struct1.f1.emplace(s2, test::StructNested());
     struct1.f2.emplace(s1, test::StructNested());
-    struct1.f2.emplace(s2, stdnullopt);
+    struct1.f2.emplace(s2, std_nullopt);
 
     // Serialize the struct to the FBE stream
     FBE::test::StructHashExModel<FBE::WriteBuffer> writer;
@@ -1322,5 +1322,5 @@ TEST_CASE("Serialization: struct hash extended", "[FBE]")
     REQUIRE(struct2.f1.find(s2)->second.f1002 == test::EnumTyped::ENUM_VALUE_2);
     REQUIRE(struct2.f2.size() == 2);
     REQUIRE(struct2.f2.find(s1)->second.value().f1002 == test::EnumTyped::ENUM_VALUE_2);
-    REQUIRE(struct2.f2.find(s2)->second == stdnullopt);
+    REQUIRE(struct2.f2.find(s2)->second == std_nullopt);
 }

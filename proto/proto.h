@@ -1742,7 +1742,7 @@ struct Account
     std::string name;
     ::proto::State state;
     ::proto::Balance wallet;
-    stdoptional<::proto::Balance> asset;
+    std_optional<::proto::Balance> asset;
     std::vector<::proto::Order> orders;
 
     Account()
@@ -1753,7 +1753,7 @@ struct Account
         , asset()
         , orders()
     {}
-    Account(int32_t arg_uid, const std::string& arg_name, const ::proto::State& arg_state, const ::proto::Balance& arg_wallet, const stdoptional<::proto::Balance>& arg_asset, const std::vector<::proto::Order>& arg_orders)
+    Account(int32_t arg_uid, const std::string& arg_name, const ::proto::State& arg_state, const ::proto::Balance& arg_wallet, const std_optional<::proto::Balance>& arg_asset, const std::vector<::proto::Order>& arg_orders)
         : uid(arg_uid)
         , name(arg_name)
         , state(arg_state)
@@ -2119,7 +2119,7 @@ public:
         if ((fbe_current_size + asset.fbe_size()) <= fbe_struct_size)
             asset.get(fbe_value.asset);
         else
-            fbe_value.asset = stdnullopt;
+            fbe_value.asset = std_nullopt;
         fbe_current_size += asset.fbe_size();
 
         if ((fbe_current_size + orders.fbe_size()) <= fbe_struct_size)
@@ -2187,7 +2187,7 @@ public:
     FieldModel<TBuffer, std::string> name;
     FieldModel<TBuffer, ::proto::State> state;
     FieldModel<TBuffer, ::proto::Balance> wallet;
-    FieldModel<TBuffer, stdoptional<::proto::Balance>> asset;
+    FieldModel<TBuffer, std_optional<::proto::Balance>> asset;
     FieldModelVector<TBuffer, ::proto::Order> orders;
 };
 
@@ -2478,7 +2478,7 @@ public:
     FinalModel<TBuffer, std::string> name;
     FinalModel<TBuffer, ::proto::State> state;
     FinalModel<TBuffer, ::proto::Balance> wallet;
-    FinalModel<TBuffer, stdoptional<::proto::Balance>> asset;
+    FinalModel<TBuffer, std_optional<::proto::Balance>> asset;
     FinalModelVector<TBuffer, ::proto::Order> orders;
 };
 
