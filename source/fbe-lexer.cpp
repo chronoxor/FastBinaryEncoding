@@ -1,6 +1,6 @@
-#line 1 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe-lexer.cpp"
+#line 1 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe-lexer.cpp"
 
-#line 3 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe-lexer.cpp"
+#line 3 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe-lexer.cpp"
 
 #define  YY_INT_ALIGNED short int
 
@@ -621,8 +621,8 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
-#line 7 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 1 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 7 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 
 #include "fbe.h"
 #include "fbe-parser.hpp"
@@ -641,9 +641,9 @@ int yystring(int s);
 int yyerror(const char* msg);
 int yyerror(const std::string& msg);
 
-#line 644 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe-lexer.cpp"
+#line 644 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe-lexer.cpp"
 #define YY_NO_INPUT 1
-#line 646 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe-lexer.cpp"
+#line 646 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe-lexer.cpp"
 
 #define INITIAL 0
 
@@ -855,10 +855,10 @@ YY_DECL
 		}
 
 	{
-#line 32 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 32 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 
 
-#line 861 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe-lexer.cpp"
+#line 861 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe-lexer.cpp"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -927,313 +927,313 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 34 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 34 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { /* Single line comment */ }
 	YY_BREAK
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 35 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 35 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { /* Multilines comment */ }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 37 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 37 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yytoken(PACKAGE); }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 38 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 38 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yytoken(OFFSET); }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 39 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 39 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yytoken(IMPORT); }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 40 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 40 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yytoken(ENUM); }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 41 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 41 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yytoken(FLAGS); }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 42 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 42 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yytoken(STRUCT); }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 43 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 43 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yytoken(KEY); }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 45 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 45 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(BOOL); }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 46 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 46 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(BYTE); }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 47 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 47 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(BYTES); }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 48 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 48 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(CHAR); }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 49 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 49 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(WCHAR); }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 50 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 50 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(INT8); }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 51 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 51 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(UINT8); }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 52 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 52 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(INT16); }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 53 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 53 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(UINT16); }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 54 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 54 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(INT32); }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 55 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 55 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(UINT32); }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 56 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 56 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(INT64); }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 57 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 57 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(UINT64); }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 58 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 58 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(FLOAT); }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 59 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 59 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(DOUBLE); }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 60 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 60 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(DECIMAL); }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 61 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 61 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(STRING); }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 62 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 62 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(TIMESTAMP); }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 63 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 63 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(UUID); }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 65 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 65 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(CONST_TRUE); }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 66 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 66 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(CONST_FALSE); }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 67 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 67 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(CONST_NULL); }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 68 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 68 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(CONST_UTC); }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 69 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 69 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(CONST_UUID1); }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 70 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 70 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(CONST_UUID4); }
 	YY_BREAK
 case 35:
 /* rule 35 can match eol */
 YY_RULE_SETUP
-#line 72 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 72 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(CONST_CHAR); }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 73 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 73 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(CONST_INT); }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 74 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 74 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(CONST_INT); }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 75 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 75 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(CONST_INT); }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 76 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 76 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(CONST_FLOAT); }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 77 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 77 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(CONST_FLOAT); }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 78 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 78 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(CONST_FLOAT); }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 79 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 79 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(CONST_STRING); }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 81 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 81 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yystring(IDENTIFIER); }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 83 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 83 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yychar('.'); }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 84 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 84 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yychar(':'); }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 85 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 85 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yychar(';'); }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 86 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 86 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yychar('='); }
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 87 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 87 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yychar('|'); }
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 88 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 88 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yychar('!'); }
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 89 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 89 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yychar('?'); }
 	YY_BREAK
 case 51:
 YY_RULE_SETUP
-#line 90 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 90 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yychar('('); }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 91 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 91 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yychar(')'); }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 92 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 92 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yychar('['); }
 	YY_BREAK
 case 54:
 YY_RULE_SETUP
-#line 93 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 93 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yychar(']'); }
 	YY_BREAK
 case 55:
 YY_RULE_SETUP
-#line 94 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 94 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yychar('<'); }
 	YY_BREAK
 case 56:
 YY_RULE_SETUP
-#line 95 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 95 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yychar('>'); }
 	YY_BREAK
 case 57:
 YY_RULE_SETUP
-#line 96 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 96 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yychar('{'); }
 	YY_BREAK
 case 58:
 YY_RULE_SETUP
-#line 97 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 97 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); return yychar('}'); }
 	YY_BREAK
 case 59:
 /* rule 59 can match eol */
 YY_RULE_SETUP
-#line 99 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 99 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); }
 	YY_BREAK
 case 60:
 YY_RULE_SETUP
-#line 101 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 101 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 { yycount(); yyerror("Unknown token!"); }
 	YY_BREAK
 case 61:
 YY_RULE_SETUP
-#line 103 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 103 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 ECHO;
 	YY_BREAK
-#line 1236 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe-lexer.cpp"
+#line 1236 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe-lexer.cpp"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2209,7 +2209,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 103 "Z:/projects/CppProjects/FastBinaryEncoding/source/fbe.l"
+#line 103 "Z:/Projects/CppProjects/FastBinaryEncoding/source/fbe.l"
 
 
 int yycolumn = 0;
