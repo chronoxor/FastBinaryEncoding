@@ -25,7 +25,7 @@ TEST_CASE("Clone structs", "[FBE]")
     REQUIRE((account2.state | proto::State::good));
     REQUIRE(std::string(account2.wallet.currency) == "USD");
     REQUIRE(account2.wallet.amount == 1000.0);
-    REQUIRE(account2.asset.has_value());
+    REQUIRE((bool)account2.asset);
     REQUIRE(std::string(account2.asset.value().currency) == "EUR");
     REQUIRE(account2.asset.value().amount == 100.0);
     REQUIRE(account2.orders.size() == 3);
