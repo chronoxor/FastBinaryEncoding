@@ -27,8 +27,8 @@ include(SetPlatformFeatures)
 include(SystemInformation)
 
 # External packages
-find_package(Bison)
-find_package(Flex)
+find_package(BISON)
+find_package(FLEX)
 find_package(Threads REQUIRED)
 
 # Modules
