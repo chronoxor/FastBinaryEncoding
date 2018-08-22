@@ -1,0 +1,4 @@
+# Exclude generated lexer & parser
+fbe-lexer.cpp
+fbe-parser.hpp
+fbe-parser.cpp
