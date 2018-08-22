@@ -94,7 +94,7 @@ TEST_CASE("Create & access", "[FBE]")
     REQUIRE(wallet_amount == 1000.0);
     reader.model.wallet.get_end(wallet_begin);
 
-    REQUIRE((bool)reader.model.asset);
+    REQUIRE(reader.model.asset.has_value());
     asset_begin = reader.model.asset.get_begin();
     asset_wallet_begin = reader.model.asset.value.get_begin();
     reader.model.asset.value.currency.get(asset_wallet_currency);

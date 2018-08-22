@@ -50,7 +50,7 @@ TEST_CASE("Extending: old -> new", "[FBE]")
     REQUIRE(std::string(account2.wallet.currency) == "USD");
     REQUIRE(account2.wallet.amount == 1000.0);
     REQUIRE(account2.wallet.locked == 0.0);
-    REQUIRE((bool)account2.asset);
+    REQUIRE(account2.asset.has_value());
     REQUIRE(std::string(account2.asset.value().currency) == "EUR");
     REQUIRE(account2.asset.value().amount == 100.0);
     REQUIRE(account2.asset.value().locked == 0.0);
@@ -127,7 +127,7 @@ TEST_CASE("Extending: new -> old", "[FBE]")
     REQUIRE((account2.state | proto::State::good));
     REQUIRE(std::string(account2.wallet.currency) == "USD");
     REQUIRE(account2.wallet.amount == 1000.0);
-    REQUIRE((bool)account2.asset);
+    REQUIRE(account2.asset.has_value());
     REQUIRE(std::string(account2.asset.value().currency) == "EUR");
     REQUIRE(account2.asset.value().amount == 100.0);
     REQUIRE(account2.orders.size() == 3);
