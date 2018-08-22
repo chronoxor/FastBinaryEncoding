@@ -1,10 +1,10 @@
-# CppTemplate
+# FastBinaryEncoding
 
-[![Linux build status](https://img.shields.io/travis/chronoxor/CppTemplate/master.svg?label=Linux)](https://travis-ci.org/chronoxor/CppTemplate)
-[![OSX build status](https://img.shields.io/travis/chronoxor/CppTemplate/master.svg?label=OSX)](https://travis-ci.org/chronoxor/CppTemplate)
-[![Cygwin build status](https://img.shields.io/appveyor/ci/chronoxor/CppTemplate/master.svg?label=Cygwin)](https://ci.appveyor.com/project/chronoxor/CppTemplate)
-[![MinGW build status](https://img.shields.io/appveyor/ci/chronoxor/CppTemplate/master.svg?label=MinGW)](https://ci.appveyor.com/project/chronoxor/CppTemplate)
-[![Windows build status](https://img.shields.io/appveyor/ci/chronoxor/CppTemplate/master.svg?label=Windows)](https://ci.appveyor.com/project/chronoxor/CppTemplate)
+[![Linux build status](https://img.shields.io/travis/chronoxor/FastBinaryEncoding/master.svg?label=Linux)](https://travis-ci.org/chronoxor/FastBinaryEncoding)
+[![OSX build status](https://img.shields.io/travis/chronoxor/FastBinaryEncoding/master.svg?label=OSX)](https://travis-ci.org/chronoxor/FastBinaryEncoding)
+[![Cygwin build status](https://img.shields.io/appveyor/ci/chronoxor/FastBinaryEncoding/master.svg?label=Cygwin)](https://ci.appveyor.com/project/chronoxor/FastBinaryEncoding)
+[![MinGW build status](https://img.shields.io/appveyor/ci/chronoxor/FastBinaryEncoding/master.svg?label=MinGW)](https://ci.appveyor.com/project/chronoxor/FastBinaryEncoding)
+[![Windows build status](https://img.shields.io/appveyor/ci/chronoxor/FastBinaryEncoding/master.svg?label=Windows)](https://ci.appveyor.com/project/chronoxor/FastBinaryEncoding)
 
 C++ Template Library contains initial templates for a new C++ library project.
 
