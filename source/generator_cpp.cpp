@@ -2726,7 +2726,14 @@ public:
 
         // Get exponent value
         double dValue = (double)value;
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#endif
         int32_t iExp = (int32_t)(((uint32_t)((*(uint64_t*)&dValue) >> 52) & 0x7FFu) - DBLBIAS);
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
         if ((iExp < -94) || (iExp > 96))
         {
             // Value too big for .NET Decimal (exponent is limited to [-94, 96])
