@@ -1811,7 +1811,7 @@ public:
         auto fbe_model = (*this)[0];
         for (size_t i = N; i-- > 0;)
         {
-            T value;
+            T value = T();
             fbe_model.get(value);
             values.emplace_back(value);
             fbe_model.fbe_shift(fbe_model.fbe_size());
@@ -2006,7 +2006,7 @@ public:
         auto fbe_model = (*this)[0];
         for (size_t i = fbe_vector_size; i-- > 0;)
         {
-            T value;
+            T value = T();
             fbe_model.get(value);
             values.emplace_back(value);
             fbe_model.fbe_shift(fbe_model.fbe_size());
@@ -2025,7 +2025,7 @@ public:
         auto fbe_model = (*this)[0];
         for (size_t i = fbe_vector_size; i-- > 0;)
         {
-            T value;
+            T value = T();
             fbe_model.get(value);
             values.emplace_back(value);
             fbe_model.fbe_shift(fbe_model.fbe_size());
@@ -2044,7 +2044,7 @@ public:
         auto fbe_model = (*this)[0];
         for (size_t i = fbe_vector_size; i-- > 0;)
         {
-            T value;
+            T value = T();
             fbe_model.get(value);
             values.emplace(value);
             fbe_model.fbe_shift(fbe_model.fbe_size());
@@ -3212,7 +3212,7 @@ public:
         FinalModel<TBuffer, T> fbe_model(_buffer, fbe_offset());
         for (size_t i = N; i-- > 0;)
         {
-            T value;
+            T value = T();
             size_t offset = fbe_model.get(value);
             values.emplace_back(value);
             fbe_model.fbe_shift(offset);
@@ -3365,7 +3365,7 @@ public:
         FinalModel<TBuffer, T> fbe_model(_buffer, fbe_offset() + 4);
         for (size_t i = fbe_vector_size; i-- > 0;)
         {
-            T value;
+            T value = T();
             size_t offset = fbe_model.get(value);
             values.emplace_back(value);
             fbe_model.fbe_shift(offset);
@@ -3391,7 +3391,7 @@ public:
         FinalModel<TBuffer, T> fbe_model(_buffer, fbe_offset() + 4);
         for (size_t i = fbe_vector_size; i-- > 0;)
         {
-            T value;
+            T value = T();
             size_t offset = fbe_model.get(value);
             values.emplace_back(value);
             fbe_model.fbe_shift(offset);
@@ -3417,7 +3417,7 @@ public:
         FinalModel<TBuffer, T> fbe_model(_buffer, fbe_offset() + 4);
         for (size_t i = fbe_vector_size; i-- > 0;)
         {
-            T value;
+            T value = T();
             size_t offset = fbe_model.get(value);
             values.emplace(value);
             fbe_model.fbe_shift(offset);
