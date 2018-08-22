@@ -1851,7 +1851,14 @@ public:
     // Get the optional value
     void get(std_optional<T>& opt, const std_optional<T>& defaults = std_nullopt) const noexcept
     {
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wuninitialized"
+#endif
         opt = defaults;
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
 
         size_t fbe_begin = get_begin();
         if (fbe_begin == 0)
