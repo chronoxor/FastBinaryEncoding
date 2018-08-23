@@ -30,18 +30,12 @@ include(SystemInformation)
 find_package(BISON)
 find_package(FLEX)
 find_package(Threads REQUIRED)
-if(WIN32)
-  find_package(RPC)
-endif()
 
 # Modules
 add_subdirectory("modules")
 
 # Link libraries
 list(APPEND LINKLIBS cppcommon)
-if(WIN32)
-  list(APPEND LINKLIBS ${RPC_LIBRARIES})
-endif()
 
 # System directories
 include_directories(SYSTEM "${CMAKE_CURRENT_SOURCE_DIR}/modules")
