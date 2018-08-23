@@ -21,9 +21,9 @@ cache:
 # Build matrix
 environment:
   matrix:
-    - type: Cygwin
-      build: C:\cygwin64\bin\bash -lc "cd $APPVEYOR_BUILD_FOLDER/build; exec 0</dev/null; ./cygwin.sh"
-      command: C:\cygwin64\bin\bash -lc
+#    - type: Cygwin
+#      build: C:\cygwin64\bin\bash -lc "cd $APPVEYOR_BUILD_FOLDER/build; exec 0</dev/null; ./cygwin.sh"
+#      command: C:\cygwin64\bin\bash -lc
     - type: MinGW
       build: call mingw.bat
       command: cmd /C
@@ -45,7 +45,12 @@ install:
 #  - choco install --cache "C:\ProgramData\chocolatey\cache" --force graphviz
 #  - choco install --cache "C:\ProgramData\chocolatey\cache" --force miktex
   # Win flex-bison
-  - choco install --cache "C:\ProgramData\chocolatey\cache" --force winflexbison3
+#  - choco install --cache "C:\ProgramData\chocolatey\cache" --force winflexbison3
+  - appveyor-retry appveyor DownloadFile "https://downloads.sourceforge.net/project/winflexbison/win_flex_bison3-latest.zip"
+  - 7z x -y -owinflexbison\ "win_flex_bison3-latest.zip" > nul
+  - set PATH=%CD%\winflexbison;%PATH%
+  - win_flex --version
+  - win_bison --version
   # Cygwin
   - if "%type%"=="Cygwin" if not exist "C:\cygwin64" mkdir "C:\cygwin64"
   - if "%type%"=="Cygwin" appveyor-retry appveyor DownloadFile "http://cygwin.com/setup-x86_64.exe" -FileName "C:\cygwin64\setup-x86_64.exe"
