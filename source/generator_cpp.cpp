@@ -59,7 +59,7 @@ void GeneratorCpp::GenerateImports()
 #include <unordered_map>
 #include <vector>
 
-#if defined(__clang__)
+#if defined(__cclang__)
 #include <experimental/optional>
 #define std_optional std::experimental::optional
 #define std_make_optional std::experimental::make_optional
@@ -1851,14 +1851,7 @@ public:
     // Get the optional value
     void get(std_optional<T>& opt, const std_optional<T>& defaults = std_nullopt) const noexcept
     {
-#if defined(__GNUC__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wuninitialized"
-#endif
         opt = defaults;
-#if defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
 
         size_t fbe_begin = get_begin();
         if (fbe_begin == 0)

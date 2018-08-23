@@ -38,7 +38,6 @@ matrix:
     - os: osx
       compiler: clang
       env: OS=osx COMPILER=clang
-      osx_image: xcode10
 
 # Using Trusty environment
 sudo: required
