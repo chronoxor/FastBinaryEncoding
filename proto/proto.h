@@ -13,11 +13,11 @@
 
 #if defined(__clang__)
 #pragma clang diagnostic push
-//#pragma clang diagnostic ignored "-Wuninitialized"
+#pragma clang diagnostic ignored "-Wuninitialized"
 #elif defined(__GNUC__)
 #pragma GCC diagnostic push
-//#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
-//#pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif
 
 #include "fbe.h"
@@ -1759,7 +1759,7 @@ struct Account
     std::string name;
     ::proto::State state;
     ::proto::Balance wallet;
-    std_optional<::proto::Balance> asset;
+    std::optional<::proto::Balance> asset;
     std::vector<::proto::Order> orders;
 
     Account()
@@ -1770,7 +1770,7 @@ struct Account
         , asset()
         , orders()
     {}
-    Account(int32_t arg_uid, const std::string& arg_name, const ::proto::State& arg_state, const ::proto::Balance& arg_wallet, const std_optional<::proto::Balance>& arg_asset, const std::vector<::proto::Order>& arg_orders)
+    Account(int32_t arg_uid, const std::string& arg_name, const ::proto::State& arg_state, const ::proto::Balance& arg_wallet, const std::optional<::proto::Balance>& arg_asset, const std::vector<::proto::Order>& arg_orders)
         : uid(arg_uid)
         , name(arg_name)
         , state(arg_state)
@@ -2136,7 +2136,7 @@ public:
         if ((fbe_current_size + asset.fbe_size()) <= fbe_struct_size)
             asset.get(fbe_value.asset);
         else
-            fbe_value.asset = std_nullopt;
+            fbe_value.asset = std::nullopt;
         fbe_current_size += asset.fbe_size();
 
         if ((fbe_current_size + orders.fbe_size()) <= fbe_struct_size)
@@ -2204,7 +2204,7 @@ public:
     FieldModel<TBuffer, std::string> name;
     FieldModel<TBuffer, ::proto::State> state;
     FieldModel<TBuffer, ::proto::Balance> wallet;
-    FieldModel<TBuffer, std_optional<::proto::Balance>> asset;
+    FieldModel<TBuffer, std::optional<::proto::Balance>> asset;
     FieldModelVector<TBuffer, ::proto::Order> orders;
 };
 
@@ -2495,7 +2495,7 @@ public:
     FinalModel<TBuffer, std::string> name;
     FinalModel<TBuffer, ::proto::State> state;
     FinalModel<TBuffer, ::proto::Balance> wallet;
-    FinalModel<TBuffer, std_optional<::proto::Balance>> asset;
+    FinalModel<TBuffer, std::optional<::proto::Balance>> asset;
     FinalModelVector<TBuffer, ::proto::Order> orders;
 };
 

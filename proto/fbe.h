@@ -13,11 +13,11 @@
 
 #if defined(__clang__)
 #pragma clang diagnostic push
-//#pragma clang diagnostic ignored "-Wuninitialized"
+#pragma clang diagnostic ignored "-Wuninitialized"
 #elif defined(__GNUC__)
 #pragma GCC diagnostic push
-//#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
-//#pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif
 
 #include <array>
@@ -31,6 +31,7 @@
 #include <list>
 #include <map>
 #include <memory>
+#include <optional>
 #include <set>
 #include <sstream>
 #include <stdexcept>
@@ -38,18 +39,6 @@
 #include <type_traits>
 #include <unordered_map>
 #include <vector>
-
-#if defined(__cclang__)
-#include <experimental/optional>
-#define std_optional std::experimental::optional
-#define std_make_optional std::experimental::make_optional
-#define std_nullopt std::experimental::nullopt
-#else
-#include <optional>
-#define std_optional std::optional
-#define std_make_optional std::make_optional
-#define std_nullopt std::nullopt
-#endif
 
 #if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__)
 #include <time.h>
@@ -1572,7 +1561,7 @@ private:
 
 // Fast Binary Encoding field model class optional specialization
 template <class TBuffer, typename T>
-class FieldModel<TBuffer, std_optional<T>>
+class FieldModel<TBuffer, std::optional<T>>
 {
 public:
     FieldModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset), value(buffer, 0) {}
@@ -1657,7 +1646,7 @@ public:
     }
 
     // Get the optional value
-    void get(std_optional<T>& opt, const std_optional<T>& defaults = std_nullopt) const noexcept
+    void get(std::optional<T>& opt, const std::optional<T>& defaults = std::nullopt) const noexcept
     {
         opt = defaults;
 
@@ -1703,7 +1692,7 @@ public:
     }
 
     // Set the optional value
-    void set(const std_optional<T>& opt)
+    void set(const std::optional<T>& opt)
     {
         size_t fbe_begin = set_begin(opt.has_value());
         if (fbe_begin == 0)
@@ -3002,13 +2991,13 @@ private:
 
 // Fast Binary Encoding final model class optional specialization
 template <class TBuffer, typename T>
-class FinalModel<TBuffer, std_optional<T>>
+class FinalModel<TBuffer, std::optional<T>>
 {
 public:
     FinalModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset), value(buffer, 0) {}
 
     // Get the allocation size
-    size_t fbe_allocation_size(const std_optional<T>& opt) const noexcept { return 1 + (opt.has_value() ? value.fbe_allocation_size(opt.value()) : 0); }
+    size_t fbe_allocation_size(const std::optional<T>& opt) const noexcept { return 1 + (opt.has_value() ? value.fbe_allocation_size(opt.value()) : 0); }
 
     // Get the field offset
     size_t fbe_offset() const noexcept { return _offset; }
@@ -3050,9 +3039,9 @@ public:
     }
 
     // Get the optional value
-    size_t get(std_optional<T>& opt) const noexcept
+    size_t get(std::optional<T>& opt) const noexcept
     {
-        opt = std_nullopt;
+        opt = std::nullopt;
 
         assert(((_buffer.offset() + fbe_offset() + 1) <= _buffer.size()) && "Model is broken!");
         if ((_buffer.offset() + fbe_offset() + 1) > _buffer.size())
@@ -3070,7 +3059,7 @@ public:
     }
 
     // Set the optional value
-    size_t set(const std_optional<T>& opt)
+    size_t set(const std::optional<T>& opt)
     {
         assert(((_buffer.offset() + fbe_offset() + 1) <= _buffer.size()) && "Model is broken!");
         if ((_buffer.offset() + fbe_offset() + 1) > _buffer.size())
@@ -4256,9 +4245,9 @@ struct ValueWriter<TOutputStream, char[N]>
 };
 
 template <class TOutputStream, typename T>
-struct ValueWriter<TOutputStream, std_optional<T>>
+struct ValueWriter<TOutputStream, std::optional<T>>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const std_optional<T>& value, bool scope = true)
+    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const std::optional<T>& value, bool scope = true)
     {
         if (value.has_value())
             return ValueWriter<TOutputStream, T>::to_json(writer, value.value(), true);
@@ -4812,11 +4801,11 @@ struct ValueReader<TJson, char[N]>
 };
 
 template <class TJson, typename T>
-struct ValueReader<TJson, std_optional<T>>
+struct ValueReader<TJson, std::optional<T>>
 {
-    static bool from_json(const TJson& json, std_optional<T>& value)
+    static bool from_json(const TJson& json, std::optional<T>& value)
     {
-        value = std_nullopt;
+        value = std::nullopt;
 
         // Empty optional value
         if (json.IsNull())
