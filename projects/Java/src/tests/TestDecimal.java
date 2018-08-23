@@ -42,7 +42,7 @@ public class TestDecimal
     @Test()
     public void DecimalTests() throws Exception
     {
-        Assert.assertEquals(VerifyDecimal(0x00000000, 0x00000000, 0x00000000, false, (byte) 0x00000000), new BigDecimal("0"));
+        Assert.assertEquals(VerifyDecimal(0x00000000, 0x00000000, 0x00000000, false, (byte)0x00000000), new BigDecimal("0"));
         Assert.assertEquals(VerifyDecimal(0x00000001, 0x00000000, 0x00000000, false, (byte)0x00000000), new BigDecimal("1"));
         Assert.assertEquals(VerifyDecimal(0x107A4000, 0x00005AF3, 0x00000000, false, (byte)0x00000000), new BigDecimal("100000000000000"));
         Assert.assertEquals(VerifyDecimal(0x10000000, 0x3E250261, 0x204FCE5E, false, (byte)(0x000E0000 >> 16)), new BigDecimal("100000000000000.00000000000000"));

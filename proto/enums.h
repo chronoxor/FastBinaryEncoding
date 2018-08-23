@@ -3,6 +3,14 @@
 
 #pragma once
 
+#if defined(__clang__)
+#pragma clang system_header
+#elif defined(__GNUC__)
+#pragma GCC system_header
+#elif defined(_MSC_VER)
+#pragma system_header
+#endif
+
 #include "fbe.h"
 
 namespace enums {
@@ -756,7 +764,7 @@ namespace enums {
 enum class EnumInt64 : int64_t
 {
     ENUM_VALUE_0,
-    ENUM_VALUE_1 = (int64_t)-9223372036854775808ll,
+    ENUM_VALUE_1 = (int64_t)-9223372036854775807ll,
     ENUM_VALUE_2,
     ENUM_VALUE_3 = (int64_t)9223372036854775806ll,
     ENUM_VALUE_4,
@@ -4483,11 +4491,11 @@ class Receiver : public virtual FBE::Receiver<TBuffer>
 public:
     Receiver() {}
     Receiver(const Receiver&) = default;
-    Receiver(Receiver&&) noexcept = default;
+    Receiver(Receiver&&) = default;
     virtual ~Receiver() = default;
 
     Receiver& operator=(const Receiver&) = default;
-    Receiver& operator=(Receiver&&) noexcept = default;
+    Receiver& operator=(Receiver&&) = default;
 
 protected:
     // Receive handlers
@@ -4587,11 +4595,11 @@ class FinalReceiver : public virtual FBE::Receiver<TBuffer>
 public:
     FinalReceiver() { this->final(true); }
     FinalReceiver(const FinalReceiver&) = default;
-    FinalReceiver(FinalReceiver&&) noexcept = default;
+    FinalReceiver(FinalReceiver&&) = default;
     virtual ~FinalReceiver() = default;
 
     FinalReceiver& operator=(const FinalReceiver&) = default;
-    FinalReceiver& operator=(FinalReceiver&&) noexcept = default;
+    FinalReceiver& operator=(FinalReceiver&&) = default;
 
 protected:
     // Receive handlers

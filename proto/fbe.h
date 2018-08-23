@@ -3,6 +3,14 @@
 
 #pragma once
 
+#if defined(__clang__)
+#pragma clang system_header
+#elif defined(__GNUC__)
+#pragma GCC system_header
+#elif defined(_MSC_VER)
+#pragma system_header
+#endif
+
 #include <array>
 #include <bitset>
 #include <cassert>
@@ -14,6 +22,7 @@
 #include <list>
 #include <map>
 #include <memory>
+#include <optional>
 #include <set>
 #include <sstream>
 #include <stdexcept>
@@ -21,18 +30,6 @@
 #include <type_traits>
 #include <unordered_map>
 #include <vector>
-
-#if defined(__clang__)
-#include <experimental/optional>
-#define stdoptional std::experimental::optional
-#define stdmakeoptional std::experimental::make_optional
-#define stdnullopt std::experimental::nullopt
-#else
-#include <optional>
-#define stdoptional std::optional
-#define stdmakeoptional std::make_optional
-#define stdnullopt std::nullopt
-#endif
 
 #if defined(unix) || defined(__unix) || defined(__unix__) || defined(__APPLE__)
 #include <time.h>
@@ -1555,7 +1552,7 @@ private:
 
 // Fast Binary Encoding field model class optional specialization
 template <class TBuffer, typename T>
-class FieldModel<TBuffer, stdoptional<T>>
+class FieldModel<TBuffer, std::optional<T>>
 {
 public:
     FieldModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset), value(buffer, 0) {}
@@ -1640,7 +1637,7 @@ public:
     }
 
     // Get the optional value
-    void get(stdoptional<T>& opt, const stdoptional<T>& defaults = stdnullopt) const noexcept
+    void get(std::optional<T>& opt, const std::optional<T>& defaults = std::nullopt) const noexcept
     {
         opt = defaults;
 
@@ -1648,7 +1645,7 @@ public:
         if (fbe_begin == 0)
             return;
 
-        T temp;
+        T temp = T();
         value.get(temp);
         opt.emplace(temp);
 
@@ -1686,7 +1683,7 @@ public:
     }
 
     // Set the optional value
-    void set(const stdoptional<T>& opt)
+    void set(const std::optional<T>& opt)
     {
         size_t fbe_begin = set_begin(opt.has_value());
         if (fbe_begin == 0)
@@ -1804,7 +1801,7 @@ public:
         auto fbe_model = (*this)[0];
         for (size_t i = N; i-- > 0;)
         {
-            T value;
+            T value = T();
             fbe_model.get(value);
             values.emplace_back(value);
             fbe_model.fbe_shift(fbe_model.fbe_size());
@@ -1999,7 +1996,7 @@ public:
         auto fbe_model = (*this)[0];
         for (size_t i = fbe_vector_size; i-- > 0;)
         {
-            T value;
+            T value = T();
             fbe_model.get(value);
             values.emplace_back(value);
             fbe_model.fbe_shift(fbe_model.fbe_size());
@@ -2018,7 +2015,7 @@ public:
         auto fbe_model = (*this)[0];
         for (size_t i = fbe_vector_size; i-- > 0;)
         {
-            T value;
+            T value = T();
             fbe_model.get(value);
             values.emplace_back(value);
             fbe_model.fbe_shift(fbe_model.fbe_size());
@@ -2037,7 +2034,7 @@ public:
         auto fbe_model = (*this)[0];
         for (size_t i = fbe_vector_size; i-- > 0;)
         {
-            T value;
+            T value = T();
             fbe_model.get(value);
             values.emplace(value);
             fbe_model.fbe_shift(fbe_model.fbe_size());
@@ -2985,13 +2982,13 @@ private:
 
 // Fast Binary Encoding final model class optional specialization
 template <class TBuffer, typename T>
-class FinalModel<TBuffer, stdoptional<T>>
+class FinalModel<TBuffer, std::optional<T>>
 {
 public:
     FinalModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset), value(buffer, 0) {}
 
     // Get the allocation size
-    size_t fbe_allocation_size(const stdoptional<T>& opt) const noexcept { return 1 + (opt.has_value() ? value.fbe_allocation_size(opt.value()) : 0); }
+    size_t fbe_allocation_size(const std::optional<T>& opt) const noexcept { return 1 + (opt.has_value() ? value.fbe_allocation_size(opt.value()) : 0); }
 
     // Get the field offset
     size_t fbe_offset() const noexcept { return _offset; }
@@ -3033,9 +3030,9 @@ public:
     }
 
     // Get the optional value
-    size_t get(stdoptional<T>& opt) const noexcept
+    size_t get(std::optional<T>& opt) const noexcept
     {
-        opt = stdnullopt;
+        opt = std::nullopt;
 
         assert(((_buffer.offset() + fbe_offset() + 1) <= _buffer.size()) && "Model is broken!");
         if ((_buffer.offset() + fbe_offset() + 1) > _buffer.size())
@@ -3045,7 +3042,7 @@ public:
             return 1;
 
         _buffer.shift(fbe_offset() + 1);
-        T temp;
+        T temp = T();
         size_t size = value.get(temp);
         opt.emplace(temp);
         _buffer.unshift(fbe_offset() + 1);
@@ -3053,7 +3050,7 @@ public:
     }
 
     // Set the optional value
-    size_t set(const stdoptional<T>& opt)
+    size_t set(const std::optional<T>& opt)
     {
         assert(((_buffer.offset() + fbe_offset() + 1) <= _buffer.size()) && "Model is broken!");
         if ((_buffer.offset() + fbe_offset() + 1) > _buffer.size())
@@ -3198,7 +3195,7 @@ public:
         FinalModel<TBuffer, T> fbe_model(_buffer, fbe_offset());
         for (size_t i = N; i-- > 0;)
         {
-            T value;
+            T value = T();
             size_t offset = fbe_model.get(value);
             values.emplace_back(value);
             fbe_model.fbe_shift(offset);
@@ -3351,7 +3348,7 @@ public:
         FinalModel<TBuffer, T> fbe_model(_buffer, fbe_offset() + 4);
         for (size_t i = fbe_vector_size; i-- > 0;)
         {
-            T value;
+            T value = T();
             size_t offset = fbe_model.get(value);
             values.emplace_back(value);
             fbe_model.fbe_shift(offset);
@@ -3377,7 +3374,7 @@ public:
         FinalModel<TBuffer, T> fbe_model(_buffer, fbe_offset() + 4);
         for (size_t i = fbe_vector_size; i-- > 0;)
         {
-            T value;
+            T value = T();
             size_t offset = fbe_model.get(value);
             values.emplace_back(value);
             fbe_model.fbe_shift(offset);
@@ -3403,7 +3400,7 @@ public:
         FinalModel<TBuffer, T> fbe_model(_buffer, fbe_offset() + 4);
         for (size_t i = fbe_vector_size; i-- > 0;)
         {
-            T value;
+            T value = T();
             size_t offset = fbe_model.get(value);
             values.emplace(value);
             fbe_model.fbe_shift(offset);
@@ -4239,9 +4236,9 @@ struct ValueWriter<TOutputStream, char[N]>
 };
 
 template <class TOutputStream, typename T>
-struct ValueWriter<TOutputStream, stdoptional<T>>
+struct ValueWriter<TOutputStream, std::optional<T>>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const stdoptional<T>& value, bool scope = true)
+    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const std::optional<T>& value, bool scope = true)
     {
         if (value.has_value())
             return ValueWriter<TOutputStream, T>::to_json(writer, value.value(), true);
@@ -4795,18 +4792,18 @@ struct ValueReader<TJson, char[N]>
 };
 
 template <class TJson, typename T>
-struct ValueReader<TJson, stdoptional<T>>
+struct ValueReader<TJson, std::optional<T>>
 {
-    static bool from_json(const TJson& json, stdoptional<T>& value)
+    static bool from_json(const TJson& json, std::optional<T>& value)
     {
-        value = stdnullopt;
+        value = std::nullopt;
 
         // Empty optional value
         if (json.IsNull())
             return true;
 
         // Try to get the value
-        T temp;
+        T temp = T();
         if (!FBE::JSON::from_json(json, temp))
             return false;
 
@@ -4887,7 +4884,7 @@ struct ValueReader<TJson, std::vector<T>>
         values.reserve(json.GetArray().Size());
         for (auto const& item : json.GetArray())
         {
-            T temp;
+            T temp = T();
             if (!FBE::JSON::from_json(item, temp))
                 return false;
             values.emplace_back(temp);
@@ -4910,7 +4907,7 @@ struct ValueReader<TJson, std::list<T>>
         // Collect list items
         for (auto const& item : json.GetArray())
         {
-            T temp;
+            T temp = T();
             if (!FBE::JSON::from_json(item, temp))
                 return false;
             values.emplace_back(temp);
@@ -4933,7 +4930,7 @@ struct ValueReader<TJson, std::set<T>>
         // Collect set items
         for (auto const& item : json.GetArray())
         {
-            T temp;
+            T temp = T();
             if (!FBE::JSON::from_json(item, temp))
                 return false;
             values.emplace(temp);

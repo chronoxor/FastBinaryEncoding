@@ -33,7 +33,6 @@ private:
     bool _json;
 
     void GenerateHeader();
-    void GenerateOnce();
     void GenerateFooter();
     void GenerateImports();
     void GenerateImports(const std::shared_ptr<Package>& p);

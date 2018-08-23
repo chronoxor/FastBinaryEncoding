@@ -97,8 +97,8 @@ TEST_CASE("Serialization: enums", "[FBE]")
     REQUIRE(enums2.uint32b5 == enums1.uint32b3);
 
     REQUIRE(enums2.int64b0 == (enums::EnumInt64)0);
-    REQUIRE(enums2.int64b1 == (enums::EnumInt64)-9223372036854775808ll);
-    REQUIRE(enums2.int64b2 == (enums::EnumInt64)-9223372036854775807ll);
+    REQUIRE(enums2.int64b1 == (enums::EnumInt64)-9223372036854775807ll);
+    REQUIRE(enums2.int64b2 == (enums::EnumInt64)-9223372036854775806ll);
     REQUIRE(enums2.int64b3 == (enums::EnumInt64)9223372036854775806ll);
     REQUIRE(enums2.int64b4 == (enums::EnumInt64)9223372036854775807ll);
     REQUIRE(enums2.int64b5 == enums1.int64b3);
@@ -198,8 +198,8 @@ TEST_CASE("Serialization (Final): enums", "[FBE]")
     REQUIRE(enums2.uint32b5 == enums1.uint32b3);
 
     REQUIRE(enums2.int64b0 == (enums::EnumInt64)0);
-    REQUIRE(enums2.int64b1 == (enums::EnumInt64)-9223372036854775808ll);
-    REQUIRE(enums2.int64b2 == (enums::EnumInt64)-9223372036854775807ll);
+    REQUIRE(enums2.int64b1 == (enums::EnumInt64)-9223372036854775807ll);
+    REQUIRE(enums2.int64b2 == (enums::EnumInt64)-9223372036854775806ll);
     REQUIRE(enums2.int64b3 == (enums::EnumInt64)9223372036854775806ll);
     REQUIRE(enums2.int64b4 == (enums::EnumInt64)9223372036854775807ll);
     REQUIRE(enums2.int64b5 == enums1.int64b3);
@@ -296,8 +296,8 @@ TEST_CASE("Serialization (JSON): enums", "[FBE]")
     REQUIRE(enums2.uint32b5 == enums1.uint32b3);
 
     REQUIRE(enums2.int64b0 == (enums::EnumInt64)0);
-    REQUIRE(enums2.int64b1 == (enums::EnumInt64)-9223372036854775808ll);
-    REQUIRE(enums2.int64b2 == (enums::EnumInt64)-9223372036854775807ll);
+    REQUIRE(enums2.int64b1 == (enums::EnumInt64)-9223372036854775807ll);
+    REQUIRE(enums2.int64b2 == (enums::EnumInt64)-9223372036854775806ll);
     REQUIRE(enums2.int64b3 == (enums::EnumInt64)9223372036854775806ll);
     REQUIRE(enums2.int64b4 == (enums::EnumInt64)9223372036854775807ll);
     REQUIRE(enums2.int64b5 == enums1.int64b3);

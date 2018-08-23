@@ -3,6 +3,14 @@
 
 #pragma once
 
+#if defined(__clang__)
+#pragma clang system_header
+#elif defined(__GNUC__)
+#pragma GCC system_header
+#elif defined(_MSC_VER)
+#pragma system_header
+#endif
+
 #include "fbe.h"
 
 #include "proto.h"
@@ -1849,7 +1857,7 @@ struct Account
     std::string name;
     ::protoex::StateEx state;
     ::protoex::Balance wallet;
-    stdoptional<::protoex::Balance> asset;
+    std::optional<::protoex::Balance> asset;
     std::vector<::protoex::Order> orders;
 
     Account()
@@ -1860,7 +1868,7 @@ struct Account
         , asset()
         , orders()
     {}
-    Account(int32_t arg_uid, const std::string& arg_name, const ::protoex::StateEx& arg_state, const ::protoex::Balance& arg_wallet, const stdoptional<::protoex::Balance>& arg_asset, const std::vector<::protoex::Order>& arg_orders)
+    Account(int32_t arg_uid, const std::string& arg_name, const ::protoex::StateEx& arg_state, const ::protoex::Balance& arg_wallet, const std::optional<::protoex::Balance>& arg_asset, const std::vector<::protoex::Order>& arg_orders)
         : uid(arg_uid)
         , name(arg_name)
         , state(arg_state)
@@ -2226,7 +2234,7 @@ public:
         if ((fbe_current_size + asset.fbe_size()) <= fbe_struct_size)
             asset.get(fbe_value.asset);
         else
-            fbe_value.asset = stdnullopt;
+            fbe_value.asset = std::nullopt;
         fbe_current_size += asset.fbe_size();
 
         if ((fbe_current_size + orders.fbe_size()) <= fbe_struct_size)
@@ -2294,7 +2302,7 @@ public:
     FieldModel<TBuffer, std::string> name;
     FieldModel<TBuffer, ::protoex::StateEx> state;
     FieldModel<TBuffer, ::protoex::Balance> wallet;
-    FieldModel<TBuffer, stdoptional<::protoex::Balance>> asset;
+    FieldModel<TBuffer, std::optional<::protoex::Balance>> asset;
     FieldModelVector<TBuffer, ::protoex::Order> orders;
 };
 
@@ -2585,7 +2593,7 @@ public:
     FinalModel<TBuffer, std::string> name;
     FinalModel<TBuffer, ::protoex::StateEx> state;
     FinalModel<TBuffer, ::protoex::Balance> wallet;
-    FinalModel<TBuffer, stdoptional<::protoex::Balance>> asset;
+    FinalModel<TBuffer, std::optional<::protoex::Balance>> asset;
     FinalModelVector<TBuffer, ::protoex::Order> orders;
 };
 
@@ -2770,11 +2778,11 @@ public:
         : proto::Receiver<TBuffer>(this->_buffer)
     {}
     Receiver(const Receiver&) = default;
-    Receiver(Receiver&&) noexcept = default;
+    Receiver(Receiver&&) = default;
     virtual ~Receiver() = default;
 
     Receiver& operator=(const Receiver&) = default;
-    Receiver& operator=(Receiver&&) noexcept = default;
+    Receiver& operator=(Receiver&&) = default;
 
 protected:
     // Receive handlers
@@ -2968,11 +2976,11 @@ public:
         : proto::FinalReceiver<TBuffer>(this->_buffer)
     { this->final(true); }
     FinalReceiver(const FinalReceiver&) = default;
-    FinalReceiver(FinalReceiver&&) noexcept = default;
+    FinalReceiver(FinalReceiver&&) = default;
     virtual ~FinalReceiver() = default;
 
     FinalReceiver& operator=(const FinalReceiver&) = default;
-    FinalReceiver& operator=(FinalReceiver&&) noexcept = default;
+    FinalReceiver& operator=(FinalReceiver&&) = default;
 
 protected:
     // Receive handlers

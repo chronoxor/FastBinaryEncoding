@@ -987,8 +987,8 @@ class FinalModelEnumUInt32(fbe.FinalModel):
 
 class EnumInt64(enum.IntEnum, metaclass=fbe.DefaultEnumMeta):
     ENUM_VALUE_0 = int(0) + 0
-    ENUM_VALUE_1 = int(-9223372036854775808) + 0
-    ENUM_VALUE_2 = int(-9223372036854775808) + 1
+    ENUM_VALUE_1 = int(-9223372036854775807) + 0
+    ENUM_VALUE_2 = int(-9223372036854775807) + 1
     ENUM_VALUE_3 = int(9223372036854775806) + 0
     ENUM_VALUE_4 = int(9223372036854775806) + 1
     ENUM_VALUE_5 = ENUM_VALUE_3

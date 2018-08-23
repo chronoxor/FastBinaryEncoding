@@ -3,6 +3,14 @@
 
 #pragma once
 
+#if defined(__clang__)
+#pragma clang system_header
+#elif defined(__GNUC__)
+#pragma GCC system_header
+#elif defined(_MSC_VER)
+#pragma system_header
+#endif
+
 #include "fbe.h"
 
 #include "proto.h"
@@ -2996,143 +3004,143 @@ namespace test {
 
 struct StructOptional : public ::test::StructSimple
 {
-    stdoptional<bool> f100;
-    stdoptional<bool> f101;
-    stdoptional<bool> f102;
-    stdoptional<uint8_t> f103;
-    stdoptional<uint8_t> f104;
-    stdoptional<uint8_t> f105;
-    stdoptional<char> f106;
-    stdoptional<char> f107;
-    stdoptional<char> f108;
-    stdoptional<wchar_t> f109;
-    stdoptional<wchar_t> f110;
-    stdoptional<wchar_t> f111;
-    stdoptional<int8_t> f112;
-    stdoptional<int8_t> f113;
-    stdoptional<int8_t> f114;
-    stdoptional<uint8_t> f115;
-    stdoptional<uint8_t> f116;
-    stdoptional<uint8_t> f117;
-    stdoptional<int16_t> f118;
-    stdoptional<int16_t> f119;
-    stdoptional<int16_t> f120;
-    stdoptional<uint16_t> f121;
-    stdoptional<uint16_t> f122;
-    stdoptional<uint16_t> f123;
-    stdoptional<int32_t> f124;
-    stdoptional<int32_t> f125;
-    stdoptional<int32_t> f126;
-    stdoptional<uint32_t> f127;
-    stdoptional<uint32_t> f128;
-    stdoptional<uint32_t> f129;
-    stdoptional<int64_t> f130;
-    stdoptional<int64_t> f131;
-    stdoptional<int64_t> f132;
-    stdoptional<uint64_t> f133;
-    stdoptional<uint64_t> f134;
-    stdoptional<uint64_t> f135;
-    stdoptional<float> f136;
-    stdoptional<float> f137;
-    stdoptional<float> f138;
-    stdoptional<double> f139;
-    stdoptional<double> f140;
-    stdoptional<double> f141;
-    stdoptional<FBE::decimal_t> f142;
-    stdoptional<FBE::decimal_t> f143;
-    stdoptional<FBE::decimal_t> f144;
-    stdoptional<std::string> f145;
-    stdoptional<std::string> f146;
-    stdoptional<std::string> f147;
-    stdoptional<uint64_t> f148;
-    stdoptional<uint64_t> f149;
-    stdoptional<uint64_t> f150;
-    stdoptional<FBE::uuid_t> f151;
-    stdoptional<FBE::uuid_t> f152;
-    stdoptional<FBE::uuid_t> f153;
-    stdoptional<::proto::OrderSide> f154;
-    stdoptional<::proto::OrderSide> f155;
-    stdoptional<::proto::OrderType> f156;
-    stdoptional<::proto::OrderType> f157;
-    stdoptional<::proto::Order> f158;
-    stdoptional<::proto::Order> f159;
-    stdoptional<::proto::Balance> f160;
-    stdoptional<::proto::Balance> f161;
-    stdoptional<::proto::State> f162;
-    stdoptional<::proto::State> f163;
-    stdoptional<::proto::Account> f164;
-    stdoptional<::proto::Account> f165;
+    std::optional<bool> f100;
+    std::optional<bool> f101;
+    std::optional<bool> f102;
+    std::optional<uint8_t> f103;
+    std::optional<uint8_t> f104;
+    std::optional<uint8_t> f105;
+    std::optional<char> f106;
+    std::optional<char> f107;
+    std::optional<char> f108;
+    std::optional<wchar_t> f109;
+    std::optional<wchar_t> f110;
+    std::optional<wchar_t> f111;
+    std::optional<int8_t> f112;
+    std::optional<int8_t> f113;
+    std::optional<int8_t> f114;
+    std::optional<uint8_t> f115;
+    std::optional<uint8_t> f116;
+    std::optional<uint8_t> f117;
+    std::optional<int16_t> f118;
+    std::optional<int16_t> f119;
+    std::optional<int16_t> f120;
+    std::optional<uint16_t> f121;
+    std::optional<uint16_t> f122;
+    std::optional<uint16_t> f123;
+    std::optional<int32_t> f124;
+    std::optional<int32_t> f125;
+    std::optional<int32_t> f126;
+    std::optional<uint32_t> f127;
+    std::optional<uint32_t> f128;
+    std::optional<uint32_t> f129;
+    std::optional<int64_t> f130;
+    std::optional<int64_t> f131;
+    std::optional<int64_t> f132;
+    std::optional<uint64_t> f133;
+    std::optional<uint64_t> f134;
+    std::optional<uint64_t> f135;
+    std::optional<float> f136;
+    std::optional<float> f137;
+    std::optional<float> f138;
+    std::optional<double> f139;
+    std::optional<double> f140;
+    std::optional<double> f141;
+    std::optional<FBE::decimal_t> f142;
+    std::optional<FBE::decimal_t> f143;
+    std::optional<FBE::decimal_t> f144;
+    std::optional<std::string> f145;
+    std::optional<std::string> f146;
+    std::optional<std::string> f147;
+    std::optional<uint64_t> f148;
+    std::optional<uint64_t> f149;
+    std::optional<uint64_t> f150;
+    std::optional<FBE::uuid_t> f151;
+    std::optional<FBE::uuid_t> f152;
+    std::optional<FBE::uuid_t> f153;
+    std::optional<::proto::OrderSide> f154;
+    std::optional<::proto::OrderSide> f155;
+    std::optional<::proto::OrderType> f156;
+    std::optional<::proto::OrderType> f157;
+    std::optional<::proto::Order> f158;
+    std::optional<::proto::Order> f159;
+    std::optional<::proto::Balance> f160;
+    std::optional<::proto::Balance> f161;
+    std::optional<::proto::State> f162;
+    std::optional<::proto::State> f163;
+    std::optional<::proto::Account> f164;
+    std::optional<::proto::Account> f165;
 
     StructOptional()
         : ::test::StructSimple()
         , f100()
         , f101(true)
-        , f102(stdnullopt)
+        , f102(std::nullopt)
         , f103()
         , f104((uint8_t)255u)
-        , f105(stdnullopt)
+        , f105(std::nullopt)
         , f106()
         , f107((char)'!')
-        , f108(stdnullopt)
+        , f108(std::nullopt)
         , f109()
         , f110((wchar_t)0x0444)
-        , f111(stdnullopt)
+        , f111(std::nullopt)
         , f112()
         , f113((int8_t)127)
-        , f114(stdnullopt)
+        , f114(std::nullopt)
         , f115()
         , f116((uint8_t)255u)
-        , f117(stdnullopt)
+        , f117(std::nullopt)
         , f118()
         , f119((int16_t)32767)
-        , f120(stdnullopt)
+        , f120(std::nullopt)
         , f121()
         , f122((uint16_t)65535u)
-        , f123(stdnullopt)
+        , f123(std::nullopt)
         , f124()
         , f125((int32_t)2147483647ll)
-        , f126(stdnullopt)
+        , f126(std::nullopt)
         , f127()
         , f128((uint32_t)0xFFFFFFFFull)
-        , f129(stdnullopt)
+        , f129(std::nullopt)
         , f130()
         , f131((int64_t)9223372036854775807ll)
-        , f132(stdnullopt)
+        , f132(std::nullopt)
         , f133()
         , f134((uint64_t)0xFFFFFFFFFFFFFFFFull)
-        , f135(stdnullopt)
+        , f135(std::nullopt)
         , f136()
         , f137((float)123.456f)
-        , f138(stdnullopt)
+        , f138(std::nullopt)
         , f139()
         , f140((double)-123.456e+123)
-        , f141(stdnullopt)
+        , f141(std::nullopt)
         , f142()
         , f143(FBE::decimal_t(123456.123456))
-        , f144(stdnullopt)
+        , f144(std::nullopt)
         , f145()
         , f146("Initial string!")
-        , f147(stdnullopt)
+        , f147(std::nullopt)
         , f148()
         , f149(FBE::utc())
-        , f150(stdnullopt)
+        , f150(std::nullopt)
         , f151()
         , f152(FBE::uuid_t("123e4567-e89b-12d3-a456-426655440000"))
-        , f153(stdnullopt)
+        , f153(std::nullopt)
         , f154()
-        , f155(stdnullopt)
+        , f155(std::nullopt)
         , f156()
-        , f157(stdnullopt)
+        , f157(std::nullopt)
         , f158()
-        , f159(stdnullopt)
+        , f159(std::nullopt)
         , f160()
-        , f161(stdnullopt)
+        , f161(std::nullopt)
         , f162()
-        , f163(stdnullopt)
+        , f163(std::nullopt)
         , f164()
-        , f165(stdnullopt)
+        , f165(std::nullopt)
     {}
-    StructOptional(const ::test::StructSimple& base, const stdoptional<bool>& arg_f100, const stdoptional<bool>& arg_f101, const stdoptional<bool>& arg_f102, const stdoptional<uint8_t>& arg_f103, const stdoptional<uint8_t>& arg_f104, const stdoptional<uint8_t>& arg_f105, const stdoptional<char>& arg_f106, const stdoptional<char>& arg_f107, const stdoptional<char>& arg_f108, const stdoptional<wchar_t>& arg_f109, const stdoptional<wchar_t>& arg_f110, const stdoptional<wchar_t>& arg_f111, const stdoptional<int8_t>& arg_f112, const stdoptional<int8_t>& arg_f113, const stdoptional<int8_t>& arg_f114, const stdoptional<uint8_t>& arg_f115, const stdoptional<uint8_t>& arg_f116, const stdoptional<uint8_t>& arg_f117, const stdoptional<int16_t>& arg_f118, const stdoptional<int16_t>& arg_f119, const stdoptional<int16_t>& arg_f120, const stdoptional<uint16_t>& arg_f121, const stdoptional<uint16_t>& arg_f122, const stdoptional<uint16_t>& arg_f123, const stdoptional<int32_t>& arg_f124, const stdoptional<int32_t>& arg_f125, const stdoptional<int32_t>& arg_f126, const stdoptional<uint32_t>& arg_f127, const stdoptional<uint32_t>& arg_f128, const stdoptional<uint32_t>& arg_f129, const stdoptional<int64_t>& arg_f130, const stdoptional<int64_t>& arg_f131, const stdoptional<int64_t>& arg_f132, const stdoptional<uint64_t>& arg_f133, const stdoptional<uint64_t>& arg_f134, const stdoptional<uint64_t>& arg_f135, const stdoptional<float>& arg_f136, const stdoptional<float>& arg_f137, const stdoptional<float>& arg_f138, const stdoptional<double>& arg_f139, const stdoptional<double>& arg_f140, const stdoptional<double>& arg_f141, const stdoptional<FBE::decimal_t>& arg_f142, const stdoptional<FBE::decimal_t>& arg_f143, const stdoptional<FBE::decimal_t>& arg_f144, const stdoptional<std::string>& arg_f145, const stdoptional<std::string>& arg_f146, const stdoptional<std::string>& arg_f147, const stdoptional<uint64_t>& arg_f148, const stdoptional<uint64_t>& arg_f149, const stdoptional<uint64_t>& arg_f150, const stdoptional<FBE::uuid_t>& arg_f151, const stdoptional<FBE::uuid_t>& arg_f152, const stdoptional<FBE::uuid_t>& arg_f153, const stdoptional<::proto::OrderSide>& arg_f154, const stdoptional<::proto::OrderSide>& arg_f155, const stdoptional<::proto::OrderType>& arg_f156, const stdoptional<::proto::OrderType>& arg_f157, const stdoptional<::proto::Order>& arg_f158, const stdoptional<::proto::Order>& arg_f159, const stdoptional<::proto::Balance>& arg_f160, const stdoptional<::proto::Balance>& arg_f161, const stdoptional<::proto::State>& arg_f162, const stdoptional<::proto::State>& arg_f163, const stdoptional<::proto::Account>& arg_f164, const stdoptional<::proto::Account>& arg_f165)
+    StructOptional(const ::test::StructSimple& base, const std::optional<bool>& arg_f100, const std::optional<bool>& arg_f101, const std::optional<bool>& arg_f102, const std::optional<uint8_t>& arg_f103, const std::optional<uint8_t>& arg_f104, const std::optional<uint8_t>& arg_f105, const std::optional<char>& arg_f106, const std::optional<char>& arg_f107, const std::optional<char>& arg_f108, const std::optional<wchar_t>& arg_f109, const std::optional<wchar_t>& arg_f110, const std::optional<wchar_t>& arg_f111, const std::optional<int8_t>& arg_f112, const std::optional<int8_t>& arg_f113, const std::optional<int8_t>& arg_f114, const std::optional<uint8_t>& arg_f115, const std::optional<uint8_t>& arg_f116, const std::optional<uint8_t>& arg_f117, const std::optional<int16_t>& arg_f118, const std::optional<int16_t>& arg_f119, const std::optional<int16_t>& arg_f120, const std::optional<uint16_t>& arg_f121, const std::optional<uint16_t>& arg_f122, const std::optional<uint16_t>& arg_f123, const std::optional<int32_t>& arg_f124, const std::optional<int32_t>& arg_f125, const std::optional<int32_t>& arg_f126, const std::optional<uint32_t>& arg_f127, const std::optional<uint32_t>& arg_f128, const std::optional<uint32_t>& arg_f129, const std::optional<int64_t>& arg_f130, const std::optional<int64_t>& arg_f131, const std::optional<int64_t>& arg_f132, const std::optional<uint64_t>& arg_f133, const std::optional<uint64_t>& arg_f134, const std::optional<uint64_t>& arg_f135, const std::optional<float>& arg_f136, const std::optional<float>& arg_f137, const std::optional<float>& arg_f138, const std::optional<double>& arg_f139, const std::optional<double>& arg_f140, const std::optional<double>& arg_f141, const std::optional<FBE::decimal_t>& arg_f142, const std::optional<FBE::decimal_t>& arg_f143, const std::optional<FBE::decimal_t>& arg_f144, const std::optional<std::string>& arg_f145, const std::optional<std::string>& arg_f146, const std::optional<std::string>& arg_f147, const std::optional<uint64_t>& arg_f148, const std::optional<uint64_t>& arg_f149, const std::optional<uint64_t>& arg_f150, const std::optional<FBE::uuid_t>& arg_f151, const std::optional<FBE::uuid_t>& arg_f152, const std::optional<FBE::uuid_t>& arg_f153, const std::optional<::proto::OrderSide>& arg_f154, const std::optional<::proto::OrderSide>& arg_f155, const std::optional<::proto::OrderType>& arg_f156, const std::optional<::proto::OrderType>& arg_f157, const std::optional<::proto::Order>& arg_f158, const std::optional<::proto::Order>& arg_f159, const std::optional<::proto::Balance>& arg_f160, const std::optional<::proto::Balance>& arg_f161, const std::optional<::proto::State>& arg_f162, const std::optional<::proto::State>& arg_f163, const std::optional<::proto::Account>& arg_f164, const std::optional<::proto::Account>& arg_f165)
         : ::test::StructSimple(base)
         , f100(arg_f100)
         , f101(arg_f101)
@@ -4446,7 +4454,7 @@ public:
         if ((fbe_current_size + f100.fbe_size()) <= fbe_struct_size)
             f100.get(fbe_value.f100);
         else
-            fbe_value.f100 = stdnullopt;
+            fbe_value.f100 = std::nullopt;
         fbe_current_size += f100.fbe_size();
 
         if ((fbe_current_size + f101.fbe_size()) <= fbe_struct_size)
@@ -4456,15 +4464,15 @@ public:
         fbe_current_size += f101.fbe_size();
 
         if ((fbe_current_size + f102.fbe_size()) <= fbe_struct_size)
-            f102.get(fbe_value.f102, stdnullopt);
+            f102.get(fbe_value.f102, std::nullopt);
         else
-            fbe_value.f102 = stdnullopt;
+            fbe_value.f102 = std::nullopt;
         fbe_current_size += f102.fbe_size();
 
         if ((fbe_current_size + f103.fbe_size()) <= fbe_struct_size)
             f103.get(fbe_value.f103);
         else
-            fbe_value.f103 = stdnullopt;
+            fbe_value.f103 = std::nullopt;
         fbe_current_size += f103.fbe_size();
 
         if ((fbe_current_size + f104.fbe_size()) <= fbe_struct_size)
@@ -4474,15 +4482,15 @@ public:
         fbe_current_size += f104.fbe_size();
 
         if ((fbe_current_size + f105.fbe_size()) <= fbe_struct_size)
-            f105.get(fbe_value.f105, stdnullopt);
+            f105.get(fbe_value.f105, std::nullopt);
         else
-            fbe_value.f105 = stdnullopt;
+            fbe_value.f105 = std::nullopt;
         fbe_current_size += f105.fbe_size();
 
         if ((fbe_current_size + f106.fbe_size()) <= fbe_struct_size)
             f106.get(fbe_value.f106);
         else
-            fbe_value.f106 = stdnullopt;
+            fbe_value.f106 = std::nullopt;
         fbe_current_size += f106.fbe_size();
 
         if ((fbe_current_size + f107.fbe_size()) <= fbe_struct_size)
@@ -4492,15 +4500,15 @@ public:
         fbe_current_size += f107.fbe_size();
 
         if ((fbe_current_size + f108.fbe_size()) <= fbe_struct_size)
-            f108.get(fbe_value.f108, stdnullopt);
+            f108.get(fbe_value.f108, std::nullopt);
         else
-            fbe_value.f108 = stdnullopt;
+            fbe_value.f108 = std::nullopt;
         fbe_current_size += f108.fbe_size();
 
         if ((fbe_current_size + f109.fbe_size()) <= fbe_struct_size)
             f109.get(fbe_value.f109);
         else
-            fbe_value.f109 = stdnullopt;
+            fbe_value.f109 = std::nullopt;
         fbe_current_size += f109.fbe_size();
 
         if ((fbe_current_size + f110.fbe_size()) <= fbe_struct_size)
@@ -4510,15 +4518,15 @@ public:
         fbe_current_size += f110.fbe_size();
 
         if ((fbe_current_size + f111.fbe_size()) <= fbe_struct_size)
-            f111.get(fbe_value.f111, stdnullopt);
+            f111.get(fbe_value.f111, std::nullopt);
         else
-            fbe_value.f111 = stdnullopt;
+            fbe_value.f111 = std::nullopt;
         fbe_current_size += f111.fbe_size();
 
         if ((fbe_current_size + f112.fbe_size()) <= fbe_struct_size)
             f112.get(fbe_value.f112);
         else
-            fbe_value.f112 = stdnullopt;
+            fbe_value.f112 = std::nullopt;
         fbe_current_size += f112.fbe_size();
 
         if ((fbe_current_size + f113.fbe_size()) <= fbe_struct_size)
@@ -4528,15 +4536,15 @@ public:
         fbe_current_size += f113.fbe_size();
 
         if ((fbe_current_size + f114.fbe_size()) <= fbe_struct_size)
-            f114.get(fbe_value.f114, stdnullopt);
+            f114.get(fbe_value.f114, std::nullopt);
         else
-            fbe_value.f114 = stdnullopt;
+            fbe_value.f114 = std::nullopt;
         fbe_current_size += f114.fbe_size();
 
         if ((fbe_current_size + f115.fbe_size()) <= fbe_struct_size)
             f115.get(fbe_value.f115);
         else
-            fbe_value.f115 = stdnullopt;
+            fbe_value.f115 = std::nullopt;
         fbe_current_size += f115.fbe_size();
 
         if ((fbe_current_size + f116.fbe_size()) <= fbe_struct_size)
@@ -4546,15 +4554,15 @@ public:
         fbe_current_size += f116.fbe_size();
 
         if ((fbe_current_size + f117.fbe_size()) <= fbe_struct_size)
-            f117.get(fbe_value.f117, stdnullopt);
+            f117.get(fbe_value.f117, std::nullopt);
         else
-            fbe_value.f117 = stdnullopt;
+            fbe_value.f117 = std::nullopt;
         fbe_current_size += f117.fbe_size();
 
         if ((fbe_current_size + f118.fbe_size()) <= fbe_struct_size)
             f118.get(fbe_value.f118);
         else
-            fbe_value.f118 = stdnullopt;
+            fbe_value.f118 = std::nullopt;
         fbe_current_size += f118.fbe_size();
 
         if ((fbe_current_size + f119.fbe_size()) <= fbe_struct_size)
@@ -4564,15 +4572,15 @@ public:
         fbe_current_size += f119.fbe_size();
 
         if ((fbe_current_size + f120.fbe_size()) <= fbe_struct_size)
-            f120.get(fbe_value.f120, stdnullopt);
+            f120.get(fbe_value.f120, std::nullopt);
         else
-            fbe_value.f120 = stdnullopt;
+            fbe_value.f120 = std::nullopt;
         fbe_current_size += f120.fbe_size();
 
         if ((fbe_current_size + f121.fbe_size()) <= fbe_struct_size)
             f121.get(fbe_value.f121);
         else
-            fbe_value.f121 = stdnullopt;
+            fbe_value.f121 = std::nullopt;
         fbe_current_size += f121.fbe_size();
 
         if ((fbe_current_size + f122.fbe_size()) <= fbe_struct_size)
@@ -4582,15 +4590,15 @@ public:
         fbe_current_size += f122.fbe_size();
 
         if ((fbe_current_size + f123.fbe_size()) <= fbe_struct_size)
-            f123.get(fbe_value.f123, stdnullopt);
+            f123.get(fbe_value.f123, std::nullopt);
         else
-            fbe_value.f123 = stdnullopt;
+            fbe_value.f123 = std::nullopt;
         fbe_current_size += f123.fbe_size();
 
         if ((fbe_current_size + f124.fbe_size()) <= fbe_struct_size)
             f124.get(fbe_value.f124);
         else
-            fbe_value.f124 = stdnullopt;
+            fbe_value.f124 = std::nullopt;
         fbe_current_size += f124.fbe_size();
 
         if ((fbe_current_size + f125.fbe_size()) <= fbe_struct_size)
@@ -4600,15 +4608,15 @@ public:
         fbe_current_size += f125.fbe_size();
 
         if ((fbe_current_size + f126.fbe_size()) <= fbe_struct_size)
-            f126.get(fbe_value.f126, stdnullopt);
+            f126.get(fbe_value.f126, std::nullopt);
         else
-            fbe_value.f126 = stdnullopt;
+            fbe_value.f126 = std::nullopt;
         fbe_current_size += f126.fbe_size();
 
         if ((fbe_current_size + f127.fbe_size()) <= fbe_struct_size)
             f127.get(fbe_value.f127);
         else
-            fbe_value.f127 = stdnullopt;
+            fbe_value.f127 = std::nullopt;
         fbe_current_size += f127.fbe_size();
 
         if ((fbe_current_size + f128.fbe_size()) <= fbe_struct_size)
@@ -4618,15 +4626,15 @@ public:
         fbe_current_size += f128.fbe_size();
 
         if ((fbe_current_size + f129.fbe_size()) <= fbe_struct_size)
-            f129.get(fbe_value.f129, stdnullopt);
+            f129.get(fbe_value.f129, std::nullopt);
         else
-            fbe_value.f129 = stdnullopt;
+            fbe_value.f129 = std::nullopt;
         fbe_current_size += f129.fbe_size();
 
         if ((fbe_current_size + f130.fbe_size()) <= fbe_struct_size)
             f130.get(fbe_value.f130);
         else
-            fbe_value.f130 = stdnullopt;
+            fbe_value.f130 = std::nullopt;
         fbe_current_size += f130.fbe_size();
 
         if ((fbe_current_size + f131.fbe_size()) <= fbe_struct_size)
@@ -4636,15 +4644,15 @@ public:
         fbe_current_size += f131.fbe_size();
 
         if ((fbe_current_size + f132.fbe_size()) <= fbe_struct_size)
-            f132.get(fbe_value.f132, stdnullopt);
+            f132.get(fbe_value.f132, std::nullopt);
         else
-            fbe_value.f132 = stdnullopt;
+            fbe_value.f132 = std::nullopt;
         fbe_current_size += f132.fbe_size();
 
         if ((fbe_current_size + f133.fbe_size()) <= fbe_struct_size)
             f133.get(fbe_value.f133);
         else
-            fbe_value.f133 = stdnullopt;
+            fbe_value.f133 = std::nullopt;
         fbe_current_size += f133.fbe_size();
 
         if ((fbe_current_size + f134.fbe_size()) <= fbe_struct_size)
@@ -4654,15 +4662,15 @@ public:
         fbe_current_size += f134.fbe_size();
 
         if ((fbe_current_size + f135.fbe_size()) <= fbe_struct_size)
-            f135.get(fbe_value.f135, stdnullopt);
+            f135.get(fbe_value.f135, std::nullopt);
         else
-            fbe_value.f135 = stdnullopt;
+            fbe_value.f135 = std::nullopt;
         fbe_current_size += f135.fbe_size();
 
         if ((fbe_current_size + f136.fbe_size()) <= fbe_struct_size)
             f136.get(fbe_value.f136);
         else
-            fbe_value.f136 = stdnullopt;
+            fbe_value.f136 = std::nullopt;
         fbe_current_size += f136.fbe_size();
 
         if ((fbe_current_size + f137.fbe_size()) <= fbe_struct_size)
@@ -4672,15 +4680,15 @@ public:
         fbe_current_size += f137.fbe_size();
 
         if ((fbe_current_size + f138.fbe_size()) <= fbe_struct_size)
-            f138.get(fbe_value.f138, stdnullopt);
+            f138.get(fbe_value.f138, std::nullopt);
         else
-            fbe_value.f138 = stdnullopt;
+            fbe_value.f138 = std::nullopt;
         fbe_current_size += f138.fbe_size();
 
         if ((fbe_current_size + f139.fbe_size()) <= fbe_struct_size)
             f139.get(fbe_value.f139);
         else
-            fbe_value.f139 = stdnullopt;
+            fbe_value.f139 = std::nullopt;
         fbe_current_size += f139.fbe_size();
 
         if ((fbe_current_size + f140.fbe_size()) <= fbe_struct_size)
@@ -4690,15 +4698,15 @@ public:
         fbe_current_size += f140.fbe_size();
 
         if ((fbe_current_size + f141.fbe_size()) <= fbe_struct_size)
-            f141.get(fbe_value.f141, stdnullopt);
+            f141.get(fbe_value.f141, std::nullopt);
         else
-            fbe_value.f141 = stdnullopt;
+            fbe_value.f141 = std::nullopt;
         fbe_current_size += f141.fbe_size();
 
         if ((fbe_current_size + f142.fbe_size()) <= fbe_struct_size)
             f142.get(fbe_value.f142);
         else
-            fbe_value.f142 = stdnullopt;
+            fbe_value.f142 = std::nullopt;
         fbe_current_size += f142.fbe_size();
 
         if ((fbe_current_size + f143.fbe_size()) <= fbe_struct_size)
@@ -4708,15 +4716,15 @@ public:
         fbe_current_size += f143.fbe_size();
 
         if ((fbe_current_size + f144.fbe_size()) <= fbe_struct_size)
-            f144.get(fbe_value.f144, stdnullopt);
+            f144.get(fbe_value.f144, std::nullopt);
         else
-            fbe_value.f144 = stdnullopt;
+            fbe_value.f144 = std::nullopt;
         fbe_current_size += f144.fbe_size();
 
         if ((fbe_current_size + f145.fbe_size()) <= fbe_struct_size)
             f145.get(fbe_value.f145);
         else
-            fbe_value.f145 = stdnullopt;
+            fbe_value.f145 = std::nullopt;
         fbe_current_size += f145.fbe_size();
 
         if ((fbe_current_size + f146.fbe_size()) <= fbe_struct_size)
@@ -4726,15 +4734,15 @@ public:
         fbe_current_size += f146.fbe_size();
 
         if ((fbe_current_size + f147.fbe_size()) <= fbe_struct_size)
-            f147.get(fbe_value.f147, stdnullopt);
+            f147.get(fbe_value.f147, std::nullopt);
         else
-            fbe_value.f147 = stdnullopt;
+            fbe_value.f147 = std::nullopt;
         fbe_current_size += f147.fbe_size();
 
         if ((fbe_current_size + f148.fbe_size()) <= fbe_struct_size)
             f148.get(fbe_value.f148);
         else
-            fbe_value.f148 = stdnullopt;
+            fbe_value.f148 = std::nullopt;
         fbe_current_size += f148.fbe_size();
 
         if ((fbe_current_size + f149.fbe_size()) <= fbe_struct_size)
@@ -4744,15 +4752,15 @@ public:
         fbe_current_size += f149.fbe_size();
 
         if ((fbe_current_size + f150.fbe_size()) <= fbe_struct_size)
-            f150.get(fbe_value.f150, stdnullopt);
+            f150.get(fbe_value.f150, std::nullopt);
         else
-            fbe_value.f150 = stdnullopt;
+            fbe_value.f150 = std::nullopt;
         fbe_current_size += f150.fbe_size();
 
         if ((fbe_current_size + f151.fbe_size()) <= fbe_struct_size)
             f151.get(fbe_value.f151);
         else
-            fbe_value.f151 = stdnullopt;
+            fbe_value.f151 = std::nullopt;
         fbe_current_size += f151.fbe_size();
 
         if ((fbe_current_size + f152.fbe_size()) <= fbe_struct_size)
@@ -4762,81 +4770,81 @@ public:
         fbe_current_size += f152.fbe_size();
 
         if ((fbe_current_size + f153.fbe_size()) <= fbe_struct_size)
-            f153.get(fbe_value.f153, stdnullopt);
+            f153.get(fbe_value.f153, std::nullopt);
         else
-            fbe_value.f153 = stdnullopt;
+            fbe_value.f153 = std::nullopt;
         fbe_current_size += f153.fbe_size();
 
         if ((fbe_current_size + f154.fbe_size()) <= fbe_struct_size)
             f154.get(fbe_value.f154);
         else
-            fbe_value.f154 = stdnullopt;
+            fbe_value.f154 = std::nullopt;
         fbe_current_size += f154.fbe_size();
 
         if ((fbe_current_size + f155.fbe_size()) <= fbe_struct_size)
-            f155.get(fbe_value.f155, stdnullopt);
+            f155.get(fbe_value.f155, std::nullopt);
         else
-            fbe_value.f155 = stdnullopt;
+            fbe_value.f155 = std::nullopt;
         fbe_current_size += f155.fbe_size();
 
         if ((fbe_current_size + f156.fbe_size()) <= fbe_struct_size)
             f156.get(fbe_value.f156);
         else
-            fbe_value.f156 = stdnullopt;
+            fbe_value.f156 = std::nullopt;
         fbe_current_size += f156.fbe_size();
 
         if ((fbe_current_size + f157.fbe_size()) <= fbe_struct_size)
-            f157.get(fbe_value.f157, stdnullopt);
+            f157.get(fbe_value.f157, std::nullopt);
         else
-            fbe_value.f157 = stdnullopt;
+            fbe_value.f157 = std::nullopt;
         fbe_current_size += f157.fbe_size();
 
         if ((fbe_current_size + f158.fbe_size()) <= fbe_struct_size)
             f158.get(fbe_value.f158);
         else
-            fbe_value.f158 = stdnullopt;
+            fbe_value.f158 = std::nullopt;
         fbe_current_size += f158.fbe_size();
 
         if ((fbe_current_size + f159.fbe_size()) <= fbe_struct_size)
-            f159.get(fbe_value.f159, stdnullopt);
+            f159.get(fbe_value.f159, std::nullopt);
         else
-            fbe_value.f159 = stdnullopt;
+            fbe_value.f159 = std::nullopt;
         fbe_current_size += f159.fbe_size();
 
         if ((fbe_current_size + f160.fbe_size()) <= fbe_struct_size)
             f160.get(fbe_value.f160);
         else
-            fbe_value.f160 = stdnullopt;
+            fbe_value.f160 = std::nullopt;
         fbe_current_size += f160.fbe_size();
 
         if ((fbe_current_size + f161.fbe_size()) <= fbe_struct_size)
-            f161.get(fbe_value.f161, stdnullopt);
+            f161.get(fbe_value.f161, std::nullopt);
         else
-            fbe_value.f161 = stdnullopt;
+            fbe_value.f161 = std::nullopt;
         fbe_current_size += f161.fbe_size();
 
         if ((fbe_current_size + f162.fbe_size()) <= fbe_struct_size)
             f162.get(fbe_value.f162);
         else
-            fbe_value.f162 = stdnullopt;
+            fbe_value.f162 = std::nullopt;
         fbe_current_size += f162.fbe_size();
 
         if ((fbe_current_size + f163.fbe_size()) <= fbe_struct_size)
-            f163.get(fbe_value.f163, stdnullopt);
+            f163.get(fbe_value.f163, std::nullopt);
         else
-            fbe_value.f163 = stdnullopt;
+            fbe_value.f163 = std::nullopt;
         fbe_current_size += f163.fbe_size();
 
         if ((fbe_current_size + f164.fbe_size()) <= fbe_struct_size)
             f164.get(fbe_value.f164);
         else
-            fbe_value.f164 = stdnullopt;
+            fbe_value.f164 = std::nullopt;
         fbe_current_size += f164.fbe_size();
 
         if ((fbe_current_size + f165.fbe_size()) <= fbe_struct_size)
-            f165.get(fbe_value.f165, stdnullopt);
+            f165.get(fbe_value.f165, std::nullopt);
         else
-            fbe_value.f165 = stdnullopt;
+            fbe_value.f165 = std::nullopt;
         fbe_current_size += f165.fbe_size();
     }
 
@@ -4956,72 +4964,72 @@ private:
 
 public:
     FieldModel<TBuffer, ::test::StructSimple> parent;
-    FieldModel<TBuffer, stdoptional<bool>> f100;
-    FieldModel<TBuffer, stdoptional<bool>> f101;
-    FieldModel<TBuffer, stdoptional<bool>> f102;
-    FieldModel<TBuffer, stdoptional<uint8_t>> f103;
-    FieldModel<TBuffer, stdoptional<uint8_t>> f104;
-    FieldModel<TBuffer, stdoptional<uint8_t>> f105;
-    FieldModel<TBuffer, stdoptional<char>> f106;
-    FieldModel<TBuffer, stdoptional<char>> f107;
-    FieldModel<TBuffer, stdoptional<char>> f108;
-    FieldModel<TBuffer, stdoptional<wchar_t>> f109;
-    FieldModel<TBuffer, stdoptional<wchar_t>> f110;
-    FieldModel<TBuffer, stdoptional<wchar_t>> f111;
-    FieldModel<TBuffer, stdoptional<int8_t>> f112;
-    FieldModel<TBuffer, stdoptional<int8_t>> f113;
-    FieldModel<TBuffer, stdoptional<int8_t>> f114;
-    FieldModel<TBuffer, stdoptional<uint8_t>> f115;
-    FieldModel<TBuffer, stdoptional<uint8_t>> f116;
-    FieldModel<TBuffer, stdoptional<uint8_t>> f117;
-    FieldModel<TBuffer, stdoptional<int16_t>> f118;
-    FieldModel<TBuffer, stdoptional<int16_t>> f119;
-    FieldModel<TBuffer, stdoptional<int16_t>> f120;
-    FieldModel<TBuffer, stdoptional<uint16_t>> f121;
-    FieldModel<TBuffer, stdoptional<uint16_t>> f122;
-    FieldModel<TBuffer, stdoptional<uint16_t>> f123;
-    FieldModel<TBuffer, stdoptional<int32_t>> f124;
-    FieldModel<TBuffer, stdoptional<int32_t>> f125;
-    FieldModel<TBuffer, stdoptional<int32_t>> f126;
-    FieldModel<TBuffer, stdoptional<uint32_t>> f127;
-    FieldModel<TBuffer, stdoptional<uint32_t>> f128;
-    FieldModel<TBuffer, stdoptional<uint32_t>> f129;
-    FieldModel<TBuffer, stdoptional<int64_t>> f130;
-    FieldModel<TBuffer, stdoptional<int64_t>> f131;
-    FieldModel<TBuffer, stdoptional<int64_t>> f132;
-    FieldModel<TBuffer, stdoptional<uint64_t>> f133;
-    FieldModel<TBuffer, stdoptional<uint64_t>> f134;
-    FieldModel<TBuffer, stdoptional<uint64_t>> f135;
-    FieldModel<TBuffer, stdoptional<float>> f136;
-    FieldModel<TBuffer, stdoptional<float>> f137;
-    FieldModel<TBuffer, stdoptional<float>> f138;
-    FieldModel<TBuffer, stdoptional<double>> f139;
-    FieldModel<TBuffer, stdoptional<double>> f140;
-    FieldModel<TBuffer, stdoptional<double>> f141;
-    FieldModel<TBuffer, stdoptional<FBE::decimal_t>> f142;
-    FieldModel<TBuffer, stdoptional<FBE::decimal_t>> f143;
-    FieldModel<TBuffer, stdoptional<FBE::decimal_t>> f144;
-    FieldModel<TBuffer, stdoptional<std::string>> f145;
-    FieldModel<TBuffer, stdoptional<std::string>> f146;
-    FieldModel<TBuffer, stdoptional<std::string>> f147;
-    FieldModel<TBuffer, stdoptional<uint64_t>> f148;
-    FieldModel<TBuffer, stdoptional<uint64_t>> f149;
-    FieldModel<TBuffer, stdoptional<uint64_t>> f150;
-    FieldModel<TBuffer, stdoptional<FBE::uuid_t>> f151;
-    FieldModel<TBuffer, stdoptional<FBE::uuid_t>> f152;
-    FieldModel<TBuffer, stdoptional<FBE::uuid_t>> f153;
-    FieldModel<TBuffer, stdoptional<::proto::OrderSide>> f154;
-    FieldModel<TBuffer, stdoptional<::proto::OrderSide>> f155;
-    FieldModel<TBuffer, stdoptional<::proto::OrderType>> f156;
-    FieldModel<TBuffer, stdoptional<::proto::OrderType>> f157;
-    FieldModel<TBuffer, stdoptional<::proto::Order>> f158;
-    FieldModel<TBuffer, stdoptional<::proto::Order>> f159;
-    FieldModel<TBuffer, stdoptional<::proto::Balance>> f160;
-    FieldModel<TBuffer, stdoptional<::proto::Balance>> f161;
-    FieldModel<TBuffer, stdoptional<::proto::State>> f162;
-    FieldModel<TBuffer, stdoptional<::proto::State>> f163;
-    FieldModel<TBuffer, stdoptional<::proto::Account>> f164;
-    FieldModel<TBuffer, stdoptional<::proto::Account>> f165;
+    FieldModel<TBuffer, std::optional<bool>> f100;
+    FieldModel<TBuffer, std::optional<bool>> f101;
+    FieldModel<TBuffer, std::optional<bool>> f102;
+    FieldModel<TBuffer, std::optional<uint8_t>> f103;
+    FieldModel<TBuffer, std::optional<uint8_t>> f104;
+    FieldModel<TBuffer, std::optional<uint8_t>> f105;
+    FieldModel<TBuffer, std::optional<char>> f106;
+    FieldModel<TBuffer, std::optional<char>> f107;
+    FieldModel<TBuffer, std::optional<char>> f108;
+    FieldModel<TBuffer, std::optional<wchar_t>> f109;
+    FieldModel<TBuffer, std::optional<wchar_t>> f110;
+    FieldModel<TBuffer, std::optional<wchar_t>> f111;
+    FieldModel<TBuffer, std::optional<int8_t>> f112;
+    FieldModel<TBuffer, std::optional<int8_t>> f113;
+    FieldModel<TBuffer, std::optional<int8_t>> f114;
+    FieldModel<TBuffer, std::optional<uint8_t>> f115;
+    FieldModel<TBuffer, std::optional<uint8_t>> f116;
+    FieldModel<TBuffer, std::optional<uint8_t>> f117;
+    FieldModel<TBuffer, std::optional<int16_t>> f118;
+    FieldModel<TBuffer, std::optional<int16_t>> f119;
+    FieldModel<TBuffer, std::optional<int16_t>> f120;
+    FieldModel<TBuffer, std::optional<uint16_t>> f121;
+    FieldModel<TBuffer, std::optional<uint16_t>> f122;
+    FieldModel<TBuffer, std::optional<uint16_t>> f123;
+    FieldModel<TBuffer, std::optional<int32_t>> f124;
+    FieldModel<TBuffer, std::optional<int32_t>> f125;
+    FieldModel<TBuffer, std::optional<int32_t>> f126;
+    FieldModel<TBuffer, std::optional<uint32_t>> f127;
+    FieldModel<TBuffer, std::optional<uint32_t>> f128;
+    FieldModel<TBuffer, std::optional<uint32_t>> f129;
+    FieldModel<TBuffer, std::optional<int64_t>> f130;
+    FieldModel<TBuffer, std::optional<int64_t>> f131;
+    FieldModel<TBuffer, std::optional<int64_t>> f132;
+    FieldModel<TBuffer, std::optional<uint64_t>> f133;
+    FieldModel<TBuffer, std::optional<uint64_t>> f134;
+    FieldModel<TBuffer, std::optional<uint64_t>> f135;
+    FieldModel<TBuffer, std::optional<float>> f136;
+    FieldModel<TBuffer, std::optional<float>> f137;
+    FieldModel<TBuffer, std::optional<float>> f138;
+    FieldModel<TBuffer, std::optional<double>> f139;
+    FieldModel<TBuffer, std::optional<double>> f140;
+    FieldModel<TBuffer, std::optional<double>> f141;
+    FieldModel<TBuffer, std::optional<FBE::decimal_t>> f142;
+    FieldModel<TBuffer, std::optional<FBE::decimal_t>> f143;
+    FieldModel<TBuffer, std::optional<FBE::decimal_t>> f144;
+    FieldModel<TBuffer, std::optional<std::string>> f145;
+    FieldModel<TBuffer, std::optional<std::string>> f146;
+    FieldModel<TBuffer, std::optional<std::string>> f147;
+    FieldModel<TBuffer, std::optional<uint64_t>> f148;
+    FieldModel<TBuffer, std::optional<uint64_t>> f149;
+    FieldModel<TBuffer, std::optional<uint64_t>> f150;
+    FieldModel<TBuffer, std::optional<FBE::uuid_t>> f151;
+    FieldModel<TBuffer, std::optional<FBE::uuid_t>> f152;
+    FieldModel<TBuffer, std::optional<FBE::uuid_t>> f153;
+    FieldModel<TBuffer, std::optional<::proto::OrderSide>> f154;
+    FieldModel<TBuffer, std::optional<::proto::OrderSide>> f155;
+    FieldModel<TBuffer, std::optional<::proto::OrderType>> f156;
+    FieldModel<TBuffer, std::optional<::proto::OrderType>> f157;
+    FieldModel<TBuffer, std::optional<::proto::Order>> f158;
+    FieldModel<TBuffer, std::optional<::proto::Order>> f159;
+    FieldModel<TBuffer, std::optional<::proto::Balance>> f160;
+    FieldModel<TBuffer, std::optional<::proto::Balance>> f161;
+    FieldModel<TBuffer, std::optional<::proto::State>> f162;
+    FieldModel<TBuffer, std::optional<::proto::State>> f163;
+    FieldModel<TBuffer, std::optional<::proto::Account>> f164;
+    FieldModel<TBuffer, std::optional<::proto::Account>> f165;
 };
 
 } // namespace FBE
@@ -6406,72 +6414,72 @@ private:
 
 public:
     FinalModel<TBuffer, ::test::StructSimple> parent;
-    FinalModel<TBuffer, stdoptional<bool>> f100;
-    FinalModel<TBuffer, stdoptional<bool>> f101;
-    FinalModel<TBuffer, stdoptional<bool>> f102;
-    FinalModel<TBuffer, stdoptional<uint8_t>> f103;
-    FinalModel<TBuffer, stdoptional<uint8_t>> f104;
-    FinalModel<TBuffer, stdoptional<uint8_t>> f105;
-    FinalModel<TBuffer, stdoptional<char>> f106;
-    FinalModel<TBuffer, stdoptional<char>> f107;
-    FinalModel<TBuffer, stdoptional<char>> f108;
-    FinalModel<TBuffer, stdoptional<wchar_t>> f109;
-    FinalModel<TBuffer, stdoptional<wchar_t>> f110;
-    FinalModel<TBuffer, stdoptional<wchar_t>> f111;
-    FinalModel<TBuffer, stdoptional<int8_t>> f112;
-    FinalModel<TBuffer, stdoptional<int8_t>> f113;
-    FinalModel<TBuffer, stdoptional<int8_t>> f114;
-    FinalModel<TBuffer, stdoptional<uint8_t>> f115;
-    FinalModel<TBuffer, stdoptional<uint8_t>> f116;
-    FinalModel<TBuffer, stdoptional<uint8_t>> f117;
-    FinalModel<TBuffer, stdoptional<int16_t>> f118;
-    FinalModel<TBuffer, stdoptional<int16_t>> f119;
-    FinalModel<TBuffer, stdoptional<int16_t>> f120;
-    FinalModel<TBuffer, stdoptional<uint16_t>> f121;
-    FinalModel<TBuffer, stdoptional<uint16_t>> f122;
-    FinalModel<TBuffer, stdoptional<uint16_t>> f123;
-    FinalModel<TBuffer, stdoptional<int32_t>> f124;
-    FinalModel<TBuffer, stdoptional<int32_t>> f125;
-    FinalModel<TBuffer, stdoptional<int32_t>> f126;
-    FinalModel<TBuffer, stdoptional<uint32_t>> f127;
-    FinalModel<TBuffer, stdoptional<uint32_t>> f128;
-    FinalModel<TBuffer, stdoptional<uint32_t>> f129;
-    FinalModel<TBuffer, stdoptional<int64_t>> f130;
-    FinalModel<TBuffer, stdoptional<int64_t>> f131;
-    FinalModel<TBuffer, stdoptional<int64_t>> f132;
-    FinalModel<TBuffer, stdoptional<uint64_t>> f133;
-    FinalModel<TBuffer, stdoptional<uint64_t>> f134;
-    FinalModel<TBuffer, stdoptional<uint64_t>> f135;
-    FinalModel<TBuffer, stdoptional<float>> f136;
-    FinalModel<TBuffer, stdoptional<float>> f137;
-    FinalModel<TBuffer, stdoptional<float>> f138;
-    FinalModel<TBuffer, stdoptional<double>> f139;
-    FinalModel<TBuffer, stdoptional<double>> f140;
-    FinalModel<TBuffer, stdoptional<double>> f141;
-    FinalModel<TBuffer, stdoptional<FBE::decimal_t>> f142;
-    FinalModel<TBuffer, stdoptional<FBE::decimal_t>> f143;
-    FinalModel<TBuffer, stdoptional<FBE::decimal_t>> f144;
-    FinalModel<TBuffer, stdoptional<std::string>> f145;
-    FinalModel<TBuffer, stdoptional<std::string>> f146;
-    FinalModel<TBuffer, stdoptional<std::string>> f147;
-    FinalModel<TBuffer, stdoptional<uint64_t>> f148;
-    FinalModel<TBuffer, stdoptional<uint64_t>> f149;
-    FinalModel<TBuffer, stdoptional<uint64_t>> f150;
-    FinalModel<TBuffer, stdoptional<FBE::uuid_t>> f151;
-    FinalModel<TBuffer, stdoptional<FBE::uuid_t>> f152;
-    FinalModel<TBuffer, stdoptional<FBE::uuid_t>> f153;
-    FinalModel<TBuffer, stdoptional<::proto::OrderSide>> f154;
-    FinalModel<TBuffer, stdoptional<::proto::OrderSide>> f155;
-    FinalModel<TBuffer, stdoptional<::proto::OrderType>> f156;
-    FinalModel<TBuffer, stdoptional<::proto::OrderType>> f157;
-    FinalModel<TBuffer, stdoptional<::proto::Order>> f158;
-    FinalModel<TBuffer, stdoptional<::proto::Order>> f159;
-    FinalModel<TBuffer, stdoptional<::proto::Balance>> f160;
-    FinalModel<TBuffer, stdoptional<::proto::Balance>> f161;
-    FinalModel<TBuffer, stdoptional<::proto::State>> f162;
-    FinalModel<TBuffer, stdoptional<::proto::State>> f163;
-    FinalModel<TBuffer, stdoptional<::proto::Account>> f164;
-    FinalModel<TBuffer, stdoptional<::proto::Account>> f165;
+    FinalModel<TBuffer, std::optional<bool>> f100;
+    FinalModel<TBuffer, std::optional<bool>> f101;
+    FinalModel<TBuffer, std::optional<bool>> f102;
+    FinalModel<TBuffer, std::optional<uint8_t>> f103;
+    FinalModel<TBuffer, std::optional<uint8_t>> f104;
+    FinalModel<TBuffer, std::optional<uint8_t>> f105;
+    FinalModel<TBuffer, std::optional<char>> f106;
+    FinalModel<TBuffer, std::optional<char>> f107;
+    FinalModel<TBuffer, std::optional<char>> f108;
+    FinalModel<TBuffer, std::optional<wchar_t>> f109;
+    FinalModel<TBuffer, std::optional<wchar_t>> f110;
+    FinalModel<TBuffer, std::optional<wchar_t>> f111;
+    FinalModel<TBuffer, std::optional<int8_t>> f112;
+    FinalModel<TBuffer, std::optional<int8_t>> f113;
+    FinalModel<TBuffer, std::optional<int8_t>> f114;
+    FinalModel<TBuffer, std::optional<uint8_t>> f115;
+    FinalModel<TBuffer, std::optional<uint8_t>> f116;
+    FinalModel<TBuffer, std::optional<uint8_t>> f117;
+    FinalModel<TBuffer, std::optional<int16_t>> f118;
+    FinalModel<TBuffer, std::optional<int16_t>> f119;
+    FinalModel<TBuffer, std::optional<int16_t>> f120;
+    FinalModel<TBuffer, std::optional<uint16_t>> f121;
+    FinalModel<TBuffer, std::optional<uint16_t>> f122;
+    FinalModel<TBuffer, std::optional<uint16_t>> f123;
+    FinalModel<TBuffer, std::optional<int32_t>> f124;
+    FinalModel<TBuffer, std::optional<int32_t>> f125;
+    FinalModel<TBuffer, std::optional<int32_t>> f126;
+    FinalModel<TBuffer, std::optional<uint32_t>> f127;
+    FinalModel<TBuffer, std::optional<uint32_t>> f128;
+    FinalModel<TBuffer, std::optional<uint32_t>> f129;
+    FinalModel<TBuffer, std::optional<int64_t>> f130;
+    FinalModel<TBuffer, std::optional<int64_t>> f131;
+    FinalModel<TBuffer, std::optional<int64_t>> f132;
+    FinalModel<TBuffer, std::optional<uint64_t>> f133;
+    FinalModel<TBuffer, std::optional<uint64_t>> f134;
+    FinalModel<TBuffer, std::optional<uint64_t>> f135;
+    FinalModel<TBuffer, std::optional<float>> f136;
+    FinalModel<TBuffer, std::optional<float>> f137;
+    FinalModel<TBuffer, std::optional<float>> f138;
+    FinalModel<TBuffer, std::optional<double>> f139;
+    FinalModel<TBuffer, std::optional<double>> f140;
+    FinalModel<TBuffer, std::optional<double>> f141;
+    FinalModel<TBuffer, std::optional<FBE::decimal_t>> f142;
+    FinalModel<TBuffer, std::optional<FBE::decimal_t>> f143;
+    FinalModel<TBuffer, std::optional<FBE::decimal_t>> f144;
+    FinalModel<TBuffer, std::optional<std::string>> f145;
+    FinalModel<TBuffer, std::optional<std::string>> f146;
+    FinalModel<TBuffer, std::optional<std::string>> f147;
+    FinalModel<TBuffer, std::optional<uint64_t>> f148;
+    FinalModel<TBuffer, std::optional<uint64_t>> f149;
+    FinalModel<TBuffer, std::optional<uint64_t>> f150;
+    FinalModel<TBuffer, std::optional<FBE::uuid_t>> f151;
+    FinalModel<TBuffer, std::optional<FBE::uuid_t>> f152;
+    FinalModel<TBuffer, std::optional<FBE::uuid_t>> f153;
+    FinalModel<TBuffer, std::optional<::proto::OrderSide>> f154;
+    FinalModel<TBuffer, std::optional<::proto::OrderSide>> f155;
+    FinalModel<TBuffer, std::optional<::proto::OrderType>> f156;
+    FinalModel<TBuffer, std::optional<::proto::OrderType>> f157;
+    FinalModel<TBuffer, std::optional<::proto::Order>> f158;
+    FinalModel<TBuffer, std::optional<::proto::Order>> f159;
+    FinalModel<TBuffer, std::optional<::proto::Balance>> f160;
+    FinalModel<TBuffer, std::optional<::proto::Balance>> f161;
+    FinalModel<TBuffer, std::optional<::proto::State>> f162;
+    FinalModel<TBuffer, std::optional<::proto::State>> f163;
+    FinalModel<TBuffer, std::optional<::proto::Account>> f164;
+    FinalModel<TBuffer, std::optional<::proto::Account>> f165;
 };
 
 } // namespace FBE
@@ -6559,34 +6567,34 @@ namespace test {
 struct StructNested : public ::test::StructOptional
 {
     ::test::EnumSimple f1000;
-    stdoptional<::test::EnumSimple> f1001;
+    std::optional<::test::EnumSimple> f1001;
     ::test::EnumTyped f1002;
-    stdoptional<::test::EnumTyped> f1003;
+    std::optional<::test::EnumTyped> f1003;
     ::test::FlagsSimple f1004;
-    stdoptional<::test::FlagsSimple> f1005;
+    std::optional<::test::FlagsSimple> f1005;
     ::test::FlagsTyped f1006;
-    stdoptional<::test::FlagsTyped> f1007;
+    std::optional<::test::FlagsTyped> f1007;
     ::test::StructSimple f1008;
-    stdoptional<::test::StructSimple> f1009;
+    std::optional<::test::StructSimple> f1009;
     ::test::StructOptional f1010;
-    stdoptional<::test::StructOptional> f1011;
+    std::optional<::test::StructOptional> f1011;
 
     StructNested()
         : ::test::StructOptional()
         , f1000()
         , f1001()
         , f1002(EnumTyped::ENUM_VALUE_2)
-        , f1003(stdnullopt)
+        , f1003(std::nullopt)
         , f1004()
         , f1005()
         , f1006(FlagsTyped::FLAG_VALUE_2 | FlagsTyped::FLAG_VALUE_4 | FlagsTyped::FLAG_VALUE_6)
-        , f1007(stdnullopt)
+        , f1007(std::nullopt)
         , f1008()
         , f1009()
         , f1010()
-        , f1011(stdnullopt)
+        , f1011(std::nullopt)
     {}
-    StructNested(const ::test::StructOptional& base, const ::test::EnumSimple& arg_f1000, const stdoptional<::test::EnumSimple>& arg_f1001, const ::test::EnumTyped& arg_f1002, const stdoptional<::test::EnumTyped>& arg_f1003, const ::test::FlagsSimple& arg_f1004, const stdoptional<::test::FlagsSimple>& arg_f1005, const ::test::FlagsTyped& arg_f1006, const stdoptional<::test::FlagsTyped>& arg_f1007, const ::test::StructSimple& arg_f1008, const stdoptional<::test::StructSimple>& arg_f1009, const ::test::StructOptional& arg_f1010, const stdoptional<::test::StructOptional>& arg_f1011)
+    StructNested(const ::test::StructOptional& base, const ::test::EnumSimple& arg_f1000, const std::optional<::test::EnumSimple>& arg_f1001, const ::test::EnumTyped& arg_f1002, const std::optional<::test::EnumTyped>& arg_f1003, const ::test::FlagsSimple& arg_f1004, const std::optional<::test::FlagsSimple>& arg_f1005, const ::test::FlagsTyped& arg_f1006, const std::optional<::test::FlagsTyped>& arg_f1007, const ::test::StructSimple& arg_f1008, const std::optional<::test::StructSimple>& arg_f1009, const ::test::StructOptional& arg_f1010, const std::optional<::test::StructOptional>& arg_f1011)
         : ::test::StructOptional(base)
         , f1000(arg_f1000)
         , f1001(arg_f1001)
@@ -7042,7 +7050,7 @@ public:
         if ((fbe_current_size + f1001.fbe_size()) <= fbe_struct_size)
             f1001.get(fbe_value.f1001);
         else
-            fbe_value.f1001 = stdnullopt;
+            fbe_value.f1001 = std::nullopt;
         fbe_current_size += f1001.fbe_size();
 
         if ((fbe_current_size + f1002.fbe_size()) <= fbe_struct_size)
@@ -7052,9 +7060,9 @@ public:
         fbe_current_size += f1002.fbe_size();
 
         if ((fbe_current_size + f1003.fbe_size()) <= fbe_struct_size)
-            f1003.get(fbe_value.f1003, stdnullopt);
+            f1003.get(fbe_value.f1003, std::nullopt);
         else
-            fbe_value.f1003 = stdnullopt;
+            fbe_value.f1003 = std::nullopt;
         fbe_current_size += f1003.fbe_size();
 
         if ((fbe_current_size + f1004.fbe_size()) <= fbe_struct_size)
@@ -7066,7 +7074,7 @@ public:
         if ((fbe_current_size + f1005.fbe_size()) <= fbe_struct_size)
             f1005.get(fbe_value.f1005);
         else
-            fbe_value.f1005 = stdnullopt;
+            fbe_value.f1005 = std::nullopt;
         fbe_current_size += f1005.fbe_size();
 
         if ((fbe_current_size + f1006.fbe_size()) <= fbe_struct_size)
@@ -7076,9 +7084,9 @@ public:
         fbe_current_size += f1006.fbe_size();
 
         if ((fbe_current_size + f1007.fbe_size()) <= fbe_struct_size)
-            f1007.get(fbe_value.f1007, stdnullopt);
+            f1007.get(fbe_value.f1007, std::nullopt);
         else
-            fbe_value.f1007 = stdnullopt;
+            fbe_value.f1007 = std::nullopt;
         fbe_current_size += f1007.fbe_size();
 
         if ((fbe_current_size + f1008.fbe_size()) <= fbe_struct_size)
@@ -7090,7 +7098,7 @@ public:
         if ((fbe_current_size + f1009.fbe_size()) <= fbe_struct_size)
             f1009.get(fbe_value.f1009);
         else
-            fbe_value.f1009 = stdnullopt;
+            fbe_value.f1009 = std::nullopt;
         fbe_current_size += f1009.fbe_size();
 
         if ((fbe_current_size + f1010.fbe_size()) <= fbe_struct_size)
@@ -7100,9 +7108,9 @@ public:
         fbe_current_size += f1010.fbe_size();
 
         if ((fbe_current_size + f1011.fbe_size()) <= fbe_struct_size)
-            f1011.get(fbe_value.f1011, stdnullopt);
+            f1011.get(fbe_value.f1011, std::nullopt);
         else
-            fbe_value.f1011 = stdnullopt;
+            fbe_value.f1011 = std::nullopt;
         fbe_current_size += f1011.fbe_size();
     }
 
@@ -7169,17 +7177,17 @@ private:
 public:
     FieldModel<TBuffer, ::test::StructOptional> parent;
     FieldModel<TBuffer, ::test::EnumSimple> f1000;
-    FieldModel<TBuffer, stdoptional<::test::EnumSimple>> f1001;
+    FieldModel<TBuffer, std::optional<::test::EnumSimple>> f1001;
     FieldModel<TBuffer, ::test::EnumTyped> f1002;
-    FieldModel<TBuffer, stdoptional<::test::EnumTyped>> f1003;
+    FieldModel<TBuffer, std::optional<::test::EnumTyped>> f1003;
     FieldModel<TBuffer, ::test::FlagsSimple> f1004;
-    FieldModel<TBuffer, stdoptional<::test::FlagsSimple>> f1005;
+    FieldModel<TBuffer, std::optional<::test::FlagsSimple>> f1005;
     FieldModel<TBuffer, ::test::FlagsTyped> f1006;
-    FieldModel<TBuffer, stdoptional<::test::FlagsTyped>> f1007;
+    FieldModel<TBuffer, std::optional<::test::FlagsTyped>> f1007;
     FieldModel<TBuffer, ::test::StructSimple> f1008;
-    FieldModel<TBuffer, stdoptional<::test::StructSimple>> f1009;
+    FieldModel<TBuffer, std::optional<::test::StructSimple>> f1009;
     FieldModel<TBuffer, ::test::StructOptional> f1010;
-    FieldModel<TBuffer, stdoptional<::test::StructOptional>> f1011;
+    FieldModel<TBuffer, std::optional<::test::StructOptional>> f1011;
 };
 
 } // namespace FBE
@@ -7593,17 +7601,17 @@ private:
 public:
     FinalModel<TBuffer, ::test::StructOptional> parent;
     FinalModel<TBuffer, ::test::EnumSimple> f1000;
-    FinalModel<TBuffer, stdoptional<::test::EnumSimple>> f1001;
+    FinalModel<TBuffer, std::optional<::test::EnumSimple>> f1001;
     FinalModel<TBuffer, ::test::EnumTyped> f1002;
-    FinalModel<TBuffer, stdoptional<::test::EnumTyped>> f1003;
+    FinalModel<TBuffer, std::optional<::test::EnumTyped>> f1003;
     FinalModel<TBuffer, ::test::FlagsSimple> f1004;
-    FinalModel<TBuffer, stdoptional<::test::FlagsSimple>> f1005;
+    FinalModel<TBuffer, std::optional<::test::FlagsSimple>> f1005;
     FinalModel<TBuffer, ::test::FlagsTyped> f1006;
-    FinalModel<TBuffer, stdoptional<::test::FlagsTyped>> f1007;
+    FinalModel<TBuffer, std::optional<::test::FlagsTyped>> f1007;
     FinalModel<TBuffer, ::test::StructSimple> f1008;
-    FinalModel<TBuffer, stdoptional<::test::StructSimple>> f1009;
+    FinalModel<TBuffer, std::optional<::test::StructSimple>> f1009;
     FinalModel<TBuffer, ::test::StructOptional> f1010;
-    FinalModel<TBuffer, stdoptional<::test::StructOptional>> f1011;
+    FinalModel<TBuffer, std::optional<::test::StructOptional>> f1011;
 };
 
 } // namespace FBE
@@ -7691,15 +7699,15 @@ namespace test {
 struct StructBytes
 {
     std::vector<uint8_t> f1;
-    stdoptional<std::vector<uint8_t>> f2;
-    stdoptional<std::vector<uint8_t>> f3;
+    std::optional<std::vector<uint8_t>> f2;
+    std::optional<std::vector<uint8_t>> f3;
 
     StructBytes()
         : f1()
         , f2()
-        , f3(stdnullopt)
+        , f3(std::nullopt)
     {}
-    StructBytes(const std::vector<uint8_t>& arg_f1, const stdoptional<std::vector<uint8_t>>& arg_f2, const stdoptional<std::vector<uint8_t>>& arg_f3)
+    StructBytes(const std::vector<uint8_t>& arg_f1, const std::optional<std::vector<uint8_t>>& arg_f2, const std::optional<std::vector<uint8_t>>& arg_f3)
         : f1(arg_f1)
         , f2(arg_f2)
         , f3(arg_f3)
@@ -7985,13 +7993,13 @@ public:
         if ((fbe_current_size + f2.fbe_size()) <= fbe_struct_size)
             f2.get(fbe_value.f2);
         else
-            fbe_value.f2 = stdnullopt;
+            fbe_value.f2 = std::nullopt;
         fbe_current_size += f2.fbe_size();
 
         if ((fbe_current_size + f3.fbe_size()) <= fbe_struct_size)
-            f3.get(fbe_value.f3, stdnullopt);
+            f3.get(fbe_value.f3, std::nullopt);
         else
-            fbe_value.f3 = stdnullopt;
+            fbe_value.f3 = std::nullopt;
         fbe_current_size += f3.fbe_size();
     }
 
@@ -8047,8 +8055,8 @@ private:
 
 public:
     FieldModel<TBuffer, std::vector<uint8_t>> f1;
-    FieldModel<TBuffer, stdoptional<std::vector<uint8_t>>> f2;
-    FieldModel<TBuffer, stdoptional<std::vector<uint8_t>>> f3;
+    FieldModel<TBuffer, std::optional<std::vector<uint8_t>>> f2;
+    FieldModel<TBuffer, std::optional<std::vector<uint8_t>>> f3;
 };
 
 } // namespace FBE
@@ -8281,8 +8289,8 @@ private:
 
 public:
     FinalModel<TBuffer, std::vector<uint8_t>> f1;
-    FinalModel<TBuffer, stdoptional<std::vector<uint8_t>>> f2;
-    FinalModel<TBuffer, stdoptional<std::vector<uint8_t>>> f3;
+    FinalModel<TBuffer, std::optional<std::vector<uint8_t>>> f2;
+    FinalModel<TBuffer, std::optional<std::vector<uint8_t>>> f3;
 };
 
 } // namespace FBE
@@ -8370,15 +8378,15 @@ namespace test {
 struct StructArray
 {
     std::array<uint8_t, 2> f1;
-    std::array<stdoptional<uint8_t>, 2> f2;
+    std::array<std::optional<uint8_t>, 2> f2;
     std::array<std::vector<uint8_t>, 2> f3;
-    std::array<stdoptional<std::vector<uint8_t>>, 2> f4;
+    std::array<std::optional<std::vector<uint8_t>>, 2> f4;
     std::array<::test::EnumSimple, 2> f5;
-    std::array<stdoptional<::test::EnumSimple>, 2> f6;
+    std::array<std::optional<::test::EnumSimple>, 2> f6;
     std::array<::test::FlagsSimple, 2> f7;
-    std::array<stdoptional<::test::FlagsSimple>, 2> f8;
+    std::array<std::optional<::test::FlagsSimple>, 2> f8;
     std::array<::test::StructSimple, 2> f9;
-    std::array<stdoptional<::test::StructSimple>, 2> f10;
+    std::array<std::optional<::test::StructSimple>, 2> f10;
 
     StructArray()
         : f1()
@@ -8392,7 +8400,7 @@ struct StructArray
         , f9()
         , f10()
     {}
-    StructArray(const std::array<uint8_t, 2>& arg_f1, const std::array<stdoptional<uint8_t>, 2>& arg_f2, const std::array<std::vector<uint8_t>, 2>& arg_f3, const std::array<stdoptional<std::vector<uint8_t>>, 2>& arg_f4, const std::array<::test::EnumSimple, 2>& arg_f5, const std::array<stdoptional<::test::EnumSimple>, 2>& arg_f6, const std::array<::test::FlagsSimple, 2>& arg_f7, const std::array<stdoptional<::test::FlagsSimple>, 2>& arg_f8, const std::array<::test::StructSimple, 2>& arg_f9, const std::array<stdoptional<::test::StructSimple>, 2>& arg_f10)
+    StructArray(const std::array<uint8_t, 2>& arg_f1, const std::array<std::optional<uint8_t>, 2>& arg_f2, const std::array<std::vector<uint8_t>, 2>& arg_f3, const std::array<std::optional<std::vector<uint8_t>>, 2>& arg_f4, const std::array<::test::EnumSimple, 2>& arg_f5, const std::array<std::optional<::test::EnumSimple>, 2>& arg_f6, const std::array<::test::FlagsSimple, 2>& arg_f7, const std::array<std::optional<::test::FlagsSimple>, 2>& arg_f8, const std::array<::test::StructSimple, 2>& arg_f9, const std::array<std::optional<::test::StructSimple>, 2>& arg_f10)
         : f1(arg_f1)
         , f2(arg_f2)
         , f3(arg_f3)
@@ -8981,15 +8989,15 @@ private:
 
 public:
     FieldModelArray<TBuffer, uint8_t, 2> f1;
-    FieldModelArray<TBuffer, stdoptional<uint8_t>, 2> f2;
+    FieldModelArray<TBuffer, std::optional<uint8_t>, 2> f2;
     FieldModelArray<TBuffer, std::vector<uint8_t>, 2> f3;
-    FieldModelArray<TBuffer, stdoptional<std::vector<uint8_t>>, 2> f4;
+    FieldModelArray<TBuffer, std::optional<std::vector<uint8_t>>, 2> f4;
     FieldModelArray<TBuffer, ::test::EnumSimple, 2> f5;
-    FieldModelArray<TBuffer, stdoptional<::test::EnumSimple>, 2> f6;
+    FieldModelArray<TBuffer, std::optional<::test::EnumSimple>, 2> f6;
     FieldModelArray<TBuffer, ::test::FlagsSimple, 2> f7;
-    FieldModelArray<TBuffer, stdoptional<::test::FlagsSimple>, 2> f8;
+    FieldModelArray<TBuffer, std::optional<::test::FlagsSimple>, 2> f8;
     FieldModelArray<TBuffer, ::test::StructSimple, 2> f9;
-    FieldModelArray<TBuffer, stdoptional<::test::StructSimple>, 2> f10;
+    FieldModelArray<TBuffer, std::optional<::test::StructSimple>, 2> f10;
 };
 
 } // namespace FBE
@@ -9348,15 +9356,15 @@ private:
 
 public:
     FinalModelArray<TBuffer, uint8_t, 2> f1;
-    FinalModelArray<TBuffer, stdoptional<uint8_t>, 2> f2;
+    FinalModelArray<TBuffer, std::optional<uint8_t>, 2> f2;
     FinalModelArray<TBuffer, std::vector<uint8_t>, 2> f3;
-    FinalModelArray<TBuffer, stdoptional<std::vector<uint8_t>>, 2> f4;
+    FinalModelArray<TBuffer, std::optional<std::vector<uint8_t>>, 2> f4;
     FinalModelArray<TBuffer, ::test::EnumSimple, 2> f5;
-    FinalModelArray<TBuffer, stdoptional<::test::EnumSimple>, 2> f6;
+    FinalModelArray<TBuffer, std::optional<::test::EnumSimple>, 2> f6;
     FinalModelArray<TBuffer, ::test::FlagsSimple, 2> f7;
-    FinalModelArray<TBuffer, stdoptional<::test::FlagsSimple>, 2> f8;
+    FinalModelArray<TBuffer, std::optional<::test::FlagsSimple>, 2> f8;
     FinalModelArray<TBuffer, ::test::StructSimple, 2> f9;
-    FinalModelArray<TBuffer, stdoptional<::test::StructSimple>, 2> f10;
+    FinalModelArray<TBuffer, std::optional<::test::StructSimple>, 2> f10;
 };
 
 } // namespace FBE
@@ -9444,15 +9452,15 @@ namespace test {
 struct StructVector
 {
     std::vector<uint8_t> f1;
-    std::vector<stdoptional<uint8_t>> f2;
+    std::vector<std::optional<uint8_t>> f2;
     std::vector<std::vector<uint8_t>> f3;
-    std::vector<stdoptional<std::vector<uint8_t>>> f4;
+    std::vector<std::optional<std::vector<uint8_t>>> f4;
     std::vector<::test::EnumSimple> f5;
-    std::vector<stdoptional<::test::EnumSimple>> f6;
+    std::vector<std::optional<::test::EnumSimple>> f6;
     std::vector<::test::FlagsSimple> f7;
-    std::vector<stdoptional<::test::FlagsSimple>> f8;
+    std::vector<std::optional<::test::FlagsSimple>> f8;
     std::vector<::test::StructSimple> f9;
-    std::vector<stdoptional<::test::StructSimple>> f10;
+    std::vector<std::optional<::test::StructSimple>> f10;
 
     StructVector()
         : f1()
@@ -9466,7 +9474,7 @@ struct StructVector
         , f9()
         , f10()
     {}
-    StructVector(const std::vector<uint8_t>& arg_f1, const std::vector<stdoptional<uint8_t>>& arg_f2, const std::vector<std::vector<uint8_t>>& arg_f3, const std::vector<stdoptional<std::vector<uint8_t>>>& arg_f4, const std::vector<::test::EnumSimple>& arg_f5, const std::vector<stdoptional<::test::EnumSimple>>& arg_f6, const std::vector<::test::FlagsSimple>& arg_f7, const std::vector<stdoptional<::test::FlagsSimple>>& arg_f8, const std::vector<::test::StructSimple>& arg_f9, const std::vector<stdoptional<::test::StructSimple>>& arg_f10)
+    StructVector(const std::vector<uint8_t>& arg_f1, const std::vector<std::optional<uint8_t>>& arg_f2, const std::vector<std::vector<uint8_t>>& arg_f3, const std::vector<std::optional<std::vector<uint8_t>>>& arg_f4, const std::vector<::test::EnumSimple>& arg_f5, const std::vector<std::optional<::test::EnumSimple>>& arg_f6, const std::vector<::test::FlagsSimple>& arg_f7, const std::vector<std::optional<::test::FlagsSimple>>& arg_f8, const std::vector<::test::StructSimple>& arg_f9, const std::vector<std::optional<::test::StructSimple>>& arg_f10)
         : f1(arg_f1)
         , f2(arg_f2)
         , f3(arg_f3)
@@ -10065,15 +10073,15 @@ private:
 
 public:
     FieldModelVector<TBuffer, uint8_t> f1;
-    FieldModelVector<TBuffer, stdoptional<uint8_t>> f2;
+    FieldModelVector<TBuffer, std::optional<uint8_t>> f2;
     FieldModelVector<TBuffer, std::vector<uint8_t>> f3;
-    FieldModelVector<TBuffer, stdoptional<std::vector<uint8_t>>> f4;
+    FieldModelVector<TBuffer, std::optional<std::vector<uint8_t>>> f4;
     FieldModelVector<TBuffer, ::test::EnumSimple> f5;
-    FieldModelVector<TBuffer, stdoptional<::test::EnumSimple>> f6;
+    FieldModelVector<TBuffer, std::optional<::test::EnumSimple>> f6;
     FieldModelVector<TBuffer, ::test::FlagsSimple> f7;
-    FieldModelVector<TBuffer, stdoptional<::test::FlagsSimple>> f8;
+    FieldModelVector<TBuffer, std::optional<::test::FlagsSimple>> f8;
     FieldModelVector<TBuffer, ::test::StructSimple> f9;
-    FieldModelVector<TBuffer, stdoptional<::test::StructSimple>> f10;
+    FieldModelVector<TBuffer, std::optional<::test::StructSimple>> f10;
 };
 
 } // namespace FBE
@@ -10432,15 +10440,15 @@ private:
 
 public:
     FinalModelVector<TBuffer, uint8_t> f1;
-    FinalModelVector<TBuffer, stdoptional<uint8_t>> f2;
+    FinalModelVector<TBuffer, std::optional<uint8_t>> f2;
     FinalModelVector<TBuffer, std::vector<uint8_t>> f3;
-    FinalModelVector<TBuffer, stdoptional<std::vector<uint8_t>>> f4;
+    FinalModelVector<TBuffer, std::optional<std::vector<uint8_t>>> f4;
     FinalModelVector<TBuffer, ::test::EnumSimple> f5;
-    FinalModelVector<TBuffer, stdoptional<::test::EnumSimple>> f6;
+    FinalModelVector<TBuffer, std::optional<::test::EnumSimple>> f6;
     FinalModelVector<TBuffer, ::test::FlagsSimple> f7;
-    FinalModelVector<TBuffer, stdoptional<::test::FlagsSimple>> f8;
+    FinalModelVector<TBuffer, std::optional<::test::FlagsSimple>> f8;
     FinalModelVector<TBuffer, ::test::StructSimple> f9;
-    FinalModelVector<TBuffer, stdoptional<::test::StructSimple>> f10;
+    FinalModelVector<TBuffer, std::optional<::test::StructSimple>> f10;
 };
 
 } // namespace FBE
@@ -10528,15 +10536,15 @@ namespace test {
 struct StructList
 {
     std::list<uint8_t> f1;
-    std::list<stdoptional<uint8_t>> f2;
+    std::list<std::optional<uint8_t>> f2;
     std::list<std::vector<uint8_t>> f3;
-    std::list<stdoptional<std::vector<uint8_t>>> f4;
+    std::list<std::optional<std::vector<uint8_t>>> f4;
     std::list<::test::EnumSimple> f5;
-    std::list<stdoptional<::test::EnumSimple>> f6;
+    std::list<std::optional<::test::EnumSimple>> f6;
     std::list<::test::FlagsSimple> f7;
-    std::list<stdoptional<::test::FlagsSimple>> f8;
+    std::list<std::optional<::test::FlagsSimple>> f8;
     std::list<::test::StructSimple> f9;
-    std::list<stdoptional<::test::StructSimple>> f10;
+    std::list<std::optional<::test::StructSimple>> f10;
 
     StructList()
         : f1()
@@ -10550,7 +10558,7 @@ struct StructList
         , f9()
         , f10()
     {}
-    StructList(const std::list<uint8_t>& arg_f1, const std::list<stdoptional<uint8_t>>& arg_f2, const std::list<std::vector<uint8_t>>& arg_f3, const std::list<stdoptional<std::vector<uint8_t>>>& arg_f4, const std::list<::test::EnumSimple>& arg_f5, const std::list<stdoptional<::test::EnumSimple>>& arg_f6, const std::list<::test::FlagsSimple>& arg_f7, const std::list<stdoptional<::test::FlagsSimple>>& arg_f8, const std::list<::test::StructSimple>& arg_f9, const std::list<stdoptional<::test::StructSimple>>& arg_f10)
+    StructList(const std::list<uint8_t>& arg_f1, const std::list<std::optional<uint8_t>>& arg_f2, const std::list<std::vector<uint8_t>>& arg_f3, const std::list<std::optional<std::vector<uint8_t>>>& arg_f4, const std::list<::test::EnumSimple>& arg_f5, const std::list<std::optional<::test::EnumSimple>>& arg_f6, const std::list<::test::FlagsSimple>& arg_f7, const std::list<std::optional<::test::FlagsSimple>>& arg_f8, const std::list<::test::StructSimple>& arg_f9, const std::list<std::optional<::test::StructSimple>>& arg_f10)
         : f1(arg_f1)
         , f2(arg_f2)
         , f3(arg_f3)
@@ -11149,15 +11157,15 @@ private:
 
 public:
     FieldModelVector<TBuffer, uint8_t> f1;
-    FieldModelVector<TBuffer, stdoptional<uint8_t>> f2;
+    FieldModelVector<TBuffer, std::optional<uint8_t>> f2;
     FieldModelVector<TBuffer, std::vector<uint8_t>> f3;
-    FieldModelVector<TBuffer, stdoptional<std::vector<uint8_t>>> f4;
+    FieldModelVector<TBuffer, std::optional<std::vector<uint8_t>>> f4;
     FieldModelVector<TBuffer, ::test::EnumSimple> f5;
-    FieldModelVector<TBuffer, stdoptional<::test::EnumSimple>> f6;
+    FieldModelVector<TBuffer, std::optional<::test::EnumSimple>> f6;
     FieldModelVector<TBuffer, ::test::FlagsSimple> f7;
-    FieldModelVector<TBuffer, stdoptional<::test::FlagsSimple>> f8;
+    FieldModelVector<TBuffer, std::optional<::test::FlagsSimple>> f8;
     FieldModelVector<TBuffer, ::test::StructSimple> f9;
-    FieldModelVector<TBuffer, stdoptional<::test::StructSimple>> f10;
+    FieldModelVector<TBuffer, std::optional<::test::StructSimple>> f10;
 };
 
 } // namespace FBE
@@ -11516,15 +11524,15 @@ private:
 
 public:
     FinalModelVector<TBuffer, uint8_t> f1;
-    FinalModelVector<TBuffer, stdoptional<uint8_t>> f2;
+    FinalModelVector<TBuffer, std::optional<uint8_t>> f2;
     FinalModelVector<TBuffer, std::vector<uint8_t>> f3;
-    FinalModelVector<TBuffer, stdoptional<std::vector<uint8_t>>> f4;
+    FinalModelVector<TBuffer, std::optional<std::vector<uint8_t>>> f4;
     FinalModelVector<TBuffer, ::test::EnumSimple> f5;
-    FinalModelVector<TBuffer, stdoptional<::test::EnumSimple>> f6;
+    FinalModelVector<TBuffer, std::optional<::test::EnumSimple>> f6;
     FinalModelVector<TBuffer, ::test::FlagsSimple> f7;
-    FinalModelVector<TBuffer, stdoptional<::test::FlagsSimple>> f8;
+    FinalModelVector<TBuffer, std::optional<::test::FlagsSimple>> f8;
     FinalModelVector<TBuffer, ::test::StructSimple> f9;
-    FinalModelVector<TBuffer, stdoptional<::test::StructSimple>> f10;
+    FinalModelVector<TBuffer, std::optional<::test::StructSimple>> f10;
 };
 
 } // namespace FBE
@@ -12372,15 +12380,15 @@ namespace test {
 struct StructMap
 {
     std::map<int32_t, uint8_t> f1;
-    std::map<int32_t, stdoptional<uint8_t>> f2;
+    std::map<int32_t, std::optional<uint8_t>> f2;
     std::map<int32_t, std::vector<uint8_t>> f3;
-    std::map<int32_t, stdoptional<std::vector<uint8_t>>> f4;
+    std::map<int32_t, std::optional<std::vector<uint8_t>>> f4;
     std::map<int32_t, ::test::EnumSimple> f5;
-    std::map<int32_t, stdoptional<::test::EnumSimple>> f6;
+    std::map<int32_t, std::optional<::test::EnumSimple>> f6;
     std::map<int32_t, ::test::FlagsSimple> f7;
-    std::map<int32_t, stdoptional<::test::FlagsSimple>> f8;
+    std::map<int32_t, std::optional<::test::FlagsSimple>> f8;
     std::map<int32_t, ::test::StructSimple> f9;
-    std::map<int32_t, stdoptional<::test::StructSimple>> f10;
+    std::map<int32_t, std::optional<::test::StructSimple>> f10;
 
     StructMap()
         : f1()
@@ -12394,7 +12402,7 @@ struct StructMap
         , f9()
         , f10()
     {}
-    StructMap(const std::map<int32_t, uint8_t>& arg_f1, const std::map<int32_t, stdoptional<uint8_t>>& arg_f2, const std::map<int32_t, std::vector<uint8_t>>& arg_f3, const std::map<int32_t, stdoptional<std::vector<uint8_t>>>& arg_f4, const std::map<int32_t, ::test::EnumSimple>& arg_f5, const std::map<int32_t, stdoptional<::test::EnumSimple>>& arg_f6, const std::map<int32_t, ::test::FlagsSimple>& arg_f7, const std::map<int32_t, stdoptional<::test::FlagsSimple>>& arg_f8, const std::map<int32_t, ::test::StructSimple>& arg_f9, const std::map<int32_t, stdoptional<::test::StructSimple>>& arg_f10)
+    StructMap(const std::map<int32_t, uint8_t>& arg_f1, const std::map<int32_t, std::optional<uint8_t>>& arg_f2, const std::map<int32_t, std::vector<uint8_t>>& arg_f3, const std::map<int32_t, std::optional<std::vector<uint8_t>>>& arg_f4, const std::map<int32_t, ::test::EnumSimple>& arg_f5, const std::map<int32_t, std::optional<::test::EnumSimple>>& arg_f6, const std::map<int32_t, ::test::FlagsSimple>& arg_f7, const std::map<int32_t, std::optional<::test::FlagsSimple>>& arg_f8, const std::map<int32_t, ::test::StructSimple>& arg_f9, const std::map<int32_t, std::optional<::test::StructSimple>>& arg_f10)
         : f1(arg_f1)
         , f2(arg_f2)
         , f3(arg_f3)
@@ -13013,15 +13021,15 @@ private:
 
 public:
     FieldModelMap<TBuffer, int32_t, uint8_t> f1;
-    FieldModelMap<TBuffer, int32_t, stdoptional<uint8_t>> f2;
+    FieldModelMap<TBuffer, int32_t, std::optional<uint8_t>> f2;
     FieldModelMap<TBuffer, int32_t, std::vector<uint8_t>> f3;
-    FieldModelMap<TBuffer, int32_t, stdoptional<std::vector<uint8_t>>> f4;
+    FieldModelMap<TBuffer, int32_t, std::optional<std::vector<uint8_t>>> f4;
     FieldModelMap<TBuffer, int32_t, ::test::EnumSimple> f5;
-    FieldModelMap<TBuffer, int32_t, stdoptional<::test::EnumSimple>> f6;
+    FieldModelMap<TBuffer, int32_t, std::optional<::test::EnumSimple>> f6;
     FieldModelMap<TBuffer, int32_t, ::test::FlagsSimple> f7;
-    FieldModelMap<TBuffer, int32_t, stdoptional<::test::FlagsSimple>> f8;
+    FieldModelMap<TBuffer, int32_t, std::optional<::test::FlagsSimple>> f8;
     FieldModelMap<TBuffer, int32_t, ::test::StructSimple> f9;
-    FieldModelMap<TBuffer, int32_t, stdoptional<::test::StructSimple>> f10;
+    FieldModelMap<TBuffer, int32_t, std::optional<::test::StructSimple>> f10;
 };
 
 } // namespace FBE
@@ -13380,15 +13388,15 @@ private:
 
 public:
     FinalModelMap<TBuffer, int32_t, uint8_t> f1;
-    FinalModelMap<TBuffer, int32_t, stdoptional<uint8_t>> f2;
+    FinalModelMap<TBuffer, int32_t, std::optional<uint8_t>> f2;
     FinalModelMap<TBuffer, int32_t, std::vector<uint8_t>> f3;
-    FinalModelMap<TBuffer, int32_t, stdoptional<std::vector<uint8_t>>> f4;
+    FinalModelMap<TBuffer, int32_t, std::optional<std::vector<uint8_t>>> f4;
     FinalModelMap<TBuffer, int32_t, ::test::EnumSimple> f5;
-    FinalModelMap<TBuffer, int32_t, stdoptional<::test::EnumSimple>> f6;
+    FinalModelMap<TBuffer, int32_t, std::optional<::test::EnumSimple>> f6;
     FinalModelMap<TBuffer, int32_t, ::test::FlagsSimple> f7;
-    FinalModelMap<TBuffer, int32_t, stdoptional<::test::FlagsSimple>> f8;
+    FinalModelMap<TBuffer, int32_t, std::optional<::test::FlagsSimple>> f8;
     FinalModelMap<TBuffer, int32_t, ::test::StructSimple> f9;
-    FinalModelMap<TBuffer, int32_t, stdoptional<::test::StructSimple>> f10;
+    FinalModelMap<TBuffer, int32_t, std::optional<::test::StructSimple>> f10;
 };
 
 } // namespace FBE
@@ -13476,15 +13484,15 @@ namespace test {
 struct StructHash
 {
     std::unordered_map<std::string, uint8_t> f1;
-    std::unordered_map<std::string, stdoptional<uint8_t>> f2;
+    std::unordered_map<std::string, std::optional<uint8_t>> f2;
     std::unordered_map<std::string, std::vector<uint8_t>> f3;
-    std::unordered_map<std::string, stdoptional<std::vector<uint8_t>>> f4;
+    std::unordered_map<std::string, std::optional<std::vector<uint8_t>>> f4;
     std::unordered_map<std::string, ::test::EnumSimple> f5;
-    std::unordered_map<std::string, stdoptional<::test::EnumSimple>> f6;
+    std::unordered_map<std::string, std::optional<::test::EnumSimple>> f6;
     std::unordered_map<std::string, ::test::FlagsSimple> f7;
-    std::unordered_map<std::string, stdoptional<::test::FlagsSimple>> f8;
+    std::unordered_map<std::string, std::optional<::test::FlagsSimple>> f8;
     std::unordered_map<std::string, ::test::StructSimple> f9;
-    std::unordered_map<std::string, stdoptional<::test::StructSimple>> f10;
+    std::unordered_map<std::string, std::optional<::test::StructSimple>> f10;
 
     StructHash()
         : f1()
@@ -13498,7 +13506,7 @@ struct StructHash
         , f9()
         , f10()
     {}
-    StructHash(const std::unordered_map<std::string, uint8_t>& arg_f1, const std::unordered_map<std::string, stdoptional<uint8_t>>& arg_f2, const std::unordered_map<std::string, std::vector<uint8_t>>& arg_f3, const std::unordered_map<std::string, stdoptional<std::vector<uint8_t>>>& arg_f4, const std::unordered_map<std::string, ::test::EnumSimple>& arg_f5, const std::unordered_map<std::string, stdoptional<::test::EnumSimple>>& arg_f6, const std::unordered_map<std::string, ::test::FlagsSimple>& arg_f7, const std::unordered_map<std::string, stdoptional<::test::FlagsSimple>>& arg_f8, const std::unordered_map<std::string, ::test::StructSimple>& arg_f9, const std::unordered_map<std::string, stdoptional<::test::StructSimple>>& arg_f10)
+    StructHash(const std::unordered_map<std::string, uint8_t>& arg_f1, const std::unordered_map<std::string, std::optional<uint8_t>>& arg_f2, const std::unordered_map<std::string, std::vector<uint8_t>>& arg_f3, const std::unordered_map<std::string, std::optional<std::vector<uint8_t>>>& arg_f4, const std::unordered_map<std::string, ::test::EnumSimple>& arg_f5, const std::unordered_map<std::string, std::optional<::test::EnumSimple>>& arg_f6, const std::unordered_map<std::string, ::test::FlagsSimple>& arg_f7, const std::unordered_map<std::string, std::optional<::test::FlagsSimple>>& arg_f8, const std::unordered_map<std::string, ::test::StructSimple>& arg_f9, const std::unordered_map<std::string, std::optional<::test::StructSimple>>& arg_f10)
         : f1(arg_f1)
         , f2(arg_f2)
         , f3(arg_f3)
@@ -14117,15 +14125,15 @@ private:
 
 public:
     FieldModelMap<TBuffer, std::string, uint8_t> f1;
-    FieldModelMap<TBuffer, std::string, stdoptional<uint8_t>> f2;
+    FieldModelMap<TBuffer, std::string, std::optional<uint8_t>> f2;
     FieldModelMap<TBuffer, std::string, std::vector<uint8_t>> f3;
-    FieldModelMap<TBuffer, std::string, stdoptional<std::vector<uint8_t>>> f4;
+    FieldModelMap<TBuffer, std::string, std::optional<std::vector<uint8_t>>> f4;
     FieldModelMap<TBuffer, std::string, ::test::EnumSimple> f5;
-    FieldModelMap<TBuffer, std::string, stdoptional<::test::EnumSimple>> f6;
+    FieldModelMap<TBuffer, std::string, std::optional<::test::EnumSimple>> f6;
     FieldModelMap<TBuffer, std::string, ::test::FlagsSimple> f7;
-    FieldModelMap<TBuffer, std::string, stdoptional<::test::FlagsSimple>> f8;
+    FieldModelMap<TBuffer, std::string, std::optional<::test::FlagsSimple>> f8;
     FieldModelMap<TBuffer, std::string, ::test::StructSimple> f9;
-    FieldModelMap<TBuffer, std::string, stdoptional<::test::StructSimple>> f10;
+    FieldModelMap<TBuffer, std::string, std::optional<::test::StructSimple>> f10;
 };
 
 } // namespace FBE
@@ -14484,15 +14492,15 @@ private:
 
 public:
     FinalModelMap<TBuffer, std::string, uint8_t> f1;
-    FinalModelMap<TBuffer, std::string, stdoptional<uint8_t>> f2;
+    FinalModelMap<TBuffer, std::string, std::optional<uint8_t>> f2;
     FinalModelMap<TBuffer, std::string, std::vector<uint8_t>> f3;
-    FinalModelMap<TBuffer, std::string, stdoptional<std::vector<uint8_t>>> f4;
+    FinalModelMap<TBuffer, std::string, std::optional<std::vector<uint8_t>>> f4;
     FinalModelMap<TBuffer, std::string, ::test::EnumSimple> f5;
-    FinalModelMap<TBuffer, std::string, stdoptional<::test::EnumSimple>> f6;
+    FinalModelMap<TBuffer, std::string, std::optional<::test::EnumSimple>> f6;
     FinalModelMap<TBuffer, std::string, ::test::FlagsSimple> f7;
-    FinalModelMap<TBuffer, std::string, stdoptional<::test::FlagsSimple>> f8;
+    FinalModelMap<TBuffer, std::string, std::optional<::test::FlagsSimple>> f8;
     FinalModelMap<TBuffer, std::string, ::test::StructSimple> f9;
-    FinalModelMap<TBuffer, std::string, stdoptional<::test::StructSimple>> f10;
+    FinalModelMap<TBuffer, std::string, std::optional<::test::StructSimple>> f10;
 };
 
 } // namespace FBE
@@ -14580,13 +14588,13 @@ namespace test {
 struct StructHashEx
 {
     std::map<::test::StructSimple, ::test::StructNested> f1;
-    std::map<::test::StructSimple, stdoptional<::test::StructNested>> f2;
+    std::map<::test::StructSimple, std::optional<::test::StructNested>> f2;
 
     StructHashEx()
         : f1()
         , f2()
     {}
-    StructHashEx(const std::map<::test::StructSimple, ::test::StructNested>& arg_f1, const std::map<::test::StructSimple, stdoptional<::test::StructNested>>& arg_f2)
+    StructHashEx(const std::map<::test::StructSimple, ::test::StructNested>& arg_f1, const std::map<::test::StructSimple, std::optional<::test::StructNested>>& arg_f2)
         : f1(arg_f1)
         , f2(arg_f2)
     {}
@@ -14933,7 +14941,7 @@ private:
 
 public:
     FieldModelMap<TBuffer, ::test::StructSimple, ::test::StructNested> f1;
-    FieldModelMap<TBuffer, ::test::StructSimple, stdoptional<::test::StructNested>> f2;
+    FieldModelMap<TBuffer, ::test::StructSimple, std::optional<::test::StructNested>> f2;
 };
 
 } // namespace FBE
@@ -15148,7 +15156,7 @@ private:
 
 public:
     FinalModelMap<TBuffer, ::test::StructSimple, ::test::StructNested> f1;
-    FinalModelMap<TBuffer, ::test::StructSimple, stdoptional<::test::StructNested>> f2;
+    FinalModelMap<TBuffer, ::test::StructSimple, std::optional<::test::StructNested>> f2;
 };
 
 } // namespace FBE
@@ -15492,11 +15500,11 @@ public:
         : proto::Receiver<TBuffer>(this->_buffer)
     {}
     Receiver(const Receiver&) = default;
-    Receiver(Receiver&&) noexcept = default;
+    Receiver(Receiver&&) = default;
     virtual ~Receiver() = default;
 
     Receiver& operator=(const Receiver&) = default;
-    Receiver& operator=(Receiver&&) noexcept = default;
+    Receiver& operator=(Receiver&&) = default;
 
 protected:
     // Receive handlers
@@ -16026,11 +16034,11 @@ public:
         : proto::FinalReceiver<TBuffer>(this->_buffer)
     { this->final(true); }
     FinalReceiver(const FinalReceiver&) = default;
-    FinalReceiver(FinalReceiver&&) noexcept = default;
+    FinalReceiver(FinalReceiver&&) = default;
     virtual ~FinalReceiver() = default;
 
     FinalReceiver& operator=(const FinalReceiver&) = default;
-    FinalReceiver& operator=(FinalReceiver&&) noexcept = default;
+    FinalReceiver& operator=(FinalReceiver&&) = default;
 
 protected:
     // Receive handlers

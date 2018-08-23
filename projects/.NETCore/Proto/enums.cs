@@ -2213,8 +2213,8 @@ namespace enums {
         public static FBE.FieldModelValueType<EnumInt64> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnumInt64(buffer, offset); }
 
         public static EnumInt64 ENUM_VALUE_0 = new EnumInt64((long)0L + 0);
-        public static EnumInt64 ENUM_VALUE_1 = new EnumInt64((long)-9223372036854775808L + 0);
-        public static EnumInt64 ENUM_VALUE_2 = new EnumInt64((long)-9223372036854775808L + 1);
+        public static EnumInt64 ENUM_VALUE_1 = new EnumInt64((long)-9223372036854775807L + 0);
+        public static EnumInt64 ENUM_VALUE_2 = new EnumInt64((long)-9223372036854775807L + 1);
         public static EnumInt64 ENUM_VALUE_3 = new EnumInt64((long)9223372036854775806L + 0);
         public static EnumInt64 ENUM_VALUE_4 = new EnumInt64((long)9223372036854775806L + 1);
         public static EnumInt64 ENUM_VALUE_5 = new EnumInt64(ENUM_VALUE_3);
