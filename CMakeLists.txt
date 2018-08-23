@@ -41,7 +41,7 @@ list(APPEND LINKLIBS cppcommon)
 include_directories(SYSTEM "${CMAKE_CURRENT_SOURCE_DIR}/modules")
 
 # Lexer & parser
-if(MSVC)
+if(MINGW OR MSVC)
   flex_target(lexer "${CMAKE_CURRENT_SOURCE_DIR}/source/fbe.l" "${CMAKE_CURRENT_SOURCE_DIR}/source/fbe-lexer.cpp" COMPILE_FLAGS "--verbose --hex --yylineno --wincompat")
 else()
   flex_target(lexer "${CMAKE_CURRENT_SOURCE_DIR}/source/fbe.l" "${CMAKE_CURRENT_SOURCE_DIR}/source/fbe-lexer.cpp" COMPILE_FLAGS "--verbose --yylineno")
