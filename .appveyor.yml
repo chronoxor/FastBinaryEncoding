@@ -21,9 +21,9 @@ cache:
 # Build matrix
 environment:
   matrix:
-#    - type: Cygwin
-#      build: C:\cygwin64\bin\bash -lc "cd $APPVEYOR_BUILD_FOLDER/build; exec 0</dev/null; ./cygwin.sh"
-#      command: C:\cygwin64\bin\bash -lc
+    - type: Cygwin
+      build: C:\cygwin64\bin\bash -lc "cd $APPVEYOR_BUILD_FOLDER/build; exec 0</dev/null; ./cygwin.sh"
+      command: C:\cygwin64\bin\bash -lc
     - type: MinGW
       build: call mingw.bat
       command: cmd /C
@@ -49,7 +49,7 @@ install:
   # Cygwin
   - if "%type%"=="Cygwin" if not exist "C:\cygwin64" mkdir "C:\cygwin64"
   - if "%type%"=="Cygwin" appveyor-retry appveyor DownloadFile "http://cygwin.com/setup-x86_64.exe" -FileName "C:\cygwin64\setup-x86_64.exe"
-  - if "%type%"=="Cygwin" C:\cygwin64\setup-x86_64.exe --quiet-mode --no-shortcuts --upgrade-also --root "C:\cygwin64" --local-package-dir "C:\cache\cygwin" --packages cmake,automake,make,gcc-core,gcc-g++,doxygen,graphviz,libncurses-devel
+  - if "%type%"=="Cygwin" C:\cygwin64\setup-x86_64.exe --quiet-mode --no-shortcuts --upgrade-also --root "C:\cygwin64" --local-package-dir "C:\cache\cygwin" --packages cmake,automake,make,gcc-core,gcc-g++,doxygen,graphviz,libncurses-devel,flex,bison
   - if "%type%"=="Cygwin" appveyor-retry appveyor DownloadFile "https://cmake.org/files/v3.12/cmake-3.12.0.tar.gz" -FileName "cmake.tar.gz"
   - if "%type%"=="Cygwin" C:\cygwin64\bin\bash -lc "cd $APPVEYOR_BUILD_FOLDER; mkdir temp; cd temp; mv ../cmake.tar.gz ./cmake.tar.gz; tar xzf cmake.tar.gz --strip-components=1; ./bootstrap && make && make install; cd ..; rm -rf ./temp"
   # MinGW
