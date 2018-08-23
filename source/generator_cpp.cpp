@@ -29,15 +29,6 @@ void GeneratorCpp::GenerateHeader()
 #elif defined(_MSC_VER)
 #pragma system_header
 #endif
-
-#if defined(__clang__)
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wuninitialized"
-#elif defined(__GNUC__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
-#pragma GCC diagnostic ignored "-Wstrict-aliasing"
-#endif
 )CODE";
 
     // Prepare code template
@@ -48,18 +39,6 @@ void GeneratorCpp::GenerateHeader()
 
 void GeneratorCpp::GenerateFooter()
 {
-    std::string code = R"CODE(
-#if defined(__clang__)
-#pragma clang diagnostic pop
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
-)CODE";
-
-    // Prepare code template
-    code = std::regex_replace(code, std::regex("\n"), EndLine());
-
-    Write(code);
 }
 
 void GeneratorCpp::GenerateImports()
