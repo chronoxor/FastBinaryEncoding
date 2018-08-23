@@ -59,7 +59,7 @@ void GeneratorCpp::GenerateImports()
 #include <unordered_map>
 #include <vector>
 
-#if defined(__cclang__)
+#if defined(__clang__)
 #include <experimental/optional>
 #define std_optional std::experimental::optional
 #define std_make_optional std::experimental::make_optional
