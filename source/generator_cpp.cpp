@@ -23,11 +23,20 @@ void GeneratorCpp::GenerateHeader()
 #pragma once
 
 #if defined(__clang__)
+#pragma clang system_header
+#elif defined(__GNUC__)
+#pragma GCC system_header
+#elif defined(_MSC_VER)
+#pragma system_header
+#endif
+
+#if defined(__clang__)
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wuninitialized"
 #elif defined(__GNUC__)
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wmaybe-uninitialized"
+#pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif
 )CODE";
 
@@ -75,7 +84,7 @@ void GeneratorCpp::GenerateImports()
 #include <unordered_map>
 #include <vector>
 
-#if defined(__clang__)
+#if defined(__cclang__)
 #include <experimental/optional>
 #define std_optional std::experimental::optional
 #define std_make_optional std::experimental::make_optional
@@ -1148,14 +1157,7 @@ public:
 
         // Get exponent value
         double dValue = (double)value;
-#if defined(__GNUC__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wstrict-aliasing"
-#endif
         int32_t iExp = (int32_t)(((uint32_t)((*(uint64_t*)&dValue) >> 52) & 0x7FFu) - DBLBIAS);
-#if defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
         if ((iExp < -94) || (iExp > 96))
         {
             // Value too big for .NET Decimal (exponent is limited to [-94, 96])
@@ -2742,14 +2744,7 @@ public:
 
         // Get exponent value
         double dValue = (double)value;
-#if defined(__GNUC__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wstrict-aliasing"
-#endif
         int32_t iExp = (int32_t)(((uint32_t)((*(uint64_t*)&dValue) >> 52) & 0x7FFu) - DBLBIAS);
-#if defined(__GNUC__)
-#pragma GCC diagnostic pop
-#endif
         if ((iExp < -94) || (iExp > 96))
         {
             // Value too big for .NET Decimal (exponent is limited to [-94, 96])
