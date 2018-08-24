@@ -8,7 +8,8 @@
 
 C++ Template Library contains initial templates for a new C++ library project.
 
-[CppTemplate API reference](https://chronoxor.github.io/CppTemplate/index.html)
+[FastBinaryEncoding documentation](https://chronoxor.github.io/FastBinaryEncoding)<br/>
+[FastBinaryEncoding downloads](https://github.com/chronoxor/FastBinaryEncoding/releases)<br/>
 
 # Contents
   * [Features](#features)
