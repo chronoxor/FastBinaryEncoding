@@ -7,10 +7,12 @@ const fbe = require('../proto/fbe')
 const int64 = require('../proto/int64')
 const proto = require('../proto/proto')
 const prototest = require('../proto/test')
+const uuid = require('../proto/uuid')
 
 const Big = big.Big
 const Int64 = int64.Int64
 const UInt64 = int64.UInt64
+const UUID = uuid.UUID
 
 test('Serialization: proto', function (t) {
   // Create a new account with some orders
@@ -136,9 +138,9 @@ test('Serialization: struct simple', function (t) {
   t.equal(struct2.f33.getTime(), new Date(Date.UTC(1970, 0, 1)).getTime())
   t.equal(struct2.f34.getTime(), new Date(Date.UTC(1970, 0, 1)).getTime())
   t.true(struct2.f35.getTime() > new Date(Date.UTC(2018, 1, 1)).getTime())
-  t.true(struct2.f36.eq(uuid.UUID()))
-  t.false(struct2.f37.eq(uuid.UUID()))
-  t.true(struct2.f38.eq(uuid.UUID('123e4567-e89b-12d3-a456-426655440000')))
+  t.true(struct2.f36.eq(new UUID()))
+  t.false(struct2.f37.eq(new UUID()))
+  t.true(struct2.f38.eq(new UUID('123e4567-e89b-12d3-a456-426655440000')))
 
   t.equal(struct2.f1, struct1.f1)
   t.equal(struct2.f2, struct1.f2)
@@ -247,9 +249,9 @@ test('Serialization: struct optional', function (t) {
   t.equal(struct2.f33.getTime(), new Date(Date.UTC(1970, 0, 1)).getTime())
   t.equal(struct2.f34.getTime(), new Date(Date.UTC(1970, 0, 1)).getTime())
   t.true(struct2.f35.getTime() > new Date(Date.UTC(2018, 1, 1)).getTime())
-  t.true(struct2.f36.eq(uuid.UUID()))
-  t.false(struct2.f37.eq(uuid.UUID()))
-  t.true(struct2.f38.eq(uuid.UUID('123e4567-e89b-12d3-a456-426655440000')))
+  t.true(struct2.f36.eq(new UUID()))
+  t.false(struct2.f37.eq(new UUID()))
+  t.true(struct2.f38.eq(new UUID('123e4567-e89b-12d3-a456-426655440000')))
 
   t.equal(struct2.f100, undefined)
   t.notEqual(struct2.f101, null)
@@ -321,7 +323,7 @@ test('Serialization: struct optional', function (t) {
   t.equal(struct2.f150, undefined)
   t.equal(struct2.f151, undefined)
   t.notEqual(struct2.f152, null)
-  t.true(struct2.f152.eq(uuid.UUID('123e4567-e89b-12d3-a456-426655440000')))
+  t.true(struct2.f152.eq(new UUID('123e4567-e89b-12d3-a456-426655440000')))
   t.equal(struct2.f153, undefined)
   t.equal(struct2.f154, undefined)
   t.equal(struct2.f155, undefined)
@@ -502,9 +504,9 @@ test('Serialization: struct nested', function (t) {
   t.equal(struct2.f33.getTime(), new Date(Date.UTC(1970, 0, 1)).getTime())
   t.equal(struct2.f34.getTime(), new Date(Date.UTC(1970, 0, 1)).getTime())
   t.true(struct2.f35.getTime() > new Date(Date.UTC(2018, 1, 1)).getTime())
-  t.true(struct2.f36.eq(uuid.UUID()))
-  t.false(struct2.f37.eq(uuid.UUID()))
-  t.true(struct2.f38.eq(uuid.UUID('123e4567-e89b-12d3-a456-426655440000')))
+  t.true(struct2.f36.eq(new UUID()))
+  t.false(struct2.f37.eq(new UUID()))
+  t.true(struct2.f38.eq(new UUID('123e4567-e89b-12d3-a456-426655440000')))
 
   t.equal(struct2.f100, undefined)
   t.notEqual(struct2.f101, null)
@@ -576,7 +578,7 @@ test('Serialization: struct nested', function (t) {
   t.equal(struct2.f150, undefined)
   t.equal(struct2.f151, undefined)
   t.notEqual(struct2.f152, null)
-  t.true(struct2.f152.eq(uuid.UUID('123e4567-e89b-12d3-a456-426655440000')))
+  t.true(struct2.f152.eq(new UUID('123e4567-e89b-12d3-a456-426655440000')))
   t.equal(struct2.f153, undefined)
   t.equal(struct2.f154, undefined)
   t.equal(struct2.f155, undefined)

@@ -6,10 +6,12 @@ const big = require('./big')
 const int64 = require('./int64')
 const ieee754 = require('./ieee754')
 const utf8 = require('./utf8')
+const uuid = require('./uuid')
 
 const Big = big.Big
 const Int64 = int64.Int64
 const UInt64 = int64.UInt64
+const UUID = uuid.UUID
 const ieee754read = ieee754.ieee754read
 const ieee754write = ieee754.ieee754write
 const utf8count = utf8.utf8count
@@ -1834,6 +1836,50 @@ class FieldModelTimestamp extends FieldModel {
 }
 
 exports.FieldModelTimestamp = FieldModelTimestamp
+
+/**
+ * Fast Binary Encoding UUID field model class
+ */
+class FieldModelUUID extends FieldModel {
+  /**
+   * Get the field size
+   * @this {!FieldModelUUID}
+   * @returns {!number} Field size
+   */
+  get FBESize () {
+    return 16
+  }
+
+  /**
+   * Get the value
+   * @this {!FieldModelUUID}
+   * @param {UUID=} defaults Default value, defaults is UUID.nil()
+   * @returns {!UUID} Result value
+   */
+  get (defaults = UUID.nil()) {
+    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+      return defaults
+    }
+
+    return new UUID(this.readBytes(this.FBEOffset, 16))
+  }
+
+  /**
+   * Set the value
+   * @this {!FieldModelUUID}
+   * @param {!UUID} value Value
+   */
+  set (value) {
+    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+      return
+    }
+
+    this.writeBytes(this.FBEOffset, value.data)
+  }
+}
+
+exports.FieldModelUUID = FieldModelUUID
 
 /**
  * Fast Binary Encoding bytes field model class
@@ -4184,6 +4230,74 @@ class FinalModelTimestamp extends FinalModel {
 }
 
 exports.FinalModelTimestamp = FinalModelTimestamp
+
+/**
+ * Fast Binary Encoding UUID final model class
+ */
+class FinalModelUUID extends FinalModel {
+  /**
+   * Get the allocation size
+   * @this {!FinalModelUUID}
+   * @param {!UUID} value Value
+   * @returns {!number} Allocation size
+   */
+  FBEAllocationSize (value) {
+    return this.FBESize
+  }
+
+  /**
+   * Get the final size
+   * @this {!FieldModelUUID}
+   * @returns {!number} Final size
+   */
+  get FBESize () {
+    return 16
+  }
+
+  /**
+   * Check if the value is valid
+   * @this {!FinalModelUUID}
+   * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
+   */
+  verify () {
+    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+      return Number.MAX_SAFE_INTEGER
+    }
+
+    return this.FBESize
+  }
+
+  /**
+   * Get the value
+   * @this {!FieldModelUUID}
+   * @returns {!object} Result UUID value and its size
+   */
+  get () {
+    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+      return { value: new UUID(), size: 0 }
+    }
+
+    return { value: new UUID(this.readBytes(this.FBEOffset, 16)), size: this.FBESize }
+  }
+
+  /**
+   * Set the value
+   * @this {!FieldModelUUID}
+   * @param {!UUID} value Value
+   * @returns {!number} Final model size
+   */
+  set (value) {
+    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+      return 0
+    }
+
+    this.writeBytes(this.FBEOffset, value.data)
+    return this.FBESize
+  }
+}
+
+exports.FinalModelUUID = FinalModelUUID
 
 /**
  * Fast Binary Encoding bytes final model class

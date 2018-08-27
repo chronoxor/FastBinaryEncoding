@@ -2859,6 +2859,186 @@ exports.UInt64 = UInt64
     Close();
 }
 
+void GeneratorJavaScript::GenerateUUID(const CppCommon::Path& path)
+{
+    // Open the common file
+    CppCommon::Path init = path / "uuid.js";
+    Open(init);
+
+    // Generate common header
+    GenerateHeader();
+
+    std::string code = R"CODE(
+class UUID {
+  constructor (value = null) {
+    if (typeof value === 'string' || value instanceof String) {
+      value = value.replace(/[{}-]/g, '')
+      this.data = new Uint8Array(16)
+      for (let i = 0; i < value.length; i += 1) { this.data[i] = parseInt(value.substr(i * 2, 2), 16) }
+    } else if (value instanceof Uint8Array) {
+      this.data = value
+    } else if (value instanceof UUID) {
+      this.data = value.data
+    } else {
+      this.data = new Uint8Array(16)
+    }
+  }
+
+  toString () {
+    let hex = []
+    for (let i = 0; i < this.data.length; i++) {
+      hex.push((this.data[i] >>> 4).toString(16))
+      hex.push((this.data[i] & 0xF).toString(16))
+      if (i === 3 || i === 5 || i === 7 || i === 9) hex.push('-')
+    }
+    return hex.join('')
+  }
+
+  static empty () {
+    return new UUID()
+  }
+
+  WriteUInt32 (offset, value) {
+    this.data[offset + 3] = (value >>> 24)
+    this.data[offset + 2] = (value >>> 16)
+    this.data[offset + 1] = (value >>> 8)
+    this.data[offset + 0] = (value & 0xFF)
+  }
+  WriteUInt16 (offset, value) {
+    this.data[offset + 1] = (value >>> 8)
+    this.data[offset + 0] = (value & 0xFF)
+  }
+  WriteUInt8 (offset, value) {
+    this.data[offset + 0] = (value & 0xFF)
+  }
+
+  fromParts (timeLow, timeMid, timeHiAndVersion, clockSeqHiAndReserved, clockSeqLow, nodeLow, nodeMid, nodeHi) {
+    this.WriteUInt32(0, timeLow)
+    this.WriteUInt16(4, timeMid)
+    this.WriteUInt16(6, timeHiAndVersion)
+    this.WriteUInt8(8, clockSeqHiAndReserved)
+    this.WriteUInt8(9, clockSeqLow)
+    this.WriteUInt32(10, nodeLow)
+    this.WriteUInt8(14, nodeMid)
+    this.WriteUInt8(15, nodeHi)
+  };
+
+  static sequential () {
+    let now = new Date().getTime()
+    let sequence = Math.floor(Math.random() * TWO_POW_14)
+    let nodeHi = (Math.floor(Math.random() * TWO_POW_8) | 1)
+    let nodeMid = Math.floor(Math.random() * TWO_POW_8)
+    let nodeLow = Math.floor(Math.random() * TWO_POW_32)
+    let tick = Math.floor(Math.random() * TWO_POW_4)
+    let timestamp = 0
+    let timestampRatio = 1 / 4
+
+    if (now !== timestamp) {
+      if (now < timestamp) {
+        sequence++
+      }
+      timestamp = now
+      tick = Math.floor(Math.random() * TWO_POW_4)
+    } else if (Math.random() < timestampRatio && tick < 9984) {
+      tick += 1 + Math.floor(Math.random() * TWO_POW_4)
+    } else {
+      sequence++
+    }
+
+    let ts = timestamp - Date.UTC(1582, 9, 15)
+    let hm = ((ts / 0x100000000) * 10000) & 0xFFFFFFF
+    let tl = ((ts & 0xFFFFFFF) * 10000) % 0x100000000 + tick
+    let thav = (hm >>> 16 & 0xFFF) | 0x1000
+
+    sequence &= 0x3FFF
+    let cshar = (sequence >>> 8) | 0x80
+    let csl = sequence & 0xFF
+
+    let uuid = new UUID()
+    uuid.fromParts(tl, hm & 0xFFFF, thav, cshar, csl, nodeLow, nodeMid, nodeHi)
+    return uuid
+  }
+
+  static random () {
+    let uuid = new UUID()
+    uuid.fromParts(
+      Math.floor(Math.random() * TWO_POW_32),
+      Math.floor(Math.random() * TWO_POW_16),
+      0x4000 | Math.floor(Math.random() * TWO_POW_12),
+      0x80 | Math.floor(Math.random() * TWO_POW_6),
+      Math.floor(Math.random() * TWO_POW_8),
+      Math.floor(Math.random() * TWO_POW_32),
+      Math.floor(Math.random() * TWO_POW_8),
+      Math.floor(Math.random() * TWO_POW_8)
+    )
+    return uuid
+  }
+
+  eq (other) {
+    let equal = true
+    for (let i = 0; i < 16; i++) {
+      if (this.data[i] !== other.data[i]) {
+        equal = false
+        break
+      }
+    }
+    return equal
+  }
+
+  ne (other) {
+    return !this.eq(other)
+  }
+
+  lt (other) {
+    return this.cmp(other) < 0
+  }
+
+  lte (other) {
+    return this.cmp(other) <= 0
+  }
+
+  gt (other) {
+    return this.cmp(other) > 0
+  }
+
+  gte (other) {
+    return this.cmp(other) >= 0
+  }
+
+  cmp (other) {
+    for (let i = 0; i < 16; i++) {
+      if (this.data[i] > other.data[i]) return 1
+      if (this.data[i] < other.data[i]) return -1
+    }
+    return 0
+  }
+}
+
+Object.defineProperty(UUID.prototype, '__isUUID__', {value: true})
+
+const TWO_POW_32 = 4294967296
+const TWO_POW_16 = 65536
+const TWO_POW_14 = 16384
+const TWO_POW_12 = 4096
+const TWO_POW_8 = 256
+const TWO_POW_6 = 64
+const TWO_POW_4 = 16
+
+exports.UUID = UUID
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate common footer
+    GenerateFooter();
+
+    // Close the common file
+    Close();
+}
+
 void GeneratorJavaScript::GenerateIEEE754(const CppCommon::Path& path)
 {
     // Open the common file
@@ -3252,10 +3432,12 @@ const big = require('./big')
 const int64 = require('./int64')
 const ieee754 = require('./ieee754')
 const utf8 = require('./utf8')
+const uuid = require('./uuid')
 
 const Big = big.Big
 const Int64 = int64.Int64
 const UInt64 = int64.UInt64
+const UUID = uuid.UUID
 const ieee754read = ieee754.ieee754read
 const ieee754write = ieee754.ieee754write
 const utf8count = utf8.utf8count
@@ -3291,6 +3473,7 @@ const utf8decode = utf8.utf8decode
     GenerateFBEFieldModel("Double", "double", "number", "8", "0.0");
     GenerateFBEFieldModelDecimal();
     GenerateFBEFieldModelTimestamp();
+    GenerateFBEFieldModelUUID();
     GenerateFBEFieldModelBytes();
     GenerateFBEFieldModelString();
     GenerateFBEFieldModelOptional();
@@ -3317,6 +3500,7 @@ const utf8decode = utf8.utf8decode
         GenerateFBEFinalModel("Double", "double", "number", "8", "0.0");
         GenerateFBEFinalModelDecimal();
         GenerateFBEFinalModelTimestamp();
+        GenerateFBEFinalModelUUID();
         GenerateFBEFinalModelBytes();
         GenerateFBEFinalModelString();
         GenerateFBEFinalModelOptional();
@@ -4670,6 +4854,60 @@ class FieldModelTimestamp extends FieldModel {
 }
 
 exports.FieldModelTimestamp = FieldModelTimestamp
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+}
+
+void GeneratorJavaScript::GenerateFBEFieldModelUUID()
+{
+    std::string code = R"CODE(
+/**
+ * Fast Binary Encoding UUID field model class
+ */
+class FieldModelUUID extends FieldModel {
+  /**
+   * Get the field size
+   * @this {!FieldModelUUID}
+   * @returns {!number} Field size
+   */
+  get FBESize () {
+    return 16
+  }
+
+  /**
+   * Get the value
+   * @this {!FieldModelUUID}
+   * @param {UUID=} defaults Default value, defaults is UUID.nil()
+   * @returns {!UUID} Result value
+   */
+  get (defaults = UUID.nil()) {
+    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+      return defaults
+    }
+
+    return new UUID(this.readBytes(this.FBEOffset, 16))
+  }
+
+  /**
+   * Set the value
+   * @this {!FieldModelUUID}
+   * @param {!UUID} value Value
+   */
+  set (value) {
+    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+      return
+    }
+
+    this.writeBytes(this.FBEOffset, value.data)
+  }
+}
+
+exports.FieldModelUUID = FieldModelUUID
 )CODE";
 
     // Prepare code template
@@ -6259,6 +6497,84 @@ exports.FinalModelTimestamp = FinalModelTimestamp
     Write(code);
 }
 
+void GeneratorJavaScript::GenerateFBEFinalModelUUID()
+{
+    std::string code = R"CODE(
+/**
+ * Fast Binary Encoding UUID final model class
+ */
+class FinalModelUUID extends FinalModel {
+  /**
+   * Get the allocation size
+   * @this {!FinalModelUUID}
+   * @param {!UUID} value Value
+   * @returns {!number} Allocation size
+   */
+  FBEAllocationSize (value) {
+    return this.FBESize
+  }
+
+  /**
+   * Get the final size
+   * @this {!FieldModelUUID}
+   * @returns {!number} Final size
+   */
+  get FBESize () {
+    return 16
+  }
+
+  /**
+   * Check if the value is valid
+   * @this {!FinalModelUUID}
+   * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
+   */
+  verify () {
+    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+      return Number.MAX_SAFE_INTEGER
+    }
+
+    return this.FBESize
+  }
+
+  /**
+   * Get the value
+   * @this {!FieldModelUUID}
+   * @returns {!object} Result UUID value and its size
+   */
+  get () {
+    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+      return { value: new UUID(), size: 0 }
+    }
+
+    return { value: new UUID(this.readBytes(this.FBEOffset, 16)), size: this.FBESize }
+  }
+
+  /**
+   * Set the value
+   * @this {!FieldModelUUID}
+   * @param {!UUID} value Value
+   * @returns {!number} Final model size
+   */
+  set (value) {
+    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+      return 0
+    }
+
+    this.writeBytes(this.FBEOffset, value.data)
+    return this.FBESize
+  }
+}
+
+exports.FinalModelUUID = FinalModelUUID
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+}
+
 void GeneratorJavaScript::GenerateFBEFinalModelBytes()
 {
     std::string code = R"CODE(
@@ -7614,10 +7930,12 @@ void GeneratorJavaScript::GenerateImports(const std::shared_ptr<Package>& p)
     WriteLineIndent("const big = require('./big')");
     WriteLineIndent("const fbe = require('./fbe')");
     WriteLineIndent("const int64 = require('./int64')");
+    WriteLineIndent("const uuid = require('./uuid')");
     WriteLine();
     WriteLineIndent("const Big = big.Big // eslint-disable-line");
     WriteLineIndent("const Int64 = int64.Int64 // eslint-disable-line");
     WriteLineIndent("const UInt64 = int64.UInt64 // eslint-disable-line");
+    WriteLineIndent("const UUID = uuid.UUID // eslint-disable-line");
 
     // Generate packages import
     if (p->import)
@@ -7637,6 +7955,7 @@ void GeneratorJavaScript::GeneratePackage(const std::shared_ptr<Package>& p)
     // Generate common files
     GenerateBig(output);
     GenerateInt64(output);
+    GenerateUUID(output);
     GenerateIEEE754(output);
     GenerateUTF8(output);
     GenerateFBE(output);
@@ -10519,6 +10838,8 @@ std::string GeneratorJavaScript::ConvertTypeFieldName(const std::string& type, b
         return "fbe." + modelType + "ModelDecimal";
     else if (type == "timestamp")
         return "fbe." + modelType + "ModelTimestamp";
+    else if (type == "uuid")
+        return "fbe." + modelType + "ModelUUID";
     else if (type == "bytes")
         return "fbe." + modelType + "ModelBytes";
     else if (type == "string")
@@ -10591,6 +10912,12 @@ std::string GeneratorJavaScript::ConvertConstant(const std::string& type, const 
         return "undefined";
     else if (value == "epoch")
         return "new Date(0)";
+    else if (value == "uuid0")
+        return "UUID.nil()";
+    else if (value == "uuid1")
+        return "UUID.sequential()";
+    else if (value == "uuid4")
+        return "UUID.random()";
     else if (value == "utc")
         return "new Date(Date.now())";
 
@@ -10604,6 +10931,8 @@ std::string GeneratorJavaScript::ConvertConstant(const std::string& type, const 
         return "new Big('" + value + "')";
     else if (type == "string")
         return ConvertString(value);
+    else if (type == "uuid")
+        return "new UUID(" + ConvertString(value) + ")";
 
     if (IsJavaScriptType(type))
         return value;
@@ -10633,6 +10962,8 @@ std::string GeneratorJavaScript::ConvertDefault(const std::string& type)
         return "false";
     else if (type == "byte")
         return "0";
+    else if (type == "bytes")
+        return "new Uint8Array(0)";
     else if ((type == "char") || (type == "wchar"))
         return "'\\0'";
     else if ((type == "int8") || (type == "uint8") || (type == "int16") || (type == "uint16") || (type == "int32") || (type == "uint32"))
@@ -10645,12 +10976,12 @@ std::string GeneratorJavaScript::ConvertDefault(const std::string& type)
         return "0.0";
     else if (type == "decimal")
         return "new Big(0)";
-    else if (type == "timestamp")
-        return "new Date(0)";
-    else if (type == "bytes")
-        return "new Uint8Array(0)";
     else if (type == "string")
         return "''";
+    else if (type == "timestamp")
+        return "new Date(0)";
+    else if (type == "uuid")
+        return "new UUID()";
 
     return "new " + type + "()";
 }
@@ -10694,6 +11025,8 @@ std::string GeneratorJavaScript::ConvertVariable(const std::string& type, const 
         return "((" + name + " != null) ? " + name + ".toFixed() : null)";
     else if (type == "timestamp")
         return "((" + name + " != null) ? (" + name + ".getTime() * 1000000) : null)";
+    else if (type == "uuid")
+        return "((" + name + " != null) ? " + name + ".toString() : null)";
     else
         return "((" + name + " != null) ? " + name + " : null)";
 }
@@ -10731,6 +11064,8 @@ void GeneratorJavaScript::CopyValueToVariable(const std::string& type, const std
         Indent(-1);
         WriteLineIndent("}");
     }
+    else if (type == "uuid")
+        WriteLineIndent(variable + " = new UUID(" + name + ")");
     else if (IsJavaScriptType(type))
         WriteLineIndent(variable + " = " + name);
     else
@@ -10753,14 +11088,14 @@ void GeneratorJavaScript::WriteOutputStreamType(const std::string& type, const s
         WriteLineIndent("result += " + name + ".toString()");
         WriteLineIndent("result += \"'\"");
     }
-    else if (type == "string")
+    else if (type == "decimal")
+        WriteLineIndent("result += " + name + ".toFixed()");
+    else if ((type == "string") || (type == "uuid"))
     {
         WriteLineIndent("result += '\"'");
         WriteLineIndent("result += " + name + ".toString()");
         WriteLineIndent("result += '\"'");
     }
-    else if (type == "decimal")
-        WriteLineIndent("result += " + name + ".toFixed()");
     else if (type == "timestamp")
         WriteLineIndent("result += " + name + ".getTime() * 1000000");
     else
@@ -10769,7 +11104,7 @@ void GeneratorJavaScript::WriteOutputStreamType(const std::string& type, const s
 
 void GeneratorJavaScript::WriteOutputStreamItem(const std::string& type, const std::string& name, bool optional)
 {
-    if ((type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || optional)
+    if ((type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid") || optional)
     {
         WriteLineIndent("if (" + name + " != null) {");
         Indent(1);
@@ -10791,7 +11126,7 @@ void GeneratorJavaScript::WriteOutputStreamItem(const std::string& type, const s
 
 void GeneratorJavaScript::WriteOutputStreamValue(const std::string& type, const std::string& name, bool optional)
 {
-    if ((type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || optional)
+    if ((type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid") || optional)
     {
         WriteLineIndent("if (" + name + " != null) {");
         Indent(1);

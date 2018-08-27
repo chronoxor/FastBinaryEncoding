@@ -36,6 +36,7 @@ private:
     void GenerateFooter();
     void GenerateBig(const CppCommon::Path& path);
     void GenerateInt64(const CppCommon::Path& path);
+    void GenerateUUID(const CppCommon::Path& path);
     void GenerateIEEE754(const CppCommon::Path& path);
     void GenerateUTF8(const CppCommon::Path& path);
     void GenerateFBE(const CppCommon::Path& path);
@@ -48,6 +49,7 @@ private:
     void GenerateFBEFieldModel(const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults);
     void GenerateFBEFieldModelDecimal();
     void GenerateFBEFieldModelTimestamp();
+    void GenerateFBEFieldModelUUID();
     void GenerateFBEFieldModelBytes();
     void GenerateFBEFieldModelString();
     void GenerateFBEFieldModelOptional();
@@ -59,6 +61,7 @@ private:
     void GenerateFBEFinalModel(const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults);
     void GenerateFBEFinalModelDecimal();
     void GenerateFBEFinalModelTimestamp();
+    void GenerateFBEFinalModelUUID();
     void GenerateFBEFinalModelBytes();
     void GenerateFBEFinalModelString();
     void GenerateFBEFinalModelOptional();

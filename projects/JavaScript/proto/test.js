@@ -6,10 +6,12 @@ const util = require('util')
 const big = require('./big')
 const fbe = require('./fbe')
 const int64 = require('./int64')
+const uuid = require('./uuid')
 
 const Big = big.Big // eslint-disable-line
 const Int64 = int64.Int64 // eslint-disable-line
 const UInt64 = int64.UInt64 // eslint-disable-line
+const UUID = uuid.UUID // eslint-disable-line
 const proto = require('./proto')
 
 /**
@@ -1099,7 +1101,7 @@ class StructSimple {
    * @param {!proto.Account=} f44
    * @constructor
    */
-  constructor (uid = 0, f1 = false, f2 = true, f3 = 0, f4 = 255, f5 = '\0', f6 = '!', f7 = '\0', f8 = String.fromCharCode(0x0444), f9 = 0, f10 = 127, f11 = 0, f12 = 255, f13 = 0, f14 = 32767, f15 = 0, f16 = 65535, f17 = 0, f18 = 2147483647, f19 = 0, f20 = 0xFFFFFFFF, f21 = new Int64(0, 0), f22 = new Int64(4294967295, 2147483647), f23 = new UInt64(0, 0), f24 = new UInt64(4294967295, 4294967295), f25 = 0.0, f26 = 123.456, f27 = 0.0, f28 = -123.456e+123, f29 = new Big(0), f30 = new Big('123456.123456'), f31 = '', f32 = 'Initial string!', f33 = new Date(0), f34 = new Date(0), f35 = new Date(Date.now()), f36 = new uuid(), f37 = new uuid(uuid1), f38 = new uuid("123e4567-e89b-12d3-a456-426655440000"), f39 = new proto.OrderSide(), f40 = new proto.OrderType(), f41 = new proto.Order(), f42 = new proto.Balance(), f43 = new proto.State(), f44 = new proto.Account()) {
+  constructor (uid = 0, f1 = false, f2 = true, f3 = 0, f4 = 255, f5 = '\0', f6 = '!', f7 = '\0', f8 = String.fromCharCode(0x0444), f9 = 0, f10 = 127, f11 = 0, f12 = 255, f13 = 0, f14 = 32767, f15 = 0, f16 = 65535, f17 = 0, f18 = 2147483647, f19 = 0, f20 = 0xFFFFFFFF, f21 = new Int64(0, 0), f22 = new Int64(4294967295, 2147483647), f23 = new UInt64(0, 0), f24 = new UInt64(4294967295, 4294967295), f25 = 0.0, f26 = 123.456, f27 = 0.0, f28 = -123.456e+123, f29 = new Big(0), f30 = new Big('123456.123456'), f31 = '', f32 = 'Initial string!', f33 = new Date(0), f34 = new Date(0), f35 = new Date(Date.now()), f36 = new UUID(), f37 = UUID.sequential(), f38 = new UUID('123e4567-e89b-12d3-a456-426655440000'), f39 = new proto.OrderSide(), f40 = new proto.OrderType(), f41 = new proto.Order(), f42 = new proto.Balance(), f43 = new proto.State(), f44 = new proto.Account()) {
     this.uid = uid
     this.f1 = f1
     this.f2 = f2
@@ -1347,17 +1349,17 @@ class StructSimple {
       this.f35 = undefined
     }
     if (other.f36 != null) {
-      this.f36 = uuid.fromObject(other.f36)
+      this.f36 = new UUID(other.f36)
     } else {
       this.f36 = undefined
     }
     if (other.f37 != null) {
-      this.f37 = uuid.fromObject(other.f37)
+      this.f37 = new UUID(other.f37)
     } else {
       this.f37 = undefined
     }
     if (other.f38 != null) {
-      this.f38 = uuid.fromObject(other.f38)
+      this.f38 = new UUID(other.f38)
     } else {
       this.f38 = undefined
     }
@@ -1548,11 +1550,29 @@ class StructSimple {
       result += 'null'
     }
     result += ',f36='
-    result += this.f36.toString()
+    if (this.f36 != null) {
+      result += '"'
+      result += this.f36.toString()
+      result += '"'
+    } else {
+      result += 'null'
+    }
     result += ',f37='
-    result += this.f37.toString()
+    if (this.f37 != null) {
+      result += '"'
+      result += this.f37.toString()
+      result += '"'
+    } else {
+      result += 'null'
+    }
     result += ',f38='
-    result += this.f38.toString()
+    if (this.f38 != null) {
+      result += '"'
+      result += this.f38.toString()
+      result += '"'
+    } else {
+      result += 'null'
+    }
     result += ',f39='
     result += this.f39.toString()
     result += ',f40='
@@ -1621,9 +1641,9 @@ class StructSimple {
       f33: ((this.f33 != null) ? (this.f33.getTime() * 1000000) : null),
       f34: ((this.f34 != null) ? (this.f34.getTime() * 1000000) : null),
       f35: ((this.f35 != null) ? (this.f35.getTime() * 1000000) : null),
-      f36: ((this.f36 != null) ? this.f36 : null),
-      f37: ((this.f37 != null) ? this.f37 : null),
-      f38: ((this.f38 != null) ? this.f38 : null),
+      f36: ((this.f36 != null) ? this.f36.toString() : null),
+      f37: ((this.f37 != null) ? this.f37.toString() : null),
+      f38: ((this.f38 != null) ? this.f38.toString() : null),
       f39: ((this.f39 != null) ? this.f39 : null),
       f40: ((this.f40 != null) ? this.f40 : null),
       f41: ((this.f41 != null) ? this.f41 : null),
@@ -1702,9 +1722,9 @@ class FieldModelStructSimple extends fbe.FieldModel {
     this._f33 = new fbe.FieldModelTimestamp(buffer, this._f32.FBEOffset + this._f32.FBESize)
     this._f34 = new fbe.FieldModelTimestamp(buffer, this._f33.FBEOffset + this._f33.FBESize)
     this._f35 = new fbe.FieldModelTimestamp(buffer, this._f34.FBEOffset + this._f34.FBESize)
-    this._f36 = new FieldModeluuid(buffer, this._f35.FBEOffset + this._f35.FBESize)
-    this._f37 = new FieldModeluuid(buffer, this._f36.FBEOffset + this._f36.FBESize)
-    this._f38 = new FieldModeluuid(buffer, this._f37.FBEOffset + this._f37.FBESize)
+    this._f36 = new fbe.FieldModelUUID(buffer, this._f35.FBEOffset + this._f35.FBESize)
+    this._f37 = new fbe.FieldModelUUID(buffer, this._f36.FBEOffset + this._f36.FBESize)
+    this._f38 = new fbe.FieldModelUUID(buffer, this._f37.FBEOffset + this._f37.FBESize)
     this._f39 = new proto.FieldModelOrderSide(buffer, this._f38.FBEOffset + this._f38.FBESize)
     this._f40 = new proto.FieldModelOrderType(buffer, this._f39.FBEOffset + this._f39.FBESize)
     this._f41 = new proto.FieldModelOrder(buffer, this._f40.FBEOffset + this._f40.FBESize)
@@ -2040,7 +2060,7 @@ class FieldModelStructSimple extends fbe.FieldModel {
   /**
    * Get the f36 field model
    * @this {!FieldModelStructSimple}
-   * @returns {!FieldModeluuid} f36 field model
+   * @returns {!fbe.FieldModelUUID} f36 field model
    */
   get f36 () {
     return this._f36
@@ -2049,7 +2069,7 @@ class FieldModelStructSimple extends fbe.FieldModel {
   /**
    * Get the f37 field model
    * @this {!FieldModelStructSimple}
-   * @returns {!FieldModeluuid} f37 field model
+   * @returns {!fbe.FieldModelUUID} f37 field model
    */
   get f37 () {
     return this._f37
@@ -2058,7 +2078,7 @@ class FieldModelStructSimple extends fbe.FieldModel {
   /**
    * Get the f38 field model
    * @this {!FieldModelStructSimple}
-   * @returns {!FieldModeluuid} f38 field model
+   * @returns {!fbe.FieldModelUUID} f38 field model
    */
   get f38 () {
     return this._f38
@@ -2971,23 +2991,23 @@ class FieldModelStructSimple extends fbe.FieldModel {
     if ((fbeCurrentSize + this.f36.FBESize) <= fbeStructSize) {
       fbeValue.f36 = this.f36.get()
     } else {
-      fbeValue.f36 = new uuid()
+      fbeValue.f36 = new UUID()
     }
     // noinspection JSUnusedAssignment
     fbeCurrentSize += this.f36.FBESize
 
     if ((fbeCurrentSize + this.f37.FBESize) <= fbeStructSize) {
-      fbeValue.f37 = this.f37.get(new uuid(uuid1))
+      fbeValue.f37 = this.f37.get(UUID.sequential())
     } else {
-      fbeValue.f37 = new uuid(uuid1)
+      fbeValue.f37 = UUID.sequential()
     }
     // noinspection JSUnusedAssignment
     fbeCurrentSize += this.f37.FBESize
 
     if ((fbeCurrentSize + this.f38.FBESize) <= fbeStructSize) {
-      fbeValue.f38 = this.f38.get(new uuid("123e4567-e89b-12d3-a456-426655440000"))
+      fbeValue.f38 = this.f38.get(new UUID('123e4567-e89b-12d3-a456-426655440000'))
     } else {
-      fbeValue.f38 = new uuid("123e4567-e89b-12d3-a456-426655440000")
+      fbeValue.f38 = new UUID('123e4567-e89b-12d3-a456-426655440000')
     }
     // noinspection JSUnusedAssignment
     fbeCurrentSize += this.f38.FBESize
@@ -3320,9 +3340,9 @@ class FinalModelStructSimple extends fbe.FinalModel {
     this._f33 = new fbe.FinalModelTimestamp(buffer, 0)
     this._f34 = new fbe.FinalModelTimestamp(buffer, 0)
     this._f35 = new fbe.FinalModelTimestamp(buffer, 0)
-    this._f36 = new FinalModeluuid(buffer, 0)
-    this._f37 = new FinalModeluuid(buffer, 0)
-    this._f38 = new FinalModeluuid(buffer, 0)
+    this._f36 = new fbe.FinalModelUUID(buffer, 0)
+    this._f37 = new fbe.FinalModelUUID(buffer, 0)
+    this._f38 = new fbe.FinalModelUUID(buffer, 0)
     this._f39 = new proto.FinalModelOrderSide(buffer, 0)
     this._f40 = new proto.FinalModelOrderType(buffer, 0)
     this._f41 = new proto.FinalModelOrder(buffer, 0)
@@ -3658,7 +3678,7 @@ class FinalModelStructSimple extends fbe.FinalModel {
   /**
    * Get the f36 final model
    * @this {!FinalModelStructSimple}
-   * @returns {!FinalModeluuid} f36 final model
+   * @returns {!fbe.FinalModelUUID} f36 final model
    */
   get f36 () {
     return this._f36
@@ -3667,7 +3687,7 @@ class FinalModelStructSimple extends fbe.FinalModel {
   /**
    * Get the f37 final model
    * @this {!FinalModelStructSimple}
-   * @returns {!FinalModeluuid} f37 final model
+   * @returns {!fbe.FinalModelUUID} f37 final model
    */
   get f37 () {
     return this._f37
@@ -3676,7 +3696,7 @@ class FinalModelStructSimple extends fbe.FinalModel {
   /**
    * Get the f38 final model
    * @this {!FinalModelStructSimple}
-   * @returns {!FinalModeluuid} f38 final model
+   * @returns {!fbe.FinalModelUUID} f38 final model
    */
   get f38 () {
     return this._f38
@@ -4914,7 +4934,7 @@ class StructOptional extends StructSimple {
    * @param {proto.Account=} f165
    * @constructor
    */
-  constructor (parent = new StructSimple(), f100 = undefined, f101 = true, f102 = undefined, f103 = undefined, f104 = 255, f105 = undefined, f106 = undefined, f107 = '!', f108 = undefined, f109 = undefined, f110 = String.fromCharCode(0x0444), f111 = undefined, f112 = undefined, f113 = 127, f114 = undefined, f115 = undefined, f116 = 255, f117 = undefined, f118 = undefined, f119 = 32767, f120 = undefined, f121 = undefined, f122 = 65535, f123 = undefined, f124 = undefined, f125 = 2147483647, f126 = undefined, f127 = undefined, f128 = 0xFFFFFFFF, f129 = undefined, f130 = undefined, f131 = new Int64(4294967295, 2147483647), f132 = undefined, f133 = undefined, f134 = new UInt64(4294967295, 4294967295), f135 = undefined, f136 = undefined, f137 = 123.456, f138 = undefined, f139 = undefined, f140 = -123.456e+123, f141 = undefined, f142 = undefined, f143 = new Big('123456.123456'), f144 = undefined, f145 = undefined, f146 = 'Initial string!', f147 = undefined, f148 = undefined, f149 = new Date(Date.now()), f150 = undefined, f151 = undefined, f152 = new uuid("123e4567-e89b-12d3-a456-426655440000"), f153 = undefined, f154 = undefined, f155 = undefined, f156 = undefined, f157 = undefined, f158 = undefined, f159 = undefined, f160 = undefined, f161 = undefined, f162 = undefined, f163 = undefined, f164 = undefined, f165 = undefined) {
+  constructor (parent = new StructSimple(), f100 = undefined, f101 = true, f102 = undefined, f103 = undefined, f104 = 255, f105 = undefined, f106 = undefined, f107 = '!', f108 = undefined, f109 = undefined, f110 = String.fromCharCode(0x0444), f111 = undefined, f112 = undefined, f113 = 127, f114 = undefined, f115 = undefined, f116 = 255, f117 = undefined, f118 = undefined, f119 = 32767, f120 = undefined, f121 = undefined, f122 = 65535, f123 = undefined, f124 = undefined, f125 = 2147483647, f126 = undefined, f127 = undefined, f128 = 0xFFFFFFFF, f129 = undefined, f130 = undefined, f131 = new Int64(4294967295, 2147483647), f132 = undefined, f133 = undefined, f134 = new UInt64(4294967295, 4294967295), f135 = undefined, f136 = undefined, f137 = 123.456, f138 = undefined, f139 = undefined, f140 = -123.456e+123, f141 = undefined, f142 = undefined, f143 = new Big('123456.123456'), f144 = undefined, f145 = undefined, f146 = 'Initial string!', f147 = undefined, f148 = undefined, f149 = new Date(Date.now()), f150 = undefined, f151 = undefined, f152 = new UUID('123e4567-e89b-12d3-a456-426655440000'), f153 = undefined, f154 = undefined, f155 = undefined, f156 = undefined, f157 = undefined, f158 = undefined, f159 = undefined, f160 = undefined, f161 = undefined, f162 = undefined, f163 = undefined, f164 = undefined, f165 = undefined) {
     super()
     super.copy(parent.clone())
     this.f100 = f100
@@ -5261,17 +5281,17 @@ class StructOptional extends StructSimple {
       this.f150 = undefined
     }
     if (other.f151 != null) {
-      this.f151 = uuid.fromObject(other.f151)
+      this.f151 = new UUID(other.f151)
     } else {
       this.f151 = undefined
     }
     if (other.f152 != null) {
-      this.f152 = uuid.fromObject(other.f152)
+      this.f152 = new UUID(other.f152)
     } else {
       this.f152 = undefined
     }
     if (other.f153 != null) {
-      this.f153 = uuid.fromObject(other.f153)
+      this.f153 = new UUID(other.f153)
     } else {
       this.f153 = undefined
     }
@@ -5706,19 +5726,25 @@ class StructOptional extends StructSimple {
     }
     result += ',f151='
     if (this.f151 != null) {
+      result += '"'
       result += this.f151.toString()
+      result += '"'
     } else {
       result += 'null'
     }
     result += ',f152='
     if (this.f152 != null) {
+      result += '"'
       result += this.f152.toString()
+      result += '"'
     } else {
       result += 'null'
     }
     result += ',f153='
     if (this.f153 != null) {
+      result += '"'
       result += this.f153.toString()
+      result += '"'
     } else {
       result += 'null'
     }
@@ -5866,9 +5892,9 @@ class StructOptional extends StructSimple {
       f148: ((this.f148 != null) ? (this.f148.getTime() * 1000000) : null),
       f149: ((this.f149 != null) ? (this.f149.getTime() * 1000000) : null),
       f150: ((this.f150 != null) ? (this.f150.getTime() * 1000000) : null),
-      f151: ((this.f151 != null) ? this.f151 : null),
-      f152: ((this.f152 != null) ? this.f152 : null),
-      f153: ((this.f153 != null) ? this.f153 : null),
+      f151: ((this.f151 != null) ? this.f151.toString() : null),
+      f152: ((this.f152 != null) ? this.f152.toString() : null),
+      f153: ((this.f153 != null) ? this.f153.toString() : null),
       f154: ((this.f154 != null) ? this.f154 : null),
       f155: ((this.f155 != null) ? this.f155 : null),
       f156: ((this.f156 != null) ? this.f156 : null),
@@ -5970,9 +5996,9 @@ class FieldModelStructOptional extends fbe.FieldModel {
     this._f148 = new fbe.FieldModelOptional(new fbe.FieldModelTimestamp(buffer, this._f147.FBEOffset + this._f147.FBESize), buffer, this._f147.FBEOffset + this._f147.FBESize)
     this._f149 = new fbe.FieldModelOptional(new fbe.FieldModelTimestamp(buffer, this._f148.FBEOffset + this._f148.FBESize), buffer, this._f148.FBEOffset + this._f148.FBESize)
     this._f150 = new fbe.FieldModelOptional(new fbe.FieldModelTimestamp(buffer, this._f149.FBEOffset + this._f149.FBESize), buffer, this._f149.FBEOffset + this._f149.FBESize)
-    this._f151 = new fbe.FieldModelOptional(new FieldModeluuid(buffer, this._f150.FBEOffset + this._f150.FBESize), buffer, this._f150.FBEOffset + this._f150.FBESize)
-    this._f152 = new fbe.FieldModelOptional(new FieldModeluuid(buffer, this._f151.FBEOffset + this._f151.FBESize), buffer, this._f151.FBEOffset + this._f151.FBESize)
-    this._f153 = new fbe.FieldModelOptional(new FieldModeluuid(buffer, this._f152.FBEOffset + this._f152.FBESize), buffer, this._f152.FBEOffset + this._f152.FBESize)
+    this._f151 = new fbe.FieldModelOptional(new fbe.FieldModelUUID(buffer, this._f150.FBEOffset + this._f150.FBESize), buffer, this._f150.FBEOffset + this._f150.FBESize)
+    this._f152 = new fbe.FieldModelOptional(new fbe.FieldModelUUID(buffer, this._f151.FBEOffset + this._f151.FBESize), buffer, this._f151.FBEOffset + this._f151.FBESize)
+    this._f153 = new fbe.FieldModelOptional(new fbe.FieldModelUUID(buffer, this._f152.FBEOffset + this._f152.FBESize), buffer, this._f152.FBEOffset + this._f152.FBESize)
     this._f154 = new fbe.FieldModelOptional(new proto.FieldModelOrderSide(buffer, this._f153.FBEOffset + this._f153.FBESize), buffer, this._f153.FBEOffset + this._f153.FBESize)
     this._f155 = new fbe.FieldModelOptional(new proto.FieldModelOrderSide(buffer, this._f154.FBEOffset + this._f154.FBESize), buffer, this._f154.FBEOffset + this._f154.FBESize)
     this._f156 = new fbe.FieldModelOptional(new proto.FieldModelOrderType(buffer, this._f155.FBEOffset + this._f155.FBESize), buffer, this._f155.FBEOffset + this._f155.FBESize)
@@ -7773,9 +7799,9 @@ class FieldModelStructOptional extends fbe.FieldModel {
     fbeCurrentSize += this.f151.FBESize
 
     if ((fbeCurrentSize + this.f152.FBESize) <= fbeStructSize) {
-      fbeValue.f152 = this.f152.get(new uuid("123e4567-e89b-12d3-a456-426655440000"))
+      fbeValue.f152 = this.f152.get(new UUID('123e4567-e89b-12d3-a456-426655440000'))
     } else {
-      fbeValue.f152 = new uuid("123e4567-e89b-12d3-a456-426655440000")
+      fbeValue.f152 = new UUID('123e4567-e89b-12d3-a456-426655440000')
     }
     // noinspection JSUnusedAssignment
     fbeCurrentSize += this.f152.FBESize
@@ -8202,9 +8228,9 @@ class FinalModelStructOptional extends fbe.FinalModel {
     this._f148 = new fbe.FinalModelOptional(new fbe.FinalModelTimestamp(buffer, 0), buffer, 0)
     this._f149 = new fbe.FinalModelOptional(new fbe.FinalModelTimestamp(buffer, 0), buffer, 0)
     this._f150 = new fbe.FinalModelOptional(new fbe.FinalModelTimestamp(buffer, 0), buffer, 0)
-    this._f151 = new fbe.FinalModelOptional(new FinalModeluuid(buffer, 0), buffer, 0)
-    this._f152 = new fbe.FinalModelOptional(new FinalModeluuid(buffer, 0), buffer, 0)
-    this._f153 = new fbe.FinalModelOptional(new FinalModeluuid(buffer, 0), buffer, 0)
+    this._f151 = new fbe.FinalModelOptional(new fbe.FinalModelUUID(buffer, 0), buffer, 0)
+    this._f152 = new fbe.FinalModelOptional(new fbe.FinalModelUUID(buffer, 0), buffer, 0)
+    this._f153 = new fbe.FinalModelOptional(new fbe.FinalModelUUID(buffer, 0), buffer, 0)
     this._f154 = new fbe.FinalModelOptional(new proto.FinalModelOrderSide(buffer, 0), buffer, 0)
     this._f155 = new fbe.FinalModelOptional(new proto.FinalModelOrderSide(buffer, 0), buffer, 0)
     this._f156 = new fbe.FinalModelOptional(new proto.FinalModelOrderType(buffer, 0), buffer, 0)
