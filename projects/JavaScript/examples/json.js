@@ -2,6 +2,6 @@
 
 const prototest = require('../proto/test')
 
-console.log(new prototest.StructSimple() + '\n')
-console.log(new prototest.StructOptional() + '\n')
-console.log(new prototest.StructNested() + '\n')
+console.log(JSON.stringify(new prototest.StructSimple()) + '\n')
+console.log(JSON.stringify(new prototest.StructOptional()) + '\n')
+console.log(JSON.stringify(new prototest.StructNested()) + '\n')
