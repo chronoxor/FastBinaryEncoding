@@ -1,9 +1,9 @@
 # FastBinaryEncoding todo
 
 General
-  * Library
-  * Examples
-  * Performance
-  * Tests
-  * Documentation
-  * Release
+- [x] Library
+- [x] Examples
+- [x] Performance
+- [x] Tests
+- [ ] Documentation
+- [ ] Release
