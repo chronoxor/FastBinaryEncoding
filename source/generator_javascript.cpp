@@ -2869,7 +2869,15 @@ void GeneratorJavaScript::GenerateUUID(const CppCommon::Path& path)
     GenerateHeader();
 
     std::string code = R"CODE(
+/**
+ * UUID class
+ */
 class UUID {
+  /**
+   * Initialize new UUID instance from provided source, if source is not provided - returns zero-filled UUID
+   * @param {string|Uint8Array|UUID} value Source
+   * @constructor
+   */
   constructor (value = null) {
     if (typeof value === 'string' || value instanceof String) {
       value = value.replace(/[{}-]/g, '')
@@ -2884,6 +2892,11 @@ class UUID {
     }
   }
 
+  /**
+   * Converts the UUID to string reprsentation in format "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+   * @this {UUID}
+   * @returns {string} Result String representation of an UUID
+   */
   toString () {
     let hex = []
     for (let i = 0; i < this.data.length; i++) {
@@ -2894,24 +2907,50 @@ class UUID {
     return hex.join('')
   }
 
-  static empty () {
-    return new UUID()
-  }
-
+  /**
+   * Writes a 32-bit unsigned numeric value into internal buffer
+   * @this {UUID}
+   * @param {number} offset Offset
+   * @param {number} value Value
+   */
   WriteUInt32 (offset, value) {
-    this.data[offset + 3] = (value >>> 24)
-    this.data[offset + 2] = (value >>> 16)
-    this.data[offset + 1] = (value >>> 8)
-    this.data[offset + 0] = (value & 0xFF)
+    this.data[offset + 0] = (value >>> 24)
+    this.data[offset + 1] = (value >>> 16)
+    this.data[offset + 2] = (value >>> 8)
+    this.data[offset + 3] = (value & 0xFF)
   }
+  /**
+   * Writes a 16-bit unsigned numeric value into internal buffer
+   * @this {UUID}
+   * @param {number} offset Offset
+   * @param {number} value Value
+   */
   WriteUInt16 (offset, value) {
-    this.data[offset + 1] = (value >>> 8)
-    this.data[offset + 0] = (value & 0xFF)
+    this.data[offset + 0] = (value >>> 8)
+    this.data[offset + 1] = (value & 0xFF)
   }
+  /**
+   * Writes a 8-bit unsigned numeric value into internal buffer
+   * @this {UUID}
+   * @param {number} offset Offset
+   * @param {number} value Value
+   */
   WriteUInt8 (offset, value) {
-    this.data[offset + 0] = (value & 0xFF)
+    this.data[offset] = (value & 0xFF)
   }
 
+  /**
+   * Fills internal buffer with provided parts
+   * @this {UUID}
+   * @param {number} timeLow The low field of the timestamp(32-bit)
+   * @param {number} timeMid The middle field of the timestamp(16-bit)
+   * @param {number} timeHiAndVersion The high field of the timestamp multiplexed with the version number(16-bit)
+   * @param {number} clockSeqHiAndReserved The high field of the clock sequence multiplexed with the variant(8-bit)
+   * @param {number} clockSeqLow The low field of the clock sequence(8-bit)
+   * @param {number} nodeLow The low field of the spatially unique node identifier(32-bit)
+   * @param {number} nodeMid The middle field of the spatially unique node identifier(8-bit)
+   * @param {number} nodeHi The high field of the spatially unique node identifier(8-bit)
+   */
   fromParts (timeLow, timeMid, timeHiAndVersion, clockSeqHiAndReserved, clockSeqLow, nodeLow, nodeMid, nodeHi) {
     this.WriteUInt32(0, timeLow)
     this.WriteUInt16(4, timeMid)
@@ -2923,10 +2962,22 @@ class UUID {
     this.WriteUInt8(15, nodeHi)
   };
 
+  /**
+   * Returns empty UUID0, initialized by zeroes.
+   * @returns {UUID} Result Empty UUID0
+   */
+  static empty () {
+    return new UUID()
+  }
+
+  /**
+   * Returns new random time-based UUID1
+   * @returns {UUID} Result Time-based UUID1
+   */
   static sequential () {
     let now = new Date().getTime()
     let sequence = Math.floor(Math.random() * TWO_POW_14)
-    let nodeHi = (Math.floor(Math.random() * TWO_POW_8) | 1)
+    let nodeHi = Math.floor(Math.random() * TWO_POW_8)
     let nodeMid = Math.floor(Math.random() * TWO_POW_8)
     let nodeLow = Math.floor(Math.random() * TWO_POW_32)
     let tick = Math.floor(Math.random() * TWO_POW_4)
@@ -2959,6 +3010,10 @@ class UUID {
     return uuid
   }
 
+  /**
+   * Returns new fully random UUID4
+   * @returns {UUID} Result Random UUID4
+   */
   static random () {
     let uuid = new UUID()
     uuid.fromParts(
@@ -2974,7 +3029,14 @@ class UUID {
     return uuid
   }
 
+  /**
+   * Is this value equal to other one?
+   * @this {UUID}
+   * @param {UUID} other Other value
+   * @returns {boolean} Equal result
+   */
   eq (other) {
+    if (!(other instanceof UUID)) return false
     let equal = true
     for (let i = 0; i < 16; i++) {
       if (this.data[i] !== other.data[i]) {
@@ -2985,26 +3047,62 @@ class UUID {
     return equal
   }
 
+  /**
+   * Is this value not equal to other one?
+   * @this {UUID}
+   * @param {UUID} other Other value
+   * @returns {boolean} Not equal result
+   */
   ne (other) {
     return !this.eq(other)
   }
 
+  /**
+   * Is this value less than other one?
+   * @this {UUID}
+   * @param {UUID} other Other value
+   * @returns {boolean} Less than result
+   */
   lt (other) {
     return this.cmp(other) < 0
   }
 
+  /**
+   * Is this value less than or equal other one?
+   * @this {UUID}
+   * @param {UUID} other Other value
+   * @returns {boolean} Less than or equal result
+   */
   lte (other) {
     return this.cmp(other) <= 0
   }
 
+  /**
+   * Is this value greater than other one?
+   * @this {UUID}
+   * @param {UUID} other Other value
+   * @returns {boolean} Greater than result
+   */
   gt (other) {
     return this.cmp(other) > 0
   }
 
+  /**
+   * Is this value greater than or equal other one?
+   * @this {UUID}
+   * @param {UUID} other Other value
+   * @returns {boolean} Greater than or equal result
+   */
   gte (other) {
     return this.cmp(other) >= 0
   }
 
+  /**
+   * Compare this value to other one
+   * @this {UUID}
+   * @param {UUID} other Other value
+   * @returns {number} 0 if they are the same, 1 if the this is greater and -1 if the given one is greater
+   */
   cmp (other) {
     for (let i = 0; i < 16; i++) {
       if (this.data[i] > other.data[i]) return 1
