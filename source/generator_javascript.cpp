@@ -10780,6 +10780,8 @@ std::string GeneratorJavaScript::ConvertTypeName(const std::string& type, bool o
         return "Date";
     else if ((type == "char") || (type == "wchar") || (type == "string"))
         return "string";
+    else if (type == "uuid")
+        return "UUID";
 
     return type;
 }
