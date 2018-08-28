@@ -1090,9 +1090,9 @@ class StructSimple {
    * @param {!Date=} f33
    * @param {!Date=} f34
    * @param {!Date=} f35
-   * @param {!uuid=} f36
-   * @param {!uuid=} f37
-   * @param {!uuid=} f38
+   * @param {!UUID=} f36
+   * @param {!UUID=} f37
+   * @param {!UUID=} f38
    * @param {!proto.OrderSide=} f39
    * @param {!proto.OrderType=} f40
    * @param {!proto.Order=} f41
@@ -4917,9 +4917,9 @@ class StructOptional extends StructSimple {
    * @param {Date=} f148
    * @param {Date=} f149
    * @param {Date=} f150
-   * @param {uuid=} f151
-   * @param {uuid=} f152
-   * @param {uuid=} f153
+   * @param {UUID=} f151
+   * @param {UUID=} f152
+   * @param {UUID=} f153
    * @param {proto.OrderSide=} f154
    * @param {proto.OrderSide=} f155
    * @param {proto.OrderType=} f156

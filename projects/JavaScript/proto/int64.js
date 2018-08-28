@@ -55,7 +55,7 @@ class Int64 {
 
   /**
    * Returns Int64 from its bytes representation
-   * @param {!Array.<number>} bytes Byte representation
+   * @param {!Array.<number>} bytes Bytes representation
    * @param {boolean=} le Whether little or big endian, defaults to little endian
    * @returns {!Int64} The corresponding Int64 value
    */
@@ -65,7 +65,7 @@ class Int64 {
 
   /**
    * Returns Int64 from its bytes representation (bid endian)
-   * @param {!Array.<number>} bytes Byte representation
+   * @param {!Array.<number>} bytes Bytes representation
    * @returns {!Int64} The corresponding Int64 value
    */
   static fromBytesBE (bytes) {
@@ -83,7 +83,7 @@ class Int64 {
 
   /**
    * Returns Int64 from its bytes representation (little endian)
-   * @param {!Array.<number>} bytes Byte representation
+   * @param {!Array.<number>} bytes Bytes representation
    * @returns {!Int64} The corresponding Int64 value
    */
   static fromBytesLE (bytes) {
@@ -208,7 +208,7 @@ class Int64 {
    * Converts the Int64 to its bytes representation
    * @this {!Int64}
    * @param {boolean=} le Whether little or big endian, defaults to little endian
-   * @returns {!Array.<number>} Byte representation
+   * @returns {!Array.<number>} Bytes representation
    */
   toBytes (le = true) {
     return le ? this.toBytesLE() : this.toBytesBE()
@@ -217,7 +217,7 @@ class Int64 {
   /**
    * Converts the Int64 to its bytes representation (big endian)
    * @this {!Int64}
-   * @returns {!Array.<number>} Byte representation
+   * @returns {!Array.<number>} Bytes representation
    */
   toBytesBE () {
     let hi = this.high
@@ -237,7 +237,7 @@ class Int64 {
   /**
    * Converts the Int64 to its bytes representation (little endian)
    * @this {!Int64}
-   * @returns {!Array.<number>} Byte representation
+   * @returns {!Array.<number>} Bytes representation
    */
   toBytesLE () {
     let hi = this.high
@@ -969,7 +969,7 @@ class UInt64 {
 
   /**
    * Returns UInt64 from its bytes representation
-   * @param {!Array.<number>} bytes Byte representation
+   * @param {!Array.<number>} bytes Bytes representation
    * @param {boolean=} le Whether little or big endian, defaults to little endian
    * @returns {!UInt64} The corresponding Int64 value
    */
@@ -979,7 +979,7 @@ class UInt64 {
 
   /**
    * Returns UInt64 from its bytes representation (bid endian)
-   * @param {!Array.<number>} bytes Byte representation
+   * @param {!Array.<number>} bytes Bytes representation
    * @returns {!UInt64} The corresponding Int64 value
    */
   static fromBytesBE (bytes) {
@@ -997,7 +997,7 @@ class UInt64 {
 
   /**
    * Returns UInt64 from its bytes representation (little endian)
-   * @param {!Array.<number>} bytes Byte representation
+   * @param {!Array.<number>} bytes Bytes representation
    * @returns {!UInt64} The corresponding Int64 value
    */
   static fromBytesLE (bytes) {
@@ -1122,7 +1122,7 @@ class UInt64 {
    * Converts the UInt64 to its bytes representation
    * @this {!UInt64}
    * @param {boolean=} le Whether little or big endian, defaults to little endian
-   * @returns {!Array.<number>} Byte representation
+   * @returns {!Array.<number>} Bytes representation
    */
   toBytes (le = true) {
     return le ? this.toBytesLE() : this.toBytesBE()
@@ -1131,7 +1131,7 @@ class UInt64 {
   /**
    * Converts the UInt64 to its bytes representation (big endian)
    * @this {!UInt64}
-   * @returns {!Array.<number>} Byte representation
+   * @returns {!Array.<number>} Bytes representation
    */
   toBytesBE () {
     let hi = this.high
@@ -1151,7 +1151,7 @@ class UInt64 {
   /**
    * Converts the UInt64 to its bytes representation (little endian)
    * @this {!UInt64}
-   * @returns {!Array.<number>} Byte representation
+   * @returns {!Array.<number>} Bytes representation
    */
   toBytesLE () {
     let hi = this.high
