@@ -219,20 +219,59 @@ Options:
 ```
 
 # Performance benchmarks
-| Language & Platform | Message size (bytes) | Serialization rate (ops/s) | Serialization time (ns) |
-| :-----------------: | -------------------: | -------------------------: | ----------------------: |
-| C++ Win64           |                  252 |                 10 416 667 |                      96 |
-| C++ Win64 (Final)   |                  152 |                 16 129 032 |                      62 |
-| C++ Win64 (JSON)    |                  353 |                    926 784 |                   1 079 |
+| Language & Platform      | Message size (bytes) | Serialization rate (ops/s) | Serialization time (ns) |
+| :----------------------: | -------------------: | -------------------------: | ----------------------: |
+| C++ Win64                |                  252 |                 10 416 667 |                      96 |
+| C++ Win64 (Final)        |                  152 |                 16 129 032 |                      62 |
+| C++ Win64 (JSON)         |                  353 |                    926 784 |                   1 079 |
+| C# Win64                 |                  252 |                  1 432 665 |                     698 |
+| C# Win64 (Final)         |                  152 |                  1 597 444 |                     626 |
+| C# Win64 (JSON)          |                  341 |                    434 783 |                   2 300 |
+| .NET Core Linux          |                  252 |                  1 189 768 |                     841 |
+| .NET Core Linux (Final)  |                  152 |                  1 315 270 |                     760 |
+| .NET Core Linux (JSON)   |                  341 |                    366 435 |                   2 729 |
+| Java Win64               |                  252 |                  4 247 162 |                     236 |
+| Java Win64 (Final)       |                  152 |                  4 883 205 |                     205 |
+| Java Win64 (JSON)        |                  353 |                    213 983 |                   4 673 |
+| JavaScript Win64         |                  252 |                     93 416 |                  10 705 |
+| JavaScript Win64 (Final) |                  152 |                    112 665 |                   8 876 |
+| JavaScript Win64 (JSON)  |                  341 |                    217 637 |                   4 595 |
+| Python Win64             |                  252 |                      9 434 |                 105 999 |
+| Python Win64 (Final)     |                  152 |                     11 635 |                  85 945 |
+| Python Win64 (JSON)      |                  324 |                     61 737 |                  16 198 |
 
-| Language & Platform | Message size (bytes) | Deserialization rate (ops/s) | Deserialization time (ns) |
-| :-----------------: | -------------------: | ---------------------------: | ------------------------: |
-| C++ Win64           |                  252 |                    9 523 810 |                       105 |
-| C++ Win64 (Final)   |                  152 |                   10 989 011 |                        91 |
-| C++ Win64 (JSON)    |                  353 |                    1 375 516 |                       727 |
+| Language & Platform      | Message size (bytes) | Deserialization rate (ops/s) | Deserialization time (ns) |
+| :----------------------: | -------------------: | ---------------------------: | ------------------------: |
+| C++ Win64                |                  252 |                    9 523 810 |                       105 |
+| C++ Win64 (Final)        |                  152 |                   10 989 011 |                        91 |
+| C++ Win64 (JSON)         |                  353 |                    1 375 516 |                       727 |
+| C# Win64                 |                  252 |                    1 014 199 |                       986 |
+| C# Win64 (Final)         |                  152 |                    1 607 717 |                       622 |
+| C# Win64 (JSON)          |                  341 |                      258 532 |                     3 868 |
+| .NET Core Linux          |                  252 |                      804 052 |                     1 244 |
+| .NET Core Linux (Final)  |                  152 |                    1 343 544 |                       744 |
+| .NET Core Linux (JSON)   |                  341 |                      222 074 |                     4 503 |
+| Java Win64               |                  252 |                    2 688 084 |                       372 |
+| Java Win64 (Final)       |                  152 |                    3 036 020 |                       329 |
+| Java Win64 (JSON)        |                  353 |                      308 675 |                     3 240 |
+| JavaScript Win64         |                  252 |                      133 892 |                     7 469 |
+| JavaScript Win64 (Final) |                  152 |                      292 273 |                     3 422 |
+| JavaScript Win64 (JSON)  |                  341 |                      289 417 |                     3 455 |
+| Python Win64             |                  252 |                        8 305 |                   120 411 |
+| Python Win64 (Final)     |                  152 |                       11 661 |                    85 758 |
+| Python Win64 (JSON)      |                  324 |                       48 859 |                    20 467 |
 
-| Language & Platform | Message size (bytes) | Verify rate (ops/s) | Verify time (ns) |
-| :-----------------: | -------------------: | ------------------: | ---------------: |
-| C++ Win64           |                  252 |          31 250 000 |              105 |
-| C++ Win64 (Final)   |                  152 |          35 714 286 |               91 |
-| C++ Win64 (JSON)    |                  353 |                     |              727 |
+| Language & Platform      | Message size (bytes) | Verify rate (ops/s) | Verify time (ns) |
+| :----------------------: | -------------------: | ------------------: | ---------------: |
+| C++ Win64                |                  252 |          31 250 000 |              105 |
+| C++ Win64 (Final)        |                  152 |          35 714 286 |               91 |
+| C# Win64                 |                  252 |           4 504 505 |              222 |
+| C# Win64 (Final)         |                  152 |           8 064 516 |              124 |
+| .NET Core Linux          |                  252 |           3 718 855 |              269 |
+| .NET Core Linux (Final)  |                  152 |           6 653 360 |              150 |
+| Java Win64               |                  252 |          11 790 374 |               85 |
+| Java Win64 (Final)       |                  152 |          16 205 533 |               62 |
+| JavaScript Win64         |                  252 |           1 105 627 |              905 |
+| JavaScript Win64 (Final) |                  152 |           5 700 408 |              175 |
+| Python Win64             |                  252 |              20 825 |           48 019 |
+| Python Win64 (Final)     |                  152 |              23 590 |           42 391 |
