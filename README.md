@@ -37,15 +37,18 @@ Typical usage workflow is the following:
 
 # Features
 * Cross platform (Linux, OSX, Windows)
-* Benchmarks
-* Examples
-* Tests
-* [Doxygen](https://www.doxygen.org) API documentation
-* Continuous integration ([Travis CI](https://travis-ci.com), [AppVeyor](https://www.appveyor.com))
+* Generators for C++, C#, Java, JavaScript, Python
+* Supported base types (byte, bool, char, wchar, int8, int16, int32, int64, float, double)
+* Supported complex types (bytes, decimal, string, timestamp, uuid)
+* Supported collections (array, vector, list, map, hash)
+* Fast binary encoding format
+* Serialization/Deserialization to binary format
+* Serialization/Deserialization to JSON
+* Sender/Receiver interfaces for communication protocols
 
 # Requirements
-* Linux (gcc g++ cmake doxygen graphviz binutils-dev uuid-dev)
-* OSX (clang cmake doxygen graphviz)
+* Linux (gcc g++ cmake doxygen graphviz binutils-dev uuid-dev flex bison)
+* OSX (clang cmake doxygen graphviz flex bison)
 * Windows 7 / Windows 10
 * [cmake](https://www.cmake.org)
 * [git](https://git-scm.com)
@@ -57,6 +60,7 @@ Optional:
 * [Cygwin](https://cygwin.com)
 * [MinGW](https://mingw-w64.org/doku.php)
 * [Visual Studio](https://www.visualstudio.com)
+* [WinFlexBison](https://github.com/lexxmark/winflexbison)
 
 # How to build?
 
