@@ -6,7 +6,19 @@
 [![MinGW build status](https://img.shields.io/appveyor/ci/chronoxor/FastBinaryEncoding/master.svg?label=MinGW)](https://ci.appveyor.com/project/chronoxor/FastBinaryEncoding)
 [![Windows build status](https://img.shields.io/appveyor/ci/chronoxor/FastBinaryEncoding/master.svg?label=Windows)](https://ci.appveyor.com/project/chronoxor/FastBinaryEncoding)
 
-C++ Template Library contains initial templates for a new C++ library project.
+Fast Binary Encoding Library allows to define any domain models, complex data
+structures, client/server requests & responses and create models for different
+programming languages and platforms.
+
+Typical usage workflow is the following:
+1) Declare a data model using base types, enums, flags and structs
+2) Generate domain model for any of supported programming languages
+   (C++, C#, Java, JavaScript, Python)
+3) Build the model library
+4) Serialize/Deserialize objects from the model in unified FastBinaryEncoding
+   format (fast and compact)
+5) JSON convert objects from the model in order to use them in Web API
+6) Implement Sender/Receiver interfaces to create a communication protocol
 
 [FastBinaryEncoding documentation](https://chronoxor.github.io/FastBinaryEncoding)<br/>
 [FastBinaryEncoding downloads](https://github.com/chronoxor/FastBinaryEncoding/releases)<br/>
