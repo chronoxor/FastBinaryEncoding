@@ -2063,7 +2063,7 @@ class Balance extends proto.Balance {
     let current = {
       locked: ((this.locked != null) ? this.locked : null)
     }
-    return {...parent, ...current}
+    return { ...parent, ...current }
   }
 
   /**

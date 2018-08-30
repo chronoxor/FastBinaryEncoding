@@ -5908,7 +5908,7 @@ class StructOptional extends StructSimple {
       f164: ((this.f164 != null) ? this.f164 : null),
       f165: ((this.f165 != null) ? this.f165 : null)
     }
-    return {...parent, ...current}
+    return { ...parent, ...current }
   }
 
   /**
@@ -10623,7 +10623,7 @@ class StructNested extends StructOptional {
       f1010: ((this.f1010 != null) ? this.f1010 : null),
       f1011: ((this.f1011 != null) ? this.f1011 : null)
     }
-    return {...parent, ...current}
+    return { ...parent, ...current }
   }
 
   /**

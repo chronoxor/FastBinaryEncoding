@@ -893,7 +893,7 @@ class Int64 {
   }
 }
 
-Object.defineProperty(Int64.prototype, '__isInt64__', {value: true})
+Object.defineProperty(Int64.prototype, '__isInt64__', { value: true })
 
 // Useful constants
 const INT64_TWO_PWR_16_DBL = 1 << 16
@@ -1785,7 +1785,7 @@ class UInt64 {
   }
 }
 
-Object.defineProperty(UInt64.prototype, '__isUInt64__', {value: true})
+Object.defineProperty(UInt64.prototype, '__isUInt64__', { value: true })
 
 // Useful constants
 const UINT64_TWO_PWR_16_DBL = 1 << 16
