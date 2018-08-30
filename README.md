@@ -10,6 +10,9 @@ Fast Binary Encoding Library allows to define any domain models, complex data
 structures, client/server requests & responses and create models for different
 programming languages and platforms.
 
+[FastBinaryEncoding documentation](https://chronoxor.github.io/FastBinaryEncoding)<br/>
+[FastBinaryEncoding downloads](https://github.com/chronoxor/FastBinaryEncoding/releases)<br/>
+
 Performance comparison to other protocols can be found [here](https://github.com/chronoxor/CppSerialization):
 
 | Protocol                                                              | Message size | Serialization time | Deserialization time |
@@ -29,9 +32,6 @@ Typical usage workflow is the following:
    FastBinaryEncoding format (fast and compact)
 5. JSON convert objects from the domain model in order to use them in Web API
 6. Implement Sender/Receiver interfaces to create a communication protocol
-
-[FastBinaryEncoding documentation](https://chronoxor.github.io/FastBinaryEncoding)<br/>
-[FastBinaryEncoding downloads](https://github.com/chronoxor/FastBinaryEncoding/releases)<br/>
 
 # Contents
   * [Features](#features)
