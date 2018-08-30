@@ -47,6 +47,9 @@ Typical usage workflow is the following:
   * [Create domain model](#create-domain-model)
   * [Generate domain model](#generate-domain-model)
   * [Performance benchmarks](#performance-benchmarks)
+    * [Benchmark 1: Serialization](#benchmark-1-serialization)
+    * [Benchmark 2: Deserialization](#benchmark-2-deserialization)
+    * [Benchmark 3: Verify](#benchmark-3-verify)
 
 # Features
 * Cross platform (Linux, OSX, Windows)
@@ -219,8 +222,11 @@ Options:
 ```
 
 # Performance benchmarks
+
+##Benchmark 1: Serialization
+
 | Language & Platform      | Message size (bytes) | Serialization rate (ops/s) | Serialization time (ns) |
-| :----------------------: | -------------------: | -------------------------: | ----------------------: |
+| :----------------------- | -------------------: | -------------------------: | ----------------------: |
 | C++ Win64                |                  252 |                 10 416 667 |                      96 |
 | C++ Win64 (Final)        |                  152 |                 16 129 032 |                      62 |
 | C++ Win64 (JSON)         |                  353 |                    926 784 |                   1 079 |
@@ -240,8 +246,10 @@ Options:
 | Python Win64 (Final)     |                  152 |                     11 635 |                  85 945 |
 | Python Win64 (JSON)      |                  324 |                     61 737 |                  16 198 |
 
+##Benchmark 2: Deserialization
+
 | Language & Platform      | Message size (bytes) | Deserialization rate (ops/s) | Deserialization time (ns) |
-| :----------------------: | -------------------: | ---------------------------: | ------------------------: |
+| :----------------------- | -------------------: | ---------------------------: | ------------------------: |
 | C++ Win64                |                  252 |                    9 523 810 |                       105 |
 | C++ Win64 (Final)        |                  152 |                   10 989 011 |                        91 |
 | C++ Win64 (JSON)         |                  353 |                    1 375 516 |                       727 |
@@ -261,8 +269,10 @@ Options:
 | Python Win64 (Final)     |                  152 |                       11 661 |                    85 758 |
 | Python Win64 (JSON)      |                  324 |                       48 859 |                    20 467 |
 
+##Benchmark 3: Verify
+
 | Language & Platform      | Message size (bytes) | Verify rate (ops/s) | Verify time (ns) |
-| :----------------------: | -------------------: | ------------------: | ---------------: |
+| :----------------------- | -------------------: | ------------------: | ---------------: |
 | C++ Win64                |                  252 |          31 250 000 |              105 |
 | C++ Win64 (Final)        |                  152 |          35 714 286 |               91 |
 | C# Win64                 |                  252 |           4 504 505 |              222 |
