@@ -110,7 +110,7 @@ and structures that related to each other and might be aggregated in some
 hierarchy.
 
 There is an example domain model which describes Account-Balance-Orders
-relation of some abstract trading platform:
+relation of some abstract trading platform (proto.fbe):
 
 ```proto
 // Package declaration
@@ -174,3 +174,35 @@ struct Account = 3
 ```
 
 # Generate domain model
+The next step is a domain model compilation using 'fbec' compiler which will
+create a generated code for required programming language.
+
+The following command will create a C++ generated code:
+```shell
+fbec --c++ --input=proto.fbe --output=.
+```
+
+All possible options for the 'fbec' compiler are the following:
+```shell
+Usage: fbec [options]
+
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -h HELP, --help=HELP  Show help
+  -i INPUT, --input=INPUT
+                        Input path
+  -o OUTPUT, --output=OUTPUT
+                        Output path
+  -q, --quiet           Launch in quiet mode. No progress will be shown!
+  -n INDENT, --indent=INDENT
+                        Format indent. Default: 0
+  -t, --tabs            Format with tabs. Default: off
+  --cpp                 Generate C++ code
+  --csharp              Generate C# code
+  --java                Generate Java code
+  --javascript          Generate JavaScript code
+  --python              Generate Python code
+  --final               Generate Final protocol code
+  --json                Generate JSON protocol code
+```
