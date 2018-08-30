@@ -223,7 +223,7 @@ Options:
 
 # Performance benchmarks
 
-##Benchmark 1: Serialization
+## Benchmark 1: Serialization
 
 | Language & Platform      | Message size (bytes) | Serialization rate (ops/s) | Serialization time (ns) |
 | :----------------------- | -------------------: | -------------------------: | ----------------------: |
@@ -246,7 +246,7 @@ Options:
 | Python Win64 (Final)     |                  152 |                     11 635 |                  85 945 |
 | Python Win64 (JSON)      |                  324 |                     61 737 |                  16 198 |
 
-##Benchmark 2: Deserialization
+## Benchmark 2: Deserialization
 
 | Language & Platform      | Message size (bytes) | Deserialization rate (ops/s) | Deserialization time (ns) |
 | :----------------------- | -------------------: | ---------------------------: | ------------------------: |
@@ -269,7 +269,7 @@ Options:
 | Python Win64 (Final)     |                  152 |                       11 661 |                    85 758 |
 | Python Win64 (JSON)      |                  324 |                       48 859 |                    20 467 |
 
-##Benchmark 3: Verify
+## Benchmark 3: Verify
 
 | Language & Platform      | Message size (bytes) | Verify rate (ops/s) | Verify time (ns) |
 | :----------------------- | -------------------: | ------------------: | ---------------: |
