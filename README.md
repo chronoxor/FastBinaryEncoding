@@ -219,8 +219,8 @@ Options:
 ```
 
 # Performance benchmarks
-| Language & Platform | Message size | Serialization rate | Serialization time | Deserialization rate | Deserialization time | Verify rate      | Verify time |
-| :-----------------: | -----------: | -----------------: | -----------------: | -------------------: | -------------------: | ---------------: | ----------: |
-| C++                 |    252 bytes |   10416666.7 ops/s |              96 ns |      9523809.5 ops/s |               105 ns | 31250000.0 ops/s |      105 ns |
-| C++ (Final)         |    152 bytes |   16129032.3 ops/s |              62 ns |     10989011.0 ops/s |                91 ns | 35714285.7 ops/s |       91 ns |
-| C++ (JSON)          |    353 bytes |     926784.1 ops/s |            1079 ns |      1375515.8 ops/s |               727 ns |                  |      727 ns |
+| Language & Platform | Message size (bytes) | Serialization rate (ops/s) | Serialization time (ns) | Deserialization rate (ops/s) | Deserialization time (ns) | Verify rate (ops/s) | Verify time (ns) |
+| :-----------------: | -------------------: | -------------------------: | ----------------------: | ---------------------------: | ------------------------: | ------------------: | ---------------: |
+| C++ Win64           |                  252 |                   10416667 |                      96 |                      9523810 |                       105 |            31250000 |              105 |
+| C++ Win64 (Final)   |                  152 |                   16129032 |                      62 |                     10989011 |                        91 |            35714286 |               91 |
+| C++ Win64 (JSON)    |                  353 |                     926784 |                    1079 |                      1375516 |                       727 |                     |              727 |
