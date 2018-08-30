@@ -219,8 +219,20 @@ Options:
 ```
 
 # Performance benchmarks
-| Language & Platform | Message size (bytes) | Serialization rate (ops/s) | Serialization time (ns) | Deserialization rate (ops/s) | Deserialization time (ns) | Verify rate (ops/s) | Verify time (ns) |
-| :-----------------: | -------------------: | -------------------------: | ----------------------: | ---------------------------: | ------------------------: | ------------------: | ---------------: |
-| C++ Win64           |                  252 |                   10416667 |                      96 |                      9523810 |                       105 |            31250000 |              105 |
-| C++ Win64 (Final)   |                  152 |                   16129032 |                      62 |                     10989011 |                        91 |            35714286 |               91 |
-| C++ Win64 (JSON)    |                  353 |                     926784 |                    1079 |                      1375516 |                       727 |                     |              727 |
+| Language & Platform | Message size (bytes) | Serialization rate (ops/s) | Serialization time (ns) |
+| :-----------------: | -------------------: | -------------------------: | ----------------------: |
+| C++ Win64           |                  252 |                 10 416 667 |                      96 |
+| C++ Win64 (Final)   |                  152 |                 16 129 032 |                      62 |
+| C++ Win64 (JSON)    |                  353 |                    926 784 |                   1 079 |
+
+| Language & Platform | Message size (bytes) | Deserialization rate (ops/s) | Deserialization time (ns) |
+| :-----------------: | -------------------: | ---------------------------: | ------------------------: |
+| C++ Win64           |                  252 |                    9 523 810 |                       105 |
+| C++ Win64 (Final)   |                  152 |                   10 989 011 |                        91 |
+| C++ Win64 (JSON)    |                  353 |                    1 375 516 |                       727 |
+
+| Language & Platform | Message size (bytes) | Verify rate (ops/s) | Verify time (ns) |
+| :-----------------: | -------------------: | ------------------: | ---------------: |
+| C++ Win64           |                  252 |          31 250 000 |              105 |
+| C++ Win64 (Final)   |                  152 |          35 714 286 |               91 |
+| C++ Win64 (JSON)    |                  353 |                     |              727 |
