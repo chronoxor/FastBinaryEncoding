@@ -10,6 +10,16 @@ Fast Binary Encoding Library allows to define any domain models, complex data
 structures, client/server requests & responses and create models for different
 programming languages and platforms.
 
+Performance comparison to other protocols can be found [here](https://github.com/chronoxor/CppSerialization):
+
+| Protocol                                                              | Message size | Serialization time | Deserialization time |
+| :-------------------------------------------------------------------: | -----------: | -----------------: | -------------------: |
+| [Cap'n'Proto](https://capnproto.org)                                  |    208 bytes |             558 ns |               359 ns |
+| [FastBinaryEncoding](https://github.com/chronoxor/FastBinaryEncoding) |    234 bytes |              66 ns |                82 ns |
+| [FlatBuffers](https://google.github.io/flatbuffers)                   |    280 bytes |             830 ns |               290 ns |
+| [Protobuf](https://developers.google.com/protocol-buffers)            |    120 bytes |             628 ns |               759 ns |
+| [JSON](http://rapidjson.org)                                          |    301 bytes |             740 ns |               500 ns |
+
 Typical usage workflow is the following:
 1. Create a domain model using base types, enums, flags and structs
 2. Generate domain model for any supported programming languages
