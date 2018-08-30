@@ -46,6 +46,7 @@ Typical usage workflow is the following:
     * [Windows (Visual Studio)](#windows-visual-studio)
   * [Create domain model](#create-domain-model)
   * [Generate domain model](#generate-domain-model)
+  * [Performance benchmarks](#performance-benchmarks)
 
 # Features
 * Cross platform (Linux, OSX, Windows)
@@ -216,3 +217,10 @@ Options:
   --final               Generate Final protocol code
   --json                Generate JSON protocol code
 ```
+
+# Performance benchmarks
+| Language & Platform | Message size | Serialization rate | Serialization time | Deserialization rate | Deserialization time | Verify rate      | Verify time |
+| :-----------------: | -----------: | -----------------: | -----------------: | -------------------: | -------------------: | ---------------: | ----------: |
+| C++                 |    252 bytes |   10416666.7 ops/s |              96 ns |      9523809.5 ops/s |               105 ns | 31250000.0 ops/s |      105 ns |
+| C++ (Final)         |    152 bytes |   16129032.3 ops/s |              62 ns |     10989011.0 ops/s |                91 ns | 35714285.7 ops/s |       91 ns |
+| C++ (JSON)          |    353 bytes |     926784.1 ops/s |            1079 ns |      1375515.8 ops/s |               727 ns |                  |      727 ns |
