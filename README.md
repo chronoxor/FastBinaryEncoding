@@ -223,6 +223,13 @@ Options:
 
 # Performance benchmarks
 
+[C++ benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/performance) results were taken using [CppBenchmark library](https://github.com/chronoxor/CppBenchmark)
+[C# benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/CSharp/Benchmarks) results were taken using [BenchmarkDotNet library](https://benchmarkdotnet.org)
+[.NET Core benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/.NETCore/Benchmarks) results were taken using [BenchmarkDotNet library](https://benchmarkdotnet.org)
+[Java benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Java/src/benchmarks) results were taken using [JMH library](http://openjdk.java.net/projects/code-tools/jmh)
+[JavaScript benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/JavaScript/benchmarks) results were taken using [Benchmark.js library](https://benchmarkjs.com)
+[Python benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Python/benchmarks) results were taken using [timeit module](https://docs.python.org/3/library/timeit.html)
+
 ## Benchmark 1: Serialization
 
 | Language & Platform      | Message size (bytes) | Serialization rate (ops/s) | Serialization time (ns) |
