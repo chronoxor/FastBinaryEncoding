@@ -24,9 +24,10 @@ Performance comparison to other protocols can be found [here](https://github.com
 | [JSON](http://rapidjson.org)                                          |    301 bytes |             740 ns |               500 ns |
 
 Typical usage workflow is the following:
-1. Create a domain model using base types, enums, flags and structs
-2. Generate domain model for any supported programming languages
-   (C++, C#, Java, JavaScript, Python)
+1. [Create domain model](#create-domain-model) using base types, enums,
+   flags and structs
+2. [Generate domain model](#generate-domain-model) for any supported
+   programming languages (C++, C#, Java, JavaScript, Python)
 3. Build the domain model library
 4. Serialize/Deserialize objects from the domain model in unified
    FastBinaryEncoding format (fast and compact)
