@@ -254,6 +254,7 @@ BENCHMARK_FIXTURE(SerializationFixture, "Serialize")
 ```
 
 Serialization benchmark results:
+
 | Language & Platform      | Message size (bytes) | Serialization rate (ops/s) | Serialization time (ns) |
 | :----------------------- | -------------------: | -------------------------: | ----------------------: |
 | C++ Win64                |                  252 |                 10 416 667 |                      96 |
@@ -287,6 +288,7 @@ BENCHMARK_FIXTURE(DeserializationFixture, "Deserialize")
 ```
 
 Deserialization benchmark results:
+
 | Language & Platform      | Message size (bytes) | Deserialization rate (ops/s) | Deserialization time (ns) |
 | :----------------------- | -------------------: | ---------------------------: | ------------------------: |
 | C++ Win64                |                  252 |                    9 523 810 |                       105 |
@@ -320,6 +322,7 @@ BENCHMARK_FIXTURE(VerifyFixture, "Verify")
 ```
 
 Verify benchmark results:
+
 | Language & Platform      | Message size (bytes) | Verify rate (ops/s) | Verify time (ns) |
 | :----------------------- | -------------------: | ------------------: | ---------------: |
 | C++ Win64                |                  252 |          31 250 000 |              105 |
