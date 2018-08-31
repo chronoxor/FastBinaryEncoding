@@ -124,8 +124,9 @@ domain model (aka business objects). Domain model is a set of enums, flags
 and structures that related to each other and might be aggregated in some
 hierarchy.
 
-There is an example domain model which describes Account-Balance-Orders
-relation of some abstract trading platform (proto.fbe):
+There is an [example domain model](https://github.com/chronoxor/FastBinaryEncoding/blob/master/proto/proto.fbe)
+which describes Account-Balance-Orders relation of some abstract trading
+platform:
 
 ```proto
 // Package declaration
