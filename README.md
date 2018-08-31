@@ -223,6 +223,15 @@ Options:
 
 # Performance benchmarks
 
+All benchmarks use the same [domain model](#create-domain-model) to create a
+single account with three orders. See the C++ code fragment below:
+```c++
+proto::Account account = { 1, "Test", proto::State::good, { "USD", 1000.0 }, std::make_optional<proto::Balance>({ "EUR", 100.0 }), {} };
+account.orders.emplace_back(1, "EURUSD", proto::OrderSide::buy, proto::OrderType::market, 1.23456, 1000.0);
+account.orders.emplace_back(2, "EURUSD", proto::OrderSide::sell, proto::OrderType::limit, 1.0, 100.0);
+account.orders.emplace_back(3, "EURUSD", proto::OrderSide::buy, proto::OrderType::stop, 1.5, 10.0);
+```
+
 * [C++ benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/performance) results were taken using [CppBenchmark library](https://github.com/chronoxor/CppBenchmark)
 * [C# benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/CSharp/Benchmarks) results were taken using [BenchmarkDotNet library](https://benchmarkdotnet.org)
 * [.NET Core benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/.NETCore/Benchmarks) results were taken using [BenchmarkDotNet library](https://benchmarkdotnet.org)
@@ -231,6 +240,17 @@ Options:
 * [Python benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Python/benchmarks) results were taken using [timeit module](https://docs.python.org/3/library/timeit.html)
 
 ## Benchmark 1: Serialization
+
+```c++
+BENCHMARK_FIXTURE(SerializationFixture, "Serialize")
+{
+    // Reset FBE stream
+    writer.reset();
+
+    // Serialize the account to the FBE stream
+    writer.serialize(account);
+}
+```
 
 | Language & Platform      | Message size (bytes) | Serialization rate (ops/s) | Serialization time (ns) |
 | :----------------------- | -------------------: | -------------------------: | ----------------------: |
@@ -255,6 +275,14 @@ Options:
 
 ## Benchmark 2: Deserialization
 
+```c++
+BENCHMARK_FIXTURE(DeserializationFixture, "Deserialize")
+{
+    // Deserialize the account from the FBE stream
+    reader.deserialize(deserialized);
+}
+```
+
 | Language & Platform      | Message size (bytes) | Deserialization rate (ops/s) | Deserialization time (ns) |
 | :----------------------- | -------------------: | ---------------------------: | ------------------------: |
 | C++ Win64                |                  252 |                    9 523 810 |                       105 |
@@ -277,6 +305,14 @@ Options:
 | Python Win64 (JSON)      |                  324 |                       48 859 |                    20 467 |
 
 ## Benchmark 3: Verify
+
+```c++
+BENCHMARK_FIXTURE(VerifyFixture, "Verify")
+{
+    // Verify the account
+    model.verify();
+}
+```
 
 | Language & Platform      | Message size (bytes) | Verify rate (ops/s) | Verify time (ns) |
 | :----------------------- | -------------------: | ------------------: | ---------------: |
