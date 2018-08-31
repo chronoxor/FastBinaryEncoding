@@ -224,7 +224,7 @@ Options:
 # Performance benchmarks
 
 All benchmarks use the same [domain model](#create-domain-model) to create a
-single account with three orders. See the C++ code fragment below:
+single account with three orders:
 ```c++
 Account account = { 1, "Test", State::good, { "USD", 1000.0 }, std::make_optional<Balance>({ "EUR", 100.0 }), {} };
 account.orders.emplace_back(1, "EURUSD", OrderSide::buy, OrderType::market, 1.23456, 1000.0);
@@ -241,6 +241,7 @@ account.orders.emplace_back(3, "EURUSD", OrderSide::buy, OrderType::stop, 1.5, 1
 
 ## Benchmark 1: Serialization
 
+Serialization benchmark C++ code:
 ```c++
 BENCHMARK_FIXTURE(SerializationFixture, "Serialize")
 {
@@ -252,6 +253,7 @@ BENCHMARK_FIXTURE(SerializationFixture, "Serialize")
 }
 ```
 
+Serialization benchmark results:
 | Language & Platform      | Message size (bytes) | Serialization rate (ops/s) | Serialization time (ns) |
 | :----------------------- | -------------------: | -------------------------: | ----------------------: |
 | C++ Win64                |                  252 |                 10 416 667 |                      96 |
@@ -275,6 +277,7 @@ BENCHMARK_FIXTURE(SerializationFixture, "Serialize")
 
 ## Benchmark 2: Deserialization
 
+Deserialization benchmark C++ code:
 ```c++
 BENCHMARK_FIXTURE(DeserializationFixture, "Deserialize")
 {
@@ -283,6 +286,7 @@ BENCHMARK_FIXTURE(DeserializationFixture, "Deserialize")
 }
 ```
 
+Deserialization benchmark results:
 | Language & Platform      | Message size (bytes) | Deserialization rate (ops/s) | Deserialization time (ns) |
 | :----------------------- | -------------------: | ---------------------------: | ------------------------: |
 | C++ Win64                |                  252 |                    9 523 810 |                       105 |
@@ -306,6 +310,7 @@ BENCHMARK_FIXTURE(DeserializationFixture, "Deserialize")
 
 ## Benchmark 3: Verify
 
+Verify benchmark C++ code:
 ```c++
 BENCHMARK_FIXTURE(VerifyFixture, "Verify")
 {
@@ -314,6 +319,7 @@ BENCHMARK_FIXTURE(VerifyFixture, "Verify")
 }
 ```
 
+Verify benchmark results:
 | Language & Platform      | Message size (bytes) | Verify rate (ops/s) | Verify time (ns) |
 | :----------------------- | -------------------: | ------------------: | ---------------: |
 | C++ Win64                |                  252 |          31 250 000 |              105 |
