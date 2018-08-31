@@ -57,7 +57,7 @@ Typical usage workflow is the following:
 * Supported base types (byte, bool, char, wchar, int8, int16, int32, int64, float, double)
 * Supported complex types (bytes, decimal, string, timestamp, uuid)
 * Supported collections (array, vector, list, map, hash)
-* Fast binary encoding format
+* [Fast binary encoding format](#performance-benchmarks)
 * Serialization/Deserialization to binary format
 * Serialization/Deserialization to JSON
 * Sender/Receiver interfaces for communication protocols
