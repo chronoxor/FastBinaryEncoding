@@ -226,10 +226,10 @@ Options:
 All benchmarks use the same [domain model](#create-domain-model) to create a
 single account with three orders. See the C++ code fragment below:
 ```c++
-proto::Account account = { 1, "Test", proto::State::good, { "USD", 1000.0 }, std::make_optional<proto::Balance>({ "EUR", 100.0 }), {} };
-account.orders.emplace_back(1, "EURUSD", proto::OrderSide::buy, proto::OrderType::market, 1.23456, 1000.0);
-account.orders.emplace_back(2, "EURUSD", proto::OrderSide::sell, proto::OrderType::limit, 1.0, 100.0);
-account.orders.emplace_back(3, "EURUSD", proto::OrderSide::buy, proto::OrderType::stop, 1.5, 10.0);
+Account account = { 1, "Test", State::good, { "USD", 1000.0 }, std::make_optional<Balance>({ "EUR", 100.0 }), {} };
+account.orders.emplace_back(1, "EURUSD", OrderSide::buy, OrderType::market, 1.23456, 1000.0);
+account.orders.emplace_back(2, "EURUSD", OrderSide::sell, OrderType::limit, 1.0, 100.0);
+account.orders.emplace_back(3, "EURUSD", OrderSide::buy, OrderType::stop, 1.5, 10.0);
 ```
 
 * [C++ benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/performance) results were taken using [CppBenchmark library](https://github.com/chronoxor/CppBenchmark)
