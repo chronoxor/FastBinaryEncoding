@@ -39,7 +39,7 @@ struct Order == 1
 }
 
 // Extended account balance declaration
-struct Balance == 2 : proto.Balance
+struct Balance = base : proto.Balance
 {
     double locked = 0.0;
 }

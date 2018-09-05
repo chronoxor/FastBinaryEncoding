@@ -1125,7 +1125,7 @@ public:
         return fbe_result;
     }
     // Get the field type
-    size_t fbe_type() const noexcept { return 110; }
+    static constexpr size_t fbe_type() noexcept { return 110; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -1904,7 +1904,7 @@ public:
     // Get the model size
     size_t fbe_size() const noexcept { return model.fbe_size() + model.fbe_extra(); }
     // Get the model type
-    size_t fbe_type() const noexcept { return model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, ::test::StructSimple>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -2085,7 +2085,7 @@ public:
     // Set the field offset
     size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
     // Get the field type
-    size_t fbe_type() const noexcept { return 110; }
+    static constexpr size_t fbe_type() noexcept { return 110; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -2934,7 +2934,7 @@ public:
     StructSimpleFinalModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), _model(this->buffer(), 8) {}
 
     // Get the model type
-    size_t fbe_type() const noexcept { return _model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, ::test::StructSimple>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -3963,7 +3963,7 @@ public:
         return fbe_result;
     }
     // Get the field type
-    size_t fbe_type() const noexcept { return 111; }
+    static constexpr size_t fbe_type() noexcept { return 111; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -5048,7 +5048,7 @@ public:
     // Get the model size
     size_t fbe_size() const noexcept { return model.fbe_size() + model.fbe_extra(); }
     // Get the model type
-    size_t fbe_type() const noexcept { return model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, ::test::StructOptional>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -5273,7 +5273,7 @@ public:
     // Set the field offset
     size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
     // Get the field type
-    size_t fbe_type() const noexcept { return 111; }
+    static constexpr size_t fbe_type() noexcept { return 111; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -6496,7 +6496,7 @@ public:
     StructOptionalFinalModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), _model(this->buffer(), 8) {}
 
     // Get the model type
-    size_t fbe_type() const noexcept { return _model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, ::test::StructOptional>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -6877,7 +6877,7 @@ public:
         return fbe_result;
     }
     // Get the field type
-    size_t fbe_type() const noexcept { return 112; }
+    static constexpr size_t fbe_type() noexcept { return 112; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -7206,7 +7206,7 @@ public:
     // Get the model size
     size_t fbe_size() const noexcept { return model.fbe_size() + model.fbe_extra(); }
     // Get the model type
-    size_t fbe_type() const noexcept { return model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, ::test::StructNested>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -7323,7 +7323,7 @@ public:
     // Set the field offset
     size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
     // Get the field type
-    size_t fbe_type() const noexcept { return 112; }
+    static constexpr size_t fbe_type() noexcept { return 112; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -7628,7 +7628,7 @@ public:
     StructNestedFinalModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), _model(this->buffer(), 8) {}
 
     // Get the model type
-    size_t fbe_type() const noexcept { return _model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, ::test::StructNested>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -7884,7 +7884,7 @@ public:
         return fbe_result;
     }
     // Get the field type
-    size_t fbe_type() const noexcept { return 120; }
+    static constexpr size_t fbe_type() noexcept { return 120; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -8075,7 +8075,7 @@ public:
     // Get the model size
     size_t fbe_size() const noexcept { return model.fbe_size() + model.fbe_extra(); }
     // Get the model type
-    size_t fbe_type() const noexcept { return model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, ::test::StructBytes>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -8172,7 +8172,7 @@ public:
     // Set the field offset
     size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
     // Get the field type
-    size_t fbe_type() const noexcept { return 120; }
+    static constexpr size_t fbe_type() noexcept { return 120; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -8307,7 +8307,7 @@ public:
     StructBytesFinalModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), _model(this->buffer(), 8) {}
 
     // Get the model type
-    size_t fbe_type() const noexcept { return _model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, ::test::StructBytes>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -8737,7 +8737,7 @@ public:
         return fbe_result;
     }
     // Get the field type
-    size_t fbe_type() const noexcept { return 125; }
+    static constexpr size_t fbe_type() noexcept { return 125; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -9016,7 +9016,7 @@ public:
     // Get the model size
     size_t fbe_size() const noexcept { return model.fbe_size() + model.fbe_extra(); }
     // Get the model type
-    size_t fbe_type() const noexcept { return model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, ::test::StructArray>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -9127,7 +9127,7 @@ public:
     // Set the field offset
     size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
     // Get the field type
-    size_t fbe_type() const noexcept { return 125; }
+    static constexpr size_t fbe_type() noexcept { return 125; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -9381,7 +9381,7 @@ public:
     StructArrayFinalModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), _model(this->buffer(), 8) {}
 
     // Get the model type
-    size_t fbe_type() const noexcept { return _model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, ::test::StructArray>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -9811,7 +9811,7 @@ public:
         return fbe_result;
     }
     // Get the field type
-    size_t fbe_type() const noexcept { return 130; }
+    static constexpr size_t fbe_type() noexcept { return 130; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -10100,7 +10100,7 @@ public:
     // Get the model size
     size_t fbe_size() const noexcept { return model.fbe_size() + model.fbe_extra(); }
     // Get the model type
-    size_t fbe_type() const noexcept { return model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, ::test::StructVector>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -10211,7 +10211,7 @@ public:
     // Set the field offset
     size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
     // Get the field type
-    size_t fbe_type() const noexcept { return 130; }
+    static constexpr size_t fbe_type() noexcept { return 130; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -10465,7 +10465,7 @@ public:
     StructVectorFinalModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), _model(this->buffer(), 8) {}
 
     // Get the model type
-    size_t fbe_type() const noexcept { return _model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, ::test::StructVector>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -10895,7 +10895,7 @@ public:
         return fbe_result;
     }
     // Get the field type
-    size_t fbe_type() const noexcept { return 131; }
+    static constexpr size_t fbe_type() noexcept { return 131; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -11184,7 +11184,7 @@ public:
     // Get the model size
     size_t fbe_size() const noexcept { return model.fbe_size() + model.fbe_extra(); }
     // Get the model type
-    size_t fbe_type() const noexcept { return model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, ::test::StructList>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -11295,7 +11295,7 @@ public:
     // Set the field offset
     size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
     // Get the field type
-    size_t fbe_type() const noexcept { return 131; }
+    static constexpr size_t fbe_type() noexcept { return 131; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -11549,7 +11549,7 @@ public:
     StructListFinalModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), _model(this->buffer(), 8) {}
 
     // Get the model type
-    size_t fbe_type() const noexcept { return _model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, ::test::StructList>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -11853,7 +11853,7 @@ public:
         return fbe_result;
     }
     // Get the field type
-    size_t fbe_type() const noexcept { return 132; }
+    static constexpr size_t fbe_type() noexcept { return 132; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -12058,7 +12058,7 @@ public:
     // Get the model size
     size_t fbe_size() const noexcept { return model.fbe_size() + model.fbe_extra(); }
     // Get the model type
-    size_t fbe_type() const noexcept { return model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, ::test::StructSet>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -12157,7 +12157,7 @@ public:
     // Set the field offset
     size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
     // Get the field type
-    size_t fbe_type() const noexcept { return 132; }
+    static constexpr size_t fbe_type() noexcept { return 132; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -12309,7 +12309,7 @@ public:
     StructSetFinalModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), _model(this->buffer(), 8) {}
 
     // Get the model type
-    size_t fbe_type() const noexcept { return _model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, ::test::StructSet>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -12759,7 +12759,7 @@ public:
         return fbe_result;
     }
     // Get the field type
-    size_t fbe_type() const noexcept { return 140; }
+    static constexpr size_t fbe_type() noexcept { return 140; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -13048,7 +13048,7 @@ public:
     // Get the model size
     size_t fbe_size() const noexcept { return model.fbe_size() + model.fbe_extra(); }
     // Get the model type
-    size_t fbe_type() const noexcept { return model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, ::test::StructMap>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -13159,7 +13159,7 @@ public:
     // Set the field offset
     size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
     // Get the field type
-    size_t fbe_type() const noexcept { return 140; }
+    static constexpr size_t fbe_type() noexcept { return 140; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -13413,7 +13413,7 @@ public:
     StructMapFinalModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), _model(this->buffer(), 8) {}
 
     // Get the model type
-    size_t fbe_type() const noexcept { return _model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, ::test::StructMap>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -13863,7 +13863,7 @@ public:
         return fbe_result;
     }
     // Get the field type
-    size_t fbe_type() const noexcept { return 141; }
+    static constexpr size_t fbe_type() noexcept { return 141; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -14152,7 +14152,7 @@ public:
     // Get the model size
     size_t fbe_size() const noexcept { return model.fbe_size() + model.fbe_extra(); }
     // Get the model type
-    size_t fbe_type() const noexcept { return model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, ::test::StructHash>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -14263,7 +14263,7 @@ public:
     // Set the field offset
     size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
     // Get the field type
-    size_t fbe_type() const noexcept { return 141; }
+    static constexpr size_t fbe_type() noexcept { return 141; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -14517,7 +14517,7 @@ public:
     StructHashFinalModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), _model(this->buffer(), 8) {}
 
     // Get the model type
-    size_t fbe_type() const noexcept { return _model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, ::test::StructHash>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -14783,7 +14783,7 @@ public:
         return fbe_result;
     }
     // Get the field type
-    size_t fbe_type() const noexcept { return 142; }
+    static constexpr size_t fbe_type() noexcept { return 142; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -14960,7 +14960,7 @@ public:
     // Get the model size
     size_t fbe_size() const noexcept { return model.fbe_size() + model.fbe_extra(); }
     // Get the model type
-    size_t fbe_type() const noexcept { return model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, ::test::StructHashEx>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -15055,7 +15055,7 @@ public:
     // Set the field offset
     size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
     // Get the field type
-    size_t fbe_type() const noexcept { return 142; }
+    static constexpr size_t fbe_type() noexcept { return 142; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -15173,7 +15173,7 @@ public:
     StructHashExFinalModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), _model(this->buffer(), 8) {}
 
     // Get the model type
-    size_t fbe_type() const noexcept { return _model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, ::test::StructHashEx>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -15525,7 +15525,7 @@ protected:
     {
         switch (type)
         {
-            case 110:
+            case FBE::test::StructSimpleModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructSimpleModel.attach(data, size);
@@ -15544,7 +15544,7 @@ protected:
                 onReceive(StructSimpleValue);
                 return true;
             }
-            case 111:
+            case FBE::test::StructOptionalModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructOptionalModel.attach(data, size);
@@ -15563,7 +15563,7 @@ protected:
                 onReceive(StructOptionalValue);
                 return true;
             }
-            case 112:
+            case FBE::test::StructNestedModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructNestedModel.attach(data, size);
@@ -15582,7 +15582,7 @@ protected:
                 onReceive(StructNestedValue);
                 return true;
             }
-            case 120:
+            case FBE::test::StructBytesModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructBytesModel.attach(data, size);
@@ -15601,7 +15601,7 @@ protected:
                 onReceive(StructBytesValue);
                 return true;
             }
-            case 125:
+            case FBE::test::StructArrayModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructArrayModel.attach(data, size);
@@ -15620,7 +15620,7 @@ protected:
                 onReceive(StructArrayValue);
                 return true;
             }
-            case 130:
+            case FBE::test::StructVectorModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructVectorModel.attach(data, size);
@@ -15639,7 +15639,7 @@ protected:
                 onReceive(StructVectorValue);
                 return true;
             }
-            case 131:
+            case FBE::test::StructListModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructListModel.attach(data, size);
@@ -15658,7 +15658,7 @@ protected:
                 onReceive(StructListValue);
                 return true;
             }
-            case 132:
+            case FBE::test::StructSetModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructSetModel.attach(data, size);
@@ -15677,7 +15677,7 @@ protected:
                 onReceive(StructSetValue);
                 return true;
             }
-            case 140:
+            case FBE::test::StructMapModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructMapModel.attach(data, size);
@@ -15696,7 +15696,7 @@ protected:
                 onReceive(StructMapValue);
                 return true;
             }
-            case 141:
+            case FBE::test::StructHashModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructHashModel.attach(data, size);
@@ -15715,7 +15715,7 @@ protected:
                 onReceive(StructHashValue);
                 return true;
             }
-            case 142:
+            case FBE::test::StructHashExModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructHashExModel.attach(data, size);
@@ -16059,7 +16059,7 @@ protected:
     {
         switch (type)
         {
-            case 110:
+            case FBE::test::StructSimpleFinalModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructSimpleModel.attach(data, size);
@@ -16078,7 +16078,7 @@ protected:
                 onReceive(StructSimpleValue);
                 return true;
             }
-            case 111:
+            case FBE::test::StructOptionalFinalModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructOptionalModel.attach(data, size);
@@ -16097,7 +16097,7 @@ protected:
                 onReceive(StructOptionalValue);
                 return true;
             }
-            case 112:
+            case FBE::test::StructNestedFinalModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructNestedModel.attach(data, size);
@@ -16116,7 +16116,7 @@ protected:
                 onReceive(StructNestedValue);
                 return true;
             }
-            case 120:
+            case FBE::test::StructBytesFinalModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructBytesModel.attach(data, size);
@@ -16135,7 +16135,7 @@ protected:
                 onReceive(StructBytesValue);
                 return true;
             }
-            case 125:
+            case FBE::test::StructArrayFinalModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructArrayModel.attach(data, size);
@@ -16154,7 +16154,7 @@ protected:
                 onReceive(StructArrayValue);
                 return true;
             }
-            case 130:
+            case FBE::test::StructVectorFinalModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructVectorModel.attach(data, size);
@@ -16173,7 +16173,7 @@ protected:
                 onReceive(StructVectorValue);
                 return true;
             }
-            case 131:
+            case FBE::test::StructListFinalModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructListModel.attach(data, size);
@@ -16192,7 +16192,7 @@ protected:
                 onReceive(StructListValue);
                 return true;
             }
-            case 132:
+            case FBE::test::StructSetFinalModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructSetModel.attach(data, size);
@@ -16211,7 +16211,7 @@ protected:
                 onReceive(StructSetValue);
                 return true;
             }
-            case 140:
+            case FBE::test::StructMapFinalModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructMapModel.attach(data, size);
@@ -16230,7 +16230,7 @@ protected:
                 onReceive(StructMapValue);
                 return true;
             }
-            case 141:
+            case FBE::test::StructHashFinalModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructHashModel.attach(data, size);
@@ -16249,7 +16249,7 @@ protected:
                 onReceive(StructHashValue);
                 return true;
             }
-            case 142:
+            case FBE::test::StructHashExFinalModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 StructHashExModel.attach(data, size);

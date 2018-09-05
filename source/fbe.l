@@ -40,6 +40,7 @@ int yyerror(const std::string& msg);
 "enum"                  { yycount(); return yytoken(ENUM); }
 "flags"                 { yycount(); return yytoken(FLAGS); }
 "struct"                { yycount(); return yytoken(STRUCT); }
+"base"                  { yycount(); return yytoken(BASE); }
 "key"                   { yycount(); return yytoken(KEY); }
 
 "bool"                  { yycount(); return yystring(BOOL); }

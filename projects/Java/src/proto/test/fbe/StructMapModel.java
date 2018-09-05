@@ -26,7 +26,8 @@ public final class StructMapModel extends Model
     // Get the model size
     public long FBESize() { return model.FBESize() + model.FBEExtra(); }
     // Get the model type
-    public long FBEType() { return model.FBEType(); }
+    public static final long FBETypeConst = FieldModelStructMap.FBETypeConst;
+    public long FBEType() { return FBETypeConst; }
 
     // Check if the struct value is valid
     public boolean verify()

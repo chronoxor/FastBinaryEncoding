@@ -5584,7 +5584,11 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     Indent(-1);
     WriteLineIndent("}");
     WriteLineIndent("// Get the field type");
-    WriteLineIndent("public long FBEType() { return " + std::to_string(s->type) + "; }");
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("public static final long FBETypeConst = " + ConvertBaseFieldName(*s->base, false) + ".FBETypeConst;");
+    else
+        WriteLineIndent("public static final long FBETypeConst = " + std::to_string(s->type) + ";");
+    WriteLineIndent("public long FBEType() { return FBETypeConst; }");
 
     // Generate struct field model verify() methods
     WriteLine();
@@ -5889,7 +5893,8 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
     WriteLineIndent("// Get the model size");
     WriteLineIndent("public long FBESize() { return model.FBESize() + model.FBEExtra(); }");
     WriteLineIndent("// Get the model type");
-    WriteLineIndent("public long FBEType() { return model.FBEType(); }");
+    WriteLineIndent("public static final long FBETypeConst = FieldModel" + *s->name + ".FBETypeConst;");
+    WriteLineIndent("public long FBEType() { return FBETypeConst; }");
 
     // Generate struct model verify() method
     WriteLine();
@@ -6070,7 +6075,11 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     WriteLineIndent("}");
     WriteLine();
     WriteLineIndent("// Get the field type");
-    WriteLineIndent("public long FBEType() { return " + std::to_string(s->type) + "; }");
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("public static final long FBETypeConst = " + ConvertBaseFieldName(*s->base, true) + ".FBETypeConst;");
+    else
+        WriteLineIndent("public static final long FBETypeConst = " + std::to_string(s->type) + ";");
+    WriteLineIndent("public long FBEType() { return FBETypeConst; }");
 
     // Generate struct final model verify() methods
     WriteLine();
@@ -6271,7 +6280,8 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
     // Generate struct model final FBE properties
     WriteLine();
     WriteLineIndent("// Get the model type");
-    WriteLineIndent("public long FBEType() { return _model.FBEType(); }");
+    WriteLineIndent("public static final long FBETypeConst = FinalModel" + *s->name + ".FBETypeConst;");
+    WriteLineIndent("public long FBEType() { return FBETypeConst; }");
 
     // Generate struct model final verify() method
     WriteLine();
@@ -6638,7 +6648,7 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case " + std::to_string(s->type) + ":");
+            WriteLineIndent("case (int)" + package + ".fbe." + *s->name + model + ".FBETypeConst:");
             WriteLineIndent("{");
             Indent(1);
             WriteLineIndent("// Deserialize the value from the FBE stream");

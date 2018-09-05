@@ -24,7 +24,8 @@ public final class StructVectorFinalModel extends Model
     public StructVectorFinalModel(Buffer buffer) { super(buffer); _model = new FinalModelStructVector(getBuffer(), 8); }
 
     // Get the model type
-    public long FBEType() { return _model.FBEType(); }
+    public static final long FBETypeConst = FinalModelStructVector.FBETypeConst;
+    public long FBEType() { return FBETypeConst; }
 
     // Check if the struct value is valid
     public boolean verify()

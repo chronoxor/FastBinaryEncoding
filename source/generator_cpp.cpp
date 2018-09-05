@@ -6538,7 +6538,10 @@ void GeneratorCpp::GenerateStructFieldModel(const std::shared_ptr<Package>& p, c
     Indent(-1);
     WriteLineIndent("}");
     WriteLineIndent("// Get the field type");
-    WriteLineIndent("size_t fbe_type() const noexcept { return " + std::to_string(s->type) + "; }");
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, " + ConvertTypeName(*p->name, *s->base, false) + ">::fbe_type(); }");
+    else
+        WriteLineIndent("static constexpr size_t fbe_type() noexcept { return " + std::to_string(s->type) + "; }");
     WriteLine();
     WriteLineIndent("// Shift the current field offset");
     WriteLineIndent("void fbe_shift(size_t size) noexcept { _offset += size; }");
@@ -6858,7 +6861,7 @@ void GeneratorCpp::GenerateStructModel(const std::shared_ptr<Package>& p, const 
     WriteLineIndent("// Get the model size");
     WriteLineIndent("size_t fbe_size() const noexcept { return model.fbe_size() + model.fbe_extra(); }");
     WriteLineIndent("// Get the model type");
-    WriteLineIndent("size_t fbe_type() const noexcept { return model.fbe_type(); }");
+    WriteLineIndent("static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, " + struct_name + ">::fbe_type(); }");
 
     // Generate struct model verify() method
     WriteLine();
@@ -7020,7 +7023,10 @@ void GeneratorCpp::GenerateStructFinalModel(const std::shared_ptr<Package>& p, c
     WriteLineIndent("// Set the field offset");
     WriteLineIndent("size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }");
     WriteLineIndent("// Get the field type");
-    WriteLineIndent("size_t fbe_type() const noexcept { return " + std::to_string(s->type) + "; }");
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, " + ConvertTypeName(*p->name, *s->base, false) + ">::fbe_type(); }");
+    else
+        WriteLineIndent("static constexpr size_t fbe_type() noexcept { return " + std::to_string(s->type) + "; }");
     WriteLine();
     WriteLineIndent("// Shift the current field offset");
     WriteLineIndent("void fbe_shift(size_t size) noexcept { _offset += size; }");
@@ -7234,7 +7240,7 @@ void GeneratorCpp::GenerateStructModelFinal(const std::shared_ptr<Package>& p, c
     // Generate struct model final FBE methods
     WriteLine();
     WriteLineIndent("// Get the model type");
-    WriteLineIndent("size_t fbe_type() const noexcept { return _model.fbe_type(); }");
+    WriteLineIndent("static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, " + struct_name + ">::fbe_type(); }");
 
     // Generate struct model final verify() method
     WriteLine();
@@ -7536,7 +7542,7 @@ void GeneratorCpp::GenerateReceiver(const std::shared_ptr<Package>& p, bool fina
         for (const auto& s : p->body->structs)
         {
             std::string struct_name = "::" + *p->name + "::" + *s->name;
-            WriteLineIndent("case " + std::to_string(s->type) + ":");
+            WriteLineIndent("case FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer>::fbe_type():");
             WriteLineIndent("{");
             Indent(1);
             WriteLineIndent("// Deserialize the value from the FBE stream");

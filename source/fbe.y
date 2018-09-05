@@ -34,7 +34,7 @@ int yyerror(const std::string& msg);
 }
 
 // Define our terminal symbols (tokens)
-%token <token>  PACKAGE OFFSET IMPORT ENUM FLAGS STRUCT KEY
+%token <token>  PACKAGE OFFSET IMPORT ENUM FLAGS STRUCT BASE KEY
 %token <string> BOOL BYTE BYTES CHAR WCHAR INT8 UINT8 INT16 UINT16 INT32 UINT32 INT64 UINT64 FLOAT DOUBLE DECIMAL STRING USTRING TIMESTAMP UUID
 %token <string> CONST_TRUE CONST_FALSE CONST_NULL CONST_UTC CONST_UUID1 CONST_UUID4 CONST_CHAR CONST_INT CONST_FLOAT CONST_STRING
 %token <string> IDENTIFIER
@@ -172,6 +172,7 @@ flags_const
 struct
     : STRUCT IDENTIFIER '{' struct_body '}'                                 { $$ = new FBE::StructType(0, false); $$->name.reset($2); $$->body.reset($4); }
     | STRUCT IDENTIFIER ':' type_name '{' struct_body '}'                   { $$ = new FBE::StructType(0, false); $$->name.reset($2); $$->base.reset($4); $$->body.reset($6); }
+    | STRUCT IDENTIFIER '=' BASE ':' type_name '{' struct_body '}'          { $$ = new FBE::StructType(0, true); $$->name.reset($2); $$->base.reset($6); $$->body.reset($8); }
     | STRUCT IDENTIFIER '=' CONST_INT '{' struct_body '}'                   { $$ = new FBE::StructType(std::stoi(*$4), false); delete $4; $$->name.reset($2); $$->body.reset($6); }
     | STRUCT IDENTIFIER '=' CONST_INT ':' type_name '{' struct_body '}'     { $$ = new FBE::StructType(std::stoi(*$4), false); delete $4; $$->name.reset($2); $$->base.reset($6); $$->body.reset($8); }
     | STRUCT IDENTIFIER '=' '=' CONST_INT '{' struct_body '}'               { $$ = new FBE::StructType(std::stoi(*$5), true); delete $5; $$->name.reset($2); $$->body.reset($7); }

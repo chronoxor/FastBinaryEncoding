@@ -1661,6 +1661,8 @@ class Enums(object):
 class FieldModelEnums(fbe.FieldModel):
     __slots__ = "_byte0", "_byte1", "_byte2", "_byte3", "_byte4", "_byte5", "_char0", "_char1", "_char2", "_char3", "_char4", "_char5", "_wchar0", "_wchar1", "_wchar2", "_wchar3", "_wchar4", "_wchar5", "_int8b0", "_int8b1", "_int8b2", "_int8b3", "_int8b4", "_int8b5", "_uint8b0", "_uint8b1", "_uint8b2", "_uint8b3", "_uint8b4", "_uint8b5", "_int16b0", "_int16b1", "_int16b2", "_int16b3", "_int16b4", "_int16b5", "_uint16b0", "_uint16b1", "_uint16b2", "_uint16b3", "_uint16b4", "_uint16b5", "_int32b0", "_int32b1", "_int32b2", "_int32b3", "_int32b4", "_int32b5", "_uint32b0", "_uint32b1", "_uint32b2", "_uint32b3", "_uint32b4", "_uint32b5", "_int64b0", "_int64b1", "_int64b2", "_int64b3", "_int64b4", "_int64b5", "_uint64b0", "_uint64b1", "_uint64b2", "_uint64b3", "_uint64b4", "_uint64b5", 
 
+    TYPE = 1
+
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._byte0 = FieldModelEnumByte(buffer, 4 + 4)
@@ -2159,7 +2161,7 @@ class FieldModelEnums(fbe.FieldModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 1
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self, fbe_verify_type=True):
@@ -3127,6 +3129,8 @@ class FieldModelEnums(fbe.FieldModel):
 class EnumsModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FieldModelEnums.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FieldModelEnums(self.buffer, 4)
@@ -3141,7 +3145,7 @@ class EnumsModel(fbe.Model):
 
     # Get the model type
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -3198,6 +3202,8 @@ class EnumsModel(fbe.Model):
 
 class FinalModelEnums(fbe.FinalModel):
     __slots__ = "_byte0", "_byte1", "_byte2", "_byte3", "_byte4", "_byte5", "_char0", "_char1", "_char2", "_char3", "_char4", "_char5", "_wchar0", "_wchar1", "_wchar2", "_wchar3", "_wchar4", "_wchar5", "_int8b0", "_int8b1", "_int8b2", "_int8b3", "_int8b4", "_int8b5", "_uint8b0", "_uint8b1", "_uint8b2", "_uint8b3", "_uint8b4", "_uint8b5", "_int16b0", "_int16b1", "_int16b2", "_int16b3", "_int16b4", "_int16b5", "_uint16b0", "_uint16b1", "_uint16b2", "_uint16b3", "_uint16b4", "_uint16b5", "_int32b0", "_int32b1", "_int32b2", "_int32b3", "_int32b4", "_int32b5", "_uint32b0", "_uint32b1", "_uint32b2", "_uint32b3", "_uint32b4", "_uint32b5", "_int64b0", "_int64b1", "_int64b2", "_int64b3", "_int64b4", "_int64b5", "_uint64b0", "_uint64b1", "_uint64b2", "_uint64b3", "_uint64b4", "_uint64b5", 
+
+    TYPE = 1
 
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -3607,7 +3613,7 @@ class FinalModelEnums(fbe.FinalModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 1
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -4780,6 +4786,8 @@ class FinalModelEnums(fbe.FinalModel):
 class EnumsFinalModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FinalModelEnums.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FinalModelEnums(self.buffer, 8)
@@ -4787,7 +4795,7 @@ class EnumsFinalModel(fbe.Model):
     # Get the model type
     @property
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -4899,7 +4907,7 @@ class Receiver(fbe.Receiver):
 
     def on_receive(self, fbe_type, buffer, offset, size):
 
-        if fbe_type == 1:
+        if fbe_type == EnumsModel.TYPE:
             # Deserialize the value from the FBE stream
             self._enums_model.attach_buffer(buffer, offset)
             assert self._enums_model.verify(), "enums.Enums validation failed!"
@@ -4974,7 +4982,7 @@ class FinalReceiver(fbe.Receiver):
 
     def on_receive(self, fbe_type, buffer, offset, size):
 
-        if fbe_type == 1:
+        if fbe_type == EnumsFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._enums_model.attach_buffer(buffer, offset)
             assert self._enums_model.verify(), "enums.Enums validation failed!"

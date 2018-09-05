@@ -46,7 +46,7 @@ public class FinalReceiver extends fbe.Receiver
     {
         switch ((int)type)
         {
-            case 1:
+            case (int)enums.fbe.EnumsFinalModel.FBETypeConst:
             {
                 // Deserialize the value from the FBE stream
                 EnumsModel.attach(buffer, offset);

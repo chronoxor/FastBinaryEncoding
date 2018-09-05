@@ -231,7 +231,8 @@ public final class FinalModelEnums extends FinalModel
     }
 
     // Get the field type
-    public long FBEType() { return 1; }
+    public static final long FBETypeConst = 1;
+    public long FBEType() { return FBETypeConst; }
 
     // Check if the struct value is valid
     @Override

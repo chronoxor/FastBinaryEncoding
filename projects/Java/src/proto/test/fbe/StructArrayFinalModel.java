@@ -24,7 +24,8 @@ public final class StructArrayFinalModel extends Model
     public StructArrayFinalModel(Buffer buffer) { super(buffer); _model = new FinalModelStructArray(getBuffer(), 8); }
 
     // Get the model type
-    public long FBEType() { return _model.FBEType(); }
+    public static final long FBETypeConst = FinalModelStructArray.FBETypeConst;
+    public long FBEType() { return FBETypeConst; }
 
     // Check if the struct value is valid
     public boolean verify()

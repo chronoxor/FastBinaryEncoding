@@ -63,7 +63,7 @@ public class Receiver extends fbe.Receiver
     {
         switch ((int)type)
         {
-            case 1:
+            case (int)protoex.fbe.OrderModel.FBETypeConst:
             {
                 // Deserialize the value from the FBE stream
                 OrderModel.attach(buffer, offset);
@@ -82,7 +82,7 @@ public class Receiver extends fbe.Receiver
                 onReceive(OrderValue);
                 return true;
             }
-            case 2:
+            case (int)protoex.fbe.BalanceModel.FBETypeConst:
             {
                 // Deserialize the value from the FBE stream
                 BalanceModel.attach(buffer, offset);
@@ -101,7 +101,7 @@ public class Receiver extends fbe.Receiver
                 onReceive(BalanceValue);
                 return true;
             }
-            case 3:
+            case (int)protoex.fbe.AccountModel.FBETypeConst:
             {
                 // Deserialize the value from the FBE stream
                 AccountModel.attach(buffer, offset);

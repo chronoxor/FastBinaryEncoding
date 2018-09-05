@@ -132,9 +132,9 @@ class TestSerialization(TestCase):
         self.assertEqual(datetime.datetime.utcfromtimestamp(struct2.f33 / 1000000000), datetime.datetime(1970, 1, 1))
         self.assertEqual(datetime.datetime.utcfromtimestamp(struct2.f34 / 1000000000), datetime.datetime(1970, 1, 1))
         self.assertGreater(datetime.datetime.utcfromtimestamp(struct2.f35 / 1000000000), datetime.datetime(2018, 1, 1))
-        self.assertEqual(struct2.f36, uuid.UUID(int=0));
-        self.assertNotEqual(struct2.f37, uuid.UUID(int=0));
-        self.assertEqual(struct2.f38, uuid.UUID("123e4567-e89b-12d3-a456-426655440000"));
+        self.assertEqual(struct2.f36, uuid.UUID(int=0))
+        self.assertNotEqual(struct2.f37, uuid.UUID(int=0))
+        self.assertEqual(struct2.f38, uuid.UUID("123e4567-e89b-12d3-a456-426655440000"))
 
         self.assertEqual(struct2.f1, struct1.f1)
         self.assertEqual(struct2.f2, struct1.f2)
@@ -241,9 +241,9 @@ class TestSerialization(TestCase):
         self.assertEqual(datetime.datetime.utcfromtimestamp(struct2.f33 / 1000000000), datetime.datetime(1970, 1, 1))
         self.assertEqual(datetime.datetime.utcfromtimestamp(struct2.f34 / 1000000000), datetime.datetime(1970, 1, 1))
         self.assertGreater(datetime.datetime.utcfromtimestamp(struct2.f35 / 1000000000), datetime.datetime(2018, 1, 1))
-        self.assertEqual(struct2.f36, uuid.UUID(int=0));
-        self.assertNotEqual(struct2.f37, uuid.UUID(int=0));
-        self.assertEqual(struct2.f38, uuid.UUID("123e4567-e89b-12d3-a456-426655440000"));
+        self.assertEqual(struct2.f36, uuid.UUID(int=0))
+        self.assertNotEqual(struct2.f37, uuid.UUID(int=0))
+        self.assertEqual(struct2.f38, uuid.UUID("123e4567-e89b-12d3-a456-426655440000"))
 
         self.assertEqual(struct2.f100, None)
         self.assertNotEqual(struct2.f101, None)
@@ -315,7 +315,7 @@ class TestSerialization(TestCase):
         self.assertEqual(struct2.f150, None)
         self.assertEqual(struct2.f151, None)
         self.assertNotEqual(struct2.f152, None)
-        self.assertEqual(struct2.f152, uuid.UUID("123e4567-e89b-12d3-a456-426655440000"));
+        self.assertEqual(struct2.f152, uuid.UUID("123e4567-e89b-12d3-a456-426655440000"))
         self.assertEqual(struct2.f153, None)
         self.assertEqual(struct2.f154, None)
         self.assertEqual(struct2.f155, None)
@@ -494,9 +494,9 @@ class TestSerialization(TestCase):
         self.assertEqual(datetime.datetime.utcfromtimestamp(struct2.f33 / 1000000000), datetime.datetime(1970, 1, 1))
         self.assertEqual(datetime.datetime.utcfromtimestamp(struct2.f34 / 1000000000), datetime.datetime(1970, 1, 1))
         self.assertGreater(datetime.datetime.utcfromtimestamp(struct2.f35 / 1000000000), datetime.datetime(2018, 1, 1))
-        self.assertEqual(struct2.f36, uuid.UUID(int=0));
-        self.assertNotEqual(struct2.f37, uuid.UUID(int=0));
-        self.assertEqual(struct2.f38, uuid.UUID("123e4567-e89b-12d3-a456-426655440000"));
+        self.assertEqual(struct2.f36, uuid.UUID(int=0))
+        self.assertNotEqual(struct2.f37, uuid.UUID(int=0))
+        self.assertEqual(struct2.f38, uuid.UUID("123e4567-e89b-12d3-a456-426655440000"))
 
         self.assertEqual(struct2.f100, None)
         self.assertNotEqual(struct2.f101, None)
@@ -568,7 +568,7 @@ class TestSerialization(TestCase):
         self.assertEqual(struct2.f150, None)
         self.assertEqual(struct2.f151, None)
         self.assertNotEqual(struct2.f152, None)
-        self.assertEqual(struct2.f152, uuid.UUID("123e4567-e89b-12d3-a456-426655440000"));
+        self.assertEqual(struct2.f152, uuid.UUID("123e4567-e89b-12d3-a456-426655440000"))
         self.assertEqual(struct2.f153, None)
         self.assertEqual(struct2.f154, None)
         self.assertEqual(struct2.f155, None)

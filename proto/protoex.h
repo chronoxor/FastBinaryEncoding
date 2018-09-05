@@ -558,7 +558,7 @@ public:
         return fbe_result;
     }
     // Get the field type
-    size_t fbe_type() const noexcept { return 1; }
+    static constexpr size_t fbe_type() noexcept { return 1; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -819,7 +819,7 @@ public:
     // Get the model size
     size_t fbe_size() const noexcept { return model.fbe_size() + model.fbe_extra(); }
     // Get the model type
-    size_t fbe_type() const noexcept { return model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, ::protoex::Order>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -926,7 +926,7 @@ public:
     // Set the field offset
     size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
     // Get the field type
-    size_t fbe_type() const noexcept { return 1; }
+    static constexpr size_t fbe_type() noexcept { return 1; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -1146,7 +1146,7 @@ public:
     OrderFinalModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), _model(this->buffer(), 8) {}
 
     // Get the model type
-    size_t fbe_type() const noexcept { return _model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, ::protoex::Order>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -1395,7 +1395,7 @@ public:
         return fbe_result;
     }
     // Get the field type
-    size_t fbe_type() const noexcept { return 2; }
+    static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, ::proto::Balance>::fbe_type(); }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -1570,7 +1570,7 @@ public:
     // Get the model size
     size_t fbe_size() const noexcept { return model.fbe_size() + model.fbe_extra(); }
     // Get the model type
-    size_t fbe_type() const noexcept { return model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, ::protoex::Balance>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -1665,7 +1665,7 @@ public:
     // Set the field offset
     size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
     // Get the field type
-    size_t fbe_type() const noexcept { return 2; }
+    static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, ::proto::Balance>::fbe_type(); }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -1783,7 +1783,7 @@ public:
     BalanceFinalModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), _model(this->buffer(), 8) {}
 
     // Get the model type
-    size_t fbe_type() const noexcept { return _model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, ::protoex::Balance>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -2089,7 +2089,7 @@ public:
         return fbe_result;
     }
     // Get the field type
-    size_t fbe_type() const noexcept { return 3; }
+    static constexpr size_t fbe_type() noexcept { return 3; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -2322,7 +2322,7 @@ public:
     // Get the model size
     size_t fbe_size() const noexcept { return model.fbe_size() + model.fbe_extra(); }
     // Get the model type
-    size_t fbe_type() const noexcept { return model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, ::protoex::Account>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -2425,7 +2425,7 @@ public:
     // Set the field offset
     size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
     // Get the field type
-    size_t fbe_type() const noexcept { return 3; }
+    static constexpr size_t fbe_type() noexcept { return 3; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -2611,7 +2611,7 @@ public:
     AccountFinalModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), _model(this->buffer(), 8) {}
 
     // Get the model type
-    size_t fbe_type() const noexcept { return _model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, ::protoex::Account>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -2795,7 +2795,7 @@ protected:
     {
         switch (type)
         {
-            case 1:
+            case FBE::protoex::OrderModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 OrderModel.attach(data, size);
@@ -2814,7 +2814,7 @@ protected:
                 onReceive(OrderValue);
                 return true;
             }
-            case 2:
+            case FBE::protoex::BalanceModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 BalanceModel.attach(data, size);
@@ -2833,7 +2833,7 @@ protected:
                 onReceive(BalanceValue);
                 return true;
             }
-            case 3:
+            case FBE::protoex::AccountModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 AccountModel.attach(data, size);
@@ -2993,7 +2993,7 @@ protected:
     {
         switch (type)
         {
-            case 1:
+            case FBE::protoex::OrderFinalModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 OrderModel.attach(data, size);
@@ -3012,7 +3012,7 @@ protected:
                 onReceive(OrderValue);
                 return true;
             }
-            case 2:
+            case FBE::protoex::BalanceFinalModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 BalanceModel.attach(data, size);
@@ -3031,7 +3031,7 @@ protected:
                 onReceive(BalanceValue);
                 return true;
             }
-            case 3:
+            case FBE::protoex::AccountFinalModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 AccountModel.attach(data, size);

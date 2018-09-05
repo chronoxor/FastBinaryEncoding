@@ -959,6 +959,8 @@ class StructSimple(object):
 class FieldModelStructSimple(fbe.FieldModel):
     __slots__ = "_uid", "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", "_f11", "_f12", "_f13", "_f14", "_f15", "_f16", "_f17", "_f18", "_f19", "_f20", "_f21", "_f22", "_f23", "_f24", "_f25", "_f26", "_f27", "_f28", "_f29", "_f30", "_f31", "_f32", "_f33", "_f34", "_f35", "_f36", "_f37", "_f38", "_f39", "_f40", "_f41", "_f42", "_f43", "_f44", 
 
+    TYPE = 110
+
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._uid = fbe.FieldModelInt32(buffer, 4 + 4)
@@ -1310,7 +1312,7 @@ class FieldModelStructSimple(fbe.FieldModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 110
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self, fbe_verify_type=True):
@@ -2005,6 +2007,8 @@ class FieldModelStructSimple(fbe.FieldModel):
 class StructSimpleModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FieldModelStructSimple.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FieldModelStructSimple(self.buffer, 4)
@@ -2019,7 +2023,7 @@ class StructSimpleModel(fbe.Model):
 
     # Get the model type
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -2076,6 +2080,8 @@ class StructSimpleModel(fbe.Model):
 
 class FinalModelStructSimple(fbe.FinalModel):
     __slots__ = "_uid", "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", "_f11", "_f12", "_f13", "_f14", "_f15", "_f16", "_f17", "_f18", "_f19", "_f20", "_f21", "_f22", "_f23", "_f24", "_f25", "_f26", "_f27", "_f28", "_f29", "_f30", "_f31", "_f32", "_f33", "_f34", "_f35", "_f36", "_f37", "_f38", "_f39", "_f40", "_f41", "_f42", "_f43", "_f44", 
+
+    TYPE = 110
 
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -2359,7 +2365,7 @@ class FinalModelStructSimple(fbe.FinalModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 110
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -3175,6 +3181,8 @@ class FinalModelStructSimple(fbe.FinalModel):
 class StructSimpleFinalModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FinalModelStructSimple.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FinalModelStructSimple(self.buffer, 8)
@@ -3182,7 +3190,7 @@ class StructSimpleFinalModel(fbe.Model):
     # Get the model type
     @property
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -3934,6 +3942,8 @@ class StructOptional(StructSimple):
 class FieldModelStructOptional(fbe.FieldModel):
     __slots__ = "_parent", "_f100", "_f101", "_f102", "_f103", "_f104", "_f105", "_f106", "_f107", "_f108", "_f109", "_f110", "_f111", "_f112", "_f113", "_f114", "_f115", "_f116", "_f117", "_f118", "_f119", "_f120", "_f121", "_f122", "_f123", "_f124", "_f125", "_f126", "_f127", "_f128", "_f129", "_f130", "_f131", "_f132", "_f133", "_f134", "_f135", "_f136", "_f137", "_f138", "_f139", "_f140", "_f141", "_f142", "_f143", "_f144", "_f145", "_f146", "_f147", "_f148", "_f149", "_f150", "_f151", "_f152", "_f153", "_f154", "_f155", "_f156", "_f157", "_f158", "_f159", "_f160", "_f161", "_f162", "_f163", "_f164", "_f165", 
 
+    TYPE = 111
+
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._parent = FieldModelStructSimple(buffer, 4 + 4)
@@ -4439,7 +4449,7 @@ class FieldModelStructOptional(fbe.FieldModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 111
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self, fbe_verify_type=True):
@@ -5418,6 +5428,8 @@ class FieldModelStructOptional(fbe.FieldModel):
 class StructOptionalModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FieldModelStructOptional.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FieldModelStructOptional(self.buffer, 4)
@@ -5432,7 +5444,7 @@ class StructOptionalModel(fbe.Model):
 
     # Get the model type
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -5489,6 +5501,8 @@ class StructOptionalModel(fbe.Model):
 
 class FinalModelStructOptional(fbe.FinalModel):
     __slots__ = "_parent", "_f100", "_f101", "_f102", "_f103", "_f104", "_f105", "_f106", "_f107", "_f108", "_f109", "_f110", "_f111", "_f112", "_f113", "_f114", "_f115", "_f116", "_f117", "_f118", "_f119", "_f120", "_f121", "_f122", "_f123", "_f124", "_f125", "_f126", "_f127", "_f128", "_f129", "_f130", "_f131", "_f132", "_f133", "_f134", "_f135", "_f136", "_f137", "_f138", "_f139", "_f140", "_f141", "_f142", "_f143", "_f144", "_f145", "_f146", "_f147", "_f148", "_f149", "_f150", "_f151", "_f152", "_f153", "_f154", "_f155", "_f156", "_f157", "_f158", "_f159", "_f160", "_f161", "_f162", "_f163", "_f164", "_f165", 
+
+    TYPE = 111
 
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -5904,7 +5918,7 @@ class FinalModelStructOptional(fbe.FinalModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 111
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -7093,6 +7107,8 @@ class FinalModelStructOptional(fbe.FinalModel):
 class StructOptionalFinalModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FinalModelStructOptional.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FinalModelStructOptional(self.buffer, 8)
@@ -7100,7 +7116,7 @@ class StructOptionalFinalModel(fbe.Model):
     # Get the model type
     @property
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -7332,6 +7348,8 @@ class StructNested(StructOptional):
 class FieldModelStructNested(fbe.FieldModel):
     __slots__ = "_parent", "_f1000", "_f1001", "_f1002", "_f1003", "_f1004", "_f1005", "_f1006", "_f1007", "_f1008", "_f1009", "_f1010", "_f1011", 
 
+    TYPE = 112
+
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._parent = FieldModelStructOptional(buffer, 4 + 4)
@@ -7459,7 +7477,7 @@ class FieldModelStructNested(fbe.FieldModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 112
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self, fbe_verify_type=True):
@@ -7736,6 +7754,8 @@ class FieldModelStructNested(fbe.FieldModel):
 class StructNestedModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FieldModelStructNested.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FieldModelStructNested(self.buffer, 4)
@@ -7750,7 +7770,7 @@ class StructNestedModel(fbe.Model):
 
     # Get the model type
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -7807,6 +7827,8 @@ class StructNestedModel(fbe.Model):
 
 class FinalModelStructNested(fbe.FinalModel):
     __slots__ = "_parent", "_f1000", "_f1001", "_f1002", "_f1003", "_f1004", "_f1005", "_f1006", "_f1007", "_f1008", "_f1009", "_f1010", "_f1011", 
+
+    TYPE = 112
 
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -7898,7 +7920,7 @@ class FinalModelStructNested(fbe.FinalModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 112
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -8169,6 +8191,8 @@ class FinalModelStructNested(fbe.FinalModel):
 class StructNestedFinalModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FinalModelStructNested.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FinalModelStructNested(self.buffer, 8)
@@ -8176,7 +8200,7 @@ class StructNestedFinalModel(fbe.Model):
     # Get the model type
     @property
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -8331,6 +8355,8 @@ class StructBytes(object):
 class FieldModelStructBytes(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", 
 
+    TYPE = 120
+
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._f1 = fbe.FieldModelBytes(buffer, 4 + 4)
@@ -8388,7 +8414,7 @@ class FieldModelStructBytes(fbe.FieldModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 120
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self, fbe_verify_type=True):
@@ -8537,6 +8563,8 @@ class FieldModelStructBytes(fbe.FieldModel):
 class StructBytesModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FieldModelStructBytes.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FieldModelStructBytes(self.buffer, 4)
@@ -8551,7 +8579,7 @@ class StructBytesModel(fbe.Model):
 
     # Get the model type
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -8609,6 +8637,8 @@ class StructBytesModel(fbe.Model):
 class FinalModelStructBytes(fbe.FinalModel):
     __slots__ = "_f1", "_f2", "_f3", 
 
+    TYPE = 120
+
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._f1 = fbe.FinalModelBytes(buffer, 0)
@@ -8639,7 +8669,7 @@ class FinalModelStructBytes(fbe.FinalModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 120
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -8741,6 +8771,8 @@ class FinalModelStructBytes(fbe.FinalModel):
 class StructBytesFinalModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FinalModelStructBytes.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FinalModelStructBytes(self.buffer, 8)
@@ -8748,7 +8780,7 @@ class StructBytesFinalModel(fbe.Model):
     # Get the model type
     @property
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -9060,6 +9092,8 @@ class StructArray(object):
 class FieldModelStructArray(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
 
+    TYPE = 125
+
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._f1 = fbe.FieldModelArray(fbe.FieldModelByte(buffer, 4 + 4), buffer, 4 + 4, 2)
@@ -9166,7 +9200,7 @@ class FieldModelStructArray(fbe.FieldModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 125
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self, fbe_verify_type=True):
@@ -9406,6 +9440,8 @@ class FieldModelStructArray(fbe.FieldModel):
 class StructArrayModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FieldModelStructArray.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FieldModelStructArray(self.buffer, 4)
@@ -9420,7 +9456,7 @@ class StructArrayModel(fbe.Model):
 
     # Get the model type
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -9477,6 +9513,8 @@ class StructArrayModel(fbe.Model):
 
 class FinalModelStructArray(fbe.FinalModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
+
+    TYPE = 125
 
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -9550,7 +9588,7 @@ class FinalModelStructArray(fbe.FinalModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 125
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -9761,6 +9799,8 @@ class FinalModelStructArray(fbe.FinalModel):
 class StructArrayFinalModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FinalModelStructArray.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FinalModelStructArray(self.buffer, 8)
@@ -9768,7 +9808,7 @@ class StructArrayFinalModel(fbe.Model):
     # Get the model type
     @property
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -10080,6 +10120,8 @@ class StructVector(object):
 class FieldModelStructVector(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
 
+    TYPE = 130
+
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._f1 = fbe.FieldModelVector(fbe.FieldModelByte(buffer, 4 + 4), buffer, 4 + 4)
@@ -10186,7 +10228,7 @@ class FieldModelStructVector(fbe.FieldModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 130
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self, fbe_verify_type=True):
@@ -10426,6 +10468,8 @@ class FieldModelStructVector(fbe.FieldModel):
 class StructVectorModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FieldModelStructVector.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FieldModelStructVector(self.buffer, 4)
@@ -10440,7 +10484,7 @@ class StructVectorModel(fbe.Model):
 
     # Get the model type
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -10497,6 +10541,8 @@ class StructVectorModel(fbe.Model):
 
 class FinalModelStructVector(fbe.FinalModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
+
+    TYPE = 130
 
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -10570,7 +10616,7 @@ class FinalModelStructVector(fbe.FinalModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 130
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -10781,6 +10827,8 @@ class FinalModelStructVector(fbe.FinalModel):
 class StructVectorFinalModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FinalModelStructVector.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FinalModelStructVector(self.buffer, 8)
@@ -10788,7 +10836,7 @@ class StructVectorFinalModel(fbe.Model):
     # Get the model type
     @property
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -11100,6 +11148,8 @@ class StructList(object):
 class FieldModelStructList(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
 
+    TYPE = 131
+
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._f1 = fbe.FieldModelVector(fbe.FieldModelByte(buffer, 4 + 4), buffer, 4 + 4)
@@ -11206,7 +11256,7 @@ class FieldModelStructList(fbe.FieldModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 131
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self, fbe_verify_type=True):
@@ -11446,6 +11496,8 @@ class FieldModelStructList(fbe.FieldModel):
 class StructListModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FieldModelStructList.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FieldModelStructList(self.buffer, 4)
@@ -11460,7 +11512,7 @@ class StructListModel(fbe.Model):
 
     # Get the model type
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -11517,6 +11569,8 @@ class StructListModel(fbe.Model):
 
 class FinalModelStructList(fbe.FinalModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
+
+    TYPE = 131
 
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -11590,7 +11644,7 @@ class FinalModelStructList(fbe.FinalModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 131
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -11801,6 +11855,8 @@ class FinalModelStructList(fbe.FinalModel):
 class StructListFinalModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FinalModelStructList.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FinalModelStructList(self.buffer, 8)
@@ -11808,7 +11864,7 @@ class StructListFinalModel(fbe.Model):
     # Get the model type
     @property
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -11996,6 +12052,8 @@ class StructSet(object):
 class FieldModelStructSet(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", 
 
+    TYPE = 132
+
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._f1 = fbe.FieldModelSet(fbe.FieldModelByte(buffer, 4 + 4), buffer, 4 + 4)
@@ -12060,7 +12118,7 @@ class FieldModelStructSet(fbe.FieldModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 132
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self, fbe_verify_type=True):
@@ -12222,6 +12280,8 @@ class FieldModelStructSet(fbe.FieldModel):
 class StructSetModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FieldModelStructSet.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FieldModelStructSet(self.buffer, 4)
@@ -12236,7 +12296,7 @@ class StructSetModel(fbe.Model):
 
     # Get the model type
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -12294,6 +12354,8 @@ class StructSetModel(fbe.Model):
 class FinalModelStructSet(fbe.FinalModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", 
 
+    TYPE = 132
+
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._f1 = fbe.FinalModelSet(fbe.FinalModelByte(buffer, 0), buffer, 0)
@@ -12330,7 +12392,7 @@ class FinalModelStructSet(fbe.FinalModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 132
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -12445,6 +12507,8 @@ class FinalModelStructSet(fbe.FinalModel):
 class StructSetFinalModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FinalModelStructSet.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FinalModelStructSet(self.buffer, 8)
@@ -12452,7 +12516,7 @@ class StructSetFinalModel(fbe.Model):
     # Get the model type
     @property
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -12794,6 +12858,8 @@ class StructMap(object):
 class FieldModelStructMap(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
 
+    TYPE = 140
+
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._f1 = fbe.FieldModelMap(fbe.FieldModelInt32(buffer, 4 + 4), fbe.FieldModelByte(buffer, 4 + 4), buffer, 4 + 4)
@@ -12900,7 +12966,7 @@ class FieldModelStructMap(fbe.FieldModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 140
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self, fbe_verify_type=True):
@@ -13140,6 +13206,8 @@ class FieldModelStructMap(fbe.FieldModel):
 class StructMapModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FieldModelStructMap.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FieldModelStructMap(self.buffer, 4)
@@ -13154,7 +13222,7 @@ class StructMapModel(fbe.Model):
 
     # Get the model type
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -13211,6 +13279,8 @@ class StructMapModel(fbe.Model):
 
 class FinalModelStructMap(fbe.FinalModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
+
+    TYPE = 140
 
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -13284,7 +13354,7 @@ class FinalModelStructMap(fbe.FinalModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 140
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -13495,6 +13565,8 @@ class FinalModelStructMap(fbe.FinalModel):
 class StructMapFinalModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FinalModelStructMap.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FinalModelStructMap(self.buffer, 8)
@@ -13502,7 +13574,7 @@ class StructMapFinalModel(fbe.Model):
     # Get the model type
     @property
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -13894,6 +13966,8 @@ class StructHash(object):
 class FieldModelStructHash(fbe.FieldModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
 
+    TYPE = 141
+
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._f1 = fbe.FieldModelMap(fbe.FieldModelString(buffer, 4 + 4), fbe.FieldModelByte(buffer, 4 + 4), buffer, 4 + 4)
@@ -14000,7 +14074,7 @@ class FieldModelStructHash(fbe.FieldModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 141
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self, fbe_verify_type=True):
@@ -14240,6 +14314,8 @@ class FieldModelStructHash(fbe.FieldModel):
 class StructHashModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FieldModelStructHash.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FieldModelStructHash(self.buffer, 4)
@@ -14254,7 +14330,7 @@ class StructHashModel(fbe.Model):
 
     # Get the model type
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -14311,6 +14387,8 @@ class StructHashModel(fbe.Model):
 
 class FinalModelStructHash(fbe.FinalModel):
     __slots__ = "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", 
+
+    TYPE = 141
 
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -14384,7 +14462,7 @@ class FinalModelStructHash(fbe.FinalModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 141
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -14595,6 +14673,8 @@ class FinalModelStructHash(fbe.FinalModel):
 class StructHashFinalModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FinalModelStructHash.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FinalModelStructHash(self.buffer, 8)
@@ -14602,7 +14682,7 @@ class StructHashFinalModel(fbe.Model):
     # Get the model type
     @property
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -14765,6 +14845,8 @@ class StructHashEx(object):
 class FieldModelStructHashEx(fbe.FieldModel):
     __slots__ = "_f1", "_f2", 
 
+    TYPE = 142
+
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._f1 = fbe.FieldModelMap(FieldModelStructSimple(buffer, 4 + 4), FieldModelStructNested(buffer, 4 + 4), buffer, 4 + 4)
@@ -14815,7 +14897,7 @@ class FieldModelStructHashEx(fbe.FieldModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 142
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self, fbe_verify_type=True):
@@ -14951,6 +15033,8 @@ class FieldModelStructHashEx(fbe.FieldModel):
 class StructHashExModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FieldModelStructHashEx.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FieldModelStructHashEx(self.buffer, 4)
@@ -14965,7 +15049,7 @@ class StructHashExModel(fbe.Model):
 
     # Get the model type
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -15023,6 +15107,8 @@ class StructHashExModel(fbe.Model):
 class FinalModelStructHashEx(fbe.FinalModel):
     __slots__ = "_f1", "_f2", 
 
+    TYPE = 142
+
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._f1 = fbe.FinalModelMap(FinalModelStructSimple(buffer, 0), FinalModelStructNested(buffer, 0), buffer, 0)
@@ -15047,7 +15133,7 @@ class FinalModelStructHashEx(fbe.FinalModel):
     # Get the field type
     @property
     def fbe_type(self):
-        return 142
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -15130,6 +15216,8 @@ class FinalModelStructHashEx(fbe.FinalModel):
 class StructHashExFinalModel(fbe.Model):
     __slots__ = "_model",
 
+    TYPE = FinalModelStructHashEx.TYPE
+
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FinalModelStructHashEx(self.buffer, 8)
@@ -15137,7 +15225,7 @@ class StructHashExFinalModel(fbe.Model):
     # Get the model type
     @property
     def fbe_type(self):
-        return self._model.fbe_type
+        return self.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -15530,7 +15618,7 @@ class Receiver(fbe.Receiver):
 
     def on_receive(self, fbe_type, buffer, offset, size):
 
-        if fbe_type == 110:
+        if fbe_type == StructSimpleModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structsimple_model.attach_buffer(buffer, offset)
             assert self._structsimple_model.verify(), "test.StructSimple validation failed!"
@@ -15546,7 +15634,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_structsimple(self._structsimple_value)
             return True
 
-        if fbe_type == 111:
+        if fbe_type == StructOptionalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structoptional_model.attach_buffer(buffer, offset)
             assert self._structoptional_model.verify(), "test.StructOptional validation failed!"
@@ -15562,7 +15650,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_structoptional(self._structoptional_value)
             return True
 
-        if fbe_type == 112:
+        if fbe_type == StructNestedModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structnested_model.attach_buffer(buffer, offset)
             assert self._structnested_model.verify(), "test.StructNested validation failed!"
@@ -15578,7 +15666,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_structnested(self._structnested_value)
             return True
 
-        if fbe_type == 120:
+        if fbe_type == StructBytesModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structbytes_model.attach_buffer(buffer, offset)
             assert self._structbytes_model.verify(), "test.StructBytes validation failed!"
@@ -15594,7 +15682,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_structbytes(self._structbytes_value)
             return True
 
-        if fbe_type == 125:
+        if fbe_type == StructArrayModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structarray_model.attach_buffer(buffer, offset)
             assert self._structarray_model.verify(), "test.StructArray validation failed!"
@@ -15610,7 +15698,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_structarray(self._structarray_value)
             return True
 
-        if fbe_type == 130:
+        if fbe_type == StructVectorModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structvector_model.attach_buffer(buffer, offset)
             assert self._structvector_model.verify(), "test.StructVector validation failed!"
@@ -15626,7 +15714,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_structvector(self._structvector_value)
             return True
 
-        if fbe_type == 131:
+        if fbe_type == StructListModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structlist_model.attach_buffer(buffer, offset)
             assert self._structlist_model.verify(), "test.StructList validation failed!"
@@ -15642,7 +15730,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_structlist(self._structlist_value)
             return True
 
-        if fbe_type == 132:
+        if fbe_type == StructSetModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structset_model.attach_buffer(buffer, offset)
             assert self._structset_model.verify(), "test.StructSet validation failed!"
@@ -15658,7 +15746,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_structset(self._structset_value)
             return True
 
-        if fbe_type == 140:
+        if fbe_type == StructMapModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structmap_model.attach_buffer(buffer, offset)
             assert self._structmap_model.verify(), "test.StructMap validation failed!"
@@ -15674,7 +15762,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_structmap(self._structmap_value)
             return True
 
-        if fbe_type == 141:
+        if fbe_type == StructHashModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structhash_model.attach_buffer(buffer, offset)
             assert self._structhash_model.verify(), "test.StructHash validation failed!"
@@ -15690,7 +15778,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_structhash(self._structhash_value)
             return True
 
-        if fbe_type == 142:
+        if fbe_type == StructHashExModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structhashex_model.attach_buffer(buffer, offset)
             assert self._structhashex_model.verify(), "test.StructHashEx validation failed!"
@@ -16049,7 +16137,7 @@ class FinalReceiver(fbe.Receiver):
 
     def on_receive(self, fbe_type, buffer, offset, size):
 
-        if fbe_type == 110:
+        if fbe_type == StructSimpleFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structsimple_model.attach_buffer(buffer, offset)
             assert self._structsimple_model.verify(), "test.StructSimple validation failed!"
@@ -16065,7 +16153,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structsimple(self._structsimple_value)
             return True
 
-        if fbe_type == 111:
+        if fbe_type == StructOptionalFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structoptional_model.attach_buffer(buffer, offset)
             assert self._structoptional_model.verify(), "test.StructOptional validation failed!"
@@ -16081,7 +16169,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structoptional(self._structoptional_value)
             return True
 
-        if fbe_type == 112:
+        if fbe_type == StructNestedFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structnested_model.attach_buffer(buffer, offset)
             assert self._structnested_model.verify(), "test.StructNested validation failed!"
@@ -16097,7 +16185,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structnested(self._structnested_value)
             return True
 
-        if fbe_type == 120:
+        if fbe_type == StructBytesFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structbytes_model.attach_buffer(buffer, offset)
             assert self._structbytes_model.verify(), "test.StructBytes validation failed!"
@@ -16113,7 +16201,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structbytes(self._structbytes_value)
             return True
 
-        if fbe_type == 125:
+        if fbe_type == StructArrayFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structarray_model.attach_buffer(buffer, offset)
             assert self._structarray_model.verify(), "test.StructArray validation failed!"
@@ -16129,7 +16217,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structarray(self._structarray_value)
             return True
 
-        if fbe_type == 130:
+        if fbe_type == StructVectorFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structvector_model.attach_buffer(buffer, offset)
             assert self._structvector_model.verify(), "test.StructVector validation failed!"
@@ -16145,7 +16233,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structvector(self._structvector_value)
             return True
 
-        if fbe_type == 131:
+        if fbe_type == StructListFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structlist_model.attach_buffer(buffer, offset)
             assert self._structlist_model.verify(), "test.StructList validation failed!"
@@ -16161,7 +16249,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structlist(self._structlist_value)
             return True
 
-        if fbe_type == 132:
+        if fbe_type == StructSetFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structset_model.attach_buffer(buffer, offset)
             assert self._structset_model.verify(), "test.StructSet validation failed!"
@@ -16177,7 +16265,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structset(self._structset_value)
             return True
 
-        if fbe_type == 140:
+        if fbe_type == StructMapFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structmap_model.attach_buffer(buffer, offset)
             assert self._structmap_model.verify(), "test.StructMap validation failed!"
@@ -16193,7 +16281,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structmap(self._structmap_value)
             return True
 
-        if fbe_type == 141:
+        if fbe_type == StructHashFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structhash_model.attach_buffer(buffer, offset)
             assert self._structhash_model.verify(), "test.StructHash validation failed!"
@@ -16209,7 +16297,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structhash(self._structhash_value)
             return True
 
-        if fbe_type == 142:
+        if fbe_type == StructHashExFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structhashex_model.attach_buffer(buffer, offset)
             assert self._structhashex_model.verify(), "test.StructHashEx validation failed!"

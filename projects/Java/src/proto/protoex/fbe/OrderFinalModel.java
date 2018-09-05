@@ -24,7 +24,8 @@ public final class OrderFinalModel extends Model
     public OrderFinalModel(Buffer buffer) { super(buffer); _model = new FinalModelOrder(getBuffer(), 8); }
 
     // Get the model type
-    public long FBEType() { return _model.FBEType(); }
+    public static final long FBETypeConst = FinalModelOrder.FBETypeConst;
+    public long FBEType() { return FBETypeConst; }
 
     // Check if the struct value is valid
     public boolean verify()

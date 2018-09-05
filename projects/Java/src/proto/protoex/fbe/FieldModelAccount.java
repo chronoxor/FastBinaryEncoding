@@ -79,7 +79,8 @@ public final class FieldModelAccount extends FieldModel
         return fbeResult;
     }
     // Get the field type
-    public long FBEType() { return 3; }
+    public static final long FBETypeConst = 3;
+    public long FBEType() { return FBETypeConst; }
 
     // Check if the struct value is valid
     @Override

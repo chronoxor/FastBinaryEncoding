@@ -24,7 +24,8 @@ public final class StructSimpleFinalModel extends Model
     public StructSimpleFinalModel(Buffer buffer) { super(buffer); _model = new FinalModelStructSimple(getBuffer(), 8); }
 
     // Get the model type
-    public long FBEType() { return _model.FBEType(); }
+    public static final long FBETypeConst = FinalModelStructSimple.FBETypeConst;
+    public long FBEType() { return FBETypeConst; }
 
     // Check if the struct value is valid
     public boolean verify()

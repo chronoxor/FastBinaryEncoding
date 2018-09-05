@@ -1577,7 +1577,8 @@ namespace test {
             }
         }
         // Get the field type
-        public long FBEType => 110;
+        public const long FBETypeConst = 110;
+        public long FBEType => FBETypeConst;
 
         // Clone the field model
         public override FieldModelValueType<StructSimple> Clone() { return new FieldModelStructSimple(_buffer, _offset); }
@@ -2313,7 +2314,8 @@ namespace test {
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
         // Get the model type
-        public long FBEType => model.FBEType;
+        public const long FBETypeConst = FieldModelStructSimple.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -2541,7 +2543,8 @@ namespace test {
         }
 
         // Get the field type
-        public long FBEType => 110;
+        public const long FBETypeConst = 110;
+        public long FBEType => FBETypeConst;
 
         // Clone the final model
         public override FinalModelValueType<StructSimple> Clone() { return new FinalModelStructSimple(_buffer, _offset); }
@@ -3342,7 +3345,8 @@ namespace test {
         public StructSimpleFinalModel(Buffer buffer) : base(buffer) { _model = new FinalModelStructSimple(Buffer, 8); }
 
         // Get the model type
-        public long FBEType => _model.FBEType;
+        public const long FBETypeConst = FinalModelStructSimple.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -4078,7 +4082,8 @@ namespace test {
             }
         }
         // Get the field type
-        public long FBEType => 111;
+        public const long FBETypeConst = 111;
+        public long FBEType => FBETypeConst;
 
         // Clone the field model
         public override FieldModelValueType<StructOptional> Clone() { return new FieldModelStructOptional(_buffer, _offset); }
@@ -5098,7 +5103,8 @@ namespace test {
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
         // Get the model type
-        public long FBEType => model.FBEType;
+        public const long FBETypeConst = FieldModelStructOptional.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -5392,7 +5398,8 @@ namespace test {
         }
 
         // Get the field type
-        public long FBEType => 111;
+        public const long FBETypeConst = 111;
+        public long FBEType => FBETypeConst;
 
         // Clone the final model
         public override FinalModelValueType<StructOptional> Clone() { return new FinalModelStructOptional(_buffer, _offset); }
@@ -6545,7 +6552,8 @@ namespace test {
         public StructOptionalFinalModel(Buffer buffer) : base(buffer) { _model = new FinalModelStructOptional(Buffer, 8); }
 
         // Get the model type
-        public long FBEType => _model.FBEType;
+        public const long FBETypeConst = FinalModelStructOptional.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -6849,7 +6857,8 @@ namespace test {
             }
         }
         // Get the field type
-        public long FBEType => 112;
+        public const long FBETypeConst = 112;
+        public long FBEType => FBETypeConst;
 
         // Clone the field model
         public override FieldModelValueType<StructNested> Clone() { return new FieldModelStructNested(_buffer, _offset); }
@@ -7167,7 +7176,8 @@ namespace test {
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
         // Get the model type
-        public long FBEType => model.FBEType;
+        public const long FBETypeConst = FieldModelStructNested.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -7299,7 +7309,8 @@ namespace test {
         }
 
         // Get the field type
-        public long FBEType => 112;
+        public const long FBETypeConst = 112;
+        public long FBEType => FBETypeConst;
 
         // Clone the final model
         public override FinalModelValueType<StructNested> Clone() { return new FinalModelStructNested(_buffer, _offset); }
@@ -7588,7 +7599,8 @@ namespace test {
         public StructNestedFinalModel(Buffer buffer) : base(buffer) { _model = new FinalModelStructNested(Buffer, 8); }
 
         // Get the model type
-        public long FBEType => _model.FBEType;
+        public const long FBETypeConst = FinalModelStructNested.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -7801,7 +7813,8 @@ namespace test {
             }
         }
         // Get the field type
-        public long FBEType => 120;
+        public const long FBETypeConst = 120;
+        public long FBEType => FBETypeConst;
 
         // Clone the field model
         public override FieldModelValueType<StructBytes> Clone() { return new FieldModelStructBytes(_buffer, _offset); }
@@ -7991,7 +8004,8 @@ namespace test {
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
         // Get the model type
-        public long FBEType => model.FBEType;
+        public const long FBETypeConst = FieldModelStructBytes.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -8093,7 +8107,8 @@ namespace test {
         }
 
         // Get the field type
-        public long FBEType => 120;
+        public const long FBETypeConst = 120;
+        public long FBEType => FBETypeConst;
 
         // Clone the final model
         public override FinalModelValueType<StructBytes> Clone() { return new FinalModelStructBytes(_buffer, _offset); }
@@ -8222,7 +8237,8 @@ namespace test {
         public StructBytesFinalModel(Buffer buffer) : base(buffer) { _model = new FinalModelStructBytes(Buffer, 8); }
 
         // Get the model type
-        public long FBEType => _model.FBEType;
+        public const long FBETypeConst = FinalModelStructBytes.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -8591,7 +8607,8 @@ namespace test {
             }
         }
         // Get the field type
-        public long FBEType => 125;
+        public const long FBETypeConst = 125;
+        public long FBEType => FBETypeConst;
 
         // Clone the field model
         public override FieldModelValueType<StructArray> Clone() { return new FieldModelStructArray(_buffer, _offset); }
@@ -8872,7 +8889,8 @@ namespace test {
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
         // Get the model type
-        public long FBEType => model.FBEType;
+        public const long FBETypeConst = FieldModelStructArray.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -8995,7 +9013,8 @@ namespace test {
         }
 
         // Get the field type
-        public long FBEType => 125;
+        public const long FBETypeConst = 125;
+        public long FBEType => FBETypeConst;
 
         // Clone the final model
         public override FinalModelValueType<StructArray> Clone() { return new FinalModelStructArray(_buffer, _offset); }
@@ -9236,7 +9255,8 @@ namespace test {
         public StructArrayFinalModel(Buffer buffer) : base(buffer) { _model = new FinalModelStructArray(Buffer, 8); }
 
         // Get the model type
-        public long FBEType => _model.FBEType;
+        public const long FBETypeConst = FinalModelStructArray.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -9605,7 +9625,8 @@ namespace test {
             }
         }
         // Get the field type
-        public long FBEType => 130;
+        public const long FBETypeConst = 130;
+        public long FBEType => FBETypeConst;
 
         // Clone the field model
         public override FieldModelValueType<StructVector> Clone() { return new FieldModelStructVector(_buffer, _offset); }
@@ -9886,7 +9907,8 @@ namespace test {
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
         // Get the model type
-        public long FBEType => model.FBEType;
+        public const long FBETypeConst = FieldModelStructVector.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -10009,7 +10031,8 @@ namespace test {
         }
 
         // Get the field type
-        public long FBEType => 130;
+        public const long FBETypeConst = 130;
+        public long FBEType => FBETypeConst;
 
         // Clone the final model
         public override FinalModelValueType<StructVector> Clone() { return new FinalModelStructVector(_buffer, _offset); }
@@ -10250,7 +10273,8 @@ namespace test {
         public StructVectorFinalModel(Buffer buffer) : base(buffer) { _model = new FinalModelStructVector(Buffer, 8); }
 
         // Get the model type
-        public long FBEType => _model.FBEType;
+        public const long FBETypeConst = FinalModelStructVector.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -10619,7 +10643,8 @@ namespace test {
             }
         }
         // Get the field type
-        public long FBEType => 131;
+        public const long FBETypeConst = 131;
+        public long FBEType => FBETypeConst;
 
         // Clone the field model
         public override FieldModelValueType<StructList> Clone() { return new FieldModelStructList(_buffer, _offset); }
@@ -10900,7 +10925,8 @@ namespace test {
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
         // Get the model type
-        public long FBEType => model.FBEType;
+        public const long FBETypeConst = FieldModelStructList.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -11023,7 +11049,8 @@ namespace test {
         }
 
         // Get the field type
-        public long FBEType => 131;
+        public const long FBETypeConst = 131;
+        public long FBEType => FBETypeConst;
 
         // Clone the final model
         public override FinalModelValueType<StructList> Clone() { return new FinalModelStructList(_buffer, _offset); }
@@ -11264,7 +11291,8 @@ namespace test {
         public StructListFinalModel(Buffer buffer) : base(buffer) { _model = new FinalModelStructList(Buffer, 8); }
 
         // Get the model type
-        public long FBEType => _model.FBEType;
+        public const long FBETypeConst = FinalModelStructList.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -11525,7 +11553,8 @@ namespace test {
             }
         }
         // Get the field type
-        public long FBEType => 132;
+        public const long FBETypeConst = 132;
+        public long FBEType => FBETypeConst;
 
         // Clone the field model
         public override FieldModelValueType<StructSet> Clone() { return new FieldModelStructSet(_buffer, _offset); }
@@ -11728,7 +11757,8 @@ namespace test {
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
         // Get the model type
-        public long FBEType => model.FBEType;
+        public const long FBETypeConst = FieldModelStructSet.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -11833,7 +11863,8 @@ namespace test {
         }
 
         // Get the field type
-        public long FBEType => 132;
+        public const long FBETypeConst = 132;
+        public long FBEType => FBETypeConst;
 
         // Clone the final model
         public override FinalModelValueType<StructSet> Clone() { return new FinalModelStructSet(_buffer, _offset); }
@@ -11978,7 +12009,8 @@ namespace test {
         public StructSetFinalModel(Buffer buffer) : base(buffer) { _model = new FinalModelStructSet(Buffer, 8); }
 
         // Get the model type
-        public long FBEType => _model.FBEType;
+        public const long FBETypeConst = FinalModelStructSet.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -12367,7 +12399,8 @@ namespace test {
             }
         }
         // Get the field type
-        public long FBEType => 140;
+        public const long FBETypeConst = 140;
+        public long FBEType => FBETypeConst;
 
         // Clone the field model
         public override FieldModelValueType<StructMap> Clone() { return new FieldModelStructMap(_buffer, _offset); }
@@ -12648,7 +12681,8 @@ namespace test {
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
         // Get the model type
-        public long FBEType => model.FBEType;
+        public const long FBETypeConst = FieldModelStructMap.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -12771,7 +12805,8 @@ namespace test {
         }
 
         // Get the field type
-        public long FBEType => 140;
+        public const long FBETypeConst = 140;
+        public long FBEType => FBETypeConst;
 
         // Clone the final model
         public override FinalModelValueType<StructMap> Clone() { return new FinalModelStructMap(_buffer, _offset); }
@@ -13012,7 +13047,8 @@ namespace test {
         public StructMapFinalModel(Buffer buffer) : base(buffer) { _model = new FinalModelStructMap(Buffer, 8); }
 
         // Get the model type
-        public long FBEType => _model.FBEType;
+        public const long FBETypeConst = FinalModelStructMap.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -13401,7 +13437,8 @@ namespace test {
             }
         }
         // Get the field type
-        public long FBEType => 141;
+        public const long FBETypeConst = 141;
+        public long FBEType => FBETypeConst;
 
         // Clone the field model
         public override FieldModelValueType<StructHash> Clone() { return new FieldModelStructHash(_buffer, _offset); }
@@ -13682,7 +13719,8 @@ namespace test {
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
         // Get the model type
-        public long FBEType => model.FBEType;
+        public const long FBETypeConst = FieldModelStructHash.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -13805,7 +13843,8 @@ namespace test {
         }
 
         // Get the field type
-        public long FBEType => 141;
+        public const long FBETypeConst = 141;
+        public long FBEType => FBETypeConst;
 
         // Clone the final model
         public override FinalModelValueType<StructHash> Clone() { return new FinalModelStructHash(_buffer, _offset); }
@@ -14046,7 +14085,8 @@ namespace test {
         public StructHashFinalModel(Buffer buffer) : base(buffer) { _model = new FinalModelStructHash(Buffer, 8); }
 
         // Get the model type
-        public long FBEType => _model.FBEType;
+        public const long FBETypeConst = FinalModelStructHash.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -14275,7 +14315,8 @@ namespace test {
             }
         }
         // Get the field type
-        public long FBEType => 142;
+        public const long FBETypeConst = 142;
+        public long FBEType => FBETypeConst;
 
         // Clone the field model
         public override FieldModelValueType<StructHashEx> Clone() { return new FieldModelStructHashEx(_buffer, _offset); }
@@ -14452,7 +14493,8 @@ namespace test {
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
         // Get the model type
-        public long FBEType => model.FBEType;
+        public const long FBETypeConst = FieldModelStructHashEx.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -14551,7 +14593,8 @@ namespace test {
         }
 
         // Get the field type
-        public long FBEType => 142;
+        public const long FBETypeConst = 142;
+        public long FBEType => FBETypeConst;
 
         // Clone the final model
         public override FinalModelValueType<StructHashEx> Clone() { return new FinalModelStructHashEx(_buffer, _offset); }
@@ -14664,7 +14707,8 @@ namespace test {
         public StructHashExFinalModel(Buffer buffer) : base(buffer) { _model = new FinalModelStructHashEx(Buffer, 8); }
 
         // Get the model type
-        public long FBEType => _model.FBEType;
+        public const long FBETypeConst = FinalModelStructHashEx.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -15086,7 +15130,7 @@ namespace test {
         {
             switch (type)
             {
-                case 110:
+                case StructSimpleModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructSimpleModel.Attach(buffer, offset);
@@ -15105,7 +15149,7 @@ namespace test {
                     OnReceive(StructSimpleValue);
                     return true;
                 }
-                case 111:
+                case StructOptionalModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructOptionalModel.Attach(buffer, offset);
@@ -15124,7 +15168,7 @@ namespace test {
                     OnReceive(StructOptionalValue);
                     return true;
                 }
-                case 112:
+                case StructNestedModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructNestedModel.Attach(buffer, offset);
@@ -15143,7 +15187,7 @@ namespace test {
                     OnReceive(StructNestedValue);
                     return true;
                 }
-                case 120:
+                case StructBytesModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructBytesModel.Attach(buffer, offset);
@@ -15162,7 +15206,7 @@ namespace test {
                     OnReceive(StructBytesValue);
                     return true;
                 }
-                case 125:
+                case StructArrayModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructArrayModel.Attach(buffer, offset);
@@ -15181,7 +15225,7 @@ namespace test {
                     OnReceive(StructArrayValue);
                     return true;
                 }
-                case 130:
+                case StructVectorModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructVectorModel.Attach(buffer, offset);
@@ -15200,7 +15244,7 @@ namespace test {
                     OnReceive(StructVectorValue);
                     return true;
                 }
-                case 131:
+                case StructListModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructListModel.Attach(buffer, offset);
@@ -15219,7 +15263,7 @@ namespace test {
                     OnReceive(StructListValue);
                     return true;
                 }
-                case 132:
+                case StructSetModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructSetModel.Attach(buffer, offset);
@@ -15238,7 +15282,7 @@ namespace test {
                     OnReceive(StructSetValue);
                     return true;
                 }
-                case 140:
+                case StructMapModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructMapModel.Attach(buffer, offset);
@@ -15257,7 +15301,7 @@ namespace test {
                     OnReceive(StructMapValue);
                     return true;
                 }
-                case 141:
+                case StructHashModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructHashModel.Attach(buffer, offset);
@@ -15276,7 +15320,7 @@ namespace test {
                     OnReceive(StructHashValue);
                     return true;
                 }
-                case 142:
+                case StructHashExModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructHashExModel.Attach(buffer, offset);
@@ -15664,7 +15708,7 @@ namespace test {
         {
             switch (type)
             {
-                case 110:
+                case StructSimpleFinalModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructSimpleModel.Attach(buffer, offset);
@@ -15683,7 +15727,7 @@ namespace test {
                     OnReceive(StructSimpleValue);
                     return true;
                 }
-                case 111:
+                case StructOptionalFinalModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructOptionalModel.Attach(buffer, offset);
@@ -15702,7 +15746,7 @@ namespace test {
                     OnReceive(StructOptionalValue);
                     return true;
                 }
-                case 112:
+                case StructNestedFinalModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructNestedModel.Attach(buffer, offset);
@@ -15721,7 +15765,7 @@ namespace test {
                     OnReceive(StructNestedValue);
                     return true;
                 }
-                case 120:
+                case StructBytesFinalModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructBytesModel.Attach(buffer, offset);
@@ -15740,7 +15784,7 @@ namespace test {
                     OnReceive(StructBytesValue);
                     return true;
                 }
-                case 125:
+                case StructArrayFinalModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructArrayModel.Attach(buffer, offset);
@@ -15759,7 +15803,7 @@ namespace test {
                     OnReceive(StructArrayValue);
                     return true;
                 }
-                case 130:
+                case StructVectorFinalModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructVectorModel.Attach(buffer, offset);
@@ -15778,7 +15822,7 @@ namespace test {
                     OnReceive(StructVectorValue);
                     return true;
                 }
-                case 131:
+                case StructListFinalModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructListModel.Attach(buffer, offset);
@@ -15797,7 +15841,7 @@ namespace test {
                     OnReceive(StructListValue);
                     return true;
                 }
-                case 132:
+                case StructSetFinalModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructSetModel.Attach(buffer, offset);
@@ -15816,7 +15860,7 @@ namespace test {
                     OnReceive(StructSetValue);
                     return true;
                 }
-                case 140:
+                case StructMapFinalModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructMapModel.Attach(buffer, offset);
@@ -15835,7 +15879,7 @@ namespace test {
                     OnReceive(StructMapValue);
                     return true;
                 }
-                case 141:
+                case StructHashFinalModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructHashModel.Attach(buffer, offset);
@@ -15854,7 +15898,7 @@ namespace test {
                     OnReceive(StructHashValue);
                     return true;
                 }
-                case 142:
+                case StructHashExFinalModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     StructHashExModel.Attach(buffer, offset);

@@ -3214,7 +3214,8 @@ namespace enums {
             }
         }
         // Get the field type
-        public long FBEType => 1;
+        public const long FBETypeConst = 1;
+        public long FBEType => FBETypeConst;
 
         // Clone the field model
         public override FieldModelValueType<Enums> Clone() { return new FieldModelEnums(_buffer, _offset); }
@@ -4223,7 +4224,8 @@ namespace enums {
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
         // Get the model type
-        public long FBEType => model.FBEType;
+        public const long FBETypeConst = FieldModelEnums.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -4514,7 +4516,8 @@ namespace enums {
         }
 
         // Get the field type
-        public long FBEType => 1;
+        public const long FBETypeConst = 1;
+        public long FBEType => FBETypeConst;
 
         // Clone the final model
         public override FinalModelValueType<Enums> Clone() { return new FinalModelEnums(_buffer, _offset); }
@@ -5651,7 +5654,8 @@ namespace enums {
         public EnumsFinalModel(Buffer buffer) : base(buffer) { _model = new FinalModelEnums(Buffer, 8); }
 
         // Get the model type
-        public long FBEType => _model.FBEType;
+        public const long FBETypeConst = FinalModelEnums.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -5793,7 +5797,7 @@ namespace enums {
         {
             switch (type)
             {
-                case 1:
+                case EnumsModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     EnumsModel.Attach(buffer, offset);
@@ -5898,7 +5902,7 @@ namespace enums {
         {
             switch (type)
             {
-                case 1:
+                case EnumsFinalModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     EnumsModel.Attach(buffer, offset);

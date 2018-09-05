@@ -940,7 +940,8 @@ namespace proto {
             }
         }
         // Get the field type
-        public long FBEType => 1;
+        public const long FBETypeConst = 1;
+        public long FBEType => FBETypeConst;
 
         // Clone the field model
         public override FieldModelValueType<Order> Clone() { return new FieldModelOrder(_buffer, _offset); }
@@ -1169,7 +1170,8 @@ namespace proto {
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
         // Get the model type
-        public long FBEType => model.FBEType;
+        public const long FBETypeConst = FieldModelOrder.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -1280,7 +1282,8 @@ namespace proto {
         }
 
         // Get the field type
-        public long FBEType => 1;
+        public const long FBETypeConst = 1;
+        public long FBEType => FBETypeConst;
 
         // Clone the final model
         public override FinalModelValueType<Order> Clone() { return new FinalModelOrder(_buffer, _offset); }
@@ -1457,7 +1460,8 @@ namespace proto {
         public OrderFinalModel(Buffer buffer) : base(buffer) { _model = new FinalModelOrder(Buffer, 8); }
 
         // Get the model type
-        public long FBEType => _model.FBEType;
+        public const long FBETypeConst = FinalModelOrder.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -1673,7 +1677,8 @@ namespace proto {
             }
         }
         // Get the field type
-        public long FBEType => 2;
+        public const long FBETypeConst = 2;
+        public long FBEType => FBETypeConst;
 
         // Clone the field model
         public override FieldModelValueType<Balance> Clone() { return new FieldModelBalance(_buffer, _offset); }
@@ -1850,7 +1855,8 @@ namespace proto {
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
         // Get the model type
-        public long FBEType => model.FBEType;
+        public const long FBETypeConst = FieldModelBalance.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -1949,7 +1955,8 @@ namespace proto {
         }
 
         // Get the field type
-        public long FBEType => 2;
+        public const long FBETypeConst = 2;
+        public long FBEType => FBETypeConst;
 
         // Clone the final model
         public override FinalModelValueType<Balance> Clone() { return new FinalModelBalance(_buffer, _offset); }
@@ -2062,7 +2069,8 @@ namespace proto {
         public BalanceFinalModel(Buffer buffer) : base(buffer) { _model = new FinalModelBalance(Buffer, 8); }
 
         // Get the model type
-        public long FBEType => _model.FBEType;
+        public const long FBETypeConst = FinalModelBalance.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -2320,7 +2328,8 @@ namespace proto {
             }
         }
         // Get the field type
-        public long FBEType => 3;
+        public const long FBETypeConst = 3;
+        public long FBEType => FBETypeConst;
 
         // Clone the field model
         public override FieldModelValueType<Account> Clone() { return new FieldModelAccount(_buffer, _offset); }
@@ -2549,7 +2558,8 @@ namespace proto {
         // Get the model size
         public long FBESize => model.FBESize + model.FBEExtra;
         // Get the model type
-        public long FBEType => model.FBEType;
+        public const long FBETypeConst = FieldModelAccount.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -2660,7 +2670,8 @@ namespace proto {
         }
 
         // Get the field type
-        public long FBEType => 3;
+        public const long FBETypeConst = 3;
+        public long FBEType => FBETypeConst;
 
         // Clone the final model
         public override FinalModelValueType<Account> Clone() { return new FinalModelAccount(_buffer, _offset); }
@@ -2837,7 +2848,8 @@ namespace proto {
         public AccountFinalModel(Buffer buffer) : base(buffer) { _model = new FinalModelAccount(Buffer, 8); }
 
         // Get the model type
-        public long FBEType => _model.FBEType;
+        public const long FBETypeConst = FinalModelAccount.FBETypeConst;
+        public long FBEType => FBETypeConst;
 
         // Check if the struct value is valid
         public bool Verify()
@@ -3033,7 +3045,7 @@ namespace proto {
         {
             switch (type)
             {
-                case 1:
+                case OrderModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     OrderModel.Attach(buffer, offset);
@@ -3052,7 +3064,7 @@ namespace proto {
                     OnReceive(OrderValue);
                     return true;
                 }
-                case 2:
+                case BalanceModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     BalanceModel.Attach(buffer, offset);
@@ -3071,7 +3083,7 @@ namespace proto {
                     OnReceive(BalanceValue);
                     return true;
                 }
-                case 3:
+                case AccountModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     AccountModel.Attach(buffer, offset);
@@ -3230,7 +3242,7 @@ namespace proto {
         {
             switch (type)
             {
-                case 1:
+                case OrderFinalModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     OrderModel.Attach(buffer, offset);
@@ -3249,7 +3261,7 @@ namespace proto {
                     OnReceive(OrderValue);
                     return true;
                 }
-                case 2:
+                case BalanceFinalModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     BalanceModel.Attach(buffer, offset);
@@ -3268,7 +3280,7 @@ namespace proto {
                     OnReceive(BalanceValue);
                     return true;
                 }
-                case 3:
+                case AccountFinalModel.FBETypeConst:
                 {
                     // Deserialize the value from the FBE stream
                     AccountModel.Attach(buffer, offset);

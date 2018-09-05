@@ -24,7 +24,8 @@ public final class StructHashExFinalModel extends Model
     public StructHashExFinalModel(Buffer buffer) { super(buffer); _model = new FinalModelStructHashEx(getBuffer(), 8); }
 
     // Get the model type
-    public long FBEType() { return _model.FBEType(); }
+    public static final long FBETypeConst = FinalModelStructHashEx.FBETypeConst;
+    public long FBEType() { return FBETypeConst; }
 
     // Check if the struct value is valid
     public boolean verify()

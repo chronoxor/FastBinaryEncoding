@@ -5011,7 +5011,11 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     Indent(-1);
     WriteLineIndent("}");
     WriteLineIndent("// Get the field type");
-    WriteLineIndent("public long FBEType => " + std::to_string(s->type) + ";");
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("public const long FBETypeConst = " + ConvertTypeFieldName(*s->base, false) + ".FBETypeConst;");
+    else
+        WriteLineIndent("public const long FBETypeConst = " + std::to_string(s->type) + ";");
+    WriteLineIndent("public long FBEType => FBETypeConst;");
 
     // Generate struct field model Clone() method
     WriteLine();
@@ -5314,7 +5318,8 @@ void GeneratorCSharp::GenerateStructModel(const std::shared_ptr<Package>& p, con
     WriteLineIndent("// Get the model size");
     WriteLineIndent("public long FBESize => model.FBESize + model.FBEExtra;");
     WriteLineIndent("// Get the model type");
-    WriteLineIndent("public long FBEType => model.FBEType;");
+    WriteLineIndent("public const long FBETypeConst = FieldModel" + *s->name + ".FBETypeConst;");
+    WriteLineIndent("public long FBEType => FBETypeConst;");
 
     // Generate struct model Verify() method
     WriteLine();
@@ -5483,7 +5488,11 @@ void GeneratorCSharp::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     WriteLineIndent("}");
     WriteLine();
     WriteLineIndent("// Get the field type");
-    WriteLineIndent("public long FBEType => " + std::to_string(s->type) + ";");
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("public const long FBETypeConst = " + ConvertTypeFieldName(*s->base, true) + ".FBETypeConst;");
+    else
+        WriteLineIndent("public const long FBETypeConst = " + std::to_string(s->type) + ";");
+    WriteLineIndent("public long FBEType => FBETypeConst;");
 
     // Generate struct final model Clone() method
     WriteLine();
@@ -5676,7 +5685,8 @@ void GeneratorCSharp::GenerateStructModelFinal(const std::shared_ptr<Package>& p
     // Generate struct model final FBE properties
     WriteLine();
     WriteLineIndent("// Get the model type");
-    WriteLineIndent("public long FBEType => _model.FBEType;");
+    WriteLineIndent("public const long FBETypeConst = FinalModel" + *s->name + ".FBETypeConst;");
+    WriteLineIndent("public long FBEType => FBETypeConst;");
 
     // Generate struct model final Verify() method
     WriteLine();
@@ -6014,7 +6024,7 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case " + std::to_string(s->type) + ":");
+            WriteLineIndent("case " + *s->name + model + ".FBETypeConst:");
             WriteLineIndent("{");
             Indent(1);
             WriteLineIndent("// Deserialize the value from the FBE stream");

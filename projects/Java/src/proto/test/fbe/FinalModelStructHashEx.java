@@ -39,7 +39,8 @@ public final class FinalModelStructHashEx extends FinalModel
     }
 
     // Get the field type
-    public long FBEType() { return 142; }
+    public static final long FBETypeConst = 142;
+    public long FBEType() { return FBETypeConst; }
 
     // Check if the struct value is valid
     @Override

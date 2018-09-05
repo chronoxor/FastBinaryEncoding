@@ -63,7 +63,8 @@ public final class FieldModelBalance extends FieldModel
         return fbeResult;
     }
     // Get the field type
-    public long FBEType() { return 2; }
+    public static final long FBETypeConst = proto.fbe.FieldModelBalance.FBETypeConst;
+    public long FBEType() { return FBETypeConst; }
 
     // Check if the struct value is valid
     @Override

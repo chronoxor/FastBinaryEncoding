@@ -1869,7 +1869,7 @@ public:
         return fbe_result;
     }
     // Get the field type
-    size_t fbe_type() const noexcept { return 1; }
+    static constexpr size_t fbe_type() noexcept { return 1; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -2942,7 +2942,7 @@ public:
     // Get the model size
     size_t fbe_size() const noexcept { return model.fbe_size() + model.fbe_extra(); }
     // Get the model type
-    size_t fbe_type() const noexcept { return model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, ::enums::Enums>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -3165,7 +3165,7 @@ public:
     // Set the field offset
     size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
     // Get the field type
-    size_t fbe_type() const noexcept { return 1; }
+    static constexpr size_t fbe_type() noexcept { return 1; }
 
     // Shift the current field offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
@@ -4371,7 +4371,7 @@ public:
     EnumsFinalModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), _model(this->buffer(), 8) {}
 
     // Get the model type
-    size_t fbe_type() const noexcept { return _model.fbe_type(); }
+    static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, ::enums::Enums>::fbe_type(); }
 
     // Check if the struct value is valid
     bool verify()
@@ -4506,7 +4506,7 @@ protected:
     {
         switch (type)
         {
-            case 1:
+            case FBE::enums::EnumsModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 EnumsModel.attach(data, size);
@@ -4610,7 +4610,7 @@ protected:
     {
         switch (type)
         {
-            case 1:
+            case FBE::enums::EnumsFinalModel<ReadBuffer>::fbe_type():
             {
                 // Deserialize the value from the FBE stream
                 EnumsModel.attach(data, size);

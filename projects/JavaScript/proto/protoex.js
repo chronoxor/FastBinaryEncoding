@@ -2169,7 +2169,7 @@ class FieldModelBalance extends fbe.FieldModel {
    * @returns {!number} Field type
    */
   get FBEType () {
-    return 2
+    return 0
   }
 
   /**
@@ -2549,7 +2549,7 @@ class FinalModelBalance extends fbe.FinalModel {
    * @returns {!number} Field type
    */
   get FBEType () {
-    return 2
+    return 0
   }
 
   /**
@@ -4144,7 +4144,7 @@ class Receiver extends fbe.Receiver {
       return true
     }
 
-    if (type === 2) {
+    if (type === 0) {
       // Deserialize the value from the FBE stream
       this._balanceModel.attachBuffer(buffer, offset)
       console.assert(this._balanceModel.verify(), 'protoex.Balance validation failed!')
@@ -4440,7 +4440,7 @@ class FinalReceiver extends fbe.Receiver {
       return true
     }
 
-    if (type === 2) {
+    if (type === 0) {
       // Deserialize the value from the FBE stream
       this._balanceModel.attachBuffer(buffer, offset)
       console.assert(this._balanceModel.verify(), 'protoex.Balance validation failed!')

@@ -71,7 +71,8 @@ public final class FieldModelStructSet extends FieldModel
         return fbeResult;
     }
     // Get the field type
-    public long FBEType() { return 132; }
+    public static final long FBETypeConst = 132;
+    public long FBEType() { return FBETypeConst; }
 
     // Check if the struct value is valid
     @Override
