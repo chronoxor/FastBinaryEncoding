@@ -41,6 +41,7 @@ Typical usage workflow is the following:
   * [Create domain model](#create-domain-model)
   * [Generate domain model](#generate-domain-model)
   * [Packages and import](#packages-and-import)
+  * [Struct types and inheritance](#struct-types-and-inheritance)
   * [Performance benchmarks](#performance-benchmarks)
     * [Benchmark 1: Serialization](#benchmark-1-serialization)
     * [Benchmark 2: Deserialization](#benchmark-2-deserialization)
@@ -228,13 +229,13 @@ Here is an example of the simple package declaration:
 package proto
 
 // Struct type is 1
-struct Struct1
+struct Struct1 (proto offset 0 + 1)
 {
     ...
 }
 
 // Struct type is 2
-struct Struct2
+struct Struct2 (proto offset 0 + 2)
 {
     ...
 }
@@ -250,22 +251,22 @@ package protoex offset 10
 // Package import
 import proto
 
-// Struct type is 10
-struct Struct10
+// Struct type is 11 (protoex offset 10 + 1)
+struct Struct11
 {
     // Struct1 is reused form the imported package
     proto.Struct1 s1;
     ...
 }
 
-// Struct type is 11
-struct Struct11
+// Struct type is 12 (protoex offset 10 + 2)
+struct Struct12
 {
     ...
 }
 ```
 
-Multiple package import is possible:
+Multiple package import is possible as well:
 ```proto
 // Package declaration. Offset is 100.
 package test offset 100
@@ -283,6 +284,56 @@ Package import is implemented using:
 * Packages in Java
 * Modules in JavaScript
 * Modules in Python
+
+# Struct types and inheritance
+Struct types are automatically increased until you provide it manually. There
+are two possibilities:
+1. Shift the current struct type offset using '=' operator. As the result all
+   new structs will have incremented type.
+2. Force set struct type offset using '==' operator. It will affect only one
+   struct.
+
+Example below demonstrates the idea:
+```proto
+// Package declaration. Offset is 0.
+package proto
+
+// Struct type is 1 (implicit declared)
+struct Struct1
+{
+    ...
+}
+
+// Struct type is 2 (implicit declared)
+struct Struct2
+{
+    ...
+}
+
+// Struct type is 10 (explicit declared, shifted to 10)
+struct Struct10 = 10
+{
+    ...
+}
+
+// Struct type is 11 (implicit declared)
+struct Struct11
+{
+    ...
+}
+
+// Struct type is 100
+struct Struct100 == 100 (explicit declared, forced to 100)
+{
+    ...
+}
+
+// Struct type is 12
+struct Struct12 (implicit declared)
+{
+    ...
+}
+```
 
 # Performance benchmarks
 All benchmarks use the same [domain model](#create-domain-model) to create a
