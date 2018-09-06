@@ -43,7 +43,7 @@ Typical usage workflow is the following:
   * [Packages and import](#packages-and-import)
   * [Struct types](#struct-types)
   * [Struct inheritance](#struct-inheritance)
-  * [Versioning](#versioning)
+  * [Versioning solution](#versioning-solution)
   * [Performance benchmarks](#performance-benchmarks)
     * [Benchmark 1: Serialization](#benchmark-1-serialization)
     * [Benchmark 2: Deserialization](#benchmark-2-deserialization)
@@ -59,7 +59,7 @@ Typical usage workflow is the following:
 * Serialization/Deserialization to binary format
 * Serialization/Deserialization to JSON
 * Sender/Receiver interfaces for communication protocols
-* [Versioning solution](#versioning)
+* [Versioning solution](#versioning-solution)
 * [Excellent performance](#performance-benchmarks)
 
 # Requirements
@@ -381,7 +381,7 @@ struct StructChild = base : proto.StructBase
 }
 ```
 
-# Versioning
+# Versioning solution
 Versioning is simple with Fast Binary Encoding.
 
 Assume you have an original protocol:
