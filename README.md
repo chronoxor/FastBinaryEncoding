@@ -219,8 +219,8 @@ Options:
 ```
 
 # Packages and import
-Package is declared with a name and optional offset. Offset will be add to the
-incremented structure type if they did not manually provided.
+Packages are declared with package name and structs offset (optional). Offset
+will be add to incremented structure type if is was not provided explicit.
 
 Here is an example of the simple package declaration:
 ```proto
@@ -243,7 +243,7 @@ struct Struct2
 One package can be imported into another. As the results all enums, flags and
 structs from the imported package are visible:
 ```proto
-// Package declaration. Offset is 10
+// Package declaration. Offset is 10.
 package protoex offset 10
 
 // Package imports
@@ -254,8 +254,6 @@ struct Struct10
 {
     // Struct1 form the imported package
     proto.Struct1 s1;
-    // Struct2 form the imported package
-    proto.Struct2 s2;
     ...
 }
 
