@@ -40,6 +40,7 @@ Typical usage workflow is the following:
   * [How to build?](#how-to-build)
   * [Create domain model](#create-domain-model)
   * [Generate domain model](#generate-domain-model)
+  * [Packages and import](#packages-and-import)
   * [Performance benchmarks](#performance-benchmarks)
     * [Benchmark 1: Serialization](#benchmark-1-serialization)
     * [Benchmark 2: Deserialization](#benchmark-2-deserialization)
@@ -217,8 +218,55 @@ Options:
   --json                Generate JSON protocol code
 ```
 
-# Performance benchmarks
+# Packages and import
+Package is declared with a name and optional offset. Offset will be add to the
+incremented structure type if they did not manually provided.
 
+Here is an example of the simple package declaration:
+```proto
+// Package declaration. Offset is 0.
+package proto
+
+// Struct type is 1
+struct Struct1
+{
+    ...
+}
+
+// Struct type is 2
+struct Struct2
+{
+    ...
+}
+```
+
+One package can be imported into another. As the results all enums, flags and
+structs from the imported package are visible:
+```proto
+// Package declaration. Offset is 10
+package protoex offset 10
+
+// Package imports
+import proto
+
+// Struct type is 10
+struct Struct10
+{
+    // Struct1 form the imported package
+    proto.Struct1 s1;
+    // Struct2 form the imported package
+    proto.Struct2 s2;
+    ...
+}
+
+// Struct type is 11
+struct Struct11
+{
+    ...
+}
+```
+
+# Performance benchmarks
 All benchmarks use the same [domain model](#create-domain-model) to create a
 single account with three orders:
 ```c++
@@ -236,7 +284,6 @@ account.orders.emplace_back(3, "EURUSD", OrderSide::buy, OrderType::stop, 1.5, 1
 * [Python benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Python/benchmarks) results were taken using [timeit module](https://docs.python.org/3/library/timeit.html)
 
 ## Benchmark 1: Serialization
-
 Serialization benchmark C++ code:
 ```c++
 BENCHMARK_FIXTURE(SerializationFixture, "Serialize")
@@ -273,7 +320,6 @@ Serialization benchmark results:
 | Python Win64 (JSON)      |                  324 |                     61 737 |                  16 198 |
 
 ## Benchmark 2: Deserialization
-
 Deserialization benchmark C++ code:
 ```c++
 BENCHMARK_FIXTURE(DeserializationFixture, "Deserialize")
@@ -307,7 +353,6 @@ Deserialization benchmark results:
 | Python Win64 (JSON)      |                  324 |                       48 859 |                    20 467 |
 
 ## Benchmark 3: Verify
-
 Verify benchmark C++ code:
 ```c++
 BENCHMARK_FIXTURE(VerifyFixture, "Verify")
