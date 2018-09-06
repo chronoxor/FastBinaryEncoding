@@ -51,10 +51,11 @@ Typical usage workflow is the following:
 * Supported base types (byte, bool, char, wchar, int8, int16, int32, int64, float, double)
 * Supported complex types (bytes, decimal, string, timestamp, uuid)
 * Supported collections (array, vector, list, map, hash)
-* [Fast binary encoding format](#performance-benchmarks)
+* Fast binary encoding format
 * Serialization/Deserialization to binary format
 * Serialization/Deserialization to JSON
 * Sender/Receiver interfaces for communication protocols
+* [Excellent performance](#performance-benchmarks)
 
 # Requirements
 * Linux (gcc g++ cmake doxygen graphviz binutils-dev uuid-dev flex bison)
