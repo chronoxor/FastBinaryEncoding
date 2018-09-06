@@ -240,8 +240,8 @@ struct Struct2
 }
 ```
 
-One package can be imported into another. As the results all enums, flags and
-structs from the imported package are visible:
+One package can be imported into another and all enums, flags and structs can
+be reused in the current package:
 ```proto
 // Package declaration. Offset is 10.
 package protoex offset 10
