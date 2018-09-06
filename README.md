@@ -43,6 +43,7 @@ Typical usage workflow is the following:
   * [Packages and import](#packages-and-import)
   * [Struct types](#struct-types)
   * [Struct inheritance](#struct-inheritance)
+  * [Versioning](#versioning)
   * [Performance benchmarks](#performance-benchmarks)
     * [Benchmark 1: Serialization](#benchmark-1-serialization)
     * [Benchmark 2: Deserialization](#benchmark-2-deserialization)
@@ -58,6 +59,7 @@ Typical usage workflow is the following:
 * Serialization/Deserialization to binary format
 * Serialization/Deserialization to JSON
 * Sender/Receiver interfaces for communication protocols
+* [Versioning solution](#versioning)
 * [Excellent performance](#performance-benchmarks)
 
 # Requirements
@@ -337,8 +339,8 @@ struct Struct12 (implicit declared)
 ```
 
 # Struct inheritance
-Structs allows to be inherited from another struct. In this case all fields
-from the base struct will be present in a child one.
+Structs can be inherited from another struct. In this case all fields from the
+base struct will be present in a child one.
 ```proto
 package proto
 
@@ -376,6 +378,92 @@ struct StructChild = base : proto.StructBase
     // int8 f2 - will be inherited from proto.StructBase
     int16 f3;
     int32 f4;
+}
+```
+
+# Versioning
+Versioning is simple with Fast Binary Encoding.
+
+Assume you have an original protocol:
+```proto
+package proto
+
+enum MyEnum
+{
+    value1;
+    value2;
+}
+
+flags MyFlags
+{
+    none = 0x00;
+    flag1 = 0x01;
+    flag2 = 0x02;
+    flag3 = 0x04;
+}
+
+struct MyStruct
+{
+    bool field1;
+    byte field2;
+    char field3;
+}
+```
+
+You need to extend it with new enum, flag and struct values. Just add required
+values to the end of the corresponding declarations:
+```proto
+package proto
+
+enum MyEnum
+{
+    value1;
+    value2;
+    value3; // New value
+    value4; // New value
+}
+
+flags MyFlags
+{
+    none = 0x00;
+    flag1 = 0x01;
+    flag2 = 0x02;
+    flag3 = 0x04;
+    flag4 = 0x08; // New value
+    flag5 = 0x10; // New value
+}
+
+struct MyStruct
+{
+    bool field1;
+    byte field2;
+    char field3;
+    int32 field4; // New field (default is 0)
+    int64 field5 = 123456; // New field (default is 123456)
+}
+```
+
+Now you can serialize and deserialize structs in different combinations:
+* Serialize old, deserialize old - nothing will be lost (best case);
+* Serialize old, deserialize new - all old fields will be deserialized, all new
+  fields will be initialized with 0 or default values according to definition;
+* Serialize new, deserialize old - all old fields will be deserialized, all new
+  fields will be discarded;
+* Serialize new, deserialize new - nothing will be lost (best case);
+
+### Versioning of the third-party protocol
+If you are not able to modify some third-party protocol, you can still have a
+solution of extending it. Just create a new protocol and import third-party
+one into it. Then extend structs with inheritance:
+```proto
+package protoex
+
+import proto
+
+struct MyStructEx = base : proto.MyStruct
+{
+    int32 field4; // New field (default is 0)
+    int64 field5 = 123456; // New field (default is 123456)
 }
 ```
 
