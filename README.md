@@ -241,18 +241,19 @@ struct Struct2
 ```
 
 One package can be imported into another and all enums, flags and structs can
-be reused in the current package:
+be reused in the current package. Package offset is used here to avoid structs
+types intersection:
 ```proto
 // Package declaration. Offset is 10.
 package protoex offset 10
 
-// Package imports
+// Package import
 import proto
 
 // Struct type is 10
 struct Struct10
 {
-    // Struct1 form the imported package
+    // Struct1 is reused form the imported package
     proto.Struct1 s1;
     ...
 }
@@ -263,6 +264,25 @@ struct Struct11
     ...
 }
 ```
+
+Multiple package import is possible:
+```proto
+// Package declaration. Offset is 100.
+package test offset 100
+
+// Package import
+import proto
+import protoex
+
+...
+```
+
+Package import is implemented using:
+* #include "..." directive in
+* Namespaces in C#
+* Packages in Java
+* Modules in JavaScript
+* Modules in Python
 
 # Performance benchmarks
 All benchmarks use the same [domain model](#create-domain-model) to create a
