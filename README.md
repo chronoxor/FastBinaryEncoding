@@ -41,7 +41,8 @@ Typical usage workflow is the following:
   * [Create domain model](#create-domain-model)
   * [Generate domain model](#generate-domain-model)
   * [Packages and import](#packages-and-import)
-  * [Struct types and inheritance](#struct-types-and-inheritance)
+  * [Struct types](#struct-types)
+  * [Struct inheritance](#struct-inheritance)
   * [Performance benchmarks](#performance-benchmarks)
     * [Benchmark 1: Serialization](#benchmark-1-serialization)
     * [Benchmark 2: Deserialization](#benchmark-2-deserialization)
@@ -285,7 +286,7 @@ Package import is implemented using:
 * Modules in JavaScript
 * Modules in Python
 
-# Struct types and inheritance
+# Struct types
 Struct types are automatically increased until you provide it manually. There
 are two possibilities:
 1. Shift the current struct type offset using '=' operator. As the result all
@@ -332,6 +333,48 @@ struct Struct100 == 100 (explicit declared, forced to 100)
 struct Struct12 (implicit declared)
 {
     ...
+}
+```
+
+# Struct inheritance
+Structs allows to be inherited from another struct. In this case all fields
+from the base struct will be present in a child one.
+```proto
+package proto
+
+// Struct type is 1
+struct StructBase
+{
+    bool f1;
+    int8 f2;
+}
+
+// Struct type is 2
+struct StructChild : Struct1
+{
+    // bool f1 - will be inherited from StructBase
+    // int8 f2 - will be inherited from StructBase
+    int16 f3;
+    int32 f4;
+}
+```
+
+Also it is possible to reuse the base struct type in a child one. It is useful
+when you extend the struct from third-party imported package:
+```proto
+// Package declaration. Offset is 10.
+package protoex offset 10
+
+// Package import
+import proto
+
+// Struct type is 1
+struct StructChild = base : proto.StructBase
+{
+    // bool f1 - will be inherited from proto.StructBase
+    // int8 f2 - will be inherited from proto.StructBase
+    int16 f3;
+    int32 f4;
 }
 ```
 
