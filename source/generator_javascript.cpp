@@ -9540,9 +9540,23 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     WriteLineIndent(" * @this {!FieldModel" + *s->name + "}");
     WriteLineIndent(" * @returns {!number} Field type");
     WriteLineIndent(" */");
+    WriteLineIndent("get FBEType () {");
+    Indent(1);
+    WriteLineIndent("return FieldModel" + *s->name + ".FBEType");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Get the field type (static)");
+    WriteLineIndent(" * @this {!FieldModel" + *s->name + "}");
+    WriteLineIndent(" * @returns {!number} Field type");
+    WriteLineIndent(" */");
     WriteLineIndent("static get FBEType () {");
     Indent(1);
-    WriteLineIndent("return " + std::to_string(s->type));
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("return " + ConvertTypeFieldName(*s->base, false) + ".FBEType");
+    else
+        WriteLineIndent("return " + std::to_string(s->type));
     Indent(-1);
     WriteLineIndent("}");
 
@@ -9913,6 +9927,17 @@ void GeneratorJavaScript::GenerateStructModel(const std::shared_ptr<StructType>&
     WriteLineIndent(" * @this {!" + *s->name + "Model}");
     WriteLineIndent(" * @returns {!number} Model type");
     WriteLineIndent(" */");
+    WriteLineIndent("get FBEType () {");
+    Indent(1);
+    WriteLineIndent("return " + *s->name + "Model.FBEType");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Get the model type (static)");
+    WriteLineIndent(" * @this {!" + *s->name + "Model}");
+    WriteLineIndent(" * @returns {!number} Model type");
+    WriteLineIndent(" */");
     WriteLineIndent("static get FBEType () {");
     Indent(1);
     WriteLineIndent("return FieldModel" + *s->name + ".FBEType");
@@ -10127,9 +10152,23 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
     WriteLineIndent(" * @this {!FinalModel" + *s->name + "}");
     WriteLineIndent(" * @returns {!number} Field type");
     WriteLineIndent(" */");
+    WriteLineIndent("get FBEType () {");
+    Indent(1);
+    WriteLineIndent("return FinalModel" + *s->name + ".FBEType");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Get the field type (static)");
+    WriteLineIndent(" * @this {!FinalModel" + *s->name + "}");
+    WriteLineIndent(" * @returns {!number} Field type");
+    WriteLineIndent(" */");
     WriteLineIndent("static get FBEType () {");
     Indent(1);
-    WriteLineIndent("return " + std::to_string(s->type));
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("return " + ConvertTypeFieldName(*s->base, true) + ".FBEType");
+    else
+        WriteLineIndent("return " + std::to_string(s->type));
     Indent(-1);
     WriteLineIndent("}");
 
@@ -10346,6 +10385,17 @@ void GeneratorJavaScript::GenerateStructModelFinal(const std::shared_ptr<StructT
     WriteLine();
     WriteLineIndent("/**");
     WriteLineIndent(" * Get the model type");
+    WriteLineIndent(" * @this {!" + *s->name + "FinalModel}");
+    WriteLineIndent(" * @returns {!number} Model type");
+    WriteLineIndent(" */");
+    WriteLineIndent("get FBEType () {");
+    Indent(1);
+    WriteLineIndent("return " + *s->name + "FinalModel.FBEType");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Get the model type (static)");
     WriteLineIndent(" * @this {!" + *s->name + "FinalModel}");
     WriteLineIndent(" * @returns {!number} Model type");
     WriteLineIndent(" */");
@@ -10754,9 +10804,11 @@ void GeneratorJavaScript::GenerateReceiver(const std::shared_ptr<Package>& p, bo
     Indent(1);
     if (p->body)
     {
+        WriteLineIndent("switch (type) {");
+        Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("if (type === " + *s->name + model + ".FBEType) {");
+            WriteLineIndent("case " + *s->name + model + ".FBEType: {");
             Indent(1);
             WriteLineIndent("// Deserialize the value from the FBE stream");
             WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model.attachBuffer(buffer, offset)");
@@ -10776,8 +10828,9 @@ void GeneratorJavaScript::GenerateReceiver(const std::shared_ptr<Package>& p, bo
             WriteLineIndent("return true");
             Indent(-1);
             WriteLineIndent("}");
-            WriteLine();
         }
+        Indent(-1);
+        WriteLineIndent("}");
     }
     if (p->import)
     {

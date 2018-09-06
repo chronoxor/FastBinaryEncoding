@@ -1067,6 +1067,15 @@ class FieldModelOrder extends fbe.FieldModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FieldModelOrder.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FieldModelOrder}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 1
   }
 
@@ -1420,7 +1429,16 @@ class OrderModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this.model.FBEType
+    return OrderModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!OrderModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FieldModelOrder.FBEType
   }
 
   /**
@@ -1617,6 +1635,15 @@ class FinalModelOrder extends fbe.FinalModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FinalModelOrder.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FinalModelOrder}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 1
   }
 
@@ -1881,7 +1908,16 @@ class OrderFinalModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this._model.FBEType
+    return OrderFinalModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!OrderFinalModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FinalModelOrder.FBEType
   }
 
   /**
@@ -2169,7 +2205,16 @@ class FieldModelBalance extends fbe.FieldModel {
    * @returns {!number} Field type
    */
   get FBEType () {
-    return 0
+    return FieldModelBalance.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FieldModelBalance}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
+    return proto.FieldModelBalance.FBEType
   }
 
   /**
@@ -2412,7 +2457,16 @@ class BalanceModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this.model.FBEType
+    return BalanceModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!BalanceModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FieldModelBalance.FBEType
   }
 
   /**
@@ -2549,7 +2603,16 @@ class FinalModelBalance extends fbe.FinalModel {
    * @returns {!number} Field type
    */
   get FBEType () {
-    return 0
+    return FinalModelBalance.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FinalModelBalance}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
+    return proto.FinalModelBalance.FBEType
   }
 
   /**
@@ -2692,7 +2755,16 @@ class BalanceFinalModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this._model.FBEType
+    return BalanceFinalModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!BalanceFinalModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FinalModelBalance.FBEType
   }
 
   /**
@@ -3093,6 +3165,15 @@ class FieldModelAccount extends fbe.FieldModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FieldModelAccount.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FieldModelAccount}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 3
   }
 
@@ -3410,7 +3491,16 @@ class AccountModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this.model.FBEType
+    return AccountModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!AccountModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FieldModelAccount.FBEType
   }
 
   /**
@@ -3587,6 +3677,15 @@ class FinalModelAccount extends fbe.FinalModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FinalModelAccount.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FinalModelAccount}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 3
   }
 
@@ -3810,7 +3909,16 @@ class AccountFinalModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this._model.FBEType
+    return AccountFinalModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!AccountFinalModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FinalModelAccount.FBEType
   }
 
   /**
@@ -4127,57 +4235,56 @@ class Receiver extends fbe.Receiver {
    * @returns {!boolean} Success flag
    */
   onReceive (type, buffer, offset, size) {
-    if (type === 1) {
-      // Deserialize the value from the FBE stream
-      this._orderModel.attachBuffer(buffer, offset)
-      console.assert(this._orderModel.verify(), 'protoex.Order validation failed!')
-      let deserialized = this._orderModel.deserialize(this._orderValue)
-      console.assert((deserialized.size > 0), 'protoex.Order deserialization failed!')
+    switch (type) {
+      case OrderModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._orderModel.attachBuffer(buffer, offset)
+        console.assert(this._orderModel.verify(), 'protoex.Order validation failed!')
+        let deserialized = this._orderModel.deserialize(this._orderValue)
+        console.assert((deserialized.size > 0), 'protoex.Order deserialization failed!')
 
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._orderValue.toString())
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._orderValue.toString())
+        }
+
+        // Call receive handler with deserialized value
+        this.onReceive_order(this._orderValue)
+        return true
       }
+      case BalanceModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._balanceModel.attachBuffer(buffer, offset)
+        console.assert(this._balanceModel.verify(), 'protoex.Balance validation failed!')
+        let deserialized = this._balanceModel.deserialize(this._balanceValue)
+        console.assert((deserialized.size > 0), 'protoex.Balance deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_order(this._orderValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._balanceValue.toString())
+        }
 
-    if (type === 0) {
-      // Deserialize the value from the FBE stream
-      this._balanceModel.attachBuffer(buffer, offset)
-      console.assert(this._balanceModel.verify(), 'protoex.Balance validation failed!')
-      let deserialized = this._balanceModel.deserialize(this._balanceValue)
-      console.assert((deserialized.size > 0), 'protoex.Balance deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._balanceValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_balance(this._balanceValue)
+        return true
       }
+      case AccountModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._accountModel.attachBuffer(buffer, offset)
+        console.assert(this._accountModel.verify(), 'protoex.Account validation failed!')
+        let deserialized = this._accountModel.deserialize(this._accountValue)
+        console.assert((deserialized.size > 0), 'protoex.Account deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_balance(this._balanceValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._accountValue.toString())
+        }
 
-    if (type === 3) {
-      // Deserialize the value from the FBE stream
-      this._accountModel.attachBuffer(buffer, offset)
-      console.assert(this._accountModel.verify(), 'protoex.Account validation failed!')
-      let deserialized = this._accountModel.deserialize(this._accountValue)
-      console.assert((deserialized.size > 0), 'protoex.Account deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._accountValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_account(this._accountValue)
+        return true
       }
-
-      // Call receive handler with deserialized value
-      this.onReceive_account(this._accountValue)
-      return true
     }
-
     // noinspection RedundantIfStatementJS
     if ((this.protoReceiver != null) && this.protoReceiver.onReceive(type, buffer, offset, size)) {
       return true
@@ -4423,57 +4530,56 @@ class FinalReceiver extends fbe.Receiver {
    * @returns {!boolean} Success flag
    */
   onReceive (type, buffer, offset, size) {
-    if (type === 1) {
-      // Deserialize the value from the FBE stream
-      this._orderModel.attachBuffer(buffer, offset)
-      console.assert(this._orderModel.verify(), 'protoex.Order validation failed!')
-      let deserialized = this._orderModel.deserialize(this._orderValue)
-      console.assert((deserialized.size > 0), 'protoex.Order deserialization failed!')
+    switch (type) {
+      case OrderFinalModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._orderModel.attachBuffer(buffer, offset)
+        console.assert(this._orderModel.verify(), 'protoex.Order validation failed!')
+        let deserialized = this._orderModel.deserialize(this._orderValue)
+        console.assert((deserialized.size > 0), 'protoex.Order deserialization failed!')
 
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._orderValue.toString())
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._orderValue.toString())
+        }
+
+        // Call receive handler with deserialized value
+        this.onReceive_order(this._orderValue)
+        return true
       }
+      case BalanceFinalModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._balanceModel.attachBuffer(buffer, offset)
+        console.assert(this._balanceModel.verify(), 'protoex.Balance validation failed!')
+        let deserialized = this._balanceModel.deserialize(this._balanceValue)
+        console.assert((deserialized.size > 0), 'protoex.Balance deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_order(this._orderValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._balanceValue.toString())
+        }
 
-    if (type === 0) {
-      // Deserialize the value from the FBE stream
-      this._balanceModel.attachBuffer(buffer, offset)
-      console.assert(this._balanceModel.verify(), 'protoex.Balance validation failed!')
-      let deserialized = this._balanceModel.deserialize(this._balanceValue)
-      console.assert((deserialized.size > 0), 'protoex.Balance deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._balanceValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_balance(this._balanceValue)
+        return true
       }
+      case AccountFinalModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._accountModel.attachBuffer(buffer, offset)
+        console.assert(this._accountModel.verify(), 'protoex.Account validation failed!')
+        let deserialized = this._accountModel.deserialize(this._accountValue)
+        console.assert((deserialized.size > 0), 'protoex.Account deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_balance(this._balanceValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._accountValue.toString())
+        }
 
-    if (type === 3) {
-      // Deserialize the value from the FBE stream
-      this._accountModel.attachBuffer(buffer, offset)
-      console.assert(this._accountModel.verify(), 'protoex.Account validation failed!')
-      let deserialized = this._accountModel.deserialize(this._accountValue)
-      console.assert((deserialized.size > 0), 'protoex.Account deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._accountValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_account(this._accountValue)
+        return true
       }
-
-      // Call receive handler with deserialized value
-      this.onReceive_account(this._accountValue)
-      return true
     }
-
     // noinspection RedundantIfStatementJS
     if ((this.protoReceiver != null) && this.protoReceiver.onReceive(type, buffer, offset, size)) {
       return true

@@ -3917,6 +3917,15 @@ class FieldModelEnums extends fbe.FieldModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FieldModelEnums.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FieldModelEnums}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 1
   }
 
@@ -5314,7 +5323,16 @@ class EnumsModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this.model.FBEType
+    return EnumsModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!EnumsModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FieldModelEnums.FBEType
   }
 
   /**
@@ -6091,6 +6109,15 @@ class FinalModelEnums extends fbe.FinalModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FinalModelEnums.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FinalModelEnums}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 1
   }
 
@@ -7515,7 +7542,16 @@ class EnumsFinalModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this._model.FBEType
+    return EnumsFinalModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!EnumsFinalModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FinalModelEnums.FBEType
   }
 
   /**
@@ -7709,23 +7745,24 @@ class Receiver extends fbe.Receiver {
    * @returns {!boolean} Success flag
    */
   onReceive (type, buffer, offset, size) {
-    if (type === 1) {
-      // Deserialize the value from the FBE stream
-      this._enumsModel.attachBuffer(buffer, offset)
-      console.assert(this._enumsModel.verify(), 'enums.Enums validation failed!')
-      let deserialized = this._enumsModel.deserialize(this._enumsValue)
-      console.assert((deserialized.size > 0), 'enums.Enums deserialization failed!')
+    switch (type) {
+      case EnumsModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._enumsModel.attachBuffer(buffer, offset)
+        console.assert(this._enumsModel.verify(), 'enums.Enums validation failed!')
+        let deserialized = this._enumsModel.deserialize(this._enumsValue)
+        console.assert((deserialized.size > 0), 'enums.Enums deserialization failed!')
 
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._enumsValue.toString())
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._enumsValue.toString())
+        }
+
+        // Call receive handler with deserialized value
+        this.onReceive_enums(this._enumsValue)
+        return true
       }
-
-      // Call receive handler with deserialized value
-      this.onReceive_enums(this._enumsValue)
-      return true
     }
-
     return false
   }
 }
@@ -7843,23 +7880,24 @@ class FinalReceiver extends fbe.Receiver {
    * @returns {!boolean} Success flag
    */
   onReceive (type, buffer, offset, size) {
-    if (type === 1) {
-      // Deserialize the value from the FBE stream
-      this._enumsModel.attachBuffer(buffer, offset)
-      console.assert(this._enumsModel.verify(), 'enums.Enums validation failed!')
-      let deserialized = this._enumsModel.deserialize(this._enumsValue)
-      console.assert((deserialized.size > 0), 'enums.Enums deserialization failed!')
+    switch (type) {
+      case EnumsFinalModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._enumsModel.attachBuffer(buffer, offset)
+        console.assert(this._enumsModel.verify(), 'enums.Enums validation failed!')
+        let deserialized = this._enumsModel.deserialize(this._enumsValue)
+        console.assert((deserialized.size > 0), 'enums.Enums deserialization failed!')
 
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._enumsValue.toString())
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._enumsValue.toString())
+        }
+
+        // Call receive handler with deserialized value
+        this.onReceive_enums(this._enumsValue)
+        return true
       }
-
-      // Call receive handler with deserialized value
-      this.onReceive_enums(this._enumsValue)
-      return true
     }
-
     return false
   }
 }

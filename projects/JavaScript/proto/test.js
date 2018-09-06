@@ -2186,6 +2186,15 @@ class FieldModelStructSimple extends fbe.FieldModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FieldModelStructSimple.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FieldModelStructSimple}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 110
   }
 
@@ -3205,7 +3214,16 @@ class StructSimpleModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this.model.FBEType
+    return StructSimpleModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructSimpleModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FieldModelStructSimple.FBEType
   }
 
   /**
@@ -3772,6 +3790,15 @@ class FinalModelStructSimple extends fbe.FinalModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FinalModelStructSimple.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FinalModelStructSimple}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 110
   }
 
@@ -4776,7 +4803,16 @@ class StructSimpleFinalModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this._model.FBEType
+    return StructSimpleFinalModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructSimpleFinalModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FinalModelStructSimple.FBEType
   }
 
   /**
@@ -6664,6 +6700,15 @@ class FieldModelStructOptional extends fbe.FieldModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FieldModelStructOptional.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FieldModelStructOptional}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 111
   }
 
@@ -8077,7 +8122,16 @@ class StructOptionalModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this.model.FBEType
+    return StructOptionalModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructOptionalModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FieldModelStructOptional.FBEType
   }
 
   /**
@@ -8864,6 +8918,15 @@ class FinalModelStructOptional extends fbe.FinalModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FinalModelStructOptional.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FinalModelStructOptional}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 111
   }
 
@@ -10307,7 +10370,16 @@ class StructOptionalFinalModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this._model.FBEType
+    return StructOptionalFinalModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructOptionalFinalModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FinalModelStructOptional.FBEType
   }
 
   /**
@@ -10839,6 +10911,15 @@ class FieldModelStructNested extends fbe.FieldModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FieldModelStructNested.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FieldModelStructNested}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 112
   }
 
@@ -11280,7 +11361,16 @@ class StructNestedModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this.model.FBEType
+    return StructNestedModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructNestedModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FieldModelStructNested.FBEType
   }
 
   /**
@@ -11527,6 +11617,15 @@ class FinalModelStructNested extends fbe.FinalModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FinalModelStructNested.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FinalModelStructNested}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 112
   }
 
@@ -11890,7 +11989,16 @@ class StructNestedFinalModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this._model.FBEType
+    return StructNestedFinalModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructNestedFinalModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FinalModelStructNested.FBEType
   }
 
   /**
@@ -12230,6 +12338,15 @@ class FieldModelStructBytes extends fbe.FieldModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FieldModelStructBytes.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FieldModelStructBytes}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 120
   }
 
@@ -12493,7 +12610,16 @@ class StructBytesModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this.model.FBEType
+    return StructBytesModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructBytesModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FieldModelStructBytes.FBEType
   }
 
   /**
@@ -12640,6 +12766,15 @@ class FinalModelStructBytes extends fbe.FinalModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FinalModelStructBytes.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FinalModelStructBytes}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 120
   }
 
@@ -12804,7 +12939,16 @@ class StructBytesFinalModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this._model.FBEType
+    return StructBytesFinalModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructBytesFinalModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FinalModelStructBytes.FBEType
   }
 
   /**
@@ -13489,6 +13633,15 @@ class FieldModelStructArray extends fbe.FieldModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FieldModelStructArray.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FieldModelStructArray}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 125
   }
 
@@ -13878,7 +14031,16 @@ class StructArrayModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this.model.FBEType
+    return StructArrayModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructArrayModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FieldModelStructArray.FBEType
   }
 
   /**
@@ -14095,6 +14257,15 @@ class FinalModelStructArray extends fbe.FinalModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FinalModelStructArray.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FinalModelStructArray}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 125
   }
 
@@ -14389,7 +14560,16 @@ class StructArrayFinalModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this._model.FBEType
+    return StructArrayFinalModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructArrayFinalModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FinalModelStructArray.FBEType
   }
 
   /**
@@ -15074,6 +15254,15 @@ class FieldModelStructVector extends fbe.FieldModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FieldModelStructVector.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FieldModelStructVector}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 130
   }
 
@@ -15463,7 +15652,16 @@ class StructVectorModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this.model.FBEType
+    return StructVectorModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructVectorModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FieldModelStructVector.FBEType
   }
 
   /**
@@ -15680,6 +15878,15 @@ class FinalModelStructVector extends fbe.FinalModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FinalModelStructVector.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FinalModelStructVector}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 130
   }
 
@@ -15974,7 +16181,16 @@ class StructVectorFinalModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this._model.FBEType
+    return StructVectorFinalModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructVectorFinalModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FinalModelStructVector.FBEType
   }
 
   /**
@@ -16659,6 +16875,15 @@ class FieldModelStructList extends fbe.FieldModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FieldModelStructList.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FieldModelStructList}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 131
   }
 
@@ -17048,7 +17273,16 @@ class StructListModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this.model.FBEType
+    return StructListModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructListModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FieldModelStructList.FBEType
   }
 
   /**
@@ -17265,6 +17499,15 @@ class FinalModelStructList extends fbe.FinalModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FinalModelStructList.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FinalModelStructList}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 131
   }
 
@@ -17559,7 +17802,16 @@ class StructListFinalModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this._model.FBEType
+    return StructListFinalModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructListFinalModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FinalModelStructList.FBEType
   }
 
   /**
@@ -17966,6 +18218,15 @@ class FieldModelStructSet extends fbe.FieldModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FieldModelStructSet.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FieldModelStructSet}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 132
   }
 
@@ -18247,7 +18508,16 @@ class StructSetModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this.model.FBEType
+    return StructSetModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructSetModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FieldModelStructSet.FBEType
   }
 
   /**
@@ -18404,6 +18674,15 @@ class FinalModelStructSet extends fbe.FinalModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FinalModelStructSet.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FinalModelStructSet}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 132
   }
 
@@ -18584,7 +18863,16 @@ class StructSetFinalModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this._model.FBEType
+    return StructSetFinalModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructSetFinalModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FinalModelStructSet.FBEType
   }
 
   /**
@@ -19339,6 +19627,15 @@ class FieldModelStructMap extends fbe.FieldModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FieldModelStructMap.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FieldModelStructMap}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 140
   }
 
@@ -19728,7 +20025,16 @@ class StructMapModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this.model.FBEType
+    return StructMapModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructMapModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FieldModelStructMap.FBEType
   }
 
   /**
@@ -19945,6 +20251,15 @@ class FinalModelStructMap extends fbe.FinalModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FinalModelStructMap.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FinalModelStructMap}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 140
   }
 
@@ -20239,7 +20554,16 @@ class StructMapFinalModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this._model.FBEType
+    return StructMapFinalModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructMapFinalModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FinalModelStructMap.FBEType
   }
 
   /**
@@ -21054,6 +21378,15 @@ class FieldModelStructHash extends fbe.FieldModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FieldModelStructHash.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FieldModelStructHash}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 141
   }
 
@@ -21443,7 +21776,16 @@ class StructHashModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this.model.FBEType
+    return StructHashModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructHashModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FieldModelStructHash.FBEType
   }
 
   /**
@@ -21660,6 +22002,15 @@ class FinalModelStructHash extends fbe.FinalModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FinalModelStructHash.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FinalModelStructHash}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 141
   }
 
@@ -21954,7 +22305,16 @@ class StructHashFinalModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this._model.FBEType
+    return StructHashFinalModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructHashFinalModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FinalModelStructHash.FBEType
   }
 
   /**
@@ -22299,6 +22659,15 @@ class FieldModelStructHashEx extends fbe.FieldModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FieldModelStructHashEx.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FieldModelStructHashEx}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 142
   }
 
@@ -22544,7 +22913,16 @@ class StructHashExModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this.model.FBEType
+    return StructHashExModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructHashExModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FieldModelStructHashEx.FBEType
   }
 
   /**
@@ -22681,6 +23059,15 @@ class FinalModelStructHashEx extends fbe.FinalModel {
    * @returns {!number} Field type
    */
   get FBEType () {
+    return FinalModelStructHashEx.FBEType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FinalModelStructHashEx}
+   * @returns {!number} Field type
+   */
+  static get FBEType () {
     return 142
   }
 
@@ -22823,7 +23210,16 @@ class StructHashExFinalModel extends fbe.Model {
    * @returns {!number} Model type
    */
   get FBEType () {
-    return this._model.FBEType
+    return StructHashExFinalModel.FBEType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructHashExFinalModel}
+   * @returns {!number} Model type
+   */
+  static get FBEType () {
+    return FinalModelStructHashEx.FBEType
   }
 
   /**
@@ -23484,193 +23880,184 @@ class Receiver extends fbe.Receiver {
    * @returns {!boolean} Success flag
    */
   onReceive (type, buffer, offset, size) {
-    if (type === 110) {
-      // Deserialize the value from the FBE stream
-      this._structsimpleModel.attachBuffer(buffer, offset)
-      console.assert(this._structsimpleModel.verify(), 'test.StructSimple validation failed!')
-      let deserialized = this._structsimpleModel.deserialize(this._structsimpleValue)
-      console.assert((deserialized.size > 0), 'test.StructSimple deserialization failed!')
+    switch (type) {
+      case StructSimpleModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structsimpleModel.attachBuffer(buffer, offset)
+        console.assert(this._structsimpleModel.verify(), 'test.StructSimple validation failed!')
+        let deserialized = this._structsimpleModel.deserialize(this._structsimpleValue)
+        console.assert((deserialized.size > 0), 'test.StructSimple deserialization failed!')
 
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structsimpleValue.toString())
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structsimpleValue.toString())
+        }
+
+        // Call receive handler with deserialized value
+        this.onReceive_structsimple(this._structsimpleValue)
+        return true
       }
+      case StructOptionalModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structoptionalModel.attachBuffer(buffer, offset)
+        console.assert(this._structoptionalModel.verify(), 'test.StructOptional validation failed!')
+        let deserialized = this._structoptionalModel.deserialize(this._structoptionalValue)
+        console.assert((deserialized.size > 0), 'test.StructOptional deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_structsimple(this._structsimpleValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structoptionalValue.toString())
+        }
 
-    if (type === 111) {
-      // Deserialize the value from the FBE stream
-      this._structoptionalModel.attachBuffer(buffer, offset)
-      console.assert(this._structoptionalModel.verify(), 'test.StructOptional validation failed!')
-      let deserialized = this._structoptionalModel.deserialize(this._structoptionalValue)
-      console.assert((deserialized.size > 0), 'test.StructOptional deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structoptionalValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_structoptional(this._structoptionalValue)
+        return true
       }
+      case StructNestedModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structnestedModel.attachBuffer(buffer, offset)
+        console.assert(this._structnestedModel.verify(), 'test.StructNested validation failed!')
+        let deserialized = this._structnestedModel.deserialize(this._structnestedValue)
+        console.assert((deserialized.size > 0), 'test.StructNested deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_structoptional(this._structoptionalValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structnestedValue.toString())
+        }
 
-    if (type === 112) {
-      // Deserialize the value from the FBE stream
-      this._structnestedModel.attachBuffer(buffer, offset)
-      console.assert(this._structnestedModel.verify(), 'test.StructNested validation failed!')
-      let deserialized = this._structnestedModel.deserialize(this._structnestedValue)
-      console.assert((deserialized.size > 0), 'test.StructNested deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structnestedValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_structnested(this._structnestedValue)
+        return true
       }
+      case StructBytesModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structbytesModel.attachBuffer(buffer, offset)
+        console.assert(this._structbytesModel.verify(), 'test.StructBytes validation failed!')
+        let deserialized = this._structbytesModel.deserialize(this._structbytesValue)
+        console.assert((deserialized.size > 0), 'test.StructBytes deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_structnested(this._structnestedValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structbytesValue.toString())
+        }
 
-    if (type === 120) {
-      // Deserialize the value from the FBE stream
-      this._structbytesModel.attachBuffer(buffer, offset)
-      console.assert(this._structbytesModel.verify(), 'test.StructBytes validation failed!')
-      let deserialized = this._structbytesModel.deserialize(this._structbytesValue)
-      console.assert((deserialized.size > 0), 'test.StructBytes deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structbytesValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_structbytes(this._structbytesValue)
+        return true
       }
+      case StructArrayModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structarrayModel.attachBuffer(buffer, offset)
+        console.assert(this._structarrayModel.verify(), 'test.StructArray validation failed!')
+        let deserialized = this._structarrayModel.deserialize(this._structarrayValue)
+        console.assert((deserialized.size > 0), 'test.StructArray deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_structbytes(this._structbytesValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structarrayValue.toString())
+        }
 
-    if (type === 125) {
-      // Deserialize the value from the FBE stream
-      this._structarrayModel.attachBuffer(buffer, offset)
-      console.assert(this._structarrayModel.verify(), 'test.StructArray validation failed!')
-      let deserialized = this._structarrayModel.deserialize(this._structarrayValue)
-      console.assert((deserialized.size > 0), 'test.StructArray deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structarrayValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_structarray(this._structarrayValue)
+        return true
       }
+      case StructVectorModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structvectorModel.attachBuffer(buffer, offset)
+        console.assert(this._structvectorModel.verify(), 'test.StructVector validation failed!')
+        let deserialized = this._structvectorModel.deserialize(this._structvectorValue)
+        console.assert((deserialized.size > 0), 'test.StructVector deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_structarray(this._structarrayValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structvectorValue.toString())
+        }
 
-    if (type === 130) {
-      // Deserialize the value from the FBE stream
-      this._structvectorModel.attachBuffer(buffer, offset)
-      console.assert(this._structvectorModel.verify(), 'test.StructVector validation failed!')
-      let deserialized = this._structvectorModel.deserialize(this._structvectorValue)
-      console.assert((deserialized.size > 0), 'test.StructVector deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structvectorValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_structvector(this._structvectorValue)
+        return true
       }
+      case StructListModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structlistModel.attachBuffer(buffer, offset)
+        console.assert(this._structlistModel.verify(), 'test.StructList validation failed!')
+        let deserialized = this._structlistModel.deserialize(this._structlistValue)
+        console.assert((deserialized.size > 0), 'test.StructList deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_structvector(this._structvectorValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structlistValue.toString())
+        }
 
-    if (type === 131) {
-      // Deserialize the value from the FBE stream
-      this._structlistModel.attachBuffer(buffer, offset)
-      console.assert(this._structlistModel.verify(), 'test.StructList validation failed!')
-      let deserialized = this._structlistModel.deserialize(this._structlistValue)
-      console.assert((deserialized.size > 0), 'test.StructList deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structlistValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_structlist(this._structlistValue)
+        return true
       }
+      case StructSetModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structsetModel.attachBuffer(buffer, offset)
+        console.assert(this._structsetModel.verify(), 'test.StructSet validation failed!')
+        let deserialized = this._structsetModel.deserialize(this._structsetValue)
+        console.assert((deserialized.size > 0), 'test.StructSet deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_structlist(this._structlistValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structsetValue.toString())
+        }
 
-    if (type === 132) {
-      // Deserialize the value from the FBE stream
-      this._structsetModel.attachBuffer(buffer, offset)
-      console.assert(this._structsetModel.verify(), 'test.StructSet validation failed!')
-      let deserialized = this._structsetModel.deserialize(this._structsetValue)
-      console.assert((deserialized.size > 0), 'test.StructSet deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structsetValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_structset(this._structsetValue)
+        return true
       }
+      case StructMapModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structmapModel.attachBuffer(buffer, offset)
+        console.assert(this._structmapModel.verify(), 'test.StructMap validation failed!')
+        let deserialized = this._structmapModel.deserialize(this._structmapValue)
+        console.assert((deserialized.size > 0), 'test.StructMap deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_structset(this._structsetValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structmapValue.toString())
+        }
 
-    if (type === 140) {
-      // Deserialize the value from the FBE stream
-      this._structmapModel.attachBuffer(buffer, offset)
-      console.assert(this._structmapModel.verify(), 'test.StructMap validation failed!')
-      let deserialized = this._structmapModel.deserialize(this._structmapValue)
-      console.assert((deserialized.size > 0), 'test.StructMap deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structmapValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_structmap(this._structmapValue)
+        return true
       }
+      case StructHashModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structhashModel.attachBuffer(buffer, offset)
+        console.assert(this._structhashModel.verify(), 'test.StructHash validation failed!')
+        let deserialized = this._structhashModel.deserialize(this._structhashValue)
+        console.assert((deserialized.size > 0), 'test.StructHash deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_structmap(this._structmapValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structhashValue.toString())
+        }
 
-    if (type === 141) {
-      // Deserialize the value from the FBE stream
-      this._structhashModel.attachBuffer(buffer, offset)
-      console.assert(this._structhashModel.verify(), 'test.StructHash validation failed!')
-      let deserialized = this._structhashModel.deserialize(this._structhashValue)
-      console.assert((deserialized.size > 0), 'test.StructHash deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structhashValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_structhash(this._structhashValue)
+        return true
       }
+      case StructHashExModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structhashexModel.attachBuffer(buffer, offset)
+        console.assert(this._structhashexModel.verify(), 'test.StructHashEx validation failed!')
+        let deserialized = this._structhashexModel.deserialize(this._structhashexValue)
+        console.assert((deserialized.size > 0), 'test.StructHashEx deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_structhash(this._structhashValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structhashexValue.toString())
+        }
 
-    if (type === 142) {
-      // Deserialize the value from the FBE stream
-      this._structhashexModel.attachBuffer(buffer, offset)
-      console.assert(this._structhashexModel.verify(), 'test.StructHashEx validation failed!')
-      let deserialized = this._structhashexModel.deserialize(this._structhashexValue)
-      console.assert((deserialized.size > 0), 'test.StructHashEx deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structhashexValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_structhashex(this._structhashexValue)
+        return true
       }
-
-      // Call receive handler with deserialized value
-      this.onReceive_structhashex(this._structhashexValue)
-      return true
     }
-
     // noinspection RedundantIfStatementJS
     if ((this.protoReceiver != null) && this.protoReceiver.onReceive(type, buffer, offset, size)) {
       return true
@@ -24260,193 +24647,184 @@ class FinalReceiver extends fbe.Receiver {
    * @returns {!boolean} Success flag
    */
   onReceive (type, buffer, offset, size) {
-    if (type === 110) {
-      // Deserialize the value from the FBE stream
-      this._structsimpleModel.attachBuffer(buffer, offset)
-      console.assert(this._structsimpleModel.verify(), 'test.StructSimple validation failed!')
-      let deserialized = this._structsimpleModel.deserialize(this._structsimpleValue)
-      console.assert((deserialized.size > 0), 'test.StructSimple deserialization failed!')
+    switch (type) {
+      case StructSimpleFinalModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structsimpleModel.attachBuffer(buffer, offset)
+        console.assert(this._structsimpleModel.verify(), 'test.StructSimple validation failed!')
+        let deserialized = this._structsimpleModel.deserialize(this._structsimpleValue)
+        console.assert((deserialized.size > 0), 'test.StructSimple deserialization failed!')
 
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structsimpleValue.toString())
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structsimpleValue.toString())
+        }
+
+        // Call receive handler with deserialized value
+        this.onReceive_structsimple(this._structsimpleValue)
+        return true
       }
+      case StructOptionalFinalModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structoptionalModel.attachBuffer(buffer, offset)
+        console.assert(this._structoptionalModel.verify(), 'test.StructOptional validation failed!')
+        let deserialized = this._structoptionalModel.deserialize(this._structoptionalValue)
+        console.assert((deserialized.size > 0), 'test.StructOptional deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_structsimple(this._structsimpleValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structoptionalValue.toString())
+        }
 
-    if (type === 111) {
-      // Deserialize the value from the FBE stream
-      this._structoptionalModel.attachBuffer(buffer, offset)
-      console.assert(this._structoptionalModel.verify(), 'test.StructOptional validation failed!')
-      let deserialized = this._structoptionalModel.deserialize(this._structoptionalValue)
-      console.assert((deserialized.size > 0), 'test.StructOptional deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structoptionalValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_structoptional(this._structoptionalValue)
+        return true
       }
+      case StructNestedFinalModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structnestedModel.attachBuffer(buffer, offset)
+        console.assert(this._structnestedModel.verify(), 'test.StructNested validation failed!')
+        let deserialized = this._structnestedModel.deserialize(this._structnestedValue)
+        console.assert((deserialized.size > 0), 'test.StructNested deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_structoptional(this._structoptionalValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structnestedValue.toString())
+        }
 
-    if (type === 112) {
-      // Deserialize the value from the FBE stream
-      this._structnestedModel.attachBuffer(buffer, offset)
-      console.assert(this._structnestedModel.verify(), 'test.StructNested validation failed!')
-      let deserialized = this._structnestedModel.deserialize(this._structnestedValue)
-      console.assert((deserialized.size > 0), 'test.StructNested deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structnestedValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_structnested(this._structnestedValue)
+        return true
       }
+      case StructBytesFinalModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structbytesModel.attachBuffer(buffer, offset)
+        console.assert(this._structbytesModel.verify(), 'test.StructBytes validation failed!')
+        let deserialized = this._structbytesModel.deserialize(this._structbytesValue)
+        console.assert((deserialized.size > 0), 'test.StructBytes deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_structnested(this._structnestedValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structbytesValue.toString())
+        }
 
-    if (type === 120) {
-      // Deserialize the value from the FBE stream
-      this._structbytesModel.attachBuffer(buffer, offset)
-      console.assert(this._structbytesModel.verify(), 'test.StructBytes validation failed!')
-      let deserialized = this._structbytesModel.deserialize(this._structbytesValue)
-      console.assert((deserialized.size > 0), 'test.StructBytes deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structbytesValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_structbytes(this._structbytesValue)
+        return true
       }
+      case StructArrayFinalModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structarrayModel.attachBuffer(buffer, offset)
+        console.assert(this._structarrayModel.verify(), 'test.StructArray validation failed!')
+        let deserialized = this._structarrayModel.deserialize(this._structarrayValue)
+        console.assert((deserialized.size > 0), 'test.StructArray deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_structbytes(this._structbytesValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structarrayValue.toString())
+        }
 
-    if (type === 125) {
-      // Deserialize the value from the FBE stream
-      this._structarrayModel.attachBuffer(buffer, offset)
-      console.assert(this._structarrayModel.verify(), 'test.StructArray validation failed!')
-      let deserialized = this._structarrayModel.deserialize(this._structarrayValue)
-      console.assert((deserialized.size > 0), 'test.StructArray deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structarrayValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_structarray(this._structarrayValue)
+        return true
       }
+      case StructVectorFinalModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structvectorModel.attachBuffer(buffer, offset)
+        console.assert(this._structvectorModel.verify(), 'test.StructVector validation failed!')
+        let deserialized = this._structvectorModel.deserialize(this._structvectorValue)
+        console.assert((deserialized.size > 0), 'test.StructVector deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_structarray(this._structarrayValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structvectorValue.toString())
+        }
 
-    if (type === 130) {
-      // Deserialize the value from the FBE stream
-      this._structvectorModel.attachBuffer(buffer, offset)
-      console.assert(this._structvectorModel.verify(), 'test.StructVector validation failed!')
-      let deserialized = this._structvectorModel.deserialize(this._structvectorValue)
-      console.assert((deserialized.size > 0), 'test.StructVector deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structvectorValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_structvector(this._structvectorValue)
+        return true
       }
+      case StructListFinalModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structlistModel.attachBuffer(buffer, offset)
+        console.assert(this._structlistModel.verify(), 'test.StructList validation failed!')
+        let deserialized = this._structlistModel.deserialize(this._structlistValue)
+        console.assert((deserialized.size > 0), 'test.StructList deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_structvector(this._structvectorValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structlistValue.toString())
+        }
 
-    if (type === 131) {
-      // Deserialize the value from the FBE stream
-      this._structlistModel.attachBuffer(buffer, offset)
-      console.assert(this._structlistModel.verify(), 'test.StructList validation failed!')
-      let deserialized = this._structlistModel.deserialize(this._structlistValue)
-      console.assert((deserialized.size > 0), 'test.StructList deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structlistValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_structlist(this._structlistValue)
+        return true
       }
+      case StructSetFinalModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structsetModel.attachBuffer(buffer, offset)
+        console.assert(this._structsetModel.verify(), 'test.StructSet validation failed!')
+        let deserialized = this._structsetModel.deserialize(this._structsetValue)
+        console.assert((deserialized.size > 0), 'test.StructSet deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_structlist(this._structlistValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structsetValue.toString())
+        }
 
-    if (type === 132) {
-      // Deserialize the value from the FBE stream
-      this._structsetModel.attachBuffer(buffer, offset)
-      console.assert(this._structsetModel.verify(), 'test.StructSet validation failed!')
-      let deserialized = this._structsetModel.deserialize(this._structsetValue)
-      console.assert((deserialized.size > 0), 'test.StructSet deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structsetValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_structset(this._structsetValue)
+        return true
       }
+      case StructMapFinalModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structmapModel.attachBuffer(buffer, offset)
+        console.assert(this._structmapModel.verify(), 'test.StructMap validation failed!')
+        let deserialized = this._structmapModel.deserialize(this._structmapValue)
+        console.assert((deserialized.size > 0), 'test.StructMap deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_structset(this._structsetValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structmapValue.toString())
+        }
 
-    if (type === 140) {
-      // Deserialize the value from the FBE stream
-      this._structmapModel.attachBuffer(buffer, offset)
-      console.assert(this._structmapModel.verify(), 'test.StructMap validation failed!')
-      let deserialized = this._structmapModel.deserialize(this._structmapValue)
-      console.assert((deserialized.size > 0), 'test.StructMap deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structmapValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_structmap(this._structmapValue)
+        return true
       }
+      case StructHashFinalModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structhashModel.attachBuffer(buffer, offset)
+        console.assert(this._structhashModel.verify(), 'test.StructHash validation failed!')
+        let deserialized = this._structhashModel.deserialize(this._structhashValue)
+        console.assert((deserialized.size > 0), 'test.StructHash deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_structmap(this._structmapValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structhashValue.toString())
+        }
 
-    if (type === 141) {
-      // Deserialize the value from the FBE stream
-      this._structhashModel.attachBuffer(buffer, offset)
-      console.assert(this._structhashModel.verify(), 'test.StructHash validation failed!')
-      let deserialized = this._structhashModel.deserialize(this._structhashValue)
-      console.assert((deserialized.size > 0), 'test.StructHash deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structhashValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_structhash(this._structhashValue)
+        return true
       }
+      case StructHashExFinalModel.FBEType: {
+        // Deserialize the value from the FBE stream
+        this._structhashexModel.attachBuffer(buffer, offset)
+        console.assert(this._structhashexModel.verify(), 'test.StructHashEx validation failed!')
+        let deserialized = this._structhashexModel.deserialize(this._structhashexValue)
+        console.assert((deserialized.size > 0), 'test.StructHashEx deserialization failed!')
 
-      // Call receive handler with deserialized value
-      this.onReceive_structhash(this._structhashValue)
-      return true
-    }
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structhashexValue.toString())
+        }
 
-    if (type === 142) {
-      // Deserialize the value from the FBE stream
-      this._structhashexModel.attachBuffer(buffer, offset)
-      console.assert(this._structhashexModel.verify(), 'test.StructHashEx validation failed!')
-      let deserialized = this._structhashexModel.deserialize(this._structhashexValue)
-      console.assert((deserialized.size > 0), 'test.StructHashEx deserialization failed!')
-
-      // Log the value
-      if (this.logging) {
-        this.onReceiveLog(this._structhashexValue.toString())
+        // Call receive handler with deserialized value
+        this.onReceive_structhashex(this._structhashexValue)
+        return true
       }
-
-      // Call receive handler with deserialized value
-      this.onReceive_structhashex(this._structhashexValue)
-      return true
     }
-
     // noinspection RedundantIfStatementJS
     if ((this.protoReceiver != null) && this.protoReceiver.onReceive(type, buffer, offset, size)) {
       return true
