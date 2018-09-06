@@ -9540,7 +9540,7 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     WriteLineIndent(" * @this {!FieldModel" + *s->name + "}");
     WriteLineIndent(" * @returns {!number} Field type");
     WriteLineIndent(" */");
-    WriteLineIndent("get FBEType () {");
+    WriteLineIndent("static get FBEType () {");
     Indent(1);
     WriteLineIndent("return " + std::to_string(s->type));
     Indent(-1);
@@ -9913,9 +9913,9 @@ void GeneratorJavaScript::GenerateStructModel(const std::shared_ptr<StructType>&
     WriteLineIndent(" * @this {!" + *s->name + "Model}");
     WriteLineIndent(" * @returns {!number} Model type");
     WriteLineIndent(" */");
-    WriteLineIndent("get FBEType () {");
+    WriteLineIndent("static get FBEType () {");
     Indent(1);
-    WriteLineIndent("return this.model.FBEType");
+    WriteLineIndent("return FieldModel" + *s->name + ".FBEType");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -10127,7 +10127,7 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
     WriteLineIndent(" * @this {!FinalModel" + *s->name + "}");
     WriteLineIndent(" * @returns {!number} Field type");
     WriteLineIndent(" */");
-    WriteLineIndent("get FBEType () {");
+    WriteLineIndent("static get FBEType () {");
     Indent(1);
     WriteLineIndent("return " + std::to_string(s->type));
     Indent(-1);
@@ -10349,9 +10349,9 @@ void GeneratorJavaScript::GenerateStructModelFinal(const std::shared_ptr<StructT
     WriteLineIndent(" * @this {!" + *s->name + "FinalModel}");
     WriteLineIndent(" * @returns {!number} Model type");
     WriteLineIndent(" */");
-    WriteLineIndent("get FBEType () {");
+    WriteLineIndent("static get FBEType () {");
     Indent(1);
-    WriteLineIndent("return this._model.FBEType");
+    WriteLineIndent("return FinalModel" + *s->name + ".FBEType");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -10756,7 +10756,7 @@ void GeneratorJavaScript::GenerateReceiver(const std::shared_ptr<Package>& p, bo
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("if (type === " + std::to_string(s->type) + ") {");
+            WriteLineIndent("if (type === " + *s->name + model + ".FBEType) {");
             Indent(1);
             WriteLineIndent("// Deserialize the value from the FBE stream");
             WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model.attachBuffer(buffer, offset)");
