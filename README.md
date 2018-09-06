@@ -28,7 +28,7 @@ Typical usage workflow is the following:
    flags and structs
 2. [Generate domain model](#generate-domain-model) for any supported
    programming languages (C++, C#, Java, JavaScript, Python)
-3. Build the domain model library
+3. [Build domain model](#build-domain-model) library
 4. Serialize/Deserialize objects from the domain model in unified
    FastBinaryEncoding format (fast and compact)
 5. JSON convert objects from the domain model in order to use them in Web API
@@ -40,6 +40,7 @@ Typical usage workflow is the following:
   * [How to build?](#how-to-build)
   * [Create domain model](#create-domain-model)
   * [Generate domain model](#generate-domain-model)
+  * [Build domain model](#build-domain-model)
   * [Packages and import](#packages-and-import)
   * [Struct types](#struct-types)
   * [Struct inheritance](#struct-inheritance)
@@ -221,6 +222,34 @@ Options:
   --final               Generate Final protocol code
   --json                Generate JSON protocol code
 ```
+
+# Build domain model
+Generated domain model represented with source code for particular languages.
+Just add it to your project and build it. However there are several building
+dependencies that worth to be mentioned.
+
+### C++
+* C++ standard is limited to be C++17 in order to have the implementation of
+  std::optional;
+* JSON protocol is implemented using [RapidJSON](http://rapidjson.org) library
+  and its headers should be available (it is header only library);
+
+### C#
+* JSON protocol is implemented using [Json.NET](https://www.newtonsoft.com/json)
+  library and its package should be imported using NuGet;
+* Fast JSON serrialization libraty is also available - [Utf8Json ](https://github.com/neuecc/Utf8Json).
+  If you want to try it, you should import is with NuGet and build domain model
+  with 'UTF8JSON' definition;
+
+### Java
+* JSON protocol is implemented using [Gson](https://github.com/google/gson)
+  library and its package should be imported using Maven;
+
+### JavaScript
+* JavaScript domain model is implemented using ECMAScript 6 (classes, etc.)
+
+### Python
+* Python domain model is implemented using Python 3.7 (time.time_ns())
 
 # Packages and import
 Packages are declared with package name and structs offset (optional). Offset
