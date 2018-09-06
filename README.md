@@ -350,7 +350,7 @@ struct StructBase
 }
 
 // Struct type is 2
-struct StructChild : Struct1
+struct StructChild : StructBase
 {
     // bool f1 - will be inherited from StructBase
     // int8 f2 - will be inherited from StructBase
