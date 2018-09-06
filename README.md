@@ -280,7 +280,7 @@ import protoex
 ```
 
 Package import is implemented using:
-* #include "..." directive in
+* #include "..." directive in C++
 * Namespaces in C#
 * Packages in Java
 * Modules in JavaScript
@@ -289,10 +289,10 @@ Package import is implemented using:
 # Struct types
 Struct types are automatically increased until you provide it manually. There
 are two possibilities:
-1. Shift the current struct type offset using '=' operator. As the result all
-   new structs will have incremented type.
-2. Force set struct type offset using '==' operator. It will affect only one
-   struct.
+1. Shift the current struct type offset using **'=' operator**. As the result
+   all new structs will have incremented type.
+2. Force set struct type offset using **'==' operator**. It will affect only
+   one struct.
 
 Example below demonstrates the idea:
 ```proto
@@ -359,8 +359,8 @@ struct StructChild : StructBase
 }
 ```
 
-Also it is possible to reuse the base struct type in a child one. It is useful
-when you extend the struct from third-party imported package:
+Also it is possible to reuse the base struct type in a child one using **'= base' operator**.
+It is useful when you extend the struct from third-party imported package:
 ```proto
 // Package declaration. Offset is 10.
 package protoex offset 10
