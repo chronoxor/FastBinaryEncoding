@@ -41,6 +41,7 @@ Typical usage workflow is the following:
   * [Create domain model](#create-domain-model)
   * [Generate domain model](#generate-domain-model)
   * [Build domain model](#build-domain-model)
+  * [JSON domain model](#json-domain-model)
   * [Packages and import](#packages-and-import)
   * [Struct types](#struct-types)
   * [Struct inheritance](#struct-inheritance)
@@ -237,7 +238,7 @@ dependencies that worth to be mentioned:
 ### C#
 * JSON protocol is implemented using [Json.NET](https://www.newtonsoft.com/json)
   library. Therefore its package should be imported using NuGet;
-* Fast JSON serrialization libraty is also available - [Utf8Json ](https://github.com/neuecc/Utf8Json).
+* Fast JSON serialization libraty is also available - [Utf8Json ](https://github.com/neuecc/Utf8Json).
   If you want to try it, you should import is with NuGet and build domain model
   with 'UTF8JSON' definition;
 
@@ -251,6 +252,87 @@ dependencies that worth to be mentioned:
 
 ### Python
 * Python domain model is implemented using Python 3.7 ([time.time_ns()](https://docs.python.org/3/library/time.html#time.time_ns))
+
+# JSON domain model
+If the domain model compiled with --json flag, then JSON protocol code will
+be generated in all domain objects. As the result each domain object can be
+serialized/deserialized into/from [JSON format](https://www.json.org).
+
+Please note that some programming languages have native JSON support
+(JavaScript, Python). Other languages requires third-party library
+to get work with JSON:
+* C++ requires [RapidJSON](http://rapidjson.org)
+* C# requires [Json.NET](https://www.newtonsoft.com/json) or more faster [Utf8Json ](https://github.com/neuecc/Utf8Json)
+* Java requires [Gson](https://github.com/google/gson)
+
+Here is an exmple of JSON serialization for C++ languages:
+```c++
+#include "../proto/proto.h"
+
+#include <iostream>
+
+int main(int argc, char** argv)
+{
+    // Create a new account with some orders
+    proto::Account account = { 1, "Test", proto::State::good, { "USD", 1000.0 }, std::make_optional<proto::Balance>({ "EUR", 100.0 }), {} };
+    account.orders.emplace_back(1, "EURUSD", proto::OrderSide::buy, proto::OrderType::market, 1.23456, 1000.0);
+    account.orders.emplace_back(2, "EURUSD", proto::OrderSide::sell, proto::OrderType::limit, 1.0, 100.0);
+    account.orders.emplace_back(3, "EURUSD", proto::OrderSide::buy, proto::OrderType::stop, 1.5, 10.0);
+
+    // Serialize the account to the JSON stream
+    rapidjson::StringBuffer buffer;
+    rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+    FBE::JSON::to_json(writer, account);
+
+    // Show the serialized JSON and its size
+    std::cout << "JSON: " << buffer.GetString() << std::endl;
+    std::cout << "JSON size: " << buffer.GetSize() << std::endl;
+
+    // Parse the JSON document
+    rapidjson::Document json;
+    json.Parse(buffer.GetString());
+
+    // Deserialize the account from the JSON stream
+    FBE::JSON::from_json(json, account);
+
+    // Show account content
+    std::cout << std::endl;
+    std::cout << account;
+
+    return 0;
+}
+```
+
+Output is the following:
+```
+JSON: {
+  "uid":1,
+  "name":
+  "Test",
+  "state":6,
+  "wallet":{"currency":"USD","amount":1000.0},
+  "asset":{"currency":"EUR","amount":100.0},
+  "orders":[
+    {"uid":1,"symbol":"EURUSD","side":0,"type":0,"price":1.23456,"volume":1000.0},
+    {"uid":2,"symbol":"EURUSD","side":1,"type":1,"price":1.0,"volume":100.0},
+    {"uid":3,"symbol":"EURUSD","side":0,"type":2,"price":1.5,"volume":10.0}
+  ]
+}
+JSON size: 353
+
+Account(
+  uid=1,
+  name="Test",
+  state=initialized|calculated|good,
+  wallet=Balance(currency="USD",amount=1000),
+  asset=Balance(currency="EUR",amount=100),
+  orders=[3][
+    Order(uid=1,symbol="EURUSD",side=buy,type=market,price=1.23456,volume=1000),
+    Order(uid=2,symbol="EURUSD",side=sell,type=limit,price=1,volume=100),
+    Order(uid=3,symbol="EURUSD",side=buy,type=stop,price=1.5,volume=10)
+  ]
+)
+```
 
 # Packages and import
 Packages are declared with package name and structs offset (optional). Offset
