@@ -224,26 +224,26 @@ Options:
 ```
 
 # Build domain model
-Generated domain model represented with source code for particular languages.
-Just add it to your project and build it. However there are several building
-dependencies that worth to be mentioned.
+Generated domain model is represented with source code for particular language.
+Just add it to your project and build it. However there are several issues and
+dependencies that worth to be mentioned:
 
 ### C++
-* C++ standard is limited to be C++17 in order to have the implementation of
-  std::optional;
-* JSON protocol is implemented using [RapidJSON](http://rapidjson.org) library
-  and its headers should be available (it is header only library);
+* C++ standard is limited to C++17 in order to have the implementation of
+  [std::optional](https://en.cppreference.com/w/cpp/utility/optional);
+* JSON protocol is implemented using [RapidJSON](http://rapidjson.org) library.
+  Therefore its headers should be available (header only library);
 
 ### C#
 * JSON protocol is implemented using [Json.NET](https://www.newtonsoft.com/json)
-  library and its package should be imported using NuGet;
+  library. Therefore its package should be imported using NuGet;
 * Fast JSON serrialization libraty is also available - [Utf8Json ](https://github.com/neuecc/Utf8Json).
   If you want to try it, you should import is with NuGet and build domain model
   with 'UTF8JSON' definition;
 
 ### Java
 * JSON protocol is implemented using [Gson](https://github.com/google/gson)
-  library and its package should be imported using Maven;
+  library. Thereforeits package should be imported using Maven;
 
 ### JavaScript
 * JavaScript domain model is implemented using ECMAScript 6 (classes, etc.)
