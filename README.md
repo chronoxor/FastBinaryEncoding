@@ -246,10 +246,11 @@ dependencies that worth to be mentioned:
   library. Thereforeits package should be imported using Maven;
 
 ### JavaScript
-* JavaScript domain model is implemented using ECMAScript 6 (classes, etc.)
+* JavaScript domain model is implemented using [ECMAScript 6](http://es6-features.org)
+  (classes, etc.)
 
 ### Python
-* Python domain model is implemented using Python 3.7 (time.time_ns())
+* Python domain model is implemented using Python 3.7 ([time.time_ns()](https://docs.python.org/3/library/time.html))
 
 # Packages and import
 Packages are declared with package name and structs offset (optional). Offset
