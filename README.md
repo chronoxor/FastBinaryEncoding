@@ -54,7 +54,7 @@ Typical usage workflow is the following:
 
 # Features
 * Cross platform (Linux, OSX, Windows)
-* Generators for C++, C#, Java, JavaScript, Python
+* [Generators for C++, C#, Java, JavaScript, Python](#generate-domain-model)
 * Supported base types (byte, bool, char, wchar, int8, int16, int32, int64, float, double)
 * Supported complex types (bytes, decimal, string, timestamp, uuid)
 * Supported collections (array, vector, list, map, hash)
