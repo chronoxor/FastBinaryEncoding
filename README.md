@@ -44,7 +44,7 @@ Typical usage workflow is the following:
   * [Packages and import](#packages-and-import)
   * [Struct types](#struct-types)
   * [Struct inheritance](#struct-inheritance)
-  * [Versioning solution](#versioning-solution)
+  * [Versioning](#versioning)
   * [Performance benchmarks](#performance-benchmarks)
     * [Benchmark 1: Serialization](#benchmark-1-serialization)
     * [Benchmark 2: Deserialization](#benchmark-2-deserialization)
@@ -60,7 +60,7 @@ Typical usage workflow is the following:
 * Serialization/Deserialization to binary format
 * Serialization/Deserialization to JSON
 * Sender/Receiver interfaces for communication protocols
-* [Versioning solution](#versioning-solution)
+* [Versioning solution](#versioning)
 * [Excellent performance](#performance-benchmarks)
 
 # Requirements
@@ -411,7 +411,7 @@ struct StructChild = base : proto.StructBase
 }
 ```
 
-# Versioning solution
+# Versioning
 Versioning is simple with Fast Binary Encoding.
 
 Assume you have an original protocol:
@@ -468,8 +468,8 @@ struct MyStruct
     bool field1;
     byte field2;
     char field3;
-    int32 field4; // New field (default is 0)
-    int64 field5 = 123456; // New field (default is 123456)
+    int32 field4; // New field (default value is 0)
+    int64 field5 = 123456; // New field (default value is 123456)
 }
 ```
 
@@ -492,8 +492,8 @@ import proto
 
 struct MyStructEx = base : proto.MyStruct
 {
-    int32 field4; // New field (default is 0)
-    int64 field5 = 123456; // New field (default is 123456)
+    int32 field4; // New field (default value is 0)
+    int64 field5 = 123456; // New field (default value is 123456)
 }
 ```
 
