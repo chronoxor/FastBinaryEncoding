@@ -31,7 +31,8 @@ Typical usage workflow is the following:
 3. [Build domain model](#build-domain-model) library
 4. Serialize/Deserialize objects from the domain model in unified
    FastBinaryEncoding format (fast and compact)
-5. JSON convert objects from the domain model in order to use them in Web API
+5. [JSON convert](#json-domain-model) objects from the domain model in order
+   to use them in Web API
 6. Implement Sender/Receiver interfaces to create a communication protocol
 
 # Contents
@@ -58,8 +59,8 @@ Typical usage workflow is the following:
 * Supported complex types (bytes, decimal, string, timestamp, uuid)
 * Supported collections (array, vector, list, map, hash)
 * Fast binary encoding format
-* Serialization/Deserialization to binary format
-* Serialization/Deserialization to JSON
+* Serialization/Deserialization to/from binary format
+* [Serialization/Deserialization to/from JSON](#json-domain-model)
 * Sender/Receiver interfaces for communication protocols
 * [Versioning solution](#versioning)
 * [Excellent performance](#performance-benchmarks)
@@ -265,7 +266,7 @@ to get work with JSON:
 * C# requires [Json.NET](https://www.newtonsoft.com/json) or more faster [Utf8Json ](https://github.com/neuecc/Utf8Json)
 * Java requires [Gson](https://github.com/google/gson)
 
-Here is an exmple of JSON serialization for C++ languages:
+Here is an exmple of JSON serialization in C++ languages:
 ```c++
 #include "../proto/proto.h"
 
@@ -274,7 +275,14 @@ Here is an exmple of JSON serialization for C++ languages:
 int main(int argc, char** argv)
 {
     // Create a new account with some orders
-    proto::Account account = { 1, "Test", proto::State::good, { "USD", 1000.0 }, std::make_optional<proto::Balance>({ "EUR", 100.0 }), {} };
+    proto::Account account = {
+        1,
+        "Test",
+        proto::State::good,
+        { "USD", 1000.0 },
+        std::make_optional<proto::Balance>({ "EUR", 100.0 }),
+        {}
+    };
     account.orders.emplace_back(1, "EURUSD", proto::OrderSide::buy, proto::OrderType::market, 1.23456, 1000.0);
     account.orders.emplace_back(2, "EURUSD", proto::OrderSide::sell, proto::OrderType::limit, 1.0, 100.0);
     account.orders.emplace_back(3, "EURUSD", proto::OrderSide::buy, proto::OrderType::stop, 1.5, 10.0);
