@@ -250,7 +250,7 @@ dependencies that worth to be mentioned:
   (classes, etc.)
 
 ### Python
-* Python domain model is implemented using Python 3.7 ([time.time_ns()](https://docs.python.org/3/library/time.html))
+* Python domain model is implemented using Python 3.7 ([time.time_ns()](https://docs.python.org/3/library/time.html#time.time_ns))
 
 # Packages and import
 Packages are declared with package name and structs offset (optional). Offset
