@@ -718,26 +718,26 @@ BENCHMARK_FIXTURE(DeserializationFixture, "Deserialize")
 
 Deserialization benchmark results:
 
-| Language & Platform      | Message size (bytes) | Rate (ops/s) | Time (ns) |
-| :----------------------- | -------------------: | -----------: | --------: |
-| C++ Win64                |                  252 |    9 523 810 |       105 |
-| C++ Win64 (Final)        |                  152 |   10 989 011 |        91 |
-| C++ Win64 (JSON)         |                  353 |    1 375 516 |       727 |
-| C# Win64                 |                  252 |    1 014 199 |       986 |
-| C# Win64 (Final)         |                  152 |    1 607 717 |       622 |
-| C# Win64 (JSON)          |                  341 |      258 532 |     3 868 |
-| .NET Core Linux          |                  252 |      804 052 |     1 244 |
-| .NET Core Linux (Final)  |                  152 |    1 343 544 |       744 |
-| .NET Core Linux (JSON)   |                  341 |      222 074 |     4 503 |
-| Java Win64               |                  252 |    2 688 084 |       372 |
-| Java Win64 (Final)       |                  152 |    3 036 020 |       329 |
-| Java Win64 (JSON)        |                  353 |      308 675 |     3 240 |
-| JavaScript Win64         |                  252 |      133 892 |     7 469 |
-| JavaScript Win64 (Final) |                  152 |      292 273 |     3 422 |
-| JavaScript Win64 (JSON)  |                  341 |      289 417 |     3 455 |
-| Python Win64             |                  252 |        8 305 |   120 411 |
-| Python Win64 (Final)     |                  152 |       11 661 |    85 758 |
-| Python Win64 (JSON)      |                  324 |       48 859 |    20 467 |
+| Language & Platform      | Message size | Deserialization rate | Deserialization time |
+| :----------------------- | -----------: | -------------------: | -------------------: |
+| C++ Win64                |    252 bytes |      9 523 810 ops/s |               105 ns |
+| C++ Win64 (Final)        |    152 bytes |     10 989 011 ops/s |                91 ns |
+| C++ Win64 (JSON)         |    353 bytes |      1 375 516 ops/s |               727 ns |
+| C# Win64                 |    252 bytes |      1 014 199 ops/s |               986 ns |
+| C# Win64 (Final)         |    152 bytes |      1 607 717 ops/s |               622 ns |
+| C# Win64 (JSON)          |    341 bytes |        258 532 ops/s |             3 868 ns |
+| .NET Core Linux          |    252 bytes |        804 052 ops/s |             1 244 ns |
+| .NET Core Linux (Final)  |    152 bytes |      1 343 544 ops/s |               744 ns |
+| .NET Core Linux (JSON)   |    341 bytes |        222 074 ops/s |             4 503 ns |
+| Java Win64               |    252 bytes |      2 688 084 ops/s |               372 ns |
+| Java Win64 (Final)       |    152 bytes |      3 036 020 ops/s |               329 ns |
+| Java Win64 (JSON)        |    353 bytes |        308 675 ops/s |             3 240 ns |
+| JavaScript Win64         |    252 bytes |        133 892 ops/s |             7 469 ns |
+| JavaScript Win64 (Final) |    152 bytes |        292 273 ops/s |             3 422 ns |
+| JavaScript Win64 (JSON)  |    341 bytes |        289 417 ops/s |             3 455 ns |
+| Python Win64             |    252 bytes |          8 305 ops/s |           120 411 ns |
+| Python Win64 (Final)     |    152 bytes |         11 661 ops/s |            85 758 ns |
+| Python Win64 (JSON)      |    324 bytes |         48 859 ops/s |            20 467 ns |
 
 ## Benchmark 3: Verify
 Verify benchmark C++ code:
@@ -751,17 +751,17 @@ BENCHMARK_FIXTURE(VerifyFixture, "Verify")
 
 Verify benchmark results:
 
-| Language & Platform      | Message size (bytes) | Rate (ops/s) | Time (ns) |
-| :----------------------- | -------------------: | -----------: | --------: |
-| C++ Win64                |                  252 |   31 250 000 |       105 |
-| C++ Win64 (Final)        |                  152 |   35 714 286 |        91 |
-| C# Win64                 |                  252 |    4 504 505 |       222 |
-| C# Win64 (Final)         |                  152 |    8 064 516 |       124 |
-| .NET Core Linux          |                  252 |    3 718 855 |       269 |
-| .NET Core Linux (Final)  |                  152 |    6 653 360 |       150 |
-| Java Win64               |                  252 |   11 790 374 |        85 |
-| Java Win64 (Final)       |                  152 |   16 205 533 |        62 |
-| JavaScript Win64         |                  252 |    1 105 627 |       905 |
-| JavaScript Win64 (Final) |                  152 |    5 700 408 |       175 |
-| Python Win64             |                  252 |       20 825 |    48 019 |
-| Python Win64 (Final)     |                  152 |       23 590 |    42 391 |
+| Language & Platform      | Message size |      Verify rate | Verify time |
+| :----------------------- | -----------: | ---------------: | ----------: |
+| C++ Win64                |    252 bytes | 31 250 000 ops/s |      105 ns |
+| C++ Win64 (Final)        |    152 bytes | 35 714 286 ops/s |       91 ns |
+| C# Win64                 |    252 bytes |  4 504 505 ops/s |      222 ns |
+| C# Win64 (Final)         |    152 bytes |  8 064 516 ops/s |      124 ns |
+| .NET Core Linux          |    252 bytes |  3 718 855 ops/s |      269 ns |
+| .NET Core Linux (Final)  |    152 bytes |  6 653 360 ops/s |      150 ns |
+| Java Win64               |    252 bytes | 11 790 374 ops/s |       85 ns |
+| Java Win64 (Final)       |    152 bytes | 16 205 533 ops/s |       62 ns |
+| JavaScript Win64         |    252 bytes |  1 105 627 ops/s |      905 ns |
+| JavaScript Win64 (Final) |    152 bytes |  5 700 408 ops/s |      175 ns |
+| Python Win64             |    252 bytes |     20 825 ops/s |   48 019 ns |
+| Python Win64 (Final)     |    152 bytes |     23 590 ops/s |   42 391 ns |
