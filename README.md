@@ -261,17 +261,17 @@ domain models in different programming languages and platforms. Also FBE format
 [solves protocol versioning problem](#versioning).
 
 Follow the steps below in order to serialize any domain object:
-1. Create a new domain object and fill its fields and collections (~proto::Account account~);
-2. Create a domain model with a write buffer (~FBE::proto::AccountModel<FBE::WriteBuffer> writer~)
-3. Serialize the domain object into the domain model buffer (~writer.serialize(account)~)
-4. (Optional) Verify the domain object in the domain model buffer (~assert(writer.verify())~)
-5. Access the domain model buffer to store or send data (~writer.buffer()~)
+1. Create a new domain object and fill its fields and collections (*proto::Account account*);
+2. Create a domain model with a write buffer (*FBE::proto::AccountModel<FBE::WriteBuffer> writer*)
+3. Serialize the domain object into the domain model buffer (*writer.serialize(account)*)
+4. (Optional) Verify the domain object in the domain model buffer (*assert(writer.verify())*)
+5. Access the domain model buffer to store or send data (*writer.buffer()*)
 
 Follow the steps below in order to deserialize any domain object:
-1. Create a domain model with a read buffer (~FBE::proto::AccountModel<FBE::ReadBuffer> reader~)
-2. Attach a source buffer to the domain model (~reader.attach(writer.buffer())~)
-3. (Optional) Verify the domain object in the domain model buffer (~assert(reader.verify())~)
-4. Deserialize the domain object from the domain model buffer (~reader.deserialize(account)~)
+1. Create a domain model with a read buffer (*FBE::proto::AccountModel<FBE::ReadBuffer> reader*)
+2. Attach a source buffer to the domain model (*reader.attach(writer.buffer())*)
+3. (Optional) Verify the domain object in the domain model buffer (*assert(reader.verify())*)
+4. Deserialize the domain object from the domain model buffer (*reader.deserialize(account)*)
 
 Here is an exmple of FBE serialization in C++ languages:
 ```c++
