@@ -29,9 +29,9 @@ Typical usage workflow is the following:
 2. [Generate domain model](#generate-domain-model) for any supported
    programming languages (C++, C#, Java, JavaScript, Python)
 3. [Build domain model](#build-domain-model) library
-4. Serialize/Deserialize objects from the domain model in unified
-   FastBinaryEncoding format (fast and compact)
-5. [JSON convert](#json-domain-model) objects from the domain model in order
+4. [Serialize/Deserialize](#fbe-serialization) objects from the domain model
+   in unified FastBinaryEncoding format (fast and compact)
+5. [JSON convert](#json-serialization) objects from the domain model in order
    to use them in Web API
 6. Implement Sender/Receiver interfaces to create a communication protocol
 
@@ -42,7 +42,8 @@ Typical usage workflow is the following:
   * [Create domain model](#create-domain-model)
   * [Generate domain model](#generate-domain-model)
   * [Build domain model](#build-domain-model)
-  * [JSON domain model](#json-domain-model)
+  * [FBE serialization](#fbe-serialization)
+  * [JSON serialization](#json-serialization)
   * [Packages and import](#packages-and-import)
   * [Struct types](#struct-types)
   * [Struct inheritance](#struct-inheritance)
@@ -59,8 +60,8 @@ Typical usage workflow is the following:
 * Supported complex types (bytes, decimal, string, timestamp, uuid)
 * Supported collections (array, vector, list, map, hash)
 * Fast binary encoding format
-* Serialization/Deserialization to/from binary format
-* [Serialization/Deserialization to/from JSON](#json-domain-model)
+* [Serialization/Deserialization to/from binary format](#fbe-serialization)
+* [Serialization/Deserialization to/from JSON](#json-serialization)
 * Sender/Receiver interfaces for communication protocols
 * [Versioning solution](#versioning)
 * [Excellent performance](#performance-benchmarks)
@@ -254,7 +255,79 @@ dependencies that worth to be mentioned:
 ### Python
 * Python domain model is implemented using Python 3.7 ([time.time_ns()](https://docs.python.org/3/library/time.html#time.time_ns))
 
-# JSON domain model
+# FBE serialization
+FastBinaryEncoding is a fast and compact binary format of representing single
+domain models in different programming languages and platforms. Also FBE format
+[solves protocol versioning problem](#versioning).
+
+Follow the steps below in order to serialize any domain object:
+1. Create a new domain object and fill its fields and collections (~proto::Account account~);
+2. Create a domain model with a write buffer (~FBE::proto::AccountModel<FBE::WriteBuffer> writer~)
+3. Serialize the domain object into the domain model buffer (~writer.serialize(account)~)
+4. (Optional) Verify the domain object in the domain model buffer (~assert(writer.verify())~)
+5. Access the domain model buffer to store or send data (~writer.buffer()~)
+
+Follow the steps below in order to deserialize any domain object:
+1. Create a domain model with a read buffer (~FBE::proto::AccountModel<FBE::ReadBuffer> reader~)
+2. Attach a source buffer to the domain model (~reader.attach(writer.buffer())~)
+3. (Optional) Verify the domain object in the domain model buffer (~assert(reader.verify())~)
+4. Deserialize the domain object from the domain model buffer (~reader.deserialize(account)~)
+
+Here is an exmple of FBE serialization in C++ languages:
+```c++
+#include "../proto/proto.h"
+
+#include <iostream>
+
+int main(int argc, char** argv)
+{
+    // Create a new account with some orders
+    proto::Account account = { 1, "Test", proto::State::good, { "USD", 1000.0 }, std::make_optional<proto::Balance>({ "EUR", 100.0 }), {} };
+    account.orders.emplace_back(1, "EURUSD", proto::OrderSide::buy, proto::OrderType::market, 1.23456, 1000.0);
+    account.orders.emplace_back(2, "EURUSD", proto::OrderSide::sell, proto::OrderType::limit, 1.0, 100.0);
+    account.orders.emplace_back(3, "EURUSD", proto::OrderSide::buy, proto::OrderType::stop, 1.5, 10.0);
+
+    // Serialize the account to the FBE stream
+    FBE::proto::AccountModel<FBE::WriteBuffer> writer;
+    writer.serialize(account);
+    assert(writer.verify());
+
+    // Show the serialized FBE size
+    std::cout << "FBE size: " << writer.buffer().size() << std::endl;
+
+    // Deserialize the account from the FBE stream
+    FBE::proto::AccountModel<FBE::ReadBuffer> reader;
+    reader.attach(writer.buffer());
+    assert(reader.verify());
+    reader.deserialize(account);
+
+    // Show account content
+    std::cout << std::endl;
+    std::cout << account;
+
+    return 0;
+}
+```
+
+Output is the following:
+```
+FBE size: 252
+
+Account(
+  uid=1,
+  name="Test",
+  state=initialized|calculated|good,
+  wallet=Balance(currency="USD",amount=1000),
+  asset=Balance(currency="EUR",amount=100),
+  orders=[3][
+    Order(uid=1,symbol="EURUSD",side=buy,type=market,price=1.23456,volume=1000),
+    Order(uid=2,symbol="EURUSD",side=sell,type=limit,price=1,volume=100),
+    Order(uid=3,symbol="EURUSD",side=buy,type=stop,price=1.5,volume=10)
+  ]
+)
+```
+
+# JSON serialization
 If the domain model compiled with --json flag, then JSON protocol code will
 be generated in all domain objects. As the result each domain object can be
 serialized/deserialized into/from [JSON format](https://www.json.org).
