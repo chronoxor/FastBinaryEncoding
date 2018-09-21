@@ -43,6 +43,7 @@ Typical usage workflow is the following:
   * [Generate domain model](#generate-domain-model)
   * [Build domain model](#build-domain-model)
   * [FBE serialization](#fbe-serialization)
+  * [FBE final serialization](#fbe-final-serialization)
   * [JSON serialization](#json-serialization)
   * [Packages and import](#packages-and-import)
   * [Struct types](#struct-types)
@@ -312,6 +313,86 @@ int main(int argc, char** argv)
 Output is the following:
 ```
 FBE size: 252
+
+Account(
+  uid=1,
+  name="Test",
+  state=initialized|calculated|good,
+  wallet=Balance(currency="USD",amount=1000),
+  asset=Balance(currency="EUR",amount=100),
+  orders=[3][
+    Order(uid=1,symbol="EURUSD",side=buy,type=market,price=1.23456,volume=1000),
+    Order(uid=2,symbol="EURUSD",side=sell,type=limit,price=1,volume=100),
+    Order(uid=3,symbol="EURUSD",side=buy,type=stop,price=1.5,volume=10)
+  ]
+)
+```
+
+# FBE final serialization
+It is possible to achieve more serialization speed if your protocol is mature
+enough so you can fix its final version and disable [versioning](#versioning)
+which requires some extra size and time to process.
+
+| Protocol       | Message size | Serialization time | Deserialization time |
+| :------------: | -----------: | -----------------: | -------------------: |
+| FBE versioning |    252 bytes |              88 ns |                98 ns |
+| FBE final      |    152 bytes |              57 ns |                81 ns |
+
+Final domain model can be compiled with --final flag. As the result additional
+final models will be available for serialization.
+
+Follow the steps below in order to serialize any domain object in final format:
+1. Create a new domain object and fill its fields and collections (*proto::Account account*);
+2. Create a domain final model with a write buffer (*FBE::proto::AccountFinalModel<FBE::WriteBuffer> writer*)
+3. Serialize the domain object into the domain model buffer (*writer.serialize(account)*)
+4. (Optional) Verify the domain object in the domain model buffer (*assert(writer.verify())*)
+5. Access the domain model buffer to store or send data (*writer.buffer()*)
+
+Follow the steps below in order to deserialize any domain object:
+1. Create a domain final model with a read buffer (*FBE::proto::AccountFinalModel<FBE::ReadBuffer> reader*)
+2. Attach a source buffer to the domain final model (*reader.attach(writer.buffer())*)
+3. (Optional) Verify the domain object in the domain model buffer (*assert(reader.verify())*)
+4. Deserialize the domain object from the domain model buffer (*reader.deserialize(account)*)
+
+Here is an exmple of FBE final serialization in C++ languages:
+```c++
+#include "../proto/proto.h"
+
+#include <iostream>
+
+int main(int argc, char** argv)
+{
+    // Create a new account with some orders
+    proto::Account account = { 1, "Test", proto::State::good, { "USD", 1000.0 }, std::make_optional<proto::Balance>({ "EUR", 100.0 }), {} };
+    account.orders.emplace_back(1, "EURUSD", proto::OrderSide::buy, proto::OrderType::market, 1.23456, 1000.0);
+    account.orders.emplace_back(2, "EURUSD", proto::OrderSide::sell, proto::OrderType::limit, 1.0, 100.0);
+    account.orders.emplace_back(3, "EURUSD", proto::OrderSide::buy, proto::OrderType::stop, 1.5, 10.0);
+
+    // Serialize the account to the FBE stream
+    FBE::proto::AccountFinalModel<FBE::WriteBuffer> writer;
+    writer.serialize(account);
+    assert(writer.verify());
+
+    // Show the serialized FBE size
+    std::cout << "FBE final size: " << writer.buffer().size() << std::endl;
+
+    // Deserialize the account from the FBE stream
+    FBE::proto::AccountFinalModel<FBE::ReadBuffer> reader;
+    reader.attach(writer.buffer());
+    assert(reader.verify());
+    reader.deserialize(account);
+
+    // Show account content
+    std::cout << std::endl;
+    std::cout << account;
+
+    return 0;
+}
+```
+
+Output is the following:
+```
+FBE final size: 152
 
 Account(
   uid=1,
