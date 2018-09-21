@@ -333,10 +333,10 @@ It is possible to achieve more serialization speed if your protocol is mature
 enough so you can fix its final version and disable [versioning](#versioning)
 which requires extra size and time to process.
 
-| Protocol  | Message size | Serialization time | Deserialization time |
-| :-------: | -----------: | -----------------: | -------------------: |
-| FBE       |    252 bytes |              88 ns |                98 ns |
-| FBE final |    152 bytes |              57 ns |                81 ns |
+| Protocol  | Message size | Serialization time | Deserialization time | Verify time |
+| :-------: | -----------: | -----------------: | -------------------: | ----------: |
+| FBE       |    252 bytes |              88 ns |                98 ns |       33 ns |
+| FBE final |    152 bytes |              57 ns |                81 ns |       28 ns |
 
 Final domain model can be compiled with --final flag. As the result additional
 final models will be available for serialization.
