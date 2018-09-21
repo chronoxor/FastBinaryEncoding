@@ -87,8 +87,8 @@ Optional:
 
 ### Clone repository with submodules
 ```shell
-git clone https://github.com/chronoxor/CppTemplate.git
-cd CppTemplate
+git clone https://github.com/chronoxor/FastBinaryEncoding.git
+cd FastBinaryEncoding
 git submodule update --init --recursive --remote
 ```
 
@@ -331,12 +331,12 @@ Account(
 # FBE final serialization
 It is possible to achieve more serialization speed if your protocol is mature
 enough so you can fix its final version and disable [versioning](#versioning)
-which requires some extra size and time to process.
+which requires extra size and time to process.
 
-| Protocol       | Message size | Serialization time | Deserialization time |
-| :------------: | -----------: | -----------------: | -------------------: |
-| FBE versioning |    252 bytes |              88 ns |                98 ns |
-| FBE final      |    152 bytes |              57 ns |                81 ns |
+| Protocol  | Message size | Serialization time | Deserialization time |
+| :-------: | -----------: | -----------------: | -------------------: |
+| FBE       |    252 bytes |              88 ns |                98 ns |
+| FBE final |    152 bytes |              57 ns |                81 ns |
 
 Final domain model can be compiled with --final flag. As the result additional
 final models will be available for serialization.
