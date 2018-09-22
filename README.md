@@ -338,7 +338,7 @@ which requires extra size and time to process.
 | FBE       |    252 bytes |              88 ns |                98 ns |       33 ns |
 | FBE final |    152 bytes |              57 ns |                81 ns |       28 ns |
 
-Final domain model can be [compiled with --final flag](#generate-domain-model).
+Final domain model can be compiled with [--final](#generate-domain-model) flag.
 As the result additional final models will be available for serialization.
 
 Follow the steps below in order to serialize any domain object in final format:
@@ -409,7 +409,7 @@ Account(
 ```
 
 # JSON serialization
-If the domain model [compiled with --json flag](#generate-domain-model),
+If the domain model compiled with [--json](#generate-domain-model) flag,
 then JSON protocol code will be generated in all domain objects.
 As the result each domain object can be serialized/deserialized into/from
 [JSON format](https://www.json.org).
