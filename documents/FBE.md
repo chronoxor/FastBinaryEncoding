@@ -59,9 +59,17 @@ struct Order
 
 ## bool
 
+![bool](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/bool.png)
+
 ## byte
 
+![byte](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/byte.png)
+
 ## char, wchar
+
+![char](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/char.png)
+
+![wchar](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/wchar.png)
 
 ## int8, uint8, int16, uint16, int32, uint32, int64, uint64
 
