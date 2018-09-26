@@ -12,6 +12,7 @@ programming languages and platforms.
 
 [FastBinaryEncoding documentation](https://chronoxor.github.io/FastBinaryEncoding)<br/>
 [FastBinaryEncoding downloads](https://github.com/chronoxor/FastBinaryEncoding/releases)<br/>
+[FastBinaryEncoding specification](documents/FBE.md)
 
 Performance comparison to other protocols can be found [here](https://github.com/chronoxor/CppSerialization):
 
@@ -42,6 +43,7 @@ Typical usage workflow is the following:
   * [Create domain model](#create-domain-model)
   * [Generate domain model](#generate-domain-model)
   * [Build domain model](#build-domain-model)
+  * [FBE format](#fbe-format)
   * [FBE serialization](#fbe-serialization)
   * [FBE final serialization](#fbe-final-serialization)
   * [JSON serialization](#json-serialization)
@@ -60,7 +62,7 @@ Typical usage workflow is the following:
 * Supported base types (byte, bool, char, wchar, int8, int16, int32, int64, float, double)
 * Supported complex types (bytes, decimal, string, timestamp, uuid)
 * Supported collections (array, vector, list, map, hash)
-* Fast binary encoding format
+* [Fast binary encoding format](documents/FBE.md)
 * [Serialization/Deserialization to/from binary format](#fbe-serialization)
 * [Serialization/Deserialization to/from JSON](#json-serialization)
 * Sender/Receiver interfaces for communication protocols
@@ -255,6 +257,9 @@ dependencies that worth to be mentioned:
 
 ### Python
 * Python domain model is implemented using Python 3.7 ([time.time_ns()](https://docs.python.org/3/library/time.html#time.time_ns))
+
+# FBE format
+[FastBinaryEncoding format specification](documents/FBE.md)
 
 # FBE serialization
 FastBinaryEncoding is a fast and compact binary format of representing single
