@@ -61,15 +61,77 @@ struct Order
 
 ![bool](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/bool.png)
 
+Size: 1 byte
+Default value: 0
+Min value: 0
+Max value: 1
+Constants:
+* false = 0
+* true = 1
+
+Examples:
+```proto
+bool field1;
+bool field2 = false;
+bool field3 = true;
+}
+```
+
 ## byte
 
 ![byte](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/byte.png)
+
+Size: 1 byte
+Default value: 0
+Min value: 0
+Max value: 255
+Unsigned
+
+Examples:
+```proto
+byte field1;
+byte field2 = 0;
+byte field3 = 128;
+byte field4 = 255;
+}
+```
 
 ## char, wchar
 
 ![char](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/char.png)
 
+Size: 1 byte
+Default value: 0
+Min value: 0
+Max value: 255
+Unsigned
+
+Examples:
+```proto
+char field1;
+char field2 = 48;
+char field3 = 0x41;
+char field4 = '!';
+}
+```
+
 ![wchar](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/wchar.png)
+
+Size: 4 bytes
+Default value: 0
+Min value: 0
+Max value: 0xFFFFFFFF
+Little-endian
+Unsigned
+
+Examples:
+```proto
+wchar field1;
+wchar field2 = 1025;
+wchar field3 = 0x0410;
+wchar field4 = '!';
+}
+```
 
 ## int8, uint8, int16, uint16, int32, uint32, int64, uint64
 
