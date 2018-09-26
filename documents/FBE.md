@@ -75,7 +75,6 @@ Examples:
 bool field1;
 bool field2 = false;
 bool field3 = true;
-}
 ```
 
 ## byte
@@ -95,7 +94,6 @@ byte field1;
 byte field2 = 0;
 byte field3 = 128;
 byte field4 = 255;
-}
 ```
 
 ## char, wchar
@@ -115,7 +113,6 @@ char field1;
 char field2 = 48;
 char field3 = 0x41;
 char field4 = '!';
-}
 ```
 
 ![wchar](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/wchar.png)
@@ -134,7 +131,6 @@ wchar field1;
 wchar field2 = 1025;
 wchar field3 = 0x0410;
 wchar field4 = '!';
-}
 ```
 
 ## int8, uint8, int16, uint16, int32, uint32, int64, uint64
