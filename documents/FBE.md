@@ -61,13 +61,14 @@ struct Order
 
 ![bool](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/bool.png)
 
-Size: 1 byte
-Default value: 0
-Min value: 0
-Max value: 1
-Constants:
-* false = 0
-* true = 1
+Properties:
+* Size = 1 byte
+* Default value = 0
+* Min value = 0
+* Max value = 1
+* Constants:
+  * false = 0
+  * true = 1
 
 Examples:
 ```proto
@@ -81,11 +82,12 @@ bool field3 = true;
 
 ![byte](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/byte.png)
 
-Size: 1 byte
-Default value: 0
-Min value: 0
-Max value: 255
-Unsigned
+Properties:
+* Size = 1 byte
+* Default value = 0
+* Min value = 0
+* Max value = 255
+* Unsigned
 
 Examples:
 ```proto
@@ -100,11 +102,12 @@ byte field4 = 255;
 
 ![char](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/char.png)
 
-Size: 1 byte
-Default value: 0
-Min value: 0
-Max value: 255
-Unsigned
+Properties:
+* Size = 1 byte
+* Default value = 0
+* Min value = 0
+* Max value = 255
+* Unsigned
 
 Examples:
 ```proto
@@ -117,12 +120,13 @@ char field4 = '!';
 
 ![wchar](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/wchar.png)
 
-Size: 4 bytes
-Default value: 0
-Min value: 0
-Max value: 0xFFFFFFFF
-Little-endian
-Unsigned
+Properties:
+* Size = 4 bytes
+* Default value = 0
+* Min value = 0
+* Max value = 0xFFFFFFFF
+* Little-endian
+* Unsigned
 
 Examples:
 ```proto
