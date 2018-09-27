@@ -311,12 +311,12 @@ double? field4 = 123.456e+123;
 
 ## bytes
 
-Represents the byte array with dynamic size that can be changed in user code.
+Represents the byte array that can be changed in user code.
 Works like a [BLOB](https://en.wikipedia.org/wiki/Binary_large_object) that
-can be changed by inserting or removin bytes by random index.
+can be changed in random index.
 
-Implementation depends on equivalent bytes type in each programming language
-(e.g. std::vector<uint8_t> in C++, byte[] in C# and Java).
+Implementation bytes type depends on equivalent bytes type in each programming
+language (e.g. std::vector<uint8_t> in C++, byte[] in C# and Java).
 
 ![bytes](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/bytes.png)
 
@@ -375,8 +375,8 @@ decimal? field4 = 987654.987654;
 
 Represents the string as an array of bytes in [UTF8 encoding](https://en.wikipedia.org/wiki/UTF-8).
 
-Implementation depends on equivalent string type in each programming language
-(e.g. std::string in C++, String class in C# and Java).
+Implementation string type depends on equivalent string type in each
+programming language (e.g. std::string in C++, String class in C# and Java).
 
 ![string](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/string.png)
 
@@ -405,8 +405,9 @@ Represents the timestamp as 64-bit count of nanoseconds from the [Unix epoch](ht
 Timestamp range is enough to store any timestamp value from 1970 to 2554 year
 in nanoseconds (2^64 nanoseconds is ~584.554531 years).
 
-Implementation depends on equivalent string type in each programming language
-(e.g. uint64_t in C++, DateTime struct in C#, Instant class in Java).
+Implementation timestamp type depends on equivalent string type in each
+programming language (e.g. uint64_t in C++, DateTime struct in C#, Instant
+class in Java).
 
 ![timestamp](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/timestamp.png)
 
