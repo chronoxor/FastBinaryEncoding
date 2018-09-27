@@ -58,10 +58,10 @@ Typical usage workflow is the following:
 # Features
 * Cross platform (Linux, OSX, Windows)
 * [Generators for C++, C#, Java, JavaScript, Python](#generate-domain-model)
+* [Fast binary encoding format](documents/FBE.md)
 * [Supported base types (byte, bool, char, wchar, int8, int16, int32, int64, float, double)](documents/FBE.md#base-types)
 * [Supported complex types (bytes, decimal, string, timestamp, uuid)](documents/FBE.md#complex-types)
 * [Supported collections (array, vector, list, map, hash)](documents/FBE.md#collections)
-* [Fast binary encoding format](documents/FBE.md)
 * [Serialization/Deserialization to/from binary format](#fbe-serialization)
 * [Serialization/Deserialization to/from JSON](#json-serialization)
 * Sender/Receiver interfaces for communication protocols
