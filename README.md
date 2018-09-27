@@ -43,7 +43,6 @@ Typical usage workflow is the following:
   * [Create domain model](#create-domain-model)
   * [Generate domain model](#generate-domain-model)
   * [Build domain model](#build-domain-model)
-  * [FBE format](#fbe-format)
   * [FBE serialization](#fbe-serialization)
   * [FBE final serialization](#fbe-final-serialization)
   * [JSON serialization](#json-serialization)
@@ -59,9 +58,9 @@ Typical usage workflow is the following:
 # Features
 * Cross platform (Linux, OSX, Windows)
 * [Generators for C++, C#, Java, JavaScript, Python](#generate-domain-model)
-* Supported base types (byte, bool, char, wchar, int8, int16, int32, int64, float, double)
-* Supported complex types (bytes, decimal, string, timestamp, uuid)
-* Supported collections (array, vector, list, map, hash)
+* [Supported base types (byte, bool, char, wchar, int8, int16, int32, int64, float, double)](documents/FBE.md#base-types)
+* [Supported complex types (bytes, decimal, string, timestamp, uuid)](documents/FBE.md#complex-types)
+* [Supported collections (array, vector, list, map, hash)](documents/FBE.md#collections)
 * [Fast binary encoding format](documents/FBE.md)
 * [Serialization/Deserialization to/from binary format](#fbe-serialization)
 * [Serialization/Deserialization to/from JSON](#json-serialization)
@@ -129,6 +128,8 @@ The first step you should perform to use FastBinaryEncoding is to provide a
 domain model (aka business objects). Domain model is a set of enums, flags
 and structures that related to each other and might be aggregated in some
 hierarchy.
+
+[FastBinaryEncoding format specification](documents/FBE.md)
 
 There is an [sample domain model](https://github.com/chronoxor/FastBinaryEncoding/blob/master/proto/proto.fbe)
 which describes Account-Balance-Orders relation of some abstract trading
@@ -257,9 +258,6 @@ dependencies that worth to be mentioned:
 
 ### Python
 * Python domain model is implemented using Python 3.7 ([time.time_ns()](https://docs.python.org/3/library/time.html#time.time_ns))
-
-# FBE format
-[FastBinaryEncoding format specification](documents/FBE.md)
 
 # FBE serialization
 FastBinaryEncoding is a fast and compact binary format of representing single

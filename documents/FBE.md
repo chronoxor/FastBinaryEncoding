@@ -320,7 +320,8 @@ bytes field1;
 bytes? field2;
 ```
 
-Final model is more compact, but does not support versing:
+[Final model](../README.md#fbe-final-serialization) is more compact, but does not support 
+[versioning](../README.md#versioning):
 
 ![bytes-final](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/bytes-final.png)
 
