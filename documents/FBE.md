@@ -325,6 +325,9 @@ bytes? field2;
 
 ![bytes-final](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/bytes-final.png)
 
+Final model bytes properties:
+* Size = 4 + N bytes
+
 ## decimal
 
 ## string
