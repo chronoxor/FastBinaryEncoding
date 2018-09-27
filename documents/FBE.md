@@ -93,7 +93,7 @@ Examples:
 byte field1;
 byte field2 = 0;
 byte field3 = 128;
-byte field4 = 255;
+byte field4 = 0xFF;
 ```
 
 ## char, wchar
@@ -134,5 +134,69 @@ wchar field4 = '!';
 ```
 
 ## int8, uint8, int16, uint16, int32, uint32, int64, uint64
+
+![int8](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/int8.png)
+
+int8 properties:
+* Size = 1 byte
+* Default value = 0
+* Min value = -128
+* Max value = 127
+* Signed
+
+Examples:
+```proto
+int8 field1;
+int8 field2 = 0;
+int8 field3 = -128;
+int8 field4 = 127;
+```
+
+uint8 properties:
+* Size = 1 byte
+* Default value = 0
+* Min value = 0
+* Max value = 255
+* Unsigned
+
+Examples:
+```proto
+uint8 field1;
+uint8 field2 = 0;
+uint8 field3 = 128;
+uint8 field4 = 0xFF;
+```
+
+![int16](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/int16.png)
+
+int16 properties:
+* Size = 2 byte
+* Default value = 0
+* Min value = -32768
+* Max value = 32767
+* Signed
+
+Examples:
+```proto
+int16 field1;
+int16 field2 = 0;
+int16 field3 = -32768;
+int16 field4 = 32767;
+```
+
+uint16 properties:
+* Size = 2 byte
+* Default value = 0
+* Min value = 0
+* Max value = 65535
+* Unsigned
+
+Examples:
+```proto
+uint16 field1;
+uint16 field2 = 0;
+uint16 field3 = 32768;
+uint16 field4 = 0xFFFF;
+```
 
 ## float, double
