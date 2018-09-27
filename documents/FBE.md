@@ -174,6 +174,7 @@ int16 properties:
 * Default value = 0
 * Min value = -32768
 * Max value = 32767
+* Little-endian
 * Signed
 
 Examples:
@@ -189,6 +190,7 @@ uint16 properties:
 * Default value = 0
 * Min value = 0
 * Max value = 65535
+* Little-endian
 * Unsigned
 
 Examples:
@@ -206,6 +208,7 @@ int32 properties:
 * Default value = 0
 * Min value = -2147483648
 * Max value = 2147483647
+* Little-endian
 * Signed
 
 Examples:
@@ -221,6 +224,7 @@ uint32 properties:
 * Default value = 0
 * Min value = 0
 * Max value = 4294967295
+* Little-endian
 * Unsigned
 
 Examples:
@@ -238,6 +242,7 @@ int64 properties:
 * Default value = 0
 * Min value = -9223372036854775808
 * Max value = 9223372036854775807
+* Little-endian
 * Signed
 
 Examples:
@@ -253,6 +258,7 @@ uint64 properties:
 * Default value = 0
 * Min value = 0
 * Max value = 18446744073709551615
+* Little-endian
 * Unsigned
 
 Examples:
@@ -272,6 +278,7 @@ float properties:
 * Default value = 0.0
 * Min value = 1.175494351e-38
 * Max value = 3.402823466e+38
+* Little-endian
 
 Examples:
 ```proto
@@ -288,6 +295,7 @@ double properties:
 * Default value = 0.0
 * Min value = 2.2250738585072014e-308
 * Max value = 1.7976931348623158e+308
+* Little-endian
 
 Examples:
 ```proto
