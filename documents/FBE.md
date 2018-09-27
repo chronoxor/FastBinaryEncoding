@@ -170,7 +170,7 @@ uint8 field4 = 0xFF;
 ![int16](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/int16.png)
 
 int16 properties:
-* Size = 2 byte
+* Size = 2 bytes
 * Default value = 0
 * Min value = -32768
 * Max value = 32767
@@ -185,7 +185,7 @@ int16 field4 = 32767;
 ```
 
 uint16 properties:
-* Size = 2 byte
+* Size = 2 bytes
 * Default value = 0
 * Min value = 0
 * Max value = 65535
@@ -199,4 +199,100 @@ uint16 field3 = 32768;
 uint16 field4 = 0xFFFF;
 ```
 
+![int32](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/int32.png)
+
+int32 properties:
+* Size = 4 bytes
+* Default value = 0
+* Min value = -2147483648
+* Max value = 2147483647
+* Signed
+
+Examples:
+```proto
+int32 field1;
+int32 field2 = 0;
+int32 field3 = -2147483648;
+int32 field4 = 2147483647;
+```
+
+uint32 properties:
+* Size = 4 bytes
+* Default value = 0
+* Min value = 0
+* Max value = 4294967295
+* Unsigned
+
+Examples:
+```proto
+uint32 field1;
+uint32 field2 = 0;
+uint32 field3 = 2147483648;
+uint32 field4 = 0xFFFFFFFF;
+```
+
+![int64](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/int64.png)
+
+int64 properties:
+* Size = 8 bytes
+* Default value = 0
+* Min value = -9223372036854775808
+* Max value = 9223372036854775807
+* Signed
+
+Examples:
+```proto
+int64 field1;
+int64 field2 = 0;
+int64 field3 = -9223372036854775808;
+int64 field4 = 9223372036854775807;
+```
+
+uint64 properties:
+* Size = 8 bytes
+* Default value = 0
+* Min value = 0
+* Max value = 18446744073709551615
+* Unsigned
+
+Examples:
+```proto
+uint64 field1;
+uint64 field2 = 0;
+uint64 field3 = 9223372036854775808;
+uint64 field4 = 0xFFFFFFFFFFFFFFFF;
+```
+
 ## float, double
+
+![float](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/float.png)
+
+float properties:
+* Size = 4 bytes
+* Default value = 0.0
+* Min value = 1.175494351e-38
+* Max value = 3.402823466e+38
+
+Examples:
+```proto
+float field1;
+float field2 = 0.0;
+float field3 = -123.456;
+float field4 = 123.456e+12;
+```
+
+![double](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/double.png)
+
+double properties:
+* Size = 8 bytes
+* Default value = 0.0
+* Min value = 2.2250738585072014e-308
+* Max value = 1.7976931348623158e+308
+
+Examples:
+```proto
+double field1;
+double field2 = 0.0;
+double field3 = -123.456;
+double field4 = 123.456e+123;
+```
