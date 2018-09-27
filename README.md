@@ -12,7 +12,7 @@ programming languages and platforms.
 
 [FastBinaryEncoding documentation](https://chronoxor.github.io/FastBinaryEncoding)<br/>
 [FastBinaryEncoding downloads](https://github.com/chronoxor/FastBinaryEncoding/releases)<br/>
-[FastBinaryEncoding specification](documents/FBE.md)
+[FastBinaryEncoding specification](https://chronoxor.github.io/FastBinaryEncoding/documents/FBE.html)
 
 Performance comparison to other protocols can be found [here](https://github.com/chronoxor/CppSerialization):
 

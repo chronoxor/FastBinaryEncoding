@@ -320,7 +320,7 @@ bytes field1;
 bytes? field2;
 ```
 
-[Final model](../README.md#fbe-final-serialization) is more compact, but does not support 
+[Final model](../README.md#fbe-final-serialization) is more compact, but does not support
 [versioning](../README.md#versioning):
 
 ![bytes-final](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/bytes-final.png)
@@ -330,7 +330,13 @@ Final model bytes properties:
 
 ## decimal
 
+![decimal](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/decimal.png)
+
 ## string
+
+![string](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/string.png)
+
+![string-final](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/string-final.png)
 
 ## timestamp
 
