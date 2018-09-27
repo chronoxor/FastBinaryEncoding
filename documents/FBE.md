@@ -279,6 +279,7 @@ float properties:
 * Min value = 1.175494351e-38
 * Max value = 3.402823466e+38
 * Little-endian
+* Signed
 
 Examples:
 ```proto
@@ -296,6 +297,7 @@ double properties:
 * Min value = 2.2250738585072014e-308
 * Max value = 1.7976931348623158e+308
 * Little-endian
+* Signed
 
 Examples:
 ```proto
@@ -308,6 +310,13 @@ double? field4 = 123.456e+123;
 # Complex types
 
 ## bytes
+
+Represents the byte array with dynamic size that can be changed in user code.
+Works like a [BLOB](https://en.wikipedia.org/wiki/Binary_large_object) that
+can be changed by inserting or removin bytes by random index.
+
+Implementation depends on equivalent bytes type in each programming language
+(e.g. std::vector<uint8_t> in C++, byte[] in C# and Java).
 
 ![bytes](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/bytes.png)
 
@@ -352,6 +361,7 @@ decimal properties:
 * Min value = -79228162514264337593543950335
 * Max value = 79228162514264337593543950335
 * Little-endian
+* Signed
 
 Examples:
 ```proto
@@ -362,6 +372,11 @@ decimal? field4 = 987654.987654;
 ```
 
 ## string
+
+Represents the string as an array of bytes in [UTF8 encoding](https://en.wikipedia.org/wiki/UTF-8).
+
+Implementation depends on equivalent string type in each programming language
+(e.g. std::string in C++, String class in C# and Java).
 
 ![string](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/string.png)
 
@@ -386,4 +401,35 @@ Final model string properties:
 
 ## timestamp
 
+Represents the timestamp as 64-bit count of nanoseconds from the [Unix epoch](https://en.wikipedia.org/wiki/Unix_time).
+Timestamp range is enough to store any timestamp value from 1970 to 2554 year
+in nanoseconds (2^64 nanoseconds is ~584.554531 years).
+
+Implementation depends on equivalent string type in each programming language
+(e.g. uint64_t in C++, DateTime struct in C#, Instant class in Java).
+
+![timestamp](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/timestamp.png)
+
+timestamp properties:
+* Resolution: nanoseconds
+* Size = 8 bytes
+* Default value = 0
+* Min value = 0 (1970-01-01T00:00:00Z)
+* Max value = 18446744073709551615 (2554-07-21T23:34:33Z and 709551615ns)
+* Constants:
+  * epoch = [Unix epoch](https://en.wikipedia.org/wiki/Unix_time) (1970-01-01T00:00:00Z)
+  * utc = Current timestamp in UTC
+* Little-endian
+* Unsigned
+
+Examples:
+```proto
+timestamp field1;
+timestamp field2 = epoch;
+timestamp field3 = now;
+timestamp? field4 = now;
+```
+
 ## uuid
+
+![uuid](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/uuid.png)
