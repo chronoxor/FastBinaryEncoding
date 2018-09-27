@@ -320,8 +320,7 @@ bytes field1;
 bytes? field2;
 ```
 
-[Final model](../README.md#fbe-final-serialization) is more compact, but does not support
-[versioning](../README.md#versioning):
+[Final model](../README.md#fbe-final-serialization) is more compact:
 
 ![bytes-final](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/bytes-final.png)
 
@@ -330,13 +329,60 @@ Final model bytes properties:
 
 ## decimal
 
+A decimal number is a floating-point value that consists of a sign, a numeric
+value where each digit in the value ranges from 0 to 9, and a scaling factor
+that indicates the position of a floating decimal point that separates the
+integral and fractional parts of the numeric value.
+
+The binary representation of a Decimal value consists of a 1-bit sign,
+a 96-bit integer number, and a scaling factor used to divide the 96-bit
+integer and specify what portion of it is a decimal fraction.
+
+The scaling factor is implicitly the number 10, raised to an exponent ranging
+from 0 to 28. Therefore, the binary representation of a âecimal value the form,
+((-29^6 to 29^6) / 10^(0 to 28)), where -(2^96-1) is equal to min value, and
+2^96-1 is equal to max value.
+
 ![decimal](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/decimal.png)
+
+decimal properties:
+* Equivalent of the [.NET Decimal type](https://docs.microsoft.com/en-us/dotnet/api/system.decimal)
+* Size = 16 bytes
+* Default value = 0
+* Min value = -79228162514264337593543950335
+* Max value = 79228162514264337593543950335
+* Little-endian
+
+Examples:
+```proto
+decimal field1;
+decimal field2 = 0.0;
+decimal field3 = 123456.123456;
+decimal? field4 = 987654.987654;
+```
 
 ## string
 
 ![string](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/string.png)
 
+string properties:
+* Encoding = [UTF8](https://en.wikipedia.org/wiki/UTF-8)
+* Size = 8 + N bytes
+
+Examples:
+```proto
+string field1;
+string field2 = "";
+string field3 = "Initial string";
+string? field4 = "Another initial string";
+```
+
+[Final model](../README.md#fbe-final-serialization) is more compact:
+
 ![string-final](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/string-final.png)
+
+Final model string properties:
+* Size = 4 + N bytes
 
 ## timestamp
 
