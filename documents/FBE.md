@@ -315,8 +315,8 @@ Represents the byte array that can be changed in user code.
 Works like a [BLOB](https://en.wikipedia.org/wiki/Binary_large_object) that
 can be changed in random index.
 
-Implementation bytes type depends on equivalent type in each programming
-language (e.g. std::vector<uint8_t> in C++, byte[] in C# and Java).
+*Implementation bytes type depends on equivalent type in each programming
+language (e.g. std::vector<uint8_t> in C++, byte[] in C# and Java).*
 
 ![bytes](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/bytes.png)
 
@@ -373,8 +373,8 @@ decimal field3 = 123456.123456;
 
 Represents the string as an array of bytes in [UTF8 encoding](https://en.wikipedia.org/wiki/UTF-8).
 
-Implementation string type depends on equivalent type in each programming
-language (e.g. std::string in C++, String class in C# and Java).
+*Implementation string type depends on equivalent type in each programming
+language (e.g. std::string in C++, String class in C# and Java).*
 
 ![string](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/string.png)
 
@@ -402,8 +402,8 @@ Represents the timestamp as 64-bit count of nanoseconds from the [Unix epoch](ht
 Timestamp range is enough to store any timestamp value from 1970 to 2554 year
 in nanoseconds (2^64 nanoseconds is ~584.554531 years).
 
-Implementation timestamp type depends on equivalent type in each programming
-language (e.g. uint64_t in C++, DateTime struct in C#, Instant class in Java).
+*Implementation timestamp type depends on equivalent type in each programming
+language (e.g. uint64_t in C++, DateTime struct in C#, Instant class in Java).*
 
 ![timestamp](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/timestamp.png)
 
@@ -436,8 +436,8 @@ Supported uuid types:
 * Sequential UUID1 (time based version)
 * Random UUID4 (randomly or pseudo-randomly generated version)
 
-Implementation uuid type depends on equivalent type in each programming
-language (e.g. custom uuid_t in C++, Guid in C#, UUID in Java).
+*Implementation uuid type depends on equivalent type in each programming
+language (e.g. custom uuid_t in C++, Guid in C#, UUID in Java).*
 
 ![uuid](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/uuid.png)
 
@@ -449,7 +449,7 @@ language (e.g. custom uuid_t in C++, Guid in C#, UUID in Java).
 | Clock sequence      | 2 bytes | 1-3 bit "variant" in the most significant bits, followed by the 13-15 bit clock sequence |
 | Node                | 6 bytes | 48-bit Node Id                                                                           |
 
-*The binary encoding of uuid fields is big-endian format!*
+**The binary encoding of uuid fields is big-endian format!**
 
 uuid properties:
 * Size = 16 bytes
