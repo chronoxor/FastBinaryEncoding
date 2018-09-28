@@ -433,4 +433,7 @@ timestamp? field4 = now;
 
 ## uuid
 
+A universally unique identifier (UUID) is a 128-bit number used to identify
+information in computer systems.
+
 ![uuid](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/uuid.png)
