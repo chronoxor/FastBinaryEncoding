@@ -74,7 +74,7 @@ Examples:
 ```proto
 bool field1;
 bool field2 = false;
-bool? field3 = true;
+bool field3 = true;
 ```
 
 ## byte
@@ -93,7 +93,7 @@ Examples:
 byte field1;
 byte field2 = 0;
 byte field3 = 128;
-byte? field4 = 0xFF;
+byte field4 = 0xFF;
 ```
 
 ## char, wchar
@@ -112,7 +112,7 @@ Examples:
 char field1;
 char field2 = 48;
 char field3 = 0x41;
-char? field4 = '!';
+char field4 = '!';
 ```
 
 ![wchar](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/wchar.png)
@@ -130,7 +130,7 @@ Examples:
 wchar field1;
 wchar field2 = 1025;
 wchar field3 = 0x0410;
-wchar? field4 = '!';
+wchar field4 = '!';
 ```
 
 ## int8, uint8, int16, uint16, int32, uint32, int64, uint64
@@ -149,7 +149,7 @@ Examples:
 int8 field1;
 int8 field2 = 0;
 int8 field3 = -128;
-int8? field4 = 127;
+int8 field4 = 127;
 ```
 
 uint8 properties:
@@ -164,7 +164,7 @@ Examples:
 uint8 field1;
 uint8 field2 = 0;
 uint8 field3 = 128;
-uint8? field4 = 0xFF;
+uint8 field4 = 0xFF;
 ```
 
 ![int16](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/int16.png)
@@ -182,7 +182,7 @@ Examples:
 int16 field1;
 int16 field2 = 0;
 int16 field3 = -32768;
-int16? field4 = 32767;
+int16 field4 = 32767;
 ```
 
 uint16 properties:
@@ -198,7 +198,7 @@ Examples:
 uint16 field1;
 uint16 field2 = 0;
 uint16 field3 = 32768;
-uint16? field4 = 0xFFFF;
+uint16 field4 = 0xFFFF;
 ```
 
 ![int32](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/int32.png)
@@ -216,7 +216,7 @@ Examples:
 int32 field1;
 int32 field2 = 0;
 int32 field3 = -2147483648;
-int32? field4 = 2147483647;
+int32 field4 = 2147483647;
 ```
 
 uint32 properties:
@@ -232,7 +232,7 @@ Examples:
 uint32 field1;
 uint32 field2 = 0;
 uint32 field3 = 2147483648;
-uint32? field4 = 0xFFFFFFFF;
+uint32 field4 = 0xFFFFFFFF;
 ```
 
 ![int64](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/int64.png)
@@ -250,7 +250,7 @@ Examples:
 int64 field1;
 int64 field2 = 0;
 int64 field3 = -9223372036854775808;
-int64? field4 = 9223372036854775807;
+int64 field4 = 9223372036854775807;
 ```
 
 uint64 properties:
@@ -266,7 +266,7 @@ Examples:
 uint64 field1;
 uint64 field2 = 0;
 uint64 field3 = 9223372036854775808;
-uint64? field4 = 0xFFFFFFFFFFFFFFFF;
+uint64 field4 = 0xFFFFFFFFFFFFFFFF;
 ```
 
 ## float, double
@@ -286,7 +286,7 @@ Examples:
 float field1;
 float field2 = 0.0;
 float field3 = -123.456;
-float? field4 = 123.456e+12;
+float field4 = 123.456e+12;
 ```
 
 ![double](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/double.png)
@@ -304,7 +304,7 @@ Examples:
 double field1;
 double field2 = 0.0;
 double field3 = -123.456;
-double? field4 = 123.456e+123;
+double field4 = 123.456e+123;
 ```
 
 # Complex types
@@ -326,7 +326,6 @@ bytes properties:
 Examples:
 ```proto
 bytes field1;
-bytes? field2;
 ```
 
 [Final model](../README.md#fbe-final-serialization) is more compact:
@@ -368,7 +367,6 @@ Examples:
 decimal field1;
 decimal field2 = 0.0;
 decimal field3 = 123456.123456;
-decimal? field4 = 987654.987654;
 ```
 
 ## string
@@ -389,7 +387,6 @@ Examples:
 string field1;
 string field2 = "";
 string field3 = "Initial string";
-string? field4 = "Another initial string";
 ```
 
 [Final model](../README.md#fbe-final-serialization) is more compact:
@@ -428,7 +425,6 @@ Examples:
 timestamp field1;
 timestamp field2 = epoch;
 timestamp field3 = now;
-timestamp? field4 = now;
 ```
 
 ## uuid
@@ -436,4 +432,34 @@ timestamp? field4 = now;
 A universally unique identifier (UUID) is a 128-bit number used to identify
 information in computer systems.
 
+Supported uuid types:
+* Nil UUID0 (all bits set to zero)
+* Sequential UUID1 (time based version)
+* Random UUID4 (randomly or pseudo-randomly generated version)
+
 ![uuid](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/uuid.png)
+
+| Field               | Size    | Comments                                                                                 |
+| :------------------ | :------ | :--------------------------------------------------------------------------------------- |
+| Time low            | 4 bytes | Integer giving the low 32 bits of the time                                               |
+| Time mid            | 2 bytes | Integer giving the middle 16 bits of the time                                            |
+| Time hi and version | 2 bytes | 4-bit "version" in the most significant bits, followed by the high 12 bits of the time   |
+| Clock sequence      | 2 bytes | 1-3 bit "variant" in the most significant bits, followed by the 13-15 bit clock sequence |
+| Node                | 6 bytes | 48-bit Node Id                                                                           |
+
+uuid properties:
+* Size = 16 bytes
+* Default value = 00000000-0000-0000-0000-000000000000
+* Constants:
+  * uuid0 = Nil UUID0
+  * uuid1 = Sequential UUID1
+  * uuid4 = Random UUID4
+
+Examples:
+```proto
+uuid field1;
+uuid field2 = uuid0;
+uuid field3 = uuid1;
+uuid field4 = uuid4;
+uuid field5 = "123e4567-e89b-12d3-a456-426655440000";
+```

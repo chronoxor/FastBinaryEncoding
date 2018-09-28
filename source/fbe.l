@@ -68,6 +68,7 @@ int yyerror(const std::string& msg);
 "null"                  { yycount(); return yystring(CONST_NULL); }
 "epoch"                 { yycount(); return yystring(CONST_EPOCH); }
 "utc"                   { yycount(); return yystring(CONST_UTC); }
+"uuid0"                 { yycount(); return yystring(CONST_UUID0); }
 "uuid1"                 { yycount(); return yystring(CONST_UUID1); }
 "uuid4"                 { yycount(); return yystring(CONST_UUID4); }
 
