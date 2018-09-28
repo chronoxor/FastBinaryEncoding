@@ -312,12 +312,13 @@ double field4 = 123.456e+123;
 
 ## bytes
 
-Represents the byte array that can be changed in user code.
+Represents a byte array that can be changed in user code.
 Works like a [BLOB](https://en.wikipedia.org/wiki/Binary_large_object) that
 can be changed in random index.
 
-*Implementation bytes type depends on equivalent type in each programming
-language (e.g. std::vector<uint8_t> in C++, byte[] in C# and Java).*
+*Implementation of the bytes type depends on equivalent type in each
+programming language (e.g. std::vector<uint8_t> in C++, byte[] in C#
+and Java).*
 
 ![bytes](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/bytes.png)
 
@@ -375,10 +376,11 @@ References:
 
 ## string
 
-Represents the string as an array of bytes in [UTF8 encoding](https://en.wikipedia.org/wiki/UTF-8).
+Represents a string as an array of bytes in [UTF8 encoding](https://en.wikipedia.org/wiki/UTF-8).
 
-*Implementation string type depends on equivalent type in each programming
-language (e.g. std::string in C++, String class in C# and Java).*
+*Implementation of the string type depends on equivalent type in each
+programming language (e.g. std::string in C++, String class in C# and
+Java).*
 
 ![string](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/string.png)
 
@@ -402,12 +404,13 @@ Final model string properties:
 
 ## timestamp
 
-Represents the timestamp as 64-bit count of nanoseconds from the [Unix epoch](https://en.wikipedia.org/wiki/Unix_time).
+Represents a timestamp as 64-bit count of nanoseconds from the [Unix epoch](https://en.wikipedia.org/wiki/Unix_time).
 Timestamp range is enough to store any timestamp value from 1970 to 2554 year
 in nanoseconds (2^64 nanoseconds is ~584.554531 years).
 
-*Implementation timestamp type depends on equivalent type in each programming
-language (e.g. uint64_t in C++, DateTime struct in C#, Instant class in Java).*
+*Implementation of the timestamp type depends on equivalent type in each
+programming language (e.g. uint64_t in C++, DateTime struct in C#, Instant
+class in Java).*
 
 ![timestamp](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/timestamp.png)
 
@@ -440,8 +443,9 @@ Supported uuid types:
 * Sequential UUID1 (time based version)
 * Random UUID4 (randomly or pseudo-randomly generated version)
 
-*Implementation uuid type depends on equivalent type in each programming
-language (e.g. custom uuid_t in C++, Guid in C#, UUID in Java).*
+*Implementation of the uuid type depends on equivalent type in each
+programming language (e.g. custom uuid_t in C++, Guid in C#, UUID in
+Java).*
 
 ![uuid](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/uuid.png)
 
@@ -498,9 +502,20 @@ References:
 
 ## array
 
+Represents a fixed size array of the given type.
+
+*Implementation of the array type depends on equivalent type in each
+programming language (e.g. std::array<T, N> in C++, T[] in C# and Java).*
+
 ![array](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/array.png)
 
 ## vector
+
+Represents a dynamic size vector of the given type.
+
+*Implementation of the vector type depends on equivalent type in each
+programming language (e.g. std::vector<T> in C++, List<T> in C#, ArrayList<T>
+in Java).*
 
 ![vector](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/vector.png)
 
@@ -508,11 +523,23 @@ References:
 
 ## list
 
+Represents a linked list of the given type.
+
+*Implementation of the list type depends on equivalent type in each
+programming language (e.g. std::list<T> in C++, LinkedList<T> in C#
+and Java).*
+
 ![list](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/list.png)
 
 ![list-final](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/list-final.png)
 
 ## map
+
+Represents an associative map of the given type.
+
+*Implementation of the map type depends on equivalent type in each
+programming language (e.g. std::map<K, V> in C++, SortedDictionary<K, V>
+in C#, TreeMap<K, V> in Java).*
 
 ![map](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/map.png)
 
@@ -520,11 +547,23 @@ References:
 
 ## hash
 
+Represents an associative hash table of the given type.
+
+*Implementation of the hash type depends on equivalent type in each
+programming language (e.g. std::unordered_map<K, V> in C++, Dictionary<K, V>
+in C#, HashMap<K, V> in Java).*
+
 ![hash](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/hash.png)
 
 ![hash-final](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/hash-final.png)
 
 # Optional type
+
+Represents an optional wrapper of the given type.
+
+*Implementation of the optional type depends on equivalent type in each
+programming language (e.g. std::optional<T> in C++, Nullable<T> struct
+or any reference type in C#, reference type in Java).*
 
 ![optional](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/optional.png)
 
