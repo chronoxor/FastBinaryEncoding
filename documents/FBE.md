@@ -51,6 +51,7 @@ struct Order
     * [list](#list)
     * [map](#map)
     * [hash](#hash)
+  * [Optional type](#optional-type)
   * [Enums](#enums)
   * [Flags](#flags)
   * [Structs](#structs)
@@ -444,9 +445,9 @@ language (e.g. custom uuid_t in C++, Guid in C#, UUID in Java).*
 
 ![uuid](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/uuid.png)
 
-In its canonical textual representation, the sixteen octets of a uuid are 
-represented as 32 hexadecimal (base 16) digits, displayed in five groups 
-separated by hyphens, in the form 8-4-4-4-12 for a total of 36 characters 
+In its canonical textual representation, the sixteen octets of a uuid are
+represented as 32 hexadecimal (base 16) digits, displayed in five groups
+separated by hyphens, in the form 8-4-4-4-12 for a total of 36 characters
 (32 alphanumeric characters and four hyphens). For example:
 
 ```
@@ -454,12 +455,12 @@ separated by hyphens, in the form 8-4-4-4-12 for a total of 36 characters
 xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx
 ```
 
-The four bits of digit M indicate the uuid version, and the one to three 
-most significant bits of digit N indicate the uuid variant. In the example, 
-M is 1 and N is a (10xx), meaning that the uuid is a variant 1, version 1 
+The four bits of digit M indicate the uuid version, and the one to three
+most significant bits of digit N indicate the uuid variant. In the example,
+M is 1 and N is a (10xx), meaning that the uuid is a variant 1, version 1
 uuid; that is, a time-based DCE/RFC 4122 uuid.
 
-The canonical 8-4-4-4-12 format string is based on the "record layout" for 
+The canonical 8-4-4-4-12 format string is based on the "record layout" for
 the 16 bytes of the uuid:
 
 | Field               | Size    | Comments                                                                                 |
@@ -492,3 +493,39 @@ uuid field5 = "123e4567-e89b-12d3-a456-426655440000";
 References:
 * [Universally unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier)
 * [RFC 4122: A Universally Unique IDentifier (UUID) URN Namespace](https://tools.ietf.org/html/rfc4122)
+
+# Collections
+
+## array
+
+![array](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/array.png)
+
+## vector
+
+![vector](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/vector.png)
+
+![vector-final](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/vector-final.png)
+
+## list
+
+![list](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/list.png)
+
+![list-final](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/list-final.png)
+
+## map
+
+![map](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/map.png)
+
+![map-final](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/map-final.png)
+
+## hash
+
+![hash](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/hash.png)
+
+![hash-final](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/hash-final.png)
+
+# Optional type
+
+![optional](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/optional.png)
+
+![optional-final](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/optional-final.png)
