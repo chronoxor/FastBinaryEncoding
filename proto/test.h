@@ -14587,14 +14587,14 @@ namespace test {
 
 struct StructHashEx
 {
-    std::map<::test::StructSimple, ::test::StructNested> f1;
-    std::map<::test::StructSimple, std::optional<::test::StructNested>> f2;
+    std::unordered_map<::test::StructSimple, ::test::StructNested> f1;
+    std::unordered_map<::test::StructSimple, std::optional<::test::StructNested>> f2;
 
     StructHashEx()
         : f1()
         , f2()
     {}
-    StructHashEx(const std::map<::test::StructSimple, ::test::StructNested>& arg_f1, const std::map<::test::StructSimple, std::optional<::test::StructNested>>& arg_f2)
+    StructHashEx(const std::unordered_map<::test::StructSimple, ::test::StructNested>& arg_f1, const std::unordered_map<::test::StructSimple, std::optional<::test::StructNested>>& arg_f2)
         : f1(arg_f1)
         , f2(arg_f2)
     {}
@@ -14649,7 +14649,7 @@ inline TOutputStream& operator<<(TOutputStream& stream, const StructHashEx& valu
     stream << "StructHashEx(";
     {
         bool first = true;
-        stream << "f1=[" << value.f1.size()<< "]<{";
+        stream << "f1=[" << value.f1.size()<< "][{";
         for (auto const& it : value.f1)
         {
             stream << std::string(first ? "" : ",") << it.first;
@@ -14657,11 +14657,11 @@ inline TOutputStream& operator<<(TOutputStream& stream, const StructHashEx& valu
             stream << it.second;
             first = false;
         }
-        stream << "}>";
+        stream << "}]";
     }
     {
         bool first = true;
-        stream << ",f2=[" << value.f2.size()<< "]<{";
+        stream << ",f2=[" << value.f2.size()<< "][{";
         for (auto const& it : value.f2)
         {
             stream << std::string(first ? "" : ",") << it.first;
@@ -14669,7 +14669,7 @@ inline TOutputStream& operator<<(TOutputStream& stream, const StructHashEx& valu
             if (it.second) stream << *it.second; else stream << "null";
             first = false;
         }
-        stream << "}>";
+        stream << "}]";
     }
     stream << ")";
     return stream;

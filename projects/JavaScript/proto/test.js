@@ -22500,7 +22500,7 @@ class StructHashEx {
       let first = true
       result += '['
       result += this.f1.size
-      result += ']<{'
+      result += '][{'
       for (let [key, value] of this.f1) {
         result += first ? '' : ','
         result += key.toString()
@@ -22509,14 +22509,14 @@ class StructHashEx {
         result += value.toString()
         first = false
       }
-      result += '}>'
+      result += '}]'
     }
     result += ',f2='
     if (this.f2 != null) {
       let first = true
       result += '['
       result += this.f2.size
-      result += ']<{'
+      result += '][{'
       for (let [key, value] of this.f2) {
         result += first ? '' : ','
         result += key.toString()
@@ -22529,7 +22529,7 @@ class StructHashEx {
         }
         first = false
       }
-      result += '}>'
+      result += '}]'
     }
     result += ')'
     return result

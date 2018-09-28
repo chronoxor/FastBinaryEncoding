@@ -14788,7 +14788,7 @@ class StructHashEx(object):
             first = True
             sb.append("[")
             sb.append(str(len(self.f1)))
-            sb.append("]<{")
+            sb.append("][{")
             for key, value in self.f1.items():
                 sb.append("" if first else ",")
                 sb.append(str(key))
@@ -14796,13 +14796,13 @@ class StructHashEx(object):
                 sb.append("" if first else ",")
                 sb.append(str(value))
                 first = False
-            sb.append("}>")
+            sb.append("}]")
         sb.append(",f2=")
         if self.f2 is not None:
             first = True
             sb.append("[")
             sb.append(str(len(self.f2)))
-            sb.append("]<{")
+            sb.append("][{")
             for key, value in self.f2.items():
                 sb.append("" if first else ",")
                 sb.append(str(key))
@@ -14813,7 +14813,7 @@ class StructHashEx(object):
                 else:
                     sb.append("null")
                 first = False
-            sb.append("}>")
+            sb.append("}]")
         sb.append(")")
         return "".join(sb)
 

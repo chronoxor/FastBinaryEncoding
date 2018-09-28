@@ -509,6 +509,17 @@ programming language (e.g. std::array<T, N> in C++, T[] in C# and Java).*
 
 ![array](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/array.png)
 
+array properties:
+* Size = N * sizeof(T)
+
+Examples:
+```proto
+byte[2] field1;
+string?[4] field2;
+MyEnum[8] field3;
+MyStruct?[16] field4;
+```
+
 ## vector
 
 Represents a dynamic size vector of the given type.
@@ -519,7 +530,23 @@ in Java).*
 
 ![vector](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/vector.png)
 
+vector properties:
+* Size = 8 + N * sizeof(T)
+
+Examples:
+```proto
+byte[] field1;
+string?[] field2;
+MyEnum[] field3;
+MyStruct?[] field4;
+```
+
+[Final model](../README.md#fbe-final-serialization) is more compact:
+
 ![vector-final](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/vector-final.png)
+
+Final model vector properties:
+* Size = 4 + N * sizeof(T)
 
 ## list
 
@@ -531,7 +558,23 @@ and Java).*
 
 ![list](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/list.png)
 
+list properties:
+* Size = 8 + N * sizeof(T)
+
+Examples:
+```proto
+byte() field1;
+string?() field2;
+MyEnum() field3;
+MyStruct?() field4;
+```
+
+[Final model](../README.md#fbe-final-serialization) is more compact:
+
 ![list-final](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/list-final.png)
+
+Final model list properties:
+* Size = 4 + N * sizeof(T)
 
 ## map
 
@@ -543,7 +586,23 @@ in C#, TreeMap<K, V> in Java).*
 
 ![map](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/map.png)
 
+map properties:
+* Size = 8 + N * (sizeof(K) + sizeof(V))
+
+Examples:
+```proto
+byte<int32> field1;
+string?<string> field2;
+MyEnum<uuid> field3;
+MyStruct?<MyKey> field4;
+```
+
+[Final model](../README.md#fbe-final-serialization) is more compact:
+
 ![map-final](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/map-final.png)
+
+Final model map properties:
+* Size = 4 + N * sizeof(T)
 
 ## hash
 
@@ -555,7 +614,23 @@ in C#, HashMap<K, V> in Java).*
 
 ![hash](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/hash.png)
 
+hash properties:
+* Size = 8 + N * (sizeof(K) + sizeof(V))
+
+Examples:
+```proto
+byte{int32} field1;
+string?{string} field2;
+MyEnum{uuid} field3;
+MyStruct?{MyKey} field4;
+```
+
+[Final model](../README.md#fbe-final-serialization) is more compact:
+
 ![hash-final](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/hash-final.png)
+
+Final model hash properties:
+* Size = 4 + N * sizeof(T)
 
 # Optional type
 
@@ -567,4 +642,22 @@ or any reference type in C#, reference type in Java).*
 
 ![optional](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/optional.png)
 
+optional properties:
+* Size = 5 | 5 + sizeof(T)
+
+Examples:
+```proto
+byte? field1;
+int32? field2 = 0;
+string? field3 = "Initial string";
+uuid? field4 = null;
+MyEnum? field5 = null;
+MyStruct? field6 = null;
+```
+
+[Final model](../README.md#fbe-final-serialization) is more compact:
+
 ![optional-final](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/optional-final.png)
+
+Final model optional properties:
+* Size = 1 | 1 + sizeof(T)

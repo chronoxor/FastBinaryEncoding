@@ -14159,16 +14159,16 @@ namespace test {
 
     public struct StructHashEx : IComparable, IComparable<StructHashEx>, IEquatable<StructHashEx>
     {
-        public SortedDictionary<StructSimple, StructNested> f1;
-        public SortedDictionary<StructSimple, StructNested?> f2;
+        public Dictionary<StructSimple, StructNested> f1;
+        public Dictionary<StructSimple, StructNested?> f2;
 
         public static StructHashEx Default => new StructHashEx
         {
-            f1 = new SortedDictionary<StructSimple, StructNested>()
-            , f2 = new SortedDictionary<StructSimple, StructNested?>()
+            f1 = new Dictionary<StructSimple, StructNested>()
+            , f2 = new Dictionary<StructSimple, StructNested?>()
         };
 
-        public StructHashEx(SortedDictionary<StructSimple, StructNested> f1, SortedDictionary<StructSimple, StructNested?> f2)
+        public StructHashEx(Dictionary<StructSimple, StructNested> f1, Dictionary<StructSimple, StructNested?> f2)
         {
             this.f1 = f1;
             this.f2 = f2;
@@ -14224,7 +14224,7 @@ namespace test {
             if (f1 != null)
             {
                 bool first = true;
-                sb.Append("f1=[").Append(f1.Count).Append("]<{");
+                sb.Append("f1=[").Append(f1.Count).Append("][{");
                 foreach (var item in f1)
                 {
                     sb.Append(first ? "" : ",").Append(item.Key);
@@ -14232,12 +14232,12 @@ namespace test {
                     sb.Append(item.Value);
                     first = false;
                 }
-                sb.Append("}>");
+                sb.Append("}]");
             }
             if (f2 != null)
             {
                 bool first = true;
-                sb.Append(",f2=[").Append(f2.Count).Append("]<{");
+                sb.Append(",f2=[").Append(f2.Count).Append("][{");
                 foreach (var item in f2)
                 {
                     sb.Append(first ? "" : ",").Append(item.Key);
@@ -14245,7 +14245,7 @@ namespace test {
                     if (item.Value != null) sb.Append(item.Value); else sb.Append("null");
                     first = false;
                 }
-                sb.Append("}>");
+                sb.Append("}]");
             }
             sb.Append(")");
             return sb.ToString();

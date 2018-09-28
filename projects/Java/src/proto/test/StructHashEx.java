@@ -16,12 +16,12 @@ import proto.*;
 
 public class StructHashEx implements Comparable<Object>
 {
-    public TreeMap<StructSimple, StructNested> f1 = new TreeMap<StructSimple, StructNested>();
-    public TreeMap<StructSimple, StructNested> f2 = new TreeMap<StructSimple, StructNested>();
+    public HashMap<StructSimple, StructNested> f1 = new HashMap<StructSimple, StructNested>();
+    public HashMap<StructSimple, StructNested> f2 = new HashMap<StructSimple, StructNested>();
 
     public StructHashEx() {}
 
-    public StructHashEx(TreeMap<StructSimple, StructNested> f1, TreeMap<StructSimple, StructNested> f2)
+    public StructHashEx(HashMap<StructSimple, StructNested> f1, HashMap<StructSimple, StructNested> f2)
     {
         this.f1 = f1;
         this.f2 = f2;
@@ -89,7 +89,7 @@ public class StructHashEx implements Comparable<Object>
         if (f1 != null)
         {
             boolean first = true;
-            sb.append("f1=[").append(f1.size()).append("]<{");
+            sb.append("f1=[").append(f1.size()).append("][{");
             for (var item : f1.entrySet())
             {
                 sb.append(first ? "" : ",").append(item.getKey());
@@ -97,12 +97,12 @@ public class StructHashEx implements Comparable<Object>
                 sb.append(item.getValue());
                 first = false;
             }
-            sb.append("}>");
+            sb.append("}]");
         }
         if (f2 != null)
         {
             boolean first = true;
-            sb.append(",f2=[").append(f2.size()).append("]<{");
+            sb.append(",f2=[").append(f2.size()).append("][{");
             for (var item : f2.entrySet())
             {
                 sb.append(first ? "" : ",").append(item.getKey());
@@ -110,7 +110,7 @@ public class StructHashEx implements Comparable<Object>
                 if (item.getValue() != null) sb.append(item.getValue()); else sb.append("null");
                 first = false;
             }
-            sb.append("}>");
+            sb.append("}]");
         }
         sb.append(")");
         return sb.toString();

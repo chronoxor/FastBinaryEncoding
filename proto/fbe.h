@@ -452,7 +452,6 @@ public:
         result._data[1] = (uuid.Data1 >> 16) & 0xFF;
         result._data[2] = (uuid.Data1 >>  8) & 0xFF;
         result._data[3] = (uuid.Data1 >>  0) & 0xFF;
-
         result._data[4] = (uuid.Data2 >>  8) & 0xFF;
         result._data[5] = (uuid.Data2 >>  0) & 0xFF;
 
@@ -464,7 +463,6 @@ public:
 
         result._data[10] = uuid.Data4[2];
         result._data[11] = uuid.Data4[3];
-
         result._data[12] = uuid.Data4[4];
         result._data[13] = uuid.Data4[5];
         result._data[14] = uuid.Data4[6];
@@ -505,7 +503,6 @@ public:
         result._data[1] = (uuid.Data1 >> 16) & 0xFF;
         result._data[2] = (uuid.Data1 >>  8) & 0xFF;
         result._data[3] = (uuid.Data1 >>  0) & 0xFF;
-
         result._data[4] = (uuid.Data2 >>  8) & 0xFF;
         result._data[5] = (uuid.Data2 >>  0) & 0xFF;
 

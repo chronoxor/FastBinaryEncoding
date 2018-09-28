@@ -291,6 +291,6 @@ struct StructHash
 // Extended hash declaration
 struct StructHashEx
 {
-    StructNested<StructSimple> f1;
-    StructNested?<StructSimple> f2;
+    StructNested{StructSimple} f1;
+    StructNested?{StructSimple} f2;
 }
