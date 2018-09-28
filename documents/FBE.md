@@ -447,6 +447,8 @@ Supported uuid types:
 | Clock sequence      | 2 bytes | 1-3 bit "variant" in the most significant bits, followed by the 13-15 bit clock sequence |
 | Node                | 6 bytes | 48-bit Node Id                                                                           |
 
+The binary encoding of uuid fields is big-endian format!
+
 uuid properties:
 * Size = 16 bytes
 * Default value = 00000000-0000-0000-0000-000000000000
