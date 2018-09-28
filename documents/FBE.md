@@ -428,7 +428,7 @@ timestamp field3 = now;
 
 ## uuid
 
-A universally unique identifier (UUID) is a 128-bit number used to identify
+A universally unique identifier (uuid) is a 128-bit number used to identify
 information in computer systems.
 
 Supported uuid types:
