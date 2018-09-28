@@ -347,7 +347,7 @@ a 96-bit integer number, and a scaling factor used to divide the 96-bit
 integer and specify what portion of it is a decimal fraction.
 
 The scaling factor is implicitly the number 10, raised to an exponent ranging
-from 0 to 28. Therefore, the binary representation of a âecimal value the form,
+from 0 to 28. Therefore, the binary representation of a decimal value the form,
 ((-29^6 to 29^6) / 10^(0 to 28)), where -(2^96-1) is equal to min value, and
 2^96-1 is equal to max value.
 
