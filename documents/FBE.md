@@ -449,7 +449,7 @@ language (e.g. custom uuid_t in C++, Guid in C#, UUID in Java).*
 | Clock sequence      | 2 bytes | 1-3 bit "variant" in the most significant bits, followed by the 13-15 bit clock sequence |
 | Node                | 6 bytes | 48-bit Node Id                                                                           |
 
-**The binary encoding of uuid fields is big-endian format!**
+**All fields are stored in big-endian format!**
 
 uuid properties:
 * Size = 16 bytes
