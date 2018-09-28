@@ -369,6 +369,9 @@ decimal field2 = 0.0;
 decimal field3 = 123456.123456;
 ```
 
+References:
+* [Decimal Struct](https://docs.microsoft.com/en-us/dotnet/api/system.decimal)
+
 ## string
 
 Represents the string as an array of bytes in [UTF8 encoding](https://en.wikipedia.org/wiki/UTF-8).
@@ -441,6 +444,24 @@ language (e.g. custom uuid_t in C++, Guid in C#, UUID in Java).*
 
 ![uuid](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/uuid.png)
 
+In its canonical textual representation, the sixteen octets of a uuid are 
+represented as 32 hexadecimal (base 16) digits, displayed in five groups 
+separated by hyphens, in the form 8-4-4-4-12 for a total of 36 characters 
+(32 alphanumeric characters and four hyphens). For example:
+
+```
+123e4567-e89b-12d3-a456-426655440000
+xxxxxxxx-xxxx-Mxxx-Nxxx-xxxxxxxxxxxx
+```
+
+The four bits of digit M indicate the uuid version, and the one to three 
+most significant bits of digit N indicate the uuid variant. In the example, 
+M is 1 and N is a (10xx), meaning that the uuid is a variant 1, version 1 
+uuid; that is, a time-based DCE/RFC 4122 uuid.
+
+The canonical 8-4-4-4-12 format string is based on the "record layout" for 
+the 16 bytes of the uuid:
+
 | Field               | Size    | Comments                                                                                 |
 | :------------------ | :------ | :--------------------------------------------------------------------------------------- |
 | Time low            | 4 bytes | Integer giving the low 32 bits of the time                                               |
@@ -453,7 +474,7 @@ language (e.g. custom uuid_t in C++, Guid in C#, UUID in Java).*
 
 uuid properties:
 * Size = 16 bytes
-* Default value = 00000000-0000-0000-0000-000000000000
+* Default value = UUID0 (00000000-0000-0000-0000-000000000000)
 * Constants:
   * uuid0 = Nil UUID0
   * uuid1 = Sequential UUID1
@@ -467,3 +488,7 @@ uuid field3 = uuid1;
 uuid field4 = uuid4;
 uuid field5 = "123e4567-e89b-12d3-a456-426655440000";
 ```
+
+References:
+* [Universally unique identifier](https://en.wikipedia.org/wiki/Universally_unique_identifier)
+* [RFC 4122: A Universally Unique IDentifier (UUID) URN Namespace](https://tools.ietf.org/html/rfc4122)
