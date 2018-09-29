@@ -661,3 +661,73 @@ MyStruct? field6 = null;
 
 Final model optional properties:
 * Size = 1 | 1 + sizeof(T)
+
+# Enums
+
+Represents an enumerable data type. It contains several identificators with
+incremental values or given integer constants.
+
+Supported enum types:
+* byte (1 byte)
+* char (1 byte)
+* wchar (4 bytes)
+* int8 (1 byte)
+* uint8 (1 byte)
+* int16 (2 bytes)
+* uint16 (2 bytes)
+* int32 (4 bytes). This is the default enum type!
+* uint32 (4 bytes)
+* int64 (8 bytes)
+* uint64 (8 bytes)
+
+![enum](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/enum.png)
+
+By default the enum identificator starts from 0 and increments by 1. It is
+possible to provide a custom valid enum value for any identificator or
+even some existing enum identificator.
+
+Examples:
+```proto
+// Default enum declaration (enum type is int32)
+enum MyEnum
+{
+    value0;             // value0 == 0
+    value1;             // value1 == 1
+    value2;             // value2 == 2
+    value3 = -2;        // value3 == -2
+    value4;             // value4 == -1
+    value5;             // value5 == 0
+    value6 = 10;        // value6 == 10
+    value7;             // value7 == 11
+    value8;             // value8 == 12
+    value9 = value1;    // value9 == 1
+    value10;            // value10 == 2
+    value11;            // value11 == 3
+}
+
+// Byte enum declaration
+enum MyByteEnum : byte
+{
+    value0;             // value0 == 0
+    value1 = 0;         // value1 == 0
+    value2;             // value2 == 1
+    value3 = 254;       // value3 == 254
+    value4;             // value4 == 255
+    value5 = value3;    // value5 == 254
+}
+
+// Char enum declaration
+enum MyCharEnum : char
+{
+    value0;             // value0 == 0
+    value1 = '1';       // value1 == '1'
+    value2;             // value2 == '2'
+    value3 = '3';       // value3 == '3'
+    value4;             // value4 == '4'
+    value5 = value3;    // value5 == '3'
+}
+```
+
+# Flags
+
+![flags](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/flags.png)
