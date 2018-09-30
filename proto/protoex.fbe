@@ -26,7 +26,7 @@ enum OrderType : byte
 }
 
 // Extended order declaration
-struct Order == 1
+struct Order(1)
 {
     [key] int32 uid;
     string symbol;
@@ -39,7 +39,7 @@ struct Order == 1
 }
 
 // Extended account balance declaration
-struct Balance = base : proto.Balance
+struct Balance(base) : proto.Balance
 {
     double locked = 0.0;
 }
@@ -59,7 +59,7 @@ flags StateEx : byte
 }
 
 // Extended account declaration
-struct Account == 3
+struct Account(3)
 {
     [key] int32 uid;
     string name;

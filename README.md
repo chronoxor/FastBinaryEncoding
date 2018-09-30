@@ -562,10 +562,10 @@ Package import is implemented using:
 # Struct types
 Struct types are automatically increased until you provide it manually. There
 are two possibilities:
-1. Shift the current struct type offset using '=' operator. As the result all
-   new structs will have incremented type.
-2. Force set struct type offset using '==' operator. It will affect only one
-   struct.
+1. Shift the current struct type offset using '(+X)' suffix. As the result
+   all new structs will have incremented type.
+2. Force set struct type offset using '(X)' of '(base)' suffix. It will
+   affect only one struct.
 
 Example below demonstrates the idea:
 ```proto
@@ -585,7 +585,7 @@ struct Struct2
 }
 
 // Struct type is 10 (explicit declared, shifted to 10)
-struct Struct10 = 10
+struct Struct10(+10)
 {
     ...
 }
@@ -596,14 +596,14 @@ struct Struct11
     ...
 }
 
-// Struct type is 100
-struct Struct100 == 100 (explicit declared, forced to 100)
+// Struct type is 100 (explicit declared, forced to 100)
+struct Struct100(100)
 {
     ...
 }
 
-// Struct type is 12
-struct Struct12 (implicit declared)
+// Struct type is 12 (implicit declared)
+struct Struct12
 {
     ...
 }
@@ -643,7 +643,7 @@ package protoex offset 10
 import proto
 
 // Struct type is 1
-struct StructChild = base : proto.StructBase
+struct StructChild(base) : proto.StructBase
 {
     // bool f1 - will be inherited from proto.StructBase
     // int8 f2 - will be inherited from proto.StructBase
@@ -709,7 +709,7 @@ struct MyStruct
     bool field1;
     byte field2;
     char field3;
-    int32 field4; // New field (default value is 0)
+    int32 field4;          // New field (default value is 0)
     int64 field5 = 123456; // New field (default value is 123456)
 }
 ```
@@ -731,9 +731,9 @@ package protoex
 
 import proto
 
-struct MyStructEx = base : proto.MyStruct
+struct MyStructEx(base) : proto.MyStruct
 {
-    int32 field4; // New field (default value is 0)
+    int32 field4;          // New field (default value is 0)
     int64 field5 = 123456; // New field (default value is 123456)
 }
 ```

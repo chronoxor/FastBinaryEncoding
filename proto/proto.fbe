@@ -21,7 +21,7 @@ enum OrderType : byte
 }
 
 // Order declaration
-struct Order = 1
+struct Order(1)
 {
     [key] int32 uid;
     string symbol;
@@ -32,7 +32,7 @@ struct Order = 1
 }
 
 // Account balance declaration
-struct Balance = 2
+struct Balance(2)
 {
     [key] string currency;
     double amount = 0.0;
@@ -51,7 +51,7 @@ flags State : byte
 }
 
 // Account declaration
-struct Account = 3
+struct Account(3)
 {
     [key] int32 uid;
     string name;

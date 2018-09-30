@@ -73,12 +73,12 @@ int yyerror(const std::string& msg);
 "uuid4"                 { yycount(); return yystring(CONST_UUID4); }
 
 '(\\.|[^\\'])+'         { yycount(); return yystring(CONST_CHAR); }
-[+-]?0[xX]{H}+          { yycount(); return yystring(CONST_INT); }
-[+-]?0{D}+              { yycount(); return yystring(CONST_INT); }
-[+-]?{D}+               { yycount(); return yystring(CONST_INT); }
-[+-]?{D}+{E}            { yycount(); return yystring(CONST_FLOAT); }
-[+-]?{D}*"."{D}+({E})?  { yycount(); return yystring(CONST_FLOAT); }
-[+-]?{D}+"."{D}*({E})?  { yycount(); return yystring(CONST_FLOAT); }
+[-]?0[xX]{H}+           { yycount(); return yystring(CONST_INT); }
+[-]?0{D}+               { yycount(); return yystring(CONST_INT); }
+[-]?{D}+                { yycount(); return yystring(CONST_INT); }
+[-]?{D}+{E}             { yycount(); return yystring(CONST_FLOAT); }
+[-]?{D}*"."{D}+({E})?   { yycount(); return yystring(CONST_FLOAT); }
+[-]?{D}+"."{D}*({E})?   { yycount(); return yystring(CONST_FLOAT); }
 \"(\\.|[^\\"\n])*\"     { yycount(); return yystring(CONST_STRING); }
 
 {L}({L}|{D})*           { yycount(); return yystring(IDENTIFIER); }
@@ -86,6 +86,7 @@ int yyerror(const std::string& msg);
 "."                     { yycount(); return yychar('.'); }
 ":"                     { yycount(); return yychar(':'); }
 ";"                     { yycount(); return yychar(';'); }
+"+"                     { yycount(); return yychar('+'); }
 "="                     { yycount(); return yychar('='); }
 "|"                     { yycount(); return yychar('|'); }
 "!"                     { yycount(); return yychar('!'); }
