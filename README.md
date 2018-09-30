@@ -257,10 +257,10 @@ dependencies that worth to be mentioned:
 
 ### JavaScript
 * JavaScript domain model is implemented using [ECMAScript 6](http://es6-features.org)
-  (classes, etc.)
+  (classes, etc.);
 
 ### Python
-* Python domain model is implemented using Python 3.7 ([time.time_ns()](https://docs.python.org/3/library/time.html#time.time_ns))
+* Python domain model is implemented using Python 3.7 ([time.time_ns()](https://docs.python.org/3/library/time.html#time.time_ns));
 
 # FBE serialization
 FastBinaryEncoding is a fast and compact binary format of representing single
