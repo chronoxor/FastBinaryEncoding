@@ -752,3 +752,64 @@ enum MyUInt64Flags : uint64
     flags  = flag2 | flag8 | flag32; // flags  == 0x2A
 }
 ```
+
+# Structs
+
+Represents a struct data type. It aggregates several fields of different
+types into one logic structure. Moreover structs can be extended using
+inheritance.
+
+[Struct types](../README.md#struct-types)
+[Struct inheritance](../README.md#struct-inheritance)
+
+*Implementation of the struct type depends on equivalent type in each
+programming language (e.g. struct in C++ and C#, class in Java).*
+
+![struct](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/struct.png)
+
+struct properties:
+* Root struct size = 16 + sizeof(fileds)
+* Inner struct size = 12 + sizeof(fileds)
+
+Examples:
+```proto
+// Order declaration
+struct Order
+{
+    [key] int32 uid;
+    string symbol;
+    OrderSide side;
+    OrderType type;
+    double price = 0.0;
+    double volume = 0.0;
+}
+
+// Account balance declaration
+struct Balance
+{
+    [key] string currency;
+    double amount = 0.0;
+}
+
+// Account declaration
+struct Account
+{
+    [key] int32 uid;
+    string name;
+    State state = State.initialized | State.bad;
+    Balance wallet;
+    Balance? asset;
+    Order[] orders;
+}
+```
+
+[Final model](../README.md#fbe-final-serialization) is more compact, but you
+will loose [versioning](#versioning) and any possibility to extend the struct
+with new fields:
+
+![struct-final](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/struct-final.png)
+
+Final model struct properties:
+* Root struct size = 8 + sizeof(fileds)
+* Inner struct size = sizeof(fileds)
+* [More compact and fast](../README.md#fbe-final-serialization)
