@@ -3,7 +3,7 @@
 FastBinaryEncoding format describes domain model with as a set of enums, flags and structs.
 Structs fields are described with a base or complex types or collection.
 
-Example of the order domain model:
+Example of the domain model:
 ```proto
 // Order side declaration
 enum OrderSide
