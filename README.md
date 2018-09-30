@@ -34,7 +34,7 @@ Typical usage workflow is the following:
    in unified FastBinaryEncoding format (fast and compact)
 5. [JSON convert](#json-serialization) objects from the domain model in order
    to use them in Web API
-6. Implement Sender/Receiver interfaces to create a communication protocol
+6. Implement [Sender/Receiver interfaces](#sender-receiver-protocol) to create a communication protocol
 
 # Contents
   * [Features](#features)
@@ -51,6 +51,7 @@ Typical usage workflow is the following:
   * [Struct types](#struct-types)
   * [Struct inheritance](#struct-inheritance)
   * [Versioning](#versioning)
+  * [Sender/Receiver protocol](#sender-receiver-protocol)
   * [Performance benchmarks](#performance-benchmarks)
     * [Benchmark 1: Serialization](#benchmark-1-serialization)
     * [Benchmark 2: Deserialization](#benchmark-2-deserialization)
@@ -65,7 +66,7 @@ Typical usage workflow is the following:
 * [Supported collections (array, vector, list, map, hash)](documents/FBE.md#collections)
 * [Serialization/Deserialization to/from binary format](#fbe-serialization)
 * [Serialization/Deserialization to/from JSON](#json-serialization)
-* Sender/Receiver interfaces for communication protocols
+* [Sender/Receiver interfaces for communication protocols](#sender-receiver-protocol)
 * [Versioning solution](#versioning)
 * [Excellent performance](#performance-benchmarks)
 
@@ -229,6 +230,7 @@ Options:
   --python              Generate Python code
   --final               Generate Final protocol code
   --json                Generate JSON protocol code
+  --sender              Generate Sender/Receiver protocol code
 ```
 
 # Build domain model
@@ -278,7 +280,7 @@ Follow the steps below in order to deserialize any domain object:
 3. (Optional) Verify the domain object in the domain model buffer (*assert(reader.verify())*)
 4. Deserialize the domain object from the domain model buffer (*reader.deserialize(account)*)
 
-Here is an exmple of FBE serialization in C++ languages:
+Here is an exmple of FBE serialization in C++ language:
 ```c++
 #include "../proto/proto.h"
 
@@ -358,7 +360,7 @@ Follow the steps below in order to deserialize any domain object:
 3. (Optional) Verify the domain object in the domain model buffer (*assert(reader.verify())*)
 4. Deserialize the domain object from the domain model buffer (*reader.deserialize(account)*)
 
-Here is an exmple of FBE final serialization in C++ languages:
+Here is an exmple of FBE final serialization in C++ language:
 ```c++
 #include "../proto/proto.h"
 
@@ -425,7 +427,7 @@ to get work with JSON:
 * C# requires [Json.NET](https://www.newtonsoft.com/json) or more faster [Utf8Json ](https://github.com/neuecc/Utf8Json)
 * Java requires [Gson](https://github.com/google/gson)
 
-Here is an exmple of JSON serialization in C++ languages:
+Here is an exmple of JSON serialization in C++ language:
 ```c++
 #include "../proto/proto.h"
 
@@ -794,6 +796,87 @@ struct MyStructEx(base) : proto.MyStruct
 {
     int32 field4;          // New field (default value is 0)
     int64 field5 = 123456; // New field (default value is 123456)
+}
+```
+
+# Sender/Receiver protocol
+If the domain model compiled with [--sender](#generate-domain-model) flag,
+then Sender/Receiver protocol code will be generated.
+
+Sender interface contains 'send(struct)' methods for all domain model structs.
+Also it has abstract 'onSend(data, size)' method which should be implemented
+to send serialized data to a socket, pipe, etc.
+
+Receiver interface contains 'onReceive(struct)' handlers for all domain
+model structs. Also it has public 'onReceive(type, data, size)' method
+which should be used to feed the Receiver with received data from a socket,
+pipe, etc.
+
+Here is an exmple of using Sender/Receiver communication protocol in C++ language:
+```c++
+#include "../proto/proto.h"
+
+#include <iostream>
+
+class MySender : public FBE::proto::Sender<FBE::WriteBuffer>
+{
+protected:
+    size_t onSend(const void* data, size_t size) override
+    {
+        // Send nothing...
+        return 0;
+    }
+
+    void onSendLog(const std::string& message) const override
+    {
+        std::cout << "onSend: " << message << std::endl;
+    }
+};
+
+class MyReceiver : public FBE::proto::Receiver<FBE::WriteBuffer>
+{
+protected:
+    void onReceive(const proto::Order& value) override {}
+    void onReceive(const proto::Balance& value) override {}
+    void onReceive(const proto::Account& value) override {}
+
+    void onReceiveLog(const std::string& message) const override
+    {
+        std::cout << "onReceive: " << message << std::endl;
+    }
+};
+
+int main(int argc, char** argv)
+{
+    MySender sender;
+
+    // Enable logging
+    sender.logging(true);
+
+    // Create and send a new order
+    proto::Order order = { 1, "EURUSD", proto::OrderSide::buy, proto::OrderType::market, 1.23456, 1000.0 };
+    sender.send(order);
+
+    // Create and send a new balance wallet
+    proto::Balance balance = { "USD", 1000.0 };
+    sender.send(balance);
+
+    // Create and send a new account with some orders
+    proto::Account account = { 1, "Test", proto::State::good, { "USD", 1000.0 }, std::make_optional<proto::Balance>({ "EUR", 100.0 }), {} };
+    account.orders.emplace_back(1, "EURUSD", proto::OrderSide::buy, proto::OrderType::market, 1.23456, 1000.0);
+    account.orders.emplace_back(2, "EURUSD", proto::OrderSide::sell, proto::OrderType::limit, 1.0, 100.0);
+    account.orders.emplace_back(3, "EURUSD", proto::OrderSide::buy, proto::OrderType::stop, 1.5, 10.0);
+    sender.send(account);
+
+    MyReceiver receiver;
+
+    // Enable logging
+    receiver.logging(true);
+
+    // Receive all data from the sender
+    receiver.receive(sender.buffer().data(), sender.buffer().size());
+
+    return 0;
 }
 ```
 

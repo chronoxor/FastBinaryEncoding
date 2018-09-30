@@ -179,6 +179,7 @@ int main(int argc, char** argv)
     parser.add_option("--python").action("store_true").set_default(0).help("Generate Python code");
     parser.add_option("--final").action("store_true").set_default(0).help("Generate Final protocol code");
     parser.add_option("--json").action("store_true").set_default(0).help("Generate JSON protocol code");
+    parser.add_option("--sender").action("store_true").set_default(0).help("Generate Sender/Receiver protocol code");
 
     optparse::Values options = parser.parse_args(argc, argv);
 
@@ -203,6 +204,7 @@ int main(int argc, char** argv)
     bool python = options.get("python");
     bool final = options.get("final");
     bool json = options.get("json");
+    bool sender = options.get("sender");
     char space = tabs ? '\t' : ' ';
 
     // Check for the input path
@@ -259,31 +261,31 @@ int main(int argc, char** argv)
     if (cpp)
     {
         if (!quiet) std::cout << "Generating C++ code...";
-        FBE::GeneratorCpp(output, (indent ? indent : 4), space).Final(final).JSON(json).Generate(FBE::Package::root);
+        FBE::GeneratorCpp(output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (csharp)
     {
         if (!quiet) std::cout << "Generating C# code...";
-        FBE::GeneratorCSharp(output, (indent ? indent : 4), space).Final(final).JSON(json).Generate(FBE::Package::root);
+        FBE::GeneratorCSharp(output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (java)
     {
         if (!quiet) std::cout << "Generating Java code...";
-        FBE::GeneratorJava(output, (indent ? indent : 4), space).Final(final).JSON(json).Generate(FBE::Package::root);
+        FBE::GeneratorJava(output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (javascript)
     {
         if (!quiet) std::cout << "Generating JavaScript code...";
-        FBE::GeneratorJavaScript(output, (indent ? indent : 2), space).Final(final).JSON(json).Generate(FBE::Package::root);
+        FBE::GeneratorJavaScript(output, (indent ? indent : 2), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (python)
     {
         if (!quiet) std::cout << "Generating Python code...";
-        FBE::GeneratorPython(output, (indent ? indent : 4), space).Final(final).JSON(json).Generate(FBE::Package::root);
+        FBE::GeneratorPython(output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
 

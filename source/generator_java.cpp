@@ -52,9 +52,13 @@ void GeneratorJava::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModelBytes("fbe");
         GenerateFBEFinalModelString("fbe");
     }
-    GenerateFBESender("fbe");
-    GenerateFBEReceiver("fbe");
-    GenerateFBEJson("fbe");
+    if (Sender())
+    {
+        GenerateFBESender("fbe");
+        GenerateFBEReceiver("fbe");
+    }
+    if (JSON())
+        GenerateFBEJson("fbe");
 
     GeneratePackage(package);
 }
@@ -4338,12 +4342,15 @@ void GeneratorJava::GeneratePackage(const std::shared_ptr<Package>& p)
         GenerateContainers(p, true);
 
     // Generate sender & receiver
-    GenerateSender(p, false);
-    GenerateReceiver(p, false);
-    if (Final())
+    if (Sender())
     {
-        GenerateSender(p, true);
-        GenerateReceiver(p, true);
+        GenerateSender(p, false);
+        GenerateReceiver(p, false);
+        if (Final())
+        {
+            GenerateSender(p, true);
+            GenerateReceiver(p, true);
+        }
     }
 
     // Generate JSON engine

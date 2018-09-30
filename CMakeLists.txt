@@ -85,12 +85,12 @@ if(NOT FBEC_MODULE)
     set(FBE_TARGET "${FBE_FILE}_TARGET")
     add_custom_command(
         OUTPUT ${FBE_OUTPUT_FILE}
-        COMMAND $<TARGET_FILE:fbec> --cpp --final --json --input ${FBE_INPUT_FILE} --output ${FBE_OUTPUT_DIR}
-        COMMAND $<TARGET_FILE:fbec> --csharp --final --json --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/CSharp/Proto
-        COMMAND $<TARGET_FILE:fbec> --csharp --final --json --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/.NETCore/Proto
-        COMMAND $<TARGET_FILE:fbec> --java --final --json --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/Java/src/proto
-        COMMAND $<TARGET_FILE:fbec> --javascript --final --json --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/JavaScript/proto
-        COMMAND $<TARGET_FILE:fbec> --python --final --json --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/Python/proto
+        COMMAND $<TARGET_FILE:fbec> --cpp --final --json --sender --input ${FBE_INPUT_FILE} --output ${FBE_OUTPUT_DIR}
+        COMMAND $<TARGET_FILE:fbec> --csharp --final --json --sender --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/CSharp/Proto
+        COMMAND $<TARGET_FILE:fbec> --csharp --final --json --sender --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/.NETCore/Proto
+        COMMAND $<TARGET_FILE:fbec> --java --final --json --sender --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/Java/src/proto
+        COMMAND $<TARGET_FILE:fbec> --javascript --final --json --sender --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/JavaScript/proto
+        COMMAND $<TARGET_FILE:fbec> --python --final --json --sender --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/Python/proto
         DEPENDS ${FBE_INPUT_FILE} COMMENT "Generating FBE proto for ${FBE_INPUT_FILE}..." VERBATIM
     )
     add_custom_target(${FBE_TARGET} DEPENDS ${FBE_OUTPUT_FILE})

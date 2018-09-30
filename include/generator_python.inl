@@ -9,7 +9,7 @@
 namespace FBE {
 
 inline GeneratorPython::GeneratorPython(const std::string& output, int indent, char space)
-    : Generator(output, indent, space), _final(false), _json(false)
+    : Generator(output, indent, space), _final(false), _json(false), _sender(false)
 {
 }
 

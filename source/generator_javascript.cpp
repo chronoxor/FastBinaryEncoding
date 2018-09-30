@@ -3652,9 +3652,13 @@ const utf8decode = utf8.utf8decode
         GenerateFBEFinalModelSet();
         GenerateFBEFinalModelMap();
     }
-    GenerateFBESender();
-    GenerateFBEReceiver();
-    GenerateFBEJson();
+    if (Sender())
+    {
+        GenerateFBESender();
+        GenerateFBEReceiver();
+    }
+    if (JSON())
+        GenerateFBEJson();
 
     // Generate common footer
     GenerateFooter();
@@ -8128,12 +8132,15 @@ void GeneratorJavaScript::GeneratePackage(const std::shared_ptr<Package>& p)
     }
 
     // Generate sender & receiver
-    GenerateSender(p, false);
-    GenerateReceiver(p, false);
-    if (Final())
+    if (Sender())
     {
-        GenerateSender(p, true);
-        GenerateReceiver(p, true);
+        GenerateSender(p, false);
+        GenerateReceiver(p, false);
+        if (Final())
+        {
+            GenerateSender(p, true);
+            GenerateReceiver(p, true);
+        }
     }
 
     // Generate package footer

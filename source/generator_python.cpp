@@ -164,8 +164,11 @@ def utc():
         GenerateFBEFinalModelSet();
         GenerateFBEFinalModelMap();
     }
-    GenerateFBESender();
-    GenerateFBEReceiver();
+    if (Sender())
+    {
+        GenerateFBESender();
+        GenerateFBEReceiver();
+    }
 
     // Generate common footer
     GenerateFooter();
@@ -2812,12 +2815,15 @@ void GeneratorPython::GeneratePackage(const std::shared_ptr<Package>& p)
     }
 
     // Generate sender & receiver
-    GenerateSender(p, false);
-    GenerateReceiver(p, false);
-    if (Final())
+    if (Sender())
     {
-        GenerateSender(p, true);
-        GenerateReceiver(p, true);
+        GenerateSender(p, false);
+        GenerateReceiver(p, false);
+        if (Final())
+        {
+            GenerateSender(p, true);
+            GenerateReceiver(p, true);
+        }
     }
 
     // Generate package footer

@@ -26,11 +26,16 @@ public:
     bool JSON() const noexcept { return _json; }
     GeneratorJava& JSON(bool json) noexcept { _json = json; return *this; }
 
+    // Sender/Receiver protocol code generation
+    bool Sender() const noexcept { return _sender; }
+    GeneratorJava& Sender(bool sender) noexcept { _sender = sender; return *this; }
+
     void Generate(const std::shared_ptr<Package>& package) override;
 
 private:
     bool _final;
     bool _json;
+    bool _sender;
 
     void GenerateHeader();
     void GenerateFooter();
