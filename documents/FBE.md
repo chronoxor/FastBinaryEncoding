@@ -767,8 +767,8 @@ inheritance.
 programming language (e.g. struct in C++ and C#, class in Java).*
 
 Schema legend:
-* **Root struct** is the top level struct serialized in buffer;
-* **Inner struct** is the struct serialized as a field value. FBE supports any
+* **Root struct** is a top level struct serialized in buffer;
+* **Inner struct** is a struct serialized as a field value. FBE supports any
   depth of struct nesting;
 
 ![struct](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/struct.png)
