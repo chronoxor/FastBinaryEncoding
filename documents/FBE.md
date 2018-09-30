@@ -759,8 +759,9 @@ Represents a struct data type. It aggregates several fields of different
 types into one logic structure. Moreover structs can be extended using
 inheritance.
 
-[Struct types](../README.md#struct-types)
-[Struct inheritance](../README.md#struct-inheritance)
+[Struct keys](../README.md#struct-keys)<br/>
+[Struct types](../README.md#struct-types)<br/>
+[Struct inheritance](../README.md#struct-inheritance)<br/>
 
 *Implementation of the struct type depends on equivalent type in each
 programming language (e.g. struct in C++ and C#, class in Java).*
@@ -804,8 +805,8 @@ struct Account
 ```
 
 [Final model](../README.md#fbe-final-serialization) is more compact, but you
-will loose [versioning](#versioning) and any possibility to extend the struct
-with new fields:
+will loose [versioning](../README.md#versioning) and the possibility to extend
+the struct with new fields:
 
 ![struct-final](https://github.com/chronoxor/FastBinaryEncoding/raw/master/images/struct-final.png)
 

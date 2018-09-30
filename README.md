@@ -47,6 +47,7 @@ Typical usage workflow is the following:
   * [FBE final serialization](#fbe-final-serialization)
   * [JSON serialization](#json-serialization)
   * [Packages and import](#packages-and-import)
+  * [Struct keys](#struct-keys)
   * [Struct types](#struct-types)
   * [Struct inheritance](#struct-inheritance)
   * [Versioning](#versioning)
@@ -558,6 +559,64 @@ Package import is implemented using:
 * Packages in Java
 * Modules in JavaScript
 * Modules in Python
+
+# Struct keys
+Some of struct fileds (one or many) can be marked with '[key]' attribute. As
+the result corresponding compare operators will be generated which allow to
+compare two instances of the struct (equality, ordering, hashing) by marked
+fields. This ability allows to use the struct as a key in associative map and
+hash containers.
+
+Example below demonstrates the usage of '[key]' attribute:
+```proto
+struct MyKeyStruct
+{
+    [key] int32 uid;
+    [key] stirng login;
+    string name;
+    string address;
+}
+```
+
+After code generation for C++ language the following comparable class will be
+generated:
+```c++
+struct MyKeyStruct
+{
+    int32_t uid;
+    ::sample::stirng login;
+    std::string name;
+    std::string address;
+
+    ...
+
+    bool operator==(const MyKeyStruct& other) const noexcept
+    {
+        return (
+            (uid == other.uid)
+            && (login == other.login)
+            );
+    }
+    bool operator!=(const MyKeyStruct& other) const noexcept { return !operator==(other); }
+    bool operator<(const MyKeyStruct& other) const noexcept
+    {
+        if (uid < other.uid)
+            return true;
+        if (other.uid < uid)
+            return false;
+        if (login < other.login)
+            return true;
+        if (other.login < login)
+            return false;
+        return false;
+    }
+    bool operator<=(const MyKeyStruct& other) const noexcept { return operator<(other) || operator==(other); }
+    bool operator>(const MyKeyStruct& other) const noexcept { return !operator<=(other); }
+    bool operator>=(const MyKeyStruct& other) const noexcept { return !operator<(other); }
+
+    ...
+};
+```
 
 # Struct types
 Struct types are automatically increased until you provide it manually. There
