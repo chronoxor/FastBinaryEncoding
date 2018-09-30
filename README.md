@@ -241,6 +241,9 @@ dependencies that worth to be mentioned:
 ### C++
 * C++ standard is limited to C++17 in order to have the implementation of
   [std::optional](https://en.cppreference.com/w/cpp/utility/optional);
+* C++ has no native support for decimal type. Currently decimal type is
+  emulated with a double type. FBE does not use [GMPLib](https://gmplib.org)
+  because of heavy dependency in generated source code;
 * JSON protocol is implemented using [RapidJSON](http://rapidjson.org) library.
   Therefore its headers should be available (header only library);
 
