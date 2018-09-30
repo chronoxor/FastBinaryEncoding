@@ -880,6 +880,16 @@ int main(int argc, char** argv)
 }
 ```
 
+Output is the following:
+```
+onSend: Order(uid=1,symbol="EURUSD",side=buy,type=market,price=1.23456,volume=1000)
+onSend: Balance(currency="USD",amount=1000)
+onSend: Account(uid=1,name="Test",state=initialized|calculated|good,wallet=Balance(currency="USD",amount=1000),asset=Balance(currency="EUR",amount=100),orders=[3][Order(uid=1,symbol="EURUSD",side=buy,type=market,price=1.23456,volume=1000),Order(uid=2,symbol="EURUSD",side=sell,type=limit,price=1,volume=100),Order(uid=3,symbol="EURUSD",side=buy,type=stop,price=1.5,volume=10)])
+onReceive: Order(uid=1,symbol="EURUSD",side=buy,type=market,price=1.23456,volume=1000)
+onReceive: Balance(currency="USD",amount=1000)
+onReceive: Account(uid=1,name="Test",state=initialized|calculated|good,wallet=Balance(currency="USD",amount=1000),asset=Balance(currency="EUR",amount=100),orders=[3][Order(uid=1,symbol="EURUSD",side=buy,type=market,price=1.23456,volume=1000),Order(uid=2,symbol="EURUSD",side=sell,type=limit,price=1,volume=100),Order(uid=3,symbol="EURUSD",side=buy,type=stop,price=1.5,volume=10)])
+```
+
 # Performance benchmarks
 All benchmarks use the same [domain model](#create-domain-model) to create a
 single account with three orders:
