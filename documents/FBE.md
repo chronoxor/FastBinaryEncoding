@@ -5,6 +5,9 @@ Structs fields are described with a base or complex types or collection.
 
 Example of the domain model:
 ```proto
+// Package declaration
+package proto
+
 // Order side declaration
 enum OrderSide
 {
@@ -29,6 +32,36 @@ struct Order
     OrderType type;
     double price = 0.0;
     double volume = 0.0;
+}
+
+// Account balance declaration
+struct Balance
+{
+    [key] string currency;
+    double amount = 0.0;
+}
+
+// Account state declaration
+flags State
+{
+    unknown = 0x00;
+    invalid = 0x01;
+    initialized = 0x02;
+    calculated = 0x04;
+    broken = 0x08;
+    good = initialized | calculated;
+    bad = unknown | invalid | broken;
+}
+
+// Account declaration
+struct Account
+{
+    [key] int32 uid;
+    string name;
+    State state = State.initialized | State.bad;
+    Balance wallet;
+    Balance? asset;
+    Order[] orders;
 }
 ```
 
