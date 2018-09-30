@@ -34,7 +34,7 @@ Typical usage workflow is the following:
    in unified FastBinaryEncoding format (fast and compact)
 5. [JSON convert](#json-serialization) objects from the domain model in order
    to use them in Web API
-6. Implement [Sender/Receiver interfaces](#sender-receiver-protocol) to create a communication protocol
+6. Implement [Sender/Receiver interfaces](#senderreceiver-protocol) to create a communication protocol
 
 # Contents
   * [Features](#features)
@@ -51,7 +51,7 @@ Typical usage workflow is the following:
   * [Struct types](#struct-types)
   * [Struct inheritance](#struct-inheritance)
   * [Versioning](#versioning)
-  * [Sender/Receiver protocol](#sender-receiver-protocol)
+  * [Sender/Receiver protocol](#senderreceiver-protocol)
   * [Performance benchmarks](#performance-benchmarks)
     * [Benchmark 1: Serialization](#benchmark-1-serialization)
     * [Benchmark 2: Deserialization](#benchmark-2-deserialization)
@@ -66,7 +66,7 @@ Typical usage workflow is the following:
 * [Supported collections (array, vector, list, map, hash)](documents/FBE.md#collections)
 * [Serialization/Deserialization to/from binary format](#fbe-serialization)
 * [Serialization/Deserialization to/from JSON](#json-serialization)
-* [Sender/Receiver interfaces for communication protocols](#sender-receiver-protocol)
+* [Sender/Receiver interfaces for communication protocols](#senderreceiver-protocol)
 * [Versioning solution](#versioning)
 * [Excellent performance](#performance-benchmarks)
 
