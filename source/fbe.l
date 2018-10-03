@@ -11,6 +11,7 @@ E [Ee][+-]?{D}+
 #include "generator_csharp.h"
 #include "generator_java.h"
 #include "generator_javascript.h"
+#include "generator_kotlin.h"
 #include "generator_python.h"
 
 #include <OptionParser.h>
@@ -176,6 +177,7 @@ int main(int argc, char** argv)
     parser.add_option("--csharp").action("store_true").set_default(0).help("Generate C# code");
     parser.add_option("--java").action("store_true").set_default(0).help("Generate Java code");
     parser.add_option("--javascript").action("store_true").set_default(0).help("Generate JavaScript code");
+    parser.add_option("--kotlin").action("store_true").set_default(0).help("Generate Kotlin code");
     parser.add_option("--python").action("store_true").set_default(0).help("Generate Python code");
     parser.add_option("--final").action("store_true").set_default(0).help("Generate Final protocol code");
     parser.add_option("--json").action("store_true").set_default(0).help("Generate JSON protocol code");
@@ -201,6 +203,7 @@ int main(int argc, char** argv)
     bool csharp = options.get("csharp");
     bool java = options.get("java");
     bool javascript = options.get("javascript");
+    bool kotlin = options.get("kotlin");
     bool python = options.get("python");
     bool final = options.get("final");
     bool json = options.get("json");
@@ -280,6 +283,12 @@ int main(int argc, char** argv)
     {
         if (!quiet) std::cout << "Generating JavaScript code...";
         FBE::GeneratorJavaScript(output, (indent ? indent : 2), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
+        if (!quiet) std::cout << "Done!" << std::endl;
+    }
+    if (kotlin)
+    {
+        if (!quiet) std::cout << "Generating Kotlin code...";
+        FBE::GeneratorKotlin(output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (python)

@@ -90,6 +90,7 @@ if(NOT FBEC_MODULE)
         COMMAND $<TARGET_FILE:fbec> --csharp --final --json --sender --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/.NETCore/Proto
         COMMAND $<TARGET_FILE:fbec> --java --final --json --sender --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/Java/src/proto
         COMMAND $<TARGET_FILE:fbec> --javascript --final --json --sender --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/JavaScript/proto
+        COMMAND $<TARGET_FILE:fbec> --kotlin --final --json --sender --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/Kotlin/src/proto
         COMMAND $<TARGET_FILE:fbec> --python --final --json --sender --input ${FBE_INPUT_FILE} --output ${CMAKE_CURRENT_SOURCE_DIR}/projects/Python/proto
         DEPENDS ${FBE_INPUT_FILE} COMMENT "Generating FBE proto for ${FBE_INPUT_FILE}..." VERBATIM
     )

@@ -34,7 +34,7 @@ public abstract class FieldModel
     public void FBEUnshift(long size) { _offset -= size; }
 
     // Initialize a new field model
-    protected FieldModel(Buffer buffer, long offset)
+    protected FieldModel(@NotNull Buffer buffer, long offset)
     {
         _buffer = buffer;
         _offset = offset;
@@ -64,8 +64,8 @@ public abstract class FieldModel
     protected void write(long offset, long value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
     protected void write(long offset, float value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
     protected void write(long offset, double value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, UUID value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, byte[] value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, byte[] value, long valueOffset, long valueSize) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value, valueOffset, valueSize); }
+    protected void write(long offset, @NotNull UUID value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
+    protected void write(long offset, @NotNull byte[] value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
+    protected void write(long offset, @NotNull byte[] value, long valueOffset, long valueSize) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value, valueOffset, valueSize); }
     protected void write(long offset, byte value, long valueCount) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value, valueCount); }
 }

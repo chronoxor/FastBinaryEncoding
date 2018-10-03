@@ -15,7 +15,7 @@ import javafx.util.*;
 // Fast Binary Encoding float field model class
 public final class FieldModelFloat extends FieldModel
 {
-    public FieldModelFloat(Buffer buffer, long offset) { super(buffer, offset); }
+    public FieldModelFloat(@NotNull Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the field size
     @Override

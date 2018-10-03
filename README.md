@@ -28,7 +28,7 @@ Typical usage workflow is the following:
 1. [Create domain model](#create-domain-model) using base types, enums,
    flags and structs
 2. [Generate domain model](#generate-domain-model) for any supported
-   programming languages (C++, C#, Java, JavaScript, Python)
+   programming languages (C++, C#, Java, JavaScript, Kotlin, Python)
 3. [Build domain model](#build-domain-model) library
 4. [Serialize/Deserialize](#fbe-serialization) objects from the domain model
    in unified FastBinaryEncoding format (fast and compact)
@@ -59,7 +59,7 @@ Typical usage workflow is the following:
 
 # Features
 * Cross platform (Linux, OSX, Windows)
-* [Generators for C++, C#, Java, JavaScript, Python](#generate-domain-model)
+* [Generators for C++, C#, Java, JavaScript, Kotlin, Python](#generate-domain-model)
 * [Fast binary encoding format](documents/FBE.md)
 * [Supported base types (byte, bool, char, wchar, int8, int16, int32, int64, float, double)](documents/FBE.md#base-types)
 * [Supported complex types (bytes, decimal, string, timestamp, uuid)](documents/FBE.md#complex-types)
@@ -227,6 +227,7 @@ Options:
   --csharp              Generate C# code
   --java                Generate Java code
   --javascript          Generate JavaScript code
+  --kotlin              Generate Kotlin code
   --python              Generate Python code
   --final               Generate Final protocol code
   --json                Generate JSON protocol code
@@ -254,7 +255,7 @@ dependencies that worth to be mentioned:
   If you want to try it, you should import is with NuGet and build domain model
   with 'UTF8JSON' definition;
 
-### Java
+### Java and Kotlin
 * JSON protocol is implemented using [Gson](https://github.com/google/gson)
   library. Thereforeits package should be imported using Maven;
 
@@ -428,7 +429,7 @@ Please note that some programming languages have native JSON support
 to get work with JSON:
 * C++ requires [RapidJSON](http://rapidjson.org)
 * C# requires [Json.NET](https://www.newtonsoft.com/json) or more faster [Utf8Json ](https://github.com/neuecc/Utf8Json)
-* Java requires [Gson](https://github.com/google/gson)
+* Java and Kotlin requires [Gson](https://github.com/google/gson)
 
 Here is an exmple of JSON serialization in C++ language:
 ```c++
@@ -561,7 +562,7 @@ import protoex
 Package import is implemented using:
 * #include "..." directive in C++
 * Namespaces in C#
-* Packages in Java
+* Packages in Java and Kotlin
 * Modules in JavaScript
 * Modules in Python
 
@@ -908,6 +909,7 @@ account.orders.emplace_back(3, "EURUSD", OrderSide::buy, OrderType::stop, 1.5, 1
 * [.NET Core benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/.NETCore/Benchmarks) results were taken using [BenchmarkDotNet library](https://benchmarkdotnet.org)
 * [Java benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Java/src/benchmarks) results were taken using [JMH library](http://openjdk.java.net/projects/code-tools/jmh)
 * [JavaScript benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/JavaScript/benchmarks) results were taken using [Benchmark.js library](https://benchmarkjs.com)
+* [Kotlin benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Kotlin/src/benchmarks) results were taken using [JMH library](http://openjdk.java.net/projects/code-tools/jmh)
 * [Python benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Python/benchmarks) results were taken using [timeit module](https://docs.python.org/3/library/timeit.html)
 
 ## Benchmark 1: Serialization
@@ -942,6 +944,9 @@ Serialization benchmark results:
 | JavaScript Win64         |    252 bytes |       93 416 ops/s |          10 705 ns |
 | JavaScript Win64 (Final) |    152 bytes |      112 665 ops/s |           8 876 ns |
 | JavaScript Win64 (JSON)  |    341 bytes |      217 637 ops/s |           4 595 ns |
+| Kotlin Win64             |    252 bytes |          ??? ops/s |             ??? ns |
+| Kotlin Win64 (Final)     |    152 bytes |          ??? ops/s |             ??? ns |
+| Kotlin Win64 (JSON)      |    353 bytes |          ??? ops/s |             ??? ns |
 | Python Win64             |    252 bytes |        9 434 ops/s |         105 999 ns |
 | Python Win64 (Final)     |    152 bytes |       11 635 ops/s |          85 945 ns |
 | Python Win64 (JSON)      |    324 bytes |       61 737 ops/s |          16 198 ns |
@@ -975,6 +980,9 @@ Deserialization benchmark results:
 | JavaScript Win64         |    252 bytes |        133 892 ops/s |             7 469 ns |
 | JavaScript Win64 (Final) |    152 bytes |        292 273 ops/s |             3 422 ns |
 | JavaScript Win64 (JSON)  |    341 bytes |        289 417 ops/s |             3 455 ns |
+| Kotlin Win64             |    252 bytes |            ??? ops/s |               ??? ns |
+| Kotlin Win64 (Final)     |    152 bytes |            ??? ops/s |               ??? ns |
+| Kotlin Win64 (JSON)      |    353 bytes |            ??? ops/s |               ??? ns |
 | Python Win64             |    252 bytes |          8 305 ops/s |           120 411 ns |
 | Python Win64 (Final)     |    152 bytes |         11 661 ops/s |            85 758 ns |
 | Python Win64 (JSON)      |    324 bytes |         48 859 ops/s |            20 467 ns |
@@ -1003,5 +1011,7 @@ Verify benchmark results:
 | Java Win64 (Final)       |    152 bytes | 16 205 533 ops/s |       62 ns |
 | JavaScript Win64         |    252 bytes |  1 105 627 ops/s |      905 ns |
 | JavaScript Win64 (Final) |    152 bytes |  5 700 408 ops/s |      175 ns |
+| Kotlin Win64             |    252 bytes |        ??? ops/s |      ??? ns |
+| Kotlin Win64 (Final)     |    152 bytes |        ??? ops/s |      ??? ns |
 | Python Win64             |    252 bytes |     20 825 ops/s |   48 019 ns |
 | Python Win64 (Final)     |    152 bytes |     23 590 ops/s |   42 391 ns |

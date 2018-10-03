@@ -1,69 +1,69 @@
 /*!
-    \file generator_java.cpp
-    \brief Fast binary encoding Java generator implementation
+    \file generator_kotlin.cpp
+    \brief Fast binary encoding Kotlin generator implementation
     \author Ivan Shynkarenka
-    \date 20.04.2018
+    \date 03.10.2018
     \copyright MIT License
 */
 
-#include "generator_java.h"
+#include "generator_kotlin.h"
 
 namespace FBE {
 
-void GeneratorJava::Generate(const std::shared_ptr<Package>& package)
+void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
 {
     GenerateFBEPackage("fbe");
     GenerateFBEUUIDGenerator("fbe");
     GenerateFBEBuffer("fbe");
     GenerateFBEModel("fbe");
     GenerateFBEFieldModel("fbe");
-    GenerateFBEFieldModel("fbe", "Boolean", "boolean", "", "1", "false");
-    GenerateFBEFieldModel("fbe", "Byte", "byte", "", "1", "(byte)0");
-    GenerateFBEFieldModel("fbe", "Char", "char", "(byte)", "1", "'\\u0000'");
-    GenerateFBEFieldModel("fbe", "WChar", "char", "(int)", "4", "'\\u0000'");
-    GenerateFBEFieldModel("fbe", "Int8", "byte", "", "1", "(byte)0");
-    GenerateFBEFieldModel("fbe", "Int16", "short", "", "2", "(short)0");
-    GenerateFBEFieldModel("fbe", "Int32", "int", "", "4", "0");
-    GenerateFBEFieldModel("fbe", "Int64", "long", "", "8", "0l");
-    GenerateFBEFieldModel("fbe", "Float", "float", "", "4", "0.0f");
-    GenerateFBEFieldModel("fbe", "Double", "double", "", "8", "0.0d");
+    GenerateFBEFieldModel("fbe", "Boolean", "Boolean", "", "1", "false");
+    GenerateFBEFieldModel("fbe", "Byte", "Byte", "", "1", "0.toByte()");
+    GenerateFBEFieldModel("fbe", "Char", "Char", ".toByte()", "1", "'\\u0000'");
+    GenerateFBEFieldModel("fbe", "WChar", "Char", ".toInt()", "4", "'\\u0000'");
+    GenerateFBEFieldModel("fbe", "Int8", "Byte", "", "1", "0.toByte()");
+    GenerateFBEFieldModel("fbe", "Int16", "Short", "", "2", "0.toShort()");
+    GenerateFBEFieldModel("fbe", "Int32", "Int", "", "4", "0");
+    GenerateFBEFieldModel("fbe", "Int64", "Long", "", "8", "0L");
+    GenerateFBEFieldModel("fbe", "Float", "Float", "", "4", "0.0f");
+    GenerateFBEFieldModel("fbe", "Double", "Double", "", "8", "0.0");
     GenerateFBEFieldModel("fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
-    GenerateFBEFieldModelDecimal("fbe");
-    GenerateFBEFieldModelTimestamp("fbe");
-    GenerateFBEFieldModelBytes("fbe");
-    GenerateFBEFieldModelString("fbe");
+    //GenerateFBEFieldModelDecimal("fbe");
+    //GenerateFBEFieldModelTimestamp("fbe");
+    //GenerateFBEFieldModelBytes("fbe");
+    //GenerateFBEFieldModelString("fbe");
     if (Final())
     {
         GenerateFBESize("fbe");
         GenerateFBEFinalModel("fbe");
-        GenerateFBEFinalModel("fbe", "Boolean", "boolean", "", "1", "false");
-        GenerateFBEFinalModel("fbe", "Byte", "byte", "", "1", "(byte)0");
-        GenerateFBEFinalModel("fbe", "Char", "char", "(byte)", "1", "'\\u0000'");
-        GenerateFBEFinalModel("fbe", "WChar", "char", "(int)", "4", "'\\u0000'");
-        GenerateFBEFinalModel("fbe", "Int8", "byte", "", "1", "(byte)0");
-        GenerateFBEFinalModel("fbe", "Int16", "short", "", "2", "(short)0");
-        GenerateFBEFinalModel("fbe", "Int32", "int", "", "4", "0");
-        GenerateFBEFinalModel("fbe", "Int64", "long", "", "8", "0l");
-        GenerateFBEFinalModel("fbe", "Float", "float", "", "4", "0.0f");
-        GenerateFBEFinalModel("fbe", "Double", "double", "", "8", "0.0d");
+        GenerateFBEFinalModel("fbe", "Boolean", "Boolean", "", "1", "false");
+        GenerateFBEFinalModel("fbe", "Byte", "Byte", "", "1", "0.toByte()");
+        GenerateFBEFinalModel("fbe", "Char", "Char", ".toByte()", "1", "'\\u0000'");
+        GenerateFBEFinalModel("fbe", "WChar", "Char", ".toInt()", "4", "'\\u0000'");
+        GenerateFBEFinalModel("fbe", "Int8", "Byte", "", "1", "0.toByte()");
+        GenerateFBEFinalModel("fbe", "Int16", "Short", "", "2", "0.toShort()");
+        GenerateFBEFinalModel("fbe", "Int32", "Int", "", "4", "0");
+        GenerateFBEFinalModel("fbe", "Int64", "Long", "", "8", "0L");
+        GenerateFBEFinalModel("fbe", "Float", "Float", "", "4", "0.0f");
+        GenerateFBEFinalModel("fbe", "Double", "Double", "", "8", "0.0");
         GenerateFBEFinalModel("fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
-        GenerateFBEFinalModelDecimal("fbe");
-        GenerateFBEFinalModelTimestamp("fbe");
-        GenerateFBEFinalModelBytes("fbe");
-        GenerateFBEFinalModelString("fbe");
+        //GenerateFBEFinalModelDecimal("fbe");
+        //GenerateFBEFinalModelTimestamp("fbe");
+        //GenerateFBEFinalModelBytes("fbe");
+        //GenerateFBEFinalModelString("fbe");
     }
     if (Sender())
     {
-        GenerateFBESender("fbe");
-        GenerateFBEReceiver("fbe");
+        //GenerateFBESender("fbe");
+        //GenerateFBEReceiver("fbe");
     }
-    if (JSON())
-        GenerateFBEJson("fbe");
+    //if (JSON())
+        //GenerateFBEJson("fbe");
 
-    GeneratePackage(package);
+    //GeneratePackage(package);
 }
 
-void GeneratorJava::GenerateHeader()
+void GeneratorKotlin::GenerateHeader()
 {
     std::string code = R"CODE(// Automatically generated by the Fast Binary Encoding compiler, do not modify!
 // https://github.com/chronoxor/FastBinaryEncoding
@@ -75,11 +75,11 @@ void GeneratorJava::GenerateHeader()
     Write(code);
 }
 
-void GeneratorJava::GenerateFooter()
+void GeneratorKotlin::GenerateFooter()
 {
 }
 
-void GeneratorJava::GenerateImports(const std::string& package)
+void GeneratorKotlin::GenerateImports(const std::string& package)
 {
     // Generate package name
     WriteLine();
@@ -97,7 +97,7 @@ void GeneratorJava::GenerateImports(const std::string& package)
     WriteLineIndent("import javafx.util.*;");
 }
 
-void GeneratorJava::GenerateImports(const std::shared_ptr<Package>& p)
+void GeneratorKotlin::GenerateImports(const std::shared_ptr<Package>& p)
 {
     // Generate common import
     GenerateImports(*p->name);
@@ -113,7 +113,7 @@ void GeneratorJava::GenerateImports(const std::shared_ptr<Package>& p)
     }
 }
 
-void GeneratorJava::GenerateFBEPackage(const std::string& package)
+void GeneratorKotlin::GenerateFBEPackage(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
@@ -121,12 +121,12 @@ void GeneratorJava::GenerateFBEPackage(const std::string& package)
     CppCommon::Directory::CreateTree(path);
 }
 
-void GeneratorJava::GenerateFBEUUIDGenerator(const std::string& package)
+void GeneratorKotlin::GenerateFBEUUIDGenerator(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / "UUIDGenerator.java";
+    CppCommon::Path file = path / "UUIDGenerator.kt";
     Open(file);
 
     // Generate headers
@@ -135,71 +135,71 @@ void GeneratorJava::GenerateFBEUUIDGenerator(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding UUID generator
-public final class UUIDGenerator
+object UUIDGenerator
 {
     // Gregorian epoch
-    private static final long GregorianEpoch = -12219292800000L;
+    private const val GregorianEpoch = -12219292800000L
+
+    // Kotlin constants workaround
+    private val Sign = java.lang.Long.parseUnsignedLong("8000000000000000", 16)
+    private val Low = java.lang.Long.parseUnsignedLong("00000000FFFFFFFF", 16)
+    private val Mid = java.lang.Long.parseUnsignedLong("0000FFFF00000000", 16)
+    private val High = java.lang.Long.parseUnsignedLong("FFFF000000000000", 16)
 
     // Lock and random generator
-    private static final Object _lock = new Object();
-    private static final Random _generator = new Random();
+    private val lock = Object()
+    private val generator = Random()
 
     // Node & clock sequence bytes
-    private static long _node = makeNode();
-    private static long _nodeAndClockSequence = makeNodeAndClockSequence();
+    private val node = makeNode()
+    private var nodeAndClockSequence = makeNodeAndClockSequence()
 
     // Last UUID generated timestamp
-    private static long _last = GregorianEpoch;
+    private var last = GregorianEpoch
 
-    private static long makeNode()
-    {
-        return _generator.nextLong() | 0x0000010000000000L;
-    }
+    private fun makeNode(): Long = generator.nextLong() or 0x0000010000000000L
 
-    private static long makeNodeAndClockSequence()
-    {
-        long clock = _generator.nextLong();
+    private fun makeNodeAndClockSequence(): Long {
+        val clock = generator.nextLong()
 
-        long lsb = 0;
+        var lsb: Long = 0
         // Variant (2 bits)
-        lsb |= 0x8000000000000000L;
+        lsb = lsb or Sign
         // Clock sequence (14 bits)
-        lsb |= (clock & 0x0000000000003FFFL) << 48;
+        lsb = lsb or ((clock and 0x0000000000003FFFL) shl 48)
         // 6 bytes
-        lsb |= _node;
-        return lsb;
+        lsb = lsb or node
+        return lsb
     }
 
     // Generate nil UUID0 (all bits set to zero)
-    public static UUID nil() { return new UUID(0, 0); }
+    fun nil(): UUID = UUID(0, 0)
 
     // Generate sequential UUID1 (time based version)
-    public static UUID sequential()
-    {
-        long now = System.currentTimeMillis();
+    fun sequential(): UUID {
+        val now = System.currentTimeMillis()
 
         // Generate new clock sequence bytes to get rid of UUID duplicates
-        synchronized(_lock)
-        {
-            if (now <= _last)
-                _nodeAndClockSequence = makeNodeAndClockSequence();
-            _last = now;
+        synchronized(lock) {
+            if (now <= last)
+                nodeAndClockSequence = makeNodeAndClockSequence()
+            last = now
         }
 
-        long nanosSince = (now - GregorianEpoch) * 10000;
+        val nanosSince = (now - GregorianEpoch) * 10000
 
-        long msb = 0L;
-        msb |= (0x00000000FFFFFFFFL & nanosSince) << 32;
-        msb |= (0x0000FFFF00000000L & nanosSince) >>> 16;
-        msb |= (0xFFFF000000000000L & nanosSince) >>> 48;
+        var msb = 0L
+        msb = msb or (Low and nanosSince).shl(32)
+        msb = msb or (Mid and nanosSince).ushr(16)
+        msb = msb or (High and nanosSince).ushr(48)
         // Sets the version to 1
-        msb |= 0x0000000000001000L;
+        msb = msb or 0x0000000000001000L
 
-        return new UUID(msb, _nodeAndClockSequence);
+        return UUID(msb, nodeAndClockSequence)
     }
 
     // Generate random UUID4 (randomly or pseudo-randomly generated version)
-    public static UUID random() { return UUID.randomUUID(); }
+    fun random(): UUID = UUID.randomUUID()
 }
 )CODE";
 
@@ -215,12 +215,12 @@ public final class UUIDGenerator
     Close();
 }
 
-void GeneratorJava::GenerateFBEBuffer(const std::string& package)
+void GeneratorKotlin::GenerateFBEBuffer(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / "Buffer.java";
+    CppCommon::Path file = path / "Buffer.kt";
     Open(file);
 
     // Generate headers
@@ -229,292 +229,269 @@ void GeneratorJava::GenerateFBEBuffer(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding buffer based on dynamic byte array
-public class Buffer
+class Buffer
 {
-    private byte[] _data;
-    private long _size;
-    private long _offset;
-
     // Get bytes memory buffer
-    public byte[] getData() { return _data; }
+    var data: ByteArray = ByteArray(0)
+        private set
     // Get bytes memory buffer capacity
-    public long getCapacity() { return _data.length; }
+    val capacity: Long
+        get() = data.size.toLong()
     // Get bytes memory buffer size
-    public long getSize() { return _size; }
+    var size: Long = 0
+        private set
     // Get bytes memory buffer offset
-    public long getOffset() { return _offset; }
+    var offset: Long = 0
+        private set
 
     // Initializes buffer with an expandable capacity initialized to zero
-    public Buffer() { attach(); }
+    constructor()
     // Initializes a new buffer with an expandable capacity initialized as specified
-    public Buffer(long capacity) { attach(capacity); }
+    constructor(capacity: Long) { attach(capacity) }
     // Initializes a new buffer based on the specified byte array
-    public Buffer(@NotNull byte[] buffer) { attach(buffer); }
+    constructor(buffer: ByteArray) { attach(buffer) }
     // Initializes a new buffer based on the specified region (offset) of a byte array
-    public Buffer(@NotNull byte[] buffer, long offset) { attach(buffer, offset); }
+    constructor(buffer: ByteArray, offset: Long) { attach(buffer, offset) }
     // Initializes a new buffer based on the specified region (size and offset) of a byte array
-    public Buffer(@NotNull byte[] buffer, long size, long offset) { attach(buffer, size, offset); }
+    constructor(buffer: ByteArray, size: Long, offset: Long) { attach(buffer, size, offset) }
 
     // Attach memory buffer methods
-    public void attach() { _data = new byte[0]; _size = 0; _offset = 0; }
-    public void attach(long capacity) { _data = new byte[(int)capacity]; _size = 0; _offset = 0; }
-    public void attach(@NotNull byte[] buffer) { _data = buffer; _size = buffer.length; _offset = 0; }
-    public void attach(@NotNull byte[] buffer, long offset) { _data = buffer; _size = buffer.length; _offset = offset; }
-    public void attach(@NotNull byte[] buffer, long size, long offset) { _data = buffer; _size = size; _offset = offset; }
+    fun attach() { data = ByteArray(0); size = 0; offset = 0 }
+    fun attach(capacity: Long) { data = ByteArray(capacity.toInt()); size = 0; offset = 0 }
+    fun attach(buffer: ByteArray) { data = buffer; size = buffer.size.toLong(); offset = 0 }
+    fun attach(buffer: ByteArray, offset: Long) { data = buffer; size = buffer.size.toLong(); this.offset = offset }
+    fun attach(buffer: ByteArray, size: Long, offset: Long) { data = buffer; this.size = size; this.offset = offset }
 
     // Allocate memory in the current buffer and return offset to the allocated memory block
-    public long allocate(long size)
-    {
-        assert (size >= 0) : "Invalid allocate size!";
+    fun allocate(size: Long): Long {
+        assert(size >= 0) { "Invalid allocate size!" }
         if (size < 0)
-            throw new IllegalArgumentException("Invalid allocate size!");
+            throw IllegalArgumentException("Invalid allocate size!")
 
-        long offset = _size;
+        val offset = this.size
 
         // Calculate a new buffer size
-        long total = _size + size;
+        val total = this.size + size
 
-        if (total <= _data.length)
-        {
-            _size = total;
-            return offset;
+        if (total <= data.size) {
+            this.size = total
+            return offset
         }
 
-        byte[] data = new byte[(int)Math.max(total, 2 * _data.length)];
-        System.arraycopy(_data, 0, data, 0, (int)_size);
-        _data = data;
-        _size = total;
-        return offset;
+        val data = ByteArray(Math.max(total, 2L * this.data.size).toInt())
+        System.arraycopy(this.data, 0, data, 0, this.size.toInt())
+        this.data = data
+        this.size = total
+        return offset
     }
 
     // Remove some memory of the given size from the current buffer
-    public void remove(long offset, long size)
-    {
-        assert ((offset + size) <= _size) : "Invalid offset & size!";
-        if ((offset + size) > _size)
-            throw new IllegalArgumentException("Invalid offset & size!");
+    fun remove(offset: Long, size: Long) {
+        assert(offset + size <= this.size) { "Invalid offset & size!" }
+        if (offset + size > this.size)
+            throw IllegalArgumentException("Invalid offset & size!")
 
-        System.arraycopy(_data, (int)(offset + size), _data, (int)offset, (int)(_size - size - offset));
-        _size -= size;
-        if (_offset >= (offset + size))
-            _offset -= size;
-        else if (_offset >= offset)
-        {
-            _offset -= _offset - offset;
-            if (_offset > _size)
-                _offset = _size;
+        System.arraycopy(data, (offset + size).toInt(), data, offset.toInt(), (this.size - size - offset).toInt())
+        this.size -= size
+        if (this.offset >= offset + size)
+            this.offset -= size
+        else if (this.offset >= offset) {
+            this.offset -= this.offset - offset
+            if (this.offset > this.size)
+                this.offset = this.size
         }
     }
 
     // Reserve memory of the given capacity in the current buffer
-    public void reserve(long capacity)
-    {
-        assert (capacity >= 0) : "Invalid reserve capacity!";
+    fun reserve(capacity: Long) {
+        assert(capacity >= 0) { "Invalid reserve capacity!" }
         if (capacity < 0)
-            throw new IllegalArgumentException("Invalid reserve capacity!");
+            throw IllegalArgumentException("Invalid reserve capacity!")
 
-        if (capacity > _data.length)
-        {
-            byte[] data = new byte[(int)Math.max(capacity, 2 * _data.length)];
-            System.arraycopy(_data, 0, data, 0, (int)_size);
-            _data = data;
+        if (capacity > data.size) {
+            val data = ByteArray(Math.max(capacity, 2L * this.data.size).toInt())
+            System.arraycopy(this.data, 0, data, 0, size.toInt())
+            this.data = data
         }
     }
 
     // Resize the current buffer
-    public void resize(long size)
-    {
-        reserve(size);
-        _size = size;
-        if (_offset > _size)
-            _offset = _size;
+    fun resize(size: Long) {
+        reserve(size)
+        this.size = size
+        if (offset > this.size)
+            offset = this.size
     }
 
     // Reset the current buffer and its offset
-    public void reset()
-    {
-        _size = 0;
-        _offset = 0;
+    fun reset() {
+        size = 0
+        offset = 0
     }
 
     // Shift the current buffer offset
-    public void shift(long offset) { _offset += offset; }
+    fun shift(offset: Long) { this.offset += offset }
     // Unshift the current buffer offset
-    public void unshift(long offset) { _offset -= offset; }
+    fun unshift(offset: Long) { this.offset -= offset }
 
-    // Buffer I/O methods
-
-    public static boolean readBoolean(@NotNull byte[] buffer, long offset)
+    companion object
     {
-        return buffer[(int)offset] != 0;
-    }
+        // Buffer I/O methods
 
-    public static byte readByte(@NotNull byte[] buffer, long offset)
-    {
-        return buffer[(int)offset];
-    }
+        fun readBoolean(buffer: ByteArray, offset: Long): Boolean {
+            val index = offset.toInt()
+            return buffer[index].toInt() != 0
+        }
 
-    public static char readChar(@NotNull byte[] buffer, long offset)
-    {
-        return (char)readInt8(buffer, offset);
-    }
+        fun readByte(buffer: ByteArray, offset: Long): Byte {
+            val index = offset.toInt()
+            return buffer[index]
+        }
 
-    public static char readWChar(@NotNull byte[] buffer, long offset)
-    {
-        return (char)readInt32(buffer, offset);
-    }
+        fun readChar(buffer: ByteArray, offset: Long): Char {
+            return readInt8(buffer, offset).toChar()
+        }
 
-    public static byte readInt8(@NotNull byte[] buffer, long offset)
-    {
-        return buffer[(int)offset];
-    }
+        fun readWChar(buffer: ByteArray, offset: Long): Char {
+            return readInt32(buffer, offset).toChar()
+        }
 
-    public static short readInt16(@NotNull byte[] buffer, long offset)
-    {
-        return (short)(((buffer[(int)offset + 0] & 0xFF) << 0) | ((buffer[(int)offset + 1] & 0xFF) << 8));
-    }
+        fun readInt8(buffer: ByteArray, offset: Long): Byte {
+            val index = offset.toInt()
+            return buffer[index]
+        }
 
-    public static int readInt32(@NotNull byte[] buffer, long offset)
-    {
-        return ((buffer[(int)offset + 0] & 0xFF) <<  0)|
-               ((buffer[(int)offset + 1] & 0xFF) <<  8)|
-               ((buffer[(int)offset + 2] & 0xFF) << 16)|
-               ((buffer[(int)offset + 3] & 0xFF) << 24);
-    }
+        fun readInt16(buffer: ByteArray, offset: Long): Short {
+            val index = offset.toInt()
+            return (((buffer[index + 0].toInt() and 0xFF) shl 0) or
+                    ((buffer[index + 1].toInt() and 0xFF) shl 8)).toShort()
+        }
 
-    public static long readInt64(@NotNull byte[] buffer, long offset)
-    {
-        return (((long)buffer[(int)offset + 0] & 0xFF) <<  0)|
-               (((long)buffer[(int)offset + 1] & 0xFF) <<  8)|
-               (((long)buffer[(int)offset + 2] & 0xFF) << 16)|
-               (((long)buffer[(int)offset + 3] & 0xFF) << 24)|
-               (((long)buffer[(int)offset + 4] & 0xFF) << 32)|
-               (((long)buffer[(int)offset + 5] & 0xFF) << 40)|
-               (((long)buffer[(int)offset + 6] & 0xFF) << 48)|
-               (((long)buffer[(int)offset + 7] & 0xFF) << 56);
-    }
+        fun readInt32(buffer: ByteArray, offset: Long): Int {
+            val index = offset.toInt()
+            return ((buffer[index + 0].toInt() and 0xFF) shl  0) or
+                   ((buffer[index + 1].toInt() and 0xFF) shl  8) or
+                   ((buffer[index + 2].toInt() and 0xFF) shl 16) or
+                   ((buffer[index + 3].toInt() and 0xFF) shl 24)
+        }
 
-    private static long readInt64BE(@NotNull byte[] buffer, long offset)
-    {
-        return (((long)buffer[(int)offset + 0] & 0xFF) << 56)|
-               (((long)buffer[(int)offset + 1] & 0xFF) << 48)|
-               (((long)buffer[(int)offset + 2] & 0xFF) << 40)|
-               (((long)buffer[(int)offset + 3] & 0xFF) << 32)|
-               (((long)buffer[(int)offset + 4] & 0xFF) << 24)|
-               (((long)buffer[(int)offset + 5] & 0xFF) << 16)|
-               (((long)buffer[(int)offset + 6] & 0xFF) <<  8)|
-               (((long)buffer[(int)offset + 7] & 0xFF) <<  0);
-    }
+        fun readInt64(buffer: ByteArray, offset: Long): Long {
+            val index = offset.toInt()
+            return ((buffer[index + 0].toLong() and 0xFF) shl  0) or
+                   ((buffer[index + 1].toLong() and 0xFF) shl  8) or
+                   ((buffer[index + 3].toLong() and 0xFF) shl 24) or
+                   ((buffer[index + 2].toLong() and 0xFF) shl 16) or
+                   ((buffer[index + 4].toLong() and 0xFF) shl 32) or
+                   ((buffer[index + 5].toLong() and 0xFF) shl 40) or
+                   ((buffer[index + 6].toLong() and 0xFF) shl 48) or
+                   ((buffer[index + 7].toLong() and 0xFF) shl 56)
+        }
 
-    public static float readFloat(@NotNull byte[] buffer, long offset)
-    {
-        int bits = readInt32(buffer, offset);
-        return Float.intBitsToFloat(bits);
-    }
+        private fun readInt64BE(buffer: ByteArray, offset: Long): Long {
+            val index = offset.toInt()
+            return ((buffer[index + 0].toLong() and 0xFF) shl 56) or
+                   ((buffer[index + 1].toLong() and 0xFF) shl 48) or
+                   ((buffer[index + 2].toLong() and 0xFF) shl 40) or
+                   ((buffer[index + 3].toLong() and 0xFF) shl 32) or
+                   ((buffer[index + 4].toLong() and 0xFF) shl 24) or
+                   ((buffer[index + 5].toLong() and 0xFF) shl 16) or
+                   ((buffer[index + 6].toLong() and 0xFF) shl  8) or
+                   ((buffer[index + 7].toLong() and 0xFF) shl  0)
+        }
 
-    public static double readDouble(@NotNull byte[] buffer, long offset)
-    {
-        long bits = readInt64(buffer, offset);
-        return Double.longBitsToDouble(bits);
-    }
+        fun readFloat(buffer: ByteArray, offset: Long): Float {
+            val bits = readInt32(buffer, offset)
+            return java.lang.Float.intBitsToFloat(bits)
+        }
 
-    public static UUID readUUID(@NotNull byte[] buffer, long offset)
-    {
-        return new UUID(readInt64BE(buffer, offset), readInt64BE(buffer, offset + 8));
-    }
+        fun readDouble(buffer: ByteArray, offset: Long): Double {
+            val bits = readInt64(buffer, offset)
+            return java.lang.Double.longBitsToDouble(bits)
+        }
 
-    public static byte[] readBytes(@NotNull byte[] buffer, long offset, long size)
-    {
-        byte[] result = new byte[(int)size];
-        System.arraycopy(buffer, (int)offset, result, 0, (int)size);
-        return result;
-    }
+        fun readUUID(buffer: ByteArray, offset: Long): UUID {
+            return UUID(readInt64BE(buffer, offset), readInt64BE(buffer, offset + 8))
+        }
 
-    public static String readString(@NotNull byte[] buffer, long offset, long size)
-    {
-        return new String(buffer, (int)offset, (int)size, StandardCharsets.UTF_8);
-    }
+        fun readBytes(buffer: ByteArray, offset: Long, size: Long): ByteArray {
+            val result = ByteArray(size.toInt())
+            System.arraycopy(buffer, offset.toInt(), result, 0, size.toInt())
+            return result
+        }
 
-    public static void write(@NotNull byte[] buffer, long offset, boolean value)
-    {
-        buffer[(int)offset] = (byte)(value ? 1 : 0);
-    }
+        fun readString(buffer: ByteArray, offset: Long, size: Long): String {
+            return kotlin.text.String(buffer, offset.toInt(), size.toInt(), StandardCharsets.UTF_8)
+        }
 
-    public static void write(@NotNull byte[] buffer, long offset, byte value)
-    {
-        buffer[(int)offset] = value;
-    }
+        fun write(buffer: ByteArray, offset: Long, value: Boolean) {
+            buffer[offset.toInt()] = (if (value) 1 else 0).toByte()
+        }
 
-    public static void write(@NotNull byte[] buffer, long offset, short value)
-    {
-        buffer[(int)offset + 0] = (byte)(value >>  0);
-        buffer[(int)offset + 1] = (byte)(value >>  8);
-    }
+        fun write(buffer: ByteArray, offset: Long, value: Byte) {
+            buffer[offset.toInt()] = value
+        }
 
-    public static void write(@NotNull byte[] buffer, long offset, int value)
-    {
-        buffer[(int)offset + 0] = (byte)(value >>  0);
-        buffer[(int)offset + 1] = (byte)(value >>  8);
-        buffer[(int)offset + 2] = (byte)(value >> 16);
-        buffer[(int)offset + 3] = (byte)(value >> 24);
-    }
+        fun write(buffer: ByteArray, offset: Long, value: Short) {
+            buffer[offset.toInt() + 0] = (value.toInt() shr 0).toByte()
+            buffer[offset.toInt() + 1] = (value.toInt() shr 8).toByte()
+        }
 
-    public static void write(@NotNull byte[] buffer, long offset, long value)
-    {
-        buffer[(int)offset + 0] = (byte)(value >>  0);
-        buffer[(int)offset + 1] = (byte)(value >>  8);
-        buffer[(int)offset + 2] = (byte)(value >> 16);
-        buffer[(int)offset + 3] = (byte)(value >> 24);
-        buffer[(int)offset + 4] = (byte)(value >> 32);
-        buffer[(int)offset + 5] = (byte)(value >> 40);
-        buffer[(int)offset + 6] = (byte)(value >> 48);
-        buffer[(int)offset + 7] = (byte)(value >> 56);
-    }
+        fun write(buffer: ByteArray, offset: Long, value: Int) {
+            buffer[offset.toInt() + 0] = (value shr  0).toByte()
+            buffer[offset.toInt() + 1] = (value shr  8).toByte()
+            buffer[offset.toInt() + 2] = (value shr 16).toByte()
+            buffer[offset.toInt() + 3] = (value shr 24).toByte()
+        }
 
-    private static void writeBE(@NotNull byte[] buffer, long offset, long value)
-    {
-        buffer[(int)offset + 0] = (byte)(value >> 56);
-        buffer[(int)offset + 1] = (byte)(value >> 48);
-        buffer[(int)offset + 2] = (byte)(value >> 40);
-        buffer[(int)offset + 3] = (byte)(value >> 32);
-        buffer[(int)offset + 4] = (byte)(value >> 24);
-        buffer[(int)offset + 5] = (byte)(value >> 16);
-        buffer[(int)offset + 6] = (byte)(value >>  8);
-        buffer[(int)offset + 7] = (byte)(value >>  0);
-    }
+        fun write(buffer: ByteArray, offset: Long, value: Long) {
+            buffer[offset.toInt() + 0] = (value shr  0).toByte()
+            buffer[offset.toInt() + 1] = (value shr  8).toByte()
+            buffer[offset.toInt() + 2] = (value shr 16).toByte()
+            buffer[offset.toInt() + 3] = (value shr 24).toByte()
+            buffer[offset.toInt() + 4] = (value shr 32).toByte()
+            buffer[offset.toInt() + 5] = (value shr 40).toByte()
+            buffer[offset.toInt() + 6] = (value shr 48).toByte()
+            buffer[offset.toInt() + 7] = (value shr 56).toByte()
+        }
 
-    public static void write(@NotNull byte[] buffer, long offset, float value)
-    {
-        int bits = Float.floatToIntBits(value);
-        write(buffer, offset, bits);
-    }
+        private fun writeBE(buffer: ByteArray, offset: Long, value: Long) {
+            buffer[offset.toInt() + 0] = (value shr 56).toByte()
+            buffer[offset.toInt() + 1] = (value shr 48).toByte()
+            buffer[offset.toInt() + 2] = (value shr 40).toByte()
+            buffer[offset.toInt() + 3] = (value shr 32).toByte()
+            buffer[offset.toInt() + 4] = (value shr 24).toByte()
+            buffer[offset.toInt() + 5] = (value shr 16).toByte()
+            buffer[offset.toInt() + 6] = (value shr  8).toByte()
+            buffer[offset.toInt() + 7] = (value shr  0).toByte()
+        }
 
-    public static void write(@NotNull byte[] buffer, long offset, double value)
-    {
-        long bits = Double.doubleToLongBits(value);
-        write(buffer, offset, bits);
-    }
+        fun write(buffer: ByteArray, offset: Long, value: Float) {
+            val bits = java.lang.Float.floatToIntBits(value)
+            write(buffer, offset, bits)
+        }
 
-    public static void write(@NotNull byte[] buffer, long offset, UUID value)
-    {
-        writeBE(buffer, offset, value.getMostSignificantBits());
-        writeBE(buffer, offset + 8, value.getLeastSignificantBits());
-    }
+        fun write(buffer: ByteArray, offset: Long, value: Double) {
+            val bits = java.lang.Double.doubleToLongBits(value)
+            write(buffer, offset, bits)
+        }
 
-    public static void write(@NotNull byte[] buffer, long offset, byte[] value)
-    {
-        System.arraycopy(value, 0, buffer, (int)offset, value.length);
-    }
+        fun write(buffer: ByteArray, offset: Long, value: UUID) {
+            writeBE(buffer, offset, value.mostSignificantBits)
+            writeBE(buffer, offset + 8, value.leastSignificantBits)
+        }
 
-    public static void write(@NotNull byte[] buffer, long offset, byte[] value, long valueOffset, long valueSize)
-    {
-        System.arraycopy(value, (int)valueOffset, buffer, (int)offset, (int)valueSize);
-    }
+        fun write(buffer: ByteArray, offset: Long, value: ByteArray) {
+            System.arraycopy(value, 0, buffer, offset.toInt(), value.size)
+        }
 
-    public static void write(@NotNull byte[] buffer, long offset, byte value, long valueCount)
-    {
-        for (long i = 0; i < valueCount; i++)
-            buffer[(int)(offset + i)] = value;
+        fun write(buffer: ByteArray, offset: Long, value: ByteArray, valueOffset: Long, valueSize: Long) {
+            System.arraycopy(value, valueOffset.toInt(), buffer, offset.toInt(), valueSize.toInt())
+        }
+
+        fun write(buffer: ByteArray, offset: Long, value: Byte, valueCount: Long) {
+            for (i in 0 until valueCount)
+                buffer[(offset + i).toInt()] = value
+        }
     }
 }
 )CODE";
@@ -531,12 +508,12 @@ public class Buffer
     Close();
 }
 
-void GeneratorJava::GenerateFBEModel(const std::string& package)
+void GeneratorKotlin::GenerateFBEModel(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / "Model.java";
+    CppCommon::Path file = path / "Model.kt";
     Open(file);
 
     // Generate headers
@@ -545,38 +522,37 @@ void GeneratorJava::GenerateFBEModel(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding base model class
-public class Model
+open class Model
 {
-    private Buffer _buffer;
-
     // Get bytes buffer
-    public Buffer getBuffer() { return _buffer; }
+    var buffer: Buffer = Buffer()
+        private set
 
     // Initialize a new model
-    protected Model() { _buffer = new Buffer(); }
-    protected Model(@NotNull Buffer buffer) { _buffer = buffer; }
+    protected constructor()
+    protected constructor(buffer: Buffer) { this.buffer = buffer }
 
     // Attach memory buffer methods
-    public void attach() { _buffer.attach(); }
-    public void attach(long capacity) { _buffer.attach(capacity); }
-    public void attach(@NotNull byte[] buffer) { _buffer.attach(buffer); }
-    public void attach(@NotNull byte[] buffer, long offset) { _buffer.attach(buffer, offset); }
-    public void attach(@NotNull byte[] buffer, long size, long offset) { _buffer.attach(buffer, size, offset); }
-    public void attach(@NotNull Buffer buffer) { _buffer.attach(buffer.getData(), buffer.getSize(), buffer.getOffset()); }
-    public void attach(@NotNull Buffer buffer, long offset) { _buffer.attach(buffer.getData(), buffer.getSize(), offset); }
+    fun attach() { buffer.attach() }
+    fun attach(capacity: Long) { buffer.attach(capacity) }
+    fun attach(buffer: ByteArray) { this.buffer.attach(buffer) }
+    fun attach(buffer: ByteArray, offset: Long) { this.buffer.attach(buffer, offset) }
+    fun attach(buffer: ByteArray, size: Long, offset: Long) { this.buffer.attach(buffer, size, offset) }
+    fun attach(buffer: Buffer) { this.buffer.attach(buffer.data, buffer.size, buffer.offset) }
+    fun attach(buffer: Buffer, offset: Long) { this.buffer.attach(buffer.data, buffer.size, offset) }
 
     // Model buffer operations
-    public long allocate(long size) { return _buffer.allocate(size); }
-    public void remove(long offset, long size) { _buffer.remove(offset, size); }
-    public void reserve(long capacity) { _buffer.reserve(capacity); }
-    public void resize(long size) { _buffer.resize(size); }
-    public void reset() { _buffer.reset(); }
-    public void shift(long offset) { _buffer.shift(offset); }
-    public void unshift(long offset) { _buffer.unshift(offset); }
+    fun allocate(size: Long): Long { return buffer.allocate(size) }
+    fun remove(offset: Long, size: Long) { buffer.remove(offset, size) }
+    fun reserve(capacity: Long) { buffer.reserve(capacity) }
+    fun resize(size: Long) { buffer.resize(size) }
+    fun reset() { buffer.reset() }
+    fun shift(offset: Long) { buffer.shift(offset) }
+    fun unshift(offset: Long) { buffer.unshift(offset) }
 
     // Buffer I/O methods
-    protected int readInt32(long offset) { return Buffer.readInt32(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected void write(long offset, int value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
+    protected fun readInt32(offset: Long): Int { return Buffer.readInt32(buffer.data, buffer.offset + offset) }
+    protected fun write(offset: Long, value: Int) { Buffer.write(buffer.data, buffer.offset + offset, value) }
 }
 )CODE";
 
@@ -592,12 +568,12 @@ public class Model
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModel(const std::string& package)
+void GeneratorKotlin::GenerateFBEFieldModel(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / "FieldModel.java";
+    CppCommon::Path file = path / "FieldModel.kt";
     Open(file);
 
     // Generate headers
@@ -606,61 +582,48 @@ void GeneratorJava::GenerateFBEFieldModel(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding base field model class
-public abstract class FieldModel
+abstract class FieldModel protected constructor(protected var _buffer: Buffer, protected var _offset: Long)
 {
-    protected Buffer _buffer;
-    protected long _offset;
-
-    // Get the field offset
-    public long FBEOffset() { return _offset; }
-    // Set the field offset
-    public void FBEOffset(long value) { _offset = value; }
-
-    // Get the field size
-    public long FBESize() { return 0; }
-    // Get the field extra size
-    public long FBEExtra() { return 0; }
+    // Field offset
+    var FBEOffset: Long = _offset
+    // Field size
+    open val FBESize: Long = 0
+    // Field extra size
+    open val FBEExtra: Long = 0
 
     // Shift the current field offset
-    public void FBEShift(long size) { _offset += size; }
+    fun FBEShift(size: Long) { _offset += size }
     // Unshift the current field offset
-    public void FBEUnshift(long size) { _offset -= size; }
-
-    // Initialize a new field model
-    protected FieldModel(@NotNull Buffer buffer, long offset)
-    {
-        _buffer = buffer;
-        _offset = offset;
-    }
+    fun FBEUnshift(size: Long) { _offset -= size }
 
     // Check if the value is valid
-    public boolean verify() { return true; }
+    open fun verify(): Boolean = true
 
     // Buffer I/O methods
-    protected boolean readBoolean(long offset) { return Buffer.readBoolean(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected byte readByte(long offset) { return Buffer.readByte(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected char readChar(long offset) { return Buffer.readChar(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected char readWChar(long offset) { return Buffer.readWChar(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected byte readInt8(long offset) { return Buffer.readInt8(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected short readInt16(long offset) { return Buffer.readInt16(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected int readInt32(long offset) { return Buffer.readInt32(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected long readInt64(long offset) { return Buffer.readInt64(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected float readFloat(long offset) { return Buffer.readFloat(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected double readDouble(long offset) { return Buffer.readDouble(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected UUID readUUID(long offset) { return Buffer.readUUID(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected byte[] readBytes(long offset, long size) { return Buffer.readBytes(_buffer.getData(), _buffer.getOffset() + offset, size); }
-    protected String readString(long offset, long size) { return Buffer.readString(_buffer.getData(), _buffer.getOffset() + offset, size); }
-    protected void write(long offset, boolean value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, byte value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, short value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, int value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, long value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, float value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, double value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, @NotNull UUID value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, @NotNull byte[] value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, @NotNull byte[] value, long valueOffset, long valueSize) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value, valueOffset, valueSize); }
-    protected void write(long offset, byte value, long valueCount) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value, valueCount); }
+    protected fun readBoolean(offset: Long): Boolean { return Buffer.readBoolean(_buffer.data, _buffer.offset + offset) }
+    protected fun readByte(offset: Long): Byte { return Buffer.readByte(_buffer.data, _buffer.offset + offset) }
+    protected fun readChar(offset: Long): Char { return Buffer.readChar(_buffer.data, _buffer.offset + offset) }
+    protected fun readWChar(offset: Long): Char { return Buffer.readWChar(_buffer.data, _buffer.offset + offset) }
+    protected fun readInt8(offset: Long): Byte { return Buffer.readInt8(_buffer.data, _buffer.offset + offset) }
+    protected fun readInt16(offset: Long): Short { return Buffer.readInt16(_buffer.data, _buffer.offset + offset) }
+    protected fun readInt32(offset: Long): Int { return Buffer.readInt32(_buffer.data, _buffer.offset + offset) }
+    protected fun readInt64(offset: Long): Long { return Buffer.readInt64(_buffer.data, _buffer.offset + offset) }
+    protected fun readFloat(offset: Long): Float { return Buffer.readFloat(_buffer.data, _buffer.offset + offset) }
+    protected fun readDouble(offset: Long): Double { return Buffer.readDouble(_buffer.data, _buffer.offset + offset) }
+    protected fun readUUID(offset: Long): UUID { return Buffer.readUUID(_buffer.data, _buffer.offset + offset) }
+    protected fun readBytes(offset: Long, size: Long): ByteArray { return Buffer.readBytes(_buffer.data, _buffer.offset + offset, size) }
+    protected fun readString(offset: Long, size: Long): String { return Buffer.readString(_buffer.data, _buffer.offset + offset, size) }
+    protected fun write(offset: Long, value: Boolean) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: Byte) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: Short) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: Int) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: Long) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: Float) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: Double) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: UUID) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: ByteArray) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: ByteArray, valueOffset: Long, valueSize: Long) { Buffer.write(_buffer.data, _buffer.offset + offset, value, valueOffset, valueSize) }
+    protected fun write(offset: Long, value: Byte, valueCount: Long) { Buffer.write(_buffer.data, _buffer.offset + offset, value, valueCount) }
 }
 )CODE";
 
@@ -676,12 +639,12 @@ public abstract class FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModel(const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults)
+void GeneratorKotlin::GenerateFBEFieldModel(const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / ("FieldModel" + name + ".java");
+    CppCommon::Path file = path / ("FieldModel" + name + ".kt");
     Open(file);
 
     // Generate headers
@@ -690,32 +653,26 @@ void GeneratorJava::GenerateFBEFieldModel(const std::string& package, const std:
 
     std::string code = R"CODE(
 // Fast Binary Encoding _TYPE_ field model class
-public final class FieldModel_NAME_ extends FieldModel
+class FieldModel_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
-    public FieldModel_NAME_(@NotNull Buffer buffer, long offset) { super(buffer, offset); }
-
-    // Get the field size
-    @Override
-    public long FBESize() { return _SIZE_; }
+    // Field size
+    override val FBESize: Long = _SIZE_
 
     // Get the value
-    public _TYPE_ get() { return get(_DEFAULTS_); }
-    public _TYPE_ get(_TYPE_ defaults)
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return defaults;
+    fun get(defaults: _TYPE_ = _DEFAULTS_): _TYPE_ {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return defaults
 
-        return read_NAME_(FBEOffset());
+        return read_NAME_(FBEOffset)
     }
 
     // Set the value
-    public void set(_TYPE_ value)
-    {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return;
+    fun set(value: _TYPE_) {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return
 
-        write(FBEOffset(), _BASE_value);
+        write(FBEOffset, value_BASE_)
     }
 }
 )CODE";
@@ -737,7 +694,7 @@ public final class FieldModel_NAME_ extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModelDecimal(const std::string& package)
+void GeneratorKotlin::GenerateFBEFieldModelDecimal(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
@@ -850,7 +807,7 @@ public final class FieldModelDecimal extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModelTimestamp(const std::string& package)
+void GeneratorKotlin::GenerateFBEFieldModelTimestamp(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
@@ -916,7 +873,7 @@ public final class FieldModelTimestamp extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModelBytes(const std::string& package)
+void GeneratorKotlin::GenerateFBEFieldModelBytes(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
@@ -1039,7 +996,7 @@ public final class FieldModelBytes extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModelString(const std::string& package)
+void GeneratorKotlin::GenerateFBEFieldModelString(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
@@ -1164,7 +1121,7 @@ public final class FieldModelString extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModelOptional(const std::string& package, const std::string& name, const std::string& type, const std::string& model)
+void GeneratorKotlin::GenerateFBEFieldModelOptional(const std::string& package, const std::string& name, const std::string& type, const std::string& model)
 {
     CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
 
@@ -1343,7 +1300,7 @@ public final class FieldModelOptional_NAME_ extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModelArray(const std::string& package, const std::string& name, const std::string& type, const std::string& model, bool bytes)
+void GeneratorKotlin::GenerateFBEFieldModelArray(const std::string& package, const std::string& name, const std::string& type, const std::string& model, bool bytes)
 {
     CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
 
@@ -1523,7 +1480,7 @@ public final class FieldModelArray_NAME_ extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModelVector(const std::string& package, const std::string& name, const std::string& type, const std::string& model)
+void GeneratorKotlin::GenerateFBEFieldModelVector(const std::string& package, const std::string& name, const std::string& type, const std::string& model)
 {
     CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
 
@@ -1858,7 +1815,7 @@ public final class FieldModelVector_NAME_ extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModelMap(const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
+void GeneratorKotlin::GenerateFBEFieldModelMap(const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
 {
     CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
 
@@ -2124,7 +2081,7 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModelEnumFlags(const std::string& package, const std::string& name, const std::string& size, const std::string& read)
+void GeneratorKotlin::GenerateFBEFieldModelEnumFlags(const std::string& package, const std::string& name, const std::string& size, const std::string& read)
 {
     CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
 
@@ -2191,12 +2148,12 @@ public final class FieldModel_NAME_ extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBESize(const std::string& package)
+void GeneratorKotlin::GenerateFBESize(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / "Size.java";
+    CppCommon::Path file = path / "Size.kt";
     Open(file);
 
     // Generate headers
@@ -2205,13 +2162,13 @@ void GeneratorJava::GenerateFBESize(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding size class
-public class Size
+class Size
 {
-    public long value;
+    var value: Long = 0
 
     // Initialize a new size
-    public Size() { value = 0; }
-    public Size(long size) { value = size; }
+    constructor()
+    constructor(size: Long) { value = size }
 }
 )CODE";
 
@@ -2227,12 +2184,12 @@ public class Size
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModel(const std::string& package)
+void GeneratorKotlin::GenerateFBEFinalModel(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / "FinalModel.java";
+    CppCommon::Path file = path / "FinalModel.kt";
     Open(file);
 
     // Generate headers
@@ -2241,61 +2198,47 @@ void GeneratorJava::GenerateFBEFinalModel(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding base final model class
-public abstract class FinalModel
-{
-    protected Buffer _buffer;
-    protected long _offset;
-
-    // Get the final offset
-    public long FBEOffset() { return _offset; }
-    // Set the final offset
-    public void FBEOffset(long value) { _offset = value; }
-
-    // Get the final size
-    public long FBESize() { return 0; }
-    // Get the final extra size
-    public long FBEExtra() { return 0; }
+abstract class FinalModel protected constructor(protected var _buffer: Buffer, protected var _offset: Long) {
+    // Final offset
+    var FBEOffset: Long = _offset
+    // Final size
+    open val FBESize: Long = 0
+    // Final extra size
+    open val FBEExtra: Long = 0
 
     // Shift the current final offset
-    public void FBEShift(long size) { _offset += size; }
+    fun FBEShift(size: Long) { _offset += size }
     // Unshift the current final offset
-    public void FBEUnshift(long size) { _offset -= size; }
-
-    // Initialize a new final model
-    protected FinalModel(@NotNull Buffer buffer, long offset)
-    {
-        _buffer = buffer;
-        _offset = offset;
-    }
+    fun FBEUnshift(size: Long) { _offset -= size }
 
     // Check if the value is valid
-    public abstract long verify();
+    abstract fun verify(): Long
 
     // Buffer I/O methods
-    protected boolean readBoolean(long offset) { return Buffer.readBoolean(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected byte readByte(long offset) { return Buffer.readByte(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected char readChar(long offset) { return Buffer.readChar(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected char readWChar(long offset) { return Buffer.readWChar(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected byte readInt8(long offset) { return Buffer.readInt8(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected short readInt16(long offset) { return Buffer.readInt16(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected int readInt32(long offset) { return Buffer.readInt32(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected long readInt64(long offset) { return Buffer.readInt64(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected float readFloat(long offset) { return Buffer.readFloat(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected double readDouble(long offset) { return Buffer.readDouble(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected UUID readUUID(long offset) { return Buffer.readUUID(_buffer.getData(), _buffer.getOffset() + offset); }
-    protected byte[] readBytes(long offset, long size) { return Buffer.readBytes(_buffer.getData(), _buffer.getOffset() + offset, size); }
-    protected String readString(long offset, long size) { return Buffer.readString(_buffer.getData(), _buffer.getOffset() + offset, size); }
-    protected void write(long offset, boolean value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, byte value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, short value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, int value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, long value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, float value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, double value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, @NotNull UUID value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, @NotNull byte[] value) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value); }
-    protected void write(long offset, @NotNull byte[] value, long valueOffset, long valueSize) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value, valueOffset, valueSize); }
-    protected void write(long offset, byte value, long valueCount) { Buffer.write(_buffer.getData(), _buffer.getOffset() + offset, value, valueCount); }
+    protected fun readBoolean(offset: Long): Boolean { return Buffer.readBoolean(_buffer.data, _buffer.offset + offset) }
+    protected fun readByte(offset: Long): Byte { return Buffer.readByte(_buffer.data, _buffer.offset + offset) }
+    protected fun readChar(offset: Long): Char { return Buffer.readChar(_buffer.data, _buffer.offset + offset) }
+    protected fun readWChar(offset: Long): Char { return Buffer.readWChar(_buffer.data, _buffer.offset + offset) }
+    protected fun readInt8(offset: Long): Byte { return Buffer.readInt8(_buffer.data, _buffer.offset + offset) }
+    protected fun readInt16(offset: Long): Short { return Buffer.readInt16(_buffer.data, _buffer.offset + offset) }
+    protected fun readInt32(offset: Long): Int { return Buffer.readInt32(_buffer.data, _buffer.offset + offset) }
+    protected fun readInt64(offset: Long): Long { return Buffer.readInt64(_buffer.data, _buffer.offset + offset) }
+    protected fun readFloat(offset: Long): Float { return Buffer.readFloat(_buffer.data, _buffer.offset + offset) }
+    protected fun readDouble(offset: Long): Double { return Buffer.readDouble(_buffer.data, _buffer.offset + offset) }
+    protected fun readUUID(offset: Long): UUID { return Buffer.readUUID(_buffer.data, _buffer.offset + offset) }
+    protected fun readBytes(offset: Long, size: Long): ByteArray { return Buffer.readBytes(_buffer.data, _buffer.offset + offset, size) }
+    protected fun readString(offset: Long, size: Long): String { return Buffer.readString(_buffer.data, _buffer.offset + offset, size) }
+    protected fun write(offset: Long, value: Boolean) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: Byte) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: Short) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: Int) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: Long) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: Float) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: Double) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: UUID) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: ByteArray) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: ByteArray, valueOffset: Long, valueSize: Long) { Buffer.write(_buffer.data, _buffer.offset + offset, value, valueOffset, valueSize) }
+    protected fun write(offset: Long, value: Byte, valueCount: Long) { Buffer.write(_buffer.data, _buffer.offset + offset, value, valueCount) }
 }
 )CODE";
 
@@ -2311,12 +2254,12 @@ public abstract class FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModel(const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults)
+void GeneratorKotlin::GenerateFBEFinalModel(const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / ("FinalModel" + name + ".java");
+    CppCommon::Path file = path / ("FinalModel" + name + ".kt");
     Open(file);
 
     // Generate headers
@@ -2325,46 +2268,42 @@ void GeneratorJava::GenerateFBEFinalModel(const std::string& package, const std:
 
     std::string code = R"CODE(
 // Fast Binary Encoding _TYPE_ final model class
-public final class FinalModel_NAME_ extends FinalModel
+class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
-    public FinalModel_NAME_(Buffer buffer, long offset) { super(buffer, offset); }
-
     // Get the allocation size
-    public long FBEAllocationSize(_TYPE_ value) { return FBESize(); }
+    @Suppress("UNUSED_PARAMETER")
+    fun FBEAllocationSize(value: _TYPE_): Long {
+        return FBESize
+    }
 
-    // Get the final size
-    @Override
-    public long FBESize() { return _SIZE_; }
+    // Final size
+    override val FBESize: Long = _SIZE_
 
     // Check if the value is valid
-    @Override
-    public long verify()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return Long.MAX_VALUE;
+    override fun verify(): Long {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return Long.MAX_VALUE
 
-        return FBESize();
+        return FBESize
     }
 
     // Get the value
-    public _TYPE_ get(Size size)
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return _DEFAULTS_;
+    fun get(size: Size): _TYPE_ {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return _DEFAULTS_
 
-        size.value = FBESize();
-        return read_NAME_(FBEOffset());
+        size.value = FBESize
+        return read_NAME_(FBEOffset)
     }
 
     // Set the value
-    public long set(_TYPE_ value)
-    {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return 0;
+    fun set(value: _TYPE_): Long {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return 0
 
-        write(FBEOffset(), _BASE_value);
-        return FBESize();
+        write(FBEOffset, value_BASE_)
+        return FBESize
     }
 }
 )CODE";
@@ -2386,7 +2325,7 @@ public final class FinalModel_NAME_ extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModelDecimal(const std::string& package)
+void GeneratorKotlin::GenerateFBEFinalModelDecimal(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
@@ -2505,7 +2444,7 @@ public final class FinalModelDecimal extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModelTimestamp(const std::string& package)
+void GeneratorKotlin::GenerateFBEFinalModelTimestamp(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
@@ -2577,7 +2516,7 @@ public final class FinalModelTimestamp extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModelBytes(const std::string& package)
+void GeneratorKotlin::GenerateFBEFinalModelBytes(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
@@ -2668,7 +2607,7 @@ public final class FinalModelBytes extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModelString(const std::string& package)
+void GeneratorKotlin::GenerateFBEFinalModelString(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
@@ -2761,7 +2700,7 @@ public final class FinalModelString extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModelOptional(const std::string& package, const std::string& name, const std::string& type, const std::string& model)
+void GeneratorKotlin::GenerateFBEFinalModelOptional(const std::string& package, const std::string& name, const std::string& type, const std::string& model)
 {
     CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
 
@@ -2882,7 +2821,7 @@ public final class FinalModelOptional_NAME_ extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModelArray(const std::string& package, const std::string& name, const std::string& type, const std::string& model, bool bytes)
+void GeneratorKotlin::GenerateFBEFinalModelArray(const std::string& package, const std::string& name, const std::string& type, const std::string& model, bool bytes)
 {
     CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
 
@@ -3093,7 +3032,7 @@ public final class FinalModelArray_NAME_ extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModelVector(const std::string& package, const std::string& name, const std::string& type, const std::string& model)
+void GeneratorKotlin::GenerateFBEFinalModelVector(const std::string& package, const std::string& name, const std::string& type, const std::string& model)
 {
     CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
 
@@ -3455,7 +3394,7 @@ public final class FinalModelVector_NAME_ extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModelMap(const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
+void GeneratorKotlin::GenerateFBEFinalModelMap(const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model)
 {
     CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
 
@@ -3696,7 +3635,7 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModelEnumFlags(const std::string& package, const std::string& name, const std::string& size, const std::string& read)
+void GeneratorKotlin::GenerateFBEFinalModelEnumFlags(const std::string& package, const std::string& name, const std::string& size, const std::string& read)
 {
     CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
 
@@ -3777,7 +3716,7 @@ public final class FinalModel_NAME_ extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBESender(const std::string& package)
+void GeneratorKotlin::GenerateFBESender(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
@@ -3848,7 +3787,7 @@ public abstract class Sender
     Close();
 }
 
-void GeneratorJava::GenerateFBEReceiver(const std::string& package)
+void GeneratorKotlin::GenerateFBEReceiver(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
@@ -4144,7 +4083,7 @@ public abstract class Receiver
     Close();
 }
 
-void GeneratorJava::GenerateFBEJson(const std::string& package)
+void GeneratorKotlin::GenerateFBEJson(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
@@ -4262,7 +4201,7 @@ public final class Json
     Close();
 }
 
-void GeneratorJava::GenerateContainers(const std::shared_ptr<Package>& p, bool final)
+void GeneratorKotlin::GenerateContainers(const std::shared_ptr<Package>& p, bool final)
 {
     CppCommon::Path path = CppCommon::Path(_output) / *p->name;
 
@@ -4313,7 +4252,7 @@ void GeneratorJava::GenerateContainers(const std::shared_ptr<Package>& p, bool f
     }
 }
 
-void GeneratorJava::GeneratePackage(const std::shared_ptr<Package>& p)
+void GeneratorKotlin::GeneratePackage(const std::shared_ptr<Package>& p)
 {
     CppCommon::Path path = CppCommon::Path(_output) / *p->name;
 
@@ -4358,7 +4297,7 @@ void GeneratorJava::GeneratePackage(const std::shared_ptr<Package>& p)
         GenerateJson(p);
 }
 
-void GeneratorJava::GenerateEnum(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e, const CppCommon::Path& path)
+void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e, const CppCommon::Path& path)
 {
     std::string enum_name = *e->name + "Enum";
 
@@ -4482,7 +4421,7 @@ void GeneratorJava::GenerateEnum(const std::shared_ptr<Package>& p, const std::s
         GenerateFBEFinalModelEnumFlags(*p->name, *e->name, ConvertEnumSize(enum_type), ConvertEnumRead(enum_type));
 }
 
-void GeneratorJava::GenerateEnumClass(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e, const CppCommon::Path& path)
+void GeneratorKotlin::GenerateEnumClass(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e, const CppCommon::Path& path)
 {
     std::string enum_name = *e->name;
     std::string enum_type_name = *e->name + "Enum";
@@ -4610,7 +4549,7 @@ void GeneratorJava::GenerateEnumClass(const std::shared_ptr<Package>& p, const s
     Close();
 }
 
-void GeneratorJava::GenerateEnumJson(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e)
+void GeneratorKotlin::GenerateEnumJson(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e)
 {
     std::string package = *p->name;
 
@@ -4671,7 +4610,7 @@ void GeneratorJava::GenerateEnumJson(const std::shared_ptr<Package>& p, const st
     Close();
 }
 
-void GeneratorJava::GenerateFlags(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f, const CppCommon::Path& path)
+void GeneratorKotlin::GenerateFlags(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f, const CppCommon::Path& path)
 {
     std::string flags_name = *f->name + "Enum";
 
@@ -4851,7 +4790,7 @@ void GeneratorJava::GenerateFlags(const std::shared_ptr<Package>& p, const std::
         GenerateFBEFinalModelEnumFlags(*p->name, *f->name, ConvertEnumSize(flags_type), ConvertEnumRead(flags_type));
 }
 
-void GeneratorJava::GenerateFlagsClass(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f, const CppCommon::Path& path)
+void GeneratorKotlin::GenerateFlagsClass(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f, const CppCommon::Path& path)
 {
     std::string flags_name = *f->name;
     std::string flags_type_name = *f->name + "Enum";
@@ -5036,7 +4975,7 @@ void GeneratorJava::GenerateFlagsClass(const std::shared_ptr<Package>& p, const 
     Close();
 }
 
-void GeneratorJava::GenerateFlagsJson(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f)
+void GeneratorKotlin::GenerateFlagsJson(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f)
 {
     std::string package = *p->name;
 
@@ -5098,7 +5037,7 @@ void GeneratorJava::GenerateFlagsJson(const std::shared_ptr<Package>& p, const s
     Close();
 }
 
-void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path)
+void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path)
 {
     // Open the output file
     CppCommon::Path output = path / (*s->name + ".java");
@@ -5474,7 +5413,7 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
     }
 }
 
-void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
+void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
     std::string package = *p->name;
 
@@ -5858,7 +5797,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     Close();
 }
 
-void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
+void GeneratorKotlin::GenerateStructModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
     std::string package = *p->name;
 
@@ -6012,7 +5951,7 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
     Close();
 }
 
-void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
+void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
     std::string package = *p->name;
 
@@ -6247,7 +6186,7 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     Close();
 }
 
-void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
+void GeneratorKotlin::GenerateStructModelFinal(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
 {
     std::string package = *p->name;
 
@@ -6387,7 +6326,7 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
     Close();
 }
 
-void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final)
+void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool final)
 {
     std::string package = *p->name;
 
@@ -6525,7 +6464,7 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
     Close();
 }
 
-void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool final)
+void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool final)
 {
     std::string package = *p->name;
 
@@ -6709,7 +6648,7 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     Close();
 }
 
-void GeneratorJava::GenerateJson(const std::shared_ptr<Package>& p)
+void GeneratorKotlin::GenerateJson(const std::shared_ptr<Package>& p)
 {
     std::string package = *p->name;
 
@@ -6791,7 +6730,7 @@ void GeneratorJava::GenerateJson(const std::shared_ptr<Package>& p)
     Close();
 }
 
-bool GeneratorJava::IsKnownType(const std::string& type)
+bool GeneratorKotlin::IsKnownType(const std::string& type)
 {
     return ((type == "bool") ||
             (type == "byte") || (type == "bytes") ||
@@ -6805,7 +6744,7 @@ bool GeneratorJava::IsKnownType(const std::string& type)
             (type == "timestamp") || (type == "uuid"));
 }
 
-bool GeneratorJava::IsPrimitiveType(const std::string& type, bool optional)
+bool GeneratorKotlin::IsPrimitiveType(const std::string& type, bool optional)
 {
     if (optional)
         return false;
@@ -6819,7 +6758,7 @@ bool GeneratorJava::IsPrimitiveType(const std::string& type, bool optional)
             (type == "float") || (type == "double"));
 }
 
-std::string GeneratorJava::ConvertEnumBase(const std::string& type)
+std::string GeneratorKotlin::ConvertEnumBase(const std::string& type)
 {
     if (type == "byte")
         return "Byte";
@@ -6848,7 +6787,7 @@ std::string GeneratorJava::ConvertEnumBase(const std::string& type)
     return "";
 }
 
-std::string GeneratorJava::ConvertEnumType(const std::string& type)
+std::string GeneratorKotlin::ConvertEnumType(const std::string& type)
 {
     if (type == "byte")
         return "byte";
@@ -6877,7 +6816,7 @@ std::string GeneratorJava::ConvertEnumType(const std::string& type)
     return "";
 }
 
-std::string GeneratorJava::ConvertEnumSize(const std::string& type)
+std::string GeneratorKotlin::ConvertEnumSize(const std::string& type)
 {
     if (type == "byte")
         return "1";
@@ -6906,7 +6845,7 @@ std::string GeneratorJava::ConvertEnumSize(const std::string& type)
     return "";
 }
 
-std::string GeneratorJava::ConvertEnumGet(const std::string& type)
+std::string GeneratorKotlin::ConvertEnumGet(const std::string& type)
 {
     if (type == "byte")
         return "getAsByte";
@@ -6935,7 +6874,7 @@ std::string GeneratorJava::ConvertEnumGet(const std::string& type)
     return "";
 }
 
-std::string GeneratorJava::ConvertEnumRead(const std::string& type)
+std::string GeneratorKotlin::ConvertEnumRead(const std::string& type)
 {
     if (type == "byte")
         return "readByte";
@@ -6964,7 +6903,7 @@ std::string GeneratorJava::ConvertEnumRead(const std::string& type)
     return "";
 }
 
-std::string GeneratorJava::ConvertEnumConstant(const std::string& type, const std::string& value, bool optional)
+std::string GeneratorKotlin::ConvertEnumConstant(const std::string& type, const std::string& value, bool optional)
 {
     std::string result = value;
 
@@ -6989,7 +6928,7 @@ std::string GeneratorJava::ConvertEnumConstant(const std::string& type, const st
     return ConvertEnumConstantPrefix(type) + result + ConvertEnumConstantSuffix(type);
 }
 
-std::string GeneratorJava::ConvertEnumConstantPrefix(const std::string& type)
+std::string GeneratorKotlin::ConvertEnumConstantPrefix(const std::string& type)
 {
     if (type == "byte")
         return "(byte)";
@@ -7017,7 +6956,7 @@ std::string GeneratorJava::ConvertEnumConstantPrefix(const std::string& type)
     return "";
 }
 
-std::string GeneratorJava::ConvertEnumConstantSuffix(const std::string& type)
+std::string GeneratorKotlin::ConvertEnumConstantSuffix(const std::string& type)
 {
     if ((type == "int64") || (type == "uint64"))
         return "L";
@@ -7025,7 +6964,7 @@ std::string GeneratorJava::ConvertEnumConstantSuffix(const std::string& type)
     return "";
 }
 
-std::string GeneratorJava::ConvertPrimitiveTypeName(const std::string& type)
+std::string GeneratorKotlin::ConvertPrimitiveTypeName(const std::string& type)
 {
     if (type == "bool")
         return "Boolean";
@@ -7059,7 +6998,7 @@ std::string GeneratorJava::ConvertPrimitiveTypeName(const std::string& type)
     return "";
 }
 
-std::string GeneratorJava::ConvertTypeName(const std::string& type, bool optional)
+std::string GeneratorKotlin::ConvertTypeName(const std::string& type, bool optional)
 {
     if (optional)
     {
@@ -7135,7 +7074,7 @@ std::string GeneratorJava::ConvertTypeName(const std::string& type, bool optiona
     return type;
 }
 
-std::string GeneratorJava::ConvertTypeName(const StructField& field)
+std::string GeneratorKotlin::ConvertTypeName(const StructField& field)
 {
     if (field.array)
         return ConvertTypeName(*field.type, field.optional) + "[]";
@@ -7153,7 +7092,7 @@ std::string GeneratorJava::ConvertTypeName(const StructField& field)
     return ConvertTypeName(*field.type, field.optional);
 }
 
-std::string GeneratorJava::ConvertBaseFieldName(const std::string& type, bool final)
+std::string GeneratorKotlin::ConvertBaseFieldName(const std::string& type, bool final)
 {
     std::string modelType = (final ? "Final" : "Field");
 
@@ -7171,7 +7110,7 @@ std::string GeneratorJava::ConvertBaseFieldName(const std::string& type, bool fi
     return ns + modelType + "Model" + ConvertTypeFieldName(t);
 }
 
-std::string GeneratorJava::ConvertTypeFieldName(const std::string& type)
+std::string GeneratorKotlin::ConvertTypeFieldName(const std::string& type)
 {
     if (type == "bool")
         return "Boolean";
@@ -7217,7 +7156,7 @@ std::string GeneratorJava::ConvertTypeFieldName(const std::string& type)
     return result;
 }
 
-std::string GeneratorJava::ConvertTypeFieldType(const std::string& type, bool optional)
+std::string GeneratorKotlin::ConvertTypeFieldType(const std::string& type, bool optional)
 {
     if (type == "bool")
         return "Boolean";
@@ -7271,7 +7210,7 @@ std::string GeneratorJava::ConvertTypeFieldType(const std::string& type, bool op
     return ns + t;
 }
 
-std::string GeneratorJava::ConvertTypeFieldDeclaration(const std::string& type, bool optional, bool final)
+std::string GeneratorKotlin::ConvertTypeFieldDeclaration(const std::string& type, bool optional, bool final)
 {
     std::string modelType = (final ? "Final" : "Field");
 
@@ -7290,7 +7229,7 @@ std::string GeneratorJava::ConvertTypeFieldDeclaration(const std::string& type, 
     return ns + modelType + "Model" + opt + ConvertTypeFieldName(t);
 }
 
-std::string GeneratorJava::ConvertTypeFieldDeclaration(const StructField& field, bool final)
+std::string GeneratorKotlin::ConvertTypeFieldDeclaration(const StructField& field, bool final)
 {
     std::string modelType = (final ? "Final" : "Field");
 
@@ -7306,7 +7245,7 @@ std::string GeneratorJava::ConvertTypeFieldDeclaration(const StructField& field,
     return ConvertTypeFieldDeclaration(*field.type, field.optional, final);
 }
 
-std::string GeneratorJava::ConvertTypeFieldInitialization(const StructField& field, const std::string& offset, bool final)
+std::string GeneratorKotlin::ConvertTypeFieldInitialization(const StructField& field, const std::string& offset, bool final)
 {
     std::string modelType = (final ? "Final" : "Field");
 
@@ -7334,7 +7273,7 @@ std::string GeneratorJava::ConvertTypeFieldInitialization(const StructField& fie
     return "new " + ns + modelType + "Model" + ConvertTypeFieldName(t) + "(buffer, " + offset + ")";
 }
 
-std::string GeneratorJava::ConvertConstant(const std::string& type, const std::string& value, bool optional)
+std::string GeneratorKotlin::ConvertConstant(const std::string& type, const std::string& value, bool optional)
 {
     if (value == "true")
         return "true";
@@ -7378,7 +7317,7 @@ std::string GeneratorJava::ConvertConstant(const std::string& type, const std::s
     return ConvertConstantPrefix(type) + result + ConvertConstantSuffix(type);
 }
 
-std::string GeneratorJava::ConvertConstantPrefix(const std::string& type)
+std::string GeneratorKotlin::ConvertConstantPrefix(const std::string& type)
 {
     if (type == "boolean")
         return "(boolean)";
@@ -7416,7 +7355,7 @@ std::string GeneratorJava::ConvertConstantPrefix(const std::string& type)
     return "";
 }
 
-std::string GeneratorJava::ConvertConstantSuffix(const std::string& type)
+std::string GeneratorKotlin::ConvertConstantSuffix(const std::string& type)
 {
     if ((type == "int64") || (type == "uint64"))
         return "L";
@@ -7432,7 +7371,7 @@ std::string GeneratorJava::ConvertConstantSuffix(const std::string& type)
     return "";
 }
 
-std::string GeneratorJava::ConvertDefault(const std::string& type)
+std::string GeneratorKotlin::ConvertDefault(const std::string& type)
 {
     if (type == "bool")
         return "false";
@@ -7466,7 +7405,7 @@ std::string GeneratorJava::ConvertDefault(const std::string& type)
     return "new " + type + "()";
 }
 
-std::string GeneratorJava::ConvertDefault(const StructField& field)
+std::string GeneratorKotlin::ConvertDefault(const StructField& field)
 {
     if (field.value)
         return ConvertConstant(*field.type, *field.value, field.optional);
@@ -7488,7 +7427,7 @@ std::string GeneratorJava::ConvertDefault(const StructField& field)
     return ConvertDefault(*field.type);
 }
 
-std::string GeneratorJava::ConvertOutputStreamType(const std::string& type, const std::string& name, bool optional)
+std::string GeneratorKotlin::ConvertOutputStreamType(const std::string& type, const std::string& name, bool optional)
 {
     if (type == "bool")
         return ".append(" + name + " ? \"true\" : \"false\")";
@@ -7504,7 +7443,7 @@ std::string GeneratorJava::ConvertOutputStreamType(const std::string& type, cons
         return ".append(" + name + ")";
 }
 
-std::string GeneratorJava::ConvertOutputStreamItem(const std::string& type, const std::string& name, bool optional)
+std::string GeneratorKotlin::ConvertOutputStreamItem(const std::string& type, const std::string& name, bool optional)
 {
     if ((type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid") || optional)
         return "if (" + name + " != null) sb.append(first ? \"\" : \",\")" + ConvertOutputStreamType(type, name, true) + "; else sb.append(\"null\");";
@@ -7512,7 +7451,7 @@ std::string GeneratorJava::ConvertOutputStreamItem(const std::string& type, cons
         return "sb.append(first ? \"\" : \",\")" + ConvertOutputStreamType(type, name, false) + ";";
 }
 
-std::string GeneratorJava::ConvertOutputStreamValue(const std::string& type, const std::string& name, bool optional)
+std::string GeneratorKotlin::ConvertOutputStreamValue(const std::string& type, const std::string& name, bool optional)
 {
     if ((type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid") || optional)
         return "if (" + name + " != null) sb" + ConvertOutputStreamType(type, name, true) + "; else sb.append(\"null\");";
