@@ -3,6 +3,9 @@
 
 !.idea
 
+# User-specific stuff
+.idea/.idea.FastBinaryEncoding/.idea/workspace.xml
+
 # User-specific files
 *.suo
 *.user
