@@ -10,7 +10,6 @@ import java.math.*;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
-import javafx.util.*;
 
 // Fast Binary Encoding char field model class
 public final class FieldModelChar extends FieldModel

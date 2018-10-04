@@ -10,7 +10,6 @@ import java.math.*;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
-import javafx.util.*;
 
 // Fast Binary Encoding UUID field model class
 public final class FieldModelUUID extends FieldModel

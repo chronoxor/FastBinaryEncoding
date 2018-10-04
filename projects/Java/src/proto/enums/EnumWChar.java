@@ -10,7 +10,6 @@ import java.math.*;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
-import javafx.util.*;
 import fbe.*;
 
 public final class EnumWChar implements Comparable<EnumWChar>
