@@ -36,6 +36,15 @@ Typical usage workflow is the following:
    to use them in Web API
 6. Implement [Sender/Receiver interfaces](#senderreceiver-protocol) to create a communication protocol
 
+Sample projects:
+* [C++ sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/examples)
+* [C# sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/CSharp)
+* [.NET Core sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/.NETCore)
+* [Java sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Java)
+* [JavaScript sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/JavaScript)
+* [Kotlin sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Kotlin)
+* [Python sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Python)
+
 # Contents
   * [Features](#features)
   * [Requirements](#requirements)
