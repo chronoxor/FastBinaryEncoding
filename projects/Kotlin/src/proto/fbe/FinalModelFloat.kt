@@ -10,7 +10,6 @@ import java.math.*;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
-import javafx.util.*;
 
 // Fast Binary Encoding Float final model class
 class FinalModelFloat(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)

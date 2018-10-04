@@ -76,7 +76,7 @@ public abstract class Receiver
                     {
                         messageSizeCopied = true;
                         messageSizeFound = true;
-                        messageSize = _buffer.readInt32(_buffer.getData(), offset0);
+                        messageSize = Buffer.readInt32(_buffer.getData(), offset0);
                         offset0 += 4;
                         break;
                     }
@@ -108,7 +108,7 @@ public abstract class Receiver
                     if (count == 4)
                     {
                         messageSizeFound = true;
-                        messageSize = _buffer.readInt32(buffer, offset + offset2);
+                        messageSize = Buffer.readInt32(buffer, offset + offset2);
                         offset2 += 4;
                         break;
                     }
@@ -164,7 +164,7 @@ public abstract class Receiver
                                 _buffer.allocate(4);
                                 size1 += 4;
 
-                                _buffer.write(_buffer.getData(), offset0, (int)messageSize);
+                                Buffer.write(_buffer.getData(), offset0, (int)messageSize);
                                 offset0 += 4;
                                 offset1 += 4;
 
@@ -208,7 +208,7 @@ public abstract class Receiver
                             _buffer.allocate(4);
                             size1 += 4;
 
-                            _buffer.write(_buffer.getData(), offset0, (int)messageSize);
+                            Buffer.write(_buffer.getData(), offset0, (int)messageSize);
                             offset0 += 4;
                             offset1 += 4;
 
@@ -238,7 +238,7 @@ public abstract class Receiver
                     _buffer.allocate(4);
                     size1 += 4;
 
-                    _buffer.write(_buffer.getData(), offset0, (int)messageSize);
+                    Buffer.write(_buffer.getData(), offset0, (int)messageSize);
                     offset0 += 4;
                     offset1 += 4;
 

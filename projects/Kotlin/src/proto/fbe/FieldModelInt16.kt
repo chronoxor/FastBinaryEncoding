@@ -10,7 +10,6 @@ import java.math.*;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
-import javafx.util.*;
 
 // Fast Binary Encoding Short field model class
 class FieldModelInt16(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)

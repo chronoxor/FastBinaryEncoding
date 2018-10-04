@@ -30,5 +30,5 @@ public final class Pair<K, V>
     public V getValue() { return value; }
 
     // Create a new pair
-    public static <K, V> Pair<K, V> createPair(K key, V value) { return new Pair<K, V>(key, value); }
+    public static <K, V> Pair<K, V> create(K key, V value) { return new Pair<K, V>(key, value); }
 }

@@ -10,7 +10,6 @@ import java.math.*;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
-import javafx.util.*;
 
 // Fast Binary Encoding base field model class
 abstract class FieldModel protected constructor(protected var _buffer: Buffer, protected var _offset: Long)

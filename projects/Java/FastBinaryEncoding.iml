@@ -4,20 +4,11 @@
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
-      <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/src/proto/enums/fbe" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/benchmarks" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/examples" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/proto" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/proto/enums" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/proto/enums/fbe" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/proto/fbe" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/proto/proto" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/proto/proto/fbe" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/proto/protoex" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/proto/protoex/fbe" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/proto/test" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/src/proto/test/fbe" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>

@@ -10,7 +10,6 @@ import java.math.*;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
-import javafx.util.*;
 
 // Fast Binary Encoding Char final model class
 class FinalModelWChar(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)

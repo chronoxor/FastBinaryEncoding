@@ -10,7 +10,6 @@ import java.math.*;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
-import javafx.util.*;
 
 // Fast Binary Encoding UUID final model class
 class FinalModelUUID(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)

@@ -96,7 +96,7 @@ public final class FieldModelMapStructSimpleOptionalStructNested extends FieldMo
         _modelValue.FBEOffset(fbeMapOffset + 4 + _modelKey.FBESize());
         _modelKey.FBEShift(index * (_modelKey.FBESize() + _modelValue.FBESize()));
         _modelValue.FBEShift(index * (_modelKey.FBESize() + _modelValue.FBESize()));
-        return new Pair<FieldModelStructSimple, FieldModelOptionalStructNested>(_modelKey, _modelValue);
+        return Pair.create(_modelKey, _modelValue);
     }
 
     // Resize the map and get its first model
@@ -115,7 +115,7 @@ public final class FieldModelMapStructSimpleOptionalStructNested extends FieldMo
 
         _modelKey.FBEOffset(fbeMapOffset + 4);
         _modelValue.FBEOffset(fbeMapOffset + 4 + _modelKey.FBESize());
-        return new Pair<FieldModelStructSimple, FieldModelOptionalStructNested>(_modelKey, _modelValue);
+        return Pair.create(_modelKey, _modelValue);
     }
 
     // Check if the map is valid
