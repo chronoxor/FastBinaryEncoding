@@ -711,16 +711,16 @@ Examples:
 // Default enum declaration (enum type is int32)
 enum MyEnum
 {
-    value0;          // value0 == 0
-    value1;          // value1 == 1
-    value2;          // value2 == 2
+    value0;          // value0 ==  0
+    value1;          // value1 ==  1
+    value2;          // value2 ==  2
     value3 = -2;     // value3 == -2
     value4;          // value4 == -1
-    value5;          // value5 == 0
+    value5;          // value5 ==  0
     value6 = 10;     // value6 == 10
     value7;          // value7 == 11
     value8;          // value8 == 12
-    value9 = value1; // value9 == 1
+    value9 = value1; // value9 ==  1
     value10;         // value10 == 2
     value11;         // value11 == 3
 }
@@ -739,7 +739,7 @@ enum MyByteEnum : byte
 // char enum declaration
 enum MyCharEnum : char
 {
-    value0;          // value0 == 0
+    value0;          // value0 ==  0
     value1 = '1';    // value1 == '1'
     value2;          // value2 == '2'
     value3 = '3';    // value3 == '3'
