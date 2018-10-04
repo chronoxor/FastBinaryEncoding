@@ -54,8 +54,8 @@ void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
     }
     if (Sender())
     {
-        //GenerateFBESender("fbe");
-        //GenerateFBEReceiver("fbe");
+        GenerateFBESender("fbe");
+        GenerateFBEReceiver("fbe");
     }
     //if (JSON())
         //GenerateFBEJson("fbe");
