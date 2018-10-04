@@ -7,7 +7,7 @@ import org.testng.annotations.*;
 public class TestClone
 {
     @Test()
-    public void CloneStructs()
+    public void cloneStructs()
     {
         // Create a new account with some orders
         var account1 = new proto.Account(1, "Test", proto.State.good, new proto.Balance("USD", 1000.0), new proto.Balance("EUR", 100.0), new ArrayList<proto.Order>());

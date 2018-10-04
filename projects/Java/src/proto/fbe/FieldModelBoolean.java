@@ -15,7 +15,7 @@ import javafx.util.*;
 // Fast Binary Encoding boolean field model class
 public final class FieldModelBoolean extends FieldModel
 {
-    public FieldModelBoolean(@NotNull Buffer buffer, long offset) { super(buffer, offset); }
+    public FieldModelBoolean(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the field size
     @Override

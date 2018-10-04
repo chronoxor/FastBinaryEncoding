@@ -22,16 +22,16 @@ public class Model
 
     // Initialize a new model
     protected Model() { _buffer = new Buffer(); }
-    protected Model(@NotNull Buffer buffer) { _buffer = buffer; }
+    protected Model(Buffer buffer) { _buffer = buffer; }
 
     // Attach memory buffer methods
     public void attach() { _buffer.attach(); }
     public void attach(long capacity) { _buffer.attach(capacity); }
-    public void attach(@NotNull byte[] buffer) { _buffer.attach(buffer); }
-    public void attach(@NotNull byte[] buffer, long offset) { _buffer.attach(buffer, offset); }
-    public void attach(@NotNull byte[] buffer, long size, long offset) { _buffer.attach(buffer, size, offset); }
-    public void attach(@NotNull Buffer buffer) { _buffer.attach(buffer.getData(), buffer.getSize(), buffer.getOffset()); }
-    public void attach(@NotNull Buffer buffer, long offset) { _buffer.attach(buffer.getData(), buffer.getSize(), offset); }
+    public void attach(byte[] buffer) { _buffer.attach(buffer); }
+    public void attach(byte[] buffer, long offset) { _buffer.attach(buffer, offset); }
+    public void attach(byte[] buffer, long size, long offset) { _buffer.attach(buffer, size, offset); }
+    public void attach(Buffer buffer) { _buffer.attach(buffer.getData(), buffer.getSize(), buffer.getOffset()); }
+    public void attach(Buffer buffer, long offset) { _buffer.attach(buffer.getData(), buffer.getSize(), offset); }
 
     // Model buffer operations
     public long allocate(long size) { return _buffer.allocate(size); }

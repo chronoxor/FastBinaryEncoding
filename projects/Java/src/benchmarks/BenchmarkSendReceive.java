@@ -76,7 +76,7 @@ public class BenchmarkSendReceive
 
     @Benchmark
     @BenchmarkMode(Mode.Throughput)
-    public void Send()
+    public void send()
     {
         // Serialize and send the account
         _sender1.send(_account);
@@ -95,7 +95,7 @@ public class BenchmarkSendReceive
     */
     @Benchmark
     @BenchmarkMode(Mode.Throughput)
-    public void Receive()
+    public void receive()
     {
         // Receive the account from the sender
         _receiver.receive(_sender2.getBuffer());
@@ -103,7 +103,7 @@ public class BenchmarkSendReceive
     /*
     @Benchmark
     @BenchmarkMode(Mode.Throughput)
-    public void ReceiveWithLogs()
+    public void receiveWithLogs()
     {
         // Enable logging
         _receiver.setLogging(true);

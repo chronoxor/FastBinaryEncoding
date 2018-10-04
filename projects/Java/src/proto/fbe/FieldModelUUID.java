@@ -15,7 +15,7 @@ import javafx.util.*;
 // Fast Binary Encoding UUID field model class
 public final class FieldModelUUID extends FieldModel
 {
-    public FieldModelUUID(@NotNull Buffer buffer, long offset) { super(buffer, offset); }
+    public FieldModelUUID(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the field size
     @Override

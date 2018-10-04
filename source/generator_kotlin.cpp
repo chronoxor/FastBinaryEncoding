@@ -28,10 +28,10 @@ void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEFieldModel("fbe", "Float", "Float", "", "4", "0.0f");
     GenerateFBEFieldModel("fbe", "Double", "Double", "", "8", "0.0");
     GenerateFBEFieldModel("fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
-    //GenerateFBEFieldModelDecimal("fbe");
-    //GenerateFBEFieldModelTimestamp("fbe");
-    //GenerateFBEFieldModelBytes("fbe");
-    //GenerateFBEFieldModelString("fbe");
+    GenerateFBEFieldModelDecimal("fbe");
+    GenerateFBEFieldModelTimestamp("fbe");
+    GenerateFBEFieldModelBytes("fbe");
+    GenerateFBEFieldModelString("fbe");
     if (Final())
     {
         GenerateFBESize("fbe");
@@ -47,10 +47,10 @@ void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModel("fbe", "Float", "Float", "", "4", "0.0f");
         GenerateFBEFinalModel("fbe", "Double", "Double", "", "8", "0.0");
         GenerateFBEFinalModel("fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
-        //GenerateFBEFinalModelDecimal("fbe");
-        //GenerateFBEFinalModelTimestamp("fbe");
-        //GenerateFBEFinalModelBytes("fbe");
-        //GenerateFBEFinalModelString("fbe");
+        GenerateFBEFinalModelDecimal("fbe");
+        GenerateFBEFinalModelTimestamp("fbe");
+        GenerateFBEFinalModelBytes("fbe");
+        GenerateFBEFinalModelString("fbe");
     }
     if (Sender())
     {
@@ -699,7 +699,7 @@ void GeneratorKotlin::GenerateFBEFieldModelDecimal(const std::string& package)
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / "FieldModelDecimal.java";
+    CppCommon::Path file = path / "FieldModelDecimal.kt";
     Open(file);
 
     // Generate headers
@@ -708,89 +708,77 @@ void GeneratorKotlin::GenerateFBEFieldModelDecimal(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding decimal field model class
-public final class FieldModelDecimal extends FieldModel
+class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
-    public FieldModelDecimal(Buffer buffer, long offset) { super(buffer, offset); }
+    // Field size
+    override val FBESize: Long = 16
 
-    // Get the field size
-    @Override
-    public long FBESize() { return 16; }
+    fun get(defaults: BigDecimal = BigDecimal.valueOf(0L)): BigDecimal {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return defaults
 
-    // Get the value
-    public BigDecimal get() { return get(BigDecimal.valueOf(0L)); }
-    public BigDecimal get(BigDecimal defaults)
-    {
-        assert (defaults != null) : "Invalid default decimal value!";
-        if (defaults == null)
-            throw new IllegalArgumentException("Invalid default decimal value!");
-
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return defaults;
-
-        byte[] magnitude = readBytes(FBEOffset(), 12);
-        int scale = readByte(FBEOffset() + 14);
-        int signum = (readByte(FBEOffset() + 15) < 0) ? -1 : 1;
+        val magnitude = readBytes(FBEOffset, 12)
+        val scale = readByte(FBEOffset + 14).toInt()
+        val signum = if (readByte(FBEOffset + 15) < 0) -1 else 1
 
         // Reverse magnitude
-        for(int i = 0; i < magnitude.length / 2; i++)
-        {
-            byte temp = magnitude[i];
-            magnitude[i] = magnitude[magnitude.length - i - 1];
-            magnitude[magnitude.length - i - 1] = temp;
+        for (i in 0 until magnitude.size / 2) {
+            val temp = magnitude[i]
+            magnitude[i] = magnitude[magnitude.size - i - 1]
+            magnitude[magnitude.size - i - 1] = temp
         }
 
-        var unscaled = new BigInteger(signum, magnitude);
+        val unscaled = BigInteger(signum, magnitude)
 
-        return new BigDecimal(unscaled, scale);
+        return BigDecimal(unscaled, scale)
     }
 
     // Set the value
-    public void set(BigDecimal value)
-    {
-        assert (value != null) : "Invalid decimal value!";
-        if (value == null)
-            throw new IllegalArgumentException("Invalid decimal value!");
-
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return;
+    fun set(value: BigDecimal) {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return
 
         // Get unscaled absolute value
-        BigInteger unscaled = value.abs().unscaledValue();
-        int bitLength = unscaled.bitLength();
-        if ((bitLength < 0) || (bitLength > 96))
-        {
+        val unscaled = value.abs().unscaledValue()
+        val bitLength = unscaled.bitLength()
+        if (bitLength < 0 || bitLength > 96) {
             // Value too big for .NET Decimal (bit length is limited to [0, 96])
-            write(FBEOffset(), (byte)0, FBESize());
-            return;
+            write(FBEOffset, 0.toByte(), FBESize)
+            return
         }
 
         // Get byte array
-        byte[] unscaledBytes = unscaled.toByteArray();
+        val unscaledBytes = unscaled.toByteArray()
 
         // Get scale
-        int scale = value.scale();
-        if ((scale < 0) || (scale > 28))
-        {
+        val scale = value.scale()
+        if (scale < 0 || scale > 28) {
             // Value scale exceeds .NET Decimal limit of [0, 28]
-            write(FBEOffset(), (byte)0, FBESize());
-            return;
+            write(FBEOffset, 0.toByte(), FBESize)
+            return
         }
 
         // Write unscaled value to bytes 0-11
-        int index = 0;
-        for (int i = unscaledBytes.length - 1; (i >= 0) && (index < 12); i--, index++)
-            write(FBEOffset() + index, unscaledBytes[i]);
+        var index = 0
+        var i = unscaledBytes.size - 1
+        while (i >= 0 && index < 12) {
+            write(FBEOffset + index, unscaledBytes[i])
+            i--
+            index++
+        }
 
         // Fill remaining bytes with zeros
-        for (; index < 14; index++)
-            write(FBEOffset() + index, (byte)0);
+        while (index < 14) {
+            write(FBEOffset + index, 0.toByte())
+            index++
+        }
 
         // Write scale at byte 14
-        write(FBEOffset() + 14, (byte)scale);
+        write(FBEOffset + 14, scale.toByte())
 
         // Write signum at byte 15
-        write(FBEOffset() + 15, (byte)((value.signum() < 0) ? -128 : 0));
+        write(FBEOffset + 15, (if (value.signum() < 0) -128 else 0).toByte())
     }
 }
 )CODE";
@@ -812,7 +800,7 @@ void GeneratorKotlin::GenerateFBEFieldModelTimestamp(const std::string& package)
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / "FieldModelTimestamp.java";
+    CppCommon::Path file = path / "FieldModelTimestamp.kt";
     Open(file);
 
     // Generate headers
@@ -821,42 +809,27 @@ void GeneratorKotlin::GenerateFBEFieldModelTimestamp(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding timestamp field model class
-public final class FieldModelTimestamp extends FieldModel
+class FieldModelTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
-    public FieldModelTimestamp(Buffer buffer, long offset) { super(buffer, offset); }
+    // Field size
+    override val FBESize: Long = 8
 
-    // Get the field size
-    @Override
-    public long FBESize() { return 8; }
+    fun get(defaults: Instant = Instant.EPOCH): Instant {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return defaults
 
-    // Get the value
-    public Instant get() { return get(Instant.EPOCH); }
-    public Instant get(Instant defaults)
-    {
-        assert (defaults != null) : "Invalid default timestamp value!";
-        if (defaults == null)
-            throw new IllegalArgumentException("Invalid default timestamp value!");
-
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return defaults;
-
-        long nanoseconds = readInt64(FBEOffset());
-        return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
+        val nanoseconds = readInt64(FBEOffset)
+        return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
     }
 
     // Set the value
-    public void set(Instant value)
-    {
-        assert (value != null) : "Invalid timestamp value!";
-        if (value == null)
-            throw new IllegalArgumentException("Invalid timestamp value!");
+    fun set(value: Instant) {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return;
-
-        long nanoseconds = value.getEpochSecond() * 1000000000 + value.getNano();
-        write(FBEOffset(), nanoseconds);
+        val nanoseconds = value.epochSecond * 1000000000 + value.nano
+        write(FBEOffset, nanoseconds)
     }
 }
 )CODE";
@@ -878,7 +851,7 @@ void GeneratorKotlin::GenerateFBEFieldModelBytes(const std::string& package)
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / "FieldModelBytes.java";
+    CppCommon::Path file = path / "FieldModelBytes.kt";
     Open(file);
 
     // Generate headers
@@ -887,99 +860,82 @@ void GeneratorKotlin::GenerateFBEFieldModelBytes(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding bytes field model class
-public final class FieldModelBytes extends FieldModel
+class FieldModelBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
-    public FieldModelBytes(Buffer buffer, long offset) { super(buffer, offset); }
+    // Field size
+    override val FBESize: Long = 4
 
-    // Get the field size
-    @Override
-    public long FBESize() { return 4; }
-    // Get the field extra size
-    @Override
-    public long FBEExtra()
+    // Field extra size
+    override val FBEExtra: Long get()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return 0;
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return 0
 
-        int fbeBytesOffset = readInt32(FBEOffset());
-        if ((fbeBytesOffset == 0) || ((_buffer.getOffset() + fbeBytesOffset + 4) > _buffer.getSize()))
-            return 0;
+        val fbeBytesOffset = readInt32(FBEOffset)
+        if (fbeBytesOffset == 0 || _buffer.offset + fbeBytesOffset.toLong() + 4 > _buffer.size)
+            return 0
 
-        int fbeBytesSize = readInt32(fbeBytesOffset);
-        return 4 + fbeBytesSize;
+        val fbeBytesSize = readInt32(fbeBytesOffset.toLong())
+        return (4 + fbeBytesSize).toLong()
     }
 
     // Check if the bytes value is valid
-    @Override
-    public boolean verify()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return true;
+    override fun verify(): Boolean {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return true
 
-        int fbeBytesOffset = readInt32(FBEOffset());
+        val fbeBytesOffset = readInt32(FBEOffset)
         if (fbeBytesOffset == 0)
-            return true;
+            return true
 
-        if ((_buffer.getOffset() + fbeBytesOffset + 4) > _buffer.getSize())
-            return false;
+        if (_buffer.offset + fbeBytesOffset.toLong() + 4 > _buffer.size)
+            return false
 
-        int fbeBytesSize = readInt32(fbeBytesOffset);
-        if ((_buffer.getOffset() + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.getSize())
-            return false;
+        val fbeBytesSize = readInt32(fbeBytesOffset.toLong())
+        if (_buffer.offset + fbeBytesOffset.toLong() + 4 + fbeBytesSize.toLong() > _buffer.size)
+            return false
 
-        return true;
+        return true
     }
 
-    // Get the bytes value
-    public byte[] get() { return get(new byte[0]); }
-    public byte[] get(byte[] defaults)
-    {
-        assert (defaults != null) : "Invalid default bytes value!";
-        if (defaults == null)
-            throw new IllegalArgumentException("Invalid default bytes value!");
+    fun get(defaults: ByteArray = ByteArray(0)): ByteArray {
+        var value: ByteArray = defaults
 
-        byte[] value = defaults;
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return value
 
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return value;
-
-        int fbeBytesOffset = readInt32(FBEOffset());
+        val fbeBytesOffset = readInt32(FBEOffset)
         if (fbeBytesOffset == 0)
-            return value;
+            return value
 
-        assert ((_buffer.getOffset() + fbeBytesOffset + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + fbeBytesOffset + 4) > _buffer.getSize())
-            return value;
+        assert(_buffer.offset + fbeBytesOffset.toLong() + 4 <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + fbeBytesOffset.toLong() + 4 > _buffer.size)
+            return value
 
-        int fbeBytesSize = readInt32(fbeBytesOffset);
-        assert ((_buffer.getOffset() + fbeBytesOffset + 4 + fbeBytesSize) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.getSize())
-            return value;
+        val fbeBytesSize = readInt32(fbeBytesOffset.toLong())
+        assert(_buffer.offset + fbeBytesOffset.toLong() + 4 + fbeBytesSize.toLong() <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + fbeBytesOffset.toLong() + 4 + fbeBytesSize.toLong() > _buffer.size)
+            return value
 
-        value = readBytes(fbeBytesOffset + 4, fbeBytesSize);
-        return value;
+        value = readBytes((fbeBytesOffset + 4).toLong(), fbeBytesSize.toLong())
+        return value
     }
 
     // Set the bytes value
-    public void set(byte[] value)
-    {
-        assert (value != null) : "Invalid bytes value!";
-        if (value == null)
-            throw new IllegalArgumentException("Invalid bytes value!");
+    fun set(value: ByteArray) {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return;
+        val fbeBytesSize = value.size
+        val fbeBytesOffset = (_buffer.allocate((4 + fbeBytesSize).toLong()) - _buffer.offset).toInt()
+        assert(fbeBytesOffset > 0 && _buffer.offset + fbeBytesOffset.toLong() + 4 + fbeBytesSize.toLong() <= _buffer.size) { "Model is broken!" }
+        if (fbeBytesOffset <= 0 || _buffer.offset + fbeBytesOffset.toLong() + 4 + fbeBytesSize.toLong() > _buffer.size)
+            return
 
-        int fbeBytesSize = value.length;
-        int fbeBytesOffset = (int)(_buffer.allocate(4 + fbeBytesSize) - _buffer.getOffset());
-        assert ((fbeBytesOffset > 0) && ((_buffer.getOffset() + fbeBytesOffset + 4 + fbeBytesSize) <= _buffer.getSize())) : "Model is broken!";
-        if ((fbeBytesOffset <= 0) || ((_buffer.getOffset() + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.getSize()))
-            return;
-
-        write(FBEOffset(), fbeBytesOffset);
-        write(fbeBytesOffset, fbeBytesSize);
-        write(fbeBytesOffset + 4, value);
+        write(FBEOffset, fbeBytesOffset)
+        write(fbeBytesOffset.toLong(), fbeBytesSize)
+        write((fbeBytesOffset + 4).toLong(), value)
     }
 }
 )CODE";
@@ -1001,7 +957,7 @@ void GeneratorKotlin::GenerateFBEFieldModelString(const std::string& package)
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / "FieldModelString.java";
+    CppCommon::Path file = path / "FieldModelString.kt";
     Open(file);
 
     // Generate headers
@@ -1010,101 +966,83 @@ void GeneratorKotlin::GenerateFBEFieldModelString(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding string field model class
-public final class FieldModelString extends FieldModel
+class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
-    public FieldModelString(Buffer buffer, long offset) { super(buffer, offset); }
+    // Field size
+    override val FBESize: Long = 4
 
-    // Get the field size
-    @Override
-    public long FBESize() { return 4; }
-    // Get the field extra size
-    @Override
-    public long FBEExtra()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return 0;
+    // Field extra size
+    override val FBEExtra: Long get() {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return 0
 
-        int fbeStringOffset = readInt32(FBEOffset());
-        if ((fbeStringOffset == 0) || ((_buffer.getOffset() + fbeStringOffset + 4) > _buffer.getSize()))
-            return 0;
+        val fbeStringOffset = readInt32(FBEOffset)
+        if (fbeStringOffset == 0 || _buffer.offset + fbeStringOffset.toLong() + 4 > _buffer.size)
+            return 0
 
-        int fbeStringSize = readInt32(fbeStringOffset);
-        return 4 + fbeStringSize;
+        val fbeStringSize = readInt32(fbeStringOffset.toLong())
+        return (4 + fbeStringSize).toLong()
     }
 
     // Check if the string value is valid
-    @Override
-    public boolean verify()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return true;
+    override fun verify(): Boolean {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return true
 
-        int fbeStringOffset = readInt32(FBEOffset());
+        val fbeStringOffset = readInt32(FBEOffset)
         if (fbeStringOffset == 0)
-            return true;
+            return true
 
-        if ((_buffer.getOffset() + fbeStringOffset + 4) > _buffer.getSize())
-            return false;
+        if (_buffer.offset + fbeStringOffset.toLong() + 4 > _buffer.size)
+            return false
 
-        int fbeStringSize = readInt32(fbeStringOffset);
-        if ((_buffer.getOffset() + fbeStringOffset + 4 + fbeStringSize) > _buffer.getSize())
-            return false;
+        val fbeStringSize = readInt32(fbeStringOffset.toLong())
+        if (_buffer.offset + fbeStringOffset.toLong() + 4 + fbeStringSize.toLong() > _buffer.size)
+            return false
 
-        return true;
+        return true
     }
 
-    // Get the string value
-    public String get() { return get(""); }
-    public String get(String defaults)
-    {
-        assert (defaults != null) : "Invalid default string value!";
-        if (defaults == null)
-            throw new IllegalArgumentException("Invalid default string value!");
+    fun get(defaults: String = ""): String {
+        var value: String = defaults
 
-        String value = defaults;
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return value
 
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return value;
-
-        int fbeStringOffset = readInt32(FBEOffset());
+        val fbeStringOffset = readInt32(FBEOffset)
         if (fbeStringOffset == 0)
-            return value;
+            return value
 
-        assert ((_buffer.getOffset() + fbeStringOffset + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + fbeStringOffset + 4) > _buffer.getSize())
-            return value;
+        assert(_buffer.offset + fbeStringOffset.toLong() + 4 <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + fbeStringOffset.toLong() + 4 > _buffer.size)
+            return value
 
-        int fbeStringSize = readInt32(fbeStringOffset);
-        assert ((_buffer.getOffset() + fbeStringOffset + 4 + fbeStringSize) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + fbeStringOffset + 4 + fbeStringSize) > _buffer.getSize())
-            return value;
+        val fbeStringSize = readInt32(fbeStringOffset.toLong())
+        assert(_buffer.offset + fbeStringOffset.toLong() + 4 + fbeStringSize.toLong() <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + fbeStringOffset.toLong() + 4 + fbeStringSize.toLong() > _buffer.size)
+            return value
 
-        value = readString(fbeStringOffset + 4, fbeStringSize);
-        return value;
+        value = readString((fbeStringOffset + 4).toLong(), fbeStringSize.toLong())
+        return value
     }
 
     // Set the string value
-    public void set(String value)
-    {
-        assert (value != null) : "Invalid string value!";
-        if (value == null)
-            throw new IllegalArgumentException("Invalid string value!");
+    fun set(value: String) {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return;
+        val bytes = value.toByteArray(StandardCharsets.UTF_8)
 
-        byte[] bytes = value.getBytes(StandardCharsets.UTF_8);
+        val fbeStringSize = bytes.size
+        val fbeStringOffset = (_buffer.allocate((4 + fbeStringSize).toLong()) - _buffer.offset).toInt()
+        assert(fbeStringOffset > 0 && _buffer.offset + fbeStringOffset.toLong() + 4 + fbeStringSize.toLong() <= _buffer.size) { "Model is broken!" }
+        if (fbeStringOffset <= 0 || _buffer.offset + fbeStringOffset.toLong() + 4 + fbeStringSize.toLong() > _buffer.size)
+            return
 
-        int fbeStringSize = bytes.length;
-        int fbeStringOffset = (int)(_buffer.allocate(4 + fbeStringSize) - _buffer.getOffset());
-        assert ((fbeStringOffset > 0) && ((_buffer.getOffset() + fbeStringOffset + 4 + fbeStringSize) <= _buffer.getSize())) : "Model is broken!";
-        if ((fbeStringOffset <= 0) || ((_buffer.getOffset() + fbeStringOffset + 4 + fbeStringSize) > _buffer.getSize()))
-            return;
-
-        write(FBEOffset(), fbeStringOffset);
-        write(fbeStringOffset, fbeStringSize);
-        write(fbeStringOffset + 4, bytes);
+        write(FBEOffset, fbeStringOffset)
+        write(fbeStringOffset.toLong(), fbeStringSize)
+        write((fbeStringOffset + 4).toLong(), bytes)
     }
 }
 )CODE";
@@ -2330,7 +2268,7 @@ void GeneratorKotlin::GenerateFBEFinalModelDecimal(const std::string& package)
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / "FinalModelDecimal.java";
+    CppCommon::Path file = path / "FinalModelDecimal.kt";
     Open(file);
 
     // Generate headers
@@ -2339,95 +2277,94 @@ void GeneratorKotlin::GenerateFBEFinalModelDecimal(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding decimal final model class
-public final class FinalModelDecimal extends FinalModel
+class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
-    public FinalModelDecimal(Buffer buffer, long offset) { super(buffer, offset); }
-
     // Get the allocation size
-    public long FBEAllocationSize(BigDecimal value) { return FBESize(); }
+    @Suppress("UNUSED_PARAMETER")
+    fun FBEAllocationSize(value: BigDecimal): Long {
+        return FBESize
+    }
 
-    // Get the final size
-    @Override
-    public long FBESize() { return 16; }
+    // Final size
+    override val FBESize: Long = 16
 
     // Check if the value is valid
-    @Override
-    public long verify()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return Long.MAX_VALUE;
+    override fun verify(): Long {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return Long.MAX_VALUE
 
-        return FBESize();
+        return FBESize
     }
 
     // Get the value
-    public BigDecimal get(Size size)
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return BigDecimal.valueOf(0L);
+    operator fun get(size: Size): BigDecimal {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return BigDecimal.valueOf(0L)
 
-        byte[] magnitude = readBytes(FBEOffset(), 12);
-        int scale = readByte(FBEOffset() + 14);
-        int signum = (readByte(FBEOffset() + 15) < 0) ? -1 : 1;
+        val magnitude = readBytes(FBEOffset, 12)
+        val scale = readByte(FBEOffset + 14).toInt()
+        val signum = if (readByte(FBEOffset + 15) < 0) -1 else 1
 
         // Reverse magnitude
-        for(int i = 0; i < magnitude.length / 2; i++)
-        {
-            byte temp = magnitude[i];
-            magnitude[i] = magnitude[magnitude.length - i - 1];
-            magnitude[magnitude.length - i - 1] = temp;
+        for (i in 0 until magnitude.size / 2) {
+            val temp = magnitude[i]
+            magnitude[i] = magnitude[magnitude.size - i - 1]
+            magnitude[magnitude.size - i - 1] = temp
         }
 
-        var unscaled = new BigInteger(signum, magnitude);
+        val unscaled = BigInteger(signum, magnitude)
 
-        size.value = FBESize();
-        return new BigDecimal(unscaled, scale);
+        size.value = FBESize
+        return BigDecimal(unscaled, scale)
     }
 
     // Set the value
-    public long set(BigDecimal value)
-    {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return 0;
+    fun set(value: BigDecimal): Long {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return 0
 
         // Get unscaled absolute value
-        BigInteger unscaled = value.abs().unscaledValue();
-        int bitLength = unscaled.bitLength();
-        if ((bitLength < 0) || (bitLength > 96))
-        {
+        val unscaled = value.abs().unscaledValue()
+        val bitLength = unscaled.bitLength()
+        if (bitLength < 0 || bitLength > 96) {
             // Value too big for .NET Decimal (bit length is limited to [0, 96])
-            write(FBEOffset(), (byte)0, FBESize());
-            return FBESize();
+            write(FBEOffset, 0.toByte(), FBESize)
+            return FBESize
         }
 
         // Get byte array
-        byte[] unscaledBytes = unscaled.toByteArray();
+        val unscaledBytes = unscaled.toByteArray()
 
         // Get scale
-        int scale = value.scale();
-        if ((scale < 0) || (scale > 28))
-        {
+        val scale = value.scale()
+        if (scale < 0 || scale > 28) {
             // Value scale exceeds .NET Decimal limit of [0, 28]
-            write(FBEOffset(), (byte)0, FBESize());
-            return FBESize();
+            write(FBEOffset, 0.toByte(), FBESize)
+            return FBESize
         }
 
         // Write unscaled value to bytes 0-11
-        int index = 0;
-        for (int i = unscaledBytes.length - 1; (i >= 0) && (index < 12); i--, index++)
-            write(FBEOffset() + index, unscaledBytes[i]);
+        var index = 0
+        var i = unscaledBytes.size - 1
+        while (i >= 0 && index < 12) {
+            write(FBEOffset + index, unscaledBytes[i])
+            i--
+            index++
+        }
 
         // Fill remaining bytes with zeros
-        for (; index < 14; index++)
-            write(FBEOffset() + index, (byte)0);
+        while (index < 14) {
+            write(FBEOffset + index, 0.toByte())
+            index++
+        }
 
         // Write scale at byte 14
-        write(FBEOffset() + 14, (byte)scale);
+        write(FBEOffset + 14, scale.toByte())
 
         // Write signum at byte 15
-        write(FBEOffset() + 15, (byte)((value.signum() < 0) ? -128 : 0));
-        return FBESize();
+        write(FBEOffset + 15, (if (value.signum() < 0) -128 else 0).toByte())
+        return FBESize
     }
 }
 )CODE";
@@ -2449,7 +2386,7 @@ void GeneratorKotlin::GenerateFBEFinalModelTimestamp(const std::string& package)
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / "FinalModelTimestamp.java";
+    CppCommon::Path file = path / "FinalModelTimestamp.kt";
     Open(file);
 
     // Generate headers
@@ -2458,48 +2395,44 @@ void GeneratorKotlin::GenerateFBEFinalModelTimestamp(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding timestamp final model class
-public final class FinalModelTimestamp extends FinalModel
+class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
-    public FinalModelTimestamp(Buffer buffer, long offset) { super(buffer, offset); }
-
     // Get the allocation size
-    public long FBEAllocationSize(Instant value) { return FBESize(); }
+    @Suppress("UNUSED_PARAMETER")
+    fun FBEAllocationSize(value: Instant): Long {
+        return FBESize
+    }
 
-    // Get the final size
-    @Override
-    public long FBESize() { return 8; }
+    // Final size
+    override val FBESize: Long = 8
 
     // Check if the value is valid
-    @Override
-    public long verify()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return Long.MAX_VALUE;
+    override fun verify(): Long {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return Long.MAX_VALUE
 
-        return FBESize();
+        return FBESize
     }
 
     // Get the value
-    public Instant get(Size size)
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return Instant.EPOCH;
+    fun get(size: Size): Instant {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return Instant.EPOCH
 
-        size.value = FBESize();
-        long nanoseconds = readInt64(FBEOffset());
-        return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
+        size.value = FBESize
+        val nanoseconds = readInt64(FBEOffset)
+        return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
     }
 
     // Set the value
-    public long set(Instant value)
-    {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return 0;
+    fun set(value: Instant): Long {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return 0
 
-        long nanoseconds = value.getEpochSecond() * 1000000000 + value.getNano();
-        write(FBEOffset(), nanoseconds);
-        return FBESize();
+        val nanoseconds = value.epochSecond * 1000000000 + value.nano
+        write(FBEOffset, nanoseconds)
+        return FBESize
     }
 }
 )CODE";
@@ -2521,7 +2454,7 @@ void GeneratorKotlin::GenerateFBEFinalModelBytes(const std::string& package)
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / "FinalModelBytes.java";
+    CppCommon::Path file = path / "FinalModelBytes.kt";
     Open(file);
 
     // Generate headers
@@ -2530,67 +2463,58 @@ void GeneratorKotlin::GenerateFBEFinalModelBytes(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding bytes final model class
-public final class FinalModelBytes extends FinalModel
+class FinalModelBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
-    public FinalModelBytes(Buffer buffer, long offset) { super(buffer, offset); }
-
     // Get the allocation size
-    public long FBEAllocationSize(byte[] value) { return 4 + value.length; }
+    @Suppress("UNUSED_PARAMETER")
+    fun FBEAllocationSize(value: ByteArray): Long {
+        return (4 + value.size).toLong()
+    }
 
     // Check if the bytes value is valid
-    @Override
-    public long verify()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-            return Long.MAX_VALUE;
+    override fun verify(): Long {
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size)
+            return Long.MAX_VALUE
 
-        int fbeBytesSize = readInt32(FBEOffset());
-        if ((_buffer.getOffset() + FBEOffset() + 4 + fbeBytesSize) > _buffer.getSize())
-            return Long.MAX_VALUE;
+        val fbeBytesSize = readInt32(FBEOffset)
+        if (_buffer.offset + FBEOffset + 4 + fbeBytesSize > _buffer.size)
+            return Long.MAX_VALUE
 
-        return 4 + fbeBytesSize;
+        return (4 + fbeBytesSize).toLong()
     }
 
     // Get the bytes value
-    public byte[] get(Size size)
-    {
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-        {
-            size.value = 0;
-            return new byte[0];
+    fun get(size: Size): ByteArray {
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size) {
+            size.value = 0
+            return ByteArray(0)
         }
 
-        int fbeBytesSize = readInt32(FBEOffset());
-        assert ((_buffer.getOffset() + FBEOffset() + 4 + fbeBytesSize) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4 + fbeBytesSize) > _buffer.getSize())
-        {
-            size.value = 4;
-            return new byte[0];
+        val fbeBytesSize = readInt32(FBEOffset)
+        assert(_buffer.offset + FBEOffset + 4 + fbeBytesSize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + 4 + fbeBytesSize > _buffer.size) {
+            size.value = 4
+            return ByteArray(0)
         }
 
-        size.value = 4 + fbeBytesSize;
-        return readBytes(FBEOffset() + 4, fbeBytesSize);
+        size.value = (4 + fbeBytesSize).toLong()
+        return readBytes(FBEOffset + 4, fbeBytesSize.toLong())
     }
 
     // Set the bytes value
-    public long set(byte[] value)
-    {
-        assert (value != null) : "Invalid bytes value!";
-        if (value == null)
-            throw new IllegalArgumentException("Invalid bytes value!");
+    fun set(value: ByteArray): Long {
+        assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size)
+            return 0
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-            return 0;
+        val fbeBytesSize = value.size
+        assert(_buffer.offset + FBEOffset + 4 + fbeBytesSize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + 4 + fbeBytesSize > _buffer.size)
+            return 4
 
-        int fbeBytesSize = value.length;
-        assert ((_buffer.getOffset() + FBEOffset() + 4 + fbeBytesSize) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4 + fbeBytesSize) > _buffer.getSize())
-            return 4;
-
-        write(FBEOffset(), fbeBytesSize);
-        write(FBEOffset() + 4, value);
-        return 4 + fbeBytesSize;
+        write(FBEOffset, fbeBytesSize)
+        write(FBEOffset + 4, value)
+        return (4 + fbeBytesSize).toLong()
     }
 }
 )CODE";
@@ -2612,7 +2536,7 @@ void GeneratorKotlin::GenerateFBEFinalModelString(const std::string& package)
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / "FinalModelString.java";
+    CppCommon::Path file = path / "FinalModelString.kt";
     Open(file);
 
     // Generate headers
@@ -2621,69 +2545,60 @@ void GeneratorKotlin::GenerateFBEFinalModelString(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding string final model class
-public final class FinalModelString extends FinalModel
+class FinalModelString(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
-    public FinalModelString(Buffer buffer, long offset) { super(buffer, offset); }
-
     // Get the allocation size
-    public long FBEAllocationSize(String value) { return 4 + 3 * (value.length() + 1); }
+    @Suppress("UNUSED_PARAMETER")
+    fun FBEAllocationSize(value: String): Long {
+        return (4 + 3 * (value.length + 1)).toLong()
+    }
 
     // Check if the string value is valid
-    @Override
-    public long verify()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-            return Long.MAX_VALUE;
+    override fun verify(): Long {
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size)
+            return Long.MAX_VALUE
 
-        int fbeStringSize = readInt32(FBEOffset());
-        if ((_buffer.getOffset() + FBEOffset() + 4 + fbeStringSize) > _buffer.getSize())
-            return Long.MAX_VALUE;
+        val fbeStringSize = readInt32(FBEOffset)
+        if (_buffer.offset + FBEOffset + 4 + fbeStringSize > _buffer.size)
+            return Long.MAX_VALUE
 
-        return 4 + fbeStringSize;
+        return (4 + fbeStringSize).toLong()
     }
 
     // Get the string value
-    public String get(Size size)
-    {
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-        {
-            size.value = 0;
-            return "";
+    fun get(size: Size): String {
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size) {
+            size.value = 0
+            return ""
         }
 
-        int fbeStringSize = readInt32(FBEOffset());
-        assert ((_buffer.getOffset() + FBEOffset() + 4 + fbeStringSize) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4 + fbeStringSize) > _buffer.getSize())
-        {
-            size.value = 4;
-            return "";
+        val fbeStringSize = readInt32(FBEOffset)
+        assert(_buffer.offset + FBEOffset + 4 + fbeStringSize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + 4 + fbeStringSize > _buffer.size) {
+            size.value = 4
+            return ""
         }
 
-        size.value = 4 + fbeStringSize;
-        return readString(FBEOffset() + 4, fbeStringSize);
+        size.value = (4 + fbeStringSize).toLong()
+        return readString(FBEOffset + 4, fbeStringSize.toLong())
     }
 
     // Set the string value
-    public long set(String value)
-    {
-        assert (value != null) : "Invalid string value!";
-        if (value == null)
-            throw new IllegalArgumentException("Invalid string value!");
+    fun set(value: String): Long {
+        assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size)
+            return 0
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-            return 0;
+        val bytes = value.toByteArray(StandardCharsets.UTF_8)
 
-        byte[] bytes = value.getBytes(StandardCharsets.UTF_8);
+        val fbeStringSize = bytes.size
+        assert(_buffer.offset + FBEOffset + 4 + fbeStringSize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + 4 + fbeStringSize > _buffer.size)
+            return 4
 
-        int fbeStringSize = bytes.length;
-        assert ((_buffer.getOffset() + FBEOffset() + 4 + fbeStringSize) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4 + fbeStringSize) > _buffer.getSize())
-            return 4;
-
-        write(FBEOffset(), fbeStringSize);
-        write(FBEOffset() + 4, bytes);
-        return 4 + fbeStringSize;
+        write(FBEOffset, fbeStringSize)
+        write(FBEOffset + 4, bytes)
+        return (4 + fbeStringSize).toLong()
     }
 }
 )CODE";

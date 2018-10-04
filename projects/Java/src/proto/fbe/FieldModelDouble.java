@@ -15,7 +15,7 @@ import javafx.util.*;
 // Fast Binary Encoding double field model class
 public final class FieldModelDouble extends FieldModel
 {
-    public FieldModelDouble(@NotNull Buffer buffer, long offset) { super(buffer, offset); }
+    public FieldModelDouble(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the field size
     @Override

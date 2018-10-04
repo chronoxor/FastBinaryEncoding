@@ -8,7 +8,7 @@ import org.testng.annotations.*;
 public class TestSerializationJson
 {
     @Test()
-    public void SerializationJsonProto()
+    public void serializationJsonProto()
     {
         // Create a new account with some orders
         var account1 = new proto.Account(1, "Test", proto.State.good, new proto.Balance("USD", 1000.0), new proto.Balance("EUR", 100.0), new ArrayList<proto.Order>());
@@ -55,7 +55,7 @@ public class TestSerializationJson
     }
 
     @Test()
-    public void SerializationJsonStructSimple()
+    public void serializationJsonStructSimple()
     {
         // Create a new struct
         var struct1 = new test.StructSimple();
@@ -151,7 +151,7 @@ public class TestSerializationJson
     }
 
     @Test()
-    public void SerializationJsonStructOptional()
+    public void serializationJsonStructOptional()
     {
         // Create a new struct
         var struct1 = new test.StructOptional();
@@ -391,7 +391,7 @@ public class TestSerializationJson
     }
 
     @Test()
-    public void SerializationJsonStructNested()
+    public void serializationJsonStructNested()
     {
         // Create a new struct
         var struct1 = new test.StructNested();
@@ -651,7 +651,7 @@ public class TestSerializationJson
     }
 
     @Test()
-    public void SerializationJsonStructBytes()
+    public void serializationJsonStructBytes()
     {
         // Create a new struct
         var struct1 = new test.StructBytes();
@@ -681,7 +681,7 @@ public class TestSerializationJson
     }
 
     @Test()
-    public void SerializationJsonStructArray()
+    public void serializationJsonStructArray()
     {
         // Create a new struct
         var struct1 = new test.StructArray();
@@ -765,7 +765,7 @@ public class TestSerializationJson
     }
 
     @Test()
-    public void SerializationJsonStructVector()
+    public void serializationJsonStructVector()
     {
         // Create a new struct
         var struct1 = new test.StructVector();
@@ -849,7 +849,7 @@ public class TestSerializationJson
     }
 
     @Test()
-    public void SerializationJsonStructList()
+    public void serializationJsonStructList()
     {
         // Create a new struct
         var struct1 = new test.StructList();
@@ -933,7 +933,7 @@ public class TestSerializationJson
     }
 
     @Test()
-    public void SerializationJsonStructSet()
+    public void serializationJsonStructSet()
     {
         // Create a new struct
         var struct1 = new test.StructSet();
@@ -976,7 +976,7 @@ public class TestSerializationJson
     }
 
     @Test()
-    public void SerializationJsonStructMap()
+    public void serializationJsonStructMap()
     {
         // Create a new struct
         var struct1 = new test.StructMap();
@@ -1047,7 +1047,7 @@ public class TestSerializationJson
     }
 
     @Test()
-    public void SerializationJsonStructHash()
+    public void serializationJsonStructHash()
     {
         // Create a new struct
         var struct1 = new test.StructHash();

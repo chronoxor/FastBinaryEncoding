@@ -15,7 +15,7 @@ import javafx.util.*;
 // Fast Binary Encoding long field model class
 public final class FieldModelInt64 extends FieldModel
 {
-    public FieldModelInt64(@NotNull Buffer buffer, long offset) { super(buffer, offset); }
+    public FieldModelInt64(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the field size
     @Override

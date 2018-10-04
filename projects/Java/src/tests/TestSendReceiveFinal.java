@@ -32,7 +32,7 @@ class MyFinalReceiver extends proto.fbe.FinalReceiver
 
 public class TestSendReceiveFinal
 {
-    public static boolean SendAndReceiveFinal(long index)
+    public static boolean sendAndReceiveFinal(long index)
     {
         var sender = new MyFinalSender();
 
@@ -61,9 +61,9 @@ public class TestSendReceiveFinal
     }
 
     @Test()
-    public void SendAndReceiveFinal()
+    public void sendAndReceiveFinal()
     {
         for (long i = 0; i < 1000; ++i)
-            Assert.assertTrue(SendAndReceiveFinal(i));
+            Assert.assertTrue(sendAndReceiveFinal(i));
     }
 }

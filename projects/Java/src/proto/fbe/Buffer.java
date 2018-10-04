@@ -33,18 +33,18 @@ public class Buffer
     // Initializes a new buffer with an expandable capacity initialized as specified
     public Buffer(long capacity) { attach(capacity); }
     // Initializes a new buffer based on the specified byte array
-    public Buffer(@NotNull byte[] buffer) { attach(buffer); }
+    public Buffer(byte[] buffer) { attach(buffer); }
     // Initializes a new buffer based on the specified region (offset) of a byte array
-    public Buffer(@NotNull byte[] buffer, long offset) { attach(buffer, offset); }
+    public Buffer(byte[] buffer, long offset) { attach(buffer, offset); }
     // Initializes a new buffer based on the specified region (size and offset) of a byte array
-    public Buffer(@NotNull byte[] buffer, long size, long offset) { attach(buffer, size, offset); }
+    public Buffer(byte[] buffer, long size, long offset) { attach(buffer, size, offset); }
 
     // Attach memory buffer methods
     public void attach() { _data = new byte[0]; _size = 0; _offset = 0; }
     public void attach(long capacity) { _data = new byte[(int)capacity]; _size = 0; _offset = 0; }
-    public void attach(@NotNull byte[] buffer) { _data = buffer; _size = buffer.length; _offset = 0; }
-    public void attach(@NotNull byte[] buffer, long offset) { _data = buffer; _size = buffer.length; _offset = offset; }
-    public void attach(@NotNull byte[] buffer, long size, long offset) { _data = buffer; _size = size; _offset = offset; }
+    public void attach(byte[] buffer) { _data = buffer; _size = buffer.length; _offset = 0; }
+    public void attach(byte[] buffer, long offset) { _data = buffer; _size = buffer.length; _offset = offset; }
+    public void attach(byte[] buffer, long size, long offset) { _data = buffer; _size = size; _offset = offset; }
 
     // Allocate memory in the current buffer and return offset to the allocated memory block
     public long allocate(long size)
@@ -128,37 +128,37 @@ public class Buffer
 
     // Buffer I/O methods
 
-    public static boolean readBoolean(@NotNull byte[] buffer, long offset)
+    public static boolean readBoolean(byte[] buffer, long offset)
     {
         return buffer[(int)offset] != 0;
     }
 
-    public static byte readByte(@NotNull byte[] buffer, long offset)
+    public static byte readByte(byte[] buffer, long offset)
     {
         return buffer[(int)offset];
     }
 
-    public static char readChar(@NotNull byte[] buffer, long offset)
+    public static char readChar(byte[] buffer, long offset)
     {
         return (char)readInt8(buffer, offset);
     }
 
-    public static char readWChar(@NotNull byte[] buffer, long offset)
+    public static char readWChar(byte[] buffer, long offset)
     {
         return (char)readInt32(buffer, offset);
     }
 
-    public static byte readInt8(@NotNull byte[] buffer, long offset)
+    public static byte readInt8(byte[] buffer, long offset)
     {
         return buffer[(int)offset];
     }
 
-    public static short readInt16(@NotNull byte[] buffer, long offset)
+    public static short readInt16(byte[] buffer, long offset)
     {
         return (short)(((buffer[(int)offset + 0] & 0xFF) << 0) | ((buffer[(int)offset + 1] & 0xFF) << 8));
     }
 
-    public static int readInt32(@NotNull byte[] buffer, long offset)
+    public static int readInt32(byte[] buffer, long offset)
     {
         return ((buffer[(int)offset + 0] & 0xFF) <<  0)|
                ((buffer[(int)offset + 1] & 0xFF) <<  8)|
@@ -166,7 +166,7 @@ public class Buffer
                ((buffer[(int)offset + 3] & 0xFF) << 24);
     }
 
-    public static long readInt64(@NotNull byte[] buffer, long offset)
+    public static long readInt64(byte[] buffer, long offset)
     {
         return (((long)buffer[(int)offset + 0] & 0xFF) <<  0)|
                (((long)buffer[(int)offset + 1] & 0xFF) <<  8)|
@@ -178,7 +178,7 @@ public class Buffer
                (((long)buffer[(int)offset + 7] & 0xFF) << 56);
     }
 
-    private static long readInt64BE(@NotNull byte[] buffer, long offset)
+    private static long readInt64BE(byte[] buffer, long offset)
     {
         return (((long)buffer[(int)offset + 0] & 0xFF) << 56)|
                (((long)buffer[(int)offset + 1] & 0xFF) << 48)|
@@ -190,52 +190,52 @@ public class Buffer
                (((long)buffer[(int)offset + 7] & 0xFF) <<  0);
     }
 
-    public static float readFloat(@NotNull byte[] buffer, long offset)
+    public static float readFloat(byte[] buffer, long offset)
     {
         int bits = readInt32(buffer, offset);
         return Float.intBitsToFloat(bits);
     }
 
-    public static double readDouble(@NotNull byte[] buffer, long offset)
+    public static double readDouble(byte[] buffer, long offset)
     {
         long bits = readInt64(buffer, offset);
         return Double.longBitsToDouble(bits);
     }
 
-    public static UUID readUUID(@NotNull byte[] buffer, long offset)
+    public static UUID readUUID(byte[] buffer, long offset)
     {
         return new UUID(readInt64BE(buffer, offset), readInt64BE(buffer, offset + 8));
     }
 
-    public static byte[] readBytes(@NotNull byte[] buffer, long offset, long size)
+    public static byte[] readBytes(byte[] buffer, long offset, long size)
     {
         byte[] result = new byte[(int)size];
         System.arraycopy(buffer, (int)offset, result, 0, (int)size);
         return result;
     }
 
-    public static String readString(@NotNull byte[] buffer, long offset, long size)
+    public static String readString(byte[] buffer, long offset, long size)
     {
         return new String(buffer, (int)offset, (int)size, StandardCharsets.UTF_8);
     }
 
-    public static void write(@NotNull byte[] buffer, long offset, boolean value)
+    public static void write(byte[] buffer, long offset, boolean value)
     {
         buffer[(int)offset] = (byte)(value ? 1 : 0);
     }
 
-    public static void write(@NotNull byte[] buffer, long offset, byte value)
+    public static void write(byte[] buffer, long offset, byte value)
     {
         buffer[(int)offset] = value;
     }
 
-    public static void write(@NotNull byte[] buffer, long offset, short value)
+    public static void write(byte[] buffer, long offset, short value)
     {
         buffer[(int)offset + 0] = (byte)(value >>  0);
         buffer[(int)offset + 1] = (byte)(value >>  8);
     }
 
-    public static void write(@NotNull byte[] buffer, long offset, int value)
+    public static void write(byte[] buffer, long offset, int value)
     {
         buffer[(int)offset + 0] = (byte)(value >>  0);
         buffer[(int)offset + 1] = (byte)(value >>  8);
@@ -243,7 +243,7 @@ public class Buffer
         buffer[(int)offset + 3] = (byte)(value >> 24);
     }
 
-    public static void write(@NotNull byte[] buffer, long offset, long value)
+    public static void write(byte[] buffer, long offset, long value)
     {
         buffer[(int)offset + 0] = (byte)(value >>  0);
         buffer[(int)offset + 1] = (byte)(value >>  8);
@@ -255,7 +255,7 @@ public class Buffer
         buffer[(int)offset + 7] = (byte)(value >> 56);
     }
 
-    private static void writeBE(@NotNull byte[] buffer, long offset, long value)
+    private static void writeBE(byte[] buffer, long offset, long value)
     {
         buffer[(int)offset + 0] = (byte)(value >> 56);
         buffer[(int)offset + 1] = (byte)(value >> 48);
@@ -267,35 +267,35 @@ public class Buffer
         buffer[(int)offset + 7] = (byte)(value >>  0);
     }
 
-    public static void write(@NotNull byte[] buffer, long offset, float value)
+    public static void write(byte[] buffer, long offset, float value)
     {
         int bits = Float.floatToIntBits(value);
         write(buffer, offset, bits);
     }
 
-    public static void write(@NotNull byte[] buffer, long offset, double value)
+    public static void write(byte[] buffer, long offset, double value)
     {
         long bits = Double.doubleToLongBits(value);
         write(buffer, offset, bits);
     }
 
-    public static void write(@NotNull byte[] buffer, long offset, UUID value)
+    public static void write(byte[] buffer, long offset, UUID value)
     {
         writeBE(buffer, offset, value.getMostSignificantBits());
         writeBE(buffer, offset + 8, value.getLeastSignificantBits());
     }
 
-    public static void write(@NotNull byte[] buffer, long offset, byte[] value)
+    public static void write(byte[] buffer, long offset, byte[] value)
     {
         System.arraycopy(value, 0, buffer, (int)offset, value.length);
     }
 
-    public static void write(@NotNull byte[] buffer, long offset, byte[] value, long valueOffset, long valueSize)
+    public static void write(byte[] buffer, long offset, byte[] value, long valueOffset, long valueSize)
     {
         System.arraycopy(value, (int)valueOffset, buffer, (int)offset, (int)valueSize);
     }
 
-    public static void write(@NotNull byte[] buffer, long offset, byte value, long valueCount)
+    public static void write(byte[] buffer, long offset, byte value, long valueCount)
     {
         for (long i = 0; i < valueCount; i++)
             buffer[(int)(offset + i)] = value;

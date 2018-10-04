@@ -32,7 +32,7 @@ public class BenchmarkSerializationFinal
 
     @Benchmark
     @BenchmarkMode(Mode.Throughput)
-    public void Verify()
+    public void verify()
     {
         // Verify the account
         _writer.verify();
@@ -40,7 +40,7 @@ public class BenchmarkSerializationFinal
 
     @Benchmark
     @BenchmarkMode(Mode.Throughput)
-    public void Serialize()
+    public void serialize()
     {
         // Reset FBE stream
         _writer.reset();
@@ -51,7 +51,7 @@ public class BenchmarkSerializationFinal
 
     @Benchmark
     @BenchmarkMode(Mode.Throughput)
-    public void Deserialize()
+    public void deserialize()
     {
         // Deserialize the account from the FBE stream
         _reader.deserialize(_account);

@@ -15,7 +15,7 @@ import javafx.util.*;
 // Fast Binary Encoding char field model class
 public final class FieldModelChar extends FieldModel
 {
-    public FieldModelChar(@NotNull Buffer buffer, long offset) { super(buffer, offset); }
+    public FieldModelChar(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the field size
     @Override

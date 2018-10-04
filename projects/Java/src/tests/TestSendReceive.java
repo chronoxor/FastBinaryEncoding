@@ -32,7 +32,7 @@ class MyReceiver extends proto.fbe.Receiver
 
 public class TestSendReceive
 {
-    public static boolean SendAndReceive(long index)
+    public static boolean sendAndReceive(long index)
     {
         var sender = new MySender();
 
@@ -61,9 +61,9 @@ public class TestSendReceive
     }
 
     @Test()
-    public void SendAndReceive()
+    public void sendAndReceive()
     {
         for (long i = 0; i < 1000; ++i)
-            Assert.assertTrue(SendAndReceive(i));
+            Assert.assertTrue(sendAndReceive(i));
     }
 }

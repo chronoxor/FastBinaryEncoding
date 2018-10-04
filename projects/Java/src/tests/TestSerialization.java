@@ -8,7 +8,7 @@ import org.testng.annotations.*;
 public class TestSerialization
 {
     @Test()
-    public void SerializationProto()
+    public void serializationProto()
     {
         // Create a new account with some orders
         var account1 = new proto.Account(1, "Test", proto.State.good, new proto.Balance("USD", 1000.0), new proto.Balance("EUR", 100.0), new ArrayList<proto.Order>());
@@ -69,7 +69,7 @@ public class TestSerialization
     }
 
     @Test()
-    public void SerializationStructSimple()
+    public void serializationStructSimple()
     {
         // Create a new struct
         var struct1 = new test.StructSimple();
@@ -181,7 +181,7 @@ public class TestSerialization
     }
 
     @Test()
-    public void SerializationStructOptional()
+    public void serializationStructOptional()
     {
         // Create a new struct
         var struct1 = new test.StructOptional();
@@ -437,7 +437,7 @@ public class TestSerialization
     }
 
     @Test()
-    public void SerializationStructNested()
+    public void serializationStructNested()
     {
         // Create a new struct
         var struct1 = new test.StructNested();
@@ -713,7 +713,7 @@ public class TestSerialization
     }
 
     @Test()
-    public void SerializationStructBytes()
+    public void serializationStructBytes()
     {
         // Create a new struct
         var struct1 = new test.StructBytes();
@@ -759,7 +759,7 @@ public class TestSerialization
     }
 
     @Test()
-    public void SerializationStructArray()
+    public void serializationStructArray()
     {
         // Create a new struct
         var struct1 = new test.StructArray();
@@ -859,7 +859,7 @@ public class TestSerialization
     }
 
     @Test()
-    public void SerializationStructVector()
+    public void serializationStructVector()
     {
         // Create a new struct
         var struct1 = new test.StructVector();
@@ -959,7 +959,7 @@ public class TestSerialization
     }
 
     @Test()
-    public void SerializationStructList()
+    public void serializationStructList()
     {
         // Create a new struct
         var struct1 = new test.StructList();
@@ -1059,7 +1059,7 @@ public class TestSerialization
     }
 
     @Test()
-    public void SerializationStructSet()
+    public void serializationStructSet()
     {
         // Create a new struct
         var struct1 = new test.StructSet();
@@ -1118,7 +1118,7 @@ public class TestSerialization
     }
 
     @Test()
-    public void SerializationStructMap()
+    public void serializationStructMap()
     {
         // Create a new struct
         var struct1 = new test.StructMap();
@@ -1205,7 +1205,7 @@ public class TestSerialization
     }
 
     @Test()
-    public void SerializationStructHash()
+    public void serializationStructHash()
     {
         // Create a new struct
         var struct1 = new test.StructHash();
@@ -1292,7 +1292,7 @@ public class TestSerialization
     }
 
     @Test()
-    public void SerializationStructHashExtended()
+    public void serializationStructHashExtended()
     {
         // Create a new struct
         var struct1 = new test.StructHashEx();

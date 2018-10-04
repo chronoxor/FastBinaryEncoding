@@ -26,7 +26,7 @@ public class BenchmarkSerializationJson
 
     @Benchmark
     @BenchmarkMode(Mode.Throughput)
-    public void Serialize()
+    public void serialize()
     {
         // Serialize the account to the JSON string
         _json = _account.toJson();
@@ -34,7 +34,7 @@ public class BenchmarkSerializationJson
 
     @Benchmark
     @BenchmarkMode(Mode.Throughput)
-    public void Deserialize()
+    public void deserialize()
     {
         // Deserialize the account from the JSON string
         _account = proto.Account.fromJson(_json);

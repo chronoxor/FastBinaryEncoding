@@ -7,7 +7,7 @@ import org.testng.annotations.*;
 public class TestEnums
 {
     @Test()
-    public void SerializationEnums()
+    public void serializationEnums()
     {
         var enums1 = new enums.Enums();
 
@@ -113,7 +113,7 @@ public class TestEnums
     }
 
     @Test()
-    public void SerializationFinalEnums()
+    public void serializationFinalEnums()
     {
         var enums1 = new enums.Enums();
 
@@ -215,7 +215,7 @@ public class TestEnums
     }
 
     @Test()
-    public void SerializationJsonEnums()
+    public void serializationJsonEnums()
     {
         var enums1 = new enums.Enums();
 

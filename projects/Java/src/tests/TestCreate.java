@@ -6,7 +6,7 @@ import org.testng.annotations.*;
 public class TestCreate
 {
     @Test()
-    public void CreateAndAccess()
+    public void createAndAccess()
     {
         // Create a new account using FBE model into the FBE stream
         var writer = new proto.fbe.AccountModel();
