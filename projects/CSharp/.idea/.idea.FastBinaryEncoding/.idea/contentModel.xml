@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\ivan.shynkarenka\.Rider2018.1\system\resharper-host\local\Transient\ReSharperHost\v12\SolutionCaches\_FastBinaryEncoding.642087070.00" t="ExcludeRecursive" />
+    <e p="Z:\Projects\CppProjects\FastBinaryEncoding\Projects\CSharp" t="IncludeFlat">
+      <e p="Benchmarks" t="IncludeRecursive">
+        <e p="app.config" t="Include" />
+        <e p="Benchmarks.csproj" t="IncludeRecursive" />
+        <e p="Bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="SendReceive.cs" t="Include" />
+        <e p="Serialization.cs" t="Include" />
+        <e p="SerializationFinal.cs" t="Include" />
+        <e p="SerializationJson.cs" t="Include" />
+      </e>
+      <e p="Examples" t="Include">
+        <e p="Create" t="IncludeRecursive">
+          <e p="app.config" t="Include" />
+          <e p="Bin" t="ExcludeRecursive" />
+          <e p="Create.csproj" t="IncludeRecursive" />
+          <e p="obj" t="ExcludeRecursive" />
+          <e p="Program.cs" t="Include" />
+          <e p="Properties" t="Include">
+            <e p="AssemblyInfo.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Print" t="IncludeRecursive">
+          <e p="app.config" t="Include" />
+          <e p="Bin" t="ExcludeRecursive" />
+          <e p="obj" t="ExcludeRecursive" />
+          <e p="Print.csproj" t="IncludeRecursive" />
+          <e p="Program.cs" t="Include" />
+          <e p="Properties" t="Include">
+            <e p="AssemblyInfo.cs" t="Include" />
+          </e>
+        </e>
+        <e p="PrintJson" t="IncludeRecursive">
+          <e p="app.config" t="Include" />
+          <e p="Bin" t="ExcludeRecursive" />
+          <e p="obj" t="ExcludeRecursive" />
+          <e p="PrintJson.csproj" t="IncludeRecursive" />
+          <e p="Program.cs" t="Include" />
+          <e p="Properties" t="Include">
+            <e p="AssemblyInfo.cs" t="Include" />
+          </e>
+        </e>
+        <e p="SendReceive" t="IncludeRecursive">
+          <e p="app.config" t="Include" />
+          <e p="Bin" t="ExcludeRecursive" />
+          <e p="obj" t="ExcludeRecursive" />
+          <e p="Program.cs" t="Include" />
+          <e p="Properties" t="Include">
+            <e p="AssemblyInfo.cs" t="Include" />
+          </e>
+          <e p="SendReceive.csproj" t="IncludeRecursive" />
+        </e>
+        <e p="Serialization" t="IncludeRecursive">
+          <e p="app.config" t="Include" />
+          <e p="Bin" t="ExcludeRecursive" />
+          <e p="obj" t="ExcludeRecursive" />
+          <e p="Program.cs" t="Include" />
+          <e p="Properties" t="Include">
+            <e p="AssemblyInfo.cs" t="Include" />
+          </e>
+          <e p="Serialization.csproj" t="IncludeRecursive" />
+        </e>
+        <e p="SerializationFinal" t="IncludeRecursive">
+          <e p="app.config" t="Include" />
+          <e p="Bin" t="ExcludeRecursive" />
+          <e p="obj" t="ExcludeRecursive" />
+          <e p="Program.cs" t="Include" />
+          <e p="Properties" t="Include">
+            <e p="AssemblyInfo.cs" t="Include" />
+          </e>
+          <e p="SerializationFinal.csproj" t="IncludeRecursive" />
+        </e>
+        <e p="SerializationJson" t="IncludeRecursive">
+          <e p="app.config" t="Include" />
+          <e p="Bin" t="ExcludeRecursive" />
+          <e p="obj" t="ExcludeRecursive" />
+          <e p="packages.config" t="Include" />
+          <e p="Program.cs" t="Include" />
+          <e p="Properties" t="Include">
+            <e p="AssemblyInfo.cs" t="Include" />
+          </e>
+          <e p="SerializationJson.csproj" t="IncludeRecursive" />
+        </e>
+      </e>
+      <e p="FastBinaryEncoding.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Proto" t="IncludeRecursive">
+        <e p="app.config" t="Include" />
+        <e p="Bin" t="ExcludeRecursive" />
+        <e p="enums.cs" t="Include" />
+        <e p="fbe.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="proto.cs" t="Include" />
+        <e p="Proto.csproj" t="IncludeRecursive" />
+        <e p="protoex.cs" t="Include" />
+        <e p="test.cs" t="Include" />
+      </e>
+      <e p="Tests" t="IncludeRecursive">
+        <e p="app.config" t="Include" />
+        <e p="Bin" t="ExcludeRecursive" />
+        <e p="Clone.cs" t="Include" />
+        <e p="Create.cs" t="Include" />
+        <e p="Decimal.cs" t="Include" />
+        <e p="enums.cs" t="Include" />
+        <e p="Extending.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="SendReceive.cs" t="Include" />
+        <e p="SendReceiveFinal.cs" t="Include" />
+        <e p="Serialization.cs" t="Include" />
+        <e p="SerializationFinal.cs" t="Include" />
+        <e p="SerializationJson.cs" t="Include" />
+        <e p="Tests.csproj" t="IncludeRecursive" />
+      </e>
+    </e>
+  </component>
+</project>
