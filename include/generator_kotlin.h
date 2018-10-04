@@ -54,7 +54,7 @@ private:
     void GenerateFBEFieldModelBytes(const std::string& package);
     void GenerateFBEFieldModelString(const std::string& package);
     void GenerateFBEFieldModelOptional(const std::string& package, const std::string& name, const std::string& type, const std::string& model);
-    void GenerateFBEFieldModelArray(const std::string& package, const std::string& name, const std::string& type, const std::string& model, bool bytes);
+    void GenerateFBEFieldModelArray(const std::string& package, const std::string& name, const std::string& type, bool optional, const std::string& model);
     void GenerateFBEFieldModelVector(const std::string& package, const std::string& name, const std::string& type, const std::string& model);
     void GenerateFBEFieldModelMap(const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model);
     void GenerateFBEFieldModelEnumFlags(const std::string& package, const std::string& name, const std::string& size, const std::string& read);
@@ -65,7 +65,7 @@ private:
     void GenerateFBEFinalModelBytes(const std::string& package);
     void GenerateFBEFinalModelString(const std::string& package);
     void GenerateFBEFinalModelOptional(const std::string& package, const std::string& name, const std::string& type, const std::string& model);
-    void GenerateFBEFinalModelArray(const std::string& package, const std::string& name, const std::string& type, const std::string& model, bool bytes);
+    void GenerateFBEFinalModelArray(const std::string& package, const std::string& name, const std::string& type, bool optional, const std::string& model);
     void GenerateFBEFinalModelVector(const std::string& package, const std::string& name, const std::string& type, const std::string& model);
     void GenerateFBEFinalModelMap(const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model);
     void GenerateFBEFinalModelEnumFlags(const std::string& package, const std::string& name, const std::string& size, const std::string& read);

@@ -133,39 +133,6 @@ public final class FieldModelVectorOrder extends FieldModel
         return true;
     }
 
-    // Get the vector
-    public Order[] get()
-    {
-        long fbeVectorSize = getSize();
-
-        var values = new Order[(int)fbeVectorSize];
-
-        var fbeModel = getItem(0);
-        for (long i = 0; i < fbeVectorSize; i++)
-        {
-            values[(int)i] = fbeModel.get();
-            fbeModel.FBEShift(fbeModel.FBESize());
-        }
-        return values;
-    }
-
-    // Get the vector
-    public void get(Order[] values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
-
-        long fbeVectorSize = getSize();
-
-        var fbeModel = getItem(0);
-        for (long i = 0; (i < values.length) && (i < fbeVectorSize); i++)
-        {
-            values[(int)i] = fbeModel.get();
-            fbeModel.FBEShift(fbeModel.FBESize());
-        }
-    }
-
     // Get the vector as ArrayList
     public void get(ArrayList<Order> values)
     {
@@ -230,25 +197,6 @@ public final class FieldModelVectorOrder extends FieldModel
         {
             Order value = fbeModel.get();
             values.add(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
-        }
-    }
-
-    // Set the vector
-    public void set(Order[] values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
-
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return;
-
-        var fbeModel = resize(values.length);
-        for (var value : values)
-        {
-            fbeModel.set(value);
             fbeModel.FBEShift(fbeModel.FBESize());
         }
     }

@@ -15,7 +15,6 @@ import java.util.*;
 class FinalModelBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
-    @Suppress("UNUSED_PARAMETER")
     fun FBEAllocationSize(value: ByteArray): Long {
         return (4 + value.size).toLong()
     }

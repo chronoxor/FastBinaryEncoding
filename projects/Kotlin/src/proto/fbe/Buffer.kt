@@ -15,7 +15,7 @@ import java.util.*;
 class Buffer
 {
     // Get bytes memory buffer
-    var data: ByteArray = ByteArray(0)
+    var data = ByteArray(0)
         private set
     // Get bytes memory buffer capacity
     val capacity: Long

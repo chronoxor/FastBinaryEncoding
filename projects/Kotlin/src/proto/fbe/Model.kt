@@ -15,7 +15,7 @@ import java.util.*;
 open class Model
 {
     // Get bytes buffer
-    var buffer: Buffer = Buffer()
+    var buffer = Buffer()
         private set
 
     // Initialize a new model

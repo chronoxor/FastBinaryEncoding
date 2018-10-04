@@ -60,7 +60,7 @@ void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
     //if (JSON())
         //GenerateFBEJson("fbe");
 
-    //GeneratePackage(package);
+    GeneratePackage(package);
 }
 
 void GeneratorKotlin::GenerateHeader()
@@ -94,7 +94,6 @@ void GeneratorKotlin::GenerateImports(const std::string& package)
     WriteLineIndent("import java.nio.charset.*;");
     WriteLineIndent("import java.time.*;");
     WriteLineIndent("import java.util.*;");
-    WriteLineIndent("import javafx.util.*;");
 }
 
 void GeneratorKotlin::GenerateImports(const std::shared_ptr<Package>& p)
@@ -232,7 +231,7 @@ void GeneratorKotlin::GenerateFBEBuffer(const std::string& package)
 class Buffer
 {
     // Get bytes memory buffer
-    var data: ByteArray = ByteArray(0)
+    var data = ByteArray(0)
         private set
     // Get bytes memory buffer capacity
     val capacity: Long
@@ -525,7 +524,7 @@ void GeneratorKotlin::GenerateFBEModel(const std::string& package)
 open class Model
 {
     // Get bytes buffer
-    var buffer: Buffer = Buffer()
+    var buffer = Buffer()
         private set
 
     // Initialize a new model
@@ -1067,7 +1066,7 @@ void GeneratorKotlin::GenerateFBEFieldModelOptional(const std::string& package, 
     CppCommon::Directory::CreateTree(path);
 
     // Open the file
-    CppCommon::Path file = path / ("FieldModelOptional" + name + ".java");
+    CppCommon::Path file = path / ("FieldModelOptional" + name + ".kt");
     Open(file);
 
     // Generate headers
@@ -1081,144 +1080,125 @@ void GeneratorKotlin::GenerateFBEFieldModelOptional(const std::string& package, 
 
     std::string code = R"CODE(
 // Fast Binary Encoding optional _NAME_ field model class
-public final class FieldModelOptional_NAME_ extends FieldModel
+class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
-    public FieldModelOptional_NAME_(Buffer buffer, long offset)
-    {
-        super(buffer, offset);
-        value = new _MODEL_(buffer, 0);
-    }
+    // Field size
+    override val FBESize: Long = (1 + 4).toLong()
 
-    // Get the field size
-    @Override
-    public long FBESize() { return 1 + 4; }
-    // Get the field extra size
-    @Override
-    public long FBEExtra()
-    {
+    // Field extra size
+    override val FBEExtra: Long get() {
         if (!hasValue())
-            return 0;
+            return 0
 
-        int fbeOptionalOffset = readInt32(FBEOffset() + 1);
-        if ((fbeOptionalOffset == 0) || ((_buffer.getOffset() + fbeOptionalOffset + 4) > _buffer.getSize()))
-            return 0;
+        val fbeOptionalOffset = readInt32(FBEOffset + 1)
+        if (fbeOptionalOffset == 0 || _buffer.offset + fbeOptionalOffset.toLong() + 4 > _buffer.size)
+            return 0
 
-        _buffer.shift(fbeOptionalOffset);
-        long fbeResult = value.FBESize() + value.FBEExtra();
-        _buffer.unshift(fbeOptionalOffset);
-        return fbeResult;
+        _buffer.shift(fbeOptionalOffset.toLong())
+        val fbeResult = value.FBESize + value.FBEExtra
+        _buffer.unshift(fbeOptionalOffset.toLong())
+        return fbeResult
     }
 
     // Checks whether the object contains a value
-    public boolean hasValue()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return false;
+    fun hasValue(): Boolean {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return false
 
-        byte fbeHasValue = readInt8(FBEOffset());
-        return (fbeHasValue != 0);
+        val fbeHasValue = readInt8(FBEOffset)
+        return fbeHasValue.toInt() != 0
     }
 
     // Base field model value
-    public final _MODEL_ value;
+    val value = _MODEL_(buffer, 0)
 
     // Check if the optional value is valid
-    @Override
-    public boolean verify()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return true;
+    override fun verify(): Boolean {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return true
 
-        byte fbeHasValue = readInt8(FBEOffset());
-        if (fbeHasValue == 0)
-            return true;
+        val fbeHasValue = readInt8(FBEOffset)
+        if (fbeHasValue.toInt() == 0)
+            return true
 
-        int fbeOptionalOffset = readInt32(FBEOffset());
+        val fbeOptionalOffset = readInt32(FBEOffset)
         if (fbeOptionalOffset == 0)
-            return false;
+            return false
 
-        _buffer.shift(fbeOptionalOffset);
-        boolean fbeResult = value.verify();
-        _buffer.unshift(fbeOptionalOffset);
-        return fbeResult;
+        _buffer.shift(fbeOptionalOffset.toLong())
+        val fbeResult = value.verify()
+        _buffer.unshift(fbeOptionalOffset.toLong())
+        return fbeResult
     }
 
     // Get the optional value (being phase)
-    public long getBegin()
-    {
+    fun getBegin(): Long {
         if (!hasValue())
-            return 0;
+            return 0
 
-        int fbeOptionalOffset = readInt32(FBEOffset() + 1);
-        assert (fbeOptionalOffset > 0) : "Model is broken!";
+        val fbeOptionalOffset = readInt32(FBEOffset + 1)
+        assert(fbeOptionalOffset > 0) { "Model is broken!" }
         if (fbeOptionalOffset <= 0)
-            return 0;
+            return 0
 
-        _buffer.shift(fbeOptionalOffset);
-        return fbeOptionalOffset;
+        _buffer.shift(fbeOptionalOffset.toLong())
+        return fbeOptionalOffset.toLong()
     }
 
     // Get the optional value (end phase)
-    public void getEnd(long fbeBegin)
-    {
-        _buffer.unshift(fbeBegin);
+    fun getEnd(fbeBegin: Long) {
+        _buffer.unshift(fbeBegin)
     }
 
-    // Get the optional value
-    public _TYPE_ get() { return get(null); }
-    public _TYPE_ get(_TYPE_ defaults)
-    {
-        long fbeBegin = getBegin();
-        if (fbeBegin == 0)
-            return defaults;
+    fun get(defaults: _TYPE_ = null): _TYPE_ {
+        val fbeBegin = getBegin()
+        if (fbeBegin == 0L)
+            return defaults
 
-        _TYPE_ optional = value.get();
+        val optional = value.get()
 
-        getEnd(fbeBegin);
+        getEnd(fbeBegin)
 
-        return optional;
+        return optional
     }
 
     // Set the optional value (begin phase)
-    public long setBegin(boolean hasValue)
-    {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return 0;
+    fun setBegin(hasValue: Boolean): Long {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return 0
 
-        byte fbeHasValue = (byte)(hasValue ? 1 : 0);
-        write(FBEOffset(), fbeHasValue);
-        if (fbeHasValue == 0)
-            return 0;
+        val fbeHasValue = (if (hasValue) 1 else 0).toByte()
+        write(FBEOffset, fbeHasValue)
+        if (fbeHasValue.toInt() == 0)
+            return 0
 
-        int fbeOptionalSize = (int)value.FBESize();
-        int fbeOptionalOffset = (int)(_buffer.allocate(fbeOptionalSize) - _buffer.getOffset());
-        assert ((fbeOptionalOffset > 0) && ((_buffer.getOffset() + fbeOptionalOffset + fbeOptionalSize) <= _buffer.getSize())) : "Model is broken!";
-        if ((fbeOptionalOffset <= 0) || ((_buffer.getOffset() + fbeOptionalOffset + fbeOptionalSize) > _buffer.getSize()))
-            return 0;
+        val fbeOptionalSize = value.FBESize.toInt()
+        val fbeOptionalOffset = (_buffer.allocate(fbeOptionalSize.toLong()) - _buffer.offset).toInt()
+        assert(fbeOptionalOffset > 0 && _buffer.offset + fbeOptionalOffset.toLong() + fbeOptionalSize.toLong() <= _buffer.size) { "Model is broken!" }
+        if (fbeOptionalOffset <= 0 || _buffer.offset + fbeOptionalOffset.toLong() + fbeOptionalSize.toLong() > _buffer.size)
+            return 0
 
-        write(FBEOffset() + 1, fbeOptionalOffset);
+        write(FBEOffset + 1, fbeOptionalOffset)
 
-        _buffer.shift(fbeOptionalOffset);
-        return fbeOptionalOffset;
+        _buffer.shift(fbeOptionalOffset.toLong())
+        return fbeOptionalOffset.toLong()
     }
 
     // Set the optional value (end phase)
-    public void setEnd(long fbeBegin)
-    {
-        _buffer.unshift(fbeBegin);
+    fun setEnd(fbeBegin: Long) {
+        _buffer.unshift(fbeBegin)
     }
 
     // Set the optional value
-    public void set(_TYPE_ optional)
-    {
-        long fbeBegin = setBegin(optional != null);
-        if (fbeBegin == 0)
-            return;
+    fun set(optional: _TYPE_) {
+        val fbeBegin = setBegin(optional != null)
+        if (fbeBegin == 0L)
+            return
 
-        value.set(optional);
+        value.set(optional!!)
 
-        setEnd(fbeBegin);
+        setEnd(fbeBegin)
     }
 }
 )CODE";
@@ -1238,7 +1218,7 @@ public final class FieldModelOptional_NAME_ extends FieldModel
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFieldModelArray(const std::string& package, const std::string& name, const std::string& type, const std::string& model, bool bytes)
+void GeneratorKotlin::GenerateFBEFieldModelArray(const std::string& package, const std::string& name, const std::string& type, bool optional, const std::string& model)
 {
     CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
 
@@ -1246,7 +1226,7 @@ void GeneratorKotlin::GenerateFBEFieldModelArray(const std::string& package, con
     CppCommon::Directory::CreateTree(path);
 
     // Open the file
-    CppCommon::Path file = path / ("FieldModelArray" + name + ".java");
+    CppCommon::Path file = path / ("FieldModelArray" + name + ".kt");
     Open(file);
 
     // Generate headers
@@ -1260,142 +1240,109 @@ void GeneratorKotlin::GenerateFBEFieldModelArray(const std::string& package, con
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ array field model class
-public final class FieldModelArray_NAME_ extends FieldModel
+class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : FieldModel(buffer, offset)
 {
-    private final _MODEL_ _model;
-    private final long _size;
+    private val _model = _MODEL_(buffer, offset)
 
-    public FieldModelArray_NAME_(Buffer buffer, long offset, long size)
-    {
-        super(buffer, offset);
-        _model = new _MODEL_(buffer, offset);
-        _size = size;
-    }
+    // Field size
+    override val FBESize: Long = size * _model.FBESize
 
-    // Get the field size
-    @Override
-    public long FBESize() { return _size * _model.FBESize(); }
-    // Get the field extra size
-    @Override
-    public long FBEExtra() { return 0; }
+    // Field extra size
+    override val FBEExtra: Long = 0
 
     // Get the array offset
-    public long getOffset() { return 0; }
-    // Get the array size
-    public long getSize() { return _size; }
+    val offset: Long get() = 0
 
     // Array index operator
-    public _MODEL_ getItem(long index)
-    {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        assert (index < _size) : "Index is out of bounds!";
+    fun getItem(index: Long): _MODEL_ {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
+        assert(index < size) { "Index is out of bounds!" }
 
-        _model.FBEOffset(FBEOffset());
-        _model.FBEShift(index * _model.FBESize());
-        return _model;
+        _model.FBEOffset = FBEOffset
+        _model.FBEShift(index * _model.FBESize)
+        return _model
     }
 
     // Check if the array is valid
-    @Override
-    public boolean verify()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return false;
+    override fun verify(): Boolean {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return false
 
-        _model.FBEOffset(FBEOffset());
-        for (long i = _size; i-- > 0;)
-        {
+        _model.FBEOffset = FBEOffset
+        var i = size
+        while (i-- > 0) {
             if (!_model.verify())
-                return false;
-            _model.FBEShift(_model.FBESize());
+                return false
+            _model.FBEShift(_model.FBESize)
         }
 
-        return true;
+        return true
     }
 
     // Get the array
-    public _ARRAY_ get()
-    {
-        var values = _INIT_;
+    fun get(): _ARRAY_ {
+        val values = _INIT_
 
-        var fbeModel = getItem(0);
-        for (long i = 0; i < _size; i++)
-        {
-            values[(int)i] = fbeModel.get();
-            fbeModel.FBEShift(fbeModel.FBESize());
+        val fbeModel = getItem(0)
+        for (i in 0 until size) {
+            values[i.toInt()] = fbeModel.get()
+            fbeModel.FBEShift(fbeModel.FBESize)
         }
-        return values;
+        return values
     }
 
     // Get the array
-    public void get(_ARRAY_ values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
-
-        var fbeModel = getItem(0);
-        for (long i = 0; (i < values.length) && (i < _size); i++)
-        {
-            values[(int)i] = fbeModel.get();
-            fbeModel.FBEShift(fbeModel.FBESize());
+    fun get(values: _ARRAY_) {
+        val fbeModel = getItem(0)
+        var i: Long = 0
+        while (i < values.size && i < size) {
+            values[i.toInt()] = fbeModel.get()
+            fbeModel.FBEShift(fbeModel.FBESize)
+            i++
         }
     }
 
     // Get the array as ArrayList
-    public void get(ArrayList<_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun get(values: ArrayList<_TYPE_>) {
+        values.clear()
+        values.ensureCapacity(size.toInt())
 
-        values.clear();
-        values.ensureCapacity((int)_size);
-
-        var fbeModel = getItem(0);
-        for (long i = _size; i-- > 0;)
-        {
-            _TYPE_ value = fbeModel.get();
-            values.add(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+        val fbeModel = getItem(0)
+        var i = size
+        while (i-- > 0) {
+            val value = fbeModel.get()
+            values.add(value)
+            fbeModel.FBEShift(fbeModel.FBESize)
         }
     }
 
     // Set the array
-    public void set(_ARRAY_ values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun set(values: _ARRAY_) {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return;
-
-        var fbeModel = getItem(0);
-        for (long i = 0; (i < values.length) && (i < _size); i++)
-        {
-            fbeModel.set(values[(int)i]);
-            fbeModel.FBEShift(fbeModel.FBESize());
+        val fbeModel = getItem(0)
+        var i: Long = 0
+        while (i < values.size && i < size) {
+            fbeModel.set(values[i.toInt()])
+            fbeModel.FBEShift(fbeModel.FBESize)
+            i++
         }
     }
 
     // Set the array as List
-    public void set(ArrayList<_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun set(values: ArrayList<_TYPE_>) {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return;
-
-        var fbeModel = getItem(0);
-        for (long i = 0; (i < values.size()) && (i < _size); i++)
-        {
-            fbeModel.set(values.get((int)i));
-            fbeModel.FBEShift(fbeModel.FBESize());
+        val fbeModel = getItem(0)
+        var i: Long = 0
+        while (i < values.size && i < size) {
+            fbeModel.set(values[i.toInt()])
+            fbeModel.FBEShift(fbeModel.FBESize)
+            i++
         }
     }
 }
@@ -1405,8 +1352,19 @@ public final class FieldModelArray_NAME_ extends FieldModel
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_TYPE_"), type);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
-    code = std::regex_replace(code, std::regex("_ARRAY_"), (bytes ? "byte" : type) + "[]");
-    code = std::regex_replace(code, std::regex("_INIT_"), ((type != "byte[]") ? ("new " + (bytes ? "byte" : type) + "[(int)_size]") : "new byte[(int)_size][]"));
+    if (!optional && ((type == "Boolean") || (type == "Byte") || (type == "Short") || (type == "Int") || (type == "Long") || (type == "Float") || (type == "Double")))
+    {
+        code = std::regex_replace(code, std::regex("_ARRAY_"), type + "Array");
+        code = std::regex_replace(code, std::regex("_INIT_"), type + "Array(size.toInt())");
+    }
+    else
+    {
+        code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type + ">");
+        if (optional)
+            code = std::regex_replace(code, std::regex("_INIT_"), "arrayOfNulls<" + type + ">(size.toInt())");
+        else
+            code = std::regex_replace(code, std::regex("_INIT_"), "Array(size.toInt()) { " + type + "(" + (((type == "ByteArray")) ? "0" : "") + ") }");
+    }
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -1426,7 +1384,7 @@ void GeneratorKotlin::GenerateFBEFieldModelVector(const std::string& package, co
     CppCommon::Directory::CreateTree(path);
 
     // Open the file
-    CppCommon::Path file = path / ("FieldModelVector" + name + ".java");
+    CppCommon::Path file = path / ("FieldModelVector" + name + ".kt");
     Open(file);
 
     // Generate headers
@@ -1440,298 +1398,199 @@ void GeneratorKotlin::GenerateFBEFieldModelVector(const std::string& package, co
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ vector field model class
-public final class FieldModelVector_NAME_ extends FieldModel
+class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
-    private final _MODEL_ _model;
+    private val _model = _MODEL_(buffer, offset)
 
-    public FieldModelVector_NAME_(Buffer buffer, long offset)
-    {
-        super(buffer, offset);
-        _model = new _MODEL_(buffer, offset);
-    }
+    // Field size
+    override val FBESize: Long = 4
 
-    // Get the field size
-    @Override
-    public long FBESize() { return 4; }
-    // Get the field extra size
-    @Override
-    public long FBEExtra()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return 0;
+    // Field extra size
+    override val FBEExtra: Long get() {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return 0
 
-        int fbeVectorOffset = readInt32(FBEOffset());
-        if ((fbeVectorOffset == 0) || ((_buffer.getOffset() + fbeVectorOffset + 4) > _buffer.getSize()))
-            return 0;
+        val fbeVectorOffset = readInt32(FBEOffset).toLong()
+        if (fbeVectorOffset == 0L || _buffer.offset + fbeVectorOffset + 4 > _buffer.size)
+            return 0
 
-        int fbeVectorSize = readInt32(fbeVectorOffset);
+        val fbeVectorSize = readInt32(fbeVectorOffset).toLong()
 
-        long fbeResult = 4;
-        _model.FBEOffset(fbeVectorOffset + 4);
-        for (int i = fbeVectorSize; i-- > 0;)
-        {
-            fbeResult += _model.FBESize() + _model.FBEExtra();
-            _model.FBEShift(_model.FBESize());
+        var fbeResult: Long = 4
+        _model.FBEOffset = fbeVectorOffset + 4
+        var i = fbeVectorSize
+        while (i-- > 0) {
+            fbeResult += _model.FBESize + _model.FBEExtra
+            _model.FBEShift(_model.FBESize)
         }
-        return fbeResult;
+        return fbeResult
     }
 
     // Get the vector offset
-    public long getOffset()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return 0;
+    val offset: Long get() {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return 0
 
-        int fbeVectorOffset = readInt32(FBEOffset());
-        return fbeVectorOffset;
+        val fbeVectorOffset = readInt32(FBEOffset).toLong()
+        return fbeVectorOffset
     }
 
     // Get the vector size
-    public long getSize()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return 0;
+    val size: Long get() {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return 0
 
-        int fbeVectorOffset = readInt32(FBEOffset());
-        if ((fbeVectorOffset == 0) || ((_buffer.getOffset() + fbeVectorOffset + 4) > _buffer.getSize()))
-            return 0;
+        val fbeVectorOffset = readInt32(FBEOffset).toLong()
+        if (fbeVectorOffset == 0L || _buffer.offset + fbeVectorOffset + 4 > _buffer.size)
+            return 0
 
-        int fbeVectorSize = readInt32(fbeVectorOffset);
-        return fbeVectorSize;
+        val fbeVectorSize = readInt32(fbeVectorOffset).toLong()
+        return fbeVectorSize
     }
 
     // Vector index operator
-    public _MODEL_ getItem(long index)
-    {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
+    fun getItem(index: Long): _MODEL_ {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
 
-        int fbeVectorOffset = readInt32(FBEOffset());
-        assert ((fbeVectorOffset > 0) && ((_buffer.getOffset() + fbeVectorOffset + 4) <= _buffer.getSize())) : "Model is broken!";
+        val fbeVectorOffset = readInt32(FBEOffset).toLong()
+        assert(fbeVectorOffset > 0 && _buffer.offset + fbeVectorOffset + 4 <= _buffer.size) { "Model is broken!" }
 
-        int fbeVectorSize = readInt32(fbeVectorOffset);
-        assert (index < fbeVectorSize) : "Index is out of bounds!";
+        val fbeVectorSize = readInt32(fbeVectorOffset).toLong()
+        assert(index < fbeVectorSize) { "Index is out of bounds!" }
 
-        _model.FBEOffset(fbeVectorOffset + 4);
-        _model.FBEShift(index * _model.FBESize());
-        return _model;
+        _model.FBEOffset = fbeVectorOffset + 4
+        _model.FBEShift(index * _model.FBESize)
+        return _model
     }
 
     // Resize the vector and get its first model
-    public _MODEL_ resize(long size)
-    {
-        int fbeVectorSize = (int)(size * _model.FBESize());
-        int fbeVectorOffset = (int)(_buffer.allocate(4 + fbeVectorSize) - _buffer.getOffset());
-        assert ((fbeVectorOffset > 0) && ((_buffer.getOffset() + fbeVectorOffset + 4) <= _buffer.getSize())) : "Model is broken!";
+    fun resize(size: Long): _MODEL_ {
+        val fbeVectorSize = size * _model.FBESize
+        val fbeVectorOffset = _buffer.allocate(4 + fbeVectorSize) - _buffer.offset
+        assert(fbeVectorOffset > 0 && _buffer.offset + fbeVectorOffset + 4 <= _buffer.size) { "Model is broken!" }
 
-        write(FBEOffset(), fbeVectorOffset);
-        write(fbeVectorOffset, (int)size);
-        write(fbeVectorOffset + 4, (byte)0, fbeVectorSize);
+        write(FBEOffset, fbeVectorOffset)
+        write(fbeVectorOffset, size.toInt())
+        write(fbeVectorOffset + 4, 0.toByte(), fbeVectorSize)
 
-        _model.FBEOffset(fbeVectorOffset + 4);
-        return _model;
+        _model.FBEOffset = fbeVectorOffset + 4
+        return _model
     }
 
     // Check if the vector is valid
-    @Override
-    public boolean verify()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return true;
+    override fun verify(): Boolean {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return true
 
-        int fbeVectorOffset = readInt32(FBEOffset());
-        if (fbeVectorOffset == 0)
-            return true;
+        val fbeVectorOffset = readInt32(FBEOffset).toLong()
+        if (fbeVectorOffset == 0L)
+            return true
 
-        if ((_buffer.getOffset() + fbeVectorOffset + 4) > _buffer.getSize())
-            return false;
+        if (_buffer.offset + fbeVectorOffset + 4 > _buffer.size)
+            return false
 
-        int fbeVectorSize = readInt32(fbeVectorOffset);
+        val fbeVectorSize = readInt32(fbeVectorOffset).toLong()
 
-        _model.FBEOffset(fbeVectorOffset + 4);
-        for (int i = fbeVectorSize; i-- > 0;)
-        {
+        _model.FBEOffset = fbeVectorOffset + 4
+        var i = fbeVectorSize
+        while (i-- > 0) {
             if (!_model.verify())
-                return false;
-            _model.FBEShift(_model.FBESize());
+                return false
+            _model.FBEShift(_model.FBESize)
         }
 
-        return true;
-    }
-
-    // Get the vector
-    public _TYPE_[] get()
-    {
-        long fbeVectorSize = getSize();
-
-        var values = _INIT_;
-
-        var fbeModel = getItem(0);
-        for (long i = 0; i < fbeVectorSize; i++)
-        {
-            values[(int)i] = fbeModel.get();
-            fbeModel.FBEShift(fbeModel.FBESize());
-        }
-        return values;
-    }
-
-    // Get the vector
-    public void get(_TYPE_[] values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
-
-        long fbeVectorSize = getSize();
-
-        var fbeModel = getItem(0);
-        for (long i = 0; (i < values.length) && (i < fbeVectorSize); i++)
-        {
-            values[(int)i] = fbeModel.get();
-            fbeModel.FBEShift(fbeModel.FBESize());
-        }
+        return true
     }
 
     // Get the vector as ArrayList
-    public void get(ArrayList<_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    operator fun get(values: ArrayList<_TYPE_>) {
+        values.clear()
 
-        values.clear();
+        val fbeVectorSize = size
+        if (fbeVectorSize == 0L)
+            return
 
-        long fbeVectorSize = getSize();
-        if (fbeVectorSize == 0)
-            return;
+        values.ensureCapacity(fbeVectorSize.toInt())
 
-        values.ensureCapacity((int)fbeVectorSize);
-
-        var fbeModel = getItem(0);
-        for (long i = fbeVectorSize; i-- > 0;)
-        {
-            _TYPE_ value = fbeModel.get();
-            values.add(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+        val fbeModel = getItem(0)
+        var i = fbeVectorSize
+        while (i-- > 0) {
+            val value = fbeModel.get()
+            values.add(value)
+            fbeModel.FBEShift(fbeModel.FBESize)
         }
     }
 
     // Get the vector as LinkedList
-    public void get(LinkedList<_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    operator fun get(values: LinkedList<_TYPE_>) {
+        values.clear()
 
-        values.clear();
+        val fbeVectorSize = size
+        if (fbeVectorSize == 0L)
+            return
 
-        long fbeVectorSize = getSize();
-        if (fbeVectorSize == 0)
-            return;
-
-        var fbeModel = getItem(0);
-        for (long i = fbeVectorSize; i-- > 0;)
-        {
-            _TYPE_ value = fbeModel.get();
-            values.add(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+        val fbeModel = getItem(0)
+        var i = fbeVectorSize
+        while (i-- > 0) {
+            val value = fbeModel.get()
+            values.add(value)
+            fbeModel.FBEShift(fbeModel.FBESize)
         }
     }
 
     // Get the vector as HashSet
-    public void get(HashSet<_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    operator fun get(values: HashSet<_TYPE_>) {
+        values.clear()
 
-        values.clear();
+        val fbeVectorSize = size
+        if (fbeVectorSize == 0L)
+            return
 
-        long fbeVectorSize = getSize();
-        if (fbeVectorSize == 0)
-            return;
-
-        var fbeModel = getItem(0);
-        for (long i = fbeVectorSize; i-- > 0;)
-        {
-            _TYPE_ value = fbeModel.get();
-            values.add(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
-        }
-    }
-
-    // Set the vector
-    public void set(_TYPE_[] values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
-
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return;
-
-        var fbeModel = resize(values.length);
-        for (var value : values)
-        {
-            fbeModel.set(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+        val fbeModel = getItem(0)
+        var i = fbeVectorSize
+        while (i-- > 0) {
+            val value = fbeModel.get()
+            values.add(value)
+            fbeModel.FBEShift(fbeModel.FBESize)
         }
     }
 
     // Set the vector as ArrayList
-    public void set(ArrayList<_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun set(values: ArrayList<_TYPE_>) {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return;
-
-        var fbeModel = resize(values.size());
-        for (var value : values)
-        {
-            fbeModel.set(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+        val fbeModel = resize(values.size.toLong())
+        for (value in values) {
+            fbeModel.set(value)
+            fbeModel.FBEShift(fbeModel.FBESize)
         }
     }
 
     // Set the vector as LinkedList
-    public void set(LinkedList<_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun set(values: LinkedList<_TYPE_>) {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return;
-
-        var fbeModel = resize(values.size());
-        for (var value : values)
-        {
-            fbeModel.set(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+        val fbeModel = resize(values.size.toLong())
+        for (value in values) {
+            fbeModel.set(value)
+            fbeModel.FBEShift(fbeModel.FBESize)
         }
     }
 
     // Set the vector as HashSet
-    public void set(HashSet<_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun set(values: HashSet<_TYPE_>) {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return;
-
-        var fbeModel = resize(values.size());
-        for (var value : values)
-        {
-            fbeModel.set(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+        val fbeModel = resize(values.size.toLong())
+        for (value in values) {
+            fbeModel.set(value)
+            fbeModel.FBEShift(fbeModel.FBESize)
         }
     }
 }
@@ -1741,7 +1600,6 @@ public final class FieldModelVector_NAME_ extends FieldModel
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_TYPE_"), type);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
-    code = std::regex_replace(code, std::regex("_INIT_"), ((type != "byte[]") ? ("new " + type + "[(int)fbeVectorSize]") : "new byte[(int)fbeVectorSize][]"));
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -1761,7 +1619,7 @@ void GeneratorKotlin::GenerateFBEFieldModelMap(const std::string& package, const
     CppCommon::Directory::CreateTree(path);
 
     // Open the file
-    CppCommon::Path file = path / ("FieldModelMap" + key_name + value_name + ".java");
+    CppCommon::Path file = path / ("FieldModelMap" + key_name + value_name + ".kt");
     Open(file);
 
     // Generate headers
@@ -1775,227 +1633,190 @@ void GeneratorKotlin::GenerateFBEFieldModelMap(const std::string& package, const
 
     std::string code = R"CODE(
 // Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map field model class
-public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
+class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
-    private final _KEY_MODEL_ _modelKey;
-    private final _VALUE_MODEL_ _modelValue;
+    private val _modelKey = _KEY_MODEL_(buffer, offset)
+    private val _modelValue = _VALUE_MODEL_(buffer, offset)
 
-    public FieldModelMap_KEY_NAME__VALUE_NAME_(Buffer buffer, long offset)
-    {
-        super(buffer, offset);
-        _modelKey = new _KEY_MODEL_(buffer, offset);
-        _modelValue = new _VALUE_MODEL_(buffer, offset);
-    }
+    // Field size
+    override val FBESize: Long = 4
 
-    // Get the field size
-    @Override
-    public long FBESize() { return 4; }
-    // Get the field extra size
-    @Override
-    public long FBEExtra()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return 0;
+    // Field extra size
+    override val FBEExtra: Long get() {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return 0
 
-        int fbeMapOffset = readInt32(FBEOffset());
-        if ((fbeMapOffset == 0) || ((_buffer.getOffset() + fbeMapOffset + 4) > _buffer.getSize()))
-            return 0;
+        val fbeMapOffset = readInt32(FBEOffset).toLong()
+        if (fbeMapOffset == 0L || _buffer.offset + fbeMapOffset + 4 > _buffer.size)
+            return 0
 
-        int fbeMapSize = readInt32(fbeMapOffset);
+        val fbeMapSize = readInt32(fbeMapOffset).toLong()
 
-        long fbeResult = 4;
-        _modelKey.FBEOffset(fbeMapOffset + 4);
-        _modelValue.FBEOffset(fbeMapOffset + 4 + _modelKey.FBESize());
-        for (int i = fbeMapSize; i-- > 0;)
-        {
-            fbeResult += _modelKey.FBESize() + _modelKey.FBEExtra();
-            _modelKey.FBEShift(_modelKey.FBESize() + _modelValue.FBESize());
+        var fbeResult: Long = 4
+        _modelKey.FBEOffset = fbeMapOffset + 4
+        _modelValue.FBEOffset = fbeMapOffset + 4 + _modelKey.FBESize
+        var i = fbeMapSize
+        while (i-- > 0) {
+            fbeResult += _modelKey.FBESize + _modelKey.FBEExtra
+            _modelKey.FBEShift(_modelKey.FBESize + _modelValue.FBESize)
 
-            fbeResult += _modelValue.FBESize() + _modelValue.FBEExtra();
-            _modelValue.FBEShift(_modelKey.FBESize() + _modelValue.FBESize());
+            fbeResult += _modelValue.FBESize + _modelValue.FBEExtra
+            _modelValue.FBEShift(_modelKey.FBESize + _modelValue.FBESize)
         }
-        return fbeResult;
+        return fbeResult
     }
 
     // Get the map offset
-    public long getOffset()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return 0;
+    val offset: Long get() {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return 0
 
-        int fbeMapOffset = readInt32(FBEOffset());
-        return fbeMapOffset;
+        val fbeMapOffset = readInt32(FBEOffset).toLong()
+        return fbeMapOffset
     }
 
     // Get the map size
-    public long getSize()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return 0;
+    val size: Long get() {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return 0
 
-        int fbeMapOffset = readInt32(FBEOffset());
-        if ((fbeMapOffset == 0) || ((_buffer.getOffset() + fbeMapOffset + 4) > _buffer.getSize()))
-            return 0;
+        val fbeMapOffset = readInt32(FBEOffset).toLong()
+        if (fbeMapOffset == 0L || _buffer.offset + fbeMapOffset + 4 > _buffer.size)
+            return 0
 
-        int fbeMapSize = readInt32(fbeMapOffset);
-        return fbeMapSize;
+        val fbeMapSize = readInt32(fbeMapOffset).toLong()
+        return fbeMapSize
     }
 
     // Map index operator
-    public Pair<_KEY_MODEL_, _VALUE_MODEL_> getItem(long index)
-    {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
+    fun getItem(index: Long): Pair<_KEY_MODEL_, _VALUE_MODEL_> {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
 
-        int fbeMapOffset = readInt32(FBEOffset());
-        assert ((fbeMapOffset > 0) && ((_buffer.getOffset() + fbeMapOffset + 4) <= _buffer.getSize())) : "Model is broken!";
+        val fbeMapOffset = readInt32(FBEOffset).toLong()
+        assert(fbeMapOffset > 0 && _buffer.offset + fbeMapOffset + 4 <= _buffer.size) { "Model is broken!" }
 
-        int fbeMapSize = readInt32(fbeMapOffset);
-        assert (index < fbeMapSize) : "Index is out of bounds!";
+        val fbeMapSize = readInt32(fbeMapOffset).toLong()
+        assert(index < fbeMapSize) { "Index is out of bounds!" }
 
-        _modelKey.FBEOffset(fbeMapOffset + 4);
-        _modelValue.FBEOffset(fbeMapOffset + 4 + _modelKey.FBESize());
-        _modelKey.FBEShift(index * (_modelKey.FBESize() + _modelValue.FBESize()));
-        _modelValue.FBEShift(index * (_modelKey.FBESize() + _modelValue.FBESize()));
-        return new Pair<_KEY_MODEL_, _VALUE_MODEL_>(_modelKey, _modelValue);
+        _modelKey.FBEOffset = fbeMapOffset + 4
+        _modelValue.FBEOffset = fbeMapOffset + 4 + _modelKey.FBESize
+        _modelKey.FBEShift(index * (_modelKey.FBESize + _modelValue.FBESize))
+        _modelValue.FBEShift(index * (_modelKey.FBESize + _modelValue.FBESize))
+        return Pair(_modelKey, _modelValue)
     }
 
     // Resize the map and get its first model
-    public Pair<_KEY_MODEL_, _VALUE_MODEL_> resize(long size)
-    {
-        _modelKey.FBEOffset(FBEOffset());
-        _modelValue.FBEOffset(FBEOffset() + _modelKey.FBESize());
+    fun resize(size: Long): Pair<_KEY_MODEL_, _VALUE_MODEL_> {
+        _modelKey.FBEOffset = FBEOffset
+        _modelValue.FBEOffset = FBEOffset + _modelKey.FBESize
 
-        int fbeMapSize = (int)(size * (_modelKey.FBESize() + _modelValue.FBESize()));
-        int fbeMapOffset = (int)(_buffer.allocate(4 + fbeMapSize) - _buffer.getOffset());
-        assert ((fbeMapOffset > 0) && ((_buffer.getOffset() + fbeMapOffset + 4) <= _buffer.getSize())) : "Model is broken!";
+        val fbeMapSize = size * (_modelKey.FBESize + _modelValue.FBESize)
+        val fbeMapOffset = _buffer.allocate(4 + fbeMapSize) - _buffer.offset
+        assert(fbeMapOffset > 0 && _buffer.offset + fbeMapOffset + 4 <= _buffer.size) { "Model is broken!" }
 
-        write(FBEOffset(), fbeMapOffset);
-        write(fbeMapOffset, (int)size);
-        write(fbeMapOffset + 4, (byte)0, fbeMapSize);
+        write(FBEOffset, fbeMapOffset)
+        write(fbeMapOffset, size.toInt())
+        write(fbeMapOffset + 4, 0.toByte(), fbeMapSize)
 
-        _modelKey.FBEOffset(fbeMapOffset + 4);
-        _modelValue.FBEOffset(fbeMapOffset + 4 + _modelKey.FBESize());
-        return new Pair<_KEY_MODEL_, _VALUE_MODEL_>(_modelKey, _modelValue);
+        _modelKey.FBEOffset = fbeMapOffset + 4
+        _modelValue.FBEOffset = fbeMapOffset + 4 + _modelKey.FBESize
+        return Pair(_modelKey, _modelValue)
     }
 
     // Check if the map is valid
-    @Override
-    public boolean verify()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return true;
+    override fun verify(): Boolean {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return true
 
-        int fbeMapOffset = readInt32(FBEOffset());
-        if (fbeMapOffset == 0)
-            return true;
+        val fbeMapOffset = readInt32(FBEOffset).toLong()
+        if (fbeMapOffset == 0L)
+            return true
 
-        if ((_buffer.getOffset() + fbeMapOffset + 4) > _buffer.getSize())
-            return false;
+        if (_buffer.offset + fbeMapOffset + 4 > _buffer.size)
+            return false
 
-        int fbeMapSize = readInt32(fbeMapOffset);
+        val fbeMapSize = readInt32(fbeMapOffset).toLong()
 
-        _modelKey.FBEOffset(fbeMapOffset + 4);
-        _modelValue.FBEOffset(fbeMapOffset + 4 + _modelKey.FBESize());
-        for (int i = fbeMapSize; i-- > 0;)
-        {
+        _modelKey.FBEOffset = fbeMapOffset + 4
+        _modelValue.FBEOffset = fbeMapOffset + 4 + _modelKey.FBESize
+        var i = fbeMapSize
+        while (i-- > 0) {
             if (!_modelKey.verify())
-                return false;
-            _modelKey.FBEShift(_modelKey.FBESize() + _modelValue.FBESize());
+                return false
+            _modelKey.FBEShift(_modelKey.FBESize + _modelValue.FBESize)
             if (!_modelValue.verify())
-                return false;
-            _modelValue.FBEShift(_modelKey.FBESize() + _modelValue.FBESize());
+                return false
+            _modelValue.FBEShift(_modelKey.FBESize + _modelValue.FBESize)
         }
 
-        return true;
+        return true
     }
 
     // Get the map as TreeMap
-    public void get(TreeMap<_KEY_TYPE_, _VALUE_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun get(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>) {
+        values.clear()
 
-        values.clear();
+        val fbeMapSize = size
+        if (fbeMapSize == 0L)
+            return
 
-        long fbeMapSize = getSize();
-        if (fbeMapSize == 0)
-            return;
-
-        var fbeModel = getItem(0);
-        for (long i = fbeMapSize; i-- > 0;)
-        {
-            _KEY_TYPE_ key = fbeModel.getKey().get();
-            _VALUE_TYPE_ value = fbeModel.getValue().get();
-            values.put(key, value);
-            fbeModel.getKey().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
-            fbeModel.getValue().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
+        val fbeModel = getItem(0)
+        var i = fbeMapSize
+        while (i-- > 0) {
+            val key = fbeModel.first.get()
+            val value = fbeModel.second.get()
+            values[key] = value
+            fbeModel.first.FBEShift(fbeModel.first.FBESize + fbeModel.second.FBESize)
+            fbeModel.second.FBEShift(fbeModel.first.FBESize + fbeModel.second.FBESize)
         }
     }
 
     // Get the map as HashMap
-    public void get(HashMap<_KEY_TYPE_, _VALUE_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    operator fun get(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>) {
+        values.clear()
 
-        values.clear();
+        val fbeMapSize = size
+        if (fbeMapSize == 0L)
+            return
 
-        long fbeMapSize = getSize();
-        if (fbeMapSize == 0)
-            return;
-
-        var fbeModel = getItem(0);
-        for (long i = fbeMapSize; i-- > 0;)
-        {
-            _KEY_TYPE_ key = fbeModel.getKey().get();
-            _VALUE_TYPE_ value = fbeModel.getValue().get();
-            values.put(key, value);
-            fbeModel.getKey().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
-            fbeModel.getValue().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
+        val fbeModel = getItem(0)
+        var i = fbeMapSize
+        while (i-- > 0) {
+            val key = fbeModel.first.get()
+            val value = fbeModel.second.get()
+            values[key] = value
+            fbeModel.first.FBEShift(fbeModel.first.FBESize + fbeModel.second.FBESize)
+            fbeModel.second.FBEShift(fbeModel.first.FBESize + fbeModel.second.FBESize)
         }
     }
 
     // Set the map as TreeMap
-    public void set(TreeMap<_KEY_TYPE_, _VALUE_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun set(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>) {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return;
-
-        var fbeModel = resize(values.size());
-        for (var value : values.entrySet())
-        {
-            fbeModel.getKey().set(value.getKey());
-            fbeModel.getKey().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
-            fbeModel.getValue().set(value.getValue());
-            fbeModel.getValue().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
+        val fbeModel = resize(values.size.toLong())
+        for ((key, value1) in values) {
+            fbeModel.first.set(key)
+            fbeModel.first.FBEShift(fbeModel.first.FBESize + fbeModel.second.FBESize)
+            fbeModel.second.set(value1)
+            fbeModel.second.FBEShift(fbeModel.first.FBESize + fbeModel.second.FBESize)
         }
     }
 
     // Set the vector as HashMap
-    public void set(HashMap<_KEY_TYPE_, _VALUE_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun set(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>) {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return;
-
-        var fbeModel = resize(values.size());
-        for (var value : values.entrySet())
-        {
-            fbeModel.getKey().set(value.getKey());
-            fbeModel.getKey().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
-            fbeModel.getValue().set(value.getValue());
-            fbeModel.getValue().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
+        val fbeModel = resize(values.size.toLong())
+        for ((key, value1) in values) {
+            fbeModel.first.set(key)
+            fbeModel.first.FBEShift(fbeModel.first.FBESize + fbeModel.second.FBESize)
+            fbeModel.second.set(value1)
+            fbeModel.second.FBEShift(fbeModel.first.FBESize + fbeModel.second.FBESize)
         }
     }
 }
@@ -2466,7 +2287,6 @@ void GeneratorKotlin::GenerateFBEFinalModelBytes(const std::string& package)
 class FinalModelBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
-    @Suppress("UNUSED_PARAMETER")
     fun FBEAllocationSize(value: ByteArray): Long {
         return (4 + value.size).toLong()
     }
@@ -2548,7 +2368,6 @@ void GeneratorKotlin::GenerateFBEFinalModelString(const std::string& package)
 class FinalModelString(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
-    @Suppress("UNUSED_PARAMETER")
     fun FBEAllocationSize(value: String): Long {
         return (4 + 3 * (value.length + 1)).toLong()
     }
@@ -2623,7 +2442,7 @@ void GeneratorKotlin::GenerateFBEFinalModelOptional(const std::string& package, 
     CppCommon::Directory::CreateTree(path);
 
     // Open the file
-    CppCommon::Path file = path / ("FinalModelOptional" + name + ".java");
+    CppCommon::Path file = path / ("FinalModelOptional" + name + ".kt");
     Open(file);
 
     // Generate headers
@@ -2637,86 +2456,75 @@ void GeneratorKotlin::GenerateFBEFinalModelOptional(const std::string& package, 
 
     std::string code = R"CODE(
 // Fast Binary Encoding optional _NAME_ final model class
-public final class FinalModelOptional_NAME_ extends FinalModel
+class FinalModelOptional_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
-    public FinalModelOptional_NAME_(Buffer buffer, long offset)
-    {
-        super(buffer, offset);
-        value = new _MODEL_(buffer, 0);
+    // Get the allocation size
+    fun FBEAllocationSize(optional: _TYPE_): Long {
+        return (1 + (if (optional != null) value.FBEAllocationSize(optional) else 0)).toLong()
     }
 
-    // Get the allocation size
-    public long FBEAllocationSize(_TYPE_ optional) { return 1 + ((optional != null) ? value.FBEAllocationSize(optional) : 0); }
-
     // Checks whether the object contains a value
-    public boolean hasValue()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + 1) > _buffer.getSize())
-            return false;
+    fun hasValue(): Boolean {
+        if (_buffer.offset + FBEOffset + 1 > _buffer.size)
+            return false
 
-        byte fbeHasValue = readInt8(FBEOffset());
-        return (fbeHasValue != 0);
+        val fbeHasValue = readInt8(FBEOffset)
+        return fbeHasValue.toInt() != 0
     }
 
     // Base final model value
-    public final _MODEL_ value;
+    val value = _MODEL_(buffer, 0)
 
     // Check if the optional value is valid
-    @Override
-    public long verify()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + 1) > _buffer.getSize())
-            return Long.MAX_VALUE;
+    override fun verify(): Long {
+        if (_buffer.offset + FBEOffset + 1 > _buffer.size)
+            return Long.MAX_VALUE
 
-        byte fbeHasValue = readInt8(FBEOffset());
-        if (fbeHasValue == 0)
-            return 1;
+        val fbeHasValue = readInt8(FBEOffset)
+        if (fbeHasValue.toInt() == 0)
+            return 1
 
-        _buffer.shift(FBEOffset() + 1);
-        long fbeResult = value.verify();
-        _buffer.unshift(FBEOffset() + 1);
-        return 1 + fbeResult;
+        _buffer.shift(FBEOffset + 1)
+        val fbeResult = value.verify()
+        _buffer.unshift(FBEOffset + 1)
+        return 1 + fbeResult
     }
 
     // Get the optional value
-    public _TYPE_ get(Size size)
-    {
-        assert ((_buffer.getOffset() + FBEOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 1) > _buffer.getSize())
-        {
-            size.value = 0;
-            return null;
+    fun get(size: Size): _TYPE_ {
+        assert(_buffer.offset + FBEOffset + 1 <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + 1 > _buffer.size) {
+            size.value = 0
+            return null
         }
 
-        if (!hasValue())
-        {
-            size.value = 1;
-            return null;
+        if (!hasValue()) {
+            size.value = 1
+            return null
         }
 
-        _buffer.shift(FBEOffset() + 1);
-        _TYPE_ optional = value.get(size);
-        _buffer.unshift(FBEOffset() + 1);
-        size.value += 1;
-        return optional;
+        _buffer.shift(FBEOffset + 1)
+        val optional = value.get(size)
+        _buffer.unshift(FBEOffset + 1)
+        size.value += 1
+        return optional
     }
 
     // Set the optional value
-    public long set(_TYPE_ optional)
-    {
-        assert ((_buffer.getOffset() + FBEOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 1) > _buffer.getSize())
-            return 0;
+    fun set(optional: _TYPE_): Long {
+        assert(_buffer.offset + FBEOffset + 1 <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + 1 > _buffer.size)
+            return 0
 
-        byte fbeHasValue = (byte)((optional != null) ? 1 : 0);
-        write(FBEOffset(), fbeHasValue);
-        if (fbeHasValue == 0)
-            return 1;
+        val fbeHasValue = (if (optional != null) 1 else 0).toByte()
+        write(FBEOffset, fbeHasValue)
+        if (fbeHasValue.toInt() == 0)
+            return 1
 
-        _buffer.shift(FBEOffset() + 1);
-        long size = value.set(optional);
-        _buffer.unshift(FBEOffset() + 1);
-        return 1 + size;
+        _buffer.shift(FBEOffset + 1)
+        val size = value.set(optional!!)
+        _buffer.unshift(FBEOffset + 1)
+        return 1 + size
     }
 }
 )CODE";
@@ -2736,7 +2544,7 @@ public final class FinalModelOptional_NAME_ extends FinalModel
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFinalModelArray(const std::string& package, const std::string& name, const std::string& type, const std::string& model, bool bytes)
+void GeneratorKotlin::GenerateFBEFinalModelArray(const std::string& package, const std::string& name, const std::string& type, bool optional, const std::string& model)
 {
     CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
 
@@ -2744,7 +2552,7 @@ void GeneratorKotlin::GenerateFBEFinalModelArray(const std::string& package, con
     CppCommon::Directory::CreateTree(path);
 
     // Open the file
-    CppCommon::Path file = path / ("FinalModelArray" + name + ".java");
+    CppCommon::Path file = path / ("FinalModelArray" + name + ".kt");
     Open(file);
 
     // Generate headers
@@ -2758,174 +2566,148 @@ void GeneratorKotlin::GenerateFBEFinalModelArray(const std::string& package, con
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ array final model class
-public final class FinalModelArray_NAME_ extends FinalModel
+class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Long) : FinalModel(buffer, offset)
 {
-    private final _MODEL_ _model;
-    private final long _size;
-
-    public FinalModelArray_NAME_(Buffer buffer, long offset, long size)
-    {
-        super(buffer, offset);
-        _model = new _MODEL_(buffer, offset);
-        _size = size;
-    }
+    private val _model = _MODEL_(buffer, offset)
 
     // Get the allocation size
-    public long FBEAllocationSize(_ARRAY_ values)
-    {
-        long size = 0;
-        for (long i = 0; (i < values.length) && (i < _size); i++)
-            size += _model.FBEAllocationSize(values[(int)i]);
-        return size;
+    fun FBEAllocationSize(values: _ARRAY_): Long {
+        var size: Long = 0
+        var i: Long = 0
+        while (i < values.size && i < _size) {
+            size += _model.FBEAllocationSize(values[i.toInt()])
+            i++
+        }
+        return size
     }
-    public long FBEAllocationSize(ArrayList<_TYPE_> values)
-    {
-        long size = 0;
-        for (long i = 0; (i < values.size()) && (i < _size); i++)
-            size += _model.FBEAllocationSize(values.get((int)i));
-        return size;
+    fun FBEAllocationSize(values: ArrayList<_TYPE_>): Long {
+        var size: Long = 0
+        var i: Long = 0
+        while (i < values.size && i < _size) {
+            size += _model.FBEAllocationSize(values[i.toInt()])
+            i++
+        }
+        return size
     }
 
     // Check if the array is valid
-    @Override
-    public long verify()
-    {
-        if ((_buffer.getOffset() + FBEOffset()) > _buffer.getSize())
-            return Long.MAX_VALUE;
+    override fun verify(): Long {
+        if (_buffer.offset + FBEOffset > _buffer.size)
+            return Long.MAX_VALUE
 
-        long size = 0;
-        _model.FBEOffset(FBEOffset());
-        for (long i = _size; i-- > 0;)
-        {
-            long offset = _model.verify();
+        var size: Long = 0
+        _model.FBEOffset = FBEOffset
+        var i = _size
+        while (i-- > 0) {
+            val offset = _model.verify()
             if (offset == Long.MAX_VALUE)
-                return Long.MAX_VALUE;
-            _model.FBEShift(offset);
-            size += offset;
+                return Long.MAX_VALUE
+            _model.FBEShift(offset)
+            size += offset
         }
-        return size;
+        return size
     }
 
     // Get the array
-    public _ARRAY_ get(Size size)
-    {
-        var values = _INIT_;
+    fun get(size: Size): _ARRAY_ {
+        val values = _INIT_
 
-        assert ((_buffer.getOffset() + FBEOffset()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset()) > _buffer.getSize())
-        {
-            size.value = 0;
-            return values;
+        assert(_buffer.offset + FBEOffset <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset > _buffer.size) {
+            size.value = 0
+            return values
         }
 
-        size.value = 0;
-        var offset = new Size();
-        _model.FBEOffset(FBEOffset());
-        for (long i = 0; i < _size; i++)
-        {
-            offset.value = 0;
-            values[(int)i] = _model.get(offset);
-            _model.FBEShift(offset.value);
-            size.value += offset.value;
+        size.value = 0
+        val offset = Size()
+        _model.FBEOffset = FBEOffset
+        for (i in 0 until _size) {
+            offset.value = 0
+            values[i.toInt()] = _model.get(offset)
+            _model.FBEShift(offset.value)
+            size.value += offset.value
         }
-        return values;
+        return values
     }
 
     // Get the array
-    public long get(_ARRAY_ values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun get(values: _ARRAY_): Long {
+        assert(_buffer.offset + FBEOffset <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset > _buffer.size)
+            return 0
 
-        assert ((_buffer.getOffset() + FBEOffset()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset()) > _buffer.getSize())
-            return 0;
-
-        long size = 0;
-        var offset = new Size();
-        _model.FBEOffset(FBEOffset());
-        for (long i = 0; (i < values.length) && (i < _size); i++)
-        {
-            offset.value = 0;
-            values[(int)i] = _model.get(offset);
-            _model.FBEShift(offset.value);
-            size += offset.value;
+        var size: Long = 0
+        val offset = Size()
+        _model.FBEOffset = FBEOffset
+        var i: Long = 0
+        while (i < values.size && i < _size) {
+            offset.value = 0
+            values[i.toInt()] = _model.get(offset)
+            _model.FBEShift(offset.value)
+            size += offset.value
+            i++
         }
-        return size;
+        return size
     }
 
     // Get the array as ArrayList
-    public long get(ArrayList<_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun get(values: ArrayList<_TYPE_>): Long {
+        values.clear()
 
-        values.clear();
+        assert(_buffer.offset + FBEOffset <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset > _buffer.size)
+            return 0
 
-        assert ((_buffer.getOffset() + FBEOffset()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset()) > _buffer.getSize())
-            return 0;
+        values.ensureCapacity(_size.toInt())
 
-        values.ensureCapacity((int)_size);
-
-        long size = 0;
-        var offset = new Size();
-        _model.FBEOffset(FBEOffset());
-        for (long i = _size; i-- > 0;)
-        {
-            offset.value = 0;
-            _TYPE_ value = _model.get(offset);
-            values.add(value);
-            _model.FBEShift(offset.value);
-            size += offset.value;
+        var size: Long = 0
+        val offset = Size()
+        _model.FBEOffset = FBEOffset
+        var i = _size
+        while (i-- > 0) {
+            offset.value = 0
+            val value = _model.get(offset)
+            values.add(value)
+            _model.FBEShift(offset.value)
+            size += offset.value
         }
-        return size;
+        return size
     }
 
     // Set the array
-    public long set(_ARRAY_ values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun set(values: _ARRAY_): Long {
+        assert(_buffer.offset + FBEOffset <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset > _buffer.size)
+            return 0
 
-        assert ((_buffer.getOffset() + FBEOffset()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset()) > _buffer.getSize())
-            return 0;
-
-        long size = 0;
-        _model.FBEOffset(FBEOffset());
-        for (long i = 0; (i < values.length) && (i < _size); i++)
-        {
-            long offset = _model.set(values[(int)i]);
-            _model.FBEShift(offset);
-            size += offset;
+        var size: Long = 0
+        _model.FBEOffset = FBEOffset
+        var i: Long = 0
+        while (i < values.size && i < _size) {
+            val offset = _model.set(values[i.toInt()])
+            _model.FBEShift(offset)
+            size += offset
+            i++
         }
-        return size;
+        return size
     }
 
     // Set the array as List
-    public long set(ArrayList<_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun set(values: ArrayList<_TYPE_>): Long {
+        assert(_buffer.offset + FBEOffset <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset > _buffer.size)
+            return 0
 
-        assert ((_buffer.getOffset() + FBEOffset()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset()) > _buffer.getSize())
-            return 0;
-
-        long size = 0;
-        _model.FBEOffset(FBEOffset());
-        for (long i = 0; (i < values.size()) && (i < _size); i++)
-        {
-            long offset = _model.set(values.get((int)i));
-            _model.FBEShift(offset);
-            size += offset;
+        var size: Long = 0
+        _model.FBEOffset = FBEOffset
+        var i: Long = 0
+        while (i < values.size && i < _size) {
+            val offset = _model.set(values[i.toInt()])
+            _model.FBEShift(offset)
+            size += offset
+            i++
         }
-        return size;
+        return size
     }
 }
 )CODE";
@@ -2934,8 +2716,19 @@ public final class FinalModelArray_NAME_ extends FinalModel
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_TYPE_"), type);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
-    code = std::regex_replace(code, std::regex("_ARRAY_"), (bytes ? "byte" : type) + "[]");
-    code = std::regex_replace(code, std::regex("_INIT_"), ((type != "byte[]") ? ("new " + (bytes ? "byte" : type) + "[(int)_size]") : "new byte[(int)_size][]"));
+    if (!optional && ((type == "Boolean") || (type == "Byte") || (type == "Short") || (type == "Int") || (type == "Long") || (type == "Float") || (type == "Double")))
+    {
+        code = std::regex_replace(code, std::regex("_ARRAY_"), type + "Array");
+        code = std::regex_replace(code, std::regex("_INIT_"), type + "Array(_size.toInt())");
+    }
+    else
+    {
+        code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type + ">");
+        if (optional)
+            code = std::regex_replace(code, std::regex("_INIT_"), "arrayOfNulls<" + type + ">(_size.toInt())");
+        else
+            code = std::regex_replace(code, std::regex("_INIT_"), "Array(_size.toInt()) { " + type + "(" + (((type == "ByteArray")) ? "0" : "") + ") }");
+    }
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -2955,7 +2748,7 @@ void GeneratorKotlin::GenerateFBEFinalModelVector(const std::string& package, co
     CppCommon::Directory::CreateTree(path);
 
     // Open the file
-    CppCommon::Path file = path / ("FinalModelVector" + name + ".java");
+    CppCommon::Path file = path / ("FinalModelVector" + name + ".kt");
     Open(file);
 
     // Generate headers
@@ -2969,325 +2762,179 @@ void GeneratorKotlin::GenerateFBEFinalModelVector(const std::string& package, co
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ vector final model class
-public final class FinalModelVector_NAME_ extends FinalModel
+class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
-    private final _MODEL_ _model;
-
-    public FinalModelVector_NAME_(Buffer buffer, long offset)
-    {
-        super(buffer, offset);
-        _model = new _MODEL_(buffer, offset);
-    }
+    private val _model = _MODEL_(buffer, offset)
 
     // Get the allocation size
-    public long FBEAllocationSize(_TYPE_[] values)
-    {
-        long size = 4;
-        for (var value : values)
-            size += _model.FBEAllocationSize(value);
-        return size;
+    fun FBEAllocationSize(values: ArrayList<_TYPE_>): Long {
+        var size: Long = 4
+        for (value in values)
+            size += _model.FBEAllocationSize(value)
+        return size
     }
-    public long FBEAllocationSize(ArrayList<_TYPE_> values)
-    {
-        long size = 4;
-        for (var value : values)
-            size += _model.FBEAllocationSize(value);
-        return size;
+    fun FBEAllocationSize(values: LinkedList<_TYPE_>): Long {
+        var size: Long = 4
+        for (value in values)
+            size += _model.FBEAllocationSize(value)
+        return size
     }
-    public long FBEAllocationSize(LinkedList<_TYPE_> values)
-    {
-        long size = 4;
-        for (var value : values)
-            size += _model.FBEAllocationSize(value);
-        return size;
-    }
-    public long FBEAllocationSize(HashSet<_TYPE_> values)
-    {
-        long size = 4;
-        for (var value : values)
-            size += _model.FBEAllocationSize(value);
-        return size;
+    fun FBEAllocationSize(values: HashSet<_TYPE_>): Long {
+        var size: Long = 4
+        for (value in values)
+            size += _model.FBEAllocationSize(value)
+        return size
     }
 
     // Check if the vector is valid
-    @Override
-    public long verify()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-            return Long.MAX_VALUE;
+    override fun verify(): Long {
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size)
+            return Long.MAX_VALUE
 
-        int fbeVectorSize = readInt32(FBEOffset());
+        val fbeVectorSize = readInt32(FBEOffset).toLong()
 
-        long size = 4;
-        _model.FBEOffset(FBEOffset() + 4);
-        for (int i = fbeVectorSize; i-- > 0;)
-        {
-            long offset = _model.verify();
+        var size: Long = 4
+        _model.FBEOffset = FBEOffset + 4
+        var i = fbeVectorSize
+        while (i-- > 0) {
+            val offset = _model.verify()
             if (offset == Long.MAX_VALUE)
-                return Long.MAX_VALUE;
-            _model.FBEShift(offset);
-            size += offset;
+                return Long.MAX_VALUE
+            _model.FBEShift(offset)
+            size += offset
         }
-        return size;
-    }
-
-    // Get the vector
-    public _TYPE_[] get(Size size)
-    {
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-        {
-            size.value = 0;
-            return _ZERO_;
-        }
-
-        long fbeVectorSize = readInt32(FBEOffset());
-        if (fbeVectorSize == 0)
-        {
-            size.value = 4;
-            return _ZERO_;
-        }
-
-        var values = _INIT_;
-
-        size.value = 4;
-        var offset = new Size();
-        _model.FBEOffset(FBEOffset() + 4);
-        for (long i = 0; i < fbeVectorSize; i++)
-        {
-            offset.value = 0;
-            values[(int)i] = _model.get(offset);
-            _model.FBEShift(offset.value);
-            size.value += offset.value;
-        }
-        return values;
-    }
-
-    // Get the vector
-    public long get(_TYPE_[] values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
-
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-        {
-            values = _ZERO_;
-            return 0;
-        }
-
-        long fbeVectorSize = readInt32(FBEOffset());
-        if (fbeVectorSize == 0)
-        {
-            values = _ZERO_;
-            return 4;
-        }
-
-        values = _INIT_;
-
-        long size = 4;
-        var offset = new Size();
-        _model.FBEOffset(FBEOffset() + 4);
-        for (long i = 0; i < fbeVectorSize; i++)
-        {
-            offset.value = 0;
-            values[(int)i] = _model.get(offset);
-            _model.FBEShift(offset.value);
-            size += offset.value;
-        }
-        return size;
+        return size
     }
 
     // Get the vector as ArrayList
-    public long get(ArrayList<_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun get(values: ArrayList<_TYPE_>): Long {
+        values.clear()
 
-        values.clear();
+        assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size)
+            return 0
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-            return 0;
+        val fbeVectorSize = readInt32(FBEOffset).toLong()
+        if (fbeVectorSize == 0L)
+            return 4
 
-        long fbeVectorSize = readInt32(FBEOffset());
-        if (fbeVectorSize == 0)
-            return 4;
+        values.ensureCapacity(fbeVectorSize.toInt())
 
-        values.ensureCapacity((int)fbeVectorSize);
-
-        long size = 4;
-        var offset = new Size();
-        _model.FBEOffset(FBEOffset() + 4);
-        for (long i = 0; i < fbeVectorSize; i++)
-        {
-            offset.value = 0;
-            _TYPE_ value = _model.get(offset);
-            values.add(value);
-            _model.FBEShift(offset.value);
-            size += offset.value;
+        var size: Long = 4
+        val offset = Size()
+        _model.FBEOffset = FBEOffset + 4
+        for (i in 0 until fbeVectorSize) {
+            offset.value = 0
+            val value = _model.get(offset)
+            values.add(value)
+            _model.FBEShift(offset.value)
+            size += offset.value
         }
-        return size;
+        return size
     }
 
     // Get the vector as LinkedList
-    public long get(LinkedList<_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun get(values: LinkedList<_TYPE_>): Long {
+        values.clear()
 
-        values.clear();
+        assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size)
+            return 0
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-            return 0;
+        val fbeVectorSize = readInt32(FBEOffset).toLong()
+        if (fbeVectorSize == 0L)
+            return 4
 
-        long fbeVectorSize = readInt32(FBEOffset());
-        if (fbeVectorSize == 0)
-            return 4;
-
-        long size = 4;
-        var offset = new Size();
-        _model.FBEOffset(FBEOffset() + 4);
-        for (long i = 0; i < fbeVectorSize; i++)
-        {
-            offset.value = 0;
-            _TYPE_ value = _model.get(offset);
-            values.add(value);
-            _model.FBEShift(offset.value);
-            size += offset.value;
+        var size: Long = 4
+        val offset = Size()
+        _model.FBEOffset = FBEOffset + 4
+        for (i in 0 until fbeVectorSize) {
+            offset.value = 0
+            val value = _model.get(offset)
+            values.add(value)
+            _model.FBEShift(offset.value)
+            size += offset.value
         }
-        return size;
+        return size
     }
 
     // Get the vector as HashSet
-    public long get(HashSet<_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun get(values: HashSet<_TYPE_>): Long {
+        values.clear()
 
-        values.clear();
+        assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size)
+            return 0
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-            return 0;
+        val fbeVectorSize = readInt32(FBEOffset).toLong()
+        if (fbeVectorSize == 0L)
+            return 4
 
-        long fbeVectorSize = readInt32(FBEOffset());
-        if (fbeVectorSize == 0)
-            return 4;
-
-        long size = 4;
-        var offset = new Size();
-        _model.FBEOffset(FBEOffset() + 4);
-        for (long i = 0; i < fbeVectorSize; i++)
-        {
-            offset.value = 0;
-            _TYPE_ value = _model.get(offset);
-            values.add(value);
-            _model.FBEShift(offset.value);
-            size += offset.value;
+        var size: Long = 4
+        val offset = Size()
+        _model.FBEOffset = FBEOffset + 4
+        for (i in 0 until fbeVectorSize) {
+            offset.value = 0
+            val value = _model.get(offset)
+            values.add(value)
+            _model.FBEShift(offset.value)
+            size += offset.value
         }
-        return size;
-    }
-
-    // Set the vector
-    public long set(_TYPE_[] values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
-
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-            return 0;
-
-        write(FBEOffset(), (int)values.length);
-
-        long size = 4;
-        _model.FBEOffset(FBEOffset() + 4);
-        for (var value : values)
-        {
-            long offset = _model.set(value);
-            _model.FBEShift(offset);
-            size += offset;
-        }
-        return size;
+        return size
     }
 
     // Set the vector as ArrayList
-    public long set(ArrayList<_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun set(values: ArrayList<_TYPE_>): Long {
+        assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size)
+            return 0
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-            return 0;
+        write(FBEOffset, values.size)
 
-        write(FBEOffset(), (int)values.size());
-
-        long size = 4;
-        _model.FBEOffset(FBEOffset() + 4);
-        for (var value : values)
-        {
-            long offset = _model.set(value);
-            _model.FBEShift(offset);
-            size += offset;
+        var size: Long = 4
+        _model.FBEOffset = FBEOffset + 4
+        for (value in values) {
+            val offset = _model.set(value)
+            _model.FBEShift(offset)
+            size += offset
         }
-        return size;
+        return size
     }
 
     // Set the vector as LinkedList
-    public long set(LinkedList<_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun set(values: LinkedList<_TYPE_>): Long {
+        assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size)
+            return 0
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-            return 0;
+        write(FBEOffset, values.size)
 
-        write(FBEOffset(), (int)values.size());
-
-        long size = 4;
-        _model.FBEOffset(FBEOffset() + 4);
-        for (var value : values)
-        {
-            long offset = _model.set(value);
-            _model.FBEShift(offset);
-            size += offset;
+        var size: Long = 4
+        _model.FBEOffset = FBEOffset + 4
+        for (value in values) {
+            val offset = _model.set(value)
+            _model.FBEShift(offset)
+            size += offset
         }
-        return size;
+        return size
     }
 
     // Set the vector as HashSet
-    public long set(HashSet<_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun set(values: HashSet<_TYPE_>): Long {
+        assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size)
+            return 0
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-            return 0;
+        write(FBEOffset, values.size)
 
-        write(FBEOffset(), (int)values.size());
-
-        long size = 4;
-        _model.FBEOffset(FBEOffset() + 4);
-        for (var value : values)
-        {
-            long offset = _model.set(value);
-            _model.FBEShift(offset);
-            size += offset;
+        var size: Long = 4
+        _model.FBEOffset = FBEOffset + 4
+        for (value in values) {
+            val offset = _model.set(value)
+            _model.FBEShift(offset)
+            size += offset
         }
-        return size;
+        return size
     }
 }
 )CODE";
@@ -3296,8 +2943,6 @@ public final class FinalModelVector_NAME_ extends FinalModel
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_TYPE_"), type);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
-    code = std::regex_replace(code, std::regex("_INIT_"), ((type != "byte[]") ? ("new " + type + "[(int)fbeVectorSize]") : "new byte[(int)fbeVectorSize][]"));
-    code = std::regex_replace(code, std::regex("_ZERO_"), ((type != "byte[]") ? ("new " + type + "[0]") : "new byte[0][]"));
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -3317,7 +2962,7 @@ void GeneratorKotlin::GenerateFBEFinalModelMap(const std::string& package, const
     CppCommon::Directory::CreateTree(path);
 
     // Open the file
-    CppCommon::Path file = path / ("FinalModelMap" + key_name + value_name + ".java");
+    CppCommon::Path file = path / ("FinalModelMap" + key_name + value_name + ".kt");
     Open(file);
 
     // Generate headers
@@ -3331,203 +2976,168 @@ void GeneratorKotlin::GenerateFBEFinalModelMap(const std::string& package, const
 
     std::string code = R"CODE(
 // Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map final model class
-public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends FinalModel
+class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
-    private final _KEY_MODEL_ _modelKey;
-    private final _VALUE_MODEL_ _modelValue;
-
-    public FinalModelMap_KEY_NAME__VALUE_NAME_(Buffer buffer, long offset)
-    {
-        super(buffer, offset);
-        _modelKey = new _KEY_MODEL_(buffer, offset);
-        _modelValue = new _VALUE_MODEL_(buffer, offset);
-    }
+    private val _modelKey = _KEY_MODEL_(buffer, offset)
+    private val _modelValue = _VALUE_MODEL_(buffer, offset)
 
     // Get the allocation size
-    public long FBEAllocationSize(TreeMap<_KEY_TYPE_, _VALUE_TYPE_> values)
-    {
-        long size = 4;
-        for (var value : values.entrySet())
-        {
-            size += _modelKey.FBEAllocationSize(value.getKey());
-            size += _modelValue.FBEAllocationSize(value.getValue());
+    fun FBEAllocationSize(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long {
+        var size: Long = 4
+        for ((key, value1) in values) {
+            size += _modelKey.FBEAllocationSize(key)
+            size += _modelValue.FBEAllocationSize(value1)
         }
-        return size;
+        return size
     }
-    public long FBEAllocationSize(HashMap<_KEY_TYPE_, _VALUE_TYPE_> values)
-    {
-        long size = 4;
-        for (var value : values.entrySet())
-        {
-            size += _modelKey.FBEAllocationSize(value.getKey());
-            size += _modelValue.FBEAllocationSize(value.getValue());
+    fun FBEAllocationSize(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long {
+        var size: Long = 4
+        for ((key, value1) in values) {
+            size += _modelKey.FBEAllocationSize(key)
+            size += _modelValue.FBEAllocationSize(value1)
         }
-        return size;
+        return size
     }
 
     // Check if the map is valid
-    @Override
-    public long verify()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-            return Long.MAX_VALUE;
+    override fun verify(): Long {
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size)
+            return Long.MAX_VALUE
 
-        int fbeMapSize = readInt32(FBEOffset());
+        val fbeMapSize = readInt32(FBEOffset).toLong()
 
-        long size = 4;
-        _modelKey.FBEOffset(FBEOffset() + 4);
-        _modelValue.FBEOffset(FBEOffset() + 4);
-        for (int i = fbeMapSize; i-- > 0;)
-        {
-            long offsetKey = _modelKey.verify();
+        var size: Long = 4
+        _modelKey.FBEOffset = FBEOffset + 4
+        _modelValue.FBEOffset = FBEOffset + 4
+        var i = fbeMapSize
+        while (i-- > 0) {
+            val offsetKey = _modelKey.verify()
             if (offsetKey == Long.MAX_VALUE)
-                return Long.MAX_VALUE;
-            _modelKey.FBEShift(offsetKey);
-            _modelValue.FBEShift(offsetKey);
-            size += offsetKey;
-            long offsetValue = _modelValue.verify();
+                return Long.MAX_VALUE
+            _modelKey.FBEShift(offsetKey)
+            _modelValue.FBEShift(offsetKey)
+            size += offsetKey
+            val offsetValue = _modelValue.verify()
             if (offsetValue == Long.MAX_VALUE)
-                return Long.MAX_VALUE;
-            _modelKey.FBEShift(offsetValue);
-            _modelValue.FBEShift(offsetValue);
-            size += offsetValue;
+                return Long.MAX_VALUE
+            _modelKey.FBEShift(offsetValue)
+            _modelValue.FBEShift(offsetValue)
+            size += offsetValue
         }
-        return size;
+        return size
     }
 
     // Get the map as TreeMap
-    public long get(TreeMap<_KEY_TYPE_, _VALUE_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun get(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long {
+        values.clear()
 
-        values.clear();
+        assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size)
+            return 0
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-            return 0;
+        val fbeMapSize = readInt32(FBEOffset).toLong()
+        if (fbeMapSize == 0L)
+            return 4
 
-        long fbeMapSize = readInt32(FBEOffset());
-        if (fbeMapSize == 0)
-            return 4;
-
-        long size = 4;
-        var offset = new Size();
-        _modelKey.FBEOffset(FBEOffset() + 4);
-        _modelValue.FBEOffset(FBEOffset() + 4);
-        for (long i = fbeMapSize; i-- > 0;)
-        {
-            offset.value = 0;
-            _KEY_TYPE_ key = _modelKey.get(offset);
-            _modelKey.FBEShift(offset.value);
-            _modelValue.FBEShift(offset.value);
-            size += offset.value;
-            offset.value = 0;
-            _VALUE_TYPE_ value = _modelValue.get(offset);
-            _modelKey.FBEShift(offset.value);
-            _modelValue.FBEShift(offset.value);
-            size += offset.value;
-            values.put(key, value);
+        var size: Long = 4
+        val offset = Size()
+        _modelKey.FBEOffset = FBEOffset + 4
+        _modelValue.FBEOffset = FBEOffset + 4
+        var i = fbeMapSize
+        while (i-- > 0) {
+            offset.value = 0
+            val key = _modelKey.get(offset)
+            _modelKey.FBEShift(offset.value)
+            _modelValue.FBEShift(offset.value)
+            size += offset.value
+            offset.value = 0
+            val value = _modelValue.get(offset)
+            _modelKey.FBEShift(offset.value)
+            _modelValue.FBEShift(offset.value)
+            size += offset.value
+            values[key] = value
         }
-        return size;
+        return size
     }
 
     // Get the map as HashMap
-    public long get(HashMap<_KEY_TYPE_, _VALUE_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun get(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long {
+        values.clear()
 
-        values.clear();
+        assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size)
+            return 0
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-            return 0;
+        val fbeMapSize = readInt32(FBEOffset).toLong()
+        if (fbeMapSize == 0L)
+            return 4
 
-        long fbeMapSize = readInt32(FBEOffset());
-        if (fbeMapSize == 0)
-            return 4;
+        var size: Long = 4
+        val offset = Size()
+        _modelKey.FBEOffset = FBEOffset + 4
+        _modelValue.FBEOffset = FBEOffset + 4
+        var i = fbeMapSize
+        while (i-- > 0) {
+            offset.value = 0
+            val key = _modelKey.get(offset)
+            _modelKey.FBEShift(offset.value)
+            _modelValue.FBEShift(offset.value)
+            size += offset.value
+            offset.value = 0
+            val value = _modelValue.get(offset)
+            _modelKey.FBEShift(offset.value)
+            _modelValue.FBEShift(offset.value)
+            size += offset.value
 
-        long size = 4;
-        var offset = new Size();
-        _modelKey.FBEOffset(FBEOffset() + 4);
-        _modelValue.FBEOffset(FBEOffset() + 4);
-        for (long i = fbeMapSize; i-- > 0;)
-        {
-            offset.value = 0;
-            _KEY_TYPE_ key = _modelKey.get(offset);
-            _modelKey.FBEShift(offset.value);
-            _modelValue.FBEShift(offset.value);
-            size += offset.value;
-            offset.value = 0;
-            _VALUE_TYPE_ value = _modelValue.get(offset);
-            _modelKey.FBEShift(offset.value);
-            _modelValue.FBEShift(offset.value);
-            size += offset.value;
-
-            values.put(key, value);
+            values[key] = value
         }
-        return size;
+        return size
     }
 
     // Set the map as TreeMap
-    public long set(TreeMap<_KEY_TYPE_, _VALUE_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun set(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long {
+        assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size)
+            return 0
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-            return 0;
+        write(FBEOffset, values.size)
 
-        write(FBEOffset(), (int)values.size());
-
-        long size = 4;
-        _modelKey.FBEOffset(FBEOffset() + 4);
-        _modelValue.FBEOffset(FBEOffset() + 4);
-        for (var value : values.entrySet())
-        {
-            long offsetKey = _modelKey.set(value.getKey());
-            _modelKey.FBEShift(offsetKey);
-            _modelValue.FBEShift(offsetKey);
-            long offsetValue = _modelValue.set(value.getValue());
-            _modelKey.FBEShift(offsetValue);
-            _modelValue.FBEShift(offsetValue);
-            size += offsetKey + offsetValue;
+        var size: Long = 4
+        _modelKey.FBEOffset = FBEOffset + 4
+        _modelValue.FBEOffset = FBEOffset + 4
+        for ((key, value1) in values) {
+            val offsetKey = _modelKey.set(key)
+            _modelKey.FBEShift(offsetKey)
+            _modelValue.FBEShift(offsetKey)
+            val offsetValue = _modelValue.set(value1)
+            _modelKey.FBEShift(offsetValue)
+            _modelValue.FBEShift(offsetValue)
+            size += offsetKey + offsetValue
         }
-        return size;
+        return size
     }
 
     // Set the vector as HashMap
-    public long set(HashMap<_KEY_TYPE_, _VALUE_TYPE_> values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
+    fun set(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long {
+        assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size)
+            return 0
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-            return 0;
+        write(FBEOffset, values.size)
 
-        write(FBEOffset(), (int)values.size());
-
-        long size = 4;
-        _modelKey.FBEOffset(FBEOffset() + 4);
-        _modelValue.FBEOffset(FBEOffset() + 4);
-        for (var value : values.entrySet())
-        {
-            long offsetKey = _modelKey.set(value.getKey());
-            _modelKey.FBEShift(offsetKey);
-            _modelValue.FBEShift(offsetKey);
-            long offsetValue = _modelValue.set(value.getValue());
-            _modelKey.FBEShift(offsetValue);
-            _modelValue.FBEShift(offsetValue);
-            size += offsetKey + offsetValue;
+        var size: Long = 4
+        _modelKey.FBEOffset = FBEOffset + 4
+        _modelValue.FBEOffset = FBEOffset + 4
+        for ((key, value1) in values) {
+            val offsetKey = _modelKey.set(key)
+            _modelKey.FBEShift(offsetKey)
+            _modelValue.FBEShift(offsetKey)
+            val offsetValue = _modelValue.set(value1)
+            _modelKey.FBEShift(offsetValue)
+            _modelValue.FBEShift(offsetValue)
+            size += offsetKey + offsetValue
         }
-        return size;
+        return size
     }
 }
 )CODE";
@@ -3636,7 +3246,7 @@ void GeneratorKotlin::GenerateFBESender(const std::string& package)
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / "Sender.java";
+    CppCommon::Path file = path / "Sender.kt";
     Open(file);
 
     // Generate headers
@@ -3645,48 +3255,43 @@ void GeneratorKotlin::GenerateFBESender(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding base sender class
-public abstract class Sender
+abstract class Sender
 {
-    private Buffer _buffer;
-    private boolean _logging;
-    private boolean _final;
-
     // Get the bytes buffer
-    public Buffer getBuffer() { return _buffer; }
-    // Get the logging flag
-    public boolean getLogging() { return _logging; }
+    var buffer: Buffer = Buffer()
+        private set
     // Enable/Disable logging
-    public void setLogging(boolean enable) { _logging = enable; }
+    var logging: Boolean = false
     // Get the final protocol flag
-    public boolean getFinal() { return _final; }
-    // Enable/Disable final protocol
-    protected void setFinal(boolean enable) { _final = enable; }
+    var final: Boolean = false
+        protected set
 
-    protected Sender() { _buffer = new Buffer(); }
-    protected Sender(Buffer buffer) { _buffer = buffer; }
+    protected constructor()
+    protected constructor(buffer: Buffer) { this.buffer = buffer }
 
     // Send serialized buffer.
     // Direct call of the method requires knowledge about internals of FBE models serialization.
     // Use it with care!
-    public long sendSerialized(long serialized)
-    {
-        assert (serialized > 0) : "Invalid size of the serialized buffer!";
+    fun sendSerialized(serialized: Long): Long {
+        assert(serialized > 0) { "Invalid size of the serialized buffer!" }
         if (serialized <= 0)
-            return 0;
+            return 0
 
         // Shift the send buffer
-        _buffer.shift(serialized);
+        buffer.shift(serialized)
 
         // Send the value
-        long sent = onSend(_buffer.getData(), 0, _buffer.getSize());
-        _buffer.remove(0, sent);
-        return sent;
+        val sent = onSend(buffer.data, 0, buffer.size)
+        buffer.remove(0, sent)
+        return sent
     }
 
     // Send message handler
-    protected abstract long onSend(byte[] buffer, long offset, long size);
+    protected abstract fun onSend(buffer: ByteArray, offset: Long, size: Long): Long
+
     // Send log message handler
-    protected void onSendLog(String message) {}
+    @Suppress("UNUSED_PARAMETER")
+    protected fun onSendLog(message: String) {}
 }
 )CODE";
 
@@ -3707,7 +3312,7 @@ void GeneratorKotlin::GenerateFBEReceiver(const std::string& package)
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / "Receiver.java";
+    CppCommon::Path file = path / "Receiver.kt";
     Open(file);
 
     // Generate headers
@@ -3716,273 +3321,238 @@ void GeneratorKotlin::GenerateFBEReceiver(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding base receiver class
-public abstract class Receiver
+abstract class Receiver
 {
-    private Buffer _buffer;
-    private boolean _logging;
-    private boolean _final;
-
     // Get the bytes buffer
-    public Buffer getBuffer() { return _buffer; }
-    // Get the logging flag
-    public boolean getLogging() { return _logging; }
+    var buffer: Buffer = Buffer()
+        private set
     // Enable/Disable logging
-    public void setLogging(boolean enable) { _logging = enable; }
+    var logging: Boolean = false
     // Get the final protocol flag
-    public boolean getFinal() { return _final; }
-    // Enable/Disable final protocol
-    protected void setFinal(boolean enable) { _final = enable; }
+    var final: Boolean = false
+        protected set
 
-    protected Receiver() { _buffer = new Buffer(); }
-    protected Receiver(Buffer buffer) { _buffer = buffer; }
+    protected constructor()
+    protected constructor(buffer: Buffer) { this.buffer = buffer }
 
     // Receive data
-    public void receive(Buffer buffer) { receive(buffer.getData(), 0, buffer.getSize()); }
-    public void receive(byte[] buffer) { receive(buffer, 0, buffer.length); }
-    public void receive(byte[] buffer, long offset, long size)
-    {
-        assert (buffer != null) : "Invalid buffer!";
-        if (buffer == null)
-            throw new IllegalArgumentException("Invalid buffer!");
-        assert ((offset + size) <= buffer.length) : "Invalid offset & size!";
-        if ((offset + size) > buffer.length)
-            throw new IllegalArgumentException("Invalid offset & size!");
+    fun receive(buffer: Buffer) { receive(buffer.data, 0, buffer.size) }
+    fun receive(buffer: ByteArray, offset: Long = 0, size: Long = buffer.size.toLong()) {
+        assert(offset + size <= buffer.size) { "Invalid offset & size!" }
+        if (offset + size > buffer.size)
+            throw IllegalArgumentException("Invalid offset & size!")
 
-        if (size == 0)
-            return;
+        if (size == 0L)
+            return
 
         // Storage buffer
-        long offset0 = _buffer.getOffset();
-        long offset1 = _buffer.getSize();
-        long size1 = _buffer.getSize();
+        var offset0 = this.buffer.offset
+        var offset1 = this.buffer.size
+        var size1 = this.buffer.size
 
         // Receive buffer
-        long offset2 = 0;
-        long size2 = size;
+        var offset2: Long = 0
 
         // While receive buffer is available to handle...
-        while (offset2 < size2)
-        {
-            byte[] messageBuffer = null;
-            long messageOffset = 0;
-            long messageSize = 0;
+        while (offset2 < size) {
+            var messageBuffer: ByteArray? = null
+            var messageOffset: Long = 0
+            var messageSize: Long = 0
 
             // Try to receive message size
-            boolean messageSizeCopied = false;
-            boolean messageSizeFound = false;
-            while (!messageSizeFound)
-            {
+            var messageSizeCopied = false
+            var messageSizeFound = false
+            while (!messageSizeFound) {
                 // Look into the storage buffer
-                if (offset0 < size1)
-                {
-                    long count = Math.min(size1 - offset0, 4);
-                    if (count == 4)
-                    {
-                        messageSizeCopied = true;
-                        messageSizeFound = true;
-                        messageSize = _buffer.readInt32(_buffer.getData(), offset0);
-                        offset0 += 4;
-                        break;
-                    }
-                    else
-                    {
+                if (offset0 < size1) {
+                    var count = Math.min(size1 - offset0, 4)
+                    if (count == 4L) {
+                        messageSizeCopied = true
+                        messageSizeFound = true
+                        messageSize = Buffer.readInt32(this.buffer.data, offset0).toLong()
+                        offset0 += 4
+                        break
+                    } else {
                         // Fill remaining data from the receive buffer
-                        if (offset2 < size2)
-                        {
-                            count = Math.min(size2 - offset2, 4 - count);
+                        if (offset2 < size) {
+                            count = Math.min(size - offset2, 4 - count)
 
                             // Allocate and refresh the storage buffer
-                            _buffer.allocate(count);
-                            size1 += count;
+                            this.buffer.allocate(count)
+                            size1 += count
 
-                            System.arraycopy(buffer, (int)(offset + offset2), _buffer.getData(), (int)offset1, (int)count);
-                            offset1 += count;
-                            offset2 += count;
-                            continue;
-                        }
-                        else
-                            break;
+                            System.arraycopy(buffer, (offset + offset2).toInt(), this.buffer.data, offset1.toInt(), count.toInt())
+                            offset1 += count
+                            offset2 += count
+                            continue
+                        } else
+                            break
                     }
                 }
 
                 // Look into the receive buffer
-                if (offset2 < size2)
-                {
-                    long count = Math.min(size2 - offset2, 4);
-                    if (count == 4)
-                    {
-                        messageSizeFound = true;
-                        messageSize = _buffer.readInt32(buffer, offset + offset2);
-                        offset2 += 4;
-                        break;
-                    }
-                    else
-                    {
+                if (offset2 < size) {
+                    val count = Math.min(size - offset2, 4)
+                    if (count == 4L) {
+                        messageSizeFound = true
+                        messageSize = Buffer.readInt32(buffer, offset + offset2).toLong()
+                        offset2 += 4
+                        break
+                    } else {
                         // Allocate and refresh the storage buffer
-                        _buffer.allocate(count);
-                        size1 += count;
+                        this.buffer.allocate(count)
+                        size1 += count
 
-                        System.arraycopy(buffer, (int)(offset + offset2), _buffer.getData(), (int)offset1, (int)count);
-                        offset1 += count;
-                        offset2 += count;
-                        continue;
+                        System.arraycopy(buffer, (offset + offset2).toInt(), this.buffer.data, offset1.toInt(), count.toInt())
+                        offset1 += count
+                        offset2 += count
+                        continue
                     }
-                }
-                else
-                    break;
+                } else
+                    break
             }
 
             if (!messageSizeFound)
-                return;
+                return
 
             // Check the message full size
-            assert (messageSize >= (4 + 4 + 4 + 4)) : "Invalid receive data!";
-            if (messageSize < (4 + 4 + 4 + 4))
-                return;
+            assert(messageSize >= 4 + 4 + 4 + 4) { "Invalid receive data!" }
+            if (messageSize < 4 + 4 + 4 + 4)
+                return
 
             // Try to receive message body
-            boolean messageFound = false;
-            while (!messageFound)
-            {
+            var messageFound = false
+            while (!messageFound) {
                 // Look into the storage buffer
-                if (offset0 < size1)
-                {
-                    long count = Math.min(size1 - offset0, messageSize - 4);
-                    if (count == (messageSize - 4))
-                    {
-                        messageFound = true;
-                        messageBuffer = _buffer.getData();
-                        messageOffset = offset0 - 4;
-                        offset0 += messageSize - 4;
-                        break;
-                    }
-                    else
-                    {
+                if (offset0 < size1) {
+                    var count = Math.min(size1 - offset0, messageSize - 4)
+                    if (count == messageSize - 4) {
+                        messageFound = true
+                        messageBuffer = this.buffer.data
+                        messageOffset = offset0 - 4
+                        offset0 += messageSize - 4
+                        break
+                    } else {
                         // Fill remaining data from the receive buffer
-                        if (offset2 < size2)
-                        {
+                        if (offset2 < size) {
                             // Copy message size into the storage buffer
-                            if (!messageSizeCopied)
-                            {
+                            if (!messageSizeCopied) {
                                 // Allocate and refresh the storage buffer
-                                _buffer.allocate(4);
-                                size1 += 4;
+                                this.buffer.allocate(4)
+                                size1 += 4
 
-                                _buffer.write(_buffer.getData(), offset0, (int)messageSize);
-                                offset0 += 4;
-                                offset1 += 4;
+                                Buffer.write(this.buffer.data, offset0, messageSize.toInt())
+                                offset0 += 4
+                                offset1 += 4
 
-                                messageSizeCopied = true;
+                                messageSizeCopied = true
                             }
 
-                            count = Math.min(size2 - offset2, messageSize - 4 - count);
+                            count = Math.min(size - offset2, messageSize - 4 - count)
 
                             // Allocate and refresh the storage buffer
-                            _buffer.allocate(count);
-                            size1 += count;
+                            this.buffer.allocate(count)
+                            size1 += count
 
-                            System.arraycopy(buffer, (int)(offset + offset2), _buffer.getData(), (int)offset1, (int)count);
-                            offset1 += count;
-                            offset2 += count;
-                            continue;
-                        }
-                        else
-                            break;
+                            System.arraycopy(buffer, (offset + offset2).toInt(), this.buffer.data, offset1.toInt(), count.toInt())
+                            offset1 += count
+                            offset2 += count
+                            continue
+                        } else
+                            break
                     }
                 }
 
                 // Look into the receive buffer
-                if (offset2 < size2)
-                {
-                    long count = Math.min(size2 - offset2, messageSize - 4);
-                    if (!messageSizeCopied && (count == (messageSize - 4)))
-                    {
-                        messageFound = true;
-                        messageBuffer = buffer;
-                        messageOffset = offset + offset2 - 4;
-                        offset2 += messageSize - 4;
-                        break;
-                    }
-                    else
-                    {
+                if (offset2 < size) {
+                    val count = Math.min(size - offset2, messageSize - 4)
+                    if (!messageSizeCopied && count == messageSize - 4) {
+                        messageFound = true
+                        messageBuffer = buffer
+                        messageOffset = offset + offset2 - 4
+                        offset2 += messageSize - 4
+                        break
+                    } else {
                         // Copy message size into the storage buffer
-                        if (!messageSizeCopied)
-                        {
+                        if (!messageSizeCopied) {
                             // Allocate and refresh the storage buffer
-                            _buffer.allocate(4);
-                            size1 += 4;
+                            this.buffer.allocate(4)
+                            size1 += 4
 
-                            _buffer.write(_buffer.getData(), offset0, (int)messageSize);
-                            offset0 += 4;
-                            offset1 += 4;
+                            Buffer.write(this.buffer.data, offset0, messageSize.toInt())
+                            offset0 += 4
+                            offset1 += 4
 
-                            messageSizeCopied = true;
+                            messageSizeCopied = true
                         }
 
                         // Allocate and refresh the storage buffer
-                        _buffer.allocate(count);
-                        size1 += count;
+                        this.buffer.allocate(count)
+                        size1 += count
 
-                        System.arraycopy(buffer, (int)(offset + offset2), _buffer.getData(), (int)offset1, (int)count);
-                        offset1 += count;
-                        offset2 += count;
-                        continue;
+                        System.arraycopy(buffer, (offset + offset2).toInt(), this.buffer.data, offset1.toInt(), count.toInt())
+                        offset1 += count
+                        offset2 += count
+                        continue
                     }
-                }
-                else
-                    break;
+                } else
+                    break
             }
 
-            if (!messageFound)
-            {
+            if (!messageFound) {
                 // Copy message size into the storage buffer
-                if (!messageSizeCopied)
-                {
+                if (!messageSizeCopied) {
                     // Allocate and refresh the storage buffer
-                    _buffer.allocate(4);
-                    size1 += 4;
+                    this.buffer.allocate(4)
+                    size1 += 4
 
-                    _buffer.write(_buffer.getData(), offset0, (int)messageSize);
-                    offset0 += 4;
-                    offset1 += 4;
+                    Buffer.write(this.buffer.data, offset0, messageSize.toInt())
+                    offset0 += 4
+                    offset1 += 4
 
-                    messageSizeCopied = true;
+                    @Suppress("UNUSED_VALUE")
+                    messageSizeCopied = true
                 }
-                return;
+                return
             }
 
-            int fbeStructSize;
-            int fbeStructType;
+            if (messageBuffer != null) {
 
-            // Read the message parameters
-            if (_final)
-            {
-                fbeStructSize = Buffer.readInt32(messageBuffer, messageOffset);
-                fbeStructType = Buffer.readInt32(messageBuffer, messageOffset + 4);
-            }
-            else
-            {
-                int fbeStructOffset = Buffer.readInt32(messageBuffer, messageOffset + 4);
-                fbeStructSize = Buffer.readInt32(messageBuffer, messageOffset + fbeStructOffset);
-                fbeStructType = Buffer.readInt32(messageBuffer, messageOffset + fbeStructOffset + 4);
-            }
+                @Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
+                val fbeStructSize: Int
+                val fbeStructType: Int
 
-            // Handle the message
-            onReceive(fbeStructType, messageBuffer, messageOffset, messageSize);
+                // Read the message parameters
+                if (final) {
+                    @Suppress("UNUSED_VALUE")
+                    fbeStructSize = Buffer.readInt32(messageBuffer, messageOffset)
+                    fbeStructType = Buffer.readInt32(messageBuffer, messageOffset + 4)
+                } else {
+                    val fbeStructOffset = Buffer.readInt32(messageBuffer, messageOffset + 4)
+                    @Suppress("UNUSED_VALUE")
+                    fbeStructSize = Buffer.readInt32(messageBuffer, messageOffset + fbeStructOffset)
+                    fbeStructType = Buffer.readInt32(messageBuffer, messageOffset + fbeStructOffset.toLong() + 4)
+                }
+
+                // Handle the message
+                onReceive(fbeStructType.toLong(), messageBuffer, messageOffset, messageSize)
+            }
 
             // Reset the storage buffer
-            _buffer.reset();
+            this.buffer.reset()
 
             // Refresh the storage buffer
-            offset1 = _buffer.getOffset();
-            size1 = _buffer.getSize();
+            offset1 = this.buffer.offset
+            size1 = this.buffer.size
         }
     }
 
     // Receive message handler
-    public abstract boolean onReceive(long type, byte[] buffer, long offset, long size);
+    abstract fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
+
     // Receive log message handler
-    protected void onReceiveLog(String message) {}
+    @Suppress("UNUSED_PARAMETER")
+    protected fun onReceiveLog(message: String) {}
 }
 )CODE";
 
@@ -4136,9 +3706,9 @@ void GeneratorKotlin::GenerateContainers(const std::shared_ptr<Package>& p, bool
                     if (field->array)
                     {
                         if (final)
-                            GenerateFBEFinalModelArray(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final), ((*field->type == "byte") && !field->optional));
+                            GenerateFBEFinalModelArray(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), field->optional, ConvertTypeFieldDeclaration(*field->type, field->optional, final));
                         else
-                            GenerateFBEFieldModelArray(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final), ((*field->type == "byte") && !field->optional));
+                            GenerateFBEFieldModelArray(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), field->optional, ConvertTypeFieldDeclaration(*field->type, field->optional, final));
                     }
                     if (field->vector || field->list || field->set)
                     {
@@ -4178,16 +3748,16 @@ void GeneratorKotlin::GeneratePackage(const std::shared_ptr<Package>& p)
     if (p->body)
     {
         // Generate child enums
-        for (const auto& child_e : p->body->enums)
-            GenerateEnum(p, child_e, path);
+        //for (const auto& child_e : p->body->enums)
+        //    GenerateEnum(p, child_e, path);
 
         // Generate child flags
-        for (const auto& child_f : p->body->flags)
-            GenerateFlags(p, child_f, path);
+        //for (const auto& child_f : p->body->flags)
+        //    GenerateFlags(p, child_f, path);
 
         // Generate child structs
-        for (const auto& child_s : p->body->structs)
-            GenerateStruct(p, child_s, path);
+        //for (const auto& child_s : p->body->structs)
+        //    GenerateStruct(p, child_s, path);
     }
 
     // Generate containers
@@ -4198,18 +3768,18 @@ void GeneratorKotlin::GeneratePackage(const std::shared_ptr<Package>& p)
     // Generate sender & receiver
     if (Sender())
     {
-        GenerateSender(p, false);
-        GenerateReceiver(p, false);
+        //GenerateSender(p, false);
+        //GenerateReceiver(p, false);
         if (Final())
         {
-            GenerateSender(p, true);
-            GenerateReceiver(p, true);
+            //GenerateSender(p, true);
+            //GenerateReceiver(p, true);
         }
     }
 
     // Generate JSON engine
-    if (JSON())
-        GenerateJson(p);
+    //if (JSON())
+    //    GenerateJson(p);
 }
 
 void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e, const CppCommon::Path& path)
@@ -6918,65 +6488,65 @@ std::string GeneratorKotlin::ConvertTypeName(const std::string& type, bool optio
     if (optional)
     {
         if (type == "bool")
-            return "Boolean";
+            return "Boolean?";
         else if (type == "byte")
-            return "Byte";
+            return "Byte?";
         else if (type == "char")
-            return "Character";
+            return "Char?";
         else if (type == "wchar")
-            return "Character";
+            return "Char?";
         else if (type == "int8")
-            return "Byte";
+            return "Byte?";
         else if (type == "uint8")
-            return "Byte";
+            return "Byte?";
         else if (type == "int16")
-            return "Short";
+            return "Short?";
         else if (type == "uint16")
-            return "Short";
+            return "Short?";
         else if (type == "int32")
-            return "Integer";
+            return "Int?";
         else if (type == "uint32")
-            return "Integer";
+            return "Int?";
         else if (type == "int64")
             return "Long";
         else if (type == "uint64")
-            return "Long";
+            return "Long?";
         else if (type == "float")
-            return "Float";
+            return "Float?";
         else if (type == "double")
-            return "Double";
+            return "Double?";
     }
 
     if (type == "bool")
-        return "boolean";
+        return "Boolean";
     else if (type == "byte")
-        return "byte";
+        return "Byte";
     else if (type == "bytes")
-        return "byte[]";
+        return "ByteArray";
     else if (type == "char")
-        return "char";
+        return "Char";
     else if (type == "wchar")
-        return "char";
+        return "Char";
     else if (type == "int8")
-        return "byte";
+        return "Byte";
     else if (type == "uint8")
-        return "byte";
+        return "Byte";
     else if (type == "int16")
-        return "short";
+        return "Short";
     else if (type == "uint16")
-        return "short";
+        return "Short";
     else if (type == "int32")
-        return "int";
+        return "Int";
     else if (type == "uint32")
-        return "int";
+        return "Int";
     else if (type == "int64")
-        return "long";
+        return "Long";
     else if (type == "uint64")
-        return "long";
+        return "Long";
     else if (type == "float")
-        return "float";
+        return "Float";
     else if (type == "double")
-        return "double";
+        return "Double";
     else if (type == "decimal")
         return "BigDecimal";
     else if (type == "string")
@@ -7073,44 +6643,46 @@ std::string GeneratorKotlin::ConvertTypeFieldName(const std::string& type)
 
 std::string GeneratorKotlin::ConvertTypeFieldType(const std::string& type, bool optional)
 {
+    std::string opt = optional ? "?" : "";
+
     if (type == "bool")
-        return "Boolean";
+        return "Boolean" + opt;
     else if (type == "byte")
-        return "Byte";
+        return "Byte" + opt;
     else if (type == "bytes")
-        return "byte[]";
+        return "ByteArray" + opt;
     else if (type == "char")
-        return "Character";
+        return "Char" + opt;
     else if (type == "wchar")
-        return "Character";
+        return "Char" + opt;
     else if (type == "int8")
-        return "Byte";
+        return "Byte" + opt;
     else if (type == "uint8")
-        return "Byte";
+        return "Byte" + opt;
     else if (type == "int16")
-        return "Short";
+        return "Short" + opt;
     else if (type == "uint16")
-        return "Short";
+        return "Short" + opt;
     else if (type == "int32")
-        return "Integer";
+        return "Int" + opt;
     else if (type == "uint32")
-        return "Integer";
+        return "Int" + opt;
     else if (type == "int64")
-        return "Long";
+        return "Long" + opt;
     else if (type == "uint64")
-        return "Long";
+        return "Long" + opt;
     else if (type == "float")
-        return "Float";
+        return "Float" + opt;
     else if (type == "double")
-        return "Double";
+        return "Double" + opt;
     else if (type == "decimal")
-        return "BigDecimal";
+        return "BigDecimal" + opt;
     else if (type == "string")
-        return "String";
+        return "String" + opt;
     else if (type == "timestamp")
-        return "Instant";
+        return "Instant" + opt;
     else if (type == "uuid")
-        return "UUID";
+        return "UUID" + opt;
 
     std::string ns = "";
     std::string t = type;
@@ -7122,7 +6694,7 @@ std::string GeneratorKotlin::ConvertTypeFieldType(const std::string& type, bool 
         t.assign(type, pos + 1, type.size() - pos);
     }
 
-    return ns + t;
+    return ns + t + opt;
 }
 
 std::string GeneratorKotlin::ConvertTypeFieldDeclaration(const std::string& type, bool optional, bool final)

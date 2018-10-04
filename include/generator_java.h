@@ -46,6 +46,7 @@ private:
     void GenerateFBEUUIDGenerator(const std::string& package);
     void GenerateFBEBuffer(const std::string& package);
     void GenerateFBEModel(const std::string& package);
+    void GenerateFBEPair(const std::string& package);
     void GenerateFBESize(const std::string& package);
     void GenerateFBEFieldModel(const std::string& package);
     void GenerateFBEFieldModel(const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults);

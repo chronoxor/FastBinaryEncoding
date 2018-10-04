@@ -15,7 +15,6 @@ import java.util.*;
 class FinalModelString(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
-    @Suppress("UNUSED_PARAMETER")
     fun FBEAllocationSize(value: String): Long {
         return (4 + 3 * (value.length + 1)).toLong()
     }

@@ -13,6 +13,7 @@ namespace FBE {
 void GeneratorJava::Generate(const std::shared_ptr<Package>& package)
 {
     GenerateFBEPackage("fbe");
+    GenerateFBEPair("fbe");
     GenerateFBEUUIDGenerator("fbe");
     GenerateFBEBuffer("fbe");
     GenerateFBEModel("fbe");
@@ -94,7 +95,6 @@ void GeneratorJava::GenerateImports(const std::string& package)
     WriteLineIndent("import java.nio.charset.*;");
     WriteLineIndent("import java.time.*;");
     WriteLineIndent("import java.util.*;");
-    WriteLineIndent("import javafx.util.*;");
 }
 
 void GeneratorJava::GenerateImports(const std::shared_ptr<Package>& p)
@@ -119,6 +119,54 @@ void GeneratorJava::GenerateFBEPackage(const std::string& package)
 
     // Create FBE package path
     CppCommon::Directory::CreateTree(path);
+}
+
+void GeneratorJava::GenerateFBEPair(const std::string& package)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / "Pair.java";
+    Open(file);
+
+    // Generate headers
+    GenerateHeader();
+    GenerateImports(package);
+
+    std::string code = R"CODE(
+// Fast Binary Encoding pair wrapper
+public final class Pair<K, V>
+{
+    private final K key;
+    private final V value;
+
+    // Initializes the pair with given key and value
+    public Pair(K key, V value)
+    {
+        this.key = key;
+        this.value = value;
+    }
+
+    // Get the pair key
+    public K getKey() { return key; }
+    // Get the pair value
+    public V getValue() { return value; }
+
+    // Create a new pair
+    public static <K, V> Pair<K, V> create(K key, V value) { return new Pair<K, V>(key, value); }
+}
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
 }
 
 void GeneratorJava::GenerateFBEUUIDGenerator(const std::string& package)
@@ -1663,39 +1711,6 @@ public final class FieldModelVector_NAME_ extends FieldModel
         return true;
     }
 
-    // Get the vector
-    public _TYPE_[] get()
-    {
-        long fbeVectorSize = getSize();
-
-        var values = _INIT_;
-
-        var fbeModel = getItem(0);
-        for (long i = 0; i < fbeVectorSize; i++)
-        {
-            values[(int)i] = fbeModel.get();
-            fbeModel.FBEShift(fbeModel.FBESize());
-        }
-        return values;
-    }
-
-    // Get the vector
-    public void get(_TYPE_[] values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
-
-        long fbeVectorSize = getSize();
-
-        var fbeModel = getItem(0);
-        for (long i = 0; (i < values.length) && (i < fbeVectorSize); i++)
-        {
-            values[(int)i] = fbeModel.get();
-            fbeModel.FBEShift(fbeModel.FBESize());
-        }
-    }
-
     // Get the vector as ArrayList
     public void get(ArrayList<_TYPE_> values)
     {
@@ -1764,25 +1779,6 @@ public final class FieldModelVector_NAME_ extends FieldModel
         }
     }
 
-    // Set the vector
-    public void set(_TYPE_[] values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
-
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return;
-
-        var fbeModel = resize(values.length);
-        for (var value : values)
-        {
-            fbeModel.set(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
-        }
-    }
-
     // Set the vector as ArrayList
     public void set(ArrayList<_TYPE_> values)
     {
@@ -1846,7 +1842,6 @@ public final class FieldModelVector_NAME_ extends FieldModel
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_TYPE_"), type);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
-    code = std::regex_replace(code, std::regex("_INIT_"), ((type != "byte[]") ? ("new " + type + "[(int)fbeVectorSize]") : "new byte[(int)fbeVectorSize][]"));
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -1961,7 +1956,7 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
         _modelValue.FBEOffset(fbeMapOffset + 4 + _modelKey.FBESize());
         _modelKey.FBEShift(index * (_modelKey.FBESize() + _modelValue.FBESize()));
         _modelValue.FBEShift(index * (_modelKey.FBESize() + _modelValue.FBESize()));
-        return new Pair<_KEY_MODEL_, _VALUE_MODEL_>(_modelKey, _modelValue);
+        return Pair.create(_modelKey, _modelValue);
     }
 
     // Resize the map and get its first model
@@ -1980,7 +1975,7 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
 
         _modelKey.FBEOffset(fbeMapOffset + 4);
         _modelValue.FBEOffset(fbeMapOffset + 4 + _modelKey.FBESize());
-        return new Pair<_KEY_MODEL_, _VALUE_MODEL_>(_modelKey, _modelValue);
+        return Pair.create(_modelKey, _modelValue);
     }
 
     // Check if the map is valid
@@ -3177,74 +3172,6 @@ public final class FinalModelVector_NAME_ extends FinalModel
         return size;
     }
 
-    // Get the vector
-    public _TYPE_[] get(Size size)
-    {
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-        {
-            size.value = 0;
-            return _ZERO_;
-        }
-
-        long fbeVectorSize = readInt32(FBEOffset());
-        if (fbeVectorSize == 0)
-        {
-            size.value = 4;
-            return _ZERO_;
-        }
-
-        var values = _INIT_;
-
-        size.value = 4;
-        var offset = new Size();
-        _model.FBEOffset(FBEOffset() + 4);
-        for (long i = 0; i < fbeVectorSize; i++)
-        {
-            offset.value = 0;
-            values[(int)i] = _model.get(offset);
-            _model.FBEShift(offset.value);
-            size.value += offset.value;
-        }
-        return values;
-    }
-
-    // Get the vector
-    public long get(_TYPE_[] values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
-
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-        {
-            values = _ZERO_;
-            return 0;
-        }
-
-        long fbeVectorSize = readInt32(FBEOffset());
-        if (fbeVectorSize == 0)
-        {
-            values = _ZERO_;
-            return 4;
-        }
-
-        values = _INIT_;
-
-        long size = 4;
-        var offset = new Size();
-        _model.FBEOffset(FBEOffset() + 4);
-        for (long i = 0; i < fbeVectorSize; i++)
-        {
-            offset.value = 0;
-            values[(int)i] = _model.get(offset);
-            _model.FBEShift(offset.value);
-            size += offset.value;
-        }
-        return size;
-    }
-
     // Get the vector as ArrayList
     public long get(ArrayList<_TYPE_> values)
     {
@@ -3340,30 +3267,6 @@ public final class FinalModelVector_NAME_ extends FinalModel
         return size;
     }
 
-    // Set the vector
-    public long set(_TYPE_[] values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
-
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-            return 0;
-
-        write(FBEOffset(), (int)values.length);
-
-        long size = 4;
-        _model.FBEOffset(FBEOffset() + 4);
-        for (var value : values)
-        {
-            long offset = _model.set(value);
-            _model.FBEShift(offset);
-            size += offset;
-        }
-        return size;
-    }
-
     // Set the vector as ArrayList
     public long set(ArrayList<_TYPE_> values)
     {
@@ -3442,8 +3345,6 @@ public final class FinalModelVector_NAME_ extends FinalModel
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_TYPE_"), type);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
-    code = std::regex_replace(code, std::regex("_INIT_"), ((type != "byte[]") ? ("new " + type + "[(int)fbeVectorSize]") : "new byte[(int)fbeVectorSize][]"));
-    code = std::regex_replace(code, std::regex("_ZERO_"), ((type != "byte[]") ? ("new " + type + "[0]") : "new byte[0][]"));
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);

@@ -77,74 +77,6 @@ public final class FinalModelVectorStructSimple extends FinalModel
         return size;
     }
 
-    // Get the vector
-    public StructSimple[] get(Size size)
-    {
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-        {
-            size.value = 0;
-            return new StructSimple[0];
-        }
-
-        long fbeVectorSize = readInt32(FBEOffset());
-        if (fbeVectorSize == 0)
-        {
-            size.value = 4;
-            return new StructSimple[0];
-        }
-
-        var values = new StructSimple[(int)fbeVectorSize];
-
-        size.value = 4;
-        var offset = new Size();
-        _model.FBEOffset(FBEOffset() + 4);
-        for (long i = 0; i < fbeVectorSize; i++)
-        {
-            offset.value = 0;
-            values[(int)i] = _model.get(offset);
-            _model.FBEShift(offset.value);
-            size.value += offset.value;
-        }
-        return values;
-    }
-
-    // Get the vector
-    public long get(StructSimple[] values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
-
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-        {
-            values = new StructSimple[0];
-            return 0;
-        }
-
-        long fbeVectorSize = readInt32(FBEOffset());
-        if (fbeVectorSize == 0)
-        {
-            values = new StructSimple[0];
-            return 4;
-        }
-
-        values = new StructSimple[(int)fbeVectorSize];
-
-        long size = 4;
-        var offset = new Size();
-        _model.FBEOffset(FBEOffset() + 4);
-        for (long i = 0; i < fbeVectorSize; i++)
-        {
-            offset.value = 0;
-            values[(int)i] = _model.get(offset);
-            _model.FBEShift(offset.value);
-            size += offset.value;
-        }
-        return size;
-    }
-
     // Get the vector as ArrayList
     public long get(ArrayList<StructSimple> values)
     {
@@ -236,30 +168,6 @@ public final class FinalModelVectorStructSimple extends FinalModel
             values.add(value);
             _model.FBEShift(offset.value);
             size += offset.value;
-        }
-        return size;
-    }
-
-    // Set the vector
-    public long set(StructSimple[] values)
-    {
-        assert (values != null) : "Invalid values parameter!";
-        if (values == null)
-            throw new IllegalArgumentException("Invalid values parameter!");
-
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
-            return 0;
-
-        write(FBEOffset(), (int)values.length);
-
-        long size = 4;
-        _model.FBEOffset(FBEOffset() + 4);
-        for (var value : values)
-        {
-            long offset = _model.set(value);
-            _model.FBEShift(offset);
-            size += offset;
         }
         return size;
     }
