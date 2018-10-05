@@ -85,6 +85,7 @@ class FieldModelOptionalStructNested(buffer: Buffer, offset: Long) : FieldModel(
         _buffer.unshift(fbeBegin)
     }
 
+    // Get the optional value
     fun get(defaults: StructNested? = null): StructNested? {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)

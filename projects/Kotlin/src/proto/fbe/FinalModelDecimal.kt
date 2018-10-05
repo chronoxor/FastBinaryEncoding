@@ -32,7 +32,7 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     }
 
     // Get the value
-    operator fun get(size: Size): BigDecimal {
+    fun get(size: Size): BigDecimal {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return BigDecimal.valueOf(0L)
 

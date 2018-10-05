@@ -15,7 +15,7 @@ import java.util.*;
 object UUIDGenerator
 {
     // Gregorian epoch
-    private const val GregorianEpoch = -12219292800000L
+    private const val GregorianEpoch = 0xFFFFF4E2F964AC00uL
 
     // Kotlin constants workaround
     private val Sign = java.lang.Long.parseUnsignedLong("8000000000000000", 16)
@@ -34,16 +34,16 @@ object UUIDGenerator
     // Last UUID generated timestamp
     private var last = GregorianEpoch
 
-    private fun makeNode(): Long = generator.nextLong() or 0x0000010000000000L
+    private fun makeNode(): ULong = generator.nextLong().toULong() or 0x0000010000000000uL
 
-    private fun makeNodeAndClockSequence(): Long {
-        val clock = generator.nextLong()
+    private fun makeNodeAndClockSequence(): ULong {
+        val clock = generator.nextLong().toULong()
 
-        var lsb: Long = 0
+        var lsb: ULong = 0u
         // Variant (2 bits)
-        lsb = lsb or Sign
+        lsb = lsb or 0x8000000000000000uL
         // Clock sequence (14 bits)
-        lsb = lsb or ((clock and 0x0000000000003FFFL) shl 48)
+        lsb = lsb or ((clock and 0x0000000000003FFFuL) shl 48)
         // 6 bytes
         lsb = lsb or node
         return lsb
@@ -54,7 +54,7 @@ object UUIDGenerator
 
     // Generate sequential UUID1 (time based version)
     fun sequential(): UUID {
-        val now = System.currentTimeMillis()
+        val now = System.currentTimeMillis().toULong()
 
         // Generate new clock sequence bytes to get rid of UUID duplicates
         synchronized(lock) {
@@ -63,16 +63,16 @@ object UUIDGenerator
             last = now
         }
 
-        val nanosSince = (now - GregorianEpoch) * 10000
+        val nanosSince = (now - GregorianEpoch) * 10000u
 
-        var msb = 0L
-        msb = msb or (Low and nanosSince).shl(32)
-        msb = msb or (Mid and nanosSince).ushr(16)
-        msb = msb or (High and nanosSince).ushr(48)
+        var msb = 0uL
+        msb = msb or (0x00000000FFFFFFFFuL and nanosSince).shl(32)
+        msb = msb or (0x0000FFFF00000000uL and nanosSince).shr(16)
+        msb = msb or (0xFFFF000000000000uL and nanosSince).shr(48)
         // Sets the version to 1
-        msb = msb or 0x0000000000001000L
+        msb = msb or 0x0000000000001000uL
 
-        return UUID(msb, nodeAndClockSequence)
+        return UUID(msb.toLong(), nodeAndClockSequence.toLong())
     }
 
     // Generate random UUID4 (randomly or pseudo-randomly generated version)

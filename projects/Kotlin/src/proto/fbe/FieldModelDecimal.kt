@@ -17,6 +17,7 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     // Field size
     override val FBESize: Long = 16
 
+    // Get the value
     fun get(defaults: BigDecimal = BigDecimal.valueOf(0L)): BigDecimal {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults

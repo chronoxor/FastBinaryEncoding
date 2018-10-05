@@ -85,6 +85,7 @@ class FieldModelOptionalDecimal(buffer: Buffer, offset: Long) : FieldModel(buffe
         _buffer.unshift(fbeBegin)
     }
 
+    // Get the optional value
     fun get(defaults: BigDecimal? = null): BigDecimal? {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)

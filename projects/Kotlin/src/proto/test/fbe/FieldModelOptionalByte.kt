@@ -85,6 +85,7 @@ class FieldModelOptionalByte(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         _buffer.unshift(fbeBegin)
     }
 
+    // Get the optional value
     fun get(defaults: Byte? = null): Byte? {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)

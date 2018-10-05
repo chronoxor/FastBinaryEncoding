@@ -48,19 +48,19 @@ public final class EnumInt8 implements Comparable<EnumInt8>
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return false;
 
-        if (!EnumInt8.class.isAssignableFrom(obj.getClass()))
+        if (!EnumInt8.class.isAssignableFrom(other.getClass()))
             return false;
 
-        final EnumInt8 other = (EnumInt8)obj;
+        final EnumInt8 enm = (EnumInt8)other;
 
-        if ((value == null) || (other.value == null))
+        if ((value == null) || (enm.value == null))
             return false;
-        if (value.getRaw() != other.value.getRaw())
+        if (value.getRaw() != enm.value.getRaw())
             return false;
         return true;
     }

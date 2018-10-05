@@ -85,6 +85,7 @@ class FieldModelOptionalprotoOrderSide(buffer: Buffer, offset: Long) : FieldMode
         _buffer.unshift(fbeBegin)
     }
 
+    // Get the optional value
     fun get(defaults: proto.OrderSide? = null): proto.OrderSide? {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)

@@ -85,6 +85,7 @@ class FieldModelOptionalFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(b
         _buffer.unshift(fbeBegin)
     }
 
+    // Get the optional value
     fun get(defaults: FlagsSimple? = null): FlagsSimple? {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)

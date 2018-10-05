@@ -154,7 +154,7 @@ class FieldModelMapInt32Byte(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Get the map as HashMap
-    operator fun get(values: HashMap<Int, Byte>) {
+    fun get(values: HashMap<Int, Byte>) {
         values.clear()
 
         val fbeMapSize = size

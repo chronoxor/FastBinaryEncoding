@@ -85,6 +85,7 @@ class FieldModelOptionalEnumTyped(buffer: Buffer, offset: Long) : FieldModel(buf
         _buffer.unshift(fbeBegin)
     }
 
+    // Get the optional value
     fun get(defaults: EnumTyped? = null): EnumTyped? {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)

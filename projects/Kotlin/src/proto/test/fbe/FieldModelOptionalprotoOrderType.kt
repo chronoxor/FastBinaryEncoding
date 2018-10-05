@@ -85,6 +85,7 @@ class FieldModelOptionalprotoOrderType(buffer: Buffer, offset: Long) : FieldMode
         _buffer.unshift(fbeBegin)
     }
 
+    // Get the optional value
     fun get(defaults: proto.OrderType? = null): proto.OrderType? {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)

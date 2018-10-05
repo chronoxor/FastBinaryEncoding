@@ -92,12 +92,14 @@ private:
 
     bool IsKnownType(const std::string& type);
     bool IsPrimitiveType(const std::string& type, bool optional);
+    bool IsUnsignedType(const std::string& type);
 
     std::string ConvertEnumBase(const std::string& type);
     std::string ConvertEnumType(const std::string& type);
     std::string ConvertEnumSize(const std::string& type);
     std::string ConvertEnumGet(const std::string& type);
     std::string ConvertEnumRead(const std::string& type);
+    std::string ConvertEnumTo(const std::string& type);
     std::string ConvertEnumConstant(const std::string& type, const std::string& value, bool optional);
     std::string ConvertEnumConstantPrefix(const std::string& type);
     std::string ConvertEnumConstantSuffix(const std::string& type);

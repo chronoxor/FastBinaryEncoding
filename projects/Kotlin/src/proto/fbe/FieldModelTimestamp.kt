@@ -17,6 +17,7 @@ class FieldModelTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     // Field size
     override val FBESize: Long = 8
 
+    // Get the value
     fun get(defaults: Instant = Instant.EPOCH): Instant {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults

@@ -47,19 +47,19 @@ public final class OrderType implements Comparable<OrderType>
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return false;
 
-        if (!OrderType.class.isAssignableFrom(obj.getClass()))
+        if (!OrderType.class.isAssignableFrom(other.getClass()))
             return false;
 
-        final OrderType other = (OrderType)obj;
+        final OrderType enm = (OrderType)other;
 
-        if ((value == null) || (other.value == null))
+        if ((value == null) || (enm.value == null))
             return false;
-        if (value.getRaw() != other.value.getRaw())
+        if (value.getRaw() != enm.value.getRaw())
             return false;
         return true;
     }

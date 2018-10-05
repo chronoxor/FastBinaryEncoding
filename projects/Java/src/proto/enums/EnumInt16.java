@@ -48,19 +48,19 @@ public final class EnumInt16 implements Comparable<EnumInt16>
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return false;
 
-        if (!EnumInt16.class.isAssignableFrom(obj.getClass()))
+        if (!EnumInt16.class.isAssignableFrom(other.getClass()))
             return false;
 
-        final EnumInt16 other = (EnumInt16)obj;
+        final EnumInt16 enm = (EnumInt16)other;
 
-        if ((value == null) || (other.value == null))
+        if ((value == null) || (enm.value == null))
             return false;
-        if (value.getRaw() != other.value.getRaw())
+        if (value.getRaw() != enm.value.getRaw())
             return false;
         return true;
     }

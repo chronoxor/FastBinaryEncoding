@@ -85,6 +85,7 @@ class FieldModelOptionalBoolean(buffer: Buffer, offset: Long) : FieldModel(buffe
         _buffer.unshift(fbeBegin)
     }
 
+    // Get the optional value
     fun get(defaults: Boolean? = null): Boolean? {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)

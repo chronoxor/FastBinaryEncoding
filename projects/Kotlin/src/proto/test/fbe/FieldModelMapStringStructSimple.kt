@@ -154,7 +154,7 @@ class FieldModelMapStringStructSimple(buffer: Buffer, offset: Long) : FieldModel
     }
 
     // Get the map as HashMap
-    operator fun get(values: HashMap<String, StructSimple>) {
+    fun get(values: HashMap<String, StructSimple>) {
         values.clear()
 
         val fbeMapSize = size

@@ -85,6 +85,7 @@ class FieldModelOptionalprotoBalance(buffer: Buffer, offset: Long) : FieldModel(
         _buffer.unshift(fbeBegin)
     }
 
+    // Get the optional value
     fun get(defaults: proto.Balance? = null): proto.Balance? {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)

@@ -144,10 +144,21 @@ class Buffer
             return buffer[index]
         }
 
+        fun readUInt8(buffer: ByteArray, offset: Long): UByte {
+            val index = offset.toInt()
+            return buffer[index].toUByte()
+        }
+
         fun readInt16(buffer: ByteArray, offset: Long): Short {
             val index = offset.toInt()
             return (((buffer[index + 0].toInt() and 0xFF) shl 0) or
                     ((buffer[index + 1].toInt() and 0xFF) shl 8)).toShort()
+        }
+
+        fun readUInt16(buffer: ByteArray, offset: Long): UShort {
+            val index = offset.toInt()
+            return (((buffer[index + 0].toUInt() and 0xFFu) shl 0) or
+                    ((buffer[index + 1].toUInt() and 0xFFu) shl 8)).toUShort()
         }
 
         fun readInt32(buffer: ByteArray, offset: Long): Int {
@@ -156,6 +167,14 @@ class Buffer
                    ((buffer[index + 1].toInt() and 0xFF) shl  8) or
                    ((buffer[index + 2].toInt() and 0xFF) shl 16) or
                    ((buffer[index + 3].toInt() and 0xFF) shl 24)
+        }
+
+        fun readUInt32(buffer: ByteArray, offset: Long): UInt {
+            val index = offset.toInt()
+            return ((buffer[index + 0].toUInt() and 0xFFu) shl  0) or
+                   ((buffer[index + 1].toUInt() and 0xFFu) shl  8) or
+                   ((buffer[index + 2].toUInt() and 0xFFu) shl 16) or
+                   ((buffer[index + 3].toUInt() and 0xFFu) shl 24)
         }
 
         fun readInt64(buffer: ByteArray, offset: Long): Long {
@@ -168,6 +187,18 @@ class Buffer
                    ((buffer[index + 5].toLong() and 0xFF) shl 40) or
                    ((buffer[index + 6].toLong() and 0xFF) shl 48) or
                    ((buffer[index + 7].toLong() and 0xFF) shl 56)
+        }
+
+        fun readUInt64(buffer: ByteArray, offset: Long): ULong {
+            val index = offset.toInt()
+            return ((buffer[index + 0].toULong() and 0xFFu) shl  0) or
+                   ((buffer[index + 1].toULong() and 0xFFu) shl  8) or
+                   ((buffer[index + 3].toULong() and 0xFFu) shl 24) or
+                   ((buffer[index + 2].toULong() and 0xFFu) shl 16) or
+                   ((buffer[index + 4].toULong() and 0xFFu) shl 32) or
+                   ((buffer[index + 5].toULong() and 0xFFu) shl 40) or
+                   ((buffer[index + 6].toULong() and 0xFFu) shl 48) or
+                   ((buffer[index + 7].toULong() and 0xFFu) shl 56)
         }
 
         private fun readInt64BE(buffer: ByteArray, offset: Long): Long {
@@ -214,9 +245,18 @@ class Buffer
             buffer[offset.toInt()] = value
         }
 
+        fun write(buffer: ByteArray, offset: Long, value: UByte) {
+            buffer[offset.toInt()] = value.toByte()
+        }
+
         fun write(buffer: ByteArray, offset: Long, value: Short) {
             buffer[offset.toInt() + 0] = (value.toInt() shr 0).toByte()
             buffer[offset.toInt() + 1] = (value.toInt() shr 8).toByte()
+        }
+
+        fun write(buffer: ByteArray, offset: Long, value: UShort) {
+            buffer[offset.toInt() + 0] = (value.toUInt() shr 0).toByte()
+            buffer[offset.toInt() + 1] = (value.toUInt() shr 8).toByte()
         }
 
         fun write(buffer: ByteArray, offset: Long, value: Int) {
@@ -226,7 +266,25 @@ class Buffer
             buffer[offset.toInt() + 3] = (value shr 24).toByte()
         }
 
+        fun write(buffer: ByteArray, offset: Long, value: UInt) {
+            buffer[offset.toInt() + 0] = (value shr  0).toByte()
+            buffer[offset.toInt() + 1] = (value shr  8).toByte()
+            buffer[offset.toInt() + 2] = (value shr 16).toByte()
+            buffer[offset.toInt() + 3] = (value shr 24).toByte()
+        }
+
         fun write(buffer: ByteArray, offset: Long, value: Long) {
+            buffer[offset.toInt() + 0] = (value shr  0).toByte()
+            buffer[offset.toInt() + 1] = (value shr  8).toByte()
+            buffer[offset.toInt() + 2] = (value shr 16).toByte()
+            buffer[offset.toInt() + 3] = (value shr 24).toByte()
+            buffer[offset.toInt() + 4] = (value shr 32).toByte()
+            buffer[offset.toInt() + 5] = (value shr 40).toByte()
+            buffer[offset.toInt() + 6] = (value shr 48).toByte()
+            buffer[offset.toInt() + 7] = (value shr 56).toByte()
+        }
+
+        fun write(buffer: ByteArray, offset: Long, value: ULong) {
             buffer[offset.toInt() + 0] = (value shr  0).toByte()
             buffer[offset.toInt() + 1] = (value shr  8).toByte()
             buffer[offset.toInt() + 2] = (value shr 16).toByte()

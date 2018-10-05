@@ -85,6 +85,7 @@ class FieldModelOptionalStructSimple(buffer: Buffer, offset: Long) : FieldModel(
         _buffer.unshift(fbeBegin)
     }
 
+    // Get the optional value
     fun get(defaults: StructSimple? = null): StructSimple? {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)

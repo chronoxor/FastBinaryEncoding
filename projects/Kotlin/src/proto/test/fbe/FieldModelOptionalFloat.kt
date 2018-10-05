@@ -85,6 +85,7 @@ class FieldModelOptionalFloat(buffer: Buffer, offset: Long) : FieldModel(buffer,
         _buffer.unshift(fbeBegin)
     }
 
+    // Get the optional value
     fun get(defaults: Float? = null): Float? {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)

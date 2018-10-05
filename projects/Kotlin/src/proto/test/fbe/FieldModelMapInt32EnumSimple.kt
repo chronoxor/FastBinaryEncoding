@@ -154,7 +154,7 @@ class FieldModelMapInt32EnumSimple(buffer: Buffer, offset: Long) : FieldModel(bu
     }
 
     // Get the map as HashMap
-    operator fun get(values: HashMap<Int, EnumSimple>) {
+    fun get(values: HashMap<Int, EnumSimple>) {
         values.clear()
 
         val fbeMapSize = size

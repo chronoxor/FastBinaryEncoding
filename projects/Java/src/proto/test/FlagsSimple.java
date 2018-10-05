@@ -94,17 +94,17 @@ public final class FlagsSimple implements Comparable<FlagsSimple>
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return false;
 
-        if (!FlagsSimple.class.isAssignableFrom(obj.getClass()))
+        if (!FlagsSimple.class.isAssignableFrom(other.getClass()))
             return false;
 
-        final FlagsSimple other = (FlagsSimple)obj;
+        final FlagsSimple flg = (FlagsSimple)other;
 
-        if (flags != other.flags)
+        if (flags != flg.flags)
             return false;
         return true;
     }

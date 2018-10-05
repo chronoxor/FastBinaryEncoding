@@ -85,6 +85,7 @@ class FieldModelOptionalInt32(buffer: Buffer, offset: Long) : FieldModel(buffer,
         _buffer.unshift(fbeBegin)
     }
 
+    // Get the optional value
     fun get(defaults: Int? = null): Int? {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)

@@ -154,7 +154,7 @@ class FieldModelMapStringOptionalEnumSimple(buffer: Buffer, offset: Long) : Fiel
     }
 
     // Get the map as HashMap
-    operator fun get(values: HashMap<String, EnumSimple?>) {
+    fun get(values: HashMap<String, EnumSimple?>) {
         values.clear()
 
         val fbeMapSize = size

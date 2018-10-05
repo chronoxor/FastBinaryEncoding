@@ -34,9 +34,13 @@ abstract class FinalModel protected constructor(protected var _buffer: Buffer, p
     protected fun readChar(offset: Long): Char { return Buffer.readChar(_buffer.data, _buffer.offset + offset) }
     protected fun readWChar(offset: Long): Char { return Buffer.readWChar(_buffer.data, _buffer.offset + offset) }
     protected fun readInt8(offset: Long): Byte { return Buffer.readInt8(_buffer.data, _buffer.offset + offset) }
+    protected fun readUInt8(offset: Long): UByte { return Buffer.readUInt8(_buffer.data, _buffer.offset + offset) }
     protected fun readInt16(offset: Long): Short { return Buffer.readInt16(_buffer.data, _buffer.offset + offset) }
+    protected fun readUInt16(offset: Long): UShort { return Buffer.readUInt16(_buffer.data, _buffer.offset + offset) }
     protected fun readInt32(offset: Long): Int { return Buffer.readInt32(_buffer.data, _buffer.offset + offset) }
+    protected fun readUInt32(offset: Long): UInt { return Buffer.readUInt32(_buffer.data, _buffer.offset + offset) }
     protected fun readInt64(offset: Long): Long { return Buffer.readInt64(_buffer.data, _buffer.offset + offset) }
+    protected fun readUInt64(offset: Long): ULong { return Buffer.readUInt64(_buffer.data, _buffer.offset + offset) }
     protected fun readFloat(offset: Long): Float { return Buffer.readFloat(_buffer.data, _buffer.offset + offset) }
     protected fun readDouble(offset: Long): Double { return Buffer.readDouble(_buffer.data, _buffer.offset + offset) }
     protected fun readUUID(offset: Long): UUID { return Buffer.readUUID(_buffer.data, _buffer.offset + offset) }
@@ -44,9 +48,13 @@ abstract class FinalModel protected constructor(protected var _buffer: Buffer, p
     protected fun readString(offset: Long, size: Long): String { return Buffer.readString(_buffer.data, _buffer.offset + offset, size) }
     protected fun write(offset: Long, value: Boolean) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Byte) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: UByte) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Short) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: UShort) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Int) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: UInt) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Long) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: ULong) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Float) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Double) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: UUID) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }

@@ -154,7 +154,7 @@ class FieldModelMapStructSimpleStructNested(buffer: Buffer, offset: Long) : Fiel
     }
 
     // Get the map as HashMap
-    operator fun get(values: HashMap<StructSimple, StructNested>) {
+    fun get(values: HashMap<StructSimple, StructNested>) {
         values.clear()
 
         val fbeMapSize = size

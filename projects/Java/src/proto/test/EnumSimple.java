@@ -49,19 +49,19 @@ public final class EnumSimple implements Comparable<EnumSimple>
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return false;
 
-        if (!EnumSimple.class.isAssignableFrom(obj.getClass()))
+        if (!EnumSimple.class.isAssignableFrom(other.getClass()))
             return false;
 
-        final EnumSimple other = (EnumSimple)obj;
+        final EnumSimple enm = (EnumSimple)other;
 
-        if ((value == null) || (other.value == null))
+        if ((value == null) || (enm.value == null))
             return false;
-        if (value.getRaw() != other.value.getRaw())
+        if (value.getRaw() != enm.value.getRaw())
             return false;
         return true;
     }

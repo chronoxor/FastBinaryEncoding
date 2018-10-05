@@ -49,6 +49,7 @@ class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
         return true
     }
 
+    // Get the string value
     fun get(defaults: String = ""): String {
         var value: String = defaults
 

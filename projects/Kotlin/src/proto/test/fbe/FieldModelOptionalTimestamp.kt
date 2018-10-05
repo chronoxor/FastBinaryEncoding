@@ -85,6 +85,7 @@ class FieldModelOptionalTimestamp(buffer: Buffer, offset: Long) : FieldModel(buf
         _buffer.unshift(fbeBegin)
     }
 
+    // Get the optional value
     fun get(defaults: Instant? = null): Instant? {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)

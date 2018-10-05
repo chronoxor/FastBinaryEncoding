@@ -85,6 +85,7 @@ class FieldModelOptionalChar(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         _buffer.unshift(fbeBegin)
     }
 
+    // Get the optional value
     fun get(defaults: Char? = null): Char? {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)

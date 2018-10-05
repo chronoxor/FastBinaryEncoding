@@ -48,19 +48,19 @@ public final class EnumWChar implements Comparable<EnumWChar>
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return false;
 
-        if (!EnumWChar.class.isAssignableFrom(obj.getClass()))
+        if (!EnumWChar.class.isAssignableFrom(other.getClass()))
             return false;
 
-        final EnumWChar other = (EnumWChar)obj;
+        final EnumWChar enm = (EnumWChar)other;
 
-        if ((value == null) || (other.value == null))
+        if ((value == null) || (enm.value == null))
             return false;
-        if (value.getRaw() != other.value.getRaw())
+        if (value.getRaw() != enm.value.getRaw())
             return false;
         return true;
     }

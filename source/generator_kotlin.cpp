@@ -22,9 +22,13 @@ void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEFieldModel("fbe", "Char", "Char", ".toByte()", "1", "'\\u0000'");
     GenerateFBEFieldModel("fbe", "WChar", "Char", ".toInt()", "4", "'\\u0000'");
     GenerateFBEFieldModel("fbe", "Int8", "Byte", "", "1", "0.toByte()");
+    GenerateFBEFieldModel("fbe", "UInt8", "UByte", "", "1", "0.toUByte()");
     GenerateFBEFieldModel("fbe", "Int16", "Short", "", "2", "0.toShort()");
+    GenerateFBEFieldModel("fbe", "UInt16", "UShort", "", "2", "0.toUShort()");
     GenerateFBEFieldModel("fbe", "Int32", "Int", "", "4", "0");
+    GenerateFBEFieldModel("fbe", "UInt32", "UInt", "", "4", "0u");
     GenerateFBEFieldModel("fbe", "Int64", "Long", "", "8", "0L");
+    GenerateFBEFieldModel("fbe", "UInt64", "ULong", "", "8", "0uL");
     GenerateFBEFieldModel("fbe", "Float", "Float", "", "4", "0.0f");
     GenerateFBEFieldModel("fbe", "Double", "Double", "", "8", "0.0");
     GenerateFBEFieldModel("fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
@@ -41,9 +45,13 @@ void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModel("fbe", "Char", "Char", ".toByte()", "1", "'\\u0000'");
         GenerateFBEFinalModel("fbe", "WChar", "Char", ".toInt()", "4", "'\\u0000'");
         GenerateFBEFinalModel("fbe", "Int8", "Byte", "", "1", "0.toByte()");
+        GenerateFBEFinalModel("fbe", "UInt8", "UByte", "", "1", "0.toUByte()");
         GenerateFBEFinalModel("fbe", "Int16", "Short", "", "2", "0.toShort()");
+        GenerateFBEFinalModel("fbe", "UInt16", "UShort", "", "2", "0.toUShort()");
         GenerateFBEFinalModel("fbe", "Int32", "Int", "", "4", "0");
+        GenerateFBEFinalModel("fbe", "UInt32", "UInt", "", "4", "0u");
         GenerateFBEFinalModel("fbe", "Int64", "Long", "", "8", "0L");
+        GenerateFBEFinalModel("fbe", "UInt64", "ULong", "", "8", "0uL");
         GenerateFBEFinalModel("fbe", "Float", "Float", "", "4", "0.0f");
         GenerateFBEFinalModel("fbe", "Double", "Double", "", "8", "0.0");
         GenerateFBEFinalModel("fbe", "UUID", "UUID", "", "16", "UUIDGenerator.nil()");
@@ -137,7 +145,7 @@ void GeneratorKotlin::GenerateFBEUUIDGenerator(const std::string& package)
 object UUIDGenerator
 {
     // Gregorian epoch
-    private const val GregorianEpoch = -12219292800000L
+    private const val GregorianEpoch = 0xFFFFF4E2F964AC00uL
 
     // Kotlin constants workaround
     private val Sign = java.lang.Long.parseUnsignedLong("8000000000000000", 16)
@@ -156,16 +164,16 @@ object UUIDGenerator
     // Last UUID generated timestamp
     private var last = GregorianEpoch
 
-    private fun makeNode(): Long = generator.nextLong() or 0x0000010000000000L
+    private fun makeNode(): ULong = generator.nextLong().toULong() or 0x0000010000000000uL
 
-    private fun makeNodeAndClockSequence(): Long {
-        val clock = generator.nextLong()
+    private fun makeNodeAndClockSequence(): ULong {
+        val clock = generator.nextLong().toULong()
 
-        var lsb: Long = 0
+        var lsb: ULong = 0u
         // Variant (2 bits)
-        lsb = lsb or Sign
+        lsb = lsb or 0x8000000000000000uL
         // Clock sequence (14 bits)
-        lsb = lsb or ((clock and 0x0000000000003FFFL) shl 48)
+        lsb = lsb or ((clock and 0x0000000000003FFFuL) shl 48)
         // 6 bytes
         lsb = lsb or node
         return lsb
@@ -176,7 +184,7 @@ object UUIDGenerator
 
     // Generate sequential UUID1 (time based version)
     fun sequential(): UUID {
-        val now = System.currentTimeMillis()
+        val now = System.currentTimeMillis().toULong()
 
         // Generate new clock sequence bytes to get rid of UUID duplicates
         synchronized(lock) {
@@ -185,16 +193,16 @@ object UUIDGenerator
             last = now
         }
 
-        val nanosSince = (now - GregorianEpoch) * 10000
+        val nanosSince = (now - GregorianEpoch) * 10000u
 
-        var msb = 0L
-        msb = msb or (Low and nanosSince).shl(32)
-        msb = msb or (Mid and nanosSince).ushr(16)
-        msb = msb or (High and nanosSince).ushr(48)
+        var msb = 0uL
+        msb = msb or (0x00000000FFFFFFFFuL and nanosSince).shl(32)
+        msb = msb or (0x0000FFFF00000000uL and nanosSince).shr(16)
+        msb = msb or (0xFFFF000000000000uL and nanosSince).shr(48)
         // Sets the version to 1
-        msb = msb or 0x0000000000001000L
+        msb = msb or 0x0000000000001000uL
 
-        return UUID(msb, nodeAndClockSequence)
+        return UUID(msb.toLong(), nodeAndClockSequence.toLong())
     }
 
     // Generate random UUID4 (randomly or pseudo-randomly generated version)
@@ -360,10 +368,21 @@ class Buffer
             return buffer[index]
         }
 
+        fun readUInt8(buffer: ByteArray, offset: Long): UByte {
+            val index = offset.toInt()
+            return buffer[index].toUByte()
+        }
+
         fun readInt16(buffer: ByteArray, offset: Long): Short {
             val index = offset.toInt()
             return (((buffer[index + 0].toInt() and 0xFF) shl 0) or
                     ((buffer[index + 1].toInt() and 0xFF) shl 8)).toShort()
+        }
+
+        fun readUInt16(buffer: ByteArray, offset: Long): UShort {
+            val index = offset.toInt()
+            return (((buffer[index + 0].toUInt() and 0xFFu) shl 0) or
+                    ((buffer[index + 1].toUInt() and 0xFFu) shl 8)).toUShort()
         }
 
         fun readInt32(buffer: ByteArray, offset: Long): Int {
@@ -372,6 +391,14 @@ class Buffer
                    ((buffer[index + 1].toInt() and 0xFF) shl  8) or
                    ((buffer[index + 2].toInt() and 0xFF) shl 16) or
                    ((buffer[index + 3].toInt() and 0xFF) shl 24)
+        }
+
+        fun readUInt32(buffer: ByteArray, offset: Long): UInt {
+            val index = offset.toInt()
+            return ((buffer[index + 0].toUInt() and 0xFFu) shl  0) or
+                   ((buffer[index + 1].toUInt() and 0xFFu) shl  8) or
+                   ((buffer[index + 2].toUInt() and 0xFFu) shl 16) or
+                   ((buffer[index + 3].toUInt() and 0xFFu) shl 24)
         }
 
         fun readInt64(buffer: ByteArray, offset: Long): Long {
@@ -384,6 +411,18 @@ class Buffer
                    ((buffer[index + 5].toLong() and 0xFF) shl 40) or
                    ((buffer[index + 6].toLong() and 0xFF) shl 48) or
                    ((buffer[index + 7].toLong() and 0xFF) shl 56)
+        }
+
+        fun readUInt64(buffer: ByteArray, offset: Long): ULong {
+            val index = offset.toInt()
+            return ((buffer[index + 0].toULong() and 0xFFu) shl  0) or
+                   ((buffer[index + 1].toULong() and 0xFFu) shl  8) or
+                   ((buffer[index + 3].toULong() and 0xFFu) shl 24) or
+                   ((buffer[index + 2].toULong() and 0xFFu) shl 16) or
+                   ((buffer[index + 4].toULong() and 0xFFu) shl 32) or
+                   ((buffer[index + 5].toULong() and 0xFFu) shl 40) or
+                   ((buffer[index + 6].toULong() and 0xFFu) shl 48) or
+                   ((buffer[index + 7].toULong() and 0xFFu) shl 56)
         }
 
         private fun readInt64BE(buffer: ByteArray, offset: Long): Long {
@@ -430,9 +469,18 @@ class Buffer
             buffer[offset.toInt()] = value
         }
 
+        fun write(buffer: ByteArray, offset: Long, value: UByte) {
+            buffer[offset.toInt()] = value.toByte()
+        }
+
         fun write(buffer: ByteArray, offset: Long, value: Short) {
             buffer[offset.toInt() + 0] = (value.toInt() shr 0).toByte()
             buffer[offset.toInt() + 1] = (value.toInt() shr 8).toByte()
+        }
+
+        fun write(buffer: ByteArray, offset: Long, value: UShort) {
+            buffer[offset.toInt() + 0] = (value.toUInt() shr 0).toByte()
+            buffer[offset.toInt() + 1] = (value.toUInt() shr 8).toByte()
         }
 
         fun write(buffer: ByteArray, offset: Long, value: Int) {
@@ -442,7 +490,25 @@ class Buffer
             buffer[offset.toInt() + 3] = (value shr 24).toByte()
         }
 
+        fun write(buffer: ByteArray, offset: Long, value: UInt) {
+            buffer[offset.toInt() + 0] = (value shr  0).toByte()
+            buffer[offset.toInt() + 1] = (value shr  8).toByte()
+            buffer[offset.toInt() + 2] = (value shr 16).toByte()
+            buffer[offset.toInt() + 3] = (value shr 24).toByte()
+        }
+
         fun write(buffer: ByteArray, offset: Long, value: Long) {
+            buffer[offset.toInt() + 0] = (value shr  0).toByte()
+            buffer[offset.toInt() + 1] = (value shr  8).toByte()
+            buffer[offset.toInt() + 2] = (value shr 16).toByte()
+            buffer[offset.toInt() + 3] = (value shr 24).toByte()
+            buffer[offset.toInt() + 4] = (value shr 32).toByte()
+            buffer[offset.toInt() + 5] = (value shr 40).toByte()
+            buffer[offset.toInt() + 6] = (value shr 48).toByte()
+            buffer[offset.toInt() + 7] = (value shr 56).toByte()
+        }
+
+        fun write(buffer: ByteArray, offset: Long, value: ULong) {
             buffer[offset.toInt() + 0] = (value shr  0).toByte()
             buffer[offset.toInt() + 1] = (value shr  8).toByte()
             buffer[offset.toInt() + 2] = (value shr 16).toByte()
@@ -604,9 +670,13 @@ abstract class FieldModel protected constructor(protected var _buffer: Buffer, p
     protected fun readChar(offset: Long): Char { return Buffer.readChar(_buffer.data, _buffer.offset + offset) }
     protected fun readWChar(offset: Long): Char { return Buffer.readWChar(_buffer.data, _buffer.offset + offset) }
     protected fun readInt8(offset: Long): Byte { return Buffer.readInt8(_buffer.data, _buffer.offset + offset) }
+    protected fun readUInt8(offset: Long): UByte { return Buffer.readUInt8(_buffer.data, _buffer.offset + offset) }
     protected fun readInt16(offset: Long): Short { return Buffer.readInt16(_buffer.data, _buffer.offset + offset) }
+    protected fun readUInt16(offset: Long): UShort { return Buffer.readUInt16(_buffer.data, _buffer.offset + offset) }
     protected fun readInt32(offset: Long): Int { return Buffer.readInt32(_buffer.data, _buffer.offset + offset) }
+    protected fun readUInt32(offset: Long): UInt { return Buffer.readUInt32(_buffer.data, _buffer.offset + offset) }
     protected fun readInt64(offset: Long): Long { return Buffer.readInt64(_buffer.data, _buffer.offset + offset) }
+    protected fun readUInt64(offset: Long): ULong { return Buffer.readUInt64(_buffer.data, _buffer.offset + offset) }
     protected fun readFloat(offset: Long): Float { return Buffer.readFloat(_buffer.data, _buffer.offset + offset) }
     protected fun readDouble(offset: Long): Double { return Buffer.readDouble(_buffer.data, _buffer.offset + offset) }
     protected fun readUUID(offset: Long): UUID { return Buffer.readUUID(_buffer.data, _buffer.offset + offset) }
@@ -614,9 +684,13 @@ abstract class FieldModel protected constructor(protected var _buffer: Buffer, p
     protected fun readString(offset: Long, size: Long): String { return Buffer.readString(_buffer.data, _buffer.offset + offset, size) }
     protected fun write(offset: Long, value: Boolean) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Byte) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: UByte) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Short) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: UShort) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Int) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: UInt) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Long) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: ULong) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Float) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Double) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: UUID) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
@@ -712,6 +786,7 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     // Field size
     override val FBESize: Long = 16
 
+    // Get the value
     fun get(defaults: BigDecimal = BigDecimal.valueOf(0L)): BigDecimal {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
@@ -813,6 +888,7 @@ class FieldModelTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     // Field size
     override val FBESize: Long = 8
 
+    // Get the value
     fun get(defaults: Instant = Instant.EPOCH): Instant {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
@@ -897,6 +973,7 @@ class FieldModelBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
         return true
     }
 
+    // Get the bytes value
     fun get(defaults: ByteArray = ByteArray(0)): ByteArray {
         var value: ByteArray = defaults
 
@@ -1002,6 +1079,7 @@ class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
         return true
     }
 
+    // Get the string value
     fun get(defaults: String = ""): String {
         var value: String = defaults
 
@@ -1150,6 +1228,7 @@ class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer
         _buffer.unshift(fbeBegin)
     }
 
+    // Get the optional value
     fun get(defaults: _TYPE_ = null): _TYPE_ {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
@@ -1772,7 +1851,7 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
     }
 
     // Get the map as HashMap
-    operator fun get(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>) {
+    fun get(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>) {
         values.clear()
 
         val fbeMapSize = size
@@ -1848,7 +1927,7 @@ void GeneratorKotlin::GenerateFBEFieldModelEnumFlags(const std::string& package,
     CppCommon::Directory::CreateTree(path);
 
     // Open the file
-    CppCommon::Path file = path / ("FieldModel" + name + ".java");
+    CppCommon::Path file = path / ("FieldModel" + name + ".kt");
     Open(file);
 
     // Generate headers
@@ -1862,32 +1941,26 @@ void GeneratorKotlin::GenerateFBEFieldModelEnumFlags(const std::string& package,
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ field model class
-public final class FieldModel_NAME_ extends FieldModel
+class FieldModel_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
-    public FieldModel_NAME_(Buffer buffer, long offset) { super(buffer, offset); }
-
-    // Get the field size
-    @Override
-    public long FBESize() { return _SIZE_; }
+    // Field size
+    override val FBESize: Long = _SIZE_
 
     // Get the value
-    public _NAME_ get() { return get(new _NAME_()); }
-    public _NAME_ get(_NAME_ defaults)
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return defaults;
+    fun get(defaults: _NAME_ = _NAME_()): _NAME_ {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return defaults
 
-        return new _NAME_(_READ_(FBEOffset()));
+        return _NAME_(_READ_(FBEOffset))
     }
 
     // Set the value
-    public void set(_NAME_ value)
-    {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return;
+    fun set(value: _NAME_) {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return
 
-        write(FBEOffset(), value.getRaw());
+        write(FBEOffset, value.raw)
     }
 }
 )CODE";
@@ -1979,9 +2052,13 @@ abstract class FinalModel protected constructor(protected var _buffer: Buffer, p
     protected fun readChar(offset: Long): Char { return Buffer.readChar(_buffer.data, _buffer.offset + offset) }
     protected fun readWChar(offset: Long): Char { return Buffer.readWChar(_buffer.data, _buffer.offset + offset) }
     protected fun readInt8(offset: Long): Byte { return Buffer.readInt8(_buffer.data, _buffer.offset + offset) }
+    protected fun readUInt8(offset: Long): UByte { return Buffer.readUInt8(_buffer.data, _buffer.offset + offset) }
     protected fun readInt16(offset: Long): Short { return Buffer.readInt16(_buffer.data, _buffer.offset + offset) }
+    protected fun readUInt16(offset: Long): UShort { return Buffer.readUInt16(_buffer.data, _buffer.offset + offset) }
     protected fun readInt32(offset: Long): Int { return Buffer.readInt32(_buffer.data, _buffer.offset + offset) }
+    protected fun readUInt32(offset: Long): UInt { return Buffer.readUInt32(_buffer.data, _buffer.offset + offset) }
     protected fun readInt64(offset: Long): Long { return Buffer.readInt64(_buffer.data, _buffer.offset + offset) }
+    protected fun readUInt64(offset: Long): ULong { return Buffer.readUInt64(_buffer.data, _buffer.offset + offset) }
     protected fun readFloat(offset: Long): Float { return Buffer.readFloat(_buffer.data, _buffer.offset + offset) }
     protected fun readDouble(offset: Long): Double { return Buffer.readDouble(_buffer.data, _buffer.offset + offset) }
     protected fun readUUID(offset: Long): UUID { return Buffer.readUUID(_buffer.data, _buffer.offset + offset) }
@@ -1989,9 +2066,13 @@ abstract class FinalModel protected constructor(protected var _buffer: Buffer, p
     protected fun readString(offset: Long, size: Long): String { return Buffer.readString(_buffer.data, _buffer.offset + offset, size) }
     protected fun write(offset: Long, value: Boolean) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Byte) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: UByte) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Short) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: UShort) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Int) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: UInt) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Long) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
+    protected fun write(offset: Long, value: ULong) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Float) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: Double) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
     protected fun write(offset: Long, value: UUID) { Buffer.write(_buffer.data, _buffer.offset + offset, value) }
@@ -2118,7 +2199,7 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     }
 
     // Get the value
-    operator fun get(size: Size): BigDecimal {
+    fun get(size: Size): BigDecimal {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return BigDecimal.valueOf(0L)
 
@@ -3168,7 +3249,7 @@ void GeneratorKotlin::GenerateFBEFinalModelEnumFlags(const std::string& package,
     CppCommon::Directory::CreateTree(path);
 
     // Open the file
-    CppCommon::Path file = path / ("FinalModel" + name + ".java");
+    CppCommon::Path file = path / ("FinalModel" + name + ".kt");
     Open(file);
 
     // Generate headers
@@ -3182,46 +3263,42 @@ void GeneratorKotlin::GenerateFBEFinalModelEnumFlags(const std::string& package,
 
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ final model class
-public final class FinalModel_NAME_ extends FinalModel
+class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
-    public FinalModel_NAME_(Buffer buffer, long offset) { super(buffer, offset); }
-
     // Get the allocation size
-    public long FBEAllocationSize(_NAME_ value) { return FBESize(); }
+    @Suppress("UNUSED_PARAMETER")
+    fun FBEAllocationSize(value: _NAME_): Long {
+        return FBESize
+    }
 
-    // Get the final size
-    @Override
-    public long FBESize() { return _SIZE_; }
+    // Final size
+    override val FBESize: Long = _SIZE_
 
     // Check if the value is valid
-    @Override
-    public long verify()
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return Long.MAX_VALUE;
+    override fun verify(): Long {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return Long.MAX_VALUE
 
-        return FBESize();
+        return FBESize
     }
 
     // Get the value
-    public _NAME_ get(Size size)
-    {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return new _NAME_();
+    fun get(size: Size): _NAME_ {
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return _NAME_()
 
-        size.value = FBESize();
-        return new _NAME_(_READ_(FBEOffset()));
+        size.value = FBESize
+        return _NAME_(_READ_(FBEOffset))
     }
 
     // Set the value
-    public long set(_NAME_ value)
-    {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
-            return 0;
+    fun set(value: _NAME_): Long {
+        assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
+        if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
+            return 0
 
-        write(FBEOffset(), value.getRaw());
-        return FBESize();
+        write(FBEOffset, value.raw)
+        return FBESize
     }
 }
 )CODE";
@@ -3748,12 +3825,12 @@ void GeneratorKotlin::GeneratePackage(const std::shared_ptr<Package>& p)
     if (p->body)
     {
         // Generate child enums
-        //for (const auto& child_e : p->body->enums)
-        //    GenerateEnum(p, child_e, path);
+        for (const auto& child_e : p->body->enums)
+            GenerateEnum(p, child_e, path);
 
         // Generate child flags
-        //for (const auto& child_f : p->body->flags)
-        //    GenerateFlags(p, child_f, path);
+        for (const auto& child_f : p->body->flags)
+            GenerateFlags(p, child_f, path);
 
         // Generate child structs
         //for (const auto& child_s : p->body->structs)
@@ -3787,7 +3864,7 @@ void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std:
     std::string enum_name = *e->name + "Enum";
 
     // Open the output file
-    CppCommon::Path output = path / (enum_name + ".java");
+    CppCommon::Path output = path / (enum_name + ".kt");
     Open(output);
 
     // Generate enum header
@@ -3800,7 +3877,7 @@ void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std:
 
     // Generate enum body
     WriteLine();
-    WriteLineIndent("public enum " + enum_name);
+    WriteLineIndent("enum class " + enum_name);
     WriteLineIndent("{");
     Indent(1);
     if (e->body)
@@ -3817,7 +3894,7 @@ void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std:
                 {
                     index = 0;
                     last = ConvertEnumConstant(enum_type, *value->value->constant, false);
-                    Write(last + " + " + std::to_string(index++));
+                    Write(last + " + " + std::to_string(index++) + (IsUnsignedType(enum_type) ? "u" : ""));
                 }
                 else if (value->value->reference && !value->value->reference->empty())
                 {
@@ -3827,7 +3904,7 @@ void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std:
                 }
             }
             else
-                Write(last + " + " + std::to_string(index++));
+                Write(last + " + " + std::to_string(index++) + (IsUnsignedType(enum_type) ? "u" : ""));
             WriteLine(")");
             first = false;
         }
@@ -3836,49 +3913,64 @@ void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std:
     }
 
     // Generate enum value
-    WriteLineIndent("private " + enum_base_type + " value;");
+    WriteLineIndent("var raw: " + enum_mapping_type + " = 0" + (IsUnsignedType(enum_type) ? "u" : ""));
+    Indent(1);
+    WriteLineIndent("private set");
+    Indent(-1);
 
     // Generate enum constructors
     WriteLine();
-    if (enum_base_type != "int")
-        WriteLineIndent(enum_name + "(" + enum_base_type + " value) { this.value = value; }");
-    WriteLineIndent(enum_name + "(int value) { this.value = (" + enum_base_type + ")value; }");
-    WriteLineIndent(enum_name + "(" + enum_name + " value) { this.value = value.value; }");
-
-    // Generate enum getRaw() method
-    WriteLine();
-    WriteLineIndent("public " + enum_base_type + " getRaw() { return value; }");
-
-    // Generate enum mapValue() method
-    WriteLine();
-    WriteLineIndent("public static " + enum_name + " mapValue(" + enum_base_type + " value) { return mapping.get(value); }");
+    if ((enum_type == "char") || (enum_type == "wchar"))
+        WriteLineIndent("constructor(value: Char) { this.raw = value" + ConvertEnumTo(enum_type) + " }");
+    if (IsUnsignedType(enum_type))
+    {
+        WriteLineIndent("constructor(value: UByte) { this.raw = value" + ConvertEnumTo(enum_type) + " }");
+        WriteLineIndent("constructor(value: UShort) { this.raw = value" + ConvertEnumTo(enum_type) + " }");
+        WriteLineIndent("constructor(value: UInt) { this.raw = value" + ConvertEnumTo(enum_type) + " }");
+        WriteLineIndent("constructor(value: ULong) { this.raw = value" + ConvertEnumTo(enum_type) + " }");
+    }
+    else
+    {
+        WriteLineIndent("constructor(value: Byte) { this.raw = value" + ConvertEnumTo(enum_type) + " }");
+        WriteLineIndent("constructor(value: Short) { this.raw = value" + ConvertEnumTo(enum_type) + " }");
+        WriteLineIndent("constructor(value: Int) { this.raw = value" + ConvertEnumTo(enum_type) + " }");
+        WriteLineIndent("constructor(value: Long) { this.raw = value" + ConvertEnumTo(enum_type) + " }");
+    }
+    WriteLineIndent("constructor(value: " + enum_name + ") { this.raw = value.raw }");
 
     // Generate enum toString() method
     WriteLine();
-    WriteLineIndent("@Override");
-    WriteLineIndent("public String toString()");
-    WriteLineIndent("{");
+    WriteLineIndent("override fun toString(): String {");
     Indent(1);
     if (e->body)
     {
         for (const auto& value : e->body->values)
-            WriteLineIndent("if (this == " + *value->name + ")" + " return \"" + *value->name + "\";");
+            WriteLineIndent("if (this == " + *value->name + ")" + " return \"" + *value->name + "\"");
 
     }
-    WriteLineIndent("return \"<unknown>\";");
+    WriteLineIndent("return \"<unknown>\"");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate enum mapping
     WriteLine();
-    WriteLineIndent("private static final Map<" + enum_mapping_type + ", " + enum_name + "> mapping = new HashMap<>();");
-    WriteLineIndent("static");
-    WriteLineIndent("{");
+    WriteLineIndent("companion object {");
     Indent(1);
-    WriteLineIndent("for (var value : " + enum_name + ".values())");
+    WriteLineIndent("private val mapping = HashMap<" + enum_mapping_type + ", " + enum_name + ">()");
+    WriteLine();
+    WriteLineIndent("init {");
     Indent(1);
-    WriteLineIndent("mapping.put(value.value, value);");
+    WriteLineIndent("for (value in " + enum_name + ".values())");
+    Indent(1);
+    WriteLineIndent("mapping[value.raw] = value");
     Indent(-1);
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate enum mapValue() method
+    WriteLine();
+    WriteLineIndent("fun mapValue(value: " + enum_mapping_type + "): " + enum_name + "?" +" { return mapping[value] }");
+
     Indent(-1);
     WriteLineIndent("}");
 
@@ -3895,8 +3987,8 @@ void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std:
     GenerateEnumClass(p, e, path);
 
     // Generate enum JSON adapter
-    if (JSON())
-        GenerateEnumJson(p, e);
+    //if (JSON())
+    //    GenerateEnumJson(p, e);
 
     // Generate enum field model
     GenerateFBEFieldModelEnumFlags(*p->name, *e->name, ConvertEnumSize(enum_type), ConvertEnumRead(enum_type));
@@ -3912,7 +4004,7 @@ void GeneratorKotlin::GenerateEnumClass(const std::shared_ptr<Package>& p, const
     std::string enum_type_name = *e->name + "Enum";
 
     // Open the output file
-    CppCommon::Path output = path / (enum_name + ".java");
+    CppCommon::Path output = path / (enum_name + ".kt");
     Open(output);
 
     // Generate enum class header
@@ -3924,105 +4016,111 @@ void GeneratorKotlin::GenerateEnumClass(const std::shared_ptr<Package>& p, const
 
     // Generate enum class body
     WriteLine();
-    WriteLineIndent("public final class " + enum_name + " implements Comparable<" + enum_name + ">");
+    WriteLineIndent("class " + enum_name + " : Comparable<" + enum_name + ">");
     WriteLineIndent("{");
     Indent(1);
     if (e->body)
     {
+        WriteLineIndent("companion object {");
+        Indent(1);
         for (const auto& value : e->body->values)
-            WriteLineIndent("public static final " + enum_name + " " + *value->name + " = new " + enum_name + "(" + enum_type_name + "." + *value->name + ");");
+            WriteLineIndent("val " + *value->name + " = " + enum_name + "(" + enum_type_name + "." + *value->name + ")");
+        Indent(-1);
+        WriteLineIndent("}");
         WriteLine();
     }
 
     // Generate enum class value
-    WriteLineIndent("private " + enum_type_name + " value = " + enum_type_name + ".values()[0];");
+    WriteLineIndent("var value: " + enum_type_name + "?" + " = " + enum_type_name + ".values()[0]");
+    Indent(1);
+    WriteLineIndent("private set");
+    Indent(-1);
+    WriteLine();
+
+    // Generate enum raw value
+    WriteLineIndent("val raw: " + enum_base_type);
+    Indent(1);
+    WriteLineIndent("get() = value!!.raw");
+    Indent(-1);
+    WriteLine();
 
     // Generate enum class constructors
+    WriteLineIndent("constructor()");
+    WriteLineIndent("constructor(value: " + enum_base_type + ") { setEnum(value) }");
+    WriteLineIndent("constructor(value: " + enum_type_name + ") { setEnum(value) }");
+    WriteLineIndent("constructor(value: " + enum_name + ") { setEnum(value) }");
     WriteLine();
-    WriteLineIndent("public " + enum_name + "() {}");
-    WriteLineIndent("public " + enum_name + "(" + enum_base_type + " value) { setEnum(value); }");
-    WriteLineIndent("public " + enum_name + "(" + enum_type_name + " value) { setEnum(value); }");
-    WriteLineIndent("public " + enum_name + "(" + enum_name + " value) { setEnum(value); }");
-
-    // Generate enum class getEnum() and getRaw() methods
-    WriteLine();
-    WriteLineIndent("public " + enum_type_name + " getEnum() { return value; }");
-    WriteLineIndent("public " + enum_base_type + " getRaw() { return value.getRaw(); }");
 
     // Generate enum class setDefault() method
+    WriteLineIndent("fun setDefault() { setEnum(0" + ConvertEnumTo(enum_type) + ") }");
     WriteLine();
-    WriteLineIndent("public void setDefault() { setEnum((" + enum_base_type + ")0); }");
 
     // Generate enum class setEnum() methods
-    WriteLine();
-    WriteLineIndent("public void setEnum(" + enum_base_type + " value) { this.value = " + enum_type_name + ".mapValue(value); }");
-    WriteLineIndent("public void setEnum(" + enum_type_name + " value) { this.value = value; }");
-    WriteLineIndent("public void setEnum(" + enum_name + " value) { this.value = value.value; }");
+    WriteLineIndent("fun setEnum(value: " + enum_base_type + ") { this.value = " + enum_type_name + ".mapValue(value) }");
+    WriteLineIndent("fun setEnum(value: " + enum_type_name + ") { this.value = value }");
+    WriteLineIndent("fun setEnum(value: " + enum_name + ") { this.value = value.value }");
 
     // Generate enum class compareTo() method
     WriteLine();
-    WriteLineIndent("@Override");
-    WriteLineIndent("public int compareTo(" + enum_name + " other)");
-    WriteLineIndent("{");
+    WriteLineIndent("override fun compareTo(other: " + enum_name + "): Int {");
     Indent(1);
     WriteLineIndent("if (value == null)");
     Indent(1);
-    WriteLineIndent("return -1;");
+    WriteLineIndent("return -1");
     Indent(-1);
     WriteLineIndent("if (other.value == null)");
     Indent(1);
-    WriteLineIndent("return 1;");
+    WriteLineIndent("return 1");
     Indent(-1);
-    WriteLineIndent("return (int)(value.getRaw() - other.value.getRaw());");
+    WriteLineIndent("return (value!!.raw - other.value!!.raw).toInt()");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate enum class equals() method
     WriteLine();
-    WriteLineIndent("@Override");
-    WriteLineIndent("public boolean equals(Object obj)");
-    WriteLineIndent("{");
+    WriteLineIndent("override fun equals(other: Any?): Boolean {");
     Indent(1);
-    WriteLineIndent("if (obj == null)");
+    WriteLineIndent("if (other == null)");
     Indent(1);
-    WriteLineIndent("return false;");
+    WriteLineIndent("return false");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("if (!" + enum_name + ".class.isAssignableFrom(obj.getClass()))");
+    WriteLineIndent("if (!" + enum_name + "::class.java.isAssignableFrom(other.javaClass))");
     Indent(1);
-    WriteLineIndent("return false;");
+    WriteLineIndent("return false");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("final " + enum_name + " other = (" + enum_name + ")obj;");
+    WriteLineIndent("val enm = other as " + enum_name + "?");
     WriteLine();
-    WriteLineIndent("if ((value == null) || (other.value == null))");
+    WriteLineIndent("if (value == null || enm!!.value == null)");
     Indent(1);
-    WriteLineIndent("return false;");
+    WriteLineIndent("return false");
     Indent(-1);
-    WriteLineIndent("if (value.getRaw() != other.value.getRaw())");
+    WriteLineIndent("if (value!!.raw != enm.value!!.raw)");
     Indent(1);
-    WriteLineIndent("return false;");
+    WriteLineIndent("return false");
     Indent(-1);
-    WriteLineIndent("return true;");
+    WriteLineIndent("return true");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate enum class hashCode() method
     WriteLine();
-    WriteLineIndent("@Override");
-    WriteLineIndent("public int hashCode()");
-    WriteLineIndent("{");
+    WriteLineIndent("override fun hashCode(): Int {");
     Indent(1);
-    WriteLineIndent("int hash = 17;");
-    WriteLineIndent("hash = hash * 31 + ((value != null) ? value.hashCode() : 0);");
-    WriteLineIndent("return hash;");
+    WriteLineIndent("var hash = 17");
+    WriteLineIndent("hash = hash * 31 + if (value != null) value!!.hashCode() else 0");
+    WriteLineIndent("return hash");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate enum class toString() method
     WriteLine();
-    WriteLineIndent("@Override");
-    WriteLineIndent("public String toString() { return (value != null) ? value.toString() : \"<unknown>\"; }");
+    WriteLineIndent("override fun toString(): String {");
+    Indent(1);
+    WriteLineIndent("return if (value != null) value!!.toString() else \"<unknown>\"");
+    Indent(-1);
+    WriteLineIndent("}");
 
     Indent(-1);
     WriteLineIndent("}");
@@ -4264,8 +4362,8 @@ void GeneratorKotlin::GenerateFlags(const std::shared_ptr<Package>& p, const std
     GenerateFlagsClass(p, f, path);
 
     // Generate flags JSON adapter
-    if (JSON())
-        GenerateFlagsJson(p, f);
+    //if (JSON())
+    //    GenerateFlagsJson(p, f);
 
     // Generate flags field model
     GenerateFBEFieldModelEnumFlags(*p->name, *f->name, ConvertEnumSize(flags_type), ConvertEnumRead(flags_type));
@@ -6243,6 +6341,11 @@ bool GeneratorKotlin::IsPrimitiveType(const std::string& type, bool optional)
             (type == "float") || (type == "double"));
 }
 
+bool GeneratorKotlin::IsUnsignedType(const std::string& type)
+{
+    return ((type == "uint8") || (type == "uint16") || (type == "uint32") || (type == "uint64"));
+}
+
 std::string GeneratorKotlin::ConvertEnumBase(const std::string& type)
 {
     if (type == "byte")
@@ -6250,23 +6353,23 @@ std::string GeneratorKotlin::ConvertEnumBase(const std::string& type)
     else if (type == "char")
         return "Byte";
     else if (type == "wchar")
-        return "Integer";
+        return "Int";
     else if (type == "int8")
         return "Byte";
     else if (type == "uint8")
-        return "Byte";
+        return "UByte";
     else if (type == "int16")
         return "Short";
     else if (type == "uint16")
-        return "Short";
+        return "UShort";
     else if (type == "int32")
-        return "Integer";
+        return "Int";
     else if (type == "uint32")
-        return "Integer";
+        return "UInt";
     else if (type == "int64")
         return "Long";
     else if (type == "uint64")
-        return "Long";
+        return "ULong";
 
     yyerror("Unsupported enum base type - " + type);
     return "";
@@ -6275,27 +6378,27 @@ std::string GeneratorKotlin::ConvertEnumBase(const std::string& type)
 std::string GeneratorKotlin::ConvertEnumType(const std::string& type)
 {
     if (type == "byte")
-        return "byte";
+        return "Byte";
     else if (type == "char")
-        return "byte";
+        return "Byte";
     else if (type == "wchar")
-        return "int";
+        return "Int";
     else if (type == "int8")
-        return "byte";
+        return "Byte";
     else if (type == "uint8")
-        return "byte";
+        return "UByte";
     else if (type == "int16")
-        return "short";
+        return "Short";
     else if (type == "uint16")
-        return "short";
+        return "UShort";
     else if (type == "int32")
-        return "int";
+        return "Int";
     else if (type == "uint32")
-        return "int";
+        return "UInt";
     else if (type == "int64")
-        return "long";
+        return "Long";
     else if (type == "uint64")
-        return "long";
+        return "ULong";
 
     yyerror("Unsupported enum base type - " + type);
     return "";
@@ -6341,19 +6444,19 @@ std::string GeneratorKotlin::ConvertEnumGet(const std::string& type)
     else if (type == "int8")
         return "getAsByte";
     else if (type == "uint8")
-        return "getAsByte";
+        return "getAsUByte";
     else if (type == "int16")
         return "getAsShort";
     else if (type == "uint16")
-        return "getAsShort";
+        return "getAsUShort";
     else if (type == "int32")
         return "getAsInt";
     else if (type == "uint32")
-        return "getAsInt";
+        return "getAsUInt";
     else if (type == "int64")
         return "getAsLong";
     else if (type == "uint64")
-        return "getAsLong";
+        return "getAsULong";
 
     yyerror("Unsupported enum base type - " + type);
     return "";
@@ -6370,19 +6473,48 @@ std::string GeneratorKotlin::ConvertEnumRead(const std::string& type)
     else if (type == "int8")
         return "readInt8";
     else if (type == "uint8")
-        return "readInt8";
+        return "readUInt8";
     else if (type == "int16")
         return "readInt16";
     else if (type == "uint16")
-        return "readInt16";
+        return "readUInt16";
     else if (type == "int32")
         return "readInt32";
     else if (type == "uint32")
-        return "readInt32";
+        return "readUInt32";
     else if (type == "int64")
         return "readInt64";
     else if (type == "uint64")
-        return "readInt64";
+        return "readUInt64";
+
+    yyerror("Unsupported enum base type - " + type);
+    return "";
+}
+
+std::string GeneratorKotlin::ConvertEnumTo(const std::string& type)
+{
+    if (type == "byte")
+        return ".toByte()";
+    else if (type == "char")
+        return ".toByte()";
+    else if (type == "wchar")
+        return ".toInt()";
+    else if (type == "int8")
+        return ".toByte()";
+    else if (type == "uint8")
+        return ".toUByte()";
+    else if (type == "int16")
+        return ".toShort()";
+    else if (type == "uint16")
+        return ".toUShort()";
+    else if (type == "int32")
+        return ".toInt()";
+    else if (type == "uint32")
+        return ".toUInt()";
+    else if (type == "int64")
+        return ".toLong()";
+    else if (type == "uint64")
+        return ".toULong()";
 
     yyerror("Unsupported enum base type - " + type);
     return "";
@@ -6404,7 +6536,7 @@ std::string GeneratorKotlin::ConvertEnumConstant(const std::string& type, const 
             bool first = true;
             for (const auto& it : flags)
             {
-                result += (first ? "" : "|") + CppCommon::StringUtils::ToTrim(it) + ".getRaw()";
+                result += (first ? "" : "|") + CppCommon::StringUtils::ToTrim(it) + ".raw";
                 first = false;
             }
         }
@@ -6415,36 +6547,17 @@ std::string GeneratorKotlin::ConvertEnumConstant(const std::string& type, const 
 
 std::string GeneratorKotlin::ConvertEnumConstantPrefix(const std::string& type)
 {
-    if (type == "byte")
-        return "(byte)";
-    else if (type == "char")
-        return "(char)";
-    else if (type == "wchar")
-        return "(char)";
-    else if (type == "int8")
-        return "(byte)";
-    else if (type == "uint8")
-        return "(byte)";
-    else if (type == "int16")
-        return "(short)";
-    else if (type == "uint16")
-        return "(short)";
-    else if (type == "int32")
-        return "(int)";
-    else if (type == "uint32")
-        return "(int)";
-    else if (type == "int64")
-        return "(long)";
-    else if (type == "uint64")
-        return "(long)";
-
     return "";
 }
 
 std::string GeneratorKotlin::ConvertEnumConstantSuffix(const std::string& type)
 {
-    if ((type == "int64") || (type == "uint64"))
+    if ((type == "uint8") || (type == "uint16") || (type == "uint32") || (type == "uint64"))
+        return "u";
+    if (type == "int64")
         return "L";
+    if (type == "uint64")
+        return "uL";
 
     return "";
 }
@@ -6462,19 +6575,19 @@ std::string GeneratorKotlin::ConvertPrimitiveTypeName(const std::string& type)
     else if (type == "int8")
         return "Byte";
     else if (type == "uint8")
-        return "Byte";
+        return "UByte";
     else if (type == "int16")
         return "Short";
     else if (type == "uint16")
-        return "Short";
+        return "UShort";
     else if (type == "int32")
-        return "Integer";
+        return "Int";
     else if (type == "uint32")
-        return "Integer";
+        return "UInt";
     else if (type == "int64")
         return "Long";
     else if (type == "uint64")
-        return "Long";
+        return "ULong";
     else if (type == "float")
         return "Float";
     else if (type == "double")
@@ -6498,19 +6611,19 @@ std::string GeneratorKotlin::ConvertTypeName(const std::string& type, bool optio
         else if (type == "int8")
             return "Byte?";
         else if (type == "uint8")
-            return "Byte?";
+            return "UByte?";
         else if (type == "int16")
             return "Short?";
         else if (type == "uint16")
-            return "Short?";
+            return "UShort?";
         else if (type == "int32")
             return "Int?";
         else if (type == "uint32")
-            return "Int?";
+            return "UInt?";
         else if (type == "int64")
             return "Long";
         else if (type == "uint64")
-            return "Long?";
+            return "ULong?";
         else if (type == "float")
             return "Float?";
         else if (type == "double")
@@ -6530,19 +6643,19 @@ std::string GeneratorKotlin::ConvertTypeName(const std::string& type, bool optio
     else if (type == "int8")
         return "Byte";
     else if (type == "uint8")
-        return "Byte";
+        return "UByte";
     else if (type == "int16")
         return "Short";
     else if (type == "uint16")
-        return "Short";
+        return "UShort";
     else if (type == "int32")
         return "Int";
     else if (type == "uint32")
-        return "Int";
+        return "UInt";
     else if (type == "int64")
         return "Long";
     else if (type == "uint64")
-        return "Long";
+        return "ULong";
     else if (type == "float")
         return "Float";
     else if (type == "double")
@@ -6610,19 +6723,19 @@ std::string GeneratorKotlin::ConvertTypeFieldName(const std::string& type)
     else if (type == "int8")
         return "Int8";
     else if (type == "uint8")
-        return "Int8";
+        return "UInt8";
     else if (type == "int16")
         return "Int16";
     else if (type == "uint16")
-        return "Int16";
+        return "UInt16";
     else if (type == "int32")
         return "Int32";
     else if (type == "uint32")
-        return "Int32";
+        return "UInt32";
     else if (type == "int64")
         return "Int64";
     else if (type == "uint64")
-        return "Int64";
+        return "UInt64";
     else if (type == "float")
         return "Float";
     else if (type == "double")
@@ -6658,19 +6771,19 @@ std::string GeneratorKotlin::ConvertTypeFieldType(const std::string& type, bool 
     else if (type == "int8")
         return "Byte" + opt;
     else if (type == "uint8")
-        return "Byte" + opt;
+        return "UByte" + opt;
     else if (type == "int16")
         return "Short" + opt;
     else if (type == "uint16")
-        return "Short" + opt;
+        return "UShort" + opt;
     else if (type == "int32")
         return "Int" + opt;
     else if (type == "uint32")
-        return "Int" + opt;
+        return "UInt" + opt;
     else if (type == "int64")
         return "Long" + opt;
     else if (type == "uint64")
-        return "Long" + opt;
+        return "ULong" + opt;
     else if (type == "float")
         return "Float" + opt;
     else if (type == "double")

@@ -98,17 +98,17 @@ public final class State implements Comparable<State>
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return false;
 
-        if (!State.class.isAssignableFrom(obj.getClass()))
+        if (!State.class.isAssignableFrom(other.getClass()))
             return false;
 
-        final State other = (State)obj;
+        final State flg = (State)other;
 
-        if (flags != other.flags)
+        if (flags != flg.flags)
             return false;
         return true;
     }

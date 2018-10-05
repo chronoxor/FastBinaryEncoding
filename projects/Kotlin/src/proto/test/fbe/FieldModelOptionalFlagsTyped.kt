@@ -85,6 +85,7 @@ class FieldModelOptionalFlagsTyped(buffer: Buffer, offset: Long) : FieldModel(bu
         _buffer.unshift(fbeBegin)
     }
 
+    // Get the optional value
     fun get(defaults: FlagsTyped? = null): FlagsTyped? {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)

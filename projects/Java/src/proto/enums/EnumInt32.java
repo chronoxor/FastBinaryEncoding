@@ -48,19 +48,19 @@ public final class EnumInt32 implements Comparable<EnumInt32>
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return false;
 
-        if (!EnumInt32.class.isAssignableFrom(obj.getClass()))
+        if (!EnumInt32.class.isAssignableFrom(other.getClass()))
             return false;
 
-        final EnumInt32 other = (EnumInt32)obj;
+        final EnumInt32 enm = (EnumInt32)other;
 
-        if ((value == null) || (other.value == null))
+        if ((value == null) || (enm.value == null))
             return false;
-        if (value.getRaw() != other.value.getRaw())
+        if (value.getRaw() != enm.value.getRaw())
             return false;
         return true;
     }

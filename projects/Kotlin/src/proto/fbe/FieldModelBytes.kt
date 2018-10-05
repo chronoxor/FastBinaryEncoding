@@ -50,6 +50,7 @@ class FieldModelBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
         return true
     }
 
+    // Get the bytes value
     fun get(defaults: ByteArray = ByteArray(0)): ByteArray {
         var value: ByteArray = defaults
 
