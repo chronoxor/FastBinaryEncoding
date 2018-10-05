@@ -57,35 +57,35 @@ public class Account implements Comparable<Object>
     }
 
     @Override
-    public int compareTo(Object obj)
+    public int compareTo(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return -1;
 
-        if (!Account.class.isAssignableFrom(obj.getClass()))
+        if (!Account.class.isAssignableFrom(other.getClass()))
             return -1;
 
-        final Account other = (Account)obj;
+        final Account obj = (Account)other;
 
         int result = 0;
-        result = Integer.compare(uid, other.uid);
+        result = Integer.compare(uid, obj.uid);
         if (result != 0)
             return result;
         return result;
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return false;
 
-        if (!Account.class.isAssignableFrom(obj.getClass()))
+        if (!Account.class.isAssignableFrom(other.getClass()))
             return false;
 
-        final Account other = (Account)obj;
+        final Account obj = (Account)other;
 
-        if (uid != other.uid)
+        if (uid != obj.uid)
             return false;
         return true;
     }

@@ -3918,7 +3918,7 @@ void GeneratorCSharp::GenerateEnum(const std::shared_ptr<Package>& p, const std:
     if (e->body)
     {
         int index = 0;
-        std::string last = ConvertEnumConstant(enum_type, "0", false);
+        std::string last = ConvertEnumConstant(enum_type, "0");
         for (auto it = e->body->values.begin(); it != e->body->values.end(); ++it)
         {
             WriteIndent("public static " + *e->name + " " + *(*it)->name + " = new " + *e->name + "(");
@@ -3927,13 +3927,13 @@ void GeneratorCSharp::GenerateEnum(const std::shared_ptr<Package>& p, const std:
                 if ((*it)->value->constant && !(*it)->value->constant->empty())
                 {
                     index = 0;
-                    last = ConvertEnumConstant(enum_type, *(*it)->value->constant, false);
+                    last = ConvertEnumConstant(enum_type, *(*it)->value->constant);
                     Write(last + " + " + std::to_string(index++));
                 }
                 else if ((*it)->value->reference && !(*it)->value->reference->empty())
                 {
                     index = 0;
-                    last = ConvertEnumConstant("", *(*it)->value->reference, false);
+                    last = ConvertEnumConstant("", *(*it)->value->reference);
                     Write(last);
                 }
             }
@@ -4305,9 +4305,9 @@ void GeneratorCSharp::GenerateFlags(const std::shared_ptr<Package>& p, const std
             if ((*it)->value)
             {
                 if ((*it)->value->constant && !(*it)->value->constant->empty())
-                    WriteLineIndent("public static " + *f->name + " " + *(*it)->name + " = new " + *f->name + "(" + ConvertEnumConstant(flags_type, *(*it)->value->constant, false) + ");");
+                    WriteLineIndent("public static " + *f->name + " " + *(*it)->name + " = new " + *f->name + "(" + ConvertEnumConstant(flags_type, *(*it)->value->constant) + ");");
                 else if ((*it)->value->reference && !(*it)->value->reference->empty())
-                    WriteLineIndent("public static " + *f->name + " " + *(*it)->name + " = new " + *f->name + "(" + ConvertEnumConstant("", *(*it)->value->reference, false) + ");");
+                    WriteLineIndent("public static " + *f->name + " " + *(*it)->name + " = new " + *f->name + "(" + ConvertEnumConstant("", *(*it)->value->reference) + ");");
             }
         }
         WriteLine();
@@ -6219,7 +6219,7 @@ std::string GeneratorCSharp::ConvertEnumTypeUtf8Json(const std::string& type)
     return "";
 }
 
-std::string GeneratorCSharp::ConvertEnumConstant(const std::string& type, const std::string& value, bool optional)
+std::string GeneratorCSharp::ConvertEnumConstant(const std::string& type, const std::string& value)
 {
     return ConvertEnumConstantPrefix(type) + value + ConvertEnumConstantSuffix(type);
 }

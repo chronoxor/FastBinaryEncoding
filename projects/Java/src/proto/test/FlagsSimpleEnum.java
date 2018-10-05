@@ -35,16 +35,8 @@ public enum FlagsSimpleEnum
     public boolean hasFlags(int flags) { return (((value & flags) != 0) && ((value & flags) == flags)); }
     public boolean hasFlags(FlagsSimpleEnum flags) { return hasFlags(flags.value); }
 
-    public EnumSet<FlagsSimpleEnum> getAllSet()
-    {
-        return EnumSet.allOf(FlagsSimpleEnum.class);
-    }
-
-    public EnumSet<FlagsSimpleEnum> getNoneSet()
-    {
-        return EnumSet.noneOf(FlagsSimpleEnum.class);
-    }
-
+    public EnumSet<FlagsSimpleEnum> getAllSet() { return EnumSet.allOf(FlagsSimpleEnum.class); }
+    public EnumSet<FlagsSimpleEnum> getNoneSet() { return EnumSet.noneOf(FlagsSimpleEnum.class); }
     public EnumSet<FlagsSimpleEnum> getCurrentSet()
     {
         EnumSet<FlagsSimpleEnum> result = EnumSet.noneOf(FlagsSimpleEnum.class);

@@ -14,15 +14,15 @@ import fbe.*;
 
 enum class EnumUInt64Enum
 {
-    ENUM_VALUE_0(0u + 0u)
-    , ENUM_VALUE_1(0u + 0u)
-    , ENUM_VALUE_2(0u + 1u)
-    , ENUM_VALUE_3(0xFFFFFFFFFFFFFFFEu + 0u)
-    , ENUM_VALUE_4(0xFFFFFFFFFFFFFFFEu + 1u)
+    ENUM_VALUE_0(0uL + 0u)
+    , ENUM_VALUE_1(0uL + 0u)
+    , ENUM_VALUE_2(0uL + 1u)
+    , ENUM_VALUE_3(0xFFFFFFFFFFFFFFFEuL + 0u)
+    , ENUM_VALUE_4(0xFFFFFFFFFFFFFFFEuL + 1u)
     , ENUM_VALUE_5(ENUM_VALUE_3.raw)
     ;
 
-    var raw: ULong = 0u
+    var raw: ULong = 0uL
         private set
 
     constructor(value: UByte) { this.raw = value.toULong() }
@@ -31,7 +31,8 @@ enum class EnumUInt64Enum
     constructor(value: ULong) { this.raw = value.toULong() }
     constructor(value: EnumUInt64Enum) { this.raw = value.raw }
 
-    override fun toString(): String {
+    override fun toString(): String
+    {
         if (this == ENUM_VALUE_0) return "ENUM_VALUE_0"
         if (this == ENUM_VALUE_1) return "ENUM_VALUE_1"
         if (this == ENUM_VALUE_2) return "ENUM_VALUE_2"
@@ -41,10 +42,12 @@ enum class EnumUInt64Enum
         return "<unknown>"
     }
 
-    companion object {
+    companion object
+    {
         private val mapping = HashMap<ULong, EnumUInt64Enum>()
 
-        init {
+        init
+        {
             for (value in EnumUInt64Enum.values())
                 mapping[value.raw] = value
         }

@@ -22,7 +22,7 @@ enum class EnumInt64Enum
     , ENUM_VALUE_5(ENUM_VALUE_3.raw)
     ;
 
-    var raw: Long = 0
+    var raw: Long = 0L
         private set
 
     constructor(value: Byte) { this.raw = value.toLong() }
@@ -31,7 +31,8 @@ enum class EnumInt64Enum
     constructor(value: Long) { this.raw = value.toLong() }
     constructor(value: EnumInt64Enum) { this.raw = value.raw }
 
-    override fun toString(): String {
+    override fun toString(): String
+    {
         if (this == ENUM_VALUE_0) return "ENUM_VALUE_0"
         if (this == ENUM_VALUE_1) return "ENUM_VALUE_1"
         if (this == ENUM_VALUE_2) return "ENUM_VALUE_2"
@@ -41,10 +42,12 @@ enum class EnumInt64Enum
         return "<unknown>"
     }
 
-    companion object {
+    companion object
+    {
         private val mapping = HashMap<Long, EnumInt64Enum>()
 
-        init {
+        init
+        {
             for (value in EnumInt64Enum.values())
                 mapping[value.raw] = value
         }

@@ -18,7 +18,8 @@ class FieldModelTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     override val FBESize: Long = 8
 
     // Get the value
-    fun get(defaults: Instant = Instant.EPOCH): Instant {
+    fun get(defaults: Instant = Instant.EPOCH): Instant
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
 
@@ -27,7 +28,8 @@ class FieldModelTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     }
 
     // Set the value
-    fun set(value: Instant) {
+    fun set(value: Instant)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return

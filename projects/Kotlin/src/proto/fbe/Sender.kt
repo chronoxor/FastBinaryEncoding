@@ -29,7 +29,8 @@ abstract class Sender
     // Send serialized buffer.
     // Direct call of the method requires knowledge about internals of FBE models serialization.
     // Use it with care!
-    fun sendSerialized(serialized: Long): Long {
+    fun sendSerialized(serialized: Long): Long
+    {
         assert(serialized > 0) { "Invalid size of the serialized buffer!" }
         if (serialized <= 0)
             return 0

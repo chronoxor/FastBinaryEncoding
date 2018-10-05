@@ -69,30 +69,30 @@ public class StructList implements Comparable<Object>
     }
 
     @Override
-    public int compareTo(Object obj)
+    public int compareTo(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return -1;
 
-        if (!StructList.class.isAssignableFrom(obj.getClass()))
+        if (!StructList.class.isAssignableFrom(other.getClass()))
             return -1;
 
-        final StructList other = (StructList)obj;
+        final StructList obj = (StructList)other;
 
         int result = 0;
         return result;
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return false;
 
-        if (!StructList.class.isAssignableFrom(obj.getClass()))
+        if (!StructList.class.isAssignableFrom(other.getClass()))
             return false;
 
-        final StructList other = (StructList)obj;
+        final StructList obj = (StructList)other;
 
         return true;
     }

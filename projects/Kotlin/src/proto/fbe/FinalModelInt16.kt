@@ -16,15 +16,14 @@ class FinalModelInt16(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun FBEAllocationSize(value: Short): Long {
-        return FBESize
-    }
+    fun FBEAllocationSize(value: Short): Long = FBESize
 
     // Final size
     override val FBESize: Long = 2
 
     // Check if the value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return Long.MAX_VALUE
 
@@ -32,7 +31,8 @@ class FinalModelInt16(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     }
 
     // Get the value
-    fun get(size: Size): Short {
+    fun get(size: Size): Short
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0.toShort()
 
@@ -41,7 +41,8 @@ class FinalModelInt16(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     }
 
     // Set the value
-    fun set(value: Short): Long {
+    fun set(value: Short): Long
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0

@@ -45,30 +45,30 @@ public class StructHashEx implements Comparable<Object>
     }
 
     @Override
-    public int compareTo(Object obj)
+    public int compareTo(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return -1;
 
-        if (!StructHashEx.class.isAssignableFrom(obj.getClass()))
+        if (!StructHashEx.class.isAssignableFrom(other.getClass()))
             return -1;
 
-        final StructHashEx other = (StructHashEx)obj;
+        final StructHashEx obj = (StructHashEx)other;
 
         int result = 0;
         return result;
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return false;
 
-        if (!StructHashEx.class.isAssignableFrom(obj.getClass()))
+        if (!StructHashEx.class.isAssignableFrom(other.getClass()))
             return false;
 
-        final StructHashEx other = (StructHashEx)obj;
+        final StructHashEx obj = (StructHashEx)other;
 
         return true;
     }

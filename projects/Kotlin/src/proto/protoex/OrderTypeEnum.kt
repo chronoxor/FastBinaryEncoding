@@ -30,7 +30,8 @@ enum class OrderTypeEnum
     constructor(value: Long) { this.raw = value.toByte() }
     constructor(value: OrderTypeEnum) { this.raw = value.raw }
 
-    override fun toString(): String {
+    override fun toString(): String
+    {
         if (this == market) return "market"
         if (this == limit) return "limit"
         if (this == stop) return "stop"
@@ -38,10 +39,12 @@ enum class OrderTypeEnum
         return "<unknown>"
     }
 
-    companion object {
+    companion object
+    {
         private val mapping = HashMap<Byte, OrderTypeEnum>()
 
-        init {
+        init
+        {
             for (value in OrderTypeEnum.values())
                 mapping[value.raw] = value
         }

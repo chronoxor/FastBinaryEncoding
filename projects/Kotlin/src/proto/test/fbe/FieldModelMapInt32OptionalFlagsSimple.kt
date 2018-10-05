@@ -24,7 +24,8 @@ class FieldModelMapInt32OptionalFlagsSimple(buffer: Buffer, offset: Long) : Fiel
     override val FBESize: Long = 4
 
     // Field extra size
-    override val FBEExtra: Long get() {
+    override val FBEExtra: Long get()
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
 
@@ -38,7 +39,8 @@ class FieldModelMapInt32OptionalFlagsSimple(buffer: Buffer, offset: Long) : Fiel
         _modelKey.FBEOffset = fbeMapOffset + 4
         _modelValue.FBEOffset = fbeMapOffset + 4 + _modelKey.FBESize
         var i = fbeMapSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             fbeResult += _modelKey.FBESize + _modelKey.FBEExtra
             _modelKey.FBEShift(_modelKey.FBESize + _modelValue.FBESize)
 
@@ -49,7 +51,8 @@ class FieldModelMapInt32OptionalFlagsSimple(buffer: Buffer, offset: Long) : Fiel
     }
 
     // Get the map offset
-    val offset: Long get() {
+    val offset: Long get()
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
 
@@ -58,7 +61,8 @@ class FieldModelMapInt32OptionalFlagsSimple(buffer: Buffer, offset: Long) : Fiel
     }
 
     // Get the map size
-    val size: Long get() {
+    val size: Long get()
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
 
@@ -71,7 +75,8 @@ class FieldModelMapInt32OptionalFlagsSimple(buffer: Buffer, offset: Long) : Fiel
     }
 
     // Map index operator
-    fun getItem(index: Long): Pair<FieldModelInt32, FieldModelOptionalFlagsSimple> {
+    fun getItem(index: Long): Pair<FieldModelInt32, FieldModelOptionalFlagsSimple>
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
 
         val fbeMapOffset = readInt32(FBEOffset).toLong()
@@ -88,7 +93,8 @@ class FieldModelMapInt32OptionalFlagsSimple(buffer: Buffer, offset: Long) : Fiel
     }
 
     // Resize the map and get its first model
-    fun resize(size: Long): Pair<FieldModelInt32, FieldModelOptionalFlagsSimple> {
+    fun resize(size: Long): Pair<FieldModelInt32, FieldModelOptionalFlagsSimple>
+    {
         _modelKey.FBEOffset = FBEOffset
         _modelValue.FBEOffset = FBEOffset + _modelKey.FBESize
 
@@ -106,7 +112,8 @@ class FieldModelMapInt32OptionalFlagsSimple(buffer: Buffer, offset: Long) : Fiel
     }
 
     // Check if the map is valid
-    override fun verify(): Boolean {
+    override fun verify(): Boolean
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return true
 
@@ -122,7 +129,8 @@ class FieldModelMapInt32OptionalFlagsSimple(buffer: Buffer, offset: Long) : Fiel
         _modelKey.FBEOffset = fbeMapOffset + 4
         _modelValue.FBEOffset = fbeMapOffset + 4 + _modelKey.FBESize
         var i = fbeMapSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             if (!_modelKey.verify())
                 return false
             _modelKey.FBEShift(_modelKey.FBESize + _modelValue.FBESize)
@@ -135,7 +143,8 @@ class FieldModelMapInt32OptionalFlagsSimple(buffer: Buffer, offset: Long) : Fiel
     }
 
     // Get the map as TreeMap
-    fun get(values: TreeMap<Int, FlagsSimple?>) {
+    fun get(values: TreeMap<Int, FlagsSimple?>)
+    {
         values.clear()
 
         val fbeMapSize = size
@@ -144,7 +153,8 @@ class FieldModelMapInt32OptionalFlagsSimple(buffer: Buffer, offset: Long) : Fiel
 
         val fbeModel = getItem(0)
         var i = fbeMapSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             val key = fbeModel.first.get()
             val value = fbeModel.second.get()
             values[key] = value
@@ -154,7 +164,8 @@ class FieldModelMapInt32OptionalFlagsSimple(buffer: Buffer, offset: Long) : Fiel
     }
 
     // Get the map as HashMap
-    fun get(values: HashMap<Int, FlagsSimple?>) {
+    fun get(values: HashMap<Int, FlagsSimple?>)
+    {
         values.clear()
 
         val fbeMapSize = size
@@ -163,7 +174,8 @@ class FieldModelMapInt32OptionalFlagsSimple(buffer: Buffer, offset: Long) : Fiel
 
         val fbeModel = getItem(0)
         var i = fbeMapSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             val key = fbeModel.first.get()
             val value = fbeModel.second.get()
             values[key] = value
@@ -173,13 +185,15 @@ class FieldModelMapInt32OptionalFlagsSimple(buffer: Buffer, offset: Long) : Fiel
     }
 
     // Set the map as TreeMap
-    fun set(values: TreeMap<Int, FlagsSimple?>) {
+    fun set(values: TreeMap<Int, FlagsSimple?>)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
 
         val fbeModel = resize(values.size.toLong())
-        for ((key, value1) in values) {
+        for ((key, value1) in values)
+        {
             fbeModel.first.set(key)
             fbeModel.first.FBEShift(fbeModel.first.FBESize + fbeModel.second.FBESize)
             fbeModel.second.set(value1)
@@ -188,13 +202,15 @@ class FieldModelMapInt32OptionalFlagsSimple(buffer: Buffer, offset: Long) : Fiel
     }
 
     // Set the vector as HashMap
-    fun set(values: HashMap<Int, FlagsSimple?>) {
+    fun set(values: HashMap<Int, FlagsSimple?>)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
 
         val fbeModel = resize(values.size.toLong())
-        for ((key, value1) in values) {
+        for ((key, value1) in values)
+        {
             fbeModel.first.set(key)
             fbeModel.first.FBEShift(fbeModel.first.FBESize + fbeModel.second.FBESize)
             fbeModel.second.set(value1)

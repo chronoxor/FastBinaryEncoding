@@ -27,16 +27,19 @@ enum class OrderSideEnum
     constructor(value: Long) { this.raw = value.toByte() }
     constructor(value: OrderSideEnum) { this.raw = value.raw }
 
-    override fun toString(): String {
+    override fun toString(): String
+    {
         if (this == buy) return "buy"
         if (this == sell) return "sell"
         return "<unknown>"
     }
 
-    companion object {
+    companion object
+    {
         private val mapping = HashMap<Byte, OrderSideEnum>()
 
-        init {
+        init
+        {
             for (value in OrderSideEnum.values())
                 mapping[value.raw] = value
         }

@@ -28,7 +28,8 @@ abstract class Receiver
 
     // Receive data
     fun receive(buffer: Buffer) { receive(buffer.data, 0, buffer.size) }
-    fun receive(buffer: ByteArray, offset: Long = 0, size: Long = buffer.size.toLong()) {
+    fun receive(buffer: ByteArray, offset: Long = 0, size: Long = buffer.size.toLong())
+    {
         assert(offset + size <= buffer.size) { "Invalid offset & size!" }
         if (offset + size > buffer.size)
             throw IllegalArgumentException("Invalid offset & size!")
@@ -45,7 +46,8 @@ abstract class Receiver
         var offset2: Long = 0
 
         // While receive buffer is available to handle...
-        while (offset2 < size) {
+        while (offset2 < size)
+        {
             var messageBuffer: ByteArray? = null
             var messageOffset: Long = 0
             var messageSize: Long = 0
@@ -53,19 +55,25 @@ abstract class Receiver
             // Try to receive message size
             var messageSizeCopied = false
             var messageSizeFound = false
-            while (!messageSizeFound) {
+            while (!messageSizeFound)
+            {
                 // Look into the storage buffer
-                if (offset0 < size1) {
+                if (offset0 < size1)
+                {
                     var count = Math.min(size1 - offset0, 4)
-                    if (count == 4L) {
+                    if (count == 4L)
+                    {
                         messageSizeCopied = true
                         messageSizeFound = true
                         messageSize = Buffer.readInt32(this.buffer.data, offset0).toLong()
                         offset0 += 4
                         break
-                    } else {
+                    }
+                    else
+                    {
                         // Fill remaining data from the receive buffer
-                        if (offset2 < size) {
+                        if (offset2 < size)
+                        {
                             count = Math.min(size - offset2, 4 - count)
 
                             // Allocate and refresh the storage buffer
@@ -76,20 +84,25 @@ abstract class Receiver
                             offset1 += count
                             offset2 += count
                             continue
-                        } else
+                        }
+                        else
                             break
                     }
                 }
 
                 // Look into the receive buffer
-                if (offset2 < size) {
+                if (offset2 < size)
+                {
                     val count = Math.min(size - offset2, 4)
-                    if (count == 4L) {
+                    if (count == 4L)
+                    {
                         messageSizeFound = true
                         messageSize = Buffer.readInt32(buffer, offset + offset2).toLong()
                         offset2 += 4
                         break
-                    } else {
+                    }
+                    else
+                    {
                         // Allocate and refresh the storage buffer
                         this.buffer.allocate(count)
                         size1 += count
@@ -99,7 +112,8 @@ abstract class Receiver
                         offset2 += count
                         continue
                     }
-                } else
+                }
+                else
                     break
             }
 
@@ -113,21 +127,28 @@ abstract class Receiver
 
             // Try to receive message body
             var messageFound = false
-            while (!messageFound) {
+            while (!messageFound)
+            {
                 // Look into the storage buffer
-                if (offset0 < size1) {
+                if (offset0 < size1)
+                {
                     var count = Math.min(size1 - offset0, messageSize - 4)
-                    if (count == messageSize - 4) {
+                    if (count == messageSize - 4)
+                    {
                         messageFound = true
                         messageBuffer = this.buffer.data
                         messageOffset = offset0 - 4
                         offset0 += messageSize - 4
                         break
-                    } else {
+                    }
+                    else
+                    {
                         // Fill remaining data from the receive buffer
-                        if (offset2 < size) {
+                        if (offset2 < size)
+                        {
                             // Copy message size into the storage buffer
-                            if (!messageSizeCopied) {
+                            if (!messageSizeCopied)
+                            {
                                 // Allocate and refresh the storage buffer
                                 this.buffer.allocate(4)
                                 size1 += 4
@@ -149,23 +170,29 @@ abstract class Receiver
                             offset1 += count
                             offset2 += count
                             continue
-                        } else
+                        }
+                        else
                             break
                     }
                 }
 
                 // Look into the receive buffer
-                if (offset2 < size) {
+                if (offset2 < size)
+                {
                     val count = Math.min(size - offset2, messageSize - 4)
-                    if (!messageSizeCopied && count == messageSize - 4) {
+                    if (!messageSizeCopied && count == messageSize - 4)
+                    {
                         messageFound = true
                         messageBuffer = buffer
                         messageOffset = offset + offset2 - 4
                         offset2 += messageSize - 4
                         break
-                    } else {
+                    }
+                    else
+                    {
                         // Copy message size into the storage buffer
-                        if (!messageSizeCopied) {
+                        if (!messageSizeCopied)
+                        {
                             // Allocate and refresh the storage buffer
                             this.buffer.allocate(4)
                             size1 += 4
@@ -186,13 +213,16 @@ abstract class Receiver
                         offset2 += count
                         continue
                     }
-                } else
+                }
+                else
                     break
             }
 
-            if (!messageFound) {
+            if (!messageFound)
+            {
                 // Copy message size into the storage buffer
-                if (!messageSizeCopied) {
+                if (!messageSizeCopied)
+                {
                     // Allocate and refresh the storage buffer
                     this.buffer.allocate(4)
                     size1 += 4
@@ -207,18 +237,21 @@ abstract class Receiver
                 return
             }
 
-            if (messageBuffer != null) {
-
+            if (messageBuffer != null)
+            {
                 @Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
                 val fbeStructSize: Int
                 val fbeStructType: Int
 
                 // Read the message parameters
-                if (final) {
+                if (final)
+                {
                     @Suppress("UNUSED_VALUE")
                     fbeStructSize = Buffer.readInt32(messageBuffer, messageOffset)
                     fbeStructType = Buffer.readInt32(messageBuffer, messageOffset + 4)
-                } else {
+                }
+                else
+                {
                     val fbeStructOffset = Buffer.readInt32(messageBuffer, messageOffset + 4)
                     @Suppress("UNUSED_VALUE")
                     fbeStructSize = Buffer.readInt32(messageBuffer, messageOffset + fbeStructOffset)

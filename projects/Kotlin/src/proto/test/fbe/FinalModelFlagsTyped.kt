@@ -19,15 +19,14 @@ class FinalModelFlagsTyped(buffer: Buffer, offset: Long) : FinalModel(buffer, of
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun FBEAllocationSize(value: FlagsTyped): Long {
-        return FBESize
-    }
+    fun FBEAllocationSize(value: FlagsTyped): Long = FBESize
 
     // Final size
     override val FBESize: Long = 8
 
     // Check if the value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return Long.MAX_VALUE
 
@@ -35,7 +34,8 @@ class FinalModelFlagsTyped(buffer: Buffer, offset: Long) : FinalModel(buffer, of
     }
 
     // Get the value
-    fun get(size: Size): FlagsTyped {
+    fun get(size: Size): FlagsTyped
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return FlagsTyped()
 
@@ -44,7 +44,8 @@ class FinalModelFlagsTyped(buffer: Buffer, offset: Long) : FinalModel(buffer, of
     }
 
     // Set the value
-    fun set(value: FlagsTyped): Long {
+    fun set(value: FlagsTyped): Long
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0

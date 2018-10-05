@@ -16,15 +16,14 @@ class FinalModelBoolean(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun FBEAllocationSize(value: Boolean): Long {
-        return FBESize
-    }
+    fun FBEAllocationSize(value: Boolean): Long = FBESize
 
     // Final size
     override val FBESize: Long = 1
 
     // Check if the value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return Long.MAX_VALUE
 
@@ -32,7 +31,8 @@ class FinalModelBoolean(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     }
 
     // Get the value
-    fun get(size: Size): Boolean {
+    fun get(size: Size): Boolean
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return false
 
@@ -41,7 +41,8 @@ class FinalModelBoolean(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     }
 
     // Set the value
-    fun set(value: Boolean): Long {
+    fun set(value: Boolean): Long
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0

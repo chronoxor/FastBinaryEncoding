@@ -36,16 +36,8 @@ public enum StateEnum
     public boolean hasFlags(byte flags) { return (((value & flags) != 0) && ((value & flags) == flags)); }
     public boolean hasFlags(StateEnum flags) { return hasFlags(flags.value); }
 
-    public EnumSet<StateEnum> getAllSet()
-    {
-        return EnumSet.allOf(StateEnum.class);
-    }
-
-    public EnumSet<StateEnum> getNoneSet()
-    {
-        return EnumSet.noneOf(StateEnum.class);
-    }
-
+    public EnumSet<StateEnum> getAllSet() { return EnumSet.allOf(StateEnum.class); }
+    public EnumSet<StateEnum> getNoneSet() { return EnumSet.noneOf(StateEnum.class); }
     public EnumSet<StateEnum> getCurrentSet()
     {
         EnumSet<StateEnum> result = EnumSet.noneOf(StateEnum.class);

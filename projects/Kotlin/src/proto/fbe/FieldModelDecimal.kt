@@ -18,7 +18,8 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     override val FBESize: Long = 16
 
     // Get the value
-    fun get(defaults: BigDecimal = BigDecimal.valueOf(0L)): BigDecimal {
+    fun get(defaults: BigDecimal = BigDecimal.valueOf(0L)): BigDecimal
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
 
@@ -27,7 +28,8 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
         val signum = if (readByte(FBEOffset + 15) < 0) -1 else 1
 
         // Reverse magnitude
-        for (i in 0 until magnitude.size / 2) {
+        for (i in 0 until magnitude.size / 2)
+        {
             val temp = magnitude[i]
             magnitude[i] = magnitude[magnitude.size - i - 1]
             magnitude[magnitude.size - i - 1] = temp
@@ -39,7 +41,8 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     }
 
     // Set the value
-    fun set(value: BigDecimal) {
+    fun set(value: BigDecimal)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
@@ -47,7 +50,8 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
         // Get unscaled absolute value
         val unscaled = value.abs().unscaledValue()
         val bitLength = unscaled.bitLength()
-        if (bitLength < 0 || bitLength > 96) {
+        if (bitLength < 0 || bitLength > 96)
+        {
             // Value too big for .NET Decimal (bit length is limited to [0, 96])
             write(FBEOffset, 0.toByte(), FBESize)
             return
@@ -58,7 +62,8 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
 
         // Get scale
         val scale = value.scale()
-        if (scale < 0 || scale > 28) {
+        if (scale < 0 || scale > 28)
+        {
             // Value scale exceeds .NET Decimal limit of [0, 28]
             write(FBEOffset, 0.toByte(), FBESize)
             return
@@ -67,14 +72,16 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
         // Write unscaled value to bytes 0-11
         var index = 0
         var i = unscaledBytes.size - 1
-        while (i >= 0 && index < 12) {
+        while (i >= 0 && index < 12)
+        {
             write(FBEOffset + index, unscaledBytes[i])
             i--
             index++
         }
 
         // Fill remaining bytes with zeros
-        while (index < 14) {
+        while (index < 14)
+        {
             write(FBEOffset + index, 0.toByte())
             index++
         }

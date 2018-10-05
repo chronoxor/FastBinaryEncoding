@@ -19,15 +19,14 @@ class FinalModelEnumSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, of
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun FBEAllocationSize(value: EnumSimple): Long {
-        return FBESize
-    }
+    fun FBEAllocationSize(value: EnumSimple): Long = FBESize
 
     // Final size
     override val FBESize: Long = 4
 
     // Check if the value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return Long.MAX_VALUE
 
@@ -35,7 +34,8 @@ class FinalModelEnumSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, of
     }
 
     // Get the value
-    fun get(size: Size): EnumSimple {
+    fun get(size: Size): EnumSimple
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return EnumSimple()
 
@@ -44,7 +44,8 @@ class FinalModelEnumSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, of
     }
 
     // Set the value
-    fun set(value: EnumSimple): Long {
+    fun set(value: EnumSimple): Long
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0

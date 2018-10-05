@@ -21,7 +21,8 @@ class FieldModelEnumWChar(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     override val FBESize: Long = 4
 
     // Get the value
-    fun get(defaults: EnumWChar = EnumWChar()): EnumWChar {
+    fun get(defaults: EnumWChar = EnumWChar()): EnumWChar
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
 
@@ -29,7 +30,8 @@ class FieldModelEnumWChar(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     }
 
     // Set the value
-    fun set(value: EnumWChar) {
+    fun set(value: EnumWChar)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return

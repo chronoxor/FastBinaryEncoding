@@ -48,30 +48,30 @@ public class StructBytes implements Comparable<Object>
     }
 
     @Override
-    public int compareTo(Object obj)
+    public int compareTo(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return -1;
 
-        if (!StructBytes.class.isAssignableFrom(obj.getClass()))
+        if (!StructBytes.class.isAssignableFrom(other.getClass()))
             return -1;
 
-        final StructBytes other = (StructBytes)obj;
+        final StructBytes obj = (StructBytes)other;
 
         int result = 0;
         return result;
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return false;
 
-        if (!StructBytes.class.isAssignableFrom(obj.getClass()))
+        if (!StructBytes.class.isAssignableFrom(other.getClass()))
             return false;
 
-        final StructBytes other = (StructBytes)obj;
+        final StructBytes obj = (StructBytes)other;
 
         return true;
     }

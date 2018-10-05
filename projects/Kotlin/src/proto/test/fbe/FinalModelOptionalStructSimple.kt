@@ -18,12 +18,11 @@ import test.*;
 class FinalModelOptionalStructSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
-    fun FBEAllocationSize(optional: StructSimple?): Long {
-        return (1 + (if (optional != null) value.FBEAllocationSize(optional) else 0)).toLong()
-    }
+    fun FBEAllocationSize(optional: StructSimple?): Long = (1 + (if (optional != null) value.FBEAllocationSize(optional) else 0)).toLong()
 
     // Checks whether the object contains a value
-    fun hasValue(): Boolean {
+    fun hasValue(): Boolean
+    {
         if (_buffer.offset + FBEOffset + 1 > _buffer.size)
             return false
 
@@ -35,7 +34,8 @@ class FinalModelOptionalStructSimple(buffer: Buffer, offset: Long) : FinalModel(
     val value = FinalModelStructSimple(buffer, 0)
 
     // Check if the optional value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + 1 > _buffer.size)
             return Long.MAX_VALUE
 
@@ -50,14 +50,17 @@ class FinalModelOptionalStructSimple(buffer: Buffer, offset: Long) : FinalModel(
     }
 
     // Get the optional value
-    fun get(size: Size): StructSimple? {
+    fun get(size: Size): StructSimple?
+    {
         assert(_buffer.offset + FBEOffset + 1 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + FBEOffset + 1 > _buffer.size) {
+        if (_buffer.offset + FBEOffset + 1 > _buffer.size)
+        {
             size.value = 0
             return null
         }
 
-        if (!hasValue()) {
+        if (!hasValue())
+        {
             size.value = 1
             return null
         }
@@ -70,7 +73,8 @@ class FinalModelOptionalStructSimple(buffer: Buffer, offset: Long) : FinalModel(
     }
 
     // Set the optional value
-    fun set(optional: StructSimple?): Long {
+    fun set(optional: StructSimple?): Long
+    {
         assert(_buffer.offset + FBEOffset + 1 <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + 1 > _buffer.size)
             return 0

@@ -4284,7 +4284,7 @@ void GeneratorJava::GenerateEnum(const std::shared_ptr<Package>& p, const std::s
     {
         int index = 0;
         bool first = true;
-        std::string last = ConvertEnumConstant(enum_type, "0", false);
+        std::string last = ConvertEnumConstant(enum_type, "0");
         for (const auto& value : e->body->values)
         {
             WriteIndent(std::string(first ? "" : ", ") + *value->name + "(");
@@ -4293,13 +4293,13 @@ void GeneratorJava::GenerateEnum(const std::shared_ptr<Package>& p, const std::s
                 if (value->value->constant && !value->value->constant->empty())
                 {
                     index = 0;
-                    last = ConvertEnumConstant(enum_type, *value->value->constant, false);
+                    last = ConvertEnumConstant(enum_type, *value->value->constant);
                     Write(last + " + " + std::to_string(index++));
                 }
                 else if (value->value->reference && !value->value->reference->empty())
                 {
                     index = 0;
-                    last = ConvertEnumConstant("", *value->value->reference, false);
+                    last = ConvertEnumConstant("", *value->value->reference);
                     Write(last);
                 }
             }
@@ -4597,7 +4597,7 @@ void GeneratorJava::GenerateFlags(const std::shared_ptr<Package>& p, const std::
     {
         int index = 0;
         bool first = true;
-        std::string last = ConvertEnumConstant(flags_type, "0", false);
+        std::string last = ConvertEnumConstant(flags_type, "0");
         for (const auto& value : f->body->values)
         {
             WriteIndent(std::string(first ? "" : ", ") + *value->name + "(");
@@ -4606,13 +4606,13 @@ void GeneratorJava::GenerateFlags(const std::shared_ptr<Package>& p, const std::
                 if (value->value->constant && !value->value->constant->empty())
                 {
                     index = 0;
-                    last = ConvertEnumConstant(flags_type, *value->value->constant, false);
+                    last = ConvertEnumConstant(flags_type, *value->value->constant);
                     Write(last + " + " + std::to_string(index++));
                 }
                 else if (value->value->reference && !value->value->reference->empty())
                 {
                     index = 0;
-                    last = ConvertEnumConstant("", *value->value->reference, false);
+                    last = ConvertEnumConstant("", *value->value->reference);
                     Write(last);
                 }
             }
@@ -4650,26 +4650,10 @@ void GeneratorJava::GenerateFlags(const std::shared_ptr<Package>& p, const std::
     WriteLineIndent("public boolean hasFlags(" + flags_base_type + " flags) { return (((value & flags) != 0) && ((value & flags) == flags)); }");
     WriteLineIndent("public boolean hasFlags(" + flags_name + " flags) { return hasFlags(flags.value); }");
 
-    // Generate flags getAllSet() method
+    // Generate flags getAllSet(), getNoneSet(), getCurrentSet() methods
     WriteLine();
-    WriteLineIndent("public EnumSet<" + flags_name + "> getAllSet()");
-    WriteLineIndent("{");
-    Indent(1);
-    WriteLineIndent("return EnumSet.allOf(" + flags_name + ".class);");
-    Indent(-1);
-    WriteLineIndent("}");
-
-    // Generate flags getNoneSet() method
-    WriteLine();
-    WriteLineIndent("public EnumSet<" + flags_name + "> getNoneSet()");
-    WriteLineIndent("{");
-    Indent(1);
-    WriteLineIndent("return EnumSet.noneOf(" + flags_name + ".class);");
-    Indent(-1);
-    WriteLineIndent("}");
-
-    // Generate flags getCurrentSet() method
-    WriteLine();
+    WriteLineIndent("public EnumSet<" + flags_name + "> getAllSet() { return EnumSet.allOf(" + flags_name + ".class); }");
+    WriteLineIndent("public EnumSet<" + flags_name + "> getNoneSet() { return EnumSet.noneOf(" + flags_name + ".class); }");
     WriteLineIndent("public EnumSet<" + flags_name + "> getCurrentSet()");
     WriteLineIndent("{");
     Indent(1);
@@ -4832,7 +4816,7 @@ void GeneratorJava::GenerateFlagsClass(const std::shared_ptr<Package>& p, const 
     WriteLineIndent("public EnumSet<" + flags_type_name + "> getNoneSet() { return value.getNoneSet(); }");
     WriteLineIndent("public EnumSet<" + flags_type_name + "> getCurrentSet() { return value.getCurrentSet(); }");
 
-    // Generate flags class fromSet() methods
+    // Generate flags class fromSet() method
     WriteLine();
     WriteLineIndent("public static " + flags_name + " fromSet(EnumSet<" + flags_type_name + "> set)");
     WriteLineIndent("{");
@@ -5089,25 +5073,25 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
     // Generate struct compareTo() method
     WriteLine();
     WriteLineIndent("@Override");
-    WriteLineIndent("public int compareTo(Object obj)");
+    WriteLineIndent("public int compareTo(Object other)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("if (obj == null)");
+    WriteLineIndent("if (other == null)");
     Indent(1);
     WriteLineIndent("return -1;");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("if (!" + *s->name + ".class.isAssignableFrom(obj.getClass()))");
+    WriteLineIndent("if (!" + *s->name + ".class.isAssignableFrom(other.getClass()))");
     Indent(1);
     WriteLineIndent("return -1;");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("final " + *s->name + " other = (" + *s->name + ")obj;");
+    WriteLineIndent("final " + *s->name + " obj = (" + *s->name + ")other;");
     WriteLine();
     WriteLineIndent("int result = 0;");
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("result = super.compareTo(other);");
+        WriteLineIndent("result = super.compareTo(obj);");
         WriteLineIndent("if (result != 0)");
         Indent(1);
         WriteLineIndent("return result;");
@@ -5120,9 +5104,9 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
             if (field->keys)
             {
                 if (IsPrimitiveType(*field->type, field->optional))
-                    WriteLineIndent("result = " + ConvertPrimitiveTypeName(*field->type)  + ".compare(" + *field->name + ", other." + *field->name + ");");
+                    WriteLineIndent("result = " + ConvertPrimitiveTypeName(*field->type)  + ".compare(" + *field->name + ", obj." + *field->name + ");");
                 else
-                    WriteLineIndent("result = " + *field->name + ".compareTo(other." + *field->name + ");");
+                    WriteLineIndent("result = " + *field->name + ".compareTo(obj." + *field->name + ");");
                 WriteLineIndent("if (result != 0)");
                 Indent(1);
                 WriteLineIndent("return result;");
@@ -5137,24 +5121,24 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
     // Generate struct equals() method
     WriteLine();
     WriteLineIndent("@Override");
-    WriteLineIndent("public boolean equals(Object obj)");
+    WriteLineIndent("public boolean equals(Object other)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("if (obj == null)");
+    WriteLineIndent("if (other == null)");
     Indent(1);
     WriteLineIndent("return false;");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("if (!" + *s->name + ".class.isAssignableFrom(obj.getClass()))");
+    WriteLineIndent("if (!" + *s->name + ".class.isAssignableFrom(other.getClass()))");
     Indent(1);
     WriteLineIndent("return false;");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("final " + *s->name + " other = (" + *s->name + ")obj;");
+    WriteLineIndent("final " + *s->name + " obj = (" + *s->name + ")other;");
     WriteLine();
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("if (!super.equals(other))");
+        WriteLineIndent("if (!super.equals(obj))");
         Indent(1);
         WriteLineIndent("return false;");
         Indent(-1);
@@ -5166,9 +5150,9 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
             if (field->keys)
             {
                 if (IsPrimitiveType(*field->type, field->optional))
-                    WriteLineIndent("if (" + *field->name + " != other." + *field->name + ")");
+                    WriteLineIndent("if (" + *field->name + " != obj." + *field->name + ")");
                 else
-                    WriteLineIndent("if (!" + *field->name + ".equals(other." + *field->name + "))");
+                    WriteLineIndent("if (!" + *field->name + ".equals(obj." + *field->name + "))");
                 Indent(1);
                 WriteLineIndent("return false;");
                 Indent(-1);
@@ -6865,7 +6849,7 @@ std::string GeneratorJava::ConvertEnumRead(const std::string& type)
     return "";
 }
 
-std::string GeneratorJava::ConvertEnumConstant(const std::string& type, const std::string& value, bool optional)
+std::string GeneratorJava::ConvertEnumConstant(const std::string& type, const std::string& value)
 {
     std::string result = value;
 

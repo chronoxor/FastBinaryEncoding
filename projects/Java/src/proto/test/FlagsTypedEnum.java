@@ -40,16 +40,8 @@ public enum FlagsTypedEnum
     public boolean hasFlags(long flags) { return (((value & flags) != 0) && ((value & flags) == flags)); }
     public boolean hasFlags(FlagsTypedEnum flags) { return hasFlags(flags.value); }
 
-    public EnumSet<FlagsTypedEnum> getAllSet()
-    {
-        return EnumSet.allOf(FlagsTypedEnum.class);
-    }
-
-    public EnumSet<FlagsTypedEnum> getNoneSet()
-    {
-        return EnumSet.noneOf(FlagsTypedEnum.class);
-    }
-
+    public EnumSet<FlagsTypedEnum> getAllSet() { return EnumSet.allOf(FlagsTypedEnum.class); }
+    public EnumSet<FlagsTypedEnum> getNoneSet() { return EnumSet.noneOf(FlagsTypedEnum.class); }
     public EnumSet<FlagsTypedEnum> getCurrentSet()
     {
         EnumSet<FlagsTypedEnum> result = EnumSet.noneOf(FlagsTypedEnum.class);

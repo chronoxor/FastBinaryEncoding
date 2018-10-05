@@ -19,15 +19,14 @@ class FinalModelStateEx(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun FBEAllocationSize(value: StateEx): Long {
-        return FBESize
-    }
+    fun FBEAllocationSize(value: StateEx): Long = FBESize
 
     // Final size
     override val FBESize: Long = 1
 
     // Check if the value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return Long.MAX_VALUE
 
@@ -35,7 +34,8 @@ class FinalModelStateEx(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     }
 
     // Get the value
-    fun get(size: Size): StateEx {
+    fun get(size: Size): StateEx
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return StateEx()
 
@@ -44,7 +44,8 @@ class FinalModelStateEx(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     }
 
     // Set the value
-    fun set(value: StateEx): Long {
+    fun set(value: StateEx): Long
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0

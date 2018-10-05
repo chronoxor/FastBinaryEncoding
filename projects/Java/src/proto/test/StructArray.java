@@ -69,30 +69,30 @@ public class StructArray implements Comparable<Object>
     }
 
     @Override
-    public int compareTo(Object obj)
+    public int compareTo(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return -1;
 
-        if (!StructArray.class.isAssignableFrom(obj.getClass()))
+        if (!StructArray.class.isAssignableFrom(other.getClass()))
             return -1;
 
-        final StructArray other = (StructArray)obj;
+        final StructArray obj = (StructArray)other;
 
         int result = 0;
         return result;
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return false;
 
-        if (!StructArray.class.isAssignableFrom(obj.getClass()))
+        if (!StructArray.class.isAssignableFrom(other.getClass()))
             return false;
 
-        final StructArray other = (StructArray)obj;
+        final StructArray obj = (StructArray)other;
 
         return true;
     }

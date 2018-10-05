@@ -21,17 +21,21 @@ class FinalModelMapStringOptionalStructSimple(buffer: Buffer, offset: Long) : Fi
     private val _modelValue = FinalModelOptionalStructSimple(buffer, offset)
 
     // Get the allocation size
-    fun FBEAllocationSize(values: TreeMap<String, StructSimple?>): Long {
+    fun FBEAllocationSize(values: TreeMap<String, StructSimple?>): Long
+    {
         var size: Long = 4
-        for ((key, value1) in values) {
+        for ((key, value1) in values)
+        {
             size += _modelKey.FBEAllocationSize(key)
             size += _modelValue.FBEAllocationSize(value1)
         }
         return size
     }
-    fun FBEAllocationSize(values: HashMap<String, StructSimple?>): Long {
+    fun FBEAllocationSize(values: HashMap<String, StructSimple?>): Long
+    {
         var size: Long = 4
-        for ((key, value1) in values) {
+        for ((key, value1) in values)
+        {
             size += _modelKey.FBEAllocationSize(key)
             size += _modelValue.FBEAllocationSize(value1)
         }
@@ -39,7 +43,8 @@ class FinalModelMapStringOptionalStructSimple(buffer: Buffer, offset: Long) : Fi
     }
 
     // Check if the map is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return Long.MAX_VALUE
 
@@ -49,7 +54,8 @@ class FinalModelMapStringOptionalStructSimple(buffer: Buffer, offset: Long) : Fi
         _modelKey.FBEOffset = FBEOffset + 4
         _modelValue.FBEOffset = FBEOffset + 4
         var i = fbeMapSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             val offsetKey = _modelKey.verify()
             if (offsetKey == Long.MAX_VALUE)
                 return Long.MAX_VALUE
@@ -67,7 +73,8 @@ class FinalModelMapStringOptionalStructSimple(buffer: Buffer, offset: Long) : Fi
     }
 
     // Get the map as TreeMap
-    fun get(values: TreeMap<String, StructSimple?>): Long {
+    fun get(values: TreeMap<String, StructSimple?>): Long
+    {
         values.clear()
 
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
@@ -83,7 +90,8 @@ class FinalModelMapStringOptionalStructSimple(buffer: Buffer, offset: Long) : Fi
         _modelKey.FBEOffset = FBEOffset + 4
         _modelValue.FBEOffset = FBEOffset + 4
         var i = fbeMapSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             offset.value = 0
             val key = _modelKey.get(offset)
             _modelKey.FBEShift(offset.value)
@@ -100,7 +108,8 @@ class FinalModelMapStringOptionalStructSimple(buffer: Buffer, offset: Long) : Fi
     }
 
     // Get the map as HashMap
-    fun get(values: HashMap<String, StructSimple?>): Long {
+    fun get(values: HashMap<String, StructSimple?>): Long
+    {
         values.clear()
 
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
@@ -116,7 +125,8 @@ class FinalModelMapStringOptionalStructSimple(buffer: Buffer, offset: Long) : Fi
         _modelKey.FBEOffset = FBEOffset + 4
         _modelValue.FBEOffset = FBEOffset + 4
         var i = fbeMapSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             offset.value = 0
             val key = _modelKey.get(offset)
             _modelKey.FBEShift(offset.value)
@@ -134,7 +144,8 @@ class FinalModelMapStringOptionalStructSimple(buffer: Buffer, offset: Long) : Fi
     }
 
     // Set the map as TreeMap
-    fun set(values: TreeMap<String, StructSimple?>): Long {
+    fun set(values: TreeMap<String, StructSimple?>): Long
+    {
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return 0
@@ -144,7 +155,8 @@ class FinalModelMapStringOptionalStructSimple(buffer: Buffer, offset: Long) : Fi
         var size: Long = 4
         _modelKey.FBEOffset = FBEOffset + 4
         _modelValue.FBEOffset = FBEOffset + 4
-        for ((key, value1) in values) {
+        for ((key, value1) in values)
+        {
             val offsetKey = _modelKey.set(key)
             _modelKey.FBEShift(offsetKey)
             _modelValue.FBEShift(offsetKey)
@@ -157,7 +169,8 @@ class FinalModelMapStringOptionalStructSimple(buffer: Buffer, offset: Long) : Fi
     }
 
     // Set the vector as HashMap
-    fun set(values: HashMap<String, StructSimple?>): Long {
+    fun set(values: HashMap<String, StructSimple?>): Long
+    {
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return 0
@@ -167,7 +180,8 @@ class FinalModelMapStringOptionalStructSimple(buffer: Buffer, offset: Long) : Fi
         var size: Long = 4
         _modelKey.FBEOffset = FBEOffset + 4
         _modelValue.FBEOffset = FBEOffset + 4
-        for ((key, value1) in values) {
+        for ((key, value1) in values)
+        {
             val offsetKey = _modelKey.set(key)
             _modelKey.FBEShift(offsetKey)
             _modelValue.FBEShift(offsetKey)

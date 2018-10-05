@@ -21,7 +21,8 @@ class FieldModelOptionalFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(b
     override val FBESize: Long = (1 + 4).toLong()
 
     // Field extra size
-    override val FBEExtra: Long get() {
+    override val FBEExtra: Long get()
+    {
         if (!hasValue())
             return 0
 
@@ -36,7 +37,8 @@ class FieldModelOptionalFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(b
     }
 
     // Checks whether the object contains a value
-    fun hasValue(): Boolean {
+    fun hasValue(): Boolean
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return false
 
@@ -48,7 +50,8 @@ class FieldModelOptionalFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(b
     val value = FieldModelFlagsSimple(buffer, 0)
 
     // Check if the optional value is valid
-    override fun verify(): Boolean {
+    override fun verify(): Boolean
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return true
 
@@ -67,7 +70,8 @@ class FieldModelOptionalFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(b
     }
 
     // Get the optional value (being phase)
-    fun getBegin(): Long {
+    fun getBegin(): Long
+    {
         if (!hasValue())
             return 0
 
@@ -81,12 +85,14 @@ class FieldModelOptionalFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(b
     }
 
     // Get the optional value (end phase)
-    fun getEnd(fbeBegin: Long) {
+    fun getEnd(fbeBegin: Long)
+    {
         _buffer.unshift(fbeBegin)
     }
 
     // Get the optional value
-    fun get(defaults: FlagsSimple? = null): FlagsSimple? {
+    fun get(defaults: FlagsSimple? = null): FlagsSimple?
+    {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
             return defaults
@@ -99,7 +105,8 @@ class FieldModelOptionalFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(b
     }
 
     // Set the optional value (begin phase)
-    fun setBegin(hasValue: Boolean): Long {
+    fun setBegin(hasValue: Boolean): Long
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
@@ -122,12 +129,14 @@ class FieldModelOptionalFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(b
     }
 
     // Set the optional value (end phase)
-    fun setEnd(fbeBegin: Long) {
+    fun setEnd(fbeBegin: Long)
+    {
         _buffer.unshift(fbeBegin)
     }
 
     // Set the optional value
-    fun set(optional: FlagsSimple?) {
+    fun set(optional: FlagsSimple?)
+    {
         val fbeBegin = setBegin(optional != null)
         if (fbeBegin == 0L)
             return

@@ -18,7 +18,8 @@ class FieldModelInt32(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     override val FBESize: Long = 4
 
     // Get the value
-    fun get(defaults: Int = 0): Int {
+    fun get(defaults: Int = 0): Int
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
 
@@ -26,7 +27,8 @@ class FieldModelInt32(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     }
 
     // Set the value
-    fun set(value: Int) {
+    fun set(value: Int)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return

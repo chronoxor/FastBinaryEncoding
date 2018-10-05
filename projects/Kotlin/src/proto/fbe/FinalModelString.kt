@@ -15,12 +15,11 @@ import java.util.*;
 class FinalModelString(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
-    fun FBEAllocationSize(value: String): Long {
-        return (4 + 3 * (value.length + 1)).toLong()
-    }
+    fun FBEAllocationSize(value: String): Long = (4 + 3 * (value.length + 1)).toLong()
 
     // Check if the string value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return Long.MAX_VALUE
 
@@ -32,15 +31,18 @@ class FinalModelString(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     }
 
     // Get the string value
-    fun get(size: Size): String {
-        if (_buffer.offset + FBEOffset + 4 > _buffer.size) {
+    fun get(size: Size): String
+    {
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size)
+        {
             size.value = 0
             return ""
         }
 
         val fbeStringSize = readInt32(FBEOffset)
         assert(_buffer.offset + FBEOffset + 4 + fbeStringSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + FBEOffset + 4 + fbeStringSize > _buffer.size) {
+        if (_buffer.offset + FBEOffset + 4 + fbeStringSize > _buffer.size)
+        {
             size.value = 4
             return ""
         }
@@ -50,7 +52,8 @@ class FinalModelString(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     }
 
     // Set the string value
-    fun set(value: String): Long {
+    fun set(value: String): Long
+    {
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return 0

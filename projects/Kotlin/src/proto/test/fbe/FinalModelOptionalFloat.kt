@@ -18,12 +18,11 @@ import test.*;
 class FinalModelOptionalFloat(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
-    fun FBEAllocationSize(optional: Float?): Long {
-        return (1 + (if (optional != null) value.FBEAllocationSize(optional) else 0)).toLong()
-    }
+    fun FBEAllocationSize(optional: Float?): Long = (1 + (if (optional != null) value.FBEAllocationSize(optional) else 0)).toLong()
 
     // Checks whether the object contains a value
-    fun hasValue(): Boolean {
+    fun hasValue(): Boolean
+    {
         if (_buffer.offset + FBEOffset + 1 > _buffer.size)
             return false
 
@@ -35,7 +34,8 @@ class FinalModelOptionalFloat(buffer: Buffer, offset: Long) : FinalModel(buffer,
     val value = FinalModelFloat(buffer, 0)
 
     // Check if the optional value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + 1 > _buffer.size)
             return Long.MAX_VALUE
 
@@ -50,14 +50,17 @@ class FinalModelOptionalFloat(buffer: Buffer, offset: Long) : FinalModel(buffer,
     }
 
     // Get the optional value
-    fun get(size: Size): Float? {
+    fun get(size: Size): Float?
+    {
         assert(_buffer.offset + FBEOffset + 1 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + FBEOffset + 1 > _buffer.size) {
+        if (_buffer.offset + FBEOffset + 1 > _buffer.size)
+        {
             size.value = 0
             return null
         }
 
-        if (!hasValue()) {
+        if (!hasValue())
+        {
             size.value = 1
             return null
         }
@@ -70,7 +73,8 @@ class FinalModelOptionalFloat(buffer: Buffer, offset: Long) : FinalModel(buffer,
     }
 
     // Set the optional value
-    fun set(optional: Float?): Long {
+    fun set(optional: Float?): Long
+    {
         assert(_buffer.offset + FBEOffset + 1 <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + 1 > _buffer.size)
             return 0

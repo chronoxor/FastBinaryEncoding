@@ -18,7 +18,8 @@ class FieldModelUInt8(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     override val FBESize: Long = 1
 
     // Get the value
-    fun get(defaults: UByte = 0.toUByte()): UByte {
+    fun get(defaults: UByte = 0.toUByte()): UByte
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
 
@@ -26,7 +27,8 @@ class FieldModelUInt8(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     }
 
     // Set the value
-    fun set(value: UByte) {
+    fun set(value: UByte)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return

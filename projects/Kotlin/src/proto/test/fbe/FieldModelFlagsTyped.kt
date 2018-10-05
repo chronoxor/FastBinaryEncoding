@@ -21,7 +21,8 @@ class FieldModelFlagsTyped(buffer: Buffer, offset: Long) : FieldModel(buffer, of
     override val FBESize: Long = 8
 
     // Get the value
-    fun get(defaults: FlagsTyped = FlagsTyped()): FlagsTyped {
+    fun get(defaults: FlagsTyped = FlagsTyped()): FlagsTyped
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
 
@@ -29,7 +30,8 @@ class FieldModelFlagsTyped(buffer: Buffer, offset: Long) : FieldModel(buffer, of
     }
 
     // Set the value
-    fun set(value: FlagsTyped) {
+    fun set(value: FlagsTyped)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return

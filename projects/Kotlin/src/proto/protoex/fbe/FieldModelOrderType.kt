@@ -21,7 +21,8 @@ class FieldModelOrderType(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     override val FBESize: Long = 1
 
     // Get the value
-    fun get(defaults: OrderType = OrderType()): OrderType {
+    fun get(defaults: OrderType = OrderType()): OrderType
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
 
@@ -29,7 +30,8 @@ class FieldModelOrderType(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     }
 
     // Set the value
-    fun set(value: OrderType) {
+    fun set(value: OrderType)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return

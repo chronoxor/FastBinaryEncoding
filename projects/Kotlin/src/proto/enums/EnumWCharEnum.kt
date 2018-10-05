@@ -32,7 +32,8 @@ enum class EnumWCharEnum
     constructor(value: Long) { this.raw = value.toInt() }
     constructor(value: EnumWCharEnum) { this.raw = value.raw }
 
-    override fun toString(): String {
+    override fun toString(): String
+    {
         if (this == ENUM_VALUE_0) return "ENUM_VALUE_0"
         if (this == ENUM_VALUE_1) return "ENUM_VALUE_1"
         if (this == ENUM_VALUE_2) return "ENUM_VALUE_2"
@@ -42,10 +43,12 @@ enum class EnumWCharEnum
         return "<unknown>"
     }
 
-    companion object {
+    companion object
+    {
         private val mapping = HashMap<Int, EnumWCharEnum>()
 
-        init {
+        init
+        {
             for (value in EnumWCharEnum.values())
                 mapping[value.raw] = value
         }

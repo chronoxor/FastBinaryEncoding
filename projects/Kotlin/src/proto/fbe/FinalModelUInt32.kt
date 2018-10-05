@@ -16,15 +16,14 @@ class FinalModelUInt32(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun FBEAllocationSize(value: UInt): Long {
-        return FBESize
-    }
+    fun FBEAllocationSize(value: UInt): Long = FBESize
 
     // Final size
     override val FBESize: Long = 4
 
     // Check if the value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return Long.MAX_VALUE
 
@@ -32,7 +31,8 @@ class FinalModelUInt32(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     }
 
     // Get the value
-    fun get(size: Size): UInt {
+    fun get(size: Size): UInt
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0u
 
@@ -41,7 +41,8 @@ class FinalModelUInt32(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     }
 
     // Set the value
-    fun set(value: UInt): Long {
+    fun set(value: UInt): Long
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0

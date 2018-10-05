@@ -18,7 +18,8 @@ class FieldModelFloat(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     override val FBESize: Long = 4
 
     // Get the value
-    fun get(defaults: Float = 0.0f): Float {
+    fun get(defaults: Float = 0.0f): Float
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
 
@@ -26,7 +27,8 @@ class FieldModelFloat(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     }
 
     // Set the value
-    fun set(value: Float) {
+    fun set(value: Float)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return

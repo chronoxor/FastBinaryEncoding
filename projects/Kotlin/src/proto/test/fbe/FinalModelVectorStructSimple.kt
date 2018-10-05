@@ -20,19 +20,22 @@ class FinalModelVectorStructSimple(buffer: Buffer, offset: Long) : FinalModel(bu
     private val _model = FinalModelStructSimple(buffer, offset)
 
     // Get the allocation size
-    fun FBEAllocationSize(values: ArrayList<StructSimple>): Long {
+    fun FBEAllocationSize(values: ArrayList<StructSimple>): Long
+    {
         var size: Long = 4
         for (value in values)
             size += _model.FBEAllocationSize(value)
         return size
     }
-    fun FBEAllocationSize(values: LinkedList<StructSimple>): Long {
+    fun FBEAllocationSize(values: LinkedList<StructSimple>): Long
+    {
         var size: Long = 4
         for (value in values)
             size += _model.FBEAllocationSize(value)
         return size
     }
-    fun FBEAllocationSize(values: HashSet<StructSimple>): Long {
+    fun FBEAllocationSize(values: HashSet<StructSimple>): Long
+    {
         var size: Long = 4
         for (value in values)
             size += _model.FBEAllocationSize(value)
@@ -40,7 +43,8 @@ class FinalModelVectorStructSimple(buffer: Buffer, offset: Long) : FinalModel(bu
     }
 
     // Check if the vector is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return Long.MAX_VALUE
 
@@ -49,7 +53,8 @@ class FinalModelVectorStructSimple(buffer: Buffer, offset: Long) : FinalModel(bu
         var size: Long = 4
         _model.FBEOffset = FBEOffset + 4
         var i = fbeVectorSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             val offset = _model.verify()
             if (offset == Long.MAX_VALUE)
                 return Long.MAX_VALUE
@@ -60,7 +65,8 @@ class FinalModelVectorStructSimple(buffer: Buffer, offset: Long) : FinalModel(bu
     }
 
     // Get the vector as ArrayList
-    fun get(values: ArrayList<StructSimple>): Long {
+    fun get(values: ArrayList<StructSimple>): Long
+    {
         values.clear()
 
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
@@ -76,7 +82,8 @@ class FinalModelVectorStructSimple(buffer: Buffer, offset: Long) : FinalModel(bu
         var size: Long = 4
         val offset = Size()
         _model.FBEOffset = FBEOffset + 4
-        for (i in 0 until fbeVectorSize) {
+        for (i in 0 until fbeVectorSize)
+        {
             offset.value = 0
             val value = _model.get(offset)
             values.add(value)
@@ -87,7 +94,8 @@ class FinalModelVectorStructSimple(buffer: Buffer, offset: Long) : FinalModel(bu
     }
 
     // Get the vector as LinkedList
-    fun get(values: LinkedList<StructSimple>): Long {
+    fun get(values: LinkedList<StructSimple>): Long
+    {
         values.clear()
 
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
@@ -101,7 +109,8 @@ class FinalModelVectorStructSimple(buffer: Buffer, offset: Long) : FinalModel(bu
         var size: Long = 4
         val offset = Size()
         _model.FBEOffset = FBEOffset + 4
-        for (i in 0 until fbeVectorSize) {
+        for (i in 0 until fbeVectorSize)
+        {
             offset.value = 0
             val value = _model.get(offset)
             values.add(value)
@@ -112,7 +121,8 @@ class FinalModelVectorStructSimple(buffer: Buffer, offset: Long) : FinalModel(bu
     }
 
     // Get the vector as HashSet
-    fun get(values: HashSet<StructSimple>): Long {
+    fun get(values: HashSet<StructSimple>): Long
+    {
         values.clear()
 
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
@@ -126,7 +136,8 @@ class FinalModelVectorStructSimple(buffer: Buffer, offset: Long) : FinalModel(bu
         var size: Long = 4
         val offset = Size()
         _model.FBEOffset = FBEOffset + 4
-        for (i in 0 until fbeVectorSize) {
+        for (i in 0 until fbeVectorSize)
+        {
             offset.value = 0
             val value = _model.get(offset)
             values.add(value)
@@ -137,7 +148,8 @@ class FinalModelVectorStructSimple(buffer: Buffer, offset: Long) : FinalModel(bu
     }
 
     // Set the vector as ArrayList
-    fun set(values: ArrayList<StructSimple>): Long {
+    fun set(values: ArrayList<StructSimple>): Long
+    {
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return 0
@@ -146,7 +158,8 @@ class FinalModelVectorStructSimple(buffer: Buffer, offset: Long) : FinalModel(bu
 
         var size: Long = 4
         _model.FBEOffset = FBEOffset + 4
-        for (value in values) {
+        for (value in values)
+        {
             val offset = _model.set(value)
             _model.FBEShift(offset)
             size += offset
@@ -155,7 +168,8 @@ class FinalModelVectorStructSimple(buffer: Buffer, offset: Long) : FinalModel(bu
     }
 
     // Set the vector as LinkedList
-    fun set(values: LinkedList<StructSimple>): Long {
+    fun set(values: LinkedList<StructSimple>): Long
+    {
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return 0
@@ -164,7 +178,8 @@ class FinalModelVectorStructSimple(buffer: Buffer, offset: Long) : FinalModel(bu
 
         var size: Long = 4
         _model.FBEOffset = FBEOffset + 4
-        for (value in values) {
+        for (value in values)
+        {
             val offset = _model.set(value)
             _model.FBEShift(offset)
             size += offset
@@ -173,7 +188,8 @@ class FinalModelVectorStructSimple(buffer: Buffer, offset: Long) : FinalModel(bu
     }
 
     // Set the vector as HashSet
-    fun set(values: HashSet<StructSimple>): Long {
+    fun set(values: HashSet<StructSimple>): Long
+    {
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return 0
@@ -182,7 +198,8 @@ class FinalModelVectorStructSimple(buffer: Buffer, offset: Long) : FinalModel(bu
 
         var size: Long = 4
         _model.FBEOffset = FBEOffset + 4
-        for (value in values) {
+        for (value in values)
+        {
             val offset = _model.set(value)
             _model.FBEShift(offset)
             size += offset

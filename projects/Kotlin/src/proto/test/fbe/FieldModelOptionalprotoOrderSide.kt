@@ -21,7 +21,8 @@ class FieldModelOptionalprotoOrderSide(buffer: Buffer, offset: Long) : FieldMode
     override val FBESize: Long = (1 + 4).toLong()
 
     // Field extra size
-    override val FBEExtra: Long get() {
+    override val FBEExtra: Long get()
+    {
         if (!hasValue())
             return 0
 
@@ -36,7 +37,8 @@ class FieldModelOptionalprotoOrderSide(buffer: Buffer, offset: Long) : FieldMode
     }
 
     // Checks whether the object contains a value
-    fun hasValue(): Boolean {
+    fun hasValue(): Boolean
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return false
 
@@ -48,7 +50,8 @@ class FieldModelOptionalprotoOrderSide(buffer: Buffer, offset: Long) : FieldMode
     val value = proto.fbe.FieldModelOrderSide(buffer, 0)
 
     // Check if the optional value is valid
-    override fun verify(): Boolean {
+    override fun verify(): Boolean
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return true
 
@@ -67,7 +70,8 @@ class FieldModelOptionalprotoOrderSide(buffer: Buffer, offset: Long) : FieldMode
     }
 
     // Get the optional value (being phase)
-    fun getBegin(): Long {
+    fun getBegin(): Long
+    {
         if (!hasValue())
             return 0
 
@@ -81,12 +85,14 @@ class FieldModelOptionalprotoOrderSide(buffer: Buffer, offset: Long) : FieldMode
     }
 
     // Get the optional value (end phase)
-    fun getEnd(fbeBegin: Long) {
+    fun getEnd(fbeBegin: Long)
+    {
         _buffer.unshift(fbeBegin)
     }
 
     // Get the optional value
-    fun get(defaults: proto.OrderSide? = null): proto.OrderSide? {
+    fun get(defaults: proto.OrderSide? = null): proto.OrderSide?
+    {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
             return defaults
@@ -99,7 +105,8 @@ class FieldModelOptionalprotoOrderSide(buffer: Buffer, offset: Long) : FieldMode
     }
 
     // Set the optional value (begin phase)
-    fun setBegin(hasValue: Boolean): Long {
+    fun setBegin(hasValue: Boolean): Long
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
@@ -122,12 +129,14 @@ class FieldModelOptionalprotoOrderSide(buffer: Buffer, offset: Long) : FieldMode
     }
 
     // Set the optional value (end phase)
-    fun setEnd(fbeBegin: Long) {
+    fun setEnd(fbeBegin: Long)
+    {
         _buffer.unshift(fbeBegin)
     }
 
     // Set the optional value
-    fun set(optional: proto.OrderSide?) {
+    fun set(optional: proto.OrderSide?)
+    {
         val fbeBegin = setBegin(optional != null)
         if (fbeBegin == 0L)
             return

@@ -236,30 +236,30 @@ public class Enums implements Comparable<Object>
     }
 
     @Override
-    public int compareTo(Object obj)
+    public int compareTo(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return -1;
 
-        if (!Enums.class.isAssignableFrom(obj.getClass()))
+        if (!Enums.class.isAssignableFrom(other.getClass()))
             return -1;
 
-        final Enums other = (Enums)obj;
+        final Enums obj = (Enums)other;
 
         int result = 0;
         return result;
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return false;
 
-        if (!Enums.class.isAssignableFrom(obj.getClass()))
+        if (!Enums.class.isAssignableFrom(other.getClass()))
             return false;
 
-        final Enums other = (Enums)obj;
+        final Enums obj = (Enums)other;
 
         return true;
     }

@@ -89,7 +89,7 @@ private:
     std::string ConvertEnumSize(const std::string& type);
     std::string ConvertEnumType(const std::string& type);
     std::string ConvertEnumTypeUtf8Json(const std::string& type);
-    std::string ConvertEnumConstant(const std::string& type, const std::string& value, bool optional);
+    std::string ConvertEnumConstant(const std::string& type, const std::string& value);
     std::string ConvertEnumConstantPrefix(const std::string& type);
     std::string ConvertEnumConstantSuffix(const std::string& type);
     std::string ConvertBaseTypeName(const std::string& type);

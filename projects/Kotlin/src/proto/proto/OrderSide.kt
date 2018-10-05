@@ -14,7 +14,8 @@ import fbe.*;
 
 class OrderSide : Comparable<OrderSide>
 {
-    companion object {
+    companion object
+    {
         val buy = OrderSide(OrderSideEnum.buy)
         val sell = OrderSide(OrderSideEnum.sell)
     }
@@ -36,7 +37,8 @@ class OrderSide : Comparable<OrderSide>
     fun setEnum(value: OrderSideEnum) { this.value = value }
     fun setEnum(value: OrderSide) { this.value = value.value }
 
-    override fun compareTo(other: OrderSide): Int {
+    override fun compareTo(other: OrderSide): Int
+    {
         if (value == null)
             return -1
         if (other.value == null)
@@ -44,7 +46,8 @@ class OrderSide : Comparable<OrderSide>
         return (value!!.raw - other.value!!.raw).toInt()
     }
 
-    override fun equals(other: Any?): Boolean {
+    override fun equals(other: Any?): Boolean
+    {
         if (other == null)
             return false
 
@@ -60,13 +63,15 @@ class OrderSide : Comparable<OrderSide>
         return true
     }
 
-    override fun hashCode(): Int {
+    override fun hashCode(): Int
+    {
         var hash = 17
         hash = hash * 31 + if (value != null) value!!.hashCode() else 0
         return hash
     }
 
-    override fun toString(): String {
+    override fun toString(): String
+    {
         return if (value != null) value!!.toString() else "<unknown>"
     }
 }

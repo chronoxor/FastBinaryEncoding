@@ -16,15 +16,14 @@ class FinalModelUUID(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun FBEAllocationSize(value: UUID): Long {
-        return FBESize
-    }
+    fun FBEAllocationSize(value: UUID): Long = FBESize
 
     // Final size
     override val FBESize: Long = 16
 
     // Check if the value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return Long.MAX_VALUE
 
@@ -32,7 +31,8 @@ class FinalModelUUID(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     }
 
     // Get the value
-    fun get(size: Size): UUID {
+    fun get(size: Size): UUID
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return UUIDGenerator.nil()
 
@@ -41,7 +41,8 @@ class FinalModelUUID(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     }
 
     // Set the value
-    fun set(value: UUID): Long {
+    fun set(value: UUID): Long
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0

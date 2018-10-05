@@ -21,7 +21,8 @@ class FieldModelOptionalStructNested(buffer: Buffer, offset: Long) : FieldModel(
     override val FBESize: Long = (1 + 4).toLong()
 
     // Field extra size
-    override val FBEExtra: Long get() {
+    override val FBEExtra: Long get()
+    {
         if (!hasValue())
             return 0
 
@@ -36,7 +37,8 @@ class FieldModelOptionalStructNested(buffer: Buffer, offset: Long) : FieldModel(
     }
 
     // Checks whether the object contains a value
-    fun hasValue(): Boolean {
+    fun hasValue(): Boolean
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return false
 
@@ -48,7 +50,8 @@ class FieldModelOptionalStructNested(buffer: Buffer, offset: Long) : FieldModel(
     val value = FieldModelStructNested(buffer, 0)
 
     // Check if the optional value is valid
-    override fun verify(): Boolean {
+    override fun verify(): Boolean
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return true
 
@@ -67,7 +70,8 @@ class FieldModelOptionalStructNested(buffer: Buffer, offset: Long) : FieldModel(
     }
 
     // Get the optional value (being phase)
-    fun getBegin(): Long {
+    fun getBegin(): Long
+    {
         if (!hasValue())
             return 0
 
@@ -81,12 +85,14 @@ class FieldModelOptionalStructNested(buffer: Buffer, offset: Long) : FieldModel(
     }
 
     // Get the optional value (end phase)
-    fun getEnd(fbeBegin: Long) {
+    fun getEnd(fbeBegin: Long)
+    {
         _buffer.unshift(fbeBegin)
     }
 
     // Get the optional value
-    fun get(defaults: StructNested? = null): StructNested? {
+    fun get(defaults: StructNested? = null): StructNested?
+    {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
             return defaults
@@ -99,7 +105,8 @@ class FieldModelOptionalStructNested(buffer: Buffer, offset: Long) : FieldModel(
     }
 
     // Set the optional value (begin phase)
-    fun setBegin(hasValue: Boolean): Long {
+    fun setBegin(hasValue: Boolean): Long
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
@@ -122,12 +129,14 @@ class FieldModelOptionalStructNested(buffer: Buffer, offset: Long) : FieldModel(
     }
 
     // Set the optional value (end phase)
-    fun setEnd(fbeBegin: Long) {
+    fun setEnd(fbeBegin: Long)
+    {
         _buffer.unshift(fbeBegin)
     }
 
     // Set the optional value
-    fun set(optional: StructNested?) {
+    fun set(optional: StructNested?)
+    {
         val fbeBegin = setBegin(optional != null)
         if (fbeBegin == 0L)
             return

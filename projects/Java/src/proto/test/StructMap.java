@@ -69,30 +69,30 @@ public class StructMap implements Comparable<Object>
     }
 
     @Override
-    public int compareTo(Object obj)
+    public int compareTo(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return -1;
 
-        if (!StructMap.class.isAssignableFrom(obj.getClass()))
+        if (!StructMap.class.isAssignableFrom(other.getClass()))
             return -1;
 
-        final StructMap other = (StructMap)obj;
+        final StructMap obj = (StructMap)other;
 
         int result = 0;
         return result;
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return false;
 
-        if (!StructMap.class.isAssignableFrom(obj.getClass()))
+        if (!StructMap.class.isAssignableFrom(other.getClass()))
             return false;
 
-        final StructMap other = (StructMap)obj;
+        final StructMap obj = (StructMap)other;
 
         return true;
     }

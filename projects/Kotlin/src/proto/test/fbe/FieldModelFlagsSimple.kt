@@ -21,7 +21,8 @@ class FieldModelFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, o
     override val FBESize: Long = 4
 
     // Get the value
-    fun get(defaults: FlagsSimple = FlagsSimple()): FlagsSimple {
+    fun get(defaults: FlagsSimple = FlagsSimple()): FlagsSimple
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
 
@@ -29,7 +30,8 @@ class FieldModelFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, o
     }
 
     // Set the value
-    fun set(value: FlagsSimple) {
+    fun set(value: FlagsSimple)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return

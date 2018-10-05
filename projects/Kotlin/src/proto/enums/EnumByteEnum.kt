@@ -31,7 +31,8 @@ enum class EnumByteEnum
     constructor(value: Long) { this.raw = value.toByte() }
     constructor(value: EnumByteEnum) { this.raw = value.raw }
 
-    override fun toString(): String {
+    override fun toString(): String
+    {
         if (this == ENUM_VALUE_0) return "ENUM_VALUE_0"
         if (this == ENUM_VALUE_1) return "ENUM_VALUE_1"
         if (this == ENUM_VALUE_2) return "ENUM_VALUE_2"
@@ -41,10 +42,12 @@ enum class EnumByteEnum
         return "<unknown>"
     }
 
-    companion object {
+    companion object
+    {
         private val mapping = HashMap<Byte, EnumByteEnum>()
 
-        init {
+        init
+        {
             for (value in EnumByteEnum.values())
                 mapping[value.raw] = value
         }

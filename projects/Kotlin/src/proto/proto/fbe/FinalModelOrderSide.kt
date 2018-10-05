@@ -19,15 +19,14 @@ class FinalModelOrderSide(buffer: Buffer, offset: Long) : FinalModel(buffer, off
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun FBEAllocationSize(value: OrderSide): Long {
-        return FBESize
-    }
+    fun FBEAllocationSize(value: OrderSide): Long = FBESize
 
     // Final size
     override val FBESize: Long = 1
 
     // Check if the value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return Long.MAX_VALUE
 
@@ -35,7 +34,8 @@ class FinalModelOrderSide(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     }
 
     // Get the value
-    fun get(size: Size): OrderSide {
+    fun get(size: Size): OrderSide
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return OrderSide()
 
@@ -44,7 +44,8 @@ class FinalModelOrderSide(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     }
 
     // Set the value
-    fun set(value: OrderSide): Long {
+    fun set(value: OrderSide): Long
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0

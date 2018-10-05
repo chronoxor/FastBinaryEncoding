@@ -44,35 +44,35 @@ public class Balance extends proto.Balance
     }
 
     @Override
-    public int compareTo(Object obj)
+    public int compareTo(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return -1;
 
-        if (!Balance.class.isAssignableFrom(obj.getClass()))
+        if (!Balance.class.isAssignableFrom(other.getClass()))
             return -1;
 
-        final Balance other = (Balance)obj;
+        final Balance obj = (Balance)other;
 
         int result = 0;
-        result = super.compareTo(other);
+        result = super.compareTo(obj);
         if (result != 0)
             return result;
         return result;
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return false;
 
-        if (!Balance.class.isAssignableFrom(obj.getClass()))
+        if (!Balance.class.isAssignableFrom(other.getClass()))
             return false;
 
-        final Balance other = (Balance)obj;
+        final Balance obj = (Balance)other;
 
-        if (!super.equals(other))
+        if (!super.equals(obj))
             return false;
         return true;
     }

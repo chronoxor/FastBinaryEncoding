@@ -239,35 +239,35 @@ public class StructOptional extends StructSimple
     }
 
     @Override
-    public int compareTo(Object obj)
+    public int compareTo(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return -1;
 
-        if (!StructOptional.class.isAssignableFrom(obj.getClass()))
+        if (!StructOptional.class.isAssignableFrom(other.getClass()))
             return -1;
 
-        final StructOptional other = (StructOptional)obj;
+        final StructOptional obj = (StructOptional)other;
 
         int result = 0;
-        result = super.compareTo(other);
+        result = super.compareTo(obj);
         if (result != 0)
             return result;
         return result;
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return false;
 
-        if (!StructOptional.class.isAssignableFrom(obj.getClass()))
+        if (!StructOptional.class.isAssignableFrom(other.getClass()))
             return false;
 
-        final StructOptional other = (StructOptional)obj;
+        final StructOptional obj = (StructOptional)other;
 
-        if (!super.equals(other))
+        if (!super.equals(obj))
             return false;
         return true;
     }

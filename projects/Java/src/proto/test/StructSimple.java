@@ -174,35 +174,35 @@ public class StructSimple implements Comparable<Object>
     }
 
     @Override
-    public int compareTo(Object obj)
+    public int compareTo(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return -1;
 
-        if (!StructSimple.class.isAssignableFrom(obj.getClass()))
+        if (!StructSimple.class.isAssignableFrom(other.getClass()))
             return -1;
 
-        final StructSimple other = (StructSimple)obj;
+        final StructSimple obj = (StructSimple)other;
 
         int result = 0;
-        result = Integer.compare(uid, other.uid);
+        result = Integer.compare(uid, obj.uid);
         if (result != 0)
             return result;
         return result;
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return false;
 
-        if (!StructSimple.class.isAssignableFrom(obj.getClass()))
+        if (!StructSimple.class.isAssignableFrom(other.getClass()))
             return false;
 
-        final StructSimple other = (StructSimple)obj;
+        final StructSimple obj = (StructSimple)other;
 
-        if (uid != other.uid)
+        if (uid != obj.uid)
             return false;
         return true;
     }

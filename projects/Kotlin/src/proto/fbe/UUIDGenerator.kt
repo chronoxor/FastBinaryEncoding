@@ -36,7 +36,8 @@ object UUIDGenerator
 
     private fun makeNode(): ULong = generator.nextLong().toULong() or 0x0000010000000000uL
 
-    private fun makeNodeAndClockSequence(): ULong {
+    private fun makeNodeAndClockSequence(): ULong
+    {
         val clock = generator.nextLong().toULong()
 
         var lsb: ULong = 0u
@@ -53,11 +54,13 @@ object UUIDGenerator
     fun nil(): UUID = UUID(0, 0)
 
     // Generate sequential UUID1 (time based version)
-    fun sequential(): UUID {
+    fun sequential(): UUID
+    {
         val now = System.currentTimeMillis().toULong()
 
         // Generate new clock sequence bytes to get rid of UUID duplicates
-        synchronized(lock) {
+        synchronized(lock)
+        {
             if (now <= last)
                 nodeAndClockSequence = makeNodeAndClockSequence()
             last = now

@@ -16,15 +16,14 @@ class FinalModelDouble(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun FBEAllocationSize(value: Double): Long {
-        return FBESize
-    }
+    fun FBEAllocationSize(value: Double): Long = FBESize
 
     // Final size
     override val FBESize: Long = 8
 
     // Check if the value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return Long.MAX_VALUE
 
@@ -32,7 +31,8 @@ class FinalModelDouble(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     }
 
     // Get the value
-    fun get(size: Size): Double {
+    fun get(size: Size): Double
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0.0
 
@@ -41,7 +41,8 @@ class FinalModelDouble(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     }
 
     // Set the value
-    fun set(value: Double): Long {
+    fun set(value: Double): Long
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0

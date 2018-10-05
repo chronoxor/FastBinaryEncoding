@@ -77,35 +77,35 @@ public class StructNested extends StructOptional
     }
 
     @Override
-    public int compareTo(Object obj)
+    public int compareTo(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return -1;
 
-        if (!StructNested.class.isAssignableFrom(obj.getClass()))
+        if (!StructNested.class.isAssignableFrom(other.getClass()))
             return -1;
 
-        final StructNested other = (StructNested)obj;
+        final StructNested obj = (StructNested)other;
 
         int result = 0;
-        result = super.compareTo(other);
+        result = super.compareTo(obj);
         if (result != 0)
             return result;
         return result;
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return false;
 
-        if (!StructNested.class.isAssignableFrom(obj.getClass()))
+        if (!StructNested.class.isAssignableFrom(other.getClass()))
             return false;
 
-        final StructNested other = (StructNested)obj;
+        final StructNested obj = (StructNested)other;
 
-        if (!super.equals(other))
+        if (!super.equals(obj))
             return false;
         return true;
     }

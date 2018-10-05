@@ -21,7 +21,8 @@ class FieldModelStateEx(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     override val FBESize: Long = 1
 
     // Get the value
-    fun get(defaults: StateEx = StateEx()): StateEx {
+    fun get(defaults: StateEx = StateEx()): StateEx
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
 
@@ -29,7 +30,8 @@ class FieldModelStateEx(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     }
 
     // Set the value
-    fun set(value: StateEx) {
+    fun set(value: StateEx)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return

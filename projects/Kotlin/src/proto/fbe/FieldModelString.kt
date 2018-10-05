@@ -18,7 +18,8 @@ class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     override val FBESize: Long = 4
 
     // Field extra size
-    override val FBEExtra: Long get() {
+    override val FBEExtra: Long get()
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
 
@@ -31,7 +32,8 @@ class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     }
 
     // Check if the string value is valid
-    override fun verify(): Boolean {
+    override fun verify(): Boolean
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return true
 
@@ -50,7 +52,8 @@ class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     }
 
     // Get the string value
-    fun get(defaults: String = ""): String {
+    fun get(defaults: String = ""): String
+    {
         var value: String = defaults
 
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
@@ -74,7 +77,8 @@ class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     }
 
     // Set the string value
-    fun set(value: String) {
+    fun set(value: String)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return

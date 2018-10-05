@@ -29,7 +29,8 @@ class FieldModelArrayOptionalFlagsSimple(buffer: Buffer, offset: Long, val size:
     val offset: Long get() = 0
 
     // Array index operator
-    fun getItem(index: Long): FieldModelOptionalFlagsSimple {
+    fun getItem(index: Long): FieldModelOptionalFlagsSimple
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         assert(index < size) { "Index is out of bounds!" }
 
@@ -39,13 +40,15 @@ class FieldModelArrayOptionalFlagsSimple(buffer: Buffer, offset: Long, val size:
     }
 
     // Check if the array is valid
-    override fun verify(): Boolean {
+    override fun verify(): Boolean
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return false
 
         _model.FBEOffset = FBEOffset
         var i = size
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             if (!_model.verify())
                 return false
             _model.FBEShift(_model.FBESize)
@@ -55,11 +58,13 @@ class FieldModelArrayOptionalFlagsSimple(buffer: Buffer, offset: Long, val size:
     }
 
     // Get the array
-    fun get(): Array<FlagsSimple?> {
+    fun get(): Array<FlagsSimple?>
+    {
         val values = arrayOfNulls<FlagsSimple?>(size.toInt())
 
         val fbeModel = getItem(0)
-        for (i in 0 until size) {
+        for (i in 0 until size)
+        {
             values[i.toInt()] = fbeModel.get()
             fbeModel.FBEShift(fbeModel.FBESize)
         }
@@ -67,10 +72,12 @@ class FieldModelArrayOptionalFlagsSimple(buffer: Buffer, offset: Long, val size:
     }
 
     // Get the array
-    fun get(values: Array<FlagsSimple?>) {
+    fun get(values: Array<FlagsSimple?>)
+    {
         val fbeModel = getItem(0)
         var i: Long = 0
-        while (i < values.size && i < size) {
+        while (i < values.size && i < size)
+        {
             values[i.toInt()] = fbeModel.get()
             fbeModel.FBEShift(fbeModel.FBESize)
             i++
@@ -78,13 +85,15 @@ class FieldModelArrayOptionalFlagsSimple(buffer: Buffer, offset: Long, val size:
     }
 
     // Get the array as ArrayList
-    fun get(values: ArrayList<FlagsSimple?>) {
+    fun get(values: ArrayList<FlagsSimple?>)
+    {
         values.clear()
         values.ensureCapacity(size.toInt())
 
         val fbeModel = getItem(0)
         var i = size
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             val value = fbeModel.get()
             values.add(value)
             fbeModel.FBEShift(fbeModel.FBESize)
@@ -92,14 +101,16 @@ class FieldModelArrayOptionalFlagsSimple(buffer: Buffer, offset: Long, val size:
     }
 
     // Set the array
-    fun set(values: Array<FlagsSimple?>) {
+    fun set(values: Array<FlagsSimple?>)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
 
         val fbeModel = getItem(0)
         var i: Long = 0
-        while (i < values.size && i < size) {
+        while (i < values.size && i < size)
+        {
             fbeModel.set(values[i.toInt()])
             fbeModel.FBEShift(fbeModel.FBESize)
             i++
@@ -107,14 +118,16 @@ class FieldModelArrayOptionalFlagsSimple(buffer: Buffer, offset: Long, val size:
     }
 
     // Set the array as List
-    fun set(values: ArrayList<FlagsSimple?>) {
+    fun set(values: ArrayList<FlagsSimple?>)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
 
         val fbeModel = getItem(0)
         var i: Long = 0
-        while (i < values.size && i < size) {
+        while (i < values.size && i < size)
+        {
             fbeModel.set(values[i.toInt()])
             fbeModel.FBEShift(fbeModel.FBESize)
             i++

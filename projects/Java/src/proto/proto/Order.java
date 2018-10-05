@@ -56,35 +56,35 @@ public class Order implements Comparable<Object>
     }
 
     @Override
-    public int compareTo(Object obj)
+    public int compareTo(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return -1;
 
-        if (!Order.class.isAssignableFrom(obj.getClass()))
+        if (!Order.class.isAssignableFrom(other.getClass()))
             return -1;
 
-        final Order other = (Order)obj;
+        final Order obj = (Order)other;
 
         int result = 0;
-        result = Integer.compare(uid, other.uid);
+        result = Integer.compare(uid, obj.uid);
         if (result != 0)
             return result;
         return result;
     }
 
     @Override
-    public boolean equals(Object obj)
+    public boolean equals(Object other)
     {
-        if (obj == null)
+        if (other == null)
             return false;
 
-        if (!Order.class.isAssignableFrom(obj.getClass()))
+        if (!Order.class.isAssignableFrom(other.getClass()))
             return false;
 
-        final Order other = (Order)obj;
+        final Order obj = (Order)other;
 
-        if (uid != other.uid)
+        if (uid != obj.uid)
             return false;
         return true;
     }

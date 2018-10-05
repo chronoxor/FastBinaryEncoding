@@ -21,7 +21,8 @@ class FieldModelOrderSide(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     override val FBESize: Long = 1
 
     // Get the value
-    fun get(defaults: OrderSide = OrderSide()): OrderSide {
+    fun get(defaults: OrderSide = OrderSide()): OrderSide
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
 
@@ -29,7 +30,8 @@ class FieldModelOrderSide(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     }
 
     // Set the value
-    fun set(value: OrderSide) {
+    fun set(value: OrderSide)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return

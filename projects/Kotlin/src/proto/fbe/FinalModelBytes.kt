@@ -15,12 +15,11 @@ import java.util.*;
 class FinalModelBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
-    fun FBEAllocationSize(value: ByteArray): Long {
-        return (4 + value.size).toLong()
-    }
+    fun FBEAllocationSize(value: ByteArray): Long = (4 + value.size).toLong()
 
     // Check if the bytes value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return Long.MAX_VALUE
 
@@ -32,15 +31,18 @@ class FinalModelBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     }
 
     // Get the bytes value
-    fun get(size: Size): ByteArray {
-        if (_buffer.offset + FBEOffset + 4 > _buffer.size) {
+    fun get(size: Size): ByteArray
+    {
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size)
+        {
             size.value = 0
             return ByteArray(0)
         }
 
         val fbeBytesSize = readInt32(FBEOffset)
         assert(_buffer.offset + FBEOffset + 4 + fbeBytesSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + FBEOffset + 4 + fbeBytesSize > _buffer.size) {
+        if (_buffer.offset + FBEOffset + 4 + fbeBytesSize > _buffer.size)
+        {
             size.value = 4
             return ByteArray(0)
         }
@@ -50,7 +52,8 @@ class FinalModelBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     }
 
     // Set the bytes value
-    fun set(value: ByteArray): Long {
+    fun set(value: ByteArray): Long
+    {
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return 0

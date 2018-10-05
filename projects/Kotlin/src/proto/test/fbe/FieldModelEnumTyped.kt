@@ -21,7 +21,8 @@ class FieldModelEnumTyped(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     override val FBESize: Long = 1
 
     // Get the value
-    fun get(defaults: EnumTyped = EnumTyped()): EnumTyped {
+    fun get(defaults: EnumTyped = EnumTyped()): EnumTyped
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
 
@@ -29,7 +30,8 @@ class FieldModelEnumTyped(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     }
 
     // Set the value
-    fun set(value: EnumTyped) {
+    fun set(value: EnumTyped)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return

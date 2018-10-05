@@ -166,7 +166,8 @@ object UUIDGenerator
 
     private fun makeNode(): ULong = generator.nextLong().toULong() or 0x0000010000000000uL
 
-    private fun makeNodeAndClockSequence(): ULong {
+    private fun makeNodeAndClockSequence(): ULong
+    {
         val clock = generator.nextLong().toULong()
 
         var lsb: ULong = 0u
@@ -183,11 +184,13 @@ object UUIDGenerator
     fun nil(): UUID = UUID(0, 0)
 
     // Generate sequential UUID1 (time based version)
-    fun sequential(): UUID {
+    fun sequential(): UUID
+    {
         val now = System.currentTimeMillis().toULong()
 
         // Generate new clock sequence bytes to get rid of UUID duplicates
-        synchronized(lock) {
+        synchronized(lock)
+        {
             if (now <= last)
                 nodeAndClockSequence = makeNodeAndClockSequence()
             last = now
@@ -270,7 +273,8 @@ class Buffer
     fun attach(buffer: ByteArray, size: Long, offset: Long) { data = buffer; this.size = size; this.offset = offset }
 
     // Allocate memory in the current buffer and return offset to the allocated memory block
-    fun allocate(size: Long): Long {
+    fun allocate(size: Long): Long
+    {
         assert(size >= 0) { "Invalid allocate size!" }
         if (size < 0)
             throw IllegalArgumentException("Invalid allocate size!")
@@ -280,7 +284,8 @@ class Buffer
         // Calculate a new buffer size
         val total = this.size + size
 
-        if (total <= data.size) {
+        if (total <= data.size)
+        {
             this.size = total
             return offset
         }
@@ -293,7 +298,8 @@ class Buffer
     }
 
     // Remove some memory of the given size from the current buffer
-    fun remove(offset: Long, size: Long) {
+    fun remove(offset: Long, size: Long)
+    {
         assert(offset + size <= this.size) { "Invalid offset & size!" }
         if (offset + size > this.size)
             throw IllegalArgumentException("Invalid offset & size!")
@@ -302,7 +308,8 @@ class Buffer
         this.size -= size
         if (this.offset >= offset + size)
             this.offset -= size
-        else if (this.offset >= offset) {
+        else if (this.offset >= offset)
+        {
             this.offset -= this.offset - offset
             if (this.offset > this.size)
                 this.offset = this.size
@@ -310,12 +317,14 @@ class Buffer
     }
 
     // Reserve memory of the given capacity in the current buffer
-    fun reserve(capacity: Long) {
+    fun reserve(capacity: Long)
+    {
         assert(capacity >= 0) { "Invalid reserve capacity!" }
         if (capacity < 0)
             throw IllegalArgumentException("Invalid reserve capacity!")
 
-        if (capacity > data.size) {
+        if (capacity > data.size)
+        {
             val data = ByteArray(Math.max(capacity, 2L * this.data.size).toInt())
             System.arraycopy(this.data, 0, data, 0, size.toInt())
             this.data = data
@@ -323,7 +332,8 @@ class Buffer
     }
 
     // Resize the current buffer
-    fun resize(size: Long) {
+    fun resize(size: Long)
+    {
         reserve(size)
         this.size = size
         if (offset > this.size)
@@ -331,7 +341,8 @@ class Buffer
     }
 
     // Reset the current buffer and its offset
-    fun reset() {
+    fun reset()
+    {
         size = 0
         offset = 0
     }
@@ -345,47 +356,56 @@ class Buffer
     {
         // Buffer I/O methods
 
-        fun readBoolean(buffer: ByteArray, offset: Long): Boolean {
+        fun readBoolean(buffer: ByteArray, offset: Long): Boolean
+        {
             val index = offset.toInt()
             return buffer[index].toInt() != 0
         }
 
-        fun readByte(buffer: ByteArray, offset: Long): Byte {
+        fun readByte(buffer: ByteArray, offset: Long): Byte
+        {
             val index = offset.toInt()
             return buffer[index]
         }
 
-        fun readChar(buffer: ByteArray, offset: Long): Char {
+        fun readChar(buffer: ByteArray, offset: Long): Char
+        {
             return readInt8(buffer, offset).toChar()
         }
 
-        fun readWChar(buffer: ByteArray, offset: Long): Char {
+        fun readWChar(buffer: ByteArray, offset: Long): Char
+        {
             return readInt32(buffer, offset).toChar()
         }
 
-        fun readInt8(buffer: ByteArray, offset: Long): Byte {
+        fun readInt8(buffer: ByteArray, offset: Long): Byte
+        {
             val index = offset.toInt()
             return buffer[index]
         }
 
-        fun readUInt8(buffer: ByteArray, offset: Long): UByte {
+        fun readUInt8(buffer: ByteArray, offset: Long): UByte
+        {
             val index = offset.toInt()
             return buffer[index].toUByte()
         }
 
-        fun readInt16(buffer: ByteArray, offset: Long): Short {
+        fun readInt16(buffer: ByteArray, offset: Long): Short
+        {
             val index = offset.toInt()
             return (((buffer[index + 0].toInt() and 0xFF) shl 0) or
                     ((buffer[index + 1].toInt() and 0xFF) shl 8)).toShort()
         }
 
-        fun readUInt16(buffer: ByteArray, offset: Long): UShort {
+        fun readUInt16(buffer: ByteArray, offset: Long): UShort
+        {
             val index = offset.toInt()
             return (((buffer[index + 0].toUInt() and 0xFFu) shl 0) or
                     ((buffer[index + 1].toUInt() and 0xFFu) shl 8)).toUShort()
         }
 
-        fun readInt32(buffer: ByteArray, offset: Long): Int {
+        fun readInt32(buffer: ByteArray, offset: Long): Int
+        {
             val index = offset.toInt()
             return ((buffer[index + 0].toInt() and 0xFF) shl  0) or
                    ((buffer[index + 1].toInt() and 0xFF) shl  8) or
@@ -393,7 +413,8 @@ class Buffer
                    ((buffer[index + 3].toInt() and 0xFF) shl 24)
         }
 
-        fun readUInt32(buffer: ByteArray, offset: Long): UInt {
+        fun readUInt32(buffer: ByteArray, offset: Long): UInt
+        {
             val index = offset.toInt()
             return ((buffer[index + 0].toUInt() and 0xFFu) shl  0) or
                    ((buffer[index + 1].toUInt() and 0xFFu) shl  8) or
@@ -401,7 +422,8 @@ class Buffer
                    ((buffer[index + 3].toUInt() and 0xFFu) shl 24)
         }
 
-        fun readInt64(buffer: ByteArray, offset: Long): Long {
+        fun readInt64(buffer: ByteArray, offset: Long): Long
+        {
             val index = offset.toInt()
             return ((buffer[index + 0].toLong() and 0xFF) shl  0) or
                    ((buffer[index + 1].toLong() and 0xFF) shl  8) or
@@ -413,7 +435,8 @@ class Buffer
                    ((buffer[index + 7].toLong() and 0xFF) shl 56)
         }
 
-        fun readUInt64(buffer: ByteArray, offset: Long): ULong {
+        fun readUInt64(buffer: ByteArray, offset: Long): ULong
+        {
             val index = offset.toInt()
             return ((buffer[index + 0].toULong() and 0xFFu) shl  0) or
                    ((buffer[index + 1].toULong() and 0xFFu) shl  8) or
@@ -425,7 +448,8 @@ class Buffer
                    ((buffer[index + 7].toULong() and 0xFFu) shl 56)
         }
 
-        private fun readInt64BE(buffer: ByteArray, offset: Long): Long {
+        private fun readInt64BE(buffer: ByteArray, offset: Long): Long
+        {
             val index = offset.toInt()
             return ((buffer[index + 0].toLong() and 0xFF) shl 56) or
                    ((buffer[index + 1].toLong() and 0xFF) shl 48) or
@@ -437,78 +461,80 @@ class Buffer
                    ((buffer[index + 7].toLong() and 0xFF) shl  0)
         }
 
-        fun readFloat(buffer: ByteArray, offset: Long): Float {
+        fun readFloat(buffer: ByteArray, offset: Long): Float
+        {
             val bits = readInt32(buffer, offset)
             return java.lang.Float.intBitsToFloat(bits)
         }
 
-        fun readDouble(buffer: ByteArray, offset: Long): Double {
+        fun readDouble(buffer: ByteArray, offset: Long): Double
+        {
             val bits = readInt64(buffer, offset)
             return java.lang.Double.longBitsToDouble(bits)
         }
 
-        fun readUUID(buffer: ByteArray, offset: Long): UUID {
+        fun readUUID(buffer: ByteArray, offset: Long): UUID
+        {
             return UUID(readInt64BE(buffer, offset), readInt64BE(buffer, offset + 8))
         }
 
-        fun readBytes(buffer: ByteArray, offset: Long, size: Long): ByteArray {
+        fun readBytes(buffer: ByteArray, offset: Long, size: Long): ByteArray
+        {
             val result = ByteArray(size.toInt())
             System.arraycopy(buffer, offset.toInt(), result, 0, size.toInt())
             return result
         }
 
-        fun readString(buffer: ByteArray, offset: Long, size: Long): String {
+        fun readString(buffer: ByteArray, offset: Long, size: Long): String
+        {
             return kotlin.text.String(buffer, offset.toInt(), size.toInt(), StandardCharsets.UTF_8)
         }
 
-        fun write(buffer: ByteArray, offset: Long, value: Boolean) {
+        fun write(buffer: ByteArray, offset: Long, value: Boolean)
+        {
             buffer[offset.toInt()] = (if (value) 1 else 0).toByte()
         }
 
-        fun write(buffer: ByteArray, offset: Long, value: Byte) {
+        fun write(buffer: ByteArray, offset: Long, value: Byte)
+        {
             buffer[offset.toInt()] = value
         }
 
-        fun write(buffer: ByteArray, offset: Long, value: UByte) {
+        fun write(buffer: ByteArray, offset: Long, value: UByte)
+        {
             buffer[offset.toInt()] = value.toByte()
         }
 
-        fun write(buffer: ByteArray, offset: Long, value: Short) {
+        fun write(buffer: ByteArray, offset: Long, value: Short)
+        {
             buffer[offset.toInt() + 0] = (value.toInt() shr 0).toByte()
             buffer[offset.toInt() + 1] = (value.toInt() shr 8).toByte()
         }
 
-        fun write(buffer: ByteArray, offset: Long, value: UShort) {
+        fun write(buffer: ByteArray, offset: Long, value: UShort)
+        {
             buffer[offset.toInt() + 0] = (value.toUInt() shr 0).toByte()
             buffer[offset.toInt() + 1] = (value.toUInt() shr 8).toByte()
         }
 
-        fun write(buffer: ByteArray, offset: Long, value: Int) {
+        fun write(buffer: ByteArray, offset: Long, value: Int)
+        {
             buffer[offset.toInt() + 0] = (value shr  0).toByte()
             buffer[offset.toInt() + 1] = (value shr  8).toByte()
             buffer[offset.toInt() + 2] = (value shr 16).toByte()
             buffer[offset.toInt() + 3] = (value shr 24).toByte()
         }
 
-        fun write(buffer: ByteArray, offset: Long, value: UInt) {
+        fun write(buffer: ByteArray, offset: Long, value: UInt)
+        {
             buffer[offset.toInt() + 0] = (value shr  0).toByte()
             buffer[offset.toInt() + 1] = (value shr  8).toByte()
             buffer[offset.toInt() + 2] = (value shr 16).toByte()
             buffer[offset.toInt() + 3] = (value shr 24).toByte()
         }
 
-        fun write(buffer: ByteArray, offset: Long, value: Long) {
-            buffer[offset.toInt() + 0] = (value shr  0).toByte()
-            buffer[offset.toInt() + 1] = (value shr  8).toByte()
-            buffer[offset.toInt() + 2] = (value shr 16).toByte()
-            buffer[offset.toInt() + 3] = (value shr 24).toByte()
-            buffer[offset.toInt() + 4] = (value shr 32).toByte()
-            buffer[offset.toInt() + 5] = (value shr 40).toByte()
-            buffer[offset.toInt() + 6] = (value shr 48).toByte()
-            buffer[offset.toInt() + 7] = (value shr 56).toByte()
-        }
-
-        fun write(buffer: ByteArray, offset: Long, value: ULong) {
+        fun write(buffer: ByteArray, offset: Long, value: Long)
+        {
             buffer[offset.toInt() + 0] = (value shr  0).toByte()
             buffer[offset.toInt() + 1] = (value shr  8).toByte()
             buffer[offset.toInt() + 2] = (value shr 16).toByte()
@@ -519,7 +545,20 @@ class Buffer
             buffer[offset.toInt() + 7] = (value shr 56).toByte()
         }
 
-        private fun writeBE(buffer: ByteArray, offset: Long, value: Long) {
+        fun write(buffer: ByteArray, offset: Long, value: ULong)
+        {
+            buffer[offset.toInt() + 0] = (value shr  0).toByte()
+            buffer[offset.toInt() + 1] = (value shr  8).toByte()
+            buffer[offset.toInt() + 2] = (value shr 16).toByte()
+            buffer[offset.toInt() + 3] = (value shr 24).toByte()
+            buffer[offset.toInt() + 4] = (value shr 32).toByte()
+            buffer[offset.toInt() + 5] = (value shr 40).toByte()
+            buffer[offset.toInt() + 6] = (value shr 48).toByte()
+            buffer[offset.toInt() + 7] = (value shr 56).toByte()
+        }
+
+        private fun writeBE(buffer: ByteArray, offset: Long, value: Long)
+        {
             buffer[offset.toInt() + 0] = (value shr 56).toByte()
             buffer[offset.toInt() + 1] = (value shr 48).toByte()
             buffer[offset.toInt() + 2] = (value shr 40).toByte()
@@ -530,30 +569,36 @@ class Buffer
             buffer[offset.toInt() + 7] = (value shr  0).toByte()
         }
 
-        fun write(buffer: ByteArray, offset: Long, value: Float) {
+        fun write(buffer: ByteArray, offset: Long, value: Float)
+        {
             val bits = java.lang.Float.floatToIntBits(value)
             write(buffer, offset, bits)
         }
 
-        fun write(buffer: ByteArray, offset: Long, value: Double) {
+        fun write(buffer: ByteArray, offset: Long, value: Double)
+        {
             val bits = java.lang.Double.doubleToLongBits(value)
             write(buffer, offset, bits)
         }
 
-        fun write(buffer: ByteArray, offset: Long, value: UUID) {
+        fun write(buffer: ByteArray, offset: Long, value: UUID)
+        {
             writeBE(buffer, offset, value.mostSignificantBits)
             writeBE(buffer, offset + 8, value.leastSignificantBits)
         }
 
-        fun write(buffer: ByteArray, offset: Long, value: ByteArray) {
+        fun write(buffer: ByteArray, offset: Long, value: ByteArray)
+        {
             System.arraycopy(value, 0, buffer, offset.toInt(), value.size)
         }
 
-        fun write(buffer: ByteArray, offset: Long, value: ByteArray, valueOffset: Long, valueSize: Long) {
+        fun write(buffer: ByteArray, offset: Long, value: ByteArray, valueOffset: Long, valueSize: Long)
+        {
             System.arraycopy(value, valueOffset.toInt(), buffer, offset.toInt(), valueSize.toInt())
         }
 
-        fun write(buffer: ByteArray, offset: Long, value: Byte, valueCount: Long) {
+        fun write(buffer: ByteArray, offset: Long, value: Byte, valueCount: Long)
+        {
             for (i in 0 until valueCount)
                 buffer[(offset + i).toInt()] = value
         }
@@ -732,7 +777,8 @@ class FieldModel_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     override val FBESize: Long = _SIZE_
 
     // Get the value
-    fun get(defaults: _TYPE_ = _DEFAULTS_): _TYPE_ {
+    fun get(defaults: _TYPE_ = _DEFAULTS_): _TYPE_
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
 
@@ -740,7 +786,8 @@ class FieldModel_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     }
 
     // Set the value
-    fun set(value: _TYPE_) {
+    fun set(value: _TYPE_)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
@@ -787,7 +834,8 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     override val FBESize: Long = 16
 
     // Get the value
-    fun get(defaults: BigDecimal = BigDecimal.valueOf(0L)): BigDecimal {
+    fun get(defaults: BigDecimal = BigDecimal.valueOf(0L)): BigDecimal
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
 
@@ -796,7 +844,8 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
         val signum = if (readByte(FBEOffset + 15) < 0) -1 else 1
 
         // Reverse magnitude
-        for (i in 0 until magnitude.size / 2) {
+        for (i in 0 until magnitude.size / 2)
+        {
             val temp = magnitude[i]
             magnitude[i] = magnitude[magnitude.size - i - 1]
             magnitude[magnitude.size - i - 1] = temp
@@ -808,7 +857,8 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     }
 
     // Set the value
-    fun set(value: BigDecimal) {
+    fun set(value: BigDecimal)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
@@ -816,7 +866,8 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
         // Get unscaled absolute value
         val unscaled = value.abs().unscaledValue()
         val bitLength = unscaled.bitLength()
-        if (bitLength < 0 || bitLength > 96) {
+        if (bitLength < 0 || bitLength > 96)
+        {
             // Value too big for .NET Decimal (bit length is limited to [0, 96])
             write(FBEOffset, 0.toByte(), FBESize)
             return
@@ -827,7 +878,8 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
 
         // Get scale
         val scale = value.scale()
-        if (scale < 0 || scale > 28) {
+        if (scale < 0 || scale > 28)
+        {
             // Value scale exceeds .NET Decimal limit of [0, 28]
             write(FBEOffset, 0.toByte(), FBESize)
             return
@@ -836,14 +888,16 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
         // Write unscaled value to bytes 0-11
         var index = 0
         var i = unscaledBytes.size - 1
-        while (i >= 0 && index < 12) {
+        while (i >= 0 && index < 12)
+        {
             write(FBEOffset + index, unscaledBytes[i])
             i--
             index++
         }
 
         // Fill remaining bytes with zeros
-        while (index < 14) {
+        while (index < 14)
+        {
             write(FBEOffset + index, 0.toByte())
             index++
         }
@@ -889,7 +943,8 @@ class FieldModelTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     override val FBESize: Long = 8
 
     // Get the value
-    fun get(defaults: Instant = Instant.EPOCH): Instant {
+    fun get(defaults: Instant = Instant.EPOCH): Instant
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
 
@@ -898,7 +953,8 @@ class FieldModelTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     }
 
     // Set the value
-    fun set(value: Instant) {
+    fun set(value: Instant)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
@@ -955,7 +1011,8 @@ class FieldModelBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     }
 
     // Check if the bytes value is valid
-    override fun verify(): Boolean {
+    override fun verify(): Boolean
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return true
 
@@ -974,7 +1031,8 @@ class FieldModelBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     }
 
     // Get the bytes value
-    fun get(defaults: ByteArray = ByteArray(0)): ByteArray {
+    fun get(defaults: ByteArray = ByteArray(0)): ByteArray
+    {
         var value: ByteArray = defaults
 
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
@@ -998,7 +1056,8 @@ class FieldModelBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     }
 
     // Set the bytes value
-    fun set(value: ByteArray) {
+    fun set(value: ByteArray)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
@@ -1048,7 +1107,8 @@ class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     override val FBESize: Long = 4
 
     // Field extra size
-    override val FBEExtra: Long get() {
+    override val FBEExtra: Long get()
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
 
@@ -1061,7 +1121,8 @@ class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     }
 
     // Check if the string value is valid
-    override fun verify(): Boolean {
+    override fun verify(): Boolean
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return true
 
@@ -1080,7 +1141,8 @@ class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     }
 
     // Get the string value
-    fun get(defaults: String = ""): String {
+    fun get(defaults: String = ""): String
+    {
         var value: String = defaults
 
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
@@ -1104,7 +1166,8 @@ class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     }
 
     // Set the string value
-    fun set(value: String) {
+    fun set(value: String)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
@@ -1164,7 +1227,8 @@ class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer
     override val FBESize: Long = (1 + 4).toLong()
 
     // Field extra size
-    override val FBEExtra: Long get() {
+    override val FBEExtra: Long get()
+    {
         if (!hasValue())
             return 0
 
@@ -1179,7 +1243,8 @@ class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer
     }
 
     // Checks whether the object contains a value
-    fun hasValue(): Boolean {
+    fun hasValue(): Boolean
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return false
 
@@ -1191,7 +1256,8 @@ class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer
     val value = _MODEL_(buffer, 0)
 
     // Check if the optional value is valid
-    override fun verify(): Boolean {
+    override fun verify(): Boolean
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return true
 
@@ -1210,7 +1276,8 @@ class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer
     }
 
     // Get the optional value (being phase)
-    fun getBegin(): Long {
+    fun getBegin(): Long
+    {
         if (!hasValue())
             return 0
 
@@ -1224,12 +1291,14 @@ class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer
     }
 
     // Get the optional value (end phase)
-    fun getEnd(fbeBegin: Long) {
+    fun getEnd(fbeBegin: Long)
+    {
         _buffer.unshift(fbeBegin)
     }
 
     // Get the optional value
-    fun get(defaults: _TYPE_ = null): _TYPE_ {
+    fun get(defaults: _TYPE_ = null): _TYPE_
+    {
         val fbeBegin = getBegin()
         if (fbeBegin == 0L)
             return defaults
@@ -1242,7 +1311,8 @@ class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer
     }
 
     // Set the optional value (begin phase)
-    fun setBegin(hasValue: Boolean): Long {
+    fun setBegin(hasValue: Boolean): Long
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
@@ -1265,12 +1335,14 @@ class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer
     }
 
     // Set the optional value (end phase)
-    fun setEnd(fbeBegin: Long) {
+    fun setEnd(fbeBegin: Long)
+    {
         _buffer.unshift(fbeBegin)
     }
 
     // Set the optional value
-    fun set(optional: _TYPE_) {
+    fun set(optional: _TYPE_)
+    {
         val fbeBegin = setBegin(optional != null)
         if (fbeBegin == 0L)
             return
@@ -1333,7 +1405,8 @@ class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : Fiel
     val offset: Long get() = 0
 
     // Array index operator
-    fun getItem(index: Long): _MODEL_ {
+    fun getItem(index: Long): _MODEL_
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         assert(index < size) { "Index is out of bounds!" }
 
@@ -1343,13 +1416,15 @@ class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : Fiel
     }
 
     // Check if the array is valid
-    override fun verify(): Boolean {
+    override fun verify(): Boolean
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return false
 
         _model.FBEOffset = FBEOffset
         var i = size
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             if (!_model.verify())
                 return false
             _model.FBEShift(_model.FBESize)
@@ -1359,11 +1434,13 @@ class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : Fiel
     }
 
     // Get the array
-    fun get(): _ARRAY_ {
+    fun get(): _ARRAY_
+    {
         val values = _INIT_
 
         val fbeModel = getItem(0)
-        for (i in 0 until size) {
+        for (i in 0 until size)
+        {
             values[i.toInt()] = fbeModel.get()
             fbeModel.FBEShift(fbeModel.FBESize)
         }
@@ -1371,10 +1448,12 @@ class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : Fiel
     }
 
     // Get the array
-    fun get(values: _ARRAY_) {
+    fun get(values: _ARRAY_)
+    {
         val fbeModel = getItem(0)
         var i: Long = 0
-        while (i < values.size && i < size) {
+        while (i < values.size && i < size)
+        {
             values[i.toInt()] = fbeModel.get()
             fbeModel.FBEShift(fbeModel.FBESize)
             i++
@@ -1382,13 +1461,15 @@ class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : Fiel
     }
 
     // Get the array as ArrayList
-    fun get(values: ArrayList<_TYPE_>) {
+    fun get(values: ArrayList<_TYPE_>)
+    {
         values.clear()
         values.ensureCapacity(size.toInt())
 
         val fbeModel = getItem(0)
         var i = size
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             val value = fbeModel.get()
             values.add(value)
             fbeModel.FBEShift(fbeModel.FBESize)
@@ -1396,14 +1477,16 @@ class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : Fiel
     }
 
     // Set the array
-    fun set(values: _ARRAY_) {
+    fun set(values: _ARRAY_)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
 
         val fbeModel = getItem(0)
         var i: Long = 0
-        while (i < values.size && i < size) {
+        while (i < values.size && i < size)
+        {
             fbeModel.set(values[i.toInt()])
             fbeModel.FBEShift(fbeModel.FBESize)
             i++
@@ -1411,14 +1494,16 @@ class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : Fiel
     }
 
     // Set the array as List
-    fun set(values: ArrayList<_TYPE_>) {
+    fun set(values: ArrayList<_TYPE_>)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
 
         val fbeModel = getItem(0)
         var i: Long = 0
-        while (i < values.size && i < size) {
+        while (i < values.size && i < size)
+        {
             fbeModel.set(values[i.toInt()])
             fbeModel.FBEShift(fbeModel.FBESize)
             i++
@@ -1485,7 +1570,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     override val FBESize: Long = 4
 
     // Field extra size
-    override val FBEExtra: Long get() {
+    override val FBEExtra: Long get()
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
 
@@ -1498,7 +1584,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         var fbeResult: Long = 4
         _model.FBEOffset = fbeVectorOffset + 4
         var i = fbeVectorSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             fbeResult += _model.FBESize + _model.FBEExtra
             _model.FBEShift(_model.FBESize)
         }
@@ -1506,7 +1593,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Get the vector offset
-    val offset: Long get() {
+    val offset: Long get()
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
 
@@ -1515,7 +1603,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Get the vector size
-    val size: Long get() {
+    val size: Long get()
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
 
@@ -1528,7 +1617,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Vector index operator
-    fun getItem(index: Long): _MODEL_ {
+    fun getItem(index: Long): _MODEL_
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
 
         val fbeVectorOffset = readInt32(FBEOffset).toLong()
@@ -1543,7 +1633,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Resize the vector and get its first model
-    fun resize(size: Long): _MODEL_ {
+    fun resize(size: Long): _MODEL_
+    {
         val fbeVectorSize = size * _model.FBESize
         val fbeVectorOffset = _buffer.allocate(4 + fbeVectorSize) - _buffer.offset
         assert(fbeVectorOffset > 0 && _buffer.offset + fbeVectorOffset + 4 <= _buffer.size) { "Model is broken!" }
@@ -1557,7 +1648,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Check if the vector is valid
-    override fun verify(): Boolean {
+    override fun verify(): Boolean
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return true
 
@@ -1572,7 +1664,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
 
         _model.FBEOffset = fbeVectorOffset + 4
         var i = fbeVectorSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             if (!_model.verify())
                 return false
             _model.FBEShift(_model.FBESize)
@@ -1582,7 +1675,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Get the vector as ArrayList
-    operator fun get(values: ArrayList<_TYPE_>) {
+    operator fun get(values: ArrayList<_TYPE_>)
+    {
         values.clear()
 
         val fbeVectorSize = size
@@ -1593,7 +1687,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
 
         val fbeModel = getItem(0)
         var i = fbeVectorSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             val value = fbeModel.get()
             values.add(value)
             fbeModel.FBEShift(fbeModel.FBESize)
@@ -1601,7 +1696,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Get the vector as LinkedList
-    operator fun get(values: LinkedList<_TYPE_>) {
+    operator fun get(values: LinkedList<_TYPE_>)
+    {
         values.clear()
 
         val fbeVectorSize = size
@@ -1610,7 +1706,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
 
         val fbeModel = getItem(0)
         var i = fbeVectorSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             val value = fbeModel.get()
             values.add(value)
             fbeModel.FBEShift(fbeModel.FBESize)
@@ -1618,7 +1715,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Get the vector as HashSet
-    operator fun get(values: HashSet<_TYPE_>) {
+    operator fun get(values: HashSet<_TYPE_>)
+    {
         values.clear()
 
         val fbeVectorSize = size
@@ -1627,7 +1725,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
 
         val fbeModel = getItem(0)
         var i = fbeVectorSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             val value = fbeModel.get()
             values.add(value)
             fbeModel.FBEShift(fbeModel.FBESize)
@@ -1635,39 +1734,45 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     }
 
     // Set the vector as ArrayList
-    fun set(values: ArrayList<_TYPE_>) {
+    fun set(values: ArrayList<_TYPE_>)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
 
         val fbeModel = resize(values.size.toLong())
-        for (value in values) {
+        for (value in values)
+        {
             fbeModel.set(value)
             fbeModel.FBEShift(fbeModel.FBESize)
         }
     }
 
     // Set the vector as LinkedList
-    fun set(values: LinkedList<_TYPE_>) {
+    fun set(values: LinkedList<_TYPE_>)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
 
         val fbeModel = resize(values.size.toLong())
-        for (value in values) {
+        for (value in values)
+        {
             fbeModel.set(value)
             fbeModel.FBEShift(fbeModel.FBESize)
         }
     }
 
     // Set the vector as HashSet
-    fun set(values: HashSet<_TYPE_>) {
+    fun set(values: HashSet<_TYPE_>)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
 
         val fbeModel = resize(values.size.toLong())
-        for (value in values) {
+        for (value in values)
+        {
             fbeModel.set(value)
             fbeModel.FBEShift(fbeModel.FBESize)
         }
@@ -1721,7 +1826,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
     override val FBESize: Long = 4
 
     // Field extra size
-    override val FBEExtra: Long get() {
+    override val FBEExtra: Long get()
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
 
@@ -1735,7 +1841,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
         _modelKey.FBEOffset = fbeMapOffset + 4
         _modelValue.FBEOffset = fbeMapOffset + 4 + _modelKey.FBESize
         var i = fbeMapSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             fbeResult += _modelKey.FBESize + _modelKey.FBEExtra
             _modelKey.FBEShift(_modelKey.FBESize + _modelValue.FBESize)
 
@@ -1746,7 +1853,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
     }
 
     // Get the map offset
-    val offset: Long get() {
+    val offset: Long get()
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
 
@@ -1755,7 +1863,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
     }
 
     // Get the map size
-    val size: Long get() {
+    val size: Long get()
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
 
@@ -1768,7 +1877,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
     }
 
     // Map index operator
-    fun getItem(index: Long): Pair<_KEY_MODEL_, _VALUE_MODEL_> {
+    fun getItem(index: Long): Pair<_KEY_MODEL_, _VALUE_MODEL_>
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
 
         val fbeMapOffset = readInt32(FBEOffset).toLong()
@@ -1785,7 +1895,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
     }
 
     // Resize the map and get its first model
-    fun resize(size: Long): Pair<_KEY_MODEL_, _VALUE_MODEL_> {
+    fun resize(size: Long): Pair<_KEY_MODEL_, _VALUE_MODEL_>
+    {
         _modelKey.FBEOffset = FBEOffset
         _modelValue.FBEOffset = FBEOffset + _modelKey.FBESize
 
@@ -1803,7 +1914,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
     }
 
     // Check if the map is valid
-    override fun verify(): Boolean {
+    override fun verify(): Boolean
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return true
 
@@ -1819,7 +1931,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
         _modelKey.FBEOffset = fbeMapOffset + 4
         _modelValue.FBEOffset = fbeMapOffset + 4 + _modelKey.FBESize
         var i = fbeMapSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             if (!_modelKey.verify())
                 return false
             _modelKey.FBEShift(_modelKey.FBESize + _modelValue.FBESize)
@@ -1832,7 +1945,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
     }
 
     // Get the map as TreeMap
-    fun get(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>) {
+    fun get(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>)
+    {
         values.clear()
 
         val fbeMapSize = size
@@ -1841,7 +1955,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
 
         val fbeModel = getItem(0)
         var i = fbeMapSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             val key = fbeModel.first.get()
             val value = fbeModel.second.get()
             values[key] = value
@@ -1851,7 +1966,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
     }
 
     // Get the map as HashMap
-    fun get(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>) {
+    fun get(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>)
+    {
         values.clear()
 
         val fbeMapSize = size
@@ -1860,7 +1976,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
 
         val fbeModel = getItem(0)
         var i = fbeMapSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             val key = fbeModel.first.get()
             val value = fbeModel.second.get()
             values[key] = value
@@ -1870,13 +1987,15 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
     }
 
     // Set the map as TreeMap
-    fun set(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>) {
+    fun set(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
 
         val fbeModel = resize(values.size.toLong())
-        for ((key, value1) in values) {
+        for ((key, value1) in values)
+        {
             fbeModel.first.set(key)
             fbeModel.first.FBEShift(fbeModel.first.FBESize + fbeModel.second.FBESize)
             fbeModel.second.set(value1)
@@ -1885,13 +2004,15 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
     }
 
     // Set the vector as HashMap
-    fun set(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>) {
+    fun set(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
 
         val fbeModel = resize(values.size.toLong())
-        for ((key, value1) in values) {
+        for ((key, value1) in values)
+        {
             fbeModel.first.set(key)
             fbeModel.first.FBEShift(fbeModel.first.FBESize + fbeModel.second.FBESize)
             fbeModel.second.set(value1)
@@ -1947,7 +2068,8 @@ class FieldModel_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     override val FBESize: Long = _SIZE_
 
     // Get the value
-    fun get(defaults: _NAME_ = _NAME_()): _NAME_ {
+    fun get(defaults: _NAME_ = _NAME_()): _NAME_
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
 
@@ -1955,7 +2077,8 @@ class FieldModel_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     }
 
     // Set the value
-    fun set(value: _NAME_) {
+    fun set(value: _NAME_)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
@@ -2030,7 +2153,8 @@ void GeneratorKotlin::GenerateFBEFinalModel(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding base final model class
-abstract class FinalModel protected constructor(protected var _buffer: Buffer, protected var _offset: Long) {
+abstract class FinalModel protected constructor(protected var _buffer: Buffer, protected var _offset: Long)
+{
     // Final offset
     var FBEOffset: Long = _offset
     // Final size
@@ -2112,15 +2236,14 @@ class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun FBEAllocationSize(value: _TYPE_): Long {
-        return FBESize
-    }
+    fun FBEAllocationSize(value: _TYPE_): Long = FBESize
 
     // Final size
     override val FBESize: Long = _SIZE_
 
     // Check if the value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return Long.MAX_VALUE
 
@@ -2128,7 +2251,8 @@ class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     }
 
     // Get the value
-    fun get(size: Size): _TYPE_ {
+    fun get(size: Size): _TYPE_
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return _DEFAULTS_
 
@@ -2137,7 +2261,8 @@ class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     }
 
     // Set the value
-    fun set(value: _TYPE_): Long {
+    fun set(value: _TYPE_): Long
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
@@ -2183,15 +2308,14 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun FBEAllocationSize(value: BigDecimal): Long {
-        return FBESize
-    }
+    fun FBEAllocationSize(value: BigDecimal): Long = FBESize
 
     // Final size
     override val FBESize: Long = 16
 
     // Check if the value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return Long.MAX_VALUE
 
@@ -2199,7 +2323,8 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     }
 
     // Get the value
-    fun get(size: Size): BigDecimal {
+    fun get(size: Size): BigDecimal
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return BigDecimal.valueOf(0L)
 
@@ -2208,7 +2333,8 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
         val signum = if (readByte(FBEOffset + 15) < 0) -1 else 1
 
         // Reverse magnitude
-        for (i in 0 until magnitude.size / 2) {
+        for (i in 0 until magnitude.size / 2)
+        {
             val temp = magnitude[i]
             magnitude[i] = magnitude[magnitude.size - i - 1]
             magnitude[magnitude.size - i - 1] = temp
@@ -2221,7 +2347,8 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     }
 
     // Set the value
-    fun set(value: BigDecimal): Long {
+    fun set(value: BigDecimal): Long
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
@@ -2229,7 +2356,8 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
         // Get unscaled absolute value
         val unscaled = value.abs().unscaledValue()
         val bitLength = unscaled.bitLength()
-        if (bitLength < 0 || bitLength > 96) {
+        if (bitLength < 0 || bitLength > 96)
+        {
             // Value too big for .NET Decimal (bit length is limited to [0, 96])
             write(FBEOffset, 0.toByte(), FBESize)
             return FBESize
@@ -2240,7 +2368,8 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
 
         // Get scale
         val scale = value.scale()
-        if (scale < 0 || scale > 28) {
+        if (scale < 0 || scale > 28)
+        {
             // Value scale exceeds .NET Decimal limit of [0, 28]
             write(FBEOffset, 0.toByte(), FBESize)
             return FBESize
@@ -2249,14 +2378,16 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
         // Write unscaled value to bytes 0-11
         var index = 0
         var i = unscaledBytes.size - 1
-        while (i >= 0 && index < 12) {
+        while (i >= 0 && index < 12)
+        {
             write(FBEOffset + index, unscaledBytes[i])
             i--
             index++
         }
 
         // Fill remaining bytes with zeros
-        while (index < 14) {
+        while (index < 14)
+        {
             write(FBEOffset + index, 0.toByte())
             index++
         }
@@ -2301,15 +2432,14 @@ class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, off
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun FBEAllocationSize(value: Instant): Long {
-        return FBESize
-    }
+    fun FBEAllocationSize(value: Instant): Long = FBESize
 
     // Final size
     override val FBESize: Long = 8
 
     // Check if the value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return Long.MAX_VALUE
 
@@ -2317,7 +2447,8 @@ class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     }
 
     // Get the value
-    fun get(size: Size): Instant {
+    fun get(size: Size): Instant
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return Instant.EPOCH
 
@@ -2327,7 +2458,8 @@ class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     }
 
     // Set the value
-    fun set(value: Instant): Long {
+    fun set(value: Instant): Long
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
@@ -2368,12 +2500,11 @@ void GeneratorKotlin::GenerateFBEFinalModelBytes(const std::string& package)
 class FinalModelBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
-    fun FBEAllocationSize(value: ByteArray): Long {
-        return (4 + value.size).toLong()
-    }
+    fun FBEAllocationSize(value: ByteArray): Long = (4 + value.size).toLong()
 
     // Check if the bytes value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return Long.MAX_VALUE
 
@@ -2385,15 +2516,18 @@ class FinalModelBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     }
 
     // Get the bytes value
-    fun get(size: Size): ByteArray {
-        if (_buffer.offset + FBEOffset + 4 > _buffer.size) {
+    fun get(size: Size): ByteArray
+    {
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size)
+        {
             size.value = 0
             return ByteArray(0)
         }
 
         val fbeBytesSize = readInt32(FBEOffset)
         assert(_buffer.offset + FBEOffset + 4 + fbeBytesSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + FBEOffset + 4 + fbeBytesSize > _buffer.size) {
+        if (_buffer.offset + FBEOffset + 4 + fbeBytesSize > _buffer.size)
+        {
             size.value = 4
             return ByteArray(0)
         }
@@ -2403,7 +2537,8 @@ class FinalModelBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     }
 
     // Set the bytes value
-    fun set(value: ByteArray): Long {
+    fun set(value: ByteArray): Long
+    {
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return 0
@@ -2449,12 +2584,11 @@ void GeneratorKotlin::GenerateFBEFinalModelString(const std::string& package)
 class FinalModelString(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
-    fun FBEAllocationSize(value: String): Long {
-        return (4 + 3 * (value.length + 1)).toLong()
-    }
+    fun FBEAllocationSize(value: String): Long = (4 + 3 * (value.length + 1)).toLong()
 
     // Check if the string value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return Long.MAX_VALUE
 
@@ -2466,15 +2600,18 @@ class FinalModelString(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     }
 
     // Get the string value
-    fun get(size: Size): String {
-        if (_buffer.offset + FBEOffset + 4 > _buffer.size) {
+    fun get(size: Size): String
+    {
+        if (_buffer.offset + FBEOffset + 4 > _buffer.size)
+        {
             size.value = 0
             return ""
         }
 
         val fbeStringSize = readInt32(FBEOffset)
         assert(_buffer.offset + FBEOffset + 4 + fbeStringSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + FBEOffset + 4 + fbeStringSize > _buffer.size) {
+        if (_buffer.offset + FBEOffset + 4 + fbeStringSize > _buffer.size)
+        {
             size.value = 4
             return ""
         }
@@ -2484,7 +2621,8 @@ class FinalModelString(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     }
 
     // Set the string value
-    fun set(value: String): Long {
+    fun set(value: String): Long
+    {
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return 0
@@ -2540,12 +2678,11 @@ void GeneratorKotlin::GenerateFBEFinalModelOptional(const std::string& package, 
 class FinalModelOptional_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
-    fun FBEAllocationSize(optional: _TYPE_): Long {
-        return (1 + (if (optional != null) value.FBEAllocationSize(optional) else 0)).toLong()
-    }
+    fun FBEAllocationSize(optional: _TYPE_): Long = (1 + (if (optional != null) value.FBEAllocationSize(optional) else 0)).toLong()
 
     // Checks whether the object contains a value
-    fun hasValue(): Boolean {
+    fun hasValue(): Boolean
+    {
         if (_buffer.offset + FBEOffset + 1 > _buffer.size)
             return false
 
@@ -2557,7 +2694,8 @@ class FinalModelOptional_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer
     val value = _MODEL_(buffer, 0)
 
     // Check if the optional value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + 1 > _buffer.size)
             return Long.MAX_VALUE
 
@@ -2572,14 +2710,17 @@ class FinalModelOptional_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer
     }
 
     // Get the optional value
-    fun get(size: Size): _TYPE_ {
+    fun get(size: Size): _TYPE_
+    {
         assert(_buffer.offset + FBEOffset + 1 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + FBEOffset + 1 > _buffer.size) {
+        if (_buffer.offset + FBEOffset + 1 > _buffer.size)
+        {
             size.value = 0
             return null
         }
 
-        if (!hasValue()) {
+        if (!hasValue())
+        {
             size.value = 1
             return null
         }
@@ -2592,7 +2733,8 @@ class FinalModelOptional_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer
     }
 
     // Set the optional value
-    fun set(optional: _TYPE_): Long {
+    fun set(optional: _TYPE_): Long
+    {
         assert(_buffer.offset + FBEOffset + 1 <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + 1 > _buffer.size)
             return 0
@@ -2652,19 +2794,23 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
     private val _model = _MODEL_(buffer, offset)
 
     // Get the allocation size
-    fun FBEAllocationSize(values: _ARRAY_): Long {
+    fun FBEAllocationSize(values: _ARRAY_): Long
+    {
         var size: Long = 0
         var i: Long = 0
-        while (i < values.size && i < _size) {
+        while (i < values.size && i < _size)
+        {
             size += _model.FBEAllocationSize(values[i.toInt()])
             i++
         }
         return size
     }
-    fun FBEAllocationSize(values: ArrayList<_TYPE_>): Long {
+    fun FBEAllocationSize(values: ArrayList<_TYPE_>): Long
+    {
         var size: Long = 0
         var i: Long = 0
-        while (i < values.size && i < _size) {
+        while (i < values.size && i < _size)
+        {
             size += _model.FBEAllocationSize(values[i.toInt()])
             i++
         }
@@ -2672,14 +2818,16 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
     }
 
     // Check if the array is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset > _buffer.size)
             return Long.MAX_VALUE
 
         var size: Long = 0
         _model.FBEOffset = FBEOffset
         var i = _size
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             val offset = _model.verify()
             if (offset == Long.MAX_VALUE)
                 return Long.MAX_VALUE
@@ -2690,11 +2838,13 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
     }
 
     // Get the array
-    fun get(size: Size): _ARRAY_ {
+    fun get(size: Size): _ARRAY_
+    {
         val values = _INIT_
 
         assert(_buffer.offset + FBEOffset <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + FBEOffset > _buffer.size) {
+        if (_buffer.offset + FBEOffset > _buffer.size)
+        {
             size.value = 0
             return values
         }
@@ -2702,7 +2852,8 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
         size.value = 0
         val offset = Size()
         _model.FBEOffset = FBEOffset
-        for (i in 0 until _size) {
+        for (i in 0 until _size)
+        {
             offset.value = 0
             values[i.toInt()] = _model.get(offset)
             _model.FBEShift(offset.value)
@@ -2712,7 +2863,8 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
     }
 
     // Get the array
-    fun get(values: _ARRAY_): Long {
+    fun get(values: _ARRAY_): Long
+    {
         assert(_buffer.offset + FBEOffset <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset > _buffer.size)
             return 0
@@ -2721,7 +2873,8 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
         val offset = Size()
         _model.FBEOffset = FBEOffset
         var i: Long = 0
-        while (i < values.size && i < _size) {
+        while (i < values.size && i < _size)
+        {
             offset.value = 0
             values[i.toInt()] = _model.get(offset)
             _model.FBEShift(offset.value)
@@ -2732,7 +2885,8 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
     }
 
     // Get the array as ArrayList
-    fun get(values: ArrayList<_TYPE_>): Long {
+    fun get(values: ArrayList<_TYPE_>): Long
+    {
         values.clear()
 
         assert(_buffer.offset + FBEOffset <= _buffer.size) { "Model is broken!" }
@@ -2745,7 +2899,8 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
         val offset = Size()
         _model.FBEOffset = FBEOffset
         var i = _size
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             offset.value = 0
             val value = _model.get(offset)
             values.add(value)
@@ -2756,7 +2911,8 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
     }
 
     // Set the array
-    fun set(values: _ARRAY_): Long {
+    fun set(values: _ARRAY_): Long
+    {
         assert(_buffer.offset + FBEOffset <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset > _buffer.size)
             return 0
@@ -2764,7 +2920,8 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
         var size: Long = 0
         _model.FBEOffset = FBEOffset
         var i: Long = 0
-        while (i < values.size && i < _size) {
+        while (i < values.size && i < _size)
+        {
             val offset = _model.set(values[i.toInt()])
             _model.FBEShift(offset)
             size += offset
@@ -2774,7 +2931,8 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
     }
 
     // Set the array as List
-    fun set(values: ArrayList<_TYPE_>): Long {
+    fun set(values: ArrayList<_TYPE_>): Long
+    {
         assert(_buffer.offset + FBEOffset <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset > _buffer.size)
             return 0
@@ -2782,7 +2940,8 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
         var size: Long = 0
         _model.FBEOffset = FBEOffset
         var i: Long = 0
-        while (i < values.size && i < _size) {
+        while (i < values.size && i < _size)
+        {
             val offset = _model.set(values[i.toInt()])
             _model.FBEShift(offset)
             size += offset
@@ -2848,19 +3007,22 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     private val _model = _MODEL_(buffer, offset)
 
     // Get the allocation size
-    fun FBEAllocationSize(values: ArrayList<_TYPE_>): Long {
+    fun FBEAllocationSize(values: ArrayList<_TYPE_>): Long
+    {
         var size: Long = 4
         for (value in values)
             size += _model.FBEAllocationSize(value)
         return size
     }
-    fun FBEAllocationSize(values: LinkedList<_TYPE_>): Long {
+    fun FBEAllocationSize(values: LinkedList<_TYPE_>): Long
+    {
         var size: Long = 4
         for (value in values)
             size += _model.FBEAllocationSize(value)
         return size
     }
-    fun FBEAllocationSize(values: HashSet<_TYPE_>): Long {
+    fun FBEAllocationSize(values: HashSet<_TYPE_>): Long
+    {
         var size: Long = 4
         for (value in values)
             size += _model.FBEAllocationSize(value)
@@ -2868,7 +3030,8 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Check if the vector is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return Long.MAX_VALUE
 
@@ -2877,7 +3040,8 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
         var size: Long = 4
         _model.FBEOffset = FBEOffset + 4
         var i = fbeVectorSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             val offset = _model.verify()
             if (offset == Long.MAX_VALUE)
                 return Long.MAX_VALUE
@@ -2888,7 +3052,8 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Get the vector as ArrayList
-    fun get(values: ArrayList<_TYPE_>): Long {
+    fun get(values: ArrayList<_TYPE_>): Long
+    {
         values.clear()
 
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
@@ -2904,7 +3069,8 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
         var size: Long = 4
         val offset = Size()
         _model.FBEOffset = FBEOffset + 4
-        for (i in 0 until fbeVectorSize) {
+        for (i in 0 until fbeVectorSize)
+        {
             offset.value = 0
             val value = _model.get(offset)
             values.add(value)
@@ -2915,7 +3081,8 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Get the vector as LinkedList
-    fun get(values: LinkedList<_TYPE_>): Long {
+    fun get(values: LinkedList<_TYPE_>): Long
+    {
         values.clear()
 
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
@@ -2929,7 +3096,8 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
         var size: Long = 4
         val offset = Size()
         _model.FBEOffset = FBEOffset + 4
-        for (i in 0 until fbeVectorSize) {
+        for (i in 0 until fbeVectorSize)
+        {
             offset.value = 0
             val value = _model.get(offset)
             values.add(value)
@@ -2940,7 +3108,8 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Get the vector as HashSet
-    fun get(values: HashSet<_TYPE_>): Long {
+    fun get(values: HashSet<_TYPE_>): Long
+    {
         values.clear()
 
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
@@ -2954,7 +3123,8 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
         var size: Long = 4
         val offset = Size()
         _model.FBEOffset = FBEOffset + 4
-        for (i in 0 until fbeVectorSize) {
+        for (i in 0 until fbeVectorSize)
+        {
             offset.value = 0
             val value = _model.get(offset)
             values.add(value)
@@ -2965,7 +3135,8 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Set the vector as ArrayList
-    fun set(values: ArrayList<_TYPE_>): Long {
+    fun set(values: ArrayList<_TYPE_>): Long
+    {
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return 0
@@ -2974,7 +3145,8 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
 
         var size: Long = 4
         _model.FBEOffset = FBEOffset + 4
-        for (value in values) {
+        for (value in values)
+        {
             val offset = _model.set(value)
             _model.FBEShift(offset)
             size += offset
@@ -2983,7 +3155,8 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Set the vector as LinkedList
-    fun set(values: LinkedList<_TYPE_>): Long {
+    fun set(values: LinkedList<_TYPE_>): Long
+    {
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return 0
@@ -2992,7 +3165,8 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
 
         var size: Long = 4
         _model.FBEOffset = FBEOffset + 4
-        for (value in values) {
+        for (value in values)
+        {
             val offset = _model.set(value)
             _model.FBEShift(offset)
             size += offset
@@ -3001,7 +3175,8 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Set the vector as HashSet
-    fun set(values: HashSet<_TYPE_>): Long {
+    fun set(values: HashSet<_TYPE_>): Long
+    {
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return 0
@@ -3010,7 +3185,8 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
 
         var size: Long = 4
         _model.FBEOffset = FBEOffset + 4
-        for (value in values) {
+        for (value in values)
+        {
             val offset = _model.set(value)
             _model.FBEShift(offset)
             size += offset
@@ -3063,17 +3239,21 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
     private val _modelValue = _VALUE_MODEL_(buffer, offset)
 
     // Get the allocation size
-    fun FBEAllocationSize(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long {
+    fun FBEAllocationSize(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
+    {
         var size: Long = 4
-        for ((key, value1) in values) {
+        for ((key, value1) in values)
+        {
             size += _modelKey.FBEAllocationSize(key)
             size += _modelValue.FBEAllocationSize(value1)
         }
         return size
     }
-    fun FBEAllocationSize(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long {
+    fun FBEAllocationSize(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
+    {
         var size: Long = 4
-        for ((key, value1) in values) {
+        for ((key, value1) in values)
+        {
             size += _modelKey.FBEAllocationSize(key)
             size += _modelValue.FBEAllocationSize(value1)
         }
@@ -3081,7 +3261,8 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
     }
 
     // Check if the map is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return Long.MAX_VALUE
 
@@ -3091,7 +3272,8 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
         _modelKey.FBEOffset = FBEOffset + 4
         _modelValue.FBEOffset = FBEOffset + 4
         var i = fbeMapSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             val offsetKey = _modelKey.verify()
             if (offsetKey == Long.MAX_VALUE)
                 return Long.MAX_VALUE
@@ -3109,7 +3291,8 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
     }
 
     // Get the map as TreeMap
-    fun get(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long {
+    fun get(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
+    {
         values.clear()
 
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
@@ -3125,7 +3308,8 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
         _modelKey.FBEOffset = FBEOffset + 4
         _modelValue.FBEOffset = FBEOffset + 4
         var i = fbeMapSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             offset.value = 0
             val key = _modelKey.get(offset)
             _modelKey.FBEShift(offset.value)
@@ -3142,7 +3326,8 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
     }
 
     // Get the map as HashMap
-    fun get(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long {
+    fun get(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
+    {
         values.clear()
 
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
@@ -3158,7 +3343,8 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
         _modelKey.FBEOffset = FBEOffset + 4
         _modelValue.FBEOffset = FBEOffset + 4
         var i = fbeMapSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             offset.value = 0
             val key = _modelKey.get(offset)
             _modelKey.FBEShift(offset.value)
@@ -3176,7 +3362,8 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
     }
 
     // Set the map as TreeMap
-    fun set(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long {
+    fun set(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
+    {
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return 0
@@ -3186,7 +3373,8 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
         var size: Long = 4
         _modelKey.FBEOffset = FBEOffset + 4
         _modelValue.FBEOffset = FBEOffset + 4
-        for ((key, value1) in values) {
+        for ((key, value1) in values)
+        {
             val offsetKey = _modelKey.set(key)
             _modelKey.FBEShift(offsetKey)
             _modelValue.FBEShift(offsetKey)
@@ -3199,7 +3387,8 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
     }
 
     // Set the vector as HashMap
-    fun set(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long {
+    fun set(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
+    {
         assert(_buffer.offset + FBEOffset + 4 <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + 4 > _buffer.size)
             return 0
@@ -3209,7 +3398,8 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
         var size: Long = 4
         _modelKey.FBEOffset = FBEOffset + 4
         _modelValue.FBEOffset = FBEOffset + 4
-        for ((key, value1) in values) {
+        for ((key, value1) in values)
+        {
             val offsetKey = _modelKey.set(key)
             _modelKey.FBEShift(offsetKey)
             _modelValue.FBEShift(offsetKey)
@@ -3267,15 +3457,14 @@ class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
 {
     // Get the allocation size
     @Suppress("UNUSED_PARAMETER")
-    fun FBEAllocationSize(value: _NAME_): Long {
-        return FBESize
-    }
+    fun FBEAllocationSize(value: _NAME_): Long = FBESize
 
     // Final size
     override val FBESize: Long = _SIZE_
 
     // Check if the value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return Long.MAX_VALUE
 
@@ -3283,7 +3472,8 @@ class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     }
 
     // Get the value
-    fun get(size: Size): _NAME_ {
+    fun get(size: Size): _NAME_
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return _NAME_()
 
@@ -3292,7 +3482,8 @@ class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     }
 
     // Set the value
-    fun set(value: _NAME_): Long {
+    fun set(value: _NAME_): Long
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
@@ -3349,7 +3540,8 @@ abstract class Sender
     // Send serialized buffer.
     // Direct call of the method requires knowledge about internals of FBE models serialization.
     // Use it with care!
-    fun sendSerialized(serialized: Long): Long {
+    fun sendSerialized(serialized: Long): Long
+    {
         assert(serialized > 0) { "Invalid size of the serialized buffer!" }
         if (serialized <= 0)
             return 0
@@ -3414,7 +3606,8 @@ abstract class Receiver
 
     // Receive data
     fun receive(buffer: Buffer) { receive(buffer.data, 0, buffer.size) }
-    fun receive(buffer: ByteArray, offset: Long = 0, size: Long = buffer.size.toLong()) {
+    fun receive(buffer: ByteArray, offset: Long = 0, size: Long = buffer.size.toLong())
+    {
         assert(offset + size <= buffer.size) { "Invalid offset & size!" }
         if (offset + size > buffer.size)
             throw IllegalArgumentException("Invalid offset & size!")
@@ -3431,7 +3624,8 @@ abstract class Receiver
         var offset2: Long = 0
 
         // While receive buffer is available to handle...
-        while (offset2 < size) {
+        while (offset2 < size)
+        {
             var messageBuffer: ByteArray? = null
             var messageOffset: Long = 0
             var messageSize: Long = 0
@@ -3439,19 +3633,25 @@ abstract class Receiver
             // Try to receive message size
             var messageSizeCopied = false
             var messageSizeFound = false
-            while (!messageSizeFound) {
+            while (!messageSizeFound)
+            {
                 // Look into the storage buffer
-                if (offset0 < size1) {
+                if (offset0 < size1)
+                {
                     var count = Math.min(size1 - offset0, 4)
-                    if (count == 4L) {
+                    if (count == 4L)
+                    {
                         messageSizeCopied = true
                         messageSizeFound = true
                         messageSize = Buffer.readInt32(this.buffer.data, offset0).toLong()
                         offset0 += 4
                         break
-                    } else {
+                    }
+                    else
+                    {
                         // Fill remaining data from the receive buffer
-                        if (offset2 < size) {
+                        if (offset2 < size)
+                        {
                             count = Math.min(size - offset2, 4 - count)
 
                             // Allocate and refresh the storage buffer
@@ -3462,20 +3662,25 @@ abstract class Receiver
                             offset1 += count
                             offset2 += count
                             continue
-                        } else
+                        }
+                        else
                             break
                     }
                 }
 
                 // Look into the receive buffer
-                if (offset2 < size) {
+                if (offset2 < size)
+                {
                     val count = Math.min(size - offset2, 4)
-                    if (count == 4L) {
+                    if (count == 4L)
+                    {
                         messageSizeFound = true
                         messageSize = Buffer.readInt32(buffer, offset + offset2).toLong()
                         offset2 += 4
                         break
-                    } else {
+                    }
+                    else
+                    {
                         // Allocate and refresh the storage buffer
                         this.buffer.allocate(count)
                         size1 += count
@@ -3485,7 +3690,8 @@ abstract class Receiver
                         offset2 += count
                         continue
                     }
-                } else
+                }
+                else
                     break
             }
 
@@ -3499,21 +3705,28 @@ abstract class Receiver
 
             // Try to receive message body
             var messageFound = false
-            while (!messageFound) {
+            while (!messageFound)
+            {
                 // Look into the storage buffer
-                if (offset0 < size1) {
+                if (offset0 < size1)
+                {
                     var count = Math.min(size1 - offset0, messageSize - 4)
-                    if (count == messageSize - 4) {
+                    if (count == messageSize - 4)
+                    {
                         messageFound = true
                         messageBuffer = this.buffer.data
                         messageOffset = offset0 - 4
                         offset0 += messageSize - 4
                         break
-                    } else {
+                    }
+                    else
+                    {
                         // Fill remaining data from the receive buffer
-                        if (offset2 < size) {
+                        if (offset2 < size)
+                        {
                             // Copy message size into the storage buffer
-                            if (!messageSizeCopied) {
+                            if (!messageSizeCopied)
+                            {
                                 // Allocate and refresh the storage buffer
                                 this.buffer.allocate(4)
                                 size1 += 4
@@ -3535,23 +3748,29 @@ abstract class Receiver
                             offset1 += count
                             offset2 += count
                             continue
-                        } else
+                        }
+                        else
                             break
                     }
                 }
 
                 // Look into the receive buffer
-                if (offset2 < size) {
+                if (offset2 < size)
+                {
                     val count = Math.min(size - offset2, messageSize - 4)
-                    if (!messageSizeCopied && count == messageSize - 4) {
+                    if (!messageSizeCopied && count == messageSize - 4)
+                    {
                         messageFound = true
                         messageBuffer = buffer
                         messageOffset = offset + offset2 - 4
                         offset2 += messageSize - 4
                         break
-                    } else {
+                    }
+                    else
+                    {
                         // Copy message size into the storage buffer
-                        if (!messageSizeCopied) {
+                        if (!messageSizeCopied)
+                        {
                             // Allocate and refresh the storage buffer
                             this.buffer.allocate(4)
                             size1 += 4
@@ -3572,13 +3791,16 @@ abstract class Receiver
                         offset2 += count
                         continue
                     }
-                } else
+                }
+                else
                     break
             }
 
-            if (!messageFound) {
+            if (!messageFound)
+            {
                 // Copy message size into the storage buffer
-                if (!messageSizeCopied) {
+                if (!messageSizeCopied)
+                {
                     // Allocate and refresh the storage buffer
                     this.buffer.allocate(4)
                     size1 += 4
@@ -3593,18 +3815,21 @@ abstract class Receiver
                 return
             }
 
-            if (messageBuffer != null) {
-
+            if (messageBuffer != null)
+            {
                 @Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
                 val fbeStructSize: Int
                 val fbeStructType: Int
 
                 // Read the message parameters
-                if (final) {
+                if (final)
+                {
                     @Suppress("UNUSED_VALUE")
                     fbeStructSize = Buffer.readInt32(messageBuffer, messageOffset)
                     fbeStructType = Buffer.readInt32(messageBuffer, messageOffset + 4)
-                } else {
+                }
+                else
+                {
                     val fbeStructOffset = Buffer.readInt32(messageBuffer, messageOffset + 4)
                     @Suppress("UNUSED_VALUE")
                     fbeStructSize = Buffer.readInt32(messageBuffer, messageOffset + fbeStructOffset)
@@ -3874,6 +4099,7 @@ void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std:
     std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
     std::string enum_base_type = ConvertEnumType(enum_type);
     std::string enum_mapping_type = ConvertEnumBase(enum_type);
+    std::string enum_to = ConvertEnumTo(enum_type);
 
     // Generate enum body
     WriteLine();
@@ -3884,7 +4110,7 @@ void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std:
     {
         int index = 0;
         bool first = true;
-        std::string last = ConvertEnumConstant(enum_type, "0", false);
+        std::string last = ConvertEnumConstant(enum_type, enum_type, "0", false);
         for (const auto& value : e->body->values)
         {
             WriteIndent(std::string(first ? "" : ", ") + *value->name + "(");
@@ -3893,13 +4119,13 @@ void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std:
                 if (value->value->constant && !value->value->constant->empty())
                 {
                     index = 0;
-                    last = ConvertEnumConstant(enum_type, *value->value->constant, false);
+                    last = ConvertEnumConstant(enum_type, enum_type, *value->value->constant, false);
                     Write(last + " + " + std::to_string(index++) + (IsUnsignedType(enum_type) ? "u" : ""));
                 }
                 else if (value->value->reference && !value->value->reference->empty())
                 {
                     index = 0;
-                    last = ConvertEnumConstant("", *value->value->reference, false);
+                    last = ConvertEnumConstant(enum_type, "", *value->value->reference, false);
                     Write(last);
                 }
             }
@@ -3913,7 +4139,7 @@ void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std:
     }
 
     // Generate enum value
-    WriteLineIndent("var raw: " + enum_mapping_type + " = 0" + (IsUnsignedType(enum_type) ? "u" : ""));
+    WriteLineIndent("var raw: " + enum_mapping_type + " = " + ConvertEnumConstant(enum_type, enum_type, "0", false));
     Indent(1);
     WriteLineIndent("private set");
     Indent(-1);
@@ -3921,32 +4147,32 @@ void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std:
     // Generate enum constructors
     WriteLine();
     if ((enum_type == "char") || (enum_type == "wchar"))
-        WriteLineIndent("constructor(value: Char) { this.raw = value" + ConvertEnumTo(enum_type) + " }");
+        WriteLineIndent("constructor(value: Char) { this.raw = value" + enum_to + " }");
     if (IsUnsignedType(enum_type))
     {
-        WriteLineIndent("constructor(value: UByte) { this.raw = value" + ConvertEnumTo(enum_type) + " }");
-        WriteLineIndent("constructor(value: UShort) { this.raw = value" + ConvertEnumTo(enum_type) + " }");
-        WriteLineIndent("constructor(value: UInt) { this.raw = value" + ConvertEnumTo(enum_type) + " }");
-        WriteLineIndent("constructor(value: ULong) { this.raw = value" + ConvertEnumTo(enum_type) + " }");
+        WriteLineIndent("constructor(value: UByte) { this.raw = value" + enum_to + " }");
+        WriteLineIndent("constructor(value: UShort) { this.raw = value" + enum_to + " }");
+        WriteLineIndent("constructor(value: UInt) { this.raw = value" + enum_to + " }");
+        WriteLineIndent("constructor(value: ULong) { this.raw = value" + enum_to + " }");
     }
     else
     {
-        WriteLineIndent("constructor(value: Byte) { this.raw = value" + ConvertEnumTo(enum_type) + " }");
-        WriteLineIndent("constructor(value: Short) { this.raw = value" + ConvertEnumTo(enum_type) + " }");
-        WriteLineIndent("constructor(value: Int) { this.raw = value" + ConvertEnumTo(enum_type) + " }");
-        WriteLineIndent("constructor(value: Long) { this.raw = value" + ConvertEnumTo(enum_type) + " }");
+        WriteLineIndent("constructor(value: Byte) { this.raw = value" + enum_to + " }");
+        WriteLineIndent("constructor(value: Short) { this.raw = value" + enum_to + " }");
+        WriteLineIndent("constructor(value: Int) { this.raw = value" + enum_to + " }");
+        WriteLineIndent("constructor(value: Long) { this.raw = value" + enum_to + " }");
     }
     WriteLineIndent("constructor(value: " + enum_name + ") { this.raw = value.raw }");
 
     // Generate enum toString() method
     WriteLine();
-    WriteLineIndent("override fun toString(): String {");
+    WriteLineIndent("override fun toString(): String");
+    WriteLineIndent("{");
     Indent(1);
     if (e->body)
     {
         for (const auto& value : e->body->values)
             WriteLineIndent("if (this == " + *value->name + ")" + " return \"" + *value->name + "\"");
-
     }
     WriteLineIndent("return \"<unknown>\"");
     Indent(-1);
@@ -3954,11 +4180,13 @@ void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std:
 
     // Generate enum mapping
     WriteLine();
-    WriteLineIndent("companion object {");
+    WriteLineIndent("companion object");
+    WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("private val mapping = HashMap<" + enum_mapping_type + ", " + enum_name + ">()");
     WriteLine();
-    WriteLineIndent("init {");
+    WriteLineIndent("init");
+    WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("for (value in " + enum_name + ".values())");
     Indent(1);
@@ -4013,6 +4241,7 @@ void GeneratorKotlin::GenerateEnumClass(const std::shared_ptr<Package>& p, const
 
     std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
     std::string enum_base_type = ConvertEnumType(enum_type);
+    std::string enum_to = ConvertEnumTo(enum_type);
 
     // Generate enum class body
     WriteLine();
@@ -4021,7 +4250,8 @@ void GeneratorKotlin::GenerateEnumClass(const std::shared_ptr<Package>& p, const
     Indent(1);
     if (e->body)
     {
-        WriteLineIndent("companion object {");
+        WriteLineIndent("companion object");
+        WriteLineIndent("{");
         Indent(1);
         for (const auto& value : e->body->values)
             WriteLineIndent("val " + *value->name + " = " + enum_name + "(" + enum_type_name + "." + *value->name + ")");
@@ -4052,7 +4282,7 @@ void GeneratorKotlin::GenerateEnumClass(const std::shared_ptr<Package>& p, const
     WriteLine();
 
     // Generate enum class setDefault() method
-    WriteLineIndent("fun setDefault() { setEnum(0" + ConvertEnumTo(enum_type) + ") }");
+    WriteLineIndent("fun setDefault() { setEnum(0" + enum_to + ") }");
     WriteLine();
 
     // Generate enum class setEnum() methods
@@ -4062,7 +4292,8 @@ void GeneratorKotlin::GenerateEnumClass(const std::shared_ptr<Package>& p, const
 
     // Generate enum class compareTo() method
     WriteLine();
-    WriteLineIndent("override fun compareTo(other: " + enum_name + "): Int {");
+    WriteLineIndent("override fun compareTo(other: " + enum_name + "): Int");
+    WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("if (value == null)");
     Indent(1);
@@ -4078,7 +4309,8 @@ void GeneratorKotlin::GenerateEnumClass(const std::shared_ptr<Package>& p, const
 
     // Generate enum class equals() method
     WriteLine();
-    WriteLineIndent("override fun equals(other: Any?): Boolean {");
+    WriteLineIndent("override fun equals(other: Any?): Boolean");
+    WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("if (other == null)");
     Indent(1);
@@ -4106,7 +4338,8 @@ void GeneratorKotlin::GenerateEnumClass(const std::shared_ptr<Package>& p, const
 
     // Generate enum class hashCode() method
     WriteLine();
-    WriteLineIndent("override fun hashCode(): Int {");
+    WriteLineIndent("override fun hashCode(): Int");
+    WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("var hash = 17");
     WriteLineIndent("hash = hash * 31 + if (value != null) value!!.hashCode() else 0");
@@ -4116,7 +4349,8 @@ void GeneratorKotlin::GenerateEnumClass(const std::shared_ptr<Package>& p, const
 
     // Generate enum class toString() method
     WriteLine();
-    WriteLineIndent("override fun toString(): String {");
+    WriteLineIndent("override fun toString(): String");
+    WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("return if (value != null) value!!.toString() else \"<unknown>\"");
     Indent(-1);
@@ -4198,7 +4432,7 @@ void GeneratorKotlin::GenerateFlags(const std::shared_ptr<Package>& p, const std
     std::string flags_name = *f->name + "Enum";
 
     // Open the output file
-    CppCommon::Path output = path / (flags_name + ".java");
+    CppCommon::Path output = path / (flags_name + ".kt");
     Open(output);
 
     // Generate flags header
@@ -4208,17 +4442,19 @@ void GeneratorKotlin::GenerateFlags(const std::shared_ptr<Package>& p, const std
     std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
     std::string flags_base_type = ConvertEnumType(flags_type);
     std::string flags_mapping_type = ConvertEnumBase(flags_type);
+    std::string flags_int = ConvertEnumFlags(flags_type);
+    std::string flags_to = ConvertEnumTo(flags_type);
 
     // Generate flags body
     WriteLine();
-    WriteLineIndent("public enum " + flags_name);
+    WriteLineIndent("enum class " + flags_name);
     WriteLineIndent("{");
     Indent(1);
     if (f->body)
     {
         int index = 0;
         bool first = true;
-        std::string last = ConvertEnumConstant(flags_type, "0", false);
+        std::string last = ConvertEnumConstant(flags_type, flags_type, "0", true);
         for (const auto& value : f->body->values)
         {
             WriteIndent(std::string(first ? "" : ", ") + *value->name + "(");
@@ -4227,18 +4463,18 @@ void GeneratorKotlin::GenerateFlags(const std::shared_ptr<Package>& p, const std
                 if (value->value->constant && !value->value->constant->empty())
                 {
                     index = 0;
-                    last = ConvertEnumConstant(flags_type, *value->value->constant, false);
-                    Write(last + " + " + std::to_string(index++));
+                    last = ConvertEnumConstant(flags_type, flags_type, *value->value->constant, true);
+                    Write(last + " + " + std::to_string(index++) + (IsUnsignedType(flags_type) ? "u" : ""));
                 }
                 else if (value->value->reference && !value->value->reference->empty())
                 {
                     index = 0;
-                    last = ConvertEnumConstant("", *value->value->reference, false);
+                    last = ConvertEnumConstant(flags_type, "", *value->value->reference, true);
                     Write(last);
                 }
             }
             else
-                Write(last + " + " + std::to_string(index++));
+                Write(last + " + " + std::to_string(index++) + (IsUnsignedType(flags_type) ? "u" : ""));
             WriteLine(")");
             first = false;
         }
@@ -4249,76 +4485,67 @@ void GeneratorKotlin::GenerateFlags(const std::shared_ptr<Package>& p, const std
         WriteIndent("unknown(0);");
 
     // Generate flags class value
-    WriteLineIndent("private " + flags_base_type + " value;");
+    WriteLineIndent("var raw: " + flags_mapping_type + " = " + ConvertEnumConstant(flags_type, flags_type, "0", false));
+    Indent(1);
+    WriteLineIndent("private set");
+    Indent(-1);
 
     // Generate flags class constructors
     WriteLine();
-    if (flags_base_type != "int")
-        WriteLineIndent(flags_name + "(" + flags_base_type + " value) { this.value = value; }");
-    WriteLineIndent(flags_name + "(int value) { this.value = (" + flags_base_type + ")value; }");
-    WriteLineIndent(flags_name + "(" + flags_name + " value) { this.value = value.value; }");
-
-    // Generate flags getRaw() method
-    WriteLine();
-    WriteLineIndent("public " + flags_base_type + " getRaw() { return value; }");
-
-    // Generate flags mapValue() method
-    WriteLine();
-    WriteLineIndent("public static " + flags_name + " mapValue(" + flags_base_type + " value) { return mapping.get(value); }");
+    if ((flags_type == "char") || (flags_type == "wchar"))
+        WriteLineIndent("constructor(value: Char) { this.raw = value" + flags_to + " }");
+    if (IsUnsignedType(flags_type))
+    {
+        WriteLineIndent("constructor(value: UByte) { this.raw = value" + flags_to + " }");
+        WriteLineIndent("constructor(value: UShort) { this.raw = value" + flags_to + " }");
+        WriteLineIndent("constructor(value: UInt) { this.raw = value" + flags_to + " }");
+        WriteLineIndent("constructor(value: ULong) { this.raw = value" + flags_to + " }");
+    }
+    else
+    {
+        WriteLineIndent("constructor(value: Byte) { this.raw = value" + flags_to + " }");
+        WriteLineIndent("constructor(value: Short) { this.raw = value" + flags_to + " }");
+        WriteLineIndent("constructor(value: Int) { this.raw = value" + flags_to + " }");
+        WriteLineIndent("constructor(value: Long) { this.raw = value" + flags_to + " }");
+    }
+    WriteLineIndent("constructor(value: " + flags_name + ") { this.raw = value.raw }");
 
     // Generate flags hasFlags() methods
     WriteLine();
-    WriteLineIndent("public boolean hasFlags(" + flags_base_type + " flags) { return (((value & flags) != 0) && ((value & flags) == flags)); }");
-    WriteLineIndent("public boolean hasFlags(" + flags_name + " flags) { return hasFlags(flags.value); }");
+    WriteLineIndent("fun hasFlags(flags: " + flags_base_type + "): Boolean = ((raw" + flags_int + " and flags" + flags_int + ") != " + ConvertEnumConstant(flags_type, flags_type, "0", false) + ") && ((raw" + flags_int + " and flags" + flags_int + ") == flags" + flags_int + ")");
+    WriteLineIndent("fun hasFlags(flags: " + flags_name + "): Boolean = hasFlags(flags.raw)");
 
-    // Generate flags getAllSet() method
+    // Generate flags getAllSet(), getNoneSet(), getCurrentSet() methods
     WriteLine();
-    WriteLineIndent("public EnumSet<" + flags_name + "> getAllSet()");
+    WriteLineIndent("val allSet: EnumSet<" + flags_name + "> get() = EnumSet.allOf(" + flags_name + "::class.java)");
+    WriteLineIndent("val noneSet: EnumSet<" + flags_name + "> get() = EnumSet.noneOf(" + flags_name + "::class.java)");
+    WriteLineIndent("val currentSet: EnumSet<" + flags_name + "> get()");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("return EnumSet.allOf(" + flags_name + ".class);");
-    Indent(-1);
-    WriteLineIndent("}");
-
-    // Generate flags getNoneSet() method
-    WriteLine();
-    WriteLineIndent("public EnumSet<" + flags_name + "> getNoneSet()");
-    WriteLineIndent("{");
-    Indent(1);
-    WriteLineIndent("return EnumSet.noneOf(" + flags_name + ".class);");
-    Indent(-1);
-    WriteLineIndent("}");
-
-    // Generate flags getCurrentSet() method
-    WriteLine();
-    WriteLineIndent("public EnumSet<" + flags_name + "> getCurrentSet()");
-    WriteLineIndent("{");
-    Indent(1);
-    WriteLineIndent("EnumSet<" + flags_name + "> result = EnumSet.noneOf(" + flags_name + ".class);");
+    WriteLineIndent("val result = EnumSet.noneOf(" + flags_name + "::class.java)");
     if (f->body)
     {
         for (const auto& value : f->body->values)
         {
-            WriteLineIndent("if ((value & " + *value->name + ".getRaw()) != 0)");
+            WriteLineIndent("if ((raw" + flags_int + " and " + *value->name + ".raw" + flags_int + ") != " + ConvertEnumConstant(flags_type, flags_type, "0", false) + ")");
             WriteLineIndent("{");
             Indent(1);
-            WriteLineIndent("result.add(" + *value->name + ");");
+            WriteLineIndent("result.add(" + *value->name + ")");
             Indent(-1);
             WriteLineIndent("}");
         }
     }
-    WriteLineIndent("return result;");
+    WriteLineIndent("return result");
     Indent(-1);
     WriteLineIndent("}");
 
-    // Generate flags toString() method
+    // Generate enum toString() method
     WriteLine();
-    WriteLineIndent("@Override");
-    WriteLineIndent("public String toString()");
+    WriteLineIndent("override fun toString(): String");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("var sb = new StringBuilder();");
-    WriteLineIndent("boolean first = true;");
+    WriteLineIndent("val sb = StringBuilder()");
+    WriteLineIndent("var first = true");
     if (f->body)
     {
         for (const auto& value : f->body->values)
@@ -4326,26 +4553,38 @@ void GeneratorKotlin::GenerateFlags(const std::shared_ptr<Package>& p, const std
             WriteLineIndent("if (hasFlags(" + *value->name + "))");
             WriteLineIndent("{");
             Indent(1);
-            WriteLineIndent("sb.append(first ? \"\" : \"|\").append(\"" + *value->name + "\");");
-            WriteLineIndent("first = false;");
+            WriteLineIndent("sb.append(if (first) \"\" else \"|\").append(\"" + *value->name + "\")");
+            WriteLineIndent("@Suppress(\"UNUSED_VALUE\")");
+            WriteLineIndent("first = false");
             Indent(-1);
             WriteLineIndent("}");
         }
     }
-    WriteLineIndent("return sb.toString();");
+    WriteLineIndent("return sb.toString()");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate flags mapping
     WriteLine();
-    WriteLineIndent("private static final Map<" + flags_mapping_type + ", " + flags_name + "> mapping = new HashMap<>();");
-    WriteLineIndent("static");
+    WriteLineIndent("companion object");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("for (var value : " + flags_name + ".values())");
+    WriteLineIndent("private val mapping = HashMap<" + flags_mapping_type + ", " + flags_name + ">()");
+    WriteLine();
+    WriteLineIndent("init");
+    WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("mapping.put(value.value, value);");
+    WriteLineIndent("for (value in " + flags_name + ".values())");
+    Indent(1);
+    WriteLineIndent("mapping[value.raw] = value");
     Indent(-1);
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate flags mapValue() method
+    WriteLine();
+    WriteLineIndent("fun mapValue(value: " + flags_mapping_type + "): " + flags_name + "?" +" { return mapping[value] }");
+
     Indent(-1);
     WriteLineIndent("}");
 
@@ -4379,7 +4618,7 @@ void GeneratorKotlin::GenerateFlagsClass(const std::shared_ptr<Package>& p, cons
     std::string flags_type_name = *f->name + "Enum";
 
     // Open the output file
-    CppCommon::Path output = path / (flags_name + ".java");
+    CppCommon::Path output = path / (flags_name + ".kt");
     Open(output);
 
     // Generate flags class header
@@ -4388,163 +4627,176 @@ void GeneratorKotlin::GenerateFlagsClass(const std::shared_ptr<Package>& p, cons
 
     std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
     std::string flags_base_type = ConvertEnumType(flags_type);
+    std::string flags_int = ConvertEnumFlags(flags_type);
+    std::string flags_to = ConvertEnumTo(flags_type);
 
     // Generate flags class body
     WriteLine();
-    WriteLineIndent("public final class " + flags_name + " implements Comparable<" + flags_name + ">");
+    WriteLineIndent("class " + flags_name + " : Comparable<" + flags_name + ">");
     WriteLineIndent("{");
     Indent(1);
     if (f->body)
     {
+        WriteLineIndent("companion object");
+        WriteLineIndent("{");
+        Indent(1);
         for (const auto& value : f->body->values)
-            WriteLineIndent("public static final " + flags_name + " " + *value->name + " = new " + flags_name + "(" + flags_type_name + "." + *value->name + ");");
+            WriteLineIndent("val " + *value->name + " = " + flags_name + "(" + flags_type_name + "." + *value->name + ")");
+
+        // Generate flags class fromSet() method
+        WriteLine();
+        WriteLineIndent("fun fromSet(set: EnumSet<" + flags_type_name + ">): " + flags_name);
+        WriteLineIndent("{");
+        Indent(1);
+        WriteLineIndent("var result = " + ConvertEnumConstant(flags_type, flags_type, "0", false));
+        if (f->body)
+        {
+            for (const auto& value : f->body->values)
+            {
+                WriteLineIndent("if (set.contains(" + *value->name + ".value!!))");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("result = result" + flags_int + " or " + *value->name + ".raw" + flags_int);
+                Indent(-1);
+                WriteLineIndent("}");
+            }
+        }
+        WriteLineIndent("return " + flags_name + "(result" + flags_to + ")");
+        Indent(-1);
+        WriteLineIndent("}");
+
+        Indent(-1);
+        WriteLineIndent("}");
         WriteLine();
     }
 
-    // Generate flags class value and flags
-    WriteLineIndent("private " + flags_type_name + " value = " + flags_type_name + ".values()[0];");
-    WriteLineIndent("private " + flags_base_type + " flags = value.getRaw();");
+    // Generate flags class value
+    WriteLineIndent("var value: " + flags_type_name + "?" + " = " + flags_type_name + ".values()[0]");
+    Indent(1);
+    WriteLineIndent("private set");
+    Indent(-1);
+    WriteLine();
+
+    // Generate flags raw value
+    WriteLineIndent("var raw: " + flags_base_type + " = value!!.raw");
+    Indent(1);
+    WriteLineIndent("private set");
+    Indent(-1);
+    WriteLine();
 
     // Generate flags class constructors
+    WriteLineIndent("constructor()");
+    WriteLineIndent("constructor(value: " + flags_base_type + ") { setEnum(value) }");
+    WriteLineIndent("constructor(value: " + flags_type_name + ") { setEnum(value) }");
+    WriteLineIndent("constructor(value: EnumSet<" + flags_type_name + ">) { setEnum(value) }");
+    WriteLineIndent("constructor(value: " + flags_name + ") { setEnum(value) }");
     WriteLine();
-    WriteLineIndent("public " + flags_name + "() {}");
-    WriteLineIndent("public " + flags_name + "(" + flags_base_type + " value) { setEnum(value); }");
-    WriteLineIndent("public " + flags_name + "(" + flags_type_name + " value) { setEnum(value); }");
-    WriteLineIndent("public " + flags_name + "(EnumSet<" + flags_type_name + "> value) { setEnum(value); }");
-    WriteLineIndent("public " + flags_name + "(" + flags_name + " value) { setEnum(value); }");
-
-    // Generate flags class getEnum() and getRaw() methods
-    WriteLine();
-    WriteLineIndent("public " + flags_type_name + " getEnum() { return value; }");
-    WriteLineIndent("public " + flags_base_type + " getRaw() { return flags; }");
 
     // Generate flags class setDefault() method
+    WriteLineIndent("fun setDefault() { setEnum(0" + flags_to + ") }");
     WriteLine();
-    WriteLineIndent("public void setDefault() { setEnum((" + flags_base_type + ")0); }");
 
     // Generate flags class setEnum() methods
-    WriteLine();
-    WriteLineIndent("public void setEnum(" + flags_base_type + " value) { this.flags = value; this.value = " + flags_type_name + ".mapValue(value); }");
-    WriteLineIndent("public void setEnum(" + flags_type_name + " value) { this.value = value; this.flags = value.getRaw(); }");
-    WriteLineIndent("public void setEnum(EnumSet<" + flags_type_name + "> value) { setEnum(" + flags_name + ".fromSet(value)); }");
-    WriteLineIndent("public void setEnum(" + flags_name + " value) { this.value = value.value; this.flags = value.flags; }");
+    WriteLineIndent("fun setEnum(value: " + flags_base_type + ") { this.raw = value; this.value = " + flags_type_name + ".mapValue(value) }");
+    WriteLineIndent("fun setEnum(value: " + flags_type_name + ") { this.value = value; this.raw = value.raw; }");
+    WriteLineIndent("fun setEnum(value: EnumSet<" + flags_type_name + ">) { setEnum(" + flags_name + ".fromSet(value)) }");
+    WriteLineIndent("fun setEnum(value: " + flags_name + ") { this.value = value.value; this.raw = value.raw }");
 
     // Generate flags class hasFlags() methods
     WriteLine();
-    WriteLineIndent("public boolean hasFlags(" + flags_base_type + " flags) { return (((this.flags & flags) != 0) && ((this.flags & flags) == flags)); }");
-    WriteLineIndent("public boolean hasFlags(" + flags_type_name + " flags) { return hasFlags(flags.getRaw()); }");
-    WriteLineIndent("public boolean hasFlags(" + flags_name + " flags) { return hasFlags(flags.flags); }");
+    WriteLineIndent("fun hasFlags(flags: " + flags_base_type + "): Boolean = ((raw" + flags_int + " and flags" + flags_int + ") != " + ConvertEnumConstant(flags_type, flags_type, "0", false) + ") && ((raw" + flags_int + " and flags" + flags_int + ") == flags" + flags_int + ")");
+    WriteLineIndent("fun hasFlags(flags: " + flags_type_name + "): Boolean = hasFlags(flags.raw)");
+    WriteLineIndent("fun hasFlags(flags: " + flags_name + "): Boolean = hasFlags(flags.raw)");
 
     // Generate flags class setFlags() methods
     WriteLine();
-    WriteLineIndent("public " + flags_name + " setFlags(" + flags_base_type + " flags) { setEnum((" + flags_base_type + ")(this.flags | flags)); return this; }");
-    WriteLineIndent("public " + flags_name + " setFlags(" + flags_type_name + " flags) { setFlags(flags.getRaw()); return this; }");
-    WriteLineIndent("public " + flags_name + " setFlags(" + flags_name + " flags) { setFlags(flags.flags); return this; }");
+    WriteLineIndent("fun setFlags(flags: " + flags_base_type + "): " + flags_name + " { setEnum((raw" + flags_int + " or flags" + flags_int + ")" + flags_to + "); return this }");
+    WriteLineIndent("fun setFlags(flags: " + flags_type_name + "): " + flags_name + " { setFlags(flags.raw); return this }");
+    WriteLineIndent("fun setFlags(flags: " + flags_name + "): " + flags_name + " { setFlags(flags.raw); return this }");
 
     // Generate flags class removeFlags() methods
     WriteLine();
-    WriteLineIndent("public " + flags_name + " removeFlags(" + flags_base_type + " flags) { setEnum((" + flags_base_type + ")(this.flags & ~flags)); return this; }");
-    WriteLineIndent("public " + flags_name + " removeFlags(" + flags_type_name + " flags) { removeFlags(flags.getRaw()); return this; }");
-    WriteLineIndent("public " + flags_name + " removeFlags(" + flags_name + " flags) { removeFlags(flags.flags); return this; }");
+    WriteLineIndent("fun removeFlags(flags: " + flags_base_type + "): " + flags_name + " { setEnum((raw" + flags_int + " and flags" + flags_int + ".inv())" + flags_to + "); return this }");
+    WriteLineIndent("fun removeFlags(flags: " + flags_type_name + "): " + flags_name + " { removeFlags(flags.raw); return this }");
+    WriteLineIndent("fun removeFlags(flags: " + flags_name + "): " + flags_name + " { removeFlags(flags.raw); return this }");
 
     // Generate flags class getAllSet(), getNoneSet() and getCurrentSet() methods
     WriteLine();
-    WriteLineIndent("public EnumSet<" + flags_type_name + "> getAllSet() { return value.getAllSet(); }");
-    WriteLineIndent("public EnumSet<" + flags_type_name + "> getNoneSet() { return value.getNoneSet(); }");
-    WriteLineIndent("public EnumSet<" + flags_type_name + "> getCurrentSet() { return value.getCurrentSet(); }");
-
-    // Generate flags class fromSet() methods
-    WriteLine();
-    WriteLineIndent("public static " + flags_name + " fromSet(EnumSet<" + flags_type_name + "> set)");
-    WriteLineIndent("{");
-    Indent(1);
-    WriteLineIndent(flags_base_type + " result = 0;");
-    if (f->body)
-    {
-        for (const auto& value : f->body->values)
-        {
-            WriteLineIndent("if (set.contains(" + *value->name + ".getEnum()))");
-            WriteLineIndent("{");
-            Indent(1);
-            WriteLineIndent("result |= " + *value->name + ".flags;");
-            Indent(-1);
-            WriteLineIndent("}");
-        }
-    }
-    WriteLineIndent("return new " + flags_name + "(result);");
-    Indent(-1);
-    WriteLineIndent("}");
+    WriteLineIndent("val allSet: EnumSet<" + flags_type_name + "> get() = value!!.allSet");
+    WriteLineIndent("val noneSet: EnumSet<" + flags_type_name + "> get() = value!!.noneSet");
+    WriteLineIndent("val currentSet: EnumSet<" + flags_type_name + "> get() = value!!.currentSet");
 
     // Generate flags class compareTo() method
     WriteLine();
-    WriteLineIndent("@Override");
-    WriteLineIndent("public int compareTo(" + flags_name + " other)");
+    WriteLineIndent("override fun compareTo(other: " + flags_name + "): Int");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("return (int)(flags - other.flags);");
+    WriteLineIndent("return (raw - other.raw).toInt()");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate flags class equals() method
     WriteLine();
-    WriteLineIndent("@Override");
-    WriteLineIndent("public boolean equals(Object obj)");
+    WriteLineIndent("override fun equals(other: Any?): Boolean");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("if (obj == null)");
+    WriteLineIndent("if (other == null)");
     Indent(1);
-    WriteLineIndent("return false;");
+    WriteLineIndent("return false");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("if (!" + flags_name + ".class.isAssignableFrom(obj.getClass()))");
+    WriteLineIndent("if (!" + flags_name + "::class.java.isAssignableFrom(other.javaClass))");
     Indent(1);
-    WriteLineIndent("return false;");
+    WriteLineIndent("return false");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("final " + flags_name + " other = (" + flags_name + ")obj;");
+    WriteLineIndent("val flg = other as " + flags_name + "?");
     WriteLine();
-    WriteLineIndent("if (flags != other.flags)");
+    WriteLineIndent("if (value == null || flg!!.value == null)");
     Indent(1);
-    WriteLineIndent("return false;");
+    WriteLineIndent("return false");
     Indent(-1);
-    WriteLineIndent("return true;");
+    WriteLineIndent("if (value!!.raw != flg.value!!.raw)");
+    Indent(1);
+    WriteLineIndent("return false");
+    Indent(-1);
+    WriteLineIndent("return true");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate flags class hashCode() method
     WriteLine();
-    WriteLineIndent("@Override");
-    WriteLineIndent("public int hashCode()");
+    WriteLineIndent("override fun hashCode(): Int");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("int hash = 17;");
-    WriteLineIndent("hash = hash * 31 + (int)flags;");
-    WriteLineIndent("return hash;");
+    WriteLineIndent("var hash = " + ConvertEnumConstant(flags_type, flags_type, "17", false));
+    WriteLineIndent("hash = hash * " + ConvertEnumConstant(flags_type, flags_type, "31", false) + " + raw" + flags_int);
+    WriteLineIndent("return hash.toInt()");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate flags class toString() method
     WriteLine();
-    WriteLineIndent("@Override");
-    WriteLineIndent("public String toString()");
+    WriteLineIndent("override fun toString(): String");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("var sb = new StringBuilder();");
-    WriteLineIndent("boolean first = true;");
+    WriteLineIndent("val sb = StringBuilder()");
+    WriteLineIndent("var first = true");
     if (f->body)
     {
         for (const auto& value : f->body->values)
         {
-            WriteLineIndent("if (hasFlags(" + *value->name + ".flags))");
+            WriteLineIndent("if (hasFlags(" + *value->name + ".raw))");
             WriteLineIndent("{");
             Indent(1);
-            WriteLineIndent("sb.append(first ? \"\" : \"|\").append(\"" + *value->name + "\");");
-            WriteLineIndent("first = false;");
+            WriteLineIndent("sb.append(if (first) \"\" else \"|\").append(\"" + *value->name + "\")");
+            WriteLineIndent("@Suppress(\"UNUSED_VALUE\")");
+            WriteLineIndent("first = false");
             Indent(-1);
             WriteLineIndent("}");
         }
     }
-    WriteLineIndent("return sb.toString();");
+    WriteLineIndent("return sb.toString()");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -4710,25 +4962,25 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
     // Generate struct compareTo() method
     WriteLine();
     WriteLineIndent("@Override");
-    WriteLineIndent("public int compareTo(Object obj)");
+    WriteLineIndent("public int compareTo(Object other)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("if (obj == null)");
+    WriteLineIndent("if (other == null)");
     Indent(1);
     WriteLineIndent("return -1;");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("if (!" + *s->name + ".class.isAssignableFrom(obj.getClass()))");
+    WriteLineIndent("if (!" + *s->name + ".class.isAssignableFrom(other.getClass()))");
     Indent(1);
     WriteLineIndent("return -1;");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("final " + *s->name + " other = (" + *s->name + ")obj;");
+    WriteLineIndent("final " + *s->name + " obj = (" + *s->name + ")other;");
     WriteLine();
     WriteLineIndent("int result = 0;");
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("result = super.compareTo(other);");
+        WriteLineIndent("result = super.compareTo(obj);");
         WriteLineIndent("if (result != 0)");
         Indent(1);
         WriteLineIndent("return result;");
@@ -4741,9 +4993,9 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
             if (field->keys)
             {
                 if (IsPrimitiveType(*field->type, field->optional))
-                    WriteLineIndent("result = " + ConvertPrimitiveTypeName(*field->type)  + ".compare(" + *field->name + ", other." + *field->name + ");");
+                    WriteLineIndent("result = " + ConvertPrimitiveTypeName(*field->type)  + ".compare(" + *field->name + ", obj." + *field->name + ");");
                 else
-                    WriteLineIndent("result = " + *field->name + ".compareTo(other." + *field->name + ");");
+                    WriteLineIndent("result = " + *field->name + ".compareTo(obj." + *field->name + ");");
                 WriteLineIndent("if (result != 0)");
                 Indent(1);
                 WriteLineIndent("return result;");
@@ -4758,24 +5010,24 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
     // Generate struct equals() method
     WriteLine();
     WriteLineIndent("@Override");
-    WriteLineIndent("public boolean equals(Object obj)");
+    WriteLineIndent("public boolean equals(Object other)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("if (obj == null)");
+    WriteLineIndent("if (other == null)");
     Indent(1);
     WriteLineIndent("return false;");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("if (!" + *s->name + ".class.isAssignableFrom(obj.getClass()))");
+    WriteLineIndent("if (!" + *s->name + ".class.isAssignableFrom(other.getClass()))");
     Indent(1);
     WriteLineIndent("return false;");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("final " + *s->name + " other = (" + *s->name + ")obj;");
+    WriteLineIndent("final " + *s->name + " obj = (" + *s->name + ")other;");
     WriteLine();
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("if (!super.equals(other))");
+        WriteLineIndent("if (!super.equals(obj))");
         Indent(1);
         WriteLineIndent("return false;");
         Indent(-1);
@@ -4787,9 +5039,9 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
             if (field->keys)
             {
                 if (IsPrimitiveType(*field->type, field->optional))
-                    WriteLineIndent("if (" + *field->name + " != other." + *field->name + ")");
+                    WriteLineIndent("if (" + *field->name + " != obj." + *field->name + ")");
                 else
-                    WriteLineIndent("if (!" + *field->name + ".equals(other." + *field->name + "))");
+                    WriteLineIndent("if (!" + *field->name + ".equals(obj." + *field->name + "))");
                 Indent(1);
                 WriteLineIndent("return false;");
                 Indent(-1);
@@ -6520,7 +6772,32 @@ std::string GeneratorKotlin::ConvertEnumTo(const std::string& type)
     return "";
 }
 
-std::string GeneratorKotlin::ConvertEnumConstant(const std::string& type, const std::string& value, bool optional)
+std::string GeneratorKotlin::ConvertEnumFlags(const std::string& type)
+{
+    if (type == "byte")
+        return ".toInt()";
+    else if (type == "int8")
+        return ".toInt()";
+    else if (type == "uint8")
+        return ".toUInt()";
+    else if (type == "int16")
+        return ".toInt()";
+    else if (type == "uint16")
+        return ".toUInt()";
+    else if (type == "int32")
+        return ".toInt()";
+    else if (type == "uint32")
+        return ".toUInt()";
+    else if (type == "int64")
+        return ".toLong()";
+    else if (type == "uint64")
+        return ".toULong()";
+
+    yyerror("Unsupported enum base type - " + type);
+    return "";
+}
+
+std::string GeneratorKotlin::ConvertEnumConstant(const std::string& base, const std::string& type, const std::string& value, bool flag)
 {
     std::string result = value;
 
@@ -6536,7 +6813,7 @@ std::string GeneratorKotlin::ConvertEnumConstant(const std::string& type, const 
             bool first = true;
             for (const auto& it : flags)
             {
-                result += (first ? "" : "|") + CppCommon::StringUtils::ToTrim(it) + ".raw";
+                result += (first ? "" : " or ") + CppCommon::StringUtils::ToTrim(it) + ".raw" + (flag ? ConvertEnumFlags(base) : "");
                 first = false;
             }
         }
@@ -6552,7 +6829,7 @@ std::string GeneratorKotlin::ConvertEnumConstantPrefix(const std::string& type)
 
 std::string GeneratorKotlin::ConvertEnumConstantSuffix(const std::string& type)
 {
-    if ((type == "uint8") || (type == "uint16") || (type == "uint32") || (type == "uint64"))
+    if ((type == "uint8") || (type == "uint16") || (type == "uint32"))
         return "u";
     if (type == "int64")
         return "L";

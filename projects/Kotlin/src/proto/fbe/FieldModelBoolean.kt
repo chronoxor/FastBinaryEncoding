@@ -18,7 +18,8 @@ class FieldModelBoolean(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     override val FBESize: Long = 1
 
     // Get the value
-    fun get(defaults: Boolean = false): Boolean {
+    fun get(defaults: Boolean = false): Boolean
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
 
@@ -26,7 +27,8 @@ class FieldModelBoolean(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     }
 
     // Set the value
-    fun set(value: Boolean) {
+    fun set(value: Boolean)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return

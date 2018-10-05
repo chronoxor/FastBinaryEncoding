@@ -32,7 +32,8 @@ class FieldModelBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     }
 
     // Check if the bytes value is valid
-    override fun verify(): Boolean {
+    override fun verify(): Boolean
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return true
 
@@ -51,7 +52,8 @@ class FieldModelBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     }
 
     // Get the bytes value
-    fun get(defaults: ByteArray = ByteArray(0)): ByteArray {
+    fun get(defaults: ByteArray = ByteArray(0)): ByteArray
+    {
         var value: ByteArray = defaults
 
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
@@ -75,7 +77,8 @@ class FieldModelBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     }
 
     // Set the bytes value
-    fun set(value: ByteArray) {
+    fun set(value: ByteArray)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return

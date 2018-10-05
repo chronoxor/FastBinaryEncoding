@@ -18,7 +18,8 @@ class FieldModelWChar(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     override val FBESize: Long = 4
 
     // Get the value
-    fun get(defaults: Char = '\u0000'): Char {
+    fun get(defaults: Char = '\u0000'): Char
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
 
@@ -26,7 +27,8 @@ class FieldModelWChar(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     }
 
     // Set the value
-    fun set(value: Char) {
+    fun set(value: Char)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return

@@ -31,7 +31,8 @@ enum class EnumInt16Enum
     constructor(value: Long) { this.raw = value.toShort() }
     constructor(value: EnumInt16Enum) { this.raw = value.raw }
 
-    override fun toString(): String {
+    override fun toString(): String
+    {
         if (this == ENUM_VALUE_0) return "ENUM_VALUE_0"
         if (this == ENUM_VALUE_1) return "ENUM_VALUE_1"
         if (this == ENUM_VALUE_2) return "ENUM_VALUE_2"
@@ -41,10 +42,12 @@ enum class EnumInt16Enum
         return "<unknown>"
     }
 
-    companion object {
+    companion object
+    {
         private val mapping = HashMap<Short, EnumInt16Enum>()
 
-        init {
+        init
+        {
             for (value in EnumInt16Enum.values())
                 mapping[value.raw] = value
         }

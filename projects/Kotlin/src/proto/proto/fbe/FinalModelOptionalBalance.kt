@@ -18,12 +18,11 @@ import proto.*;
 class FinalModelOptionalBalance(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
-    fun FBEAllocationSize(optional: Balance?): Long {
-        return (1 + (if (optional != null) value.FBEAllocationSize(optional) else 0)).toLong()
-    }
+    fun FBEAllocationSize(optional: Balance?): Long = (1 + (if (optional != null) value.FBEAllocationSize(optional) else 0)).toLong()
 
     // Checks whether the object contains a value
-    fun hasValue(): Boolean {
+    fun hasValue(): Boolean
+    {
         if (_buffer.offset + FBEOffset + 1 > _buffer.size)
             return false
 
@@ -35,7 +34,8 @@ class FinalModelOptionalBalance(buffer: Buffer, offset: Long) : FinalModel(buffe
     val value = FinalModelBalance(buffer, 0)
 
     // Check if the optional value is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset + 1 > _buffer.size)
             return Long.MAX_VALUE
 
@@ -50,14 +50,17 @@ class FinalModelOptionalBalance(buffer: Buffer, offset: Long) : FinalModel(buffe
     }
 
     // Get the optional value
-    fun get(size: Size): Balance? {
+    fun get(size: Size): Balance?
+    {
         assert(_buffer.offset + FBEOffset + 1 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + FBEOffset + 1 > _buffer.size) {
+        if (_buffer.offset + FBEOffset + 1 > _buffer.size)
+        {
             size.value = 0
             return null
         }
 
-        if (!hasValue()) {
+        if (!hasValue())
+        {
             size.value = 1
             return null
         }
@@ -70,7 +73,8 @@ class FinalModelOptionalBalance(buffer: Buffer, offset: Long) : FinalModel(buffe
     }
 
     // Set the optional value
-    fun set(optional: Balance?): Long {
+    fun set(optional: Balance?): Long
+    {
         assert(_buffer.offset + FBEOffset + 1 <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + 1 > _buffer.size)
             return 0

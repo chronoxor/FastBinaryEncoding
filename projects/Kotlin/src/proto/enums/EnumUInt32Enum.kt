@@ -31,7 +31,8 @@ enum class EnumUInt32Enum
     constructor(value: ULong) { this.raw = value.toUInt() }
     constructor(value: EnumUInt32Enum) { this.raw = value.raw }
 
-    override fun toString(): String {
+    override fun toString(): String
+    {
         if (this == ENUM_VALUE_0) return "ENUM_VALUE_0"
         if (this == ENUM_VALUE_1) return "ENUM_VALUE_1"
         if (this == ENUM_VALUE_2) return "ENUM_VALUE_2"
@@ -41,10 +42,12 @@ enum class EnumUInt32Enum
         return "<unknown>"
     }
 
-    companion object {
+    companion object
+    {
         private val mapping = HashMap<UInt, EnumUInt32Enum>()
 
-        init {
+        init
+        {
             for (value in EnumUInt32Enum.values())
                 mapping[value.raw] = value
         }

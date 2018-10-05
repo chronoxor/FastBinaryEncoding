@@ -18,7 +18,8 @@ class FieldModelUUID(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     override val FBESize: Long = 16
 
     // Get the value
-    fun get(defaults: UUID = UUIDGenerator.nil()): UUID {
+    fun get(defaults: UUID = UUIDGenerator.nil()): UUID
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return defaults
 
@@ -26,7 +27,8 @@ class FieldModelUUID(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     }
 
     // Set the value
-    fun set(value: UUID) {
+    fun set(value: UUID)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return

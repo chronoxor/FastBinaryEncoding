@@ -23,7 +23,8 @@ class FieldModelVectorFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(buf
     override val FBESize: Long = 4
 
     // Field extra size
-    override val FBEExtra: Long get() {
+    override val FBEExtra: Long get()
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
 
@@ -36,7 +37,8 @@ class FieldModelVectorFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(buf
         var fbeResult: Long = 4
         _model.FBEOffset = fbeVectorOffset + 4
         var i = fbeVectorSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             fbeResult += _model.FBESize + _model.FBEExtra
             _model.FBEShift(_model.FBESize)
         }
@@ -44,7 +46,8 @@ class FieldModelVectorFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(buf
     }
 
     // Get the vector offset
-    val offset: Long get() {
+    val offset: Long get()
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
 
@@ -53,7 +56,8 @@ class FieldModelVectorFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(buf
     }
 
     // Get the vector size
-    val size: Long get() {
+    val size: Long get()
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return 0
 
@@ -66,7 +70,8 @@ class FieldModelVectorFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(buf
     }
 
     // Vector index operator
-    fun getItem(index: Long): FieldModelFlagsSimple {
+    fun getItem(index: Long): FieldModelFlagsSimple
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
 
         val fbeVectorOffset = readInt32(FBEOffset).toLong()
@@ -81,7 +86,8 @@ class FieldModelVectorFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(buf
     }
 
     // Resize the vector and get its first model
-    fun resize(size: Long): FieldModelFlagsSimple {
+    fun resize(size: Long): FieldModelFlagsSimple
+    {
         val fbeVectorSize = size * _model.FBESize
         val fbeVectorOffset = _buffer.allocate(4 + fbeVectorSize) - _buffer.offset
         assert(fbeVectorOffset > 0 && _buffer.offset + fbeVectorOffset + 4 <= _buffer.size) { "Model is broken!" }
@@ -95,7 +101,8 @@ class FieldModelVectorFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(buf
     }
 
     // Check if the vector is valid
-    override fun verify(): Boolean {
+    override fun verify(): Boolean
+    {
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return true
 
@@ -110,7 +117,8 @@ class FieldModelVectorFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(buf
 
         _model.FBEOffset = fbeVectorOffset + 4
         var i = fbeVectorSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             if (!_model.verify())
                 return false
             _model.FBEShift(_model.FBESize)
@@ -120,7 +128,8 @@ class FieldModelVectorFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(buf
     }
 
     // Get the vector as ArrayList
-    operator fun get(values: ArrayList<FlagsSimple>) {
+    operator fun get(values: ArrayList<FlagsSimple>)
+    {
         values.clear()
 
         val fbeVectorSize = size
@@ -131,7 +140,8 @@ class FieldModelVectorFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(buf
 
         val fbeModel = getItem(0)
         var i = fbeVectorSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             val value = fbeModel.get()
             values.add(value)
             fbeModel.FBEShift(fbeModel.FBESize)
@@ -139,7 +149,8 @@ class FieldModelVectorFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(buf
     }
 
     // Get the vector as LinkedList
-    operator fun get(values: LinkedList<FlagsSimple>) {
+    operator fun get(values: LinkedList<FlagsSimple>)
+    {
         values.clear()
 
         val fbeVectorSize = size
@@ -148,7 +159,8 @@ class FieldModelVectorFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(buf
 
         val fbeModel = getItem(0)
         var i = fbeVectorSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             val value = fbeModel.get()
             values.add(value)
             fbeModel.FBEShift(fbeModel.FBESize)
@@ -156,7 +168,8 @@ class FieldModelVectorFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(buf
     }
 
     // Get the vector as HashSet
-    operator fun get(values: HashSet<FlagsSimple>) {
+    operator fun get(values: HashSet<FlagsSimple>)
+    {
         values.clear()
 
         val fbeVectorSize = size
@@ -165,7 +178,8 @@ class FieldModelVectorFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(buf
 
         val fbeModel = getItem(0)
         var i = fbeVectorSize
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             val value = fbeModel.get()
             values.add(value)
             fbeModel.FBEShift(fbeModel.FBESize)
@@ -173,39 +187,45 @@ class FieldModelVectorFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(buf
     }
 
     // Set the vector as ArrayList
-    fun set(values: ArrayList<FlagsSimple>) {
+    fun set(values: ArrayList<FlagsSimple>)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
 
         val fbeModel = resize(values.size.toLong())
-        for (value in values) {
+        for (value in values)
+        {
             fbeModel.set(value)
             fbeModel.FBEShift(fbeModel.FBESize)
         }
     }
 
     // Set the vector as LinkedList
-    fun set(values: LinkedList<FlagsSimple>) {
+    fun set(values: LinkedList<FlagsSimple>)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
 
         val fbeModel = resize(values.size.toLong())
-        for (value in values) {
+        for (value in values)
+        {
             fbeModel.set(value)
             fbeModel.FBEShift(fbeModel.FBESize)
         }
     }
 
     // Set the vector as HashSet
-    fun set(values: HashSet<FlagsSimple>) {
+    fun set(values: HashSet<FlagsSimple>)
+    {
         assert(_buffer.offset + FBEOffset + FBESize <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset + FBESize > _buffer.size)
             return
 
         val fbeModel = resize(values.size.toLong())
-        for (value in values) {
+        for (value in values)
+        {
             fbeModel.set(value)
             fbeModel.FBEShift(fbeModel.FBESize)
         }

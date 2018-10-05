@@ -20,19 +20,23 @@ class FinalModelArrayOptionalByte(buffer: Buffer, offset: Long, private val _siz
     private val _model = FinalModelOptionalByte(buffer, offset)
 
     // Get the allocation size
-    fun FBEAllocationSize(values: Array<Byte?>): Long {
+    fun FBEAllocationSize(values: Array<Byte?>): Long
+    {
         var size: Long = 0
         var i: Long = 0
-        while (i < values.size && i < _size) {
+        while (i < values.size && i < _size)
+        {
             size += _model.FBEAllocationSize(values[i.toInt()])
             i++
         }
         return size
     }
-    fun FBEAllocationSize(values: ArrayList<Byte?>): Long {
+    fun FBEAllocationSize(values: ArrayList<Byte?>): Long
+    {
         var size: Long = 0
         var i: Long = 0
-        while (i < values.size && i < _size) {
+        while (i < values.size && i < _size)
+        {
             size += _model.FBEAllocationSize(values[i.toInt()])
             i++
         }
@@ -40,14 +44,16 @@ class FinalModelArrayOptionalByte(buffer: Buffer, offset: Long, private val _siz
     }
 
     // Check if the array is valid
-    override fun verify(): Long {
+    override fun verify(): Long
+    {
         if (_buffer.offset + FBEOffset > _buffer.size)
             return Long.MAX_VALUE
 
         var size: Long = 0
         _model.FBEOffset = FBEOffset
         var i = _size
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             val offset = _model.verify()
             if (offset == Long.MAX_VALUE)
                 return Long.MAX_VALUE
@@ -58,11 +64,13 @@ class FinalModelArrayOptionalByte(buffer: Buffer, offset: Long, private val _siz
     }
 
     // Get the array
-    fun get(size: Size): Array<Byte?> {
+    fun get(size: Size): Array<Byte?>
+    {
         val values = arrayOfNulls<Byte?>(_size.toInt())
 
         assert(_buffer.offset + FBEOffset <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + FBEOffset > _buffer.size) {
+        if (_buffer.offset + FBEOffset > _buffer.size)
+        {
             size.value = 0
             return values
         }
@@ -70,7 +78,8 @@ class FinalModelArrayOptionalByte(buffer: Buffer, offset: Long, private val _siz
         size.value = 0
         val offset = Size()
         _model.FBEOffset = FBEOffset
-        for (i in 0 until _size) {
+        for (i in 0 until _size)
+        {
             offset.value = 0
             values[i.toInt()] = _model.get(offset)
             _model.FBEShift(offset.value)
@@ -80,7 +89,8 @@ class FinalModelArrayOptionalByte(buffer: Buffer, offset: Long, private val _siz
     }
 
     // Get the array
-    fun get(values: Array<Byte?>): Long {
+    fun get(values: Array<Byte?>): Long
+    {
         assert(_buffer.offset + FBEOffset <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset > _buffer.size)
             return 0
@@ -89,7 +99,8 @@ class FinalModelArrayOptionalByte(buffer: Buffer, offset: Long, private val _siz
         val offset = Size()
         _model.FBEOffset = FBEOffset
         var i: Long = 0
-        while (i < values.size && i < _size) {
+        while (i < values.size && i < _size)
+        {
             offset.value = 0
             values[i.toInt()] = _model.get(offset)
             _model.FBEShift(offset.value)
@@ -100,7 +111,8 @@ class FinalModelArrayOptionalByte(buffer: Buffer, offset: Long, private val _siz
     }
 
     // Get the array as ArrayList
-    fun get(values: ArrayList<Byte?>): Long {
+    fun get(values: ArrayList<Byte?>): Long
+    {
         values.clear()
 
         assert(_buffer.offset + FBEOffset <= _buffer.size) { "Model is broken!" }
@@ -113,7 +125,8 @@ class FinalModelArrayOptionalByte(buffer: Buffer, offset: Long, private val _siz
         val offset = Size()
         _model.FBEOffset = FBEOffset
         var i = _size
-        while (i-- > 0) {
+        while (i-- > 0)
+        {
             offset.value = 0
             val value = _model.get(offset)
             values.add(value)
@@ -124,7 +137,8 @@ class FinalModelArrayOptionalByte(buffer: Buffer, offset: Long, private val _siz
     }
 
     // Set the array
-    fun set(values: Array<Byte?>): Long {
+    fun set(values: Array<Byte?>): Long
+    {
         assert(_buffer.offset + FBEOffset <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset > _buffer.size)
             return 0
@@ -132,7 +146,8 @@ class FinalModelArrayOptionalByte(buffer: Buffer, offset: Long, private val _siz
         var size: Long = 0
         _model.FBEOffset = FBEOffset
         var i: Long = 0
-        while (i < values.size && i < _size) {
+        while (i < values.size && i < _size)
+        {
             val offset = _model.set(values[i.toInt()])
             _model.FBEShift(offset)
             size += offset
@@ -142,7 +157,8 @@ class FinalModelArrayOptionalByte(buffer: Buffer, offset: Long, private val _siz
     }
 
     // Set the array as List
-    fun set(values: ArrayList<Byte?>): Long {
+    fun set(values: ArrayList<Byte?>): Long
+    {
         assert(_buffer.offset + FBEOffset <= _buffer.size) { "Model is broken!" }
         if (_buffer.offset + FBEOffset > _buffer.size)
             return 0
@@ -150,7 +166,8 @@ class FinalModelArrayOptionalByte(buffer: Buffer, offset: Long, private val _siz
         var size: Long = 0
         _model.FBEOffset = FBEOffset
         var i: Long = 0
-        while (i < values.size && i < _size) {
+        while (i < values.size && i < _size)
+        {
             val offset = _model.set(values[i.toInt()])
             _model.FBEShift(offset)
             size += offset

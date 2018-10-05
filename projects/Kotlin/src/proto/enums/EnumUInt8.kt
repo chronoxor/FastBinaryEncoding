@@ -14,7 +14,8 @@ import fbe.*;
 
 class EnumUInt8 : Comparable<EnumUInt8>
 {
-    companion object {
+    companion object
+    {
         val ENUM_VALUE_0 = EnumUInt8(EnumUInt8Enum.ENUM_VALUE_0)
         val ENUM_VALUE_1 = EnumUInt8(EnumUInt8Enum.ENUM_VALUE_1)
         val ENUM_VALUE_2 = EnumUInt8(EnumUInt8Enum.ENUM_VALUE_2)
@@ -40,7 +41,8 @@ class EnumUInt8 : Comparable<EnumUInt8>
     fun setEnum(value: EnumUInt8Enum) { this.value = value }
     fun setEnum(value: EnumUInt8) { this.value = value.value }
 
-    override fun compareTo(other: EnumUInt8): Int {
+    override fun compareTo(other: EnumUInt8): Int
+    {
         if (value == null)
             return -1
         if (other.value == null)
@@ -48,7 +50,8 @@ class EnumUInt8 : Comparable<EnumUInt8>
         return (value!!.raw - other.value!!.raw).toInt()
     }
 
-    override fun equals(other: Any?): Boolean {
+    override fun equals(other: Any?): Boolean
+    {
         if (other == null)
             return false
 
@@ -64,13 +67,15 @@ class EnumUInt8 : Comparable<EnumUInt8>
         return true
     }
 
-    override fun hashCode(): Int {
+    override fun hashCode(): Int
+    {
         var hash = 17
         hash = hash * 31 + if (value != null) value!!.hashCode() else 0
         return hash
     }
 
-    override fun toString(): String {
+    override fun toString(): String
+    {
         return if (value != null) value!!.toString() else "<unknown>"
     }
 }
