@@ -264,13 +264,18 @@ dependencies that worth to be mentioned:
   If you want to try it, you should import is with NuGet and build domain model
   with 'UTF8JSON' definition;
 
-### Java and Kotlin
+### Java
 * JSON protocol is implemented using [Gson](https://github.com/google/gson)
   library. Thereforeits package should be imported using Maven;
 
 ### JavaScript
 * JavaScript domain model is implemented using [ECMAScript 6](http://es6-features.org)
   (classes, etc.);
+
+### Kotlin
+* Starting from the version 1.3 [Kotlin supports unsigned integer numbers (UByte, UShort, UInt, ULong)](https://github.com/Kotlin/KEEP/blob/unsigned_types/proposals/unsigned-types.md).
+  This gives ability to represent FBE domain model more accurately than using
+  Java language.
 
 ### Python
 * Python domain model is implemented using Python 3.7 ([time.time_ns()](https://docs.python.org/3/library/time.html#time.time_ns));
