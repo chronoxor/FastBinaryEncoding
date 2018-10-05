@@ -274,8 +274,8 @@ dependencies that worth to be mentioned:
 
 ### Kotlin
 * Starting from the version 1.3 [Kotlin supports unsigned integer numbers (UByte, UShort, UInt, ULong)](https://github.com/Kotlin/KEEP/blob/unsigned_types/proposals/unsigned-types.md).
-  This gives ability to represent FBE domain model more accurately than using
-  Java language.
+  This gives ability to represent FBE domain model more accurately than Java
+  language does.
 
 ### Python
 * Python domain model is implemented using Python 3.7 ([time.time_ns()](https://docs.python.org/3/library/time.html#time.time_ns));
