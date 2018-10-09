@@ -5047,7 +5047,7 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     Indent(-1);
     WriteLine();
     WriteLineIndent("uint fbeStructSize = ReadUInt32(fbeStructOffset);");
-    WriteLineIndent("if (fbeStructSize < 4 + 4)");
+    WriteLineIndent("if (fbeStructSize < (4 + 4))");
     Indent(1);
     WriteLineIndent("return false;");
     Indent(-1);
@@ -5125,8 +5125,8 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     Indent(-1);
     WriteLine();
     WriteLineIndent("uint fbeStructSize = ReadUInt32(fbeStructOffset);");
-    WriteLineIndent("Debug.Assert((fbeStructSize >= 4 + 4), \"Model is broken!\");");
-    WriteLineIndent("if (fbeStructSize < 4 + 4)");
+    WriteLineIndent("Debug.Assert((fbeStructSize >= (4 + 4)), \"Model is broken!\");");
+    WriteLineIndent("if (fbeStructSize < (4 + 4))");
     Indent(1);
     WriteLineIndent("return 0;");
     Indent(-1);

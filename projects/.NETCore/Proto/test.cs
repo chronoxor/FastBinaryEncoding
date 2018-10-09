@@ -1595,7 +1595,7 @@ namespace test {
                 return false;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            if (fbeStructSize < 4 + 4)
+            if (fbeStructSize < (4 + 4))
                 return false;
 
             uint fbeStructType = ReadUInt32(fbeStructOffset + 4);
@@ -1898,8 +1898,8 @@ namespace test {
                 return 0;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            Debug.Assert((fbeStructSize >= 4 + 4), "Model is broken!");
-            if (fbeStructSize < 4 + 4)
+            Debug.Assert((fbeStructSize >= (4 + 4)), "Model is broken!");
+            if (fbeStructSize < (4 + 4))
                 return 0;
 
             _buffer.Shift(fbeStructOffset);
@@ -4100,7 +4100,7 @@ namespace test {
                 return false;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            if (fbeStructSize < 4 + 4)
+            if (fbeStructSize < (4 + 4))
                 return false;
 
             uint fbeStructType = ReadUInt32(fbeStructOffset + 4);
@@ -4535,8 +4535,8 @@ namespace test {
                 return 0;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            Debug.Assert((fbeStructSize >= 4 + 4), "Model is broken!");
-            if (fbeStructSize < 4 + 4)
+            Debug.Assert((fbeStructSize >= (4 + 4)), "Model is broken!");
+            if (fbeStructSize < (4 + 4))
                 return 0;
 
             _buffer.Shift(fbeStructOffset);
@@ -6875,7 +6875,7 @@ namespace test {
                 return false;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            if (fbeStructSize < 4 + 4)
+            if (fbeStructSize < (4 + 4))
                 return false;
 
             uint fbeStructType = ReadUInt32(fbeStructOffset + 4);
@@ -6986,8 +6986,8 @@ namespace test {
                 return 0;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            Debug.Assert((fbeStructSize >= 4 + 4), "Model is broken!");
-            if (fbeStructSize < 4 + 4)
+            Debug.Assert((fbeStructSize >= (4 + 4)), "Model is broken!");
+            if (fbeStructSize < (4 + 4))
                 return 0;
 
             _buffer.Shift(fbeStructOffset);
@@ -7831,7 +7831,7 @@ namespace test {
                 return false;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            if (fbeStructSize < 4 + 4)
+            if (fbeStructSize < (4 + 4))
                 return false;
 
             uint fbeStructType = ReadUInt32(fbeStructOffset + 4);
@@ -7882,8 +7882,8 @@ namespace test {
                 return 0;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            Debug.Assert((fbeStructSize >= 4 + 4), "Model is broken!");
-            if (fbeStructSize < 4 + 4)
+            Debug.Assert((fbeStructSize >= (4 + 4)), "Model is broken!");
+            if (fbeStructSize < (4 + 4))
                 return 0;
 
             _buffer.Shift(fbeStructOffset);
@@ -8625,7 +8625,7 @@ namespace test {
                 return false;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            if (fbeStructSize < 4 + 4)
+            if (fbeStructSize < (4 + 4))
                 return false;
 
             uint fbeStructType = ReadUInt32(fbeStructOffset + 4);
@@ -8718,8 +8718,8 @@ namespace test {
                 return 0;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            Debug.Assert((fbeStructSize >= 4 + 4), "Model is broken!");
-            if (fbeStructSize < 4 + 4)
+            Debug.Assert((fbeStructSize >= (4 + 4)), "Model is broken!");
+            if (fbeStructSize < (4 + 4))
                 return 0;
 
             _buffer.Shift(fbeStructOffset);
@@ -9643,7 +9643,7 @@ namespace test {
                 return false;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            if (fbeStructSize < 4 + 4)
+            if (fbeStructSize < (4 + 4))
                 return false;
 
             uint fbeStructType = ReadUInt32(fbeStructOffset + 4);
@@ -9736,8 +9736,8 @@ namespace test {
                 return 0;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            Debug.Assert((fbeStructSize >= 4 + 4), "Model is broken!");
-            if (fbeStructSize < 4 + 4)
+            Debug.Assert((fbeStructSize >= (4 + 4)), "Model is broken!");
+            if (fbeStructSize < (4 + 4))
                 return 0;
 
             _buffer.Shift(fbeStructOffset);
@@ -10661,7 +10661,7 @@ namespace test {
                 return false;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            if (fbeStructSize < 4 + 4)
+            if (fbeStructSize < (4 + 4))
                 return false;
 
             uint fbeStructType = ReadUInt32(fbeStructOffset + 4);
@@ -10754,8 +10754,8 @@ namespace test {
                 return 0;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            Debug.Assert((fbeStructSize >= 4 + 4), "Model is broken!");
-            if (fbeStructSize < 4 + 4)
+            Debug.Assert((fbeStructSize >= (4 + 4)), "Model is broken!");
+            if (fbeStructSize < (4 + 4))
                 return 0;
 
             _buffer.Shift(fbeStructOffset);
@@ -11571,7 +11571,7 @@ namespace test {
                 return false;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            if (fbeStructSize < 4 + 4)
+            if (fbeStructSize < (4 + 4))
                 return false;
 
             uint fbeStructType = ReadUInt32(fbeStructOffset + 4);
@@ -11628,8 +11628,8 @@ namespace test {
                 return 0;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            Debug.Assert((fbeStructSize >= 4 + 4), "Model is broken!");
-            if (fbeStructSize < 4 + 4)
+            Debug.Assert((fbeStructSize >= (4 + 4)), "Model is broken!");
+            if (fbeStructSize < (4 + 4))
                 return 0;
 
             _buffer.Shift(fbeStructOffset);
@@ -12417,7 +12417,7 @@ namespace test {
                 return false;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            if (fbeStructSize < 4 + 4)
+            if (fbeStructSize < (4 + 4))
                 return false;
 
             uint fbeStructType = ReadUInt32(fbeStructOffset + 4);
@@ -12510,8 +12510,8 @@ namespace test {
                 return 0;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            Debug.Assert((fbeStructSize >= 4 + 4), "Model is broken!");
-            if (fbeStructSize < 4 + 4)
+            Debug.Assert((fbeStructSize >= (4 + 4)), "Model is broken!");
+            if (fbeStructSize < (4 + 4))
                 return 0;
 
             _buffer.Shift(fbeStructOffset);
@@ -13455,7 +13455,7 @@ namespace test {
                 return false;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            if (fbeStructSize < 4 + 4)
+            if (fbeStructSize < (4 + 4))
                 return false;
 
             uint fbeStructType = ReadUInt32(fbeStructOffset + 4);
@@ -13548,8 +13548,8 @@ namespace test {
                 return 0;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            Debug.Assert((fbeStructSize >= 4 + 4), "Model is broken!");
-            if (fbeStructSize < 4 + 4)
+            Debug.Assert((fbeStructSize >= (4 + 4)), "Model is broken!");
+            if (fbeStructSize < (4 + 4))
                 return 0;
 
             _buffer.Shift(fbeStructOffset);
@@ -14333,7 +14333,7 @@ namespace test {
                 return false;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            if (fbeStructSize < 4 + 4)
+            if (fbeStructSize < (4 + 4))
                 return false;
 
             uint fbeStructType = ReadUInt32(fbeStructOffset + 4);
@@ -14378,8 +14378,8 @@ namespace test {
                 return 0;
 
             uint fbeStructSize = ReadUInt32(fbeStructOffset);
-            Debug.Assert((fbeStructSize >= 4 + 4), "Model is broken!");
-            if (fbeStructSize < 4 + 4)
+            Debug.Assert((fbeStructSize >= (4 + 4)), "Model is broken!");
+            if (fbeStructSize < (4 + 4))
                 return 0;
 
             _buffer.Shift(fbeStructOffset);

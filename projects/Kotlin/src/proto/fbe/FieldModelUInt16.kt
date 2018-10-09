@@ -22,7 +22,7 @@ class FieldModelUInt16(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     // Get the value
     fun get(defaults: UShort = 0.toUShort()): UShort
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
 
         return readUInt16(fbeOffset)
@@ -31,8 +31,8 @@ class FieldModelUInt16(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     // Set the value
     fun set(value: UShort)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         write(fbeOffset, value)

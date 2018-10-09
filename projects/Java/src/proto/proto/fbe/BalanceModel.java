@@ -25,8 +25,8 @@ public final class BalanceModel extends Model
     // Get the model size
     public long fbeSize() { return model.fbeSize() + model.fbeExtra(); }
     // Get the model type
-    public static final long FBETypeConst = FieldModelBalance.FBETypeConst;
-    public long FBEType() { return FBETypeConst; }
+    public static final long fbeTypeConst = FieldModelBalance.fbeTypeConst;
+    public long fbeType() { return fbeTypeConst; }
 
     // Check if the struct value is valid
     public boolean verify()

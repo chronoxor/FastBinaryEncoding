@@ -120,7 +120,7 @@ public class FinalReceiver extends fbe.Receiver
     {
         switch ((int)type)
         {
-            case (int)test.fbe.StructSimpleFinalModel.FBETypeConst:
+            case (int)test.fbe.StructSimpleFinalModel.fbeTypeConst:
             {
                 // Deserialize the value from the FBE stream
                 StructSimpleModel.attach(buffer, offset);
@@ -139,7 +139,7 @@ public class FinalReceiver extends fbe.Receiver
                 onReceive(StructSimpleValue);
                 return true;
             }
-            case (int)test.fbe.StructOptionalFinalModel.FBETypeConst:
+            case (int)test.fbe.StructOptionalFinalModel.fbeTypeConst:
             {
                 // Deserialize the value from the FBE stream
                 StructOptionalModel.attach(buffer, offset);
@@ -158,7 +158,7 @@ public class FinalReceiver extends fbe.Receiver
                 onReceive(StructOptionalValue);
                 return true;
             }
-            case (int)test.fbe.StructNestedFinalModel.FBETypeConst:
+            case (int)test.fbe.StructNestedFinalModel.fbeTypeConst:
             {
                 // Deserialize the value from the FBE stream
                 StructNestedModel.attach(buffer, offset);
@@ -177,7 +177,7 @@ public class FinalReceiver extends fbe.Receiver
                 onReceive(StructNestedValue);
                 return true;
             }
-            case (int)test.fbe.StructBytesFinalModel.FBETypeConst:
+            case (int)test.fbe.StructBytesFinalModel.fbeTypeConst:
             {
                 // Deserialize the value from the FBE stream
                 StructBytesModel.attach(buffer, offset);
@@ -196,7 +196,7 @@ public class FinalReceiver extends fbe.Receiver
                 onReceive(StructBytesValue);
                 return true;
             }
-            case (int)test.fbe.StructArrayFinalModel.FBETypeConst:
+            case (int)test.fbe.StructArrayFinalModel.fbeTypeConst:
             {
                 // Deserialize the value from the FBE stream
                 StructArrayModel.attach(buffer, offset);
@@ -215,7 +215,7 @@ public class FinalReceiver extends fbe.Receiver
                 onReceive(StructArrayValue);
                 return true;
             }
-            case (int)test.fbe.StructVectorFinalModel.FBETypeConst:
+            case (int)test.fbe.StructVectorFinalModel.fbeTypeConst:
             {
                 // Deserialize the value from the FBE stream
                 StructVectorModel.attach(buffer, offset);
@@ -234,7 +234,7 @@ public class FinalReceiver extends fbe.Receiver
                 onReceive(StructVectorValue);
                 return true;
             }
-            case (int)test.fbe.StructListFinalModel.FBETypeConst:
+            case (int)test.fbe.StructListFinalModel.fbeTypeConst:
             {
                 // Deserialize the value from the FBE stream
                 StructListModel.attach(buffer, offset);
@@ -253,7 +253,7 @@ public class FinalReceiver extends fbe.Receiver
                 onReceive(StructListValue);
                 return true;
             }
-            case (int)test.fbe.StructSetFinalModel.FBETypeConst:
+            case (int)test.fbe.StructSetFinalModel.fbeTypeConst:
             {
                 // Deserialize the value from the FBE stream
                 StructSetModel.attach(buffer, offset);
@@ -272,7 +272,7 @@ public class FinalReceiver extends fbe.Receiver
                 onReceive(StructSetValue);
                 return true;
             }
-            case (int)test.fbe.StructMapFinalModel.FBETypeConst:
+            case (int)test.fbe.StructMapFinalModel.fbeTypeConst:
             {
                 // Deserialize the value from the FBE stream
                 StructMapModel.attach(buffer, offset);
@@ -291,7 +291,7 @@ public class FinalReceiver extends fbe.Receiver
                 onReceive(StructMapValue);
                 return true;
             }
-            case (int)test.fbe.StructHashFinalModel.FBETypeConst:
+            case (int)test.fbe.StructHashFinalModel.fbeTypeConst:
             {
                 // Deserialize the value from the FBE stream
                 StructHashModel.attach(buffer, offset);
@@ -310,7 +310,7 @@ public class FinalReceiver extends fbe.Receiver
                 onReceive(StructHashValue);
                 return true;
             }
-            case (int)test.fbe.StructHashExFinalModel.FBETypeConst:
+            case (int)test.fbe.StructHashExFinalModel.fbeTypeConst:
             {
                 // Deserialize the value from the FBE stream
                 StructHashExModel.attach(buffer, offset);

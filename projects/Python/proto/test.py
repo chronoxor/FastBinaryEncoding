@@ -1324,7 +1324,7 @@ class FieldModelStructSimple(fbe.FieldModel):
             return False
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        if fbe_struct_size < 4 + 4:
+        if fbe_struct_size < (4 + 4):
             return False
 
         fbe_struct_type = self.read_uint32(fbe_struct_offset + 4)
@@ -1623,8 +1623,8 @@ class FieldModelStructSimple(fbe.FieldModel):
             return 0
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        assert (fbe_struct_size >= 4 + 4), "Model is broken!"
-        if fbe_struct_size < 4 + 4:
+        assert (fbe_struct_size >= (4 + 4)), "Model is broken!"
+        if fbe_struct_size < (4 + 4):
             return 0
 
         self._buffer.shift(fbe_struct_offset)
@@ -4461,7 +4461,7 @@ class FieldModelStructOptional(fbe.FieldModel):
             return False
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        if fbe_struct_size < 4 + 4:
+        if fbe_struct_size < (4 + 4):
             return False
 
         fbe_struct_type = self.read_uint32(fbe_struct_offset + 4)
@@ -4892,8 +4892,8 @@ class FieldModelStructOptional(fbe.FieldModel):
             return 0
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        assert (fbe_struct_size >= 4 + 4), "Model is broken!"
-        if fbe_struct_size < 4 + 4:
+        assert (fbe_struct_size >= (4 + 4)), "Model is broken!"
+        if fbe_struct_size < (4 + 4):
             return 0
 
         self._buffer.shift(fbe_struct_offset)
@@ -7489,7 +7489,7 @@ class FieldModelStructNested(fbe.FieldModel):
             return False
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        if fbe_struct_size < 4 + 4:
+        if fbe_struct_size < (4 + 4):
             return False
 
         fbe_struct_type = self.read_uint32(fbe_struct_offset + 4)
@@ -7596,8 +7596,8 @@ class FieldModelStructNested(fbe.FieldModel):
             return 0
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        assert (fbe_struct_size >= 4 + 4), "Model is broken!"
-        if fbe_struct_size < 4 + 4:
+        assert (fbe_struct_size >= (4 + 4)), "Model is broken!"
+        if fbe_struct_size < (4 + 4):
             return 0
 
         self._buffer.shift(fbe_struct_offset)
@@ -8426,7 +8426,7 @@ class FieldModelStructBytes(fbe.FieldModel):
             return False
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        if fbe_struct_size < 4 + 4:
+        if fbe_struct_size < (4 + 4):
             return False
 
         fbe_struct_type = self.read_uint32(fbe_struct_offset + 4)
@@ -8473,8 +8473,8 @@ class FieldModelStructBytes(fbe.FieldModel):
             return 0
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        assert (fbe_struct_size >= 4 + 4), "Model is broken!"
-        if fbe_struct_size < 4 + 4:
+        assert (fbe_struct_size >= (4 + 4)), "Model is broken!"
+        if fbe_struct_size < (4 + 4):
             return 0
 
         self._buffer.shift(fbe_struct_offset)
@@ -9212,7 +9212,7 @@ class FieldModelStructArray(fbe.FieldModel):
             return False
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        if fbe_struct_size < 4 + 4:
+        if fbe_struct_size < (4 + 4):
             return False
 
         fbe_struct_type = self.read_uint32(fbe_struct_offset + 4)
@@ -9301,8 +9301,8 @@ class FieldModelStructArray(fbe.FieldModel):
             return 0
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        assert (fbe_struct_size >= 4 + 4), "Model is broken!"
-        if fbe_struct_size < 4 + 4:
+        assert (fbe_struct_size >= (4 + 4)), "Model is broken!"
+        if fbe_struct_size < (4 + 4):
             return 0
 
         self._buffer.shift(fbe_struct_offset)
@@ -10240,7 +10240,7 @@ class FieldModelStructVector(fbe.FieldModel):
             return False
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        if fbe_struct_size < 4 + 4:
+        if fbe_struct_size < (4 + 4):
             return False
 
         fbe_struct_type = self.read_uint32(fbe_struct_offset + 4)
@@ -10329,8 +10329,8 @@ class FieldModelStructVector(fbe.FieldModel):
             return 0
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        assert (fbe_struct_size >= 4 + 4), "Model is broken!"
-        if fbe_struct_size < 4 + 4:
+        assert (fbe_struct_size >= (4 + 4)), "Model is broken!"
+        if fbe_struct_size < (4 + 4):
             return 0
 
         self._buffer.shift(fbe_struct_offset)
@@ -11268,7 +11268,7 @@ class FieldModelStructList(fbe.FieldModel):
             return False
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        if fbe_struct_size < 4 + 4:
+        if fbe_struct_size < (4 + 4):
             return False
 
         fbe_struct_type = self.read_uint32(fbe_struct_offset + 4)
@@ -11357,8 +11357,8 @@ class FieldModelStructList(fbe.FieldModel):
             return 0
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        assert (fbe_struct_size >= 4 + 4), "Model is broken!"
-        if fbe_struct_size < 4 + 4:
+        assert (fbe_struct_size >= (4 + 4)), "Model is broken!"
+        if fbe_struct_size < (4 + 4):
             return 0
 
         self._buffer.shift(fbe_struct_offset)
@@ -12130,7 +12130,7 @@ class FieldModelStructSet(fbe.FieldModel):
             return False
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        if fbe_struct_size < 4 + 4:
+        if fbe_struct_size < (4 + 4):
             return False
 
         fbe_struct_type = self.read_uint32(fbe_struct_offset + 4)
@@ -12183,8 +12183,8 @@ class FieldModelStructSet(fbe.FieldModel):
             return 0
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        assert (fbe_struct_size >= 4 + 4), "Model is broken!"
-        if fbe_struct_size < 4 + 4:
+        assert (fbe_struct_size >= (4 + 4)), "Model is broken!"
+        if fbe_struct_size < (4 + 4):
             return 0
 
         self._buffer.shift(fbe_struct_offset)
@@ -12978,7 +12978,7 @@ class FieldModelStructMap(fbe.FieldModel):
             return False
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        if fbe_struct_size < 4 + 4:
+        if fbe_struct_size < (4 + 4):
             return False
 
         fbe_struct_type = self.read_uint32(fbe_struct_offset + 4)
@@ -13067,8 +13067,8 @@ class FieldModelStructMap(fbe.FieldModel):
             return 0
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        assert (fbe_struct_size >= 4 + 4), "Model is broken!"
-        if fbe_struct_size < 4 + 4:
+        assert (fbe_struct_size >= (4 + 4)), "Model is broken!"
+        if fbe_struct_size < (4 + 4):
             return 0
 
         self._buffer.shift(fbe_struct_offset)
@@ -14086,7 +14086,7 @@ class FieldModelStructHash(fbe.FieldModel):
             return False
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        if fbe_struct_size < 4 + 4:
+        if fbe_struct_size < (4 + 4):
             return False
 
         fbe_struct_type = self.read_uint32(fbe_struct_offset + 4)
@@ -14175,8 +14175,8 @@ class FieldModelStructHash(fbe.FieldModel):
             return 0
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        assert (fbe_struct_size >= 4 + 4), "Model is broken!"
-        if fbe_struct_size < 4 + 4:
+        assert (fbe_struct_size >= (4 + 4)), "Model is broken!"
+        if fbe_struct_size < (4 + 4):
             return 0
 
         self._buffer.shift(fbe_struct_offset)
@@ -14909,7 +14909,7 @@ class FieldModelStructHashEx(fbe.FieldModel):
             return False
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        if fbe_struct_size < 4 + 4:
+        if fbe_struct_size < (4 + 4):
             return False
 
         fbe_struct_type = self.read_uint32(fbe_struct_offset + 4)
@@ -14950,8 +14950,8 @@ class FieldModelStructHashEx(fbe.FieldModel):
             return 0
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        assert (fbe_struct_size >= 4 + 4), "Model is broken!"
-        if fbe_struct_size < 4 + 4:
+        assert (fbe_struct_size >= (4 + 4)), "Model is broken!"
+        if fbe_struct_size < (4 + 4):
             return 0
 
         self._buffer.shift(fbe_struct_offset)

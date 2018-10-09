@@ -22,7 +22,7 @@ class FieldModelDouble(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     // Get the value
     fun get(defaults: Double = 0.0): Double
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
 
         return readDouble(fbeOffset)
@@ -31,8 +31,8 @@ class FieldModelDouble(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     // Set the value
     fun set(value: Double)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         write(fbeOffset, value)

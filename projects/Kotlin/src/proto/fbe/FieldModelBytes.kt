@@ -22,32 +22,32 @@ class FieldModelBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     // Field extra size
     override val fbeExtra: Long get()
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
-        val fbeBytesOffset = readInt32(fbeOffset)
-        if (fbeBytesOffset == 0 || _buffer.offset + fbeBytesOffset.toLong() + 4 > _buffer.size)
+        val fbeBytesOffset = readUInt32(fbeOffset).toLong()
+        if ((fbeBytesOffset == 0L) || ((_buffer.offset + fbeBytesOffset + 4) > _buffer.size))
             return 0
 
-        val fbeBytesSize = readInt32(fbeBytesOffset.toLong())
-        return (4 + fbeBytesSize).toLong()
+        val fbeBytesSize = readUInt32(fbeBytesOffset).toLong()
+        return 4 + fbeBytesSize
     }
 
     // Check if the bytes value is valid
     override fun verify(): Boolean
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return true
 
-        val fbeBytesOffset = readInt32(fbeOffset)
-        if (fbeBytesOffset == 0)
+        val fbeBytesOffset = readUInt32(fbeOffset).toLong()
+        if (fbeBytesOffset == 0L)
             return true
 
-        if (_buffer.offset + fbeBytesOffset.toLong() + 4 > _buffer.size)
+        if ((_buffer.offset + fbeBytesOffset + 4) > _buffer.size)
             return false
 
-        val fbeBytesSize = readInt32(fbeBytesOffset.toLong())
-        if (_buffer.offset + fbeBytesOffset.toLong() + 4 + fbeBytesSize.toLong() > _buffer.size)
+        val fbeBytesSize = readUInt32(fbeBytesOffset).toLong()
+        if ((_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.size)
             return false
 
         return true
@@ -58,41 +58,41 @@ class FieldModelBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     {
         var value: ByteArray = defaults
 
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return value
 
-        val fbeBytesOffset = readInt32(fbeOffset)
-        if (fbeBytesOffset == 0)
+        val fbeBytesOffset = readUInt32(fbeOffset).toLong()
+        if (fbeBytesOffset == 0L)
             return value
 
-        assert(_buffer.offset + fbeBytesOffset.toLong() + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeBytesOffset.toLong() + 4 > _buffer.size)
+        assert((_buffer.offset + fbeBytesOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeBytesOffset + 4) > _buffer.size)
             return value
 
-        val fbeBytesSize = readInt32(fbeBytesOffset.toLong())
-        assert(_buffer.offset + fbeBytesOffset.toLong() + 4 + fbeBytesSize.toLong() <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeBytesOffset.toLong() + 4 + fbeBytesSize.toLong() > _buffer.size)
+        val fbeBytesSize = readUInt32(fbeBytesOffset).toLong()
+        assert((_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.size)
             return value
 
-        value = readBytes((fbeBytesOffset + 4).toLong(), fbeBytesSize.toLong())
+        value = readBytes(fbeBytesOffset + 4, fbeBytesSize)
         return value
     }
 
     // Set the bytes value
     fun set(value: ByteArray)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
-        val fbeBytesSize = value.size
-        val fbeBytesOffset = (_buffer.allocate((4 + fbeBytesSize).toLong()) - _buffer.offset).toInt()
-        assert(fbeBytesOffset > 0 && _buffer.offset + fbeBytesOffset.toLong() + 4 + fbeBytesSize.toLong() <= _buffer.size) { "Model is broken!" }
-        if (fbeBytesOffset <= 0 || _buffer.offset + fbeBytesOffset.toLong() + 4 + fbeBytesSize.toLong() > _buffer.size)
+        val fbeBytesSize = value.size.toLong()
+        val fbeBytesOffset = _buffer.allocate(4 + fbeBytesSize) - _buffer.offset
+        assert((fbeBytesOffset > 0) && ((_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) <= _buffer.size)) { "Model is broken!" }
+        if ((fbeBytesOffset <= 0) || ((_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.size))
             return
 
-        write(fbeOffset, fbeBytesOffset)
-        write(fbeBytesOffset.toLong(), fbeBytesSize)
-        write((fbeBytesOffset + 4).toLong(), value)
+        write(fbeOffset, fbeBytesOffset.toUInt())
+        write(fbeBytesOffset, fbeBytesSize.toUInt())
+        write(fbeBytesOffset + 4, value)
     }
 }

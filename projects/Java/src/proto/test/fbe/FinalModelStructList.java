@@ -62,8 +62,8 @@ public final class FinalModelStructList extends FinalModel
     }
 
     // Get the field type
-    public static final long FBETypeConst = 131;
-    public long FBEType() { return FBETypeConst; }
+    public static final long fbeTypeConst = 131;
+    public long fbeType() { return fbeTypeConst; }
 
     // Check if the struct value is valid
     @Override

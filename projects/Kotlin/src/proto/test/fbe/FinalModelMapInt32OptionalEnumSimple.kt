@@ -47,10 +47,10 @@ class FinalModelMapInt32OptionalEnumSimple(buffer: Buffer, offset: Long) : Final
     // Check if the map is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return Long.MAX_VALUE
 
-        val fbeMapSize = readInt32(fbeOffset).toLong()
+        val fbeMapSize = readUInt32(fbeOffset).toLong()
 
         var size: Long = 4
         _modelKey.fbeOffset = fbeOffset + 4
@@ -79,11 +79,11 @@ class FinalModelMapInt32OptionalEnumSimple(buffer: Buffer, offset: Long) : Final
     {
         values.clear()
 
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        val fbeMapSize = readInt32(fbeOffset).toLong()
+        val fbeMapSize = readUInt32(fbeOffset).toLong()
         if (fbeMapSize == 0L)
             return 4
 
@@ -114,11 +114,11 @@ class FinalModelMapInt32OptionalEnumSimple(buffer: Buffer, offset: Long) : Final
     {
         values.clear()
 
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        val fbeMapSize = readInt32(fbeOffset).toLong()
+        val fbeMapSize = readUInt32(fbeOffset).toLong()
         if (fbeMapSize == 0L)
             return 4
 
@@ -148,11 +148,11 @@ class FinalModelMapInt32OptionalEnumSimple(buffer: Buffer, offset: Long) : Final
     // Set the map as TreeMap
     fun set(values: TreeMap<Int, EnumSimple?>): Long
     {
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        write(fbeOffset, values.size)
+        write(fbeOffset, values.size.toUInt())
 
         var size: Long = 4
         _modelKey.fbeOffset = fbeOffset + 4
@@ -173,11 +173,11 @@ class FinalModelMapInt32OptionalEnumSimple(buffer: Buffer, offset: Long) : Final
     // Set the vector as HashMap
     fun set(values: HashMap<Int, EnumSimple?>): Long
     {
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        write(fbeOffset, values.size)
+        write(fbeOffset, values.size.toUInt())
 
         var size: Long = 4
         _modelKey.fbeOffset = fbeOffset + 4

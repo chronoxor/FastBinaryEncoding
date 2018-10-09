@@ -28,14 +28,14 @@ class FieldModelMapStringByte(buffer: Buffer, offset: Long) : FieldModel(buffer,
     // Field extra size
     override val fbeExtra: Long get()
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
-        val fbeMapOffset = readInt32(fbeOffset).toLong()
-        if (fbeMapOffset == 0L || _buffer.offset + fbeMapOffset + 4 > _buffer.size)
+        val fbeMapOffset = readUInt32(fbeOffset).toLong()
+        if ((fbeMapOffset == 0L) || ((_buffer.offset + fbeMapOffset + 4) > _buffer.size))
             return 0
 
-        val fbeMapSize = readInt32(fbeMapOffset).toLong()
+        val fbeMapSize = readUInt32(fbeMapOffset).toLong()
 
         var fbeResult: Long = 4
         _modelKey.fbeOffset = fbeMapOffset + 4
@@ -55,36 +55,34 @@ class FieldModelMapStringByte(buffer: Buffer, offset: Long) : FieldModel(buffer,
     // Get the map offset
     val offset: Long get()
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
-        val fbeMapOffset = readInt32(fbeOffset).toLong()
-        return fbeMapOffset
+        return readUInt32(fbeOffset).toLong()
     }
 
     // Get the map size
     val size: Long get()
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
-        val fbeMapOffset = readInt32(fbeOffset).toLong()
-        if (fbeMapOffset == 0L || _buffer.offset + fbeMapOffset + 4 > _buffer.size)
+        val fbeMapOffset = readUInt32(fbeOffset).toLong()
+        if ((fbeMapOffset == 0L) || ((_buffer.offset + fbeMapOffset + 4) > _buffer.size))
             return 0
 
-        val fbeMapSize = readInt32(fbeMapOffset).toLong()
-        return fbeMapSize
+        return readUInt32(fbeMapOffset).toLong()
     }
 
     // Map index operator
     fun getItem(index: Long): Pair<FieldModelString, FieldModelByte>
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
 
-        val fbeMapOffset = readInt32(fbeOffset).toLong()
-        assert(fbeMapOffset > 0 && _buffer.offset + fbeMapOffset + 4 <= _buffer.size) { "Model is broken!" }
+        val fbeMapOffset = readUInt32(fbeOffset).toLong()
+        assert((fbeMapOffset > 0) && ((_buffer.offset + fbeMapOffset + 4) <= _buffer.size)) { "Model is broken!" }
 
-        val fbeMapSize = readInt32(fbeMapOffset).toLong()
+        val fbeMapSize = readUInt32(fbeMapOffset).toLong()
         assert(index < fbeMapSize) { "Index is out of bounds!" }
 
         _modelKey.fbeOffset = fbeMapOffset + 4
@@ -102,10 +100,10 @@ class FieldModelMapStringByte(buffer: Buffer, offset: Long) : FieldModel(buffer,
 
         val fbeMapSize = size * (_modelKey.fbeSize + _modelValue.fbeSize)
         val fbeMapOffset = _buffer.allocate(4 + fbeMapSize) - _buffer.offset
-        assert(fbeMapOffset > 0 && _buffer.offset + fbeMapOffset + 4 <= _buffer.size) { "Model is broken!" }
+        assert((fbeMapOffset > 0) && ((_buffer.offset + fbeMapOffset + 4) <= _buffer.size)) { "Model is broken!" }
 
-        write(fbeOffset, fbeMapOffset)
-        write(fbeMapOffset, size.toInt())
+        write(fbeOffset, fbeMapOffset.toUInt())
+        write(fbeMapOffset, size.toUInt())
         write(fbeMapOffset + 4, 0.toByte(), fbeMapSize)
 
         _modelKey.fbeOffset = fbeMapOffset + 4
@@ -116,17 +114,17 @@ class FieldModelMapStringByte(buffer: Buffer, offset: Long) : FieldModel(buffer,
     // Check if the map is valid
     override fun verify(): Boolean
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return true
 
-        val fbeMapOffset = readInt32(fbeOffset).toLong()
+        val fbeMapOffset = readUInt32(fbeOffset).toLong()
         if (fbeMapOffset == 0L)
             return true
 
-        if (_buffer.offset + fbeMapOffset + 4 > _buffer.size)
+        if ((_buffer.offset + fbeMapOffset + 4) > _buffer.size)
             return false
 
-        val fbeMapSize = readInt32(fbeMapOffset).toLong()
+        val fbeMapSize = readUInt32(fbeMapOffset).toLong()
 
         _modelKey.fbeOffset = fbeMapOffset + 4
         _modelValue.fbeOffset = fbeMapOffset + 4 + _modelKey.fbeSize
@@ -189,8 +187,8 @@ class FieldModelMapStringByte(buffer: Buffer, offset: Long) : FieldModel(buffer,
     // Set the map as TreeMap
     fun set(values: TreeMap<String, Byte>)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         val fbeModel = resize(values.size.toLong())
@@ -206,8 +204,8 @@ class FieldModelMapStringByte(buffer: Buffer, offset: Long) : FieldModel(buffer,
     // Set the vector as HashMap
     fun set(values: HashMap<String, Byte>)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         val fbeModel = resize(values.size.toLong())

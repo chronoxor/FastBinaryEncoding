@@ -38,8 +38,8 @@ public final class FinalModelBalance extends FinalModel
     }
 
     // Get the field type
-    public static final long FBETypeConst = proto.fbe.FinalModelBalance.FBETypeConst;
-    public long FBEType() { return FBETypeConst; }
+    public static final long fbeTypeConst = proto.fbe.FinalModelBalance.fbeTypeConst;
+    public long fbeType() { return fbeTypeConst; }
 
     // Check if the struct value is valid
     @Override

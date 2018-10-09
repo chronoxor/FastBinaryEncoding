@@ -29,7 +29,7 @@ class FinalModelOrderSide(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     // Check if the value is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return Long.MAX_VALUE
 
         return fbeSize
@@ -38,7 +38,7 @@ class FinalModelOrderSide(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     // Get the value
     fun get(size: Size): OrderSide
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return OrderSide()
 
         size.value = fbeSize
@@ -48,8 +48,8 @@ class FinalModelOrderSide(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     // Set the value
     fun set(value: OrderSide): Long
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
         write(fbeOffset, value.raw)

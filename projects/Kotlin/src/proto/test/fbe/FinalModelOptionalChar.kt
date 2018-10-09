@@ -20,16 +20,16 @@ import test.*
 class FinalModelOptionalChar(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
-    fun fbeAllocationSize(optional: Char?): Long = (1 + (if (optional != null) value.fbeAllocationSize(optional) else 0)).toLong()
+    fun fbeAllocationSize(optional: Char?): Long = 1 + (if (optional != null) value.fbeAllocationSize(optional) else 0)
 
     // Checks whether the object contains a value
     fun hasValue(): Boolean
     {
-        if (_buffer.offset + fbeOffset + 1 > _buffer.size)
+        if ((_buffer.offset + fbeOffset + 1) > _buffer.size)
             return false
 
-        val fbeHasValue = readInt8(fbeOffset)
-        return fbeHasValue.toInt() != 0
+        val fbeHasValue = readInt8(fbeOffset).toInt()
+        return fbeHasValue != 0
     }
 
     // Base final model value
@@ -38,11 +38,11 @@ class FinalModelOptionalChar(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     // Check if the optional value is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset + 1 > _buffer.size)
+        if ((_buffer.offset + fbeOffset + 1) > _buffer.size)
             return Long.MAX_VALUE
 
-        val fbeHasValue = readInt8(fbeOffset)
-        if (fbeHasValue.toInt() == 0)
+        val fbeHasValue = readInt8(fbeOffset).toInt()
+        if (fbeHasValue == 0)
             return 1
 
         _buffer.shift(fbeOffset + 1)
@@ -54,8 +54,8 @@ class FinalModelOptionalChar(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     // Get the optional value
     fun get(size: Size): Char?
     {
-        assert(_buffer.offset + fbeOffset + 1 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 1 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 1) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 1) > _buffer.size)
         {
             size.value = 0
             return null
@@ -77,13 +77,13 @@ class FinalModelOptionalChar(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     // Set the optional value
     fun set(optional: Char?): Long
     {
-        assert(_buffer.offset + fbeOffset + 1 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 1 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 1) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 1) > _buffer.size)
             return 0
 
-        val fbeHasValue = (if (optional != null) 1 else 0).toByte()
-        write(fbeOffset, fbeHasValue)
-        if (fbeHasValue.toInt() == 0)
+        val fbeHasValue = if (optional != null) 1 else 0
+        write(fbeOffset, fbeHasValue.toByte())
+        if (fbeHasValue == 0)
             return 1
 
         _buffer.shift(fbeOffset + 1)

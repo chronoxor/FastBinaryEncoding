@@ -35,7 +35,7 @@ public final class FieldModelStructNested extends FieldModel
     {
         super(buffer, offset);
         parent = new FieldModelStructOptional(buffer, 4 + 4);
-        f1000 = new FieldModelEnumSimple(buffer, parent.fbeOffset() + parent.FBEBody() - 4 - 4);
+        f1000 = new FieldModelEnumSimple(buffer, parent.fbeOffset() + parent.fbeBody() - 4 - 4);
         f1001 = new FieldModelOptionalEnumSimple(buffer, f1000.fbeOffset() + f1000.fbeSize());
         f1002 = new FieldModelEnumTyped(buffer, f1001.fbeOffset() + f1001.fbeSize());
         f1003 = new FieldModelOptionalEnumTyped(buffer, f1002.fbeOffset() + f1002.fbeSize());
@@ -53,10 +53,10 @@ public final class FieldModelStructNested extends FieldModel
     @Override
     public long fbeSize() { return 4; }
     // Get the field body size
-    public long FBEBody()
+    public long fbeBody()
     {
         long fbeResult = 4 + 4
-            + parent.FBEBody() - 4 - 4
+            + parent.fbeBody() - 4 - 4
             + f1000.fbeSize()
             + f1001.fbeSize()
             + f1002.fbeSize()
@@ -85,7 +85,7 @@ public final class FieldModelStructNested extends FieldModel
 
         _buffer.shift(fbeStructOffset);
 
-        long fbeResult = FBEBody()
+        long fbeResult = fbeBody()
             + parent.fbeExtra()
             + f1000.fbeExtra()
             + f1001.fbeExtra()
@@ -106,8 +106,8 @@ public final class FieldModelStructNested extends FieldModel
         return fbeResult;
     }
     // Get the field type
-    public static final long FBETypeConst = 112;
-    public long FBEType() { return FBETypeConst; }
+    public static final long fbeTypeConst = 112;
+    public long fbeType() { return fbeTypeConst; }
 
     // Check if the struct value is valid
     @Override
@@ -122,11 +122,11 @@ public final class FieldModelStructNested extends FieldModel
             return false;
 
         int fbeStructSize = readInt32(fbeStructOffset);
-        if (fbeStructSize < 4 + 4)
+        if (fbeStructSize < (4 + 4))
             return false;
 
         int fbeStructType = readInt32(fbeStructOffset + 4);
-        if (fbeVerifyType && (fbeStructType != FBEType()))
+        if (fbeVerifyType && (fbeStructType != fbeType()))
             return false;
 
         _buffer.shift(fbeStructOffset);
@@ -140,11 +140,11 @@ public final class FieldModelStructNested extends FieldModel
     {
         long fbeCurrentSize = 4 + 4;
 
-        if ((fbeCurrentSize + parent.FBEBody() - 4 - 4) > fbeStructSize)
+        if ((fbeCurrentSize + parent.fbeBody() - 4 - 4) > fbeStructSize)
             return true;
         if (!parent.verifyFields(fbeStructSize))
             return false;
-        fbeCurrentSize += parent.FBEBody() - 4 - 4;
+        fbeCurrentSize += parent.fbeBody() - 4 - 4;
 
         if ((fbeCurrentSize + f1000.fbeSize()) > fbeStructSize)
             return true;
@@ -233,8 +233,8 @@ public final class FieldModelStructNested extends FieldModel
             return 0;
 
         int fbeStructSize = readInt32(fbeStructOffset);
-        assert (fbeStructSize >= 4 + 4) : "Model is broken!";
-        if (fbeStructSize < 4 + 4)
+        assert (fbeStructSize >= (4 + 4)) : "Model is broken!";
+        if (fbeStructSize < (4 + 4))
             return 0;
 
         _buffer.shift(fbeStructOffset);
@@ -266,9 +266,9 @@ public final class FieldModelStructNested extends FieldModel
     {
         long fbeCurrentSize = 4 + 4;
 
-        if ((fbeCurrentSize + parent.FBEBody() - 4 - 4) <= fbeStructSize)
+        if ((fbeCurrentSize + parent.fbeBody() - 4 - 4) <= fbeStructSize)
             parent.getFields(fbeValue, fbeStructSize);
-        fbeCurrentSize += parent.FBEBody() - 4 - 4;
+        fbeCurrentSize += parent.fbeBody() - 4 - 4;
 
         if ((fbeCurrentSize + f1000.fbeSize()) <= fbeStructSize)
             fbeValue.f1000 = f1000.get();
@@ -350,7 +350,7 @@ public final class FieldModelStructNested extends FieldModel
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeStructSize = (int)FBEBody();
+        int fbeStructSize = (int)fbeBody();
         int fbeStructOffset = (int)(_buffer.allocate(fbeStructSize) - _buffer.getOffset());
         assert ((fbeStructOffset > 0) && ((_buffer.getOffset() + fbeStructOffset + fbeStructSize) <= _buffer.getSize())) : "Model is broken!";
         if ((fbeStructOffset <= 0) || ((_buffer.getOffset() + fbeStructOffset + fbeStructSize) > _buffer.getSize()))
@@ -358,7 +358,7 @@ public final class FieldModelStructNested extends FieldModel
 
         write(fbeOffset(), fbeStructOffset);
         write(fbeStructOffset, fbeStructSize);
-        write(fbeStructOffset + 4, (int)FBEType());
+        write(fbeStructOffset + 4, (int)fbeType());
 
         _buffer.shift(fbeStructOffset);
         return fbeStructOffset;

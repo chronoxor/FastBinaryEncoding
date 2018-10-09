@@ -9427,7 +9427,7 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     {
         WriteLineIndent("this._parent = new " + ConvertTypeFieldName(*s->base, false) + "(buffer, " + prev_offset + " + " + prev_size + ")");
         prev_offset = "this._parent.fbeOffset";
-        prev_size = "this._parent.FBEBody - 4 - 4";
+        prev_size = "this._parent.fbeBody - 4 - 4";
     }
     if (s->body)
     {
@@ -9492,11 +9492,11 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     WriteLineIndent(" * @this {!FieldModel" + *s->name + "}");
     WriteLineIndent(" * @returns {!number} Field body size");
     WriteLineIndent(" */");
-    WriteLineIndent("get FBEBody () {");
+    WriteLineIndent("get fbeBody () {");
     Indent(1);
     WriteIndent("return 4 + 4");
     if (s->base && !s->base->empty())
-        Write(" + this.parent.FBEBody - 4 - 4");
+        Write(" + this.parent.fbeBody - 4 - 4");
     if (s->body)
         for (const auto& field : s->body->fields)
             Write(" + this." + *field->name + ".fbeSize");
@@ -9526,7 +9526,7 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     WriteLine();
     WriteLineIndent("this._buffer.shift(fbeStructOffset)");
     WriteLine();
-    WriteIndent("let fbeResult = this.FBEBody");
+    WriteIndent("let fbeResult = this.fbeBody");
     Indent(1);
     if (s->base && !s->base->empty())
         Write(" + this.parent.fbeExtra");
@@ -9547,9 +9547,9 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     WriteLineIndent(" * @this {!FieldModel" + *s->name + "}");
     WriteLineIndent(" * @returns {!number} Field type");
     WriteLineIndent(" */");
-    WriteLineIndent("get FBEType () {");
+    WriteLineIndent("get fbeType () {");
     Indent(1);
-    WriteLineIndent("return FieldModel" + *s->name + ".FBEType");
+    WriteLineIndent("return FieldModel" + *s->name + ".fbeType");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
@@ -9558,10 +9558,10 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     WriteLineIndent(" * @this {!FieldModel" + *s->name + "}");
     WriteLineIndent(" * @returns {!number} Field type");
     WriteLineIndent(" */");
-    WriteLineIndent("static get FBEType () {");
+    WriteLineIndent("static get fbeType () {");
     Indent(1);
     if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("return " + ConvertTypeFieldName(*s->base, false) + ".FBEType");
+        WriteLineIndent("return " + ConvertTypeFieldName(*s->base, false) + ".fbeType");
     else
         WriteLineIndent("return " + std::to_string(s->type));
     Indent(-1);
@@ -9591,14 +9591,14 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     WriteLineIndent("}");
     WriteLine();
     WriteLineIndent("let fbeStructSize = this.readUInt32(fbeStructOffset)");
-    WriteLineIndent("if (fbeStructSize < 4 + 4) {");
+    WriteLineIndent("if (fbeStructSize < (4 + 4)) {");
     Indent(1);
     WriteLineIndent("return false");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
     WriteLineIndent("let fbeStructType = this.readUInt32(fbeStructOffset + 4)");
-    WriteLineIndent("if (fbeVerifyType && (fbeStructType !== this.FBEType)) {");
+    WriteLineIndent("if (fbeVerifyType && (fbeStructType !== this.fbeType)) {");
     Indent(1);
     WriteLineIndent("return false");
     Indent(-1);
@@ -9625,7 +9625,7 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("if ((fbeCurrentSize + this.parent.FBEBody - 4 - 4) > fbeStructSize) {");
+        WriteLineIndent("if ((fbeCurrentSize + this.parent.fbeBody - 4 - 4) > fbeStructSize) {");
         Indent(1);
         WriteLineIndent("return true");
         Indent(-1);
@@ -9636,7 +9636,7 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
         Indent(-1);
         WriteLineIndent("}");
         WriteLineIndent("// noinspection JSUnusedAssignment");
-        WriteLineIndent("fbeCurrentSize += this.parent.FBEBody - 4 - 4");
+        WriteLineIndent("fbeCurrentSize += this.parent.fbeBody - 4 - 4");
     }
     if (s->body)
     {
@@ -9686,8 +9686,8 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     WriteLineIndent("}");
     WriteLine();
     WriteLineIndent("let fbeStructSize = this.readUInt32(fbeStructOffset)");
-    WriteLineIndent("console.assert((fbeStructSize >= 4 + 4), 'Model is broken!')");
-    WriteLineIndent("if (fbeStructSize < 4 + 4) {");
+    WriteLineIndent("console.assert((fbeStructSize >= (4 + 4)), 'Model is broken!')");
+    WriteLineIndent("if (fbeStructSize < (4 + 4)) {");
     Indent(1);
     WriteLineIndent("return 0");
     Indent(-1);
@@ -9749,13 +9749,13 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("if ((fbeCurrentSize + this.parent.FBEBody - 4 - 4) <= fbeStructSize) {");
+        WriteLineIndent("if ((fbeCurrentSize + this.parent.fbeBody - 4 - 4) <= fbeStructSize) {");
         Indent(1);
         WriteLineIndent("this.parent.getFields(fbeValue, fbeStructSize)");
         Indent(-1);
         WriteLineIndent("}");
         WriteLineIndent("// noinspection JSUnusedAssignment");
-        WriteLineIndent("fbeCurrentSize += this.parent.FBEBody - 4 - 4");
+        WriteLineIndent("fbeCurrentSize += this.parent.fbeBody - 4 - 4");
     }
     if (s->body)
     {
@@ -9802,7 +9802,7 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("let fbeStructSize = this.FBEBody");
+    WriteLineIndent("let fbeStructSize = this.fbeBody");
     WriteLineIndent("let fbeStructOffset = this._buffer.allocate(fbeStructSize) - this._buffer.offset");
     WriteLineIndent("console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + fbeStructSize) <= this._buffer.size), 'Model is broken!')");
     WriteLineIndent("if ((fbeStructOffset <= 0) || ((this._buffer.offset + fbeStructOffset + fbeStructSize) > this._buffer.size)) {");
@@ -9813,7 +9813,7 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     WriteLine();
     WriteLineIndent("this.writeUInt32(this.fbeOffset, fbeStructOffset)");
     WriteLineIndent("this.writeUInt32(fbeStructOffset, fbeStructSize)");
-    WriteLineIndent("this.writeUInt32(fbeStructOffset + 4, this.FBEType)");
+    WriteLineIndent("this.writeUInt32(fbeStructOffset + 4, this.fbeType)");
     WriteLine();
     WriteLineIndent("this._buffer.shift(fbeStructOffset)");
     WriteLineIndent("return fbeStructOffset");
@@ -9934,9 +9934,9 @@ void GeneratorJavaScript::GenerateStructModel(const std::shared_ptr<StructType>&
     WriteLineIndent(" * @this {!" + *s->name + "Model}");
     WriteLineIndent(" * @returns {!number} Model type");
     WriteLineIndent(" */");
-    WriteLineIndent("get FBEType () {");
+    WriteLineIndent("get fbeType () {");
     Indent(1);
-    WriteLineIndent("return " + *s->name + "Model.FBEType");
+    WriteLineIndent("return " + *s->name + "Model.fbeType");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
@@ -9945,9 +9945,9 @@ void GeneratorJavaScript::GenerateStructModel(const std::shared_ptr<StructType>&
     WriteLineIndent(" * @this {!" + *s->name + "Model}");
     WriteLineIndent(" * @returns {!number} Model type");
     WriteLineIndent(" */");
-    WriteLineIndent("static get FBEType () {");
+    WriteLineIndent("static get fbeType () {");
     Indent(1);
-    WriteLineIndent("return FieldModel" + *s->name + ".FBEType");
+    WriteLineIndent("return FieldModel" + *s->name + ".fbeType");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -10159,9 +10159,9 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
     WriteLineIndent(" * @this {!FinalModel" + *s->name + "}");
     WriteLineIndent(" * @returns {!number} Field type");
     WriteLineIndent(" */");
-    WriteLineIndent("get FBEType () {");
+    WriteLineIndent("get fbeType () {");
     Indent(1);
-    WriteLineIndent("return FinalModel" + *s->name + ".FBEType");
+    WriteLineIndent("return FinalModel" + *s->name + ".fbeType");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
@@ -10170,10 +10170,10 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
     WriteLineIndent(" * @this {!FinalModel" + *s->name + "}");
     WriteLineIndent(" * @returns {!number} Field type");
     WriteLineIndent(" */");
-    WriteLineIndent("static get FBEType () {");
+    WriteLineIndent("static get fbeType () {");
     Indent(1);
     if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("return " + ConvertTypeFieldName(*s->base, true) + ".FBEType");
+        WriteLineIndent("return " + ConvertTypeFieldName(*s->base, true) + ".fbeType");
     else
         WriteLineIndent("return " + std::to_string(s->type));
     Indent(-1);
@@ -10395,9 +10395,9 @@ void GeneratorJavaScript::GenerateStructModelFinal(const std::shared_ptr<StructT
     WriteLineIndent(" * @this {!" + *s->name + "FinalModel}");
     WriteLineIndent(" * @returns {!number} Model type");
     WriteLineIndent(" */");
-    WriteLineIndent("get FBEType () {");
+    WriteLineIndent("get fbeType () {");
     Indent(1);
-    WriteLineIndent("return " + *s->name + "FinalModel.FBEType");
+    WriteLineIndent("return " + *s->name + "FinalModel.fbeType");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
@@ -10406,9 +10406,9 @@ void GeneratorJavaScript::GenerateStructModelFinal(const std::shared_ptr<StructT
     WriteLineIndent(" * @this {!" + *s->name + "FinalModel}");
     WriteLineIndent(" * @returns {!number} Model type");
     WriteLineIndent(" */");
-    WriteLineIndent("static get FBEType () {");
+    WriteLineIndent("static get fbeType () {");
     Indent(1);
-    WriteLineIndent("return FinalModel" + *s->name + ".FBEType");
+    WriteLineIndent("return FinalModel" + *s->name + ".fbeType");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -10429,7 +10429,7 @@ void GeneratorJavaScript::GenerateStructModelFinal(const std::shared_ptr<StructT
     WriteLine();
     WriteLineIndent("let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)");
     WriteLineIndent("let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)");
-    WriteLineIndent("if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {");
+    WriteLineIndent("if ((fbeStructSize <= 0) || (fbeStructType !== this.fbeType)) {");
     Indent(1);
     WriteLineIndent("return false");
     Indent(-1);
@@ -10451,7 +10451,7 @@ void GeneratorJavaScript::GenerateStructModelFinal(const std::shared_ptr<StructT
     Indent(1);
     WriteLineIndent("let fbeInitialSize = this.buffer.size");
     WriteLine();
-    WriteLineIndent("let fbeStructType = this.FBEType");
+    WriteLineIndent("let fbeStructType = this.fbeType");
     WriteLineIndent("let fbeStructSize = 8 + this._model.fbeAllocationSize(value)");
     WriteLineIndent("let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset");
     WriteLineIndent("console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')");
@@ -10490,8 +10490,8 @@ void GeneratorJavaScript::GenerateStructModelFinal(const std::shared_ptr<StructT
     WriteLine();
     WriteLineIndent("let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)");
     WriteLineIndent("let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)");
-    WriteLineIndent("console.assert(((fbeStructSize > 0) && (fbeStructType === this.FBEType)), 'Model is broken!')");
-    WriteLineIndent("if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {");
+    WriteLineIndent("console.assert(((fbeStructSize > 0) && (fbeStructType === this.fbeType)), 'Model is broken!')");
+    WriteLineIndent("if ((fbeStructSize <= 0) || (fbeStructType !== this.fbeType)) {");
     Indent(1);
     WriteLineIndent("return { value: new " + *s->name + "(), size: 8 }");
     Indent(-1);
@@ -10815,7 +10815,7 @@ void GeneratorJavaScript::GenerateReceiver(const std::shared_ptr<Package>& p, bo
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case " + *s->name + model + ".FBEType: {");
+            WriteLineIndent("case " + *s->name + model + ".fbeType: {");
             Indent(1);
             WriteLineIndent("// Deserialize the value from the FBE stream");
             WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model.attachBuffer(buffer, offset)");

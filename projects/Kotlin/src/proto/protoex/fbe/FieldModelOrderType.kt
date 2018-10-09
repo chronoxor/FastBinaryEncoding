@@ -25,7 +25,7 @@ class FieldModelOrderType(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     // Get the value
     fun get(defaults: OrderType = OrderType()): OrderType
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
 
         return OrderType(readByte(fbeOffset))
@@ -34,8 +34,8 @@ class FieldModelOrderType(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     // Set the value
     fun set(value: OrderType)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         write(fbeOffset, value.raw)

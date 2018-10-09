@@ -25,7 +25,7 @@ class FieldModelFlagsTyped(buffer: Buffer, offset: Long) : FieldModel(buffer, of
     // Get the value
     fun get(defaults: FlagsTyped = FlagsTyped()): FlagsTyped
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
 
         return FlagsTyped(readUInt64(fbeOffset))
@@ -34,8 +34,8 @@ class FieldModelFlagsTyped(buffer: Buffer, offset: Long) : FieldModel(buffer, of
     // Set the value
     fun set(value: FlagsTyped)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         write(fbeOffset, value.raw)

@@ -22,7 +22,7 @@ class FieldModelChar(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     // Get the value
     fun get(defaults: Char = '\u0000'): Char
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
 
         return readChar(fbeOffset)
@@ -31,8 +31,8 @@ class FieldModelChar(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     // Set the value
     fun set(value: Char)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         write(fbeOffset, value.toByte())

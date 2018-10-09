@@ -23,8 +23,8 @@ public final class StructNestedFinalModel extends Model
     public StructNestedFinalModel(Buffer buffer) { super(buffer); _model = new FinalModelStructNested(getBuffer(), 8); }
 
     // Get the model type
-    public static final long FBETypeConst = FinalModelStructNested.FBETypeConst;
-    public long FBEType() { return FBETypeConst; }
+    public static final long fbeTypeConst = FinalModelStructNested.fbeTypeConst;
+    public long fbeType() { return fbeTypeConst; }
 
     // Check if the struct value is valid
     public boolean verify()
@@ -34,7 +34,7 @@ public final class StructNestedFinalModel extends Model
 
         int fbeStructSize = readInt32(_model.fbeOffset() - 8);
         int fbeStructType = readInt32(_model.fbeOffset() - 4);
-        if ((fbeStructSize <= 0) || (fbeStructType != FBEType()))
+        if ((fbeStructSize <= 0) || (fbeStructType != fbeType()))
             return false;
 
         return ((8 + _model.verify()) == fbeStructSize);
@@ -45,7 +45,7 @@ public final class StructNestedFinalModel extends Model
     {
         long fbeInitialSize = getBuffer().getSize();
 
-        int fbeStructType = (int)FBEType();
+        int fbeStructType = (int)fbeType();
         int fbeStructSize = (int)(8 + _model.fbeAllocationSize(value));
         int fbeStructOffset = (int)(getBuffer().allocate(fbeStructSize) - getBuffer().getOffset());
         assert ((getBuffer().getOffset() + fbeStructOffset + fbeStructSize) <= getBuffer().getSize()) : "Model is broken!";
@@ -71,8 +71,8 @@ public final class StructNestedFinalModel extends Model
 
         long fbeStructSize = readInt32(_model.fbeOffset() - 8);
         long fbeStructType = readInt32(_model.fbeOffset() - 4);
-        assert ((fbeStructSize > 0) && (fbeStructType == FBEType())) : "Model is broken!";
-        if ((fbeStructSize <= 0) || (fbeStructType != FBEType()))
+        assert ((fbeStructSize > 0) && (fbeStructType == fbeType())) : "Model is broken!";
+        if ((fbeStructSize <= 0) || (fbeStructType != fbeType()))
             return 8;
 
         var fbeSize = new Size(0);

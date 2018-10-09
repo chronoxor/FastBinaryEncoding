@@ -26,7 +26,7 @@ class FinalModelBoolean(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     // Check if the value is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return Long.MAX_VALUE
 
         return fbeSize
@@ -35,7 +35,7 @@ class FinalModelBoolean(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     // Get the value
     fun get(size: Size): Boolean
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return false
 
         size.value = fbeSize
@@ -45,8 +45,8 @@ class FinalModelBoolean(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     // Set the value
     fun set(value: Boolean): Long
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
         write(fbeOffset, value)

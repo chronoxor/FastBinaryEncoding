@@ -29,7 +29,7 @@ class FinalModelEnumInt8(buffer: Buffer, offset: Long) : FinalModel(buffer, offs
     // Check if the value is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return Long.MAX_VALUE
 
         return fbeSize
@@ -38,7 +38,7 @@ class FinalModelEnumInt8(buffer: Buffer, offset: Long) : FinalModel(buffer, offs
     // Get the value
     fun get(size: Size): EnumInt8
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return EnumInt8()
 
         size.value = fbeSize
@@ -48,8 +48,8 @@ class FinalModelEnumInt8(buffer: Buffer, offset: Long) : FinalModel(buffer, offs
     // Set the value
     fun set(value: EnumInt8): Long
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
         write(fbeOffset, value.raw)

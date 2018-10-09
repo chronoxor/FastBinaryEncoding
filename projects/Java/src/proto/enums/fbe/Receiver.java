@@ -43,7 +43,7 @@ public class Receiver extends fbe.Receiver
     {
         switch ((int)type)
         {
-            case (int)enums.fbe.EnumsModel.FBETypeConst:
+            case (int)enums.fbe.EnumsModel.fbeTypeConst:
             {
                 // Deserialize the value from the FBE stream
                 EnumsModel.attach(buffer, offset);

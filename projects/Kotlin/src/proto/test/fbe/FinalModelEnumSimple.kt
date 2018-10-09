@@ -29,7 +29,7 @@ class FinalModelEnumSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, of
     // Check if the value is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return Long.MAX_VALUE
 
         return fbeSize
@@ -38,7 +38,7 @@ class FinalModelEnumSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, of
     // Get the value
     fun get(size: Size): EnumSimple
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return EnumSimple()
 
         size.value = fbeSize
@@ -48,8 +48,8 @@ class FinalModelEnumSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, of
     // Set the value
     fun set(value: EnumSimple): Long
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
         write(fbeOffset, value.raw)

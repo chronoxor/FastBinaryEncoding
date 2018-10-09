@@ -25,7 +25,7 @@ class FieldModelEnumByte(buffer: Buffer, offset: Long) : FieldModel(buffer, offs
     // Get the value
     fun get(defaults: EnumByte = EnumByte()): EnumByte
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
 
         return EnumByte(readByte(fbeOffset))
@@ -34,8 +34,8 @@ class FieldModelEnumByte(buffer: Buffer, offset: Long) : FieldModel(buffer, offs
     // Set the value
     fun set(value: EnumByte)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         write(fbeOffset, value.raw)

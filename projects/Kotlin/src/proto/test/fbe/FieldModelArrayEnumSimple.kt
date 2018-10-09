@@ -33,7 +33,7 @@ class FieldModelArrayEnumSimple(buffer: Buffer, offset: Long, val size: Long) : 
     // Array index operator
     fun getItem(index: Long): FieldModelEnumSimple
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         assert(index < size) { "Index is out of bounds!" }
 
         _model.fbeOffset = fbeOffset
@@ -44,7 +44,7 @@ class FieldModelArrayEnumSimple(buffer: Buffer, offset: Long, val size: Long) : 
     // Check if the array is valid
     override fun verify(): Boolean
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return false
 
         _model.fbeOffset = fbeOffset
@@ -78,7 +78,7 @@ class FieldModelArrayEnumSimple(buffer: Buffer, offset: Long, val size: Long) : 
     {
         val fbeModel = getItem(0)
         var i: Long = 0
-        while (i < values.size && i < size)
+        while ((i < values.size) && (i < size))
         {
             values[i.toInt()] = fbeModel.get()
             fbeModel.fbeShift(fbeModel.fbeSize)
@@ -105,13 +105,13 @@ class FieldModelArrayEnumSimple(buffer: Buffer, offset: Long, val size: Long) : 
     // Set the array
     fun set(values: Array<EnumSimple>)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         val fbeModel = getItem(0)
         var i: Long = 0
-        while (i < values.size && i < size)
+        while ((i < values.size) && (i < size))
         {
             fbeModel.set(values[i.toInt()])
             fbeModel.fbeShift(fbeModel.fbeSize)
@@ -122,13 +122,13 @@ class FieldModelArrayEnumSimple(buffer: Buffer, offset: Long, val size: Long) : 
     // Set the array as List
     fun set(values: ArrayList<EnumSimple>)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         val fbeModel = getItem(0)
         var i: Long = 0
-        while (i < values.size && i < size)
+        while ((i < values.size) && (i < size))
         {
             fbeModel.set(values[i.toInt()])
             fbeModel.fbeShift(fbeModel.fbeSize)

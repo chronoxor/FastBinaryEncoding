@@ -26,7 +26,7 @@ class FinalModelWChar(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     // Check if the value is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return Long.MAX_VALUE
 
         return fbeSize
@@ -35,7 +35,7 @@ class FinalModelWChar(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     // Get the value
     fun get(size: Size): Char
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return '\u0000'
 
         size.value = fbeSize
@@ -45,8 +45,8 @@ class FinalModelWChar(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     // Set the value
     fun set(value: Char): Long
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
         write(fbeOffset, value.toInt())

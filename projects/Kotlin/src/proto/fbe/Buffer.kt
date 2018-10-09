@@ -75,8 +75,8 @@ class Buffer
     // Remove some memory of the given size from the current buffer
     fun remove(offset: Long, size: Long)
     {
-        assert(offset + size <= this.size) { "Invalid offset & size!" }
-        if (offset + size > this.size)
+        assert((offset + size) <= this.size) { "Invalid offset & size!" }
+        if ((offset + size) > this.size)
             throw IllegalArgumentException("Invalid offset & size!")
 
         System.arraycopy(data, (offset + size).toInt(), data, offset.toInt(), (this.size - size - offset).toInt())

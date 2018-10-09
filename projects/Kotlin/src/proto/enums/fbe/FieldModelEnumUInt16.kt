@@ -25,7 +25,7 @@ class FieldModelEnumUInt16(buffer: Buffer, offset: Long) : FieldModel(buffer, of
     // Get the value
     fun get(defaults: EnumUInt16 = EnumUInt16()): EnumUInt16
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
 
         return EnumUInt16(readUInt16(fbeOffset))
@@ -34,8 +34,8 @@ class FieldModelEnumUInt16(buffer: Buffer, offset: Long) : FieldModel(buffer, of
     // Set the value
     fun set(value: EnumUInt16)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         write(fbeOffset, value.raw)

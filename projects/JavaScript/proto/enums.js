@@ -3883,7 +3883,7 @@ class FieldModelEnums extends fbe.FieldModel {
    * @this {!FieldModelEnums}
    * @returns {!number} Field body size
    */
-  get FBEBody () {
+  get fbeBody () {
     return 4 + 4 + this.byte0.fbeSize + this.byte1.fbeSize + this.byte2.fbeSize + this.byte3.fbeSize + this.byte4.fbeSize + this.byte5.fbeSize + this.char0.fbeSize + this.char1.fbeSize + this.char2.fbeSize + this.char3.fbeSize + this.char4.fbeSize + this.char5.fbeSize + this.wchar0.fbeSize + this.wchar1.fbeSize + this.wchar2.fbeSize + this.wchar3.fbeSize + this.wchar4.fbeSize + this.wchar5.fbeSize + this.int8b0.fbeSize + this.int8b1.fbeSize + this.int8b2.fbeSize + this.int8b3.fbeSize + this.int8b4.fbeSize + this.int8b5.fbeSize + this.uint8b0.fbeSize + this.uint8b1.fbeSize + this.uint8b2.fbeSize + this.uint8b3.fbeSize + this.uint8b4.fbeSize + this.uint8b5.fbeSize + this.int16b0.fbeSize + this.int16b1.fbeSize + this.int16b2.fbeSize + this.int16b3.fbeSize + this.int16b4.fbeSize + this.int16b5.fbeSize + this.uint16b0.fbeSize + this.uint16b1.fbeSize + this.uint16b2.fbeSize + this.uint16b3.fbeSize + this.uint16b4.fbeSize + this.uint16b5.fbeSize + this.int32b0.fbeSize + this.int32b1.fbeSize + this.int32b2.fbeSize + this.int32b3.fbeSize + this.int32b4.fbeSize + this.int32b5.fbeSize + this.uint32b0.fbeSize + this.uint32b1.fbeSize + this.uint32b2.fbeSize + this.uint32b3.fbeSize + this.uint32b4.fbeSize + this.uint32b5.fbeSize + this.int64b0.fbeSize + this.int64b1.fbeSize + this.int64b2.fbeSize + this.int64b3.fbeSize + this.int64b4.fbeSize + this.int64b5.fbeSize + this.uint64b0.fbeSize + this.uint64b1.fbeSize + this.uint64b2.fbeSize + this.uint64b3.fbeSize + this.uint64b4.fbeSize + this.uint64b5.fbeSize
   }
 
@@ -3904,7 +3904,7 @@ class FieldModelEnums extends fbe.FieldModel {
 
     this._buffer.shift(fbeStructOffset)
 
-    let fbeResult = this.FBEBody + this.byte0.fbeExtra + this.byte1.fbeExtra + this.byte2.fbeExtra + this.byte3.fbeExtra + this.byte4.fbeExtra + this.byte5.fbeExtra + this.char0.fbeExtra + this.char1.fbeExtra + this.char2.fbeExtra + this.char3.fbeExtra + this.char4.fbeExtra + this.char5.fbeExtra + this.wchar0.fbeExtra + this.wchar1.fbeExtra + this.wchar2.fbeExtra + this.wchar3.fbeExtra + this.wchar4.fbeExtra + this.wchar5.fbeExtra + this.int8b0.fbeExtra + this.int8b1.fbeExtra + this.int8b2.fbeExtra + this.int8b3.fbeExtra + this.int8b4.fbeExtra + this.int8b5.fbeExtra + this.uint8b0.fbeExtra + this.uint8b1.fbeExtra + this.uint8b2.fbeExtra + this.uint8b3.fbeExtra + this.uint8b4.fbeExtra + this.uint8b5.fbeExtra + this.int16b0.fbeExtra + this.int16b1.fbeExtra + this.int16b2.fbeExtra + this.int16b3.fbeExtra + this.int16b4.fbeExtra + this.int16b5.fbeExtra + this.uint16b0.fbeExtra + this.uint16b1.fbeExtra + this.uint16b2.fbeExtra + this.uint16b3.fbeExtra + this.uint16b4.fbeExtra + this.uint16b5.fbeExtra + this.int32b0.fbeExtra + this.int32b1.fbeExtra + this.int32b2.fbeExtra + this.int32b3.fbeExtra + this.int32b4.fbeExtra + this.int32b5.fbeExtra + this.uint32b0.fbeExtra + this.uint32b1.fbeExtra + this.uint32b2.fbeExtra + this.uint32b3.fbeExtra + this.uint32b4.fbeExtra + this.uint32b5.fbeExtra + this.int64b0.fbeExtra + this.int64b1.fbeExtra + this.int64b2.fbeExtra + this.int64b3.fbeExtra + this.int64b4.fbeExtra + this.int64b5.fbeExtra + this.uint64b0.fbeExtra + this.uint64b1.fbeExtra + this.uint64b2.fbeExtra + this.uint64b3.fbeExtra + this.uint64b4.fbeExtra + this.uint64b5.fbeExtra
+    let fbeResult = this.fbeBody + this.byte0.fbeExtra + this.byte1.fbeExtra + this.byte2.fbeExtra + this.byte3.fbeExtra + this.byte4.fbeExtra + this.byte5.fbeExtra + this.char0.fbeExtra + this.char1.fbeExtra + this.char2.fbeExtra + this.char3.fbeExtra + this.char4.fbeExtra + this.char5.fbeExtra + this.wchar0.fbeExtra + this.wchar1.fbeExtra + this.wchar2.fbeExtra + this.wchar3.fbeExtra + this.wchar4.fbeExtra + this.wchar5.fbeExtra + this.int8b0.fbeExtra + this.int8b1.fbeExtra + this.int8b2.fbeExtra + this.int8b3.fbeExtra + this.int8b4.fbeExtra + this.int8b5.fbeExtra + this.uint8b0.fbeExtra + this.uint8b1.fbeExtra + this.uint8b2.fbeExtra + this.uint8b3.fbeExtra + this.uint8b4.fbeExtra + this.uint8b5.fbeExtra + this.int16b0.fbeExtra + this.int16b1.fbeExtra + this.int16b2.fbeExtra + this.int16b3.fbeExtra + this.int16b4.fbeExtra + this.int16b5.fbeExtra + this.uint16b0.fbeExtra + this.uint16b1.fbeExtra + this.uint16b2.fbeExtra + this.uint16b3.fbeExtra + this.uint16b4.fbeExtra + this.uint16b5.fbeExtra + this.int32b0.fbeExtra + this.int32b1.fbeExtra + this.int32b2.fbeExtra + this.int32b3.fbeExtra + this.int32b4.fbeExtra + this.int32b5.fbeExtra + this.uint32b0.fbeExtra + this.uint32b1.fbeExtra + this.uint32b2.fbeExtra + this.uint32b3.fbeExtra + this.uint32b4.fbeExtra + this.uint32b5.fbeExtra + this.int64b0.fbeExtra + this.int64b1.fbeExtra + this.int64b2.fbeExtra + this.int64b3.fbeExtra + this.int64b4.fbeExtra + this.int64b5.fbeExtra + this.uint64b0.fbeExtra + this.uint64b1.fbeExtra + this.uint64b2.fbeExtra + this.uint64b3.fbeExtra + this.uint64b4.fbeExtra + this.uint64b5.fbeExtra
 
     this._buffer.unshift(fbeStructOffset)
 
@@ -3916,8 +3916,8 @@ class FieldModelEnums extends fbe.FieldModel {
    * @this {!FieldModelEnums}
    * @returns {!number} Field type
    */
-  get FBEType () {
-    return FieldModelEnums.FBEType
+  get fbeType () {
+    return FieldModelEnums.fbeType
   }
 
   /**
@@ -3925,7 +3925,7 @@ class FieldModelEnums extends fbe.FieldModel {
    * @this {!FieldModelEnums}
    * @returns {!number} Field type
    */
-  static get FBEType () {
+  static get fbeType () {
     return 1
   }
 
@@ -3946,12 +3946,12 @@ class FieldModelEnums extends fbe.FieldModel {
     }
 
     let fbeStructSize = this.readUInt32(fbeStructOffset)
-    if (fbeStructSize < 4 + 4) {
+    if (fbeStructSize < (4 + 4)) {
       return false
     }
 
     let fbeStructType = this.readUInt32(fbeStructOffset + 4)
-    if (fbeVerifyType && (fbeStructType !== this.FBEType)) {
+    if (fbeVerifyType && (fbeStructType !== this.fbeType)) {
       return false
     }
 
@@ -4584,8 +4584,8 @@ class FieldModelEnums extends fbe.FieldModel {
     }
 
     let fbeStructSize = this.readUInt32(fbeStructOffset)
-    console.assert((fbeStructSize >= 4 + 4), 'Model is broken!')
-    if (fbeStructSize < 4 + 4) {
+    console.assert((fbeStructSize >= (4 + 4)), 'Model is broken!')
+    if (fbeStructSize < (4 + 4)) {
       return 0
     }
 
@@ -5169,7 +5169,7 @@ class FieldModelEnums extends fbe.FieldModel {
       return 0
     }
 
-    let fbeStructSize = this.FBEBody
+    let fbeStructSize = this.fbeBody
     let fbeStructOffset = this._buffer.allocate(fbeStructSize) - this._buffer.offset
     console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + fbeStructSize) <= this._buffer.size), 'Model is broken!')
     if ((fbeStructOffset <= 0) || ((this._buffer.offset + fbeStructOffset + fbeStructSize) > this._buffer.size)) {
@@ -5178,7 +5178,7 @@ class FieldModelEnums extends fbe.FieldModel {
 
     this.writeUInt32(this.fbeOffset, fbeStructOffset)
     this.writeUInt32(fbeStructOffset, fbeStructSize)
-    this.writeUInt32(fbeStructOffset + 4, this.FBEType)
+    this.writeUInt32(fbeStructOffset + 4, this.fbeType)
 
     this._buffer.shift(fbeStructOffset)
     return fbeStructOffset
@@ -5322,8 +5322,8 @@ class EnumsModel extends fbe.Model {
    * @this {!EnumsModel}
    * @returns {!number} Model type
    */
-  get FBEType () {
-    return EnumsModel.FBEType
+  get fbeType () {
+    return EnumsModel.fbeType
   }
 
   /**
@@ -5331,8 +5331,8 @@ class EnumsModel extends fbe.Model {
    * @this {!EnumsModel}
    * @returns {!number} Model type
    */
-  static get FBEType () {
-    return FieldModelEnums.FBEType
+  static get fbeType () {
+    return FieldModelEnums.fbeType
   }
 
   /**
@@ -6108,8 +6108,8 @@ class FinalModelEnums extends fbe.FinalModel {
    * @this {!FinalModelEnums}
    * @returns {!number} Field type
    */
-  get FBEType () {
-    return FinalModelEnums.FBEType
+  get fbeType () {
+    return FinalModelEnums.fbeType
   }
 
   /**
@@ -6117,7 +6117,7 @@ class FinalModelEnums extends fbe.FinalModel {
    * @this {!FinalModelEnums}
    * @returns {!number} Field type
    */
-  static get FBEType () {
+  static get fbeType () {
     return 1
   }
 
@@ -7541,8 +7541,8 @@ class EnumsFinalModel extends fbe.Model {
    * @this {!EnumsFinalModel}
    * @returns {!number} Model type
    */
-  get FBEType () {
-    return EnumsFinalModel.FBEType
+  get fbeType () {
+    return EnumsFinalModel.fbeType
   }
 
   /**
@@ -7550,8 +7550,8 @@ class EnumsFinalModel extends fbe.Model {
    * @this {!EnumsFinalModel}
    * @returns {!number} Model type
    */
-  static get FBEType () {
-    return FinalModelEnums.FBEType
+  static get fbeType () {
+    return FinalModelEnums.fbeType
   }
 
   /**
@@ -7566,7 +7566,7 @@ class EnumsFinalModel extends fbe.Model {
 
     let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
     let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
-    if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
+    if ((fbeStructSize <= 0) || (fbeStructType !== this.fbeType)) {
       return false
     }
 
@@ -7582,7 +7582,7 @@ class EnumsFinalModel extends fbe.Model {
   serialize (value) {
     let fbeInitialSize = this.buffer.size
 
-    let fbeStructType = this.FBEType
+    let fbeStructType = this.fbeType
     let fbeStructSize = 8 + this._model.fbeAllocationSize(value)
     let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset
     console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')
@@ -7613,8 +7613,8 @@ class EnumsFinalModel extends fbe.Model {
 
     let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
     let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
-    console.assert(((fbeStructSize > 0) && (fbeStructType === this.FBEType)), 'Model is broken!')
-    if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
+    console.assert(((fbeStructSize > 0) && (fbeStructType === this.fbeType)), 'Model is broken!')
+    if ((fbeStructSize <= 0) || (fbeStructType !== this.fbeType)) {
       return { value: new Enums(), size: 8 }
     }
 
@@ -7746,7 +7746,7 @@ class Receiver extends fbe.Receiver {
    */
   onReceive (type, buffer, offset, size) {
     switch (type) {
-      case EnumsModel.FBEType: {
+      case EnumsModel.fbeType: {
         // Deserialize the value from the FBE stream
         this._enumsModel.attachBuffer(buffer, offset)
         console.assert(this._enumsModel.verify(), 'enums.Enums validation failed!')
@@ -7881,7 +7881,7 @@ class FinalReceiver extends fbe.Receiver {
    */
   onReceive (type, buffer, offset, size) {
     switch (type) {
-      case EnumsFinalModel.FBEType: {
+      case EnumsFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
         this._enumsModel.attachBuffer(buffer, offset)
         console.assert(this._enumsModel.verify(), 'enums.Enums validation failed!')

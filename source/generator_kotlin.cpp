@@ -302,8 +302,8 @@ class Buffer
     // Remove some memory of the given size from the current buffer
     fun remove(offset: Long, size: Long)
     {
-        assert(offset + size <= this.size) { "Invalid offset & size!" }
-        if (offset + size > this.size)
+        assert((offset + size) <= this.size) { "Invalid offset & size!" }
+        if ((offset + size) > this.size)
             throw IllegalArgumentException("Invalid offset & size!")
 
         System.arraycopy(data, (offset + size).toInt(), data, offset.toInt(), (this.size - size - offset).toInt())
@@ -663,8 +663,8 @@ open class Model
     fun unshift(offset: Long) { buffer.unshift(offset) }
 
     // Buffer I/O methods
-    protected fun readInt32(offset: Long): Int { return Buffer.readInt32(buffer.data, buffer.offset + offset) }
-    protected fun write(offset: Long, value: Int) { Buffer.write(buffer.data, buffer.offset + offset, value) }
+    protected fun readUInt32(offset: Long): UInt { return Buffer.readUInt32(buffer.data, buffer.offset + offset) }
+    protected fun write(offset: Long, value: UInt) { Buffer.write(buffer.data, buffer.offset + offset, value) }
 }
 )CODE";
 
@@ -694,6 +694,7 @@ void GeneratorKotlin::GenerateFBEFieldModel(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding base field model class
+@Suppress("MemberVisibilityCanBePrivate")
 abstract class FieldModel protected constructor(protected var _buffer: Buffer, protected var _offset: Long)
 {
     // Field offset
@@ -781,7 +782,7 @@ class FieldModel_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     // Get the value
     fun get(defaults: _TYPE_ = _DEFAULTS_): _TYPE_
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
 
         return read_NAME_(fbeOffset)
@@ -790,8 +791,8 @@ class FieldModel_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     // Set the value
     fun set(value: _TYPE_)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         write(fbeOffset, value_BASE_)
@@ -838,7 +839,7 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     // Get the value
     fun get(defaults: BigDecimal = BigDecimal.valueOf(0L)): BigDecimal
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
 
         val magnitude = readBytes(fbeOffset, 12)
@@ -846,7 +847,7 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
         val signum = if (readByte(fbeOffset + 15) < 0) -1 else 1
 
         // Reverse magnitude
-        for (i in 0 until magnitude.size / 2)
+        for (i in 0 until (magnitude.size / 2))
         {
             val temp = magnitude[i]
             magnitude[i] = magnitude[magnitude.size - i - 1]
@@ -861,14 +862,14 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     // Set the value
     fun set(value: BigDecimal)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         // Get unscaled absolute value
         val unscaled = value.abs().unscaledValue()
         val bitLength = unscaled.bitLength()
-        if (bitLength < 0 || bitLength > 96)
+        if ((bitLength < 0) || (bitLength > 96))
         {
             // Value too big for .NET Decimal (bit length is limited to [0, 96])
             write(fbeOffset, 0.toByte(), fbeSize)
@@ -880,7 +881,7 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
 
         // Get scale
         val scale = value.scale()
-        if (scale < 0 || scale > 28)
+        if ((scale < 0) || (scale > 28))
         {
             // Value scale exceeds .NET Decimal limit of [0, 28]
             write(fbeOffset, 0.toByte(), fbeSize)
@@ -890,7 +891,7 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
         // Write unscaled value to bytes 0-11
         var index = 0
         var i = unscaledBytes.size - 1
-        while (i >= 0 && index < 12)
+        while ((i >= 0) && (index < 12))
         {
             write(fbeOffset + index, unscaledBytes[i])
             i--
@@ -947,7 +948,7 @@ class FieldModelTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     // Get the value
     fun get(defaults: Instant = Instant.EPOCH): Instant
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
 
         val nanoseconds = readInt64(fbeOffset)
@@ -957,12 +958,12 @@ class FieldModelTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     // Set the value
     fun set(value: Instant)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         val nanoseconds = value.epochSecond * 1000000000 + value.nano
-        write(fbeOffset, nanoseconds)
+        write(fbeOffset, nanoseconds.toULong())
     }
 }
 )CODE";
@@ -1001,32 +1002,32 @@ class FieldModelBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     // Field extra size
     override val fbeExtra: Long get()
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
-        val fbeBytesOffset = readInt32(fbeOffset)
-        if (fbeBytesOffset == 0 || _buffer.offset + fbeBytesOffset.toLong() + 4 > _buffer.size)
+        val fbeBytesOffset = readUInt32(fbeOffset).toLong()
+        if ((fbeBytesOffset == 0L) || ((_buffer.offset + fbeBytesOffset + 4) > _buffer.size))
             return 0
 
-        val fbeBytesSize = readInt32(fbeBytesOffset.toLong())
-        return (4 + fbeBytesSize).toLong()
+        val fbeBytesSize = readUInt32(fbeBytesOffset).toLong()
+        return 4 + fbeBytesSize
     }
 
     // Check if the bytes value is valid
     override fun verify(): Boolean
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return true
 
-        val fbeBytesOffset = readInt32(fbeOffset)
-        if (fbeBytesOffset == 0)
+        val fbeBytesOffset = readUInt32(fbeOffset).toLong()
+        if (fbeBytesOffset == 0L)
             return true
 
-        if (_buffer.offset + fbeBytesOffset.toLong() + 4 > _buffer.size)
+        if ((_buffer.offset + fbeBytesOffset + 4) > _buffer.size)
             return false
 
-        val fbeBytesSize = readInt32(fbeBytesOffset.toLong())
-        if (_buffer.offset + fbeBytesOffset.toLong() + 4 + fbeBytesSize.toLong() > _buffer.size)
+        val fbeBytesSize = readUInt32(fbeBytesOffset).toLong()
+        if ((_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.size)
             return false
 
         return true
@@ -1037,42 +1038,42 @@ class FieldModelBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     {
         var value: ByteArray = defaults
 
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return value
 
-        val fbeBytesOffset = readInt32(fbeOffset)
-        if (fbeBytesOffset == 0)
+        val fbeBytesOffset = readUInt32(fbeOffset).toLong()
+        if (fbeBytesOffset == 0L)
             return value
 
-        assert(_buffer.offset + fbeBytesOffset.toLong() + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeBytesOffset.toLong() + 4 > _buffer.size)
+        assert((_buffer.offset + fbeBytesOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeBytesOffset + 4) > _buffer.size)
             return value
 
-        val fbeBytesSize = readInt32(fbeBytesOffset.toLong())
-        assert(_buffer.offset + fbeBytesOffset.toLong() + 4 + fbeBytesSize.toLong() <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeBytesOffset.toLong() + 4 + fbeBytesSize.toLong() > _buffer.size)
+        val fbeBytesSize = readUInt32(fbeBytesOffset).toLong()
+        assert((_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.size)
             return value
 
-        value = readBytes((fbeBytesOffset + 4).toLong(), fbeBytesSize.toLong())
+        value = readBytes(fbeBytesOffset + 4, fbeBytesSize)
         return value
     }
 
     // Set the bytes value
     fun set(value: ByteArray)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
-        val fbeBytesSize = value.size
-        val fbeBytesOffset = (_buffer.allocate((4 + fbeBytesSize).toLong()) - _buffer.offset).toInt()
-        assert(fbeBytesOffset > 0 && _buffer.offset + fbeBytesOffset.toLong() + 4 + fbeBytesSize.toLong() <= _buffer.size) { "Model is broken!" }
-        if (fbeBytesOffset <= 0 || _buffer.offset + fbeBytesOffset.toLong() + 4 + fbeBytesSize.toLong() > _buffer.size)
+        val fbeBytesSize = value.size.toLong()
+        val fbeBytesOffset = _buffer.allocate(4 + fbeBytesSize) - _buffer.offset
+        assert((fbeBytesOffset > 0) && ((_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) <= _buffer.size)) { "Model is broken!" }
+        if ((fbeBytesOffset <= 0) || ((_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.size))
             return
 
-        write(fbeOffset, fbeBytesOffset)
-        write(fbeBytesOffset.toLong(), fbeBytesSize)
-        write((fbeBytesOffset + 4).toLong(), value)
+        write(fbeOffset, fbeBytesOffset.toUInt())
+        write(fbeBytesOffset, fbeBytesSize.toUInt())
+        write(fbeBytesOffset + 4, value)
     }
 }
 )CODE";
@@ -1111,32 +1112,32 @@ class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     // Field extra size
     override val fbeExtra: Long get()
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
-        val fbeStringOffset = readInt32(fbeOffset)
-        if (fbeStringOffset == 0 || _buffer.offset + fbeStringOffset.toLong() + 4 > _buffer.size)
+        val fbeStringOffset = readUInt32(fbeOffset).toLong()
+        if ((fbeStringOffset == 0L) || ((_buffer.offset + fbeStringOffset + 4) > _buffer.size))
             return 0
 
-        val fbeStringSize = readInt32(fbeStringOffset.toLong())
-        return (4 + fbeStringSize).toLong()
+        val fbeStringSize = readUInt32(fbeStringOffset).toLong()
+        return 4 + fbeStringSize
     }
 
     // Check if the string value is valid
     override fun verify(): Boolean
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return true
 
-        val fbeStringOffset = readInt32(fbeOffset)
-        if (fbeStringOffset == 0)
+        val fbeStringOffset = readUInt32(fbeOffset).toLong()
+        if (fbeStringOffset == 0L)
             return true
 
-        if (_buffer.offset + fbeStringOffset.toLong() + 4 > _buffer.size)
+        if ((_buffer.offset + fbeStringOffset + 4) > _buffer.size)
             return false
 
-        val fbeStringSize = readInt32(fbeStringOffset.toLong())
-        if (_buffer.offset + fbeStringOffset.toLong() + 4 + fbeStringSize.toLong() > _buffer.size)
+        val fbeStringSize = readUInt32(fbeStringOffset).toLong()
+        if ((_buffer.offset + fbeStringOffset + 4 + fbeStringSize) > _buffer.size)
             return false
 
         return true
@@ -1147,44 +1148,44 @@ class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     {
         var value: String = defaults
 
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return value
 
-        val fbeStringOffset = readInt32(fbeOffset)
-        if (fbeStringOffset == 0)
+        val fbeStringOffset = readUInt32(fbeOffset).toLong()
+        if (fbeStringOffset == 0L)
             return value
 
-        assert(_buffer.offset + fbeStringOffset.toLong() + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeStringOffset.toLong() + 4 > _buffer.size)
+        assert((_buffer.offset + fbeStringOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeStringOffset + 4) > _buffer.size)
             return value
 
-        val fbeStringSize = readInt32(fbeStringOffset.toLong())
-        assert(_buffer.offset + fbeStringOffset.toLong() + 4 + fbeStringSize.toLong() <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeStringOffset.toLong() + 4 + fbeStringSize.toLong() > _buffer.size)
+        val fbeStringSize = readUInt32(fbeStringOffset).toLong()
+        assert((_buffer.offset + fbeStringOffset + 4 + fbeStringSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeStringOffset + 4 + fbeStringSize) > _buffer.size)
             return value
 
-        value = readString((fbeStringOffset + 4).toLong(), fbeStringSize.toLong())
+        value = readString(fbeStringOffset + 4, fbeStringSize)
         return value
     }
 
     // Set the string value
     fun set(value: String)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         val bytes = value.toByteArray(StandardCharsets.UTF_8)
 
-        val fbeStringSize = bytes.size
-        val fbeStringOffset = (_buffer.allocate((4 + fbeStringSize).toLong()) - _buffer.offset).toInt()
-        assert(fbeStringOffset > 0 && _buffer.offset + fbeStringOffset.toLong() + 4 + fbeStringSize.toLong() <= _buffer.size) { "Model is broken!" }
-        if (fbeStringOffset <= 0 || _buffer.offset + fbeStringOffset.toLong() + 4 + fbeStringSize.toLong() > _buffer.size)
+        val fbeStringSize = bytes.size.toLong()
+        val fbeStringOffset = _buffer.allocate(4 + fbeStringSize) - _buffer.offset
+        assert((fbeStringOffset > 0) && ((_buffer.offset + fbeStringOffset + 4 + fbeStringSize) <= _buffer.size)) { "Model is broken!" }
+        if ((fbeStringOffset <= 0) || ((_buffer.offset + fbeStringOffset + 4 + fbeStringSize) > _buffer.size))
             return
 
-        write(fbeOffset, fbeStringOffset)
-        write(fbeStringOffset.toLong(), fbeStringSize)
-        write((fbeStringOffset + 4).toLong(), bytes)
+        write(fbeOffset, fbeStringOffset.toUInt())
+        write(fbeStringOffset, fbeStringSize.toUInt())
+        write(fbeStringOffset + 4, bytes)
     }
 }
 )CODE";
@@ -1226,7 +1227,7 @@ void GeneratorKotlin::GenerateFBEFieldModelOptional(const std::string& package, 
 class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size
-    override val fbeSize: Long = (1 + 4).toLong()
+    override val fbeSize: Long = 1 + 4
 
     // Field extra size
     override val fbeExtra: Long get()
@@ -1234,24 +1235,24 @@ class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer
         if (!hasValue())
             return 0
 
-        val fbeOptionalOffset = readInt32(fbeOffset + 1)
-        if (fbeOptionalOffset == 0 || _buffer.offset + fbeOptionalOffset.toLong() + 4 > _buffer.size)
+        val fbeOptionalOffset = readUInt32(fbeOffset + 1).toLong()
+        if ((fbeOptionalOffset == 0L) || ((_buffer.offset + fbeOptionalOffset + 4) > _buffer.size))
             return 0
 
-        _buffer.shift(fbeOptionalOffset.toLong())
+        _buffer.shift(fbeOptionalOffset)
         val fbeResult = value.fbeSize + value.fbeExtra
-        _buffer.unshift(fbeOptionalOffset.toLong())
+        _buffer.unshift(fbeOptionalOffset)
         return fbeResult
     }
 
     // Checks whether the object contains a value
     fun hasValue(): Boolean
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return false
 
-        val fbeHasValue = readInt8(fbeOffset)
-        return fbeHasValue.toInt() != 0
+        val fbeHasValue = readInt8(fbeOffset).toInt()
+        return fbeHasValue != 0
     }
 
     // Base field model value
@@ -1260,20 +1261,20 @@ class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer
     // Check if the optional value is valid
     override fun verify(): Boolean
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return true
 
-        val fbeHasValue = readInt8(fbeOffset)
-        if (fbeHasValue.toInt() == 0)
+        val fbeHasValue = readInt8(fbeOffset).toInt()
+        if (fbeHasValue == 0)
             return true
 
-        val fbeOptionalOffset = readInt32(fbeOffset)
-        if (fbeOptionalOffset == 0)
+        val fbeOptionalOffset = readUInt32(fbeOffset).toLong()
+        if (fbeOptionalOffset == 0L)
             return false
 
-        _buffer.shift(fbeOptionalOffset.toLong())
+        _buffer.shift(fbeOptionalOffset)
         val fbeResult = value.verify()
-        _buffer.unshift(fbeOptionalOffset.toLong())
+        _buffer.unshift(fbeOptionalOffset)
         return fbeResult
     }
 
@@ -1283,13 +1284,13 @@ class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer
         if (!hasValue())
             return 0
 
-        val fbeOptionalOffset = readInt32(fbeOffset + 1)
+        val fbeOptionalOffset = readUInt32(fbeOffset + 1).toLong()
         assert(fbeOptionalOffset > 0) { "Model is broken!" }
         if (fbeOptionalOffset <= 0)
             return 0
 
-        _buffer.shift(fbeOptionalOffset.toLong())
-        return fbeOptionalOffset.toLong()
+        _buffer.shift(fbeOptionalOffset)
+        return fbeOptionalOffset
     }
 
     // Get the optional value (end phase)
@@ -1315,25 +1316,25 @@ class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer
     // Set the optional value (begin phase)
     fun setBegin(hasValue: Boolean): Long
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
-        val fbeHasValue = (if (hasValue) 1 else 0).toByte()
-        write(fbeOffset, fbeHasValue)
-        if (fbeHasValue.toInt() == 0)
+        val fbeHasValue = if (hasValue) 1 else 0
+        write(fbeOffset, fbeHasValue.toByte())
+        if (fbeHasValue == 0)
             return 0
 
-        val fbeOptionalSize = value.fbeSize.toInt()
-        val fbeOptionalOffset = (_buffer.allocate(fbeOptionalSize.toLong()) - _buffer.offset).toInt()
-        assert(fbeOptionalOffset > 0 && _buffer.offset + fbeOptionalOffset.toLong() + fbeOptionalSize.toLong() <= _buffer.size) { "Model is broken!" }
-        if (fbeOptionalOffset <= 0 || _buffer.offset + fbeOptionalOffset.toLong() + fbeOptionalSize.toLong() > _buffer.size)
+        val fbeOptionalSize = value.fbeSize
+        val fbeOptionalOffset = _buffer.allocate(fbeOptionalSize) - _buffer.offset
+        assert((fbeOptionalOffset > 0) && ((_buffer.offset + fbeOptionalOffset + fbeOptionalSize) <= _buffer.size)) { "Model is broken!" }
+        if ((fbeOptionalOffset <= 0) || ((_buffer.offset + fbeOptionalOffset + fbeOptionalSize) > _buffer.size))
             return 0
 
-        write(fbeOffset + 1, fbeOptionalOffset)
+        write(fbeOffset + 1, fbeOptionalOffset.toUInt())
 
-        _buffer.shift(fbeOptionalOffset.toLong())
-        return fbeOptionalOffset.toLong()
+        _buffer.shift(fbeOptionalOffset)
+        return fbeOptionalOffset
     }
 
     // Set the optional value (end phase)
@@ -1371,7 +1372,7 @@ class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFieldModelArray(const std::string& package, const std::string& name, const std::string& type, bool optional, const std::string& model)
+void GeneratorKotlin::GenerateFBEFieldModelArray(const std::string& package, const std::string& name, const std::string& type, const std::string& base, bool optional, const std::string& model)
 {
     CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
 
@@ -1409,7 +1410,7 @@ class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : Fiel
     // Array index operator
     fun getItem(index: Long): _MODEL_
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         assert(index < size) { "Index is out of bounds!" }
 
         _model.fbeOffset = fbeOffset
@@ -1420,7 +1421,7 @@ class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : Fiel
     // Check if the array is valid
     override fun verify(): Boolean
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return false
 
         _model.fbeOffset = fbeOffset
@@ -1454,7 +1455,7 @@ class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : Fiel
     {
         val fbeModel = getItem(0)
         var i: Long = 0
-        while (i < values.size && i < size)
+        while ((i < values.size) && (i < size))
         {
             values[i.toInt()] = fbeModel.get()
             fbeModel.fbeShift(fbeModel.fbeSize)
@@ -1481,13 +1482,13 @@ class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : Fiel
     // Set the array
     fun set(values: _ARRAY_)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         val fbeModel = getItem(0)
         var i: Long = 0
-        while (i < values.size && i < size)
+        while ((i < values.size) && (i < size))
         {
             fbeModel.set(values[i.toInt()])
             fbeModel.fbeShift(fbeModel.fbeSize)
@@ -1498,13 +1499,13 @@ class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : Fiel
     // Set the array as List
     fun set(values: ArrayList<_TYPE_>)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         val fbeModel = getItem(0)
         var i: Long = 0
-        while (i < values.size && i < size)
+        while ((i < values.size) && (i < size))
         {
             fbeModel.set(values[i.toInt()])
             fbeModel.fbeShift(fbeModel.fbeSize)
@@ -1518,19 +1519,11 @@ class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : Fiel
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_TYPE_"), type);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
-    if (!optional && ((type == "Boolean") || (type == "Byte") || (type == "Short") || (type == "Int") || (type == "Long") || (type == "Float") || (type == "Double")))
-    {
-        code = std::regex_replace(code, std::regex("_ARRAY_"), type + "Array");
-        code = std::regex_replace(code, std::regex("_INIT_"), type + "Array(size.toInt())");
-    }
+    code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type + ">");
+    if (optional)
+        code = std::regex_replace(code, std::regex("_INIT_"), "arrayOfNulls<" + type + ">(size.toInt())");
     else
-    {
-        code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type + ">");
-        if (optional)
-            code = std::regex_replace(code, std::regex("_INIT_"), "arrayOfNulls<" + type + ">(size.toInt())");
-        else
-            code = std::regex_replace(code, std::regex("_INIT_"), "Array(size.toInt()) { " + type + "(" + (((type == "ByteArray")) ? "0" : "") + ") }");
-    }
+        code = std::regex_replace(code, std::regex("_INIT_"), "Array(size.toInt()) { " + ConvertDefault(base) + " }");
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -1574,14 +1567,14 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     // Field extra size
     override val fbeExtra: Long get()
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
-        val fbeVectorOffset = readInt32(fbeOffset).toLong()
-        if (fbeVectorOffset == 0L || _buffer.offset + fbeVectorOffset + 4 > _buffer.size)
+        val fbeVectorOffset = readUInt32(fbeOffset).toLong()
+        if ((fbeVectorOffset == 0L) || ((_buffer.offset + fbeVectorOffset + 4) > _buffer.size))
             return 0
 
-        val fbeVectorSize = readInt32(fbeVectorOffset).toLong()
+        val fbeVectorSize = readUInt32(fbeVectorOffset).toLong()
 
         var fbeResult: Long = 4
         _model.fbeOffset = fbeVectorOffset + 4
@@ -1597,36 +1590,34 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     // Get the vector offset
     val offset: Long get()
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
-        val fbeVectorOffset = readInt32(fbeOffset).toLong()
-        return fbeVectorOffset
+        return readUInt32(fbeOffset).toLong()
     }
 
     // Get the vector size
     val size: Long get()
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
-        val fbeVectorOffset = readInt32(fbeOffset).toLong()
-        if (fbeVectorOffset == 0L || _buffer.offset + fbeVectorOffset + 4 > _buffer.size)
+        val fbeVectorOffset = readUInt32(fbeOffset).toLong()
+        if ((fbeVectorOffset == 0L) || ((_buffer.offset + fbeVectorOffset + 4) > _buffer.size))
             return 0
 
-        val fbeVectorSize = readInt32(fbeVectorOffset).toLong()
-        return fbeVectorSize
+        return readUInt32(fbeVectorOffset).toLong()
     }
 
     // Vector index operator
     fun getItem(index: Long): _MODEL_
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
 
-        val fbeVectorOffset = readInt32(fbeOffset).toLong()
-        assert(fbeVectorOffset > 0 && _buffer.offset + fbeVectorOffset + 4 <= _buffer.size) { "Model is broken!" }
+        val fbeVectorOffset = readUInt32(fbeOffset).toLong()
+        assert((fbeVectorOffset > 0) && ((_buffer.offset + fbeVectorOffset + 4) <= _buffer.size)) { "Model is broken!" }
 
-        val fbeVectorSize = readInt32(fbeVectorOffset).toLong()
+        val fbeVectorSize = readUInt32(fbeVectorOffset).toLong()
         assert(index < fbeVectorSize) { "Index is out of bounds!" }
 
         _model.fbeOffset = fbeVectorOffset + 4
@@ -1639,10 +1630,10 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     {
         val fbeVectorSize = size * _model.fbeSize
         val fbeVectorOffset = _buffer.allocate(4 + fbeVectorSize) - _buffer.offset
-        assert(fbeVectorOffset > 0 && _buffer.offset + fbeVectorOffset + 4 <= _buffer.size) { "Model is broken!" }
+        assert((fbeVectorOffset > 0) && ((_buffer.offset + fbeVectorOffset + 4) <= _buffer.size)) { "Model is broken!" }
 
-        write(fbeOffset, fbeVectorOffset)
-        write(fbeVectorOffset, size.toInt())
+        write(fbeOffset, fbeVectorOffset.toUInt())
+        write(fbeVectorOffset, size.toUInt())
         write(fbeVectorOffset + 4, 0.toByte(), fbeVectorSize)
 
         _model.fbeOffset = fbeVectorOffset + 4
@@ -1652,17 +1643,17 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     // Check if the vector is valid
     override fun verify(): Boolean
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return true
 
-        val fbeVectorOffset = readInt32(fbeOffset).toLong()
+        val fbeVectorOffset = readUInt32(fbeOffset).toLong()
         if (fbeVectorOffset == 0L)
             return true
 
-        if (_buffer.offset + fbeVectorOffset + 4 > _buffer.size)
+        if ((_buffer.offset + fbeVectorOffset + 4) > _buffer.size)
             return false
 
-        val fbeVectorSize = readInt32(fbeVectorOffset).toLong()
+        val fbeVectorSize = readUInt32(fbeVectorOffset).toLong()
 
         _model.fbeOffset = fbeVectorOffset + 4
         var i = fbeVectorSize
@@ -1738,8 +1729,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     // Set the vector as ArrayList
     fun set(values: ArrayList<_TYPE_>)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         val fbeModel = resize(values.size.toLong())
@@ -1753,8 +1744,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     // Set the vector as LinkedList
     fun set(values: LinkedList<_TYPE_>)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         val fbeModel = resize(values.size.toLong())
@@ -1768,8 +1759,8 @@ class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     // Set the vector as HashSet
     fun set(values: HashSet<_TYPE_>)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         val fbeModel = resize(values.size.toLong())
@@ -1830,14 +1821,14 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
     // Field extra size
     override val fbeExtra: Long get()
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
-        val fbeMapOffset = readInt32(fbeOffset).toLong()
-        if (fbeMapOffset == 0L || _buffer.offset + fbeMapOffset + 4 > _buffer.size)
+        val fbeMapOffset = readUInt32(fbeOffset).toLong()
+        if ((fbeMapOffset == 0L) || ((_buffer.offset + fbeMapOffset + 4) > _buffer.size))
             return 0
 
-        val fbeMapSize = readInt32(fbeMapOffset).toLong()
+        val fbeMapSize = readUInt32(fbeMapOffset).toLong()
 
         var fbeResult: Long = 4
         _modelKey.fbeOffset = fbeMapOffset + 4
@@ -1857,36 +1848,34 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
     // Get the map offset
     val offset: Long get()
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
-        val fbeMapOffset = readInt32(fbeOffset).toLong()
-        return fbeMapOffset
+        return readUInt32(fbeOffset).toLong()
     }
 
     // Get the map size
     val size: Long get()
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
-        val fbeMapOffset = readInt32(fbeOffset).toLong()
-        if (fbeMapOffset == 0L || _buffer.offset + fbeMapOffset + 4 > _buffer.size)
+        val fbeMapOffset = readUInt32(fbeOffset).toLong()
+        if ((fbeMapOffset == 0L) || ((_buffer.offset + fbeMapOffset + 4) > _buffer.size))
             return 0
 
-        val fbeMapSize = readInt32(fbeMapOffset).toLong()
-        return fbeMapSize
+        return readUInt32(fbeMapOffset).toLong()
     }
 
     // Map index operator
     fun getItem(index: Long): Pair<_KEY_MODEL_, _VALUE_MODEL_>
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
 
-        val fbeMapOffset = readInt32(fbeOffset).toLong()
-        assert(fbeMapOffset > 0 && _buffer.offset + fbeMapOffset + 4 <= _buffer.size) { "Model is broken!" }
+        val fbeMapOffset = readUInt32(fbeOffset).toLong()
+        assert((fbeMapOffset > 0) && ((_buffer.offset + fbeMapOffset + 4) <= _buffer.size)) { "Model is broken!" }
 
-        val fbeMapSize = readInt32(fbeMapOffset).toLong()
+        val fbeMapSize = readUInt32(fbeMapOffset).toLong()
         assert(index < fbeMapSize) { "Index is out of bounds!" }
 
         _modelKey.fbeOffset = fbeMapOffset + 4
@@ -1904,10 +1893,10 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
 
         val fbeMapSize = size * (_modelKey.fbeSize + _modelValue.fbeSize)
         val fbeMapOffset = _buffer.allocate(4 + fbeMapSize) - _buffer.offset
-        assert(fbeMapOffset > 0 && _buffer.offset + fbeMapOffset + 4 <= _buffer.size) { "Model is broken!" }
+        assert((fbeMapOffset > 0) && ((_buffer.offset + fbeMapOffset + 4) <= _buffer.size)) { "Model is broken!" }
 
-        write(fbeOffset, fbeMapOffset)
-        write(fbeMapOffset, size.toInt())
+        write(fbeOffset, fbeMapOffset.toUInt())
+        write(fbeMapOffset, size.toUInt())
         write(fbeMapOffset + 4, 0.toByte(), fbeMapSize)
 
         _modelKey.fbeOffset = fbeMapOffset + 4
@@ -1918,17 +1907,17 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
     // Check if the map is valid
     override fun verify(): Boolean
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return true
 
-        val fbeMapOffset = readInt32(fbeOffset).toLong()
+        val fbeMapOffset = readUInt32(fbeOffset).toLong()
         if (fbeMapOffset == 0L)
             return true
 
-        if (_buffer.offset + fbeMapOffset + 4 > _buffer.size)
+        if ((_buffer.offset + fbeMapOffset + 4) > _buffer.size)
             return false
 
-        val fbeMapSize = readInt32(fbeMapOffset).toLong()
+        val fbeMapSize = readUInt32(fbeMapOffset).toLong()
 
         _modelKey.fbeOffset = fbeMapOffset + 4
         _modelValue.fbeOffset = fbeMapOffset + 4 + _modelKey.fbeSize
@@ -1991,8 +1980,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
     // Set the map as TreeMap
     fun set(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         val fbeModel = resize(values.size.toLong())
@@ -2008,8 +1997,8 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
     // Set the vector as HashMap
     fun set(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         val fbeModel = resize(values.size.toLong())
@@ -2072,7 +2061,7 @@ class FieldModel_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     // Get the value
     fun get(defaults: _NAME_ = _NAME_()): _NAME_
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
 
         return _NAME_(_READ_(fbeOffset))
@@ -2081,8 +2070,8 @@ class FieldModel_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     // Set the value
     fun set(value: _NAME_)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         write(fbeOffset, value.raw)
@@ -2155,6 +2144,7 @@ void GeneratorKotlin::GenerateFBEFinalModel(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding base final model class
+@Suppress("MemberVisibilityCanBePrivate")
 abstract class FinalModel protected constructor(protected var _buffer: Buffer, protected var _offset: Long)
 {
     // Final offset
@@ -2246,7 +2236,7 @@ class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     // Check if the value is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return Long.MAX_VALUE
 
         return fbeSize
@@ -2255,7 +2245,7 @@ class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     // Get the value
     fun get(size: Size): _TYPE_
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return _DEFAULTS_
 
         size.value = fbeSize
@@ -2265,8 +2255,8 @@ class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     // Set the value
     fun set(value: _TYPE_): Long
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
         write(fbeOffset, value_BASE_)
@@ -2318,7 +2308,7 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     // Check if the value is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return Long.MAX_VALUE
 
         return fbeSize
@@ -2327,7 +2317,7 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     // Get the value
     fun get(size: Size): BigDecimal
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return BigDecimal.valueOf(0L)
 
         val magnitude = readBytes(fbeOffset, 12)
@@ -2335,7 +2325,7 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
         val signum = if (readByte(fbeOffset + 15) < 0) -1 else 1
 
         // Reverse magnitude
-        for (i in 0 until magnitude.size / 2)
+        for (i in 0 until (magnitude.size / 2))
         {
             val temp = magnitude[i]
             magnitude[i] = magnitude[magnitude.size - i - 1]
@@ -2351,14 +2341,14 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     // Set the value
     fun set(value: BigDecimal): Long
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
         // Get unscaled absolute value
         val unscaled = value.abs().unscaledValue()
         val bitLength = unscaled.bitLength()
-        if (bitLength < 0 || bitLength > 96)
+        if ((bitLength < 0) || (bitLength > 96))
         {
             // Value too big for .NET Decimal (bit length is limited to [0, 96])
             write(fbeOffset, 0.toByte(), fbeSize)
@@ -2370,7 +2360,7 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
 
         // Get scale
         val scale = value.scale()
-        if (scale < 0 || scale > 28)
+        if ((scale < 0) || (scale > 28))
         {
             // Value scale exceeds .NET Decimal limit of [0, 28]
             write(fbeOffset, 0.toByte(), fbeSize)
@@ -2380,7 +2370,7 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
         // Write unscaled value to bytes 0-11
         var index = 0
         var i = unscaledBytes.size - 1
-        while (i >= 0 && index < 12)
+        while ((i >= 0) && (index < 12))
         {
             write(fbeOffset + index, unscaledBytes[i])
             i--
@@ -2442,7 +2432,7 @@ class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     // Check if the value is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return Long.MAX_VALUE
 
         return fbeSize
@@ -2451,7 +2441,7 @@ class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     // Get the value
     fun get(size: Size): Instant
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return Instant.EPOCH
 
         size.value = fbeSize
@@ -2462,12 +2452,12 @@ class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     // Set the value
     fun set(value: Instant): Long
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
         val nanoseconds = value.epochSecond * 1000000000 + value.nano
-        write(fbeOffset, nanoseconds)
+        write(fbeOffset, nanoseconds.toULong())
         return fbeSize
     }
 }
@@ -2502,57 +2492,57 @@ void GeneratorKotlin::GenerateFBEFinalModelBytes(const std::string& package)
 class FinalModelBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
-    fun fbeAllocationSize(value: ByteArray): Long = (4 + value.size).toLong()
+    fun fbeAllocationSize(value: ByteArray): Long = 4 + value.size.toLong()
 
     // Check if the bytes value is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        if ((_buffer.offset + fbeOffset) + 4 > _buffer.size)
             return Long.MAX_VALUE
 
-        val fbeBytesSize = readInt32(fbeOffset)
-        if (_buffer.offset + fbeOffset + 4 + fbeBytesSize > _buffer.size)
+        val fbeBytesSize = readUInt32(fbeOffset).toLong()
+        if ((_buffer.offset + fbeOffset + 4 + fbeBytesSize) > _buffer.size)
             return Long.MAX_VALUE
 
-        return (4 + fbeBytesSize).toLong()
+        return 4 + fbeBytesSize
     }
 
     // Get the bytes value
     fun get(size: Size): ByteArray
     {
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        if ((_buffer.offset + fbeOffset) + 4 > _buffer.size)
         {
             size.value = 0
             return ByteArray(0)
         }
 
-        val fbeBytesSize = readInt32(fbeOffset)
-        assert(_buffer.offset + fbeOffset + 4 + fbeBytesSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 + fbeBytesSize > _buffer.size)
+        val fbeBytesSize = readUInt32(fbeOffset).toLong()
+        assert((_buffer.offset + fbeOffset + 4 + fbeBytesSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4 + fbeBytesSize) > _buffer.size)
         {
             size.value = 4
             return ByteArray(0)
         }
 
-        size.value = (4 + fbeBytesSize).toLong()
-        return readBytes(fbeOffset + 4, fbeBytesSize.toLong())
+        size.value = 4 + fbeBytesSize
+        return readBytes(fbeOffset + 4, fbeBytesSize)
     }
 
     // Set the bytes value
     fun set(value: ByteArray): Long
     {
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        val fbeBytesSize = value.size
-        assert(_buffer.offset + fbeOffset + 4 + fbeBytesSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 + fbeBytesSize > _buffer.size)
+        val fbeBytesSize = value.size.toLong()
+        assert((_buffer.offset + fbeOffset + 4 + fbeBytesSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4 + fbeBytesSize) > _buffer.size)
             return 4
 
-        write(fbeOffset, fbeBytesSize)
+        write(fbeOffset, fbeBytesSize.toUInt())
         write(fbeOffset + 4, value)
-        return (4 + fbeBytesSize).toLong()
+        return 4 + fbeBytesSize
     }
 }
 )CODE";
@@ -2586,59 +2576,59 @@ void GeneratorKotlin::GenerateFBEFinalModelString(const std::string& package)
 class FinalModelString(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
-    fun fbeAllocationSize(value: String): Long = (4 + 3 * (value.length + 1)).toLong()
+    fun fbeAllocationSize(value: String): Long = 4 + 3 * (value.length.toLong() + 1)
 
     // Check if the string value is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return Long.MAX_VALUE
 
-        val fbeStringSize = readInt32(fbeOffset)
-        if (_buffer.offset + fbeOffset + 4 + fbeStringSize > _buffer.size)
+        val fbeStringSize = readUInt32(fbeOffset).toLong()
+        if ((_buffer.offset + fbeOffset + 4 + fbeStringSize) > _buffer.size)
             return Long.MAX_VALUE
 
-        return (4 + fbeStringSize).toLong()
+        return 4 + fbeStringSize
     }
 
     // Get the string value
     fun get(size: Size): String
     {
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
         {
             size.value = 0
             return ""
         }
 
-        val fbeStringSize = readInt32(fbeOffset)
-        assert(_buffer.offset + fbeOffset + 4 + fbeStringSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 + fbeStringSize > _buffer.size)
+        val fbeStringSize = readUInt32(fbeOffset).toLong()
+        assert((_buffer.offset + fbeOffset + 4 + fbeStringSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4 + fbeStringSize) > _buffer.size)
         {
             size.value = 4
             return ""
         }
 
-        size.value = (4 + fbeStringSize).toLong()
-        return readString(fbeOffset + 4, fbeStringSize.toLong())
+        size.value = 4 + fbeStringSize
+        return readString(fbeOffset + 4, fbeStringSize)
     }
 
     // Set the string value
     fun set(value: String): Long
     {
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
         val bytes = value.toByteArray(StandardCharsets.UTF_8)
 
-        val fbeStringSize = bytes.size
-        assert(_buffer.offset + fbeOffset + 4 + fbeStringSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 + fbeStringSize > _buffer.size)
+        val fbeStringSize = bytes.size.toLong()
+        assert((_buffer.offset + fbeOffset + 4 + fbeStringSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4 + fbeStringSize) > _buffer.size)
             return 4
 
-        write(fbeOffset, fbeStringSize)
+        write(fbeOffset, fbeStringSize.toUInt())
         write(fbeOffset + 4, bytes)
-        return (4 + fbeStringSize).toLong()
+        return 4 + fbeStringSize
     }
 }
 )CODE";
@@ -2680,16 +2670,16 @@ void GeneratorKotlin::GenerateFBEFinalModelOptional(const std::string& package, 
 class FinalModelOptional_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
-    fun fbeAllocationSize(optional: _TYPE_): Long = (1 + (if (optional != null) value.fbeAllocationSize(optional) else 0)).toLong()
+    fun fbeAllocationSize(optional: _TYPE_): Long = 1 + (if (optional != null) value.fbeAllocationSize(optional) else 0)
 
     // Checks whether the object contains a value
     fun hasValue(): Boolean
     {
-        if (_buffer.offset + fbeOffset + 1 > _buffer.size)
+        if ((_buffer.offset + fbeOffset + 1) > _buffer.size)
             return false
 
-        val fbeHasValue = readInt8(fbeOffset)
-        return fbeHasValue.toInt() != 0
+        val fbeHasValue = readInt8(fbeOffset).toInt()
+        return fbeHasValue != 0
     }
 
     // Base final model value
@@ -2698,11 +2688,11 @@ class FinalModelOptional_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer
     // Check if the optional value is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset + 1 > _buffer.size)
+        if ((_buffer.offset + fbeOffset + 1) > _buffer.size)
             return Long.MAX_VALUE
 
-        val fbeHasValue = readInt8(fbeOffset)
-        if (fbeHasValue.toInt() == 0)
+        val fbeHasValue = readInt8(fbeOffset).toInt()
+        if (fbeHasValue == 0)
             return 1
 
         _buffer.shift(fbeOffset + 1)
@@ -2714,8 +2704,8 @@ class FinalModelOptional_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer
     // Get the optional value
     fun get(size: Size): _TYPE_
     {
-        assert(_buffer.offset + fbeOffset + 1 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 1 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 1) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 1) > _buffer.size)
         {
             size.value = 0
             return null
@@ -2737,13 +2727,13 @@ class FinalModelOptional_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer
     // Set the optional value
     fun set(optional: _TYPE_): Long
     {
-        assert(_buffer.offset + fbeOffset + 1 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 1 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 1) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 1) > _buffer.size)
             return 0
 
-        val fbeHasValue = (if (optional != null) 1 else 0).toByte()
-        write(fbeOffset, fbeHasValue)
-        if (fbeHasValue.toInt() == 0)
+        val fbeHasValue = if (optional != null) 1 else 0
+        write(fbeOffset, fbeHasValue.toByte())
+        if (fbeHasValue == 0)
             return 1
 
         _buffer.shift(fbeOffset + 1)
@@ -2769,7 +2759,7 @@ class FinalModelOptional_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer
     Close();
 }
 
-void GeneratorKotlin::GenerateFBEFinalModelArray(const std::string& package, const std::string& name, const std::string& type, bool optional, const std::string& model)
+void GeneratorKotlin::GenerateFBEFinalModelArray(const std::string& package, const std::string& name, const std::string& type, const std::string& base, bool optional, const std::string& model)
 {
     CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
 
@@ -2800,7 +2790,7 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
     {
         var size: Long = 0
         var i: Long = 0
-        while (i < values.size && i < _size)
+        while ((i < values.size) && (i < _size))
         {
             size += _model.fbeAllocationSize(values[i.toInt()])
             i++
@@ -2811,7 +2801,7 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
     {
         var size: Long = 0
         var i: Long = 0
-        while (i < values.size && i < _size)
+        while ((i < values.size) && (i < _size))
         {
             size += _model.fbeAllocationSize(values[i.toInt()])
             i++
@@ -2822,7 +2812,7 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
     // Check if the array is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset > _buffer.size)
+        if ((_buffer.offset + fbeOffset) > _buffer.size)
             return Long.MAX_VALUE
 
         var size: Long = 0
@@ -2844,8 +2834,8 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
     {
         val values = _INIT_
 
-        assert(_buffer.offset + fbeOffset <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset > _buffer.size)
+        assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset) > _buffer.size)
         {
             size.value = 0
             return values
@@ -2867,15 +2857,15 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
     // Get the array
     fun get(values: _ARRAY_): Long
     {
-        assert(_buffer.offset + fbeOffset <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset > _buffer.size)
+        assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset) > _buffer.size)
             return 0
 
         var size: Long = 0
         val offset = Size()
         _model.fbeOffset = fbeOffset
         var i: Long = 0
-        while (i < values.size && i < _size)
+        while ((i < values.size) && (i < _size))
         {
             offset.value = 0
             values[i.toInt()] = _model.get(offset)
@@ -2891,8 +2881,8 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
     {
         values.clear()
 
-        assert(_buffer.offset + fbeOffset <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset > _buffer.size)
+        assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset) > _buffer.size)
             return 0
 
         values.ensureCapacity(_size.toInt())
@@ -2915,14 +2905,14 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
     // Set the array
     fun set(values: _ARRAY_): Long
     {
-        assert(_buffer.offset + fbeOffset <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset > _buffer.size)
+        assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset) > _buffer.size)
             return 0
 
         var size: Long = 0
         _model.fbeOffset = fbeOffset
         var i: Long = 0
-        while (i < values.size && i < _size)
+        while ((i < values.size) && (i < _size))
         {
             val offset = _model.set(values[i.toInt()])
             _model.fbeShift(offset)
@@ -2935,14 +2925,14 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
     // Set the array as List
     fun set(values: ArrayList<_TYPE_>): Long
     {
-        assert(_buffer.offset + fbeOffset <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset > _buffer.size)
+        assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset) > _buffer.size)
             return 0
 
         var size: Long = 0
         _model.fbeOffset = fbeOffset
         var i: Long = 0
-        while (i < values.size && i < _size)
+        while ((i < values.size) && (i < _size))
         {
             val offset = _model.set(values[i.toInt()])
             _model.fbeShift(offset)
@@ -2958,19 +2948,11 @@ class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Lon
     code = std::regex_replace(code, std::regex("_NAME_"), name);
     code = std::regex_replace(code, std::regex("_TYPE_"), type);
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
-    if (!optional && ((type == "Boolean") || (type == "Byte") || (type == "Short") || (type == "Int") || (type == "Long") || (type == "Float") || (type == "Double")))
-    {
-        code = std::regex_replace(code, std::regex("_ARRAY_"), type + "Array");
-        code = std::regex_replace(code, std::regex("_INIT_"), type + "Array(_size.toInt())");
-    }
+    code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type + ">");
+    if (optional)
+        code = std::regex_replace(code, std::regex("_INIT_"), "arrayOfNulls<" + type + ">(_size.toInt())");
     else
-    {
-        code = std::regex_replace(code, std::regex("_ARRAY_"), "Array<" + type + ">");
-        if (optional)
-            code = std::regex_replace(code, std::regex("_INIT_"), "arrayOfNulls<" + type + ">(_size.toInt())");
-        else
-            code = std::regex_replace(code, std::regex("_INIT_"), "Array(_size.toInt()) { " + type + "(" + (((type == "ByteArray")) ? "0" : "") + ") }");
-    }
+        code = std::regex_replace(code, std::regex("_INIT_"), "Array(_size.toInt()) { " + ConvertDefault(base) + " }");
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -3034,10 +3016,10 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     // Check if the vector is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return Long.MAX_VALUE
 
-        val fbeVectorSize = readInt32(fbeOffset).toLong()
+        val fbeVectorSize = readUInt32(fbeOffset).toLong()
 
         var size: Long = 4
         _model.fbeOffset = fbeOffset + 4
@@ -3058,11 +3040,11 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     {
         values.clear()
 
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        val fbeVectorSize = readInt32(fbeOffset).toLong()
+        val fbeVectorSize = readUInt32(fbeOffset).toLong()
         if (fbeVectorSize == 0L)
             return 4
 
@@ -3087,11 +3069,11 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     {
         values.clear()
 
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        val fbeVectorSize = readInt32(fbeOffset).toLong()
+        val fbeVectorSize = readUInt32(fbeOffset).toLong()
         if (fbeVectorSize == 0L)
             return 4
 
@@ -3114,11 +3096,11 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     {
         values.clear()
 
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        val fbeVectorSize = readInt32(fbeOffset).toLong()
+        val fbeVectorSize = readUInt32(fbeOffset).toLong()
         if (fbeVectorSize == 0L)
             return 4
 
@@ -3139,11 +3121,11 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     // Set the vector as ArrayList
     fun set(values: ArrayList<_TYPE_>): Long
     {
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        write(fbeOffset, values.size)
+        write(fbeOffset, values.size.toUInt())
 
         var size: Long = 4
         _model.fbeOffset = fbeOffset + 4
@@ -3159,11 +3141,11 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     // Set the vector as LinkedList
     fun set(values: LinkedList<_TYPE_>): Long
     {
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        write(fbeOffset, values.size)
+        write(fbeOffset, values.size.toUInt())
 
         var size: Long = 4
         _model.fbeOffset = fbeOffset + 4
@@ -3179,11 +3161,11 @@ class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     // Set the vector as HashSet
     fun set(values: HashSet<_TYPE_>): Long
     {
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        write(fbeOffset, values.size)
+        write(fbeOffset, values.size.toUInt())
 
         var size: Long = 4
         _model.fbeOffset = fbeOffset + 4
@@ -3265,10 +3247,10 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
     // Check if the map is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return Long.MAX_VALUE
 
-        val fbeMapSize = readInt32(fbeOffset).toLong()
+        val fbeMapSize = readUInt32(fbeOffset).toLong()
 
         var size: Long = 4
         _modelKey.fbeOffset = fbeOffset + 4
@@ -3297,11 +3279,11 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
     {
         values.clear()
 
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        val fbeMapSize = readInt32(fbeOffset).toLong()
+        val fbeMapSize = readUInt32(fbeOffset).toLong()
         if (fbeMapSize == 0L)
             return 4
 
@@ -3332,11 +3314,11 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
     {
         values.clear()
 
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        val fbeMapSize = readInt32(fbeOffset).toLong()
+        val fbeMapSize = readUInt32(fbeOffset).toLong()
         if (fbeMapSize == 0L)
             return 4
 
@@ -3366,11 +3348,11 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
     // Set the map as TreeMap
     fun set(values: TreeMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
     {
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        write(fbeOffset, values.size)
+        write(fbeOffset, values.size.toUInt())
 
         var size: Long = 4
         _modelKey.fbeOffset = fbeOffset + 4
@@ -3391,11 +3373,11 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
     // Set the vector as HashMap
     fun set(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
     {
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        write(fbeOffset, values.size)
+        write(fbeOffset, values.size.toUInt())
 
         var size: Long = 4
         _modelKey.fbeOffset = fbeOffset + 4
@@ -3467,7 +3449,7 @@ class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     // Check if the value is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return Long.MAX_VALUE
 
         return fbeSize
@@ -3476,7 +3458,7 @@ class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     // Get the value
     fun get(size: Size): _NAME_
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return _NAME_()
 
         size.value = fbeSize
@@ -3486,8 +3468,8 @@ class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset
     // Set the value
     fun set(value: _NAME_): Long
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
         write(fbeOffset, value.raw)
@@ -3525,6 +3507,7 @@ void GeneratorKotlin::GenerateFBESender(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding base sender class
+@Suppress("MemberVisibilityCanBePrivate")
 abstract class Sender
 {
     // Get the bytes buffer
@@ -3592,6 +3575,7 @@ void GeneratorKotlin::GenerateFBEReceiver(const std::string& package)
 
     std::string code = R"CODE(
 // Fast Binary Encoding base receiver class
+@Suppress("MemberVisibilityCanBePrivate")
 abstract class Receiver
 {
     // Get the bytes buffer
@@ -3610,8 +3594,8 @@ abstract class Receiver
     fun receive(buffer: Buffer) { receive(buffer.data, 0, buffer.size) }
     fun receive(buffer: ByteArray, offset: Long = 0, size: Long = buffer.size.toLong())
     {
-        assert(offset + size <= buffer.size) { "Invalid offset & size!" }
-        if (offset + size > buffer.size)
+        assert((offset + size) <= buffer.size) { "Invalid offset & size!" }
+        if ((offset + size) > buffer.size)
             throw IllegalArgumentException("Invalid offset & size!")
 
         if (size == 0L)
@@ -3645,7 +3629,7 @@ abstract class Receiver
                     {
                         messageSizeCopied = true
                         messageSizeFound = true
-                        messageSize = Buffer.readInt32(this.buffer.data, offset0).toLong()
+                        messageSize = Buffer.readUInt32(this.buffer.data, offset0).toLong()
                         offset0 += 4
                         break
                     }
@@ -3677,7 +3661,7 @@ abstract class Receiver
                     if (count == 4L)
                     {
                         messageSizeFound = true
-                        messageSize = Buffer.readInt32(buffer, offset + offset2).toLong()
+                        messageSize = Buffer.readUInt32(buffer, offset + offset2).toLong()
                         offset2 += 4
                         break
                     }
@@ -3701,8 +3685,8 @@ abstract class Receiver
                 return
 
             // Check the message full size
-            assert(messageSize >= 4 + 4 + 4 + 4) { "Invalid receive data!" }
-            if (messageSize < 4 + 4 + 4 + 4)
+            assert(messageSize >= (4 + 4 + 4 + 4)) { "Invalid receive data!" }
+            if (messageSize < (4 + 4 + 4 + 4))
                 return
 
             // Try to receive message body
@@ -3713,7 +3697,7 @@ abstract class Receiver
                 if (offset0 < size1)
                 {
                     var count = Math.min(size1 - offset0, messageSize - 4)
-                    if (count == messageSize - 4)
+                    if (count == (messageSize - 4))
                     {
                         messageFound = true
                         messageBuffer = this.buffer.data
@@ -3733,7 +3717,7 @@ abstract class Receiver
                                 this.buffer.allocate(4)
                                 size1 += 4
 
-                                Buffer.write(this.buffer.data, offset0, messageSize.toInt())
+                                Buffer.write(this.buffer.data, offset0, messageSize.toUInt())
                                 offset0 += 4
                                 offset1 += 4
 
@@ -3760,7 +3744,7 @@ abstract class Receiver
                 if (offset2 < size)
                 {
                     val count = Math.min(size - offset2, messageSize - 4)
-                    if (!messageSizeCopied && count == messageSize - 4)
+                    if (!messageSizeCopied && (count == (messageSize - 4)))
                     {
                         messageFound = true
                         messageBuffer = buffer
@@ -3777,7 +3761,7 @@ abstract class Receiver
                             this.buffer.allocate(4)
                             size1 += 4
 
-                            Buffer.write(this.buffer.data, offset0, messageSize.toInt())
+                            Buffer.write(this.buffer.data, offset0, messageSize.toUInt())
                             offset0 += 4
                             offset1 += 4
 
@@ -3807,7 +3791,7 @@ abstract class Receiver
                     this.buffer.allocate(4)
                     size1 += 4
 
-                    Buffer.write(this.buffer.data, offset0, messageSize.toInt())
+                    Buffer.write(this.buffer.data, offset0, messageSize.toUInt())
                     offset0 += 4
                     offset1 += 4
 
@@ -3820,26 +3804,26 @@ abstract class Receiver
             if (messageBuffer != null)
             {
                 @Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
-                val fbeStructSize: Int
-                val fbeStructType: Int
+                val fbeStructSize: Long
+                val fbeStructType: Long
 
                 // Read the message parameters
                 if (final)
                 {
                     @Suppress("UNUSED_VALUE")
-                    fbeStructSize = Buffer.readInt32(messageBuffer, messageOffset)
-                    fbeStructType = Buffer.readInt32(messageBuffer, messageOffset + 4)
+                    fbeStructSize = Buffer.readUInt32(messageBuffer, messageOffset).toLong()
+                    fbeStructType = Buffer.readUInt32(messageBuffer, messageOffset + 4).toLong()
                 }
                 else
                 {
-                    val fbeStructOffset = Buffer.readInt32(messageBuffer, messageOffset + 4)
+                    val fbeStructOffset = Buffer.readUInt32(messageBuffer, messageOffset + 4).toLong()
                     @Suppress("UNUSED_VALUE")
-                    fbeStructSize = Buffer.readInt32(messageBuffer, messageOffset + fbeStructOffset)
-                    fbeStructType = Buffer.readInt32(messageBuffer, messageOffset + fbeStructOffset.toLong() + 4)
+                    fbeStructSize = Buffer.readUInt32(messageBuffer, messageOffset + fbeStructOffset).toLong()
+                    fbeStructType = Buffer.readUInt32(messageBuffer, messageOffset + fbeStructOffset + 4).toLong()
                 }
 
                 // Handle the message
-                onReceive(fbeStructType.toLong(), messageBuffer, messageOffset, messageSize)
+                onReceive(fbeStructType, messageBuffer, messageOffset, messageSize)
             }
 
             // Reset the storage buffer
@@ -4010,9 +3994,9 @@ void GeneratorKotlin::GenerateContainers(const std::shared_ptr<Package>& p, bool
                     if (field->array)
                     {
                         if (final)
-                            GenerateFBEFinalModelArray(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), field->optional, ConvertTypeFieldDeclaration(*field->type, field->optional, final));
+                            GenerateFBEFinalModelArray(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), *field->type, field->optional, ConvertTypeFieldDeclaration(*field->type, field->optional, final));
                         else
-                            GenerateFBEFieldModelArray(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), field->optional, ConvertTypeFieldDeclaration(*field->type, field->optional, final));
+                            GenerateFBEFieldModelArray(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), *field->type, field->optional, ConvertTypeFieldDeclaration(*field->type, field->optional, final));
                     }
                     if (field->vector || field->list || field->set)
                     {
@@ -5268,7 +5252,7 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     CppCommon::Directory::CreateTree(path);
 
     // Open the file
-    CppCommon::Path file = path / ("FieldModel" + *s->name + ".java");
+    CppCommon::Path file = path / ("FieldModel" + *s->name + ".kt");
     Open(file);
 
     // Generate headers
@@ -5283,279 +5267,264 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     // Generate struct field model begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *s->name + " field model class");
-    WriteLineIndent("public final class FieldModel" + *s->name + " extends FieldModel");
+    WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"RemoveRedundantCallsOfConversionMethods\", \"ReplaceGetOrSet\")");
+    WriteLineIndent("class FieldModel" + *s->name + "(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)");
     WriteLineIndent("{");
     Indent(1);
 
     // Generate struct field model accessors
-    if (s->base && !s->base->empty())
-        WriteLineIndent("public final " + ConvertBaseFieldName(*s->base, false) + " parent;");
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            WriteLineIndent("public final " + ConvertTypeFieldDeclaration(*field, false) + " " + *field->name + ";");
-
-    // Generate struct field model constructor
-    WriteLine();
-    WriteLineIndent("public FieldModel" + *s->name + "(Buffer buffer, long offset)");
-    WriteLineIndent("{");
-    Indent(1);
-    WriteLineIndent("super(buffer, offset);");
     std::string prev_offset("4");
     std::string prev_size("4");
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("parent = new " + ConvertBaseFieldName(*s->base, false) + "(buffer, " + prev_offset + " + " + prev_size + ");");
-        prev_offset = "parent.fbeOffset()";
-        prev_size = "parent.FBEBody() - 4 - 4";
+        WriteLineIndent("val parent: " + ConvertBaseFieldName(*s->base, false) + " = " + ConvertBaseFieldName(*s->base, false) + "(buffer, " + prev_offset + " + " + prev_size + ")");
+        prev_offset = "parent.fbeOffset";
+        prev_size = "parent.fbeBody - 4 - 4";
     }
     if (s->body)
     {
         for (const auto& field : s->body->fields)
         {
-            WriteLineIndent(*field->name + " = " + ConvertTypeFieldInitialization(*field, prev_offset + " + " + prev_size, false) + ";");
-            prev_offset = *field->name + ".fbeOffset()";
-            prev_size = *field->name + ".fbeSize()";
+            WriteLineIndent("val " + *field->name + ": " + ConvertTypeFieldDeclaration(*field, false) + " = " + ConvertTypeFieldInitialization(*field, prev_offset + " + " + prev_size, false));
+            prev_offset = *field->name + ".fbeOffset";
+            prev_size = *field->name + ".fbeSize";
         }
     }
-    Indent(-1);
-    WriteLineIndent("}");
 
     // Generate struct field model FBE properties
     WriteLine();
-    WriteLineIndent("// Get the field size");
-    WriteLineIndent("@Override");
-    WriteLineIndent("public long fbeSize() { return 4; }");
-    WriteLineIndent("// Get the field body size");
-    WriteLineIndent("public long FBEBody()");
-    WriteLineIndent("{");
-    Indent(1);
-    WriteLineIndent("long fbeResult = 4 + 4");
+    WriteLineIndent("// Field size");
+    WriteLineIndent("override val fbeSize: Long = 4");
+    WriteLine();
+    WriteLineIndent("// Field body size");
+    WriteLineIndent("val fbeBody: Long = (4 + 4");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("+ parent.FBEBody() - 4 - 4");
+        WriteLineIndent("+ parent.fbeBody - 4 - 4");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("+ " + *field->name + ".fbeSize()");
-    WriteLineIndent(";");
+            WriteLineIndent("+ " + *field->name + ".fbeSize");
+    WriteLineIndent(")");
     Indent(-1);
-    WriteLineIndent("return fbeResult;");
-    Indent(-1);
-    WriteLineIndent("}");
-    WriteLineIndent("// Get the field extra size");
-    WriteLineIndent("@Override");
-    WriteLineIndent("public long fbeExtra()");
+    WriteLine();
+    WriteLineIndent("// Field extra size");
+    WriteLineIndent("override val fbeExtra: Long get()");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())");
+    WriteLineIndent("if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)");
     Indent(1);
-    WriteLineIndent("return 0;");
+    WriteLineIndent("return 0");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("int fbeStructOffset = readInt32(fbeOffset());");
-    WriteLineIndent("if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4) > _buffer.getSize()))");
+    WriteLineIndent("val fbeStructOffset = readUInt32(fbeOffset).toLong()");
+    WriteLineIndent("if ((fbeStructOffset == 0L) || ((_buffer.offset + fbeStructOffset + 4) > _buffer.size))");
     Indent(1);
-    WriteLineIndent("return 0;");
+    WriteLineIndent("return 0");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("_buffer.shift(fbeStructOffset);");
+    WriteLineIndent("_buffer.shift(fbeStructOffset)");
     WriteLine();
-    WriteLineIndent("long fbeResult = FBEBody()");
+    WriteLineIndent("val fbeResult = (fbeBody");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("+ parent.fbeExtra()");
+        WriteLineIndent("+ parent.fbeExtra");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("+ " + *field->name + ".fbeExtra()");
-    WriteLineIndent(";");
+            WriteLineIndent("+ " + *field->name + ".fbeExtra");
+    WriteLineIndent(")");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("_buffer.unshift(fbeStructOffset);");
+    WriteLineIndent("_buffer.unshift(fbeStructOffset)");
     WriteLine();
-    WriteLineIndent("return fbeResult;");
+    WriteLineIndent("return fbeResult");
     Indent(-1);
     WriteLineIndent("}");
-    WriteLineIndent("// Get the field type");
+    WriteLine();
+    WriteLineIndent("// Field type");
+    WriteLineIndent("var fbeType: Long = fbeTypeConst");
+    WriteLine();
+    WriteLineIndent("companion object");
+    WriteLineIndent("{");
+    Indent(1);
     if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("public static final long FBETypeConst = " + ConvertBaseFieldName(*s->base, false) + ".FBETypeConst;");
+        WriteLineIndent("const val fbeTypeConst: Long = " + ConvertBaseFieldName(*s->base, false) + ".fbeTypeConst");
     else
-        WriteLineIndent("public static final long FBETypeConst = " + std::to_string(s->type) + ";");
-    WriteLineIndent("public long FBEType() { return FBETypeConst; }");
+        WriteLineIndent("const val fbeTypeConst: Long = " + std::to_string(s->type));
+    Indent(-1);
+    WriteLineIndent("}");
 
     // Generate struct field model verify() methods
     WriteLine();
     WriteLineIndent("// Check if the struct value is valid");
-    WriteLineIndent("@Override");
-    WriteLineIndent("public boolean verify() { return verify(true); }");
-    WriteLineIndent("public boolean verify(boolean fbeVerifyType)");
+    WriteLineIndent("fun verify(fbeVerifyType: Boolean = true): Boolean");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())");
+    WriteLineIndent("if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)");
     Indent(1);
-    WriteLineIndent("return true;");
+    WriteLineIndent("return true");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("int fbeStructOffset = readInt32(fbeOffset());");
-    WriteLineIndent("if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4 + 4) > _buffer.getSize()))");
+    WriteLineIndent("val fbeStructOffset = readUInt32(fbeOffset).toLong()");
+    WriteLineIndent("if ((fbeStructOffset == 0L) || ((_buffer.offset + fbeStructOffset + 4 + 4) > _buffer.size))");
     Indent(1);
-    WriteLineIndent("return false;");
+    WriteLineIndent("return false");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("int fbeStructSize = readInt32(fbeStructOffset);");
-    WriteLineIndent("if (fbeStructSize < 4 + 4)");
+    WriteLineIndent("val fbeStructSize = readUInt32(fbeStructOffset).toLong()");
+    WriteLineIndent("if (fbeStructSize < (4 + 4))");
     Indent(1);
-    WriteLineIndent("return false;");
+    WriteLineIndent("return false");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("int fbeStructType = readInt32(fbeStructOffset + 4);");
-    WriteLineIndent("if (fbeVerifyType && (fbeStructType != FBEType()))");
+    WriteLineIndent("val fbeStructType = readUInt32(fbeStructOffset + 4).toLong()");
+    WriteLineIndent("if (fbeVerifyType && (fbeStructType != fbeType))");
     Indent(1);
-    WriteLineIndent("return false;");
+    WriteLineIndent("return false");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("_buffer.shift(fbeStructOffset);");
-    WriteLineIndent("boolean fbeResult = verifyFields(fbeStructSize);");
-    WriteLineIndent("_buffer.unshift(fbeStructOffset);");
-    WriteLineIndent("return fbeResult;");
+    WriteLineIndent("_buffer.shift(fbeStructOffset)");
+    WriteLineIndent("val fbeResult = verifyFields(fbeStructSize)");
+    WriteLineIndent("_buffer.unshift(fbeStructOffset)");
+    WriteLineIndent("return fbeResult");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct field model verifyFields() method
     WriteLine();
     WriteLineIndent("// Check if the struct fields are valid");
-    WriteLineIndent("public boolean verifyFields(long fbeStructSize)");
+    WriteLineIndent("fun verifyFields(fbeStructSize: Long): Boolean");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeCurrentSize = 4 + 4;");
+    WriteLineIndent("var fbeCurrentSize = 4L + 4L");
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("if ((fbeCurrentSize + parent.FBEBody() - 4 - 4) > fbeStructSize)");
+        WriteLineIndent("if ((fbeCurrentSize + parent.fbeBody - 4 - 4) > fbeStructSize)");
         Indent(1);
-        WriteLineIndent("return true;");
+        WriteLineIndent("return true");
         Indent(-1);
         WriteLineIndent("if (!parent.verifyFields(fbeStructSize))");
         Indent(1);
-        WriteLineIndent("return false;");
+        WriteLineIndent("return false");
         Indent(-1);
-        WriteLineIndent("fbeCurrentSize += parent.FBEBody() - 4 - 4;");
+        WriteLineIndent("fbeCurrentSize += parent.fbeBody - 4 - 4");
     }
     if (s->body)
     {
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".fbeSize()) > fbeStructSize)");
+            WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".fbeSize) > fbeStructSize)");
             Indent(1);
-            WriteLineIndent("return true;");
+            WriteLineIndent("return true");
             Indent(-1);
             WriteLineIndent("if (!" + *field->name + ".verify())");
             Indent(1);
-            WriteLineIndent("return false;");
+            WriteLineIndent("return false");
             Indent(-1);
-            WriteLineIndent("fbeCurrentSize += " + *field->name + ".fbeSize();");
+            WriteLineIndent("fbeCurrentSize += " + *field->name + ".fbeSize");
         }
     }
     WriteLine();
-    WriteLineIndent("return true;");
+    WriteLineIndent("return true");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct field model getBegin() method
     WriteLine();
     WriteLineIndent("// Get the struct value (begin phase)");
-    WriteLineIndent("public long getBegin()");
+    WriteLineIndent("fun getBegin(): Long");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())");
+    WriteLineIndent("if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)");
     Indent(1);
-    WriteLineIndent("return 0;");
+    WriteLineIndent("return 0");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("int fbeStructOffset = readInt32(fbeOffset());");
-    WriteLineIndent("assert ((fbeStructOffset > 0) && ((_buffer.getOffset() + fbeStructOffset + 4 + 4) <= _buffer.getSize())) : \"Model is broken!\";");
-    WriteLineIndent("if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4 + 4) > _buffer.getSize()))");
+    WriteLineIndent("val fbeStructOffset = readUInt32(fbeOffset).toLong()");
+    WriteLineIndent("assert((fbeStructOffset > 0) && ((_buffer.offset + fbeStructOffset + 4 + 4) <= _buffer.size)) { \"Model is broken!\" }");
+    WriteLineIndent("if ((fbeStructOffset == 0L) || ((_buffer.offset + fbeStructOffset + 4 + 4) > _buffer.size))");
     Indent(1);
-    WriteLineIndent("return 0;");
+    WriteLineIndent("return 0");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("int fbeStructSize = readInt32(fbeStructOffset);");
-    WriteLineIndent("assert (fbeStructSize >= 4 + 4) : \"Model is broken!\";");
-    WriteLineIndent("if (fbeStructSize < 4 + 4)");
+    WriteLineIndent("val fbeStructSize = readUInt32(fbeStructOffset).toLong()");
+    WriteLineIndent("assert(fbeStructSize >= (4 + 4)) { \"Model is broken!\" }");
+    WriteLineIndent("if (fbeStructSize < (4 + 4))");
     Indent(1);
-    WriteLineIndent("return 0;");
+    WriteLineIndent("return 0");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("_buffer.shift(fbeStructOffset);");
-    WriteLineIndent("return fbeStructOffset;");
+    WriteLineIndent("_buffer.shift(fbeStructOffset)");
+    WriteLineIndent("return fbeStructOffset");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct field model getEnd() method
     WriteLine();
     WriteLineIndent("// Get the struct value (end phase)");
-    WriteLineIndent("public void getEnd(long fbeBegin)");
+    WriteLineIndent("fun getEnd(fbeBegin: Long)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("_buffer.unshift(fbeBegin);");
+    WriteLineIndent("_buffer.unshift(fbeBegin)");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct field model get() methods
     WriteLine();
     WriteLineIndent("// Get the struct value");
-    WriteLineIndent("public " + *s->name + " get() { return get(new " + *s->name + "()); }");
-    WriteLineIndent("public " + *s->name + " get(" + *s->name + " fbeValue)");
+    WriteLineIndent("fun get(fbeValue: " + *s->name + " = " + *s->name + "()): " + *s->name);
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeBegin = getBegin();");
-    WriteLineIndent("if (fbeBegin == 0)");
+    WriteLineIndent("val fbeBegin = getBegin()");
+    WriteLineIndent("if (fbeBegin == 0L)");
     Indent(1);
-    WriteLineIndent("return fbeValue;");
+    WriteLineIndent("return fbeValue");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("int fbeStructSize = readInt32(0);");
-    WriteLineIndent("getFields(fbeValue, fbeStructSize);");
-    WriteLineIndent("getEnd(fbeBegin);");
-    WriteLineIndent("return fbeValue;");
+    WriteLineIndent("val fbeStructSize = readUInt32(0).toLong()");
+    WriteLineIndent("getFields(fbeValue, fbeStructSize)");
+    WriteLineIndent("getEnd(fbeBegin)");
+    WriteLineIndent("return fbeValue");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct field model getFields() method
     WriteLine();
     WriteLineIndent("// Get the struct fields values");
-    WriteLineIndent("public void getFields(" + *s->name + " fbeValue, long fbeStructSize)");
+    WriteLineIndent("fun getFields(fbeValue: " + *s->name + ", fbeStructSize: Long)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeCurrentSize = 4 + 4;");
+    WriteLineIndent("var fbeCurrentSize = 4L + 4L");
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("if ((fbeCurrentSize + parent.FBEBody() - 4 - 4) <= fbeStructSize)");
+        WriteLineIndent("if ((fbeCurrentSize + parent.fbeBody - 4 - 4) <= fbeStructSize)");
         Indent(1);
-        WriteLineIndent("parent.getFields(fbeValue, fbeStructSize);");
+        WriteLineIndent("parent.getFields(fbeValue, fbeStructSize)");
         Indent(-1);
-        WriteLineIndent("fbeCurrentSize += parent.FBEBody() - 4 - 4;");
+        WriteLineIndent("fbeCurrentSize += parent.fbeBody - 4 - 4");
     }
     if (s->body)
     {
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".fbeSize()) <= fbeStructSize)");
+            WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".fbeSize) <= fbeStructSize)");
             Indent(1);
             if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent(*field->name + ".get(fbeValue." + *field->name + ");");
+                WriteLineIndent(*field->name + ".get(fbeValue." + *field->name + ")");
             else
-                WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(" + (field->value ? ConvertConstant(*field->type, *field->value, field->optional) : "") + ");");
+                WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(" + (field->value ? ConvertConstant(*field->type, *field->value, field->optional) : "") + ")");
             Indent(-1);
             WriteLineIndent("else");
             Indent(1);
             if (field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent("fbeValue." + *field->name + ".clear();");
+                WriteLineIndent("fbeValue." + *field->name + ".clear()");
             else
-                WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field.get()) + ";");
+                WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field.get()));
             Indent(-1);
-            WriteLineIndent("fbeCurrentSize += " + *field->name + ".fbeSize();");
+            WriteLineIndent("fbeCurrentSize += " + *field->name + ".fbeSize");
         }
     }
     Indent(-1);
@@ -5564,70 +5533,70 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     // Generate struct field model setBegin() method
     WriteLine();
     WriteLineIndent("// Set the struct value (begin phase)");
-    WriteLineIndent("public long setBegin()");
+    WriteLineIndent("fun setBegin(): Long");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : \"Model is broken!\";");
-    WriteLineIndent("if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())");
+    WriteLineIndent("assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { \"Model is broken!\" }");
+    WriteLineIndent("if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)");
     Indent(1);
-    WriteLineIndent("return 0;");
+    WriteLineIndent("return 0");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("int fbeStructSize = (int)FBEBody();");
-    WriteLineIndent("int fbeStructOffset = (int)(_buffer.allocate(fbeStructSize) - _buffer.getOffset());");
-    WriteLineIndent("assert ((fbeStructOffset > 0) && ((_buffer.getOffset() + fbeStructOffset + fbeStructSize) <= _buffer.getSize())) : \"Model is broken!\";");
-    WriteLineIndent("if ((fbeStructOffset <= 0) || ((_buffer.getOffset() + fbeStructOffset + fbeStructSize) > _buffer.getSize()))");
+    WriteLineIndent("val fbeStructSize = fbeBody");
+    WriteLineIndent("val fbeStructOffset = _buffer.allocate(fbeStructSize) - _buffer.offset");
+    WriteLineIndent("assert((fbeStructOffset > 0) && ((_buffer.offset + fbeStructOffset + fbeStructSize) <= _buffer.size)) { \"Model is broken!\" }");
+    WriteLineIndent("if ((fbeStructOffset <= 0) || ((_buffer.offset + fbeStructOffset + fbeStructSize) > _buffer.size))");
     Indent(1);
-    WriteLineIndent("return 0;");
+    WriteLineIndent("return 0");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("write(fbeOffset(), fbeStructOffset);");
-    WriteLineIndent("write(fbeStructOffset, fbeStructSize);");
-    WriteLineIndent("write(fbeStructOffset + 4, (int)FBEType());");
+    WriteLineIndent("write(fbeOffset, fbeStructOffset.toUInt())");
+    WriteLineIndent("write(fbeStructOffset, fbeStructSize.toUInt())");
+    WriteLineIndent("write(fbeStructOffset + 4, fbeType.toUInt())");
     WriteLine();
-    WriteLineIndent("_buffer.shift(fbeStructOffset);");
-    WriteLineIndent("return fbeStructOffset;");
+    WriteLineIndent("_buffer.shift(fbeStructOffset)");
+    WriteLineIndent("return fbeStructOffset");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct field model setEnd() method
     WriteLine();
     WriteLineIndent("// Set the struct value (end phase)");
-    WriteLineIndent("public void setEnd(long fbeBegin)");
+    WriteLineIndent("fun setEnd(fbeBegin: Long)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("_buffer.unshift(fbeBegin);");
+    WriteLineIndent("_buffer.unshift(fbeBegin)");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct field model set() method
     WriteLine();
     WriteLineIndent("// Set the struct value");
-    WriteLineIndent("public void set(" + *s->name + " fbeValue)");
+    WriteLineIndent("fun set(fbeValue: " + *s->name + ")");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeBegin = setBegin();");
-    WriteLineIndent("if (fbeBegin == 0)");
+    WriteLineIndent("val fbeBegin = setBegin()");
+    WriteLineIndent("if (fbeBegin == 0L)");
     Indent(1);
-    WriteLineIndent("return;");
+    WriteLineIndent("return");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("setFields(fbeValue);");
-    WriteLineIndent("setEnd(fbeBegin);");
+    WriteLineIndent("setFields(fbeValue)");
+    WriteLineIndent("setEnd(fbeBegin)");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct field model setFields() method
     WriteLine();
     WriteLineIndent("// Set the struct fields values");
-    WriteLineIndent("public void setFields(" + *s->name + " fbeValue)");
+    WriteLineIndent("fun setFields(fbeValue: " + *s->name + ")");
     WriteLineIndent("{");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("parent.setFields(fbeValue);");
+        WriteLineIndent("parent.setFields(fbeValue)");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent(*field->name + ".set(fbeValue." + *field->name + ");");
+            WriteLineIndent(*field->name + ".set(fbeValue." + *field->name + ")");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5652,7 +5621,7 @@ void GeneratorKotlin::GenerateStructModel(const std::shared_ptr<Package>& p, con
     CppCommon::Directory::CreateTree(path);
 
     // Open the file
-    CppCommon::Path file = path / (*s->name + "Model.java");
+    CppCommon::Path file = path / (*s->name + "Model.kt");
     Open(file);
 
     // Generate headers
@@ -5667,121 +5636,128 @@ void GeneratorKotlin::GenerateStructModel(const std::shared_ptr<Package>& p, con
     // Generate struct model begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *s->name + " model class");
-    WriteLineIndent("public final class " + *s->name + "Model extends Model");
+    WriteLineIndent("class " + *s->name + "Model : Model");
     WriteLineIndent("{");
     Indent(1);
 
     // Generate struct model accessor
-    WriteLineIndent("public final FieldModel" + *s->name + " model;");
+    WriteLineIndent("val model: FieldModel" + *s->name);
 
     // Generate struct model constructors
     WriteLine();
-    WriteLineIndent("public " + *s->name + "Model() { model = new FieldModel" + *s->name + "(getBuffer(), 4); }");
-    WriteLineIndent("public " + *s->name + "Model(Buffer buffer) { super(buffer); model = new FieldModel" + *s->name + "(getBuffer(), 4); }");
+    WriteLineIndent("constructor() { model = FieldModel" + *s->name + "(buffer, 4) }");
+    WriteLineIndent("constructor(buffer: Buffer) : super(buffer) { model = FieldModel" + *s->name + "(buffer, 4) }");
 
     // Generate struct model FBE properties
     WriteLine();
-    WriteLineIndent("// Get the model size");
-    WriteLineIndent("public long fbeSize() { return model.fbeSize() + model.fbeExtra(); }");
-    WriteLineIndent("// Get the model type");
-    WriteLineIndent("public static final long FBETypeConst = FieldModel" + *s->name + ".FBETypeConst;");
-    WriteLineIndent("public long FBEType() { return FBETypeConst; }");
+    WriteLineIndent("// Model size");
+    WriteLineIndent("fun fbeSize(): Long = model.fbeSize + model.fbeExtra");
+    WriteLineIndent("// Model type");
+    WriteLineIndent("var fbeType: Long = fbeTypeConst");
+    WriteLine();
+    WriteLineIndent("companion object");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("const val fbeTypeConst: Long = FieldModel" + *s->name + ".fbeTypeConst");
+    Indent(-1);
+    WriteLineIndent("}");
 
     // Generate struct model verify() method
     WriteLine();
     WriteLineIndent("// Check if the struct value is valid");
-    WriteLineIndent("public boolean verify()");
+    WriteLineIndent("fun verify(): Boolean");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("if ((getBuffer().getOffset() + model.fbeOffset() - 4) > getBuffer().getSize())");
+    WriteLineIndent("if ((buffer.offset + model.fbeOffset - 4) > buffer.size)");
     Indent(1);
-    WriteLineIndent("return false;");
+    WriteLineIndent("return false");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("int fbeFullSize = readInt32(model.fbeOffset() - 4);");
-    WriteLineIndent("if (fbeFullSize < model.fbeSize())");
+    WriteLineIndent("val fbeFullSize = readUInt32(model.fbeOffset - 4).toLong()");
+    WriteLineIndent("if (fbeFullSize < model.fbeSize)");
     Indent(1);
-    WriteLineIndent("return false;");
+    WriteLineIndent("return false");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("return model.verify();");
+    WriteLineIndent("return model.verify()");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct model createBegin() method
     WriteLine();
     WriteLineIndent("// Create a new model (begin phase)");
-    WriteLineIndent("public long createBegin()");
+    WriteLineIndent("fun createBegin(): Long");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeBegin = getBuffer().allocate(4 + model.fbeSize());");
-    WriteLineIndent("return fbeBegin;");
+    WriteLineIndent("return buffer.allocate(4 + model.fbeSize)");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct model createEnd() method
     WriteLine();
     WriteLineIndent("// Create a new model (end phase)");
-    WriteLineIndent("public long createEnd(long fbeBegin)");
+    WriteLineIndent("fun createEnd(fbeBegin: Long): Long");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeEnd = getBuffer().getSize();");
-    WriteLineIndent("int fbeFullSize = (int)(fbeEnd - fbeBegin);");
-    WriteLineIndent("write(model.fbeOffset() - 4, fbeFullSize);");
-    WriteLineIndent("return fbeFullSize;");
+    WriteLineIndent("val fbeEnd = buffer.size");
+    WriteLineIndent("val fbeFullSize = fbeEnd - fbeBegin");
+    WriteLineIndent("write(model.fbeOffset - 4, fbeFullSize.toUInt())");
+    WriteLineIndent("return fbeFullSize");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct model serialize() method
     WriteLine();
     WriteLineIndent("// Serialize the struct value");
-    WriteLineIndent("public long serialize(" + *s->name + " value)");
+    WriteLineIndent("fun serialize(value: " + *s->name + "): Long");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeBegin = createBegin();");
-    WriteLineIndent("model.set(value);");
-    WriteLineIndent("long fbeFullSize = createEnd(fbeBegin);");
-    WriteLineIndent("return fbeFullSize;");
+    WriteLineIndent("val fbeBegin = createBegin()");
+    WriteLineIndent("model.set(value)");
+    WriteLineIndent("return createEnd(fbeBegin)");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct model deserialize() methods
     WriteLine();
     WriteLineIndent("// Deserialize the struct value");
-    WriteLineIndent("public " + *s->name + " deserialize() { var value = new " + *s->name + "(); deserialize(value); return value; }");
-    WriteLineIndent("public long deserialize(" + *s->name + " value)");
+    WriteLineIndent("fun deserialize(): " + *s->name + " { val value = " + *s->name + "(); deserialize(value); return value }");
+    WriteLineIndent("@Suppress(\"UNUSED_VALUE\")");
+    WriteLineIndent("fun deserialize(value: " + *s->name + "): Long");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("if ((getBuffer().getOffset() + model.fbeOffset() - 4) > getBuffer().getSize())");
+    WriteLineIndent("var valueRef = value");
+    WriteLine();
+    WriteLineIndent("if ((buffer.offset + model.fbeOffset - 4) > buffer.size)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("value = new " + *s->name + "();");
-    WriteLineIndent("return 0;");
+    WriteLineIndent("valueRef = " + *s->name + "()");
+    WriteLineIndent("return 0");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("int fbeFullSize = readInt32(model.fbeOffset() - 4);");
-    WriteLineIndent("assert (fbeFullSize >= model.fbeSize()) : \"Model is broken!\";");
-    WriteLineIndent("if (fbeFullSize < model.fbeSize())");
+    WriteLineIndent("val fbeFullSize = readUInt32(model.fbeOffset - 4).toLong()");
+    WriteLineIndent("assert(fbeFullSize >= model.fbeSize) { \"Model is broken!\" }");
+    WriteLineIndent("if (fbeFullSize < model.fbeSize)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("value = new " + *s->name + "();");
-    WriteLineIndent("return 0;");
+    WriteLineIndent("valueRef = " + *s->name + "()");
+    WriteLineIndent("return 0");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("value = model.get(value);");
-    WriteLineIndent("return fbeFullSize;");
+    WriteLineIndent("valueRef = model.get(valueRef)");
+    WriteLineIndent("return fbeFullSize");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct model next() method
     WriteLine();
     WriteLineIndent("// Move to the next struct value");
-    WriteLineIndent("public void next(long prev)");
+    WriteLineIndent("fun next(prev: Long)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("model.fbeShift(prev);");
+    WriteLineIndent("model.fbeShift(prev)");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5806,7 +5782,7 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     CppCommon::Directory::CreateTree(path);
 
     // Open the file
-    CppCommon::Path file = path / ("FinalModel" + *s->name + ".java");
+    CppCommon::Path file = path / ("FinalModel" + *s->name + ".kt");
     Open(file);
 
     // Generate headers
@@ -5821,202 +5797,188 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     // Generate struct final model begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model class");
-    WriteLineIndent("public final class FinalModel" + *s->name + " extends FinalModel");
+    WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"RemoveRedundantCallsOfConversionMethods\", \"ReplaceGetOrSet\")");
+    WriteLineIndent("class FinalModel" + *s->name + "(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)");
     WriteLineIndent("{");
     Indent(1);
 
     // Generate struct final model accessors
     if (s->base && !s->base->empty())
-        WriteLineIndent("public final " + ConvertBaseFieldName(*s->base, true) + " parent;");
+        WriteLineIndent("val parent: " + ConvertBaseFieldName(*s->base, true) + " = " + ConvertBaseFieldName(*s->base, true) + "(buffer, 0)");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("public final " + ConvertTypeFieldDeclaration(*field, true) + " " + *field->name + ";");
-
-    // Generate struct final model constructor
-    WriteLine();
-    WriteLineIndent("public FinalModel" + *s->name + "(Buffer buffer, long offset)");
-    WriteLineIndent("{");
-    Indent(1);
-    WriteLineIndent("super(buffer, offset);");
-    if (s->base && !s->base->empty())
-        WriteLineIndent("parent = new " + ConvertBaseFieldName(*s->base, true) + "(buffer, 0);");
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            WriteLineIndent(*field->name + " = " + ConvertTypeFieldInitialization(*field, "0", true) + ";");
-    Indent(-1);
-    WriteLineIndent("}");
+            WriteLineIndent("val " + *field->name + ": " + ConvertTypeFieldDeclaration(*field, true) + " = " + ConvertTypeFieldInitialization(*field, "0", true));
 
     // Generate struct final model FBE properties
     WriteLine();
     WriteLineIndent("// Get the allocation size");
-    WriteLineIndent("public long fbeAllocationSize(" + *s->name + " fbeValue)");
-    WriteLineIndent("{");
-    Indent(1);
-    WriteLineIndent("long fbeResult = 0");
+    WriteLineIndent("fun fbeAllocationSize(fbeValue: " + *s->name + "): Long = (0");
     Indent(1);
     if (s->base && !s->base->empty())
         WriteLineIndent("+ parent.fbeAllocationSize(fbeValue)");
     if (s->body)
         for (const auto& field : s->body->fields)
             WriteLineIndent("+ " + *field->name + ".fbeAllocationSize(fbeValue." + *field->name + ")");
-    WriteLineIndent(";");
+    WriteLineIndent(")");
     Indent(-1);
-    WriteLineIndent("return fbeResult;");
+    WriteLine();
+    WriteLineIndent("// Field type");
+    WriteLineIndent("var fbeType: Long = fbeTypeConst");
+    WriteLine();
+    WriteLineIndent("companion object");
+    WriteLineIndent("{");
+    Indent(1);
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("const val fbeTypeConst: Long = " + ConvertBaseFieldName(*s->base, true) + ".fbeTypeConst");
+    else
+        WriteLineIndent("const val fbeTypeConst: Long = " + std::to_string(s->type));
     Indent(-1);
     WriteLineIndent("}");
-    WriteLine();
-    WriteLineIndent("// Get the field type");
-    if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("public static final long FBETypeConst = " + ConvertBaseFieldName(*s->base, true) + ".FBETypeConst;");
-    else
-        WriteLineIndent("public static final long FBETypeConst = " + std::to_string(s->type) + ";");
-    WriteLineIndent("public long FBEType() { return FBETypeConst; }");
 
     // Generate struct final model verify() methods
     WriteLine();
     WriteLineIndent("// Check if the struct value is valid");
-    WriteLineIndent("@Override");
-    WriteLineIndent("public long verify()");
+    WriteLineIndent("override fun verify(): Long");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("_buffer.shift(fbeOffset());");
-    WriteLineIndent("long fbeResult = verifyFields();");
-    WriteLineIndent("_buffer.unshift(fbeOffset());");
-    WriteLineIndent("return fbeResult;");
+    WriteLineIndent("_buffer.shift(fbeOffset)");
+    WriteLineIndent("val fbeResult = verifyFields()");
+    WriteLineIndent("_buffer.unshift(fbeOffset)");
+    WriteLineIndent("return fbeResult");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct final model verifyFields() method
     WriteLine();
     WriteLineIndent("// Check if the struct fields are valid");
-    WriteLineIndent("public long verifyFields()");
+    WriteLineIndent("fun verifyFields(): Long");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeCurrentOffset = 0;");
-    WriteLineIndent("long fbeFieldSize = 0;");
+    WriteLineIndent("var fbeCurrentOffset = 0L");
+    WriteLineIndent("@Suppress(\"VARIABLE_WITH_REDUNDANT_INITIALIZER\")");
+    WriteLineIndent("var fbeFieldSize = 0L");
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("parent.fbeOffset(fbeCurrentOffset);");
-        WriteLineIndent("fbeFieldSize = parent.verifyFields();");
+        WriteLineIndent("parent.fbeOffset = fbeCurrentOffset");
+        WriteLineIndent("fbeFieldSize = parent.verifyFields()");
         WriteLineIndent("if (fbeFieldSize == Long.MAX_VALUE)");
         Indent(1);
-        WriteLineIndent("return Long.MAX_VALUE;");
+        WriteLineIndent("return Long.MAX_VALUE");
         Indent(-1);
-        WriteLineIndent("fbeCurrentOffset += fbeFieldSize;");
+        WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
     }
     if (s->body)
     {
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent(*field->name + ".fbeOffset(fbeCurrentOffset);");
-            WriteLineIndent("fbeFieldSize = " + *field->name + ".verify();");
+            WriteLineIndent(*field->name + ".fbeOffset = fbeCurrentOffset");
+            WriteLineIndent("fbeFieldSize = " + *field->name + ".verify()");
             WriteLineIndent("if (fbeFieldSize == Long.MAX_VALUE)");
             Indent(1);
-            WriteLineIndent("return Long.MAX_VALUE;");
+            WriteLineIndent("return Long.MAX_VALUE");
             Indent(-1);
-            WriteLineIndent("fbeCurrentOffset += fbeFieldSize;");
+            WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
         }
     }
     WriteLine();
-    WriteLineIndent("return fbeCurrentOffset;");
+    WriteLineIndent("return fbeCurrentOffset");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct final model get() methods
     WriteLine();
     WriteLineIndent("// Get the struct value");
-    WriteLineIndent("public " + *s->name + " get(Size fbeSize) { return get(fbeSize, new " + *s->name + "()); }");
-    WriteLineIndent("public " + *s->name + " get(Size fbeSize, " + *s->name + " fbeValue)");
+    WriteLineIndent("fun get(fbeSize: Size, fbeValue: " + *s->name + " = " + *s->name + "()): " + *s->name);
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("_buffer.shift(fbeOffset());");
-    WriteLineIndent("fbeSize.value = getFields(fbeValue);");
-    WriteLineIndent("_buffer.unshift(fbeOffset());");
-    WriteLineIndent("return fbeValue;");
+    WriteLineIndent("_buffer.shift(fbeOffset)");
+    WriteLineIndent("fbeSize.value = getFields(fbeValue)");
+    WriteLineIndent("_buffer.unshift(fbeOffset)");
+    WriteLineIndent("return fbeValue");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct final model getFields() method
     WriteLine();
     WriteLineIndent("// Get the struct fields values");
-    WriteLineIndent("public long getFields(" + *s->name + " fbeValue)");
+    WriteLineIndent("fun getFields(fbeValue: " + *s->name + "): Long");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeCurrentOffset = 0;");
-    WriteLineIndent("long fbeCurrentSize = 0;");
-    WriteLineIndent("var fbeFieldSize = new Size(0);");
+    WriteLineIndent("var fbeCurrentOffset = 0L");
+    WriteLineIndent("var fbeCurrentSize = 0L");
+    WriteLineIndent("val fbeFieldSize = Size(0)");
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("parent.fbeOffset(fbeCurrentOffset);");
-        WriteLineIndent("fbeFieldSize.value = parent.getFields(fbeValue);");
-        WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value;");
-        WriteLineIndent("fbeCurrentSize += fbeFieldSize.value;");
+        WriteLineIndent("parent.fbeOffset = fbeCurrentOffset");
+        WriteLineIndent("fbeFieldSize.value = parent.getFields(fbeValue)");
+        WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value");
+        WriteLineIndent("fbeCurrentSize += fbeFieldSize.value");
     }
     if (s->body)
     {
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent(*field->name + ".fbeOffset(fbeCurrentOffset);");
+            WriteLineIndent(*field->name + ".fbeOffset = fbeCurrentOffset");
             if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent("fbeFieldSize.value = " + *field->name + ".get(fbeValue." + *field->name + ");");
+                WriteLineIndent("fbeFieldSize.value = " + *field->name + ".get(fbeValue." + *field->name + ")");
             else
-                WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(fbeFieldSize);");
-            WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value;");
-            WriteLineIndent("fbeCurrentSize += fbeFieldSize.value;");
+                WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(fbeFieldSize)");
+            WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value");
+            WriteLineIndent("fbeCurrentSize += fbeFieldSize.value");
         }
     }
     WriteLine();
-    WriteLineIndent("return fbeCurrentSize;");
+    WriteLineIndent("return fbeCurrentSize");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct final model set() method
     WriteLine();
     WriteLineIndent("// Set the struct value");
-    WriteLineIndent("public long set(" + *s->name + " fbeValue)");
+    WriteLineIndent("fun set(fbeValue: " + *s->name + "): Long");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("_buffer.shift(fbeOffset());");
-    WriteLineIndent("long fbeSize = setFields(fbeValue);");
-    WriteLineIndent("_buffer.unshift(fbeOffset());");
-    WriteLineIndent("return fbeSize;");
+    WriteLineIndent("_buffer.shift(fbeOffset)");
+    WriteLineIndent("val fbeSize = setFields(fbeValue)");
+    WriteLineIndent("_buffer.unshift(fbeOffset)");
+    WriteLineIndent("return fbeSize");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct final model setFields() method
     WriteLine();
     WriteLineIndent("// Set the struct fields values");
-    WriteLineIndent("public long setFields(" + *s->name + " fbeValue)");
+    WriteLineIndent("fun setFields(fbeValue: " + *s->name + "): Long");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeCurrentOffset = 0;");
-    WriteLineIndent("long fbeCurrentSize = 0;");
-    WriteLineIndent("var fbeFieldSize = new Size(0);");
+    WriteLineIndent("var fbeCurrentOffset = 0L");
+    WriteLineIndent("var fbeCurrentSize = 0L");
+    WriteLineIndent("val fbeFieldSize = Size(0)");
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("parent.fbeOffset(fbeCurrentOffset);");
-        WriteLineIndent("fbeFieldSize.value = parent.setFields(fbeValue);");
-        WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value;");
-        WriteLineIndent("fbeCurrentSize += fbeFieldSize.value;");
+        WriteLineIndent("parent.fbeOffset = fbeCurrentOffset");
+        WriteLineIndent("fbeFieldSize.value = parent.setFields(fbeValue)");
+        WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value");
+        WriteLineIndent("fbeCurrentSize += fbeFieldSize.value");
     }
     if (s->body)
     {
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent(*field->name + ".fbeOffset(fbeCurrentOffset);");
-            WriteLineIndent("fbeFieldSize.value = " + *field->name + ".set(fbeValue." + *field->name + ");");
-            WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value;");
-            WriteLineIndent("fbeCurrentSize += fbeFieldSize.value;");
+            WriteLineIndent(*field->name + ".fbeOffset = fbeCurrentOffset");
+            WriteLineIndent("fbeFieldSize.value = " + *field->name + ".set(fbeValue." + *field->name + ")");
+            WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value");
+            WriteLineIndent("fbeCurrentSize += fbeFieldSize.value");
         }
     }
     WriteLine();
-    WriteLineIndent("return fbeCurrentSize;");
+    WriteLineIndent("return fbeCurrentSize");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -6041,7 +6003,7 @@ void GeneratorKotlin::GenerateStructModelFinal(const std::shared_ptr<Package>& p
     CppCommon::Directory::CreateTree(path);
 
     // Open the file
-    CppCommon::Path file = path / (*s->name + "FinalModel.java");
+    CppCommon::Path file = path / (*s->name + "FinalModel.kt");
     Open(file);
 
     // Generate headers
@@ -6056,107 +6018,116 @@ void GeneratorKotlin::GenerateStructModelFinal(const std::shared_ptr<Package>& p
     // Generate struct model final begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model class");
-    WriteLineIndent("public final class " + *s->name + "FinalModel extends Model");
+    WriteLineIndent("class " + *s->name + "FinalModel : Model");
     WriteLineIndent("{");
     Indent(1);
 
     // Generate struct model final accessor
-    WriteLineIndent("private final FinalModel" + *s->name + " _model;");
+    WriteLineIndent("private val _model: FinalModel" + *s->name);
 
     // Generate struct model final constructors
     WriteLine();
-    WriteLineIndent("public " + *s->name + "FinalModel() { _model = new FinalModel" + *s->name + "(getBuffer(), 8); }");
-    WriteLineIndent("public " + *s->name + "FinalModel(Buffer buffer) { super(buffer); _model = new FinalModel" + *s->name + "(getBuffer(), 8); }");
+    WriteLineIndent("constructor() { _model = FinalModel" + *s->name + "(buffer, 8) }");
+    WriteLineIndent("constructor(buffer: Buffer) : super(buffer) { _model = FinalModel" + *s->name + "(buffer, 8) }");
 
     // Generate struct model final FBE properties
     WriteLine();
-    WriteLineIndent("// Get the model type");
-    WriteLineIndent("public static final long FBETypeConst = FinalModel" + *s->name + ".FBETypeConst;");
-    WriteLineIndent("public long FBEType() { return FBETypeConst; }");
+    WriteLineIndent("// Model type");
+    WriteLineIndent("var fbeType: Long = fbeTypeConst");
+    WriteLine();
+    WriteLineIndent("companion object");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("const val fbeTypeConst: Long = FinalModel" + *s->name + ".fbeTypeConst");
+    Indent(-1);
+    WriteLineIndent("}");
 
     // Generate struct model final verify() method
     WriteLine();
     WriteLineIndent("// Check if the struct value is valid");
-    WriteLineIndent("public boolean verify()");
+    WriteLineIndent("fun verify(): Boolean");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("if ((getBuffer().getOffset() + _model.fbeOffset()) > getBuffer().getSize())");
+    WriteLineIndent("if ((buffer.offset + _model.fbeOffset) > buffer.size)");
     Indent(1);
-    WriteLineIndent("return false;");
+    WriteLineIndent("return false");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("int fbeStructSize = readInt32(_model.fbeOffset() - 8);");
-    WriteLineIndent("int fbeStructType = readInt32(_model.fbeOffset() - 4);");
-    WriteLineIndent("if ((fbeStructSize <= 0) || (fbeStructType != FBEType()))");
+    WriteLineIndent("val fbeStructSize = readUInt32(_model.fbeOffset - 8).toLong()");
+    WriteLineIndent("val fbeStructType = readUInt32(_model.fbeOffset - 4).toLong()");
+    WriteLineIndent("if ((fbeStructSize <= 0) || (fbeStructType != fbeType))");
     Indent(1);
-    WriteLineIndent("return false;");
+    WriteLineIndent("return false");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("return ((8 + _model.verify()) == fbeStructSize);");
+    WriteLineIndent("return ((8 + _model.verify()) == fbeStructSize)");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct model final serialize() method
     WriteLine();
     WriteLineIndent("// Serialize the struct value");
-    WriteLineIndent("public long serialize(" + *s->name + " value)");
+    WriteLineIndent("fun serialize(value: " + *s->name + "): Long");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeInitialSize = getBuffer().getSize();");
+    WriteLineIndent("val fbeInitialSize = buffer.size");
     WriteLine();
-    WriteLineIndent("int fbeStructType = (int)FBEType();");
-    WriteLineIndent("int fbeStructSize = (int)(8 + _model.fbeAllocationSize(value));");
-    WriteLineIndent("int fbeStructOffset = (int)(getBuffer().allocate(fbeStructSize) - getBuffer().getOffset());");
-    WriteLineIndent("assert ((getBuffer().getOffset() + fbeStructOffset + fbeStructSize) <= getBuffer().getSize()) : \"Model is broken!\";");
-    WriteLineIndent("if ((getBuffer().getOffset() + fbeStructOffset + fbeStructSize) > getBuffer().getSize())");
+    WriteLineIndent("val fbeStructType = fbeType");
+    WriteLineIndent("var fbeStructSize = 8 + _model.fbeAllocationSize(value)");
+    WriteLineIndent("val fbeStructOffset = buffer.allocate(fbeStructSize) - buffer.offset");
+    WriteLineIndent("assert((buffer.offset + fbeStructOffset + fbeStructSize) <= buffer.size) { \"Model is broken!\" }");
+    WriteLineIndent("if ((buffer.offset + fbeStructOffset + fbeStructSize) > buffer.size)");
     Indent(1);
-    WriteLineIndent("return 0;");
+    WriteLineIndent("return 0");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("fbeStructSize = (int)(8 + _model.set(value));");
-    WriteLineIndent("getBuffer().resize(fbeInitialSize + fbeStructSize);");
+    WriteLineIndent("fbeStructSize = 8 + _model.set(value)");
+    WriteLineIndent("buffer.resize(fbeInitialSize + fbeStructSize)");
     WriteLine();
-    WriteLineIndent("write(_model.fbeOffset() - 8, fbeStructSize);");
-    WriteLineIndent("write(_model.fbeOffset() - 4, fbeStructType);");
+    WriteLineIndent("write(_model.fbeOffset - 8, fbeStructSize.toUInt())");
+    WriteLineIndent("write(_model.fbeOffset - 4, fbeStructType.toUInt())");
     WriteLine();
-    WriteLineIndent("return fbeStructSize;");
+    WriteLineIndent("return fbeStructSize");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct model final deserialize() methods
     WriteLine();
     WriteLineIndent("// Deserialize the struct value");
-    WriteLineIndent("public " + *s->name + " deserialize() { var value = new " + *s->name + "(); deserialize(value); return value; }");
-    WriteLineIndent("public long deserialize(" + *s->name + " value)");
+    WriteLineIndent("fun deserialize(): " + *s->name + " { val value = " + *s->name + "(); deserialize(value); return value }");
+    WriteLineIndent("@Suppress(\"UNUSED_VALUE\")");
+    WriteLineIndent("fun deserialize(value: " + *s->name + "): Long");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("assert ((getBuffer().getOffset() + _model.fbeOffset()) <= getBuffer().getSize()) : \"Model is broken!\";");
-    WriteLineIndent("if ((getBuffer().getOffset() + _model.fbeOffset()) > getBuffer().getSize())");
+    WriteLineIndent("var valueRef = value");
+    WriteLine();
+    WriteLineIndent("assert((buffer.offset + _model.fbeOffset) <= buffer.size) { \"Model is broken!\" }");
+    WriteLineIndent("if ((buffer.offset + _model.fbeOffset) > buffer.size)");
     Indent(1);
-    WriteLineIndent("return 0;");
+    WriteLineIndent("return 0");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("long fbeStructSize = readInt32(_model.fbeOffset() - 8);");
-    WriteLineIndent("long fbeStructType = readInt32(_model.fbeOffset() - 4);");
-    WriteLineIndent("assert ((fbeStructSize > 0) && (fbeStructType == FBEType())) : \"Model is broken!\";");
-    WriteLineIndent("if ((fbeStructSize <= 0) || (fbeStructType != FBEType()))");
+    WriteLineIndent("val fbeStructSize = readUInt32(_model.fbeOffset - 8).toLong()");
+    WriteLineIndent("val fbeStructType = readUInt32(_model.fbeOffset - 4).toLong()");
+    WriteLineIndent("assert((fbeStructSize > 0) && (fbeStructType == fbeType)) { \"Model is broken!\" }");
+    WriteLineIndent("if ((fbeStructSize <= 0) || (fbeStructType != fbeType))");
     Indent(1);
-    WriteLineIndent("return 8;");
+    WriteLineIndent("return 8");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("var fbeSize = new Size(0);");
-    WriteLineIndent("value = _model.get(fbeSize, value);");
-    WriteLineIndent("return 8 + fbeSize.value;");
+    WriteLineIndent("val fbeSize = Size(0)");
+    WriteLineIndent("valueRef = _model.get(fbeSize, valueRef)");
+    WriteLineIndent("return 8 + fbeSize.value");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct model final next() method
     WriteLine();
     WriteLineIndent("// Move to the next struct value");
-    WriteLineIndent("public void next(long prev)");
+    WriteLineIndent("fun next(prev: Long)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("_model.fbeShift(prev);");
+    WriteLineIndent("_model.fbeShift(prev)");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -6273,7 +6244,7 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
             Indent(1);
             WriteLineIndent("// Serialize the value into the FBE stream");
             WriteLineIndent("long serialized = " + *s->name + "Model.serialize(value);");
-            WriteLineIndent("assert (serialized > 0) : \"" + *p->name + "." + *s->name + " serialization failed!\";");
+            WriteLineIndent("assert(serialized > 0) : \"" + *p->name + "." + *s->name + " serialization failed!\";");
             WriteLineIndent("assert " + *s->name + "Model.verify() : \"" + *p->name + "." + *s->name + " validation failed!\";");
             WriteLine();
             WriteLineIndent("// Log the value");
@@ -6439,7 +6410,7 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case (int)" + package + ".fbe." + *s->name + model + ".FBETypeConst:");
+            WriteLineIndent("case (int)" + package + ".fbe." + *s->name + model + ".fbeTypeConst:");
             WriteLineIndent("{");
             Indent(1);
             WriteLineIndent("// Deserialize the value from the FBE stream");
@@ -7105,13 +7076,13 @@ std::string GeneratorKotlin::ConvertTypeFieldInitialization(const StructField& f
     std::string modelType = (final ? "Final" : "Field");
 
     if (field.array)
-        return "new " + modelType + "ModelArray" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type) + "(buffer, " + offset + ", " + std::to_string(field.N) + ")";
+        return modelType + "ModelArray" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type) + "(buffer, " + offset + ", " + std::to_string(field.N) + ")";
     else if (field.vector || field.list || field.set)
-        return "new " + modelType + "ModelVector" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type) + "(buffer, " + offset + ")";
+        return modelType + "ModelVector" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type) + "(buffer, " + offset + ")";
     else if (field.map || field.hash)
-        return "new " + modelType + "ModelMap" + ConvertTypeFieldName(*field.key) + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type) + "(buffer, " + offset + ")";
+        return modelType + "ModelMap" + ConvertTypeFieldName(*field.key) + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type) + "(buffer, " + offset + ")";
     else if (field.optional)
-        return "new " + modelType + "ModelOptional" + ConvertTypeFieldName(*field.type) + "(buffer, " + offset + ")";
+        return modelType + "ModelOptional" + ConvertTypeFieldName(*field.type) + "(buffer, " + offset + ")";
 
     std::string ns = "";
     std::string t = *field.type;
@@ -7125,7 +7096,7 @@ std::string GeneratorKotlin::ConvertTypeFieldInitialization(const StructField& f
         t.assign(type, pos + 1, type.size() - pos);
     }
 
-    return "new " + ns + modelType + "Model" + ConvertTypeFieldName(t) + "(buffer, " + offset + ")";
+    return ns + modelType + "Model" + ConvertTypeFieldName(t) + "(buffer, " + offset + ")";
 }
 
 std::string GeneratorKotlin::ConvertConstant(const std::string& type, const std::string& value, bool optional)

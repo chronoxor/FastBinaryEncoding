@@ -2173,7 +2173,7 @@ class FieldModelEnums(fbe.FieldModel):
             return False
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        if fbe_struct_size < 4 + 4:
+        if fbe_struct_size < (4 + 4):
             return False
 
         fbe_struct_type = self.read_uint32(fbe_struct_offset + 4)
@@ -2598,8 +2598,8 @@ class FieldModelEnums(fbe.FieldModel):
             return 0
 
         fbe_struct_size = self.read_uint32(fbe_struct_offset)
-        assert (fbe_struct_size >= 4 + 4), "Model is broken!"
-        if fbe_struct_size < 4 + 4:
+        assert (fbe_struct_size >= (4 + 4)), "Model is broken!"
+        if fbe_struct_size < (4 + 4):
             return 0
 
         self._buffer.shift(fbe_struct_offset)

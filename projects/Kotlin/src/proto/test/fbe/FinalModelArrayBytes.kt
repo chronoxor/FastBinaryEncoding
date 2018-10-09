@@ -26,7 +26,7 @@ class FinalModelArrayBytes(buffer: Buffer, offset: Long, private val _size: Long
     {
         var size: Long = 0
         var i: Long = 0
-        while (i < values.size && i < _size)
+        while ((i < values.size) && (i < _size))
         {
             size += _model.fbeAllocationSize(values[i.toInt()])
             i++
@@ -37,7 +37,7 @@ class FinalModelArrayBytes(buffer: Buffer, offset: Long, private val _size: Long
     {
         var size: Long = 0
         var i: Long = 0
-        while (i < values.size && i < _size)
+        while ((i < values.size) && (i < _size))
         {
             size += _model.fbeAllocationSize(values[i.toInt()])
             i++
@@ -48,7 +48,7 @@ class FinalModelArrayBytes(buffer: Buffer, offset: Long, private val _size: Long
     // Check if the array is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset > _buffer.size)
+        if ((_buffer.offset + fbeOffset) > _buffer.size)
             return Long.MAX_VALUE
 
         var size: Long = 0
@@ -70,8 +70,8 @@ class FinalModelArrayBytes(buffer: Buffer, offset: Long, private val _size: Long
     {
         val values = Array(_size.toInt()) { ByteArray(0) }
 
-        assert(_buffer.offset + fbeOffset <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset > _buffer.size)
+        assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset) > _buffer.size)
         {
             size.value = 0
             return values
@@ -93,15 +93,15 @@ class FinalModelArrayBytes(buffer: Buffer, offset: Long, private val _size: Long
     // Get the array
     fun get(values: Array<ByteArray>): Long
     {
-        assert(_buffer.offset + fbeOffset <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset > _buffer.size)
+        assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset) > _buffer.size)
             return 0
 
         var size: Long = 0
         val offset = Size()
         _model.fbeOffset = fbeOffset
         var i: Long = 0
-        while (i < values.size && i < _size)
+        while ((i < values.size) && (i < _size))
         {
             offset.value = 0
             values[i.toInt()] = _model.get(offset)
@@ -117,8 +117,8 @@ class FinalModelArrayBytes(buffer: Buffer, offset: Long, private val _size: Long
     {
         values.clear()
 
-        assert(_buffer.offset + fbeOffset <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset > _buffer.size)
+        assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset) > _buffer.size)
             return 0
 
         values.ensureCapacity(_size.toInt())
@@ -141,14 +141,14 @@ class FinalModelArrayBytes(buffer: Buffer, offset: Long, private val _size: Long
     // Set the array
     fun set(values: Array<ByteArray>): Long
     {
-        assert(_buffer.offset + fbeOffset <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset > _buffer.size)
+        assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset) > _buffer.size)
             return 0
 
         var size: Long = 0
         _model.fbeOffset = fbeOffset
         var i: Long = 0
-        while (i < values.size && i < _size)
+        while ((i < values.size) && (i < _size))
         {
             val offset = _model.set(values[i.toInt()])
             _model.fbeShift(offset)
@@ -161,14 +161,14 @@ class FinalModelArrayBytes(buffer: Buffer, offset: Long, private val _size: Long
     // Set the array as List
     fun set(values: ArrayList<ByteArray>): Long
     {
-        assert(_buffer.offset + fbeOffset <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset > _buffer.size)
+        assert((_buffer.offset + fbeOffset) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset) > _buffer.size)
             return 0
 
         var size: Long = 0
         _model.fbeOffset = fbeOffset
         var i: Long = 0
-        while (i < values.size && i < _size)
+        while ((i < values.size) && (i < _size))
         {
             val offset = _model.set(values[i.toInt()])
             _model.fbeShift(offset)

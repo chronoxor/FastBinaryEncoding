@@ -33,7 +33,7 @@ class FieldModelArrayByte(buffer: Buffer, offset: Long, val size: Long) : FieldM
     // Array index operator
     fun getItem(index: Long): FieldModelByte
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
         assert(index < size) { "Index is out of bounds!" }
 
         _model.fbeOffset = fbeOffset
@@ -44,7 +44,7 @@ class FieldModelArrayByte(buffer: Buffer, offset: Long, val size: Long) : FieldM
     // Check if the array is valid
     override fun verify(): Boolean
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return false
 
         _model.fbeOffset = fbeOffset
@@ -60,9 +60,9 @@ class FieldModelArrayByte(buffer: Buffer, offset: Long, val size: Long) : FieldM
     }
 
     // Get the array
-    fun get(): ByteArray
+    fun get(): Array<Byte>
     {
-        val values = ByteArray(size.toInt())
+        val values = Array(size.toInt()) { 0.toByte() }
 
         val fbeModel = getItem(0)
         for (i in 0 until size)
@@ -74,11 +74,11 @@ class FieldModelArrayByte(buffer: Buffer, offset: Long, val size: Long) : FieldM
     }
 
     // Get the array
-    fun get(values: ByteArray)
+    fun get(values: Array<Byte>)
     {
         val fbeModel = getItem(0)
         var i: Long = 0
-        while (i < values.size && i < size)
+        while ((i < values.size) && (i < size))
         {
             values[i.toInt()] = fbeModel.get()
             fbeModel.fbeShift(fbeModel.fbeSize)
@@ -103,15 +103,15 @@ class FieldModelArrayByte(buffer: Buffer, offset: Long, val size: Long) : FieldM
     }
 
     // Set the array
-    fun set(values: ByteArray)
+    fun set(values: Array<Byte>)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         val fbeModel = getItem(0)
         var i: Long = 0
-        while (i < values.size && i < size)
+        while ((i < values.size) && (i < size))
         {
             fbeModel.set(values[i.toInt()])
             fbeModel.fbeShift(fbeModel.fbeSize)
@@ -122,13 +122,13 @@ class FieldModelArrayByte(buffer: Buffer, offset: Long, val size: Long) : FieldM
     // Set the array as List
     fun set(values: ArrayList<Byte>)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         val fbeModel = getItem(0)
         var i: Long = 0
-        while (i < values.size && i < size)
+        while ((i < values.size) && (i < size))
         {
             fbeModel.set(values[i.toInt()])
             fbeModel.fbeShift(fbeModel.fbeSize)

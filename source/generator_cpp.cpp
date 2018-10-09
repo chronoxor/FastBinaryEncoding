@@ -6572,7 +6572,7 @@ void GeneratorCpp::GenerateStructFieldModel(const std::shared_ptr<Package>& p, c
     Indent(-1);
     WriteLine();
     WriteLineIndent("uint32_t fbe_struct_size = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset));");
-    WriteLineIndent("if (fbe_struct_size < 4 + 4)");
+    WriteLineIndent("if (fbe_struct_size < (4 + 4))");
     Indent(1);
     WriteLineIndent("return false;");
     Indent(-1);
@@ -6650,8 +6650,8 @@ void GeneratorCpp::GenerateStructFieldModel(const std::shared_ptr<Package>& p, c
     Indent(-1);
     WriteLine();
     WriteLineIndent("uint32_t fbe_struct_size = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset));");
-    WriteLineIndent("assert((fbe_struct_size >= 4 + 4) && \"Model is broken!\");");
-    WriteLineIndent("if (fbe_struct_size < 4 + 4)");
+    WriteLineIndent("assert((fbe_struct_size >= (4 + 4)) && \"Model is broken!\");");
+    WriteLineIndent("if (fbe_struct_size < (4 + 4))");
     Indent(1);
     WriteLineIndent("return 0;");
     Indent(-1);

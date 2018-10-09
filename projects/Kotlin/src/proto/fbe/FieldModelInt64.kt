@@ -22,7 +22,7 @@ class FieldModelInt64(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     // Get the value
     fun get(defaults: Long = 0L): Long
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return defaults
 
         return readInt64(fbeOffset)
@@ -31,8 +31,8 @@ class FieldModelInt64(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     // Set the value
     fun set(value: Long)
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return
 
         write(fbeOffset, value)

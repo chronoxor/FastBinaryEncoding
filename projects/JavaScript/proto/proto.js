@@ -968,7 +968,7 @@ class FieldModelOrder extends fbe.FieldModel {
    * @this {!FieldModelOrder}
    * @returns {!number} Field body size
    */
-  get FBEBody () {
+  get fbeBody () {
     return 4 + 4 + this.uid.fbeSize + this.symbol.fbeSize + this.side.fbeSize + this.type.fbeSize + this.price.fbeSize + this.volume.fbeSize
   }
 
@@ -989,7 +989,7 @@ class FieldModelOrder extends fbe.FieldModel {
 
     this._buffer.shift(fbeStructOffset)
 
-    let fbeResult = this.FBEBody + this.uid.fbeExtra + this.symbol.fbeExtra + this.side.fbeExtra + this.type.fbeExtra + this.price.fbeExtra + this.volume.fbeExtra
+    let fbeResult = this.fbeBody + this.uid.fbeExtra + this.symbol.fbeExtra + this.side.fbeExtra + this.type.fbeExtra + this.price.fbeExtra + this.volume.fbeExtra
 
     this._buffer.unshift(fbeStructOffset)
 
@@ -1001,8 +1001,8 @@ class FieldModelOrder extends fbe.FieldModel {
    * @this {!FieldModelOrder}
    * @returns {!number} Field type
    */
-  get FBEType () {
-    return FieldModelOrder.FBEType
+  get fbeType () {
+    return FieldModelOrder.fbeType
   }
 
   /**
@@ -1010,7 +1010,7 @@ class FieldModelOrder extends fbe.FieldModel {
    * @this {!FieldModelOrder}
    * @returns {!number} Field type
    */
-  static get FBEType () {
+  static get fbeType () {
     return 1
   }
 
@@ -1031,12 +1031,12 @@ class FieldModelOrder extends fbe.FieldModel {
     }
 
     let fbeStructSize = this.readUInt32(fbeStructOffset)
-    if (fbeStructSize < 4 + 4) {
+    if (fbeStructSize < (4 + 4)) {
       return false
     }
 
     let fbeStructType = this.readUInt32(fbeStructOffset + 4)
-    if (fbeVerifyType && (fbeStructType !== this.FBEType)) {
+    if (fbeVerifyType && (fbeStructType !== this.fbeType)) {
       return false
     }
 
@@ -1129,8 +1129,8 @@ class FieldModelOrder extends fbe.FieldModel {
     }
 
     let fbeStructSize = this.readUInt32(fbeStructOffset)
-    console.assert((fbeStructSize >= 4 + 4), 'Model is broken!')
-    if (fbeStructSize < 4 + 4) {
+    console.assert((fbeStructSize >= (4 + 4)), 'Model is broken!')
+    if (fbeStructSize < (4 + 4)) {
       return 0
     }
 
@@ -1234,7 +1234,7 @@ class FieldModelOrder extends fbe.FieldModel {
       return 0
     }
 
-    let fbeStructSize = this.FBEBody
+    let fbeStructSize = this.fbeBody
     let fbeStructOffset = this._buffer.allocate(fbeStructSize) - this._buffer.offset
     console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + fbeStructSize) <= this._buffer.size), 'Model is broken!')
     if ((fbeStructOffset <= 0) || ((this._buffer.offset + fbeStructOffset + fbeStructSize) > this._buffer.size)) {
@@ -1243,7 +1243,7 @@ class FieldModelOrder extends fbe.FieldModel {
 
     this.writeUInt32(this.fbeOffset, fbeStructOffset)
     this.writeUInt32(fbeStructOffset, fbeStructSize)
-    this.writeUInt32(fbeStructOffset + 4, this.FBEType)
+    this.writeUInt32(fbeStructOffset + 4, this.fbeType)
 
     this._buffer.shift(fbeStructOffset)
     return fbeStructOffset
@@ -1327,8 +1327,8 @@ class OrderModel extends fbe.Model {
    * @this {!OrderModel}
    * @returns {!number} Model type
    */
-  get FBEType () {
-    return OrderModel.FBEType
+  get fbeType () {
+    return OrderModel.fbeType
   }
 
   /**
@@ -1336,8 +1336,8 @@ class OrderModel extends fbe.Model {
    * @this {!OrderModel}
    * @returns {!number} Model type
    */
-  static get FBEType () {
-    return FieldModelOrder.FBEType
+  static get fbeType () {
+    return FieldModelOrder.fbeType
   }
 
   /**
@@ -1513,8 +1513,8 @@ class FinalModelOrder extends fbe.FinalModel {
    * @this {!FinalModelOrder}
    * @returns {!number} Field type
    */
-  get FBEType () {
-    return FinalModelOrder.FBEType
+  get fbeType () {
+    return FinalModelOrder.fbeType
   }
 
   /**
@@ -1522,7 +1522,7 @@ class FinalModelOrder extends fbe.FinalModel {
    * @this {!FinalModelOrder}
    * @returns {!number} Field type
    */
-  static get FBEType () {
+  static get fbeType () {
     return 1
   }
 
@@ -1746,8 +1746,8 @@ class OrderFinalModel extends fbe.Model {
    * @this {!OrderFinalModel}
    * @returns {!number} Model type
    */
-  get FBEType () {
-    return OrderFinalModel.FBEType
+  get fbeType () {
+    return OrderFinalModel.fbeType
   }
 
   /**
@@ -1755,8 +1755,8 @@ class OrderFinalModel extends fbe.Model {
    * @this {!OrderFinalModel}
    * @returns {!number} Model type
    */
-  static get FBEType () {
-    return FinalModelOrder.FBEType
+  static get fbeType () {
+    return FinalModelOrder.fbeType
   }
 
   /**
@@ -1771,7 +1771,7 @@ class OrderFinalModel extends fbe.Model {
 
     let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
     let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
-    if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
+    if ((fbeStructSize <= 0) || (fbeStructType !== this.fbeType)) {
       return false
     }
 
@@ -1787,7 +1787,7 @@ class OrderFinalModel extends fbe.Model {
   serialize (value) {
     let fbeInitialSize = this.buffer.size
 
-    let fbeStructType = this.FBEType
+    let fbeStructType = this.fbeType
     let fbeStructSize = 8 + this._model.fbeAllocationSize(value)
     let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset
     console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')
@@ -1818,8 +1818,8 @@ class OrderFinalModel extends fbe.Model {
 
     let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
     let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
-    console.assert(((fbeStructSize > 0) && (fbeStructType === this.FBEType)), 'Model is broken!')
-    if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
+    console.assert(((fbeStructSize > 0) && (fbeStructType === this.fbeType)), 'Model is broken!')
+    if ((fbeStructSize <= 0) || (fbeStructType !== this.fbeType)) {
       return { value: new Order(), size: 8 }
     }
 
@@ -2019,7 +2019,7 @@ class FieldModelBalance extends fbe.FieldModel {
    * @this {!FieldModelBalance}
    * @returns {!number} Field body size
    */
-  get FBEBody () {
+  get fbeBody () {
     return 4 + 4 + this.currency.fbeSize + this.amount.fbeSize
   }
 
@@ -2040,7 +2040,7 @@ class FieldModelBalance extends fbe.FieldModel {
 
     this._buffer.shift(fbeStructOffset)
 
-    let fbeResult = this.FBEBody + this.currency.fbeExtra + this.amount.fbeExtra
+    let fbeResult = this.fbeBody + this.currency.fbeExtra + this.amount.fbeExtra
 
     this._buffer.unshift(fbeStructOffset)
 
@@ -2052,8 +2052,8 @@ class FieldModelBalance extends fbe.FieldModel {
    * @this {!FieldModelBalance}
    * @returns {!number} Field type
    */
-  get FBEType () {
-    return FieldModelBalance.FBEType
+  get fbeType () {
+    return FieldModelBalance.fbeType
   }
 
   /**
@@ -2061,7 +2061,7 @@ class FieldModelBalance extends fbe.FieldModel {
    * @this {!FieldModelBalance}
    * @returns {!number} Field type
    */
-  static get FBEType () {
+  static get fbeType () {
     return 2
   }
 
@@ -2082,12 +2082,12 @@ class FieldModelBalance extends fbe.FieldModel {
     }
 
     let fbeStructSize = this.readUInt32(fbeStructOffset)
-    if (fbeStructSize < 4 + 4) {
+    if (fbeStructSize < (4 + 4)) {
       return false
     }
 
     let fbeStructType = this.readUInt32(fbeStructOffset + 4)
-    if (fbeVerifyType && (fbeStructType !== this.FBEType)) {
+    if (fbeVerifyType && (fbeStructType !== this.fbeType)) {
       return false
     }
 
@@ -2144,8 +2144,8 @@ class FieldModelBalance extends fbe.FieldModel {
     }
 
     let fbeStructSize = this.readUInt32(fbeStructOffset)
-    console.assert((fbeStructSize >= 4 + 4), 'Model is broken!')
-    if (fbeStructSize < 4 + 4) {
+    console.assert((fbeStructSize >= (4 + 4)), 'Model is broken!')
+    if (fbeStructSize < (4 + 4)) {
       return 0
     }
 
@@ -2217,7 +2217,7 @@ class FieldModelBalance extends fbe.FieldModel {
       return 0
     }
 
-    let fbeStructSize = this.FBEBody
+    let fbeStructSize = this.fbeBody
     let fbeStructOffset = this._buffer.allocate(fbeStructSize) - this._buffer.offset
     console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + fbeStructSize) <= this._buffer.size), 'Model is broken!')
     if ((fbeStructOffset <= 0) || ((this._buffer.offset + fbeStructOffset + fbeStructSize) > this._buffer.size)) {
@@ -2226,7 +2226,7 @@ class FieldModelBalance extends fbe.FieldModel {
 
     this.writeUInt32(this.fbeOffset, fbeStructOffset)
     this.writeUInt32(fbeStructOffset, fbeStructSize)
-    this.writeUInt32(fbeStructOffset + 4, this.FBEType)
+    this.writeUInt32(fbeStructOffset + 4, this.fbeType)
 
     this._buffer.shift(fbeStructOffset)
     return fbeStructOffset
@@ -2306,8 +2306,8 @@ class BalanceModel extends fbe.Model {
    * @this {!BalanceModel}
    * @returns {!number} Model type
    */
-  get FBEType () {
-    return BalanceModel.FBEType
+  get fbeType () {
+    return BalanceModel.fbeType
   }
 
   /**
@@ -2315,8 +2315,8 @@ class BalanceModel extends fbe.Model {
    * @this {!BalanceModel}
    * @returns {!number} Model type
    */
-  static get FBEType () {
-    return FieldModelBalance.FBEType
+  static get fbeType () {
+    return FieldModelBalance.fbeType
   }
 
   /**
@@ -2452,8 +2452,8 @@ class FinalModelBalance extends fbe.FinalModel {
    * @this {!FinalModelBalance}
    * @returns {!number} Field type
    */
-  get FBEType () {
-    return FinalModelBalance.FBEType
+  get fbeType () {
+    return FinalModelBalance.fbeType
   }
 
   /**
@@ -2461,7 +2461,7 @@ class FinalModelBalance extends fbe.FinalModel {
    * @this {!FinalModelBalance}
    * @returns {!number} Field type
    */
-  static get FBEType () {
+  static get fbeType () {
     return 2
   }
 
@@ -2605,8 +2605,8 @@ class BalanceFinalModel extends fbe.Model {
    * @this {!BalanceFinalModel}
    * @returns {!number} Model type
    */
-  get FBEType () {
-    return BalanceFinalModel.FBEType
+  get fbeType () {
+    return BalanceFinalModel.fbeType
   }
 
   /**
@@ -2614,8 +2614,8 @@ class BalanceFinalModel extends fbe.Model {
    * @this {!BalanceFinalModel}
    * @returns {!number} Model type
    */
-  static get FBEType () {
-    return FinalModelBalance.FBEType
+  static get fbeType () {
+    return FinalModelBalance.fbeType
   }
 
   /**
@@ -2630,7 +2630,7 @@ class BalanceFinalModel extends fbe.Model {
 
     let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
     let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
-    if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
+    if ((fbeStructSize <= 0) || (fbeStructType !== this.fbeType)) {
       return false
     }
 
@@ -2646,7 +2646,7 @@ class BalanceFinalModel extends fbe.Model {
   serialize (value) {
     let fbeInitialSize = this.buffer.size
 
-    let fbeStructType = this.FBEType
+    let fbeStructType = this.fbeType
     let fbeStructSize = 8 + this._model.fbeAllocationSize(value)
     let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset
     console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')
@@ -2677,8 +2677,8 @@ class BalanceFinalModel extends fbe.Model {
 
     let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
     let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
-    console.assert(((fbeStructSize > 0) && (fbeStructType === this.FBEType)), 'Model is broken!')
-    if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
+    console.assert(((fbeStructSize > 0) && (fbeStructType === this.fbeType)), 'Model is broken!')
+    if ((fbeStructSize <= 0) || (fbeStructType !== this.fbeType)) {
       return { value: new Balance(), size: 8 }
     }
 
@@ -2982,7 +2982,7 @@ class FieldModelAccount extends fbe.FieldModel {
    * @this {!FieldModelAccount}
    * @returns {!number} Field body size
    */
-  get FBEBody () {
+  get fbeBody () {
     return 4 + 4 + this.uid.fbeSize + this.name.fbeSize + this.state.fbeSize + this.wallet.fbeSize + this.asset.fbeSize + this.orders.fbeSize
   }
 
@@ -3003,7 +3003,7 @@ class FieldModelAccount extends fbe.FieldModel {
 
     this._buffer.shift(fbeStructOffset)
 
-    let fbeResult = this.FBEBody + this.uid.fbeExtra + this.name.fbeExtra + this.state.fbeExtra + this.wallet.fbeExtra + this.asset.fbeExtra + this.orders.fbeExtra
+    let fbeResult = this.fbeBody + this.uid.fbeExtra + this.name.fbeExtra + this.state.fbeExtra + this.wallet.fbeExtra + this.asset.fbeExtra + this.orders.fbeExtra
 
     this._buffer.unshift(fbeStructOffset)
 
@@ -3015,8 +3015,8 @@ class FieldModelAccount extends fbe.FieldModel {
    * @this {!FieldModelAccount}
    * @returns {!number} Field type
    */
-  get FBEType () {
-    return FieldModelAccount.FBEType
+  get fbeType () {
+    return FieldModelAccount.fbeType
   }
 
   /**
@@ -3024,7 +3024,7 @@ class FieldModelAccount extends fbe.FieldModel {
    * @this {!FieldModelAccount}
    * @returns {!number} Field type
    */
-  static get FBEType () {
+  static get fbeType () {
     return 3
   }
 
@@ -3045,12 +3045,12 @@ class FieldModelAccount extends fbe.FieldModel {
     }
 
     let fbeStructSize = this.readUInt32(fbeStructOffset)
-    if (fbeStructSize < 4 + 4) {
+    if (fbeStructSize < (4 + 4)) {
       return false
     }
 
     let fbeStructType = this.readUInt32(fbeStructOffset + 4)
-    if (fbeVerifyType && (fbeStructType !== this.FBEType)) {
+    if (fbeVerifyType && (fbeStructType !== this.fbeType)) {
       return false
     }
 
@@ -3143,8 +3143,8 @@ class FieldModelAccount extends fbe.FieldModel {
     }
 
     let fbeStructSize = this.readUInt32(fbeStructOffset)
-    console.assert((fbeStructSize >= 4 + 4), 'Model is broken!')
-    if (fbeStructSize < 4 + 4) {
+    console.assert((fbeStructSize >= (4 + 4)), 'Model is broken!')
+    if (fbeStructSize < (4 + 4)) {
       return 0
     }
 
@@ -3248,7 +3248,7 @@ class FieldModelAccount extends fbe.FieldModel {
       return 0
     }
 
-    let fbeStructSize = this.FBEBody
+    let fbeStructSize = this.fbeBody
     let fbeStructOffset = this._buffer.allocate(fbeStructSize) - this._buffer.offset
     console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + fbeStructSize) <= this._buffer.size), 'Model is broken!')
     if ((fbeStructOffset <= 0) || ((this._buffer.offset + fbeStructOffset + fbeStructSize) > this._buffer.size)) {
@@ -3257,7 +3257,7 @@ class FieldModelAccount extends fbe.FieldModel {
 
     this.writeUInt32(this.fbeOffset, fbeStructOffset)
     this.writeUInt32(fbeStructOffset, fbeStructSize)
-    this.writeUInt32(fbeStructOffset + 4, this.FBEType)
+    this.writeUInt32(fbeStructOffset + 4, this.fbeType)
 
     this._buffer.shift(fbeStructOffset)
     return fbeStructOffset
@@ -3341,8 +3341,8 @@ class AccountModel extends fbe.Model {
    * @this {!AccountModel}
    * @returns {!number} Model type
    */
-  get FBEType () {
-    return AccountModel.FBEType
+  get fbeType () {
+    return AccountModel.fbeType
   }
 
   /**
@@ -3350,8 +3350,8 @@ class AccountModel extends fbe.Model {
    * @this {!AccountModel}
    * @returns {!number} Model type
    */
-  static get FBEType () {
-    return FieldModelAccount.FBEType
+  static get fbeType () {
+    return FieldModelAccount.fbeType
   }
 
   /**
@@ -3527,8 +3527,8 @@ class FinalModelAccount extends fbe.FinalModel {
    * @this {!FinalModelAccount}
    * @returns {!number} Field type
    */
-  get FBEType () {
-    return FinalModelAccount.FBEType
+  get fbeType () {
+    return FinalModelAccount.fbeType
   }
 
   /**
@@ -3536,7 +3536,7 @@ class FinalModelAccount extends fbe.FinalModel {
    * @this {!FinalModelAccount}
    * @returns {!number} Field type
    */
-  static get FBEType () {
+  static get fbeType () {
     return 3
   }
 
@@ -3759,8 +3759,8 @@ class AccountFinalModel extends fbe.Model {
    * @this {!AccountFinalModel}
    * @returns {!number} Model type
    */
-  get FBEType () {
-    return AccountFinalModel.FBEType
+  get fbeType () {
+    return AccountFinalModel.fbeType
   }
 
   /**
@@ -3768,8 +3768,8 @@ class AccountFinalModel extends fbe.Model {
    * @this {!AccountFinalModel}
    * @returns {!number} Model type
    */
-  static get FBEType () {
-    return FinalModelAccount.FBEType
+  static get fbeType () {
+    return FinalModelAccount.fbeType
   }
 
   /**
@@ -3784,7 +3784,7 @@ class AccountFinalModel extends fbe.Model {
 
     let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
     let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
-    if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
+    if ((fbeStructSize <= 0) || (fbeStructType !== this.fbeType)) {
       return false
     }
 
@@ -3800,7 +3800,7 @@ class AccountFinalModel extends fbe.Model {
   serialize (value) {
     let fbeInitialSize = this.buffer.size
 
-    let fbeStructType = this.FBEType
+    let fbeStructType = this.fbeType
     let fbeStructSize = 8 + this._model.fbeAllocationSize(value)
     let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset
     console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')
@@ -3831,8 +3831,8 @@ class AccountFinalModel extends fbe.Model {
 
     let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
     let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
-    console.assert(((fbeStructSize > 0) && (fbeStructType === this.FBEType)), 'Model is broken!')
-    if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
+    console.assert(((fbeStructSize > 0) && (fbeStructType === this.fbeType)), 'Model is broken!')
+    if ((fbeStructSize <= 0) || (fbeStructType !== this.fbeType)) {
       return { value: new Account(), size: 8 }
     }
 
@@ -4050,7 +4050,7 @@ class Receiver extends fbe.Receiver {
    */
   onReceive (type, buffer, offset, size) {
     switch (type) {
-      case OrderModel.FBEType: {
+      case OrderModel.fbeType: {
         // Deserialize the value from the FBE stream
         this._orderModel.attachBuffer(buffer, offset)
         console.assert(this._orderModel.verify(), 'proto.Order validation failed!')
@@ -4066,7 +4066,7 @@ class Receiver extends fbe.Receiver {
         this.onReceive_order(this._orderValue)
         return true
       }
-      case BalanceModel.FBEType: {
+      case BalanceModel.fbeType: {
         // Deserialize the value from the FBE stream
         this._balanceModel.attachBuffer(buffer, offset)
         console.assert(this._balanceModel.verify(), 'proto.Balance validation failed!')
@@ -4082,7 +4082,7 @@ class Receiver extends fbe.Receiver {
         this.onReceive_balance(this._balanceValue)
         return true
       }
-      case AccountModel.FBEType: {
+      case AccountModel.fbeType: {
         // Deserialize the value from the FBE stream
         this._accountModel.attachBuffer(buffer, offset)
         console.assert(this._accountModel.verify(), 'proto.Account validation failed!')
@@ -4303,7 +4303,7 @@ class FinalReceiver extends fbe.Receiver {
    */
   onReceive (type, buffer, offset, size) {
     switch (type) {
-      case OrderFinalModel.FBEType: {
+      case OrderFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
         this._orderModel.attachBuffer(buffer, offset)
         console.assert(this._orderModel.verify(), 'proto.Order validation failed!')
@@ -4319,7 +4319,7 @@ class FinalReceiver extends fbe.Receiver {
         this.onReceive_order(this._orderValue)
         return true
       }
-      case BalanceFinalModel.FBEType: {
+      case BalanceFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
         this._balanceModel.attachBuffer(buffer, offset)
         console.assert(this._balanceModel.verify(), 'proto.Balance validation failed!')
@@ -4335,7 +4335,7 @@ class FinalReceiver extends fbe.Receiver {
         this.onReceive_balance(this._balanceValue)
         return true
       }
-      case AccountFinalModel.FBEType: {
+      case AccountFinalModel.fbeType: {
         // Deserialize the value from the FBE stream
         this._accountModel.attachBuffer(buffer, offset)
         console.assert(this._accountModel.verify(), 'proto.Account validation failed!')

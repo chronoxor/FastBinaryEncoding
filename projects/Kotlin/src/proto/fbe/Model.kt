@@ -43,6 +43,6 @@ open class Model
     fun unshift(offset: Long) { buffer.unshift(offset) }
 
     // Buffer I/O methods
-    protected fun readInt32(offset: Long): Int { return Buffer.readInt32(buffer.data, buffer.offset + offset) }
-    protected fun write(offset: Long, value: Int) { Buffer.write(buffer.data, buffer.offset + offset, value) }
+    protected fun readUInt32(offset: Long): UInt { return Buffer.readUInt32(buffer.data, buffer.offset + offset) }
+    protected fun write(offset: Long, value: UInt) { Buffer.write(buffer.data, buffer.offset + offset, value) }
 }

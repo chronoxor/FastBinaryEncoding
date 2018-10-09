@@ -3838,7 +3838,7 @@ void GeneratorPython::GenerateStructFieldModel(const std::shared_ptr<StructType>
     Indent(-1);
     WriteLine();
     WriteLineIndent("fbe_struct_size = self.read_uint32(fbe_struct_offset)");
-    WriteLineIndent("if fbe_struct_size < 4 + 4:");
+    WriteLineIndent("if fbe_struct_size < (4 + 4):");
     Indent(1);
     WriteLineIndent("return False");
     Indent(-1);
@@ -3912,8 +3912,8 @@ void GeneratorPython::GenerateStructFieldModel(const std::shared_ptr<StructType>
     Indent(-1);
     WriteLine();
     WriteLineIndent("fbe_struct_size = self.read_uint32(fbe_struct_offset)");
-    WriteLineIndent("assert (fbe_struct_size >= 4 + 4), \"Model is broken!\"");
-    WriteLineIndent("if fbe_struct_size < 4 + 4:");
+    WriteLineIndent("assert (fbe_struct_size >= (4 + 4)), \"Model is broken!\"");
+    WriteLineIndent("if fbe_struct_size < (4 + 4):");
     Indent(1);
     WriteLineIndent("return 0");
     Indent(-1);

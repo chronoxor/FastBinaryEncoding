@@ -89,7 +89,7 @@ public final class FieldModelStructOptional extends FieldModel
     {
         super(buffer, offset);
         parent = new FieldModelStructSimple(buffer, 4 + 4);
-        f100 = new FieldModelOptionalBoolean(buffer, parent.fbeOffset() + parent.FBEBody() - 4 - 4);
+        f100 = new FieldModelOptionalBoolean(buffer, parent.fbeOffset() + parent.fbeBody() - 4 - 4);
         f101 = new FieldModelOptionalBoolean(buffer, f100.fbeOffset() + f100.fbeSize());
         f102 = new FieldModelOptionalBoolean(buffer, f101.fbeOffset() + f101.fbeSize());
         f103 = new FieldModelOptionalByte(buffer, f102.fbeOffset() + f102.fbeSize());
@@ -161,10 +161,10 @@ public final class FieldModelStructOptional extends FieldModel
     @Override
     public long fbeSize() { return 4; }
     // Get the field body size
-    public long FBEBody()
+    public long fbeBody()
     {
         long fbeResult = 4 + 4
-            + parent.FBEBody() - 4 - 4
+            + parent.fbeBody() - 4 - 4
             + f100.fbeSize()
             + f101.fbeSize()
             + f102.fbeSize()
@@ -247,7 +247,7 @@ public final class FieldModelStructOptional extends FieldModel
 
         _buffer.shift(fbeStructOffset);
 
-        long fbeResult = FBEBody()
+        long fbeResult = fbeBody()
             + parent.fbeExtra()
             + f100.fbeExtra()
             + f101.fbeExtra()
@@ -322,8 +322,8 @@ public final class FieldModelStructOptional extends FieldModel
         return fbeResult;
     }
     // Get the field type
-    public static final long FBETypeConst = 111;
-    public long FBEType() { return FBETypeConst; }
+    public static final long fbeTypeConst = 111;
+    public long fbeType() { return fbeTypeConst; }
 
     // Check if the struct value is valid
     @Override
@@ -338,11 +338,11 @@ public final class FieldModelStructOptional extends FieldModel
             return false;
 
         int fbeStructSize = readInt32(fbeStructOffset);
-        if (fbeStructSize < 4 + 4)
+        if (fbeStructSize < (4 + 4))
             return false;
 
         int fbeStructType = readInt32(fbeStructOffset + 4);
-        if (fbeVerifyType && (fbeStructType != FBEType()))
+        if (fbeVerifyType && (fbeStructType != fbeType()))
             return false;
 
         _buffer.shift(fbeStructOffset);
@@ -356,11 +356,11 @@ public final class FieldModelStructOptional extends FieldModel
     {
         long fbeCurrentSize = 4 + 4;
 
-        if ((fbeCurrentSize + parent.FBEBody() - 4 - 4) > fbeStructSize)
+        if ((fbeCurrentSize + parent.fbeBody() - 4 - 4) > fbeStructSize)
             return true;
         if (!parent.verifyFields(fbeStructSize))
             return false;
-        fbeCurrentSize += parent.FBEBody() - 4 - 4;
+        fbeCurrentSize += parent.fbeBody() - 4 - 4;
 
         if ((fbeCurrentSize + f100.fbeSize()) > fbeStructSize)
             return true;
@@ -773,8 +773,8 @@ public final class FieldModelStructOptional extends FieldModel
             return 0;
 
         int fbeStructSize = readInt32(fbeStructOffset);
-        assert (fbeStructSize >= 4 + 4) : "Model is broken!";
-        if (fbeStructSize < 4 + 4)
+        assert (fbeStructSize >= (4 + 4)) : "Model is broken!";
+        if (fbeStructSize < (4 + 4))
             return 0;
 
         _buffer.shift(fbeStructOffset);
@@ -806,9 +806,9 @@ public final class FieldModelStructOptional extends FieldModel
     {
         long fbeCurrentSize = 4 + 4;
 
-        if ((fbeCurrentSize + parent.FBEBody() - 4 - 4) <= fbeStructSize)
+        if ((fbeCurrentSize + parent.fbeBody() - 4 - 4) <= fbeStructSize)
             parent.getFields(fbeValue, fbeStructSize);
-        fbeCurrentSize += parent.FBEBody() - 4 - 4;
+        fbeCurrentSize += parent.fbeBody() - 4 - 4;
 
         if ((fbeCurrentSize + f100.fbeSize()) <= fbeStructSize)
             fbeValue.f100 = f100.get();
@@ -1214,7 +1214,7 @@ public final class FieldModelStructOptional extends FieldModel
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeStructSize = (int)FBEBody();
+        int fbeStructSize = (int)fbeBody();
         int fbeStructOffset = (int)(_buffer.allocate(fbeStructSize) - _buffer.getOffset());
         assert ((fbeStructOffset > 0) && ((_buffer.getOffset() + fbeStructOffset + fbeStructSize) <= _buffer.getSize())) : "Model is broken!";
         if ((fbeStructOffset <= 0) || ((_buffer.getOffset() + fbeStructOffset + fbeStructSize) > _buffer.getSize()))
@@ -1222,7 +1222,7 @@ public final class FieldModelStructOptional extends FieldModel
 
         write(fbeOffset(), fbeStructOffset);
         write(fbeStructOffset, fbeStructSize);
-        write(fbeStructOffset + 4, (int)FBEType());
+        write(fbeStructOffset + 4, (int)fbeType());
 
         _buffer.shift(fbeStructOffset);
         return fbeStructOffset;

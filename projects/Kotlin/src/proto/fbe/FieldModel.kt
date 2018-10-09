@@ -14,6 +14,7 @@ import java.time.*
 import java.util.*
 
 // Fast Binary Encoding base field model class
+@Suppress("MemberVisibilityCanBePrivate")
 abstract class FieldModel protected constructor(protected var _buffer: Buffer, protected var _offset: Long)
 {
     // Field offset

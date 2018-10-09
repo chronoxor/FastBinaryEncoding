@@ -26,7 +26,7 @@ class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     // Check if the value is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return Long.MAX_VALUE
 
         return fbeSize
@@ -35,7 +35,7 @@ class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     // Get the value
     fun get(size: Size): Instant
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return Instant.EPOCH
 
         size.value = fbeSize
@@ -46,12 +46,12 @@ class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     // Set the value
     fun set(value: Instant): Long
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
         val nanoseconds = value.epochSecond * 1000000000 + value.nano
-        write(fbeOffset, nanoseconds)
+        write(fbeOffset, nanoseconds.toULong())
         return fbeSize
     }
 }

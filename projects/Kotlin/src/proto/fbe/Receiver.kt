@@ -14,6 +14,7 @@ import java.time.*
 import java.util.*
 
 // Fast Binary Encoding base receiver class
+@Suppress("MemberVisibilityCanBePrivate")
 abstract class Receiver
 {
     // Get the bytes buffer
@@ -32,8 +33,8 @@ abstract class Receiver
     fun receive(buffer: Buffer) { receive(buffer.data, 0, buffer.size) }
     fun receive(buffer: ByteArray, offset: Long = 0, size: Long = buffer.size.toLong())
     {
-        assert(offset + size <= buffer.size) { "Invalid offset & size!" }
-        if (offset + size > buffer.size)
+        assert((offset + size) <= buffer.size) { "Invalid offset & size!" }
+        if ((offset + size) > buffer.size)
             throw IllegalArgumentException("Invalid offset & size!")
 
         if (size == 0L)
@@ -67,7 +68,7 @@ abstract class Receiver
                     {
                         messageSizeCopied = true
                         messageSizeFound = true
-                        messageSize = Buffer.readInt32(this.buffer.data, offset0).toLong()
+                        messageSize = Buffer.readUInt32(this.buffer.data, offset0).toLong()
                         offset0 += 4
                         break
                     }
@@ -99,7 +100,7 @@ abstract class Receiver
                     if (count == 4L)
                     {
                         messageSizeFound = true
-                        messageSize = Buffer.readInt32(buffer, offset + offset2).toLong()
+                        messageSize = Buffer.readUInt32(buffer, offset + offset2).toLong()
                         offset2 += 4
                         break
                     }
@@ -123,8 +124,8 @@ abstract class Receiver
                 return
 
             // Check the message full size
-            assert(messageSize >= 4 + 4 + 4 + 4) { "Invalid receive data!" }
-            if (messageSize < 4 + 4 + 4 + 4)
+            assert(messageSize >= (4 + 4 + 4 + 4)) { "Invalid receive data!" }
+            if (messageSize < (4 + 4 + 4 + 4))
                 return
 
             // Try to receive message body
@@ -135,7 +136,7 @@ abstract class Receiver
                 if (offset0 < size1)
                 {
                     var count = Math.min(size1 - offset0, messageSize - 4)
-                    if (count == messageSize - 4)
+                    if (count == (messageSize - 4))
                     {
                         messageFound = true
                         messageBuffer = this.buffer.data
@@ -155,7 +156,7 @@ abstract class Receiver
                                 this.buffer.allocate(4)
                                 size1 += 4
 
-                                Buffer.write(this.buffer.data, offset0, messageSize.toInt())
+                                Buffer.write(this.buffer.data, offset0, messageSize.toUInt())
                                 offset0 += 4
                                 offset1 += 4
 
@@ -182,7 +183,7 @@ abstract class Receiver
                 if (offset2 < size)
                 {
                     val count = Math.min(size - offset2, messageSize - 4)
-                    if (!messageSizeCopied && count == messageSize - 4)
+                    if (!messageSizeCopied && (count == (messageSize - 4)))
                     {
                         messageFound = true
                         messageBuffer = buffer
@@ -199,7 +200,7 @@ abstract class Receiver
                             this.buffer.allocate(4)
                             size1 += 4
 
-                            Buffer.write(this.buffer.data, offset0, messageSize.toInt())
+                            Buffer.write(this.buffer.data, offset0, messageSize.toUInt())
                             offset0 += 4
                             offset1 += 4
 
@@ -229,7 +230,7 @@ abstract class Receiver
                     this.buffer.allocate(4)
                     size1 += 4
 
-                    Buffer.write(this.buffer.data, offset0, messageSize.toInt())
+                    Buffer.write(this.buffer.data, offset0, messageSize.toUInt())
                     offset0 += 4
                     offset1 += 4
 
@@ -242,26 +243,26 @@ abstract class Receiver
             if (messageBuffer != null)
             {
                 @Suppress("ASSIGNED_BUT_NEVER_ACCESSED_VARIABLE")
-                val fbeStructSize: Int
-                val fbeStructType: Int
+                val fbeStructSize: Long
+                val fbeStructType: Long
 
                 // Read the message parameters
                 if (final)
                 {
                     @Suppress("UNUSED_VALUE")
-                    fbeStructSize = Buffer.readInt32(messageBuffer, messageOffset)
-                    fbeStructType = Buffer.readInt32(messageBuffer, messageOffset + 4)
+                    fbeStructSize = Buffer.readUInt32(messageBuffer, messageOffset).toLong()
+                    fbeStructType = Buffer.readUInt32(messageBuffer, messageOffset + 4).toLong()
                 }
                 else
                 {
-                    val fbeStructOffset = Buffer.readInt32(messageBuffer, messageOffset + 4)
+                    val fbeStructOffset = Buffer.readUInt32(messageBuffer, messageOffset + 4).toLong()
                     @Suppress("UNUSED_VALUE")
-                    fbeStructSize = Buffer.readInt32(messageBuffer, messageOffset + fbeStructOffset)
-                    fbeStructType = Buffer.readInt32(messageBuffer, messageOffset + fbeStructOffset.toLong() + 4)
+                    fbeStructSize = Buffer.readUInt32(messageBuffer, messageOffset + fbeStructOffset).toLong()
+                    fbeStructType = Buffer.readUInt32(messageBuffer, messageOffset + fbeStructOffset + 4).toLong()
                 }
 
                 // Handle the message
-                onReceive(fbeStructType.toLong(), messageBuffer, messageOffset, messageSize)
+                onReceive(fbeStructType, messageBuffer, messageOffset, messageSize)
             }
 
             // Reset the storage buffer

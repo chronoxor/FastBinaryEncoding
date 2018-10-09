@@ -71,8 +71,8 @@ public final class FinalModelStructNested extends FinalModel
     }
 
     // Get the field type
-    public static final long FBETypeConst = 112;
-    public long FBEType() { return FBETypeConst; }
+    public static final long fbeTypeConst = 112;
+    public long fbeType() { return fbeTypeConst; }
 
     // Check if the struct value is valid
     @Override

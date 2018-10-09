@@ -533,7 +533,7 @@ public:
             return false;
 
         uint32_t fbe_struct_size = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset));
-        if (fbe_struct_size < 4 + 4)
+        if (fbe_struct_size < (4 + 4))
             return false;
 
         uint32_t fbe_struct_type = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset + 4));
@@ -602,8 +602,8 @@ public:
             return 0;
 
         uint32_t fbe_struct_size = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset));
-        assert((fbe_struct_size >= 4 + 4) && "Model is broken!");
-        if (fbe_struct_size < 4 + 4)
+        assert((fbe_struct_size >= (4 + 4)) && "Model is broken!");
+        if (fbe_struct_size < (4 + 4))
             return 0;
 
         _buffer.shift(fbe_struct_offset);
@@ -1304,7 +1304,7 @@ public:
             return false;
 
         uint32_t fbe_struct_size = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset));
-        if (fbe_struct_size < 4 + 4)
+        if (fbe_struct_size < (4 + 4))
             return false;
 
         uint32_t fbe_struct_type = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset + 4));
@@ -1349,8 +1349,8 @@ public:
             return 0;
 
         uint32_t fbe_struct_size = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset));
-        assert((fbe_struct_size >= 4 + 4) && "Model is broken!");
-        if (fbe_struct_size < 4 + 4)
+        assert((fbe_struct_size >= (4 + 4)) && "Model is broken!");
+        if (fbe_struct_size < (4 + 4))
             return 0;
 
         _buffer.shift(fbe_struct_offset);
@@ -2000,7 +2000,7 @@ public:
             return false;
 
         uint32_t fbe_struct_size = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset));
-        if (fbe_struct_size < 4 + 4)
+        if (fbe_struct_size < (4 + 4))
             return false;
 
         uint32_t fbe_struct_type = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset + 4));
@@ -2069,8 +2069,8 @@ public:
             return 0;
 
         uint32_t fbe_struct_size = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset));
-        assert((fbe_struct_size >= 4 + 4) && "Model is broken!");
-        if (fbe_struct_size < 4 + 4)
+        assert((fbe_struct_size >= (4 + 4)) && "Model is broken!");
+        if (fbe_struct_size < (4 + 4))
             return 0;
 
         _buffer.shift(fbe_struct_offset);

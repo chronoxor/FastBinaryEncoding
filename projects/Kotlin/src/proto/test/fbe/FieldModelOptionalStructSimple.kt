@@ -20,7 +20,7 @@ import test.*
 class FieldModelOptionalStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size
-    override val fbeSize: Long = (1 + 4).toLong()
+    override val fbeSize: Long = 1 + 4
 
     // Field extra size
     override val fbeExtra: Long get()
@@ -28,24 +28,24 @@ class FieldModelOptionalStructSimple(buffer: Buffer, offset: Long) : FieldModel(
         if (!hasValue())
             return 0
 
-        val fbeOptionalOffset = readInt32(fbeOffset + 1)
-        if (fbeOptionalOffset == 0 || _buffer.offset + fbeOptionalOffset.toLong() + 4 > _buffer.size)
+        val fbeOptionalOffset = readUInt32(fbeOffset + 1).toLong()
+        if ((fbeOptionalOffset == 0L) || ((_buffer.offset + fbeOptionalOffset + 4) > _buffer.size))
             return 0
 
-        _buffer.shift(fbeOptionalOffset.toLong())
+        _buffer.shift(fbeOptionalOffset)
         val fbeResult = value.fbeSize + value.fbeExtra
-        _buffer.unshift(fbeOptionalOffset.toLong())
+        _buffer.unshift(fbeOptionalOffset)
         return fbeResult
     }
 
     // Checks whether the object contains a value
     fun hasValue(): Boolean
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return false
 
-        val fbeHasValue = readInt8(fbeOffset)
-        return fbeHasValue.toInt() != 0
+        val fbeHasValue = readInt8(fbeOffset).toInt()
+        return fbeHasValue != 0
     }
 
     // Base field model value
@@ -54,20 +54,20 @@ class FieldModelOptionalStructSimple(buffer: Buffer, offset: Long) : FieldModel(
     // Check if the optional value is valid
     override fun verify(): Boolean
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return true
 
-        val fbeHasValue = readInt8(fbeOffset)
-        if (fbeHasValue.toInt() == 0)
+        val fbeHasValue = readInt8(fbeOffset).toInt()
+        if (fbeHasValue == 0)
             return true
 
-        val fbeOptionalOffset = readInt32(fbeOffset)
-        if (fbeOptionalOffset == 0)
+        val fbeOptionalOffset = readUInt32(fbeOffset).toLong()
+        if (fbeOptionalOffset == 0L)
             return false
 
-        _buffer.shift(fbeOptionalOffset.toLong())
+        _buffer.shift(fbeOptionalOffset)
         val fbeResult = value.verify()
-        _buffer.unshift(fbeOptionalOffset.toLong())
+        _buffer.unshift(fbeOptionalOffset)
         return fbeResult
     }
 
@@ -77,13 +77,13 @@ class FieldModelOptionalStructSimple(buffer: Buffer, offset: Long) : FieldModel(
         if (!hasValue())
             return 0
 
-        val fbeOptionalOffset = readInt32(fbeOffset + 1)
+        val fbeOptionalOffset = readUInt32(fbeOffset + 1).toLong()
         assert(fbeOptionalOffset > 0) { "Model is broken!" }
         if (fbeOptionalOffset <= 0)
             return 0
 
-        _buffer.shift(fbeOptionalOffset.toLong())
-        return fbeOptionalOffset.toLong()
+        _buffer.shift(fbeOptionalOffset)
+        return fbeOptionalOffset
     }
 
     // Get the optional value (end phase)
@@ -109,25 +109,25 @@ class FieldModelOptionalStructSimple(buffer: Buffer, offset: Long) : FieldModel(
     // Set the optional value (begin phase)
     fun setBegin(hasValue: Boolean): Long
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
-        val fbeHasValue = (if (hasValue) 1 else 0).toByte()
-        write(fbeOffset, fbeHasValue)
-        if (fbeHasValue.toInt() == 0)
+        val fbeHasValue = if (hasValue) 1 else 0
+        write(fbeOffset, fbeHasValue.toByte())
+        if (fbeHasValue == 0)
             return 0
 
-        val fbeOptionalSize = value.fbeSize.toInt()
-        val fbeOptionalOffset = (_buffer.allocate(fbeOptionalSize.toLong()) - _buffer.offset).toInt()
-        assert(fbeOptionalOffset > 0 && _buffer.offset + fbeOptionalOffset.toLong() + fbeOptionalSize.toLong() <= _buffer.size) { "Model is broken!" }
-        if (fbeOptionalOffset <= 0 || _buffer.offset + fbeOptionalOffset.toLong() + fbeOptionalSize.toLong() > _buffer.size)
+        val fbeOptionalSize = value.fbeSize
+        val fbeOptionalOffset = _buffer.allocate(fbeOptionalSize) - _buffer.offset
+        assert((fbeOptionalOffset > 0) && ((_buffer.offset + fbeOptionalOffset + fbeOptionalSize) <= _buffer.size)) { "Model is broken!" }
+        if ((fbeOptionalOffset <= 0) || ((_buffer.offset + fbeOptionalOffset + fbeOptionalSize) > _buffer.size))
             return 0
 
-        write(fbeOffset + 1, fbeOptionalOffset)
+        write(fbeOffset + 1, fbeOptionalOffset.toUInt())
 
-        _buffer.shift(fbeOptionalOffset.toLong())
-        return fbeOptionalOffset.toLong()
+        _buffer.shift(fbeOptionalOffset)
+        return fbeOptionalOffset
     }
 
     // Set the optional value (end phase)

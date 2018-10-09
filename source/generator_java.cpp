@@ -5407,7 +5407,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     {
         WriteLineIndent("parent = new " + ConvertBaseFieldName(*s->base, false) + "(buffer, " + prev_offset + " + " + prev_size + ");");
         prev_offset = "parent.fbeOffset()";
-        prev_size = "parent.FBEBody() - 4 - 4";
+        prev_size = "parent.fbeBody() - 4 - 4";
     }
     if (s->body)
     {
@@ -5427,13 +5427,13 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     WriteLineIndent("@Override");
     WriteLineIndent("public long fbeSize() { return 4; }");
     WriteLineIndent("// Get the field body size");
-    WriteLineIndent("public long FBEBody()");
+    WriteLineIndent("public long fbeBody()");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("long fbeResult = 4 + 4");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("+ parent.FBEBody() - 4 - 4");
+        WriteLineIndent("+ parent.fbeBody() - 4 - 4");
     if (s->body)
         for (const auto& field : s->body->fields)
             WriteLineIndent("+ " + *field->name + ".fbeSize()");
@@ -5460,7 +5460,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     WriteLine();
     WriteLineIndent("_buffer.shift(fbeStructOffset);");
     WriteLine();
-    WriteLineIndent("long fbeResult = FBEBody()");
+    WriteLineIndent("long fbeResult = fbeBody()");
     Indent(1);
     if (s->base && !s->base->empty())
         WriteLineIndent("+ parent.fbeExtra()");
@@ -5477,10 +5477,10 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     WriteLineIndent("}");
     WriteLineIndent("// Get the field type");
     if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("public static final long FBETypeConst = " + ConvertBaseFieldName(*s->base, false) + ".FBETypeConst;");
+        WriteLineIndent("public static final long fbeTypeConst = " + ConvertBaseFieldName(*s->base, false) + ".fbeTypeConst;");
     else
-        WriteLineIndent("public static final long FBETypeConst = " + std::to_string(s->type) + ";");
-    WriteLineIndent("public long FBEType() { return FBETypeConst; }");
+        WriteLineIndent("public static final long fbeTypeConst = " + std::to_string(s->type) + ";");
+    WriteLineIndent("public long fbeType() { return fbeTypeConst; }");
 
     // Generate struct field model verify() methods
     WriteLine();
@@ -5502,13 +5502,13 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     Indent(-1);
     WriteLine();
     WriteLineIndent("int fbeStructSize = readInt32(fbeStructOffset);");
-    WriteLineIndent("if (fbeStructSize < 4 + 4)");
+    WriteLineIndent("if (fbeStructSize < (4 + 4))");
     Indent(1);
     WriteLineIndent("return false;");
     Indent(-1);
     WriteLine();
     WriteLineIndent("int fbeStructType = readInt32(fbeStructOffset + 4);");
-    WriteLineIndent("if (fbeVerifyType && (fbeStructType != FBEType()))");
+    WriteLineIndent("if (fbeVerifyType && (fbeStructType != fbeType()))");
     Indent(1);
     WriteLineIndent("return false;");
     Indent(-1);
@@ -5530,7 +5530,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("if ((fbeCurrentSize + parent.FBEBody() - 4 - 4) > fbeStructSize)");
+        WriteLineIndent("if ((fbeCurrentSize + parent.fbeBody() - 4 - 4) > fbeStructSize)");
         Indent(1);
         WriteLineIndent("return true;");
         Indent(-1);
@@ -5538,7 +5538,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
         Indent(1);
         WriteLineIndent("return false;");
         Indent(-1);
-        WriteLineIndent("fbeCurrentSize += parent.FBEBody() - 4 - 4;");
+        WriteLineIndent("fbeCurrentSize += parent.fbeBody() - 4 - 4;");
     }
     if (s->body)
     {
@@ -5580,8 +5580,8 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     Indent(-1);
     WriteLine();
     WriteLineIndent("int fbeStructSize = readInt32(fbeStructOffset);");
-    WriteLineIndent("assert (fbeStructSize >= 4 + 4) : \"Model is broken!\";");
-    WriteLineIndent("if (fbeStructSize < 4 + 4)");
+    WriteLineIndent("assert (fbeStructSize >= (4 + 4)) : \"Model is broken!\";");
+    WriteLineIndent("if (fbeStructSize < (4 + 4))");
     Indent(1);
     WriteLineIndent("return 0;");
     Indent(-1);
@@ -5631,11 +5631,11 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("if ((fbeCurrentSize + parent.FBEBody() - 4 - 4) <= fbeStructSize)");
+        WriteLineIndent("if ((fbeCurrentSize + parent.fbeBody() - 4 - 4) <= fbeStructSize)");
         Indent(1);
         WriteLineIndent("parent.getFields(fbeValue, fbeStructSize);");
         Indent(-1);
-        WriteLineIndent("fbeCurrentSize += parent.FBEBody() - 4 - 4;");
+        WriteLineIndent("fbeCurrentSize += parent.fbeBody() - 4 - 4;");
     }
     if (s->body)
     {
@@ -5674,7 +5674,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     WriteLineIndent("return 0;");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("int fbeStructSize = (int)FBEBody();");
+    WriteLineIndent("int fbeStructSize = (int)fbeBody();");
     WriteLineIndent("int fbeStructOffset = (int)(_buffer.allocate(fbeStructSize) - _buffer.getOffset());");
     WriteLineIndent("assert ((fbeStructOffset > 0) && ((_buffer.getOffset() + fbeStructOffset + fbeStructSize) <= _buffer.getSize())) : \"Model is broken!\";");
     WriteLineIndent("if ((fbeStructOffset <= 0) || ((_buffer.getOffset() + fbeStructOffset + fbeStructSize) > _buffer.getSize()))");
@@ -5684,7 +5684,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     WriteLine();
     WriteLineIndent("write(fbeOffset(), fbeStructOffset);");
     WriteLineIndent("write(fbeStructOffset, fbeStructSize);");
-    WriteLineIndent("write(fbeStructOffset + 4, (int)FBEType());");
+    WriteLineIndent("write(fbeStructOffset + 4, (int)fbeType());");
     WriteLine();
     WriteLineIndent("_buffer.shift(fbeStructOffset);");
     WriteLineIndent("return fbeStructOffset;");
@@ -5785,8 +5785,8 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
     WriteLineIndent("// Get the model size");
     WriteLineIndent("public long fbeSize() { return model.fbeSize() + model.fbeExtra(); }");
     WriteLineIndent("// Get the model type");
-    WriteLineIndent("public static final long FBETypeConst = FieldModel" + *s->name + ".FBETypeConst;");
-    WriteLineIndent("public long FBEType() { return FBETypeConst; }");
+    WriteLineIndent("public static final long fbeTypeConst = FieldModel" + *s->name + ".fbeTypeConst;");
+    WriteLineIndent("public long fbeType() { return fbeTypeConst; }");
 
     // Generate struct model verify() method
     WriteLine();
@@ -5968,10 +5968,10 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     WriteLine();
     WriteLineIndent("// Get the field type");
     if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("public static final long FBETypeConst = " + ConvertBaseFieldName(*s->base, true) + ".FBETypeConst;");
+        WriteLineIndent("public static final long fbeTypeConst = " + ConvertBaseFieldName(*s->base, true) + ".fbeTypeConst;");
     else
-        WriteLineIndent("public static final long FBETypeConst = " + std::to_string(s->type) + ";");
-    WriteLineIndent("public long FBEType() { return FBETypeConst; }");
+        WriteLineIndent("public static final long fbeTypeConst = " + std::to_string(s->type) + ";");
+    WriteLineIndent("public long fbeType() { return fbeTypeConst; }");
 
     // Generate struct final model verify() methods
     WriteLine();
@@ -6172,8 +6172,8 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
     // Generate struct model final FBE properties
     WriteLine();
     WriteLineIndent("// Get the model type");
-    WriteLineIndent("public static final long FBETypeConst = FinalModel" + *s->name + ".FBETypeConst;");
-    WriteLineIndent("public long FBEType() { return FBETypeConst; }");
+    WriteLineIndent("public static final long fbeTypeConst = FinalModel" + *s->name + ".fbeTypeConst;");
+    WriteLineIndent("public long fbeType() { return fbeTypeConst; }");
 
     // Generate struct model final verify() method
     WriteLine();
@@ -6188,7 +6188,7 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
     WriteLine();
     WriteLineIndent("int fbeStructSize = readInt32(_model.fbeOffset() - 8);");
     WriteLineIndent("int fbeStructType = readInt32(_model.fbeOffset() - 4);");
-    WriteLineIndent("if ((fbeStructSize <= 0) || (fbeStructType != FBEType()))");
+    WriteLineIndent("if ((fbeStructSize <= 0) || (fbeStructType != fbeType()))");
     Indent(1);
     WriteLineIndent("return false;");
     Indent(-1);
@@ -6205,7 +6205,7 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
     Indent(1);
     WriteLineIndent("long fbeInitialSize = getBuffer().getSize();");
     WriteLine();
-    WriteLineIndent("int fbeStructType = (int)FBEType();");
+    WriteLineIndent("int fbeStructType = (int)fbeType();");
     WriteLineIndent("int fbeStructSize = (int)(8 + _model.fbeAllocationSize(value));");
     WriteLineIndent("int fbeStructOffset = (int)(getBuffer().allocate(fbeStructSize) - getBuffer().getOffset());");
     WriteLineIndent("assert ((getBuffer().getOffset() + fbeStructOffset + fbeStructSize) <= getBuffer().getSize()) : \"Model is broken!\";");
@@ -6239,8 +6239,8 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
     WriteLine();
     WriteLineIndent("long fbeStructSize = readInt32(_model.fbeOffset() - 8);");
     WriteLineIndent("long fbeStructType = readInt32(_model.fbeOffset() - 4);");
-    WriteLineIndent("assert ((fbeStructSize > 0) && (fbeStructType == FBEType())) : \"Model is broken!\";");
-    WriteLineIndent("if ((fbeStructSize <= 0) || (fbeStructType != FBEType()))");
+    WriteLineIndent("assert ((fbeStructSize > 0) && (fbeStructType == fbeType())) : \"Model is broken!\";");
+    WriteLineIndent("if ((fbeStructSize <= 0) || (fbeStructType != fbeType()))");
     Indent(1);
     WriteLineIndent("return 8;");
     Indent(-1);
@@ -6540,7 +6540,7 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case (int)" + package + ".fbe." + *s->name + model + ".FBETypeConst:");
+            WriteLineIndent("case (int)" + package + ".fbe." + *s->name + model + ".fbeTypeConst:");
             WriteLineIndent("{");
             Indent(1);
             WriteLineIndent("// Deserialize the value from the FBE stream");

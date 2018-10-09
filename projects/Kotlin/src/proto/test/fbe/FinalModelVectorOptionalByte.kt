@@ -47,10 +47,10 @@ class FinalModelVectorOptionalByte(buffer: Buffer, offset: Long) : FinalModel(bu
     // Check if the vector is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return Long.MAX_VALUE
 
-        val fbeVectorSize = readInt32(fbeOffset).toLong()
+        val fbeVectorSize = readUInt32(fbeOffset).toLong()
 
         var size: Long = 4
         _model.fbeOffset = fbeOffset + 4
@@ -71,11 +71,11 @@ class FinalModelVectorOptionalByte(buffer: Buffer, offset: Long) : FinalModel(bu
     {
         values.clear()
 
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        val fbeVectorSize = readInt32(fbeOffset).toLong()
+        val fbeVectorSize = readUInt32(fbeOffset).toLong()
         if (fbeVectorSize == 0L)
             return 4
 
@@ -100,11 +100,11 @@ class FinalModelVectorOptionalByte(buffer: Buffer, offset: Long) : FinalModel(bu
     {
         values.clear()
 
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        val fbeVectorSize = readInt32(fbeOffset).toLong()
+        val fbeVectorSize = readUInt32(fbeOffset).toLong()
         if (fbeVectorSize == 0L)
             return 4
 
@@ -127,11 +127,11 @@ class FinalModelVectorOptionalByte(buffer: Buffer, offset: Long) : FinalModel(bu
     {
         values.clear()
 
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        val fbeVectorSize = readInt32(fbeOffset).toLong()
+        val fbeVectorSize = readUInt32(fbeOffset).toLong()
         if (fbeVectorSize == 0L)
             return 4
 
@@ -152,11 +152,11 @@ class FinalModelVectorOptionalByte(buffer: Buffer, offset: Long) : FinalModel(bu
     // Set the vector as ArrayList
     fun set(values: ArrayList<Byte?>): Long
     {
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        write(fbeOffset, values.size)
+        write(fbeOffset, values.size.toUInt())
 
         var size: Long = 4
         _model.fbeOffset = fbeOffset + 4
@@ -172,11 +172,11 @@ class FinalModelVectorOptionalByte(buffer: Buffer, offset: Long) : FinalModel(bu
     // Set the vector as LinkedList
     fun set(values: LinkedList<Byte?>): Long
     {
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        write(fbeOffset, values.size)
+        write(fbeOffset, values.size.toUInt())
 
         var size: Long = 4
         _model.fbeOffset = fbeOffset + 4
@@ -192,11 +192,11 @@ class FinalModelVectorOptionalByte(buffer: Buffer, offset: Long) : FinalModel(bu
     // Set the vector as HashSet
     fun set(values: HashSet<Byte?>): Long
     {
-        assert(_buffer.offset + fbeOffset + 4 <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + 4 > _buffer.size)
+        assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + 4) > _buffer.size)
             return 0
 
-        write(fbeOffset, values.size)
+        write(fbeOffset, values.size.toUInt())
 
         var size: Long = 4
         _model.fbeOffset = fbeOffset + 4

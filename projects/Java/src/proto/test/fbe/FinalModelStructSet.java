@@ -44,8 +44,8 @@ public final class FinalModelStructSet extends FinalModel
     }
 
     // Get the field type
-    public static final long FBETypeConst = 132;
-    public long FBEType() { return FBETypeConst; }
+    public static final long fbeTypeConst = 132;
+    public long fbeType() { return fbeTypeConst; }
 
     // Check if the struct value is valid
     @Override

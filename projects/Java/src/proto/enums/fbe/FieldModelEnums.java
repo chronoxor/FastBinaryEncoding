@@ -159,7 +159,7 @@ public final class FieldModelEnums extends FieldModel
     @Override
     public long fbeSize() { return 4; }
     // Get the field body size
-    public long FBEBody()
+    public long fbeBody()
     {
         long fbeResult = 4 + 4
             + byte0.fbeSize()
@@ -244,7 +244,7 @@ public final class FieldModelEnums extends FieldModel
 
         _buffer.shift(fbeStructOffset);
 
-        long fbeResult = FBEBody()
+        long fbeResult = fbeBody()
             + byte0.fbeExtra()
             + byte1.fbeExtra()
             + byte2.fbeExtra()
@@ -318,8 +318,8 @@ public final class FieldModelEnums extends FieldModel
         return fbeResult;
     }
     // Get the field type
-    public static final long FBETypeConst = 1;
-    public long FBEType() { return FBETypeConst; }
+    public static final long fbeTypeConst = 1;
+    public long fbeType() { return fbeTypeConst; }
 
     // Check if the struct value is valid
     @Override
@@ -334,11 +334,11 @@ public final class FieldModelEnums extends FieldModel
             return false;
 
         int fbeStructSize = readInt32(fbeStructOffset);
-        if (fbeStructSize < 4 + 4)
+        if (fbeStructSize < (4 + 4))
             return false;
 
         int fbeStructType = readInt32(fbeStructOffset + 4);
-        if (fbeVerifyType && (fbeStructType != FBEType()))
+        if (fbeVerifyType && (fbeStructType != fbeType()))
             return false;
 
         _buffer.shift(fbeStructOffset);
@@ -763,8 +763,8 @@ public final class FieldModelEnums extends FieldModel
             return 0;
 
         int fbeStructSize = readInt32(fbeStructOffset);
-        assert (fbeStructSize >= 4 + 4) : "Model is broken!";
-        if (fbeStructSize < 4 + 4)
+        assert (fbeStructSize >= (4 + 4)) : "Model is broken!";
+        if (fbeStructSize < (4 + 4))
             return 0;
 
         _buffer.shift(fbeStructOffset);
@@ -1200,7 +1200,7 @@ public final class FieldModelEnums extends FieldModel
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeStructSize = (int)FBEBody();
+        int fbeStructSize = (int)fbeBody();
         int fbeStructOffset = (int)(_buffer.allocate(fbeStructSize) - _buffer.getOffset());
         assert ((fbeStructOffset > 0) && ((_buffer.getOffset() + fbeStructOffset + fbeStructSize) <= _buffer.getSize())) : "Model is broken!";
         if ((fbeStructOffset <= 0) || ((_buffer.getOffset() + fbeStructOffset + fbeStructSize) > _buffer.getSize()))
@@ -1208,7 +1208,7 @@ public final class FieldModelEnums extends FieldModel
 
         write(fbeOffset(), fbeStructOffset);
         write(fbeStructOffset, fbeStructSize);
-        write(fbeStructOffset + 4, (int)FBEType());
+        write(fbeStructOffset + 4, (int)fbeType());
 
         _buffer.shift(fbeStructOffset);
         return fbeStructOffset;

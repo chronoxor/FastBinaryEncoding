@@ -14,6 +14,7 @@ import java.time.*
 import java.util.*
 
 // Fast Binary Encoding base sender class
+@Suppress("MemberVisibilityCanBePrivate")
 abstract class Sender
 {
     // Get the bytes buffer

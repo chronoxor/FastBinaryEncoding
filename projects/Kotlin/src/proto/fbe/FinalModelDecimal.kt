@@ -26,7 +26,7 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     // Check if the value is valid
     override fun verify(): Long
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return Long.MAX_VALUE
 
         return fbeSize
@@ -35,7 +35,7 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     // Get the value
     fun get(size: Size): BigDecimal
     {
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return BigDecimal.valueOf(0L)
 
         val magnitude = readBytes(fbeOffset, 12)
@@ -43,7 +43,7 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
         val signum = if (readByte(fbeOffset + 15) < 0) -1 else 1
 
         // Reverse magnitude
-        for (i in 0 until magnitude.size / 2)
+        for (i in 0 until (magnitude.size / 2))
         {
             val temp = magnitude[i]
             magnitude[i] = magnitude[magnitude.size - i - 1]
@@ -59,14 +59,14 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     // Set the value
     fun set(value: BigDecimal): Long
     {
-        assert(_buffer.offset + fbeOffset + fbeSize <= _buffer.size) { "Model is broken!" }
-        if (_buffer.offset + fbeOffset + fbeSize > _buffer.size)
+        assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
+        if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
             return 0
 
         // Get unscaled absolute value
         val unscaled = value.abs().unscaledValue()
         val bitLength = unscaled.bitLength()
-        if (bitLength < 0 || bitLength > 96)
+        if ((bitLength < 0) || (bitLength > 96))
         {
             // Value too big for .NET Decimal (bit length is limited to [0, 96])
             write(fbeOffset, 0.toByte(), fbeSize)
@@ -78,7 +78,7 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
 
         // Get scale
         val scale = value.scale()
-        if (scale < 0 || scale > 28)
+        if ((scale < 0) || (scale > 28))
         {
             // Value scale exceeds .NET Decimal limit of [0, 28]
             write(fbeOffset, 0.toByte(), fbeSize)
@@ -88,7 +88,7 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
         // Write unscaled value to bytes 0-11
         var index = 0
         var i = unscaledBytes.size - 1
-        while (i >= 0 && index < 12)
+        while ((i >= 0) && (index < 12))
         {
             write(fbeOffset + index, unscaledBytes[i])
             i--
