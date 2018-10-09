@@ -131,7 +131,7 @@ class FieldModelEnumByte extends fbe.FieldModel {
    * @this {!FieldModelEnumByte}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 1
   }
 
@@ -142,11 +142,11 @@ class FieldModelEnumByte extends fbe.FieldModel {
    * @returns {!EnumByte} Result value
    */
   get (defaults = new EnumByte()) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
-    return new EnumByte(this.readByte(this.FBEOffset))
+    return new EnumByte(this.readByte(this.fbeOffset))
   }
 
   /**
@@ -155,12 +155,12 @@ class FieldModelEnumByte extends fbe.FieldModel {
    * @param {!EnumByte} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
-    this.writeByte(this.FBEOffset, value.value)
+    this.writeByte(this.fbeOffset, value.value)
   }
 }
 exports.FieldModelEnumByte = FieldModelEnumByte
@@ -175,8 +175,8 @@ class FinalModelEnumByte extends fbe.FinalModel {
    * @param {!EnumByte} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -184,7 +184,7 @@ class FinalModelEnumByte extends fbe.FinalModel {
    * @this {!FieldModelEnumByte}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return 1
   }
 
@@ -194,11 +194,11 @@ class FinalModelEnumByte extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -207,11 +207,11 @@ class FinalModelEnumByte extends fbe.FinalModel {
    * @returns {!object} Result value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: new EnumByte(), size: 0 }
     }
 
-    return { value: new EnumByte(this.readByte(this.FBEOffset)), size: this.FBESize }
+    return { value: new EnumByte(this.readByte(this.fbeOffset)), size: this.fbeSize }
   }
 
   /**
@@ -221,13 +221,13 @@ class FinalModelEnumByte extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    this.writeByte(this.FBEOffset, value.value)
-    return this.FBESize
+    this.writeByte(this.fbeOffset, value.value)
+    return this.fbeSize
   }
 }
 
@@ -351,7 +351,7 @@ class FieldModelEnumChar extends fbe.FieldModel {
    * @this {!FieldModelEnumChar}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 1
   }
 
@@ -362,11 +362,11 @@ class FieldModelEnumChar extends fbe.FieldModel {
    * @returns {!EnumChar} Result value
    */
   get (defaults = new EnumChar()) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
-    return new EnumChar(this.readUInt8(this.FBEOffset))
+    return new EnumChar(this.readUInt8(this.fbeOffset))
   }
 
   /**
@@ -375,12 +375,12 @@ class FieldModelEnumChar extends fbe.FieldModel {
    * @param {!EnumChar} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
-    this.writeUInt8(this.FBEOffset, value.value)
+    this.writeUInt8(this.fbeOffset, value.value)
   }
 }
 exports.FieldModelEnumChar = FieldModelEnumChar
@@ -395,8 +395,8 @@ class FinalModelEnumChar extends fbe.FinalModel {
    * @param {!EnumChar} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -404,7 +404,7 @@ class FinalModelEnumChar extends fbe.FinalModel {
    * @this {!FieldModelEnumChar}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return 1
   }
 
@@ -414,11 +414,11 @@ class FinalModelEnumChar extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -427,11 +427,11 @@ class FinalModelEnumChar extends fbe.FinalModel {
    * @returns {!object} Result value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: new EnumChar(), size: 0 }
     }
 
-    return { value: new EnumChar(this.readUInt8(this.FBEOffset)), size: this.FBESize }
+    return { value: new EnumChar(this.readUInt8(this.fbeOffset)), size: this.fbeSize }
   }
 
   /**
@@ -441,13 +441,13 @@ class FinalModelEnumChar extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    this.writeUInt8(this.FBEOffset, value.value)
-    return this.FBESize
+    this.writeUInt8(this.fbeOffset, value.value)
+    return this.fbeSize
   }
 }
 
@@ -571,7 +571,7 @@ class FieldModelEnumWChar extends fbe.FieldModel {
    * @this {!FieldModelEnumWChar}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -582,11 +582,11 @@ class FieldModelEnumWChar extends fbe.FieldModel {
    * @returns {!EnumWChar} Result value
    */
   get (defaults = new EnumWChar()) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
-    return new EnumWChar(this.readUInt32(this.FBEOffset))
+    return new EnumWChar(this.readUInt32(this.fbeOffset))
   }
 
   /**
@@ -595,12 +595,12 @@ class FieldModelEnumWChar extends fbe.FieldModel {
    * @param {!EnumWChar} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
-    this.writeUInt32(this.FBEOffset, value.value)
+    this.writeUInt32(this.fbeOffset, value.value)
   }
 }
 exports.FieldModelEnumWChar = FieldModelEnumWChar
@@ -615,8 +615,8 @@ class FinalModelEnumWChar extends fbe.FinalModel {
    * @param {!EnumWChar} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -624,7 +624,7 @@ class FinalModelEnumWChar extends fbe.FinalModel {
    * @this {!FieldModelEnumWChar}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -634,11 +634,11 @@ class FinalModelEnumWChar extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -647,11 +647,11 @@ class FinalModelEnumWChar extends fbe.FinalModel {
    * @returns {!object} Result value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: new EnumWChar(), size: 0 }
     }
 
-    return { value: new EnumWChar(this.readUInt32(this.FBEOffset)), size: this.FBESize }
+    return { value: new EnumWChar(this.readUInt32(this.fbeOffset)), size: this.fbeSize }
   }
 
   /**
@@ -661,13 +661,13 @@ class FinalModelEnumWChar extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    this.writeUInt32(this.FBEOffset, value.value)
-    return this.FBESize
+    this.writeUInt32(this.fbeOffset, value.value)
+    return this.fbeSize
   }
 }
 
@@ -791,7 +791,7 @@ class FieldModelEnumInt8 extends fbe.FieldModel {
    * @this {!FieldModelEnumInt8}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 1
   }
 
@@ -802,11 +802,11 @@ class FieldModelEnumInt8 extends fbe.FieldModel {
    * @returns {!EnumInt8} Result value
    */
   get (defaults = new EnumInt8()) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
-    return new EnumInt8(this.readInt8(this.FBEOffset))
+    return new EnumInt8(this.readInt8(this.fbeOffset))
   }
 
   /**
@@ -815,12 +815,12 @@ class FieldModelEnumInt8 extends fbe.FieldModel {
    * @param {!EnumInt8} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
-    this.writeInt8(this.FBEOffset, value.value)
+    this.writeInt8(this.fbeOffset, value.value)
   }
 }
 exports.FieldModelEnumInt8 = FieldModelEnumInt8
@@ -835,8 +835,8 @@ class FinalModelEnumInt8 extends fbe.FinalModel {
    * @param {!EnumInt8} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -844,7 +844,7 @@ class FinalModelEnumInt8 extends fbe.FinalModel {
    * @this {!FieldModelEnumInt8}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return 1
   }
 
@@ -854,11 +854,11 @@ class FinalModelEnumInt8 extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -867,11 +867,11 @@ class FinalModelEnumInt8 extends fbe.FinalModel {
    * @returns {!object} Result value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: new EnumInt8(), size: 0 }
     }
 
-    return { value: new EnumInt8(this.readInt8(this.FBEOffset)), size: this.FBESize }
+    return { value: new EnumInt8(this.readInt8(this.fbeOffset)), size: this.fbeSize }
   }
 
   /**
@@ -881,13 +881,13 @@ class FinalModelEnumInt8 extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    this.writeInt8(this.FBEOffset, value.value)
-    return this.FBESize
+    this.writeInt8(this.fbeOffset, value.value)
+    return this.fbeSize
   }
 }
 
@@ -1011,7 +1011,7 @@ class FieldModelEnumUInt8 extends fbe.FieldModel {
    * @this {!FieldModelEnumUInt8}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 1
   }
 
@@ -1022,11 +1022,11 @@ class FieldModelEnumUInt8 extends fbe.FieldModel {
    * @returns {!EnumUInt8} Result value
    */
   get (defaults = new EnumUInt8()) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
-    return new EnumUInt8(this.readUInt8(this.FBEOffset))
+    return new EnumUInt8(this.readUInt8(this.fbeOffset))
   }
 
   /**
@@ -1035,12 +1035,12 @@ class FieldModelEnumUInt8 extends fbe.FieldModel {
    * @param {!EnumUInt8} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
-    this.writeUInt8(this.FBEOffset, value.value)
+    this.writeUInt8(this.fbeOffset, value.value)
   }
 }
 exports.FieldModelEnumUInt8 = FieldModelEnumUInt8
@@ -1055,8 +1055,8 @@ class FinalModelEnumUInt8 extends fbe.FinalModel {
    * @param {!EnumUInt8} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -1064,7 +1064,7 @@ class FinalModelEnumUInt8 extends fbe.FinalModel {
    * @this {!FieldModelEnumUInt8}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return 1
   }
 
@@ -1074,11 +1074,11 @@ class FinalModelEnumUInt8 extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -1087,11 +1087,11 @@ class FinalModelEnumUInt8 extends fbe.FinalModel {
    * @returns {!object} Result value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: new EnumUInt8(), size: 0 }
     }
 
-    return { value: new EnumUInt8(this.readUInt8(this.FBEOffset)), size: this.FBESize }
+    return { value: new EnumUInt8(this.readUInt8(this.fbeOffset)), size: this.fbeSize }
   }
 
   /**
@@ -1101,13 +1101,13 @@ class FinalModelEnumUInt8 extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    this.writeUInt8(this.FBEOffset, value.value)
-    return this.FBESize
+    this.writeUInt8(this.fbeOffset, value.value)
+    return this.fbeSize
   }
 }
 
@@ -1231,7 +1231,7 @@ class FieldModelEnumInt16 extends fbe.FieldModel {
    * @this {!FieldModelEnumInt16}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 2
   }
 
@@ -1242,11 +1242,11 @@ class FieldModelEnumInt16 extends fbe.FieldModel {
    * @returns {!EnumInt16} Result value
    */
   get (defaults = new EnumInt16()) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
-    return new EnumInt16(this.readInt16(this.FBEOffset))
+    return new EnumInt16(this.readInt16(this.fbeOffset))
   }
 
   /**
@@ -1255,12 +1255,12 @@ class FieldModelEnumInt16 extends fbe.FieldModel {
    * @param {!EnumInt16} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
-    this.writeInt16(this.FBEOffset, value.value)
+    this.writeInt16(this.fbeOffset, value.value)
   }
 }
 exports.FieldModelEnumInt16 = FieldModelEnumInt16
@@ -1275,8 +1275,8 @@ class FinalModelEnumInt16 extends fbe.FinalModel {
    * @param {!EnumInt16} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -1284,7 +1284,7 @@ class FinalModelEnumInt16 extends fbe.FinalModel {
    * @this {!FieldModelEnumInt16}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return 2
   }
 
@@ -1294,11 +1294,11 @@ class FinalModelEnumInt16 extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -1307,11 +1307,11 @@ class FinalModelEnumInt16 extends fbe.FinalModel {
    * @returns {!object} Result value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: new EnumInt16(), size: 0 }
     }
 
-    return { value: new EnumInt16(this.readInt16(this.FBEOffset)), size: this.FBESize }
+    return { value: new EnumInt16(this.readInt16(this.fbeOffset)), size: this.fbeSize }
   }
 
   /**
@@ -1321,13 +1321,13 @@ class FinalModelEnumInt16 extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    this.writeInt16(this.FBEOffset, value.value)
-    return this.FBESize
+    this.writeInt16(this.fbeOffset, value.value)
+    return this.fbeSize
   }
 }
 
@@ -1451,7 +1451,7 @@ class FieldModelEnumUInt16 extends fbe.FieldModel {
    * @this {!FieldModelEnumUInt16}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 2
   }
 
@@ -1462,11 +1462,11 @@ class FieldModelEnumUInt16 extends fbe.FieldModel {
    * @returns {!EnumUInt16} Result value
    */
   get (defaults = new EnumUInt16()) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
-    return new EnumUInt16(this.readUInt16(this.FBEOffset))
+    return new EnumUInt16(this.readUInt16(this.fbeOffset))
   }
 
   /**
@@ -1475,12 +1475,12 @@ class FieldModelEnumUInt16 extends fbe.FieldModel {
    * @param {!EnumUInt16} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
-    this.writeUInt16(this.FBEOffset, value.value)
+    this.writeUInt16(this.fbeOffset, value.value)
   }
 }
 exports.FieldModelEnumUInt16 = FieldModelEnumUInt16
@@ -1495,8 +1495,8 @@ class FinalModelEnumUInt16 extends fbe.FinalModel {
    * @param {!EnumUInt16} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -1504,7 +1504,7 @@ class FinalModelEnumUInt16 extends fbe.FinalModel {
    * @this {!FieldModelEnumUInt16}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return 2
   }
 
@@ -1514,11 +1514,11 @@ class FinalModelEnumUInt16 extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -1527,11 +1527,11 @@ class FinalModelEnumUInt16 extends fbe.FinalModel {
    * @returns {!object} Result value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: new EnumUInt16(), size: 0 }
     }
 
-    return { value: new EnumUInt16(this.readUInt16(this.FBEOffset)), size: this.FBESize }
+    return { value: new EnumUInt16(this.readUInt16(this.fbeOffset)), size: this.fbeSize }
   }
 
   /**
@@ -1541,13 +1541,13 @@ class FinalModelEnumUInt16 extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    this.writeUInt16(this.FBEOffset, value.value)
-    return this.FBESize
+    this.writeUInt16(this.fbeOffset, value.value)
+    return this.fbeSize
   }
 }
 
@@ -1671,7 +1671,7 @@ class FieldModelEnumInt32 extends fbe.FieldModel {
    * @this {!FieldModelEnumInt32}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -1682,11 +1682,11 @@ class FieldModelEnumInt32 extends fbe.FieldModel {
    * @returns {!EnumInt32} Result value
    */
   get (defaults = new EnumInt32()) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
-    return new EnumInt32(this.readInt32(this.FBEOffset))
+    return new EnumInt32(this.readInt32(this.fbeOffset))
   }
 
   /**
@@ -1695,12 +1695,12 @@ class FieldModelEnumInt32 extends fbe.FieldModel {
    * @param {!EnumInt32} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
-    this.writeInt32(this.FBEOffset, value.value)
+    this.writeInt32(this.fbeOffset, value.value)
   }
 }
 exports.FieldModelEnumInt32 = FieldModelEnumInt32
@@ -1715,8 +1715,8 @@ class FinalModelEnumInt32 extends fbe.FinalModel {
    * @param {!EnumInt32} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -1724,7 +1724,7 @@ class FinalModelEnumInt32 extends fbe.FinalModel {
    * @this {!FieldModelEnumInt32}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -1734,11 +1734,11 @@ class FinalModelEnumInt32 extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -1747,11 +1747,11 @@ class FinalModelEnumInt32 extends fbe.FinalModel {
    * @returns {!object} Result value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: new EnumInt32(), size: 0 }
     }
 
-    return { value: new EnumInt32(this.readInt32(this.FBEOffset)), size: this.FBESize }
+    return { value: new EnumInt32(this.readInt32(this.fbeOffset)), size: this.fbeSize }
   }
 
   /**
@@ -1761,13 +1761,13 @@ class FinalModelEnumInt32 extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    this.writeInt32(this.FBEOffset, value.value)
-    return this.FBESize
+    this.writeInt32(this.fbeOffset, value.value)
+    return this.fbeSize
   }
 }
 
@@ -1891,7 +1891,7 @@ class FieldModelEnumUInt32 extends fbe.FieldModel {
    * @this {!FieldModelEnumUInt32}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -1902,11 +1902,11 @@ class FieldModelEnumUInt32 extends fbe.FieldModel {
    * @returns {!EnumUInt32} Result value
    */
   get (defaults = new EnumUInt32()) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
-    return new EnumUInt32(this.readUInt32(this.FBEOffset))
+    return new EnumUInt32(this.readUInt32(this.fbeOffset))
   }
 
   /**
@@ -1915,12 +1915,12 @@ class FieldModelEnumUInt32 extends fbe.FieldModel {
    * @param {!EnumUInt32} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
-    this.writeUInt32(this.FBEOffset, value.value)
+    this.writeUInt32(this.fbeOffset, value.value)
   }
 }
 exports.FieldModelEnumUInt32 = FieldModelEnumUInt32
@@ -1935,8 +1935,8 @@ class FinalModelEnumUInt32 extends fbe.FinalModel {
    * @param {!EnumUInt32} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -1944,7 +1944,7 @@ class FinalModelEnumUInt32 extends fbe.FinalModel {
    * @this {!FieldModelEnumUInt32}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -1954,11 +1954,11 @@ class FinalModelEnumUInt32 extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -1967,11 +1967,11 @@ class FinalModelEnumUInt32 extends fbe.FinalModel {
    * @returns {!object} Result value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: new EnumUInt32(), size: 0 }
     }
 
-    return { value: new EnumUInt32(this.readUInt32(this.FBEOffset)), size: this.FBESize }
+    return { value: new EnumUInt32(this.readUInt32(this.fbeOffset)), size: this.fbeSize }
   }
 
   /**
@@ -1981,13 +1981,13 @@ class FinalModelEnumUInt32 extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    this.writeUInt32(this.FBEOffset, value.value)
-    return this.FBESize
+    this.writeUInt32(this.fbeOffset, value.value)
+    return this.fbeSize
   }
 }
 
@@ -2111,7 +2111,7 @@ class FieldModelEnumInt64 extends fbe.FieldModel {
    * @this {!FieldModelEnumInt64}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 8
   }
 
@@ -2122,11 +2122,11 @@ class FieldModelEnumInt64 extends fbe.FieldModel {
    * @returns {!EnumInt64} Result value
    */
   get (defaults = new EnumInt64()) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
-    return new EnumInt64(this.readInt64(this.FBEOffset).toNumber())
+    return new EnumInt64(this.readInt64(this.fbeOffset).toNumber())
   }
 
   /**
@@ -2135,12 +2135,12 @@ class FieldModelEnumInt64 extends fbe.FieldModel {
    * @param {!EnumInt64} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
-    this.writeInt64(this.FBEOffset, Int64.fromNumber(value.value))
+    this.writeInt64(this.fbeOffset, Int64.fromNumber(value.value))
   }
 }
 exports.FieldModelEnumInt64 = FieldModelEnumInt64
@@ -2155,8 +2155,8 @@ class FinalModelEnumInt64 extends fbe.FinalModel {
    * @param {!EnumInt64} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -2164,7 +2164,7 @@ class FinalModelEnumInt64 extends fbe.FinalModel {
    * @this {!FieldModelEnumInt64}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return 8
   }
 
@@ -2174,11 +2174,11 @@ class FinalModelEnumInt64 extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -2187,11 +2187,11 @@ class FinalModelEnumInt64 extends fbe.FinalModel {
    * @returns {!object} Result value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: new EnumInt64(), size: 0 }
     }
 
-    return { value: new EnumInt64(this.readInt64(this.FBEOffset).toNumber()), size: this.FBESize }
+    return { value: new EnumInt64(this.readInt64(this.fbeOffset).toNumber()), size: this.fbeSize }
   }
 
   /**
@@ -2201,13 +2201,13 @@ class FinalModelEnumInt64 extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    this.writeInt64(this.FBEOffset, Int64.fromNumber(value.value))
-    return this.FBESize
+    this.writeInt64(this.fbeOffset, Int64.fromNumber(value.value))
+    return this.fbeSize
   }
 }
 
@@ -2331,7 +2331,7 @@ class FieldModelEnumUInt64 extends fbe.FieldModel {
    * @this {!FieldModelEnumUInt64}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 8
   }
 
@@ -2342,11 +2342,11 @@ class FieldModelEnumUInt64 extends fbe.FieldModel {
    * @returns {!EnumUInt64} Result value
    */
   get (defaults = new EnumUInt64()) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
-    return new EnumUInt64(this.readUInt64(this.FBEOffset).toNumber())
+    return new EnumUInt64(this.readUInt64(this.fbeOffset).toNumber())
   }
 
   /**
@@ -2355,12 +2355,12 @@ class FieldModelEnumUInt64 extends fbe.FieldModel {
    * @param {!EnumUInt64} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
-    this.writeUInt64(this.FBEOffset, UInt64.fromNumber(value.value))
+    this.writeUInt64(this.fbeOffset, UInt64.fromNumber(value.value))
   }
 }
 exports.FieldModelEnumUInt64 = FieldModelEnumUInt64
@@ -2375,8 +2375,8 @@ class FinalModelEnumUInt64 extends fbe.FinalModel {
    * @param {!EnumUInt64} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -2384,7 +2384,7 @@ class FinalModelEnumUInt64 extends fbe.FinalModel {
    * @this {!FieldModelEnumUInt64}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return 8
   }
 
@@ -2394,11 +2394,11 @@ class FinalModelEnumUInt64 extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -2407,11 +2407,11 @@ class FinalModelEnumUInt64 extends fbe.FinalModel {
    * @returns {!object} Result value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: new EnumUInt64(), size: 0 }
     }
 
-    return { value: new EnumUInt64(this.readUInt64(this.FBEOffset).toNumber()), size: this.FBESize }
+    return { value: new EnumUInt64(this.readUInt64(this.fbeOffset).toNumber()), size: this.fbeSize }
   }
 
   /**
@@ -2421,13 +2421,13 @@ class FinalModelEnumUInt64 extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    this.writeUInt64(this.FBEOffset, UInt64.fromNumber(value.value))
-    return this.FBESize
+    this.writeUInt64(this.fbeOffset, UInt64.fromNumber(value.value))
+    return this.fbeSize
   }
 }
 
@@ -3208,71 +3208,71 @@ class FieldModelEnums extends fbe.FieldModel {
   constructor (buffer, offset) {
     super(buffer, offset)
     this._byte0 = new FieldModelEnumByte(buffer, 4 + 4)
-    this._byte1 = new FieldModelEnumByte(buffer, this._byte0.FBEOffset + this._byte0.FBESize)
-    this._byte2 = new FieldModelEnumByte(buffer, this._byte1.FBEOffset + this._byte1.FBESize)
-    this._byte3 = new FieldModelEnumByte(buffer, this._byte2.FBEOffset + this._byte2.FBESize)
-    this._byte4 = new FieldModelEnumByte(buffer, this._byte3.FBEOffset + this._byte3.FBESize)
-    this._byte5 = new FieldModelEnumByte(buffer, this._byte4.FBEOffset + this._byte4.FBESize)
-    this._char0 = new FieldModelEnumChar(buffer, this._byte5.FBEOffset + this._byte5.FBESize)
-    this._char1 = new FieldModelEnumChar(buffer, this._char0.FBEOffset + this._char0.FBESize)
-    this._char2 = new FieldModelEnumChar(buffer, this._char1.FBEOffset + this._char1.FBESize)
-    this._char3 = new FieldModelEnumChar(buffer, this._char2.FBEOffset + this._char2.FBESize)
-    this._char4 = new FieldModelEnumChar(buffer, this._char3.FBEOffset + this._char3.FBESize)
-    this._char5 = new FieldModelEnumChar(buffer, this._char4.FBEOffset + this._char4.FBESize)
-    this._wchar0 = new FieldModelEnumWChar(buffer, this._char5.FBEOffset + this._char5.FBESize)
-    this._wchar1 = new FieldModelEnumWChar(buffer, this._wchar0.FBEOffset + this._wchar0.FBESize)
-    this._wchar2 = new FieldModelEnumWChar(buffer, this._wchar1.FBEOffset + this._wchar1.FBESize)
-    this._wchar3 = new FieldModelEnumWChar(buffer, this._wchar2.FBEOffset + this._wchar2.FBESize)
-    this._wchar4 = new FieldModelEnumWChar(buffer, this._wchar3.FBEOffset + this._wchar3.FBESize)
-    this._wchar5 = new FieldModelEnumWChar(buffer, this._wchar4.FBEOffset + this._wchar4.FBESize)
-    this._int8b0 = new FieldModelEnumInt8(buffer, this._wchar5.FBEOffset + this._wchar5.FBESize)
-    this._int8b1 = new FieldModelEnumInt8(buffer, this._int8b0.FBEOffset + this._int8b0.FBESize)
-    this._int8b2 = new FieldModelEnumInt8(buffer, this._int8b1.FBEOffset + this._int8b1.FBESize)
-    this._int8b3 = new FieldModelEnumInt8(buffer, this._int8b2.FBEOffset + this._int8b2.FBESize)
-    this._int8b4 = new FieldModelEnumInt8(buffer, this._int8b3.FBEOffset + this._int8b3.FBESize)
-    this._int8b5 = new FieldModelEnumInt8(buffer, this._int8b4.FBEOffset + this._int8b4.FBESize)
-    this._uint8b0 = new FieldModelEnumUInt8(buffer, this._int8b5.FBEOffset + this._int8b5.FBESize)
-    this._uint8b1 = new FieldModelEnumUInt8(buffer, this._uint8b0.FBEOffset + this._uint8b0.FBESize)
-    this._uint8b2 = new FieldModelEnumUInt8(buffer, this._uint8b1.FBEOffset + this._uint8b1.FBESize)
-    this._uint8b3 = new FieldModelEnumUInt8(buffer, this._uint8b2.FBEOffset + this._uint8b2.FBESize)
-    this._uint8b4 = new FieldModelEnumUInt8(buffer, this._uint8b3.FBEOffset + this._uint8b3.FBESize)
-    this._uint8b5 = new FieldModelEnumUInt8(buffer, this._uint8b4.FBEOffset + this._uint8b4.FBESize)
-    this._int16b0 = new FieldModelEnumInt16(buffer, this._uint8b5.FBEOffset + this._uint8b5.FBESize)
-    this._int16b1 = new FieldModelEnumInt16(buffer, this._int16b0.FBEOffset + this._int16b0.FBESize)
-    this._int16b2 = new FieldModelEnumInt16(buffer, this._int16b1.FBEOffset + this._int16b1.FBESize)
-    this._int16b3 = new FieldModelEnumInt16(buffer, this._int16b2.FBEOffset + this._int16b2.FBESize)
-    this._int16b4 = new FieldModelEnumInt16(buffer, this._int16b3.FBEOffset + this._int16b3.FBESize)
-    this._int16b5 = new FieldModelEnumInt16(buffer, this._int16b4.FBEOffset + this._int16b4.FBESize)
-    this._uint16b0 = new FieldModelEnumUInt16(buffer, this._int16b5.FBEOffset + this._int16b5.FBESize)
-    this._uint16b1 = new FieldModelEnumUInt16(buffer, this._uint16b0.FBEOffset + this._uint16b0.FBESize)
-    this._uint16b2 = new FieldModelEnumUInt16(buffer, this._uint16b1.FBEOffset + this._uint16b1.FBESize)
-    this._uint16b3 = new FieldModelEnumUInt16(buffer, this._uint16b2.FBEOffset + this._uint16b2.FBESize)
-    this._uint16b4 = new FieldModelEnumUInt16(buffer, this._uint16b3.FBEOffset + this._uint16b3.FBESize)
-    this._uint16b5 = new FieldModelEnumUInt16(buffer, this._uint16b4.FBEOffset + this._uint16b4.FBESize)
-    this._int32b0 = new FieldModelEnumInt32(buffer, this._uint16b5.FBEOffset + this._uint16b5.FBESize)
-    this._int32b1 = new FieldModelEnumInt32(buffer, this._int32b0.FBEOffset + this._int32b0.FBESize)
-    this._int32b2 = new FieldModelEnumInt32(buffer, this._int32b1.FBEOffset + this._int32b1.FBESize)
-    this._int32b3 = new FieldModelEnumInt32(buffer, this._int32b2.FBEOffset + this._int32b2.FBESize)
-    this._int32b4 = new FieldModelEnumInt32(buffer, this._int32b3.FBEOffset + this._int32b3.FBESize)
-    this._int32b5 = new FieldModelEnumInt32(buffer, this._int32b4.FBEOffset + this._int32b4.FBESize)
-    this._uint32b0 = new FieldModelEnumUInt32(buffer, this._int32b5.FBEOffset + this._int32b5.FBESize)
-    this._uint32b1 = new FieldModelEnumUInt32(buffer, this._uint32b0.FBEOffset + this._uint32b0.FBESize)
-    this._uint32b2 = new FieldModelEnumUInt32(buffer, this._uint32b1.FBEOffset + this._uint32b1.FBESize)
-    this._uint32b3 = new FieldModelEnumUInt32(buffer, this._uint32b2.FBEOffset + this._uint32b2.FBESize)
-    this._uint32b4 = new FieldModelEnumUInt32(buffer, this._uint32b3.FBEOffset + this._uint32b3.FBESize)
-    this._uint32b5 = new FieldModelEnumUInt32(buffer, this._uint32b4.FBEOffset + this._uint32b4.FBESize)
-    this._int64b0 = new FieldModelEnumInt64(buffer, this._uint32b5.FBEOffset + this._uint32b5.FBESize)
-    this._int64b1 = new FieldModelEnumInt64(buffer, this._int64b0.FBEOffset + this._int64b0.FBESize)
-    this._int64b2 = new FieldModelEnumInt64(buffer, this._int64b1.FBEOffset + this._int64b1.FBESize)
-    this._int64b3 = new FieldModelEnumInt64(buffer, this._int64b2.FBEOffset + this._int64b2.FBESize)
-    this._int64b4 = new FieldModelEnumInt64(buffer, this._int64b3.FBEOffset + this._int64b3.FBESize)
-    this._int64b5 = new FieldModelEnumInt64(buffer, this._int64b4.FBEOffset + this._int64b4.FBESize)
-    this._uint64b0 = new FieldModelEnumUInt64(buffer, this._int64b5.FBEOffset + this._int64b5.FBESize)
-    this._uint64b1 = new FieldModelEnumUInt64(buffer, this._uint64b0.FBEOffset + this._uint64b0.FBESize)
-    this._uint64b2 = new FieldModelEnumUInt64(buffer, this._uint64b1.FBEOffset + this._uint64b1.FBESize)
-    this._uint64b3 = new FieldModelEnumUInt64(buffer, this._uint64b2.FBEOffset + this._uint64b2.FBESize)
-    this._uint64b4 = new FieldModelEnumUInt64(buffer, this._uint64b3.FBEOffset + this._uint64b3.FBESize)
-    this._uint64b5 = new FieldModelEnumUInt64(buffer, this._uint64b4.FBEOffset + this._uint64b4.FBESize)
+    this._byte1 = new FieldModelEnumByte(buffer, this._byte0.fbeOffset + this._byte0.fbeSize)
+    this._byte2 = new FieldModelEnumByte(buffer, this._byte1.fbeOffset + this._byte1.fbeSize)
+    this._byte3 = new FieldModelEnumByte(buffer, this._byte2.fbeOffset + this._byte2.fbeSize)
+    this._byte4 = new FieldModelEnumByte(buffer, this._byte3.fbeOffset + this._byte3.fbeSize)
+    this._byte5 = new FieldModelEnumByte(buffer, this._byte4.fbeOffset + this._byte4.fbeSize)
+    this._char0 = new FieldModelEnumChar(buffer, this._byte5.fbeOffset + this._byte5.fbeSize)
+    this._char1 = new FieldModelEnumChar(buffer, this._char0.fbeOffset + this._char0.fbeSize)
+    this._char2 = new FieldModelEnumChar(buffer, this._char1.fbeOffset + this._char1.fbeSize)
+    this._char3 = new FieldModelEnumChar(buffer, this._char2.fbeOffset + this._char2.fbeSize)
+    this._char4 = new FieldModelEnumChar(buffer, this._char3.fbeOffset + this._char3.fbeSize)
+    this._char5 = new FieldModelEnumChar(buffer, this._char4.fbeOffset + this._char4.fbeSize)
+    this._wchar0 = new FieldModelEnumWChar(buffer, this._char5.fbeOffset + this._char5.fbeSize)
+    this._wchar1 = new FieldModelEnumWChar(buffer, this._wchar0.fbeOffset + this._wchar0.fbeSize)
+    this._wchar2 = new FieldModelEnumWChar(buffer, this._wchar1.fbeOffset + this._wchar1.fbeSize)
+    this._wchar3 = new FieldModelEnumWChar(buffer, this._wchar2.fbeOffset + this._wchar2.fbeSize)
+    this._wchar4 = new FieldModelEnumWChar(buffer, this._wchar3.fbeOffset + this._wchar3.fbeSize)
+    this._wchar5 = new FieldModelEnumWChar(buffer, this._wchar4.fbeOffset + this._wchar4.fbeSize)
+    this._int8b0 = new FieldModelEnumInt8(buffer, this._wchar5.fbeOffset + this._wchar5.fbeSize)
+    this._int8b1 = new FieldModelEnumInt8(buffer, this._int8b0.fbeOffset + this._int8b0.fbeSize)
+    this._int8b2 = new FieldModelEnumInt8(buffer, this._int8b1.fbeOffset + this._int8b1.fbeSize)
+    this._int8b3 = new FieldModelEnumInt8(buffer, this._int8b2.fbeOffset + this._int8b2.fbeSize)
+    this._int8b4 = new FieldModelEnumInt8(buffer, this._int8b3.fbeOffset + this._int8b3.fbeSize)
+    this._int8b5 = new FieldModelEnumInt8(buffer, this._int8b4.fbeOffset + this._int8b4.fbeSize)
+    this._uint8b0 = new FieldModelEnumUInt8(buffer, this._int8b5.fbeOffset + this._int8b5.fbeSize)
+    this._uint8b1 = new FieldModelEnumUInt8(buffer, this._uint8b0.fbeOffset + this._uint8b0.fbeSize)
+    this._uint8b2 = new FieldModelEnumUInt8(buffer, this._uint8b1.fbeOffset + this._uint8b1.fbeSize)
+    this._uint8b3 = new FieldModelEnumUInt8(buffer, this._uint8b2.fbeOffset + this._uint8b2.fbeSize)
+    this._uint8b4 = new FieldModelEnumUInt8(buffer, this._uint8b3.fbeOffset + this._uint8b3.fbeSize)
+    this._uint8b5 = new FieldModelEnumUInt8(buffer, this._uint8b4.fbeOffset + this._uint8b4.fbeSize)
+    this._int16b0 = new FieldModelEnumInt16(buffer, this._uint8b5.fbeOffset + this._uint8b5.fbeSize)
+    this._int16b1 = new FieldModelEnumInt16(buffer, this._int16b0.fbeOffset + this._int16b0.fbeSize)
+    this._int16b2 = new FieldModelEnumInt16(buffer, this._int16b1.fbeOffset + this._int16b1.fbeSize)
+    this._int16b3 = new FieldModelEnumInt16(buffer, this._int16b2.fbeOffset + this._int16b2.fbeSize)
+    this._int16b4 = new FieldModelEnumInt16(buffer, this._int16b3.fbeOffset + this._int16b3.fbeSize)
+    this._int16b5 = new FieldModelEnumInt16(buffer, this._int16b4.fbeOffset + this._int16b4.fbeSize)
+    this._uint16b0 = new FieldModelEnumUInt16(buffer, this._int16b5.fbeOffset + this._int16b5.fbeSize)
+    this._uint16b1 = new FieldModelEnumUInt16(buffer, this._uint16b0.fbeOffset + this._uint16b0.fbeSize)
+    this._uint16b2 = new FieldModelEnumUInt16(buffer, this._uint16b1.fbeOffset + this._uint16b1.fbeSize)
+    this._uint16b3 = new FieldModelEnumUInt16(buffer, this._uint16b2.fbeOffset + this._uint16b2.fbeSize)
+    this._uint16b4 = new FieldModelEnumUInt16(buffer, this._uint16b3.fbeOffset + this._uint16b3.fbeSize)
+    this._uint16b5 = new FieldModelEnumUInt16(buffer, this._uint16b4.fbeOffset + this._uint16b4.fbeSize)
+    this._int32b0 = new FieldModelEnumInt32(buffer, this._uint16b5.fbeOffset + this._uint16b5.fbeSize)
+    this._int32b1 = new FieldModelEnumInt32(buffer, this._int32b0.fbeOffset + this._int32b0.fbeSize)
+    this._int32b2 = new FieldModelEnumInt32(buffer, this._int32b1.fbeOffset + this._int32b1.fbeSize)
+    this._int32b3 = new FieldModelEnumInt32(buffer, this._int32b2.fbeOffset + this._int32b2.fbeSize)
+    this._int32b4 = new FieldModelEnumInt32(buffer, this._int32b3.fbeOffset + this._int32b3.fbeSize)
+    this._int32b5 = new FieldModelEnumInt32(buffer, this._int32b4.fbeOffset + this._int32b4.fbeSize)
+    this._uint32b0 = new FieldModelEnumUInt32(buffer, this._int32b5.fbeOffset + this._int32b5.fbeSize)
+    this._uint32b1 = new FieldModelEnumUInt32(buffer, this._uint32b0.fbeOffset + this._uint32b0.fbeSize)
+    this._uint32b2 = new FieldModelEnumUInt32(buffer, this._uint32b1.fbeOffset + this._uint32b1.fbeSize)
+    this._uint32b3 = new FieldModelEnumUInt32(buffer, this._uint32b2.fbeOffset + this._uint32b2.fbeSize)
+    this._uint32b4 = new FieldModelEnumUInt32(buffer, this._uint32b3.fbeOffset + this._uint32b3.fbeSize)
+    this._uint32b5 = new FieldModelEnumUInt32(buffer, this._uint32b4.fbeOffset + this._uint32b4.fbeSize)
+    this._int64b0 = new FieldModelEnumInt64(buffer, this._uint32b5.fbeOffset + this._uint32b5.fbeSize)
+    this._int64b1 = new FieldModelEnumInt64(buffer, this._int64b0.fbeOffset + this._int64b0.fbeSize)
+    this._int64b2 = new FieldModelEnumInt64(buffer, this._int64b1.fbeOffset + this._int64b1.fbeSize)
+    this._int64b3 = new FieldModelEnumInt64(buffer, this._int64b2.fbeOffset + this._int64b2.fbeSize)
+    this._int64b4 = new FieldModelEnumInt64(buffer, this._int64b3.fbeOffset + this._int64b3.fbeSize)
+    this._int64b5 = new FieldModelEnumInt64(buffer, this._int64b4.fbeOffset + this._int64b4.fbeSize)
+    this._uint64b0 = new FieldModelEnumUInt64(buffer, this._int64b5.fbeOffset + this._int64b5.fbeSize)
+    this._uint64b1 = new FieldModelEnumUInt64(buffer, this._uint64b0.fbeOffset + this._uint64b0.fbeSize)
+    this._uint64b2 = new FieldModelEnumUInt64(buffer, this._uint64b1.fbeOffset + this._uint64b1.fbeSize)
+    this._uint64b3 = new FieldModelEnumUInt64(buffer, this._uint64b2.fbeOffset + this._uint64b2.fbeSize)
+    this._uint64b4 = new FieldModelEnumUInt64(buffer, this._uint64b3.fbeOffset + this._uint64b3.fbeSize)
+    this._uint64b5 = new FieldModelEnumUInt64(buffer, this._uint64b4.fbeOffset + this._uint64b4.fbeSize)
   }
 
   /**
@@ -3874,7 +3874,7 @@ class FieldModelEnums extends fbe.FieldModel {
    * @this {!FieldModelEnums}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -3884,7 +3884,7 @@ class FieldModelEnums extends fbe.FieldModel {
    * @returns {!number} Field body size
    */
   get FBEBody () {
-    return 4 + 4 + this.byte0.FBESize + this.byte1.FBESize + this.byte2.FBESize + this.byte3.FBESize + this.byte4.FBESize + this.byte5.FBESize + this.char0.FBESize + this.char1.FBESize + this.char2.FBESize + this.char3.FBESize + this.char4.FBESize + this.char5.FBESize + this.wchar0.FBESize + this.wchar1.FBESize + this.wchar2.FBESize + this.wchar3.FBESize + this.wchar4.FBESize + this.wchar5.FBESize + this.int8b0.FBESize + this.int8b1.FBESize + this.int8b2.FBESize + this.int8b3.FBESize + this.int8b4.FBESize + this.int8b5.FBESize + this.uint8b0.FBESize + this.uint8b1.FBESize + this.uint8b2.FBESize + this.uint8b3.FBESize + this.uint8b4.FBESize + this.uint8b5.FBESize + this.int16b0.FBESize + this.int16b1.FBESize + this.int16b2.FBESize + this.int16b3.FBESize + this.int16b4.FBESize + this.int16b5.FBESize + this.uint16b0.FBESize + this.uint16b1.FBESize + this.uint16b2.FBESize + this.uint16b3.FBESize + this.uint16b4.FBESize + this.uint16b5.FBESize + this.int32b0.FBESize + this.int32b1.FBESize + this.int32b2.FBESize + this.int32b3.FBESize + this.int32b4.FBESize + this.int32b5.FBESize + this.uint32b0.FBESize + this.uint32b1.FBESize + this.uint32b2.FBESize + this.uint32b3.FBESize + this.uint32b4.FBESize + this.uint32b5.FBESize + this.int64b0.FBESize + this.int64b1.FBESize + this.int64b2.FBESize + this.int64b3.FBESize + this.int64b4.FBESize + this.int64b5.FBESize + this.uint64b0.FBESize + this.uint64b1.FBESize + this.uint64b2.FBESize + this.uint64b3.FBESize + this.uint64b4.FBESize + this.uint64b5.FBESize
+    return 4 + 4 + this.byte0.fbeSize + this.byte1.fbeSize + this.byte2.fbeSize + this.byte3.fbeSize + this.byte4.fbeSize + this.byte5.fbeSize + this.char0.fbeSize + this.char1.fbeSize + this.char2.fbeSize + this.char3.fbeSize + this.char4.fbeSize + this.char5.fbeSize + this.wchar0.fbeSize + this.wchar1.fbeSize + this.wchar2.fbeSize + this.wchar3.fbeSize + this.wchar4.fbeSize + this.wchar5.fbeSize + this.int8b0.fbeSize + this.int8b1.fbeSize + this.int8b2.fbeSize + this.int8b3.fbeSize + this.int8b4.fbeSize + this.int8b5.fbeSize + this.uint8b0.fbeSize + this.uint8b1.fbeSize + this.uint8b2.fbeSize + this.uint8b3.fbeSize + this.uint8b4.fbeSize + this.uint8b5.fbeSize + this.int16b0.fbeSize + this.int16b1.fbeSize + this.int16b2.fbeSize + this.int16b3.fbeSize + this.int16b4.fbeSize + this.int16b5.fbeSize + this.uint16b0.fbeSize + this.uint16b1.fbeSize + this.uint16b2.fbeSize + this.uint16b3.fbeSize + this.uint16b4.fbeSize + this.uint16b5.fbeSize + this.int32b0.fbeSize + this.int32b1.fbeSize + this.int32b2.fbeSize + this.int32b3.fbeSize + this.int32b4.fbeSize + this.int32b5.fbeSize + this.uint32b0.fbeSize + this.uint32b1.fbeSize + this.uint32b2.fbeSize + this.uint32b3.fbeSize + this.uint32b4.fbeSize + this.uint32b5.fbeSize + this.int64b0.fbeSize + this.int64b1.fbeSize + this.int64b2.fbeSize + this.int64b3.fbeSize + this.int64b4.fbeSize + this.int64b5.fbeSize + this.uint64b0.fbeSize + this.uint64b1.fbeSize + this.uint64b2.fbeSize + this.uint64b3.fbeSize + this.uint64b4.fbeSize + this.uint64b5.fbeSize
   }
 
   /**
@@ -3892,19 +3892,19 @@ class FieldModelEnums extends fbe.FieldModel {
    * @this {!FieldModelEnums}
    * @returns {!number} Field extra size
    */
-  get FBEExtra () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4) > this._buffer.size)) {
       return 0
     }
 
     this._buffer.shift(fbeStructOffset)
 
-    let fbeResult = this.FBEBody + this.byte0.FBEExtra + this.byte1.FBEExtra + this.byte2.FBEExtra + this.byte3.FBEExtra + this.byte4.FBEExtra + this.byte5.FBEExtra + this.char0.FBEExtra + this.char1.FBEExtra + this.char2.FBEExtra + this.char3.FBEExtra + this.char4.FBEExtra + this.char5.FBEExtra + this.wchar0.FBEExtra + this.wchar1.FBEExtra + this.wchar2.FBEExtra + this.wchar3.FBEExtra + this.wchar4.FBEExtra + this.wchar5.FBEExtra + this.int8b0.FBEExtra + this.int8b1.FBEExtra + this.int8b2.FBEExtra + this.int8b3.FBEExtra + this.int8b4.FBEExtra + this.int8b5.FBEExtra + this.uint8b0.FBEExtra + this.uint8b1.FBEExtra + this.uint8b2.FBEExtra + this.uint8b3.FBEExtra + this.uint8b4.FBEExtra + this.uint8b5.FBEExtra + this.int16b0.FBEExtra + this.int16b1.FBEExtra + this.int16b2.FBEExtra + this.int16b3.FBEExtra + this.int16b4.FBEExtra + this.int16b5.FBEExtra + this.uint16b0.FBEExtra + this.uint16b1.FBEExtra + this.uint16b2.FBEExtra + this.uint16b3.FBEExtra + this.uint16b4.FBEExtra + this.uint16b5.FBEExtra + this.int32b0.FBEExtra + this.int32b1.FBEExtra + this.int32b2.FBEExtra + this.int32b3.FBEExtra + this.int32b4.FBEExtra + this.int32b5.FBEExtra + this.uint32b0.FBEExtra + this.uint32b1.FBEExtra + this.uint32b2.FBEExtra + this.uint32b3.FBEExtra + this.uint32b4.FBEExtra + this.uint32b5.FBEExtra + this.int64b0.FBEExtra + this.int64b1.FBEExtra + this.int64b2.FBEExtra + this.int64b3.FBEExtra + this.int64b4.FBEExtra + this.int64b5.FBEExtra + this.uint64b0.FBEExtra + this.uint64b1.FBEExtra + this.uint64b2.FBEExtra + this.uint64b3.FBEExtra + this.uint64b4.FBEExtra + this.uint64b5.FBEExtra
+    let fbeResult = this.FBEBody + this.byte0.fbeExtra + this.byte1.fbeExtra + this.byte2.fbeExtra + this.byte3.fbeExtra + this.byte4.fbeExtra + this.byte5.fbeExtra + this.char0.fbeExtra + this.char1.fbeExtra + this.char2.fbeExtra + this.char3.fbeExtra + this.char4.fbeExtra + this.char5.fbeExtra + this.wchar0.fbeExtra + this.wchar1.fbeExtra + this.wchar2.fbeExtra + this.wchar3.fbeExtra + this.wchar4.fbeExtra + this.wchar5.fbeExtra + this.int8b0.fbeExtra + this.int8b1.fbeExtra + this.int8b2.fbeExtra + this.int8b3.fbeExtra + this.int8b4.fbeExtra + this.int8b5.fbeExtra + this.uint8b0.fbeExtra + this.uint8b1.fbeExtra + this.uint8b2.fbeExtra + this.uint8b3.fbeExtra + this.uint8b4.fbeExtra + this.uint8b5.fbeExtra + this.int16b0.fbeExtra + this.int16b1.fbeExtra + this.int16b2.fbeExtra + this.int16b3.fbeExtra + this.int16b4.fbeExtra + this.int16b5.fbeExtra + this.uint16b0.fbeExtra + this.uint16b1.fbeExtra + this.uint16b2.fbeExtra + this.uint16b3.fbeExtra + this.uint16b4.fbeExtra + this.uint16b5.fbeExtra + this.int32b0.fbeExtra + this.int32b1.fbeExtra + this.int32b2.fbeExtra + this.int32b3.fbeExtra + this.int32b4.fbeExtra + this.int32b5.fbeExtra + this.uint32b0.fbeExtra + this.uint32b1.fbeExtra + this.uint32b2.fbeExtra + this.uint32b3.fbeExtra + this.uint32b4.fbeExtra + this.uint32b5.fbeExtra + this.int64b0.fbeExtra + this.int64b1.fbeExtra + this.int64b2.fbeExtra + this.int64b3.fbeExtra + this.int64b4.fbeExtra + this.int64b5.fbeExtra + this.uint64b0.fbeExtra + this.uint64b1.fbeExtra + this.uint64b2.fbeExtra + this.uint64b3.fbeExtra + this.uint64b4.fbeExtra + this.uint64b5.fbeExtra
 
     this._buffer.unshift(fbeStructOffset)
 
@@ -3936,11 +3936,11 @@ class FieldModelEnums extends fbe.FieldModel {
    * @returns {!boolean} Field model valid state
    */
   verify (fbeVerifyType = true) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return true
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return false
     }
@@ -3970,599 +3970,599 @@ class FieldModelEnums extends fbe.FieldModel {
   verifyFields (fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.byte0.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.byte0.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.byte0.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.byte0.FBESize
+    fbeCurrentSize += this.byte0.fbeSize
 
-    if ((fbeCurrentSize + this.byte1.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.byte1.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.byte1.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.byte1.FBESize
+    fbeCurrentSize += this.byte1.fbeSize
 
-    if ((fbeCurrentSize + this.byte2.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.byte2.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.byte2.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.byte2.FBESize
+    fbeCurrentSize += this.byte2.fbeSize
 
-    if ((fbeCurrentSize + this.byte3.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.byte3.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.byte3.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.byte3.FBESize
+    fbeCurrentSize += this.byte3.fbeSize
 
-    if ((fbeCurrentSize + this.byte4.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.byte4.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.byte4.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.byte4.FBESize
+    fbeCurrentSize += this.byte4.fbeSize
 
-    if ((fbeCurrentSize + this.byte5.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.byte5.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.byte5.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.byte5.FBESize
+    fbeCurrentSize += this.byte5.fbeSize
 
-    if ((fbeCurrentSize + this.char0.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.char0.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.char0.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.char0.FBESize
+    fbeCurrentSize += this.char0.fbeSize
 
-    if ((fbeCurrentSize + this.char1.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.char1.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.char1.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.char1.FBESize
+    fbeCurrentSize += this.char1.fbeSize
 
-    if ((fbeCurrentSize + this.char2.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.char2.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.char2.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.char2.FBESize
+    fbeCurrentSize += this.char2.fbeSize
 
-    if ((fbeCurrentSize + this.char3.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.char3.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.char3.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.char3.FBESize
+    fbeCurrentSize += this.char3.fbeSize
 
-    if ((fbeCurrentSize + this.char4.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.char4.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.char4.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.char4.FBESize
+    fbeCurrentSize += this.char4.fbeSize
 
-    if ((fbeCurrentSize + this.char5.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.char5.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.char5.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.char5.FBESize
+    fbeCurrentSize += this.char5.fbeSize
 
-    if ((fbeCurrentSize + this.wchar0.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.wchar0.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.wchar0.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.wchar0.FBESize
+    fbeCurrentSize += this.wchar0.fbeSize
 
-    if ((fbeCurrentSize + this.wchar1.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.wchar1.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.wchar1.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.wchar1.FBESize
+    fbeCurrentSize += this.wchar1.fbeSize
 
-    if ((fbeCurrentSize + this.wchar2.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.wchar2.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.wchar2.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.wchar2.FBESize
+    fbeCurrentSize += this.wchar2.fbeSize
 
-    if ((fbeCurrentSize + this.wchar3.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.wchar3.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.wchar3.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.wchar3.FBESize
+    fbeCurrentSize += this.wchar3.fbeSize
 
-    if ((fbeCurrentSize + this.wchar4.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.wchar4.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.wchar4.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.wchar4.FBESize
+    fbeCurrentSize += this.wchar4.fbeSize
 
-    if ((fbeCurrentSize + this.wchar5.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.wchar5.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.wchar5.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.wchar5.FBESize
+    fbeCurrentSize += this.wchar5.fbeSize
 
-    if ((fbeCurrentSize + this.int8b0.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int8b0.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int8b0.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int8b0.FBESize
+    fbeCurrentSize += this.int8b0.fbeSize
 
-    if ((fbeCurrentSize + this.int8b1.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int8b1.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int8b1.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int8b1.FBESize
+    fbeCurrentSize += this.int8b1.fbeSize
 
-    if ((fbeCurrentSize + this.int8b2.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int8b2.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int8b2.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int8b2.FBESize
+    fbeCurrentSize += this.int8b2.fbeSize
 
-    if ((fbeCurrentSize + this.int8b3.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int8b3.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int8b3.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int8b3.FBESize
+    fbeCurrentSize += this.int8b3.fbeSize
 
-    if ((fbeCurrentSize + this.int8b4.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int8b4.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int8b4.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int8b4.FBESize
+    fbeCurrentSize += this.int8b4.fbeSize
 
-    if ((fbeCurrentSize + this.int8b5.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int8b5.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int8b5.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int8b5.FBESize
+    fbeCurrentSize += this.int8b5.fbeSize
 
-    if ((fbeCurrentSize + this.uint8b0.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint8b0.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint8b0.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint8b0.FBESize
+    fbeCurrentSize += this.uint8b0.fbeSize
 
-    if ((fbeCurrentSize + this.uint8b1.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint8b1.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint8b1.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint8b1.FBESize
+    fbeCurrentSize += this.uint8b1.fbeSize
 
-    if ((fbeCurrentSize + this.uint8b2.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint8b2.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint8b2.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint8b2.FBESize
+    fbeCurrentSize += this.uint8b2.fbeSize
 
-    if ((fbeCurrentSize + this.uint8b3.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint8b3.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint8b3.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint8b3.FBESize
+    fbeCurrentSize += this.uint8b3.fbeSize
 
-    if ((fbeCurrentSize + this.uint8b4.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint8b4.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint8b4.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint8b4.FBESize
+    fbeCurrentSize += this.uint8b4.fbeSize
 
-    if ((fbeCurrentSize + this.uint8b5.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint8b5.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint8b5.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint8b5.FBESize
+    fbeCurrentSize += this.uint8b5.fbeSize
 
-    if ((fbeCurrentSize + this.int16b0.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int16b0.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int16b0.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int16b0.FBESize
+    fbeCurrentSize += this.int16b0.fbeSize
 
-    if ((fbeCurrentSize + this.int16b1.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int16b1.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int16b1.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int16b1.FBESize
+    fbeCurrentSize += this.int16b1.fbeSize
 
-    if ((fbeCurrentSize + this.int16b2.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int16b2.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int16b2.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int16b2.FBESize
+    fbeCurrentSize += this.int16b2.fbeSize
 
-    if ((fbeCurrentSize + this.int16b3.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int16b3.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int16b3.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int16b3.FBESize
+    fbeCurrentSize += this.int16b3.fbeSize
 
-    if ((fbeCurrentSize + this.int16b4.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int16b4.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int16b4.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int16b4.FBESize
+    fbeCurrentSize += this.int16b4.fbeSize
 
-    if ((fbeCurrentSize + this.int16b5.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int16b5.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int16b5.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int16b5.FBESize
+    fbeCurrentSize += this.int16b5.fbeSize
 
-    if ((fbeCurrentSize + this.uint16b0.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint16b0.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint16b0.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint16b0.FBESize
+    fbeCurrentSize += this.uint16b0.fbeSize
 
-    if ((fbeCurrentSize + this.uint16b1.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint16b1.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint16b1.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint16b1.FBESize
+    fbeCurrentSize += this.uint16b1.fbeSize
 
-    if ((fbeCurrentSize + this.uint16b2.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint16b2.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint16b2.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint16b2.FBESize
+    fbeCurrentSize += this.uint16b2.fbeSize
 
-    if ((fbeCurrentSize + this.uint16b3.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint16b3.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint16b3.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint16b3.FBESize
+    fbeCurrentSize += this.uint16b3.fbeSize
 
-    if ((fbeCurrentSize + this.uint16b4.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint16b4.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint16b4.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint16b4.FBESize
+    fbeCurrentSize += this.uint16b4.fbeSize
 
-    if ((fbeCurrentSize + this.uint16b5.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint16b5.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint16b5.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint16b5.FBESize
+    fbeCurrentSize += this.uint16b5.fbeSize
 
-    if ((fbeCurrentSize + this.int32b0.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int32b0.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int32b0.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int32b0.FBESize
+    fbeCurrentSize += this.int32b0.fbeSize
 
-    if ((fbeCurrentSize + this.int32b1.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int32b1.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int32b1.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int32b1.FBESize
+    fbeCurrentSize += this.int32b1.fbeSize
 
-    if ((fbeCurrentSize + this.int32b2.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int32b2.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int32b2.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int32b2.FBESize
+    fbeCurrentSize += this.int32b2.fbeSize
 
-    if ((fbeCurrentSize + this.int32b3.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int32b3.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int32b3.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int32b3.FBESize
+    fbeCurrentSize += this.int32b3.fbeSize
 
-    if ((fbeCurrentSize + this.int32b4.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int32b4.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int32b4.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int32b4.FBESize
+    fbeCurrentSize += this.int32b4.fbeSize
 
-    if ((fbeCurrentSize + this.int32b5.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int32b5.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int32b5.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int32b5.FBESize
+    fbeCurrentSize += this.int32b5.fbeSize
 
-    if ((fbeCurrentSize + this.uint32b0.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint32b0.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint32b0.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint32b0.FBESize
+    fbeCurrentSize += this.uint32b0.fbeSize
 
-    if ((fbeCurrentSize + this.uint32b1.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint32b1.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint32b1.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint32b1.FBESize
+    fbeCurrentSize += this.uint32b1.fbeSize
 
-    if ((fbeCurrentSize + this.uint32b2.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint32b2.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint32b2.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint32b2.FBESize
+    fbeCurrentSize += this.uint32b2.fbeSize
 
-    if ((fbeCurrentSize + this.uint32b3.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint32b3.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint32b3.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint32b3.FBESize
+    fbeCurrentSize += this.uint32b3.fbeSize
 
-    if ((fbeCurrentSize + this.uint32b4.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint32b4.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint32b4.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint32b4.FBESize
+    fbeCurrentSize += this.uint32b4.fbeSize
 
-    if ((fbeCurrentSize + this.uint32b5.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint32b5.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint32b5.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint32b5.FBESize
+    fbeCurrentSize += this.uint32b5.fbeSize
 
-    if ((fbeCurrentSize + this.int64b0.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int64b0.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int64b0.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int64b0.FBESize
+    fbeCurrentSize += this.int64b0.fbeSize
 
-    if ((fbeCurrentSize + this.int64b1.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int64b1.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int64b1.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int64b1.FBESize
+    fbeCurrentSize += this.int64b1.fbeSize
 
-    if ((fbeCurrentSize + this.int64b2.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int64b2.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int64b2.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int64b2.FBESize
+    fbeCurrentSize += this.int64b2.fbeSize
 
-    if ((fbeCurrentSize + this.int64b3.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int64b3.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int64b3.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int64b3.FBESize
+    fbeCurrentSize += this.int64b3.fbeSize
 
-    if ((fbeCurrentSize + this.int64b4.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int64b4.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int64b4.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int64b4.FBESize
+    fbeCurrentSize += this.int64b4.fbeSize
 
-    if ((fbeCurrentSize + this.int64b5.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.int64b5.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.int64b5.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int64b5.FBESize
+    fbeCurrentSize += this.int64b5.fbeSize
 
-    if ((fbeCurrentSize + this.uint64b0.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint64b0.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint64b0.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint64b0.FBESize
+    fbeCurrentSize += this.uint64b0.fbeSize
 
-    if ((fbeCurrentSize + this.uint64b1.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint64b1.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint64b1.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint64b1.FBESize
+    fbeCurrentSize += this.uint64b1.fbeSize
 
-    if ((fbeCurrentSize + this.uint64b2.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint64b2.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint64b2.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint64b2.FBESize
+    fbeCurrentSize += this.uint64b2.fbeSize
 
-    if ((fbeCurrentSize + this.uint64b3.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint64b3.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint64b3.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint64b3.FBESize
+    fbeCurrentSize += this.uint64b3.fbeSize
 
-    if ((fbeCurrentSize + this.uint64b4.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint64b4.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint64b4.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint64b4.FBESize
+    fbeCurrentSize += this.uint64b4.fbeSize
 
-    if ((fbeCurrentSize + this.uint64b5.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uint64b5.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uint64b5.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint64b5.FBESize
+    fbeCurrentSize += this.uint64b5.fbeSize
 
     return true
   }
@@ -4573,11 +4573,11 @@ class FieldModelEnums extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   getBegin () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + 4 + 4) <= this._buffer.size), 'Model is broken!')
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return 0
@@ -4629,533 +4629,533 @@ class FieldModelEnums extends fbe.FieldModel {
   getFields (fbeValue, fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.byte0.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.byte0.fbeSize) <= fbeStructSize) {
       fbeValue.byte0 = this.byte0.get(new EnumByte(EnumByte.ENUM_VALUE_0))
     } else {
       fbeValue.byte0 = new EnumByte(EnumByte.ENUM_VALUE_0)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.byte0.FBESize
+    fbeCurrentSize += this.byte0.fbeSize
 
-    if ((fbeCurrentSize + this.byte1.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.byte1.fbeSize) <= fbeStructSize) {
       fbeValue.byte1 = this.byte1.get(new EnumByte(EnumByte.ENUM_VALUE_1))
     } else {
       fbeValue.byte1 = new EnumByte(EnumByte.ENUM_VALUE_1)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.byte1.FBESize
+    fbeCurrentSize += this.byte1.fbeSize
 
-    if ((fbeCurrentSize + this.byte2.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.byte2.fbeSize) <= fbeStructSize) {
       fbeValue.byte2 = this.byte2.get(new EnumByte(EnumByte.ENUM_VALUE_2))
     } else {
       fbeValue.byte2 = new EnumByte(EnumByte.ENUM_VALUE_2)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.byte2.FBESize
+    fbeCurrentSize += this.byte2.fbeSize
 
-    if ((fbeCurrentSize + this.byte3.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.byte3.fbeSize) <= fbeStructSize) {
       fbeValue.byte3 = this.byte3.get(new EnumByte(EnumByte.ENUM_VALUE_3))
     } else {
       fbeValue.byte3 = new EnumByte(EnumByte.ENUM_VALUE_3)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.byte3.FBESize
+    fbeCurrentSize += this.byte3.fbeSize
 
-    if ((fbeCurrentSize + this.byte4.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.byte4.fbeSize) <= fbeStructSize) {
       fbeValue.byte4 = this.byte4.get(new EnumByte(EnumByte.ENUM_VALUE_4))
     } else {
       fbeValue.byte4 = new EnumByte(EnumByte.ENUM_VALUE_4)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.byte4.FBESize
+    fbeCurrentSize += this.byte4.fbeSize
 
-    if ((fbeCurrentSize + this.byte5.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.byte5.fbeSize) <= fbeStructSize) {
       fbeValue.byte5 = this.byte5.get(new EnumByte(EnumByte.ENUM_VALUE_5))
     } else {
       fbeValue.byte5 = new EnumByte(EnumByte.ENUM_VALUE_5)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.byte5.FBESize
+    fbeCurrentSize += this.byte5.fbeSize
 
-    if ((fbeCurrentSize + this.char0.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.char0.fbeSize) <= fbeStructSize) {
       fbeValue.char0 = this.char0.get(new EnumChar(EnumChar.ENUM_VALUE_0))
     } else {
       fbeValue.char0 = new EnumChar(EnumChar.ENUM_VALUE_0)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.char0.FBESize
+    fbeCurrentSize += this.char0.fbeSize
 
-    if ((fbeCurrentSize + this.char1.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.char1.fbeSize) <= fbeStructSize) {
       fbeValue.char1 = this.char1.get(new EnumChar(EnumChar.ENUM_VALUE_1))
     } else {
       fbeValue.char1 = new EnumChar(EnumChar.ENUM_VALUE_1)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.char1.FBESize
+    fbeCurrentSize += this.char1.fbeSize
 
-    if ((fbeCurrentSize + this.char2.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.char2.fbeSize) <= fbeStructSize) {
       fbeValue.char2 = this.char2.get(new EnumChar(EnumChar.ENUM_VALUE_2))
     } else {
       fbeValue.char2 = new EnumChar(EnumChar.ENUM_VALUE_2)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.char2.FBESize
+    fbeCurrentSize += this.char2.fbeSize
 
-    if ((fbeCurrentSize + this.char3.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.char3.fbeSize) <= fbeStructSize) {
       fbeValue.char3 = this.char3.get(new EnumChar(EnumChar.ENUM_VALUE_3))
     } else {
       fbeValue.char3 = new EnumChar(EnumChar.ENUM_VALUE_3)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.char3.FBESize
+    fbeCurrentSize += this.char3.fbeSize
 
-    if ((fbeCurrentSize + this.char4.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.char4.fbeSize) <= fbeStructSize) {
       fbeValue.char4 = this.char4.get(new EnumChar(EnumChar.ENUM_VALUE_4))
     } else {
       fbeValue.char4 = new EnumChar(EnumChar.ENUM_VALUE_4)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.char4.FBESize
+    fbeCurrentSize += this.char4.fbeSize
 
-    if ((fbeCurrentSize + this.char5.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.char5.fbeSize) <= fbeStructSize) {
       fbeValue.char5 = this.char5.get(new EnumChar(EnumChar.ENUM_VALUE_5))
     } else {
       fbeValue.char5 = new EnumChar(EnumChar.ENUM_VALUE_5)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.char5.FBESize
+    fbeCurrentSize += this.char5.fbeSize
 
-    if ((fbeCurrentSize + this.wchar0.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.wchar0.fbeSize) <= fbeStructSize) {
       fbeValue.wchar0 = this.wchar0.get(new EnumWChar(EnumWChar.ENUM_VALUE_0))
     } else {
       fbeValue.wchar0 = new EnumWChar(EnumWChar.ENUM_VALUE_0)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.wchar0.FBESize
+    fbeCurrentSize += this.wchar0.fbeSize
 
-    if ((fbeCurrentSize + this.wchar1.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.wchar1.fbeSize) <= fbeStructSize) {
       fbeValue.wchar1 = this.wchar1.get(new EnumWChar(EnumWChar.ENUM_VALUE_1))
     } else {
       fbeValue.wchar1 = new EnumWChar(EnumWChar.ENUM_VALUE_1)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.wchar1.FBESize
+    fbeCurrentSize += this.wchar1.fbeSize
 
-    if ((fbeCurrentSize + this.wchar2.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.wchar2.fbeSize) <= fbeStructSize) {
       fbeValue.wchar2 = this.wchar2.get(new EnumWChar(EnumWChar.ENUM_VALUE_2))
     } else {
       fbeValue.wchar2 = new EnumWChar(EnumWChar.ENUM_VALUE_2)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.wchar2.FBESize
+    fbeCurrentSize += this.wchar2.fbeSize
 
-    if ((fbeCurrentSize + this.wchar3.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.wchar3.fbeSize) <= fbeStructSize) {
       fbeValue.wchar3 = this.wchar3.get(new EnumWChar(EnumWChar.ENUM_VALUE_3))
     } else {
       fbeValue.wchar3 = new EnumWChar(EnumWChar.ENUM_VALUE_3)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.wchar3.FBESize
+    fbeCurrentSize += this.wchar3.fbeSize
 
-    if ((fbeCurrentSize + this.wchar4.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.wchar4.fbeSize) <= fbeStructSize) {
       fbeValue.wchar4 = this.wchar4.get(new EnumWChar(EnumWChar.ENUM_VALUE_4))
     } else {
       fbeValue.wchar4 = new EnumWChar(EnumWChar.ENUM_VALUE_4)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.wchar4.FBESize
+    fbeCurrentSize += this.wchar4.fbeSize
 
-    if ((fbeCurrentSize + this.wchar5.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.wchar5.fbeSize) <= fbeStructSize) {
       fbeValue.wchar5 = this.wchar5.get(new EnumWChar(EnumWChar.ENUM_VALUE_5))
     } else {
       fbeValue.wchar5 = new EnumWChar(EnumWChar.ENUM_VALUE_5)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.wchar5.FBESize
+    fbeCurrentSize += this.wchar5.fbeSize
 
-    if ((fbeCurrentSize + this.int8b0.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int8b0.fbeSize) <= fbeStructSize) {
       fbeValue.int8b0 = this.int8b0.get(new EnumInt8(EnumInt8.ENUM_VALUE_0))
     } else {
       fbeValue.int8b0 = new EnumInt8(EnumInt8.ENUM_VALUE_0)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int8b0.FBESize
+    fbeCurrentSize += this.int8b0.fbeSize
 
-    if ((fbeCurrentSize + this.int8b1.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int8b1.fbeSize) <= fbeStructSize) {
       fbeValue.int8b1 = this.int8b1.get(new EnumInt8(EnumInt8.ENUM_VALUE_1))
     } else {
       fbeValue.int8b1 = new EnumInt8(EnumInt8.ENUM_VALUE_1)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int8b1.FBESize
+    fbeCurrentSize += this.int8b1.fbeSize
 
-    if ((fbeCurrentSize + this.int8b2.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int8b2.fbeSize) <= fbeStructSize) {
       fbeValue.int8b2 = this.int8b2.get(new EnumInt8(EnumInt8.ENUM_VALUE_2))
     } else {
       fbeValue.int8b2 = new EnumInt8(EnumInt8.ENUM_VALUE_2)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int8b2.FBESize
+    fbeCurrentSize += this.int8b2.fbeSize
 
-    if ((fbeCurrentSize + this.int8b3.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int8b3.fbeSize) <= fbeStructSize) {
       fbeValue.int8b3 = this.int8b3.get(new EnumInt8(EnumInt8.ENUM_VALUE_3))
     } else {
       fbeValue.int8b3 = new EnumInt8(EnumInt8.ENUM_VALUE_3)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int8b3.FBESize
+    fbeCurrentSize += this.int8b3.fbeSize
 
-    if ((fbeCurrentSize + this.int8b4.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int8b4.fbeSize) <= fbeStructSize) {
       fbeValue.int8b4 = this.int8b4.get(new EnumInt8(EnumInt8.ENUM_VALUE_4))
     } else {
       fbeValue.int8b4 = new EnumInt8(EnumInt8.ENUM_VALUE_4)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int8b4.FBESize
+    fbeCurrentSize += this.int8b4.fbeSize
 
-    if ((fbeCurrentSize + this.int8b5.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int8b5.fbeSize) <= fbeStructSize) {
       fbeValue.int8b5 = this.int8b5.get(new EnumInt8(EnumInt8.ENUM_VALUE_5))
     } else {
       fbeValue.int8b5 = new EnumInt8(EnumInt8.ENUM_VALUE_5)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int8b5.FBESize
+    fbeCurrentSize += this.int8b5.fbeSize
 
-    if ((fbeCurrentSize + this.uint8b0.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint8b0.fbeSize) <= fbeStructSize) {
       fbeValue.uint8b0 = this.uint8b0.get(new EnumUInt8(EnumUInt8.ENUM_VALUE_0))
     } else {
       fbeValue.uint8b0 = new EnumUInt8(EnumUInt8.ENUM_VALUE_0)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint8b0.FBESize
+    fbeCurrentSize += this.uint8b0.fbeSize
 
-    if ((fbeCurrentSize + this.uint8b1.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint8b1.fbeSize) <= fbeStructSize) {
       fbeValue.uint8b1 = this.uint8b1.get(new EnumUInt8(EnumUInt8.ENUM_VALUE_1))
     } else {
       fbeValue.uint8b1 = new EnumUInt8(EnumUInt8.ENUM_VALUE_1)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint8b1.FBESize
+    fbeCurrentSize += this.uint8b1.fbeSize
 
-    if ((fbeCurrentSize + this.uint8b2.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint8b2.fbeSize) <= fbeStructSize) {
       fbeValue.uint8b2 = this.uint8b2.get(new EnumUInt8(EnumUInt8.ENUM_VALUE_2))
     } else {
       fbeValue.uint8b2 = new EnumUInt8(EnumUInt8.ENUM_VALUE_2)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint8b2.FBESize
+    fbeCurrentSize += this.uint8b2.fbeSize
 
-    if ((fbeCurrentSize + this.uint8b3.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint8b3.fbeSize) <= fbeStructSize) {
       fbeValue.uint8b3 = this.uint8b3.get(new EnumUInt8(EnumUInt8.ENUM_VALUE_3))
     } else {
       fbeValue.uint8b3 = new EnumUInt8(EnumUInt8.ENUM_VALUE_3)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint8b3.FBESize
+    fbeCurrentSize += this.uint8b3.fbeSize
 
-    if ((fbeCurrentSize + this.uint8b4.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint8b4.fbeSize) <= fbeStructSize) {
       fbeValue.uint8b4 = this.uint8b4.get(new EnumUInt8(EnumUInt8.ENUM_VALUE_4))
     } else {
       fbeValue.uint8b4 = new EnumUInt8(EnumUInt8.ENUM_VALUE_4)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint8b4.FBESize
+    fbeCurrentSize += this.uint8b4.fbeSize
 
-    if ((fbeCurrentSize + this.uint8b5.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint8b5.fbeSize) <= fbeStructSize) {
       fbeValue.uint8b5 = this.uint8b5.get(new EnumUInt8(EnumUInt8.ENUM_VALUE_5))
     } else {
       fbeValue.uint8b5 = new EnumUInt8(EnumUInt8.ENUM_VALUE_5)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint8b5.FBESize
+    fbeCurrentSize += this.uint8b5.fbeSize
 
-    if ((fbeCurrentSize + this.int16b0.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int16b0.fbeSize) <= fbeStructSize) {
       fbeValue.int16b0 = this.int16b0.get(new EnumInt16(EnumInt16.ENUM_VALUE_0))
     } else {
       fbeValue.int16b0 = new EnumInt16(EnumInt16.ENUM_VALUE_0)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int16b0.FBESize
+    fbeCurrentSize += this.int16b0.fbeSize
 
-    if ((fbeCurrentSize + this.int16b1.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int16b1.fbeSize) <= fbeStructSize) {
       fbeValue.int16b1 = this.int16b1.get(new EnumInt16(EnumInt16.ENUM_VALUE_1))
     } else {
       fbeValue.int16b1 = new EnumInt16(EnumInt16.ENUM_VALUE_1)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int16b1.FBESize
+    fbeCurrentSize += this.int16b1.fbeSize
 
-    if ((fbeCurrentSize + this.int16b2.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int16b2.fbeSize) <= fbeStructSize) {
       fbeValue.int16b2 = this.int16b2.get(new EnumInt16(EnumInt16.ENUM_VALUE_2))
     } else {
       fbeValue.int16b2 = new EnumInt16(EnumInt16.ENUM_VALUE_2)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int16b2.FBESize
+    fbeCurrentSize += this.int16b2.fbeSize
 
-    if ((fbeCurrentSize + this.int16b3.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int16b3.fbeSize) <= fbeStructSize) {
       fbeValue.int16b3 = this.int16b3.get(new EnumInt16(EnumInt16.ENUM_VALUE_3))
     } else {
       fbeValue.int16b3 = new EnumInt16(EnumInt16.ENUM_VALUE_3)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int16b3.FBESize
+    fbeCurrentSize += this.int16b3.fbeSize
 
-    if ((fbeCurrentSize + this.int16b4.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int16b4.fbeSize) <= fbeStructSize) {
       fbeValue.int16b4 = this.int16b4.get(new EnumInt16(EnumInt16.ENUM_VALUE_4))
     } else {
       fbeValue.int16b4 = new EnumInt16(EnumInt16.ENUM_VALUE_4)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int16b4.FBESize
+    fbeCurrentSize += this.int16b4.fbeSize
 
-    if ((fbeCurrentSize + this.int16b5.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int16b5.fbeSize) <= fbeStructSize) {
       fbeValue.int16b5 = this.int16b5.get(new EnumInt16(EnumInt16.ENUM_VALUE_5))
     } else {
       fbeValue.int16b5 = new EnumInt16(EnumInt16.ENUM_VALUE_5)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int16b5.FBESize
+    fbeCurrentSize += this.int16b5.fbeSize
 
-    if ((fbeCurrentSize + this.uint16b0.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint16b0.fbeSize) <= fbeStructSize) {
       fbeValue.uint16b0 = this.uint16b0.get(new EnumUInt16(EnumUInt16.ENUM_VALUE_0))
     } else {
       fbeValue.uint16b0 = new EnumUInt16(EnumUInt16.ENUM_VALUE_0)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint16b0.FBESize
+    fbeCurrentSize += this.uint16b0.fbeSize
 
-    if ((fbeCurrentSize + this.uint16b1.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint16b1.fbeSize) <= fbeStructSize) {
       fbeValue.uint16b1 = this.uint16b1.get(new EnumUInt16(EnumUInt16.ENUM_VALUE_1))
     } else {
       fbeValue.uint16b1 = new EnumUInt16(EnumUInt16.ENUM_VALUE_1)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint16b1.FBESize
+    fbeCurrentSize += this.uint16b1.fbeSize
 
-    if ((fbeCurrentSize + this.uint16b2.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint16b2.fbeSize) <= fbeStructSize) {
       fbeValue.uint16b2 = this.uint16b2.get(new EnumUInt16(EnumUInt16.ENUM_VALUE_2))
     } else {
       fbeValue.uint16b2 = new EnumUInt16(EnumUInt16.ENUM_VALUE_2)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint16b2.FBESize
+    fbeCurrentSize += this.uint16b2.fbeSize
 
-    if ((fbeCurrentSize + this.uint16b3.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint16b3.fbeSize) <= fbeStructSize) {
       fbeValue.uint16b3 = this.uint16b3.get(new EnumUInt16(EnumUInt16.ENUM_VALUE_3))
     } else {
       fbeValue.uint16b3 = new EnumUInt16(EnumUInt16.ENUM_VALUE_3)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint16b3.FBESize
+    fbeCurrentSize += this.uint16b3.fbeSize
 
-    if ((fbeCurrentSize + this.uint16b4.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint16b4.fbeSize) <= fbeStructSize) {
       fbeValue.uint16b4 = this.uint16b4.get(new EnumUInt16(EnumUInt16.ENUM_VALUE_4))
     } else {
       fbeValue.uint16b4 = new EnumUInt16(EnumUInt16.ENUM_VALUE_4)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint16b4.FBESize
+    fbeCurrentSize += this.uint16b4.fbeSize
 
-    if ((fbeCurrentSize + this.uint16b5.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint16b5.fbeSize) <= fbeStructSize) {
       fbeValue.uint16b5 = this.uint16b5.get(new EnumUInt16(EnumUInt16.ENUM_VALUE_5))
     } else {
       fbeValue.uint16b5 = new EnumUInt16(EnumUInt16.ENUM_VALUE_5)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint16b5.FBESize
+    fbeCurrentSize += this.uint16b5.fbeSize
 
-    if ((fbeCurrentSize + this.int32b0.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int32b0.fbeSize) <= fbeStructSize) {
       fbeValue.int32b0 = this.int32b0.get(new EnumInt32(EnumInt32.ENUM_VALUE_0))
     } else {
       fbeValue.int32b0 = new EnumInt32(EnumInt32.ENUM_VALUE_0)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int32b0.FBESize
+    fbeCurrentSize += this.int32b0.fbeSize
 
-    if ((fbeCurrentSize + this.int32b1.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int32b1.fbeSize) <= fbeStructSize) {
       fbeValue.int32b1 = this.int32b1.get(new EnumInt32(EnumInt32.ENUM_VALUE_1))
     } else {
       fbeValue.int32b1 = new EnumInt32(EnumInt32.ENUM_VALUE_1)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int32b1.FBESize
+    fbeCurrentSize += this.int32b1.fbeSize
 
-    if ((fbeCurrentSize + this.int32b2.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int32b2.fbeSize) <= fbeStructSize) {
       fbeValue.int32b2 = this.int32b2.get(new EnumInt32(EnumInt32.ENUM_VALUE_2))
     } else {
       fbeValue.int32b2 = new EnumInt32(EnumInt32.ENUM_VALUE_2)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int32b2.FBESize
+    fbeCurrentSize += this.int32b2.fbeSize
 
-    if ((fbeCurrentSize + this.int32b3.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int32b3.fbeSize) <= fbeStructSize) {
       fbeValue.int32b3 = this.int32b3.get(new EnumInt32(EnumInt32.ENUM_VALUE_3))
     } else {
       fbeValue.int32b3 = new EnumInt32(EnumInt32.ENUM_VALUE_3)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int32b3.FBESize
+    fbeCurrentSize += this.int32b3.fbeSize
 
-    if ((fbeCurrentSize + this.int32b4.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int32b4.fbeSize) <= fbeStructSize) {
       fbeValue.int32b4 = this.int32b4.get(new EnumInt32(EnumInt32.ENUM_VALUE_4))
     } else {
       fbeValue.int32b4 = new EnumInt32(EnumInt32.ENUM_VALUE_4)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int32b4.FBESize
+    fbeCurrentSize += this.int32b4.fbeSize
 
-    if ((fbeCurrentSize + this.int32b5.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int32b5.fbeSize) <= fbeStructSize) {
       fbeValue.int32b5 = this.int32b5.get(new EnumInt32(EnumInt32.ENUM_VALUE_5))
     } else {
       fbeValue.int32b5 = new EnumInt32(EnumInt32.ENUM_VALUE_5)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int32b5.FBESize
+    fbeCurrentSize += this.int32b5.fbeSize
 
-    if ((fbeCurrentSize + this.uint32b0.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint32b0.fbeSize) <= fbeStructSize) {
       fbeValue.uint32b0 = this.uint32b0.get(new EnumUInt32(EnumUInt32.ENUM_VALUE_0))
     } else {
       fbeValue.uint32b0 = new EnumUInt32(EnumUInt32.ENUM_VALUE_0)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint32b0.FBESize
+    fbeCurrentSize += this.uint32b0.fbeSize
 
-    if ((fbeCurrentSize + this.uint32b1.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint32b1.fbeSize) <= fbeStructSize) {
       fbeValue.uint32b1 = this.uint32b1.get(new EnumUInt32(EnumUInt32.ENUM_VALUE_1))
     } else {
       fbeValue.uint32b1 = new EnumUInt32(EnumUInt32.ENUM_VALUE_1)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint32b1.FBESize
+    fbeCurrentSize += this.uint32b1.fbeSize
 
-    if ((fbeCurrentSize + this.uint32b2.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint32b2.fbeSize) <= fbeStructSize) {
       fbeValue.uint32b2 = this.uint32b2.get(new EnumUInt32(EnumUInt32.ENUM_VALUE_2))
     } else {
       fbeValue.uint32b2 = new EnumUInt32(EnumUInt32.ENUM_VALUE_2)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint32b2.FBESize
+    fbeCurrentSize += this.uint32b2.fbeSize
 
-    if ((fbeCurrentSize + this.uint32b3.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint32b3.fbeSize) <= fbeStructSize) {
       fbeValue.uint32b3 = this.uint32b3.get(new EnumUInt32(EnumUInt32.ENUM_VALUE_3))
     } else {
       fbeValue.uint32b3 = new EnumUInt32(EnumUInt32.ENUM_VALUE_3)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint32b3.FBESize
+    fbeCurrentSize += this.uint32b3.fbeSize
 
-    if ((fbeCurrentSize + this.uint32b4.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint32b4.fbeSize) <= fbeStructSize) {
       fbeValue.uint32b4 = this.uint32b4.get(new EnumUInt32(EnumUInt32.ENUM_VALUE_4))
     } else {
       fbeValue.uint32b4 = new EnumUInt32(EnumUInt32.ENUM_VALUE_4)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint32b4.FBESize
+    fbeCurrentSize += this.uint32b4.fbeSize
 
-    if ((fbeCurrentSize + this.uint32b5.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint32b5.fbeSize) <= fbeStructSize) {
       fbeValue.uint32b5 = this.uint32b5.get(new EnumUInt32(EnumUInt32.ENUM_VALUE_5))
     } else {
       fbeValue.uint32b5 = new EnumUInt32(EnumUInt32.ENUM_VALUE_5)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint32b5.FBESize
+    fbeCurrentSize += this.uint32b5.fbeSize
 
-    if ((fbeCurrentSize + this.int64b0.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int64b0.fbeSize) <= fbeStructSize) {
       fbeValue.int64b0 = this.int64b0.get(new EnumInt64(EnumInt64.ENUM_VALUE_0))
     } else {
       fbeValue.int64b0 = new EnumInt64(EnumInt64.ENUM_VALUE_0)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int64b0.FBESize
+    fbeCurrentSize += this.int64b0.fbeSize
 
-    if ((fbeCurrentSize + this.int64b1.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int64b1.fbeSize) <= fbeStructSize) {
       fbeValue.int64b1 = this.int64b1.get(new EnumInt64(EnumInt64.ENUM_VALUE_1))
     } else {
       fbeValue.int64b1 = new EnumInt64(EnumInt64.ENUM_VALUE_1)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int64b1.FBESize
+    fbeCurrentSize += this.int64b1.fbeSize
 
-    if ((fbeCurrentSize + this.int64b2.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int64b2.fbeSize) <= fbeStructSize) {
       fbeValue.int64b2 = this.int64b2.get(new EnumInt64(EnumInt64.ENUM_VALUE_2))
     } else {
       fbeValue.int64b2 = new EnumInt64(EnumInt64.ENUM_VALUE_2)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int64b2.FBESize
+    fbeCurrentSize += this.int64b2.fbeSize
 
-    if ((fbeCurrentSize + this.int64b3.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int64b3.fbeSize) <= fbeStructSize) {
       fbeValue.int64b3 = this.int64b3.get(new EnumInt64(EnumInt64.ENUM_VALUE_3))
     } else {
       fbeValue.int64b3 = new EnumInt64(EnumInt64.ENUM_VALUE_3)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int64b3.FBESize
+    fbeCurrentSize += this.int64b3.fbeSize
 
-    if ((fbeCurrentSize + this.int64b4.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int64b4.fbeSize) <= fbeStructSize) {
       fbeValue.int64b4 = this.int64b4.get(new EnumInt64(EnumInt64.ENUM_VALUE_4))
     } else {
       fbeValue.int64b4 = new EnumInt64(EnumInt64.ENUM_VALUE_4)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int64b4.FBESize
+    fbeCurrentSize += this.int64b4.fbeSize
 
-    if ((fbeCurrentSize + this.int64b5.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.int64b5.fbeSize) <= fbeStructSize) {
       fbeValue.int64b5 = this.int64b5.get(new EnumInt64(EnumInt64.ENUM_VALUE_5))
     } else {
       fbeValue.int64b5 = new EnumInt64(EnumInt64.ENUM_VALUE_5)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.int64b5.FBESize
+    fbeCurrentSize += this.int64b5.fbeSize
 
-    if ((fbeCurrentSize + this.uint64b0.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint64b0.fbeSize) <= fbeStructSize) {
       fbeValue.uint64b0 = this.uint64b0.get(new EnumUInt64(EnumUInt64.ENUM_VALUE_0))
     } else {
       fbeValue.uint64b0 = new EnumUInt64(EnumUInt64.ENUM_VALUE_0)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint64b0.FBESize
+    fbeCurrentSize += this.uint64b0.fbeSize
 
-    if ((fbeCurrentSize + this.uint64b1.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint64b1.fbeSize) <= fbeStructSize) {
       fbeValue.uint64b1 = this.uint64b1.get(new EnumUInt64(EnumUInt64.ENUM_VALUE_1))
     } else {
       fbeValue.uint64b1 = new EnumUInt64(EnumUInt64.ENUM_VALUE_1)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint64b1.FBESize
+    fbeCurrentSize += this.uint64b1.fbeSize
 
-    if ((fbeCurrentSize + this.uint64b2.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint64b2.fbeSize) <= fbeStructSize) {
       fbeValue.uint64b2 = this.uint64b2.get(new EnumUInt64(EnumUInt64.ENUM_VALUE_2))
     } else {
       fbeValue.uint64b2 = new EnumUInt64(EnumUInt64.ENUM_VALUE_2)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint64b2.FBESize
+    fbeCurrentSize += this.uint64b2.fbeSize
 
-    if ((fbeCurrentSize + this.uint64b3.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint64b3.fbeSize) <= fbeStructSize) {
       fbeValue.uint64b3 = this.uint64b3.get(new EnumUInt64(EnumUInt64.ENUM_VALUE_3))
     } else {
       fbeValue.uint64b3 = new EnumUInt64(EnumUInt64.ENUM_VALUE_3)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint64b3.FBESize
+    fbeCurrentSize += this.uint64b3.fbeSize
 
-    if ((fbeCurrentSize + this.uint64b4.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint64b4.fbeSize) <= fbeStructSize) {
       fbeValue.uint64b4 = this.uint64b4.get(new EnumUInt64(EnumUInt64.ENUM_VALUE_4))
     } else {
       fbeValue.uint64b4 = new EnumUInt64(EnumUInt64.ENUM_VALUE_4)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint64b4.FBESize
+    fbeCurrentSize += this.uint64b4.fbeSize
 
-    if ((fbeCurrentSize + this.uint64b5.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uint64b5.fbeSize) <= fbeStructSize) {
       fbeValue.uint64b5 = this.uint64b5.get(new EnumUInt64(EnumUInt64.ENUM_VALUE_5))
     } else {
       fbeValue.uint64b5 = new EnumUInt64(EnumUInt64.ENUM_VALUE_5)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uint64b5.FBESize
+    fbeCurrentSize += this.uint64b5.fbeSize
   }
 
   /**
@@ -5164,8 +5164,8 @@ class FieldModelEnums extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   setBegin () {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
@@ -5176,7 +5176,7 @@ class FieldModelEnums extends fbe.FieldModel {
       return 0
     }
 
-    this.writeUInt32(this.FBEOffset, fbeStructOffset)
+    this.writeUInt32(this.fbeOffset, fbeStructOffset)
     this.writeUInt32(fbeStructOffset, fbeStructSize)
     this.writeUInt32(fbeStructOffset + 4, this.FBEType)
 
@@ -5313,8 +5313,8 @@ class EnumsModel extends fbe.Model {
    * @this {!EnumsModel}
    * @returns {!number} Model size
    */
-  get FBESize () {
-    return this.model.FBESize + this.model.FBEExtra
+  get fbeSize () {
+    return this.model.fbeSize + this.model.fbeExtra
   }
 
   /**
@@ -5341,12 +5341,12 @@ class EnumsModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return false
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    if (fbeFullSize < this.model.fbeSize) {
       return false
     }
 
@@ -5359,7 +5359,7 @@ class EnumsModel extends fbe.Model {
    * @returns {!number} Model begin offset
    */
   createBegin () {
-    return this.buffer.allocate(4 + this.model.FBESize)
+    return this.buffer.allocate(4 + this.model.fbeSize)
   }
 
   /**
@@ -5370,7 +5370,7 @@ class EnumsModel extends fbe.Model {
   createEnd (fbeBegin) {
     let fbeEnd = this.buffer.size
     let fbeFullSize = fbeEnd - fbeBegin
-    this.writeUInt32(this.model.FBEOffset - 4, fbeFullSize)
+    this.writeUInt32(this.model.fbeOffset - 4, fbeFullSize)
     return fbeFullSize
   }
 
@@ -5393,13 +5393,13 @@ class EnumsModel extends fbe.Model {
    * @return {!object} Deserialized Enums value and its size
    */
   deserialize (value = new Enums()) {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return { value: new Enums(), size: 0 }
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    console.assert((fbeFullSize >= this.model.FBESize), 'Model is broken!')
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    console.assert((fbeFullSize >= this.model.fbeSize), 'Model is broken!')
+    if (fbeFullSize < this.model.fbeSize) {
       return { value: new Enums(), size: 0 }
     }
 
@@ -5413,7 +5413,7 @@ class EnumsModel extends fbe.Model {
    * @param {!number} prev Previous Enums model size
    */
   next (prev) {
-    this.model.FBEShift(prev)
+    this.model.fbeShift(prev)
   }
 }
 
@@ -6099,8 +6099,8 @@ class FinalModelEnums extends fbe.FinalModel {
    * @param {!Enums} fbeValue Enums value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (fbeValue) {
-    return 0 + this.byte0.FBEAllocationSize(fbeValue.byte0) + this.byte1.FBEAllocationSize(fbeValue.byte1) + this.byte2.FBEAllocationSize(fbeValue.byte2) + this.byte3.FBEAllocationSize(fbeValue.byte3) + this.byte4.FBEAllocationSize(fbeValue.byte4) + this.byte5.FBEAllocationSize(fbeValue.byte5) + this.char0.FBEAllocationSize(fbeValue.char0) + this.char1.FBEAllocationSize(fbeValue.char1) + this.char2.FBEAllocationSize(fbeValue.char2) + this.char3.FBEAllocationSize(fbeValue.char3) + this.char4.FBEAllocationSize(fbeValue.char4) + this.char5.FBEAllocationSize(fbeValue.char5) + this.wchar0.FBEAllocationSize(fbeValue.wchar0) + this.wchar1.FBEAllocationSize(fbeValue.wchar1) + this.wchar2.FBEAllocationSize(fbeValue.wchar2) + this.wchar3.FBEAllocationSize(fbeValue.wchar3) + this.wchar4.FBEAllocationSize(fbeValue.wchar4) + this.wchar5.FBEAllocationSize(fbeValue.wchar5) + this.int8b0.FBEAllocationSize(fbeValue.int8b0) + this.int8b1.FBEAllocationSize(fbeValue.int8b1) + this.int8b2.FBEAllocationSize(fbeValue.int8b2) + this.int8b3.FBEAllocationSize(fbeValue.int8b3) + this.int8b4.FBEAllocationSize(fbeValue.int8b4) + this.int8b5.FBEAllocationSize(fbeValue.int8b5) + this.uint8b0.FBEAllocationSize(fbeValue.uint8b0) + this.uint8b1.FBEAllocationSize(fbeValue.uint8b1) + this.uint8b2.FBEAllocationSize(fbeValue.uint8b2) + this.uint8b3.FBEAllocationSize(fbeValue.uint8b3) + this.uint8b4.FBEAllocationSize(fbeValue.uint8b4) + this.uint8b5.FBEAllocationSize(fbeValue.uint8b5) + this.int16b0.FBEAllocationSize(fbeValue.int16b0) + this.int16b1.FBEAllocationSize(fbeValue.int16b1) + this.int16b2.FBEAllocationSize(fbeValue.int16b2) + this.int16b3.FBEAllocationSize(fbeValue.int16b3) + this.int16b4.FBEAllocationSize(fbeValue.int16b4) + this.int16b5.FBEAllocationSize(fbeValue.int16b5) + this.uint16b0.FBEAllocationSize(fbeValue.uint16b0) + this.uint16b1.FBEAllocationSize(fbeValue.uint16b1) + this.uint16b2.FBEAllocationSize(fbeValue.uint16b2) + this.uint16b3.FBEAllocationSize(fbeValue.uint16b3) + this.uint16b4.FBEAllocationSize(fbeValue.uint16b4) + this.uint16b5.FBEAllocationSize(fbeValue.uint16b5) + this.int32b0.FBEAllocationSize(fbeValue.int32b0) + this.int32b1.FBEAllocationSize(fbeValue.int32b1) + this.int32b2.FBEAllocationSize(fbeValue.int32b2) + this.int32b3.FBEAllocationSize(fbeValue.int32b3) + this.int32b4.FBEAllocationSize(fbeValue.int32b4) + this.int32b5.FBEAllocationSize(fbeValue.int32b5) + this.uint32b0.FBEAllocationSize(fbeValue.uint32b0) + this.uint32b1.FBEAllocationSize(fbeValue.uint32b1) + this.uint32b2.FBEAllocationSize(fbeValue.uint32b2) + this.uint32b3.FBEAllocationSize(fbeValue.uint32b3) + this.uint32b4.FBEAllocationSize(fbeValue.uint32b4) + this.uint32b5.FBEAllocationSize(fbeValue.uint32b5) + this.int64b0.FBEAllocationSize(fbeValue.int64b0) + this.int64b1.FBEAllocationSize(fbeValue.int64b1) + this.int64b2.FBEAllocationSize(fbeValue.int64b2) + this.int64b3.FBEAllocationSize(fbeValue.int64b3) + this.int64b4.FBEAllocationSize(fbeValue.int64b4) + this.int64b5.FBEAllocationSize(fbeValue.int64b5) + this.uint64b0.FBEAllocationSize(fbeValue.uint64b0) + this.uint64b1.FBEAllocationSize(fbeValue.uint64b1) + this.uint64b2.FBEAllocationSize(fbeValue.uint64b2) + this.uint64b3.FBEAllocationSize(fbeValue.uint64b3) + this.uint64b4.FBEAllocationSize(fbeValue.uint64b4) + this.uint64b5.FBEAllocationSize(fbeValue.uint64b5)
+  fbeAllocationSize (fbeValue) {
+    return 0 + this.byte0.fbeAllocationSize(fbeValue.byte0) + this.byte1.fbeAllocationSize(fbeValue.byte1) + this.byte2.fbeAllocationSize(fbeValue.byte2) + this.byte3.fbeAllocationSize(fbeValue.byte3) + this.byte4.fbeAllocationSize(fbeValue.byte4) + this.byte5.fbeAllocationSize(fbeValue.byte5) + this.char0.fbeAllocationSize(fbeValue.char0) + this.char1.fbeAllocationSize(fbeValue.char1) + this.char2.fbeAllocationSize(fbeValue.char2) + this.char3.fbeAllocationSize(fbeValue.char3) + this.char4.fbeAllocationSize(fbeValue.char4) + this.char5.fbeAllocationSize(fbeValue.char5) + this.wchar0.fbeAllocationSize(fbeValue.wchar0) + this.wchar1.fbeAllocationSize(fbeValue.wchar1) + this.wchar2.fbeAllocationSize(fbeValue.wchar2) + this.wchar3.fbeAllocationSize(fbeValue.wchar3) + this.wchar4.fbeAllocationSize(fbeValue.wchar4) + this.wchar5.fbeAllocationSize(fbeValue.wchar5) + this.int8b0.fbeAllocationSize(fbeValue.int8b0) + this.int8b1.fbeAllocationSize(fbeValue.int8b1) + this.int8b2.fbeAllocationSize(fbeValue.int8b2) + this.int8b3.fbeAllocationSize(fbeValue.int8b3) + this.int8b4.fbeAllocationSize(fbeValue.int8b4) + this.int8b5.fbeAllocationSize(fbeValue.int8b5) + this.uint8b0.fbeAllocationSize(fbeValue.uint8b0) + this.uint8b1.fbeAllocationSize(fbeValue.uint8b1) + this.uint8b2.fbeAllocationSize(fbeValue.uint8b2) + this.uint8b3.fbeAllocationSize(fbeValue.uint8b3) + this.uint8b4.fbeAllocationSize(fbeValue.uint8b4) + this.uint8b5.fbeAllocationSize(fbeValue.uint8b5) + this.int16b0.fbeAllocationSize(fbeValue.int16b0) + this.int16b1.fbeAllocationSize(fbeValue.int16b1) + this.int16b2.fbeAllocationSize(fbeValue.int16b2) + this.int16b3.fbeAllocationSize(fbeValue.int16b3) + this.int16b4.fbeAllocationSize(fbeValue.int16b4) + this.int16b5.fbeAllocationSize(fbeValue.int16b5) + this.uint16b0.fbeAllocationSize(fbeValue.uint16b0) + this.uint16b1.fbeAllocationSize(fbeValue.uint16b1) + this.uint16b2.fbeAllocationSize(fbeValue.uint16b2) + this.uint16b3.fbeAllocationSize(fbeValue.uint16b3) + this.uint16b4.fbeAllocationSize(fbeValue.uint16b4) + this.uint16b5.fbeAllocationSize(fbeValue.uint16b5) + this.int32b0.fbeAllocationSize(fbeValue.int32b0) + this.int32b1.fbeAllocationSize(fbeValue.int32b1) + this.int32b2.fbeAllocationSize(fbeValue.int32b2) + this.int32b3.fbeAllocationSize(fbeValue.int32b3) + this.int32b4.fbeAllocationSize(fbeValue.int32b4) + this.int32b5.fbeAllocationSize(fbeValue.int32b5) + this.uint32b0.fbeAllocationSize(fbeValue.uint32b0) + this.uint32b1.fbeAllocationSize(fbeValue.uint32b1) + this.uint32b2.fbeAllocationSize(fbeValue.uint32b2) + this.uint32b3.fbeAllocationSize(fbeValue.uint32b3) + this.uint32b4.fbeAllocationSize(fbeValue.uint32b4) + this.uint32b5.fbeAllocationSize(fbeValue.uint32b5) + this.int64b0.fbeAllocationSize(fbeValue.int64b0) + this.int64b1.fbeAllocationSize(fbeValue.int64b1) + this.int64b2.fbeAllocationSize(fbeValue.int64b2) + this.int64b3.fbeAllocationSize(fbeValue.int64b3) + this.int64b4.fbeAllocationSize(fbeValue.int64b4) + this.int64b5.fbeAllocationSize(fbeValue.int64b5) + this.uint64b0.fbeAllocationSize(fbeValue.uint64b0) + this.uint64b1.fbeAllocationSize(fbeValue.uint64b1) + this.uint64b2.fbeAllocationSize(fbeValue.uint64b2) + this.uint64b3.fbeAllocationSize(fbeValue.uint64b3) + this.uint64b4.fbeAllocationSize(fbeValue.uint64b4) + this.uint64b5.fbeAllocationSize(fbeValue.uint64b5)
   }
 
   /**
@@ -6127,9 +6127,9 @@ class FinalModelEnums extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeResult = this.verifyFields()
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeResult
   }
 
@@ -6142,462 +6142,462 @@ class FinalModelEnums extends fbe.FinalModel {
     let fbeCurrentOffset = 0
     let fbeFieldSize
 
-    this.byte0.FBEOffset = fbeCurrentOffset
+    this.byte0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.byte0.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.byte1.FBEOffset = fbeCurrentOffset
+    this.byte1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.byte1.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.byte2.FBEOffset = fbeCurrentOffset
+    this.byte2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.byte2.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.byte3.FBEOffset = fbeCurrentOffset
+    this.byte3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.byte3.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.byte4.FBEOffset = fbeCurrentOffset
+    this.byte4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.byte4.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.byte5.FBEOffset = fbeCurrentOffset
+    this.byte5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.byte5.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.char0.FBEOffset = fbeCurrentOffset
+    this.char0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.char0.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.char1.FBEOffset = fbeCurrentOffset
+    this.char1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.char1.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.char2.FBEOffset = fbeCurrentOffset
+    this.char2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.char2.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.char3.FBEOffset = fbeCurrentOffset
+    this.char3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.char3.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.char4.FBEOffset = fbeCurrentOffset
+    this.char4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.char4.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.char5.FBEOffset = fbeCurrentOffset
+    this.char5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.char5.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.wchar0.FBEOffset = fbeCurrentOffset
+    this.wchar0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.wchar0.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.wchar1.FBEOffset = fbeCurrentOffset
+    this.wchar1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.wchar1.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.wchar2.FBEOffset = fbeCurrentOffset
+    this.wchar2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.wchar2.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.wchar3.FBEOffset = fbeCurrentOffset
+    this.wchar3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.wchar3.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.wchar4.FBEOffset = fbeCurrentOffset
+    this.wchar4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.wchar4.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.wchar5.FBEOffset = fbeCurrentOffset
+    this.wchar5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.wchar5.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int8b0.FBEOffset = fbeCurrentOffset
+    this.int8b0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int8b0.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int8b1.FBEOffset = fbeCurrentOffset
+    this.int8b1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int8b1.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int8b2.FBEOffset = fbeCurrentOffset
+    this.int8b2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int8b2.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int8b3.FBEOffset = fbeCurrentOffset
+    this.int8b3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int8b3.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int8b4.FBEOffset = fbeCurrentOffset
+    this.int8b4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int8b4.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int8b5.FBEOffset = fbeCurrentOffset
+    this.int8b5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int8b5.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint8b0.FBEOffset = fbeCurrentOffset
+    this.uint8b0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint8b0.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint8b1.FBEOffset = fbeCurrentOffset
+    this.uint8b1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint8b1.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint8b2.FBEOffset = fbeCurrentOffset
+    this.uint8b2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint8b2.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint8b3.FBEOffset = fbeCurrentOffset
+    this.uint8b3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint8b3.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint8b4.FBEOffset = fbeCurrentOffset
+    this.uint8b4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint8b4.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint8b5.FBEOffset = fbeCurrentOffset
+    this.uint8b5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint8b5.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int16b0.FBEOffset = fbeCurrentOffset
+    this.int16b0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int16b0.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int16b1.FBEOffset = fbeCurrentOffset
+    this.int16b1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int16b1.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int16b2.FBEOffset = fbeCurrentOffset
+    this.int16b2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int16b2.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int16b3.FBEOffset = fbeCurrentOffset
+    this.int16b3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int16b3.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int16b4.FBEOffset = fbeCurrentOffset
+    this.int16b4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int16b4.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int16b5.FBEOffset = fbeCurrentOffset
+    this.int16b5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int16b5.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint16b0.FBEOffset = fbeCurrentOffset
+    this.uint16b0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint16b0.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint16b1.FBEOffset = fbeCurrentOffset
+    this.uint16b1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint16b1.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint16b2.FBEOffset = fbeCurrentOffset
+    this.uint16b2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint16b2.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint16b3.FBEOffset = fbeCurrentOffset
+    this.uint16b3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint16b3.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint16b4.FBEOffset = fbeCurrentOffset
+    this.uint16b4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint16b4.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint16b5.FBEOffset = fbeCurrentOffset
+    this.uint16b5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint16b5.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int32b0.FBEOffset = fbeCurrentOffset
+    this.int32b0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int32b0.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int32b1.FBEOffset = fbeCurrentOffset
+    this.int32b1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int32b1.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int32b2.FBEOffset = fbeCurrentOffset
+    this.int32b2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int32b2.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int32b3.FBEOffset = fbeCurrentOffset
+    this.int32b3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int32b3.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int32b4.FBEOffset = fbeCurrentOffset
+    this.int32b4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int32b4.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int32b5.FBEOffset = fbeCurrentOffset
+    this.int32b5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int32b5.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint32b0.FBEOffset = fbeCurrentOffset
+    this.uint32b0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint32b0.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint32b1.FBEOffset = fbeCurrentOffset
+    this.uint32b1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint32b1.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint32b2.FBEOffset = fbeCurrentOffset
+    this.uint32b2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint32b2.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint32b3.FBEOffset = fbeCurrentOffset
+    this.uint32b3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint32b3.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint32b4.FBEOffset = fbeCurrentOffset
+    this.uint32b4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint32b4.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint32b5.FBEOffset = fbeCurrentOffset
+    this.uint32b5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint32b5.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int64b0.FBEOffset = fbeCurrentOffset
+    this.int64b0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int64b0.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int64b1.FBEOffset = fbeCurrentOffset
+    this.int64b1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int64b1.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int64b2.FBEOffset = fbeCurrentOffset
+    this.int64b2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int64b2.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int64b3.FBEOffset = fbeCurrentOffset
+    this.int64b3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int64b3.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int64b4.FBEOffset = fbeCurrentOffset
+    this.int64b4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int64b4.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.int64b5.FBEOffset = fbeCurrentOffset
+    this.int64b5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int64b5.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint64b0.FBEOffset = fbeCurrentOffset
+    this.uint64b0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint64b0.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint64b1.FBEOffset = fbeCurrentOffset
+    this.uint64b1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint64b1.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint64b2.FBEOffset = fbeCurrentOffset
+    this.uint64b2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint64b2.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint64b3.FBEOffset = fbeCurrentOffset
+    this.uint64b3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint64b3.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint64b4.FBEOffset = fbeCurrentOffset
+    this.uint64b4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint64b4.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.uint64b5.FBEOffset = fbeCurrentOffset
+    this.uint64b5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint64b5.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
@@ -6614,9 +6614,9 @@ class FinalModelEnums extends fbe.FinalModel {
    * @returns {!object} Result struct value and its size
    */
   get (fbeValue = new Enums()) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.getFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return { value: fbeValue, size: fbeSize }
   }
 
@@ -6631,462 +6631,462 @@ class FinalModelEnums extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeResult
 
-    this.byte0.FBEOffset = fbeCurrentOffset
+    this.byte0.fbeOffset = fbeCurrentOffset
     fbeResult = this.byte0.get()
     fbeValue.byte0 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.byte1.FBEOffset = fbeCurrentOffset
+    this.byte1.fbeOffset = fbeCurrentOffset
     fbeResult = this.byte1.get()
     fbeValue.byte1 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.byte2.FBEOffset = fbeCurrentOffset
+    this.byte2.fbeOffset = fbeCurrentOffset
     fbeResult = this.byte2.get()
     fbeValue.byte2 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.byte3.FBEOffset = fbeCurrentOffset
+    this.byte3.fbeOffset = fbeCurrentOffset
     fbeResult = this.byte3.get()
     fbeValue.byte3 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.byte4.FBEOffset = fbeCurrentOffset
+    this.byte4.fbeOffset = fbeCurrentOffset
     fbeResult = this.byte4.get()
     fbeValue.byte4 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.byte5.FBEOffset = fbeCurrentOffset
+    this.byte5.fbeOffset = fbeCurrentOffset
     fbeResult = this.byte5.get()
     fbeValue.byte5 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.char0.FBEOffset = fbeCurrentOffset
+    this.char0.fbeOffset = fbeCurrentOffset
     fbeResult = this.char0.get()
     fbeValue.char0 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.char1.FBEOffset = fbeCurrentOffset
+    this.char1.fbeOffset = fbeCurrentOffset
     fbeResult = this.char1.get()
     fbeValue.char1 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.char2.FBEOffset = fbeCurrentOffset
+    this.char2.fbeOffset = fbeCurrentOffset
     fbeResult = this.char2.get()
     fbeValue.char2 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.char3.FBEOffset = fbeCurrentOffset
+    this.char3.fbeOffset = fbeCurrentOffset
     fbeResult = this.char3.get()
     fbeValue.char3 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.char4.FBEOffset = fbeCurrentOffset
+    this.char4.fbeOffset = fbeCurrentOffset
     fbeResult = this.char4.get()
     fbeValue.char4 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.char5.FBEOffset = fbeCurrentOffset
+    this.char5.fbeOffset = fbeCurrentOffset
     fbeResult = this.char5.get()
     fbeValue.char5 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.wchar0.FBEOffset = fbeCurrentOffset
+    this.wchar0.fbeOffset = fbeCurrentOffset
     fbeResult = this.wchar0.get()
     fbeValue.wchar0 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.wchar1.FBEOffset = fbeCurrentOffset
+    this.wchar1.fbeOffset = fbeCurrentOffset
     fbeResult = this.wchar1.get()
     fbeValue.wchar1 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.wchar2.FBEOffset = fbeCurrentOffset
+    this.wchar2.fbeOffset = fbeCurrentOffset
     fbeResult = this.wchar2.get()
     fbeValue.wchar2 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.wchar3.FBEOffset = fbeCurrentOffset
+    this.wchar3.fbeOffset = fbeCurrentOffset
     fbeResult = this.wchar3.get()
     fbeValue.wchar3 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.wchar4.FBEOffset = fbeCurrentOffset
+    this.wchar4.fbeOffset = fbeCurrentOffset
     fbeResult = this.wchar4.get()
     fbeValue.wchar4 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.wchar5.FBEOffset = fbeCurrentOffset
+    this.wchar5.fbeOffset = fbeCurrentOffset
     fbeResult = this.wchar5.get()
     fbeValue.wchar5 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int8b0.FBEOffset = fbeCurrentOffset
+    this.int8b0.fbeOffset = fbeCurrentOffset
     fbeResult = this.int8b0.get()
     fbeValue.int8b0 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int8b1.FBEOffset = fbeCurrentOffset
+    this.int8b1.fbeOffset = fbeCurrentOffset
     fbeResult = this.int8b1.get()
     fbeValue.int8b1 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int8b2.FBEOffset = fbeCurrentOffset
+    this.int8b2.fbeOffset = fbeCurrentOffset
     fbeResult = this.int8b2.get()
     fbeValue.int8b2 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int8b3.FBEOffset = fbeCurrentOffset
+    this.int8b3.fbeOffset = fbeCurrentOffset
     fbeResult = this.int8b3.get()
     fbeValue.int8b3 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int8b4.FBEOffset = fbeCurrentOffset
+    this.int8b4.fbeOffset = fbeCurrentOffset
     fbeResult = this.int8b4.get()
     fbeValue.int8b4 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int8b5.FBEOffset = fbeCurrentOffset
+    this.int8b5.fbeOffset = fbeCurrentOffset
     fbeResult = this.int8b5.get()
     fbeValue.int8b5 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint8b0.FBEOffset = fbeCurrentOffset
+    this.uint8b0.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint8b0.get()
     fbeValue.uint8b0 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint8b1.FBEOffset = fbeCurrentOffset
+    this.uint8b1.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint8b1.get()
     fbeValue.uint8b1 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint8b2.FBEOffset = fbeCurrentOffset
+    this.uint8b2.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint8b2.get()
     fbeValue.uint8b2 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint8b3.FBEOffset = fbeCurrentOffset
+    this.uint8b3.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint8b3.get()
     fbeValue.uint8b3 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint8b4.FBEOffset = fbeCurrentOffset
+    this.uint8b4.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint8b4.get()
     fbeValue.uint8b4 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint8b5.FBEOffset = fbeCurrentOffset
+    this.uint8b5.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint8b5.get()
     fbeValue.uint8b5 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int16b0.FBEOffset = fbeCurrentOffset
+    this.int16b0.fbeOffset = fbeCurrentOffset
     fbeResult = this.int16b0.get()
     fbeValue.int16b0 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int16b1.FBEOffset = fbeCurrentOffset
+    this.int16b1.fbeOffset = fbeCurrentOffset
     fbeResult = this.int16b1.get()
     fbeValue.int16b1 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int16b2.FBEOffset = fbeCurrentOffset
+    this.int16b2.fbeOffset = fbeCurrentOffset
     fbeResult = this.int16b2.get()
     fbeValue.int16b2 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int16b3.FBEOffset = fbeCurrentOffset
+    this.int16b3.fbeOffset = fbeCurrentOffset
     fbeResult = this.int16b3.get()
     fbeValue.int16b3 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int16b4.FBEOffset = fbeCurrentOffset
+    this.int16b4.fbeOffset = fbeCurrentOffset
     fbeResult = this.int16b4.get()
     fbeValue.int16b4 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int16b5.FBEOffset = fbeCurrentOffset
+    this.int16b5.fbeOffset = fbeCurrentOffset
     fbeResult = this.int16b5.get()
     fbeValue.int16b5 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint16b0.FBEOffset = fbeCurrentOffset
+    this.uint16b0.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint16b0.get()
     fbeValue.uint16b0 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint16b1.FBEOffset = fbeCurrentOffset
+    this.uint16b1.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint16b1.get()
     fbeValue.uint16b1 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint16b2.FBEOffset = fbeCurrentOffset
+    this.uint16b2.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint16b2.get()
     fbeValue.uint16b2 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint16b3.FBEOffset = fbeCurrentOffset
+    this.uint16b3.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint16b3.get()
     fbeValue.uint16b3 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint16b4.FBEOffset = fbeCurrentOffset
+    this.uint16b4.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint16b4.get()
     fbeValue.uint16b4 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint16b5.FBEOffset = fbeCurrentOffset
+    this.uint16b5.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint16b5.get()
     fbeValue.uint16b5 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int32b0.FBEOffset = fbeCurrentOffset
+    this.int32b0.fbeOffset = fbeCurrentOffset
     fbeResult = this.int32b0.get()
     fbeValue.int32b0 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int32b1.FBEOffset = fbeCurrentOffset
+    this.int32b1.fbeOffset = fbeCurrentOffset
     fbeResult = this.int32b1.get()
     fbeValue.int32b1 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int32b2.FBEOffset = fbeCurrentOffset
+    this.int32b2.fbeOffset = fbeCurrentOffset
     fbeResult = this.int32b2.get()
     fbeValue.int32b2 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int32b3.FBEOffset = fbeCurrentOffset
+    this.int32b3.fbeOffset = fbeCurrentOffset
     fbeResult = this.int32b3.get()
     fbeValue.int32b3 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int32b4.FBEOffset = fbeCurrentOffset
+    this.int32b4.fbeOffset = fbeCurrentOffset
     fbeResult = this.int32b4.get()
     fbeValue.int32b4 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int32b5.FBEOffset = fbeCurrentOffset
+    this.int32b5.fbeOffset = fbeCurrentOffset
     fbeResult = this.int32b5.get()
     fbeValue.int32b5 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint32b0.FBEOffset = fbeCurrentOffset
+    this.uint32b0.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint32b0.get()
     fbeValue.uint32b0 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint32b1.FBEOffset = fbeCurrentOffset
+    this.uint32b1.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint32b1.get()
     fbeValue.uint32b1 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint32b2.FBEOffset = fbeCurrentOffset
+    this.uint32b2.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint32b2.get()
     fbeValue.uint32b2 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint32b3.FBEOffset = fbeCurrentOffset
+    this.uint32b3.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint32b3.get()
     fbeValue.uint32b3 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint32b4.FBEOffset = fbeCurrentOffset
+    this.uint32b4.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint32b4.get()
     fbeValue.uint32b4 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint32b5.FBEOffset = fbeCurrentOffset
+    this.uint32b5.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint32b5.get()
     fbeValue.uint32b5 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int64b0.FBEOffset = fbeCurrentOffset
+    this.int64b0.fbeOffset = fbeCurrentOffset
     fbeResult = this.int64b0.get()
     fbeValue.int64b0 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int64b1.FBEOffset = fbeCurrentOffset
+    this.int64b1.fbeOffset = fbeCurrentOffset
     fbeResult = this.int64b1.get()
     fbeValue.int64b1 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int64b2.FBEOffset = fbeCurrentOffset
+    this.int64b2.fbeOffset = fbeCurrentOffset
     fbeResult = this.int64b2.get()
     fbeValue.int64b2 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int64b3.FBEOffset = fbeCurrentOffset
+    this.int64b3.fbeOffset = fbeCurrentOffset
     fbeResult = this.int64b3.get()
     fbeValue.int64b3 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int64b4.FBEOffset = fbeCurrentOffset
+    this.int64b4.fbeOffset = fbeCurrentOffset
     fbeResult = this.int64b4.get()
     fbeValue.int64b4 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.int64b5.FBEOffset = fbeCurrentOffset
+    this.int64b5.fbeOffset = fbeCurrentOffset
     fbeResult = this.int64b5.get()
     fbeValue.int64b5 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint64b0.FBEOffset = fbeCurrentOffset
+    this.uint64b0.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint64b0.get()
     fbeValue.uint64b0 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint64b1.FBEOffset = fbeCurrentOffset
+    this.uint64b1.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint64b1.get()
     fbeValue.uint64b1 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint64b2.FBEOffset = fbeCurrentOffset
+    this.uint64b2.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint64b2.get()
     fbeValue.uint64b2 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint64b3.FBEOffset = fbeCurrentOffset
+    this.uint64b3.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint64b3.get()
     fbeValue.uint64b3 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint64b4.FBEOffset = fbeCurrentOffset
+    this.uint64b4.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint64b4.get()
     fbeValue.uint64b4 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.uint64b5.FBEOffset = fbeCurrentOffset
+    this.uint64b5.fbeOffset = fbeCurrentOffset
     fbeResult = this.uint64b5.get()
     fbeValue.uint64b5 = fbeResult.value
     // noinspection JSUnusedAssignment
@@ -7103,9 +7103,9 @@ class FinalModelEnums extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (fbeValue) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.setFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeSize
   }
 
@@ -7120,397 +7120,397 @@ class FinalModelEnums extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeFieldSize
 
-    this.byte0.FBEOffset = fbeCurrentOffset
+    this.byte0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.byte0.set(fbeValue.byte0)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.byte1.FBEOffset = fbeCurrentOffset
+    this.byte1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.byte1.set(fbeValue.byte1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.byte2.FBEOffset = fbeCurrentOffset
+    this.byte2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.byte2.set(fbeValue.byte2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.byte3.FBEOffset = fbeCurrentOffset
+    this.byte3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.byte3.set(fbeValue.byte3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.byte4.FBEOffset = fbeCurrentOffset
+    this.byte4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.byte4.set(fbeValue.byte4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.byte5.FBEOffset = fbeCurrentOffset
+    this.byte5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.byte5.set(fbeValue.byte5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.char0.FBEOffset = fbeCurrentOffset
+    this.char0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.char0.set(fbeValue.char0)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.char1.FBEOffset = fbeCurrentOffset
+    this.char1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.char1.set(fbeValue.char1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.char2.FBEOffset = fbeCurrentOffset
+    this.char2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.char2.set(fbeValue.char2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.char3.FBEOffset = fbeCurrentOffset
+    this.char3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.char3.set(fbeValue.char3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.char4.FBEOffset = fbeCurrentOffset
+    this.char4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.char4.set(fbeValue.char4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.char5.FBEOffset = fbeCurrentOffset
+    this.char5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.char5.set(fbeValue.char5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.wchar0.FBEOffset = fbeCurrentOffset
+    this.wchar0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.wchar0.set(fbeValue.wchar0)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.wchar1.FBEOffset = fbeCurrentOffset
+    this.wchar1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.wchar1.set(fbeValue.wchar1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.wchar2.FBEOffset = fbeCurrentOffset
+    this.wchar2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.wchar2.set(fbeValue.wchar2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.wchar3.FBEOffset = fbeCurrentOffset
+    this.wchar3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.wchar3.set(fbeValue.wchar3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.wchar4.FBEOffset = fbeCurrentOffset
+    this.wchar4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.wchar4.set(fbeValue.wchar4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.wchar5.FBEOffset = fbeCurrentOffset
+    this.wchar5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.wchar5.set(fbeValue.wchar5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int8b0.FBEOffset = fbeCurrentOffset
+    this.int8b0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int8b0.set(fbeValue.int8b0)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int8b1.FBEOffset = fbeCurrentOffset
+    this.int8b1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int8b1.set(fbeValue.int8b1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int8b2.FBEOffset = fbeCurrentOffset
+    this.int8b2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int8b2.set(fbeValue.int8b2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int8b3.FBEOffset = fbeCurrentOffset
+    this.int8b3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int8b3.set(fbeValue.int8b3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int8b4.FBEOffset = fbeCurrentOffset
+    this.int8b4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int8b4.set(fbeValue.int8b4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int8b5.FBEOffset = fbeCurrentOffset
+    this.int8b5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int8b5.set(fbeValue.int8b5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint8b0.FBEOffset = fbeCurrentOffset
+    this.uint8b0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint8b0.set(fbeValue.uint8b0)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint8b1.FBEOffset = fbeCurrentOffset
+    this.uint8b1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint8b1.set(fbeValue.uint8b1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint8b2.FBEOffset = fbeCurrentOffset
+    this.uint8b2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint8b2.set(fbeValue.uint8b2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint8b3.FBEOffset = fbeCurrentOffset
+    this.uint8b3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint8b3.set(fbeValue.uint8b3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint8b4.FBEOffset = fbeCurrentOffset
+    this.uint8b4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint8b4.set(fbeValue.uint8b4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint8b5.FBEOffset = fbeCurrentOffset
+    this.uint8b5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint8b5.set(fbeValue.uint8b5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int16b0.FBEOffset = fbeCurrentOffset
+    this.int16b0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int16b0.set(fbeValue.int16b0)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int16b1.FBEOffset = fbeCurrentOffset
+    this.int16b1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int16b1.set(fbeValue.int16b1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int16b2.FBEOffset = fbeCurrentOffset
+    this.int16b2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int16b2.set(fbeValue.int16b2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int16b3.FBEOffset = fbeCurrentOffset
+    this.int16b3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int16b3.set(fbeValue.int16b3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int16b4.FBEOffset = fbeCurrentOffset
+    this.int16b4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int16b4.set(fbeValue.int16b4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int16b5.FBEOffset = fbeCurrentOffset
+    this.int16b5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int16b5.set(fbeValue.int16b5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint16b0.FBEOffset = fbeCurrentOffset
+    this.uint16b0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint16b0.set(fbeValue.uint16b0)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint16b1.FBEOffset = fbeCurrentOffset
+    this.uint16b1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint16b1.set(fbeValue.uint16b1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint16b2.FBEOffset = fbeCurrentOffset
+    this.uint16b2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint16b2.set(fbeValue.uint16b2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint16b3.FBEOffset = fbeCurrentOffset
+    this.uint16b3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint16b3.set(fbeValue.uint16b3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint16b4.FBEOffset = fbeCurrentOffset
+    this.uint16b4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint16b4.set(fbeValue.uint16b4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint16b5.FBEOffset = fbeCurrentOffset
+    this.uint16b5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint16b5.set(fbeValue.uint16b5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int32b0.FBEOffset = fbeCurrentOffset
+    this.int32b0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int32b0.set(fbeValue.int32b0)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int32b1.FBEOffset = fbeCurrentOffset
+    this.int32b1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int32b1.set(fbeValue.int32b1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int32b2.FBEOffset = fbeCurrentOffset
+    this.int32b2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int32b2.set(fbeValue.int32b2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int32b3.FBEOffset = fbeCurrentOffset
+    this.int32b3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int32b3.set(fbeValue.int32b3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int32b4.FBEOffset = fbeCurrentOffset
+    this.int32b4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int32b4.set(fbeValue.int32b4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int32b5.FBEOffset = fbeCurrentOffset
+    this.int32b5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int32b5.set(fbeValue.int32b5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint32b0.FBEOffset = fbeCurrentOffset
+    this.uint32b0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint32b0.set(fbeValue.uint32b0)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint32b1.FBEOffset = fbeCurrentOffset
+    this.uint32b1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint32b1.set(fbeValue.uint32b1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint32b2.FBEOffset = fbeCurrentOffset
+    this.uint32b2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint32b2.set(fbeValue.uint32b2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint32b3.FBEOffset = fbeCurrentOffset
+    this.uint32b3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint32b3.set(fbeValue.uint32b3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint32b4.FBEOffset = fbeCurrentOffset
+    this.uint32b4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint32b4.set(fbeValue.uint32b4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint32b5.FBEOffset = fbeCurrentOffset
+    this.uint32b5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint32b5.set(fbeValue.uint32b5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int64b0.FBEOffset = fbeCurrentOffset
+    this.int64b0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int64b0.set(fbeValue.int64b0)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int64b1.FBEOffset = fbeCurrentOffset
+    this.int64b1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int64b1.set(fbeValue.int64b1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int64b2.FBEOffset = fbeCurrentOffset
+    this.int64b2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int64b2.set(fbeValue.int64b2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int64b3.FBEOffset = fbeCurrentOffset
+    this.int64b3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int64b3.set(fbeValue.int64b3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int64b4.FBEOffset = fbeCurrentOffset
+    this.int64b4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int64b4.set(fbeValue.int64b4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.int64b5.FBEOffset = fbeCurrentOffset
+    this.int64b5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.int64b5.set(fbeValue.int64b5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint64b0.FBEOffset = fbeCurrentOffset
+    this.uint64b0.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint64b0.set(fbeValue.uint64b0)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint64b1.FBEOffset = fbeCurrentOffset
+    this.uint64b1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint64b1.set(fbeValue.uint64b1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint64b2.FBEOffset = fbeCurrentOffset
+    this.uint64b2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint64b2.set(fbeValue.uint64b2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint64b3.FBEOffset = fbeCurrentOffset
+    this.uint64b3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint64b3.set(fbeValue.uint64b3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint64b4.FBEOffset = fbeCurrentOffset
+    this.uint64b4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint64b4.set(fbeValue.uint64b4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.uint64b5.FBEOffset = fbeCurrentOffset
+    this.uint64b5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uint64b5.set(fbeValue.uint64b5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
@@ -7560,12 +7560,12 @@ class EnumsFinalModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return false
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return false
     }
@@ -7583,7 +7583,7 @@ class EnumsFinalModel extends fbe.Model {
     let fbeInitialSize = this.buffer.size
 
     let fbeStructType = this.FBEType
-    let fbeStructSize = 8 + this._model.FBEAllocationSize(value)
+    let fbeStructSize = 8 + this._model.fbeAllocationSize(value)
     let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset
     console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')
     if ((this.buffer.offset + fbeStructOffset + fbeStructSize) > this.buffer.size) {
@@ -7593,8 +7593,8 @@ class EnumsFinalModel extends fbe.Model {
     fbeStructSize = 8 + this._model.set(value)
     this.buffer.resize(fbeInitialSize + fbeStructSize)
 
-    this.writeUInt32(this._model.FBEOffset - 8, fbeStructSize)
-    this.writeUInt32(this._model.FBEOffset - 4, fbeStructType)
+    this.writeUInt32(this._model.fbeOffset - 8, fbeStructSize)
+    this.writeUInt32(this._model.fbeOffset - 4, fbeStructType)
 
     return fbeStructSize
   }
@@ -7606,13 +7606,13 @@ class EnumsFinalModel extends fbe.Model {
    * @return {!object} Deserialized Enums value and its size
    */
   deserialize (value = new Enums()) {
-    console.assert(((this.buffer.offset + this._model.FBEOffset) <= this.buffer.size), 'Model is broken!')
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    console.assert(((this.buffer.offset + this._model.fbeOffset) <= this.buffer.size), 'Model is broken!')
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return { value: new Enums(), size: 0 }
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     console.assert(((fbeStructSize > 0) && (fbeStructType === this.FBEType)), 'Model is broken!')
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return { value: new Enums(), size: 8 }
@@ -7628,7 +7628,7 @@ class EnumsFinalModel extends fbe.Model {
    * @param {!number} prev Previous Enums model size
    */
   next (prev) {
-    this._model.FBEShift(prev)
+    this._model.fbeShift(prev)
   }
 }
 

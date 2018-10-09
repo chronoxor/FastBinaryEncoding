@@ -25,20 +25,20 @@ public final class FieldModelOptionalFlagsTyped extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return 1 + 4; }
+    public long fbeSize() { return 1 + 4; }
     // Get the field extra size
     @Override
-    public long FBEExtra()
+    public long fbeExtra()
     {
         if (!hasValue())
             return 0;
 
-        int fbeOptionalOffset = readInt32(FBEOffset() + 1);
+        int fbeOptionalOffset = readInt32(fbeOffset() + 1);
         if ((fbeOptionalOffset == 0) || ((_buffer.getOffset() + fbeOptionalOffset + 4) > _buffer.getSize()))
             return 0;
 
         _buffer.shift(fbeOptionalOffset);
-        long fbeResult = value.FBESize() + value.FBEExtra();
+        long fbeResult = value.fbeSize() + value.fbeExtra();
         _buffer.unshift(fbeOptionalOffset);
         return fbeResult;
     }
@@ -46,10 +46,10 @@ public final class FieldModelOptionalFlagsTyped extends FieldModel
     // Checks whether the object contains a value
     public boolean hasValue()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return false;
 
-        byte fbeHasValue = readInt8(FBEOffset());
+        byte fbeHasValue = readInt8(fbeOffset());
         return (fbeHasValue != 0);
     }
 
@@ -60,14 +60,14 @@ public final class FieldModelOptionalFlagsTyped extends FieldModel
     @Override
     public boolean verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return true;
 
-        byte fbeHasValue = readInt8(FBEOffset());
+        byte fbeHasValue = readInt8(fbeOffset());
         if (fbeHasValue == 0)
             return true;
 
-        int fbeOptionalOffset = readInt32(FBEOffset());
+        int fbeOptionalOffset = readInt32(fbeOffset());
         if (fbeOptionalOffset == 0)
             return false;
 
@@ -83,7 +83,7 @@ public final class FieldModelOptionalFlagsTyped extends FieldModel
         if (!hasValue())
             return 0;
 
-        int fbeOptionalOffset = readInt32(FBEOffset() + 1);
+        int fbeOptionalOffset = readInt32(fbeOffset() + 1);
         assert (fbeOptionalOffset > 0) : "Model is broken!";
         if (fbeOptionalOffset <= 0)
             return 0;
@@ -116,22 +116,22 @@ public final class FieldModelOptionalFlagsTyped extends FieldModel
     // Set the optional value (begin phase)
     public long setBegin(boolean hasValue)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
         byte fbeHasValue = (byte)(hasValue ? 1 : 0);
-        write(FBEOffset(), fbeHasValue);
+        write(fbeOffset(), fbeHasValue);
         if (fbeHasValue == 0)
             return 0;
 
-        int fbeOptionalSize = (int)value.FBESize();
+        int fbeOptionalSize = (int)value.fbeSize();
         int fbeOptionalOffset = (int)(_buffer.allocate(fbeOptionalSize) - _buffer.getOffset());
         assert ((fbeOptionalOffset > 0) && ((_buffer.getOffset() + fbeOptionalOffset + fbeOptionalSize) <= _buffer.getSize())) : "Model is broken!";
         if ((fbeOptionalOffset <= 0) || ((_buffer.getOffset() + fbeOptionalOffset + fbeOptionalSize) > _buffer.getSize()))
             return 0;
 
-        write(FBEOffset() + 1, fbeOptionalOffset);
+        write(fbeOffset() + 1, fbeOptionalOffset);
 
         _buffer.shift(fbeOptionalOffset);
         return fbeOptionalOffset;

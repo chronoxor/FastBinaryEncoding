@@ -17,40 +17,40 @@ public final class FinalModelBoolean extends FinalModel
     public FinalModelBoolean(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long FBEAllocationSize(boolean value) { return FBESize(); }
+    public long fbeAllocationSize(boolean value) { return fbeSize(); }
 
     // Get the final size
     @Override
-    public long FBESize() { return 1; }
+    public long fbeSize() { return 1; }
 
     // Check if the value is valid
     @Override
     public long verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return Long.MAX_VALUE;
 
-        return FBESize();
+        return fbeSize();
     }
 
     // Get the value
     public boolean get(Size size)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return false;
 
-        size.value = FBESize();
-        return readBoolean(FBEOffset());
+        size.value = fbeSize();
+        return readBoolean(fbeOffset());
     }
 
     // Set the value
     public long set(boolean value)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        write(FBEOffset(), value);
-        return FBESize();
+        write(fbeOffset(), value);
+        return fbeSize();
     }
 }

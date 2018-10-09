@@ -24,37 +24,37 @@ public final class FieldModelBalance extends FieldModel
     {
         super(buffer, offset);
         parent = new proto.fbe.FieldModelBalance(buffer, 4 + 4);
-        locked = new FieldModelDouble(buffer, parent.FBEOffset() + parent.FBEBody() - 4 - 4);
+        locked = new FieldModelDouble(buffer, parent.fbeOffset() + parent.FBEBody() - 4 - 4);
     }
 
     // Get the field size
     @Override
-    public long FBESize() { return 4; }
+    public long fbeSize() { return 4; }
     // Get the field body size
     public long FBEBody()
     {
         long fbeResult = 4 + 4
             + parent.FBEBody() - 4 - 4
-            + locked.FBESize()
+            + locked.fbeSize()
             ;
         return fbeResult;
     }
     // Get the field extra size
     @Override
-    public long FBEExtra()
+    public long fbeExtra()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeStructOffset = readInt32(FBEOffset());
+        int fbeStructOffset = readInt32(fbeOffset());
         if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4) > _buffer.getSize()))
             return 0;
 
         _buffer.shift(fbeStructOffset);
 
         long fbeResult = FBEBody()
-            + parent.FBEExtra()
-            + locked.FBEExtra()
+            + parent.fbeExtra()
+            + locked.fbeExtra()
             ;
 
         _buffer.unshift(fbeStructOffset);
@@ -70,10 +70,10 @@ public final class FieldModelBalance extends FieldModel
     public boolean verify() { return verify(true); }
     public boolean verify(boolean fbeVerifyType)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return true;
 
-        int fbeStructOffset = readInt32(FBEOffset());
+        int fbeStructOffset = readInt32(fbeOffset());
         if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4 + 4) > _buffer.getSize()))
             return false;
 
@@ -102,11 +102,11 @@ public final class FieldModelBalance extends FieldModel
             return false;
         fbeCurrentSize += parent.FBEBody() - 4 - 4;
 
-        if ((fbeCurrentSize + locked.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + locked.fbeSize()) > fbeStructSize)
             return true;
         if (!locked.verify())
             return false;
-        fbeCurrentSize += locked.FBESize();
+        fbeCurrentSize += locked.fbeSize();
 
         return true;
     }
@@ -114,10 +114,10 @@ public final class FieldModelBalance extends FieldModel
     // Get the struct value (begin phase)
     public long getBegin()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeStructOffset = readInt32(FBEOffset());
+        int fbeStructOffset = readInt32(fbeOffset());
         assert ((fbeStructOffset > 0) && ((_buffer.getOffset() + fbeStructOffset + 4 + 4) <= _buffer.getSize())) : "Model is broken!";
         if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4 + 4) > _buffer.getSize()))
             return 0;
@@ -160,18 +160,18 @@ public final class FieldModelBalance extends FieldModel
             parent.getFields(fbeValue, fbeStructSize);
         fbeCurrentSize += parent.FBEBody() - 4 - 4;
 
-        if ((fbeCurrentSize + locked.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + locked.fbeSize()) <= fbeStructSize)
             fbeValue.locked = locked.get((double)0.0d);
         else
             fbeValue.locked = (double)0.0d;
-        fbeCurrentSize += locked.FBESize();
+        fbeCurrentSize += locked.fbeSize();
     }
 
     // Set the struct value (begin phase)
     public long setBegin()
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
         int fbeStructSize = (int)FBEBody();
@@ -180,7 +180,7 @@ public final class FieldModelBalance extends FieldModel
         if ((fbeStructOffset <= 0) || ((_buffer.getOffset() + fbeStructOffset + fbeStructSize) > _buffer.getSize()))
             return 0;
 
-        write(FBEOffset(), fbeStructOffset);
+        write(fbeOffset(), fbeStructOffset);
         write(fbeStructOffset, fbeStructSize);
         write(fbeStructOffset + 4, (int)FBEType());
 

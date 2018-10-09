@@ -17,40 +17,40 @@ public final class FinalModelChar extends FinalModel
     public FinalModelChar(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long FBEAllocationSize(char value) { return FBESize(); }
+    public long fbeAllocationSize(char value) { return fbeSize(); }
 
     // Get the final size
     @Override
-    public long FBESize() { return 1; }
+    public long fbeSize() { return 1; }
 
     // Check if the value is valid
     @Override
     public long verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return Long.MAX_VALUE;
 
-        return FBESize();
+        return fbeSize();
     }
 
     // Get the value
     public char get(Size size)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return '\u0000';
 
-        size.value = FBESize();
-        return readChar(FBEOffset());
+        size.value = fbeSize();
+        return readChar(fbeOffset());
     }
 
     // Set the value
     public long set(char value)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        write(FBEOffset(), (byte)value);
-        return FBESize();
+        write(fbeOffset(), (byte)value);
+        return fbeSize();
     }
 }

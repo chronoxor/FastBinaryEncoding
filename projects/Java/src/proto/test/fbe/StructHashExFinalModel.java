@@ -29,11 +29,11 @@ public final class StructHashExFinalModel extends Model
     // Check if the struct value is valid
     public boolean verify()
     {
-        if ((getBuffer().getOffset() + _model.FBEOffset()) > getBuffer().getSize())
+        if ((getBuffer().getOffset() + _model.fbeOffset()) > getBuffer().getSize())
             return false;
 
-        int fbeStructSize = readInt32(_model.FBEOffset() - 8);
-        int fbeStructType = readInt32(_model.FBEOffset() - 4);
+        int fbeStructSize = readInt32(_model.fbeOffset() - 8);
+        int fbeStructType = readInt32(_model.fbeOffset() - 4);
         if ((fbeStructSize <= 0) || (fbeStructType != FBEType()))
             return false;
 
@@ -46,7 +46,7 @@ public final class StructHashExFinalModel extends Model
         long fbeInitialSize = getBuffer().getSize();
 
         int fbeStructType = (int)FBEType();
-        int fbeStructSize = (int)(8 + _model.FBEAllocationSize(value));
+        int fbeStructSize = (int)(8 + _model.fbeAllocationSize(value));
         int fbeStructOffset = (int)(getBuffer().allocate(fbeStructSize) - getBuffer().getOffset());
         assert ((getBuffer().getOffset() + fbeStructOffset + fbeStructSize) <= getBuffer().getSize()) : "Model is broken!";
         if ((getBuffer().getOffset() + fbeStructOffset + fbeStructSize) > getBuffer().getSize())
@@ -55,8 +55,8 @@ public final class StructHashExFinalModel extends Model
         fbeStructSize = (int)(8 + _model.set(value));
         getBuffer().resize(fbeInitialSize + fbeStructSize);
 
-        write(_model.FBEOffset() - 8, fbeStructSize);
-        write(_model.FBEOffset() - 4, fbeStructType);
+        write(_model.fbeOffset() - 8, fbeStructSize);
+        write(_model.fbeOffset() - 4, fbeStructType);
 
         return fbeStructSize;
     }
@@ -65,12 +65,12 @@ public final class StructHashExFinalModel extends Model
     public StructHashEx deserialize() { var value = new StructHashEx(); deserialize(value); return value; }
     public long deserialize(StructHashEx value)
     {
-        assert ((getBuffer().getOffset() + _model.FBEOffset()) <= getBuffer().getSize()) : "Model is broken!";
-        if ((getBuffer().getOffset() + _model.FBEOffset()) > getBuffer().getSize())
+        assert ((getBuffer().getOffset() + _model.fbeOffset()) <= getBuffer().getSize()) : "Model is broken!";
+        if ((getBuffer().getOffset() + _model.fbeOffset()) > getBuffer().getSize())
             return 0;
 
-        long fbeStructSize = readInt32(_model.FBEOffset() - 8);
-        long fbeStructType = readInt32(_model.FBEOffset() - 4);
+        long fbeStructSize = readInt32(_model.fbeOffset() - 8);
+        long fbeStructType = readInt32(_model.fbeOffset() - 4);
         assert ((fbeStructSize > 0) && (fbeStructType == FBEType())) : "Model is broken!";
         if ((fbeStructSize <= 0) || (fbeStructType != FBEType()))
             return 8;
@@ -83,6 +83,6 @@ public final class StructHashExFinalModel extends Model
     // Move to the next struct value
     public void next(long prev)
     {
-        _model.FBEShift(prev);
+        _model.fbeShift(prev);
     }
 }

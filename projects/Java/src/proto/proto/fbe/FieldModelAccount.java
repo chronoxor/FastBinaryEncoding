@@ -28,49 +28,49 @@ public final class FieldModelAccount extends FieldModel
     {
         super(buffer, offset);
         uid = new FieldModelInt32(buffer, 4 + 4);
-        name = new FieldModelString(buffer, uid.FBEOffset() + uid.FBESize());
-        state = new FieldModelState(buffer, name.FBEOffset() + name.FBESize());
-        wallet = new FieldModelBalance(buffer, state.FBEOffset() + state.FBESize());
-        asset = new FieldModelOptionalBalance(buffer, wallet.FBEOffset() + wallet.FBESize());
-        orders = new FieldModelVectorOrder(buffer, asset.FBEOffset() + asset.FBESize());
+        name = new FieldModelString(buffer, uid.fbeOffset() + uid.fbeSize());
+        state = new FieldModelState(buffer, name.fbeOffset() + name.fbeSize());
+        wallet = new FieldModelBalance(buffer, state.fbeOffset() + state.fbeSize());
+        asset = new FieldModelOptionalBalance(buffer, wallet.fbeOffset() + wallet.fbeSize());
+        orders = new FieldModelVectorOrder(buffer, asset.fbeOffset() + asset.fbeSize());
     }
 
     // Get the field size
     @Override
-    public long FBESize() { return 4; }
+    public long fbeSize() { return 4; }
     // Get the field body size
     public long FBEBody()
     {
         long fbeResult = 4 + 4
-            + uid.FBESize()
-            + name.FBESize()
-            + state.FBESize()
-            + wallet.FBESize()
-            + asset.FBESize()
-            + orders.FBESize()
+            + uid.fbeSize()
+            + name.fbeSize()
+            + state.fbeSize()
+            + wallet.fbeSize()
+            + asset.fbeSize()
+            + orders.fbeSize()
             ;
         return fbeResult;
     }
     // Get the field extra size
     @Override
-    public long FBEExtra()
+    public long fbeExtra()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeStructOffset = readInt32(FBEOffset());
+        int fbeStructOffset = readInt32(fbeOffset());
         if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4) > _buffer.getSize()))
             return 0;
 
         _buffer.shift(fbeStructOffset);
 
         long fbeResult = FBEBody()
-            + uid.FBEExtra()
-            + name.FBEExtra()
-            + state.FBEExtra()
-            + wallet.FBEExtra()
-            + asset.FBEExtra()
-            + orders.FBEExtra()
+            + uid.fbeExtra()
+            + name.fbeExtra()
+            + state.fbeExtra()
+            + wallet.fbeExtra()
+            + asset.fbeExtra()
+            + orders.fbeExtra()
             ;
 
         _buffer.unshift(fbeStructOffset);
@@ -86,10 +86,10 @@ public final class FieldModelAccount extends FieldModel
     public boolean verify() { return verify(true); }
     public boolean verify(boolean fbeVerifyType)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return true;
 
-        int fbeStructOffset = readInt32(FBEOffset());
+        int fbeStructOffset = readInt32(fbeOffset());
         if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4 + 4) > _buffer.getSize()))
             return false;
 
@@ -112,41 +112,41 @@ public final class FieldModelAccount extends FieldModel
     {
         long fbeCurrentSize = 4 + 4;
 
-        if ((fbeCurrentSize + uid.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + uid.fbeSize()) > fbeStructSize)
             return true;
         if (!uid.verify())
             return false;
-        fbeCurrentSize += uid.FBESize();
+        fbeCurrentSize += uid.fbeSize();
 
-        if ((fbeCurrentSize + name.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + name.fbeSize()) > fbeStructSize)
             return true;
         if (!name.verify())
             return false;
-        fbeCurrentSize += name.FBESize();
+        fbeCurrentSize += name.fbeSize();
 
-        if ((fbeCurrentSize + state.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + state.fbeSize()) > fbeStructSize)
             return true;
         if (!state.verify())
             return false;
-        fbeCurrentSize += state.FBESize();
+        fbeCurrentSize += state.fbeSize();
 
-        if ((fbeCurrentSize + wallet.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + wallet.fbeSize()) > fbeStructSize)
             return true;
         if (!wallet.verify())
             return false;
-        fbeCurrentSize += wallet.FBESize();
+        fbeCurrentSize += wallet.fbeSize();
 
-        if ((fbeCurrentSize + asset.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + asset.fbeSize()) > fbeStructSize)
             return true;
         if (!asset.verify())
             return false;
-        fbeCurrentSize += asset.FBESize();
+        fbeCurrentSize += asset.fbeSize();
 
-        if ((fbeCurrentSize + orders.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + orders.fbeSize()) > fbeStructSize)
             return true;
         if (!orders.verify())
             return false;
-        fbeCurrentSize += orders.FBESize();
+        fbeCurrentSize += orders.fbeSize();
 
         return true;
     }
@@ -154,10 +154,10 @@ public final class FieldModelAccount extends FieldModel
     // Get the struct value (begin phase)
     public long getBegin()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeStructOffset = readInt32(FBEOffset());
+        int fbeStructOffset = readInt32(fbeOffset());
         assert ((fbeStructOffset > 0) && ((_buffer.getOffset() + fbeStructOffset + 4 + 4) <= _buffer.getSize())) : "Model is broken!";
         if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4 + 4) > _buffer.getSize()))
             return 0;
@@ -196,48 +196,48 @@ public final class FieldModelAccount extends FieldModel
     {
         long fbeCurrentSize = 4 + 4;
 
-        if ((fbeCurrentSize + uid.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + uid.fbeSize()) <= fbeStructSize)
             fbeValue.uid = uid.get();
         else
             fbeValue.uid = 0;
-        fbeCurrentSize += uid.FBESize();
+        fbeCurrentSize += uid.fbeSize();
 
-        if ((fbeCurrentSize + name.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + name.fbeSize()) <= fbeStructSize)
             fbeValue.name = name.get();
         else
             fbeValue.name = "";
-        fbeCurrentSize += name.FBESize();
+        fbeCurrentSize += name.fbeSize();
 
-        if ((fbeCurrentSize + state.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + state.fbeSize()) <= fbeStructSize)
             fbeValue.state = state.get(State.fromSet(EnumSet.of(State.initialized.getEnum(), State.bad.getEnum())));
         else
             fbeValue.state = State.fromSet(EnumSet.of(State.initialized.getEnum(), State.bad.getEnum()));
-        fbeCurrentSize += state.FBESize();
+        fbeCurrentSize += state.fbeSize();
 
-        if ((fbeCurrentSize + wallet.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + wallet.fbeSize()) <= fbeStructSize)
             fbeValue.wallet = wallet.get();
         else
             fbeValue.wallet = new Balance();
-        fbeCurrentSize += wallet.FBESize();
+        fbeCurrentSize += wallet.fbeSize();
 
-        if ((fbeCurrentSize + asset.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + asset.fbeSize()) <= fbeStructSize)
             fbeValue.asset = asset.get();
         else
             fbeValue.asset = null;
-        fbeCurrentSize += asset.FBESize();
+        fbeCurrentSize += asset.fbeSize();
 
-        if ((fbeCurrentSize + orders.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + orders.fbeSize()) <= fbeStructSize)
             orders.get(fbeValue.orders);
         else
             fbeValue.orders.clear();
-        fbeCurrentSize += orders.FBESize();
+        fbeCurrentSize += orders.fbeSize();
     }
 
     // Set the struct value (begin phase)
     public long setBegin()
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
         int fbeStructSize = (int)FBEBody();
@@ -246,7 +246,7 @@ public final class FieldModelAccount extends FieldModel
         if ((fbeStructOffset <= 0) || ((_buffer.getOffset() + fbeStructOffset + fbeStructSize) > _buffer.getSize()))
             return 0;
 
-        write(FBEOffset(), fbeStructOffset);
+        write(fbeOffset(), fbeStructOffset);
         write(fbeStructOffset, fbeStructSize);
         write(fbeStructOffset + 4, (int)FBEType());
 

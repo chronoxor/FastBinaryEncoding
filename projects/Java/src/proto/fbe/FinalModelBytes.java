@@ -17,17 +17,17 @@ public final class FinalModelBytes extends FinalModel
     public FinalModelBytes(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long FBEAllocationSize(byte[] value) { return 4 + value.length; }
+    public long fbeAllocationSize(byte[] value) { return 4 + value.length; }
 
     // Check if the bytes value is valid
     @Override
     public long verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return Long.MAX_VALUE;
 
-        int fbeBytesSize = readInt32(FBEOffset());
-        if ((_buffer.getOffset() + FBEOffset() + 4 + fbeBytesSize) > _buffer.getSize())
+        int fbeBytesSize = readInt32(fbeOffset());
+        if ((_buffer.getOffset() + fbeOffset() + 4 + fbeBytesSize) > _buffer.getSize())
             return Long.MAX_VALUE;
 
         return 4 + fbeBytesSize;
@@ -36,22 +36,22 @@ public final class FinalModelBytes extends FinalModel
     // Get the bytes value
     public byte[] get(Size size)
     {
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
         {
             size.value = 0;
             return new byte[0];
         }
 
-        int fbeBytesSize = readInt32(FBEOffset());
-        assert ((_buffer.getOffset() + FBEOffset() + 4 + fbeBytesSize) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4 + fbeBytesSize) > _buffer.getSize())
+        int fbeBytesSize = readInt32(fbeOffset());
+        assert ((_buffer.getOffset() + fbeOffset() + 4 + fbeBytesSize) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4 + fbeBytesSize) > _buffer.getSize())
         {
             size.value = 4;
             return new byte[0];
         }
 
         size.value = 4 + fbeBytesSize;
-        return readBytes(FBEOffset() + 4, fbeBytesSize);
+        return readBytes(fbeOffset() + 4, fbeBytesSize);
     }
 
     // Set the bytes value
@@ -61,17 +61,17 @@ public final class FinalModelBytes extends FinalModel
         if (value == null)
             throw new IllegalArgumentException("Invalid bytes value!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
         int fbeBytesSize = value.length;
-        assert ((_buffer.getOffset() + FBEOffset() + 4 + fbeBytesSize) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4 + fbeBytesSize) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4 + fbeBytesSize) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4 + fbeBytesSize) > _buffer.getSize())
             return 4;
 
-        write(FBEOffset(), fbeBytesSize);
-        write(FBEOffset() + 4, value);
+        write(fbeOffset(), fbeBytesSize);
+        write(fbeOffset() + 4, value);
         return 4 + fbeBytesSize;
     }
 }

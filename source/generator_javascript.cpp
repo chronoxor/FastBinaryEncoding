@@ -4197,7 +4197,7 @@ class FieldModelBase {
    * @this {!FieldModelBase}
    * @returns {!number} Field offset
    */
-  get FBEOffset () {
+  get fbeOffset () {
     return this._offset
   }
 
@@ -4206,7 +4206,7 @@ class FieldModelBase {
    * @this {!FieldModelBase}
    * @param {!number} offset Field offset
    */
-  set FBEOffset (offset) {
+  set fbeOffset (offset) {
     this._offset = offset
   }
 
@@ -4215,7 +4215,7 @@ class FieldModelBase {
    * @this {!FieldModelBase}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 0
   }
 
@@ -4224,7 +4224,7 @@ class FieldModelBase {
    * @this {!FieldModelBase}
    * @returns {!number} Field extra size
    */
-  get FBEExtra () {
+  get fbeExtra () {
     return 0
   }
 
@@ -4233,7 +4233,7 @@ class FieldModelBase {
    * @this {!FieldModelBase}
    * @param {!number} offset Offset
    */
-  FBEShift (offset) {
+  fbeShift (offset) {
     this._offset += offset
   }
 
@@ -4242,7 +4242,7 @@ class FieldModelBase {
    * @this {!FieldModelBase}
    * @param {!number} offset Offset
    */
-  FBEUnshift (offset) {
+  fbeUnshift (offset) {
     this._offset -= offset
   }
 
@@ -4797,7 +4797,7 @@ class FieldModel_NAME_ extends FieldModel {
    * @this {!FieldModel_NAME_}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return _SIZE_
   }
 
@@ -4808,11 +4808,11 @@ class FieldModel_NAME_ extends FieldModel {
    * @returns {!_BASE_} Result value
    */
   get (defaults = _DEFAULTS_) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
-    return this.read_NAME_(this.FBEOffset)
+    return this.read_NAME_(this.fbeOffset)
   }
 
   /**
@@ -4821,12 +4821,12 @@ class FieldModel_NAME_ extends FieldModel {
    * @param {!_BASE_} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
-    this.write_NAME_(this.FBEOffset, value)
+    this.write_NAME_(this.fbeOffset, value)
   }
 }
 
@@ -4856,7 +4856,7 @@ class FieldModelDecimal extends FieldModel {
    * @this {!FieldModelDecimal}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 16
   }
 
@@ -4867,15 +4867,15 @@ class FieldModelDecimal extends FieldModel {
    * @returns {!Big} Result value
    */
   get (defaults = new Big(0)) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
     // Read decimal parts
-    let low = this.readUInt32(this.FBEOffset)
-    let mid = this.readUInt32(this.FBEOffset + 4)
-    let high = this.readUInt32(this.FBEOffset + 8)
-    let flags = this.readUInt32(this.FBEOffset + 12)
+    let low = this.readUInt32(this.fbeOffset)
+    let mid = this.readUInt32(this.fbeOffset + 4)
+    let high = this.readUInt32(this.fbeOffset + 8)
+    let flags = this.readUInt32(this.fbeOffset + 12)
 
     // Calculate decimal value
     let negative = (flags & 0x80000000) !== 0
@@ -4898,8 +4898,8 @@ class FieldModelDecimal extends FieldModel {
    * @param {!Big} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
@@ -4911,7 +4911,7 @@ class FieldModelDecimal extends FieldModel {
     // Check for decimal scale overflow
     if ((scale < 0) || (scale > 28)) {
       // Value scale exceeds .NET Decimal limit of [0, 28]
-      this.writeCount(this.FBEOffset, 0, this.FBESize)
+      this.writeCount(this.fbeOffset, 0, this.fbeSize)
       return
     }
 
@@ -4921,26 +4921,26 @@ class FieldModelDecimal extends FieldModel {
       // Check for decimal number overflow
       if (index > 11) {
         // Value too big for .NET Decimal (bit length is limited to [0, 96])
-        this.writeCount(this.FBEOffset, 0, this.FBESize)
+        this.writeCount(this.fbeOffset, 0, this.fbeSize)
         return
       }
       let byte = parseInt(number.mod(256))
-      this.writeByte(this.FBEOffset + index, byte)
+      this.writeByte(this.fbeOffset + index, byte)
       number = number.div(256).round(0, 0)
       index++
     }
 
     // Fill remaining bytes with zeros
     while (index < 12) {
-      this.writeByte(this.FBEOffset + index, 0)
+      this.writeByte(this.fbeOffset + index, 0)
       index++
     }
 
     // Write scale at byte 14
-    this.writeByte(this.FBEOffset + 14, scale)
+    this.writeByte(this.fbeOffset + 14, scale)
 
     // Write signum at byte 15
-    this.writeByte(this.FBEOffset + 15, (negative ? 0x80 : 0))
+    this.writeByte(this.fbeOffset + 15, (negative ? 0x80 : 0))
   }
 }
 
@@ -4965,7 +4965,7 @@ class FieldModelTimestamp extends FieldModel {
    * @this {!FieldModelTimestamp}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 8
   }
 
@@ -4976,11 +4976,11 @@ class FieldModelTimestamp extends FieldModel {
    * @returns {!Date} Result value
    */
   get (defaults = new Date(0)) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
-    let nanoseconds = this.readUInt64(this.FBEOffset)
+    let nanoseconds = this.readUInt64(this.fbeOffset)
     return new Date(Math.round(nanoseconds / 1000000))
   }
 
@@ -4990,13 +4990,13 @@ class FieldModelTimestamp extends FieldModel {
    * @param {!Date} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
     let nanoseconds = UInt64.fromNumber(value.getTime()).mul(1000000)
-    this.writeUInt64(this.FBEOffset, nanoseconds)
+    this.writeUInt64(this.fbeOffset, nanoseconds)
   }
 }
 
@@ -5021,7 +5021,7 @@ class FieldModelUUID extends FieldModel {
    * @this {!FieldModelUUID}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 16
   }
 
@@ -5032,11 +5032,11 @@ class FieldModelUUID extends FieldModel {
    * @returns {!UUID} Result value
    */
   get (defaults = UUID.nil()) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
-    return new UUID(this.readBytes(this.FBEOffset, 16))
+    return new UUID(this.readBytes(this.fbeOffset, 16))
   }
 
   /**
@@ -5045,12 +5045,12 @@ class FieldModelUUID extends FieldModel {
    * @param {!UUID} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
-    this.writeBytes(this.FBEOffset, value.data)
+    this.writeBytes(this.fbeOffset, value.data)
   }
 }
 
@@ -5075,7 +5075,7 @@ class FieldModelBytes extends FieldModel {
    * @this {!FieldModelBytes}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -5084,12 +5084,12 @@ class FieldModelBytes extends FieldModel {
    * @this {!FieldModelBytes}
    * @returns {!number} Field extra size
    */
-  get FBEExtra () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeBytesOffset = this.readUInt32(this.FBEOffset)
+    let fbeBytesOffset = this.readUInt32(this.fbeOffset)
     if ((fbeBytesOffset === 0) || ((this._buffer.offset + fbeBytesOffset + 4) > this._buffer.size)) {
       return 0
     }
@@ -5104,11 +5104,11 @@ class FieldModelBytes extends FieldModel {
    * @returns {!boolean} Field model valid state
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return true
     }
 
-    let fbeBytesOffset = this.readUInt32(this.FBEOffset)
+    let fbeBytesOffset = this.readUInt32(this.fbeOffset)
     if (fbeBytesOffset === 0) {
       return true
     }
@@ -5130,11 +5130,11 @@ class FieldModelBytes extends FieldModel {
   get (defaults = new Uint8Array(0)) {
     let value = defaults
 
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return value
     }
 
-    let fbeBytesOffset = this.readUInt32(this.FBEOffset)
+    let fbeBytesOffset = this.readUInt32(this.fbeOffset)
     if (fbeBytesOffset === 0) {
       return value
     }
@@ -5160,8 +5160,8 @@ class FieldModelBytes extends FieldModel {
    * @param {!Uint8Array} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
@@ -5172,7 +5172,7 @@ class FieldModelBytes extends FieldModel {
       return
     }
 
-    this.writeUInt32(this.FBEOffset, fbeBytesOffset)
+    this.writeUInt32(this.fbeOffset, fbeBytesOffset)
     this.writeUInt32(fbeBytesOffset, fbeBytesSize)
     this.writeBytes(fbeBytesOffset + 4, value)
   }
@@ -5199,7 +5199,7 @@ class FieldModelString extends FieldModel {
    * @this {!FieldModelString}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -5208,12 +5208,12 @@ class FieldModelString extends FieldModel {
    * @this {!FieldModelString}
    * @returns {!number} Field extra size
    */
-  get FBEExtra () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStringOffset = this.readUInt32(this.FBEOffset)
+    let fbeStringOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStringOffset === 0) || ((this._buffer.offset + fbeStringOffset + 4) > this._buffer.size)) {
       return 0
     }
@@ -5228,11 +5228,11 @@ class FieldModelString extends FieldModel {
    * @returns {!boolean} Field model valid state
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return true
     }
 
-    let fbeStringOffset = this.readUInt32(this.FBEOffset)
+    let fbeStringOffset = this.readUInt32(this.fbeOffset)
     if (fbeStringOffset === 0) {
       return true
     }
@@ -5254,11 +5254,11 @@ class FieldModelString extends FieldModel {
   get (defaults = '') {
     let value = defaults
 
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return value
     }
 
-    let fbeStringOffset = this.readUInt32(this.FBEOffset)
+    let fbeStringOffset = this.readUInt32(this.fbeOffset)
     if (fbeStringOffset === 0) {
       return value
     }
@@ -5284,8 +5284,8 @@ class FieldModelString extends FieldModel {
    * @param {!string} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
@@ -5296,7 +5296,7 @@ class FieldModelString extends FieldModel {
       return
     }
 
-    this.writeUInt32(this.FBEOffset, fbeStringOffset)
+    this.writeUInt32(this.fbeOffset, fbeStringOffset)
     this.writeUInt32(fbeStringOffset, fbeStringSize)
     this.writeString(fbeStringOffset + 4, value, fbeStringSize)
   }
@@ -5328,7 +5328,7 @@ class FieldModelOptional extends FieldModel {
   constructor (model, buffer, offset) {
     super(buffer, offset)
     this._model = model
-    this._model.FBEOffset = 0
+    this._model.fbeOffset = 0
   }
 
   /**
@@ -5336,7 +5336,7 @@ class FieldModelOptional extends FieldModel {
    * @this {!FieldModelOptional}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 1 + 4
   }
 
@@ -5345,18 +5345,18 @@ class FieldModelOptional extends FieldModel {
    * @this {!FieldModelOptional}
    * @returns {!number} Field extra size
    */
-  get FBEExtra () {
+  get fbeExtra () {
     if (!this.hasValue) {
       return 0
     }
 
-    let fbeOptionalOffset = this.readUInt32(this.FBEOffset + 1)
+    let fbeOptionalOffset = this.readUInt32(this.fbeOffset + 1)
     if ((fbeOptionalOffset === 0) || ((this._buffer.offset + fbeOptionalOffset + 4) > this._buffer.size)) {
       return 0
     }
 
     this._buffer.shift(fbeOptionalOffset)
-    let fbeResult = this.value.FBESize + this.value.FBEExtra
+    let fbeResult = this.value.fbeSize + this.value.fbeExtra
     this._buffer.unshift(fbeOptionalOffset)
     return fbeResult
   }
@@ -5367,11 +5367,11 @@ class FieldModelOptional extends FieldModel {
    * @returns {!boolean} Optional has value flag
    */
   get hasValue () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return false
     }
 
-    let fbeHasValue = this.readUInt8(this.FBEOffset)
+    let fbeHasValue = this.readUInt8(this.fbeOffset)
     return fbeHasValue !== 0
   }
 
@@ -5390,16 +5390,16 @@ class FieldModelOptional extends FieldModel {
    * @returns {!boolean} Field model valid state
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return true
     }
 
-    let fbeHasValue = this.readUInt8(this.FBEOffset)
+    let fbeHasValue = this.readUInt8(this.fbeOffset)
     if (fbeHasValue === 0) {
       return true
     }
 
-    let fbeOptionalOffset = this.readUInt32(this.FBEOffset)
+    let fbeOptionalOffset = this.readUInt32(this.fbeOffset)
     if (fbeOptionalOffset === 0) {
       return false
     }
@@ -5420,7 +5420,7 @@ class FieldModelOptional extends FieldModel {
       return 0
     }
 
-    let fbeOptionalOffset = this.readUInt32(this.FBEOffset + 1)
+    let fbeOptionalOffset = this.readUInt32(this.fbeOffset + 1)
     console.assert((fbeOptionalOffset > 0), 'Model is broken!')
     if (fbeOptionalOffset <= 0) {
       return 0
@@ -5462,24 +5462,24 @@ class FieldModelOptional extends FieldModel {
    * @returns {!number} Optional begin offset
    */
   setBegin (hasValue) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    this.writeBool(this.FBEOffset, hasValue)
+    this.writeBool(this.fbeOffset, hasValue)
     if (!hasValue) {
       return 0
     }
 
-    let fbeOptionalSize = this.value.FBESize
+    let fbeOptionalSize = this.value.fbeSize
     let fbeOptionalOffset = this._buffer.allocate(fbeOptionalSize) - this._buffer.offset
     console.assert(((fbeOptionalOffset > 0) && ((this._buffer.offset + fbeOptionalOffset + fbeOptionalSize) <= this._buffer.size)), 'Model is broken!')
     if ((fbeOptionalOffset <= 0) || ((this._buffer.offset + fbeOptionalOffset + fbeOptionalSize) > this._buffer.size)) {
       return 0
     }
 
-    this.writeUInt32(this.FBEOffset + 1, fbeOptionalOffset)
+    this.writeUInt32(this.fbeOffset + 1, fbeOptionalOffset)
 
     this._buffer.shift(fbeOptionalOffset)
     return fbeOptionalOffset
@@ -5544,8 +5544,8 @@ class FieldModelArray extends FieldModel {
    * @this {!FieldModelArray}
    * @returns {!number} Field size
    */
-  get FBESize () {
-    return this._size * this._model.FBESize
+  get fbeSize () {
+    return this._size * this._model.fbeSize
   }
 
   /**
@@ -5553,7 +5553,7 @@ class FieldModelArray extends FieldModel {
    * @this {!FieldModelArray}
    * @returns {!number} Field extra size
    */
-  get FBEExtra () {
+  get fbeExtra () {
     return 0
   }
 
@@ -5582,13 +5582,13 @@ class FieldModelArray extends FieldModel {
    * @returns {!FieldModel} Base field model value
    */
   getItem (index) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
     if (index >= this._size) {
       throw new Error('Index is out of bounds!')
     }
 
-    this._model.FBEOffset = this.FBEOffset
-    this._model.FBEShift(index * this._model.FBESize)
+    this._model.fbeOffset = this.fbeOffset
+    this._model.fbeShift(index * this._model.fbeSize)
     return this._model
   }
 
@@ -5598,16 +5598,16 @@ class FieldModelArray extends FieldModel {
    * @returns {!boolean} Field model valid state
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return false
     }
 
-    this._model.FBEOffset = this.FBEOffset
+    this._model.fbeOffset = this.fbeOffset
     for (let i = 0; i < this._size; i++) {
       if (!this._model.verify()) {
         return false
       }
-      this._model.FBEShift(this._model.FBESize)
+      this._model.fbeShift(this._model.fbeSize)
     }
 
     return true
@@ -5626,7 +5626,7 @@ class FieldModelArray extends FieldModel {
     for (let i = 0; i < this._size; i++) {
       let value = fbeModel.get()
       values.push(value)
-      fbeModel.FBEShift(fbeModel.FBESize)
+      fbeModel.fbeShift(fbeModel.fbeSize)
     }
 
     return values
@@ -5638,15 +5638,15 @@ class FieldModelArray extends FieldModel {
    * @param {!Array} values Array values
    */
   set (values) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
     let fbeModel = this.getItem(0)
     for (let i = 0; i < Math.min(values.length, this._size); i++) {
       fbeModel.set(values[i])
-      fbeModel.FBEShift(fbeModel.FBESize)
+      fbeModel.fbeShift(fbeModel.fbeSize)
     }
   }
 }
@@ -5684,7 +5684,7 @@ class FieldModelVector extends FieldModel {
    * @this {!FieldModelVector}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -5693,12 +5693,12 @@ class FieldModelVector extends FieldModel {
    * @this {!FieldModelVector}
    * @returns {!number} Field extra size
    */
-  get FBEExtra () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeVectorOffset = this.readUInt32(this.FBEOffset)
+    let fbeVectorOffset = this.readUInt32(this.fbeOffset)
     if ((fbeVectorOffset === 0) || ((this._buffer.offset + fbeVectorOffset + 4) > this._buffer.size)) {
       return 0
     }
@@ -5706,10 +5706,10 @@ class FieldModelVector extends FieldModel {
     let fbeVectorSize = this.readUInt32(fbeVectorOffset)
 
     let fbeResult = 4
-    this._model.FBEOffset = fbeVectorOffset + 4
+    this._model.fbeOffset = fbeVectorOffset + 4
     for (let i = 0; i < fbeVectorSize; i++) {
-      fbeResult += this._model.FBESize + this._model.FBEExtra
-      this._model.FBEShift(this._model.FBESize)
+      fbeResult += this._model.fbeSize + this._model.fbeExtra
+      this._model.fbeShift(this._model.fbeSize)
     }
     return fbeResult
   }
@@ -5720,12 +5720,12 @@ class FieldModelVector extends FieldModel {
    * @returns {!number} Vector offset
    */
   get offset () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
     // noinspection UnnecessaryLocalVariableJS
-    let fbeVectorOffset = this.readUInt32(this.FBEOffset)
+    let fbeVectorOffset = this.readUInt32(this.fbeOffset)
     return fbeVectorOffset
   }
 
@@ -5735,11 +5735,11 @@ class FieldModelVector extends FieldModel {
    * @returns {!number} Vector size
    */
   get size () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeVectorOffset = this.readUInt32(this.FBEOffset)
+    let fbeVectorOffset = this.readUInt32(this.fbeOffset)
     if ((fbeVectorOffset === 0) || ((this._buffer.offset + fbeVectorOffset + 4) > this._buffer.size)) {
       return 0
     }
@@ -5756,9 +5756,9 @@ class FieldModelVector extends FieldModel {
    * @returns {!FieldModel} Base field model value
    */
   getItem (index) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
 
-    let fbeVectorOffset = this.readUInt32(this.FBEOffset)
+    let fbeVectorOffset = this.readUInt32(this.fbeOffset)
     console.assert(((fbeVectorOffset > 0) && ((this._buffer.offset + fbeVectorOffset + 4) <= this._buffer.size)), 'Model is broken!')
 
     let fbeVectorSize = this.readUInt32(fbeVectorOffset)
@@ -5766,8 +5766,8 @@ class FieldModelVector extends FieldModel {
       throw new Error('Index is out of bounds!')
     }
 
-    this._model.FBEOffset = fbeVectorOffset + 4
-    this._model.FBEShift(index * this._model.FBESize)
+    this._model.fbeOffset = fbeVectorOffset + 4
+    this._model.fbeShift(index * this._model.fbeSize)
     return this._model
   }
 
@@ -5778,15 +5778,15 @@ class FieldModelVector extends FieldModel {
    * @returns {!FieldModel} Base field model value
    */
   resize (size) {
-    let fbeVectorSize = size * this._model.FBESize
+    let fbeVectorSize = size * this._model.fbeSize
     let fbeVectorOffset = this._buffer.allocate(4 + fbeVectorSize) - this._buffer.offset
     console.assert(((fbeVectorOffset > 0) && ((this._buffer.offset + fbeVectorOffset + 4) <= this._buffer.size)), 'Model is broken!')
 
-    this.writeUInt32(this.FBEOffset, fbeVectorOffset)
+    this.writeUInt32(this.fbeOffset, fbeVectorOffset)
     this.writeUInt32(fbeVectorOffset, size)
     this.writeCount(fbeVectorOffset + 4, 0, fbeVectorSize)
 
-    this._model.FBEOffset = fbeVectorOffset + 4
+    this._model.fbeOffset = fbeVectorOffset + 4
     return this._model
   }
 
@@ -5796,11 +5796,11 @@ class FieldModelVector extends FieldModel {
    * @returns {!boolean} Field model valid state
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return true
     }
 
-    let fbeVectorOffset = this.readUInt32(this.FBEOffset)
+    let fbeVectorOffset = this.readUInt32(this.fbeOffset)
     if (fbeVectorOffset === 0) {
       return true
     }
@@ -5811,12 +5811,12 @@ class FieldModelVector extends FieldModel {
 
     let fbeVectorSize = this.readUInt32(fbeVectorOffset)
 
-    this._model.FBEOffset = fbeVectorOffset + 4
+    this._model.fbeOffset = fbeVectorOffset + 4
     for (let i = 0; i < fbeVectorSize; i++) {
       if (!this._model.verify()) {
         return false
       }
-      this._model.FBEShift(this._model.FBESize)
+      this._model.fbeShift(this._model.fbeSize)
     }
 
     return true
@@ -5840,7 +5840,7 @@ class FieldModelVector extends FieldModel {
     for (let i = 0; i < fbeVectorSize; i++) {
       let value = fbeModel.get()
       values.push(value)
-      fbeModel.FBEShift(fbeModel.FBESize)
+      fbeModel.fbeShift(fbeModel.fbeSize)
     }
 
     return values
@@ -5852,15 +5852,15 @@ class FieldModelVector extends FieldModel {
    * @param {!Array} values Vector values
    */
   set (values) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
     let fbeModel = this.resize(values.length)
     for (let value of values) {
       fbeModel.set(value)
-      fbeModel.FBEShift(fbeModel.FBESize)
+      fbeModel.fbeShift(fbeModel.fbeSize)
     }
   }
 }
@@ -5898,7 +5898,7 @@ class FieldModelSet extends FieldModel {
    * @this {!FieldModelSet}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -5907,12 +5907,12 @@ class FieldModelSet extends FieldModel {
    * @this {!FieldModelSet}
    * @returns {!number} Field extra size
    */
-  get FBEExtra () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeSetOffset = this.readUInt32(this.FBEOffset)
+    let fbeSetOffset = this.readUInt32(this.fbeOffset)
     if ((fbeSetOffset === 0) || ((this._buffer.offset + fbeSetOffset + 4) > this._buffer.size)) {
       return 0
     }
@@ -5920,10 +5920,10 @@ class FieldModelSet extends FieldModel {
     let fbeSetSize = this.readUInt32(fbeSetOffset)
 
     let fbeResult = 4
-    this._model.FBEOffset = fbeSetOffset + 4
+    this._model.fbeOffset = fbeSetOffset + 4
     for (let i = 0; i < fbeSetSize; i++) {
-      fbeResult += this._model.FBESize + this._model.FBEExtra
-      this._model.FBEShift(this._model.FBESize)
+      fbeResult += this._model.fbeSize + this._model.fbeExtra
+      this._model.fbeShift(this._model.fbeSize)
     }
     return fbeResult
   }
@@ -5934,12 +5934,12 @@ class FieldModelSet extends FieldModel {
    * @returns {!number} Set offset
    */
   get offset () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
     // noinspection UnnecessaryLocalVariableJS
-    let fbeSetOffset = this.readUInt32(this.FBEOffset)
+    let fbeSetOffset = this.readUInt32(this.fbeOffset)
     return fbeSetOffset
   }
 
@@ -5949,11 +5949,11 @@ class FieldModelSet extends FieldModel {
    * @returns {!number} Set size
    */
   get size () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeSetOffset = this.readUInt32(this.FBEOffset)
+    let fbeSetOffset = this.readUInt32(this.fbeOffset)
     if ((fbeSetOffset === 0) || ((this._buffer.offset + fbeSetOffset + 4) > this._buffer.size)) {
       return 0
     }
@@ -5970,9 +5970,9 @@ class FieldModelSet extends FieldModel {
    * @returns {!FieldModel} Base field model value
    */
   getItem (index) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
 
-    let fbeSetOffset = this.readUInt32(this.FBEOffset)
+    let fbeSetOffset = this.readUInt32(this.fbeOffset)
     console.assert(((fbeSetOffset > 0) && ((this._buffer.offset + fbeSetOffset + 4) <= this._buffer.size)), 'Model is broken!')
 
     let fbeSetSize = this.readUInt32(fbeSetOffset)
@@ -5980,8 +5980,8 @@ class FieldModelSet extends FieldModel {
       throw new Error('Index is out of bounds!')
     }
 
-    this._model.FBEOffset = fbeSetOffset + 4
-    this._model.FBEShift(index * this._model.FBESize)
+    this._model.fbeOffset = fbeSetOffset + 4
+    this._model.fbeShift(index * this._model.fbeSize)
     return this._model
   }
 
@@ -5992,15 +5992,15 @@ class FieldModelSet extends FieldModel {
    * @returns {!FieldModel} Base field model value
    */
   resize (size) {
-    let fbeSetSize = size * this._model.FBESize
+    let fbeSetSize = size * this._model.fbeSize
     let fbeSetOffset = this._buffer.allocate(4 + fbeSetSize) - this._buffer.offset
     console.assert(((fbeSetOffset > 0) && ((this._buffer.offset + fbeSetOffset + 4) <= this._buffer.size)), 'Model is broken!')
 
-    this.writeUInt32(this.FBEOffset, fbeSetOffset)
+    this.writeUInt32(this.fbeOffset, fbeSetOffset)
     this.writeUInt32(fbeSetOffset, size)
     this.writeCount(fbeSetOffset + 4, 0, fbeSetSize)
 
-    this._model.FBEOffset = fbeSetOffset + 4
+    this._model.fbeOffset = fbeSetOffset + 4
     return this._model
   }
 
@@ -6010,11 +6010,11 @@ class FieldModelSet extends FieldModel {
    * @returns {!boolean} Field model valid state
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return true
     }
 
-    let fbeSetOffset = this.readUInt32(this.FBEOffset)
+    let fbeSetOffset = this.readUInt32(this.fbeOffset)
     if (fbeSetOffset === 0) {
       return true
     }
@@ -6025,12 +6025,12 @@ class FieldModelSet extends FieldModel {
 
     let fbeSetSize = this.readUInt32(fbeSetOffset)
 
-    this._model.FBEOffset = fbeSetOffset + 4
+    this._model.fbeOffset = fbeSetOffset + 4
     for (let i = 0; i < fbeSetSize; i++) {
       if (!this._model.verify()) {
         return false
       }
-      this._model.FBEShift(this._model.FBESize)
+      this._model.fbeShift(this._model.fbeSize)
     }
 
     return true
@@ -6054,7 +6054,7 @@ class FieldModelSet extends FieldModel {
     for (let i = 0; i < fbeSetSize; i++) {
       let value = fbeModel.get()
       values.add(value)
-      fbeModel.FBEShift(fbeModel.FBESize)
+      fbeModel.fbeShift(fbeModel.fbeSize)
     }
 
     return values
@@ -6066,15 +6066,15 @@ class FieldModelSet extends FieldModel {
    * @param {!Set} values Set values
    */
   set (values) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
     let fbeModel = this.resize(values.size)
     for (let value of values) {
       fbeModel.set(value)
-      fbeModel.FBEShift(fbeModel.FBESize)
+      fbeModel.fbeShift(fbeModel.fbeSize)
     }
   }
 }
@@ -6114,7 +6114,7 @@ class FieldModelMap extends FieldModel {
    * @this {!FieldModelMap}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -6123,12 +6123,12 @@ class FieldModelMap extends FieldModel {
    * @this {!FieldModelMap}
    * @returns {!number} Field extra size
    */
-  get FBEExtra () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeMapOffset = this.readUInt32(this.FBEOffset)
+    let fbeMapOffset = this.readUInt32(this.fbeOffset)
     if ((fbeMapOffset === 0) || ((this._buffer.offset + fbeMapOffset + 4) > this._buffer.size)) {
       return 0
     }
@@ -6136,13 +6136,13 @@ class FieldModelMap extends FieldModel {
     let fbeMapSize = this.readUInt32(fbeMapOffset)
 
     let fbeResult = 4
-    this._modelKey.FBEOffset = fbeMapOffset + 4
-    this._modelValue.FBEOffset = fbeMapOffset + 4 + this._modelKey.FBESize
+    this._modelKey.fbeOffset = fbeMapOffset + 4
+    this._modelValue.fbeOffset = fbeMapOffset + 4 + this._modelKey.fbeSize
     for (let i = 0; i < fbeMapSize; i++) {
-      fbeResult += this._modelKey.FBESize + this._modelKey.FBEExtra
-      this._modelKey.FBEShift(this._modelKey.FBESize + this._modelValue.FBESize)
-      fbeResult += this._modelValue.FBESize + this._modelValue.FBEExtra
-      this._modelValue.FBEShift(this._modelKey.FBESize + this._modelValue.FBESize)
+      fbeResult += this._modelKey.fbeSize + this._modelKey.fbeExtra
+      this._modelKey.fbeShift(this._modelKey.fbeSize + this._modelValue.fbeSize)
+      fbeResult += this._modelValue.fbeSize + this._modelValue.fbeExtra
+      this._modelValue.fbeShift(this._modelKey.fbeSize + this._modelValue.fbeSize)
     }
     return fbeResult
   }
@@ -6153,12 +6153,12 @@ class FieldModelMap extends FieldModel {
    * @returns {!number} Map offset
    */
   get offset () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
     // noinspection UnnecessaryLocalVariableJS
-    let fbeMapOffset = this.readUInt32(this.FBEOffset)
+    let fbeMapOffset = this.readUInt32(this.fbeOffset)
     return fbeMapOffset
   }
 
@@ -6168,11 +6168,11 @@ class FieldModelMap extends FieldModel {
    * @returns {!number} Map size
    */
   get size () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeMapOffset = this.readUInt32(this.FBEOffset)
+    let fbeMapOffset = this.readUInt32(this.fbeOffset)
     if ((fbeMapOffset === 0) || ((this._buffer.offset + fbeMapOffset + 4) > this._buffer.size)) {
       return 0
     }
@@ -6189,9 +6189,9 @@ class FieldModelMap extends FieldModel {
    * @returns {[!FieldModel]} Base field model value
    */
   getItem (index) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
 
-    let fbeMapOffset = this.readUInt32(this.FBEOffset)
+    let fbeMapOffset = this.readUInt32(this.fbeOffset)
     console.assert(((fbeMapOffset > 0) && ((this._buffer.offset + fbeMapOffset + 4) <= this._buffer.size)), 'Model is broken!')
 
     let fbeMapSize = this.readUInt32(fbeMapOffset)
@@ -6199,10 +6199,10 @@ class FieldModelMap extends FieldModel {
       throw new Error('Index is out of bounds!')
     }
 
-    this._modelKey.FBEOffset = fbeMapOffset + 4
-    this._modelValue.FBEOffset = fbeMapOffset + 4 + this._modelKey.FBESize
-    this._modelKey.FBEShift(index * (this._modelKey.FBESize + this._modelValue.FBESize))
-    this._modelValue.FBEShift(index * (this._modelKey.FBESize + this._modelValue.FBESize))
+    this._modelKey.fbeOffset = fbeMapOffset + 4
+    this._modelValue.fbeOffset = fbeMapOffset + 4 + this._modelKey.fbeSize
+    this._modelKey.fbeShift(index * (this._modelKey.fbeSize + this._modelValue.fbeSize))
+    this._modelValue.fbeShift(index * (this._modelKey.fbeSize + this._modelValue.fbeSize))
     return [this._modelKey, this._modelValue]
   }
 
@@ -6213,19 +6213,19 @@ class FieldModelMap extends FieldModel {
    * @returns {[!FieldModel]} Base field model value
    */
   resize (size) {
-    this._modelKey.FBEOffset = this.FBEOffset
-    this._modelValue.FBEOffset = this.FBEOffset + this._modelKey.FBESize
+    this._modelKey.fbeOffset = this.fbeOffset
+    this._modelValue.fbeOffset = this.fbeOffset + this._modelKey.fbeSize
 
-    let fbeMapSize = size * (this._modelKey.FBESize + this._modelValue.FBESize)
+    let fbeMapSize = size * (this._modelKey.fbeSize + this._modelValue.fbeSize)
     let fbeMapOffset = this._buffer.allocate(4 + fbeMapSize) - this._buffer.offset
     console.assert(((fbeMapOffset > 0) && ((this._buffer.offset + fbeMapOffset + 4) <= this._buffer.size)), 'Model is broken!')
 
-    this.writeUInt32(this.FBEOffset, fbeMapOffset)
+    this.writeUInt32(this.fbeOffset, fbeMapOffset)
     this.writeUInt32(fbeMapOffset, size)
     this.writeCount(fbeMapOffset + 4, 0, fbeMapSize)
 
-    this._modelKey.FBEOffset = fbeMapOffset + 4
-    this._modelValue.FBEOffset = fbeMapOffset + 4 + this._modelKey.FBESize
+    this._modelKey.fbeOffset = fbeMapOffset + 4
+    this._modelValue.fbeOffset = fbeMapOffset + 4 + this._modelKey.fbeSize
     return [this._modelKey, this._modelValue]
   }
 
@@ -6235,11 +6235,11 @@ class FieldModelMap extends FieldModel {
    * @returns {!boolean} Field model valid state
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return true
     }
 
-    let fbeMapOffset = this.readUInt32(this.FBEOffset)
+    let fbeMapOffset = this.readUInt32(this.fbeOffset)
     if (fbeMapOffset === 0) {
       return true
     }
@@ -6250,17 +6250,17 @@ class FieldModelMap extends FieldModel {
 
     let fbeMapSize = this.readUInt32(fbeMapOffset)
 
-    this._modelKey.FBEOffset = fbeMapOffset + 4
-    this._modelValue.FBEOffset = fbeMapOffset + 4 + this._modelKey.FBESize
+    this._modelKey.fbeOffset = fbeMapOffset + 4
+    this._modelValue.fbeOffset = fbeMapOffset + 4 + this._modelKey.fbeSize
     for (let i = 0; i < fbeMapSize; i++) {
       if (!this._modelKey.verify()) {
         return false
       }
-      this._modelKey.FBEShift(this._modelKey.FBESize + this._modelValue.FBESize)
+      this._modelKey.fbeShift(this._modelKey.fbeSize + this._modelValue.fbeSize)
       if (!this._modelValue.verify()) {
         return false
       }
-      this._modelValue.FBEShift(this._modelKey.FBESize + this._modelValue.FBESize)
+      this._modelValue.fbeShift(this._modelKey.fbeSize + this._modelValue.fbeSize)
     }
 
     return true
@@ -6285,8 +6285,8 @@ class FieldModelMap extends FieldModel {
       let key = fbeModelKey.get()
       let value = fbeModelValue.get()
       values.set(key, value)
-      fbeModelKey.FBEShift(fbeModelKey.FBESize + fbeModelValue.FBESize)
-      fbeModelValue.FBEShift(fbeModelKey.FBESize + fbeModelValue.FBESize)
+      fbeModelKey.fbeShift(fbeModelKey.fbeSize + fbeModelValue.fbeSize)
+      fbeModelValue.fbeShift(fbeModelKey.fbeSize + fbeModelValue.fbeSize)
     }
 
     return values
@@ -6298,17 +6298,17 @@ class FieldModelMap extends FieldModel {
    * @param {!Map} values Map values
    */
   set (values) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
     let [fbeModelKey, fbeModelValue] = this.resize(values.size)
     for (let [key, value] of values) {
       fbeModelKey.set(key)
-      fbeModelKey.FBEShift(fbeModelKey.FBESize + fbeModelValue.FBESize)
+      fbeModelKey.fbeShift(fbeModelKey.fbeSize + fbeModelValue.fbeSize)
       fbeModelValue.set(value)
-      fbeModelValue.FBEShift(fbeModelKey.FBESize + fbeModelValue.FBESize)
+      fbeModelValue.fbeShift(fbeModelKey.fbeSize + fbeModelValue.fbeSize)
     }
   }
 }
@@ -6361,8 +6361,8 @@ class FinalModel_NAME_ extends FinalModel {
    * @param {!_BASE_} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -6370,7 +6370,7 @@ class FinalModel_NAME_ extends FinalModel {
    * @this {!FinalModel_NAME_}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return _SIZE_
   }
 
@@ -6380,11 +6380,11 @@ class FinalModel_NAME_ extends FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -6393,11 +6393,11 @@ class FinalModel_NAME_ extends FinalModel {
    * @returns {!object} Result value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: _DEFAULTS_, size: 0 }
     }
 
-    return { value: this.read_NAME_(this.FBEOffset), size: this.FBESize }
+    return { value: this.read_NAME_(this.fbeOffset), size: this.fbeSize }
   }
 
   /**
@@ -6407,13 +6407,13 @@ class FinalModel_NAME_ extends FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    this.write_NAME_(this.FBEOffset, value)
-    return this.FBESize
+    this.write_NAME_(this.fbeOffset, value)
+    return this.fbeSize
   }
 }
 
@@ -6444,8 +6444,8 @@ class FinalModelDecimal extends FinalModel {
    * @param {!Big} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -6453,7 +6453,7 @@ class FinalModelDecimal extends FinalModel {
    * @this {!FieldModelDecimal}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return 16
   }
 
@@ -6463,11 +6463,11 @@ class FinalModelDecimal extends FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -6476,15 +6476,15 @@ class FinalModelDecimal extends FinalModel {
    * @returns {!object} Result decimal value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: new Big(0), size: 0 }
     }
 
     // Read decimal parts
-    let low = this.readUInt32(this.FBEOffset)
-    let mid = this.readUInt32(this.FBEOffset + 4)
-    let high = this.readUInt32(this.FBEOffset + 8)
-    let flags = this.readUInt32(this.FBEOffset + 12)
+    let low = this.readUInt32(this.fbeOffset)
+    let mid = this.readUInt32(this.fbeOffset + 4)
+    let high = this.readUInt32(this.fbeOffset + 8)
+    let flags = this.readUInt32(this.fbeOffset + 12)
 
     // Calculate decimal value
     let negative = (flags & 0x80000000) !== 0
@@ -6498,7 +6498,7 @@ class FinalModelDecimal extends FinalModel {
       result.s = -1
     }
 
-    return { value: result, size: this.FBESize }
+    return { value: result, size: this.fbeSize }
   }
 
   /**
@@ -6508,8 +6508,8 @@ class FinalModelDecimal extends FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
@@ -6521,8 +6521,8 @@ class FinalModelDecimal extends FinalModel {
     // Check for decimal scale overflow
     if ((scale < 0) || (scale > 28)) {
       // Value scale exceeds .NET Decimal limit of [0, 28]
-      this.writeCount(this.FBEOffset, 0, this.FBESize)
-      return this.FBESize
+      this.writeCount(this.fbeOffset, 0, this.fbeSize)
+      return this.fbeSize
     }
 
     // Write unscaled value to bytes 0-11
@@ -6531,27 +6531,27 @@ class FinalModelDecimal extends FinalModel {
       // Check for decimal number overflow
       if (index > 11) {
         // Value too big for .NET Decimal (bit length is limited to [0, 96])
-        this.writeCount(this.FBEOffset, 0, this.FBESize)
-        return this.FBESize
+        this.writeCount(this.fbeOffset, 0, this.fbeSize)
+        return this.fbeSize
       }
       let byte = parseInt(number.mod(256))
-      this.writeByte(this.FBEOffset + index, byte)
+      this.writeByte(this.fbeOffset + index, byte)
       number = number.div(256).round(0, 0)
       index++
     }
 
     // Fill remaining bytes with zeros
     while (index < 12) {
-      this.writeByte(this.FBEOffset + index, 0)
+      this.writeByte(this.fbeOffset + index, 0)
       index++
     }
 
     // Write scale at byte 14
-    this.writeByte(this.FBEOffset + 14, scale)
+    this.writeByte(this.fbeOffset + 14, scale)
 
     // Write signum at byte 15
-    this.writeByte(this.FBEOffset + 15, (negative ? 0x80 : 0))
-    return this.FBESize
+    this.writeByte(this.fbeOffset + 15, (negative ? 0x80 : 0))
+    return this.fbeSize
   }
 }
 
@@ -6577,8 +6577,8 @@ class FinalModelTimestamp extends FinalModel {
    * @param {!Date} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -6586,7 +6586,7 @@ class FinalModelTimestamp extends FinalModel {
    * @this {!FieldModelTimestamp}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return 8
   }
 
@@ -6596,11 +6596,11 @@ class FinalModelTimestamp extends FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -6609,12 +6609,12 @@ class FinalModelTimestamp extends FinalModel {
    * @returns {!object} Result timestamp value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: new Date(0), size: 0 }
     }
 
-    let nanoseconds = this.readUInt64(this.FBEOffset)
-    return { value: new Date(Math.round(nanoseconds / 1000000)), size: this.FBESize }
+    let nanoseconds = this.readUInt64(this.fbeOffset)
+    return { value: new Date(Math.round(nanoseconds / 1000000)), size: this.fbeSize }
   }
 
   /**
@@ -6624,14 +6624,14 @@ class FinalModelTimestamp extends FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
     let nanoseconds = UInt64.fromNumber(value.getTime()).mul(1000000)
-    this.writeUInt64(this.FBEOffset, nanoseconds)
-    return this.FBESize
+    this.writeUInt64(this.fbeOffset, nanoseconds)
+    return this.fbeSize
   }
 }
 
@@ -6657,8 +6657,8 @@ class FinalModelUUID extends FinalModel {
    * @param {!UUID} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -6666,7 +6666,7 @@ class FinalModelUUID extends FinalModel {
    * @this {!FieldModelUUID}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return 16
   }
 
@@ -6676,11 +6676,11 @@ class FinalModelUUID extends FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -6689,11 +6689,11 @@ class FinalModelUUID extends FinalModel {
    * @returns {!object} Result UUID value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: new UUID(), size: 0 }
     }
 
-    return { value: new UUID(this.readBytes(this.FBEOffset, 16)), size: this.FBESize }
+    return { value: new UUID(this.readBytes(this.fbeOffset, 16)), size: this.fbeSize }
   }
 
   /**
@@ -6703,13 +6703,13 @@ class FinalModelUUID extends FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    this.writeBytes(this.FBEOffset, value.data)
-    return this.FBESize
+    this.writeBytes(this.fbeOffset, value.data)
+    return this.fbeSize
   }
 }
 
@@ -6735,7 +6735,7 @@ class FinalModelBytes extends FinalModel {
    * @param {!Uint8Array} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
+  fbeAllocationSize (value) {
     return 4 + value.length
   }
 
@@ -6745,12 +6745,12 @@ class FinalModelBytes extends FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + 4) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + 4) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    let fbeBytesSize = this.readUInt32(this.FBEOffset)
-    if ((this._buffer.offset + this.FBEOffset + 4 + fbeBytesSize) > this._buffer.size) {
+    let fbeBytesSize = this.readUInt32(this.fbeOffset)
+    if ((this._buffer.offset + this.fbeOffset + 4 + fbeBytesSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
@@ -6763,17 +6763,17 @@ class FinalModelBytes extends FinalModel {
    * @returns {!object} Result bytes value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + 4) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + 4) > this._buffer.size) {
       return { value: new Uint8Array(0), size: 0 }
     }
 
-    let fbeBytesSize = this.readUInt32(this.FBEOffset)
-    console.assert(((this._buffer.offset + this.FBEOffset + 4 + fbeBytesSize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + 4 + fbeBytesSize) > this._buffer.size) {
+    let fbeBytesSize = this.readUInt32(this.fbeOffset)
+    console.assert(((this._buffer.offset + this.fbeOffset + 4 + fbeBytesSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + 4 + fbeBytesSize) > this._buffer.size) {
       return { value: new Uint8Array(0), size: 4 }
     }
 
-    return { value: this.readBytes(this.FBEOffset + 4, fbeBytesSize), size: (4 + fbeBytesSize) }
+    return { value: this.readBytes(this.fbeOffset + 4, fbeBytesSize), size: (4 + fbeBytesSize) }
   }
 
   /**
@@ -6783,19 +6783,19 @@ class FinalModelBytes extends FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + 4) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + 4) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + 4) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + 4) > this._buffer.size) {
       return 0
     }
 
     let fbeBytesSize = value.length
-    console.assert(((this._buffer.offset + this.FBEOffset + 4 + fbeBytesSize) <= this._buffer.size), 'Model is broken!')
-    if (((this._buffer.offset + this.FBEOffset + 4 + fbeBytesSize) > this._buffer.size)) {
+    console.assert(((this._buffer.offset + this.fbeOffset + 4 + fbeBytesSize) <= this._buffer.size), 'Model is broken!')
+    if (((this._buffer.offset + this.fbeOffset + 4 + fbeBytesSize) > this._buffer.size)) {
       return 4
     }
 
-    this.writeUInt32(this.FBEOffset, fbeBytesSize)
-    this.writeBytes(this.FBEOffset + 4, value)
+    this.writeUInt32(this.fbeOffset, fbeBytesSize)
+    this.writeBytes(this.fbeOffset + 4, value)
     return 4 + fbeBytesSize
   }
 }
@@ -6822,7 +6822,7 @@ class FinalModelString extends FinalModel {
    * @param {!string} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
+  fbeAllocationSize (value) {
     return 4 + 3 * (value.length + 1)
   }
 
@@ -6832,12 +6832,12 @@ class FinalModelString extends FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + 4) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + 4) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    let fbeStringSize = this.readUInt32(this.FBEOffset)
-    if ((this._buffer.offset + this.FBEOffset + 4 + fbeStringSize) > this._buffer.size) {
+    let fbeStringSize = this.readUInt32(this.fbeOffset)
+    if ((this._buffer.offset + this.fbeOffset + 4 + fbeStringSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
@@ -6850,17 +6850,17 @@ class FinalModelString extends FinalModel {
    * @returns {!object} Result string value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + 4) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + 4) > this._buffer.size) {
       return { value: '', size: 0 }
     }
 
-    let fbeStringSize = this.readUInt32(this.FBEOffset)
-    console.assert(((this._buffer.offset + this.FBEOffset + 4 + fbeStringSize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + 4 + fbeStringSize) > this._buffer.size) {
+    let fbeStringSize = this.readUInt32(this.fbeOffset)
+    console.assert(((this._buffer.offset + this.fbeOffset + 4 + fbeStringSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + 4 + fbeStringSize) > this._buffer.size) {
       return { value: '', size: 4 }
     }
 
-    return { value: this.readString(this.FBEOffset + 4, fbeStringSize), size: (4 + fbeStringSize) }
+    return { value: this.readString(this.fbeOffset + 4, fbeStringSize), size: (4 + fbeStringSize) }
   }
 
   /**
@@ -6870,19 +6870,19 @@ class FinalModelString extends FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + 4) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + 4) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + 4) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + 4) > this._buffer.size) {
       return 0
     }
 
     let fbeStringSize = utf8count(value)
-    console.assert(((this._buffer.offset + this.FBEOffset + 4 + fbeStringSize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + 4 + fbeStringSize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + 4 + fbeStringSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + 4 + fbeStringSize) > this._buffer.size) {
       return 4
     }
 
-    this.writeUInt32(this.FBEOffset, fbeStringSize)
-    this.writeString(this.FBEOffset + 4, value, fbeStringSize)
+    this.writeUInt32(this.fbeOffset, fbeStringSize)
+    this.writeString(this.fbeOffset + 4, value, fbeStringSize)
     return 4 + fbeStringSize
   }
 }
@@ -6913,7 +6913,7 @@ class FinalModelOptional extends FinalModel {
   constructor (model, buffer, offset) {
     super(buffer, offset)
     this._model = model
-    this._model.FBEOffset = 0
+    this._model.fbeOffset = 0
   }
 
   /**
@@ -6922,8 +6922,8 @@ class FinalModelOptional extends FinalModel {
    * @param {object} optional Optional value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (optional) {
-    return 1 + ((optional != null) ? this.value.FBEAllocationSize(optional) : 0)
+  fbeAllocationSize (optional) {
+    return 1 + ((optional != null) ? this.value.fbeAllocationSize(optional) : 0)
   }
 
   /**
@@ -6932,11 +6932,11 @@ class FinalModelOptional extends FinalModel {
    * @returns {!boolean} Optional has value flag
    */
   get hasValue () {
-    if ((this._buffer.offset + this.FBEOffset + 1) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + 1) > this._buffer.size) {
       return false
     }
 
-    let fbeHasValue = this.readUInt8(this.FBEOffset)
+    let fbeHasValue = this.readUInt8(this.fbeOffset)
     return fbeHasValue !== 0
   }
 
@@ -6955,18 +6955,18 @@ class FinalModelOptional extends FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + 1) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + 1) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    let fbeHasValue = this.readUInt8(this.FBEOffset)
+    let fbeHasValue = this.readUInt8(this.fbeOffset)
     if (fbeHasValue === 0) {
       return 1
     }
 
-    this._buffer.shift(this.FBEOffset + 1)
+    this._buffer.shift(this.fbeOffset + 1)
     let fbeResult = this.value.verify()
-    this._buffer.unshift(this.FBEOffset + 1)
+    this._buffer.unshift(this.fbeOffset + 1)
     return 1 + fbeResult
   }
 
@@ -6976,8 +6976,8 @@ class FinalModelOptional extends FinalModel {
    * @returns {!object} Result optional value and its size
    */
   get () {
-    console.assert(((this._buffer.offset + this.FBEOffset + 1) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + 1) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + 1) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + 1) > this._buffer.size) {
       return { value: undefined, size: 0 }
     }
 
@@ -6985,9 +6985,9 @@ class FinalModelOptional extends FinalModel {
       return { value: undefined, size: 1 }
     }
 
-    this._buffer.shift(this.FBEOffset + 1)
+    this._buffer.shift(this.fbeOffset + 1)
     let optional = this.value.get()
-    this._buffer.unshift(this.FBEOffset + 1)
+    this._buffer.unshift(this.fbeOffset + 1)
     return { value: optional.value, size: (1 + optional.size) }
   }
 
@@ -6998,20 +6998,20 @@ class FinalModelOptional extends FinalModel {
    * @returns {!number} Final model size
    */
   set (optional) {
-    console.assert(((this._buffer.offset + this.FBEOffset + 1) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + 1) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + 1) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + 1) > this._buffer.size) {
       return 0
     }
 
     let hasValue = (optional != null)
-    this.writeBool(this.FBEOffset, hasValue)
+    this.writeBool(this.fbeOffset, hasValue)
     if (!hasValue) {
       return 1
     }
 
-    this._buffer.shift(this.FBEOffset + 1)
+    this._buffer.shift(this.fbeOffset + 1)
     let size = this.value.set(optional)
-    this._buffer.unshift(this.FBEOffset + 1)
+    this._buffer.unshift(this.fbeOffset + 1)
     return 1 + size
   }
 }
@@ -7052,10 +7052,10 @@ class FinalModelArray extends FinalModel {
    * @param {!Array} values Array values
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (values) {
+  fbeAllocationSize (values) {
     let size = 0
     for (let i = 0; i < Math.min(values.length, this._size); i++) {
-      size += this._model.FBEAllocationSize(values[i])
+      size += this._model.fbeAllocationSize(values[i])
     }
     return size
   }
@@ -7066,18 +7066,18 @@ class FinalModelArray extends FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
     let size = 0
-    this._model.FBEOffset = this.FBEOffset
+    this._model.fbeOffset = this.fbeOffset
     for (let i = 0; i < this._size; i++) {
       let offset = this._model.verify()
       if (offset === Number.MAX_SAFE_INTEGER) {
         return Number.MAX_SAFE_INTEGER
       }
-      this._model.FBEShift(offset)
+      this._model.fbeShift(offset)
       size += offset
     }
     return size
@@ -7092,17 +7092,17 @@ class FinalModelArray extends FinalModel {
   get (values = []) {
     values.length = 0
 
-    console.assert(((this._buffer.offset + this.FBEOffset) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset) > this._buffer.size) {
       return { value: values, size: 0 }
     }
 
     let size = 0
-    this._model.FBEOffset = this.FBEOffset
+    this._model.fbeOffset = this.fbeOffset
     for (let i = 0; i < this._size; i++) {
       let value = this._model.get()
       values.push(value.value)
-      this._model.FBEShift(value.size)
+      this._model.fbeShift(value.size)
       size += value.size
     }
     return { value: values, size: size }
@@ -7115,16 +7115,16 @@ class FinalModelArray extends FinalModel {
    * @returns {!number} Final model size
    */
   set (values) {
-    console.assert(((this._buffer.offset + this.FBEOffset) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset) > this._buffer.size) {
       return 0
     }
 
     let size = 0
-    this._model.FBEOffset = this.FBEOffset
+    this._model.fbeOffset = this.fbeOffset
     for (let i = 0; i < Math.min(values.length, this._size); i++) {
       let offset = this._model.set(values[i])
-      this._model.FBEShift(offset)
+      this._model.fbeShift(offset)
       size += offset
     }
     return size
@@ -7165,10 +7165,10 @@ class FinalModelVector extends FinalModel {
    * @param {!Array} values Vector values
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (values) {
+  fbeAllocationSize (values) {
     let size = 0
     for (let value of values) {
-      size += this._model.FBEAllocationSize(value)
+      size += this._model.fbeAllocationSize(value)
     }
     return size
   }
@@ -7179,20 +7179,20 @@ class FinalModelVector extends FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + 4) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + 4) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    let fbeVectorSize = this.readUInt32(this.FBEOffset)
+    let fbeVectorSize = this.readUInt32(this.fbeOffset)
 
     let size = 4
-    this._model.FBEOffset = this.FBEOffset + 4
+    this._model.fbeOffset = this.fbeOffset + 4
     for (let i = 0; i < fbeVectorSize; i++) {
       let offset = this._model.verify()
       if (offset === Number.MAX_SAFE_INTEGER) {
         return Number.MAX_SAFE_INTEGER
       }
-      this._model.FBEShift(offset)
+      this._model.fbeShift(offset)
       size += offset
     }
     return size
@@ -7207,22 +7207,22 @@ class FinalModelVector extends FinalModel {
   get (values = []) {
     values.length = 0
 
-    console.assert(((this._buffer.offset + this.FBEOffset + 4) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + 4) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + 4) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + 4) > this._buffer.size) {
       return { value: values, size: 0 }
     }
 
-    let fbeVectorSize = this.readUInt32(this.FBEOffset)
+    let fbeVectorSize = this.readUInt32(this.fbeOffset)
     if (fbeVectorSize === 0) {
       return { value: values, size: 4 }
     }
 
     let size = 4
-    this._model.FBEOffset = this.FBEOffset + 4
+    this._model.fbeOffset = this.fbeOffset + 4
     for (let i = 0; i < fbeVectorSize; i++) {
       let value = this._model.get()
       values.push(value.value)
-      this._model.FBEShift(value.size)
+      this._model.fbeShift(value.size)
       size += value.size
     }
     return { value: values, size: size }
@@ -7235,18 +7235,18 @@ class FinalModelVector extends FinalModel {
    * @returns {!number} Final model size
    */
   set (values) {
-    console.assert(((this._buffer.offset + this.FBEOffset + 4) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + 4) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + 4) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + 4) > this._buffer.size) {
       return 0
     }
 
-    this.writeUInt32(this.FBEOffset, values.length)
+    this.writeUInt32(this.fbeOffset, values.length)
 
     let size = 4
-    this._model.FBEOffset = this.FBEOffset + 4
+    this._model.fbeOffset = this.fbeOffset + 4
     for (let value of values) {
       let offset = this._model.set(value)
-      this._model.FBEShift(offset)
+      this._model.fbeShift(offset)
       size += offset
     }
     return size
@@ -7287,10 +7287,10 @@ class FinalModelSet extends FinalModel {
    * @param {!Set} values Set values
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (values) {
+  fbeAllocationSize (values) {
     let size = 0
     for (let value of values) {
-      size += this._model.FBEAllocationSize(value)
+      size += this._model.fbeAllocationSize(value)
     }
     return size
   }
@@ -7301,20 +7301,20 @@ class FinalModelSet extends FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + 4) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + 4) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    let fbeSetSize = this.readUInt32(this.FBEOffset)
+    let fbeSetSize = this.readUInt32(this.fbeOffset)
 
     let size = 4
-    this._model.FBEOffset = this.FBEOffset + 4
+    this._model.fbeOffset = this.fbeOffset + 4
     for (let i = 0; i < fbeSetSize; i++) {
       let offset = this._model.verify()
       if (offset === Number.MAX_SAFE_INTEGER) {
         return Number.MAX_SAFE_INTEGER
       }
-      this._model.FBEShift(offset)
+      this._model.fbeShift(offset)
       size += offset
     }
     return size
@@ -7329,22 +7329,22 @@ class FinalModelSet extends FinalModel {
   get (values = new Set()) {
     values.clear()
 
-    console.assert(((this._buffer.offset + this.FBEOffset + 4) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + 4) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + 4) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + 4) > this._buffer.size) {
       return { value: values, size: 0 }
     }
 
-    let fbeSetSize = this.readUInt32(this.FBEOffset)
+    let fbeSetSize = this.readUInt32(this.fbeOffset)
     if (fbeSetSize === 0) {
       return { value: values, size: 4 }
     }
 
     let size = 4
-    this._model.FBEOffset = this.FBEOffset + 4
+    this._model.fbeOffset = this.fbeOffset + 4
     for (let i = 0; i < fbeSetSize; i++) {
       let value = this._model.get()
       values.add(value.value)
-      this._model.FBEShift(value.size)
+      this._model.fbeShift(value.size)
       size += value.size
     }
     return { value: values, size: size }
@@ -7357,18 +7357,18 @@ class FinalModelSet extends FinalModel {
    * @returns {!number} Final model size
    */
   set (values) {
-    console.assert(((this._buffer.offset + this.FBEOffset + 4) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + 4) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + 4) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + 4) > this._buffer.size) {
       return 0
     }
 
-    this.writeUInt32(this.FBEOffset, values.size)
+    this.writeUInt32(this.fbeOffset, values.size)
 
     let size = 4
-    this._model.FBEOffset = this.FBEOffset + 4
+    this._model.fbeOffset = this.fbeOffset + 4
     for (let value of values) {
       let offset = this._model.set(value)
-      this._model.FBEShift(offset)
+      this._model.fbeShift(offset)
       size += offset
     }
     return size
@@ -7411,11 +7411,11 @@ class FinalModelMap extends FinalModel {
    * @param {!Map} values Map values
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (values) {
+  fbeAllocationSize (values) {
     let size = 0
     for (let [key, value] of values) {
-      size += this._modelKey.FBEAllocationSize(key)
-      size += this._modelValue.FBEAllocationSize(value)
+      size += this._modelKey.fbeAllocationSize(key)
+      size += this._modelValue.fbeAllocationSize(value)
     }
     return size
   }
@@ -7426,29 +7426,29 @@ class FinalModelMap extends FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + 4) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + 4) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    let fbeMapSize = this.readUInt32(this.FBEOffset)
+    let fbeMapSize = this.readUInt32(this.fbeOffset)
 
     let size = 4
-    this._modelKey.FBEOffset = this.FBEOffset + 4
-    this._modelValue.FBEOffset = this.FBEOffset + 4
+    this._modelKey.fbeOffset = this.fbeOffset + 4
+    this._modelValue.fbeOffset = this.fbeOffset + 4
     for (let i = 0; i < fbeMapSize; i++) {
       let offsetKey = this._modelKey.verify()
       if (offsetKey === Number.MAX_SAFE_INTEGER) {
         return Number.MAX_SAFE_INTEGER
       }
-      this._modelKey.FBEShift(offsetKey)
-      this._modelValue.FBEShift(offsetKey)
+      this._modelKey.fbeShift(offsetKey)
+      this._modelValue.fbeShift(offsetKey)
       size += offsetKey
       let offsetValue = this._modelValue.verify()
       if (offsetValue === Number.MAX_SAFE_INTEGER) {
         return Number.MAX_SAFE_INTEGER
       }
-      this._modelKey.FBEShift(offsetValue)
-      this._modelValue.FBEShift(offsetValue)
+      this._modelKey.fbeShift(offsetValue)
+      this._modelValue.fbeShift(offsetValue)
       size += offsetValue
     }
     return size
@@ -7463,27 +7463,27 @@ class FinalModelMap extends FinalModel {
   get (values = new Map()) {
     values.clear()
 
-    console.assert(((this._buffer.offset + this.FBEOffset + 4) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + 4) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + 4) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + 4) > this._buffer.size) {
       return { value: values, size: 0 }
     }
 
-    let fbeMapSize = this.readUInt32(this.FBEOffset)
+    let fbeMapSize = this.readUInt32(this.fbeOffset)
     if (fbeMapSize === 0) {
       return { value: values, size: 4 }
     }
 
     let size = 4
-    this._modelKey.FBEOffset = this.FBEOffset + 4
-    this._modelValue.FBEOffset = this.FBEOffset + 4
+    this._modelKey.fbeOffset = this.fbeOffset + 4
+    this._modelValue.fbeOffset = this.fbeOffset + 4
     for (let i = 0; i < fbeMapSize; i++) {
       let key = this._modelKey.get()
-      this._modelKey.FBEShift(key.size)
-      this._modelValue.FBEShift(key.size)
+      this._modelKey.fbeShift(key.size)
+      this._modelValue.fbeShift(key.size)
       size += key.size
       let value = this._modelValue.get()
-      this._modelKey.FBEShift(value.size)
-      this._modelValue.FBEShift(value.size)
+      this._modelKey.fbeShift(value.size)
+      this._modelValue.fbeShift(value.size)
       size += value.size
       values.set(key.value, value.value)
     }
@@ -7497,24 +7497,24 @@ class FinalModelMap extends FinalModel {
    * @returns {!number} Final model size
    */
   set (values) {
-    console.assert(((this._buffer.offset + this.FBEOffset + 4) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + 4) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + 4) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + 4) > this._buffer.size) {
       return 0
     }
 
-    this.writeUInt32(this.FBEOffset, values.size)
+    this.writeUInt32(this.fbeOffset, values.size)
 
     let size = 4
-    this._modelKey.FBEOffset = this.FBEOffset + 4
-    this._modelValue.FBEOffset = this.FBEOffset + 4
+    this._modelKey.fbeOffset = this.fbeOffset + 4
+    this._modelValue.fbeOffset = this.fbeOffset + 4
     for (let [key, value] of values) {
       let offsetKey = this._modelKey.set(key)
-      this._modelKey.FBEShift(offsetKey)
-      this._modelValue.FBEShift(offsetKey)
+      this._modelKey.fbeShift(offsetKey)
+      this._modelValue.fbeShift(offsetKey)
       size += offsetKey
       let offsetValue = this._modelValue.set(value)
-      this._modelKey.FBEShift(offsetValue)
-      this._modelValue.FBEShift(offsetValue)
+      this._modelKey.fbeShift(offsetValue)
+      this._modelValue.fbeShift(offsetValue)
       size += offsetValue
     }
     return size
@@ -8343,7 +8343,7 @@ class FieldModel_ENUM_NAME_ extends fbe.FieldModel {
    * @this {!FieldModel_ENUM_NAME_}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return _ENUM_SIZE_
   }
 
@@ -8354,11 +8354,11 @@ class FieldModel_ENUM_NAME_ extends fbe.FieldModel {
    * @returns {!_ENUM_NAME_} Result value
    */
   get (defaults = new _ENUM_NAME_()) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
-    return new _ENUM_NAME_(this.read_ENUM_TYPE_(this.FBEOffset)_ENUM_READ_SUFFIX_)
+    return new _ENUM_NAME_(this.read_ENUM_TYPE_(this.fbeOffset)_ENUM_READ_SUFFIX_)
   }
 
   /**
@@ -8367,12 +8367,12 @@ class FieldModel_ENUM_NAME_ extends fbe.FieldModel {
    * @param {!_ENUM_NAME_} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
-    this.write_ENUM_TYPE_(this.FBEOffset, _ENUM_WRITE_PREFIX_value.value_ENUM_WRITE_SUFFIX_)
+    this.write_ENUM_TYPE_(this.fbeOffset, _ENUM_WRITE_PREFIX_value.value_ENUM_WRITE_SUFFIX_)
   }
 }
 exports.FieldModel_ENUM_NAME_ = FieldModel_ENUM_NAME_
@@ -8422,8 +8422,8 @@ class FinalModel_ENUM_NAME_ extends fbe.FinalModel {
    * @param {!_ENUM_NAME_} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -8431,7 +8431,7 @@ class FinalModel_ENUM_NAME_ extends fbe.FinalModel {
    * @this {!FieldModel_ENUM_NAME_}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return _ENUM_SIZE_
   }
 
@@ -8441,11 +8441,11 @@ class FinalModel_ENUM_NAME_ extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -8454,11 +8454,11 @@ class FinalModel_ENUM_NAME_ extends fbe.FinalModel {
    * @returns {!object} Result value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: new _ENUM_NAME_(), size: 0 }
     }
 
-    return { value: new _ENUM_NAME_(this.read_ENUM_TYPE_(this.FBEOffset)_ENUM_READ_SUFFIX_), size: this.FBESize }
+    return { value: new _ENUM_NAME_(this.read_ENUM_TYPE_(this.fbeOffset)_ENUM_READ_SUFFIX_), size: this.fbeSize }
   }
 
   /**
@@ -8468,13 +8468,13 @@ class FinalModel_ENUM_NAME_ extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    this.write_ENUM_TYPE_(this.FBEOffset, _ENUM_WRITE_PREFIX_value.value_ENUM_WRITE_SUFFIX_)
-    return this.FBESize
+    this.write_ENUM_TYPE_(this.fbeOffset, _ENUM_WRITE_PREFIX_value.value_ENUM_WRITE_SUFFIX_)
+    return this.fbeSize
   }
 }
 
@@ -8779,7 +8779,7 @@ class FieldModel_FLAGS_NAME_ extends fbe.FieldModel {
    * @this {!FieldModel_FLAGS_NAME_}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return _FLAGS_SIZE_
   }
 
@@ -8790,11 +8790,11 @@ class FieldModel_FLAGS_NAME_ extends fbe.FieldModel {
    * @returns {!_FLAGS_NAME_} Result value
    */
   get (defaults = new _FLAGS_NAME_()) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
-    return new _FLAGS_NAME_(this.read_FLAGS_TYPE_(this.FBEOffset)_FLAGS_READ_SUFFIX_)
+    return new _FLAGS_NAME_(this.read_FLAGS_TYPE_(this.fbeOffset)_FLAGS_READ_SUFFIX_)
   }
 
   /**
@@ -8803,12 +8803,12 @@ class FieldModel_FLAGS_NAME_ extends fbe.FieldModel {
    * @param {!_FLAGS_NAME_} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
-    this.write_FLAGS_TYPE_(this.FBEOffset, _FLAGS_WRITE_PREFIX_value.value_FLAGS_WRITE_SUFFIX_)
+    this.write_FLAGS_TYPE_(this.fbeOffset, _FLAGS_WRITE_PREFIX_value.value_FLAGS_WRITE_SUFFIX_)
   }
 }
 
@@ -8859,8 +8859,8 @@ class FinalModel_FLAGS_NAME_ extends fbe.FinalModel {
    * @param {!_FLAGS_NAME_} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -8868,7 +8868,7 @@ class FinalModel_FLAGS_NAME_ extends fbe.FinalModel {
    * @this {!FieldModel_FLAGS_NAME_}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return _FLAGS_SIZE_
   }
 
@@ -8878,11 +8878,11 @@ class FinalModel_FLAGS_NAME_ extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -8891,11 +8891,11 @@ class FinalModel_FLAGS_NAME_ extends fbe.FinalModel {
    * @returns {!object} Result value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: new _FLAGS_NAME_(), size: 0 }
     }
 
-    return { value: new _FLAGS_NAME_(this.read_FLAGS_TYPE_(this.FBEOffset)_FLAGS_READ_SUFFIX_), size: this.FBESize }
+    return { value: new _FLAGS_NAME_(this.read_FLAGS_TYPE_(this.fbeOffset)_FLAGS_READ_SUFFIX_), size: this.fbeSize }
   }
 
   /**
@@ -8905,13 +8905,13 @@ class FinalModel_FLAGS_NAME_ extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    this.write_FLAGS_TYPE_(this.FBEOffset, _FLAGS_WRITE_PREFIX_value.value_FLAGS_WRITE_SUFFIX_)
-    return this.FBESize
+    this.write_FLAGS_TYPE_(this.fbeOffset, _FLAGS_WRITE_PREFIX_value.value_FLAGS_WRITE_SUFFIX_)
+    return this.fbeSize
   }
 }
 
@@ -9426,7 +9426,7 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     if (s->base && !s->base->empty())
     {
         WriteLineIndent("this._parent = new " + ConvertTypeFieldName(*s->base, false) + "(buffer, " + prev_offset + " + " + prev_size + ")");
-        prev_offset = "this._parent.FBEOffset";
+        prev_offset = "this._parent.fbeOffset";
         prev_size = "this._parent.FBEBody - 4 - 4";
     }
     if (s->body)
@@ -9434,8 +9434,8 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
         for (const auto& field : s->body->fields)
         {
             WriteLineIndent("this._" + *field->name + " = new " + ConvertTypeFieldInitialization(*field, prev_offset + " + " + prev_size, false));
-            prev_offset = "this._" + *field->name + ".FBEOffset";
-            prev_size = "this._" + *field->name + ".FBESize";
+            prev_offset = "this._" + *field->name + ".fbeOffset";
+            prev_size = "this._" + *field->name + ".fbeSize";
         }
     }
     Indent(-1);
@@ -9481,7 +9481,7 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     WriteLineIndent(" * @this {!FieldModel" + *s->name + "}");
     WriteLineIndent(" * @returns {!number} Field size");
     WriteLineIndent(" */");
-    WriteLineIndent("get FBESize () {");
+    WriteLineIndent("get fbeSize () {");
     Indent(1);
     WriteLineIndent("return 4");
     Indent(-1);
@@ -9499,7 +9499,7 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
         Write(" + this.parent.FBEBody - 4 - 4");
     if (s->body)
         for (const auto& field : s->body->fields)
-            Write(" + this." + *field->name + ".FBESize");
+            Write(" + this." + *field->name + ".fbeSize");
     WriteLine();
     Indent(-1);
     WriteLineIndent("}");
@@ -9509,15 +9509,15 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     WriteLineIndent(" * @this {!FieldModel" + *s->name + "}");
     WriteLineIndent(" * @returns {!number} Field extra size");
     WriteLineIndent(" */");
-    WriteLineIndent("get FBEExtra () {");
+    WriteLineIndent("get fbeExtra () {");
     Indent(1);
-    WriteLineIndent("if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {");
+    WriteLineIndent("if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {");
     Indent(1);
     WriteLineIndent("return 0");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("let fbeStructOffset = this.readUInt32(this.FBEOffset)");
+    WriteLineIndent("let fbeStructOffset = this.readUInt32(this.fbeOffset)");
     WriteLineIndent("if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4) > this._buffer.size)) {");
     Indent(1);
     WriteLineIndent("return 0");
@@ -9529,10 +9529,10 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     WriteIndent("let fbeResult = this.FBEBody");
     Indent(1);
     if (s->base && !s->base->empty())
-        Write(" + this.parent.FBEExtra");
+        Write(" + this.parent.fbeExtra");
     if (s->body)
         for (const auto& field : s->body->fields)
-            Write(" + this." + *field->name + ".FBEExtra");
+            Write(" + this." + *field->name + ".fbeExtra");
     WriteLine();
     Indent(-1);
     WriteLine();
@@ -9577,13 +9577,13 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     WriteLineIndent(" */");
     WriteLineIndent("verify (fbeVerifyType = true) {");
     Indent(1);
-    WriteLineIndent("if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {");
+    WriteLineIndent("if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {");
     Indent(1);
     WriteLineIndent("return true");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("let fbeStructOffset = this.readUInt32(this.FBEOffset)");
+    WriteLineIndent("let fbeStructOffset = this.readUInt32(this.fbeOffset)");
     WriteLineIndent("if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {");
     Indent(1);
     WriteLineIndent("return false");
@@ -9643,7 +9643,7 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("if ((fbeCurrentSize + this." + *field->name + ".FBESize) > fbeStructSize) {");
+            WriteLineIndent("if ((fbeCurrentSize + this." + *field->name + ".fbeSize) > fbeStructSize) {");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);
@@ -9654,7 +9654,7 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
             Indent(-1);
             WriteLineIndent("}");
             WriteLineIndent("// noinspection JSUnusedAssignment");
-            WriteLineIndent("fbeCurrentSize += this." + *field->name + ".FBESize");
+            WriteLineIndent("fbeCurrentSize += this." + *field->name + ".fbeSize");
         }
     }
     WriteLine();
@@ -9671,13 +9671,13 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     WriteLineIndent(" */");
     WriteLineIndent("getBegin () {");
     Indent(1);
-    WriteLineIndent("if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {");
+    WriteLineIndent("if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {");
     Indent(1);
     WriteLineIndent("return 0");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("let fbeStructOffset = this.readUInt32(this.FBEOffset)");
+    WriteLineIndent("let fbeStructOffset = this.readUInt32(this.fbeOffset)");
     WriteLineIndent("console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + 4 + 4) <= this._buffer.size), 'Model is broken!')");
     WriteLineIndent("if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {");
     Indent(1);
@@ -9762,7 +9762,7 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("if ((fbeCurrentSize + this." + *field->name + ".FBESize) <= fbeStructSize) {");
+            WriteLineIndent("if ((fbeCurrentSize + this." + *field->name + ".fbeSize) <= fbeStructSize) {");
             Indent(1);
             if (field->array || field->vector || field->list || field->set || field->map || field->hash)
                 WriteLineIndent("this." + *field->name + ".get(fbeValue." + *field->name + ")");
@@ -9780,7 +9780,7 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
             Indent(-1);
             WriteLineIndent("}");
             WriteLineIndent("// noinspection JSUnusedAssignment");
-            WriteLineIndent("fbeCurrentSize += this." + *field->name + ".FBESize");
+            WriteLineIndent("fbeCurrentSize += this." + *field->name + ".fbeSize");
         }
     }
     Indent(-1);
@@ -9795,8 +9795,8 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     WriteLineIndent(" */");
     WriteLineIndent("setBegin () {");
     Indent(1);
-    WriteLineIndent("console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')");
-    WriteLineIndent("if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {");
+    WriteLineIndent("console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')");
+    WriteLineIndent("if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {");
     Indent(1);
     WriteLineIndent("return 0");
     Indent(-1);
@@ -9811,7 +9811,7 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("this.writeUInt32(this.FBEOffset, fbeStructOffset)");
+    WriteLineIndent("this.writeUInt32(this.fbeOffset, fbeStructOffset)");
     WriteLineIndent("this.writeUInt32(fbeStructOffset, fbeStructSize)");
     WriteLineIndent("this.writeUInt32(fbeStructOffset + 4, this.FBEType)");
     WriteLine();
@@ -9923,9 +9923,9 @@ void GeneratorJavaScript::GenerateStructModel(const std::shared_ptr<StructType>&
     WriteLineIndent(" * @this {!" + *s->name + "Model}");
     WriteLineIndent(" * @returns {!number} Model size");
     WriteLineIndent(" */");
-    WriteLineIndent("get FBESize () {");
+    WriteLineIndent("get fbeSize () {");
     Indent(1);
-    WriteLineIndent("return this.model.FBESize + this.model.FBEExtra");
+    WriteLineIndent("return this.model.fbeSize + this.model.fbeExtra");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
@@ -9960,14 +9960,14 @@ void GeneratorJavaScript::GenerateStructModel(const std::shared_ptr<StructType>&
     WriteLineIndent(" */");
     WriteLineIndent("verify () {");
     Indent(1);
-    WriteLineIndent("if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {");
+    WriteLineIndent("if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {");
     Indent(1);
     WriteLineIndent("return false");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)");
-    WriteLineIndent("if (fbeFullSize < this.model.FBESize) {");
+    WriteLineIndent("let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)");
+    WriteLineIndent("if (fbeFullSize < this.model.fbeSize) {");
     Indent(1);
     WriteLineIndent("return false");
     Indent(-1);
@@ -9986,7 +9986,7 @@ void GeneratorJavaScript::GenerateStructModel(const std::shared_ptr<StructType>&
     WriteLineIndent(" */");
     WriteLineIndent("createBegin () {");
     Indent(1);
-    WriteLineIndent("return this.buffer.allocate(4 + this.model.FBESize)");
+    WriteLineIndent("return this.buffer.allocate(4 + this.model.fbeSize)");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -10001,7 +10001,7 @@ void GeneratorJavaScript::GenerateStructModel(const std::shared_ptr<StructType>&
     Indent(1);
     WriteLineIndent("let fbeEnd = this.buffer.size");
     WriteLineIndent("let fbeFullSize = fbeEnd - fbeBegin");
-    WriteLineIndent("this.writeUInt32(this.model.FBEOffset - 4, fbeFullSize)");
+    WriteLineIndent("this.writeUInt32(this.model.fbeOffset - 4, fbeFullSize)");
     WriteLineIndent("return fbeFullSize");
     Indent(-1);
     WriteLineIndent("}");
@@ -10032,15 +10032,15 @@ void GeneratorJavaScript::GenerateStructModel(const std::shared_ptr<StructType>&
     WriteLineIndent(" */");
     WriteLineIndent("deserialize (value = new " + *s->name + "()) {");
     Indent(1);
-    WriteLineIndent("if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {");
+    WriteLineIndent("if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {");
     Indent(1);
     WriteLineIndent("return { value: new " + *s->name + "(), size: 0 }");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)");
-    WriteLineIndent("console.assert((fbeFullSize >= this.model.FBESize), 'Model is broken!')");
-    WriteLineIndent("if (fbeFullSize < this.model.FBESize) {");
+    WriteLineIndent("let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)");
+    WriteLineIndent("console.assert((fbeFullSize >= this.model.fbeSize), 'Model is broken!')");
+    WriteLineIndent("if (fbeFullSize < this.model.fbeSize) {");
     Indent(1);
     WriteLineIndent("return { value: new " + *s->name + "(), size: 0 }");
     Indent(-1);
@@ -10060,7 +10060,7 @@ void GeneratorJavaScript::GenerateStructModel(const std::shared_ptr<StructType>&
     WriteLineIndent(" */");
     WriteLineIndent("next (prev) {");
     Indent(1);
-    WriteLineIndent("this.model.FBEShift(prev)");
+    WriteLineIndent("this.model.fbeShift(prev)");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -10142,14 +10142,14 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
     WriteLineIndent(" * @param {!" + *s->name + "} fbeValue " + *s->name + " value");
     WriteLineIndent(" * @returns {!number} Allocation size");
     WriteLineIndent(" */");
-    WriteLineIndent("FBEAllocationSize (fbeValue) {");
+    WriteLineIndent("fbeAllocationSize (fbeValue) {");
     Indent(1);
     WriteIndent("return 0");
     if (s->base && !s->base->empty())
-        Write(" + this.parent.FBEAllocationSize(fbeValue)");
+        Write(" + this.parent.fbeAllocationSize(fbeValue)");
     if (s->body)
         for (const auto& field : s->body->fields)
-            Write(" + this." + *field->name + ".FBEAllocationSize(fbeValue." + *field->name + ")");
+            Write(" + this." + *field->name + ".fbeAllocationSize(fbeValue." + *field->name + ")");
     WriteLine();
     Indent(-1);
     WriteLineIndent("}");
@@ -10188,9 +10188,9 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
     WriteLineIndent(" */");
     WriteLineIndent("verify () {");
     Indent(1);
-    WriteLineIndent("this._buffer.shift(this.FBEOffset)");
+    WriteLineIndent("this._buffer.shift(this.fbeOffset)");
     WriteLineIndent("let fbeResult = this.verifyFields()");
-    WriteLineIndent("this._buffer.unshift(this.FBEOffset)");
+    WriteLineIndent("this._buffer.unshift(this.fbeOffset)");
     WriteLineIndent("return fbeResult");
     Indent(-1);
     WriteLineIndent("}");
@@ -10209,7 +10209,7 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("this.parent.FBEOffset = fbeCurrentOffset");
+        WriteLineIndent("this.parent.fbeOffset = fbeCurrentOffset");
         WriteLineIndent("fbeFieldSize = this.parent.verifyFields()");
         WriteLineIndent("if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {");
         Indent(1);
@@ -10223,7 +10223,7 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("this." + *field->name + ".FBEOffset = fbeCurrentOffset");
+            WriteLineIndent("this." + *field->name + ".fbeOffset = fbeCurrentOffset");
             WriteLineIndent("fbeFieldSize = this." + *field->name + ".verify()");
             WriteLineIndent("if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {");
             Indent(1);
@@ -10248,9 +10248,9 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
     WriteLineIndent(" */");
     WriteLineIndent("get (fbeValue = new " + *s->name + "()) {");
     Indent(1);
-    WriteLineIndent("this._buffer.shift(this.FBEOffset)");
+    WriteLineIndent("this._buffer.shift(this.fbeOffset)");
     WriteLineIndent("let fbeSize = this.getFields(fbeValue)");
-    WriteLineIndent("this._buffer.unshift(this.FBEOffset)");
+    WriteLineIndent("this._buffer.unshift(this.fbeOffset)");
     WriteLineIndent("return { value: fbeValue, size: fbeSize }");
     Indent(-1);
     WriteLineIndent("}");
@@ -10271,7 +10271,7 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("this.parent.FBEOffset = fbeCurrentOffset");
+        WriteLineIndent("this.parent.fbeOffset = fbeCurrentOffset");
         WriteLineIndent("fbeResult = this.parent.getFields(fbeValue)");
         WriteLineIndent("// noinspection JSUnusedAssignment");
         WriteLineIndent("fbeCurrentOffset += fbeResult");
@@ -10282,7 +10282,7 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("this." + *field->name + ".FBEOffset = fbeCurrentOffset");
+            WriteLineIndent("this." + *field->name + ".fbeOffset = fbeCurrentOffset");
             if (field->array || field->vector || field->list || field->set || field->map || field->hash)
                 WriteLineIndent("fbeResult = this." + *field->name + ".get(fbeValue." + *field->name + ")");
             else
@@ -10310,9 +10310,9 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
     WriteLineIndent(" */");
     WriteLineIndent("set (fbeValue) {");
     Indent(1);
-    WriteLineIndent("this._buffer.shift(this.FBEOffset)");
+    WriteLineIndent("this._buffer.shift(this.fbeOffset)");
     WriteLineIndent("let fbeSize = this.setFields(fbeValue)");
-    WriteLineIndent("this._buffer.unshift(this.FBEOffset)");
+    WriteLineIndent("this._buffer.unshift(this.fbeOffset)");
     WriteLineIndent("return fbeSize");
     Indent(-1);
     WriteLineIndent("}");
@@ -10333,7 +10333,7 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("this.parent.FBEOffset = fbeCurrentOffset");
+        WriteLineIndent("this.parent.fbeOffset = fbeCurrentOffset");
         WriteLineIndent("fbeFieldSize = this.parent.setFields(fbeValue)");
         WriteLineIndent("// noinspection JSUnusedAssignment");
         WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
@@ -10344,7 +10344,7 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("this." + *field->name + ".FBEOffset = fbeCurrentOffset");
+            WriteLineIndent("this." + *field->name + ".fbeOffset = fbeCurrentOffset");
             WriteLineIndent("fbeFieldSize = this." + *field->name + ".set(fbeValue." + *field->name + ")");
             WriteLineIndent("// noinspection JSUnusedAssignment");
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
@@ -10421,14 +10421,14 @@ void GeneratorJavaScript::GenerateStructModelFinal(const std::shared_ptr<StructT
     WriteLineIndent(" */");
     WriteLineIndent("verify () {");
     Indent(1);
-    WriteLineIndent("if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {");
+    WriteLineIndent("if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {");
     Indent(1);
     WriteLineIndent("return false");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)");
-    WriteLineIndent("let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)");
+    WriteLineIndent("let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)");
+    WriteLineIndent("let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)");
     WriteLineIndent("if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {");
     Indent(1);
     WriteLineIndent("return false");
@@ -10452,7 +10452,7 @@ void GeneratorJavaScript::GenerateStructModelFinal(const std::shared_ptr<StructT
     WriteLineIndent("let fbeInitialSize = this.buffer.size");
     WriteLine();
     WriteLineIndent("let fbeStructType = this.FBEType");
-    WriteLineIndent("let fbeStructSize = 8 + this._model.FBEAllocationSize(value)");
+    WriteLineIndent("let fbeStructSize = 8 + this._model.fbeAllocationSize(value)");
     WriteLineIndent("let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset");
     WriteLineIndent("console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')");
     WriteLineIndent("if ((this.buffer.offset + fbeStructOffset + fbeStructSize) > this.buffer.size) {");
@@ -10464,8 +10464,8 @@ void GeneratorJavaScript::GenerateStructModelFinal(const std::shared_ptr<StructT
     WriteLineIndent("fbeStructSize = 8 + this._model.set(value)");
     WriteLineIndent("this.buffer.resize(fbeInitialSize + fbeStructSize)");
     WriteLine();
-    WriteLineIndent("this.writeUInt32(this._model.FBEOffset - 8, fbeStructSize)");
-    WriteLineIndent("this.writeUInt32(this._model.FBEOffset - 4, fbeStructType)");
+    WriteLineIndent("this.writeUInt32(this._model.fbeOffset - 8, fbeStructSize)");
+    WriteLineIndent("this.writeUInt32(this._model.fbeOffset - 4, fbeStructType)");
     WriteLine();
     WriteLineIndent("return fbeStructSize");
     Indent(-1);
@@ -10481,15 +10481,15 @@ void GeneratorJavaScript::GenerateStructModelFinal(const std::shared_ptr<StructT
     WriteLineIndent(" */");
     WriteLineIndent("deserialize (value = new " + *s->name + "()) {");
     Indent(1);
-    WriteLineIndent("console.assert(((this.buffer.offset + this._model.FBEOffset) <= this.buffer.size), 'Model is broken!')");
-    WriteLineIndent("if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {");
+    WriteLineIndent("console.assert(((this.buffer.offset + this._model.fbeOffset) <= this.buffer.size), 'Model is broken!')");
+    WriteLineIndent("if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {");
     Indent(1);
     WriteLineIndent("return { value: new " + *s->name + "(), size: 0 }");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)");
-    WriteLineIndent("let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)");
+    WriteLineIndent("let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)");
+    WriteLineIndent("let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)");
     WriteLineIndent("console.assert(((fbeStructSize > 0) && (fbeStructType === this.FBEType)), 'Model is broken!')");
     WriteLineIndent("if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {");
     Indent(1);
@@ -10511,7 +10511,7 @@ void GeneratorJavaScript::GenerateStructModelFinal(const std::shared_ptr<StructT
     WriteLineIndent(" */");
     WriteLineIndent("next (prev) {");
     Indent(1);
-    WriteLineIndent("this._model.FBEShift(prev)");
+    WriteLineIndent("this._model.fbeShift(prev)");
     Indent(-1);
     WriteLineIndent("}");
 

@@ -10,12 +10,12 @@ test('Serialization: enums', function (t) {
 
   // Serialize enums to the FBE stream
   let writer = new enums.EnumsModel(new fbe.WriteBuffer())
-  t.equal(writer.model.FBEOffset, 4)
+  t.equal(writer.model.fbeOffset, 4)
   let serialized = writer.serialize(enums1)
   t.equal(serialized, writer.buffer.size)
   t.true(writer.verify())
   writer.next(serialized)
-  t.equal(writer.model.FBEOffset, (4 + writer.buffer.size))
+  t.equal(writer.model.fbeOffset, (4 + writer.buffer.size))
 
   // Check the serialized FBE size
   t.equal(writer.buffer.size, 232)
@@ -23,13 +23,13 @@ test('Serialization: enums', function (t) {
   // Deserialize enums from the FBE stream
   let enums2 = new enums.Enums()
   let reader = new enums.EnumsModel(new fbe.ReadBuffer())
-  t.equal(reader.model.FBEOffset, 4)
+  t.equal(reader.model.fbeOffset, 4)
   reader.attachBuffer(writer.buffer)
   t.true(reader.verify())
   let deserialized = reader.deserialize(enums2)
   t.true(deserialized.size, reader.buffer.size)
   reader.next(deserialized.size)
-  t.true(reader.model.FBEOffset, (4 + reader.buffer.size))
+  t.true(reader.model.fbeOffset, (4 + reader.buffer.size))
 
   t.true(enums2.byte0.eq(enums.EnumByte.ENUM_VALUE_0))
   t.true(enums2.byte1.eq(enums.EnumByte.ENUM_VALUE_1))

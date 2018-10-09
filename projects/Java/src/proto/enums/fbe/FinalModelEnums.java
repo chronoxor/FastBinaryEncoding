@@ -156,75 +156,75 @@ public final class FinalModelEnums extends FinalModel
     }
 
     // Get the allocation size
-    public long FBEAllocationSize(Enums fbeValue)
+    public long fbeAllocationSize(Enums fbeValue)
     {
         long fbeResult = 0
-            + byte0.FBEAllocationSize(fbeValue.byte0)
-            + byte1.FBEAllocationSize(fbeValue.byte1)
-            + byte2.FBEAllocationSize(fbeValue.byte2)
-            + byte3.FBEAllocationSize(fbeValue.byte3)
-            + byte4.FBEAllocationSize(fbeValue.byte4)
-            + byte5.FBEAllocationSize(fbeValue.byte5)
-            + char0.FBEAllocationSize(fbeValue.char0)
-            + char1.FBEAllocationSize(fbeValue.char1)
-            + char2.FBEAllocationSize(fbeValue.char2)
-            + char3.FBEAllocationSize(fbeValue.char3)
-            + char4.FBEAllocationSize(fbeValue.char4)
-            + char5.FBEAllocationSize(fbeValue.char5)
-            + wchar0.FBEAllocationSize(fbeValue.wchar0)
-            + wchar1.FBEAllocationSize(fbeValue.wchar1)
-            + wchar2.FBEAllocationSize(fbeValue.wchar2)
-            + wchar3.FBEAllocationSize(fbeValue.wchar3)
-            + wchar4.FBEAllocationSize(fbeValue.wchar4)
-            + wchar5.FBEAllocationSize(fbeValue.wchar5)
-            + int8b0.FBEAllocationSize(fbeValue.int8b0)
-            + int8b1.FBEAllocationSize(fbeValue.int8b1)
-            + int8b2.FBEAllocationSize(fbeValue.int8b2)
-            + int8b3.FBEAllocationSize(fbeValue.int8b3)
-            + int8b4.FBEAllocationSize(fbeValue.int8b4)
-            + int8b5.FBEAllocationSize(fbeValue.int8b5)
-            + uint8b0.FBEAllocationSize(fbeValue.uint8b0)
-            + uint8b1.FBEAllocationSize(fbeValue.uint8b1)
-            + uint8b2.FBEAllocationSize(fbeValue.uint8b2)
-            + uint8b3.FBEAllocationSize(fbeValue.uint8b3)
-            + uint8b4.FBEAllocationSize(fbeValue.uint8b4)
-            + uint8b5.FBEAllocationSize(fbeValue.uint8b5)
-            + int16b0.FBEAllocationSize(fbeValue.int16b0)
-            + int16b1.FBEAllocationSize(fbeValue.int16b1)
-            + int16b2.FBEAllocationSize(fbeValue.int16b2)
-            + int16b3.FBEAllocationSize(fbeValue.int16b3)
-            + int16b4.FBEAllocationSize(fbeValue.int16b4)
-            + int16b5.FBEAllocationSize(fbeValue.int16b5)
-            + uint16b0.FBEAllocationSize(fbeValue.uint16b0)
-            + uint16b1.FBEAllocationSize(fbeValue.uint16b1)
-            + uint16b2.FBEAllocationSize(fbeValue.uint16b2)
-            + uint16b3.FBEAllocationSize(fbeValue.uint16b3)
-            + uint16b4.FBEAllocationSize(fbeValue.uint16b4)
-            + uint16b5.FBEAllocationSize(fbeValue.uint16b5)
-            + int32b0.FBEAllocationSize(fbeValue.int32b0)
-            + int32b1.FBEAllocationSize(fbeValue.int32b1)
-            + int32b2.FBEAllocationSize(fbeValue.int32b2)
-            + int32b3.FBEAllocationSize(fbeValue.int32b3)
-            + int32b4.FBEAllocationSize(fbeValue.int32b4)
-            + int32b5.FBEAllocationSize(fbeValue.int32b5)
-            + uint32b0.FBEAllocationSize(fbeValue.uint32b0)
-            + uint32b1.FBEAllocationSize(fbeValue.uint32b1)
-            + uint32b2.FBEAllocationSize(fbeValue.uint32b2)
-            + uint32b3.FBEAllocationSize(fbeValue.uint32b3)
-            + uint32b4.FBEAllocationSize(fbeValue.uint32b4)
-            + uint32b5.FBEAllocationSize(fbeValue.uint32b5)
-            + int64b0.FBEAllocationSize(fbeValue.int64b0)
-            + int64b1.FBEAllocationSize(fbeValue.int64b1)
-            + int64b2.FBEAllocationSize(fbeValue.int64b2)
-            + int64b3.FBEAllocationSize(fbeValue.int64b3)
-            + int64b4.FBEAllocationSize(fbeValue.int64b4)
-            + int64b5.FBEAllocationSize(fbeValue.int64b5)
-            + uint64b0.FBEAllocationSize(fbeValue.uint64b0)
-            + uint64b1.FBEAllocationSize(fbeValue.uint64b1)
-            + uint64b2.FBEAllocationSize(fbeValue.uint64b2)
-            + uint64b3.FBEAllocationSize(fbeValue.uint64b3)
-            + uint64b4.FBEAllocationSize(fbeValue.uint64b4)
-            + uint64b5.FBEAllocationSize(fbeValue.uint64b5)
+            + byte0.fbeAllocationSize(fbeValue.byte0)
+            + byte1.fbeAllocationSize(fbeValue.byte1)
+            + byte2.fbeAllocationSize(fbeValue.byte2)
+            + byte3.fbeAllocationSize(fbeValue.byte3)
+            + byte4.fbeAllocationSize(fbeValue.byte4)
+            + byte5.fbeAllocationSize(fbeValue.byte5)
+            + char0.fbeAllocationSize(fbeValue.char0)
+            + char1.fbeAllocationSize(fbeValue.char1)
+            + char2.fbeAllocationSize(fbeValue.char2)
+            + char3.fbeAllocationSize(fbeValue.char3)
+            + char4.fbeAllocationSize(fbeValue.char4)
+            + char5.fbeAllocationSize(fbeValue.char5)
+            + wchar0.fbeAllocationSize(fbeValue.wchar0)
+            + wchar1.fbeAllocationSize(fbeValue.wchar1)
+            + wchar2.fbeAllocationSize(fbeValue.wchar2)
+            + wchar3.fbeAllocationSize(fbeValue.wchar3)
+            + wchar4.fbeAllocationSize(fbeValue.wchar4)
+            + wchar5.fbeAllocationSize(fbeValue.wchar5)
+            + int8b0.fbeAllocationSize(fbeValue.int8b0)
+            + int8b1.fbeAllocationSize(fbeValue.int8b1)
+            + int8b2.fbeAllocationSize(fbeValue.int8b2)
+            + int8b3.fbeAllocationSize(fbeValue.int8b3)
+            + int8b4.fbeAllocationSize(fbeValue.int8b4)
+            + int8b5.fbeAllocationSize(fbeValue.int8b5)
+            + uint8b0.fbeAllocationSize(fbeValue.uint8b0)
+            + uint8b1.fbeAllocationSize(fbeValue.uint8b1)
+            + uint8b2.fbeAllocationSize(fbeValue.uint8b2)
+            + uint8b3.fbeAllocationSize(fbeValue.uint8b3)
+            + uint8b4.fbeAllocationSize(fbeValue.uint8b4)
+            + uint8b5.fbeAllocationSize(fbeValue.uint8b5)
+            + int16b0.fbeAllocationSize(fbeValue.int16b0)
+            + int16b1.fbeAllocationSize(fbeValue.int16b1)
+            + int16b2.fbeAllocationSize(fbeValue.int16b2)
+            + int16b3.fbeAllocationSize(fbeValue.int16b3)
+            + int16b4.fbeAllocationSize(fbeValue.int16b4)
+            + int16b5.fbeAllocationSize(fbeValue.int16b5)
+            + uint16b0.fbeAllocationSize(fbeValue.uint16b0)
+            + uint16b1.fbeAllocationSize(fbeValue.uint16b1)
+            + uint16b2.fbeAllocationSize(fbeValue.uint16b2)
+            + uint16b3.fbeAllocationSize(fbeValue.uint16b3)
+            + uint16b4.fbeAllocationSize(fbeValue.uint16b4)
+            + uint16b5.fbeAllocationSize(fbeValue.uint16b5)
+            + int32b0.fbeAllocationSize(fbeValue.int32b0)
+            + int32b1.fbeAllocationSize(fbeValue.int32b1)
+            + int32b2.fbeAllocationSize(fbeValue.int32b2)
+            + int32b3.fbeAllocationSize(fbeValue.int32b3)
+            + int32b4.fbeAllocationSize(fbeValue.int32b4)
+            + int32b5.fbeAllocationSize(fbeValue.int32b5)
+            + uint32b0.fbeAllocationSize(fbeValue.uint32b0)
+            + uint32b1.fbeAllocationSize(fbeValue.uint32b1)
+            + uint32b2.fbeAllocationSize(fbeValue.uint32b2)
+            + uint32b3.fbeAllocationSize(fbeValue.uint32b3)
+            + uint32b4.fbeAllocationSize(fbeValue.uint32b4)
+            + uint32b5.fbeAllocationSize(fbeValue.uint32b5)
+            + int64b0.fbeAllocationSize(fbeValue.int64b0)
+            + int64b1.fbeAllocationSize(fbeValue.int64b1)
+            + int64b2.fbeAllocationSize(fbeValue.int64b2)
+            + int64b3.fbeAllocationSize(fbeValue.int64b3)
+            + int64b4.fbeAllocationSize(fbeValue.int64b4)
+            + int64b5.fbeAllocationSize(fbeValue.int64b5)
+            + uint64b0.fbeAllocationSize(fbeValue.uint64b0)
+            + uint64b1.fbeAllocationSize(fbeValue.uint64b1)
+            + uint64b2.fbeAllocationSize(fbeValue.uint64b2)
+            + uint64b3.fbeAllocationSize(fbeValue.uint64b3)
+            + uint64b4.fbeAllocationSize(fbeValue.uint64b4)
+            + uint64b5.fbeAllocationSize(fbeValue.uint64b5)
             ;
         return fbeResult;
     }
@@ -237,9 +237,9 @@ public final class FinalModelEnums extends FinalModel
     @Override
     public long verify()
     {
-        _buffer.shift(FBEOffset());
+        _buffer.shift(fbeOffset());
         long fbeResult = verifyFields();
-        _buffer.unshift(FBEOffset());
+        _buffer.unshift(fbeOffset());
         return fbeResult;
     }
 
@@ -249,397 +249,397 @@ public final class FinalModelEnums extends FinalModel
         long fbeCurrentOffset = 0;
         long fbeFieldSize = 0;
 
-        byte0.FBEOffset(fbeCurrentOffset);
+        byte0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = byte0.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        byte1.FBEOffset(fbeCurrentOffset);
+        byte1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = byte1.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        byte2.FBEOffset(fbeCurrentOffset);
+        byte2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = byte2.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        byte3.FBEOffset(fbeCurrentOffset);
+        byte3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = byte3.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        byte4.FBEOffset(fbeCurrentOffset);
+        byte4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = byte4.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        byte5.FBEOffset(fbeCurrentOffset);
+        byte5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = byte5.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        char0.FBEOffset(fbeCurrentOffset);
+        char0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = char0.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        char1.FBEOffset(fbeCurrentOffset);
+        char1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = char1.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        char2.FBEOffset(fbeCurrentOffset);
+        char2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = char2.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        char3.FBEOffset(fbeCurrentOffset);
+        char3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = char3.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        char4.FBEOffset(fbeCurrentOffset);
+        char4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = char4.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        char5.FBEOffset(fbeCurrentOffset);
+        char5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = char5.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        wchar0.FBEOffset(fbeCurrentOffset);
+        wchar0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = wchar0.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        wchar1.FBEOffset(fbeCurrentOffset);
+        wchar1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = wchar1.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        wchar2.FBEOffset(fbeCurrentOffset);
+        wchar2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = wchar2.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        wchar3.FBEOffset(fbeCurrentOffset);
+        wchar3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = wchar3.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        wchar4.FBEOffset(fbeCurrentOffset);
+        wchar4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = wchar4.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        wchar5.FBEOffset(fbeCurrentOffset);
+        wchar5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = wchar5.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int8b0.FBEOffset(fbeCurrentOffset);
+        int8b0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int8b0.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int8b1.FBEOffset(fbeCurrentOffset);
+        int8b1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int8b1.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int8b2.FBEOffset(fbeCurrentOffset);
+        int8b2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int8b2.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int8b3.FBEOffset(fbeCurrentOffset);
+        int8b3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int8b3.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int8b4.FBEOffset(fbeCurrentOffset);
+        int8b4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int8b4.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int8b5.FBEOffset(fbeCurrentOffset);
+        int8b5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int8b5.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint8b0.FBEOffset(fbeCurrentOffset);
+        uint8b0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint8b0.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint8b1.FBEOffset(fbeCurrentOffset);
+        uint8b1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint8b1.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint8b2.FBEOffset(fbeCurrentOffset);
+        uint8b2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint8b2.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint8b3.FBEOffset(fbeCurrentOffset);
+        uint8b3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint8b3.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint8b4.FBEOffset(fbeCurrentOffset);
+        uint8b4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint8b4.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint8b5.FBEOffset(fbeCurrentOffset);
+        uint8b5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint8b5.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int16b0.FBEOffset(fbeCurrentOffset);
+        int16b0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int16b0.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int16b1.FBEOffset(fbeCurrentOffset);
+        int16b1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int16b1.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int16b2.FBEOffset(fbeCurrentOffset);
+        int16b2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int16b2.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int16b3.FBEOffset(fbeCurrentOffset);
+        int16b3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int16b3.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int16b4.FBEOffset(fbeCurrentOffset);
+        int16b4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int16b4.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int16b5.FBEOffset(fbeCurrentOffset);
+        int16b5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int16b5.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint16b0.FBEOffset(fbeCurrentOffset);
+        uint16b0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint16b0.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint16b1.FBEOffset(fbeCurrentOffset);
+        uint16b1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint16b1.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint16b2.FBEOffset(fbeCurrentOffset);
+        uint16b2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint16b2.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint16b3.FBEOffset(fbeCurrentOffset);
+        uint16b3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint16b3.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint16b4.FBEOffset(fbeCurrentOffset);
+        uint16b4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint16b4.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint16b5.FBEOffset(fbeCurrentOffset);
+        uint16b5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint16b5.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int32b0.FBEOffset(fbeCurrentOffset);
+        int32b0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int32b0.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int32b1.FBEOffset(fbeCurrentOffset);
+        int32b1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int32b1.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int32b2.FBEOffset(fbeCurrentOffset);
+        int32b2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int32b2.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int32b3.FBEOffset(fbeCurrentOffset);
+        int32b3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int32b3.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int32b4.FBEOffset(fbeCurrentOffset);
+        int32b4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int32b4.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int32b5.FBEOffset(fbeCurrentOffset);
+        int32b5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int32b5.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint32b0.FBEOffset(fbeCurrentOffset);
+        uint32b0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint32b0.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint32b1.FBEOffset(fbeCurrentOffset);
+        uint32b1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint32b1.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint32b2.FBEOffset(fbeCurrentOffset);
+        uint32b2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint32b2.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint32b3.FBEOffset(fbeCurrentOffset);
+        uint32b3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint32b3.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint32b4.FBEOffset(fbeCurrentOffset);
+        uint32b4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint32b4.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint32b5.FBEOffset(fbeCurrentOffset);
+        uint32b5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint32b5.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int64b0.FBEOffset(fbeCurrentOffset);
+        int64b0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int64b0.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int64b1.FBEOffset(fbeCurrentOffset);
+        int64b1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int64b1.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int64b2.FBEOffset(fbeCurrentOffset);
+        int64b2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int64b2.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int64b3.FBEOffset(fbeCurrentOffset);
+        int64b3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int64b3.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int64b4.FBEOffset(fbeCurrentOffset);
+        int64b4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int64b4.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        int64b5.FBEOffset(fbeCurrentOffset);
+        int64b5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = int64b5.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint64b0.FBEOffset(fbeCurrentOffset);
+        uint64b0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint64b0.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint64b1.FBEOffset(fbeCurrentOffset);
+        uint64b1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint64b1.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint64b2.FBEOffset(fbeCurrentOffset);
+        uint64b2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint64b2.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint64b3.FBEOffset(fbeCurrentOffset);
+        uint64b3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint64b3.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint64b4.FBEOffset(fbeCurrentOffset);
+        uint64b4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint64b4.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        uint64b5.FBEOffset(fbeCurrentOffset);
+        uint64b5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uint64b5.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
@@ -652,9 +652,9 @@ public final class FinalModelEnums extends FinalModel
     public Enums get(Size fbeSize) { return get(fbeSize, new Enums()); }
     public Enums get(Size fbeSize, Enums fbeValue)
     {
-        _buffer.shift(FBEOffset());
+        _buffer.shift(fbeOffset());
         fbeSize.value = getFields(fbeValue);
-        _buffer.unshift(FBEOffset());
+        _buffer.unshift(fbeOffset());
         return fbeValue;
     }
 
@@ -665,332 +665,332 @@ public final class FinalModelEnums extends FinalModel
         long fbeCurrentSize = 0;
         var fbeFieldSize = new Size(0);
 
-        byte0.FBEOffset(fbeCurrentOffset);
+        byte0.fbeOffset(fbeCurrentOffset);
         fbeValue.byte0 = byte0.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        byte1.FBEOffset(fbeCurrentOffset);
+        byte1.fbeOffset(fbeCurrentOffset);
         fbeValue.byte1 = byte1.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        byte2.FBEOffset(fbeCurrentOffset);
+        byte2.fbeOffset(fbeCurrentOffset);
         fbeValue.byte2 = byte2.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        byte3.FBEOffset(fbeCurrentOffset);
+        byte3.fbeOffset(fbeCurrentOffset);
         fbeValue.byte3 = byte3.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        byte4.FBEOffset(fbeCurrentOffset);
+        byte4.fbeOffset(fbeCurrentOffset);
         fbeValue.byte4 = byte4.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        byte5.FBEOffset(fbeCurrentOffset);
+        byte5.fbeOffset(fbeCurrentOffset);
         fbeValue.byte5 = byte5.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        char0.FBEOffset(fbeCurrentOffset);
+        char0.fbeOffset(fbeCurrentOffset);
         fbeValue.char0 = char0.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        char1.FBEOffset(fbeCurrentOffset);
+        char1.fbeOffset(fbeCurrentOffset);
         fbeValue.char1 = char1.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        char2.FBEOffset(fbeCurrentOffset);
+        char2.fbeOffset(fbeCurrentOffset);
         fbeValue.char2 = char2.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        char3.FBEOffset(fbeCurrentOffset);
+        char3.fbeOffset(fbeCurrentOffset);
         fbeValue.char3 = char3.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        char4.FBEOffset(fbeCurrentOffset);
+        char4.fbeOffset(fbeCurrentOffset);
         fbeValue.char4 = char4.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        char5.FBEOffset(fbeCurrentOffset);
+        char5.fbeOffset(fbeCurrentOffset);
         fbeValue.char5 = char5.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        wchar0.FBEOffset(fbeCurrentOffset);
+        wchar0.fbeOffset(fbeCurrentOffset);
         fbeValue.wchar0 = wchar0.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        wchar1.FBEOffset(fbeCurrentOffset);
+        wchar1.fbeOffset(fbeCurrentOffset);
         fbeValue.wchar1 = wchar1.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        wchar2.FBEOffset(fbeCurrentOffset);
+        wchar2.fbeOffset(fbeCurrentOffset);
         fbeValue.wchar2 = wchar2.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        wchar3.FBEOffset(fbeCurrentOffset);
+        wchar3.fbeOffset(fbeCurrentOffset);
         fbeValue.wchar3 = wchar3.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        wchar4.FBEOffset(fbeCurrentOffset);
+        wchar4.fbeOffset(fbeCurrentOffset);
         fbeValue.wchar4 = wchar4.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        wchar5.FBEOffset(fbeCurrentOffset);
+        wchar5.fbeOffset(fbeCurrentOffset);
         fbeValue.wchar5 = wchar5.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int8b0.FBEOffset(fbeCurrentOffset);
+        int8b0.fbeOffset(fbeCurrentOffset);
         fbeValue.int8b0 = int8b0.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int8b1.FBEOffset(fbeCurrentOffset);
+        int8b1.fbeOffset(fbeCurrentOffset);
         fbeValue.int8b1 = int8b1.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int8b2.FBEOffset(fbeCurrentOffset);
+        int8b2.fbeOffset(fbeCurrentOffset);
         fbeValue.int8b2 = int8b2.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int8b3.FBEOffset(fbeCurrentOffset);
+        int8b3.fbeOffset(fbeCurrentOffset);
         fbeValue.int8b3 = int8b3.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int8b4.FBEOffset(fbeCurrentOffset);
+        int8b4.fbeOffset(fbeCurrentOffset);
         fbeValue.int8b4 = int8b4.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int8b5.FBEOffset(fbeCurrentOffset);
+        int8b5.fbeOffset(fbeCurrentOffset);
         fbeValue.int8b5 = int8b5.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint8b0.FBEOffset(fbeCurrentOffset);
+        uint8b0.fbeOffset(fbeCurrentOffset);
         fbeValue.uint8b0 = uint8b0.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint8b1.FBEOffset(fbeCurrentOffset);
+        uint8b1.fbeOffset(fbeCurrentOffset);
         fbeValue.uint8b1 = uint8b1.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint8b2.FBEOffset(fbeCurrentOffset);
+        uint8b2.fbeOffset(fbeCurrentOffset);
         fbeValue.uint8b2 = uint8b2.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint8b3.FBEOffset(fbeCurrentOffset);
+        uint8b3.fbeOffset(fbeCurrentOffset);
         fbeValue.uint8b3 = uint8b3.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint8b4.FBEOffset(fbeCurrentOffset);
+        uint8b4.fbeOffset(fbeCurrentOffset);
         fbeValue.uint8b4 = uint8b4.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint8b5.FBEOffset(fbeCurrentOffset);
+        uint8b5.fbeOffset(fbeCurrentOffset);
         fbeValue.uint8b5 = uint8b5.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int16b0.FBEOffset(fbeCurrentOffset);
+        int16b0.fbeOffset(fbeCurrentOffset);
         fbeValue.int16b0 = int16b0.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int16b1.FBEOffset(fbeCurrentOffset);
+        int16b1.fbeOffset(fbeCurrentOffset);
         fbeValue.int16b1 = int16b1.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int16b2.FBEOffset(fbeCurrentOffset);
+        int16b2.fbeOffset(fbeCurrentOffset);
         fbeValue.int16b2 = int16b2.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int16b3.FBEOffset(fbeCurrentOffset);
+        int16b3.fbeOffset(fbeCurrentOffset);
         fbeValue.int16b3 = int16b3.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int16b4.FBEOffset(fbeCurrentOffset);
+        int16b4.fbeOffset(fbeCurrentOffset);
         fbeValue.int16b4 = int16b4.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int16b5.FBEOffset(fbeCurrentOffset);
+        int16b5.fbeOffset(fbeCurrentOffset);
         fbeValue.int16b5 = int16b5.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint16b0.FBEOffset(fbeCurrentOffset);
+        uint16b0.fbeOffset(fbeCurrentOffset);
         fbeValue.uint16b0 = uint16b0.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint16b1.FBEOffset(fbeCurrentOffset);
+        uint16b1.fbeOffset(fbeCurrentOffset);
         fbeValue.uint16b1 = uint16b1.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint16b2.FBEOffset(fbeCurrentOffset);
+        uint16b2.fbeOffset(fbeCurrentOffset);
         fbeValue.uint16b2 = uint16b2.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint16b3.FBEOffset(fbeCurrentOffset);
+        uint16b3.fbeOffset(fbeCurrentOffset);
         fbeValue.uint16b3 = uint16b3.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint16b4.FBEOffset(fbeCurrentOffset);
+        uint16b4.fbeOffset(fbeCurrentOffset);
         fbeValue.uint16b4 = uint16b4.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint16b5.FBEOffset(fbeCurrentOffset);
+        uint16b5.fbeOffset(fbeCurrentOffset);
         fbeValue.uint16b5 = uint16b5.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int32b0.FBEOffset(fbeCurrentOffset);
+        int32b0.fbeOffset(fbeCurrentOffset);
         fbeValue.int32b0 = int32b0.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int32b1.FBEOffset(fbeCurrentOffset);
+        int32b1.fbeOffset(fbeCurrentOffset);
         fbeValue.int32b1 = int32b1.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int32b2.FBEOffset(fbeCurrentOffset);
+        int32b2.fbeOffset(fbeCurrentOffset);
         fbeValue.int32b2 = int32b2.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int32b3.FBEOffset(fbeCurrentOffset);
+        int32b3.fbeOffset(fbeCurrentOffset);
         fbeValue.int32b3 = int32b3.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int32b4.FBEOffset(fbeCurrentOffset);
+        int32b4.fbeOffset(fbeCurrentOffset);
         fbeValue.int32b4 = int32b4.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int32b5.FBEOffset(fbeCurrentOffset);
+        int32b5.fbeOffset(fbeCurrentOffset);
         fbeValue.int32b5 = int32b5.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint32b0.FBEOffset(fbeCurrentOffset);
+        uint32b0.fbeOffset(fbeCurrentOffset);
         fbeValue.uint32b0 = uint32b0.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint32b1.FBEOffset(fbeCurrentOffset);
+        uint32b1.fbeOffset(fbeCurrentOffset);
         fbeValue.uint32b1 = uint32b1.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint32b2.FBEOffset(fbeCurrentOffset);
+        uint32b2.fbeOffset(fbeCurrentOffset);
         fbeValue.uint32b2 = uint32b2.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint32b3.FBEOffset(fbeCurrentOffset);
+        uint32b3.fbeOffset(fbeCurrentOffset);
         fbeValue.uint32b3 = uint32b3.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint32b4.FBEOffset(fbeCurrentOffset);
+        uint32b4.fbeOffset(fbeCurrentOffset);
         fbeValue.uint32b4 = uint32b4.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint32b5.FBEOffset(fbeCurrentOffset);
+        uint32b5.fbeOffset(fbeCurrentOffset);
         fbeValue.uint32b5 = uint32b5.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int64b0.FBEOffset(fbeCurrentOffset);
+        int64b0.fbeOffset(fbeCurrentOffset);
         fbeValue.int64b0 = int64b0.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int64b1.FBEOffset(fbeCurrentOffset);
+        int64b1.fbeOffset(fbeCurrentOffset);
         fbeValue.int64b1 = int64b1.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int64b2.FBEOffset(fbeCurrentOffset);
+        int64b2.fbeOffset(fbeCurrentOffset);
         fbeValue.int64b2 = int64b2.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int64b3.FBEOffset(fbeCurrentOffset);
+        int64b3.fbeOffset(fbeCurrentOffset);
         fbeValue.int64b3 = int64b3.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int64b4.FBEOffset(fbeCurrentOffset);
+        int64b4.fbeOffset(fbeCurrentOffset);
         fbeValue.int64b4 = int64b4.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int64b5.FBEOffset(fbeCurrentOffset);
+        int64b5.fbeOffset(fbeCurrentOffset);
         fbeValue.int64b5 = int64b5.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint64b0.FBEOffset(fbeCurrentOffset);
+        uint64b0.fbeOffset(fbeCurrentOffset);
         fbeValue.uint64b0 = uint64b0.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint64b1.FBEOffset(fbeCurrentOffset);
+        uint64b1.fbeOffset(fbeCurrentOffset);
         fbeValue.uint64b1 = uint64b1.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint64b2.FBEOffset(fbeCurrentOffset);
+        uint64b2.fbeOffset(fbeCurrentOffset);
         fbeValue.uint64b2 = uint64b2.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint64b3.FBEOffset(fbeCurrentOffset);
+        uint64b3.fbeOffset(fbeCurrentOffset);
         fbeValue.uint64b3 = uint64b3.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint64b4.FBEOffset(fbeCurrentOffset);
+        uint64b4.fbeOffset(fbeCurrentOffset);
         fbeValue.uint64b4 = uint64b4.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint64b5.FBEOffset(fbeCurrentOffset);
+        uint64b5.fbeOffset(fbeCurrentOffset);
         fbeValue.uint64b5 = uint64b5.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
@@ -1001,9 +1001,9 @@ public final class FinalModelEnums extends FinalModel
     // Set the struct value
     public long set(Enums fbeValue)
     {
-        _buffer.shift(FBEOffset());
+        _buffer.shift(fbeOffset());
         long fbeSize = setFields(fbeValue);
-        _buffer.unshift(FBEOffset());
+        _buffer.unshift(fbeOffset());
         return fbeSize;
     }
 
@@ -1014,332 +1014,332 @@ public final class FinalModelEnums extends FinalModel
         long fbeCurrentSize = 0;
         var fbeFieldSize = new Size(0);
 
-        byte0.FBEOffset(fbeCurrentOffset);
+        byte0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = byte0.set(fbeValue.byte0);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        byte1.FBEOffset(fbeCurrentOffset);
+        byte1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = byte1.set(fbeValue.byte1);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        byte2.FBEOffset(fbeCurrentOffset);
+        byte2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = byte2.set(fbeValue.byte2);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        byte3.FBEOffset(fbeCurrentOffset);
+        byte3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = byte3.set(fbeValue.byte3);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        byte4.FBEOffset(fbeCurrentOffset);
+        byte4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = byte4.set(fbeValue.byte4);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        byte5.FBEOffset(fbeCurrentOffset);
+        byte5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = byte5.set(fbeValue.byte5);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        char0.FBEOffset(fbeCurrentOffset);
+        char0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = char0.set(fbeValue.char0);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        char1.FBEOffset(fbeCurrentOffset);
+        char1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = char1.set(fbeValue.char1);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        char2.FBEOffset(fbeCurrentOffset);
+        char2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = char2.set(fbeValue.char2);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        char3.FBEOffset(fbeCurrentOffset);
+        char3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = char3.set(fbeValue.char3);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        char4.FBEOffset(fbeCurrentOffset);
+        char4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = char4.set(fbeValue.char4);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        char5.FBEOffset(fbeCurrentOffset);
+        char5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = char5.set(fbeValue.char5);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        wchar0.FBEOffset(fbeCurrentOffset);
+        wchar0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = wchar0.set(fbeValue.wchar0);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        wchar1.FBEOffset(fbeCurrentOffset);
+        wchar1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = wchar1.set(fbeValue.wchar1);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        wchar2.FBEOffset(fbeCurrentOffset);
+        wchar2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = wchar2.set(fbeValue.wchar2);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        wchar3.FBEOffset(fbeCurrentOffset);
+        wchar3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = wchar3.set(fbeValue.wchar3);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        wchar4.FBEOffset(fbeCurrentOffset);
+        wchar4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = wchar4.set(fbeValue.wchar4);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        wchar5.FBEOffset(fbeCurrentOffset);
+        wchar5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = wchar5.set(fbeValue.wchar5);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int8b0.FBEOffset(fbeCurrentOffset);
+        int8b0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int8b0.set(fbeValue.int8b0);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int8b1.FBEOffset(fbeCurrentOffset);
+        int8b1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int8b1.set(fbeValue.int8b1);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int8b2.FBEOffset(fbeCurrentOffset);
+        int8b2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int8b2.set(fbeValue.int8b2);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int8b3.FBEOffset(fbeCurrentOffset);
+        int8b3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int8b3.set(fbeValue.int8b3);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int8b4.FBEOffset(fbeCurrentOffset);
+        int8b4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int8b4.set(fbeValue.int8b4);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int8b5.FBEOffset(fbeCurrentOffset);
+        int8b5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int8b5.set(fbeValue.int8b5);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint8b0.FBEOffset(fbeCurrentOffset);
+        uint8b0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint8b0.set(fbeValue.uint8b0);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint8b1.FBEOffset(fbeCurrentOffset);
+        uint8b1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint8b1.set(fbeValue.uint8b1);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint8b2.FBEOffset(fbeCurrentOffset);
+        uint8b2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint8b2.set(fbeValue.uint8b2);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint8b3.FBEOffset(fbeCurrentOffset);
+        uint8b3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint8b3.set(fbeValue.uint8b3);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint8b4.FBEOffset(fbeCurrentOffset);
+        uint8b4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint8b4.set(fbeValue.uint8b4);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint8b5.FBEOffset(fbeCurrentOffset);
+        uint8b5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint8b5.set(fbeValue.uint8b5);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int16b0.FBEOffset(fbeCurrentOffset);
+        int16b0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int16b0.set(fbeValue.int16b0);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int16b1.FBEOffset(fbeCurrentOffset);
+        int16b1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int16b1.set(fbeValue.int16b1);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int16b2.FBEOffset(fbeCurrentOffset);
+        int16b2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int16b2.set(fbeValue.int16b2);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int16b3.FBEOffset(fbeCurrentOffset);
+        int16b3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int16b3.set(fbeValue.int16b3);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int16b4.FBEOffset(fbeCurrentOffset);
+        int16b4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int16b4.set(fbeValue.int16b4);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int16b5.FBEOffset(fbeCurrentOffset);
+        int16b5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int16b5.set(fbeValue.int16b5);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint16b0.FBEOffset(fbeCurrentOffset);
+        uint16b0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint16b0.set(fbeValue.uint16b0);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint16b1.FBEOffset(fbeCurrentOffset);
+        uint16b1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint16b1.set(fbeValue.uint16b1);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint16b2.FBEOffset(fbeCurrentOffset);
+        uint16b2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint16b2.set(fbeValue.uint16b2);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint16b3.FBEOffset(fbeCurrentOffset);
+        uint16b3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint16b3.set(fbeValue.uint16b3);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint16b4.FBEOffset(fbeCurrentOffset);
+        uint16b4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint16b4.set(fbeValue.uint16b4);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint16b5.FBEOffset(fbeCurrentOffset);
+        uint16b5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint16b5.set(fbeValue.uint16b5);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int32b0.FBEOffset(fbeCurrentOffset);
+        int32b0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int32b0.set(fbeValue.int32b0);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int32b1.FBEOffset(fbeCurrentOffset);
+        int32b1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int32b1.set(fbeValue.int32b1);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int32b2.FBEOffset(fbeCurrentOffset);
+        int32b2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int32b2.set(fbeValue.int32b2);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int32b3.FBEOffset(fbeCurrentOffset);
+        int32b3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int32b3.set(fbeValue.int32b3);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int32b4.FBEOffset(fbeCurrentOffset);
+        int32b4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int32b4.set(fbeValue.int32b4);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int32b5.FBEOffset(fbeCurrentOffset);
+        int32b5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int32b5.set(fbeValue.int32b5);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint32b0.FBEOffset(fbeCurrentOffset);
+        uint32b0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint32b0.set(fbeValue.uint32b0);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint32b1.FBEOffset(fbeCurrentOffset);
+        uint32b1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint32b1.set(fbeValue.uint32b1);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint32b2.FBEOffset(fbeCurrentOffset);
+        uint32b2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint32b2.set(fbeValue.uint32b2);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint32b3.FBEOffset(fbeCurrentOffset);
+        uint32b3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint32b3.set(fbeValue.uint32b3);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint32b4.FBEOffset(fbeCurrentOffset);
+        uint32b4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint32b4.set(fbeValue.uint32b4);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint32b5.FBEOffset(fbeCurrentOffset);
+        uint32b5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint32b5.set(fbeValue.uint32b5);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int64b0.FBEOffset(fbeCurrentOffset);
+        int64b0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int64b0.set(fbeValue.int64b0);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int64b1.FBEOffset(fbeCurrentOffset);
+        int64b1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int64b1.set(fbeValue.int64b1);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int64b2.FBEOffset(fbeCurrentOffset);
+        int64b2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int64b2.set(fbeValue.int64b2);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int64b3.FBEOffset(fbeCurrentOffset);
+        int64b3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int64b3.set(fbeValue.int64b3);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int64b4.FBEOffset(fbeCurrentOffset);
+        int64b4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int64b4.set(fbeValue.int64b4);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        int64b5.FBEOffset(fbeCurrentOffset);
+        int64b5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = int64b5.set(fbeValue.int64b5);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint64b0.FBEOffset(fbeCurrentOffset);
+        uint64b0.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint64b0.set(fbeValue.uint64b0);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint64b1.FBEOffset(fbeCurrentOffset);
+        uint64b1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint64b1.set(fbeValue.uint64b1);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint64b2.FBEOffset(fbeCurrentOffset);
+        uint64b2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint64b2.set(fbeValue.uint64b2);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint64b3.FBEOffset(fbeCurrentOffset);
+        uint64b3.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint64b3.set(fbeValue.uint64b3);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint64b4.FBEOffset(fbeCurrentOffset);
+        uint64b4.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint64b4.set(fbeValue.uint64b4);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        uint64b5.FBEOffset(fbeCurrentOffset);
+        uint64b5.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uint64b5.set(fbeValue.uint64b5);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;

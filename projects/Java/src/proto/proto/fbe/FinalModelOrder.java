@@ -36,15 +36,15 @@ public final class FinalModelOrder extends FinalModel
     }
 
     // Get the allocation size
-    public long FBEAllocationSize(Order fbeValue)
+    public long fbeAllocationSize(Order fbeValue)
     {
         long fbeResult = 0
-            + uid.FBEAllocationSize(fbeValue.uid)
-            + symbol.FBEAllocationSize(fbeValue.symbol)
-            + side.FBEAllocationSize(fbeValue.side)
-            + type.FBEAllocationSize(fbeValue.type)
-            + price.FBEAllocationSize(fbeValue.price)
-            + volume.FBEAllocationSize(fbeValue.volume)
+            + uid.fbeAllocationSize(fbeValue.uid)
+            + symbol.fbeAllocationSize(fbeValue.symbol)
+            + side.fbeAllocationSize(fbeValue.side)
+            + type.fbeAllocationSize(fbeValue.type)
+            + price.fbeAllocationSize(fbeValue.price)
+            + volume.fbeAllocationSize(fbeValue.volume)
             ;
         return fbeResult;
     }
@@ -57,9 +57,9 @@ public final class FinalModelOrder extends FinalModel
     @Override
     public long verify()
     {
-        _buffer.shift(FBEOffset());
+        _buffer.shift(fbeOffset());
         long fbeResult = verifyFields();
-        _buffer.unshift(FBEOffset());
+        _buffer.unshift(fbeOffset());
         return fbeResult;
     }
 
@@ -69,37 +69,37 @@ public final class FinalModelOrder extends FinalModel
         long fbeCurrentOffset = 0;
         long fbeFieldSize = 0;
 
-        uid.FBEOffset(fbeCurrentOffset);
+        uid.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uid.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        symbol.FBEOffset(fbeCurrentOffset);
+        symbol.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = symbol.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        side.FBEOffset(fbeCurrentOffset);
+        side.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = side.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        type.FBEOffset(fbeCurrentOffset);
+        type.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = type.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        price.FBEOffset(fbeCurrentOffset);
+        price.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = price.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        volume.FBEOffset(fbeCurrentOffset);
+        volume.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = volume.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
@@ -112,9 +112,9 @@ public final class FinalModelOrder extends FinalModel
     public Order get(Size fbeSize) { return get(fbeSize, new Order()); }
     public Order get(Size fbeSize, Order fbeValue)
     {
-        _buffer.shift(FBEOffset());
+        _buffer.shift(fbeOffset());
         fbeSize.value = getFields(fbeValue);
-        _buffer.unshift(FBEOffset());
+        _buffer.unshift(fbeOffset());
         return fbeValue;
     }
 
@@ -125,32 +125,32 @@ public final class FinalModelOrder extends FinalModel
         long fbeCurrentSize = 0;
         var fbeFieldSize = new Size(0);
 
-        uid.FBEOffset(fbeCurrentOffset);
+        uid.fbeOffset(fbeCurrentOffset);
         fbeValue.uid = uid.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        symbol.FBEOffset(fbeCurrentOffset);
+        symbol.fbeOffset(fbeCurrentOffset);
         fbeValue.symbol = symbol.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        side.FBEOffset(fbeCurrentOffset);
+        side.fbeOffset(fbeCurrentOffset);
         fbeValue.side = side.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        type.FBEOffset(fbeCurrentOffset);
+        type.fbeOffset(fbeCurrentOffset);
         fbeValue.type = type.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        price.FBEOffset(fbeCurrentOffset);
+        price.fbeOffset(fbeCurrentOffset);
         fbeValue.price = price.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        volume.FBEOffset(fbeCurrentOffset);
+        volume.fbeOffset(fbeCurrentOffset);
         fbeValue.volume = volume.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
@@ -161,9 +161,9 @@ public final class FinalModelOrder extends FinalModel
     // Set the struct value
     public long set(Order fbeValue)
     {
-        _buffer.shift(FBEOffset());
+        _buffer.shift(fbeOffset());
         long fbeSize = setFields(fbeValue);
-        _buffer.unshift(FBEOffset());
+        _buffer.unshift(fbeOffset());
         return fbeSize;
     }
 
@@ -174,32 +174,32 @@ public final class FinalModelOrder extends FinalModel
         long fbeCurrentSize = 0;
         var fbeFieldSize = new Size(0);
 
-        uid.FBEOffset(fbeCurrentOffset);
+        uid.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uid.set(fbeValue.uid);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        symbol.FBEOffset(fbeCurrentOffset);
+        symbol.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = symbol.set(fbeValue.symbol);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        side.FBEOffset(fbeCurrentOffset);
+        side.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = side.set(fbeValue.side);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        type.FBEOffset(fbeCurrentOffset);
+        type.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = type.set(fbeValue.type);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        price.FBEOffset(fbeCurrentOffset);
+        price.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = price.set(fbeValue.price);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        volume.FBEOffset(fbeCurrentOffset);
+        volume.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = volume.set(fbeValue.volume);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;

@@ -21,25 +21,25 @@ public final class FieldModelState extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return 1; }
+    public long fbeSize() { return 1; }
 
     // Get the value
     public State get() { return get(new State()); }
     public State get(State defaults)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
 
-        return new State(readByte(FBEOffset()));
+        return new State(readByte(fbeOffset()));
     }
 
     // Set the value
     public void set(State value)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
-        write(FBEOffset(), value.getRaw());
+        write(fbeOffset(), value.getRaw());
     }
 }

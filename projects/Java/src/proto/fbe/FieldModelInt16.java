@@ -18,25 +18,25 @@ public final class FieldModelInt16 extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return 2; }
+    public long fbeSize() { return 2; }
 
     // Get the value
     public short get() { return get((short)0); }
     public short get(short defaults)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
 
-        return readInt16(FBEOffset());
+        return readInt16(fbeOffset());
     }
 
     // Set the value
     public void set(short value)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
-        write(FBEOffset(), value);
+        write(fbeOffset(), value);
     }
 }

@@ -26,32 +26,32 @@ public final class FinalModelVectorOrder extends FinalModel
     }
 
     // Get the allocation size
-    public long FBEAllocationSize(Order[] values)
+    public long fbeAllocationSize(Order[] values)
     {
         long size = 4;
         for (var value : values)
-            size += _model.FBEAllocationSize(value);
+            size += _model.fbeAllocationSize(value);
         return size;
     }
-    public long FBEAllocationSize(ArrayList<Order> values)
+    public long fbeAllocationSize(ArrayList<Order> values)
     {
         long size = 4;
         for (var value : values)
-            size += _model.FBEAllocationSize(value);
+            size += _model.fbeAllocationSize(value);
         return size;
     }
-    public long FBEAllocationSize(LinkedList<Order> values)
+    public long fbeAllocationSize(LinkedList<Order> values)
     {
         long size = 4;
         for (var value : values)
-            size += _model.FBEAllocationSize(value);
+            size += _model.fbeAllocationSize(value);
         return size;
     }
-    public long FBEAllocationSize(HashSet<Order> values)
+    public long fbeAllocationSize(HashSet<Order> values)
     {
         long size = 4;
         for (var value : values)
-            size += _model.FBEAllocationSize(value);
+            size += _model.fbeAllocationSize(value);
         return size;
     }
 
@@ -59,19 +59,19 @@ public final class FinalModelVectorOrder extends FinalModel
     @Override
     public long verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return Long.MAX_VALUE;
 
-        int fbeVectorSize = readInt32(FBEOffset());
+        int fbeVectorSize = readInt32(fbeOffset());
 
         long size = 4;
-        _model.FBEOffset(FBEOffset() + 4);
+        _model.fbeOffset(fbeOffset() + 4);
         for (int i = fbeVectorSize; i-- > 0;)
         {
             long offset = _model.verify();
             if (offset == Long.MAX_VALUE)
                 return Long.MAX_VALUE;
-            _model.FBEShift(offset);
+            _model.fbeShift(offset);
             size += offset;
         }
         return size;
@@ -86,11 +86,11 @@ public final class FinalModelVectorOrder extends FinalModel
 
         values.clear();
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
-        long fbeVectorSize = readInt32(FBEOffset());
+        long fbeVectorSize = readInt32(fbeOffset());
         if (fbeVectorSize == 0)
             return 4;
 
@@ -98,13 +98,13 @@ public final class FinalModelVectorOrder extends FinalModel
 
         long size = 4;
         var offset = new Size();
-        _model.FBEOffset(FBEOffset() + 4);
+        _model.fbeOffset(fbeOffset() + 4);
         for (long i = 0; i < fbeVectorSize; i++)
         {
             offset.value = 0;
             Order value = _model.get(offset);
             values.add(value);
-            _model.FBEShift(offset.value);
+            _model.fbeShift(offset.value);
             size += offset.value;
         }
         return size;
@@ -119,23 +119,23 @@ public final class FinalModelVectorOrder extends FinalModel
 
         values.clear();
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
-        long fbeVectorSize = readInt32(FBEOffset());
+        long fbeVectorSize = readInt32(fbeOffset());
         if (fbeVectorSize == 0)
             return 4;
 
         long size = 4;
         var offset = new Size();
-        _model.FBEOffset(FBEOffset() + 4);
+        _model.fbeOffset(fbeOffset() + 4);
         for (long i = 0; i < fbeVectorSize; i++)
         {
             offset.value = 0;
             Order value = _model.get(offset);
             values.add(value);
-            _model.FBEShift(offset.value);
+            _model.fbeShift(offset.value);
             size += offset.value;
         }
         return size;
@@ -150,23 +150,23 @@ public final class FinalModelVectorOrder extends FinalModel
 
         values.clear();
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
-        long fbeVectorSize = readInt32(FBEOffset());
+        long fbeVectorSize = readInt32(fbeOffset());
         if (fbeVectorSize == 0)
             return 4;
 
         long size = 4;
         var offset = new Size();
-        _model.FBEOffset(FBEOffset() + 4);
+        _model.fbeOffset(fbeOffset() + 4);
         for (long i = 0; i < fbeVectorSize; i++)
         {
             offset.value = 0;
             Order value = _model.get(offset);
             values.add(value);
-            _model.FBEShift(offset.value);
+            _model.fbeShift(offset.value);
             size += offset.value;
         }
         return size;
@@ -179,18 +179,18 @@ public final class FinalModelVectorOrder extends FinalModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
-        write(FBEOffset(), (int)values.size());
+        write(fbeOffset(), (int)values.size());
 
         long size = 4;
-        _model.FBEOffset(FBEOffset() + 4);
+        _model.fbeOffset(fbeOffset() + 4);
         for (var value : values)
         {
             long offset = _model.set(value);
-            _model.FBEShift(offset);
+            _model.fbeShift(offset);
             size += offset;
         }
         return size;
@@ -203,18 +203,18 @@ public final class FinalModelVectorOrder extends FinalModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
-        write(FBEOffset(), (int)values.size());
+        write(fbeOffset(), (int)values.size());
 
         long size = 4;
-        _model.FBEOffset(FBEOffset() + 4);
+        _model.fbeOffset(fbeOffset() + 4);
         for (var value : values)
         {
             long offset = _model.set(value);
-            _model.FBEShift(offset);
+            _model.fbeShift(offset);
             size += offset;
         }
         return size;
@@ -227,18 +227,18 @@ public final class FinalModelVectorOrder extends FinalModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
-        write(FBEOffset(), (int)values.size());
+        write(fbeOffset(), (int)values.size());
 
         long size = 4;
-        _model.FBEOffset(FBEOffset() + 4);
+        _model.fbeOffset(fbeOffset() + 4);
         for (var value : values)
         {
             long offset = _model.set(value);
-            _model.FBEShift(offset);
+            _model.fbeShift(offset);
             size += offset;
         }
         return size;

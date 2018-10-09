@@ -15,12 +15,12 @@ test('Extending: old -> new', function (t) {
 
   // Serialize the account to the FBE stream
   let writer = new proto.AccountModel(new fbe.WriteBuffer())
-  t.equal(writer.model.FBEOffset, 4)
+  t.equal(writer.model.fbeOffset, 4)
   let serialized = writer.serialize(account1)
   t.equal(serialized, writer.buffer.size)
   t.true(writer.verify())
   writer.next(serialized)
-  t.equal(writer.model.FBEOffset, (4 + writer.buffer.size))
+  t.equal(writer.model.fbeOffset, (4 + writer.buffer.size))
 
   // Check the serialized FBE size
   t.equal(writer.buffer.size, 252)
@@ -28,13 +28,13 @@ test('Extending: old -> new', function (t) {
   // Deserialize the account from the FBE stream
   let account2 = new protoex.Account()
   let reader = new protoex.AccountModel(new fbe.ReadBuffer())
-  t.equal(reader.model.FBEOffset, 4)
+  t.equal(reader.model.fbeOffset, 4)
   reader.attachBuffer(writer.buffer)
   t.true(reader.verify())
   let deserialized = reader.deserialize(account2)
   t.true(deserialized.size, reader.buffer.size)
   reader.next(deserialized.size)
-  t.true(reader.model.FBEOffset, (4 + reader.buffer.size))
+  t.true(reader.model.fbeOffset, (4 + reader.buffer.size))
 
   t.equal(account2.uid, 1)
   t.equal(account2.name, 'Test')
@@ -83,12 +83,12 @@ test('Extending: new -> old', function (t) {
 
   // Serialize the account to the FBE stream
   let writer = new protoex.AccountModel(new fbe.WriteBuffer())
-  t.equal(writer.model.FBEOffset, 4)
+  t.equal(writer.model.fbeOffset, 4)
   let serialized = writer.serialize(account1)
   t.equal(serialized, writer.buffer.size)
   t.true(writer.verify())
   writer.next(serialized)
-  t.equal(writer.model.FBEOffset, (4 + writer.buffer.size))
+  t.equal(writer.model.fbeOffset, (4 + writer.buffer.size))
 
   // Check the serialized FBE size
   t.equal(writer.buffer.size, 316)
@@ -96,13 +96,13 @@ test('Extending: new -> old', function (t) {
   // Deserialize the account from the FBE stream
   let account2 = new proto.Account()
   let reader = new proto.AccountModel(new fbe.ReadBuffer())
-  t.equal(reader.model.FBEOffset, 4)
+  t.equal(reader.model.fbeOffset, 4)
   reader.attachBuffer(writer.buffer)
   t.true(reader.verify())
   let deserialized = reader.deserialize(account2)
   t.true(deserialized.size, reader.buffer.size)
   reader.next(deserialized.size)
-  t.true(reader.model.FBEOffset, (4 + reader.buffer.size))
+  t.true(reader.model.fbeOffset, (4 + reader.buffer.size))
 
   t.equal(account2.uid, 1)
   t.equal(account2.name, 'Test')

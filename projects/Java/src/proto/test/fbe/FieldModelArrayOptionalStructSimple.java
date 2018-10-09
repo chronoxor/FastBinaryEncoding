@@ -29,10 +29,10 @@ public final class FieldModelArrayOptionalStructSimple extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return _size * _model.FBESize(); }
+    public long fbeSize() { return _size * _model.fbeSize(); }
     // Get the field extra size
     @Override
-    public long FBEExtra() { return 0; }
+    public long fbeExtra() { return 0; }
 
     // Get the array offset
     public long getOffset() { return 0; }
@@ -42,11 +42,11 @@ public final class FieldModelArrayOptionalStructSimple extends FieldModel
     // Array index operator
     public FieldModelOptionalStructSimple getItem(long index)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         assert (index < _size) : "Index is out of bounds!";
 
-        _model.FBEOffset(FBEOffset());
-        _model.FBEShift(index * _model.FBESize());
+        _model.fbeOffset(fbeOffset());
+        _model.fbeShift(index * _model.fbeSize());
         return _model;
     }
 
@@ -54,15 +54,15 @@ public final class FieldModelArrayOptionalStructSimple extends FieldModel
     @Override
     public boolean verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return false;
 
-        _model.FBEOffset(FBEOffset());
+        _model.fbeOffset(fbeOffset());
         for (long i = _size; i-- > 0;)
         {
             if (!_model.verify())
                 return false;
-            _model.FBEShift(_model.FBESize());
+            _model.fbeShift(_model.fbeSize());
         }
 
         return true;
@@ -77,7 +77,7 @@ public final class FieldModelArrayOptionalStructSimple extends FieldModel
         for (long i = 0; i < _size; i++)
         {
             values[(int)i] = fbeModel.get();
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
         return values;
     }
@@ -93,7 +93,7 @@ public final class FieldModelArrayOptionalStructSimple extends FieldModel
         for (long i = 0; (i < values.length) && (i < _size); i++)
         {
             values[(int)i] = fbeModel.get();
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
@@ -112,7 +112,7 @@ public final class FieldModelArrayOptionalStructSimple extends FieldModel
         {
             StructSimple value = fbeModel.get();
             values.add(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
@@ -123,15 +123,15 @@ public final class FieldModelArrayOptionalStructSimple extends FieldModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
         var fbeModel = getItem(0);
         for (long i = 0; (i < values.length) && (i < _size); i++)
         {
             fbeModel.set(values[(int)i]);
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
@@ -142,15 +142,15 @@ public final class FieldModelArrayOptionalStructSimple extends FieldModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
         var fbeModel = getItem(0);
         for (long i = 0; (i < values.size()) && (i < _size); i++)
         {
             fbeModel.set(values.get((int)i));
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 }

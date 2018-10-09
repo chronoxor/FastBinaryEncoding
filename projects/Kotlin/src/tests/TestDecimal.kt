@@ -29,7 +29,7 @@ class TestDecimal
 
         val finalModel = fbe.FinalModelDecimal(fbe.Buffer(buffer), 0)
         val size = fbe.Size()
-        val value2 = finalModel[size]
+        val value2 = finalModel.get(size)
         finalModel.set(value2)
         if ((fbe.Buffer.readInt32(buffer, 0) != low) ||
             (fbe.Buffer.readInt32(buffer, 4) != mid) ||

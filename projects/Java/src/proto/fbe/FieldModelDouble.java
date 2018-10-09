@@ -18,25 +18,25 @@ public final class FieldModelDouble extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return 8; }
+    public long fbeSize() { return 8; }
 
     // Get the value
     public double get() { return get(0.0d); }
     public double get(double defaults)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
 
-        return readDouble(FBEOffset());
+        return readDouble(fbeOffset());
     }
 
     // Set the value
     public void set(double value)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
-        write(FBEOffset(), value);
+        write(fbeOffset(), value);
     }
 }

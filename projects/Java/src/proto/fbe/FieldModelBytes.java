@@ -18,15 +18,15 @@ public final class FieldModelBytes extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return 4; }
+    public long fbeSize() { return 4; }
     // Get the field extra size
     @Override
-    public long FBEExtra()
+    public long fbeExtra()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeBytesOffset = readInt32(FBEOffset());
+        int fbeBytesOffset = readInt32(fbeOffset());
         if ((fbeBytesOffset == 0) || ((_buffer.getOffset() + fbeBytesOffset + 4) > _buffer.getSize()))
             return 0;
 
@@ -38,10 +38,10 @@ public final class FieldModelBytes extends FieldModel
     @Override
     public boolean verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return true;
 
-        int fbeBytesOffset = readInt32(FBEOffset());
+        int fbeBytesOffset = readInt32(fbeOffset());
         if (fbeBytesOffset == 0)
             return true;
 
@@ -65,10 +65,10 @@ public final class FieldModelBytes extends FieldModel
 
         byte[] value = defaults;
 
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return value;
 
-        int fbeBytesOffset = readInt32(FBEOffset());
+        int fbeBytesOffset = readInt32(fbeOffset());
         if (fbeBytesOffset == 0)
             return value;
 
@@ -92,8 +92,8 @@ public final class FieldModelBytes extends FieldModel
         if (value == null)
             throw new IllegalArgumentException("Invalid bytes value!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
         int fbeBytesSize = value.length;
@@ -102,7 +102,7 @@ public final class FieldModelBytes extends FieldModel
         if ((fbeBytesOffset <= 0) || ((_buffer.getOffset() + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.getSize()))
             return;
 
-        write(FBEOffset(), fbeBytesOffset);
+        write(fbeOffset(), fbeBytesOffset);
         write(fbeBytesOffset, fbeBytesSize);
         write(fbeBytesOffset + 4, value);
     }

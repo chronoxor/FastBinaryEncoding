@@ -17,31 +17,31 @@ public final class FinalModelDecimal extends FinalModel
     public FinalModelDecimal(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long FBEAllocationSize(BigDecimal value) { return FBESize(); }
+    public long fbeAllocationSize(BigDecimal value) { return fbeSize(); }
 
     // Get the final size
     @Override
-    public long FBESize() { return 16; }
+    public long fbeSize() { return 16; }
 
     // Check if the value is valid
     @Override
     public long verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return Long.MAX_VALUE;
 
-        return FBESize();
+        return fbeSize();
     }
 
     // Get the value
     public BigDecimal get(Size size)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return BigDecimal.valueOf(0L);
 
-        byte[] magnitude = readBytes(FBEOffset(), 12);
-        int scale = readByte(FBEOffset() + 14);
-        int signum = (readByte(FBEOffset() + 15) < 0) ? -1 : 1;
+        byte[] magnitude = readBytes(fbeOffset(), 12);
+        int scale = readByte(fbeOffset() + 14);
+        int signum = (readByte(fbeOffset() + 15) < 0) ? -1 : 1;
 
         // Reverse magnitude
         for(int i = 0; i < magnitude.length / 2; i++)
@@ -53,15 +53,15 @@ public final class FinalModelDecimal extends FinalModel
 
         var unscaled = new BigInteger(signum, magnitude);
 
-        size.value = FBESize();
+        size.value = fbeSize();
         return new BigDecimal(unscaled, scale);
     }
 
     // Set the value
     public long set(BigDecimal value)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
         // Get unscaled absolute value
@@ -70,8 +70,8 @@ public final class FinalModelDecimal extends FinalModel
         if ((bitLength < 0) || (bitLength > 96))
         {
             // Value too big for .NET Decimal (bit length is limited to [0, 96])
-            write(FBEOffset(), (byte)0, FBESize());
-            return FBESize();
+            write(fbeOffset(), (byte)0, fbeSize());
+            return fbeSize();
         }
 
         // Get byte array
@@ -82,24 +82,24 @@ public final class FinalModelDecimal extends FinalModel
         if ((scale < 0) || (scale > 28))
         {
             // Value scale exceeds .NET Decimal limit of [0, 28]
-            write(FBEOffset(), (byte)0, FBESize());
-            return FBESize();
+            write(fbeOffset(), (byte)0, fbeSize());
+            return fbeSize();
         }
 
         // Write unscaled value to bytes 0-11
         int index = 0;
         for (int i = unscaledBytes.length - 1; (i >= 0) && (index < 12); i--, index++)
-            write(FBEOffset() + index, unscaledBytes[i]);
+            write(fbeOffset() + index, unscaledBytes[i]);
 
         // Fill remaining bytes with zeros
         for (; index < 14; index++)
-            write(FBEOffset() + index, (byte)0);
+            write(fbeOffset() + index, (byte)0);
 
         // Write scale at byte 14
-        write(FBEOffset() + 14, (byte)scale);
+        write(fbeOffset() + 14, (byte)scale);
 
         // Write signum at byte 15
-        write(FBEOffset() + 15, (byte)((value.signum() < 0) ? -128 : 0));
-        return FBESize();
+        write(fbeOffset() + 15, (byte)((value.signum() < 0) ? -128 : 0));
+        return fbeSize();
     }
 }

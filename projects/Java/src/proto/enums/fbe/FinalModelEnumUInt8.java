@@ -20,40 +20,40 @@ public final class FinalModelEnumUInt8 extends FinalModel
     public FinalModelEnumUInt8(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long FBEAllocationSize(EnumUInt8 value) { return FBESize(); }
+    public long fbeAllocationSize(EnumUInt8 value) { return fbeSize(); }
 
     // Get the final size
     @Override
-    public long FBESize() { return 1; }
+    public long fbeSize() { return 1; }
 
     // Check if the value is valid
     @Override
     public long verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return Long.MAX_VALUE;
 
-        return FBESize();
+        return fbeSize();
     }
 
     // Get the value
     public EnumUInt8 get(Size size)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return new EnumUInt8();
 
-        size.value = FBESize();
-        return new EnumUInt8(readInt8(FBEOffset()));
+        size.value = fbeSize();
+        return new EnumUInt8(readInt8(fbeOffset()));
     }
 
     // Set the value
     public long set(EnumUInt8 value)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        write(FBEOffset(), value.getRaw());
-        return FBESize();
+        write(fbeOffset(), value.getRaw());
+        return fbeSize();
     }
 }

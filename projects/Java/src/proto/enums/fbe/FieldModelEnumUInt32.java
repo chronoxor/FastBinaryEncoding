@@ -21,25 +21,25 @@ public final class FieldModelEnumUInt32 extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return 4; }
+    public long fbeSize() { return 4; }
 
     // Get the value
     public EnumUInt32 get() { return get(new EnumUInt32()); }
     public EnumUInt32 get(EnumUInt32 defaults)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
 
-        return new EnumUInt32(readInt32(FBEOffset()));
+        return new EnumUInt32(readInt32(fbeOffset()));
     }
 
     // Set the value
     public void set(EnumUInt32 value)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
-        write(FBEOffset(), value.getRaw());
+        write(fbeOffset(), value.getRaw());
     }
 }

@@ -18,25 +18,25 @@ public final class FieldModelInt64 extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return 8; }
+    public long fbeSize() { return 8; }
 
     // Get the value
     public long get() { return get(0l); }
     public long get(long defaults)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
 
-        return readInt64(FBEOffset());
+        return readInt64(fbeOffset());
     }
 
     // Set the value
     public void set(long value)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
-        write(FBEOffset(), value);
+        write(fbeOffset(), value);
     }
 }

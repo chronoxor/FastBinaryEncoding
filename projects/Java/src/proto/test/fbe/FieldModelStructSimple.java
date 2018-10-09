@@ -67,166 +67,166 @@ public final class FieldModelStructSimple extends FieldModel
     {
         super(buffer, offset);
         uid = new FieldModelInt32(buffer, 4 + 4);
-        f1 = new FieldModelBoolean(buffer, uid.FBEOffset() + uid.FBESize());
-        f2 = new FieldModelBoolean(buffer, f1.FBEOffset() + f1.FBESize());
-        f3 = new FieldModelByte(buffer, f2.FBEOffset() + f2.FBESize());
-        f4 = new FieldModelByte(buffer, f3.FBEOffset() + f3.FBESize());
-        f5 = new FieldModelChar(buffer, f4.FBEOffset() + f4.FBESize());
-        f6 = new FieldModelChar(buffer, f5.FBEOffset() + f5.FBESize());
-        f7 = new FieldModelWChar(buffer, f6.FBEOffset() + f6.FBESize());
-        f8 = new FieldModelWChar(buffer, f7.FBEOffset() + f7.FBESize());
-        f9 = new FieldModelInt8(buffer, f8.FBEOffset() + f8.FBESize());
-        f10 = new FieldModelInt8(buffer, f9.FBEOffset() + f9.FBESize());
-        f11 = new FieldModelInt8(buffer, f10.FBEOffset() + f10.FBESize());
-        f12 = new FieldModelInt8(buffer, f11.FBEOffset() + f11.FBESize());
-        f13 = new FieldModelInt16(buffer, f12.FBEOffset() + f12.FBESize());
-        f14 = new FieldModelInt16(buffer, f13.FBEOffset() + f13.FBESize());
-        f15 = new FieldModelInt16(buffer, f14.FBEOffset() + f14.FBESize());
-        f16 = new FieldModelInt16(buffer, f15.FBEOffset() + f15.FBESize());
-        f17 = new FieldModelInt32(buffer, f16.FBEOffset() + f16.FBESize());
-        f18 = new FieldModelInt32(buffer, f17.FBEOffset() + f17.FBESize());
-        f19 = new FieldModelInt32(buffer, f18.FBEOffset() + f18.FBESize());
-        f20 = new FieldModelInt32(buffer, f19.FBEOffset() + f19.FBESize());
-        f21 = new FieldModelInt64(buffer, f20.FBEOffset() + f20.FBESize());
-        f22 = new FieldModelInt64(buffer, f21.FBEOffset() + f21.FBESize());
-        f23 = new FieldModelInt64(buffer, f22.FBEOffset() + f22.FBESize());
-        f24 = new FieldModelInt64(buffer, f23.FBEOffset() + f23.FBESize());
-        f25 = new FieldModelFloat(buffer, f24.FBEOffset() + f24.FBESize());
-        f26 = new FieldModelFloat(buffer, f25.FBEOffset() + f25.FBESize());
-        f27 = new FieldModelDouble(buffer, f26.FBEOffset() + f26.FBESize());
-        f28 = new FieldModelDouble(buffer, f27.FBEOffset() + f27.FBESize());
-        f29 = new FieldModelDecimal(buffer, f28.FBEOffset() + f28.FBESize());
-        f30 = new FieldModelDecimal(buffer, f29.FBEOffset() + f29.FBESize());
-        f31 = new FieldModelString(buffer, f30.FBEOffset() + f30.FBESize());
-        f32 = new FieldModelString(buffer, f31.FBEOffset() + f31.FBESize());
-        f33 = new FieldModelTimestamp(buffer, f32.FBEOffset() + f32.FBESize());
-        f34 = new FieldModelTimestamp(buffer, f33.FBEOffset() + f33.FBESize());
-        f35 = new FieldModelTimestamp(buffer, f34.FBEOffset() + f34.FBESize());
-        f36 = new FieldModelUUID(buffer, f35.FBEOffset() + f35.FBESize());
-        f37 = new FieldModelUUID(buffer, f36.FBEOffset() + f36.FBESize());
-        f38 = new FieldModelUUID(buffer, f37.FBEOffset() + f37.FBESize());
-        f39 = new proto.fbe.FieldModelOrderSide(buffer, f38.FBEOffset() + f38.FBESize());
-        f40 = new proto.fbe.FieldModelOrderType(buffer, f39.FBEOffset() + f39.FBESize());
-        f41 = new proto.fbe.FieldModelOrder(buffer, f40.FBEOffset() + f40.FBESize());
-        f42 = new proto.fbe.FieldModelBalance(buffer, f41.FBEOffset() + f41.FBESize());
-        f43 = new proto.fbe.FieldModelState(buffer, f42.FBEOffset() + f42.FBESize());
-        f44 = new proto.fbe.FieldModelAccount(buffer, f43.FBEOffset() + f43.FBESize());
+        f1 = new FieldModelBoolean(buffer, uid.fbeOffset() + uid.fbeSize());
+        f2 = new FieldModelBoolean(buffer, f1.fbeOffset() + f1.fbeSize());
+        f3 = new FieldModelByte(buffer, f2.fbeOffset() + f2.fbeSize());
+        f4 = new FieldModelByte(buffer, f3.fbeOffset() + f3.fbeSize());
+        f5 = new FieldModelChar(buffer, f4.fbeOffset() + f4.fbeSize());
+        f6 = new FieldModelChar(buffer, f5.fbeOffset() + f5.fbeSize());
+        f7 = new FieldModelWChar(buffer, f6.fbeOffset() + f6.fbeSize());
+        f8 = new FieldModelWChar(buffer, f7.fbeOffset() + f7.fbeSize());
+        f9 = new FieldModelInt8(buffer, f8.fbeOffset() + f8.fbeSize());
+        f10 = new FieldModelInt8(buffer, f9.fbeOffset() + f9.fbeSize());
+        f11 = new FieldModelInt8(buffer, f10.fbeOffset() + f10.fbeSize());
+        f12 = new FieldModelInt8(buffer, f11.fbeOffset() + f11.fbeSize());
+        f13 = new FieldModelInt16(buffer, f12.fbeOffset() + f12.fbeSize());
+        f14 = new FieldModelInt16(buffer, f13.fbeOffset() + f13.fbeSize());
+        f15 = new FieldModelInt16(buffer, f14.fbeOffset() + f14.fbeSize());
+        f16 = new FieldModelInt16(buffer, f15.fbeOffset() + f15.fbeSize());
+        f17 = new FieldModelInt32(buffer, f16.fbeOffset() + f16.fbeSize());
+        f18 = new FieldModelInt32(buffer, f17.fbeOffset() + f17.fbeSize());
+        f19 = new FieldModelInt32(buffer, f18.fbeOffset() + f18.fbeSize());
+        f20 = new FieldModelInt32(buffer, f19.fbeOffset() + f19.fbeSize());
+        f21 = new FieldModelInt64(buffer, f20.fbeOffset() + f20.fbeSize());
+        f22 = new FieldModelInt64(buffer, f21.fbeOffset() + f21.fbeSize());
+        f23 = new FieldModelInt64(buffer, f22.fbeOffset() + f22.fbeSize());
+        f24 = new FieldModelInt64(buffer, f23.fbeOffset() + f23.fbeSize());
+        f25 = new FieldModelFloat(buffer, f24.fbeOffset() + f24.fbeSize());
+        f26 = new FieldModelFloat(buffer, f25.fbeOffset() + f25.fbeSize());
+        f27 = new FieldModelDouble(buffer, f26.fbeOffset() + f26.fbeSize());
+        f28 = new FieldModelDouble(buffer, f27.fbeOffset() + f27.fbeSize());
+        f29 = new FieldModelDecimal(buffer, f28.fbeOffset() + f28.fbeSize());
+        f30 = new FieldModelDecimal(buffer, f29.fbeOffset() + f29.fbeSize());
+        f31 = new FieldModelString(buffer, f30.fbeOffset() + f30.fbeSize());
+        f32 = new FieldModelString(buffer, f31.fbeOffset() + f31.fbeSize());
+        f33 = new FieldModelTimestamp(buffer, f32.fbeOffset() + f32.fbeSize());
+        f34 = new FieldModelTimestamp(buffer, f33.fbeOffset() + f33.fbeSize());
+        f35 = new FieldModelTimestamp(buffer, f34.fbeOffset() + f34.fbeSize());
+        f36 = new FieldModelUUID(buffer, f35.fbeOffset() + f35.fbeSize());
+        f37 = new FieldModelUUID(buffer, f36.fbeOffset() + f36.fbeSize());
+        f38 = new FieldModelUUID(buffer, f37.fbeOffset() + f37.fbeSize());
+        f39 = new proto.fbe.FieldModelOrderSide(buffer, f38.fbeOffset() + f38.fbeSize());
+        f40 = new proto.fbe.FieldModelOrderType(buffer, f39.fbeOffset() + f39.fbeSize());
+        f41 = new proto.fbe.FieldModelOrder(buffer, f40.fbeOffset() + f40.fbeSize());
+        f42 = new proto.fbe.FieldModelBalance(buffer, f41.fbeOffset() + f41.fbeSize());
+        f43 = new proto.fbe.FieldModelState(buffer, f42.fbeOffset() + f42.fbeSize());
+        f44 = new proto.fbe.FieldModelAccount(buffer, f43.fbeOffset() + f43.fbeSize());
     }
 
     // Get the field size
     @Override
-    public long FBESize() { return 4; }
+    public long fbeSize() { return 4; }
     // Get the field body size
     public long FBEBody()
     {
         long fbeResult = 4 + 4
-            + uid.FBESize()
-            + f1.FBESize()
-            + f2.FBESize()
-            + f3.FBESize()
-            + f4.FBESize()
-            + f5.FBESize()
-            + f6.FBESize()
-            + f7.FBESize()
-            + f8.FBESize()
-            + f9.FBESize()
-            + f10.FBESize()
-            + f11.FBESize()
-            + f12.FBESize()
-            + f13.FBESize()
-            + f14.FBESize()
-            + f15.FBESize()
-            + f16.FBESize()
-            + f17.FBESize()
-            + f18.FBESize()
-            + f19.FBESize()
-            + f20.FBESize()
-            + f21.FBESize()
-            + f22.FBESize()
-            + f23.FBESize()
-            + f24.FBESize()
-            + f25.FBESize()
-            + f26.FBESize()
-            + f27.FBESize()
-            + f28.FBESize()
-            + f29.FBESize()
-            + f30.FBESize()
-            + f31.FBESize()
-            + f32.FBESize()
-            + f33.FBESize()
-            + f34.FBESize()
-            + f35.FBESize()
-            + f36.FBESize()
-            + f37.FBESize()
-            + f38.FBESize()
-            + f39.FBESize()
-            + f40.FBESize()
-            + f41.FBESize()
-            + f42.FBESize()
-            + f43.FBESize()
-            + f44.FBESize()
+            + uid.fbeSize()
+            + f1.fbeSize()
+            + f2.fbeSize()
+            + f3.fbeSize()
+            + f4.fbeSize()
+            + f5.fbeSize()
+            + f6.fbeSize()
+            + f7.fbeSize()
+            + f8.fbeSize()
+            + f9.fbeSize()
+            + f10.fbeSize()
+            + f11.fbeSize()
+            + f12.fbeSize()
+            + f13.fbeSize()
+            + f14.fbeSize()
+            + f15.fbeSize()
+            + f16.fbeSize()
+            + f17.fbeSize()
+            + f18.fbeSize()
+            + f19.fbeSize()
+            + f20.fbeSize()
+            + f21.fbeSize()
+            + f22.fbeSize()
+            + f23.fbeSize()
+            + f24.fbeSize()
+            + f25.fbeSize()
+            + f26.fbeSize()
+            + f27.fbeSize()
+            + f28.fbeSize()
+            + f29.fbeSize()
+            + f30.fbeSize()
+            + f31.fbeSize()
+            + f32.fbeSize()
+            + f33.fbeSize()
+            + f34.fbeSize()
+            + f35.fbeSize()
+            + f36.fbeSize()
+            + f37.fbeSize()
+            + f38.fbeSize()
+            + f39.fbeSize()
+            + f40.fbeSize()
+            + f41.fbeSize()
+            + f42.fbeSize()
+            + f43.fbeSize()
+            + f44.fbeSize()
             ;
         return fbeResult;
     }
     // Get the field extra size
     @Override
-    public long FBEExtra()
+    public long fbeExtra()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeStructOffset = readInt32(FBEOffset());
+        int fbeStructOffset = readInt32(fbeOffset());
         if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4) > _buffer.getSize()))
             return 0;
 
         _buffer.shift(fbeStructOffset);
 
         long fbeResult = FBEBody()
-            + uid.FBEExtra()
-            + f1.FBEExtra()
-            + f2.FBEExtra()
-            + f3.FBEExtra()
-            + f4.FBEExtra()
-            + f5.FBEExtra()
-            + f6.FBEExtra()
-            + f7.FBEExtra()
-            + f8.FBEExtra()
-            + f9.FBEExtra()
-            + f10.FBEExtra()
-            + f11.FBEExtra()
-            + f12.FBEExtra()
-            + f13.FBEExtra()
-            + f14.FBEExtra()
-            + f15.FBEExtra()
-            + f16.FBEExtra()
-            + f17.FBEExtra()
-            + f18.FBEExtra()
-            + f19.FBEExtra()
-            + f20.FBEExtra()
-            + f21.FBEExtra()
-            + f22.FBEExtra()
-            + f23.FBEExtra()
-            + f24.FBEExtra()
-            + f25.FBEExtra()
-            + f26.FBEExtra()
-            + f27.FBEExtra()
-            + f28.FBEExtra()
-            + f29.FBEExtra()
-            + f30.FBEExtra()
-            + f31.FBEExtra()
-            + f32.FBEExtra()
-            + f33.FBEExtra()
-            + f34.FBEExtra()
-            + f35.FBEExtra()
-            + f36.FBEExtra()
-            + f37.FBEExtra()
-            + f38.FBEExtra()
-            + f39.FBEExtra()
-            + f40.FBEExtra()
-            + f41.FBEExtra()
-            + f42.FBEExtra()
-            + f43.FBEExtra()
-            + f44.FBEExtra()
+            + uid.fbeExtra()
+            + f1.fbeExtra()
+            + f2.fbeExtra()
+            + f3.fbeExtra()
+            + f4.fbeExtra()
+            + f5.fbeExtra()
+            + f6.fbeExtra()
+            + f7.fbeExtra()
+            + f8.fbeExtra()
+            + f9.fbeExtra()
+            + f10.fbeExtra()
+            + f11.fbeExtra()
+            + f12.fbeExtra()
+            + f13.fbeExtra()
+            + f14.fbeExtra()
+            + f15.fbeExtra()
+            + f16.fbeExtra()
+            + f17.fbeExtra()
+            + f18.fbeExtra()
+            + f19.fbeExtra()
+            + f20.fbeExtra()
+            + f21.fbeExtra()
+            + f22.fbeExtra()
+            + f23.fbeExtra()
+            + f24.fbeExtra()
+            + f25.fbeExtra()
+            + f26.fbeExtra()
+            + f27.fbeExtra()
+            + f28.fbeExtra()
+            + f29.fbeExtra()
+            + f30.fbeExtra()
+            + f31.fbeExtra()
+            + f32.fbeExtra()
+            + f33.fbeExtra()
+            + f34.fbeExtra()
+            + f35.fbeExtra()
+            + f36.fbeExtra()
+            + f37.fbeExtra()
+            + f38.fbeExtra()
+            + f39.fbeExtra()
+            + f40.fbeExtra()
+            + f41.fbeExtra()
+            + f42.fbeExtra()
+            + f43.fbeExtra()
+            + f44.fbeExtra()
             ;
 
         _buffer.unshift(fbeStructOffset);
@@ -242,10 +242,10 @@ public final class FieldModelStructSimple extends FieldModel
     public boolean verify() { return verify(true); }
     public boolean verify(boolean fbeVerifyType)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return true;
 
-        int fbeStructOffset = readInt32(FBEOffset());
+        int fbeStructOffset = readInt32(fbeOffset());
         if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4 + 4) > _buffer.getSize()))
             return false;
 
@@ -268,275 +268,275 @@ public final class FieldModelStructSimple extends FieldModel
     {
         long fbeCurrentSize = 4 + 4;
 
-        if ((fbeCurrentSize + uid.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + uid.fbeSize()) > fbeStructSize)
             return true;
         if (!uid.verify())
             return false;
-        fbeCurrentSize += uid.FBESize();
+        fbeCurrentSize += uid.fbeSize();
 
-        if ((fbeCurrentSize + f1.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f1.fbeSize()) > fbeStructSize)
             return true;
         if (!f1.verify())
             return false;
-        fbeCurrentSize += f1.FBESize();
+        fbeCurrentSize += f1.fbeSize();
 
-        if ((fbeCurrentSize + f2.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f2.fbeSize()) > fbeStructSize)
             return true;
         if (!f2.verify())
             return false;
-        fbeCurrentSize += f2.FBESize();
+        fbeCurrentSize += f2.fbeSize();
 
-        if ((fbeCurrentSize + f3.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f3.fbeSize()) > fbeStructSize)
             return true;
         if (!f3.verify())
             return false;
-        fbeCurrentSize += f3.FBESize();
+        fbeCurrentSize += f3.fbeSize();
 
-        if ((fbeCurrentSize + f4.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f4.fbeSize()) > fbeStructSize)
             return true;
         if (!f4.verify())
             return false;
-        fbeCurrentSize += f4.FBESize();
+        fbeCurrentSize += f4.fbeSize();
 
-        if ((fbeCurrentSize + f5.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f5.fbeSize()) > fbeStructSize)
             return true;
         if (!f5.verify())
             return false;
-        fbeCurrentSize += f5.FBESize();
+        fbeCurrentSize += f5.fbeSize();
 
-        if ((fbeCurrentSize + f6.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f6.fbeSize()) > fbeStructSize)
             return true;
         if (!f6.verify())
             return false;
-        fbeCurrentSize += f6.FBESize();
+        fbeCurrentSize += f6.fbeSize();
 
-        if ((fbeCurrentSize + f7.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f7.fbeSize()) > fbeStructSize)
             return true;
         if (!f7.verify())
             return false;
-        fbeCurrentSize += f7.FBESize();
+        fbeCurrentSize += f7.fbeSize();
 
-        if ((fbeCurrentSize + f8.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f8.fbeSize()) > fbeStructSize)
             return true;
         if (!f8.verify())
             return false;
-        fbeCurrentSize += f8.FBESize();
+        fbeCurrentSize += f8.fbeSize();
 
-        if ((fbeCurrentSize + f9.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f9.fbeSize()) > fbeStructSize)
             return true;
         if (!f9.verify())
             return false;
-        fbeCurrentSize += f9.FBESize();
+        fbeCurrentSize += f9.fbeSize();
 
-        if ((fbeCurrentSize + f10.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f10.fbeSize()) > fbeStructSize)
             return true;
         if (!f10.verify())
             return false;
-        fbeCurrentSize += f10.FBESize();
+        fbeCurrentSize += f10.fbeSize();
 
-        if ((fbeCurrentSize + f11.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f11.fbeSize()) > fbeStructSize)
             return true;
         if (!f11.verify())
             return false;
-        fbeCurrentSize += f11.FBESize();
+        fbeCurrentSize += f11.fbeSize();
 
-        if ((fbeCurrentSize + f12.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f12.fbeSize()) > fbeStructSize)
             return true;
         if (!f12.verify())
             return false;
-        fbeCurrentSize += f12.FBESize();
+        fbeCurrentSize += f12.fbeSize();
 
-        if ((fbeCurrentSize + f13.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f13.fbeSize()) > fbeStructSize)
             return true;
         if (!f13.verify())
             return false;
-        fbeCurrentSize += f13.FBESize();
+        fbeCurrentSize += f13.fbeSize();
 
-        if ((fbeCurrentSize + f14.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f14.fbeSize()) > fbeStructSize)
             return true;
         if (!f14.verify())
             return false;
-        fbeCurrentSize += f14.FBESize();
+        fbeCurrentSize += f14.fbeSize();
 
-        if ((fbeCurrentSize + f15.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f15.fbeSize()) > fbeStructSize)
             return true;
         if (!f15.verify())
             return false;
-        fbeCurrentSize += f15.FBESize();
+        fbeCurrentSize += f15.fbeSize();
 
-        if ((fbeCurrentSize + f16.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f16.fbeSize()) > fbeStructSize)
             return true;
         if (!f16.verify())
             return false;
-        fbeCurrentSize += f16.FBESize();
+        fbeCurrentSize += f16.fbeSize();
 
-        if ((fbeCurrentSize + f17.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f17.fbeSize()) > fbeStructSize)
             return true;
         if (!f17.verify())
             return false;
-        fbeCurrentSize += f17.FBESize();
+        fbeCurrentSize += f17.fbeSize();
 
-        if ((fbeCurrentSize + f18.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f18.fbeSize()) > fbeStructSize)
             return true;
         if (!f18.verify())
             return false;
-        fbeCurrentSize += f18.FBESize();
+        fbeCurrentSize += f18.fbeSize();
 
-        if ((fbeCurrentSize + f19.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f19.fbeSize()) > fbeStructSize)
             return true;
         if (!f19.verify())
             return false;
-        fbeCurrentSize += f19.FBESize();
+        fbeCurrentSize += f19.fbeSize();
 
-        if ((fbeCurrentSize + f20.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f20.fbeSize()) > fbeStructSize)
             return true;
         if (!f20.verify())
             return false;
-        fbeCurrentSize += f20.FBESize();
+        fbeCurrentSize += f20.fbeSize();
 
-        if ((fbeCurrentSize + f21.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f21.fbeSize()) > fbeStructSize)
             return true;
         if (!f21.verify())
             return false;
-        fbeCurrentSize += f21.FBESize();
+        fbeCurrentSize += f21.fbeSize();
 
-        if ((fbeCurrentSize + f22.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f22.fbeSize()) > fbeStructSize)
             return true;
         if (!f22.verify())
             return false;
-        fbeCurrentSize += f22.FBESize();
+        fbeCurrentSize += f22.fbeSize();
 
-        if ((fbeCurrentSize + f23.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f23.fbeSize()) > fbeStructSize)
             return true;
         if (!f23.verify())
             return false;
-        fbeCurrentSize += f23.FBESize();
+        fbeCurrentSize += f23.fbeSize();
 
-        if ((fbeCurrentSize + f24.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f24.fbeSize()) > fbeStructSize)
             return true;
         if (!f24.verify())
             return false;
-        fbeCurrentSize += f24.FBESize();
+        fbeCurrentSize += f24.fbeSize();
 
-        if ((fbeCurrentSize + f25.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f25.fbeSize()) > fbeStructSize)
             return true;
         if (!f25.verify())
             return false;
-        fbeCurrentSize += f25.FBESize();
+        fbeCurrentSize += f25.fbeSize();
 
-        if ((fbeCurrentSize + f26.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f26.fbeSize()) > fbeStructSize)
             return true;
         if (!f26.verify())
             return false;
-        fbeCurrentSize += f26.FBESize();
+        fbeCurrentSize += f26.fbeSize();
 
-        if ((fbeCurrentSize + f27.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f27.fbeSize()) > fbeStructSize)
             return true;
         if (!f27.verify())
             return false;
-        fbeCurrentSize += f27.FBESize();
+        fbeCurrentSize += f27.fbeSize();
 
-        if ((fbeCurrentSize + f28.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f28.fbeSize()) > fbeStructSize)
             return true;
         if (!f28.verify())
             return false;
-        fbeCurrentSize += f28.FBESize();
+        fbeCurrentSize += f28.fbeSize();
 
-        if ((fbeCurrentSize + f29.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f29.fbeSize()) > fbeStructSize)
             return true;
         if (!f29.verify())
             return false;
-        fbeCurrentSize += f29.FBESize();
+        fbeCurrentSize += f29.fbeSize();
 
-        if ((fbeCurrentSize + f30.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f30.fbeSize()) > fbeStructSize)
             return true;
         if (!f30.verify())
             return false;
-        fbeCurrentSize += f30.FBESize();
+        fbeCurrentSize += f30.fbeSize();
 
-        if ((fbeCurrentSize + f31.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f31.fbeSize()) > fbeStructSize)
             return true;
         if (!f31.verify())
             return false;
-        fbeCurrentSize += f31.FBESize();
+        fbeCurrentSize += f31.fbeSize();
 
-        if ((fbeCurrentSize + f32.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f32.fbeSize()) > fbeStructSize)
             return true;
         if (!f32.verify())
             return false;
-        fbeCurrentSize += f32.FBESize();
+        fbeCurrentSize += f32.fbeSize();
 
-        if ((fbeCurrentSize + f33.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f33.fbeSize()) > fbeStructSize)
             return true;
         if (!f33.verify())
             return false;
-        fbeCurrentSize += f33.FBESize();
+        fbeCurrentSize += f33.fbeSize();
 
-        if ((fbeCurrentSize + f34.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f34.fbeSize()) > fbeStructSize)
             return true;
         if (!f34.verify())
             return false;
-        fbeCurrentSize += f34.FBESize();
+        fbeCurrentSize += f34.fbeSize();
 
-        if ((fbeCurrentSize + f35.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f35.fbeSize()) > fbeStructSize)
             return true;
         if (!f35.verify())
             return false;
-        fbeCurrentSize += f35.FBESize();
+        fbeCurrentSize += f35.fbeSize();
 
-        if ((fbeCurrentSize + f36.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f36.fbeSize()) > fbeStructSize)
             return true;
         if (!f36.verify())
             return false;
-        fbeCurrentSize += f36.FBESize();
+        fbeCurrentSize += f36.fbeSize();
 
-        if ((fbeCurrentSize + f37.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f37.fbeSize()) > fbeStructSize)
             return true;
         if (!f37.verify())
             return false;
-        fbeCurrentSize += f37.FBESize();
+        fbeCurrentSize += f37.fbeSize();
 
-        if ((fbeCurrentSize + f38.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f38.fbeSize()) > fbeStructSize)
             return true;
         if (!f38.verify())
             return false;
-        fbeCurrentSize += f38.FBESize();
+        fbeCurrentSize += f38.fbeSize();
 
-        if ((fbeCurrentSize + f39.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f39.fbeSize()) > fbeStructSize)
             return true;
         if (!f39.verify())
             return false;
-        fbeCurrentSize += f39.FBESize();
+        fbeCurrentSize += f39.fbeSize();
 
-        if ((fbeCurrentSize + f40.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f40.fbeSize()) > fbeStructSize)
             return true;
         if (!f40.verify())
             return false;
-        fbeCurrentSize += f40.FBESize();
+        fbeCurrentSize += f40.fbeSize();
 
-        if ((fbeCurrentSize + f41.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f41.fbeSize()) > fbeStructSize)
             return true;
         if (!f41.verify())
             return false;
-        fbeCurrentSize += f41.FBESize();
+        fbeCurrentSize += f41.fbeSize();
 
-        if ((fbeCurrentSize + f42.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f42.fbeSize()) > fbeStructSize)
             return true;
         if (!f42.verify())
             return false;
-        fbeCurrentSize += f42.FBESize();
+        fbeCurrentSize += f42.fbeSize();
 
-        if ((fbeCurrentSize + f43.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f43.fbeSize()) > fbeStructSize)
             return true;
         if (!f43.verify())
             return false;
-        fbeCurrentSize += f43.FBESize();
+        fbeCurrentSize += f43.fbeSize();
 
-        if ((fbeCurrentSize + f44.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f44.fbeSize()) > fbeStructSize)
             return true;
         if (!f44.verify())
             return false;
-        fbeCurrentSize += f44.FBESize();
+        fbeCurrentSize += f44.fbeSize();
 
         return true;
     }
@@ -544,10 +544,10 @@ public final class FieldModelStructSimple extends FieldModel
     // Get the struct value (begin phase)
     public long getBegin()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeStructOffset = readInt32(FBEOffset());
+        int fbeStructOffset = readInt32(fbeOffset());
         assert ((fbeStructOffset > 0) && ((_buffer.getOffset() + fbeStructOffset + 4 + 4) <= _buffer.getSize())) : "Model is broken!";
         if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4 + 4) > _buffer.getSize()))
             return 0;
@@ -586,282 +586,282 @@ public final class FieldModelStructSimple extends FieldModel
     {
         long fbeCurrentSize = 4 + 4;
 
-        if ((fbeCurrentSize + uid.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + uid.fbeSize()) <= fbeStructSize)
             fbeValue.uid = uid.get();
         else
             fbeValue.uid = 0;
-        fbeCurrentSize += uid.FBESize();
+        fbeCurrentSize += uid.fbeSize();
 
-        if ((fbeCurrentSize + f1.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f1.fbeSize()) <= fbeStructSize)
             fbeValue.f1 = f1.get();
         else
             fbeValue.f1 = false;
-        fbeCurrentSize += f1.FBESize();
+        fbeCurrentSize += f1.fbeSize();
 
-        if ((fbeCurrentSize + f2.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f2.fbeSize()) <= fbeStructSize)
             fbeValue.f2 = f2.get(true);
         else
             fbeValue.f2 = true;
-        fbeCurrentSize += f2.FBESize();
+        fbeCurrentSize += f2.fbeSize();
 
-        if ((fbeCurrentSize + f3.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f3.fbeSize()) <= fbeStructSize)
             fbeValue.f3 = f3.get();
         else
             fbeValue.f3 = (byte)0;
-        fbeCurrentSize += f3.FBESize();
+        fbeCurrentSize += f3.fbeSize();
 
-        if ((fbeCurrentSize + f4.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f4.fbeSize()) <= fbeStructSize)
             fbeValue.f4 = f4.get((byte)255);
         else
             fbeValue.f4 = (byte)255;
-        fbeCurrentSize += f4.FBESize();
+        fbeCurrentSize += f4.fbeSize();
 
-        if ((fbeCurrentSize + f5.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f5.fbeSize()) <= fbeStructSize)
             fbeValue.f5 = f5.get();
         else
             fbeValue.f5 = '\0';
-        fbeCurrentSize += f5.FBESize();
+        fbeCurrentSize += f5.fbeSize();
 
-        if ((fbeCurrentSize + f6.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f6.fbeSize()) <= fbeStructSize)
             fbeValue.f6 = f6.get((char)'!');
         else
             fbeValue.f6 = (char)'!';
-        fbeCurrentSize += f6.FBESize();
+        fbeCurrentSize += f6.fbeSize();
 
-        if ((fbeCurrentSize + f7.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f7.fbeSize()) <= fbeStructSize)
             fbeValue.f7 = f7.get();
         else
             fbeValue.f7 = '\0';
-        fbeCurrentSize += f7.FBESize();
+        fbeCurrentSize += f7.fbeSize();
 
-        if ((fbeCurrentSize + f8.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f8.fbeSize()) <= fbeStructSize)
             fbeValue.f8 = f8.get((char)0x0444);
         else
             fbeValue.f8 = (char)0x0444;
-        fbeCurrentSize += f8.FBESize();
+        fbeCurrentSize += f8.fbeSize();
 
-        if ((fbeCurrentSize + f9.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f9.fbeSize()) <= fbeStructSize)
             fbeValue.f9 = f9.get();
         else
             fbeValue.f9 = (byte)0;
-        fbeCurrentSize += f9.FBESize();
+        fbeCurrentSize += f9.fbeSize();
 
-        if ((fbeCurrentSize + f10.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f10.fbeSize()) <= fbeStructSize)
             fbeValue.f10 = f10.get((byte)127);
         else
             fbeValue.f10 = (byte)127;
-        fbeCurrentSize += f10.FBESize();
+        fbeCurrentSize += f10.fbeSize();
 
-        if ((fbeCurrentSize + f11.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f11.fbeSize()) <= fbeStructSize)
             fbeValue.f11 = f11.get();
         else
             fbeValue.f11 = (byte)0;
-        fbeCurrentSize += f11.FBESize();
+        fbeCurrentSize += f11.fbeSize();
 
-        if ((fbeCurrentSize + f12.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f12.fbeSize()) <= fbeStructSize)
             fbeValue.f12 = f12.get((byte)255);
         else
             fbeValue.f12 = (byte)255;
-        fbeCurrentSize += f12.FBESize();
+        fbeCurrentSize += f12.fbeSize();
 
-        if ((fbeCurrentSize + f13.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f13.fbeSize()) <= fbeStructSize)
             fbeValue.f13 = f13.get();
         else
             fbeValue.f13 = (short)0;
-        fbeCurrentSize += f13.FBESize();
+        fbeCurrentSize += f13.fbeSize();
 
-        if ((fbeCurrentSize + f14.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f14.fbeSize()) <= fbeStructSize)
             fbeValue.f14 = f14.get((short)32767);
         else
             fbeValue.f14 = (short)32767;
-        fbeCurrentSize += f14.FBESize();
+        fbeCurrentSize += f14.fbeSize();
 
-        if ((fbeCurrentSize + f15.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f15.fbeSize()) <= fbeStructSize)
             fbeValue.f15 = f15.get();
         else
             fbeValue.f15 = (short)0;
-        fbeCurrentSize += f15.FBESize();
+        fbeCurrentSize += f15.fbeSize();
 
-        if ((fbeCurrentSize + f16.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f16.fbeSize()) <= fbeStructSize)
             fbeValue.f16 = f16.get((short)65535);
         else
             fbeValue.f16 = (short)65535;
-        fbeCurrentSize += f16.FBESize();
+        fbeCurrentSize += f16.fbeSize();
 
-        if ((fbeCurrentSize + f17.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f17.fbeSize()) <= fbeStructSize)
             fbeValue.f17 = f17.get();
         else
             fbeValue.f17 = 0;
-        fbeCurrentSize += f17.FBESize();
+        fbeCurrentSize += f17.fbeSize();
 
-        if ((fbeCurrentSize + f18.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f18.fbeSize()) <= fbeStructSize)
             fbeValue.f18 = f18.get((int)2147483647);
         else
             fbeValue.f18 = (int)2147483647;
-        fbeCurrentSize += f18.FBESize();
+        fbeCurrentSize += f18.fbeSize();
 
-        if ((fbeCurrentSize + f19.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f19.fbeSize()) <= fbeStructSize)
             fbeValue.f19 = f19.get();
         else
             fbeValue.f19 = 0;
-        fbeCurrentSize += f19.FBESize();
+        fbeCurrentSize += f19.fbeSize();
 
-        if ((fbeCurrentSize + f20.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f20.fbeSize()) <= fbeStructSize)
             fbeValue.f20 = f20.get((int)0xFFFFFFFF);
         else
             fbeValue.f20 = (int)0xFFFFFFFF;
-        fbeCurrentSize += f20.FBESize();
+        fbeCurrentSize += f20.fbeSize();
 
-        if ((fbeCurrentSize + f21.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f21.fbeSize()) <= fbeStructSize)
             fbeValue.f21 = f21.get();
         else
             fbeValue.f21 = 0L;
-        fbeCurrentSize += f21.FBESize();
+        fbeCurrentSize += f21.fbeSize();
 
-        if ((fbeCurrentSize + f22.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f22.fbeSize()) <= fbeStructSize)
             fbeValue.f22 = f22.get((long)9223372036854775807L);
         else
             fbeValue.f22 = (long)9223372036854775807L;
-        fbeCurrentSize += f22.FBESize();
+        fbeCurrentSize += f22.fbeSize();
 
-        if ((fbeCurrentSize + f23.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f23.fbeSize()) <= fbeStructSize)
             fbeValue.f23 = f23.get();
         else
             fbeValue.f23 = 0L;
-        fbeCurrentSize += f23.FBESize();
+        fbeCurrentSize += f23.fbeSize();
 
-        if ((fbeCurrentSize + f24.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f24.fbeSize()) <= fbeStructSize)
             fbeValue.f24 = f24.get((long)0xFFFFFFFFFFFFFFFFL);
         else
             fbeValue.f24 = (long)0xFFFFFFFFFFFFFFFFL;
-        fbeCurrentSize += f24.FBESize();
+        fbeCurrentSize += f24.fbeSize();
 
-        if ((fbeCurrentSize + f25.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f25.fbeSize()) <= fbeStructSize)
             fbeValue.f25 = f25.get();
         else
             fbeValue.f25 = 0.0f;
-        fbeCurrentSize += f25.FBESize();
+        fbeCurrentSize += f25.fbeSize();
 
-        if ((fbeCurrentSize + f26.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f26.fbeSize()) <= fbeStructSize)
             fbeValue.f26 = f26.get((float)123.456f);
         else
             fbeValue.f26 = (float)123.456f;
-        fbeCurrentSize += f26.FBESize();
+        fbeCurrentSize += f26.fbeSize();
 
-        if ((fbeCurrentSize + f27.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f27.fbeSize()) <= fbeStructSize)
             fbeValue.f27 = f27.get();
         else
             fbeValue.f27 = 0.0d;
-        fbeCurrentSize += f27.FBESize();
+        fbeCurrentSize += f27.fbeSize();
 
-        if ((fbeCurrentSize + f28.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f28.fbeSize()) <= fbeStructSize)
             fbeValue.f28 = f28.get((double)-123.456e+123d);
         else
             fbeValue.f28 = (double)-123.456e+123d;
-        fbeCurrentSize += f28.FBESize();
+        fbeCurrentSize += f28.fbeSize();
 
-        if ((fbeCurrentSize + f29.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f29.fbeSize()) <= fbeStructSize)
             fbeValue.f29 = f29.get();
         else
             fbeValue.f29 = BigDecimal.valueOf(0L);
-        fbeCurrentSize += f29.FBESize();
+        fbeCurrentSize += f29.fbeSize();
 
-        if ((fbeCurrentSize + f30.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f30.fbeSize()) <= fbeStructSize)
             fbeValue.f30 = f30.get(BigDecimal.valueOf(123456.123456d));
         else
             fbeValue.f30 = BigDecimal.valueOf(123456.123456d);
-        fbeCurrentSize += f30.FBESize();
+        fbeCurrentSize += f30.fbeSize();
 
-        if ((fbeCurrentSize + f31.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f31.fbeSize()) <= fbeStructSize)
             fbeValue.f31 = f31.get();
         else
             fbeValue.f31 = "";
-        fbeCurrentSize += f31.FBESize();
+        fbeCurrentSize += f31.fbeSize();
 
-        if ((fbeCurrentSize + f32.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f32.fbeSize()) <= fbeStructSize)
             fbeValue.f32 = f32.get("Initial string!");
         else
             fbeValue.f32 = "Initial string!";
-        fbeCurrentSize += f32.FBESize();
+        fbeCurrentSize += f32.fbeSize();
 
-        if ((fbeCurrentSize + f33.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f33.fbeSize()) <= fbeStructSize)
             fbeValue.f33 = f33.get();
         else
             fbeValue.f33 = Instant.EPOCH;
-        fbeCurrentSize += f33.FBESize();
+        fbeCurrentSize += f33.fbeSize();
 
-        if ((fbeCurrentSize + f34.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f34.fbeSize()) <= fbeStructSize)
             fbeValue.f34 = f34.get(Instant.EPOCH);
         else
             fbeValue.f34 = Instant.EPOCH;
-        fbeCurrentSize += f34.FBESize();
+        fbeCurrentSize += f34.fbeSize();
 
-        if ((fbeCurrentSize + f35.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f35.fbeSize()) <= fbeStructSize)
             fbeValue.f35 = f35.get(Instant.now());
         else
             fbeValue.f35 = Instant.now();
-        fbeCurrentSize += f35.FBESize();
+        fbeCurrentSize += f35.fbeSize();
 
-        if ((fbeCurrentSize + f36.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f36.fbeSize()) <= fbeStructSize)
             fbeValue.f36 = f36.get();
         else
             fbeValue.f36 = fbe.UUIDGenerator.nil();
-        fbeCurrentSize += f36.FBESize();
+        fbeCurrentSize += f36.fbeSize();
 
-        if ((fbeCurrentSize + f37.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f37.fbeSize()) <= fbeStructSize)
             fbeValue.f37 = f37.get(fbe.UUIDGenerator.sequential());
         else
             fbeValue.f37 = fbe.UUIDGenerator.sequential();
-        fbeCurrentSize += f37.FBESize();
+        fbeCurrentSize += f37.fbeSize();
 
-        if ((fbeCurrentSize + f38.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f38.fbeSize()) <= fbeStructSize)
             fbeValue.f38 = f38.get(UUID.fromString("123e4567-e89b-12d3-a456-426655440000"));
         else
             fbeValue.f38 = UUID.fromString("123e4567-e89b-12d3-a456-426655440000");
-        fbeCurrentSize += f38.FBESize();
+        fbeCurrentSize += f38.fbeSize();
 
-        if ((fbeCurrentSize + f39.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f39.fbeSize()) <= fbeStructSize)
             fbeValue.f39 = f39.get();
         else
             fbeValue.f39 = new proto.OrderSide();
-        fbeCurrentSize += f39.FBESize();
+        fbeCurrentSize += f39.fbeSize();
 
-        if ((fbeCurrentSize + f40.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f40.fbeSize()) <= fbeStructSize)
             fbeValue.f40 = f40.get();
         else
             fbeValue.f40 = new proto.OrderType();
-        fbeCurrentSize += f40.FBESize();
+        fbeCurrentSize += f40.fbeSize();
 
-        if ((fbeCurrentSize + f41.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f41.fbeSize()) <= fbeStructSize)
             fbeValue.f41 = f41.get();
         else
             fbeValue.f41 = new proto.Order();
-        fbeCurrentSize += f41.FBESize();
+        fbeCurrentSize += f41.fbeSize();
 
-        if ((fbeCurrentSize + f42.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f42.fbeSize()) <= fbeStructSize)
             fbeValue.f42 = f42.get();
         else
             fbeValue.f42 = new proto.Balance();
-        fbeCurrentSize += f42.FBESize();
+        fbeCurrentSize += f42.fbeSize();
 
-        if ((fbeCurrentSize + f43.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f43.fbeSize()) <= fbeStructSize)
             fbeValue.f43 = f43.get();
         else
             fbeValue.f43 = new proto.State();
-        fbeCurrentSize += f43.FBESize();
+        fbeCurrentSize += f43.fbeSize();
 
-        if ((fbeCurrentSize + f44.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f44.fbeSize()) <= fbeStructSize)
             fbeValue.f44 = f44.get();
         else
             fbeValue.f44 = new proto.Account();
-        fbeCurrentSize += f44.FBESize();
+        fbeCurrentSize += f44.fbeSize();
     }
 
     // Set the struct value (begin phase)
     public long setBegin()
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
         int fbeStructSize = (int)FBEBody();
@@ -870,7 +870,7 @@ public final class FieldModelStructSimple extends FieldModel
         if ((fbeStructOffset <= 0) || ((_buffer.getOffset() + fbeStructOffset + fbeStructSize) > _buffer.getSize()))
             return 0;
 
-        write(FBEOffset(), fbeStructOffset);
+        write(fbeOffset(), fbeStructOffset);
         write(fbeStructOffset, fbeStructSize);
         write(fbeStructOffset + 4, (int)FBEType());
 

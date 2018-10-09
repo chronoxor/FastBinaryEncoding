@@ -18,19 +18,19 @@ public abstract class FinalModel
     protected long _offset;
 
     // Get the final offset
-    public long FBEOffset() { return _offset; }
+    public long fbeOffset() { return _offset; }
     // Set the final offset
-    public void FBEOffset(long value) { _offset = value; }
+    public void fbeOffset(long value) { _offset = value; }
 
     // Get the final size
-    public long FBESize() { return 0; }
+    public long fbeSize() { return 0; }
     // Get the final extra size
-    public long FBEExtra() { return 0; }
+    public long fbeExtra() { return 0; }
 
     // Shift the current final offset
-    public void FBEShift(long size) { _offset += size; }
+    public void fbeShift(long size) { _offset += size; }
     // Unshift the current final offset
-    public void FBEUnshift(long size) { _offset -= size; }
+    public void fbeUnshift(long size) { _offset -= size; }
 
     // Initialize a new final model
     protected FinalModel(Buffer buffer, long offset)

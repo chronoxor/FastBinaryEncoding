@@ -660,19 +660,19 @@ public abstract class FieldModel
     protected long _offset;
 
     // Get the field offset
-    public long FBEOffset() { return _offset; }
+    public long fbeOffset() { return _offset; }
     // Set the field offset
-    public void FBEOffset(long value) { _offset = value; }
+    public void fbeOffset(long value) { _offset = value; }
 
     // Get the field size
-    public long FBESize() { return 0; }
+    public long fbeSize() { return 0; }
     // Get the field extra size
-    public long FBEExtra() { return 0; }
+    public long fbeExtra() { return 0; }
 
     // Shift the current field offset
-    public void FBEShift(long size) { _offset += size; }
+    public void fbeShift(long size) { _offset += size; }
     // Unshift the current field offset
-    public void FBEUnshift(long size) { _offset -= size; }
+    public void fbeUnshift(long size) { _offset -= size; }
 
     // Initialize a new field model
     protected FieldModel(Buffer buffer, long offset)
@@ -744,26 +744,26 @@ public final class FieldModel_NAME_ extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return _SIZE_; }
+    public long fbeSize() { return _SIZE_; }
 
     // Get the value
     public _TYPE_ get() { return get(_DEFAULTS_); }
     public _TYPE_ get(_TYPE_ defaults)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
 
-        return read_NAME_(FBEOffset());
+        return read_NAME_(fbeOffset());
     }
 
     // Set the value
     public void set(_TYPE_ value)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
-        write(FBEOffset(), _BASE_value);
+        write(fbeOffset(), _BASE_value);
     }
 }
 )CODE";
@@ -805,7 +805,7 @@ public final class FieldModelDecimal extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return 16; }
+    public long fbeSize() { return 16; }
 
     // Get the value
     public BigDecimal get() { return get(BigDecimal.valueOf(0L)); }
@@ -815,12 +815,12 @@ public final class FieldModelDecimal extends FieldModel
         if (defaults == null)
             throw new IllegalArgumentException("Invalid default decimal value!");
 
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
 
-        byte[] magnitude = readBytes(FBEOffset(), 12);
-        int scale = readByte(FBEOffset() + 14);
-        int signum = (readByte(FBEOffset() + 15) < 0) ? -1 : 1;
+        byte[] magnitude = readBytes(fbeOffset(), 12);
+        int scale = readByte(fbeOffset() + 14);
+        int signum = (readByte(fbeOffset() + 15) < 0) ? -1 : 1;
 
         // Reverse magnitude
         for(int i = 0; i < magnitude.length / 2; i++)
@@ -842,8 +842,8 @@ public final class FieldModelDecimal extends FieldModel
         if (value == null)
             throw new IllegalArgumentException("Invalid decimal value!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
         // Get unscaled absolute value
@@ -852,7 +852,7 @@ public final class FieldModelDecimal extends FieldModel
         if ((bitLength < 0) || (bitLength > 96))
         {
             // Value too big for .NET Decimal (bit length is limited to [0, 96])
-            write(FBEOffset(), (byte)0, FBESize());
+            write(fbeOffset(), (byte)0, fbeSize());
             return;
         }
 
@@ -864,24 +864,24 @@ public final class FieldModelDecimal extends FieldModel
         if ((scale < 0) || (scale > 28))
         {
             // Value scale exceeds .NET Decimal limit of [0, 28]
-            write(FBEOffset(), (byte)0, FBESize());
+            write(fbeOffset(), (byte)0, fbeSize());
             return;
         }
 
         // Write unscaled value to bytes 0-11
         int index = 0;
         for (int i = unscaledBytes.length - 1; (i >= 0) && (index < 12); i--, index++)
-            write(FBEOffset() + index, unscaledBytes[i]);
+            write(fbeOffset() + index, unscaledBytes[i]);
 
         // Fill remaining bytes with zeros
         for (; index < 14; index++)
-            write(FBEOffset() + index, (byte)0);
+            write(fbeOffset() + index, (byte)0);
 
         // Write scale at byte 14
-        write(FBEOffset() + 14, (byte)scale);
+        write(fbeOffset() + 14, (byte)scale);
 
         // Write signum at byte 15
-        write(FBEOffset() + 15, (byte)((value.signum() < 0) ? -128 : 0));
+        write(fbeOffset() + 15, (byte)((value.signum() < 0) ? -128 : 0));
     }
 }
 )CODE";
@@ -918,7 +918,7 @@ public final class FieldModelTimestamp extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return 8; }
+    public long fbeSize() { return 8; }
 
     // Get the value
     public Instant get() { return get(Instant.EPOCH); }
@@ -928,10 +928,10 @@ public final class FieldModelTimestamp extends FieldModel
         if (defaults == null)
             throw new IllegalArgumentException("Invalid default timestamp value!");
 
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
 
-        long nanoseconds = readInt64(FBEOffset());
+        long nanoseconds = readInt64(fbeOffset());
         return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
     }
 
@@ -942,12 +942,12 @@ public final class FieldModelTimestamp extends FieldModel
         if (value == null)
             throw new IllegalArgumentException("Invalid timestamp value!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
         long nanoseconds = value.getEpochSecond() * 1000000000 + value.getNano();
-        write(FBEOffset(), nanoseconds);
+        write(fbeOffset(), nanoseconds);
     }
 }
 )CODE";
@@ -984,15 +984,15 @@ public final class FieldModelBytes extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return 4; }
+    public long fbeSize() { return 4; }
     // Get the field extra size
     @Override
-    public long FBEExtra()
+    public long fbeExtra()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeBytesOffset = readInt32(FBEOffset());
+        int fbeBytesOffset = readInt32(fbeOffset());
         if ((fbeBytesOffset == 0) || ((_buffer.getOffset() + fbeBytesOffset + 4) > _buffer.getSize()))
             return 0;
 
@@ -1004,10 +1004,10 @@ public final class FieldModelBytes extends FieldModel
     @Override
     public boolean verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return true;
 
-        int fbeBytesOffset = readInt32(FBEOffset());
+        int fbeBytesOffset = readInt32(fbeOffset());
         if (fbeBytesOffset == 0)
             return true;
 
@@ -1031,10 +1031,10 @@ public final class FieldModelBytes extends FieldModel
 
         byte[] value = defaults;
 
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return value;
 
-        int fbeBytesOffset = readInt32(FBEOffset());
+        int fbeBytesOffset = readInt32(fbeOffset());
         if (fbeBytesOffset == 0)
             return value;
 
@@ -1058,8 +1058,8 @@ public final class FieldModelBytes extends FieldModel
         if (value == null)
             throw new IllegalArgumentException("Invalid bytes value!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
         int fbeBytesSize = value.length;
@@ -1068,7 +1068,7 @@ public final class FieldModelBytes extends FieldModel
         if ((fbeBytesOffset <= 0) || ((_buffer.getOffset() + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.getSize()))
             return;
 
-        write(FBEOffset(), fbeBytesOffset);
+        write(fbeOffset(), fbeBytesOffset);
         write(fbeBytesOffset, fbeBytesSize);
         write(fbeBytesOffset + 4, value);
     }
@@ -1107,15 +1107,15 @@ public final class FieldModelString extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return 4; }
+    public long fbeSize() { return 4; }
     // Get the field extra size
     @Override
-    public long FBEExtra()
+    public long fbeExtra()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeStringOffset = readInt32(FBEOffset());
+        int fbeStringOffset = readInt32(fbeOffset());
         if ((fbeStringOffset == 0) || ((_buffer.getOffset() + fbeStringOffset + 4) > _buffer.getSize()))
             return 0;
 
@@ -1127,10 +1127,10 @@ public final class FieldModelString extends FieldModel
     @Override
     public boolean verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return true;
 
-        int fbeStringOffset = readInt32(FBEOffset());
+        int fbeStringOffset = readInt32(fbeOffset());
         if (fbeStringOffset == 0)
             return true;
 
@@ -1154,10 +1154,10 @@ public final class FieldModelString extends FieldModel
 
         String value = defaults;
 
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return value;
 
-        int fbeStringOffset = readInt32(FBEOffset());
+        int fbeStringOffset = readInt32(fbeOffset());
         if (fbeStringOffset == 0)
             return value;
 
@@ -1181,8 +1181,8 @@ public final class FieldModelString extends FieldModel
         if (value == null)
             throw new IllegalArgumentException("Invalid string value!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
         byte[] bytes = value.getBytes(StandardCharsets.UTF_8);
@@ -1193,7 +1193,7 @@ public final class FieldModelString extends FieldModel
         if ((fbeStringOffset <= 0) || ((_buffer.getOffset() + fbeStringOffset + 4 + fbeStringSize) > _buffer.getSize()))
             return;
 
-        write(FBEOffset(), fbeStringOffset);
+        write(fbeOffset(), fbeStringOffset);
         write(fbeStringOffset, fbeStringSize);
         write(fbeStringOffset + 4, bytes);
     }
@@ -1244,20 +1244,20 @@ public final class FieldModelOptional_NAME_ extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return 1 + 4; }
+    public long fbeSize() { return 1 + 4; }
     // Get the field extra size
     @Override
-    public long FBEExtra()
+    public long fbeExtra()
     {
         if (!hasValue())
             return 0;
 
-        int fbeOptionalOffset = readInt32(FBEOffset() + 1);
+        int fbeOptionalOffset = readInt32(fbeOffset() + 1);
         if ((fbeOptionalOffset == 0) || ((_buffer.getOffset() + fbeOptionalOffset + 4) > _buffer.getSize()))
             return 0;
 
         _buffer.shift(fbeOptionalOffset);
-        long fbeResult = value.FBESize() + value.FBEExtra();
+        long fbeResult = value.fbeSize() + value.fbeExtra();
         _buffer.unshift(fbeOptionalOffset);
         return fbeResult;
     }
@@ -1265,10 +1265,10 @@ public final class FieldModelOptional_NAME_ extends FieldModel
     // Checks whether the object contains a value
     public boolean hasValue()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return false;
 
-        byte fbeHasValue = readInt8(FBEOffset());
+        byte fbeHasValue = readInt8(fbeOffset());
         return (fbeHasValue != 0);
     }
 
@@ -1279,14 +1279,14 @@ public final class FieldModelOptional_NAME_ extends FieldModel
     @Override
     public boolean verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return true;
 
-        byte fbeHasValue = readInt8(FBEOffset());
+        byte fbeHasValue = readInt8(fbeOffset());
         if (fbeHasValue == 0)
             return true;
 
-        int fbeOptionalOffset = readInt32(FBEOffset());
+        int fbeOptionalOffset = readInt32(fbeOffset());
         if (fbeOptionalOffset == 0)
             return false;
 
@@ -1302,7 +1302,7 @@ public final class FieldModelOptional_NAME_ extends FieldModel
         if (!hasValue())
             return 0;
 
-        int fbeOptionalOffset = readInt32(FBEOffset() + 1);
+        int fbeOptionalOffset = readInt32(fbeOffset() + 1);
         assert (fbeOptionalOffset > 0) : "Model is broken!";
         if (fbeOptionalOffset <= 0)
             return 0;
@@ -1335,22 +1335,22 @@ public final class FieldModelOptional_NAME_ extends FieldModel
     // Set the optional value (begin phase)
     public long setBegin(boolean hasValue)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
         byte fbeHasValue = (byte)(hasValue ? 1 : 0);
-        write(FBEOffset(), fbeHasValue);
+        write(fbeOffset(), fbeHasValue);
         if (fbeHasValue == 0)
             return 0;
 
-        int fbeOptionalSize = (int)value.FBESize();
+        int fbeOptionalSize = (int)value.fbeSize();
         int fbeOptionalOffset = (int)(_buffer.allocate(fbeOptionalSize) - _buffer.getOffset());
         assert ((fbeOptionalOffset > 0) && ((_buffer.getOffset() + fbeOptionalOffset + fbeOptionalSize) <= _buffer.getSize())) : "Model is broken!";
         if ((fbeOptionalOffset <= 0) || ((_buffer.getOffset() + fbeOptionalOffset + fbeOptionalSize) > _buffer.getSize()))
             return 0;
 
-        write(FBEOffset() + 1, fbeOptionalOffset);
+        write(fbeOffset() + 1, fbeOptionalOffset);
 
         _buffer.shift(fbeOptionalOffset);
         return fbeOptionalOffset;
@@ -1427,10 +1427,10 @@ public final class FieldModelArray_NAME_ extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return _size * _model.FBESize(); }
+    public long fbeSize() { return _size * _model.fbeSize(); }
     // Get the field extra size
     @Override
-    public long FBEExtra() { return 0; }
+    public long fbeExtra() { return 0; }
 
     // Get the array offset
     public long getOffset() { return 0; }
@@ -1440,11 +1440,11 @@ public final class FieldModelArray_NAME_ extends FieldModel
     // Array index operator
     public _MODEL_ getItem(long index)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
         assert (index < _size) : "Index is out of bounds!";
 
-        _model.FBEOffset(FBEOffset());
-        _model.FBEShift(index * _model.FBESize());
+        _model.fbeOffset(fbeOffset());
+        _model.fbeShift(index * _model.fbeSize());
         return _model;
     }
 
@@ -1452,15 +1452,15 @@ public final class FieldModelArray_NAME_ extends FieldModel
     @Override
     public boolean verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return false;
 
-        _model.FBEOffset(FBEOffset());
+        _model.fbeOffset(fbeOffset());
         for (long i = _size; i-- > 0;)
         {
             if (!_model.verify())
                 return false;
-            _model.FBEShift(_model.FBESize());
+            _model.fbeShift(_model.fbeSize());
         }
 
         return true;
@@ -1475,7 +1475,7 @@ public final class FieldModelArray_NAME_ extends FieldModel
         for (long i = 0; i < _size; i++)
         {
             values[(int)i] = fbeModel.get();
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
         return values;
     }
@@ -1491,7 +1491,7 @@ public final class FieldModelArray_NAME_ extends FieldModel
         for (long i = 0; (i < values.length) && (i < _size); i++)
         {
             values[(int)i] = fbeModel.get();
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
@@ -1510,7 +1510,7 @@ public final class FieldModelArray_NAME_ extends FieldModel
         {
             _TYPE_ value = fbeModel.get();
             values.add(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
@@ -1521,15 +1521,15 @@ public final class FieldModelArray_NAME_ extends FieldModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
         var fbeModel = getItem(0);
         for (long i = 0; (i < values.length) && (i < _size); i++)
         {
             fbeModel.set(values[(int)i]);
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
@@ -1540,15 +1540,15 @@ public final class FieldModelArray_NAME_ extends FieldModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
         var fbeModel = getItem(0);
         for (long i = 0; (i < values.size()) && (i < _size); i++)
         {
             fbeModel.set(values.get((int)i));
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 }
@@ -1605,26 +1605,26 @@ public final class FieldModelVector_NAME_ extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return 4; }
+    public long fbeSize() { return 4; }
     // Get the field extra size
     @Override
-    public long FBEExtra()
+    public long fbeExtra()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeVectorOffset = readInt32(FBEOffset());
+        int fbeVectorOffset = readInt32(fbeOffset());
         if ((fbeVectorOffset == 0) || ((_buffer.getOffset() + fbeVectorOffset + 4) > _buffer.getSize()))
             return 0;
 
         int fbeVectorSize = readInt32(fbeVectorOffset);
 
         long fbeResult = 4;
-        _model.FBEOffset(fbeVectorOffset + 4);
+        _model.fbeOffset(fbeVectorOffset + 4);
         for (int i = fbeVectorSize; i-- > 0;)
         {
-            fbeResult += _model.FBESize() + _model.FBEExtra();
-            _model.FBEShift(_model.FBESize());
+            fbeResult += _model.fbeSize() + _model.fbeExtra();
+            _model.fbeShift(_model.fbeSize());
         }
         return fbeResult;
     }
@@ -1632,20 +1632,20 @@ public final class FieldModelVector_NAME_ extends FieldModel
     // Get the vector offset
     public long getOffset()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeVectorOffset = readInt32(FBEOffset());
+        int fbeVectorOffset = readInt32(fbeOffset());
         return fbeVectorOffset;
     }
 
     // Get the vector size
     public long getSize()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeVectorOffset = readInt32(FBEOffset());
+        int fbeVectorOffset = readInt32(fbeOffset());
         if ((fbeVectorOffset == 0) || ((_buffer.getOffset() + fbeVectorOffset + 4) > _buffer.getSize()))
             return 0;
 
@@ -1656,31 +1656,31 @@ public final class FieldModelVector_NAME_ extends FieldModel
     // Vector index operator
     public _MODEL_ getItem(long index)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
 
-        int fbeVectorOffset = readInt32(FBEOffset());
+        int fbeVectorOffset = readInt32(fbeOffset());
         assert ((fbeVectorOffset > 0) && ((_buffer.getOffset() + fbeVectorOffset + 4) <= _buffer.getSize())) : "Model is broken!";
 
         int fbeVectorSize = readInt32(fbeVectorOffset);
         assert (index < fbeVectorSize) : "Index is out of bounds!";
 
-        _model.FBEOffset(fbeVectorOffset + 4);
-        _model.FBEShift(index * _model.FBESize());
+        _model.fbeOffset(fbeVectorOffset + 4);
+        _model.fbeShift(index * _model.fbeSize());
         return _model;
     }
 
     // Resize the vector and get its first model
     public _MODEL_ resize(long size)
     {
-        int fbeVectorSize = (int)(size * _model.FBESize());
+        int fbeVectorSize = (int)(size * _model.fbeSize());
         int fbeVectorOffset = (int)(_buffer.allocate(4 + fbeVectorSize) - _buffer.getOffset());
         assert ((fbeVectorOffset > 0) && ((_buffer.getOffset() + fbeVectorOffset + 4) <= _buffer.getSize())) : "Model is broken!";
 
-        write(FBEOffset(), fbeVectorOffset);
+        write(fbeOffset(), fbeVectorOffset);
         write(fbeVectorOffset, (int)size);
         write(fbeVectorOffset + 4, (byte)0, fbeVectorSize);
 
-        _model.FBEOffset(fbeVectorOffset + 4);
+        _model.fbeOffset(fbeVectorOffset + 4);
         return _model;
     }
 
@@ -1688,10 +1688,10 @@ public final class FieldModelVector_NAME_ extends FieldModel
     @Override
     public boolean verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return true;
 
-        int fbeVectorOffset = readInt32(FBEOffset());
+        int fbeVectorOffset = readInt32(fbeOffset());
         if (fbeVectorOffset == 0)
             return true;
 
@@ -1700,12 +1700,12 @@ public final class FieldModelVector_NAME_ extends FieldModel
 
         int fbeVectorSize = readInt32(fbeVectorOffset);
 
-        _model.FBEOffset(fbeVectorOffset + 4);
+        _model.fbeOffset(fbeVectorOffset + 4);
         for (int i = fbeVectorSize; i-- > 0;)
         {
             if (!_model.verify())
                 return false;
-            _model.FBEShift(_model.FBESize());
+            _model.fbeShift(_model.fbeSize());
         }
 
         return true;
@@ -1731,7 +1731,7 @@ public final class FieldModelVector_NAME_ extends FieldModel
         {
             _TYPE_ value = fbeModel.get();
             values.add(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
@@ -1753,7 +1753,7 @@ public final class FieldModelVector_NAME_ extends FieldModel
         {
             _TYPE_ value = fbeModel.get();
             values.add(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
@@ -1775,7 +1775,7 @@ public final class FieldModelVector_NAME_ extends FieldModel
         {
             _TYPE_ value = fbeModel.get();
             values.add(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
@@ -1786,15 +1786,15 @@ public final class FieldModelVector_NAME_ extends FieldModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
         var fbeModel = resize(values.size());
         for (var value : values)
         {
             fbeModel.set(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
@@ -1805,15 +1805,15 @@ public final class FieldModelVector_NAME_ extends FieldModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
         var fbeModel = resize(values.size());
         for (var value : values)
         {
             fbeModel.set(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
@@ -1824,15 +1824,15 @@ public final class FieldModelVector_NAME_ extends FieldModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
         var fbeModel = resize(values.size());
         for (var value : values)
         {
             fbeModel.set(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 }
@@ -1889,30 +1889,30 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return 4; }
+    public long fbeSize() { return 4; }
     // Get the field extra size
     @Override
-    public long FBEExtra()
+    public long fbeExtra()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeMapOffset = readInt32(FBEOffset());
+        int fbeMapOffset = readInt32(fbeOffset());
         if ((fbeMapOffset == 0) || ((_buffer.getOffset() + fbeMapOffset + 4) > _buffer.getSize()))
             return 0;
 
         int fbeMapSize = readInt32(fbeMapOffset);
 
         long fbeResult = 4;
-        _modelKey.FBEOffset(fbeMapOffset + 4);
-        _modelValue.FBEOffset(fbeMapOffset + 4 + _modelKey.FBESize());
+        _modelKey.fbeOffset(fbeMapOffset + 4);
+        _modelValue.fbeOffset(fbeMapOffset + 4 + _modelKey.fbeSize());
         for (int i = fbeMapSize; i-- > 0;)
         {
-            fbeResult += _modelKey.FBESize() + _modelKey.FBEExtra();
-            _modelKey.FBEShift(_modelKey.FBESize() + _modelValue.FBESize());
+            fbeResult += _modelKey.fbeSize() + _modelKey.fbeExtra();
+            _modelKey.fbeShift(_modelKey.fbeSize() + _modelValue.fbeSize());
 
-            fbeResult += _modelValue.FBESize() + _modelValue.FBEExtra();
-            _modelValue.FBEShift(_modelKey.FBESize() + _modelValue.FBESize());
+            fbeResult += _modelValue.fbeSize() + _modelValue.fbeExtra();
+            _modelValue.fbeShift(_modelKey.fbeSize() + _modelValue.fbeSize());
         }
         return fbeResult;
     }
@@ -1920,20 +1920,20 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
     // Get the map offset
     public long getOffset()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeMapOffset = readInt32(FBEOffset());
+        int fbeMapOffset = readInt32(fbeOffset());
         return fbeMapOffset;
     }
 
     // Get the map size
     public long getSize()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeMapOffset = readInt32(FBEOffset());
+        int fbeMapOffset = readInt32(fbeOffset());
         if ((fbeMapOffset == 0) || ((_buffer.getOffset() + fbeMapOffset + 4) > _buffer.getSize()))
             return 0;
 
@@ -1944,37 +1944,37 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
     // Map index operator
     public Pair<_KEY_MODEL_, _VALUE_MODEL_> getItem(long index)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
 
-        int fbeMapOffset = readInt32(FBEOffset());
+        int fbeMapOffset = readInt32(fbeOffset());
         assert ((fbeMapOffset > 0) && ((_buffer.getOffset() + fbeMapOffset + 4) <= _buffer.getSize())) : "Model is broken!";
 
         int fbeMapSize = readInt32(fbeMapOffset);
         assert (index < fbeMapSize) : "Index is out of bounds!";
 
-        _modelKey.FBEOffset(fbeMapOffset + 4);
-        _modelValue.FBEOffset(fbeMapOffset + 4 + _modelKey.FBESize());
-        _modelKey.FBEShift(index * (_modelKey.FBESize() + _modelValue.FBESize()));
-        _modelValue.FBEShift(index * (_modelKey.FBESize() + _modelValue.FBESize()));
+        _modelKey.fbeOffset(fbeMapOffset + 4);
+        _modelValue.fbeOffset(fbeMapOffset + 4 + _modelKey.fbeSize());
+        _modelKey.fbeShift(index * (_modelKey.fbeSize() + _modelValue.fbeSize()));
+        _modelValue.fbeShift(index * (_modelKey.fbeSize() + _modelValue.fbeSize()));
         return Pair.create(_modelKey, _modelValue);
     }
 
     // Resize the map and get its first model
     public Pair<_KEY_MODEL_, _VALUE_MODEL_> resize(long size)
     {
-        _modelKey.FBEOffset(FBEOffset());
-        _modelValue.FBEOffset(FBEOffset() + _modelKey.FBESize());
+        _modelKey.fbeOffset(fbeOffset());
+        _modelValue.fbeOffset(fbeOffset() + _modelKey.fbeSize());
 
-        int fbeMapSize = (int)(size * (_modelKey.FBESize() + _modelValue.FBESize()));
+        int fbeMapSize = (int)(size * (_modelKey.fbeSize() + _modelValue.fbeSize()));
         int fbeMapOffset = (int)(_buffer.allocate(4 + fbeMapSize) - _buffer.getOffset());
         assert ((fbeMapOffset > 0) && ((_buffer.getOffset() + fbeMapOffset + 4) <= _buffer.getSize())) : "Model is broken!";
 
-        write(FBEOffset(), fbeMapOffset);
+        write(fbeOffset(), fbeMapOffset);
         write(fbeMapOffset, (int)size);
         write(fbeMapOffset + 4, (byte)0, fbeMapSize);
 
-        _modelKey.FBEOffset(fbeMapOffset + 4);
-        _modelValue.FBEOffset(fbeMapOffset + 4 + _modelKey.FBESize());
+        _modelKey.fbeOffset(fbeMapOffset + 4);
+        _modelValue.fbeOffset(fbeMapOffset + 4 + _modelKey.fbeSize());
         return Pair.create(_modelKey, _modelValue);
     }
 
@@ -1982,10 +1982,10 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
     @Override
     public boolean verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return true;
 
-        int fbeMapOffset = readInt32(FBEOffset());
+        int fbeMapOffset = readInt32(fbeOffset());
         if (fbeMapOffset == 0)
             return true;
 
@@ -1994,16 +1994,16 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
 
         int fbeMapSize = readInt32(fbeMapOffset);
 
-        _modelKey.FBEOffset(fbeMapOffset + 4);
-        _modelValue.FBEOffset(fbeMapOffset + 4 + _modelKey.FBESize());
+        _modelKey.fbeOffset(fbeMapOffset + 4);
+        _modelValue.fbeOffset(fbeMapOffset + 4 + _modelKey.fbeSize());
         for (int i = fbeMapSize; i-- > 0;)
         {
             if (!_modelKey.verify())
                 return false;
-            _modelKey.FBEShift(_modelKey.FBESize() + _modelValue.FBESize());
+            _modelKey.fbeShift(_modelKey.fbeSize() + _modelValue.fbeSize());
             if (!_modelValue.verify())
                 return false;
-            _modelValue.FBEShift(_modelKey.FBESize() + _modelValue.FBESize());
+            _modelValue.fbeShift(_modelKey.fbeSize() + _modelValue.fbeSize());
         }
 
         return true;
@@ -2028,8 +2028,8 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
             _KEY_TYPE_ key = fbeModel.getKey().get();
             _VALUE_TYPE_ value = fbeModel.getValue().get();
             values.put(key, value);
-            fbeModel.getKey().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
-            fbeModel.getValue().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
+            fbeModel.getKey().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
+            fbeModel.getValue().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
         }
     }
 
@@ -2052,8 +2052,8 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
             _KEY_TYPE_ key = fbeModel.getKey().get();
             _VALUE_TYPE_ value = fbeModel.getValue().get();
             values.put(key, value);
-            fbeModel.getKey().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
-            fbeModel.getValue().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
+            fbeModel.getKey().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
+            fbeModel.getValue().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
         }
     }
 
@@ -2064,17 +2064,17 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
         var fbeModel = resize(values.size());
         for (var value : values.entrySet())
         {
             fbeModel.getKey().set(value.getKey());
-            fbeModel.getKey().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
+            fbeModel.getKey().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
             fbeModel.getValue().set(value.getValue());
-            fbeModel.getValue().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
+            fbeModel.getValue().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
         }
     }
 
@@ -2085,17 +2085,17 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
         var fbeModel = resize(values.size());
         for (var value : values.entrySet())
         {
             fbeModel.getKey().set(value.getKey());
-            fbeModel.getKey().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
+            fbeModel.getKey().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
             fbeModel.getValue().set(value.getValue());
-            fbeModel.getValue().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
+            fbeModel.getValue().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
         }
     }
 }
@@ -2147,26 +2147,26 @@ public final class FieldModel_NAME_ extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return _SIZE_; }
+    public long fbeSize() { return _SIZE_; }
 
     // Get the value
     public _NAME_ get() { return get(new _NAME_()); }
     public _NAME_ get(_NAME_ defaults)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
 
-        return new _NAME_(_READ_(FBEOffset()));
+        return new _NAME_(_READ_(fbeOffset()));
     }
 
     // Set the value
     public void set(_NAME_ value)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
-        write(FBEOffset(), value.getRaw());
+        write(fbeOffset(), value.getRaw());
     }
 }
 )CODE";
@@ -2242,19 +2242,19 @@ public abstract class FinalModel
     protected long _offset;
 
     // Get the final offset
-    public long FBEOffset() { return _offset; }
+    public long fbeOffset() { return _offset; }
     // Set the final offset
-    public void FBEOffset(long value) { _offset = value; }
+    public void fbeOffset(long value) { _offset = value; }
 
     // Get the final size
-    public long FBESize() { return 0; }
+    public long fbeSize() { return 0; }
     // Get the final extra size
-    public long FBEExtra() { return 0; }
+    public long fbeExtra() { return 0; }
 
     // Shift the current final offset
-    public void FBEShift(long size) { _offset += size; }
+    public void fbeShift(long size) { _offset += size; }
     // Unshift the current final offset
-    public void FBEUnshift(long size) { _offset -= size; }
+    public void fbeUnshift(long size) { _offset -= size; }
 
     // Initialize a new final model
     protected FinalModel(Buffer buffer, long offset)
@@ -2325,41 +2325,41 @@ public final class FinalModel_NAME_ extends FinalModel
     public FinalModel_NAME_(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long FBEAllocationSize(_TYPE_ value) { return FBESize(); }
+    public long fbeAllocationSize(_TYPE_ value) { return fbeSize(); }
 
     // Get the final size
     @Override
-    public long FBESize() { return _SIZE_; }
+    public long fbeSize() { return _SIZE_; }
 
     // Check if the value is valid
     @Override
     public long verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return Long.MAX_VALUE;
 
-        return FBESize();
+        return fbeSize();
     }
 
     // Get the value
     public _TYPE_ get(Size size)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return _DEFAULTS_;
 
-        size.value = FBESize();
-        return read_NAME_(FBEOffset());
+        size.value = fbeSize();
+        return read_NAME_(fbeOffset());
     }
 
     // Set the value
     public long set(_TYPE_ value)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        write(FBEOffset(), _BASE_value);
-        return FBESize();
+        write(fbeOffset(), _BASE_value);
+        return fbeSize();
     }
 }
 )CODE";
@@ -2400,31 +2400,31 @@ public final class FinalModelDecimal extends FinalModel
     public FinalModelDecimal(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long FBEAllocationSize(BigDecimal value) { return FBESize(); }
+    public long fbeAllocationSize(BigDecimal value) { return fbeSize(); }
 
     // Get the final size
     @Override
-    public long FBESize() { return 16; }
+    public long fbeSize() { return 16; }
 
     // Check if the value is valid
     @Override
     public long verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return Long.MAX_VALUE;
 
-        return FBESize();
+        return fbeSize();
     }
 
     // Get the value
     public BigDecimal get(Size size)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return BigDecimal.valueOf(0L);
 
-        byte[] magnitude = readBytes(FBEOffset(), 12);
-        int scale = readByte(FBEOffset() + 14);
-        int signum = (readByte(FBEOffset() + 15) < 0) ? -1 : 1;
+        byte[] magnitude = readBytes(fbeOffset(), 12);
+        int scale = readByte(fbeOffset() + 14);
+        int signum = (readByte(fbeOffset() + 15) < 0) ? -1 : 1;
 
         // Reverse magnitude
         for(int i = 0; i < magnitude.length / 2; i++)
@@ -2436,15 +2436,15 @@ public final class FinalModelDecimal extends FinalModel
 
         var unscaled = new BigInteger(signum, magnitude);
 
-        size.value = FBESize();
+        size.value = fbeSize();
         return new BigDecimal(unscaled, scale);
     }
 
     // Set the value
     public long set(BigDecimal value)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
         // Get unscaled absolute value
@@ -2453,8 +2453,8 @@ public final class FinalModelDecimal extends FinalModel
         if ((bitLength < 0) || (bitLength > 96))
         {
             // Value too big for .NET Decimal (bit length is limited to [0, 96])
-            write(FBEOffset(), (byte)0, FBESize());
-            return FBESize();
+            write(fbeOffset(), (byte)0, fbeSize());
+            return fbeSize();
         }
 
         // Get byte array
@@ -2465,25 +2465,25 @@ public final class FinalModelDecimal extends FinalModel
         if ((scale < 0) || (scale > 28))
         {
             // Value scale exceeds .NET Decimal limit of [0, 28]
-            write(FBEOffset(), (byte)0, FBESize());
-            return FBESize();
+            write(fbeOffset(), (byte)0, fbeSize());
+            return fbeSize();
         }
 
         // Write unscaled value to bytes 0-11
         int index = 0;
         for (int i = unscaledBytes.length - 1; (i >= 0) && (index < 12); i--, index++)
-            write(FBEOffset() + index, unscaledBytes[i]);
+            write(fbeOffset() + index, unscaledBytes[i]);
 
         // Fill remaining bytes with zeros
         for (; index < 14; index++)
-            write(FBEOffset() + index, (byte)0);
+            write(fbeOffset() + index, (byte)0);
 
         // Write scale at byte 14
-        write(FBEOffset() + 14, (byte)scale);
+        write(fbeOffset() + 14, (byte)scale);
 
         // Write signum at byte 15
-        write(FBEOffset() + 15, (byte)((value.signum() < 0) ? -128 : 0));
-        return FBESize();
+        write(fbeOffset() + 15, (byte)((value.signum() < 0) ? -128 : 0));
+        return fbeSize();
     }
 }
 )CODE";
@@ -2519,43 +2519,43 @@ public final class FinalModelTimestamp extends FinalModel
     public FinalModelTimestamp(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long FBEAllocationSize(Instant value) { return FBESize(); }
+    public long fbeAllocationSize(Instant value) { return fbeSize(); }
 
     // Get the final size
     @Override
-    public long FBESize() { return 8; }
+    public long fbeSize() { return 8; }
 
     // Check if the value is valid
     @Override
     public long verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return Long.MAX_VALUE;
 
-        return FBESize();
+        return fbeSize();
     }
 
     // Get the value
     public Instant get(Size size)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return Instant.EPOCH;
 
-        size.value = FBESize();
-        long nanoseconds = readInt64(FBEOffset());
+        size.value = fbeSize();
+        long nanoseconds = readInt64(fbeOffset());
         return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
     }
 
     // Set the value
     public long set(Instant value)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
         long nanoseconds = value.getEpochSecond() * 1000000000 + value.getNano();
-        write(FBEOffset(), nanoseconds);
-        return FBESize();
+        write(fbeOffset(), nanoseconds);
+        return fbeSize();
     }
 }
 )CODE";
@@ -2591,17 +2591,17 @@ public final class FinalModelBytes extends FinalModel
     public FinalModelBytes(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long FBEAllocationSize(byte[] value) { return 4 + value.length; }
+    public long fbeAllocationSize(byte[] value) { return 4 + value.length; }
 
     // Check if the bytes value is valid
     @Override
     public long verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return Long.MAX_VALUE;
 
-        int fbeBytesSize = readInt32(FBEOffset());
-        if ((_buffer.getOffset() + FBEOffset() + 4 + fbeBytesSize) > _buffer.getSize())
+        int fbeBytesSize = readInt32(fbeOffset());
+        if ((_buffer.getOffset() + fbeOffset() + 4 + fbeBytesSize) > _buffer.getSize())
             return Long.MAX_VALUE;
 
         return 4 + fbeBytesSize;
@@ -2610,22 +2610,22 @@ public final class FinalModelBytes extends FinalModel
     // Get the bytes value
     public byte[] get(Size size)
     {
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
         {
             size.value = 0;
             return new byte[0];
         }
 
-        int fbeBytesSize = readInt32(FBEOffset());
-        assert ((_buffer.getOffset() + FBEOffset() + 4 + fbeBytesSize) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4 + fbeBytesSize) > _buffer.getSize())
+        int fbeBytesSize = readInt32(fbeOffset());
+        assert ((_buffer.getOffset() + fbeOffset() + 4 + fbeBytesSize) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4 + fbeBytesSize) > _buffer.getSize())
         {
             size.value = 4;
             return new byte[0];
         }
 
         size.value = 4 + fbeBytesSize;
-        return readBytes(FBEOffset() + 4, fbeBytesSize);
+        return readBytes(fbeOffset() + 4, fbeBytesSize);
     }
 
     // Set the bytes value
@@ -2635,17 +2635,17 @@ public final class FinalModelBytes extends FinalModel
         if (value == null)
             throw new IllegalArgumentException("Invalid bytes value!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
         int fbeBytesSize = value.length;
-        assert ((_buffer.getOffset() + FBEOffset() + 4 + fbeBytesSize) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4 + fbeBytesSize) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4 + fbeBytesSize) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4 + fbeBytesSize) > _buffer.getSize())
             return 4;
 
-        write(FBEOffset(), fbeBytesSize);
-        write(FBEOffset() + 4, value);
+        write(fbeOffset(), fbeBytesSize);
+        write(fbeOffset() + 4, value);
         return 4 + fbeBytesSize;
     }
 }
@@ -2682,17 +2682,17 @@ public final class FinalModelString extends FinalModel
     public FinalModelString(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long FBEAllocationSize(String value) { return 4 + 3 * (value.length() + 1); }
+    public long fbeAllocationSize(String value) { return 4 + 3 * (value.length() + 1); }
 
     // Check if the string value is valid
     @Override
     public long verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return Long.MAX_VALUE;
 
-        int fbeStringSize = readInt32(FBEOffset());
-        if ((_buffer.getOffset() + FBEOffset() + 4 + fbeStringSize) > _buffer.getSize())
+        int fbeStringSize = readInt32(fbeOffset());
+        if ((_buffer.getOffset() + fbeOffset() + 4 + fbeStringSize) > _buffer.getSize())
             return Long.MAX_VALUE;
 
         return 4 + fbeStringSize;
@@ -2701,22 +2701,22 @@ public final class FinalModelString extends FinalModel
     // Get the string value
     public String get(Size size)
     {
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
         {
             size.value = 0;
             return "";
         }
 
-        int fbeStringSize = readInt32(FBEOffset());
-        assert ((_buffer.getOffset() + FBEOffset() + 4 + fbeStringSize) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4 + fbeStringSize) > _buffer.getSize())
+        int fbeStringSize = readInt32(fbeOffset());
+        assert ((_buffer.getOffset() + fbeOffset() + 4 + fbeStringSize) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4 + fbeStringSize) > _buffer.getSize())
         {
             size.value = 4;
             return "";
         }
 
         size.value = 4 + fbeStringSize;
-        return readString(FBEOffset() + 4, fbeStringSize);
+        return readString(fbeOffset() + 4, fbeStringSize);
     }
 
     // Set the string value
@@ -2726,19 +2726,19 @@ public final class FinalModelString extends FinalModel
         if (value == null)
             throw new IllegalArgumentException("Invalid string value!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
         byte[] bytes = value.getBytes(StandardCharsets.UTF_8);
 
         int fbeStringSize = bytes.length;
-        assert ((_buffer.getOffset() + FBEOffset() + 4 + fbeStringSize) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4 + fbeStringSize) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4 + fbeStringSize) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4 + fbeStringSize) > _buffer.getSize())
             return 4;
 
-        write(FBEOffset(), fbeStringSize);
-        write(FBEOffset() + 4, bytes);
+        write(fbeOffset(), fbeStringSize);
+        write(fbeOffset() + 4, bytes);
         return 4 + fbeStringSize;
     }
 }
@@ -2787,15 +2787,15 @@ public final class FinalModelOptional_NAME_ extends FinalModel
     }
 
     // Get the allocation size
-    public long FBEAllocationSize(_TYPE_ optional) { return 1 + ((optional != null) ? value.FBEAllocationSize(optional) : 0); }
+    public long fbeAllocationSize(_TYPE_ optional) { return 1 + ((optional != null) ? value.fbeAllocationSize(optional) : 0); }
 
     // Checks whether the object contains a value
     public boolean hasValue()
     {
-        if ((_buffer.getOffset() + FBEOffset() + 1) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())
             return false;
 
-        byte fbeHasValue = readInt8(FBEOffset());
+        byte fbeHasValue = readInt8(fbeOffset());
         return (fbeHasValue != 0);
     }
 
@@ -2806,24 +2806,24 @@ public final class FinalModelOptional_NAME_ extends FinalModel
     @Override
     public long verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + 1) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())
             return Long.MAX_VALUE;
 
-        byte fbeHasValue = readInt8(FBEOffset());
+        byte fbeHasValue = readInt8(fbeOffset());
         if (fbeHasValue == 0)
             return 1;
 
-        _buffer.shift(FBEOffset() + 1);
+        _buffer.shift(fbeOffset() + 1);
         long fbeResult = value.verify();
-        _buffer.unshift(FBEOffset() + 1);
+        _buffer.unshift(fbeOffset() + 1);
         return 1 + fbeResult;
     }
 
     // Get the optional value
     public _TYPE_ get(Size size)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 1) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())
         {
             size.value = 0;
             return null;
@@ -2835,9 +2835,9 @@ public final class FinalModelOptional_NAME_ extends FinalModel
             return null;
         }
 
-        _buffer.shift(FBEOffset() + 1);
+        _buffer.shift(fbeOffset() + 1);
         _TYPE_ optional = value.get(size);
-        _buffer.unshift(FBEOffset() + 1);
+        _buffer.unshift(fbeOffset() + 1);
         size.value += 1;
         return optional;
     }
@@ -2845,18 +2845,18 @@ public final class FinalModelOptional_NAME_ extends FinalModel
     // Set the optional value
     public long set(_TYPE_ optional)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 1) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())
             return 0;
 
         byte fbeHasValue = (byte)((optional != null) ? 1 : 0);
-        write(FBEOffset(), fbeHasValue);
+        write(fbeOffset(), fbeHasValue);
         if (fbeHasValue == 0)
             return 1;
 
-        _buffer.shift(FBEOffset() + 1);
+        _buffer.shift(fbeOffset() + 1);
         long size = value.set(optional);
-        _buffer.unshift(FBEOffset() + 1);
+        _buffer.unshift(fbeOffset() + 1);
         return 1 + size;
     }
 }
@@ -2912,18 +2912,18 @@ public final class FinalModelArray_NAME_ extends FinalModel
     }
 
     // Get the allocation size
-    public long FBEAllocationSize(_ARRAY_ values)
+    public long fbeAllocationSize(_ARRAY_ values)
     {
         long size = 0;
         for (long i = 0; (i < values.length) && (i < _size); i++)
-            size += _model.FBEAllocationSize(values[(int)i]);
+            size += _model.fbeAllocationSize(values[(int)i]);
         return size;
     }
-    public long FBEAllocationSize(ArrayList<_TYPE_> values)
+    public long fbeAllocationSize(ArrayList<_TYPE_> values)
     {
         long size = 0;
         for (long i = 0; (i < values.size()) && (i < _size); i++)
-            size += _model.FBEAllocationSize(values.get((int)i));
+            size += _model.fbeAllocationSize(values.get((int)i));
         return size;
     }
 
@@ -2931,17 +2931,17 @@ public final class FinalModelArray_NAME_ extends FinalModel
     @Override
     public long verify()
     {
-        if ((_buffer.getOffset() + FBEOffset()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset()) > _buffer.getSize())
             return Long.MAX_VALUE;
 
         long size = 0;
-        _model.FBEOffset(FBEOffset());
+        _model.fbeOffset(fbeOffset());
         for (long i = _size; i-- > 0;)
         {
             long offset = _model.verify();
             if (offset == Long.MAX_VALUE)
                 return Long.MAX_VALUE;
-            _model.FBEShift(offset);
+            _model.fbeShift(offset);
             size += offset;
         }
         return size;
@@ -2952,8 +2952,8 @@ public final class FinalModelArray_NAME_ extends FinalModel
     {
         var values = _INIT_;
 
-        assert ((_buffer.getOffset() + FBEOffset()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset()) > _buffer.getSize())
         {
             size.value = 0;
             return values;
@@ -2961,12 +2961,12 @@ public final class FinalModelArray_NAME_ extends FinalModel
 
         size.value = 0;
         var offset = new Size();
-        _model.FBEOffset(FBEOffset());
+        _model.fbeOffset(fbeOffset());
         for (long i = 0; i < _size; i++)
         {
             offset.value = 0;
             values[(int)i] = _model.get(offset);
-            _model.FBEShift(offset.value);
+            _model.fbeShift(offset.value);
             size.value += offset.value;
         }
         return values;
@@ -2979,18 +2979,18 @@ public final class FinalModelArray_NAME_ extends FinalModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset()) > _buffer.getSize())
             return 0;
 
         long size = 0;
         var offset = new Size();
-        _model.FBEOffset(FBEOffset());
+        _model.fbeOffset(fbeOffset());
         for (long i = 0; (i < values.length) && (i < _size); i++)
         {
             offset.value = 0;
             values[(int)i] = _model.get(offset);
-            _model.FBEShift(offset.value);
+            _model.fbeShift(offset.value);
             size += offset.value;
         }
         return size;
@@ -3005,21 +3005,21 @@ public final class FinalModelArray_NAME_ extends FinalModel
 
         values.clear();
 
-        assert ((_buffer.getOffset() + FBEOffset()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset()) > _buffer.getSize())
             return 0;
 
         values.ensureCapacity((int)_size);
 
         long size = 0;
         var offset = new Size();
-        _model.FBEOffset(FBEOffset());
+        _model.fbeOffset(fbeOffset());
         for (long i = _size; i-- > 0;)
         {
             offset.value = 0;
             _TYPE_ value = _model.get(offset);
             values.add(value);
-            _model.FBEShift(offset.value);
+            _model.fbeShift(offset.value);
             size += offset.value;
         }
         return size;
@@ -3032,16 +3032,16 @@ public final class FinalModelArray_NAME_ extends FinalModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset()) > _buffer.getSize())
             return 0;
 
         long size = 0;
-        _model.FBEOffset(FBEOffset());
+        _model.fbeOffset(fbeOffset());
         for (long i = 0; (i < values.length) && (i < _size); i++)
         {
             long offset = _model.set(values[(int)i]);
-            _model.FBEShift(offset);
+            _model.fbeShift(offset);
             size += offset;
         }
         return size;
@@ -3054,16 +3054,16 @@ public final class FinalModelArray_NAME_ extends FinalModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset()) > _buffer.getSize())
             return 0;
 
         long size = 0;
-        _model.FBEOffset(FBEOffset());
+        _model.fbeOffset(fbeOffset());
         for (long i = 0; (i < values.size()) && (i < _size); i++)
         {
             long offset = _model.set(values.get((int)i));
-            _model.FBEShift(offset);
+            _model.fbeShift(offset);
             size += offset;
         }
         return size;
@@ -3121,32 +3121,32 @@ public final class FinalModelVector_NAME_ extends FinalModel
     }
 
     // Get the allocation size
-    public long FBEAllocationSize(_TYPE_[] values)
+    public long fbeAllocationSize(_TYPE_[] values)
     {
         long size = 4;
         for (var value : values)
-            size += _model.FBEAllocationSize(value);
+            size += _model.fbeAllocationSize(value);
         return size;
     }
-    public long FBEAllocationSize(ArrayList<_TYPE_> values)
+    public long fbeAllocationSize(ArrayList<_TYPE_> values)
     {
         long size = 4;
         for (var value : values)
-            size += _model.FBEAllocationSize(value);
+            size += _model.fbeAllocationSize(value);
         return size;
     }
-    public long FBEAllocationSize(LinkedList<_TYPE_> values)
+    public long fbeAllocationSize(LinkedList<_TYPE_> values)
     {
         long size = 4;
         for (var value : values)
-            size += _model.FBEAllocationSize(value);
+            size += _model.fbeAllocationSize(value);
         return size;
     }
-    public long FBEAllocationSize(HashSet<_TYPE_> values)
+    public long fbeAllocationSize(HashSet<_TYPE_> values)
     {
         long size = 4;
         for (var value : values)
-            size += _model.FBEAllocationSize(value);
+            size += _model.fbeAllocationSize(value);
         return size;
     }
 
@@ -3154,19 +3154,19 @@ public final class FinalModelVector_NAME_ extends FinalModel
     @Override
     public long verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return Long.MAX_VALUE;
 
-        int fbeVectorSize = readInt32(FBEOffset());
+        int fbeVectorSize = readInt32(fbeOffset());
 
         long size = 4;
-        _model.FBEOffset(FBEOffset() + 4);
+        _model.fbeOffset(fbeOffset() + 4);
         for (int i = fbeVectorSize; i-- > 0;)
         {
             long offset = _model.verify();
             if (offset == Long.MAX_VALUE)
                 return Long.MAX_VALUE;
-            _model.FBEShift(offset);
+            _model.fbeShift(offset);
             size += offset;
         }
         return size;
@@ -3181,11 +3181,11 @@ public final class FinalModelVector_NAME_ extends FinalModel
 
         values.clear();
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
-        long fbeVectorSize = readInt32(FBEOffset());
+        long fbeVectorSize = readInt32(fbeOffset());
         if (fbeVectorSize == 0)
             return 4;
 
@@ -3193,13 +3193,13 @@ public final class FinalModelVector_NAME_ extends FinalModel
 
         long size = 4;
         var offset = new Size();
-        _model.FBEOffset(FBEOffset() + 4);
+        _model.fbeOffset(fbeOffset() + 4);
         for (long i = 0; i < fbeVectorSize; i++)
         {
             offset.value = 0;
             _TYPE_ value = _model.get(offset);
             values.add(value);
-            _model.FBEShift(offset.value);
+            _model.fbeShift(offset.value);
             size += offset.value;
         }
         return size;
@@ -3214,23 +3214,23 @@ public final class FinalModelVector_NAME_ extends FinalModel
 
         values.clear();
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
-        long fbeVectorSize = readInt32(FBEOffset());
+        long fbeVectorSize = readInt32(fbeOffset());
         if (fbeVectorSize == 0)
             return 4;
 
         long size = 4;
         var offset = new Size();
-        _model.FBEOffset(FBEOffset() + 4);
+        _model.fbeOffset(fbeOffset() + 4);
         for (long i = 0; i < fbeVectorSize; i++)
         {
             offset.value = 0;
             _TYPE_ value = _model.get(offset);
             values.add(value);
-            _model.FBEShift(offset.value);
+            _model.fbeShift(offset.value);
             size += offset.value;
         }
         return size;
@@ -3245,23 +3245,23 @@ public final class FinalModelVector_NAME_ extends FinalModel
 
         values.clear();
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
-        long fbeVectorSize = readInt32(FBEOffset());
+        long fbeVectorSize = readInt32(fbeOffset());
         if (fbeVectorSize == 0)
             return 4;
 
         long size = 4;
         var offset = new Size();
-        _model.FBEOffset(FBEOffset() + 4);
+        _model.fbeOffset(fbeOffset() + 4);
         for (long i = 0; i < fbeVectorSize; i++)
         {
             offset.value = 0;
             _TYPE_ value = _model.get(offset);
             values.add(value);
-            _model.FBEShift(offset.value);
+            _model.fbeShift(offset.value);
             size += offset.value;
         }
         return size;
@@ -3274,18 +3274,18 @@ public final class FinalModelVector_NAME_ extends FinalModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
-        write(FBEOffset(), (int)values.size());
+        write(fbeOffset(), (int)values.size());
 
         long size = 4;
-        _model.FBEOffset(FBEOffset() + 4);
+        _model.fbeOffset(fbeOffset() + 4);
         for (var value : values)
         {
             long offset = _model.set(value);
-            _model.FBEShift(offset);
+            _model.fbeShift(offset);
             size += offset;
         }
         return size;
@@ -3298,18 +3298,18 @@ public final class FinalModelVector_NAME_ extends FinalModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
-        write(FBEOffset(), (int)values.size());
+        write(fbeOffset(), (int)values.size());
 
         long size = 4;
-        _model.FBEOffset(FBEOffset() + 4);
+        _model.fbeOffset(fbeOffset() + 4);
         for (var value : values)
         {
             long offset = _model.set(value);
-            _model.FBEShift(offset);
+            _model.fbeShift(offset);
             size += offset;
         }
         return size;
@@ -3322,18 +3322,18 @@ public final class FinalModelVector_NAME_ extends FinalModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
-        write(FBEOffset(), (int)values.size());
+        write(fbeOffset(), (int)values.size());
 
         long size = 4;
-        _model.FBEOffset(FBEOffset() + 4);
+        _model.fbeOffset(fbeOffset() + 4);
         for (var value : values)
         {
             long offset = _model.set(value);
-            _model.FBEShift(offset);
+            _model.fbeShift(offset);
             size += offset;
         }
         return size;
@@ -3391,23 +3391,23 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends FinalModel
     }
 
     // Get the allocation size
-    public long FBEAllocationSize(TreeMap<_KEY_TYPE_, _VALUE_TYPE_> values)
+    public long fbeAllocationSize(TreeMap<_KEY_TYPE_, _VALUE_TYPE_> values)
     {
         long size = 4;
         for (var value : values.entrySet())
         {
-            size += _modelKey.FBEAllocationSize(value.getKey());
-            size += _modelValue.FBEAllocationSize(value.getValue());
+            size += _modelKey.fbeAllocationSize(value.getKey());
+            size += _modelValue.fbeAllocationSize(value.getValue());
         }
         return size;
     }
-    public long FBEAllocationSize(HashMap<_KEY_TYPE_, _VALUE_TYPE_> values)
+    public long fbeAllocationSize(HashMap<_KEY_TYPE_, _VALUE_TYPE_> values)
     {
         long size = 4;
         for (var value : values.entrySet())
         {
-            size += _modelKey.FBEAllocationSize(value.getKey());
-            size += _modelValue.FBEAllocationSize(value.getValue());
+            size += _modelKey.fbeAllocationSize(value.getKey());
+            size += _modelValue.fbeAllocationSize(value.getValue());
         }
         return size;
     }
@@ -3416,27 +3416,27 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends FinalModel
     @Override
     public long verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return Long.MAX_VALUE;
 
-        int fbeMapSize = readInt32(FBEOffset());
+        int fbeMapSize = readInt32(fbeOffset());
 
         long size = 4;
-        _modelKey.FBEOffset(FBEOffset() + 4);
-        _modelValue.FBEOffset(FBEOffset() + 4);
+        _modelKey.fbeOffset(fbeOffset() + 4);
+        _modelValue.fbeOffset(fbeOffset() + 4);
         for (int i = fbeMapSize; i-- > 0;)
         {
             long offsetKey = _modelKey.verify();
             if (offsetKey == Long.MAX_VALUE)
                 return Long.MAX_VALUE;
-            _modelKey.FBEShift(offsetKey);
-            _modelValue.FBEShift(offsetKey);
+            _modelKey.fbeShift(offsetKey);
+            _modelValue.fbeShift(offsetKey);
             size += offsetKey;
             long offsetValue = _modelValue.verify();
             if (offsetValue == Long.MAX_VALUE)
                 return Long.MAX_VALUE;
-            _modelKey.FBEShift(offsetValue);
-            _modelValue.FBEShift(offsetValue);
+            _modelKey.fbeShift(offsetValue);
+            _modelValue.fbeShift(offsetValue);
             size += offsetValue;
         }
         return size;
@@ -3451,29 +3451,29 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends FinalModel
 
         values.clear();
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
-        long fbeMapSize = readInt32(FBEOffset());
+        long fbeMapSize = readInt32(fbeOffset());
         if (fbeMapSize == 0)
             return 4;
 
         long size = 4;
         var offset = new Size();
-        _modelKey.FBEOffset(FBEOffset() + 4);
-        _modelValue.FBEOffset(FBEOffset() + 4);
+        _modelKey.fbeOffset(fbeOffset() + 4);
+        _modelValue.fbeOffset(fbeOffset() + 4);
         for (long i = fbeMapSize; i-- > 0;)
         {
             offset.value = 0;
             _KEY_TYPE_ key = _modelKey.get(offset);
-            _modelKey.FBEShift(offset.value);
-            _modelValue.FBEShift(offset.value);
+            _modelKey.fbeShift(offset.value);
+            _modelValue.fbeShift(offset.value);
             size += offset.value;
             offset.value = 0;
             _VALUE_TYPE_ value = _modelValue.get(offset);
-            _modelKey.FBEShift(offset.value);
-            _modelValue.FBEShift(offset.value);
+            _modelKey.fbeShift(offset.value);
+            _modelValue.fbeShift(offset.value);
             size += offset.value;
             values.put(key, value);
         }
@@ -3489,29 +3489,29 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends FinalModel
 
         values.clear();
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
-        long fbeMapSize = readInt32(FBEOffset());
+        long fbeMapSize = readInt32(fbeOffset());
         if (fbeMapSize == 0)
             return 4;
 
         long size = 4;
         var offset = new Size();
-        _modelKey.FBEOffset(FBEOffset() + 4);
-        _modelValue.FBEOffset(FBEOffset() + 4);
+        _modelKey.fbeOffset(fbeOffset() + 4);
+        _modelValue.fbeOffset(fbeOffset() + 4);
         for (long i = fbeMapSize; i-- > 0;)
         {
             offset.value = 0;
             _KEY_TYPE_ key = _modelKey.get(offset);
-            _modelKey.FBEShift(offset.value);
-            _modelValue.FBEShift(offset.value);
+            _modelKey.fbeShift(offset.value);
+            _modelValue.fbeShift(offset.value);
             size += offset.value;
             offset.value = 0;
             _VALUE_TYPE_ value = _modelValue.get(offset);
-            _modelKey.FBEShift(offset.value);
-            _modelValue.FBEShift(offset.value);
+            _modelKey.fbeShift(offset.value);
+            _modelValue.fbeShift(offset.value);
             size += offset.value;
 
             values.put(key, value);
@@ -3526,23 +3526,23 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends FinalModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
-        write(FBEOffset(), (int)values.size());
+        write(fbeOffset(), (int)values.size());
 
         long size = 4;
-        _modelKey.FBEOffset(FBEOffset() + 4);
-        _modelValue.FBEOffset(FBEOffset() + 4);
+        _modelKey.fbeOffset(fbeOffset() + 4);
+        _modelValue.fbeOffset(fbeOffset() + 4);
         for (var value : values.entrySet())
         {
             long offsetKey = _modelKey.set(value.getKey());
-            _modelKey.FBEShift(offsetKey);
-            _modelValue.FBEShift(offsetKey);
+            _modelKey.fbeShift(offsetKey);
+            _modelValue.fbeShift(offsetKey);
             long offsetValue = _modelValue.set(value.getValue());
-            _modelKey.FBEShift(offsetValue);
-            _modelValue.FBEShift(offsetValue);
+            _modelKey.fbeShift(offsetValue);
+            _modelValue.fbeShift(offsetValue);
             size += offsetKey + offsetValue;
         }
         return size;
@@ -3555,23 +3555,23 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends FinalModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + 4) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + 4) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
-        write(FBEOffset(), (int)values.size());
+        write(fbeOffset(), (int)values.size());
 
         long size = 4;
-        _modelKey.FBEOffset(FBEOffset() + 4);
-        _modelValue.FBEOffset(FBEOffset() + 4);
+        _modelKey.fbeOffset(fbeOffset() + 4);
+        _modelValue.fbeOffset(fbeOffset() + 4);
         for (var value : values.entrySet())
         {
             long offsetKey = _modelKey.set(value.getKey());
-            _modelKey.FBEShift(offsetKey);
-            _modelValue.FBEShift(offsetKey);
+            _modelKey.fbeShift(offsetKey);
+            _modelValue.fbeShift(offsetKey);
             long offsetValue = _modelValue.set(value.getValue());
-            _modelKey.FBEShift(offsetValue);
-            _modelValue.FBEShift(offsetValue);
+            _modelKey.fbeShift(offsetValue);
+            _modelValue.fbeShift(offsetValue);
             size += offsetKey + offsetValue;
         }
         return size;
@@ -3624,41 +3624,41 @@ public final class FinalModel_NAME_ extends FinalModel
     public FinalModel_NAME_(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long FBEAllocationSize(_NAME_ value) { return FBESize(); }
+    public long fbeAllocationSize(_NAME_ value) { return fbeSize(); }
 
     // Get the final size
     @Override
-    public long FBESize() { return _SIZE_; }
+    public long fbeSize() { return _SIZE_; }
 
     // Check if the value is valid
     @Override
     public long verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return Long.MAX_VALUE;
 
-        return FBESize();
+        return fbeSize();
     }
 
     // Get the value
     public _NAME_ get(Size size)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return new _NAME_();
 
-        size.value = FBESize();
-        return new _NAME_(_READ_(FBEOffset()));
+        size.value = fbeSize();
+        return new _NAME_(_READ_(fbeOffset()));
     }
 
     // Set the value
     public long set(_NAME_ value)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        write(FBEOffset(), value.getRaw());
-        return FBESize();
+        write(fbeOffset(), value.getRaw());
+        return fbeSize();
     }
 }
 )CODE";
@@ -5406,7 +5406,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     if (s->base && !s->base->empty())
     {
         WriteLineIndent("parent = new " + ConvertBaseFieldName(*s->base, false) + "(buffer, " + prev_offset + " + " + prev_size + ");");
-        prev_offset = "parent.FBEOffset()";
+        prev_offset = "parent.fbeOffset()";
         prev_size = "parent.FBEBody() - 4 - 4";
     }
     if (s->body)
@@ -5414,8 +5414,8 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
         for (const auto& field : s->body->fields)
         {
             WriteLineIndent(*field->name + " = " + ConvertTypeFieldInitialization(*field, prev_offset + " + " + prev_size, false) + ";");
-            prev_offset = *field->name + ".FBEOffset()";
-            prev_size = *field->name + ".FBESize()";
+            prev_offset = *field->name + ".fbeOffset()";
+            prev_size = *field->name + ".fbeSize()";
         }
     }
     Indent(-1);
@@ -5425,7 +5425,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     WriteLine();
     WriteLineIndent("// Get the field size");
     WriteLineIndent("@Override");
-    WriteLineIndent("public long FBESize() { return 4; }");
+    WriteLineIndent("public long fbeSize() { return 4; }");
     WriteLineIndent("// Get the field body size");
     WriteLineIndent("public long FBEBody()");
     WriteLineIndent("{");
@@ -5436,7 +5436,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
         WriteLineIndent("+ parent.FBEBody() - 4 - 4");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("+ " + *field->name + ".FBESize()");
+            WriteLineIndent("+ " + *field->name + ".fbeSize()");
     WriteLineIndent(";");
     Indent(-1);
     WriteLineIndent("return fbeResult;");
@@ -5444,15 +5444,15 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     WriteLineIndent("}");
     WriteLineIndent("// Get the field extra size");
     WriteLineIndent("@Override");
-    WriteLineIndent("public long FBEExtra()");
+    WriteLineIndent("public long fbeExtra()");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())");
+    WriteLineIndent("if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())");
     Indent(1);
     WriteLineIndent("return 0;");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("int fbeStructOffset = readInt32(FBEOffset());");
+    WriteLineIndent("int fbeStructOffset = readInt32(fbeOffset());");
     WriteLineIndent("if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4) > _buffer.getSize()))");
     Indent(1);
     WriteLineIndent("return 0;");
@@ -5463,10 +5463,10 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     WriteLineIndent("long fbeResult = FBEBody()");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("+ parent.FBEExtra()");
+        WriteLineIndent("+ parent.fbeExtra()");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("+ " + *field->name + ".FBEExtra()");
+            WriteLineIndent("+ " + *field->name + ".fbeExtra()");
     WriteLineIndent(";");
     Indent(-1);
     WriteLine();
@@ -5490,12 +5490,12 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     WriteLineIndent("public boolean verify(boolean fbeVerifyType)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())");
+    WriteLineIndent("if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())");
     Indent(1);
     WriteLineIndent("return true;");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("int fbeStructOffset = readInt32(FBEOffset());");
+    WriteLineIndent("int fbeStructOffset = readInt32(fbeOffset());");
     WriteLineIndent("if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4 + 4) > _buffer.getSize()))");
     Indent(1);
     WriteLineIndent("return false;");
@@ -5545,7 +5545,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".FBESize()) > fbeStructSize)");
+            WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".fbeSize()) > fbeStructSize)");
             Indent(1);
             WriteLineIndent("return true;");
             Indent(-1);
@@ -5553,7 +5553,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
             Indent(1);
             WriteLineIndent("return false;");
             Indent(-1);
-            WriteLineIndent("fbeCurrentSize += " + *field->name + ".FBESize();");
+            WriteLineIndent("fbeCurrentSize += " + *field->name + ".fbeSize();");
         }
     }
     WriteLine();
@@ -5567,12 +5567,12 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     WriteLineIndent("public long getBegin()");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())");
+    WriteLineIndent("if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())");
     Indent(1);
     WriteLineIndent("return 0;");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("int fbeStructOffset = readInt32(FBEOffset());");
+    WriteLineIndent("int fbeStructOffset = readInt32(fbeOffset());");
     WriteLineIndent("assert ((fbeStructOffset > 0) && ((_buffer.getOffset() + fbeStructOffset + 4 + 4) <= _buffer.getSize())) : \"Model is broken!\";");
     WriteLineIndent("if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4 + 4) > _buffer.getSize()))");
     Indent(1);
@@ -5642,7 +5642,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".FBESize()) <= fbeStructSize)");
+            WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".fbeSize()) <= fbeStructSize)");
             Indent(1);
             if (field->array || field->vector || field->list || field->set || field->map || field->hash)
                 WriteLineIndent(*field->name + ".get(fbeValue." + *field->name + ");");
@@ -5656,7 +5656,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
             else
                 WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field.get()) + ";");
             Indent(-1);
-            WriteLineIndent("fbeCurrentSize += " + *field->name + ".FBESize();");
+            WriteLineIndent("fbeCurrentSize += " + *field->name + ".fbeSize();");
         }
     }
     Indent(-1);
@@ -5668,8 +5668,8 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     WriteLineIndent("public long setBegin()");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : \"Model is broken!\";");
-    WriteLineIndent("if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())");
+    WriteLineIndent("assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : \"Model is broken!\";");
+    WriteLineIndent("if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())");
     Indent(1);
     WriteLineIndent("return 0;");
     Indent(-1);
@@ -5682,7 +5682,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     WriteLineIndent("return 0;");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("write(FBEOffset(), fbeStructOffset);");
+    WriteLineIndent("write(fbeOffset(), fbeStructOffset);");
     WriteLineIndent("write(fbeStructOffset, fbeStructSize);");
     WriteLineIndent("write(fbeStructOffset + 4, (int)FBEType());");
     WriteLine();
@@ -5783,7 +5783,7 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
     // Generate struct model FBE properties
     WriteLine();
     WriteLineIndent("// Get the model size");
-    WriteLineIndent("public long FBESize() { return model.FBESize() + model.FBEExtra(); }");
+    WriteLineIndent("public long fbeSize() { return model.fbeSize() + model.fbeExtra(); }");
     WriteLineIndent("// Get the model type");
     WriteLineIndent("public static final long FBETypeConst = FieldModel" + *s->name + ".FBETypeConst;");
     WriteLineIndent("public long FBEType() { return FBETypeConst; }");
@@ -5794,13 +5794,13 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
     WriteLineIndent("public boolean verify()");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("if ((getBuffer().getOffset() + model.FBEOffset() - 4) > getBuffer().getSize())");
+    WriteLineIndent("if ((getBuffer().getOffset() + model.fbeOffset() - 4) > getBuffer().getSize())");
     Indent(1);
     WriteLineIndent("return false;");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("int fbeFullSize = readInt32(model.FBEOffset() - 4);");
-    WriteLineIndent("if (fbeFullSize < model.FBESize())");
+    WriteLineIndent("int fbeFullSize = readInt32(model.fbeOffset() - 4);");
+    WriteLineIndent("if (fbeFullSize < model.fbeSize())");
     Indent(1);
     WriteLineIndent("return false;");
     Indent(-1);
@@ -5815,7 +5815,7 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
     WriteLineIndent("public long createBegin()");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeBegin = getBuffer().allocate(4 + model.FBESize());");
+    WriteLineIndent("long fbeBegin = getBuffer().allocate(4 + model.fbeSize());");
     WriteLineIndent("return fbeBegin;");
     Indent(-1);
     WriteLineIndent("}");
@@ -5828,7 +5828,7 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
     Indent(1);
     WriteLineIndent("long fbeEnd = getBuffer().getSize();");
     WriteLineIndent("int fbeFullSize = (int)(fbeEnd - fbeBegin);");
-    WriteLineIndent("write(model.FBEOffset() - 4, fbeFullSize);");
+    WriteLineIndent("write(model.fbeOffset() - 4, fbeFullSize);");
     WriteLineIndent("return fbeFullSize;");
     Indent(-1);
     WriteLineIndent("}");
@@ -5853,7 +5853,7 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
     WriteLineIndent("public long deserialize(" + *s->name + " value)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("if ((getBuffer().getOffset() + model.FBEOffset() - 4) > getBuffer().getSize())");
+    WriteLineIndent("if ((getBuffer().getOffset() + model.fbeOffset() - 4) > getBuffer().getSize())");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("value = new " + *s->name + "();");
@@ -5861,9 +5861,9 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("int fbeFullSize = readInt32(model.FBEOffset() - 4);");
-    WriteLineIndent("assert (fbeFullSize >= model.FBESize()) : \"Model is broken!\";");
-    WriteLineIndent("if (fbeFullSize < model.FBESize())");
+    WriteLineIndent("int fbeFullSize = readInt32(model.fbeOffset() - 4);");
+    WriteLineIndent("assert (fbeFullSize >= model.fbeSize()) : \"Model is broken!\";");
+    WriteLineIndent("if (fbeFullSize < model.fbeSize())");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("value = new " + *s->name + "();");
@@ -5882,7 +5882,7 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
     WriteLineIndent("public void next(long prev)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("model.FBEShift(prev);");
+    WriteLineIndent("model.fbeShift(prev);");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5950,16 +5950,16 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     // Generate struct final model FBE properties
     WriteLine();
     WriteLineIndent("// Get the allocation size");
-    WriteLineIndent("public long FBEAllocationSize(" + *s->name + " fbeValue)");
+    WriteLineIndent("public long fbeAllocationSize(" + *s->name + " fbeValue)");
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("long fbeResult = 0");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("+ parent.FBEAllocationSize(fbeValue)");
+        WriteLineIndent("+ parent.fbeAllocationSize(fbeValue)");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("+ " + *field->name + ".FBEAllocationSize(fbeValue." + *field->name + ")");
+            WriteLineIndent("+ " + *field->name + ".fbeAllocationSize(fbeValue." + *field->name + ")");
     WriteLineIndent(";");
     Indent(-1);
     WriteLineIndent("return fbeResult;");
@@ -5980,9 +5980,9 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     WriteLineIndent("public long verify()");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("_buffer.shift(FBEOffset());");
+    WriteLineIndent("_buffer.shift(fbeOffset());");
     WriteLineIndent("long fbeResult = verifyFields();");
-    WriteLineIndent("_buffer.unshift(FBEOffset());");
+    WriteLineIndent("_buffer.unshift(fbeOffset());");
     WriteLineIndent("return fbeResult;");
     Indent(-1);
     WriteLineIndent("}");
@@ -5998,7 +5998,7 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("parent.FBEOffset(fbeCurrentOffset);");
+        WriteLineIndent("parent.fbeOffset(fbeCurrentOffset);");
         WriteLineIndent("fbeFieldSize = parent.verifyFields();");
         WriteLineIndent("if (fbeFieldSize == Long.MAX_VALUE)");
         Indent(1);
@@ -6011,7 +6011,7 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent(*field->name + ".FBEOffset(fbeCurrentOffset);");
+            WriteLineIndent(*field->name + ".fbeOffset(fbeCurrentOffset);");
             WriteLineIndent("fbeFieldSize = " + *field->name + ".verify();");
             WriteLineIndent("if (fbeFieldSize == Long.MAX_VALUE)");
             Indent(1);
@@ -6032,9 +6032,9 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     WriteLineIndent("public " + *s->name + " get(Size fbeSize, " + *s->name + " fbeValue)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("_buffer.shift(FBEOffset());");
+    WriteLineIndent("_buffer.shift(fbeOffset());");
     WriteLineIndent("fbeSize.value = getFields(fbeValue);");
-    WriteLineIndent("_buffer.unshift(FBEOffset());");
+    WriteLineIndent("_buffer.unshift(fbeOffset());");
     WriteLineIndent("return fbeValue;");
     Indent(-1);
     WriteLineIndent("}");
@@ -6051,7 +6051,7 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("parent.FBEOffset(fbeCurrentOffset);");
+        WriteLineIndent("parent.fbeOffset(fbeCurrentOffset);");
         WriteLineIndent("fbeFieldSize.value = parent.getFields(fbeValue);");
         WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value;");
         WriteLineIndent("fbeCurrentSize += fbeFieldSize.value;");
@@ -6061,7 +6061,7 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent(*field->name + ".FBEOffset(fbeCurrentOffset);");
+            WriteLineIndent(*field->name + ".fbeOffset(fbeCurrentOffset);");
             if (field->array || field->vector || field->list || field->set || field->map || field->hash)
                 WriteLineIndent("fbeFieldSize.value = " + *field->name + ".get(fbeValue." + *field->name + ");");
             else
@@ -6081,9 +6081,9 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     WriteLineIndent("public long set(" + *s->name + " fbeValue)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("_buffer.shift(FBEOffset());");
+    WriteLineIndent("_buffer.shift(fbeOffset());");
     WriteLineIndent("long fbeSize = setFields(fbeValue);");
-    WriteLineIndent("_buffer.unshift(FBEOffset());");
+    WriteLineIndent("_buffer.unshift(fbeOffset());");
     WriteLineIndent("return fbeSize;");
     Indent(-1);
     WriteLineIndent("}");
@@ -6100,7 +6100,7 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("parent.FBEOffset(fbeCurrentOffset);");
+        WriteLineIndent("parent.fbeOffset(fbeCurrentOffset);");
         WriteLineIndent("fbeFieldSize.value = parent.setFields(fbeValue);");
         WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value;");
         WriteLineIndent("fbeCurrentSize += fbeFieldSize.value;");
@@ -6110,7 +6110,7 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent(*field->name + ".FBEOffset(fbeCurrentOffset);");
+            WriteLineIndent(*field->name + ".fbeOffset(fbeCurrentOffset);");
             WriteLineIndent("fbeFieldSize.value = " + *field->name + ".set(fbeValue." + *field->name + ");");
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value;");
             WriteLineIndent("fbeCurrentSize += fbeFieldSize.value;");
@@ -6181,13 +6181,13 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
     WriteLineIndent("public boolean verify()");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("if ((getBuffer().getOffset() + _model.FBEOffset()) > getBuffer().getSize())");
+    WriteLineIndent("if ((getBuffer().getOffset() + _model.fbeOffset()) > getBuffer().getSize())");
     Indent(1);
     WriteLineIndent("return false;");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("int fbeStructSize = readInt32(_model.FBEOffset() - 8);");
-    WriteLineIndent("int fbeStructType = readInt32(_model.FBEOffset() - 4);");
+    WriteLineIndent("int fbeStructSize = readInt32(_model.fbeOffset() - 8);");
+    WriteLineIndent("int fbeStructType = readInt32(_model.fbeOffset() - 4);");
     WriteLineIndent("if ((fbeStructSize <= 0) || (fbeStructType != FBEType()))");
     Indent(1);
     WriteLineIndent("return false;");
@@ -6206,7 +6206,7 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
     WriteLineIndent("long fbeInitialSize = getBuffer().getSize();");
     WriteLine();
     WriteLineIndent("int fbeStructType = (int)FBEType();");
-    WriteLineIndent("int fbeStructSize = (int)(8 + _model.FBEAllocationSize(value));");
+    WriteLineIndent("int fbeStructSize = (int)(8 + _model.fbeAllocationSize(value));");
     WriteLineIndent("int fbeStructOffset = (int)(getBuffer().allocate(fbeStructSize) - getBuffer().getOffset());");
     WriteLineIndent("assert ((getBuffer().getOffset() + fbeStructOffset + fbeStructSize) <= getBuffer().getSize()) : \"Model is broken!\";");
     WriteLineIndent("if ((getBuffer().getOffset() + fbeStructOffset + fbeStructSize) > getBuffer().getSize())");
@@ -6217,8 +6217,8 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
     WriteLineIndent("fbeStructSize = (int)(8 + _model.set(value));");
     WriteLineIndent("getBuffer().resize(fbeInitialSize + fbeStructSize);");
     WriteLine();
-    WriteLineIndent("write(_model.FBEOffset() - 8, fbeStructSize);");
-    WriteLineIndent("write(_model.FBEOffset() - 4, fbeStructType);");
+    WriteLineIndent("write(_model.fbeOffset() - 8, fbeStructSize);");
+    WriteLineIndent("write(_model.fbeOffset() - 4, fbeStructType);");
     WriteLine();
     WriteLineIndent("return fbeStructSize;");
     Indent(-1);
@@ -6231,14 +6231,14 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
     WriteLineIndent("public long deserialize(" + *s->name + " value)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("assert ((getBuffer().getOffset() + _model.FBEOffset()) <= getBuffer().getSize()) : \"Model is broken!\";");
-    WriteLineIndent("if ((getBuffer().getOffset() + _model.FBEOffset()) > getBuffer().getSize())");
+    WriteLineIndent("assert ((getBuffer().getOffset() + _model.fbeOffset()) <= getBuffer().getSize()) : \"Model is broken!\";");
+    WriteLineIndent("if ((getBuffer().getOffset() + _model.fbeOffset()) > getBuffer().getSize())");
     Indent(1);
     WriteLineIndent("return 0;");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("long fbeStructSize = readInt32(_model.FBEOffset() - 8);");
-    WriteLineIndent("long fbeStructType = readInt32(_model.FBEOffset() - 4);");
+    WriteLineIndent("long fbeStructSize = readInt32(_model.fbeOffset() - 8);");
+    WriteLineIndent("long fbeStructType = readInt32(_model.fbeOffset() - 4);");
     WriteLineIndent("assert ((fbeStructSize > 0) && (fbeStructType == FBEType())) : \"Model is broken!\";");
     WriteLineIndent("if ((fbeStructSize <= 0) || (fbeStructType != FBEType()))");
     Indent(1);
@@ -6257,7 +6257,7 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
     WriteLineIndent("public void next(long prev)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("_model.FBEShift(prev);");
+    WriteLineIndent("_model.fbeShift(prev);");
     Indent(-1);
     WriteLineIndent("}");
 

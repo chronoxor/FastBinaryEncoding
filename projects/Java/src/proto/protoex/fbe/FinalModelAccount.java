@@ -36,15 +36,15 @@ public final class FinalModelAccount extends FinalModel
     }
 
     // Get the allocation size
-    public long FBEAllocationSize(Account fbeValue)
+    public long fbeAllocationSize(Account fbeValue)
     {
         long fbeResult = 0
-            + uid.FBEAllocationSize(fbeValue.uid)
-            + name.FBEAllocationSize(fbeValue.name)
-            + state.FBEAllocationSize(fbeValue.state)
-            + wallet.FBEAllocationSize(fbeValue.wallet)
-            + asset.FBEAllocationSize(fbeValue.asset)
-            + orders.FBEAllocationSize(fbeValue.orders)
+            + uid.fbeAllocationSize(fbeValue.uid)
+            + name.fbeAllocationSize(fbeValue.name)
+            + state.fbeAllocationSize(fbeValue.state)
+            + wallet.fbeAllocationSize(fbeValue.wallet)
+            + asset.fbeAllocationSize(fbeValue.asset)
+            + orders.fbeAllocationSize(fbeValue.orders)
             ;
         return fbeResult;
     }
@@ -57,9 +57,9 @@ public final class FinalModelAccount extends FinalModel
     @Override
     public long verify()
     {
-        _buffer.shift(FBEOffset());
+        _buffer.shift(fbeOffset());
         long fbeResult = verifyFields();
-        _buffer.unshift(FBEOffset());
+        _buffer.unshift(fbeOffset());
         return fbeResult;
     }
 
@@ -69,37 +69,37 @@ public final class FinalModelAccount extends FinalModel
         long fbeCurrentOffset = 0;
         long fbeFieldSize = 0;
 
-        uid.FBEOffset(fbeCurrentOffset);
+        uid.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = uid.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        name.FBEOffset(fbeCurrentOffset);
+        name.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = name.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        state.FBEOffset(fbeCurrentOffset);
+        state.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = state.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        wallet.FBEOffset(fbeCurrentOffset);
+        wallet.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = wallet.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        asset.FBEOffset(fbeCurrentOffset);
+        asset.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = asset.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        orders.FBEOffset(fbeCurrentOffset);
+        orders.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = orders.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
@@ -112,9 +112,9 @@ public final class FinalModelAccount extends FinalModel
     public Account get(Size fbeSize) { return get(fbeSize, new Account()); }
     public Account get(Size fbeSize, Account fbeValue)
     {
-        _buffer.shift(FBEOffset());
+        _buffer.shift(fbeOffset());
         fbeSize.value = getFields(fbeValue);
-        _buffer.unshift(FBEOffset());
+        _buffer.unshift(fbeOffset());
         return fbeValue;
     }
 
@@ -125,32 +125,32 @@ public final class FinalModelAccount extends FinalModel
         long fbeCurrentSize = 0;
         var fbeFieldSize = new Size(0);
 
-        uid.FBEOffset(fbeCurrentOffset);
+        uid.fbeOffset(fbeCurrentOffset);
         fbeValue.uid = uid.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        name.FBEOffset(fbeCurrentOffset);
+        name.fbeOffset(fbeCurrentOffset);
         fbeValue.name = name.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        state.FBEOffset(fbeCurrentOffset);
+        state.fbeOffset(fbeCurrentOffset);
         fbeValue.state = state.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        wallet.FBEOffset(fbeCurrentOffset);
+        wallet.fbeOffset(fbeCurrentOffset);
         fbeValue.wallet = wallet.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        asset.FBEOffset(fbeCurrentOffset);
+        asset.fbeOffset(fbeCurrentOffset);
         fbeValue.asset = asset.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        orders.FBEOffset(fbeCurrentOffset);
+        orders.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = orders.get(fbeValue.orders);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
@@ -161,9 +161,9 @@ public final class FinalModelAccount extends FinalModel
     // Set the struct value
     public long set(Account fbeValue)
     {
-        _buffer.shift(FBEOffset());
+        _buffer.shift(fbeOffset());
         long fbeSize = setFields(fbeValue);
-        _buffer.unshift(FBEOffset());
+        _buffer.unshift(fbeOffset());
         return fbeSize;
     }
 
@@ -174,32 +174,32 @@ public final class FinalModelAccount extends FinalModel
         long fbeCurrentSize = 0;
         var fbeFieldSize = new Size(0);
 
-        uid.FBEOffset(fbeCurrentOffset);
+        uid.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = uid.set(fbeValue.uid);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        name.FBEOffset(fbeCurrentOffset);
+        name.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = name.set(fbeValue.name);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        state.FBEOffset(fbeCurrentOffset);
+        state.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = state.set(fbeValue.state);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        wallet.FBEOffset(fbeCurrentOffset);
+        wallet.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = wallet.set(fbeValue.wallet);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        asset.FBEOffset(fbeCurrentOffset);
+        asset.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = asset.set(fbeValue.asset);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        orders.FBEOffset(fbeCurrentOffset);
+        orders.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = orders.set(fbeValue.orders);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;

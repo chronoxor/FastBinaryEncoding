@@ -28,11 +28,11 @@ public final class FinalModelBalance extends FinalModel
     }
 
     // Get the allocation size
-    public long FBEAllocationSize(Balance fbeValue)
+    public long fbeAllocationSize(Balance fbeValue)
     {
         long fbeResult = 0
-            + parent.FBEAllocationSize(fbeValue)
-            + locked.FBEAllocationSize(fbeValue.locked)
+            + parent.fbeAllocationSize(fbeValue)
+            + locked.fbeAllocationSize(fbeValue.locked)
             ;
         return fbeResult;
     }
@@ -45,9 +45,9 @@ public final class FinalModelBalance extends FinalModel
     @Override
     public long verify()
     {
-        _buffer.shift(FBEOffset());
+        _buffer.shift(fbeOffset());
         long fbeResult = verifyFields();
-        _buffer.unshift(FBEOffset());
+        _buffer.unshift(fbeOffset());
         return fbeResult;
     }
 
@@ -57,13 +57,13 @@ public final class FinalModelBalance extends FinalModel
         long fbeCurrentOffset = 0;
         long fbeFieldSize = 0;
 
-        parent.FBEOffset(fbeCurrentOffset);
+        parent.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = parent.verifyFields();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        locked.FBEOffset(fbeCurrentOffset);
+        locked.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = locked.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
@@ -76,9 +76,9 @@ public final class FinalModelBalance extends FinalModel
     public Balance get(Size fbeSize) { return get(fbeSize, new Balance()); }
     public Balance get(Size fbeSize, Balance fbeValue)
     {
-        _buffer.shift(FBEOffset());
+        _buffer.shift(fbeOffset());
         fbeSize.value = getFields(fbeValue);
-        _buffer.unshift(FBEOffset());
+        _buffer.unshift(fbeOffset());
         return fbeValue;
     }
 
@@ -89,12 +89,12 @@ public final class FinalModelBalance extends FinalModel
         long fbeCurrentSize = 0;
         var fbeFieldSize = new Size(0);
 
-        parent.FBEOffset(fbeCurrentOffset);
+        parent.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = parent.getFields(fbeValue);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        locked.FBEOffset(fbeCurrentOffset);
+        locked.fbeOffset(fbeCurrentOffset);
         fbeValue.locked = locked.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
@@ -105,9 +105,9 @@ public final class FinalModelBalance extends FinalModel
     // Set the struct value
     public long set(Balance fbeValue)
     {
-        _buffer.shift(FBEOffset());
+        _buffer.shift(fbeOffset());
         long fbeSize = setFields(fbeValue);
-        _buffer.unshift(FBEOffset());
+        _buffer.unshift(fbeOffset());
         return fbeSize;
     }
 
@@ -118,12 +118,12 @@ public final class FinalModelBalance extends FinalModel
         long fbeCurrentSize = 0;
         var fbeFieldSize = new Size(0);
 
-        parent.FBEOffset(fbeCurrentOffset);
+        parent.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = parent.setFields(fbeValue);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        locked.FBEOffset(fbeCurrentOffset);
+        locked.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = locked.set(fbeValue.locked);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;

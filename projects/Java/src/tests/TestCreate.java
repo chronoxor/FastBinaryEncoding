@@ -10,7 +10,7 @@ public class TestCreate
     {
         // Create a new account using FBE model into the FBE stream
         var writer = new proto.fbe.AccountModel();
-        Assert.assertEquals(writer.model.FBEOffset(), 4);
+        Assert.assertEquals(writer.model.fbeOffset(), 4);
         long model_begin = writer.createBegin();
         long account_begin = writer.model.setBegin();
         writer.model.uid.set(1);
@@ -35,7 +35,7 @@ public class TestCreate
         order.price.set(1.23456);
         order.volume.set(1000.0);
         order.setEnd(order_begin);
-        order.FBEShift(order.FBESize());
+        order.fbeShift(order.fbeSize());
         order_begin = order.setBegin();
         order.uid.set(2);
         order.symbol.set("EURUSD");
@@ -44,7 +44,7 @@ public class TestCreate
         order.price.set(1.0);
         order.volume.set(100.0);
         order.setEnd(order_begin);
-        order.FBEShift(order.FBESize());
+        order.fbeShift(order.fbeSize());
         order_begin = order.setBegin();
         order.uid.set(3);
         order.symbol.set("EURUSD");
@@ -53,20 +53,20 @@ public class TestCreate
         order.price.set(1.5);
         order.volume.set(10.0);
         order.setEnd(order_begin);
-        order.FBEShift(order.FBESize());
+        order.fbeShift(order.fbeSize());
         writer.model.setEnd(account_begin);
         long serialized = writer.createEnd(model_begin);
         Assert.assertEquals(serialized, writer.getBuffer().getSize());
         Assert.assertTrue(writer.verify());
         writer.next(serialized);
-        Assert.assertEquals(writer.model.FBEOffset(), (4 + writer.getBuffer().getSize()));
+        Assert.assertEquals(writer.model.fbeOffset(), (4 + writer.getBuffer().getSize()));
 
         // Check the serialized FBE size
         Assert.assertEquals(writer.getBuffer().getSize(), 252);
 
         // Access the account model in the FBE stream
         var reader = new proto.fbe.AccountModel();
-        Assert.assertEquals(reader.model.FBEOffset(), 4);
+        Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
         Assert.assertTrue(reader.verify());
 

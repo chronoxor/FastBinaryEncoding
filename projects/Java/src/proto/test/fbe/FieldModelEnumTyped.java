@@ -21,25 +21,25 @@ public final class FieldModelEnumTyped extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return 1; }
+    public long fbeSize() { return 1; }
 
     // Get the value
     public EnumTyped get() { return get(new EnumTyped()); }
     public EnumTyped get(EnumTyped defaults)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
 
-        return new EnumTyped(readInt8(FBEOffset()));
+        return new EnumTyped(readInt8(fbeOffset()));
     }
 
     // Set the value
     public void set(EnumTyped value)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
-        write(FBEOffset(), value.getRaw());
+        write(fbeOffset(), value.getRaw());
     }
 }

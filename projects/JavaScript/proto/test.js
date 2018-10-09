@@ -132,7 +132,7 @@ class FieldModelEnumSimple extends fbe.FieldModel {
    * @this {!FieldModelEnumSimple}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -143,11 +143,11 @@ class FieldModelEnumSimple extends fbe.FieldModel {
    * @returns {!EnumSimple} Result value
    */
   get (defaults = new EnumSimple()) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
-    return new EnumSimple(this.readInt32(this.FBEOffset))
+    return new EnumSimple(this.readInt32(this.fbeOffset))
   }
 
   /**
@@ -156,12 +156,12 @@ class FieldModelEnumSimple extends fbe.FieldModel {
    * @param {!EnumSimple} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
-    this.writeInt32(this.FBEOffset, value.value)
+    this.writeInt32(this.fbeOffset, value.value)
   }
 }
 exports.FieldModelEnumSimple = FieldModelEnumSimple
@@ -176,8 +176,8 @@ class FinalModelEnumSimple extends fbe.FinalModel {
    * @param {!EnumSimple} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -185,7 +185,7 @@ class FinalModelEnumSimple extends fbe.FinalModel {
    * @this {!FieldModelEnumSimple}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -195,11 +195,11 @@ class FinalModelEnumSimple extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -208,11 +208,11 @@ class FinalModelEnumSimple extends fbe.FinalModel {
    * @returns {!object} Result value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: new EnumSimple(), size: 0 }
     }
 
-    return { value: new EnumSimple(this.readInt32(this.FBEOffset)), size: this.FBESize }
+    return { value: new EnumSimple(this.readInt32(this.fbeOffset)), size: this.fbeSize }
   }
 
   /**
@@ -222,13 +222,13 @@ class FinalModelEnumSimple extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    this.writeInt32(this.FBEOffset, value.value)
-    return this.FBESize
+    this.writeInt32(this.fbeOffset, value.value)
+    return this.fbeSize
   }
 }
 
@@ -352,7 +352,7 @@ class FieldModelEnumTyped extends fbe.FieldModel {
    * @this {!FieldModelEnumTyped}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 1
   }
 
@@ -363,11 +363,11 @@ class FieldModelEnumTyped extends fbe.FieldModel {
    * @returns {!EnumTyped} Result value
    */
   get (defaults = new EnumTyped()) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
-    return new EnumTyped(this.readUInt8(this.FBEOffset))
+    return new EnumTyped(this.readUInt8(this.fbeOffset))
   }
 
   /**
@@ -376,12 +376,12 @@ class FieldModelEnumTyped extends fbe.FieldModel {
    * @param {!EnumTyped} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
-    this.writeUInt8(this.FBEOffset, value.value)
+    this.writeUInt8(this.fbeOffset, value.value)
   }
 }
 exports.FieldModelEnumTyped = FieldModelEnumTyped
@@ -396,8 +396,8 @@ class FinalModelEnumTyped extends fbe.FinalModel {
    * @param {!EnumTyped} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -405,7 +405,7 @@ class FinalModelEnumTyped extends fbe.FinalModel {
    * @this {!FieldModelEnumTyped}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return 1
   }
 
@@ -415,11 +415,11 @@ class FinalModelEnumTyped extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -428,11 +428,11 @@ class FinalModelEnumTyped extends fbe.FinalModel {
    * @returns {!object} Result value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: new EnumTyped(), size: 0 }
     }
 
-    return { value: new EnumTyped(this.readUInt8(this.FBEOffset)), size: this.FBESize }
+    return { value: new EnumTyped(this.readUInt8(this.fbeOffset)), size: this.fbeSize }
   }
 
   /**
@@ -442,13 +442,13 @@ class FinalModelEnumTyped extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    this.writeUInt8(this.FBEOffset, value.value)
-    return this.FBESize
+    this.writeUInt8(this.fbeOffset, value.value)
+    return this.fbeSize
   }
 }
 
@@ -634,7 +634,7 @@ class FieldModelFlagsSimple extends fbe.FieldModel {
    * @this {!FieldModelFlagsSimple}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -645,11 +645,11 @@ class FieldModelFlagsSimple extends fbe.FieldModel {
    * @returns {!FlagsSimple} Result value
    */
   get (defaults = new FlagsSimple()) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
-    return new FlagsSimple(this.readInt32(this.FBEOffset))
+    return new FlagsSimple(this.readInt32(this.fbeOffset))
   }
 
   /**
@@ -658,12 +658,12 @@ class FieldModelFlagsSimple extends fbe.FieldModel {
    * @param {!FlagsSimple} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
-    this.writeInt32(this.FBEOffset, value.value)
+    this.writeInt32(this.fbeOffset, value.value)
   }
 }
 
@@ -679,8 +679,8 @@ class FinalModelFlagsSimple extends fbe.FinalModel {
    * @param {!FlagsSimple} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -688,7 +688,7 @@ class FinalModelFlagsSimple extends fbe.FinalModel {
    * @this {!FieldModelFlagsSimple}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -698,11 +698,11 @@ class FinalModelFlagsSimple extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -711,11 +711,11 @@ class FinalModelFlagsSimple extends fbe.FinalModel {
    * @returns {!object} Result value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: new FlagsSimple(), size: 0 }
     }
 
-    return { value: new FlagsSimple(this.readInt32(this.FBEOffset)), size: this.FBESize }
+    return { value: new FlagsSimple(this.readInt32(this.fbeOffset)), size: this.fbeSize }
   }
 
   /**
@@ -725,13 +725,13 @@ class FinalModelFlagsSimple extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    this.writeInt32(this.FBEOffset, value.value)
-    return this.FBESize
+    this.writeInt32(this.fbeOffset, value.value)
+    return this.fbeSize
   }
 }
 
@@ -945,7 +945,7 @@ class FieldModelFlagsTyped extends fbe.FieldModel {
    * @this {!FieldModelFlagsTyped}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 8
   }
 
@@ -956,11 +956,11 @@ class FieldModelFlagsTyped extends fbe.FieldModel {
    * @returns {!FlagsTyped} Result value
    */
   get (defaults = new FlagsTyped()) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return defaults
     }
 
-    return new FlagsTyped(this.readUInt64(this.FBEOffset).toNumber())
+    return new FlagsTyped(this.readUInt64(this.fbeOffset).toNumber())
   }
 
   /**
@@ -969,12 +969,12 @@ class FieldModelFlagsTyped extends fbe.FieldModel {
    * @param {!FlagsTyped} value Value
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return
     }
 
-    this.writeUInt64(this.FBEOffset, UInt64.fromNumber(value.value))
+    this.writeUInt64(this.fbeOffset, UInt64.fromNumber(value.value))
   }
 }
 
@@ -990,8 +990,8 @@ class FinalModelFlagsTyped extends fbe.FinalModel {
    * @param {!FlagsTyped} value Value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (value) {
-    return this.FBESize
+  fbeAllocationSize (value) {
+    return this.fbeSize
   }
 
   /**
@@ -999,7 +999,7 @@ class FinalModelFlagsTyped extends fbe.FinalModel {
    * @this {!FieldModelFlagsTyped}
    * @returns {!number} Final size
    */
-  get FBESize () {
+  get fbeSize () {
     return 8
   }
 
@@ -1009,11 +1009,11 @@ class FinalModelFlagsTyped extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return Number.MAX_SAFE_INTEGER
     }
 
-    return this.FBESize
+    return this.fbeSize
   }
 
   /**
@@ -1022,11 +1022,11 @@ class FinalModelFlagsTyped extends fbe.FinalModel {
    * @returns {!object} Result value and its size
    */
   get () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return { value: new FlagsTyped(), size: 0 }
     }
 
-    return { value: new FlagsTyped(this.readUInt64(this.FBEOffset).toNumber()), size: this.FBESize }
+    return { value: new FlagsTyped(this.readUInt64(this.fbeOffset).toNumber()), size: this.fbeSize }
   }
 
   /**
@@ -1036,13 +1036,13 @@ class FinalModelFlagsTyped extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (value) {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    this.writeUInt64(this.FBEOffset, UInt64.fromNumber(value.value))
-    return this.FBESize
+    this.writeUInt64(this.fbeOffset, UInt64.fromNumber(value.value))
+    return this.fbeSize
   }
 }
 
@@ -1687,50 +1687,50 @@ class FieldModelStructSimple extends fbe.FieldModel {
   constructor (buffer, offset) {
     super(buffer, offset)
     this._uid = new fbe.FieldModelInt32(buffer, 4 + 4)
-    this._f1 = new fbe.FieldModelBool(buffer, this._uid.FBEOffset + this._uid.FBESize)
-    this._f2 = new fbe.FieldModelBool(buffer, this._f1.FBEOffset + this._f1.FBESize)
-    this._f3 = new fbe.FieldModelByte(buffer, this._f2.FBEOffset + this._f2.FBESize)
-    this._f4 = new fbe.FieldModelByte(buffer, this._f3.FBEOffset + this._f3.FBESize)
-    this._f5 = new fbe.FieldModelChar(buffer, this._f4.FBEOffset + this._f4.FBESize)
-    this._f6 = new fbe.FieldModelChar(buffer, this._f5.FBEOffset + this._f5.FBESize)
-    this._f7 = new fbe.FieldModelWChar(buffer, this._f6.FBEOffset + this._f6.FBESize)
-    this._f8 = new fbe.FieldModelWChar(buffer, this._f7.FBEOffset + this._f7.FBESize)
-    this._f9 = new fbe.FieldModelInt8(buffer, this._f8.FBEOffset + this._f8.FBESize)
-    this._f10 = new fbe.FieldModelInt8(buffer, this._f9.FBEOffset + this._f9.FBESize)
-    this._f11 = new fbe.FieldModelUInt8(buffer, this._f10.FBEOffset + this._f10.FBESize)
-    this._f12 = new fbe.FieldModelUInt8(buffer, this._f11.FBEOffset + this._f11.FBESize)
-    this._f13 = new fbe.FieldModelInt16(buffer, this._f12.FBEOffset + this._f12.FBESize)
-    this._f14 = new fbe.FieldModelInt16(buffer, this._f13.FBEOffset + this._f13.FBESize)
-    this._f15 = new fbe.FieldModelUInt16(buffer, this._f14.FBEOffset + this._f14.FBESize)
-    this._f16 = new fbe.FieldModelUInt16(buffer, this._f15.FBEOffset + this._f15.FBESize)
-    this._f17 = new fbe.FieldModelInt32(buffer, this._f16.FBEOffset + this._f16.FBESize)
-    this._f18 = new fbe.FieldModelInt32(buffer, this._f17.FBEOffset + this._f17.FBESize)
-    this._f19 = new fbe.FieldModelUInt32(buffer, this._f18.FBEOffset + this._f18.FBESize)
-    this._f20 = new fbe.FieldModelUInt32(buffer, this._f19.FBEOffset + this._f19.FBESize)
-    this._f21 = new fbe.FieldModelInt64(buffer, this._f20.FBEOffset + this._f20.FBESize)
-    this._f22 = new fbe.FieldModelInt64(buffer, this._f21.FBEOffset + this._f21.FBESize)
-    this._f23 = new fbe.FieldModelUInt64(buffer, this._f22.FBEOffset + this._f22.FBESize)
-    this._f24 = new fbe.FieldModelUInt64(buffer, this._f23.FBEOffset + this._f23.FBESize)
-    this._f25 = new fbe.FieldModelFloat(buffer, this._f24.FBEOffset + this._f24.FBESize)
-    this._f26 = new fbe.FieldModelFloat(buffer, this._f25.FBEOffset + this._f25.FBESize)
-    this._f27 = new fbe.FieldModelDouble(buffer, this._f26.FBEOffset + this._f26.FBESize)
-    this._f28 = new fbe.FieldModelDouble(buffer, this._f27.FBEOffset + this._f27.FBESize)
-    this._f29 = new fbe.FieldModelDecimal(buffer, this._f28.FBEOffset + this._f28.FBESize)
-    this._f30 = new fbe.FieldModelDecimal(buffer, this._f29.FBEOffset + this._f29.FBESize)
-    this._f31 = new fbe.FieldModelString(buffer, this._f30.FBEOffset + this._f30.FBESize)
-    this._f32 = new fbe.FieldModelString(buffer, this._f31.FBEOffset + this._f31.FBESize)
-    this._f33 = new fbe.FieldModelTimestamp(buffer, this._f32.FBEOffset + this._f32.FBESize)
-    this._f34 = new fbe.FieldModelTimestamp(buffer, this._f33.FBEOffset + this._f33.FBESize)
-    this._f35 = new fbe.FieldModelTimestamp(buffer, this._f34.FBEOffset + this._f34.FBESize)
-    this._f36 = new fbe.FieldModelUUID(buffer, this._f35.FBEOffset + this._f35.FBESize)
-    this._f37 = new fbe.FieldModelUUID(buffer, this._f36.FBEOffset + this._f36.FBESize)
-    this._f38 = new fbe.FieldModelUUID(buffer, this._f37.FBEOffset + this._f37.FBESize)
-    this._f39 = new proto.FieldModelOrderSide(buffer, this._f38.FBEOffset + this._f38.FBESize)
-    this._f40 = new proto.FieldModelOrderType(buffer, this._f39.FBEOffset + this._f39.FBESize)
-    this._f41 = new proto.FieldModelOrder(buffer, this._f40.FBEOffset + this._f40.FBESize)
-    this._f42 = new proto.FieldModelBalance(buffer, this._f41.FBEOffset + this._f41.FBESize)
-    this._f43 = new proto.FieldModelState(buffer, this._f42.FBEOffset + this._f42.FBESize)
-    this._f44 = new proto.FieldModelAccount(buffer, this._f43.FBEOffset + this._f43.FBESize)
+    this._f1 = new fbe.FieldModelBool(buffer, this._uid.fbeOffset + this._uid.fbeSize)
+    this._f2 = new fbe.FieldModelBool(buffer, this._f1.fbeOffset + this._f1.fbeSize)
+    this._f3 = new fbe.FieldModelByte(buffer, this._f2.fbeOffset + this._f2.fbeSize)
+    this._f4 = new fbe.FieldModelByte(buffer, this._f3.fbeOffset + this._f3.fbeSize)
+    this._f5 = new fbe.FieldModelChar(buffer, this._f4.fbeOffset + this._f4.fbeSize)
+    this._f6 = new fbe.FieldModelChar(buffer, this._f5.fbeOffset + this._f5.fbeSize)
+    this._f7 = new fbe.FieldModelWChar(buffer, this._f6.fbeOffset + this._f6.fbeSize)
+    this._f8 = new fbe.FieldModelWChar(buffer, this._f7.fbeOffset + this._f7.fbeSize)
+    this._f9 = new fbe.FieldModelInt8(buffer, this._f8.fbeOffset + this._f8.fbeSize)
+    this._f10 = new fbe.FieldModelInt8(buffer, this._f9.fbeOffset + this._f9.fbeSize)
+    this._f11 = new fbe.FieldModelUInt8(buffer, this._f10.fbeOffset + this._f10.fbeSize)
+    this._f12 = new fbe.FieldModelUInt8(buffer, this._f11.fbeOffset + this._f11.fbeSize)
+    this._f13 = new fbe.FieldModelInt16(buffer, this._f12.fbeOffset + this._f12.fbeSize)
+    this._f14 = new fbe.FieldModelInt16(buffer, this._f13.fbeOffset + this._f13.fbeSize)
+    this._f15 = new fbe.FieldModelUInt16(buffer, this._f14.fbeOffset + this._f14.fbeSize)
+    this._f16 = new fbe.FieldModelUInt16(buffer, this._f15.fbeOffset + this._f15.fbeSize)
+    this._f17 = new fbe.FieldModelInt32(buffer, this._f16.fbeOffset + this._f16.fbeSize)
+    this._f18 = new fbe.FieldModelInt32(buffer, this._f17.fbeOffset + this._f17.fbeSize)
+    this._f19 = new fbe.FieldModelUInt32(buffer, this._f18.fbeOffset + this._f18.fbeSize)
+    this._f20 = new fbe.FieldModelUInt32(buffer, this._f19.fbeOffset + this._f19.fbeSize)
+    this._f21 = new fbe.FieldModelInt64(buffer, this._f20.fbeOffset + this._f20.fbeSize)
+    this._f22 = new fbe.FieldModelInt64(buffer, this._f21.fbeOffset + this._f21.fbeSize)
+    this._f23 = new fbe.FieldModelUInt64(buffer, this._f22.fbeOffset + this._f22.fbeSize)
+    this._f24 = new fbe.FieldModelUInt64(buffer, this._f23.fbeOffset + this._f23.fbeSize)
+    this._f25 = new fbe.FieldModelFloat(buffer, this._f24.fbeOffset + this._f24.fbeSize)
+    this._f26 = new fbe.FieldModelFloat(buffer, this._f25.fbeOffset + this._f25.fbeSize)
+    this._f27 = new fbe.FieldModelDouble(buffer, this._f26.fbeOffset + this._f26.fbeSize)
+    this._f28 = new fbe.FieldModelDouble(buffer, this._f27.fbeOffset + this._f27.fbeSize)
+    this._f29 = new fbe.FieldModelDecimal(buffer, this._f28.fbeOffset + this._f28.fbeSize)
+    this._f30 = new fbe.FieldModelDecimal(buffer, this._f29.fbeOffset + this._f29.fbeSize)
+    this._f31 = new fbe.FieldModelString(buffer, this._f30.fbeOffset + this._f30.fbeSize)
+    this._f32 = new fbe.FieldModelString(buffer, this._f31.fbeOffset + this._f31.fbeSize)
+    this._f33 = new fbe.FieldModelTimestamp(buffer, this._f32.fbeOffset + this._f32.fbeSize)
+    this._f34 = new fbe.FieldModelTimestamp(buffer, this._f33.fbeOffset + this._f33.fbeSize)
+    this._f35 = new fbe.FieldModelTimestamp(buffer, this._f34.fbeOffset + this._f34.fbeSize)
+    this._f36 = new fbe.FieldModelUUID(buffer, this._f35.fbeOffset + this._f35.fbeSize)
+    this._f37 = new fbe.FieldModelUUID(buffer, this._f36.fbeOffset + this._f36.fbeSize)
+    this._f38 = new fbe.FieldModelUUID(buffer, this._f37.fbeOffset + this._f37.fbeSize)
+    this._f39 = new proto.FieldModelOrderSide(buffer, this._f38.fbeOffset + this._f38.fbeSize)
+    this._f40 = new proto.FieldModelOrderType(buffer, this._f39.fbeOffset + this._f39.fbeSize)
+    this._f41 = new proto.FieldModelOrder(buffer, this._f40.fbeOffset + this._f40.fbeSize)
+    this._f42 = new proto.FieldModelBalance(buffer, this._f41.fbeOffset + this._f41.fbeSize)
+    this._f43 = new proto.FieldModelState(buffer, this._f42.fbeOffset + this._f42.fbeSize)
+    this._f44 = new proto.FieldModelAccount(buffer, this._f43.fbeOffset + this._f43.fbeSize)
   }
 
   /**
@@ -2143,7 +2143,7 @@ class FieldModelStructSimple extends fbe.FieldModel {
    * @this {!FieldModelStructSimple}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -2153,7 +2153,7 @@ class FieldModelStructSimple extends fbe.FieldModel {
    * @returns {!number} Field body size
    */
   get FBEBody () {
-    return 4 + 4 + this.uid.FBESize + this.f1.FBESize + this.f2.FBESize + this.f3.FBESize + this.f4.FBESize + this.f5.FBESize + this.f6.FBESize + this.f7.FBESize + this.f8.FBESize + this.f9.FBESize + this.f10.FBESize + this.f11.FBESize + this.f12.FBESize + this.f13.FBESize + this.f14.FBESize + this.f15.FBESize + this.f16.FBESize + this.f17.FBESize + this.f18.FBESize + this.f19.FBESize + this.f20.FBESize + this.f21.FBESize + this.f22.FBESize + this.f23.FBESize + this.f24.FBESize + this.f25.FBESize + this.f26.FBESize + this.f27.FBESize + this.f28.FBESize + this.f29.FBESize + this.f30.FBESize + this.f31.FBESize + this.f32.FBESize + this.f33.FBESize + this.f34.FBESize + this.f35.FBESize + this.f36.FBESize + this.f37.FBESize + this.f38.FBESize + this.f39.FBESize + this.f40.FBESize + this.f41.FBESize + this.f42.FBESize + this.f43.FBESize + this.f44.FBESize
+    return 4 + 4 + this.uid.fbeSize + this.f1.fbeSize + this.f2.fbeSize + this.f3.fbeSize + this.f4.fbeSize + this.f5.fbeSize + this.f6.fbeSize + this.f7.fbeSize + this.f8.fbeSize + this.f9.fbeSize + this.f10.fbeSize + this.f11.fbeSize + this.f12.fbeSize + this.f13.fbeSize + this.f14.fbeSize + this.f15.fbeSize + this.f16.fbeSize + this.f17.fbeSize + this.f18.fbeSize + this.f19.fbeSize + this.f20.fbeSize + this.f21.fbeSize + this.f22.fbeSize + this.f23.fbeSize + this.f24.fbeSize + this.f25.fbeSize + this.f26.fbeSize + this.f27.fbeSize + this.f28.fbeSize + this.f29.fbeSize + this.f30.fbeSize + this.f31.fbeSize + this.f32.fbeSize + this.f33.fbeSize + this.f34.fbeSize + this.f35.fbeSize + this.f36.fbeSize + this.f37.fbeSize + this.f38.fbeSize + this.f39.fbeSize + this.f40.fbeSize + this.f41.fbeSize + this.f42.fbeSize + this.f43.fbeSize + this.f44.fbeSize
   }
 
   /**
@@ -2161,19 +2161,19 @@ class FieldModelStructSimple extends fbe.FieldModel {
    * @this {!FieldModelStructSimple}
    * @returns {!number} Field extra size
    */
-  get FBEExtra () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4) > this._buffer.size)) {
       return 0
     }
 
     this._buffer.shift(fbeStructOffset)
 
-    let fbeResult = this.FBEBody + this.uid.FBEExtra + this.f1.FBEExtra + this.f2.FBEExtra + this.f3.FBEExtra + this.f4.FBEExtra + this.f5.FBEExtra + this.f6.FBEExtra + this.f7.FBEExtra + this.f8.FBEExtra + this.f9.FBEExtra + this.f10.FBEExtra + this.f11.FBEExtra + this.f12.FBEExtra + this.f13.FBEExtra + this.f14.FBEExtra + this.f15.FBEExtra + this.f16.FBEExtra + this.f17.FBEExtra + this.f18.FBEExtra + this.f19.FBEExtra + this.f20.FBEExtra + this.f21.FBEExtra + this.f22.FBEExtra + this.f23.FBEExtra + this.f24.FBEExtra + this.f25.FBEExtra + this.f26.FBEExtra + this.f27.FBEExtra + this.f28.FBEExtra + this.f29.FBEExtra + this.f30.FBEExtra + this.f31.FBEExtra + this.f32.FBEExtra + this.f33.FBEExtra + this.f34.FBEExtra + this.f35.FBEExtra + this.f36.FBEExtra + this.f37.FBEExtra + this.f38.FBEExtra + this.f39.FBEExtra + this.f40.FBEExtra + this.f41.FBEExtra + this.f42.FBEExtra + this.f43.FBEExtra + this.f44.FBEExtra
+    let fbeResult = this.FBEBody + this.uid.fbeExtra + this.f1.fbeExtra + this.f2.fbeExtra + this.f3.fbeExtra + this.f4.fbeExtra + this.f5.fbeExtra + this.f6.fbeExtra + this.f7.fbeExtra + this.f8.fbeExtra + this.f9.fbeExtra + this.f10.fbeExtra + this.f11.fbeExtra + this.f12.fbeExtra + this.f13.fbeExtra + this.f14.fbeExtra + this.f15.fbeExtra + this.f16.fbeExtra + this.f17.fbeExtra + this.f18.fbeExtra + this.f19.fbeExtra + this.f20.fbeExtra + this.f21.fbeExtra + this.f22.fbeExtra + this.f23.fbeExtra + this.f24.fbeExtra + this.f25.fbeExtra + this.f26.fbeExtra + this.f27.fbeExtra + this.f28.fbeExtra + this.f29.fbeExtra + this.f30.fbeExtra + this.f31.fbeExtra + this.f32.fbeExtra + this.f33.fbeExtra + this.f34.fbeExtra + this.f35.fbeExtra + this.f36.fbeExtra + this.f37.fbeExtra + this.f38.fbeExtra + this.f39.fbeExtra + this.f40.fbeExtra + this.f41.fbeExtra + this.f42.fbeExtra + this.f43.fbeExtra + this.f44.fbeExtra
 
     this._buffer.unshift(fbeStructOffset)
 
@@ -2205,11 +2205,11 @@ class FieldModelStructSimple extends fbe.FieldModel {
    * @returns {!boolean} Field model valid state
    */
   verify (fbeVerifyType = true) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return true
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return false
     }
@@ -2239,410 +2239,410 @@ class FieldModelStructSimple extends fbe.FieldModel {
   verifyFields (fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.uid.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.uid.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.uid.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uid.FBESize
+    fbeCurrentSize += this.uid.fbeSize
 
-    if ((fbeCurrentSize + this.f1.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1.FBESize
+    fbeCurrentSize += this.f1.fbeSize
 
-    if ((fbeCurrentSize + this.f2.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f2.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f2.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f2.FBESize
+    fbeCurrentSize += this.f2.fbeSize
 
-    if ((fbeCurrentSize + this.f3.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f3.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f3.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f3.FBESize
+    fbeCurrentSize += this.f3.fbeSize
 
-    if ((fbeCurrentSize + this.f4.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f4.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f4.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f4.FBESize
+    fbeCurrentSize += this.f4.fbeSize
 
-    if ((fbeCurrentSize + this.f5.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f5.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f5.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f5.FBESize
+    fbeCurrentSize += this.f5.fbeSize
 
-    if ((fbeCurrentSize + this.f6.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f6.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f6.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f6.FBESize
+    fbeCurrentSize += this.f6.fbeSize
 
-    if ((fbeCurrentSize + this.f7.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f7.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f7.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f7.FBESize
+    fbeCurrentSize += this.f7.fbeSize
 
-    if ((fbeCurrentSize + this.f8.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f8.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f8.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f8.FBESize
+    fbeCurrentSize += this.f8.fbeSize
 
-    if ((fbeCurrentSize + this.f9.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f9.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f9.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f9.FBESize
+    fbeCurrentSize += this.f9.fbeSize
 
-    if ((fbeCurrentSize + this.f10.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f10.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f10.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f10.FBESize
+    fbeCurrentSize += this.f10.fbeSize
 
-    if ((fbeCurrentSize + this.f11.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f11.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f11.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f11.FBESize
+    fbeCurrentSize += this.f11.fbeSize
 
-    if ((fbeCurrentSize + this.f12.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f12.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f12.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f12.FBESize
+    fbeCurrentSize += this.f12.fbeSize
 
-    if ((fbeCurrentSize + this.f13.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f13.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f13.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f13.FBESize
+    fbeCurrentSize += this.f13.fbeSize
 
-    if ((fbeCurrentSize + this.f14.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f14.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f14.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f14.FBESize
+    fbeCurrentSize += this.f14.fbeSize
 
-    if ((fbeCurrentSize + this.f15.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f15.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f15.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f15.FBESize
+    fbeCurrentSize += this.f15.fbeSize
 
-    if ((fbeCurrentSize + this.f16.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f16.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f16.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f16.FBESize
+    fbeCurrentSize += this.f16.fbeSize
 
-    if ((fbeCurrentSize + this.f17.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f17.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f17.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f17.FBESize
+    fbeCurrentSize += this.f17.fbeSize
 
-    if ((fbeCurrentSize + this.f18.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f18.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f18.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f18.FBESize
+    fbeCurrentSize += this.f18.fbeSize
 
-    if ((fbeCurrentSize + this.f19.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f19.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f19.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f19.FBESize
+    fbeCurrentSize += this.f19.fbeSize
 
-    if ((fbeCurrentSize + this.f20.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f20.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f20.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f20.FBESize
+    fbeCurrentSize += this.f20.fbeSize
 
-    if ((fbeCurrentSize + this.f21.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f21.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f21.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f21.FBESize
+    fbeCurrentSize += this.f21.fbeSize
 
-    if ((fbeCurrentSize + this.f22.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f22.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f22.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f22.FBESize
+    fbeCurrentSize += this.f22.fbeSize
 
-    if ((fbeCurrentSize + this.f23.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f23.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f23.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f23.FBESize
+    fbeCurrentSize += this.f23.fbeSize
 
-    if ((fbeCurrentSize + this.f24.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f24.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f24.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f24.FBESize
+    fbeCurrentSize += this.f24.fbeSize
 
-    if ((fbeCurrentSize + this.f25.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f25.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f25.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f25.FBESize
+    fbeCurrentSize += this.f25.fbeSize
 
-    if ((fbeCurrentSize + this.f26.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f26.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f26.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f26.FBESize
+    fbeCurrentSize += this.f26.fbeSize
 
-    if ((fbeCurrentSize + this.f27.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f27.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f27.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f27.FBESize
+    fbeCurrentSize += this.f27.fbeSize
 
-    if ((fbeCurrentSize + this.f28.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f28.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f28.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f28.FBESize
+    fbeCurrentSize += this.f28.fbeSize
 
-    if ((fbeCurrentSize + this.f29.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f29.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f29.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f29.FBESize
+    fbeCurrentSize += this.f29.fbeSize
 
-    if ((fbeCurrentSize + this.f30.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f30.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f30.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f30.FBESize
+    fbeCurrentSize += this.f30.fbeSize
 
-    if ((fbeCurrentSize + this.f31.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f31.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f31.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f31.FBESize
+    fbeCurrentSize += this.f31.fbeSize
 
-    if ((fbeCurrentSize + this.f32.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f32.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f32.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f32.FBESize
+    fbeCurrentSize += this.f32.fbeSize
 
-    if ((fbeCurrentSize + this.f33.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f33.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f33.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f33.FBESize
+    fbeCurrentSize += this.f33.fbeSize
 
-    if ((fbeCurrentSize + this.f34.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f34.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f34.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f34.FBESize
+    fbeCurrentSize += this.f34.fbeSize
 
-    if ((fbeCurrentSize + this.f35.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f35.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f35.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f35.FBESize
+    fbeCurrentSize += this.f35.fbeSize
 
-    if ((fbeCurrentSize + this.f36.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f36.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f36.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f36.FBESize
+    fbeCurrentSize += this.f36.fbeSize
 
-    if ((fbeCurrentSize + this.f37.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f37.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f37.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f37.FBESize
+    fbeCurrentSize += this.f37.fbeSize
 
-    if ((fbeCurrentSize + this.f38.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f38.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f38.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f38.FBESize
+    fbeCurrentSize += this.f38.fbeSize
 
-    if ((fbeCurrentSize + this.f39.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f39.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f39.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f39.FBESize
+    fbeCurrentSize += this.f39.fbeSize
 
-    if ((fbeCurrentSize + this.f40.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f40.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f40.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f40.FBESize
+    fbeCurrentSize += this.f40.fbeSize
 
-    if ((fbeCurrentSize + this.f41.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f41.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f41.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f41.FBESize
+    fbeCurrentSize += this.f41.fbeSize
 
-    if ((fbeCurrentSize + this.f42.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f42.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f42.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f42.FBESize
+    fbeCurrentSize += this.f42.fbeSize
 
-    if ((fbeCurrentSize + this.f43.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f43.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f43.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f43.FBESize
+    fbeCurrentSize += this.f43.fbeSize
 
-    if ((fbeCurrentSize + this.f44.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f44.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f44.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f44.FBESize
+    fbeCurrentSize += this.f44.fbeSize
 
     return true
   }
@@ -2653,11 +2653,11 @@ class FieldModelStructSimple extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   getBegin () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + 4 + 4) <= this._buffer.size), 'Model is broken!')
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return 0
@@ -2709,365 +2709,365 @@ class FieldModelStructSimple extends fbe.FieldModel {
   getFields (fbeValue, fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.uid.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.uid.fbeSize) <= fbeStructSize) {
       fbeValue.uid = this.uid.get()
     } else {
       fbeValue.uid = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uid.FBESize
+    fbeCurrentSize += this.uid.fbeSize
 
-    if ((fbeCurrentSize + this.f1.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1.fbeSize) <= fbeStructSize) {
       fbeValue.f1 = this.f1.get()
     } else {
       fbeValue.f1 = false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1.FBESize
+    fbeCurrentSize += this.f1.fbeSize
 
-    if ((fbeCurrentSize + this.f2.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f2.fbeSize) <= fbeStructSize) {
       fbeValue.f2 = this.f2.get(true)
     } else {
       fbeValue.f2 = true
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f2.FBESize
+    fbeCurrentSize += this.f2.fbeSize
 
-    if ((fbeCurrentSize + this.f3.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f3.fbeSize) <= fbeStructSize) {
       fbeValue.f3 = this.f3.get()
     } else {
       fbeValue.f3 = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f3.FBESize
+    fbeCurrentSize += this.f3.fbeSize
 
-    if ((fbeCurrentSize + this.f4.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f4.fbeSize) <= fbeStructSize) {
       fbeValue.f4 = this.f4.get(255)
     } else {
       fbeValue.f4 = 255
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f4.FBESize
+    fbeCurrentSize += this.f4.fbeSize
 
-    if ((fbeCurrentSize + this.f5.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f5.fbeSize) <= fbeStructSize) {
       fbeValue.f5 = this.f5.get()
     } else {
       fbeValue.f5 = '\0'
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f5.FBESize
+    fbeCurrentSize += this.f5.fbeSize
 
-    if ((fbeCurrentSize + this.f6.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f6.fbeSize) <= fbeStructSize) {
       fbeValue.f6 = this.f6.get('!')
     } else {
       fbeValue.f6 = '!'
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f6.FBESize
+    fbeCurrentSize += this.f6.fbeSize
 
-    if ((fbeCurrentSize + this.f7.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f7.fbeSize) <= fbeStructSize) {
       fbeValue.f7 = this.f7.get()
     } else {
       fbeValue.f7 = '\0'
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f7.FBESize
+    fbeCurrentSize += this.f7.fbeSize
 
-    if ((fbeCurrentSize + this.f8.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f8.fbeSize) <= fbeStructSize) {
       fbeValue.f8 = this.f8.get(String.fromCharCode(0x0444))
     } else {
       fbeValue.f8 = String.fromCharCode(0x0444)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f8.FBESize
+    fbeCurrentSize += this.f8.fbeSize
 
-    if ((fbeCurrentSize + this.f9.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f9.fbeSize) <= fbeStructSize) {
       fbeValue.f9 = this.f9.get()
     } else {
       fbeValue.f9 = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f9.FBESize
+    fbeCurrentSize += this.f9.fbeSize
 
-    if ((fbeCurrentSize + this.f10.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f10.fbeSize) <= fbeStructSize) {
       fbeValue.f10 = this.f10.get(127)
     } else {
       fbeValue.f10 = 127
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f10.FBESize
+    fbeCurrentSize += this.f10.fbeSize
 
-    if ((fbeCurrentSize + this.f11.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f11.fbeSize) <= fbeStructSize) {
       fbeValue.f11 = this.f11.get()
     } else {
       fbeValue.f11 = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f11.FBESize
+    fbeCurrentSize += this.f11.fbeSize
 
-    if ((fbeCurrentSize + this.f12.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f12.fbeSize) <= fbeStructSize) {
       fbeValue.f12 = this.f12.get(255)
     } else {
       fbeValue.f12 = 255
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f12.FBESize
+    fbeCurrentSize += this.f12.fbeSize
 
-    if ((fbeCurrentSize + this.f13.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f13.fbeSize) <= fbeStructSize) {
       fbeValue.f13 = this.f13.get()
     } else {
       fbeValue.f13 = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f13.FBESize
+    fbeCurrentSize += this.f13.fbeSize
 
-    if ((fbeCurrentSize + this.f14.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f14.fbeSize) <= fbeStructSize) {
       fbeValue.f14 = this.f14.get(32767)
     } else {
       fbeValue.f14 = 32767
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f14.FBESize
+    fbeCurrentSize += this.f14.fbeSize
 
-    if ((fbeCurrentSize + this.f15.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f15.fbeSize) <= fbeStructSize) {
       fbeValue.f15 = this.f15.get()
     } else {
       fbeValue.f15 = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f15.FBESize
+    fbeCurrentSize += this.f15.fbeSize
 
-    if ((fbeCurrentSize + this.f16.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f16.fbeSize) <= fbeStructSize) {
       fbeValue.f16 = this.f16.get(65535)
     } else {
       fbeValue.f16 = 65535
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f16.FBESize
+    fbeCurrentSize += this.f16.fbeSize
 
-    if ((fbeCurrentSize + this.f17.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f17.fbeSize) <= fbeStructSize) {
       fbeValue.f17 = this.f17.get()
     } else {
       fbeValue.f17 = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f17.FBESize
+    fbeCurrentSize += this.f17.fbeSize
 
-    if ((fbeCurrentSize + this.f18.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f18.fbeSize) <= fbeStructSize) {
       fbeValue.f18 = this.f18.get(2147483647)
     } else {
       fbeValue.f18 = 2147483647
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f18.FBESize
+    fbeCurrentSize += this.f18.fbeSize
 
-    if ((fbeCurrentSize + this.f19.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f19.fbeSize) <= fbeStructSize) {
       fbeValue.f19 = this.f19.get()
     } else {
       fbeValue.f19 = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f19.FBESize
+    fbeCurrentSize += this.f19.fbeSize
 
-    if ((fbeCurrentSize + this.f20.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f20.fbeSize) <= fbeStructSize) {
       fbeValue.f20 = this.f20.get(0xFFFFFFFF)
     } else {
       fbeValue.f20 = 0xFFFFFFFF
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f20.FBESize
+    fbeCurrentSize += this.f20.fbeSize
 
-    if ((fbeCurrentSize + this.f21.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f21.fbeSize) <= fbeStructSize) {
       fbeValue.f21 = this.f21.get()
     } else {
       fbeValue.f21 = new Int64(0, 0)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f21.FBESize
+    fbeCurrentSize += this.f21.fbeSize
 
-    if ((fbeCurrentSize + this.f22.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f22.fbeSize) <= fbeStructSize) {
       fbeValue.f22 = this.f22.get(new Int64(4294967295, 2147483647))
     } else {
       fbeValue.f22 = new Int64(4294967295, 2147483647)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f22.FBESize
+    fbeCurrentSize += this.f22.fbeSize
 
-    if ((fbeCurrentSize + this.f23.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f23.fbeSize) <= fbeStructSize) {
       fbeValue.f23 = this.f23.get()
     } else {
       fbeValue.f23 = new UInt64(0, 0)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f23.FBESize
+    fbeCurrentSize += this.f23.fbeSize
 
-    if ((fbeCurrentSize + this.f24.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f24.fbeSize) <= fbeStructSize) {
       fbeValue.f24 = this.f24.get(new UInt64(4294967295, 4294967295))
     } else {
       fbeValue.f24 = new UInt64(4294967295, 4294967295)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f24.FBESize
+    fbeCurrentSize += this.f24.fbeSize
 
-    if ((fbeCurrentSize + this.f25.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f25.fbeSize) <= fbeStructSize) {
       fbeValue.f25 = this.f25.get()
     } else {
       fbeValue.f25 = 0.0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f25.FBESize
+    fbeCurrentSize += this.f25.fbeSize
 
-    if ((fbeCurrentSize + this.f26.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f26.fbeSize) <= fbeStructSize) {
       fbeValue.f26 = this.f26.get(123.456)
     } else {
       fbeValue.f26 = 123.456
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f26.FBESize
+    fbeCurrentSize += this.f26.fbeSize
 
-    if ((fbeCurrentSize + this.f27.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f27.fbeSize) <= fbeStructSize) {
       fbeValue.f27 = this.f27.get()
     } else {
       fbeValue.f27 = 0.0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f27.FBESize
+    fbeCurrentSize += this.f27.fbeSize
 
-    if ((fbeCurrentSize + this.f28.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f28.fbeSize) <= fbeStructSize) {
       fbeValue.f28 = this.f28.get(-123.456e+123)
     } else {
       fbeValue.f28 = -123.456e+123
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f28.FBESize
+    fbeCurrentSize += this.f28.fbeSize
 
-    if ((fbeCurrentSize + this.f29.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f29.fbeSize) <= fbeStructSize) {
       fbeValue.f29 = this.f29.get()
     } else {
       fbeValue.f29 = new Big(0)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f29.FBESize
+    fbeCurrentSize += this.f29.fbeSize
 
-    if ((fbeCurrentSize + this.f30.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f30.fbeSize) <= fbeStructSize) {
       fbeValue.f30 = this.f30.get(new Big('123456.123456'))
     } else {
       fbeValue.f30 = new Big('123456.123456')
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f30.FBESize
+    fbeCurrentSize += this.f30.fbeSize
 
-    if ((fbeCurrentSize + this.f31.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f31.fbeSize) <= fbeStructSize) {
       fbeValue.f31 = this.f31.get()
     } else {
       fbeValue.f31 = ''
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f31.FBESize
+    fbeCurrentSize += this.f31.fbeSize
 
-    if ((fbeCurrentSize + this.f32.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f32.fbeSize) <= fbeStructSize) {
       fbeValue.f32 = this.f32.get('Initial string!')
     } else {
       fbeValue.f32 = 'Initial string!'
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f32.FBESize
+    fbeCurrentSize += this.f32.fbeSize
 
-    if ((fbeCurrentSize + this.f33.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f33.fbeSize) <= fbeStructSize) {
       fbeValue.f33 = this.f33.get()
     } else {
       fbeValue.f33 = new Date(0)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f33.FBESize
+    fbeCurrentSize += this.f33.fbeSize
 
-    if ((fbeCurrentSize + this.f34.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f34.fbeSize) <= fbeStructSize) {
       fbeValue.f34 = this.f34.get(new Date(0))
     } else {
       fbeValue.f34 = new Date(0)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f34.FBESize
+    fbeCurrentSize += this.f34.fbeSize
 
-    if ((fbeCurrentSize + this.f35.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f35.fbeSize) <= fbeStructSize) {
       fbeValue.f35 = this.f35.get(new Date(Date.now()))
     } else {
       fbeValue.f35 = new Date(Date.now())
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f35.FBESize
+    fbeCurrentSize += this.f35.fbeSize
 
-    if ((fbeCurrentSize + this.f36.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f36.fbeSize) <= fbeStructSize) {
       fbeValue.f36 = this.f36.get()
     } else {
       fbeValue.f36 = new UUID()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f36.FBESize
+    fbeCurrentSize += this.f36.fbeSize
 
-    if ((fbeCurrentSize + this.f37.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f37.fbeSize) <= fbeStructSize) {
       fbeValue.f37 = this.f37.get(UUID.sequential())
     } else {
       fbeValue.f37 = UUID.sequential()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f37.FBESize
+    fbeCurrentSize += this.f37.fbeSize
 
-    if ((fbeCurrentSize + this.f38.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f38.fbeSize) <= fbeStructSize) {
       fbeValue.f38 = this.f38.get(new UUID('123e4567-e89b-12d3-a456-426655440000'))
     } else {
       fbeValue.f38 = new UUID('123e4567-e89b-12d3-a456-426655440000')
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f38.FBESize
+    fbeCurrentSize += this.f38.fbeSize
 
-    if ((fbeCurrentSize + this.f39.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f39.fbeSize) <= fbeStructSize) {
       fbeValue.f39 = this.f39.get()
     } else {
       fbeValue.f39 = new proto.OrderSide()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f39.FBESize
+    fbeCurrentSize += this.f39.fbeSize
 
-    if ((fbeCurrentSize + this.f40.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f40.fbeSize) <= fbeStructSize) {
       fbeValue.f40 = this.f40.get()
     } else {
       fbeValue.f40 = new proto.OrderType()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f40.FBESize
+    fbeCurrentSize += this.f40.fbeSize
 
-    if ((fbeCurrentSize + this.f41.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f41.fbeSize) <= fbeStructSize) {
       fbeValue.f41 = this.f41.get()
     } else {
       fbeValue.f41 = new proto.Order()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f41.FBESize
+    fbeCurrentSize += this.f41.fbeSize
 
-    if ((fbeCurrentSize + this.f42.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f42.fbeSize) <= fbeStructSize) {
       fbeValue.f42 = this.f42.get()
     } else {
       fbeValue.f42 = new proto.Balance()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f42.FBESize
+    fbeCurrentSize += this.f42.fbeSize
 
-    if ((fbeCurrentSize + this.f43.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f43.fbeSize) <= fbeStructSize) {
       fbeValue.f43 = this.f43.get()
     } else {
       fbeValue.f43 = new proto.State()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f43.FBESize
+    fbeCurrentSize += this.f43.fbeSize
 
-    if ((fbeCurrentSize + this.f44.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f44.fbeSize) <= fbeStructSize) {
       fbeValue.f44 = this.f44.get()
     } else {
       fbeValue.f44 = new proto.Account()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f44.FBESize
+    fbeCurrentSize += this.f44.fbeSize
   }
 
   /**
@@ -3076,8 +3076,8 @@ class FieldModelStructSimple extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   setBegin () {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
@@ -3088,7 +3088,7 @@ class FieldModelStructSimple extends fbe.FieldModel {
       return 0
     }
 
-    this.writeUInt32(this.FBEOffset, fbeStructOffset)
+    this.writeUInt32(this.fbeOffset, fbeStructOffset)
     this.writeUInt32(fbeStructOffset, fbeStructSize)
     this.writeUInt32(fbeStructOffset + 4, this.FBEType)
 
@@ -3204,8 +3204,8 @@ class StructSimpleModel extends fbe.Model {
    * @this {!StructSimpleModel}
    * @returns {!number} Model size
    */
-  get FBESize () {
-    return this.model.FBESize + this.model.FBEExtra
+  get fbeSize () {
+    return this.model.fbeSize + this.model.fbeExtra
   }
 
   /**
@@ -3232,12 +3232,12 @@ class StructSimpleModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return false
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    if (fbeFullSize < this.model.fbeSize) {
       return false
     }
 
@@ -3250,7 +3250,7 @@ class StructSimpleModel extends fbe.Model {
    * @returns {!number} Model begin offset
    */
   createBegin () {
-    return this.buffer.allocate(4 + this.model.FBESize)
+    return this.buffer.allocate(4 + this.model.fbeSize)
   }
 
   /**
@@ -3261,7 +3261,7 @@ class StructSimpleModel extends fbe.Model {
   createEnd (fbeBegin) {
     let fbeEnd = this.buffer.size
     let fbeFullSize = fbeEnd - fbeBegin
-    this.writeUInt32(this.model.FBEOffset - 4, fbeFullSize)
+    this.writeUInt32(this.model.fbeOffset - 4, fbeFullSize)
     return fbeFullSize
   }
 
@@ -3284,13 +3284,13 @@ class StructSimpleModel extends fbe.Model {
    * @return {!object} Deserialized StructSimple value and its size
    */
   deserialize (value = new StructSimple()) {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return { value: new StructSimple(), size: 0 }
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    console.assert((fbeFullSize >= this.model.FBESize), 'Model is broken!')
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    console.assert((fbeFullSize >= this.model.fbeSize), 'Model is broken!')
+    if (fbeFullSize < this.model.fbeSize) {
       return { value: new StructSimple(), size: 0 }
     }
 
@@ -3304,7 +3304,7 @@ class StructSimpleModel extends fbe.Model {
    * @param {!number} prev Previous StructSimple model size
    */
   next (prev) {
-    this.model.FBEShift(prev)
+    this.model.fbeShift(prev)
   }
 }
 
@@ -3780,8 +3780,8 @@ class FinalModelStructSimple extends fbe.FinalModel {
    * @param {!StructSimple} fbeValue StructSimple value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (fbeValue) {
-    return 0 + this.uid.FBEAllocationSize(fbeValue.uid) + this.f1.FBEAllocationSize(fbeValue.f1) + this.f2.FBEAllocationSize(fbeValue.f2) + this.f3.FBEAllocationSize(fbeValue.f3) + this.f4.FBEAllocationSize(fbeValue.f4) + this.f5.FBEAllocationSize(fbeValue.f5) + this.f6.FBEAllocationSize(fbeValue.f6) + this.f7.FBEAllocationSize(fbeValue.f7) + this.f8.FBEAllocationSize(fbeValue.f8) + this.f9.FBEAllocationSize(fbeValue.f9) + this.f10.FBEAllocationSize(fbeValue.f10) + this.f11.FBEAllocationSize(fbeValue.f11) + this.f12.FBEAllocationSize(fbeValue.f12) + this.f13.FBEAllocationSize(fbeValue.f13) + this.f14.FBEAllocationSize(fbeValue.f14) + this.f15.FBEAllocationSize(fbeValue.f15) + this.f16.FBEAllocationSize(fbeValue.f16) + this.f17.FBEAllocationSize(fbeValue.f17) + this.f18.FBEAllocationSize(fbeValue.f18) + this.f19.FBEAllocationSize(fbeValue.f19) + this.f20.FBEAllocationSize(fbeValue.f20) + this.f21.FBEAllocationSize(fbeValue.f21) + this.f22.FBEAllocationSize(fbeValue.f22) + this.f23.FBEAllocationSize(fbeValue.f23) + this.f24.FBEAllocationSize(fbeValue.f24) + this.f25.FBEAllocationSize(fbeValue.f25) + this.f26.FBEAllocationSize(fbeValue.f26) + this.f27.FBEAllocationSize(fbeValue.f27) + this.f28.FBEAllocationSize(fbeValue.f28) + this.f29.FBEAllocationSize(fbeValue.f29) + this.f30.FBEAllocationSize(fbeValue.f30) + this.f31.FBEAllocationSize(fbeValue.f31) + this.f32.FBEAllocationSize(fbeValue.f32) + this.f33.FBEAllocationSize(fbeValue.f33) + this.f34.FBEAllocationSize(fbeValue.f34) + this.f35.FBEAllocationSize(fbeValue.f35) + this.f36.FBEAllocationSize(fbeValue.f36) + this.f37.FBEAllocationSize(fbeValue.f37) + this.f38.FBEAllocationSize(fbeValue.f38) + this.f39.FBEAllocationSize(fbeValue.f39) + this.f40.FBEAllocationSize(fbeValue.f40) + this.f41.FBEAllocationSize(fbeValue.f41) + this.f42.FBEAllocationSize(fbeValue.f42) + this.f43.FBEAllocationSize(fbeValue.f43) + this.f44.FBEAllocationSize(fbeValue.f44)
+  fbeAllocationSize (fbeValue) {
+    return 0 + this.uid.fbeAllocationSize(fbeValue.uid) + this.f1.fbeAllocationSize(fbeValue.f1) + this.f2.fbeAllocationSize(fbeValue.f2) + this.f3.fbeAllocationSize(fbeValue.f3) + this.f4.fbeAllocationSize(fbeValue.f4) + this.f5.fbeAllocationSize(fbeValue.f5) + this.f6.fbeAllocationSize(fbeValue.f6) + this.f7.fbeAllocationSize(fbeValue.f7) + this.f8.fbeAllocationSize(fbeValue.f8) + this.f9.fbeAllocationSize(fbeValue.f9) + this.f10.fbeAllocationSize(fbeValue.f10) + this.f11.fbeAllocationSize(fbeValue.f11) + this.f12.fbeAllocationSize(fbeValue.f12) + this.f13.fbeAllocationSize(fbeValue.f13) + this.f14.fbeAllocationSize(fbeValue.f14) + this.f15.fbeAllocationSize(fbeValue.f15) + this.f16.fbeAllocationSize(fbeValue.f16) + this.f17.fbeAllocationSize(fbeValue.f17) + this.f18.fbeAllocationSize(fbeValue.f18) + this.f19.fbeAllocationSize(fbeValue.f19) + this.f20.fbeAllocationSize(fbeValue.f20) + this.f21.fbeAllocationSize(fbeValue.f21) + this.f22.fbeAllocationSize(fbeValue.f22) + this.f23.fbeAllocationSize(fbeValue.f23) + this.f24.fbeAllocationSize(fbeValue.f24) + this.f25.fbeAllocationSize(fbeValue.f25) + this.f26.fbeAllocationSize(fbeValue.f26) + this.f27.fbeAllocationSize(fbeValue.f27) + this.f28.fbeAllocationSize(fbeValue.f28) + this.f29.fbeAllocationSize(fbeValue.f29) + this.f30.fbeAllocationSize(fbeValue.f30) + this.f31.fbeAllocationSize(fbeValue.f31) + this.f32.fbeAllocationSize(fbeValue.f32) + this.f33.fbeAllocationSize(fbeValue.f33) + this.f34.fbeAllocationSize(fbeValue.f34) + this.f35.fbeAllocationSize(fbeValue.f35) + this.f36.fbeAllocationSize(fbeValue.f36) + this.f37.fbeAllocationSize(fbeValue.f37) + this.f38.fbeAllocationSize(fbeValue.f38) + this.f39.fbeAllocationSize(fbeValue.f39) + this.f40.fbeAllocationSize(fbeValue.f40) + this.f41.fbeAllocationSize(fbeValue.f41) + this.f42.fbeAllocationSize(fbeValue.f42) + this.f43.fbeAllocationSize(fbeValue.f43) + this.f44.fbeAllocationSize(fbeValue.f44)
   }
 
   /**
@@ -3808,9 +3808,9 @@ class FinalModelStructSimple extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeResult = this.verifyFields()
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeResult
   }
 
@@ -3823,315 +3823,315 @@ class FinalModelStructSimple extends fbe.FinalModel {
     let fbeCurrentOffset = 0
     let fbeFieldSize
 
-    this.uid.FBEOffset = fbeCurrentOffset
+    this.uid.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uid.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f2.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f3.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f4.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f5.FBEOffset = fbeCurrentOffset
+    this.f5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f5.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f6.FBEOffset = fbeCurrentOffset
+    this.f6.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f6.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f7.FBEOffset = fbeCurrentOffset
+    this.f7.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f7.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f8.FBEOffset = fbeCurrentOffset
+    this.f8.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f8.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f9.FBEOffset = fbeCurrentOffset
+    this.f9.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f9.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f10.FBEOffset = fbeCurrentOffset
+    this.f10.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f10.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f11.FBEOffset = fbeCurrentOffset
+    this.f11.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f11.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f12.FBEOffset = fbeCurrentOffset
+    this.f12.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f12.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f13.FBEOffset = fbeCurrentOffset
+    this.f13.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f13.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f14.FBEOffset = fbeCurrentOffset
+    this.f14.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f14.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f15.FBEOffset = fbeCurrentOffset
+    this.f15.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f15.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f16.FBEOffset = fbeCurrentOffset
+    this.f16.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f16.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f17.FBEOffset = fbeCurrentOffset
+    this.f17.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f17.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f18.FBEOffset = fbeCurrentOffset
+    this.f18.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f18.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f19.FBEOffset = fbeCurrentOffset
+    this.f19.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f19.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f20.FBEOffset = fbeCurrentOffset
+    this.f20.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f20.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f21.FBEOffset = fbeCurrentOffset
+    this.f21.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f21.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f22.FBEOffset = fbeCurrentOffset
+    this.f22.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f22.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f23.FBEOffset = fbeCurrentOffset
+    this.f23.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f23.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f24.FBEOffset = fbeCurrentOffset
+    this.f24.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f24.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f25.FBEOffset = fbeCurrentOffset
+    this.f25.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f25.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f26.FBEOffset = fbeCurrentOffset
+    this.f26.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f26.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f27.FBEOffset = fbeCurrentOffset
+    this.f27.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f27.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f28.FBEOffset = fbeCurrentOffset
+    this.f28.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f28.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f29.FBEOffset = fbeCurrentOffset
+    this.f29.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f29.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f30.FBEOffset = fbeCurrentOffset
+    this.f30.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f30.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f31.FBEOffset = fbeCurrentOffset
+    this.f31.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f31.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f32.FBEOffset = fbeCurrentOffset
+    this.f32.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f32.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f33.FBEOffset = fbeCurrentOffset
+    this.f33.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f33.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f34.FBEOffset = fbeCurrentOffset
+    this.f34.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f34.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f35.FBEOffset = fbeCurrentOffset
+    this.f35.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f35.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f36.FBEOffset = fbeCurrentOffset
+    this.f36.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f36.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f37.FBEOffset = fbeCurrentOffset
+    this.f37.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f37.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f38.FBEOffset = fbeCurrentOffset
+    this.f38.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f38.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f39.FBEOffset = fbeCurrentOffset
+    this.f39.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f39.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f40.FBEOffset = fbeCurrentOffset
+    this.f40.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f40.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f41.FBEOffset = fbeCurrentOffset
+    this.f41.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f41.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f42.FBEOffset = fbeCurrentOffset
+    this.f42.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f42.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f43.FBEOffset = fbeCurrentOffset
+    this.f43.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f43.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f44.FBEOffset = fbeCurrentOffset
+    this.f44.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f44.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
@@ -4148,9 +4148,9 @@ class FinalModelStructSimple extends fbe.FinalModel {
    * @returns {!object} Result struct value and its size
    */
   get (fbeValue = new StructSimple()) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.getFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return { value: fbeValue, size: fbeSize }
   }
 
@@ -4165,315 +4165,315 @@ class FinalModelStructSimple extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeResult
 
-    this.uid.FBEOffset = fbeCurrentOffset
+    this.uid.fbeOffset = fbeCurrentOffset
     fbeResult = this.uid.get()
     fbeValue.uid = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1.get()
     fbeValue.f1 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeResult = this.f2.get()
     fbeValue.f2 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeResult = this.f3.get()
     fbeValue.f3 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeResult = this.f4.get()
     fbeValue.f4 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f5.FBEOffset = fbeCurrentOffset
+    this.f5.fbeOffset = fbeCurrentOffset
     fbeResult = this.f5.get()
     fbeValue.f5 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f6.FBEOffset = fbeCurrentOffset
+    this.f6.fbeOffset = fbeCurrentOffset
     fbeResult = this.f6.get()
     fbeValue.f6 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f7.FBEOffset = fbeCurrentOffset
+    this.f7.fbeOffset = fbeCurrentOffset
     fbeResult = this.f7.get()
     fbeValue.f7 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f8.FBEOffset = fbeCurrentOffset
+    this.f8.fbeOffset = fbeCurrentOffset
     fbeResult = this.f8.get()
     fbeValue.f8 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f9.FBEOffset = fbeCurrentOffset
+    this.f9.fbeOffset = fbeCurrentOffset
     fbeResult = this.f9.get()
     fbeValue.f9 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f10.FBEOffset = fbeCurrentOffset
+    this.f10.fbeOffset = fbeCurrentOffset
     fbeResult = this.f10.get()
     fbeValue.f10 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f11.FBEOffset = fbeCurrentOffset
+    this.f11.fbeOffset = fbeCurrentOffset
     fbeResult = this.f11.get()
     fbeValue.f11 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f12.FBEOffset = fbeCurrentOffset
+    this.f12.fbeOffset = fbeCurrentOffset
     fbeResult = this.f12.get()
     fbeValue.f12 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f13.FBEOffset = fbeCurrentOffset
+    this.f13.fbeOffset = fbeCurrentOffset
     fbeResult = this.f13.get()
     fbeValue.f13 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f14.FBEOffset = fbeCurrentOffset
+    this.f14.fbeOffset = fbeCurrentOffset
     fbeResult = this.f14.get()
     fbeValue.f14 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f15.FBEOffset = fbeCurrentOffset
+    this.f15.fbeOffset = fbeCurrentOffset
     fbeResult = this.f15.get()
     fbeValue.f15 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f16.FBEOffset = fbeCurrentOffset
+    this.f16.fbeOffset = fbeCurrentOffset
     fbeResult = this.f16.get()
     fbeValue.f16 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f17.FBEOffset = fbeCurrentOffset
+    this.f17.fbeOffset = fbeCurrentOffset
     fbeResult = this.f17.get()
     fbeValue.f17 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f18.FBEOffset = fbeCurrentOffset
+    this.f18.fbeOffset = fbeCurrentOffset
     fbeResult = this.f18.get()
     fbeValue.f18 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f19.FBEOffset = fbeCurrentOffset
+    this.f19.fbeOffset = fbeCurrentOffset
     fbeResult = this.f19.get()
     fbeValue.f19 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f20.FBEOffset = fbeCurrentOffset
+    this.f20.fbeOffset = fbeCurrentOffset
     fbeResult = this.f20.get()
     fbeValue.f20 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f21.FBEOffset = fbeCurrentOffset
+    this.f21.fbeOffset = fbeCurrentOffset
     fbeResult = this.f21.get()
     fbeValue.f21 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f22.FBEOffset = fbeCurrentOffset
+    this.f22.fbeOffset = fbeCurrentOffset
     fbeResult = this.f22.get()
     fbeValue.f22 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f23.FBEOffset = fbeCurrentOffset
+    this.f23.fbeOffset = fbeCurrentOffset
     fbeResult = this.f23.get()
     fbeValue.f23 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f24.FBEOffset = fbeCurrentOffset
+    this.f24.fbeOffset = fbeCurrentOffset
     fbeResult = this.f24.get()
     fbeValue.f24 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f25.FBEOffset = fbeCurrentOffset
+    this.f25.fbeOffset = fbeCurrentOffset
     fbeResult = this.f25.get()
     fbeValue.f25 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f26.FBEOffset = fbeCurrentOffset
+    this.f26.fbeOffset = fbeCurrentOffset
     fbeResult = this.f26.get()
     fbeValue.f26 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f27.FBEOffset = fbeCurrentOffset
+    this.f27.fbeOffset = fbeCurrentOffset
     fbeResult = this.f27.get()
     fbeValue.f27 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f28.FBEOffset = fbeCurrentOffset
+    this.f28.fbeOffset = fbeCurrentOffset
     fbeResult = this.f28.get()
     fbeValue.f28 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f29.FBEOffset = fbeCurrentOffset
+    this.f29.fbeOffset = fbeCurrentOffset
     fbeResult = this.f29.get()
     fbeValue.f29 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f30.FBEOffset = fbeCurrentOffset
+    this.f30.fbeOffset = fbeCurrentOffset
     fbeResult = this.f30.get()
     fbeValue.f30 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f31.FBEOffset = fbeCurrentOffset
+    this.f31.fbeOffset = fbeCurrentOffset
     fbeResult = this.f31.get()
     fbeValue.f31 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f32.FBEOffset = fbeCurrentOffset
+    this.f32.fbeOffset = fbeCurrentOffset
     fbeResult = this.f32.get()
     fbeValue.f32 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f33.FBEOffset = fbeCurrentOffset
+    this.f33.fbeOffset = fbeCurrentOffset
     fbeResult = this.f33.get()
     fbeValue.f33 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f34.FBEOffset = fbeCurrentOffset
+    this.f34.fbeOffset = fbeCurrentOffset
     fbeResult = this.f34.get()
     fbeValue.f34 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f35.FBEOffset = fbeCurrentOffset
+    this.f35.fbeOffset = fbeCurrentOffset
     fbeResult = this.f35.get()
     fbeValue.f35 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f36.FBEOffset = fbeCurrentOffset
+    this.f36.fbeOffset = fbeCurrentOffset
     fbeResult = this.f36.get()
     fbeValue.f36 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f37.FBEOffset = fbeCurrentOffset
+    this.f37.fbeOffset = fbeCurrentOffset
     fbeResult = this.f37.get()
     fbeValue.f37 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f38.FBEOffset = fbeCurrentOffset
+    this.f38.fbeOffset = fbeCurrentOffset
     fbeResult = this.f38.get()
     fbeValue.f38 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f39.FBEOffset = fbeCurrentOffset
+    this.f39.fbeOffset = fbeCurrentOffset
     fbeResult = this.f39.get()
     fbeValue.f39 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f40.FBEOffset = fbeCurrentOffset
+    this.f40.fbeOffset = fbeCurrentOffset
     fbeResult = this.f40.get()
     fbeValue.f40 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f41.FBEOffset = fbeCurrentOffset
+    this.f41.fbeOffset = fbeCurrentOffset
     fbeResult = this.f41.get()
     fbeValue.f41 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f42.FBEOffset = fbeCurrentOffset
+    this.f42.fbeOffset = fbeCurrentOffset
     fbeResult = this.f42.get()
     fbeValue.f42 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f43.FBEOffset = fbeCurrentOffset
+    this.f43.fbeOffset = fbeCurrentOffset
     fbeResult = this.f43.get()
     fbeValue.f43 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f44.FBEOffset = fbeCurrentOffset
+    this.f44.fbeOffset = fbeCurrentOffset
     fbeResult = this.f44.get()
     fbeValue.f44 = fbeResult.value
     // noinspection JSUnusedAssignment
@@ -4490,9 +4490,9 @@ class FinalModelStructSimple extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (fbeValue) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.setFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeSize
   }
 
@@ -4507,271 +4507,271 @@ class FinalModelStructSimple extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeFieldSize
 
-    this.uid.FBEOffset = fbeCurrentOffset
+    this.uid.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.uid.set(fbeValue.uid)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1.set(fbeValue.f1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f2.set(fbeValue.f2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f3.set(fbeValue.f3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f4.set(fbeValue.f4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f5.FBEOffset = fbeCurrentOffset
+    this.f5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f5.set(fbeValue.f5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f6.FBEOffset = fbeCurrentOffset
+    this.f6.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f6.set(fbeValue.f6)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f7.FBEOffset = fbeCurrentOffset
+    this.f7.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f7.set(fbeValue.f7)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f8.FBEOffset = fbeCurrentOffset
+    this.f8.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f8.set(fbeValue.f8)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f9.FBEOffset = fbeCurrentOffset
+    this.f9.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f9.set(fbeValue.f9)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f10.FBEOffset = fbeCurrentOffset
+    this.f10.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f10.set(fbeValue.f10)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f11.FBEOffset = fbeCurrentOffset
+    this.f11.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f11.set(fbeValue.f11)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f12.FBEOffset = fbeCurrentOffset
+    this.f12.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f12.set(fbeValue.f12)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f13.FBEOffset = fbeCurrentOffset
+    this.f13.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f13.set(fbeValue.f13)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f14.FBEOffset = fbeCurrentOffset
+    this.f14.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f14.set(fbeValue.f14)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f15.FBEOffset = fbeCurrentOffset
+    this.f15.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f15.set(fbeValue.f15)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f16.FBEOffset = fbeCurrentOffset
+    this.f16.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f16.set(fbeValue.f16)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f17.FBEOffset = fbeCurrentOffset
+    this.f17.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f17.set(fbeValue.f17)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f18.FBEOffset = fbeCurrentOffset
+    this.f18.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f18.set(fbeValue.f18)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f19.FBEOffset = fbeCurrentOffset
+    this.f19.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f19.set(fbeValue.f19)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f20.FBEOffset = fbeCurrentOffset
+    this.f20.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f20.set(fbeValue.f20)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f21.FBEOffset = fbeCurrentOffset
+    this.f21.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f21.set(fbeValue.f21)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f22.FBEOffset = fbeCurrentOffset
+    this.f22.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f22.set(fbeValue.f22)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f23.FBEOffset = fbeCurrentOffset
+    this.f23.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f23.set(fbeValue.f23)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f24.FBEOffset = fbeCurrentOffset
+    this.f24.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f24.set(fbeValue.f24)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f25.FBEOffset = fbeCurrentOffset
+    this.f25.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f25.set(fbeValue.f25)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f26.FBEOffset = fbeCurrentOffset
+    this.f26.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f26.set(fbeValue.f26)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f27.FBEOffset = fbeCurrentOffset
+    this.f27.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f27.set(fbeValue.f27)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f28.FBEOffset = fbeCurrentOffset
+    this.f28.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f28.set(fbeValue.f28)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f29.FBEOffset = fbeCurrentOffset
+    this.f29.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f29.set(fbeValue.f29)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f30.FBEOffset = fbeCurrentOffset
+    this.f30.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f30.set(fbeValue.f30)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f31.FBEOffset = fbeCurrentOffset
+    this.f31.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f31.set(fbeValue.f31)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f32.FBEOffset = fbeCurrentOffset
+    this.f32.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f32.set(fbeValue.f32)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f33.FBEOffset = fbeCurrentOffset
+    this.f33.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f33.set(fbeValue.f33)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f34.FBEOffset = fbeCurrentOffset
+    this.f34.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f34.set(fbeValue.f34)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f35.FBEOffset = fbeCurrentOffset
+    this.f35.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f35.set(fbeValue.f35)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f36.FBEOffset = fbeCurrentOffset
+    this.f36.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f36.set(fbeValue.f36)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f37.FBEOffset = fbeCurrentOffset
+    this.f37.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f37.set(fbeValue.f37)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f38.FBEOffset = fbeCurrentOffset
+    this.f38.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f38.set(fbeValue.f38)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f39.FBEOffset = fbeCurrentOffset
+    this.f39.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f39.set(fbeValue.f39)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f40.FBEOffset = fbeCurrentOffset
+    this.f40.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f40.set(fbeValue.f40)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f41.FBEOffset = fbeCurrentOffset
+    this.f41.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f41.set(fbeValue.f41)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f42.FBEOffset = fbeCurrentOffset
+    this.f42.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f42.set(fbeValue.f42)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f43.FBEOffset = fbeCurrentOffset
+    this.f43.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f43.set(fbeValue.f43)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f44.FBEOffset = fbeCurrentOffset
+    this.f44.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f44.set(fbeValue.f44)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
@@ -4821,12 +4821,12 @@ class StructSimpleFinalModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return false
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return false
     }
@@ -4844,7 +4844,7 @@ class StructSimpleFinalModel extends fbe.Model {
     let fbeInitialSize = this.buffer.size
 
     let fbeStructType = this.FBEType
-    let fbeStructSize = 8 + this._model.FBEAllocationSize(value)
+    let fbeStructSize = 8 + this._model.fbeAllocationSize(value)
     let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset
     console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')
     if ((this.buffer.offset + fbeStructOffset + fbeStructSize) > this.buffer.size) {
@@ -4854,8 +4854,8 @@ class StructSimpleFinalModel extends fbe.Model {
     fbeStructSize = 8 + this._model.set(value)
     this.buffer.resize(fbeInitialSize + fbeStructSize)
 
-    this.writeUInt32(this._model.FBEOffset - 8, fbeStructSize)
-    this.writeUInt32(this._model.FBEOffset - 4, fbeStructType)
+    this.writeUInt32(this._model.fbeOffset - 8, fbeStructSize)
+    this.writeUInt32(this._model.fbeOffset - 4, fbeStructType)
 
     return fbeStructSize
   }
@@ -4867,13 +4867,13 @@ class StructSimpleFinalModel extends fbe.Model {
    * @return {!object} Deserialized StructSimple value and its size
    */
   deserialize (value = new StructSimple()) {
-    console.assert(((this.buffer.offset + this._model.FBEOffset) <= this.buffer.size), 'Model is broken!')
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    console.assert(((this.buffer.offset + this._model.fbeOffset) <= this.buffer.size), 'Model is broken!')
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return { value: new StructSimple(), size: 0 }
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     console.assert(((fbeStructSize > 0) && (fbeStructType === this.FBEType)), 'Model is broken!')
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return { value: new StructSimple(), size: 8 }
@@ -4889,7 +4889,7 @@ class StructSimpleFinalModel extends fbe.Model {
    * @param {!number} prev Previous StructSimple model size
    */
   next (prev) {
-    this._model.FBEShift(prev)
+    this._model.fbeShift(prev)
   }
 }
 
@@ -5981,72 +5981,72 @@ class FieldModelStructOptional extends fbe.FieldModel {
   constructor (buffer, offset) {
     super(buffer, offset)
     this._parent = new FieldModelStructSimple(buffer, 4 + 4)
-    this._f100 = new fbe.FieldModelOptional(new fbe.FieldModelBool(buffer, this._parent.FBEOffset + this._parent.FBEBody - 4 - 4), buffer, this._parent.FBEOffset + this._parent.FBEBody - 4 - 4)
-    this._f101 = new fbe.FieldModelOptional(new fbe.FieldModelBool(buffer, this._f100.FBEOffset + this._f100.FBESize), buffer, this._f100.FBEOffset + this._f100.FBESize)
-    this._f102 = new fbe.FieldModelOptional(new fbe.FieldModelBool(buffer, this._f101.FBEOffset + this._f101.FBESize), buffer, this._f101.FBEOffset + this._f101.FBESize)
-    this._f103 = new fbe.FieldModelOptional(new fbe.FieldModelByte(buffer, this._f102.FBEOffset + this._f102.FBESize), buffer, this._f102.FBEOffset + this._f102.FBESize)
-    this._f104 = new fbe.FieldModelOptional(new fbe.FieldModelByte(buffer, this._f103.FBEOffset + this._f103.FBESize), buffer, this._f103.FBEOffset + this._f103.FBESize)
-    this._f105 = new fbe.FieldModelOptional(new fbe.FieldModelByte(buffer, this._f104.FBEOffset + this._f104.FBESize), buffer, this._f104.FBEOffset + this._f104.FBESize)
-    this._f106 = new fbe.FieldModelOptional(new fbe.FieldModelChar(buffer, this._f105.FBEOffset + this._f105.FBESize), buffer, this._f105.FBEOffset + this._f105.FBESize)
-    this._f107 = new fbe.FieldModelOptional(new fbe.FieldModelChar(buffer, this._f106.FBEOffset + this._f106.FBESize), buffer, this._f106.FBEOffset + this._f106.FBESize)
-    this._f108 = new fbe.FieldModelOptional(new fbe.FieldModelChar(buffer, this._f107.FBEOffset + this._f107.FBESize), buffer, this._f107.FBEOffset + this._f107.FBESize)
-    this._f109 = new fbe.FieldModelOptional(new fbe.FieldModelWChar(buffer, this._f108.FBEOffset + this._f108.FBESize), buffer, this._f108.FBEOffset + this._f108.FBESize)
-    this._f110 = new fbe.FieldModelOptional(new fbe.FieldModelWChar(buffer, this._f109.FBEOffset + this._f109.FBESize), buffer, this._f109.FBEOffset + this._f109.FBESize)
-    this._f111 = new fbe.FieldModelOptional(new fbe.FieldModelWChar(buffer, this._f110.FBEOffset + this._f110.FBESize), buffer, this._f110.FBEOffset + this._f110.FBESize)
-    this._f112 = new fbe.FieldModelOptional(new fbe.FieldModelInt8(buffer, this._f111.FBEOffset + this._f111.FBESize), buffer, this._f111.FBEOffset + this._f111.FBESize)
-    this._f113 = new fbe.FieldModelOptional(new fbe.FieldModelInt8(buffer, this._f112.FBEOffset + this._f112.FBESize), buffer, this._f112.FBEOffset + this._f112.FBESize)
-    this._f114 = new fbe.FieldModelOptional(new fbe.FieldModelInt8(buffer, this._f113.FBEOffset + this._f113.FBESize), buffer, this._f113.FBEOffset + this._f113.FBESize)
-    this._f115 = new fbe.FieldModelOptional(new fbe.FieldModelUInt8(buffer, this._f114.FBEOffset + this._f114.FBESize), buffer, this._f114.FBEOffset + this._f114.FBESize)
-    this._f116 = new fbe.FieldModelOptional(new fbe.FieldModelUInt8(buffer, this._f115.FBEOffset + this._f115.FBESize), buffer, this._f115.FBEOffset + this._f115.FBESize)
-    this._f117 = new fbe.FieldModelOptional(new fbe.FieldModelUInt8(buffer, this._f116.FBEOffset + this._f116.FBESize), buffer, this._f116.FBEOffset + this._f116.FBESize)
-    this._f118 = new fbe.FieldModelOptional(new fbe.FieldModelInt16(buffer, this._f117.FBEOffset + this._f117.FBESize), buffer, this._f117.FBEOffset + this._f117.FBESize)
-    this._f119 = new fbe.FieldModelOptional(new fbe.FieldModelInt16(buffer, this._f118.FBEOffset + this._f118.FBESize), buffer, this._f118.FBEOffset + this._f118.FBESize)
-    this._f120 = new fbe.FieldModelOptional(new fbe.FieldModelInt16(buffer, this._f119.FBEOffset + this._f119.FBESize), buffer, this._f119.FBEOffset + this._f119.FBESize)
-    this._f121 = new fbe.FieldModelOptional(new fbe.FieldModelUInt16(buffer, this._f120.FBEOffset + this._f120.FBESize), buffer, this._f120.FBEOffset + this._f120.FBESize)
-    this._f122 = new fbe.FieldModelOptional(new fbe.FieldModelUInt16(buffer, this._f121.FBEOffset + this._f121.FBESize), buffer, this._f121.FBEOffset + this._f121.FBESize)
-    this._f123 = new fbe.FieldModelOptional(new fbe.FieldModelUInt16(buffer, this._f122.FBEOffset + this._f122.FBESize), buffer, this._f122.FBEOffset + this._f122.FBESize)
-    this._f124 = new fbe.FieldModelOptional(new fbe.FieldModelInt32(buffer, this._f123.FBEOffset + this._f123.FBESize), buffer, this._f123.FBEOffset + this._f123.FBESize)
-    this._f125 = new fbe.FieldModelOptional(new fbe.FieldModelInt32(buffer, this._f124.FBEOffset + this._f124.FBESize), buffer, this._f124.FBEOffset + this._f124.FBESize)
-    this._f126 = new fbe.FieldModelOptional(new fbe.FieldModelInt32(buffer, this._f125.FBEOffset + this._f125.FBESize), buffer, this._f125.FBEOffset + this._f125.FBESize)
-    this._f127 = new fbe.FieldModelOptional(new fbe.FieldModelUInt32(buffer, this._f126.FBEOffset + this._f126.FBESize), buffer, this._f126.FBEOffset + this._f126.FBESize)
-    this._f128 = new fbe.FieldModelOptional(new fbe.FieldModelUInt32(buffer, this._f127.FBEOffset + this._f127.FBESize), buffer, this._f127.FBEOffset + this._f127.FBESize)
-    this._f129 = new fbe.FieldModelOptional(new fbe.FieldModelUInt32(buffer, this._f128.FBEOffset + this._f128.FBESize), buffer, this._f128.FBEOffset + this._f128.FBESize)
-    this._f130 = new fbe.FieldModelOptional(new fbe.FieldModelInt64(buffer, this._f129.FBEOffset + this._f129.FBESize), buffer, this._f129.FBEOffset + this._f129.FBESize)
-    this._f131 = new fbe.FieldModelOptional(new fbe.FieldModelInt64(buffer, this._f130.FBEOffset + this._f130.FBESize), buffer, this._f130.FBEOffset + this._f130.FBESize)
-    this._f132 = new fbe.FieldModelOptional(new fbe.FieldModelInt64(buffer, this._f131.FBEOffset + this._f131.FBESize), buffer, this._f131.FBEOffset + this._f131.FBESize)
-    this._f133 = new fbe.FieldModelOptional(new fbe.FieldModelUInt64(buffer, this._f132.FBEOffset + this._f132.FBESize), buffer, this._f132.FBEOffset + this._f132.FBESize)
-    this._f134 = new fbe.FieldModelOptional(new fbe.FieldModelUInt64(buffer, this._f133.FBEOffset + this._f133.FBESize), buffer, this._f133.FBEOffset + this._f133.FBESize)
-    this._f135 = new fbe.FieldModelOptional(new fbe.FieldModelUInt64(buffer, this._f134.FBEOffset + this._f134.FBESize), buffer, this._f134.FBEOffset + this._f134.FBESize)
-    this._f136 = new fbe.FieldModelOptional(new fbe.FieldModelFloat(buffer, this._f135.FBEOffset + this._f135.FBESize), buffer, this._f135.FBEOffset + this._f135.FBESize)
-    this._f137 = new fbe.FieldModelOptional(new fbe.FieldModelFloat(buffer, this._f136.FBEOffset + this._f136.FBESize), buffer, this._f136.FBEOffset + this._f136.FBESize)
-    this._f138 = new fbe.FieldModelOptional(new fbe.FieldModelFloat(buffer, this._f137.FBEOffset + this._f137.FBESize), buffer, this._f137.FBEOffset + this._f137.FBESize)
-    this._f139 = new fbe.FieldModelOptional(new fbe.FieldModelDouble(buffer, this._f138.FBEOffset + this._f138.FBESize), buffer, this._f138.FBEOffset + this._f138.FBESize)
-    this._f140 = new fbe.FieldModelOptional(new fbe.FieldModelDouble(buffer, this._f139.FBEOffset + this._f139.FBESize), buffer, this._f139.FBEOffset + this._f139.FBESize)
-    this._f141 = new fbe.FieldModelOptional(new fbe.FieldModelDouble(buffer, this._f140.FBEOffset + this._f140.FBESize), buffer, this._f140.FBEOffset + this._f140.FBESize)
-    this._f142 = new fbe.FieldModelOptional(new fbe.FieldModelDecimal(buffer, this._f141.FBEOffset + this._f141.FBESize), buffer, this._f141.FBEOffset + this._f141.FBESize)
-    this._f143 = new fbe.FieldModelOptional(new fbe.FieldModelDecimal(buffer, this._f142.FBEOffset + this._f142.FBESize), buffer, this._f142.FBEOffset + this._f142.FBESize)
-    this._f144 = new fbe.FieldModelOptional(new fbe.FieldModelDecimal(buffer, this._f143.FBEOffset + this._f143.FBESize), buffer, this._f143.FBEOffset + this._f143.FBESize)
-    this._f145 = new fbe.FieldModelOptional(new fbe.FieldModelString(buffer, this._f144.FBEOffset + this._f144.FBESize), buffer, this._f144.FBEOffset + this._f144.FBESize)
-    this._f146 = new fbe.FieldModelOptional(new fbe.FieldModelString(buffer, this._f145.FBEOffset + this._f145.FBESize), buffer, this._f145.FBEOffset + this._f145.FBESize)
-    this._f147 = new fbe.FieldModelOptional(new fbe.FieldModelString(buffer, this._f146.FBEOffset + this._f146.FBESize), buffer, this._f146.FBEOffset + this._f146.FBESize)
-    this._f148 = new fbe.FieldModelOptional(new fbe.FieldModelTimestamp(buffer, this._f147.FBEOffset + this._f147.FBESize), buffer, this._f147.FBEOffset + this._f147.FBESize)
-    this._f149 = new fbe.FieldModelOptional(new fbe.FieldModelTimestamp(buffer, this._f148.FBEOffset + this._f148.FBESize), buffer, this._f148.FBEOffset + this._f148.FBESize)
-    this._f150 = new fbe.FieldModelOptional(new fbe.FieldModelTimestamp(buffer, this._f149.FBEOffset + this._f149.FBESize), buffer, this._f149.FBEOffset + this._f149.FBESize)
-    this._f151 = new fbe.FieldModelOptional(new fbe.FieldModelUUID(buffer, this._f150.FBEOffset + this._f150.FBESize), buffer, this._f150.FBEOffset + this._f150.FBESize)
-    this._f152 = new fbe.FieldModelOptional(new fbe.FieldModelUUID(buffer, this._f151.FBEOffset + this._f151.FBESize), buffer, this._f151.FBEOffset + this._f151.FBESize)
-    this._f153 = new fbe.FieldModelOptional(new fbe.FieldModelUUID(buffer, this._f152.FBEOffset + this._f152.FBESize), buffer, this._f152.FBEOffset + this._f152.FBESize)
-    this._f154 = new fbe.FieldModelOptional(new proto.FieldModelOrderSide(buffer, this._f153.FBEOffset + this._f153.FBESize), buffer, this._f153.FBEOffset + this._f153.FBESize)
-    this._f155 = new fbe.FieldModelOptional(new proto.FieldModelOrderSide(buffer, this._f154.FBEOffset + this._f154.FBESize), buffer, this._f154.FBEOffset + this._f154.FBESize)
-    this._f156 = new fbe.FieldModelOptional(new proto.FieldModelOrderType(buffer, this._f155.FBEOffset + this._f155.FBESize), buffer, this._f155.FBEOffset + this._f155.FBESize)
-    this._f157 = new fbe.FieldModelOptional(new proto.FieldModelOrderType(buffer, this._f156.FBEOffset + this._f156.FBESize), buffer, this._f156.FBEOffset + this._f156.FBESize)
-    this._f158 = new fbe.FieldModelOptional(new proto.FieldModelOrder(buffer, this._f157.FBEOffset + this._f157.FBESize), buffer, this._f157.FBEOffset + this._f157.FBESize)
-    this._f159 = new fbe.FieldModelOptional(new proto.FieldModelOrder(buffer, this._f158.FBEOffset + this._f158.FBESize), buffer, this._f158.FBEOffset + this._f158.FBESize)
-    this._f160 = new fbe.FieldModelOptional(new proto.FieldModelBalance(buffer, this._f159.FBEOffset + this._f159.FBESize), buffer, this._f159.FBEOffset + this._f159.FBESize)
-    this._f161 = new fbe.FieldModelOptional(new proto.FieldModelBalance(buffer, this._f160.FBEOffset + this._f160.FBESize), buffer, this._f160.FBEOffset + this._f160.FBESize)
-    this._f162 = new fbe.FieldModelOptional(new proto.FieldModelState(buffer, this._f161.FBEOffset + this._f161.FBESize), buffer, this._f161.FBEOffset + this._f161.FBESize)
-    this._f163 = new fbe.FieldModelOptional(new proto.FieldModelState(buffer, this._f162.FBEOffset + this._f162.FBESize), buffer, this._f162.FBEOffset + this._f162.FBESize)
-    this._f164 = new fbe.FieldModelOptional(new proto.FieldModelAccount(buffer, this._f163.FBEOffset + this._f163.FBESize), buffer, this._f163.FBEOffset + this._f163.FBESize)
-    this._f165 = new fbe.FieldModelOptional(new proto.FieldModelAccount(buffer, this._f164.FBEOffset + this._f164.FBESize), buffer, this._f164.FBEOffset + this._f164.FBESize)
+    this._f100 = new fbe.FieldModelOptional(new fbe.FieldModelBool(buffer, this._parent.fbeOffset + this._parent.FBEBody - 4 - 4), buffer, this._parent.fbeOffset + this._parent.FBEBody - 4 - 4)
+    this._f101 = new fbe.FieldModelOptional(new fbe.FieldModelBool(buffer, this._f100.fbeOffset + this._f100.fbeSize), buffer, this._f100.fbeOffset + this._f100.fbeSize)
+    this._f102 = new fbe.FieldModelOptional(new fbe.FieldModelBool(buffer, this._f101.fbeOffset + this._f101.fbeSize), buffer, this._f101.fbeOffset + this._f101.fbeSize)
+    this._f103 = new fbe.FieldModelOptional(new fbe.FieldModelByte(buffer, this._f102.fbeOffset + this._f102.fbeSize), buffer, this._f102.fbeOffset + this._f102.fbeSize)
+    this._f104 = new fbe.FieldModelOptional(new fbe.FieldModelByte(buffer, this._f103.fbeOffset + this._f103.fbeSize), buffer, this._f103.fbeOffset + this._f103.fbeSize)
+    this._f105 = new fbe.FieldModelOptional(new fbe.FieldModelByte(buffer, this._f104.fbeOffset + this._f104.fbeSize), buffer, this._f104.fbeOffset + this._f104.fbeSize)
+    this._f106 = new fbe.FieldModelOptional(new fbe.FieldModelChar(buffer, this._f105.fbeOffset + this._f105.fbeSize), buffer, this._f105.fbeOffset + this._f105.fbeSize)
+    this._f107 = new fbe.FieldModelOptional(new fbe.FieldModelChar(buffer, this._f106.fbeOffset + this._f106.fbeSize), buffer, this._f106.fbeOffset + this._f106.fbeSize)
+    this._f108 = new fbe.FieldModelOptional(new fbe.FieldModelChar(buffer, this._f107.fbeOffset + this._f107.fbeSize), buffer, this._f107.fbeOffset + this._f107.fbeSize)
+    this._f109 = new fbe.FieldModelOptional(new fbe.FieldModelWChar(buffer, this._f108.fbeOffset + this._f108.fbeSize), buffer, this._f108.fbeOffset + this._f108.fbeSize)
+    this._f110 = new fbe.FieldModelOptional(new fbe.FieldModelWChar(buffer, this._f109.fbeOffset + this._f109.fbeSize), buffer, this._f109.fbeOffset + this._f109.fbeSize)
+    this._f111 = new fbe.FieldModelOptional(new fbe.FieldModelWChar(buffer, this._f110.fbeOffset + this._f110.fbeSize), buffer, this._f110.fbeOffset + this._f110.fbeSize)
+    this._f112 = new fbe.FieldModelOptional(new fbe.FieldModelInt8(buffer, this._f111.fbeOffset + this._f111.fbeSize), buffer, this._f111.fbeOffset + this._f111.fbeSize)
+    this._f113 = new fbe.FieldModelOptional(new fbe.FieldModelInt8(buffer, this._f112.fbeOffset + this._f112.fbeSize), buffer, this._f112.fbeOffset + this._f112.fbeSize)
+    this._f114 = new fbe.FieldModelOptional(new fbe.FieldModelInt8(buffer, this._f113.fbeOffset + this._f113.fbeSize), buffer, this._f113.fbeOffset + this._f113.fbeSize)
+    this._f115 = new fbe.FieldModelOptional(new fbe.FieldModelUInt8(buffer, this._f114.fbeOffset + this._f114.fbeSize), buffer, this._f114.fbeOffset + this._f114.fbeSize)
+    this._f116 = new fbe.FieldModelOptional(new fbe.FieldModelUInt8(buffer, this._f115.fbeOffset + this._f115.fbeSize), buffer, this._f115.fbeOffset + this._f115.fbeSize)
+    this._f117 = new fbe.FieldModelOptional(new fbe.FieldModelUInt8(buffer, this._f116.fbeOffset + this._f116.fbeSize), buffer, this._f116.fbeOffset + this._f116.fbeSize)
+    this._f118 = new fbe.FieldModelOptional(new fbe.FieldModelInt16(buffer, this._f117.fbeOffset + this._f117.fbeSize), buffer, this._f117.fbeOffset + this._f117.fbeSize)
+    this._f119 = new fbe.FieldModelOptional(new fbe.FieldModelInt16(buffer, this._f118.fbeOffset + this._f118.fbeSize), buffer, this._f118.fbeOffset + this._f118.fbeSize)
+    this._f120 = new fbe.FieldModelOptional(new fbe.FieldModelInt16(buffer, this._f119.fbeOffset + this._f119.fbeSize), buffer, this._f119.fbeOffset + this._f119.fbeSize)
+    this._f121 = new fbe.FieldModelOptional(new fbe.FieldModelUInt16(buffer, this._f120.fbeOffset + this._f120.fbeSize), buffer, this._f120.fbeOffset + this._f120.fbeSize)
+    this._f122 = new fbe.FieldModelOptional(new fbe.FieldModelUInt16(buffer, this._f121.fbeOffset + this._f121.fbeSize), buffer, this._f121.fbeOffset + this._f121.fbeSize)
+    this._f123 = new fbe.FieldModelOptional(new fbe.FieldModelUInt16(buffer, this._f122.fbeOffset + this._f122.fbeSize), buffer, this._f122.fbeOffset + this._f122.fbeSize)
+    this._f124 = new fbe.FieldModelOptional(new fbe.FieldModelInt32(buffer, this._f123.fbeOffset + this._f123.fbeSize), buffer, this._f123.fbeOffset + this._f123.fbeSize)
+    this._f125 = new fbe.FieldModelOptional(new fbe.FieldModelInt32(buffer, this._f124.fbeOffset + this._f124.fbeSize), buffer, this._f124.fbeOffset + this._f124.fbeSize)
+    this._f126 = new fbe.FieldModelOptional(new fbe.FieldModelInt32(buffer, this._f125.fbeOffset + this._f125.fbeSize), buffer, this._f125.fbeOffset + this._f125.fbeSize)
+    this._f127 = new fbe.FieldModelOptional(new fbe.FieldModelUInt32(buffer, this._f126.fbeOffset + this._f126.fbeSize), buffer, this._f126.fbeOffset + this._f126.fbeSize)
+    this._f128 = new fbe.FieldModelOptional(new fbe.FieldModelUInt32(buffer, this._f127.fbeOffset + this._f127.fbeSize), buffer, this._f127.fbeOffset + this._f127.fbeSize)
+    this._f129 = new fbe.FieldModelOptional(new fbe.FieldModelUInt32(buffer, this._f128.fbeOffset + this._f128.fbeSize), buffer, this._f128.fbeOffset + this._f128.fbeSize)
+    this._f130 = new fbe.FieldModelOptional(new fbe.FieldModelInt64(buffer, this._f129.fbeOffset + this._f129.fbeSize), buffer, this._f129.fbeOffset + this._f129.fbeSize)
+    this._f131 = new fbe.FieldModelOptional(new fbe.FieldModelInt64(buffer, this._f130.fbeOffset + this._f130.fbeSize), buffer, this._f130.fbeOffset + this._f130.fbeSize)
+    this._f132 = new fbe.FieldModelOptional(new fbe.FieldModelInt64(buffer, this._f131.fbeOffset + this._f131.fbeSize), buffer, this._f131.fbeOffset + this._f131.fbeSize)
+    this._f133 = new fbe.FieldModelOptional(new fbe.FieldModelUInt64(buffer, this._f132.fbeOffset + this._f132.fbeSize), buffer, this._f132.fbeOffset + this._f132.fbeSize)
+    this._f134 = new fbe.FieldModelOptional(new fbe.FieldModelUInt64(buffer, this._f133.fbeOffset + this._f133.fbeSize), buffer, this._f133.fbeOffset + this._f133.fbeSize)
+    this._f135 = new fbe.FieldModelOptional(new fbe.FieldModelUInt64(buffer, this._f134.fbeOffset + this._f134.fbeSize), buffer, this._f134.fbeOffset + this._f134.fbeSize)
+    this._f136 = new fbe.FieldModelOptional(new fbe.FieldModelFloat(buffer, this._f135.fbeOffset + this._f135.fbeSize), buffer, this._f135.fbeOffset + this._f135.fbeSize)
+    this._f137 = new fbe.FieldModelOptional(new fbe.FieldModelFloat(buffer, this._f136.fbeOffset + this._f136.fbeSize), buffer, this._f136.fbeOffset + this._f136.fbeSize)
+    this._f138 = new fbe.FieldModelOptional(new fbe.FieldModelFloat(buffer, this._f137.fbeOffset + this._f137.fbeSize), buffer, this._f137.fbeOffset + this._f137.fbeSize)
+    this._f139 = new fbe.FieldModelOptional(new fbe.FieldModelDouble(buffer, this._f138.fbeOffset + this._f138.fbeSize), buffer, this._f138.fbeOffset + this._f138.fbeSize)
+    this._f140 = new fbe.FieldModelOptional(new fbe.FieldModelDouble(buffer, this._f139.fbeOffset + this._f139.fbeSize), buffer, this._f139.fbeOffset + this._f139.fbeSize)
+    this._f141 = new fbe.FieldModelOptional(new fbe.FieldModelDouble(buffer, this._f140.fbeOffset + this._f140.fbeSize), buffer, this._f140.fbeOffset + this._f140.fbeSize)
+    this._f142 = new fbe.FieldModelOptional(new fbe.FieldModelDecimal(buffer, this._f141.fbeOffset + this._f141.fbeSize), buffer, this._f141.fbeOffset + this._f141.fbeSize)
+    this._f143 = new fbe.FieldModelOptional(new fbe.FieldModelDecimal(buffer, this._f142.fbeOffset + this._f142.fbeSize), buffer, this._f142.fbeOffset + this._f142.fbeSize)
+    this._f144 = new fbe.FieldModelOptional(new fbe.FieldModelDecimal(buffer, this._f143.fbeOffset + this._f143.fbeSize), buffer, this._f143.fbeOffset + this._f143.fbeSize)
+    this._f145 = new fbe.FieldModelOptional(new fbe.FieldModelString(buffer, this._f144.fbeOffset + this._f144.fbeSize), buffer, this._f144.fbeOffset + this._f144.fbeSize)
+    this._f146 = new fbe.FieldModelOptional(new fbe.FieldModelString(buffer, this._f145.fbeOffset + this._f145.fbeSize), buffer, this._f145.fbeOffset + this._f145.fbeSize)
+    this._f147 = new fbe.FieldModelOptional(new fbe.FieldModelString(buffer, this._f146.fbeOffset + this._f146.fbeSize), buffer, this._f146.fbeOffset + this._f146.fbeSize)
+    this._f148 = new fbe.FieldModelOptional(new fbe.FieldModelTimestamp(buffer, this._f147.fbeOffset + this._f147.fbeSize), buffer, this._f147.fbeOffset + this._f147.fbeSize)
+    this._f149 = new fbe.FieldModelOptional(new fbe.FieldModelTimestamp(buffer, this._f148.fbeOffset + this._f148.fbeSize), buffer, this._f148.fbeOffset + this._f148.fbeSize)
+    this._f150 = new fbe.FieldModelOptional(new fbe.FieldModelTimestamp(buffer, this._f149.fbeOffset + this._f149.fbeSize), buffer, this._f149.fbeOffset + this._f149.fbeSize)
+    this._f151 = new fbe.FieldModelOptional(new fbe.FieldModelUUID(buffer, this._f150.fbeOffset + this._f150.fbeSize), buffer, this._f150.fbeOffset + this._f150.fbeSize)
+    this._f152 = new fbe.FieldModelOptional(new fbe.FieldModelUUID(buffer, this._f151.fbeOffset + this._f151.fbeSize), buffer, this._f151.fbeOffset + this._f151.fbeSize)
+    this._f153 = new fbe.FieldModelOptional(new fbe.FieldModelUUID(buffer, this._f152.fbeOffset + this._f152.fbeSize), buffer, this._f152.fbeOffset + this._f152.fbeSize)
+    this._f154 = new fbe.FieldModelOptional(new proto.FieldModelOrderSide(buffer, this._f153.fbeOffset + this._f153.fbeSize), buffer, this._f153.fbeOffset + this._f153.fbeSize)
+    this._f155 = new fbe.FieldModelOptional(new proto.FieldModelOrderSide(buffer, this._f154.fbeOffset + this._f154.fbeSize), buffer, this._f154.fbeOffset + this._f154.fbeSize)
+    this._f156 = new fbe.FieldModelOptional(new proto.FieldModelOrderType(buffer, this._f155.fbeOffset + this._f155.fbeSize), buffer, this._f155.fbeOffset + this._f155.fbeSize)
+    this._f157 = new fbe.FieldModelOptional(new proto.FieldModelOrderType(buffer, this._f156.fbeOffset + this._f156.fbeSize), buffer, this._f156.fbeOffset + this._f156.fbeSize)
+    this._f158 = new fbe.FieldModelOptional(new proto.FieldModelOrder(buffer, this._f157.fbeOffset + this._f157.fbeSize), buffer, this._f157.fbeOffset + this._f157.fbeSize)
+    this._f159 = new fbe.FieldModelOptional(new proto.FieldModelOrder(buffer, this._f158.fbeOffset + this._f158.fbeSize), buffer, this._f158.fbeOffset + this._f158.fbeSize)
+    this._f160 = new fbe.FieldModelOptional(new proto.FieldModelBalance(buffer, this._f159.fbeOffset + this._f159.fbeSize), buffer, this._f159.fbeOffset + this._f159.fbeSize)
+    this._f161 = new fbe.FieldModelOptional(new proto.FieldModelBalance(buffer, this._f160.fbeOffset + this._f160.fbeSize), buffer, this._f160.fbeOffset + this._f160.fbeSize)
+    this._f162 = new fbe.FieldModelOptional(new proto.FieldModelState(buffer, this._f161.fbeOffset + this._f161.fbeSize), buffer, this._f161.fbeOffset + this._f161.fbeSize)
+    this._f163 = new fbe.FieldModelOptional(new proto.FieldModelState(buffer, this._f162.fbeOffset + this._f162.fbeSize), buffer, this._f162.fbeOffset + this._f162.fbeSize)
+    this._f164 = new fbe.FieldModelOptional(new proto.FieldModelAccount(buffer, this._f163.fbeOffset + this._f163.fbeSize), buffer, this._f163.fbeOffset + this._f163.fbeSize)
+    this._f165 = new fbe.FieldModelOptional(new proto.FieldModelAccount(buffer, this._f164.fbeOffset + this._f164.fbeSize), buffer, this._f164.fbeOffset + this._f164.fbeSize)
   }
 
   /**
@@ -6657,7 +6657,7 @@ class FieldModelStructOptional extends fbe.FieldModel {
    * @this {!FieldModelStructOptional}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -6667,7 +6667,7 @@ class FieldModelStructOptional extends fbe.FieldModel {
    * @returns {!number} Field body size
    */
   get FBEBody () {
-    return 4 + 4 + this.parent.FBEBody - 4 - 4 + this.f100.FBESize + this.f101.FBESize + this.f102.FBESize + this.f103.FBESize + this.f104.FBESize + this.f105.FBESize + this.f106.FBESize + this.f107.FBESize + this.f108.FBESize + this.f109.FBESize + this.f110.FBESize + this.f111.FBESize + this.f112.FBESize + this.f113.FBESize + this.f114.FBESize + this.f115.FBESize + this.f116.FBESize + this.f117.FBESize + this.f118.FBESize + this.f119.FBESize + this.f120.FBESize + this.f121.FBESize + this.f122.FBESize + this.f123.FBESize + this.f124.FBESize + this.f125.FBESize + this.f126.FBESize + this.f127.FBESize + this.f128.FBESize + this.f129.FBESize + this.f130.FBESize + this.f131.FBESize + this.f132.FBESize + this.f133.FBESize + this.f134.FBESize + this.f135.FBESize + this.f136.FBESize + this.f137.FBESize + this.f138.FBESize + this.f139.FBESize + this.f140.FBESize + this.f141.FBESize + this.f142.FBESize + this.f143.FBESize + this.f144.FBESize + this.f145.FBESize + this.f146.FBESize + this.f147.FBESize + this.f148.FBESize + this.f149.FBESize + this.f150.FBESize + this.f151.FBESize + this.f152.FBESize + this.f153.FBESize + this.f154.FBESize + this.f155.FBESize + this.f156.FBESize + this.f157.FBESize + this.f158.FBESize + this.f159.FBESize + this.f160.FBESize + this.f161.FBESize + this.f162.FBESize + this.f163.FBESize + this.f164.FBESize + this.f165.FBESize
+    return 4 + 4 + this.parent.FBEBody - 4 - 4 + this.f100.fbeSize + this.f101.fbeSize + this.f102.fbeSize + this.f103.fbeSize + this.f104.fbeSize + this.f105.fbeSize + this.f106.fbeSize + this.f107.fbeSize + this.f108.fbeSize + this.f109.fbeSize + this.f110.fbeSize + this.f111.fbeSize + this.f112.fbeSize + this.f113.fbeSize + this.f114.fbeSize + this.f115.fbeSize + this.f116.fbeSize + this.f117.fbeSize + this.f118.fbeSize + this.f119.fbeSize + this.f120.fbeSize + this.f121.fbeSize + this.f122.fbeSize + this.f123.fbeSize + this.f124.fbeSize + this.f125.fbeSize + this.f126.fbeSize + this.f127.fbeSize + this.f128.fbeSize + this.f129.fbeSize + this.f130.fbeSize + this.f131.fbeSize + this.f132.fbeSize + this.f133.fbeSize + this.f134.fbeSize + this.f135.fbeSize + this.f136.fbeSize + this.f137.fbeSize + this.f138.fbeSize + this.f139.fbeSize + this.f140.fbeSize + this.f141.fbeSize + this.f142.fbeSize + this.f143.fbeSize + this.f144.fbeSize + this.f145.fbeSize + this.f146.fbeSize + this.f147.fbeSize + this.f148.fbeSize + this.f149.fbeSize + this.f150.fbeSize + this.f151.fbeSize + this.f152.fbeSize + this.f153.fbeSize + this.f154.fbeSize + this.f155.fbeSize + this.f156.fbeSize + this.f157.fbeSize + this.f158.fbeSize + this.f159.fbeSize + this.f160.fbeSize + this.f161.fbeSize + this.f162.fbeSize + this.f163.fbeSize + this.f164.fbeSize + this.f165.fbeSize
   }
 
   /**
@@ -6675,19 +6675,19 @@ class FieldModelStructOptional extends fbe.FieldModel {
    * @this {!FieldModelStructOptional}
    * @returns {!number} Field extra size
    */
-  get FBEExtra () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4) > this._buffer.size)) {
       return 0
     }
 
     this._buffer.shift(fbeStructOffset)
 
-    let fbeResult = this.FBEBody + this.parent.FBEExtra + this.f100.FBEExtra + this.f101.FBEExtra + this.f102.FBEExtra + this.f103.FBEExtra + this.f104.FBEExtra + this.f105.FBEExtra + this.f106.FBEExtra + this.f107.FBEExtra + this.f108.FBEExtra + this.f109.FBEExtra + this.f110.FBEExtra + this.f111.FBEExtra + this.f112.FBEExtra + this.f113.FBEExtra + this.f114.FBEExtra + this.f115.FBEExtra + this.f116.FBEExtra + this.f117.FBEExtra + this.f118.FBEExtra + this.f119.FBEExtra + this.f120.FBEExtra + this.f121.FBEExtra + this.f122.FBEExtra + this.f123.FBEExtra + this.f124.FBEExtra + this.f125.FBEExtra + this.f126.FBEExtra + this.f127.FBEExtra + this.f128.FBEExtra + this.f129.FBEExtra + this.f130.FBEExtra + this.f131.FBEExtra + this.f132.FBEExtra + this.f133.FBEExtra + this.f134.FBEExtra + this.f135.FBEExtra + this.f136.FBEExtra + this.f137.FBEExtra + this.f138.FBEExtra + this.f139.FBEExtra + this.f140.FBEExtra + this.f141.FBEExtra + this.f142.FBEExtra + this.f143.FBEExtra + this.f144.FBEExtra + this.f145.FBEExtra + this.f146.FBEExtra + this.f147.FBEExtra + this.f148.FBEExtra + this.f149.FBEExtra + this.f150.FBEExtra + this.f151.FBEExtra + this.f152.FBEExtra + this.f153.FBEExtra + this.f154.FBEExtra + this.f155.FBEExtra + this.f156.FBEExtra + this.f157.FBEExtra + this.f158.FBEExtra + this.f159.FBEExtra + this.f160.FBEExtra + this.f161.FBEExtra + this.f162.FBEExtra + this.f163.FBEExtra + this.f164.FBEExtra + this.f165.FBEExtra
+    let fbeResult = this.FBEBody + this.parent.fbeExtra + this.f100.fbeExtra + this.f101.fbeExtra + this.f102.fbeExtra + this.f103.fbeExtra + this.f104.fbeExtra + this.f105.fbeExtra + this.f106.fbeExtra + this.f107.fbeExtra + this.f108.fbeExtra + this.f109.fbeExtra + this.f110.fbeExtra + this.f111.fbeExtra + this.f112.fbeExtra + this.f113.fbeExtra + this.f114.fbeExtra + this.f115.fbeExtra + this.f116.fbeExtra + this.f117.fbeExtra + this.f118.fbeExtra + this.f119.fbeExtra + this.f120.fbeExtra + this.f121.fbeExtra + this.f122.fbeExtra + this.f123.fbeExtra + this.f124.fbeExtra + this.f125.fbeExtra + this.f126.fbeExtra + this.f127.fbeExtra + this.f128.fbeExtra + this.f129.fbeExtra + this.f130.fbeExtra + this.f131.fbeExtra + this.f132.fbeExtra + this.f133.fbeExtra + this.f134.fbeExtra + this.f135.fbeExtra + this.f136.fbeExtra + this.f137.fbeExtra + this.f138.fbeExtra + this.f139.fbeExtra + this.f140.fbeExtra + this.f141.fbeExtra + this.f142.fbeExtra + this.f143.fbeExtra + this.f144.fbeExtra + this.f145.fbeExtra + this.f146.fbeExtra + this.f147.fbeExtra + this.f148.fbeExtra + this.f149.fbeExtra + this.f150.fbeExtra + this.f151.fbeExtra + this.f152.fbeExtra + this.f153.fbeExtra + this.f154.fbeExtra + this.f155.fbeExtra + this.f156.fbeExtra + this.f157.fbeExtra + this.f158.fbeExtra + this.f159.fbeExtra + this.f160.fbeExtra + this.f161.fbeExtra + this.f162.fbeExtra + this.f163.fbeExtra + this.f164.fbeExtra + this.f165.fbeExtra
 
     this._buffer.unshift(fbeStructOffset)
 
@@ -6719,11 +6719,11 @@ class FieldModelStructOptional extends fbe.FieldModel {
    * @returns {!boolean} Field model valid state
    */
   verify (fbeVerifyType = true) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return true
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return false
     }
@@ -6762,599 +6762,599 @@ class FieldModelStructOptional extends fbe.FieldModel {
     // noinspection JSUnusedAssignment
     fbeCurrentSize += this.parent.FBEBody - 4 - 4
 
-    if ((fbeCurrentSize + this.f100.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f100.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f100.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f100.FBESize
+    fbeCurrentSize += this.f100.fbeSize
 
-    if ((fbeCurrentSize + this.f101.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f101.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f101.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f101.FBESize
+    fbeCurrentSize += this.f101.fbeSize
 
-    if ((fbeCurrentSize + this.f102.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f102.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f102.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f102.FBESize
+    fbeCurrentSize += this.f102.fbeSize
 
-    if ((fbeCurrentSize + this.f103.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f103.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f103.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f103.FBESize
+    fbeCurrentSize += this.f103.fbeSize
 
-    if ((fbeCurrentSize + this.f104.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f104.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f104.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f104.FBESize
+    fbeCurrentSize += this.f104.fbeSize
 
-    if ((fbeCurrentSize + this.f105.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f105.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f105.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f105.FBESize
+    fbeCurrentSize += this.f105.fbeSize
 
-    if ((fbeCurrentSize + this.f106.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f106.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f106.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f106.FBESize
+    fbeCurrentSize += this.f106.fbeSize
 
-    if ((fbeCurrentSize + this.f107.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f107.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f107.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f107.FBESize
+    fbeCurrentSize += this.f107.fbeSize
 
-    if ((fbeCurrentSize + this.f108.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f108.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f108.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f108.FBESize
+    fbeCurrentSize += this.f108.fbeSize
 
-    if ((fbeCurrentSize + this.f109.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f109.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f109.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f109.FBESize
+    fbeCurrentSize += this.f109.fbeSize
 
-    if ((fbeCurrentSize + this.f110.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f110.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f110.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f110.FBESize
+    fbeCurrentSize += this.f110.fbeSize
 
-    if ((fbeCurrentSize + this.f111.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f111.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f111.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f111.FBESize
+    fbeCurrentSize += this.f111.fbeSize
 
-    if ((fbeCurrentSize + this.f112.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f112.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f112.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f112.FBESize
+    fbeCurrentSize += this.f112.fbeSize
 
-    if ((fbeCurrentSize + this.f113.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f113.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f113.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f113.FBESize
+    fbeCurrentSize += this.f113.fbeSize
 
-    if ((fbeCurrentSize + this.f114.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f114.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f114.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f114.FBESize
+    fbeCurrentSize += this.f114.fbeSize
 
-    if ((fbeCurrentSize + this.f115.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f115.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f115.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f115.FBESize
+    fbeCurrentSize += this.f115.fbeSize
 
-    if ((fbeCurrentSize + this.f116.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f116.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f116.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f116.FBESize
+    fbeCurrentSize += this.f116.fbeSize
 
-    if ((fbeCurrentSize + this.f117.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f117.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f117.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f117.FBESize
+    fbeCurrentSize += this.f117.fbeSize
 
-    if ((fbeCurrentSize + this.f118.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f118.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f118.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f118.FBESize
+    fbeCurrentSize += this.f118.fbeSize
 
-    if ((fbeCurrentSize + this.f119.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f119.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f119.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f119.FBESize
+    fbeCurrentSize += this.f119.fbeSize
 
-    if ((fbeCurrentSize + this.f120.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f120.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f120.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f120.FBESize
+    fbeCurrentSize += this.f120.fbeSize
 
-    if ((fbeCurrentSize + this.f121.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f121.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f121.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f121.FBESize
+    fbeCurrentSize += this.f121.fbeSize
 
-    if ((fbeCurrentSize + this.f122.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f122.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f122.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f122.FBESize
+    fbeCurrentSize += this.f122.fbeSize
 
-    if ((fbeCurrentSize + this.f123.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f123.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f123.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f123.FBESize
+    fbeCurrentSize += this.f123.fbeSize
 
-    if ((fbeCurrentSize + this.f124.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f124.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f124.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f124.FBESize
+    fbeCurrentSize += this.f124.fbeSize
 
-    if ((fbeCurrentSize + this.f125.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f125.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f125.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f125.FBESize
+    fbeCurrentSize += this.f125.fbeSize
 
-    if ((fbeCurrentSize + this.f126.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f126.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f126.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f126.FBESize
+    fbeCurrentSize += this.f126.fbeSize
 
-    if ((fbeCurrentSize + this.f127.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f127.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f127.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f127.FBESize
+    fbeCurrentSize += this.f127.fbeSize
 
-    if ((fbeCurrentSize + this.f128.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f128.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f128.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f128.FBESize
+    fbeCurrentSize += this.f128.fbeSize
 
-    if ((fbeCurrentSize + this.f129.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f129.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f129.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f129.FBESize
+    fbeCurrentSize += this.f129.fbeSize
 
-    if ((fbeCurrentSize + this.f130.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f130.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f130.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f130.FBESize
+    fbeCurrentSize += this.f130.fbeSize
 
-    if ((fbeCurrentSize + this.f131.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f131.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f131.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f131.FBESize
+    fbeCurrentSize += this.f131.fbeSize
 
-    if ((fbeCurrentSize + this.f132.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f132.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f132.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f132.FBESize
+    fbeCurrentSize += this.f132.fbeSize
 
-    if ((fbeCurrentSize + this.f133.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f133.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f133.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f133.FBESize
+    fbeCurrentSize += this.f133.fbeSize
 
-    if ((fbeCurrentSize + this.f134.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f134.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f134.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f134.FBESize
+    fbeCurrentSize += this.f134.fbeSize
 
-    if ((fbeCurrentSize + this.f135.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f135.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f135.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f135.FBESize
+    fbeCurrentSize += this.f135.fbeSize
 
-    if ((fbeCurrentSize + this.f136.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f136.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f136.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f136.FBESize
+    fbeCurrentSize += this.f136.fbeSize
 
-    if ((fbeCurrentSize + this.f137.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f137.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f137.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f137.FBESize
+    fbeCurrentSize += this.f137.fbeSize
 
-    if ((fbeCurrentSize + this.f138.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f138.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f138.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f138.FBESize
+    fbeCurrentSize += this.f138.fbeSize
 
-    if ((fbeCurrentSize + this.f139.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f139.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f139.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f139.FBESize
+    fbeCurrentSize += this.f139.fbeSize
 
-    if ((fbeCurrentSize + this.f140.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f140.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f140.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f140.FBESize
+    fbeCurrentSize += this.f140.fbeSize
 
-    if ((fbeCurrentSize + this.f141.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f141.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f141.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f141.FBESize
+    fbeCurrentSize += this.f141.fbeSize
 
-    if ((fbeCurrentSize + this.f142.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f142.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f142.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f142.FBESize
+    fbeCurrentSize += this.f142.fbeSize
 
-    if ((fbeCurrentSize + this.f143.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f143.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f143.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f143.FBESize
+    fbeCurrentSize += this.f143.fbeSize
 
-    if ((fbeCurrentSize + this.f144.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f144.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f144.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f144.FBESize
+    fbeCurrentSize += this.f144.fbeSize
 
-    if ((fbeCurrentSize + this.f145.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f145.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f145.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f145.FBESize
+    fbeCurrentSize += this.f145.fbeSize
 
-    if ((fbeCurrentSize + this.f146.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f146.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f146.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f146.FBESize
+    fbeCurrentSize += this.f146.fbeSize
 
-    if ((fbeCurrentSize + this.f147.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f147.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f147.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f147.FBESize
+    fbeCurrentSize += this.f147.fbeSize
 
-    if ((fbeCurrentSize + this.f148.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f148.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f148.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f148.FBESize
+    fbeCurrentSize += this.f148.fbeSize
 
-    if ((fbeCurrentSize + this.f149.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f149.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f149.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f149.FBESize
+    fbeCurrentSize += this.f149.fbeSize
 
-    if ((fbeCurrentSize + this.f150.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f150.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f150.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f150.FBESize
+    fbeCurrentSize += this.f150.fbeSize
 
-    if ((fbeCurrentSize + this.f151.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f151.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f151.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f151.FBESize
+    fbeCurrentSize += this.f151.fbeSize
 
-    if ((fbeCurrentSize + this.f152.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f152.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f152.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f152.FBESize
+    fbeCurrentSize += this.f152.fbeSize
 
-    if ((fbeCurrentSize + this.f153.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f153.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f153.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f153.FBESize
+    fbeCurrentSize += this.f153.fbeSize
 
-    if ((fbeCurrentSize + this.f154.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f154.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f154.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f154.FBESize
+    fbeCurrentSize += this.f154.fbeSize
 
-    if ((fbeCurrentSize + this.f155.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f155.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f155.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f155.FBESize
+    fbeCurrentSize += this.f155.fbeSize
 
-    if ((fbeCurrentSize + this.f156.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f156.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f156.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f156.FBESize
+    fbeCurrentSize += this.f156.fbeSize
 
-    if ((fbeCurrentSize + this.f157.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f157.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f157.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f157.FBESize
+    fbeCurrentSize += this.f157.fbeSize
 
-    if ((fbeCurrentSize + this.f158.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f158.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f158.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f158.FBESize
+    fbeCurrentSize += this.f158.fbeSize
 
-    if ((fbeCurrentSize + this.f159.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f159.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f159.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f159.FBESize
+    fbeCurrentSize += this.f159.fbeSize
 
-    if ((fbeCurrentSize + this.f160.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f160.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f160.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f160.FBESize
+    fbeCurrentSize += this.f160.fbeSize
 
-    if ((fbeCurrentSize + this.f161.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f161.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f161.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f161.FBESize
+    fbeCurrentSize += this.f161.fbeSize
 
-    if ((fbeCurrentSize + this.f162.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f162.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f162.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f162.FBESize
+    fbeCurrentSize += this.f162.fbeSize
 
-    if ((fbeCurrentSize + this.f163.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f163.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f163.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f163.FBESize
+    fbeCurrentSize += this.f163.fbeSize
 
-    if ((fbeCurrentSize + this.f164.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f164.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f164.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f164.FBESize
+    fbeCurrentSize += this.f164.fbeSize
 
-    if ((fbeCurrentSize + this.f165.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f165.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f165.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f165.FBESize
+    fbeCurrentSize += this.f165.fbeSize
 
     return true
   }
@@ -7365,11 +7365,11 @@ class FieldModelStructOptional extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   getBegin () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + 4 + 4) <= this._buffer.size), 'Model is broken!')
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return 0
@@ -7427,533 +7427,533 @@ class FieldModelStructOptional extends fbe.FieldModel {
     // noinspection JSUnusedAssignment
     fbeCurrentSize += this.parent.FBEBody - 4 - 4
 
-    if ((fbeCurrentSize + this.f100.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f100.fbeSize) <= fbeStructSize) {
       fbeValue.f100 = this.f100.get()
     } else {
       fbeValue.f100 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f100.FBESize
+    fbeCurrentSize += this.f100.fbeSize
 
-    if ((fbeCurrentSize + this.f101.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f101.fbeSize) <= fbeStructSize) {
       fbeValue.f101 = this.f101.get(true)
     } else {
       fbeValue.f101 = true
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f101.FBESize
+    fbeCurrentSize += this.f101.fbeSize
 
-    if ((fbeCurrentSize + this.f102.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f102.fbeSize) <= fbeStructSize) {
       fbeValue.f102 = this.f102.get(undefined)
     } else {
       fbeValue.f102 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f102.FBESize
+    fbeCurrentSize += this.f102.fbeSize
 
-    if ((fbeCurrentSize + this.f103.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f103.fbeSize) <= fbeStructSize) {
       fbeValue.f103 = this.f103.get()
     } else {
       fbeValue.f103 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f103.FBESize
+    fbeCurrentSize += this.f103.fbeSize
 
-    if ((fbeCurrentSize + this.f104.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f104.fbeSize) <= fbeStructSize) {
       fbeValue.f104 = this.f104.get(255)
     } else {
       fbeValue.f104 = 255
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f104.FBESize
+    fbeCurrentSize += this.f104.fbeSize
 
-    if ((fbeCurrentSize + this.f105.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f105.fbeSize) <= fbeStructSize) {
       fbeValue.f105 = this.f105.get(undefined)
     } else {
       fbeValue.f105 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f105.FBESize
+    fbeCurrentSize += this.f105.fbeSize
 
-    if ((fbeCurrentSize + this.f106.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f106.fbeSize) <= fbeStructSize) {
       fbeValue.f106 = this.f106.get()
     } else {
       fbeValue.f106 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f106.FBESize
+    fbeCurrentSize += this.f106.fbeSize
 
-    if ((fbeCurrentSize + this.f107.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f107.fbeSize) <= fbeStructSize) {
       fbeValue.f107 = this.f107.get('!')
     } else {
       fbeValue.f107 = '!'
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f107.FBESize
+    fbeCurrentSize += this.f107.fbeSize
 
-    if ((fbeCurrentSize + this.f108.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f108.fbeSize) <= fbeStructSize) {
       fbeValue.f108 = this.f108.get(undefined)
     } else {
       fbeValue.f108 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f108.FBESize
+    fbeCurrentSize += this.f108.fbeSize
 
-    if ((fbeCurrentSize + this.f109.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f109.fbeSize) <= fbeStructSize) {
       fbeValue.f109 = this.f109.get()
     } else {
       fbeValue.f109 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f109.FBESize
+    fbeCurrentSize += this.f109.fbeSize
 
-    if ((fbeCurrentSize + this.f110.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f110.fbeSize) <= fbeStructSize) {
       fbeValue.f110 = this.f110.get(String.fromCharCode(0x0444))
     } else {
       fbeValue.f110 = String.fromCharCode(0x0444)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f110.FBESize
+    fbeCurrentSize += this.f110.fbeSize
 
-    if ((fbeCurrentSize + this.f111.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f111.fbeSize) <= fbeStructSize) {
       fbeValue.f111 = this.f111.get(undefined)
     } else {
       fbeValue.f111 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f111.FBESize
+    fbeCurrentSize += this.f111.fbeSize
 
-    if ((fbeCurrentSize + this.f112.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f112.fbeSize) <= fbeStructSize) {
       fbeValue.f112 = this.f112.get()
     } else {
       fbeValue.f112 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f112.FBESize
+    fbeCurrentSize += this.f112.fbeSize
 
-    if ((fbeCurrentSize + this.f113.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f113.fbeSize) <= fbeStructSize) {
       fbeValue.f113 = this.f113.get(127)
     } else {
       fbeValue.f113 = 127
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f113.FBESize
+    fbeCurrentSize += this.f113.fbeSize
 
-    if ((fbeCurrentSize + this.f114.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f114.fbeSize) <= fbeStructSize) {
       fbeValue.f114 = this.f114.get(undefined)
     } else {
       fbeValue.f114 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f114.FBESize
+    fbeCurrentSize += this.f114.fbeSize
 
-    if ((fbeCurrentSize + this.f115.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f115.fbeSize) <= fbeStructSize) {
       fbeValue.f115 = this.f115.get()
     } else {
       fbeValue.f115 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f115.FBESize
+    fbeCurrentSize += this.f115.fbeSize
 
-    if ((fbeCurrentSize + this.f116.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f116.fbeSize) <= fbeStructSize) {
       fbeValue.f116 = this.f116.get(255)
     } else {
       fbeValue.f116 = 255
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f116.FBESize
+    fbeCurrentSize += this.f116.fbeSize
 
-    if ((fbeCurrentSize + this.f117.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f117.fbeSize) <= fbeStructSize) {
       fbeValue.f117 = this.f117.get(undefined)
     } else {
       fbeValue.f117 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f117.FBESize
+    fbeCurrentSize += this.f117.fbeSize
 
-    if ((fbeCurrentSize + this.f118.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f118.fbeSize) <= fbeStructSize) {
       fbeValue.f118 = this.f118.get()
     } else {
       fbeValue.f118 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f118.FBESize
+    fbeCurrentSize += this.f118.fbeSize
 
-    if ((fbeCurrentSize + this.f119.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f119.fbeSize) <= fbeStructSize) {
       fbeValue.f119 = this.f119.get(32767)
     } else {
       fbeValue.f119 = 32767
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f119.FBESize
+    fbeCurrentSize += this.f119.fbeSize
 
-    if ((fbeCurrentSize + this.f120.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f120.fbeSize) <= fbeStructSize) {
       fbeValue.f120 = this.f120.get(undefined)
     } else {
       fbeValue.f120 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f120.FBESize
+    fbeCurrentSize += this.f120.fbeSize
 
-    if ((fbeCurrentSize + this.f121.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f121.fbeSize) <= fbeStructSize) {
       fbeValue.f121 = this.f121.get()
     } else {
       fbeValue.f121 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f121.FBESize
+    fbeCurrentSize += this.f121.fbeSize
 
-    if ((fbeCurrentSize + this.f122.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f122.fbeSize) <= fbeStructSize) {
       fbeValue.f122 = this.f122.get(65535)
     } else {
       fbeValue.f122 = 65535
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f122.FBESize
+    fbeCurrentSize += this.f122.fbeSize
 
-    if ((fbeCurrentSize + this.f123.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f123.fbeSize) <= fbeStructSize) {
       fbeValue.f123 = this.f123.get(undefined)
     } else {
       fbeValue.f123 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f123.FBESize
+    fbeCurrentSize += this.f123.fbeSize
 
-    if ((fbeCurrentSize + this.f124.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f124.fbeSize) <= fbeStructSize) {
       fbeValue.f124 = this.f124.get()
     } else {
       fbeValue.f124 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f124.FBESize
+    fbeCurrentSize += this.f124.fbeSize
 
-    if ((fbeCurrentSize + this.f125.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f125.fbeSize) <= fbeStructSize) {
       fbeValue.f125 = this.f125.get(2147483647)
     } else {
       fbeValue.f125 = 2147483647
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f125.FBESize
+    fbeCurrentSize += this.f125.fbeSize
 
-    if ((fbeCurrentSize + this.f126.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f126.fbeSize) <= fbeStructSize) {
       fbeValue.f126 = this.f126.get(undefined)
     } else {
       fbeValue.f126 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f126.FBESize
+    fbeCurrentSize += this.f126.fbeSize
 
-    if ((fbeCurrentSize + this.f127.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f127.fbeSize) <= fbeStructSize) {
       fbeValue.f127 = this.f127.get()
     } else {
       fbeValue.f127 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f127.FBESize
+    fbeCurrentSize += this.f127.fbeSize
 
-    if ((fbeCurrentSize + this.f128.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f128.fbeSize) <= fbeStructSize) {
       fbeValue.f128 = this.f128.get(0xFFFFFFFF)
     } else {
       fbeValue.f128 = 0xFFFFFFFF
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f128.FBESize
+    fbeCurrentSize += this.f128.fbeSize
 
-    if ((fbeCurrentSize + this.f129.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f129.fbeSize) <= fbeStructSize) {
       fbeValue.f129 = this.f129.get(undefined)
     } else {
       fbeValue.f129 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f129.FBESize
+    fbeCurrentSize += this.f129.fbeSize
 
-    if ((fbeCurrentSize + this.f130.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f130.fbeSize) <= fbeStructSize) {
       fbeValue.f130 = this.f130.get()
     } else {
       fbeValue.f130 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f130.FBESize
+    fbeCurrentSize += this.f130.fbeSize
 
-    if ((fbeCurrentSize + this.f131.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f131.fbeSize) <= fbeStructSize) {
       fbeValue.f131 = this.f131.get(new Int64(4294967295, 2147483647))
     } else {
       fbeValue.f131 = new Int64(4294967295, 2147483647)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f131.FBESize
+    fbeCurrentSize += this.f131.fbeSize
 
-    if ((fbeCurrentSize + this.f132.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f132.fbeSize) <= fbeStructSize) {
       fbeValue.f132 = this.f132.get(undefined)
     } else {
       fbeValue.f132 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f132.FBESize
+    fbeCurrentSize += this.f132.fbeSize
 
-    if ((fbeCurrentSize + this.f133.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f133.fbeSize) <= fbeStructSize) {
       fbeValue.f133 = this.f133.get()
     } else {
       fbeValue.f133 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f133.FBESize
+    fbeCurrentSize += this.f133.fbeSize
 
-    if ((fbeCurrentSize + this.f134.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f134.fbeSize) <= fbeStructSize) {
       fbeValue.f134 = this.f134.get(new UInt64(4294967295, 4294967295))
     } else {
       fbeValue.f134 = new UInt64(4294967295, 4294967295)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f134.FBESize
+    fbeCurrentSize += this.f134.fbeSize
 
-    if ((fbeCurrentSize + this.f135.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f135.fbeSize) <= fbeStructSize) {
       fbeValue.f135 = this.f135.get(undefined)
     } else {
       fbeValue.f135 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f135.FBESize
+    fbeCurrentSize += this.f135.fbeSize
 
-    if ((fbeCurrentSize + this.f136.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f136.fbeSize) <= fbeStructSize) {
       fbeValue.f136 = this.f136.get()
     } else {
       fbeValue.f136 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f136.FBESize
+    fbeCurrentSize += this.f136.fbeSize
 
-    if ((fbeCurrentSize + this.f137.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f137.fbeSize) <= fbeStructSize) {
       fbeValue.f137 = this.f137.get(123.456)
     } else {
       fbeValue.f137 = 123.456
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f137.FBESize
+    fbeCurrentSize += this.f137.fbeSize
 
-    if ((fbeCurrentSize + this.f138.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f138.fbeSize) <= fbeStructSize) {
       fbeValue.f138 = this.f138.get(undefined)
     } else {
       fbeValue.f138 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f138.FBESize
+    fbeCurrentSize += this.f138.fbeSize
 
-    if ((fbeCurrentSize + this.f139.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f139.fbeSize) <= fbeStructSize) {
       fbeValue.f139 = this.f139.get()
     } else {
       fbeValue.f139 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f139.FBESize
+    fbeCurrentSize += this.f139.fbeSize
 
-    if ((fbeCurrentSize + this.f140.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f140.fbeSize) <= fbeStructSize) {
       fbeValue.f140 = this.f140.get(-123.456e+123)
     } else {
       fbeValue.f140 = -123.456e+123
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f140.FBESize
+    fbeCurrentSize += this.f140.fbeSize
 
-    if ((fbeCurrentSize + this.f141.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f141.fbeSize) <= fbeStructSize) {
       fbeValue.f141 = this.f141.get(undefined)
     } else {
       fbeValue.f141 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f141.FBESize
+    fbeCurrentSize += this.f141.fbeSize
 
-    if ((fbeCurrentSize + this.f142.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f142.fbeSize) <= fbeStructSize) {
       fbeValue.f142 = this.f142.get()
     } else {
       fbeValue.f142 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f142.FBESize
+    fbeCurrentSize += this.f142.fbeSize
 
-    if ((fbeCurrentSize + this.f143.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f143.fbeSize) <= fbeStructSize) {
       fbeValue.f143 = this.f143.get(new Big('123456.123456'))
     } else {
       fbeValue.f143 = new Big('123456.123456')
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f143.FBESize
+    fbeCurrentSize += this.f143.fbeSize
 
-    if ((fbeCurrentSize + this.f144.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f144.fbeSize) <= fbeStructSize) {
       fbeValue.f144 = this.f144.get(undefined)
     } else {
       fbeValue.f144 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f144.FBESize
+    fbeCurrentSize += this.f144.fbeSize
 
-    if ((fbeCurrentSize + this.f145.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f145.fbeSize) <= fbeStructSize) {
       fbeValue.f145 = this.f145.get()
     } else {
       fbeValue.f145 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f145.FBESize
+    fbeCurrentSize += this.f145.fbeSize
 
-    if ((fbeCurrentSize + this.f146.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f146.fbeSize) <= fbeStructSize) {
       fbeValue.f146 = this.f146.get('Initial string!')
     } else {
       fbeValue.f146 = 'Initial string!'
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f146.FBESize
+    fbeCurrentSize += this.f146.fbeSize
 
-    if ((fbeCurrentSize + this.f147.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f147.fbeSize) <= fbeStructSize) {
       fbeValue.f147 = this.f147.get(undefined)
     } else {
       fbeValue.f147 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f147.FBESize
+    fbeCurrentSize += this.f147.fbeSize
 
-    if ((fbeCurrentSize + this.f148.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f148.fbeSize) <= fbeStructSize) {
       fbeValue.f148 = this.f148.get()
     } else {
       fbeValue.f148 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f148.FBESize
+    fbeCurrentSize += this.f148.fbeSize
 
-    if ((fbeCurrentSize + this.f149.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f149.fbeSize) <= fbeStructSize) {
       fbeValue.f149 = this.f149.get(new Date(Date.now()))
     } else {
       fbeValue.f149 = new Date(Date.now())
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f149.FBESize
+    fbeCurrentSize += this.f149.fbeSize
 
-    if ((fbeCurrentSize + this.f150.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f150.fbeSize) <= fbeStructSize) {
       fbeValue.f150 = this.f150.get(undefined)
     } else {
       fbeValue.f150 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f150.FBESize
+    fbeCurrentSize += this.f150.fbeSize
 
-    if ((fbeCurrentSize + this.f151.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f151.fbeSize) <= fbeStructSize) {
       fbeValue.f151 = this.f151.get()
     } else {
       fbeValue.f151 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f151.FBESize
+    fbeCurrentSize += this.f151.fbeSize
 
-    if ((fbeCurrentSize + this.f152.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f152.fbeSize) <= fbeStructSize) {
       fbeValue.f152 = this.f152.get(new UUID('123e4567-e89b-12d3-a456-426655440000'))
     } else {
       fbeValue.f152 = new UUID('123e4567-e89b-12d3-a456-426655440000')
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f152.FBESize
+    fbeCurrentSize += this.f152.fbeSize
 
-    if ((fbeCurrentSize + this.f153.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f153.fbeSize) <= fbeStructSize) {
       fbeValue.f153 = this.f153.get(undefined)
     } else {
       fbeValue.f153 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f153.FBESize
+    fbeCurrentSize += this.f153.fbeSize
 
-    if ((fbeCurrentSize + this.f154.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f154.fbeSize) <= fbeStructSize) {
       fbeValue.f154 = this.f154.get()
     } else {
       fbeValue.f154 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f154.FBESize
+    fbeCurrentSize += this.f154.fbeSize
 
-    if ((fbeCurrentSize + this.f155.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f155.fbeSize) <= fbeStructSize) {
       fbeValue.f155 = this.f155.get(undefined)
     } else {
       fbeValue.f155 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f155.FBESize
+    fbeCurrentSize += this.f155.fbeSize
 
-    if ((fbeCurrentSize + this.f156.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f156.fbeSize) <= fbeStructSize) {
       fbeValue.f156 = this.f156.get()
     } else {
       fbeValue.f156 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f156.FBESize
+    fbeCurrentSize += this.f156.fbeSize
 
-    if ((fbeCurrentSize + this.f157.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f157.fbeSize) <= fbeStructSize) {
       fbeValue.f157 = this.f157.get(undefined)
     } else {
       fbeValue.f157 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f157.FBESize
+    fbeCurrentSize += this.f157.fbeSize
 
-    if ((fbeCurrentSize + this.f158.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f158.fbeSize) <= fbeStructSize) {
       fbeValue.f158 = this.f158.get()
     } else {
       fbeValue.f158 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f158.FBESize
+    fbeCurrentSize += this.f158.fbeSize
 
-    if ((fbeCurrentSize + this.f159.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f159.fbeSize) <= fbeStructSize) {
       fbeValue.f159 = this.f159.get(undefined)
     } else {
       fbeValue.f159 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f159.FBESize
+    fbeCurrentSize += this.f159.fbeSize
 
-    if ((fbeCurrentSize + this.f160.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f160.fbeSize) <= fbeStructSize) {
       fbeValue.f160 = this.f160.get()
     } else {
       fbeValue.f160 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f160.FBESize
+    fbeCurrentSize += this.f160.fbeSize
 
-    if ((fbeCurrentSize + this.f161.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f161.fbeSize) <= fbeStructSize) {
       fbeValue.f161 = this.f161.get(undefined)
     } else {
       fbeValue.f161 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f161.FBESize
+    fbeCurrentSize += this.f161.fbeSize
 
-    if ((fbeCurrentSize + this.f162.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f162.fbeSize) <= fbeStructSize) {
       fbeValue.f162 = this.f162.get()
     } else {
       fbeValue.f162 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f162.FBESize
+    fbeCurrentSize += this.f162.fbeSize
 
-    if ((fbeCurrentSize + this.f163.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f163.fbeSize) <= fbeStructSize) {
       fbeValue.f163 = this.f163.get(undefined)
     } else {
       fbeValue.f163 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f163.FBESize
+    fbeCurrentSize += this.f163.fbeSize
 
-    if ((fbeCurrentSize + this.f164.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f164.fbeSize) <= fbeStructSize) {
       fbeValue.f164 = this.f164.get()
     } else {
       fbeValue.f164 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f164.FBESize
+    fbeCurrentSize += this.f164.fbeSize
 
-    if ((fbeCurrentSize + this.f165.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f165.fbeSize) <= fbeStructSize) {
       fbeValue.f165 = this.f165.get(undefined)
     } else {
       fbeValue.f165 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f165.FBESize
+    fbeCurrentSize += this.f165.fbeSize
   }
 
   /**
@@ -7962,8 +7962,8 @@ class FieldModelStructOptional extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   setBegin () {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
@@ -7974,7 +7974,7 @@ class FieldModelStructOptional extends fbe.FieldModel {
       return 0
     }
 
-    this.writeUInt32(this.FBEOffset, fbeStructOffset)
+    this.writeUInt32(this.fbeOffset, fbeStructOffset)
     this.writeUInt32(fbeStructOffset, fbeStructSize)
     this.writeUInt32(fbeStructOffset + 4, this.FBEType)
 
@@ -8112,8 +8112,8 @@ class StructOptionalModel extends fbe.Model {
    * @this {!StructOptionalModel}
    * @returns {!number} Model size
    */
-  get FBESize () {
-    return this.model.FBESize + this.model.FBEExtra
+  get fbeSize () {
+    return this.model.fbeSize + this.model.fbeExtra
   }
 
   /**
@@ -8140,12 +8140,12 @@ class StructOptionalModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return false
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    if (fbeFullSize < this.model.fbeSize) {
       return false
     }
 
@@ -8158,7 +8158,7 @@ class StructOptionalModel extends fbe.Model {
    * @returns {!number} Model begin offset
    */
   createBegin () {
-    return this.buffer.allocate(4 + this.model.FBESize)
+    return this.buffer.allocate(4 + this.model.fbeSize)
   }
 
   /**
@@ -8169,7 +8169,7 @@ class StructOptionalModel extends fbe.Model {
   createEnd (fbeBegin) {
     let fbeEnd = this.buffer.size
     let fbeFullSize = fbeEnd - fbeBegin
-    this.writeUInt32(this.model.FBEOffset - 4, fbeFullSize)
+    this.writeUInt32(this.model.fbeOffset - 4, fbeFullSize)
     return fbeFullSize
   }
 
@@ -8192,13 +8192,13 @@ class StructOptionalModel extends fbe.Model {
    * @return {!object} Deserialized StructOptional value and its size
    */
   deserialize (value = new StructOptional()) {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return { value: new StructOptional(), size: 0 }
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    console.assert((fbeFullSize >= this.model.FBESize), 'Model is broken!')
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    console.assert((fbeFullSize >= this.model.fbeSize), 'Model is broken!')
+    if (fbeFullSize < this.model.fbeSize) {
       return { value: new StructOptional(), size: 0 }
     }
 
@@ -8212,7 +8212,7 @@ class StructOptionalModel extends fbe.Model {
    * @param {!number} prev Previous StructOptional model size
    */
   next (prev) {
-    this.model.FBEShift(prev)
+    this.model.fbeShift(prev)
   }
 }
 
@@ -8908,8 +8908,8 @@ class FinalModelStructOptional extends fbe.FinalModel {
    * @param {!StructOptional} fbeValue StructOptional value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (fbeValue) {
-    return 0 + this.parent.FBEAllocationSize(fbeValue) + this.f100.FBEAllocationSize(fbeValue.f100) + this.f101.FBEAllocationSize(fbeValue.f101) + this.f102.FBEAllocationSize(fbeValue.f102) + this.f103.FBEAllocationSize(fbeValue.f103) + this.f104.FBEAllocationSize(fbeValue.f104) + this.f105.FBEAllocationSize(fbeValue.f105) + this.f106.FBEAllocationSize(fbeValue.f106) + this.f107.FBEAllocationSize(fbeValue.f107) + this.f108.FBEAllocationSize(fbeValue.f108) + this.f109.FBEAllocationSize(fbeValue.f109) + this.f110.FBEAllocationSize(fbeValue.f110) + this.f111.FBEAllocationSize(fbeValue.f111) + this.f112.FBEAllocationSize(fbeValue.f112) + this.f113.FBEAllocationSize(fbeValue.f113) + this.f114.FBEAllocationSize(fbeValue.f114) + this.f115.FBEAllocationSize(fbeValue.f115) + this.f116.FBEAllocationSize(fbeValue.f116) + this.f117.FBEAllocationSize(fbeValue.f117) + this.f118.FBEAllocationSize(fbeValue.f118) + this.f119.FBEAllocationSize(fbeValue.f119) + this.f120.FBEAllocationSize(fbeValue.f120) + this.f121.FBEAllocationSize(fbeValue.f121) + this.f122.FBEAllocationSize(fbeValue.f122) + this.f123.FBEAllocationSize(fbeValue.f123) + this.f124.FBEAllocationSize(fbeValue.f124) + this.f125.FBEAllocationSize(fbeValue.f125) + this.f126.FBEAllocationSize(fbeValue.f126) + this.f127.FBEAllocationSize(fbeValue.f127) + this.f128.FBEAllocationSize(fbeValue.f128) + this.f129.FBEAllocationSize(fbeValue.f129) + this.f130.FBEAllocationSize(fbeValue.f130) + this.f131.FBEAllocationSize(fbeValue.f131) + this.f132.FBEAllocationSize(fbeValue.f132) + this.f133.FBEAllocationSize(fbeValue.f133) + this.f134.FBEAllocationSize(fbeValue.f134) + this.f135.FBEAllocationSize(fbeValue.f135) + this.f136.FBEAllocationSize(fbeValue.f136) + this.f137.FBEAllocationSize(fbeValue.f137) + this.f138.FBEAllocationSize(fbeValue.f138) + this.f139.FBEAllocationSize(fbeValue.f139) + this.f140.FBEAllocationSize(fbeValue.f140) + this.f141.FBEAllocationSize(fbeValue.f141) + this.f142.FBEAllocationSize(fbeValue.f142) + this.f143.FBEAllocationSize(fbeValue.f143) + this.f144.FBEAllocationSize(fbeValue.f144) + this.f145.FBEAllocationSize(fbeValue.f145) + this.f146.FBEAllocationSize(fbeValue.f146) + this.f147.FBEAllocationSize(fbeValue.f147) + this.f148.FBEAllocationSize(fbeValue.f148) + this.f149.FBEAllocationSize(fbeValue.f149) + this.f150.FBEAllocationSize(fbeValue.f150) + this.f151.FBEAllocationSize(fbeValue.f151) + this.f152.FBEAllocationSize(fbeValue.f152) + this.f153.FBEAllocationSize(fbeValue.f153) + this.f154.FBEAllocationSize(fbeValue.f154) + this.f155.FBEAllocationSize(fbeValue.f155) + this.f156.FBEAllocationSize(fbeValue.f156) + this.f157.FBEAllocationSize(fbeValue.f157) + this.f158.FBEAllocationSize(fbeValue.f158) + this.f159.FBEAllocationSize(fbeValue.f159) + this.f160.FBEAllocationSize(fbeValue.f160) + this.f161.FBEAllocationSize(fbeValue.f161) + this.f162.FBEAllocationSize(fbeValue.f162) + this.f163.FBEAllocationSize(fbeValue.f163) + this.f164.FBEAllocationSize(fbeValue.f164) + this.f165.FBEAllocationSize(fbeValue.f165)
+  fbeAllocationSize (fbeValue) {
+    return 0 + this.parent.fbeAllocationSize(fbeValue) + this.f100.fbeAllocationSize(fbeValue.f100) + this.f101.fbeAllocationSize(fbeValue.f101) + this.f102.fbeAllocationSize(fbeValue.f102) + this.f103.fbeAllocationSize(fbeValue.f103) + this.f104.fbeAllocationSize(fbeValue.f104) + this.f105.fbeAllocationSize(fbeValue.f105) + this.f106.fbeAllocationSize(fbeValue.f106) + this.f107.fbeAllocationSize(fbeValue.f107) + this.f108.fbeAllocationSize(fbeValue.f108) + this.f109.fbeAllocationSize(fbeValue.f109) + this.f110.fbeAllocationSize(fbeValue.f110) + this.f111.fbeAllocationSize(fbeValue.f111) + this.f112.fbeAllocationSize(fbeValue.f112) + this.f113.fbeAllocationSize(fbeValue.f113) + this.f114.fbeAllocationSize(fbeValue.f114) + this.f115.fbeAllocationSize(fbeValue.f115) + this.f116.fbeAllocationSize(fbeValue.f116) + this.f117.fbeAllocationSize(fbeValue.f117) + this.f118.fbeAllocationSize(fbeValue.f118) + this.f119.fbeAllocationSize(fbeValue.f119) + this.f120.fbeAllocationSize(fbeValue.f120) + this.f121.fbeAllocationSize(fbeValue.f121) + this.f122.fbeAllocationSize(fbeValue.f122) + this.f123.fbeAllocationSize(fbeValue.f123) + this.f124.fbeAllocationSize(fbeValue.f124) + this.f125.fbeAllocationSize(fbeValue.f125) + this.f126.fbeAllocationSize(fbeValue.f126) + this.f127.fbeAllocationSize(fbeValue.f127) + this.f128.fbeAllocationSize(fbeValue.f128) + this.f129.fbeAllocationSize(fbeValue.f129) + this.f130.fbeAllocationSize(fbeValue.f130) + this.f131.fbeAllocationSize(fbeValue.f131) + this.f132.fbeAllocationSize(fbeValue.f132) + this.f133.fbeAllocationSize(fbeValue.f133) + this.f134.fbeAllocationSize(fbeValue.f134) + this.f135.fbeAllocationSize(fbeValue.f135) + this.f136.fbeAllocationSize(fbeValue.f136) + this.f137.fbeAllocationSize(fbeValue.f137) + this.f138.fbeAllocationSize(fbeValue.f138) + this.f139.fbeAllocationSize(fbeValue.f139) + this.f140.fbeAllocationSize(fbeValue.f140) + this.f141.fbeAllocationSize(fbeValue.f141) + this.f142.fbeAllocationSize(fbeValue.f142) + this.f143.fbeAllocationSize(fbeValue.f143) + this.f144.fbeAllocationSize(fbeValue.f144) + this.f145.fbeAllocationSize(fbeValue.f145) + this.f146.fbeAllocationSize(fbeValue.f146) + this.f147.fbeAllocationSize(fbeValue.f147) + this.f148.fbeAllocationSize(fbeValue.f148) + this.f149.fbeAllocationSize(fbeValue.f149) + this.f150.fbeAllocationSize(fbeValue.f150) + this.f151.fbeAllocationSize(fbeValue.f151) + this.f152.fbeAllocationSize(fbeValue.f152) + this.f153.fbeAllocationSize(fbeValue.f153) + this.f154.fbeAllocationSize(fbeValue.f154) + this.f155.fbeAllocationSize(fbeValue.f155) + this.f156.fbeAllocationSize(fbeValue.f156) + this.f157.fbeAllocationSize(fbeValue.f157) + this.f158.fbeAllocationSize(fbeValue.f158) + this.f159.fbeAllocationSize(fbeValue.f159) + this.f160.fbeAllocationSize(fbeValue.f160) + this.f161.fbeAllocationSize(fbeValue.f161) + this.f162.fbeAllocationSize(fbeValue.f162) + this.f163.fbeAllocationSize(fbeValue.f163) + this.f164.fbeAllocationSize(fbeValue.f164) + this.f165.fbeAllocationSize(fbeValue.f165)
   }
 
   /**
@@ -8936,9 +8936,9 @@ class FinalModelStructOptional extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeResult = this.verifyFields()
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeResult
   }
 
@@ -8951,469 +8951,469 @@ class FinalModelStructOptional extends fbe.FinalModel {
     let fbeCurrentOffset = 0
     let fbeFieldSize
 
-    this.parent.FBEOffset = fbeCurrentOffset
+    this.parent.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.parent.verifyFields()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f100.FBEOffset = fbeCurrentOffset
+    this.f100.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f100.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f101.FBEOffset = fbeCurrentOffset
+    this.f101.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f101.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f102.FBEOffset = fbeCurrentOffset
+    this.f102.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f102.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f103.FBEOffset = fbeCurrentOffset
+    this.f103.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f103.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f104.FBEOffset = fbeCurrentOffset
+    this.f104.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f104.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f105.FBEOffset = fbeCurrentOffset
+    this.f105.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f105.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f106.FBEOffset = fbeCurrentOffset
+    this.f106.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f106.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f107.FBEOffset = fbeCurrentOffset
+    this.f107.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f107.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f108.FBEOffset = fbeCurrentOffset
+    this.f108.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f108.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f109.FBEOffset = fbeCurrentOffset
+    this.f109.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f109.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f110.FBEOffset = fbeCurrentOffset
+    this.f110.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f110.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f111.FBEOffset = fbeCurrentOffset
+    this.f111.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f111.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f112.FBEOffset = fbeCurrentOffset
+    this.f112.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f112.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f113.FBEOffset = fbeCurrentOffset
+    this.f113.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f113.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f114.FBEOffset = fbeCurrentOffset
+    this.f114.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f114.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f115.FBEOffset = fbeCurrentOffset
+    this.f115.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f115.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f116.FBEOffset = fbeCurrentOffset
+    this.f116.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f116.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f117.FBEOffset = fbeCurrentOffset
+    this.f117.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f117.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f118.FBEOffset = fbeCurrentOffset
+    this.f118.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f118.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f119.FBEOffset = fbeCurrentOffset
+    this.f119.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f119.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f120.FBEOffset = fbeCurrentOffset
+    this.f120.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f120.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f121.FBEOffset = fbeCurrentOffset
+    this.f121.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f121.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f122.FBEOffset = fbeCurrentOffset
+    this.f122.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f122.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f123.FBEOffset = fbeCurrentOffset
+    this.f123.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f123.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f124.FBEOffset = fbeCurrentOffset
+    this.f124.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f124.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f125.FBEOffset = fbeCurrentOffset
+    this.f125.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f125.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f126.FBEOffset = fbeCurrentOffset
+    this.f126.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f126.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f127.FBEOffset = fbeCurrentOffset
+    this.f127.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f127.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f128.FBEOffset = fbeCurrentOffset
+    this.f128.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f128.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f129.FBEOffset = fbeCurrentOffset
+    this.f129.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f129.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f130.FBEOffset = fbeCurrentOffset
+    this.f130.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f130.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f131.FBEOffset = fbeCurrentOffset
+    this.f131.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f131.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f132.FBEOffset = fbeCurrentOffset
+    this.f132.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f132.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f133.FBEOffset = fbeCurrentOffset
+    this.f133.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f133.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f134.FBEOffset = fbeCurrentOffset
+    this.f134.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f134.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f135.FBEOffset = fbeCurrentOffset
+    this.f135.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f135.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f136.FBEOffset = fbeCurrentOffset
+    this.f136.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f136.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f137.FBEOffset = fbeCurrentOffset
+    this.f137.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f137.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f138.FBEOffset = fbeCurrentOffset
+    this.f138.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f138.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f139.FBEOffset = fbeCurrentOffset
+    this.f139.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f139.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f140.FBEOffset = fbeCurrentOffset
+    this.f140.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f140.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f141.FBEOffset = fbeCurrentOffset
+    this.f141.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f141.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f142.FBEOffset = fbeCurrentOffset
+    this.f142.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f142.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f143.FBEOffset = fbeCurrentOffset
+    this.f143.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f143.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f144.FBEOffset = fbeCurrentOffset
+    this.f144.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f144.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f145.FBEOffset = fbeCurrentOffset
+    this.f145.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f145.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f146.FBEOffset = fbeCurrentOffset
+    this.f146.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f146.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f147.FBEOffset = fbeCurrentOffset
+    this.f147.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f147.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f148.FBEOffset = fbeCurrentOffset
+    this.f148.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f148.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f149.FBEOffset = fbeCurrentOffset
+    this.f149.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f149.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f150.FBEOffset = fbeCurrentOffset
+    this.f150.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f150.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f151.FBEOffset = fbeCurrentOffset
+    this.f151.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f151.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f152.FBEOffset = fbeCurrentOffset
+    this.f152.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f152.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f153.FBEOffset = fbeCurrentOffset
+    this.f153.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f153.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f154.FBEOffset = fbeCurrentOffset
+    this.f154.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f154.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f155.FBEOffset = fbeCurrentOffset
+    this.f155.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f155.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f156.FBEOffset = fbeCurrentOffset
+    this.f156.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f156.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f157.FBEOffset = fbeCurrentOffset
+    this.f157.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f157.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f158.FBEOffset = fbeCurrentOffset
+    this.f158.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f158.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f159.FBEOffset = fbeCurrentOffset
+    this.f159.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f159.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f160.FBEOffset = fbeCurrentOffset
+    this.f160.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f160.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f161.FBEOffset = fbeCurrentOffset
+    this.f161.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f161.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f162.FBEOffset = fbeCurrentOffset
+    this.f162.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f162.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f163.FBEOffset = fbeCurrentOffset
+    this.f163.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f163.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f164.FBEOffset = fbeCurrentOffset
+    this.f164.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f164.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f165.FBEOffset = fbeCurrentOffset
+    this.f165.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f165.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
@@ -9430,9 +9430,9 @@ class FinalModelStructOptional extends fbe.FinalModel {
    * @returns {!object} Result struct value and its size
    */
   get (fbeValue = new StructOptional()) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.getFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return { value: fbeValue, size: fbeSize }
   }
 
@@ -9447,468 +9447,468 @@ class FinalModelStructOptional extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeResult
 
-    this.parent.FBEOffset = fbeCurrentOffset
+    this.parent.fbeOffset = fbeCurrentOffset
     fbeResult = this.parent.getFields(fbeValue)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult
     fbeCurrentSize += fbeResult
 
-    this.f100.FBEOffset = fbeCurrentOffset
+    this.f100.fbeOffset = fbeCurrentOffset
     fbeResult = this.f100.get()
     fbeValue.f100 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f101.FBEOffset = fbeCurrentOffset
+    this.f101.fbeOffset = fbeCurrentOffset
     fbeResult = this.f101.get()
     fbeValue.f101 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f102.FBEOffset = fbeCurrentOffset
+    this.f102.fbeOffset = fbeCurrentOffset
     fbeResult = this.f102.get()
     fbeValue.f102 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f103.FBEOffset = fbeCurrentOffset
+    this.f103.fbeOffset = fbeCurrentOffset
     fbeResult = this.f103.get()
     fbeValue.f103 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f104.FBEOffset = fbeCurrentOffset
+    this.f104.fbeOffset = fbeCurrentOffset
     fbeResult = this.f104.get()
     fbeValue.f104 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f105.FBEOffset = fbeCurrentOffset
+    this.f105.fbeOffset = fbeCurrentOffset
     fbeResult = this.f105.get()
     fbeValue.f105 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f106.FBEOffset = fbeCurrentOffset
+    this.f106.fbeOffset = fbeCurrentOffset
     fbeResult = this.f106.get()
     fbeValue.f106 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f107.FBEOffset = fbeCurrentOffset
+    this.f107.fbeOffset = fbeCurrentOffset
     fbeResult = this.f107.get()
     fbeValue.f107 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f108.FBEOffset = fbeCurrentOffset
+    this.f108.fbeOffset = fbeCurrentOffset
     fbeResult = this.f108.get()
     fbeValue.f108 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f109.FBEOffset = fbeCurrentOffset
+    this.f109.fbeOffset = fbeCurrentOffset
     fbeResult = this.f109.get()
     fbeValue.f109 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f110.FBEOffset = fbeCurrentOffset
+    this.f110.fbeOffset = fbeCurrentOffset
     fbeResult = this.f110.get()
     fbeValue.f110 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f111.FBEOffset = fbeCurrentOffset
+    this.f111.fbeOffset = fbeCurrentOffset
     fbeResult = this.f111.get()
     fbeValue.f111 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f112.FBEOffset = fbeCurrentOffset
+    this.f112.fbeOffset = fbeCurrentOffset
     fbeResult = this.f112.get()
     fbeValue.f112 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f113.FBEOffset = fbeCurrentOffset
+    this.f113.fbeOffset = fbeCurrentOffset
     fbeResult = this.f113.get()
     fbeValue.f113 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f114.FBEOffset = fbeCurrentOffset
+    this.f114.fbeOffset = fbeCurrentOffset
     fbeResult = this.f114.get()
     fbeValue.f114 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f115.FBEOffset = fbeCurrentOffset
+    this.f115.fbeOffset = fbeCurrentOffset
     fbeResult = this.f115.get()
     fbeValue.f115 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f116.FBEOffset = fbeCurrentOffset
+    this.f116.fbeOffset = fbeCurrentOffset
     fbeResult = this.f116.get()
     fbeValue.f116 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f117.FBEOffset = fbeCurrentOffset
+    this.f117.fbeOffset = fbeCurrentOffset
     fbeResult = this.f117.get()
     fbeValue.f117 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f118.FBEOffset = fbeCurrentOffset
+    this.f118.fbeOffset = fbeCurrentOffset
     fbeResult = this.f118.get()
     fbeValue.f118 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f119.FBEOffset = fbeCurrentOffset
+    this.f119.fbeOffset = fbeCurrentOffset
     fbeResult = this.f119.get()
     fbeValue.f119 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f120.FBEOffset = fbeCurrentOffset
+    this.f120.fbeOffset = fbeCurrentOffset
     fbeResult = this.f120.get()
     fbeValue.f120 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f121.FBEOffset = fbeCurrentOffset
+    this.f121.fbeOffset = fbeCurrentOffset
     fbeResult = this.f121.get()
     fbeValue.f121 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f122.FBEOffset = fbeCurrentOffset
+    this.f122.fbeOffset = fbeCurrentOffset
     fbeResult = this.f122.get()
     fbeValue.f122 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f123.FBEOffset = fbeCurrentOffset
+    this.f123.fbeOffset = fbeCurrentOffset
     fbeResult = this.f123.get()
     fbeValue.f123 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f124.FBEOffset = fbeCurrentOffset
+    this.f124.fbeOffset = fbeCurrentOffset
     fbeResult = this.f124.get()
     fbeValue.f124 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f125.FBEOffset = fbeCurrentOffset
+    this.f125.fbeOffset = fbeCurrentOffset
     fbeResult = this.f125.get()
     fbeValue.f125 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f126.FBEOffset = fbeCurrentOffset
+    this.f126.fbeOffset = fbeCurrentOffset
     fbeResult = this.f126.get()
     fbeValue.f126 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f127.FBEOffset = fbeCurrentOffset
+    this.f127.fbeOffset = fbeCurrentOffset
     fbeResult = this.f127.get()
     fbeValue.f127 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f128.FBEOffset = fbeCurrentOffset
+    this.f128.fbeOffset = fbeCurrentOffset
     fbeResult = this.f128.get()
     fbeValue.f128 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f129.FBEOffset = fbeCurrentOffset
+    this.f129.fbeOffset = fbeCurrentOffset
     fbeResult = this.f129.get()
     fbeValue.f129 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f130.FBEOffset = fbeCurrentOffset
+    this.f130.fbeOffset = fbeCurrentOffset
     fbeResult = this.f130.get()
     fbeValue.f130 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f131.FBEOffset = fbeCurrentOffset
+    this.f131.fbeOffset = fbeCurrentOffset
     fbeResult = this.f131.get()
     fbeValue.f131 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f132.FBEOffset = fbeCurrentOffset
+    this.f132.fbeOffset = fbeCurrentOffset
     fbeResult = this.f132.get()
     fbeValue.f132 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f133.FBEOffset = fbeCurrentOffset
+    this.f133.fbeOffset = fbeCurrentOffset
     fbeResult = this.f133.get()
     fbeValue.f133 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f134.FBEOffset = fbeCurrentOffset
+    this.f134.fbeOffset = fbeCurrentOffset
     fbeResult = this.f134.get()
     fbeValue.f134 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f135.FBEOffset = fbeCurrentOffset
+    this.f135.fbeOffset = fbeCurrentOffset
     fbeResult = this.f135.get()
     fbeValue.f135 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f136.FBEOffset = fbeCurrentOffset
+    this.f136.fbeOffset = fbeCurrentOffset
     fbeResult = this.f136.get()
     fbeValue.f136 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f137.FBEOffset = fbeCurrentOffset
+    this.f137.fbeOffset = fbeCurrentOffset
     fbeResult = this.f137.get()
     fbeValue.f137 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f138.FBEOffset = fbeCurrentOffset
+    this.f138.fbeOffset = fbeCurrentOffset
     fbeResult = this.f138.get()
     fbeValue.f138 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f139.FBEOffset = fbeCurrentOffset
+    this.f139.fbeOffset = fbeCurrentOffset
     fbeResult = this.f139.get()
     fbeValue.f139 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f140.FBEOffset = fbeCurrentOffset
+    this.f140.fbeOffset = fbeCurrentOffset
     fbeResult = this.f140.get()
     fbeValue.f140 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f141.FBEOffset = fbeCurrentOffset
+    this.f141.fbeOffset = fbeCurrentOffset
     fbeResult = this.f141.get()
     fbeValue.f141 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f142.FBEOffset = fbeCurrentOffset
+    this.f142.fbeOffset = fbeCurrentOffset
     fbeResult = this.f142.get()
     fbeValue.f142 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f143.FBEOffset = fbeCurrentOffset
+    this.f143.fbeOffset = fbeCurrentOffset
     fbeResult = this.f143.get()
     fbeValue.f143 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f144.FBEOffset = fbeCurrentOffset
+    this.f144.fbeOffset = fbeCurrentOffset
     fbeResult = this.f144.get()
     fbeValue.f144 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f145.FBEOffset = fbeCurrentOffset
+    this.f145.fbeOffset = fbeCurrentOffset
     fbeResult = this.f145.get()
     fbeValue.f145 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f146.FBEOffset = fbeCurrentOffset
+    this.f146.fbeOffset = fbeCurrentOffset
     fbeResult = this.f146.get()
     fbeValue.f146 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f147.FBEOffset = fbeCurrentOffset
+    this.f147.fbeOffset = fbeCurrentOffset
     fbeResult = this.f147.get()
     fbeValue.f147 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f148.FBEOffset = fbeCurrentOffset
+    this.f148.fbeOffset = fbeCurrentOffset
     fbeResult = this.f148.get()
     fbeValue.f148 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f149.FBEOffset = fbeCurrentOffset
+    this.f149.fbeOffset = fbeCurrentOffset
     fbeResult = this.f149.get()
     fbeValue.f149 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f150.FBEOffset = fbeCurrentOffset
+    this.f150.fbeOffset = fbeCurrentOffset
     fbeResult = this.f150.get()
     fbeValue.f150 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f151.FBEOffset = fbeCurrentOffset
+    this.f151.fbeOffset = fbeCurrentOffset
     fbeResult = this.f151.get()
     fbeValue.f151 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f152.FBEOffset = fbeCurrentOffset
+    this.f152.fbeOffset = fbeCurrentOffset
     fbeResult = this.f152.get()
     fbeValue.f152 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f153.FBEOffset = fbeCurrentOffset
+    this.f153.fbeOffset = fbeCurrentOffset
     fbeResult = this.f153.get()
     fbeValue.f153 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f154.FBEOffset = fbeCurrentOffset
+    this.f154.fbeOffset = fbeCurrentOffset
     fbeResult = this.f154.get()
     fbeValue.f154 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f155.FBEOffset = fbeCurrentOffset
+    this.f155.fbeOffset = fbeCurrentOffset
     fbeResult = this.f155.get()
     fbeValue.f155 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f156.FBEOffset = fbeCurrentOffset
+    this.f156.fbeOffset = fbeCurrentOffset
     fbeResult = this.f156.get()
     fbeValue.f156 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f157.FBEOffset = fbeCurrentOffset
+    this.f157.fbeOffset = fbeCurrentOffset
     fbeResult = this.f157.get()
     fbeValue.f157 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f158.FBEOffset = fbeCurrentOffset
+    this.f158.fbeOffset = fbeCurrentOffset
     fbeResult = this.f158.get()
     fbeValue.f158 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f159.FBEOffset = fbeCurrentOffset
+    this.f159.fbeOffset = fbeCurrentOffset
     fbeResult = this.f159.get()
     fbeValue.f159 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f160.FBEOffset = fbeCurrentOffset
+    this.f160.fbeOffset = fbeCurrentOffset
     fbeResult = this.f160.get()
     fbeValue.f160 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f161.FBEOffset = fbeCurrentOffset
+    this.f161.fbeOffset = fbeCurrentOffset
     fbeResult = this.f161.get()
     fbeValue.f161 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f162.FBEOffset = fbeCurrentOffset
+    this.f162.fbeOffset = fbeCurrentOffset
     fbeResult = this.f162.get()
     fbeValue.f162 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f163.FBEOffset = fbeCurrentOffset
+    this.f163.fbeOffset = fbeCurrentOffset
     fbeResult = this.f163.get()
     fbeValue.f163 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f164.FBEOffset = fbeCurrentOffset
+    this.f164.fbeOffset = fbeCurrentOffset
     fbeResult = this.f164.get()
     fbeValue.f164 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f165.FBEOffset = fbeCurrentOffset
+    this.f165.fbeOffset = fbeCurrentOffset
     fbeResult = this.f165.get()
     fbeValue.f165 = fbeResult.value
     // noinspection JSUnusedAssignment
@@ -9925,9 +9925,9 @@ class FinalModelStructOptional extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (fbeValue) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.setFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeSize
   }
 
@@ -9942,403 +9942,403 @@ class FinalModelStructOptional extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeFieldSize
 
-    this.parent.FBEOffset = fbeCurrentOffset
+    this.parent.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.parent.setFields(fbeValue)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f100.FBEOffset = fbeCurrentOffset
+    this.f100.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f100.set(fbeValue.f100)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f101.FBEOffset = fbeCurrentOffset
+    this.f101.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f101.set(fbeValue.f101)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f102.FBEOffset = fbeCurrentOffset
+    this.f102.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f102.set(fbeValue.f102)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f103.FBEOffset = fbeCurrentOffset
+    this.f103.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f103.set(fbeValue.f103)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f104.FBEOffset = fbeCurrentOffset
+    this.f104.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f104.set(fbeValue.f104)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f105.FBEOffset = fbeCurrentOffset
+    this.f105.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f105.set(fbeValue.f105)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f106.FBEOffset = fbeCurrentOffset
+    this.f106.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f106.set(fbeValue.f106)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f107.FBEOffset = fbeCurrentOffset
+    this.f107.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f107.set(fbeValue.f107)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f108.FBEOffset = fbeCurrentOffset
+    this.f108.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f108.set(fbeValue.f108)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f109.FBEOffset = fbeCurrentOffset
+    this.f109.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f109.set(fbeValue.f109)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f110.FBEOffset = fbeCurrentOffset
+    this.f110.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f110.set(fbeValue.f110)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f111.FBEOffset = fbeCurrentOffset
+    this.f111.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f111.set(fbeValue.f111)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f112.FBEOffset = fbeCurrentOffset
+    this.f112.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f112.set(fbeValue.f112)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f113.FBEOffset = fbeCurrentOffset
+    this.f113.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f113.set(fbeValue.f113)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f114.FBEOffset = fbeCurrentOffset
+    this.f114.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f114.set(fbeValue.f114)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f115.FBEOffset = fbeCurrentOffset
+    this.f115.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f115.set(fbeValue.f115)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f116.FBEOffset = fbeCurrentOffset
+    this.f116.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f116.set(fbeValue.f116)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f117.FBEOffset = fbeCurrentOffset
+    this.f117.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f117.set(fbeValue.f117)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f118.FBEOffset = fbeCurrentOffset
+    this.f118.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f118.set(fbeValue.f118)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f119.FBEOffset = fbeCurrentOffset
+    this.f119.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f119.set(fbeValue.f119)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f120.FBEOffset = fbeCurrentOffset
+    this.f120.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f120.set(fbeValue.f120)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f121.FBEOffset = fbeCurrentOffset
+    this.f121.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f121.set(fbeValue.f121)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f122.FBEOffset = fbeCurrentOffset
+    this.f122.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f122.set(fbeValue.f122)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f123.FBEOffset = fbeCurrentOffset
+    this.f123.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f123.set(fbeValue.f123)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f124.FBEOffset = fbeCurrentOffset
+    this.f124.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f124.set(fbeValue.f124)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f125.FBEOffset = fbeCurrentOffset
+    this.f125.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f125.set(fbeValue.f125)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f126.FBEOffset = fbeCurrentOffset
+    this.f126.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f126.set(fbeValue.f126)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f127.FBEOffset = fbeCurrentOffset
+    this.f127.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f127.set(fbeValue.f127)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f128.FBEOffset = fbeCurrentOffset
+    this.f128.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f128.set(fbeValue.f128)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f129.FBEOffset = fbeCurrentOffset
+    this.f129.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f129.set(fbeValue.f129)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f130.FBEOffset = fbeCurrentOffset
+    this.f130.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f130.set(fbeValue.f130)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f131.FBEOffset = fbeCurrentOffset
+    this.f131.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f131.set(fbeValue.f131)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f132.FBEOffset = fbeCurrentOffset
+    this.f132.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f132.set(fbeValue.f132)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f133.FBEOffset = fbeCurrentOffset
+    this.f133.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f133.set(fbeValue.f133)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f134.FBEOffset = fbeCurrentOffset
+    this.f134.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f134.set(fbeValue.f134)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f135.FBEOffset = fbeCurrentOffset
+    this.f135.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f135.set(fbeValue.f135)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f136.FBEOffset = fbeCurrentOffset
+    this.f136.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f136.set(fbeValue.f136)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f137.FBEOffset = fbeCurrentOffset
+    this.f137.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f137.set(fbeValue.f137)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f138.FBEOffset = fbeCurrentOffset
+    this.f138.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f138.set(fbeValue.f138)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f139.FBEOffset = fbeCurrentOffset
+    this.f139.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f139.set(fbeValue.f139)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f140.FBEOffset = fbeCurrentOffset
+    this.f140.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f140.set(fbeValue.f140)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f141.FBEOffset = fbeCurrentOffset
+    this.f141.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f141.set(fbeValue.f141)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f142.FBEOffset = fbeCurrentOffset
+    this.f142.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f142.set(fbeValue.f142)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f143.FBEOffset = fbeCurrentOffset
+    this.f143.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f143.set(fbeValue.f143)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f144.FBEOffset = fbeCurrentOffset
+    this.f144.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f144.set(fbeValue.f144)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f145.FBEOffset = fbeCurrentOffset
+    this.f145.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f145.set(fbeValue.f145)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f146.FBEOffset = fbeCurrentOffset
+    this.f146.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f146.set(fbeValue.f146)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f147.FBEOffset = fbeCurrentOffset
+    this.f147.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f147.set(fbeValue.f147)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f148.FBEOffset = fbeCurrentOffset
+    this.f148.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f148.set(fbeValue.f148)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f149.FBEOffset = fbeCurrentOffset
+    this.f149.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f149.set(fbeValue.f149)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f150.FBEOffset = fbeCurrentOffset
+    this.f150.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f150.set(fbeValue.f150)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f151.FBEOffset = fbeCurrentOffset
+    this.f151.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f151.set(fbeValue.f151)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f152.FBEOffset = fbeCurrentOffset
+    this.f152.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f152.set(fbeValue.f152)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f153.FBEOffset = fbeCurrentOffset
+    this.f153.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f153.set(fbeValue.f153)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f154.FBEOffset = fbeCurrentOffset
+    this.f154.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f154.set(fbeValue.f154)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f155.FBEOffset = fbeCurrentOffset
+    this.f155.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f155.set(fbeValue.f155)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f156.FBEOffset = fbeCurrentOffset
+    this.f156.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f156.set(fbeValue.f156)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f157.FBEOffset = fbeCurrentOffset
+    this.f157.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f157.set(fbeValue.f157)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f158.FBEOffset = fbeCurrentOffset
+    this.f158.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f158.set(fbeValue.f158)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f159.FBEOffset = fbeCurrentOffset
+    this.f159.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f159.set(fbeValue.f159)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f160.FBEOffset = fbeCurrentOffset
+    this.f160.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f160.set(fbeValue.f160)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f161.FBEOffset = fbeCurrentOffset
+    this.f161.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f161.set(fbeValue.f161)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f162.FBEOffset = fbeCurrentOffset
+    this.f162.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f162.set(fbeValue.f162)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f163.FBEOffset = fbeCurrentOffset
+    this.f163.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f163.set(fbeValue.f163)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f164.FBEOffset = fbeCurrentOffset
+    this.f164.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f164.set(fbeValue.f164)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f165.FBEOffset = fbeCurrentOffset
+    this.f165.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f165.set(fbeValue.f165)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
@@ -10388,12 +10388,12 @@ class StructOptionalFinalModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return false
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return false
     }
@@ -10411,7 +10411,7 @@ class StructOptionalFinalModel extends fbe.Model {
     let fbeInitialSize = this.buffer.size
 
     let fbeStructType = this.FBEType
-    let fbeStructSize = 8 + this._model.FBEAllocationSize(value)
+    let fbeStructSize = 8 + this._model.fbeAllocationSize(value)
     let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset
     console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')
     if ((this.buffer.offset + fbeStructOffset + fbeStructSize) > this.buffer.size) {
@@ -10421,8 +10421,8 @@ class StructOptionalFinalModel extends fbe.Model {
     fbeStructSize = 8 + this._model.set(value)
     this.buffer.resize(fbeInitialSize + fbeStructSize)
 
-    this.writeUInt32(this._model.FBEOffset - 8, fbeStructSize)
-    this.writeUInt32(this._model.FBEOffset - 4, fbeStructType)
+    this.writeUInt32(this._model.fbeOffset - 8, fbeStructSize)
+    this.writeUInt32(this._model.fbeOffset - 4, fbeStructType)
 
     return fbeStructSize
   }
@@ -10434,13 +10434,13 @@ class StructOptionalFinalModel extends fbe.Model {
    * @return {!object} Deserialized StructOptional value and its size
    */
   deserialize (value = new StructOptional()) {
-    console.assert(((this.buffer.offset + this._model.FBEOffset) <= this.buffer.size), 'Model is broken!')
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    console.assert(((this.buffer.offset + this._model.fbeOffset) <= this.buffer.size), 'Model is broken!')
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return { value: new StructOptional(), size: 0 }
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     console.assert(((fbeStructSize > 0) && (fbeStructType === this.FBEType)), 'Model is broken!')
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return { value: new StructOptional(), size: 8 }
@@ -10456,7 +10456,7 @@ class StructOptionalFinalModel extends fbe.Model {
    * @param {!number} prev Previous StructOptional model size
    */
   next (prev) {
-    this._model.FBEShift(prev)
+    this._model.fbeShift(prev)
   }
 }
 
@@ -10732,18 +10732,18 @@ class FieldModelStructNested extends fbe.FieldModel {
   constructor (buffer, offset) {
     super(buffer, offset)
     this._parent = new FieldModelStructOptional(buffer, 4 + 4)
-    this._f1000 = new FieldModelEnumSimple(buffer, this._parent.FBEOffset + this._parent.FBEBody - 4 - 4)
-    this._f1001 = new fbe.FieldModelOptional(new FieldModelEnumSimple(buffer, this._f1000.FBEOffset + this._f1000.FBESize), buffer, this._f1000.FBEOffset + this._f1000.FBESize)
-    this._f1002 = new FieldModelEnumTyped(buffer, this._f1001.FBEOffset + this._f1001.FBESize)
-    this._f1003 = new fbe.FieldModelOptional(new FieldModelEnumTyped(buffer, this._f1002.FBEOffset + this._f1002.FBESize), buffer, this._f1002.FBEOffset + this._f1002.FBESize)
-    this._f1004 = new FieldModelFlagsSimple(buffer, this._f1003.FBEOffset + this._f1003.FBESize)
-    this._f1005 = new fbe.FieldModelOptional(new FieldModelFlagsSimple(buffer, this._f1004.FBEOffset + this._f1004.FBESize), buffer, this._f1004.FBEOffset + this._f1004.FBESize)
-    this._f1006 = new FieldModelFlagsTyped(buffer, this._f1005.FBEOffset + this._f1005.FBESize)
-    this._f1007 = new fbe.FieldModelOptional(new FieldModelFlagsTyped(buffer, this._f1006.FBEOffset + this._f1006.FBESize), buffer, this._f1006.FBEOffset + this._f1006.FBESize)
-    this._f1008 = new FieldModelStructSimple(buffer, this._f1007.FBEOffset + this._f1007.FBESize)
-    this._f1009 = new fbe.FieldModelOptional(new FieldModelStructSimple(buffer, this._f1008.FBEOffset + this._f1008.FBESize), buffer, this._f1008.FBEOffset + this._f1008.FBESize)
-    this._f1010 = new FieldModelStructOptional(buffer, this._f1009.FBEOffset + this._f1009.FBESize)
-    this._f1011 = new fbe.FieldModelOptional(new FieldModelStructOptional(buffer, this._f1010.FBEOffset + this._f1010.FBESize), buffer, this._f1010.FBEOffset + this._f1010.FBESize)
+    this._f1000 = new FieldModelEnumSimple(buffer, this._parent.fbeOffset + this._parent.FBEBody - 4 - 4)
+    this._f1001 = new fbe.FieldModelOptional(new FieldModelEnumSimple(buffer, this._f1000.fbeOffset + this._f1000.fbeSize), buffer, this._f1000.fbeOffset + this._f1000.fbeSize)
+    this._f1002 = new FieldModelEnumTyped(buffer, this._f1001.fbeOffset + this._f1001.fbeSize)
+    this._f1003 = new fbe.FieldModelOptional(new FieldModelEnumTyped(buffer, this._f1002.fbeOffset + this._f1002.fbeSize), buffer, this._f1002.fbeOffset + this._f1002.fbeSize)
+    this._f1004 = new FieldModelFlagsSimple(buffer, this._f1003.fbeOffset + this._f1003.fbeSize)
+    this._f1005 = new fbe.FieldModelOptional(new FieldModelFlagsSimple(buffer, this._f1004.fbeOffset + this._f1004.fbeSize), buffer, this._f1004.fbeOffset + this._f1004.fbeSize)
+    this._f1006 = new FieldModelFlagsTyped(buffer, this._f1005.fbeOffset + this._f1005.fbeSize)
+    this._f1007 = new fbe.FieldModelOptional(new FieldModelFlagsTyped(buffer, this._f1006.fbeOffset + this._f1006.fbeSize), buffer, this._f1006.fbeOffset + this._f1006.fbeSize)
+    this._f1008 = new FieldModelStructSimple(buffer, this._f1007.fbeOffset + this._f1007.fbeSize)
+    this._f1009 = new fbe.FieldModelOptional(new FieldModelStructSimple(buffer, this._f1008.fbeOffset + this._f1008.fbeSize), buffer, this._f1008.fbeOffset + this._f1008.fbeSize)
+    this._f1010 = new FieldModelStructOptional(buffer, this._f1009.fbeOffset + this._f1009.fbeSize)
+    this._f1011 = new fbe.FieldModelOptional(new FieldModelStructOptional(buffer, this._f1010.fbeOffset + this._f1010.fbeSize), buffer, this._f1010.fbeOffset + this._f1010.fbeSize)
   }
 
   /**
@@ -10868,7 +10868,7 @@ class FieldModelStructNested extends fbe.FieldModel {
    * @this {!FieldModelStructNested}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -10878,7 +10878,7 @@ class FieldModelStructNested extends fbe.FieldModel {
    * @returns {!number} Field body size
    */
   get FBEBody () {
-    return 4 + 4 + this.parent.FBEBody - 4 - 4 + this.f1000.FBESize + this.f1001.FBESize + this.f1002.FBESize + this.f1003.FBESize + this.f1004.FBESize + this.f1005.FBESize + this.f1006.FBESize + this.f1007.FBESize + this.f1008.FBESize + this.f1009.FBESize + this.f1010.FBESize + this.f1011.FBESize
+    return 4 + 4 + this.parent.FBEBody - 4 - 4 + this.f1000.fbeSize + this.f1001.fbeSize + this.f1002.fbeSize + this.f1003.fbeSize + this.f1004.fbeSize + this.f1005.fbeSize + this.f1006.fbeSize + this.f1007.fbeSize + this.f1008.fbeSize + this.f1009.fbeSize + this.f1010.fbeSize + this.f1011.fbeSize
   }
 
   /**
@@ -10886,19 +10886,19 @@ class FieldModelStructNested extends fbe.FieldModel {
    * @this {!FieldModelStructNested}
    * @returns {!number} Field extra size
    */
-  get FBEExtra () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4) > this._buffer.size)) {
       return 0
     }
 
     this._buffer.shift(fbeStructOffset)
 
-    let fbeResult = this.FBEBody + this.parent.FBEExtra + this.f1000.FBEExtra + this.f1001.FBEExtra + this.f1002.FBEExtra + this.f1003.FBEExtra + this.f1004.FBEExtra + this.f1005.FBEExtra + this.f1006.FBEExtra + this.f1007.FBEExtra + this.f1008.FBEExtra + this.f1009.FBEExtra + this.f1010.FBEExtra + this.f1011.FBEExtra
+    let fbeResult = this.FBEBody + this.parent.fbeExtra + this.f1000.fbeExtra + this.f1001.fbeExtra + this.f1002.fbeExtra + this.f1003.fbeExtra + this.f1004.fbeExtra + this.f1005.fbeExtra + this.f1006.fbeExtra + this.f1007.fbeExtra + this.f1008.fbeExtra + this.f1009.fbeExtra + this.f1010.fbeExtra + this.f1011.fbeExtra
 
     this._buffer.unshift(fbeStructOffset)
 
@@ -10930,11 +10930,11 @@ class FieldModelStructNested extends fbe.FieldModel {
    * @returns {!boolean} Field model valid state
    */
   verify (fbeVerifyType = true) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return true
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return false
     }
@@ -10973,113 +10973,113 @@ class FieldModelStructNested extends fbe.FieldModel {
     // noinspection JSUnusedAssignment
     fbeCurrentSize += this.parent.FBEBody - 4 - 4
 
-    if ((fbeCurrentSize + this.f1000.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1000.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1000.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1000.FBESize
+    fbeCurrentSize += this.f1000.fbeSize
 
-    if ((fbeCurrentSize + this.f1001.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1001.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1001.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1001.FBESize
+    fbeCurrentSize += this.f1001.fbeSize
 
-    if ((fbeCurrentSize + this.f1002.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1002.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1002.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1002.FBESize
+    fbeCurrentSize += this.f1002.fbeSize
 
-    if ((fbeCurrentSize + this.f1003.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1003.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1003.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1003.FBESize
+    fbeCurrentSize += this.f1003.fbeSize
 
-    if ((fbeCurrentSize + this.f1004.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1004.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1004.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1004.FBESize
+    fbeCurrentSize += this.f1004.fbeSize
 
-    if ((fbeCurrentSize + this.f1005.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1005.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1005.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1005.FBESize
+    fbeCurrentSize += this.f1005.fbeSize
 
-    if ((fbeCurrentSize + this.f1006.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1006.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1006.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1006.FBESize
+    fbeCurrentSize += this.f1006.fbeSize
 
-    if ((fbeCurrentSize + this.f1007.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1007.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1007.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1007.FBESize
+    fbeCurrentSize += this.f1007.fbeSize
 
-    if ((fbeCurrentSize + this.f1008.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1008.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1008.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1008.FBESize
+    fbeCurrentSize += this.f1008.fbeSize
 
-    if ((fbeCurrentSize + this.f1009.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1009.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1009.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1009.FBESize
+    fbeCurrentSize += this.f1009.fbeSize
 
-    if ((fbeCurrentSize + this.f1010.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1010.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1010.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1010.FBESize
+    fbeCurrentSize += this.f1010.fbeSize
 
-    if ((fbeCurrentSize + this.f1011.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1011.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1011.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1011.FBESize
+    fbeCurrentSize += this.f1011.fbeSize
 
     return true
   }
@@ -11090,11 +11090,11 @@ class FieldModelStructNested extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   getBegin () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + 4 + 4) <= this._buffer.size), 'Model is broken!')
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return 0
@@ -11152,101 +11152,101 @@ class FieldModelStructNested extends fbe.FieldModel {
     // noinspection JSUnusedAssignment
     fbeCurrentSize += this.parent.FBEBody - 4 - 4
 
-    if ((fbeCurrentSize + this.f1000.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1000.fbeSize) <= fbeStructSize) {
       fbeValue.f1000 = this.f1000.get()
     } else {
       fbeValue.f1000 = new EnumSimple()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1000.FBESize
+    fbeCurrentSize += this.f1000.fbeSize
 
-    if ((fbeCurrentSize + this.f1001.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1001.fbeSize) <= fbeStructSize) {
       fbeValue.f1001 = this.f1001.get()
     } else {
       fbeValue.f1001 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1001.FBESize
+    fbeCurrentSize += this.f1001.fbeSize
 
-    if ((fbeCurrentSize + this.f1002.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1002.fbeSize) <= fbeStructSize) {
       fbeValue.f1002 = this.f1002.get(new EnumTyped(EnumTyped.ENUM_VALUE_2))
     } else {
       fbeValue.f1002 = new EnumTyped(EnumTyped.ENUM_VALUE_2)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1002.FBESize
+    fbeCurrentSize += this.f1002.fbeSize
 
-    if ((fbeCurrentSize + this.f1003.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1003.fbeSize) <= fbeStructSize) {
       fbeValue.f1003 = this.f1003.get(undefined)
     } else {
       fbeValue.f1003 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1003.FBESize
+    fbeCurrentSize += this.f1003.fbeSize
 
-    if ((fbeCurrentSize + this.f1004.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1004.fbeSize) <= fbeStructSize) {
       fbeValue.f1004 = this.f1004.get()
     } else {
       fbeValue.f1004 = new FlagsSimple()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1004.FBESize
+    fbeCurrentSize += this.f1004.fbeSize
 
-    if ((fbeCurrentSize + this.f1005.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1005.fbeSize) <= fbeStructSize) {
       fbeValue.f1005 = this.f1005.get()
     } else {
       fbeValue.f1005 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1005.FBESize
+    fbeCurrentSize += this.f1005.fbeSize
 
-    if ((fbeCurrentSize + this.f1006.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1006.fbeSize) <= fbeStructSize) {
       fbeValue.f1006 = this.f1006.get(new FlagsTyped(FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6))
     } else {
       fbeValue.f1006 = new FlagsTyped(FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1006.FBESize
+    fbeCurrentSize += this.f1006.fbeSize
 
-    if ((fbeCurrentSize + this.f1007.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1007.fbeSize) <= fbeStructSize) {
       fbeValue.f1007 = this.f1007.get(undefined)
     } else {
       fbeValue.f1007 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1007.FBESize
+    fbeCurrentSize += this.f1007.fbeSize
 
-    if ((fbeCurrentSize + this.f1008.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1008.fbeSize) <= fbeStructSize) {
       fbeValue.f1008 = this.f1008.get()
     } else {
       fbeValue.f1008 = new StructSimple()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1008.FBESize
+    fbeCurrentSize += this.f1008.fbeSize
 
-    if ((fbeCurrentSize + this.f1009.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1009.fbeSize) <= fbeStructSize) {
       fbeValue.f1009 = this.f1009.get()
     } else {
       fbeValue.f1009 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1009.FBESize
+    fbeCurrentSize += this.f1009.fbeSize
 
-    if ((fbeCurrentSize + this.f1010.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1010.fbeSize) <= fbeStructSize) {
       fbeValue.f1010 = this.f1010.get()
     } else {
       fbeValue.f1010 = new StructOptional()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1010.FBESize
+    fbeCurrentSize += this.f1010.fbeSize
 
-    if ((fbeCurrentSize + this.f1011.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1011.fbeSize) <= fbeStructSize) {
       fbeValue.f1011 = this.f1011.get(undefined)
     } else {
       fbeValue.f1011 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1011.FBESize
+    fbeCurrentSize += this.f1011.fbeSize
   }
 
   /**
@@ -11255,8 +11255,8 @@ class FieldModelStructNested extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   setBegin () {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
@@ -11267,7 +11267,7 @@ class FieldModelStructNested extends fbe.FieldModel {
       return 0
     }
 
-    this.writeUInt32(this.FBEOffset, fbeStructOffset)
+    this.writeUInt32(this.fbeOffset, fbeStructOffset)
     this.writeUInt32(fbeStructOffset, fbeStructSize)
     this.writeUInt32(fbeStructOffset + 4, this.FBEType)
 
@@ -11351,8 +11351,8 @@ class StructNestedModel extends fbe.Model {
    * @this {!StructNestedModel}
    * @returns {!number} Model size
    */
-  get FBESize () {
-    return this.model.FBESize + this.model.FBEExtra
+  get fbeSize () {
+    return this.model.fbeSize + this.model.fbeExtra
   }
 
   /**
@@ -11379,12 +11379,12 @@ class StructNestedModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return false
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    if (fbeFullSize < this.model.fbeSize) {
       return false
     }
 
@@ -11397,7 +11397,7 @@ class StructNestedModel extends fbe.Model {
    * @returns {!number} Model begin offset
    */
   createBegin () {
-    return this.buffer.allocate(4 + this.model.FBESize)
+    return this.buffer.allocate(4 + this.model.fbeSize)
   }
 
   /**
@@ -11408,7 +11408,7 @@ class StructNestedModel extends fbe.Model {
   createEnd (fbeBegin) {
     let fbeEnd = this.buffer.size
     let fbeFullSize = fbeEnd - fbeBegin
-    this.writeUInt32(this.model.FBEOffset - 4, fbeFullSize)
+    this.writeUInt32(this.model.fbeOffset - 4, fbeFullSize)
     return fbeFullSize
   }
 
@@ -11431,13 +11431,13 @@ class StructNestedModel extends fbe.Model {
    * @return {!object} Deserialized StructNested value and its size
    */
   deserialize (value = new StructNested()) {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return { value: new StructNested(), size: 0 }
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    console.assert((fbeFullSize >= this.model.FBESize), 'Model is broken!')
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    console.assert((fbeFullSize >= this.model.fbeSize), 'Model is broken!')
+    if (fbeFullSize < this.model.fbeSize) {
       return { value: new StructNested(), size: 0 }
     }
 
@@ -11451,7 +11451,7 @@ class StructNestedModel extends fbe.Model {
    * @param {!number} prev Previous StructNested model size
    */
   next (prev) {
-    this.model.FBEShift(prev)
+    this.model.fbeShift(prev)
   }
 }
 
@@ -11607,8 +11607,8 @@ class FinalModelStructNested extends fbe.FinalModel {
    * @param {!StructNested} fbeValue StructNested value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (fbeValue) {
-    return 0 + this.parent.FBEAllocationSize(fbeValue) + this.f1000.FBEAllocationSize(fbeValue.f1000) + this.f1001.FBEAllocationSize(fbeValue.f1001) + this.f1002.FBEAllocationSize(fbeValue.f1002) + this.f1003.FBEAllocationSize(fbeValue.f1003) + this.f1004.FBEAllocationSize(fbeValue.f1004) + this.f1005.FBEAllocationSize(fbeValue.f1005) + this.f1006.FBEAllocationSize(fbeValue.f1006) + this.f1007.FBEAllocationSize(fbeValue.f1007) + this.f1008.FBEAllocationSize(fbeValue.f1008) + this.f1009.FBEAllocationSize(fbeValue.f1009) + this.f1010.FBEAllocationSize(fbeValue.f1010) + this.f1011.FBEAllocationSize(fbeValue.f1011)
+  fbeAllocationSize (fbeValue) {
+    return 0 + this.parent.fbeAllocationSize(fbeValue) + this.f1000.fbeAllocationSize(fbeValue.f1000) + this.f1001.fbeAllocationSize(fbeValue.f1001) + this.f1002.fbeAllocationSize(fbeValue.f1002) + this.f1003.fbeAllocationSize(fbeValue.f1003) + this.f1004.fbeAllocationSize(fbeValue.f1004) + this.f1005.fbeAllocationSize(fbeValue.f1005) + this.f1006.fbeAllocationSize(fbeValue.f1006) + this.f1007.fbeAllocationSize(fbeValue.f1007) + this.f1008.fbeAllocationSize(fbeValue.f1008) + this.f1009.fbeAllocationSize(fbeValue.f1009) + this.f1010.fbeAllocationSize(fbeValue.f1010) + this.f1011.fbeAllocationSize(fbeValue.f1011)
   }
 
   /**
@@ -11635,9 +11635,9 @@ class FinalModelStructNested extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeResult = this.verifyFields()
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeResult
   }
 
@@ -11650,91 +11650,91 @@ class FinalModelStructNested extends fbe.FinalModel {
     let fbeCurrentOffset = 0
     let fbeFieldSize
 
-    this.parent.FBEOffset = fbeCurrentOffset
+    this.parent.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.parent.verifyFields()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f1000.FBEOffset = fbeCurrentOffset
+    this.f1000.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1000.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f1001.FBEOffset = fbeCurrentOffset
+    this.f1001.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1001.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f1002.FBEOffset = fbeCurrentOffset
+    this.f1002.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1002.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f1003.FBEOffset = fbeCurrentOffset
+    this.f1003.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1003.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f1004.FBEOffset = fbeCurrentOffset
+    this.f1004.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1004.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f1005.FBEOffset = fbeCurrentOffset
+    this.f1005.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1005.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f1006.FBEOffset = fbeCurrentOffset
+    this.f1006.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1006.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f1007.FBEOffset = fbeCurrentOffset
+    this.f1007.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1007.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f1008.FBEOffset = fbeCurrentOffset
+    this.f1008.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1008.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f1009.FBEOffset = fbeCurrentOffset
+    this.f1009.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1009.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f1010.FBEOffset = fbeCurrentOffset
+    this.f1010.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1010.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f1011.FBEOffset = fbeCurrentOffset
+    this.f1011.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1011.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
@@ -11751,9 +11751,9 @@ class FinalModelStructNested extends fbe.FinalModel {
    * @returns {!object} Result struct value and its size
    */
   get (fbeValue = new StructNested()) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.getFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return { value: fbeValue, size: fbeSize }
   }
 
@@ -11768,90 +11768,90 @@ class FinalModelStructNested extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeResult
 
-    this.parent.FBEOffset = fbeCurrentOffset
+    this.parent.fbeOffset = fbeCurrentOffset
     fbeResult = this.parent.getFields(fbeValue)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult
     fbeCurrentSize += fbeResult
 
-    this.f1000.FBEOffset = fbeCurrentOffset
+    this.f1000.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1000.get()
     fbeValue.f1000 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f1001.FBEOffset = fbeCurrentOffset
+    this.f1001.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1001.get()
     fbeValue.f1001 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f1002.FBEOffset = fbeCurrentOffset
+    this.f1002.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1002.get()
     fbeValue.f1002 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f1003.FBEOffset = fbeCurrentOffset
+    this.f1003.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1003.get()
     fbeValue.f1003 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f1004.FBEOffset = fbeCurrentOffset
+    this.f1004.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1004.get()
     fbeValue.f1004 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f1005.FBEOffset = fbeCurrentOffset
+    this.f1005.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1005.get()
     fbeValue.f1005 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f1006.FBEOffset = fbeCurrentOffset
+    this.f1006.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1006.get()
     fbeValue.f1006 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f1007.FBEOffset = fbeCurrentOffset
+    this.f1007.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1007.get()
     fbeValue.f1007 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f1008.FBEOffset = fbeCurrentOffset
+    this.f1008.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1008.get()
     fbeValue.f1008 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f1009.FBEOffset = fbeCurrentOffset
+    this.f1009.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1009.get()
     fbeValue.f1009 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f1010.FBEOffset = fbeCurrentOffset
+    this.f1010.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1010.get()
     fbeValue.f1010 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f1011.FBEOffset = fbeCurrentOffset
+    this.f1011.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1011.get()
     fbeValue.f1011 = fbeResult.value
     // noinspection JSUnusedAssignment
@@ -11868,9 +11868,9 @@ class FinalModelStructNested extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (fbeValue) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.setFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeSize
   }
 
@@ -11885,79 +11885,79 @@ class FinalModelStructNested extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeFieldSize
 
-    this.parent.FBEOffset = fbeCurrentOffset
+    this.parent.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.parent.setFields(fbeValue)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f1000.FBEOffset = fbeCurrentOffset
+    this.f1000.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1000.set(fbeValue.f1000)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f1001.FBEOffset = fbeCurrentOffset
+    this.f1001.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1001.set(fbeValue.f1001)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f1002.FBEOffset = fbeCurrentOffset
+    this.f1002.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1002.set(fbeValue.f1002)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f1003.FBEOffset = fbeCurrentOffset
+    this.f1003.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1003.set(fbeValue.f1003)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f1004.FBEOffset = fbeCurrentOffset
+    this.f1004.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1004.set(fbeValue.f1004)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f1005.FBEOffset = fbeCurrentOffset
+    this.f1005.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1005.set(fbeValue.f1005)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f1006.FBEOffset = fbeCurrentOffset
+    this.f1006.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1006.set(fbeValue.f1006)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f1007.FBEOffset = fbeCurrentOffset
+    this.f1007.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1007.set(fbeValue.f1007)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f1008.FBEOffset = fbeCurrentOffset
+    this.f1008.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1008.set(fbeValue.f1008)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f1009.FBEOffset = fbeCurrentOffset
+    this.f1009.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1009.set(fbeValue.f1009)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f1010.FBEOffset = fbeCurrentOffset
+    this.f1010.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1010.set(fbeValue.f1010)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f1011.FBEOffset = fbeCurrentOffset
+    this.f1011.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1011.set(fbeValue.f1011)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
@@ -12007,12 +12007,12 @@ class StructNestedFinalModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return false
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return false
     }
@@ -12030,7 +12030,7 @@ class StructNestedFinalModel extends fbe.Model {
     let fbeInitialSize = this.buffer.size
 
     let fbeStructType = this.FBEType
-    let fbeStructSize = 8 + this._model.FBEAllocationSize(value)
+    let fbeStructSize = 8 + this._model.fbeAllocationSize(value)
     let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset
     console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')
     if ((this.buffer.offset + fbeStructOffset + fbeStructSize) > this.buffer.size) {
@@ -12040,8 +12040,8 @@ class StructNestedFinalModel extends fbe.Model {
     fbeStructSize = 8 + this._model.set(value)
     this.buffer.resize(fbeInitialSize + fbeStructSize)
 
-    this.writeUInt32(this._model.FBEOffset - 8, fbeStructSize)
-    this.writeUInt32(this._model.FBEOffset - 4, fbeStructType)
+    this.writeUInt32(this._model.fbeOffset - 8, fbeStructSize)
+    this.writeUInt32(this._model.fbeOffset - 4, fbeStructType)
 
     return fbeStructSize
   }
@@ -12053,13 +12053,13 @@ class StructNestedFinalModel extends fbe.Model {
    * @return {!object} Deserialized StructNested value and its size
    */
   deserialize (value = new StructNested()) {
-    console.assert(((this.buffer.offset + this._model.FBEOffset) <= this.buffer.size), 'Model is broken!')
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    console.assert(((this.buffer.offset + this._model.fbeOffset) <= this.buffer.size), 'Model is broken!')
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return { value: new StructNested(), size: 0 }
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     console.assert(((fbeStructSize > 0) && (fbeStructType === this.FBEType)), 'Model is broken!')
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return { value: new StructNested(), size: 8 }
@@ -12075,7 +12075,7 @@ class StructNestedFinalModel extends fbe.Model {
    * @param {!number} prev Previous StructNested model size
    */
   next (prev) {
-    this._model.FBEShift(prev)
+    this._model.fbeShift(prev)
   }
 }
 
@@ -12259,8 +12259,8 @@ class FieldModelStructBytes extends fbe.FieldModel {
   constructor (buffer, offset) {
     super(buffer, offset)
     this._f1 = new fbe.FieldModelBytes(buffer, 4 + 4)
-    this._f2 = new fbe.FieldModelOptional(new fbe.FieldModelBytes(buffer, this._f1.FBEOffset + this._f1.FBESize), buffer, this._f1.FBEOffset + this._f1.FBESize)
-    this._f3 = new fbe.FieldModelOptional(new fbe.FieldModelBytes(buffer, this._f2.FBEOffset + this._f2.FBESize), buffer, this._f2.FBEOffset + this._f2.FBESize)
+    this._f2 = new fbe.FieldModelOptional(new fbe.FieldModelBytes(buffer, this._f1.fbeOffset + this._f1.fbeSize), buffer, this._f1.fbeOffset + this._f1.fbeSize)
+    this._f3 = new fbe.FieldModelOptional(new fbe.FieldModelBytes(buffer, this._f2.fbeOffset + this._f2.fbeSize), buffer, this._f2.fbeOffset + this._f2.fbeSize)
   }
 
   /**
@@ -12295,7 +12295,7 @@ class FieldModelStructBytes extends fbe.FieldModel {
    * @this {!FieldModelStructBytes}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -12305,7 +12305,7 @@ class FieldModelStructBytes extends fbe.FieldModel {
    * @returns {!number} Field body size
    */
   get FBEBody () {
-    return 4 + 4 + this.f1.FBESize + this.f2.FBESize + this.f3.FBESize
+    return 4 + 4 + this.f1.fbeSize + this.f2.fbeSize + this.f3.fbeSize
   }
 
   /**
@@ -12313,19 +12313,19 @@ class FieldModelStructBytes extends fbe.FieldModel {
    * @this {!FieldModelStructBytes}
    * @returns {!number} Field extra size
    */
-  get FBEExtra () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4) > this._buffer.size)) {
       return 0
     }
 
     this._buffer.shift(fbeStructOffset)
 
-    let fbeResult = this.FBEBody + this.f1.FBEExtra + this.f2.FBEExtra + this.f3.FBEExtra
+    let fbeResult = this.FBEBody + this.f1.fbeExtra + this.f2.fbeExtra + this.f3.fbeExtra
 
     this._buffer.unshift(fbeStructOffset)
 
@@ -12357,11 +12357,11 @@ class FieldModelStructBytes extends fbe.FieldModel {
    * @returns {!boolean} Field model valid state
    */
   verify (fbeVerifyType = true) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return true
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return false
     }
@@ -12391,32 +12391,32 @@ class FieldModelStructBytes extends fbe.FieldModel {
   verifyFields (fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.f1.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1.FBESize
+    fbeCurrentSize += this.f1.fbeSize
 
-    if ((fbeCurrentSize + this.f2.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f2.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f2.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f2.FBESize
+    fbeCurrentSize += this.f2.fbeSize
 
-    if ((fbeCurrentSize + this.f3.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f3.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f3.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f3.FBESize
+    fbeCurrentSize += this.f3.fbeSize
 
     return true
   }
@@ -12427,11 +12427,11 @@ class FieldModelStructBytes extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   getBegin () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + 4 + 4) <= this._buffer.size), 'Model is broken!')
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return 0
@@ -12483,29 +12483,29 @@ class FieldModelStructBytes extends fbe.FieldModel {
   getFields (fbeValue, fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.f1.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1.fbeSize) <= fbeStructSize) {
       fbeValue.f1 = this.f1.get()
     } else {
       fbeValue.f1 = new Uint8Array(0)
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1.FBESize
+    fbeCurrentSize += this.f1.fbeSize
 
-    if ((fbeCurrentSize + this.f2.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f2.fbeSize) <= fbeStructSize) {
       fbeValue.f2 = this.f2.get()
     } else {
       fbeValue.f2 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f2.FBESize
+    fbeCurrentSize += this.f2.fbeSize
 
-    if ((fbeCurrentSize + this.f3.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f3.fbeSize) <= fbeStructSize) {
       fbeValue.f3 = this.f3.get(undefined)
     } else {
       fbeValue.f3 = undefined
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f3.FBESize
+    fbeCurrentSize += this.f3.fbeSize
   }
 
   /**
@@ -12514,8 +12514,8 @@ class FieldModelStructBytes extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   setBegin () {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
@@ -12526,7 +12526,7 @@ class FieldModelStructBytes extends fbe.FieldModel {
       return 0
     }
 
-    this.writeUInt32(this.FBEOffset, fbeStructOffset)
+    this.writeUInt32(this.fbeOffset, fbeStructOffset)
     this.writeUInt32(fbeStructOffset, fbeStructSize)
     this.writeUInt32(fbeStructOffset + 4, this.FBEType)
 
@@ -12600,8 +12600,8 @@ class StructBytesModel extends fbe.Model {
    * @this {!StructBytesModel}
    * @returns {!number} Model size
    */
-  get FBESize () {
-    return this.model.FBESize + this.model.FBEExtra
+  get fbeSize () {
+    return this.model.fbeSize + this.model.fbeExtra
   }
 
   /**
@@ -12628,12 +12628,12 @@ class StructBytesModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return false
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    if (fbeFullSize < this.model.fbeSize) {
       return false
     }
 
@@ -12646,7 +12646,7 @@ class StructBytesModel extends fbe.Model {
    * @returns {!number} Model begin offset
    */
   createBegin () {
-    return this.buffer.allocate(4 + this.model.FBESize)
+    return this.buffer.allocate(4 + this.model.fbeSize)
   }
 
   /**
@@ -12657,7 +12657,7 @@ class StructBytesModel extends fbe.Model {
   createEnd (fbeBegin) {
     let fbeEnd = this.buffer.size
     let fbeFullSize = fbeEnd - fbeBegin
-    this.writeUInt32(this.model.FBEOffset - 4, fbeFullSize)
+    this.writeUInt32(this.model.fbeOffset - 4, fbeFullSize)
     return fbeFullSize
   }
 
@@ -12680,13 +12680,13 @@ class StructBytesModel extends fbe.Model {
    * @return {!object} Deserialized StructBytes value and its size
    */
   deserialize (value = new StructBytes()) {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return { value: new StructBytes(), size: 0 }
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    console.assert((fbeFullSize >= this.model.FBESize), 'Model is broken!')
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    console.assert((fbeFullSize >= this.model.fbeSize), 'Model is broken!')
+    if (fbeFullSize < this.model.fbeSize) {
       return { value: new StructBytes(), size: 0 }
     }
 
@@ -12700,7 +12700,7 @@ class StructBytesModel extends fbe.Model {
    * @param {!number} prev Previous StructBytes model size
    */
   next (prev) {
-    this.model.FBEShift(prev)
+    this.model.fbeShift(prev)
   }
 }
 
@@ -12756,8 +12756,8 @@ class FinalModelStructBytes extends fbe.FinalModel {
    * @param {!StructBytes} fbeValue StructBytes value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (fbeValue) {
-    return 0 + this.f1.FBEAllocationSize(fbeValue.f1) + this.f2.FBEAllocationSize(fbeValue.f2) + this.f3.FBEAllocationSize(fbeValue.f3)
+  fbeAllocationSize (fbeValue) {
+    return 0 + this.f1.fbeAllocationSize(fbeValue.f1) + this.f2.fbeAllocationSize(fbeValue.f2) + this.f3.fbeAllocationSize(fbeValue.f3)
   }
 
   /**
@@ -12784,9 +12784,9 @@ class FinalModelStructBytes extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeResult = this.verifyFields()
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeResult
   }
 
@@ -12799,21 +12799,21 @@ class FinalModelStructBytes extends fbe.FinalModel {
     let fbeCurrentOffset = 0
     let fbeFieldSize
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f2.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f3.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
@@ -12830,9 +12830,9 @@ class FinalModelStructBytes extends fbe.FinalModel {
    * @returns {!object} Result struct value and its size
    */
   get (fbeValue = new StructBytes()) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.getFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return { value: fbeValue, size: fbeSize }
   }
 
@@ -12847,21 +12847,21 @@ class FinalModelStructBytes extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeResult
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1.get()
     fbeValue.f1 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeResult = this.f2.get()
     fbeValue.f2 = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeResult = this.f3.get()
     fbeValue.f3 = fbeResult.value
     // noinspection JSUnusedAssignment
@@ -12878,9 +12878,9 @@ class FinalModelStructBytes extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (fbeValue) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.setFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeSize
   }
 
@@ -12895,19 +12895,19 @@ class FinalModelStructBytes extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeFieldSize
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1.set(fbeValue.f1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f2.set(fbeValue.f2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f3.set(fbeValue.f3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
@@ -12957,12 +12957,12 @@ class StructBytesFinalModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return false
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return false
     }
@@ -12980,7 +12980,7 @@ class StructBytesFinalModel extends fbe.Model {
     let fbeInitialSize = this.buffer.size
 
     let fbeStructType = this.FBEType
-    let fbeStructSize = 8 + this._model.FBEAllocationSize(value)
+    let fbeStructSize = 8 + this._model.fbeAllocationSize(value)
     let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset
     console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')
     if ((this.buffer.offset + fbeStructOffset + fbeStructSize) > this.buffer.size) {
@@ -12990,8 +12990,8 @@ class StructBytesFinalModel extends fbe.Model {
     fbeStructSize = 8 + this._model.set(value)
     this.buffer.resize(fbeInitialSize + fbeStructSize)
 
-    this.writeUInt32(this._model.FBEOffset - 8, fbeStructSize)
-    this.writeUInt32(this._model.FBEOffset - 4, fbeStructType)
+    this.writeUInt32(this._model.fbeOffset - 8, fbeStructSize)
+    this.writeUInt32(this._model.fbeOffset - 4, fbeStructType)
 
     return fbeStructSize
   }
@@ -13003,13 +13003,13 @@ class StructBytesFinalModel extends fbe.Model {
    * @return {!object} Deserialized StructBytes value and its size
    */
   deserialize (value = new StructBytes()) {
-    console.assert(((this.buffer.offset + this._model.FBEOffset) <= this.buffer.size), 'Model is broken!')
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    console.assert(((this.buffer.offset + this._model.fbeOffset) <= this.buffer.size), 'Model is broken!')
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return { value: new StructBytes(), size: 0 }
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     console.assert(((fbeStructSize > 0) && (fbeStructType === this.FBEType)), 'Model is broken!')
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return { value: new StructBytes(), size: 8 }
@@ -13025,7 +13025,7 @@ class StructBytesFinalModel extends fbe.Model {
    * @param {!number} prev Previous StructBytes model size
    */
   next (prev) {
-    this._model.FBEShift(prev)
+    this._model.fbeShift(prev)
   }
 }
 
@@ -13484,15 +13484,15 @@ class FieldModelStructArray extends fbe.FieldModel {
   constructor (buffer, offset) {
     super(buffer, offset)
     this._f1 = new fbe.FieldModelArray(new fbe.FieldModelByte(buffer, 4 + 4), buffer, 4 + 4, 2)
-    this._f2 = new fbe.FieldModelArray(new fbe.FieldModelOptional(new fbe.FieldModelByte(buffer, this._f1.FBEOffset + this._f1.FBESize), buffer, this._f1.FBEOffset + this._f1.FBESize), buffer, this._f1.FBEOffset + this._f1.FBESize, 2)
-    this._f3 = new fbe.FieldModelArray(new fbe.FieldModelBytes(buffer, this._f2.FBEOffset + this._f2.FBESize), buffer, this._f2.FBEOffset + this._f2.FBESize, 2)
-    this._f4 = new fbe.FieldModelArray(new fbe.FieldModelOptional(new fbe.FieldModelBytes(buffer, this._f3.FBEOffset + this._f3.FBESize), buffer, this._f3.FBEOffset + this._f3.FBESize), buffer, this._f3.FBEOffset + this._f3.FBESize, 2)
-    this._f5 = new fbe.FieldModelArray(new FieldModelEnumSimple(buffer, this._f4.FBEOffset + this._f4.FBESize), buffer, this._f4.FBEOffset + this._f4.FBESize, 2)
-    this._f6 = new fbe.FieldModelArray(new fbe.FieldModelOptional(new FieldModelEnumSimple(buffer, this._f5.FBEOffset + this._f5.FBESize), buffer, this._f5.FBEOffset + this._f5.FBESize), buffer, this._f5.FBEOffset + this._f5.FBESize, 2)
-    this._f7 = new fbe.FieldModelArray(new FieldModelFlagsSimple(buffer, this._f6.FBEOffset + this._f6.FBESize), buffer, this._f6.FBEOffset + this._f6.FBESize, 2)
-    this._f8 = new fbe.FieldModelArray(new fbe.FieldModelOptional(new FieldModelFlagsSimple(buffer, this._f7.FBEOffset + this._f7.FBESize), buffer, this._f7.FBEOffset + this._f7.FBESize), buffer, this._f7.FBEOffset + this._f7.FBESize, 2)
-    this._f9 = new fbe.FieldModelArray(new FieldModelStructSimple(buffer, this._f8.FBEOffset + this._f8.FBESize), buffer, this._f8.FBEOffset + this._f8.FBESize, 2)
-    this._f10 = new fbe.FieldModelArray(new fbe.FieldModelOptional(new FieldModelStructSimple(buffer, this._f9.FBEOffset + this._f9.FBESize), buffer, this._f9.FBEOffset + this._f9.FBESize), buffer, this._f9.FBEOffset + this._f9.FBESize, 2)
+    this._f2 = new fbe.FieldModelArray(new fbe.FieldModelOptional(new fbe.FieldModelByte(buffer, this._f1.fbeOffset + this._f1.fbeSize), buffer, this._f1.fbeOffset + this._f1.fbeSize), buffer, this._f1.fbeOffset + this._f1.fbeSize, 2)
+    this._f3 = new fbe.FieldModelArray(new fbe.FieldModelBytes(buffer, this._f2.fbeOffset + this._f2.fbeSize), buffer, this._f2.fbeOffset + this._f2.fbeSize, 2)
+    this._f4 = new fbe.FieldModelArray(new fbe.FieldModelOptional(new fbe.FieldModelBytes(buffer, this._f3.fbeOffset + this._f3.fbeSize), buffer, this._f3.fbeOffset + this._f3.fbeSize), buffer, this._f3.fbeOffset + this._f3.fbeSize, 2)
+    this._f5 = new fbe.FieldModelArray(new FieldModelEnumSimple(buffer, this._f4.fbeOffset + this._f4.fbeSize), buffer, this._f4.fbeOffset + this._f4.fbeSize, 2)
+    this._f6 = new fbe.FieldModelArray(new fbe.FieldModelOptional(new FieldModelEnumSimple(buffer, this._f5.fbeOffset + this._f5.fbeSize), buffer, this._f5.fbeOffset + this._f5.fbeSize), buffer, this._f5.fbeOffset + this._f5.fbeSize, 2)
+    this._f7 = new fbe.FieldModelArray(new FieldModelFlagsSimple(buffer, this._f6.fbeOffset + this._f6.fbeSize), buffer, this._f6.fbeOffset + this._f6.fbeSize, 2)
+    this._f8 = new fbe.FieldModelArray(new fbe.FieldModelOptional(new FieldModelFlagsSimple(buffer, this._f7.fbeOffset + this._f7.fbeSize), buffer, this._f7.fbeOffset + this._f7.fbeSize), buffer, this._f7.fbeOffset + this._f7.fbeSize, 2)
+    this._f9 = new fbe.FieldModelArray(new FieldModelStructSimple(buffer, this._f8.fbeOffset + this._f8.fbeSize), buffer, this._f8.fbeOffset + this._f8.fbeSize, 2)
+    this._f10 = new fbe.FieldModelArray(new fbe.FieldModelOptional(new FieldModelStructSimple(buffer, this._f9.fbeOffset + this._f9.fbeSize), buffer, this._f9.fbeOffset + this._f9.fbeSize), buffer, this._f9.fbeOffset + this._f9.fbeSize, 2)
   }
 
   /**
@@ -13590,7 +13590,7 @@ class FieldModelStructArray extends fbe.FieldModel {
    * @this {!FieldModelStructArray}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -13600,7 +13600,7 @@ class FieldModelStructArray extends fbe.FieldModel {
    * @returns {!number} Field body size
    */
   get FBEBody () {
-    return 4 + 4 + this.f1.FBESize + this.f2.FBESize + this.f3.FBESize + this.f4.FBESize + this.f5.FBESize + this.f6.FBESize + this.f7.FBESize + this.f8.FBESize + this.f9.FBESize + this.f10.FBESize
+    return 4 + 4 + this.f1.fbeSize + this.f2.fbeSize + this.f3.fbeSize + this.f4.fbeSize + this.f5.fbeSize + this.f6.fbeSize + this.f7.fbeSize + this.f8.fbeSize + this.f9.fbeSize + this.f10.fbeSize
   }
 
   /**
@@ -13608,19 +13608,19 @@ class FieldModelStructArray extends fbe.FieldModel {
    * @this {!FieldModelStructArray}
    * @returns {!number} Field extra size
    */
-  get FBEExtra () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4) > this._buffer.size)) {
       return 0
     }
 
     this._buffer.shift(fbeStructOffset)
 
-    let fbeResult = this.FBEBody + this.f1.FBEExtra + this.f2.FBEExtra + this.f3.FBEExtra + this.f4.FBEExtra + this.f5.FBEExtra + this.f6.FBEExtra + this.f7.FBEExtra + this.f8.FBEExtra + this.f9.FBEExtra + this.f10.FBEExtra
+    let fbeResult = this.FBEBody + this.f1.fbeExtra + this.f2.fbeExtra + this.f3.fbeExtra + this.f4.fbeExtra + this.f5.fbeExtra + this.f6.fbeExtra + this.f7.fbeExtra + this.f8.fbeExtra + this.f9.fbeExtra + this.f10.fbeExtra
 
     this._buffer.unshift(fbeStructOffset)
 
@@ -13652,11 +13652,11 @@ class FieldModelStructArray extends fbe.FieldModel {
    * @returns {!boolean} Field model valid state
    */
   verify (fbeVerifyType = true) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return true
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return false
     }
@@ -13686,95 +13686,95 @@ class FieldModelStructArray extends fbe.FieldModel {
   verifyFields (fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.f1.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1.FBESize
+    fbeCurrentSize += this.f1.fbeSize
 
-    if ((fbeCurrentSize + this.f2.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f2.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f2.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f2.FBESize
+    fbeCurrentSize += this.f2.fbeSize
 
-    if ((fbeCurrentSize + this.f3.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f3.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f3.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f3.FBESize
+    fbeCurrentSize += this.f3.fbeSize
 
-    if ((fbeCurrentSize + this.f4.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f4.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f4.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f4.FBESize
+    fbeCurrentSize += this.f4.fbeSize
 
-    if ((fbeCurrentSize + this.f5.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f5.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f5.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f5.FBESize
+    fbeCurrentSize += this.f5.fbeSize
 
-    if ((fbeCurrentSize + this.f6.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f6.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f6.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f6.FBESize
+    fbeCurrentSize += this.f6.fbeSize
 
-    if ((fbeCurrentSize + this.f7.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f7.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f7.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f7.FBESize
+    fbeCurrentSize += this.f7.fbeSize
 
-    if ((fbeCurrentSize + this.f8.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f8.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f8.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f8.FBESize
+    fbeCurrentSize += this.f8.fbeSize
 
-    if ((fbeCurrentSize + this.f9.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f9.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f9.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f9.FBESize
+    fbeCurrentSize += this.f9.fbeSize
 
-    if ((fbeCurrentSize + this.f10.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f10.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f10.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f10.FBESize
+    fbeCurrentSize += this.f10.fbeSize
 
     return true
   }
@@ -13785,11 +13785,11 @@ class FieldModelStructArray extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   getBegin () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + 4 + 4) <= this._buffer.size), 'Model is broken!')
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return 0
@@ -13841,85 +13841,85 @@ class FieldModelStructArray extends fbe.FieldModel {
   getFields (fbeValue, fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.f1.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1.fbeSize) <= fbeStructSize) {
       this.f1.get(fbeValue.f1)
     } else {
       fbeValue.f1.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1.FBESize
+    fbeCurrentSize += this.f1.fbeSize
 
-    if ((fbeCurrentSize + this.f2.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f2.fbeSize) <= fbeStructSize) {
       this.f2.get(fbeValue.f2)
     } else {
       fbeValue.f2.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f2.FBESize
+    fbeCurrentSize += this.f2.fbeSize
 
-    if ((fbeCurrentSize + this.f3.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f3.fbeSize) <= fbeStructSize) {
       this.f3.get(fbeValue.f3)
     } else {
       fbeValue.f3.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f3.FBESize
+    fbeCurrentSize += this.f3.fbeSize
 
-    if ((fbeCurrentSize + this.f4.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f4.fbeSize) <= fbeStructSize) {
       this.f4.get(fbeValue.f4)
     } else {
       fbeValue.f4.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f4.FBESize
+    fbeCurrentSize += this.f4.fbeSize
 
-    if ((fbeCurrentSize + this.f5.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f5.fbeSize) <= fbeStructSize) {
       this.f5.get(fbeValue.f5)
     } else {
       fbeValue.f5.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f5.FBESize
+    fbeCurrentSize += this.f5.fbeSize
 
-    if ((fbeCurrentSize + this.f6.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f6.fbeSize) <= fbeStructSize) {
       this.f6.get(fbeValue.f6)
     } else {
       fbeValue.f6.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f6.FBESize
+    fbeCurrentSize += this.f6.fbeSize
 
-    if ((fbeCurrentSize + this.f7.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f7.fbeSize) <= fbeStructSize) {
       this.f7.get(fbeValue.f7)
     } else {
       fbeValue.f7.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f7.FBESize
+    fbeCurrentSize += this.f7.fbeSize
 
-    if ((fbeCurrentSize + this.f8.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f8.fbeSize) <= fbeStructSize) {
       this.f8.get(fbeValue.f8)
     } else {
       fbeValue.f8.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f8.FBESize
+    fbeCurrentSize += this.f8.fbeSize
 
-    if ((fbeCurrentSize + this.f9.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f9.fbeSize) <= fbeStructSize) {
       this.f9.get(fbeValue.f9)
     } else {
       fbeValue.f9.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f9.FBESize
+    fbeCurrentSize += this.f9.fbeSize
 
-    if ((fbeCurrentSize + this.f10.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f10.fbeSize) <= fbeStructSize) {
       this.f10.get(fbeValue.f10)
     } else {
       fbeValue.f10.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f10.FBESize
+    fbeCurrentSize += this.f10.fbeSize
   }
 
   /**
@@ -13928,8 +13928,8 @@ class FieldModelStructArray extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   setBegin () {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
@@ -13940,7 +13940,7 @@ class FieldModelStructArray extends fbe.FieldModel {
       return 0
     }
 
-    this.writeUInt32(this.FBEOffset, fbeStructOffset)
+    this.writeUInt32(this.fbeOffset, fbeStructOffset)
     this.writeUInt32(fbeStructOffset, fbeStructSize)
     this.writeUInt32(fbeStructOffset + 4, this.FBEType)
 
@@ -14021,8 +14021,8 @@ class StructArrayModel extends fbe.Model {
    * @this {!StructArrayModel}
    * @returns {!number} Model size
    */
-  get FBESize () {
-    return this.model.FBESize + this.model.FBEExtra
+  get fbeSize () {
+    return this.model.fbeSize + this.model.fbeExtra
   }
 
   /**
@@ -14049,12 +14049,12 @@ class StructArrayModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return false
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    if (fbeFullSize < this.model.fbeSize) {
       return false
     }
 
@@ -14067,7 +14067,7 @@ class StructArrayModel extends fbe.Model {
    * @returns {!number} Model begin offset
    */
   createBegin () {
-    return this.buffer.allocate(4 + this.model.FBESize)
+    return this.buffer.allocate(4 + this.model.fbeSize)
   }
 
   /**
@@ -14078,7 +14078,7 @@ class StructArrayModel extends fbe.Model {
   createEnd (fbeBegin) {
     let fbeEnd = this.buffer.size
     let fbeFullSize = fbeEnd - fbeBegin
-    this.writeUInt32(this.model.FBEOffset - 4, fbeFullSize)
+    this.writeUInt32(this.model.fbeOffset - 4, fbeFullSize)
     return fbeFullSize
   }
 
@@ -14101,13 +14101,13 @@ class StructArrayModel extends fbe.Model {
    * @return {!object} Deserialized StructArray value and its size
    */
   deserialize (value = new StructArray()) {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return { value: new StructArray(), size: 0 }
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    console.assert((fbeFullSize >= this.model.FBESize), 'Model is broken!')
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    console.assert((fbeFullSize >= this.model.fbeSize), 'Model is broken!')
+    if (fbeFullSize < this.model.fbeSize) {
       return { value: new StructArray(), size: 0 }
     }
 
@@ -14121,7 +14121,7 @@ class StructArrayModel extends fbe.Model {
    * @param {!number} prev Previous StructArray model size
    */
   next (prev) {
-    this.model.FBEShift(prev)
+    this.model.fbeShift(prev)
   }
 }
 
@@ -14247,8 +14247,8 @@ class FinalModelStructArray extends fbe.FinalModel {
    * @param {!StructArray} fbeValue StructArray value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (fbeValue) {
-    return 0 + this.f1.FBEAllocationSize(fbeValue.f1) + this.f2.FBEAllocationSize(fbeValue.f2) + this.f3.FBEAllocationSize(fbeValue.f3) + this.f4.FBEAllocationSize(fbeValue.f4) + this.f5.FBEAllocationSize(fbeValue.f5) + this.f6.FBEAllocationSize(fbeValue.f6) + this.f7.FBEAllocationSize(fbeValue.f7) + this.f8.FBEAllocationSize(fbeValue.f8) + this.f9.FBEAllocationSize(fbeValue.f9) + this.f10.FBEAllocationSize(fbeValue.f10)
+  fbeAllocationSize (fbeValue) {
+    return 0 + this.f1.fbeAllocationSize(fbeValue.f1) + this.f2.fbeAllocationSize(fbeValue.f2) + this.f3.fbeAllocationSize(fbeValue.f3) + this.f4.fbeAllocationSize(fbeValue.f4) + this.f5.fbeAllocationSize(fbeValue.f5) + this.f6.fbeAllocationSize(fbeValue.f6) + this.f7.fbeAllocationSize(fbeValue.f7) + this.f8.fbeAllocationSize(fbeValue.f8) + this.f9.fbeAllocationSize(fbeValue.f9) + this.f10.fbeAllocationSize(fbeValue.f10)
   }
 
   /**
@@ -14275,9 +14275,9 @@ class FinalModelStructArray extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeResult = this.verifyFields()
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeResult
   }
 
@@ -14290,70 +14290,70 @@ class FinalModelStructArray extends fbe.FinalModel {
     let fbeCurrentOffset = 0
     let fbeFieldSize
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f2.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f3.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f4.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f5.FBEOffset = fbeCurrentOffset
+    this.f5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f5.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f6.FBEOffset = fbeCurrentOffset
+    this.f6.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f6.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f7.FBEOffset = fbeCurrentOffset
+    this.f7.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f7.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f8.FBEOffset = fbeCurrentOffset
+    this.f8.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f8.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f9.FBEOffset = fbeCurrentOffset
+    this.f9.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f9.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f10.FBEOffset = fbeCurrentOffset
+    this.f10.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f10.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
@@ -14370,9 +14370,9 @@ class FinalModelStructArray extends fbe.FinalModel {
    * @returns {!object} Result struct value and its size
    */
   get (fbeValue = new StructArray()) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.getFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return { value: fbeValue, size: fbeSize }
   }
 
@@ -14387,61 +14387,61 @@ class FinalModelStructArray extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeResult
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1.get(fbeValue.f1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeResult = this.f2.get(fbeValue.f2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeResult = this.f3.get(fbeValue.f3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeResult = this.f4.get(fbeValue.f4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f5.FBEOffset = fbeCurrentOffset
+    this.f5.fbeOffset = fbeCurrentOffset
     fbeResult = this.f5.get(fbeValue.f5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f6.FBEOffset = fbeCurrentOffset
+    this.f6.fbeOffset = fbeCurrentOffset
     fbeResult = this.f6.get(fbeValue.f6)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f7.FBEOffset = fbeCurrentOffset
+    this.f7.fbeOffset = fbeCurrentOffset
     fbeResult = this.f7.get(fbeValue.f7)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f8.FBEOffset = fbeCurrentOffset
+    this.f8.fbeOffset = fbeCurrentOffset
     fbeResult = this.f8.get(fbeValue.f8)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f9.FBEOffset = fbeCurrentOffset
+    this.f9.fbeOffset = fbeCurrentOffset
     fbeResult = this.f9.get(fbeValue.f9)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f10.FBEOffset = fbeCurrentOffset
+    this.f10.fbeOffset = fbeCurrentOffset
     fbeResult = this.f10.get(fbeValue.f10)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
@@ -14457,9 +14457,9 @@ class FinalModelStructArray extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (fbeValue) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.setFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeSize
   }
 
@@ -14474,61 +14474,61 @@ class FinalModelStructArray extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeFieldSize
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1.set(fbeValue.f1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f2.set(fbeValue.f2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f3.set(fbeValue.f3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f4.set(fbeValue.f4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f5.FBEOffset = fbeCurrentOffset
+    this.f5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f5.set(fbeValue.f5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f6.FBEOffset = fbeCurrentOffset
+    this.f6.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f6.set(fbeValue.f6)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f7.FBEOffset = fbeCurrentOffset
+    this.f7.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f7.set(fbeValue.f7)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f8.FBEOffset = fbeCurrentOffset
+    this.f8.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f8.set(fbeValue.f8)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f9.FBEOffset = fbeCurrentOffset
+    this.f9.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f9.set(fbeValue.f9)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f10.FBEOffset = fbeCurrentOffset
+    this.f10.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f10.set(fbeValue.f10)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
@@ -14578,12 +14578,12 @@ class StructArrayFinalModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return false
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return false
     }
@@ -14601,7 +14601,7 @@ class StructArrayFinalModel extends fbe.Model {
     let fbeInitialSize = this.buffer.size
 
     let fbeStructType = this.FBEType
-    let fbeStructSize = 8 + this._model.FBEAllocationSize(value)
+    let fbeStructSize = 8 + this._model.fbeAllocationSize(value)
     let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset
     console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')
     if ((this.buffer.offset + fbeStructOffset + fbeStructSize) > this.buffer.size) {
@@ -14611,8 +14611,8 @@ class StructArrayFinalModel extends fbe.Model {
     fbeStructSize = 8 + this._model.set(value)
     this.buffer.resize(fbeInitialSize + fbeStructSize)
 
-    this.writeUInt32(this._model.FBEOffset - 8, fbeStructSize)
-    this.writeUInt32(this._model.FBEOffset - 4, fbeStructType)
+    this.writeUInt32(this._model.fbeOffset - 8, fbeStructSize)
+    this.writeUInt32(this._model.fbeOffset - 4, fbeStructType)
 
     return fbeStructSize
   }
@@ -14624,13 +14624,13 @@ class StructArrayFinalModel extends fbe.Model {
    * @return {!object} Deserialized StructArray value and its size
    */
   deserialize (value = new StructArray()) {
-    console.assert(((this.buffer.offset + this._model.FBEOffset) <= this.buffer.size), 'Model is broken!')
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    console.assert(((this.buffer.offset + this._model.fbeOffset) <= this.buffer.size), 'Model is broken!')
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return { value: new StructArray(), size: 0 }
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     console.assert(((fbeStructSize > 0) && (fbeStructType === this.FBEType)), 'Model is broken!')
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return { value: new StructArray(), size: 8 }
@@ -14646,7 +14646,7 @@ class StructArrayFinalModel extends fbe.Model {
    * @param {!number} prev Previous StructArray model size
    */
   next (prev) {
-    this._model.FBEShift(prev)
+    this._model.fbeShift(prev)
   }
 }
 
@@ -15105,15 +15105,15 @@ class FieldModelStructVector extends fbe.FieldModel {
   constructor (buffer, offset) {
     super(buffer, offset)
     this._f1 = new fbe.FieldModelVector(new fbe.FieldModelByte(buffer, 4 + 4), buffer, 4 + 4)
-    this._f2 = new fbe.FieldModelVector(new fbe.FieldModelOptional(new fbe.FieldModelByte(buffer, this._f1.FBEOffset + this._f1.FBESize), buffer, this._f1.FBEOffset + this._f1.FBESize), buffer, this._f1.FBEOffset + this._f1.FBESize)
-    this._f3 = new fbe.FieldModelVector(new fbe.FieldModelBytes(buffer, this._f2.FBEOffset + this._f2.FBESize), buffer, this._f2.FBEOffset + this._f2.FBESize)
-    this._f4 = new fbe.FieldModelVector(new fbe.FieldModelOptional(new fbe.FieldModelBytes(buffer, this._f3.FBEOffset + this._f3.FBESize), buffer, this._f3.FBEOffset + this._f3.FBESize), buffer, this._f3.FBEOffset + this._f3.FBESize)
-    this._f5 = new fbe.FieldModelVector(new FieldModelEnumSimple(buffer, this._f4.FBEOffset + this._f4.FBESize), buffer, this._f4.FBEOffset + this._f4.FBESize)
-    this._f6 = new fbe.FieldModelVector(new fbe.FieldModelOptional(new FieldModelEnumSimple(buffer, this._f5.FBEOffset + this._f5.FBESize), buffer, this._f5.FBEOffset + this._f5.FBESize), buffer, this._f5.FBEOffset + this._f5.FBESize)
-    this._f7 = new fbe.FieldModelVector(new FieldModelFlagsSimple(buffer, this._f6.FBEOffset + this._f6.FBESize), buffer, this._f6.FBEOffset + this._f6.FBESize)
-    this._f8 = new fbe.FieldModelVector(new fbe.FieldModelOptional(new FieldModelFlagsSimple(buffer, this._f7.FBEOffset + this._f7.FBESize), buffer, this._f7.FBEOffset + this._f7.FBESize), buffer, this._f7.FBEOffset + this._f7.FBESize)
-    this._f9 = new fbe.FieldModelVector(new FieldModelStructSimple(buffer, this._f8.FBEOffset + this._f8.FBESize), buffer, this._f8.FBEOffset + this._f8.FBESize)
-    this._f10 = new fbe.FieldModelVector(new fbe.FieldModelOptional(new FieldModelStructSimple(buffer, this._f9.FBEOffset + this._f9.FBESize), buffer, this._f9.FBEOffset + this._f9.FBESize), buffer, this._f9.FBEOffset + this._f9.FBESize)
+    this._f2 = new fbe.FieldModelVector(new fbe.FieldModelOptional(new fbe.FieldModelByte(buffer, this._f1.fbeOffset + this._f1.fbeSize), buffer, this._f1.fbeOffset + this._f1.fbeSize), buffer, this._f1.fbeOffset + this._f1.fbeSize)
+    this._f3 = new fbe.FieldModelVector(new fbe.FieldModelBytes(buffer, this._f2.fbeOffset + this._f2.fbeSize), buffer, this._f2.fbeOffset + this._f2.fbeSize)
+    this._f4 = new fbe.FieldModelVector(new fbe.FieldModelOptional(new fbe.FieldModelBytes(buffer, this._f3.fbeOffset + this._f3.fbeSize), buffer, this._f3.fbeOffset + this._f3.fbeSize), buffer, this._f3.fbeOffset + this._f3.fbeSize)
+    this._f5 = new fbe.FieldModelVector(new FieldModelEnumSimple(buffer, this._f4.fbeOffset + this._f4.fbeSize), buffer, this._f4.fbeOffset + this._f4.fbeSize)
+    this._f6 = new fbe.FieldModelVector(new fbe.FieldModelOptional(new FieldModelEnumSimple(buffer, this._f5.fbeOffset + this._f5.fbeSize), buffer, this._f5.fbeOffset + this._f5.fbeSize), buffer, this._f5.fbeOffset + this._f5.fbeSize)
+    this._f7 = new fbe.FieldModelVector(new FieldModelFlagsSimple(buffer, this._f6.fbeOffset + this._f6.fbeSize), buffer, this._f6.fbeOffset + this._f6.fbeSize)
+    this._f8 = new fbe.FieldModelVector(new fbe.FieldModelOptional(new FieldModelFlagsSimple(buffer, this._f7.fbeOffset + this._f7.fbeSize), buffer, this._f7.fbeOffset + this._f7.fbeSize), buffer, this._f7.fbeOffset + this._f7.fbeSize)
+    this._f9 = new fbe.FieldModelVector(new FieldModelStructSimple(buffer, this._f8.fbeOffset + this._f8.fbeSize), buffer, this._f8.fbeOffset + this._f8.fbeSize)
+    this._f10 = new fbe.FieldModelVector(new fbe.FieldModelOptional(new FieldModelStructSimple(buffer, this._f9.fbeOffset + this._f9.fbeSize), buffer, this._f9.fbeOffset + this._f9.fbeSize), buffer, this._f9.fbeOffset + this._f9.fbeSize)
   }
 
   /**
@@ -15211,7 +15211,7 @@ class FieldModelStructVector extends fbe.FieldModel {
    * @this {!FieldModelStructVector}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -15221,7 +15221,7 @@ class FieldModelStructVector extends fbe.FieldModel {
    * @returns {!number} Field body size
    */
   get FBEBody () {
-    return 4 + 4 + this.f1.FBESize + this.f2.FBESize + this.f3.FBESize + this.f4.FBESize + this.f5.FBESize + this.f6.FBESize + this.f7.FBESize + this.f8.FBESize + this.f9.FBESize + this.f10.FBESize
+    return 4 + 4 + this.f1.fbeSize + this.f2.fbeSize + this.f3.fbeSize + this.f4.fbeSize + this.f5.fbeSize + this.f6.fbeSize + this.f7.fbeSize + this.f8.fbeSize + this.f9.fbeSize + this.f10.fbeSize
   }
 
   /**
@@ -15229,19 +15229,19 @@ class FieldModelStructVector extends fbe.FieldModel {
    * @this {!FieldModelStructVector}
    * @returns {!number} Field extra size
    */
-  get FBEExtra () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4) > this._buffer.size)) {
       return 0
     }
 
     this._buffer.shift(fbeStructOffset)
 
-    let fbeResult = this.FBEBody + this.f1.FBEExtra + this.f2.FBEExtra + this.f3.FBEExtra + this.f4.FBEExtra + this.f5.FBEExtra + this.f6.FBEExtra + this.f7.FBEExtra + this.f8.FBEExtra + this.f9.FBEExtra + this.f10.FBEExtra
+    let fbeResult = this.FBEBody + this.f1.fbeExtra + this.f2.fbeExtra + this.f3.fbeExtra + this.f4.fbeExtra + this.f5.fbeExtra + this.f6.fbeExtra + this.f7.fbeExtra + this.f8.fbeExtra + this.f9.fbeExtra + this.f10.fbeExtra
 
     this._buffer.unshift(fbeStructOffset)
 
@@ -15273,11 +15273,11 @@ class FieldModelStructVector extends fbe.FieldModel {
    * @returns {!boolean} Field model valid state
    */
   verify (fbeVerifyType = true) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return true
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return false
     }
@@ -15307,95 +15307,95 @@ class FieldModelStructVector extends fbe.FieldModel {
   verifyFields (fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.f1.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1.FBESize
+    fbeCurrentSize += this.f1.fbeSize
 
-    if ((fbeCurrentSize + this.f2.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f2.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f2.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f2.FBESize
+    fbeCurrentSize += this.f2.fbeSize
 
-    if ((fbeCurrentSize + this.f3.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f3.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f3.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f3.FBESize
+    fbeCurrentSize += this.f3.fbeSize
 
-    if ((fbeCurrentSize + this.f4.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f4.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f4.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f4.FBESize
+    fbeCurrentSize += this.f4.fbeSize
 
-    if ((fbeCurrentSize + this.f5.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f5.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f5.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f5.FBESize
+    fbeCurrentSize += this.f5.fbeSize
 
-    if ((fbeCurrentSize + this.f6.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f6.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f6.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f6.FBESize
+    fbeCurrentSize += this.f6.fbeSize
 
-    if ((fbeCurrentSize + this.f7.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f7.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f7.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f7.FBESize
+    fbeCurrentSize += this.f7.fbeSize
 
-    if ((fbeCurrentSize + this.f8.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f8.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f8.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f8.FBESize
+    fbeCurrentSize += this.f8.fbeSize
 
-    if ((fbeCurrentSize + this.f9.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f9.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f9.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f9.FBESize
+    fbeCurrentSize += this.f9.fbeSize
 
-    if ((fbeCurrentSize + this.f10.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f10.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f10.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f10.FBESize
+    fbeCurrentSize += this.f10.fbeSize
 
     return true
   }
@@ -15406,11 +15406,11 @@ class FieldModelStructVector extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   getBegin () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + 4 + 4) <= this._buffer.size), 'Model is broken!')
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return 0
@@ -15462,85 +15462,85 @@ class FieldModelStructVector extends fbe.FieldModel {
   getFields (fbeValue, fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.f1.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1.fbeSize) <= fbeStructSize) {
       this.f1.get(fbeValue.f1)
     } else {
       fbeValue.f1.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1.FBESize
+    fbeCurrentSize += this.f1.fbeSize
 
-    if ((fbeCurrentSize + this.f2.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f2.fbeSize) <= fbeStructSize) {
       this.f2.get(fbeValue.f2)
     } else {
       fbeValue.f2.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f2.FBESize
+    fbeCurrentSize += this.f2.fbeSize
 
-    if ((fbeCurrentSize + this.f3.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f3.fbeSize) <= fbeStructSize) {
       this.f3.get(fbeValue.f3)
     } else {
       fbeValue.f3.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f3.FBESize
+    fbeCurrentSize += this.f3.fbeSize
 
-    if ((fbeCurrentSize + this.f4.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f4.fbeSize) <= fbeStructSize) {
       this.f4.get(fbeValue.f4)
     } else {
       fbeValue.f4.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f4.FBESize
+    fbeCurrentSize += this.f4.fbeSize
 
-    if ((fbeCurrentSize + this.f5.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f5.fbeSize) <= fbeStructSize) {
       this.f5.get(fbeValue.f5)
     } else {
       fbeValue.f5.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f5.FBESize
+    fbeCurrentSize += this.f5.fbeSize
 
-    if ((fbeCurrentSize + this.f6.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f6.fbeSize) <= fbeStructSize) {
       this.f6.get(fbeValue.f6)
     } else {
       fbeValue.f6.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f6.FBESize
+    fbeCurrentSize += this.f6.fbeSize
 
-    if ((fbeCurrentSize + this.f7.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f7.fbeSize) <= fbeStructSize) {
       this.f7.get(fbeValue.f7)
     } else {
       fbeValue.f7.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f7.FBESize
+    fbeCurrentSize += this.f7.fbeSize
 
-    if ((fbeCurrentSize + this.f8.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f8.fbeSize) <= fbeStructSize) {
       this.f8.get(fbeValue.f8)
     } else {
       fbeValue.f8.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f8.FBESize
+    fbeCurrentSize += this.f8.fbeSize
 
-    if ((fbeCurrentSize + this.f9.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f9.fbeSize) <= fbeStructSize) {
       this.f9.get(fbeValue.f9)
     } else {
       fbeValue.f9.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f9.FBESize
+    fbeCurrentSize += this.f9.fbeSize
 
-    if ((fbeCurrentSize + this.f10.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f10.fbeSize) <= fbeStructSize) {
       this.f10.get(fbeValue.f10)
     } else {
       fbeValue.f10.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f10.FBESize
+    fbeCurrentSize += this.f10.fbeSize
   }
 
   /**
@@ -15549,8 +15549,8 @@ class FieldModelStructVector extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   setBegin () {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
@@ -15561,7 +15561,7 @@ class FieldModelStructVector extends fbe.FieldModel {
       return 0
     }
 
-    this.writeUInt32(this.FBEOffset, fbeStructOffset)
+    this.writeUInt32(this.fbeOffset, fbeStructOffset)
     this.writeUInt32(fbeStructOffset, fbeStructSize)
     this.writeUInt32(fbeStructOffset + 4, this.FBEType)
 
@@ -15642,8 +15642,8 @@ class StructVectorModel extends fbe.Model {
    * @this {!StructVectorModel}
    * @returns {!number} Model size
    */
-  get FBESize () {
-    return this.model.FBESize + this.model.FBEExtra
+  get fbeSize () {
+    return this.model.fbeSize + this.model.fbeExtra
   }
 
   /**
@@ -15670,12 +15670,12 @@ class StructVectorModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return false
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    if (fbeFullSize < this.model.fbeSize) {
       return false
     }
 
@@ -15688,7 +15688,7 @@ class StructVectorModel extends fbe.Model {
    * @returns {!number} Model begin offset
    */
   createBegin () {
-    return this.buffer.allocate(4 + this.model.FBESize)
+    return this.buffer.allocate(4 + this.model.fbeSize)
   }
 
   /**
@@ -15699,7 +15699,7 @@ class StructVectorModel extends fbe.Model {
   createEnd (fbeBegin) {
     let fbeEnd = this.buffer.size
     let fbeFullSize = fbeEnd - fbeBegin
-    this.writeUInt32(this.model.FBEOffset - 4, fbeFullSize)
+    this.writeUInt32(this.model.fbeOffset - 4, fbeFullSize)
     return fbeFullSize
   }
 
@@ -15722,13 +15722,13 @@ class StructVectorModel extends fbe.Model {
    * @return {!object} Deserialized StructVector value and its size
    */
   deserialize (value = new StructVector()) {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return { value: new StructVector(), size: 0 }
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    console.assert((fbeFullSize >= this.model.FBESize), 'Model is broken!')
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    console.assert((fbeFullSize >= this.model.fbeSize), 'Model is broken!')
+    if (fbeFullSize < this.model.fbeSize) {
       return { value: new StructVector(), size: 0 }
     }
 
@@ -15742,7 +15742,7 @@ class StructVectorModel extends fbe.Model {
    * @param {!number} prev Previous StructVector model size
    */
   next (prev) {
-    this.model.FBEShift(prev)
+    this.model.fbeShift(prev)
   }
 }
 
@@ -15868,8 +15868,8 @@ class FinalModelStructVector extends fbe.FinalModel {
    * @param {!StructVector} fbeValue StructVector value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (fbeValue) {
-    return 0 + this.f1.FBEAllocationSize(fbeValue.f1) + this.f2.FBEAllocationSize(fbeValue.f2) + this.f3.FBEAllocationSize(fbeValue.f3) + this.f4.FBEAllocationSize(fbeValue.f4) + this.f5.FBEAllocationSize(fbeValue.f5) + this.f6.FBEAllocationSize(fbeValue.f6) + this.f7.FBEAllocationSize(fbeValue.f7) + this.f8.FBEAllocationSize(fbeValue.f8) + this.f9.FBEAllocationSize(fbeValue.f9) + this.f10.FBEAllocationSize(fbeValue.f10)
+  fbeAllocationSize (fbeValue) {
+    return 0 + this.f1.fbeAllocationSize(fbeValue.f1) + this.f2.fbeAllocationSize(fbeValue.f2) + this.f3.fbeAllocationSize(fbeValue.f3) + this.f4.fbeAllocationSize(fbeValue.f4) + this.f5.fbeAllocationSize(fbeValue.f5) + this.f6.fbeAllocationSize(fbeValue.f6) + this.f7.fbeAllocationSize(fbeValue.f7) + this.f8.fbeAllocationSize(fbeValue.f8) + this.f9.fbeAllocationSize(fbeValue.f9) + this.f10.fbeAllocationSize(fbeValue.f10)
   }
 
   /**
@@ -15896,9 +15896,9 @@ class FinalModelStructVector extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeResult = this.verifyFields()
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeResult
   }
 
@@ -15911,70 +15911,70 @@ class FinalModelStructVector extends fbe.FinalModel {
     let fbeCurrentOffset = 0
     let fbeFieldSize
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f2.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f3.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f4.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f5.FBEOffset = fbeCurrentOffset
+    this.f5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f5.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f6.FBEOffset = fbeCurrentOffset
+    this.f6.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f6.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f7.FBEOffset = fbeCurrentOffset
+    this.f7.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f7.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f8.FBEOffset = fbeCurrentOffset
+    this.f8.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f8.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f9.FBEOffset = fbeCurrentOffset
+    this.f9.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f9.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f10.FBEOffset = fbeCurrentOffset
+    this.f10.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f10.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
@@ -15991,9 +15991,9 @@ class FinalModelStructVector extends fbe.FinalModel {
    * @returns {!object} Result struct value and its size
    */
   get (fbeValue = new StructVector()) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.getFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return { value: fbeValue, size: fbeSize }
   }
 
@@ -16008,61 +16008,61 @@ class FinalModelStructVector extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeResult
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1.get(fbeValue.f1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeResult = this.f2.get(fbeValue.f2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeResult = this.f3.get(fbeValue.f3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeResult = this.f4.get(fbeValue.f4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f5.FBEOffset = fbeCurrentOffset
+    this.f5.fbeOffset = fbeCurrentOffset
     fbeResult = this.f5.get(fbeValue.f5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f6.FBEOffset = fbeCurrentOffset
+    this.f6.fbeOffset = fbeCurrentOffset
     fbeResult = this.f6.get(fbeValue.f6)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f7.FBEOffset = fbeCurrentOffset
+    this.f7.fbeOffset = fbeCurrentOffset
     fbeResult = this.f7.get(fbeValue.f7)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f8.FBEOffset = fbeCurrentOffset
+    this.f8.fbeOffset = fbeCurrentOffset
     fbeResult = this.f8.get(fbeValue.f8)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f9.FBEOffset = fbeCurrentOffset
+    this.f9.fbeOffset = fbeCurrentOffset
     fbeResult = this.f9.get(fbeValue.f9)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f10.FBEOffset = fbeCurrentOffset
+    this.f10.fbeOffset = fbeCurrentOffset
     fbeResult = this.f10.get(fbeValue.f10)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
@@ -16078,9 +16078,9 @@ class FinalModelStructVector extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (fbeValue) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.setFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeSize
   }
 
@@ -16095,61 +16095,61 @@ class FinalModelStructVector extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeFieldSize
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1.set(fbeValue.f1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f2.set(fbeValue.f2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f3.set(fbeValue.f3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f4.set(fbeValue.f4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f5.FBEOffset = fbeCurrentOffset
+    this.f5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f5.set(fbeValue.f5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f6.FBEOffset = fbeCurrentOffset
+    this.f6.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f6.set(fbeValue.f6)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f7.FBEOffset = fbeCurrentOffset
+    this.f7.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f7.set(fbeValue.f7)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f8.FBEOffset = fbeCurrentOffset
+    this.f8.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f8.set(fbeValue.f8)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f9.FBEOffset = fbeCurrentOffset
+    this.f9.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f9.set(fbeValue.f9)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f10.FBEOffset = fbeCurrentOffset
+    this.f10.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f10.set(fbeValue.f10)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
@@ -16199,12 +16199,12 @@ class StructVectorFinalModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return false
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return false
     }
@@ -16222,7 +16222,7 @@ class StructVectorFinalModel extends fbe.Model {
     let fbeInitialSize = this.buffer.size
 
     let fbeStructType = this.FBEType
-    let fbeStructSize = 8 + this._model.FBEAllocationSize(value)
+    let fbeStructSize = 8 + this._model.fbeAllocationSize(value)
     let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset
     console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')
     if ((this.buffer.offset + fbeStructOffset + fbeStructSize) > this.buffer.size) {
@@ -16232,8 +16232,8 @@ class StructVectorFinalModel extends fbe.Model {
     fbeStructSize = 8 + this._model.set(value)
     this.buffer.resize(fbeInitialSize + fbeStructSize)
 
-    this.writeUInt32(this._model.FBEOffset - 8, fbeStructSize)
-    this.writeUInt32(this._model.FBEOffset - 4, fbeStructType)
+    this.writeUInt32(this._model.fbeOffset - 8, fbeStructSize)
+    this.writeUInt32(this._model.fbeOffset - 4, fbeStructType)
 
     return fbeStructSize
   }
@@ -16245,13 +16245,13 @@ class StructVectorFinalModel extends fbe.Model {
    * @return {!object} Deserialized StructVector value and its size
    */
   deserialize (value = new StructVector()) {
-    console.assert(((this.buffer.offset + this._model.FBEOffset) <= this.buffer.size), 'Model is broken!')
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    console.assert(((this.buffer.offset + this._model.fbeOffset) <= this.buffer.size), 'Model is broken!')
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return { value: new StructVector(), size: 0 }
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     console.assert(((fbeStructSize > 0) && (fbeStructType === this.FBEType)), 'Model is broken!')
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return { value: new StructVector(), size: 8 }
@@ -16267,7 +16267,7 @@ class StructVectorFinalModel extends fbe.Model {
    * @param {!number} prev Previous StructVector model size
    */
   next (prev) {
-    this._model.FBEShift(prev)
+    this._model.fbeShift(prev)
   }
 }
 
@@ -16726,15 +16726,15 @@ class FieldModelStructList extends fbe.FieldModel {
   constructor (buffer, offset) {
     super(buffer, offset)
     this._f1 = new fbe.FieldModelVector(new fbe.FieldModelByte(buffer, 4 + 4), buffer, 4 + 4)
-    this._f2 = new fbe.FieldModelVector(new fbe.FieldModelOptional(new fbe.FieldModelByte(buffer, this._f1.FBEOffset + this._f1.FBESize), buffer, this._f1.FBEOffset + this._f1.FBESize), buffer, this._f1.FBEOffset + this._f1.FBESize)
-    this._f3 = new fbe.FieldModelVector(new fbe.FieldModelBytes(buffer, this._f2.FBEOffset + this._f2.FBESize), buffer, this._f2.FBEOffset + this._f2.FBESize)
-    this._f4 = new fbe.FieldModelVector(new fbe.FieldModelOptional(new fbe.FieldModelBytes(buffer, this._f3.FBEOffset + this._f3.FBESize), buffer, this._f3.FBEOffset + this._f3.FBESize), buffer, this._f3.FBEOffset + this._f3.FBESize)
-    this._f5 = new fbe.FieldModelVector(new FieldModelEnumSimple(buffer, this._f4.FBEOffset + this._f4.FBESize), buffer, this._f4.FBEOffset + this._f4.FBESize)
-    this._f6 = new fbe.FieldModelVector(new fbe.FieldModelOptional(new FieldModelEnumSimple(buffer, this._f5.FBEOffset + this._f5.FBESize), buffer, this._f5.FBEOffset + this._f5.FBESize), buffer, this._f5.FBEOffset + this._f5.FBESize)
-    this._f7 = new fbe.FieldModelVector(new FieldModelFlagsSimple(buffer, this._f6.FBEOffset + this._f6.FBESize), buffer, this._f6.FBEOffset + this._f6.FBESize)
-    this._f8 = new fbe.FieldModelVector(new fbe.FieldModelOptional(new FieldModelFlagsSimple(buffer, this._f7.FBEOffset + this._f7.FBESize), buffer, this._f7.FBEOffset + this._f7.FBESize), buffer, this._f7.FBEOffset + this._f7.FBESize)
-    this._f9 = new fbe.FieldModelVector(new FieldModelStructSimple(buffer, this._f8.FBEOffset + this._f8.FBESize), buffer, this._f8.FBEOffset + this._f8.FBESize)
-    this._f10 = new fbe.FieldModelVector(new fbe.FieldModelOptional(new FieldModelStructSimple(buffer, this._f9.FBEOffset + this._f9.FBESize), buffer, this._f9.FBEOffset + this._f9.FBESize), buffer, this._f9.FBEOffset + this._f9.FBESize)
+    this._f2 = new fbe.FieldModelVector(new fbe.FieldModelOptional(new fbe.FieldModelByte(buffer, this._f1.fbeOffset + this._f1.fbeSize), buffer, this._f1.fbeOffset + this._f1.fbeSize), buffer, this._f1.fbeOffset + this._f1.fbeSize)
+    this._f3 = new fbe.FieldModelVector(new fbe.FieldModelBytes(buffer, this._f2.fbeOffset + this._f2.fbeSize), buffer, this._f2.fbeOffset + this._f2.fbeSize)
+    this._f4 = new fbe.FieldModelVector(new fbe.FieldModelOptional(new fbe.FieldModelBytes(buffer, this._f3.fbeOffset + this._f3.fbeSize), buffer, this._f3.fbeOffset + this._f3.fbeSize), buffer, this._f3.fbeOffset + this._f3.fbeSize)
+    this._f5 = new fbe.FieldModelVector(new FieldModelEnumSimple(buffer, this._f4.fbeOffset + this._f4.fbeSize), buffer, this._f4.fbeOffset + this._f4.fbeSize)
+    this._f6 = new fbe.FieldModelVector(new fbe.FieldModelOptional(new FieldModelEnumSimple(buffer, this._f5.fbeOffset + this._f5.fbeSize), buffer, this._f5.fbeOffset + this._f5.fbeSize), buffer, this._f5.fbeOffset + this._f5.fbeSize)
+    this._f7 = new fbe.FieldModelVector(new FieldModelFlagsSimple(buffer, this._f6.fbeOffset + this._f6.fbeSize), buffer, this._f6.fbeOffset + this._f6.fbeSize)
+    this._f8 = new fbe.FieldModelVector(new fbe.FieldModelOptional(new FieldModelFlagsSimple(buffer, this._f7.fbeOffset + this._f7.fbeSize), buffer, this._f7.fbeOffset + this._f7.fbeSize), buffer, this._f7.fbeOffset + this._f7.fbeSize)
+    this._f9 = new fbe.FieldModelVector(new FieldModelStructSimple(buffer, this._f8.fbeOffset + this._f8.fbeSize), buffer, this._f8.fbeOffset + this._f8.fbeSize)
+    this._f10 = new fbe.FieldModelVector(new fbe.FieldModelOptional(new FieldModelStructSimple(buffer, this._f9.fbeOffset + this._f9.fbeSize), buffer, this._f9.fbeOffset + this._f9.fbeSize), buffer, this._f9.fbeOffset + this._f9.fbeSize)
   }
 
   /**
@@ -16832,7 +16832,7 @@ class FieldModelStructList extends fbe.FieldModel {
    * @this {!FieldModelStructList}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -16842,7 +16842,7 @@ class FieldModelStructList extends fbe.FieldModel {
    * @returns {!number} Field body size
    */
   get FBEBody () {
-    return 4 + 4 + this.f1.FBESize + this.f2.FBESize + this.f3.FBESize + this.f4.FBESize + this.f5.FBESize + this.f6.FBESize + this.f7.FBESize + this.f8.FBESize + this.f9.FBESize + this.f10.FBESize
+    return 4 + 4 + this.f1.fbeSize + this.f2.fbeSize + this.f3.fbeSize + this.f4.fbeSize + this.f5.fbeSize + this.f6.fbeSize + this.f7.fbeSize + this.f8.fbeSize + this.f9.fbeSize + this.f10.fbeSize
   }
 
   /**
@@ -16850,19 +16850,19 @@ class FieldModelStructList extends fbe.FieldModel {
    * @this {!FieldModelStructList}
    * @returns {!number} Field extra size
    */
-  get FBEExtra () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4) > this._buffer.size)) {
       return 0
     }
 
     this._buffer.shift(fbeStructOffset)
 
-    let fbeResult = this.FBEBody + this.f1.FBEExtra + this.f2.FBEExtra + this.f3.FBEExtra + this.f4.FBEExtra + this.f5.FBEExtra + this.f6.FBEExtra + this.f7.FBEExtra + this.f8.FBEExtra + this.f9.FBEExtra + this.f10.FBEExtra
+    let fbeResult = this.FBEBody + this.f1.fbeExtra + this.f2.fbeExtra + this.f3.fbeExtra + this.f4.fbeExtra + this.f5.fbeExtra + this.f6.fbeExtra + this.f7.fbeExtra + this.f8.fbeExtra + this.f9.fbeExtra + this.f10.fbeExtra
 
     this._buffer.unshift(fbeStructOffset)
 
@@ -16894,11 +16894,11 @@ class FieldModelStructList extends fbe.FieldModel {
    * @returns {!boolean} Field model valid state
    */
   verify (fbeVerifyType = true) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return true
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return false
     }
@@ -16928,95 +16928,95 @@ class FieldModelStructList extends fbe.FieldModel {
   verifyFields (fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.f1.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1.FBESize
+    fbeCurrentSize += this.f1.fbeSize
 
-    if ((fbeCurrentSize + this.f2.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f2.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f2.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f2.FBESize
+    fbeCurrentSize += this.f2.fbeSize
 
-    if ((fbeCurrentSize + this.f3.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f3.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f3.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f3.FBESize
+    fbeCurrentSize += this.f3.fbeSize
 
-    if ((fbeCurrentSize + this.f4.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f4.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f4.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f4.FBESize
+    fbeCurrentSize += this.f4.fbeSize
 
-    if ((fbeCurrentSize + this.f5.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f5.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f5.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f5.FBESize
+    fbeCurrentSize += this.f5.fbeSize
 
-    if ((fbeCurrentSize + this.f6.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f6.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f6.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f6.FBESize
+    fbeCurrentSize += this.f6.fbeSize
 
-    if ((fbeCurrentSize + this.f7.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f7.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f7.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f7.FBESize
+    fbeCurrentSize += this.f7.fbeSize
 
-    if ((fbeCurrentSize + this.f8.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f8.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f8.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f8.FBESize
+    fbeCurrentSize += this.f8.fbeSize
 
-    if ((fbeCurrentSize + this.f9.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f9.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f9.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f9.FBESize
+    fbeCurrentSize += this.f9.fbeSize
 
-    if ((fbeCurrentSize + this.f10.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f10.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f10.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f10.FBESize
+    fbeCurrentSize += this.f10.fbeSize
 
     return true
   }
@@ -17027,11 +17027,11 @@ class FieldModelStructList extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   getBegin () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + 4 + 4) <= this._buffer.size), 'Model is broken!')
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return 0
@@ -17083,85 +17083,85 @@ class FieldModelStructList extends fbe.FieldModel {
   getFields (fbeValue, fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.f1.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1.fbeSize) <= fbeStructSize) {
       this.f1.get(fbeValue.f1)
     } else {
       fbeValue.f1.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1.FBESize
+    fbeCurrentSize += this.f1.fbeSize
 
-    if ((fbeCurrentSize + this.f2.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f2.fbeSize) <= fbeStructSize) {
       this.f2.get(fbeValue.f2)
     } else {
       fbeValue.f2.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f2.FBESize
+    fbeCurrentSize += this.f2.fbeSize
 
-    if ((fbeCurrentSize + this.f3.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f3.fbeSize) <= fbeStructSize) {
       this.f3.get(fbeValue.f3)
     } else {
       fbeValue.f3.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f3.FBESize
+    fbeCurrentSize += this.f3.fbeSize
 
-    if ((fbeCurrentSize + this.f4.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f4.fbeSize) <= fbeStructSize) {
       this.f4.get(fbeValue.f4)
     } else {
       fbeValue.f4.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f4.FBESize
+    fbeCurrentSize += this.f4.fbeSize
 
-    if ((fbeCurrentSize + this.f5.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f5.fbeSize) <= fbeStructSize) {
       this.f5.get(fbeValue.f5)
     } else {
       fbeValue.f5.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f5.FBESize
+    fbeCurrentSize += this.f5.fbeSize
 
-    if ((fbeCurrentSize + this.f6.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f6.fbeSize) <= fbeStructSize) {
       this.f6.get(fbeValue.f6)
     } else {
       fbeValue.f6.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f6.FBESize
+    fbeCurrentSize += this.f6.fbeSize
 
-    if ((fbeCurrentSize + this.f7.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f7.fbeSize) <= fbeStructSize) {
       this.f7.get(fbeValue.f7)
     } else {
       fbeValue.f7.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f7.FBESize
+    fbeCurrentSize += this.f7.fbeSize
 
-    if ((fbeCurrentSize + this.f8.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f8.fbeSize) <= fbeStructSize) {
       this.f8.get(fbeValue.f8)
     } else {
       fbeValue.f8.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f8.FBESize
+    fbeCurrentSize += this.f8.fbeSize
 
-    if ((fbeCurrentSize + this.f9.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f9.fbeSize) <= fbeStructSize) {
       this.f9.get(fbeValue.f9)
     } else {
       fbeValue.f9.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f9.FBESize
+    fbeCurrentSize += this.f9.fbeSize
 
-    if ((fbeCurrentSize + this.f10.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f10.fbeSize) <= fbeStructSize) {
       this.f10.get(fbeValue.f10)
     } else {
       fbeValue.f10.length = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f10.FBESize
+    fbeCurrentSize += this.f10.fbeSize
   }
 
   /**
@@ -17170,8 +17170,8 @@ class FieldModelStructList extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   setBegin () {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
@@ -17182,7 +17182,7 @@ class FieldModelStructList extends fbe.FieldModel {
       return 0
     }
 
-    this.writeUInt32(this.FBEOffset, fbeStructOffset)
+    this.writeUInt32(this.fbeOffset, fbeStructOffset)
     this.writeUInt32(fbeStructOffset, fbeStructSize)
     this.writeUInt32(fbeStructOffset + 4, this.FBEType)
 
@@ -17263,8 +17263,8 @@ class StructListModel extends fbe.Model {
    * @this {!StructListModel}
    * @returns {!number} Model size
    */
-  get FBESize () {
-    return this.model.FBESize + this.model.FBEExtra
+  get fbeSize () {
+    return this.model.fbeSize + this.model.fbeExtra
   }
 
   /**
@@ -17291,12 +17291,12 @@ class StructListModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return false
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    if (fbeFullSize < this.model.fbeSize) {
       return false
     }
 
@@ -17309,7 +17309,7 @@ class StructListModel extends fbe.Model {
    * @returns {!number} Model begin offset
    */
   createBegin () {
-    return this.buffer.allocate(4 + this.model.FBESize)
+    return this.buffer.allocate(4 + this.model.fbeSize)
   }
 
   /**
@@ -17320,7 +17320,7 @@ class StructListModel extends fbe.Model {
   createEnd (fbeBegin) {
     let fbeEnd = this.buffer.size
     let fbeFullSize = fbeEnd - fbeBegin
-    this.writeUInt32(this.model.FBEOffset - 4, fbeFullSize)
+    this.writeUInt32(this.model.fbeOffset - 4, fbeFullSize)
     return fbeFullSize
   }
 
@@ -17343,13 +17343,13 @@ class StructListModel extends fbe.Model {
    * @return {!object} Deserialized StructList value and its size
    */
   deserialize (value = new StructList()) {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return { value: new StructList(), size: 0 }
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    console.assert((fbeFullSize >= this.model.FBESize), 'Model is broken!')
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    console.assert((fbeFullSize >= this.model.fbeSize), 'Model is broken!')
+    if (fbeFullSize < this.model.fbeSize) {
       return { value: new StructList(), size: 0 }
     }
 
@@ -17363,7 +17363,7 @@ class StructListModel extends fbe.Model {
    * @param {!number} prev Previous StructList model size
    */
   next (prev) {
-    this.model.FBEShift(prev)
+    this.model.fbeShift(prev)
   }
 }
 
@@ -17489,8 +17489,8 @@ class FinalModelStructList extends fbe.FinalModel {
    * @param {!StructList} fbeValue StructList value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (fbeValue) {
-    return 0 + this.f1.FBEAllocationSize(fbeValue.f1) + this.f2.FBEAllocationSize(fbeValue.f2) + this.f3.FBEAllocationSize(fbeValue.f3) + this.f4.FBEAllocationSize(fbeValue.f4) + this.f5.FBEAllocationSize(fbeValue.f5) + this.f6.FBEAllocationSize(fbeValue.f6) + this.f7.FBEAllocationSize(fbeValue.f7) + this.f8.FBEAllocationSize(fbeValue.f8) + this.f9.FBEAllocationSize(fbeValue.f9) + this.f10.FBEAllocationSize(fbeValue.f10)
+  fbeAllocationSize (fbeValue) {
+    return 0 + this.f1.fbeAllocationSize(fbeValue.f1) + this.f2.fbeAllocationSize(fbeValue.f2) + this.f3.fbeAllocationSize(fbeValue.f3) + this.f4.fbeAllocationSize(fbeValue.f4) + this.f5.fbeAllocationSize(fbeValue.f5) + this.f6.fbeAllocationSize(fbeValue.f6) + this.f7.fbeAllocationSize(fbeValue.f7) + this.f8.fbeAllocationSize(fbeValue.f8) + this.f9.fbeAllocationSize(fbeValue.f9) + this.f10.fbeAllocationSize(fbeValue.f10)
   }
 
   /**
@@ -17517,9 +17517,9 @@ class FinalModelStructList extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeResult = this.verifyFields()
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeResult
   }
 
@@ -17532,70 +17532,70 @@ class FinalModelStructList extends fbe.FinalModel {
     let fbeCurrentOffset = 0
     let fbeFieldSize
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f2.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f3.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f4.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f5.FBEOffset = fbeCurrentOffset
+    this.f5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f5.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f6.FBEOffset = fbeCurrentOffset
+    this.f6.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f6.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f7.FBEOffset = fbeCurrentOffset
+    this.f7.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f7.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f8.FBEOffset = fbeCurrentOffset
+    this.f8.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f8.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f9.FBEOffset = fbeCurrentOffset
+    this.f9.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f9.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f10.FBEOffset = fbeCurrentOffset
+    this.f10.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f10.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
@@ -17612,9 +17612,9 @@ class FinalModelStructList extends fbe.FinalModel {
    * @returns {!object} Result struct value and its size
    */
   get (fbeValue = new StructList()) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.getFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return { value: fbeValue, size: fbeSize }
   }
 
@@ -17629,61 +17629,61 @@ class FinalModelStructList extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeResult
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1.get(fbeValue.f1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeResult = this.f2.get(fbeValue.f2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeResult = this.f3.get(fbeValue.f3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeResult = this.f4.get(fbeValue.f4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f5.FBEOffset = fbeCurrentOffset
+    this.f5.fbeOffset = fbeCurrentOffset
     fbeResult = this.f5.get(fbeValue.f5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f6.FBEOffset = fbeCurrentOffset
+    this.f6.fbeOffset = fbeCurrentOffset
     fbeResult = this.f6.get(fbeValue.f6)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f7.FBEOffset = fbeCurrentOffset
+    this.f7.fbeOffset = fbeCurrentOffset
     fbeResult = this.f7.get(fbeValue.f7)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f8.FBEOffset = fbeCurrentOffset
+    this.f8.fbeOffset = fbeCurrentOffset
     fbeResult = this.f8.get(fbeValue.f8)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f9.FBEOffset = fbeCurrentOffset
+    this.f9.fbeOffset = fbeCurrentOffset
     fbeResult = this.f9.get(fbeValue.f9)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f10.FBEOffset = fbeCurrentOffset
+    this.f10.fbeOffset = fbeCurrentOffset
     fbeResult = this.f10.get(fbeValue.f10)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
@@ -17699,9 +17699,9 @@ class FinalModelStructList extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (fbeValue) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.setFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeSize
   }
 
@@ -17716,61 +17716,61 @@ class FinalModelStructList extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeFieldSize
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1.set(fbeValue.f1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f2.set(fbeValue.f2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f3.set(fbeValue.f3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f4.set(fbeValue.f4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f5.FBEOffset = fbeCurrentOffset
+    this.f5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f5.set(fbeValue.f5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f6.FBEOffset = fbeCurrentOffset
+    this.f6.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f6.set(fbeValue.f6)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f7.FBEOffset = fbeCurrentOffset
+    this.f7.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f7.set(fbeValue.f7)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f8.FBEOffset = fbeCurrentOffset
+    this.f8.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f8.set(fbeValue.f8)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f9.FBEOffset = fbeCurrentOffset
+    this.f9.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f9.set(fbeValue.f9)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f10.FBEOffset = fbeCurrentOffset
+    this.f10.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f10.set(fbeValue.f10)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
@@ -17820,12 +17820,12 @@ class StructListFinalModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return false
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return false
     }
@@ -17843,7 +17843,7 @@ class StructListFinalModel extends fbe.Model {
     let fbeInitialSize = this.buffer.size
 
     let fbeStructType = this.FBEType
-    let fbeStructSize = 8 + this._model.FBEAllocationSize(value)
+    let fbeStructSize = 8 + this._model.fbeAllocationSize(value)
     let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset
     console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')
     if ((this.buffer.offset + fbeStructOffset + fbeStructSize) > this.buffer.size) {
@@ -17853,8 +17853,8 @@ class StructListFinalModel extends fbe.Model {
     fbeStructSize = 8 + this._model.set(value)
     this.buffer.resize(fbeInitialSize + fbeStructSize)
 
-    this.writeUInt32(this._model.FBEOffset - 8, fbeStructSize)
-    this.writeUInt32(this._model.FBEOffset - 4, fbeStructType)
+    this.writeUInt32(this._model.fbeOffset - 8, fbeStructSize)
+    this.writeUInt32(this._model.fbeOffset - 4, fbeStructType)
 
     return fbeStructSize
   }
@@ -17866,13 +17866,13 @@ class StructListFinalModel extends fbe.Model {
    * @return {!object} Deserialized StructList value and its size
    */
   deserialize (value = new StructList()) {
-    console.assert(((this.buffer.offset + this._model.FBEOffset) <= this.buffer.size), 'Model is broken!')
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    console.assert(((this.buffer.offset + this._model.fbeOffset) <= this.buffer.size), 'Model is broken!')
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return { value: new StructList(), size: 0 }
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     console.assert(((fbeStructSize > 0) && (fbeStructType === this.FBEType)), 'Model is broken!')
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return { value: new StructList(), size: 8 }
@@ -17888,7 +17888,7 @@ class StructListFinalModel extends fbe.Model {
    * @param {!number} prev Previous StructList model size
    */
   next (prev) {
-    this._model.FBEShift(prev)
+    this._model.fbeShift(prev)
   }
 }
 
@@ -18129,9 +18129,9 @@ class FieldModelStructSet extends fbe.FieldModel {
   constructor (buffer, offset) {
     super(buffer, offset)
     this._f1 = new fbe.FieldModelSet(new fbe.FieldModelByte(buffer, 4 + 4), buffer, 4 + 4)
-    this._f2 = new fbe.FieldModelSet(new FieldModelEnumSimple(buffer, this._f1.FBEOffset + this._f1.FBESize), buffer, this._f1.FBEOffset + this._f1.FBESize)
-    this._f3 = new fbe.FieldModelSet(new FieldModelFlagsSimple(buffer, this._f2.FBEOffset + this._f2.FBESize), buffer, this._f2.FBEOffset + this._f2.FBESize)
-    this._f4 = new fbe.FieldModelSet(new FieldModelStructSimple(buffer, this._f3.FBEOffset + this._f3.FBESize), buffer, this._f3.FBEOffset + this._f3.FBESize)
+    this._f2 = new fbe.FieldModelSet(new FieldModelEnumSimple(buffer, this._f1.fbeOffset + this._f1.fbeSize), buffer, this._f1.fbeOffset + this._f1.fbeSize)
+    this._f3 = new fbe.FieldModelSet(new FieldModelFlagsSimple(buffer, this._f2.fbeOffset + this._f2.fbeSize), buffer, this._f2.fbeOffset + this._f2.fbeSize)
+    this._f4 = new fbe.FieldModelSet(new FieldModelStructSimple(buffer, this._f3.fbeOffset + this._f3.fbeSize), buffer, this._f3.fbeOffset + this._f3.fbeSize)
   }
 
   /**
@@ -18175,7 +18175,7 @@ class FieldModelStructSet extends fbe.FieldModel {
    * @this {!FieldModelStructSet}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -18185,7 +18185,7 @@ class FieldModelStructSet extends fbe.FieldModel {
    * @returns {!number} Field body size
    */
   get FBEBody () {
-    return 4 + 4 + this.f1.FBESize + this.f2.FBESize + this.f3.FBESize + this.f4.FBESize
+    return 4 + 4 + this.f1.fbeSize + this.f2.fbeSize + this.f3.fbeSize + this.f4.fbeSize
   }
 
   /**
@@ -18193,19 +18193,19 @@ class FieldModelStructSet extends fbe.FieldModel {
    * @this {!FieldModelStructSet}
    * @returns {!number} Field extra size
    */
-  get FBEExtra () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4) > this._buffer.size)) {
       return 0
     }
 
     this._buffer.shift(fbeStructOffset)
 
-    let fbeResult = this.FBEBody + this.f1.FBEExtra + this.f2.FBEExtra + this.f3.FBEExtra + this.f4.FBEExtra
+    let fbeResult = this.FBEBody + this.f1.fbeExtra + this.f2.fbeExtra + this.f3.fbeExtra + this.f4.fbeExtra
 
     this._buffer.unshift(fbeStructOffset)
 
@@ -18237,11 +18237,11 @@ class FieldModelStructSet extends fbe.FieldModel {
    * @returns {!boolean} Field model valid state
    */
   verify (fbeVerifyType = true) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return true
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return false
     }
@@ -18271,41 +18271,41 @@ class FieldModelStructSet extends fbe.FieldModel {
   verifyFields (fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.f1.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1.FBESize
+    fbeCurrentSize += this.f1.fbeSize
 
-    if ((fbeCurrentSize + this.f2.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f2.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f2.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f2.FBESize
+    fbeCurrentSize += this.f2.fbeSize
 
-    if ((fbeCurrentSize + this.f3.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f3.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f3.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f3.FBESize
+    fbeCurrentSize += this.f3.fbeSize
 
-    if ((fbeCurrentSize + this.f4.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f4.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f4.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f4.FBESize
+    fbeCurrentSize += this.f4.fbeSize
 
     return true
   }
@@ -18316,11 +18316,11 @@ class FieldModelStructSet extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   getBegin () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + 4 + 4) <= this._buffer.size), 'Model is broken!')
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return 0
@@ -18372,37 +18372,37 @@ class FieldModelStructSet extends fbe.FieldModel {
   getFields (fbeValue, fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.f1.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1.fbeSize) <= fbeStructSize) {
       this.f1.get(fbeValue.f1)
     } else {
       fbeValue.f1.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1.FBESize
+    fbeCurrentSize += this.f1.fbeSize
 
-    if ((fbeCurrentSize + this.f2.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f2.fbeSize) <= fbeStructSize) {
       this.f2.get(fbeValue.f2)
     } else {
       fbeValue.f2.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f2.FBESize
+    fbeCurrentSize += this.f2.fbeSize
 
-    if ((fbeCurrentSize + this.f3.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f3.fbeSize) <= fbeStructSize) {
       this.f3.get(fbeValue.f3)
     } else {
       fbeValue.f3.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f3.FBESize
+    fbeCurrentSize += this.f3.fbeSize
 
-    if ((fbeCurrentSize + this.f4.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f4.fbeSize) <= fbeStructSize) {
       this.f4.get(fbeValue.f4)
     } else {
       fbeValue.f4.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f4.FBESize
+    fbeCurrentSize += this.f4.fbeSize
   }
 
   /**
@@ -18411,8 +18411,8 @@ class FieldModelStructSet extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   setBegin () {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
@@ -18423,7 +18423,7 @@ class FieldModelStructSet extends fbe.FieldModel {
       return 0
     }
 
-    this.writeUInt32(this.FBEOffset, fbeStructOffset)
+    this.writeUInt32(this.fbeOffset, fbeStructOffset)
     this.writeUInt32(fbeStructOffset, fbeStructSize)
     this.writeUInt32(fbeStructOffset + 4, this.FBEType)
 
@@ -18498,8 +18498,8 @@ class StructSetModel extends fbe.Model {
    * @this {!StructSetModel}
    * @returns {!number} Model size
    */
-  get FBESize () {
-    return this.model.FBESize + this.model.FBEExtra
+  get fbeSize () {
+    return this.model.fbeSize + this.model.fbeExtra
   }
 
   /**
@@ -18526,12 +18526,12 @@ class StructSetModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return false
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    if (fbeFullSize < this.model.fbeSize) {
       return false
     }
 
@@ -18544,7 +18544,7 @@ class StructSetModel extends fbe.Model {
    * @returns {!number} Model begin offset
    */
   createBegin () {
-    return this.buffer.allocate(4 + this.model.FBESize)
+    return this.buffer.allocate(4 + this.model.fbeSize)
   }
 
   /**
@@ -18555,7 +18555,7 @@ class StructSetModel extends fbe.Model {
   createEnd (fbeBegin) {
     let fbeEnd = this.buffer.size
     let fbeFullSize = fbeEnd - fbeBegin
-    this.writeUInt32(this.model.FBEOffset - 4, fbeFullSize)
+    this.writeUInt32(this.model.fbeOffset - 4, fbeFullSize)
     return fbeFullSize
   }
 
@@ -18578,13 +18578,13 @@ class StructSetModel extends fbe.Model {
    * @return {!object} Deserialized StructSet value and its size
    */
   deserialize (value = new StructSet()) {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return { value: new StructSet(), size: 0 }
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    console.assert((fbeFullSize >= this.model.FBESize), 'Model is broken!')
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    console.assert((fbeFullSize >= this.model.fbeSize), 'Model is broken!')
+    if (fbeFullSize < this.model.fbeSize) {
       return { value: new StructSet(), size: 0 }
     }
 
@@ -18598,7 +18598,7 @@ class StructSetModel extends fbe.Model {
    * @param {!number} prev Previous StructSet model size
    */
   next (prev) {
-    this.model.FBEShift(prev)
+    this.model.fbeShift(prev)
   }
 }
 
@@ -18664,8 +18664,8 @@ class FinalModelStructSet extends fbe.FinalModel {
    * @param {!StructSet} fbeValue StructSet value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (fbeValue) {
-    return 0 + this.f1.FBEAllocationSize(fbeValue.f1) + this.f2.FBEAllocationSize(fbeValue.f2) + this.f3.FBEAllocationSize(fbeValue.f3) + this.f4.FBEAllocationSize(fbeValue.f4)
+  fbeAllocationSize (fbeValue) {
+    return 0 + this.f1.fbeAllocationSize(fbeValue.f1) + this.f2.fbeAllocationSize(fbeValue.f2) + this.f3.fbeAllocationSize(fbeValue.f3) + this.f4.fbeAllocationSize(fbeValue.f4)
   }
 
   /**
@@ -18692,9 +18692,9 @@ class FinalModelStructSet extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeResult = this.verifyFields()
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeResult
   }
 
@@ -18707,28 +18707,28 @@ class FinalModelStructSet extends fbe.FinalModel {
     let fbeCurrentOffset = 0
     let fbeFieldSize
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f2.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f3.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f4.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
@@ -18745,9 +18745,9 @@ class FinalModelStructSet extends fbe.FinalModel {
    * @returns {!object} Result struct value and its size
    */
   get (fbeValue = new StructSet()) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.getFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return { value: fbeValue, size: fbeSize }
   }
 
@@ -18762,25 +18762,25 @@ class FinalModelStructSet extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeResult
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1.get(fbeValue.f1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeResult = this.f2.get(fbeValue.f2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeResult = this.f3.get(fbeValue.f3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeResult = this.f4.get(fbeValue.f4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
@@ -18796,9 +18796,9 @@ class FinalModelStructSet extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (fbeValue) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.setFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeSize
   }
 
@@ -18813,25 +18813,25 @@ class FinalModelStructSet extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeFieldSize
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1.set(fbeValue.f1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f2.set(fbeValue.f2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f3.set(fbeValue.f3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f4.set(fbeValue.f4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
@@ -18881,12 +18881,12 @@ class StructSetFinalModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return false
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return false
     }
@@ -18904,7 +18904,7 @@ class StructSetFinalModel extends fbe.Model {
     let fbeInitialSize = this.buffer.size
 
     let fbeStructType = this.FBEType
-    let fbeStructSize = 8 + this._model.FBEAllocationSize(value)
+    let fbeStructSize = 8 + this._model.fbeAllocationSize(value)
     let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset
     console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')
     if ((this.buffer.offset + fbeStructOffset + fbeStructSize) > this.buffer.size) {
@@ -18914,8 +18914,8 @@ class StructSetFinalModel extends fbe.Model {
     fbeStructSize = 8 + this._model.set(value)
     this.buffer.resize(fbeInitialSize + fbeStructSize)
 
-    this.writeUInt32(this._model.FBEOffset - 8, fbeStructSize)
-    this.writeUInt32(this._model.FBEOffset - 4, fbeStructType)
+    this.writeUInt32(this._model.fbeOffset - 8, fbeStructSize)
+    this.writeUInt32(this._model.fbeOffset - 4, fbeStructType)
 
     return fbeStructSize
   }
@@ -18927,13 +18927,13 @@ class StructSetFinalModel extends fbe.Model {
    * @return {!object} Deserialized StructSet value and its size
    */
   deserialize (value = new StructSet()) {
-    console.assert(((this.buffer.offset + this._model.FBEOffset) <= this.buffer.size), 'Model is broken!')
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    console.assert(((this.buffer.offset + this._model.fbeOffset) <= this.buffer.size), 'Model is broken!')
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return { value: new StructSet(), size: 0 }
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     console.assert(((fbeStructSize > 0) && (fbeStructType === this.FBEType)), 'Model is broken!')
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return { value: new StructSet(), size: 8 }
@@ -18949,7 +18949,7 @@ class StructSetFinalModel extends fbe.Model {
    * @param {!number} prev Previous StructSet model size
    */
   next (prev) {
-    this._model.FBEShift(prev)
+    this._model.fbeShift(prev)
   }
 }
 
@@ -19478,15 +19478,15 @@ class FieldModelStructMap extends fbe.FieldModel {
   constructor (buffer, offset) {
     super(buffer, offset)
     this._f1 = new fbe.FieldModelMap(new fbe.FieldModelInt32(buffer, 4 + 4), new fbe.FieldModelByte(buffer, 4 + 4), buffer, 4 + 4)
-    this._f2 = new fbe.FieldModelMap(new fbe.FieldModelInt32(buffer, this._f1.FBEOffset + this._f1.FBESize), new fbe.FieldModelOptional(new fbe.FieldModelByte(buffer, this._f1.FBEOffset + this._f1.FBESize), buffer, this._f1.FBEOffset + this._f1.FBESize), buffer, this._f1.FBEOffset + this._f1.FBESize)
-    this._f3 = new fbe.FieldModelMap(new fbe.FieldModelInt32(buffer, this._f2.FBEOffset + this._f2.FBESize), new fbe.FieldModelBytes(buffer, this._f2.FBEOffset + this._f2.FBESize), buffer, this._f2.FBEOffset + this._f2.FBESize)
-    this._f4 = new fbe.FieldModelMap(new fbe.FieldModelInt32(buffer, this._f3.FBEOffset + this._f3.FBESize), new fbe.FieldModelOptional(new fbe.FieldModelBytes(buffer, this._f3.FBEOffset + this._f3.FBESize), buffer, this._f3.FBEOffset + this._f3.FBESize), buffer, this._f3.FBEOffset + this._f3.FBESize)
-    this._f5 = new fbe.FieldModelMap(new fbe.FieldModelInt32(buffer, this._f4.FBEOffset + this._f4.FBESize), new FieldModelEnumSimple(buffer, this._f4.FBEOffset + this._f4.FBESize), buffer, this._f4.FBEOffset + this._f4.FBESize)
-    this._f6 = new fbe.FieldModelMap(new fbe.FieldModelInt32(buffer, this._f5.FBEOffset + this._f5.FBESize), new fbe.FieldModelOptional(new FieldModelEnumSimple(buffer, this._f5.FBEOffset + this._f5.FBESize), buffer, this._f5.FBEOffset + this._f5.FBESize), buffer, this._f5.FBEOffset + this._f5.FBESize)
-    this._f7 = new fbe.FieldModelMap(new fbe.FieldModelInt32(buffer, this._f6.FBEOffset + this._f6.FBESize), new FieldModelFlagsSimple(buffer, this._f6.FBEOffset + this._f6.FBESize), buffer, this._f6.FBEOffset + this._f6.FBESize)
-    this._f8 = new fbe.FieldModelMap(new fbe.FieldModelInt32(buffer, this._f7.FBEOffset + this._f7.FBESize), new fbe.FieldModelOptional(new FieldModelFlagsSimple(buffer, this._f7.FBEOffset + this._f7.FBESize), buffer, this._f7.FBEOffset + this._f7.FBESize), buffer, this._f7.FBEOffset + this._f7.FBESize)
-    this._f9 = new fbe.FieldModelMap(new fbe.FieldModelInt32(buffer, this._f8.FBEOffset + this._f8.FBESize), new FieldModelStructSimple(buffer, this._f8.FBEOffset + this._f8.FBESize), buffer, this._f8.FBEOffset + this._f8.FBESize)
-    this._f10 = new fbe.FieldModelMap(new fbe.FieldModelInt32(buffer, this._f9.FBEOffset + this._f9.FBESize), new fbe.FieldModelOptional(new FieldModelStructSimple(buffer, this._f9.FBEOffset + this._f9.FBESize), buffer, this._f9.FBEOffset + this._f9.FBESize), buffer, this._f9.FBEOffset + this._f9.FBESize)
+    this._f2 = new fbe.FieldModelMap(new fbe.FieldModelInt32(buffer, this._f1.fbeOffset + this._f1.fbeSize), new fbe.FieldModelOptional(new fbe.FieldModelByte(buffer, this._f1.fbeOffset + this._f1.fbeSize), buffer, this._f1.fbeOffset + this._f1.fbeSize), buffer, this._f1.fbeOffset + this._f1.fbeSize)
+    this._f3 = new fbe.FieldModelMap(new fbe.FieldModelInt32(buffer, this._f2.fbeOffset + this._f2.fbeSize), new fbe.FieldModelBytes(buffer, this._f2.fbeOffset + this._f2.fbeSize), buffer, this._f2.fbeOffset + this._f2.fbeSize)
+    this._f4 = new fbe.FieldModelMap(new fbe.FieldModelInt32(buffer, this._f3.fbeOffset + this._f3.fbeSize), new fbe.FieldModelOptional(new fbe.FieldModelBytes(buffer, this._f3.fbeOffset + this._f3.fbeSize), buffer, this._f3.fbeOffset + this._f3.fbeSize), buffer, this._f3.fbeOffset + this._f3.fbeSize)
+    this._f5 = new fbe.FieldModelMap(new fbe.FieldModelInt32(buffer, this._f4.fbeOffset + this._f4.fbeSize), new FieldModelEnumSimple(buffer, this._f4.fbeOffset + this._f4.fbeSize), buffer, this._f4.fbeOffset + this._f4.fbeSize)
+    this._f6 = new fbe.FieldModelMap(new fbe.FieldModelInt32(buffer, this._f5.fbeOffset + this._f5.fbeSize), new fbe.FieldModelOptional(new FieldModelEnumSimple(buffer, this._f5.fbeOffset + this._f5.fbeSize), buffer, this._f5.fbeOffset + this._f5.fbeSize), buffer, this._f5.fbeOffset + this._f5.fbeSize)
+    this._f7 = new fbe.FieldModelMap(new fbe.FieldModelInt32(buffer, this._f6.fbeOffset + this._f6.fbeSize), new FieldModelFlagsSimple(buffer, this._f6.fbeOffset + this._f6.fbeSize), buffer, this._f6.fbeOffset + this._f6.fbeSize)
+    this._f8 = new fbe.FieldModelMap(new fbe.FieldModelInt32(buffer, this._f7.fbeOffset + this._f7.fbeSize), new fbe.FieldModelOptional(new FieldModelFlagsSimple(buffer, this._f7.fbeOffset + this._f7.fbeSize), buffer, this._f7.fbeOffset + this._f7.fbeSize), buffer, this._f7.fbeOffset + this._f7.fbeSize)
+    this._f9 = new fbe.FieldModelMap(new fbe.FieldModelInt32(buffer, this._f8.fbeOffset + this._f8.fbeSize), new FieldModelStructSimple(buffer, this._f8.fbeOffset + this._f8.fbeSize), buffer, this._f8.fbeOffset + this._f8.fbeSize)
+    this._f10 = new fbe.FieldModelMap(new fbe.FieldModelInt32(buffer, this._f9.fbeOffset + this._f9.fbeSize), new fbe.FieldModelOptional(new FieldModelStructSimple(buffer, this._f9.fbeOffset + this._f9.fbeSize), buffer, this._f9.fbeOffset + this._f9.fbeSize), buffer, this._f9.fbeOffset + this._f9.fbeSize)
   }
 
   /**
@@ -19584,7 +19584,7 @@ class FieldModelStructMap extends fbe.FieldModel {
    * @this {!FieldModelStructMap}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -19594,7 +19594,7 @@ class FieldModelStructMap extends fbe.FieldModel {
    * @returns {!number} Field body size
    */
   get FBEBody () {
-    return 4 + 4 + this.f1.FBESize + this.f2.FBESize + this.f3.FBESize + this.f4.FBESize + this.f5.FBESize + this.f6.FBESize + this.f7.FBESize + this.f8.FBESize + this.f9.FBESize + this.f10.FBESize
+    return 4 + 4 + this.f1.fbeSize + this.f2.fbeSize + this.f3.fbeSize + this.f4.fbeSize + this.f5.fbeSize + this.f6.fbeSize + this.f7.fbeSize + this.f8.fbeSize + this.f9.fbeSize + this.f10.fbeSize
   }
 
   /**
@@ -19602,19 +19602,19 @@ class FieldModelStructMap extends fbe.FieldModel {
    * @this {!FieldModelStructMap}
    * @returns {!number} Field extra size
    */
-  get FBEExtra () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4) > this._buffer.size)) {
       return 0
     }
 
     this._buffer.shift(fbeStructOffset)
 
-    let fbeResult = this.FBEBody + this.f1.FBEExtra + this.f2.FBEExtra + this.f3.FBEExtra + this.f4.FBEExtra + this.f5.FBEExtra + this.f6.FBEExtra + this.f7.FBEExtra + this.f8.FBEExtra + this.f9.FBEExtra + this.f10.FBEExtra
+    let fbeResult = this.FBEBody + this.f1.fbeExtra + this.f2.fbeExtra + this.f3.fbeExtra + this.f4.fbeExtra + this.f5.fbeExtra + this.f6.fbeExtra + this.f7.fbeExtra + this.f8.fbeExtra + this.f9.fbeExtra + this.f10.fbeExtra
 
     this._buffer.unshift(fbeStructOffset)
 
@@ -19646,11 +19646,11 @@ class FieldModelStructMap extends fbe.FieldModel {
    * @returns {!boolean} Field model valid state
    */
   verify (fbeVerifyType = true) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return true
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return false
     }
@@ -19680,95 +19680,95 @@ class FieldModelStructMap extends fbe.FieldModel {
   verifyFields (fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.f1.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1.FBESize
+    fbeCurrentSize += this.f1.fbeSize
 
-    if ((fbeCurrentSize + this.f2.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f2.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f2.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f2.FBESize
+    fbeCurrentSize += this.f2.fbeSize
 
-    if ((fbeCurrentSize + this.f3.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f3.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f3.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f3.FBESize
+    fbeCurrentSize += this.f3.fbeSize
 
-    if ((fbeCurrentSize + this.f4.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f4.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f4.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f4.FBESize
+    fbeCurrentSize += this.f4.fbeSize
 
-    if ((fbeCurrentSize + this.f5.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f5.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f5.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f5.FBESize
+    fbeCurrentSize += this.f5.fbeSize
 
-    if ((fbeCurrentSize + this.f6.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f6.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f6.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f6.FBESize
+    fbeCurrentSize += this.f6.fbeSize
 
-    if ((fbeCurrentSize + this.f7.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f7.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f7.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f7.FBESize
+    fbeCurrentSize += this.f7.fbeSize
 
-    if ((fbeCurrentSize + this.f8.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f8.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f8.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f8.FBESize
+    fbeCurrentSize += this.f8.fbeSize
 
-    if ((fbeCurrentSize + this.f9.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f9.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f9.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f9.FBESize
+    fbeCurrentSize += this.f9.fbeSize
 
-    if ((fbeCurrentSize + this.f10.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f10.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f10.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f10.FBESize
+    fbeCurrentSize += this.f10.fbeSize
 
     return true
   }
@@ -19779,11 +19779,11 @@ class FieldModelStructMap extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   getBegin () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + 4 + 4) <= this._buffer.size), 'Model is broken!')
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return 0
@@ -19835,85 +19835,85 @@ class FieldModelStructMap extends fbe.FieldModel {
   getFields (fbeValue, fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.f1.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1.fbeSize) <= fbeStructSize) {
       this.f1.get(fbeValue.f1)
     } else {
       fbeValue.f1.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1.FBESize
+    fbeCurrentSize += this.f1.fbeSize
 
-    if ((fbeCurrentSize + this.f2.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f2.fbeSize) <= fbeStructSize) {
       this.f2.get(fbeValue.f2)
     } else {
       fbeValue.f2.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f2.FBESize
+    fbeCurrentSize += this.f2.fbeSize
 
-    if ((fbeCurrentSize + this.f3.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f3.fbeSize) <= fbeStructSize) {
       this.f3.get(fbeValue.f3)
     } else {
       fbeValue.f3.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f3.FBESize
+    fbeCurrentSize += this.f3.fbeSize
 
-    if ((fbeCurrentSize + this.f4.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f4.fbeSize) <= fbeStructSize) {
       this.f4.get(fbeValue.f4)
     } else {
       fbeValue.f4.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f4.FBESize
+    fbeCurrentSize += this.f4.fbeSize
 
-    if ((fbeCurrentSize + this.f5.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f5.fbeSize) <= fbeStructSize) {
       this.f5.get(fbeValue.f5)
     } else {
       fbeValue.f5.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f5.FBESize
+    fbeCurrentSize += this.f5.fbeSize
 
-    if ((fbeCurrentSize + this.f6.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f6.fbeSize) <= fbeStructSize) {
       this.f6.get(fbeValue.f6)
     } else {
       fbeValue.f6.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f6.FBESize
+    fbeCurrentSize += this.f6.fbeSize
 
-    if ((fbeCurrentSize + this.f7.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f7.fbeSize) <= fbeStructSize) {
       this.f7.get(fbeValue.f7)
     } else {
       fbeValue.f7.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f7.FBESize
+    fbeCurrentSize += this.f7.fbeSize
 
-    if ((fbeCurrentSize + this.f8.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f8.fbeSize) <= fbeStructSize) {
       this.f8.get(fbeValue.f8)
     } else {
       fbeValue.f8.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f8.FBESize
+    fbeCurrentSize += this.f8.fbeSize
 
-    if ((fbeCurrentSize + this.f9.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f9.fbeSize) <= fbeStructSize) {
       this.f9.get(fbeValue.f9)
     } else {
       fbeValue.f9.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f9.FBESize
+    fbeCurrentSize += this.f9.fbeSize
 
-    if ((fbeCurrentSize + this.f10.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f10.fbeSize) <= fbeStructSize) {
       this.f10.get(fbeValue.f10)
     } else {
       fbeValue.f10.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f10.FBESize
+    fbeCurrentSize += this.f10.fbeSize
   }
 
   /**
@@ -19922,8 +19922,8 @@ class FieldModelStructMap extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   setBegin () {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
@@ -19934,7 +19934,7 @@ class FieldModelStructMap extends fbe.FieldModel {
       return 0
     }
 
-    this.writeUInt32(this.FBEOffset, fbeStructOffset)
+    this.writeUInt32(this.fbeOffset, fbeStructOffset)
     this.writeUInt32(fbeStructOffset, fbeStructSize)
     this.writeUInt32(fbeStructOffset + 4, this.FBEType)
 
@@ -20015,8 +20015,8 @@ class StructMapModel extends fbe.Model {
    * @this {!StructMapModel}
    * @returns {!number} Model size
    */
-  get FBESize () {
-    return this.model.FBESize + this.model.FBEExtra
+  get fbeSize () {
+    return this.model.fbeSize + this.model.fbeExtra
   }
 
   /**
@@ -20043,12 +20043,12 @@ class StructMapModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return false
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    if (fbeFullSize < this.model.fbeSize) {
       return false
     }
 
@@ -20061,7 +20061,7 @@ class StructMapModel extends fbe.Model {
    * @returns {!number} Model begin offset
    */
   createBegin () {
-    return this.buffer.allocate(4 + this.model.FBESize)
+    return this.buffer.allocate(4 + this.model.fbeSize)
   }
 
   /**
@@ -20072,7 +20072,7 @@ class StructMapModel extends fbe.Model {
   createEnd (fbeBegin) {
     let fbeEnd = this.buffer.size
     let fbeFullSize = fbeEnd - fbeBegin
-    this.writeUInt32(this.model.FBEOffset - 4, fbeFullSize)
+    this.writeUInt32(this.model.fbeOffset - 4, fbeFullSize)
     return fbeFullSize
   }
 
@@ -20095,13 +20095,13 @@ class StructMapModel extends fbe.Model {
    * @return {!object} Deserialized StructMap value and its size
    */
   deserialize (value = new StructMap()) {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return { value: new StructMap(), size: 0 }
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    console.assert((fbeFullSize >= this.model.FBESize), 'Model is broken!')
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    console.assert((fbeFullSize >= this.model.fbeSize), 'Model is broken!')
+    if (fbeFullSize < this.model.fbeSize) {
       return { value: new StructMap(), size: 0 }
     }
 
@@ -20115,7 +20115,7 @@ class StructMapModel extends fbe.Model {
    * @param {!number} prev Previous StructMap model size
    */
   next (prev) {
-    this.model.FBEShift(prev)
+    this.model.fbeShift(prev)
   }
 }
 
@@ -20241,8 +20241,8 @@ class FinalModelStructMap extends fbe.FinalModel {
    * @param {!StructMap} fbeValue StructMap value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (fbeValue) {
-    return 0 + this.f1.FBEAllocationSize(fbeValue.f1) + this.f2.FBEAllocationSize(fbeValue.f2) + this.f3.FBEAllocationSize(fbeValue.f3) + this.f4.FBEAllocationSize(fbeValue.f4) + this.f5.FBEAllocationSize(fbeValue.f5) + this.f6.FBEAllocationSize(fbeValue.f6) + this.f7.FBEAllocationSize(fbeValue.f7) + this.f8.FBEAllocationSize(fbeValue.f8) + this.f9.FBEAllocationSize(fbeValue.f9) + this.f10.FBEAllocationSize(fbeValue.f10)
+  fbeAllocationSize (fbeValue) {
+    return 0 + this.f1.fbeAllocationSize(fbeValue.f1) + this.f2.fbeAllocationSize(fbeValue.f2) + this.f3.fbeAllocationSize(fbeValue.f3) + this.f4.fbeAllocationSize(fbeValue.f4) + this.f5.fbeAllocationSize(fbeValue.f5) + this.f6.fbeAllocationSize(fbeValue.f6) + this.f7.fbeAllocationSize(fbeValue.f7) + this.f8.fbeAllocationSize(fbeValue.f8) + this.f9.fbeAllocationSize(fbeValue.f9) + this.f10.fbeAllocationSize(fbeValue.f10)
   }
 
   /**
@@ -20269,9 +20269,9 @@ class FinalModelStructMap extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeResult = this.verifyFields()
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeResult
   }
 
@@ -20284,70 +20284,70 @@ class FinalModelStructMap extends fbe.FinalModel {
     let fbeCurrentOffset = 0
     let fbeFieldSize
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f2.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f3.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f4.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f5.FBEOffset = fbeCurrentOffset
+    this.f5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f5.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f6.FBEOffset = fbeCurrentOffset
+    this.f6.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f6.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f7.FBEOffset = fbeCurrentOffset
+    this.f7.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f7.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f8.FBEOffset = fbeCurrentOffset
+    this.f8.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f8.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f9.FBEOffset = fbeCurrentOffset
+    this.f9.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f9.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f10.FBEOffset = fbeCurrentOffset
+    this.f10.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f10.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
@@ -20364,9 +20364,9 @@ class FinalModelStructMap extends fbe.FinalModel {
    * @returns {!object} Result struct value and its size
    */
   get (fbeValue = new StructMap()) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.getFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return { value: fbeValue, size: fbeSize }
   }
 
@@ -20381,61 +20381,61 @@ class FinalModelStructMap extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeResult
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1.get(fbeValue.f1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeResult = this.f2.get(fbeValue.f2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeResult = this.f3.get(fbeValue.f3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeResult = this.f4.get(fbeValue.f4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f5.FBEOffset = fbeCurrentOffset
+    this.f5.fbeOffset = fbeCurrentOffset
     fbeResult = this.f5.get(fbeValue.f5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f6.FBEOffset = fbeCurrentOffset
+    this.f6.fbeOffset = fbeCurrentOffset
     fbeResult = this.f6.get(fbeValue.f6)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f7.FBEOffset = fbeCurrentOffset
+    this.f7.fbeOffset = fbeCurrentOffset
     fbeResult = this.f7.get(fbeValue.f7)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f8.FBEOffset = fbeCurrentOffset
+    this.f8.fbeOffset = fbeCurrentOffset
     fbeResult = this.f8.get(fbeValue.f8)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f9.FBEOffset = fbeCurrentOffset
+    this.f9.fbeOffset = fbeCurrentOffset
     fbeResult = this.f9.get(fbeValue.f9)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f10.FBEOffset = fbeCurrentOffset
+    this.f10.fbeOffset = fbeCurrentOffset
     fbeResult = this.f10.get(fbeValue.f10)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
@@ -20451,9 +20451,9 @@ class FinalModelStructMap extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (fbeValue) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.setFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeSize
   }
 
@@ -20468,61 +20468,61 @@ class FinalModelStructMap extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeFieldSize
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1.set(fbeValue.f1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f2.set(fbeValue.f2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f3.set(fbeValue.f3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f4.set(fbeValue.f4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f5.FBEOffset = fbeCurrentOffset
+    this.f5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f5.set(fbeValue.f5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f6.FBEOffset = fbeCurrentOffset
+    this.f6.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f6.set(fbeValue.f6)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f7.FBEOffset = fbeCurrentOffset
+    this.f7.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f7.set(fbeValue.f7)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f8.FBEOffset = fbeCurrentOffset
+    this.f8.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f8.set(fbeValue.f8)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f9.FBEOffset = fbeCurrentOffset
+    this.f9.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f9.set(fbeValue.f9)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f10.FBEOffset = fbeCurrentOffset
+    this.f10.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f10.set(fbeValue.f10)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
@@ -20572,12 +20572,12 @@ class StructMapFinalModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return false
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return false
     }
@@ -20595,7 +20595,7 @@ class StructMapFinalModel extends fbe.Model {
     let fbeInitialSize = this.buffer.size
 
     let fbeStructType = this.FBEType
-    let fbeStructSize = 8 + this._model.FBEAllocationSize(value)
+    let fbeStructSize = 8 + this._model.fbeAllocationSize(value)
     let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset
     console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')
     if ((this.buffer.offset + fbeStructOffset + fbeStructSize) > this.buffer.size) {
@@ -20605,8 +20605,8 @@ class StructMapFinalModel extends fbe.Model {
     fbeStructSize = 8 + this._model.set(value)
     this.buffer.resize(fbeInitialSize + fbeStructSize)
 
-    this.writeUInt32(this._model.FBEOffset - 8, fbeStructSize)
-    this.writeUInt32(this._model.FBEOffset - 4, fbeStructType)
+    this.writeUInt32(this._model.fbeOffset - 8, fbeStructSize)
+    this.writeUInt32(this._model.fbeOffset - 4, fbeStructType)
 
     return fbeStructSize
   }
@@ -20618,13 +20618,13 @@ class StructMapFinalModel extends fbe.Model {
    * @return {!object} Deserialized StructMap value and its size
    */
   deserialize (value = new StructMap()) {
-    console.assert(((this.buffer.offset + this._model.FBEOffset) <= this.buffer.size), 'Model is broken!')
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    console.assert(((this.buffer.offset + this._model.fbeOffset) <= this.buffer.size), 'Model is broken!')
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return { value: new StructMap(), size: 0 }
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     console.assert(((fbeStructSize > 0) && (fbeStructType === this.FBEType)), 'Model is broken!')
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return { value: new StructMap(), size: 8 }
@@ -20640,7 +20640,7 @@ class StructMapFinalModel extends fbe.Model {
    * @param {!number} prev Previous StructMap model size
    */
   next (prev) {
-    this._model.FBEShift(prev)
+    this._model.fbeShift(prev)
   }
 }
 
@@ -21229,15 +21229,15 @@ class FieldModelStructHash extends fbe.FieldModel {
   constructor (buffer, offset) {
     super(buffer, offset)
     this._f1 = new fbe.FieldModelMap(new fbe.FieldModelString(buffer, 4 + 4), new fbe.FieldModelByte(buffer, 4 + 4), buffer, 4 + 4)
-    this._f2 = new fbe.FieldModelMap(new fbe.FieldModelString(buffer, this._f1.FBEOffset + this._f1.FBESize), new fbe.FieldModelOptional(new fbe.FieldModelByte(buffer, this._f1.FBEOffset + this._f1.FBESize), buffer, this._f1.FBEOffset + this._f1.FBESize), buffer, this._f1.FBEOffset + this._f1.FBESize)
-    this._f3 = new fbe.FieldModelMap(new fbe.FieldModelString(buffer, this._f2.FBEOffset + this._f2.FBESize), new fbe.FieldModelBytes(buffer, this._f2.FBEOffset + this._f2.FBESize), buffer, this._f2.FBEOffset + this._f2.FBESize)
-    this._f4 = new fbe.FieldModelMap(new fbe.FieldModelString(buffer, this._f3.FBEOffset + this._f3.FBESize), new fbe.FieldModelOptional(new fbe.FieldModelBytes(buffer, this._f3.FBEOffset + this._f3.FBESize), buffer, this._f3.FBEOffset + this._f3.FBESize), buffer, this._f3.FBEOffset + this._f3.FBESize)
-    this._f5 = new fbe.FieldModelMap(new fbe.FieldModelString(buffer, this._f4.FBEOffset + this._f4.FBESize), new FieldModelEnumSimple(buffer, this._f4.FBEOffset + this._f4.FBESize), buffer, this._f4.FBEOffset + this._f4.FBESize)
-    this._f6 = new fbe.FieldModelMap(new fbe.FieldModelString(buffer, this._f5.FBEOffset + this._f5.FBESize), new fbe.FieldModelOptional(new FieldModelEnumSimple(buffer, this._f5.FBEOffset + this._f5.FBESize), buffer, this._f5.FBEOffset + this._f5.FBESize), buffer, this._f5.FBEOffset + this._f5.FBESize)
-    this._f7 = new fbe.FieldModelMap(new fbe.FieldModelString(buffer, this._f6.FBEOffset + this._f6.FBESize), new FieldModelFlagsSimple(buffer, this._f6.FBEOffset + this._f6.FBESize), buffer, this._f6.FBEOffset + this._f6.FBESize)
-    this._f8 = new fbe.FieldModelMap(new fbe.FieldModelString(buffer, this._f7.FBEOffset + this._f7.FBESize), new fbe.FieldModelOptional(new FieldModelFlagsSimple(buffer, this._f7.FBEOffset + this._f7.FBESize), buffer, this._f7.FBEOffset + this._f7.FBESize), buffer, this._f7.FBEOffset + this._f7.FBESize)
-    this._f9 = new fbe.FieldModelMap(new fbe.FieldModelString(buffer, this._f8.FBEOffset + this._f8.FBESize), new FieldModelStructSimple(buffer, this._f8.FBEOffset + this._f8.FBESize), buffer, this._f8.FBEOffset + this._f8.FBESize)
-    this._f10 = new fbe.FieldModelMap(new fbe.FieldModelString(buffer, this._f9.FBEOffset + this._f9.FBESize), new fbe.FieldModelOptional(new FieldModelStructSimple(buffer, this._f9.FBEOffset + this._f9.FBESize), buffer, this._f9.FBEOffset + this._f9.FBESize), buffer, this._f9.FBEOffset + this._f9.FBESize)
+    this._f2 = new fbe.FieldModelMap(new fbe.FieldModelString(buffer, this._f1.fbeOffset + this._f1.fbeSize), new fbe.FieldModelOptional(new fbe.FieldModelByte(buffer, this._f1.fbeOffset + this._f1.fbeSize), buffer, this._f1.fbeOffset + this._f1.fbeSize), buffer, this._f1.fbeOffset + this._f1.fbeSize)
+    this._f3 = new fbe.FieldModelMap(new fbe.FieldModelString(buffer, this._f2.fbeOffset + this._f2.fbeSize), new fbe.FieldModelBytes(buffer, this._f2.fbeOffset + this._f2.fbeSize), buffer, this._f2.fbeOffset + this._f2.fbeSize)
+    this._f4 = new fbe.FieldModelMap(new fbe.FieldModelString(buffer, this._f3.fbeOffset + this._f3.fbeSize), new fbe.FieldModelOptional(new fbe.FieldModelBytes(buffer, this._f3.fbeOffset + this._f3.fbeSize), buffer, this._f3.fbeOffset + this._f3.fbeSize), buffer, this._f3.fbeOffset + this._f3.fbeSize)
+    this._f5 = new fbe.FieldModelMap(new fbe.FieldModelString(buffer, this._f4.fbeOffset + this._f4.fbeSize), new FieldModelEnumSimple(buffer, this._f4.fbeOffset + this._f4.fbeSize), buffer, this._f4.fbeOffset + this._f4.fbeSize)
+    this._f6 = new fbe.FieldModelMap(new fbe.FieldModelString(buffer, this._f5.fbeOffset + this._f5.fbeSize), new fbe.FieldModelOptional(new FieldModelEnumSimple(buffer, this._f5.fbeOffset + this._f5.fbeSize), buffer, this._f5.fbeOffset + this._f5.fbeSize), buffer, this._f5.fbeOffset + this._f5.fbeSize)
+    this._f7 = new fbe.FieldModelMap(new fbe.FieldModelString(buffer, this._f6.fbeOffset + this._f6.fbeSize), new FieldModelFlagsSimple(buffer, this._f6.fbeOffset + this._f6.fbeSize), buffer, this._f6.fbeOffset + this._f6.fbeSize)
+    this._f8 = new fbe.FieldModelMap(new fbe.FieldModelString(buffer, this._f7.fbeOffset + this._f7.fbeSize), new fbe.FieldModelOptional(new FieldModelFlagsSimple(buffer, this._f7.fbeOffset + this._f7.fbeSize), buffer, this._f7.fbeOffset + this._f7.fbeSize), buffer, this._f7.fbeOffset + this._f7.fbeSize)
+    this._f9 = new fbe.FieldModelMap(new fbe.FieldModelString(buffer, this._f8.fbeOffset + this._f8.fbeSize), new FieldModelStructSimple(buffer, this._f8.fbeOffset + this._f8.fbeSize), buffer, this._f8.fbeOffset + this._f8.fbeSize)
+    this._f10 = new fbe.FieldModelMap(new fbe.FieldModelString(buffer, this._f9.fbeOffset + this._f9.fbeSize), new fbe.FieldModelOptional(new FieldModelStructSimple(buffer, this._f9.fbeOffset + this._f9.fbeSize), buffer, this._f9.fbeOffset + this._f9.fbeSize), buffer, this._f9.fbeOffset + this._f9.fbeSize)
   }
 
   /**
@@ -21335,7 +21335,7 @@ class FieldModelStructHash extends fbe.FieldModel {
    * @this {!FieldModelStructHash}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -21345,7 +21345,7 @@ class FieldModelStructHash extends fbe.FieldModel {
    * @returns {!number} Field body size
    */
   get FBEBody () {
-    return 4 + 4 + this.f1.FBESize + this.f2.FBESize + this.f3.FBESize + this.f4.FBESize + this.f5.FBESize + this.f6.FBESize + this.f7.FBESize + this.f8.FBESize + this.f9.FBESize + this.f10.FBESize
+    return 4 + 4 + this.f1.fbeSize + this.f2.fbeSize + this.f3.fbeSize + this.f4.fbeSize + this.f5.fbeSize + this.f6.fbeSize + this.f7.fbeSize + this.f8.fbeSize + this.f9.fbeSize + this.f10.fbeSize
   }
 
   /**
@@ -21353,19 +21353,19 @@ class FieldModelStructHash extends fbe.FieldModel {
    * @this {!FieldModelStructHash}
    * @returns {!number} Field extra size
    */
-  get FBEExtra () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4) > this._buffer.size)) {
       return 0
     }
 
     this._buffer.shift(fbeStructOffset)
 
-    let fbeResult = this.FBEBody + this.f1.FBEExtra + this.f2.FBEExtra + this.f3.FBEExtra + this.f4.FBEExtra + this.f5.FBEExtra + this.f6.FBEExtra + this.f7.FBEExtra + this.f8.FBEExtra + this.f9.FBEExtra + this.f10.FBEExtra
+    let fbeResult = this.FBEBody + this.f1.fbeExtra + this.f2.fbeExtra + this.f3.fbeExtra + this.f4.fbeExtra + this.f5.fbeExtra + this.f6.fbeExtra + this.f7.fbeExtra + this.f8.fbeExtra + this.f9.fbeExtra + this.f10.fbeExtra
 
     this._buffer.unshift(fbeStructOffset)
 
@@ -21397,11 +21397,11 @@ class FieldModelStructHash extends fbe.FieldModel {
    * @returns {!boolean} Field model valid state
    */
   verify (fbeVerifyType = true) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return true
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return false
     }
@@ -21431,95 +21431,95 @@ class FieldModelStructHash extends fbe.FieldModel {
   verifyFields (fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.f1.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1.FBESize
+    fbeCurrentSize += this.f1.fbeSize
 
-    if ((fbeCurrentSize + this.f2.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f2.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f2.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f2.FBESize
+    fbeCurrentSize += this.f2.fbeSize
 
-    if ((fbeCurrentSize + this.f3.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f3.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f3.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f3.FBESize
+    fbeCurrentSize += this.f3.fbeSize
 
-    if ((fbeCurrentSize + this.f4.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f4.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f4.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f4.FBESize
+    fbeCurrentSize += this.f4.fbeSize
 
-    if ((fbeCurrentSize + this.f5.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f5.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f5.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f5.FBESize
+    fbeCurrentSize += this.f5.fbeSize
 
-    if ((fbeCurrentSize + this.f6.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f6.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f6.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f6.FBESize
+    fbeCurrentSize += this.f6.fbeSize
 
-    if ((fbeCurrentSize + this.f7.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f7.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f7.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f7.FBESize
+    fbeCurrentSize += this.f7.fbeSize
 
-    if ((fbeCurrentSize + this.f8.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f8.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f8.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f8.FBESize
+    fbeCurrentSize += this.f8.fbeSize
 
-    if ((fbeCurrentSize + this.f9.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f9.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f9.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f9.FBESize
+    fbeCurrentSize += this.f9.fbeSize
 
-    if ((fbeCurrentSize + this.f10.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f10.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f10.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f10.FBESize
+    fbeCurrentSize += this.f10.fbeSize
 
     return true
   }
@@ -21530,11 +21530,11 @@ class FieldModelStructHash extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   getBegin () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + 4 + 4) <= this._buffer.size), 'Model is broken!')
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return 0
@@ -21586,85 +21586,85 @@ class FieldModelStructHash extends fbe.FieldModel {
   getFields (fbeValue, fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.f1.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1.fbeSize) <= fbeStructSize) {
       this.f1.get(fbeValue.f1)
     } else {
       fbeValue.f1.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1.FBESize
+    fbeCurrentSize += this.f1.fbeSize
 
-    if ((fbeCurrentSize + this.f2.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f2.fbeSize) <= fbeStructSize) {
       this.f2.get(fbeValue.f2)
     } else {
       fbeValue.f2.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f2.FBESize
+    fbeCurrentSize += this.f2.fbeSize
 
-    if ((fbeCurrentSize + this.f3.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f3.fbeSize) <= fbeStructSize) {
       this.f3.get(fbeValue.f3)
     } else {
       fbeValue.f3.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f3.FBESize
+    fbeCurrentSize += this.f3.fbeSize
 
-    if ((fbeCurrentSize + this.f4.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f4.fbeSize) <= fbeStructSize) {
       this.f4.get(fbeValue.f4)
     } else {
       fbeValue.f4.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f4.FBESize
+    fbeCurrentSize += this.f4.fbeSize
 
-    if ((fbeCurrentSize + this.f5.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f5.fbeSize) <= fbeStructSize) {
       this.f5.get(fbeValue.f5)
     } else {
       fbeValue.f5.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f5.FBESize
+    fbeCurrentSize += this.f5.fbeSize
 
-    if ((fbeCurrentSize + this.f6.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f6.fbeSize) <= fbeStructSize) {
       this.f6.get(fbeValue.f6)
     } else {
       fbeValue.f6.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f6.FBESize
+    fbeCurrentSize += this.f6.fbeSize
 
-    if ((fbeCurrentSize + this.f7.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f7.fbeSize) <= fbeStructSize) {
       this.f7.get(fbeValue.f7)
     } else {
       fbeValue.f7.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f7.FBESize
+    fbeCurrentSize += this.f7.fbeSize
 
-    if ((fbeCurrentSize + this.f8.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f8.fbeSize) <= fbeStructSize) {
       this.f8.get(fbeValue.f8)
     } else {
       fbeValue.f8.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f8.FBESize
+    fbeCurrentSize += this.f8.fbeSize
 
-    if ((fbeCurrentSize + this.f9.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f9.fbeSize) <= fbeStructSize) {
       this.f9.get(fbeValue.f9)
     } else {
       fbeValue.f9.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f9.FBESize
+    fbeCurrentSize += this.f9.fbeSize
 
-    if ((fbeCurrentSize + this.f10.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f10.fbeSize) <= fbeStructSize) {
       this.f10.get(fbeValue.f10)
     } else {
       fbeValue.f10.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f10.FBESize
+    fbeCurrentSize += this.f10.fbeSize
   }
 
   /**
@@ -21673,8 +21673,8 @@ class FieldModelStructHash extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   setBegin () {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
@@ -21685,7 +21685,7 @@ class FieldModelStructHash extends fbe.FieldModel {
       return 0
     }
 
-    this.writeUInt32(this.FBEOffset, fbeStructOffset)
+    this.writeUInt32(this.fbeOffset, fbeStructOffset)
     this.writeUInt32(fbeStructOffset, fbeStructSize)
     this.writeUInt32(fbeStructOffset + 4, this.FBEType)
 
@@ -21766,8 +21766,8 @@ class StructHashModel extends fbe.Model {
    * @this {!StructHashModel}
    * @returns {!number} Model size
    */
-  get FBESize () {
-    return this.model.FBESize + this.model.FBEExtra
+  get fbeSize () {
+    return this.model.fbeSize + this.model.fbeExtra
   }
 
   /**
@@ -21794,12 +21794,12 @@ class StructHashModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return false
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    if (fbeFullSize < this.model.fbeSize) {
       return false
     }
 
@@ -21812,7 +21812,7 @@ class StructHashModel extends fbe.Model {
    * @returns {!number} Model begin offset
    */
   createBegin () {
-    return this.buffer.allocate(4 + this.model.FBESize)
+    return this.buffer.allocate(4 + this.model.fbeSize)
   }
 
   /**
@@ -21823,7 +21823,7 @@ class StructHashModel extends fbe.Model {
   createEnd (fbeBegin) {
     let fbeEnd = this.buffer.size
     let fbeFullSize = fbeEnd - fbeBegin
-    this.writeUInt32(this.model.FBEOffset - 4, fbeFullSize)
+    this.writeUInt32(this.model.fbeOffset - 4, fbeFullSize)
     return fbeFullSize
   }
 
@@ -21846,13 +21846,13 @@ class StructHashModel extends fbe.Model {
    * @return {!object} Deserialized StructHash value and its size
    */
   deserialize (value = new StructHash()) {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return { value: new StructHash(), size: 0 }
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    console.assert((fbeFullSize >= this.model.FBESize), 'Model is broken!')
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    console.assert((fbeFullSize >= this.model.fbeSize), 'Model is broken!')
+    if (fbeFullSize < this.model.fbeSize) {
       return { value: new StructHash(), size: 0 }
     }
 
@@ -21866,7 +21866,7 @@ class StructHashModel extends fbe.Model {
    * @param {!number} prev Previous StructHash model size
    */
   next (prev) {
-    this.model.FBEShift(prev)
+    this.model.fbeShift(prev)
   }
 }
 
@@ -21992,8 +21992,8 @@ class FinalModelStructHash extends fbe.FinalModel {
    * @param {!StructHash} fbeValue StructHash value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (fbeValue) {
-    return 0 + this.f1.FBEAllocationSize(fbeValue.f1) + this.f2.FBEAllocationSize(fbeValue.f2) + this.f3.FBEAllocationSize(fbeValue.f3) + this.f4.FBEAllocationSize(fbeValue.f4) + this.f5.FBEAllocationSize(fbeValue.f5) + this.f6.FBEAllocationSize(fbeValue.f6) + this.f7.FBEAllocationSize(fbeValue.f7) + this.f8.FBEAllocationSize(fbeValue.f8) + this.f9.FBEAllocationSize(fbeValue.f9) + this.f10.FBEAllocationSize(fbeValue.f10)
+  fbeAllocationSize (fbeValue) {
+    return 0 + this.f1.fbeAllocationSize(fbeValue.f1) + this.f2.fbeAllocationSize(fbeValue.f2) + this.f3.fbeAllocationSize(fbeValue.f3) + this.f4.fbeAllocationSize(fbeValue.f4) + this.f5.fbeAllocationSize(fbeValue.f5) + this.f6.fbeAllocationSize(fbeValue.f6) + this.f7.fbeAllocationSize(fbeValue.f7) + this.f8.fbeAllocationSize(fbeValue.f8) + this.f9.fbeAllocationSize(fbeValue.f9) + this.f10.fbeAllocationSize(fbeValue.f10)
   }
 
   /**
@@ -22020,9 +22020,9 @@ class FinalModelStructHash extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeResult = this.verifyFields()
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeResult
   }
 
@@ -22035,70 +22035,70 @@ class FinalModelStructHash extends fbe.FinalModel {
     let fbeCurrentOffset = 0
     let fbeFieldSize
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f2.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f3.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f4.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f5.FBEOffset = fbeCurrentOffset
+    this.f5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f5.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f6.FBEOffset = fbeCurrentOffset
+    this.f6.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f6.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f7.FBEOffset = fbeCurrentOffset
+    this.f7.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f7.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f8.FBEOffset = fbeCurrentOffset
+    this.f8.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f8.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f9.FBEOffset = fbeCurrentOffset
+    this.f9.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f9.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f10.FBEOffset = fbeCurrentOffset
+    this.f10.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f10.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
@@ -22115,9 +22115,9 @@ class FinalModelStructHash extends fbe.FinalModel {
    * @returns {!object} Result struct value and its size
    */
   get (fbeValue = new StructHash()) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.getFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return { value: fbeValue, size: fbeSize }
   }
 
@@ -22132,61 +22132,61 @@ class FinalModelStructHash extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeResult
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1.get(fbeValue.f1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeResult = this.f2.get(fbeValue.f2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeResult = this.f3.get(fbeValue.f3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeResult = this.f4.get(fbeValue.f4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f5.FBEOffset = fbeCurrentOffset
+    this.f5.fbeOffset = fbeCurrentOffset
     fbeResult = this.f5.get(fbeValue.f5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f6.FBEOffset = fbeCurrentOffset
+    this.f6.fbeOffset = fbeCurrentOffset
     fbeResult = this.f6.get(fbeValue.f6)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f7.FBEOffset = fbeCurrentOffset
+    this.f7.fbeOffset = fbeCurrentOffset
     fbeResult = this.f7.get(fbeValue.f7)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f8.FBEOffset = fbeCurrentOffset
+    this.f8.fbeOffset = fbeCurrentOffset
     fbeResult = this.f8.get(fbeValue.f8)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f9.FBEOffset = fbeCurrentOffset
+    this.f9.fbeOffset = fbeCurrentOffset
     fbeResult = this.f9.get(fbeValue.f9)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f10.FBEOffset = fbeCurrentOffset
+    this.f10.fbeOffset = fbeCurrentOffset
     fbeResult = this.f10.get(fbeValue.f10)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
@@ -22202,9 +22202,9 @@ class FinalModelStructHash extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (fbeValue) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.setFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeSize
   }
 
@@ -22219,61 +22219,61 @@ class FinalModelStructHash extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeFieldSize
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1.set(fbeValue.f1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f2.set(fbeValue.f2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f3.FBEOffset = fbeCurrentOffset
+    this.f3.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f3.set(fbeValue.f3)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f4.FBEOffset = fbeCurrentOffset
+    this.f4.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f4.set(fbeValue.f4)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f5.FBEOffset = fbeCurrentOffset
+    this.f5.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f5.set(fbeValue.f5)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f6.FBEOffset = fbeCurrentOffset
+    this.f6.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f6.set(fbeValue.f6)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f7.FBEOffset = fbeCurrentOffset
+    this.f7.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f7.set(fbeValue.f7)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f8.FBEOffset = fbeCurrentOffset
+    this.f8.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f8.set(fbeValue.f8)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f9.FBEOffset = fbeCurrentOffset
+    this.f9.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f9.set(fbeValue.f9)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f10.FBEOffset = fbeCurrentOffset
+    this.f10.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f10.set(fbeValue.f10)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
@@ -22323,12 +22323,12 @@ class StructHashFinalModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return false
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return false
     }
@@ -22346,7 +22346,7 @@ class StructHashFinalModel extends fbe.Model {
     let fbeInitialSize = this.buffer.size
 
     let fbeStructType = this.FBEType
-    let fbeStructSize = 8 + this._model.FBEAllocationSize(value)
+    let fbeStructSize = 8 + this._model.fbeAllocationSize(value)
     let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset
     console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')
     if ((this.buffer.offset + fbeStructOffset + fbeStructSize) > this.buffer.size) {
@@ -22356,8 +22356,8 @@ class StructHashFinalModel extends fbe.Model {
     fbeStructSize = 8 + this._model.set(value)
     this.buffer.resize(fbeInitialSize + fbeStructSize)
 
-    this.writeUInt32(this._model.FBEOffset - 8, fbeStructSize)
-    this.writeUInt32(this._model.FBEOffset - 4, fbeStructType)
+    this.writeUInt32(this._model.fbeOffset - 8, fbeStructSize)
+    this.writeUInt32(this._model.fbeOffset - 4, fbeStructType)
 
     return fbeStructSize
   }
@@ -22369,13 +22369,13 @@ class StructHashFinalModel extends fbe.Model {
    * @return {!object} Deserialized StructHash value and its size
    */
   deserialize (value = new StructHash()) {
-    console.assert(((this.buffer.offset + this._model.FBEOffset) <= this.buffer.size), 'Model is broken!')
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    console.assert(((this.buffer.offset + this._model.fbeOffset) <= this.buffer.size), 'Model is broken!')
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return { value: new StructHash(), size: 0 }
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     console.assert(((fbeStructSize > 0) && (fbeStructType === this.FBEType)), 'Model is broken!')
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return { value: new StructHash(), size: 8 }
@@ -22391,7 +22391,7 @@ class StructHashFinalModel extends fbe.Model {
    * @param {!number} prev Previous StructHash model size
    */
   next (prev) {
-    this._model.FBEShift(prev)
+    this._model.fbeShift(prev)
   }
 }
 
@@ -22590,7 +22590,7 @@ class FieldModelStructHashEx extends fbe.FieldModel {
   constructor (buffer, offset) {
     super(buffer, offset)
     this._f1 = new fbe.FieldModelMap(new FieldModelStructSimple(buffer, 4 + 4), new FieldModelStructNested(buffer, 4 + 4), buffer, 4 + 4)
-    this._f2 = new fbe.FieldModelMap(new FieldModelStructSimple(buffer, this._f1.FBEOffset + this._f1.FBESize), new fbe.FieldModelOptional(new FieldModelStructNested(buffer, this._f1.FBEOffset + this._f1.FBESize), buffer, this._f1.FBEOffset + this._f1.FBESize), buffer, this._f1.FBEOffset + this._f1.FBESize)
+    this._f2 = new fbe.FieldModelMap(new FieldModelStructSimple(buffer, this._f1.fbeOffset + this._f1.fbeSize), new fbe.FieldModelOptional(new FieldModelStructNested(buffer, this._f1.fbeOffset + this._f1.fbeSize), buffer, this._f1.fbeOffset + this._f1.fbeSize), buffer, this._f1.fbeOffset + this._f1.fbeSize)
   }
 
   /**
@@ -22616,7 +22616,7 @@ class FieldModelStructHashEx extends fbe.FieldModel {
    * @this {!FieldModelStructHashEx}
    * @returns {!number} Field size
    */
-  get FBESize () {
+  get fbeSize () {
     return 4
   }
 
@@ -22626,7 +22626,7 @@ class FieldModelStructHashEx extends fbe.FieldModel {
    * @returns {!number} Field body size
    */
   get FBEBody () {
-    return 4 + 4 + this.f1.FBESize + this.f2.FBESize
+    return 4 + 4 + this.f1.fbeSize + this.f2.fbeSize
   }
 
   /**
@@ -22634,19 +22634,19 @@ class FieldModelStructHashEx extends fbe.FieldModel {
    * @this {!FieldModelStructHashEx}
    * @returns {!number} Field extra size
    */
-  get FBEExtra () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4) > this._buffer.size)) {
       return 0
     }
 
     this._buffer.shift(fbeStructOffset)
 
-    let fbeResult = this.FBEBody + this.f1.FBEExtra + this.f2.FBEExtra
+    let fbeResult = this.FBEBody + this.f1.fbeExtra + this.f2.fbeExtra
 
     this._buffer.unshift(fbeStructOffset)
 
@@ -22678,11 +22678,11 @@ class FieldModelStructHashEx extends fbe.FieldModel {
    * @returns {!boolean} Field model valid state
    */
   verify (fbeVerifyType = true) {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return true
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return false
     }
@@ -22712,23 +22712,23 @@ class FieldModelStructHashEx extends fbe.FieldModel {
   verifyFields (fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.f1.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f1.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f1.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1.FBESize
+    fbeCurrentSize += this.f1.fbeSize
 
-    if ((fbeCurrentSize + this.f2.FBESize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.f2.fbeSize) > fbeStructSize) {
       return true
     }
     if (!this.f2.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f2.FBESize
+    fbeCurrentSize += this.f2.fbeSize
 
     return true
   }
@@ -22739,11 +22739,11 @@ class FieldModelStructHashEx extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   getBegin () {
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
-    let fbeStructOffset = this.readUInt32(this.FBEOffset)
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
     console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + 4 + 4) <= this._buffer.size), 'Model is broken!')
     if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
       return 0
@@ -22795,21 +22795,21 @@ class FieldModelStructHashEx extends fbe.FieldModel {
   getFields (fbeValue, fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.f1.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f1.fbeSize) <= fbeStructSize) {
       this.f1.get(fbeValue.f1)
     } else {
       fbeValue.f1.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f1.FBESize
+    fbeCurrentSize += this.f1.fbeSize
 
-    if ((fbeCurrentSize + this.f2.FBESize) <= fbeStructSize) {
+    if ((fbeCurrentSize + this.f2.fbeSize) <= fbeStructSize) {
       this.f2.get(fbeValue.f2)
     } else {
       fbeValue.f2.clear()
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.f2.FBESize
+    fbeCurrentSize += this.f2.fbeSize
   }
 
   /**
@@ -22818,8 +22818,8 @@ class FieldModelStructHashEx extends fbe.FieldModel {
    * @returns {!number} Field model begin offset
    */
   setBegin () {
-    console.assert(((this._buffer.offset + this.FBEOffset + this.FBESize) <= this._buffer.size), 'Model is broken!')
-    if ((this._buffer.offset + this.FBEOffset + this.FBESize) > this._buffer.size) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
       return 0
     }
 
@@ -22830,7 +22830,7 @@ class FieldModelStructHashEx extends fbe.FieldModel {
       return 0
     }
 
-    this.writeUInt32(this.FBEOffset, fbeStructOffset)
+    this.writeUInt32(this.fbeOffset, fbeStructOffset)
     this.writeUInt32(fbeStructOffset, fbeStructSize)
     this.writeUInt32(fbeStructOffset + 4, this.FBEType)
 
@@ -22903,8 +22903,8 @@ class StructHashExModel extends fbe.Model {
    * @this {!StructHashExModel}
    * @returns {!number} Model size
    */
-  get FBESize () {
-    return this.model.FBESize + this.model.FBEExtra
+  get fbeSize () {
+    return this.model.fbeSize + this.model.fbeExtra
   }
 
   /**
@@ -22931,12 +22931,12 @@ class StructHashExModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return false
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    if (fbeFullSize < this.model.fbeSize) {
       return false
     }
 
@@ -22949,7 +22949,7 @@ class StructHashExModel extends fbe.Model {
    * @returns {!number} Model begin offset
    */
   createBegin () {
-    return this.buffer.allocate(4 + this.model.FBESize)
+    return this.buffer.allocate(4 + this.model.fbeSize)
   }
 
   /**
@@ -22960,7 +22960,7 @@ class StructHashExModel extends fbe.Model {
   createEnd (fbeBegin) {
     let fbeEnd = this.buffer.size
     let fbeFullSize = fbeEnd - fbeBegin
-    this.writeUInt32(this.model.FBEOffset - 4, fbeFullSize)
+    this.writeUInt32(this.model.fbeOffset - 4, fbeFullSize)
     return fbeFullSize
   }
 
@@ -22983,13 +22983,13 @@ class StructHashExModel extends fbe.Model {
    * @return {!object} Deserialized StructHashEx value and its size
    */
   deserialize (value = new StructHashEx()) {
-    if ((this.buffer.offset + this.model.FBEOffset - 4) > this.buffer.size) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
       return { value: new StructHashEx(), size: 0 }
     }
 
-    let fbeFullSize = this.readUInt32(this.model.FBEOffset - 4)
-    console.assert((fbeFullSize >= this.model.FBESize), 'Model is broken!')
-    if (fbeFullSize < this.model.FBESize) {
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    console.assert((fbeFullSize >= this.model.fbeSize), 'Model is broken!')
+    if (fbeFullSize < this.model.fbeSize) {
       return { value: new StructHashEx(), size: 0 }
     }
 
@@ -23003,7 +23003,7 @@ class StructHashExModel extends fbe.Model {
    * @param {!number} prev Previous StructHashEx model size
    */
   next (prev) {
-    this.model.FBEShift(prev)
+    this.model.fbeShift(prev)
   }
 }
 
@@ -23049,8 +23049,8 @@ class FinalModelStructHashEx extends fbe.FinalModel {
    * @param {!StructHashEx} fbeValue StructHashEx value
    * @returns {!number} Allocation size
    */
-  FBEAllocationSize (fbeValue) {
-    return 0 + this.f1.FBEAllocationSize(fbeValue.f1) + this.f2.FBEAllocationSize(fbeValue.f2)
+  fbeAllocationSize (fbeValue) {
+    return 0 + this.f1.fbeAllocationSize(fbeValue.f1) + this.f2.fbeAllocationSize(fbeValue.f2)
   }
 
   /**
@@ -23077,9 +23077,9 @@ class FinalModelStructHashEx extends fbe.FinalModel {
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
   verify () {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeResult = this.verifyFields()
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeResult
   }
 
@@ -23092,14 +23092,14 @@ class FinalModelStructHashEx extends fbe.FinalModel {
     let fbeCurrentOffset = 0
     let fbeFieldSize
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
     fbeCurrentOffset += fbeFieldSize
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f2.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
@@ -23116,9 +23116,9 @@ class FinalModelStructHashEx extends fbe.FinalModel {
    * @returns {!object} Result struct value and its size
    */
   get (fbeValue = new StructHashEx()) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.getFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return { value: fbeValue, size: fbeSize }
   }
 
@@ -23133,13 +23133,13 @@ class FinalModelStructHashEx extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeResult
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeResult = this.f1.get(fbeValue.f1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeResult = this.f2.get(fbeValue.f2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
@@ -23155,9 +23155,9 @@ class FinalModelStructHashEx extends fbe.FinalModel {
    * @returns {!number} Final model size
    */
   set (fbeValue) {
-    this._buffer.shift(this.FBEOffset)
+    this._buffer.shift(this.fbeOffset)
     let fbeSize = this.setFields(fbeValue)
-    this._buffer.unshift(this.FBEOffset)
+    this._buffer.unshift(this.fbeOffset)
     return fbeSize
   }
 
@@ -23172,13 +23172,13 @@ class FinalModelStructHashEx extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeFieldSize
 
-    this.f1.FBEOffset = fbeCurrentOffset
+    this.f1.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f1.set(fbeValue.f1)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    this.f2.FBEOffset = fbeCurrentOffset
+    this.f2.fbeOffset = fbeCurrentOffset
     fbeFieldSize = this.f2.set(fbeValue.f2)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
@@ -23228,12 +23228,12 @@ class StructHashExFinalModel extends fbe.Model {
    * @returns {!boolean} Model valid state
    */
   verify () {
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return false
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return false
     }
@@ -23251,7 +23251,7 @@ class StructHashExFinalModel extends fbe.Model {
     let fbeInitialSize = this.buffer.size
 
     let fbeStructType = this.FBEType
-    let fbeStructSize = 8 + this._model.FBEAllocationSize(value)
+    let fbeStructSize = 8 + this._model.fbeAllocationSize(value)
     let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset
     console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')
     if ((this.buffer.offset + fbeStructOffset + fbeStructSize) > this.buffer.size) {
@@ -23261,8 +23261,8 @@ class StructHashExFinalModel extends fbe.Model {
     fbeStructSize = 8 + this._model.set(value)
     this.buffer.resize(fbeInitialSize + fbeStructSize)
 
-    this.writeUInt32(this._model.FBEOffset - 8, fbeStructSize)
-    this.writeUInt32(this._model.FBEOffset - 4, fbeStructType)
+    this.writeUInt32(this._model.fbeOffset - 8, fbeStructSize)
+    this.writeUInt32(this._model.fbeOffset - 4, fbeStructType)
 
     return fbeStructSize
   }
@@ -23274,13 +23274,13 @@ class StructHashExFinalModel extends fbe.Model {
    * @return {!object} Deserialized StructHashEx value and its size
    */
   deserialize (value = new StructHashEx()) {
-    console.assert(((this.buffer.offset + this._model.FBEOffset) <= this.buffer.size), 'Model is broken!')
-    if ((this.buffer.offset + this._model.FBEOffset) > this.buffer.size) {
+    console.assert(((this.buffer.offset + this._model.fbeOffset) <= this.buffer.size), 'Model is broken!')
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
       return { value: new StructHashEx(), size: 0 }
     }
 
-    let fbeStructSize = this.readUInt32(this._model.FBEOffset - 8)
-    let fbeStructType = this.readUInt32(this._model.FBEOffset - 4)
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
     console.assert(((fbeStructSize > 0) && (fbeStructType === this.FBEType)), 'Model is broken!')
     if ((fbeStructSize <= 0) || (fbeStructType !== this.FBEType)) {
       return { value: new StructHashEx(), size: 8 }
@@ -23296,7 +23296,7 @@ class StructHashExFinalModel extends fbe.Model {
    * @param {!number} prev Previous StructHashEx model size
    */
   next (prev) {
-    this._model.FBEShift(prev)
+    this._model.fbeShift(prev)
   }
 }
 

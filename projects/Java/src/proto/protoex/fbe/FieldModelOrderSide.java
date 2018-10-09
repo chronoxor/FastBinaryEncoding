@@ -21,25 +21,25 @@ public final class FieldModelOrderSide extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return 1; }
+    public long fbeSize() { return 1; }
 
     // Get the value
     public OrderSide get() { return get(new OrderSide()); }
     public OrderSide get(OrderSide defaults)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
 
-        return new OrderSide(readByte(FBEOffset()));
+        return new OrderSide(readByte(fbeOffset()));
     }
 
     // Set the value
     public void set(OrderSide value)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
-        write(FBEOffset(), value.getRaw());
+        write(fbeOffset(), value.getRaw());
     }
 }

@@ -28,49 +28,49 @@ public final class FieldModelOrder extends FieldModel
     {
         super(buffer, offset);
         uid = new FieldModelInt32(buffer, 4 + 4);
-        symbol = new FieldModelString(buffer, uid.FBEOffset() + uid.FBESize());
-        side = new FieldModelOrderSide(buffer, symbol.FBEOffset() + symbol.FBESize());
-        type = new FieldModelOrderType(buffer, side.FBEOffset() + side.FBESize());
-        price = new FieldModelDouble(buffer, type.FBEOffset() + type.FBESize());
-        volume = new FieldModelDouble(buffer, price.FBEOffset() + price.FBESize());
+        symbol = new FieldModelString(buffer, uid.fbeOffset() + uid.fbeSize());
+        side = new FieldModelOrderSide(buffer, symbol.fbeOffset() + symbol.fbeSize());
+        type = new FieldModelOrderType(buffer, side.fbeOffset() + side.fbeSize());
+        price = new FieldModelDouble(buffer, type.fbeOffset() + type.fbeSize());
+        volume = new FieldModelDouble(buffer, price.fbeOffset() + price.fbeSize());
     }
 
     // Get the field size
     @Override
-    public long FBESize() { return 4; }
+    public long fbeSize() { return 4; }
     // Get the field body size
     public long FBEBody()
     {
         long fbeResult = 4 + 4
-            + uid.FBESize()
-            + symbol.FBESize()
-            + side.FBESize()
-            + type.FBESize()
-            + price.FBESize()
-            + volume.FBESize()
+            + uid.fbeSize()
+            + symbol.fbeSize()
+            + side.fbeSize()
+            + type.fbeSize()
+            + price.fbeSize()
+            + volume.fbeSize()
             ;
         return fbeResult;
     }
     // Get the field extra size
     @Override
-    public long FBEExtra()
+    public long fbeExtra()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeStructOffset = readInt32(FBEOffset());
+        int fbeStructOffset = readInt32(fbeOffset());
         if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4) > _buffer.getSize()))
             return 0;
 
         _buffer.shift(fbeStructOffset);
 
         long fbeResult = FBEBody()
-            + uid.FBEExtra()
-            + symbol.FBEExtra()
-            + side.FBEExtra()
-            + type.FBEExtra()
-            + price.FBEExtra()
-            + volume.FBEExtra()
+            + uid.fbeExtra()
+            + symbol.fbeExtra()
+            + side.fbeExtra()
+            + type.fbeExtra()
+            + price.fbeExtra()
+            + volume.fbeExtra()
             ;
 
         _buffer.unshift(fbeStructOffset);
@@ -86,10 +86,10 @@ public final class FieldModelOrder extends FieldModel
     public boolean verify() { return verify(true); }
     public boolean verify(boolean fbeVerifyType)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return true;
 
-        int fbeStructOffset = readInt32(FBEOffset());
+        int fbeStructOffset = readInt32(fbeOffset());
         if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4 + 4) > _buffer.getSize()))
             return false;
 
@@ -112,41 +112,41 @@ public final class FieldModelOrder extends FieldModel
     {
         long fbeCurrentSize = 4 + 4;
 
-        if ((fbeCurrentSize + uid.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + uid.fbeSize()) > fbeStructSize)
             return true;
         if (!uid.verify())
             return false;
-        fbeCurrentSize += uid.FBESize();
+        fbeCurrentSize += uid.fbeSize();
 
-        if ((fbeCurrentSize + symbol.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + symbol.fbeSize()) > fbeStructSize)
             return true;
         if (!symbol.verify())
             return false;
-        fbeCurrentSize += symbol.FBESize();
+        fbeCurrentSize += symbol.fbeSize();
 
-        if ((fbeCurrentSize + side.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + side.fbeSize()) > fbeStructSize)
             return true;
         if (!side.verify())
             return false;
-        fbeCurrentSize += side.FBESize();
+        fbeCurrentSize += side.fbeSize();
 
-        if ((fbeCurrentSize + type.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + type.fbeSize()) > fbeStructSize)
             return true;
         if (!type.verify())
             return false;
-        fbeCurrentSize += type.FBESize();
+        fbeCurrentSize += type.fbeSize();
 
-        if ((fbeCurrentSize + price.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + price.fbeSize()) > fbeStructSize)
             return true;
         if (!price.verify())
             return false;
-        fbeCurrentSize += price.FBESize();
+        fbeCurrentSize += price.fbeSize();
 
-        if ((fbeCurrentSize + volume.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + volume.fbeSize()) > fbeStructSize)
             return true;
         if (!volume.verify())
             return false;
-        fbeCurrentSize += volume.FBESize();
+        fbeCurrentSize += volume.fbeSize();
 
         return true;
     }
@@ -154,10 +154,10 @@ public final class FieldModelOrder extends FieldModel
     // Get the struct value (begin phase)
     public long getBegin()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeStructOffset = readInt32(FBEOffset());
+        int fbeStructOffset = readInt32(fbeOffset());
         assert ((fbeStructOffset > 0) && ((_buffer.getOffset() + fbeStructOffset + 4 + 4) <= _buffer.getSize())) : "Model is broken!";
         if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4 + 4) > _buffer.getSize()))
             return 0;
@@ -196,48 +196,48 @@ public final class FieldModelOrder extends FieldModel
     {
         long fbeCurrentSize = 4 + 4;
 
-        if ((fbeCurrentSize + uid.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + uid.fbeSize()) <= fbeStructSize)
             fbeValue.uid = uid.get();
         else
             fbeValue.uid = 0;
-        fbeCurrentSize += uid.FBESize();
+        fbeCurrentSize += uid.fbeSize();
 
-        if ((fbeCurrentSize + symbol.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + symbol.fbeSize()) <= fbeStructSize)
             fbeValue.symbol = symbol.get();
         else
             fbeValue.symbol = "";
-        fbeCurrentSize += symbol.FBESize();
+        fbeCurrentSize += symbol.fbeSize();
 
-        if ((fbeCurrentSize + side.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + side.fbeSize()) <= fbeStructSize)
             fbeValue.side = side.get();
         else
             fbeValue.side = new OrderSide();
-        fbeCurrentSize += side.FBESize();
+        fbeCurrentSize += side.fbeSize();
 
-        if ((fbeCurrentSize + type.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + type.fbeSize()) <= fbeStructSize)
             fbeValue.type = type.get();
         else
             fbeValue.type = new OrderType();
-        fbeCurrentSize += type.FBESize();
+        fbeCurrentSize += type.fbeSize();
 
-        if ((fbeCurrentSize + price.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + price.fbeSize()) <= fbeStructSize)
             fbeValue.price = price.get((double)0.0d);
         else
             fbeValue.price = (double)0.0d;
-        fbeCurrentSize += price.FBESize();
+        fbeCurrentSize += price.fbeSize();
 
-        if ((fbeCurrentSize + volume.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + volume.fbeSize()) <= fbeStructSize)
             fbeValue.volume = volume.get((double)0.0d);
         else
             fbeValue.volume = (double)0.0d;
-        fbeCurrentSize += volume.FBESize();
+        fbeCurrentSize += volume.fbeSize();
     }
 
     // Set the struct value (begin phase)
     public long setBegin()
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
         int fbeStructSize = (int)FBEBody();
@@ -246,7 +246,7 @@ public final class FieldModelOrder extends FieldModel
         if ((fbeStructOffset <= 0) || ((_buffer.getOffset() + fbeStructOffset + fbeStructSize) > _buffer.getSize()))
             return 0;
 
-        write(FBEOffset(), fbeStructOffset);
+        write(fbeOffset(), fbeStructOffset);
         write(fbeStructOffset, fbeStructSize);
         write(fbeStructOffset + 4, (int)FBEType());
 

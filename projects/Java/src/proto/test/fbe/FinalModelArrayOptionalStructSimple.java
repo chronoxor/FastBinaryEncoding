@@ -28,18 +28,18 @@ public final class FinalModelArrayOptionalStructSimple extends FinalModel
     }
 
     // Get the allocation size
-    public long FBEAllocationSize(StructSimple[] values)
+    public long fbeAllocationSize(StructSimple[] values)
     {
         long size = 0;
         for (long i = 0; (i < values.length) && (i < _size); i++)
-            size += _model.FBEAllocationSize(values[(int)i]);
+            size += _model.fbeAllocationSize(values[(int)i]);
         return size;
     }
-    public long FBEAllocationSize(ArrayList<StructSimple> values)
+    public long fbeAllocationSize(ArrayList<StructSimple> values)
     {
         long size = 0;
         for (long i = 0; (i < values.size()) && (i < _size); i++)
-            size += _model.FBEAllocationSize(values.get((int)i));
+            size += _model.fbeAllocationSize(values.get((int)i));
         return size;
     }
 
@@ -47,17 +47,17 @@ public final class FinalModelArrayOptionalStructSimple extends FinalModel
     @Override
     public long verify()
     {
-        if ((_buffer.getOffset() + FBEOffset()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset()) > _buffer.getSize())
             return Long.MAX_VALUE;
 
         long size = 0;
-        _model.FBEOffset(FBEOffset());
+        _model.fbeOffset(fbeOffset());
         for (long i = _size; i-- > 0;)
         {
             long offset = _model.verify();
             if (offset == Long.MAX_VALUE)
                 return Long.MAX_VALUE;
-            _model.FBEShift(offset);
+            _model.fbeShift(offset);
             size += offset;
         }
         return size;
@@ -68,8 +68,8 @@ public final class FinalModelArrayOptionalStructSimple extends FinalModel
     {
         var values = new StructSimple[(int)_size];
 
-        assert ((_buffer.getOffset() + FBEOffset()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset()) > _buffer.getSize())
         {
             size.value = 0;
             return values;
@@ -77,12 +77,12 @@ public final class FinalModelArrayOptionalStructSimple extends FinalModel
 
         size.value = 0;
         var offset = new Size();
-        _model.FBEOffset(FBEOffset());
+        _model.fbeOffset(fbeOffset());
         for (long i = 0; i < _size; i++)
         {
             offset.value = 0;
             values[(int)i] = _model.get(offset);
-            _model.FBEShift(offset.value);
+            _model.fbeShift(offset.value);
             size.value += offset.value;
         }
         return values;
@@ -95,18 +95,18 @@ public final class FinalModelArrayOptionalStructSimple extends FinalModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset()) > _buffer.getSize())
             return 0;
 
         long size = 0;
         var offset = new Size();
-        _model.FBEOffset(FBEOffset());
+        _model.fbeOffset(fbeOffset());
         for (long i = 0; (i < values.length) && (i < _size); i++)
         {
             offset.value = 0;
             values[(int)i] = _model.get(offset);
-            _model.FBEShift(offset.value);
+            _model.fbeShift(offset.value);
             size += offset.value;
         }
         return size;
@@ -121,21 +121,21 @@ public final class FinalModelArrayOptionalStructSimple extends FinalModel
 
         values.clear();
 
-        assert ((_buffer.getOffset() + FBEOffset()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset()) > _buffer.getSize())
             return 0;
 
         values.ensureCapacity((int)_size);
 
         long size = 0;
         var offset = new Size();
-        _model.FBEOffset(FBEOffset());
+        _model.fbeOffset(fbeOffset());
         for (long i = _size; i-- > 0;)
         {
             offset.value = 0;
             StructSimple value = _model.get(offset);
             values.add(value);
-            _model.FBEShift(offset.value);
+            _model.fbeShift(offset.value);
             size += offset.value;
         }
         return size;
@@ -148,16 +148,16 @@ public final class FinalModelArrayOptionalStructSimple extends FinalModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset()) > _buffer.getSize())
             return 0;
 
         long size = 0;
-        _model.FBEOffset(FBEOffset());
+        _model.fbeOffset(fbeOffset());
         for (long i = 0; (i < values.length) && (i < _size); i++)
         {
             long offset = _model.set(values[(int)i]);
-            _model.FBEShift(offset);
+            _model.fbeShift(offset);
             size += offset;
         }
         return size;
@@ -170,16 +170,16 @@ public final class FinalModelArrayOptionalStructSimple extends FinalModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset()) > _buffer.getSize())
             return 0;
 
         long size = 0;
-        _model.FBEOffset(FBEOffset());
+        _model.fbeOffset(fbeOffset());
         for (long i = 0; (i < values.size()) && (i < _size); i++)
         {
             long offset = _model.set(values.get((int)i));
-            _model.FBEShift(offset);
+            _model.fbeShift(offset);
             size += offset;
         }
         return size;

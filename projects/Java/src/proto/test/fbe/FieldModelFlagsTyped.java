@@ -21,25 +21,25 @@ public final class FieldModelFlagsTyped extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return 8; }
+    public long fbeSize() { return 8; }
 
     // Get the value
     public FlagsTyped get() { return get(new FlagsTyped()); }
     public FlagsTyped get(FlagsTyped defaults)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
 
-        return new FlagsTyped(readInt64(FBEOffset()));
+        return new FlagsTyped(readInt64(fbeOffset()));
     }
 
     // Set the value
     public void set(FlagsTyped value)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
-        write(FBEOffset(), value.getRaw());
+        write(fbeOffset(), value.getRaw());
     }
 }

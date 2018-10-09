@@ -8,7 +8,7 @@ const proto = require('../proto/proto')
 test('Create & access', function (t) {
   // Create a new account using FBE model into the FBE stream
   let writer = new proto.AccountModel(new fbe.WriteBuffer())
-  t.equal(writer.model.FBEOffset, 4)
+  t.equal(writer.model.fbeOffset, 4)
   let modelBegin = writer.createBegin()
   let accountBegin = writer.model.setBegin()
   writer.model.uid.set(1)
@@ -33,7 +33,7 @@ test('Create & access', function (t) {
   order.price.set(1.23456)
   order.volume.set(1000.0)
   order.setEnd(orderBegin)
-  order.FBEShift(order.FBESize)
+  order.fbeShift(order.fbeSize)
   orderBegin = order.setBegin()
   order.uid.set(2)
   order.symbol.set('EURUSD')
@@ -42,7 +42,7 @@ test('Create & access', function (t) {
   order.price.set(1.0)
   order.volume.set(100.0)
   order.setEnd(orderBegin)
-  order.FBEShift(order.FBESize)
+  order.fbeShift(order.fbeSize)
   orderBegin = order.setBegin()
   order.uid.set(3)
   order.symbol.set('EURUSD')
@@ -51,20 +51,20 @@ test('Create & access', function (t) {
   order.price.set(1.5)
   order.volume.set(10.0)
   order.setEnd(orderBegin)
-  order.FBEShift(order.FBESize)
+  order.fbeShift(order.fbeSize)
   writer.model.setEnd(accountBegin)
   let serialized = writer.createEnd(modelBegin)
   t.equal(serialized, writer.buffer.size)
   t.true(writer.verify())
   writer.next(serialized)
-  t.equal(writer.model.FBEOffset, (4 + writer.buffer.size))
+  t.equal(writer.model.fbeOffset, (4 + writer.buffer.size))
 
   // Check the serialized FBE size
   t.equal(writer.buffer.size, 252)
 
   // Access the account model in the FBE stream
   let reader = new proto.AccountModel(new fbe.ReadBuffer())
-  t.equal(reader.model.FBEOffset, 4)
+  t.equal(reader.model.fbeOffset, 4)
   reader.attachBuffer(writer.buffer)
   t.true(reader.verify())
 

@@ -29,30 +29,30 @@ public final class FieldModelMapInt32FlagsSimple extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return 4; }
+    public long fbeSize() { return 4; }
     // Get the field extra size
     @Override
-    public long FBEExtra()
+    public long fbeExtra()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeMapOffset = readInt32(FBEOffset());
+        int fbeMapOffset = readInt32(fbeOffset());
         if ((fbeMapOffset == 0) || ((_buffer.getOffset() + fbeMapOffset + 4) > _buffer.getSize()))
             return 0;
 
         int fbeMapSize = readInt32(fbeMapOffset);
 
         long fbeResult = 4;
-        _modelKey.FBEOffset(fbeMapOffset + 4);
-        _modelValue.FBEOffset(fbeMapOffset + 4 + _modelKey.FBESize());
+        _modelKey.fbeOffset(fbeMapOffset + 4);
+        _modelValue.fbeOffset(fbeMapOffset + 4 + _modelKey.fbeSize());
         for (int i = fbeMapSize; i-- > 0;)
         {
-            fbeResult += _modelKey.FBESize() + _modelKey.FBEExtra();
-            _modelKey.FBEShift(_modelKey.FBESize() + _modelValue.FBESize());
+            fbeResult += _modelKey.fbeSize() + _modelKey.fbeExtra();
+            _modelKey.fbeShift(_modelKey.fbeSize() + _modelValue.fbeSize());
 
-            fbeResult += _modelValue.FBESize() + _modelValue.FBEExtra();
-            _modelValue.FBEShift(_modelKey.FBESize() + _modelValue.FBESize());
+            fbeResult += _modelValue.fbeSize() + _modelValue.fbeExtra();
+            _modelValue.fbeShift(_modelKey.fbeSize() + _modelValue.fbeSize());
         }
         return fbeResult;
     }
@@ -60,20 +60,20 @@ public final class FieldModelMapInt32FlagsSimple extends FieldModel
     // Get the map offset
     public long getOffset()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeMapOffset = readInt32(FBEOffset());
+        int fbeMapOffset = readInt32(fbeOffset());
         return fbeMapOffset;
     }
 
     // Get the map size
     public long getSize()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeMapOffset = readInt32(FBEOffset());
+        int fbeMapOffset = readInt32(fbeOffset());
         if ((fbeMapOffset == 0) || ((_buffer.getOffset() + fbeMapOffset + 4) > _buffer.getSize()))
             return 0;
 
@@ -84,37 +84,37 @@ public final class FieldModelMapInt32FlagsSimple extends FieldModel
     // Map index operator
     public Pair<FieldModelInt32, FieldModelFlagsSimple> getItem(long index)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
 
-        int fbeMapOffset = readInt32(FBEOffset());
+        int fbeMapOffset = readInt32(fbeOffset());
         assert ((fbeMapOffset > 0) && ((_buffer.getOffset() + fbeMapOffset + 4) <= _buffer.getSize())) : "Model is broken!";
 
         int fbeMapSize = readInt32(fbeMapOffset);
         assert (index < fbeMapSize) : "Index is out of bounds!";
 
-        _modelKey.FBEOffset(fbeMapOffset + 4);
-        _modelValue.FBEOffset(fbeMapOffset + 4 + _modelKey.FBESize());
-        _modelKey.FBEShift(index * (_modelKey.FBESize() + _modelValue.FBESize()));
-        _modelValue.FBEShift(index * (_modelKey.FBESize() + _modelValue.FBESize()));
+        _modelKey.fbeOffset(fbeMapOffset + 4);
+        _modelValue.fbeOffset(fbeMapOffset + 4 + _modelKey.fbeSize());
+        _modelKey.fbeShift(index * (_modelKey.fbeSize() + _modelValue.fbeSize()));
+        _modelValue.fbeShift(index * (_modelKey.fbeSize() + _modelValue.fbeSize()));
         return Pair.create(_modelKey, _modelValue);
     }
 
     // Resize the map and get its first model
     public Pair<FieldModelInt32, FieldModelFlagsSimple> resize(long size)
     {
-        _modelKey.FBEOffset(FBEOffset());
-        _modelValue.FBEOffset(FBEOffset() + _modelKey.FBESize());
+        _modelKey.fbeOffset(fbeOffset());
+        _modelValue.fbeOffset(fbeOffset() + _modelKey.fbeSize());
 
-        int fbeMapSize = (int)(size * (_modelKey.FBESize() + _modelValue.FBESize()));
+        int fbeMapSize = (int)(size * (_modelKey.fbeSize() + _modelValue.fbeSize()));
         int fbeMapOffset = (int)(_buffer.allocate(4 + fbeMapSize) - _buffer.getOffset());
         assert ((fbeMapOffset > 0) && ((_buffer.getOffset() + fbeMapOffset + 4) <= _buffer.getSize())) : "Model is broken!";
 
-        write(FBEOffset(), fbeMapOffset);
+        write(fbeOffset(), fbeMapOffset);
         write(fbeMapOffset, (int)size);
         write(fbeMapOffset + 4, (byte)0, fbeMapSize);
 
-        _modelKey.FBEOffset(fbeMapOffset + 4);
-        _modelValue.FBEOffset(fbeMapOffset + 4 + _modelKey.FBESize());
+        _modelKey.fbeOffset(fbeMapOffset + 4);
+        _modelValue.fbeOffset(fbeMapOffset + 4 + _modelKey.fbeSize());
         return Pair.create(_modelKey, _modelValue);
     }
 
@@ -122,10 +122,10 @@ public final class FieldModelMapInt32FlagsSimple extends FieldModel
     @Override
     public boolean verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return true;
 
-        int fbeMapOffset = readInt32(FBEOffset());
+        int fbeMapOffset = readInt32(fbeOffset());
         if (fbeMapOffset == 0)
             return true;
 
@@ -134,16 +134,16 @@ public final class FieldModelMapInt32FlagsSimple extends FieldModel
 
         int fbeMapSize = readInt32(fbeMapOffset);
 
-        _modelKey.FBEOffset(fbeMapOffset + 4);
-        _modelValue.FBEOffset(fbeMapOffset + 4 + _modelKey.FBESize());
+        _modelKey.fbeOffset(fbeMapOffset + 4);
+        _modelValue.fbeOffset(fbeMapOffset + 4 + _modelKey.fbeSize());
         for (int i = fbeMapSize; i-- > 0;)
         {
             if (!_modelKey.verify())
                 return false;
-            _modelKey.FBEShift(_modelKey.FBESize() + _modelValue.FBESize());
+            _modelKey.fbeShift(_modelKey.fbeSize() + _modelValue.fbeSize());
             if (!_modelValue.verify())
                 return false;
-            _modelValue.FBEShift(_modelKey.FBESize() + _modelValue.FBESize());
+            _modelValue.fbeShift(_modelKey.fbeSize() + _modelValue.fbeSize());
         }
 
         return true;
@@ -168,8 +168,8 @@ public final class FieldModelMapInt32FlagsSimple extends FieldModel
             Integer key = fbeModel.getKey().get();
             FlagsSimple value = fbeModel.getValue().get();
             values.put(key, value);
-            fbeModel.getKey().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
-            fbeModel.getValue().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
+            fbeModel.getKey().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
+            fbeModel.getValue().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
         }
     }
 
@@ -192,8 +192,8 @@ public final class FieldModelMapInt32FlagsSimple extends FieldModel
             Integer key = fbeModel.getKey().get();
             FlagsSimple value = fbeModel.getValue().get();
             values.put(key, value);
-            fbeModel.getKey().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
-            fbeModel.getValue().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
+            fbeModel.getKey().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
+            fbeModel.getValue().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
         }
     }
 
@@ -204,17 +204,17 @@ public final class FieldModelMapInt32FlagsSimple extends FieldModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
         var fbeModel = resize(values.size());
         for (var value : values.entrySet())
         {
             fbeModel.getKey().set(value.getKey());
-            fbeModel.getKey().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
+            fbeModel.getKey().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
             fbeModel.getValue().set(value.getValue());
-            fbeModel.getValue().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
+            fbeModel.getValue().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
         }
     }
 
@@ -225,17 +225,17 @@ public final class FieldModelMapInt32FlagsSimple extends FieldModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
         var fbeModel = resize(values.size());
         for (var value : values.entrySet())
         {
             fbeModel.getKey().set(value.getKey());
-            fbeModel.getKey().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
+            fbeModel.getKey().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
             fbeModel.getValue().set(value.getValue());
-            fbeModel.getValue().FBEShift(fbeModel.getKey().FBESize() + fbeModel.getValue().FBESize());
+            fbeModel.getValue().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
         }
     }
 }

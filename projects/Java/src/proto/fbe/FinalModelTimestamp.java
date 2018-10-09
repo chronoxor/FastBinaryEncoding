@@ -17,42 +17,42 @@ public final class FinalModelTimestamp extends FinalModel
     public FinalModelTimestamp(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long FBEAllocationSize(Instant value) { return FBESize(); }
+    public long fbeAllocationSize(Instant value) { return fbeSize(); }
 
     // Get the final size
     @Override
-    public long FBESize() { return 8; }
+    public long fbeSize() { return 8; }
 
     // Check if the value is valid
     @Override
     public long verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return Long.MAX_VALUE;
 
-        return FBESize();
+        return fbeSize();
     }
 
     // Get the value
     public Instant get(Size size)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return Instant.EPOCH;
 
-        size.value = FBESize();
-        long nanoseconds = readInt64(FBEOffset());
+        size.value = fbeSize();
+        long nanoseconds = readInt64(fbeOffset());
         return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
     }
 
     // Set the value
     public long set(Instant value)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
         long nanoseconds = value.getEpochSecond() * 1000000000 + value.getNano();
-        write(FBEOffset(), nanoseconds);
-        return FBESize();
+        write(fbeOffset(), nanoseconds);
+        return fbeSize();
     }
 }

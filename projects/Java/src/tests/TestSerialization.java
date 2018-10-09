@@ -18,12 +18,12 @@ public class TestSerialization
 
         // Serialize the account to the FBE stream
         var writer = new proto.fbe.AccountModel();
-        Assert.assertEquals(writer.model.FBEOffset(), 4);
+        Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(account1);
         Assert.assertEquals(serialized, writer.getBuffer().getSize());
         Assert.assertTrue(writer.verify());
         writer.next(serialized);
-        Assert.assertEquals(writer.model.FBEOffset(), (4 + writer.getBuffer().getSize()));
+        Assert.assertEquals(writer.model.fbeOffset(), (4 + writer.getBuffer().getSize()));
 
         // Check the serialized FBE size
         Assert.assertEquals(writer.getBuffer().getSize(), 252);
@@ -31,13 +31,13 @@ public class TestSerialization
         // Deserialize the account from the FBE stream
         var account2 = new proto.Account();
         var reader = new proto.fbe.AccountModel();
-        Assert.assertEquals(reader.model.FBEOffset(), 4);
+        Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
         Assert.assertTrue(reader.verify());
         long deserialized = reader.deserialize(account2);
         Assert.assertEquals(deserialized, reader.getBuffer().getSize());
         reader.next(deserialized);
-        Assert.assertEquals(reader.model.FBEOffset(), (4 + reader.getBuffer().getSize()));
+        Assert.assertEquals(reader.model.fbeOffset(), (4 + reader.getBuffer().getSize()));
 
         Assert.assertEquals(account2.uid, 1);
         Assert.assertEquals(account2.name, "Test");
@@ -77,12 +77,12 @@ public class TestSerialization
         // Serialize the struct to the FBE stream
         var writer = new test.fbe.StructSimpleModel();
         Assert.assertEquals(writer.model.FBEType(), 110);
-        Assert.assertEquals(writer.model.FBEOffset(), 4);
+        Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
         Assert.assertEquals(serialized, writer.getBuffer().getSize());
         Assert.assertTrue(writer.verify());
         writer.next(serialized);
-        Assert.assertEquals(writer.model.FBEOffset(), (4 + writer.getBuffer().getSize()));
+        Assert.assertEquals(writer.model.fbeOffset(), (4 + writer.getBuffer().getSize()));
 
         // Check the serialized FBE size
         Assert.assertEquals(writer.getBuffer().getSize(), 392);
@@ -91,13 +91,13 @@ public class TestSerialization
         var struct2 = new test.StructSimple();
         var reader = new test.fbe.StructSimpleModel();
         Assert.assertEquals(reader.model.FBEType(), 110);
-        Assert.assertEquals(reader.model.FBEOffset(), 4);
+        Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
         Assert.assertTrue(reader.verify());
         long deserialized = reader.deserialize(struct2);
         Assert.assertEquals(deserialized, reader.getBuffer().getSize());
         reader.next(deserialized);
-        Assert.assertEquals(reader.model.FBEOffset(), (4 + reader.getBuffer().getSize()));
+        Assert.assertEquals(reader.model.fbeOffset(), (4 + reader.getBuffer().getSize()));
 
         Assert.assertEquals(struct2.f1, false);
         Assert.assertEquals(struct2.f2, true);
@@ -189,12 +189,12 @@ public class TestSerialization
         // Serialize the struct to the FBE stream
         var writer = new test.fbe.StructOptionalModel();
         Assert.assertEquals(writer.model.FBEType(), 111);
-        Assert.assertEquals(writer.model.FBEOffset(), 4);
+        Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
         Assert.assertEquals(serialized, writer.getBuffer().getSize());
         Assert.assertTrue(writer.verify());
         writer.next(serialized);
-        Assert.assertEquals(writer.model.FBEOffset(), (4 + writer.getBuffer().getSize()));
+        Assert.assertEquals(writer.model.fbeOffset(), (4 + writer.getBuffer().getSize()));
 
         // Check the serialized FBE size
         Assert.assertEquals(writer.getBuffer().getSize(), 834);
@@ -203,13 +203,13 @@ public class TestSerialization
         var struct2 = new test.StructOptional();
         var reader = new test.fbe.StructOptionalModel();
         Assert.assertEquals(reader.model.FBEType(), 111);
-        Assert.assertEquals(reader.model.FBEOffset(), 4);
+        Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
         Assert.assertTrue(reader.verify());
         long deserialized = reader.deserialize(struct2);
         Assert.assertEquals(deserialized, reader.getBuffer().getSize());
         reader.next(deserialized);
-        Assert.assertEquals(reader.model.FBEOffset(), (4 + reader.getBuffer().getSize()));
+        Assert.assertEquals(reader.model.fbeOffset(), (4 + reader.getBuffer().getSize()));
 
         Assert.assertEquals(struct2.f2, true);
         Assert.assertEquals(struct2.f1, false);
@@ -445,12 +445,12 @@ public class TestSerialization
         // Serialize the struct to the FBE stream
         var writer = new test.fbe.StructNestedModel();
         Assert.assertEquals(writer.model.FBEType(), 112);
-        Assert.assertEquals(writer.model.FBEOffset(), 4);
+        Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
         Assert.assertEquals(serialized, writer.getBuffer().getSize());
         Assert.assertTrue(writer.verify());
         writer.next(serialized);
-        Assert.assertEquals(writer.model.FBEOffset(), (4 + writer.getBuffer().getSize()));
+        Assert.assertEquals(writer.model.fbeOffset(), (4 + writer.getBuffer().getSize()));
 
         // Check the serialized FBE size
         Assert.assertEquals(writer.getBuffer().getSize(), 2099);
@@ -459,13 +459,13 @@ public class TestSerialization
         var struct2 = new test.StructNested();
         var reader = new test.fbe.StructNestedModel();
         Assert.assertEquals(reader.model.FBEType(), 112);
-        Assert.assertEquals(reader.model.FBEOffset(), 4);
+        Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
         Assert.assertTrue(reader.verify());
         long deserialized = reader.deserialize(struct2);
         Assert.assertEquals(deserialized, reader.getBuffer().getSize());
         reader.next(deserialized);
-        Assert.assertEquals(reader.model.FBEOffset(), (4 + reader.getBuffer().getSize()));
+        Assert.assertEquals(reader.model.fbeOffset(), (4 + reader.getBuffer().getSize()));
 
         Assert.assertEquals(struct2.f1, false);
         Assert.assertEquals(struct2.f2, true);
@@ -723,12 +723,12 @@ public class TestSerialization
         // Serialize the struct to the FBE stream
         var writer = new test.fbe.StructBytesModel();
         Assert.assertEquals(writer.model.FBEType(), 120);
-        Assert.assertEquals(writer.model.FBEOffset(), 4);
+        Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
         Assert.assertEquals(serialized, writer.getBuffer().getSize());
         Assert.assertTrue(writer.verify());
         writer.next(serialized);
-        Assert.assertEquals(writer.model.FBEOffset(), (4 + writer.getBuffer().getSize()));
+        Assert.assertEquals(writer.model.fbeOffset(), (4 + writer.getBuffer().getSize()));
 
         // Check the serialized FBE size
         Assert.assertEquals(writer.getBuffer().getSize(), 49);
@@ -737,13 +737,13 @@ public class TestSerialization
         var struct2 = new test.StructBytes();
         var reader = new test.fbe.StructBytesModel();
         Assert.assertEquals(reader.model.FBEType(), 120);
-        Assert.assertEquals(reader.model.FBEOffset(), 4);
+        Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
         Assert.assertTrue(reader.verify());
         long deserialized = reader.deserialize(struct2);
         Assert.assertEquals(deserialized, reader.getBuffer().getSize());
         reader.next(deserialized);
-        Assert.assertEquals(reader.model.FBEOffset(), (4 + reader.getBuffer().getSize()));
+        Assert.assertEquals(reader.model.fbeOffset(), (4 + reader.getBuffer().getSize()));
 
         Assert.assertEquals(struct2.f1.length, 3);
         Assert.assertEquals(struct2.f1[0], (byte)'A');
@@ -787,12 +787,12 @@ public class TestSerialization
         // Serialize the struct to the FBE stream
         var writer = new test.fbe.StructArrayModel();
         Assert.assertEquals(writer.model.FBEType(), 125);
-        Assert.assertEquals(writer.model.FBEOffset(), 4);
+        Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
         Assert.assertEquals(serialized, writer.getBuffer().getSize());
         Assert.assertTrue(writer.verify());
         writer.next(serialized);
-        Assert.assertEquals(writer.model.FBEOffset(), (4 + writer.getBuffer().getSize()));
+        Assert.assertEquals(writer.model.fbeOffset(), (4 + writer.getBuffer().getSize()));
 
         // Check the serialized FBE size
         Assert.assertEquals(writer.getBuffer().getSize(), 1290);
@@ -801,13 +801,13 @@ public class TestSerialization
         var struct2 = new test.StructArray();
         var reader = new test.fbe.StructArrayModel();
         Assert.assertEquals(reader.model.FBEType(), 125);
-        Assert.assertEquals(reader.model.FBEOffset(), 4);
+        Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
         Assert.assertTrue(reader.verify());
         long deserialized = reader.deserialize(struct2);
         Assert.assertEquals(deserialized, reader.getBuffer().getSize());
         reader.next(deserialized);
-        Assert.assertEquals(reader.model.FBEOffset(), (4 + reader.getBuffer().getSize()));
+        Assert.assertEquals(reader.model.fbeOffset(), (4 + reader.getBuffer().getSize()));
 
         Assert.assertEquals(struct2.f1.length, 2);
         Assert.assertEquals(struct2.f1[0], 48);
@@ -887,12 +887,12 @@ public class TestSerialization
         // Serialize the struct to the FBE stream
         var writer = new test.fbe.StructVectorModel();
         Assert.assertEquals(writer.model.FBEType(), 130);
-        Assert.assertEquals(writer.model.FBEOffset(), 4);
+        Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
         Assert.assertEquals(serialized, writer.getBuffer().getSize());
         Assert.assertTrue(writer.verify());
         writer.next(serialized);
-        Assert.assertEquals(writer.model.FBEOffset(), (4 + writer.getBuffer().getSize()));
+        Assert.assertEquals(writer.model.fbeOffset(), (4 + writer.getBuffer().getSize()));
 
         // Check the serialized FBE size
         Assert.assertEquals(writer.getBuffer().getSize(), 1370);
@@ -901,13 +901,13 @@ public class TestSerialization
         var struct2 = new test.StructVector();
         var reader = new test.fbe.StructVectorModel();
         Assert.assertEquals(reader.model.FBEType(), 130);
-        Assert.assertEquals(reader.model.FBEOffset(), 4);
+        Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
         Assert.assertTrue(reader.verify());
         long deserialized = reader.deserialize(struct2);
         Assert.assertEquals(deserialized, reader.getBuffer().getSize());
         reader.next(deserialized);
-        Assert.assertEquals(reader.model.FBEOffset(), (4 + reader.getBuffer().getSize()));
+        Assert.assertEquals(reader.model.fbeOffset(), (4 + reader.getBuffer().getSize()));
 
         Assert.assertEquals(struct2.f1.size(), 2);
         Assert.assertEquals(struct2.f1.get(0).byteValue(), 48);
@@ -987,12 +987,12 @@ public class TestSerialization
         // Serialize the struct to the FBE stream
         var writer = new test.fbe.StructListModel();
         Assert.assertEquals(writer.model.FBEType(), 131);
-        Assert.assertEquals(writer.model.FBEOffset(), 4);
+        Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
         Assert.assertEquals(serialized, writer.getBuffer().getSize());
         Assert.assertTrue(writer.verify());
         writer.next(serialized);
-        Assert.assertEquals(writer.model.FBEOffset(), (4 + writer.getBuffer().getSize()));
+        Assert.assertEquals(writer.model.fbeOffset(), (4 + writer.getBuffer().getSize()));
 
         // Check the serialized FBE size
         Assert.assertEquals(writer.getBuffer().getSize(), 1370);
@@ -1001,13 +1001,13 @@ public class TestSerialization
         var struct2 = new test.StructList();
         var reader = new test.fbe.StructListModel();
         Assert.assertEquals(reader.model.FBEType(), 131);
-        Assert.assertEquals(reader.model.FBEOffset(), 4);
+        Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
         Assert.assertTrue(reader.verify());
         long deserialized = reader.deserialize(struct2);
         Assert.assertEquals(deserialized, reader.getBuffer().getSize());
         reader.next(deserialized);
-        Assert.assertEquals(reader.model.FBEOffset(), (4 + reader.getBuffer().getSize()));
+        Assert.assertEquals(reader.model.fbeOffset(), (4 + reader.getBuffer().getSize()));
 
         Assert.assertEquals(struct2.f1.size(), 2);
         Assert.assertEquals(struct2.f1.getFirst().byteValue(), 48);
@@ -1080,12 +1080,12 @@ public class TestSerialization
         // Serialize the struct to the FBE stream
         var writer = new test.fbe.StructSetModel();
         Assert.assertEquals(writer.model.FBEType(), 132);
-        Assert.assertEquals(writer.model.FBEOffset(), 4);
+        Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
         Assert.assertEquals(serialized, writer.getBuffer().getSize());
         Assert.assertTrue(writer.verify());
         writer.next(serialized);
-        Assert.assertEquals(writer.model.FBEOffset(), (4 + writer.getBuffer().getSize()));
+        Assert.assertEquals(writer.model.fbeOffset(), (4 + writer.getBuffer().getSize()));
 
         // Check the serialized FBE size
         Assert.assertEquals(writer.getBuffer().getSize(), 843);
@@ -1094,13 +1094,13 @@ public class TestSerialization
         var struct2 = new test.StructSet();
         var reader = new test.fbe.StructSetModel();
         Assert.assertEquals(reader.model.FBEType(), 132);
-        Assert.assertEquals(reader.model.FBEOffset(), 4);
+        Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
         Assert.assertTrue(reader.verify());
         long deserialized = reader.deserialize(struct2);
         Assert.assertEquals(deserialized, reader.getBuffer().getSize());
         reader.next(deserialized);
-        Assert.assertEquals(reader.model.FBEOffset(), (4 + reader.getBuffer().getSize()));
+        Assert.assertEquals(reader.model.fbeOffset(), (4 + reader.getBuffer().getSize()));
 
         Assert.assertEquals(struct2.f1.size(), 3);
         Assert.assertTrue(struct2.f1.contains((byte)48));
@@ -1150,12 +1150,12 @@ public class TestSerialization
         // Serialize the struct to the FBE stream
         var writer = new test.fbe.StructMapModel();
         Assert.assertEquals(writer.model.FBEType(), 140);
-        Assert.assertEquals(writer.model.FBEOffset(), 4);
+        Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
         Assert.assertEquals(serialized, writer.getBuffer().getSize());
         Assert.assertTrue(writer.verify());
         writer.next(serialized);
-        Assert.assertEquals(writer.model.FBEOffset(), (4 + writer.getBuffer().getSize()));
+        Assert.assertEquals(writer.model.fbeOffset(), (4 + writer.getBuffer().getSize()));
 
         // Check the serialized FBE size
         Assert.assertEquals(writer.getBuffer().getSize(), 1450);
@@ -1164,13 +1164,13 @@ public class TestSerialization
         var struct2 = new test.StructMap();
         var reader = new test.fbe.StructMapModel();
         Assert.assertEquals(reader.model.FBEType(), 140);
-        Assert.assertEquals(reader.model.FBEOffset(), 4);
+        Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
         Assert.assertTrue(reader.verify());
         long deserialized = reader.deserialize(struct2);
         Assert.assertEquals(deserialized, reader.getBuffer().getSize());
         reader.next(deserialized);
-        Assert.assertEquals(reader.model.FBEOffset(), (4 + reader.getBuffer().getSize()));
+        Assert.assertEquals(reader.model.fbeOffset(), (4 + reader.getBuffer().getSize()));
 
         Assert.assertEquals(struct2.f1.size(), 2);
         Assert.assertEquals(struct2.f1.get(10).byteValue(), 48);
@@ -1237,12 +1237,12 @@ public class TestSerialization
         // Serialize the struct to the FBE stream
         var writer = new test.fbe.StructHashModel();
         Assert.assertEquals(writer.model.FBEType(), 141);
-        Assert.assertEquals(writer.model.FBEOffset(), 4);
+        Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
         Assert.assertEquals(serialized, writer.getBuffer().getSize());
         Assert.assertTrue(writer.verify());
         writer.next(serialized);
-        Assert.assertEquals(writer.model.FBEOffset(), (4 + writer.getBuffer().getSize()));
+        Assert.assertEquals(writer.model.fbeOffset(), (4 + writer.getBuffer().getSize()));
 
         // Check the serialized FBE size
         Assert.assertEquals(writer.getBuffer().getSize(), 1570);
@@ -1251,13 +1251,13 @@ public class TestSerialization
         var struct2 = new test.StructHash();
         var reader = new test.fbe.StructHashModel();
         Assert.assertEquals(reader.model.FBEType(), 141);
-        Assert.assertEquals(reader.model.FBEOffset(), 4);
+        Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
         Assert.assertTrue(reader.verify());
         long deserialized = reader.deserialize(struct2);
         Assert.assertEquals(deserialized, reader.getBuffer().getSize());
         reader.next(deserialized);
-        Assert.assertEquals(reader.model.FBEOffset(), (4 + reader.getBuffer().getSize()));
+        Assert.assertEquals(reader.model.fbeOffset(), (4 + reader.getBuffer().getSize()));
 
         Assert.assertEquals(struct2.f1.size(), 2);
         Assert.assertEquals(struct2.f1.get("10").byteValue(), 48);
@@ -1308,12 +1308,12 @@ public class TestSerialization
         // Serialize the struct to the FBE stream
         var writer = new test.fbe.StructHashExModel();
         Assert.assertEquals(writer.model.FBEType(), 142);
-        Assert.assertEquals(writer.model.FBEOffset(), 4);
+        Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(struct1);
         Assert.assertEquals(serialized, writer.getBuffer().getSize());
         Assert.assertTrue(writer.verify());
         writer.next(serialized);
-        Assert.assertEquals(writer.model.FBEOffset(), (4 + writer.getBuffer().getSize()));
+        Assert.assertEquals(writer.model.fbeOffset(), (4 + writer.getBuffer().getSize()));
 
         // Check the serialized FBE size
         Assert.assertEquals(writer.getBuffer().getSize(), 7879);
@@ -1322,13 +1322,13 @@ public class TestSerialization
         var struct2 = new test.StructHashEx();
         var reader = new test.fbe.StructHashExModel();
         Assert.assertEquals(reader.model.FBEType(), 142);
-        Assert.assertEquals(reader.model.FBEOffset(), 4);
+        Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
         Assert.assertTrue(reader.verify());
         long deserialized = reader.deserialize(struct2);
         Assert.assertEquals(deserialized, reader.getBuffer().getSize());
         reader.next(deserialized);
-        Assert.assertEquals(reader.model.FBEOffset(), (4 + reader.getBuffer().getSize()));
+        Assert.assertEquals(reader.model.fbeOffset(), (4 + reader.getBuffer().getSize()));
 
         Assert.assertEquals(struct2.f1.size(), 2);
         Assert.assertEquals(struct2.f1.get(s1).f1002, test.EnumTyped.ENUM_VALUE_2);

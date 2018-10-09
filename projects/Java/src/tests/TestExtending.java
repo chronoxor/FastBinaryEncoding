@@ -17,12 +17,12 @@ public class TestExtending
 
         // Serialize the account to the FBE stream
         var writer = new proto.fbe.AccountModel();
-        Assert.assertEquals(writer.model.FBEOffset(), 4);
+        Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(account1);
         Assert.assertEquals(serialized, writer.getBuffer().getSize());
         Assert.assertTrue(writer.verify());
         writer.next(serialized);
-        Assert.assertEquals(writer.model.FBEOffset(), (4 + writer.getBuffer().getSize()));
+        Assert.assertEquals(writer.model.fbeOffset(), (4 + writer.getBuffer().getSize()));
 
         // Check the serialized FBE size
         Assert.assertEquals(writer.getBuffer().getSize(), 252);
@@ -30,13 +30,13 @@ public class TestExtending
         // Deserialize the account from the FBE stream
         var account2 = new protoex.Account();
         var reader = new protoex.fbe.AccountModel();
-        Assert.assertEquals(reader.model.FBEOffset(), 4);
+        Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
         Assert.assertTrue(reader.verify());
         long deserialized = reader.deserialize(account2);
         Assert.assertEquals(deserialized, reader.getBuffer().getSize());
         reader.next(deserialized);
-        Assert.assertEquals(reader.model.FBEOffset(), (4 + reader.getBuffer().getSize()));
+        Assert.assertEquals(reader.model.fbeOffset(), (4 + reader.getBuffer().getSize()));
 
         Assert.assertEquals(account2.uid, 1);
         Assert.assertEquals(account2.name, "Test");
@@ -96,12 +96,12 @@ public class TestExtending
 
         // Serialize the account to the FBE stream
         var writer = new protoex.fbe.AccountModel();
-        Assert.assertEquals(writer.model.FBEOffset(), 4);
+        Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(account1);
         Assert.assertEquals(serialized, writer.getBuffer().getSize());
         Assert.assertTrue(writer.verify());
         writer.next(serialized);
-        Assert.assertEquals(writer.model.FBEOffset(), (4 + writer.getBuffer().getSize()));
+        Assert.assertEquals(writer.model.fbeOffset(), (4 + writer.getBuffer().getSize()));
 
         // Check the serialized FBE size
         Assert.assertEquals(writer.getBuffer().getSize(), 316);
@@ -109,13 +109,13 @@ public class TestExtending
         // Deserialize the account from the FBE stream
         var account2 = new proto.Account();
         var reader = new proto.fbe.AccountModel();
-        Assert.assertEquals(reader.model.FBEOffset(), 4);
+        Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
         Assert.assertTrue(reader.verify());
         long deserialized = reader.deserialize(account2);
         Assert.assertEquals(deserialized, reader.getBuffer().getSize());
         reader.next(deserialized);
-        Assert.assertEquals(reader.model.FBEOffset(), (4 + reader.getBuffer().getSize()));
+        Assert.assertEquals(reader.model.fbeOffset(), (4 + reader.getBuffer().getSize()));
 
         Assert.assertEquals(account2.uid, 1);
         Assert.assertEquals(account2.name, "Test");

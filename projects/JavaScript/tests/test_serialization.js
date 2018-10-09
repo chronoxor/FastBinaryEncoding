@@ -23,12 +23,12 @@ test('Serialization: proto', function (t) {
 
   // Serialize the account to the FBE stream
   let writer = new proto.AccountModel(new fbe.WriteBuffer())
-  t.equal(writer.model.FBEOffset, 4)
+  t.equal(writer.model.fbeOffset, 4)
   let serialized = writer.serialize(account1)
   t.equal(serialized, writer.buffer.size)
   t.true(writer.verify())
   writer.next(serialized)
-  t.equal(writer.model.FBEOffset, (4 + writer.buffer.size))
+  t.equal(writer.model.fbeOffset, (4 + writer.buffer.size))
 
   // Check the serialized FBE size
   t.equal(writer.buffer.size, 252)
@@ -36,13 +36,13 @@ test('Serialization: proto', function (t) {
   // Deserialize the account from the FBE stream
   let account2 = new proto.Account()
   let reader = new proto.AccountModel(new fbe.ReadBuffer())
-  t.equal(reader.model.FBEOffset, 4)
+  t.equal(reader.model.fbeOffset, 4)
   reader.attachBuffer(writer.buffer)
   t.true(reader.verify())
   let deserialized = reader.deserialize(account2)
   t.true(deserialized.size, reader.buffer.size)
   reader.next(deserialized.size)
-  t.true(reader.model.FBEOffset, (4 + reader.buffer.size))
+  t.true(reader.model.fbeOffset, (4 + reader.buffer.size))
 
   t.equal(account2.uid, 1)
   t.equal(account2.name, 'Test')
@@ -81,12 +81,12 @@ test('Serialization: struct simple', function (t) {
   // Serialize the struct to the FBE stream
   let writer = new prototest.StructSimpleModel(new fbe.WriteBuffer())
   t.equal(writer.model.FBEType, 110)
-  t.equal(writer.model.FBEOffset, 4)
+  t.equal(writer.model.fbeOffset, 4)
   let serialized = writer.serialize(struct1)
   t.equal(serialized, writer.buffer.size)
   t.true(writer.verify())
   writer.next(serialized)
-  t.equal(writer.model.FBEOffset, (4 + writer.buffer.size))
+  t.equal(writer.model.fbeOffset, (4 + writer.buffer.size))
 
   // Check the serialized FBE size
   t.equal(writer.buffer.size, 392)
@@ -95,13 +95,13 @@ test('Serialization: struct simple', function (t) {
   let struct2 = new prototest.StructSimple()
   let reader = new prototest.StructSimpleModel(new fbe.ReadBuffer())
   t.equal(reader.model.FBEType, 110)
-  t.equal(reader.model.FBEOffset, 4)
+  t.equal(reader.model.fbeOffset, 4)
   reader.attachBuffer(writer.buffer)
   t.true(reader.verify())
   let deserialized = reader.deserialize(struct2)
   t.true(deserialized.size, reader.buffer.size)
   reader.next(deserialized.size)
-  t.true(reader.model.FBEOffset, (4 + reader.buffer.size))
+  t.true(reader.model.fbeOffset, (4 + reader.buffer.size))
 
   t.equal(struct2.f1, false)
   t.equal(struct2.f2, true)
@@ -192,12 +192,12 @@ test('Serialization: struct optional', function (t) {
   // Serialize the struct to the FBE stream
   let writer = new prototest.StructOptionalModel(new fbe.WriteBuffer())
   t.equal(writer.model.FBEType, 111)
-  t.equal(writer.model.FBEOffset, 4)
+  t.equal(writer.model.fbeOffset, 4)
   let serialized = writer.serialize(struct1)
   t.equal(serialized, writer.buffer.size)
   t.true(writer.verify())
   writer.next(serialized)
-  t.equal(writer.model.FBEOffset, (4 + writer.buffer.size))
+  t.equal(writer.model.fbeOffset, (4 + writer.buffer.size))
 
   // Check the serialized FBE size
   t.equal(writer.buffer.size, 834)
@@ -206,13 +206,13 @@ test('Serialization: struct optional', function (t) {
   let struct2 = new prototest.StructOptional()
   let reader = new prototest.StructOptionalModel(new fbe.ReadBuffer())
   t.equal(reader.model.FBEType, 111)
-  t.equal(reader.model.FBEOffset, 4)
+  t.equal(reader.model.fbeOffset, 4)
   reader.attachBuffer(writer.buffer)
   t.true(reader.verify())
   let deserialized = reader.deserialize(struct2)
   t.true(deserialized.size, reader.buffer.size)
   reader.next(deserialized.size)
-  t.true(reader.model.FBEOffset, (4 + reader.buffer.size))
+  t.true(reader.model.fbeOffset, (4 + reader.buffer.size))
 
   t.equal(struct2.f1, false)
   t.equal(struct2.f2, true)
@@ -447,12 +447,12 @@ test('Serialization: struct nested', function (t) {
   // Serialize the struct to the FBE stream
   let writer = new prototest.StructNestedModel(new fbe.WriteBuffer())
   t.equal(writer.model.FBEType, 112)
-  t.equal(writer.model.FBEOffset, 4)
+  t.equal(writer.model.fbeOffset, 4)
   let serialized = writer.serialize(struct1)
   t.equal(serialized, writer.buffer.size)
   t.true(writer.verify())
   writer.next(serialized)
-  t.equal(writer.model.FBEOffset, (4 + writer.buffer.size))
+  t.equal(writer.model.fbeOffset, (4 + writer.buffer.size))
 
   // Check the serialized FBE size
   t.equal(writer.buffer.size, 2099)
@@ -461,13 +461,13 @@ test('Serialization: struct nested', function (t) {
   let struct2 = new prototest.StructNested()
   let reader = new prototest.StructNestedModel(new fbe.ReadBuffer())
   t.equal(reader.model.FBEType, 112)
-  t.equal(reader.model.FBEOffset, 4)
+  t.equal(reader.model.fbeOffset, 4)
   reader.attachBuffer(writer.buffer)
   t.true(reader.verify())
   let deserialized = reader.deserialize(struct2)
   t.true(deserialized.size, reader.buffer.size)
   reader.next(deserialized.size)
-  t.true(reader.model.FBEOffset, (4 + reader.buffer.size))
+  t.true(reader.model.fbeOffset, (4 + reader.buffer.size))
 
   t.equal(struct2.f1, false)
   t.equal(struct2.f2, true)
@@ -726,12 +726,12 @@ test('Serialization: struct bytes', function (t) {
   // Serialize the struct to the FBE stream
   let writer = new prototest.StructBytesModel(new fbe.WriteBuffer())
   t.equal(writer.model.FBEType, 120)
-  t.equal(writer.model.FBEOffset, 4)
+  t.equal(writer.model.fbeOffset, 4)
   let serialized = writer.serialize(struct1)
   t.equal(serialized, writer.buffer.size)
   t.true(writer.verify())
   writer.next(serialized)
-  t.equal(writer.model.FBEOffset, (4 + writer.buffer.size))
+  t.equal(writer.model.fbeOffset, (4 + writer.buffer.size))
 
   // Check the serialized FBE size
   t.equal(writer.buffer.size, 49)
@@ -740,13 +740,13 @@ test('Serialization: struct bytes', function (t) {
   let struct2 = new prototest.StructBytes()
   let reader = new prototest.StructBytesModel(new fbe.ReadBuffer())
   t.equal(reader.model.FBEType, 120)
-  t.equal(reader.model.FBEOffset, 4)
+  t.equal(reader.model.fbeOffset, 4)
   reader.attachBuffer(writer.buffer)
   t.true(reader.verify())
   let deserialized = reader.deserialize(struct2)
   t.true(deserialized.size, reader.buffer.size)
   reader.next(deserialized.size)
-  t.true(reader.model.FBEOffset, (4 + reader.buffer.size))
+  t.true(reader.model.fbeOffset, (4 + reader.buffer.size))
 
   t.equal(struct2.f1.length, 3)
   t.equal(struct2.f1[0], 'A'.charCodeAt(0))
@@ -789,12 +789,12 @@ test('Serialization: struct array', function (t) {
   // Serialize the struct to the FBE stream
   let writer = new prototest.StructArrayModel(new fbe.WriteBuffer())
   t.equal(writer.model.FBEType, 125)
-  t.equal(writer.model.FBEOffset, 4)
+  t.equal(writer.model.fbeOffset, 4)
   let serialized = writer.serialize(struct1)
   t.equal(serialized, writer.buffer.size)
   t.true(writer.verify())
   writer.next(serialized)
-  t.equal(writer.model.FBEOffset, (4 + writer.buffer.size))
+  t.equal(writer.model.fbeOffset, (4 + writer.buffer.size))
 
   // Check the serialized FBE size
   t.equal(writer.buffer.size, 1290)
@@ -803,13 +803,13 @@ test('Serialization: struct array', function (t) {
   let struct2 = new prototest.StructArray()
   let reader = new prototest.StructArrayModel(new fbe.ReadBuffer())
   t.equal(reader.model.FBEType, 125)
-  t.equal(reader.model.FBEOffset, 4)
+  t.equal(reader.model.fbeOffset, 4)
   reader.attachBuffer(writer.buffer)
   t.true(reader.verify())
   let deserialized = reader.deserialize(struct2)
   t.true(deserialized.size, reader.buffer.size)
   reader.next(deserialized.size)
-  t.true(reader.model.FBEOffset, (4 + reader.buffer.size))
+  t.true(reader.model.fbeOffset, (4 + reader.buffer.size))
 
   t.equal(struct2.f1.length, 2)
   t.equal(struct2.f1[0], 48)
@@ -888,12 +888,12 @@ test('Serialization: struct vector', function (t) {
   // Serialize the struct to the FBE stream
   let writer = new prototest.StructVectorModel(new fbe.WriteBuffer())
   t.equal(writer.model.FBEType, 130)
-  t.equal(writer.model.FBEOffset, 4)
+  t.equal(writer.model.fbeOffset, 4)
   let serialized = writer.serialize(struct1)
   t.equal(serialized, writer.buffer.size)
   t.true(writer.verify())
   writer.next(serialized)
-  t.equal(writer.model.FBEOffset, (4 + writer.buffer.size))
+  t.equal(writer.model.fbeOffset, (4 + writer.buffer.size))
 
   // Check the serialized FBE size
   t.equal(writer.buffer.size, 1370)
@@ -902,13 +902,13 @@ test('Serialization: struct vector', function (t) {
   let struct2 = new prototest.StructVector()
   let reader = new prototest.StructVectorModel(new fbe.ReadBuffer())
   t.equal(reader.model.FBEType, 130)
-  t.equal(reader.model.FBEOffset, 4)
+  t.equal(reader.model.fbeOffset, 4)
   reader.attachBuffer(writer.buffer)
   t.true(reader.verify())
   let deserialized = reader.deserialize(struct2)
   t.true(deserialized.size, reader.buffer.size)
   reader.next(deserialized.size)
-  t.true(reader.model.FBEOffset, (4 + reader.buffer.size))
+  t.true(reader.model.fbeOffset, (4 + reader.buffer.size))
 
   t.equal(struct2.f1.length, 2)
   t.equal(struct2.f1[0], 48)
@@ -987,12 +987,12 @@ test('Serialization: struct list', function (t) {
   // Serialize the struct to the FBE stream
   let writer = new prototest.StructListModel(new fbe.WriteBuffer())
   t.equal(writer.model.FBEType, 131)
-  t.equal(writer.model.FBEOffset, 4)
+  t.equal(writer.model.fbeOffset, 4)
   let serialized = writer.serialize(struct1)
   t.equal(serialized, writer.buffer.size)
   t.true(writer.verify())
   writer.next(serialized)
-  t.equal(writer.model.FBEOffset, (4 + writer.buffer.size))
+  t.equal(writer.model.fbeOffset, (4 + writer.buffer.size))
 
   // Check the serialized FBE size
   t.equal(writer.buffer.size, 1370)
@@ -1001,13 +1001,13 @@ test('Serialization: struct list', function (t) {
   let struct2 = new prototest.StructList()
   let reader = new prototest.StructListModel(new fbe.ReadBuffer())
   t.equal(reader.model.FBEType, 131)
-  t.equal(reader.model.FBEOffset, 4)
+  t.equal(reader.model.fbeOffset, 4)
   reader.attachBuffer(writer.buffer)
   t.true(reader.verify())
   let deserialized = reader.deserialize(struct2)
   t.true(deserialized.size, reader.buffer.size)
   reader.next(deserialized.size)
-  t.true(reader.model.FBEOffset, (4 + reader.buffer.size))
+  t.true(reader.model.fbeOffset, (4 + reader.buffer.size))
 
   t.equal(struct2.f1.length, 2)
   t.equal(struct2.f1[0], 48)
@@ -1079,12 +1079,12 @@ test('Serialization: struct set', function (t) {
   // Serialize the struct to the FBE stream
   let writer = new prototest.StructSetModel(new fbe.WriteBuffer())
   t.equal(writer.model.FBEType, 132)
-  t.equal(writer.model.FBEOffset, 4)
+  t.equal(writer.model.fbeOffset, 4)
   let serialized = writer.serialize(struct1)
   t.equal(serialized, writer.buffer.size)
   t.true(writer.verify())
   writer.next(serialized)
-  t.equal(writer.model.FBEOffset, (4 + writer.buffer.size))
+  t.equal(writer.model.fbeOffset, (4 + writer.buffer.size))
 
   // Check the serialized FBE size
   t.equal(writer.buffer.size, 843)
@@ -1093,13 +1093,13 @@ test('Serialization: struct set', function (t) {
   let struct2 = new prototest.StructSet()
   let reader = new prototest.StructSetModel(new fbe.ReadBuffer())
   t.equal(reader.model.FBEType, 132)
-  t.equal(reader.model.FBEOffset, 4)
+  t.equal(reader.model.fbeOffset, 4)
   reader.attachBuffer(writer.buffer)
   t.true(reader.verify())
   let deserialized = reader.deserialize(struct2)
   t.true(deserialized.size, reader.buffer.size)
   reader.next(deserialized.size)
-  t.true(reader.model.FBEOffset, (4 + reader.buffer.size))
+  t.true(reader.model.fbeOffset, (4 + reader.buffer.size))
 
   let found
 
@@ -1163,12 +1163,12 @@ test('Serialization: struct map', function (t) {
   // Serialize the struct to the FBE stream
   let writer = new prototest.StructMapModel(new fbe.WriteBuffer())
   t.equal(writer.model.FBEType, 140)
-  t.equal(writer.model.FBEOffset, 4)
+  t.equal(writer.model.fbeOffset, 4)
   let serialized = writer.serialize(struct1)
   t.equal(serialized, writer.buffer.size)
   t.true(writer.verify())
   writer.next(serialized)
-  t.equal(writer.model.FBEOffset, (4 + writer.buffer.size))
+  t.equal(writer.model.fbeOffset, (4 + writer.buffer.size))
 
   // Check the serialized FBE size
   t.equal(writer.buffer.size, 1450)
@@ -1177,13 +1177,13 @@ test('Serialization: struct map', function (t) {
   let struct2 = new prototest.StructMap()
   let reader = new prototest.StructMapModel(new fbe.ReadBuffer())
   t.equal(reader.model.FBEType, 140)
-  t.equal(reader.model.FBEOffset, 4)
+  t.equal(reader.model.fbeOffset, 4)
   reader.attachBuffer(writer.buffer)
   t.true(reader.verify())
   let deserialized = reader.deserialize(struct2)
   t.true(deserialized.size, reader.buffer.size)
   reader.next(deserialized.size)
-  t.true(reader.model.FBEOffset, (4 + reader.buffer.size))
+  t.true(reader.model.fbeOffset, (4 + reader.buffer.size))
 
   t.equal(struct2.f1.size, 2)
   t.equal(struct2.f1.get(10), 48)
@@ -1249,12 +1249,12 @@ test('Serialization: struct hash', function (t) {
   // Serialize the struct to the FBE stream
   let writer = new prototest.StructHashModel(new fbe.WriteBuffer())
   t.equal(writer.model.FBEType, 141)
-  t.equal(writer.model.FBEOffset, 4)
+  t.equal(writer.model.fbeOffset, 4)
   let serialized = writer.serialize(struct1)
   t.equal(serialized, writer.buffer.size)
   t.true(writer.verify())
   writer.next(serialized)
-  t.equal(writer.model.FBEOffset, (4 + writer.buffer.size))
+  t.equal(writer.model.fbeOffset, (4 + writer.buffer.size))
 
   // Check the serialized FBE size
   t.equal(writer.buffer.size, 1570)
@@ -1263,13 +1263,13 @@ test('Serialization: struct hash', function (t) {
   let struct2 = new prototest.StructHash()
   let reader = new prototest.StructHashModel(new fbe.ReadBuffer())
   t.equal(reader.model.FBEType, 141)
-  t.equal(reader.model.FBEOffset, 4)
+  t.equal(reader.model.fbeOffset, 4)
   reader.attachBuffer(writer.buffer)
   t.true(reader.verify())
   let deserialized = reader.deserialize(struct2)
   t.true(deserialized.size, reader.buffer.size)
   reader.next(deserialized.size)
-  t.true(reader.model.FBEOffset, (4 + reader.buffer.size))
+  t.true(reader.model.fbeOffset, (4 + reader.buffer.size))
 
   t.equal(struct2.f1.size, 2)
   t.equal(struct2.f1.get('10'), 48)
@@ -1319,12 +1319,12 @@ test('Serialization: struct hash extended', function (t) {
   // Serialize the struct to the FBE stream
   let writer = new prototest.StructHashExModel(new fbe.WriteBuffer())
   t.equal(writer.model.FBEType, 142)
-  t.equal(writer.model.FBEOffset, 4)
+  t.equal(writer.model.fbeOffset, 4)
   let serialized = writer.serialize(struct1)
   t.equal(serialized, writer.buffer.size)
   t.true(writer.verify())
   writer.next(serialized)
-  t.equal(writer.model.FBEOffset, (4 + writer.buffer.size))
+  t.equal(writer.model.fbeOffset, (4 + writer.buffer.size))
 
   // Check the serialized FBE size
   t.equal(writer.buffer.size, 7879)
@@ -1333,13 +1333,13 @@ test('Serialization: struct hash extended', function (t) {
   let struct2 = new prototest.StructHashEx()
   let reader = new prototest.StructHashExModel(new fbe.ReadBuffer())
   t.equal(reader.model.FBEType, 142)
-  t.equal(reader.model.FBEOffset, 4)
+  t.equal(reader.model.fbeOffset, 4)
   reader.attachBuffer(writer.buffer)
   t.true(reader.verify())
   let deserialized = reader.deserialize(struct2)
   t.true(deserialized.size, reader.buffer.size)
   reader.next(deserialized.size)
-  t.true(reader.model.FBEOffset, (4 + reader.buffer.size))
+  t.true(reader.model.fbeOffset, (4 + reader.buffer.size))
 
   // Javascript maps are limited to get object key with custom key comparator!
   t.equal(struct2.f1.size, 2)

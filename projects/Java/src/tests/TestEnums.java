@@ -13,12 +13,12 @@ public class TestEnums
 
         // Serialize enums to the FBE stream
         var writer = new enums.fbe.EnumsModel();
-        Assert.assertEquals(writer.model.FBEOffset(), 4);
+        Assert.assertEquals(writer.model.fbeOffset(), 4);
         long serialized = writer.serialize(enums1);
         Assert.assertEquals(serialized, writer.getBuffer().getSize());
         Assert.assertTrue(writer.verify());
         writer.next(serialized);
-        Assert.assertEquals(writer.model.FBEOffset(), (4 + writer.getBuffer().getSize()));
+        Assert.assertEquals(writer.model.fbeOffset(), (4 + writer.getBuffer().getSize()));
 
         // Check the serialized FBE size
         Assert.assertEquals(writer.getBuffer().getSize(), 232);
@@ -26,13 +26,13 @@ public class TestEnums
         // Deserialize enums from the FBE stream
         var enums2 = new enums.Enums();
         var reader = new enums.fbe.EnumsModel();
-        Assert.assertEquals(reader.model.FBEOffset(), 4);
+        Assert.assertEquals(reader.model.fbeOffset(), 4);
         reader.attach(writer.getBuffer());
         Assert.assertTrue(reader.verify());
         long deserialized = reader.deserialize(enums2);
         Assert.assertEquals(deserialized, reader.getBuffer().getSize());
         reader.next(deserialized);
-        Assert.assertEquals(reader.model.FBEOffset(), (4 + reader.getBuffer().getSize()));
+        Assert.assertEquals(reader.model.fbeOffset(), (4 + reader.getBuffer().getSize()));
 
         Assert.assertEquals(enums2.byte0, enums.EnumByte.ENUM_VALUE_0);
         Assert.assertEquals(enums2.byte1, enums.EnumByte.ENUM_VALUE_1);

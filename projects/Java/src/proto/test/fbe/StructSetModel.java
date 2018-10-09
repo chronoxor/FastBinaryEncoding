@@ -23,7 +23,7 @@ public final class StructSetModel extends Model
     public StructSetModel(Buffer buffer) { super(buffer); model = new FieldModelStructSet(getBuffer(), 4); }
 
     // Get the model size
-    public long FBESize() { return model.FBESize() + model.FBEExtra(); }
+    public long fbeSize() { return model.fbeSize() + model.fbeExtra(); }
     // Get the model type
     public static final long FBETypeConst = FieldModelStructSet.FBETypeConst;
     public long FBEType() { return FBETypeConst; }
@@ -31,11 +31,11 @@ public final class StructSetModel extends Model
     // Check if the struct value is valid
     public boolean verify()
     {
-        if ((getBuffer().getOffset() + model.FBEOffset() - 4) > getBuffer().getSize())
+        if ((getBuffer().getOffset() + model.fbeOffset() - 4) > getBuffer().getSize())
             return false;
 
-        int fbeFullSize = readInt32(model.FBEOffset() - 4);
-        if (fbeFullSize < model.FBESize())
+        int fbeFullSize = readInt32(model.fbeOffset() - 4);
+        if (fbeFullSize < model.fbeSize())
             return false;
 
         return model.verify();
@@ -44,7 +44,7 @@ public final class StructSetModel extends Model
     // Create a new model (begin phase)
     public long createBegin()
     {
-        long fbeBegin = getBuffer().allocate(4 + model.FBESize());
+        long fbeBegin = getBuffer().allocate(4 + model.fbeSize());
         return fbeBegin;
     }
 
@@ -53,7 +53,7 @@ public final class StructSetModel extends Model
     {
         long fbeEnd = getBuffer().getSize();
         int fbeFullSize = (int)(fbeEnd - fbeBegin);
-        write(model.FBEOffset() - 4, fbeFullSize);
+        write(model.fbeOffset() - 4, fbeFullSize);
         return fbeFullSize;
     }
 
@@ -70,15 +70,15 @@ public final class StructSetModel extends Model
     public StructSet deserialize() { var value = new StructSet(); deserialize(value); return value; }
     public long deserialize(StructSet value)
     {
-        if ((getBuffer().getOffset() + model.FBEOffset() - 4) > getBuffer().getSize())
+        if ((getBuffer().getOffset() + model.fbeOffset() - 4) > getBuffer().getSize())
         {
             value = new StructSet();
             return 0;
         }
 
-        int fbeFullSize = readInt32(model.FBEOffset() - 4);
-        assert (fbeFullSize >= model.FBESize()) : "Model is broken!";
-        if (fbeFullSize < model.FBESize())
+        int fbeFullSize = readInt32(model.fbeOffset() - 4);
+        assert (fbeFullSize >= model.fbeSize()) : "Model is broken!";
+        if (fbeFullSize < model.fbeSize())
         {
             value = new StructSet();
             return 0;
@@ -91,6 +91,6 @@ public final class StructSetModel extends Model
     // Move to the next struct value
     public void next(long prev)
     {
-        model.FBEShift(prev);
+        model.fbeShift(prev);
     }
 }

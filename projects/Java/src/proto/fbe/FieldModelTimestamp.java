@@ -18,7 +18,7 @@ public final class FieldModelTimestamp extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return 8; }
+    public long fbeSize() { return 8; }
 
     // Get the value
     public Instant get() { return get(Instant.EPOCH); }
@@ -28,10 +28,10 @@ public final class FieldModelTimestamp extends FieldModel
         if (defaults == null)
             throw new IllegalArgumentException("Invalid default timestamp value!");
 
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return defaults;
 
-        long nanoseconds = readInt64(FBEOffset());
+        long nanoseconds = readInt64(fbeOffset());
         return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
     }
 
@@ -42,11 +42,11 @@ public final class FieldModelTimestamp extends FieldModel
         if (value == null)
             throw new IllegalArgumentException("Invalid timestamp value!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
         long nanoseconds = value.getEpochSecond() * 1000000000 + value.getNano();
-        write(FBEOffset(), nanoseconds);
+        write(fbeOffset(), nanoseconds);
     }
 }

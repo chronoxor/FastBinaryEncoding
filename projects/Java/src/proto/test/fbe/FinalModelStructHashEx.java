@@ -28,11 +28,11 @@ public final class FinalModelStructHashEx extends FinalModel
     }
 
     // Get the allocation size
-    public long FBEAllocationSize(StructHashEx fbeValue)
+    public long fbeAllocationSize(StructHashEx fbeValue)
     {
         long fbeResult = 0
-            + f1.FBEAllocationSize(fbeValue.f1)
-            + f2.FBEAllocationSize(fbeValue.f2)
+            + f1.fbeAllocationSize(fbeValue.f1)
+            + f2.fbeAllocationSize(fbeValue.f2)
             ;
         return fbeResult;
     }
@@ -45,9 +45,9 @@ public final class FinalModelStructHashEx extends FinalModel
     @Override
     public long verify()
     {
-        _buffer.shift(FBEOffset());
+        _buffer.shift(fbeOffset());
         long fbeResult = verifyFields();
-        _buffer.unshift(FBEOffset());
+        _buffer.unshift(fbeOffset());
         return fbeResult;
     }
 
@@ -57,13 +57,13 @@ public final class FinalModelStructHashEx extends FinalModel
         long fbeCurrentOffset = 0;
         long fbeFieldSize = 0;
 
-        f1.FBEOffset(fbeCurrentOffset);
+        f1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = f1.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
 
-        f2.FBEOffset(fbeCurrentOffset);
+        f2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize = f2.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
@@ -76,9 +76,9 @@ public final class FinalModelStructHashEx extends FinalModel
     public StructHashEx get(Size fbeSize) { return get(fbeSize, new StructHashEx()); }
     public StructHashEx get(Size fbeSize, StructHashEx fbeValue)
     {
-        _buffer.shift(FBEOffset());
+        _buffer.shift(fbeOffset());
         fbeSize.value = getFields(fbeValue);
-        _buffer.unshift(FBEOffset());
+        _buffer.unshift(fbeOffset());
         return fbeValue;
     }
 
@@ -89,12 +89,12 @@ public final class FinalModelStructHashEx extends FinalModel
         long fbeCurrentSize = 0;
         var fbeFieldSize = new Size(0);
 
-        f1.FBEOffset(fbeCurrentOffset);
+        f1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = f1.get(fbeValue.f1);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        f2.FBEOffset(fbeCurrentOffset);
+        f2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = f2.get(fbeValue.f2);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
@@ -105,9 +105,9 @@ public final class FinalModelStructHashEx extends FinalModel
     // Set the struct value
     public long set(StructHashEx fbeValue)
     {
-        _buffer.shift(FBEOffset());
+        _buffer.shift(fbeOffset());
         long fbeSize = setFields(fbeValue);
-        _buffer.unshift(FBEOffset());
+        _buffer.unshift(fbeOffset());
         return fbeSize;
     }
 
@@ -118,12 +118,12 @@ public final class FinalModelStructHashEx extends FinalModel
         long fbeCurrentSize = 0;
         var fbeFieldSize = new Size(0);
 
-        f1.FBEOffset(fbeCurrentOffset);
+        f1.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = f1.set(fbeValue.f1);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
-        f2.FBEOffset(fbeCurrentOffset);
+        f2.fbeOffset(fbeCurrentOffset);
         fbeFieldSize.value = f2.set(fbeValue.f2);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;

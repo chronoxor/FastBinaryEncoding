@@ -27,26 +27,26 @@ public final class FieldModelVectorByte extends FieldModel
 
     // Get the field size
     @Override
-    public long FBESize() { return 4; }
+    public long fbeSize() { return 4; }
     // Get the field extra size
     @Override
-    public long FBEExtra()
+    public long fbeExtra()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeVectorOffset = readInt32(FBEOffset());
+        int fbeVectorOffset = readInt32(fbeOffset());
         if ((fbeVectorOffset == 0) || ((_buffer.getOffset() + fbeVectorOffset + 4) > _buffer.getSize()))
             return 0;
 
         int fbeVectorSize = readInt32(fbeVectorOffset);
 
         long fbeResult = 4;
-        _model.FBEOffset(fbeVectorOffset + 4);
+        _model.fbeOffset(fbeVectorOffset + 4);
         for (int i = fbeVectorSize; i-- > 0;)
         {
-            fbeResult += _model.FBESize() + _model.FBEExtra();
-            _model.FBEShift(_model.FBESize());
+            fbeResult += _model.fbeSize() + _model.fbeExtra();
+            _model.fbeShift(_model.fbeSize());
         }
         return fbeResult;
     }
@@ -54,20 +54,20 @@ public final class FieldModelVectorByte extends FieldModel
     // Get the vector offset
     public long getOffset()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeVectorOffset = readInt32(FBEOffset());
+        int fbeVectorOffset = readInt32(fbeOffset());
         return fbeVectorOffset;
     }
 
     // Get the vector size
     public long getSize()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeVectorOffset = readInt32(FBEOffset());
+        int fbeVectorOffset = readInt32(fbeOffset());
         if ((fbeVectorOffset == 0) || ((_buffer.getOffset() + fbeVectorOffset + 4) > _buffer.getSize()))
             return 0;
 
@@ -78,31 +78,31 @@ public final class FieldModelVectorByte extends FieldModel
     // Vector index operator
     public FieldModelByte getItem(long index)
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
 
-        int fbeVectorOffset = readInt32(FBEOffset());
+        int fbeVectorOffset = readInt32(fbeOffset());
         assert ((fbeVectorOffset > 0) && ((_buffer.getOffset() + fbeVectorOffset + 4) <= _buffer.getSize())) : "Model is broken!";
 
         int fbeVectorSize = readInt32(fbeVectorOffset);
         assert (index < fbeVectorSize) : "Index is out of bounds!";
 
-        _model.FBEOffset(fbeVectorOffset + 4);
-        _model.FBEShift(index * _model.FBESize());
+        _model.fbeOffset(fbeVectorOffset + 4);
+        _model.fbeShift(index * _model.fbeSize());
         return _model;
     }
 
     // Resize the vector and get its first model
     public FieldModelByte resize(long size)
     {
-        int fbeVectorSize = (int)(size * _model.FBESize());
+        int fbeVectorSize = (int)(size * _model.fbeSize());
         int fbeVectorOffset = (int)(_buffer.allocate(4 + fbeVectorSize) - _buffer.getOffset());
         assert ((fbeVectorOffset > 0) && ((_buffer.getOffset() + fbeVectorOffset + 4) <= _buffer.getSize())) : "Model is broken!";
 
-        write(FBEOffset(), fbeVectorOffset);
+        write(fbeOffset(), fbeVectorOffset);
         write(fbeVectorOffset, (int)size);
         write(fbeVectorOffset + 4, (byte)0, fbeVectorSize);
 
-        _model.FBEOffset(fbeVectorOffset + 4);
+        _model.fbeOffset(fbeVectorOffset + 4);
         return _model;
     }
 
@@ -110,10 +110,10 @@ public final class FieldModelVectorByte extends FieldModel
     @Override
     public boolean verify()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return true;
 
-        int fbeVectorOffset = readInt32(FBEOffset());
+        int fbeVectorOffset = readInt32(fbeOffset());
         if (fbeVectorOffset == 0)
             return true;
 
@@ -122,12 +122,12 @@ public final class FieldModelVectorByte extends FieldModel
 
         int fbeVectorSize = readInt32(fbeVectorOffset);
 
-        _model.FBEOffset(fbeVectorOffset + 4);
+        _model.fbeOffset(fbeVectorOffset + 4);
         for (int i = fbeVectorSize; i-- > 0;)
         {
             if (!_model.verify())
                 return false;
-            _model.FBEShift(_model.FBESize());
+            _model.fbeShift(_model.fbeSize());
         }
 
         return true;
@@ -153,7 +153,7 @@ public final class FieldModelVectorByte extends FieldModel
         {
             Byte value = fbeModel.get();
             values.add(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
@@ -175,7 +175,7 @@ public final class FieldModelVectorByte extends FieldModel
         {
             Byte value = fbeModel.get();
             values.add(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
@@ -197,7 +197,7 @@ public final class FieldModelVectorByte extends FieldModel
         {
             Byte value = fbeModel.get();
             values.add(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
@@ -208,15 +208,15 @@ public final class FieldModelVectorByte extends FieldModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
         var fbeModel = resize(values.size());
         for (var value : values)
         {
             fbeModel.set(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
@@ -227,15 +227,15 @@ public final class FieldModelVectorByte extends FieldModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
         var fbeModel = resize(values.size());
         for (var value : values)
         {
             fbeModel.set(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
@@ -246,15 +246,15 @@ public final class FieldModelVectorByte extends FieldModel
         if (values == null)
             throw new IllegalArgumentException("Invalid values parameter!");
 
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
         var fbeModel = resize(values.size());
         for (var value : values)
         {
             fbeModel.set(value);
-            fbeModel.FBEShift(fbeModel.FBESize());
+            fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 }

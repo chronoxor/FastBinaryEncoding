@@ -26,43 +26,43 @@ public final class FieldModelStructSet extends FieldModel
     {
         super(buffer, offset);
         f1 = new FieldModelVectorByte(buffer, 4 + 4);
-        f2 = new FieldModelVectorEnumSimple(buffer, f1.FBEOffset() + f1.FBESize());
-        f3 = new FieldModelVectorFlagsSimple(buffer, f2.FBEOffset() + f2.FBESize());
-        f4 = new FieldModelVectorStructSimple(buffer, f3.FBEOffset() + f3.FBESize());
+        f2 = new FieldModelVectorEnumSimple(buffer, f1.fbeOffset() + f1.fbeSize());
+        f3 = new FieldModelVectorFlagsSimple(buffer, f2.fbeOffset() + f2.fbeSize());
+        f4 = new FieldModelVectorStructSimple(buffer, f3.fbeOffset() + f3.fbeSize());
     }
 
     // Get the field size
     @Override
-    public long FBESize() { return 4; }
+    public long fbeSize() { return 4; }
     // Get the field body size
     public long FBEBody()
     {
         long fbeResult = 4 + 4
-            + f1.FBESize()
-            + f2.FBESize()
-            + f3.FBESize()
-            + f4.FBESize()
+            + f1.fbeSize()
+            + f2.fbeSize()
+            + f3.fbeSize()
+            + f4.fbeSize()
             ;
         return fbeResult;
     }
     // Get the field extra size
     @Override
-    public long FBEExtra()
+    public long fbeExtra()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeStructOffset = readInt32(FBEOffset());
+        int fbeStructOffset = readInt32(fbeOffset());
         if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4) > _buffer.getSize()))
             return 0;
 
         _buffer.shift(fbeStructOffset);
 
         long fbeResult = FBEBody()
-            + f1.FBEExtra()
-            + f2.FBEExtra()
-            + f3.FBEExtra()
-            + f4.FBEExtra()
+            + f1.fbeExtra()
+            + f2.fbeExtra()
+            + f3.fbeExtra()
+            + f4.fbeExtra()
             ;
 
         _buffer.unshift(fbeStructOffset);
@@ -78,10 +78,10 @@ public final class FieldModelStructSet extends FieldModel
     public boolean verify() { return verify(true); }
     public boolean verify(boolean fbeVerifyType)
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return true;
 
-        int fbeStructOffset = readInt32(FBEOffset());
+        int fbeStructOffset = readInt32(fbeOffset());
         if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4 + 4) > _buffer.getSize()))
             return false;
 
@@ -104,29 +104,29 @@ public final class FieldModelStructSet extends FieldModel
     {
         long fbeCurrentSize = 4 + 4;
 
-        if ((fbeCurrentSize + f1.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f1.fbeSize()) > fbeStructSize)
             return true;
         if (!f1.verify())
             return false;
-        fbeCurrentSize += f1.FBESize();
+        fbeCurrentSize += f1.fbeSize();
 
-        if ((fbeCurrentSize + f2.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f2.fbeSize()) > fbeStructSize)
             return true;
         if (!f2.verify())
             return false;
-        fbeCurrentSize += f2.FBESize();
+        fbeCurrentSize += f2.fbeSize();
 
-        if ((fbeCurrentSize + f3.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f3.fbeSize()) > fbeStructSize)
             return true;
         if (!f3.verify())
             return false;
-        fbeCurrentSize += f3.FBESize();
+        fbeCurrentSize += f3.fbeSize();
 
-        if ((fbeCurrentSize + f4.FBESize()) > fbeStructSize)
+        if ((fbeCurrentSize + f4.fbeSize()) > fbeStructSize)
             return true;
         if (!f4.verify())
             return false;
-        fbeCurrentSize += f4.FBESize();
+        fbeCurrentSize += f4.fbeSize();
 
         return true;
     }
@@ -134,10 +134,10 @@ public final class FieldModelStructSet extends FieldModel
     // Get the struct value (begin phase)
     public long getBegin()
     {
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
-        int fbeStructOffset = readInt32(FBEOffset());
+        int fbeStructOffset = readInt32(fbeOffset());
         assert ((fbeStructOffset > 0) && ((_buffer.getOffset() + fbeStructOffset + 4 + 4) <= _buffer.getSize())) : "Model is broken!";
         if ((fbeStructOffset == 0) || ((_buffer.getOffset() + fbeStructOffset + 4 + 4) > _buffer.getSize()))
             return 0;
@@ -176,36 +176,36 @@ public final class FieldModelStructSet extends FieldModel
     {
         long fbeCurrentSize = 4 + 4;
 
-        if ((fbeCurrentSize + f1.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f1.fbeSize()) <= fbeStructSize)
             f1.get(fbeValue.f1);
         else
             fbeValue.f1.clear();
-        fbeCurrentSize += f1.FBESize();
+        fbeCurrentSize += f1.fbeSize();
 
-        if ((fbeCurrentSize + f2.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f2.fbeSize()) <= fbeStructSize)
             f2.get(fbeValue.f2);
         else
             fbeValue.f2.clear();
-        fbeCurrentSize += f2.FBESize();
+        fbeCurrentSize += f2.fbeSize();
 
-        if ((fbeCurrentSize + f3.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f3.fbeSize()) <= fbeStructSize)
             f3.get(fbeValue.f3);
         else
             fbeValue.f3.clear();
-        fbeCurrentSize += f3.FBESize();
+        fbeCurrentSize += f3.fbeSize();
 
-        if ((fbeCurrentSize + f4.FBESize()) <= fbeStructSize)
+        if ((fbeCurrentSize + f4.fbeSize()) <= fbeStructSize)
             f4.get(fbeValue.f4);
         else
             fbeValue.f4.clear();
-        fbeCurrentSize += f4.FBESize();
+        fbeCurrentSize += f4.fbeSize();
     }
 
     // Set the struct value (begin phase)
     public long setBegin()
     {
-        assert ((_buffer.getOffset() + FBEOffset() + FBESize()) <= _buffer.getSize()) : "Model is broken!";
-        if ((_buffer.getOffset() + FBEOffset() + FBESize()) > _buffer.getSize())
+        assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
+        if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return 0;
 
         int fbeStructSize = (int)FBEBody();
@@ -214,7 +214,7 @@ public final class FieldModelStructSet extends FieldModel
         if ((fbeStructOffset <= 0) || ((_buffer.getOffset() + fbeStructOffset + fbeStructSize) > _buffer.getSize()))
             return 0;
 
-        write(FBEOffset(), fbeStructOffset);
+        write(fbeOffset(), fbeStructOffset);
         write(fbeStructOffset, fbeStructSize);
         write(fbeStructOffset + 4, (int)FBEType());
 
