@@ -236,6 +236,9 @@ open class StructArray : Comparable<Any?>
         return sb.toString()
     }
 
-    //public String toJson() { return test.fbe.Json.getJsonEngine().toJson(this); }
-    //public static StructArray fromJson(String json) { return test.fbe.Json.getJsonEngine().fromJson(json, StructArray.class); }
+    open fun toJson(): String = test.fbe.Json.engine.toJson(this)
+    companion object
+    {
+        fun fromJson(json: String): StructArray = test.fbe.Json.engine.fromJson(json, StructArray::class.java)
+    }
 }

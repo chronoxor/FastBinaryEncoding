@@ -22,19 +22,19 @@ public final class Json
     private static final Gson _engine;
 
     // Get the JSON engine
-    public static Gson getJsonEngine() { return _engine; }
+    public static Gson getEngine() { return _engine; }
 
     static
     {
-        _engine = Register(new GsonBuilder()).create();
+        _engine = register(new GsonBuilder()).create();
     }
 
     private Json() {}
 
-    public static GsonBuilder Register(GsonBuilder builder)
+    public static GsonBuilder register(GsonBuilder builder)
     {
-        fbe.Json.Register(builder);
-        proto.fbe.Json.Register(builder);
+        fbe.Json.register(builder);
+        proto.fbe.Json.register(builder);
         builder.registerTypeAdapter(OrderSide.class, new OrderSideJson());
         builder.registerTypeAdapter(OrderType.class, new OrderTypeJson());
         builder.registerTypeAdapter(StateEx.class, new StateExJson());

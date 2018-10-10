@@ -98,6 +98,9 @@ open class StructBytes : Comparable<Any?>
         return sb.toString()
     }
 
-    //public String toJson() { return test.fbe.Json.getJsonEngine().toJson(this); }
-    //public static StructBytes fromJson(String json) { return test.fbe.Json.getJsonEngine().fromJson(json, StructBytes.class); }
+    open fun toJson(): String = test.fbe.Json.engine.toJson(this)
+    companion object
+    {
+        fun fromJson(json: String): StructBytes = test.fbe.Json.engine.fromJson(json, StructBytes::class.java)
+    }
 }

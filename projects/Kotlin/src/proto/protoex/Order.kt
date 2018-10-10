@@ -124,6 +124,9 @@ open class Order : Comparable<Any?>
         return sb.toString()
     }
 
-    //public String toJson() { return protoex.fbe.Json.getJsonEngine().toJson(this); }
-    //public static Order fromJson(String json) { return protoex.fbe.Json.getJsonEngine().fromJson(json, Order.class); }
+    open fun toJson(): String = protoex.fbe.Json.engine.toJson(this)
+    companion object
+    {
+        fun fromJson(json: String): Order = protoex.fbe.Json.engine.fromJson(json, Order::class.java)
+    }
 }

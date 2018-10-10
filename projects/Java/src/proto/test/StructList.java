@@ -223,6 +223,6 @@ public class StructList implements Comparable<Object>
         return sb.toString();
     }
 
-    public String toJson() { return test.fbe.Json.getJsonEngine().toJson(this); }
-    public static StructList fromJson(String json) { return test.fbe.Json.getJsonEngine().fromJson(json, StructList.class); }
+    public String toJson() { return test.fbe.Json.getEngine().toJson(this); }
+    public static StructList fromJson(String json) { return test.fbe.Json.getEngine().fromJson(json, StructList.class); }
 }

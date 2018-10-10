@@ -65,8 +65,8 @@ void GeneratorKotlin::Generate(const std::shared_ptr<Package>& package)
         GenerateFBESender("fbe");
         GenerateFBEReceiver("fbe");
     }
-    //if (JSON())
-        //GenerateFBEJson("fbe");
+    if (JSON())
+        GenerateFBEJson("fbe");
 
     GeneratePackage(package);
 }
@@ -3865,7 +3865,7 @@ void GeneratorKotlin::GenerateFBEJson(const std::string& package)
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / "Json.java";
+    CppCommon::Path file = path / "Json.kt";
     Open(file);
 
     // Generate headers
@@ -3874,94 +3874,81 @@ void GeneratorKotlin::GenerateFBEJson(const std::string& package)
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import com.google.gson.*;");
+    WriteLineIndent("import com.google.gson.*");
 
     std::string code = R"CODE(
-final class BytesJson implements JsonSerializer<byte[]>, JsonDeserializer<byte[]>
+internal class BytesJson : JsonSerializer<ByteArray>, JsonDeserializer<ByteArray>
 {
-    @Override
-    public JsonElement serialize(byte[] src, Type typeOfSrc, JsonSerializationContext context)
+    override fun serialize(src: ByteArray, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
     {
-        return new JsonPrimitive(Base64.getEncoder().encodeToString(src));
+        return JsonPrimitive(Base64.getEncoder().encodeToString(src))
     }
 
-    @Override
-    public byte[] deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+    @Throws(JsonParseException::class)
+    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): ByteArray
     {
-        return Base64.getDecoder().decode(json.getAsString());
+        return Base64.getDecoder().decode(json.asString)
     }
 }
 
-final class InstantJson implements JsonSerializer<Instant>, JsonDeserializer<Instant>
+internal class InstantJson : JsonSerializer<Instant>, JsonDeserializer<Instant>
 {
-    @Override
-    public JsonElement serialize(Instant src, Type typeOfSrc, JsonSerializationContext context)
+    override fun serialize(src: Instant, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
     {
-        long nanoseconds = src.getEpochSecond() * 1000000000 + src.getNano();
-        return new JsonPrimitive(nanoseconds);
+        val nanoseconds = src.epochSecond * 1000000000 + src.nano
+        return JsonPrimitive(nanoseconds)
     }
 
-    @Override
-    public Instant deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+    @Throws(JsonParseException::class)
+    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): Instant
     {
-        long nanoseconds = json.getAsJsonPrimitive().getAsLong();
-        return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
+        val nanoseconds = json.asJsonPrimitive.asLong
+        return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
     }
 }
 
-final class BigDecimalJson implements JsonSerializer<BigDecimal>, JsonDeserializer<BigDecimal>
+internal class BigDecimalJson : JsonSerializer<BigDecimal>, JsonDeserializer<BigDecimal>
 {
-    @Override
-    public JsonElement serialize(BigDecimal src, Type typeOfSrc, JsonSerializationContext context)
+    override fun serialize(src: BigDecimal, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
     {
-        return new JsonPrimitive(src.toPlainString());
+        return JsonPrimitive(src.toPlainString())
     }
 
-    @Override
-    public BigDecimal deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+    @Throws(JsonParseException::class)
+    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): BigDecimal
     {
-        return new BigDecimal(json.getAsJsonPrimitive().getAsString());
+        return BigDecimal(json.asJsonPrimitive.asString)
     }
 }
 
-final class UUIDJson implements JsonSerializer<UUID>, JsonDeserializer<UUID>
+internal class UUIDJson : JsonSerializer<UUID>, JsonDeserializer<UUID>
 {
-    @Override
-    public JsonElement serialize(UUID src, Type typeOfSrc, JsonSerializationContext context)
+    override fun serialize(src: UUID, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
     {
-        return new JsonPrimitive(src.toString());
+        return JsonPrimitive(src.toString())
     }
 
-    @Override
-    public UUID deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
-    {
-        return UUID.fromString(json.getAsJsonPrimitive().getAsString());
+    @Throws(JsonParseException::class)
+    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): UUID {
+        return UUID.fromString(json.asJsonPrimitive.asString)
     }
 }
 
 // Fast Binary Encoding base JSON class
-public final class Json
+@Suppress("MemberVisibilityCanBePrivate")
+object Json
 {
-    private static final Gson _engine;
-
     // Get the JSON engine
-    public static Gson getJsonEngine() { return _engine; }
+    val engine: Gson = register(GsonBuilder()).create()
 
-    static
+    fun register(builder: GsonBuilder): GsonBuilder
     {
-        _engine = Register(new GsonBuilder()).create();
-    }
-
-    private Json() {}
-
-    public static GsonBuilder Register(GsonBuilder builder)
-    {
-        builder.serializeNulls();
-        builder.registerTypeAdapter(byte[].class, new BytesJson());
-        builder.registerTypeAdapter(Instant.class, new InstantJson());
-        builder.registerTypeAdapter(BigDecimal.class, new BigDecimalJson());
-        builder.registerTypeAdapter(UUID.class, new UUIDJson());
-        return builder;
+        builder.serializeNulls()
+        builder.registerTypeAdapter(ByteArray::class.java, BytesJson())
+        builder.registerTypeAdapter(Instant::class.java, InstantJson())
+        builder.registerTypeAdapter(BigDecimal::class.java, BigDecimalJson())
+        builder.registerTypeAdapter(UUID::class.java, UUIDJson())
+        return builder
     }
 }
 )CODE";
@@ -4070,8 +4057,8 @@ void GeneratorKotlin::GeneratePackage(const std::shared_ptr<Package>& p)
     }
 
     // Generate JSON engine
-    //if (JSON())
-    //    GenerateJson(p);
+    if (JSON())
+        GenerateJson(p);
 }
 
 void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e, const CppCommon::Path& path)
@@ -4206,8 +4193,8 @@ void GeneratorKotlin::GenerateEnum(const std::shared_ptr<Package>& p, const std:
     GenerateEnumClass(p, e, path);
 
     // Generate enum JSON adapter
-    //if (JSON())
-    //    GenerateEnumJson(p, e);
+    if (JSON())
+        GenerateEnumJson(p, e);
 
     // Generate enum field model
     GenerateFBEFieldModelEnumFlags(*p->name, *e->name, ConvertEnumSize(enum_type), ConvertEnumRead(enum_type));
@@ -4371,41 +4358,45 @@ void GeneratorKotlin::GenerateEnumJson(const std::shared_ptr<Package>& p, const 
     std::string adapter_name = *e->name + "Json";
 
     // Open the output file
-    CppCommon::Path output = path / (adapter_name + ".java");
+    CppCommon::Path output = path / (adapter_name + ".kt");
     Open(output);
 
-    // Generate JSON adapter header
+    // Generate headers
     GenerateHeader();
-    GenerateImports(p);
+    GenerateImports(package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import com.google.gson.*;");
+    WriteLineIndent("import fbe.*");
+    WriteLineIndent("import " + package + ".*");
+
+    // Generate custom import
+    WriteLine();
+    WriteLineIndent("import com.google.gson.*");
 
     std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
 
     // Generate JSON adapter body
     WriteLine();
-    WriteLineIndent("public final class " + adapter_name + " implements JsonSerializer<" + enum_name + ">, JsonDeserializer<" + enum_name + ">");
+    WriteLineIndent("class " + adapter_name + " : JsonSerializer<" + enum_name + ">, JsonDeserializer<" + enum_name + ">");
     WriteLineIndent("{");
     Indent(1);
 
     // Generate JSON adapter serialize() method
-    WriteLineIndent("@Override");
-    WriteLineIndent("public JsonElement serialize(" + enum_name + " src, Type typeOfSrc, JsonSerializationContext context)");
+    WriteLineIndent("override fun serialize(src: " + enum_name + ", typeOfSrc: Type, context: JsonSerializationContext): JsonElement");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("return new JsonPrimitive(src.getRaw());");
+    WriteLineIndent("return JsonPrimitive(src.raw" + ConvertEnumFrom(enum_type) + ")");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate JSON adapter deserialize() method
     WriteLine();
-    WriteLineIndent("@Override");
-    WriteLineIndent("public " + enum_name + " deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException");
+    WriteLineIndent("@Throws(JsonParseException::class)");
+    WriteLineIndent("override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): " + enum_name);
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("return new " + enum_name + "(json.getAsJsonPrimitive()." + ConvertEnumGet(enum_type) + "());");
+    WriteLineIndent("return " + enum_name + "(json.asJsonPrimitive." + ConvertEnumGet(enum_type) + ")");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -4594,8 +4585,8 @@ void GeneratorKotlin::GenerateFlags(const std::shared_ptr<Package>& p, const std
     GenerateFlagsClass(p, f, path);
 
     // Generate flags JSON adapter
-    //if (JSON())
-    //    GenerateFlagsJson(p, f);
+    if (JSON())
+        GenerateFlagsJson(p, f);
 
     // Generate flags field model
     GenerateFBEFieldModelEnumFlags(*p->name, *f->name, ConvertEnumSize(flags_type), ConvertEnumRead(flags_type));
@@ -4813,42 +4804,47 @@ void GeneratorKotlin::GenerateFlagsJson(const std::shared_ptr<Package>& p, const
     std::string adapter_name = *f->name + "Json";
 
     // Open the output file
-    CppCommon::Path output = path / (adapter_name + ".java");
+    CppCommon::Path output = path / (adapter_name + ".kt");
     Open(output);
 
-    // Generate JSON adapter header
+    // Generate headers
     GenerateHeader();
-    GenerateImports(p);
+    GenerateImports(package + ".fbe");
 
     // Generate custom import
     WriteLine();
-    WriteLineIndent("import com.google.gson.*;");
+    WriteLineIndent("import fbe.*");
+    WriteLineIndent("import " + package + ".*");
+
+    // Generate custom import
+    WriteLine();
+    WriteLineIndent("import com.google.gson.*");
 
     std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
 
     // Generate JSON adapter body
     WriteLine();
-    WriteLineIndent("public final class " + adapter_name + " implements JsonSerializer<" + flags_name + ">, JsonDeserializer<" + flags_name + ">");
+    WriteLineIndent("class " + adapter_name + " : JsonSerializer<" + flags_name + ">, JsonDeserializer<" + flags_name + ">");
     WriteLineIndent("{");
     Indent(1);
 
     // Generate JSON adapter serialize() method
     WriteLine();
     WriteLineIndent("@Override");
-    WriteLineIndent("public JsonElement serialize(" + flags_name + " src, Type typeOfSrc, JsonSerializationContext context)");
+    WriteLineIndent("override fun serialize(src: " + flags_name + ", typeOfSrc: Type, context: JsonSerializationContext): JsonElement");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("return new JsonPrimitive(src.getRaw());");
+    WriteLineIndent("return JsonPrimitive(src.raw" + ConvertEnumFrom(flags_type) + ")");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate JSON adapter deserialize() method
     WriteLine();
-    WriteLineIndent("@Override");
-    WriteLineIndent("public " + flags_name + " deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException");
+    WriteLineIndent("@Throws(JsonParseException::class)");
+    WriteLineIndent("override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext):" + flags_name);
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("return new " + flags_name + "(json.getAsJsonPrimitive()." + ConvertEnumGet(flags_type) + "());");
+    WriteLineIndent("return " + flags_name + "(json.asJsonPrimitive." + ConvertEnumGet(flags_type) + ")");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5216,8 +5212,14 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
     if (JSON())
     {
         WriteLine();
-        WriteLineIndent("//public String toJson() { return " + *p->name + ".fbe.Json.getJsonEngine().toJson(this); }");
-        WriteLineIndent("//public static " + *s->name + " fromJson(String json) { return " + *p->name + ".fbe.Json.getJsonEngine().fromJson(json, " + *s->name + ".class); }");
+        WriteIndent(std::string((s->base && !s->base->empty()) ? "override" : "open") + " fun toJson(): String = " + *p->name + ".fbe.Json.engine.toJson(this)");
+        WriteLine();
+        WriteLineIndent("companion object");
+        WriteLineIndent("{");
+        Indent(1);
+        WriteLineIndent("fun fromJson(json: String): " + *s->name + " = " + *p->name + ".fbe.Json.engine.fromJson(json, " + *s->name + "::class.java)");
+        Indent(-1);
+        WriteLineIndent("}");
     }
 
     // Generate struct end
@@ -6474,7 +6476,7 @@ void GeneratorKotlin::GenerateJson(const std::shared_ptr<Package>& p)
     CppCommon::Directory::CreateTree(path);
 
     // Open the file
-    CppCommon::Path file = path / "Json.java";
+    CppCommon::Path file = path / "Json.kt";
     Open(file);
 
     // Generate headers
@@ -6486,52 +6488,38 @@ void GeneratorKotlin::GenerateJson(const std::shared_ptr<Package>& p)
     WriteLineIndent("import fbe.*");
     WriteLineIndent("import " + package + ".*");
     WriteLine();
-    WriteLineIndent("import com.google.gson.*;");
+    WriteLineIndent("import com.google.gson.*");
 
     // Generate JSON engine begin
     WriteLine();
     WriteLineIndent("// Fast Binary Encoding " + *p->name + " JSON class");
-    WriteLineIndent("public final class Json");
+    WriteLineIndent("object Json");
     WriteLineIndent("{");
     Indent(1);
 
-    WriteLineIndent("private static final Gson _engine;");
-    WriteLine();
     WriteLineIndent("// Get the JSON engine");
-    WriteLineIndent("public static Gson getJsonEngine() { return _engine; }");
-    WriteLine();
-
-    // Generate JSON engine static initialization
-    WriteLineIndent("static");
-    WriteLineIndent("{");
-    Indent(1);
-    WriteLineIndent("_engine = Register(new GsonBuilder()).create();");
-    Indent(-1);
-    WriteLineIndent("}");
-    WriteLine();
-
-    // Generate JSON engine private constructor
-    WriteLineIndent("private Json() {}");
+    WriteLineIndent("val engine: Gson = register(GsonBuilder()).create()");
     WriteLine();
 
     // Generate JSON engine Register() method
-    WriteLineIndent("public static GsonBuilder Register(GsonBuilder builder)");
+    WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\")");
+    WriteLineIndent("fun register(builder: GsonBuilder): GsonBuilder");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("fbe.Json.Register(builder);");
+    WriteLineIndent("fbe.Json.register(builder)");
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + ".fbe.Json.Register(builder);");
+            WriteLineIndent(*import + ".fbe.Json.register(builder)");
     }
     if (p->body)
     {
         for (const auto& e : p->body->enums)
-            WriteLineIndent("builder.registerTypeAdapter(" + *e->name + ".class, new " + *e->name + "Json());");
+            WriteLineIndent("builder.registerTypeAdapter(" + *e->name + "::class.java, " + *e->name + "Json())");
         for (const auto& f : p->body->flags)
-            WriteLineIndent("builder.registerTypeAdapter(" + *f->name + ".class, new " + *f->name + "Json());");
+            WriteLineIndent("builder.registerTypeAdapter(" + *f->name + "::class.java, " + *f->name + "Json())");
     }
-    WriteLineIndent("return builder;");
+    WriteLineIndent("return builder");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -6667,27 +6655,27 @@ std::string GeneratorKotlin::ConvertEnumSize(const std::string& type)
 std::string GeneratorKotlin::ConvertEnumGet(const std::string& type)
 {
     if (type == "byte")
-        return "getAsByte";
+        return "asByte";
     else if (type == "char")
-        return "getAsByte";
+        return "asByte";
     else if (type == "wchar")
-        return "getAsInt";
+        return "asInt";
     else if (type == "int8")
-        return "getAsByte";
+        return "asByte";
     else if (type == "uint8")
-        return "getAsUByte";
+        return "asByte.toUByte()";
     else if (type == "int16")
-        return "getAsShort";
+        return "asShort";
     else if (type == "uint16")
-        return "getAsUShort";
+        return "asShort.toUShort()";
     else if (type == "int32")
-        return "getAsInt";
+        return "asInt";
     else if (type == "uint32")
-        return "getAsUInt";
+        return "asInt.toUInt()";
     else if (type == "int64")
-        return "getAsLong";
+        return "asLong";
     else if (type == "uint64")
-        return "getAsULong";
+        return "asLong.toULong()";
 
     yyerror("Unsupported enum base type - " + type);
     return "";
@@ -6719,6 +6707,20 @@ std::string GeneratorKotlin::ConvertEnumRead(const std::string& type)
         return "readUInt64";
 
     yyerror("Unsupported enum base type - " + type);
+    return "";
+}
+
+std::string GeneratorKotlin::ConvertEnumFrom(const std::string& type)
+{
+    if (type == "uint8")
+        return ".toByte()";
+    else if (type == "uint16")
+        return ".toShort()";
+    else if (type == "uint32")
+        return ".toInt()";
+    else if (type == "uint64")
+        return ".toLong()";
+
     return "";
 }
 

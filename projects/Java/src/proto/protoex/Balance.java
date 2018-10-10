@@ -96,6 +96,6 @@ public class Balance extends proto.Balance
         return sb.toString();
     }
 
-    public String toJson() { return protoex.fbe.Json.getJsonEngine().toJson(this); }
-    public static Balance fromJson(String json) { return protoex.fbe.Json.getJsonEngine().fromJson(json, Balance.class); }
+    public String toJson() { return protoex.fbe.Json.getEngine().toJson(this); }
+    public static Balance fromJson(String json) { return protoex.fbe.Json.getEngine().fromJson(json, Balance.class); }
 }

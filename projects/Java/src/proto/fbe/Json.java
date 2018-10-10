@@ -81,16 +81,16 @@ public final class Json
     private static final Gson _engine;
 
     // Get the JSON engine
-    public static Gson getJsonEngine() { return _engine; }
+    public static Gson getEngine() { return _engine; }
 
     static
     {
-        _engine = Register(new GsonBuilder()).create();
+        _engine = register(new GsonBuilder()).create();
     }
 
     private Json() {}
 
-    public static GsonBuilder Register(GsonBuilder builder)
+    public static GsonBuilder register(GsonBuilder builder)
     {
         builder.serializeNulls();
         builder.registerTypeAdapter(byte[].class, new BytesJson());

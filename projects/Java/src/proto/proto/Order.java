@@ -112,6 +112,6 @@ public class Order implements Comparable<Object>
         return sb.toString();
     }
 
-    public String toJson() { return proto.fbe.Json.getJsonEngine().toJson(this); }
-    public static Order fromJson(String json) { return proto.fbe.Json.getJsonEngine().fromJson(json, Order.class); }
+    public String toJson() { return proto.fbe.Json.getEngine().toJson(this); }
+    public static Order fromJson(String json) { return proto.fbe.Json.getEngine().fromJson(json, Order.class); }
 }

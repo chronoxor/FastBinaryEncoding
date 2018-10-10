@@ -356,6 +356,6 @@ public class StructOptional extends StructSimple
         return sb.toString();
     }
 
-    public String toJson() { return test.fbe.Json.getJsonEngine().toJson(this); }
-    public static StructOptional fromJson(String json) { return test.fbe.Json.getJsonEngine().fromJson(json, StructOptional.class); }
+    public String toJson() { return test.fbe.Json.getEngine().toJson(this); }
+    public static StructOptional fromJson(String json) { return test.fbe.Json.getEngine().fromJson(json, StructOptional.class); }
 }

@@ -95,6 +95,6 @@ public class StructBytes implements Comparable<Object>
         return sb.toString();
     }
 
-    public String toJson() { return test.fbe.Json.getJsonEngine().toJson(this); }
-    public static StructBytes fromJson(String json) { return test.fbe.Json.getJsonEngine().fromJson(json, StructBytes.class); }
+    public String toJson() { return test.fbe.Json.getEngine().toJson(this); }
+    public static StructBytes fromJson(String json) { return test.fbe.Json.getEngine().fromJson(json, StructBytes.class); }
 }

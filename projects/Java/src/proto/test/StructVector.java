@@ -223,6 +223,6 @@ public class StructVector implements Comparable<Object>
         return sb.toString();
     }
 
-    public String toJson() { return test.fbe.Json.getJsonEngine().toJson(this); }
-    public static StructVector fromJson(String json) { return test.fbe.Json.getJsonEngine().fromJson(json, StructVector.class); }
+    public String toJson() { return test.fbe.Json.getEngine().toJson(this); }
+    public static StructVector fromJson(String json) { return test.fbe.Json.getEngine().fromJson(json, StructVector.class); }
 }

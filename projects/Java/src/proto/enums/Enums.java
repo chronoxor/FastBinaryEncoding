@@ -346,6 +346,6 @@ public class Enums implements Comparable<Object>
         return sb.toString();
     }
 
-    public String toJson() { return enums.fbe.Json.getJsonEngine().toJson(this); }
-    public static Enums fromJson(String json) { return enums.fbe.Json.getJsonEngine().fromJson(json, Enums.class); }
+    public String toJson() { return enums.fbe.Json.getEngine().toJson(this); }
+    public static Enums fromJson(String json) { return enums.fbe.Json.getEngine().fromJson(json, Enums.class); }
 }

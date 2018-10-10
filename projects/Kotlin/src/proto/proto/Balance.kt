@@ -99,6 +99,9 @@ open class Balance : Comparable<Any?>
         return sb.toString()
     }
 
-    //public String toJson() { return proto.fbe.Json.getJsonEngine().toJson(this); }
-    //public static Balance fromJson(String json) { return proto.fbe.Json.getJsonEngine().fromJson(json, Balance.class); }
+    open fun toJson(): String = proto.fbe.Json.engine.toJson(this)
+    companion object
+    {
+        fun fromJson(json: String): Balance = proto.fbe.Json.engine.fromJson(json, Balance::class.java)
+    }
 }

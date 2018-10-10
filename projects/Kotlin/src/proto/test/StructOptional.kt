@@ -357,6 +357,9 @@ open class StructOptional : StructSimple
         return sb.toString()
     }
 
-    //public String toJson() { return test.fbe.Json.getJsonEngine().toJson(this); }
-    //public static StructOptional fromJson(String json) { return test.fbe.Json.getJsonEngine().fromJson(json, StructOptional.class); }
+    override fun toJson(): String = test.fbe.Json.engine.toJson(this)
+    companion object
+    {
+        fun fromJson(json: String): StructOptional = test.fbe.Json.engine.fromJson(json, StructOptional::class.java)
+    }
 }

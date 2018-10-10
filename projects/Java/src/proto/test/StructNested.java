@@ -140,6 +140,6 @@ public class StructNested extends StructOptional
         return sb.toString();
     }
 
-    public String toJson() { return test.fbe.Json.getJsonEngine().toJson(this); }
-    public static StructNested fromJson(String json) { return test.fbe.Json.getJsonEngine().fromJson(json, StructNested.class); }
+    public String toJson() { return test.fbe.Json.getEngine().toJson(this); }
+    public static StructNested fromJson(String json) { return test.fbe.Json.getEngine().fromJson(json, StructNested.class); }
 }

@@ -141,6 +141,9 @@ open class StructNested : StructOptional
         return sb.toString()
     }
 
-    //public String toJson() { return test.fbe.Json.getJsonEngine().toJson(this); }
-    //public static StructNested fromJson(String json) { return test.fbe.Json.getJsonEngine().fromJson(json, StructNested.class); }
+    override fun toJson(): String = test.fbe.Json.engine.toJson(this)
+    companion object
+    {
+        fun fromJson(json: String): StructNested = test.fbe.Json.engine.fromJson(json, StructNested::class.java)
+    }
 }

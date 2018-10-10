@@ -243,6 +243,6 @@ public class StructHash implements Comparable<Object>
         return sb.toString();
     }
 
-    public String toJson() { return test.fbe.Json.getJsonEngine().toJson(this); }
-    public static StructHash fromJson(String json) { return test.fbe.Json.getJsonEngine().fromJson(json, StructHash.class); }
+    public String toJson() { return test.fbe.Json.getEngine().toJson(this); }
+    public static StructHash fromJson(String json) { return test.fbe.Json.getEngine().fromJson(json, StructHash.class); }
 }

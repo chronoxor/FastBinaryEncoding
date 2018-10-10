@@ -4130,16 +4130,16 @@ public final class Json
     private static final Gson _engine;
 
     // Get the JSON engine
-    public static Gson getJsonEngine() { return _engine; }
+    public static Gson getEngine() { return _engine; }
 
     static
     {
-        _engine = Register(new GsonBuilder()).create();
+        _engine = register(new GsonBuilder()).create();
     }
 
     private Json() {}
 
-    public static GsonBuilder Register(GsonBuilder builder)
+    public static GsonBuilder register(GsonBuilder builder)
     {
         builder.serializeNulls();
         builder.registerTypeAdapter(byte[].class, new BytesJson());
@@ -4527,9 +4527,14 @@ void GeneratorJava::GenerateEnumJson(const std::shared_ptr<Package>& p, const st
     CppCommon::Path output = path / (adapter_name + ".java");
     Open(output);
 
-    // Generate JSON adapter header
+    // Generate headers
     GenerateHeader();
-    GenerateImports(p);
+    GenerateImports(package + ".fbe;");
+
+    // Generate custom import
+    WriteLine();
+    WriteLineIndent("import fbe.*;");
+    WriteLineIndent("import " + package + ".*;");
 
     // Generate custom import
     WriteLine();
@@ -4937,9 +4942,14 @@ void GeneratorJava::GenerateFlagsJson(const std::shared_ptr<Package>& p, const s
     CppCommon::Path output = path / (adapter_name + ".java");
     Open(output);
 
-    // Generate JSON adapter header
+    // Generate headers
     GenerateHeader();
-    GenerateImports(p);
+    GenerateImports(package + ".fbe;");
+
+    // Generate custom import
+    WriteLine();
+    WriteLineIndent("import fbe.*;");
+    WriteLineIndent("import " + package + ".*;");
 
     // Generate custom import
     WriteLine();
@@ -5333,8 +5343,8 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
     if (JSON())
     {
         WriteLine();
-        WriteLineIndent("public String toJson() { return " + *p->name + ".fbe.Json.getJsonEngine().toJson(this); }");
-        WriteLineIndent("public static " + *s->name + " fromJson(String json) { return " + *p->name + ".fbe.Json.getJsonEngine().fromJson(json, " + *s->name + ".class); }");
+        WriteLineIndent("public String toJson() { return " + *p->name + ".fbe.Json.getEngine().toJson(this); }");
+        WriteLineIndent("public static " + *s->name + " fromJson(String json) { return " + *p->name + ".fbe.Json.getEngine().fromJson(json, " + *s->name + ".class); }");
     }
 
     // Generate struct end
@@ -6628,14 +6638,14 @@ void GeneratorJava::GenerateJson(const std::shared_ptr<Package>& p)
     WriteLineIndent("private static final Gson _engine;");
     WriteLine();
     WriteLineIndent("// Get the JSON engine");
-    WriteLineIndent("public static Gson getJsonEngine() { return _engine; }");
+    WriteLineIndent("public static Gson getEngine() { return _engine; }");
     WriteLine();
 
     // Generate JSON engine static initialization
     WriteLineIndent("static");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("_engine = Register(new GsonBuilder()).create();");
+    WriteLineIndent("_engine = register(new GsonBuilder()).create();");
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
@@ -6645,14 +6655,14 @@ void GeneratorJava::GenerateJson(const std::shared_ptr<Package>& p)
     WriteLine();
 
     // Generate JSON engine Register() method
-    WriteLineIndent("public static GsonBuilder Register(GsonBuilder builder)");
+    WriteLineIndent("public static GsonBuilder register(GsonBuilder builder)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("fbe.Json.Register(builder);");
+    WriteLineIndent("fbe.Json.register(builder);");
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + ".fbe.Json.Register(builder);");
+            WriteLineIndent(*import + ".fbe.Json.register(builder);");
     }
     if (p->body)
     {

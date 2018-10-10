@@ -97,6 +97,9 @@ open class Balance : proto.Balance
         return sb.toString()
     }
 
-    //public String toJson() { return protoex.fbe.Json.getJsonEngine().toJson(this); }
-    //public static Balance fromJson(String json) { return protoex.fbe.Json.getJsonEngine().fromJson(json, Balance.class); }
+    override fun toJson(): String = protoex.fbe.Json.engine.toJson(this)
+    companion object
+    {
+        fun fromJson(json: String): Balance = protoex.fbe.Json.engine.fromJson(json, Balance::class.java)
+    }
 }

@@ -123,6 +123,6 @@ public class Account implements Comparable<Object>
         return sb.toString();
     }
 
-    public String toJson() { return protoex.fbe.Json.getJsonEngine().toJson(this); }
-    public static Account fromJson(String json) { return protoex.fbe.Json.getJsonEngine().fromJson(json, Account.class); }
+    public String toJson() { return protoex.fbe.Json.getEngine().toJson(this); }
+    public static Account fromJson(String json) { return protoex.fbe.Json.getEngine().fromJson(json, Account.class); }
 }

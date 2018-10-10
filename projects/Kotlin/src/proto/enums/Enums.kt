@@ -349,6 +349,9 @@ open class Enums : Comparable<Any?>
         return sb.toString()
     }
 
-    //public String toJson() { return enums.fbe.Json.getJsonEngine().toJson(this); }
-    //public static Enums fromJson(String json) { return enums.fbe.Json.getJsonEngine().fromJson(json, Enums.class); }
+    open fun toJson(): String = enums.fbe.Json.engine.toJson(this)
+    companion object
+    {
+        fun fromJson(json: String): Enums = enums.fbe.Json.engine.fromJson(json, Enums::class.java)
+    }
 }

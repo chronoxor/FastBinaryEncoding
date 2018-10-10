@@ -266,7 +266,7 @@ dependencies that worth to be mentioned:
 
 ### Java
 * JSON protocol is implemented using [Gson](https://github.com/google/gson)
-  library. Thereforeits package should be imported using Maven;
+  library. Therefore its package should be imported using Maven;
 
 ### JavaScript
 * JavaScript domain model is implemented using [ECMAScript 6](http://es6-features.org)
@@ -276,6 +276,8 @@ dependencies that worth to be mentioned:
 * Starting from the version 1.3 [Kotlin supports unsigned integer numbers (UByte, UShort, UInt, ULong)](https://github.com/Kotlin/KEEP/blob/unsigned_types/proposals/unsigned-types.md).
   This gives ability to represent FBE domain model more accurately than Java
   language does.
+* JSON protocol is implemented using [Gson](https://github.com/google/gson)
+  library. Therefore its package should be imported using Maven;
 
 ### Python
 * Python domain model is implemented using Python 3.7 ([time.time_ns()](https://docs.python.org/3/library/time.html#time.time_ns));
@@ -958,9 +960,9 @@ Serialization benchmark results:
 | JavaScript Win64         |    252 bytes |       93 416 ops/s |          10 705 ns |
 | JavaScript Win64 (Final) |    152 bytes |      112 665 ops/s |           8 876 ns |
 | JavaScript Win64 (JSON)  |    341 bytes |      217 637 ops/s |           4 595 ns |
-| Kotlin Win64             |    252 bytes |          ??? ops/s |             ??? ns |
-| Kotlin Win64 (Final)     |    152 bytes |          ??? ops/s |             ??? ns |
-| Kotlin Win64 (JSON)      |    353 bytes |          ??? ops/s |             ??? ns |
+| Kotlin Win64             |    252 bytes |    3 546 694 ops/s |             282 ns |
+| Kotlin Win64 (Final)     |    152 bytes |    4 096 406 ops/s |             244 ns |
+| Kotlin Win64 (JSON)      |    353 bytes |      185 788 ops/s |           5 382 ns |
 | Python Win64             |    252 bytes |        9 434 ops/s |         105 999 ns |
 | Python Win64 (Final)     |    152 bytes |       11 635 ops/s |          85 945 ns |
 | Python Win64 (JSON)      |    324 bytes |       61 737 ops/s |          16 198 ns |
@@ -994,9 +996,9 @@ Deserialization benchmark results:
 | JavaScript Win64         |    252 bytes |        133 892 ops/s |             7 469 ns |
 | JavaScript Win64 (Final) |    152 bytes |        292 273 ops/s |             3 422 ns |
 | JavaScript Win64 (JSON)  |    341 bytes |        289 417 ops/s |             3 455 ns |
-| Kotlin Win64             |    252 bytes |            ??? ops/s |               ??? ns |
-| Kotlin Win64 (Final)     |    152 bytes |            ??? ops/s |               ??? ns |
-| Kotlin Win64 (JSON)      |    353 bytes |            ??? ops/s |               ??? ns |
+| Kotlin Win64             |    252 bytes |      2 280 923 ops/s |               438 ns |
+| Kotlin Win64 (Final)     |    152 bytes |      2 652 728 ops/s |               277 ns |
+| Kotlin Win64 (JSON)      |    353 bytes |        250 524 ops/s |             3 992 ns |
 | Python Win64             |    252 bytes |          8 305 ops/s |           120 411 ns |
 | Python Win64 (Final)     |    152 bytes |         11 661 ops/s |            85 758 ns |
 | Python Win64 (JSON)      |    324 bytes |         48 859 ops/s |            20 467 ns |
@@ -1015,8 +1017,8 @@ Verify benchmark results:
 
 | Language & Platform      | Message size |      Verify rate | Verify time |
 | :----------------------- | -----------: | ---------------: | ----------: |
-| C++ Win64                |    252 bytes | 31 250 000 ops/s |      105 ns |
-| C++ Win64 (Final)        |    152 bytes | 35 714 286 ops/s |       91 ns |
+| C++ Win64                |    252 bytes | 31 250 000 ops/s |       32 ns |
+| C++ Win64 (Final)        |    152 bytes | 35 714 286 ops/s |       28 ns |
 | C# Win64                 |    252 bytes |  4 504 505 ops/s |      222 ns |
 | C# Win64 (Final)         |    152 bytes |  8 064 516 ops/s |      124 ns |
 | .NET Core Linux          |    252 bytes |  3 718 855 ops/s |      269 ns |
@@ -1025,7 +1027,7 @@ Verify benchmark results:
 | Java Win64 (Final)       |    152 bytes | 16 205 533 ops/s |       62 ns |
 | JavaScript Win64         |    252 bytes |  1 105 627 ops/s |      905 ns |
 | JavaScript Win64 (Final) |    152 bytes |  5 700 408 ops/s |      175 ns |
-| Kotlin Win64             |    252 bytes |        ??? ops/s |      ??? ns |
-| Kotlin Win64 (Final)     |    152 bytes |        ??? ops/s |      ??? ns |
+| Kotlin Win64             |    252 bytes |  8 625 935 ops/s |      116 ns |
+| Kotlin Win64 (Final)     |    152 bytes | 13 373 757 ops/s |       75 ns |
 | Python Win64             |    252 bytes |     20 825 ops/s |   48 019 ns |
 | Python Win64 (Final)     |    152 bytes |     23 590 ops/s |   42 391 ns |

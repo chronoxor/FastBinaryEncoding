@@ -115,6 +115,6 @@ public class StructHashEx implements Comparable<Object>
         return sb.toString();
     }
 
-    public String toJson() { return test.fbe.Json.getJsonEngine().toJson(this); }
-    public static StructHashEx fromJson(String json) { return test.fbe.Json.getJsonEngine().fromJson(json, StructHashEx.class); }
+    public String toJson() { return test.fbe.Json.getEngine().toJson(this); }
+    public static StructHashEx fromJson(String json) { return test.fbe.Json.getEngine().fromJson(json, StructHashEx.class); }
 }

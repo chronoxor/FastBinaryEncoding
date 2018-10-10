@@ -236,6 +236,9 @@ open class StructList : Comparable<Any?>
         return sb.toString()
     }
 
-    //public String toJson() { return test.fbe.Json.getJsonEngine().toJson(this); }
-    //public static StructList fromJson(String json) { return test.fbe.Json.getJsonEngine().fromJson(json, StructList.class); }
+    open fun toJson(): String = test.fbe.Json.engine.toJson(this)
+    companion object
+    {
+        fun fromJson(json: String): StructList = test.fbe.Json.engine.fromJson(json, StructList::class.java)
+    }
 }

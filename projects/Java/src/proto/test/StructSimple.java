@@ -269,6 +269,6 @@ public class StructSimple implements Comparable<Object>
         return sb.toString();
     }
 
-    public String toJson() { return test.fbe.Json.getJsonEngine().toJson(this); }
-    public static StructSimple fromJson(String json) { return test.fbe.Json.getJsonEngine().fromJson(json, StructSimple.class); }
+    public String toJson() { return test.fbe.Json.getEngine().toJson(this); }
+    public static StructSimple fromJson(String json) { return test.fbe.Json.getEngine().fromJson(json, StructSimple.class); }
 }

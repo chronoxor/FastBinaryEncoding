@@ -99,6 +99,7 @@ private:
     std::string ConvertEnumSize(const std::string& type);
     std::string ConvertEnumGet(const std::string& type);
     std::string ConvertEnumRead(const std::string& type);
+    std::string ConvertEnumFrom(const std::string& type);
     std::string ConvertEnumTo(const std::string& type);
     std::string ConvertEnumFlags(const std::string& type);
     std::string ConvertEnumConstant(const std::string& base, const std::string& type, const std::string& value, bool flag);

@@ -212,7 +212,7 @@ class TestEnums
         assertEquals(enums2.uint64b4, enums.EnumUInt64.ENUM_VALUE_4)
         assertEquals(enums2.uint64b5, enums1.uint64b3)
     }
-/*
+
     @Test
     fun serializationJsonEnums()
     {
@@ -222,7 +222,7 @@ class TestEnums
         val json = enums1.toJson()
 
         // Check the serialized JSON size
-        assertTrue(json.length() > 0)
+        assertTrue(json.isNotEmpty())
 
         // Deserialize enums from the JSON string
         val enums2 = enums.Enums.fromJson(json)
@@ -304,5 +304,4 @@ class TestEnums
         assertEquals(enums2.uint64b4, enums.EnumUInt64.ENUM_VALUE_4)
         assertEquals(enums2.uint64b5, enums1.uint64b3)
     }
-*/
 }

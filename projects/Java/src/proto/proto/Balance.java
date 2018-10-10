@@ -96,6 +96,6 @@ public class Balance implements Comparable<Object>
         return sb.toString();
     }
 
-    public String toJson() { return proto.fbe.Json.getJsonEngine().toJson(this); }
-    public static Balance fromJson(String json) { return proto.fbe.Json.getJsonEngine().fromJson(json, Balance.class); }
+    public String toJson() { return proto.fbe.Json.getEngine().toJson(this); }
+    public static Balance fromJson(String json) { return proto.fbe.Json.getEngine().fromJson(json, Balance.class); }
 }

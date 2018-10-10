@@ -6,13 +6,16 @@
       <sourceFolder url="file://$MODULE_DIR$/src/tests" isTestSource="true" />
       <sourceFolder url="file://$MODULE_DIR$/src/proto" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/benchmarks" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/lib" />
     </content>
-    <orderEntry type="jdk" jdkName="10" jdkType="JavaSDK" />
+    <orderEntry type="jdk" jdkName="11" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="KotlinJavaRuntime" level="project" />
-    <orderEntry type="library" exported="" name="org.jetbrains.kotlin:kotlin-test:Latest" level="project" />
+    <orderEntry type="library" exported="" name="com.google.code.gson:gson:Latest" level="project" />
+    <orderEntry type="library" exported="" name="org.openjdk.jmh:jmh-core:Latest" level="project" />
+    <orderEntry type="library" exported="" name="org.openjdk.jmh:jmh-generator-annprocess:Latest" level="project" />
     <orderEntry type="library" exported="" name="org.testng:testng:Latest" level="project" />
   </component>
 </module>

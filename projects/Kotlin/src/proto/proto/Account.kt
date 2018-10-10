@@ -126,6 +126,9 @@ open class Account : Comparable<Any?>
         return sb.toString()
     }
 
-    //public String toJson() { return proto.fbe.Json.getJsonEngine().toJson(this); }
-    //public static Account fromJson(String json) { return proto.fbe.Json.getJsonEngine().fromJson(json, Account.class); }
+    open fun toJson(): String = proto.fbe.Json.engine.toJson(this)
+    companion object
+    {
+        fun fromJson(json: String): Account = proto.fbe.Json.engine.fromJson(json, Account::class.java)
+    }
 }

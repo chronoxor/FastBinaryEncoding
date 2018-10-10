@@ -272,6 +272,9 @@ open class StructSimple : Comparable<Any?>
         return sb.toString()
     }
 
-    //public String toJson() { return test.fbe.Json.getJsonEngine().toJson(this); }
-    //public static StructSimple fromJson(String json) { return test.fbe.Json.getJsonEngine().fromJson(json, StructSimple.class); }
+    open fun toJson(): String = test.fbe.Json.engine.toJson(this)
+    companion object
+    {
+        fun fromJson(json: String): StructSimple = test.fbe.Json.engine.fromJson(json, StructSimple::class.java)
+    }
 }

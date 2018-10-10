@@ -223,6 +223,6 @@ public class StructArray implements Comparable<Object>
         return sb.toString();
     }
 
-    public String toJson() { return test.fbe.Json.getJsonEngine().toJson(this); }
-    public static StructArray fromJson(String json) { return test.fbe.Json.getJsonEngine().fromJson(json, StructArray.class); }
+    public String toJson() { return test.fbe.Json.getEngine().toJson(this); }
+    public static StructArray fromJson(String json) { return test.fbe.Json.getEngine().fromJson(json, StructArray.class); }
 }
