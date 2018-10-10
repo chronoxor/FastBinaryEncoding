@@ -18,7 +18,9 @@ import java.util.*
 abstract class FieldModel protected constructor(protected var _buffer: Buffer, protected var _offset: Long)
 {
     // Field offset
-    var fbeOffset: Long = _offset
+    var fbeOffset: Long
+        get() = _offset
+        set(value) { _offset = value }
     // Field size
     open val fbeSize: Long = 0
     // Field extra size

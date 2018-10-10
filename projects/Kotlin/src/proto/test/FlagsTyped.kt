@@ -128,9 +128,7 @@ class FlagsTyped : Comparable<FlagsTyped>
 
         val flg = other as FlagsTyped? ?: return false
 
-        if (flg.value == null)
-            return false
-        if (value!!.raw != flg.value!!.raw)
+        if (raw != flg.raw)
             return false
         return true
     }

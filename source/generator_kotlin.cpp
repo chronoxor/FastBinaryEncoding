@@ -698,7 +698,9 @@ void GeneratorKotlin::GenerateFBEFieldModel(const std::string& package)
 abstract class FieldModel protected constructor(protected var _buffer: Buffer, protected var _offset: Long)
 {
     // Field offset
-    var fbeOffset: Long = _offset
+    var fbeOffset: Long
+        get() = _offset
+        set(value) { _offset = value }
     // Field size
     open val fbeSize: Long = 0
     // Field extra size
@@ -2148,7 +2150,9 @@ void GeneratorKotlin::GenerateFBEFinalModel(const std::string& package)
 abstract class FinalModel protected constructor(protected var _buffer: Buffer, protected var _offset: Long)
 {
     // Final offset
-    var fbeOffset: Long = _offset
+    var fbeOffset: Long
+        get() = _offset
+        set(value) { _offset = value }
     // Final size
     open val fbeSize: Long = 0
     // Final extra size
@@ -3545,7 +3549,7 @@ abstract class Sender
 
     // Send log message handler
     @Suppress("UNUSED_PARAMETER")
-    protected fun onSendLog(message: String) {}
+    protected open fun onSendLog(message: String) {}
 }
 )CODE";
 
@@ -3840,7 +3844,7 @@ abstract class Receiver
 
     // Receive log message handler
     @Suppress("UNUSED_PARAMETER")
-    protected fun onReceiveLog(message: String) {}
+    protected open fun onReceiveLog(message: String) {}
 }
 )CODE";
 
@@ -4056,12 +4060,12 @@ void GeneratorKotlin::GeneratePackage(const std::shared_ptr<Package>& p)
     // Generate sender & receiver
     if (Sender())
     {
-        //GenerateSender(p, false);
-        //GenerateReceiver(p, false);
+        GenerateSender(p, false);
+        GenerateReceiver(p, false);
         if (Final())
         {
-            //GenerateSender(p, true);
-            //GenerateReceiver(p, true);
+            GenerateSender(p, true);
+            GenerateReceiver(p, true);
         }
     }
 
@@ -4742,11 +4746,7 @@ void GeneratorKotlin::GenerateFlagsClass(const std::shared_ptr<Package>& p, cons
     WriteLine();
     WriteLineIndent("val flg = other as " + flags_name + "? ?: return false");
     WriteLine();
-    WriteLineIndent("if (flg.value == null)");
-    Indent(1);
-    WriteLineIndent("return false");
-    Indent(-1);
-    WriteLineIndent("if (value!!.raw != flg.value!!.raw)");
+    WriteLineIndent("if (raw != flg.raw)");
     Indent(1);
     WriteLineIndent("return false");
     Indent(-1);
@@ -6155,7 +6155,7 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     std::string model = (final ? "FinalModel" : "Model");
 
     // Open the file
-    CppCommon::Path file = path / (sender + ".java");
+    CppCommon::Path file = path / (sender + ".kt");
     Open(file);
 
     // Generate headers
@@ -6173,7 +6173,8 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " final sender class");
     else
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " sender class");
-    WriteLineIndent("public class " + sender + " extends fbe.Sender");
+    WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"PropertyName\")");
+    WriteLineIndent("open class " + sender + " : fbe.Sender");
     WriteLineIndent("{");
     Indent(1);
 
@@ -6182,7 +6183,7 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     {
         WriteLineIndent("// Imported senders");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("public final " + *import + ".fbe." + sender + " " + *import + "Sender;");
+            WriteLineIndent("val " + *import + "Sender: " + *import + ".fbe." + sender);
         WriteLine();
     }
 
@@ -6191,43 +6192,43 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     {
         WriteLineIndent("// Sender models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("public final " + *s->name + model + " " + *s->name + "Model;");
+            WriteLineIndent("val " + *s->name + "Model: " + *s->name + model);
         WriteLine();
     }
 
     // Generate sender constructors
-    WriteLineIndent("public " + sender + "()");
+    WriteLineIndent("constructor()");
     WriteLineIndent("{");
     Indent(1);
     if (final)
-        WriteLineIndent("setFinal(true);");
+        WriteLineIndent("final = true");
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Sender = new " + *import + ".fbe." + sender + "(getBuffer());");
+            WriteLineIndent(*import + "Sender = " + *import + ".fbe." + sender + "(buffer)");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent(*s->name + "Model = new " + *s->name + model + "(getBuffer());");
+            WriteLineIndent(*s->name + "Model = " + *s->name + model + "(buffer)");
     }
     Indent(-1);
     WriteLineIndent("}");
-    WriteLineIndent("public " + sender + "(Buffer buffer)");
+    WriteLine();
+    WriteLineIndent("constructor(buffer: Buffer) : super(buffer)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("super(buffer);");
     if (final)
-        WriteLineIndent("setFinal(true);");
+        WriteLineIndent("final = true");
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Sender = new " + *import + ".fbe." + sender + "(getBuffer());");
+            WriteLineIndent(*import + "Sender = " + *import + ".fbe." + sender + "(buffer)");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent(*s->name + "Model = new " + *s->name + model + "(getBuffer());");
+            WriteLineIndent(*s->name + "Model = " + *s->name + model + "(buffer)");
     }
     Indent(-1);
     WriteLineIndent("}");
@@ -6239,25 +6240,25 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
         for (const auto& s : p->body->structs)
         {
             std::string struct_name = *p->name + "." + *s->name;
-            WriteLineIndent("public long send(" + struct_name + " value)");
+            WriteLineIndent("fun send(value: " + struct_name + "): Long");
             WriteLineIndent("{");
             Indent(1);
             WriteLineIndent("// Serialize the value into the FBE stream");
-            WriteLineIndent("long serialized = " + *s->name + "Model.serialize(value);");
-            WriteLineIndent("assert(serialized > 0) : \"" + *p->name + "." + *s->name + " serialization failed!\";");
-            WriteLineIndent("assert " + *s->name + "Model.verify() : \"" + *p->name + "." + *s->name + " validation failed!\";");
+            WriteLineIndent("val serialized = " + *s->name + "Model.serialize(value)");
+            WriteLineIndent("assert(serialized > 0) { \"" + *p->name + "." + *s->name + " serialization failed!\" }");
+            WriteLineIndent("assert(" + *s->name + "Model.verify()) { \"" + *p->name + "." + *s->name + " validation failed!\" }");
             WriteLine();
             WriteLineIndent("// Log the value");
-            WriteLineIndent("if (getLogging())");
+            WriteLineIndent("if (logging)");
             WriteLineIndent("{");
             Indent(1);
-            WriteLineIndent("String message = value.toString();");
-            WriteLineIndent("onSendLog(message);");
+            WriteLineIndent("val message = value.toString()");
+            WriteLineIndent("onSendLog(message)");
             Indent(-1);
             WriteLineIndent("}");
             WriteLine();
             WriteLineIndent("// Send the serialized value");
-            WriteLineIndent("return sendSerialized(serialized);");
+            WriteLineIndent("return sendSerialized(serialized)");
             Indent(-1);
             WriteLineIndent("}");
         }
@@ -6266,8 +6267,7 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     // Generate sender message handler
     WriteLine();
     WriteLineIndent("// Send message handler");
-    WriteLineIndent("@Override");
-    WriteLineIndent("protected long onSend(byte[] buffer, long offset, long size) { throw new UnsupportedOperationException(\"" + *p->name + ".fbe.Sender.onSend() not implemented!\"); }");
+    WriteLineIndent("override fun onSend(buffer: ByteArray, offset: Long, size: Long): Long { throw UnsupportedOperationException(\"" + *p->name + ".fbe.Sender.onSend() not implemented!\") }");
 
     // Generate sender end
     Indent(-1);
@@ -6293,7 +6293,7 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     std::string model = (final ? "FinalModel" : "Model");
 
     // Open the file
-    CppCommon::Path file = path / (receiver + ".java");
+    CppCommon::Path file = path / (receiver + ".kt");
     Open(file);
 
     // Generate headers
@@ -6311,7 +6311,8 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " final receiver class");
     else
         WriteLineIndent("// Fast Binary Encoding " + *p->name + " receiver class");
-    WriteLineIndent("public class " + receiver + " extends fbe.Receiver");
+    WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"PrivatePropertyName\", \"UNUSED_PARAMETER\")");
+    WriteLineIndent("open class " + receiver + " : fbe.Receiver");
     WriteLineIndent("{");
     Indent(1);
 
@@ -6320,7 +6321,7 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     {
         WriteLineIndent("// Imported receivers");
         for (const auto& import : p->import->imports)
-            WriteLineIndent("public " + *import + ".fbe." + receiver + " " + *import + "Receiver;");
+            WriteLineIndent("var " + *import + "Receiver: " + *import + ".fbe." + receiver + "? = null");
         WriteLine();
     }
 
@@ -6331,55 +6332,55 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         for (const auto& s : p->body->structs)
         {
             std::string struct_name = *p->name + "." + *s->name;
-            WriteLineIndent("private final " + struct_name + " " + *s->name + "Value;");
+            WriteLineIndent("private val " + *s->name + "Value: " + struct_name);
         }
         WriteLine();
         WriteLineIndent("// Receiver models accessors");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("private final " + *s->name + model + " " + *s->name + "Model;");
+            WriteLineIndent("private val " + *s->name + "Model: " + *s->name + model);
         WriteLine();
     }
 
     // Generate receiver constructors
-    WriteLineIndent("public " + receiver + "()");
+    WriteLineIndent("constructor()");
     WriteLineIndent("{");
     Indent(1);
     if (final)
-        WriteLineIndent("setFinal(true);");
+        WriteLineIndent("final = true");
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Receiver = new " + *import + ".fbe." + receiver + "(getBuffer());");
+            WriteLineIndent(*import + "Receiver = " + *import + ".fbe." + receiver + "(buffer)");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
             std::string struct_name = *p->name + "." + *s->name;
-            WriteLineIndent(*s->name + "Value = new " + struct_name + "();");
-            WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
+            WriteLineIndent(*s->name + "Value = " + struct_name + "()");
+            WriteLineIndent(*s->name + "Model = " + *s->name + model + "()");
         }
     }
     Indent(-1);
     WriteLineIndent("}");
-    WriteLineIndent("public " + receiver + "(Buffer buffer)");
+    WriteLine();
+    WriteLineIndent("constructor(buffer: Buffer) : super(buffer)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("super(buffer);");
     if (final)
-        WriteLineIndent("setFinal(true);");
+        WriteLineIndent("final = true");
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "Receiver = new " + *import + ".fbe." + receiver + "(getBuffer());");
+            WriteLineIndent(*import + "Receiver = " + *import + ".fbe." + receiver + "(buffer)");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
             std::string struct_name = *p->name + "." + *s->name;
-            WriteLineIndent(*s->name + "Value = new " + struct_name + "();");
-            WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
+            WriteLineIndent(*s->name + "Value = " + struct_name + "()");
+            WriteLineIndent(*s->name + "Model = " + *s->name + model + "()");
         }
     }
     Indent(-1);
@@ -6393,44 +6394,43 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         for (const auto& s : p->body->structs)
         {
             std::string struct_name = *p->name + "." + *s->name;
-            WriteLineIndent("protected void onReceive(" + struct_name + " value) {}");
+            WriteLineIndent("protected open fun onReceive(value: " + struct_name + ") {}");
         }
         WriteLine();
     }
 
     // Generate receiver message handler
-    WriteLineIndent("@Override");
-    WriteLineIndent("public boolean onReceive(long type, byte[] buffer, long offset, long size)");
+    WriteLineIndent("override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean");
     WriteLineIndent("{");
     Indent(1);
     if (p->body)
     {
-        WriteLineIndent("switch ((int)type)");
+        WriteLineIndent("when (type)");
         WriteLineIndent("{");
         Indent(1);
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("case (int)" + package + ".fbe." + *s->name + model + ".fbeTypeConst:");
+            WriteLineIndent(package + ".fbe." + *s->name + model + ".fbeTypeConst ->");
             WriteLineIndent("{");
             Indent(1);
             WriteLineIndent("// Deserialize the value from the FBE stream");
-            WriteLineIndent(*s->name + "Model.attach(buffer, offset);");
-            WriteLineIndent("assert " + *s->name + "Model.verify() : \"" + *p->name + "." + *s->name + " validation failed!\";");
-            WriteLineIndent("long deserialized = " + *s->name + "Model.deserialize(" + *s->name + "Value);");
-            WriteLineIndent("assert (deserialized > 0) : \"" + *p->name + "." + *s->name + " deserialization failed!\";");
+            WriteLineIndent(*s->name + "Model.attach(buffer, offset)");
+            WriteLineIndent("assert(" + *s->name + "Model.verify()) { \"" + *p->name + "." + *s->name + " validation failed!\" }");
+            WriteLineIndent("val deserialized = " + *s->name + "Model.deserialize(" + *s->name + "Value)");
+            WriteLineIndent("assert(deserialized > 0) { \"" + *p->name + "." + *s->name + " deserialization failed!\" }");
             WriteLine();
             WriteLineIndent("// Log the value");
-            WriteLineIndent("if (getLogging())");
+            WriteLineIndent("if (logging)");
             WriteLineIndent("{");
             Indent(1);
-            WriteLineIndent("String message = " + *s->name + "Value.toString();");
-            WriteLineIndent("onReceiveLog(message);");
+            WriteLineIndent("val message = " + *s->name + "Value.toString()");
+            WriteLineIndent("onReceiveLog(message)");
             Indent(-1);
             WriteLineIndent("}");
             WriteLine();
             WriteLineIndent("// Call receive handler with deserialized value");
-            WriteLineIndent("onReceive(" + *s->name + "Value);");
-            WriteLineIndent("return true;");
+            WriteLineIndent("onReceive(" + *s->name + "Value)");
+            WriteLineIndent("return true");
             Indent(-1);
             WriteLineIndent("}");
         }
@@ -6442,14 +6442,14 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
         WriteLine();
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("if ((" + *import + "Receiver != null) && " + *import + "Receiver.onReceive(type, buffer, offset, size))");
+            WriteLineIndent("if ((" + *import + "Receiver != null) && " + *import + "Receiver!!.onReceive(type, buffer, offset, size))");
             Indent(1);
-            WriteLineIndent("return true;");
+            WriteLineIndent("return true");
             Indent(-1);
         }
     }
     WriteLine();
-    WriteLineIndent("return false;");
+    WriteLineIndent("return false");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -7146,7 +7146,7 @@ std::string GeneratorKotlin::ConvertConstant(const std::string& type, const std:
 std::string GeneratorKotlin::ConvertConstantPrefix(const std::string& type)
 {
     if (type == "decimal")
-        return "BigDecimal(";
+        return "BigDecimal.valueOf(";
     if (type == "uuid")
         return "UUID.fromString(";
 

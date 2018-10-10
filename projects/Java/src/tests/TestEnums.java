@@ -1,6 +1,5 @@
 package tests;
 
-import java.util.*;
 import org.testng.*;
 import org.testng.annotations.*;
 

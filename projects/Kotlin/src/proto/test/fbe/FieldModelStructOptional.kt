@@ -998,9 +998,9 @@ class FieldModelStructOptional(buffer: Buffer, offset: Long) : FieldModel(buffer
         fbeCurrentSize += f142.fbeSize
 
         if ((fbeCurrentSize + f143.fbeSize) <= fbeStructSize)
-            fbeValue.f143 = f143.get(BigDecimal(123456.123456))
+            fbeValue.f143 = f143.get(BigDecimal.valueOf(123456.123456))
         else
-            fbeValue.f143 = BigDecimal(123456.123456)
+            fbeValue.f143 = BigDecimal.valueOf(123456.123456)
         fbeCurrentSize += f143.fbeSize
 
         if ((fbeCurrentSize + f144.fbeSize) <= fbeStructSize)

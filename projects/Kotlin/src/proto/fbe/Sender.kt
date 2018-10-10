@@ -52,5 +52,5 @@ abstract class Sender
 
     // Send log message handler
     @Suppress("UNUSED_PARAMETER")
-    protected fun onSendLog(message: String) {}
+    protected open fun onSendLog(message: String) {}
 }

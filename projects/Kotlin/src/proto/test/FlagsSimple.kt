@@ -108,9 +108,7 @@ class FlagsSimple : Comparable<FlagsSimple>
 
         val flg = other as FlagsSimple? ?: return false
 
-        if (flg.value == null)
-            return false
-        if (value!!.raw != flg.value!!.raw)
+        if (raw != flg.raw)
             return false
         return true
     }

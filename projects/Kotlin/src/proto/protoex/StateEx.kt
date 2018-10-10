@@ -123,9 +123,7 @@ class StateEx : Comparable<StateEx>
 
         val flg = other as StateEx? ?: return false
 
-        if (flg.value == null)
-            return false
-        if (value!!.raw != flg.value!!.raw)
+        if (raw != flg.raw)
             return false
         return true
     }

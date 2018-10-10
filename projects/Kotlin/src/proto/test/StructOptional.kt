@@ -61,7 +61,7 @@ open class StructOptional : StructSimple
     var f140: Double? = -123.456e+123
     var f141: Double? = null
     var f142: BigDecimal? = null
-    var f143: BigDecimal? = BigDecimal(123456.123456)
+    var f143: BigDecimal? = BigDecimal.valueOf(123456.123456)
     var f144: BigDecimal? = null
     var f145: String? = null
     var f146: String? = "Initial string!"

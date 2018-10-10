@@ -279,5 +279,5 @@ abstract class Receiver
 
     // Receive log message handler
     @Suppress("UNUSED_PARAMETER")
-    protected fun onReceiveLog(message: String) {}
+    protected open fun onReceiveLog(message: String) {}
 }

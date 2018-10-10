@@ -48,7 +48,7 @@ open class StructSimple : Comparable<Any?>
     var f27: Double = 0.0
     var f28: Double = -123.456e+123
     var f29: BigDecimal = BigDecimal.valueOf(0L)
-    var f30: BigDecimal = BigDecimal(123456.123456)
+    var f30: BigDecimal = BigDecimal.valueOf(123456.123456)
     var f31: String = ""
     var f32: String = "Initial string!"
     var f33: Instant = Instant.EPOCH

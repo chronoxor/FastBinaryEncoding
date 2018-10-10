@@ -18,7 +18,9 @@ import java.util.*
 abstract class FinalModel protected constructor(protected var _buffer: Buffer, protected var _offset: Long)
 {
     // Final offset
-    var fbeOffset: Long = _offset
+    var fbeOffset: Long
+        get() = _offset
+        set(value) { _offset = value }
     // Final size
     open val fbeSize: Long = 0
     // Final extra size

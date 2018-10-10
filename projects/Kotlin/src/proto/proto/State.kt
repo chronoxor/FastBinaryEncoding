@@ -112,9 +112,7 @@ class State : Comparable<State>
 
         val flg = other as State? ?: return false
 
-        if (flg.value == null)
-            return false
-        if (value!!.raw != flg.value!!.raw)
+        if (raw != flg.raw)
             return false
         return true
     }
