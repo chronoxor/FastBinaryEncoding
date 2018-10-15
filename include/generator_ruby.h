@@ -39,6 +39,7 @@ private:
 
     void GenerateHeader();
     void GenerateFooter();
+    void GenerateImports();
     void GenerateFBE(const CppCommon::Path& path);
     void GenerateFBEBuffer();
     void GenerateFBEWriteBuffer();

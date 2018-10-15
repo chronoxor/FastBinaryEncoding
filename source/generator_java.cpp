@@ -283,6 +283,8 @@ public class Buffer
     private long _size;
     private long _offset;
 
+    // Is the buffer empty?
+    public boolean isEmpty() { return (_data == null) || (_size == 0); }
     // Get bytes memory buffer
     public byte[] getData() { return _data; }
     // Get bytes memory buffer capacity
@@ -313,9 +315,9 @@ public class Buffer
     // Allocate memory in the current buffer and return offset to the allocated memory block
     public long allocate(long size)
     {
-        assert (size >= 0) : "Invalid allocate size!";
+        assert (size >= 0) : "Invalid allocation size!";
         if (size < 0)
-            throw new IllegalArgumentException("Invalid allocate size!");
+            throw new IllegalArgumentException("Invalid allocation size!");
 
         long offset = _size;
 

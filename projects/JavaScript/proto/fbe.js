@@ -33,6 +33,15 @@ class BaseBuffer {
   }
 
   /**
+   * Is the buffer empty?
+   * @this {!BaseBuffer}
+   * @returns {boolean} Buffer empty flag
+   */
+  get isEmpty () {
+    return (this._buffer == null) || (this._size === 0)
+  }
+
+  /**
    * Get the buffer
    * @this {!BaseBuffer}
    * @returns {Uint8Array} Buffer
@@ -196,12 +205,12 @@ class WriteBuffer extends BaseBuffer {
   /**
    * Allocate memory in the current write buffer and return offset to the allocated memory block
    * @this {!WriteBuffer}
-   * @param {!number} size Allocate size
+   * @param {!number} size Allocation size
    * @returns {!number} Allocated memory offset
    */
   allocate (size) {
     if (size < 0) {
-      throw new Error('Invalid allocate size!')
+      throw new Error('Invalid allocation size!')
     }
 
     let offset = this._size
@@ -385,7 +394,7 @@ class Model {
   /**
    * Allocate memory in the current write buffer and return offset to the allocated memory block
    * @this {!Model}
-   * @param {!number} size Allocate size
+   * @param {!number} size Allocation size
    * @returns {!number} Allocated memory offset
    */
   allocate (size) {

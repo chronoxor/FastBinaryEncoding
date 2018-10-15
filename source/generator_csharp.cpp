@@ -156,6 +156,8 @@ void GeneratorCSharp::GenerateFBEBuffer()
         private long _size;
         private long _offset;
 
+        // Is the buffer empty?
+        public bool IsEmpty => (_data == null) || (_size == 0);
         // Bytes memory buffer
         public byte[] Data => _data;
         // Bytes memory buffer capacity
@@ -191,9 +193,9 @@ void GeneratorCSharp::GenerateFBEBuffer()
         // Allocate memory in the current write buffer and return offset to the allocated memory block
         public long Allocate(long size)
         {
-            Debug.Assert((size >= 0), "Invalid allocate size!");
+            Debug.Assert((size >= 0), "Invalid allocation size!");
             if (size < 0)
-                throw new ArgumentException("Invalid allocate size!", nameof(size));
+                throw new ArgumentException("Invalid allocation size!", nameof(size));
 
             long offset = Size;
 

@@ -243,6 +243,9 @@ void GeneratorKotlin::GenerateFBEBuffer(const std::string& package)
 // Fast Binary Encoding buffer based on dynamic byte array
 class Buffer
 {
+    // Is the buffer empty?
+    val empty: Boolean
+        get() = size == 0L
     // Get bytes memory buffer
     var data = ByteArray(0)
         private set
@@ -277,9 +280,9 @@ class Buffer
     // Allocate memory in the current buffer and return offset to the allocated memory block
     fun allocate(size: Long): Long
     {
-        assert(size >= 0) { "Invalid allocate size!" }
+        assert(size >= 0) { "Invalid allocation size!" }
         if (size < 0)
-            throw IllegalArgumentException("Invalid allocate size!")
+            throw IllegalArgumentException("Invalid allocation size!")
 
         val offset = this.size
 

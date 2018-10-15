@@ -680,6 +680,7 @@ public:
     WriteBuffer& operator=(const WriteBuffer&) = default;
     WriteBuffer& operator=(WriteBuffer&&) noexcept = default;
 
+    bool empty() const noexcept { return (_data == nullptr) || (_size == 0); }
     const uint8_t* data() const noexcept { return _data; }
     uint8_t* data() noexcept { return _data; }
     size_t capacity() const noexcept { return _capacity; }
@@ -828,6 +829,7 @@ public:
     ReadBuffer& operator=(const ReadBuffer&) = default;
     ReadBuffer& operator=(ReadBuffer&&) noexcept = default;
 
+    bool empty() const noexcept { return (_data == nullptr) || (_size == 0); }
     const uint8_t* data() const noexcept { return _data; }
     size_t capacity() const noexcept { return _size; }
     size_t size() const noexcept { return _size; }

@@ -16,6 +16,7 @@
     <orderEntry type="library" exported="" name="com.google.code.gson:gson:Latest" level="project" />
     <orderEntry type="library" exported="" name="org.openjdk.jmh:jmh-core:Latest" level="project" />
     <orderEntry type="library" exported="" name="org.openjdk.jmh:jmh-generator-annprocess:Latest" level="project" />
+    <orderEntry type="library" exported="" name="org.jetbrains.kotlin:kotlin-test:Latest" level="project" />
     <orderEntry type="library" exported="" name="org.testng:testng:Latest" level="project" />
   </component>
 </module>

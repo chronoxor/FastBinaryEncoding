@@ -191,18 +191,15 @@ class WriteBuffer(object):
         self._offset = 0
 
     def __bool__(self):
-        return self._buffer is not None
+        return not self.empty
+
+    @property
+    def empty(self):
+        return (self._buffer is None) or (self._size <= 0)
 
     @property
     def buffer(self):
         return self._buffer
-
-    @property
-    def data(self):
-        return bytes(self._buffer)
-
-    def __bytes__(self):
-        return bytes(self._buffer)
 
     @property
     def capacity(self):
@@ -256,9 +253,9 @@ class WriteBuffer(object):
 
     # Allocate memory in the current write buffer and return offset to the allocated memory block
     def allocate(self, size):
-        assert (size >= 0), "Invalid allocate size!"
+        assert (size >= 0), "Invalid allocation size!"
         if size < 0:
-            raise ValueError("Invalid allocate size!")
+            raise ValueError("Invalid allocation size!")
 
         offset = self._size
 
@@ -347,13 +344,6 @@ class ReadBuffer(object):
     @property
     def buffer(self):
         return self._buffer
-
-    @property
-    def data(self):
-        return bytes(self._buffer)
-
-    def __bytes__(self):
-        return bytes(self._buffer)
 
     @property
     def capacity(self):
