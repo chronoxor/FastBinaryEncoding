@@ -136,8 +136,8 @@ void GeneratorRuby::GenerateFBE(const CppCommon::Path& path)
     }
     if (Sender())
     {
-        //GenerateFBESender();
-        //GenerateFBEReceiver();
+        GenerateFBESender();
+        GenerateFBEReceiver();
     }
 
     // Generate module begin
@@ -2570,61 +2570,69 @@ void GeneratorRuby::GenerateFBEFinalModelMap()
 void GeneratorRuby::GenerateFBESender()
 {
     std::string code = R"CODE(
-
-# Fast Binary Encoding base sender class
-class Sender(object):
-    __slots__ = "_buffer", "_logging", "_final",
-
-    def __init__(self, buffer=None, logging=False, final=False):
-        if buffer is None:
-            buffer = WriteBuffer()
-        self._buffer = buffer
-        self._logging = logging
-        self._final = final
+  # Fast Binary Encoding base sender class
+  class Sender
+    def initialize(buffer = WriteBuffer.new, logging = false, final = false)
+      @_buffer = buffer
+      @_logging = logging
+      @_final = final
+    end
 
     # Get the bytes buffer
-    @property
-    def buffer(self):
-        return self._buffer
+    def buffer
+      @_buffer
+    end
 
     # Get the logging flag
-    @property
-    def logging(self):
-        return self._logging
+    def logging
+      @_logging
+    end
 
     # Set the logging flag
-    @logging.setter
-    def logging(self, logging):
-        self._logging = logging
+    def logging=(logging)
+      @_logging = logging
+    end
 
     # Get the final protocol flag
-    @property
-    def final(self):
-        return self._final
+    def final
+      @_final
+    end
 
     # Send serialized buffer.
     # Direct call of the method requires knowledge about internals of FBE models serialization.
     # Use it with care!
-    def send_serialized(self, serialized):
-        assert (serialized > 0), "Invalid size of the serialized buffer!"
-        if serialized <= 0:
-            return 0
+    def send_serialized(serialized)
+      if serialized <= 0
+        return 0
+      end
 
-        # Shift the send buffer
-        self._buffer.shift(serialized)
+      # Shift the send buffer
+      @_buffer.shift(serialized)
 
-        # Send the value
-        sent = self.on_send(self._buffer.buffer, 0, self._buffer.size)
-        self._buffer.remove(0, sent)
-        return sent
+      # Send the value
+      sent = on_send(@_buffer.buffer, 0, @_buffer.size)
+      @_buffer.remove(0, sent)
+      sent
+    end
+
+    protected
+
+    # Set the final protocol flag
+    def final=(final)
+      @_final = final
+    end
 
     # Send message handler
-    def on_send(self, buffer, offset, size):
-        raise NotImplementedError("Abstract method call!")
+    # noinspection RubyUnusedLocalVariable
+    def on_send(buffer, offset, size)
+      raise NotImplementedError, 'Abstract method call!'
+    end
 
     # Send log message handler
-    def on_send_log(self, message):
-        pass
+    # noinspection RubyUnusedLocalVariable
+    def on_send_log(message)
+    end
+  end
 )CODE";
 
     // Prepare code template
@@ -2636,255 +2644,286 @@ class Sender(object):
 void GeneratorRuby::GenerateFBEReceiver()
 {
     std::string code = R"CODE(
-
-# Fast Binary Encoding base receiver class
-class Receiver(object):
-    __slots__ = "_buffer", "_logging", "_final",
-
-    def __init__(self, buffer=None, logging=False, final=False):
-        if buffer is None:
-            buffer = WriteBuffer()
-        self._buffer = buffer
-        self._logging = logging
-        self._final = final
+  # Fast Binary Encoding base receiver class
+  class Receiver
+    def initialize(buffer = WriteBuffer.new, logging = false, final = false)
+      @_buffer = buffer
+      @_logging = logging
+      @_final = final
+    end
 
     # Get the bytes buffer
-    @property
-    def buffer(self):
-        return self._buffer
+    def buffer
+      @_buffer
+    end
 
     # Get the logging flag
-    @property
-    def logging(self):
-        return self._logging
+    def logging
+      @_logging
+    end
 
     # Set the logging flag
-    @logging.setter
-    def logging(self, logging):
-        self._logging = logging
+    def logging=(logging)
+      @_logging = logging
+    end
 
     # Get the final protocol flag
-    @property
-    def final(self):
-        return self._final
+    def final
+      @_final
+    end
 
     # Receive data
-    def receive(self, buffer, offset=0, size=None):
-        assert (buffer is not None), "Invalid buffer!"
-        if buffer is None:
-            raise ValueError("Invalid buffer!")
+    def receive(buffer, offset = 0, size = nil)
+      raise ArgumentError, 'Invalid buffer!' if buffer.nil?
 
-        if size is None:
-            size = len(buffer)
+      if buffer.is_a?(ReadBuffer) || buffer.is_a?(WriteBuffer)
+        buffer = buffer.buffer
+      end
 
-        assert ((offset + size) <= len(buffer)), "Invalid offset & size!"
-        if (offset + size) > len(buffer):
-            raise ValueError("Invalid offset & size!")
+      if size.nil?
+        size = buffer.length
+      end
 
-        if size == 0:
-            return
+      raise ArgumentError, 'Invalid offset & size!' if (offset + size) > buffer.length
 
-        if isinstance(buffer, ReadBuffer) or isinstance(buffer, WriteBuffer):
-            buffer = buffer.buffer
+      if size == 0
+        return
+      end
 
-        # Storage buffer
-        offset0 = self._buffer.offset
-        offset1 = self._buffer.size
-        size1 = self._buffer.size
+      # Storage buffer
+      offset0 = @_buffer.offset
+      offset1 = @_buffer.size
+      size1 = @_buffer.size
 
-        # Receive buffer
-        offset2 = 0
-        size2 = size
+      # Receive buffer
+      offset2 = 0
+      size2 = size
 
-        # While receive buffer is available to handle...
-        while offset2 < size2:
-            message_buffer = None
-            message_offset = 0
-            message_size = 0
+      # While receive buffer is available to handle...
+      while offset2 < size2
+        message_buffer = nil
+        message_offset = 0
+        message_size = 0
 
-            # Try to receive message size
-            message_size_copied = False
-            message_size_found = False
-            while not message_size_found:
-                # Look into the storage buffer
-                if offset0 < size1:
-                    count = min(size1 - offset0, 4)
-                    if count == 4:
-                        message_size_copied = True
-                        message_size_found = True
-                        message_size = Receiver.read_uint32(self._buffer.buffer, self._buffer.offset + offset0)
-                        offset0 += 4
-                        break
-                    else:
-                        # Fill remaining data from the receive buffer
-                        if offset2 < size2:
-                            count = min(size2 - offset2, 4 - count)
+        # Try to receive message size
+        message_size_copied = false
+        message_size_found = false
+        until message_size_found
+          # Look into the storage buffer
+          if offset0 < size1
+            count = [size1 - offset0, 4].min
+            if count == 4
+              message_size_copied = true
+              message_size_found = true
+              message_size = Receiver.read_uint32(@_buffer.buffer, @_buffer.offset + offset0)
+              offset0 += 4
+              break
+            else
+              # Fill remaining data from the receive buffer
+              if offset2 < size2
+                count = [size2 - offset2, 4 - count].min
 
-                            # Allocate and refresh the storage buffer
-                            self._buffer.allocate(count)
-                            size1 += count
+                # Allocate and refresh the storage buffer
+                @_buffer.allocate(count)
+                size1 += count
 
-                            self._buffer.buffer[offset1:offset1 + count] = buffer[offset + offset2:offset + offset2 + count]
-                            offset1 += count
-                            offset2 += count
-                            continue
-                        else:
-                            break
+                @_buffer.buffer[offset1, count] = buffer[offset + offset2, count]
+                offset1 += count
+                offset2 += count
+                continue
+              else
+                break
+              end
+            end
+          end
 
-                # Look into the receive buffer
-                if offset2 < size2:
-                    count = min(size2 - offset2, 4)
-                    if count == 4:
-                        message_size_found = True
-                        message_size = Receiver.read_uint32(buffer, offset + offset2)
-                        offset2 += 4
-                        break
-                    else:
-                        # Allocate and refresh the storage buffer
-                        self._buffer.allocate(count)
-                        size1 += count
+          # Look into the receive buffer
+          if offset2 < size2
+            count = [size2 - offset2, 4].min
+            if count == 4
+              message_size_found = true
+              message_size = Receiver.read_uint32(buffer, offset + offset2)
+              offset2 += 4
+              break
+            else
+              # Allocate and refresh the storage buffer
+              @_buffer.allocate(count)
+              size1 += count
 
-                        self._buffer.buffer[offset1:offset1 + count] = buffer[offset + offset2:offset + offset2 + count]
-                        offset1 += count
-                        offset2 += count
-                        continue
-                else:
-                    break
+              @_buffer.buffer[offset1, count] = buffer[offset + offset2, count]
+              offset1 += count
+              offset2 += count
+              continue
+            end
+          else
+            break
+          end
+        end
 
-            if not message_size_found:
-                return
+        unless message_size_found
+          return
+        end
 
-            # Check the message full size
-            assert (message_size >= (4 + 4 + 4 + 4)), "Invalid receive data!"
-            if message_size < (4 + 4 + 4 + 4):
-                return
+        # Check the message full size
+        if message_size < (4 + 4 + 4 + 4)
+          return
+        end
 
-            # Try to receive message body
-            message_found = False
-            while not message_found:
-                # Look into the storage buffer
-                if offset0 < size1:
-                    count = min(size1 - offset0, message_size - 4)
-                    if count == (message_size - 4):
-                        message_found = True
-                        message_buffer = self._buffer.buffer
-                        message_offset = offset0 - 4
-                        offset0 += message_size - 4
-                        break
-                    else:
-                        # Fill remaining data from the receive buffer
-                        if offset2 < size2:
-                            # Copy message size into the storage buffer
-                            if not message_size_copied:
-                                # Allocate and refresh the storage buffer
-                                self._buffer.allocate(4)
-                                size1 += 4
-
-                                Receiver.write_uint32(self._buffer.buffer, self._buffer.offset + offset0, message_size)
-                                offset0 += 4
-                                offset1 += 4
-
-                                message_size_copied = True
-
-                            count = min(size2 - offset2, message_size - 4 - count)
-
-                            # Allocate and refresh the storage buffer
-                            self._buffer.allocate(count)
-                            size1 += count
-
-                            self._buffer.buffer[offset1:offset1 + count] = buffer[offset + offset2:offset + offset2 + count]
-                            offset1 += count
-                            offset2 += count
-                            continue
-                        else:
-                            break
-
-                # Look into the receive buffer
-                if offset2 < size2:
-                    count = min(size2 - offset2, message_size - 4)
-                    if not message_size_copied and (count == (message_size - 4)):
-                        message_found = True
-                        message_buffer = buffer
-                        message_offset = offset + offset2 - 4
-                        offset2 += message_size - 4
-                        break
-                    else:
-                        # Copy message size into the storage buffer
-                        if not message_size_copied:
-                            # Allocate and refresh the storage buffer
-                            self._buffer.allocate(4)
-                            size1 += 4
-
-                            Receiver.write_uint32(self._buffer.buffer, self._buffer.offset + offset0, message_size)
-                            offset0 += 4
-                            offset1 += 4
-
-                            message_size_copied = True
-
-                        # Allocate and refresh the storage buffer
-                        self._buffer.allocate(count)
-                        size1 += count
-
-                        self._buffer.buffer[offset1:offset1 + count] = buffer[offset + offset2:offset + offset2 + count]
-                        offset1 += count
-                        offset2 += count
-                        continue
-                else:
-                    break
-
-            if not message_found:
+        # Try to receive message body
+        message_found = false
+        until message_found
+          # Look into the storage buffer
+          if offset0 < size1
+            count = [size1 - offset0, message_size - 4].min
+            if count == (message_size - 4)
+              message_found = true
+              message_buffer = @_buffer.buffer
+              message_offset = offset0 - 4
+              offset0 += message_size - 4
+              break
+            else
+              # Fill remaining data from the receive buffer
+              if offset2 < size2
                 # Copy message size into the storage buffer
-                if not message_size_copied:
-                    # Allocate and refresh the storage buffer
-                    self._buffer.allocate(4)
-                    size1 += 4
+                unless message_size_copied
+                  # Allocate and refresh the storage buffer
+                  @_buffer.allocate(4)
+                  size1 += 4
 
-                    Receiver.write_uint32(self._buffer.buffer, self._buffer.offset + offset0, message_size)
-                    offset0 += 4
-                    offset1 += 4
+                  Receiver.write_uint32(@_buffer.buffer, @_buffer.offset + offset0, message_size)
+                  offset0 += 4
+                  offset1 += 4
 
-                    # noinspection PyUnusedLocal
-                    message_size_copied = True
-                return
+                  message_size_copied = true
+                end
 
-            # Read the message parameters
-            if self._final:
-                # noinspection PyUnusedLocal
-                fbe_struct_size = Receiver.read_uint32(message_buffer, message_offset)
-                fbe_struct_type = Receiver.read_uint32(message_buffer, message_offset + 4)
-            else:
-                fbe_struct_offset = Receiver.read_uint32(message_buffer, message_offset + 4)
-                # noinspection PyUnusedLocal
-                fbe_struct_size = Receiver.read_uint32(message_buffer, message_offset + fbe_struct_offset)
-                fbe_struct_type = Receiver.read_uint32(message_buffer, message_offset + fbe_struct_offset + 4)
+                count = [size2 - offset2, message_size - 4 - count].min
 
-            # Handle the message
-            self.on_receive(fbe_struct_type, message_buffer, message_offset, message_size)
+                # Allocate and refresh the storage buffer
+                @_buffer.allocate(count)
+                size1 += count
 
-            # Reset the storage buffer
-            self._buffer.reset()
+                @_buffer.buffer[offset1, count] = buffer[offset + offset2, count]
+                offset1 += count
+                offset2 += count
+                continue
+              else
+                break
+              end
+            end
+          end
 
-            # Refresh the storage buffer
-            offset1 = self._buffer.offset
-            size1 = self._buffer.size
+          # Look into the receive buffer
+          if offset2 < size2
+            count = [size2 - offset2, message_size - 4].min
+            if !message_size_copied && (count == (message_size - 4))
+              message_found = true
+              message_buffer = buffer
+              message_offset = offset + offset2 - 4
+              offset2 += message_size - 4
+              break
+            else
+              # Copy message size into the storage buffer
+              unless message_size_copied
+                # Allocate and refresh the storage buffer
+                @_buffer.allocate(4)
+                size1 += 4
+
+                Receiver.write_uint32(@_buffer.buffer, @_buffer.offset + offset0, message_size)
+                offset0 += 4
+                offset1 += 4
+
+                message_size_copied = true
+              end
+
+              # Allocate and refresh the storage buffer
+              @_buffer.allocate(count)
+              size1 += count
+
+              @_buffer.buffer[offset1, count] = buffer[offset + offset2, count]
+              offset1 += count
+              offset2 += count
+              continue
+            end
+          else
+            break
+          end
+        end
+
+        unless message_found
+          # Copy message size into the storage buffer
+          unless message_size_copied
+            # Allocate and refresh the storage buffer
+            @_buffer.allocate(4)
+            # noinspection RubyUnusedLocalVariable
+            size1 += 4
+
+            Receiver.write_uint32(@_buffer.buffer, @_buffer.offset + offset0, message_size)
+            # noinspection RubyUnusedLocalVariable
+            offset0 += 4
+            # noinspection RubyUnusedLocalVariable
+            offset1 += 4
+
+            # noinspection RubyUnusedLocalVariable
+            message_size_copied = true
+          end
+          return
+        end
+
+        # Read the message parameters
+        if @_final
+          # noinspection RubyUnusedLocalVariable
+          fbe_struct_size = Receiver.read_uint32(message_buffer, message_offset)
+          fbe_struct_type = Receiver.read_uint32(message_buffer, message_offset + 4)
+        else
+          fbe_struct_offset = Receiver.read_uint32(message_buffer, message_offset + 4)
+          # noinspection RubyUnusedLocalVariable
+          fbe_struct_size = Receiver.read_uint32(message_buffer, message_offset + fbe_struct_offset)
+          fbe_struct_type = Receiver.read_uint32(message_buffer, message_offset + fbe_struct_offset + 4)
+        end
+
+        # Handle the message
+        on_receive(fbe_struct_type, message_buffer, message_offset, message_size)
+
+        # Reset the storage buffer
+        @_buffer.reset
+
+        # Refresh the storage buffer
+        offset1 = @_buffer.offset
+        size1 = @_buffer.size
+      end
+    end
+
+    protected
+
+    # Set the final protocol flag
+    def final=(final)
+      @_final = final
+    end
 
     # Receive message handler
-    def on_receive(self, fbe_type, buffer, offset, size):
-        raise NotImplementedError("Abstract method call!")
+    # noinspection RubyUnusedLocalVariable
+    def on_receive(fbe_type, buffer, offset, size)
+      raise NotImplementedError, 'Abstract method call!'
+    end
 
     # Receive log message handler
-    def on_receive_log(self, message):
-        pass
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_log(message)
+    end
+
+    private
 
     # Buffer I/O methods
 
-    @staticmethod
-    def read_uint32(buffer, offset):
-        return struct.unpack_from("<I", buffer, offset)[0]
+    def self.read_uint32(buffer, offset)
+      buffer.slice(offset, 4).unpack('L<')[0]
+    end
 
-    @staticmethod
-    def write_uint32(buffer, offset, value):
-        return struct.pack_into("<I", buffer, offset, value)
+    def self.write_uint32(buffer, offset, value)
+      buffer[offset, 4] = [value].pack('L<')
+    end
+  end
 )CODE";
 
     // Prepare code template

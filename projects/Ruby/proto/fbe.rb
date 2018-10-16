@@ -3321,6 +3321,351 @@ module FBE
       size
     end
   end
+
+  # Fast Binary Encoding base sender class
+  class Sender
+    def initialize(buffer = WriteBuffer.new, logging = false, final = false)
+      @_buffer = buffer
+      @_logging = logging
+      @_final = final
+    end
+
+    # Get the bytes buffer
+    def buffer
+      @_buffer
+    end
+
+    # Get the logging flag
+    def logging
+      @_logging
+    end
+
+    # Set the logging flag
+    def logging=(logging)
+      @_logging = logging
+    end
+
+    # Get the final protocol flag
+    def final
+      @_final
+    end
+
+    # Send serialized buffer.
+    # Direct call of the method requires knowledge about internals of FBE models serialization.
+    # Use it with care!
+    def send_serialized(serialized)
+      if serialized <= 0
+        return 0
+      end
+
+      # Shift the send buffer
+      @_buffer.shift(serialized)
+
+      # Send the value
+      sent = on_send(@_buffer.buffer, 0, @_buffer.size)
+      @_buffer.remove(0, sent)
+      sent
+    end
+
+    protected
+
+    # Set the final protocol flag
+    def final=(final)
+      @_final = final
+    end
+
+    # Send message handler
+    # noinspection RubyUnusedLocalVariable
+    def on_send(buffer, offset, size)
+      raise NotImplementedError, 'Abstract method call!'
+    end
+
+    # Send log message handler
+    # noinspection RubyUnusedLocalVariable
+    def on_send_log(message)
+    end
+  end
+
+  # Fast Binary Encoding base receiver class
+  class Receiver
+    def initialize(buffer = WriteBuffer.new, logging = false, final = false)
+      @_buffer = buffer
+      @_logging = logging
+      @_final = final
+    end
+
+    # Get the bytes buffer
+    def buffer
+      @_buffer
+    end
+
+    # Get the logging flag
+    def logging
+      @_logging
+    end
+
+    # Set the logging flag
+    def logging=(logging)
+      @_logging = logging
+    end
+
+    # Get the final protocol flag
+    def final
+      @_final
+    end
+
+    # Receive data
+    def receive(buffer, offset = 0, size = nil)
+      raise ArgumentError, 'Invalid buffer!' if buffer.nil?
+
+      if buffer.is_a?(ReadBuffer) || buffer.is_a?(WriteBuffer)
+        buffer = buffer.buffer
+      end
+
+      if size.nil?
+        size = buffer.length
+      end
+
+      raise ArgumentError, 'Invalid offset & size!' if (offset + size) > buffer.length
+
+      if size == 0
+        return
+      end
+
+      # Storage buffer
+      offset0 = @_buffer.offset
+      offset1 = @_buffer.size
+      size1 = @_buffer.size
+
+      # Receive buffer
+      offset2 = 0
+      size2 = size
+
+      # While receive buffer is available to handle...
+      while offset2 < size2
+        message_buffer = nil
+        message_offset = 0
+        message_size = 0
+
+        # Try to receive message size
+        message_size_copied = false
+        message_size_found = false
+        until message_size_found
+          # Look into the storage buffer
+          if offset0 < size1
+            count = [size1 - offset0, 4].min
+            if count == 4
+              message_size_copied = true
+              message_size_found = true
+              message_size = Receiver.read_uint32(@_buffer.buffer, @_buffer.offset + offset0)
+              offset0 += 4
+              break
+            else
+              # Fill remaining data from the receive buffer
+              if offset2 < size2
+                count = [size2 - offset2, 4 - count].min
+
+                # Allocate and refresh the storage buffer
+                @_buffer.allocate(count)
+                size1 += count
+
+                @_buffer.buffer[offset1, count] = buffer[offset + offset2, count]
+                offset1 += count
+                offset2 += count
+                continue
+              else
+                break
+              end
+            end
+          end
+
+          # Look into the receive buffer
+          if offset2 < size2
+            count = [size2 - offset2, 4].min
+            if count == 4
+              message_size_found = true
+              message_size = Receiver.read_uint32(buffer, offset + offset2)
+              offset2 += 4
+              break
+            else
+              # Allocate and refresh the storage buffer
+              @_buffer.allocate(count)
+              size1 += count
+
+              @_buffer.buffer[offset1, count] = buffer[offset + offset2, count]
+              offset1 += count
+              offset2 += count
+              continue
+            end
+          else
+            break
+          end
+        end
+
+        unless message_size_found
+          return
+        end
+
+        # Check the message full size
+        if message_size < (4 + 4 + 4 + 4)
+          return
+        end
+
+        # Try to receive message body
+        message_found = false
+        until message_found
+          # Look into the storage buffer
+          if offset0 < size1
+            count = [size1 - offset0, message_size - 4].min
+            if count == (message_size - 4)
+              message_found = true
+              message_buffer = @_buffer.buffer
+              message_offset = offset0 - 4
+              offset0 += message_size - 4
+              break
+            else
+              # Fill remaining data from the receive buffer
+              if offset2 < size2
+                # Copy message size into the storage buffer
+                unless message_size_copied
+                  # Allocate and refresh the storage buffer
+                  @_buffer.allocate(4)
+                  size1 += 4
+
+                  Receiver.write_uint32(@_buffer.buffer, @_buffer.offset + offset0, message_size)
+                  offset0 += 4
+                  offset1 += 4
+
+                  message_size_copied = true
+                end
+
+                count = [size2 - offset2, message_size - 4 - count].min
+
+                # Allocate and refresh the storage buffer
+                @_buffer.allocate(count)
+                size1 += count
+
+                @_buffer.buffer[offset1, count] = buffer[offset + offset2, count]
+                offset1 += count
+                offset2 += count
+                continue
+              else
+                break
+              end
+            end
+          end
+
+          # Look into the receive buffer
+          if offset2 < size2
+            count = [size2 - offset2, message_size - 4].min
+            if !message_size_copied && (count == (message_size - 4))
+              message_found = true
+              message_buffer = buffer
+              message_offset = offset + offset2 - 4
+              offset2 += message_size - 4
+              break
+            else
+              # Copy message size into the storage buffer
+              unless message_size_copied
+                # Allocate and refresh the storage buffer
+                @_buffer.allocate(4)
+                size1 += 4
+
+                Receiver.write_uint32(@_buffer.buffer, @_buffer.offset + offset0, message_size)
+                offset0 += 4
+                offset1 += 4
+
+                message_size_copied = true
+              end
+
+              # Allocate and refresh the storage buffer
+              @_buffer.allocate(count)
+              size1 += count
+
+              @_buffer.buffer[offset1, count] = buffer[offset + offset2, count]
+              offset1 += count
+              offset2 += count
+              continue
+            end
+          else
+            break
+          end
+        end
+
+        unless message_found
+          # Copy message size into the storage buffer
+          unless message_size_copied
+            # Allocate and refresh the storage buffer
+            @_buffer.allocate(4)
+            # noinspection RubyUnusedLocalVariable
+            size1 += 4
+
+            Receiver.write_uint32(@_buffer.buffer, @_buffer.offset + offset0, message_size)
+            # noinspection RubyUnusedLocalVariable
+            offset0 += 4
+            # noinspection RubyUnusedLocalVariable
+            offset1 += 4
+
+            # noinspection RubyUnusedLocalVariable
+            message_size_copied = true
+          end
+          return
+        end
+
+        # Read the message parameters
+        if @_final
+          # noinspection RubyUnusedLocalVariable
+          fbe_struct_size = Receiver.read_uint32(message_buffer, message_offset)
+          fbe_struct_type = Receiver.read_uint32(message_buffer, message_offset + 4)
+        else
+          fbe_struct_offset = Receiver.read_uint32(message_buffer, message_offset + 4)
+          # noinspection RubyUnusedLocalVariable
+          fbe_struct_size = Receiver.read_uint32(message_buffer, message_offset + fbe_struct_offset)
+          fbe_struct_type = Receiver.read_uint32(message_buffer, message_offset + fbe_struct_offset + 4)
+        end
+
+        # Handle the message
+        on_receive(fbe_struct_type, message_buffer, message_offset, message_size)
+
+        # Reset the storage buffer
+        @_buffer.reset
+
+        # Refresh the storage buffer
+        offset1 = @_buffer.offset
+        size1 = @_buffer.size
+      end
+    end
+
+    protected
+
+    # Set the final protocol flag
+    def final=(final)
+      @_final = final
+    end
+
+    # Receive message handler
+    # noinspection RubyUnusedLocalVariable
+    def on_receive(fbe_type, buffer, offset, size)
+      raise NotImplementedError, 'Abstract method call!'
+    end
+
+    # Receive log message handler
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_log(message)
+    end
+
+    private
+
+    # Buffer I/O methods
+
+    def self.read_uint32(buffer, offset)
+      buffer.slice(offset, 4).unpack('L<')[0]
+    end
+
+    def self.write_uint32(buffer, offset, value)
+      buffer[offset, 4] = [value].pack('L<')
+    end
+  end
 end
 
 # rubocop:enable all
