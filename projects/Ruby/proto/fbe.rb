@@ -10,6 +10,7 @@
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/PerceivedComplexity
 
+require 'bigdecimal'
 require 'uuidtools'
 
 module FBE
@@ -279,7 +280,7 @@ module FBE
     # Buffer I/O methods
 
     def read_uint32(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L<')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L<')[0]
     end
 
     def write_uint32(offset, value)
@@ -328,67 +329,67 @@ module FBE
     # Buffer I/O methods
 
     def read_bool(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('C')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('C')[0]
     end
 
     def read_byte(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('C')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('C')[0]
     end
 
     def read_char(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('C').chr
+      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('C')[0].chr
     end
 
     def read_wchar(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L<').chr
+      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L<')[0].chr
     end
 
     def read_int8(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('c')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('c')[0]
     end
 
     def read_uint8(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('C')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('C')[0]
     end
 
     def read_int16(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 2).unpack('s<')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 2).unpack('s<')[0]
     end
 
     def read_uint16(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 2).unpack('S<')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 2).unpack('S<')[0]
     end
 
     def read_uint16_be(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 2).unpack('S>')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 2).unpack('S>')[0]
     end
 
     def read_int32(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('l<')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('l<')[0]
     end
 
     def read_uint32(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L<')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L<')[0]
     end
 
     def read_uint32_be(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L>')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L>')[0]
     end
 
     def read_int64(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 8).unpack('q<')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 8).unpack('q<')[0]
     end
 
     def read_uint64(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 8).unpack('Q<')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 8).unpack('Q<')[0]
     end
 
     def read_float(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('e')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('e')[0]
     end
 
     def read_double(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 8).unpack('E')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 8).unpack('E')[0]
     end
 
     def read_uuid(offset)
@@ -464,7 +465,7 @@ module FBE
     end
 
     def write_count(offset, value, value_count)
-      (0...value_count).each { |i| @_buffer.buffer[@_buffer.offset + offset + i] = value }
+      (0...value_count).each { |i| @_buffer.buffer[@_buffer.offset + offset + i] = value.chr }
     end
   end
 
@@ -477,6 +478,1421 @@ module FBE
     # Check if the value is valid
     def verify
       true
+    end
+  end
+
+  # Fast Binary Encoding bool field model class
+  class FieldModelBool < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      1
+    end
+
+    # Get the value
+    def get(defaults = false)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      read_bool(fbe_offset)
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_bool(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding byte field model class
+  class FieldModelByte < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      1
+    end
+
+    # Get the value
+    def get(defaults = 0)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      read_byte(fbe_offset)
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_byte(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding char field model class
+  class FieldModelChar < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      1
+    end
+
+    # Get the value
+    def get(defaults = '\0')
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      read_char(fbe_offset)
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_char(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding wchar field model class
+  class FieldModelWChar < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the value
+    def get(defaults = '\0')
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      read_wchar(fbe_offset)
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_wchar(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding int8 field model class
+  class FieldModelInt8 < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      1
+    end
+
+    # Get the value
+    def get(defaults = 0)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      read_int8(fbe_offset)
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_int8(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding uint8 field model class
+  class FieldModelUInt8 < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      1
+    end
+
+    # Get the value
+    def get(defaults = 0)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      read_uint8(fbe_offset)
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_uint8(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding int16 field model class
+  class FieldModelInt16 < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      2
+    end
+
+    # Get the value
+    def get(defaults = 0)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      read_int16(fbe_offset)
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_int16(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding uint16 field model class
+  class FieldModelUInt16 < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      2
+    end
+
+    # Get the value
+    def get(defaults = 0)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      read_uint16(fbe_offset)
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_uint16(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding int32 field model class
+  class FieldModelInt32 < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the value
+    def get(defaults = 0)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      read_int32(fbe_offset)
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_int32(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding uint32 field model class
+  class FieldModelUInt32 < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the value
+    def get(defaults = 0)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      read_uint32(fbe_offset)
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_uint32(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding int64 field model class
+  class FieldModelInt64 < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      8
+    end
+
+    # Get the value
+    def get(defaults = 0)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      read_int64(fbe_offset)
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_int64(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding uint64 field model class
+  class FieldModelUInt64 < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      8
+    end
+
+    # Get the value
+    def get(defaults = 0)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      read_uint64(fbe_offset)
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_uint64(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding float field model class
+  class FieldModelFloat < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the value
+    def get(defaults = 0.0)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      read_float(fbe_offset)
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_float(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding double field model class
+  class FieldModelDouble < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      8
+    end
+
+    # Get the value
+    def get(defaults = 0.0)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      read_double(fbe_offset)
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_double(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding uint64 field model class
+  class FieldModelTimestamp < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      8
+    end
+
+    # Get the value
+    def get(defaults = 0)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      read_uint64(fbe_offset)
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_uint64(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding uuid field model class
+  class FieldModelUUID < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      16
+    end
+
+    # Get the value
+    def get(defaults = UUIDTools::UUID.parse_int(0))
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      read_uuid(fbe_offset)
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_uuid(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding decimal field model class
+  class FieldModelDecimal < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      16
+    end
+
+    # Get the value
+    def get(defaults = BigDecimal.new(0))
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      # Read decimal parts
+      low = read_uint32(fbe_offset)
+      mid = read_uint32(fbe_offset + 4)
+      high = read_uint32(fbe_offset + 8)
+      flags = read_uint32(fbe_offset + 12)
+
+      # Calculate decimal value
+      negative = (flags & 0x80000000) != 0
+      scale = (flags & 0x7FFFFFFF) >> 16
+      result = BigDecimal.new(high) * 18446744073709551616
+      result += BigDecimal.new(mid) * 4294967296
+      result += BigDecimal.new(low)
+      result /= 10 ** scale
+      result = -result if negative
+
+      # Return decimal value
+      result
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      # Extract decimal parts
+      sign, significant_digits, _, exponent = value.split
+      number = significant_digits.to_i(10)
+      if exponent > significant_digits.length
+        number *= 10 ** (exponent - 1)
+        scale = 0
+      else
+        scale = significant_digits.length - exponent
+      end
+
+      # Check for decimal number overflow
+      bits = number.bit_length
+      if (bits < 0) || (bits > 96)
+        # Value too big for .NET Decimal (bit length is limited to [0, 96])
+        write_count(fbe_offset, 0, fbe_size)
+        return
+      end
+
+      # Check for decimal scale overflow
+      if (scale < 0) || (scale > 28)
+        # Value scale exceeds .NET Decimal limit of [0, 28]
+        write_count(fbe_offset, 0, fbe_size)
+        return
+      end
+
+      # Write unscaled value to bytes 0-11
+      bytes = []
+      while number > 0
+        bytes.insert(-1, number & 0xFF)
+        number >>= 8
+      end
+      bytes = bytes.pack("C*")
+      write_bytes(fbe_offset, bytes)
+      write_count(fbe_offset + bytes.length, 0, 12 - bytes.length)
+
+      # Write scale at byte 14
+      write_byte(fbe_offset + 14, scale)
+
+      # Write signum at byte 15
+      write_byte(fbe_offset + 15, (sign == -1) ? 0x80 : 0)
+    end
+  end
+
+  # Fast Binary Encoding final model class
+  class FinalModel < FieldModelBase
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
+
+    # Check if the value is valid
+    def verify
+      raise NotImplementedError, 'verify() method not implemented!'
+    end
+  end
+
+  # Fast Binary Encoding bool final model class
+  class FinalModelBool < FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      1
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [false, 0]
+      end
+
+      [read_bool(fbe_offset), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_bool(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  # Fast Binary Encoding byte final model class
+  class FinalModelByte < FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      1
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [0, 0]
+      end
+
+      [read_byte(fbe_offset), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_byte(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  # Fast Binary Encoding char final model class
+  class FinalModelChar < FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      1
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return ['\0', 0]
+      end
+
+      [read_char(fbe_offset), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_char(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  # Fast Binary Encoding wchar final model class
+  class FinalModelWChar < FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      4
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return ['\0', 0]
+      end
+
+      [read_wchar(fbe_offset), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_wchar(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  # Fast Binary Encoding int8 final model class
+  class FinalModelInt8 < FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      1
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [0, 0]
+      end
+
+      [read_int8(fbe_offset), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_int8(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  # Fast Binary Encoding uint8 final model class
+  class FinalModelUInt8 < FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      1
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [0, 0]
+      end
+
+      [read_uint8(fbe_offset), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_uint8(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  # Fast Binary Encoding int16 final model class
+  class FinalModelInt16 < FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      2
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [0, 0]
+      end
+
+      [read_int16(fbe_offset), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_int16(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  # Fast Binary Encoding uint16 final model class
+  class FinalModelUInt16 < FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      2
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [0, 0]
+      end
+
+      [read_uint16(fbe_offset), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_uint16(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  # Fast Binary Encoding int32 final model class
+  class FinalModelInt32 < FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      4
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [0, 0]
+      end
+
+      [read_int32(fbe_offset), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_int32(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  # Fast Binary Encoding uint32 final model class
+  class FinalModelUInt32 < FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      4
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [0, 0]
+      end
+
+      [read_uint32(fbe_offset), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_uint32(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  # Fast Binary Encoding int64 final model class
+  class FinalModelInt64 < FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      8
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [0, 0]
+      end
+
+      [read_int64(fbe_offset), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_int64(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  # Fast Binary Encoding uint64 final model class
+  class FinalModelUInt64 < FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      8
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [0, 0]
+      end
+
+      [read_uint64(fbe_offset), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_uint64(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  # Fast Binary Encoding float final model class
+  class FinalModelFloat < FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      4
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [0.0, 0]
+      end
+
+      [read_float(fbe_offset), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_float(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  # Fast Binary Encoding double final model class
+  class FinalModelDouble < FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      8
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [0.0, 0]
+      end
+
+      [read_double(fbe_offset), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_double(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  # Fast Binary Encoding uint64 final model class
+  class FinalModelTimestamp < FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      8
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [0, 0]
+      end
+
+      [read_uint64(fbe_offset), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_uint64(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  # Fast Binary Encoding uuid final model class
+  class FinalModelUUID < FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      16
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [UUIDTools::UUID.parse_int(0), 0]
+      end
+
+      [read_uuid(fbe_offset), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_uuid(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  # Fast Binary Encoding decimal final model class
+  class FinalModelDecimal < FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      16
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [BigDecimal.new(0), 0]
+      end
+
+      # Read decimal parts
+      low = read_uint32(fbe_offset)
+      mid = read_uint32(fbe_offset + 4)
+      high = read_uint32(fbe_offset + 8)
+      flags = read_uint32(fbe_offset + 12)
+
+      # Calculate decimal value
+      negative = (flags & 0x80000000) != 0
+      scale = (flags & 0x7FFFFFFF) >> 16
+      result = BigDecimal.new(high) * 18446744073709551616
+      result += BigDecimal.new(mid) * 4294967296
+      result += BigDecimal.new(low)
+      result /= 10 ** scale
+      result = -result if negative
+
+      # Return decimal value
+      [result, fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      # Extract decimal parts
+      sign, significant_digits, _, exponent = value.split
+      number = significant_digits.to_i(10)
+      if exponent > significant_digits.length
+        number *= 10 ** (exponent - 1)
+        scale = 0
+      else
+        scale = significant_digits.length - exponent
+      end
+
+      # Check for decimal number overflow
+      bits = number.bit_length
+      if (bits < 0) || (bits > 96)
+        # Value too big for .NET Decimal (bit length is limited to [0, 96])
+        write_count(fbe_offset, 0, fbe_size)
+        return
+      end
+
+      # Check for decimal scale overflow
+      if (scale < 0) || (scale > 28)
+        # Value scale exceeds .NET Decimal limit of [0, 28]
+        write_count(fbe_offset, 0, fbe_size)
+        return
+      end
+
+      # Write unscaled value to bytes 0-11
+      bytes = []
+      while number > 0
+        bytes.insert(-1, number & 0xFF)
+        number >>= 8
+      end
+      bytes = bytes.pack("C*")
+      write_bytes(fbe_offset, bytes)
+      write_count(fbe_offset + bytes.length, 0, 12 - bytes.length)
+
+      # Write scale at byte 14
+      write_byte(fbe_offset + 14, scale)
+
+      # Write signum at byte 15
+      write_byte(fbe_offset + 15, (sign == -1) ? 0x80 : 0)
+
+      fbe_size
     end
   end
 end

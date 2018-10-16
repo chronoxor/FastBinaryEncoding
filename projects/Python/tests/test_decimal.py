@@ -11,10 +11,10 @@ class TestDecimal(TestCase):
         flags = (scale << 16) | 0x80000000 if negative else (scale << 16)
 
         buffer = bytearray(16)
-        struct.pack_into("I", buffer, 0, low)
-        struct.pack_into("I", buffer, 4, mid)
-        struct.pack_into("I", buffer, 8, high)
-        struct.pack_into("I", buffer, 12, flags)
+        struct.pack_into("<I", buffer, 0, low)
+        struct.pack_into("<I", buffer, 4, mid)
+        struct.pack_into("<I", buffer, 8, high)
+        struct.pack_into("<I", buffer, 12, flags)
 
         read_buffer = fbe.ReadBuffer()
         read_buffer.attach_buffer(buffer)

@@ -51,6 +51,7 @@ void GeneratorRuby::GenerateFooter()
 void GeneratorRuby::GenerateImports()
 {
     std::string code = R"CODE(
+require 'bigdecimal'
 require 'uuidtools'
 )CODE";
 
@@ -81,23 +82,23 @@ void GeneratorRuby::GenerateFBE(const CppCommon::Path& path)
     GenerateFBEModel();
     GenerateFBEFieldModelBase();
     GenerateFBEFieldModel();
-    //GenerateFBEFieldModel("Bool", "bool", "1", "False");
-    //GenerateFBEFieldModel("Byte", "byte", "1", "0");
-    //GenerateFBEFieldModel("Char", "char", "1", "'\\0'");
-    //GenerateFBEFieldModel("WChar", "wchar", "4", "'\\0'");
-    //GenerateFBEFieldModel("Int8", "int8", "1", "0");
-    //GenerateFBEFieldModel("UInt8", "uint8", "1", "0");
-    //GenerateFBEFieldModel("Int16", "int16", "2", "0");
-    //GenerateFBEFieldModel("UInt16", "uint16", "2", "0");
-    //GenerateFBEFieldModel("Int32", "int32", "4", "0");
-    //GenerateFBEFieldModel("UInt32", "uint32", "4", "0");
-    //GenerateFBEFieldModel("Int64", "int64", "8", "0");
-    //GenerateFBEFieldModel("UInt64", "uint64", "8", "0");
-    //GenerateFBEFieldModel("Float", "float", "4", "0.0");
-    //GenerateFBEFieldModel("Double", "double", "8", "0.0");
-    //GenerateFBEFieldModel("Timestamp", "uint64", "8", "0");
-    //GenerateFBEFieldModel("UUID", "uuid", "16", "uuid.UUID(int=0)");
-    //GenerateFBEFieldModelDecimal();
+    GenerateFBEFieldModel("Bool", "bool", "1", "false");
+    GenerateFBEFieldModel("Byte", "byte", "1", "0");
+    GenerateFBEFieldModel("Char", "char", "1", "'\\0'");
+    GenerateFBEFieldModel("WChar", "wchar", "4", "'\\0'");
+    GenerateFBEFieldModel("Int8", "int8", "1", "0");
+    GenerateFBEFieldModel("UInt8", "uint8", "1", "0");
+    GenerateFBEFieldModel("Int16", "int16", "2", "0");
+    GenerateFBEFieldModel("UInt16", "uint16", "2", "0");
+    GenerateFBEFieldModel("Int32", "int32", "4", "0");
+    GenerateFBEFieldModel("UInt32", "uint32", "4", "0");
+    GenerateFBEFieldModel("Int64", "int64", "8", "0");
+    GenerateFBEFieldModel("UInt64", "uint64", "8", "0");
+    GenerateFBEFieldModel("Float", "float", "4", "0.0");
+    GenerateFBEFieldModel("Double", "double", "8", "0.0");
+    GenerateFBEFieldModel("Timestamp", "uint64", "8", "0");
+    GenerateFBEFieldModel("UUID", "uuid", "16", "UUIDTools::UUID.parse_int(0)");
+    GenerateFBEFieldModelDecimal();
     //GenerateFBEFieldModelBytes();
     //GenerateFBEFieldModelString();
     //GenerateFBEFieldModelOptional();
@@ -107,24 +108,24 @@ void GeneratorRuby::GenerateFBE(const CppCommon::Path& path)
     //GenerateFBEFieldModelMap();
     if (Final())
     {
-        //GenerateFBEFinalModel();
-        //GenerateFBEFinalModel("Bool", "bool", "1", "False");
-        //GenerateFBEFinalModel("Byte", "byte", "1", "0");
-        //GenerateFBEFinalModel("Char", "char", "1", "'\\0'");
-        //GenerateFBEFinalModel("WChar", "wchar", "4", "'\\0'");
-        //GenerateFBEFinalModel("Int8", "int8", "1", "0");
-        //GenerateFBEFinalModel("UInt8", "uint8", "1", "0");
-        //GenerateFBEFinalModel("Int16", "int16", "2", "0");
-        //GenerateFBEFinalModel("UInt16", "uint16", "2", "0");
-        //GenerateFBEFinalModel("Int32", "int32", "4", "0");
-        //GenerateFBEFinalModel("UInt32", "uint32", "4", "0");
-        //GenerateFBEFinalModel("Int64", "int64", "8", "0");
-        //GenerateFBEFinalModel("UInt64", "uint64", "8", "0");
-        //GenerateFBEFinalModel("Float", "float", "4", "0.0");
-        //GenerateFBEFinalModel("Double", "double", "8", "0.0");
-        //GenerateFBEFinalModel("Timestamp", "uint64", "8", "0");
-        //GenerateFBEFinalModel("UUID", "uuid", "16", "uuid.UUID(int=0)");
-        //GenerateFBEFinalModelDecimal();
+        GenerateFBEFinalModel();
+        GenerateFBEFinalModel("Bool", "bool", "1", "false");
+        GenerateFBEFinalModel("Byte", "byte", "1", "0");
+        GenerateFBEFinalModel("Char", "char", "1", "'\\0'");
+        GenerateFBEFinalModel("WChar", "wchar", "4", "'\\0'");
+        GenerateFBEFinalModel("Int8", "int8", "1", "0");
+        GenerateFBEFinalModel("UInt8", "uint8", "1", "0");
+        GenerateFBEFinalModel("Int16", "int16", "2", "0");
+        GenerateFBEFinalModel("UInt16", "uint16", "2", "0");
+        GenerateFBEFinalModel("Int32", "int32", "4", "0");
+        GenerateFBEFinalModel("UInt32", "uint32", "4", "0");
+        GenerateFBEFinalModel("Int64", "int64", "8", "0");
+        GenerateFBEFinalModel("UInt64", "uint64", "8", "0");
+        GenerateFBEFinalModel("Float", "float", "4", "0.0");
+        GenerateFBEFinalModel("Double", "double", "8", "0.0");
+        GenerateFBEFinalModel("Timestamp", "uint64", "8", "0");
+        GenerateFBEFinalModel("UUID", "uuid", "16", "UUIDTools::UUID.parse_int(0)");
+        GenerateFBEFinalModelDecimal();
         //GenerateFBEFinalModelBytes();
         //GenerateFBEFinalModelString();
         //GenerateFBEFinalModelOptional();
@@ -439,7 +440,7 @@ void GeneratorRuby::GenerateFBEModel()
     # Buffer I/O methods
 
     def read_uint32(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L<')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L<')[0]
     end
 
     def write_uint32(offset, value)
@@ -498,67 +499,67 @@ void GeneratorRuby::GenerateFBEFieldModelBase()
     # Buffer I/O methods
 
     def read_bool(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('C')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('C')[0]
     end
 
     def read_byte(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('C')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('C')[0]
     end
 
     def read_char(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('C').chr
+      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('C')[0].chr
     end
 
     def read_wchar(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L<').chr
+      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L<')[0].chr
     end
 
     def read_int8(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('c')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('c')[0]
     end
 
     def read_uint8(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('C')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('C')[0]
     end
 
     def read_int16(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 2).unpack('s<')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 2).unpack('s<')[0]
     end
 
     def read_uint16(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 2).unpack('S<')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 2).unpack('S<')[0]
     end
 
     def read_uint16_be(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 2).unpack('S>')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 2).unpack('S>')[0]
     end
 
     def read_int32(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('l<')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('l<')[0]
     end
 
     def read_uint32(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L<')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L<')[0]
     end
 
     def read_uint32_be(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L>')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L>')[0]
     end
 
     def read_int64(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 8).unpack('q<')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 8).unpack('q<')[0]
     end
 
     def read_uint64(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 8).unpack('Q<')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 8).unpack('Q<')[0]
     end
 
     def read_float(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('e')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('e')[0]
     end
 
     def read_double(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 8).unpack('E')
+      @_buffer.buffer.slice(@_buffer.offset + offset, 8).unpack('E')[0]
     end
 
     def read_uuid(offset)
@@ -634,7 +635,7 @@ void GeneratorRuby::GenerateFBEFieldModelBase()
     end
 
     def write_count(offset, value, value_count)
-      (0...value_count).each { |i| @_buffer.buffer[@_buffer.offset + offset + i] = value }
+      (0...value_count).each { |i| @_buffer.buffer[@_buffer.offset + offset + i] = value.chr }
     end
   end
 )CODE";
@@ -670,34 +671,35 @@ void GeneratorRuby::GenerateFBEFieldModel()
 void GeneratorRuby::GenerateFBEFieldModel(const std::string& name, const std::string& type, const std::string& size, const std::string& defaults)
 {
     std::string code = R"CODE(
-
-# Fast Binary Encoding _TYPE_ field model class
-class FieldModel_NAME_(FieldModel):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
+  # Fast Binary Encoding _TYPE_ field model class
+  class FieldModel_NAME_ < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
 
     # Get the field size
-    @property
-    def fbe_size(self):
-        return _SIZE_
+    def fbe_size
+      _SIZE_
+    end
 
     # Get the value
-    def get(self, defaults=None):
-        if defaults is None:
-            defaults = _DEFAULTS_
+    def get(defaults = _DEFAULTS_)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
 
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return defaults
-
-        return self.read__TYPE_(self.fbe_offset)
+      read__TYPE_(fbe_offset)
+    end
 
     # Set the value
-    def set(self, value):
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
 
-        self.write__TYPE_(self.fbe_offset, value)
+      write__TYPE_(fbe_offset, value)
+    end
+  end
 )CODE";
 
     // Prepare code template
@@ -713,75 +715,90 @@ class FieldModel_NAME_(FieldModel):
 void GeneratorRuby::GenerateFBEFieldModelDecimal()
 {
     std::string code = R"CODE(
-
-# Fast Binary Encoding decimal field model class
-class FieldModelDecimal(FieldModel):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
+  # Fast Binary Encoding decimal field model class
+  class FieldModelDecimal < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
 
     # Get the field size
-    @property
-    def fbe_size(self):
-        return 16
+    def fbe_size
+      16
+    end
 
     # Get the value
-    def get(self, defaults=None):
-        if defaults is None:
-            defaults = decimal.Decimal(0)
+    def get(defaults = BigDecimal.new(0))
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
 
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return defaults
+      # Read decimal parts
+      low = read_uint32(fbe_offset)
+      mid = read_uint32(fbe_offset + 4)
+      high = read_uint32(fbe_offset + 8)
+      flags = read_uint32(fbe_offset + 12)
 
-        # Read decimal parts
-        low = self.read_uint32(self.fbe_offset)
-        mid = self.read_uint32(self.fbe_offset + 4)
-        high = self.read_uint32(self.fbe_offset + 8)
-        flags = self.read_uint32(self.fbe_offset + 12)
+      # Calculate decimal value
+      negative = (flags & 0x80000000) != 0
+      scale = (flags & 0x7FFFFFFF) >> 16
+      result = BigDecimal.new(high) * 18446744073709551616
+      result += BigDecimal.new(mid) * 4294967296
+      result += BigDecimal.new(low)
+      result /= 10 ** scale
+      result = -result if negative
 
-        # Calculate decimal value
-        negative = (flags & 0x80000000) != 0
-        scale = (flags & 0x7FFFFFFF) >> 16
-        result = decimal.Decimal(high) * 18446744073709551616
-        result += decimal.Decimal(mid) * 4294967296
-        result += decimal.Decimal(low)
-        result /= pow(10, scale)
-        if negative:
-            result = -result
-
-        return result
+      # Return decimal value
+      result
+    end
 
     # Set the value
-    def set(self, value):
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
 
-        # Extract decimal parts
-        parts = value.as_tuple()
-        negative = True if parts.sign == 1 else False
-        number = int(''.join(map(str, parts.digits)))
-        scale = -parts.exponent
+      # Extract decimal parts
+      sign, significant_digits, _, exponent = value.split
+      number = significant_digits.to_i(10)
+      if exponent > significant_digits.length
+        number *= 10 ** (exponent - 1)
+        scale = 0
+      else
+        scale = significant_digits.length - exponent
+      end
 
-        # Check for decimal number overflow
-        if (number.bit_length() < 0) or (number.bit_length() > 96):
-            # Value too big for .NET Decimal (bit length is limited to [0, 96])
-            self.write_count(self.fbe_offset, 0, self.fbe_size)
-            return
+      # Check for decimal number overflow
+      bits = number.bit_length
+      if (bits < 0) || (bits > 96)
+        # Value too big for .NET Decimal (bit length is limited to [0, 96])
+        write_count(fbe_offset, 0, fbe_size)
+        return
+      end
 
-        # Check for decimal scale overflow
-        if (scale < 0) or (scale > 28):
-            # Value scale exceeds .NET Decimal limit of [0, 28]
-            self.write_count(self.fbe_offset, 0, self.fbe_size)
-            return
+      # Check for decimal scale overflow
+      if (scale < 0) || (scale > 28)
+        # Value scale exceeds .NET Decimal limit of [0, 28]
+        write_count(fbe_offset, 0, fbe_size)
+        return
+      end
 
-        # Write unscaled value to bytes 0-11
-        self.write_bytes(self.fbe_offset, number.to_bytes(12, "little"))
+      # Write unscaled value to bytes 0-11
+      bytes = []
+      while number > 0
+        bytes.insert(-1, number & 0xFF)
+        number >>= 8
+      end
+      bytes = bytes.pack("C*")
+      write_bytes(fbe_offset, bytes)
+      write_count(fbe_offset + bytes.length, 0, 12 - bytes.length)
 
-        # Write scale at byte 14
-        self.write_byte(self.fbe_offset + 14, scale)
+      # Write scale at byte 14
+      write_byte(fbe_offset + 14, scale)
 
-        # Write signum at byte 15
-        self.write_byte(self.fbe_offset + 15, 0x80 if negative else 0)
+      # Write signum at byte 15
+      write_byte(fbe_offset + 15, (sign == -1) ? 0x80 : 0)
+    end
+  end
 )CODE";
 
     // Prepare code template
@@ -1690,15 +1707,17 @@ class FieldModelMap(FieldModel):
 void GeneratorRuby::GenerateFBEFinalModel()
 {
     std::string code = R"CODE(
-
-# Fast Binary Encoding final model class
-class FinalModel(FieldModelBase):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
+  # Fast Binary Encoding final model class
+  class FinalModel < FieldModelBase
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
 
     # Check if the value is valid
-    def verify(self):
-        raise NotImplementedError("verify() method not implemented!")
+    def verify
+      raise NotImplementedError, 'verify() method not implemented!'
+    end
+  end
 )CODE";
 
     // Prepare code template
@@ -1710,44 +1729,51 @@ class FinalModel(FieldModelBase):
 void GeneratorRuby::GenerateFBEFinalModel(const std::string& name, const std::string& type, const std::string& size, const std::string& defaults)
 {
     std::string code = R"CODE(
-
-# Fast Binary Encoding _TYPE_ final model class
-class FinalModel_NAME_(FinalModel):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
+  # Fast Binary Encoding _TYPE_ final model class
+  class FinalModel_NAME_ < FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
 
     # Get the allocation size
-    # noinspection PyUnusedLocal
-    def fbe_allocation_size(self, value):
-        return self.fbe_size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
 
     # Get the final size
-    @property
-    def fbe_size(self):
-        return _SIZE_
+    def fbe_size
+      _SIZE_
+    end
 
     # Check if the value is valid
-    def verify(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return sys.maxsize
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
 
-        return self.fbe_size
+      fbe_size
+    end
 
     # Get the value
-    def get(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return _DEFAULTS_, 0
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [_DEFAULTS_, 0]
+      end
 
-        return self.read__TYPE_(self.fbe_offset), self.fbe_size
+      [read__TYPE_(fbe_offset), fbe_size]
+    end
 
     # Set the value
-    def set(self, value):
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return 0
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
 
-        self.write__TYPE_(self.fbe_offset, value)
-        return self.fbe_size
+      write__TYPE_(fbe_offset, value)
+      fbe_size
+    end
+  end
 )CODE";
 
     // Prepare code template
@@ -1763,85 +1789,107 @@ class FinalModel_NAME_(FinalModel):
 void GeneratorRuby::GenerateFBEFinalModelDecimal()
 {
     std::string code = R"CODE(
-
-# Fast Binary Encoding decimal final model class
-class FinalModelDecimal(FieldModel):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
+  # Fast Binary Encoding decimal final model class
+  class FinalModelDecimal < FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
 
     # Get the allocation size
-    # noinspection PyUnusedLocal
-    def fbe_allocation_size(self, value):
-        return self.fbe_size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
 
     # Get the final size
-    @property
-    def fbe_size(self):
-        return 16
+    def fbe_size
+      16
+    end
 
     # Check if the value is valid
-    def verify(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return sys.maxsize
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
 
-        return self.fbe_size
+      fbe_size
+    end
 
     # Get the value
-    def get(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return decimal.Decimal(0), 0
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [BigDecimal.new(0), 0]
+      end
 
-        # Read decimal parts
-        low = self.read_uint32(self.fbe_offset)
-        mid = self.read_uint32(self.fbe_offset + 4)
-        high = self.read_uint32(self.fbe_offset + 8)
-        flags = self.read_uint32(self.fbe_offset + 12)
+      # Read decimal parts
+      low = read_uint32(fbe_offset)
+      mid = read_uint32(fbe_offset + 4)
+      high = read_uint32(fbe_offset + 8)
+      flags = read_uint32(fbe_offset + 12)
 
-        # Calculate decimal value
-        negative = (flags & 0x80000000) != 0
-        scale = (flags & 0x7FFFFFFF) >> 16
-        result = decimal.Decimal(high) * 18446744073709551616
-        result += decimal.Decimal(mid) * 4294967296
-        result += decimal.Decimal(low)
-        result /= pow(10, scale)
-        if negative:
-            result = -result
+      # Calculate decimal value
+      negative = (flags & 0x80000000) != 0
+      scale = (flags & 0x7FFFFFFF) >> 16
+      result = BigDecimal.new(high) * 18446744073709551616
+      result += BigDecimal.new(mid) * 4294967296
+      result += BigDecimal.new(low)
+      result /= 10 ** scale
+      result = -result if negative
 
-        return result, self.fbe_size
+      # Return decimal value
+      [result, fbe_size]
+    end
 
     # Set the value
-    def set(self, value):
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return 0
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
 
-        # Extract decimal parts
-        parts = value.as_tuple()
-        negative = True if parts.sign == 1 else False
-        number = int(''.join(map(str, parts.digits)))
-        scale = -parts.exponent
+      # Extract decimal parts
+      sign, significant_digits, _, exponent = value.split
+      number = significant_digits.to_i(10)
+      if exponent > significant_digits.length
+        number *= 10 ** (exponent - 1)
+        scale = 0
+      else
+        scale = significant_digits.length - exponent
+      end
 
-        # Check for decimal number overflow
-        if (number.bit_length() < 0) or (number.bit_length() > 96):
-            # Value too big for .NET Decimal (bit length is limited to [0, 96])
-            self.write_count(self.fbe_offset, 0, self.fbe_size)
-            return self.fbe_size
+      # Check for decimal number overflow
+      bits = number.bit_length
+      if (bits < 0) || (bits > 96)
+        # Value too big for .NET Decimal (bit length is limited to [0, 96])
+        write_count(fbe_offset, 0, fbe_size)
+        return
+      end
 
-        # Check for decimal scale overflow
-        if (scale < 0) or (scale > 28):
-            # Value scale exceeds .NET Decimal limit of [0, 28]
-            self.write_count(self.fbe_offset, 0, self.fbe_size)
-            return self.fbe_size
+      # Check for decimal scale overflow
+      if (scale < 0) || (scale > 28)
+        # Value scale exceeds .NET Decimal limit of [0, 28]
+        write_count(fbe_offset, 0, fbe_size)
+        return
+      end
 
-        # Write unscaled value to bytes 0-11
-        self.write_bytes(self.fbe_offset, number.to_bytes(12, "little"))
+      # Write unscaled value to bytes 0-11
+      bytes = []
+      while number > 0
+        bytes.insert(-1, number & 0xFF)
+        number >>= 8
+      end
+      bytes = bytes.pack("C*")
+      write_bytes(fbe_offset, bytes)
+      write_count(fbe_offset + bytes.length, 0, 12 - bytes.length)
 
-        # Write scale at byte 14
-        self.write_byte(self.fbe_offset + 14, scale)
+      # Write scale at byte 14
+      write_byte(fbe_offset + 14, scale)
 
-        # Write signum at byte 15
-        self.write_byte(self.fbe_offset + 15, 0x80 if negative else 0)
-        return self.fbe_size
+      # Write signum at byte 15
+      write_byte(fbe_offset + 15, (sign == -1) ? 0x80 : 0)
+
+      fbe_size
+    end
+  end
 )CODE";
 
     // Prepare code template

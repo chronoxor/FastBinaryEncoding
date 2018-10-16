@@ -282,6 +282,12 @@ dependencies that worth to be mentioned:
 ### Python
 * Python domain model is implemented using Python 3.7 ([time.time_ns()](https://docs.python.org/3/library/time.html#time.time_ns));
 
+### Ruby
+* Some Ruby dependencies should be installed from Gems:
+```shell
+gem install uuidtools
+```
+
 # FBE serialization
 FastBinaryEncoding is a fast and compact binary format of representing single
 domain models in different programming languages and platforms. Also FBE format

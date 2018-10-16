@@ -744,7 +744,8 @@ class FieldModelDecimal(FieldModel):
         scale = -parts.exponent
 
         # Check for decimal number overflow
-        if (number.bit_length() < 0) or (number.bit_length() > 96):
+        bits = number.bit_length()
+        if (bits < 0) or (bits > 96):
             # Value too big for .NET Decimal (bit length is limited to [0, 96])
             self.write_count(self.fbe_offset, 0, self.fbe_size)
             return

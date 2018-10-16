@@ -303,7 +303,7 @@ int main(int argc, char** argv)
     if (ruby)
     {
         if (!quiet) std::cout << "Generating Ruby code...";
-        FBE::GeneratorRuby(output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
+        FBE::GeneratorRuby(output, (indent ? indent : 2), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
 

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="org.testng:testng:Latest" type="repository">
+    <properties maven-id="org.testng:testng:LATEST" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/testng-7.0.0-beta1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/jcommander-1.72.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
