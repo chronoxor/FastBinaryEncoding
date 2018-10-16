@@ -1046,6 +1046,885 @@ module FBE
     end
   end
 
+  # Fast Binary Encoding bytes field model class
+  class FieldModelBytes < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_bytes_offset = read_uint32(fbe_offset)
+      if (fbe_bytes_offset == 0) || ((@_buffer.offset + fbe_bytes_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_bytes_size = read_uint32(fbe_bytes_offset)
+      4 + fbe_bytes_size
+    end
+
+    # Check if the bytes value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_bytes_offset = read_uint32(fbe_offset)
+      if fbe_bytes_offset == 0
+        return true
+      end
+
+      if (@_buffer.offset + fbe_bytes_offset + 4) > @_buffer.size
+        return false
+      end
+
+      fbe_bytes_size = read_uint32(fbe_bytes_offset)
+      if (@_buffer.offset + fbe_bytes_offset + 4 + fbe_bytes_size) > @_buffer.size
+        return false
+      end
+
+      true
+    end
+
+    # Get the bytes value
+    def get(defaults = '')
+      value = defaults
+
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return value
+      end
+
+      fbe_bytes_offset = read_uint32(fbe_offset)
+      if fbe_bytes_offset == 0
+        return value
+      end
+
+      if (@_buffer.offset + fbe_bytes_offset + 4) > @_buffer.size
+        return value
+      end
+
+      fbe_bytes_size = read_uint32(fbe_bytes_offset)
+      if (@_buffer.offset + fbe_bytes_offset + 4 + fbe_bytes_size) > @_buffer.size
+        return value
+      end
+
+      read_bytes(fbe_bytes_offset + 4, fbe_bytes_size)
+    end
+
+    # Set the bytes value
+    def set(value)
+      raise ArgumentError, 'Invalid bytes value!' if value.nil? || !value.is_a?(String)
+
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      fbe_bytes_size = value.length
+      fbe_bytes_offset = @_buffer.allocate(4 + fbe_bytes_size) - @_buffer.offset
+      if (fbe_bytes_offset <= 0) or ((@_buffer.offset + fbe_bytes_offset + 4 + fbe_bytes_size) > @_buffer.size)
+        return
+      end
+
+      write_uint32(fbe_offset, fbe_bytes_offset)
+      write_uint32(fbe_bytes_offset, fbe_bytes_size)
+      write_bytes(fbe_bytes_offset + 4, value)
+    end
+  end
+
+  # Fast Binary Encoding string field model class
+  class FieldModelString < FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_string_offset = read_uint32(fbe_offset)
+      if (fbe_string_offset == 0) or ((@_buffer.offset + fbe_string_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_string_size = read_uint32(fbe_string_offset)
+      4 + fbe_string_size
+    end
+
+    # Check if the string value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_string_offset = read_uint32(fbe_offset)
+      if fbe_string_offset == 0
+        return true
+      end
+
+      if (@_buffer.offset + fbe_string_offset + 4) > @_buffer.size
+        return false
+      end
+
+      fbe_string_size = read_uint32(fbe_string_offset)
+      if (@_buffer.offset + fbe_string_offset + 4 + fbe_string_size) > @_buffer.size
+        return false
+      end
+
+      true
+    end
+
+    # Get the string value
+    def get(defaults = '')
+      value = defaults
+
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return value
+      end
+
+      fbe_string_offset = read_uint32(fbe_offset)
+      if fbe_string_offset == 0
+        return value
+      end
+
+      if (@_buffer.offset + fbe_string_offset + 4) > @_buffer.size
+        return value
+      end
+
+      fbe_string_size = read_uint32(fbe_string_offset)
+      if (@_buffer.offset + fbe_string_offset + 4 + fbe_string_size) > @_buffer.size
+        return value
+      end
+
+      data = read_bytes(fbe_string_offset + 4, fbe_string_size)
+      data.decode('utf-8')
+    end
+
+    # Set the string value
+    def set(value)
+      raise ArgumentError, 'Invalid string value!' if value.nil? || !value.is_a?(String)
+
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      data = value.encode('utf-8')
+
+      fbe_string_size = data.length
+      fbe_string_offset = @_buffer.allocate(4 + fbe_string_size) - @_buffer.offset
+      if (fbe_string_offset <= 0) || ((@_buffer.offset + fbe_string_offset + 4 + fbe_string_size) > @_buffer.size)
+        return
+      end
+
+      write_uint32(fbe_offset, fbe_string_offset)
+      write_uint32(fbe_string_offset, fbe_string_size)
+      write_bytes(fbe_string_offset + 4, data)
+    end
+  end
+
+  # Fast Binary Encoding optional field model
+  class FieldModelOptional < FieldModel
+    def initialize(model, buffer, offset)
+      super(buffer, offset)
+      @_model = model
+      @_model.fbe_offset = 0
+    end
+
+    # Get the field size
+    def fbe_size
+      1 + 4
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      unless has_value
+        return 0
+      end
+
+      fbe_optional_offset = read_uint32(fbe_offset + 1)
+      if (fbe_optional_offset == 0) || ((@_buffer.offset + fbe_optional_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      @_buffer.shift(fbe_optional_offset)
+      fbe_result = value.fbe_size + value.fbe_extra
+      @_buffer.unshift(fbe_optional_offset)
+      fbe_result
+    end
+
+    # Checks whether the object contains a value
+    def empty?
+      has_value
+    end
+
+    # Checks whether the object contains a value
+    def has_value
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return false
+      end
+
+      fbe_has_value = read_uint8(fbe_offset)
+      fbe_has_value != 0
+    end
+
+    # Get the base field model value
+    def value
+      @_model
+    end
+
+    # Check if the optional value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_has_value = read_uint8(fbe_offset)
+      if fbe_has_value == 0
+        return true
+      end
+
+      fbe_optional_offset = read_uint32(fbe_offset)
+      if fbe_optional_offset == 0
+        return false
+      end
+
+      @_buffer.shift(fbe_optional_offset)
+      fbe_result = value.verify
+      @_buffer.unshift(fbe_optional_offset)
+      fbe_result
+    end
+
+    # Get the optional value (being phase)
+    def get_begin
+      unless has_value
+        return 0
+      end
+
+      fbe_optional_offset = read_uint32(fbe_offset + 1)
+      if fbe_optional_offset <= 0
+        return 0
+      end
+
+      @_buffer.shift(fbe_optional_offset)
+      fbe_optional_offset
+    end
+
+    # Get the optional value (end phase)
+    def get_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Get the optional value
+    def get(defaults = nil)
+      fbe_begin = get_begin
+      if fbe_begin == 0
+        return defaults
+      end
+      optional = value.get
+      get_end(fbe_begin)
+      optional
+    end
+
+    # Set the optional value (begin phase)
+    def set_begin(has_value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_has_value = has_value ? 1 : 0
+      write_bool(fbe_offset, fbe_has_value)
+      if fbe_has_value == 0
+        return 0
+      end
+
+      fbe_optional_size = value.fbe_size
+      fbe_optional_offset = @_buffer.allocate(fbe_optional_size) - @_buffer.offset
+      if (fbe_optional_offset <= 0) || ((@_buffer.offset + fbe_optional_offset + fbe_optional_size) > @_buffer.size)
+        return 0
+      end
+
+      write_uint32(fbe_offset + 1, fbe_optional_offset)
+
+      @_buffer.shift(fbe_optional_offset)
+      fbe_optional_offset
+    end
+
+    # Set the optional value (end phase)
+    def set_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Set the optional value
+    def set(optional)
+      fbe_begin = set_begin(!optional.nil?)
+      if fbe_begin == 0
+        return
+      end
+      value.set(optional)
+      set_end(fbe_begin)
+    end
+  end
+
+  # Fast Binary Encoding array field model class
+  class FieldModelArray < FieldModel
+    def initialize(model, buffer, offset, size)
+        super(buffer, offset)
+        @_model = model
+        @_size = size
+    end
+
+    # Get the field size
+    def fbe_size
+      @_size * @_model.fbe_size
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      0
+    end
+
+    # Get the array offset
+    def offset
+      0
+    end
+
+    # Get the array size
+    def size
+      @_size
+    end
+
+    # Array index operator
+    def [](index)
+      raise RuntimeError, 'Model is broken!' if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+      raise IndexError, 'Index is out of bounds!' if index >= @_size
+
+      @_model.fbe_offset = fbe_offset
+      @_model.fbe_shift(index * @_model.fbe_size)
+      @_model
+    end
+
+    # Check if the array is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return false
+      end
+
+      @_model.fbe_offset = fbe_offset
+      @_size.times do
+        unless @_model.verify
+          return false
+        end
+        @_model.fbe_shift(@_model.fbe_size)
+      end
+
+      true
+    end
+
+    # Get the array
+    def get(values = Array.new)
+      values.clear
+
+      fbe_model = self[0]
+      @_size.times do
+        value = fbe_model.get
+        values.append(value)
+        fbe_model.fbe_shift(fbe_model.fbe_size)
+      end
+
+      values
+    end
+
+    # Set the array
+    def set(values)
+      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Array)
+
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      fbe_model = self[0]
+      (0...[values.length, @_size].min).each do |i|
+        fbe_model.set(values[i])
+        fbe_model.fbe_shift(fbe_model.fbe_size)
+      end
+    end
+  end
+
+  # Fast Binary Encoding vector field model class
+  class FieldModelVector < FieldModel
+    def initialize(model, buffer, offset)
+      super(buffer, offset)
+      @_model = model
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_vector_offset = read_uint32(fbe_offset)
+      if (fbe_vector_offset == 0) || ((@_buffer.offset + fbe_vector_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_vector_size = read_uint32(fbe_vector_offset)
+
+      fbe_result = 4
+      @_model.fbe_offset = fbe_vector_offset + 4
+      fbe_vector_size.times do
+        fbe_result += @_model.fbe_size + @_model.fbe_extra
+        @_model.fbe_shift(@_model.fbe_size)
+      end
+      fbe_result
+    end
+
+    # Get the vector offset
+    def offset
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      read_uint32(fbe_offset)
+    end
+
+    # Get the vector size
+    def size
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_vector_offset = read_uint32(fbe_offset)
+      if (fbe_vector_offset == 0) || ((@_buffer.offset + fbe_vector_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      read_uint32(fbe_vector_offset)
+    end
+
+    # Vector index operator
+    def [](index)
+      raise RuntimeError, 'Model is broken!' if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+      fbe_vector_offset = read_uint32(fbe_offset)
+      raise RuntimeError, 'Model is broken!' if (fbe_vector_offset <= 0) || ((@_buffer.offset + fbe_vector_offset + 4) > @_buffer.size)
+      fbe_vector_size = read_uint32(fbe_vector_offset)
+      raise IndexError, 'Index is out of bounds!' if index >= fbe_vector_size
+
+      @_model.fbe_offset = fbe_vector_offset + 4
+      @_model.fbe_shift(index * @_model.fbe_size)
+      @_model
+    end
+
+    # Resize the vector and get its first model
+    def resize(size)
+      fbe_vector_size = size * @_model.fbe_size
+      fbe_vector_offset = @_buffer.allocate(4 + fbe_vector_size) - @_buffer.offset
+      raise RuntimeError, 'Model is broken!' if (fbe_vector_offset <= 0) || ((@_buffer.offset + fbe_vector_offset + 4) > @_buffer.size)
+
+      write_uint32(fbe_offset, fbe_vector_offset)
+      write_uint32(fbe_vector_offset, size)
+      write_count(fbe_vector_offset + 4, 0, fbe_vector_size)
+
+      @_model.fbe_offset = fbe_vector_offset + 4
+      @_model
+    end
+
+    # Check if the vector is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_vector_offset = read_uint32(fbe_offset)
+      if fbe_vector_offset == 0
+        return true
+      end
+
+      if (@_buffer.offset + fbe_vector_offset + 4) > @_buffer.size
+        return false
+      end
+
+      fbe_vector_size = read_uint32(fbe_vector_offset)
+
+      @_model.fbe_offset = fbe_vector_offset + 4
+      fbe_vector_size.times do
+        unless @_model.verify
+          return false
+        end
+        @_model.fbe_shift(@_model.fbe_size)
+      end
+
+      true
+    end
+
+    # Get the vector
+    def get(values = Array.new)
+      values.clear
+
+      fbe_vector_size = size
+      if fbe_vector_size == 0
+        return values
+      end
+
+      fbe_model = self[0]
+      fbe_vector_size.times do
+        value = fbe_model.get
+        values.append(value)
+        fbe_model.fbe_shift(fbe_model.fbe_size)
+      end
+
+      values
+    end
+
+    # Set the vector
+    def set(values)
+      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Array)
+
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      fbe_model = resize(values.length)
+      values.each do |value|
+        fbe_model.set(value)
+        fbe_model.fbe_shift(fbe_model.fbe_size)
+      end
+    end
+  end
+
+  # Fast Binary Encoding set field model class
+  class FieldModelSet < FieldModel
+    def initialize(model, buffer, offset)
+      super(buffer, offset)
+      @_model = model
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_set_offset = read_uint32(fbe_offset)
+      if (fbe_set_offset == 0) || ((@_buffer.offset + fbe_set_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_set_size = read_uint32(fbe_set_offset)
+
+      fbe_result = 4
+      @_model.fbe_offset = fbe_set_offset + 4
+      fbe_set_size.times do
+        fbe_result += @_model.fbe_size + @_model.fbe_extra
+        @_model.fbe_shift(@_model.fbe_size)
+      end
+      fbe_result
+    end
+
+    # Get the set value offset
+    def offset
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      read_uint32(fbe_offset)
+    end
+
+    # Get the set value size
+    def size
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_set_offset = read_uint32(fbe_offset)
+      if (fbe_set_offset == 0) || ((@_buffer.offset + fbe_set_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      read_uint32(fbe_set_offset)
+    end
+
+    # Set index operator
+    def [](index)
+      raise RuntimeError, 'Model is broken!' if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+      fbe_set_offset = read_uint32(fbe_offset)
+      raise RuntimeError, 'Model is broken!' if (fbe_set_offset <= 0) || ((@_buffer.offset + fbe_set_offset + 4) > @_buffer.size)
+      fbe_set_size = read_uint32(fbe_set_offset)
+      raise IndexError, 'Index is out of bounds!' if index >= fbe_set_size
+
+      @_model.fbe_offset = fbe_set_offset + 4
+      @_model.fbe_shift(index * @_model.fbe_size)
+      @_model
+    end
+
+    # Resize the set and get its first model
+    def resize(size)
+      fbe_set_size = size * @_model.fbe_size
+      fbe_set_offset = @_buffer.allocate(4 + fbe_set_size) - @_buffer.offset
+      raise RuntimeError, 'Model is broken!' if (fbe_set_offset <= 0) || ((@_buffer.offset + fbe_set_offset + 4) > @_buffer.size)
+
+      write_uint32(fbe_offset, fbe_set_offset)
+      write_uint32(fbe_set_offset, size)
+      write_count(fbe_set_offset + 4, 0, fbe_set_size)
+
+      @_model.fbe_offset = fbe_set_offset + 4
+      @_model
+    end
+
+    # Check if the set value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_set_offset = read_uint32(fbe_offset)
+      if fbe_set_offset == 0
+        return true
+      end
+
+      if (@_buffer.offset + fbe_set_offset + 4) > @_buffer.size
+        return false
+      end
+
+      fbe_set_size = read_uint32(fbe_set_offset)
+
+      @_model.fbe_offset = fbe_set_offset + 4
+      fbe_set_size.times do
+        unless @_model.verify
+          return false
+        end
+        @_model.fbe_shift(@_model.fbe_size)
+      end
+
+      true
+    end
+
+    # Get the set value
+    def get(values = Set.new)
+      values.clear
+
+      fbe_set_size = size
+      if fbe_set_size == 0
+        return values
+      end
+
+      fbe_model = self[0]
+      fbe_set_size.times do
+        value = fbe_model.get
+        values.add(value)
+        fbe_model.fbe_shift(fbe_model.fbe_size)
+      end
+
+      values
+    end
+
+    # Set the set value
+    def set(values)
+      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Set)
+
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      fbe_model = resize(values.length)
+      values.each do |value|
+        fbe_model.set(value)
+        fbe_model.fbe_shift(fbe_model.fbe_size)
+      end
+    end
+  end
+
+  # Fast Binary Encoding map field model class
+  class FieldModelMap < FieldModel
+    def initialize(model_key, model_value, buffer, offset)
+      super(buffer, offset)
+      @_model_key = model_key
+      @_model_value = model_value
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_map_offset = read_uint32(fbe_offset)
+      if (fbe_map_offset == 0) || ((@_buffer.offset + fbe_map_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_map_size = read_uint32(fbe_map_offset)
+
+      fbe_result = 4
+      @_model_key.fbe_offset = fbe_map_offset + 4
+      @_model_value.fbe_offset = fbe_map_offset + 4 + @_model_key.fbe_size
+      fbe_map_size.times do
+        fbe_result += @_model_key.fbe_size + @_model_key.fbe_extra
+        @_model_key.fbe_shift(@_model_key.fbe_size + @_model_value.fbe_size)
+        fbe_result += @_model_value.fbe_size + @_model_value.fbe_extra
+        @_model_value.fbe_shift(@_model_key.fbe_size + @_model_value.fbe_size)
+      end
+      fbe_result
+    end
+
+    # Get the map offset
+    def offset
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      read_uint32(fbe_offset)
+    end
+
+    # Get the map size
+    def size
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_map_offset = read_uint32(fbe_offset)
+      if (fbe_map_offset == 0) || ((@_buffer.offset + fbe_map_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      read_uint32(fbe_map_offset)
+    end
+
+    # Map index operator
+    def [](index)
+      raise RuntimeError, 'Model is broken!' if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+      fbe_map_offset = read_uint32(fbe_offset)
+      raise RuntimeError, 'Model is broken!' if (fbe_map_offset <= 0) || ((@_buffer.offset + fbe_map_offset + 4) > @_buffer.size)
+      fbe_map_size = read_uint32(fbe_map_offset)
+      raise IndexError, 'Index is out of bounds!' if index >= fbe_map_size
+
+      @_model_key.fbe_offset = fbe_map_offset + 4
+      @_model_value.fbe_offset = fbe_map_offset + 4 + @_model_key.fbe_size
+      @_model_key.fbe_shift(index * (@_model_key.fbe_size + @_model_value.fbe_size))
+      @_model_value.fbe_shift(index * (@_model_key.fbe_size + @_model_value.fbe_size))
+      [@_model_key, @_model_value]
+    end
+
+    # Resize the map and get its first model
+    def resize(size)
+      @_model_key.fbe_offset = fbe_offset
+      @_model_value.fbe_offset = fbe_offset + @_model_key.fbe_size
+
+      fbe_map_size = size * (@_model_key.fbe_size + @_model_value.fbe_size)
+      fbe_map_offset = @_buffer.allocate(4 + fbe_map_size) - @_buffer.offset
+      raise RuntimeError, 'Model is broken!' if (fbe_map_offset <= 0) || ((@_buffer.offset + fbe_map_offset + 4) > @_buffer.size)
+
+      write_uint32(fbe_offset, fbe_map_offset)
+      write_uint32(fbe_map_offset, size)
+      write_count(fbe_map_offset + 4, 0, fbe_map_size)
+
+      @_model_key.fbe_offset = fbe_map_offset + 4
+      @_model_value.fbe_offset = fbe_map_offset + 4 + @_model_key.fbe_size
+      [@_model_key, @_model_value]
+    end
+
+    # Check if the map is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_map_offset = read_uint32(fbe_offset)
+      if fbe_map_offset == 0
+        return true
+      end
+
+      if (@_buffer.offset + fbe_map_offset + 4) > @_buffer.size
+        return false
+      end
+
+      fbe_map_size = read_uint32(fbe_map_offset)
+
+      @_model_key.fbe_offset = fbe_map_offset + 4
+      @_model_value.fbe_offset = fbe_map_offset + 4 + @_model_key.fbe_size
+      fbe_map_size.times do
+        unless @_model_key.verify
+          return false
+        end
+        @_model_key.fbe_shift(@_model_key.fbe_size + @_model_value.fbe_size)
+        unless @_model_value.verify
+          return false
+        end
+        @_model_value.fbe_shift(@_model_key.fbe_size + @_model_value.fbe_size)
+      end
+
+      true
+    end
+
+    # Get the map
+    def get(values = Hash.new)
+      values.clear
+
+      fbe_map_size = size
+      if fbe_map_size == 0
+        return values
+      end
+
+      fbe_model_key, fbe_model_value = self[0]
+      fbe_map_size.times do
+        key = fbe_model_key.get
+        value = fbe_model_value.get
+        values[key] = value
+        fbe_model_key.fbe_shift(fbe_model_key.fbe_size + fbe_model_value.fbe_size)
+        fbe_model_value.fbe_shift(fbe_model_key.fbe_size + fbe_model_value.fbe_size)
+      end
+
+      values
+    end
+
+    # Set the map
+    def set(values)
+      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Hash)
+
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      fbe_model_key, fbe_model_value = resize(values.length)
+      values.each do |key, value|
+        fbe_model_key.set(key)
+        fbe_model_key.fbe_shift(fbe_model_key.fbe_size + fbe_model_value.fbe_size)
+        fbe_model_value.set(value)
+        fbe_model_value.fbe_shift(fbe_model_key.fbe_size + fbe_model_value.fbe_size)
+      end
+    end
+  end
+
   # Fast Binary Encoding final model class
   class FinalModel < FieldModelBase
     def initialize(buffer, offset)
@@ -1893,6 +2772,553 @@ module FBE
       write_byte(fbe_offset + 15, (sign == -1) ? 0x80 : 0)
 
       fbe_size
+    end
+  end
+
+  # Fast Binary Encoding bytes final model class
+  class FinalModelBytes < FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(value)
+      4 + value.length
+    end
+
+    # Check if the bytes value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_bytes_size = read_uint32(fbe_offset)
+      if (@_buffer.offset + fbe_offset + 4 + fbe_bytes_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      4 + fbe_bytes_size
+    end
+
+    # Get the bytes value
+    def get
+      if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
+        return ['', 0]
+      end
+
+      fbe_bytes_size = read_uint32(fbe_offset)
+      if (@_buffer.offset + fbe_offset + 4 + fbe_bytes_size) > @_buffer.size
+        return ['', 4]
+      end
+
+      [read_bytes(fbe_offset + 4, fbe_bytes_size), (4 + fbe_bytes_size)]
+    end
+
+    # Set the bytes value
+    def set(value)
+      raise ArgumentError, 'Invalid bytes value!' if value.nil? || !value.is_a?(String)
+
+      if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
+        return 0
+      end
+
+      fbe_bytes_size = value.length
+      if (@_buffer.offset + fbe_offset + 4 + fbe_bytes_size) > @_buffer.size
+        return 4
+      end
+
+      write_uint32(fbe_offset, fbe_bytes_size)
+      write_bytes(fbe_offset + 4, value)
+      4 + fbe_bytes_size
+    end
+  end
+
+  # Fast Binary Encoding string final model class
+  class FinalModelString < FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(value)
+      4 + 3 * (value.length + 1)
+    end
+
+    # Check if the string value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_string_size = read_uint32(fbe_offset)
+      if (@_buffer.offset + fbe_offset + 4 + fbe_string_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      4 + fbe_string_size
+    end
+
+    # Get the string value
+    def get
+      if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
+        return ['', 0]
+      end
+
+      fbe_string_size = read_uint32(fbe_offset)
+      if (@_buffer.offset + fbe_offset + 4 + fbe_string_size) > @_buffer.size
+        return ['', 4]
+      end
+
+      data = read_bytes(fbe_offset + 4, fbe_string_size)
+      [data.decode('utf-8'), (4 + fbe_string_size)]
+    end
+
+    # Set the string value
+    def set(value)
+      raise ArgumentError, 'Invalid string value!' if value.nil? || !value.is_a?(String)
+
+      if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
+        return 0
+      end
+
+      data = value.encode('utf-8')
+
+      fbe_string_size = data.length
+      if (@_buffer.offset + fbe_offset + 4 + fbe_string_size) > @_buffer.size
+        return 4
+      end
+
+      write_uint32(fbe_offset, fbe_string_size)
+      write_bytes(fbe_offset + 4, data)
+      4 + fbe_string_size
+    end
+  end
+
+  # Fast Binary Encoding optional final model
+  class FinalModelOptional < FinalModel
+    def initialize(model, buffer, offset)
+      super(buffer, offset)
+      @_model = model
+      @_model.fbe_offset = 0
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(optional)
+      1 + (optional ? value.fbe_allocation_size(optional) : 0)
+    end
+
+    # Checks whether the object contains a value
+    def empty?
+      has_value
+    end
+
+    # Checks whether the object contains a value
+    def has_value
+      if (@_buffer.offset + fbe_offset + 1) > @_buffer.size
+        return false
+      end
+
+      fbe_has_value = read_uint8(fbe_offset)
+      fbe_has_value != 0
+    end
+
+    # Get the base final model value
+    def value
+      @_model
+    end
+
+    # Check if the optional value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + 1) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_has_value = read_uint8(fbe_offset)
+      if fbe_has_value == 0
+        return 1
+      end
+
+      @_buffer.shift(fbe_offset + 1)
+      fbe_result = value.verify
+      @_buffer.unshift(fbe_offset + 1)
+      1 + fbe_result
+    end
+
+    # Get the optional value
+    def get
+      if (@_buffer.offset + fbe_offset + 1) > @_buffer.size
+        return [nil, 0]
+      end
+
+      unless has_value
+        return [nil, 1]
+      end
+
+      @_buffer.shift(fbe_offset + 1)
+      optional = value.get
+      @_buffer.unshift(fbe_offset + 1)
+      [optional[0], (1 + optional[1])]
+    end
+
+    # Set the optional value
+    def set(optional)
+      if (@_buffer.offset + fbe_offset + 1) > @_buffer.size
+        return 0
+      end
+
+      fbe_has_value = optional ? 1 : 0
+      write_bool(fbe_offset, fbe_has_value)
+      if fbe_has_value == 0
+        return 1
+      end
+
+      @_buffer.shift(fbe_offset + 1)
+      size = value.set(optional)
+      @_buffer.unshift(fbe_offset + 1)
+      1 + size
+    end
+  end
+
+  # Fast Binary Encoding array final model class
+  class FinalModelArray < FinalModel
+    def initialize(model, buffer, offset, size)
+      super(buffer, offset)
+      @_model = model
+      @_size = size
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(values)
+      size = 0
+      [values.length, @_size].times do |i|
+        size += @_model.fbe_allocation_size(values[i])
+      end
+      size
+    end
+
+    # Check if the array is valid
+    def verify
+      if (@_buffer.offset + fbe_offset) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      size = 0
+      @_model.fbe_offset = fbe_offset
+      @_size.times do
+        offset = @_model.verify
+        if offset == Fixnum::MAX
+          return Fixnum::MAX
+        end
+        @_model.fbe_shift(offset)
+        size += offset
+      end
+      size
+    end
+
+    # Get the array
+    def get(values = Array.new)
+      values.clear
+
+      if (@_buffer.offset + fbe_offset) > @_buffer.size
+        return [values, 0]
+      end
+
+      size = 0
+      @_model.fbe_offset = fbe_offset
+      @_size.times do
+        value = @_model.get
+        values.append(value[0])
+        @_model.fbe_shift(value[1])
+        size += value[1]
+      end
+      [values, size]
+    end
+
+    # Set the array
+    def set(values)
+      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Array)
+
+      if (@_buffer.offset + fbe_offset) > @_buffer.size
+        return 0
+      end
+
+      size = 0
+      @_model.fbe_offset = fbe_offset
+      [values.length, @_size].min.times do |i|
+        offset = @_model.set(values[i])
+        @_model.fbe_shift(offset)
+        size += offset
+      end
+      size
+    end
+  end
+
+  # Fast Binary Encoding vector final model class
+  class FinalModelVector < FinalModel
+    def initialize(model, buffer, offset)
+      super(buffer, offset)
+      @_model = model
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(values)
+      size = 4
+      values.each do |value|
+        size += @_model.fbe_allocation_size(value)
+      end
+      size
+    end
+
+    # Check if the vector is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_vector_size = read_uint32(fbe_offset)
+
+      size = 4
+      @_model.fbe_offset = fbe_offset + 4
+      fbe_vector_size.times do
+        offset = @_model.verify
+        if offset == Fixnum::MAX
+          return Fixnum::MAX
+        end
+        @_model.fbe_shift(offset)
+        size += offset
+      end
+      size
+    end
+
+    # Get the vector
+    def get(values = Array.new)
+      values.clear
+
+      if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
+        return [values, 0]
+      end
+
+      fbe_vector_size = read_uint32(fbe_offset)
+      if fbe_vector_size == 0
+        return [values, 4]
+      end
+
+      size = 4
+      @_model.fbe_offset = fbe_offset + 4
+      fbe_vector_size.times do
+        value = @_model.get
+        values.append(value[0])
+        @_model.fbe_shift(value[1])
+        size += value[1]
+      end
+      [values, size]
+    end
+
+    # Set the vector
+    def set(values)
+      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Array)
+
+      if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
+        return 0
+      end
+
+      write_uint32(fbe_offset, values.length)
+
+      size = 4
+      @_model.fbe_offset = fbe_offset + 4
+      values.each do |value|
+        offset = @_model.set(value)
+        @_model.fbe_shift(offset)
+        size += offset
+      end
+      size
+    end
+  end
+
+  # Fast Binary Encoding set final model class
+  class FinalModelSet < FinalModel
+    def initialize(model, buffer, offset)
+      super(buffer, offset)
+      @_model = model
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(values)
+      size = 4
+      values.each do |value|
+        size += @_model.fbe_allocation_size(value)
+      end
+      size
+    end
+
+    # Check if the set value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_set_size = read_uint32(fbe_offset)
+
+      size = 4
+      @_model.fbe_offset = fbe_offset + 4
+      fbe_set_size.times do
+        offset = @_model.verify
+        if offset == Fixnum::MAX
+          return Fixnum::MAX
+        end
+        @_model.fbe_shift(offset)
+        size += offset
+      end
+      size
+    end
+
+    # Get the set value
+    def get(values = Set.new)
+      values.clear
+
+      if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
+        return [values, 0]
+      end
+
+      fbe_set_size = read_uint32(fbe_offset)
+      if fbe_set_size == 0
+        return [values, 4]
+      end
+
+      size = 4
+      @_model.fbe_offset = self.fbe_offset + 4
+      fbe_set_size.times do
+        value = @_model.get
+        values.add(value[0])
+        @_model.fbe_shift(value[1])
+        size += value[1]
+      end
+      [values, size]
+    end
+
+    # Set the set value
+    def set(values)
+      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Set)
+
+      if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
+        return 0
+      end
+
+      write_uint32(fbe_offset, values.length)
+
+      size = 4
+      @_model.fbe_offset = fbe_offset + 4
+      values.each do |value|
+        offset = @_model.set(value)
+        @_model.fbe_shift(offset)
+        size += offset
+      end
+      size
+    end
+  end
+
+  # Fast Binary Encoding map final model class
+  class FinalModelMap < FinalModel
+    def initialize(model_key, model_value, buffer, offset)
+      super(buffer, offset)
+      @_model_key = model_key
+      @_model_value = model_value
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(values)
+      size = 4
+      values.each do |key, value|
+        size += @_model_key.fbe_allocation_size(key)
+        size += @_model_value.fbe_allocation_size(value)
+      end
+      size
+    end
+
+    # Check if the map is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_map_size = read_uint32(fbe_offset)
+
+      size = 4
+      @_model_key.fbe_offset = fbe_offset + 4
+      @_model_value.fbe_offset = fbe_offset + 4
+      fbe_map_size.times do
+        offset_key = @_model_key.verify
+        if offset_key == Fixnum::MAX
+          return Fixnum::MAX
+        end
+        @_model_key.fbe_shift(offset_key)
+        @_model_value.fbe_shift(offset_key)
+        size += offset_key
+        offset_value = @_model_value.verify
+        if offset_value == Fixnum::MAX
+          return Fixnum::MAX
+        end
+        @_model_key.fbe_shift(offset_value)
+        @_model_value.fbe_shift(offset_value)
+        size += offset_value
+      end
+      size
+    end
+
+    # Get the map
+    def get(values = Hash.new)
+      values.clear
+
+      if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
+        return [values, 0]
+      end
+
+      fbe_map_size = read_uint32(fbe_offset)
+      if fbe_map_size == 0
+        return [values, 4]
+      end
+
+      size = 4
+      @_model_key.fbe_offset = self.fbe_offset + 4
+      @_model_value.fbe_offset = self.fbe_offset + 4
+      fbe_map_size.times do
+        key = @_model_key.get
+        @_model_key.fbe_shift(key[1])
+        @_model_value.fbe_shift(key[1])
+        size += key[1]
+        value = @_model_value.get
+        @_model_key.fbe_shift(value[1])
+        @_model_value.fbe_shift(value[1])
+        size += value[1]
+        values[key[0]] = value[0]
+      end
+      [values, size]
+    end
+
+    # Set the map
+    def set(values)
+      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Hash)
+
+      if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
+        return 0
+      end
+
+      write_uint32(fbe_offset, values.length)
+
+      size = 4
+      @_model_key.fbe_offset = self.fbe_offset + 4
+      @_model_value.fbe_offset = self.fbe_offset + 4
+      values.each do |key, value|
+        offset_key = @_model_key.set(key)
+        @_model_key.fbe_shift(offset_key)
+        @_model_value.fbe_shift(offset_key)
+        size += offset_key
+        offset_value = @_model_value.set(value)
+        @_model_key.fbe_shift(offset_value)
+        @_model_value.fbe_shift(offset_value)
+        size += offset_value
+      end
+      size
     end
   end
 end
