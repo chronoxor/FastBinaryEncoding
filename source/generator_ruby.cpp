@@ -3376,7 +3376,7 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
     WriteLine();
     WriteLineIndent("def initialize(value = 0)");
     Indent(1);
-    WriteLineIndent("@value = value");
+    WriteLineIndent("@value = value.is_a?(Enum) ? value.value : value");
     Indent(-1);
     WriteLineIndent("end");
 
@@ -3593,7 +3593,40 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     WriteLine();
     WriteLineIndent("def initialize(value = 0)");
     Indent(1);
-    WriteLineIndent("@value = value");
+    WriteLineIndent("@value = value.is_a?(Flags) ? value.value : value");
+    Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate flags operators
+    WriteLine();
+    WriteLineIndent("def ~");
+    Indent(1);
+    WriteLineIndent("Flags.new(~@value)");
+    Indent(-1);
+    WriteLineIndent("end");
+    WriteLineIndent("def &(flags) Flags.new(@value & flags.value) end");
+    WriteLineIndent("def |(flags) Flags.new(@value | flags.value) end");
+    WriteLineIndent("def ^(flags) Flags.new(@value ^ flags.value) end");
+
+    // Generate flags manipulation methods
+    WriteLine();
+    WriteLineIndent("def has_flags(flags)");
+    Indent(1);
+    WriteLineIndent("((@value & flags.value) != 0) && ((self.value & flags.value) == flags.value)");
+    Indent(-1);
+    WriteLineIndent("end");
+    WriteLine();
+    WriteLineIndent("def set_flags(flags)");
+    Indent(1);
+    WriteLineIndent("@value |= flags.value");
+    WriteLineIndent("self");
+    Indent(-1);
+    WriteLineIndent("end");
+    WriteLine();
+    WriteLineIndent("def remove_flags(flags)");
+    Indent(1);
+    WriteLineIndent("@value &= ~flags.value");
+    WriteLineIndent("self");
     Indent(-1);
     WriteLineIndent("end");
 
@@ -3615,7 +3648,7 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     {
         for (auto it = f->body->values.begin(); it != f->body->values.end(); ++it)
         {
-            WriteLineIndent("if (@value == Flags." + *(*it)->name + ") && ((@value & Flags." + *(*it)->name + ") == Flags." + *(*it)->name + ")");
+            WriteLineIndent("if ((@value & Flags." + *(*it)->name + ") != 0) && ((@value & Flags." + *(*it)->name + ") == Flags." + *(*it)->name + ")");
             Indent(1);
             WriteLineIndent("if first");
             Indent(1);

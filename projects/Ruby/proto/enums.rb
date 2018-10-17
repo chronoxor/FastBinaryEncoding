@@ -29,7 +29,7 @@ module Enums
       define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
 
       def initialize(value = 0)
-        @value = value
+        @value = value.is_a?(Enum) ? value.value : value
       end
 
       def to_i
@@ -170,7 +170,7 @@ module Enums
       define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
 
       def initialize(value = 0)
-        @value = value
+        @value = value.is_a?(Enum) ? value.value : value
       end
 
       def to_i
@@ -311,7 +311,7 @@ module Enums
       define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
 
       def initialize(value = 0)
-        @value = value
+        @value = value.is_a?(Enum) ? value.value : value
       end
 
       def to_i
@@ -452,7 +452,7 @@ module Enums
       define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
 
       def initialize(value = 0)
-        @value = value
+        @value = value.is_a?(Enum) ? value.value : value
       end
 
       def to_i
@@ -593,7 +593,7 @@ module Enums
       define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
 
       def initialize(value = 0)
-        @value = value
+        @value = value.is_a?(Enum) ? value.value : value
       end
 
       def to_i
@@ -734,7 +734,7 @@ module Enums
       define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
 
       def initialize(value = 0)
-        @value = value
+        @value = value.is_a?(Enum) ? value.value : value
       end
 
       def to_i
@@ -875,7 +875,7 @@ module Enums
       define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
 
       def initialize(value = 0)
-        @value = value
+        @value = value.is_a?(Enum) ? value.value : value
       end
 
       def to_i
@@ -1016,7 +1016,7 @@ module Enums
       define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
 
       def initialize(value = 0)
-        @value = value
+        @value = value.is_a?(Enum) ? value.value : value
       end
 
       def to_i
@@ -1157,7 +1157,7 @@ module Enums
       define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
 
       def initialize(value = 0)
-        @value = value
+        @value = value.is_a?(Enum) ? value.value : value
       end
 
       def to_i
@@ -1298,7 +1298,7 @@ module Enums
       define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
 
       def initialize(value = 0)
-        @value = value
+        @value = value.is_a?(Enum) ? value.value : value
       end
 
       def to_i
@@ -1439,7 +1439,7 @@ module Enums
       define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
 
       def initialize(value = 0)
-        @value = value
+        @value = value.is_a?(Enum) ? value.value : value
       end
 
       def to_i

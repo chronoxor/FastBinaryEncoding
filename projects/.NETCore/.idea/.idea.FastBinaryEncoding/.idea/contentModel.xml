@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\ivan.shynkarenka\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.reporters.netcoreapp10.dll" t="Include" />
-    <e p="C:\Users\ivan.shynkarenka\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.utility.netcoreapp10.dll" t="Include" />
-    <e p="C:\Users\ivan.shynkarenka\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
-    <e p="C:\Users\ivan.shynkarenka\.Rider2018.1\system\resharper-host\local\Transient\ReSharperHost\v12\SolutionCaches\_FastBinaryEncoding.-1793967401.00" t="ExcludeRecursive" />
+    <e p="\app" t="IncludeRecursive" />
+    <e p="\cb8ef5e9" t="IncludeRecursive" />
+    <e p="C:\Users\chronoxor\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.reporters.netcoreapp10.dll" t="Include" />
+    <e p="C:\Users\chronoxor\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.utility.netcoreapp10.dll" t="Include" />
+    <e p="C:\Users\chronoxor\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
+    <e p="C:\Users\chronoxor\.Rider2018.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\chronoxor\.Rider2018.2\system\resharper-host\local\Transient\ReSharperHost\v182\SolutionCaches\_FastBinaryEncoding.-1793967401.00" t="ExcludeRecursive" />
     <e p="Z:\Projects\CppProjects\FastBinaryEncoding\Projects\.NETCore" t="IncludeFlat">
       <e p="Benchmarks" t="IncludeRecursive">
         <e p="Benchmarks.csproj" t="IncludeRecursive" />

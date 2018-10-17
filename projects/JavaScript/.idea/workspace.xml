@@ -14,85 +14,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="test_send_seceive.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/test_send_seceive.js">
+      <file leaf-file-name="test_clone.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_clone.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1139">
-              <caret line="67" selection-start-line="67" selection-end-line="67" />
+            <state relative-caret-position="51">
+              <caret line="3" selection-start-line="3" selection-end-line="3" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_send_seceive_final.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/test_send_seceive_final.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1139">
-              <caret line="67" selection-start-line="67" selection-end-line="67" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_create.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="test_create.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/test_create.js">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file leaf-file-name="proto.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/proto/proto.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="73967">
-              <caret line="4352" column="7" selection-start-line="4352" selection-start-column="7" selection-end-line="4352" selection-end-column="7" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="protoex.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/proto/protoex.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="37383">
-              <caret line="2200" selection-start-line="2200" selection-end-line="2200" />
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="package-lock.json" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/package-lock.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1557" column="14" selection-start-line="1557" selection-start-column="5" selection-end-line="1557" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_serialization_final.js" pinned="false" current-in-tab="false">
-        <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_serialization_final.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_create.js" pinned="false" current-in-tab="false">
-        <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_create.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="969">
-              <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="proto.js" pinned="false" current-in-tab="false">
-        <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/proto.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="69394">
-              <caret line="4083" column="7" selection-start-line="4083" selection-start-column="7" selection-end-line="4083" selection-end-column="7" />
+            <state relative-caret-position="196">
+              <caret line="65" column="38" selection-start-line="65" selection-start-column="38" selection-end-line="65" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -150,12 +85,7 @@
             <path>
               <item name="JavaScript" type="b2602c69:ProjectViewProjectNode" />
               <item name="JavaScript" type="462c0819:PsiDirectoryNode" />
-              <item name="proto" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JavaScript" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JavaScript" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -172,7 +102,7 @@
     <property name="node.js.selected.package.eslint" value="Z:\projects\CppProjects\FastBinaryEncoding\projects\JavaScript\node_modules\eslint" />
     <property name="node.js.selected.package.standard" value="Z:\projects\CppProjects\FastBinaryEncoding\projects\JavaScript\node_modules\standard" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -186,9 +116,9 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.test_send_seceive.js">
+  <component name="RunManager" selected="Node.js.print.js">
+    <configuration name="print.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="print.js" working-dir="$PROJECT_DIR$/examples" />
     <configuration name="test_send_seceive.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="test_send_seceive.js" working-dir="$PROJECT_DIR$/tests" />
-    <configuration name="test_serialization_final.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="test_serialization_final.js" working-dir="$PROJECT_DIR$/tests" />
     <configuration name="tests-browser-local" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -217,19 +147,19 @@
       <envs />
     </configuration>
     <list>
-      <item itemvalue="Node.js.test_serialization_final.js" />
       <item itemvalue="npm.tests-node" />
       <item itemvalue="npm.tests-standard" />
       <item itemvalue="Node.js.test_send_seceive.js" />
       <item itemvalue="npm.tests-browser-local" />
+      <item itemvalue="Node.js.print.js" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.print.js" />
         <item itemvalue="npm.tests-node" />
         <item itemvalue="npm.tests-standard" />
         <item itemvalue="npm.tests-browser-local" />
         <item itemvalue="Node.js.test_send_seceive.js" />
-        <item itemvalue="Node.js.test_serialization_final.js" />
       </list>
     </recent_temporary>
   </component>
@@ -250,22 +180,25 @@
       <workItem from="1538595028708" duration="81000" />
       <workItem from="1538702879777" duration="190000" />
       <workItem from="1538703111323" duration="96000" />
+      <workItem from="1539796825868" duration="136000" />
+      <workItem from="1539797118671" duration="63000" />
+      <workItem from="1539798043102" duration="642000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3924000" />
+    <option name="totallyTimeSpent" value="4765000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="622" y="333" width="1318" height="773" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49141964" visible="true" weight="0.3859375" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6043956" visible="true" weight="0.3859375" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info id="npm" order="2" sideWeight="0.5085803" side_tool="true" visible="true" weight="0.3859375" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.43213728" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.43213728" />
+      <window_info id="npm" order="2" sideWeight="0.3956044" side_tool="true" visible="true" weight="0.3859375" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -303,16 +236,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/proto/proto.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73984">
-          <caret line="4352" column="7" selection-start-line="4352" selection-start-column="7" selection-end-line="4352" selection-end-column="7" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/node_modules/tape/lib/test.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1598">
@@ -595,9 +518,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_create.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/node_modules/tape/lib/test.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1598">
@@ -609,16 +529,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/proto.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73967">
-          <caret line="4352" column="7" selection-start-line="4352" selection-start-column="7" selection-end-line="4352" selection-end-column="7" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -643,6 +553,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1557" column="14" selection-start-line="1557" selection-start-column="5" selection-end-line="1557" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/proto.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6768">
+          <caret line="964" lean-forward="true" selection-start-line="964" selection-end-line="964" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_clone.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_create.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="196">
+          <caret line="65" column="38" selection-start-line="65" selection-start-column="38" selection-end-line="65" selection-end-column="38" />
         </state>
       </provider>
     </entry>

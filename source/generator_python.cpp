@@ -2745,10 +2745,7 @@ void GeneratorPython::GenerateImports(const std::shared_ptr<Package>& p)
     // Generate common import
     WriteLine();
     if (JSON())
-    {
-        WriteLineIndent("# noinspection PyUnresolvedReferences");
         WriteLineIndent("import base64");
-    }
     WriteLineIndent("import copy");
     WriteLineIndent("import decimal");
     WriteLineIndent("import enum");

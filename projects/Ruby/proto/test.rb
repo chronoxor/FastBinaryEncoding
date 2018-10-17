@@ -31,7 +31,7 @@ module Test
       define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
 
       def initialize(value = 0)
-        @value = value
+        @value = value.is_a?(Enum) ? value.value : value
       end
 
       def to_i
@@ -172,7 +172,7 @@ module Test
       define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
 
       def initialize(value = 0)
-        @value = value
+        @value = value.is_a?(Enum) ? value.value : value
       end
 
       def to_i
@@ -313,7 +313,28 @@ module Test
       define :FLAG_VALUE_5, Flags.value(:FLAG_VALUE_1)|Flags.value(:FLAG_VALUE_3)
 
       def initialize(value = 0)
-        @value = value
+        @value = value.is_a?(Flags) ? value.value : value
+      end
+
+      def ~
+        Flags.new(~@value)
+      end
+      def &(flags) Flags.new(@value & flags.value) end
+      def |(flags) Flags.new(@value | flags.value) end
+      def ^(flags) Flags.new(@value ^ flags.value) end
+
+      def has_flags(flags)
+        ((@value & flags.value) != 0) && ((self.value & flags.value) == flags.value)
+      end
+
+      def set_flags(flags)
+        @value |= flags.value
+        self
+      end
+
+      def remove_flags(flags)
+        @value &= ~flags.value
+        self
       end
 
       def to_i
@@ -323,7 +344,7 @@ module Test
       def to_s
         result = ''
         first = true
-        if (@value == Flags.FLAG_VALUE_0) && ((@value & Flags.FLAG_VALUE_0) == Flags.FLAG_VALUE_0)
+        if ((@value & Flags.FLAG_VALUE_0) != 0) && ((@value & Flags.FLAG_VALUE_0) == Flags.FLAG_VALUE_0)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -332,7 +353,7 @@ module Test
           end
           result << 'FLAG_VALUE_0'
         end
-        if (@value == Flags.FLAG_VALUE_1) && ((@value & Flags.FLAG_VALUE_1) == Flags.FLAG_VALUE_1)
+        if ((@value & Flags.FLAG_VALUE_1) != 0) && ((@value & Flags.FLAG_VALUE_1) == Flags.FLAG_VALUE_1)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -341,7 +362,7 @@ module Test
           end
           result << 'FLAG_VALUE_1'
         end
-        if (@value == Flags.FLAG_VALUE_2) && ((@value & Flags.FLAG_VALUE_2) == Flags.FLAG_VALUE_2)
+        if ((@value & Flags.FLAG_VALUE_2) != 0) && ((@value & Flags.FLAG_VALUE_2) == Flags.FLAG_VALUE_2)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -350,7 +371,7 @@ module Test
           end
           result << 'FLAG_VALUE_2'
         end
-        if (@value == Flags.FLAG_VALUE_3) && ((@value & Flags.FLAG_VALUE_3) == Flags.FLAG_VALUE_3)
+        if ((@value & Flags.FLAG_VALUE_3) != 0) && ((@value & Flags.FLAG_VALUE_3) == Flags.FLAG_VALUE_3)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -359,7 +380,7 @@ module Test
           end
           result << 'FLAG_VALUE_3'
         end
-        if (@value == Flags.FLAG_VALUE_4) && ((@value & Flags.FLAG_VALUE_4) == Flags.FLAG_VALUE_4)
+        if ((@value & Flags.FLAG_VALUE_4) != 0) && ((@value & Flags.FLAG_VALUE_4) == Flags.FLAG_VALUE_4)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -368,7 +389,7 @@ module Test
           end
           result << 'FLAG_VALUE_4'
         end
-        if (@value == Flags.FLAG_VALUE_5) && ((@value & Flags.FLAG_VALUE_5) == Flags.FLAG_VALUE_5)
+        if ((@value & Flags.FLAG_VALUE_5) != 0) && ((@value & Flags.FLAG_VALUE_5) == Flags.FLAG_VALUE_5)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -496,7 +517,28 @@ module Test
       define :FLAG_VALUE_9, Flags.value(:FLAG_VALUE_2)|Flags.value(:FLAG_VALUE_4)|Flags.value(:FLAG_VALUE_6)
 
       def initialize(value = 0)
-        @value = value
+        @value = value.is_a?(Flags) ? value.value : value
+      end
+
+      def ~
+        Flags.new(~@value)
+      end
+      def &(flags) Flags.new(@value & flags.value) end
+      def |(flags) Flags.new(@value | flags.value) end
+      def ^(flags) Flags.new(@value ^ flags.value) end
+
+      def has_flags(flags)
+        ((@value & flags.value) != 0) && ((self.value & flags.value) == flags.value)
+      end
+
+      def set_flags(flags)
+        @value |= flags.value
+        self
+      end
+
+      def remove_flags(flags)
+        @value &= ~flags.value
+        self
       end
 
       def to_i
@@ -506,7 +548,7 @@ module Test
       def to_s
         result = ''
         first = true
-        if (@value == Flags.FLAG_VALUE_0) && ((@value & Flags.FLAG_VALUE_0) == Flags.FLAG_VALUE_0)
+        if ((@value & Flags.FLAG_VALUE_0) != 0) && ((@value & Flags.FLAG_VALUE_0) == Flags.FLAG_VALUE_0)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -515,7 +557,7 @@ module Test
           end
           result << 'FLAG_VALUE_0'
         end
-        if (@value == Flags.FLAG_VALUE_1) && ((@value & Flags.FLAG_VALUE_1) == Flags.FLAG_VALUE_1)
+        if ((@value & Flags.FLAG_VALUE_1) != 0) && ((@value & Flags.FLAG_VALUE_1) == Flags.FLAG_VALUE_1)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -524,7 +566,7 @@ module Test
           end
           result << 'FLAG_VALUE_1'
         end
-        if (@value == Flags.FLAG_VALUE_2) && ((@value & Flags.FLAG_VALUE_2) == Flags.FLAG_VALUE_2)
+        if ((@value & Flags.FLAG_VALUE_2) != 0) && ((@value & Flags.FLAG_VALUE_2) == Flags.FLAG_VALUE_2)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -533,7 +575,7 @@ module Test
           end
           result << 'FLAG_VALUE_2'
         end
-        if (@value == Flags.FLAG_VALUE_3) && ((@value & Flags.FLAG_VALUE_3) == Flags.FLAG_VALUE_3)
+        if ((@value & Flags.FLAG_VALUE_3) != 0) && ((@value & Flags.FLAG_VALUE_3) == Flags.FLAG_VALUE_3)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -542,7 +584,7 @@ module Test
           end
           result << 'FLAG_VALUE_3'
         end
-        if (@value == Flags.FLAG_VALUE_4) && ((@value & Flags.FLAG_VALUE_4) == Flags.FLAG_VALUE_4)
+        if ((@value & Flags.FLAG_VALUE_4) != 0) && ((@value & Flags.FLAG_VALUE_4) == Flags.FLAG_VALUE_4)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -551,7 +593,7 @@ module Test
           end
           result << 'FLAG_VALUE_4'
         end
-        if (@value == Flags.FLAG_VALUE_5) && ((@value & Flags.FLAG_VALUE_5) == Flags.FLAG_VALUE_5)
+        if ((@value & Flags.FLAG_VALUE_5) != 0) && ((@value & Flags.FLAG_VALUE_5) == Flags.FLAG_VALUE_5)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -560,7 +602,7 @@ module Test
           end
           result << 'FLAG_VALUE_5'
         end
-        if (@value == Flags.FLAG_VALUE_6) && ((@value & Flags.FLAG_VALUE_6) == Flags.FLAG_VALUE_6)
+        if ((@value & Flags.FLAG_VALUE_6) != 0) && ((@value & Flags.FLAG_VALUE_6) == Flags.FLAG_VALUE_6)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -569,7 +611,7 @@ module Test
           end
           result << 'FLAG_VALUE_6'
         end
-        if (@value == Flags.FLAG_VALUE_7) && ((@value & Flags.FLAG_VALUE_7) == Flags.FLAG_VALUE_7)
+        if ((@value & Flags.FLAG_VALUE_7) != 0) && ((@value & Flags.FLAG_VALUE_7) == Flags.FLAG_VALUE_7)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -578,7 +620,7 @@ module Test
           end
           result << 'FLAG_VALUE_7'
         end
-        if (@value == Flags.FLAG_VALUE_8) && ((@value & Flags.FLAG_VALUE_8) == Flags.FLAG_VALUE_8)
+        if ((@value & Flags.FLAG_VALUE_8) != 0) && ((@value & Flags.FLAG_VALUE_8) == Flags.FLAG_VALUE_8)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -587,7 +629,7 @@ module Test
           end
           result << 'FLAG_VALUE_8'
         end
-        if (@value == Flags.FLAG_VALUE_9) && ((@value & Flags.FLAG_VALUE_9) == Flags.FLAG_VALUE_9)
+        if ((@value & Flags.FLAG_VALUE_9) != 0) && ((@value & Flags.FLAG_VALUE_9) == Flags.FLAG_VALUE_9)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false

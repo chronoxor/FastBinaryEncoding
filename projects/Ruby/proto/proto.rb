@@ -25,7 +25,7 @@ module Proto
       define :sell, 0 + 1
 
       def initialize(value = 0)
-        @value = value
+        @value = value.is_a?(Enum) ? value.value : value
       end
 
       def to_i
@@ -143,7 +143,7 @@ module Proto
       define :stop, 0 + 2
 
       def initialize(value = 0)
-        @value = value
+        @value = value.is_a?(Enum) ? value.value : value
       end
 
       def to_i
@@ -270,7 +270,28 @@ module Proto
       define :bad, Flags.value(:unknown)|Flags.value(:invalid)|Flags.value(:broken)
 
       def initialize(value = 0)
-        @value = value
+        @value = value.is_a?(Flags) ? value.value : value
+      end
+
+      def ~
+        Flags.new(~@value)
+      end
+      def &(flags) Flags.new(@value & flags.value) end
+      def |(flags) Flags.new(@value | flags.value) end
+      def ^(flags) Flags.new(@value ^ flags.value) end
+
+      def has_flags(flags)
+        ((@value & flags.value) != 0) && ((self.value & flags.value) == flags.value)
+      end
+
+      def set_flags(flags)
+        @value |= flags.value
+        self
+      end
+
+      def remove_flags(flags)
+        @value &= ~flags.value
+        self
       end
 
       def to_i
@@ -280,7 +301,7 @@ module Proto
       def to_s
         result = ''
         first = true
-        if (@value == Flags.unknown) && ((@value & Flags.unknown) == Flags.unknown)
+        if ((@value & Flags.unknown) != 0) && ((@value & Flags.unknown) == Flags.unknown)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -289,7 +310,7 @@ module Proto
           end
           result << 'unknown'
         end
-        if (@value == Flags.invalid) && ((@value & Flags.invalid) == Flags.invalid)
+        if ((@value & Flags.invalid) != 0) && ((@value & Flags.invalid) == Flags.invalid)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -298,7 +319,7 @@ module Proto
           end
           result << 'invalid'
         end
-        if (@value == Flags.initialized) && ((@value & Flags.initialized) == Flags.initialized)
+        if ((@value & Flags.initialized) != 0) && ((@value & Flags.initialized) == Flags.initialized)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -307,7 +328,7 @@ module Proto
           end
           result << 'initialized'
         end
-        if (@value == Flags.calculated) && ((@value & Flags.calculated) == Flags.calculated)
+        if ((@value & Flags.calculated) != 0) && ((@value & Flags.calculated) == Flags.calculated)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -316,7 +337,7 @@ module Proto
           end
           result << 'calculated'
         end
-        if (@value == Flags.broken) && ((@value & Flags.broken) == Flags.broken)
+        if ((@value & Flags.broken) != 0) && ((@value & Flags.broken) == Flags.broken)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -325,7 +346,7 @@ module Proto
           end
           result << 'broken'
         end
-        if (@value == Flags.good) && ((@value & Flags.good) == Flags.good)
+        if ((@value & Flags.good) != 0) && ((@value & Flags.good) == Flags.good)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false
@@ -334,7 +355,7 @@ module Proto
           end
           result << 'good'
         end
-        if (@value == Flags.bad) && ((@value & Flags.bad) == Flags.bad)
+        if ((@value & Flags.bad) != 0) && ((@value & Flags.bad) == Flags.bad)
           if first
             # noinspection RubyUnusedLocalVariable
             first = false

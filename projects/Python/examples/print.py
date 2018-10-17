@@ -1,4 +1,3 @@
-import proto
 from proto import test
 
 
