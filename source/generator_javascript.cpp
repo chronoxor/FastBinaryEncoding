@@ -8736,8 +8736,6 @@ void GeneratorJavaScript::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     if (f->body)
     {
         WriteLine();
-        int index = 0;
-        std::string last = ConvertEnumConstant(*f->name, "int32", "0");
         for (const auto& value : f->body->values)
         {
             WriteLineIndent("// noinspection PointlessArithmeticExpressionJS");
@@ -8745,20 +8743,10 @@ void GeneratorJavaScript::GenerateFlags(const std::shared_ptr<FlagsType>& f)
             if (value->value)
             {
                 if (value->value->constant && !value->value->constant->empty())
-                {
-                    index = 0;
-                    last = ConvertEnumConstant(*f->name, flags_type, *value->value->constant);
-                    Write(last + " + " + std::to_string(index++));
-                }
+                    Write(ConvertEnumConstant(*f->name, flags_type, *value->value->constant));
                 else if (value->value->reference && !value->value->reference->empty())
-                {
-                    index = 0;
-                    last = ConvertEnumConstant(*f->name, "", *value->value->reference);
-                    Write(last);
-                }
+                    Write(ConvertEnumConstant(*f->name, "", *value->value->reference));
             }
-            else
-                Write(last + " + " + std::to_string(index++));
             Write(")");
             WriteLine();
         }

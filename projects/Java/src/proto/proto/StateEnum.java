@@ -14,11 +14,11 @@ import fbe.*;
 
 public enum StateEnum
 {
-    unknown((byte)0x00 + 0)
-    , invalid((byte)0x01 + 0)
-    , initialized((byte)0x02 + 0)
-    , calculated((byte)0x04 + 0)
-    , broken((byte)0x08 + 0)
+    unknown((byte)0x00)
+    , invalid((byte)0x01)
+    , initialized((byte)0x02)
+    , calculated((byte)0x04)
+    , broken((byte)0x08)
     , good(initialized.getRaw()|calculated.getRaw())
     , bad(unknown.getRaw()|invalid.getRaw()|broken.getRaw())
     ;

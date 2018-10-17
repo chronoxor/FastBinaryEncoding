@@ -232,10 +232,10 @@ class FinalModelEnumTyped(fbe.FinalModel):
 
 
 class FlagsSimple(enum.IntFlag, metaclass=fbe.DefaultEnumMeta):
-    FLAG_VALUE_0 = int(0x0) + 0
-    FLAG_VALUE_1 = int(0x1) + 0
-    FLAG_VALUE_2 = int(0x2) + 0
-    FLAG_VALUE_3 = int(0x4) + 0
+    FLAG_VALUE_0 = int(0x0)
+    FLAG_VALUE_1 = int(0x1)
+    FLAG_VALUE_2 = int(0x2)
+    FLAG_VALUE_3 = int(0x4)
     FLAG_VALUE_4 = FLAG_VALUE_3
     FLAG_VALUE_5 = FLAG_VALUE_1 | FLAG_VALUE_3
 
@@ -378,14 +378,14 @@ class FinalModelFlagsSimple(fbe.FinalModel):
 
 
 class FlagsTyped(enum.IntFlag, metaclass=fbe.DefaultEnumMeta):
-    FLAG_VALUE_0 = int(0x00) + 0
-    FLAG_VALUE_1 = int(0x01) + 0
-    FLAG_VALUE_2 = int(0x02) + 0
-    FLAG_VALUE_3 = int(0x04) + 0
-    FLAG_VALUE_4 = int(0x08) + 0
-    FLAG_VALUE_5 = int(0x10) + 0
-    FLAG_VALUE_6 = int(0x20) + 0
-    FLAG_VALUE_7 = int(0x40) + 0
+    FLAG_VALUE_0 = int(0x00)
+    FLAG_VALUE_1 = int(0x01)
+    FLAG_VALUE_2 = int(0x02)
+    FLAG_VALUE_3 = int(0x04)
+    FLAG_VALUE_4 = int(0x08)
+    FLAG_VALUE_5 = int(0x10)
+    FLAG_VALUE_6 = int(0x20)
+    FLAG_VALUE_7 = int(0x40)
     FLAG_VALUE_8 = FLAG_VALUE_7
     FLAG_VALUE_9 = FLAG_VALUE_2 | FLAG_VALUE_4 | FLAG_VALUE_6
 

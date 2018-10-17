@@ -10,4 +10,1564 @@
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/PerceivedComplexity
 
+require 'bigdecimal'
+require 'uuidtools'
+
+require_relative 'fbe'
+
+module Enums
+
+  module EnumByte
+    class Enum
+      include FBE::Enum
+
+      define :ENUM_VALUE_0, 0 + 0
+      define :ENUM_VALUE_1, 0 + 0
+      define :ENUM_VALUE_2, 0 + 1
+      define :ENUM_VALUE_3, 254 + 0
+      define :ENUM_VALUE_4, 254 + 1
+      define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
+
+      def initialize(value = 0)
+        @value = value
+      end
+
+      def to_i
+        @value
+      end
+
+      def to_s
+        if @value == Enum.ENUM_VALUE_0
+          return 'ENUM_VALUE_0'
+        end
+        if @value == Enum.ENUM_VALUE_1
+          return 'ENUM_VALUE_1'
+        end
+        if @value == Enum.ENUM_VALUE_2
+          return 'ENUM_VALUE_2'
+        end
+        if @value == Enum.ENUM_VALUE_3
+          return 'ENUM_VALUE_3'
+        end
+        if @value == Enum.ENUM_VALUE_4
+          return 'ENUM_VALUE_4'
+        end
+        if @value == Enum.ENUM_VALUE_5
+          return 'ENUM_VALUE_5'
+        end
+        '<unknown>'
+      end
+    end
+
+    class << self
+      attr_accessor :ENUM_VALUE_0
+      attr_accessor :ENUM_VALUE_1
+      attr_accessor :ENUM_VALUE_2
+      attr_accessor :ENUM_VALUE_3
+      attr_accessor :ENUM_VALUE_4
+      attr_accessor :ENUM_VALUE_5
+    end
+
+    self.ENUM_VALUE_0 = Enum.new(Enum.ENUM_VALUE_0)
+    self.ENUM_VALUE_1 = Enum.new(Enum.ENUM_VALUE_1)
+    self.ENUM_VALUE_2 = Enum.new(Enum.ENUM_VALUE_2)
+    self.ENUM_VALUE_3 = Enum.new(Enum.ENUM_VALUE_3)
+    self.ENUM_VALUE_4 = Enum.new(Enum.ENUM_VALUE_4)
+    self.ENUM_VALUE_5 = Enum.new(Enum.ENUM_VALUE_5)
+
+    def self.new(value = 0)
+      Enum.new(value)
+    end
+  end
+
+  EnumByte.freeze
+
+  # Fast Binary Encoding EnumByte field model class
+  class FieldModelEnumByte < FBE::FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      1
+    end
+
+    # Get the value
+    def get(defaults = EnumByte.new)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      EnumByte.new(read_byte(fbe_offset))
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_byte(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding EnumByte final model class
+  class FinalModelEnumByte < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      1
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [EnumByte.new, 0]
+      end
+
+      [EnumByte.new(read_byte(fbe_offset)), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_byte(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  module EnumChar
+    class Enum
+      include FBE::Enum
+
+      define :ENUM_VALUE_0, 0 + 0
+      define :ENUM_VALUE_1, '1'.ord + 0
+      define :ENUM_VALUE_2, '1'.ord + 1
+      define :ENUM_VALUE_3, '3'.ord + 0
+      define :ENUM_VALUE_4, '3'.ord + 1
+      define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
+
+      def initialize(value = 0)
+        @value = value
+      end
+
+      def to_i
+        @value
+      end
+
+      def to_s
+        if @value == Enum.ENUM_VALUE_0
+          return 'ENUM_VALUE_0'
+        end
+        if @value == Enum.ENUM_VALUE_1
+          return 'ENUM_VALUE_1'
+        end
+        if @value == Enum.ENUM_VALUE_2
+          return 'ENUM_VALUE_2'
+        end
+        if @value == Enum.ENUM_VALUE_3
+          return 'ENUM_VALUE_3'
+        end
+        if @value == Enum.ENUM_VALUE_4
+          return 'ENUM_VALUE_4'
+        end
+        if @value == Enum.ENUM_VALUE_5
+          return 'ENUM_VALUE_5'
+        end
+        '<unknown>'
+      end
+    end
+
+    class << self
+      attr_accessor :ENUM_VALUE_0
+      attr_accessor :ENUM_VALUE_1
+      attr_accessor :ENUM_VALUE_2
+      attr_accessor :ENUM_VALUE_3
+      attr_accessor :ENUM_VALUE_4
+      attr_accessor :ENUM_VALUE_5
+    end
+
+    self.ENUM_VALUE_0 = Enum.new(Enum.ENUM_VALUE_0)
+    self.ENUM_VALUE_1 = Enum.new(Enum.ENUM_VALUE_1)
+    self.ENUM_VALUE_2 = Enum.new(Enum.ENUM_VALUE_2)
+    self.ENUM_VALUE_3 = Enum.new(Enum.ENUM_VALUE_3)
+    self.ENUM_VALUE_4 = Enum.new(Enum.ENUM_VALUE_4)
+    self.ENUM_VALUE_5 = Enum.new(Enum.ENUM_VALUE_5)
+
+    def self.new(value = 0)
+      Enum.new(value)
+    end
+  end
+
+  EnumChar.freeze
+
+  # Fast Binary Encoding EnumChar field model class
+  class FieldModelEnumChar < FBE::FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      1
+    end
+
+    # Get the value
+    def get(defaults = EnumChar.new)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      EnumChar.new(read_uint8(fbe_offset))
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_uint8(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding EnumChar final model class
+  class FinalModelEnumChar < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      1
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [EnumChar.new, 0]
+      end
+
+      [EnumChar.new(read_uint8(fbe_offset)), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_uint8(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  module EnumWChar
+    class Enum
+      include FBE::Enum
+
+      define :ENUM_VALUE_0, 0 + 0
+      define :ENUM_VALUE_1, 0x0444 + 0
+      define :ENUM_VALUE_2, 0x0444 + 1
+      define :ENUM_VALUE_3, 0x0555 + 0
+      define :ENUM_VALUE_4, 0x0555 + 1
+      define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
+
+      def initialize(value = 0)
+        @value = value
+      end
+
+      def to_i
+        @value
+      end
+
+      def to_s
+        if @value == Enum.ENUM_VALUE_0
+          return 'ENUM_VALUE_0'
+        end
+        if @value == Enum.ENUM_VALUE_1
+          return 'ENUM_VALUE_1'
+        end
+        if @value == Enum.ENUM_VALUE_2
+          return 'ENUM_VALUE_2'
+        end
+        if @value == Enum.ENUM_VALUE_3
+          return 'ENUM_VALUE_3'
+        end
+        if @value == Enum.ENUM_VALUE_4
+          return 'ENUM_VALUE_4'
+        end
+        if @value == Enum.ENUM_VALUE_5
+          return 'ENUM_VALUE_5'
+        end
+        '<unknown>'
+      end
+    end
+
+    class << self
+      attr_accessor :ENUM_VALUE_0
+      attr_accessor :ENUM_VALUE_1
+      attr_accessor :ENUM_VALUE_2
+      attr_accessor :ENUM_VALUE_3
+      attr_accessor :ENUM_VALUE_4
+      attr_accessor :ENUM_VALUE_5
+    end
+
+    self.ENUM_VALUE_0 = Enum.new(Enum.ENUM_VALUE_0)
+    self.ENUM_VALUE_1 = Enum.new(Enum.ENUM_VALUE_1)
+    self.ENUM_VALUE_2 = Enum.new(Enum.ENUM_VALUE_2)
+    self.ENUM_VALUE_3 = Enum.new(Enum.ENUM_VALUE_3)
+    self.ENUM_VALUE_4 = Enum.new(Enum.ENUM_VALUE_4)
+    self.ENUM_VALUE_5 = Enum.new(Enum.ENUM_VALUE_5)
+
+    def self.new(value = 0)
+      Enum.new(value)
+    end
+  end
+
+  EnumWChar.freeze
+
+  # Fast Binary Encoding EnumWChar field model class
+  class FieldModelEnumWChar < FBE::FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the value
+    def get(defaults = EnumWChar.new)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      EnumWChar.new(read_uint32(fbe_offset))
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_uint32(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding EnumWChar final model class
+  class FinalModelEnumWChar < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      4
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [EnumWChar.new, 0]
+      end
+
+      [EnumWChar.new(read_uint32(fbe_offset)), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_uint32(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  module EnumInt8
+    class Enum
+      include FBE::Enum
+
+      define :ENUM_VALUE_0, 0 + 0
+      define :ENUM_VALUE_1, -128 + 0
+      define :ENUM_VALUE_2, -128 + 1
+      define :ENUM_VALUE_3, 126 + 0
+      define :ENUM_VALUE_4, 126 + 1
+      define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
+
+      def initialize(value = 0)
+        @value = value
+      end
+
+      def to_i
+        @value
+      end
+
+      def to_s
+        if @value == Enum.ENUM_VALUE_0
+          return 'ENUM_VALUE_0'
+        end
+        if @value == Enum.ENUM_VALUE_1
+          return 'ENUM_VALUE_1'
+        end
+        if @value == Enum.ENUM_VALUE_2
+          return 'ENUM_VALUE_2'
+        end
+        if @value == Enum.ENUM_VALUE_3
+          return 'ENUM_VALUE_3'
+        end
+        if @value == Enum.ENUM_VALUE_4
+          return 'ENUM_VALUE_4'
+        end
+        if @value == Enum.ENUM_VALUE_5
+          return 'ENUM_VALUE_5'
+        end
+        '<unknown>'
+      end
+    end
+
+    class << self
+      attr_accessor :ENUM_VALUE_0
+      attr_accessor :ENUM_VALUE_1
+      attr_accessor :ENUM_VALUE_2
+      attr_accessor :ENUM_VALUE_3
+      attr_accessor :ENUM_VALUE_4
+      attr_accessor :ENUM_VALUE_5
+    end
+
+    self.ENUM_VALUE_0 = Enum.new(Enum.ENUM_VALUE_0)
+    self.ENUM_VALUE_1 = Enum.new(Enum.ENUM_VALUE_1)
+    self.ENUM_VALUE_2 = Enum.new(Enum.ENUM_VALUE_2)
+    self.ENUM_VALUE_3 = Enum.new(Enum.ENUM_VALUE_3)
+    self.ENUM_VALUE_4 = Enum.new(Enum.ENUM_VALUE_4)
+    self.ENUM_VALUE_5 = Enum.new(Enum.ENUM_VALUE_5)
+
+    def self.new(value = 0)
+      Enum.new(value)
+    end
+  end
+
+  EnumInt8.freeze
+
+  # Fast Binary Encoding EnumInt8 field model class
+  class FieldModelEnumInt8 < FBE::FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      1
+    end
+
+    # Get the value
+    def get(defaults = EnumInt8.new)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      EnumInt8.new(read_int8(fbe_offset))
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_int8(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding EnumInt8 final model class
+  class FinalModelEnumInt8 < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      1
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [EnumInt8.new, 0]
+      end
+
+      [EnumInt8.new(read_int8(fbe_offset)), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_int8(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  module EnumUInt8
+    class Enum
+      include FBE::Enum
+
+      define :ENUM_VALUE_0, 0 + 0
+      define :ENUM_VALUE_1, 0 + 0
+      define :ENUM_VALUE_2, 0 + 1
+      define :ENUM_VALUE_3, 254 + 0
+      define :ENUM_VALUE_4, 254 + 1
+      define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
+
+      def initialize(value = 0)
+        @value = value
+      end
+
+      def to_i
+        @value
+      end
+
+      def to_s
+        if @value == Enum.ENUM_VALUE_0
+          return 'ENUM_VALUE_0'
+        end
+        if @value == Enum.ENUM_VALUE_1
+          return 'ENUM_VALUE_1'
+        end
+        if @value == Enum.ENUM_VALUE_2
+          return 'ENUM_VALUE_2'
+        end
+        if @value == Enum.ENUM_VALUE_3
+          return 'ENUM_VALUE_3'
+        end
+        if @value == Enum.ENUM_VALUE_4
+          return 'ENUM_VALUE_4'
+        end
+        if @value == Enum.ENUM_VALUE_5
+          return 'ENUM_VALUE_5'
+        end
+        '<unknown>'
+      end
+    end
+
+    class << self
+      attr_accessor :ENUM_VALUE_0
+      attr_accessor :ENUM_VALUE_1
+      attr_accessor :ENUM_VALUE_2
+      attr_accessor :ENUM_VALUE_3
+      attr_accessor :ENUM_VALUE_4
+      attr_accessor :ENUM_VALUE_5
+    end
+
+    self.ENUM_VALUE_0 = Enum.new(Enum.ENUM_VALUE_0)
+    self.ENUM_VALUE_1 = Enum.new(Enum.ENUM_VALUE_1)
+    self.ENUM_VALUE_2 = Enum.new(Enum.ENUM_VALUE_2)
+    self.ENUM_VALUE_3 = Enum.new(Enum.ENUM_VALUE_3)
+    self.ENUM_VALUE_4 = Enum.new(Enum.ENUM_VALUE_4)
+    self.ENUM_VALUE_5 = Enum.new(Enum.ENUM_VALUE_5)
+
+    def self.new(value = 0)
+      Enum.new(value)
+    end
+  end
+
+  EnumUInt8.freeze
+
+  # Fast Binary Encoding EnumUInt8 field model class
+  class FieldModelEnumUInt8 < FBE::FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      1
+    end
+
+    # Get the value
+    def get(defaults = EnumUInt8.new)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      EnumUInt8.new(read_uint8(fbe_offset))
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_uint8(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding EnumUInt8 final model class
+  class FinalModelEnumUInt8 < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      1
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [EnumUInt8.new, 0]
+      end
+
+      [EnumUInt8.new(read_uint8(fbe_offset)), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_uint8(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  module EnumInt16
+    class Enum
+      include FBE::Enum
+
+      define :ENUM_VALUE_0, 0 + 0
+      define :ENUM_VALUE_1, -32768 + 0
+      define :ENUM_VALUE_2, -32768 + 1
+      define :ENUM_VALUE_3, 32766 + 0
+      define :ENUM_VALUE_4, 32766 + 1
+      define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
+
+      def initialize(value = 0)
+        @value = value
+      end
+
+      def to_i
+        @value
+      end
+
+      def to_s
+        if @value == Enum.ENUM_VALUE_0
+          return 'ENUM_VALUE_0'
+        end
+        if @value == Enum.ENUM_VALUE_1
+          return 'ENUM_VALUE_1'
+        end
+        if @value == Enum.ENUM_VALUE_2
+          return 'ENUM_VALUE_2'
+        end
+        if @value == Enum.ENUM_VALUE_3
+          return 'ENUM_VALUE_3'
+        end
+        if @value == Enum.ENUM_VALUE_4
+          return 'ENUM_VALUE_4'
+        end
+        if @value == Enum.ENUM_VALUE_5
+          return 'ENUM_VALUE_5'
+        end
+        '<unknown>'
+      end
+    end
+
+    class << self
+      attr_accessor :ENUM_VALUE_0
+      attr_accessor :ENUM_VALUE_1
+      attr_accessor :ENUM_VALUE_2
+      attr_accessor :ENUM_VALUE_3
+      attr_accessor :ENUM_VALUE_4
+      attr_accessor :ENUM_VALUE_5
+    end
+
+    self.ENUM_VALUE_0 = Enum.new(Enum.ENUM_VALUE_0)
+    self.ENUM_VALUE_1 = Enum.new(Enum.ENUM_VALUE_1)
+    self.ENUM_VALUE_2 = Enum.new(Enum.ENUM_VALUE_2)
+    self.ENUM_VALUE_3 = Enum.new(Enum.ENUM_VALUE_3)
+    self.ENUM_VALUE_4 = Enum.new(Enum.ENUM_VALUE_4)
+    self.ENUM_VALUE_5 = Enum.new(Enum.ENUM_VALUE_5)
+
+    def self.new(value = 0)
+      Enum.new(value)
+    end
+  end
+
+  EnumInt16.freeze
+
+  # Fast Binary Encoding EnumInt16 field model class
+  class FieldModelEnumInt16 < FBE::FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      2
+    end
+
+    # Get the value
+    def get(defaults = EnumInt16.new)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      EnumInt16.new(read_int16(fbe_offset))
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_int16(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding EnumInt16 final model class
+  class FinalModelEnumInt16 < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      2
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [EnumInt16.new, 0]
+      end
+
+      [EnumInt16.new(read_int16(fbe_offset)), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_int16(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  module EnumUInt16
+    class Enum
+      include FBE::Enum
+
+      define :ENUM_VALUE_0, 0 + 0
+      define :ENUM_VALUE_1, 0 + 0
+      define :ENUM_VALUE_2, 0 + 1
+      define :ENUM_VALUE_3, 65534 + 0
+      define :ENUM_VALUE_4, 65534 + 1
+      define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
+
+      def initialize(value = 0)
+        @value = value
+      end
+
+      def to_i
+        @value
+      end
+
+      def to_s
+        if @value == Enum.ENUM_VALUE_0
+          return 'ENUM_VALUE_0'
+        end
+        if @value == Enum.ENUM_VALUE_1
+          return 'ENUM_VALUE_1'
+        end
+        if @value == Enum.ENUM_VALUE_2
+          return 'ENUM_VALUE_2'
+        end
+        if @value == Enum.ENUM_VALUE_3
+          return 'ENUM_VALUE_3'
+        end
+        if @value == Enum.ENUM_VALUE_4
+          return 'ENUM_VALUE_4'
+        end
+        if @value == Enum.ENUM_VALUE_5
+          return 'ENUM_VALUE_5'
+        end
+        '<unknown>'
+      end
+    end
+
+    class << self
+      attr_accessor :ENUM_VALUE_0
+      attr_accessor :ENUM_VALUE_1
+      attr_accessor :ENUM_VALUE_2
+      attr_accessor :ENUM_VALUE_3
+      attr_accessor :ENUM_VALUE_4
+      attr_accessor :ENUM_VALUE_5
+    end
+
+    self.ENUM_VALUE_0 = Enum.new(Enum.ENUM_VALUE_0)
+    self.ENUM_VALUE_1 = Enum.new(Enum.ENUM_VALUE_1)
+    self.ENUM_VALUE_2 = Enum.new(Enum.ENUM_VALUE_2)
+    self.ENUM_VALUE_3 = Enum.new(Enum.ENUM_VALUE_3)
+    self.ENUM_VALUE_4 = Enum.new(Enum.ENUM_VALUE_4)
+    self.ENUM_VALUE_5 = Enum.new(Enum.ENUM_VALUE_5)
+
+    def self.new(value = 0)
+      Enum.new(value)
+    end
+  end
+
+  EnumUInt16.freeze
+
+  # Fast Binary Encoding EnumUInt16 field model class
+  class FieldModelEnumUInt16 < FBE::FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      2
+    end
+
+    # Get the value
+    def get(defaults = EnumUInt16.new)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      EnumUInt16.new(read_uint16(fbe_offset))
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_uint16(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding EnumUInt16 final model class
+  class FinalModelEnumUInt16 < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      2
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [EnumUInt16.new, 0]
+      end
+
+      [EnumUInt16.new(read_uint16(fbe_offset)), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_uint16(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  module EnumInt32
+    class Enum
+      include FBE::Enum
+
+      define :ENUM_VALUE_0, 0 + 0
+      define :ENUM_VALUE_1, -2147483648 + 0
+      define :ENUM_VALUE_2, -2147483648 + 1
+      define :ENUM_VALUE_3, 2147483646 + 0
+      define :ENUM_VALUE_4, 2147483646 + 1
+      define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
+
+      def initialize(value = 0)
+        @value = value
+      end
+
+      def to_i
+        @value
+      end
+
+      def to_s
+        if @value == Enum.ENUM_VALUE_0
+          return 'ENUM_VALUE_0'
+        end
+        if @value == Enum.ENUM_VALUE_1
+          return 'ENUM_VALUE_1'
+        end
+        if @value == Enum.ENUM_VALUE_2
+          return 'ENUM_VALUE_2'
+        end
+        if @value == Enum.ENUM_VALUE_3
+          return 'ENUM_VALUE_3'
+        end
+        if @value == Enum.ENUM_VALUE_4
+          return 'ENUM_VALUE_4'
+        end
+        if @value == Enum.ENUM_VALUE_5
+          return 'ENUM_VALUE_5'
+        end
+        '<unknown>'
+      end
+    end
+
+    class << self
+      attr_accessor :ENUM_VALUE_0
+      attr_accessor :ENUM_VALUE_1
+      attr_accessor :ENUM_VALUE_2
+      attr_accessor :ENUM_VALUE_3
+      attr_accessor :ENUM_VALUE_4
+      attr_accessor :ENUM_VALUE_5
+    end
+
+    self.ENUM_VALUE_0 = Enum.new(Enum.ENUM_VALUE_0)
+    self.ENUM_VALUE_1 = Enum.new(Enum.ENUM_VALUE_1)
+    self.ENUM_VALUE_2 = Enum.new(Enum.ENUM_VALUE_2)
+    self.ENUM_VALUE_3 = Enum.new(Enum.ENUM_VALUE_3)
+    self.ENUM_VALUE_4 = Enum.new(Enum.ENUM_VALUE_4)
+    self.ENUM_VALUE_5 = Enum.new(Enum.ENUM_VALUE_5)
+
+    def self.new(value = 0)
+      Enum.new(value)
+    end
+  end
+
+  EnumInt32.freeze
+
+  # Fast Binary Encoding EnumInt32 field model class
+  class FieldModelEnumInt32 < FBE::FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the value
+    def get(defaults = EnumInt32.new)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      EnumInt32.new(read_int32(fbe_offset))
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_int32(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding EnumInt32 final model class
+  class FinalModelEnumInt32 < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      4
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [EnumInt32.new, 0]
+      end
+
+      [EnumInt32.new(read_int32(fbe_offset)), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_int32(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  module EnumUInt32
+    class Enum
+      include FBE::Enum
+
+      define :ENUM_VALUE_0, 0 + 0
+      define :ENUM_VALUE_1, 0 + 0
+      define :ENUM_VALUE_2, 0 + 1
+      define :ENUM_VALUE_3, 0xFFFFFFFE + 0
+      define :ENUM_VALUE_4, 0xFFFFFFFE + 1
+      define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
+
+      def initialize(value = 0)
+        @value = value
+      end
+
+      def to_i
+        @value
+      end
+
+      def to_s
+        if @value == Enum.ENUM_VALUE_0
+          return 'ENUM_VALUE_0'
+        end
+        if @value == Enum.ENUM_VALUE_1
+          return 'ENUM_VALUE_1'
+        end
+        if @value == Enum.ENUM_VALUE_2
+          return 'ENUM_VALUE_2'
+        end
+        if @value == Enum.ENUM_VALUE_3
+          return 'ENUM_VALUE_3'
+        end
+        if @value == Enum.ENUM_VALUE_4
+          return 'ENUM_VALUE_4'
+        end
+        if @value == Enum.ENUM_VALUE_5
+          return 'ENUM_VALUE_5'
+        end
+        '<unknown>'
+      end
+    end
+
+    class << self
+      attr_accessor :ENUM_VALUE_0
+      attr_accessor :ENUM_VALUE_1
+      attr_accessor :ENUM_VALUE_2
+      attr_accessor :ENUM_VALUE_3
+      attr_accessor :ENUM_VALUE_4
+      attr_accessor :ENUM_VALUE_5
+    end
+
+    self.ENUM_VALUE_0 = Enum.new(Enum.ENUM_VALUE_0)
+    self.ENUM_VALUE_1 = Enum.new(Enum.ENUM_VALUE_1)
+    self.ENUM_VALUE_2 = Enum.new(Enum.ENUM_VALUE_2)
+    self.ENUM_VALUE_3 = Enum.new(Enum.ENUM_VALUE_3)
+    self.ENUM_VALUE_4 = Enum.new(Enum.ENUM_VALUE_4)
+    self.ENUM_VALUE_5 = Enum.new(Enum.ENUM_VALUE_5)
+
+    def self.new(value = 0)
+      Enum.new(value)
+    end
+  end
+
+  EnumUInt32.freeze
+
+  # Fast Binary Encoding EnumUInt32 field model class
+  class FieldModelEnumUInt32 < FBE::FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the value
+    def get(defaults = EnumUInt32.new)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      EnumUInt32.new(read_uint32(fbe_offset))
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_uint32(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding EnumUInt32 final model class
+  class FinalModelEnumUInt32 < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      4
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [EnumUInt32.new, 0]
+      end
+
+      [EnumUInt32.new(read_uint32(fbe_offset)), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_uint32(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  module EnumInt64
+    class Enum
+      include FBE::Enum
+
+      define :ENUM_VALUE_0, 0 + 0
+      define :ENUM_VALUE_1, -9223372036854775807 + 0
+      define :ENUM_VALUE_2, -9223372036854775807 + 1
+      define :ENUM_VALUE_3, 9223372036854775806 + 0
+      define :ENUM_VALUE_4, 9223372036854775806 + 1
+      define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
+
+      def initialize(value = 0)
+        @value = value
+      end
+
+      def to_i
+        @value
+      end
+
+      def to_s
+        if @value == Enum.ENUM_VALUE_0
+          return 'ENUM_VALUE_0'
+        end
+        if @value == Enum.ENUM_VALUE_1
+          return 'ENUM_VALUE_1'
+        end
+        if @value == Enum.ENUM_VALUE_2
+          return 'ENUM_VALUE_2'
+        end
+        if @value == Enum.ENUM_VALUE_3
+          return 'ENUM_VALUE_3'
+        end
+        if @value == Enum.ENUM_VALUE_4
+          return 'ENUM_VALUE_4'
+        end
+        if @value == Enum.ENUM_VALUE_5
+          return 'ENUM_VALUE_5'
+        end
+        '<unknown>'
+      end
+    end
+
+    class << self
+      attr_accessor :ENUM_VALUE_0
+      attr_accessor :ENUM_VALUE_1
+      attr_accessor :ENUM_VALUE_2
+      attr_accessor :ENUM_VALUE_3
+      attr_accessor :ENUM_VALUE_4
+      attr_accessor :ENUM_VALUE_5
+    end
+
+    self.ENUM_VALUE_0 = Enum.new(Enum.ENUM_VALUE_0)
+    self.ENUM_VALUE_1 = Enum.new(Enum.ENUM_VALUE_1)
+    self.ENUM_VALUE_2 = Enum.new(Enum.ENUM_VALUE_2)
+    self.ENUM_VALUE_3 = Enum.new(Enum.ENUM_VALUE_3)
+    self.ENUM_VALUE_4 = Enum.new(Enum.ENUM_VALUE_4)
+    self.ENUM_VALUE_5 = Enum.new(Enum.ENUM_VALUE_5)
+
+    def self.new(value = 0)
+      Enum.new(value)
+    end
+  end
+
+  EnumInt64.freeze
+
+  # Fast Binary Encoding EnumInt64 field model class
+  class FieldModelEnumInt64 < FBE::FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      8
+    end
+
+    # Get the value
+    def get(defaults = EnumInt64.new)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      EnumInt64.new(read_int64(fbe_offset))
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_int64(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding EnumInt64 final model class
+  class FinalModelEnumInt64 < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      8
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [EnumInt64.new, 0]
+      end
+
+      [EnumInt64.new(read_int64(fbe_offset)), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_int64(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  module EnumUInt64
+    class Enum
+      include FBE::Enum
+
+      define :ENUM_VALUE_0, 0 + 0
+      define :ENUM_VALUE_1, 0 + 0
+      define :ENUM_VALUE_2, 0 + 1
+      define :ENUM_VALUE_3, 0xFFFFFFFFFFFFFFFE + 0
+      define :ENUM_VALUE_4, 0xFFFFFFFFFFFFFFFE + 1
+      define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
+
+      def initialize(value = 0)
+        @value = value
+      end
+
+      def to_i
+        @value
+      end
+
+      def to_s
+        if @value == Enum.ENUM_VALUE_0
+          return 'ENUM_VALUE_0'
+        end
+        if @value == Enum.ENUM_VALUE_1
+          return 'ENUM_VALUE_1'
+        end
+        if @value == Enum.ENUM_VALUE_2
+          return 'ENUM_VALUE_2'
+        end
+        if @value == Enum.ENUM_VALUE_3
+          return 'ENUM_VALUE_3'
+        end
+        if @value == Enum.ENUM_VALUE_4
+          return 'ENUM_VALUE_4'
+        end
+        if @value == Enum.ENUM_VALUE_5
+          return 'ENUM_VALUE_5'
+        end
+        '<unknown>'
+      end
+    end
+
+    class << self
+      attr_accessor :ENUM_VALUE_0
+      attr_accessor :ENUM_VALUE_1
+      attr_accessor :ENUM_VALUE_2
+      attr_accessor :ENUM_VALUE_3
+      attr_accessor :ENUM_VALUE_4
+      attr_accessor :ENUM_VALUE_5
+    end
+
+    self.ENUM_VALUE_0 = Enum.new(Enum.ENUM_VALUE_0)
+    self.ENUM_VALUE_1 = Enum.new(Enum.ENUM_VALUE_1)
+    self.ENUM_VALUE_2 = Enum.new(Enum.ENUM_VALUE_2)
+    self.ENUM_VALUE_3 = Enum.new(Enum.ENUM_VALUE_3)
+    self.ENUM_VALUE_4 = Enum.new(Enum.ENUM_VALUE_4)
+    self.ENUM_VALUE_5 = Enum.new(Enum.ENUM_VALUE_5)
+
+    def self.new(value = 0)
+      Enum.new(value)
+    end
+  end
+
+  EnumUInt64.freeze
+
+  # Fast Binary Encoding EnumUInt64 field model class
+  class FieldModelEnumUInt64 < FBE::FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      8
+    end
+
+    # Get the value
+    def get(defaults = EnumUInt64.new)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      EnumUInt64.new(read_uint64(fbe_offset))
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_uint64(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding EnumUInt64 final model class
+  class FinalModelEnumUInt64 < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      8
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [EnumUInt64.new, 0]
+      end
+
+      [EnumUInt64.new(read_uint64(fbe_offset)), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_uint64(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+end
+
 # rubocop:enable all

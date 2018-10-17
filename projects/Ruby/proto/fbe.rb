@@ -14,6 +14,299 @@ require 'bigdecimal'
 require 'uuidtools'
 
 module FBE
+
+  # Fast Binary Encoding enum utility module
+  module Enum
+
+    attr_reader :key, :value
+
+    def initialize(key, value)
+      @key = key
+      @value = value
+    end
+
+    def self.included(base)
+      base.extend Enumerable
+      base.extend ClassMethods
+    end
+
+    module ClassMethods
+      # Define an enumerated value.
+      #
+      # === Parameters
+      # [key] Enumerator key.
+      # [value] Enumerator value.
+      def define(key, value)
+        @_enum_hash ||= {}
+        @_enums_by_value ||= {}
+
+        validate_key!(key)
+        store_new_instance(key, value)
+        define_singleton_method(key) { value }
+      end
+
+      def store_new_instance(key, value)
+        new_instance = new(key, value)
+        @_enum_hash[key] = new_instance
+        @_enums_by_value[value] = new_instance
+      end
+
+      def const_missing(key)
+        raise "Constant is missing for key '#{key}' in enum '#{name}'"
+      end
+
+      # Iterate over all enumerated values.
+      # Required for Enumerable mixin
+      def each(&block)
+        @_enum_hash.each(&block)
+      end
+
+      # Attempt to parse an enum key and return the
+      # corresponding value.
+      #
+      # === Parameters
+      # [k] The key string to parse.
+      #
+      # Returns the corresponding value or nil.
+      def parse(k)
+        k = k.to_s.upcase
+        each do |key, enum|
+          return enum.value if key.to_s.upcase == k
+        end
+        nil
+      end
+
+      # Whether the specified key exists in this enum.
+      #
+      # === Parameters
+      # [k] The string key to check.
+      #
+      # Returns true if the key exists, false otherwise.
+      def key?(k)
+        @_enum_hash.key?(k)
+      end
+
+      # Gets the string value for the specified key.
+      #
+      # === Parameters
+      # [k] The key symbol to get the value for.
+      #
+      # Returns the corresponding enum instance or nil.
+      def value(k)
+        enum = @_enum_hash[k]
+        enum.value if enum
+      end
+
+      # Whether the specified value exists in this enum.
+      #
+      # === Parameters
+      # [k] The string value to check.
+      #
+      # Returns true if the value exists, false otherwise.
+      def value?(v)
+        @_enums_by_value.key?(v)
+      end
+
+      # Gets the key symbol for the specified value.
+      #
+      # === Parameters
+      # [v] The string value to parse.
+      #
+      # Returns the corresponding key symbol or nil.
+      def key(v)
+        enum = @_enums_by_value[v]
+        enum.key if enum
+      end
+
+      # Returns all enum keys.
+      def keys
+        @_enum_hash.values.map(&:key)
+      end
+
+      # Returns all enum values.
+      def values
+        @_enum_hash.values.map(&:value)
+      end
+
+      def to_h
+        Hash[@_enum_hash.map do |key, enum|
+          [key, enum.value]
+        end]
+      end
+
+      private
+
+      def upper?(s)
+        !/[[:upper:]]/.match(s).nil?
+      end
+
+      def validate_key!(key)
+        return unless @_enum_hash.key?(key)
+        raise "Duplicate key '#{key}' in enum '#{name}'"
+      end
+
+      def validate_value!(value)
+        return unless @_enums_by_value.key?(value)
+        raise "Duplicate value '#{value}' in enum '#{name}'"
+      end
+    end
+
+  end
+
+  # Fast Binary Encoding flags utility module
+  module Flags
+
+    attr_reader :key, :value
+
+    def initialize(key, value)
+      @key = key
+      @value = value
+    end
+
+    def self.included(base)
+      base.extend Enumerable
+      base.extend ClassMethods
+    end
+
+    module ClassMethods
+      # Define an enumerated value.
+      #
+      # === Parameters
+      # [key] Enumerator key.
+      # [value] Enumerator value.
+      def define(key, value)
+        @_enum_hash ||= {}
+        @_enums_by_value ||= {}
+
+        validate_key!(key)
+        store_new_instance(key, value)
+        define_singleton_method(key) { value }
+
+        name = key.to_s
+
+        # Flags check method
+        define_method(name + '?') do
+          @value & value != 0
+        end
+
+        # Flags set/reset method
+        define_method(name + '=') do |set|
+          if set
+            @value |= value
+          else
+            @value &= ~value
+          end
+        end
+      end
+
+      def store_new_instance(key, value)
+        new_instance = new(key, value)
+        @_enum_hash[key] = new_instance
+        @_enums_by_value[value] = new_instance
+      end
+
+      def const_missing(key)
+        raise "Constant is missing for key '#{key}' in flags '#{name}'"
+      end
+
+      # Iterate over all enumerated values.
+      # Required for Enumerable mixin
+      def each(&block)
+        @_enum_hash.each(&block)
+      end
+
+      # Attempt to parse an enum key and return the
+      # corresponding value.
+      #
+      # === Parameters
+      # [k] The key string to parse.
+      #
+      # Returns the corresponding value or nil.
+      def parse(k)
+        k = k.to_s.upcase
+        each do |key, enum|
+          return enum.value if key.to_s.upcase == k
+        end
+        nil
+      end
+
+      # Whether the specified key exists in this enum.
+      #
+      # === Parameters
+      # [k] The string key to check.
+      #
+      # Returns true if the key exists, false otherwise.
+      def key?(k)
+        @_enum_hash.key?(k)
+      end
+
+      # Gets the string value for the specified key.
+      #
+      # === Parameters
+      # [k] The key symbol to get the value for.
+      #
+      # Returns the corresponding enum instance or nil.
+      def value(k)
+        enum = @_enum_hash[k]
+        enum.value if enum
+      end
+
+      # Whether the specified value exists in this enum.
+      #
+      # === Parameters
+      # [k] The string value to check.
+      #
+      # Returns true if the value exists, false otherwise.
+      def value?(v)
+        @_enums_by_value.key?(v)
+      end
+
+      # Gets the key symbol for the specified value.
+      #
+      # === Parameters
+      # [v] The string value to parse.
+      #
+      # Returns the corresponding key symbol or nil.
+      def key(v)
+        enum = @_enums_by_value[v]
+        enum.key if enum
+      end
+
+      # Returns all enum keys.
+      def keys
+        @_enum_hash.values.map(&:key)
+      end
+
+      # Returns all enum values.
+      def values
+        @_enum_hash.values.map(&:value)
+      end
+
+      def to_h
+        Hash[@_enum_hash.map do |key, enum|
+          [key, enum.value]
+        end]
+      end
+
+      private
+
+      def upper?(s)
+        !/[[:upper:]]/.match(s).nil?
+      end
+
+      def validate_key!(key)
+        return unless @_enum_hash.key?(key)
+        raise "Duplicate key '#{key}' in flags '#{name}'"
+      end
+
+      def validate_value!(value)
+        return unless @_enums_by_value.key?(value)
+        raise "Duplicate value '#{value}' in flags '#{name}'"
+      end
+    end
+
+  end
+
   # Fast Binary Encoding write buffer based on the dynamic byte array
   class WriteBuffer
     def initialize(capacity = 0)
@@ -58,7 +351,7 @@ module FBE
 
     # Attach a given memory buffer
     def attach_buffer(buffer, offset = 0, size = nil)
-      raise ArgumentError, 'Invalid buffer!' if buffer.nil?
+      raise ArgumentError, "Invalid buffer!" if buffer.nil?
 
       if buffer.is_a?(String)
         @_buffer = buffer
@@ -69,13 +362,13 @@ module FBE
       elsif buffer.is_a?(ReadBuffer)
         @_buffer = buffer.buffer
       else
-        raise ArgumentError, 'Unknown buffer type!'
+        raise ArgumentError, "Unknown buffer type!"
       end
 
       size = @_buffer.length if size.nil?
 
-      raise ArgumentError, 'Invalid size!' if size <= 0
-      raise ArgumentError, 'Invalid offset!' if offset > size
+      raise ArgumentError, "Invalid size!" if size <= 0
+      raise ArgumentError, "Invalid offset!" if offset > size
 
       @_size = size
       @_offset = offset
@@ -83,7 +376,7 @@ module FBE
 
     # Allocate memory in the current write buffer and return offset to the allocated memory block
     def allocate(size)
-      raise ArgumentError, 'Invalid allocation size!' if size < 0
+      raise ArgumentError, "Invalid allocation size!" if size < 0
 
       offset = @_size
 
@@ -102,7 +395,7 @@ module FBE
 
     # Remove some memory of the given size from the current write buffer
     def remove(offset, size)
-      raise ArgumentError, 'Invalid offset & size!' if (offset + size) > @_buffer.length
+      raise ArgumentError, "Invalid offset & size!" if (offset + size) > @_buffer.length
 
       @_buffer.slice!(offset, size)
       @_size -= size
@@ -116,7 +409,7 @@ module FBE
 
     # Reserve memory of the given capacity in the current write buffer
     def reserve(capacity)
-      raise ArgumentError, 'Invalid reserve capacity!' if capacity < 0
+      raise ArgumentError, "Invalid reserve capacity!" if capacity < 0
 
       @_buffer += [0].pack('C') * [capacity, 2 * @_buffer.length].max if capacity > @_buffer.length
     end
@@ -175,7 +468,7 @@ module FBE
 
     # Attach a given memory buffer
     def attach_buffer(buffer, offset = 0, size = nil)
-      raise ArgumentError, 'Invalid buffer!' if buffer.nil?
+      raise ArgumentError, "Invalid buffer!" if buffer.nil?
 
       if buffer.is_a?(String)
         @_buffer = buffer
@@ -186,13 +479,13 @@ module FBE
       elsif buffer.is_a?(ReadBuffer)
         @_buffer = buffer.buffer
       else
-        raise ArgumentError, 'Unknown buffer type!'
+        raise ArgumentError, "Unknown buffer type!"
       end
 
       size = @_buffer.length if size.nil?
 
-      raise ArgumentError, 'Invalid size!' if size <= 0
-      raise ArgumentError, 'Invalid offset!' if offset > size
+      raise ArgumentError, "Invalid size!" if size <= 0
+      raise ArgumentError, "Invalid offset!" if offset > size
 
       @_size = size
       @_offset = offset
@@ -553,7 +846,7 @@ module FBE
     end
 
     # Get the value
-    def get(defaults = '\0')
+    def get(defaults = "\0")
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return defaults
       end
@@ -583,7 +876,7 @@ module FBE
     end
 
     # Get the value
-    def get(defaults = '\0')
+    def get(defaults = "\0")
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return defaults
       end
@@ -1122,7 +1415,7 @@ module FBE
 
     # Set the bytes value
     def set(value)
-      raise ArgumentError, 'Invalid bytes value!' if value.nil? || !value.is_a?(String)
+      raise ArgumentError, "Invalid bytes value!" if value.nil? || !value.is_a?(String)
 
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return
@@ -1217,7 +1510,7 @@ module FBE
 
     # Set the string value
     def set(value)
-      raise ArgumentError, 'Invalid string value!' if value.nil? || !value.is_a?(String)
+      raise ArgumentError, "Invalid string value!" if value.nil? || !value.is_a?(String)
 
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return
@@ -1410,8 +1703,8 @@ module FBE
 
     # Array index operator
     def [](index)
-      raise RuntimeError, 'Model is broken!' if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-      raise IndexError, 'Index is out of bounds!' if index >= @_size
+      raise RuntimeError, "Model is broken!" if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+      raise IndexError, "Index is out of bounds!" if index >= @_size
 
       @_model.fbe_offset = fbe_offset
       @_model.fbe_shift(index * @_model.fbe_size)
@@ -1451,7 +1744,7 @@ module FBE
 
     # Set the array
     def set(values)
-      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Array)
+      raise ArgumentError, "Invalid values parameter!" if values.nil? || !values.is_a?(Array)
 
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return
@@ -1524,11 +1817,11 @@ module FBE
 
     # Vector index operator
     def [](index)
-      raise RuntimeError, 'Model is broken!' if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+      raise RuntimeError, "Model is broken!" if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
       fbe_vector_offset = read_uint32(fbe_offset)
-      raise RuntimeError, 'Model is broken!' if (fbe_vector_offset <= 0) || ((@_buffer.offset + fbe_vector_offset + 4) > @_buffer.size)
+      raise RuntimeError, "Model is broken!" if (fbe_vector_offset <= 0) || ((@_buffer.offset + fbe_vector_offset + 4) > @_buffer.size)
       fbe_vector_size = read_uint32(fbe_vector_offset)
-      raise IndexError, 'Index is out of bounds!' if index >= fbe_vector_size
+      raise IndexError, "Index is out of bounds!" if index >= fbe_vector_size
 
       @_model.fbe_offset = fbe_vector_offset + 4
       @_model.fbe_shift(index * @_model.fbe_size)
@@ -1539,7 +1832,7 @@ module FBE
     def resize(size)
       fbe_vector_size = size * @_model.fbe_size
       fbe_vector_offset = @_buffer.allocate(4 + fbe_vector_size) - @_buffer.offset
-      raise RuntimeError, 'Model is broken!' if (fbe_vector_offset <= 0) || ((@_buffer.offset + fbe_vector_offset + 4) > @_buffer.size)
+      raise RuntimeError, "Model is broken!" if (fbe_vector_offset <= 0) || ((@_buffer.offset + fbe_vector_offset + 4) > @_buffer.size)
 
       write_uint32(fbe_offset, fbe_vector_offset)
       write_uint32(fbe_vector_offset, size)
@@ -1598,7 +1891,7 @@ module FBE
 
     # Set the vector
     def set(values)
-      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Array)
+      raise ArgumentError, "Invalid values parameter!" if values.nil? || !values.is_a?(Array)
 
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return
@@ -1671,11 +1964,11 @@ module FBE
 
     # Set index operator
     def [](index)
-      raise RuntimeError, 'Model is broken!' if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+      raise RuntimeError, "Model is broken!" if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
       fbe_set_offset = read_uint32(fbe_offset)
-      raise RuntimeError, 'Model is broken!' if (fbe_set_offset <= 0) || ((@_buffer.offset + fbe_set_offset + 4) > @_buffer.size)
+      raise RuntimeError, "Model is broken!" if (fbe_set_offset <= 0) || ((@_buffer.offset + fbe_set_offset + 4) > @_buffer.size)
       fbe_set_size = read_uint32(fbe_set_offset)
-      raise IndexError, 'Index is out of bounds!' if index >= fbe_set_size
+      raise IndexError, "Index is out of bounds!" if index >= fbe_set_size
 
       @_model.fbe_offset = fbe_set_offset + 4
       @_model.fbe_shift(index * @_model.fbe_size)
@@ -1686,7 +1979,7 @@ module FBE
     def resize(size)
       fbe_set_size = size * @_model.fbe_size
       fbe_set_offset = @_buffer.allocate(4 + fbe_set_size) - @_buffer.offset
-      raise RuntimeError, 'Model is broken!' if (fbe_set_offset <= 0) || ((@_buffer.offset + fbe_set_offset + 4) > @_buffer.size)
+      raise RuntimeError, "Model is broken!" if (fbe_set_offset <= 0) || ((@_buffer.offset + fbe_set_offset + 4) > @_buffer.size)
 
       write_uint32(fbe_offset, fbe_set_offset)
       write_uint32(fbe_set_offset, size)
@@ -1745,7 +2038,7 @@ module FBE
 
     # Set the set value
     def set(values)
-      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Set)
+      raise ArgumentError, "Invalid values parameter!" if values.nil? || !values.is_a?(Set)
 
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return
@@ -1822,11 +2115,11 @@ module FBE
 
     # Map index operator
     def [](index)
-      raise RuntimeError, 'Model is broken!' if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+      raise RuntimeError, "Model is broken!" if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
       fbe_map_offset = read_uint32(fbe_offset)
-      raise RuntimeError, 'Model is broken!' if (fbe_map_offset <= 0) || ((@_buffer.offset + fbe_map_offset + 4) > @_buffer.size)
+      raise RuntimeError, "Model is broken!" if (fbe_map_offset <= 0) || ((@_buffer.offset + fbe_map_offset + 4) > @_buffer.size)
       fbe_map_size = read_uint32(fbe_map_offset)
-      raise IndexError, 'Index is out of bounds!' if index >= fbe_map_size
+      raise IndexError, "Index is out of bounds!" if index >= fbe_map_size
 
       @_model_key.fbe_offset = fbe_map_offset + 4
       @_model_value.fbe_offset = fbe_map_offset + 4 + @_model_key.fbe_size
@@ -1842,7 +2135,7 @@ module FBE
 
       fbe_map_size = size * (@_model_key.fbe_size + @_model_value.fbe_size)
       fbe_map_offset = @_buffer.allocate(4 + fbe_map_size) - @_buffer.offset
-      raise RuntimeError, 'Model is broken!' if (fbe_map_offset <= 0) || ((@_buffer.offset + fbe_map_offset + 4) > @_buffer.size)
+      raise RuntimeError, "Model is broken!" if (fbe_map_offset <= 0) || ((@_buffer.offset + fbe_map_offset + 4) > @_buffer.size)
 
       write_uint32(fbe_offset, fbe_map_offset)
       write_uint32(fbe_map_offset, size)
@@ -1909,7 +2202,7 @@ module FBE
 
     # Set the map
     def set(values)
-      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Hash)
+      raise ArgumentError, "Invalid values parameter!" if values.nil? || !values.is_a?(Hash)
 
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return
@@ -1933,7 +2226,7 @@ module FBE
 
     # Check if the value is valid
     def verify
-      raise NotImplementedError, 'verify() method not implemented!'
+      raise NotImplementedError, "verify() method not implemented!"
     end
   end
 
@@ -2058,7 +2351,7 @@ module FBE
     # Get the value
     def get
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return ['\0', 0]
+        return ["\0", 0]
       end
 
       [read_char(fbe_offset), fbe_size]
@@ -2104,7 +2397,7 @@ module FBE
     # Get the value
     def get
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return ['\0', 0]
+        return ["\0", 0]
       end
 
       [read_wchar(fbe_offset), fbe_size]
@@ -2816,7 +3109,7 @@ module FBE
 
     # Set the bytes value
     def set(value)
-      raise ArgumentError, 'Invalid bytes value!' if value.nil? || !value.is_a?(String)
+      raise ArgumentError, "Invalid bytes value!" if value.nil? || !value.is_a?(String)
 
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
         return 0
@@ -2875,7 +3168,7 @@ module FBE
 
     # Set the string value
     def set(value)
-      raise ArgumentError, 'Invalid string value!' if value.nil? || !value.is_a?(String)
+      raise ArgumentError, "Invalid string value!" if value.nil? || !value.is_a?(String)
 
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
         return 0
@@ -3036,7 +3329,7 @@ module FBE
 
     # Set the array
     def set(values)
-      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Array)
+      raise ArgumentError, "Invalid values parameter!" if values.nil? || !values.is_a?(Array)
 
       if (@_buffer.offset + fbe_offset) > @_buffer.size
         return 0
@@ -3116,7 +3409,7 @@ module FBE
 
     # Set the vector
     def set(values)
-      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Array)
+      raise ArgumentError, "Invalid values parameter!" if values.nil? || !values.is_a?(Array)
 
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
         return 0
@@ -3198,7 +3491,7 @@ module FBE
 
     # Set the set value
     def set(values)
-      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Set)
+      raise ArgumentError, "Invalid values parameter!" if values.nil? || !values.is_a?(Set)
 
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
         return 0
@@ -3297,7 +3590,7 @@ module FBE
 
     # Set the map
     def set(values)
-      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Hash)
+      raise ArgumentError, "Invalid values parameter!" if values.nil? || !values.is_a?(Hash)
 
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
         return 0
@@ -3377,7 +3670,7 @@ module FBE
     # Send message handler
     # noinspection RubyUnusedLocalVariable
     def on_send(buffer, offset, size)
-      raise NotImplementedError, 'Abstract method call!'
+      raise NotImplementedError, "Abstract method call!"
     end
 
     # Send log message handler
@@ -3416,7 +3709,7 @@ module FBE
 
     # Receive data
     def receive(buffer, offset = 0, size = nil)
-      raise ArgumentError, 'Invalid buffer!' if buffer.nil?
+      raise ArgumentError, "Invalid buffer!" if buffer.nil?
 
       if buffer.is_a?(ReadBuffer) || buffer.is_a?(WriteBuffer)
         buffer = buffer.buffer
@@ -3426,7 +3719,7 @@ module FBE
         size = buffer.length
       end
 
-      raise ArgumentError, 'Invalid offset & size!' if (offset + size) > buffer.length
+      raise ArgumentError, "Invalid offset & size!" if (offset + size) > buffer.length
 
       if size == 0
         return
@@ -3646,7 +3939,7 @@ module FBE
     # Receive message handler
     # noinspection RubyUnusedLocalVariable
     def on_receive(fbe_type, buffer, offset, size)
-      raise NotImplementedError, 'Abstract method call!'
+      raise NotImplementedError, "Abstract method call!"
     end
 
     # Receive log message handler
@@ -3666,6 +3959,7 @@ module FBE
       buffer[offset, 4] = [value].pack('L<')
     end
   end
+
 end
 
 # rubocop:enable all

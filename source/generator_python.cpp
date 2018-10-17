@@ -3037,28 +3037,16 @@ void GeneratorPython::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     // Generate flags body
     if (f->body)
     {
-        int index = 0;
-        std::string last = ConvertEnumConstant("int32", "0");
         for (const auto& value : f->body->values)
         {
             WriteIndent(*value->name + " = ");
             if (value->value)
             {
                 if (value->value->constant && !value->value->constant->empty())
-                {
-                    index = 0;
-                    last = ConvertEnumConstant(enum_type, *value->value->constant);
-                    Write(last + " + " + std::to_string(index++));
-                }
+                    Write(ConvertEnumConstant(enum_type, *value->value->constant));
                 else if (value->value->reference && !value->value->reference->empty())
-                {
-                    index = 0;
-                    last = ConvertEnumConstant("", *value->value->reference);
-                    Write(last);
-                }
+                    Write(ConvertEnumConstant("", *value->value->reference));
             }
-            else
-                Write(last + " + " + std::to_string(index++));
             WriteLine();
         }
     }

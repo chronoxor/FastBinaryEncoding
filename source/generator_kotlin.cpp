@@ -4439,29 +4439,17 @@ void GeneratorKotlin::GenerateFlags(const std::shared_ptr<Package>& p, const std
     Indent(1);
     if (f->body)
     {
-        int index = 0;
         bool first = true;
-        std::string last = ConvertEnumConstant(flags_type, flags_type, "0", true);
         for (const auto& value : f->body->values)
         {
             WriteIndent(std::string(first ? "" : ", ") + *value->name + "(");
             if (value->value)
             {
                 if (value->value->constant && !value->value->constant->empty())
-                {
-                    index = 0;
-                    last = ConvertEnumConstant(flags_type, flags_type, *value->value->constant, true);
-                    Write(last + " + " + std::to_string(index++) + (IsUnsignedType(flags_type) ? "u" : ""));
-                }
+                    Write(ConvertEnumConstant(flags_type, flags_type, *value->value->constant, true));
                 else if (value->value->reference && !value->value->reference->empty())
-                {
-                    index = 0;
-                    last = ConvertEnumConstant(flags_type, "", *value->value->reference, true);
-                    Write(last);
-                }
+                    Write(ConvertEnumConstant(flags_type, "", *value->value->reference, true));
             }
-            else
-                Write(last + " + " + std::to_string(index++) + (IsUnsignedType(flags_type) ? "u" : ""));
             WriteLine(")");
             first = false;
         }

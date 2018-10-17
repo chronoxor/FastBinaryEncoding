@@ -601,19 +601,19 @@ class StateEx {
 }
 
 // noinspection PointlessArithmeticExpressionJS
-StateEx.unknown = new StateEx(0x00 + 0)
+StateEx.unknown = new StateEx(0x00)
 // noinspection PointlessArithmeticExpressionJS
-StateEx.invalid = new StateEx(0x01 + 0)
+StateEx.invalid = new StateEx(0x01)
 // noinspection PointlessArithmeticExpressionJS
-StateEx.initialized = new StateEx(0x02 + 0)
+StateEx.initialized = new StateEx(0x02)
 // noinspection PointlessArithmeticExpressionJS
-StateEx.calculated = new StateEx(0x04 + 0)
+StateEx.calculated = new StateEx(0x04)
 // noinspection PointlessArithmeticExpressionJS
-StateEx.broken = new StateEx(0x08 + 0)
+StateEx.broken = new StateEx(0x08)
 // noinspection PointlessArithmeticExpressionJS
-StateEx.happy = new StateEx(0x10 + 0)
+StateEx.happy = new StateEx(0x10)
 // noinspection PointlessArithmeticExpressionJS
-StateEx.sad = new StateEx(0x20 + 0)
+StateEx.sad = new StateEx(0x20)
 // noinspection PointlessArithmeticExpressionJS
 StateEx.good = new StateEx(StateEx.initialized | StateEx.calculated)
 // noinspection PointlessArithmeticExpressionJS

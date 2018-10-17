@@ -15,14 +15,14 @@ import proto.*;
 
 public enum FlagsTypedEnum
 {
-    FLAG_VALUE_0((long)0x00L + 0)
-    , FLAG_VALUE_1((long)0x01L + 0)
-    , FLAG_VALUE_2((long)0x02L + 0)
-    , FLAG_VALUE_3((long)0x04L + 0)
-    , FLAG_VALUE_4((long)0x08L + 0)
-    , FLAG_VALUE_5((long)0x10L + 0)
-    , FLAG_VALUE_6((long)0x20L + 0)
-    , FLAG_VALUE_7((long)0x40L + 0)
+    FLAG_VALUE_0((long)0x00L)
+    , FLAG_VALUE_1((long)0x01L)
+    , FLAG_VALUE_2((long)0x02L)
+    , FLAG_VALUE_3((long)0x04L)
+    , FLAG_VALUE_4((long)0x08L)
+    , FLAG_VALUE_5((long)0x10L)
+    , FLAG_VALUE_6((long)0x20L)
+    , FLAG_VALUE_7((long)0x40L)
     , FLAG_VALUE_8(FLAG_VALUE_7.getRaw())
     , FLAG_VALUE_9(FLAG_VALUE_2.getRaw()|FLAG_VALUE_4.getRaw()|FLAG_VALUE_6.getRaw())
     ;

@@ -4602,29 +4602,17 @@ void GeneratorJava::GenerateFlags(const std::shared_ptr<Package>& p, const std::
     Indent(1);
     if (f->body)
     {
-        int index = 0;
         bool first = true;
-        std::string last = ConvertEnumConstant(flags_type, "0");
         for (const auto& value : f->body->values)
         {
             WriteIndent(std::string(first ? "" : ", ") + *value->name + "(");
             if (value->value)
             {
                 if (value->value->constant && !value->value->constant->empty())
-                {
-                    index = 0;
-                    last = ConvertEnumConstant(flags_type, *value->value->constant);
-                    Write(last + " + " + std::to_string(index++));
-                }
+                    Write(ConvertEnumConstant(flags_type, *value->value->constant));
                 else if (value->value->reference && !value->value->reference->empty())
-                {
-                    index = 0;
-                    last = ConvertEnumConstant("", *value->value->reference);
-                    Write(last);
-                }
+                    Write(ConvertEnumConstant("", *value->value->reference));
             }
-            else
-                Write(last + " + " + std::to_string(index++));
             WriteLine(")");
             first = false;
         }

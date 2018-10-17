@@ -217,13 +217,13 @@ class FinalModelOrderType(fbe.FinalModel):
 
 
 class StateEx(enum.IntFlag, metaclass=fbe.DefaultEnumMeta):
-    unknown = int(0x00) + 0
-    invalid = int(0x01) + 0
-    initialized = int(0x02) + 0
-    calculated = int(0x04) + 0
-    broken = int(0x08) + 0
-    happy = int(0x10) + 0
-    sad = int(0x20) + 0
+    unknown = int(0x00)
+    invalid = int(0x01)
+    initialized = int(0x02)
+    calculated = int(0x04)
+    broken = int(0x08)
+    happy = int(0x10)
+    sad = int(0x20)
     good = initialized | calculated
     bad = unknown | invalid | broken
 

@@ -18,14 +18,14 @@ import proto.*
 @Suppress("EnumEntryName", "MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 enum class FlagsTypedEnum
 {
-    FLAG_VALUE_0(0x00uL + 0u)
-    , FLAG_VALUE_1(0x01uL + 0u)
-    , FLAG_VALUE_2(0x02uL + 0u)
-    , FLAG_VALUE_3(0x04uL + 0u)
-    , FLAG_VALUE_4(0x08uL + 0u)
-    , FLAG_VALUE_5(0x10uL + 0u)
-    , FLAG_VALUE_6(0x20uL + 0u)
-    , FLAG_VALUE_7(0x40uL + 0u)
+    FLAG_VALUE_0(0x00uL)
+    , FLAG_VALUE_1(0x01uL)
+    , FLAG_VALUE_2(0x02uL)
+    , FLAG_VALUE_3(0x04uL)
+    , FLAG_VALUE_4(0x08uL)
+    , FLAG_VALUE_5(0x10uL)
+    , FLAG_VALUE_6(0x20uL)
+    , FLAG_VALUE_7(0x40uL)
     , FLAG_VALUE_8(FLAG_VALUE_7.raw.toULong())
     , FLAG_VALUE_9(FLAG_VALUE_2.raw.toULong() or FLAG_VALUE_4.raw.toULong() or FLAG_VALUE_6.raw.toULong())
     ;

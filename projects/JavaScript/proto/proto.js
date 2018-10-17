@@ -580,15 +580,15 @@ class State {
 }
 
 // noinspection PointlessArithmeticExpressionJS
-State.unknown = new State(0x00 + 0)
+State.unknown = new State(0x00)
 // noinspection PointlessArithmeticExpressionJS
-State.invalid = new State(0x01 + 0)
+State.invalid = new State(0x01)
 // noinspection PointlessArithmeticExpressionJS
-State.initialized = new State(0x02 + 0)
+State.initialized = new State(0x02)
 // noinspection PointlessArithmeticExpressionJS
-State.calculated = new State(0x04 + 0)
+State.calculated = new State(0x04)
 // noinspection PointlessArithmeticExpressionJS
-State.broken = new State(0x08 + 0)
+State.broken = new State(0x08)
 // noinspection PointlessArithmeticExpressionJS
 State.good = new State(State.initialized | State.calculated)
 // noinspection PointlessArithmeticExpressionJS

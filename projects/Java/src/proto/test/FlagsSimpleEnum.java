@@ -15,10 +15,10 @@ import proto.*;
 
 public enum FlagsSimpleEnum
 {
-    FLAG_VALUE_0((int)0x0 + 0)
-    , FLAG_VALUE_1((int)0x1 + 0)
-    , FLAG_VALUE_2((int)0x2 + 0)
-    , FLAG_VALUE_3((int)0x4 + 0)
+    FLAG_VALUE_0((int)0x0)
+    , FLAG_VALUE_1((int)0x1)
+    , FLAG_VALUE_2((int)0x2)
+    , FLAG_VALUE_3((int)0x4)
     , FLAG_VALUE_4(FLAG_VALUE_3.getRaw())
     , FLAG_VALUE_5(FLAG_VALUE_1.getRaw()|FLAG_VALUE_3.getRaw())
     ;

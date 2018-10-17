@@ -611,13 +611,13 @@ class FlagsSimple {
 }
 
 // noinspection PointlessArithmeticExpressionJS
-FlagsSimple.FLAG_VALUE_0 = new FlagsSimple(0x0 + 0)
+FlagsSimple.FLAG_VALUE_0 = new FlagsSimple(0x0)
 // noinspection PointlessArithmeticExpressionJS
-FlagsSimple.FLAG_VALUE_1 = new FlagsSimple(0x1 + 0)
+FlagsSimple.FLAG_VALUE_1 = new FlagsSimple(0x1)
 // noinspection PointlessArithmeticExpressionJS
-FlagsSimple.FLAG_VALUE_2 = new FlagsSimple(0x2 + 0)
+FlagsSimple.FLAG_VALUE_2 = new FlagsSimple(0x2)
 // noinspection PointlessArithmeticExpressionJS
-FlagsSimple.FLAG_VALUE_3 = new FlagsSimple(0x4 + 0)
+FlagsSimple.FLAG_VALUE_3 = new FlagsSimple(0x4)
 // noinspection PointlessArithmeticExpressionJS
 FlagsSimple.FLAG_VALUE_4 = new FlagsSimple(FlagsSimple.FLAG_VALUE_3)
 // noinspection PointlessArithmeticExpressionJS
@@ -914,21 +914,21 @@ class FlagsTyped {
 }
 
 // noinspection PointlessArithmeticExpressionJS
-FlagsTyped.FLAG_VALUE_0 = new FlagsTyped(0x00 + 0)
+FlagsTyped.FLAG_VALUE_0 = new FlagsTyped(0x00)
 // noinspection PointlessArithmeticExpressionJS
-FlagsTyped.FLAG_VALUE_1 = new FlagsTyped(0x01 + 0)
+FlagsTyped.FLAG_VALUE_1 = new FlagsTyped(0x01)
 // noinspection PointlessArithmeticExpressionJS
-FlagsTyped.FLAG_VALUE_2 = new FlagsTyped(0x02 + 0)
+FlagsTyped.FLAG_VALUE_2 = new FlagsTyped(0x02)
 // noinspection PointlessArithmeticExpressionJS
-FlagsTyped.FLAG_VALUE_3 = new FlagsTyped(0x04 + 0)
+FlagsTyped.FLAG_VALUE_3 = new FlagsTyped(0x04)
 // noinspection PointlessArithmeticExpressionJS
-FlagsTyped.FLAG_VALUE_4 = new FlagsTyped(0x08 + 0)
+FlagsTyped.FLAG_VALUE_4 = new FlagsTyped(0x08)
 // noinspection PointlessArithmeticExpressionJS
-FlagsTyped.FLAG_VALUE_5 = new FlagsTyped(0x10 + 0)
+FlagsTyped.FLAG_VALUE_5 = new FlagsTyped(0x10)
 // noinspection PointlessArithmeticExpressionJS
-FlagsTyped.FLAG_VALUE_6 = new FlagsTyped(0x20 + 0)
+FlagsTyped.FLAG_VALUE_6 = new FlagsTyped(0x20)
 // noinspection PointlessArithmeticExpressionJS
-FlagsTyped.FLAG_VALUE_7 = new FlagsTyped(0x40 + 0)
+FlagsTyped.FLAG_VALUE_7 = new FlagsTyped(0x40)
 // noinspection PointlessArithmeticExpressionJS
 FlagsTyped.FLAG_VALUE_8 = new FlagsTyped(FlagsTyped.FLAG_VALUE_7)
 // noinspection PointlessArithmeticExpressionJS

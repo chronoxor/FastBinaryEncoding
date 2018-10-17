@@ -73,10 +73,12 @@ void GeneratorRuby::GenerateFBE(const CppCommon::Path& path)
 
     // Generate module begin
     WriteLine();
-    WriteIndent("module FBE");
+    WriteLineIndent("module FBE");
     Indent(1);
 
     // Generate common models
+    GenerateFBEEnum();
+    GenerateFBEFlags();
     GenerateFBEWriteBuffer();
     GenerateFBEReadBuffer();
     GenerateFBEModel();
@@ -84,8 +86,8 @@ void GeneratorRuby::GenerateFBE(const CppCommon::Path& path)
     GenerateFBEFieldModel();
     GenerateFBEFieldModel("Bool", "bool", "1", "false");
     GenerateFBEFieldModel("Byte", "byte", "1", "0");
-    GenerateFBEFieldModel("Char", "char", "1", "'\\0'");
-    GenerateFBEFieldModel("WChar", "wchar", "4", "'\\0'");
+    GenerateFBEFieldModel("Char", "char", "1", "\"\\0\"");
+    GenerateFBEFieldModel("WChar", "wchar", "4", "\"\\0\"");
     GenerateFBEFieldModel("Int8", "int8", "1", "0");
     GenerateFBEFieldModel("UInt8", "uint8", "1", "0");
     GenerateFBEFieldModel("Int16", "int16", "2", "0");
@@ -111,8 +113,8 @@ void GeneratorRuby::GenerateFBE(const CppCommon::Path& path)
         GenerateFBEFinalModel();
         GenerateFBEFinalModel("Bool", "bool", "1", "false");
         GenerateFBEFinalModel("Byte", "byte", "1", "0");
-        GenerateFBEFinalModel("Char", "char", "1", "'\\0'");
-        GenerateFBEFinalModel("WChar", "wchar", "4", "'\\0'");
+        GenerateFBEFinalModel("Char", "char", "1", "\"\\0\"");
+        GenerateFBEFinalModel("WChar", "wchar", "4", "\"\\0\"");
         GenerateFBEFinalModel("Int8", "int8", "1", "0");
         GenerateFBEFinalModel("UInt8", "uint8", "1", "0");
         GenerateFBEFinalModel("Int16", "int16", "2", "0");
@@ -140,8 +142,9 @@ void GeneratorRuby::GenerateFBE(const CppCommon::Path& path)
         GenerateFBEReceiver();
     }
 
-    // Generate module begin
+    // Generate module end
     Indent(-1);
+    WriteLine();
     WriteLineIndent("end");
 
     // Generate common footer
@@ -149,6 +152,318 @@ void GeneratorRuby::GenerateFBE(const CppCommon::Path& path)
 
     // Close the common file
     Close();
+}
+
+void GeneratorRuby::GenerateFBEEnum()
+{
+    std::string code = R"CODE(
+  # Fast Binary Encoding enum utility module
+  module Enum
+
+    attr_reader :key, :value
+
+    def initialize(key, value)
+      @key = key
+      @value = value
+    end
+
+    def self.included(base)
+      base.extend Enumerable
+      base.extend ClassMethods
+    end
+
+    module ClassMethods
+      # Define an enumerated value.
+      #
+      # === Parameters
+      # [key] Enumerator key.
+      # [value] Enumerator value.
+      def define(key, value)
+        @_enum_hash ||= {}
+        @_enums_by_value ||= {}
+
+        validate_key!(key)
+        store_new_instance(key, value)
+        define_singleton_method(key) { value }
+      end
+
+      def store_new_instance(key, value)
+        new_instance = new(key, value)
+        @_enum_hash[key] = new_instance
+        @_enums_by_value[value] = new_instance
+      end
+
+      def const_missing(key)
+        raise "Constant is missing for key '#{key}' in enum '#{name}'"
+      end
+
+      # Iterate over all enumerated values.
+      # Required for Enumerable mixin
+      def each(&block)
+        @_enum_hash.each(&block)
+      end
+
+      # Attempt to parse an enum key and return the
+      # corresponding value.
+      #
+      # === Parameters
+      # [k] The key string to parse.
+      #
+      # Returns the corresponding value or nil.
+      def parse(k)
+        k = k.to_s.upcase
+        each do |key, enum|
+          return enum.value if key.to_s.upcase == k
+        end
+        nil
+      end
+
+      # Whether the specified key exists in this enum.
+      #
+      # === Parameters
+      # [k] The string key to check.
+      #
+      # Returns true if the key exists, false otherwise.
+      def key?(k)
+        @_enum_hash.key?(k)
+      end
+
+      # Gets the string value for the specified key.
+      #
+      # === Parameters
+      # [k] The key symbol to get the value for.
+      #
+      # Returns the corresponding enum instance or nil.
+      def value(k)
+        enum = @_enum_hash[k]
+        enum.value if enum
+      end
+
+      # Whether the specified value exists in this enum.
+      #
+      # === Parameters
+      # [k] The string value to check.
+      #
+      # Returns true if the value exists, false otherwise.
+      def value?(v)
+        @_enums_by_value.key?(v)
+      end
+
+      # Gets the key symbol for the specified value.
+      #
+      # === Parameters
+      # [v] The string value to parse.
+      #
+      # Returns the corresponding key symbol or nil.
+      def key(v)
+        enum = @_enums_by_value[v]
+        enum.key if enum
+      end
+
+      # Returns all enum keys.
+      def keys
+        @_enum_hash.values.map(&:key)
+      end
+
+      # Returns all enum values.
+      def values
+        @_enum_hash.values.map(&:value)
+      end
+
+      def to_h
+        Hash[@_enum_hash.map do |key, enum|
+          [key, enum.value]
+        end]
+      end
+
+      private
+
+      def upper?(s)
+        !/[[:upper:]]/.match(s).nil?
+      end
+
+      def validate_key!(key)
+        return unless @_enum_hash.key?(key)
+        raise "Duplicate key '#{key}' in enum '#{name}'"
+      end
+
+      def validate_value!(value)
+        return unless @_enums_by_value.key?(value)
+        raise "Duplicate value '#{value}' in enum '#{name}'"
+      end
+    end
+
+  end
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+}
+
+void GeneratorRuby::GenerateFBEFlags()
+{
+    std::string code = R"CODE(
+  # Fast Binary Encoding flags utility module
+  module Flags
+
+    attr_reader :key, :value
+
+    def initialize(key, value)
+      @key = key
+      @value = value
+    end
+
+    def self.included(base)
+      base.extend Enumerable
+      base.extend ClassMethods
+    end
+
+    module ClassMethods
+      # Define an enumerated value.
+      #
+      # === Parameters
+      # [key] Enumerator key.
+      # [value] Enumerator value.
+      def define(key, value)
+        @_enum_hash ||= {}
+        @_enums_by_value ||= {}
+
+        validate_key!(key)
+        store_new_instance(key, value)
+        define_singleton_method(key) { value }
+
+        name = key.to_s
+
+        # Flags check method
+        define_method(name + '?') do
+          @value & value != 0
+        end
+
+        # Flags set/reset method
+        define_method(name + '=') do |set|
+          if set
+            @value |= value
+          else
+            @value &= ~value
+          end
+        end
+      end
+
+      def store_new_instance(key, value)
+        new_instance = new(key, value)
+        @_enum_hash[key] = new_instance
+        @_enums_by_value[value] = new_instance
+      end
+
+      def const_missing(key)
+        raise "Constant is missing for key '#{key}' in flags '#{name}'"
+      end
+
+      # Iterate over all enumerated values.
+      # Required for Enumerable mixin
+      def each(&block)
+        @_enum_hash.each(&block)
+      end
+
+      # Attempt to parse an enum key and return the
+      # corresponding value.
+      #
+      # === Parameters
+      # [k] The key string to parse.
+      #
+      # Returns the corresponding value or nil.
+      def parse(k)
+        k = k.to_s.upcase
+        each do |key, enum|
+          return enum.value if key.to_s.upcase == k
+        end
+        nil
+      end
+
+      # Whether the specified key exists in this enum.
+      #
+      # === Parameters
+      # [k] The string key to check.
+      #
+      # Returns true if the key exists, false otherwise.
+      def key?(k)
+        @_enum_hash.key?(k)
+      end
+
+      # Gets the string value for the specified key.
+      #
+      # === Parameters
+      # [k] The key symbol to get the value for.
+      #
+      # Returns the corresponding enum instance or nil.
+      def value(k)
+        enum = @_enum_hash[k]
+        enum.value if enum
+      end
+
+      # Whether the specified value exists in this enum.
+      #
+      # === Parameters
+      # [k] The string value to check.
+      #
+      # Returns true if the value exists, false otherwise.
+      def value?(v)
+        @_enums_by_value.key?(v)
+      end
+
+      # Gets the key symbol for the specified value.
+      #
+      # === Parameters
+      # [v] The string value to parse.
+      #
+      # Returns the corresponding key symbol or nil.
+      def key(v)
+        enum = @_enums_by_value[v]
+        enum.key if enum
+      end
+
+      # Returns all enum keys.
+      def keys
+        @_enum_hash.values.map(&:key)
+      end
+
+      # Returns all enum values.
+      def values
+        @_enum_hash.values.map(&:value)
+      end
+
+      def to_h
+        Hash[@_enum_hash.map do |key, enum|
+          [key, enum.value]
+        end]
+      end
+
+      private
+
+      def upper?(s)
+        !/[[:upper:]]/.match(s).nil?
+      end
+
+      def validate_key!(key)
+        return unless @_enum_hash.key?(key)
+        raise "Duplicate key '#{key}' in flags '#{name}'"
+      end
+
+      def validate_value!(value)
+        return unless @_enums_by_value.key?(value)
+        raise "Duplicate value '#{value}' in flags '#{name}'"
+      end
+    end
+
+  end
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
 }
 
 void GeneratorRuby::GenerateFBEWriteBuffer()
@@ -198,7 +513,7 @@ void GeneratorRuby::GenerateFBEWriteBuffer()
 
     # Attach a given memory buffer
     def attach_buffer(buffer, offset = 0, size = nil)
-      raise ArgumentError, 'Invalid buffer!' if buffer.nil?
+      raise ArgumentError, "Invalid buffer!" if buffer.nil?
 
       if buffer.is_a?(String)
         @_buffer = buffer
@@ -209,13 +524,13 @@ void GeneratorRuby::GenerateFBEWriteBuffer()
       elsif buffer.is_a?(ReadBuffer)
         @_buffer = buffer.buffer
       else
-        raise ArgumentError, 'Unknown buffer type!'
+        raise ArgumentError, "Unknown buffer type!"
       end
 
       size = @_buffer.length if size.nil?
 
-      raise ArgumentError, 'Invalid size!' if size <= 0
-      raise ArgumentError, 'Invalid offset!' if offset > size
+      raise ArgumentError, "Invalid size!" if size <= 0
+      raise ArgumentError, "Invalid offset!" if offset > size
 
       @_size = size
       @_offset = offset
@@ -223,7 +538,7 @@ void GeneratorRuby::GenerateFBEWriteBuffer()
 
     # Allocate memory in the current write buffer and return offset to the allocated memory block
     def allocate(size)
-      raise ArgumentError, 'Invalid allocation size!' if size < 0
+      raise ArgumentError, "Invalid allocation size!" if size < 0
 
       offset = @_size
 
@@ -242,7 +557,7 @@ void GeneratorRuby::GenerateFBEWriteBuffer()
 
     # Remove some memory of the given size from the current write buffer
     def remove(offset, size)
-      raise ArgumentError, 'Invalid offset & size!' if (offset + size) > @_buffer.length
+      raise ArgumentError, "Invalid offset & size!" if (offset + size) > @_buffer.length
 
       @_buffer.slice!(offset, size)
       @_size -= size
@@ -256,7 +571,7 @@ void GeneratorRuby::GenerateFBEWriteBuffer()
 
     # Reserve memory of the given capacity in the current write buffer
     def reserve(capacity)
-      raise ArgumentError, 'Invalid reserve capacity!' if capacity < 0
+      raise ArgumentError, "Invalid reserve capacity!" if capacity < 0
 
       @_buffer += [0].pack('C') * [capacity, 2 * @_buffer.length].max if capacity > @_buffer.length
     end
@@ -325,7 +640,7 @@ void GeneratorRuby::GenerateFBEReadBuffer()
 
     # Attach a given memory buffer
     def attach_buffer(buffer, offset = 0, size = nil)
-      raise ArgumentError, 'Invalid buffer!' if buffer.nil?
+      raise ArgumentError, "Invalid buffer!" if buffer.nil?
 
       if buffer.is_a?(String)
         @_buffer = buffer
@@ -336,13 +651,13 @@ void GeneratorRuby::GenerateFBEReadBuffer()
       elsif buffer.is_a?(ReadBuffer)
         @_buffer = buffer.buffer
       else
-        raise ArgumentError, 'Unknown buffer type!'
+        raise ArgumentError, "Unknown buffer type!"
       end
 
       size = @_buffer.length if size.nil?
 
-      raise ArgumentError, 'Invalid size!' if size <= 0
-      raise ArgumentError, 'Invalid offset!' if offset > size
+      raise ArgumentError, "Invalid size!" if size <= 0
+      raise ArgumentError, "Invalid offset!" if offset > size
 
       @_size = size
       @_offset = offset
@@ -886,7 +1201,7 @@ void GeneratorRuby::GenerateFBEFieldModelBytes()
 
     # Set the bytes value
     def set(value)
-      raise ArgumentError, 'Invalid bytes value!' if value.nil? || !value.is_a?(String)
+      raise ArgumentError, "Invalid bytes value!" if value.nil? || !value.is_a?(String)
 
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return
@@ -991,7 +1306,7 @@ void GeneratorRuby::GenerateFBEFieldModelString()
 
     # Set the string value
     def set(value)
-      raise ArgumentError, 'Invalid string value!' if value.nil? || !value.is_a?(String)
+      raise ArgumentError, "Invalid string value!" if value.nil? || !value.is_a?(String)
 
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return
@@ -1204,8 +1519,8 @@ void GeneratorRuby::GenerateFBEFieldModelArray()
 
     # Array index operator
     def [](index)
-      raise RuntimeError, 'Model is broken!' if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-      raise IndexError, 'Index is out of bounds!' if index >= @_size
+      raise RuntimeError, "Model is broken!" if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+      raise IndexError, "Index is out of bounds!" if index >= @_size
 
       @_model.fbe_offset = fbe_offset
       @_model.fbe_shift(index * @_model.fbe_size)
@@ -1245,7 +1560,7 @@ void GeneratorRuby::GenerateFBEFieldModelArray()
 
     # Set the array
     def set(values)
-      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Array)
+      raise ArgumentError, "Invalid values parameter!" if values.nil? || !values.is_a?(Array)
 
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return
@@ -1328,11 +1643,11 @@ void GeneratorRuby::GenerateFBEFieldModelVector()
 
     # Vector index operator
     def [](index)
-      raise RuntimeError, 'Model is broken!' if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+      raise RuntimeError, "Model is broken!" if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
       fbe_vector_offset = read_uint32(fbe_offset)
-      raise RuntimeError, 'Model is broken!' if (fbe_vector_offset <= 0) || ((@_buffer.offset + fbe_vector_offset + 4) > @_buffer.size)
+      raise RuntimeError, "Model is broken!" if (fbe_vector_offset <= 0) || ((@_buffer.offset + fbe_vector_offset + 4) > @_buffer.size)
       fbe_vector_size = read_uint32(fbe_vector_offset)
-      raise IndexError, 'Index is out of bounds!' if index >= fbe_vector_size
+      raise IndexError, "Index is out of bounds!" if index >= fbe_vector_size
 
       @_model.fbe_offset = fbe_vector_offset + 4
       @_model.fbe_shift(index * @_model.fbe_size)
@@ -1343,7 +1658,7 @@ void GeneratorRuby::GenerateFBEFieldModelVector()
     def resize(size)
       fbe_vector_size = size * @_model.fbe_size
       fbe_vector_offset = @_buffer.allocate(4 + fbe_vector_size) - @_buffer.offset
-      raise RuntimeError, 'Model is broken!' if (fbe_vector_offset <= 0) || ((@_buffer.offset + fbe_vector_offset + 4) > @_buffer.size)
+      raise RuntimeError, "Model is broken!" if (fbe_vector_offset <= 0) || ((@_buffer.offset + fbe_vector_offset + 4) > @_buffer.size)
 
       write_uint32(fbe_offset, fbe_vector_offset)
       write_uint32(fbe_vector_offset, size)
@@ -1402,7 +1717,7 @@ void GeneratorRuby::GenerateFBEFieldModelVector()
 
     # Set the vector
     def set(values)
-      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Array)
+      raise ArgumentError, "Invalid values parameter!" if values.nil? || !values.is_a?(Array)
 
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return
@@ -1485,11 +1800,11 @@ void GeneratorRuby::GenerateFBEFieldModelSet()
 
     # Set index operator
     def [](index)
-      raise RuntimeError, 'Model is broken!' if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+      raise RuntimeError, "Model is broken!" if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
       fbe_set_offset = read_uint32(fbe_offset)
-      raise RuntimeError, 'Model is broken!' if (fbe_set_offset <= 0) || ((@_buffer.offset + fbe_set_offset + 4) > @_buffer.size)
+      raise RuntimeError, "Model is broken!" if (fbe_set_offset <= 0) || ((@_buffer.offset + fbe_set_offset + 4) > @_buffer.size)
       fbe_set_size = read_uint32(fbe_set_offset)
-      raise IndexError, 'Index is out of bounds!' if index >= fbe_set_size
+      raise IndexError, "Index is out of bounds!" if index >= fbe_set_size
 
       @_model.fbe_offset = fbe_set_offset + 4
       @_model.fbe_shift(index * @_model.fbe_size)
@@ -1500,7 +1815,7 @@ void GeneratorRuby::GenerateFBEFieldModelSet()
     def resize(size)
       fbe_set_size = size * @_model.fbe_size
       fbe_set_offset = @_buffer.allocate(4 + fbe_set_size) - @_buffer.offset
-      raise RuntimeError, 'Model is broken!' if (fbe_set_offset <= 0) || ((@_buffer.offset + fbe_set_offset + 4) > @_buffer.size)
+      raise RuntimeError, "Model is broken!" if (fbe_set_offset <= 0) || ((@_buffer.offset + fbe_set_offset + 4) > @_buffer.size)
 
       write_uint32(fbe_offset, fbe_set_offset)
       write_uint32(fbe_set_offset, size)
@@ -1559,7 +1874,7 @@ void GeneratorRuby::GenerateFBEFieldModelSet()
 
     # Set the set value
     def set(values)
-      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Set)
+      raise ArgumentError, "Invalid values parameter!" if values.nil? || !values.is_a?(Set)
 
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return
@@ -1646,11 +1961,11 @@ void GeneratorRuby::GenerateFBEFieldModelMap()
 
     # Map index operator
     def [](index)
-      raise RuntimeError, 'Model is broken!' if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+      raise RuntimeError, "Model is broken!" if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
       fbe_map_offset = read_uint32(fbe_offset)
-      raise RuntimeError, 'Model is broken!' if (fbe_map_offset <= 0) || ((@_buffer.offset + fbe_map_offset + 4) > @_buffer.size)
+      raise RuntimeError, "Model is broken!" if (fbe_map_offset <= 0) || ((@_buffer.offset + fbe_map_offset + 4) > @_buffer.size)
       fbe_map_size = read_uint32(fbe_map_offset)
-      raise IndexError, 'Index is out of bounds!' if index >= fbe_map_size
+      raise IndexError, "Index is out of bounds!" if index >= fbe_map_size
 
       @_model_key.fbe_offset = fbe_map_offset + 4
       @_model_value.fbe_offset = fbe_map_offset + 4 + @_model_key.fbe_size
@@ -1666,7 +1981,7 @@ void GeneratorRuby::GenerateFBEFieldModelMap()
 
       fbe_map_size = size * (@_model_key.fbe_size + @_model_value.fbe_size)
       fbe_map_offset = @_buffer.allocate(4 + fbe_map_size) - @_buffer.offset
-      raise RuntimeError, 'Model is broken!' if (fbe_map_offset <= 0) || ((@_buffer.offset + fbe_map_offset + 4) > @_buffer.size)
+      raise RuntimeError, "Model is broken!" if (fbe_map_offset <= 0) || ((@_buffer.offset + fbe_map_offset + 4) > @_buffer.size)
 
       write_uint32(fbe_offset, fbe_map_offset)
       write_uint32(fbe_map_offset, size)
@@ -1733,7 +2048,7 @@ void GeneratorRuby::GenerateFBEFieldModelMap()
 
     # Set the map
     def set(values)
-      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Hash)
+      raise ArgumentError, "Invalid values parameter!" if values.nil? || !values.is_a?(Hash)
 
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return
@@ -1767,7 +2082,7 @@ void GeneratorRuby::GenerateFBEFinalModel()
 
     # Check if the value is valid
     def verify
-      raise NotImplementedError, 'verify() method not implemented!'
+      raise NotImplementedError, "verify() method not implemented!"
     end
   end
 )CODE";
@@ -1994,7 +2309,7 @@ void GeneratorRuby::GenerateFBEFinalModelBytes()
 
     # Set the bytes value
     def set(value)
-      raise ArgumentError, 'Invalid bytes value!' if value.nil? || !value.is_a?(String)
+      raise ArgumentError, "Invalid bytes value!" if value.nil? || !value.is_a?(String)
 
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
         return 0
@@ -2063,7 +2378,7 @@ void GeneratorRuby::GenerateFBEFinalModelString()
 
     # Set the string value
     def set(value)
-      raise ArgumentError, 'Invalid string value!' if value.nil? || !value.is_a?(String)
+      raise ArgumentError, "Invalid string value!" if value.nil? || !value.is_a?(String)
 
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
         return 0
@@ -2244,7 +2559,7 @@ void GeneratorRuby::GenerateFBEFinalModelArray()
 
     # Set the array
     def set(values)
-      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Array)
+      raise ArgumentError, "Invalid values parameter!" if values.nil? || !values.is_a?(Array)
 
       if (@_buffer.offset + fbe_offset) > @_buffer.size
         return 0
@@ -2334,7 +2649,7 @@ void GeneratorRuby::GenerateFBEFinalModelVector()
 
     # Set the vector
     def set(values)
-      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Array)
+      raise ArgumentError, "Invalid values parameter!" if values.nil? || !values.is_a?(Array)
 
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
         return 0
@@ -2426,7 +2741,7 @@ void GeneratorRuby::GenerateFBEFinalModelSet()
 
     # Set the set value
     def set(values)
-      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Set)
+      raise ArgumentError, "Invalid values parameter!" if values.nil? || !values.is_a?(Set)
 
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
         return 0
@@ -2535,7 +2850,7 @@ void GeneratorRuby::GenerateFBEFinalModelMap()
 
     # Set the map
     def set(values)
-      raise ArgumentError, 'Invalid values parameter!' if values.nil? || !values.is_a?(Hash)
+      raise ArgumentError, "Invalid values parameter!" if values.nil? || !values.is_a?(Hash)
 
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
         return 0
@@ -2625,7 +2940,7 @@ void GeneratorRuby::GenerateFBESender()
     # Send message handler
     # noinspection RubyUnusedLocalVariable
     def on_send(buffer, offset, size)
-      raise NotImplementedError, 'Abstract method call!'
+      raise NotImplementedError, "Abstract method call!"
     end
 
     # Send log message handler
@@ -2674,7 +2989,7 @@ void GeneratorRuby::GenerateFBEReceiver()
 
     # Receive data
     def receive(buffer, offset = 0, size = nil)
-      raise ArgumentError, 'Invalid buffer!' if buffer.nil?
+      raise ArgumentError, "Invalid buffer!" if buffer.nil?
 
       if buffer.is_a?(ReadBuffer) || buffer.is_a?(WriteBuffer)
         buffer = buffer.buffer
@@ -2684,7 +2999,7 @@ void GeneratorRuby::GenerateFBEReceiver()
         size = buffer.length
       end
 
-      raise ArgumentError, 'Invalid offset & size!' if (offset + size) > buffer.length
+      raise ArgumentError, "Invalid offset & size!" if (offset + size) > buffer.length
 
       if size == 0
         return
@@ -2904,7 +3219,7 @@ void GeneratorRuby::GenerateFBEReceiver()
     # Receive message handler
     # noinspection RubyUnusedLocalVariable
     def on_receive(fbe_type, buffer, offset, size)
-      raise NotImplementedError, 'Abstract method call!'
+      raise NotImplementedError, "Abstract method call!"
     end
 
     # Receive log message handler
@@ -2935,28 +3250,18 @@ void GeneratorRuby::GenerateFBEReceiver()
 void GeneratorRuby::GenerateImports(const std::shared_ptr<Package>& p)
 {
     // Generate common import
+    GenerateImports();
+
+    // Generate FBE import
     WriteLine();
-    if (JSON())
-    {
-        WriteLineIndent("# noinspection PyUnresolvedReferences");
-        WriteLineIndent("import base64");
-    }
-    WriteLineIndent("import copy");
-    WriteLineIndent("import decimal");
-    WriteLineIndent("import enum");
-    WriteLineIndent("import functools");
-    WriteLineIndent("import fbe");
-    if (JSON())
-        WriteLineIndent("import json");
-    WriteLineIndent("import sys");
-    WriteLineIndent("import uuid");
+    WriteLineIndent("require_relative 'fbe'");
 
     // Generate packages import
     if (p->import)
     {
         WriteLine();
         for (const auto& import : p->import->imports)
-            WriteLineIndent("from . import " + *import);
+            WriteLineIndent("require_relative '" + *import + "'");
     }
 }
 
@@ -2976,18 +3281,23 @@ void GeneratorRuby::GeneratePackage(const std::shared_ptr<Package>& p)
 
     // Generate package header
     GenerateHeader();
-    //GenerateImports(p);
+    GenerateImports(p);
+
+    // Generate module begin
+    WriteLine();
+    WriteLineIndent("module " + ConvertPackage(*p->name));
+    Indent(1);
 
     // Generate namespace
     if (p->body)
     {
         // Generate child enums
-        //for (const auto& child_e : p->body->enums)
-        //    GenerateEnum(child_e);
+        for (const auto& child_e : p->body->enums)
+            GenerateEnum(child_e);
 
         // Generate child flags
-        //for (const auto& child_f : p->body->flags)
-        //    GenerateFlags(child_f);
+        for (const auto& child_f : p->body->flags)
+            GenerateFlags(child_f);
 
         // Generate child structs
         //for (const auto& child_s : p->body->structs)
@@ -3006,6 +3316,11 @@ void GeneratorRuby::GeneratePackage(const std::shared_ptr<Package>& p)
         }
     }
 
+    // Generate module end
+    Indent(-1);
+    WriteLine();
+    WriteLineIndent("end");
+
     // Generate package footer
     GenerateFooter();
 
@@ -3015,34 +3330,39 @@ void GeneratorRuby::GeneratePackage(const std::shared_ptr<Package>& p)
 
 void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
 {
-    // Generate enum begin
+    // Generate enum module
     WriteLine();
-    WriteLine();
-    WriteLineIndent("class " + *e->name + "(enum.IntEnum, metaclass=fbe.DefaultEnumMeta):");
+    WriteLineIndent("module " + *e->name);
     Indent(1);
 
     std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
 
-    // Generate enum body
+    // Generate enum class
+    WriteLineIndent("class Enum");
+    Indent(1);
+    WriteLineIndent("include FBE::Enum");
+    WriteLine();
+
+    // Generate enum class body
     if (e->body)
     {
         int index = 0;
-        std::string last = ConvertEnumConstant("int32", "0");
+        std::string last = ConvertEnumConstant("int32", "0", false);
         for (const auto& value : e->body->values)
         {
-            WriteIndent(*value->name + " = ");
+            WriteIndent("define :" + *value->name + ", ");
             if (value->value)
             {
                 if (value->value->constant && !value->value->constant->empty())
                 {
                     index = 0;
-                    last = ConvertEnumConstant(enum_type, *value->value->constant);
+                    last = ConvertEnumConstant(enum_type, *value->value->constant, false);
                     Write(last + " + " + std::to_string(index++));
                 }
                 else if (value->value->reference && !value->value->reference->empty())
                 {
                     index = 0;
-                    last = ConvertEnumConstant("", *value->value->reference);
+                    last = ConvertEnumConstant("", *value->value->reference, false);
                     Write(last);
                 }
             }
@@ -3050,62 +3370,78 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
                 Write(last + " + " + std::to_string(index++));
             WriteLine();
         }
-        WriteLineIndent("unknown = ~0");
     }
 
-    // Generate enum __slots__
+    // Generate enum class initialize method
     WriteLine();
-    WriteLineIndent("__slots__ = ()");
-
-    // Generate enum __format__ method
-    WriteLine();
-    WriteLineIndent("def __format__(self, format_spec):");
+    WriteLineIndent("def initialize(value = 0)");
     Indent(1);
-    WriteLineIndent("return self.__str__()");
+    WriteLineIndent("@value = value");
     Indent(-1);
+    WriteLineIndent("end");
 
-    // Generate enum __str__ method
+    // Generate enum class to_i method
     WriteLine();
-    WriteLineIndent("def __str__(self):");
+    WriteLineIndent("def to_i");
+    Indent(1);
+    WriteLineIndent("@value");
+    Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate enum class to_s method
+    WriteLine();
+    WriteLineIndent("def to_s");
     Indent(1);
     if (e->body)
     {
         for (auto it = e->body->values.begin(); it != e->body->values.end(); ++it)
         {
-            WriteLineIndent("if self.value == " + *e->name + "." + *(*it)->name + ":");
+            WriteLineIndent("if @value == Enum." + *(*it)->name);
             Indent(1);
-            WriteLineIndent("return \"" + *(*it)->name + "\"");
+            WriteLineIndent("return '" + *(*it)->name + "'");
             Indent(-1);
+            WriteLineIndent("end");
         }
     }
-    WriteLineIndent("return \"<unknown>\"");
+    WriteLineIndent("'<unknown>'");
     Indent(-1);
+    WriteLineIndent("end");
 
-    // Generate enum __format__ method
+    // Generate enum class end
+    Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate enum module class
     WriteLine();
-    WriteLineIndent("@classmethod");
-    WriteLineIndent("def _missing_(cls, value):");
+    WriteLineIndent("class << self");
     Indent(1);
-    WriteLineIndent("return " + *e->name + ".unknown");
+    if (e->body)
+        for (auto it = e->body->values.begin(); it != e->body->values.end(); ++it)
+            WriteLineIndent("attr_accessor :" + *(*it)->name);
     Indent(-1);
+    WriteLineIndent("end");
 
-    if (JSON())
-    {
-        // Generate enum __from_json__ method
-        WriteLine();
-        WriteLineIndent("@staticmethod");
-        WriteLineIndent("def __from_json__(value):");
-        Indent(1);
-        WriteLineIndent("if value is None:");
-        Indent(1);
-        WriteLineIndent("return None");
-        Indent(-1);
-        WriteLineIndent("return " + *e->name + "(value)");
-        Indent(-1);
-    }
+    // Generate enum module class attributes
+    WriteLine();
+    if (e->body)
+        for (auto it = e->body->values.begin(); it != e->body->values.end(); ++it)
+            WriteLineIndent("self." + *(*it)->name + " = Enum.new(Enum." + *(*it)->name + ")");
 
-    // Generate enum end
+    // Generate enum module class constructor
+    WriteLine();
+    WriteLineIndent("def self.new(value = 0)");
+    Indent(1);
+    WriteLineIndent("Enum.new(value)");
     Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate enum module end
+    Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate enum module freeze
+    WriteLine();
+    WriteLineIndent(*e->name + ".freeze");
 
     // Generate enum field model
     GenerateEnumFieldModel(e);
@@ -3118,34 +3454,35 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
 void GeneratorRuby::GenerateEnumFieldModel(const std::shared_ptr<EnumType>& e)
 {
     std::string code = R"CODE(
-
-# Fast Binary Encoding _ENUM_NAME_ field model class
-class FieldModel_ENUM_NAME_(fbe.FieldModel):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
+  # Fast Binary Encoding _ENUM_NAME_ field model class
+  class FieldModel_ENUM_NAME_ < FBE::FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
 
     # Get the field size
-    @property
-    def fbe_size(self):
-        return _ENUM_SIZE_
+    def fbe_size
+      _ENUM_SIZE_
+    end
 
     # Get the value
-    def get(self, defaults=None):
-        if defaults is None:
-            defaults = _ENUM_NAME_()
+    def get(defaults = _ENUM_NAME_.new)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
 
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return defaults
-
-        return _ENUM_NAME_(self.read__ENUM_TYPE_(self.fbe_offset))
+      _ENUM_NAME_.new(read__ENUM_TYPE_(fbe_offset))
+    end
 
     # Set the value
-    def set(self, value):
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
 
-        self.write__ENUM_TYPE_(self.fbe_offset, value)
+      write__ENUM_TYPE_(fbe_offset, value)
+    end
+  end
 )CODE";
 
     std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
@@ -3162,44 +3499,51 @@ class FieldModel_ENUM_NAME_(fbe.FieldModel):
 void GeneratorRuby::GenerateEnumFinalModel(const std::shared_ptr<EnumType>& e)
 {
     std::string code = R"CODE(
-
-# Fast Binary Encoding _ENUM_NAME_ final model class
-class FinalModel_ENUM_NAME_(fbe.FinalModel):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
+  # Fast Binary Encoding _ENUM_NAME_ final model class
+  class FinalModel_ENUM_NAME_ < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
 
     # Get the allocation size
-    # noinspection PyUnusedLocal
-    def fbe_allocation_size(self, value):
-        return self.fbe_size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
 
     # Get the final size
-    @property
-    def fbe_size(self):
-        return _ENUM_SIZE_
+    def fbe_size
+      _ENUM_SIZE_
+    end
 
     # Check if the value is valid
-    def verify(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return sys.maxsize
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
 
-        return self.fbe_size
+      fbe_size
+    end
 
     # Get the value
-    def get(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return _ENUM_NAME_(), 0
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [_ENUM_NAME_.new, 0]
+      end
 
-        return _ENUM_NAME_(self.read__ENUM_TYPE_(self.fbe_offset)), self.fbe_size
+      [_ENUM_NAME_.new(read__ENUM_TYPE_(fbe_offset)), fbe_size]
+    end
 
     # Set the value
-    def set(self, value):
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return 0
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
 
-        self.write__ENUM_TYPE_(self.fbe_offset, value)
-        return self.fbe_size
+      write__ENUM_TYPE_(fbe_offset, value)
+      fbe_size
+    end
+  end
 )CODE";
 
     std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
@@ -3215,122 +3559,118 @@ class FinalModel_ENUM_NAME_(fbe.FinalModel):
 
 void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
 {
-    // Generate flags begin
+    // Generate flags module
     WriteLine();
-    WriteLine();
-    WriteLineIndent("class " + *f->name + "(enum.IntFlag, metaclass=fbe.DefaultEnumMeta):");
+    WriteLineIndent("module " + *f->name);
     Indent(1);
 
-    std::string enum_type = (f->base && !f->base->empty()) ? *f->base : "int32";
+    std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
 
-    // Generate flags body
+    // Generate flags class
+    WriteLineIndent("class Flags");
+    Indent(1);
+    WriteLineIndent("include FBE::Flags");
+    WriteLine();
+
+    // Generate flags class body
     if (f->body)
     {
-        int index = 0;
-        std::string last = ConvertEnumConstant("int32", "0");
         for (const auto& value : f->body->values)
         {
-            WriteIndent(*value->name + " = ");
+            WriteIndent("define :" + *value->name + ", ");
             if (value->value)
             {
                 if (value->value->constant && !value->value->constant->empty())
-                {
-                    index = 0;
-                    last = ConvertEnumConstant(enum_type, *value->value->constant);
-                    Write(last + " + " + std::to_string(index++));
-                }
+                    Write(ConvertEnumConstant(flags_type, *value->value->constant, true));
                 else if (value->value->reference && !value->value->reference->empty())
-                {
-                    index = 0;
-                    last = ConvertEnumConstant("", *value->value->reference);
-                    Write(last);
-                }
+                    Write(ConvertEnumConstant("", *value->value->reference, true));
             }
-            else
-                Write(last + " + " + std::to_string(index++));
             WriteLine();
         }
     }
 
-    // Generate flags __slots__
+    // Generate flags class initialize method
     WriteLine();
-    WriteLineIndent("__slots__ = ()");
-
-    // Generate flags has_flags() method
-    WriteLine();
-    WriteLineIndent("def has_flags(self, flags):");
+    WriteLineIndent("def initialize(value = 0)");
     Indent(1);
-    WriteLineIndent("return ((self.value & flags.value) != 0) and ((self.value & flags.value) == flags.value)");
+    WriteLineIndent("@value = value");
     Indent(-1);
+    WriteLineIndent("end");
 
-    // Generate flags set_flags() method
+    // Generate flags class to_i method
     WriteLine();
-    WriteLineIndent("def set_flags(self, flags):");
+    WriteLineIndent("def to_i");
     Indent(1);
-    WriteLineIndent("self.value |= flags.value");
-    WriteLineIndent("return self");
+    WriteLineIndent("@value");
     Indent(-1);
+    WriteLineIndent("end");
 
-    // Generate flags remove_flags() method
+    // Generate flags class to_s method
     WriteLine();
-    WriteLineIndent("def remove_flags(self, flags):");
+    WriteLineIndent("def to_s");
     Indent(1);
-    WriteLineIndent("self.value &= ~flags.value");
-    WriteLineIndent("return self");
-    Indent(-1);
-
-    // Generate flags __format__ method
-    WriteLine();
-    WriteLineIndent("def __format__(self, format_spec):");
-    Indent(1);
-    WriteLineIndent("return self.__str__()");
-    Indent(-1);
-
-    // Generate flags __str__ method
-    WriteLine();
-    WriteLineIndent("def __str__(self):");
-    Indent(1);
-    WriteLineIndent("sb = list()");
-    WriteLineIndent("first = True");
+    WriteLineIndent("result = ''");
+    WriteLineIndent("first = true");
     if (f->body)
     {
         for (auto it = f->body->values.begin(); it != f->body->values.end(); ++it)
         {
-            WriteLineIndent("if (self.value & " + *f->name + "." + *(*it)->name + ".value) and ((self.value & " + *f->name + "." + *(*it)->name + ".value) == " + *f->name + "." + *(*it)->name + ".value):");
+            WriteLineIndent("if (@value == Flags." + *(*it)->name + ") && ((@value & Flags." + *(*it)->name + ") == Flags." + *(*it)->name + ")");
             Indent(1);
-            WriteLineIndent("if first:");
+            WriteLineIndent("if first");
             Indent(1);
-            WriteLineIndent("# noinspection PyUnusedLocal");
-            WriteLineIndent("first = False");
+            WriteLineIndent("# noinspection RubyUnusedLocalVariable");
+            WriteLineIndent("first = false");
             Indent(-1);
-            WriteLineIndent("else:");
+            WriteLineIndent("else");
             Indent(1);
-            WriteLineIndent("sb.append(\"|\")");
+            WriteLineIndent("result << '|'");
             Indent(-1);
-            WriteLineIndent("sb.append(\"" + *(*it)->name + "\")");
+            WriteLineIndent("end");
+            WriteLineIndent("result << '" + *(*it)->name + "'");
             Indent(-1);
+            WriteLineIndent("end");
         }
     }
-    WriteLineIndent("return \"\".join(sb)");
+    WriteLineIndent("result");
     Indent(-1);
+    WriteLineIndent("end");
 
-    if (JSON())
-    {
-        // Generate flags __from_json__ method
-        WriteLine();
-        WriteLineIndent("@staticmethod");
-        WriteLineIndent("def __from_json__(value):");
-        Indent(1);
-        WriteLineIndent("if value is None:");
-        Indent(1);
-        WriteLineIndent("return None");
-        Indent(-1);
-        WriteLineIndent("return " + *f->name + "(value)");
-        Indent(-1);
-    }
-
-    // Generate flags end
+    // Generate flags class end
     Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate flags module class
+    WriteLine();
+    WriteLineIndent("class << self");
+    Indent(1);
+    if (f->body)
+        for (auto it = f->body->values.begin(); it != f->body->values.end(); ++it)
+            WriteLineIndent("attr_accessor :" + *(*it)->name);
+    Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate flags module class attributes
+    WriteLine();
+    if (f->body)
+        for (auto it = f->body->values.begin(); it != f->body->values.end(); ++it)
+            WriteLineIndent("self." + *(*it)->name + " = Flags.new(Flags." + *(*it)->name + ")");
+
+    // Generate flags module class constructor
+    WriteLine();
+    WriteLineIndent("def self.new(value = 0)");
+    Indent(1);
+    WriteLineIndent("Flags.new(value)");
+    Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate flags module end
+    Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate flags module freeze
+    WriteLine();
+    WriteLineIndent(*f->name + ".freeze");
 
     // Generate flags field model
     GenerateFlagsFieldModel(f);
@@ -3343,34 +3683,35 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
 void GeneratorRuby::GenerateFlagsFieldModel(const std::shared_ptr<FlagsType>& f)
 {
     std::string code = R"CODE(
-
-# Fast Binary Encoding _FLAGS_NAME_ field model class
-class FieldModel_FLAGS_NAME_(fbe.FieldModel):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
+  # Fast Binary Encoding _FLAGS_NAME_ field model class
+  class FieldModel_FLAGS_NAME_ < FBE::FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
 
     # Get the field size
-    @property
-    def fbe_size(self):
-        return _FLAGS_SIZE_
+    def fbe_size
+      _FLAGS_SIZE_
+    end
 
     # Get the value
-    def get(self, defaults=None):
-        if defaults is None:
-            defaults = _FLAGS_NAME_()
+    def get(defaults = _FLAGS_NAME_.new)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
 
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return defaults
-
-        return _FLAGS_NAME_(self.read__FLAGS_TYPE_(self.fbe_offset))
+      _FLAGS_NAME_.new(read__FLAGS_TYPE_(fbe_offset))
+    end
 
     # Set the value
-    def set(self, value):
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
 
-        self.write__FLAGS_TYPE_(self.fbe_offset, value)
+      write__FLAGS_TYPE_(fbe_offset, value)
+    end
+  end
 )CODE";
 
     std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
@@ -3387,44 +3728,51 @@ class FieldModel_FLAGS_NAME_(fbe.FieldModel):
 void GeneratorRuby::GenerateFlagsFinalModel(const std::shared_ptr<FlagsType>& f)
 {
     std::string code = R"CODE(
-
-# Fast Binary Encoding _FLAGS_NAME_ final model class
-class FinalModel_FLAGS_NAME_(fbe.FinalModel):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
+  # Fast Binary Encoding _FLAGS_NAME_ final model class
+  class FinalModel_FLAGS_NAME_ < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
 
     # Get the allocation size
-    # noinspection PyUnusedLocal
-    def fbe_allocation_size(self, value):
-        return self.fbe_size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
 
     # Get the final size
-    @property
-    def fbe_size(self):
-        return _FLAGS_SIZE_
+    def fbe_size
+      _FLAGS_SIZE_
+    end
 
     # Check if the value is valid
-    def verify(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return sys.maxsize
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
 
-        return self.fbe_size
+      fbe_size
+    end
 
     # Get the value
-    def get(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return _FLAGS_NAME_(), 0
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [_FLAGS_NAME_.new, 0]
+      end
 
-        return _FLAGS_NAME_(self.read__FLAGS_TYPE_(self.fbe_offset)), self.fbe_size
+      [_FLAGS_NAME_.new(read__FLAGS_TYPE_(fbe_offset)), fbe_size]
+    end
 
     # Set the value
-    def set(self, value):
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return 0
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
 
-        self.write__FLAGS_TYPE_(self.fbe_offset, value)
-        return self.fbe_size
+      write__FLAGS_TYPE_(fbe_offset, value)
+      fbe_size
+    end
+  end
 )CODE";
 
     std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
@@ -5021,6 +5369,13 @@ bool GeneratorRuby::IsRubyType(const std::string& type)
     return IsPrimitiveType(type) || (type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid");
 }
 
+std::string GeneratorRuby::ConvertPackage(const std::string& package)
+{
+    std::string result = package;
+    result[0] = std::toupper(result[0]);
+    return result;
+}
+
 std::string GeneratorRuby::ConvertEnumSize(const std::string& type)
 {
     if (type == "byte")
@@ -5079,14 +5434,34 @@ std::string GeneratorRuby::ConvertEnumType(const std::string& type)
     return "";
 }
 
-std::string GeneratorRuby::ConvertEnumConstant(const std::string& type, const std::string& value)
+std::string GeneratorRuby::ConvertEnumConstant(const std::string& type, const std::string& value, bool flag)
 {
-    if (((type == "char") || (type == "wchar")) && CppCommon::StringUtils::StartsWith(value, "'"))
-        return "ord(" + value + ")";
-    else if (type.empty())
-        return value;
+    std::string prefix = flag ? "Flags.value(:" : "Enum.value(:";
 
-    return "int(" + value + ")";
+    if (((type == "char") || (type == "wchar")) && CppCommon::StringUtils::StartsWith(value, "'"))
+        return value + ".ord";
+    else if (type.empty())
+    {
+        // Fill flags values
+        std::vector<std::string> flags = CppCommon::StringUtils::Split(value, '|', true);
+
+        // Generate flags combination
+        if (!flags.empty())
+        {
+            std::string result = "";
+            bool first = true;
+            for (const auto& it : flags)
+            {
+                result += std::string(first ? "" : "|") + prefix + CppCommon::StringUtils::ToTrim(it) + ")";
+                first = false;
+            }
+            return result;
+        }
+
+        return prefix + value + ")";
+    }
+
+    return value;
 }
 
 std::string GeneratorRuby::ConvertTypeName(const std::string& type, bool optional)

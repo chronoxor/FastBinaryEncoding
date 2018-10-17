@@ -18,10 +18,10 @@ import proto.*
 @Suppress("EnumEntryName", "MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 enum class FlagsSimpleEnum
 {
-    FLAG_VALUE_0(0x0 + 0)
-    , FLAG_VALUE_1(0x1 + 0)
-    , FLAG_VALUE_2(0x2 + 0)
-    , FLAG_VALUE_3(0x4 + 0)
+    FLAG_VALUE_0(0x0)
+    , FLAG_VALUE_1(0x1)
+    , FLAG_VALUE_2(0x2)
+    , FLAG_VALUE_3(0x4)
     , FLAG_VALUE_4(FLAG_VALUE_3.raw.toInt())
     , FLAG_VALUE_5(FLAG_VALUE_1.raw.toInt() or FLAG_VALUE_3.raw.toInt())
     ;

@@ -41,7 +41,8 @@ private:
     void GenerateFooter();
     void GenerateImports();
     void GenerateFBE(const CppCommon::Path& path);
-    void GenerateFBEBuffer();
+    void GenerateFBEEnum();
+    void GenerateFBEFlags();
     void GenerateFBEWriteBuffer();
     void GenerateFBEReadBuffer();
     void GenerateFBEModel();
@@ -88,9 +89,10 @@ private:
     bool IsPrimitiveType(const std::string& type);
     bool IsRubyType(const std::string& type);
 
+    std::string ConvertPackage(const std::string& package);
     std::string ConvertEnumSize(const std::string& type);
     std::string ConvertEnumType(const std::string& type);
-    std::string ConvertEnumConstant(const std::string& type, const std::string& value);
+    std::string ConvertEnumConstant(const std::string& type, const std::string& value, bool flag);
     std::string ConvertTypeName(const std::string& type, bool optional);
     std::string ConvertTypeName(const StructField& field);
     std::string ConvertTypeFieldName(const std::string& type, bool final);

@@ -10,4 +10,703 @@
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/PerceivedComplexity
 
+require 'bigdecimal'
+require 'uuidtools'
+
+require_relative 'fbe'
+
+require_relative 'proto'
+
+module Test
+
+  module EnumSimple
+    class Enum
+      include FBE::Enum
+
+      define :ENUM_VALUE_0, 0 + 0
+      define :ENUM_VALUE_1, 1 + 0
+      define :ENUM_VALUE_2, 1 + 1
+      define :ENUM_VALUE_3, 3 + 0
+      define :ENUM_VALUE_4, 0x4 + 0
+      define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
+
+      def initialize(value = 0)
+        @value = value
+      end
+
+      def to_i
+        @value
+      end
+
+      def to_s
+        if @value == Enum.ENUM_VALUE_0
+          return 'ENUM_VALUE_0'
+        end
+        if @value == Enum.ENUM_VALUE_1
+          return 'ENUM_VALUE_1'
+        end
+        if @value == Enum.ENUM_VALUE_2
+          return 'ENUM_VALUE_2'
+        end
+        if @value == Enum.ENUM_VALUE_3
+          return 'ENUM_VALUE_3'
+        end
+        if @value == Enum.ENUM_VALUE_4
+          return 'ENUM_VALUE_4'
+        end
+        if @value == Enum.ENUM_VALUE_5
+          return 'ENUM_VALUE_5'
+        end
+        '<unknown>'
+      end
+    end
+
+    class << self
+      attr_accessor :ENUM_VALUE_0
+      attr_accessor :ENUM_VALUE_1
+      attr_accessor :ENUM_VALUE_2
+      attr_accessor :ENUM_VALUE_3
+      attr_accessor :ENUM_VALUE_4
+      attr_accessor :ENUM_VALUE_5
+    end
+
+    self.ENUM_VALUE_0 = Enum.new(Enum.ENUM_VALUE_0)
+    self.ENUM_VALUE_1 = Enum.new(Enum.ENUM_VALUE_1)
+    self.ENUM_VALUE_2 = Enum.new(Enum.ENUM_VALUE_2)
+    self.ENUM_VALUE_3 = Enum.new(Enum.ENUM_VALUE_3)
+    self.ENUM_VALUE_4 = Enum.new(Enum.ENUM_VALUE_4)
+    self.ENUM_VALUE_5 = Enum.new(Enum.ENUM_VALUE_5)
+
+    def self.new(value = 0)
+      Enum.new(value)
+    end
+  end
+
+  EnumSimple.freeze
+
+  # Fast Binary Encoding EnumSimple field model class
+  class FieldModelEnumSimple < FBE::FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the value
+    def get(defaults = EnumSimple.new)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      EnumSimple.new(read_int32(fbe_offset))
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_int32(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding EnumSimple final model class
+  class FinalModelEnumSimple < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      4
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [EnumSimple.new, 0]
+      end
+
+      [EnumSimple.new(read_int32(fbe_offset)), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_int32(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  module EnumTyped
+    class Enum
+      include FBE::Enum
+
+      define :ENUM_VALUE_0, 0 + 0
+      define :ENUM_VALUE_1, '1'.ord + 0
+      define :ENUM_VALUE_2, '1'.ord + 1
+      define :ENUM_VALUE_3, '3'.ord + 0
+      define :ENUM_VALUE_4, '3'.ord + 1
+      define :ENUM_VALUE_5, Enum.value(:ENUM_VALUE_3)
+
+      def initialize(value = 0)
+        @value = value
+      end
+
+      def to_i
+        @value
+      end
+
+      def to_s
+        if @value == Enum.ENUM_VALUE_0
+          return 'ENUM_VALUE_0'
+        end
+        if @value == Enum.ENUM_VALUE_1
+          return 'ENUM_VALUE_1'
+        end
+        if @value == Enum.ENUM_VALUE_2
+          return 'ENUM_VALUE_2'
+        end
+        if @value == Enum.ENUM_VALUE_3
+          return 'ENUM_VALUE_3'
+        end
+        if @value == Enum.ENUM_VALUE_4
+          return 'ENUM_VALUE_4'
+        end
+        if @value == Enum.ENUM_VALUE_5
+          return 'ENUM_VALUE_5'
+        end
+        '<unknown>'
+      end
+    end
+
+    class << self
+      attr_accessor :ENUM_VALUE_0
+      attr_accessor :ENUM_VALUE_1
+      attr_accessor :ENUM_VALUE_2
+      attr_accessor :ENUM_VALUE_3
+      attr_accessor :ENUM_VALUE_4
+      attr_accessor :ENUM_VALUE_5
+    end
+
+    self.ENUM_VALUE_0 = Enum.new(Enum.ENUM_VALUE_0)
+    self.ENUM_VALUE_1 = Enum.new(Enum.ENUM_VALUE_1)
+    self.ENUM_VALUE_2 = Enum.new(Enum.ENUM_VALUE_2)
+    self.ENUM_VALUE_3 = Enum.new(Enum.ENUM_VALUE_3)
+    self.ENUM_VALUE_4 = Enum.new(Enum.ENUM_VALUE_4)
+    self.ENUM_VALUE_5 = Enum.new(Enum.ENUM_VALUE_5)
+
+    def self.new(value = 0)
+      Enum.new(value)
+    end
+  end
+
+  EnumTyped.freeze
+
+  # Fast Binary Encoding EnumTyped field model class
+  class FieldModelEnumTyped < FBE::FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      1
+    end
+
+    # Get the value
+    def get(defaults = EnumTyped.new)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      EnumTyped.new(read_uint8(fbe_offset))
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_uint8(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding EnumTyped final model class
+  class FinalModelEnumTyped < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      1
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [EnumTyped.new, 0]
+      end
+
+      [EnumTyped.new(read_uint8(fbe_offset)), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_uint8(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  module FlagsSimple
+    class Flags
+      include FBE::Flags
+
+      define :FLAG_VALUE_0, 0x0
+      define :FLAG_VALUE_1, 0x1
+      define :FLAG_VALUE_2, 0x2
+      define :FLAG_VALUE_3, 0x4
+      define :FLAG_VALUE_4, Flags.value(:FLAG_VALUE_3)
+      define :FLAG_VALUE_5, Flags.value(:FLAG_VALUE_1)|Flags.value(:FLAG_VALUE_3)
+
+      def initialize(value = 0)
+        @value = value
+      end
+
+      def to_i
+        @value
+      end
+
+      def to_s
+        result = ''
+        first = true
+        if (@value == Flags.FLAG_VALUE_0) && ((@value & Flags.FLAG_VALUE_0) == Flags.FLAG_VALUE_0)
+          if first
+            # noinspection RubyUnusedLocalVariable
+            first = false
+          else
+            result << '|'
+          end
+          result << 'FLAG_VALUE_0'
+        end
+        if (@value == Flags.FLAG_VALUE_1) && ((@value & Flags.FLAG_VALUE_1) == Flags.FLAG_VALUE_1)
+          if first
+            # noinspection RubyUnusedLocalVariable
+            first = false
+          else
+            result << '|'
+          end
+          result << 'FLAG_VALUE_1'
+        end
+        if (@value == Flags.FLAG_VALUE_2) && ((@value & Flags.FLAG_VALUE_2) == Flags.FLAG_VALUE_2)
+          if first
+            # noinspection RubyUnusedLocalVariable
+            first = false
+          else
+            result << '|'
+          end
+          result << 'FLAG_VALUE_2'
+        end
+        if (@value == Flags.FLAG_VALUE_3) && ((@value & Flags.FLAG_VALUE_3) == Flags.FLAG_VALUE_3)
+          if first
+            # noinspection RubyUnusedLocalVariable
+            first = false
+          else
+            result << '|'
+          end
+          result << 'FLAG_VALUE_3'
+        end
+        if (@value == Flags.FLAG_VALUE_4) && ((@value & Flags.FLAG_VALUE_4) == Flags.FLAG_VALUE_4)
+          if first
+            # noinspection RubyUnusedLocalVariable
+            first = false
+          else
+            result << '|'
+          end
+          result << 'FLAG_VALUE_4'
+        end
+        if (@value == Flags.FLAG_VALUE_5) && ((@value & Flags.FLAG_VALUE_5) == Flags.FLAG_VALUE_5)
+          if first
+            # noinspection RubyUnusedLocalVariable
+            first = false
+          else
+            result << '|'
+          end
+          result << 'FLAG_VALUE_5'
+        end
+        result
+      end
+    end
+
+    class << self
+      attr_accessor :FLAG_VALUE_0
+      attr_accessor :FLAG_VALUE_1
+      attr_accessor :FLAG_VALUE_2
+      attr_accessor :FLAG_VALUE_3
+      attr_accessor :FLAG_VALUE_4
+      attr_accessor :FLAG_VALUE_5
+    end
+
+    self.FLAG_VALUE_0 = Flags.new(Flags.FLAG_VALUE_0)
+    self.FLAG_VALUE_1 = Flags.new(Flags.FLAG_VALUE_1)
+    self.FLAG_VALUE_2 = Flags.new(Flags.FLAG_VALUE_2)
+    self.FLAG_VALUE_3 = Flags.new(Flags.FLAG_VALUE_3)
+    self.FLAG_VALUE_4 = Flags.new(Flags.FLAG_VALUE_4)
+    self.FLAG_VALUE_5 = Flags.new(Flags.FLAG_VALUE_5)
+
+    def self.new(value = 0)
+      Flags.new(value)
+    end
+  end
+
+  FlagsSimple.freeze
+
+  # Fast Binary Encoding FlagsSimple field model class
+  class FieldModelFlagsSimple < FBE::FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the value
+    def get(defaults = FlagsSimple.new)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      FlagsSimple.new(read_int32(fbe_offset))
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_int32(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding FlagsSimple final model class
+  class FinalModelFlagsSimple < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      4
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [FlagsSimple.new, 0]
+      end
+
+      [FlagsSimple.new(read_int32(fbe_offset)), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_int32(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+  module FlagsTyped
+    class Flags
+      include FBE::Flags
+
+      define :FLAG_VALUE_0, 0x00
+      define :FLAG_VALUE_1, 0x01
+      define :FLAG_VALUE_2, 0x02
+      define :FLAG_VALUE_3, 0x04
+      define :FLAG_VALUE_4, 0x08
+      define :FLAG_VALUE_5, 0x10
+      define :FLAG_VALUE_6, 0x20
+      define :FLAG_VALUE_7, 0x40
+      define :FLAG_VALUE_8, Flags.value(:FLAG_VALUE_7)
+      define :FLAG_VALUE_9, Flags.value(:FLAG_VALUE_2)|Flags.value(:FLAG_VALUE_4)|Flags.value(:FLAG_VALUE_6)
+
+      def initialize(value = 0)
+        @value = value
+      end
+
+      def to_i
+        @value
+      end
+
+      def to_s
+        result = ''
+        first = true
+        if (@value == Flags.FLAG_VALUE_0) && ((@value & Flags.FLAG_VALUE_0) == Flags.FLAG_VALUE_0)
+          if first
+            # noinspection RubyUnusedLocalVariable
+            first = false
+          else
+            result << '|'
+          end
+          result << 'FLAG_VALUE_0'
+        end
+        if (@value == Flags.FLAG_VALUE_1) && ((@value & Flags.FLAG_VALUE_1) == Flags.FLAG_VALUE_1)
+          if first
+            # noinspection RubyUnusedLocalVariable
+            first = false
+          else
+            result << '|'
+          end
+          result << 'FLAG_VALUE_1'
+        end
+        if (@value == Flags.FLAG_VALUE_2) && ((@value & Flags.FLAG_VALUE_2) == Flags.FLAG_VALUE_2)
+          if first
+            # noinspection RubyUnusedLocalVariable
+            first = false
+          else
+            result << '|'
+          end
+          result << 'FLAG_VALUE_2'
+        end
+        if (@value == Flags.FLAG_VALUE_3) && ((@value & Flags.FLAG_VALUE_3) == Flags.FLAG_VALUE_3)
+          if first
+            # noinspection RubyUnusedLocalVariable
+            first = false
+          else
+            result << '|'
+          end
+          result << 'FLAG_VALUE_3'
+        end
+        if (@value == Flags.FLAG_VALUE_4) && ((@value & Flags.FLAG_VALUE_4) == Flags.FLAG_VALUE_4)
+          if first
+            # noinspection RubyUnusedLocalVariable
+            first = false
+          else
+            result << '|'
+          end
+          result << 'FLAG_VALUE_4'
+        end
+        if (@value == Flags.FLAG_VALUE_5) && ((@value & Flags.FLAG_VALUE_5) == Flags.FLAG_VALUE_5)
+          if first
+            # noinspection RubyUnusedLocalVariable
+            first = false
+          else
+            result << '|'
+          end
+          result << 'FLAG_VALUE_5'
+        end
+        if (@value == Flags.FLAG_VALUE_6) && ((@value & Flags.FLAG_VALUE_6) == Flags.FLAG_VALUE_6)
+          if first
+            # noinspection RubyUnusedLocalVariable
+            first = false
+          else
+            result << '|'
+          end
+          result << 'FLAG_VALUE_6'
+        end
+        if (@value == Flags.FLAG_VALUE_7) && ((@value & Flags.FLAG_VALUE_7) == Flags.FLAG_VALUE_7)
+          if first
+            # noinspection RubyUnusedLocalVariable
+            first = false
+          else
+            result << '|'
+          end
+          result << 'FLAG_VALUE_7'
+        end
+        if (@value == Flags.FLAG_VALUE_8) && ((@value & Flags.FLAG_VALUE_8) == Flags.FLAG_VALUE_8)
+          if first
+            # noinspection RubyUnusedLocalVariable
+            first = false
+          else
+            result << '|'
+          end
+          result << 'FLAG_VALUE_8'
+        end
+        if (@value == Flags.FLAG_VALUE_9) && ((@value & Flags.FLAG_VALUE_9) == Flags.FLAG_VALUE_9)
+          if first
+            # noinspection RubyUnusedLocalVariable
+            first = false
+          else
+            result << '|'
+          end
+          result << 'FLAG_VALUE_9'
+        end
+        result
+      end
+    end
+
+    class << self
+      attr_accessor :FLAG_VALUE_0
+      attr_accessor :FLAG_VALUE_1
+      attr_accessor :FLAG_VALUE_2
+      attr_accessor :FLAG_VALUE_3
+      attr_accessor :FLAG_VALUE_4
+      attr_accessor :FLAG_VALUE_5
+      attr_accessor :FLAG_VALUE_6
+      attr_accessor :FLAG_VALUE_7
+      attr_accessor :FLAG_VALUE_8
+      attr_accessor :FLAG_VALUE_9
+    end
+
+    self.FLAG_VALUE_0 = Flags.new(Flags.FLAG_VALUE_0)
+    self.FLAG_VALUE_1 = Flags.new(Flags.FLAG_VALUE_1)
+    self.FLAG_VALUE_2 = Flags.new(Flags.FLAG_VALUE_2)
+    self.FLAG_VALUE_3 = Flags.new(Flags.FLAG_VALUE_3)
+    self.FLAG_VALUE_4 = Flags.new(Flags.FLAG_VALUE_4)
+    self.FLAG_VALUE_5 = Flags.new(Flags.FLAG_VALUE_5)
+    self.FLAG_VALUE_6 = Flags.new(Flags.FLAG_VALUE_6)
+    self.FLAG_VALUE_7 = Flags.new(Flags.FLAG_VALUE_7)
+    self.FLAG_VALUE_8 = Flags.new(Flags.FLAG_VALUE_8)
+    self.FLAG_VALUE_9 = Flags.new(Flags.FLAG_VALUE_9)
+
+    def self.new(value = 0)
+      Flags.new(value)
+    end
+  end
+
+  FlagsTyped.freeze
+
+  # Fast Binary Encoding FlagsTyped field model class
+  class FieldModelFlagsTyped < FBE::FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      8
+    end
+
+    # Get the value
+    def get(defaults = FlagsTyped.new)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      FlagsTyped.new(read_uint64(fbe_offset))
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_uint64(fbe_offset, value)
+    end
+  end
+
+  # Fast Binary Encoding FlagsTyped final model class
+  class FinalModelFlagsTyped < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      8
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return Fixnum::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [FlagsTyped.new, 0]
+      end
+
+      [FlagsTyped.new(read_uint64(fbe_offset)), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_uint64(fbe_offset, value)
+      fbe_size
+    end
+  end
+
+end
+
 # rubocop:enable all

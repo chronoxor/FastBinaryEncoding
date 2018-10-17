@@ -17,11 +17,11 @@ import fbe.*
 @Suppress("EnumEntryName", "MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 enum class StateEnum
 {
-    unknown(0x00 + 0)
-    , invalid(0x01 + 0)
-    , initialized(0x02 + 0)
-    , calculated(0x04 + 0)
-    , broken(0x08 + 0)
+    unknown(0x00)
+    , invalid(0x01)
+    , initialized(0x02)
+    , calculated(0x04)
+    , broken(0x08)
     , good(initialized.raw.toInt() or calculated.raw.toInt())
     , bad(unknown.raw.toInt() or invalid.raw.toInt() or broken.raw.toInt())
     ;

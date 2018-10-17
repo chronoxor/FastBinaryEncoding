@@ -15,13 +15,13 @@ import proto.*;
 
 public enum StateExEnum
 {
-    unknown((byte)0x00 + 0)
-    , invalid((byte)0x01 + 0)
-    , initialized((byte)0x02 + 0)
-    , calculated((byte)0x04 + 0)
-    , broken((byte)0x08 + 0)
-    , happy((byte)0x10 + 0)
-    , sad((byte)0x20 + 0)
+    unknown((byte)0x00)
+    , invalid((byte)0x01)
+    , initialized((byte)0x02)
+    , calculated((byte)0x04)
+    , broken((byte)0x08)
+    , happy((byte)0x10)
+    , sad((byte)0x20)
     , good(initialized.getRaw()|calculated.getRaw())
     , bad(unknown.getRaw()|invalid.getRaw()|broken.getRaw())
     ;
