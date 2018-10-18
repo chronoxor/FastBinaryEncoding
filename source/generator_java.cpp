@@ -7255,7 +7255,6 @@ std::string GeneratorJava::ConvertConstant(const std::string& type, const std::s
                 result += (first ? "" : ", ") + CppCommon::StringUtils::ToTrim(it) + ".getEnum()";
                 first = false;
             }
-
             result = type + ".fromSet(EnumSet.of(" + result + "))";
         }
     }

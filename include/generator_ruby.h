@@ -89,7 +89,7 @@ private:
     bool IsPrimitiveType(const std::string& type);
     bool IsRubyType(const std::string& type);
 
-    std::string ConvertPackage(const std::string& package);
+    std::string ConvertTitle(const std::string& type);
     std::string ConvertEnumSize(const std::string& type);
     std::string ConvertEnumType(const std::string& type);
     std::string ConvertEnumConstant(const std::string& type, const std::string& value, bool flag);
@@ -99,13 +99,12 @@ private:
     std::string ConvertTypeFieldInitialization(const std::string& type, bool optional, const std::string& offset, bool final);
     std::string ConvertTypeFieldInitialization(const StructField& field, const std::string& offset, bool final);
     std::string ConvertConstant(const std::string& type, const std::string& value, bool optional);
-    std::string ConvertDefaultOrNone(const std::string& type, bool optional);
     std::string ConvertDefault(const std::string& type, bool optional);
     std::string ConvertDefault(const StructField& field);
 
-    void WriteOutputStreamType(const std::string& type, const std::string& name, bool optional);
-    void WriteOutputStreamItem(const std::string& type, const std::string& name, bool optional);
-    void WriteOutputStreamValue(const std::string& type, const std::string& name, bool optional);
+    void WriteOutputStreamType(const std::string& type, const std::string& name);
+    void WriteOutputStreamItem(const std::string& type, const std::string& name);
+    void WriteOutputStreamValue(const std::string& type, const std::string& name);
 };
 
 } // namespace FBE

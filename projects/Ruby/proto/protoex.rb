@@ -507,6 +507,324 @@ module Protoex
     end
   end
 
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  class Order
+    attr_accessor :uid
+    attr_accessor :symbol
+    attr_accessor :side
+    attr_accessor :type
+    attr_accessor :price
+    attr_accessor :volume
+    attr_accessor :tp
+    attr_accessor :sl
+
+    def initialize(uid = 0, symbol = '', side = OrderSide.new, type = OrderType.new, price = 0.0, volume = 0.0, tp = 10.0, sl = -10.0)
+      @uid = uid
+      @symbol = symbol
+      @side = side
+      @type = type
+      @price = price
+      @volume = volume
+      @tp = tp
+      @sl = sl
+    end
+
+    def copy(other)
+      @uid = other.uid
+      @symbol = other.symbol
+      @side = other.side
+      @type = other.type
+      @price = other.price
+      @volume = other.volume
+      @tp = other.tp
+      @sl = other.sl
+      self
+    end
+
+    def clone
+      Marshal.load(Marshal.dump(self))
+    end
+
+    def <=>(other)
+      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(Order)
+
+      # noinspection RubyUnusedLocalVariable
+      result = 0
+      result = @uid <=> other.uid
+      if result != 0
+        return false
+      end
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def ==(other) (self <=> other) == 0 end
+    def !=(other) (self <=> other) != 0 end
+    def  <(other) (self <=> other)  < 0 end
+    def  >(other) (self <=> other)  > 0 end
+    def <=(other) (self <=> other) <= 0 end
+    def >=(other) (self <=> other) >= 0 end
+
+    def eql?(other)
+      self == other
+    end
+
+    def key
+      result = []
+      result.push(@uid)
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def hash
+      key.hash
+    end
+
+    def to_s
+      result = ''
+      result << 'Order('
+      result << 'uid='
+      if !@uid.nil?
+        result << @uid.to_s
+      else
+        result << 'null'
+      end
+      result << ',symbol='
+      if !@symbol.nil?
+        result << '"' << @symbol.to_s << '"'
+      else
+        result << 'null'
+      end
+      result << ',side='
+      if !@side.nil?
+        result << @side.to_s
+      else
+        result << 'null'
+      end
+      result << ',type='
+      if !@type.nil?
+        result << @type.to_s
+      else
+        result << 'null'
+      end
+      result << ',price='
+      if !@price.nil?
+        result << @price.to_s
+      else
+        result << 'null'
+      end
+      result << ',volume='
+      if !@volume.nil?
+        result << @volume.to_s
+      else
+        result << 'null'
+      end
+      result << ',tp='
+      if !@tp.nil?
+        result << @tp.to_s
+      else
+        result << 'null'
+      end
+      result << ',sl='
+      if !@sl.nil?
+        result << @sl.to_s
+      else
+        result << 'null'
+      end
+      result << ")"
+      result
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  class Balance < Proto::Balance
+    attr_accessor :locked
+
+    def initialize(parent = Proto::Balance.new, locked = 0.0)
+      method(:copy).super_method.call(parent)
+      @locked = locked
+    end
+
+    def copy(other)
+      super(other)
+      @locked = other.locked
+      self
+    end
+
+    def clone
+      Marshal.load(Marshal.dump(self))
+    end
+
+    def <=>(other)
+      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(Balance)
+
+      # noinspection RubyUnusedLocalVariable
+      result = 0
+      result = super
+      if result != 0
+        return result
+      end
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def ==(other) (self <=> other) == 0 end
+    def !=(other) (self <=> other) != 0 end
+    def  <(other) (self <=> other)  < 0 end
+    def  >(other) (self <=> other)  > 0 end
+    def <=(other) (self <=> other) <= 0 end
+    def >=(other) (self <=> other) >= 0 end
+
+    def eql?(other)
+      self == other
+    end
+
+    def key
+      result = []
+      result.push(super)
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def hash
+      key.hash
+    end
+
+    def to_s
+      result = ''
+      result << 'Balance('
+      result << super
+      result << ',locked='
+      if !@locked.nil?
+        result << @locked.to_s
+      else
+        result << 'null'
+      end
+      result << ")"
+      result
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  class Account
+    attr_accessor :uid
+    attr_accessor :name
+    attr_accessor :state
+    attr_accessor :wallet
+    attr_accessor :asset
+    attr_accessor :orders
+
+    def initialize(uid = 0, name = '', state = StateEx.initialized | StateEx.bad | StateEx.sad, wallet = Balance.new, asset = nil, orders = Array.new)
+      @uid = uid
+      @name = name
+      @state = state
+      @wallet = wallet
+      @asset = asset
+      @orders = orders
+    end
+
+    def copy(other)
+      @uid = other.uid
+      @name = other.name
+      @state = other.state
+      @wallet = other.wallet
+      @asset = other.asset
+      @orders = other.orders
+      self
+    end
+
+    def clone
+      Marshal.load(Marshal.dump(self))
+    end
+
+    def <=>(other)
+      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(Account)
+
+      # noinspection RubyUnusedLocalVariable
+      result = 0
+      result = @uid <=> other.uid
+      if result != 0
+        return false
+      end
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def ==(other) (self <=> other) == 0 end
+    def !=(other) (self <=> other) != 0 end
+    def  <(other) (self <=> other)  < 0 end
+    def  >(other) (self <=> other)  > 0 end
+    def <=(other) (self <=> other) <= 0 end
+    def >=(other) (self <=> other) >= 0 end
+
+    def eql?(other)
+      self == other
+    end
+
+    def key
+      result = []
+      result.push(@uid)
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def hash
+      key.hash
+    end
+
+    def to_s
+      result = ''
+      result << 'Account('
+      result << 'uid='
+      if !@uid.nil?
+        result << @uid.to_s
+      else
+        result << 'null'
+      end
+      result << ',name='
+      if !@name.nil?
+        result << '"' << @name.to_s << '"'
+      else
+        result << 'null'
+      end
+      result << ',state='
+      if !@state.nil?
+        result << @state.to_s
+      else
+        result << 'null'
+      end
+      result << ',wallet='
+      if !@wallet.nil?
+        result << @wallet.to_s
+      else
+        result << 'null'
+      end
+      result << ',asset='
+      if !@asset.nil?
+        result << @asset.to_s
+      else
+        result << 'null'
+      end
+      result << ',orders='
+      unless @orders.nil?
+        first = true
+        result << '[' << @orders.length.to_s << ']['
+        @orders.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ")"
+      result
+    end
+  end
+
 end
 
 # rubocop:enable all

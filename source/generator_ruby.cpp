@@ -3285,7 +3285,7 @@ void GeneratorRuby::GeneratePackage(const std::shared_ptr<Package>& p)
 
     // Generate module begin
     WriteLine();
-    WriteLineIndent("module " + ConvertPackage(*p->name));
+    WriteLineIndent("module " + ConvertTitle(*p->name));
     Indent(1);
 
     // Generate namespace
@@ -3300,8 +3300,8 @@ void GeneratorRuby::GeneratePackage(const std::shared_ptr<Package>& p)
             GenerateFlags(child_f);
 
         // Generate child structs
-        //for (const auto& child_s : p->body->structs)
-        //    GenerateStruct(child_s);
+        for (const auto& child_s : p->body->structs)
+            GenerateStruct(child_s);
     }
 
     // Generate sender & receiver
@@ -3330,12 +3330,13 @@ void GeneratorRuby::GeneratePackage(const std::shared_ptr<Package>& p)
 
 void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
 {
+    std::string enum_name = ConvertTitle(*e->name);
+    std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
+
     // Generate enum module
     WriteLine();
-    WriteLineIndent("module " + *e->name);
+    WriteLineIndent("module " + enum_name);
     Indent(1);
-
-    std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
 
     // Generate enum class
     WriteLineIndent("class Enum");
@@ -3441,7 +3442,7 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
 
     // Generate enum module freeze
     WriteLine();
-    WriteLineIndent(*e->name + ".freeze");
+    WriteLineIndent(enum_name + ".freeze");
 
     // Generate enum field model
     GenerateEnumFieldModel(e);
@@ -3485,10 +3486,11 @@ void GeneratorRuby::GenerateEnumFieldModel(const std::shared_ptr<EnumType>& e)
   end
 )CODE";
 
+    std::string enum_name = ConvertTitle(*e->name);
     std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
 
     // Prepare code template
-    code = std::regex_replace(code, std::regex("_ENUM_NAME_"), *e->name);
+    code = std::regex_replace(code, std::regex("_ENUM_NAME_"), enum_name);
     code = std::regex_replace(code, std::regex("_ENUM_TYPE_"), ConvertEnumType(enum_type));
     code = std::regex_replace(code, std::regex("_ENUM_SIZE_"), ConvertEnumSize(enum_type));
     code = std::regex_replace(code, std::regex("\n"), EndLine());
@@ -3546,10 +3548,11 @@ void GeneratorRuby::GenerateEnumFinalModel(const std::shared_ptr<EnumType>& e)
   end
 )CODE";
 
+    std::string enum_name = ConvertTitle(*e->name);
     std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
 
     // Prepare code template
-    code = std::regex_replace(code, std::regex("_ENUM_NAME_"), *e->name);
+    code = std::regex_replace(code, std::regex("_ENUM_NAME_"), enum_name);
     code = std::regex_replace(code, std::regex("_ENUM_TYPE_"), ConvertEnumType(enum_type));
     code = std::regex_replace(code, std::regex("_ENUM_SIZE_"), ConvertEnumSize(enum_type));
     code = std::regex_replace(code, std::regex("\n"), EndLine());
@@ -3559,12 +3562,13 @@ void GeneratorRuby::GenerateEnumFinalModel(const std::shared_ptr<EnumType>& e)
 
 void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
 {
+    std::string flags_name = ConvertTitle(*f->name);
+    std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
+
     // Generate flags module
     WriteLine();
-    WriteLineIndent("module " + *f->name);
+    WriteLineIndent("module " + flags_name);
     Indent(1);
-
-    std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
 
     // Generate flags class
     WriteLineIndent("class Flags");
@@ -3703,7 +3707,7 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
 
     // Generate flags module freeze
     WriteLine();
-    WriteLineIndent(*f->name + ".freeze");
+    WriteLineIndent(flags_name + ".freeze");
 
     // Generate flags field model
     GenerateFlagsFieldModel(f);
@@ -3747,10 +3751,11 @@ void GeneratorRuby::GenerateFlagsFieldModel(const std::shared_ptr<FlagsType>& f)
   end
 )CODE";
 
+    std::string flags_name = ConvertTitle(*f->name);
     std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
 
     // Prepare code template
-    code = std::regex_replace(code, std::regex("_FLAGS_NAME_"), *f->name);
+    code = std::regex_replace(code, std::regex("_FLAGS_NAME_"), flags_name);
     code = std::regex_replace(code, std::regex("_FLAGS_TYPE_"), ConvertEnumType(flags_type));
     code = std::regex_replace(code, std::regex("_FLAGS_SIZE_"), ConvertEnumSize(flags_type));
     code = std::regex_replace(code, std::regex("\n"), EndLine());
@@ -3808,10 +3813,11 @@ void GeneratorRuby::GenerateFlagsFinalModel(const std::shared_ptr<FlagsType>& f)
   end
 )CODE";
 
+    std::string flags_name = ConvertTitle(*f->name);
     std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
 
     // Prepare code template
-    code = std::regex_replace(code, std::regex("_FLAGS_NAME_"), *f->name);
+    code = std::regex_replace(code, std::regex("_FLAGS_NAME_"), flags_name);
     code = std::regex_replace(code, std::regex("_FLAGS_TYPE_"), ConvertEnumType(flags_type));
     code = std::regex_replace(code, std::regex("_FLAGS_SIZE_"), ConvertEnumSize(flags_type));
     code = std::regex_replace(code, std::regex("\n"), EndLine());
@@ -3821,310 +3827,262 @@ void GeneratorRuby::GenerateFlagsFinalModel(const std::shared_ptr<FlagsType>& f)
 
 void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
 {
-    std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "object";
+    std::string struct_name = ConvertTitle(*s->name);
+    std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "";
 
     // Generate struct begin
     WriteLine();
-    WriteLine();
-    WriteLineIndent("@functools.total_ordering");
-    WriteLineIndent("class " + *s->name + "(" + base_type + "):");
+    WriteLineIndent("# noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection");
+    if (s->base && !s->base->empty())
+        WriteLineIndent("class " + struct_name + " < " + base_type);
+    else
+        WriteLineIndent("class " + struct_name);
     Indent(1);
 
-    // Generate struct __slots__
-    WriteIndent("__slots__ = ");
+    // Generate struct accessors
     if (s->body)
         for (const auto& field : s->body->fields)
-            Write("\"" + *field->name + "\", ");
-    WriteLine();
+            WriteLineIndent("attr_accessor :" + *field->name);
 
     // Generate struct constructor
     WriteLine();
-    WriteIndent("def __init__(self");
-    if (s->base && !s->base->empty())
-        Write(", parent=None");
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
-        {
-            Write(", " + *field->name + "=");
-            if (field->value)
-                Write(ConvertConstant(*field->type, *field->value, field->optional));
-            else if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                Write("None");
-            else
-                Write(ConvertDefaultOrNone(*field->type, field->optional));
-        }
-    }
-    WriteLine("):");
-    Indent(1);
-    if (s->base && !s->base->empty())
-    {
-        WriteLineIndent("super().__init__()");
-        WriteLineIndent("if parent is None:");
-        Indent(1);
-        WriteLineIndent("parent = " + base_type + "()");
-        Indent(-1);
-        WriteLineIndent("super().copy(parent)");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
-        {
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash || (!field->value && !field->optional && !IsPrimitiveType(*field->type) && (*field->type != "string") && (*field->type != "timestamp")))
-            {
-                WriteLineIndent("if " + *field->name + " is None:");
-                Indent(1);
-                WriteLineIndent(*field->name + " = " + ConvertDefault(*field.get()));
-                Indent(-1);
-            }
-        }
-        for (const auto& field : s->body->fields)
-            WriteLineIndent("self." + *field->name + " = " + *field->name);
-    }
-    Indent(-1);
-
-    // Generate struct copy() method
-    WriteLine();
-    WriteLineIndent("def copy(self, other):");
-    Indent(1);
-    if (s->base && !s->base->empty())
-        WriteLineIndent("super().copy(other)");
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            WriteLineIndent("self." + *field->name + " = copy.deepcopy(other." + *field->name + ")");
-    WriteLineIndent("return self");
-    Indent(-1);
-
-    // Generate struct clone() method
-    WriteLine();
-    WriteLineIndent("def clone(self):");
-    Indent(1);
-    WriteLineIndent("clone = " + *s->name + "()");
-    WriteLineIndent("clone.copy(self)");
-    WriteLineIndent("return clone");
-    Indent(-1);
-
-    // Generate struct __eq__ method
-    WriteLine();
-    WriteLineIndent("def __eq__(self, other):");
-    Indent(1);
-    WriteLineIndent("if not isinstance(self, other.__class__):");
-    Indent(1);
-    WriteLineIndent("return NotImplemented");
-    Indent(-1);
-    if (s->base && !s->base->empty())
-    {
-        WriteLineIndent("if not super().__eq__(other):");
-        Indent(1);
-        WriteLineIndent("return False");
-        Indent(-1);
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
-        {
-            if (field->keys)
-            {
-                WriteLineIndent("if not self." + *field->name + " == other." + *field->name + ":");
-                Indent(1);
-                WriteLineIndent("return False");
-                Indent(-1);
-            }
-        }
-    }
-    WriteLineIndent("return True");
-    Indent(-1);
-
-    // Generate struct __lt__ method
-    WriteLine();
-    WriteLineIndent("def __lt__(self, other):");
-    Indent(1);
-    WriteLineIndent("if not isinstance(self, other.__class__):");
-    Indent(1);
-    WriteLineIndent("return NotImplemented");
-    Indent(-1);
-    if (s->base && !s->base->empty())
-    {
-        WriteLineIndent("if super().__lt__(other):");
-        Indent(1);
-        WriteLineIndent("return True");
-        Indent(-1);
-        WriteLineIndent("if super().__eq__(other):");
-        Indent(1);
-        WriteLineIndent("return False");
-        Indent(-1);
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
-        {
-            if (field->keys)
-            {
-                WriteLineIndent("if self." + *field->name + " < other." + *field->name + ":");
-                Indent(1);
-                WriteLineIndent("return True");
-                Indent(-1);
-                WriteLineIndent("if self." + *field->name + " == other." + *field->name + ":");
-                Indent(1);
-                WriteLineIndent("return False");
-                Indent(-1);
-            }
-        }
-    }
-    WriteLineIndent("return False");
-    Indent(-1);
-
-    // Generate struct __key__ property
-    WriteLine();
-    WriteLineIndent("@property");
-    WriteLineIndent("def __key__(self):");
-    Indent(1);
-    WriteIndent("return ");
-    if (s->base && !s->base->empty())
-        Write("super().__key__ + (");
-    bool empty = true;
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
-        {
-            if (field->keys)
-            {
-                Write("self." + *field->name + ", ");
-                empty = false;
-            }
-        }
-    }
-    if (s->base && !s->base->empty())
-        Write(")");
-    else if (empty)
-        Write("()");
-    WriteLine();
-    Indent(-1);
-
-    // Generate struct __hash__ method
-    WriteLine();
-    WriteLineIndent("def __hash__(self):");
-    Indent(1);
-    WriteLineIndent("return hash(self.__key__)");
-    Indent(-1);
-
-    // Generate flags __format__ method
-    WriteLine();
-    WriteLineIndent("def __format__(self, format_spec):");
-    Indent(1);
-    WriteLineIndent("return self.__str__()");
-    Indent(-1);
-
-    // Generate struct __str__ method
-    WriteLine();
-    WriteLineIndent("def __str__(self):");
-    Indent(1);
-    WriteLineIndent("sb = list()");
-    WriteLineIndent("sb.append(\"" + *s->name + "(\")");
+    WriteIndent("def initialize(");
     bool first = true;
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("sb.append(" + base_type + ".__str__(self))");
+        Write("parent = " + base_type + ".new");
         first = false;
     }
     if (s->body)
     {
         for (const auto& field : s->body->fields)
         {
-            WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=\")");
-            if (field->array || field->vector)
-            {
-                WriteLineIndent("if self." + *field->name + " is not None:");
-                Indent(1);
-                WriteLineIndent("first = True");
-                WriteLineIndent("sb.append(\"[\")");
-                WriteLineIndent("sb.append(str(len(self." + *field->name + "))" + ")");
-                WriteLineIndent("sb.append(\"][\")");
-                WriteLineIndent("for item in self." + *field->name + ":");
-                Indent(1);
-                WriteOutputStreamItem(*field->type, "item", field->optional);
-                WriteLineIndent("first = False");
-                Indent(-1);
-                WriteLineIndent("sb.append(\"]\")");
-                Indent(-1);
-            }
-            else if (field->list)
-            {
-                WriteLineIndent("if self." + *field->name + " is not None:");
-                Indent(1);
-                WriteLineIndent("first = True");
-                WriteLineIndent("sb.append(\"[\")");
-                WriteLineIndent("sb.append(str(len(self." + *field->name + "))" + ")");
-                WriteLineIndent("sb.append(\"]<\")");
-                WriteLineIndent("for item in self." + *field->name + ":");
-                Indent(1);
-                WriteOutputStreamItem(*field->type, "item", field->optional);
-                WriteLineIndent("first = False");
-                Indent(-1);
-                WriteLineIndent("sb.append(\">\")");
-                Indent(-1);
-            }
-            else if (field->set)
-            {
-                WriteLineIndent("if self." + *field->name + " is not None:");
-                Indent(1);
-                WriteLineIndent("first = True");
-                WriteLineIndent("sb.append(\"[\")");
-                WriteLineIndent("sb.append(str(len(self." + *field->name + "))" + ")");
-                WriteLineIndent("sb.append(\"]{\")");
-                WriteLineIndent("for item in self." + *field->name + ":");
-                Indent(1);
-                WriteOutputStreamItem(*field->type, "item", field->optional);
-                WriteLineIndent("first = False");
-                Indent(-1);
-                WriteLineIndent("sb.append(\"}\")");
-                Indent(-1);
-            }
-            else if (field->map)
-            {
-                WriteLineIndent("if self." + *field->name + " is not None:");
-                Indent(1);
-                WriteLineIndent("first = True");
-                WriteLineIndent("sb.append(\"[\")");
-                WriteLineIndent("sb.append(str(len(self." + *field->name + "))" + ")");
-                WriteLineIndent("sb.append(\"]<{\")");
-                WriteLineIndent("for key, value in self." + *field->name + ".items():");
-                Indent(1);
-                WriteOutputStreamItem(*field->key, "key", false);
-                WriteLineIndent("sb.append(\"->\")");
-                WriteOutputStreamItem(*field->type, "value", field->optional);
-                WriteLineIndent("first = False");
-                Indent(-1);
-                WriteLineIndent("sb.append(\"}>\")");
-                Indent(-1);
-            }
-            else if (field->hash)
-            {
-                WriteLineIndent("if self." + *field->name + " is not None:");
-                Indent(1);
-                WriteLineIndent("first = True");
-                WriteLineIndent("sb.append(\"[\")");
-                WriteLineIndent("sb.append(str(len(self." + *field->name + "))" + ")");
-                WriteLineIndent("sb.append(\"][{\")");
-                WriteLineIndent("for key, value in self." + *field->name + ".items():");
-                Indent(1);
-                WriteOutputStreamItem(*field->key, "key", false);
-                WriteLineIndent("sb.append(\"->\")");
-                WriteOutputStreamItem(*field->type, "value", field->optional);
-                WriteLineIndent("first = False");
-                Indent(-1);
-                WriteLineIndent("sb.append(\"}]\")");
-                Indent(-1);
-            }
+            Write((first ? "" : ", ") + *field->name + " = ");
+            if (field->value)
+                Write(ConvertConstant(*field->type, *field->value, field->optional));
             else
-                WriteOutputStreamValue(*field->type, "self." + *field->name, field->optional);
+                Write(ConvertDefault(*field.get()));
             first = false;
         }
     }
-    WriteLineIndent("sb.append(\")\")");
-    WriteLineIndent("return \"\".join(sb)");
+    WriteLine(")");
+    Indent(1);
+    if (s->base && !s->base->empty())
+        WriteLineIndent("method(:copy).super_method.call(parent)");
+    if (s->body)
+    {
+        for (const auto& field : s->body->fields)
+            WriteLineIndent("@" + *field->name + " = " + *field->name);
+    }
     Indent(-1);
+    WriteLineIndent("end");
 
+    // Generate struct copy() method
+    WriteLine();
+    WriteLineIndent("def copy(other)");
+    Indent(1);
+    if (s->base && !s->base->empty())
+        WriteLineIndent("super(other)");
+    if (s->body)
+        for (const auto& field : s->body->fields)
+            WriteLineIndent("@" + *field->name + " = other." + *field->name);
+    WriteLineIndent("self");
+    Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate struct clone() method
+    WriteLine();
+    WriteLineIndent("def clone");
+    Indent(1);
+    WriteLineIndent("Marshal.load(Marshal.dump(self))");
+    Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate struct compare methods
+    WriteLine();
+    WriteLineIndent("def <=>(other)");
+    Indent(1);
+    WriteLineIndent("raise NotImplementedError, \"Cannot compare structs of different types!\" unless other.is_a?(" + struct_name + ")");
+    WriteLine();
+    WriteLineIndent("# noinspection RubyUnusedLocalVariable");
+    WriteLineIndent("result = 0");
+    if (s->base && !s->base->empty())
+    {
+        WriteLineIndent("result = super");
+        WriteLineIndent("if result != 0");
+        Indent(1);
+        WriteLineIndent("return result");
+        Indent(-1);
+        WriteLineIndent("end");
+    }
+    if (s->body)
+    {
+        for (const auto& field : s->body->fields)
+        {
+            if (field->keys)
+            {
+                WriteLineIndent("result = @" + *field->name + " <=> other." + *field->name);
+                WriteLineIndent("if result != 0");
+                Indent(1);
+                WriteLineIndent("return false");
+                Indent(-1);
+                WriteLineIndent("end");
+            }
+        }
+    }
+    WriteLineIndent("# noinspection RubyUnnecessaryReturnValue");
+    WriteLineIndent("result");
+    Indent(-1);
+    WriteLineIndent("end");
+    WriteLine();
+    WriteLineIndent("def ==(other) (self <=> other) == 0 end");
+    WriteLineIndent("def !=(other) (self <=> other) != 0 end");
+    WriteLineIndent("def  <(other) (self <=> other)  < 0 end");
+    WriteLineIndent("def  >(other) (self <=> other)  > 0 end");
+    WriteLineIndent("def <=(other) (self <=> other) <= 0 end");
+    WriteLineIndent("def >=(other) (self <=> other) >= 0 end");
+
+    // Generate struct hesh & equals methods
+    WriteLine();
+    WriteLineIndent("def eql?(other)");
+    Indent(1);
+    WriteLineIndent("self == other");
+    Indent(-1);
+    WriteLineIndent("end");
+    WriteLine();
+    WriteLineIndent("def key");
+    Indent(1);
+    WriteLineIndent("result = []");
+    if (s->base && !s->base->empty())
+        WriteLineIndent("result.push(super)");
+    if (s->body)
+    {
+        for (const auto& field : s->body->fields)
+            if (field->keys)
+                WriteLineIndent("result.push(@" + *field->name + ")");
+    }
+    WriteLineIndent("# noinspection RubyUnnecessaryReturnValue");
+    WriteLineIndent("result");
+    Indent(-1);
+    WriteLineIndent("end");
+    WriteLine();
+    WriteLineIndent("def hash");
+    Indent(1);
+    WriteLineIndent("key.hash");
+    Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate struct __str__ method
+    WriteLine();
+    WriteLineIndent("def to_s");
+    Indent(1);
+    WriteLineIndent("result = ''");
+    WriteLineIndent("result << '" + *s->name + "('");
+    first = true;
+    if (s->base && !s->base->empty())
+    {
+        WriteLineIndent("result << super");
+        first = false;
+    }
+    if (s->body)
+    {
+        for (const auto& field : s->body->fields)
+        {
+            WriteLineIndent("result << '" + std::string(first ? "" : ",") + *field->name + "='");
+            if (field->array || field->vector)
+            {
+                WriteLineIndent("unless @" + *field->name + ".nil?");
+                Indent(1);
+                WriteLineIndent("first = true");
+                WriteLineIndent("result << '[' << @" + *field->name + ".length.to_s << ']['");
+                WriteLineIndent("@" + *field->name + ".each do |item|");
+                Indent(1);
+                WriteOutputStreamItem(*field->type, "item");
+                WriteLineIndent("first = false");
+                Indent(-1);
+                WriteLineIndent("end");
+                WriteLineIndent("result << ']'");
+                Indent(-1);
+                WriteLineIndent("end");
+            }
+            else if (field->list)
+            {
+                WriteLineIndent("unless @" + *field->name + ".nil?");
+                Indent(1);
+                WriteLineIndent("first = true");
+                WriteLineIndent("result << '[' << @" + *field->name + ".length.to_s << ']<'");
+                WriteLineIndent("@" + *field->name + ".each do |item|");
+                Indent(1);
+                WriteOutputStreamItem(*field->type, "item");
+                WriteLineIndent("first = false");
+                Indent(-1);
+                WriteLineIndent("end");
+                WriteLineIndent("result << '>'");
+                Indent(-1);
+                WriteLineIndent("end");
+            }
+            else if (field->set)
+            {
+                WriteLineIndent("unless @" + *field->name + ".nil?");
+                Indent(1);
+                WriteLineIndent("first = true");
+                WriteLineIndent("result << '[' << @" + *field->name + ".length.to_s << ']{'");
+                WriteLineIndent("@" + *field->name + ".each do |item|");
+                Indent(1);
+                WriteOutputStreamItem(*field->type, "item");
+                WriteLineIndent("first = false");
+                Indent(-1);
+                WriteLineIndent("end");
+                WriteLineIndent("result << '}'");
+                Indent(-1);
+                WriteLineIndent("end");
+            }
+            else if (field->map)
+            {
+                WriteLineIndent("unless @" + *field->name + ".nil?");
+                Indent(1);
+                WriteLineIndent("first = true");
+                WriteLineIndent("result << '[' << @" + *field->name + ".length.to_s << ']<{'");
+                WriteLineIndent("@" + *field->name + ".each do |key, value|");
+                Indent(1);
+                WriteOutputStreamItem(*field->type, "key");
+                WriteLineIndent("first = false");
+                WriteLineIndent("result << '->'");
+                WriteOutputStreamItem(*field->type, "value");
+                Indent(-1);
+                WriteLineIndent("end");
+                WriteLineIndent("result << '}>'");
+                Indent(-1);
+                WriteLineIndent("end");
+            }
+            else if (field->hash)
+            {
+                WriteLineIndent("unless @" + *field->name + ".nil?");
+                Indent(1);
+                WriteLineIndent("first = true");
+                WriteLineIndent("result << '[' << @" + *field->name + ".length.to_s << '][{'");
+                WriteLineIndent("@" + *field->name + ".each do |key, value|");
+                Indent(1);
+                WriteOutputStreamItem(*field->type, "key");
+                WriteLineIndent("first = false");
+                WriteLineIndent("result << '->'");
+                WriteOutputStreamItem(*field->type, "value");
+                Indent(-1);
+                WriteLineIndent("end");
+                WriteLineIndent("result << '}]'");
+                Indent(-1);
+                WriteLineIndent("end");
+            }
+            else
+                WriteOutputStreamValue(*field->type, "@" + *field->name);
+            first = false;
+        }
+    }
+    WriteLineIndent("result << \")\"");
+    WriteLineIndent("result");
+    Indent(-1);
+    WriteLineIndent("end");
+    /*
     if (JSON())
     {
         // Generate struct __to_json__ method
@@ -4230,21 +4188,22 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
         WriteLineIndent("return " + *s->name + ".__from_json__(json.loads(document))");
         Indent(-1);
     }
-
+    */
     // Generate struct end
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct field model
-    GenerateStructFieldModel(s);
+    //GenerateStructFieldModel(s);
 
     // Generate struct model
-    GenerateStructModel(s);
+    //GenerateStructModel(s);
 
     // Generate struct final models
     if (Final())
     {
-        GenerateStructFinalModel(s);
-        GenerateStructModelFinal(s);
+        //GenerateStructFinalModel(s);
+        //GenerateStructModelFinal(s);
     }
 }
 
@@ -5402,9 +5361,25 @@ bool GeneratorRuby::IsRubyType(const std::string& type)
     return IsPrimitiveType(type) || (type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid");
 }
 
-std::string GeneratorRuby::ConvertPackage(const std::string& package)
+std::string GeneratorRuby::ConvertTitle(const std::string& type)
 {
-    std::string result = package;
+    std::vector<std::string> parts = CppCommon::StringUtils::Split(type, '.', true);
+
+    if (!parts.empty())
+    {
+        std::string result = "";
+        bool first = true;
+        for (const auto& it : parts)
+        {
+            std::string value = CppCommon::StringUtils::ToTrim(it);
+            value[0] = std::toupper(value[0]);
+            result += (first ? "" : "::") + value;
+            first = false;
+        }
+        return result;
+    }
+
+    std::string result = type;
     result[0] = std::toupper(result[0]);
     return result;
 }
@@ -5491,7 +5466,7 @@ std::string GeneratorRuby::ConvertEnumConstant(const std::string& type, const st
             return result;
         }
 
-        return prefix + value + ")";
+        return prefix + CppCommon::StringUtils::ToTrim(value) + ")";
     }
 
     return value;
@@ -5499,38 +5474,23 @@ std::string GeneratorRuby::ConvertEnumConstant(const std::string& type, const st
 
 std::string GeneratorRuby::ConvertTypeName(const std::string& type, bool optional)
 {
-    if (type == "bool")
-        return "bool";
-    else if ((type == "byte") || (type == "int8") || (type == "uint8") || (type == "int16") || (type == "uint16") || (type == "int32") || (type == "uint32") || (type == "int64") || (type == "uint64") || (type == "timestamp"))
-        return "int";
-    else if (type == "bytes")
-        return "bytearray";
-    else if ((type == "float") || (type == "double"))
-        return "float";
-    else if (type == "decimal")
-        return "decimal.Decimal";
-    else if (type == "string")
-        return "str";
-    else if (type == "uuid")
-        return "uuid.UUID";
-
-    return type;
+    return ConvertTitle(type);
 }
 
 std::string GeneratorRuby::ConvertTypeName(const StructField& field)
 {
     if (field.array)
-        return "list";
+        return "Array";
     else if (field.vector)
-        return "list";
+        return "Array";
     else if (field.list)
-        return "list";
+        return "Array";
     else if (field.set)
-        return "set";
+        return "Set";
     else if (field.map)
-        return "dict";
+        return "Hash";
     else if (field.hash)
-        return "dict";
+        return "Hash";
 
     return ConvertTypeName(*field.type, field.optional);
 }
@@ -5620,94 +5580,63 @@ std::string GeneratorRuby::ConvertTypeFieldInitialization(const StructField& fie
 std::string GeneratorRuby::ConvertConstant(const std::string& type, const std::string& value, bool optional)
 {
     if (value == "true")
-        return "True";
+        return "true";
     else if (value == "false")
-        return "False";
+        return "false";
     else if (value == "null")
-        return "None";
+        return "nil";
     else if (value == "epoch")
-        return "fbe.epoch()";
+        return "Time.utc(1970)";
     else if (value == "utc")
-        return "fbe.utc()";
+        return "Time.now.utc";
     else if (value == "uuid0")
-        return "uuid.UUID(int=0)";
+        return "UUIDTools::UUID.parse_int(0)";
     else if (value == "uuid1")
-        return "uuid.uuid1()";
+        return "UUIDTools::UUID.timestamp_create";
     else if (value == "uuid4")
-        return "uuid.uuid4()";
+        return "UUIDTools::UUID.random_create";
 
     if (type == "bool")
-        return "bool(" + value + ")";
-    else if (((type == "char") || (type == "wchar")) && !CppCommon::StringUtils::StartsWith(value, "'"))
-        return "chr(" + value + ")";
-    else if ((type == "byte") || (type == "int8") || (type == "uint8") || (type == "int16") || (type == "uint16") || (type == "int32") || (type == "uint32") || (type == "int64") || (type == "uint64") || (type == "timestamp"))
-        return "int(" + value + ")";
-    else if ((type == "float") || (type == "double"))
-        return "float(" + value + ")";
+        return value + " != 0";
+    else if ((type == "char") && !CppCommon::StringUtils::StartsWith(value, "'"))
+        return value + ".chr";
+    else if ((type == "wchar") && !CppCommon::StringUtils::StartsWith(value, "'"))
+        return value + ".chr(Encoding::UTF_8)";
     else if (type == "decimal")
-        return "decimal.Decimal(\"" + value + "\")";
+        return "BigDecimal.new(\"" + value + "\")";
     else if (type == "uuid")
-        return "uuid.UUID(" + value + ")";
+        return "UUIDTools::UUID.parse(" + value + ")";
 
     return value;
-}
-
-std::string GeneratorRuby::ConvertDefaultOrNone(const std::string& type, bool optional)
-{
-    if (optional)
-        return "None";
-
-    if (type == "bool")
-        return "False";
-    else if (type == "byte")
-        return "0";
-    else if (type == "bytes")
-        return "None";
-    else if ((type == "char") || (type == "wchar"))
-        return "'\\0'";
-    else if ((type == "int8") || (type == "uint8") || (type == "int16") || (type == "uint16") || (type == "int32") || (type == "uint32") || (type == "int64") || (type == "uint64"))
-        return "0";
-    else if ((type == "float") || (type == "double"))
-        return "0.0";
-    else if (type == "decimal")
-        return "decimal.Decimal(0)";
-    else if (type == "timestamp")
-        return "fbe.epoch()";
-    else if (type == "string")
-        return "\"\"";
-    else if (type == "uuid")
-        return "uuid.UUID(int=0)";
-
-    return "None";
 }
 
 std::string GeneratorRuby::ConvertDefault(const std::string& type, bool optional)
 {
     if (optional)
-        return "None";
+        return "nil";
 
     if (type == "bool")
-        return "False";
+        return "false";
     else if (type == "byte")
         return "0";
     else if (type == "bytes")
-        return "bytearray()";
+        return "''";
     else if ((type == "char") || (type == "wchar"))
-        return "'\\0'";
+        return "\"\\0\"";
     else if ((type == "int8") || (type == "uint8") || (type == "int16") || (type == "uint16") || (type == "int32") || (type == "uint32") || (type == "int64") || (type == "uint64"))
         return "0";
     else if ((type == "float") || (type == "double"))
         return "0.0";
     else if (type == "decimal")
-        return "decimal.Decimal(0)";
+        return "BigDecimal.new(0)";
     else if (type == "timestamp")
-        return "fbe.epoch()";
+        return "Time.utc(1970)";
     else if (type == "string")
-        return "\"\"";
+        return "''";
     else if (type == "uuid")
-        return "uuid.UUID(int=0)";
+        return "UUIDTools::UUID.parse_int(0)";
 
-    return type + "()";
+    return ConvertTitle(type) + ".new";
 }
 
 std::string GeneratorRuby::ConvertDefault(const StructField& field)
@@ -5716,79 +5645,60 @@ std::string GeneratorRuby::ConvertDefault(const StructField& field)
         return ConvertConstant(*field.type, *field.value, field.optional);
 
     if (field.array)
-        return "[" + ConvertDefault(*field.type, field.optional) + "]*" + std::to_string(field.N);
+        return "Array.new(" + std::to_string(field.N) + ", " + ConvertDefault(*field.type, field.optional) + ")";
     else if (field.vector || field.list || field.set || field.map || field.hash)
-        return ConvertTypeName(field) + "()";
+        return ConvertTypeName(field) + ".new";
     else if (field.optional)
-        return "None";
+        return "nil";
     else if (*field.type == "bytes")
-        return "bytearray()";
+        return "''";
 
     return ConvertDefault(*field.type, field.optional);
 }
 
-void GeneratorRuby::WriteOutputStreamType(const std::string& type, const std::string& name, bool optional)
+void GeneratorRuby::WriteOutputStreamType(const std::string& type, const std::string& name)
 {
     if (type == "bool")
-        WriteLineIndent("sb.append(\"true\" if " + name + " else \"false\")");
+        WriteLineIndent("result << (" + name + " ? 'true' : 'false')");
     else if (type == "bytes")
-    {
-        WriteLineIndent("sb.append(\"bytes[\")");
-        WriteLineIndent("sb.append(str(len(" + name + ")))");
-        WriteLineIndent("sb.append(\"]\")");
-    }
+        WriteLineIndent("result << 'bytes[' << " + name + ".length.to_s << ']'");
     else if ((type == "char") || (type == "wchar"))
-    {
-        WriteLineIndent("sb.append(\"'\")");
-        WriteLineIndent("sb.append(str(" + name + "))");
-        WriteLineIndent("sb.append(\"'\")");
-    }
+        WriteLineIndent("result << \"'\" << " + name + " << \"'\"");
+    else if (type == "decimal")
+        WriteLineIndent("result << " + name + ".to_s('F')");
     else if ((type == "string") || (type == "uuid"))
-    {
-        WriteLineIndent("sb.append(\"\\\"\")");
-        WriteLineIndent("sb.append(str(" + name + "))");
-        WriteLineIndent("sb.append(\"\\\"\")");
-    }
+        WriteLineIndent("result << '\"' << " + name + ".to_s << '\"'");
+    else if (type == "timestamp")
+        WriteLineIndent("result << (" + name + ".to_i * 1000000000 + " + name + ".nsec).to_s");
     else
-        WriteLineIndent("sb.append(str(" + name + "))");
+        WriteLineIndent("result << " + name + ".to_s");
 }
 
-void GeneratorRuby::WriteOutputStreamItem(const std::string& type, const std::string& name, bool optional)
+void GeneratorRuby::WriteOutputStreamItem(const std::string& type, const std::string& name)
 {
-    if ((type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid") || optional)
-    {
-        WriteLineIndent("if " + name + " is not None:");
-        Indent(1);
-        WriteLineIndent("sb.append(\"\" if first else \",\")");
-        WriteOutputStreamType(type, name, true);
-        Indent(-1);
-        WriteLineIndent("else:");
-        Indent(1);
-        WriteLineIndent("sb.append(\"null\")");
-        Indent(-1);
-    }
-    else
-    {
-        WriteLineIndent("sb.append(\"\" if first else \",\")");
-        WriteOutputStreamType(type, name, false);
-    }
+    WriteLineIndent("if !" + name + ".nil?");
+    Indent(1);
+    WriteLineIndent("result << (first ? '' : ',')");
+    WriteOutputStreamType(type, name);
+    Indent(-1);
+    WriteLineIndent("else");
+    Indent(1);
+    WriteLineIndent("result << 'null'");
+    Indent(-1);
+    WriteLineIndent("end");
 }
 
-void GeneratorRuby::WriteOutputStreamValue(const std::string& type, const std::string& name, bool optional)
+void GeneratorRuby::WriteOutputStreamValue(const std::string& type, const std::string& name)
 {
-    if ((type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid") || optional)
-    {
-        WriteLineIndent("if " + name + " is not None:");
-        Indent(1);
-        WriteOutputStreamType(type, name, true);
-        Indent(-1);
-        WriteLineIndent("else:");
-        Indent(1);
-        WriteLineIndent("sb.append(\"null\")");
-        Indent(-1);
-    }
-    else
-        WriteOutputStreamType(type, name, false);
+    WriteLineIndent("if !" + name + ".nil?");
+    Indent(1);
+    WriteOutputStreamType(type, name);
+    Indent(-1);
+    WriteLineIndent("else");
+    Indent(1);
+    WriteLineIndent("result << 'null'");
+    Indent(-1);
+    WriteLineIndent("end");
 }
 
 } // namespace FBE

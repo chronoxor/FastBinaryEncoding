@@ -749,6 +749,2895 @@ module Test
     end
   end
 
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  class StructSimple
+    attr_accessor :uid
+    attr_accessor :f1
+    attr_accessor :f2
+    attr_accessor :f3
+    attr_accessor :f4
+    attr_accessor :f5
+    attr_accessor :f6
+    attr_accessor :f7
+    attr_accessor :f8
+    attr_accessor :f9
+    attr_accessor :f10
+    attr_accessor :f11
+    attr_accessor :f12
+    attr_accessor :f13
+    attr_accessor :f14
+    attr_accessor :f15
+    attr_accessor :f16
+    attr_accessor :f17
+    attr_accessor :f18
+    attr_accessor :f19
+    attr_accessor :f20
+    attr_accessor :f21
+    attr_accessor :f22
+    attr_accessor :f23
+    attr_accessor :f24
+    attr_accessor :f25
+    attr_accessor :f26
+    attr_accessor :f27
+    attr_accessor :f28
+    attr_accessor :f29
+    attr_accessor :f30
+    attr_accessor :f31
+    attr_accessor :f32
+    attr_accessor :f33
+    attr_accessor :f34
+    attr_accessor :f35
+    attr_accessor :f36
+    attr_accessor :f37
+    attr_accessor :f38
+    attr_accessor :f39
+    attr_accessor :f40
+    attr_accessor :f41
+    attr_accessor :f42
+    attr_accessor :f43
+    attr_accessor :f44
+
+    def initialize(uid = 0, f1 = false, f2 = true, f3 = 0, f4 = 255, f5 = "\0", f6 = '!', f7 = "\0", f8 = 0x0444.chr(Encoding::UTF_8), f9 = 0, f10 = 127, f11 = 0, f12 = 255, f13 = 0, f14 = 32767, f15 = 0, f16 = 65535, f17 = 0, f18 = 2147483647, f19 = 0, f20 = 0xFFFFFFFF, f21 = 0, f22 = 9223372036854775807, f23 = 0, f24 = 0xFFFFFFFFFFFFFFFF, f25 = 0.0, f26 = 123.456, f27 = 0.0, f28 = -123.456e+123, f29 = BigDecimal.new(0), f30 = BigDecimal.new("123456.123456"), f31 = '', f32 = "Initial string!", f33 = Time.utc(1970), f34 = Time.utc(1970), f35 = Time.now.utc, f36 = UUIDTools::UUID.parse_int(0), f37 = UUIDTools::UUID.timestamp_create, f38 = UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000"), f39 = Proto::OrderSide.new, f40 = Proto::OrderType.new, f41 = Proto::Order.new, f42 = Proto::Balance.new, f43 = Proto::State.new, f44 = Proto::Account.new)
+      @uid = uid
+      @f1 = f1
+      @f2 = f2
+      @f3 = f3
+      @f4 = f4
+      @f5 = f5
+      @f6 = f6
+      @f7 = f7
+      @f8 = f8
+      @f9 = f9
+      @f10 = f10
+      @f11 = f11
+      @f12 = f12
+      @f13 = f13
+      @f14 = f14
+      @f15 = f15
+      @f16 = f16
+      @f17 = f17
+      @f18 = f18
+      @f19 = f19
+      @f20 = f20
+      @f21 = f21
+      @f22 = f22
+      @f23 = f23
+      @f24 = f24
+      @f25 = f25
+      @f26 = f26
+      @f27 = f27
+      @f28 = f28
+      @f29 = f29
+      @f30 = f30
+      @f31 = f31
+      @f32 = f32
+      @f33 = f33
+      @f34 = f34
+      @f35 = f35
+      @f36 = f36
+      @f37 = f37
+      @f38 = f38
+      @f39 = f39
+      @f40 = f40
+      @f41 = f41
+      @f42 = f42
+      @f43 = f43
+      @f44 = f44
+    end
+
+    def copy(other)
+      @uid = other.uid
+      @f1 = other.f1
+      @f2 = other.f2
+      @f3 = other.f3
+      @f4 = other.f4
+      @f5 = other.f5
+      @f6 = other.f6
+      @f7 = other.f7
+      @f8 = other.f8
+      @f9 = other.f9
+      @f10 = other.f10
+      @f11 = other.f11
+      @f12 = other.f12
+      @f13 = other.f13
+      @f14 = other.f14
+      @f15 = other.f15
+      @f16 = other.f16
+      @f17 = other.f17
+      @f18 = other.f18
+      @f19 = other.f19
+      @f20 = other.f20
+      @f21 = other.f21
+      @f22 = other.f22
+      @f23 = other.f23
+      @f24 = other.f24
+      @f25 = other.f25
+      @f26 = other.f26
+      @f27 = other.f27
+      @f28 = other.f28
+      @f29 = other.f29
+      @f30 = other.f30
+      @f31 = other.f31
+      @f32 = other.f32
+      @f33 = other.f33
+      @f34 = other.f34
+      @f35 = other.f35
+      @f36 = other.f36
+      @f37 = other.f37
+      @f38 = other.f38
+      @f39 = other.f39
+      @f40 = other.f40
+      @f41 = other.f41
+      @f42 = other.f42
+      @f43 = other.f43
+      @f44 = other.f44
+      self
+    end
+
+    def clone
+      Marshal.load(Marshal.dump(self))
+    end
+
+    def <=>(other)
+      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructSimple)
+
+      # noinspection RubyUnusedLocalVariable
+      result = 0
+      result = @uid <=> other.uid
+      if result != 0
+        return false
+      end
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def ==(other) (self <=> other) == 0 end
+    def !=(other) (self <=> other) != 0 end
+    def  <(other) (self <=> other)  < 0 end
+    def  >(other) (self <=> other)  > 0 end
+    def <=(other) (self <=> other) <= 0 end
+    def >=(other) (self <=> other) >= 0 end
+
+    def eql?(other)
+      self == other
+    end
+
+    def key
+      result = []
+      result.push(@uid)
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def hash
+      key.hash
+    end
+
+    def to_s
+      result = ''
+      result << 'StructSimple('
+      result << 'uid='
+      if !@uid.nil?
+        result << @uid.to_s
+      else
+        result << 'null'
+      end
+      result << ',f1='
+      if !@f1.nil?
+        result << (@f1 ? 'true' : 'false')
+      else
+        result << 'null'
+      end
+      result << ',f2='
+      if !@f2.nil?
+        result << (@f2 ? 'true' : 'false')
+      else
+        result << 'null'
+      end
+      result << ',f3='
+      if !@f3.nil?
+        result << @f3.to_s
+      else
+        result << 'null'
+      end
+      result << ',f4='
+      if !@f4.nil?
+        result << @f4.to_s
+      else
+        result << 'null'
+      end
+      result << ',f5='
+      if !@f5.nil?
+        result << "'" << @f5 << "'"
+      else
+        result << 'null'
+      end
+      result << ',f6='
+      if !@f6.nil?
+        result << "'" << @f6 << "'"
+      else
+        result << 'null'
+      end
+      result << ',f7='
+      if !@f7.nil?
+        result << "'" << @f7 << "'"
+      else
+        result << 'null'
+      end
+      result << ',f8='
+      if !@f8.nil?
+        result << "'" << @f8 << "'"
+      else
+        result << 'null'
+      end
+      result << ',f9='
+      if !@f9.nil?
+        result << @f9.to_s
+      else
+        result << 'null'
+      end
+      result << ',f10='
+      if !@f10.nil?
+        result << @f10.to_s
+      else
+        result << 'null'
+      end
+      result << ',f11='
+      if !@f11.nil?
+        result << @f11.to_s
+      else
+        result << 'null'
+      end
+      result << ',f12='
+      if !@f12.nil?
+        result << @f12.to_s
+      else
+        result << 'null'
+      end
+      result << ',f13='
+      if !@f13.nil?
+        result << @f13.to_s
+      else
+        result << 'null'
+      end
+      result << ',f14='
+      if !@f14.nil?
+        result << @f14.to_s
+      else
+        result << 'null'
+      end
+      result << ',f15='
+      if !@f15.nil?
+        result << @f15.to_s
+      else
+        result << 'null'
+      end
+      result << ',f16='
+      if !@f16.nil?
+        result << @f16.to_s
+      else
+        result << 'null'
+      end
+      result << ',f17='
+      if !@f17.nil?
+        result << @f17.to_s
+      else
+        result << 'null'
+      end
+      result << ',f18='
+      if !@f18.nil?
+        result << @f18.to_s
+      else
+        result << 'null'
+      end
+      result << ',f19='
+      if !@f19.nil?
+        result << @f19.to_s
+      else
+        result << 'null'
+      end
+      result << ',f20='
+      if !@f20.nil?
+        result << @f20.to_s
+      else
+        result << 'null'
+      end
+      result << ',f21='
+      if !@f21.nil?
+        result << @f21.to_s
+      else
+        result << 'null'
+      end
+      result << ',f22='
+      if !@f22.nil?
+        result << @f22.to_s
+      else
+        result << 'null'
+      end
+      result << ',f23='
+      if !@f23.nil?
+        result << @f23.to_s
+      else
+        result << 'null'
+      end
+      result << ',f24='
+      if !@f24.nil?
+        result << @f24.to_s
+      else
+        result << 'null'
+      end
+      result << ',f25='
+      if !@f25.nil?
+        result << @f25.to_s
+      else
+        result << 'null'
+      end
+      result << ',f26='
+      if !@f26.nil?
+        result << @f26.to_s
+      else
+        result << 'null'
+      end
+      result << ',f27='
+      if !@f27.nil?
+        result << @f27.to_s
+      else
+        result << 'null'
+      end
+      result << ',f28='
+      if !@f28.nil?
+        result << @f28.to_s
+      else
+        result << 'null'
+      end
+      result << ',f29='
+      if !@f29.nil?
+        result << @f29.to_s('F')
+      else
+        result << 'null'
+      end
+      result << ',f30='
+      if !@f30.nil?
+        result << @f30.to_s('F')
+      else
+        result << 'null'
+      end
+      result << ',f31='
+      if !@f31.nil?
+        result << '"' << @f31.to_s << '"'
+      else
+        result << 'null'
+      end
+      result << ',f32='
+      if !@f32.nil?
+        result << '"' << @f32.to_s << '"'
+      else
+        result << 'null'
+      end
+      result << ',f33='
+      if !@f33.nil?
+        result << (@f33.to_i * 1000000000 + @f33.nsec).to_s
+      else
+        result << 'null'
+      end
+      result << ',f34='
+      if !@f34.nil?
+        result << (@f34.to_i * 1000000000 + @f34.nsec).to_s
+      else
+        result << 'null'
+      end
+      result << ',f35='
+      if !@f35.nil?
+        result << (@f35.to_i * 1000000000 + @f35.nsec).to_s
+      else
+        result << 'null'
+      end
+      result << ',f36='
+      if !@f36.nil?
+        result << '"' << @f36.to_s << '"'
+      else
+        result << 'null'
+      end
+      result << ',f37='
+      if !@f37.nil?
+        result << '"' << @f37.to_s << '"'
+      else
+        result << 'null'
+      end
+      result << ',f38='
+      if !@f38.nil?
+        result << '"' << @f38.to_s << '"'
+      else
+        result << 'null'
+      end
+      result << ',f39='
+      if !@f39.nil?
+        result << @f39.to_s
+      else
+        result << 'null'
+      end
+      result << ',f40='
+      if !@f40.nil?
+        result << @f40.to_s
+      else
+        result << 'null'
+      end
+      result << ',f41='
+      if !@f41.nil?
+        result << @f41.to_s
+      else
+        result << 'null'
+      end
+      result << ',f42='
+      if !@f42.nil?
+        result << @f42.to_s
+      else
+        result << 'null'
+      end
+      result << ',f43='
+      if !@f43.nil?
+        result << @f43.to_s
+      else
+        result << 'null'
+      end
+      result << ',f44='
+      if !@f44.nil?
+        result << @f44.to_s
+      else
+        result << 'null'
+      end
+      result << ")"
+      result
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  class StructOptional < StructSimple
+    attr_accessor :f100
+    attr_accessor :f101
+    attr_accessor :f102
+    attr_accessor :f103
+    attr_accessor :f104
+    attr_accessor :f105
+    attr_accessor :f106
+    attr_accessor :f107
+    attr_accessor :f108
+    attr_accessor :f109
+    attr_accessor :f110
+    attr_accessor :f111
+    attr_accessor :f112
+    attr_accessor :f113
+    attr_accessor :f114
+    attr_accessor :f115
+    attr_accessor :f116
+    attr_accessor :f117
+    attr_accessor :f118
+    attr_accessor :f119
+    attr_accessor :f120
+    attr_accessor :f121
+    attr_accessor :f122
+    attr_accessor :f123
+    attr_accessor :f124
+    attr_accessor :f125
+    attr_accessor :f126
+    attr_accessor :f127
+    attr_accessor :f128
+    attr_accessor :f129
+    attr_accessor :f130
+    attr_accessor :f131
+    attr_accessor :f132
+    attr_accessor :f133
+    attr_accessor :f134
+    attr_accessor :f135
+    attr_accessor :f136
+    attr_accessor :f137
+    attr_accessor :f138
+    attr_accessor :f139
+    attr_accessor :f140
+    attr_accessor :f141
+    attr_accessor :f142
+    attr_accessor :f143
+    attr_accessor :f144
+    attr_accessor :f145
+    attr_accessor :f146
+    attr_accessor :f147
+    attr_accessor :f148
+    attr_accessor :f149
+    attr_accessor :f150
+    attr_accessor :f151
+    attr_accessor :f152
+    attr_accessor :f153
+    attr_accessor :f154
+    attr_accessor :f155
+    attr_accessor :f156
+    attr_accessor :f157
+    attr_accessor :f158
+    attr_accessor :f159
+    attr_accessor :f160
+    attr_accessor :f161
+    attr_accessor :f162
+    attr_accessor :f163
+    attr_accessor :f164
+    attr_accessor :f165
+
+    def initialize(parent = StructSimple.new, f100 = nil, f101 = true, f102 = nil, f103 = nil, f104 = 255, f105 = nil, f106 = nil, f107 = '!', f108 = nil, f109 = nil, f110 = 0x0444.chr(Encoding::UTF_8), f111 = nil, f112 = nil, f113 = 127, f114 = nil, f115 = nil, f116 = 255, f117 = nil, f118 = nil, f119 = 32767, f120 = nil, f121 = nil, f122 = 65535, f123 = nil, f124 = nil, f125 = 2147483647, f126 = nil, f127 = nil, f128 = 0xFFFFFFFF, f129 = nil, f130 = nil, f131 = 9223372036854775807, f132 = nil, f133 = nil, f134 = 0xFFFFFFFFFFFFFFFF, f135 = nil, f136 = nil, f137 = 123.456, f138 = nil, f139 = nil, f140 = -123.456e+123, f141 = nil, f142 = nil, f143 = BigDecimal.new("123456.123456"), f144 = nil, f145 = nil, f146 = "Initial string!", f147 = nil, f148 = nil, f149 = Time.now.utc, f150 = nil, f151 = nil, f152 = UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000"), f153 = nil, f154 = nil, f155 = nil, f156 = nil, f157 = nil, f158 = nil, f159 = nil, f160 = nil, f161 = nil, f162 = nil, f163 = nil, f164 = nil, f165 = nil)
+      method(:copy).super_method.call(parent)
+      @f100 = f100
+      @f101 = f101
+      @f102 = f102
+      @f103 = f103
+      @f104 = f104
+      @f105 = f105
+      @f106 = f106
+      @f107 = f107
+      @f108 = f108
+      @f109 = f109
+      @f110 = f110
+      @f111 = f111
+      @f112 = f112
+      @f113 = f113
+      @f114 = f114
+      @f115 = f115
+      @f116 = f116
+      @f117 = f117
+      @f118 = f118
+      @f119 = f119
+      @f120 = f120
+      @f121 = f121
+      @f122 = f122
+      @f123 = f123
+      @f124 = f124
+      @f125 = f125
+      @f126 = f126
+      @f127 = f127
+      @f128 = f128
+      @f129 = f129
+      @f130 = f130
+      @f131 = f131
+      @f132 = f132
+      @f133 = f133
+      @f134 = f134
+      @f135 = f135
+      @f136 = f136
+      @f137 = f137
+      @f138 = f138
+      @f139 = f139
+      @f140 = f140
+      @f141 = f141
+      @f142 = f142
+      @f143 = f143
+      @f144 = f144
+      @f145 = f145
+      @f146 = f146
+      @f147 = f147
+      @f148 = f148
+      @f149 = f149
+      @f150 = f150
+      @f151 = f151
+      @f152 = f152
+      @f153 = f153
+      @f154 = f154
+      @f155 = f155
+      @f156 = f156
+      @f157 = f157
+      @f158 = f158
+      @f159 = f159
+      @f160 = f160
+      @f161 = f161
+      @f162 = f162
+      @f163 = f163
+      @f164 = f164
+      @f165 = f165
+    end
+
+    def copy(other)
+      super(other)
+      @f100 = other.f100
+      @f101 = other.f101
+      @f102 = other.f102
+      @f103 = other.f103
+      @f104 = other.f104
+      @f105 = other.f105
+      @f106 = other.f106
+      @f107 = other.f107
+      @f108 = other.f108
+      @f109 = other.f109
+      @f110 = other.f110
+      @f111 = other.f111
+      @f112 = other.f112
+      @f113 = other.f113
+      @f114 = other.f114
+      @f115 = other.f115
+      @f116 = other.f116
+      @f117 = other.f117
+      @f118 = other.f118
+      @f119 = other.f119
+      @f120 = other.f120
+      @f121 = other.f121
+      @f122 = other.f122
+      @f123 = other.f123
+      @f124 = other.f124
+      @f125 = other.f125
+      @f126 = other.f126
+      @f127 = other.f127
+      @f128 = other.f128
+      @f129 = other.f129
+      @f130 = other.f130
+      @f131 = other.f131
+      @f132 = other.f132
+      @f133 = other.f133
+      @f134 = other.f134
+      @f135 = other.f135
+      @f136 = other.f136
+      @f137 = other.f137
+      @f138 = other.f138
+      @f139 = other.f139
+      @f140 = other.f140
+      @f141 = other.f141
+      @f142 = other.f142
+      @f143 = other.f143
+      @f144 = other.f144
+      @f145 = other.f145
+      @f146 = other.f146
+      @f147 = other.f147
+      @f148 = other.f148
+      @f149 = other.f149
+      @f150 = other.f150
+      @f151 = other.f151
+      @f152 = other.f152
+      @f153 = other.f153
+      @f154 = other.f154
+      @f155 = other.f155
+      @f156 = other.f156
+      @f157 = other.f157
+      @f158 = other.f158
+      @f159 = other.f159
+      @f160 = other.f160
+      @f161 = other.f161
+      @f162 = other.f162
+      @f163 = other.f163
+      @f164 = other.f164
+      @f165 = other.f165
+      self
+    end
+
+    def clone
+      Marshal.load(Marshal.dump(self))
+    end
+
+    def <=>(other)
+      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructOptional)
+
+      # noinspection RubyUnusedLocalVariable
+      result = 0
+      result = super
+      if result != 0
+        return result
+      end
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def ==(other) (self <=> other) == 0 end
+    def !=(other) (self <=> other) != 0 end
+    def  <(other) (self <=> other)  < 0 end
+    def  >(other) (self <=> other)  > 0 end
+    def <=(other) (self <=> other) <= 0 end
+    def >=(other) (self <=> other) >= 0 end
+
+    def eql?(other)
+      self == other
+    end
+
+    def key
+      result = []
+      result.push(super)
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def hash
+      key.hash
+    end
+
+    def to_s
+      result = ''
+      result << 'StructOptional('
+      result << super
+      result << ',f100='
+      if !@f100.nil?
+        result << (@f100 ? 'true' : 'false')
+      else
+        result << 'null'
+      end
+      result << ',f101='
+      if !@f101.nil?
+        result << (@f101 ? 'true' : 'false')
+      else
+        result << 'null'
+      end
+      result << ',f102='
+      if !@f102.nil?
+        result << (@f102 ? 'true' : 'false')
+      else
+        result << 'null'
+      end
+      result << ',f103='
+      if !@f103.nil?
+        result << @f103.to_s
+      else
+        result << 'null'
+      end
+      result << ',f104='
+      if !@f104.nil?
+        result << @f104.to_s
+      else
+        result << 'null'
+      end
+      result << ',f105='
+      if !@f105.nil?
+        result << @f105.to_s
+      else
+        result << 'null'
+      end
+      result << ',f106='
+      if !@f106.nil?
+        result << "'" << @f106 << "'"
+      else
+        result << 'null'
+      end
+      result << ',f107='
+      if !@f107.nil?
+        result << "'" << @f107 << "'"
+      else
+        result << 'null'
+      end
+      result << ',f108='
+      if !@f108.nil?
+        result << "'" << @f108 << "'"
+      else
+        result << 'null'
+      end
+      result << ',f109='
+      if !@f109.nil?
+        result << "'" << @f109 << "'"
+      else
+        result << 'null'
+      end
+      result << ',f110='
+      if !@f110.nil?
+        result << "'" << @f110 << "'"
+      else
+        result << 'null'
+      end
+      result << ',f111='
+      if !@f111.nil?
+        result << "'" << @f111 << "'"
+      else
+        result << 'null'
+      end
+      result << ',f112='
+      if !@f112.nil?
+        result << @f112.to_s
+      else
+        result << 'null'
+      end
+      result << ',f113='
+      if !@f113.nil?
+        result << @f113.to_s
+      else
+        result << 'null'
+      end
+      result << ',f114='
+      if !@f114.nil?
+        result << @f114.to_s
+      else
+        result << 'null'
+      end
+      result << ',f115='
+      if !@f115.nil?
+        result << @f115.to_s
+      else
+        result << 'null'
+      end
+      result << ',f116='
+      if !@f116.nil?
+        result << @f116.to_s
+      else
+        result << 'null'
+      end
+      result << ',f117='
+      if !@f117.nil?
+        result << @f117.to_s
+      else
+        result << 'null'
+      end
+      result << ',f118='
+      if !@f118.nil?
+        result << @f118.to_s
+      else
+        result << 'null'
+      end
+      result << ',f119='
+      if !@f119.nil?
+        result << @f119.to_s
+      else
+        result << 'null'
+      end
+      result << ',f120='
+      if !@f120.nil?
+        result << @f120.to_s
+      else
+        result << 'null'
+      end
+      result << ',f121='
+      if !@f121.nil?
+        result << @f121.to_s
+      else
+        result << 'null'
+      end
+      result << ',f122='
+      if !@f122.nil?
+        result << @f122.to_s
+      else
+        result << 'null'
+      end
+      result << ',f123='
+      if !@f123.nil?
+        result << @f123.to_s
+      else
+        result << 'null'
+      end
+      result << ',f124='
+      if !@f124.nil?
+        result << @f124.to_s
+      else
+        result << 'null'
+      end
+      result << ',f125='
+      if !@f125.nil?
+        result << @f125.to_s
+      else
+        result << 'null'
+      end
+      result << ',f126='
+      if !@f126.nil?
+        result << @f126.to_s
+      else
+        result << 'null'
+      end
+      result << ',f127='
+      if !@f127.nil?
+        result << @f127.to_s
+      else
+        result << 'null'
+      end
+      result << ',f128='
+      if !@f128.nil?
+        result << @f128.to_s
+      else
+        result << 'null'
+      end
+      result << ',f129='
+      if !@f129.nil?
+        result << @f129.to_s
+      else
+        result << 'null'
+      end
+      result << ',f130='
+      if !@f130.nil?
+        result << @f130.to_s
+      else
+        result << 'null'
+      end
+      result << ',f131='
+      if !@f131.nil?
+        result << @f131.to_s
+      else
+        result << 'null'
+      end
+      result << ',f132='
+      if !@f132.nil?
+        result << @f132.to_s
+      else
+        result << 'null'
+      end
+      result << ',f133='
+      if !@f133.nil?
+        result << @f133.to_s
+      else
+        result << 'null'
+      end
+      result << ',f134='
+      if !@f134.nil?
+        result << @f134.to_s
+      else
+        result << 'null'
+      end
+      result << ',f135='
+      if !@f135.nil?
+        result << @f135.to_s
+      else
+        result << 'null'
+      end
+      result << ',f136='
+      if !@f136.nil?
+        result << @f136.to_s
+      else
+        result << 'null'
+      end
+      result << ',f137='
+      if !@f137.nil?
+        result << @f137.to_s
+      else
+        result << 'null'
+      end
+      result << ',f138='
+      if !@f138.nil?
+        result << @f138.to_s
+      else
+        result << 'null'
+      end
+      result << ',f139='
+      if !@f139.nil?
+        result << @f139.to_s
+      else
+        result << 'null'
+      end
+      result << ',f140='
+      if !@f140.nil?
+        result << @f140.to_s
+      else
+        result << 'null'
+      end
+      result << ',f141='
+      if !@f141.nil?
+        result << @f141.to_s
+      else
+        result << 'null'
+      end
+      result << ',f142='
+      if !@f142.nil?
+        result << @f142.to_s('F')
+      else
+        result << 'null'
+      end
+      result << ',f143='
+      if !@f143.nil?
+        result << @f143.to_s('F')
+      else
+        result << 'null'
+      end
+      result << ',f144='
+      if !@f144.nil?
+        result << @f144.to_s('F')
+      else
+        result << 'null'
+      end
+      result << ',f145='
+      if !@f145.nil?
+        result << '"' << @f145.to_s << '"'
+      else
+        result << 'null'
+      end
+      result << ',f146='
+      if !@f146.nil?
+        result << '"' << @f146.to_s << '"'
+      else
+        result << 'null'
+      end
+      result << ',f147='
+      if !@f147.nil?
+        result << '"' << @f147.to_s << '"'
+      else
+        result << 'null'
+      end
+      result << ',f148='
+      if !@f148.nil?
+        result << (@f148.to_i * 1000000000 + @f148.nsec).to_s
+      else
+        result << 'null'
+      end
+      result << ',f149='
+      if !@f149.nil?
+        result << (@f149.to_i * 1000000000 + @f149.nsec).to_s
+      else
+        result << 'null'
+      end
+      result << ',f150='
+      if !@f150.nil?
+        result << (@f150.to_i * 1000000000 + @f150.nsec).to_s
+      else
+        result << 'null'
+      end
+      result << ',f151='
+      if !@f151.nil?
+        result << '"' << @f151.to_s << '"'
+      else
+        result << 'null'
+      end
+      result << ',f152='
+      if !@f152.nil?
+        result << '"' << @f152.to_s << '"'
+      else
+        result << 'null'
+      end
+      result << ',f153='
+      if !@f153.nil?
+        result << '"' << @f153.to_s << '"'
+      else
+        result << 'null'
+      end
+      result << ',f154='
+      if !@f154.nil?
+        result << @f154.to_s
+      else
+        result << 'null'
+      end
+      result << ',f155='
+      if !@f155.nil?
+        result << @f155.to_s
+      else
+        result << 'null'
+      end
+      result << ',f156='
+      if !@f156.nil?
+        result << @f156.to_s
+      else
+        result << 'null'
+      end
+      result << ',f157='
+      if !@f157.nil?
+        result << @f157.to_s
+      else
+        result << 'null'
+      end
+      result << ',f158='
+      if !@f158.nil?
+        result << @f158.to_s
+      else
+        result << 'null'
+      end
+      result << ',f159='
+      if !@f159.nil?
+        result << @f159.to_s
+      else
+        result << 'null'
+      end
+      result << ',f160='
+      if !@f160.nil?
+        result << @f160.to_s
+      else
+        result << 'null'
+      end
+      result << ',f161='
+      if !@f161.nil?
+        result << @f161.to_s
+      else
+        result << 'null'
+      end
+      result << ',f162='
+      if !@f162.nil?
+        result << @f162.to_s
+      else
+        result << 'null'
+      end
+      result << ',f163='
+      if !@f163.nil?
+        result << @f163.to_s
+      else
+        result << 'null'
+      end
+      result << ',f164='
+      if !@f164.nil?
+        result << @f164.to_s
+      else
+        result << 'null'
+      end
+      result << ',f165='
+      if !@f165.nil?
+        result << @f165.to_s
+      else
+        result << 'null'
+      end
+      result << ")"
+      result
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  class StructNested < StructOptional
+    attr_accessor :f1000
+    attr_accessor :f1001
+    attr_accessor :f1002
+    attr_accessor :f1003
+    attr_accessor :f1004
+    attr_accessor :f1005
+    attr_accessor :f1006
+    attr_accessor :f1007
+    attr_accessor :f1008
+    attr_accessor :f1009
+    attr_accessor :f1010
+    attr_accessor :f1011
+
+    def initialize(parent = StructOptional.new, f1000 = EnumSimple.new, f1001 = nil, f1002 = EnumTyped.ENUM_VALUE_2, f1003 = nil, f1004 = FlagsSimple.new, f1005 = nil, f1006 = FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6, f1007 = nil, f1008 = StructSimple.new, f1009 = nil, f1010 = StructOptional.new, f1011 = nil)
+      method(:copy).super_method.call(parent)
+      @f1000 = f1000
+      @f1001 = f1001
+      @f1002 = f1002
+      @f1003 = f1003
+      @f1004 = f1004
+      @f1005 = f1005
+      @f1006 = f1006
+      @f1007 = f1007
+      @f1008 = f1008
+      @f1009 = f1009
+      @f1010 = f1010
+      @f1011 = f1011
+    end
+
+    def copy(other)
+      super
+      @f1000 = other.f1000
+      @f1001 = other.f1001
+      @f1002 = other.f1002
+      @f1003 = other.f1003
+      @f1004 = other.f1004
+      @f1005 = other.f1005
+      @f1006 = other.f1006
+      @f1007 = other.f1007
+      @f1008 = other.f1008
+      @f1009 = other.f1009
+      @f1010 = other.f1010
+      @f1011 = other.f1011
+      self
+    end
+
+    def clone
+      Marshal.load(Marshal.dump(self))
+    end
+
+    def <=>(other)
+      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructNested)
+
+      # noinspection RubyUnusedLocalVariable
+      result = 0
+      result = super
+      if result != 0
+        return result
+      end
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def ==(other) (self <=> other) == 0 end
+    def !=(other) (self <=> other) != 0 end
+    def  <(other) (self <=> other)  < 0 end
+    def  >(other) (self <=> other)  > 0 end
+    def <=(other) (self <=> other) <= 0 end
+    def >=(other) (self <=> other) >= 0 end
+
+    def eql?(other)
+      self == other
+    end
+
+    def key
+      result = []
+      result.push(super)
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def hash
+      key.hash
+    end
+
+    def to_s
+      result = ''
+      result << 'StructNested('
+      result << super
+      result << ',f1000='
+      if !@f1000.nil?
+        result << @f1000.to_s
+      else
+        result << 'null'
+      end
+      result << ',f1001='
+      if !@f1001.nil?
+        result << @f1001.to_s
+      else
+        result << 'null'
+      end
+      result << ',f1002='
+      if !@f1002.nil?
+        result << @f1002.to_s
+      else
+        result << 'null'
+      end
+      result << ',f1003='
+      if !@f1003.nil?
+        result << @f1003.to_s
+      else
+        result << 'null'
+      end
+      result << ',f1004='
+      if !@f1004.nil?
+        result << @f1004.to_s
+      else
+        result << 'null'
+      end
+      result << ',f1005='
+      if !@f1005.nil?
+        result << @f1005.to_s
+      else
+        result << 'null'
+      end
+      result << ',f1006='
+      if !@f1006.nil?
+        result << @f1006.to_s
+      else
+        result << 'null'
+      end
+      result << ',f1007='
+      if !@f1007.nil?
+        result << @f1007.to_s
+      else
+        result << 'null'
+      end
+      result << ',f1008='
+      if !@f1008.nil?
+        result << @f1008.to_s
+      else
+        result << 'null'
+      end
+      result << ',f1009='
+      if !@f1009.nil?
+        result << @f1009.to_s
+      else
+        result << 'null'
+      end
+      result << ',f1010='
+      if !@f1010.nil?
+        result << @f1010.to_s
+      else
+        result << 'null'
+      end
+      result << ',f1011='
+      if !@f1011.nil?
+        result << @f1011.to_s
+      else
+        result << 'null'
+      end
+      result << ")"
+      result
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  class StructBytes
+    attr_accessor :f1
+    attr_accessor :f2
+    attr_accessor :f3
+
+    def initialize(f1 = '', f2 = nil, f3 = nil)
+      @f1 = f1
+      @f2 = f2
+      @f3 = f3
+    end
+
+    def copy(other)
+      @f1 = other.f1
+      @f2 = other.f2
+      @f3 = other.f3
+      self
+    end
+
+    def clone
+      Marshal.load(Marshal.dump(self))
+    end
+
+    def <=>(other)
+      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructBytes)
+
+      # noinspection RubyUnusedLocalVariable
+      result = 0
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def ==(other) (self <=> other) == 0 end
+    def !=(other) (self <=> other) != 0 end
+    def  <(other) (self <=> other)  < 0 end
+    def  >(other) (self <=> other)  > 0 end
+    def <=(other) (self <=> other) <= 0 end
+    def >=(other) (self <=> other) >= 0 end
+
+    def eql?(other)
+      self == other
+    end
+
+    def key
+      result = []
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def hash
+      key.hash
+    end
+
+    def to_s
+      result = ''
+      result << 'StructBytes('
+      result << 'f1='
+      if !@f1.nil?
+        result << 'bytes[' << @f1.length.to_s << ']'
+      else
+        result << 'null'
+      end
+      result << ',f2='
+      if !@f2.nil?
+        result << 'bytes[' << @f2.length.to_s << ']'
+      else
+        result << 'null'
+      end
+      result << ',f3='
+      if !@f3.nil?
+        result << 'bytes[' << @f3.length.to_s << ']'
+      else
+        result << 'null'
+      end
+      result << ")"
+      result
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  class StructArray
+    attr_accessor :f1
+    attr_accessor :f2
+    attr_accessor :f3
+    attr_accessor :f4
+    attr_accessor :f5
+    attr_accessor :f6
+    attr_accessor :f7
+    attr_accessor :f8
+    attr_accessor :f9
+    attr_accessor :f10
+
+    def initialize(f1 = Array.new(2, 0), f2 = Array.new(2, nil), f3 = Array.new(2, ''), f4 = Array.new(2, nil), f5 = Array.new(2, EnumSimple.new), f6 = Array.new(2, nil), f7 = Array.new(2, FlagsSimple.new), f8 = Array.new(2, nil), f9 = Array.new(2, StructSimple.new), f10 = Array.new(2, nil))
+      @f1 = f1
+      @f2 = f2
+      @f3 = f3
+      @f4 = f4
+      @f5 = f5
+      @f6 = f6
+      @f7 = f7
+      @f8 = f8
+      @f9 = f9
+      @f10 = f10
+    end
+
+    def copy(other)
+      @f1 = other.f1
+      @f2 = other.f2
+      @f3 = other.f3
+      @f4 = other.f4
+      @f5 = other.f5
+      @f6 = other.f6
+      @f7 = other.f7
+      @f8 = other.f8
+      @f9 = other.f9
+      @f10 = other.f10
+      self
+    end
+
+    def clone
+      Marshal.load(Marshal.dump(self))
+    end
+
+    def <=>(other)
+      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructArray)
+
+      # noinspection RubyUnusedLocalVariable
+      result = 0
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def ==(other) (self <=> other) == 0 end
+    def !=(other) (self <=> other) != 0 end
+    def  <(other) (self <=> other)  < 0 end
+    def  >(other) (self <=> other)  > 0 end
+    def <=(other) (self <=> other) <= 0 end
+    def >=(other) (self <=> other) >= 0 end
+
+    def eql?(other)
+      self == other
+    end
+
+    def key
+      result = []
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def hash
+      key.hash
+    end
+
+    def to_s
+      result = ''
+      result << 'StructArray('
+      result << 'f1='
+      unless @f1.nil?
+        first = true
+        result << '[' << @f1.length.to_s << ']['
+        @f1.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ',f2='
+      unless @f2.nil?
+        first = true
+        result << '[' << @f2.length.to_s << ']['
+        @f2.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ',f3='
+      unless @f3.nil?
+        first = true
+        result << '[' << @f3.length.to_s << ']['
+        @f3.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << 'bytes[' << item.length.to_s << ']'
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ',f4='
+      unless @f4.nil?
+        first = true
+        result << '[' << @f4.length.to_s << ']['
+        @f4.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << 'bytes[' << item.length.to_s << ']'
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ',f5='
+      unless @f5.nil?
+        first = true
+        result << '[' << @f5.length.to_s << ']['
+        @f5.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ',f6='
+      unless @f6.nil?
+        first = true
+        result << '[' << @f6.length.to_s << ']['
+        @f6.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ',f7='
+      unless @f7.nil?
+        first = true
+        result << '[' << @f7.length.to_s << ']['
+        @f7.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ',f8='
+      unless @f8.nil?
+        first = true
+        result << '[' << @f8.length.to_s << ']['
+        @f8.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ',f9='
+      unless @f9.nil?
+        first = true
+        result << '[' << @f9.length.to_s << ']['
+        @f9.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ',f10='
+      unless @f10.nil?
+        first = true
+        result << '[' << @f10.length.to_s << ']['
+        @f10.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ")"
+      result
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  class StructVector
+    attr_accessor :f1
+    attr_accessor :f2
+    attr_accessor :f3
+    attr_accessor :f4
+    attr_accessor :f5
+    attr_accessor :f6
+    attr_accessor :f7
+    attr_accessor :f8
+    attr_accessor :f9
+    attr_accessor :f10
+
+    def initialize(f1 = Array.new, f2 = Array.new, f3 = Array.new, f4 = Array.new, f5 = Array.new, f6 = Array.new, f7 = Array.new, f8 = Array.new, f9 = Array.new, f10 = Array.new)
+      @f1 = f1
+      @f2 = f2
+      @f3 = f3
+      @f4 = f4
+      @f5 = f5
+      @f6 = f6
+      @f7 = f7
+      @f8 = f8
+      @f9 = f9
+      @f10 = f10
+    end
+
+    def copy(other)
+      @f1 = other.f1
+      @f2 = other.f2
+      @f3 = other.f3
+      @f4 = other.f4
+      @f5 = other.f5
+      @f6 = other.f6
+      @f7 = other.f7
+      @f8 = other.f8
+      @f9 = other.f9
+      @f10 = other.f10
+      self
+    end
+
+    def clone
+      Marshal.load(Marshal.dump(self))
+    end
+
+    def <=>(other)
+      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructVector)
+
+      # noinspection RubyUnusedLocalVariable
+      result = 0
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def ==(other) (self <=> other) == 0 end
+    def !=(other) (self <=> other) != 0 end
+    def  <(other) (self <=> other)  < 0 end
+    def  >(other) (self <=> other)  > 0 end
+    def <=(other) (self <=> other) <= 0 end
+    def >=(other) (self <=> other) >= 0 end
+
+    def eql?(other)
+      self == other
+    end
+
+    def key
+      result = []
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def hash
+      key.hash
+    end
+
+    def to_s
+      result = ''
+      result << 'StructVector('
+      result << 'f1='
+      unless @f1.nil?
+        first = true
+        result << '[' << @f1.length.to_s << ']['
+        @f1.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ',f2='
+      unless @f2.nil?
+        first = true
+        result << '[' << @f2.length.to_s << ']['
+        @f2.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ',f3='
+      unless @f3.nil?
+        first = true
+        result << '[' << @f3.length.to_s << ']['
+        @f3.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << 'bytes[' << item.length.to_s << ']'
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ',f4='
+      unless @f4.nil?
+        first = true
+        result << '[' << @f4.length.to_s << ']['
+        @f4.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << 'bytes[' << item.length.to_s << ']'
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ',f5='
+      unless @f5.nil?
+        first = true
+        result << '[' << @f5.length.to_s << ']['
+        @f5.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ',f6='
+      unless @f6.nil?
+        first = true
+        result << '[' << @f6.length.to_s << ']['
+        @f6.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ',f7='
+      unless @f7.nil?
+        first = true
+        result << '[' << @f7.length.to_s << ']['
+        @f7.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ',f8='
+      unless @f8.nil?
+        first = true
+        result << '[' << @f8.length.to_s << ']['
+        @f8.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ',f9='
+      unless @f9.nil?
+        first = true
+        result << '[' << @f9.length.to_s << ']['
+        @f9.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ',f10='
+      unless @f10.nil?
+        first = true
+        result << '[' << @f10.length.to_s << ']['
+        @f10.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << ']'
+      end
+      result << ")"
+      result
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  class StructList
+    attr_accessor :f1
+    attr_accessor :f2
+    attr_accessor :f3
+    attr_accessor :f4
+    attr_accessor :f5
+    attr_accessor :f6
+    attr_accessor :f7
+    attr_accessor :f8
+    attr_accessor :f9
+    attr_accessor :f10
+
+    def initialize(f1 = Array.new, f2 = Array.new, f3 = Array.new, f4 = Array.new, f5 = Array.new, f6 = Array.new, f7 = Array.new, f8 = Array.new, f9 = Array.new, f10 = Array.new)
+      @f1 = f1
+      @f2 = f2
+      @f3 = f3
+      @f4 = f4
+      @f5 = f5
+      @f6 = f6
+      @f7 = f7
+      @f8 = f8
+      @f9 = f9
+      @f10 = f10
+    end
+
+    def copy(other)
+      @f1 = other.f1
+      @f2 = other.f2
+      @f3 = other.f3
+      @f4 = other.f4
+      @f5 = other.f5
+      @f6 = other.f6
+      @f7 = other.f7
+      @f8 = other.f8
+      @f9 = other.f9
+      @f10 = other.f10
+      self
+    end
+
+    def clone
+      Marshal.load(Marshal.dump(self))
+    end
+
+    def <=>(other)
+      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructList)
+
+      # noinspection RubyUnusedLocalVariable
+      result = 0
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def ==(other) (self <=> other) == 0 end
+    def !=(other) (self <=> other) != 0 end
+    def  <(other) (self <=> other)  < 0 end
+    def  >(other) (self <=> other)  > 0 end
+    def <=(other) (self <=> other) <= 0 end
+    def >=(other) (self <=> other) >= 0 end
+
+    def eql?(other)
+      self == other
+    end
+
+    def key
+      result = []
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def hash
+      key.hash
+    end
+
+    def to_s
+      result = ''
+      result << 'StructList('
+      result << 'f1='
+      unless @f1.nil?
+        first = true
+        result << '[' << @f1.length.to_s << ']<'
+        @f1.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << '>'
+      end
+      result << ',f2='
+      unless @f2.nil?
+        first = true
+        result << '[' << @f2.length.to_s << ']<'
+        @f2.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << '>'
+      end
+      result << ',f3='
+      unless @f3.nil?
+        first = true
+        result << '[' << @f3.length.to_s << ']<'
+        @f3.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << 'bytes[' << item.length.to_s << ']'
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << '>'
+      end
+      result << ',f4='
+      unless @f4.nil?
+        first = true
+        result << '[' << @f4.length.to_s << ']<'
+        @f4.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << 'bytes[' << item.length.to_s << ']'
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << '>'
+      end
+      result << ',f5='
+      unless @f5.nil?
+        first = true
+        result << '[' << @f5.length.to_s << ']<'
+        @f5.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << '>'
+      end
+      result << ',f6='
+      unless @f6.nil?
+        first = true
+        result << '[' << @f6.length.to_s << ']<'
+        @f6.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << '>'
+      end
+      result << ',f7='
+      unless @f7.nil?
+        first = true
+        result << '[' << @f7.length.to_s << ']<'
+        @f7.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << '>'
+      end
+      result << ',f8='
+      unless @f8.nil?
+        first = true
+        result << '[' << @f8.length.to_s << ']<'
+        @f8.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << '>'
+      end
+      result << ',f9='
+      unless @f9.nil?
+        first = true
+        result << '[' << @f9.length.to_s << ']<'
+        @f9.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << '>'
+      end
+      result << ',f10='
+      unless @f10.nil?
+        first = true
+        result << '[' << @f10.length.to_s << ']<'
+        @f10.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << '>'
+      end
+      result << ")"
+      result
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  class StructSet
+    attr_accessor :f1
+    attr_accessor :f2
+    attr_accessor :f3
+    attr_accessor :f4
+
+    def initialize(f1 = Set.new, f2 = Set.new, f3 = Set.new, f4 = Set.new)
+      @f1 = f1
+      @f2 = f2
+      @f3 = f3
+      @f4 = f4
+    end
+
+    def copy(other)
+      @f1 = other.f1
+      @f2 = other.f2
+      @f3 = other.f3
+      @f4 = other.f4
+      self
+    end
+
+    def clone
+      Marshal.load(Marshal.dump(self))
+    end
+
+    def <=>(other)
+      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructSet)
+
+      # noinspection RubyUnusedLocalVariable
+      result = 0
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def ==(other) (self <=> other) == 0 end
+    def !=(other) (self <=> other) != 0 end
+    def  <(other) (self <=> other)  < 0 end
+    def  >(other) (self <=> other)  > 0 end
+    def <=(other) (self <=> other) <= 0 end
+    def >=(other) (self <=> other) >= 0 end
+
+    def eql?(other)
+      self == other
+    end
+
+    def key
+      result = []
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def hash
+      key.hash
+    end
+
+    def to_s
+      result = ''
+      result << 'StructSet('
+      result << 'f1='
+      unless @f1.nil?
+        first = true
+        result << '[' << @f1.length.to_s << ']{'
+        @f1.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << '}'
+      end
+      result << ',f2='
+      unless @f2.nil?
+        first = true
+        result << '[' << @f2.length.to_s << ']{'
+        @f2.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << '}'
+      end
+      result << ',f3='
+      unless @f3.nil?
+        first = true
+        result << '[' << @f3.length.to_s << ']{'
+        @f3.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << '}'
+      end
+      result << ',f4='
+      unless @f4.nil?
+        first = true
+        result << '[' << @f4.length.to_s << ']{'
+        @f4.each do |item|
+          if !item.nil?
+            result << (first ? '' : ',')
+            result << item.to_s
+          else
+            result << 'null'
+          end
+          first = false
+        end
+        result << '}'
+      end
+      result << ")"
+      result
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  class StructMap
+    attr_accessor :f1
+    attr_accessor :f2
+    attr_accessor :f3
+    attr_accessor :f4
+    attr_accessor :f5
+    attr_accessor :f6
+    attr_accessor :f7
+    attr_accessor :f8
+    attr_accessor :f9
+    attr_accessor :f10
+
+    def initialize(f1 = Hash.new, f2 = Hash.new, f3 = Hash.new, f4 = Hash.new, f5 = Hash.new, f6 = Hash.new, f7 = Hash.new, f8 = Hash.new, f9 = Hash.new, f10 = Hash.new)
+      @f1 = f1
+      @f2 = f2
+      @f3 = f3
+      @f4 = f4
+      @f5 = f5
+      @f6 = f6
+      @f7 = f7
+      @f8 = f8
+      @f9 = f9
+      @f10 = f10
+    end
+
+    def copy(other)
+      @f1 = other.f1
+      @f2 = other.f2
+      @f3 = other.f3
+      @f4 = other.f4
+      @f5 = other.f5
+      @f6 = other.f6
+      @f7 = other.f7
+      @f8 = other.f8
+      @f9 = other.f9
+      @f10 = other.f10
+      self
+    end
+
+    def clone
+      Marshal.load(Marshal.dump(self))
+    end
+
+    def <=>(other)
+      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructMap)
+
+      # noinspection RubyUnusedLocalVariable
+      result = 0
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def ==(other) (self <=> other) == 0 end
+    def !=(other) (self <=> other) != 0 end
+    def  <(other) (self <=> other)  < 0 end
+    def  >(other) (self <=> other)  > 0 end
+    def <=(other) (self <=> other) <= 0 end
+    def >=(other) (self <=> other) >= 0 end
+
+    def eql?(other)
+      self == other
+    end
+
+    def key
+      result = []
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def hash
+      key.hash
+    end
+
+    def to_s
+      result = ''
+      result << 'StructMap('
+      result << 'f1='
+      unless @f1.nil?
+        first = true
+        result << '[' << @f1.length.to_s << ']<{'
+        @f1.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << key.to_s
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << value.to_s
+          else
+            result << 'null'
+          end
+        end
+        result << '}>'
+      end
+      result << ',f2='
+      unless @f2.nil?
+        first = true
+        result << '[' << @f2.length.to_s << ']<{'
+        @f2.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << key.to_s
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << value.to_s
+          else
+            result << 'null'
+          end
+        end
+        result << '}>'
+      end
+      result << ',f3='
+      unless @f3.nil?
+        first = true
+        result << '[' << @f3.length.to_s << ']<{'
+        @f3.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << 'bytes[' << key.length.to_s << ']'
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << 'bytes[' << value.length.to_s << ']'
+          else
+            result << 'null'
+          end
+        end
+        result << '}>'
+      end
+      result << ',f4='
+      unless @f4.nil?
+        first = true
+        result << '[' << @f4.length.to_s << ']<{'
+        @f4.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << 'bytes[' << key.length.to_s << ']'
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << 'bytes[' << value.length.to_s << ']'
+          else
+            result << 'null'
+          end
+        end
+        result << '}>'
+      end
+      result << ',f5='
+      unless @f5.nil?
+        first = true
+        result << '[' << @f5.length.to_s << ']<{'
+        @f5.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << key.to_s
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << value.to_s
+          else
+            result << 'null'
+          end
+        end
+        result << '}>'
+      end
+      result << ',f6='
+      unless @f6.nil?
+        first = true
+        result << '[' << @f6.length.to_s << ']<{'
+        @f6.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << key.to_s
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << value.to_s
+          else
+            result << 'null'
+          end
+        end
+        result << '}>'
+      end
+      result << ',f7='
+      unless @f7.nil?
+        first = true
+        result << '[' << @f7.length.to_s << ']<{'
+        @f7.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << key.to_s
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << value.to_s
+          else
+            result << 'null'
+          end
+        end
+        result << '}>'
+      end
+      result << ',f8='
+      unless @f8.nil?
+        first = true
+        result << '[' << @f8.length.to_s << ']<{'
+        @f8.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << key.to_s
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << value.to_s
+          else
+            result << 'null'
+          end
+        end
+        result << '}>'
+      end
+      result << ',f9='
+      unless @f9.nil?
+        first = true
+        result << '[' << @f9.length.to_s << ']<{'
+        @f9.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << key.to_s
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << value.to_s
+          else
+            result << 'null'
+          end
+        end
+        result << '}>'
+      end
+      result << ',f10='
+      unless @f10.nil?
+        first = true
+        result << '[' << @f10.length.to_s << ']<{'
+        @f10.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << key.to_s
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << value.to_s
+          else
+            result << 'null'
+          end
+        end
+        result << '}>'
+      end
+      result << ")"
+      result
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  class StructHash
+    attr_accessor :f1
+    attr_accessor :f2
+    attr_accessor :f3
+    attr_accessor :f4
+    attr_accessor :f5
+    attr_accessor :f6
+    attr_accessor :f7
+    attr_accessor :f8
+    attr_accessor :f9
+    attr_accessor :f10
+
+    def initialize(f1 = Hash.new, f2 = Hash.new, f3 = Hash.new, f4 = Hash.new, f5 = Hash.new, f6 = Hash.new, f7 = Hash.new, f8 = Hash.new, f9 = Hash.new, f10 = Hash.new)
+      @f1 = f1
+      @f2 = f2
+      @f3 = f3
+      @f4 = f4
+      @f5 = f5
+      @f6 = f6
+      @f7 = f7
+      @f8 = f8
+      @f9 = f9
+      @f10 = f10
+    end
+
+    def copy(other)
+      @f1 = other.f1
+      @f2 = other.f2
+      @f3 = other.f3
+      @f4 = other.f4
+      @f5 = other.f5
+      @f6 = other.f6
+      @f7 = other.f7
+      @f8 = other.f8
+      @f9 = other.f9
+      @f10 = other.f10
+      self
+    end
+
+    def clone
+      Marshal.load(Marshal.dump(self))
+    end
+
+    def <=>(other)
+      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructHash)
+
+      # noinspection RubyUnusedLocalVariable
+      result = 0
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def ==(other) (self <=> other) == 0 end
+    def !=(other) (self <=> other) != 0 end
+    def  <(other) (self <=> other)  < 0 end
+    def  >(other) (self <=> other)  > 0 end
+    def <=(other) (self <=> other) <= 0 end
+    def >=(other) (self <=> other) >= 0 end
+
+    def eql?(other)
+      self == other
+    end
+
+    def key
+      result = []
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def hash
+      key.hash
+    end
+
+    def to_s
+      result = ''
+      result << 'StructHash('
+      result << 'f1='
+      unless @f1.nil?
+        first = true
+        result << '[' << @f1.length.to_s << '][{'
+        @f1.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << key.to_s
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << value.to_s
+          else
+            result << 'null'
+          end
+        end
+        result << '}]'
+      end
+      result << ',f2='
+      unless @f2.nil?
+        first = true
+        result << '[' << @f2.length.to_s << '][{'
+        @f2.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << key.to_s
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << value.to_s
+          else
+            result << 'null'
+          end
+        end
+        result << '}]'
+      end
+      result << ',f3='
+      unless @f3.nil?
+        first = true
+        result << '[' << @f3.length.to_s << '][{'
+        @f3.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << 'bytes[' << key.length.to_s << ']'
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << 'bytes[' << value.length.to_s << ']'
+          else
+            result << 'null'
+          end
+        end
+        result << '}]'
+      end
+      result << ',f4='
+      unless @f4.nil?
+        first = true
+        result << '[' << @f4.length.to_s << '][{'
+        @f4.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << 'bytes[' << key.length.to_s << ']'
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << 'bytes[' << value.length.to_s << ']'
+          else
+            result << 'null'
+          end
+        end
+        result << '}]'
+      end
+      result << ',f5='
+      unless @f5.nil?
+        first = true
+        result << '[' << @f5.length.to_s << '][{'
+        @f5.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << key.to_s
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << value.to_s
+          else
+            result << 'null'
+          end
+        end
+        result << '}]'
+      end
+      result << ',f6='
+      unless @f6.nil?
+        first = true
+        result << '[' << @f6.length.to_s << '][{'
+        @f6.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << key.to_s
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << value.to_s
+          else
+            result << 'null'
+          end
+        end
+        result << '}]'
+      end
+      result << ',f7='
+      unless @f7.nil?
+        first = true
+        result << '[' << @f7.length.to_s << '][{'
+        @f7.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << key.to_s
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << value.to_s
+          else
+            result << 'null'
+          end
+        end
+        result << '}]'
+      end
+      result << ',f8='
+      unless @f8.nil?
+        first = true
+        result << '[' << @f8.length.to_s << '][{'
+        @f8.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << key.to_s
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << value.to_s
+          else
+            result << 'null'
+          end
+        end
+        result << '}]'
+      end
+      result << ',f9='
+      unless @f9.nil?
+        first = true
+        result << '[' << @f9.length.to_s << '][{'
+        @f9.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << key.to_s
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << value.to_s
+          else
+            result << 'null'
+          end
+        end
+        result << '}]'
+      end
+      result << ',f10='
+      unless @f10.nil?
+        first = true
+        result << '[' << @f10.length.to_s << '][{'
+        @f10.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << key.to_s
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << value.to_s
+          else
+            result << 'null'
+          end
+        end
+        result << '}]'
+      end
+      result << ")"
+      result
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  class StructHashEx
+    attr_accessor :f1
+    attr_accessor :f2
+
+    def initialize(f1 = Hash.new, f2 = Hash.new)
+      @f1 = f1
+      @f2 = f2
+    end
+
+    def copy(other)
+      @f1 = other.f1
+      @f2 = other.f2
+      self
+    end
+
+    def clone
+      Marshal.load(Marshal.dump(self))
+    end
+
+    def <=>(other)
+      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructHashEx)
+
+      # noinspection RubyUnusedLocalVariable
+      result = 0
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def ==(other) (self <=> other) == 0 end
+    def !=(other) (self <=> other) != 0 end
+    def  <(other) (self <=> other)  < 0 end
+    def  >(other) (self <=> other)  > 0 end
+    def <=(other) (self <=> other) <= 0 end
+    def >=(other) (self <=> other) >= 0 end
+
+    def eql?(other)
+      self == other
+    end
+
+    def key
+      result = []
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def hash
+      key.hash
+    end
+
+    def to_s
+      result = ''
+      result << 'StructHashEx('
+      result << 'f1='
+      unless @f1.nil?
+        first = true
+        result << '[' << @f1.length.to_s << '][{'
+        @f1.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << key.to_s
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << value.to_s
+          else
+            result << 'null'
+          end
+        end
+        result << '}]'
+      end
+      result << ',f2='
+      unless @f2.nil?
+        first = true
+        result << '[' << @f2.length.to_s << '][{'
+        @f2.each do |key, value|
+          if !key.nil?
+            result << (first ? '' : ',')
+            result << key.to_s
+          else
+            result << 'null'
+          end
+          first = false
+          result << '->'
+          if !value.nil?
+            result << (first ? '' : ',')
+            result << value.to_s
+          else
+            result << 'null'
+          end
+        end
+        result << '}]'
+      end
+      result << ")"
+      result
+    end
+  end
+
 end
 
 # rubocop:enable all

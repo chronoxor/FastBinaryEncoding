@@ -7128,7 +7128,6 @@ std::string GeneratorKotlin::ConvertConstant(const std::string& type, const std:
                 result += (first ? "" : ", ") + CppCommon::StringUtils::ToTrim(it) + ".value";
                 first = false;
             }
-
             result = type + ".fromSet(EnumSet.of(" + result + "))";
         }
     }

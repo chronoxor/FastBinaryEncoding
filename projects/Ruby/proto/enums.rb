@@ -1568,6 +1568,652 @@ module Enums
     end
   end
 
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  class Enums
+    attr_accessor :byte0
+    attr_accessor :byte1
+    attr_accessor :byte2
+    attr_accessor :byte3
+    attr_accessor :byte4
+    attr_accessor :byte5
+    attr_accessor :char0
+    attr_accessor :char1
+    attr_accessor :char2
+    attr_accessor :char3
+    attr_accessor :char4
+    attr_accessor :char5
+    attr_accessor :wchar0
+    attr_accessor :wchar1
+    attr_accessor :wchar2
+    attr_accessor :wchar3
+    attr_accessor :wchar4
+    attr_accessor :wchar5
+    attr_accessor :int8b0
+    attr_accessor :int8b1
+    attr_accessor :int8b2
+    attr_accessor :int8b3
+    attr_accessor :int8b4
+    attr_accessor :int8b5
+    attr_accessor :uint8b0
+    attr_accessor :uint8b1
+    attr_accessor :uint8b2
+    attr_accessor :uint8b3
+    attr_accessor :uint8b4
+    attr_accessor :uint8b5
+    attr_accessor :int16b0
+    attr_accessor :int16b1
+    attr_accessor :int16b2
+    attr_accessor :int16b3
+    attr_accessor :int16b4
+    attr_accessor :int16b5
+    attr_accessor :uint16b0
+    attr_accessor :uint16b1
+    attr_accessor :uint16b2
+    attr_accessor :uint16b3
+    attr_accessor :uint16b4
+    attr_accessor :uint16b5
+    attr_accessor :int32b0
+    attr_accessor :int32b1
+    attr_accessor :int32b2
+    attr_accessor :int32b3
+    attr_accessor :int32b4
+    attr_accessor :int32b5
+    attr_accessor :uint32b0
+    attr_accessor :uint32b1
+    attr_accessor :uint32b2
+    attr_accessor :uint32b3
+    attr_accessor :uint32b4
+    attr_accessor :uint32b5
+    attr_accessor :int64b0
+    attr_accessor :int64b1
+    attr_accessor :int64b2
+    attr_accessor :int64b3
+    attr_accessor :int64b4
+    attr_accessor :int64b5
+    attr_accessor :uint64b0
+    attr_accessor :uint64b1
+    attr_accessor :uint64b2
+    attr_accessor :uint64b3
+    attr_accessor :uint64b4
+    attr_accessor :uint64b5
+
+    def initialize(byte0 = EnumByte.ENUM_VALUE_0, byte1 = EnumByte.ENUM_VALUE_1, byte2 = EnumByte.ENUM_VALUE_2, byte3 = EnumByte.ENUM_VALUE_3, byte4 = EnumByte.ENUM_VALUE_4, byte5 = EnumByte.ENUM_VALUE_5, char0 = EnumChar.ENUM_VALUE_0, char1 = EnumChar.ENUM_VALUE_1, char2 = EnumChar.ENUM_VALUE_2, char3 = EnumChar.ENUM_VALUE_3, char4 = EnumChar.ENUM_VALUE_4, char5 = EnumChar.ENUM_VALUE_5, wchar0 = EnumWChar.ENUM_VALUE_0, wchar1 = EnumWChar.ENUM_VALUE_1, wchar2 = EnumWChar.ENUM_VALUE_2, wchar3 = EnumWChar.ENUM_VALUE_3, wchar4 = EnumWChar.ENUM_VALUE_4, wchar5 = EnumWChar.ENUM_VALUE_5, int8b0 = EnumInt8.ENUM_VALUE_0, int8b1 = EnumInt8.ENUM_VALUE_1, int8b2 = EnumInt8.ENUM_VALUE_2, int8b3 = EnumInt8.ENUM_VALUE_3, int8b4 = EnumInt8.ENUM_VALUE_4, int8b5 = EnumInt8.ENUM_VALUE_5, uint8b0 = EnumUInt8.ENUM_VALUE_0, uint8b1 = EnumUInt8.ENUM_VALUE_1, uint8b2 = EnumUInt8.ENUM_VALUE_2, uint8b3 = EnumUInt8.ENUM_VALUE_3, uint8b4 = EnumUInt8.ENUM_VALUE_4, uint8b5 = EnumUInt8.ENUM_VALUE_5, int16b0 = EnumInt16.ENUM_VALUE_0, int16b1 = EnumInt16.ENUM_VALUE_1, int16b2 = EnumInt16.ENUM_VALUE_2, int16b3 = EnumInt16.ENUM_VALUE_3, int16b4 = EnumInt16.ENUM_VALUE_4, int16b5 = EnumInt16.ENUM_VALUE_5, uint16b0 = EnumUInt16.ENUM_VALUE_0, uint16b1 = EnumUInt16.ENUM_VALUE_1, uint16b2 = EnumUInt16.ENUM_VALUE_2, uint16b3 = EnumUInt16.ENUM_VALUE_3, uint16b4 = EnumUInt16.ENUM_VALUE_4, uint16b5 = EnumUInt16.ENUM_VALUE_5, int32b0 = EnumInt32.ENUM_VALUE_0, int32b1 = EnumInt32.ENUM_VALUE_1, int32b2 = EnumInt32.ENUM_VALUE_2, int32b3 = EnumInt32.ENUM_VALUE_3, int32b4 = EnumInt32.ENUM_VALUE_4, int32b5 = EnumInt32.ENUM_VALUE_5, uint32b0 = EnumUInt32.ENUM_VALUE_0, uint32b1 = EnumUInt32.ENUM_VALUE_1, uint32b2 = EnumUInt32.ENUM_VALUE_2, uint32b3 = EnumUInt32.ENUM_VALUE_3, uint32b4 = EnumUInt32.ENUM_VALUE_4, uint32b5 = EnumUInt32.ENUM_VALUE_5, int64b0 = EnumInt64.ENUM_VALUE_0, int64b1 = EnumInt64.ENUM_VALUE_1, int64b2 = EnumInt64.ENUM_VALUE_2, int64b3 = EnumInt64.ENUM_VALUE_3, int64b4 = EnumInt64.ENUM_VALUE_4, int64b5 = EnumInt64.ENUM_VALUE_5, uint64b0 = EnumUInt64.ENUM_VALUE_0, uint64b1 = EnumUInt64.ENUM_VALUE_1, uint64b2 = EnumUInt64.ENUM_VALUE_2, uint64b3 = EnumUInt64.ENUM_VALUE_3, uint64b4 = EnumUInt64.ENUM_VALUE_4, uint64b5 = EnumUInt64.ENUM_VALUE_5)
+      @byte0 = byte0
+      @byte1 = byte1
+      @byte2 = byte2
+      @byte3 = byte3
+      @byte4 = byte4
+      @byte5 = byte5
+      @char0 = char0
+      @char1 = char1
+      @char2 = char2
+      @char3 = char3
+      @char4 = char4
+      @char5 = char5
+      @wchar0 = wchar0
+      @wchar1 = wchar1
+      @wchar2 = wchar2
+      @wchar3 = wchar3
+      @wchar4 = wchar4
+      @wchar5 = wchar5
+      @int8b0 = int8b0
+      @int8b1 = int8b1
+      @int8b2 = int8b2
+      @int8b3 = int8b3
+      @int8b4 = int8b4
+      @int8b5 = int8b5
+      @uint8b0 = uint8b0
+      @uint8b1 = uint8b1
+      @uint8b2 = uint8b2
+      @uint8b3 = uint8b3
+      @uint8b4 = uint8b4
+      @uint8b5 = uint8b5
+      @int16b0 = int16b0
+      @int16b1 = int16b1
+      @int16b2 = int16b2
+      @int16b3 = int16b3
+      @int16b4 = int16b4
+      @int16b5 = int16b5
+      @uint16b0 = uint16b0
+      @uint16b1 = uint16b1
+      @uint16b2 = uint16b2
+      @uint16b3 = uint16b3
+      @uint16b4 = uint16b4
+      @uint16b5 = uint16b5
+      @int32b0 = int32b0
+      @int32b1 = int32b1
+      @int32b2 = int32b2
+      @int32b3 = int32b3
+      @int32b4 = int32b4
+      @int32b5 = int32b5
+      @uint32b0 = uint32b0
+      @uint32b1 = uint32b1
+      @uint32b2 = uint32b2
+      @uint32b3 = uint32b3
+      @uint32b4 = uint32b4
+      @uint32b5 = uint32b5
+      @int64b0 = int64b0
+      @int64b1 = int64b1
+      @int64b2 = int64b2
+      @int64b3 = int64b3
+      @int64b4 = int64b4
+      @int64b5 = int64b5
+      @uint64b0 = uint64b0
+      @uint64b1 = uint64b1
+      @uint64b2 = uint64b2
+      @uint64b3 = uint64b3
+      @uint64b4 = uint64b4
+      @uint64b5 = uint64b5
+    end
+
+    def copy(other)
+      @byte0 = other.byte0
+      @byte1 = other.byte1
+      @byte2 = other.byte2
+      @byte3 = other.byte3
+      @byte4 = other.byte4
+      @byte5 = other.byte5
+      @char0 = other.char0
+      @char1 = other.char1
+      @char2 = other.char2
+      @char3 = other.char3
+      @char4 = other.char4
+      @char5 = other.char5
+      @wchar0 = other.wchar0
+      @wchar1 = other.wchar1
+      @wchar2 = other.wchar2
+      @wchar3 = other.wchar3
+      @wchar4 = other.wchar4
+      @wchar5 = other.wchar5
+      @int8b0 = other.int8b0
+      @int8b1 = other.int8b1
+      @int8b2 = other.int8b2
+      @int8b3 = other.int8b3
+      @int8b4 = other.int8b4
+      @int8b5 = other.int8b5
+      @uint8b0 = other.uint8b0
+      @uint8b1 = other.uint8b1
+      @uint8b2 = other.uint8b2
+      @uint8b3 = other.uint8b3
+      @uint8b4 = other.uint8b4
+      @uint8b5 = other.uint8b5
+      @int16b0 = other.int16b0
+      @int16b1 = other.int16b1
+      @int16b2 = other.int16b2
+      @int16b3 = other.int16b3
+      @int16b4 = other.int16b4
+      @int16b5 = other.int16b5
+      @uint16b0 = other.uint16b0
+      @uint16b1 = other.uint16b1
+      @uint16b2 = other.uint16b2
+      @uint16b3 = other.uint16b3
+      @uint16b4 = other.uint16b4
+      @uint16b5 = other.uint16b5
+      @int32b0 = other.int32b0
+      @int32b1 = other.int32b1
+      @int32b2 = other.int32b2
+      @int32b3 = other.int32b3
+      @int32b4 = other.int32b4
+      @int32b5 = other.int32b5
+      @uint32b0 = other.uint32b0
+      @uint32b1 = other.uint32b1
+      @uint32b2 = other.uint32b2
+      @uint32b3 = other.uint32b3
+      @uint32b4 = other.uint32b4
+      @uint32b5 = other.uint32b5
+      @int64b0 = other.int64b0
+      @int64b1 = other.int64b1
+      @int64b2 = other.int64b2
+      @int64b3 = other.int64b3
+      @int64b4 = other.int64b4
+      @int64b5 = other.int64b5
+      @uint64b0 = other.uint64b0
+      @uint64b1 = other.uint64b1
+      @uint64b2 = other.uint64b2
+      @uint64b3 = other.uint64b3
+      @uint64b4 = other.uint64b4
+      @uint64b5 = other.uint64b5
+      self
+    end
+
+    def clone
+      Marshal.load(Marshal.dump(self))
+    end
+
+    def <=>(other)
+      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(Enums)
+
+      # noinspection RubyUnusedLocalVariable
+      result = 0
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def ==(other) (self <=> other) == 0 end
+    def !=(other) (self <=> other) != 0 end
+    def  <(other) (self <=> other)  < 0 end
+    def  >(other) (self <=> other)  > 0 end
+    def <=(other) (self <=> other) <= 0 end
+    def >=(other) (self <=> other) >= 0 end
+
+    def eql?(other)
+      self == other
+    end
+
+    def key
+      result = []
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    def hash
+      key.hash
+    end
+
+    def to_s
+      result = ''
+      result << 'Enums('
+      result << 'byte0='
+      if !@byte0.nil?
+        result << @byte0.to_s
+      else
+        result << 'null'
+      end
+      result << ',byte1='
+      if !@byte1.nil?
+        result << @byte1.to_s
+      else
+        result << 'null'
+      end
+      result << ',byte2='
+      if !@byte2.nil?
+        result << @byte2.to_s
+      else
+        result << 'null'
+      end
+      result << ',byte3='
+      if !@byte3.nil?
+        result << @byte3.to_s
+      else
+        result << 'null'
+      end
+      result << ',byte4='
+      if !@byte4.nil?
+        result << @byte4.to_s
+      else
+        result << 'null'
+      end
+      result << ',byte5='
+      if !@byte5.nil?
+        result << @byte5.to_s
+      else
+        result << 'null'
+      end
+      result << ',char0='
+      if !@char0.nil?
+        result << @char0.to_s
+      else
+        result << 'null'
+      end
+      result << ',char1='
+      if !@char1.nil?
+        result << @char1.to_s
+      else
+        result << 'null'
+      end
+      result << ',char2='
+      if !@char2.nil?
+        result << @char2.to_s
+      else
+        result << 'null'
+      end
+      result << ',char3='
+      if !@char3.nil?
+        result << @char3.to_s
+      else
+        result << 'null'
+      end
+      result << ',char4='
+      if !@char4.nil?
+        result << @char4.to_s
+      else
+        result << 'null'
+      end
+      result << ',char5='
+      if !@char5.nil?
+        result << @char5.to_s
+      else
+        result << 'null'
+      end
+      result << ',wchar0='
+      if !@wchar0.nil?
+        result << @wchar0.to_s
+      else
+        result << 'null'
+      end
+      result << ',wchar1='
+      if !@wchar1.nil?
+        result << @wchar1.to_s
+      else
+        result << 'null'
+      end
+      result << ',wchar2='
+      if !@wchar2.nil?
+        result << @wchar2.to_s
+      else
+        result << 'null'
+      end
+      result << ',wchar3='
+      if !@wchar3.nil?
+        result << @wchar3.to_s
+      else
+        result << 'null'
+      end
+      result << ',wchar4='
+      if !@wchar4.nil?
+        result << @wchar4.to_s
+      else
+        result << 'null'
+      end
+      result << ',wchar5='
+      if !@wchar5.nil?
+        result << @wchar5.to_s
+      else
+        result << 'null'
+      end
+      result << ',int8b0='
+      if !@int8b0.nil?
+        result << @int8b0.to_s
+      else
+        result << 'null'
+      end
+      result << ',int8b1='
+      if !@int8b1.nil?
+        result << @int8b1.to_s
+      else
+        result << 'null'
+      end
+      result << ',int8b2='
+      if !@int8b2.nil?
+        result << @int8b2.to_s
+      else
+        result << 'null'
+      end
+      result << ',int8b3='
+      if !@int8b3.nil?
+        result << @int8b3.to_s
+      else
+        result << 'null'
+      end
+      result << ',int8b4='
+      if !@int8b4.nil?
+        result << @int8b4.to_s
+      else
+        result << 'null'
+      end
+      result << ',int8b5='
+      if !@int8b5.nil?
+        result << @int8b5.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint8b0='
+      if !@uint8b0.nil?
+        result << @uint8b0.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint8b1='
+      if !@uint8b1.nil?
+        result << @uint8b1.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint8b2='
+      if !@uint8b2.nil?
+        result << @uint8b2.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint8b3='
+      if !@uint8b3.nil?
+        result << @uint8b3.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint8b4='
+      if !@uint8b4.nil?
+        result << @uint8b4.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint8b5='
+      if !@uint8b5.nil?
+        result << @uint8b5.to_s
+      else
+        result << 'null'
+      end
+      result << ',int16b0='
+      if !@int16b0.nil?
+        result << @int16b0.to_s
+      else
+        result << 'null'
+      end
+      result << ',int16b1='
+      if !@int16b1.nil?
+        result << @int16b1.to_s
+      else
+        result << 'null'
+      end
+      result << ',int16b2='
+      if !@int16b2.nil?
+        result << @int16b2.to_s
+      else
+        result << 'null'
+      end
+      result << ',int16b3='
+      if !@int16b3.nil?
+        result << @int16b3.to_s
+      else
+        result << 'null'
+      end
+      result << ',int16b4='
+      if !@int16b4.nil?
+        result << @int16b4.to_s
+      else
+        result << 'null'
+      end
+      result << ',int16b5='
+      if !@int16b5.nil?
+        result << @int16b5.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint16b0='
+      if !@uint16b0.nil?
+        result << @uint16b0.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint16b1='
+      if !@uint16b1.nil?
+        result << @uint16b1.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint16b2='
+      if !@uint16b2.nil?
+        result << @uint16b2.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint16b3='
+      if !@uint16b3.nil?
+        result << @uint16b3.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint16b4='
+      if !@uint16b4.nil?
+        result << @uint16b4.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint16b5='
+      if !@uint16b5.nil?
+        result << @uint16b5.to_s
+      else
+        result << 'null'
+      end
+      result << ',int32b0='
+      if !@int32b0.nil?
+        result << @int32b0.to_s
+      else
+        result << 'null'
+      end
+      result << ',int32b1='
+      if !@int32b1.nil?
+        result << @int32b1.to_s
+      else
+        result << 'null'
+      end
+      result << ',int32b2='
+      if !@int32b2.nil?
+        result << @int32b2.to_s
+      else
+        result << 'null'
+      end
+      result << ',int32b3='
+      if !@int32b3.nil?
+        result << @int32b3.to_s
+      else
+        result << 'null'
+      end
+      result << ',int32b4='
+      if !@int32b4.nil?
+        result << @int32b4.to_s
+      else
+        result << 'null'
+      end
+      result << ',int32b5='
+      if !@int32b5.nil?
+        result << @int32b5.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint32b0='
+      if !@uint32b0.nil?
+        result << @uint32b0.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint32b1='
+      if !@uint32b1.nil?
+        result << @uint32b1.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint32b2='
+      if !@uint32b2.nil?
+        result << @uint32b2.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint32b3='
+      if !@uint32b3.nil?
+        result << @uint32b3.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint32b4='
+      if !@uint32b4.nil?
+        result << @uint32b4.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint32b5='
+      if !@uint32b5.nil?
+        result << @uint32b5.to_s
+      else
+        result << 'null'
+      end
+      result << ',int64b0='
+      if !@int64b0.nil?
+        result << @int64b0.to_s
+      else
+        result << 'null'
+      end
+      result << ',int64b1='
+      if !@int64b1.nil?
+        result << @int64b1.to_s
+      else
+        result << 'null'
+      end
+      result << ',int64b2='
+      if !@int64b2.nil?
+        result << @int64b2.to_s
+      else
+        result << 'null'
+      end
+      result << ',int64b3='
+      if !@int64b3.nil?
+        result << @int64b3.to_s
+      else
+        result << 'null'
+      end
+      result << ',int64b4='
+      if !@int64b4.nil?
+        result << @int64b4.to_s
+      else
+        result << 'null'
+      end
+      result << ',int64b5='
+      if !@int64b5.nil?
+        result << @int64b5.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint64b0='
+      if !@uint64b0.nil?
+        result << @uint64b0.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint64b1='
+      if !@uint64b1.nil?
+        result << @uint64b1.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint64b2='
+      if !@uint64b2.nil?
+        result << @uint64b2.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint64b3='
+      if !@uint64b3.nil?
+        result << @uint64b3.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint64b4='
+      if !@uint64b4.nil?
+        result << @uint64b4.to_s
+      else
+        result << 'null'
+      end
+      result << ',uint64b5='
+      if !@uint64b5.nil?
+        result << @uint64b5.to_s
+      else
+        result << 'null'
+      end
+      result << ")"
+      result
+    end
+  end
+
 end
 
 # rubocop:enable all
