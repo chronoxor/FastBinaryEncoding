@@ -28,6 +28,9 @@ module Proto
         @value = value.is_a?(Enum) ? value.value : value
       end
 
+      def ==(value) @value == value.value end
+      def !=(value) @value == value.value end
+
       def to_i
         @value
       end
@@ -84,7 +87,7 @@ module Proto
         return
       end
 
-      write_byte(fbe_offset, value)
+      write_byte(fbe_offset, value.value)
     end
   end
 
@@ -108,7 +111,7 @@ module Proto
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return FBE::Integer::MAX
       end
 
       fbe_size
@@ -129,7 +132,7 @@ module Proto
         return 0
       end
 
-      write_byte(fbe_offset, value)
+      write_byte(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -145,6 +148,9 @@ module Proto
       def initialize(value = 0)
         @value = value.is_a?(Enum) ? value.value : value
       end
+
+      def ==(value) @value == value.value end
+      def !=(value) @value == value.value end
 
       def to_i
         @value
@@ -207,7 +213,7 @@ module Proto
         return
       end
 
-      write_byte(fbe_offset, value)
+      write_byte(fbe_offset, value.value)
     end
   end
 
@@ -231,7 +237,7 @@ module Proto
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return FBE::Integer::MAX
       end
 
       fbe_size
@@ -252,7 +258,7 @@ module Proto
         return 0
       end
 
-      write_byte(fbe_offset, value)
+      write_byte(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -272,6 +278,9 @@ module Proto
       def initialize(value = 0)
         @value = value.is_a?(Flags) ? value.value : value
       end
+
+      def ==(flags) @value == flags.value end
+      def !=(flags) @value == flags.value end
 
       def ~
         Flags.new(~@value)
@@ -419,7 +428,7 @@ module Proto
         return
       end
 
-      write_byte(fbe_offset, value)
+      write_byte(fbe_offset, value.value)
     end
   end
 
@@ -443,7 +452,7 @@ module Proto
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return FBE::Integer::MAX
       end
 
       fbe_size
@@ -464,7 +473,7 @@ module Proto
         return 0
       end
 
-      write_byte(fbe_offset, value)
+      write_byte(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -584,12 +593,12 @@ module Proto
   class FieldModelOrder < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_uid = FBE::FieldModelInt32(self.buffer, 4 + 4)
-      @_symbol = FBE::FieldModelString(self.buffer, @_uid.fbe_offset + @_uid.fbe_size)
-      @_side = FieldModelOrderSide(self.buffer, @_symbol.fbe_offset + @_symbol.fbe_size)
-      @_type = FieldModelOrderType(self.buffer, @_side.fbe_offset + @_side.fbe_size)
-      @_price = FBE::FieldModelDouble(self.buffer, @_type.fbe_offset + @_type.fbe_size)
-      @_volume = FBE::FieldModelDouble(self.buffer, @_price.fbe_offset + @_price.fbe_size)
+      @_uid = FBE::FieldModelInt32.new(self.buffer, 4 + 4)
+      @_symbol = FBE::FieldModelString.new(self.buffer, @_uid.fbe_offset + @_uid.fbe_size)
+      @_side = FieldModelOrderSide.new(self.buffer, @_symbol.fbe_offset + @_symbol.fbe_size)
+      @_type = FieldModelOrderType.new(self.buffer, @_side.fbe_offset + @_side.fbe_size)
+      @_price = FBE::FieldModelDouble.new(self.buffer, @_type.fbe_offset + @_type.fbe_size)
+      @_volume = FBE::FieldModelDouble.new(self.buffer, @_price.fbe_offset + @_price.fbe_size)
     end
 
     def uid
@@ -623,13 +632,13 @@ module Proto
 
     # Get the field body size
     def fbe_body
-      4 + 4
-        + uid.fbe_size
-        + symbol.fbe_size
-        + side.fbe_size
-        + type.fbe_size
-        + price.fbe_size
-        + volume.fbe_size
+      4 + 4 \
+        + uid.fbe_size \
+        + symbol.fbe_size \
+        + side.fbe_size \
+        + type.fbe_size \
+        + price.fbe_size \
+        + volume.fbe_size \
     end
 
     # Get the field extra size
@@ -645,13 +654,13 @@ module Proto
 
       @_buffer.shift(fbe_struct_offset)
 
-      fbe_result = fbe_body
-        + uid.fbe_extra
-        + symbol.fbe_extra
-        + side.fbe_extra
-        + type.fbe_extra
-        + price.fbe_extra
-        + volume.fbe_extra
+      fbe_result = fbe_body \
+        + uid.fbe_extra \
+        + symbol.fbe_extra \
+        + side.fbe_extra \
+        + type.fbe_extra \
+        + price.fbe_extra \
+        + volume.fbe_extra \
 
       @_buffer.unshift(fbe_struct_offset)
 
@@ -895,7 +904,7 @@ module Proto
   class OrderModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FieldModelOrder(self.buffer, 4)
+      @_model = FieldModelOrder.new(self.buffer, 4)
     end
 
     def model
@@ -973,12 +982,12 @@ module Proto
   class FinalModelOrder < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_uid = FBE::FinalModelInt32(self.buffer, 0)
-      @_symbol = FBE::FinalModelString(self.buffer, 0)
-      @_side = FinalModelOrderSide(self.buffer, 0)
-      @_type = FinalModelOrderType(self.buffer, 0)
-      @_price = FBE::FinalModelDouble(self.buffer, 0)
-      @_volume = FBE::FinalModelDouble(self.buffer, 0)
+      @_uid = FBE::FinalModelInt32.new(self.buffer, 0)
+      @_symbol = FBE::FinalModelString.new(self.buffer, 0)
+      @_side = FinalModelOrderSide.new(self.buffer, 0)
+      @_type = FinalModelOrderType.new(self.buffer, 0)
+      @_price = FBE::FinalModelDouble.new(self.buffer, 0)
+      @_volume = FBE::FinalModelDouble.new(self.buffer, 0)
     end
 
     def uid
@@ -1007,13 +1016,13 @@ module Proto
 
     # Get the allocation size
     def fbe_allocation_size(fbe_value)
-      0
-        + uid.fbe_allocation_size(fbe_value.uid)
-        + symbol.fbe_allocation_size(fbe_value.symbol)
-        + side.fbe_allocation_size(fbe_value.side)
-        + type.fbe_allocation_size(fbe_value.type)
-        + price.fbe_allocation_size(fbe_value.price)
-        + volume.fbe_allocation_size(fbe_value.volume)
+      0 \
+        + uid.fbe_allocation_size(fbe_value.uid) \
+        + symbol.fbe_allocation_size(fbe_value.symbol) \
+        + side.fbe_allocation_size(fbe_value.side) \
+        + type.fbe_allocation_size(fbe_value.type) \
+        + price.fbe_allocation_size(fbe_value.price) \
+        + volume.fbe_allocation_size(fbe_value.volume) \
     end
 
     # Get the field type
@@ -1037,43 +1046,43 @@ module Proto
 
       uid.fbe_offset = fbe_current_offset
       fbe_field_size = uid.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       symbol.fbe_offset = fbe_current_offset
       fbe_field_size = symbol.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       side.fbe_offset = fbe_current_offset
       fbe_field_size = side.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       type.fbe_offset = fbe_current_offset
       fbe_field_size = type.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       price.fbe_offset = fbe_current_offset
       fbe_field_size = price.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       volume.fbe_offset = fbe_current_offset
       fbe_field_size = volume.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
@@ -1198,7 +1207,7 @@ module Proto
   class OrderFinalModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FinalModelOrder(self.buffer, 8)
+      @_model = FinalModelOrder.new(self.buffer, 8)
     end
 
     # Get the model type
@@ -1344,8 +1353,8 @@ module Proto
   class FieldModelBalance < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_currency = FBE::FieldModelString(self.buffer, 4 + 4)
-      @_amount = FBE::FieldModelDouble(self.buffer, @_currency.fbe_offset + @_currency.fbe_size)
+      @_currency = FBE::FieldModelString.new(self.buffer, 4 + 4)
+      @_amount = FBE::FieldModelDouble.new(self.buffer, @_currency.fbe_offset + @_currency.fbe_size)
     end
 
     def currency
@@ -1363,9 +1372,9 @@ module Proto
 
     # Get the field body size
     def fbe_body
-      4 + 4
-        + currency.fbe_size
-        + amount.fbe_size
+      4 + 4 \
+        + currency.fbe_size \
+        + amount.fbe_size \
     end
 
     # Get the field extra size
@@ -1381,9 +1390,9 @@ module Proto
 
       @_buffer.shift(fbe_struct_offset)
 
-      fbe_result = fbe_body
-        + currency.fbe_extra
-        + amount.fbe_extra
+      fbe_result = fbe_body \
+        + currency.fbe_extra \
+        + amount.fbe_extra \
 
       @_buffer.unshift(fbe_struct_offset)
 
@@ -1555,7 +1564,7 @@ module Proto
   class BalanceModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FieldModelBalance(self.buffer, 4)
+      @_model = FieldModelBalance.new(self.buffer, 4)
     end
 
     def model
@@ -1633,8 +1642,8 @@ module Proto
   class FinalModelBalance < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_currency = FBE::FinalModelString(self.buffer, 0)
-      @_amount = FBE::FinalModelDouble(self.buffer, 0)
+      @_currency = FBE::FinalModelString.new(self.buffer, 0)
+      @_amount = FBE::FinalModelDouble.new(self.buffer, 0)
     end
 
     def currency
@@ -1647,9 +1656,9 @@ module Proto
 
     # Get the allocation size
     def fbe_allocation_size(fbe_value)
-      0
-        + currency.fbe_allocation_size(fbe_value.currency)
-        + amount.fbe_allocation_size(fbe_value.amount)
+      0 \
+        + currency.fbe_allocation_size(fbe_value.currency) \
+        + amount.fbe_allocation_size(fbe_value.amount) \
     end
 
     # Get the field type
@@ -1673,15 +1682,15 @@ module Proto
 
       currency.fbe_offset = fbe_current_offset
       fbe_field_size = currency.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       amount.fbe_offset = fbe_current_offset
       fbe_field_size = amount.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
@@ -1754,7 +1763,7 @@ module Proto
   class BalanceFinalModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FinalModelBalance(self.buffer, 8)
+      @_model = FinalModelBalance.new(self.buffer, 8)
     end
 
     # Get the model type
@@ -1945,12 +1954,12 @@ module Proto
   class FieldModelAccount < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_uid = FBE::FieldModelInt32(self.buffer, 4 + 4)
-      @_name = FBE::FieldModelString(self.buffer, @_uid.fbe_offset + @_uid.fbe_size)
-      @_state = FieldModelState(self.buffer, @_name.fbe_offset + @_name.fbe_size)
-      @_wallet = FieldModelBalance(self.buffer, @_state.fbe_offset + @_state.fbe_size)
-      @_asset = FBE::FieldModelOptional(FieldModelBalance(self.buffer, @_wallet.fbe_offset + @_wallet.fbe_size), self.buffer, @_wallet.fbe_offset + @_wallet.fbe_size)
-      @_orders = FBE::FieldModelVector(FieldModelOrder(self.buffer, @_asset.fbe_offset + @_asset.fbe_size), self.buffer, @_asset.fbe_offset + @_asset.fbe_size)
+      @_uid = FBE::FieldModelInt32.new(self.buffer, 4 + 4)
+      @_name = FBE::FieldModelString.new(self.buffer, @_uid.fbe_offset + @_uid.fbe_size)
+      @_state = FieldModelState.new(self.buffer, @_name.fbe_offset + @_name.fbe_size)
+      @_wallet = FieldModelBalance.new(self.buffer, @_state.fbe_offset + @_state.fbe_size)
+      @_asset = FBE::FieldModelOptional.new(FieldModelBalance.new(self.buffer, @_wallet.fbe_offset + @_wallet.fbe_size), self.buffer, @_wallet.fbe_offset + @_wallet.fbe_size)
+      @_orders = FBE::FieldModelVector.new(FieldModelOrder.new(self.buffer, @_asset.fbe_offset + @_asset.fbe_size), self.buffer, @_asset.fbe_offset + @_asset.fbe_size)
     end
 
     def uid
@@ -1984,13 +1993,13 @@ module Proto
 
     # Get the field body size
     def fbe_body
-      4 + 4
-        + uid.fbe_size
-        + name.fbe_size
-        + state.fbe_size
-        + wallet.fbe_size
-        + asset.fbe_size
-        + orders.fbe_size
+      4 + 4 \
+        + uid.fbe_size \
+        + name.fbe_size \
+        + state.fbe_size \
+        + wallet.fbe_size \
+        + asset.fbe_size \
+        + orders.fbe_size \
     end
 
     # Get the field extra size
@@ -2006,13 +2015,13 @@ module Proto
 
       @_buffer.shift(fbe_struct_offset)
 
-      fbe_result = fbe_body
-        + uid.fbe_extra
-        + name.fbe_extra
-        + state.fbe_extra
-        + wallet.fbe_extra
-        + asset.fbe_extra
-        + orders.fbe_extra
+      fbe_result = fbe_body \
+        + uid.fbe_extra \
+        + name.fbe_extra \
+        + state.fbe_extra \
+        + wallet.fbe_extra \
+        + asset.fbe_extra \
+        + orders.fbe_extra \
 
       @_buffer.unshift(fbe_struct_offset)
 
@@ -2256,7 +2265,7 @@ module Proto
   class AccountModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FieldModelAccount(self.buffer, 4)
+      @_model = FieldModelAccount.new(self.buffer, 4)
     end
 
     def model
@@ -2334,12 +2343,12 @@ module Proto
   class FinalModelAccount < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_uid = FBE::FinalModelInt32(self.buffer, 0)
-      @_name = FBE::FinalModelString(self.buffer, 0)
-      @_state = FinalModelState(self.buffer, 0)
-      @_wallet = FinalModelBalance(self.buffer, 0)
-      @_asset = FBE::FinalModelOptional(FinalModelBalance(self.buffer, 0), self.buffer, 0)
-      @_orders = FBE::FinalModelVector(FinalModelOrder(self.buffer, 0), self.buffer, 0)
+      @_uid = FBE::FinalModelInt32.new(self.buffer, 0)
+      @_name = FBE::FinalModelString.new(self.buffer, 0)
+      @_state = FinalModelState.new(self.buffer, 0)
+      @_wallet = FinalModelBalance.new(self.buffer, 0)
+      @_asset = FBE::FinalModelOptional.new(FinalModelBalance.new(self.buffer, 0), self.buffer, 0)
+      @_orders = FBE::FinalModelVector.new(FinalModelOrder.new(self.buffer, 0), self.buffer, 0)
     end
 
     def uid
@@ -2368,13 +2377,13 @@ module Proto
 
     # Get the allocation size
     def fbe_allocation_size(fbe_value)
-      0
-        + uid.fbe_allocation_size(fbe_value.uid)
-        + name.fbe_allocation_size(fbe_value.name)
-        + state.fbe_allocation_size(fbe_value.state)
-        + wallet.fbe_allocation_size(fbe_value.wallet)
-        + asset.fbe_allocation_size(fbe_value.asset)
-        + orders.fbe_allocation_size(fbe_value.orders)
+      0 \
+        + uid.fbe_allocation_size(fbe_value.uid) \
+        + name.fbe_allocation_size(fbe_value.name) \
+        + state.fbe_allocation_size(fbe_value.state) \
+        + wallet.fbe_allocation_size(fbe_value.wallet) \
+        + asset.fbe_allocation_size(fbe_value.asset) \
+        + orders.fbe_allocation_size(fbe_value.orders) \
     end
 
     # Get the field type
@@ -2398,43 +2407,43 @@ module Proto
 
       uid.fbe_offset = fbe_current_offset
       fbe_field_size = uid.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       name.fbe_offset = fbe_current_offset
       fbe_field_size = name.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       state.fbe_offset = fbe_current_offset
       fbe_field_size = state.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       wallet.fbe_offset = fbe_current_offset
       fbe_field_size = wallet.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       asset.fbe_offset = fbe_current_offset
       fbe_field_size = asset.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       orders.fbe_offset = fbe_current_offset
       fbe_field_size = orders.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
@@ -2558,7 +2567,7 @@ module Proto
   class AccountFinalModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FinalModelAccount(self.buffer, 8)
+      @_model = FinalModelAccount.new(self.buffer, 8)
     end
 
     # Get the model type

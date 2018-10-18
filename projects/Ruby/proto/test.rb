@@ -34,6 +34,9 @@ module Test
         @value = value.is_a?(Enum) ? value.value : value
       end
 
+      def ==(value) @value == value.value end
+      def !=(value) @value == value.value end
+
       def to_i
         @value
       end
@@ -110,7 +113,7 @@ module Test
         return
       end
 
-      write_int32(fbe_offset, value)
+      write_int32(fbe_offset, value.value)
     end
   end
 
@@ -134,7 +137,7 @@ module Test
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return FBE::Integer::MAX
       end
 
       fbe_size
@@ -155,7 +158,7 @@ module Test
         return 0
       end
 
-      write_int32(fbe_offset, value)
+      write_int32(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -174,6 +177,9 @@ module Test
       def initialize(value = 0)
         @value = value.is_a?(Enum) ? value.value : value
       end
+
+      def ==(value) @value == value.value end
+      def !=(value) @value == value.value end
 
       def to_i
         @value
@@ -251,7 +257,7 @@ module Test
         return
       end
 
-      write_uint8(fbe_offset, value)
+      write_uint8(fbe_offset, value.value)
     end
   end
 
@@ -275,7 +281,7 @@ module Test
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return FBE::Integer::MAX
       end
 
       fbe_size
@@ -296,7 +302,7 @@ module Test
         return 0
       end
 
-      write_uint8(fbe_offset, value)
+      write_uint8(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -315,6 +321,9 @@ module Test
       def initialize(value = 0)
         @value = value.is_a?(Flags) ? value.value : value
       end
+
+      def ==(flags) @value == flags.value end
+      def !=(flags) @value == flags.value end
 
       def ~
         Flags.new(~@value)
@@ -451,7 +460,7 @@ module Test
         return
       end
 
-      write_int32(fbe_offset, value)
+      write_int32(fbe_offset, value.value)
     end
   end
 
@@ -475,7 +484,7 @@ module Test
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return FBE::Integer::MAX
       end
 
       fbe_size
@@ -496,7 +505,7 @@ module Test
         return 0
       end
 
-      write_int32(fbe_offset, value)
+      write_int32(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -519,6 +528,9 @@ module Test
       def initialize(value = 0)
         @value = value.is_a?(Flags) ? value.value : value
       end
+
+      def ==(flags) @value == flags.value end
+      def !=(flags) @value == flags.value end
 
       def ~
         Flags.new(~@value)
@@ -699,7 +711,7 @@ module Test
         return
       end
 
-      write_uint64(fbe_offset, value)
+      write_uint64(fbe_offset, value.value)
     end
   end
 
@@ -723,7 +735,7 @@ module Test
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return FBE::Integer::MAX
       end
 
       fbe_size
@@ -744,7 +756,7 @@ module Test
         return 0
       end
 
-      write_uint64(fbe_offset, value)
+      write_uint64(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -1215,51 +1227,51 @@ module Test
   class FieldModelStructSimple < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_uid = FBE::FieldModelInt32(self.buffer, 4 + 4)
-      @_f1 = FBE::FieldModelBool(self.buffer, @_uid.fbe_offset + @_uid.fbe_size)
-      @_f2 = FBE::FieldModelBool(self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
-      @_f3 = FBE::FieldModelByte(self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
-      @_f4 = FBE::FieldModelByte(self.buffer, @_f3.fbe_offset + @_f3.fbe_size)
-      @_f5 = FBE::FieldModelChar(self.buffer, @_f4.fbe_offset + @_f4.fbe_size)
-      @_f6 = FBE::FieldModelChar(self.buffer, @_f5.fbe_offset + @_f5.fbe_size)
-      @_f7 = FBE::FieldModelWChar(self.buffer, @_f6.fbe_offset + @_f6.fbe_size)
-      @_f8 = FBE::FieldModelWChar(self.buffer, @_f7.fbe_offset + @_f7.fbe_size)
-      @_f9 = FBE::FieldModelInt8(self.buffer, @_f8.fbe_offset + @_f8.fbe_size)
-      @_f10 = FBE::FieldModelInt8(self.buffer, @_f9.fbe_offset + @_f9.fbe_size)
-      @_f11 = FBE::FieldModelUInt8(self.buffer, @_f10.fbe_offset + @_f10.fbe_size)
-      @_f12 = FBE::FieldModelUInt8(self.buffer, @_f11.fbe_offset + @_f11.fbe_size)
-      @_f13 = FBE::FieldModelInt16(self.buffer, @_f12.fbe_offset + @_f12.fbe_size)
-      @_f14 = FBE::FieldModelInt16(self.buffer, @_f13.fbe_offset + @_f13.fbe_size)
-      @_f15 = FBE::FieldModelUInt16(self.buffer, @_f14.fbe_offset + @_f14.fbe_size)
-      @_f16 = FBE::FieldModelUInt16(self.buffer, @_f15.fbe_offset + @_f15.fbe_size)
-      @_f17 = FBE::FieldModelInt32(self.buffer, @_f16.fbe_offset + @_f16.fbe_size)
-      @_f18 = FBE::FieldModelInt32(self.buffer, @_f17.fbe_offset + @_f17.fbe_size)
-      @_f19 = FBE::FieldModelUInt32(self.buffer, @_f18.fbe_offset + @_f18.fbe_size)
-      @_f20 = FBE::FieldModelUInt32(self.buffer, @_f19.fbe_offset + @_f19.fbe_size)
-      @_f21 = FBE::FieldModelInt64(self.buffer, @_f20.fbe_offset + @_f20.fbe_size)
-      @_f22 = FBE::FieldModelInt64(self.buffer, @_f21.fbe_offset + @_f21.fbe_size)
-      @_f23 = FBE::FieldModelUInt64(self.buffer, @_f22.fbe_offset + @_f22.fbe_size)
-      @_f24 = FBE::FieldModelUInt64(self.buffer, @_f23.fbe_offset + @_f23.fbe_size)
-      @_f25 = FBE::FieldModelFloat(self.buffer, @_f24.fbe_offset + @_f24.fbe_size)
-      @_f26 = FBE::FieldModelFloat(self.buffer, @_f25.fbe_offset + @_f25.fbe_size)
-      @_f27 = FBE::FieldModelDouble(self.buffer, @_f26.fbe_offset + @_f26.fbe_size)
-      @_f28 = FBE::FieldModelDouble(self.buffer, @_f27.fbe_offset + @_f27.fbe_size)
-      @_f29 = FBE::FieldModelDecimal(self.buffer, @_f28.fbe_offset + @_f28.fbe_size)
-      @_f30 = FBE::FieldModelDecimal(self.buffer, @_f29.fbe_offset + @_f29.fbe_size)
-      @_f31 = FBE::FieldModelString(self.buffer, @_f30.fbe_offset + @_f30.fbe_size)
-      @_f32 = FBE::FieldModelString(self.buffer, @_f31.fbe_offset + @_f31.fbe_size)
-      @_f33 = FBE::FieldModelTimestamp(self.buffer, @_f32.fbe_offset + @_f32.fbe_size)
-      @_f34 = FBE::FieldModelTimestamp(self.buffer, @_f33.fbe_offset + @_f33.fbe_size)
-      @_f35 = FBE::FieldModelTimestamp(self.buffer, @_f34.fbe_offset + @_f34.fbe_size)
-      @_f36 = FBE::FieldModelUUID(self.buffer, @_f35.fbe_offset + @_f35.fbe_size)
-      @_f37 = FBE::FieldModelUUID(self.buffer, @_f36.fbe_offset + @_f36.fbe_size)
-      @_f38 = FBE::FieldModelUUID(self.buffer, @_f37.fbe_offset + @_f37.fbe_size)
-      @_f39 = proto.FieldModelOrderSide(self.buffer, @_f38.fbe_offset + @_f38.fbe_size)
-      @_f40 = proto.FieldModelOrderType(self.buffer, @_f39.fbe_offset + @_f39.fbe_size)
-      @_f41 = proto.FieldModelOrder(self.buffer, @_f40.fbe_offset + @_f40.fbe_size)
-      @_f42 = proto.FieldModelBalance(self.buffer, @_f41.fbe_offset + @_f41.fbe_size)
-      @_f43 = proto.FieldModelState(self.buffer, @_f42.fbe_offset + @_f42.fbe_size)
-      @_f44 = proto.FieldModelAccount(self.buffer, @_f43.fbe_offset + @_f43.fbe_size)
+      @_uid = FBE::FieldModelInt32.new(self.buffer, 4 + 4)
+      @_f1 = FBE::FieldModelBool.new(self.buffer, @_uid.fbe_offset + @_uid.fbe_size)
+      @_f2 = FBE::FieldModelBool.new(self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
+      @_f3 = FBE::FieldModelByte.new(self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
+      @_f4 = FBE::FieldModelByte.new(self.buffer, @_f3.fbe_offset + @_f3.fbe_size)
+      @_f5 = FBE::FieldModelChar.new(self.buffer, @_f4.fbe_offset + @_f4.fbe_size)
+      @_f6 = FBE::FieldModelChar.new(self.buffer, @_f5.fbe_offset + @_f5.fbe_size)
+      @_f7 = FBE::FieldModelWChar.new(self.buffer, @_f6.fbe_offset + @_f6.fbe_size)
+      @_f8 = FBE::FieldModelWChar.new(self.buffer, @_f7.fbe_offset + @_f7.fbe_size)
+      @_f9 = FBE::FieldModelInt8.new(self.buffer, @_f8.fbe_offset + @_f8.fbe_size)
+      @_f10 = FBE::FieldModelInt8.new(self.buffer, @_f9.fbe_offset + @_f9.fbe_size)
+      @_f11 = FBE::FieldModelUInt8.new(self.buffer, @_f10.fbe_offset + @_f10.fbe_size)
+      @_f12 = FBE::FieldModelUInt8.new(self.buffer, @_f11.fbe_offset + @_f11.fbe_size)
+      @_f13 = FBE::FieldModelInt16.new(self.buffer, @_f12.fbe_offset + @_f12.fbe_size)
+      @_f14 = FBE::FieldModelInt16.new(self.buffer, @_f13.fbe_offset + @_f13.fbe_size)
+      @_f15 = FBE::FieldModelUInt16.new(self.buffer, @_f14.fbe_offset + @_f14.fbe_size)
+      @_f16 = FBE::FieldModelUInt16.new(self.buffer, @_f15.fbe_offset + @_f15.fbe_size)
+      @_f17 = FBE::FieldModelInt32.new(self.buffer, @_f16.fbe_offset + @_f16.fbe_size)
+      @_f18 = FBE::FieldModelInt32.new(self.buffer, @_f17.fbe_offset + @_f17.fbe_size)
+      @_f19 = FBE::FieldModelUInt32.new(self.buffer, @_f18.fbe_offset + @_f18.fbe_size)
+      @_f20 = FBE::FieldModelUInt32.new(self.buffer, @_f19.fbe_offset + @_f19.fbe_size)
+      @_f21 = FBE::FieldModelInt64.new(self.buffer, @_f20.fbe_offset + @_f20.fbe_size)
+      @_f22 = FBE::FieldModelInt64.new(self.buffer, @_f21.fbe_offset + @_f21.fbe_size)
+      @_f23 = FBE::FieldModelUInt64.new(self.buffer, @_f22.fbe_offset + @_f22.fbe_size)
+      @_f24 = FBE::FieldModelUInt64.new(self.buffer, @_f23.fbe_offset + @_f23.fbe_size)
+      @_f25 = FBE::FieldModelFloat.new(self.buffer, @_f24.fbe_offset + @_f24.fbe_size)
+      @_f26 = FBE::FieldModelFloat.new(self.buffer, @_f25.fbe_offset + @_f25.fbe_size)
+      @_f27 = FBE::FieldModelDouble.new(self.buffer, @_f26.fbe_offset + @_f26.fbe_size)
+      @_f28 = FBE::FieldModelDouble.new(self.buffer, @_f27.fbe_offset + @_f27.fbe_size)
+      @_f29 = FBE::FieldModelDecimal.new(self.buffer, @_f28.fbe_offset + @_f28.fbe_size)
+      @_f30 = FBE::FieldModelDecimal.new(self.buffer, @_f29.fbe_offset + @_f29.fbe_size)
+      @_f31 = FBE::FieldModelString.new(self.buffer, @_f30.fbe_offset + @_f30.fbe_size)
+      @_f32 = FBE::FieldModelString.new(self.buffer, @_f31.fbe_offset + @_f31.fbe_size)
+      @_f33 = FBE::FieldModelTimestamp.new(self.buffer, @_f32.fbe_offset + @_f32.fbe_size)
+      @_f34 = FBE::FieldModelTimestamp.new(self.buffer, @_f33.fbe_offset + @_f33.fbe_size)
+      @_f35 = FBE::FieldModelTimestamp.new(self.buffer, @_f34.fbe_offset + @_f34.fbe_size)
+      @_f36 = FBE::FieldModelUUID.new(self.buffer, @_f35.fbe_offset + @_f35.fbe_size)
+      @_f37 = FBE::FieldModelUUID.new(self.buffer, @_f36.fbe_offset + @_f36.fbe_size)
+      @_f38 = FBE::FieldModelUUID.new(self.buffer, @_f37.fbe_offset + @_f37.fbe_size)
+      @_f39 = proto.FieldModelOrderSide.new(self.buffer, @_f38.fbe_offset + @_f38.fbe_size)
+      @_f40 = proto.FieldModelOrderType.new(self.buffer, @_f39.fbe_offset + @_f39.fbe_size)
+      @_f41 = proto.FieldModelOrder.new(self.buffer, @_f40.fbe_offset + @_f40.fbe_size)
+      @_f42 = proto.FieldModelBalance.new(self.buffer, @_f41.fbe_offset + @_f41.fbe_size)
+      @_f43 = proto.FieldModelState.new(self.buffer, @_f42.fbe_offset + @_f42.fbe_size)
+      @_f44 = proto.FieldModelAccount.new(self.buffer, @_f43.fbe_offset + @_f43.fbe_size)
     end
 
     def uid
@@ -1449,52 +1461,52 @@ module Test
 
     # Get the field body size
     def fbe_body
-      4 + 4
-        + uid.fbe_size
-        + f1.fbe_size
-        + f2.fbe_size
-        + f3.fbe_size
-        + f4.fbe_size
-        + f5.fbe_size
-        + f6.fbe_size
-        + f7.fbe_size
-        + f8.fbe_size
-        + f9.fbe_size
-        + f10.fbe_size
-        + f11.fbe_size
-        + f12.fbe_size
-        + f13.fbe_size
-        + f14.fbe_size
-        + f15.fbe_size
-        + f16.fbe_size
-        + f17.fbe_size
-        + f18.fbe_size
-        + f19.fbe_size
-        + f20.fbe_size
-        + f21.fbe_size
-        + f22.fbe_size
-        + f23.fbe_size
-        + f24.fbe_size
-        + f25.fbe_size
-        + f26.fbe_size
-        + f27.fbe_size
-        + f28.fbe_size
-        + f29.fbe_size
-        + f30.fbe_size
-        + f31.fbe_size
-        + f32.fbe_size
-        + f33.fbe_size
-        + f34.fbe_size
-        + f35.fbe_size
-        + f36.fbe_size
-        + f37.fbe_size
-        + f38.fbe_size
-        + f39.fbe_size
-        + f40.fbe_size
-        + f41.fbe_size
-        + f42.fbe_size
-        + f43.fbe_size
-        + f44.fbe_size
+      4 + 4 \
+        + uid.fbe_size \
+        + f1.fbe_size \
+        + f2.fbe_size \
+        + f3.fbe_size \
+        + f4.fbe_size \
+        + f5.fbe_size \
+        + f6.fbe_size \
+        + f7.fbe_size \
+        + f8.fbe_size \
+        + f9.fbe_size \
+        + f10.fbe_size \
+        + f11.fbe_size \
+        + f12.fbe_size \
+        + f13.fbe_size \
+        + f14.fbe_size \
+        + f15.fbe_size \
+        + f16.fbe_size \
+        + f17.fbe_size \
+        + f18.fbe_size \
+        + f19.fbe_size \
+        + f20.fbe_size \
+        + f21.fbe_size \
+        + f22.fbe_size \
+        + f23.fbe_size \
+        + f24.fbe_size \
+        + f25.fbe_size \
+        + f26.fbe_size \
+        + f27.fbe_size \
+        + f28.fbe_size \
+        + f29.fbe_size \
+        + f30.fbe_size \
+        + f31.fbe_size \
+        + f32.fbe_size \
+        + f33.fbe_size \
+        + f34.fbe_size \
+        + f35.fbe_size \
+        + f36.fbe_size \
+        + f37.fbe_size \
+        + f38.fbe_size \
+        + f39.fbe_size \
+        + f40.fbe_size \
+        + f41.fbe_size \
+        + f42.fbe_size \
+        + f43.fbe_size \
+        + f44.fbe_size \
     end
 
     # Get the field extra size
@@ -1510,52 +1522,52 @@ module Test
 
       @_buffer.shift(fbe_struct_offset)
 
-      fbe_result = fbe_body
-        + uid.fbe_extra
-        + f1.fbe_extra
-        + f2.fbe_extra
-        + f3.fbe_extra
-        + f4.fbe_extra
-        + f5.fbe_extra
-        + f6.fbe_extra
-        + f7.fbe_extra
-        + f8.fbe_extra
-        + f9.fbe_extra
-        + f10.fbe_extra
-        + f11.fbe_extra
-        + f12.fbe_extra
-        + f13.fbe_extra
-        + f14.fbe_extra
-        + f15.fbe_extra
-        + f16.fbe_extra
-        + f17.fbe_extra
-        + f18.fbe_extra
-        + f19.fbe_extra
-        + f20.fbe_extra
-        + f21.fbe_extra
-        + f22.fbe_extra
-        + f23.fbe_extra
-        + f24.fbe_extra
-        + f25.fbe_extra
-        + f26.fbe_extra
-        + f27.fbe_extra
-        + f28.fbe_extra
-        + f29.fbe_extra
-        + f30.fbe_extra
-        + f31.fbe_extra
-        + f32.fbe_extra
-        + f33.fbe_extra
-        + f34.fbe_extra
-        + f35.fbe_extra
-        + f36.fbe_extra
-        + f37.fbe_extra
-        + f38.fbe_extra
-        + f39.fbe_extra
-        + f40.fbe_extra
-        + f41.fbe_extra
-        + f42.fbe_extra
-        + f43.fbe_extra
-        + f44.fbe_extra
+      fbe_result = fbe_body \
+        + uid.fbe_extra \
+        + f1.fbe_extra \
+        + f2.fbe_extra \
+        + f3.fbe_extra \
+        + f4.fbe_extra \
+        + f5.fbe_extra \
+        + f6.fbe_extra \
+        + f7.fbe_extra \
+        + f8.fbe_extra \
+        + f9.fbe_extra \
+        + f10.fbe_extra \
+        + f11.fbe_extra \
+        + f12.fbe_extra \
+        + f13.fbe_extra \
+        + f14.fbe_extra \
+        + f15.fbe_extra \
+        + f16.fbe_extra \
+        + f17.fbe_extra \
+        + f18.fbe_extra \
+        + f19.fbe_extra \
+        + f20.fbe_extra \
+        + f21.fbe_extra \
+        + f22.fbe_extra \
+        + f23.fbe_extra \
+        + f24.fbe_extra \
+        + f25.fbe_extra \
+        + f26.fbe_extra \
+        + f27.fbe_extra \
+        + f28.fbe_extra \
+        + f29.fbe_extra \
+        + f30.fbe_extra \
+        + f31.fbe_extra \
+        + f32.fbe_extra \
+        + f33.fbe_extra \
+        + f34.fbe_extra \
+        + f35.fbe_extra \
+        + f36.fbe_extra \
+        + f37.fbe_extra \
+        + f38.fbe_extra \
+        + f39.fbe_extra \
+        + f40.fbe_extra \
+        + f41.fbe_extra \
+        + f42.fbe_extra \
+        + f43.fbe_extra \
+        + f44.fbe_extra \
 
       @_buffer.unshift(fbe_struct_offset)
 
@@ -2501,7 +2513,7 @@ module Test
   class StructSimpleModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FieldModelStructSimple(self.buffer, 4)
+      @_model = FieldModelStructSimple.new(self.buffer, 4)
     end
 
     def model
@@ -2579,51 +2591,51 @@ module Test
   class FinalModelStructSimple < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_uid = FBE::FinalModelInt32(self.buffer, 0)
-      @_f1 = FBE::FinalModelBool(self.buffer, 0)
-      @_f2 = FBE::FinalModelBool(self.buffer, 0)
-      @_f3 = FBE::FinalModelByte(self.buffer, 0)
-      @_f4 = FBE::FinalModelByte(self.buffer, 0)
-      @_f5 = FBE::FinalModelChar(self.buffer, 0)
-      @_f6 = FBE::FinalModelChar(self.buffer, 0)
-      @_f7 = FBE::FinalModelWChar(self.buffer, 0)
-      @_f8 = FBE::FinalModelWChar(self.buffer, 0)
-      @_f9 = FBE::FinalModelInt8(self.buffer, 0)
-      @_f10 = FBE::FinalModelInt8(self.buffer, 0)
-      @_f11 = FBE::FinalModelUInt8(self.buffer, 0)
-      @_f12 = FBE::FinalModelUInt8(self.buffer, 0)
-      @_f13 = FBE::FinalModelInt16(self.buffer, 0)
-      @_f14 = FBE::FinalModelInt16(self.buffer, 0)
-      @_f15 = FBE::FinalModelUInt16(self.buffer, 0)
-      @_f16 = FBE::FinalModelUInt16(self.buffer, 0)
-      @_f17 = FBE::FinalModelInt32(self.buffer, 0)
-      @_f18 = FBE::FinalModelInt32(self.buffer, 0)
-      @_f19 = FBE::FinalModelUInt32(self.buffer, 0)
-      @_f20 = FBE::FinalModelUInt32(self.buffer, 0)
-      @_f21 = FBE::FinalModelInt64(self.buffer, 0)
-      @_f22 = FBE::FinalModelInt64(self.buffer, 0)
-      @_f23 = FBE::FinalModelUInt64(self.buffer, 0)
-      @_f24 = FBE::FinalModelUInt64(self.buffer, 0)
-      @_f25 = FBE::FinalModelFloat(self.buffer, 0)
-      @_f26 = FBE::FinalModelFloat(self.buffer, 0)
-      @_f27 = FBE::FinalModelDouble(self.buffer, 0)
-      @_f28 = FBE::FinalModelDouble(self.buffer, 0)
-      @_f29 = FBE::FinalModelDecimal(self.buffer, 0)
-      @_f30 = FBE::FinalModelDecimal(self.buffer, 0)
-      @_f31 = FBE::FinalModelString(self.buffer, 0)
-      @_f32 = FBE::FinalModelString(self.buffer, 0)
-      @_f33 = FBE::FinalModelTimestamp(self.buffer, 0)
-      @_f34 = FBE::FinalModelTimestamp(self.buffer, 0)
-      @_f35 = FBE::FinalModelTimestamp(self.buffer, 0)
-      @_f36 = FBE::FinalModelUUID(self.buffer, 0)
-      @_f37 = FBE::FinalModelUUID(self.buffer, 0)
-      @_f38 = FBE::FinalModelUUID(self.buffer, 0)
-      @_f39 = proto.FinalModelOrderSide(self.buffer, 0)
-      @_f40 = proto.FinalModelOrderType(self.buffer, 0)
-      @_f41 = proto.FinalModelOrder(self.buffer, 0)
-      @_f42 = proto.FinalModelBalance(self.buffer, 0)
-      @_f43 = proto.FinalModelState(self.buffer, 0)
-      @_f44 = proto.FinalModelAccount(self.buffer, 0)
+      @_uid = FBE::FinalModelInt32.new(self.buffer, 0)
+      @_f1 = FBE::FinalModelBool.new(self.buffer, 0)
+      @_f2 = FBE::FinalModelBool.new(self.buffer, 0)
+      @_f3 = FBE::FinalModelByte.new(self.buffer, 0)
+      @_f4 = FBE::FinalModelByte.new(self.buffer, 0)
+      @_f5 = FBE::FinalModelChar.new(self.buffer, 0)
+      @_f6 = FBE::FinalModelChar.new(self.buffer, 0)
+      @_f7 = FBE::FinalModelWChar.new(self.buffer, 0)
+      @_f8 = FBE::FinalModelWChar.new(self.buffer, 0)
+      @_f9 = FBE::FinalModelInt8.new(self.buffer, 0)
+      @_f10 = FBE::FinalModelInt8.new(self.buffer, 0)
+      @_f11 = FBE::FinalModelUInt8.new(self.buffer, 0)
+      @_f12 = FBE::FinalModelUInt8.new(self.buffer, 0)
+      @_f13 = FBE::FinalModelInt16.new(self.buffer, 0)
+      @_f14 = FBE::FinalModelInt16.new(self.buffer, 0)
+      @_f15 = FBE::FinalModelUInt16.new(self.buffer, 0)
+      @_f16 = FBE::FinalModelUInt16.new(self.buffer, 0)
+      @_f17 = FBE::FinalModelInt32.new(self.buffer, 0)
+      @_f18 = FBE::FinalModelInt32.new(self.buffer, 0)
+      @_f19 = FBE::FinalModelUInt32.new(self.buffer, 0)
+      @_f20 = FBE::FinalModelUInt32.new(self.buffer, 0)
+      @_f21 = FBE::FinalModelInt64.new(self.buffer, 0)
+      @_f22 = FBE::FinalModelInt64.new(self.buffer, 0)
+      @_f23 = FBE::FinalModelUInt64.new(self.buffer, 0)
+      @_f24 = FBE::FinalModelUInt64.new(self.buffer, 0)
+      @_f25 = FBE::FinalModelFloat.new(self.buffer, 0)
+      @_f26 = FBE::FinalModelFloat.new(self.buffer, 0)
+      @_f27 = FBE::FinalModelDouble.new(self.buffer, 0)
+      @_f28 = FBE::FinalModelDouble.new(self.buffer, 0)
+      @_f29 = FBE::FinalModelDecimal.new(self.buffer, 0)
+      @_f30 = FBE::FinalModelDecimal.new(self.buffer, 0)
+      @_f31 = FBE::FinalModelString.new(self.buffer, 0)
+      @_f32 = FBE::FinalModelString.new(self.buffer, 0)
+      @_f33 = FBE::FinalModelTimestamp.new(self.buffer, 0)
+      @_f34 = FBE::FinalModelTimestamp.new(self.buffer, 0)
+      @_f35 = FBE::FinalModelTimestamp.new(self.buffer, 0)
+      @_f36 = FBE::FinalModelUUID.new(self.buffer, 0)
+      @_f37 = FBE::FinalModelUUID.new(self.buffer, 0)
+      @_f38 = FBE::FinalModelUUID.new(self.buffer, 0)
+      @_f39 = proto.FinalModelOrderSide.new(self.buffer, 0)
+      @_f40 = proto.FinalModelOrderType.new(self.buffer, 0)
+      @_f41 = proto.FinalModelOrder.new(self.buffer, 0)
+      @_f42 = proto.FinalModelBalance.new(self.buffer, 0)
+      @_f43 = proto.FinalModelState.new(self.buffer, 0)
+      @_f44 = proto.FinalModelAccount.new(self.buffer, 0)
     end
 
     def uid
@@ -2808,52 +2820,52 @@ module Test
 
     # Get the allocation size
     def fbe_allocation_size(fbe_value)
-      0
-        + uid.fbe_allocation_size(fbe_value.uid)
-        + f1.fbe_allocation_size(fbe_value.f1)
-        + f2.fbe_allocation_size(fbe_value.f2)
-        + f3.fbe_allocation_size(fbe_value.f3)
-        + f4.fbe_allocation_size(fbe_value.f4)
-        + f5.fbe_allocation_size(fbe_value.f5)
-        + f6.fbe_allocation_size(fbe_value.f6)
-        + f7.fbe_allocation_size(fbe_value.f7)
-        + f8.fbe_allocation_size(fbe_value.f8)
-        + f9.fbe_allocation_size(fbe_value.f9)
-        + f10.fbe_allocation_size(fbe_value.f10)
-        + f11.fbe_allocation_size(fbe_value.f11)
-        + f12.fbe_allocation_size(fbe_value.f12)
-        + f13.fbe_allocation_size(fbe_value.f13)
-        + f14.fbe_allocation_size(fbe_value.f14)
-        + f15.fbe_allocation_size(fbe_value.f15)
-        + f16.fbe_allocation_size(fbe_value.f16)
-        + f17.fbe_allocation_size(fbe_value.f17)
-        + f18.fbe_allocation_size(fbe_value.f18)
-        + f19.fbe_allocation_size(fbe_value.f19)
-        + f20.fbe_allocation_size(fbe_value.f20)
-        + f21.fbe_allocation_size(fbe_value.f21)
-        + f22.fbe_allocation_size(fbe_value.f22)
-        + f23.fbe_allocation_size(fbe_value.f23)
-        + f24.fbe_allocation_size(fbe_value.f24)
-        + f25.fbe_allocation_size(fbe_value.f25)
-        + f26.fbe_allocation_size(fbe_value.f26)
-        + f27.fbe_allocation_size(fbe_value.f27)
-        + f28.fbe_allocation_size(fbe_value.f28)
-        + f29.fbe_allocation_size(fbe_value.f29)
-        + f30.fbe_allocation_size(fbe_value.f30)
-        + f31.fbe_allocation_size(fbe_value.f31)
-        + f32.fbe_allocation_size(fbe_value.f32)
-        + f33.fbe_allocation_size(fbe_value.f33)
-        + f34.fbe_allocation_size(fbe_value.f34)
-        + f35.fbe_allocation_size(fbe_value.f35)
-        + f36.fbe_allocation_size(fbe_value.f36)
-        + f37.fbe_allocation_size(fbe_value.f37)
-        + f38.fbe_allocation_size(fbe_value.f38)
-        + f39.fbe_allocation_size(fbe_value.f39)
-        + f40.fbe_allocation_size(fbe_value.f40)
-        + f41.fbe_allocation_size(fbe_value.f41)
-        + f42.fbe_allocation_size(fbe_value.f42)
-        + f43.fbe_allocation_size(fbe_value.f43)
-        + f44.fbe_allocation_size(fbe_value.f44)
+      0 \
+        + uid.fbe_allocation_size(fbe_value.uid) \
+        + f1.fbe_allocation_size(fbe_value.f1) \
+        + f2.fbe_allocation_size(fbe_value.f2) \
+        + f3.fbe_allocation_size(fbe_value.f3) \
+        + f4.fbe_allocation_size(fbe_value.f4) \
+        + f5.fbe_allocation_size(fbe_value.f5) \
+        + f6.fbe_allocation_size(fbe_value.f6) \
+        + f7.fbe_allocation_size(fbe_value.f7) \
+        + f8.fbe_allocation_size(fbe_value.f8) \
+        + f9.fbe_allocation_size(fbe_value.f9) \
+        + f10.fbe_allocation_size(fbe_value.f10) \
+        + f11.fbe_allocation_size(fbe_value.f11) \
+        + f12.fbe_allocation_size(fbe_value.f12) \
+        + f13.fbe_allocation_size(fbe_value.f13) \
+        + f14.fbe_allocation_size(fbe_value.f14) \
+        + f15.fbe_allocation_size(fbe_value.f15) \
+        + f16.fbe_allocation_size(fbe_value.f16) \
+        + f17.fbe_allocation_size(fbe_value.f17) \
+        + f18.fbe_allocation_size(fbe_value.f18) \
+        + f19.fbe_allocation_size(fbe_value.f19) \
+        + f20.fbe_allocation_size(fbe_value.f20) \
+        + f21.fbe_allocation_size(fbe_value.f21) \
+        + f22.fbe_allocation_size(fbe_value.f22) \
+        + f23.fbe_allocation_size(fbe_value.f23) \
+        + f24.fbe_allocation_size(fbe_value.f24) \
+        + f25.fbe_allocation_size(fbe_value.f25) \
+        + f26.fbe_allocation_size(fbe_value.f26) \
+        + f27.fbe_allocation_size(fbe_value.f27) \
+        + f28.fbe_allocation_size(fbe_value.f28) \
+        + f29.fbe_allocation_size(fbe_value.f29) \
+        + f30.fbe_allocation_size(fbe_value.f30) \
+        + f31.fbe_allocation_size(fbe_value.f31) \
+        + f32.fbe_allocation_size(fbe_value.f32) \
+        + f33.fbe_allocation_size(fbe_value.f33) \
+        + f34.fbe_allocation_size(fbe_value.f34) \
+        + f35.fbe_allocation_size(fbe_value.f35) \
+        + f36.fbe_allocation_size(fbe_value.f36) \
+        + f37.fbe_allocation_size(fbe_value.f37) \
+        + f38.fbe_allocation_size(fbe_value.f38) \
+        + f39.fbe_allocation_size(fbe_value.f39) \
+        + f40.fbe_allocation_size(fbe_value.f40) \
+        + f41.fbe_allocation_size(fbe_value.f41) \
+        + f42.fbe_allocation_size(fbe_value.f42) \
+        + f43.fbe_allocation_size(fbe_value.f43) \
+        + f44.fbe_allocation_size(fbe_value.f44) \
     end
 
     # Get the field type
@@ -2877,316 +2889,316 @@ module Test
 
       uid.fbe_offset = fbe_current_offset
       fbe_field_size = uid.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f1.fbe_offset = fbe_current_offset
       fbe_field_size = f1.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f2.fbe_offset = fbe_current_offset
       fbe_field_size = f2.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f3.fbe_offset = fbe_current_offset
       fbe_field_size = f3.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f4.fbe_offset = fbe_current_offset
       fbe_field_size = f4.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f5.fbe_offset = fbe_current_offset
       fbe_field_size = f5.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f6.fbe_offset = fbe_current_offset
       fbe_field_size = f6.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f7.fbe_offset = fbe_current_offset
       fbe_field_size = f7.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f8.fbe_offset = fbe_current_offset
       fbe_field_size = f8.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f9.fbe_offset = fbe_current_offset
       fbe_field_size = f9.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f10.fbe_offset = fbe_current_offset
       fbe_field_size = f10.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f11.fbe_offset = fbe_current_offset
       fbe_field_size = f11.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f12.fbe_offset = fbe_current_offset
       fbe_field_size = f12.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f13.fbe_offset = fbe_current_offset
       fbe_field_size = f13.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f14.fbe_offset = fbe_current_offset
       fbe_field_size = f14.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f15.fbe_offset = fbe_current_offset
       fbe_field_size = f15.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f16.fbe_offset = fbe_current_offset
       fbe_field_size = f16.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f17.fbe_offset = fbe_current_offset
       fbe_field_size = f17.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f18.fbe_offset = fbe_current_offset
       fbe_field_size = f18.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f19.fbe_offset = fbe_current_offset
       fbe_field_size = f19.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f20.fbe_offset = fbe_current_offset
       fbe_field_size = f20.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f21.fbe_offset = fbe_current_offset
       fbe_field_size = f21.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f22.fbe_offset = fbe_current_offset
       fbe_field_size = f22.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f23.fbe_offset = fbe_current_offset
       fbe_field_size = f23.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f24.fbe_offset = fbe_current_offset
       fbe_field_size = f24.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f25.fbe_offset = fbe_current_offset
       fbe_field_size = f25.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f26.fbe_offset = fbe_current_offset
       fbe_field_size = f26.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f27.fbe_offset = fbe_current_offset
       fbe_field_size = f27.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f28.fbe_offset = fbe_current_offset
       fbe_field_size = f28.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f29.fbe_offset = fbe_current_offset
       fbe_field_size = f29.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f30.fbe_offset = fbe_current_offset
       fbe_field_size = f30.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f31.fbe_offset = fbe_current_offset
       fbe_field_size = f31.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f32.fbe_offset = fbe_current_offset
       fbe_field_size = f32.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f33.fbe_offset = fbe_current_offset
       fbe_field_size = f33.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f34.fbe_offset = fbe_current_offset
       fbe_field_size = f34.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f35.fbe_offset = fbe_current_offset
       fbe_field_size = f35.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f36.fbe_offset = fbe_current_offset
       fbe_field_size = f36.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f37.fbe_offset = fbe_current_offset
       fbe_field_size = f37.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f38.fbe_offset = fbe_current_offset
       fbe_field_size = f38.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f39.fbe_offset = fbe_current_offset
       fbe_field_size = f39.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f40.fbe_offset = fbe_current_offset
       fbe_field_size = f40.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f41.fbe_offset = fbe_current_offset
       fbe_field_size = f41.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f42.fbe_offset = fbe_current_offset
       fbe_field_size = f42.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f43.fbe_offset = fbe_current_offset
       fbe_field_size = f43.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f44.fbe_offset = fbe_current_offset
       fbe_field_size = f44.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
@@ -3818,7 +3830,7 @@ module Test
   class StructSimpleFinalModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FinalModelStructSimple(self.buffer, 8)
+      @_model = FinalModelStructSimple.new(self.buffer, 8)
     end
 
     # Get the model type
@@ -4543,73 +4555,73 @@ module Test
   class FieldModelStructOptional < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_parent = FieldModelStructSimple(self.buffer, 4 + 4)
-      @_f100 = FBE::FieldModelOptional(FBE::FieldModelBool(self.buffer, @_parent.fbe_offset + @_parent.fbe_body - 4 - 4), self.buffer, @_parent.fbe_offset + @_parent.fbe_body - 4 - 4)
-      @_f101 = FBE::FieldModelOptional(FBE::FieldModelBool(self.buffer, @_f100.fbe_offset + @_f100.fbe_size), self.buffer, @_f100.fbe_offset + @_f100.fbe_size)
-      @_f102 = FBE::FieldModelOptional(FBE::FieldModelBool(self.buffer, @_f101.fbe_offset + @_f101.fbe_size), self.buffer, @_f101.fbe_offset + @_f101.fbe_size)
-      @_f103 = FBE::FieldModelOptional(FBE::FieldModelByte(self.buffer, @_f102.fbe_offset + @_f102.fbe_size), self.buffer, @_f102.fbe_offset + @_f102.fbe_size)
-      @_f104 = FBE::FieldModelOptional(FBE::FieldModelByte(self.buffer, @_f103.fbe_offset + @_f103.fbe_size), self.buffer, @_f103.fbe_offset + @_f103.fbe_size)
-      @_f105 = FBE::FieldModelOptional(FBE::FieldModelByte(self.buffer, @_f104.fbe_offset + @_f104.fbe_size), self.buffer, @_f104.fbe_offset + @_f104.fbe_size)
-      @_f106 = FBE::FieldModelOptional(FBE::FieldModelChar(self.buffer, @_f105.fbe_offset + @_f105.fbe_size), self.buffer, @_f105.fbe_offset + @_f105.fbe_size)
-      @_f107 = FBE::FieldModelOptional(FBE::FieldModelChar(self.buffer, @_f106.fbe_offset + @_f106.fbe_size), self.buffer, @_f106.fbe_offset + @_f106.fbe_size)
-      @_f108 = FBE::FieldModelOptional(FBE::FieldModelChar(self.buffer, @_f107.fbe_offset + @_f107.fbe_size), self.buffer, @_f107.fbe_offset + @_f107.fbe_size)
-      @_f109 = FBE::FieldModelOptional(FBE::FieldModelWChar(self.buffer, @_f108.fbe_offset + @_f108.fbe_size), self.buffer, @_f108.fbe_offset + @_f108.fbe_size)
-      @_f110 = FBE::FieldModelOptional(FBE::FieldModelWChar(self.buffer, @_f109.fbe_offset + @_f109.fbe_size), self.buffer, @_f109.fbe_offset + @_f109.fbe_size)
-      @_f111 = FBE::FieldModelOptional(FBE::FieldModelWChar(self.buffer, @_f110.fbe_offset + @_f110.fbe_size), self.buffer, @_f110.fbe_offset + @_f110.fbe_size)
-      @_f112 = FBE::FieldModelOptional(FBE::FieldModelInt8(self.buffer, @_f111.fbe_offset + @_f111.fbe_size), self.buffer, @_f111.fbe_offset + @_f111.fbe_size)
-      @_f113 = FBE::FieldModelOptional(FBE::FieldModelInt8(self.buffer, @_f112.fbe_offset + @_f112.fbe_size), self.buffer, @_f112.fbe_offset + @_f112.fbe_size)
-      @_f114 = FBE::FieldModelOptional(FBE::FieldModelInt8(self.buffer, @_f113.fbe_offset + @_f113.fbe_size), self.buffer, @_f113.fbe_offset + @_f113.fbe_size)
-      @_f115 = FBE::FieldModelOptional(FBE::FieldModelUInt8(self.buffer, @_f114.fbe_offset + @_f114.fbe_size), self.buffer, @_f114.fbe_offset + @_f114.fbe_size)
-      @_f116 = FBE::FieldModelOptional(FBE::FieldModelUInt8(self.buffer, @_f115.fbe_offset + @_f115.fbe_size), self.buffer, @_f115.fbe_offset + @_f115.fbe_size)
-      @_f117 = FBE::FieldModelOptional(FBE::FieldModelUInt8(self.buffer, @_f116.fbe_offset + @_f116.fbe_size), self.buffer, @_f116.fbe_offset + @_f116.fbe_size)
-      @_f118 = FBE::FieldModelOptional(FBE::FieldModelInt16(self.buffer, @_f117.fbe_offset + @_f117.fbe_size), self.buffer, @_f117.fbe_offset + @_f117.fbe_size)
-      @_f119 = FBE::FieldModelOptional(FBE::FieldModelInt16(self.buffer, @_f118.fbe_offset + @_f118.fbe_size), self.buffer, @_f118.fbe_offset + @_f118.fbe_size)
-      @_f120 = FBE::FieldModelOptional(FBE::FieldModelInt16(self.buffer, @_f119.fbe_offset + @_f119.fbe_size), self.buffer, @_f119.fbe_offset + @_f119.fbe_size)
-      @_f121 = FBE::FieldModelOptional(FBE::FieldModelUInt16(self.buffer, @_f120.fbe_offset + @_f120.fbe_size), self.buffer, @_f120.fbe_offset + @_f120.fbe_size)
-      @_f122 = FBE::FieldModelOptional(FBE::FieldModelUInt16(self.buffer, @_f121.fbe_offset + @_f121.fbe_size), self.buffer, @_f121.fbe_offset + @_f121.fbe_size)
-      @_f123 = FBE::FieldModelOptional(FBE::FieldModelUInt16(self.buffer, @_f122.fbe_offset + @_f122.fbe_size), self.buffer, @_f122.fbe_offset + @_f122.fbe_size)
-      @_f124 = FBE::FieldModelOptional(FBE::FieldModelInt32(self.buffer, @_f123.fbe_offset + @_f123.fbe_size), self.buffer, @_f123.fbe_offset + @_f123.fbe_size)
-      @_f125 = FBE::FieldModelOptional(FBE::FieldModelInt32(self.buffer, @_f124.fbe_offset + @_f124.fbe_size), self.buffer, @_f124.fbe_offset + @_f124.fbe_size)
-      @_f126 = FBE::FieldModelOptional(FBE::FieldModelInt32(self.buffer, @_f125.fbe_offset + @_f125.fbe_size), self.buffer, @_f125.fbe_offset + @_f125.fbe_size)
-      @_f127 = FBE::FieldModelOptional(FBE::FieldModelUInt32(self.buffer, @_f126.fbe_offset + @_f126.fbe_size), self.buffer, @_f126.fbe_offset + @_f126.fbe_size)
-      @_f128 = FBE::FieldModelOptional(FBE::FieldModelUInt32(self.buffer, @_f127.fbe_offset + @_f127.fbe_size), self.buffer, @_f127.fbe_offset + @_f127.fbe_size)
-      @_f129 = FBE::FieldModelOptional(FBE::FieldModelUInt32(self.buffer, @_f128.fbe_offset + @_f128.fbe_size), self.buffer, @_f128.fbe_offset + @_f128.fbe_size)
-      @_f130 = FBE::FieldModelOptional(FBE::FieldModelInt64(self.buffer, @_f129.fbe_offset + @_f129.fbe_size), self.buffer, @_f129.fbe_offset + @_f129.fbe_size)
-      @_f131 = FBE::FieldModelOptional(FBE::FieldModelInt64(self.buffer, @_f130.fbe_offset + @_f130.fbe_size), self.buffer, @_f130.fbe_offset + @_f130.fbe_size)
-      @_f132 = FBE::FieldModelOptional(FBE::FieldModelInt64(self.buffer, @_f131.fbe_offset + @_f131.fbe_size), self.buffer, @_f131.fbe_offset + @_f131.fbe_size)
-      @_f133 = FBE::FieldModelOptional(FBE::FieldModelUInt64(self.buffer, @_f132.fbe_offset + @_f132.fbe_size), self.buffer, @_f132.fbe_offset + @_f132.fbe_size)
-      @_f134 = FBE::FieldModelOptional(FBE::FieldModelUInt64(self.buffer, @_f133.fbe_offset + @_f133.fbe_size), self.buffer, @_f133.fbe_offset + @_f133.fbe_size)
-      @_f135 = FBE::FieldModelOptional(FBE::FieldModelUInt64(self.buffer, @_f134.fbe_offset + @_f134.fbe_size), self.buffer, @_f134.fbe_offset + @_f134.fbe_size)
-      @_f136 = FBE::FieldModelOptional(FBE::FieldModelFloat(self.buffer, @_f135.fbe_offset + @_f135.fbe_size), self.buffer, @_f135.fbe_offset + @_f135.fbe_size)
-      @_f137 = FBE::FieldModelOptional(FBE::FieldModelFloat(self.buffer, @_f136.fbe_offset + @_f136.fbe_size), self.buffer, @_f136.fbe_offset + @_f136.fbe_size)
-      @_f138 = FBE::FieldModelOptional(FBE::FieldModelFloat(self.buffer, @_f137.fbe_offset + @_f137.fbe_size), self.buffer, @_f137.fbe_offset + @_f137.fbe_size)
-      @_f139 = FBE::FieldModelOptional(FBE::FieldModelDouble(self.buffer, @_f138.fbe_offset + @_f138.fbe_size), self.buffer, @_f138.fbe_offset + @_f138.fbe_size)
-      @_f140 = FBE::FieldModelOptional(FBE::FieldModelDouble(self.buffer, @_f139.fbe_offset + @_f139.fbe_size), self.buffer, @_f139.fbe_offset + @_f139.fbe_size)
-      @_f141 = FBE::FieldModelOptional(FBE::FieldModelDouble(self.buffer, @_f140.fbe_offset + @_f140.fbe_size), self.buffer, @_f140.fbe_offset + @_f140.fbe_size)
-      @_f142 = FBE::FieldModelOptional(FBE::FieldModelDecimal(self.buffer, @_f141.fbe_offset + @_f141.fbe_size), self.buffer, @_f141.fbe_offset + @_f141.fbe_size)
-      @_f143 = FBE::FieldModelOptional(FBE::FieldModelDecimal(self.buffer, @_f142.fbe_offset + @_f142.fbe_size), self.buffer, @_f142.fbe_offset + @_f142.fbe_size)
-      @_f144 = FBE::FieldModelOptional(FBE::FieldModelDecimal(self.buffer, @_f143.fbe_offset + @_f143.fbe_size), self.buffer, @_f143.fbe_offset + @_f143.fbe_size)
-      @_f145 = FBE::FieldModelOptional(FBE::FieldModelString(self.buffer, @_f144.fbe_offset + @_f144.fbe_size), self.buffer, @_f144.fbe_offset + @_f144.fbe_size)
-      @_f146 = FBE::FieldModelOptional(FBE::FieldModelString(self.buffer, @_f145.fbe_offset + @_f145.fbe_size), self.buffer, @_f145.fbe_offset + @_f145.fbe_size)
-      @_f147 = FBE::FieldModelOptional(FBE::FieldModelString(self.buffer, @_f146.fbe_offset + @_f146.fbe_size), self.buffer, @_f146.fbe_offset + @_f146.fbe_size)
-      @_f148 = FBE::FieldModelOptional(FBE::FieldModelTimestamp(self.buffer, @_f147.fbe_offset + @_f147.fbe_size), self.buffer, @_f147.fbe_offset + @_f147.fbe_size)
-      @_f149 = FBE::FieldModelOptional(FBE::FieldModelTimestamp(self.buffer, @_f148.fbe_offset + @_f148.fbe_size), self.buffer, @_f148.fbe_offset + @_f148.fbe_size)
-      @_f150 = FBE::FieldModelOptional(FBE::FieldModelTimestamp(self.buffer, @_f149.fbe_offset + @_f149.fbe_size), self.buffer, @_f149.fbe_offset + @_f149.fbe_size)
-      @_f151 = FBE::FieldModelOptional(FBE::FieldModelUUID(self.buffer, @_f150.fbe_offset + @_f150.fbe_size), self.buffer, @_f150.fbe_offset + @_f150.fbe_size)
-      @_f152 = FBE::FieldModelOptional(FBE::FieldModelUUID(self.buffer, @_f151.fbe_offset + @_f151.fbe_size), self.buffer, @_f151.fbe_offset + @_f151.fbe_size)
-      @_f153 = FBE::FieldModelOptional(FBE::FieldModelUUID(self.buffer, @_f152.fbe_offset + @_f152.fbe_size), self.buffer, @_f152.fbe_offset + @_f152.fbe_size)
-      @_f154 = FBE::FieldModelOptional(proto.FieldModelOrderSide(self.buffer, @_f153.fbe_offset + @_f153.fbe_size), self.buffer, @_f153.fbe_offset + @_f153.fbe_size)
-      @_f155 = FBE::FieldModelOptional(proto.FieldModelOrderSide(self.buffer, @_f154.fbe_offset + @_f154.fbe_size), self.buffer, @_f154.fbe_offset + @_f154.fbe_size)
-      @_f156 = FBE::FieldModelOptional(proto.FieldModelOrderType(self.buffer, @_f155.fbe_offset + @_f155.fbe_size), self.buffer, @_f155.fbe_offset + @_f155.fbe_size)
-      @_f157 = FBE::FieldModelOptional(proto.FieldModelOrderType(self.buffer, @_f156.fbe_offset + @_f156.fbe_size), self.buffer, @_f156.fbe_offset + @_f156.fbe_size)
-      @_f158 = FBE::FieldModelOptional(proto.FieldModelOrder(self.buffer, @_f157.fbe_offset + @_f157.fbe_size), self.buffer, @_f157.fbe_offset + @_f157.fbe_size)
-      @_f159 = FBE::FieldModelOptional(proto.FieldModelOrder(self.buffer, @_f158.fbe_offset + @_f158.fbe_size), self.buffer, @_f158.fbe_offset + @_f158.fbe_size)
-      @_f160 = FBE::FieldModelOptional(proto.FieldModelBalance(self.buffer, @_f159.fbe_offset + @_f159.fbe_size), self.buffer, @_f159.fbe_offset + @_f159.fbe_size)
-      @_f161 = FBE::FieldModelOptional(proto.FieldModelBalance(self.buffer, @_f160.fbe_offset + @_f160.fbe_size), self.buffer, @_f160.fbe_offset + @_f160.fbe_size)
-      @_f162 = FBE::FieldModelOptional(proto.FieldModelState(self.buffer, @_f161.fbe_offset + @_f161.fbe_size), self.buffer, @_f161.fbe_offset + @_f161.fbe_size)
-      @_f163 = FBE::FieldModelOptional(proto.FieldModelState(self.buffer, @_f162.fbe_offset + @_f162.fbe_size), self.buffer, @_f162.fbe_offset + @_f162.fbe_size)
-      @_f164 = FBE::FieldModelOptional(proto.FieldModelAccount(self.buffer, @_f163.fbe_offset + @_f163.fbe_size), self.buffer, @_f163.fbe_offset + @_f163.fbe_size)
-      @_f165 = FBE::FieldModelOptional(proto.FieldModelAccount(self.buffer, @_f164.fbe_offset + @_f164.fbe_size), self.buffer, @_f164.fbe_offset + @_f164.fbe_size)
+      @_parent = FieldModelStructSimple.new(self.buffer, 4 + 4)
+      @_f100 = FBE::FieldModelOptional.new(FBE::FieldModelBool.new(self.buffer, @_parent.fbe_offset + @_parent.fbe_body - 4 - 4), self.buffer, @_parent.fbe_offset + @_parent.fbe_body - 4 - 4)
+      @_f101 = FBE::FieldModelOptional.new(FBE::FieldModelBool.new(self.buffer, @_f100.fbe_offset + @_f100.fbe_size), self.buffer, @_f100.fbe_offset + @_f100.fbe_size)
+      @_f102 = FBE::FieldModelOptional.new(FBE::FieldModelBool.new(self.buffer, @_f101.fbe_offset + @_f101.fbe_size), self.buffer, @_f101.fbe_offset + @_f101.fbe_size)
+      @_f103 = FBE::FieldModelOptional.new(FBE::FieldModelByte.new(self.buffer, @_f102.fbe_offset + @_f102.fbe_size), self.buffer, @_f102.fbe_offset + @_f102.fbe_size)
+      @_f104 = FBE::FieldModelOptional.new(FBE::FieldModelByte.new(self.buffer, @_f103.fbe_offset + @_f103.fbe_size), self.buffer, @_f103.fbe_offset + @_f103.fbe_size)
+      @_f105 = FBE::FieldModelOptional.new(FBE::FieldModelByte.new(self.buffer, @_f104.fbe_offset + @_f104.fbe_size), self.buffer, @_f104.fbe_offset + @_f104.fbe_size)
+      @_f106 = FBE::FieldModelOptional.new(FBE::FieldModelChar.new(self.buffer, @_f105.fbe_offset + @_f105.fbe_size), self.buffer, @_f105.fbe_offset + @_f105.fbe_size)
+      @_f107 = FBE::FieldModelOptional.new(FBE::FieldModelChar.new(self.buffer, @_f106.fbe_offset + @_f106.fbe_size), self.buffer, @_f106.fbe_offset + @_f106.fbe_size)
+      @_f108 = FBE::FieldModelOptional.new(FBE::FieldModelChar.new(self.buffer, @_f107.fbe_offset + @_f107.fbe_size), self.buffer, @_f107.fbe_offset + @_f107.fbe_size)
+      @_f109 = FBE::FieldModelOptional.new(FBE::FieldModelWChar.new(self.buffer, @_f108.fbe_offset + @_f108.fbe_size), self.buffer, @_f108.fbe_offset + @_f108.fbe_size)
+      @_f110 = FBE::FieldModelOptional.new(FBE::FieldModelWChar.new(self.buffer, @_f109.fbe_offset + @_f109.fbe_size), self.buffer, @_f109.fbe_offset + @_f109.fbe_size)
+      @_f111 = FBE::FieldModelOptional.new(FBE::FieldModelWChar.new(self.buffer, @_f110.fbe_offset + @_f110.fbe_size), self.buffer, @_f110.fbe_offset + @_f110.fbe_size)
+      @_f112 = FBE::FieldModelOptional.new(FBE::FieldModelInt8.new(self.buffer, @_f111.fbe_offset + @_f111.fbe_size), self.buffer, @_f111.fbe_offset + @_f111.fbe_size)
+      @_f113 = FBE::FieldModelOptional.new(FBE::FieldModelInt8.new(self.buffer, @_f112.fbe_offset + @_f112.fbe_size), self.buffer, @_f112.fbe_offset + @_f112.fbe_size)
+      @_f114 = FBE::FieldModelOptional.new(FBE::FieldModelInt8.new(self.buffer, @_f113.fbe_offset + @_f113.fbe_size), self.buffer, @_f113.fbe_offset + @_f113.fbe_size)
+      @_f115 = FBE::FieldModelOptional.new(FBE::FieldModelUInt8.new(self.buffer, @_f114.fbe_offset + @_f114.fbe_size), self.buffer, @_f114.fbe_offset + @_f114.fbe_size)
+      @_f116 = FBE::FieldModelOptional.new(FBE::FieldModelUInt8.new(self.buffer, @_f115.fbe_offset + @_f115.fbe_size), self.buffer, @_f115.fbe_offset + @_f115.fbe_size)
+      @_f117 = FBE::FieldModelOptional.new(FBE::FieldModelUInt8.new(self.buffer, @_f116.fbe_offset + @_f116.fbe_size), self.buffer, @_f116.fbe_offset + @_f116.fbe_size)
+      @_f118 = FBE::FieldModelOptional.new(FBE::FieldModelInt16.new(self.buffer, @_f117.fbe_offset + @_f117.fbe_size), self.buffer, @_f117.fbe_offset + @_f117.fbe_size)
+      @_f119 = FBE::FieldModelOptional.new(FBE::FieldModelInt16.new(self.buffer, @_f118.fbe_offset + @_f118.fbe_size), self.buffer, @_f118.fbe_offset + @_f118.fbe_size)
+      @_f120 = FBE::FieldModelOptional.new(FBE::FieldModelInt16.new(self.buffer, @_f119.fbe_offset + @_f119.fbe_size), self.buffer, @_f119.fbe_offset + @_f119.fbe_size)
+      @_f121 = FBE::FieldModelOptional.new(FBE::FieldModelUInt16.new(self.buffer, @_f120.fbe_offset + @_f120.fbe_size), self.buffer, @_f120.fbe_offset + @_f120.fbe_size)
+      @_f122 = FBE::FieldModelOptional.new(FBE::FieldModelUInt16.new(self.buffer, @_f121.fbe_offset + @_f121.fbe_size), self.buffer, @_f121.fbe_offset + @_f121.fbe_size)
+      @_f123 = FBE::FieldModelOptional.new(FBE::FieldModelUInt16.new(self.buffer, @_f122.fbe_offset + @_f122.fbe_size), self.buffer, @_f122.fbe_offset + @_f122.fbe_size)
+      @_f124 = FBE::FieldModelOptional.new(FBE::FieldModelInt32.new(self.buffer, @_f123.fbe_offset + @_f123.fbe_size), self.buffer, @_f123.fbe_offset + @_f123.fbe_size)
+      @_f125 = FBE::FieldModelOptional.new(FBE::FieldModelInt32.new(self.buffer, @_f124.fbe_offset + @_f124.fbe_size), self.buffer, @_f124.fbe_offset + @_f124.fbe_size)
+      @_f126 = FBE::FieldModelOptional.new(FBE::FieldModelInt32.new(self.buffer, @_f125.fbe_offset + @_f125.fbe_size), self.buffer, @_f125.fbe_offset + @_f125.fbe_size)
+      @_f127 = FBE::FieldModelOptional.new(FBE::FieldModelUInt32.new(self.buffer, @_f126.fbe_offset + @_f126.fbe_size), self.buffer, @_f126.fbe_offset + @_f126.fbe_size)
+      @_f128 = FBE::FieldModelOptional.new(FBE::FieldModelUInt32.new(self.buffer, @_f127.fbe_offset + @_f127.fbe_size), self.buffer, @_f127.fbe_offset + @_f127.fbe_size)
+      @_f129 = FBE::FieldModelOptional.new(FBE::FieldModelUInt32.new(self.buffer, @_f128.fbe_offset + @_f128.fbe_size), self.buffer, @_f128.fbe_offset + @_f128.fbe_size)
+      @_f130 = FBE::FieldModelOptional.new(FBE::FieldModelInt64.new(self.buffer, @_f129.fbe_offset + @_f129.fbe_size), self.buffer, @_f129.fbe_offset + @_f129.fbe_size)
+      @_f131 = FBE::FieldModelOptional.new(FBE::FieldModelInt64.new(self.buffer, @_f130.fbe_offset + @_f130.fbe_size), self.buffer, @_f130.fbe_offset + @_f130.fbe_size)
+      @_f132 = FBE::FieldModelOptional.new(FBE::FieldModelInt64.new(self.buffer, @_f131.fbe_offset + @_f131.fbe_size), self.buffer, @_f131.fbe_offset + @_f131.fbe_size)
+      @_f133 = FBE::FieldModelOptional.new(FBE::FieldModelUInt64.new(self.buffer, @_f132.fbe_offset + @_f132.fbe_size), self.buffer, @_f132.fbe_offset + @_f132.fbe_size)
+      @_f134 = FBE::FieldModelOptional.new(FBE::FieldModelUInt64.new(self.buffer, @_f133.fbe_offset + @_f133.fbe_size), self.buffer, @_f133.fbe_offset + @_f133.fbe_size)
+      @_f135 = FBE::FieldModelOptional.new(FBE::FieldModelUInt64.new(self.buffer, @_f134.fbe_offset + @_f134.fbe_size), self.buffer, @_f134.fbe_offset + @_f134.fbe_size)
+      @_f136 = FBE::FieldModelOptional.new(FBE::FieldModelFloat.new(self.buffer, @_f135.fbe_offset + @_f135.fbe_size), self.buffer, @_f135.fbe_offset + @_f135.fbe_size)
+      @_f137 = FBE::FieldModelOptional.new(FBE::FieldModelFloat.new(self.buffer, @_f136.fbe_offset + @_f136.fbe_size), self.buffer, @_f136.fbe_offset + @_f136.fbe_size)
+      @_f138 = FBE::FieldModelOptional.new(FBE::FieldModelFloat.new(self.buffer, @_f137.fbe_offset + @_f137.fbe_size), self.buffer, @_f137.fbe_offset + @_f137.fbe_size)
+      @_f139 = FBE::FieldModelOptional.new(FBE::FieldModelDouble.new(self.buffer, @_f138.fbe_offset + @_f138.fbe_size), self.buffer, @_f138.fbe_offset + @_f138.fbe_size)
+      @_f140 = FBE::FieldModelOptional.new(FBE::FieldModelDouble.new(self.buffer, @_f139.fbe_offset + @_f139.fbe_size), self.buffer, @_f139.fbe_offset + @_f139.fbe_size)
+      @_f141 = FBE::FieldModelOptional.new(FBE::FieldModelDouble.new(self.buffer, @_f140.fbe_offset + @_f140.fbe_size), self.buffer, @_f140.fbe_offset + @_f140.fbe_size)
+      @_f142 = FBE::FieldModelOptional.new(FBE::FieldModelDecimal.new(self.buffer, @_f141.fbe_offset + @_f141.fbe_size), self.buffer, @_f141.fbe_offset + @_f141.fbe_size)
+      @_f143 = FBE::FieldModelOptional.new(FBE::FieldModelDecimal.new(self.buffer, @_f142.fbe_offset + @_f142.fbe_size), self.buffer, @_f142.fbe_offset + @_f142.fbe_size)
+      @_f144 = FBE::FieldModelOptional.new(FBE::FieldModelDecimal.new(self.buffer, @_f143.fbe_offset + @_f143.fbe_size), self.buffer, @_f143.fbe_offset + @_f143.fbe_size)
+      @_f145 = FBE::FieldModelOptional.new(FBE::FieldModelString.new(self.buffer, @_f144.fbe_offset + @_f144.fbe_size), self.buffer, @_f144.fbe_offset + @_f144.fbe_size)
+      @_f146 = FBE::FieldModelOptional.new(FBE::FieldModelString.new(self.buffer, @_f145.fbe_offset + @_f145.fbe_size), self.buffer, @_f145.fbe_offset + @_f145.fbe_size)
+      @_f147 = FBE::FieldModelOptional.new(FBE::FieldModelString.new(self.buffer, @_f146.fbe_offset + @_f146.fbe_size), self.buffer, @_f146.fbe_offset + @_f146.fbe_size)
+      @_f148 = FBE::FieldModelOptional.new(FBE::FieldModelTimestamp.new(self.buffer, @_f147.fbe_offset + @_f147.fbe_size), self.buffer, @_f147.fbe_offset + @_f147.fbe_size)
+      @_f149 = FBE::FieldModelOptional.new(FBE::FieldModelTimestamp.new(self.buffer, @_f148.fbe_offset + @_f148.fbe_size), self.buffer, @_f148.fbe_offset + @_f148.fbe_size)
+      @_f150 = FBE::FieldModelOptional.new(FBE::FieldModelTimestamp.new(self.buffer, @_f149.fbe_offset + @_f149.fbe_size), self.buffer, @_f149.fbe_offset + @_f149.fbe_size)
+      @_f151 = FBE::FieldModelOptional.new(FBE::FieldModelUUID.new(self.buffer, @_f150.fbe_offset + @_f150.fbe_size), self.buffer, @_f150.fbe_offset + @_f150.fbe_size)
+      @_f152 = FBE::FieldModelOptional.new(FBE::FieldModelUUID.new(self.buffer, @_f151.fbe_offset + @_f151.fbe_size), self.buffer, @_f151.fbe_offset + @_f151.fbe_size)
+      @_f153 = FBE::FieldModelOptional.new(FBE::FieldModelUUID.new(self.buffer, @_f152.fbe_offset + @_f152.fbe_size), self.buffer, @_f152.fbe_offset + @_f152.fbe_size)
+      @_f154 = FBE::FieldModelOptional.new(proto.FieldModelOrderSide.new(self.buffer, @_f153.fbe_offset + @_f153.fbe_size), self.buffer, @_f153.fbe_offset + @_f153.fbe_size)
+      @_f155 = FBE::FieldModelOptional.new(proto.FieldModelOrderSide.new(self.buffer, @_f154.fbe_offset + @_f154.fbe_size), self.buffer, @_f154.fbe_offset + @_f154.fbe_size)
+      @_f156 = FBE::FieldModelOptional.new(proto.FieldModelOrderType.new(self.buffer, @_f155.fbe_offset + @_f155.fbe_size), self.buffer, @_f155.fbe_offset + @_f155.fbe_size)
+      @_f157 = FBE::FieldModelOptional.new(proto.FieldModelOrderType.new(self.buffer, @_f156.fbe_offset + @_f156.fbe_size), self.buffer, @_f156.fbe_offset + @_f156.fbe_size)
+      @_f158 = FBE::FieldModelOptional.new(proto.FieldModelOrder.new(self.buffer, @_f157.fbe_offset + @_f157.fbe_size), self.buffer, @_f157.fbe_offset + @_f157.fbe_size)
+      @_f159 = FBE::FieldModelOptional.new(proto.FieldModelOrder.new(self.buffer, @_f158.fbe_offset + @_f158.fbe_size), self.buffer, @_f158.fbe_offset + @_f158.fbe_size)
+      @_f160 = FBE::FieldModelOptional.new(proto.FieldModelBalance.new(self.buffer, @_f159.fbe_offset + @_f159.fbe_size), self.buffer, @_f159.fbe_offset + @_f159.fbe_size)
+      @_f161 = FBE::FieldModelOptional.new(proto.FieldModelBalance.new(self.buffer, @_f160.fbe_offset + @_f160.fbe_size), self.buffer, @_f160.fbe_offset + @_f160.fbe_size)
+      @_f162 = FBE::FieldModelOptional.new(proto.FieldModelState.new(self.buffer, @_f161.fbe_offset + @_f161.fbe_size), self.buffer, @_f161.fbe_offset + @_f161.fbe_size)
+      @_f163 = FBE::FieldModelOptional.new(proto.FieldModelState.new(self.buffer, @_f162.fbe_offset + @_f162.fbe_size), self.buffer, @_f162.fbe_offset + @_f162.fbe_size)
+      @_f164 = FBE::FieldModelOptional.new(proto.FieldModelAccount.new(self.buffer, @_f163.fbe_offset + @_f163.fbe_size), self.buffer, @_f163.fbe_offset + @_f163.fbe_size)
+      @_f165 = FBE::FieldModelOptional.new(proto.FieldModelAccount.new(self.buffer, @_f164.fbe_offset + @_f164.fbe_size), self.buffer, @_f164.fbe_offset + @_f164.fbe_size)
     end
 
     def parent
@@ -4887,74 +4899,74 @@ module Test
 
     # Get the field body size
     def fbe_body
-      4 + 4
-        + parent.fbe_body - 4 - 4
-        + f100.fbe_size
-        + f101.fbe_size
-        + f102.fbe_size
-        + f103.fbe_size
-        + f104.fbe_size
-        + f105.fbe_size
-        + f106.fbe_size
-        + f107.fbe_size
-        + f108.fbe_size
-        + f109.fbe_size
-        + f110.fbe_size
-        + f111.fbe_size
-        + f112.fbe_size
-        + f113.fbe_size
-        + f114.fbe_size
-        + f115.fbe_size
-        + f116.fbe_size
-        + f117.fbe_size
-        + f118.fbe_size
-        + f119.fbe_size
-        + f120.fbe_size
-        + f121.fbe_size
-        + f122.fbe_size
-        + f123.fbe_size
-        + f124.fbe_size
-        + f125.fbe_size
-        + f126.fbe_size
-        + f127.fbe_size
-        + f128.fbe_size
-        + f129.fbe_size
-        + f130.fbe_size
-        + f131.fbe_size
-        + f132.fbe_size
-        + f133.fbe_size
-        + f134.fbe_size
-        + f135.fbe_size
-        + f136.fbe_size
-        + f137.fbe_size
-        + f138.fbe_size
-        + f139.fbe_size
-        + f140.fbe_size
-        + f141.fbe_size
-        + f142.fbe_size
-        + f143.fbe_size
-        + f144.fbe_size
-        + f145.fbe_size
-        + f146.fbe_size
-        + f147.fbe_size
-        + f148.fbe_size
-        + f149.fbe_size
-        + f150.fbe_size
-        + f151.fbe_size
-        + f152.fbe_size
-        + f153.fbe_size
-        + f154.fbe_size
-        + f155.fbe_size
-        + f156.fbe_size
-        + f157.fbe_size
-        + f158.fbe_size
-        + f159.fbe_size
-        + f160.fbe_size
-        + f161.fbe_size
-        + f162.fbe_size
-        + f163.fbe_size
-        + f164.fbe_size
-        + f165.fbe_size
+      4 + 4 \
+        + parent.fbe_body - 4 - 4 \
+        + f100.fbe_size \
+        + f101.fbe_size \
+        + f102.fbe_size \
+        + f103.fbe_size \
+        + f104.fbe_size \
+        + f105.fbe_size \
+        + f106.fbe_size \
+        + f107.fbe_size \
+        + f108.fbe_size \
+        + f109.fbe_size \
+        + f110.fbe_size \
+        + f111.fbe_size \
+        + f112.fbe_size \
+        + f113.fbe_size \
+        + f114.fbe_size \
+        + f115.fbe_size \
+        + f116.fbe_size \
+        + f117.fbe_size \
+        + f118.fbe_size \
+        + f119.fbe_size \
+        + f120.fbe_size \
+        + f121.fbe_size \
+        + f122.fbe_size \
+        + f123.fbe_size \
+        + f124.fbe_size \
+        + f125.fbe_size \
+        + f126.fbe_size \
+        + f127.fbe_size \
+        + f128.fbe_size \
+        + f129.fbe_size \
+        + f130.fbe_size \
+        + f131.fbe_size \
+        + f132.fbe_size \
+        + f133.fbe_size \
+        + f134.fbe_size \
+        + f135.fbe_size \
+        + f136.fbe_size \
+        + f137.fbe_size \
+        + f138.fbe_size \
+        + f139.fbe_size \
+        + f140.fbe_size \
+        + f141.fbe_size \
+        + f142.fbe_size \
+        + f143.fbe_size \
+        + f144.fbe_size \
+        + f145.fbe_size \
+        + f146.fbe_size \
+        + f147.fbe_size \
+        + f148.fbe_size \
+        + f149.fbe_size \
+        + f150.fbe_size \
+        + f151.fbe_size \
+        + f152.fbe_size \
+        + f153.fbe_size \
+        + f154.fbe_size \
+        + f155.fbe_size \
+        + f156.fbe_size \
+        + f157.fbe_size \
+        + f158.fbe_size \
+        + f159.fbe_size \
+        + f160.fbe_size \
+        + f161.fbe_size \
+        + f162.fbe_size \
+        + f163.fbe_size \
+        + f164.fbe_size \
+        + f165.fbe_size \
     end
 
     # Get the field extra size
@@ -4970,74 +4982,74 @@ module Test
 
       @_buffer.shift(fbe_struct_offset)
 
-      fbe_result = fbe_body
-        + parent.fbe_extra
-        + f100.fbe_extra
-        + f101.fbe_extra
-        + f102.fbe_extra
-        + f103.fbe_extra
-        + f104.fbe_extra
-        + f105.fbe_extra
-        + f106.fbe_extra
-        + f107.fbe_extra
-        + f108.fbe_extra
-        + f109.fbe_extra
-        + f110.fbe_extra
-        + f111.fbe_extra
-        + f112.fbe_extra
-        + f113.fbe_extra
-        + f114.fbe_extra
-        + f115.fbe_extra
-        + f116.fbe_extra
-        + f117.fbe_extra
-        + f118.fbe_extra
-        + f119.fbe_extra
-        + f120.fbe_extra
-        + f121.fbe_extra
-        + f122.fbe_extra
-        + f123.fbe_extra
-        + f124.fbe_extra
-        + f125.fbe_extra
-        + f126.fbe_extra
-        + f127.fbe_extra
-        + f128.fbe_extra
-        + f129.fbe_extra
-        + f130.fbe_extra
-        + f131.fbe_extra
-        + f132.fbe_extra
-        + f133.fbe_extra
-        + f134.fbe_extra
-        + f135.fbe_extra
-        + f136.fbe_extra
-        + f137.fbe_extra
-        + f138.fbe_extra
-        + f139.fbe_extra
-        + f140.fbe_extra
-        + f141.fbe_extra
-        + f142.fbe_extra
-        + f143.fbe_extra
-        + f144.fbe_extra
-        + f145.fbe_extra
-        + f146.fbe_extra
-        + f147.fbe_extra
-        + f148.fbe_extra
-        + f149.fbe_extra
-        + f150.fbe_extra
-        + f151.fbe_extra
-        + f152.fbe_extra
-        + f153.fbe_extra
-        + f154.fbe_extra
-        + f155.fbe_extra
-        + f156.fbe_extra
-        + f157.fbe_extra
-        + f158.fbe_extra
-        + f159.fbe_extra
-        + f160.fbe_extra
-        + f161.fbe_extra
-        + f162.fbe_extra
-        + f163.fbe_extra
-        + f164.fbe_extra
-        + f165.fbe_extra
+      fbe_result = fbe_body \
+        + parent.fbe_extra \
+        + f100.fbe_extra \
+        + f101.fbe_extra \
+        + f102.fbe_extra \
+        + f103.fbe_extra \
+        + f104.fbe_extra \
+        + f105.fbe_extra \
+        + f106.fbe_extra \
+        + f107.fbe_extra \
+        + f108.fbe_extra \
+        + f109.fbe_extra \
+        + f110.fbe_extra \
+        + f111.fbe_extra \
+        + f112.fbe_extra \
+        + f113.fbe_extra \
+        + f114.fbe_extra \
+        + f115.fbe_extra \
+        + f116.fbe_extra \
+        + f117.fbe_extra \
+        + f118.fbe_extra \
+        + f119.fbe_extra \
+        + f120.fbe_extra \
+        + f121.fbe_extra \
+        + f122.fbe_extra \
+        + f123.fbe_extra \
+        + f124.fbe_extra \
+        + f125.fbe_extra \
+        + f126.fbe_extra \
+        + f127.fbe_extra \
+        + f128.fbe_extra \
+        + f129.fbe_extra \
+        + f130.fbe_extra \
+        + f131.fbe_extra \
+        + f132.fbe_extra \
+        + f133.fbe_extra \
+        + f134.fbe_extra \
+        + f135.fbe_extra \
+        + f136.fbe_extra \
+        + f137.fbe_extra \
+        + f138.fbe_extra \
+        + f139.fbe_extra \
+        + f140.fbe_extra \
+        + f141.fbe_extra \
+        + f142.fbe_extra \
+        + f143.fbe_extra \
+        + f144.fbe_extra \
+        + f145.fbe_extra \
+        + f146.fbe_extra \
+        + f147.fbe_extra \
+        + f148.fbe_extra \
+        + f149.fbe_extra \
+        + f150.fbe_extra \
+        + f151.fbe_extra \
+        + f152.fbe_extra \
+        + f153.fbe_extra \
+        + f154.fbe_extra \
+        + f155.fbe_extra \
+        + f156.fbe_extra \
+        + f157.fbe_extra \
+        + f158.fbe_extra \
+        + f159.fbe_extra \
+        + f160.fbe_extra \
+        + f161.fbe_extra \
+        + f162.fbe_extra \
+        + f163.fbe_extra \
+        + f164.fbe_extra \
+        + f165.fbe_extra \
 
       @_buffer.unshift(fbe_struct_offset)
 
@@ -6377,7 +6389,7 @@ module Test
   class StructOptionalModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FieldModelStructOptional(self.buffer, 4)
+      @_model = FieldModelStructOptional.new(self.buffer, 4)
     end
 
     def model
@@ -6455,73 +6467,73 @@ module Test
   class FinalModelStructOptional < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_parent = FinalModelStructSimple(self.buffer, 0)
-      @_f100 = FBE::FinalModelOptional(FBE::FinalModelBool(self.buffer, 0), self.buffer, 0)
-      @_f101 = FBE::FinalModelOptional(FBE::FinalModelBool(self.buffer, 0), self.buffer, 0)
-      @_f102 = FBE::FinalModelOptional(FBE::FinalModelBool(self.buffer, 0), self.buffer, 0)
-      @_f103 = FBE::FinalModelOptional(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0)
-      @_f104 = FBE::FinalModelOptional(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0)
-      @_f105 = FBE::FinalModelOptional(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0)
-      @_f106 = FBE::FinalModelOptional(FBE::FinalModelChar(self.buffer, 0), self.buffer, 0)
-      @_f107 = FBE::FinalModelOptional(FBE::FinalModelChar(self.buffer, 0), self.buffer, 0)
-      @_f108 = FBE::FinalModelOptional(FBE::FinalModelChar(self.buffer, 0), self.buffer, 0)
-      @_f109 = FBE::FinalModelOptional(FBE::FinalModelWChar(self.buffer, 0), self.buffer, 0)
-      @_f110 = FBE::FinalModelOptional(FBE::FinalModelWChar(self.buffer, 0), self.buffer, 0)
-      @_f111 = FBE::FinalModelOptional(FBE::FinalModelWChar(self.buffer, 0), self.buffer, 0)
-      @_f112 = FBE::FinalModelOptional(FBE::FinalModelInt8(self.buffer, 0), self.buffer, 0)
-      @_f113 = FBE::FinalModelOptional(FBE::FinalModelInt8(self.buffer, 0), self.buffer, 0)
-      @_f114 = FBE::FinalModelOptional(FBE::FinalModelInt8(self.buffer, 0), self.buffer, 0)
-      @_f115 = FBE::FinalModelOptional(FBE::FinalModelUInt8(self.buffer, 0), self.buffer, 0)
-      @_f116 = FBE::FinalModelOptional(FBE::FinalModelUInt8(self.buffer, 0), self.buffer, 0)
-      @_f117 = FBE::FinalModelOptional(FBE::FinalModelUInt8(self.buffer, 0), self.buffer, 0)
-      @_f118 = FBE::FinalModelOptional(FBE::FinalModelInt16(self.buffer, 0), self.buffer, 0)
-      @_f119 = FBE::FinalModelOptional(FBE::FinalModelInt16(self.buffer, 0), self.buffer, 0)
-      @_f120 = FBE::FinalModelOptional(FBE::FinalModelInt16(self.buffer, 0), self.buffer, 0)
-      @_f121 = FBE::FinalModelOptional(FBE::FinalModelUInt16(self.buffer, 0), self.buffer, 0)
-      @_f122 = FBE::FinalModelOptional(FBE::FinalModelUInt16(self.buffer, 0), self.buffer, 0)
-      @_f123 = FBE::FinalModelOptional(FBE::FinalModelUInt16(self.buffer, 0), self.buffer, 0)
-      @_f124 = FBE::FinalModelOptional(FBE::FinalModelInt32(self.buffer, 0), self.buffer, 0)
-      @_f125 = FBE::FinalModelOptional(FBE::FinalModelInt32(self.buffer, 0), self.buffer, 0)
-      @_f126 = FBE::FinalModelOptional(FBE::FinalModelInt32(self.buffer, 0), self.buffer, 0)
-      @_f127 = FBE::FinalModelOptional(FBE::FinalModelUInt32(self.buffer, 0), self.buffer, 0)
-      @_f128 = FBE::FinalModelOptional(FBE::FinalModelUInt32(self.buffer, 0), self.buffer, 0)
-      @_f129 = FBE::FinalModelOptional(FBE::FinalModelUInt32(self.buffer, 0), self.buffer, 0)
-      @_f130 = FBE::FinalModelOptional(FBE::FinalModelInt64(self.buffer, 0), self.buffer, 0)
-      @_f131 = FBE::FinalModelOptional(FBE::FinalModelInt64(self.buffer, 0), self.buffer, 0)
-      @_f132 = FBE::FinalModelOptional(FBE::FinalModelInt64(self.buffer, 0), self.buffer, 0)
-      @_f133 = FBE::FinalModelOptional(FBE::FinalModelUInt64(self.buffer, 0), self.buffer, 0)
-      @_f134 = FBE::FinalModelOptional(FBE::FinalModelUInt64(self.buffer, 0), self.buffer, 0)
-      @_f135 = FBE::FinalModelOptional(FBE::FinalModelUInt64(self.buffer, 0), self.buffer, 0)
-      @_f136 = FBE::FinalModelOptional(FBE::FinalModelFloat(self.buffer, 0), self.buffer, 0)
-      @_f137 = FBE::FinalModelOptional(FBE::FinalModelFloat(self.buffer, 0), self.buffer, 0)
-      @_f138 = FBE::FinalModelOptional(FBE::FinalModelFloat(self.buffer, 0), self.buffer, 0)
-      @_f139 = FBE::FinalModelOptional(FBE::FinalModelDouble(self.buffer, 0), self.buffer, 0)
-      @_f140 = FBE::FinalModelOptional(FBE::FinalModelDouble(self.buffer, 0), self.buffer, 0)
-      @_f141 = FBE::FinalModelOptional(FBE::FinalModelDouble(self.buffer, 0), self.buffer, 0)
-      @_f142 = FBE::FinalModelOptional(FBE::FinalModelDecimal(self.buffer, 0), self.buffer, 0)
-      @_f143 = FBE::FinalModelOptional(FBE::FinalModelDecimal(self.buffer, 0), self.buffer, 0)
-      @_f144 = FBE::FinalModelOptional(FBE::FinalModelDecimal(self.buffer, 0), self.buffer, 0)
-      @_f145 = FBE::FinalModelOptional(FBE::FinalModelString(self.buffer, 0), self.buffer, 0)
-      @_f146 = FBE::FinalModelOptional(FBE::FinalModelString(self.buffer, 0), self.buffer, 0)
-      @_f147 = FBE::FinalModelOptional(FBE::FinalModelString(self.buffer, 0), self.buffer, 0)
-      @_f148 = FBE::FinalModelOptional(FBE::FinalModelTimestamp(self.buffer, 0), self.buffer, 0)
-      @_f149 = FBE::FinalModelOptional(FBE::FinalModelTimestamp(self.buffer, 0), self.buffer, 0)
-      @_f150 = FBE::FinalModelOptional(FBE::FinalModelTimestamp(self.buffer, 0), self.buffer, 0)
-      @_f151 = FBE::FinalModelOptional(FBE::FinalModelUUID(self.buffer, 0), self.buffer, 0)
-      @_f152 = FBE::FinalModelOptional(FBE::FinalModelUUID(self.buffer, 0), self.buffer, 0)
-      @_f153 = FBE::FinalModelOptional(FBE::FinalModelUUID(self.buffer, 0), self.buffer, 0)
-      @_f154 = FBE::FinalModelOptional(proto.FinalModelOrderSide(self.buffer, 0), self.buffer, 0)
-      @_f155 = FBE::FinalModelOptional(proto.FinalModelOrderSide(self.buffer, 0), self.buffer, 0)
-      @_f156 = FBE::FinalModelOptional(proto.FinalModelOrderType(self.buffer, 0), self.buffer, 0)
-      @_f157 = FBE::FinalModelOptional(proto.FinalModelOrderType(self.buffer, 0), self.buffer, 0)
-      @_f158 = FBE::FinalModelOptional(proto.FinalModelOrder(self.buffer, 0), self.buffer, 0)
-      @_f159 = FBE::FinalModelOptional(proto.FinalModelOrder(self.buffer, 0), self.buffer, 0)
-      @_f160 = FBE::FinalModelOptional(proto.FinalModelBalance(self.buffer, 0), self.buffer, 0)
-      @_f161 = FBE::FinalModelOptional(proto.FinalModelBalance(self.buffer, 0), self.buffer, 0)
-      @_f162 = FBE::FinalModelOptional(proto.FinalModelState(self.buffer, 0), self.buffer, 0)
-      @_f163 = FBE::FinalModelOptional(proto.FinalModelState(self.buffer, 0), self.buffer, 0)
-      @_f164 = FBE::FinalModelOptional(proto.FinalModelAccount(self.buffer, 0), self.buffer, 0)
-      @_f165 = FBE::FinalModelOptional(proto.FinalModelAccount(self.buffer, 0), self.buffer, 0)
+      @_parent = FinalModelStructSimple.new(self.buffer, 0)
+      @_f100 = FBE::FinalModelOptional.new(FBE::FinalModelBool.new(self.buffer, 0), self.buffer, 0)
+      @_f101 = FBE::FinalModelOptional.new(FBE::FinalModelBool.new(self.buffer, 0), self.buffer, 0)
+      @_f102 = FBE::FinalModelOptional.new(FBE::FinalModelBool.new(self.buffer, 0), self.buffer, 0)
+      @_f103 = FBE::FinalModelOptional.new(FBE::FinalModelByte.new(self.buffer, 0), self.buffer, 0)
+      @_f104 = FBE::FinalModelOptional.new(FBE::FinalModelByte.new(self.buffer, 0), self.buffer, 0)
+      @_f105 = FBE::FinalModelOptional.new(FBE::FinalModelByte.new(self.buffer, 0), self.buffer, 0)
+      @_f106 = FBE::FinalModelOptional.new(FBE::FinalModelChar.new(self.buffer, 0), self.buffer, 0)
+      @_f107 = FBE::FinalModelOptional.new(FBE::FinalModelChar.new(self.buffer, 0), self.buffer, 0)
+      @_f108 = FBE::FinalModelOptional.new(FBE::FinalModelChar.new(self.buffer, 0), self.buffer, 0)
+      @_f109 = FBE::FinalModelOptional.new(FBE::FinalModelWChar.new(self.buffer, 0), self.buffer, 0)
+      @_f110 = FBE::FinalModelOptional.new(FBE::FinalModelWChar.new(self.buffer, 0), self.buffer, 0)
+      @_f111 = FBE::FinalModelOptional.new(FBE::FinalModelWChar.new(self.buffer, 0), self.buffer, 0)
+      @_f112 = FBE::FinalModelOptional.new(FBE::FinalModelInt8.new(self.buffer, 0), self.buffer, 0)
+      @_f113 = FBE::FinalModelOptional.new(FBE::FinalModelInt8.new(self.buffer, 0), self.buffer, 0)
+      @_f114 = FBE::FinalModelOptional.new(FBE::FinalModelInt8.new(self.buffer, 0), self.buffer, 0)
+      @_f115 = FBE::FinalModelOptional.new(FBE::FinalModelUInt8.new(self.buffer, 0), self.buffer, 0)
+      @_f116 = FBE::FinalModelOptional.new(FBE::FinalModelUInt8.new(self.buffer, 0), self.buffer, 0)
+      @_f117 = FBE::FinalModelOptional.new(FBE::FinalModelUInt8.new(self.buffer, 0), self.buffer, 0)
+      @_f118 = FBE::FinalModelOptional.new(FBE::FinalModelInt16.new(self.buffer, 0), self.buffer, 0)
+      @_f119 = FBE::FinalModelOptional.new(FBE::FinalModelInt16.new(self.buffer, 0), self.buffer, 0)
+      @_f120 = FBE::FinalModelOptional.new(FBE::FinalModelInt16.new(self.buffer, 0), self.buffer, 0)
+      @_f121 = FBE::FinalModelOptional.new(FBE::FinalModelUInt16.new(self.buffer, 0), self.buffer, 0)
+      @_f122 = FBE::FinalModelOptional.new(FBE::FinalModelUInt16.new(self.buffer, 0), self.buffer, 0)
+      @_f123 = FBE::FinalModelOptional.new(FBE::FinalModelUInt16.new(self.buffer, 0), self.buffer, 0)
+      @_f124 = FBE::FinalModelOptional.new(FBE::FinalModelInt32.new(self.buffer, 0), self.buffer, 0)
+      @_f125 = FBE::FinalModelOptional.new(FBE::FinalModelInt32.new(self.buffer, 0), self.buffer, 0)
+      @_f126 = FBE::FinalModelOptional.new(FBE::FinalModelInt32.new(self.buffer, 0), self.buffer, 0)
+      @_f127 = FBE::FinalModelOptional.new(FBE::FinalModelUInt32.new(self.buffer, 0), self.buffer, 0)
+      @_f128 = FBE::FinalModelOptional.new(FBE::FinalModelUInt32.new(self.buffer, 0), self.buffer, 0)
+      @_f129 = FBE::FinalModelOptional.new(FBE::FinalModelUInt32.new(self.buffer, 0), self.buffer, 0)
+      @_f130 = FBE::FinalModelOptional.new(FBE::FinalModelInt64.new(self.buffer, 0), self.buffer, 0)
+      @_f131 = FBE::FinalModelOptional.new(FBE::FinalModelInt64.new(self.buffer, 0), self.buffer, 0)
+      @_f132 = FBE::FinalModelOptional.new(FBE::FinalModelInt64.new(self.buffer, 0), self.buffer, 0)
+      @_f133 = FBE::FinalModelOptional.new(FBE::FinalModelUInt64.new(self.buffer, 0), self.buffer, 0)
+      @_f134 = FBE::FinalModelOptional.new(FBE::FinalModelUInt64.new(self.buffer, 0), self.buffer, 0)
+      @_f135 = FBE::FinalModelOptional.new(FBE::FinalModelUInt64.new(self.buffer, 0), self.buffer, 0)
+      @_f136 = FBE::FinalModelOptional.new(FBE::FinalModelFloat.new(self.buffer, 0), self.buffer, 0)
+      @_f137 = FBE::FinalModelOptional.new(FBE::FinalModelFloat.new(self.buffer, 0), self.buffer, 0)
+      @_f138 = FBE::FinalModelOptional.new(FBE::FinalModelFloat.new(self.buffer, 0), self.buffer, 0)
+      @_f139 = FBE::FinalModelOptional.new(FBE::FinalModelDouble.new(self.buffer, 0), self.buffer, 0)
+      @_f140 = FBE::FinalModelOptional.new(FBE::FinalModelDouble.new(self.buffer, 0), self.buffer, 0)
+      @_f141 = FBE::FinalModelOptional.new(FBE::FinalModelDouble.new(self.buffer, 0), self.buffer, 0)
+      @_f142 = FBE::FinalModelOptional.new(FBE::FinalModelDecimal.new(self.buffer, 0), self.buffer, 0)
+      @_f143 = FBE::FinalModelOptional.new(FBE::FinalModelDecimal.new(self.buffer, 0), self.buffer, 0)
+      @_f144 = FBE::FinalModelOptional.new(FBE::FinalModelDecimal.new(self.buffer, 0), self.buffer, 0)
+      @_f145 = FBE::FinalModelOptional.new(FBE::FinalModelString.new(self.buffer, 0), self.buffer, 0)
+      @_f146 = FBE::FinalModelOptional.new(FBE::FinalModelString.new(self.buffer, 0), self.buffer, 0)
+      @_f147 = FBE::FinalModelOptional.new(FBE::FinalModelString.new(self.buffer, 0), self.buffer, 0)
+      @_f148 = FBE::FinalModelOptional.new(FBE::FinalModelTimestamp.new(self.buffer, 0), self.buffer, 0)
+      @_f149 = FBE::FinalModelOptional.new(FBE::FinalModelTimestamp.new(self.buffer, 0), self.buffer, 0)
+      @_f150 = FBE::FinalModelOptional.new(FBE::FinalModelTimestamp.new(self.buffer, 0), self.buffer, 0)
+      @_f151 = FBE::FinalModelOptional.new(FBE::FinalModelUUID.new(self.buffer, 0), self.buffer, 0)
+      @_f152 = FBE::FinalModelOptional.new(FBE::FinalModelUUID.new(self.buffer, 0), self.buffer, 0)
+      @_f153 = FBE::FinalModelOptional.new(FBE::FinalModelUUID.new(self.buffer, 0), self.buffer, 0)
+      @_f154 = FBE::FinalModelOptional.new(proto.FinalModelOrderSide.new(self.buffer, 0), self.buffer, 0)
+      @_f155 = FBE::FinalModelOptional.new(proto.FinalModelOrderSide.new(self.buffer, 0), self.buffer, 0)
+      @_f156 = FBE::FinalModelOptional.new(proto.FinalModelOrderType.new(self.buffer, 0), self.buffer, 0)
+      @_f157 = FBE::FinalModelOptional.new(proto.FinalModelOrderType.new(self.buffer, 0), self.buffer, 0)
+      @_f158 = FBE::FinalModelOptional.new(proto.FinalModelOrder.new(self.buffer, 0), self.buffer, 0)
+      @_f159 = FBE::FinalModelOptional.new(proto.FinalModelOrder.new(self.buffer, 0), self.buffer, 0)
+      @_f160 = FBE::FinalModelOptional.new(proto.FinalModelBalance.new(self.buffer, 0), self.buffer, 0)
+      @_f161 = FBE::FinalModelOptional.new(proto.FinalModelBalance.new(self.buffer, 0), self.buffer, 0)
+      @_f162 = FBE::FinalModelOptional.new(proto.FinalModelState.new(self.buffer, 0), self.buffer, 0)
+      @_f163 = FBE::FinalModelOptional.new(proto.FinalModelState.new(self.buffer, 0), self.buffer, 0)
+      @_f164 = FBE::FinalModelOptional.new(proto.FinalModelAccount.new(self.buffer, 0), self.buffer, 0)
+      @_f165 = FBE::FinalModelOptional.new(proto.FinalModelAccount.new(self.buffer, 0), self.buffer, 0)
     end
 
     def parent
@@ -6794,74 +6806,74 @@ module Test
 
     # Get the allocation size
     def fbe_allocation_size(fbe_value)
-      0
-        + parent.fbe_allocation_size(fbe_value)
-        + f100.fbe_allocation_size(fbe_value.f100)
-        + f101.fbe_allocation_size(fbe_value.f101)
-        + f102.fbe_allocation_size(fbe_value.f102)
-        + f103.fbe_allocation_size(fbe_value.f103)
-        + f104.fbe_allocation_size(fbe_value.f104)
-        + f105.fbe_allocation_size(fbe_value.f105)
-        + f106.fbe_allocation_size(fbe_value.f106)
-        + f107.fbe_allocation_size(fbe_value.f107)
-        + f108.fbe_allocation_size(fbe_value.f108)
-        + f109.fbe_allocation_size(fbe_value.f109)
-        + f110.fbe_allocation_size(fbe_value.f110)
-        + f111.fbe_allocation_size(fbe_value.f111)
-        + f112.fbe_allocation_size(fbe_value.f112)
-        + f113.fbe_allocation_size(fbe_value.f113)
-        + f114.fbe_allocation_size(fbe_value.f114)
-        + f115.fbe_allocation_size(fbe_value.f115)
-        + f116.fbe_allocation_size(fbe_value.f116)
-        + f117.fbe_allocation_size(fbe_value.f117)
-        + f118.fbe_allocation_size(fbe_value.f118)
-        + f119.fbe_allocation_size(fbe_value.f119)
-        + f120.fbe_allocation_size(fbe_value.f120)
-        + f121.fbe_allocation_size(fbe_value.f121)
-        + f122.fbe_allocation_size(fbe_value.f122)
-        + f123.fbe_allocation_size(fbe_value.f123)
-        + f124.fbe_allocation_size(fbe_value.f124)
-        + f125.fbe_allocation_size(fbe_value.f125)
-        + f126.fbe_allocation_size(fbe_value.f126)
-        + f127.fbe_allocation_size(fbe_value.f127)
-        + f128.fbe_allocation_size(fbe_value.f128)
-        + f129.fbe_allocation_size(fbe_value.f129)
-        + f130.fbe_allocation_size(fbe_value.f130)
-        + f131.fbe_allocation_size(fbe_value.f131)
-        + f132.fbe_allocation_size(fbe_value.f132)
-        + f133.fbe_allocation_size(fbe_value.f133)
-        + f134.fbe_allocation_size(fbe_value.f134)
-        + f135.fbe_allocation_size(fbe_value.f135)
-        + f136.fbe_allocation_size(fbe_value.f136)
-        + f137.fbe_allocation_size(fbe_value.f137)
-        + f138.fbe_allocation_size(fbe_value.f138)
-        + f139.fbe_allocation_size(fbe_value.f139)
-        + f140.fbe_allocation_size(fbe_value.f140)
-        + f141.fbe_allocation_size(fbe_value.f141)
-        + f142.fbe_allocation_size(fbe_value.f142)
-        + f143.fbe_allocation_size(fbe_value.f143)
-        + f144.fbe_allocation_size(fbe_value.f144)
-        + f145.fbe_allocation_size(fbe_value.f145)
-        + f146.fbe_allocation_size(fbe_value.f146)
-        + f147.fbe_allocation_size(fbe_value.f147)
-        + f148.fbe_allocation_size(fbe_value.f148)
-        + f149.fbe_allocation_size(fbe_value.f149)
-        + f150.fbe_allocation_size(fbe_value.f150)
-        + f151.fbe_allocation_size(fbe_value.f151)
-        + f152.fbe_allocation_size(fbe_value.f152)
-        + f153.fbe_allocation_size(fbe_value.f153)
-        + f154.fbe_allocation_size(fbe_value.f154)
-        + f155.fbe_allocation_size(fbe_value.f155)
-        + f156.fbe_allocation_size(fbe_value.f156)
-        + f157.fbe_allocation_size(fbe_value.f157)
-        + f158.fbe_allocation_size(fbe_value.f158)
-        + f159.fbe_allocation_size(fbe_value.f159)
-        + f160.fbe_allocation_size(fbe_value.f160)
-        + f161.fbe_allocation_size(fbe_value.f161)
-        + f162.fbe_allocation_size(fbe_value.f162)
-        + f163.fbe_allocation_size(fbe_value.f163)
-        + f164.fbe_allocation_size(fbe_value.f164)
-        + f165.fbe_allocation_size(fbe_value.f165)
+      0 \
+        + parent.fbe_allocation_size(fbe_value) \
+        + f100.fbe_allocation_size(fbe_value.f100) \
+        + f101.fbe_allocation_size(fbe_value.f101) \
+        + f102.fbe_allocation_size(fbe_value.f102) \
+        + f103.fbe_allocation_size(fbe_value.f103) \
+        + f104.fbe_allocation_size(fbe_value.f104) \
+        + f105.fbe_allocation_size(fbe_value.f105) \
+        + f106.fbe_allocation_size(fbe_value.f106) \
+        + f107.fbe_allocation_size(fbe_value.f107) \
+        + f108.fbe_allocation_size(fbe_value.f108) \
+        + f109.fbe_allocation_size(fbe_value.f109) \
+        + f110.fbe_allocation_size(fbe_value.f110) \
+        + f111.fbe_allocation_size(fbe_value.f111) \
+        + f112.fbe_allocation_size(fbe_value.f112) \
+        + f113.fbe_allocation_size(fbe_value.f113) \
+        + f114.fbe_allocation_size(fbe_value.f114) \
+        + f115.fbe_allocation_size(fbe_value.f115) \
+        + f116.fbe_allocation_size(fbe_value.f116) \
+        + f117.fbe_allocation_size(fbe_value.f117) \
+        + f118.fbe_allocation_size(fbe_value.f118) \
+        + f119.fbe_allocation_size(fbe_value.f119) \
+        + f120.fbe_allocation_size(fbe_value.f120) \
+        + f121.fbe_allocation_size(fbe_value.f121) \
+        + f122.fbe_allocation_size(fbe_value.f122) \
+        + f123.fbe_allocation_size(fbe_value.f123) \
+        + f124.fbe_allocation_size(fbe_value.f124) \
+        + f125.fbe_allocation_size(fbe_value.f125) \
+        + f126.fbe_allocation_size(fbe_value.f126) \
+        + f127.fbe_allocation_size(fbe_value.f127) \
+        + f128.fbe_allocation_size(fbe_value.f128) \
+        + f129.fbe_allocation_size(fbe_value.f129) \
+        + f130.fbe_allocation_size(fbe_value.f130) \
+        + f131.fbe_allocation_size(fbe_value.f131) \
+        + f132.fbe_allocation_size(fbe_value.f132) \
+        + f133.fbe_allocation_size(fbe_value.f133) \
+        + f134.fbe_allocation_size(fbe_value.f134) \
+        + f135.fbe_allocation_size(fbe_value.f135) \
+        + f136.fbe_allocation_size(fbe_value.f136) \
+        + f137.fbe_allocation_size(fbe_value.f137) \
+        + f138.fbe_allocation_size(fbe_value.f138) \
+        + f139.fbe_allocation_size(fbe_value.f139) \
+        + f140.fbe_allocation_size(fbe_value.f140) \
+        + f141.fbe_allocation_size(fbe_value.f141) \
+        + f142.fbe_allocation_size(fbe_value.f142) \
+        + f143.fbe_allocation_size(fbe_value.f143) \
+        + f144.fbe_allocation_size(fbe_value.f144) \
+        + f145.fbe_allocation_size(fbe_value.f145) \
+        + f146.fbe_allocation_size(fbe_value.f146) \
+        + f147.fbe_allocation_size(fbe_value.f147) \
+        + f148.fbe_allocation_size(fbe_value.f148) \
+        + f149.fbe_allocation_size(fbe_value.f149) \
+        + f150.fbe_allocation_size(fbe_value.f150) \
+        + f151.fbe_allocation_size(fbe_value.f151) \
+        + f152.fbe_allocation_size(fbe_value.f152) \
+        + f153.fbe_allocation_size(fbe_value.f153) \
+        + f154.fbe_allocation_size(fbe_value.f154) \
+        + f155.fbe_allocation_size(fbe_value.f155) \
+        + f156.fbe_allocation_size(fbe_value.f156) \
+        + f157.fbe_allocation_size(fbe_value.f157) \
+        + f158.fbe_allocation_size(fbe_value.f158) \
+        + f159.fbe_allocation_size(fbe_value.f159) \
+        + f160.fbe_allocation_size(fbe_value.f160) \
+        + f161.fbe_allocation_size(fbe_value.f161) \
+        + f162.fbe_allocation_size(fbe_value.f162) \
+        + f163.fbe_allocation_size(fbe_value.f163) \
+        + f164.fbe_allocation_size(fbe_value.f164) \
+        + f165.fbe_allocation_size(fbe_value.f165) \
     end
 
     # Get the field type
@@ -6885,470 +6897,470 @@ module Test
 
       parent.fbe_offset = fbe_current_offset
       fbe_field_size = parent.verify_fields
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f100.fbe_offset = fbe_current_offset
       fbe_field_size = f100.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f101.fbe_offset = fbe_current_offset
       fbe_field_size = f101.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f102.fbe_offset = fbe_current_offset
       fbe_field_size = f102.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f103.fbe_offset = fbe_current_offset
       fbe_field_size = f103.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f104.fbe_offset = fbe_current_offset
       fbe_field_size = f104.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f105.fbe_offset = fbe_current_offset
       fbe_field_size = f105.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f106.fbe_offset = fbe_current_offset
       fbe_field_size = f106.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f107.fbe_offset = fbe_current_offset
       fbe_field_size = f107.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f108.fbe_offset = fbe_current_offset
       fbe_field_size = f108.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f109.fbe_offset = fbe_current_offset
       fbe_field_size = f109.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f110.fbe_offset = fbe_current_offset
       fbe_field_size = f110.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f111.fbe_offset = fbe_current_offset
       fbe_field_size = f111.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f112.fbe_offset = fbe_current_offset
       fbe_field_size = f112.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f113.fbe_offset = fbe_current_offset
       fbe_field_size = f113.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f114.fbe_offset = fbe_current_offset
       fbe_field_size = f114.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f115.fbe_offset = fbe_current_offset
       fbe_field_size = f115.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f116.fbe_offset = fbe_current_offset
       fbe_field_size = f116.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f117.fbe_offset = fbe_current_offset
       fbe_field_size = f117.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f118.fbe_offset = fbe_current_offset
       fbe_field_size = f118.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f119.fbe_offset = fbe_current_offset
       fbe_field_size = f119.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f120.fbe_offset = fbe_current_offset
       fbe_field_size = f120.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f121.fbe_offset = fbe_current_offset
       fbe_field_size = f121.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f122.fbe_offset = fbe_current_offset
       fbe_field_size = f122.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f123.fbe_offset = fbe_current_offset
       fbe_field_size = f123.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f124.fbe_offset = fbe_current_offset
       fbe_field_size = f124.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f125.fbe_offset = fbe_current_offset
       fbe_field_size = f125.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f126.fbe_offset = fbe_current_offset
       fbe_field_size = f126.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f127.fbe_offset = fbe_current_offset
       fbe_field_size = f127.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f128.fbe_offset = fbe_current_offset
       fbe_field_size = f128.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f129.fbe_offset = fbe_current_offset
       fbe_field_size = f129.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f130.fbe_offset = fbe_current_offset
       fbe_field_size = f130.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f131.fbe_offset = fbe_current_offset
       fbe_field_size = f131.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f132.fbe_offset = fbe_current_offset
       fbe_field_size = f132.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f133.fbe_offset = fbe_current_offset
       fbe_field_size = f133.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f134.fbe_offset = fbe_current_offset
       fbe_field_size = f134.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f135.fbe_offset = fbe_current_offset
       fbe_field_size = f135.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f136.fbe_offset = fbe_current_offset
       fbe_field_size = f136.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f137.fbe_offset = fbe_current_offset
       fbe_field_size = f137.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f138.fbe_offset = fbe_current_offset
       fbe_field_size = f138.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f139.fbe_offset = fbe_current_offset
       fbe_field_size = f139.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f140.fbe_offset = fbe_current_offset
       fbe_field_size = f140.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f141.fbe_offset = fbe_current_offset
       fbe_field_size = f141.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f142.fbe_offset = fbe_current_offset
       fbe_field_size = f142.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f143.fbe_offset = fbe_current_offset
       fbe_field_size = f143.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f144.fbe_offset = fbe_current_offset
       fbe_field_size = f144.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f145.fbe_offset = fbe_current_offset
       fbe_field_size = f145.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f146.fbe_offset = fbe_current_offset
       fbe_field_size = f146.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f147.fbe_offset = fbe_current_offset
       fbe_field_size = f147.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f148.fbe_offset = fbe_current_offset
       fbe_field_size = f148.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f149.fbe_offset = fbe_current_offset
       fbe_field_size = f149.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f150.fbe_offset = fbe_current_offset
       fbe_field_size = f150.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f151.fbe_offset = fbe_current_offset
       fbe_field_size = f151.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f152.fbe_offset = fbe_current_offset
       fbe_field_size = f152.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f153.fbe_offset = fbe_current_offset
       fbe_field_size = f153.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f154.fbe_offset = fbe_current_offset
       fbe_field_size = f154.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f155.fbe_offset = fbe_current_offset
       fbe_field_size = f155.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f156.fbe_offset = fbe_current_offset
       fbe_field_size = f156.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f157.fbe_offset = fbe_current_offset
       fbe_field_size = f157.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f158.fbe_offset = fbe_current_offset
       fbe_field_size = f158.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f159.fbe_offset = fbe_current_offset
       fbe_field_size = f159.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f160.fbe_offset = fbe_current_offset
       fbe_field_size = f160.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f161.fbe_offset = fbe_current_offset
       fbe_field_size = f161.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f162.fbe_offset = fbe_current_offset
       fbe_field_size = f162.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f163.fbe_offset = fbe_current_offset
       fbe_field_size = f163.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f164.fbe_offset = fbe_current_offset
       fbe_field_size = f164.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f165.fbe_offset = fbe_current_offset
       fbe_field_size = f165.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
@@ -8265,7 +8277,7 @@ module Test
   class StructOptionalFinalModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FinalModelStructOptional(self.buffer, 8)
+      @_model = FinalModelStructOptional.new(self.buffer, 8)
     end
 
     # Get the model type
@@ -8504,19 +8516,19 @@ module Test
   class FieldModelStructNested < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_parent = FieldModelStructOptional(self.buffer, 4 + 4)
-      @_f1000 = FieldModelEnumSimple(self.buffer, @_parent.fbe_offset + @_parent.fbe_body - 4 - 4)
-      @_f1001 = FBE::FieldModelOptional(FieldModelEnumSimple(self.buffer, @_f1000.fbe_offset + @_f1000.fbe_size), self.buffer, @_f1000.fbe_offset + @_f1000.fbe_size)
-      @_f1002 = FieldModelEnumTyped(self.buffer, @_f1001.fbe_offset + @_f1001.fbe_size)
-      @_f1003 = FBE::FieldModelOptional(FieldModelEnumTyped(self.buffer, @_f1002.fbe_offset + @_f1002.fbe_size), self.buffer, @_f1002.fbe_offset + @_f1002.fbe_size)
-      @_f1004 = FieldModelFlagsSimple(self.buffer, @_f1003.fbe_offset + @_f1003.fbe_size)
-      @_f1005 = FBE::FieldModelOptional(FieldModelFlagsSimple(self.buffer, @_f1004.fbe_offset + @_f1004.fbe_size), self.buffer, @_f1004.fbe_offset + @_f1004.fbe_size)
-      @_f1006 = FieldModelFlagsTyped(self.buffer, @_f1005.fbe_offset + @_f1005.fbe_size)
-      @_f1007 = FBE::FieldModelOptional(FieldModelFlagsTyped(self.buffer, @_f1006.fbe_offset + @_f1006.fbe_size), self.buffer, @_f1006.fbe_offset + @_f1006.fbe_size)
-      @_f1008 = FieldModelStructSimple(self.buffer, @_f1007.fbe_offset + @_f1007.fbe_size)
-      @_f1009 = FBE::FieldModelOptional(FieldModelStructSimple(self.buffer, @_f1008.fbe_offset + @_f1008.fbe_size), self.buffer, @_f1008.fbe_offset + @_f1008.fbe_size)
-      @_f1010 = FieldModelStructOptional(self.buffer, @_f1009.fbe_offset + @_f1009.fbe_size)
-      @_f1011 = FBE::FieldModelOptional(FieldModelStructOptional(self.buffer, @_f1010.fbe_offset + @_f1010.fbe_size), self.buffer, @_f1010.fbe_offset + @_f1010.fbe_size)
+      @_parent = FieldModelStructOptional.new(self.buffer, 4 + 4)
+      @_f1000 = FieldModelEnumSimple.new(self.buffer, @_parent.fbe_offset + @_parent.fbe_body - 4 - 4)
+      @_f1001 = FBE::FieldModelOptional.new(FieldModelEnumSimple.new(self.buffer, @_f1000.fbe_offset + @_f1000.fbe_size), self.buffer, @_f1000.fbe_offset + @_f1000.fbe_size)
+      @_f1002 = FieldModelEnumTyped.new(self.buffer, @_f1001.fbe_offset + @_f1001.fbe_size)
+      @_f1003 = FBE::FieldModelOptional.new(FieldModelEnumTyped.new(self.buffer, @_f1002.fbe_offset + @_f1002.fbe_size), self.buffer, @_f1002.fbe_offset + @_f1002.fbe_size)
+      @_f1004 = FieldModelFlagsSimple.new(self.buffer, @_f1003.fbe_offset + @_f1003.fbe_size)
+      @_f1005 = FBE::FieldModelOptional.new(FieldModelFlagsSimple.new(self.buffer, @_f1004.fbe_offset + @_f1004.fbe_size), self.buffer, @_f1004.fbe_offset + @_f1004.fbe_size)
+      @_f1006 = FieldModelFlagsTyped.new(self.buffer, @_f1005.fbe_offset + @_f1005.fbe_size)
+      @_f1007 = FBE::FieldModelOptional.new(FieldModelFlagsTyped.new(self.buffer, @_f1006.fbe_offset + @_f1006.fbe_size), self.buffer, @_f1006.fbe_offset + @_f1006.fbe_size)
+      @_f1008 = FieldModelStructSimple.new(self.buffer, @_f1007.fbe_offset + @_f1007.fbe_size)
+      @_f1009 = FBE::FieldModelOptional.new(FieldModelStructSimple.new(self.buffer, @_f1008.fbe_offset + @_f1008.fbe_size), self.buffer, @_f1008.fbe_offset + @_f1008.fbe_size)
+      @_f1010 = FieldModelStructOptional.new(self.buffer, @_f1009.fbe_offset + @_f1009.fbe_size)
+      @_f1011 = FBE::FieldModelOptional.new(FieldModelStructOptional.new(self.buffer, @_f1010.fbe_offset + @_f1010.fbe_size), self.buffer, @_f1010.fbe_offset + @_f1010.fbe_size)
     end
 
     def parent
@@ -8578,20 +8590,20 @@ module Test
 
     # Get the field body size
     def fbe_body
-      4 + 4
-        + parent.fbe_body - 4 - 4
-        + f1000.fbe_size
-        + f1001.fbe_size
-        + f1002.fbe_size
-        + f1003.fbe_size
-        + f1004.fbe_size
-        + f1005.fbe_size
-        + f1006.fbe_size
-        + f1007.fbe_size
-        + f1008.fbe_size
-        + f1009.fbe_size
-        + f1010.fbe_size
-        + f1011.fbe_size
+      4 + 4 \
+        + parent.fbe_body - 4 - 4 \
+        + f1000.fbe_size \
+        + f1001.fbe_size \
+        + f1002.fbe_size \
+        + f1003.fbe_size \
+        + f1004.fbe_size \
+        + f1005.fbe_size \
+        + f1006.fbe_size \
+        + f1007.fbe_size \
+        + f1008.fbe_size \
+        + f1009.fbe_size \
+        + f1010.fbe_size \
+        + f1011.fbe_size \
     end
 
     # Get the field extra size
@@ -8607,20 +8619,20 @@ module Test
 
       @_buffer.shift(fbe_struct_offset)
 
-      fbe_result = fbe_body
-        + parent.fbe_extra
-        + f1000.fbe_extra
-        + f1001.fbe_extra
-        + f1002.fbe_extra
-        + f1003.fbe_extra
-        + f1004.fbe_extra
-        + f1005.fbe_extra
-        + f1006.fbe_extra
-        + f1007.fbe_extra
-        + f1008.fbe_extra
-        + f1009.fbe_extra
-        + f1010.fbe_extra
-        + f1011.fbe_extra
+      fbe_result = fbe_body \
+        + parent.fbe_extra \
+        + f1000.fbe_extra \
+        + f1001.fbe_extra \
+        + f1002.fbe_extra \
+        + f1003.fbe_extra \
+        + f1004.fbe_extra \
+        + f1005.fbe_extra \
+        + f1006.fbe_extra \
+        + f1007.fbe_extra \
+        + f1008.fbe_extra \
+        + f1009.fbe_extra \
+        + f1010.fbe_extra \
+        + f1011.fbe_extra \
 
       @_buffer.unshift(fbe_struct_offset)
 
@@ -8988,7 +9000,7 @@ module Test
   class StructNestedModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FieldModelStructNested(self.buffer, 4)
+      @_model = FieldModelStructNested.new(self.buffer, 4)
     end
 
     def model
@@ -9066,19 +9078,19 @@ module Test
   class FinalModelStructNested < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_parent = FinalModelStructOptional(self.buffer, 0)
-      @_f1000 = FinalModelEnumSimple(self.buffer, 0)
-      @_f1001 = FBE::FinalModelOptional(FinalModelEnumSimple(self.buffer, 0), self.buffer, 0)
-      @_f1002 = FinalModelEnumTyped(self.buffer, 0)
-      @_f1003 = FBE::FinalModelOptional(FinalModelEnumTyped(self.buffer, 0), self.buffer, 0)
-      @_f1004 = FinalModelFlagsSimple(self.buffer, 0)
-      @_f1005 = FBE::FinalModelOptional(FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0)
-      @_f1006 = FinalModelFlagsTyped(self.buffer, 0)
-      @_f1007 = FBE::FinalModelOptional(FinalModelFlagsTyped(self.buffer, 0), self.buffer, 0)
-      @_f1008 = FinalModelStructSimple(self.buffer, 0)
-      @_f1009 = FBE::FinalModelOptional(FinalModelStructSimple(self.buffer, 0), self.buffer, 0)
-      @_f1010 = FinalModelStructOptional(self.buffer, 0)
-      @_f1011 = FBE::FinalModelOptional(FinalModelStructOptional(self.buffer, 0), self.buffer, 0)
+      @_parent = FinalModelStructOptional.new(self.buffer, 0)
+      @_f1000 = FinalModelEnumSimple.new(self.buffer, 0)
+      @_f1001 = FBE::FinalModelOptional.new(FinalModelEnumSimple.new(self.buffer, 0), self.buffer, 0)
+      @_f1002 = FinalModelEnumTyped.new(self.buffer, 0)
+      @_f1003 = FBE::FinalModelOptional.new(FinalModelEnumTyped.new(self.buffer, 0), self.buffer, 0)
+      @_f1004 = FinalModelFlagsSimple.new(self.buffer, 0)
+      @_f1005 = FBE::FinalModelOptional.new(FinalModelFlagsSimple.new(self.buffer, 0), self.buffer, 0)
+      @_f1006 = FinalModelFlagsTyped.new(self.buffer, 0)
+      @_f1007 = FBE::FinalModelOptional.new(FinalModelFlagsTyped.new(self.buffer, 0), self.buffer, 0)
+      @_f1008 = FinalModelStructSimple.new(self.buffer, 0)
+      @_f1009 = FBE::FinalModelOptional.new(FinalModelStructSimple.new(self.buffer, 0), self.buffer, 0)
+      @_f1010 = FinalModelStructOptional.new(self.buffer, 0)
+      @_f1011 = FBE::FinalModelOptional.new(FinalModelStructOptional.new(self.buffer, 0), self.buffer, 0)
     end
 
     def parent
@@ -9135,20 +9147,20 @@ module Test
 
     # Get the allocation size
     def fbe_allocation_size(fbe_value)
-      0
-        + parent.fbe_allocation_size(fbe_value)
-        + f1000.fbe_allocation_size(fbe_value.f1000)
-        + f1001.fbe_allocation_size(fbe_value.f1001)
-        + f1002.fbe_allocation_size(fbe_value.f1002)
-        + f1003.fbe_allocation_size(fbe_value.f1003)
-        + f1004.fbe_allocation_size(fbe_value.f1004)
-        + f1005.fbe_allocation_size(fbe_value.f1005)
-        + f1006.fbe_allocation_size(fbe_value.f1006)
-        + f1007.fbe_allocation_size(fbe_value.f1007)
-        + f1008.fbe_allocation_size(fbe_value.f1008)
-        + f1009.fbe_allocation_size(fbe_value.f1009)
-        + f1010.fbe_allocation_size(fbe_value.f1010)
-        + f1011.fbe_allocation_size(fbe_value.f1011)
+      0 \
+        + parent.fbe_allocation_size(fbe_value) \
+        + f1000.fbe_allocation_size(fbe_value.f1000) \
+        + f1001.fbe_allocation_size(fbe_value.f1001) \
+        + f1002.fbe_allocation_size(fbe_value.f1002) \
+        + f1003.fbe_allocation_size(fbe_value.f1003) \
+        + f1004.fbe_allocation_size(fbe_value.f1004) \
+        + f1005.fbe_allocation_size(fbe_value.f1005) \
+        + f1006.fbe_allocation_size(fbe_value.f1006) \
+        + f1007.fbe_allocation_size(fbe_value.f1007) \
+        + f1008.fbe_allocation_size(fbe_value.f1008) \
+        + f1009.fbe_allocation_size(fbe_value.f1009) \
+        + f1010.fbe_allocation_size(fbe_value.f1010) \
+        + f1011.fbe_allocation_size(fbe_value.f1011) \
     end
 
     # Get the field type
@@ -9172,92 +9184,92 @@ module Test
 
       parent.fbe_offset = fbe_current_offset
       fbe_field_size = parent.verify_fields
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f1000.fbe_offset = fbe_current_offset
       fbe_field_size = f1000.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f1001.fbe_offset = fbe_current_offset
       fbe_field_size = f1001.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f1002.fbe_offset = fbe_current_offset
       fbe_field_size = f1002.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f1003.fbe_offset = fbe_current_offset
       fbe_field_size = f1003.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f1004.fbe_offset = fbe_current_offset
       fbe_field_size = f1004.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f1005.fbe_offset = fbe_current_offset
       fbe_field_size = f1005.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f1006.fbe_offset = fbe_current_offset
       fbe_field_size = f1006.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f1007.fbe_offset = fbe_current_offset
       fbe_field_size = f1007.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f1008.fbe_offset = fbe_current_offset
       fbe_field_size = f1008.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f1009.fbe_offset = fbe_current_offset
       fbe_field_size = f1009.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f1010.fbe_offset = fbe_current_offset
       fbe_field_size = f1010.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f1011.fbe_offset = fbe_current_offset
       fbe_field_size = f1011.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
@@ -9472,7 +9484,7 @@ module Test
   class StructNestedFinalModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FinalModelStructNested(self.buffer, 8)
+      @_model = FinalModelStructNested.new(self.buffer, 8)
     end
 
     # Get the model type
@@ -9622,9 +9634,9 @@ module Test
   class FieldModelStructBytes < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_f1 = FBE::FieldModelBytes(self.buffer, 4 + 4)
-      @_f2 = FBE::FieldModelOptional(FBE::FieldModelBytes(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
-      @_f3 = FBE::FieldModelOptional(FBE::FieldModelBytes(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
+      @_f1 = FBE::FieldModelBytes.new(self.buffer, 4 + 4)
+      @_f2 = FBE::FieldModelOptional.new(FBE::FieldModelBytes.new(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
+      @_f3 = FBE::FieldModelOptional.new(FBE::FieldModelBytes.new(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
     end
 
     def f1
@@ -9646,10 +9658,10 @@ module Test
 
     # Get the field body size
     def fbe_body
-      4 + 4
-        + f1.fbe_size
-        + f2.fbe_size
-        + f3.fbe_size
+      4 + 4 \
+        + f1.fbe_size \
+        + f2.fbe_size \
+        + f3.fbe_size \
     end
 
     # Get the field extra size
@@ -9665,10 +9677,10 @@ module Test
 
       @_buffer.shift(fbe_struct_offset)
 
-      fbe_result = fbe_body
-        + f1.fbe_extra
-        + f2.fbe_extra
-        + f3.fbe_extra
+      fbe_result = fbe_body \
+        + f1.fbe_extra \
+        + f2.fbe_extra \
+        + f3.fbe_extra \
 
       @_buffer.unshift(fbe_struct_offset)
 
@@ -9858,7 +9870,7 @@ module Test
   class StructBytesModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FieldModelStructBytes(self.buffer, 4)
+      @_model = FieldModelStructBytes.new(self.buffer, 4)
     end
 
     def model
@@ -9936,9 +9948,9 @@ module Test
   class FinalModelStructBytes < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_f1 = FBE::FinalModelBytes(self.buffer, 0)
-      @_f2 = FBE::FinalModelOptional(FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0)
-      @_f3 = FBE::FinalModelOptional(FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0)
+      @_f1 = FBE::FinalModelBytes.new(self.buffer, 0)
+      @_f2 = FBE::FinalModelOptional.new(FBE::FinalModelBytes.new(self.buffer, 0), self.buffer, 0)
+      @_f3 = FBE::FinalModelOptional.new(FBE::FinalModelBytes.new(self.buffer, 0), self.buffer, 0)
     end
 
     def f1
@@ -9955,10 +9967,10 @@ module Test
 
     # Get the allocation size
     def fbe_allocation_size(fbe_value)
-      0
-        + f1.fbe_allocation_size(fbe_value.f1)
-        + f2.fbe_allocation_size(fbe_value.f2)
-        + f3.fbe_allocation_size(fbe_value.f3)
+      0 \
+        + f1.fbe_allocation_size(fbe_value.f1) \
+        + f2.fbe_allocation_size(fbe_value.f2) \
+        + f3.fbe_allocation_size(fbe_value.f3) \
     end
 
     # Get the field type
@@ -9982,22 +9994,22 @@ module Test
 
       f1.fbe_offset = fbe_current_offset
       fbe_field_size = f1.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f2.fbe_offset = fbe_current_offset
       fbe_field_size = f2.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f3.fbe_offset = fbe_current_offset
       fbe_field_size = f3.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
@@ -10083,7 +10095,7 @@ module Test
   class StructBytesFinalModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FinalModelStructBytes(self.buffer, 8)
+      @_model = FinalModelStructBytes.new(self.buffer, 8)
     end
 
     # Get the model type
@@ -10386,16 +10398,16 @@ module Test
   class FieldModelStructArray < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_f1 = FBE::FieldModelArray(FBE::FieldModelByte(self.buffer, 4 + 4), self.buffer, 4 + 4, 2)
-      @_f2 = FBE::FieldModelArray(FBE::FieldModelOptional(FBE::FieldModelByte(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size, 2)
-      @_f3 = FBE::FieldModelArray(FBE::FieldModelBytes(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size, 2)
-      @_f4 = FBE::FieldModelArray(FBE::FieldModelOptional(FBE::FieldModelBytes(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size, 2)
-      @_f5 = FBE::FieldModelArray(FieldModelEnumSimple(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), self.buffer, @_f4.fbe_offset + @_f4.fbe_size, 2)
-      @_f6 = FBE::FieldModelArray(FBE::FieldModelOptional(FieldModelEnumSimple(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size, 2)
-      @_f7 = FBE::FieldModelArray(FieldModelFlagsSimple(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), self.buffer, @_f6.fbe_offset + @_f6.fbe_size, 2)
-      @_f8 = FBE::FieldModelArray(FBE::FieldModelOptional(FieldModelFlagsSimple(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size, 2)
-      @_f9 = FBE::FieldModelArray(FieldModelStructSimple(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), self.buffer, @_f8.fbe_offset + @_f8.fbe_size, 2)
-      @_f10 = FBE::FieldModelArray(FBE::FieldModelOptional(FieldModelStructSimple(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size, 2)
+      @_f1 = FBE::FieldModelArray.new(FBE::FieldModelByte.new(self.buffer, 4 + 4), self.buffer, 4 + 4, 2)
+      @_f2 = FBE::FieldModelArray.new(FBE::FieldModelOptional.new(FBE::FieldModelByte.new(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size, 2)
+      @_f3 = FBE::FieldModelArray.new(FBE::FieldModelBytes.new(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size, 2)
+      @_f4 = FBE::FieldModelArray.new(FBE::FieldModelOptional.new(FBE::FieldModelBytes.new(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size, 2)
+      @_f5 = FBE::FieldModelArray.new(FieldModelEnumSimple.new(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), self.buffer, @_f4.fbe_offset + @_f4.fbe_size, 2)
+      @_f6 = FBE::FieldModelArray.new(FBE::FieldModelOptional.new(FieldModelEnumSimple.new(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size, 2)
+      @_f7 = FBE::FieldModelArray.new(FieldModelFlagsSimple.new(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), self.buffer, @_f6.fbe_offset + @_f6.fbe_size, 2)
+      @_f8 = FBE::FieldModelArray.new(FBE::FieldModelOptional.new(FieldModelFlagsSimple.new(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size, 2)
+      @_f9 = FBE::FieldModelArray.new(FieldModelStructSimple.new(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), self.buffer, @_f8.fbe_offset + @_f8.fbe_size, 2)
+      @_f10 = FBE::FieldModelArray.new(FBE::FieldModelOptional.new(FieldModelStructSimple.new(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size, 2)
     end
 
     def f1
@@ -10445,17 +10457,17 @@ module Test
 
     # Get the field body size
     def fbe_body
-      4 + 4
-        + f1.fbe_size
-        + f2.fbe_size
-        + f3.fbe_size
-        + f4.fbe_size
-        + f5.fbe_size
-        + f6.fbe_size
-        + f7.fbe_size
-        + f8.fbe_size
-        + f9.fbe_size
-        + f10.fbe_size
+      4 + 4 \
+        + f1.fbe_size \
+        + f2.fbe_size \
+        + f3.fbe_size \
+        + f4.fbe_size \
+        + f5.fbe_size \
+        + f6.fbe_size \
+        + f7.fbe_size \
+        + f8.fbe_size \
+        + f9.fbe_size \
+        + f10.fbe_size \
     end
 
     # Get the field extra size
@@ -10471,17 +10483,17 @@ module Test
 
       @_buffer.shift(fbe_struct_offset)
 
-      fbe_result = fbe_body
-        + f1.fbe_extra
-        + f2.fbe_extra
-        + f3.fbe_extra
-        + f4.fbe_extra
-        + f5.fbe_extra
-        + f6.fbe_extra
-        + f7.fbe_extra
-        + f8.fbe_extra
-        + f9.fbe_extra
-        + f10.fbe_extra
+      fbe_result = fbe_body \
+        + f1.fbe_extra \
+        + f2.fbe_extra \
+        + f3.fbe_extra \
+        + f4.fbe_extra \
+        + f5.fbe_extra \
+        + f6.fbe_extra \
+        + f7.fbe_extra \
+        + f8.fbe_extra \
+        + f9.fbe_extra \
+        + f10.fbe_extra \
 
       @_buffer.unshift(fbe_struct_offset)
 
@@ -10797,7 +10809,7 @@ module Test
   class StructArrayModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FieldModelStructArray(self.buffer, 4)
+      @_model = FieldModelStructArray.new(self.buffer, 4)
     end
 
     def model
@@ -10875,16 +10887,16 @@ module Test
   class FinalModelStructArray < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_f1 = FBE::FinalModelArray(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0, 2)
-      @_f2 = FBE::FinalModelArray(FBE::FinalModelOptional(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0), self.buffer, 0, 2)
-      @_f3 = FBE::FinalModelArray(FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0, 2)
-      @_f4 = FBE::FinalModelArray(FBE::FinalModelOptional(FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0), self.buffer, 0, 2)
-      @_f5 = FBE::FinalModelArray(FinalModelEnumSimple(self.buffer, 0), self.buffer, 0, 2)
-      @_f6 = FBE::FinalModelArray(FBE::FinalModelOptional(FinalModelEnumSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0, 2)
-      @_f7 = FBE::FinalModelArray(FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0, 2)
-      @_f8 = FBE::FinalModelArray(FBE::FinalModelOptional(FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0, 2)
-      @_f9 = FBE::FinalModelArray(FinalModelStructSimple(self.buffer, 0), self.buffer, 0, 2)
-      @_f10 = FBE::FinalModelArray(FBE::FinalModelOptional(FinalModelStructSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0, 2)
+      @_f1 = FBE::FinalModelArray.new(FBE::FinalModelByte.new(self.buffer, 0), self.buffer, 0, 2)
+      @_f2 = FBE::FinalModelArray.new(FBE::FinalModelOptional.new(FBE::FinalModelByte.new(self.buffer, 0), self.buffer, 0), self.buffer, 0, 2)
+      @_f3 = FBE::FinalModelArray.new(FBE::FinalModelBytes.new(self.buffer, 0), self.buffer, 0, 2)
+      @_f4 = FBE::FinalModelArray.new(FBE::FinalModelOptional.new(FBE::FinalModelBytes.new(self.buffer, 0), self.buffer, 0), self.buffer, 0, 2)
+      @_f5 = FBE::FinalModelArray.new(FinalModelEnumSimple.new(self.buffer, 0), self.buffer, 0, 2)
+      @_f6 = FBE::FinalModelArray.new(FBE::FinalModelOptional.new(FinalModelEnumSimple.new(self.buffer, 0), self.buffer, 0), self.buffer, 0, 2)
+      @_f7 = FBE::FinalModelArray.new(FinalModelFlagsSimple.new(self.buffer, 0), self.buffer, 0, 2)
+      @_f8 = FBE::FinalModelArray.new(FBE::FinalModelOptional.new(FinalModelFlagsSimple.new(self.buffer, 0), self.buffer, 0), self.buffer, 0, 2)
+      @_f9 = FBE::FinalModelArray.new(FinalModelStructSimple.new(self.buffer, 0), self.buffer, 0, 2)
+      @_f10 = FBE::FinalModelArray.new(FBE::FinalModelOptional.new(FinalModelStructSimple.new(self.buffer, 0), self.buffer, 0), self.buffer, 0, 2)
     end
 
     def f1
@@ -10929,17 +10941,17 @@ module Test
 
     # Get the allocation size
     def fbe_allocation_size(fbe_value)
-      0
-        + f1.fbe_allocation_size(fbe_value.f1)
-        + f2.fbe_allocation_size(fbe_value.f2)
-        + f3.fbe_allocation_size(fbe_value.f3)
-        + f4.fbe_allocation_size(fbe_value.f4)
-        + f5.fbe_allocation_size(fbe_value.f5)
-        + f6.fbe_allocation_size(fbe_value.f6)
-        + f7.fbe_allocation_size(fbe_value.f7)
-        + f8.fbe_allocation_size(fbe_value.f8)
-        + f9.fbe_allocation_size(fbe_value.f9)
-        + f10.fbe_allocation_size(fbe_value.f10)
+      0 \
+        + f1.fbe_allocation_size(fbe_value.f1) \
+        + f2.fbe_allocation_size(fbe_value.f2) \
+        + f3.fbe_allocation_size(fbe_value.f3) \
+        + f4.fbe_allocation_size(fbe_value.f4) \
+        + f5.fbe_allocation_size(fbe_value.f5) \
+        + f6.fbe_allocation_size(fbe_value.f6) \
+        + f7.fbe_allocation_size(fbe_value.f7) \
+        + f8.fbe_allocation_size(fbe_value.f8) \
+        + f9.fbe_allocation_size(fbe_value.f9) \
+        + f10.fbe_allocation_size(fbe_value.f10) \
     end
 
     # Get the field type
@@ -10963,71 +10975,71 @@ module Test
 
       f1.fbe_offset = fbe_current_offset
       fbe_field_size = f1.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f2.fbe_offset = fbe_current_offset
       fbe_field_size = f2.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f3.fbe_offset = fbe_current_offset
       fbe_field_size = f3.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f4.fbe_offset = fbe_current_offset
       fbe_field_size = f4.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f5.fbe_offset = fbe_current_offset
       fbe_field_size = f5.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f6.fbe_offset = fbe_current_offset
       fbe_field_size = f6.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f7.fbe_offset = fbe_current_offset
       fbe_field_size = f7.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f8.fbe_offset = fbe_current_offset
       fbe_field_size = f8.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f9.fbe_offset = fbe_current_offset
       fbe_field_size = f9.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f10.fbe_offset = fbe_current_offset
       fbe_field_size = f10.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
@@ -11194,7 +11206,7 @@ module Test
   class StructArrayFinalModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FinalModelStructArray(self.buffer, 8)
+      @_model = FinalModelStructArray.new(self.buffer, 8)
     end
 
     # Get the model type
@@ -11497,16 +11509,16 @@ module Test
   class FieldModelStructVector < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_f1 = FBE::FieldModelVector(FBE::FieldModelByte(self.buffer, 4 + 4), self.buffer, 4 + 4)
-      @_f2 = FBE::FieldModelVector(FBE::FieldModelOptional(FBE::FieldModelByte(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
-      @_f3 = FBE::FieldModelVector(FBE::FieldModelBytes(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
-      @_f4 = FBE::FieldModelVector(FBE::FieldModelOptional(FBE::FieldModelBytes(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size)
-      @_f5 = FBE::FieldModelVector(FieldModelEnumSimple(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), self.buffer, @_f4.fbe_offset + @_f4.fbe_size)
-      @_f6 = FBE::FieldModelVector(FBE::FieldModelOptional(FieldModelEnumSimple(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size)
-      @_f7 = FBE::FieldModelVector(FieldModelFlagsSimple(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), self.buffer, @_f6.fbe_offset + @_f6.fbe_size)
-      @_f8 = FBE::FieldModelVector(FBE::FieldModelOptional(FieldModelFlagsSimple(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size)
-      @_f9 = FBE::FieldModelVector(FieldModelStructSimple(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), self.buffer, @_f8.fbe_offset + @_f8.fbe_size)
-      @_f10 = FBE::FieldModelVector(FBE::FieldModelOptional(FieldModelStructSimple(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size)
+      @_f1 = FBE::FieldModelVector.new(FBE::FieldModelByte.new(self.buffer, 4 + 4), self.buffer, 4 + 4)
+      @_f2 = FBE::FieldModelVector.new(FBE::FieldModelOptional.new(FBE::FieldModelByte.new(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
+      @_f3 = FBE::FieldModelVector.new(FBE::FieldModelBytes.new(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
+      @_f4 = FBE::FieldModelVector.new(FBE::FieldModelOptional.new(FBE::FieldModelBytes.new(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size)
+      @_f5 = FBE::FieldModelVector.new(FieldModelEnumSimple.new(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), self.buffer, @_f4.fbe_offset + @_f4.fbe_size)
+      @_f6 = FBE::FieldModelVector.new(FBE::FieldModelOptional.new(FieldModelEnumSimple.new(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size)
+      @_f7 = FBE::FieldModelVector.new(FieldModelFlagsSimple.new(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), self.buffer, @_f6.fbe_offset + @_f6.fbe_size)
+      @_f8 = FBE::FieldModelVector.new(FBE::FieldModelOptional.new(FieldModelFlagsSimple.new(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size)
+      @_f9 = FBE::FieldModelVector.new(FieldModelStructSimple.new(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), self.buffer, @_f8.fbe_offset + @_f8.fbe_size)
+      @_f10 = FBE::FieldModelVector.new(FBE::FieldModelOptional.new(FieldModelStructSimple.new(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size)
     end
 
     def f1
@@ -11556,17 +11568,17 @@ module Test
 
     # Get the field body size
     def fbe_body
-      4 + 4
-        + f1.fbe_size
-        + f2.fbe_size
-        + f3.fbe_size
-        + f4.fbe_size
-        + f5.fbe_size
-        + f6.fbe_size
-        + f7.fbe_size
-        + f8.fbe_size
-        + f9.fbe_size
-        + f10.fbe_size
+      4 + 4 \
+        + f1.fbe_size \
+        + f2.fbe_size \
+        + f3.fbe_size \
+        + f4.fbe_size \
+        + f5.fbe_size \
+        + f6.fbe_size \
+        + f7.fbe_size \
+        + f8.fbe_size \
+        + f9.fbe_size \
+        + f10.fbe_size \
     end
 
     # Get the field extra size
@@ -11582,17 +11594,17 @@ module Test
 
       @_buffer.shift(fbe_struct_offset)
 
-      fbe_result = fbe_body
-        + f1.fbe_extra
-        + f2.fbe_extra
-        + f3.fbe_extra
-        + f4.fbe_extra
-        + f5.fbe_extra
-        + f6.fbe_extra
-        + f7.fbe_extra
-        + f8.fbe_extra
-        + f9.fbe_extra
-        + f10.fbe_extra
+      fbe_result = fbe_body \
+        + f1.fbe_extra \
+        + f2.fbe_extra \
+        + f3.fbe_extra \
+        + f4.fbe_extra \
+        + f5.fbe_extra \
+        + f6.fbe_extra \
+        + f7.fbe_extra \
+        + f8.fbe_extra \
+        + f9.fbe_extra \
+        + f10.fbe_extra \
 
       @_buffer.unshift(fbe_struct_offset)
 
@@ -11908,7 +11920,7 @@ module Test
   class StructVectorModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FieldModelStructVector(self.buffer, 4)
+      @_model = FieldModelStructVector.new(self.buffer, 4)
     end
 
     def model
@@ -11986,16 +11998,16 @@ module Test
   class FinalModelStructVector < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_f1 = FBE::FinalModelVector(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0)
-      @_f2 = FBE::FinalModelVector(FBE::FinalModelOptional(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0), self.buffer, 0)
-      @_f3 = FBE::FinalModelVector(FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0)
-      @_f4 = FBE::FinalModelVector(FBE::FinalModelOptional(FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0), self.buffer, 0)
-      @_f5 = FBE::FinalModelVector(FinalModelEnumSimple(self.buffer, 0), self.buffer, 0)
-      @_f6 = FBE::FinalModelVector(FBE::FinalModelOptional(FinalModelEnumSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
-      @_f7 = FBE::FinalModelVector(FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0)
-      @_f8 = FBE::FinalModelVector(FBE::FinalModelOptional(FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
-      @_f9 = FBE::FinalModelVector(FinalModelStructSimple(self.buffer, 0), self.buffer, 0)
-      @_f10 = FBE::FinalModelVector(FBE::FinalModelOptional(FinalModelStructSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f1 = FBE::FinalModelVector.new(FBE::FinalModelByte.new(self.buffer, 0), self.buffer, 0)
+      @_f2 = FBE::FinalModelVector.new(FBE::FinalModelOptional.new(FBE::FinalModelByte.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f3 = FBE::FinalModelVector.new(FBE::FinalModelBytes.new(self.buffer, 0), self.buffer, 0)
+      @_f4 = FBE::FinalModelVector.new(FBE::FinalModelOptional.new(FBE::FinalModelBytes.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f5 = FBE::FinalModelVector.new(FinalModelEnumSimple.new(self.buffer, 0), self.buffer, 0)
+      @_f6 = FBE::FinalModelVector.new(FBE::FinalModelOptional.new(FinalModelEnumSimple.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f7 = FBE::FinalModelVector.new(FinalModelFlagsSimple.new(self.buffer, 0), self.buffer, 0)
+      @_f8 = FBE::FinalModelVector.new(FBE::FinalModelOptional.new(FinalModelFlagsSimple.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f9 = FBE::FinalModelVector.new(FinalModelStructSimple.new(self.buffer, 0), self.buffer, 0)
+      @_f10 = FBE::FinalModelVector.new(FBE::FinalModelOptional.new(FinalModelStructSimple.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
     end
 
     def f1
@@ -12040,17 +12052,17 @@ module Test
 
     # Get the allocation size
     def fbe_allocation_size(fbe_value)
-      0
-        + f1.fbe_allocation_size(fbe_value.f1)
-        + f2.fbe_allocation_size(fbe_value.f2)
-        + f3.fbe_allocation_size(fbe_value.f3)
-        + f4.fbe_allocation_size(fbe_value.f4)
-        + f5.fbe_allocation_size(fbe_value.f5)
-        + f6.fbe_allocation_size(fbe_value.f6)
-        + f7.fbe_allocation_size(fbe_value.f7)
-        + f8.fbe_allocation_size(fbe_value.f8)
-        + f9.fbe_allocation_size(fbe_value.f9)
-        + f10.fbe_allocation_size(fbe_value.f10)
+      0 \
+        + f1.fbe_allocation_size(fbe_value.f1) \
+        + f2.fbe_allocation_size(fbe_value.f2) \
+        + f3.fbe_allocation_size(fbe_value.f3) \
+        + f4.fbe_allocation_size(fbe_value.f4) \
+        + f5.fbe_allocation_size(fbe_value.f5) \
+        + f6.fbe_allocation_size(fbe_value.f6) \
+        + f7.fbe_allocation_size(fbe_value.f7) \
+        + f8.fbe_allocation_size(fbe_value.f8) \
+        + f9.fbe_allocation_size(fbe_value.f9) \
+        + f10.fbe_allocation_size(fbe_value.f10) \
     end
 
     # Get the field type
@@ -12074,71 +12086,71 @@ module Test
 
       f1.fbe_offset = fbe_current_offset
       fbe_field_size = f1.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f2.fbe_offset = fbe_current_offset
       fbe_field_size = f2.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f3.fbe_offset = fbe_current_offset
       fbe_field_size = f3.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f4.fbe_offset = fbe_current_offset
       fbe_field_size = f4.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f5.fbe_offset = fbe_current_offset
       fbe_field_size = f5.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f6.fbe_offset = fbe_current_offset
       fbe_field_size = f6.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f7.fbe_offset = fbe_current_offset
       fbe_field_size = f7.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f8.fbe_offset = fbe_current_offset
       fbe_field_size = f8.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f9.fbe_offset = fbe_current_offset
       fbe_field_size = f9.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f10.fbe_offset = fbe_current_offset
       fbe_field_size = f10.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
@@ -12305,7 +12317,7 @@ module Test
   class StructVectorFinalModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FinalModelStructVector(self.buffer, 8)
+      @_model = FinalModelStructVector.new(self.buffer, 8)
     end
 
     # Get the model type
@@ -12608,16 +12620,16 @@ module Test
   class FieldModelStructList < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_f1 = FBE::FieldModelVector(FBE::FieldModelByte(self.buffer, 4 + 4), self.buffer, 4 + 4)
-      @_f2 = FBE::FieldModelVector(FBE::FieldModelOptional(FBE::FieldModelByte(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
-      @_f3 = FBE::FieldModelVector(FBE::FieldModelBytes(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
-      @_f4 = FBE::FieldModelVector(FBE::FieldModelOptional(FBE::FieldModelBytes(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size)
-      @_f5 = FBE::FieldModelVector(FieldModelEnumSimple(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), self.buffer, @_f4.fbe_offset + @_f4.fbe_size)
-      @_f6 = FBE::FieldModelVector(FBE::FieldModelOptional(FieldModelEnumSimple(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size)
-      @_f7 = FBE::FieldModelVector(FieldModelFlagsSimple(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), self.buffer, @_f6.fbe_offset + @_f6.fbe_size)
-      @_f8 = FBE::FieldModelVector(FBE::FieldModelOptional(FieldModelFlagsSimple(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size)
-      @_f9 = FBE::FieldModelVector(FieldModelStructSimple(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), self.buffer, @_f8.fbe_offset + @_f8.fbe_size)
-      @_f10 = FBE::FieldModelVector(FBE::FieldModelOptional(FieldModelStructSimple(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size)
+      @_f1 = FBE::FieldModelVector.new(FBE::FieldModelByte.new(self.buffer, 4 + 4), self.buffer, 4 + 4)
+      @_f2 = FBE::FieldModelVector.new(FBE::FieldModelOptional.new(FBE::FieldModelByte.new(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
+      @_f3 = FBE::FieldModelVector.new(FBE::FieldModelBytes.new(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
+      @_f4 = FBE::FieldModelVector.new(FBE::FieldModelOptional.new(FBE::FieldModelBytes.new(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size)
+      @_f5 = FBE::FieldModelVector.new(FieldModelEnumSimple.new(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), self.buffer, @_f4.fbe_offset + @_f4.fbe_size)
+      @_f6 = FBE::FieldModelVector.new(FBE::FieldModelOptional.new(FieldModelEnumSimple.new(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size)
+      @_f7 = FBE::FieldModelVector.new(FieldModelFlagsSimple.new(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), self.buffer, @_f6.fbe_offset + @_f6.fbe_size)
+      @_f8 = FBE::FieldModelVector.new(FBE::FieldModelOptional.new(FieldModelFlagsSimple.new(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size)
+      @_f9 = FBE::FieldModelVector.new(FieldModelStructSimple.new(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), self.buffer, @_f8.fbe_offset + @_f8.fbe_size)
+      @_f10 = FBE::FieldModelVector.new(FBE::FieldModelOptional.new(FieldModelStructSimple.new(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size)
     end
 
     def f1
@@ -12667,17 +12679,17 @@ module Test
 
     # Get the field body size
     def fbe_body
-      4 + 4
-        + f1.fbe_size
-        + f2.fbe_size
-        + f3.fbe_size
-        + f4.fbe_size
-        + f5.fbe_size
-        + f6.fbe_size
-        + f7.fbe_size
-        + f8.fbe_size
-        + f9.fbe_size
-        + f10.fbe_size
+      4 + 4 \
+        + f1.fbe_size \
+        + f2.fbe_size \
+        + f3.fbe_size \
+        + f4.fbe_size \
+        + f5.fbe_size \
+        + f6.fbe_size \
+        + f7.fbe_size \
+        + f8.fbe_size \
+        + f9.fbe_size \
+        + f10.fbe_size \
     end
 
     # Get the field extra size
@@ -12693,17 +12705,17 @@ module Test
 
       @_buffer.shift(fbe_struct_offset)
 
-      fbe_result = fbe_body
-        + f1.fbe_extra
-        + f2.fbe_extra
-        + f3.fbe_extra
-        + f4.fbe_extra
-        + f5.fbe_extra
-        + f6.fbe_extra
-        + f7.fbe_extra
-        + f8.fbe_extra
-        + f9.fbe_extra
-        + f10.fbe_extra
+      fbe_result = fbe_body \
+        + f1.fbe_extra \
+        + f2.fbe_extra \
+        + f3.fbe_extra \
+        + f4.fbe_extra \
+        + f5.fbe_extra \
+        + f6.fbe_extra \
+        + f7.fbe_extra \
+        + f8.fbe_extra \
+        + f9.fbe_extra \
+        + f10.fbe_extra \
 
       @_buffer.unshift(fbe_struct_offset)
 
@@ -13019,7 +13031,7 @@ module Test
   class StructListModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FieldModelStructList(self.buffer, 4)
+      @_model = FieldModelStructList.new(self.buffer, 4)
     end
 
     def model
@@ -13097,16 +13109,16 @@ module Test
   class FinalModelStructList < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_f1 = FBE::FinalModelVector(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0)
-      @_f2 = FBE::FinalModelVector(FBE::FinalModelOptional(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0), self.buffer, 0)
-      @_f3 = FBE::FinalModelVector(FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0)
-      @_f4 = FBE::FinalModelVector(FBE::FinalModelOptional(FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0), self.buffer, 0)
-      @_f5 = FBE::FinalModelVector(FinalModelEnumSimple(self.buffer, 0), self.buffer, 0)
-      @_f6 = FBE::FinalModelVector(FBE::FinalModelOptional(FinalModelEnumSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
-      @_f7 = FBE::FinalModelVector(FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0)
-      @_f8 = FBE::FinalModelVector(FBE::FinalModelOptional(FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
-      @_f9 = FBE::FinalModelVector(FinalModelStructSimple(self.buffer, 0), self.buffer, 0)
-      @_f10 = FBE::FinalModelVector(FBE::FinalModelOptional(FinalModelStructSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f1 = FBE::FinalModelVector.new(FBE::FinalModelByte.new(self.buffer, 0), self.buffer, 0)
+      @_f2 = FBE::FinalModelVector.new(FBE::FinalModelOptional.new(FBE::FinalModelByte.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f3 = FBE::FinalModelVector.new(FBE::FinalModelBytes.new(self.buffer, 0), self.buffer, 0)
+      @_f4 = FBE::FinalModelVector.new(FBE::FinalModelOptional.new(FBE::FinalModelBytes.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f5 = FBE::FinalModelVector.new(FinalModelEnumSimple.new(self.buffer, 0), self.buffer, 0)
+      @_f6 = FBE::FinalModelVector.new(FBE::FinalModelOptional.new(FinalModelEnumSimple.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f7 = FBE::FinalModelVector.new(FinalModelFlagsSimple.new(self.buffer, 0), self.buffer, 0)
+      @_f8 = FBE::FinalModelVector.new(FBE::FinalModelOptional.new(FinalModelFlagsSimple.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f9 = FBE::FinalModelVector.new(FinalModelStructSimple.new(self.buffer, 0), self.buffer, 0)
+      @_f10 = FBE::FinalModelVector.new(FBE::FinalModelOptional.new(FinalModelStructSimple.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
     end
 
     def f1
@@ -13151,17 +13163,17 @@ module Test
 
     # Get the allocation size
     def fbe_allocation_size(fbe_value)
-      0
-        + f1.fbe_allocation_size(fbe_value.f1)
-        + f2.fbe_allocation_size(fbe_value.f2)
-        + f3.fbe_allocation_size(fbe_value.f3)
-        + f4.fbe_allocation_size(fbe_value.f4)
-        + f5.fbe_allocation_size(fbe_value.f5)
-        + f6.fbe_allocation_size(fbe_value.f6)
-        + f7.fbe_allocation_size(fbe_value.f7)
-        + f8.fbe_allocation_size(fbe_value.f8)
-        + f9.fbe_allocation_size(fbe_value.f9)
-        + f10.fbe_allocation_size(fbe_value.f10)
+      0 \
+        + f1.fbe_allocation_size(fbe_value.f1) \
+        + f2.fbe_allocation_size(fbe_value.f2) \
+        + f3.fbe_allocation_size(fbe_value.f3) \
+        + f4.fbe_allocation_size(fbe_value.f4) \
+        + f5.fbe_allocation_size(fbe_value.f5) \
+        + f6.fbe_allocation_size(fbe_value.f6) \
+        + f7.fbe_allocation_size(fbe_value.f7) \
+        + f8.fbe_allocation_size(fbe_value.f8) \
+        + f9.fbe_allocation_size(fbe_value.f9) \
+        + f10.fbe_allocation_size(fbe_value.f10) \
     end
 
     # Get the field type
@@ -13185,71 +13197,71 @@ module Test
 
       f1.fbe_offset = fbe_current_offset
       fbe_field_size = f1.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f2.fbe_offset = fbe_current_offset
       fbe_field_size = f2.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f3.fbe_offset = fbe_current_offset
       fbe_field_size = f3.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f4.fbe_offset = fbe_current_offset
       fbe_field_size = f4.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f5.fbe_offset = fbe_current_offset
       fbe_field_size = f5.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f6.fbe_offset = fbe_current_offset
       fbe_field_size = f6.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f7.fbe_offset = fbe_current_offset
       fbe_field_size = f7.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f8.fbe_offset = fbe_current_offset
       fbe_field_size = f8.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f9.fbe_offset = fbe_current_offset
       fbe_field_size = f9.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f10.fbe_offset = fbe_current_offset
       fbe_field_size = f10.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
@@ -13416,7 +13428,7 @@ module Test
   class StructListFinalModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FinalModelStructList(self.buffer, 8)
+      @_model = FinalModelStructList.new(self.buffer, 8)
     end
 
     # Get the model type
@@ -13611,10 +13623,10 @@ module Test
   class FieldModelStructSet < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_f1 = FBE::FieldModelSet(FBE::FieldModelByte(self.buffer, 4 + 4), self.buffer, 4 + 4)
-      @_f2 = FBE::FieldModelSet(FieldModelEnumSimple(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
-      @_f3 = FBE::FieldModelSet(FieldModelFlagsSimple(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
-      @_f4 = FBE::FieldModelSet(FieldModelStructSimple(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size)
+      @_f1 = FBE::FieldModelSet.new(FBE::FieldModelByte.new(self.buffer, 4 + 4), self.buffer, 4 + 4)
+      @_f2 = FBE::FieldModelSet.new(FieldModelEnumSimple.new(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
+      @_f3 = FBE::FieldModelSet.new(FieldModelFlagsSimple.new(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
+      @_f4 = FBE::FieldModelSet.new(FieldModelStructSimple.new(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size)
     end
 
     def f1
@@ -13640,11 +13652,11 @@ module Test
 
     # Get the field body size
     def fbe_body
-      4 + 4
-        + f1.fbe_size
-        + f2.fbe_size
-        + f3.fbe_size
-        + f4.fbe_size
+      4 + 4 \
+        + f1.fbe_size \
+        + f2.fbe_size \
+        + f3.fbe_size \
+        + f4.fbe_size \
     end
 
     # Get the field extra size
@@ -13660,11 +13672,11 @@ module Test
 
       @_buffer.shift(fbe_struct_offset)
 
-      fbe_result = fbe_body
-        + f1.fbe_extra
-        + f2.fbe_extra
-        + f3.fbe_extra
-        + f4.fbe_extra
+      fbe_result = fbe_body \
+        + f1.fbe_extra \
+        + f2.fbe_extra \
+        + f3.fbe_extra \
+        + f4.fbe_extra \
 
       @_buffer.unshift(fbe_struct_offset)
 
@@ -13872,7 +13884,7 @@ module Test
   class StructSetModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FieldModelStructSet(self.buffer, 4)
+      @_model = FieldModelStructSet.new(self.buffer, 4)
     end
 
     def model
@@ -13950,10 +13962,10 @@ module Test
   class FinalModelStructSet < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_f1 = FBE::FinalModelSet(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0)
-      @_f2 = FBE::FinalModelSet(FinalModelEnumSimple(self.buffer, 0), self.buffer, 0)
-      @_f3 = FBE::FinalModelSet(FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0)
-      @_f4 = FBE::FinalModelSet(FinalModelStructSimple(self.buffer, 0), self.buffer, 0)
+      @_f1 = FBE::FinalModelSet.new(FBE::FinalModelByte.new(self.buffer, 0), self.buffer, 0)
+      @_f2 = FBE::FinalModelSet.new(FinalModelEnumSimple.new(self.buffer, 0), self.buffer, 0)
+      @_f3 = FBE::FinalModelSet.new(FinalModelFlagsSimple.new(self.buffer, 0), self.buffer, 0)
+      @_f4 = FBE::FinalModelSet.new(FinalModelStructSimple.new(self.buffer, 0), self.buffer, 0)
     end
 
     def f1
@@ -13974,11 +13986,11 @@ module Test
 
     # Get the allocation size
     def fbe_allocation_size(fbe_value)
-      0
-        + f1.fbe_allocation_size(fbe_value.f1)
-        + f2.fbe_allocation_size(fbe_value.f2)
-        + f3.fbe_allocation_size(fbe_value.f3)
-        + f4.fbe_allocation_size(fbe_value.f4)
+      0 \
+        + f1.fbe_allocation_size(fbe_value.f1) \
+        + f2.fbe_allocation_size(fbe_value.f2) \
+        + f3.fbe_allocation_size(fbe_value.f3) \
+        + f4.fbe_allocation_size(fbe_value.f4) \
     end
 
     # Get the field type
@@ -14002,29 +14014,29 @@ module Test
 
       f1.fbe_offset = fbe_current_offset
       fbe_field_size = f1.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f2.fbe_offset = fbe_current_offset
       fbe_field_size = f2.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f3.fbe_offset = fbe_current_offset
       fbe_field_size = f3.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f4.fbe_offset = fbe_current_offset
       fbe_field_size = f4.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
@@ -14119,7 +14131,7 @@ module Test
   class StructSetFinalModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FinalModelStructSet(self.buffer, 8)
+      @_model = FinalModelStructSet.new(self.buffer, 8)
     end
 
     # Get the model type
@@ -14492,16 +14504,16 @@ module Test
   class FieldModelStructMap < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_f1 = FBE::FieldModelMap(FBE::FieldModelInt32(self.buffer, 4 + 4), FBE::FieldModelByte(self.buffer, 4 + 4), self.buffer, 4 + 4)
-      @_f2 = FBE::FieldModelMap(FBE::FieldModelInt32(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), FBE::FieldModelOptional(FBE::FieldModelByte(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
-      @_f3 = FBE::FieldModelMap(FBE::FieldModelInt32(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), FBE::FieldModelBytes(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
-      @_f4 = FBE::FieldModelMap(FBE::FieldModelInt32(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), FBE::FieldModelOptional(FBE::FieldModelBytes(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size)
-      @_f5 = FBE::FieldModelMap(FBE::FieldModelInt32(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), FieldModelEnumSimple(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), self.buffer, @_f4.fbe_offset + @_f4.fbe_size)
-      @_f6 = FBE::FieldModelMap(FBE::FieldModelInt32(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), FBE::FieldModelOptional(FieldModelEnumSimple(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size)
-      @_f7 = FBE::FieldModelMap(FBE::FieldModelInt32(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), FieldModelFlagsSimple(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), self.buffer, @_f6.fbe_offset + @_f6.fbe_size)
-      @_f8 = FBE::FieldModelMap(FBE::FieldModelInt32(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), FBE::FieldModelOptional(FieldModelFlagsSimple(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size)
-      @_f9 = FBE::FieldModelMap(FBE::FieldModelInt32(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), FieldModelStructSimple(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), self.buffer, @_f8.fbe_offset + @_f8.fbe_size)
-      @_f10 = FBE::FieldModelMap(FBE::FieldModelInt32(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), FBE::FieldModelOptional(FieldModelStructSimple(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size)
+      @_f1 = FBE::FieldModelMap.new(FBE::FieldModelInt32.new(self.buffer, 4 + 4), FBE::FieldModelByte.new(self.buffer, 4 + 4), self.buffer, 4 + 4)
+      @_f2 = FBE::FieldModelMap.new(FBE::FieldModelInt32.new(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), FBE::FieldModelOptional.new(FBE::FieldModelByte.new(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
+      @_f3 = FBE::FieldModelMap.new(FBE::FieldModelInt32.new(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), FBE::FieldModelBytes.new(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
+      @_f4 = FBE::FieldModelMap.new(FBE::FieldModelInt32.new(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), FBE::FieldModelOptional.new(FBE::FieldModelBytes.new(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size)
+      @_f5 = FBE::FieldModelMap.new(FBE::FieldModelInt32.new(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), FieldModelEnumSimple.new(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), self.buffer, @_f4.fbe_offset + @_f4.fbe_size)
+      @_f6 = FBE::FieldModelMap.new(FBE::FieldModelInt32.new(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), FBE::FieldModelOptional.new(FieldModelEnumSimple.new(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size)
+      @_f7 = FBE::FieldModelMap.new(FBE::FieldModelInt32.new(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), FieldModelFlagsSimple.new(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), self.buffer, @_f6.fbe_offset + @_f6.fbe_size)
+      @_f8 = FBE::FieldModelMap.new(FBE::FieldModelInt32.new(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), FBE::FieldModelOptional.new(FieldModelFlagsSimple.new(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size)
+      @_f9 = FBE::FieldModelMap.new(FBE::FieldModelInt32.new(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), FieldModelStructSimple.new(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), self.buffer, @_f8.fbe_offset + @_f8.fbe_size)
+      @_f10 = FBE::FieldModelMap.new(FBE::FieldModelInt32.new(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), FBE::FieldModelOptional.new(FieldModelStructSimple.new(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size)
     end
 
     def f1
@@ -14551,17 +14563,17 @@ module Test
 
     # Get the field body size
     def fbe_body
-      4 + 4
-        + f1.fbe_size
-        + f2.fbe_size
-        + f3.fbe_size
-        + f4.fbe_size
-        + f5.fbe_size
-        + f6.fbe_size
-        + f7.fbe_size
-        + f8.fbe_size
-        + f9.fbe_size
-        + f10.fbe_size
+      4 + 4 \
+        + f1.fbe_size \
+        + f2.fbe_size \
+        + f3.fbe_size \
+        + f4.fbe_size \
+        + f5.fbe_size \
+        + f6.fbe_size \
+        + f7.fbe_size \
+        + f8.fbe_size \
+        + f9.fbe_size \
+        + f10.fbe_size \
     end
 
     # Get the field extra size
@@ -14577,17 +14589,17 @@ module Test
 
       @_buffer.shift(fbe_struct_offset)
 
-      fbe_result = fbe_body
-        + f1.fbe_extra
-        + f2.fbe_extra
-        + f3.fbe_extra
-        + f4.fbe_extra
-        + f5.fbe_extra
-        + f6.fbe_extra
-        + f7.fbe_extra
-        + f8.fbe_extra
-        + f9.fbe_extra
-        + f10.fbe_extra
+      fbe_result = fbe_body \
+        + f1.fbe_extra \
+        + f2.fbe_extra \
+        + f3.fbe_extra \
+        + f4.fbe_extra \
+        + f5.fbe_extra \
+        + f6.fbe_extra \
+        + f7.fbe_extra \
+        + f8.fbe_extra \
+        + f9.fbe_extra \
+        + f10.fbe_extra \
 
       @_buffer.unshift(fbe_struct_offset)
 
@@ -14903,7 +14915,7 @@ module Test
   class StructMapModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FieldModelStructMap(self.buffer, 4)
+      @_model = FieldModelStructMap.new(self.buffer, 4)
     end
 
     def model
@@ -14981,16 +14993,16 @@ module Test
   class FinalModelStructMap < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_f1 = FBE::FinalModelMap(FBE::FinalModelInt32(self.buffer, 0), FBE::FinalModelByte(self.buffer, 0), self.buffer, 0)
-      @_f2 = FBE::FinalModelMap(FBE::FinalModelInt32(self.buffer, 0), FBE::FinalModelOptional(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0), self.buffer, 0)
-      @_f3 = FBE::FinalModelMap(FBE::FinalModelInt32(self.buffer, 0), FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0)
-      @_f4 = FBE::FinalModelMap(FBE::FinalModelInt32(self.buffer, 0), FBE::FinalModelOptional(FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0), self.buffer, 0)
-      @_f5 = FBE::FinalModelMap(FBE::FinalModelInt32(self.buffer, 0), FinalModelEnumSimple(self.buffer, 0), self.buffer, 0)
-      @_f6 = FBE::FinalModelMap(FBE::FinalModelInt32(self.buffer, 0), FBE::FinalModelOptional(FinalModelEnumSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
-      @_f7 = FBE::FinalModelMap(FBE::FinalModelInt32(self.buffer, 0), FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0)
-      @_f8 = FBE::FinalModelMap(FBE::FinalModelInt32(self.buffer, 0), FBE::FinalModelOptional(FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
-      @_f9 = FBE::FinalModelMap(FBE::FinalModelInt32(self.buffer, 0), FinalModelStructSimple(self.buffer, 0), self.buffer, 0)
-      @_f10 = FBE::FinalModelMap(FBE::FinalModelInt32(self.buffer, 0), FBE::FinalModelOptional(FinalModelStructSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f1 = FBE::FinalModelMap.new(FBE::FinalModelInt32.new(self.buffer, 0), FBE::FinalModelByte.new(self.buffer, 0), self.buffer, 0)
+      @_f2 = FBE::FinalModelMap.new(FBE::FinalModelInt32.new(self.buffer, 0), FBE::FinalModelOptional.new(FBE::FinalModelByte.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f3 = FBE::FinalModelMap.new(FBE::FinalModelInt32.new(self.buffer, 0), FBE::FinalModelBytes.new(self.buffer, 0), self.buffer, 0)
+      @_f4 = FBE::FinalModelMap.new(FBE::FinalModelInt32.new(self.buffer, 0), FBE::FinalModelOptional.new(FBE::FinalModelBytes.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f5 = FBE::FinalModelMap.new(FBE::FinalModelInt32.new(self.buffer, 0), FinalModelEnumSimple.new(self.buffer, 0), self.buffer, 0)
+      @_f6 = FBE::FinalModelMap.new(FBE::FinalModelInt32.new(self.buffer, 0), FBE::FinalModelOptional.new(FinalModelEnumSimple.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f7 = FBE::FinalModelMap.new(FBE::FinalModelInt32.new(self.buffer, 0), FinalModelFlagsSimple.new(self.buffer, 0), self.buffer, 0)
+      @_f8 = FBE::FinalModelMap.new(FBE::FinalModelInt32.new(self.buffer, 0), FBE::FinalModelOptional.new(FinalModelFlagsSimple.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f9 = FBE::FinalModelMap.new(FBE::FinalModelInt32.new(self.buffer, 0), FinalModelStructSimple.new(self.buffer, 0), self.buffer, 0)
+      @_f10 = FBE::FinalModelMap.new(FBE::FinalModelInt32.new(self.buffer, 0), FBE::FinalModelOptional.new(FinalModelStructSimple.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
     end
 
     def f1
@@ -15035,17 +15047,17 @@ module Test
 
     # Get the allocation size
     def fbe_allocation_size(fbe_value)
-      0
-        + f1.fbe_allocation_size(fbe_value.f1)
-        + f2.fbe_allocation_size(fbe_value.f2)
-        + f3.fbe_allocation_size(fbe_value.f3)
-        + f4.fbe_allocation_size(fbe_value.f4)
-        + f5.fbe_allocation_size(fbe_value.f5)
-        + f6.fbe_allocation_size(fbe_value.f6)
-        + f7.fbe_allocation_size(fbe_value.f7)
-        + f8.fbe_allocation_size(fbe_value.f8)
-        + f9.fbe_allocation_size(fbe_value.f9)
-        + f10.fbe_allocation_size(fbe_value.f10)
+      0 \
+        + f1.fbe_allocation_size(fbe_value.f1) \
+        + f2.fbe_allocation_size(fbe_value.f2) \
+        + f3.fbe_allocation_size(fbe_value.f3) \
+        + f4.fbe_allocation_size(fbe_value.f4) \
+        + f5.fbe_allocation_size(fbe_value.f5) \
+        + f6.fbe_allocation_size(fbe_value.f6) \
+        + f7.fbe_allocation_size(fbe_value.f7) \
+        + f8.fbe_allocation_size(fbe_value.f8) \
+        + f9.fbe_allocation_size(fbe_value.f9) \
+        + f10.fbe_allocation_size(fbe_value.f10) \
     end
 
     # Get the field type
@@ -15069,71 +15081,71 @@ module Test
 
       f1.fbe_offset = fbe_current_offset
       fbe_field_size = f1.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f2.fbe_offset = fbe_current_offset
       fbe_field_size = f2.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f3.fbe_offset = fbe_current_offset
       fbe_field_size = f3.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f4.fbe_offset = fbe_current_offset
       fbe_field_size = f4.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f5.fbe_offset = fbe_current_offset
       fbe_field_size = f5.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f6.fbe_offset = fbe_current_offset
       fbe_field_size = f6.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f7.fbe_offset = fbe_current_offset
       fbe_field_size = f7.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f8.fbe_offset = fbe_current_offset
       fbe_field_size = f8.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f9.fbe_offset = fbe_current_offset
       fbe_field_size = f9.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f10.fbe_offset = fbe_current_offset
       fbe_field_size = f10.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
@@ -15300,7 +15312,7 @@ module Test
   class StructMapFinalModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FinalModelStructMap(self.buffer, 8)
+      @_model = FinalModelStructMap.new(self.buffer, 8)
     end
 
     # Get the model type
@@ -15673,16 +15685,16 @@ module Test
   class FieldModelStructHash < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_f1 = FBE::FieldModelMap(FBE::FieldModelString(self.buffer, 4 + 4), FBE::FieldModelByte(self.buffer, 4 + 4), self.buffer, 4 + 4)
-      @_f2 = FBE::FieldModelMap(FBE::FieldModelString(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), FBE::FieldModelOptional(FBE::FieldModelByte(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
-      @_f3 = FBE::FieldModelMap(FBE::FieldModelString(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), FBE::FieldModelBytes(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
-      @_f4 = FBE::FieldModelMap(FBE::FieldModelString(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), FBE::FieldModelOptional(FBE::FieldModelBytes(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size)
-      @_f5 = FBE::FieldModelMap(FBE::FieldModelString(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), FieldModelEnumSimple(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), self.buffer, @_f4.fbe_offset + @_f4.fbe_size)
-      @_f6 = FBE::FieldModelMap(FBE::FieldModelString(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), FBE::FieldModelOptional(FieldModelEnumSimple(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size)
-      @_f7 = FBE::FieldModelMap(FBE::FieldModelString(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), FieldModelFlagsSimple(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), self.buffer, @_f6.fbe_offset + @_f6.fbe_size)
-      @_f8 = FBE::FieldModelMap(FBE::FieldModelString(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), FBE::FieldModelOptional(FieldModelFlagsSimple(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size)
-      @_f9 = FBE::FieldModelMap(FBE::FieldModelString(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), FieldModelStructSimple(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), self.buffer, @_f8.fbe_offset + @_f8.fbe_size)
-      @_f10 = FBE::FieldModelMap(FBE::FieldModelString(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), FBE::FieldModelOptional(FieldModelStructSimple(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size)
+      @_f1 = FBE::FieldModelMap.new(FBE::FieldModelString.new(self.buffer, 4 + 4), FBE::FieldModelByte.new(self.buffer, 4 + 4), self.buffer, 4 + 4)
+      @_f2 = FBE::FieldModelMap.new(FBE::FieldModelString.new(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), FBE::FieldModelOptional.new(FBE::FieldModelByte.new(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
+      @_f3 = FBE::FieldModelMap.new(FBE::FieldModelString.new(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), FBE::FieldModelBytes.new(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
+      @_f4 = FBE::FieldModelMap.new(FBE::FieldModelString.new(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), FBE::FieldModelOptional.new(FBE::FieldModelBytes.new(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size)
+      @_f5 = FBE::FieldModelMap.new(FBE::FieldModelString.new(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), FieldModelEnumSimple.new(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), self.buffer, @_f4.fbe_offset + @_f4.fbe_size)
+      @_f6 = FBE::FieldModelMap.new(FBE::FieldModelString.new(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), FBE::FieldModelOptional.new(FieldModelEnumSimple.new(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size)
+      @_f7 = FBE::FieldModelMap.new(FBE::FieldModelString.new(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), FieldModelFlagsSimple.new(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), self.buffer, @_f6.fbe_offset + @_f6.fbe_size)
+      @_f8 = FBE::FieldModelMap.new(FBE::FieldModelString.new(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), FBE::FieldModelOptional.new(FieldModelFlagsSimple.new(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size)
+      @_f9 = FBE::FieldModelMap.new(FBE::FieldModelString.new(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), FieldModelStructSimple.new(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), self.buffer, @_f8.fbe_offset + @_f8.fbe_size)
+      @_f10 = FBE::FieldModelMap.new(FBE::FieldModelString.new(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), FBE::FieldModelOptional.new(FieldModelStructSimple.new(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size)
     end
 
     def f1
@@ -15732,17 +15744,17 @@ module Test
 
     # Get the field body size
     def fbe_body
-      4 + 4
-        + f1.fbe_size
-        + f2.fbe_size
-        + f3.fbe_size
-        + f4.fbe_size
-        + f5.fbe_size
-        + f6.fbe_size
-        + f7.fbe_size
-        + f8.fbe_size
-        + f9.fbe_size
-        + f10.fbe_size
+      4 + 4 \
+        + f1.fbe_size \
+        + f2.fbe_size \
+        + f3.fbe_size \
+        + f4.fbe_size \
+        + f5.fbe_size \
+        + f6.fbe_size \
+        + f7.fbe_size \
+        + f8.fbe_size \
+        + f9.fbe_size \
+        + f10.fbe_size \
     end
 
     # Get the field extra size
@@ -15758,17 +15770,17 @@ module Test
 
       @_buffer.shift(fbe_struct_offset)
 
-      fbe_result = fbe_body
-        + f1.fbe_extra
-        + f2.fbe_extra
-        + f3.fbe_extra
-        + f4.fbe_extra
-        + f5.fbe_extra
-        + f6.fbe_extra
-        + f7.fbe_extra
-        + f8.fbe_extra
-        + f9.fbe_extra
-        + f10.fbe_extra
+      fbe_result = fbe_body \
+        + f1.fbe_extra \
+        + f2.fbe_extra \
+        + f3.fbe_extra \
+        + f4.fbe_extra \
+        + f5.fbe_extra \
+        + f6.fbe_extra \
+        + f7.fbe_extra \
+        + f8.fbe_extra \
+        + f9.fbe_extra \
+        + f10.fbe_extra \
 
       @_buffer.unshift(fbe_struct_offset)
 
@@ -16084,7 +16096,7 @@ module Test
   class StructHashModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FieldModelStructHash(self.buffer, 4)
+      @_model = FieldModelStructHash.new(self.buffer, 4)
     end
 
     def model
@@ -16162,16 +16174,16 @@ module Test
   class FinalModelStructHash < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_f1 = FBE::FinalModelMap(FBE::FinalModelString(self.buffer, 0), FBE::FinalModelByte(self.buffer, 0), self.buffer, 0)
-      @_f2 = FBE::FinalModelMap(FBE::FinalModelString(self.buffer, 0), FBE::FinalModelOptional(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0), self.buffer, 0)
-      @_f3 = FBE::FinalModelMap(FBE::FinalModelString(self.buffer, 0), FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0)
-      @_f4 = FBE::FinalModelMap(FBE::FinalModelString(self.buffer, 0), FBE::FinalModelOptional(FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0), self.buffer, 0)
-      @_f5 = FBE::FinalModelMap(FBE::FinalModelString(self.buffer, 0), FinalModelEnumSimple(self.buffer, 0), self.buffer, 0)
-      @_f6 = FBE::FinalModelMap(FBE::FinalModelString(self.buffer, 0), FBE::FinalModelOptional(FinalModelEnumSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
-      @_f7 = FBE::FinalModelMap(FBE::FinalModelString(self.buffer, 0), FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0)
-      @_f8 = FBE::FinalModelMap(FBE::FinalModelString(self.buffer, 0), FBE::FinalModelOptional(FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
-      @_f9 = FBE::FinalModelMap(FBE::FinalModelString(self.buffer, 0), FinalModelStructSimple(self.buffer, 0), self.buffer, 0)
-      @_f10 = FBE::FinalModelMap(FBE::FinalModelString(self.buffer, 0), FBE::FinalModelOptional(FinalModelStructSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f1 = FBE::FinalModelMap.new(FBE::FinalModelString.new(self.buffer, 0), FBE::FinalModelByte.new(self.buffer, 0), self.buffer, 0)
+      @_f2 = FBE::FinalModelMap.new(FBE::FinalModelString.new(self.buffer, 0), FBE::FinalModelOptional.new(FBE::FinalModelByte.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f3 = FBE::FinalModelMap.new(FBE::FinalModelString.new(self.buffer, 0), FBE::FinalModelBytes.new(self.buffer, 0), self.buffer, 0)
+      @_f4 = FBE::FinalModelMap.new(FBE::FinalModelString.new(self.buffer, 0), FBE::FinalModelOptional.new(FBE::FinalModelBytes.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f5 = FBE::FinalModelMap.new(FBE::FinalModelString.new(self.buffer, 0), FinalModelEnumSimple.new(self.buffer, 0), self.buffer, 0)
+      @_f6 = FBE::FinalModelMap.new(FBE::FinalModelString.new(self.buffer, 0), FBE::FinalModelOptional.new(FinalModelEnumSimple.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f7 = FBE::FinalModelMap.new(FBE::FinalModelString.new(self.buffer, 0), FinalModelFlagsSimple.new(self.buffer, 0), self.buffer, 0)
+      @_f8 = FBE::FinalModelMap.new(FBE::FinalModelString.new(self.buffer, 0), FBE::FinalModelOptional.new(FinalModelFlagsSimple.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f9 = FBE::FinalModelMap.new(FBE::FinalModelString.new(self.buffer, 0), FinalModelStructSimple.new(self.buffer, 0), self.buffer, 0)
+      @_f10 = FBE::FinalModelMap.new(FBE::FinalModelString.new(self.buffer, 0), FBE::FinalModelOptional.new(FinalModelStructSimple.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
     end
 
     def f1
@@ -16216,17 +16228,17 @@ module Test
 
     # Get the allocation size
     def fbe_allocation_size(fbe_value)
-      0
-        + f1.fbe_allocation_size(fbe_value.f1)
-        + f2.fbe_allocation_size(fbe_value.f2)
-        + f3.fbe_allocation_size(fbe_value.f3)
-        + f4.fbe_allocation_size(fbe_value.f4)
-        + f5.fbe_allocation_size(fbe_value.f5)
-        + f6.fbe_allocation_size(fbe_value.f6)
-        + f7.fbe_allocation_size(fbe_value.f7)
-        + f8.fbe_allocation_size(fbe_value.f8)
-        + f9.fbe_allocation_size(fbe_value.f9)
-        + f10.fbe_allocation_size(fbe_value.f10)
+      0 \
+        + f1.fbe_allocation_size(fbe_value.f1) \
+        + f2.fbe_allocation_size(fbe_value.f2) \
+        + f3.fbe_allocation_size(fbe_value.f3) \
+        + f4.fbe_allocation_size(fbe_value.f4) \
+        + f5.fbe_allocation_size(fbe_value.f5) \
+        + f6.fbe_allocation_size(fbe_value.f6) \
+        + f7.fbe_allocation_size(fbe_value.f7) \
+        + f8.fbe_allocation_size(fbe_value.f8) \
+        + f9.fbe_allocation_size(fbe_value.f9) \
+        + f10.fbe_allocation_size(fbe_value.f10) \
     end
 
     # Get the field type
@@ -16250,71 +16262,71 @@ module Test
 
       f1.fbe_offset = fbe_current_offset
       fbe_field_size = f1.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f2.fbe_offset = fbe_current_offset
       fbe_field_size = f2.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f3.fbe_offset = fbe_current_offset
       fbe_field_size = f3.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f4.fbe_offset = fbe_current_offset
       fbe_field_size = f4.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f5.fbe_offset = fbe_current_offset
       fbe_field_size = f5.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f6.fbe_offset = fbe_current_offset
       fbe_field_size = f6.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f7.fbe_offset = fbe_current_offset
       fbe_field_size = f7.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f8.fbe_offset = fbe_current_offset
       fbe_field_size = f8.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f9.fbe_offset = fbe_current_offset
       fbe_field_size = f9.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f10.fbe_offset = fbe_current_offset
       fbe_field_size = f10.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
@@ -16481,7 +16493,7 @@ module Test
   class StructHashFinalModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FinalModelStructHash(self.buffer, 8)
+      @_model = FinalModelStructHash.new(self.buffer, 8)
     end
 
     # Get the model type
@@ -16654,8 +16666,8 @@ module Test
   class FieldModelStructHashEx < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_f1 = FBE::FieldModelMap(FieldModelStructSimple(self.buffer, 4 + 4), FieldModelStructNested(self.buffer, 4 + 4), self.buffer, 4 + 4)
-      @_f2 = FBE::FieldModelMap(FieldModelStructSimple(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), FBE::FieldModelOptional(FieldModelStructNested(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
+      @_f1 = FBE::FieldModelMap.new(FieldModelStructSimple.new(self.buffer, 4 + 4), FieldModelStructNested.new(self.buffer, 4 + 4), self.buffer, 4 + 4)
+      @_f2 = FBE::FieldModelMap.new(FieldModelStructSimple.new(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), FBE::FieldModelOptional.new(FieldModelStructNested.new(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
     end
 
     def f1
@@ -16673,9 +16685,9 @@ module Test
 
     # Get the field body size
     def fbe_body
-      4 + 4
-        + f1.fbe_size
-        + f2.fbe_size
+      4 + 4 \
+        + f1.fbe_size \
+        + f2.fbe_size \
     end
 
     # Get the field extra size
@@ -16691,9 +16703,9 @@ module Test
 
       @_buffer.shift(fbe_struct_offset)
 
-      fbe_result = fbe_body
-        + f1.fbe_extra
-        + f2.fbe_extra
+      fbe_result = fbe_body \
+        + f1.fbe_extra \
+        + f2.fbe_extra \
 
       @_buffer.unshift(fbe_struct_offset)
 
@@ -16865,7 +16877,7 @@ module Test
   class StructHashExModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FieldModelStructHashEx(self.buffer, 4)
+      @_model = FieldModelStructHashEx.new(self.buffer, 4)
     end
 
     def model
@@ -16943,8 +16955,8 @@ module Test
   class FinalModelStructHashEx < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_f1 = FBE::FinalModelMap(FinalModelStructSimple(self.buffer, 0), FinalModelStructNested(self.buffer, 0), self.buffer, 0)
-      @_f2 = FBE::FinalModelMap(FinalModelStructSimple(self.buffer, 0), FBE::FinalModelOptional(FinalModelStructNested(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f1 = FBE::FinalModelMap.new(FinalModelStructSimple.new(self.buffer, 0), FinalModelStructNested.new(self.buffer, 0), self.buffer, 0)
+      @_f2 = FBE::FinalModelMap.new(FinalModelStructSimple.new(self.buffer, 0), FBE::FinalModelOptional.new(FinalModelStructNested.new(self.buffer, 0), self.buffer, 0), self.buffer, 0)
     end
 
     def f1
@@ -16957,9 +16969,9 @@ module Test
 
     # Get the allocation size
     def fbe_allocation_size(fbe_value)
-      0
-        + f1.fbe_allocation_size(fbe_value.f1)
-        + f2.fbe_allocation_size(fbe_value.f2)
+      0 \
+        + f1.fbe_allocation_size(fbe_value.f1) \
+        + f2.fbe_allocation_size(fbe_value.f2) \
     end
 
     # Get the field type
@@ -16983,15 +16995,15 @@ module Test
 
       f1.fbe_offset = fbe_current_offset
       fbe_field_size = f1.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       f2.fbe_offset = fbe_current_offset
       fbe_field_size = f2.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
@@ -17062,7 +17074,7 @@ module Test
   class StructHashExFinalModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FinalModelStructHashEx(self.buffer, 8)
+      @_model = FinalModelStructHashEx.new(self.buffer, 8)
     end
 
     # Get the model type

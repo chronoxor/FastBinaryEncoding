@@ -43,6 +43,7 @@ private:
     void GenerateFBE(const CppCommon::Path& path);
     void GenerateFBEEnum();
     void GenerateFBEFlags();
+    void GenerateFBEInteger();
     void GenerateFBEWriteBuffer();
     void GenerateFBEReadBuffer();
     void GenerateFBEModel();

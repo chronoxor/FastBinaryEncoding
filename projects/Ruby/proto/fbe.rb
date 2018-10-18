@@ -307,6 +307,14 @@ module FBE
 
   end
 
+  # Fast Binary Encoding integer number constants
+  class Integer
+    N_BYTES = [42].pack('i').size
+    N_BITS = N_BYTES * 16
+    MAX = 2 ** (N_BITS - 2) - 1
+    MIN = -MAX - 1
+  end
+
   # Fast Binary Encoding write buffer based on the dynamic byte array
   class WriteBuffer
     def initialize(capacity = 0)
@@ -586,6 +594,10 @@ module FBE
     def initialize(buffer, offset)
       @_buffer = buffer
       @_offset = offset
+    end
+
+    def buffer
+      @_buffer
     end
 
     # Get the field offset
@@ -1504,7 +1516,7 @@ module FBE
       end
 
       data = read_bytes(fbe_string_offset + 4, fbe_string_size)
-      data.decode('utf-8')
+      data.encode!('utf-8')
     end
 
     # Set the string value
@@ -2249,7 +2261,7 @@ module FBE
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_size
@@ -2295,7 +2307,7 @@ module FBE
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_size
@@ -2341,7 +2353,7 @@ module FBE
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_size
@@ -2387,7 +2399,7 @@ module FBE
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_size
@@ -2433,7 +2445,7 @@ module FBE
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_size
@@ -2479,7 +2491,7 @@ module FBE
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_size
@@ -2525,7 +2537,7 @@ module FBE
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_size
@@ -2571,7 +2583,7 @@ module FBE
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_size
@@ -2617,7 +2629,7 @@ module FBE
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_size
@@ -2663,7 +2675,7 @@ module FBE
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_size
@@ -2709,7 +2721,7 @@ module FBE
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_size
@@ -2755,7 +2767,7 @@ module FBE
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_size
@@ -2801,7 +2813,7 @@ module FBE
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_size
@@ -2847,7 +2859,7 @@ module FBE
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_size
@@ -2893,7 +2905,7 @@ module FBE
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_size
@@ -2939,7 +2951,7 @@ module FBE
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_size
@@ -2985,7 +2997,7 @@ module FBE
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_size
@@ -3081,12 +3093,12 @@ module FBE
     # Check if the bytes value is valid
     def verify
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_bytes_size = read_uint32(fbe_offset)
       if (@_buffer.offset + fbe_offset + 4 + fbe_bytes_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       4 + fbe_bytes_size
@@ -3139,12 +3151,12 @@ module FBE
     # Check if the string value is valid
     def verify
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_string_size = read_uint32(fbe_offset)
       if (@_buffer.offset + fbe_offset + 4 + fbe_string_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       4 + fbe_string_size
@@ -3162,7 +3174,7 @@ module FBE
       end
 
       data = read_bytes(fbe_offset + 4, fbe_string_size)
-      [data.decode('utf-8'), (4 + fbe_string_size)]
+      [data.encode!('utf-8'), (4 + fbe_string_size)]
     end
 
     # Set the string value
@@ -3222,7 +3234,7 @@ module FBE
     # Check if the optional value is valid
     def verify
       if (@_buffer.offset + fbe_offset + 1) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_has_value = read_uint8(fbe_offset)
@@ -3291,15 +3303,15 @@ module FBE
     # Check if the array is valid
     def verify
       if (@_buffer.offset + fbe_offset) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       size = 0
       @_model.fbe_offset = fbe_offset
       @_size.times do
         offset = @_model.verify
-        if offset == Fixnum::MAX
-          return Fixnum::MAX
+        if offset == Integer::MAX
+          return Integer::MAX
         end
         @_model.fbe_shift(offset)
         size += offset
@@ -3364,7 +3376,7 @@ module FBE
     # Check if the vector is valid
     def verify
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_vector_size = read_uint32(fbe_offset)
@@ -3373,8 +3385,8 @@ module FBE
       @_model.fbe_offset = fbe_offset + 4
       fbe_vector_size.times do
         offset = @_model.verify
-        if offset == Fixnum::MAX
-          return Fixnum::MAX
+        if offset == Integer::MAX
+          return Integer::MAX
         end
         @_model.fbe_shift(offset)
         size += offset
@@ -3446,7 +3458,7 @@ module FBE
     # Check if the set value is valid
     def verify
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_set_size = read_uint32(fbe_offset)
@@ -3455,8 +3467,8 @@ module FBE
       @_model.fbe_offset = fbe_offset + 4
       fbe_set_size.times do
         offset = @_model.verify
-        if offset == Fixnum::MAX
-          return Fixnum::MAX
+        if offset == Integer::MAX
+          return Integer::MAX
         end
         @_model.fbe_shift(offset)
         size += offset
@@ -3530,7 +3542,7 @@ module FBE
     # Check if the map is valid
     def verify
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_map_size = read_uint32(fbe_offset)
@@ -3540,15 +3552,15 @@ module FBE
       @_model_value.fbe_offset = fbe_offset + 4
       fbe_map_size.times do
         offset_key = @_model_key.verify
-        if offset_key == Fixnum::MAX
-          return Fixnum::MAX
+        if offset_key == Integer::MAX
+          return Integer::MAX
         end
         @_model_key.fbe_shift(offset_key)
         @_model_value.fbe_shift(offset_key)
         size += offset_key
         offset_value = @_model_value.verify
-        if offset_value == Fixnum::MAX
-          return Fixnum::MAX
+        if offset_value == Integer::MAX
+          return Integer::MAX
         end
         @_model_key.fbe_shift(offset_value)
         @_model_value.fbe_shift(offset_value)

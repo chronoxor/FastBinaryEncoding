@@ -79,6 +79,7 @@ void GeneratorRuby::GenerateFBE(const CppCommon::Path& path)
     // Generate common models
     GenerateFBEEnum();
     GenerateFBEFlags();
+    GenerateFBEInteger();
     GenerateFBEWriteBuffer();
     GenerateFBEReadBuffer();
     GenerateFBEModel();
@@ -466,6 +467,24 @@ void GeneratorRuby::GenerateFBEFlags()
     Write(code);
 }
 
+void GeneratorRuby::GenerateFBEInteger()
+{
+    std::string code = R"CODE(
+  # Fast Binary Encoding integer number constants
+  class Integer
+    N_BYTES = [42].pack('i').size
+    N_BITS = N_BYTES * 16
+    MAX = 2 ** (N_BITS - 2) - 1
+    MIN = -MAX - 1
+  end
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+}
+
 void GeneratorRuby::GenerateFBEWriteBuffer()
 {
     std::string code = R"CODE(
@@ -778,6 +797,10 @@ void GeneratorRuby::GenerateFBEFieldModelBase()
     def initialize(buffer, offset)
       @_buffer = buffer
       @_offset = offset
+    end
+
+    def buffer
+      @_buffer
     end
 
     # Get the field offset
@@ -1300,7 +1323,7 @@ void GeneratorRuby::GenerateFBEFieldModelString()
       end
 
       data = read_bytes(fbe_string_offset + 4, fbe_string_size)
-      data.decode('utf-8')
+      data.encode!('utf-8')
     end
 
     # Set the string value
@@ -2115,7 +2138,7 @@ void GeneratorRuby::GenerateFBEFinalModel(const std::string& name, const std::st
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_size
@@ -2175,7 +2198,7 @@ void GeneratorRuby::GenerateFBEFinalModelDecimal()
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_size
@@ -2281,12 +2304,12 @@ void GeneratorRuby::GenerateFBEFinalModelBytes()
     # Check if the bytes value is valid
     def verify
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_bytes_size = read_uint32(fbe_offset)
       if (@_buffer.offset + fbe_offset + 4 + fbe_bytes_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       4 + fbe_bytes_size
@@ -2349,12 +2372,12 @@ void GeneratorRuby::GenerateFBEFinalModelString()
     # Check if the string value is valid
     def verify
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_string_size = read_uint32(fbe_offset)
       if (@_buffer.offset + fbe_offset + 4 + fbe_string_size) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       4 + fbe_string_size
@@ -2372,7 +2395,7 @@ void GeneratorRuby::GenerateFBEFinalModelString()
       end
 
       data = read_bytes(fbe_offset + 4, fbe_string_size)
-      [data.decode('utf-8'), (4 + fbe_string_size)]
+      [data.encode!('utf-8'), (4 + fbe_string_size)]
     end
 
     # Set the string value
@@ -2442,7 +2465,7 @@ void GeneratorRuby::GenerateFBEFinalModelOptional()
     # Check if the optional value is valid
     def verify
       if (@_buffer.offset + fbe_offset + 1) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_has_value = read_uint8(fbe_offset)
@@ -2521,15 +2544,15 @@ void GeneratorRuby::GenerateFBEFinalModelArray()
     # Check if the array is valid
     def verify
       if (@_buffer.offset + fbe_offset) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       size = 0
       @_model.fbe_offset = fbe_offset
       @_size.times do
         offset = @_model.verify
-        if offset == Fixnum::MAX
-          return Fixnum::MAX
+        if offset == Integer::MAX
+          return Integer::MAX
         end
         @_model.fbe_shift(offset)
         size += offset
@@ -2604,7 +2627,7 @@ void GeneratorRuby::GenerateFBEFinalModelVector()
     # Check if the vector is valid
     def verify
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_vector_size = read_uint32(fbe_offset)
@@ -2613,8 +2636,8 @@ void GeneratorRuby::GenerateFBEFinalModelVector()
       @_model.fbe_offset = fbe_offset + 4
       fbe_vector_size.times do
         offset = @_model.verify
-        if offset == Fixnum::MAX
-          return Fixnum::MAX
+        if offset == Integer::MAX
+          return Integer::MAX
         end
         @_model.fbe_shift(offset)
         size += offset
@@ -2696,7 +2719,7 @@ void GeneratorRuby::GenerateFBEFinalModelSet()
     # Check if the set value is valid
     def verify
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_set_size = read_uint32(fbe_offset)
@@ -2705,8 +2728,8 @@ void GeneratorRuby::GenerateFBEFinalModelSet()
       @_model.fbe_offset = fbe_offset + 4
       fbe_set_size.times do
         offset = @_model.verify
-        if offset == Fixnum::MAX
-          return Fixnum::MAX
+        if offset == Integer::MAX
+          return Integer::MAX
         end
         @_model.fbe_shift(offset)
         size += offset
@@ -2790,7 +2813,7 @@ void GeneratorRuby::GenerateFBEFinalModelMap()
     # Check if the map is valid
     def verify
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
-        return Fixnum::MAX
+        return Integer::MAX
       end
 
       fbe_map_size = read_uint32(fbe_offset)
@@ -2800,15 +2823,15 @@ void GeneratorRuby::GenerateFBEFinalModelMap()
       @_model_value.fbe_offset = fbe_offset + 4
       fbe_map_size.times do
         offset_key = @_model_key.verify
-        if offset_key == Fixnum::MAX
-          return Fixnum::MAX
+        if offset_key == Integer::MAX
+          return Integer::MAX
         end
         @_model_key.fbe_shift(offset_key)
         @_model_value.fbe_shift(offset_key)
         size += offset_key
         offset_value = @_model_value.verify
-        if offset_value == Fixnum::MAX
-          return Fixnum::MAX
+        if offset_value == Integer::MAX
+          return Integer::MAX
         end
         @_model_key.fbe_shift(offset_value)
         @_model_value.fbe_shift(offset_value)
@@ -3380,6 +3403,11 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
     Indent(-1);
     WriteLineIndent("end");
 
+    // Generate enum class compare operators
+    WriteLine();
+    WriteLineIndent("def ==(value) @value == value.value end");
+    WriteLineIndent("def !=(value) @value == value.value end");
+
     // Generate enum class to_i method
     WriteLine();
     WriteLineIndent("def to_i");
@@ -3480,7 +3508,7 @@ void GeneratorRuby::GenerateEnumFieldModel(const std::shared_ptr<EnumType>& e)
         return
       end
 
-      write__ENUM_TYPE_(fbe_offset, value)
+      write__ENUM_TYPE_(fbe_offset, value.value)
     end
   end
 )CODE";
@@ -3520,7 +3548,7 @@ void GeneratorRuby::GenerateEnumFinalModel(const std::shared_ptr<EnumType>& e)
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return FBE::Integer::MAX
       end
 
       fbe_size
@@ -3541,7 +3569,7 @@ void GeneratorRuby::GenerateEnumFinalModel(const std::shared_ptr<EnumType>& e)
         return 0
       end
 
-      write__ENUM_TYPE_(fbe_offset, value)
+      write__ENUM_TYPE_(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -3600,7 +3628,12 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     Indent(-1);
     WriteLineIndent("end");
 
-    // Generate flags operators
+    // Generate flags class compare operators
+    WriteLine();
+    WriteLineIndent("def ==(flags) @value == flags.value end");
+    WriteLineIndent("def !=(flags) @value == flags.value end");
+
+    // Generate flags class bit operators
     WriteLine();
     WriteLineIndent("def ~");
     Indent(1);
@@ -3611,7 +3644,7 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     WriteLineIndent("def |(flags) Flags.new(@value | flags.value) end");
     WriteLineIndent("def ^(flags) Flags.new(@value ^ flags.value) end");
 
-    // Generate flags manipulation methods
+    // Generate flags class manipulation methods
     WriteLine();
     WriteLineIndent("def has_flags(flags)");
     Indent(1);
@@ -3745,7 +3778,7 @@ void GeneratorRuby::GenerateFlagsFieldModel(const std::shared_ptr<FlagsType>& f)
         return
       end
 
-      write__FLAGS_TYPE_(fbe_offset, value)
+      write__FLAGS_TYPE_(fbe_offset, value.value)
     end
   end
 )CODE";
@@ -3785,7 +3818,7 @@ void GeneratorRuby::GenerateFlagsFinalModel(const std::shared_ptr<FlagsType>& f)
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return FBE::Integer::MAX
       end
 
       fbe_size
@@ -3806,7 +3839,7 @@ void GeneratorRuby::GenerateFlagsFinalModel(const std::shared_ptr<FlagsType>& f)
         return 0
       end
 
-      write__FLAGS_TYPE_(fbe_offset, value)
+      write__FLAGS_TYPE_(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -3897,7 +3930,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
     Indent(-1);
     WriteLineIndent("end");
 
-    // Generate struct compare methods
+    // Generate struct compare operators
     WriteLine();
     WriteLineIndent("def <=>(other)");
     Indent(1);
@@ -4224,7 +4257,7 @@ void GeneratorRuby::GenerateStructFieldModel(const std::shared_ptr<StructType>& 
     std::string prev_size("4");
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("@_parent = " + ConvertTypeFieldName(*s->base, false) + "(self.buffer, " + prev_offset + " + " + prev_size + ")");
+        WriteLineIndent("@_parent = " + ConvertTypeFieldName(*s->base, false) + ".new(self.buffer, " + prev_offset + " + " + prev_size + ")");
         prev_offset = "@_parent.fbe_offset";
         prev_size = "@_parent.fbe_body - 4 - 4";
     }
@@ -4275,13 +4308,13 @@ void GeneratorRuby::GenerateStructFieldModel(const std::shared_ptr<StructType>& 
     WriteLineIndent("# Get the field body size");
     WriteLineIndent("def fbe_body");
     Indent(1);
-    WriteLineIndent("4 + 4");
+    WriteLineIndent("4 + 4 \\");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("+ parent.fbe_body - 4 - 4");
+        WriteLineIndent("+ parent.fbe_body - 4 - 4 \\");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("+ " + *field->name + ".fbe_size");
+            WriteLineIndent("+ " + *field->name + ".fbe_size \\");
     Indent(-1);
     Indent(-1);
     WriteLineIndent("end");
@@ -4304,13 +4337,13 @@ void GeneratorRuby::GenerateStructFieldModel(const std::shared_ptr<StructType>& 
     WriteLine();
     WriteLineIndent("@_buffer.shift(fbe_struct_offset)");
     WriteLine();
-    WriteLineIndent("fbe_result = fbe_body");
+    WriteLineIndent("fbe_result = fbe_body \\");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("+ parent.fbe_extra");
+        WriteLineIndent("+ parent.fbe_extra \\");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("+ " + *field->name + ".fbe_extra");
+            WriteLineIndent("+ " + *field->name + ".fbe_extra \\");
     Indent(-1);
     WriteLine();
     WriteLineIndent("@_buffer.unshift(fbe_struct_offset)");
@@ -4606,7 +4639,7 @@ void GeneratorRuby::GenerateStructModel(const std::shared_ptr<StructType>& s)
     WriteLineIndent("def initialize(buffer = WriteBuffer.new)");
     Indent(1);
     WriteLineIndent("super(buffer)");
-    WriteLineIndent("@_model = FieldModel" + struct_name + "(self.buffer, 4)");
+    WriteLineIndent("@_model = FieldModel" + struct_name + ".new(self.buffer, 4)");
     Indent(-1);
     WriteLineIndent("end");
 
@@ -4744,7 +4777,7 @@ void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& 
     Indent(1);
     WriteLineIndent("super(buffer, offset)");
     if (s->base && !s->base->empty())
-        WriteLineIndent("@_parent = " + ConvertTypeFieldName(*s->base, true) + "(self.buffer, 0)");
+        WriteLineIndent("@_parent = " + ConvertTypeFieldName(*s->base, true) + ".new(self.buffer, 0)");
     if (s->body)
         for (const auto& field : s->body->fields)
             WriteLineIndent("@_" + *field->name + " = " + ConvertTypeFieldInitialization(*field, "0", true));
@@ -4779,13 +4812,13 @@ void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& 
     WriteLineIndent("# Get the allocation size");
     WriteLineIndent("def fbe_allocation_size(fbe_value)");
     Indent(1);
-    WriteLineIndent("0");
+    WriteLineIndent("0 \\");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("+ parent.fbe_allocation_size(fbe_value)");
+        WriteLineIndent("+ parent.fbe_allocation_size(fbe_value) \\");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("+ " + *field->name + ".fbe_allocation_size(fbe_value." + *field->name + ")");
+            WriteLineIndent("+ " + *field->name + ".fbe_allocation_size(fbe_value." + *field->name + ") \\");
     Indent(-1);
     Indent(-1);
     WriteLineIndent("end");
@@ -4827,9 +4860,9 @@ void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& 
         WriteLine();
         WriteLineIndent("parent.fbe_offset = fbe_current_offset");
         WriteLineIndent("fbe_field_size = parent.verify_fields");
-        WriteLineIndent("if fbe_field_size == Fixnum::MAX");
+        WriteLineIndent("if fbe_field_size == FBE::Integer::MAX");
         Indent(1);
-        WriteLineIndent("return Fixnum::MAX");
+        WriteLineIndent("return FBE::Integer::MAX");
         Indent(-1);
         WriteLineIndent("end");
         WriteLineIndent("fbe_current_offset += fbe_field_size");
@@ -4841,9 +4874,9 @@ void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& 
             WriteLine();
             WriteLineIndent(*field->name + ".fbe_offset = fbe_current_offset");
             WriteLineIndent("fbe_field_size = " + *field->name + ".verify");
-            WriteLineIndent("if fbe_field_size == Fixnum::MAX");
+            WriteLineIndent("if fbe_field_size == FBE::Integer::MAX");
             Indent(1);
-            WriteLineIndent("return Fixnum::MAX");
+            WriteLineIndent("return FBE::Integer::MAX");
             Indent(-1);
             WriteLineIndent("end");
             WriteLineIndent("fbe_current_offset += fbe_field_size");
@@ -4972,7 +5005,7 @@ void GeneratorRuby::GenerateStructModelFinal(const std::shared_ptr<StructType>& 
     WriteLineIndent("def initialize(buffer = WriteBuffer.new)");
     Indent(1);
     WriteLineIndent("super(buffer)");
-    WriteLineIndent("@_model = FinalModel" + struct_name + "(self.buffer, 8)");
+    WriteLineIndent("@_model = FinalModel" + struct_name + ".new(self.buffer, 8)");
     Indent(-1);
     WriteLineIndent("end");
 
@@ -5575,9 +5608,9 @@ std::string GeneratorRuby::ConvertTypeFieldInitialization(const std::string& typ
     std::string modelType = (final ? "Final" : "Field");
 
     if (optional)
-        return "FBE::" + modelType + "ModelOptional(" + ConvertTypeFieldInitialization(type, false, offset, final)+ ", self.buffer, " + offset + ")";
+        return "FBE::" + modelType + "ModelOptional.new(" + ConvertTypeFieldInitialization(type, false, offset, final)+ ", self.buffer, " + offset + ")";
     else
-        return ConvertTypeFieldName(type, final) + "(self.buffer, " + offset + ")";
+        return ConvertTypeFieldName(type, final) + ".new(self.buffer, " + offset + ")";
 }
 
 std::string GeneratorRuby::ConvertTypeFieldInitialization(const StructField& field, const std::string& offset, bool final)
@@ -5585,13 +5618,13 @@ std::string GeneratorRuby::ConvertTypeFieldInitialization(const StructField& fie
     std::string modelType = (final ? "Final" : "Field");
 
     if (field.array)
-        return "FBE::" + modelType + "ModelArray(" + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", self.buffer, " + offset + ", " + std::to_string(field.N) + ")";
+        return "FBE::" + modelType + "ModelArray.new(" + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", self.buffer, " + offset + ", " + std::to_string(field.N) + ")";
     else if (field.vector || field.list)
-        return "FBE::" + modelType + "ModelVector(" + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", self.buffer, " + offset + ")";
+        return "FBE::" + modelType + "ModelVector.new(" + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", self.buffer, " + offset + ")";
     else if (field.set)
-        return "FBE::" + modelType + "ModelSet(" + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", self.buffer, " + offset + ")";
+        return "FBE::" + modelType + "ModelSet.new(" + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", self.buffer, " + offset + ")";
     else if (field.map || field.hash)
-        return "FBE::" + modelType + "ModelMap(" + ConvertTypeFieldInitialization(*field.key, false, offset, final) + ", " + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", self.buffer, " + offset + ")";
+        return "FBE::" + modelType + "ModelMap.new(" + ConvertTypeFieldInitialization(*field.key, false, offset, final) + ", " + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", self.buffer, " + offset + ")";
     else
         return ConvertTypeFieldInitialization(*field.type, field.optional, offset, final);
 }

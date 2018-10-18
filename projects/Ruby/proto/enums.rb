@@ -32,6 +32,9 @@ module Enums
         @value = value.is_a?(Enum) ? value.value : value
       end
 
+      def ==(value) @value == value.value end
+      def !=(value) @value == value.value end
+
       def to_i
         @value
       end
@@ -108,7 +111,7 @@ module Enums
         return
       end
 
-      write_byte(fbe_offset, value)
+      write_byte(fbe_offset, value.value)
     end
   end
 
@@ -132,7 +135,7 @@ module Enums
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return FBE::Integer::MAX
       end
 
       fbe_size
@@ -153,7 +156,7 @@ module Enums
         return 0
       end
 
-      write_byte(fbe_offset, value)
+      write_byte(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -172,6 +175,9 @@ module Enums
       def initialize(value = 0)
         @value = value.is_a?(Enum) ? value.value : value
       end
+
+      def ==(value) @value == value.value end
+      def !=(value) @value == value.value end
 
       def to_i
         @value
@@ -249,7 +255,7 @@ module Enums
         return
       end
 
-      write_uint8(fbe_offset, value)
+      write_uint8(fbe_offset, value.value)
     end
   end
 
@@ -273,7 +279,7 @@ module Enums
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return FBE::Integer::MAX
       end
 
       fbe_size
@@ -294,7 +300,7 @@ module Enums
         return 0
       end
 
-      write_uint8(fbe_offset, value)
+      write_uint8(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -313,6 +319,9 @@ module Enums
       def initialize(value = 0)
         @value = value.is_a?(Enum) ? value.value : value
       end
+
+      def ==(value) @value == value.value end
+      def !=(value) @value == value.value end
 
       def to_i
         @value
@@ -390,7 +399,7 @@ module Enums
         return
       end
 
-      write_uint32(fbe_offset, value)
+      write_uint32(fbe_offset, value.value)
     end
   end
 
@@ -414,7 +423,7 @@ module Enums
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return FBE::Integer::MAX
       end
 
       fbe_size
@@ -435,7 +444,7 @@ module Enums
         return 0
       end
 
-      write_uint32(fbe_offset, value)
+      write_uint32(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -454,6 +463,9 @@ module Enums
       def initialize(value = 0)
         @value = value.is_a?(Enum) ? value.value : value
       end
+
+      def ==(value) @value == value.value end
+      def !=(value) @value == value.value end
 
       def to_i
         @value
@@ -531,7 +543,7 @@ module Enums
         return
       end
 
-      write_int8(fbe_offset, value)
+      write_int8(fbe_offset, value.value)
     end
   end
 
@@ -555,7 +567,7 @@ module Enums
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return FBE::Integer::MAX
       end
 
       fbe_size
@@ -576,7 +588,7 @@ module Enums
         return 0
       end
 
-      write_int8(fbe_offset, value)
+      write_int8(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -595,6 +607,9 @@ module Enums
       def initialize(value = 0)
         @value = value.is_a?(Enum) ? value.value : value
       end
+
+      def ==(value) @value == value.value end
+      def !=(value) @value == value.value end
 
       def to_i
         @value
@@ -672,7 +687,7 @@ module Enums
         return
       end
 
-      write_uint8(fbe_offset, value)
+      write_uint8(fbe_offset, value.value)
     end
   end
 
@@ -696,7 +711,7 @@ module Enums
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return FBE::Integer::MAX
       end
 
       fbe_size
@@ -717,7 +732,7 @@ module Enums
         return 0
       end
 
-      write_uint8(fbe_offset, value)
+      write_uint8(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -736,6 +751,9 @@ module Enums
       def initialize(value = 0)
         @value = value.is_a?(Enum) ? value.value : value
       end
+
+      def ==(value) @value == value.value end
+      def !=(value) @value == value.value end
 
       def to_i
         @value
@@ -813,7 +831,7 @@ module Enums
         return
       end
 
-      write_int16(fbe_offset, value)
+      write_int16(fbe_offset, value.value)
     end
   end
 
@@ -837,7 +855,7 @@ module Enums
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return FBE::Integer::MAX
       end
 
       fbe_size
@@ -858,7 +876,7 @@ module Enums
         return 0
       end
 
-      write_int16(fbe_offset, value)
+      write_int16(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -877,6 +895,9 @@ module Enums
       def initialize(value = 0)
         @value = value.is_a?(Enum) ? value.value : value
       end
+
+      def ==(value) @value == value.value end
+      def !=(value) @value == value.value end
 
       def to_i
         @value
@@ -954,7 +975,7 @@ module Enums
         return
       end
 
-      write_uint16(fbe_offset, value)
+      write_uint16(fbe_offset, value.value)
     end
   end
 
@@ -978,7 +999,7 @@ module Enums
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return FBE::Integer::MAX
       end
 
       fbe_size
@@ -999,7 +1020,7 @@ module Enums
         return 0
       end
 
-      write_uint16(fbe_offset, value)
+      write_uint16(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -1018,6 +1039,9 @@ module Enums
       def initialize(value = 0)
         @value = value.is_a?(Enum) ? value.value : value
       end
+
+      def ==(value) @value == value.value end
+      def !=(value) @value == value.value end
 
       def to_i
         @value
@@ -1095,7 +1119,7 @@ module Enums
         return
       end
 
-      write_int32(fbe_offset, value)
+      write_int32(fbe_offset, value.value)
     end
   end
 
@@ -1119,7 +1143,7 @@ module Enums
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return FBE::Integer::MAX
       end
 
       fbe_size
@@ -1140,7 +1164,7 @@ module Enums
         return 0
       end
 
-      write_int32(fbe_offset, value)
+      write_int32(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -1159,6 +1183,9 @@ module Enums
       def initialize(value = 0)
         @value = value.is_a?(Enum) ? value.value : value
       end
+
+      def ==(value) @value == value.value end
+      def !=(value) @value == value.value end
 
       def to_i
         @value
@@ -1236,7 +1263,7 @@ module Enums
         return
       end
 
-      write_uint32(fbe_offset, value)
+      write_uint32(fbe_offset, value.value)
     end
   end
 
@@ -1260,7 +1287,7 @@ module Enums
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return FBE::Integer::MAX
       end
 
       fbe_size
@@ -1281,7 +1308,7 @@ module Enums
         return 0
       end
 
-      write_uint32(fbe_offset, value)
+      write_uint32(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -1300,6 +1327,9 @@ module Enums
       def initialize(value = 0)
         @value = value.is_a?(Enum) ? value.value : value
       end
+
+      def ==(value) @value == value.value end
+      def !=(value) @value == value.value end
 
       def to_i
         @value
@@ -1377,7 +1407,7 @@ module Enums
         return
       end
 
-      write_int64(fbe_offset, value)
+      write_int64(fbe_offset, value.value)
     end
   end
 
@@ -1401,7 +1431,7 @@ module Enums
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return FBE::Integer::MAX
       end
 
       fbe_size
@@ -1422,7 +1452,7 @@ module Enums
         return 0
       end
 
-      write_int64(fbe_offset, value)
+      write_int64(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -1441,6 +1471,9 @@ module Enums
       def initialize(value = 0)
         @value = value.is_a?(Enum) ? value.value : value
       end
+
+      def ==(value) @value == value.value end
+      def !=(value) @value == value.value end
 
       def to_i
         @value
@@ -1518,7 +1551,7 @@ module Enums
         return
       end
 
-      write_uint64(fbe_offset, value)
+      write_uint64(fbe_offset, value.value)
     end
   end
 
@@ -1542,7 +1575,7 @@ module Enums
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return Fixnum::MAX
+        return FBE::Integer::MAX
       end
 
       fbe_size
@@ -1563,7 +1596,7 @@ module Enums
         return 0
       end
 
-      write_uint64(fbe_offset, value)
+      write_uint64(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -2218,72 +2251,72 @@ module Enums
   class FieldModelEnums < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_byte0 = FieldModelEnumByte(self.buffer, 4 + 4)
-      @_byte1 = FieldModelEnumByte(self.buffer, @_byte0.fbe_offset + @_byte0.fbe_size)
-      @_byte2 = FieldModelEnumByte(self.buffer, @_byte1.fbe_offset + @_byte1.fbe_size)
-      @_byte3 = FieldModelEnumByte(self.buffer, @_byte2.fbe_offset + @_byte2.fbe_size)
-      @_byte4 = FieldModelEnumByte(self.buffer, @_byte3.fbe_offset + @_byte3.fbe_size)
-      @_byte5 = FieldModelEnumByte(self.buffer, @_byte4.fbe_offset + @_byte4.fbe_size)
-      @_char0 = FieldModelEnumChar(self.buffer, @_byte5.fbe_offset + @_byte5.fbe_size)
-      @_char1 = FieldModelEnumChar(self.buffer, @_char0.fbe_offset + @_char0.fbe_size)
-      @_char2 = FieldModelEnumChar(self.buffer, @_char1.fbe_offset + @_char1.fbe_size)
-      @_char3 = FieldModelEnumChar(self.buffer, @_char2.fbe_offset + @_char2.fbe_size)
-      @_char4 = FieldModelEnumChar(self.buffer, @_char3.fbe_offset + @_char3.fbe_size)
-      @_char5 = FieldModelEnumChar(self.buffer, @_char4.fbe_offset + @_char4.fbe_size)
-      @_wchar0 = FieldModelEnumWChar(self.buffer, @_char5.fbe_offset + @_char5.fbe_size)
-      @_wchar1 = FieldModelEnumWChar(self.buffer, @_wchar0.fbe_offset + @_wchar0.fbe_size)
-      @_wchar2 = FieldModelEnumWChar(self.buffer, @_wchar1.fbe_offset + @_wchar1.fbe_size)
-      @_wchar3 = FieldModelEnumWChar(self.buffer, @_wchar2.fbe_offset + @_wchar2.fbe_size)
-      @_wchar4 = FieldModelEnumWChar(self.buffer, @_wchar3.fbe_offset + @_wchar3.fbe_size)
-      @_wchar5 = FieldModelEnumWChar(self.buffer, @_wchar4.fbe_offset + @_wchar4.fbe_size)
-      @_int8b0 = FieldModelEnumInt8(self.buffer, @_wchar5.fbe_offset + @_wchar5.fbe_size)
-      @_int8b1 = FieldModelEnumInt8(self.buffer, @_int8b0.fbe_offset + @_int8b0.fbe_size)
-      @_int8b2 = FieldModelEnumInt8(self.buffer, @_int8b1.fbe_offset + @_int8b1.fbe_size)
-      @_int8b3 = FieldModelEnumInt8(self.buffer, @_int8b2.fbe_offset + @_int8b2.fbe_size)
-      @_int8b4 = FieldModelEnumInt8(self.buffer, @_int8b3.fbe_offset + @_int8b3.fbe_size)
-      @_int8b5 = FieldModelEnumInt8(self.buffer, @_int8b4.fbe_offset + @_int8b4.fbe_size)
-      @_uint8b0 = FieldModelEnumUInt8(self.buffer, @_int8b5.fbe_offset + @_int8b5.fbe_size)
-      @_uint8b1 = FieldModelEnumUInt8(self.buffer, @_uint8b0.fbe_offset + @_uint8b0.fbe_size)
-      @_uint8b2 = FieldModelEnumUInt8(self.buffer, @_uint8b1.fbe_offset + @_uint8b1.fbe_size)
-      @_uint8b3 = FieldModelEnumUInt8(self.buffer, @_uint8b2.fbe_offset + @_uint8b2.fbe_size)
-      @_uint8b4 = FieldModelEnumUInt8(self.buffer, @_uint8b3.fbe_offset + @_uint8b3.fbe_size)
-      @_uint8b5 = FieldModelEnumUInt8(self.buffer, @_uint8b4.fbe_offset + @_uint8b4.fbe_size)
-      @_int16b0 = FieldModelEnumInt16(self.buffer, @_uint8b5.fbe_offset + @_uint8b5.fbe_size)
-      @_int16b1 = FieldModelEnumInt16(self.buffer, @_int16b0.fbe_offset + @_int16b0.fbe_size)
-      @_int16b2 = FieldModelEnumInt16(self.buffer, @_int16b1.fbe_offset + @_int16b1.fbe_size)
-      @_int16b3 = FieldModelEnumInt16(self.buffer, @_int16b2.fbe_offset + @_int16b2.fbe_size)
-      @_int16b4 = FieldModelEnumInt16(self.buffer, @_int16b3.fbe_offset + @_int16b3.fbe_size)
-      @_int16b5 = FieldModelEnumInt16(self.buffer, @_int16b4.fbe_offset + @_int16b4.fbe_size)
-      @_uint16b0 = FieldModelEnumUInt16(self.buffer, @_int16b5.fbe_offset + @_int16b5.fbe_size)
-      @_uint16b1 = FieldModelEnumUInt16(self.buffer, @_uint16b0.fbe_offset + @_uint16b0.fbe_size)
-      @_uint16b2 = FieldModelEnumUInt16(self.buffer, @_uint16b1.fbe_offset + @_uint16b1.fbe_size)
-      @_uint16b3 = FieldModelEnumUInt16(self.buffer, @_uint16b2.fbe_offset + @_uint16b2.fbe_size)
-      @_uint16b4 = FieldModelEnumUInt16(self.buffer, @_uint16b3.fbe_offset + @_uint16b3.fbe_size)
-      @_uint16b5 = FieldModelEnumUInt16(self.buffer, @_uint16b4.fbe_offset + @_uint16b4.fbe_size)
-      @_int32b0 = FieldModelEnumInt32(self.buffer, @_uint16b5.fbe_offset + @_uint16b5.fbe_size)
-      @_int32b1 = FieldModelEnumInt32(self.buffer, @_int32b0.fbe_offset + @_int32b0.fbe_size)
-      @_int32b2 = FieldModelEnumInt32(self.buffer, @_int32b1.fbe_offset + @_int32b1.fbe_size)
-      @_int32b3 = FieldModelEnumInt32(self.buffer, @_int32b2.fbe_offset + @_int32b2.fbe_size)
-      @_int32b4 = FieldModelEnumInt32(self.buffer, @_int32b3.fbe_offset + @_int32b3.fbe_size)
-      @_int32b5 = FieldModelEnumInt32(self.buffer, @_int32b4.fbe_offset + @_int32b4.fbe_size)
-      @_uint32b0 = FieldModelEnumUInt32(self.buffer, @_int32b5.fbe_offset + @_int32b5.fbe_size)
-      @_uint32b1 = FieldModelEnumUInt32(self.buffer, @_uint32b0.fbe_offset + @_uint32b0.fbe_size)
-      @_uint32b2 = FieldModelEnumUInt32(self.buffer, @_uint32b1.fbe_offset + @_uint32b1.fbe_size)
-      @_uint32b3 = FieldModelEnumUInt32(self.buffer, @_uint32b2.fbe_offset + @_uint32b2.fbe_size)
-      @_uint32b4 = FieldModelEnumUInt32(self.buffer, @_uint32b3.fbe_offset + @_uint32b3.fbe_size)
-      @_uint32b5 = FieldModelEnumUInt32(self.buffer, @_uint32b4.fbe_offset + @_uint32b4.fbe_size)
-      @_int64b0 = FieldModelEnumInt64(self.buffer, @_uint32b5.fbe_offset + @_uint32b5.fbe_size)
-      @_int64b1 = FieldModelEnumInt64(self.buffer, @_int64b0.fbe_offset + @_int64b0.fbe_size)
-      @_int64b2 = FieldModelEnumInt64(self.buffer, @_int64b1.fbe_offset + @_int64b1.fbe_size)
-      @_int64b3 = FieldModelEnumInt64(self.buffer, @_int64b2.fbe_offset + @_int64b2.fbe_size)
-      @_int64b4 = FieldModelEnumInt64(self.buffer, @_int64b3.fbe_offset + @_int64b3.fbe_size)
-      @_int64b5 = FieldModelEnumInt64(self.buffer, @_int64b4.fbe_offset + @_int64b4.fbe_size)
-      @_uint64b0 = FieldModelEnumUInt64(self.buffer, @_int64b5.fbe_offset + @_int64b5.fbe_size)
-      @_uint64b1 = FieldModelEnumUInt64(self.buffer, @_uint64b0.fbe_offset + @_uint64b0.fbe_size)
-      @_uint64b2 = FieldModelEnumUInt64(self.buffer, @_uint64b1.fbe_offset + @_uint64b1.fbe_size)
-      @_uint64b3 = FieldModelEnumUInt64(self.buffer, @_uint64b2.fbe_offset + @_uint64b2.fbe_size)
-      @_uint64b4 = FieldModelEnumUInt64(self.buffer, @_uint64b3.fbe_offset + @_uint64b3.fbe_size)
-      @_uint64b5 = FieldModelEnumUInt64(self.buffer, @_uint64b4.fbe_offset + @_uint64b4.fbe_size)
+      @_byte0 = FieldModelEnumByte.new(self.buffer, 4 + 4)
+      @_byte1 = FieldModelEnumByte.new(self.buffer, @_byte0.fbe_offset + @_byte0.fbe_size)
+      @_byte2 = FieldModelEnumByte.new(self.buffer, @_byte1.fbe_offset + @_byte1.fbe_size)
+      @_byte3 = FieldModelEnumByte.new(self.buffer, @_byte2.fbe_offset + @_byte2.fbe_size)
+      @_byte4 = FieldModelEnumByte.new(self.buffer, @_byte3.fbe_offset + @_byte3.fbe_size)
+      @_byte5 = FieldModelEnumByte.new(self.buffer, @_byte4.fbe_offset + @_byte4.fbe_size)
+      @_char0 = FieldModelEnumChar.new(self.buffer, @_byte5.fbe_offset + @_byte5.fbe_size)
+      @_char1 = FieldModelEnumChar.new(self.buffer, @_char0.fbe_offset + @_char0.fbe_size)
+      @_char2 = FieldModelEnumChar.new(self.buffer, @_char1.fbe_offset + @_char1.fbe_size)
+      @_char3 = FieldModelEnumChar.new(self.buffer, @_char2.fbe_offset + @_char2.fbe_size)
+      @_char4 = FieldModelEnumChar.new(self.buffer, @_char3.fbe_offset + @_char3.fbe_size)
+      @_char5 = FieldModelEnumChar.new(self.buffer, @_char4.fbe_offset + @_char4.fbe_size)
+      @_wchar0 = FieldModelEnumWChar.new(self.buffer, @_char5.fbe_offset + @_char5.fbe_size)
+      @_wchar1 = FieldModelEnumWChar.new(self.buffer, @_wchar0.fbe_offset + @_wchar0.fbe_size)
+      @_wchar2 = FieldModelEnumWChar.new(self.buffer, @_wchar1.fbe_offset + @_wchar1.fbe_size)
+      @_wchar3 = FieldModelEnumWChar.new(self.buffer, @_wchar2.fbe_offset + @_wchar2.fbe_size)
+      @_wchar4 = FieldModelEnumWChar.new(self.buffer, @_wchar3.fbe_offset + @_wchar3.fbe_size)
+      @_wchar5 = FieldModelEnumWChar.new(self.buffer, @_wchar4.fbe_offset + @_wchar4.fbe_size)
+      @_int8b0 = FieldModelEnumInt8.new(self.buffer, @_wchar5.fbe_offset + @_wchar5.fbe_size)
+      @_int8b1 = FieldModelEnumInt8.new(self.buffer, @_int8b0.fbe_offset + @_int8b0.fbe_size)
+      @_int8b2 = FieldModelEnumInt8.new(self.buffer, @_int8b1.fbe_offset + @_int8b1.fbe_size)
+      @_int8b3 = FieldModelEnumInt8.new(self.buffer, @_int8b2.fbe_offset + @_int8b2.fbe_size)
+      @_int8b4 = FieldModelEnumInt8.new(self.buffer, @_int8b3.fbe_offset + @_int8b3.fbe_size)
+      @_int8b5 = FieldModelEnumInt8.new(self.buffer, @_int8b4.fbe_offset + @_int8b4.fbe_size)
+      @_uint8b0 = FieldModelEnumUInt8.new(self.buffer, @_int8b5.fbe_offset + @_int8b5.fbe_size)
+      @_uint8b1 = FieldModelEnumUInt8.new(self.buffer, @_uint8b0.fbe_offset + @_uint8b0.fbe_size)
+      @_uint8b2 = FieldModelEnumUInt8.new(self.buffer, @_uint8b1.fbe_offset + @_uint8b1.fbe_size)
+      @_uint8b3 = FieldModelEnumUInt8.new(self.buffer, @_uint8b2.fbe_offset + @_uint8b2.fbe_size)
+      @_uint8b4 = FieldModelEnumUInt8.new(self.buffer, @_uint8b3.fbe_offset + @_uint8b3.fbe_size)
+      @_uint8b5 = FieldModelEnumUInt8.new(self.buffer, @_uint8b4.fbe_offset + @_uint8b4.fbe_size)
+      @_int16b0 = FieldModelEnumInt16.new(self.buffer, @_uint8b5.fbe_offset + @_uint8b5.fbe_size)
+      @_int16b1 = FieldModelEnumInt16.new(self.buffer, @_int16b0.fbe_offset + @_int16b0.fbe_size)
+      @_int16b2 = FieldModelEnumInt16.new(self.buffer, @_int16b1.fbe_offset + @_int16b1.fbe_size)
+      @_int16b3 = FieldModelEnumInt16.new(self.buffer, @_int16b2.fbe_offset + @_int16b2.fbe_size)
+      @_int16b4 = FieldModelEnumInt16.new(self.buffer, @_int16b3.fbe_offset + @_int16b3.fbe_size)
+      @_int16b5 = FieldModelEnumInt16.new(self.buffer, @_int16b4.fbe_offset + @_int16b4.fbe_size)
+      @_uint16b0 = FieldModelEnumUInt16.new(self.buffer, @_int16b5.fbe_offset + @_int16b5.fbe_size)
+      @_uint16b1 = FieldModelEnumUInt16.new(self.buffer, @_uint16b0.fbe_offset + @_uint16b0.fbe_size)
+      @_uint16b2 = FieldModelEnumUInt16.new(self.buffer, @_uint16b1.fbe_offset + @_uint16b1.fbe_size)
+      @_uint16b3 = FieldModelEnumUInt16.new(self.buffer, @_uint16b2.fbe_offset + @_uint16b2.fbe_size)
+      @_uint16b4 = FieldModelEnumUInt16.new(self.buffer, @_uint16b3.fbe_offset + @_uint16b3.fbe_size)
+      @_uint16b5 = FieldModelEnumUInt16.new(self.buffer, @_uint16b4.fbe_offset + @_uint16b4.fbe_size)
+      @_int32b0 = FieldModelEnumInt32.new(self.buffer, @_uint16b5.fbe_offset + @_uint16b5.fbe_size)
+      @_int32b1 = FieldModelEnumInt32.new(self.buffer, @_int32b0.fbe_offset + @_int32b0.fbe_size)
+      @_int32b2 = FieldModelEnumInt32.new(self.buffer, @_int32b1.fbe_offset + @_int32b1.fbe_size)
+      @_int32b3 = FieldModelEnumInt32.new(self.buffer, @_int32b2.fbe_offset + @_int32b2.fbe_size)
+      @_int32b4 = FieldModelEnumInt32.new(self.buffer, @_int32b3.fbe_offset + @_int32b3.fbe_size)
+      @_int32b5 = FieldModelEnumInt32.new(self.buffer, @_int32b4.fbe_offset + @_int32b4.fbe_size)
+      @_uint32b0 = FieldModelEnumUInt32.new(self.buffer, @_int32b5.fbe_offset + @_int32b5.fbe_size)
+      @_uint32b1 = FieldModelEnumUInt32.new(self.buffer, @_uint32b0.fbe_offset + @_uint32b0.fbe_size)
+      @_uint32b2 = FieldModelEnumUInt32.new(self.buffer, @_uint32b1.fbe_offset + @_uint32b1.fbe_size)
+      @_uint32b3 = FieldModelEnumUInt32.new(self.buffer, @_uint32b2.fbe_offset + @_uint32b2.fbe_size)
+      @_uint32b4 = FieldModelEnumUInt32.new(self.buffer, @_uint32b3.fbe_offset + @_uint32b3.fbe_size)
+      @_uint32b5 = FieldModelEnumUInt32.new(self.buffer, @_uint32b4.fbe_offset + @_uint32b4.fbe_size)
+      @_int64b0 = FieldModelEnumInt64.new(self.buffer, @_uint32b5.fbe_offset + @_uint32b5.fbe_size)
+      @_int64b1 = FieldModelEnumInt64.new(self.buffer, @_int64b0.fbe_offset + @_int64b0.fbe_size)
+      @_int64b2 = FieldModelEnumInt64.new(self.buffer, @_int64b1.fbe_offset + @_int64b1.fbe_size)
+      @_int64b3 = FieldModelEnumInt64.new(self.buffer, @_int64b2.fbe_offset + @_int64b2.fbe_size)
+      @_int64b4 = FieldModelEnumInt64.new(self.buffer, @_int64b3.fbe_offset + @_int64b3.fbe_size)
+      @_int64b5 = FieldModelEnumInt64.new(self.buffer, @_int64b4.fbe_offset + @_int64b4.fbe_size)
+      @_uint64b0 = FieldModelEnumUInt64.new(self.buffer, @_int64b5.fbe_offset + @_int64b5.fbe_size)
+      @_uint64b1 = FieldModelEnumUInt64.new(self.buffer, @_uint64b0.fbe_offset + @_uint64b0.fbe_size)
+      @_uint64b2 = FieldModelEnumUInt64.new(self.buffer, @_uint64b1.fbe_offset + @_uint64b1.fbe_size)
+      @_uint64b3 = FieldModelEnumUInt64.new(self.buffer, @_uint64b2.fbe_offset + @_uint64b2.fbe_size)
+      @_uint64b4 = FieldModelEnumUInt64.new(self.buffer, @_uint64b3.fbe_offset + @_uint64b3.fbe_size)
+      @_uint64b5 = FieldModelEnumUInt64.new(self.buffer, @_uint64b4.fbe_offset + @_uint64b4.fbe_size)
     end
 
     def byte0
@@ -2557,73 +2590,73 @@ module Enums
 
     # Get the field body size
     def fbe_body
-      4 + 4
-        + byte0.fbe_size
-        + byte1.fbe_size
-        + byte2.fbe_size
-        + byte3.fbe_size
-        + byte4.fbe_size
-        + byte5.fbe_size
-        + char0.fbe_size
-        + char1.fbe_size
-        + char2.fbe_size
-        + char3.fbe_size
-        + char4.fbe_size
-        + char5.fbe_size
-        + wchar0.fbe_size
-        + wchar1.fbe_size
-        + wchar2.fbe_size
-        + wchar3.fbe_size
-        + wchar4.fbe_size
-        + wchar5.fbe_size
-        + int8b0.fbe_size
-        + int8b1.fbe_size
-        + int8b2.fbe_size
-        + int8b3.fbe_size
-        + int8b4.fbe_size
-        + int8b5.fbe_size
-        + uint8b0.fbe_size
-        + uint8b1.fbe_size
-        + uint8b2.fbe_size
-        + uint8b3.fbe_size
-        + uint8b4.fbe_size
-        + uint8b5.fbe_size
-        + int16b0.fbe_size
-        + int16b1.fbe_size
-        + int16b2.fbe_size
-        + int16b3.fbe_size
-        + int16b4.fbe_size
-        + int16b5.fbe_size
-        + uint16b0.fbe_size
-        + uint16b1.fbe_size
-        + uint16b2.fbe_size
-        + uint16b3.fbe_size
-        + uint16b4.fbe_size
-        + uint16b5.fbe_size
-        + int32b0.fbe_size
-        + int32b1.fbe_size
-        + int32b2.fbe_size
-        + int32b3.fbe_size
-        + int32b4.fbe_size
-        + int32b5.fbe_size
-        + uint32b0.fbe_size
-        + uint32b1.fbe_size
-        + uint32b2.fbe_size
-        + uint32b3.fbe_size
-        + uint32b4.fbe_size
-        + uint32b5.fbe_size
-        + int64b0.fbe_size
-        + int64b1.fbe_size
-        + int64b2.fbe_size
-        + int64b3.fbe_size
-        + int64b4.fbe_size
-        + int64b5.fbe_size
-        + uint64b0.fbe_size
-        + uint64b1.fbe_size
-        + uint64b2.fbe_size
-        + uint64b3.fbe_size
-        + uint64b4.fbe_size
-        + uint64b5.fbe_size
+      4 + 4 \
+        + byte0.fbe_size \
+        + byte1.fbe_size \
+        + byte2.fbe_size \
+        + byte3.fbe_size \
+        + byte4.fbe_size \
+        + byte5.fbe_size \
+        + char0.fbe_size \
+        + char1.fbe_size \
+        + char2.fbe_size \
+        + char3.fbe_size \
+        + char4.fbe_size \
+        + char5.fbe_size \
+        + wchar0.fbe_size \
+        + wchar1.fbe_size \
+        + wchar2.fbe_size \
+        + wchar3.fbe_size \
+        + wchar4.fbe_size \
+        + wchar5.fbe_size \
+        + int8b0.fbe_size \
+        + int8b1.fbe_size \
+        + int8b2.fbe_size \
+        + int8b3.fbe_size \
+        + int8b4.fbe_size \
+        + int8b5.fbe_size \
+        + uint8b0.fbe_size \
+        + uint8b1.fbe_size \
+        + uint8b2.fbe_size \
+        + uint8b3.fbe_size \
+        + uint8b4.fbe_size \
+        + uint8b5.fbe_size \
+        + int16b0.fbe_size \
+        + int16b1.fbe_size \
+        + int16b2.fbe_size \
+        + int16b3.fbe_size \
+        + int16b4.fbe_size \
+        + int16b5.fbe_size \
+        + uint16b0.fbe_size \
+        + uint16b1.fbe_size \
+        + uint16b2.fbe_size \
+        + uint16b3.fbe_size \
+        + uint16b4.fbe_size \
+        + uint16b5.fbe_size \
+        + int32b0.fbe_size \
+        + int32b1.fbe_size \
+        + int32b2.fbe_size \
+        + int32b3.fbe_size \
+        + int32b4.fbe_size \
+        + int32b5.fbe_size \
+        + uint32b0.fbe_size \
+        + uint32b1.fbe_size \
+        + uint32b2.fbe_size \
+        + uint32b3.fbe_size \
+        + uint32b4.fbe_size \
+        + uint32b5.fbe_size \
+        + int64b0.fbe_size \
+        + int64b1.fbe_size \
+        + int64b2.fbe_size \
+        + int64b3.fbe_size \
+        + int64b4.fbe_size \
+        + int64b5.fbe_size \
+        + uint64b0.fbe_size \
+        + uint64b1.fbe_size \
+        + uint64b2.fbe_size \
+        + uint64b3.fbe_size \
+        + uint64b4.fbe_size \
+        + uint64b5.fbe_size \
     end
 
     # Get the field extra size
@@ -2639,73 +2672,73 @@ module Enums
 
       @_buffer.shift(fbe_struct_offset)
 
-      fbe_result = fbe_body
-        + byte0.fbe_extra
-        + byte1.fbe_extra
-        + byte2.fbe_extra
-        + byte3.fbe_extra
-        + byte4.fbe_extra
-        + byte5.fbe_extra
-        + char0.fbe_extra
-        + char1.fbe_extra
-        + char2.fbe_extra
-        + char3.fbe_extra
-        + char4.fbe_extra
-        + char5.fbe_extra
-        + wchar0.fbe_extra
-        + wchar1.fbe_extra
-        + wchar2.fbe_extra
-        + wchar3.fbe_extra
-        + wchar4.fbe_extra
-        + wchar5.fbe_extra
-        + int8b0.fbe_extra
-        + int8b1.fbe_extra
-        + int8b2.fbe_extra
-        + int8b3.fbe_extra
-        + int8b4.fbe_extra
-        + int8b5.fbe_extra
-        + uint8b0.fbe_extra
-        + uint8b1.fbe_extra
-        + uint8b2.fbe_extra
-        + uint8b3.fbe_extra
-        + uint8b4.fbe_extra
-        + uint8b5.fbe_extra
-        + int16b0.fbe_extra
-        + int16b1.fbe_extra
-        + int16b2.fbe_extra
-        + int16b3.fbe_extra
-        + int16b4.fbe_extra
-        + int16b5.fbe_extra
-        + uint16b0.fbe_extra
-        + uint16b1.fbe_extra
-        + uint16b2.fbe_extra
-        + uint16b3.fbe_extra
-        + uint16b4.fbe_extra
-        + uint16b5.fbe_extra
-        + int32b0.fbe_extra
-        + int32b1.fbe_extra
-        + int32b2.fbe_extra
-        + int32b3.fbe_extra
-        + int32b4.fbe_extra
-        + int32b5.fbe_extra
-        + uint32b0.fbe_extra
-        + uint32b1.fbe_extra
-        + uint32b2.fbe_extra
-        + uint32b3.fbe_extra
-        + uint32b4.fbe_extra
-        + uint32b5.fbe_extra
-        + int64b0.fbe_extra
-        + int64b1.fbe_extra
-        + int64b2.fbe_extra
-        + int64b3.fbe_extra
-        + int64b4.fbe_extra
-        + int64b5.fbe_extra
-        + uint64b0.fbe_extra
-        + uint64b1.fbe_extra
-        + uint64b2.fbe_extra
-        + uint64b3.fbe_extra
-        + uint64b4.fbe_extra
-        + uint64b5.fbe_extra
+      fbe_result = fbe_body \
+        + byte0.fbe_extra \
+        + byte1.fbe_extra \
+        + byte2.fbe_extra \
+        + byte3.fbe_extra \
+        + byte4.fbe_extra \
+        + byte5.fbe_extra \
+        + char0.fbe_extra \
+        + char1.fbe_extra \
+        + char2.fbe_extra \
+        + char3.fbe_extra \
+        + char4.fbe_extra \
+        + char5.fbe_extra \
+        + wchar0.fbe_extra \
+        + wchar1.fbe_extra \
+        + wchar2.fbe_extra \
+        + wchar3.fbe_extra \
+        + wchar4.fbe_extra \
+        + wchar5.fbe_extra \
+        + int8b0.fbe_extra \
+        + int8b1.fbe_extra \
+        + int8b2.fbe_extra \
+        + int8b3.fbe_extra \
+        + int8b4.fbe_extra \
+        + int8b5.fbe_extra \
+        + uint8b0.fbe_extra \
+        + uint8b1.fbe_extra \
+        + uint8b2.fbe_extra \
+        + uint8b3.fbe_extra \
+        + uint8b4.fbe_extra \
+        + uint8b5.fbe_extra \
+        + int16b0.fbe_extra \
+        + int16b1.fbe_extra \
+        + int16b2.fbe_extra \
+        + int16b3.fbe_extra \
+        + int16b4.fbe_extra \
+        + int16b5.fbe_extra \
+        + uint16b0.fbe_extra \
+        + uint16b1.fbe_extra \
+        + uint16b2.fbe_extra \
+        + uint16b3.fbe_extra \
+        + uint16b4.fbe_extra \
+        + uint16b5.fbe_extra \
+        + int32b0.fbe_extra \
+        + int32b1.fbe_extra \
+        + int32b2.fbe_extra \
+        + int32b3.fbe_extra \
+        + int32b4.fbe_extra \
+        + int32b5.fbe_extra \
+        + uint32b0.fbe_extra \
+        + uint32b1.fbe_extra \
+        + uint32b2.fbe_extra \
+        + uint32b3.fbe_extra \
+        + uint32b4.fbe_extra \
+        + uint32b5.fbe_extra \
+        + int64b0.fbe_extra \
+        + int64b1.fbe_extra \
+        + int64b2.fbe_extra \
+        + int64b3.fbe_extra \
+        + int64b4.fbe_extra \
+        + int64b5.fbe_extra \
+        + uint64b0.fbe_extra \
+        + uint64b1.fbe_extra \
+        + uint64b2.fbe_extra \
+        + uint64b3.fbe_extra \
+        + uint64b4.fbe_extra \
+        + uint64b5.fbe_extra \
 
       @_buffer.unshift(fbe_struct_offset)
 
@@ -4029,7 +4062,7 @@ module Enums
   class EnumsModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FieldModelEnums(self.buffer, 4)
+      @_model = FieldModelEnums.new(self.buffer, 4)
     end
 
     def model
@@ -4107,72 +4140,72 @@ module Enums
   class FinalModelEnums < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_byte0 = FinalModelEnumByte(self.buffer, 0)
-      @_byte1 = FinalModelEnumByte(self.buffer, 0)
-      @_byte2 = FinalModelEnumByte(self.buffer, 0)
-      @_byte3 = FinalModelEnumByte(self.buffer, 0)
-      @_byte4 = FinalModelEnumByte(self.buffer, 0)
-      @_byte5 = FinalModelEnumByte(self.buffer, 0)
-      @_char0 = FinalModelEnumChar(self.buffer, 0)
-      @_char1 = FinalModelEnumChar(self.buffer, 0)
-      @_char2 = FinalModelEnumChar(self.buffer, 0)
-      @_char3 = FinalModelEnumChar(self.buffer, 0)
-      @_char4 = FinalModelEnumChar(self.buffer, 0)
-      @_char5 = FinalModelEnumChar(self.buffer, 0)
-      @_wchar0 = FinalModelEnumWChar(self.buffer, 0)
-      @_wchar1 = FinalModelEnumWChar(self.buffer, 0)
-      @_wchar2 = FinalModelEnumWChar(self.buffer, 0)
-      @_wchar3 = FinalModelEnumWChar(self.buffer, 0)
-      @_wchar4 = FinalModelEnumWChar(self.buffer, 0)
-      @_wchar5 = FinalModelEnumWChar(self.buffer, 0)
-      @_int8b0 = FinalModelEnumInt8(self.buffer, 0)
-      @_int8b1 = FinalModelEnumInt8(self.buffer, 0)
-      @_int8b2 = FinalModelEnumInt8(self.buffer, 0)
-      @_int8b3 = FinalModelEnumInt8(self.buffer, 0)
-      @_int8b4 = FinalModelEnumInt8(self.buffer, 0)
-      @_int8b5 = FinalModelEnumInt8(self.buffer, 0)
-      @_uint8b0 = FinalModelEnumUInt8(self.buffer, 0)
-      @_uint8b1 = FinalModelEnumUInt8(self.buffer, 0)
-      @_uint8b2 = FinalModelEnumUInt8(self.buffer, 0)
-      @_uint8b3 = FinalModelEnumUInt8(self.buffer, 0)
-      @_uint8b4 = FinalModelEnumUInt8(self.buffer, 0)
-      @_uint8b5 = FinalModelEnumUInt8(self.buffer, 0)
-      @_int16b0 = FinalModelEnumInt16(self.buffer, 0)
-      @_int16b1 = FinalModelEnumInt16(self.buffer, 0)
-      @_int16b2 = FinalModelEnumInt16(self.buffer, 0)
-      @_int16b3 = FinalModelEnumInt16(self.buffer, 0)
-      @_int16b4 = FinalModelEnumInt16(self.buffer, 0)
-      @_int16b5 = FinalModelEnumInt16(self.buffer, 0)
-      @_uint16b0 = FinalModelEnumUInt16(self.buffer, 0)
-      @_uint16b1 = FinalModelEnumUInt16(self.buffer, 0)
-      @_uint16b2 = FinalModelEnumUInt16(self.buffer, 0)
-      @_uint16b3 = FinalModelEnumUInt16(self.buffer, 0)
-      @_uint16b4 = FinalModelEnumUInt16(self.buffer, 0)
-      @_uint16b5 = FinalModelEnumUInt16(self.buffer, 0)
-      @_int32b0 = FinalModelEnumInt32(self.buffer, 0)
-      @_int32b1 = FinalModelEnumInt32(self.buffer, 0)
-      @_int32b2 = FinalModelEnumInt32(self.buffer, 0)
-      @_int32b3 = FinalModelEnumInt32(self.buffer, 0)
-      @_int32b4 = FinalModelEnumInt32(self.buffer, 0)
-      @_int32b5 = FinalModelEnumInt32(self.buffer, 0)
-      @_uint32b0 = FinalModelEnumUInt32(self.buffer, 0)
-      @_uint32b1 = FinalModelEnumUInt32(self.buffer, 0)
-      @_uint32b2 = FinalModelEnumUInt32(self.buffer, 0)
-      @_uint32b3 = FinalModelEnumUInt32(self.buffer, 0)
-      @_uint32b4 = FinalModelEnumUInt32(self.buffer, 0)
-      @_uint32b5 = FinalModelEnumUInt32(self.buffer, 0)
-      @_int64b0 = FinalModelEnumInt64(self.buffer, 0)
-      @_int64b1 = FinalModelEnumInt64(self.buffer, 0)
-      @_int64b2 = FinalModelEnumInt64(self.buffer, 0)
-      @_int64b3 = FinalModelEnumInt64(self.buffer, 0)
-      @_int64b4 = FinalModelEnumInt64(self.buffer, 0)
-      @_int64b5 = FinalModelEnumInt64(self.buffer, 0)
-      @_uint64b0 = FinalModelEnumUInt64(self.buffer, 0)
-      @_uint64b1 = FinalModelEnumUInt64(self.buffer, 0)
-      @_uint64b2 = FinalModelEnumUInt64(self.buffer, 0)
-      @_uint64b3 = FinalModelEnumUInt64(self.buffer, 0)
-      @_uint64b4 = FinalModelEnumUInt64(self.buffer, 0)
-      @_uint64b5 = FinalModelEnumUInt64(self.buffer, 0)
+      @_byte0 = FinalModelEnumByte.new(self.buffer, 0)
+      @_byte1 = FinalModelEnumByte.new(self.buffer, 0)
+      @_byte2 = FinalModelEnumByte.new(self.buffer, 0)
+      @_byte3 = FinalModelEnumByte.new(self.buffer, 0)
+      @_byte4 = FinalModelEnumByte.new(self.buffer, 0)
+      @_byte5 = FinalModelEnumByte.new(self.buffer, 0)
+      @_char0 = FinalModelEnumChar.new(self.buffer, 0)
+      @_char1 = FinalModelEnumChar.new(self.buffer, 0)
+      @_char2 = FinalModelEnumChar.new(self.buffer, 0)
+      @_char3 = FinalModelEnumChar.new(self.buffer, 0)
+      @_char4 = FinalModelEnumChar.new(self.buffer, 0)
+      @_char5 = FinalModelEnumChar.new(self.buffer, 0)
+      @_wchar0 = FinalModelEnumWChar.new(self.buffer, 0)
+      @_wchar1 = FinalModelEnumWChar.new(self.buffer, 0)
+      @_wchar2 = FinalModelEnumWChar.new(self.buffer, 0)
+      @_wchar3 = FinalModelEnumWChar.new(self.buffer, 0)
+      @_wchar4 = FinalModelEnumWChar.new(self.buffer, 0)
+      @_wchar5 = FinalModelEnumWChar.new(self.buffer, 0)
+      @_int8b0 = FinalModelEnumInt8.new(self.buffer, 0)
+      @_int8b1 = FinalModelEnumInt8.new(self.buffer, 0)
+      @_int8b2 = FinalModelEnumInt8.new(self.buffer, 0)
+      @_int8b3 = FinalModelEnumInt8.new(self.buffer, 0)
+      @_int8b4 = FinalModelEnumInt8.new(self.buffer, 0)
+      @_int8b5 = FinalModelEnumInt8.new(self.buffer, 0)
+      @_uint8b0 = FinalModelEnumUInt8.new(self.buffer, 0)
+      @_uint8b1 = FinalModelEnumUInt8.new(self.buffer, 0)
+      @_uint8b2 = FinalModelEnumUInt8.new(self.buffer, 0)
+      @_uint8b3 = FinalModelEnumUInt8.new(self.buffer, 0)
+      @_uint8b4 = FinalModelEnumUInt8.new(self.buffer, 0)
+      @_uint8b5 = FinalModelEnumUInt8.new(self.buffer, 0)
+      @_int16b0 = FinalModelEnumInt16.new(self.buffer, 0)
+      @_int16b1 = FinalModelEnumInt16.new(self.buffer, 0)
+      @_int16b2 = FinalModelEnumInt16.new(self.buffer, 0)
+      @_int16b3 = FinalModelEnumInt16.new(self.buffer, 0)
+      @_int16b4 = FinalModelEnumInt16.new(self.buffer, 0)
+      @_int16b5 = FinalModelEnumInt16.new(self.buffer, 0)
+      @_uint16b0 = FinalModelEnumUInt16.new(self.buffer, 0)
+      @_uint16b1 = FinalModelEnumUInt16.new(self.buffer, 0)
+      @_uint16b2 = FinalModelEnumUInt16.new(self.buffer, 0)
+      @_uint16b3 = FinalModelEnumUInt16.new(self.buffer, 0)
+      @_uint16b4 = FinalModelEnumUInt16.new(self.buffer, 0)
+      @_uint16b5 = FinalModelEnumUInt16.new(self.buffer, 0)
+      @_int32b0 = FinalModelEnumInt32.new(self.buffer, 0)
+      @_int32b1 = FinalModelEnumInt32.new(self.buffer, 0)
+      @_int32b2 = FinalModelEnumInt32.new(self.buffer, 0)
+      @_int32b3 = FinalModelEnumInt32.new(self.buffer, 0)
+      @_int32b4 = FinalModelEnumInt32.new(self.buffer, 0)
+      @_int32b5 = FinalModelEnumInt32.new(self.buffer, 0)
+      @_uint32b0 = FinalModelEnumUInt32.new(self.buffer, 0)
+      @_uint32b1 = FinalModelEnumUInt32.new(self.buffer, 0)
+      @_uint32b2 = FinalModelEnumUInt32.new(self.buffer, 0)
+      @_uint32b3 = FinalModelEnumUInt32.new(self.buffer, 0)
+      @_uint32b4 = FinalModelEnumUInt32.new(self.buffer, 0)
+      @_uint32b5 = FinalModelEnumUInt32.new(self.buffer, 0)
+      @_int64b0 = FinalModelEnumInt64.new(self.buffer, 0)
+      @_int64b1 = FinalModelEnumInt64.new(self.buffer, 0)
+      @_int64b2 = FinalModelEnumInt64.new(self.buffer, 0)
+      @_int64b3 = FinalModelEnumInt64.new(self.buffer, 0)
+      @_int64b4 = FinalModelEnumInt64.new(self.buffer, 0)
+      @_int64b5 = FinalModelEnumInt64.new(self.buffer, 0)
+      @_uint64b0 = FinalModelEnumUInt64.new(self.buffer, 0)
+      @_uint64b1 = FinalModelEnumUInt64.new(self.buffer, 0)
+      @_uint64b2 = FinalModelEnumUInt64.new(self.buffer, 0)
+      @_uint64b3 = FinalModelEnumUInt64.new(self.buffer, 0)
+      @_uint64b4 = FinalModelEnumUInt64.new(self.buffer, 0)
+      @_uint64b5 = FinalModelEnumUInt64.new(self.buffer, 0)
     end
 
     def byte0
@@ -4441,73 +4474,73 @@ module Enums
 
     # Get the allocation size
     def fbe_allocation_size(fbe_value)
-      0
-        + byte0.fbe_allocation_size(fbe_value.byte0)
-        + byte1.fbe_allocation_size(fbe_value.byte1)
-        + byte2.fbe_allocation_size(fbe_value.byte2)
-        + byte3.fbe_allocation_size(fbe_value.byte3)
-        + byte4.fbe_allocation_size(fbe_value.byte4)
-        + byte5.fbe_allocation_size(fbe_value.byte5)
-        + char0.fbe_allocation_size(fbe_value.char0)
-        + char1.fbe_allocation_size(fbe_value.char1)
-        + char2.fbe_allocation_size(fbe_value.char2)
-        + char3.fbe_allocation_size(fbe_value.char3)
-        + char4.fbe_allocation_size(fbe_value.char4)
-        + char5.fbe_allocation_size(fbe_value.char5)
-        + wchar0.fbe_allocation_size(fbe_value.wchar0)
-        + wchar1.fbe_allocation_size(fbe_value.wchar1)
-        + wchar2.fbe_allocation_size(fbe_value.wchar2)
-        + wchar3.fbe_allocation_size(fbe_value.wchar3)
-        + wchar4.fbe_allocation_size(fbe_value.wchar4)
-        + wchar5.fbe_allocation_size(fbe_value.wchar5)
-        + int8b0.fbe_allocation_size(fbe_value.int8b0)
-        + int8b1.fbe_allocation_size(fbe_value.int8b1)
-        + int8b2.fbe_allocation_size(fbe_value.int8b2)
-        + int8b3.fbe_allocation_size(fbe_value.int8b3)
-        + int8b4.fbe_allocation_size(fbe_value.int8b4)
-        + int8b5.fbe_allocation_size(fbe_value.int8b5)
-        + uint8b0.fbe_allocation_size(fbe_value.uint8b0)
-        + uint8b1.fbe_allocation_size(fbe_value.uint8b1)
-        + uint8b2.fbe_allocation_size(fbe_value.uint8b2)
-        + uint8b3.fbe_allocation_size(fbe_value.uint8b3)
-        + uint8b4.fbe_allocation_size(fbe_value.uint8b4)
-        + uint8b5.fbe_allocation_size(fbe_value.uint8b5)
-        + int16b0.fbe_allocation_size(fbe_value.int16b0)
-        + int16b1.fbe_allocation_size(fbe_value.int16b1)
-        + int16b2.fbe_allocation_size(fbe_value.int16b2)
-        + int16b3.fbe_allocation_size(fbe_value.int16b3)
-        + int16b4.fbe_allocation_size(fbe_value.int16b4)
-        + int16b5.fbe_allocation_size(fbe_value.int16b5)
-        + uint16b0.fbe_allocation_size(fbe_value.uint16b0)
-        + uint16b1.fbe_allocation_size(fbe_value.uint16b1)
-        + uint16b2.fbe_allocation_size(fbe_value.uint16b2)
-        + uint16b3.fbe_allocation_size(fbe_value.uint16b3)
-        + uint16b4.fbe_allocation_size(fbe_value.uint16b4)
-        + uint16b5.fbe_allocation_size(fbe_value.uint16b5)
-        + int32b0.fbe_allocation_size(fbe_value.int32b0)
-        + int32b1.fbe_allocation_size(fbe_value.int32b1)
-        + int32b2.fbe_allocation_size(fbe_value.int32b2)
-        + int32b3.fbe_allocation_size(fbe_value.int32b3)
-        + int32b4.fbe_allocation_size(fbe_value.int32b4)
-        + int32b5.fbe_allocation_size(fbe_value.int32b5)
-        + uint32b0.fbe_allocation_size(fbe_value.uint32b0)
-        + uint32b1.fbe_allocation_size(fbe_value.uint32b1)
-        + uint32b2.fbe_allocation_size(fbe_value.uint32b2)
-        + uint32b3.fbe_allocation_size(fbe_value.uint32b3)
-        + uint32b4.fbe_allocation_size(fbe_value.uint32b4)
-        + uint32b5.fbe_allocation_size(fbe_value.uint32b5)
-        + int64b0.fbe_allocation_size(fbe_value.int64b0)
-        + int64b1.fbe_allocation_size(fbe_value.int64b1)
-        + int64b2.fbe_allocation_size(fbe_value.int64b2)
-        + int64b3.fbe_allocation_size(fbe_value.int64b3)
-        + int64b4.fbe_allocation_size(fbe_value.int64b4)
-        + int64b5.fbe_allocation_size(fbe_value.int64b5)
-        + uint64b0.fbe_allocation_size(fbe_value.uint64b0)
-        + uint64b1.fbe_allocation_size(fbe_value.uint64b1)
-        + uint64b2.fbe_allocation_size(fbe_value.uint64b2)
-        + uint64b3.fbe_allocation_size(fbe_value.uint64b3)
-        + uint64b4.fbe_allocation_size(fbe_value.uint64b4)
-        + uint64b5.fbe_allocation_size(fbe_value.uint64b5)
+      0 \
+        + byte0.fbe_allocation_size(fbe_value.byte0) \
+        + byte1.fbe_allocation_size(fbe_value.byte1) \
+        + byte2.fbe_allocation_size(fbe_value.byte2) \
+        + byte3.fbe_allocation_size(fbe_value.byte3) \
+        + byte4.fbe_allocation_size(fbe_value.byte4) \
+        + byte5.fbe_allocation_size(fbe_value.byte5) \
+        + char0.fbe_allocation_size(fbe_value.char0) \
+        + char1.fbe_allocation_size(fbe_value.char1) \
+        + char2.fbe_allocation_size(fbe_value.char2) \
+        + char3.fbe_allocation_size(fbe_value.char3) \
+        + char4.fbe_allocation_size(fbe_value.char4) \
+        + char5.fbe_allocation_size(fbe_value.char5) \
+        + wchar0.fbe_allocation_size(fbe_value.wchar0) \
+        + wchar1.fbe_allocation_size(fbe_value.wchar1) \
+        + wchar2.fbe_allocation_size(fbe_value.wchar2) \
+        + wchar3.fbe_allocation_size(fbe_value.wchar3) \
+        + wchar4.fbe_allocation_size(fbe_value.wchar4) \
+        + wchar5.fbe_allocation_size(fbe_value.wchar5) \
+        + int8b0.fbe_allocation_size(fbe_value.int8b0) \
+        + int8b1.fbe_allocation_size(fbe_value.int8b1) \
+        + int8b2.fbe_allocation_size(fbe_value.int8b2) \
+        + int8b3.fbe_allocation_size(fbe_value.int8b3) \
+        + int8b4.fbe_allocation_size(fbe_value.int8b4) \
+        + int8b5.fbe_allocation_size(fbe_value.int8b5) \
+        + uint8b0.fbe_allocation_size(fbe_value.uint8b0) \
+        + uint8b1.fbe_allocation_size(fbe_value.uint8b1) \
+        + uint8b2.fbe_allocation_size(fbe_value.uint8b2) \
+        + uint8b3.fbe_allocation_size(fbe_value.uint8b3) \
+        + uint8b4.fbe_allocation_size(fbe_value.uint8b4) \
+        + uint8b5.fbe_allocation_size(fbe_value.uint8b5) \
+        + int16b0.fbe_allocation_size(fbe_value.int16b0) \
+        + int16b1.fbe_allocation_size(fbe_value.int16b1) \
+        + int16b2.fbe_allocation_size(fbe_value.int16b2) \
+        + int16b3.fbe_allocation_size(fbe_value.int16b3) \
+        + int16b4.fbe_allocation_size(fbe_value.int16b4) \
+        + int16b5.fbe_allocation_size(fbe_value.int16b5) \
+        + uint16b0.fbe_allocation_size(fbe_value.uint16b0) \
+        + uint16b1.fbe_allocation_size(fbe_value.uint16b1) \
+        + uint16b2.fbe_allocation_size(fbe_value.uint16b2) \
+        + uint16b3.fbe_allocation_size(fbe_value.uint16b3) \
+        + uint16b4.fbe_allocation_size(fbe_value.uint16b4) \
+        + uint16b5.fbe_allocation_size(fbe_value.uint16b5) \
+        + int32b0.fbe_allocation_size(fbe_value.int32b0) \
+        + int32b1.fbe_allocation_size(fbe_value.int32b1) \
+        + int32b2.fbe_allocation_size(fbe_value.int32b2) \
+        + int32b3.fbe_allocation_size(fbe_value.int32b3) \
+        + int32b4.fbe_allocation_size(fbe_value.int32b4) \
+        + int32b5.fbe_allocation_size(fbe_value.int32b5) \
+        + uint32b0.fbe_allocation_size(fbe_value.uint32b0) \
+        + uint32b1.fbe_allocation_size(fbe_value.uint32b1) \
+        + uint32b2.fbe_allocation_size(fbe_value.uint32b2) \
+        + uint32b3.fbe_allocation_size(fbe_value.uint32b3) \
+        + uint32b4.fbe_allocation_size(fbe_value.uint32b4) \
+        + uint32b5.fbe_allocation_size(fbe_value.uint32b5) \
+        + int64b0.fbe_allocation_size(fbe_value.int64b0) \
+        + int64b1.fbe_allocation_size(fbe_value.int64b1) \
+        + int64b2.fbe_allocation_size(fbe_value.int64b2) \
+        + int64b3.fbe_allocation_size(fbe_value.int64b3) \
+        + int64b4.fbe_allocation_size(fbe_value.int64b4) \
+        + int64b5.fbe_allocation_size(fbe_value.int64b5) \
+        + uint64b0.fbe_allocation_size(fbe_value.uint64b0) \
+        + uint64b1.fbe_allocation_size(fbe_value.uint64b1) \
+        + uint64b2.fbe_allocation_size(fbe_value.uint64b2) \
+        + uint64b3.fbe_allocation_size(fbe_value.uint64b3) \
+        + uint64b4.fbe_allocation_size(fbe_value.uint64b4) \
+        + uint64b5.fbe_allocation_size(fbe_value.uint64b5) \
     end
 
     # Get the field type
@@ -4531,463 +4564,463 @@ module Enums
 
       byte0.fbe_offset = fbe_current_offset
       fbe_field_size = byte0.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       byte1.fbe_offset = fbe_current_offset
       fbe_field_size = byte1.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       byte2.fbe_offset = fbe_current_offset
       fbe_field_size = byte2.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       byte3.fbe_offset = fbe_current_offset
       fbe_field_size = byte3.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       byte4.fbe_offset = fbe_current_offset
       fbe_field_size = byte4.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       byte5.fbe_offset = fbe_current_offset
       fbe_field_size = byte5.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       char0.fbe_offset = fbe_current_offset
       fbe_field_size = char0.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       char1.fbe_offset = fbe_current_offset
       fbe_field_size = char1.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       char2.fbe_offset = fbe_current_offset
       fbe_field_size = char2.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       char3.fbe_offset = fbe_current_offset
       fbe_field_size = char3.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       char4.fbe_offset = fbe_current_offset
       fbe_field_size = char4.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       char5.fbe_offset = fbe_current_offset
       fbe_field_size = char5.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       wchar0.fbe_offset = fbe_current_offset
       fbe_field_size = wchar0.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       wchar1.fbe_offset = fbe_current_offset
       fbe_field_size = wchar1.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       wchar2.fbe_offset = fbe_current_offset
       fbe_field_size = wchar2.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       wchar3.fbe_offset = fbe_current_offset
       fbe_field_size = wchar3.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       wchar4.fbe_offset = fbe_current_offset
       fbe_field_size = wchar4.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       wchar5.fbe_offset = fbe_current_offset
       fbe_field_size = wchar5.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int8b0.fbe_offset = fbe_current_offset
       fbe_field_size = int8b0.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int8b1.fbe_offset = fbe_current_offset
       fbe_field_size = int8b1.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int8b2.fbe_offset = fbe_current_offset
       fbe_field_size = int8b2.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int8b3.fbe_offset = fbe_current_offset
       fbe_field_size = int8b3.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int8b4.fbe_offset = fbe_current_offset
       fbe_field_size = int8b4.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int8b5.fbe_offset = fbe_current_offset
       fbe_field_size = int8b5.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint8b0.fbe_offset = fbe_current_offset
       fbe_field_size = uint8b0.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint8b1.fbe_offset = fbe_current_offset
       fbe_field_size = uint8b1.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint8b2.fbe_offset = fbe_current_offset
       fbe_field_size = uint8b2.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint8b3.fbe_offset = fbe_current_offset
       fbe_field_size = uint8b3.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint8b4.fbe_offset = fbe_current_offset
       fbe_field_size = uint8b4.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint8b5.fbe_offset = fbe_current_offset
       fbe_field_size = uint8b5.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int16b0.fbe_offset = fbe_current_offset
       fbe_field_size = int16b0.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int16b1.fbe_offset = fbe_current_offset
       fbe_field_size = int16b1.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int16b2.fbe_offset = fbe_current_offset
       fbe_field_size = int16b2.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int16b3.fbe_offset = fbe_current_offset
       fbe_field_size = int16b3.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int16b4.fbe_offset = fbe_current_offset
       fbe_field_size = int16b4.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int16b5.fbe_offset = fbe_current_offset
       fbe_field_size = int16b5.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint16b0.fbe_offset = fbe_current_offset
       fbe_field_size = uint16b0.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint16b1.fbe_offset = fbe_current_offset
       fbe_field_size = uint16b1.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint16b2.fbe_offset = fbe_current_offset
       fbe_field_size = uint16b2.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint16b3.fbe_offset = fbe_current_offset
       fbe_field_size = uint16b3.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint16b4.fbe_offset = fbe_current_offset
       fbe_field_size = uint16b4.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint16b5.fbe_offset = fbe_current_offset
       fbe_field_size = uint16b5.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int32b0.fbe_offset = fbe_current_offset
       fbe_field_size = int32b0.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int32b1.fbe_offset = fbe_current_offset
       fbe_field_size = int32b1.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int32b2.fbe_offset = fbe_current_offset
       fbe_field_size = int32b2.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int32b3.fbe_offset = fbe_current_offset
       fbe_field_size = int32b3.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int32b4.fbe_offset = fbe_current_offset
       fbe_field_size = int32b4.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int32b5.fbe_offset = fbe_current_offset
       fbe_field_size = int32b5.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint32b0.fbe_offset = fbe_current_offset
       fbe_field_size = uint32b0.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint32b1.fbe_offset = fbe_current_offset
       fbe_field_size = uint32b1.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint32b2.fbe_offset = fbe_current_offset
       fbe_field_size = uint32b2.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint32b3.fbe_offset = fbe_current_offset
       fbe_field_size = uint32b3.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint32b4.fbe_offset = fbe_current_offset
       fbe_field_size = uint32b4.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint32b5.fbe_offset = fbe_current_offset
       fbe_field_size = uint32b5.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int64b0.fbe_offset = fbe_current_offset
       fbe_field_size = int64b0.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int64b1.fbe_offset = fbe_current_offset
       fbe_field_size = int64b1.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int64b2.fbe_offset = fbe_current_offset
       fbe_field_size = int64b2.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int64b3.fbe_offset = fbe_current_offset
       fbe_field_size = int64b3.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int64b4.fbe_offset = fbe_current_offset
       fbe_field_size = int64b4.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       int64b5.fbe_offset = fbe_current_offset
       fbe_field_size = int64b5.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint64b0.fbe_offset = fbe_current_offset
       fbe_field_size = uint64b0.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint64b1.fbe_offset = fbe_current_offset
       fbe_field_size = uint64b1.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint64b2.fbe_offset = fbe_current_offset
       fbe_field_size = uint64b2.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint64b3.fbe_offset = fbe_current_offset
       fbe_field_size = uint64b3.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint64b4.fbe_offset = fbe_current_offset
       fbe_field_size = uint64b4.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
       uint64b5.fbe_offset = fbe_current_offset
       fbe_field_size = uint64b5.verify
-      if fbe_field_size == Fixnum::MAX
-        return Fixnum::MAX
+      if fbe_field_size == FBE::Integer::MAX
+        return FBE::Integer::MAX
       end
       fbe_current_offset += fbe_field_size
 
@@ -5892,7 +5925,7 @@ module Enums
   class EnumsFinalModel < FBE::Model
     def initialize(buffer = WriteBuffer.new)
       super(buffer)
-      @_model = FinalModelEnums(self.buffer, 8)
+      @_model = FinalModelEnums.new(self.buffer, 8)
     end
 
     # Get the model type
