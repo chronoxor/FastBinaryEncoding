@@ -907,7 +907,14 @@ module Test
     end
 
     def clone
-      Marshal.load(Marshal.dump(self))
+      # Serialize the struct to the FBE stream
+      writer = StructSimpleModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+
+      # Deserialize the struct from the FBE stream
+      reader = StructSimpleModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(writer.buffer)
+      reader.deserialize[0]
     end
 
     def <=>(other)
@@ -1266,12 +1273,12 @@ module Test
       @_f36 = FBE::FieldModelUUID.new(self.buffer, @_f35.fbe_offset + @_f35.fbe_size)
       @_f37 = FBE::FieldModelUUID.new(self.buffer, @_f36.fbe_offset + @_f36.fbe_size)
       @_f38 = FBE::FieldModelUUID.new(self.buffer, @_f37.fbe_offset + @_f37.fbe_size)
-      @_f39 = proto.FieldModelOrderSide.new(self.buffer, @_f38.fbe_offset + @_f38.fbe_size)
-      @_f40 = proto.FieldModelOrderType.new(self.buffer, @_f39.fbe_offset + @_f39.fbe_size)
-      @_f41 = proto.FieldModelOrder.new(self.buffer, @_f40.fbe_offset + @_f40.fbe_size)
-      @_f42 = proto.FieldModelBalance.new(self.buffer, @_f41.fbe_offset + @_f41.fbe_size)
-      @_f43 = proto.FieldModelState.new(self.buffer, @_f42.fbe_offset + @_f42.fbe_size)
-      @_f44 = proto.FieldModelAccount.new(self.buffer, @_f43.fbe_offset + @_f43.fbe_size)
+      @_f39 = Proto::FieldModelOrderSide.new(self.buffer, @_f38.fbe_offset + @_f38.fbe_size)
+      @_f40 = Proto::FieldModelOrderType.new(self.buffer, @_f39.fbe_offset + @_f39.fbe_size)
+      @_f41 = Proto::FieldModelOrder.new(self.buffer, @_f40.fbe_offset + @_f40.fbe_size)
+      @_f42 = Proto::FieldModelBalance.new(self.buffer, @_f41.fbe_offset + @_f41.fbe_size)
+      @_f43 = Proto::FieldModelState.new(self.buffer, @_f42.fbe_offset + @_f42.fbe_size)
+      @_f44 = Proto::FieldModelAccount.new(self.buffer, @_f43.fbe_offset + @_f43.fbe_size)
     end
 
     def uid
@@ -2630,12 +2637,12 @@ module Test
       @_f36 = FBE::FinalModelUUID.new(self.buffer, 0)
       @_f37 = FBE::FinalModelUUID.new(self.buffer, 0)
       @_f38 = FBE::FinalModelUUID.new(self.buffer, 0)
-      @_f39 = proto.FinalModelOrderSide.new(self.buffer, 0)
-      @_f40 = proto.FinalModelOrderType.new(self.buffer, 0)
-      @_f41 = proto.FinalModelOrder.new(self.buffer, 0)
-      @_f42 = proto.FinalModelBalance.new(self.buffer, 0)
-      @_f43 = proto.FinalModelState.new(self.buffer, 0)
-      @_f44 = proto.FinalModelAccount.new(self.buffer, 0)
+      @_f39 = Proto::FinalModelOrderSide.new(self.buffer, 0)
+      @_f40 = Proto::FinalModelOrderType.new(self.buffer, 0)
+      @_f41 = Proto::FinalModelOrder.new(self.buffer, 0)
+      @_f42 = Proto::FinalModelBalance.new(self.buffer, 0)
+      @_f43 = Proto::FinalModelState.new(self.buffer, 0)
+      @_f44 = Proto::FinalModelAccount.new(self.buffer, 0)
     end
 
     def uid
@@ -4108,7 +4115,14 @@ module Test
     end
 
     def clone
-      Marshal.load(Marshal.dump(self))
+      # Serialize the struct to the FBE stream
+      writer = StructOptionalModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+
+      # Deserialize the struct from the FBE stream
+      reader = StructOptionalModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(writer.buffer)
+      reader.deserialize[0]
     end
 
     def <=>(other)
@@ -4555,7 +4569,7 @@ module Test
   class FieldModelStructOptional < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_parent = FieldModelStructSimple.new(self.buffer, 4 + 4)
+      @_parent = StructSimple.new(self.buffer, 4 + 4)
       @_f100 = FBE::FieldModelOptional.new(FBE::FieldModelBool.new(self.buffer, @_parent.fbe_offset + @_parent.fbe_body - 4 - 4), self.buffer, @_parent.fbe_offset + @_parent.fbe_body - 4 - 4)
       @_f101 = FBE::FieldModelOptional.new(FBE::FieldModelBool.new(self.buffer, @_f100.fbe_offset + @_f100.fbe_size), self.buffer, @_f100.fbe_offset + @_f100.fbe_size)
       @_f102 = FBE::FieldModelOptional.new(FBE::FieldModelBool.new(self.buffer, @_f101.fbe_offset + @_f101.fbe_size), self.buffer, @_f101.fbe_offset + @_f101.fbe_size)
@@ -4610,18 +4624,18 @@ module Test
       @_f151 = FBE::FieldModelOptional.new(FBE::FieldModelUUID.new(self.buffer, @_f150.fbe_offset + @_f150.fbe_size), self.buffer, @_f150.fbe_offset + @_f150.fbe_size)
       @_f152 = FBE::FieldModelOptional.new(FBE::FieldModelUUID.new(self.buffer, @_f151.fbe_offset + @_f151.fbe_size), self.buffer, @_f151.fbe_offset + @_f151.fbe_size)
       @_f153 = FBE::FieldModelOptional.new(FBE::FieldModelUUID.new(self.buffer, @_f152.fbe_offset + @_f152.fbe_size), self.buffer, @_f152.fbe_offset + @_f152.fbe_size)
-      @_f154 = FBE::FieldModelOptional.new(proto.FieldModelOrderSide.new(self.buffer, @_f153.fbe_offset + @_f153.fbe_size), self.buffer, @_f153.fbe_offset + @_f153.fbe_size)
-      @_f155 = FBE::FieldModelOptional.new(proto.FieldModelOrderSide.new(self.buffer, @_f154.fbe_offset + @_f154.fbe_size), self.buffer, @_f154.fbe_offset + @_f154.fbe_size)
-      @_f156 = FBE::FieldModelOptional.new(proto.FieldModelOrderType.new(self.buffer, @_f155.fbe_offset + @_f155.fbe_size), self.buffer, @_f155.fbe_offset + @_f155.fbe_size)
-      @_f157 = FBE::FieldModelOptional.new(proto.FieldModelOrderType.new(self.buffer, @_f156.fbe_offset + @_f156.fbe_size), self.buffer, @_f156.fbe_offset + @_f156.fbe_size)
-      @_f158 = FBE::FieldModelOptional.new(proto.FieldModelOrder.new(self.buffer, @_f157.fbe_offset + @_f157.fbe_size), self.buffer, @_f157.fbe_offset + @_f157.fbe_size)
-      @_f159 = FBE::FieldModelOptional.new(proto.FieldModelOrder.new(self.buffer, @_f158.fbe_offset + @_f158.fbe_size), self.buffer, @_f158.fbe_offset + @_f158.fbe_size)
-      @_f160 = FBE::FieldModelOptional.new(proto.FieldModelBalance.new(self.buffer, @_f159.fbe_offset + @_f159.fbe_size), self.buffer, @_f159.fbe_offset + @_f159.fbe_size)
-      @_f161 = FBE::FieldModelOptional.new(proto.FieldModelBalance.new(self.buffer, @_f160.fbe_offset + @_f160.fbe_size), self.buffer, @_f160.fbe_offset + @_f160.fbe_size)
-      @_f162 = FBE::FieldModelOptional.new(proto.FieldModelState.new(self.buffer, @_f161.fbe_offset + @_f161.fbe_size), self.buffer, @_f161.fbe_offset + @_f161.fbe_size)
-      @_f163 = FBE::FieldModelOptional.new(proto.FieldModelState.new(self.buffer, @_f162.fbe_offset + @_f162.fbe_size), self.buffer, @_f162.fbe_offset + @_f162.fbe_size)
-      @_f164 = FBE::FieldModelOptional.new(proto.FieldModelAccount.new(self.buffer, @_f163.fbe_offset + @_f163.fbe_size), self.buffer, @_f163.fbe_offset + @_f163.fbe_size)
-      @_f165 = FBE::FieldModelOptional.new(proto.FieldModelAccount.new(self.buffer, @_f164.fbe_offset + @_f164.fbe_size), self.buffer, @_f164.fbe_offset + @_f164.fbe_size)
+      @_f154 = FBE::FieldModelOptional.new(Proto::FieldModelOrderSide.new(self.buffer, @_f153.fbe_offset + @_f153.fbe_size), self.buffer, @_f153.fbe_offset + @_f153.fbe_size)
+      @_f155 = FBE::FieldModelOptional.new(Proto::FieldModelOrderSide.new(self.buffer, @_f154.fbe_offset + @_f154.fbe_size), self.buffer, @_f154.fbe_offset + @_f154.fbe_size)
+      @_f156 = FBE::FieldModelOptional.new(Proto::FieldModelOrderType.new(self.buffer, @_f155.fbe_offset + @_f155.fbe_size), self.buffer, @_f155.fbe_offset + @_f155.fbe_size)
+      @_f157 = FBE::FieldModelOptional.new(Proto::FieldModelOrderType.new(self.buffer, @_f156.fbe_offset + @_f156.fbe_size), self.buffer, @_f156.fbe_offset + @_f156.fbe_size)
+      @_f158 = FBE::FieldModelOptional.new(Proto::FieldModelOrder.new(self.buffer, @_f157.fbe_offset + @_f157.fbe_size), self.buffer, @_f157.fbe_offset + @_f157.fbe_size)
+      @_f159 = FBE::FieldModelOptional.new(Proto::FieldModelOrder.new(self.buffer, @_f158.fbe_offset + @_f158.fbe_size), self.buffer, @_f158.fbe_offset + @_f158.fbe_size)
+      @_f160 = FBE::FieldModelOptional.new(Proto::FieldModelBalance.new(self.buffer, @_f159.fbe_offset + @_f159.fbe_size), self.buffer, @_f159.fbe_offset + @_f159.fbe_size)
+      @_f161 = FBE::FieldModelOptional.new(Proto::FieldModelBalance.new(self.buffer, @_f160.fbe_offset + @_f160.fbe_size), self.buffer, @_f160.fbe_offset + @_f160.fbe_size)
+      @_f162 = FBE::FieldModelOptional.new(Proto::FieldModelState.new(self.buffer, @_f161.fbe_offset + @_f161.fbe_size), self.buffer, @_f161.fbe_offset + @_f161.fbe_size)
+      @_f163 = FBE::FieldModelOptional.new(Proto::FieldModelState.new(self.buffer, @_f162.fbe_offset + @_f162.fbe_size), self.buffer, @_f162.fbe_offset + @_f162.fbe_size)
+      @_f164 = FBE::FieldModelOptional.new(Proto::FieldModelAccount.new(self.buffer, @_f163.fbe_offset + @_f163.fbe_size), self.buffer, @_f163.fbe_offset + @_f163.fbe_size)
+      @_f165 = FBE::FieldModelOptional.new(Proto::FieldModelAccount.new(self.buffer, @_f164.fbe_offset + @_f164.fbe_size), self.buffer, @_f164.fbe_offset + @_f164.fbe_size)
     end
 
     def parent
@@ -6467,7 +6481,7 @@ module Test
   class FinalModelStructOptional < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_parent = FinalModelStructSimple.new(self.buffer, 0)
+      @_parent = StructSimple.new(self.buffer, 0)
       @_f100 = FBE::FinalModelOptional.new(FBE::FinalModelBool.new(self.buffer, 0), self.buffer, 0)
       @_f101 = FBE::FinalModelOptional.new(FBE::FinalModelBool.new(self.buffer, 0), self.buffer, 0)
       @_f102 = FBE::FinalModelOptional.new(FBE::FinalModelBool.new(self.buffer, 0), self.buffer, 0)
@@ -6522,18 +6536,18 @@ module Test
       @_f151 = FBE::FinalModelOptional.new(FBE::FinalModelUUID.new(self.buffer, 0), self.buffer, 0)
       @_f152 = FBE::FinalModelOptional.new(FBE::FinalModelUUID.new(self.buffer, 0), self.buffer, 0)
       @_f153 = FBE::FinalModelOptional.new(FBE::FinalModelUUID.new(self.buffer, 0), self.buffer, 0)
-      @_f154 = FBE::FinalModelOptional.new(proto.FinalModelOrderSide.new(self.buffer, 0), self.buffer, 0)
-      @_f155 = FBE::FinalModelOptional.new(proto.FinalModelOrderSide.new(self.buffer, 0), self.buffer, 0)
-      @_f156 = FBE::FinalModelOptional.new(proto.FinalModelOrderType.new(self.buffer, 0), self.buffer, 0)
-      @_f157 = FBE::FinalModelOptional.new(proto.FinalModelOrderType.new(self.buffer, 0), self.buffer, 0)
-      @_f158 = FBE::FinalModelOptional.new(proto.FinalModelOrder.new(self.buffer, 0), self.buffer, 0)
-      @_f159 = FBE::FinalModelOptional.new(proto.FinalModelOrder.new(self.buffer, 0), self.buffer, 0)
-      @_f160 = FBE::FinalModelOptional.new(proto.FinalModelBalance.new(self.buffer, 0), self.buffer, 0)
-      @_f161 = FBE::FinalModelOptional.new(proto.FinalModelBalance.new(self.buffer, 0), self.buffer, 0)
-      @_f162 = FBE::FinalModelOptional.new(proto.FinalModelState.new(self.buffer, 0), self.buffer, 0)
-      @_f163 = FBE::FinalModelOptional.new(proto.FinalModelState.new(self.buffer, 0), self.buffer, 0)
-      @_f164 = FBE::FinalModelOptional.new(proto.FinalModelAccount.new(self.buffer, 0), self.buffer, 0)
-      @_f165 = FBE::FinalModelOptional.new(proto.FinalModelAccount.new(self.buffer, 0), self.buffer, 0)
+      @_f154 = FBE::FinalModelOptional.new(Proto::FinalModelOrderSide.new(self.buffer, 0), self.buffer, 0)
+      @_f155 = FBE::FinalModelOptional.new(Proto::FinalModelOrderSide.new(self.buffer, 0), self.buffer, 0)
+      @_f156 = FBE::FinalModelOptional.new(Proto::FinalModelOrderType.new(self.buffer, 0), self.buffer, 0)
+      @_f157 = FBE::FinalModelOptional.new(Proto::FinalModelOrderType.new(self.buffer, 0), self.buffer, 0)
+      @_f158 = FBE::FinalModelOptional.new(Proto::FinalModelOrder.new(self.buffer, 0), self.buffer, 0)
+      @_f159 = FBE::FinalModelOptional.new(Proto::FinalModelOrder.new(self.buffer, 0), self.buffer, 0)
+      @_f160 = FBE::FinalModelOptional.new(Proto::FinalModelBalance.new(self.buffer, 0), self.buffer, 0)
+      @_f161 = FBE::FinalModelOptional.new(Proto::FinalModelBalance.new(self.buffer, 0), self.buffer, 0)
+      @_f162 = FBE::FinalModelOptional.new(Proto::FinalModelState.new(self.buffer, 0), self.buffer, 0)
+      @_f163 = FBE::FinalModelOptional.new(Proto::FinalModelState.new(self.buffer, 0), self.buffer, 0)
+      @_f164 = FBE::FinalModelOptional.new(Proto::FinalModelAccount.new(self.buffer, 0), self.buffer, 0)
+      @_f165 = FBE::FinalModelOptional.new(Proto::FinalModelAccount.new(self.buffer, 0), self.buffer, 0)
     end
 
     def parent
@@ -8393,7 +8407,14 @@ module Test
     end
 
     def clone
-      Marshal.load(Marshal.dump(self))
+      # Serialize the struct to the FBE stream
+      writer = StructNestedModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+
+      # Deserialize the struct from the FBE stream
+      reader = StructNestedModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(writer.buffer)
+      reader.deserialize[0]
     end
 
     def <=>(other)
@@ -8516,7 +8537,7 @@ module Test
   class FieldModelStructNested < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_parent = FieldModelStructOptional.new(self.buffer, 4 + 4)
+      @_parent = StructOptional.new(self.buffer, 4 + 4)
       @_f1000 = FieldModelEnumSimple.new(self.buffer, @_parent.fbe_offset + @_parent.fbe_body - 4 - 4)
       @_f1001 = FBE::FieldModelOptional.new(FieldModelEnumSimple.new(self.buffer, @_f1000.fbe_offset + @_f1000.fbe_size), self.buffer, @_f1000.fbe_offset + @_f1000.fbe_size)
       @_f1002 = FieldModelEnumTyped.new(self.buffer, @_f1001.fbe_offset + @_f1001.fbe_size)
@@ -9078,7 +9099,7 @@ module Test
   class FinalModelStructNested < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_parent = FinalModelStructOptional.new(self.buffer, 0)
+      @_parent = StructOptional.new(self.buffer, 0)
       @_f1000 = FinalModelEnumSimple.new(self.buffer, 0)
       @_f1001 = FBE::FinalModelOptional.new(FinalModelEnumSimple.new(self.buffer, 0), self.buffer, 0)
       @_f1002 = FinalModelEnumTyped.new(self.buffer, 0)
@@ -9571,7 +9592,14 @@ module Test
     end
 
     def clone
-      Marshal.load(Marshal.dump(self))
+      # Serialize the struct to the FBE stream
+      writer = StructBytesModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+
+      # Deserialize the struct from the FBE stream
+      reader = StructBytesModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(writer.buffer)
+      reader.deserialize[0]
     end
 
     def <=>(other)
@@ -10203,7 +10231,14 @@ module Test
     end
 
     def clone
-      Marshal.load(Marshal.dump(self))
+      # Serialize the struct to the FBE stream
+      writer = StructArrayModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+
+      # Deserialize the struct from the FBE stream
+      reader = StructArrayModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(writer.buffer)
+      reader.deserialize[0]
     end
 
     def <=>(other)
@@ -11314,7 +11349,14 @@ module Test
     end
 
     def clone
-      Marshal.load(Marshal.dump(self))
+      # Serialize the struct to the FBE stream
+      writer = StructVectorModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+
+      # Deserialize the struct from the FBE stream
+      reader = StructVectorModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(writer.buffer)
+      reader.deserialize[0]
     end
 
     def <=>(other)
@@ -12425,7 +12467,14 @@ module Test
     end
 
     def clone
-      Marshal.load(Marshal.dump(self))
+      # Serialize the struct to the FBE stream
+      writer = StructListModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+
+      # Deserialize the struct from the FBE stream
+      reader = StructListModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(writer.buffer)
+      reader.deserialize[0]
     end
 
     def <=>(other)
@@ -13518,7 +13567,14 @@ module Test
     end
 
     def clone
-      Marshal.load(Marshal.dump(self))
+      # Serialize the struct to the FBE stream
+      writer = StructSetModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+
+      # Deserialize the struct from the FBE stream
+      reader = StructSetModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(writer.buffer)
+      reader.deserialize[0]
     end
 
     def <=>(other)
@@ -14239,7 +14295,14 @@ module Test
     end
 
     def clone
-      Marshal.load(Marshal.dump(self))
+      # Serialize the struct to the FBE stream
+      writer = StructMapModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+
+      # Deserialize the struct from the FBE stream
+      reader = StructMapModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(writer.buffer)
+      reader.deserialize[0]
     end
 
     def <=>(other)
@@ -15420,7 +15483,14 @@ module Test
     end
 
     def clone
-      Marshal.load(Marshal.dump(self))
+      # Serialize the struct to the FBE stream
+      writer = StructHashModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+
+      # Deserialize the struct from the FBE stream
+      reader = StructHashModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(writer.buffer)
+      reader.deserialize[0]
     end
 
     def <=>(other)
@@ -16577,7 +16647,14 @@ module Test
     end
 
     def clone
-      Marshal.load(Marshal.dump(self))
+      # Serialize the struct to the FBE stream
+      writer = StructHashExModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+
+      # Deserialize the struct from the FBE stream
+      reader = StructHashExModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(writer.buffer)
+      reader.deserialize[0]
     end
 
     def <=>(other)

@@ -705,7 +705,7 @@ module FBE
     end
 
     def write_bool(offset, value)
-      @_buffer.buffer[@_buffer.offset + offset, 1] = [value].pack('C')
+      @_buffer.buffer[@_buffer.offset + offset, 1] = [value ? 1 : 0].pack('C')
     end
 
     def write_byte(offset, value)

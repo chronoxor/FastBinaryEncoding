@@ -908,7 +908,7 @@ void GeneratorRuby::GenerateFBEFieldModelBase()
     end
 
     def write_bool(offset, value)
-      @_buffer.buffer[@_buffer.offset + offset, 1] = [value].pack('C')
+      @_buffer.buffer[@_buffer.offset + offset, 1] = [value ? 1 : 0].pack('C')
     end
 
     def write_byte(offset, value)
@@ -3926,7 +3926,14 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
     WriteLine();
     WriteLineIndent("def clone");
     Indent(1);
-    WriteLineIndent("Marshal.load(Marshal.dump(self))");
+    WriteLineIndent("# Serialize the struct to the FBE stream");
+    WriteLineIndent("writer = " + *s->name + "Model.new(FBE::WriteBuffer.new)");
+    WriteLineIndent("writer.serialize(self)");
+    WriteLine();
+    WriteLineIndent("# Deserialize the struct from the FBE stream");
+    WriteLineIndent("reader = " + *s->name + "Model.new(FBE::ReadBuffer.new)");
+    WriteLineIndent("reader.attach_buffer(writer.buffer)");
+    WriteLineIndent("reader.deserialize[0]");
     Indent(-1);
     WriteLineIndent("end");
 
@@ -4242,6 +4249,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
 void GeneratorRuby::GenerateStructFieldModel(const std::shared_ptr<StructType>& s)
 {
     std::string struct_name = ConvertTitle(*s->name);
+    std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "";
 
     // Generate struct field model begin
     WriteLine();
@@ -4257,7 +4265,7 @@ void GeneratorRuby::GenerateStructFieldModel(const std::shared_ptr<StructType>& 
     std::string prev_size("4");
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("@_parent = " + ConvertTypeFieldName(*s->base, false) + ".new(self.buffer, " + prev_offset + " + " + prev_size + ")");
+        WriteLineIndent("@_parent = " + base_type + ".new(self.buffer, " + prev_offset + " + " + prev_size + ")");
         prev_offset = "@_parent.fbe_offset";
         prev_size = "@_parent.fbe_body - 4 - 4";
     }
@@ -4362,7 +4370,7 @@ void GeneratorRuby::GenerateStructFieldModel(const std::shared_ptr<StructType>& 
     // Generate struct field model type
     WriteLine();
     if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("TYPE = " + ConvertTypeFieldName(*s->base, false) + "::TYPE");
+        WriteLineIndent("TYPE = " + base_type + "::TYPE");
     else
         WriteLineIndent("TYPE = " + std::to_string(s->type));
 
@@ -4628,6 +4636,7 @@ void GeneratorRuby::GenerateStructFieldModel(const std::shared_ptr<StructType>& 
 void GeneratorRuby::GenerateStructModel(const std::shared_ptr<StructType>& s)
 {
     std::string struct_name = ConvertTitle(*s->name);
+    std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "";
 
     // Generate struct model begin
     WriteLine();
@@ -4765,6 +4774,7 @@ void GeneratorRuby::GenerateStructModel(const std::shared_ptr<StructType>& s)
 void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& s)
 {
     std::string struct_name = ConvertTitle(*s->name);
+    std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "";
 
     // Generate struct final model begin
     WriteLine();
@@ -4777,7 +4787,7 @@ void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& 
     Indent(1);
     WriteLineIndent("super(buffer, offset)");
     if (s->base && !s->base->empty())
-        WriteLineIndent("@_parent = " + ConvertTypeFieldName(*s->base, true) + ".new(self.buffer, 0)");
+        WriteLineIndent("@_parent = " + base_type + ".new(self.buffer, 0)");
     if (s->body)
         for (const auto& field : s->body->fields)
             WriteLineIndent("@_" + *field->name + " = " + ConvertTypeFieldInitialization(*field, "0", true));
@@ -4833,7 +4843,7 @@ void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& 
     // Generate struct final model type
     WriteLine();
     if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("TYPE = " + ConvertTypeFieldName(*s->base, true) + "::TYPE");
+        WriteLineIndent("TYPE = " + base_type + "::TYPE");
     else
         WriteLineIndent("TYPE = " + std::to_string(s->type));
 
@@ -4994,6 +5004,7 @@ void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& 
 void GeneratorRuby::GenerateStructModelFinal(const std::shared_ptr<StructType>& s)
 {
     std::string struct_name = ConvertTitle(*s->name);
+    std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "";
 
     // Generate struct model final begin
     WriteLine();
@@ -5415,7 +5426,7 @@ bool GeneratorRuby::IsRubyType(const std::string& type)
 
 std::string GeneratorRuby::ConvertTitle(const std::string& type)
 {
-    std::vector<std::string> parts = CppCommon::StringUtils::Split(type, '.', true);
+    std::vector<std::string> parts = CppCommon::StringUtils::Split(type, '.', false);
 
     if (!parts.empty())
     {
@@ -5600,7 +5611,7 @@ std::string GeneratorRuby::ConvertTypeFieldName(const std::string& type, bool fi
         t.assign(type, pos + 1, type.size() - pos);
     }
 
-    return ns + modelType + "Model" + ConvertTypeName(t, false);
+    return ConvertTitle(ns) + modelType + "Model" + ConvertTypeName(t, false);
 }
 
 std::string GeneratorRuby::ConvertTypeFieldInitialization(const std::string& type, bool optional, const std::string& offset, bool final)

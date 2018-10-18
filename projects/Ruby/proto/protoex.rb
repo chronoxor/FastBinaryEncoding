@@ -551,7 +551,14 @@ module Protoex
     end
 
     def clone
-      Marshal.load(Marshal.dump(self))
+      # Serialize the struct to the FBE stream
+      writer = OrderModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+
+      # Deserialize the struct from the FBE stream
+      reader = OrderModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(writer.buffer)
+      reader.deserialize[0]
     end
 
     def <=>(other)
@@ -1448,7 +1455,14 @@ module Protoex
     end
 
     def clone
-      Marshal.load(Marshal.dump(self))
+      # Serialize the struct to the FBE stream
+      writer = BalanceModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+
+      # Deserialize the struct from the FBE stream
+      reader = BalanceModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(writer.buffer)
+      reader.deserialize[0]
     end
 
     def <=>(other)
@@ -1505,7 +1519,7 @@ module Protoex
   class FieldModelBalance < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_parent = proto.FieldModelBalance.new(self.buffer, 4 + 4)
+      @_parent = Proto::Balance.new(self.buffer, 4 + 4)
       @_locked = FBE::FieldModelDouble.new(self.buffer, @_parent.fbe_offset + @_parent.fbe_body - 4 - 4)
     end
 
@@ -1556,7 +1570,7 @@ module Protoex
       TYPE
     end
 
-    TYPE = proto.FieldModelBalance::TYPE
+    TYPE = Proto::Balance::TYPE
 
     # Check if the struct value is valid
     def verify(fbe_verify_type = true)
@@ -1792,7 +1806,7 @@ module Protoex
   class FinalModelBalance < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_parent = proto.FinalModelBalance.new(self.buffer, 0)
+      @_parent = Proto::Balance.new(self.buffer, 0)
       @_locked = FBE::FinalModelDouble.new(self.buffer, 0)
     end
 
@@ -1816,7 +1830,7 @@ module Protoex
       TYPE
     end
 
-    TYPE = proto.FinalModelBalance::TYPE
+    TYPE = Proto::Balance::TYPE
 
     # Check if the struct value is valid
     def verify
@@ -2008,7 +2022,14 @@ module Protoex
     end
 
     def clone
-      Marshal.load(Marshal.dump(self))
+      # Serialize the struct to the FBE stream
+      writer = AccountModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+
+      # Deserialize the struct from the FBE stream
+      reader = AccountModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(writer.buffer)
+      reader.deserialize[0]
     end
 
     def <=>(other)

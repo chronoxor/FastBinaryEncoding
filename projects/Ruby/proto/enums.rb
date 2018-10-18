@@ -1810,7 +1810,14 @@ module Enums
     end
 
     def clone
-      Marshal.load(Marshal.dump(self))
+      # Serialize the struct to the FBE stream
+      writer = EnumsModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+
+      # Deserialize the struct from the FBE stream
+      reader = EnumsModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(writer.buffer)
+      reader.deserialize[0]
     end
 
     def <=>(other)

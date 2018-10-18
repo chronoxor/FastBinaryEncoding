@@ -507,7 +507,14 @@ module Proto
     end
 
     def clone
-      Marshal.load(Marshal.dump(self))
+      # Serialize the struct to the FBE stream
+      writer = OrderModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+
+      # Deserialize the struct from the FBE stream
+      reader = OrderModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(writer.buffer)
+      reader.deserialize[0]
     end
 
     def <=>(other)
@@ -1291,7 +1298,14 @@ module Proto
     end
 
     def clone
-      Marshal.load(Marshal.dump(self))
+      # Serialize the struct to the FBE stream
+      writer = BalanceModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+
+      # Deserialize the struct from the FBE stream
+      reader = BalanceModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(writer.buffer)
+      reader.deserialize[0]
     end
 
     def <=>(other)
@@ -1859,7 +1873,14 @@ module Proto
     end
 
     def clone
-      Marshal.load(Marshal.dump(self))
+      # Serialize the struct to the FBE stream
+      writer = AccountModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+
+      # Deserialize the struct from the FBE stream
+      reader = AccountModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(writer.buffer)
+      reader.deserialize[0]
     end
 
     def <=>(other)
