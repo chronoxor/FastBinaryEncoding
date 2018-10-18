@@ -2746,7 +2746,6 @@ void GeneratorPython::GenerateImports(const std::shared_ptr<Package>& p)
     WriteLine();
     if (JSON())
         WriteLineIndent("import base64");
-    WriteLineIndent("import copy");
     WriteLineIndent("import decimal");
     WriteLineIndent("import enum");
     WriteLineIndent("import functools");
@@ -3054,6 +3053,7 @@ void GeneratorPython::GenerateFlags(const std::shared_ptr<FlagsType>& f)
 
     // Generate flags has_flags() method
     WriteLine();
+    WriteLineIndent("# Is flags set?");
     WriteLineIndent("def has_flags(self, flags):");
     Indent(1);
     WriteLineIndent("return ((self.value & flags.value) != 0) and ((self.value & flags.value) == flags.value)");
@@ -3061,6 +3061,7 @@ void GeneratorPython::GenerateFlags(const std::shared_ptr<FlagsType>& f)
 
     // Generate flags set_flags() method
     WriteLine();
+    WriteLineIndent("# Set flags");
     WriteLineIndent("def set_flags(self, flags):");
     Indent(1);
     WriteLineIndent("self.value |= flags.value");
@@ -3069,6 +3070,7 @@ void GeneratorPython::GenerateFlags(const std::shared_ptr<FlagsType>& f)
 
     // Generate flags remove_flags() method
     WriteLine();
+    WriteLineIndent("# Remove flags");
     WriteLineIndent("def remove_flags(self, flags):");
     Indent(1);
     WriteLineIndent("self.value &= ~flags.value");
@@ -3300,18 +3302,20 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
 
     // Generate struct copy() method
     WriteLine();
+    WriteLineIndent("# Struct shallow copy");
     WriteLineIndent("def copy(self, other):");
     Indent(1);
     if (s->base && !s->base->empty())
         WriteLineIndent("super().copy(other)");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("self." + *field->name + " = copy.deepcopy(other." + *field->name + ")");
+            WriteLineIndent("self." + *field->name + " = other." + *field->name);
     WriteLineIndent("return self");
     Indent(-1);
 
     // Generate struct clone() method
     WriteLine();
+    WriteLineIndent("# Struct deep clone");
     WriteLineIndent("def clone(self):");
     Indent(1);
     WriteLineIndent("# Serialize the struct to the FBE stream");
@@ -3637,6 +3641,7 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
 
         // Generate struct to_json method
         WriteLine();
+        WriteLineIndent("# Get struct JSON value");
         WriteLineIndent("def to_json(self):");
         Indent(1);
         WriteLineIndent("return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))");
@@ -3644,6 +3649,7 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
 
         // Generate struct from_json method
         WriteLine();
+        WriteLineIndent("# Create struct from JSON value");
         WriteLineIndent("@staticmethod");
         WriteLineIndent("def from_json(document):");
         Indent(1);

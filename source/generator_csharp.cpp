@@ -4571,7 +4571,7 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
     WriteLineIndent("{");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("this.parent = parent.Clone();");
+        WriteLineIndent("this.parent = parent;");
     if (s->body)
         for (const auto& field : s->body->fields)
             WriteLineIndent("this." + *field->name + " = " + *field->name + ";");

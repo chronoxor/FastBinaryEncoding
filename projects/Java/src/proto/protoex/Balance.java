@@ -21,7 +21,7 @@ public class Balance extends proto.Balance
 
     public Balance(proto.Balance parent, double locked)
     {
-        super(parent.clone());
+        super(parent);
         this.locked = locked;
     }
 

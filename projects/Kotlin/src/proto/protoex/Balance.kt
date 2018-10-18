@@ -22,7 +22,7 @@ open class Balance : proto.Balance
 
     constructor()
 
-    constructor(parent: proto.Balance, locked: Double): super(parent.clone())
+    constructor(parent: proto.Balance, locked: Double): super(parent)
     {
         this.locked = locked
     }

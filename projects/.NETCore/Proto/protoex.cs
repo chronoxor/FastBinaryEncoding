@@ -1643,7 +1643,7 @@ namespace protoex {
 
         public Balance(global::proto.Balance parent, double locked)
         {
-            this.parent = parent.Clone();
+            this.parent = parent;
             this.locked = locked;
         }
 

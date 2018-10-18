@@ -28,13 +28,16 @@ module Proto
         @value = value.is_a?(Enum) ? value.value : value
       end
 
+      # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value == value.value end
 
+      # Get enum integer value
       def to_i
         @value
       end
 
+      # Get enum string value
       def to_s
         if @value == Enum.buy
           return 'buy'
@@ -149,13 +152,16 @@ module Proto
         @value = value.is_a?(Enum) ? value.value : value
       end
 
+      # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value == value.value end
 
+      # Get enum integer value
       def to_i
         @value
       end
 
+      # Get enum string value
       def to_s
         if @value == Enum.market
           return 'market'
@@ -279,9 +285,11 @@ module Proto
         @value = value.is_a?(Flags) ? value.value : value
       end
 
+      # Flags compare operators
       def ==(flags) @value == flags.value end
       def !=(flags) @value == flags.value end
 
+      # Flags bit operators
       def ~
         Flags.new(~@value)
       end
@@ -289,24 +297,29 @@ module Proto
       def |(flags) Flags.new(@value | flags.value) end
       def ^(flags) Flags.new(@value ^ flags.value) end
 
+      # Is flags set?
       def has_flags(flags)
         ((@value & flags.value) != 0) && ((@value & flags.value) == flags.value)
       end
 
+      # Set flags
       def set_flags(flags)
         @value |= flags.value
         self
       end
 
+      # Remove flags
       def remove_flags(flags)
         @value &= ~flags.value
         self
       end
 
+      # Get flags integer value
       def to_i
         @value
       end
 
+      # Get flags string value
       def to_s
         result = ''
         first = true
@@ -496,6 +509,7 @@ module Proto
       @volume = volume
     end
 
+    # Struct shallow copy
     def copy(other)
       @uid = other.uid
       @symbol = other.symbol
@@ -506,6 +520,7 @@ module Proto
       self
     end
 
+    # Struct deep clone
     def clone
       # Serialize the struct to the FBE stream
       writer = OrderModel.new(FBE::WriteBuffer.new)
@@ -517,6 +532,7 @@ module Proto
       reader.deserialize[0]
     end
 
+    # Struct compare operators
     def <=>(other)
       raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(Order)
 
@@ -537,10 +553,12 @@ module Proto
     def <=(other) (self <=> other) <= 0 end
     def >=(other) (self <=> other) >= 0 end
 
+    # Struct equals
     def eql?(other)
       self == other
     end
 
+    # Struct keys
     def key
       result = []
       result.push(@uid)
@@ -548,10 +566,12 @@ module Proto
       result
     end
 
+    # Struct hash code
     def hash
       key.hash
     end
 
+    # Get struct string value
     def to_s
       result = ''
       result << 'Order('
@@ -1291,12 +1311,14 @@ module Proto
       @amount = amount
     end
 
+    # Struct shallow copy
     def copy(other)
       @currency = other.currency
       @amount = other.amount
       self
     end
 
+    # Struct deep clone
     def clone
       # Serialize the struct to the FBE stream
       writer = BalanceModel.new(FBE::WriteBuffer.new)
@@ -1308,6 +1330,7 @@ module Proto
       reader.deserialize[0]
     end
 
+    # Struct compare operators
     def <=>(other)
       raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(Balance)
 
@@ -1328,10 +1351,12 @@ module Proto
     def <=(other) (self <=> other) <= 0 end
     def >=(other) (self <=> other) >= 0 end
 
+    # Struct equals
     def eql?(other)
       self == other
     end
 
+    # Struct keys
     def key
       result = []
       result.push(@currency)
@@ -1339,10 +1364,12 @@ module Proto
       result
     end
 
+    # Struct hash code
     def hash
       key.hash
     end
 
+    # Get struct string value
     def to_s
       result = ''
       result << 'Balance('
@@ -1862,6 +1889,7 @@ module Proto
       @orders = orders
     end
 
+    # Struct shallow copy
     def copy(other)
       @uid = other.uid
       @name = other.name
@@ -1872,6 +1900,7 @@ module Proto
       self
     end
 
+    # Struct deep clone
     def clone
       # Serialize the struct to the FBE stream
       writer = AccountModel.new(FBE::WriteBuffer.new)
@@ -1883,6 +1912,7 @@ module Proto
       reader.deserialize[0]
     end
 
+    # Struct compare operators
     def <=>(other)
       raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(Account)
 
@@ -1903,10 +1933,12 @@ module Proto
     def <=(other) (self <=> other) <= 0 end
     def >=(other) (self <=> other) >= 0 end
 
+    # Struct equals
     def eql?(other)
       self == other
     end
 
+    # Struct keys
     def key
       result = []
       result.push(@uid)
@@ -1914,10 +1946,12 @@ module Proto
       result
     end
 
+    # Struct hash code
     def hash
       key.hash
     end
 
+    # Get struct string value
     def to_s
       result = ''
       result << 'Account('

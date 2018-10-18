@@ -1150,7 +1150,7 @@ class StructSimple {
   }
 
   /**
-   * Copy struct
+   * Copy struct (shallow copy)
    * @this {!StructSimple}
    * @param {!StructSimple} other Other struct
    * @returns {!StructSimple} This struct
@@ -1397,7 +1397,7 @@ class StructSimple {
   }
 
   /**
-   * Clone struct
+   * Clone struct (deep clone)
    * @this {!StructSimple}
    * @returns {!StructSimple} Cloned struct
    */
@@ -4972,7 +4972,7 @@ class StructOptional extends StructSimple {
    */
   constructor (parent = new StructSimple(), f100 = undefined, f101 = true, f102 = undefined, f103 = undefined, f104 = 255, f105 = undefined, f106 = undefined, f107 = '!', f108 = undefined, f109 = undefined, f110 = String.fromCharCode(0x0444), f111 = undefined, f112 = undefined, f113 = 127, f114 = undefined, f115 = undefined, f116 = 255, f117 = undefined, f118 = undefined, f119 = 32767, f120 = undefined, f121 = undefined, f122 = 65535, f123 = undefined, f124 = undefined, f125 = 2147483647, f126 = undefined, f127 = undefined, f128 = 0xFFFFFFFF, f129 = undefined, f130 = undefined, f131 = new Int64(4294967295, 2147483647), f132 = undefined, f133 = undefined, f134 = new UInt64(4294967295, 4294967295), f135 = undefined, f136 = undefined, f137 = 123.456, f138 = undefined, f139 = undefined, f140 = -123.456e+123, f141 = undefined, f142 = undefined, f143 = new Big('123456.123456'), f144 = undefined, f145 = undefined, f146 = 'Initial string!', f147 = undefined, f148 = undefined, f149 = new Date(Date.now()), f150 = undefined, f151 = undefined, f152 = new UUID('123e4567-e89b-12d3-a456-426655440000'), f153 = undefined, f154 = undefined, f155 = undefined, f156 = undefined, f157 = undefined, f158 = undefined, f159 = undefined, f160 = undefined, f161 = undefined, f162 = undefined, f163 = undefined, f164 = undefined, f165 = undefined) {
     super()
-    super.copy(parent.clone())
+    super.copy(parent)
     this.f100 = f100
     this.f101 = f101
     this.f102 = f102
@@ -5042,7 +5042,7 @@ class StructOptional extends StructSimple {
   }
 
   /**
-   * Copy struct
+   * Copy struct (shallow copy)
    * @this {!StructOptional}
    * @param {!StructOptional} other Other struct
    * @returns {!StructOptional} This struct
@@ -5395,7 +5395,7 @@ class StructOptional extends StructSimple {
   }
 
   /**
-   * Clone struct
+   * Clone struct (deep clone)
    * @this {!StructOptional}
    * @returns {!StructOptional} Cloned struct
    */
@@ -10485,7 +10485,7 @@ class StructNested extends StructOptional {
    */
   constructor (parent = new StructOptional(), f1000 = new EnumSimple(), f1001 = undefined, f1002 = new EnumTyped(EnumTyped.ENUM_VALUE_2), f1003 = undefined, f1004 = new FlagsSimple(), f1005 = undefined, f1006 = new FlagsTyped(FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6), f1007 = undefined, f1008 = new StructSimple(), f1009 = undefined, f1010 = new StructOptional(), f1011 = undefined) {
     super()
-    super.copy(parent.clone())
+    super.copy(parent)
     this.f1000 = f1000
     this.f1001 = f1001
     this.f1002 = f1002
@@ -10501,7 +10501,7 @@ class StructNested extends StructOptional {
   }
 
   /**
-   * Copy struct
+   * Copy struct (shallow copy)
    * @this {!StructNested}
    * @param {!StructNested} other Other struct
    * @returns {!StructNested} This struct
@@ -10572,7 +10572,7 @@ class StructNested extends StructOptional {
   }
 
   /**
-   * Clone struct
+   * Clone struct (deep clone)
    * @this {!StructNested}
    * @returns {!StructNested} Cloned struct
    */
@@ -12099,7 +12099,7 @@ class StructBytes {
   }
 
   /**
-   * Copy struct
+   * Copy struct (shallow copy)
    * @this {!StructBytes}
    * @param {!StructBytes} other Other struct
    * @returns {!StructBytes} This struct
@@ -12139,7 +12139,7 @@ class StructBytes {
   }
 
   /**
-   * Clone struct
+   * Clone struct (deep clone)
    * @this {!StructBytes}
    * @returns {!StructBytes} Cloned struct
    */
@@ -13063,7 +13063,7 @@ class StructArray {
   }
 
   /**
-   * Copy struct
+   * Copy struct (shallow copy)
    * @this {!StructArray}
    * @param {!StructArray} other Other struct
    * @returns {!StructArray} This struct
@@ -13223,7 +13223,7 @@ class StructArray {
   }
 
   /**
-   * Clone struct
+   * Clone struct (deep clone)
    * @this {!StructArray}
    * @returns {!StructArray} Cloned struct
    */
@@ -14684,7 +14684,7 @@ class StructVector {
   }
 
   /**
-   * Copy struct
+   * Copy struct (shallow copy)
    * @this {!StructVector}
    * @param {!StructVector} other Other struct
    * @returns {!StructVector} This struct
@@ -14844,7 +14844,7 @@ class StructVector {
   }
 
   /**
-   * Clone struct
+   * Clone struct (deep clone)
    * @this {!StructVector}
    * @returns {!StructVector} Cloned struct
    */
@@ -16305,7 +16305,7 @@ class StructList {
   }
 
   /**
-   * Copy struct
+   * Copy struct (shallow copy)
    * @this {!StructList}
    * @param {!StructList} other Other struct
    * @returns {!StructList} This struct
@@ -16465,7 +16465,7 @@ class StructList {
   }
 
   /**
-   * Clone struct
+   * Clone struct (deep clone)
    * @this {!StructList}
    * @returns {!StructList} Cloned struct
    */
@@ -17914,7 +17914,7 @@ class StructSet {
   }
 
   /**
-   * Copy struct
+   * Copy struct (shallow copy)
    * @this {!StructSet}
    * @param {!StructSet} other Other struct
    * @returns {!StructSet} This struct
@@ -17980,7 +17980,7 @@ class StructSet {
   }
 
   /**
-   * Clone struct
+   * Clone struct (deep clone)
    * @this {!StructSet}
    * @returns {!StructSet} Cloned struct
    */
@@ -18987,7 +18987,7 @@ class StructMap {
   }
 
   /**
-   * Copy struct
+   * Copy struct (shallow copy)
    * @this {!StructMap}
    * @param {!StructMap} other Other struct
    * @returns {!StructMap} This struct
@@ -19187,7 +19187,7 @@ class StructMap {
   }
 
   /**
-   * Clone struct
+   * Clone struct (deep clone)
    * @this {!StructMap}
    * @returns {!StructMap} Cloned struct
    */
@@ -20678,7 +20678,7 @@ class StructHash {
   }
 
   /**
-   * Copy struct
+   * Copy struct (shallow copy)
    * @this {!StructHash}
    * @param {!StructHash} other Other struct
    * @returns {!StructHash} This struct
@@ -20878,7 +20878,7 @@ class StructHash {
   }
 
   /**
-   * Clone struct
+   * Clone struct (deep clone)
    * @this {!StructHash}
    * @returns {!StructHash} Cloned struct
    */
@@ -22413,7 +22413,7 @@ class StructHashEx {
   }
 
   /**
-   * Copy struct
+   * Copy struct (shallow copy)
    * @this {!StructHashEx}
    * @param {!StructHashEx} other Other struct
    * @returns {!StructHashEx} This struct
@@ -22459,7 +22459,7 @@ class StructHashEx {
   }
 
   /**
-   * Clone struct
+   * Clone struct (deep clone)
    * @this {!StructHashEx}
    * @returns {!StructHashEx} Cloned struct
    */

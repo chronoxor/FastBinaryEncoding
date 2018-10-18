@@ -2,7 +2,6 @@
 # https://github.com/chronoxor/FastBinaryEncoding
 
 import base64
-import copy
 import decimal
 import enum
 import functools
@@ -218,13 +217,16 @@ class State(enum.IntFlag, metaclass=fbe.DefaultEnumMeta):
 
     __slots__ = ()
 
+    # Is flags set?
     def has_flags(self, flags):
         return ((self.value & flags.value) != 0) and ((self.value & flags.value) == flags.value)
 
+    # Set flags
     def set_flags(self, flags):
         self.value |= flags.value
         return self
 
+    # Remove flags
     def remove_flags(self, flags):
         self.value &= ~flags.value
         return self
@@ -377,15 +379,17 @@ class Order(object):
         self.price = price
         self.volume = volume
 
+    # Struct shallow copy
     def copy(self, other):
-        self.uid = copy.deepcopy(other.uid)
-        self.symbol = copy.deepcopy(other.symbol)
-        self.side = copy.deepcopy(other.side)
-        self.type = copy.deepcopy(other.type)
-        self.price = copy.deepcopy(other.price)
-        self.volume = copy.deepcopy(other.volume)
+        self.uid = other.uid
+        self.symbol = other.symbol
+        self.side = other.side
+        self.type = other.type
+        self.price = other.price
+        self.volume = other.volume
         return self
 
+    # Struct deep clone
     def clone(self):
         # Serialize the struct to the FBE stream
         writer = OrderModel(fbe.WriteBuffer())
@@ -470,9 +474,11 @@ class Order(object):
             None if "volume" not in fields else fields["volume"],
         )
 
+    # Get struct JSON value
     def to_json(self):
         return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
 
+    # Create struct from JSON value
     @staticmethod
     def from_json(document):
         return Order.__from_json__(json.loads(document))
@@ -1099,11 +1105,13 @@ class Balance(object):
         self.currency = currency
         self.amount = amount
 
+    # Struct shallow copy
     def copy(self, other):
-        self.currency = copy.deepcopy(other.currency)
-        self.amount = copy.deepcopy(other.amount)
+        self.currency = other.currency
+        self.amount = other.amount
         return self
 
+    # Struct deep clone
     def clone(self):
         # Serialize the struct to the FBE stream
         writer = BalanceModel(fbe.WriteBuffer())
@@ -1172,9 +1180,11 @@ class Balance(object):
             None if "amount" not in fields else fields["amount"],
         )
 
+    # Get struct JSON value
     def to_json(self):
         return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
 
+    # Create struct from JSON value
     @staticmethod
     def from_json(document):
         return Balance.__from_json__(json.loads(document))
@@ -1637,15 +1647,17 @@ class Account(object):
         self.asset = asset
         self.orders = orders
 
+    # Struct shallow copy
     def copy(self, other):
-        self.uid = copy.deepcopy(other.uid)
-        self.name = copy.deepcopy(other.name)
-        self.state = copy.deepcopy(other.state)
-        self.wallet = copy.deepcopy(other.wallet)
-        self.asset = copy.deepcopy(other.asset)
-        self.orders = copy.deepcopy(other.orders)
+        self.uid = other.uid
+        self.name = other.name
+        self.state = other.state
+        self.wallet = other.wallet
+        self.asset = other.asset
+        self.orders = other.orders
         return self
 
+    # Struct deep clone
     def clone(self):
         # Serialize the struct to the FBE stream
         writer = AccountModel(fbe.WriteBuffer())
@@ -1742,9 +1754,11 @@ class Account(object):
             None if "orders" not in fields else [Order.__from_json__(value) for value in fields["orders"]],
         )
 
+    # Get struct JSON value
     def to_json(self):
         return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
 
+    # Create struct from JSON value
     @staticmethod
     def from_json(document):
         return Account.__from_json__(json.loads(document))

@@ -5034,7 +5034,7 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
     WriteLineIndent("{");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("super(parent.clone());");
+        WriteLineIndent("super(parent);");
     if (s->body)
         for (const auto& field : s->body->fields)
             WriteLineIndent("this." + *field->name + " = " + *field->name + ";");

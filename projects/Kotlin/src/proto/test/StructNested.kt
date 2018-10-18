@@ -33,7 +33,7 @@ open class StructNested : StructOptional
 
     constructor()
 
-    constructor(parent: StructOptional, f1000: EnumSimple, f1001: EnumSimple?, f1002: EnumTyped, f1003: EnumTyped?, f1004: FlagsSimple, f1005: FlagsSimple?, f1006: FlagsTyped, f1007: FlagsTyped?, f1008: StructSimple, f1009: StructSimple?, f1010: StructOptional, f1011: StructOptional?): super(parent.clone())
+    constructor(parent: StructOptional, f1000: EnumSimple, f1001: EnumSimple?, f1002: EnumTyped, f1003: EnumTyped?, f1004: FlagsSimple, f1005: FlagsSimple?, f1006: FlagsTyped, f1007: FlagsTyped?, f1008: StructSimple, f1009: StructSimple?, f1010: StructOptional, f1011: StructOptional?): super(parent)
     {
         this.f1000 = f1000
         this.f1001 = f1001

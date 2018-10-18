@@ -64,8 +64,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="622" />
-    <option name="y" value="333" />
+    <option name="x" value="680" />
+    <option name="y" value="469" />
     <option name="width" value="1318" />
     <option name="height" value="773" />
   </component>
@@ -81,11 +81,6 @@
             <path>
               <item name="JavaScript" type="b2602c69:ProjectViewProjectNode" />
               <item name="JavaScript" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JavaScript" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JavaScript" type="462c0819:PsiDirectoryNode" />
-              <item name="examples" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -155,9 +150,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Node.js.print.js" />
         <item itemvalue="npm.tests-node" />
         <item itemvalue="npm.tests-standard" />
+        <item itemvalue="Node.js.print.js" />
         <item itemvalue="npm.tests-browser-local" />
         <item itemvalue="Node.js.test_send_seceive.js" />
       </list>
@@ -182,22 +177,22 @@
       <workItem from="1538703111323" duration="96000" />
       <workItem from="1539796825868" duration="136000" />
       <workItem from="1539797118671" duration="63000" />
-      <workItem from="1539798043102" duration="642000" />
+      <workItem from="1539798043102" duration="666000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4765000" />
+    <option name="totallyTimeSpent" value="4789000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="622" y="333" width="1318" height="773" extended-state="0" />
+    <frame x="680" y="469" width="1318" height="773" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6043956" visible="true" weight="0.3859375" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6043956" visible="true" weight="0.3859375" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.43213728" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.43213728" />
       <window_info id="npm" order="2" sideWeight="0.3956044" side_tool="true" visible="true" weight="0.3859375" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />

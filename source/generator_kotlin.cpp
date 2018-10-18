@@ -4899,7 +4899,7 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
     }
     Write(")");
     if (s->base && !s->base->empty())
-        WriteLine(": super(parent.clone())");
+        WriteLine(": super(parent)");
     else
         WriteLine();
     WriteLineIndent("{");

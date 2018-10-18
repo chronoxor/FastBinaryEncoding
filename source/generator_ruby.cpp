@@ -99,7 +99,7 @@ void GeneratorRuby::GenerateFBE(const CppCommon::Path& path)
     GenerateFBEFieldModel("UInt64", "uint64", "8", "0");
     GenerateFBEFieldModel("Float", "float", "4", "0.0");
     GenerateFBEFieldModel("Double", "double", "8", "0.0");
-    GenerateFBEFieldModel("Timestamp", "uint64", "8", "0");
+    GenerateFBEFieldModel("Timestamp", "timestamp", "8", "0");
     GenerateFBEFieldModel("UUID", "uuid", "16", "UUIDTools::UUID.parse_int(0)");
     GenerateFBEFieldModelDecimal();
     GenerateFBEFieldModelBytes();
@@ -126,7 +126,7 @@ void GeneratorRuby::GenerateFBE(const CppCommon::Path& path)
         GenerateFBEFinalModel("UInt64", "uint64", "8", "0");
         GenerateFBEFinalModel("Float", "float", "4", "0.0");
         GenerateFBEFinalModel("Double", "double", "8", "0.0");
-        GenerateFBEFinalModel("Timestamp", "uint64", "8", "0");
+        GenerateFBEFinalModel("Timestamp", "timestamp", "8", "0");
         GenerateFBEFinalModel("UUID", "uuid", "16", "UUIDTools::UUID.parse_int(0)");
         GenerateFBEFinalModelDecimal();
         GenerateFBEFinalModelBytes();
@@ -848,7 +848,7 @@ void GeneratorRuby::GenerateFBEFieldModelBase()
     end
 
     def read_wchar(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L<')[0].chr
+      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L<')[0].chr(Encoding::UTF_8)
     end
 
     def read_int8(offset)
@@ -897,6 +897,11 @@ void GeneratorRuby::GenerateFBEFieldModelBase()
 
     def read_double(offset)
       @_buffer.buffer.slice(@_buffer.offset + offset, 8).unpack('E')[0]
+    end
+
+    def read_timestamp(offset)
+      nanoseconds = read_uint64(offset)
+      Time.at(nanoseconds / 1000000000, (nanoseconds % 1000000000) / 1000.0)
     end
 
     def read_uuid(offset)
@@ -961,6 +966,11 @@ void GeneratorRuby::GenerateFBEFieldModelBase()
 
     def write_double(offset, value)
       @_buffer.buffer[@_buffer.offset + offset, 8] = [value].pack('E')
+    end
+
+    def write_timestamp(offset, value)
+      nanoseconds = value.to_i * 1000000000 + value.nsec
+      write_uint64(offset, nanoseconds)
     end
 
     def write_uuid(offset, value)
@@ -3405,11 +3415,13 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
 
     // Generate enum class compare operators
     WriteLine();
+    WriteLineIndent("# Enum compare operators");
     WriteLineIndent("def ==(value) @value == value.value end");
     WriteLineIndent("def !=(value) @value == value.value end");
 
     // Generate enum class to_i method
     WriteLine();
+    WriteLineIndent("# Get enum integer value");
     WriteLineIndent("def to_i");
     Indent(1);
     WriteLineIndent("@value");
@@ -3418,6 +3430,7 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
 
     // Generate enum class to_s method
     WriteLine();
+    WriteLineIndent("# Get enum string value");
     WriteLineIndent("def to_s");
     Indent(1);
     if (e->body)
@@ -3630,11 +3643,13 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
 
     // Generate flags class compare operators
     WriteLine();
+    WriteLineIndent("# Flags compare operators");
     WriteLineIndent("def ==(flags) @value == flags.value end");
     WriteLineIndent("def !=(flags) @value == flags.value end");
 
     // Generate flags class bit operators
     WriteLine();
+    WriteLineIndent("# Flags bit operators");
     WriteLineIndent("def ~");
     Indent(1);
     WriteLineIndent("Flags.new(~@value)");
@@ -3646,12 +3661,14 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
 
     // Generate flags class manipulation methods
     WriteLine();
+    WriteLineIndent("# Is flags set?");
     WriteLineIndent("def has_flags(flags)");
     Indent(1);
     WriteLineIndent("((@value & flags.value) != 0) && ((@value & flags.value) == flags.value)");
     Indent(-1);
     WriteLineIndent("end");
     WriteLine();
+    WriteLineIndent("# Set flags");
     WriteLineIndent("def set_flags(flags)");
     Indent(1);
     WriteLineIndent("@value |= flags.value");
@@ -3659,6 +3676,7 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     Indent(-1);
     WriteLineIndent("end");
     WriteLine();
+    WriteLineIndent("# Remove flags");
     WriteLineIndent("def remove_flags(flags)");
     Indent(1);
     WriteLineIndent("@value &= ~flags.value");
@@ -3668,6 +3686,7 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
 
     // Generate flags class to_i method
     WriteLine();
+    WriteLineIndent("# Get flags integer value");
     WriteLineIndent("def to_i");
     Indent(1);
     WriteLineIndent("@value");
@@ -3676,6 +3695,7 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
 
     // Generate flags class to_s method
     WriteLine();
+    WriteLineIndent("# Get flags string value");
     WriteLineIndent("def to_s");
     Indent(1);
     WriteLineIndent("result = ''");
@@ -3900,7 +3920,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
     WriteLine(")");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("super(parent.clone)");
+        WriteLineIndent("method(:copy).super_method.call(parent)");
     if (s->body)
     {
         for (const auto& field : s->body->fields)
@@ -3911,6 +3931,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
 
     // Generate struct copy() method
     WriteLine();
+    WriteLineIndent("# Struct shallow copy");
     WriteLineIndent("def copy(other)");
     Indent(1);
     if (s->base && !s->base->empty())
@@ -3924,6 +3945,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
 
     // Generate struct clone() method
     WriteLine();
+    WriteLineIndent("# Struct deep clone");
     WriteLineIndent("def clone");
     Indent(1);
     WriteLineIndent("# Serialize the struct to the FBE stream");
@@ -3939,6 +3961,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
 
     // Generate struct compare operators
     WriteLine();
+    WriteLineIndent("# Struct compare operators");
     WriteLineIndent("def <=>(other)");
     Indent(1);
     WriteLineIndent("raise NotImplementedError, \"Cannot compare structs of different types!\" unless other.is_a?(" + struct_name + ")");
@@ -3983,12 +4006,14 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
 
     // Generate struct hesh & equals methods
     WriteLine();
+    WriteLineIndent("# Struct equals");
     WriteLineIndent("def eql?(other)");
     Indent(1);
     WriteLineIndent("self == other");
     Indent(-1);
     WriteLineIndent("end");
     WriteLine();
+    WriteLineIndent("# Struct keys");
     WriteLineIndent("def key");
     Indent(1);
     WriteLineIndent("result = []");
@@ -4005,6 +4030,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
     Indent(-1);
     WriteLineIndent("end");
     WriteLine();
+    WriteLineIndent("# Struct hash code");
     WriteLineIndent("def hash");
     Indent(1);
     WriteLineIndent("key.hash");
@@ -4013,6 +4039,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
 
     // Generate struct __str__ method
     WriteLine();
+    WriteLineIndent("# Get struct string value");
     WriteLineIndent("def to_s");
     Indent(1);
     WriteLineIndent("result = ''");
@@ -4214,6 +4241,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
 
         // Generate struct to_json method
         WriteLine();
+        WriteLineIndent("# Get struct JSON value");
         WriteLineIndent("def to_json(self):");
         Indent(1);
         WriteLineIndent("return json.dumps(@__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))");
@@ -4221,6 +4249,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
 
         // Generate struct from_json method
         WriteLine();
+        WriteLineIndent("# Create struct from JSON value");
         WriteLineIndent("@staticmethod");
         WriteLineIndent("def from_json(document):");
         Indent(1);
@@ -4249,7 +4278,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
 void GeneratorRuby::GenerateStructFieldModel(const std::shared_ptr<StructType>& s)
 {
     std::string struct_name = ConvertTitle(*s->name);
-    std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "";
+    std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeFieldName(*s->base, false) : "";
 
     // Generate struct field model begin
     WriteLine();
@@ -4636,7 +4665,6 @@ void GeneratorRuby::GenerateStructFieldModel(const std::shared_ptr<StructType>& 
 void GeneratorRuby::GenerateStructModel(const std::shared_ptr<StructType>& s)
 {
     std::string struct_name = ConvertTitle(*s->name);
-    std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "";
 
     // Generate struct model begin
     WriteLine();
@@ -4774,7 +4802,7 @@ void GeneratorRuby::GenerateStructModel(const std::shared_ptr<StructType>& s)
 void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& s)
 {
     std::string struct_name = ConvertTitle(*s->name);
-    std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "";
+    std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeFieldName(*s->base, false) : "";
 
     // Generate struct final model begin
     WriteLine();
@@ -5004,7 +5032,6 @@ void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& 
 void GeneratorRuby::GenerateStructModelFinal(const std::shared_ptr<StructType>& s)
 {
     std::string struct_name = ConvertTitle(*s->name);
-    std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "";
 
     // Generate struct model final begin
     WriteLine();

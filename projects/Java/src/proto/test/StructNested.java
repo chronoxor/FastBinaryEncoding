@@ -32,7 +32,7 @@ public class StructNested extends StructOptional
 
     public StructNested(StructOptional parent, EnumSimple f1000, EnumSimple f1001, EnumTyped f1002, EnumTyped f1003, FlagsSimple f1004, FlagsSimple f1005, FlagsTyped f1006, FlagsTyped f1007, StructSimple f1008, StructSimple f1009, StructOptional f1010, StructOptional f1011)
     {
-        super(parent.clone());
+        super(parent);
         this.f1000 = f1000;
         this.f1001 = f1001;
         this.f1002 = f1002;

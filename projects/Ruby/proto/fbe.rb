@@ -645,7 +645,7 @@ module FBE
     end
 
     def read_wchar(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L<')[0].chr
+      @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L<')[0].chr(Encoding::UTF_8)
     end
 
     def read_int8(offset)
@@ -694,6 +694,11 @@ module FBE
 
     def read_double(offset)
       @_buffer.buffer.slice(@_buffer.offset + offset, 8).unpack('E')[0]
+    end
+
+    def read_timestamp(offset)
+      nanoseconds = read_uint64(offset)
+      Time.at(nanoseconds / 1000000000, (nanoseconds % 1000000000) / 1000.0)
     end
 
     def read_uuid(offset)
@@ -758,6 +763,11 @@ module FBE
 
     def write_double(offset, value)
       @_buffer.buffer[@_buffer.offset + offset, 8] = [value].pack('E')
+    end
+
+    def write_timestamp(offset, value)
+      nanoseconds = value.to_i * 1000000000 + value.nsec
+      write_uint64(offset, nanoseconds)
     end
 
     def write_uuid(offset, value)
@@ -1205,7 +1215,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding uint64 field model class
+  # Fast Binary Encoding timestamp field model class
   class FieldModelTimestamp < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1222,7 +1232,7 @@ module FBE
         return defaults
       end
 
-      read_uint64(fbe_offset)
+      read_timestamp(fbe_offset)
     end
 
     # Set the value
@@ -1231,7 +1241,7 @@ module FBE
         return
       end
 
-      write_uint64(fbe_offset, value)
+      write_timestamp(fbe_offset, value)
     end
   end
 
@@ -2885,7 +2895,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding uint64 final model class
+  # Fast Binary Encoding timestamp final model class
   class FinalModelTimestamp < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -2917,7 +2927,7 @@ module FBE
         return [0, 0]
       end
 
-      [read_uint64(fbe_offset), fbe_size]
+      [read_timestamp(fbe_offset), fbe_size]
     end
 
     # Set the value
@@ -2926,7 +2936,7 @@ module FBE
         return 0
       end
 
-      write_uint64(fbe_offset, value)
+      write_timestamp(fbe_offset, value)
       fbe_size
     end
   end

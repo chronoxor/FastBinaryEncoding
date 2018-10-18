@@ -732,7 +732,7 @@ class Order {
   }
 
   /**
-   * Copy struct
+   * Copy struct (shallow copy)
    * @this {!Order}
    * @param {!Order} other Other struct
    * @returns {!Order} This struct
@@ -772,7 +772,7 @@ class Order {
   }
 
   /**
-   * Clone struct
+   * Clone struct (deep clone)
    * @this {!Order}
    * @returns {!Order} Cloned struct
    */
@@ -1855,7 +1855,7 @@ class Balance {
   }
 
   /**
-   * Copy struct
+   * Copy struct (shallow copy)
    * @this {!Balance}
    * @param {!Balance} other Other struct
    * @returns {!Balance} This struct
@@ -1875,7 +1875,7 @@ class Balance {
   }
 
   /**
-   * Clone struct
+   * Clone struct (deep clone)
    * @this {!Balance}
    * @returns {!Balance} Cloned struct
    */
@@ -2722,7 +2722,7 @@ class Account {
   }
 
   /**
-   * Copy struct
+   * Copy struct (shallow copy)
    * @this {!Account}
    * @param {!Account} other Other struct
    * @returns {!Account} This struct
@@ -2771,7 +2771,7 @@ class Account {
   }
 
   /**
-   * Clone struct
+   * Clone struct (deep clone)
    * @this {!Account}
    * @returns {!Account} Cloned struct
    */

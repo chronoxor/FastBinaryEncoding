@@ -86,7 +86,7 @@ public class StructOptional extends StructSimple
 
     public StructOptional(StructSimple parent, Boolean f100, Boolean f101, Boolean f102, Byte f103, Byte f104, Byte f105, Character f106, Character f107, Character f108, Character f109, Character f110, Character f111, Byte f112, Byte f113, Byte f114, Byte f115, Byte f116, Byte f117, Short f118, Short f119, Short f120, Short f121, Short f122, Short f123, Integer f124, Integer f125, Integer f126, Integer f127, Integer f128, Integer f129, Long f130, Long f131, Long f132, Long f133, Long f134, Long f135, Float f136, Float f137, Float f138, Double f139, Double f140, Double f141, BigDecimal f142, BigDecimal f143, BigDecimal f144, String f145, String f146, String f147, Instant f148, Instant f149, Instant f150, UUID f151, UUID f152, UUID f153, proto.OrderSide f154, proto.OrderSide f155, proto.OrderType f156, proto.OrderType f157, proto.Order f158, proto.Order f159, proto.Balance f160, proto.Balance f161, proto.State f162, proto.State f163, proto.Account f164, proto.Account f165)
     {
-        super(parent.clone());
+        super(parent);
         this.f100 = f100;
         this.f101 = f101;
         this.f102 = f102;

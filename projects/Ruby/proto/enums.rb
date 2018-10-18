@@ -32,13 +32,16 @@ module Enums
         @value = value.is_a?(Enum) ? value.value : value
       end
 
+      # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value == value.value end
 
+      # Get enum integer value
       def to_i
         @value
       end
 
+      # Get enum string value
       def to_s
         if @value == Enum.ENUM_VALUE_0
           return 'ENUM_VALUE_0'
@@ -176,13 +179,16 @@ module Enums
         @value = value.is_a?(Enum) ? value.value : value
       end
 
+      # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value == value.value end
 
+      # Get enum integer value
       def to_i
         @value
       end
 
+      # Get enum string value
       def to_s
         if @value == Enum.ENUM_VALUE_0
           return 'ENUM_VALUE_0'
@@ -320,13 +326,16 @@ module Enums
         @value = value.is_a?(Enum) ? value.value : value
       end
 
+      # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value == value.value end
 
+      # Get enum integer value
       def to_i
         @value
       end
 
+      # Get enum string value
       def to_s
         if @value == Enum.ENUM_VALUE_0
           return 'ENUM_VALUE_0'
@@ -464,13 +473,16 @@ module Enums
         @value = value.is_a?(Enum) ? value.value : value
       end
 
+      # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value == value.value end
 
+      # Get enum integer value
       def to_i
         @value
       end
 
+      # Get enum string value
       def to_s
         if @value == Enum.ENUM_VALUE_0
           return 'ENUM_VALUE_0'
@@ -608,13 +620,16 @@ module Enums
         @value = value.is_a?(Enum) ? value.value : value
       end
 
+      # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value == value.value end
 
+      # Get enum integer value
       def to_i
         @value
       end
 
+      # Get enum string value
       def to_s
         if @value == Enum.ENUM_VALUE_0
           return 'ENUM_VALUE_0'
@@ -752,13 +767,16 @@ module Enums
         @value = value.is_a?(Enum) ? value.value : value
       end
 
+      # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value == value.value end
 
+      # Get enum integer value
       def to_i
         @value
       end
 
+      # Get enum string value
       def to_s
         if @value == Enum.ENUM_VALUE_0
           return 'ENUM_VALUE_0'
@@ -896,13 +914,16 @@ module Enums
         @value = value.is_a?(Enum) ? value.value : value
       end
 
+      # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value == value.value end
 
+      # Get enum integer value
       def to_i
         @value
       end
 
+      # Get enum string value
       def to_s
         if @value == Enum.ENUM_VALUE_0
           return 'ENUM_VALUE_0'
@@ -1040,13 +1061,16 @@ module Enums
         @value = value.is_a?(Enum) ? value.value : value
       end
 
+      # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value == value.value end
 
+      # Get enum integer value
       def to_i
         @value
       end
 
+      # Get enum string value
       def to_s
         if @value == Enum.ENUM_VALUE_0
           return 'ENUM_VALUE_0'
@@ -1184,13 +1208,16 @@ module Enums
         @value = value.is_a?(Enum) ? value.value : value
       end
 
+      # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value == value.value end
 
+      # Get enum integer value
       def to_i
         @value
       end
 
+      # Get enum string value
       def to_s
         if @value == Enum.ENUM_VALUE_0
           return 'ENUM_VALUE_0'
@@ -1328,13 +1355,16 @@ module Enums
         @value = value.is_a?(Enum) ? value.value : value
       end
 
+      # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value == value.value end
 
+      # Get enum integer value
       def to_i
         @value
       end
 
+      # Get enum string value
       def to_s
         if @value == Enum.ENUM_VALUE_0
           return 'ENUM_VALUE_0'
@@ -1472,13 +1502,16 @@ module Enums
         @value = value.is_a?(Enum) ? value.value : value
       end
 
+      # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value == value.value end
 
+      # Get enum integer value
       def to_i
         @value
       end
 
+      # Get enum string value
       def to_s
         if @value == Enum.ENUM_VALUE_0
           return 'ENUM_VALUE_0'
@@ -1739,6 +1772,7 @@ module Enums
       @uint64b5 = uint64b5
     end
 
+    # Struct shallow copy
     def copy(other)
       @byte0 = other.byte0
       @byte1 = other.byte1
@@ -1809,6 +1843,7 @@ module Enums
       self
     end
 
+    # Struct deep clone
     def clone
       # Serialize the struct to the FBE stream
       writer = EnumsModel.new(FBE::WriteBuffer.new)
@@ -1820,6 +1855,7 @@ module Enums
       reader.deserialize[0]
     end
 
+    # Struct compare operators
     def <=>(other)
       raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(Enums)
 
@@ -1836,20 +1872,24 @@ module Enums
     def <=(other) (self <=> other) <= 0 end
     def >=(other) (self <=> other) >= 0 end
 
+    # Struct equals
     def eql?(other)
       self == other
     end
 
+    # Struct keys
     def key
       result = []
       # noinspection RubyUnnecessaryReturnValue
       result
     end
 
+    # Struct hash code
     def hash
       key.hash
     end
 
+    # Get struct string value
     def to_s
       result = ''
       result << 'Enums('

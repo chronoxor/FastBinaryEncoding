@@ -34,13 +34,16 @@ module Test
         @value = value.is_a?(Enum) ? value.value : value
       end
 
+      # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value == value.value end
 
+      # Get enum integer value
       def to_i
         @value
       end
 
+      # Get enum string value
       def to_s
         if @value == Enum.ENUM_VALUE_0
           return 'ENUM_VALUE_0'
@@ -178,13 +181,16 @@ module Test
         @value = value.is_a?(Enum) ? value.value : value
       end
 
+      # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value == value.value end
 
+      # Get enum integer value
       def to_i
         @value
       end
 
+      # Get enum string value
       def to_s
         if @value == Enum.ENUM_VALUE_0
           return 'ENUM_VALUE_0'
@@ -322,9 +328,11 @@ module Test
         @value = value.is_a?(Flags) ? value.value : value
       end
 
+      # Flags compare operators
       def ==(flags) @value == flags.value end
       def !=(flags) @value == flags.value end
 
+      # Flags bit operators
       def ~
         Flags.new(~@value)
       end
@@ -332,24 +340,29 @@ module Test
       def |(flags) Flags.new(@value | flags.value) end
       def ^(flags) Flags.new(@value ^ flags.value) end
 
+      # Is flags set?
       def has_flags(flags)
         ((@value & flags.value) != 0) && ((@value & flags.value) == flags.value)
       end
 
+      # Set flags
       def set_flags(flags)
         @value |= flags.value
         self
       end
 
+      # Remove flags
       def remove_flags(flags)
         @value &= ~flags.value
         self
       end
 
+      # Get flags integer value
       def to_i
         @value
       end
 
+      # Get flags string value
       def to_s
         result = ''
         first = true
@@ -529,9 +542,11 @@ module Test
         @value = value.is_a?(Flags) ? value.value : value
       end
 
+      # Flags compare operators
       def ==(flags) @value == flags.value end
       def !=(flags) @value == flags.value end
 
+      # Flags bit operators
       def ~
         Flags.new(~@value)
       end
@@ -539,24 +554,29 @@ module Test
       def |(flags) Flags.new(@value | flags.value) end
       def ^(flags) Flags.new(@value ^ flags.value) end
 
+      # Is flags set?
       def has_flags(flags)
         ((@value & flags.value) != 0) && ((@value & flags.value) == flags.value)
       end
 
+      # Set flags
       def set_flags(flags)
         @value |= flags.value
         self
       end
 
+      # Remove flags
       def remove_flags(flags)
         @value &= ~flags.value
         self
       end
 
+      # Get flags integer value
       def to_i
         @value
       end
 
+      # Get flags string value
       def to_s
         result = ''
         first = true
@@ -857,6 +877,7 @@ module Test
       @f44 = f44
     end
 
+    # Struct shallow copy
     def copy(other)
       @uid = other.uid
       @f1 = other.f1
@@ -906,6 +927,7 @@ module Test
       self
     end
 
+    # Struct deep clone
     def clone
       # Serialize the struct to the FBE stream
       writer = StructSimpleModel.new(FBE::WriteBuffer.new)
@@ -917,6 +939,7 @@ module Test
       reader.deserialize[0]
     end
 
+    # Struct compare operators
     def <=>(other)
       raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructSimple)
 
@@ -937,10 +960,12 @@ module Test
     def <=(other) (self <=> other) <= 0 end
     def >=(other) (self <=> other) >= 0 end
 
+    # Struct equals
     def eql?(other)
       self == other
     end
 
+    # Struct keys
     def key
       result = []
       result.push(@uid)
@@ -948,10 +973,12 @@ module Test
       result
     end
 
+    # Struct hash code
     def hash
       key.hash
     end
 
+    # Get struct string value
     def to_s
       result = ''
       result << 'StructSimple('
@@ -3974,7 +4001,7 @@ module Test
     attr_accessor :f165
 
     def initialize(parent = StructSimple.new, f100 = nil, f101 = true, f102 = nil, f103 = nil, f104 = 255, f105 = nil, f106 = nil, f107 = '!', f108 = nil, f109 = nil, f110 = 0x0444.chr(Encoding::UTF_8), f111 = nil, f112 = nil, f113 = 127, f114 = nil, f115 = nil, f116 = 255, f117 = nil, f118 = nil, f119 = 32767, f120 = nil, f121 = nil, f122 = 65535, f123 = nil, f124 = nil, f125 = 2147483647, f126 = nil, f127 = nil, f128 = 0xFFFFFFFF, f129 = nil, f130 = nil, f131 = 9223372036854775807, f132 = nil, f133 = nil, f134 = 0xFFFFFFFFFFFFFFFF, f135 = nil, f136 = nil, f137 = 123.456, f138 = nil, f139 = nil, f140 = -123.456e+123, f141 = nil, f142 = nil, f143 = BigDecimal.new("123456.123456"), f144 = nil, f145 = nil, f146 = "Initial string!", f147 = nil, f148 = nil, f149 = Time.now.utc, f150 = nil, f151 = nil, f152 = UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000"), f153 = nil, f154 = nil, f155 = nil, f156 = nil, f157 = nil, f158 = nil, f159 = nil, f160 = nil, f161 = nil, f162 = nil, f163 = nil, f164 = nil, f165 = nil)
-      super(parent.clone)
+      method(:copy).super_method.call(parent)
       @f100 = f100
       @f101 = f101
       @f102 = f102
@@ -4043,6 +4070,7 @@ module Test
       @f165 = f165
     end
 
+    # Struct shallow copy
     def copy(other)
       super(other)
       @f100 = other.f100
@@ -4114,6 +4142,7 @@ module Test
       self
     end
 
+    # Struct deep clone
     def clone
       # Serialize the struct to the FBE stream
       writer = StructOptionalModel.new(FBE::WriteBuffer.new)
@@ -4125,6 +4154,7 @@ module Test
       reader.deserialize[0]
     end
 
+    # Struct compare operators
     def <=>(other)
       raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructOptional)
 
@@ -4145,10 +4175,12 @@ module Test
     def <=(other) (self <=> other) <= 0 end
     def >=(other) (self <=> other) >= 0 end
 
+    # Struct equals
     def eql?(other)
       self == other
     end
 
+    # Struct keys
     def key
       result = []
       result.push(super)
@@ -4156,10 +4188,12 @@ module Test
       result
     end
 
+    # Struct hash code
     def hash
       key.hash
     end
 
+    # Get struct string value
     def to_s
       result = ''
       result << 'StructOptional('
@@ -4569,7 +4603,7 @@ module Test
   class FieldModelStructOptional < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_parent = StructSimple.new(self.buffer, 4 + 4)
+      @_parent = FieldModelStructSimple.new(self.buffer, 4 + 4)
       @_f100 = FBE::FieldModelOptional.new(FBE::FieldModelBool.new(self.buffer, @_parent.fbe_offset + @_parent.fbe_body - 4 - 4), self.buffer, @_parent.fbe_offset + @_parent.fbe_body - 4 - 4)
       @_f101 = FBE::FieldModelOptional.new(FBE::FieldModelBool.new(self.buffer, @_f100.fbe_offset + @_f100.fbe_size), self.buffer, @_f100.fbe_offset + @_f100.fbe_size)
       @_f102 = FBE::FieldModelOptional.new(FBE::FieldModelBool.new(self.buffer, @_f101.fbe_offset + @_f101.fbe_size), self.buffer, @_f101.fbe_offset + @_f101.fbe_size)
@@ -6481,7 +6515,7 @@ module Test
   class FinalModelStructOptional < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_parent = StructSimple.new(self.buffer, 0)
+      @_parent = FieldModelStructSimple.new(self.buffer, 0)
       @_f100 = FBE::FinalModelOptional.new(FBE::FinalModelBool.new(self.buffer, 0), self.buffer, 0)
       @_f101 = FBE::FinalModelOptional.new(FBE::FinalModelBool.new(self.buffer, 0), self.buffer, 0)
       @_f102 = FBE::FinalModelOptional.new(FBE::FinalModelBool.new(self.buffer, 0), self.buffer, 0)
@@ -8374,7 +8408,7 @@ module Test
     attr_accessor :f1011
 
     def initialize(parent = StructOptional.new, f1000 = EnumSimple.new, f1001 = nil, f1002 = EnumTyped.ENUM_VALUE_2, f1003 = nil, f1004 = FlagsSimple.new, f1005 = nil, f1006 = FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6, f1007 = nil, f1008 = StructSimple.new, f1009 = nil, f1010 = StructOptional.new, f1011 = nil)
-      super(parent.clone)
+      method(:copy).super_method.call(parent)
       @f1000 = f1000
       @f1001 = f1001
       @f1002 = f1002
@@ -8389,6 +8423,7 @@ module Test
       @f1011 = f1011
     end
 
+    # Struct shallow copy
     def copy(other)
       super(other)
       @f1000 = other.f1000
@@ -8406,6 +8441,7 @@ module Test
       self
     end
 
+    # Struct deep clone
     def clone
       # Serialize the struct to the FBE stream
       writer = StructNestedModel.new(FBE::WriteBuffer.new)
@@ -8417,6 +8453,7 @@ module Test
       reader.deserialize[0]
     end
 
+    # Struct compare operators
     def <=>(other)
       raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructNested)
 
@@ -8437,10 +8474,12 @@ module Test
     def <=(other) (self <=> other) <= 0 end
     def >=(other) (self <=> other) >= 0 end
 
+    # Struct equals
     def eql?(other)
       self == other
     end
 
+    # Struct keys
     def key
       result = []
       result.push(super)
@@ -8448,10 +8487,12 @@ module Test
       result
     end
 
+    # Struct hash code
     def hash
       key.hash
     end
 
+    # Get struct string value
     def to_s
       result = ''
       result << 'StructNested('
@@ -8537,7 +8578,7 @@ module Test
   class FieldModelStructNested < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_parent = StructOptional.new(self.buffer, 4 + 4)
+      @_parent = FieldModelStructOptional.new(self.buffer, 4 + 4)
       @_f1000 = FieldModelEnumSimple.new(self.buffer, @_parent.fbe_offset + @_parent.fbe_body - 4 - 4)
       @_f1001 = FBE::FieldModelOptional.new(FieldModelEnumSimple.new(self.buffer, @_f1000.fbe_offset + @_f1000.fbe_size), self.buffer, @_f1000.fbe_offset + @_f1000.fbe_size)
       @_f1002 = FieldModelEnumTyped.new(self.buffer, @_f1001.fbe_offset + @_f1001.fbe_size)
@@ -9099,7 +9140,7 @@ module Test
   class FinalModelStructNested < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_parent = StructOptional.new(self.buffer, 0)
+      @_parent = FieldModelStructOptional.new(self.buffer, 0)
       @_f1000 = FinalModelEnumSimple.new(self.buffer, 0)
       @_f1001 = FBE::FinalModelOptional.new(FinalModelEnumSimple.new(self.buffer, 0), self.buffer, 0)
       @_f1002 = FinalModelEnumTyped.new(self.buffer, 0)
@@ -9584,6 +9625,7 @@ module Test
       @f3 = f3
     end
 
+    # Struct shallow copy
     def copy(other)
       @f1 = other.f1
       @f2 = other.f2
@@ -9591,6 +9633,7 @@ module Test
       self
     end
 
+    # Struct deep clone
     def clone
       # Serialize the struct to the FBE stream
       writer = StructBytesModel.new(FBE::WriteBuffer.new)
@@ -9602,6 +9645,7 @@ module Test
       reader.deserialize[0]
     end
 
+    # Struct compare operators
     def <=>(other)
       raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructBytes)
 
@@ -9618,20 +9662,24 @@ module Test
     def <=(other) (self <=> other) <= 0 end
     def >=(other) (self <=> other) >= 0 end
 
+    # Struct equals
     def eql?(other)
       self == other
     end
 
+    # Struct keys
     def key
       result = []
       # noinspection RubyUnnecessaryReturnValue
       result
     end
 
+    # Struct hash code
     def hash
       key.hash
     end
 
+    # Get struct string value
     def to_s
       result = ''
       result << 'StructBytes('
@@ -10216,6 +10264,7 @@ module Test
       @f10 = f10
     end
 
+    # Struct shallow copy
     def copy(other)
       @f1 = other.f1
       @f2 = other.f2
@@ -10230,6 +10279,7 @@ module Test
       self
     end
 
+    # Struct deep clone
     def clone
       # Serialize the struct to the FBE stream
       writer = StructArrayModel.new(FBE::WriteBuffer.new)
@@ -10241,6 +10291,7 @@ module Test
       reader.deserialize[0]
     end
 
+    # Struct compare operators
     def <=>(other)
       raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructArray)
 
@@ -10257,20 +10308,24 @@ module Test
     def <=(other) (self <=> other) <= 0 end
     def >=(other) (self <=> other) >= 0 end
 
+    # Struct equals
     def eql?(other)
       self == other
     end
 
+    # Struct keys
     def key
       result = []
       # noinspection RubyUnnecessaryReturnValue
       result
     end
 
+    # Struct hash code
     def hash
       key.hash
     end
 
+    # Get struct string value
     def to_s
       result = ''
       result << 'StructArray('
@@ -11334,6 +11389,7 @@ module Test
       @f10 = f10
     end
 
+    # Struct shallow copy
     def copy(other)
       @f1 = other.f1
       @f2 = other.f2
@@ -11348,6 +11404,7 @@ module Test
       self
     end
 
+    # Struct deep clone
     def clone
       # Serialize the struct to the FBE stream
       writer = StructVectorModel.new(FBE::WriteBuffer.new)
@@ -11359,6 +11416,7 @@ module Test
       reader.deserialize[0]
     end
 
+    # Struct compare operators
     def <=>(other)
       raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructVector)
 
@@ -11375,20 +11433,24 @@ module Test
     def <=(other) (self <=> other) <= 0 end
     def >=(other) (self <=> other) >= 0 end
 
+    # Struct equals
     def eql?(other)
       self == other
     end
 
+    # Struct keys
     def key
       result = []
       # noinspection RubyUnnecessaryReturnValue
       result
     end
 
+    # Struct hash code
     def hash
       key.hash
     end
 
+    # Get struct string value
     def to_s
       result = ''
       result << 'StructVector('
@@ -12452,6 +12514,7 @@ module Test
       @f10 = f10
     end
 
+    # Struct shallow copy
     def copy(other)
       @f1 = other.f1
       @f2 = other.f2
@@ -12466,6 +12529,7 @@ module Test
       self
     end
 
+    # Struct deep clone
     def clone
       # Serialize the struct to the FBE stream
       writer = StructListModel.new(FBE::WriteBuffer.new)
@@ -12477,6 +12541,7 @@ module Test
       reader.deserialize[0]
     end
 
+    # Struct compare operators
     def <=>(other)
       raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructList)
 
@@ -12493,20 +12558,24 @@ module Test
     def <=(other) (self <=> other) <= 0 end
     def >=(other) (self <=> other) >= 0 end
 
+    # Struct equals
     def eql?(other)
       self == other
     end
 
+    # Struct keys
     def key
       result = []
       # noinspection RubyUnnecessaryReturnValue
       result
     end
 
+    # Struct hash code
     def hash
       key.hash
     end
 
+    # Get struct string value
     def to_s
       result = ''
       result << 'StructList('
@@ -13558,6 +13627,7 @@ module Test
       @f4 = f4
     end
 
+    # Struct shallow copy
     def copy(other)
       @f1 = other.f1
       @f2 = other.f2
@@ -13566,6 +13636,7 @@ module Test
       self
     end
 
+    # Struct deep clone
     def clone
       # Serialize the struct to the FBE stream
       writer = StructSetModel.new(FBE::WriteBuffer.new)
@@ -13577,6 +13648,7 @@ module Test
       reader.deserialize[0]
     end
 
+    # Struct compare operators
     def <=>(other)
       raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructSet)
 
@@ -13593,20 +13665,24 @@ module Test
     def <=(other) (self <=> other) <= 0 end
     def >=(other) (self <=> other) >= 0 end
 
+    # Struct equals
     def eql?(other)
       self == other
     end
 
+    # Struct keys
     def key
       result = []
       # noinspection RubyUnnecessaryReturnValue
       result
     end
 
+    # Struct hash code
     def hash
       key.hash
     end
 
+    # Get struct string value
     def to_s
       result = ''
       result << 'StructSet('
@@ -14280,6 +14356,7 @@ module Test
       @f10 = f10
     end
 
+    # Struct shallow copy
     def copy(other)
       @f1 = other.f1
       @f2 = other.f2
@@ -14294,6 +14371,7 @@ module Test
       self
     end
 
+    # Struct deep clone
     def clone
       # Serialize the struct to the FBE stream
       writer = StructMapModel.new(FBE::WriteBuffer.new)
@@ -14305,6 +14383,7 @@ module Test
       reader.deserialize[0]
     end
 
+    # Struct compare operators
     def <=>(other)
       raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructMap)
 
@@ -14321,20 +14400,24 @@ module Test
     def <=(other) (self <=> other) <= 0 end
     def >=(other) (self <=> other) >= 0 end
 
+    # Struct equals
     def eql?(other)
       self == other
     end
 
+    # Struct keys
     def key
       result = []
       # noinspection RubyUnnecessaryReturnValue
       result
     end
 
+    # Struct hash code
     def hash
       key.hash
     end
 
+    # Get struct string value
     def to_s
       result = ''
       result << 'StructMap('
@@ -15468,6 +15551,7 @@ module Test
       @f10 = f10
     end
 
+    # Struct shallow copy
     def copy(other)
       @f1 = other.f1
       @f2 = other.f2
@@ -15482,6 +15566,7 @@ module Test
       self
     end
 
+    # Struct deep clone
     def clone
       # Serialize the struct to the FBE stream
       writer = StructHashModel.new(FBE::WriteBuffer.new)
@@ -15493,6 +15578,7 @@ module Test
       reader.deserialize[0]
     end
 
+    # Struct compare operators
     def <=>(other)
       raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructHash)
 
@@ -15509,20 +15595,24 @@ module Test
     def <=(other) (self <=> other) <= 0 end
     def >=(other) (self <=> other) >= 0 end
 
+    # Struct equals
     def eql?(other)
       self == other
     end
 
+    # Struct keys
     def key
       result = []
       # noinspection RubyUnnecessaryReturnValue
       result
     end
 
+    # Struct hash code
     def hash
       key.hash
     end
 
+    # Get struct string value
     def to_s
       result = ''
       result << 'StructHash('
@@ -16640,12 +16730,14 @@ module Test
       @f2 = f2
     end
 
+    # Struct shallow copy
     def copy(other)
       @f1 = other.f1
       @f2 = other.f2
       self
     end
 
+    # Struct deep clone
     def clone
       # Serialize the struct to the FBE stream
       writer = StructHashExModel.new(FBE::WriteBuffer.new)
@@ -16657,6 +16749,7 @@ module Test
       reader.deserialize[0]
     end
 
+    # Struct compare operators
     def <=>(other)
       raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructHashEx)
 
@@ -16673,20 +16766,24 @@ module Test
     def <=(other) (self <=> other) <= 0 end
     def >=(other) (self <=> other) >= 0 end
 
+    # Struct equals
     def eql?(other)
       self == other
     end
 
+    # Struct keys
     def key
       result = []
       # noinspection RubyUnnecessaryReturnValue
       result
     end
 
+    # Struct hash code
     def hash
       key.hash
     end
 
+    # Get struct string value
     def to_s
       result = ''
       result << 'StructHashEx('

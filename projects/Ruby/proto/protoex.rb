@@ -31,13 +31,16 @@ module Protoex
         @value = value.is_a?(Enum) ? value.value : value
       end
 
+      # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value == value.value end
 
+      # Get enum integer value
       def to_i
         @value
       end
 
+      # Get enum string value
       def to_s
         if @value == Enum.buy
           return 'buy'
@@ -158,13 +161,16 @@ module Protoex
         @value = value.is_a?(Enum) ? value.value : value
       end
 
+      # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value == value.value end
 
+      # Get enum integer value
       def to_i
         @value
       end
 
+      # Get enum string value
       def to_s
         if @value == Enum.market
           return 'market'
@@ -295,9 +301,11 @@ module Protoex
         @value = value.is_a?(Flags) ? value.value : value
       end
 
+      # Flags compare operators
       def ==(flags) @value == flags.value end
       def !=(flags) @value == flags.value end
 
+      # Flags bit operators
       def ~
         Flags.new(~@value)
       end
@@ -305,24 +313,29 @@ module Protoex
       def |(flags) Flags.new(@value | flags.value) end
       def ^(flags) Flags.new(@value ^ flags.value) end
 
+      # Is flags set?
       def has_flags(flags)
         ((@value & flags.value) != 0) && ((@value & flags.value) == flags.value)
       end
 
+      # Set flags
       def set_flags(flags)
         @value |= flags.value
         self
       end
 
+      # Remove flags
       def remove_flags(flags)
         @value &= ~flags.value
         self
       end
 
+      # Get flags integer value
       def to_i
         @value
       end
 
+      # Get flags string value
       def to_s
         result = ''
         first = true
@@ -538,6 +551,7 @@ module Protoex
       @sl = sl
     end
 
+    # Struct shallow copy
     def copy(other)
       @uid = other.uid
       @symbol = other.symbol
@@ -550,6 +564,7 @@ module Protoex
       self
     end
 
+    # Struct deep clone
     def clone
       # Serialize the struct to the FBE stream
       writer = OrderModel.new(FBE::WriteBuffer.new)
@@ -561,6 +576,7 @@ module Protoex
       reader.deserialize[0]
     end
 
+    # Struct compare operators
     def <=>(other)
       raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(Order)
 
@@ -581,10 +597,12 @@ module Protoex
     def <=(other) (self <=> other) <= 0 end
     def >=(other) (self <=> other) >= 0 end
 
+    # Struct equals
     def eql?(other)
       self == other
     end
 
+    # Struct keys
     def key
       result = []
       result.push(@uid)
@@ -592,10 +610,12 @@ module Protoex
       result
     end
 
+    # Struct hash code
     def hash
       key.hash
     end
 
+    # Get struct string value
     def to_s
       result = ''
       result << 'Order('
@@ -1444,16 +1464,18 @@ module Protoex
     attr_accessor :locked
 
     def initialize(parent = Proto::Balance.new, locked = 0.0)
-      super(parent.clone)
+      method(:copy).super_method.call(parent)
       @locked = locked
     end
 
+    # Struct shallow copy
     def copy(other)
       super(other)
       @locked = other.locked
       self
     end
 
+    # Struct deep clone
     def clone
       # Serialize the struct to the FBE stream
       writer = BalanceModel.new(FBE::WriteBuffer.new)
@@ -1465,6 +1487,7 @@ module Protoex
       reader.deserialize[0]
     end
 
+    # Struct compare operators
     def <=>(other)
       raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(Balance)
 
@@ -1485,10 +1508,12 @@ module Protoex
     def <=(other) (self <=> other) <= 0 end
     def >=(other) (self <=> other) >= 0 end
 
+    # Struct equals
     def eql?(other)
       self == other
     end
 
+    # Struct keys
     def key
       result = []
       result.push(super)
@@ -1496,10 +1521,12 @@ module Protoex
       result
     end
 
+    # Struct hash code
     def hash
       key.hash
     end
 
+    # Get struct string value
     def to_s
       result = ''
       result << 'Balance('
@@ -1519,7 +1546,7 @@ module Protoex
   class FieldModelBalance < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_parent = Proto::Balance.new(self.buffer, 4 + 4)
+      @_parent = Proto::FieldModelBalance.new(self.buffer, 4 + 4)
       @_locked = FBE::FieldModelDouble.new(self.buffer, @_parent.fbe_offset + @_parent.fbe_body - 4 - 4)
     end
 
@@ -1570,7 +1597,7 @@ module Protoex
       TYPE
     end
 
-    TYPE = Proto::Balance::TYPE
+    TYPE = Proto::FieldModelBalance::TYPE
 
     # Check if the struct value is valid
     def verify(fbe_verify_type = true)
@@ -1806,7 +1833,7 @@ module Protoex
   class FinalModelBalance < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_parent = Proto::Balance.new(self.buffer, 0)
+      @_parent = Proto::FieldModelBalance.new(self.buffer, 0)
       @_locked = FBE::FinalModelDouble.new(self.buffer, 0)
     end
 
@@ -1830,7 +1857,7 @@ module Protoex
       TYPE
     end
 
-    TYPE = Proto::Balance::TYPE
+    TYPE = Proto::FieldModelBalance::TYPE
 
     # Check if the struct value is valid
     def verify
@@ -2011,6 +2038,7 @@ module Protoex
       @orders = orders
     end
 
+    # Struct shallow copy
     def copy(other)
       @uid = other.uid
       @name = other.name
@@ -2021,6 +2049,7 @@ module Protoex
       self
     end
 
+    # Struct deep clone
     def clone
       # Serialize the struct to the FBE stream
       writer = AccountModel.new(FBE::WriteBuffer.new)
@@ -2032,6 +2061,7 @@ module Protoex
       reader.deserialize[0]
     end
 
+    # Struct compare operators
     def <=>(other)
       raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(Account)
 
@@ -2052,10 +2082,12 @@ module Protoex
     def <=(other) (self <=> other) <= 0 end
     def >=(other) (self <=> other) >= 0 end
 
+    # Struct equals
     def eql?(other)
       self == other
     end
 
+    # Struct keys
     def key
       result = []
       result.push(@uid)
@@ -2063,10 +2095,12 @@ module Protoex
       result
     end
 
+    # Struct hash code
     def hash
       key.hash
     end
 
+    # Get struct string value
     def to_s
       result = ''
       result << 'Account('

@@ -2577,7 +2577,7 @@ class Enums {
   }
 
   /**
-   * Copy struct
+   * Copy struct (shallow copy)
    * @this {!Enums}
    * @param {!Enums} other Other struct
    * @returns {!Enums} This struct
@@ -2917,7 +2917,7 @@ class Enums {
   }
 
   /**
-   * Clone struct
+   * Clone struct (deep clone)
    * @this {!Enums}
    * @returns {!Enums} Cloned struct
    */

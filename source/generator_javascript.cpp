@@ -8989,7 +8989,7 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
     if (s->base && !s->base->empty())
     {
         WriteLineIndent("super()");
-        WriteLineIndent("super.copy(parent.clone())");
+        WriteLineIndent("super.copy(parent)");
     }
     if (s->body)
         for (const auto& field : s->body->fields)
@@ -9000,7 +9000,7 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
     // Generate struct copy() method
     WriteLine();
     WriteLineIndent("/**");
-    WriteLineIndent(" * Copy struct");
+    WriteLineIndent(" * Copy struct (shallow copy)");
     WriteLineIndent(" * @this {!" + *s->name + "}");
     WriteLineIndent(" * @param {!" + *s->name + "} other Other struct");
     WriteLineIndent(" * @returns {!" + *s->name + "} This struct");
@@ -9095,7 +9095,7 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
     // Generate struct clone() method
     WriteLine();
     WriteLineIndent("/**");
-    WriteLineIndent(" * Clone struct");
+    WriteLineIndent(" * Clone struct (deep clone)");
     WriteLineIndent(" * @this {!" + *s->name + "}");
     WriteLineIndent(" * @returns {!" + *s->name + "} Cloned struct");
     WriteLineIndent(" */");

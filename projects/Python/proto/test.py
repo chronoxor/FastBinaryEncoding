@@ -2,7 +2,6 @@
 # https://github.com/chronoxor/FastBinaryEncoding
 
 import base64
-import copy
 import decimal
 import enum
 import functools
@@ -240,13 +239,16 @@ class FlagsSimple(enum.IntFlag, metaclass=fbe.DefaultEnumMeta):
 
     __slots__ = ()
 
+    # Is flags set?
     def has_flags(self, flags):
         return ((self.value & flags.value) != 0) and ((self.value & flags.value) == flags.value)
 
+    # Set flags
     def set_flags(self, flags):
         self.value |= flags.value
         return self
 
+    # Remove flags
     def remove_flags(self, flags):
         self.value &= ~flags.value
         return self
@@ -390,13 +392,16 @@ class FlagsTyped(enum.IntFlag, metaclass=fbe.DefaultEnumMeta):
 
     __slots__ = ()
 
+    # Is flags set?
     def has_flags(self, flags):
         return ((self.value & flags.value) != 0) and ((self.value & flags.value) == flags.value)
 
+    # Set flags
     def set_flags(self, flags):
         self.value |= flags.value
         return self
 
+    # Remove flags
     def remove_flags(self, flags):
         self.value &= ~flags.value
         return self
@@ -621,54 +626,56 @@ class StructSimple(object):
         self.f43 = f43
         self.f44 = f44
 
+    # Struct shallow copy
     def copy(self, other):
-        self.uid = copy.deepcopy(other.uid)
-        self.f1 = copy.deepcopy(other.f1)
-        self.f2 = copy.deepcopy(other.f2)
-        self.f3 = copy.deepcopy(other.f3)
-        self.f4 = copy.deepcopy(other.f4)
-        self.f5 = copy.deepcopy(other.f5)
-        self.f6 = copy.deepcopy(other.f6)
-        self.f7 = copy.deepcopy(other.f7)
-        self.f8 = copy.deepcopy(other.f8)
-        self.f9 = copy.deepcopy(other.f9)
-        self.f10 = copy.deepcopy(other.f10)
-        self.f11 = copy.deepcopy(other.f11)
-        self.f12 = copy.deepcopy(other.f12)
-        self.f13 = copy.deepcopy(other.f13)
-        self.f14 = copy.deepcopy(other.f14)
-        self.f15 = copy.deepcopy(other.f15)
-        self.f16 = copy.deepcopy(other.f16)
-        self.f17 = copy.deepcopy(other.f17)
-        self.f18 = copy.deepcopy(other.f18)
-        self.f19 = copy.deepcopy(other.f19)
-        self.f20 = copy.deepcopy(other.f20)
-        self.f21 = copy.deepcopy(other.f21)
-        self.f22 = copy.deepcopy(other.f22)
-        self.f23 = copy.deepcopy(other.f23)
-        self.f24 = copy.deepcopy(other.f24)
-        self.f25 = copy.deepcopy(other.f25)
-        self.f26 = copy.deepcopy(other.f26)
-        self.f27 = copy.deepcopy(other.f27)
-        self.f28 = copy.deepcopy(other.f28)
-        self.f29 = copy.deepcopy(other.f29)
-        self.f30 = copy.deepcopy(other.f30)
-        self.f31 = copy.deepcopy(other.f31)
-        self.f32 = copy.deepcopy(other.f32)
-        self.f33 = copy.deepcopy(other.f33)
-        self.f34 = copy.deepcopy(other.f34)
-        self.f35 = copy.deepcopy(other.f35)
-        self.f36 = copy.deepcopy(other.f36)
-        self.f37 = copy.deepcopy(other.f37)
-        self.f38 = copy.deepcopy(other.f38)
-        self.f39 = copy.deepcopy(other.f39)
-        self.f40 = copy.deepcopy(other.f40)
-        self.f41 = copy.deepcopy(other.f41)
-        self.f42 = copy.deepcopy(other.f42)
-        self.f43 = copy.deepcopy(other.f43)
-        self.f44 = copy.deepcopy(other.f44)
+        self.uid = other.uid
+        self.f1 = other.f1
+        self.f2 = other.f2
+        self.f3 = other.f3
+        self.f4 = other.f4
+        self.f5 = other.f5
+        self.f6 = other.f6
+        self.f7 = other.f7
+        self.f8 = other.f8
+        self.f9 = other.f9
+        self.f10 = other.f10
+        self.f11 = other.f11
+        self.f12 = other.f12
+        self.f13 = other.f13
+        self.f14 = other.f14
+        self.f15 = other.f15
+        self.f16 = other.f16
+        self.f17 = other.f17
+        self.f18 = other.f18
+        self.f19 = other.f19
+        self.f20 = other.f20
+        self.f21 = other.f21
+        self.f22 = other.f22
+        self.f23 = other.f23
+        self.f24 = other.f24
+        self.f25 = other.f25
+        self.f26 = other.f26
+        self.f27 = other.f27
+        self.f28 = other.f28
+        self.f29 = other.f29
+        self.f30 = other.f30
+        self.f31 = other.f31
+        self.f32 = other.f32
+        self.f33 = other.f33
+        self.f34 = other.f34
+        self.f35 = other.f35
+        self.f36 = other.f36
+        self.f37 = other.f37
+        self.f38 = other.f38
+        self.f39 = other.f39
+        self.f40 = other.f40
+        self.f41 = other.f41
+        self.f42 = other.f42
+        self.f43 = other.f43
+        self.f44 = other.f44
         return self
 
+    # Struct deep clone
     def clone(self):
         # Serialize the struct to the FBE stream
         writer = StructSimpleModel(fbe.WriteBuffer())
@@ -952,9 +959,11 @@ class StructSimple(object):
             None if "f44" not in fields else proto.Account.__from_json__(fields["f44"]),
         )
 
+    # Get struct JSON value
     def to_json(self):
         return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
 
+    # Create struct from JSON value
     @staticmethod
     def from_json(document):
         return StructSimple.__from_json__(json.loads(document))
@@ -3326,76 +3335,78 @@ class StructOptional(StructSimple):
         self.f164 = f164
         self.f165 = f165
 
+    # Struct shallow copy
     def copy(self, other):
         super().copy(other)
-        self.f100 = copy.deepcopy(other.f100)
-        self.f101 = copy.deepcopy(other.f101)
-        self.f102 = copy.deepcopy(other.f102)
-        self.f103 = copy.deepcopy(other.f103)
-        self.f104 = copy.deepcopy(other.f104)
-        self.f105 = copy.deepcopy(other.f105)
-        self.f106 = copy.deepcopy(other.f106)
-        self.f107 = copy.deepcopy(other.f107)
-        self.f108 = copy.deepcopy(other.f108)
-        self.f109 = copy.deepcopy(other.f109)
-        self.f110 = copy.deepcopy(other.f110)
-        self.f111 = copy.deepcopy(other.f111)
-        self.f112 = copy.deepcopy(other.f112)
-        self.f113 = copy.deepcopy(other.f113)
-        self.f114 = copy.deepcopy(other.f114)
-        self.f115 = copy.deepcopy(other.f115)
-        self.f116 = copy.deepcopy(other.f116)
-        self.f117 = copy.deepcopy(other.f117)
-        self.f118 = copy.deepcopy(other.f118)
-        self.f119 = copy.deepcopy(other.f119)
-        self.f120 = copy.deepcopy(other.f120)
-        self.f121 = copy.deepcopy(other.f121)
-        self.f122 = copy.deepcopy(other.f122)
-        self.f123 = copy.deepcopy(other.f123)
-        self.f124 = copy.deepcopy(other.f124)
-        self.f125 = copy.deepcopy(other.f125)
-        self.f126 = copy.deepcopy(other.f126)
-        self.f127 = copy.deepcopy(other.f127)
-        self.f128 = copy.deepcopy(other.f128)
-        self.f129 = copy.deepcopy(other.f129)
-        self.f130 = copy.deepcopy(other.f130)
-        self.f131 = copy.deepcopy(other.f131)
-        self.f132 = copy.deepcopy(other.f132)
-        self.f133 = copy.deepcopy(other.f133)
-        self.f134 = copy.deepcopy(other.f134)
-        self.f135 = copy.deepcopy(other.f135)
-        self.f136 = copy.deepcopy(other.f136)
-        self.f137 = copy.deepcopy(other.f137)
-        self.f138 = copy.deepcopy(other.f138)
-        self.f139 = copy.deepcopy(other.f139)
-        self.f140 = copy.deepcopy(other.f140)
-        self.f141 = copy.deepcopy(other.f141)
-        self.f142 = copy.deepcopy(other.f142)
-        self.f143 = copy.deepcopy(other.f143)
-        self.f144 = copy.deepcopy(other.f144)
-        self.f145 = copy.deepcopy(other.f145)
-        self.f146 = copy.deepcopy(other.f146)
-        self.f147 = copy.deepcopy(other.f147)
-        self.f148 = copy.deepcopy(other.f148)
-        self.f149 = copy.deepcopy(other.f149)
-        self.f150 = copy.deepcopy(other.f150)
-        self.f151 = copy.deepcopy(other.f151)
-        self.f152 = copy.deepcopy(other.f152)
-        self.f153 = copy.deepcopy(other.f153)
-        self.f154 = copy.deepcopy(other.f154)
-        self.f155 = copy.deepcopy(other.f155)
-        self.f156 = copy.deepcopy(other.f156)
-        self.f157 = copy.deepcopy(other.f157)
-        self.f158 = copy.deepcopy(other.f158)
-        self.f159 = copy.deepcopy(other.f159)
-        self.f160 = copy.deepcopy(other.f160)
-        self.f161 = copy.deepcopy(other.f161)
-        self.f162 = copy.deepcopy(other.f162)
-        self.f163 = copy.deepcopy(other.f163)
-        self.f164 = copy.deepcopy(other.f164)
-        self.f165 = copy.deepcopy(other.f165)
+        self.f100 = other.f100
+        self.f101 = other.f101
+        self.f102 = other.f102
+        self.f103 = other.f103
+        self.f104 = other.f104
+        self.f105 = other.f105
+        self.f106 = other.f106
+        self.f107 = other.f107
+        self.f108 = other.f108
+        self.f109 = other.f109
+        self.f110 = other.f110
+        self.f111 = other.f111
+        self.f112 = other.f112
+        self.f113 = other.f113
+        self.f114 = other.f114
+        self.f115 = other.f115
+        self.f116 = other.f116
+        self.f117 = other.f117
+        self.f118 = other.f118
+        self.f119 = other.f119
+        self.f120 = other.f120
+        self.f121 = other.f121
+        self.f122 = other.f122
+        self.f123 = other.f123
+        self.f124 = other.f124
+        self.f125 = other.f125
+        self.f126 = other.f126
+        self.f127 = other.f127
+        self.f128 = other.f128
+        self.f129 = other.f129
+        self.f130 = other.f130
+        self.f131 = other.f131
+        self.f132 = other.f132
+        self.f133 = other.f133
+        self.f134 = other.f134
+        self.f135 = other.f135
+        self.f136 = other.f136
+        self.f137 = other.f137
+        self.f138 = other.f138
+        self.f139 = other.f139
+        self.f140 = other.f140
+        self.f141 = other.f141
+        self.f142 = other.f142
+        self.f143 = other.f143
+        self.f144 = other.f144
+        self.f145 = other.f145
+        self.f146 = other.f146
+        self.f147 = other.f147
+        self.f148 = other.f148
+        self.f149 = other.f149
+        self.f150 = other.f150
+        self.f151 = other.f151
+        self.f152 = other.f152
+        self.f153 = other.f153
+        self.f154 = other.f154
+        self.f155 = other.f155
+        self.f156 = other.f156
+        self.f157 = other.f157
+        self.f158 = other.f158
+        self.f159 = other.f159
+        self.f160 = other.f160
+        self.f161 = other.f161
+        self.f162 = other.f162
+        self.f163 = other.f163
+        self.f164 = other.f164
+        self.f165 = other.f165
         return self
 
+    # Struct deep clone
     def clone(self):
         # Serialize the struct to the FBE stream
         writer = StructOptionalModel(fbe.WriteBuffer())
@@ -3940,9 +3951,11 @@ class StructOptional(StructSimple):
             None if "f165" not in fields else proto.Account.__from_json__(fields["f165"]),
         )
 
+    # Get struct JSON value
     def to_json(self):
         return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
 
+    # Create struct from JSON value
     @staticmethod
     def from_json(document):
         return StructOptional.__from_json__(json.loads(document))
@@ -7211,22 +7224,24 @@ class StructNested(StructOptional):
         self.f1010 = f1010
         self.f1011 = f1011
 
+    # Struct shallow copy
     def copy(self, other):
         super().copy(other)
-        self.f1000 = copy.deepcopy(other.f1000)
-        self.f1001 = copy.deepcopy(other.f1001)
-        self.f1002 = copy.deepcopy(other.f1002)
-        self.f1003 = copy.deepcopy(other.f1003)
-        self.f1004 = copy.deepcopy(other.f1004)
-        self.f1005 = copy.deepcopy(other.f1005)
-        self.f1006 = copy.deepcopy(other.f1006)
-        self.f1007 = copy.deepcopy(other.f1007)
-        self.f1008 = copy.deepcopy(other.f1008)
-        self.f1009 = copy.deepcopy(other.f1009)
-        self.f1010 = copy.deepcopy(other.f1010)
-        self.f1011 = copy.deepcopy(other.f1011)
+        self.f1000 = other.f1000
+        self.f1001 = other.f1001
+        self.f1002 = other.f1002
+        self.f1003 = other.f1003
+        self.f1004 = other.f1004
+        self.f1005 = other.f1005
+        self.f1006 = other.f1006
+        self.f1007 = other.f1007
+        self.f1008 = other.f1008
+        self.f1009 = other.f1009
+        self.f1010 = other.f1010
+        self.f1011 = other.f1011
         return self
 
+    # Struct deep clone
     def clone(self):
         # Serialize the struct to the FBE stream
         writer = StructNestedModel(fbe.WriteBuffer())
@@ -7351,9 +7366,11 @@ class StructNested(StructOptional):
             None if "f1011" not in fields else StructOptional.__from_json__(fields["f1011"]),
         )
 
+    # Get struct JSON value
     def to_json(self):
         return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
 
+    # Create struct from JSON value
     @staticmethod
     def from_json(document):
         return StructNested.__from_json__(json.loads(document))
@@ -8281,12 +8298,14 @@ class StructBytes(object):
         self.f2 = f2
         self.f3 = f3
 
+    # Struct shallow copy
     def copy(self, other):
-        self.f1 = copy.deepcopy(other.f1)
-        self.f2 = copy.deepcopy(other.f2)
-        self.f3 = copy.deepcopy(other.f3)
+        self.f1 = other.f1
+        self.f2 = other.f2
+        self.f3 = other.f3
         return self
 
+    # Struct deep clone
     def clone(self):
         # Serialize the struct to the FBE stream
         writer = StructBytesModel(fbe.WriteBuffer())
@@ -8363,9 +8382,11 @@ class StructBytes(object):
             None if "f3" not in fields else None if fields["f3"] is None else base64.b64decode(fields["f3"].encode('ascii')),
         )
 
+    # Get struct JSON value
     def to_json(self):
         return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
 
+    # Create struct from JSON value
     @staticmethod
     def from_json(document):
         return StructBytes.__from_json__(json.loads(document))
@@ -8891,19 +8912,21 @@ class StructArray(object):
         self.f9 = f9
         self.f10 = f10
 
+    # Struct shallow copy
     def copy(self, other):
-        self.f1 = copy.deepcopy(other.f1)
-        self.f2 = copy.deepcopy(other.f2)
-        self.f3 = copy.deepcopy(other.f3)
-        self.f4 = copy.deepcopy(other.f4)
-        self.f5 = copy.deepcopy(other.f5)
-        self.f6 = copy.deepcopy(other.f6)
-        self.f7 = copy.deepcopy(other.f7)
-        self.f8 = copy.deepcopy(other.f8)
-        self.f9 = copy.deepcopy(other.f9)
-        self.f10 = copy.deepcopy(other.f10)
+        self.f1 = other.f1
+        self.f2 = other.f2
+        self.f3 = other.f3
+        self.f4 = other.f4
+        self.f5 = other.f5
+        self.f6 = other.f6
+        self.f7 = other.f7
+        self.f8 = other.f8
+        self.f9 = other.f9
+        self.f10 = other.f10
         return self
 
+    # Struct deep clone
     def clone(self):
         # Serialize the struct to the FBE stream
         writer = StructArrayModel(fbe.WriteBuffer())
@@ -9105,9 +9128,11 @@ class StructArray(object):
             None if "f10" not in fields else [StructSimple.__from_json__(value) for value in fields["f10"]],
         )
 
+    # Get struct JSON value
     def to_json(self):
         return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
 
+    # Create struct from JSON value
     @staticmethod
     def from_json(document):
         return StructArray.__from_json__(json.loads(document))
@@ -9924,19 +9949,21 @@ class StructVector(object):
         self.f9 = f9
         self.f10 = f10
 
+    # Struct shallow copy
     def copy(self, other):
-        self.f1 = copy.deepcopy(other.f1)
-        self.f2 = copy.deepcopy(other.f2)
-        self.f3 = copy.deepcopy(other.f3)
-        self.f4 = copy.deepcopy(other.f4)
-        self.f5 = copy.deepcopy(other.f5)
-        self.f6 = copy.deepcopy(other.f6)
-        self.f7 = copy.deepcopy(other.f7)
-        self.f8 = copy.deepcopy(other.f8)
-        self.f9 = copy.deepcopy(other.f9)
-        self.f10 = copy.deepcopy(other.f10)
+        self.f1 = other.f1
+        self.f2 = other.f2
+        self.f3 = other.f3
+        self.f4 = other.f4
+        self.f5 = other.f5
+        self.f6 = other.f6
+        self.f7 = other.f7
+        self.f8 = other.f8
+        self.f9 = other.f9
+        self.f10 = other.f10
         return self
 
+    # Struct deep clone
     def clone(self):
         # Serialize the struct to the FBE stream
         writer = StructVectorModel(fbe.WriteBuffer())
@@ -10138,9 +10165,11 @@ class StructVector(object):
             None if "f10" not in fields else [StructSimple.__from_json__(value) for value in fields["f10"]],
         )
 
+    # Get struct JSON value
     def to_json(self):
         return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
 
+    # Create struct from JSON value
     @staticmethod
     def from_json(document):
         return StructVector.__from_json__(json.loads(document))
@@ -10957,19 +10986,21 @@ class StructList(object):
         self.f9 = f9
         self.f10 = f10
 
+    # Struct shallow copy
     def copy(self, other):
-        self.f1 = copy.deepcopy(other.f1)
-        self.f2 = copy.deepcopy(other.f2)
-        self.f3 = copy.deepcopy(other.f3)
-        self.f4 = copy.deepcopy(other.f4)
-        self.f5 = copy.deepcopy(other.f5)
-        self.f6 = copy.deepcopy(other.f6)
-        self.f7 = copy.deepcopy(other.f7)
-        self.f8 = copy.deepcopy(other.f8)
-        self.f9 = copy.deepcopy(other.f9)
-        self.f10 = copy.deepcopy(other.f10)
+        self.f1 = other.f1
+        self.f2 = other.f2
+        self.f3 = other.f3
+        self.f4 = other.f4
+        self.f5 = other.f5
+        self.f6 = other.f6
+        self.f7 = other.f7
+        self.f8 = other.f8
+        self.f9 = other.f9
+        self.f10 = other.f10
         return self
 
+    # Struct deep clone
     def clone(self):
         # Serialize the struct to the FBE stream
         writer = StructListModel(fbe.WriteBuffer())
@@ -11171,9 +11202,11 @@ class StructList(object):
             None if "f10" not in fields else [StructSimple.__from_json__(value) for value in fields["f10"]],
         )
 
+    # Get struct JSON value
     def to_json(self):
         return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
 
+    # Create struct from JSON value
     @staticmethod
     def from_json(document):
         return StructList.__from_json__(json.loads(document))
@@ -11972,13 +12005,15 @@ class StructSet(object):
         self.f3 = f3
         self.f4 = f4
 
+    # Struct shallow copy
     def copy(self, other):
-        self.f1 = copy.deepcopy(other.f1)
-        self.f2 = copy.deepcopy(other.f2)
-        self.f3 = copy.deepcopy(other.f3)
-        self.f4 = copy.deepcopy(other.f4)
+        self.f1 = other.f1
+        self.f2 = other.f2
+        self.f3 = other.f3
+        self.f4 = other.f4
         return self
 
+    # Struct deep clone
     def clone(self):
         # Serialize the struct to the FBE stream
         writer = StructSetModel(fbe.WriteBuffer())
@@ -12080,9 +12115,11 @@ class StructSet(object):
             None if "f4" not in fields else {StructSimple.__from_json__(value) for value in fields["f4"]},
         )
 
+    # Get struct JSON value
     def to_json(self):
         return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
 
+    # Create struct from JSON value
     @staticmethod
     def from_json(document):
         return StructSet.__from_json__(json.loads(document))
@@ -12647,19 +12684,21 @@ class StructMap(object):
         self.f9 = f9
         self.f10 = f10
 
+    # Struct shallow copy
     def copy(self, other):
-        self.f1 = copy.deepcopy(other.f1)
-        self.f2 = copy.deepcopy(other.f2)
-        self.f3 = copy.deepcopy(other.f3)
-        self.f4 = copy.deepcopy(other.f4)
-        self.f5 = copy.deepcopy(other.f5)
-        self.f6 = copy.deepcopy(other.f6)
-        self.f7 = copy.deepcopy(other.f7)
-        self.f8 = copy.deepcopy(other.f8)
-        self.f9 = copy.deepcopy(other.f9)
-        self.f10 = copy.deepcopy(other.f10)
+        self.f1 = other.f1
+        self.f2 = other.f2
+        self.f3 = other.f3
+        self.f4 = other.f4
+        self.f5 = other.f5
+        self.f6 = other.f6
+        self.f7 = other.f7
+        self.f8 = other.f8
+        self.f9 = other.f9
+        self.f10 = other.f10
         return self
 
+    # Struct deep clone
     def clone(self):
         # Serialize the struct to the FBE stream
         writer = StructMapModel(fbe.WriteBuffer())
@@ -12891,9 +12930,11 @@ class StructMap(object):
             None if "f10" not in fields else {key: StructSimple.__from_json__(value) for key, value in fields["f10"].items()},
         )
 
+    # Get struct JSON value
     def to_json(self):
         return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
 
+    # Create struct from JSON value
     @staticmethod
     def from_json(document):
         return StructMap.__from_json__(json.loads(document))
@@ -13710,19 +13751,21 @@ class StructHash(object):
         self.f9 = f9
         self.f10 = f10
 
+    # Struct shallow copy
     def copy(self, other):
-        self.f1 = copy.deepcopy(other.f1)
-        self.f2 = copy.deepcopy(other.f2)
-        self.f3 = copy.deepcopy(other.f3)
-        self.f4 = copy.deepcopy(other.f4)
-        self.f5 = copy.deepcopy(other.f5)
-        self.f6 = copy.deepcopy(other.f6)
-        self.f7 = copy.deepcopy(other.f7)
-        self.f8 = copy.deepcopy(other.f8)
-        self.f9 = copy.deepcopy(other.f9)
-        self.f10 = copy.deepcopy(other.f10)
+        self.f1 = other.f1
+        self.f2 = other.f2
+        self.f3 = other.f3
+        self.f4 = other.f4
+        self.f5 = other.f5
+        self.f6 = other.f6
+        self.f7 = other.f7
+        self.f8 = other.f8
+        self.f9 = other.f9
+        self.f10 = other.f10
         return self
 
+    # Struct deep clone
     def clone(self):
         # Serialize the struct to the FBE stream
         writer = StructHashModel(fbe.WriteBuffer())
@@ -14004,9 +14047,11 @@ class StructHash(object):
             None if "f10" not in fields else {key: StructSimple.__from_json__(value) for key, value in fields["f10"].items()},
         )
 
+    # Get struct JSON value
     def to_json(self):
         return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
 
+    # Create struct from JSON value
     @staticmethod
     def from_json(document):
         return StructHash.__from_json__(json.loads(document))
@@ -14799,11 +14844,13 @@ class StructHashEx(object):
         self.f1 = f1
         self.f2 = f2
 
+    # Struct shallow copy
     def copy(self, other):
-        self.f1 = copy.deepcopy(other.f1)
-        self.f2 = copy.deepcopy(other.f2)
+        self.f1 = other.f1
+        self.f2 = other.f2
         return self
 
+    # Struct deep clone
     def clone(self):
         # Serialize the struct to the FBE stream
         writer = StructHashExModel(fbe.WriteBuffer())
@@ -14888,9 +14935,11 @@ class StructHashEx(object):
             None if "f2" not in fields else {StructSimple.__from_json__(key): StructNested.__from_json__(value) for key, value in fields["f2"].items()},
         )
 
+    # Get struct JSON value
     def to_json(self):
         return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
 
+    # Create struct from JSON value
     @staticmethod
     def from_json(document):
         return StructHashEx.__from_json__(json.loads(document))

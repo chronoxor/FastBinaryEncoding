@@ -2,7 +2,6 @@
 # https://github.com/chronoxor/FastBinaryEncoding
 
 import base64
-import copy
 import decimal
 import enum
 import functools
@@ -1272,75 +1271,77 @@ class Enums(object):
         self.uint64b4 = uint64b4
         self.uint64b5 = uint64b5
 
+    # Struct shallow copy
     def copy(self, other):
-        self.byte0 = copy.deepcopy(other.byte0)
-        self.byte1 = copy.deepcopy(other.byte1)
-        self.byte2 = copy.deepcopy(other.byte2)
-        self.byte3 = copy.deepcopy(other.byte3)
-        self.byte4 = copy.deepcopy(other.byte4)
-        self.byte5 = copy.deepcopy(other.byte5)
-        self.char0 = copy.deepcopy(other.char0)
-        self.char1 = copy.deepcopy(other.char1)
-        self.char2 = copy.deepcopy(other.char2)
-        self.char3 = copy.deepcopy(other.char3)
-        self.char4 = copy.deepcopy(other.char4)
-        self.char5 = copy.deepcopy(other.char5)
-        self.wchar0 = copy.deepcopy(other.wchar0)
-        self.wchar1 = copy.deepcopy(other.wchar1)
-        self.wchar2 = copy.deepcopy(other.wchar2)
-        self.wchar3 = copy.deepcopy(other.wchar3)
-        self.wchar4 = copy.deepcopy(other.wchar4)
-        self.wchar5 = copy.deepcopy(other.wchar5)
-        self.int8b0 = copy.deepcopy(other.int8b0)
-        self.int8b1 = copy.deepcopy(other.int8b1)
-        self.int8b2 = copy.deepcopy(other.int8b2)
-        self.int8b3 = copy.deepcopy(other.int8b3)
-        self.int8b4 = copy.deepcopy(other.int8b4)
-        self.int8b5 = copy.deepcopy(other.int8b5)
-        self.uint8b0 = copy.deepcopy(other.uint8b0)
-        self.uint8b1 = copy.deepcopy(other.uint8b1)
-        self.uint8b2 = copy.deepcopy(other.uint8b2)
-        self.uint8b3 = copy.deepcopy(other.uint8b3)
-        self.uint8b4 = copy.deepcopy(other.uint8b4)
-        self.uint8b5 = copy.deepcopy(other.uint8b5)
-        self.int16b0 = copy.deepcopy(other.int16b0)
-        self.int16b1 = copy.deepcopy(other.int16b1)
-        self.int16b2 = copy.deepcopy(other.int16b2)
-        self.int16b3 = copy.deepcopy(other.int16b3)
-        self.int16b4 = copy.deepcopy(other.int16b4)
-        self.int16b5 = copy.deepcopy(other.int16b5)
-        self.uint16b0 = copy.deepcopy(other.uint16b0)
-        self.uint16b1 = copy.deepcopy(other.uint16b1)
-        self.uint16b2 = copy.deepcopy(other.uint16b2)
-        self.uint16b3 = copy.deepcopy(other.uint16b3)
-        self.uint16b4 = copy.deepcopy(other.uint16b4)
-        self.uint16b5 = copy.deepcopy(other.uint16b5)
-        self.int32b0 = copy.deepcopy(other.int32b0)
-        self.int32b1 = copy.deepcopy(other.int32b1)
-        self.int32b2 = copy.deepcopy(other.int32b2)
-        self.int32b3 = copy.deepcopy(other.int32b3)
-        self.int32b4 = copy.deepcopy(other.int32b4)
-        self.int32b5 = copy.deepcopy(other.int32b5)
-        self.uint32b0 = copy.deepcopy(other.uint32b0)
-        self.uint32b1 = copy.deepcopy(other.uint32b1)
-        self.uint32b2 = copy.deepcopy(other.uint32b2)
-        self.uint32b3 = copy.deepcopy(other.uint32b3)
-        self.uint32b4 = copy.deepcopy(other.uint32b4)
-        self.uint32b5 = copy.deepcopy(other.uint32b5)
-        self.int64b0 = copy.deepcopy(other.int64b0)
-        self.int64b1 = copy.deepcopy(other.int64b1)
-        self.int64b2 = copy.deepcopy(other.int64b2)
-        self.int64b3 = copy.deepcopy(other.int64b3)
-        self.int64b4 = copy.deepcopy(other.int64b4)
-        self.int64b5 = copy.deepcopy(other.int64b5)
-        self.uint64b0 = copy.deepcopy(other.uint64b0)
-        self.uint64b1 = copy.deepcopy(other.uint64b1)
-        self.uint64b2 = copy.deepcopy(other.uint64b2)
-        self.uint64b3 = copy.deepcopy(other.uint64b3)
-        self.uint64b4 = copy.deepcopy(other.uint64b4)
-        self.uint64b5 = copy.deepcopy(other.uint64b5)
+        self.byte0 = other.byte0
+        self.byte1 = other.byte1
+        self.byte2 = other.byte2
+        self.byte3 = other.byte3
+        self.byte4 = other.byte4
+        self.byte5 = other.byte5
+        self.char0 = other.char0
+        self.char1 = other.char1
+        self.char2 = other.char2
+        self.char3 = other.char3
+        self.char4 = other.char4
+        self.char5 = other.char5
+        self.wchar0 = other.wchar0
+        self.wchar1 = other.wchar1
+        self.wchar2 = other.wchar2
+        self.wchar3 = other.wchar3
+        self.wchar4 = other.wchar4
+        self.wchar5 = other.wchar5
+        self.int8b0 = other.int8b0
+        self.int8b1 = other.int8b1
+        self.int8b2 = other.int8b2
+        self.int8b3 = other.int8b3
+        self.int8b4 = other.int8b4
+        self.int8b5 = other.int8b5
+        self.uint8b0 = other.uint8b0
+        self.uint8b1 = other.uint8b1
+        self.uint8b2 = other.uint8b2
+        self.uint8b3 = other.uint8b3
+        self.uint8b4 = other.uint8b4
+        self.uint8b5 = other.uint8b5
+        self.int16b0 = other.int16b0
+        self.int16b1 = other.int16b1
+        self.int16b2 = other.int16b2
+        self.int16b3 = other.int16b3
+        self.int16b4 = other.int16b4
+        self.int16b5 = other.int16b5
+        self.uint16b0 = other.uint16b0
+        self.uint16b1 = other.uint16b1
+        self.uint16b2 = other.uint16b2
+        self.uint16b3 = other.uint16b3
+        self.uint16b4 = other.uint16b4
+        self.uint16b5 = other.uint16b5
+        self.int32b0 = other.int32b0
+        self.int32b1 = other.int32b1
+        self.int32b2 = other.int32b2
+        self.int32b3 = other.int32b3
+        self.int32b4 = other.int32b4
+        self.int32b5 = other.int32b5
+        self.uint32b0 = other.uint32b0
+        self.uint32b1 = other.uint32b1
+        self.uint32b2 = other.uint32b2
+        self.uint32b3 = other.uint32b3
+        self.uint32b4 = other.uint32b4
+        self.uint32b5 = other.uint32b5
+        self.int64b0 = other.int64b0
+        self.int64b1 = other.int64b1
+        self.int64b2 = other.int64b2
+        self.int64b3 = other.int64b3
+        self.int64b4 = other.int64b4
+        self.int64b5 = other.int64b5
+        self.uint64b0 = other.uint64b0
+        self.uint64b1 = other.uint64b1
+        self.uint64b2 = other.uint64b2
+        self.uint64b3 = other.uint64b3
+        self.uint64b4 = other.uint64b4
+        self.uint64b5 = other.uint64b5
         return self
 
+    # Struct deep clone
     def clone(self):
         # Serialize the struct to the FBE stream
         writer = EnumsModel(fbe.WriteBuffer())
@@ -1654,9 +1655,11 @@ class Enums(object):
             None if "uint64b5" not in fields else EnumUInt64.__from_json__(fields["uint64b5"]),
         )
 
+    # Get struct JSON value
     def to_json(self):
         return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
 
+    # Create struct from JSON value
     @staticmethod
     def from_json(document):
         return Enums.__from_json__(json.loads(document))

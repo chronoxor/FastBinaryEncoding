@@ -3560,7 +3560,7 @@ namespace test {
 
         public StructOptional(StructSimple parent, bool? f100, bool? f101, bool? f102, byte? f103, byte? f104, byte? f105, char? f106, char? f107, char? f108, char? f109, char? f110, char? f111, sbyte? f112, sbyte? f113, sbyte? f114, byte? f115, byte? f116, byte? f117, short? f118, short? f119, short? f120, ushort? f121, ushort? f122, ushort? f123, int? f124, int? f125, int? f126, uint? f127, uint? f128, uint? f129, long? f130, long? f131, long? f132, ulong? f133, ulong? f134, ulong? f135, float? f136, float? f137, float? f138, double? f139, double? f140, double? f141, decimal? f142, decimal? f143, decimal? f144, string f145, string f146, string f147, DateTime? f148, DateTime? f149, DateTime? f150, Guid? f151, Guid? f152, Guid? f153, global::proto.OrderSide? f154, global::proto.OrderSide? f155, global::proto.OrderType? f156, global::proto.OrderType? f157, global::proto.Order? f158, global::proto.Order? f159, global::proto.Balance? f160, global::proto.Balance? f161, global::proto.State? f162, global::proto.State? f163, global::proto.Account? f164, global::proto.Account? f165)
         {
-            this.parent = parent.Clone();
+            this.parent = parent;
             this.f100 = f100;
             this.f101 = f101;
             this.f102 = f102;
@@ -6659,7 +6659,7 @@ namespace test {
 
         public StructNested(StructOptional parent, EnumSimple f1000, EnumSimple? f1001, EnumTyped f1002, EnumTyped? f1003, FlagsSimple f1004, FlagsSimple? f1005, FlagsTyped f1006, FlagsTyped? f1007, StructSimple f1008, StructSimple? f1009, StructOptional f1010, StructOptional? f1011)
         {
-            this.parent = parent.Clone();
+            this.parent = parent;
             this.f1000 = f1000;
             this.f1001 = f1001;
             this.f1002 = f1002;
