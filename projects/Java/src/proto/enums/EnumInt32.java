@@ -10,6 +10,7 @@ import java.math.*;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
+
 import fbe.*;
 
 public final class EnumInt32 implements Comparable<EnumInt32>

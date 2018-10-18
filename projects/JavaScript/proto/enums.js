@@ -4,7 +4,6 @@
 const util = require('util')
 
 const big = require('./big')
-const fbe = require('./fbe')
 const int64 = require('./int64')
 const uuid = require('./uuid')
 
@@ -12,6 +11,8 @@ const Big = big.Big // eslint-disable-line
 const Int64 = int64.Int64 // eslint-disable-line
 const UInt64 = int64.UInt64 // eslint-disable-line
 const UUID = uuid.UUID // eslint-disable-line
+
+const fbe = require('./fbe')
 
 /**
  * EnumByte enum

@@ -5,11 +5,11 @@ import base64
 import decimal
 import enum
 import functools
-import fbe
 import json
 import sys
 import uuid
 
+import fbe
 from . import proto
 
 

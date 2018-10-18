@@ -14,7 +14,6 @@ require 'bigdecimal'
 require 'uuidtools'
 
 require_relative 'fbe'
-
 require_relative 'proto'
 
 module Protoex
@@ -33,7 +32,7 @@ module Protoex
 
       # Enum compare operators
       def ==(value) @value == value.value end
-      def !=(value) @value == value.value end
+      def !=(value) @value != value.value end
 
       # Get enum integer value
       def to_i
@@ -163,7 +162,7 @@ module Protoex
 
       # Enum compare operators
       def ==(value) @value == value.value end
-      def !=(value) @value == value.value end
+      def !=(value) @value != value.value end
 
       # Get enum integer value
       def to_i
@@ -303,7 +302,7 @@ module Protoex
 
       # Flags compare operators
       def ==(flags) @value == flags.value end
-      def !=(flags) @value == flags.value end
+      def !=(flags) @value != flags.value end
 
       # Flags bit operators
       def ~
@@ -667,7 +666,7 @@ module Protoex
       else
         result << 'null'
       end
-      result << ")"
+      result << ')'
       result
     end
   end
@@ -1035,7 +1034,7 @@ module Protoex
 
   # Fast Binary Encoding Order model class
   class OrderModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FieldModelOrder.new(self.buffer, 4)
     end
@@ -1390,7 +1389,7 @@ module Protoex
 
   # Fast Binary Encoding Order final model class
   class OrderFinalModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FinalModelOrder.new(self.buffer, 8)
     end
@@ -1537,7 +1536,7 @@ module Protoex
       else
         result << 'null'
       end
-      result << ")"
+      result << ')'
       result
     end
   end
@@ -1753,7 +1752,7 @@ module Protoex
 
   # Fast Binary Encoding Balance model class
   class BalanceModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FieldModelBalance.new(self.buffer, 4)
     end
@@ -1951,7 +1950,7 @@ module Protoex
 
   # Fast Binary Encoding Balance final model class
   class BalanceFinalModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FinalModelBalance.new(self.buffer, 8)
     end
@@ -2149,7 +2148,7 @@ module Protoex
         end
         result << ']'
       end
-      result << ")"
+      result << ')'
       result
     end
   end
@@ -2467,7 +2466,7 @@ module Protoex
 
   # Fast Binary Encoding Account model class
   class AccountModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FieldModelAccount.new(self.buffer, 4)
     end
@@ -2769,7 +2768,7 @@ module Protoex
 
   # Fast Binary Encoding Account final model class
   class AccountFinalModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FinalModelAccount.new(self.buffer, 8)
     end
@@ -2835,6 +2834,442 @@ module Protoex
     # Move to the next struct value
     def next(prev)
       @_model.fbe_shift(prev)
+    end
+  end
+
+  # Fast Binary Encoding Protoex sender class
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class Sender < FBE::Sender
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer, false, false)
+      @_proto_sender = Proto::Sender.new(self.buffer)
+      @_order_model = OrderModel.new(self.buffer)
+      @_balance_model = BalanceModel.new(self.buffer)
+      @_account_model = AccountModel.new(self.buffer)
+    end
+
+    # Imported senders
+
+    def proto_sender
+      @_proto_sender
+    end
+
+    # Sender models accessors
+
+    def order_model
+      @_order_model
+    end
+
+    def balance_model
+      @_balance_model
+    end
+
+    def account_model
+      @_account_model
+    end
+
+    # Send methods
+
+    def send(value)
+      if value.is_a?(Order)
+        return send_order(value)
+      end
+      if value.is_a?(Balance)
+        return send_balance(value)
+      end
+      if value.is_a?(Account)
+        return send_account(value)
+      end
+      result = @_proto_sender.send(value)
+      if result > 0
+        return result
+      end
+      0
+    end
+
+    def send_order(value)
+      # Serialize the value into the FBE stream
+      serialized = order_model.serialize(value)
+      raise RuntimeError, "Protoex.Order serialization failed!" if serialized <= 0
+      raise RuntimeError, "Protoex.Order validation failed!" unless order_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_balance(value)
+      # Serialize the value into the FBE stream
+      serialized = balance_model.serialize(value)
+      raise RuntimeError, "Protoex.Balance serialization failed!" if serialized <= 0
+      raise RuntimeError, "Protoex.Balance validation failed!" unless balance_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_account(value)
+      # Serialize the value into the FBE stream
+      serialized = account_model.serialize(value)
+      raise RuntimeError, "Protoex.Account serialization failed!" if serialized <= 0
+      raise RuntimeError, "Protoex.Account validation failed!" unless account_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    # Send message handler
+    def on_send(buffer, offset, size)
+      raise NotImplementedError, "Protoex.Sender.on_send() not implemented!"
+    end
+  end
+
+  # Fast Binary Encoding Protoex receiver class
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class Receiver < FBE::Receiver
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer, false, false)
+      @_proto_receiver = Proto::Receiver.new(self.buffer)
+      @_order_value = Order.new
+      @_order_model = OrderModel.new
+      @_balance_value = Balance.new
+      @_balance_model = BalanceModel.new
+      @_account_value = Account.new
+      @_account_model = AccountModel.new
+    end
+
+    # Imported receivers
+
+    def proto_receiver
+      @_proto_receiver
+    end
+
+    def proto_receiver=(receiver)
+      @_proto_receiver = receiver
+    end
+
+    # Receive handlers
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_order(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_balance(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_account(value)
+    end
+
+    def on_receive(fbe_type, buffer, offset, size)
+
+      if fbe_type == OrderModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_order_model.attach_buffer(buffer, offset)
+        unless @_order_model.verify
+          return false
+        end
+        _, deserialized = @_order_model.deserialize(@_order_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_order_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_order(@_order_value)
+        true
+      end
+
+      if fbe_type == BalanceModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_balance_model.attach_buffer(buffer, offset)
+        unless @_balance_model.verify
+          return false
+        end
+        _, deserialized = @_balance_model.deserialize(@_balance_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_balance_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_balance(@_balance_value)
+        true
+      end
+
+      if fbe_type == AccountModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_account_model.attach_buffer(buffer, offset)
+        unless @_account_model.verify
+          return false
+        end
+        _, deserialized = @_account_model.deserialize(@_account_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_account_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_account(@_account_value)
+        true
+      end
+
+      if !proto_receiver.nil? && proto_receiver.on_receive(type, buffer, offset, size)
+        return true
+      end
+
+      false
+    end
+  end
+
+  # Fast Binary Encoding Protoex final sender class
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalSender < FBE::Sender
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer, false, true)
+      @_proto_sender = Proto::FinalSender.new(self.buffer)
+      @_order_model = OrderFinalModel.new(self.buffer)
+      @_balance_model = BalanceFinalModel.new(self.buffer)
+      @_account_model = AccountFinalModel.new(self.buffer)
+    end
+
+    # Imported senders
+
+    def proto_sender
+      @_proto_sender
+    end
+
+    # Sender models accessors
+
+    def order_model
+      @_order_model
+    end
+
+    def balance_model
+      @_balance_model
+    end
+
+    def account_model
+      @_account_model
+    end
+
+    # Send methods
+
+    def send(value)
+      if value.is_a?(Order)
+        return send_order(value)
+      end
+      if value.is_a?(Balance)
+        return send_balance(value)
+      end
+      if value.is_a?(Account)
+        return send_account(value)
+      end
+      result = @_proto_sender.send(value)
+      if result > 0
+        return result
+      end
+      0
+    end
+
+    def send_order(value)
+      # Serialize the value into the FBE stream
+      serialized = order_model.serialize(value)
+      raise RuntimeError, "Protoex.Order serialization failed!" if serialized <= 0
+      raise RuntimeError, "Protoex.Order validation failed!" unless order_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_balance(value)
+      # Serialize the value into the FBE stream
+      serialized = balance_model.serialize(value)
+      raise RuntimeError, "Protoex.Balance serialization failed!" if serialized <= 0
+      raise RuntimeError, "Protoex.Balance validation failed!" unless balance_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_account(value)
+      # Serialize the value into the FBE stream
+      serialized = account_model.serialize(value)
+      raise RuntimeError, "Protoex.Account serialization failed!" if serialized <= 0
+      raise RuntimeError, "Protoex.Account validation failed!" unless account_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    # Send message handler
+    def on_send(buffer, offset, size)
+      raise NotImplementedError, "Protoex.Sender.on_send() not implemented!"
+    end
+  end
+
+  # Fast Binary Encoding Protoex final receiver class
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalReceiver < FBE::Receiver
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer, false, true)
+      @_proto_receiver = Proto::FinalReceiver.new(self.buffer)
+      @_order_value = Order.new
+      @_order_model = OrderFinalModel.new
+      @_balance_value = Balance.new
+      @_balance_model = BalanceFinalModel.new
+      @_account_value = Account.new
+      @_account_model = AccountFinalModel.new
+    end
+
+    # Imported receivers
+
+    def proto_receiver
+      @_proto_receiver
+    end
+
+    def proto_receiver=(receiver)
+      @_proto_receiver = receiver
+    end
+
+    # Receive handlers
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_order(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_balance(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_account(value)
+    end
+
+    def on_receive(fbe_type, buffer, offset, size)
+
+      if fbe_type == OrderFinalModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_order_model.attach_buffer(buffer, offset)
+        unless @_order_model.verify
+          return false
+        end
+        _, deserialized = @_order_model.deserialize(@_order_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_order_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_order(@_order_value)
+        true
+      end
+
+      if fbe_type == BalanceFinalModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_balance_model.attach_buffer(buffer, offset)
+        unless @_balance_model.verify
+          return false
+        end
+        _, deserialized = @_balance_model.deserialize(@_balance_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_balance_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_balance(@_balance_value)
+        true
+      end
+
+      if fbe_type == AccountFinalModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_account_model.attach_buffer(buffer, offset)
+        unless @_account_model.verify
+          return false
+        end
+        _, deserialized = @_account_model.deserialize(@_account_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_account_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_account(@_account_value)
+        true
+      end
+
+      if !proto_receiver.nil? && proto_receiver.on_receive(type, buffer, offset, size)
+        return true
+      end
+
+      false
     end
   end
 

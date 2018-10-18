@@ -14,7 +14,6 @@ require 'bigdecimal'
 require 'uuidtools'
 
 require_relative 'fbe'
-
 require_relative 'proto'
 
 module Test
@@ -36,7 +35,7 @@ module Test
 
       # Enum compare operators
       def ==(value) @value == value.value end
-      def !=(value) @value == value.value end
+      def !=(value) @value != value.value end
 
       # Get enum integer value
       def to_i
@@ -183,7 +182,7 @@ module Test
 
       # Enum compare operators
       def ==(value) @value == value.value end
-      def !=(value) @value == value.value end
+      def !=(value) @value != value.value end
 
       # Get enum integer value
       def to_i
@@ -330,7 +329,7 @@ module Test
 
       # Flags compare operators
       def ==(flags) @value == flags.value end
-      def !=(flags) @value == flags.value end
+      def !=(flags) @value != flags.value end
 
       # Flags bit operators
       def ~
@@ -544,7 +543,7 @@ module Test
 
       # Flags compare operators
       def ==(flags) @value == flags.value end
-      def !=(flags) @value == flags.value end
+      def !=(flags) @value != flags.value end
 
       # Flags bit operators
       def ~
@@ -829,7 +828,7 @@ module Test
     attr_accessor :f43
     attr_accessor :f44
 
-    def initialize(uid = 0, f1 = false, f2 = true, f3 = 0, f4 = 255, f5 = "\0", f6 = '!', f7 = "\0", f8 = 0x0444.chr(Encoding::UTF_8), f9 = 0, f10 = 127, f11 = 0, f12 = 255, f13 = 0, f14 = 32767, f15 = 0, f16 = 65535, f17 = 0, f18 = 2147483647, f19 = 0, f20 = 0xFFFFFFFF, f21 = 0, f22 = 9223372036854775807, f23 = 0, f24 = 0xFFFFFFFFFFFFFFFF, f25 = 0.0, f26 = 123.456, f27 = 0.0, f28 = -123.456e+123, f29 = BigDecimal.new(0), f30 = BigDecimal.new("123456.123456"), f31 = '', f32 = "Initial string!", f33 = Time.utc(1970), f34 = Time.utc(1970), f35 = Time.now.utc, f36 = UUIDTools::UUID.parse_int(0), f37 = UUIDTools::UUID.timestamp_create, f38 = UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000"), f39 = Proto::OrderSide.new, f40 = Proto::OrderType.new, f41 = Proto::Order.new, f42 = Proto::Balance.new, f43 = Proto::State.new, f44 = Proto::Account.new)
+    def initialize(uid = 0, f1 = false, f2 = true, f3 = 0, f4 = 255, f5 = "\0", f6 = '!', f7 = "\0", f8 = 0x0444.chr(Encoding::UTF_8), f9 = 0, f10 = 127, f11 = 0, f12 = 255, f13 = 0, f14 = 32767, f15 = 0, f16 = 65535, f17 = 0, f18 = 2147483647, f19 = 0, f20 = 0xFFFFFFFF, f21 = 0, f22 = 9223372036854775807, f23 = 0, f24 = 0xFFFFFFFFFFFFFFFF, f25 = 0.0, f26 = 123.456, f27 = 0.0, f28 = -123.456e+123, f29 = BigDecimal.new(0), f30 = BigDecimal.new('123456.123456'), f31 = '', f32 = "Initial string!", f33 = Time.utc(1970), f34 = Time.utc(1970), f35 = Time.now.utc, f36 = UUIDTools::UUID.parse_int(0), f37 = UUIDTools::UUID.timestamp_create, f38 = UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000"), f39 = Proto::OrderSide.new, f40 = Proto::OrderType.new, f41 = Proto::Order.new, f42 = Proto::Balance.new, f43 = Proto::State.new, f44 = Proto::Account.new)
       @uid = uid
       @f1 = f1
       @f2 = f2
@@ -1252,7 +1251,7 @@ module Test
       else
         result << 'null'
       end
-      result << ")"
+      result << ')'
       result
     end
   end
@@ -2337,9 +2336,9 @@ module Test
       fbe_current_size += f29.fbe_size
 
       if (fbe_current_size + f30.fbe_size) <= fbe_struct_size
-        fbe_value.f30 = f30.get(BigDecimal.new("123456.123456"))
+        fbe_value.f30 = f30.get(BigDecimal.new('123456.123456'))
       else
-        fbe_value.f30 = BigDecimal.new("123456.123456")
+        fbe_value.f30 = BigDecimal.new('123456.123456')
       end
       # noinspection RubyUnusedLocalVariable
       fbe_current_size += f30.fbe_size
@@ -2545,7 +2544,7 @@ module Test
 
   # Fast Binary Encoding StructSimple model class
   class StructSimpleModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FieldModelStructSimple.new(self.buffer, 4)
     end
@@ -3862,7 +3861,7 @@ module Test
 
   # Fast Binary Encoding StructSimple final model class
   class StructSimpleFinalModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FinalModelStructSimple.new(self.buffer, 8)
     end
@@ -4000,7 +3999,7 @@ module Test
     attr_accessor :f164
     attr_accessor :f165
 
-    def initialize(parent = StructSimple.new, f100 = nil, f101 = true, f102 = nil, f103 = nil, f104 = 255, f105 = nil, f106 = nil, f107 = '!', f108 = nil, f109 = nil, f110 = 0x0444.chr(Encoding::UTF_8), f111 = nil, f112 = nil, f113 = 127, f114 = nil, f115 = nil, f116 = 255, f117 = nil, f118 = nil, f119 = 32767, f120 = nil, f121 = nil, f122 = 65535, f123 = nil, f124 = nil, f125 = 2147483647, f126 = nil, f127 = nil, f128 = 0xFFFFFFFF, f129 = nil, f130 = nil, f131 = 9223372036854775807, f132 = nil, f133 = nil, f134 = 0xFFFFFFFFFFFFFFFF, f135 = nil, f136 = nil, f137 = 123.456, f138 = nil, f139 = nil, f140 = -123.456e+123, f141 = nil, f142 = nil, f143 = BigDecimal.new("123456.123456"), f144 = nil, f145 = nil, f146 = "Initial string!", f147 = nil, f148 = nil, f149 = Time.now.utc, f150 = nil, f151 = nil, f152 = UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000"), f153 = nil, f154 = nil, f155 = nil, f156 = nil, f157 = nil, f158 = nil, f159 = nil, f160 = nil, f161 = nil, f162 = nil, f163 = nil, f164 = nil, f165 = nil)
+    def initialize(parent = StructSimple.new, f100 = nil, f101 = true, f102 = nil, f103 = nil, f104 = 255, f105 = nil, f106 = nil, f107 = '!', f108 = nil, f109 = nil, f110 = 0x0444.chr(Encoding::UTF_8), f111 = nil, f112 = nil, f113 = 127, f114 = nil, f115 = nil, f116 = 255, f117 = nil, f118 = nil, f119 = 32767, f120 = nil, f121 = nil, f122 = 65535, f123 = nil, f124 = nil, f125 = 2147483647, f126 = nil, f127 = nil, f128 = 0xFFFFFFFF, f129 = nil, f130 = nil, f131 = 9223372036854775807, f132 = nil, f133 = nil, f134 = 0xFFFFFFFFFFFFFFFF, f135 = nil, f136 = nil, f137 = 123.456, f138 = nil, f139 = nil, f140 = -123.456e+123, f141 = nil, f142 = nil, f143 = BigDecimal.new('123456.123456'), f144 = nil, f145 = nil, f146 = "Initial string!", f147 = nil, f148 = nil, f149 = Time.now.utc, f150 = nil, f151 = nil, f152 = UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000"), f153 = nil, f154 = nil, f155 = nil, f156 = nil, f157 = nil, f158 = nil, f159 = nil, f160 = nil, f161 = nil, f162 = nil, f163 = nil, f164 = nil, f165 = nil)
       method(:copy).super_method.call(parent)
       @f100 = f100
       @f101 = f101
@@ -4594,7 +4593,7 @@ module Test
       else
         result << 'null'
       end
-      result << ")"
+      result << ')'
       result
     end
   end
@@ -6141,9 +6140,9 @@ module Test
       fbe_current_size += f142.fbe_size
 
       if (fbe_current_size + f143.fbe_size) <= fbe_struct_size
-        fbe_value.f143 = f143.get(BigDecimal.new("123456.123456"))
+        fbe_value.f143 = f143.get(BigDecimal.new('123456.123456'))
       else
-        fbe_value.f143 = BigDecimal.new("123456.123456")
+        fbe_value.f143 = BigDecimal.new('123456.123456')
       end
       # noinspection RubyUnusedLocalVariable
       fbe_current_size += f143.fbe_size
@@ -6435,7 +6434,7 @@ module Test
 
   # Fast Binary Encoding StructOptional model class
   class StructOptionalModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FieldModelStructOptional.new(self.buffer, 4)
     end
@@ -8323,7 +8322,7 @@ module Test
 
   # Fast Binary Encoding StructOptional final model class
   class StructOptionalFinalModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FinalModelStructOptional.new(self.buffer, 8)
     end
@@ -8569,7 +8568,7 @@ module Test
       else
         result << 'null'
       end
-      result << ")"
+      result << ')'
       result
     end
   end
@@ -9060,7 +9059,7 @@ module Test
 
   # Fast Binary Encoding StructNested model class
   class StructNestedModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FieldModelStructNested.new(self.buffer, 4)
     end
@@ -9544,7 +9543,7 @@ module Test
 
   # Fast Binary Encoding StructNested final model class
   class StructNestedFinalModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FinalModelStructNested.new(self.buffer, 8)
     end
@@ -9701,7 +9700,7 @@ module Test
       else
         result << 'null'
       end
-      result << ")"
+      result << ')'
       result
     end
   end
@@ -9944,7 +9943,7 @@ module Test
 
   # Fast Binary Encoding StructBytes model class
   class StructBytesModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FieldModelStructBytes.new(self.buffer, 4)
     end
@@ -10169,7 +10168,7 @@ module Test
 
   # Fast Binary Encoding StructBytes final model class
   class StructBytesFinalModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FinalModelStructBytes.new(self.buffer, 8)
     end
@@ -10479,7 +10478,7 @@ module Test
         end
         result << ']'
       end
-      result << ")"
+      result << ')'
       result
     end
   end
@@ -10897,7 +10896,7 @@ module Test
 
   # Fast Binary Encoding StructArray model class
   class StructArrayModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FieldModelStructArray.new(self.buffer, 4)
     end
@@ -11294,7 +11293,7 @@ module Test
 
   # Fast Binary Encoding StructArray final model class
   class StructArrayFinalModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FinalModelStructArray.new(self.buffer, 8)
     end
@@ -11604,7 +11603,7 @@ module Test
         end
         result << ']'
       end
-      result << ")"
+      result << ')'
       result
     end
   end
@@ -12022,7 +12021,7 @@ module Test
 
   # Fast Binary Encoding StructVector model class
   class StructVectorModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FieldModelStructVector.new(self.buffer, 4)
     end
@@ -12419,7 +12418,7 @@ module Test
 
   # Fast Binary Encoding StructVector final model class
   class StructVectorFinalModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FinalModelStructVector.new(self.buffer, 8)
     end
@@ -12729,7 +12728,7 @@ module Test
         end
         result << '>'
       end
-      result << ")"
+      result << ')'
       result
     end
   end
@@ -13147,7 +13146,7 @@ module Test
 
   # Fast Binary Encoding StructList model class
   class StructListModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FieldModelStructList.new(self.buffer, 4)
     end
@@ -13544,7 +13543,7 @@ module Test
 
   # Fast Binary Encoding StructList final model class
   class StructListFinalModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FinalModelStructList.new(self.buffer, 8)
     end
@@ -13746,7 +13745,7 @@ module Test
         end
         result << '}'
       end
-      result << ")"
+      result << ')'
       result
     end
   end
@@ -14014,7 +14013,7 @@ module Test
 
   # Fast Binary Encoding StructSet model class
   class StructSetModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FieldModelStructSet.new(self.buffer, 4)
     end
@@ -14261,7 +14260,7 @@ module Test
 
   # Fast Binary Encoding StructSet final model class
   class StructSetFinalModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FinalModelStructSet.new(self.buffer, 8)
     end
@@ -14641,7 +14640,7 @@ module Test
         end
         result << '}>'
       end
-      result << ")"
+      result << ')'
       result
     end
   end
@@ -15059,7 +15058,7 @@ module Test
 
   # Fast Binary Encoding StructMap model class
   class StructMapModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FieldModelStructMap.new(self.buffer, 4)
     end
@@ -15456,7 +15455,7 @@ module Test
 
   # Fast Binary Encoding StructMap final model class
   class StructMapFinalModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FinalModelStructMap.new(self.buffer, 8)
     end
@@ -15836,7 +15835,7 @@ module Test
         end
         result << '}]'
       end
-      result << ")"
+      result << ')'
       result
     end
   end
@@ -16254,7 +16253,7 @@ module Test
 
   # Fast Binary Encoding StructHash model class
   class StructHashModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FieldModelStructHash.new(self.buffer, 4)
     end
@@ -16651,7 +16650,7 @@ module Test
 
   # Fast Binary Encoding StructHash final model class
   class StructHashFinalModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FinalModelStructHash.new(self.buffer, 8)
     end
@@ -16831,7 +16830,7 @@ module Test
         end
         result << '}]'
       end
-      result << ")"
+      result << ')'
       result
     end
   end
@@ -17049,7 +17048,7 @@ module Test
 
   # Fast Binary Encoding StructHashEx model class
   class StructHashExModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FieldModelStructHashEx.new(self.buffer, 4)
     end
@@ -17246,7 +17245,7 @@ module Test
 
   # Fast Binary Encoding StructHashEx final model class
   class StructHashExFinalModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FinalModelStructHashEx.new(self.buffer, 8)
     end
@@ -17312,6 +17311,1274 @@ module Test
     # Move to the next struct value
     def next(prev)
       @_model.fbe_shift(prev)
+    end
+  end
+
+  # Fast Binary Encoding Test sender class
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class Sender < FBE::Sender
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer, false, false)
+      @_proto_sender = Proto::Sender.new(self.buffer)
+      @_structsimple_model = StructSimpleModel.new(self.buffer)
+      @_structoptional_model = StructOptionalModel.new(self.buffer)
+      @_structnested_model = StructNestedModel.new(self.buffer)
+      @_structbytes_model = StructBytesModel.new(self.buffer)
+      @_structarray_model = StructArrayModel.new(self.buffer)
+      @_structvector_model = StructVectorModel.new(self.buffer)
+      @_structlist_model = StructListModel.new(self.buffer)
+      @_structset_model = StructSetModel.new(self.buffer)
+      @_structmap_model = StructMapModel.new(self.buffer)
+      @_structhash_model = StructHashModel.new(self.buffer)
+      @_structhashex_model = StructHashExModel.new(self.buffer)
+    end
+
+    # Imported senders
+
+    def proto_sender
+      @_proto_sender
+    end
+
+    # Sender models accessors
+
+    def structsimple_model
+      @_structsimple_model
+    end
+
+    def structoptional_model
+      @_structoptional_model
+    end
+
+    def structnested_model
+      @_structnested_model
+    end
+
+    def structbytes_model
+      @_structbytes_model
+    end
+
+    def structarray_model
+      @_structarray_model
+    end
+
+    def structvector_model
+      @_structvector_model
+    end
+
+    def structlist_model
+      @_structlist_model
+    end
+
+    def structset_model
+      @_structset_model
+    end
+
+    def structmap_model
+      @_structmap_model
+    end
+
+    def structhash_model
+      @_structhash_model
+    end
+
+    def structhashex_model
+      @_structhashex_model
+    end
+
+    # Send methods
+
+    def send(value)
+      if value.is_a?(StructSimple)
+        return send_structsimple(value)
+      end
+      if value.is_a?(StructOptional)
+        return send_structoptional(value)
+      end
+      if value.is_a?(StructNested)
+        return send_structnested(value)
+      end
+      if value.is_a?(StructBytes)
+        return send_structbytes(value)
+      end
+      if value.is_a?(StructArray)
+        return send_structarray(value)
+      end
+      if value.is_a?(StructVector)
+        return send_structvector(value)
+      end
+      if value.is_a?(StructList)
+        return send_structlist(value)
+      end
+      if value.is_a?(StructSet)
+        return send_structset(value)
+      end
+      if value.is_a?(StructMap)
+        return send_structmap(value)
+      end
+      if value.is_a?(StructHash)
+        return send_structhash(value)
+      end
+      if value.is_a?(StructHashEx)
+        return send_structhashex(value)
+      end
+      result = @_proto_sender.send(value)
+      if result > 0
+        return result
+      end
+      0
+    end
+
+    def send_structsimple(value)
+      # Serialize the value into the FBE stream
+      serialized = structsimple_model.serialize(value)
+      raise RuntimeError, "Test.StructSimple serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructSimple validation failed!" unless structsimple_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structoptional(value)
+      # Serialize the value into the FBE stream
+      serialized = structoptional_model.serialize(value)
+      raise RuntimeError, "Test.StructOptional serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructOptional validation failed!" unless structoptional_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structnested(value)
+      # Serialize the value into the FBE stream
+      serialized = structnested_model.serialize(value)
+      raise RuntimeError, "Test.StructNested serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructNested validation failed!" unless structnested_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structbytes(value)
+      # Serialize the value into the FBE stream
+      serialized = structbytes_model.serialize(value)
+      raise RuntimeError, "Test.StructBytes serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructBytes validation failed!" unless structbytes_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structarray(value)
+      # Serialize the value into the FBE stream
+      serialized = structarray_model.serialize(value)
+      raise RuntimeError, "Test.StructArray serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructArray validation failed!" unless structarray_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structvector(value)
+      # Serialize the value into the FBE stream
+      serialized = structvector_model.serialize(value)
+      raise RuntimeError, "Test.StructVector serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructVector validation failed!" unless structvector_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structlist(value)
+      # Serialize the value into the FBE stream
+      serialized = structlist_model.serialize(value)
+      raise RuntimeError, "Test.StructList serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructList validation failed!" unless structlist_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structset(value)
+      # Serialize the value into the FBE stream
+      serialized = structset_model.serialize(value)
+      raise RuntimeError, "Test.StructSet serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructSet validation failed!" unless structset_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structmap(value)
+      # Serialize the value into the FBE stream
+      serialized = structmap_model.serialize(value)
+      raise RuntimeError, "Test.StructMap serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructMap validation failed!" unless structmap_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structhash(value)
+      # Serialize the value into the FBE stream
+      serialized = structhash_model.serialize(value)
+      raise RuntimeError, "Test.StructHash serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructHash validation failed!" unless structhash_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structhashex(value)
+      # Serialize the value into the FBE stream
+      serialized = structhashex_model.serialize(value)
+      raise RuntimeError, "Test.StructHashEx serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructHashEx validation failed!" unless structhashex_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    # Send message handler
+    def on_send(buffer, offset, size)
+      raise NotImplementedError, "Test.Sender.on_send() not implemented!"
+    end
+  end
+
+  # Fast Binary Encoding Test receiver class
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class Receiver < FBE::Receiver
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer, false, false)
+      @_proto_receiver = Proto::Receiver.new(self.buffer)
+      @_structsimple_value = StructSimple.new
+      @_structsimple_model = StructSimpleModel.new
+      @_structoptional_value = StructOptional.new
+      @_structoptional_model = StructOptionalModel.new
+      @_structnested_value = StructNested.new
+      @_structnested_model = StructNestedModel.new
+      @_structbytes_value = StructBytes.new
+      @_structbytes_model = StructBytesModel.new
+      @_structarray_value = StructArray.new
+      @_structarray_model = StructArrayModel.new
+      @_structvector_value = StructVector.new
+      @_structvector_model = StructVectorModel.new
+      @_structlist_value = StructList.new
+      @_structlist_model = StructListModel.new
+      @_structset_value = StructSet.new
+      @_structset_model = StructSetModel.new
+      @_structmap_value = StructMap.new
+      @_structmap_model = StructMapModel.new
+      @_structhash_value = StructHash.new
+      @_structhash_model = StructHashModel.new
+      @_structhashex_value = StructHashEx.new
+      @_structhashex_model = StructHashExModel.new
+    end
+
+    # Imported receivers
+
+    def proto_receiver
+      @_proto_receiver
+    end
+
+    def proto_receiver=(receiver)
+      @_proto_receiver = receiver
+    end
+
+    # Receive handlers
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structsimple(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structoptional(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structnested(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structbytes(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structarray(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structvector(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structlist(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structset(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structmap(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structhash(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structhashex(value)
+    end
+
+    def on_receive(fbe_type, buffer, offset, size)
+
+      if fbe_type == StructSimpleModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structsimple_model.attach_buffer(buffer, offset)
+        unless @_structsimple_model.verify
+          return false
+        end
+        _, deserialized = @_structsimple_model.deserialize(@_structsimple_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structsimple_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structsimple(@_structsimple_value)
+        true
+      end
+
+      if fbe_type == StructOptionalModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structoptional_model.attach_buffer(buffer, offset)
+        unless @_structoptional_model.verify
+          return false
+        end
+        _, deserialized = @_structoptional_model.deserialize(@_structoptional_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structoptional_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structoptional(@_structoptional_value)
+        true
+      end
+
+      if fbe_type == StructNestedModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structnested_model.attach_buffer(buffer, offset)
+        unless @_structnested_model.verify
+          return false
+        end
+        _, deserialized = @_structnested_model.deserialize(@_structnested_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structnested_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structnested(@_structnested_value)
+        true
+      end
+
+      if fbe_type == StructBytesModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structbytes_model.attach_buffer(buffer, offset)
+        unless @_structbytes_model.verify
+          return false
+        end
+        _, deserialized = @_structbytes_model.deserialize(@_structbytes_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structbytes_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structbytes(@_structbytes_value)
+        true
+      end
+
+      if fbe_type == StructArrayModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structarray_model.attach_buffer(buffer, offset)
+        unless @_structarray_model.verify
+          return false
+        end
+        _, deserialized = @_structarray_model.deserialize(@_structarray_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structarray_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structarray(@_structarray_value)
+        true
+      end
+
+      if fbe_type == StructVectorModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structvector_model.attach_buffer(buffer, offset)
+        unless @_structvector_model.verify
+          return false
+        end
+        _, deserialized = @_structvector_model.deserialize(@_structvector_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structvector_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structvector(@_structvector_value)
+        true
+      end
+
+      if fbe_type == StructListModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structlist_model.attach_buffer(buffer, offset)
+        unless @_structlist_model.verify
+          return false
+        end
+        _, deserialized = @_structlist_model.deserialize(@_structlist_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structlist_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structlist(@_structlist_value)
+        true
+      end
+
+      if fbe_type == StructSetModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structset_model.attach_buffer(buffer, offset)
+        unless @_structset_model.verify
+          return false
+        end
+        _, deserialized = @_structset_model.deserialize(@_structset_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structset_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structset(@_structset_value)
+        true
+      end
+
+      if fbe_type == StructMapModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structmap_model.attach_buffer(buffer, offset)
+        unless @_structmap_model.verify
+          return false
+        end
+        _, deserialized = @_structmap_model.deserialize(@_structmap_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structmap_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structmap(@_structmap_value)
+        true
+      end
+
+      if fbe_type == StructHashModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structhash_model.attach_buffer(buffer, offset)
+        unless @_structhash_model.verify
+          return false
+        end
+        _, deserialized = @_structhash_model.deserialize(@_structhash_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structhash_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structhash(@_structhash_value)
+        true
+      end
+
+      if fbe_type == StructHashExModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structhashex_model.attach_buffer(buffer, offset)
+        unless @_structhashex_model.verify
+          return false
+        end
+        _, deserialized = @_structhashex_model.deserialize(@_structhashex_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structhashex_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structhashex(@_structhashex_value)
+        true
+      end
+
+      if !proto_receiver.nil? && proto_receiver.on_receive(type, buffer, offset, size)
+        return true
+      end
+
+      false
+    end
+  end
+
+  # Fast Binary Encoding Test final sender class
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalSender < FBE::Sender
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer, false, true)
+      @_proto_sender = Proto::FinalSender.new(self.buffer)
+      @_structsimple_model = StructSimpleFinalModel.new(self.buffer)
+      @_structoptional_model = StructOptionalFinalModel.new(self.buffer)
+      @_structnested_model = StructNestedFinalModel.new(self.buffer)
+      @_structbytes_model = StructBytesFinalModel.new(self.buffer)
+      @_structarray_model = StructArrayFinalModel.new(self.buffer)
+      @_structvector_model = StructVectorFinalModel.new(self.buffer)
+      @_structlist_model = StructListFinalModel.new(self.buffer)
+      @_structset_model = StructSetFinalModel.new(self.buffer)
+      @_structmap_model = StructMapFinalModel.new(self.buffer)
+      @_structhash_model = StructHashFinalModel.new(self.buffer)
+      @_structhashex_model = StructHashExFinalModel.new(self.buffer)
+    end
+
+    # Imported senders
+
+    def proto_sender
+      @_proto_sender
+    end
+
+    # Sender models accessors
+
+    def structsimple_model
+      @_structsimple_model
+    end
+
+    def structoptional_model
+      @_structoptional_model
+    end
+
+    def structnested_model
+      @_structnested_model
+    end
+
+    def structbytes_model
+      @_structbytes_model
+    end
+
+    def structarray_model
+      @_structarray_model
+    end
+
+    def structvector_model
+      @_structvector_model
+    end
+
+    def structlist_model
+      @_structlist_model
+    end
+
+    def structset_model
+      @_structset_model
+    end
+
+    def structmap_model
+      @_structmap_model
+    end
+
+    def structhash_model
+      @_structhash_model
+    end
+
+    def structhashex_model
+      @_structhashex_model
+    end
+
+    # Send methods
+
+    def send(value)
+      if value.is_a?(StructSimple)
+        return send_structsimple(value)
+      end
+      if value.is_a?(StructOptional)
+        return send_structoptional(value)
+      end
+      if value.is_a?(StructNested)
+        return send_structnested(value)
+      end
+      if value.is_a?(StructBytes)
+        return send_structbytes(value)
+      end
+      if value.is_a?(StructArray)
+        return send_structarray(value)
+      end
+      if value.is_a?(StructVector)
+        return send_structvector(value)
+      end
+      if value.is_a?(StructList)
+        return send_structlist(value)
+      end
+      if value.is_a?(StructSet)
+        return send_structset(value)
+      end
+      if value.is_a?(StructMap)
+        return send_structmap(value)
+      end
+      if value.is_a?(StructHash)
+        return send_structhash(value)
+      end
+      if value.is_a?(StructHashEx)
+        return send_structhashex(value)
+      end
+      result = @_proto_sender.send(value)
+      if result > 0
+        return result
+      end
+      0
+    end
+
+    def send_structsimple(value)
+      # Serialize the value into the FBE stream
+      serialized = structsimple_model.serialize(value)
+      raise RuntimeError, "Test.StructSimple serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructSimple validation failed!" unless structsimple_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structoptional(value)
+      # Serialize the value into the FBE stream
+      serialized = structoptional_model.serialize(value)
+      raise RuntimeError, "Test.StructOptional serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructOptional validation failed!" unless structoptional_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structnested(value)
+      # Serialize the value into the FBE stream
+      serialized = structnested_model.serialize(value)
+      raise RuntimeError, "Test.StructNested serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructNested validation failed!" unless structnested_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structbytes(value)
+      # Serialize the value into the FBE stream
+      serialized = structbytes_model.serialize(value)
+      raise RuntimeError, "Test.StructBytes serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructBytes validation failed!" unless structbytes_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structarray(value)
+      # Serialize the value into the FBE stream
+      serialized = structarray_model.serialize(value)
+      raise RuntimeError, "Test.StructArray serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructArray validation failed!" unless structarray_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structvector(value)
+      # Serialize the value into the FBE stream
+      serialized = structvector_model.serialize(value)
+      raise RuntimeError, "Test.StructVector serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructVector validation failed!" unless structvector_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structlist(value)
+      # Serialize the value into the FBE stream
+      serialized = structlist_model.serialize(value)
+      raise RuntimeError, "Test.StructList serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructList validation failed!" unless structlist_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structset(value)
+      # Serialize the value into the FBE stream
+      serialized = structset_model.serialize(value)
+      raise RuntimeError, "Test.StructSet serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructSet validation failed!" unless structset_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structmap(value)
+      # Serialize the value into the FBE stream
+      serialized = structmap_model.serialize(value)
+      raise RuntimeError, "Test.StructMap serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructMap validation failed!" unless structmap_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structhash(value)
+      # Serialize the value into the FBE stream
+      serialized = structhash_model.serialize(value)
+      raise RuntimeError, "Test.StructHash serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructHash validation failed!" unless structhash_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structhashex(value)
+      # Serialize the value into the FBE stream
+      serialized = structhashex_model.serialize(value)
+      raise RuntimeError, "Test.StructHashEx serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructHashEx validation failed!" unless structhashex_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    # Send message handler
+    def on_send(buffer, offset, size)
+      raise NotImplementedError, "Test.Sender.on_send() not implemented!"
+    end
+  end
+
+  # Fast Binary Encoding Test final receiver class
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalReceiver < FBE::Receiver
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer, false, true)
+      @_proto_receiver = Proto::FinalReceiver.new(self.buffer)
+      @_structsimple_value = StructSimple.new
+      @_structsimple_model = StructSimpleFinalModel.new
+      @_structoptional_value = StructOptional.new
+      @_structoptional_model = StructOptionalFinalModel.new
+      @_structnested_value = StructNested.new
+      @_structnested_model = StructNestedFinalModel.new
+      @_structbytes_value = StructBytes.new
+      @_structbytes_model = StructBytesFinalModel.new
+      @_structarray_value = StructArray.new
+      @_structarray_model = StructArrayFinalModel.new
+      @_structvector_value = StructVector.new
+      @_structvector_model = StructVectorFinalModel.new
+      @_structlist_value = StructList.new
+      @_structlist_model = StructListFinalModel.new
+      @_structset_value = StructSet.new
+      @_structset_model = StructSetFinalModel.new
+      @_structmap_value = StructMap.new
+      @_structmap_model = StructMapFinalModel.new
+      @_structhash_value = StructHash.new
+      @_structhash_model = StructHashFinalModel.new
+      @_structhashex_value = StructHashEx.new
+      @_structhashex_model = StructHashExFinalModel.new
+    end
+
+    # Imported receivers
+
+    def proto_receiver
+      @_proto_receiver
+    end
+
+    def proto_receiver=(receiver)
+      @_proto_receiver = receiver
+    end
+
+    # Receive handlers
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structsimple(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structoptional(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structnested(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structbytes(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structarray(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structvector(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structlist(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structset(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structmap(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structhash(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structhashex(value)
+    end
+
+    def on_receive(fbe_type, buffer, offset, size)
+
+      if fbe_type == StructSimpleFinalModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structsimple_model.attach_buffer(buffer, offset)
+        unless @_structsimple_model.verify
+          return false
+        end
+        _, deserialized = @_structsimple_model.deserialize(@_structsimple_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structsimple_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structsimple(@_structsimple_value)
+        true
+      end
+
+      if fbe_type == StructOptionalFinalModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structoptional_model.attach_buffer(buffer, offset)
+        unless @_structoptional_model.verify
+          return false
+        end
+        _, deserialized = @_structoptional_model.deserialize(@_structoptional_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structoptional_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structoptional(@_structoptional_value)
+        true
+      end
+
+      if fbe_type == StructNestedFinalModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structnested_model.attach_buffer(buffer, offset)
+        unless @_structnested_model.verify
+          return false
+        end
+        _, deserialized = @_structnested_model.deserialize(@_structnested_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structnested_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structnested(@_structnested_value)
+        true
+      end
+
+      if fbe_type == StructBytesFinalModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structbytes_model.attach_buffer(buffer, offset)
+        unless @_structbytes_model.verify
+          return false
+        end
+        _, deserialized = @_structbytes_model.deserialize(@_structbytes_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structbytes_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structbytes(@_structbytes_value)
+        true
+      end
+
+      if fbe_type == StructArrayFinalModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structarray_model.attach_buffer(buffer, offset)
+        unless @_structarray_model.verify
+          return false
+        end
+        _, deserialized = @_structarray_model.deserialize(@_structarray_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structarray_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structarray(@_structarray_value)
+        true
+      end
+
+      if fbe_type == StructVectorFinalModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structvector_model.attach_buffer(buffer, offset)
+        unless @_structvector_model.verify
+          return false
+        end
+        _, deserialized = @_structvector_model.deserialize(@_structvector_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structvector_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structvector(@_structvector_value)
+        true
+      end
+
+      if fbe_type == StructListFinalModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structlist_model.attach_buffer(buffer, offset)
+        unless @_structlist_model.verify
+          return false
+        end
+        _, deserialized = @_structlist_model.deserialize(@_structlist_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structlist_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structlist(@_structlist_value)
+        true
+      end
+
+      if fbe_type == StructSetFinalModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structset_model.attach_buffer(buffer, offset)
+        unless @_structset_model.verify
+          return false
+        end
+        _, deserialized = @_structset_model.deserialize(@_structset_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structset_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structset(@_structset_value)
+        true
+      end
+
+      if fbe_type == StructMapFinalModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structmap_model.attach_buffer(buffer, offset)
+        unless @_structmap_model.verify
+          return false
+        end
+        _, deserialized = @_structmap_model.deserialize(@_structmap_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structmap_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structmap(@_structmap_value)
+        true
+      end
+
+      if fbe_type == StructHashFinalModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structhash_model.attach_buffer(buffer, offset)
+        unless @_structhash_model.verify
+          return false
+        end
+        _, deserialized = @_structhash_model.deserialize(@_structhash_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structhash_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structhash(@_structhash_value)
+        true
+      end
+
+      if fbe_type == StructHashExFinalModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structhashex_model.attach_buffer(buffer, offset)
+        unless @_structhashex_model.verify
+          return false
+        end
+        _, deserialized = @_structhashex_model.deserialize(@_structhashex_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_structhashex_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structhashex(@_structhashex_value)
+        true
+      end
+
+      if !proto_receiver.nil? && proto_receiver.on_receive(type, buffer, offset, size)
+        return true
+      end
+
+      false
     end
   end
 

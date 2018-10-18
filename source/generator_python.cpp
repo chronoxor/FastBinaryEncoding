@@ -2749,19 +2749,19 @@ void GeneratorPython::GenerateImports(const std::shared_ptr<Package>& p)
     WriteLineIndent("import decimal");
     WriteLineIndent("import enum");
     WriteLineIndent("import functools");
-    WriteLineIndent("import fbe");
     if (JSON())
         WriteLineIndent("import json");
     WriteLineIndent("import sys");
     WriteLineIndent("import uuid");
 
+    // Generate FBE import
+    WriteLine();
+    WriteLineIndent("import fbe");
+
     // Generate packages import
     if (p->import)
-    {
-        WriteLine();
         for (const auto& import : p->import->imports)
             WriteLineIndent("from . import " + *import);
-    }
 }
 
 void GeneratorPython::GeneratePackage(const std::shared_ptr<Package>& p)

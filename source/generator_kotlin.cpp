@@ -112,14 +112,13 @@ void GeneratorKotlin::GenerateImports(const std::shared_ptr<Package>& p)
     GenerateImports(*p->name);
 
     // Generate FBE import
+    WriteLine();
     WriteLineIndent("import fbe.*");
 
     // Generate packages import
     if (p->import)
-    {
         for (const auto& import : p->import->imports)
             WriteLineIndent("import " + *import + ".*");
-    }
 }
 
 void GeneratorKotlin::GenerateFBEPackage(const std::string& package)

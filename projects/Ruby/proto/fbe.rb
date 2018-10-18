@@ -363,17 +363,19 @@ module FBE
 
       if buffer.is_a?(String)
         @_buffer = buffer
+        size = @_buffer.length if size.nil?
       elsif buffer.is_a?(Array)
         @_buffer = buffer.join
+        size = @_buffer.length if size.nil?
       elsif buffer.is_a?(WriteBuffer)
         @_buffer = buffer.buffer
+        size = buffer.size if size.nil?
       elsif buffer.is_a?(ReadBuffer)
         @_buffer = buffer.buffer
+        size = buffer.size if size.nil?
       else
         raise ArgumentError, "Unknown buffer type!"
       end
-
-      size = @_buffer.length if size.nil?
 
       raise ArgumentError, "Invalid size!" if size <= 0
       raise ArgumentError, "Invalid offset!" if offset > size
@@ -480,17 +482,19 @@ module FBE
 
       if buffer.is_a?(String)
         @_buffer = buffer
+        size = @_buffer.length if size.nil?
       elsif buffer.is_a?(Array)
         @_buffer = buffer.join
+        size = @_buffer.length if size.nil?
       elsif buffer.is_a?(WriteBuffer)
         @_buffer = buffer.buffer
+        size = buffer.size if size.nil?
       elsif buffer.is_a?(ReadBuffer)
         @_buffer = buffer.buffer
+        size = buffer.size if size.nil?
       else
         raise ArgumentError, "Unknown buffer type!"
       end
-
-      size = @_buffer.length if size.nil?
 
       raise ArgumentError, "Invalid size!" if size <= 0
       raise ArgumentError, "Invalid offset!" if offset > size
@@ -645,6 +649,7 @@ module FBE
     end
 
     def read_wchar(offset)
+      # noinspection RubyResolve
       @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L<')[0].chr(Encoding::UTF_8)
     end
 
@@ -3786,7 +3791,7 @@ module FBE
                 @_buffer.buffer[offset1, count] = buffer[offset + offset2, count]
                 offset1 += count
                 offset2 += count
-                continue
+                next
               else
                 break
               end
@@ -3809,7 +3814,7 @@ module FBE
               @_buffer.buffer[offset1, count] = buffer[offset + offset2, count]
               offset1 += count
               offset2 += count
-              continue
+              next
             end
           else
             break
@@ -3862,7 +3867,7 @@ module FBE
                 @_buffer.buffer[offset1, count] = buffer[offset + offset2, count]
                 offset1 += count
                 offset2 += count
-                continue
+                next
               else
                 break
               end
@@ -3899,7 +3904,7 @@ module FBE
               @_buffer.buffer[offset1, count] = buffer[offset + offset2, count]
               offset1 += count
               offset2 += count
-              continue
+              next
             end
           else
             break

@@ -8084,7 +8084,6 @@ void GeneratorJavaScript::GenerateImports(const std::shared_ptr<Package>& p)
     WriteLineIndent("const util = require('util')");
     WriteLine();
     WriteLineIndent("const big = require('./big')");
-    WriteLineIndent("const fbe = require('./fbe')");
     WriteLineIndent("const int64 = require('./int64')");
     WriteLineIndent("const uuid = require('./uuid')");
     WriteLine();
@@ -8093,12 +8092,14 @@ void GeneratorJavaScript::GenerateImports(const std::shared_ptr<Package>& p)
     WriteLineIndent("const UInt64 = int64.UInt64 // eslint-disable-line");
     WriteLineIndent("const UUID = uuid.UUID // eslint-disable-line");
 
+    // Generate FBE import
+    WriteLine();
+    WriteLineIndent("const fbe = require('./fbe')");
+
     // Generate packages import
     if (p->import)
-    {
         for (const auto& import : p->import->imports)
             WriteLineIndent("const " + *import + " = require('./" + *import + "')");
-    }
 }
 
 void GeneratorJavaScript::GeneratePackage(const std::shared_ptr<Package>& p)

@@ -536,17 +536,19 @@ void GeneratorRuby::GenerateFBEWriteBuffer()
 
       if buffer.is_a?(String)
         @_buffer = buffer
+        size = @_buffer.length if size.nil?
       elsif buffer.is_a?(Array)
         @_buffer = buffer.join
+        size = @_buffer.length if size.nil?
       elsif buffer.is_a?(WriteBuffer)
         @_buffer = buffer.buffer
+        size = buffer.size if size.nil?
       elsif buffer.is_a?(ReadBuffer)
         @_buffer = buffer.buffer
+        size = buffer.size if size.nil?
       else
         raise ArgumentError, "Unknown buffer type!"
       end
-
-      size = @_buffer.length if size.nil?
 
       raise ArgumentError, "Invalid size!" if size <= 0
       raise ArgumentError, "Invalid offset!" if offset > size
@@ -663,17 +665,19 @@ void GeneratorRuby::GenerateFBEReadBuffer()
 
       if buffer.is_a?(String)
         @_buffer = buffer
+        size = @_buffer.length if size.nil?
       elsif buffer.is_a?(Array)
         @_buffer = buffer.join
+        size = @_buffer.length if size.nil?
       elsif buffer.is_a?(WriteBuffer)
         @_buffer = buffer.buffer
+        size = buffer.size if size.nil?
       elsif buffer.is_a?(ReadBuffer)
         @_buffer = buffer.buffer
+        size = buffer.size if size.nil?
       else
         raise ArgumentError, "Unknown buffer type!"
       end
-
-      size = @_buffer.length if size.nil?
 
       raise ArgumentError, "Invalid size!" if size <= 0
       raise ArgumentError, "Invalid offset!" if offset > size
@@ -848,6 +852,7 @@ void GeneratorRuby::GenerateFBEFieldModelBase()
     end
 
     def read_wchar(offset)
+      # noinspection RubyResolve
       @_buffer.buffer.slice(@_buffer.offset + offset, 4).unpack('L<')[0].chr(Encoding::UTF_8)
     end
 
@@ -3077,7 +3082,7 @@ void GeneratorRuby::GenerateFBEReceiver()
                 @_buffer.buffer[offset1, count] = buffer[offset + offset2, count]
                 offset1 += count
                 offset2 += count
-                continue
+                next
               else
                 break
               end
@@ -3100,7 +3105,7 @@ void GeneratorRuby::GenerateFBEReceiver()
               @_buffer.buffer[offset1, count] = buffer[offset + offset2, count]
               offset1 += count
               offset2 += count
-              continue
+              next
             end
           else
             break
@@ -3153,7 +3158,7 @@ void GeneratorRuby::GenerateFBEReceiver()
                 @_buffer.buffer[offset1, count] = buffer[offset + offset2, count]
                 offset1 += count
                 offset2 += count
-                continue
+                next
               else
                 break
               end
@@ -3190,7 +3195,7 @@ void GeneratorRuby::GenerateFBEReceiver()
               @_buffer.buffer[offset1, count] = buffer[offset + offset2, count]
               offset1 += count
               offset2 += count
-              continue
+              next
             end
           else
             break
@@ -3290,11 +3295,8 @@ void GeneratorRuby::GenerateImports(const std::shared_ptr<Package>& p)
 
     // Generate packages import
     if (p->import)
-    {
-        WriteLine();
         for (const auto& import : p->import->imports)
             WriteLineIndent("require_relative '" + *import + "'");
-    }
 }
 
 void GeneratorRuby::GeneratePackage(const std::shared_ptr<Package>& p)
@@ -3339,12 +3341,12 @@ void GeneratorRuby::GeneratePackage(const std::shared_ptr<Package>& p)
     // Generate sender & receiver
     if (Sender())
     {
-        //GenerateSender(p, false);
-        //GenerateReceiver(p, false);
+        GenerateSender(p, false);
+        GenerateReceiver(p, false);
         if (Final())
         {
-            //GenerateSender(p, true);
-            //GenerateReceiver(p, true);
+            GenerateSender(p, true);
+            GenerateReceiver(p, true);
         }
     }
 
@@ -3417,7 +3419,7 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
     WriteLine();
     WriteLineIndent("# Enum compare operators");
     WriteLineIndent("def ==(value) @value == value.value end");
-    WriteLineIndent("def !=(value) @value == value.value end");
+    WriteLineIndent("def !=(value) @value != value.value end");
 
     // Generate enum class to_i method
     WriteLine();
@@ -3645,7 +3647,7 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     WriteLine();
     WriteLineIndent("# Flags compare operators");
     WriteLineIndent("def ==(flags) @value == flags.value end");
-    WriteLineIndent("def !=(flags) @value == flags.value end");
+    WriteLineIndent("def !=(flags) @value != flags.value end");
 
     // Generate flags class bit operators
     WriteLine();
@@ -4144,7 +4146,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
             first = false;
         }
     }
-    WriteLineIndent("result << \")\"");
+    WriteLineIndent("result << ')'");
     WriteLineIndent("result");
     Indent(-1);
     WriteLineIndent("end");
@@ -4673,7 +4675,7 @@ void GeneratorRuby::GenerateStructModel(const std::shared_ptr<StructType>& s)
     Indent(1);
 
     // Generate struct model constructor
-    WriteLineIndent("def initialize(buffer = WriteBuffer.new)");
+    WriteLineIndent("def initialize(buffer = FBE::WriteBuffer.new)");
     Indent(1);
     WriteLineIndent("super(buffer)");
     WriteLineIndent("@_model = FieldModel" + struct_name + ".new(self.buffer, 4)");
@@ -5040,7 +5042,7 @@ void GeneratorRuby::GenerateStructModelFinal(const std::shared_ptr<StructType>& 
     Indent(1);
 
     // Generate struct model final constructor
-    WriteLineIndent("def initialize(buffer = WriteBuffer.new)");
+    WriteLineIndent("def initialize(buffer = FBE::WriteBuffer.new)");
     Indent(1);
     WriteLineIndent("super(buffer)");
     WriteLineIndent("@_model = FinalModel" + struct_name + ".new(self.buffer, 8)");
@@ -5149,52 +5151,39 @@ void GeneratorRuby::GenerateStructModelFinal(const std::shared_ptr<StructType>& 
 
 void GeneratorRuby::GenerateSender(const std::shared_ptr<Package>& p, bool final)
 {
+    std::string package = ConvertTitle(*p->name);
     std::string sender = (final ? "FinalSender" : "Sender");
     std::string model = (final ? "FinalModel" : "Model");
 
     // Generate sender begin
     WriteLine();
-    WriteLine();
     if (final)
-        WriteLineIndent("# Fast Binary Encoding " + *p->name + " final sender class");
+        WriteLineIndent("# Fast Binary Encoding " + package + " final sender class");
     else
-        WriteLineIndent("# Fast Binary Encoding " + *p->name + " sender class");
-    WriteLineIndent("class " + sender + "(FBE::Sender):");
+        WriteLineIndent("# Fast Binary Encoding " + package + " sender class");
+    WriteLineIndent("# noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection");
+    WriteLineIndent("class " + sender + " < FBE::Sender");
     Indent(1);
-
-    // Generate sender __slots__
-    WriteIndent("__slots__ = ");
-    if (p->import)
-    {
-        for (const auto& import : p->import->imports)
-            Write("\"_" + CppCommon::StringUtils::ToLower(*import) + "_sender\", ");
-    }
-    if (p->body)
-    {
-        for (const auto& s : p->body->structs)
-            Write("\"_" + CppCommon::StringUtils::ToLower(*s->name) + "_model\", ");
-    }
-    WriteLine();
 
     // Generate sender constructor
-    WriteLine();
-    WriteLineIndent("def __init__(self, buffer=None):");
+    WriteLineIndent("def initialize(buffer = FBE::WriteBuffer.new)");
     Indent(1);
     if (final)
-        WriteLineIndent("super().__init__(buffer, False, True)");
+        WriteLineIndent("super(buffer, false, true)");
     else
-        WriteLineIndent("super().__init__(buffer, False, False)");
+        WriteLineIndent("super(buffer, false, false)");
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*import) + "_sender = " + *import + "." + sender + "(self.buffer)");
+            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*import) + "_sender = " + ConvertTitle(*import) + "::" + sender + ".new(self.buffer)");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + *s->name + model + "(self.buffer)");
+            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + ConvertTitle(*s->name) + model + ".new(self.buffer)");
     }
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate imported senders accessors
     if (p->import)
@@ -5204,11 +5193,11 @@ void GeneratorRuby::GenerateSender(const std::shared_ptr<Package>& p, bool final
         for (const auto& import : p->import->imports)
         {
             WriteLine();
-            WriteLineIndent("@property");
-            WriteLineIndent("def " + CppCommon::StringUtils::ToLower(*import) + "_sender(self):");
+            WriteLineIndent("def " + CppCommon::StringUtils::ToLower(*import) + "_sender");
             Indent(1);
-            WriteLineIndent("return @_" + CppCommon::StringUtils::ToLower(*import) + "_sender");
+            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*import) + "_sender");
             Indent(-1);
+            WriteLineIndent("end");
         }
     }
 
@@ -5220,11 +5209,11 @@ void GeneratorRuby::GenerateSender(const std::shared_ptr<Package>& p, bool final
         for (const auto& s : p->body->structs)
         {
             WriteLine();
-            WriteLineIndent("@property");
-            WriteLineIndent("def " + CppCommon::StringUtils::ToLower(*s->name) + "_model(self):");
+            WriteLineIndent("def " + CppCommon::StringUtils::ToLower(*s->name) + "_model");
             Indent(1);
-            WriteLineIndent("return @_" + CppCommon::StringUtils::ToLower(*s->name) + "_model");
+            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model");
             Indent(-1);
+            WriteLineIndent("end");
         }
     }
 
@@ -5232,16 +5221,17 @@ void GeneratorRuby::GenerateSender(const std::shared_ptr<Package>& p, bool final
     WriteLine();
     WriteLineIndent("# Send methods");
     WriteLine();
-    WriteLineIndent("def send(self, value):");
+    WriteLineIndent("def send(value)");
     Indent(1);
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("if isinstance(value, " + *s->name + "):");
+            WriteLineIndent("if value.is_a?(" + ConvertTitle(*s->name) + ")");
             Indent(1);
-            WriteLineIndent("return self.send_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
+            WriteLineIndent("return send_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
             Indent(-1);
+            WriteLineIndent("end");
         }
     }
     if (p->import)
@@ -5249,105 +5239,95 @@ void GeneratorRuby::GenerateSender(const std::shared_ptr<Package>& p, bool final
         for (const auto& import : p->import->imports)
         {
             WriteLineIndent("result = @_" + CppCommon::StringUtils::ToLower(*import) + "_sender.send(value)");
-            WriteLineIndent("if result > 0:");
+            WriteLineIndent("if result > 0");
             Indent(1);
             WriteLineIndent("return result");
             Indent(-1);
+            WriteLineIndent("end");
         }
     }
-    WriteLineIndent("return 0");
+    WriteLineIndent("0");
     Indent(-1);
+    WriteLineIndent("end");
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
             WriteLine();
-            WriteLineIndent("def send_" + CppCommon::StringUtils::ToLower(*s->name) + "(self, value):");
+            WriteLineIndent("def send_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
             Indent(1);
             WriteLineIndent("# Serialize the value into the FBE stream");
-            WriteLineIndent("serialized = self." + CppCommon::StringUtils::ToLower(*s->name) + "_model.serialize(value)");
-            WriteLineIndent("assert (serialized > 0), \"" + *p->name + "." + *s->name + " serialization failed!\"");
-            WriteLineIndent("assert self." + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify(), \"" + *p->name + "." + *s->name + " validation failed!\"");
+            WriteLineIndent("serialized = " + CppCommon::StringUtils::ToLower(*s->name) + "_model.serialize(value)");
+            WriteLineIndent("raise RuntimeError, \"" + package + "." + ConvertTitle(*s->name) + " serialization failed!\" if serialized <= 0");
+            WriteLineIndent("raise RuntimeError, \"" + package + "." + ConvertTitle(*s->name) + " validation failed!\" unless " + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify");
             WriteLine();
             WriteLineIndent("# Log the value");
-            WriteLineIndent("if self.logging:");
+            WriteLineIndent("if logging");
             Indent(1);
-            WriteLineIndent("message = str(value)");
-            WriteLineIndent("self.on_send_log(message)");
+            WriteLineIndent("message = value.to_s");
+            WriteLineIndent("on_send_log(message)");
             Indent(-1);
+            WriteLineIndent("end");
             WriteLine();
             WriteLineIndent("# Send the serialized value");
-            WriteLineIndent("return self.send_serialized(serialized)");
+            WriteLineIndent("send_serialized(serialized)");
             Indent(-1);
+            WriteLineIndent("end");
         }
     }
 
     // Generate sender message handler
     WriteLine();
     WriteLineIndent("# Send message handler");
-    WriteLineIndent("def on_send(self, buffer, offset, size):");
+    WriteLineIndent("def on_send(buffer, offset, size)");
     Indent(1);
-    WriteLineIndent("raise NotImplementedError(\"" + *p->name + ".Sender.on_send() not implemented!\")");
+    WriteLineIndent("raise NotImplementedError, \"" + package + ".Sender.on_send() not implemented!\"");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate sender end
     Indent(-1);
+    WriteLineIndent("end");
 }
 
 void GeneratorRuby::GenerateReceiver(const std::shared_ptr<Package>& p, bool final)
 {
+    std::string package = ConvertTitle(*p->name);
     std::string receiver = (final ? "FinalReceiver" : "Receiver");
     std::string model = (final ? "FinalModel" : "Model");
 
     // Generate receiver begin
     WriteLine();
-    WriteLine();
     if (final)
-        WriteLineIndent("# Fast Binary Encoding " + *p->name + " final receiver class");
+        WriteLineIndent("# Fast Binary Encoding " + package + " final receiver class");
     else
-        WriteLineIndent("# Fast Binary Encoding " + *p->name + " receiver class");
-    WriteLineIndent("class " + receiver + "(FBE::Receiver):");
+        WriteLineIndent("# Fast Binary Encoding " + package + " receiver class");
+    WriteLineIndent("# noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection");
+    WriteLineIndent("class " + receiver + " < FBE::Receiver");
     Indent(1);
-
-    // Generate receiver __slots__
-    WriteIndent("__slots__ = ");
-    if (p->import)
-    {
-        for (const auto& import : p->import->imports)
-            Write("\"_" + CppCommon::StringUtils::ToLower(*import) + "_receiver\", ");
-    }
-    if (p->body)
-    {
-        for (const auto& s : p->body->structs)
-        {
-            Write("\"_" + CppCommon::StringUtils::ToLower(*s->name) + "_value\", ");
-            Write("\"_" + CppCommon::StringUtils::ToLower(*s->name) + "_model\", ");
-        }
-    }
-    WriteLine();
 
     // Generate receiver constructor
-    WriteLine();
-    WriteLineIndent("def __init__(self, buffer=None):");
+    WriteLineIndent("def initialize(buffer = FBE::WriteBuffer.new)");
     Indent(1);
     if (final)
-        WriteLineIndent("super().__init__(buffer, False, True)");
+        WriteLineIndent("super(buffer, false, true)");
     else
-        WriteLineIndent("super().__init__(buffer, False, False)");
+        WriteLineIndent("super(buffer, false, false)");
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*import) + "_receiver = " + *import + "." + receiver + "(self.buffer)");
+            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*import) + "_receiver = " + ConvertTitle(*import) + "::" + receiver + ".new(self.buffer)");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_value = " + *s->name + "()");
-            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + *s->name + model + "()");
+            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_value = " + ConvertTitle(*s->name) + ".new");
+            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + ConvertTitle(*s->name) + model + ".new");
         }
     }
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate imported receiver accessors
     if (p->import)
@@ -5357,17 +5337,17 @@ void GeneratorRuby::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
         for (const auto& import : p->import->imports)
         {
             WriteLine();
-            WriteLineIndent("@property");
-            WriteLineIndent("def " + CppCommon::StringUtils::ToLower(*import) + "_receiver(self):");
+            WriteLineIndent("def " + CppCommon::StringUtils::ToLower(*import) + "_receiver");
             Indent(1);
-            WriteLineIndent("return @_" + CppCommon::StringUtils::ToLower(*import) + "_receiver");
+            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*import) + "_receiver");
             Indent(-1);
+            WriteLineIndent("end");
             WriteLine();
-            WriteLineIndent("@" + CppCommon::StringUtils::ToLower(*import) + "_receiver.setter");
-            WriteLineIndent("def " + CppCommon::StringUtils::ToLower(*import) + "_receiver(self, receiver):");
+            WriteLineIndent("def " + CppCommon::StringUtils::ToLower(*import) + "_receiver=(receiver)");
             Indent(1);
             WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*import) + "_receiver = receiver");
             Indent(-1);
+            WriteLineIndent("end");
         }
     }
 
@@ -5379,41 +5359,50 @@ void GeneratorRuby::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
         for (const auto& s : p->body->structs)
         {
             WriteLine();
-            WriteLineIndent("def on_receive_" + CppCommon::StringUtils::ToLower(*s->name) + "(self, value):");
-            Indent(1);
-            WriteLineIndent("pass");
-            Indent(-1);
+            WriteLineIndent("# noinspection RubyUnusedLocalVariable");
+            WriteLineIndent("def on_receive_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
+            WriteLineIndent("end");
         }
         WriteLine();
     }
 
     // Generate receiver message handler
-    WriteLineIndent("def on_receive(self, fbe_type, buffer, offset, size):");
+    WriteLineIndent("def on_receive(fbe_type, buffer, offset, size)");
     Indent(1);
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
             WriteLine();
-            WriteLineIndent("if fbe_type == " + *s->name + model + "::TYPE:");
+            WriteLineIndent("if fbe_type == " + ConvertTitle(*s->name) + model + "::TYPE");
             Indent(1);
             WriteLineIndent("# Deserialize the value from the FBE stream");
             WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.attach_buffer(buffer, offset)");
-            WriteLineIndent("assert @_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify(), \"" + *p->name + "." + *s->name + " validation failed!\"");
-            WriteLineIndent("(_, deserialized) = @_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.deserialize(@_" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
-            WriteLineIndent("assert (deserialized > 0), \"" + *p->name + "." + *s->name + " deserialization failed!\"");
+            WriteLineIndent("unless @_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify");
+            Indent(1);
+            WriteLineIndent("return false");
+            Indent(-1);
+            WriteLineIndent("end");
+            WriteLineIndent("_, deserialized = @_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.deserialize(@_" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
+            WriteLineIndent("if deserialized <= 0");
+            Indent(1);
+            WriteLineIndent("return false");
+            Indent(-1);
+            WriteLineIndent("end");
             WriteLine();
             WriteLineIndent("# Log the value");
-            WriteLineIndent("if self.logging:");
+            WriteLineIndent("if logging");
             Indent(1);
-            WriteLineIndent("message = str(@_" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
-            WriteLineIndent("self.on_receive_log(message)");
+            WriteLineIndent("message = @_" + CppCommon::StringUtils::ToLower(*s->name) + "_value.to_s");
+            WriteLineIndent("on_receive_log(message)");
             Indent(-1);
+            WriteLineIndent("end");
             WriteLine();
             WriteLineIndent("# Call receive handler with deserialized value");
-            WriteLineIndent("self.on_receive_" + CppCommon::StringUtils::ToLower(*s->name) + "(@_" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
-            WriteLineIndent("return True");
+            WriteLineIndent("on_receive_" + CppCommon::StringUtils::ToLower(*s->name) + "(@_" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
+            WriteLineIndent("true");
             Indent(-1);
+            WriteLineIndent("end");
         }
     }
     if (p->import)
@@ -5421,18 +5410,21 @@ void GeneratorRuby::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
         WriteLine();
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("if (self." + CppCommon::StringUtils::ToLower(*import) + "_receiver is not None) and self." + CppCommon::StringUtils::ToLower(*import) + "_receiver.on_receive(type, buffer, offset, size):");
+            WriteLineIndent("if !" + CppCommon::StringUtils::ToLower(*import) + "_receiver.nil? && " + CppCommon::StringUtils::ToLower(*import) + "_receiver.on_receive(type, buffer, offset, size)");
             Indent(1);
-            WriteLineIndent("return True");
+            WriteLineIndent("return true");
             Indent(-1);
+            WriteLineIndent("end");
         }
     }
     WriteLine();
-    WriteLineIndent("return False");
+    WriteLineIndent("false");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate receiver end
     Indent(-1);
+    WriteLineIndent("end");
 }
 
 bool GeneratorRuby::IsPrimitiveType(const std::string& type)
@@ -5693,7 +5685,7 @@ std::string GeneratorRuby::ConvertConstant(const std::string& type, const std::s
     else if ((type == "wchar") && !CppCommon::StringUtils::StartsWith(value, "'"))
         return value + ".chr(Encoding::UTF_8)";
     else if (type == "decimal")
-        return "BigDecimal.new(\"" + value + "\")";
+        return "BigDecimal.new('" + value + "')";
     else if (type == "uuid")
         return "UUIDTools::UUID.parse(" + value + ")";
 

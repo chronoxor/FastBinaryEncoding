@@ -34,7 +34,7 @@ module Enums
 
       # Enum compare operators
       def ==(value) @value == value.value end
-      def !=(value) @value == value.value end
+      def !=(value) @value != value.value end
 
       # Get enum integer value
       def to_i
@@ -181,7 +181,7 @@ module Enums
 
       # Enum compare operators
       def ==(value) @value == value.value end
-      def !=(value) @value == value.value end
+      def !=(value) @value != value.value end
 
       # Get enum integer value
       def to_i
@@ -328,7 +328,7 @@ module Enums
 
       # Enum compare operators
       def ==(value) @value == value.value end
-      def !=(value) @value == value.value end
+      def !=(value) @value != value.value end
 
       # Get enum integer value
       def to_i
@@ -475,7 +475,7 @@ module Enums
 
       # Enum compare operators
       def ==(value) @value == value.value end
-      def !=(value) @value == value.value end
+      def !=(value) @value != value.value end
 
       # Get enum integer value
       def to_i
@@ -622,7 +622,7 @@ module Enums
 
       # Enum compare operators
       def ==(value) @value == value.value end
-      def !=(value) @value == value.value end
+      def !=(value) @value != value.value end
 
       # Get enum integer value
       def to_i
@@ -769,7 +769,7 @@ module Enums
 
       # Enum compare operators
       def ==(value) @value == value.value end
-      def !=(value) @value == value.value end
+      def !=(value) @value != value.value end
 
       # Get enum integer value
       def to_i
@@ -916,7 +916,7 @@ module Enums
 
       # Enum compare operators
       def ==(value) @value == value.value end
-      def !=(value) @value == value.value end
+      def !=(value) @value != value.value end
 
       # Get enum integer value
       def to_i
@@ -1063,7 +1063,7 @@ module Enums
 
       # Enum compare operators
       def ==(value) @value == value.value end
-      def !=(value) @value == value.value end
+      def !=(value) @value != value.value end
 
       # Get enum integer value
       def to_i
@@ -1210,7 +1210,7 @@ module Enums
 
       # Enum compare operators
       def ==(value) @value == value.value end
-      def !=(value) @value == value.value end
+      def !=(value) @value != value.value end
 
       # Get enum integer value
       def to_i
@@ -1357,7 +1357,7 @@ module Enums
 
       # Enum compare operators
       def ==(value) @value == value.value end
-      def !=(value) @value == value.value end
+      def !=(value) @value != value.value end
 
       # Get enum integer value
       def to_i
@@ -1504,7 +1504,7 @@ module Enums
 
       # Enum compare operators
       def ==(value) @value == value.value end
-      def !=(value) @value == value.value end
+      def !=(value) @value != value.value end
 
       # Get enum integer value
       def to_i
@@ -2289,7 +2289,7 @@ module Enums
       else
         result << 'null'
       end
-      result << ")"
+      result << ')'
       result
     end
   end
@@ -4107,7 +4107,7 @@ module Enums
 
   # Fast Binary Encoding Enums model class
   class EnumsModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FieldModelEnums.new(self.buffer, 4)
     end
@@ -5970,7 +5970,7 @@ module Enums
 
   # Fast Binary Encoding Enums final model class
   class EnumsFinalModel < FBE::Model
-    def initialize(buffer = WriteBuffer.new)
+    def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
       @_model = FinalModelEnums.new(self.buffer, 8)
     end
@@ -6036,6 +6036,182 @@ module Enums
     # Move to the next struct value
     def next(prev)
       @_model.fbe_shift(prev)
+    end
+  end
+
+  # Fast Binary Encoding Enums sender class
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class Sender < FBE::Sender
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer, false, false)
+      @_enums_model = EnumsModel.new(self.buffer)
+    end
+
+    # Sender models accessors
+
+    def enums_model
+      @_enums_model
+    end
+
+    # Send methods
+
+    def send(value)
+      if value.is_a?(Enums)
+        return send_enums(value)
+      end
+      0
+    end
+
+    def send_enums(value)
+      # Serialize the value into the FBE stream
+      serialized = enums_model.serialize(value)
+      raise RuntimeError, "Enums.Enums serialization failed!" if serialized <= 0
+      raise RuntimeError, "Enums.Enums validation failed!" unless enums_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    # Send message handler
+    def on_send(buffer, offset, size)
+      raise NotImplementedError, "Enums.Sender.on_send() not implemented!"
+    end
+  end
+
+  # Fast Binary Encoding Enums receiver class
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class Receiver < FBE::Receiver
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer, false, false)
+      @_enums_value = Enums.new
+      @_enums_model = EnumsModel.new
+    end
+
+    # Receive handlers
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_enums(value)
+    end
+
+    def on_receive(fbe_type, buffer, offset, size)
+
+      if fbe_type == EnumsModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_enums_model.attach_buffer(buffer, offset)
+        unless @_enums_model.verify
+          return false
+        end
+        _, deserialized = @_enums_model.deserialize(@_enums_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_enums_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_enums(@_enums_value)
+        true
+      end
+
+      false
+    end
+  end
+
+  # Fast Binary Encoding Enums final sender class
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalSender < FBE::Sender
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer, false, true)
+      @_enums_model = EnumsFinalModel.new(self.buffer)
+    end
+
+    # Sender models accessors
+
+    def enums_model
+      @_enums_model
+    end
+
+    # Send methods
+
+    def send(value)
+      if value.is_a?(Enums)
+        return send_enums(value)
+      end
+      0
+    end
+
+    def send_enums(value)
+      # Serialize the value into the FBE stream
+      serialized = enums_model.serialize(value)
+      raise RuntimeError, "Enums.Enums serialization failed!" if serialized <= 0
+      raise RuntimeError, "Enums.Enums validation failed!" unless enums_model.verify
+
+      # Log the value
+      if logging
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    # Send message handler
+    def on_send(buffer, offset, size)
+      raise NotImplementedError, "Enums.Sender.on_send() not implemented!"
+    end
+  end
+
+  # Fast Binary Encoding Enums final receiver class
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalReceiver < FBE::Receiver
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer, false, true)
+      @_enums_value = Enums.new
+      @_enums_model = EnumsFinalModel.new
+    end
+
+    # Receive handlers
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_enums(value)
+    end
+
+    def on_receive(fbe_type, buffer, offset, size)
+
+      if fbe_type == EnumsFinalModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_enums_model.attach_buffer(buffer, offset)
+        unless @_enums_model.verify
+          return false
+        end
+        _, deserialized = @_enums_model.deserialize(@_enums_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging
+          message = @_enums_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_enums(@_enums_value)
+        true
+      end
+
+      false
     end
   end
 
