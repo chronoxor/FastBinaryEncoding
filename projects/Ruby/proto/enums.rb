@@ -1568,7 +1568,7 @@ module Enums
     end
   end
 
-  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Enums
     attr_accessor :byte0
     attr_accessor :byte1
@@ -2211,6 +2211,3751 @@ module Enums
       end
       result << ")"
       result
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FieldModelEnums < FBE::FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_byte0 = FieldModelEnumByte(self.buffer, 4 + 4)
+      @_byte1 = FieldModelEnumByte(self.buffer, @_byte0.fbe_offset + @_byte0.fbe_size)
+      @_byte2 = FieldModelEnumByte(self.buffer, @_byte1.fbe_offset + @_byte1.fbe_size)
+      @_byte3 = FieldModelEnumByte(self.buffer, @_byte2.fbe_offset + @_byte2.fbe_size)
+      @_byte4 = FieldModelEnumByte(self.buffer, @_byte3.fbe_offset + @_byte3.fbe_size)
+      @_byte5 = FieldModelEnumByte(self.buffer, @_byte4.fbe_offset + @_byte4.fbe_size)
+      @_char0 = FieldModelEnumChar(self.buffer, @_byte5.fbe_offset + @_byte5.fbe_size)
+      @_char1 = FieldModelEnumChar(self.buffer, @_char0.fbe_offset + @_char0.fbe_size)
+      @_char2 = FieldModelEnumChar(self.buffer, @_char1.fbe_offset + @_char1.fbe_size)
+      @_char3 = FieldModelEnumChar(self.buffer, @_char2.fbe_offset + @_char2.fbe_size)
+      @_char4 = FieldModelEnumChar(self.buffer, @_char3.fbe_offset + @_char3.fbe_size)
+      @_char5 = FieldModelEnumChar(self.buffer, @_char4.fbe_offset + @_char4.fbe_size)
+      @_wchar0 = FieldModelEnumWChar(self.buffer, @_char5.fbe_offset + @_char5.fbe_size)
+      @_wchar1 = FieldModelEnumWChar(self.buffer, @_wchar0.fbe_offset + @_wchar0.fbe_size)
+      @_wchar2 = FieldModelEnumWChar(self.buffer, @_wchar1.fbe_offset + @_wchar1.fbe_size)
+      @_wchar3 = FieldModelEnumWChar(self.buffer, @_wchar2.fbe_offset + @_wchar2.fbe_size)
+      @_wchar4 = FieldModelEnumWChar(self.buffer, @_wchar3.fbe_offset + @_wchar3.fbe_size)
+      @_wchar5 = FieldModelEnumWChar(self.buffer, @_wchar4.fbe_offset + @_wchar4.fbe_size)
+      @_int8b0 = FieldModelEnumInt8(self.buffer, @_wchar5.fbe_offset + @_wchar5.fbe_size)
+      @_int8b1 = FieldModelEnumInt8(self.buffer, @_int8b0.fbe_offset + @_int8b0.fbe_size)
+      @_int8b2 = FieldModelEnumInt8(self.buffer, @_int8b1.fbe_offset + @_int8b1.fbe_size)
+      @_int8b3 = FieldModelEnumInt8(self.buffer, @_int8b2.fbe_offset + @_int8b2.fbe_size)
+      @_int8b4 = FieldModelEnumInt8(self.buffer, @_int8b3.fbe_offset + @_int8b3.fbe_size)
+      @_int8b5 = FieldModelEnumInt8(self.buffer, @_int8b4.fbe_offset + @_int8b4.fbe_size)
+      @_uint8b0 = FieldModelEnumUInt8(self.buffer, @_int8b5.fbe_offset + @_int8b5.fbe_size)
+      @_uint8b1 = FieldModelEnumUInt8(self.buffer, @_uint8b0.fbe_offset + @_uint8b0.fbe_size)
+      @_uint8b2 = FieldModelEnumUInt8(self.buffer, @_uint8b1.fbe_offset + @_uint8b1.fbe_size)
+      @_uint8b3 = FieldModelEnumUInt8(self.buffer, @_uint8b2.fbe_offset + @_uint8b2.fbe_size)
+      @_uint8b4 = FieldModelEnumUInt8(self.buffer, @_uint8b3.fbe_offset + @_uint8b3.fbe_size)
+      @_uint8b5 = FieldModelEnumUInt8(self.buffer, @_uint8b4.fbe_offset + @_uint8b4.fbe_size)
+      @_int16b0 = FieldModelEnumInt16(self.buffer, @_uint8b5.fbe_offset + @_uint8b5.fbe_size)
+      @_int16b1 = FieldModelEnumInt16(self.buffer, @_int16b0.fbe_offset + @_int16b0.fbe_size)
+      @_int16b2 = FieldModelEnumInt16(self.buffer, @_int16b1.fbe_offset + @_int16b1.fbe_size)
+      @_int16b3 = FieldModelEnumInt16(self.buffer, @_int16b2.fbe_offset + @_int16b2.fbe_size)
+      @_int16b4 = FieldModelEnumInt16(self.buffer, @_int16b3.fbe_offset + @_int16b3.fbe_size)
+      @_int16b5 = FieldModelEnumInt16(self.buffer, @_int16b4.fbe_offset + @_int16b4.fbe_size)
+      @_uint16b0 = FieldModelEnumUInt16(self.buffer, @_int16b5.fbe_offset + @_int16b5.fbe_size)
+      @_uint16b1 = FieldModelEnumUInt16(self.buffer, @_uint16b0.fbe_offset + @_uint16b0.fbe_size)
+      @_uint16b2 = FieldModelEnumUInt16(self.buffer, @_uint16b1.fbe_offset + @_uint16b1.fbe_size)
+      @_uint16b3 = FieldModelEnumUInt16(self.buffer, @_uint16b2.fbe_offset + @_uint16b2.fbe_size)
+      @_uint16b4 = FieldModelEnumUInt16(self.buffer, @_uint16b3.fbe_offset + @_uint16b3.fbe_size)
+      @_uint16b5 = FieldModelEnumUInt16(self.buffer, @_uint16b4.fbe_offset + @_uint16b4.fbe_size)
+      @_int32b0 = FieldModelEnumInt32(self.buffer, @_uint16b5.fbe_offset + @_uint16b5.fbe_size)
+      @_int32b1 = FieldModelEnumInt32(self.buffer, @_int32b0.fbe_offset + @_int32b0.fbe_size)
+      @_int32b2 = FieldModelEnumInt32(self.buffer, @_int32b1.fbe_offset + @_int32b1.fbe_size)
+      @_int32b3 = FieldModelEnumInt32(self.buffer, @_int32b2.fbe_offset + @_int32b2.fbe_size)
+      @_int32b4 = FieldModelEnumInt32(self.buffer, @_int32b3.fbe_offset + @_int32b3.fbe_size)
+      @_int32b5 = FieldModelEnumInt32(self.buffer, @_int32b4.fbe_offset + @_int32b4.fbe_size)
+      @_uint32b0 = FieldModelEnumUInt32(self.buffer, @_int32b5.fbe_offset + @_int32b5.fbe_size)
+      @_uint32b1 = FieldModelEnumUInt32(self.buffer, @_uint32b0.fbe_offset + @_uint32b0.fbe_size)
+      @_uint32b2 = FieldModelEnumUInt32(self.buffer, @_uint32b1.fbe_offset + @_uint32b1.fbe_size)
+      @_uint32b3 = FieldModelEnumUInt32(self.buffer, @_uint32b2.fbe_offset + @_uint32b2.fbe_size)
+      @_uint32b4 = FieldModelEnumUInt32(self.buffer, @_uint32b3.fbe_offset + @_uint32b3.fbe_size)
+      @_uint32b5 = FieldModelEnumUInt32(self.buffer, @_uint32b4.fbe_offset + @_uint32b4.fbe_size)
+      @_int64b0 = FieldModelEnumInt64(self.buffer, @_uint32b5.fbe_offset + @_uint32b5.fbe_size)
+      @_int64b1 = FieldModelEnumInt64(self.buffer, @_int64b0.fbe_offset + @_int64b0.fbe_size)
+      @_int64b2 = FieldModelEnumInt64(self.buffer, @_int64b1.fbe_offset + @_int64b1.fbe_size)
+      @_int64b3 = FieldModelEnumInt64(self.buffer, @_int64b2.fbe_offset + @_int64b2.fbe_size)
+      @_int64b4 = FieldModelEnumInt64(self.buffer, @_int64b3.fbe_offset + @_int64b3.fbe_size)
+      @_int64b5 = FieldModelEnumInt64(self.buffer, @_int64b4.fbe_offset + @_int64b4.fbe_size)
+      @_uint64b0 = FieldModelEnumUInt64(self.buffer, @_int64b5.fbe_offset + @_int64b5.fbe_size)
+      @_uint64b1 = FieldModelEnumUInt64(self.buffer, @_uint64b0.fbe_offset + @_uint64b0.fbe_size)
+      @_uint64b2 = FieldModelEnumUInt64(self.buffer, @_uint64b1.fbe_offset + @_uint64b1.fbe_size)
+      @_uint64b3 = FieldModelEnumUInt64(self.buffer, @_uint64b2.fbe_offset + @_uint64b2.fbe_size)
+      @_uint64b4 = FieldModelEnumUInt64(self.buffer, @_uint64b3.fbe_offset + @_uint64b3.fbe_size)
+      @_uint64b5 = FieldModelEnumUInt64(self.buffer, @_uint64b4.fbe_offset + @_uint64b4.fbe_size)
+    end
+
+    def byte0
+      @_byte0
+    end
+
+    def byte1
+      @_byte1
+    end
+
+    def byte2
+      @_byte2
+    end
+
+    def byte3
+      @_byte3
+    end
+
+    def byte4
+      @_byte4
+    end
+
+    def byte5
+      @_byte5
+    end
+
+    def char0
+      @_char0
+    end
+
+    def char1
+      @_char1
+    end
+
+    def char2
+      @_char2
+    end
+
+    def char3
+      @_char3
+    end
+
+    def char4
+      @_char4
+    end
+
+    def char5
+      @_char5
+    end
+
+    def wchar0
+      @_wchar0
+    end
+
+    def wchar1
+      @_wchar1
+    end
+
+    def wchar2
+      @_wchar2
+    end
+
+    def wchar3
+      @_wchar3
+    end
+
+    def wchar4
+      @_wchar4
+    end
+
+    def wchar5
+      @_wchar5
+    end
+
+    def int8b0
+      @_int8b0
+    end
+
+    def int8b1
+      @_int8b1
+    end
+
+    def int8b2
+      @_int8b2
+    end
+
+    def int8b3
+      @_int8b3
+    end
+
+    def int8b4
+      @_int8b4
+    end
+
+    def int8b5
+      @_int8b5
+    end
+
+    def uint8b0
+      @_uint8b0
+    end
+
+    def uint8b1
+      @_uint8b1
+    end
+
+    def uint8b2
+      @_uint8b2
+    end
+
+    def uint8b3
+      @_uint8b3
+    end
+
+    def uint8b4
+      @_uint8b4
+    end
+
+    def uint8b5
+      @_uint8b5
+    end
+
+    def int16b0
+      @_int16b0
+    end
+
+    def int16b1
+      @_int16b1
+    end
+
+    def int16b2
+      @_int16b2
+    end
+
+    def int16b3
+      @_int16b3
+    end
+
+    def int16b4
+      @_int16b4
+    end
+
+    def int16b5
+      @_int16b5
+    end
+
+    def uint16b0
+      @_uint16b0
+    end
+
+    def uint16b1
+      @_uint16b1
+    end
+
+    def uint16b2
+      @_uint16b2
+    end
+
+    def uint16b3
+      @_uint16b3
+    end
+
+    def uint16b4
+      @_uint16b4
+    end
+
+    def uint16b5
+      @_uint16b5
+    end
+
+    def int32b0
+      @_int32b0
+    end
+
+    def int32b1
+      @_int32b1
+    end
+
+    def int32b2
+      @_int32b2
+    end
+
+    def int32b3
+      @_int32b3
+    end
+
+    def int32b4
+      @_int32b4
+    end
+
+    def int32b5
+      @_int32b5
+    end
+
+    def uint32b0
+      @_uint32b0
+    end
+
+    def uint32b1
+      @_uint32b1
+    end
+
+    def uint32b2
+      @_uint32b2
+    end
+
+    def uint32b3
+      @_uint32b3
+    end
+
+    def uint32b4
+      @_uint32b4
+    end
+
+    def uint32b5
+      @_uint32b5
+    end
+
+    def int64b0
+      @_int64b0
+    end
+
+    def int64b1
+      @_int64b1
+    end
+
+    def int64b2
+      @_int64b2
+    end
+
+    def int64b3
+      @_int64b3
+    end
+
+    def int64b4
+      @_int64b4
+    end
+
+    def int64b5
+      @_int64b5
+    end
+
+    def uint64b0
+      @_uint64b0
+    end
+
+    def uint64b1
+      @_uint64b1
+    end
+
+    def uint64b2
+      @_uint64b2
+    end
+
+    def uint64b3
+      @_uint64b3
+    end
+
+    def uint64b4
+      @_uint64b4
+    end
+
+    def uint64b5
+      @_uint64b5
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field body size
+    def fbe_body
+      4 + 4
+        + byte0.fbe_size
+        + byte1.fbe_size
+        + byte2.fbe_size
+        + byte3.fbe_size
+        + byte4.fbe_size
+        + byte5.fbe_size
+        + char0.fbe_size
+        + char1.fbe_size
+        + char2.fbe_size
+        + char3.fbe_size
+        + char4.fbe_size
+        + char5.fbe_size
+        + wchar0.fbe_size
+        + wchar1.fbe_size
+        + wchar2.fbe_size
+        + wchar3.fbe_size
+        + wchar4.fbe_size
+        + wchar5.fbe_size
+        + int8b0.fbe_size
+        + int8b1.fbe_size
+        + int8b2.fbe_size
+        + int8b3.fbe_size
+        + int8b4.fbe_size
+        + int8b5.fbe_size
+        + uint8b0.fbe_size
+        + uint8b1.fbe_size
+        + uint8b2.fbe_size
+        + uint8b3.fbe_size
+        + uint8b4.fbe_size
+        + uint8b5.fbe_size
+        + int16b0.fbe_size
+        + int16b1.fbe_size
+        + int16b2.fbe_size
+        + int16b3.fbe_size
+        + int16b4.fbe_size
+        + int16b5.fbe_size
+        + uint16b0.fbe_size
+        + uint16b1.fbe_size
+        + uint16b2.fbe_size
+        + uint16b3.fbe_size
+        + uint16b4.fbe_size
+        + uint16b5.fbe_size
+        + int32b0.fbe_size
+        + int32b1.fbe_size
+        + int32b2.fbe_size
+        + int32b3.fbe_size
+        + int32b4.fbe_size
+        + int32b5.fbe_size
+        + uint32b0.fbe_size
+        + uint32b1.fbe_size
+        + uint32b2.fbe_size
+        + uint32b3.fbe_size
+        + uint32b4.fbe_size
+        + uint32b5.fbe_size
+        + int64b0.fbe_size
+        + int64b1.fbe_size
+        + int64b2.fbe_size
+        + int64b3.fbe_size
+        + int64b4.fbe_size
+        + int64b5.fbe_size
+        + uint64b0.fbe_size
+        + uint64b1.fbe_size
+        + uint64b2.fbe_size
+        + uint64b3.fbe_size
+        + uint64b4.fbe_size
+        + uint64b5.fbe_size
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+
+      fbe_result = fbe_body
+        + byte0.fbe_extra
+        + byte1.fbe_extra
+        + byte2.fbe_extra
+        + byte3.fbe_extra
+        + byte4.fbe_extra
+        + byte5.fbe_extra
+        + char0.fbe_extra
+        + char1.fbe_extra
+        + char2.fbe_extra
+        + char3.fbe_extra
+        + char4.fbe_extra
+        + char5.fbe_extra
+        + wchar0.fbe_extra
+        + wchar1.fbe_extra
+        + wchar2.fbe_extra
+        + wchar3.fbe_extra
+        + wchar4.fbe_extra
+        + wchar5.fbe_extra
+        + int8b0.fbe_extra
+        + int8b1.fbe_extra
+        + int8b2.fbe_extra
+        + int8b3.fbe_extra
+        + int8b4.fbe_extra
+        + int8b5.fbe_extra
+        + uint8b0.fbe_extra
+        + uint8b1.fbe_extra
+        + uint8b2.fbe_extra
+        + uint8b3.fbe_extra
+        + uint8b4.fbe_extra
+        + uint8b5.fbe_extra
+        + int16b0.fbe_extra
+        + int16b1.fbe_extra
+        + int16b2.fbe_extra
+        + int16b3.fbe_extra
+        + int16b4.fbe_extra
+        + int16b5.fbe_extra
+        + uint16b0.fbe_extra
+        + uint16b1.fbe_extra
+        + uint16b2.fbe_extra
+        + uint16b3.fbe_extra
+        + uint16b4.fbe_extra
+        + uint16b5.fbe_extra
+        + int32b0.fbe_extra
+        + int32b1.fbe_extra
+        + int32b2.fbe_extra
+        + int32b3.fbe_extra
+        + int32b4.fbe_extra
+        + int32b5.fbe_extra
+        + uint32b0.fbe_extra
+        + uint32b1.fbe_extra
+        + uint32b2.fbe_extra
+        + uint32b3.fbe_extra
+        + uint32b4.fbe_extra
+        + uint32b5.fbe_extra
+        + int64b0.fbe_extra
+        + int64b1.fbe_extra
+        + int64b2.fbe_extra
+        + int64b3.fbe_extra
+        + int64b4.fbe_extra
+        + int64b5.fbe_extra
+        + uint64b0.fbe_extra
+        + uint64b1.fbe_extra
+        + uint64b2.fbe_extra
+        + uint64b3.fbe_extra
+        + uint64b4.fbe_extra
+        + uint64b5.fbe_extra
+
+      @_buffer.unshift(fbe_struct_offset)
+
+      fbe_result
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 1
+
+    # Check if the struct value is valid
+    def verify(fbe_verify_type = true)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return false
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return false
+      end
+
+      fbe_struct_type = read_uint32(fbe_struct_offset + 4)
+      if fbe_verify_type && (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_result = verify_fields(fbe_struct_size)
+      @_buffer.unshift(fbe_struct_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields(fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + byte0.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless byte0.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += byte0.fbe_size
+
+      if (fbe_current_size + byte1.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless byte1.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += byte1.fbe_size
+
+      if (fbe_current_size + byte2.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless byte2.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += byte2.fbe_size
+
+      if (fbe_current_size + byte3.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless byte3.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += byte3.fbe_size
+
+      if (fbe_current_size + byte4.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless byte4.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += byte4.fbe_size
+
+      if (fbe_current_size + byte5.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless byte5.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += byte5.fbe_size
+
+      if (fbe_current_size + char0.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless char0.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += char0.fbe_size
+
+      if (fbe_current_size + char1.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless char1.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += char1.fbe_size
+
+      if (fbe_current_size + char2.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless char2.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += char2.fbe_size
+
+      if (fbe_current_size + char3.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless char3.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += char3.fbe_size
+
+      if (fbe_current_size + char4.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless char4.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += char4.fbe_size
+
+      if (fbe_current_size + char5.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless char5.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += char5.fbe_size
+
+      if (fbe_current_size + wchar0.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless wchar0.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += wchar0.fbe_size
+
+      if (fbe_current_size + wchar1.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless wchar1.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += wchar1.fbe_size
+
+      if (fbe_current_size + wchar2.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless wchar2.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += wchar2.fbe_size
+
+      if (fbe_current_size + wchar3.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless wchar3.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += wchar3.fbe_size
+
+      if (fbe_current_size + wchar4.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless wchar4.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += wchar4.fbe_size
+
+      if (fbe_current_size + wchar5.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless wchar5.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += wchar5.fbe_size
+
+      if (fbe_current_size + int8b0.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int8b0.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int8b0.fbe_size
+
+      if (fbe_current_size + int8b1.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int8b1.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int8b1.fbe_size
+
+      if (fbe_current_size + int8b2.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int8b2.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int8b2.fbe_size
+
+      if (fbe_current_size + int8b3.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int8b3.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int8b3.fbe_size
+
+      if (fbe_current_size + int8b4.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int8b4.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int8b4.fbe_size
+
+      if (fbe_current_size + int8b5.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int8b5.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int8b5.fbe_size
+
+      if (fbe_current_size + uint8b0.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint8b0.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint8b0.fbe_size
+
+      if (fbe_current_size + uint8b1.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint8b1.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint8b1.fbe_size
+
+      if (fbe_current_size + uint8b2.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint8b2.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint8b2.fbe_size
+
+      if (fbe_current_size + uint8b3.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint8b3.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint8b3.fbe_size
+
+      if (fbe_current_size + uint8b4.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint8b4.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint8b4.fbe_size
+
+      if (fbe_current_size + uint8b5.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint8b5.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint8b5.fbe_size
+
+      if (fbe_current_size + int16b0.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int16b0.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int16b0.fbe_size
+
+      if (fbe_current_size + int16b1.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int16b1.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int16b1.fbe_size
+
+      if (fbe_current_size + int16b2.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int16b2.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int16b2.fbe_size
+
+      if (fbe_current_size + int16b3.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int16b3.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int16b3.fbe_size
+
+      if (fbe_current_size + int16b4.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int16b4.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int16b4.fbe_size
+
+      if (fbe_current_size + int16b5.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int16b5.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int16b5.fbe_size
+
+      if (fbe_current_size + uint16b0.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint16b0.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint16b0.fbe_size
+
+      if (fbe_current_size + uint16b1.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint16b1.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint16b1.fbe_size
+
+      if (fbe_current_size + uint16b2.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint16b2.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint16b2.fbe_size
+
+      if (fbe_current_size + uint16b3.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint16b3.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint16b3.fbe_size
+
+      if (fbe_current_size + uint16b4.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint16b4.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint16b4.fbe_size
+
+      if (fbe_current_size + uint16b5.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint16b5.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint16b5.fbe_size
+
+      if (fbe_current_size + int32b0.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int32b0.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int32b0.fbe_size
+
+      if (fbe_current_size + int32b1.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int32b1.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int32b1.fbe_size
+
+      if (fbe_current_size + int32b2.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int32b2.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int32b2.fbe_size
+
+      if (fbe_current_size + int32b3.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int32b3.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int32b3.fbe_size
+
+      if (fbe_current_size + int32b4.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int32b4.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int32b4.fbe_size
+
+      if (fbe_current_size + int32b5.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int32b5.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int32b5.fbe_size
+
+      if (fbe_current_size + uint32b0.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint32b0.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint32b0.fbe_size
+
+      if (fbe_current_size + uint32b1.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint32b1.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint32b1.fbe_size
+
+      if (fbe_current_size + uint32b2.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint32b2.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint32b2.fbe_size
+
+      if (fbe_current_size + uint32b3.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint32b3.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint32b3.fbe_size
+
+      if (fbe_current_size + uint32b4.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint32b4.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint32b4.fbe_size
+
+      if (fbe_current_size + uint32b5.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint32b5.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint32b5.fbe_size
+
+      if (fbe_current_size + int64b0.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int64b0.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int64b0.fbe_size
+
+      if (fbe_current_size + int64b1.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int64b1.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int64b1.fbe_size
+
+      if (fbe_current_size + int64b2.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int64b2.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int64b2.fbe_size
+
+      if (fbe_current_size + int64b3.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int64b3.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int64b3.fbe_size
+
+      if (fbe_current_size + int64b4.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int64b4.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int64b4.fbe_size
+
+      if (fbe_current_size + int64b5.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless int64b5.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int64b5.fbe_size
+
+      if (fbe_current_size + uint64b0.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint64b0.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint64b0.fbe_size
+
+      if (fbe_current_size + uint64b1.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint64b1.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint64b1.fbe_size
+
+      if (fbe_current_size + uint64b2.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint64b2.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint64b2.fbe_size
+
+      if (fbe_current_size + uint64b3.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint64b3.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint64b3.fbe_size
+
+      if (fbe_current_size + uint64b4.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint64b4.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint64b4.fbe_size
+
+      if (fbe_current_size + uint64b5.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uint64b5.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint64b5.fbe_size
+
+      true
+    end
+
+    # Get the struct value (begin phase)
+    def get_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Get the struct value (end phase)
+    def get_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Get the struct value
+    def get(fbe_value = Enums.new)
+      fbe_begin = get_begin
+      if fbe_begin == 0
+        return fbe_value
+      end
+
+      fbe_struct_size = read_uint32(0)
+      get_fields(fbe_value, fbe_struct_size)
+      get_end(fbe_begin)
+      fbe_value
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value, fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + byte0.fbe_size) <= fbe_struct_size
+        fbe_value.byte0 = byte0.get(EnumByte.ENUM_VALUE_0)
+      else
+        fbe_value.byte0 = EnumByte.ENUM_VALUE_0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += byte0.fbe_size
+
+      if (fbe_current_size + byte1.fbe_size) <= fbe_struct_size
+        fbe_value.byte1 = byte1.get(EnumByte.ENUM_VALUE_1)
+      else
+        fbe_value.byte1 = EnumByte.ENUM_VALUE_1
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += byte1.fbe_size
+
+      if (fbe_current_size + byte2.fbe_size) <= fbe_struct_size
+        fbe_value.byte2 = byte2.get(EnumByte.ENUM_VALUE_2)
+      else
+        fbe_value.byte2 = EnumByte.ENUM_VALUE_2
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += byte2.fbe_size
+
+      if (fbe_current_size + byte3.fbe_size) <= fbe_struct_size
+        fbe_value.byte3 = byte3.get(EnumByte.ENUM_VALUE_3)
+      else
+        fbe_value.byte3 = EnumByte.ENUM_VALUE_3
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += byte3.fbe_size
+
+      if (fbe_current_size + byte4.fbe_size) <= fbe_struct_size
+        fbe_value.byte4 = byte4.get(EnumByte.ENUM_VALUE_4)
+      else
+        fbe_value.byte4 = EnumByte.ENUM_VALUE_4
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += byte4.fbe_size
+
+      if (fbe_current_size + byte5.fbe_size) <= fbe_struct_size
+        fbe_value.byte5 = byte5.get(EnumByte.ENUM_VALUE_5)
+      else
+        fbe_value.byte5 = EnumByte.ENUM_VALUE_5
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += byte5.fbe_size
+
+      if (fbe_current_size + char0.fbe_size) <= fbe_struct_size
+        fbe_value.char0 = char0.get(EnumChar.ENUM_VALUE_0)
+      else
+        fbe_value.char0 = EnumChar.ENUM_VALUE_0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += char0.fbe_size
+
+      if (fbe_current_size + char1.fbe_size) <= fbe_struct_size
+        fbe_value.char1 = char1.get(EnumChar.ENUM_VALUE_1)
+      else
+        fbe_value.char1 = EnumChar.ENUM_VALUE_1
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += char1.fbe_size
+
+      if (fbe_current_size + char2.fbe_size) <= fbe_struct_size
+        fbe_value.char2 = char2.get(EnumChar.ENUM_VALUE_2)
+      else
+        fbe_value.char2 = EnumChar.ENUM_VALUE_2
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += char2.fbe_size
+
+      if (fbe_current_size + char3.fbe_size) <= fbe_struct_size
+        fbe_value.char3 = char3.get(EnumChar.ENUM_VALUE_3)
+      else
+        fbe_value.char3 = EnumChar.ENUM_VALUE_3
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += char3.fbe_size
+
+      if (fbe_current_size + char4.fbe_size) <= fbe_struct_size
+        fbe_value.char4 = char4.get(EnumChar.ENUM_VALUE_4)
+      else
+        fbe_value.char4 = EnumChar.ENUM_VALUE_4
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += char4.fbe_size
+
+      if (fbe_current_size + char5.fbe_size) <= fbe_struct_size
+        fbe_value.char5 = char5.get(EnumChar.ENUM_VALUE_5)
+      else
+        fbe_value.char5 = EnumChar.ENUM_VALUE_5
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += char5.fbe_size
+
+      if (fbe_current_size + wchar0.fbe_size) <= fbe_struct_size
+        fbe_value.wchar0 = wchar0.get(EnumWChar.ENUM_VALUE_0)
+      else
+        fbe_value.wchar0 = EnumWChar.ENUM_VALUE_0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += wchar0.fbe_size
+
+      if (fbe_current_size + wchar1.fbe_size) <= fbe_struct_size
+        fbe_value.wchar1 = wchar1.get(EnumWChar.ENUM_VALUE_1)
+      else
+        fbe_value.wchar1 = EnumWChar.ENUM_VALUE_1
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += wchar1.fbe_size
+
+      if (fbe_current_size + wchar2.fbe_size) <= fbe_struct_size
+        fbe_value.wchar2 = wchar2.get(EnumWChar.ENUM_VALUE_2)
+      else
+        fbe_value.wchar2 = EnumWChar.ENUM_VALUE_2
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += wchar2.fbe_size
+
+      if (fbe_current_size + wchar3.fbe_size) <= fbe_struct_size
+        fbe_value.wchar3 = wchar3.get(EnumWChar.ENUM_VALUE_3)
+      else
+        fbe_value.wchar3 = EnumWChar.ENUM_VALUE_3
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += wchar3.fbe_size
+
+      if (fbe_current_size + wchar4.fbe_size) <= fbe_struct_size
+        fbe_value.wchar4 = wchar4.get(EnumWChar.ENUM_VALUE_4)
+      else
+        fbe_value.wchar4 = EnumWChar.ENUM_VALUE_4
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += wchar4.fbe_size
+
+      if (fbe_current_size + wchar5.fbe_size) <= fbe_struct_size
+        fbe_value.wchar5 = wchar5.get(EnumWChar.ENUM_VALUE_5)
+      else
+        fbe_value.wchar5 = EnumWChar.ENUM_VALUE_5
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += wchar5.fbe_size
+
+      if (fbe_current_size + int8b0.fbe_size) <= fbe_struct_size
+        fbe_value.int8b0 = int8b0.get(EnumInt8.ENUM_VALUE_0)
+      else
+        fbe_value.int8b0 = EnumInt8.ENUM_VALUE_0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int8b0.fbe_size
+
+      if (fbe_current_size + int8b1.fbe_size) <= fbe_struct_size
+        fbe_value.int8b1 = int8b1.get(EnumInt8.ENUM_VALUE_1)
+      else
+        fbe_value.int8b1 = EnumInt8.ENUM_VALUE_1
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int8b1.fbe_size
+
+      if (fbe_current_size + int8b2.fbe_size) <= fbe_struct_size
+        fbe_value.int8b2 = int8b2.get(EnumInt8.ENUM_VALUE_2)
+      else
+        fbe_value.int8b2 = EnumInt8.ENUM_VALUE_2
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int8b2.fbe_size
+
+      if (fbe_current_size + int8b3.fbe_size) <= fbe_struct_size
+        fbe_value.int8b3 = int8b3.get(EnumInt8.ENUM_VALUE_3)
+      else
+        fbe_value.int8b3 = EnumInt8.ENUM_VALUE_3
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int8b3.fbe_size
+
+      if (fbe_current_size + int8b4.fbe_size) <= fbe_struct_size
+        fbe_value.int8b4 = int8b4.get(EnumInt8.ENUM_VALUE_4)
+      else
+        fbe_value.int8b4 = EnumInt8.ENUM_VALUE_4
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int8b4.fbe_size
+
+      if (fbe_current_size + int8b5.fbe_size) <= fbe_struct_size
+        fbe_value.int8b5 = int8b5.get(EnumInt8.ENUM_VALUE_5)
+      else
+        fbe_value.int8b5 = EnumInt8.ENUM_VALUE_5
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int8b5.fbe_size
+
+      if (fbe_current_size + uint8b0.fbe_size) <= fbe_struct_size
+        fbe_value.uint8b0 = uint8b0.get(EnumUInt8.ENUM_VALUE_0)
+      else
+        fbe_value.uint8b0 = EnumUInt8.ENUM_VALUE_0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint8b0.fbe_size
+
+      if (fbe_current_size + uint8b1.fbe_size) <= fbe_struct_size
+        fbe_value.uint8b1 = uint8b1.get(EnumUInt8.ENUM_VALUE_1)
+      else
+        fbe_value.uint8b1 = EnumUInt8.ENUM_VALUE_1
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint8b1.fbe_size
+
+      if (fbe_current_size + uint8b2.fbe_size) <= fbe_struct_size
+        fbe_value.uint8b2 = uint8b2.get(EnumUInt8.ENUM_VALUE_2)
+      else
+        fbe_value.uint8b2 = EnumUInt8.ENUM_VALUE_2
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint8b2.fbe_size
+
+      if (fbe_current_size + uint8b3.fbe_size) <= fbe_struct_size
+        fbe_value.uint8b3 = uint8b3.get(EnumUInt8.ENUM_VALUE_3)
+      else
+        fbe_value.uint8b3 = EnumUInt8.ENUM_VALUE_3
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint8b3.fbe_size
+
+      if (fbe_current_size + uint8b4.fbe_size) <= fbe_struct_size
+        fbe_value.uint8b4 = uint8b4.get(EnumUInt8.ENUM_VALUE_4)
+      else
+        fbe_value.uint8b4 = EnumUInt8.ENUM_VALUE_4
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint8b4.fbe_size
+
+      if (fbe_current_size + uint8b5.fbe_size) <= fbe_struct_size
+        fbe_value.uint8b5 = uint8b5.get(EnumUInt8.ENUM_VALUE_5)
+      else
+        fbe_value.uint8b5 = EnumUInt8.ENUM_VALUE_5
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint8b5.fbe_size
+
+      if (fbe_current_size + int16b0.fbe_size) <= fbe_struct_size
+        fbe_value.int16b0 = int16b0.get(EnumInt16.ENUM_VALUE_0)
+      else
+        fbe_value.int16b0 = EnumInt16.ENUM_VALUE_0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int16b0.fbe_size
+
+      if (fbe_current_size + int16b1.fbe_size) <= fbe_struct_size
+        fbe_value.int16b1 = int16b1.get(EnumInt16.ENUM_VALUE_1)
+      else
+        fbe_value.int16b1 = EnumInt16.ENUM_VALUE_1
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int16b1.fbe_size
+
+      if (fbe_current_size + int16b2.fbe_size) <= fbe_struct_size
+        fbe_value.int16b2 = int16b2.get(EnumInt16.ENUM_VALUE_2)
+      else
+        fbe_value.int16b2 = EnumInt16.ENUM_VALUE_2
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int16b2.fbe_size
+
+      if (fbe_current_size + int16b3.fbe_size) <= fbe_struct_size
+        fbe_value.int16b3 = int16b3.get(EnumInt16.ENUM_VALUE_3)
+      else
+        fbe_value.int16b3 = EnumInt16.ENUM_VALUE_3
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int16b3.fbe_size
+
+      if (fbe_current_size + int16b4.fbe_size) <= fbe_struct_size
+        fbe_value.int16b4 = int16b4.get(EnumInt16.ENUM_VALUE_4)
+      else
+        fbe_value.int16b4 = EnumInt16.ENUM_VALUE_4
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int16b4.fbe_size
+
+      if (fbe_current_size + int16b5.fbe_size) <= fbe_struct_size
+        fbe_value.int16b5 = int16b5.get(EnumInt16.ENUM_VALUE_5)
+      else
+        fbe_value.int16b5 = EnumInt16.ENUM_VALUE_5
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int16b5.fbe_size
+
+      if (fbe_current_size + uint16b0.fbe_size) <= fbe_struct_size
+        fbe_value.uint16b0 = uint16b0.get(EnumUInt16.ENUM_VALUE_0)
+      else
+        fbe_value.uint16b0 = EnumUInt16.ENUM_VALUE_0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint16b0.fbe_size
+
+      if (fbe_current_size + uint16b1.fbe_size) <= fbe_struct_size
+        fbe_value.uint16b1 = uint16b1.get(EnumUInt16.ENUM_VALUE_1)
+      else
+        fbe_value.uint16b1 = EnumUInt16.ENUM_VALUE_1
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint16b1.fbe_size
+
+      if (fbe_current_size + uint16b2.fbe_size) <= fbe_struct_size
+        fbe_value.uint16b2 = uint16b2.get(EnumUInt16.ENUM_VALUE_2)
+      else
+        fbe_value.uint16b2 = EnumUInt16.ENUM_VALUE_2
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint16b2.fbe_size
+
+      if (fbe_current_size + uint16b3.fbe_size) <= fbe_struct_size
+        fbe_value.uint16b3 = uint16b3.get(EnumUInt16.ENUM_VALUE_3)
+      else
+        fbe_value.uint16b3 = EnumUInt16.ENUM_VALUE_3
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint16b3.fbe_size
+
+      if (fbe_current_size + uint16b4.fbe_size) <= fbe_struct_size
+        fbe_value.uint16b4 = uint16b4.get(EnumUInt16.ENUM_VALUE_4)
+      else
+        fbe_value.uint16b4 = EnumUInt16.ENUM_VALUE_4
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint16b4.fbe_size
+
+      if (fbe_current_size + uint16b5.fbe_size) <= fbe_struct_size
+        fbe_value.uint16b5 = uint16b5.get(EnumUInt16.ENUM_VALUE_5)
+      else
+        fbe_value.uint16b5 = EnumUInt16.ENUM_VALUE_5
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint16b5.fbe_size
+
+      if (fbe_current_size + int32b0.fbe_size) <= fbe_struct_size
+        fbe_value.int32b0 = int32b0.get(EnumInt32.ENUM_VALUE_0)
+      else
+        fbe_value.int32b0 = EnumInt32.ENUM_VALUE_0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int32b0.fbe_size
+
+      if (fbe_current_size + int32b1.fbe_size) <= fbe_struct_size
+        fbe_value.int32b1 = int32b1.get(EnumInt32.ENUM_VALUE_1)
+      else
+        fbe_value.int32b1 = EnumInt32.ENUM_VALUE_1
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int32b1.fbe_size
+
+      if (fbe_current_size + int32b2.fbe_size) <= fbe_struct_size
+        fbe_value.int32b2 = int32b2.get(EnumInt32.ENUM_VALUE_2)
+      else
+        fbe_value.int32b2 = EnumInt32.ENUM_VALUE_2
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int32b2.fbe_size
+
+      if (fbe_current_size + int32b3.fbe_size) <= fbe_struct_size
+        fbe_value.int32b3 = int32b3.get(EnumInt32.ENUM_VALUE_3)
+      else
+        fbe_value.int32b3 = EnumInt32.ENUM_VALUE_3
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int32b3.fbe_size
+
+      if (fbe_current_size + int32b4.fbe_size) <= fbe_struct_size
+        fbe_value.int32b4 = int32b4.get(EnumInt32.ENUM_VALUE_4)
+      else
+        fbe_value.int32b4 = EnumInt32.ENUM_VALUE_4
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int32b4.fbe_size
+
+      if (fbe_current_size + int32b5.fbe_size) <= fbe_struct_size
+        fbe_value.int32b5 = int32b5.get(EnumInt32.ENUM_VALUE_5)
+      else
+        fbe_value.int32b5 = EnumInt32.ENUM_VALUE_5
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int32b5.fbe_size
+
+      if (fbe_current_size + uint32b0.fbe_size) <= fbe_struct_size
+        fbe_value.uint32b0 = uint32b0.get(EnumUInt32.ENUM_VALUE_0)
+      else
+        fbe_value.uint32b0 = EnumUInt32.ENUM_VALUE_0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint32b0.fbe_size
+
+      if (fbe_current_size + uint32b1.fbe_size) <= fbe_struct_size
+        fbe_value.uint32b1 = uint32b1.get(EnumUInt32.ENUM_VALUE_1)
+      else
+        fbe_value.uint32b1 = EnumUInt32.ENUM_VALUE_1
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint32b1.fbe_size
+
+      if (fbe_current_size + uint32b2.fbe_size) <= fbe_struct_size
+        fbe_value.uint32b2 = uint32b2.get(EnumUInt32.ENUM_VALUE_2)
+      else
+        fbe_value.uint32b2 = EnumUInt32.ENUM_VALUE_2
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint32b2.fbe_size
+
+      if (fbe_current_size + uint32b3.fbe_size) <= fbe_struct_size
+        fbe_value.uint32b3 = uint32b3.get(EnumUInt32.ENUM_VALUE_3)
+      else
+        fbe_value.uint32b3 = EnumUInt32.ENUM_VALUE_3
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint32b3.fbe_size
+
+      if (fbe_current_size + uint32b4.fbe_size) <= fbe_struct_size
+        fbe_value.uint32b4 = uint32b4.get(EnumUInt32.ENUM_VALUE_4)
+      else
+        fbe_value.uint32b4 = EnumUInt32.ENUM_VALUE_4
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint32b4.fbe_size
+
+      if (fbe_current_size + uint32b5.fbe_size) <= fbe_struct_size
+        fbe_value.uint32b5 = uint32b5.get(EnumUInt32.ENUM_VALUE_5)
+      else
+        fbe_value.uint32b5 = EnumUInt32.ENUM_VALUE_5
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint32b5.fbe_size
+
+      if (fbe_current_size + int64b0.fbe_size) <= fbe_struct_size
+        fbe_value.int64b0 = int64b0.get(EnumInt64.ENUM_VALUE_0)
+      else
+        fbe_value.int64b0 = EnumInt64.ENUM_VALUE_0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int64b0.fbe_size
+
+      if (fbe_current_size + int64b1.fbe_size) <= fbe_struct_size
+        fbe_value.int64b1 = int64b1.get(EnumInt64.ENUM_VALUE_1)
+      else
+        fbe_value.int64b1 = EnumInt64.ENUM_VALUE_1
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int64b1.fbe_size
+
+      if (fbe_current_size + int64b2.fbe_size) <= fbe_struct_size
+        fbe_value.int64b2 = int64b2.get(EnumInt64.ENUM_VALUE_2)
+      else
+        fbe_value.int64b2 = EnumInt64.ENUM_VALUE_2
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int64b2.fbe_size
+
+      if (fbe_current_size + int64b3.fbe_size) <= fbe_struct_size
+        fbe_value.int64b3 = int64b3.get(EnumInt64.ENUM_VALUE_3)
+      else
+        fbe_value.int64b3 = EnumInt64.ENUM_VALUE_3
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int64b3.fbe_size
+
+      if (fbe_current_size + int64b4.fbe_size) <= fbe_struct_size
+        fbe_value.int64b4 = int64b4.get(EnumInt64.ENUM_VALUE_4)
+      else
+        fbe_value.int64b4 = EnumInt64.ENUM_VALUE_4
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int64b4.fbe_size
+
+      if (fbe_current_size + int64b5.fbe_size) <= fbe_struct_size
+        fbe_value.int64b5 = int64b5.get(EnumInt64.ENUM_VALUE_5)
+      else
+        fbe_value.int64b5 = EnumInt64.ENUM_VALUE_5
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += int64b5.fbe_size
+
+      if (fbe_current_size + uint64b0.fbe_size) <= fbe_struct_size
+        fbe_value.uint64b0 = uint64b0.get(EnumUInt64.ENUM_VALUE_0)
+      else
+        fbe_value.uint64b0 = EnumUInt64.ENUM_VALUE_0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint64b0.fbe_size
+
+      if (fbe_current_size + uint64b1.fbe_size) <= fbe_struct_size
+        fbe_value.uint64b1 = uint64b1.get(EnumUInt64.ENUM_VALUE_1)
+      else
+        fbe_value.uint64b1 = EnumUInt64.ENUM_VALUE_1
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint64b1.fbe_size
+
+      if (fbe_current_size + uint64b2.fbe_size) <= fbe_struct_size
+        fbe_value.uint64b2 = uint64b2.get(EnumUInt64.ENUM_VALUE_2)
+      else
+        fbe_value.uint64b2 = EnumUInt64.ENUM_VALUE_2
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint64b2.fbe_size
+
+      if (fbe_current_size + uint64b3.fbe_size) <= fbe_struct_size
+        fbe_value.uint64b3 = uint64b3.get(EnumUInt64.ENUM_VALUE_3)
+      else
+        fbe_value.uint64b3 = EnumUInt64.ENUM_VALUE_3
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint64b3.fbe_size
+
+      if (fbe_current_size + uint64b4.fbe_size) <= fbe_struct_size
+        fbe_value.uint64b4 = uint64b4.get(EnumUInt64.ENUM_VALUE_4)
+      else
+        fbe_value.uint64b4 = EnumUInt64.ENUM_VALUE_4
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint64b4.fbe_size
+
+      if (fbe_current_size + uint64b5.fbe_size) <= fbe_struct_size
+        fbe_value.uint64b5 = uint64b5.get(EnumUInt64.ENUM_VALUE_5)
+      else
+        fbe_value.uint64b5 = EnumUInt64.ENUM_VALUE_5
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uint64b5.fbe_size
+    end
+
+    # Set the struct value (begin phase)
+    def set_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_size = fbe_body
+      fbe_struct_offset = @_buffer.allocate(fbe_struct_size) - @_buffer.offset
+      if (fbe_struct_offset <= 0) || ((@_buffer.offset + fbe_struct_offset + fbe_struct_size) > @_buffer.size)
+        return 0
+      end
+
+      write_uint32(fbe_offset, fbe_struct_offset)
+      write_uint32(fbe_struct_offset, fbe_struct_size)
+      write_uint32(fbe_struct_offset + 4, fbe_type)
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Set the struct value (end phase)
+    def set_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      fbe_begin = set_begin
+      if fbe_begin == 0
+        return
+      end
+
+      set_fields(fbe_value)
+      set_end(fbe_begin)
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      byte0.set(fbe_value.byte0)
+      byte1.set(fbe_value.byte1)
+      byte2.set(fbe_value.byte2)
+      byte3.set(fbe_value.byte3)
+      byte4.set(fbe_value.byte4)
+      byte5.set(fbe_value.byte5)
+      char0.set(fbe_value.char0)
+      char1.set(fbe_value.char1)
+      char2.set(fbe_value.char2)
+      char3.set(fbe_value.char3)
+      char4.set(fbe_value.char4)
+      char5.set(fbe_value.char5)
+      wchar0.set(fbe_value.wchar0)
+      wchar1.set(fbe_value.wchar1)
+      wchar2.set(fbe_value.wchar2)
+      wchar3.set(fbe_value.wchar3)
+      wchar4.set(fbe_value.wchar4)
+      wchar5.set(fbe_value.wchar5)
+      int8b0.set(fbe_value.int8b0)
+      int8b1.set(fbe_value.int8b1)
+      int8b2.set(fbe_value.int8b2)
+      int8b3.set(fbe_value.int8b3)
+      int8b4.set(fbe_value.int8b4)
+      int8b5.set(fbe_value.int8b5)
+      uint8b0.set(fbe_value.uint8b0)
+      uint8b1.set(fbe_value.uint8b1)
+      uint8b2.set(fbe_value.uint8b2)
+      uint8b3.set(fbe_value.uint8b3)
+      uint8b4.set(fbe_value.uint8b4)
+      uint8b5.set(fbe_value.uint8b5)
+      int16b0.set(fbe_value.int16b0)
+      int16b1.set(fbe_value.int16b1)
+      int16b2.set(fbe_value.int16b2)
+      int16b3.set(fbe_value.int16b3)
+      int16b4.set(fbe_value.int16b4)
+      int16b5.set(fbe_value.int16b5)
+      uint16b0.set(fbe_value.uint16b0)
+      uint16b1.set(fbe_value.uint16b1)
+      uint16b2.set(fbe_value.uint16b2)
+      uint16b3.set(fbe_value.uint16b3)
+      uint16b4.set(fbe_value.uint16b4)
+      uint16b5.set(fbe_value.uint16b5)
+      int32b0.set(fbe_value.int32b0)
+      int32b1.set(fbe_value.int32b1)
+      int32b2.set(fbe_value.int32b2)
+      int32b3.set(fbe_value.int32b3)
+      int32b4.set(fbe_value.int32b4)
+      int32b5.set(fbe_value.int32b5)
+      uint32b0.set(fbe_value.uint32b0)
+      uint32b1.set(fbe_value.uint32b1)
+      uint32b2.set(fbe_value.uint32b2)
+      uint32b3.set(fbe_value.uint32b3)
+      uint32b4.set(fbe_value.uint32b4)
+      uint32b5.set(fbe_value.uint32b5)
+      int64b0.set(fbe_value.int64b0)
+      int64b1.set(fbe_value.int64b1)
+      int64b2.set(fbe_value.int64b2)
+      int64b3.set(fbe_value.int64b3)
+      int64b4.set(fbe_value.int64b4)
+      int64b5.set(fbe_value.int64b5)
+      uint64b0.set(fbe_value.uint64b0)
+      uint64b1.set(fbe_value.uint64b1)
+      uint64b2.set(fbe_value.uint64b2)
+      uint64b3.set(fbe_value.uint64b3)
+      uint64b4.set(fbe_value.uint64b4)
+      uint64b5.set(fbe_value.uint64b5)
+    end
+  end
+
+  # Fast Binary Encoding Enums model class
+  class EnumsModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FieldModelEnums(self.buffer, 4)
+    end
+
+    def model
+      @_model
+    end
+
+    # Get the model size
+    def fbe_size
+      @_model.fbe_size + @_model.fbe_extra
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FieldModelEnums::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        return false
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        return false
+      end
+
+      @_model.verify
+    end
+
+    # Create a new model (begin phase)
+    def create_begin
+      buffer.allocate(4 + @_model.fbe_size)
+    end
+
+    # Create a new model (end phase)
+    def create_end(fbe_begin)
+      fbe_end = buffer.size
+      fbe_full_size = fbe_end - fbe_begin
+      write_uint32(@_model.fbe_offset - 4, fbe_full_size)
+      fbe_full_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_begin = create_begin
+      @_model.set(value)
+      create_end(fbe_begin)
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = Enums.new)
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        [Enums.new, 0]
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        [Enums.new, 0]
+      end
+
+      @_model.get(value)
+      [value, fbe_full_size]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalModelEnums < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_byte0 = FinalModelEnumByte(self.buffer, 0)
+      @_byte1 = FinalModelEnumByte(self.buffer, 0)
+      @_byte2 = FinalModelEnumByte(self.buffer, 0)
+      @_byte3 = FinalModelEnumByte(self.buffer, 0)
+      @_byte4 = FinalModelEnumByte(self.buffer, 0)
+      @_byte5 = FinalModelEnumByte(self.buffer, 0)
+      @_char0 = FinalModelEnumChar(self.buffer, 0)
+      @_char1 = FinalModelEnumChar(self.buffer, 0)
+      @_char2 = FinalModelEnumChar(self.buffer, 0)
+      @_char3 = FinalModelEnumChar(self.buffer, 0)
+      @_char4 = FinalModelEnumChar(self.buffer, 0)
+      @_char5 = FinalModelEnumChar(self.buffer, 0)
+      @_wchar0 = FinalModelEnumWChar(self.buffer, 0)
+      @_wchar1 = FinalModelEnumWChar(self.buffer, 0)
+      @_wchar2 = FinalModelEnumWChar(self.buffer, 0)
+      @_wchar3 = FinalModelEnumWChar(self.buffer, 0)
+      @_wchar4 = FinalModelEnumWChar(self.buffer, 0)
+      @_wchar5 = FinalModelEnumWChar(self.buffer, 0)
+      @_int8b0 = FinalModelEnumInt8(self.buffer, 0)
+      @_int8b1 = FinalModelEnumInt8(self.buffer, 0)
+      @_int8b2 = FinalModelEnumInt8(self.buffer, 0)
+      @_int8b3 = FinalModelEnumInt8(self.buffer, 0)
+      @_int8b4 = FinalModelEnumInt8(self.buffer, 0)
+      @_int8b5 = FinalModelEnumInt8(self.buffer, 0)
+      @_uint8b0 = FinalModelEnumUInt8(self.buffer, 0)
+      @_uint8b1 = FinalModelEnumUInt8(self.buffer, 0)
+      @_uint8b2 = FinalModelEnumUInt8(self.buffer, 0)
+      @_uint8b3 = FinalModelEnumUInt8(self.buffer, 0)
+      @_uint8b4 = FinalModelEnumUInt8(self.buffer, 0)
+      @_uint8b5 = FinalModelEnumUInt8(self.buffer, 0)
+      @_int16b0 = FinalModelEnumInt16(self.buffer, 0)
+      @_int16b1 = FinalModelEnumInt16(self.buffer, 0)
+      @_int16b2 = FinalModelEnumInt16(self.buffer, 0)
+      @_int16b3 = FinalModelEnumInt16(self.buffer, 0)
+      @_int16b4 = FinalModelEnumInt16(self.buffer, 0)
+      @_int16b5 = FinalModelEnumInt16(self.buffer, 0)
+      @_uint16b0 = FinalModelEnumUInt16(self.buffer, 0)
+      @_uint16b1 = FinalModelEnumUInt16(self.buffer, 0)
+      @_uint16b2 = FinalModelEnumUInt16(self.buffer, 0)
+      @_uint16b3 = FinalModelEnumUInt16(self.buffer, 0)
+      @_uint16b4 = FinalModelEnumUInt16(self.buffer, 0)
+      @_uint16b5 = FinalModelEnumUInt16(self.buffer, 0)
+      @_int32b0 = FinalModelEnumInt32(self.buffer, 0)
+      @_int32b1 = FinalModelEnumInt32(self.buffer, 0)
+      @_int32b2 = FinalModelEnumInt32(self.buffer, 0)
+      @_int32b3 = FinalModelEnumInt32(self.buffer, 0)
+      @_int32b4 = FinalModelEnumInt32(self.buffer, 0)
+      @_int32b5 = FinalModelEnumInt32(self.buffer, 0)
+      @_uint32b0 = FinalModelEnumUInt32(self.buffer, 0)
+      @_uint32b1 = FinalModelEnumUInt32(self.buffer, 0)
+      @_uint32b2 = FinalModelEnumUInt32(self.buffer, 0)
+      @_uint32b3 = FinalModelEnumUInt32(self.buffer, 0)
+      @_uint32b4 = FinalModelEnumUInt32(self.buffer, 0)
+      @_uint32b5 = FinalModelEnumUInt32(self.buffer, 0)
+      @_int64b0 = FinalModelEnumInt64(self.buffer, 0)
+      @_int64b1 = FinalModelEnumInt64(self.buffer, 0)
+      @_int64b2 = FinalModelEnumInt64(self.buffer, 0)
+      @_int64b3 = FinalModelEnumInt64(self.buffer, 0)
+      @_int64b4 = FinalModelEnumInt64(self.buffer, 0)
+      @_int64b5 = FinalModelEnumInt64(self.buffer, 0)
+      @_uint64b0 = FinalModelEnumUInt64(self.buffer, 0)
+      @_uint64b1 = FinalModelEnumUInt64(self.buffer, 0)
+      @_uint64b2 = FinalModelEnumUInt64(self.buffer, 0)
+      @_uint64b3 = FinalModelEnumUInt64(self.buffer, 0)
+      @_uint64b4 = FinalModelEnumUInt64(self.buffer, 0)
+      @_uint64b5 = FinalModelEnumUInt64(self.buffer, 0)
+    end
+
+    def byte0
+      @_byte0
+    end
+
+    def byte1
+      @_byte1
+    end
+
+    def byte2
+      @_byte2
+    end
+
+    def byte3
+      @_byte3
+    end
+
+    def byte4
+      @_byte4
+    end
+
+    def byte5
+      @_byte5
+    end
+
+    def char0
+      @_char0
+    end
+
+    def char1
+      @_char1
+    end
+
+    def char2
+      @_char2
+    end
+
+    def char3
+      @_char3
+    end
+
+    def char4
+      @_char4
+    end
+
+    def char5
+      @_char5
+    end
+
+    def wchar0
+      @_wchar0
+    end
+
+    def wchar1
+      @_wchar1
+    end
+
+    def wchar2
+      @_wchar2
+    end
+
+    def wchar3
+      @_wchar3
+    end
+
+    def wchar4
+      @_wchar4
+    end
+
+    def wchar5
+      @_wchar5
+    end
+
+    def int8b0
+      @_int8b0
+    end
+
+    def int8b1
+      @_int8b1
+    end
+
+    def int8b2
+      @_int8b2
+    end
+
+    def int8b3
+      @_int8b3
+    end
+
+    def int8b4
+      @_int8b4
+    end
+
+    def int8b5
+      @_int8b5
+    end
+
+    def uint8b0
+      @_uint8b0
+    end
+
+    def uint8b1
+      @_uint8b1
+    end
+
+    def uint8b2
+      @_uint8b2
+    end
+
+    def uint8b3
+      @_uint8b3
+    end
+
+    def uint8b4
+      @_uint8b4
+    end
+
+    def uint8b5
+      @_uint8b5
+    end
+
+    def int16b0
+      @_int16b0
+    end
+
+    def int16b1
+      @_int16b1
+    end
+
+    def int16b2
+      @_int16b2
+    end
+
+    def int16b3
+      @_int16b3
+    end
+
+    def int16b4
+      @_int16b4
+    end
+
+    def int16b5
+      @_int16b5
+    end
+
+    def uint16b0
+      @_uint16b0
+    end
+
+    def uint16b1
+      @_uint16b1
+    end
+
+    def uint16b2
+      @_uint16b2
+    end
+
+    def uint16b3
+      @_uint16b3
+    end
+
+    def uint16b4
+      @_uint16b4
+    end
+
+    def uint16b5
+      @_uint16b5
+    end
+
+    def int32b0
+      @_int32b0
+    end
+
+    def int32b1
+      @_int32b1
+    end
+
+    def int32b2
+      @_int32b2
+    end
+
+    def int32b3
+      @_int32b3
+    end
+
+    def int32b4
+      @_int32b4
+    end
+
+    def int32b5
+      @_int32b5
+    end
+
+    def uint32b0
+      @_uint32b0
+    end
+
+    def uint32b1
+      @_uint32b1
+    end
+
+    def uint32b2
+      @_uint32b2
+    end
+
+    def uint32b3
+      @_uint32b3
+    end
+
+    def uint32b4
+      @_uint32b4
+    end
+
+    def uint32b5
+      @_uint32b5
+    end
+
+    def int64b0
+      @_int64b0
+    end
+
+    def int64b1
+      @_int64b1
+    end
+
+    def int64b2
+      @_int64b2
+    end
+
+    def int64b3
+      @_int64b3
+    end
+
+    def int64b4
+      @_int64b4
+    end
+
+    def int64b5
+      @_int64b5
+    end
+
+    def uint64b0
+      @_uint64b0
+    end
+
+    def uint64b1
+      @_uint64b1
+    end
+
+    def uint64b2
+      @_uint64b2
+    end
+
+    def uint64b3
+      @_uint64b3
+    end
+
+    def uint64b4
+      @_uint64b4
+    end
+
+    def uint64b5
+      @_uint64b5
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(fbe_value)
+      0
+        + byte0.fbe_allocation_size(fbe_value.byte0)
+        + byte1.fbe_allocation_size(fbe_value.byte1)
+        + byte2.fbe_allocation_size(fbe_value.byte2)
+        + byte3.fbe_allocation_size(fbe_value.byte3)
+        + byte4.fbe_allocation_size(fbe_value.byte4)
+        + byte5.fbe_allocation_size(fbe_value.byte5)
+        + char0.fbe_allocation_size(fbe_value.char0)
+        + char1.fbe_allocation_size(fbe_value.char1)
+        + char2.fbe_allocation_size(fbe_value.char2)
+        + char3.fbe_allocation_size(fbe_value.char3)
+        + char4.fbe_allocation_size(fbe_value.char4)
+        + char5.fbe_allocation_size(fbe_value.char5)
+        + wchar0.fbe_allocation_size(fbe_value.wchar0)
+        + wchar1.fbe_allocation_size(fbe_value.wchar1)
+        + wchar2.fbe_allocation_size(fbe_value.wchar2)
+        + wchar3.fbe_allocation_size(fbe_value.wchar3)
+        + wchar4.fbe_allocation_size(fbe_value.wchar4)
+        + wchar5.fbe_allocation_size(fbe_value.wchar5)
+        + int8b0.fbe_allocation_size(fbe_value.int8b0)
+        + int8b1.fbe_allocation_size(fbe_value.int8b1)
+        + int8b2.fbe_allocation_size(fbe_value.int8b2)
+        + int8b3.fbe_allocation_size(fbe_value.int8b3)
+        + int8b4.fbe_allocation_size(fbe_value.int8b4)
+        + int8b5.fbe_allocation_size(fbe_value.int8b5)
+        + uint8b0.fbe_allocation_size(fbe_value.uint8b0)
+        + uint8b1.fbe_allocation_size(fbe_value.uint8b1)
+        + uint8b2.fbe_allocation_size(fbe_value.uint8b2)
+        + uint8b3.fbe_allocation_size(fbe_value.uint8b3)
+        + uint8b4.fbe_allocation_size(fbe_value.uint8b4)
+        + uint8b5.fbe_allocation_size(fbe_value.uint8b5)
+        + int16b0.fbe_allocation_size(fbe_value.int16b0)
+        + int16b1.fbe_allocation_size(fbe_value.int16b1)
+        + int16b2.fbe_allocation_size(fbe_value.int16b2)
+        + int16b3.fbe_allocation_size(fbe_value.int16b3)
+        + int16b4.fbe_allocation_size(fbe_value.int16b4)
+        + int16b5.fbe_allocation_size(fbe_value.int16b5)
+        + uint16b0.fbe_allocation_size(fbe_value.uint16b0)
+        + uint16b1.fbe_allocation_size(fbe_value.uint16b1)
+        + uint16b2.fbe_allocation_size(fbe_value.uint16b2)
+        + uint16b3.fbe_allocation_size(fbe_value.uint16b3)
+        + uint16b4.fbe_allocation_size(fbe_value.uint16b4)
+        + uint16b5.fbe_allocation_size(fbe_value.uint16b5)
+        + int32b0.fbe_allocation_size(fbe_value.int32b0)
+        + int32b1.fbe_allocation_size(fbe_value.int32b1)
+        + int32b2.fbe_allocation_size(fbe_value.int32b2)
+        + int32b3.fbe_allocation_size(fbe_value.int32b3)
+        + int32b4.fbe_allocation_size(fbe_value.int32b4)
+        + int32b5.fbe_allocation_size(fbe_value.int32b5)
+        + uint32b0.fbe_allocation_size(fbe_value.uint32b0)
+        + uint32b1.fbe_allocation_size(fbe_value.uint32b1)
+        + uint32b2.fbe_allocation_size(fbe_value.uint32b2)
+        + uint32b3.fbe_allocation_size(fbe_value.uint32b3)
+        + uint32b4.fbe_allocation_size(fbe_value.uint32b4)
+        + uint32b5.fbe_allocation_size(fbe_value.uint32b5)
+        + int64b0.fbe_allocation_size(fbe_value.int64b0)
+        + int64b1.fbe_allocation_size(fbe_value.int64b1)
+        + int64b2.fbe_allocation_size(fbe_value.int64b2)
+        + int64b3.fbe_allocation_size(fbe_value.int64b3)
+        + int64b4.fbe_allocation_size(fbe_value.int64b4)
+        + int64b5.fbe_allocation_size(fbe_value.int64b5)
+        + uint64b0.fbe_allocation_size(fbe_value.uint64b0)
+        + uint64b1.fbe_allocation_size(fbe_value.uint64b1)
+        + uint64b2.fbe_allocation_size(fbe_value.uint64b2)
+        + uint64b3.fbe_allocation_size(fbe_value.uint64b3)
+        + uint64b4.fbe_allocation_size(fbe_value.uint64b4)
+        + uint64b5.fbe_allocation_size(fbe_value.uint64b5)
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 1
+
+    # Check if the struct value is valid
+    def verify
+      @_buffer.shift(fbe_offset)
+      fbe_result = verify_fields
+      @_buffer.unshift(fbe_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields
+      fbe_current_offset = 0
+
+      byte0.fbe_offset = fbe_current_offset
+      fbe_field_size = byte0.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      byte1.fbe_offset = fbe_current_offset
+      fbe_field_size = byte1.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      byte2.fbe_offset = fbe_current_offset
+      fbe_field_size = byte2.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      byte3.fbe_offset = fbe_current_offset
+      fbe_field_size = byte3.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      byte4.fbe_offset = fbe_current_offset
+      fbe_field_size = byte4.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      byte5.fbe_offset = fbe_current_offset
+      fbe_field_size = byte5.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      char0.fbe_offset = fbe_current_offset
+      fbe_field_size = char0.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      char1.fbe_offset = fbe_current_offset
+      fbe_field_size = char1.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      char2.fbe_offset = fbe_current_offset
+      fbe_field_size = char2.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      char3.fbe_offset = fbe_current_offset
+      fbe_field_size = char3.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      char4.fbe_offset = fbe_current_offset
+      fbe_field_size = char4.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      char5.fbe_offset = fbe_current_offset
+      fbe_field_size = char5.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      wchar0.fbe_offset = fbe_current_offset
+      fbe_field_size = wchar0.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      wchar1.fbe_offset = fbe_current_offset
+      fbe_field_size = wchar1.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      wchar2.fbe_offset = fbe_current_offset
+      fbe_field_size = wchar2.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      wchar3.fbe_offset = fbe_current_offset
+      fbe_field_size = wchar3.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      wchar4.fbe_offset = fbe_current_offset
+      fbe_field_size = wchar4.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      wchar5.fbe_offset = fbe_current_offset
+      fbe_field_size = wchar5.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int8b0.fbe_offset = fbe_current_offset
+      fbe_field_size = int8b0.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int8b1.fbe_offset = fbe_current_offset
+      fbe_field_size = int8b1.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int8b2.fbe_offset = fbe_current_offset
+      fbe_field_size = int8b2.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int8b3.fbe_offset = fbe_current_offset
+      fbe_field_size = int8b3.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int8b4.fbe_offset = fbe_current_offset
+      fbe_field_size = int8b4.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int8b5.fbe_offset = fbe_current_offset
+      fbe_field_size = int8b5.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint8b0.fbe_offset = fbe_current_offset
+      fbe_field_size = uint8b0.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint8b1.fbe_offset = fbe_current_offset
+      fbe_field_size = uint8b1.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint8b2.fbe_offset = fbe_current_offset
+      fbe_field_size = uint8b2.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint8b3.fbe_offset = fbe_current_offset
+      fbe_field_size = uint8b3.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint8b4.fbe_offset = fbe_current_offset
+      fbe_field_size = uint8b4.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint8b5.fbe_offset = fbe_current_offset
+      fbe_field_size = uint8b5.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int16b0.fbe_offset = fbe_current_offset
+      fbe_field_size = int16b0.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int16b1.fbe_offset = fbe_current_offset
+      fbe_field_size = int16b1.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int16b2.fbe_offset = fbe_current_offset
+      fbe_field_size = int16b2.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int16b3.fbe_offset = fbe_current_offset
+      fbe_field_size = int16b3.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int16b4.fbe_offset = fbe_current_offset
+      fbe_field_size = int16b4.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int16b5.fbe_offset = fbe_current_offset
+      fbe_field_size = int16b5.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint16b0.fbe_offset = fbe_current_offset
+      fbe_field_size = uint16b0.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint16b1.fbe_offset = fbe_current_offset
+      fbe_field_size = uint16b1.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint16b2.fbe_offset = fbe_current_offset
+      fbe_field_size = uint16b2.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint16b3.fbe_offset = fbe_current_offset
+      fbe_field_size = uint16b3.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint16b4.fbe_offset = fbe_current_offset
+      fbe_field_size = uint16b4.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint16b5.fbe_offset = fbe_current_offset
+      fbe_field_size = uint16b5.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int32b0.fbe_offset = fbe_current_offset
+      fbe_field_size = int32b0.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int32b1.fbe_offset = fbe_current_offset
+      fbe_field_size = int32b1.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int32b2.fbe_offset = fbe_current_offset
+      fbe_field_size = int32b2.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int32b3.fbe_offset = fbe_current_offset
+      fbe_field_size = int32b3.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int32b4.fbe_offset = fbe_current_offset
+      fbe_field_size = int32b4.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int32b5.fbe_offset = fbe_current_offset
+      fbe_field_size = int32b5.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint32b0.fbe_offset = fbe_current_offset
+      fbe_field_size = uint32b0.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint32b1.fbe_offset = fbe_current_offset
+      fbe_field_size = uint32b1.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint32b2.fbe_offset = fbe_current_offset
+      fbe_field_size = uint32b2.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint32b3.fbe_offset = fbe_current_offset
+      fbe_field_size = uint32b3.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint32b4.fbe_offset = fbe_current_offset
+      fbe_field_size = uint32b4.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint32b5.fbe_offset = fbe_current_offset
+      fbe_field_size = uint32b5.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int64b0.fbe_offset = fbe_current_offset
+      fbe_field_size = int64b0.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int64b1.fbe_offset = fbe_current_offset
+      fbe_field_size = int64b1.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int64b2.fbe_offset = fbe_current_offset
+      fbe_field_size = int64b2.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int64b3.fbe_offset = fbe_current_offset
+      fbe_field_size = int64b3.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int64b4.fbe_offset = fbe_current_offset
+      fbe_field_size = int64b4.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      int64b5.fbe_offset = fbe_current_offset
+      fbe_field_size = int64b5.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint64b0.fbe_offset = fbe_current_offset
+      fbe_field_size = uint64b0.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint64b1.fbe_offset = fbe_current_offset
+      fbe_field_size = uint64b1.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint64b2.fbe_offset = fbe_current_offset
+      fbe_field_size = uint64b2.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint64b3.fbe_offset = fbe_current_offset
+      fbe_field_size = uint64b3.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint64b4.fbe_offset = fbe_current_offset
+      fbe_field_size = uint64b4.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      uint64b5.fbe_offset = fbe_current_offset
+      fbe_field_size = uint64b5.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_offset
+    end
+
+    # Get the struct value
+    def get(fbe_value = Enums.new)
+      @_buffer.shift(fbe_offset)
+      fbe_size = get_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      [fbe_value, fbe_size]
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      byte0.fbe_offset = fbe_current_offset
+      fbe_result = byte0.get
+      fbe_value.byte0 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      byte1.fbe_offset = fbe_current_offset
+      fbe_result = byte1.get
+      fbe_value.byte1 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      byte2.fbe_offset = fbe_current_offset
+      fbe_result = byte2.get
+      fbe_value.byte2 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      byte3.fbe_offset = fbe_current_offset
+      fbe_result = byte3.get
+      fbe_value.byte3 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      byte4.fbe_offset = fbe_current_offset
+      fbe_result = byte4.get
+      fbe_value.byte4 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      byte5.fbe_offset = fbe_current_offset
+      fbe_result = byte5.get
+      fbe_value.byte5 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      char0.fbe_offset = fbe_current_offset
+      fbe_result = char0.get
+      fbe_value.char0 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      char1.fbe_offset = fbe_current_offset
+      fbe_result = char1.get
+      fbe_value.char1 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      char2.fbe_offset = fbe_current_offset
+      fbe_result = char2.get
+      fbe_value.char2 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      char3.fbe_offset = fbe_current_offset
+      fbe_result = char3.get
+      fbe_value.char3 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      char4.fbe_offset = fbe_current_offset
+      fbe_result = char4.get
+      fbe_value.char4 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      char5.fbe_offset = fbe_current_offset
+      fbe_result = char5.get
+      fbe_value.char5 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      wchar0.fbe_offset = fbe_current_offset
+      fbe_result = wchar0.get
+      fbe_value.wchar0 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      wchar1.fbe_offset = fbe_current_offset
+      fbe_result = wchar1.get
+      fbe_value.wchar1 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      wchar2.fbe_offset = fbe_current_offset
+      fbe_result = wchar2.get
+      fbe_value.wchar2 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      wchar3.fbe_offset = fbe_current_offset
+      fbe_result = wchar3.get
+      fbe_value.wchar3 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      wchar4.fbe_offset = fbe_current_offset
+      fbe_result = wchar4.get
+      fbe_value.wchar4 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      wchar5.fbe_offset = fbe_current_offset
+      fbe_result = wchar5.get
+      fbe_value.wchar5 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int8b0.fbe_offset = fbe_current_offset
+      fbe_result = int8b0.get
+      fbe_value.int8b0 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int8b1.fbe_offset = fbe_current_offset
+      fbe_result = int8b1.get
+      fbe_value.int8b1 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int8b2.fbe_offset = fbe_current_offset
+      fbe_result = int8b2.get
+      fbe_value.int8b2 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int8b3.fbe_offset = fbe_current_offset
+      fbe_result = int8b3.get
+      fbe_value.int8b3 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int8b4.fbe_offset = fbe_current_offset
+      fbe_result = int8b4.get
+      fbe_value.int8b4 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int8b5.fbe_offset = fbe_current_offset
+      fbe_result = int8b5.get
+      fbe_value.int8b5 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint8b0.fbe_offset = fbe_current_offset
+      fbe_result = uint8b0.get
+      fbe_value.uint8b0 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint8b1.fbe_offset = fbe_current_offset
+      fbe_result = uint8b1.get
+      fbe_value.uint8b1 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint8b2.fbe_offset = fbe_current_offset
+      fbe_result = uint8b2.get
+      fbe_value.uint8b2 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint8b3.fbe_offset = fbe_current_offset
+      fbe_result = uint8b3.get
+      fbe_value.uint8b3 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint8b4.fbe_offset = fbe_current_offset
+      fbe_result = uint8b4.get
+      fbe_value.uint8b4 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint8b5.fbe_offset = fbe_current_offset
+      fbe_result = uint8b5.get
+      fbe_value.uint8b5 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int16b0.fbe_offset = fbe_current_offset
+      fbe_result = int16b0.get
+      fbe_value.int16b0 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int16b1.fbe_offset = fbe_current_offset
+      fbe_result = int16b1.get
+      fbe_value.int16b1 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int16b2.fbe_offset = fbe_current_offset
+      fbe_result = int16b2.get
+      fbe_value.int16b2 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int16b3.fbe_offset = fbe_current_offset
+      fbe_result = int16b3.get
+      fbe_value.int16b3 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int16b4.fbe_offset = fbe_current_offset
+      fbe_result = int16b4.get
+      fbe_value.int16b4 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int16b5.fbe_offset = fbe_current_offset
+      fbe_result = int16b5.get
+      fbe_value.int16b5 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint16b0.fbe_offset = fbe_current_offset
+      fbe_result = uint16b0.get
+      fbe_value.uint16b0 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint16b1.fbe_offset = fbe_current_offset
+      fbe_result = uint16b1.get
+      fbe_value.uint16b1 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint16b2.fbe_offset = fbe_current_offset
+      fbe_result = uint16b2.get
+      fbe_value.uint16b2 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint16b3.fbe_offset = fbe_current_offset
+      fbe_result = uint16b3.get
+      fbe_value.uint16b3 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint16b4.fbe_offset = fbe_current_offset
+      fbe_result = uint16b4.get
+      fbe_value.uint16b4 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint16b5.fbe_offset = fbe_current_offset
+      fbe_result = uint16b5.get
+      fbe_value.uint16b5 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int32b0.fbe_offset = fbe_current_offset
+      fbe_result = int32b0.get
+      fbe_value.int32b0 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int32b1.fbe_offset = fbe_current_offset
+      fbe_result = int32b1.get
+      fbe_value.int32b1 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int32b2.fbe_offset = fbe_current_offset
+      fbe_result = int32b2.get
+      fbe_value.int32b2 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int32b3.fbe_offset = fbe_current_offset
+      fbe_result = int32b3.get
+      fbe_value.int32b3 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int32b4.fbe_offset = fbe_current_offset
+      fbe_result = int32b4.get
+      fbe_value.int32b4 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int32b5.fbe_offset = fbe_current_offset
+      fbe_result = int32b5.get
+      fbe_value.int32b5 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint32b0.fbe_offset = fbe_current_offset
+      fbe_result = uint32b0.get
+      fbe_value.uint32b0 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint32b1.fbe_offset = fbe_current_offset
+      fbe_result = uint32b1.get
+      fbe_value.uint32b1 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint32b2.fbe_offset = fbe_current_offset
+      fbe_result = uint32b2.get
+      fbe_value.uint32b2 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint32b3.fbe_offset = fbe_current_offset
+      fbe_result = uint32b3.get
+      fbe_value.uint32b3 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint32b4.fbe_offset = fbe_current_offset
+      fbe_result = uint32b4.get
+      fbe_value.uint32b4 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint32b5.fbe_offset = fbe_current_offset
+      fbe_result = uint32b5.get
+      fbe_value.uint32b5 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int64b0.fbe_offset = fbe_current_offset
+      fbe_result = int64b0.get
+      fbe_value.int64b0 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int64b1.fbe_offset = fbe_current_offset
+      fbe_result = int64b1.get
+      fbe_value.int64b1 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int64b2.fbe_offset = fbe_current_offset
+      fbe_result = int64b2.get
+      fbe_value.int64b2 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int64b3.fbe_offset = fbe_current_offset
+      fbe_result = int64b3.get
+      fbe_value.int64b3 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int64b4.fbe_offset = fbe_current_offset
+      fbe_result = int64b4.get
+      fbe_value.int64b4 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      int64b5.fbe_offset = fbe_current_offset
+      fbe_result = int64b5.get
+      fbe_value.int64b5 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint64b0.fbe_offset = fbe_current_offset
+      fbe_result = uint64b0.get
+      fbe_value.uint64b0 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint64b1.fbe_offset = fbe_current_offset
+      fbe_result = uint64b1.get
+      fbe_value.uint64b1 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint64b2.fbe_offset = fbe_current_offset
+      fbe_result = uint64b2.get
+      fbe_value.uint64b2 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint64b3.fbe_offset = fbe_current_offset
+      fbe_result = uint64b3.get
+      fbe_value.uint64b3 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint64b4.fbe_offset = fbe_current_offset
+      fbe_result = uint64b4.get
+      fbe_value.uint64b4 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      uint64b5.fbe_offset = fbe_current_offset
+      fbe_result = uint64b5.get
+      fbe_value.uint64b5 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      @_buffer.shift(fbe_offset)
+      fbe_size = set_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      fbe_size
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      byte0.fbe_offset = fbe_current_offset
+      fbe_field_size = byte0.set(fbe_value.byte0)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      byte1.fbe_offset = fbe_current_offset
+      fbe_field_size = byte1.set(fbe_value.byte1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      byte2.fbe_offset = fbe_current_offset
+      fbe_field_size = byte2.set(fbe_value.byte2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      byte3.fbe_offset = fbe_current_offset
+      fbe_field_size = byte3.set(fbe_value.byte3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      byte4.fbe_offset = fbe_current_offset
+      fbe_field_size = byte4.set(fbe_value.byte4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      byte5.fbe_offset = fbe_current_offset
+      fbe_field_size = byte5.set(fbe_value.byte5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      char0.fbe_offset = fbe_current_offset
+      fbe_field_size = char0.set(fbe_value.char0)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      char1.fbe_offset = fbe_current_offset
+      fbe_field_size = char1.set(fbe_value.char1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      char2.fbe_offset = fbe_current_offset
+      fbe_field_size = char2.set(fbe_value.char2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      char3.fbe_offset = fbe_current_offset
+      fbe_field_size = char3.set(fbe_value.char3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      char4.fbe_offset = fbe_current_offset
+      fbe_field_size = char4.set(fbe_value.char4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      char5.fbe_offset = fbe_current_offset
+      fbe_field_size = char5.set(fbe_value.char5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      wchar0.fbe_offset = fbe_current_offset
+      fbe_field_size = wchar0.set(fbe_value.wchar0)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      wchar1.fbe_offset = fbe_current_offset
+      fbe_field_size = wchar1.set(fbe_value.wchar1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      wchar2.fbe_offset = fbe_current_offset
+      fbe_field_size = wchar2.set(fbe_value.wchar2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      wchar3.fbe_offset = fbe_current_offset
+      fbe_field_size = wchar3.set(fbe_value.wchar3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      wchar4.fbe_offset = fbe_current_offset
+      fbe_field_size = wchar4.set(fbe_value.wchar4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      wchar5.fbe_offset = fbe_current_offset
+      fbe_field_size = wchar5.set(fbe_value.wchar5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int8b0.fbe_offset = fbe_current_offset
+      fbe_field_size = int8b0.set(fbe_value.int8b0)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int8b1.fbe_offset = fbe_current_offset
+      fbe_field_size = int8b1.set(fbe_value.int8b1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int8b2.fbe_offset = fbe_current_offset
+      fbe_field_size = int8b2.set(fbe_value.int8b2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int8b3.fbe_offset = fbe_current_offset
+      fbe_field_size = int8b3.set(fbe_value.int8b3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int8b4.fbe_offset = fbe_current_offset
+      fbe_field_size = int8b4.set(fbe_value.int8b4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int8b5.fbe_offset = fbe_current_offset
+      fbe_field_size = int8b5.set(fbe_value.int8b5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint8b0.fbe_offset = fbe_current_offset
+      fbe_field_size = uint8b0.set(fbe_value.uint8b0)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint8b1.fbe_offset = fbe_current_offset
+      fbe_field_size = uint8b1.set(fbe_value.uint8b1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint8b2.fbe_offset = fbe_current_offset
+      fbe_field_size = uint8b2.set(fbe_value.uint8b2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint8b3.fbe_offset = fbe_current_offset
+      fbe_field_size = uint8b3.set(fbe_value.uint8b3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint8b4.fbe_offset = fbe_current_offset
+      fbe_field_size = uint8b4.set(fbe_value.uint8b4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint8b5.fbe_offset = fbe_current_offset
+      fbe_field_size = uint8b5.set(fbe_value.uint8b5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int16b0.fbe_offset = fbe_current_offset
+      fbe_field_size = int16b0.set(fbe_value.int16b0)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int16b1.fbe_offset = fbe_current_offset
+      fbe_field_size = int16b1.set(fbe_value.int16b1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int16b2.fbe_offset = fbe_current_offset
+      fbe_field_size = int16b2.set(fbe_value.int16b2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int16b3.fbe_offset = fbe_current_offset
+      fbe_field_size = int16b3.set(fbe_value.int16b3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int16b4.fbe_offset = fbe_current_offset
+      fbe_field_size = int16b4.set(fbe_value.int16b4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int16b5.fbe_offset = fbe_current_offset
+      fbe_field_size = int16b5.set(fbe_value.int16b5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint16b0.fbe_offset = fbe_current_offset
+      fbe_field_size = uint16b0.set(fbe_value.uint16b0)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint16b1.fbe_offset = fbe_current_offset
+      fbe_field_size = uint16b1.set(fbe_value.uint16b1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint16b2.fbe_offset = fbe_current_offset
+      fbe_field_size = uint16b2.set(fbe_value.uint16b2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint16b3.fbe_offset = fbe_current_offset
+      fbe_field_size = uint16b3.set(fbe_value.uint16b3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint16b4.fbe_offset = fbe_current_offset
+      fbe_field_size = uint16b4.set(fbe_value.uint16b4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint16b5.fbe_offset = fbe_current_offset
+      fbe_field_size = uint16b5.set(fbe_value.uint16b5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int32b0.fbe_offset = fbe_current_offset
+      fbe_field_size = int32b0.set(fbe_value.int32b0)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int32b1.fbe_offset = fbe_current_offset
+      fbe_field_size = int32b1.set(fbe_value.int32b1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int32b2.fbe_offset = fbe_current_offset
+      fbe_field_size = int32b2.set(fbe_value.int32b2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int32b3.fbe_offset = fbe_current_offset
+      fbe_field_size = int32b3.set(fbe_value.int32b3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int32b4.fbe_offset = fbe_current_offset
+      fbe_field_size = int32b4.set(fbe_value.int32b4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int32b5.fbe_offset = fbe_current_offset
+      fbe_field_size = int32b5.set(fbe_value.int32b5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint32b0.fbe_offset = fbe_current_offset
+      fbe_field_size = uint32b0.set(fbe_value.uint32b0)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint32b1.fbe_offset = fbe_current_offset
+      fbe_field_size = uint32b1.set(fbe_value.uint32b1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint32b2.fbe_offset = fbe_current_offset
+      fbe_field_size = uint32b2.set(fbe_value.uint32b2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint32b3.fbe_offset = fbe_current_offset
+      fbe_field_size = uint32b3.set(fbe_value.uint32b3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint32b4.fbe_offset = fbe_current_offset
+      fbe_field_size = uint32b4.set(fbe_value.uint32b4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint32b5.fbe_offset = fbe_current_offset
+      fbe_field_size = uint32b5.set(fbe_value.uint32b5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int64b0.fbe_offset = fbe_current_offset
+      fbe_field_size = int64b0.set(fbe_value.int64b0)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int64b1.fbe_offset = fbe_current_offset
+      fbe_field_size = int64b1.set(fbe_value.int64b1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int64b2.fbe_offset = fbe_current_offset
+      fbe_field_size = int64b2.set(fbe_value.int64b2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int64b3.fbe_offset = fbe_current_offset
+      fbe_field_size = int64b3.set(fbe_value.int64b3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int64b4.fbe_offset = fbe_current_offset
+      fbe_field_size = int64b4.set(fbe_value.int64b4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      int64b5.fbe_offset = fbe_current_offset
+      fbe_field_size = int64b5.set(fbe_value.int64b5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint64b0.fbe_offset = fbe_current_offset
+      fbe_field_size = uint64b0.set(fbe_value.uint64b0)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint64b1.fbe_offset = fbe_current_offset
+      fbe_field_size = uint64b1.set(fbe_value.uint64b1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint64b2.fbe_offset = fbe_current_offset
+      fbe_field_size = uint64b2.set(fbe_value.uint64b2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint64b3.fbe_offset = fbe_current_offset
+      fbe_field_size = uint64b3.set(fbe_value.uint64b3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint64b4.fbe_offset = fbe_current_offset
+      fbe_field_size = uint64b4.set(fbe_value.uint64b4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      uint64b5.fbe_offset = fbe_current_offset
+      fbe_field_size = uint64b5.set(fbe_value.uint64b5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+  end
+
+  # Fast Binary Encoding Enums final model class
+  class EnumsFinalModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FinalModelEnums(self.buffer, 8)
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FinalModelEnums::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        return false
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) or (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      (8 + @_model.verify) == fbe_struct_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_initial_size = buffer.size
+
+      fbe_struct_type = fbe_type
+      fbe_struct_size = 8 + @_model.fbe_allocation_size(value)
+      fbe_struct_offset = buffer.allocate(fbe_struct_size) - buffer.offset
+      if (buffer.offset + fbe_struct_offset + fbe_struct_size) > buffer.size
+        return 0
+      end
+
+      fbe_struct_size = 8 + @_model.set(value)
+      buffer.resize(fbe_initial_size + fbe_struct_size)
+
+      write_uint32(@_model.fbe_offset - 8, fbe_struct_size)
+      write_uint32(@_model.fbe_offset - 4, fbe_struct_type)
+
+      fbe_struct_size
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = Enums.new)
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        [Enums.new, 0]
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) || (fbe_struct_type != fbe_type)
+        [Enums.new, 8]
+      end
+
+      fbe_result = @_model.get(value)
+      [fbe_result[0], (8 + fbe_result[1])]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
     end
   end
 

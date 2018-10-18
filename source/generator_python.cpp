@@ -3685,13 +3685,6 @@ void GeneratorPython::GenerateStructFieldModel(const std::shared_ptr<StructType>
             Write("\"_" + *field->name + "\", ");
     WriteLine();
 
-    // Generate struct field model type
-    WriteLine();
-    if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("TYPE = " + ConvertTypeFieldName(*s->base, false) + ".TYPE");
-    else
-        WriteLineIndent("TYPE = " + std::to_string(s->type));
-
     // Generate struct field model constructor
     WriteLine();
     WriteLineIndent("def __init__(self, buffer, offset):");
@@ -3801,6 +3794,13 @@ void GeneratorPython::GenerateStructFieldModel(const std::shared_ptr<StructType>
     Indent(1);
     WriteLineIndent("return self.TYPE");
     Indent(-1);
+
+    // Generate struct field model type
+    WriteLine();
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("TYPE = " + ConvertTypeFieldName(*s->base, false) + ".TYPE");
+    else
+        WriteLineIndent("TYPE = " + std::to_string(s->type));
 
     // Generate struct field model verify() method
     WriteLine();
@@ -4050,10 +4050,6 @@ void GeneratorPython::GenerateStructModel(const std::shared_ptr<StructType>& s)
     // Generate struct model __slots__
     WriteLineIndent("__slots__ = \"_model\",");
 
-    // Generate struct model type
-    WriteLine();
-    WriteLineIndent("TYPE = FieldModel" + *s->name + ".TYPE");
-
     // Generate struct model constructor
     WriteLine();
     WriteLineIndent("def __init__(self, buffer=None):");
@@ -4083,6 +4079,10 @@ void GeneratorPython::GenerateStructModel(const std::shared_ptr<StructType>& s)
     Indent(1);
     WriteLineIndent("return self.TYPE");
     Indent(-1);
+
+    // Generate struct model type
+    WriteLine();
+    WriteLineIndent("TYPE = FieldModel" + *s->name + ".TYPE");
 
     // Generate struct model verify() method
     WriteLine();
@@ -4191,13 +4191,6 @@ void GeneratorPython::GenerateStructFinalModel(const std::shared_ptr<StructType>
             Write("\"_" + *field->name + "\", ");
     WriteLine();
 
-    // Generate struct final model type
-    WriteLine();
-    if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("TYPE = " + ConvertTypeFieldName(*s->base, true) + ".TYPE");
-    else
-        WriteLineIndent("TYPE = " + std::to_string(s->type));
-
     // Generate struct final model constructor
     WriteLine();
     WriteLineIndent("def __init__(self, buffer, offset):");
@@ -4256,6 +4249,13 @@ void GeneratorPython::GenerateStructFinalModel(const std::shared_ptr<StructType>
     Indent(1);
     WriteLineIndent("return self.TYPE");
     Indent(-1);
+
+    // Generate struct final model type
+    WriteLine();
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("TYPE = " + ConvertTypeFieldName(*s->base, true) + ".TYPE");
+    else
+        WriteLineIndent("TYPE = " + std::to_string(s->type));
 
     // Generate struct final model verify() method
     WriteLine();
@@ -4412,10 +4412,6 @@ void GeneratorPython::GenerateStructModelFinal(const std::shared_ptr<StructType>
     // Generate struct model final __slots__
     WriteLineIndent("__slots__ = \"_model\",");
 
-    // Generate struct model type
-    WriteLine();
-    WriteLineIndent("TYPE = FinalModel" + *s->name + ".TYPE");
-
     // Generate struct model final constructor
     WriteLine();
     WriteLineIndent("def __init__(self, buffer=None):");
@@ -4432,6 +4428,10 @@ void GeneratorPython::GenerateStructModelFinal(const std::shared_ptr<StructType>
     Indent(1);
     WriteLineIndent("return self.TYPE");
     Indent(-1);
+
+    // Generate struct model type
+    WriteLine();
+    WriteLineIndent("TYPE = FinalModel" + *s->name + ".TYPE");
 
     // Generate struct model final verify() method
     WriteLine();

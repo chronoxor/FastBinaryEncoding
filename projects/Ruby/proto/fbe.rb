@@ -511,8 +511,7 @@ module FBE
 
   # Fast Binary Encoding base model class
   class Model
-    def initialize(buffer = nil)
-      buffer = WriteBuffer.new if buffer.nil?
+    def initialize(buffer = WriteBuffer.new)
       @_buffer = buffer
     end
 
@@ -3479,7 +3478,7 @@ module FBE
       end
 
       size = 4
-      @_model.fbe_offset = self.fbe_offset + 4
+      @_model.fbe_offset = fbe_offset + 4
       fbe_set_size.times do
         value = @_model.get
         values.add(value[0])
@@ -3572,8 +3571,8 @@ module FBE
       end
 
       size = 4
-      @_model_key.fbe_offset = self.fbe_offset + 4
-      @_model_value.fbe_offset = self.fbe_offset + 4
+      @_model_key.fbe_offset = fbe_offset + 4
+      @_model_value.fbe_offset = fbe_offset + 4
       fbe_map_size.times do
         key = @_model_key.get
         @_model_key.fbe_shift(key[1])
@@ -3599,8 +3598,8 @@ module FBE
       write_uint32(fbe_offset, values.length)
 
       size = 4
-      @_model_key.fbe_offset = self.fbe_offset + 4
-      @_model_value.fbe_offset = self.fbe_offset + 4
+      @_model_key.fbe_offset = fbe_offset + 4
+      @_model_value.fbe_offset = fbe_offset + 4
       values.each do |key, value|
         offset_key = @_model_key.set(key)
         @_model_key.fbe_shift(offset_key)

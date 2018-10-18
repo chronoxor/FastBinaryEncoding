@@ -693,8 +693,7 @@ void GeneratorRuby::GenerateFBEModel()
     std::string code = R"CODE(
   # Fast Binary Encoding base model class
   class Model
-    def initialize(buffer = nil)
-      buffer = WriteBuffer.new if buffer.nil?
+    def initialize(buffer = WriteBuffer.new)
       @_buffer = buffer
     end
 
@@ -2729,7 +2728,7 @@ void GeneratorRuby::GenerateFBEFinalModelSet()
       end
 
       size = 4
-      @_model.fbe_offset = self.fbe_offset + 4
+      @_model.fbe_offset = fbe_offset + 4
       fbe_set_size.times do
         value = @_model.get
         values.add(value[0])
@@ -2832,8 +2831,8 @@ void GeneratorRuby::GenerateFBEFinalModelMap()
       end
 
       size = 4
-      @_model_key.fbe_offset = self.fbe_offset + 4
-      @_model_value.fbe_offset = self.fbe_offset + 4
+      @_model_key.fbe_offset = fbe_offset + 4
+      @_model_value.fbe_offset = fbe_offset + 4
       fbe_map_size.times do
         key = @_model_key.get
         @_model_key.fbe_shift(key[1])
@@ -2859,8 +2858,8 @@ void GeneratorRuby::GenerateFBEFinalModelMap()
       write_uint32(fbe_offset, values.length)
 
       size = 4
-      @_model_key.fbe_offset = self.fbe_offset + 4
-      @_model_value.fbe_offset = self.fbe_offset + 4
+      @_model_key.fbe_offset = fbe_offset + 4
+      @_model_value.fbe_offset = fbe_offset + 4
       values.each do |key, value|
         offset_key = @_model_key.set(key)
         @_model_key.fbe_shift(offset_key)
@@ -3616,7 +3615,7 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     WriteLine();
     WriteLineIndent("def has_flags(flags)");
     Indent(1);
-    WriteLineIndent("((@value & flags.value) != 0) && ((self.value & flags.value) == flags.value)");
+    WriteLineIndent("((@value & flags.value) != 0) && ((@value & flags.value) == flags.value)");
     Indent(-1);
     WriteLineIndent("end");
     WriteLine();
@@ -3832,7 +3831,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
 
     // Generate struct begin
     WriteLine();
-    WriteLineIndent("# noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection");
+    WriteLineIndent("# noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection");
     if (s->base && !s->base->empty())
         WriteLineIndent("class " + struct_name + " < " + base_type);
     else
@@ -3868,7 +3867,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
     WriteLine(")");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("method(:copy).super_method.call(parent)");
+        WriteLineIndent("super(parent.clone)");
     if (s->body)
     {
         for (const auto& field : s->body->fields)
@@ -4177,7 +4176,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
         WriteLine();
         WriteLineIndent("def to_json(self):");
         Indent(1);
-        WriteLineIndent("return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))");
+        WriteLineIndent("return json.dumps(@__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))");
         Indent(-1);
 
         // Generate struct from_json method
@@ -4194,634 +4193,645 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
     WriteLineIndent("end");
 
     // Generate struct field model
-    //GenerateStructFieldModel(s);
+    GenerateStructFieldModel(s);
 
     // Generate struct model
-    //GenerateStructModel(s);
+    GenerateStructModel(s);
 
     // Generate struct final models
     if (Final())
     {
-        //GenerateStructFinalModel(s);
-        //GenerateStructModelFinal(s);
+        GenerateStructFinalModel(s);
+        GenerateStructModelFinal(s);
     }
 }
 
 void GeneratorRuby::GenerateStructFieldModel(const std::shared_ptr<StructType>& s)
 {
+    std::string struct_name = ConvertTitle(*s->name);
+
     // Generate struct field model begin
     WriteLine();
-    WriteLine();
-    WriteLineIndent("class FieldModel" + *s->name + "(fbe.FieldModel):");
+    WriteLineIndent("# noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection");
+    WriteLineIndent("class FieldModel" + struct_name + " < FBE::FieldModel");
     Indent(1);
-
-    // Generate struct field model __slots__
-    WriteIndent("__slots__ = ");
-    if (s->base && !s->base->empty())
-        Write("\"_parent\", ");
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            Write("\"_" + *field->name + "\", ");
-    WriteLine();
-
-    // Generate struct field model type
-    WriteLine();
-    if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("TYPE = " + ConvertTypeFieldName(*s->base, false) + ".TYPE");
-    else
-        WriteLineIndent("TYPE = " + std::to_string(s->type));
 
     // Generate struct field model constructor
-    WriteLine();
-    WriteLineIndent("def __init__(self, buffer, offset):");
+    WriteLineIndent("def initialize(buffer, offset)");
     Indent(1);
-    WriteLineIndent("super().__init__(buffer, offset)");
+    WriteLineIndent("super(buffer, offset)");
     std::string prev_offset("4");
     std::string prev_size("4");
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("self._parent = " + ConvertTypeFieldName(*s->base, false) + "(buffer, " + prev_offset + " + " + prev_size + ")");
-        prev_offset = "self._parent.fbe_offset";
-        prev_size = "self._parent.fbe_body - 4 - 4";
+        WriteLineIndent("@_parent = " + ConvertTypeFieldName(*s->base, false) + "(self.buffer, " + prev_offset + " + " + prev_size + ")");
+        prev_offset = "@_parent.fbe_offset";
+        prev_size = "@_parent.fbe_body - 4 - 4";
     }
     if (s->body)
     {
         for (const auto& field : s->body->fields)
         {
-            WriteLineIndent("self._" + *field->name + " = " + ConvertTypeFieldInitialization(*field, prev_offset + " + " + prev_size, false));
-            prev_offset = "self._" + *field->name + ".fbe_offset";
-            prev_size = "self._" + *field->name + ".fbe_size";
+            WriteLineIndent("@_" + *field->name + " = " + ConvertTypeFieldInitialization(*field, prev_offset + " + " + prev_size, false));
+            prev_offset = "@_" + *field->name + ".fbe_offset";
+            prev_size = "@_" + *field->name + ".fbe_size";
         }
     }
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct field model accessors
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("@property");
-        WriteLineIndent("def parent(self):");
+        WriteLineIndent("def parent");
         Indent(1);
-        WriteLineIndent("return self._parent");
+        WriteLineIndent("@_parent");
         Indent(-1);
+        WriteLineIndent("end");
     }
     if (s->body)
     {
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("@property");
-            WriteLineIndent("def " + *field->name + "(self):");
+            WriteLineIndent("def " + *field->name);
             Indent(1);
-            WriteLineIndent("return self._" + *field->name);
+            WriteLineIndent("@_" + *field->name);
             Indent(-1);
+            WriteLineIndent("end");
         }
     }
 
     // Generate struct field model FBE properties
     WriteLine();
     WriteLineIndent("# Get the field size");
-    WriteLineIndent("@property");
-    WriteLineIndent("def fbe_size(self):");
+    WriteLineIndent("def fbe_size");
     Indent(1);
-    WriteLineIndent("return 4");
+    WriteLineIndent("4");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
     WriteLineIndent("# Get the field body size");
-    WriteLineIndent("@property");
-    WriteLineIndent("def fbe_body(self):");
+    WriteLineIndent("def fbe_body");
     Indent(1);
-    WriteLineIndent("fbe_result = 4 + 4 \\");
+    WriteLineIndent("4 + 4");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("+ self.parent.fbe_body - 4 - 4 \\");
+        WriteLineIndent("+ parent.fbe_body - 4 - 4");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("+ self." + *field->name + ".fbe_size \\");
+            WriteLineIndent("+ " + *field->name + ".fbe_size");
     Indent(-1);
-    WriteLine();
-    WriteLineIndent("return fbe_result");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
     WriteLineIndent("# Get the field extra size");
-    WriteLineIndent("@property");
-    WriteLineIndent("def fbe_extra(self):");
+    WriteLineIndent("def fbe_extra");
     Indent(1);
-    WriteLineIndent("if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:");
-    Indent(1);
-    WriteLineIndent("return 0");
-    Indent(-1);
-    WriteLine();
-    WriteLineIndent("fbe_struct_offset = self.read_uint32(self.fbe_offset)");
-    WriteLineIndent("if (fbe_struct_offset == 0) or ((self._buffer.offset + fbe_struct_offset + 4) > self._buffer.size):");
+    WriteLineIndent("if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size");
     Indent(1);
     WriteLineIndent("return 0");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("self._buffer.shift(fbe_struct_offset)");
+    WriteLineIndent("fbe_struct_offset = read_uint32(fbe_offset)");
+    WriteLineIndent("if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4) > @_buffer.size)");
+    Indent(1);
+    WriteLineIndent("return 0");
+    Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("fbe_result = self.fbe_body \\");
+    WriteLineIndent("@_buffer.shift(fbe_struct_offset)");
+    WriteLine();
+    WriteLineIndent("fbe_result = fbe_body");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("+ self.parent.fbe_extra \\");
+        WriteLineIndent("+ parent.fbe_extra");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("+ self." + *field->name + ".fbe_extra \\");
+            WriteLineIndent("+ " + *field->name + ".fbe_extra");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("self._buffer.unshift(fbe_struct_offset)");
+    WriteLineIndent("@_buffer.unshift(fbe_struct_offset)");
     WriteLine();
-    WriteLineIndent("return fbe_result");
+    WriteLineIndent("fbe_result");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
     WriteLineIndent("# Get the field type");
-    WriteLineIndent("@property");
-    WriteLineIndent("def fbe_type(self):");
+    WriteLineIndent("def fbe_type");
     Indent(1);
-    WriteLineIndent("return self.TYPE");
+    WriteLineIndent("TYPE");
     Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate struct field model type
+    WriteLine();
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("TYPE = " + ConvertTypeFieldName(*s->base, false) + "::TYPE");
+    else
+        WriteLineIndent("TYPE = " + std::to_string(s->type));
 
     // Generate struct field model verify() method
     WriteLine();
     WriteLineIndent("# Check if the struct value is valid");
-    WriteLineIndent("def verify(self, fbe_verify_type=True):");
+    WriteLineIndent("def verify(fbe_verify_type = true)");
     Indent(1);
-    WriteLineIndent("if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:");
+    WriteLineIndent("if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size");
     Indent(1);
-    WriteLineIndent("return True");
+    WriteLineIndent("return true");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("fbe_struct_offset = self.read_uint32(self.fbe_offset)");
-    WriteLineIndent("if (fbe_struct_offset == 0) or ((self._buffer.offset + fbe_struct_offset + 4 + 4) > self._buffer.size):");
+    WriteLineIndent("fbe_struct_offset = read_uint32(fbe_offset)");
+    WriteLineIndent("if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)");
     Indent(1);
-    WriteLineIndent("return False");
+    WriteLineIndent("return false");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("fbe_struct_size = self.read_uint32(fbe_struct_offset)");
-    WriteLineIndent("if fbe_struct_size < (4 + 4):");
+    WriteLineIndent("fbe_struct_size = read_uint32(fbe_struct_offset)");
+    WriteLineIndent("if fbe_struct_size < (4 + 4)");
     Indent(1);
-    WriteLineIndent("return False");
+    WriteLineIndent("return false");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("fbe_struct_type = self.read_uint32(fbe_struct_offset + 4)");
-    WriteLineIndent("if fbe_verify_type and (fbe_struct_type != self.fbe_type):");
+    WriteLineIndent("fbe_struct_type = read_uint32(fbe_struct_offset + 4)");
+    WriteLineIndent("if fbe_verify_type && (fbe_struct_type != fbe_type)");
     Indent(1);
-    WriteLineIndent("return False");
+    WriteLineIndent("return false");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("self._buffer.shift(fbe_struct_offset)");
-    WriteLineIndent("fbe_result = self.verify_fields(fbe_struct_size)");
-    WriteLineIndent("self._buffer.unshift(fbe_struct_offset)");
-    WriteLineIndent("return fbe_result");
+    WriteLineIndent("@_buffer.shift(fbe_struct_offset)");
+    WriteLineIndent("fbe_result = verify_fields(fbe_struct_size)");
+    WriteLineIndent("@_buffer.unshift(fbe_struct_offset)");
+    WriteLineIndent("fbe_result");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct field model verify_fields() method
     WriteLine();
     WriteLineIndent("# Check if the struct fields are valid");
-    WriteLineIndent("def verify_fields(self, fbe_struct_size):");
+    WriteLineIndent("def verify_fields(fbe_struct_size)");
     Indent(1);
     WriteLineIndent("fbe_current_size = 4 + 4");
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("if (fbe_current_size + self.parent.fbe_body - 4 - 4) > fbe_struct_size:");
+        WriteLineIndent("if (fbe_current_size + parent.fbe_body - 4 - 4) > fbe_struct_size");
         Indent(1);
-        WriteLineIndent("return True");
+        WriteLineIndent("return true");
         Indent(-1);
-        WriteLineIndent("if not self.parent.verify_fields(fbe_struct_size):");
+        WriteLineIndent("end");
+        WriteLineIndent("unless parent.verify_fields(fbe_struct_size)");
         Indent(1);
-        WriteLineIndent("return False");
+        WriteLineIndent("return false");
         Indent(-1);
-        WriteLineIndent("fbe_current_size += self.parent.fbe_body - 4 - 4");
+        WriteLineIndent("end");
+        WriteLineIndent("# noinspection RubyUnusedLocalVariable");
+        WriteLineIndent("fbe_current_size += parent.fbe_body - 4 - 4");
     }
     if (s->body)
     {
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("if (fbe_current_size + self." + *field->name + ".fbe_size) > fbe_struct_size:");
+            WriteLineIndent("if (fbe_current_size + " + *field->name + ".fbe_size) > fbe_struct_size");
             Indent(1);
-            WriteLineIndent("return True");
+            WriteLineIndent("return true");
             Indent(-1);
-            WriteLineIndent("if not self." + *field->name + ".verify():");
+            WriteLineIndent("end");
+            WriteLineIndent("unless " + *field->name + ".verify");
             Indent(1);
-            WriteLineIndent("return False");
+            WriteLineIndent("return false");
             Indent(-1);
-            WriteLineIndent("fbe_current_size += self." + *field->name + ".fbe_size");
+            WriteLineIndent("end");
+            WriteLineIndent("# noinspection RubyUnusedLocalVariable");
+            WriteLineIndent("fbe_current_size += " + *field->name + ".fbe_size");
         }
     }
     WriteLine();
-    WriteLineIndent("return True");
+    WriteLineIndent("true");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct field model get_begin() method
     WriteLine();
     WriteLineIndent("# Get the struct value (begin phase)");
-    WriteLineIndent("def get_begin(self):");
+    WriteLineIndent("def get_begin");
     Indent(1);
-    WriteLineIndent("if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:");
-    Indent(1);
-    WriteLineIndent("return 0");
-    Indent(-1);
-    WriteLine();
-    WriteLineIndent("fbe_struct_offset = self.read_uint32(self.fbe_offset)");
-    WriteLineIndent("assert (fbe_struct_offset > 0) and ((self._buffer.offset + fbe_struct_offset + 4 + 4) <= self._buffer.size), \"Model is broken!\"");
-    WriteLineIndent("if (fbe_struct_offset == 0) or ((self._buffer.offset + fbe_struct_offset + 4 + 4) > self._buffer.size):");
+    WriteLineIndent("if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size");
     Indent(1);
     WriteLineIndent("return 0");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("fbe_struct_size = self.read_uint32(fbe_struct_offset)");
-    WriteLineIndent("assert (fbe_struct_size >= (4 + 4)), \"Model is broken!\"");
-    WriteLineIndent("if fbe_struct_size < (4 + 4):");
+    WriteLineIndent("fbe_struct_offset = read_uint32(fbe_offset)");
+    WriteLineIndent("if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)");
     Indent(1);
     WriteLineIndent("return 0");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("self._buffer.shift(fbe_struct_offset)");
-    WriteLineIndent("return fbe_struct_offset");
+    WriteLineIndent("fbe_struct_size = read_uint32(fbe_struct_offset)");
+    WriteLineIndent("if fbe_struct_size < (4 + 4)");
+    Indent(1);
+    WriteLineIndent("return 0");
     Indent(-1);
+    WriteLineIndent("end");
+    WriteLine();
+    WriteLineIndent("@_buffer.shift(fbe_struct_offset)");
+    WriteLineIndent("fbe_struct_offset");
+    Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct field model get_end() method
     WriteLine();
     WriteLineIndent("# Get the struct value (end phase)");
-    WriteLineIndent("def get_end(self, fbe_begin):");
+    WriteLineIndent("def get_end(fbe_begin)");
     Indent(1);
-    WriteLineIndent("self._buffer.unshift(fbe_begin)");
+    WriteLineIndent("@_buffer.unshift(fbe_begin)");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct field model get() method
     WriteLine();
     WriteLineIndent("# Get the struct value");
-    WriteLineIndent("def get(self, fbe_value=None):");
+    WriteLineIndent("def get(fbe_value = " + struct_name + ".new)");
     Indent(1);
-    WriteLineIndent("if fbe_value is None:");
-    Indent(1);
-    WriteLineIndent("fbe_value = " + *s->name + "()");
-    Indent(-1);
-    WriteLine();
-    WriteLineIndent("fbe_begin = self.get_begin()");
-    WriteLineIndent("if fbe_begin == 0:");
+    WriteLineIndent("fbe_begin = get_begin");
+    WriteLineIndent("if fbe_begin == 0");
     Indent(1);
     WriteLineIndent("return fbe_value");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("fbe_struct_size = self.read_uint32(0)");
-    WriteLineIndent("self.get_fields(fbe_value, fbe_struct_size)");
-    WriteLineIndent("self.get_end(fbe_begin)");
-    WriteLineIndent("return fbe_value");
+    WriteLineIndent("fbe_struct_size = read_uint32(0)");
+    WriteLineIndent("get_fields(fbe_value, fbe_struct_size)");
+    WriteLineIndent("get_end(fbe_begin)");
+    WriteLineIndent("fbe_value");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct field model get_fields() method
     WriteLine();
     WriteLineIndent("# Get the struct fields values");
-    WriteLineIndent("def get_fields(self, fbe_value, fbe_struct_size):");
+    WriteLineIndent("def get_fields(fbe_value, fbe_struct_size)");
     Indent(1);
     WriteLineIndent("fbe_current_size = 4 + 4");
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("if (fbe_current_size + self.parent.fbe_body - 4 - 4) <= fbe_struct_size:");
+        WriteLineIndent("if (fbe_current_size + parent.fbe_body - 4 - 4) <= fbe_struct_size");
         Indent(1);
-        WriteLineIndent("self.parent.get_fields(fbe_value, fbe_struct_size)");
+        WriteLineIndent("parent.get_fields(fbe_value, fbe_struct_size)");
         Indent(-1);
-        WriteLineIndent("fbe_current_size += self.parent.fbe_body - 4 - 4");
+        WriteLineIndent("end");
+        WriteLineIndent("# noinspection RubyUnusedLocalVariable");
+        WriteLineIndent("fbe_current_size += parent.fbe_body - 4 - 4");
     }
     if (s->body)
     {
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("if (fbe_current_size + self." + *field->name + ".fbe_size) <= fbe_struct_size:");
+            WriteLineIndent("if (fbe_current_size + " + *field->name + ".fbe_size) <= fbe_struct_size");
             Indent(1);
             if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent("self." + *field->name + ".get(fbe_value." + *field->name + ")");
+                WriteLineIndent(*field->name + ".get(fbe_value." + *field->name + ")");
             else
-                WriteLineIndent("fbe_value." + *field->name + " = self." + *field->name + ".get(" + (field->value ? ConvertConstant(*field->type, *field->value, field->optional) : "") + ")");
+                WriteLineIndent("fbe_value." + *field->name + " = " + *field->name + ".get" + (field->value ? ("(" + ConvertConstant(*field->type, *field->value, field->optional) + ")") : ""));
             Indent(-1);
-            WriteLineIndent("else:");
+            WriteLineIndent("else");
             Indent(1);
             if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent("fbe_value." + *field->name + ".clear()");
+                WriteLineIndent("fbe_value." + *field->name + ".clear");
             else
                 WriteLineIndent("fbe_value." + *field->name + " = " + ConvertDefault(*field.get()));
             Indent(-1);
-            WriteLineIndent("fbe_current_size += self." + *field->name + ".fbe_size");
+            WriteLineIndent("end");
+            WriteLineIndent("# noinspection RubyUnusedLocalVariable");
+            WriteLineIndent("fbe_current_size += " + *field->name + ".fbe_size");
         }
     }
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct field model set_begin() method
     WriteLine();
     WriteLineIndent("# Set the struct value (begin phase)");
-    WriteLineIndent("def set_begin(self):");
+    WriteLineIndent("def set_begin");
     Indent(1);
-    WriteLineIndent("assert (self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size, \"Model is broken!\"");
-    WriteLineIndent("if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:");
-    Indent(1);
-    WriteLineIndent("return 0");
-    Indent(-1);
-    WriteLine();
-    WriteLineIndent("fbe_struct_size = self.fbe_body");
-    WriteLineIndent("fbe_struct_offset = self._buffer.allocate(fbe_struct_size) - self._buffer.offset");
-    WriteLineIndent("assert (fbe_struct_offset > 0) and ((self._buffer.offset + fbe_struct_offset + fbe_struct_size) <= self._buffer.size), \"Model is broken!\"");
-    WriteLineIndent("if (fbe_struct_offset <= 0) or ((self._buffer.offset + fbe_struct_offset + fbe_struct_size) > self._buffer.size):");
+    WriteLineIndent("if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size");
     Indent(1);
     WriteLineIndent("return 0");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("self.write_uint32(self.fbe_offset, fbe_struct_offset)");
-    WriteLineIndent("self.write_uint32(fbe_struct_offset, fbe_struct_size)");
-    WriteLineIndent("self.write_uint32(fbe_struct_offset + 4, self.fbe_type)");
-    WriteLine();
-    WriteLineIndent("self._buffer.shift(fbe_struct_offset)");
-    WriteLineIndent("return fbe_struct_offset");
+    WriteLineIndent("fbe_struct_size = fbe_body");
+    WriteLineIndent("fbe_struct_offset = @_buffer.allocate(fbe_struct_size) - @_buffer.offset");
+    WriteLineIndent("if (fbe_struct_offset <= 0) || ((@_buffer.offset + fbe_struct_offset + fbe_struct_size) > @_buffer.size)");
+    Indent(1);
+    WriteLineIndent("return 0");
     Indent(-1);
+    WriteLineIndent("end");
+    WriteLine();
+    WriteLineIndent("write_uint32(fbe_offset, fbe_struct_offset)");
+    WriteLineIndent("write_uint32(fbe_struct_offset, fbe_struct_size)");
+    WriteLineIndent("write_uint32(fbe_struct_offset + 4, fbe_type)");
+    WriteLine();
+    WriteLineIndent("@_buffer.shift(fbe_struct_offset)");
+    WriteLineIndent("fbe_struct_offset");
+    Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct field model set_end() method
     WriteLine();
     WriteLineIndent("# Set the struct value (end phase)");
-    WriteLineIndent("def set_end(self, fbe_begin):");
+    WriteLineIndent("def set_end(fbe_begin)");
     Indent(1);
-    WriteLineIndent("self._buffer.unshift(fbe_begin)");
+    WriteLineIndent("@_buffer.unshift(fbe_begin)");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct field model set() method
     WriteLine();
     WriteLineIndent("# Set the struct value");
-    WriteLineIndent("def set(self, fbe_value):");
+    WriteLineIndent("def set(fbe_value)");
     Indent(1);
-    WriteLineIndent("fbe_begin = self.set_begin()");
-    WriteLineIndent("if fbe_begin == 0:");
+    WriteLineIndent("fbe_begin = set_begin");
+    WriteLineIndent("if fbe_begin == 0");
     Indent(1);
     WriteLineIndent("return");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("self.set_fields(fbe_value)");
-    WriteLineIndent("self.set_end(fbe_begin)");
+    WriteLineIndent("set_fields(fbe_value)");
+    WriteLineIndent("set_end(fbe_begin)");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct field model set_fields() method
     WriteLine();
     WriteLineIndent("# Set the struct fields values");
-    WriteLineIndent("def set_fields(self, fbe_value):");
+    WriteLineIndent("def set_fields(fbe_value)");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("self.parent.set_fields(fbe_value)");
+        WriteLineIndent("parent.set_fields(fbe_value)");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("self." + *field->name + ".set(fbe_value." + *field->name + ")");
+            WriteLineIndent(*field->name + ".set(fbe_value." + *field->name + ")");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct field model end
     Indent(-1);
+    WriteLineIndent("end");
 }
 
 void GeneratorRuby::GenerateStructModel(const std::shared_ptr<StructType>& s)
 {
+    std::string struct_name = ConvertTitle(*s->name);
+
     // Generate struct model begin
     WriteLine();
-    WriteLine();
-    WriteLineIndent("# Fast Binary Encoding " + *s->name + " model class");
-    WriteLineIndent("class " + *s->name + "Model(fbe.Model):");
+    WriteLineIndent("# Fast Binary Encoding " + struct_name + " model class");
+    WriteLineIndent("class " + struct_name + "Model < FBE::Model");
     Indent(1);
-
-    // Generate struct model __slots__
-    WriteLineIndent("__slots__ = \"_model\",");
-
-    // Generate struct model type
-    WriteLine();
-    WriteLineIndent("TYPE = FieldModel" + *s->name + ".TYPE");
 
     // Generate struct model constructor
-    WriteLine();
-    WriteLineIndent("def __init__(self, buffer=None):");
+    WriteLineIndent("def initialize(buffer = WriteBuffer.new)");
     Indent(1);
-    WriteLineIndent("super().__init__(buffer)");
-    WriteLineIndent("self._model = FieldModel" + *s->name + "(self.buffer, 4)");
+    WriteLineIndent("super(buffer)");
+    WriteLineIndent("@_model = FieldModel" + struct_name + "(self.buffer, 4)");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct model accessor
     WriteLine();
-    WriteLineIndent("@property");
-    WriteLineIndent("def model(self):");
+    WriteLineIndent("def model");
     Indent(1);
-    WriteLineIndent("return self._model");
+    WriteLineIndent("@_model");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct model FBE properties
     WriteLine();
     WriteLineIndent("# Get the model size");
-    WriteLineIndent("def fbe_size(self):");
+    WriteLineIndent("def fbe_size");
     Indent(1);
-    WriteLineIndent("return self._model.fbe_size + self._model.fbe_extra");
+    WriteLineIndent("@_model.fbe_size + @_model.fbe_extra");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
     WriteLineIndent("# Get the model type");
-    WriteLineIndent("def fbe_type(self):");
+    WriteLineIndent("def fbe_type");
     Indent(1);
-    WriteLineIndent("return self.TYPE");
+    WriteLineIndent("TYPE");
     Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate struct model type
+    WriteLine();
+    WriteLineIndent("TYPE = FieldModel" + struct_name + "::TYPE");
 
     // Generate struct model verify() method
     WriteLine();
     WriteLineIndent("# Check if the struct value is valid");
-    WriteLineIndent("def verify(self):");
+    WriteLineIndent("def verify");
     Indent(1);
-    WriteLineIndent("if (self.buffer.offset + self._model.fbe_offset - 4) > self.buffer.size:");
+    WriteLineIndent("if (buffer.offset + @_model.fbe_offset - 4) > buffer.size");
     Indent(1);
-    WriteLineIndent("return False");
+    WriteLineIndent("return false");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("fbe_full_size = self.read_uint32(self._model.fbe_offset - 4)");
-    WriteLineIndent("if fbe_full_size < self._model.fbe_size:");
+    WriteLineIndent("fbe_full_size = read_uint32(@_model.fbe_offset - 4)");
+    WriteLineIndent("if fbe_full_size < @_model.fbe_size");
     Indent(1);
-    WriteLineIndent("return False");
+    WriteLineIndent("return false");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("return self._model.verify()");
+    WriteLineIndent("@_model.verify");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct model create_begin() method
     WriteLine();
     WriteLineIndent("# Create a new model (begin phase)");
-    WriteLineIndent("def create_begin(self):");
+    WriteLineIndent("def create_begin");
     Indent(1);
-    WriteLineIndent("fbe_begin = self.buffer.allocate(4 + self._model.fbe_size)");
-    WriteLineIndent("return fbe_begin");
+    WriteLineIndent("buffer.allocate(4 + @_model.fbe_size)");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct model create_end() method
     WriteLine();
     WriteLineIndent("# Create a new model (end phase)");
-    WriteLineIndent("def create_end(self, fbe_begin):");
+    WriteLineIndent("def create_end(fbe_begin)");
     Indent(1);
-    WriteLineIndent("fbe_end = self.buffer.size");
+    WriteLineIndent("fbe_end = buffer.size");
     WriteLineIndent("fbe_full_size = fbe_end - fbe_begin");
-    WriteLineIndent("self.write_uint32(self._model.fbe_offset - 4, fbe_full_size)");
-    WriteLineIndent("return fbe_full_size");
+    WriteLineIndent("write_uint32(@_model.fbe_offset - 4, fbe_full_size)");
+    WriteLineIndent("fbe_full_size");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct model serialize() method
     WriteLine();
     WriteLineIndent("# Serialize the struct value");
-    WriteLineIndent("def serialize(self, value):");
+    WriteLineIndent("def serialize(value)");
     Indent(1);
-    WriteLineIndent("fbe_begin = self.create_begin()");
-    WriteLineIndent("self._model.set(value)");
-    WriteLineIndent("fbe_full_size = self.create_end(fbe_begin)");
-    WriteLineIndent("return fbe_full_size");
+    WriteLineIndent("fbe_begin = create_begin");
+    WriteLineIndent("@_model.set(value)");
+    WriteLineIndent("create_end(fbe_begin)");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct model deserialize() methods
     WriteLine();
     WriteLineIndent("# Deserialize the struct value");
-    WriteLineIndent("def deserialize(self, value=None):");
+    WriteLineIndent("def deserialize(value = " + struct_name + ".new)");
     Indent(1);
-    WriteLineIndent("if value is None:");
+    WriteLineIndent("if (buffer.offset + @_model.fbe_offset - 4) > buffer.size");
     Indent(1);
-    WriteLineIndent("value = " + *s->name + "()");
+    WriteLineIndent("[" + struct_name + ".new, 0]");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("if (self.buffer.offset + self._model.fbe_offset - 4) > self.buffer.size:");
+    WriteLineIndent("fbe_full_size = read_uint32(@_model.fbe_offset - 4)");
+    WriteLineIndent("if fbe_full_size < @_model.fbe_size");
     Indent(1);
-    WriteLineIndent("value = " + *s->name + "()");
-    WriteLineIndent("return value, 0");
+    WriteLineIndent("[" + struct_name + ".new, 0]");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("fbe_full_size = self.read_uint32(self._model.fbe_offset - 4)");
-    WriteLineIndent("assert (fbe_full_size >= self._model.fbe_size), \"Model is broken!\"");
-    WriteLineIndent("if fbe_full_size < self._model.fbe_size:");
-    Indent(1);
-    WriteLineIndent("value = " + *s->name + "()");
-    WriteLineIndent("return value, 0");
+    WriteLineIndent("@_model.get(value)");
+    WriteLineIndent("[value, fbe_full_size]");
     Indent(-1);
-    WriteLine();
-    WriteLineIndent("self._model.get(value)");
-    WriteLineIndent("return value, fbe_full_size");
-    Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct model next() method
     WriteLine();
     WriteLineIndent("# Move to the next struct value");
-    WriteLineIndent("def next(self, prev):");
+    WriteLineIndent("def next(prev)");
     Indent(1);
-    WriteLineIndent("self._model.fbe_shift(prev)");
+    WriteLineIndent("@_model.fbe_shift(prev)");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct model end
     Indent(-1);
+    WriteLineIndent("end");
 }
 
 void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& s)
 {
+    std::string struct_name = ConvertTitle(*s->name);
+
     // Generate struct final model begin
     WriteLine();
-    WriteLine();
-    WriteLineIndent("class FinalModel" + *s->name + "(fbe.FinalModel):");
+    WriteLineIndent("# noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection");
+    WriteLineIndent("class FinalModel" + struct_name + " < FBE::FinalModel");
     Indent(1);
-
-    // Generate struct final model __slots__
-    WriteIndent("__slots__ = ");
-    if (s->base && !s->base->empty())
-        Write("\"_parent\", ");
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            Write("\"_" + *field->name + "\", ");
-    WriteLine();
-
-    // Generate struct final model type
-    WriteLine();
-    if (s->base && !s->base->empty() && (s->type == 0))
-        WriteLineIndent("TYPE = " + ConvertTypeFieldName(*s->base, true) + ".TYPE");
-    else
-        WriteLineIndent("TYPE = " + std::to_string(s->type));
 
     // Generate struct final model constructor
-    WriteLine();
-    WriteLineIndent("def __init__(self, buffer, offset):");
+    WriteLineIndent("def initialize(buffer, offset)");
     Indent(1);
-    WriteLineIndent("super().__init__(buffer, offset)");
+    WriteLineIndent("super(buffer, offset)");
     if (s->base && !s->base->empty())
-        WriteLineIndent("self._parent = " + ConvertTypeFieldName(*s->base, true) + "(buffer, 0)");
+        WriteLineIndent("@_parent = " + ConvertTypeFieldName(*s->base, true) + "(self.buffer, 0)");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("self._" + *field->name + " = " + ConvertTypeFieldInitialization(*field, "0", true));
+            WriteLineIndent("@_" + *field->name + " = " + ConvertTypeFieldInitialization(*field, "0", true));
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct final model accessors
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("@property");
-        WriteLineIndent("def parent(self):");
+        WriteLineIndent("def parent");
         Indent(1);
-        WriteLineIndent("return self._parent");
+        WriteLineIndent("@_parent");
         Indent(-1);
+        WriteLineIndent("end");
     }
     if (s->body)
     {
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("@property");
-            WriteLineIndent("def " + *field->name + "(self):");
+            WriteLineIndent("def " + *field->name);
             Indent(1);
-            WriteLineIndent("return self._" + *field->name);
+            WriteLineIndent("@_" + *field->name);
             Indent(-1);
+            WriteLineIndent("end");
         }
     }
 
     // Generate struct final model FBE properties
     WriteLine();
     WriteLineIndent("# Get the allocation size");
-    WriteLineIndent("def fbe_allocation_size(self, fbe_value):");
+    WriteLineIndent("def fbe_allocation_size(fbe_value)");
     Indent(1);
-    WriteLineIndent("fbe_result = 0 \\");
+    WriteLineIndent("0");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("+ self.parent.fbe_allocation_size(fbe_value) \\");
+        WriteLineIndent("+ parent.fbe_allocation_size(fbe_value)");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("+ self." + *field->name + ".fbe_allocation_size(fbe_value." + *field->name + ") \\");
+            WriteLineIndent("+ " + *field->name + ".fbe_allocation_size(fbe_value." + *field->name + ")");
     Indent(-1);
-    WriteLine();
-    WriteLineIndent("return fbe_result");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
     WriteLineIndent("# Get the field type");
-    WriteLineIndent("@property");
-    WriteLineIndent("def fbe_type(self):");
+    WriteLineIndent("def fbe_type");
     Indent(1);
-    WriteLineIndent("return self.TYPE");
+    WriteLineIndent("TYPE");
     Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate struct final model type
+    WriteLine();
+    if (s->base && !s->base->empty() && (s->type == 0))
+        WriteLineIndent("TYPE = " + ConvertTypeFieldName(*s->base, true) + "::TYPE");
+    else
+        WriteLineIndent("TYPE = " + std::to_string(s->type));
 
     // Generate struct final model verify() method
     WriteLine();
     WriteLineIndent("# Check if the struct value is valid");
-    WriteLineIndent("def verify(self):");
+    WriteLineIndent("def verify");
     Indent(1);
-    WriteLineIndent("self._buffer.shift(self.fbe_offset)");
-    WriteLineIndent("fbe_result = self.verify_fields()");
-    WriteLineIndent("self._buffer.unshift(self.fbe_offset)");
-    WriteLineIndent("return fbe_result");
+    WriteLineIndent("@_buffer.shift(fbe_offset)");
+    WriteLineIndent("fbe_result = verify_fields");
+    WriteLineIndent("@_buffer.unshift(fbe_offset)");
+    WriteLineIndent("fbe_result");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct final model verify_fields() method
     WriteLine();
     WriteLineIndent("# Check if the struct fields are valid");
-    WriteLineIndent("def verify_fields(self):");
+    WriteLineIndent("def verify_fields");
     Indent(1);
     WriteLineIndent("fbe_current_offset = 0");
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("self.parent.fbe_offset = fbe_current_offset");
-        WriteLineIndent("fbe_field_size = self.parent.verify_fields()");
-        WriteLineIndent("if fbe_field_size == sys.maxsize:");
+        WriteLineIndent("parent.fbe_offset = fbe_current_offset");
+        WriteLineIndent("fbe_field_size = parent.verify_fields");
+        WriteLineIndent("if fbe_field_size == Fixnum::MAX");
         Indent(1);
-        WriteLineIndent("return sys.maxsize");
+        WriteLineIndent("return Fixnum::MAX");
         Indent(-1);
+        WriteLineIndent("end");
         WriteLineIndent("fbe_current_offset += fbe_field_size");
     }
     if (s->body)
@@ -4829,47 +4839,47 @@ void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& 
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("self." + *field->name + ".fbe_offset = fbe_current_offset");
-            WriteLineIndent("fbe_field_size = self." + *field->name + ".verify()");
-            WriteLineIndent("if fbe_field_size == sys.maxsize:");
+            WriteLineIndent(*field->name + ".fbe_offset = fbe_current_offset");
+            WriteLineIndent("fbe_field_size = " + *field->name + ".verify");
+            WriteLineIndent("if fbe_field_size == Fixnum::MAX");
             Indent(1);
-            WriteLineIndent("return sys.maxsize");
+            WriteLineIndent("return Fixnum::MAX");
             Indent(-1);
+            WriteLineIndent("end");
             WriteLineIndent("fbe_current_offset += fbe_field_size");
         }
     }
     WriteLine();
-    WriteLineIndent("return fbe_current_offset");
+    WriteLineIndent("# noinspection RubyUnnecessaryReturnValue");
+    WriteLineIndent("fbe_current_offset");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct final model get() method
     WriteLine();
     WriteLineIndent("# Get the struct value");
-    WriteLineIndent("def get(self, fbe_value=None):");
+    WriteLineIndent("def get(fbe_value = " + struct_name + ".new)");
     Indent(1);
-    WriteLineIndent("if fbe_value is None:");
-    Indent(1);
-    WriteLineIndent("fbe_value = " + *s->name + "()");
+    WriteLineIndent("@_buffer.shift(fbe_offset)");
+    WriteLineIndent("fbe_size = get_fields(fbe_value)");
+    WriteLineIndent("@_buffer.unshift(fbe_offset)");
+    WriteLineIndent("[fbe_value, fbe_size]");
     Indent(-1);
-    WriteLine();
-    WriteLineIndent("self._buffer.shift(self.fbe_offset)");
-    WriteLineIndent("fbe_size = self.get_fields(fbe_value)");
-    WriteLineIndent("self._buffer.unshift(self.fbe_offset)");
-    WriteLineIndent("return fbe_value, fbe_size");
-    Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct final model get_fields() method
     WriteLine();
     WriteLineIndent("# Get the struct fields values");
-    WriteLineIndent("def get_fields(self, fbe_value):");
+    WriteLineIndent("def get_fields(fbe_value)");
     Indent(1);
     WriteLineIndent("fbe_current_offset = 0");
     WriteLineIndent("fbe_current_size = 0");
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("self.parent.fbe_offset = fbe_current_offset");
-        WriteLineIndent("fbe_result = self.parent.get_fields(fbe_value)");
+        WriteLineIndent("parent.fbe_offset = fbe_current_offset");
+        WriteLineIndent("fbe_result = parent.get_fields(fbe_value)");
+        WriteLineIndent("# noinspection RubyUnusedLocalVariable");
         WriteLineIndent("fbe_current_offset += fbe_result");
         WriteLineIndent("fbe_current_size += fbe_result");
     }
@@ -4878,45 +4888,50 @@ void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& 
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("self." + *field->name + ".fbe_offset = fbe_current_offset");
+            WriteLineIndent(*field->name + ".fbe_offset = fbe_current_offset");
             if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent("fbe_result = self." + *field->name + ".get(fbe_value." + *field->name + ")");
+                WriteLineIndent("fbe_result = " + *field->name + ".get(fbe_value." + *field->name + ")");
             else
             {
-                WriteLineIndent("fbe_result = self." + *field->name + ".get()");
+                WriteLineIndent("fbe_result = " + *field->name + ".get");
                 WriteLineIndent("fbe_value." + *field->name + " = fbe_result[0]");
             }
+            WriteLineIndent("# noinspection RubyUnusedLocalVariable");
             WriteLineIndent("fbe_current_offset += fbe_result[1]");
             WriteLineIndent("fbe_current_size += fbe_result[1]");
         }
     }
     WriteLine();
-    WriteLineIndent("return fbe_current_size");
+    WriteLineIndent("# noinspection RubyUnnecessaryReturnValue");
+    WriteLineIndent("fbe_current_size");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct final model set() method
     WriteLine();
     WriteLineIndent("# Set the struct value");
-    WriteLineIndent("def set(self, fbe_value):");
+    WriteLineIndent("def set(fbe_value)");
     Indent(1);
-    WriteLineIndent("self._buffer.shift(self.fbe_offset)");
-    WriteLineIndent("fbe_size = self.set_fields(fbe_value)");
-    WriteLineIndent("self._buffer.unshift(self.fbe_offset)");
-    WriteLineIndent("return fbe_size");
+    WriteLineIndent("@_buffer.shift(fbe_offset)");
+    WriteLineIndent("fbe_size = set_fields(fbe_value)");
+    WriteLineIndent("@_buffer.unshift(fbe_offset)");
+    WriteLineIndent("fbe_size");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct final model set_fields() method
     WriteLine();
     WriteLineIndent("# Set the struct fields values");
-    WriteLineIndent("def set_fields(self, fbe_value):");
+    WriteLineIndent("def set_fields(fbe_value)");
     Indent(1);
     WriteLineIndent("fbe_current_offset = 0");
     WriteLineIndent("fbe_current_size = 0");
     if (s->base && !s->base->empty())
     {
         WriteLine();
-        WriteLineIndent("self.parent.fbe_offset = fbe_current_offset");
-        WriteLineIndent("fbe_field_size = self.parent.set_fields(fbe_value)");
+        WriteLineIndent("parent.fbe_offset = fbe_current_offset");
+        WriteLineIndent("fbe_field_size = parent.set_fields(fbe_value)");
+        WriteLineIndent("# noinspection RubyUnusedLocalVariable");
         WriteLineIndent("fbe_current_offset += fbe_field_size");
         WriteLineIndent("fbe_current_size += fbe_field_size");
     }
@@ -4925,136 +4940,140 @@ void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& 
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("self." + *field->name + ".fbe_offset = fbe_current_offset");
-            WriteLineIndent("fbe_field_size = self." + *field->name + ".set(fbe_value." + *field->name + ")");
+            WriteLineIndent(*field->name + ".fbe_offset = fbe_current_offset");
+            WriteLineIndent("fbe_field_size = " + *field->name + ".set(fbe_value." + *field->name + ")");
+            WriteLineIndent("# noinspection RubyUnusedLocalVariable");
             WriteLineIndent("fbe_current_offset += fbe_field_size");
             WriteLineIndent("fbe_current_size += fbe_field_size");
         }
     }
     WriteLine();
-    WriteLineIndent("return fbe_current_size");
+    WriteLineIndent("# noinspection RubyUnnecessaryReturnValue");
+    WriteLineIndent("fbe_current_size");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct final model end
     Indent(-1);
+    WriteLineIndent("end");
 }
 
 void GeneratorRuby::GenerateStructModelFinal(const std::shared_ptr<StructType>& s)
 {
+    std::string struct_name = ConvertTitle(*s->name);
+
     // Generate struct model final begin
     WriteLine();
-    WriteLine();
-    WriteLineIndent("# Fast Binary Encoding " + *s->name + " final model class");
-    WriteLineIndent("class " + *s->name + "FinalModel(fbe.Model):");
+    WriteLineIndent("# Fast Binary Encoding " + struct_name + " final model class");
+    WriteLineIndent("class " + struct_name + "FinalModel < FBE::Model");
     Indent(1);
-
-    // Generate struct model final __slots__
-    WriteLineIndent("__slots__ = \"_model\",");
-
-    // Generate struct model type
-    WriteLine();
-    WriteLineIndent("TYPE = FinalModel" + *s->name + ".TYPE");
 
     // Generate struct model final constructor
-    WriteLine();
-    WriteLineIndent("def __init__(self, buffer=None):");
+    WriteLineIndent("def initialize(buffer = WriteBuffer.new)");
     Indent(1);
-    WriteLineIndent("super().__init__(buffer)");
-    WriteLineIndent("self._model = FinalModel" + *s->name + "(self.buffer, 8)");
+    WriteLineIndent("super(buffer)");
+    WriteLineIndent("@_model = FinalModel" + struct_name + "(self.buffer, 8)");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct model final FBE properties
     WriteLine();
     WriteLineIndent("# Get the model type");
-    WriteLineIndent("@property");
-    WriteLineIndent("def fbe_type(self):");
+    WriteLineIndent("def fbe_type");
     Indent(1);
-    WriteLineIndent("return self.TYPE");
+    WriteLineIndent("TYPE");
     Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate struct model type
+    WriteLine();
+    WriteLineIndent("TYPE = FinalModel" + struct_name + "::TYPE");
 
     // Generate struct model final verify() method
     WriteLine();
     WriteLineIndent("# Check if the struct value is valid");
-    WriteLineIndent("def verify(self):");
+    WriteLineIndent("def verify");
     Indent(1);
-    WriteLineIndent("if (self.buffer.offset + self._model.fbe_offset) > self.buffer.size:");
+    WriteLineIndent("if (buffer.offset + @_model.fbe_offset) > buffer.size");
     Indent(1);
-    WriteLineIndent("return False");
+    WriteLineIndent("return false");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("fbe_struct_size = self.read_uint32(self._model.fbe_offset - 8)");
-    WriteLineIndent("fbe_struct_type = self.read_uint32(self._model.fbe_offset - 4)");
-    WriteLineIndent("if (fbe_struct_size <= 0) or (fbe_struct_type != self.fbe_type):");
+    WriteLineIndent("fbe_struct_size = read_uint32(@_model.fbe_offset - 8)");
+    WriteLineIndent("fbe_struct_type = read_uint32(@_model.fbe_offset - 4)");
+    WriteLineIndent("if (fbe_struct_size <= 0) or (fbe_struct_type != fbe_type)");
     Indent(1);
-    WriteLineIndent("return False");
+    WriteLineIndent("return false");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("return (8 + self._model.verify()) == fbe_struct_size");
+    WriteLineIndent("(8 + @_model.verify) == fbe_struct_size");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct model final serialize() method
     WriteLine();
     WriteLineIndent("# Serialize the struct value");
-    WriteLineIndent("def serialize(self, value):");
+    WriteLineIndent("def serialize(value)");
     Indent(1);
-    WriteLineIndent("fbe_initial_size = self.buffer.size");
+    WriteLineIndent("fbe_initial_size = buffer.size");
     WriteLine();
-    WriteLineIndent("fbe_struct_type = self.fbe_type");
-    WriteLineIndent("fbe_struct_size = 8 + self._model.fbe_allocation_size(value)");
-    WriteLineIndent("fbe_struct_offset = self.buffer.allocate(fbe_struct_size) - self.buffer.offset");
-    WriteLineIndent("assert ((self.buffer.offset + fbe_struct_offset + fbe_struct_size) <= self.buffer.size), \"Model is broken!\"");
-    WriteLineIndent("if (self.buffer.offset + fbe_struct_offset + fbe_struct_size) > self.buffer.size:");
+    WriteLineIndent("fbe_struct_type = fbe_type");
+    WriteLineIndent("fbe_struct_size = 8 + @_model.fbe_allocation_size(value)");
+    WriteLineIndent("fbe_struct_offset = buffer.allocate(fbe_struct_size) - buffer.offset");
+    WriteLineIndent("if (buffer.offset + fbe_struct_offset + fbe_struct_size) > buffer.size");
     Indent(1);
     WriteLineIndent("return 0");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("fbe_struct_size = 8 + self._model.set(value)");
-    WriteLineIndent("self.buffer.resize(fbe_initial_size + fbe_struct_size)");
+    WriteLineIndent("fbe_struct_size = 8 + @_model.set(value)");
+    WriteLineIndent("buffer.resize(fbe_initial_size + fbe_struct_size)");
     WriteLine();
-    WriteLineIndent("self.write_uint32(self._model.fbe_offset - 8, fbe_struct_size)");
-    WriteLineIndent("self.write_uint32(self._model.fbe_offset - 4, fbe_struct_type)");
+    WriteLineIndent("write_uint32(@_model.fbe_offset - 8, fbe_struct_size)");
+    WriteLineIndent("write_uint32(@_model.fbe_offset - 4, fbe_struct_type)");
     WriteLine();
-    WriteLineIndent("return fbe_struct_size");
+    WriteLineIndent("fbe_struct_size");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct model final deserialize() methods
     WriteLine();
     WriteLineIndent("# Deserialize the struct value");
-    WriteLineIndent("def deserialize(self, value=None):");
+    WriteLineIndent("def deserialize(value = " + struct_name + ".new)");
     Indent(1);
-    WriteLineIndent("if value is None:");
+    WriteLineIndent("if (buffer.offset + @_model.fbe_offset) > buffer.size");
     Indent(1);
-    WriteLineIndent("value = " + *s->name + "()");
+    WriteLineIndent("[" + struct_name + ".new, 0]");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("assert ((self.buffer.offset + self._model.fbe_offset) <= self.buffer.size), \"Model is broken!\"");
-    WriteLineIndent("if (self.buffer.offset + self._model.fbe_offset) > self.buffer.size:");
+    WriteLineIndent("fbe_struct_size = read_uint32(@_model.fbe_offset - 8)");
+    WriteLineIndent("fbe_struct_type = read_uint32(@_model.fbe_offset - 4)");
+    WriteLineIndent("if (fbe_struct_size <= 0) || (fbe_struct_type != fbe_type)");
     Indent(1);
-    WriteLineIndent("return " + *s->name + "(), 0");
+    WriteLineIndent("[" + struct_name + ".new, 8]");
     Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("fbe_struct_size = self.read_uint32(self._model.fbe_offset - 8)");
-    WriteLineIndent("fbe_struct_type = self.read_uint32(self._model.fbe_offset - 4)");
-    WriteLineIndent("assert ((fbe_struct_size > 0) and (fbe_struct_type == self.fbe_type)), \"Model is broken!\"");
-    WriteLineIndent("if (fbe_struct_size <= 0) or (fbe_struct_type != self.fbe_type):");
-    Indent(1);
-    WriteLineIndent("return " + *s->name + "(), 8");
+    WriteLineIndent("fbe_result = @_model.get(value)");
+    WriteLineIndent("[fbe_result[0], (8 + fbe_result[1])]");
     Indent(-1);
-    WriteLine();
-    WriteLineIndent("fbe_result = self._model.get(value)");
-    WriteLineIndent("return fbe_result[0], (8 + fbe_result[1])");
-    Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct model final next() method
     WriteLine();
     WriteLineIndent("# Move to the next struct value");
-    WriteLineIndent("def next(self, prev):");
+    WriteLineIndent("def next(prev)");
     Indent(1);
-    WriteLineIndent("self._model.fbe_shift(prev)");
+    WriteLineIndent("@_model.fbe_shift(prev)");
     Indent(-1);
+    WriteLineIndent("end");
 
     // Generate struct model final end
     Indent(-1);
+    WriteLineIndent("end");
 }
 
 void GeneratorRuby::GenerateSender(const std::shared_ptr<Package>& p, bool final)
@@ -5069,7 +5088,7 @@ void GeneratorRuby::GenerateSender(const std::shared_ptr<Package>& p, bool final
         WriteLineIndent("# Fast Binary Encoding " + *p->name + " final sender class");
     else
         WriteLineIndent("# Fast Binary Encoding " + *p->name + " sender class");
-    WriteLineIndent("class " + sender + "(fbe.Sender):");
+    WriteLineIndent("class " + sender + "(FBE::Sender):");
     Indent(1);
 
     // Generate sender __slots__
@@ -5097,12 +5116,12 @@ void GeneratorRuby::GenerateSender(const std::shared_ptr<Package>& p, bool final
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*import) + "_sender = " + *import + "." + sender + "(self.buffer)");
+            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*import) + "_sender = " + *import + "." + sender + "(self.buffer)");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
-            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + *s->name + model + "(self.buffer)");
+            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + *s->name + model + "(self.buffer)");
     }
     Indent(-1);
 
@@ -5117,7 +5136,7 @@ void GeneratorRuby::GenerateSender(const std::shared_ptr<Package>& p, bool final
             WriteLineIndent("@property");
             WriteLineIndent("def " + CppCommon::StringUtils::ToLower(*import) + "_sender(self):");
             Indent(1);
-            WriteLineIndent("return self._" + CppCommon::StringUtils::ToLower(*import) + "_sender");
+            WriteLineIndent("return @_" + CppCommon::StringUtils::ToLower(*import) + "_sender");
             Indent(-1);
         }
     }
@@ -5133,7 +5152,7 @@ void GeneratorRuby::GenerateSender(const std::shared_ptr<Package>& p, bool final
             WriteLineIndent("@property");
             WriteLineIndent("def " + CppCommon::StringUtils::ToLower(*s->name) + "_model(self):");
             Indent(1);
-            WriteLineIndent("return self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model");
+            WriteLineIndent("return @_" + CppCommon::StringUtils::ToLower(*s->name) + "_model");
             Indent(-1);
         }
     }
@@ -5158,7 +5177,7 @@ void GeneratorRuby::GenerateSender(const std::shared_ptr<Package>& p, bool final
     {
         for (const auto& import : p->import->imports)
         {
-            WriteLineIndent("result = self._" + CppCommon::StringUtils::ToLower(*import) + "_sender.send(value)");
+            WriteLineIndent("result = @_" + CppCommon::StringUtils::ToLower(*import) + "_sender.send(value)");
             WriteLineIndent("if result > 0:");
             Indent(1);
             WriteLineIndent("return result");
@@ -5216,7 +5235,7 @@ void GeneratorRuby::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
         WriteLineIndent("# Fast Binary Encoding " + *p->name + " final receiver class");
     else
         WriteLineIndent("# Fast Binary Encoding " + *p->name + " receiver class");
-    WriteLineIndent("class " + receiver + "(fbe.Receiver):");
+    WriteLineIndent("class " + receiver + "(FBE::Receiver):");
     Indent(1);
 
     // Generate receiver __slots__
@@ -5247,14 +5266,14 @@ void GeneratorRuby::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     if (p->import)
     {
         for (const auto& import : p->import->imports)
-            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*import) + "_receiver = " + *import + "." + receiver + "(self.buffer)");
+            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*import) + "_receiver = " + *import + "." + receiver + "(self.buffer)");
     }
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_value = " + *s->name + "()");
-            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + *s->name + model + "()");
+            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_value = " + *s->name + "()");
+            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + *s->name + model + "()");
         }
     }
     Indent(-1);
@@ -5270,13 +5289,13 @@ void GeneratorRuby::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
             WriteLineIndent("@property");
             WriteLineIndent("def " + CppCommon::StringUtils::ToLower(*import) + "_receiver(self):");
             Indent(1);
-            WriteLineIndent("return self._" + CppCommon::StringUtils::ToLower(*import) + "_receiver");
+            WriteLineIndent("return @_" + CppCommon::StringUtils::ToLower(*import) + "_receiver");
             Indent(-1);
             WriteLine();
             WriteLineIndent("@" + CppCommon::StringUtils::ToLower(*import) + "_receiver.setter");
             WriteLineIndent("def " + CppCommon::StringUtils::ToLower(*import) + "_receiver(self, receiver):");
             Indent(1);
-            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*import) + "_receiver = receiver");
+            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*import) + "_receiver = receiver");
             Indent(-1);
         }
     }
@@ -5305,23 +5324,23 @@ void GeneratorRuby::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
         for (const auto& s : p->body->structs)
         {
             WriteLine();
-            WriteLineIndent("if fbe_type == " + *s->name + model + ".TYPE:");
+            WriteLineIndent("if fbe_type == " + *s->name + model + "::TYPE:");
             Indent(1);
             WriteLineIndent("# Deserialize the value from the FBE stream");
-            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.attach_buffer(buffer, offset)");
-            WriteLineIndent("assert self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify(), \"" + *p->name + "." + *s->name + " validation failed!\"");
-            WriteLineIndent("(_, deserialized) = self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.deserialize(self._" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
+            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.attach_buffer(buffer, offset)");
+            WriteLineIndent("assert @_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify(), \"" + *p->name + "." + *s->name + " validation failed!\"");
+            WriteLineIndent("(_, deserialized) = @_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.deserialize(@_" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
             WriteLineIndent("assert (deserialized > 0), \"" + *p->name + "." + *s->name + " deserialization failed!\"");
             WriteLine();
             WriteLineIndent("# Log the value");
             WriteLineIndent("if self.logging:");
             Indent(1);
-            WriteLineIndent("message = str(self._" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
+            WriteLineIndent("message = str(@_" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
             WriteLineIndent("self.on_receive_log(message)");
             Indent(-1);
             WriteLine();
             WriteLineIndent("# Call receive handler with deserialized value");
-            WriteLineIndent("self.on_receive_" + CppCommon::StringUtils::ToLower(*s->name) + "(self._" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
+            WriteLineIndent("self.on_receive_" + CppCommon::StringUtils::ToLower(*s->name) + "(@_" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
             WriteLineIndent("return True");
             Indent(-1);
         }
@@ -5500,43 +5519,43 @@ std::string GeneratorRuby::ConvertTypeFieldName(const std::string& type, bool fi
     std::string modelType = (final ? "Final" : "Field");
 
     if (type == "bool")
-        return "fbe." + modelType + "ModelBool";
+        return "FBE::" + modelType + "ModelBool";
     else if (type == "byte")
-        return "fbe." + modelType + "ModelByte";
+        return "FBE::" + modelType + "ModelByte";
     else if (type == "bytes")
-        return "fbe." + modelType + "ModelBytes";
+        return "FBE::" + modelType + "ModelBytes";
     else if (type == "char")
-        return "fbe." + modelType + "ModelChar";
+        return "FBE::" + modelType + "ModelChar";
     else if (type == "wchar")
-        return "fbe." + modelType + "ModelWChar";
+        return "FBE::" + modelType + "ModelWChar";
     else if (type == "int8")
-        return "fbe." + modelType + "ModelInt8";
+        return "FBE::" + modelType + "ModelInt8";
     else if (type == "uint8")
-        return "fbe." + modelType + "ModelUInt8";
+        return "FBE::" + modelType + "ModelUInt8";
     else if (type == "int16")
-        return "fbe." + modelType + "ModelInt16";
+        return "FBE::" + modelType + "ModelInt16";
     else if (type == "uint16")
-        return "fbe." + modelType + "ModelUInt16";
+        return "FBE::" + modelType + "ModelUInt16";
     else if (type == "int32")
-        return "fbe." + modelType + "ModelInt32";
+        return "FBE::" + modelType + "ModelInt32";
     else if (type == "uint32")
-        return "fbe." + modelType + "ModelUInt32";
+        return "FBE::" + modelType + "ModelUInt32";
     else if (type == "int64")
-        return "fbe." + modelType + "ModelInt64";
+        return "FBE::" + modelType + "ModelInt64";
     else if (type == "uint64")
-        return "fbe." + modelType + "ModelUInt64";
+        return "FBE::" + modelType + "ModelUInt64";
     else if (type == "float")
-        return "fbe." + modelType + "ModelFloat";
+        return "FBE::" + modelType + "ModelFloat";
     else if (type == "double")
-        return "fbe." + modelType + "ModelDouble";
+        return "FBE::" + modelType + "ModelDouble";
     else if (type == "decimal")
-        return "fbe." + modelType + "ModelDecimal";
+        return "FBE::" + modelType + "ModelDecimal";
     else if (type == "timestamp")
-        return "fbe." + modelType + "ModelTimestamp";
+        return "FBE::" + modelType + "ModelTimestamp";
     else if (type == "string")
-        return "fbe." + modelType + "ModelString";
+        return "FBE::" + modelType + "ModelString";
     else if (type == "uuid")
-        return "fbe." + modelType + "ModelUUID";
+        return "FBE::" + modelType + "ModelUUID";
 
     std::string ns = "";
     std::string t = type;
@@ -5556,9 +5575,9 @@ std::string GeneratorRuby::ConvertTypeFieldInitialization(const std::string& typ
     std::string modelType = (final ? "Final" : "Field");
 
     if (optional)
-        return "fbe." + modelType + "ModelOptional(" + ConvertTypeFieldInitialization(type, false, offset, final)+ ", buffer, " + offset + ")";
+        return "FBE::" + modelType + "ModelOptional(" + ConvertTypeFieldInitialization(type, false, offset, final)+ ", self.buffer, " + offset + ")";
     else
-        return ConvertTypeFieldName(type, final) + "(buffer, " + offset + ")";
+        return ConvertTypeFieldName(type, final) + "(self.buffer, " + offset + ")";
 }
 
 std::string GeneratorRuby::ConvertTypeFieldInitialization(const StructField& field, const std::string& offset, bool final)
@@ -5566,13 +5585,13 @@ std::string GeneratorRuby::ConvertTypeFieldInitialization(const StructField& fie
     std::string modelType = (final ? "Final" : "Field");
 
     if (field.array)
-        return "fbe." + modelType + "ModelArray(" + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", buffer, " + offset + ", " + std::to_string(field.N) + ")";
+        return "FBE::" + modelType + "ModelArray(" + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", self.buffer, " + offset + ", " + std::to_string(field.N) + ")";
     else if (field.vector || field.list)
-        return "fbe." + modelType + "ModelVector(" + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", buffer, " + offset + ")";
+        return "FBE::" + modelType + "ModelVector(" + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", self.buffer, " + offset + ")";
     else if (field.set)
-        return "fbe." + modelType + "ModelSet(" + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", buffer, " + offset + ")";
+        return "FBE::" + modelType + "ModelSet(" + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", self.buffer, " + offset + ")";
     else if (field.map || field.hash)
-        return "fbe." + modelType + "ModelMap(" + ConvertTypeFieldInitialization(*field.key, false, offset, final) + ", " + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", buffer, " + offset + ")";
+        return "FBE::" + modelType + "ModelMap(" + ConvertTypeFieldInitialization(*field.key, false, offset, final) + ", " + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", self.buffer, " + offset + ")";
     else
         return ConvertTypeFieldInitialization(*field.type, field.optional, offset, final);
 }

@@ -517,8 +517,6 @@ class Order(object):
 class FieldModelOrder(fbe.FieldModel):
     __slots__ = "_uid", "_symbol", "_side", "_type", "_price", "_volume", "_tp", "_sl", 
 
-    TYPE = 1
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._uid = fbe.FieldModelInt32(buffer, 4 + 4)
@@ -612,6 +610,8 @@ class FieldModelOrder(fbe.FieldModel):
     @property
     def fbe_type(self):
         return self.TYPE
+
+    TYPE = 1
 
     # Check if the struct value is valid
     def verify(self, fbe_verify_type=True):
@@ -825,8 +825,6 @@ class FieldModelOrder(fbe.FieldModel):
 class OrderModel(fbe.Model):
     __slots__ = "_model",
 
-    TYPE = FieldModelOrder.TYPE
-
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FieldModelOrder(self.buffer, 4)
@@ -842,6 +840,8 @@ class OrderModel(fbe.Model):
     # Get the model type
     def fbe_type(self):
         return self.TYPE
+
+    TYPE = FieldModelOrder.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -898,8 +898,6 @@ class OrderModel(fbe.Model):
 
 class FinalModelOrder(fbe.FinalModel):
     __slots__ = "_uid", "_symbol", "_side", "_type", "_price", "_volume", "_tp", "_sl", 
-
-    TYPE = 1
 
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -962,6 +960,8 @@ class FinalModelOrder(fbe.FinalModel):
     @property
     def fbe_type(self):
         return self.TYPE
+
+    TYPE = 1
 
     # Check if the struct value is valid
     def verify(self):
@@ -1148,8 +1148,6 @@ class FinalModelOrder(fbe.FinalModel):
 class OrderFinalModel(fbe.Model):
     __slots__ = "_model",
 
-    TYPE = FinalModelOrder.TYPE
-
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FinalModelOrder(self.buffer, 8)
@@ -1158,6 +1156,8 @@ class OrderFinalModel(fbe.Model):
     @property
     def fbe_type(self):
         return self.TYPE
+
+    TYPE = FinalModelOrder.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -1302,8 +1302,6 @@ class Balance(proto.Balance):
 class FieldModelBalance(fbe.FieldModel):
     __slots__ = "_parent", "_locked", 
 
-    TYPE = proto.FieldModelBalance.TYPE
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._parent = proto.FieldModelBalance(buffer, 4 + 4)
@@ -1355,6 +1353,8 @@ class FieldModelBalance(fbe.FieldModel):
     @property
     def fbe_type(self):
         return self.TYPE
+
+    TYPE = proto.FieldModelBalance.TYPE
 
     # Check if the struct value is valid
     def verify(self, fbe_verify_type=True):
@@ -1488,8 +1488,6 @@ class FieldModelBalance(fbe.FieldModel):
 class BalanceModel(fbe.Model):
     __slots__ = "_model",
 
-    TYPE = FieldModelBalance.TYPE
-
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FieldModelBalance(self.buffer, 4)
@@ -1505,6 +1503,8 @@ class BalanceModel(fbe.Model):
     # Get the model type
     def fbe_type(self):
         return self.TYPE
+
+    TYPE = FieldModelBalance.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -1562,8 +1562,6 @@ class BalanceModel(fbe.Model):
 class FinalModelBalance(fbe.FinalModel):
     __slots__ = "_parent", "_locked", 
 
-    TYPE = proto.FinalModelBalance.TYPE
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._parent = proto.FinalModelBalance(buffer, 0)
@@ -1589,6 +1587,8 @@ class FinalModelBalance(fbe.FinalModel):
     @property
     def fbe_type(self):
         return self.TYPE
+
+    TYPE = proto.FinalModelBalance.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -1672,8 +1672,6 @@ class FinalModelBalance(fbe.FinalModel):
 class BalanceFinalModel(fbe.Model):
     __slots__ = "_model",
 
-    TYPE = FinalModelBalance.TYPE
-
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FinalModelBalance(self.buffer, 8)
@@ -1682,6 +1680,8 @@ class BalanceFinalModel(fbe.Model):
     @property
     def fbe_type(self):
         return self.TYPE
+
+    TYPE = FinalModelBalance.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -1869,8 +1869,6 @@ class Account(object):
 class FieldModelAccount(fbe.FieldModel):
     __slots__ = "_uid", "_name", "_state", "_wallet", "_asset", "_orders", 
 
-    TYPE = 3
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._uid = fbe.FieldModelInt32(buffer, 4 + 4)
@@ -1950,6 +1948,8 @@ class FieldModelAccount(fbe.FieldModel):
     @property
     def fbe_type(self):
         return self.TYPE
+
+    TYPE = 3
 
     # Check if the struct value is valid
     def verify(self, fbe_verify_type=True):
@@ -2137,8 +2137,6 @@ class FieldModelAccount(fbe.FieldModel):
 class AccountModel(fbe.Model):
     __slots__ = "_model",
 
-    TYPE = FieldModelAccount.TYPE
-
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FieldModelAccount(self.buffer, 4)
@@ -2154,6 +2152,8 @@ class AccountModel(fbe.Model):
     # Get the model type
     def fbe_type(self):
         return self.TYPE
+
+    TYPE = FieldModelAccount.TYPE
 
     # Check if the struct value is valid
     def verify(self):
@@ -2211,8 +2211,6 @@ class AccountModel(fbe.Model):
 class FinalModelAccount(fbe.FinalModel):
     __slots__ = "_uid", "_name", "_state", "_wallet", "_asset", "_orders", 
 
-    TYPE = 3
-
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
         self._uid = fbe.FinalModelInt32(buffer, 0)
@@ -2262,6 +2260,8 @@ class FinalModelAccount(fbe.FinalModel):
     @property
     def fbe_type(self):
         return self.TYPE
+
+    TYPE = 3
 
     # Check if the struct value is valid
     def verify(self):
@@ -2413,8 +2413,6 @@ class FinalModelAccount(fbe.FinalModel):
 class AccountFinalModel(fbe.Model):
     __slots__ = "_model",
 
-    TYPE = FinalModelAccount.TYPE
-
     def __init__(self, buffer=None):
         super().__init__(buffer)
         self._model = FinalModelAccount(self.buffer, 8)
@@ -2423,6 +2421,8 @@ class AccountFinalModel(fbe.Model):
     @property
     def fbe_type(self):
         return self.TYPE
+
+    TYPE = FinalModelAccount.TYPE
 
     # Check if the struct value is valid
     def verify(self):

@@ -324,7 +324,7 @@ module Test
       def ^(flags) Flags.new(@value ^ flags.value) end
 
       def has_flags(flags)
-        ((@value & flags.value) != 0) && ((self.value & flags.value) == flags.value)
+        ((@value & flags.value) != 0) && ((@value & flags.value) == flags.value)
       end
 
       def set_flags(flags)
@@ -528,7 +528,7 @@ module Test
       def ^(flags) Flags.new(@value ^ flags.value) end
 
       def has_flags(flags)
-        ((@value & flags.value) != 0) && ((self.value & flags.value) == flags.value)
+        ((@value & flags.value) != 0) && ((@value & flags.value) == flags.value)
       end
 
       def set_flags(flags)
@@ -749,7 +749,7 @@ module Test
     end
   end
 
-  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructSimple
     attr_accessor :uid
     attr_accessor :f1
@@ -1211,7 +1211,2681 @@ module Test
     end
   end
 
-  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FieldModelStructSimple < FBE::FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_uid = FBE::FieldModelInt32(self.buffer, 4 + 4)
+      @_f1 = FBE::FieldModelBool(self.buffer, @_uid.fbe_offset + @_uid.fbe_size)
+      @_f2 = FBE::FieldModelBool(self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
+      @_f3 = FBE::FieldModelByte(self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
+      @_f4 = FBE::FieldModelByte(self.buffer, @_f3.fbe_offset + @_f3.fbe_size)
+      @_f5 = FBE::FieldModelChar(self.buffer, @_f4.fbe_offset + @_f4.fbe_size)
+      @_f6 = FBE::FieldModelChar(self.buffer, @_f5.fbe_offset + @_f5.fbe_size)
+      @_f7 = FBE::FieldModelWChar(self.buffer, @_f6.fbe_offset + @_f6.fbe_size)
+      @_f8 = FBE::FieldModelWChar(self.buffer, @_f7.fbe_offset + @_f7.fbe_size)
+      @_f9 = FBE::FieldModelInt8(self.buffer, @_f8.fbe_offset + @_f8.fbe_size)
+      @_f10 = FBE::FieldModelInt8(self.buffer, @_f9.fbe_offset + @_f9.fbe_size)
+      @_f11 = FBE::FieldModelUInt8(self.buffer, @_f10.fbe_offset + @_f10.fbe_size)
+      @_f12 = FBE::FieldModelUInt8(self.buffer, @_f11.fbe_offset + @_f11.fbe_size)
+      @_f13 = FBE::FieldModelInt16(self.buffer, @_f12.fbe_offset + @_f12.fbe_size)
+      @_f14 = FBE::FieldModelInt16(self.buffer, @_f13.fbe_offset + @_f13.fbe_size)
+      @_f15 = FBE::FieldModelUInt16(self.buffer, @_f14.fbe_offset + @_f14.fbe_size)
+      @_f16 = FBE::FieldModelUInt16(self.buffer, @_f15.fbe_offset + @_f15.fbe_size)
+      @_f17 = FBE::FieldModelInt32(self.buffer, @_f16.fbe_offset + @_f16.fbe_size)
+      @_f18 = FBE::FieldModelInt32(self.buffer, @_f17.fbe_offset + @_f17.fbe_size)
+      @_f19 = FBE::FieldModelUInt32(self.buffer, @_f18.fbe_offset + @_f18.fbe_size)
+      @_f20 = FBE::FieldModelUInt32(self.buffer, @_f19.fbe_offset + @_f19.fbe_size)
+      @_f21 = FBE::FieldModelInt64(self.buffer, @_f20.fbe_offset + @_f20.fbe_size)
+      @_f22 = FBE::FieldModelInt64(self.buffer, @_f21.fbe_offset + @_f21.fbe_size)
+      @_f23 = FBE::FieldModelUInt64(self.buffer, @_f22.fbe_offset + @_f22.fbe_size)
+      @_f24 = FBE::FieldModelUInt64(self.buffer, @_f23.fbe_offset + @_f23.fbe_size)
+      @_f25 = FBE::FieldModelFloat(self.buffer, @_f24.fbe_offset + @_f24.fbe_size)
+      @_f26 = FBE::FieldModelFloat(self.buffer, @_f25.fbe_offset + @_f25.fbe_size)
+      @_f27 = FBE::FieldModelDouble(self.buffer, @_f26.fbe_offset + @_f26.fbe_size)
+      @_f28 = FBE::FieldModelDouble(self.buffer, @_f27.fbe_offset + @_f27.fbe_size)
+      @_f29 = FBE::FieldModelDecimal(self.buffer, @_f28.fbe_offset + @_f28.fbe_size)
+      @_f30 = FBE::FieldModelDecimal(self.buffer, @_f29.fbe_offset + @_f29.fbe_size)
+      @_f31 = FBE::FieldModelString(self.buffer, @_f30.fbe_offset + @_f30.fbe_size)
+      @_f32 = FBE::FieldModelString(self.buffer, @_f31.fbe_offset + @_f31.fbe_size)
+      @_f33 = FBE::FieldModelTimestamp(self.buffer, @_f32.fbe_offset + @_f32.fbe_size)
+      @_f34 = FBE::FieldModelTimestamp(self.buffer, @_f33.fbe_offset + @_f33.fbe_size)
+      @_f35 = FBE::FieldModelTimestamp(self.buffer, @_f34.fbe_offset + @_f34.fbe_size)
+      @_f36 = FBE::FieldModelUUID(self.buffer, @_f35.fbe_offset + @_f35.fbe_size)
+      @_f37 = FBE::FieldModelUUID(self.buffer, @_f36.fbe_offset + @_f36.fbe_size)
+      @_f38 = FBE::FieldModelUUID(self.buffer, @_f37.fbe_offset + @_f37.fbe_size)
+      @_f39 = proto.FieldModelOrderSide(self.buffer, @_f38.fbe_offset + @_f38.fbe_size)
+      @_f40 = proto.FieldModelOrderType(self.buffer, @_f39.fbe_offset + @_f39.fbe_size)
+      @_f41 = proto.FieldModelOrder(self.buffer, @_f40.fbe_offset + @_f40.fbe_size)
+      @_f42 = proto.FieldModelBalance(self.buffer, @_f41.fbe_offset + @_f41.fbe_size)
+      @_f43 = proto.FieldModelState(self.buffer, @_f42.fbe_offset + @_f42.fbe_size)
+      @_f44 = proto.FieldModelAccount(self.buffer, @_f43.fbe_offset + @_f43.fbe_size)
+    end
+
+    def uid
+      @_uid
+    end
+
+    def f1
+      @_f1
+    end
+
+    def f2
+      @_f2
+    end
+
+    def f3
+      @_f3
+    end
+
+    def f4
+      @_f4
+    end
+
+    def f5
+      @_f5
+    end
+
+    def f6
+      @_f6
+    end
+
+    def f7
+      @_f7
+    end
+
+    def f8
+      @_f8
+    end
+
+    def f9
+      @_f9
+    end
+
+    def f10
+      @_f10
+    end
+
+    def f11
+      @_f11
+    end
+
+    def f12
+      @_f12
+    end
+
+    def f13
+      @_f13
+    end
+
+    def f14
+      @_f14
+    end
+
+    def f15
+      @_f15
+    end
+
+    def f16
+      @_f16
+    end
+
+    def f17
+      @_f17
+    end
+
+    def f18
+      @_f18
+    end
+
+    def f19
+      @_f19
+    end
+
+    def f20
+      @_f20
+    end
+
+    def f21
+      @_f21
+    end
+
+    def f22
+      @_f22
+    end
+
+    def f23
+      @_f23
+    end
+
+    def f24
+      @_f24
+    end
+
+    def f25
+      @_f25
+    end
+
+    def f26
+      @_f26
+    end
+
+    def f27
+      @_f27
+    end
+
+    def f28
+      @_f28
+    end
+
+    def f29
+      @_f29
+    end
+
+    def f30
+      @_f30
+    end
+
+    def f31
+      @_f31
+    end
+
+    def f32
+      @_f32
+    end
+
+    def f33
+      @_f33
+    end
+
+    def f34
+      @_f34
+    end
+
+    def f35
+      @_f35
+    end
+
+    def f36
+      @_f36
+    end
+
+    def f37
+      @_f37
+    end
+
+    def f38
+      @_f38
+    end
+
+    def f39
+      @_f39
+    end
+
+    def f40
+      @_f40
+    end
+
+    def f41
+      @_f41
+    end
+
+    def f42
+      @_f42
+    end
+
+    def f43
+      @_f43
+    end
+
+    def f44
+      @_f44
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field body size
+    def fbe_body
+      4 + 4
+        + uid.fbe_size
+        + f1.fbe_size
+        + f2.fbe_size
+        + f3.fbe_size
+        + f4.fbe_size
+        + f5.fbe_size
+        + f6.fbe_size
+        + f7.fbe_size
+        + f8.fbe_size
+        + f9.fbe_size
+        + f10.fbe_size
+        + f11.fbe_size
+        + f12.fbe_size
+        + f13.fbe_size
+        + f14.fbe_size
+        + f15.fbe_size
+        + f16.fbe_size
+        + f17.fbe_size
+        + f18.fbe_size
+        + f19.fbe_size
+        + f20.fbe_size
+        + f21.fbe_size
+        + f22.fbe_size
+        + f23.fbe_size
+        + f24.fbe_size
+        + f25.fbe_size
+        + f26.fbe_size
+        + f27.fbe_size
+        + f28.fbe_size
+        + f29.fbe_size
+        + f30.fbe_size
+        + f31.fbe_size
+        + f32.fbe_size
+        + f33.fbe_size
+        + f34.fbe_size
+        + f35.fbe_size
+        + f36.fbe_size
+        + f37.fbe_size
+        + f38.fbe_size
+        + f39.fbe_size
+        + f40.fbe_size
+        + f41.fbe_size
+        + f42.fbe_size
+        + f43.fbe_size
+        + f44.fbe_size
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+
+      fbe_result = fbe_body
+        + uid.fbe_extra
+        + f1.fbe_extra
+        + f2.fbe_extra
+        + f3.fbe_extra
+        + f4.fbe_extra
+        + f5.fbe_extra
+        + f6.fbe_extra
+        + f7.fbe_extra
+        + f8.fbe_extra
+        + f9.fbe_extra
+        + f10.fbe_extra
+        + f11.fbe_extra
+        + f12.fbe_extra
+        + f13.fbe_extra
+        + f14.fbe_extra
+        + f15.fbe_extra
+        + f16.fbe_extra
+        + f17.fbe_extra
+        + f18.fbe_extra
+        + f19.fbe_extra
+        + f20.fbe_extra
+        + f21.fbe_extra
+        + f22.fbe_extra
+        + f23.fbe_extra
+        + f24.fbe_extra
+        + f25.fbe_extra
+        + f26.fbe_extra
+        + f27.fbe_extra
+        + f28.fbe_extra
+        + f29.fbe_extra
+        + f30.fbe_extra
+        + f31.fbe_extra
+        + f32.fbe_extra
+        + f33.fbe_extra
+        + f34.fbe_extra
+        + f35.fbe_extra
+        + f36.fbe_extra
+        + f37.fbe_extra
+        + f38.fbe_extra
+        + f39.fbe_extra
+        + f40.fbe_extra
+        + f41.fbe_extra
+        + f42.fbe_extra
+        + f43.fbe_extra
+        + f44.fbe_extra
+
+      @_buffer.unshift(fbe_struct_offset)
+
+      fbe_result
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 110
+
+    # Check if the struct value is valid
+    def verify(fbe_verify_type = true)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return false
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return false
+      end
+
+      fbe_struct_type = read_uint32(fbe_struct_offset + 4)
+      if fbe_verify_type && (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_result = verify_fields(fbe_struct_size)
+      @_buffer.unshift(fbe_struct_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields(fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + uid.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uid.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uid.fbe_size
+
+      if (fbe_current_size + f1.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1.fbe_size
+
+      if (fbe_current_size + f2.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f2.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f2.fbe_size
+
+      if (fbe_current_size + f3.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f3.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f3.fbe_size
+
+      if (fbe_current_size + f4.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f4.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f4.fbe_size
+
+      if (fbe_current_size + f5.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f5.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f5.fbe_size
+
+      if (fbe_current_size + f6.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f6.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f6.fbe_size
+
+      if (fbe_current_size + f7.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f7.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f7.fbe_size
+
+      if (fbe_current_size + f8.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f8.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f8.fbe_size
+
+      if (fbe_current_size + f9.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f9.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f9.fbe_size
+
+      if (fbe_current_size + f10.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f10.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f10.fbe_size
+
+      if (fbe_current_size + f11.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f11.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f11.fbe_size
+
+      if (fbe_current_size + f12.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f12.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f12.fbe_size
+
+      if (fbe_current_size + f13.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f13.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f13.fbe_size
+
+      if (fbe_current_size + f14.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f14.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f14.fbe_size
+
+      if (fbe_current_size + f15.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f15.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f15.fbe_size
+
+      if (fbe_current_size + f16.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f16.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f16.fbe_size
+
+      if (fbe_current_size + f17.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f17.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f17.fbe_size
+
+      if (fbe_current_size + f18.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f18.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f18.fbe_size
+
+      if (fbe_current_size + f19.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f19.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f19.fbe_size
+
+      if (fbe_current_size + f20.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f20.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f20.fbe_size
+
+      if (fbe_current_size + f21.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f21.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f21.fbe_size
+
+      if (fbe_current_size + f22.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f22.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f22.fbe_size
+
+      if (fbe_current_size + f23.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f23.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f23.fbe_size
+
+      if (fbe_current_size + f24.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f24.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f24.fbe_size
+
+      if (fbe_current_size + f25.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f25.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f25.fbe_size
+
+      if (fbe_current_size + f26.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f26.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f26.fbe_size
+
+      if (fbe_current_size + f27.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f27.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f27.fbe_size
+
+      if (fbe_current_size + f28.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f28.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f28.fbe_size
+
+      if (fbe_current_size + f29.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f29.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f29.fbe_size
+
+      if (fbe_current_size + f30.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f30.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f30.fbe_size
+
+      if (fbe_current_size + f31.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f31.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f31.fbe_size
+
+      if (fbe_current_size + f32.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f32.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f32.fbe_size
+
+      if (fbe_current_size + f33.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f33.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f33.fbe_size
+
+      if (fbe_current_size + f34.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f34.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f34.fbe_size
+
+      if (fbe_current_size + f35.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f35.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f35.fbe_size
+
+      if (fbe_current_size + f36.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f36.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f36.fbe_size
+
+      if (fbe_current_size + f37.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f37.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f37.fbe_size
+
+      if (fbe_current_size + f38.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f38.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f38.fbe_size
+
+      if (fbe_current_size + f39.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f39.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f39.fbe_size
+
+      if (fbe_current_size + f40.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f40.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f40.fbe_size
+
+      if (fbe_current_size + f41.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f41.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f41.fbe_size
+
+      if (fbe_current_size + f42.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f42.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f42.fbe_size
+
+      if (fbe_current_size + f43.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f43.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f43.fbe_size
+
+      if (fbe_current_size + f44.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f44.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f44.fbe_size
+
+      true
+    end
+
+    # Get the struct value (begin phase)
+    def get_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Get the struct value (end phase)
+    def get_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructSimple.new)
+      fbe_begin = get_begin
+      if fbe_begin == 0
+        return fbe_value
+      end
+
+      fbe_struct_size = read_uint32(0)
+      get_fields(fbe_value, fbe_struct_size)
+      get_end(fbe_begin)
+      fbe_value
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value, fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + uid.fbe_size) <= fbe_struct_size
+        fbe_value.uid = uid.get
+      else
+        fbe_value.uid = 0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uid.fbe_size
+
+      if (fbe_current_size + f1.fbe_size) <= fbe_struct_size
+        fbe_value.f1 = f1.get
+      else
+        fbe_value.f1 = false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1.fbe_size
+
+      if (fbe_current_size + f2.fbe_size) <= fbe_struct_size
+        fbe_value.f2 = f2.get(true)
+      else
+        fbe_value.f2 = true
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f2.fbe_size
+
+      if (fbe_current_size + f3.fbe_size) <= fbe_struct_size
+        fbe_value.f3 = f3.get
+      else
+        fbe_value.f3 = 0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f3.fbe_size
+
+      if (fbe_current_size + f4.fbe_size) <= fbe_struct_size
+        fbe_value.f4 = f4.get(255)
+      else
+        fbe_value.f4 = 255
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f4.fbe_size
+
+      if (fbe_current_size + f5.fbe_size) <= fbe_struct_size
+        fbe_value.f5 = f5.get
+      else
+        fbe_value.f5 = "\0"
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f5.fbe_size
+
+      if (fbe_current_size + f6.fbe_size) <= fbe_struct_size
+        fbe_value.f6 = f6.get('!')
+      else
+        fbe_value.f6 = '!'
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f6.fbe_size
+
+      if (fbe_current_size + f7.fbe_size) <= fbe_struct_size
+        fbe_value.f7 = f7.get
+      else
+        fbe_value.f7 = "\0"
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f7.fbe_size
+
+      if (fbe_current_size + f8.fbe_size) <= fbe_struct_size
+        fbe_value.f8 = f8.get(0x0444.chr(Encoding::UTF_8))
+      else
+        fbe_value.f8 = 0x0444.chr(Encoding::UTF_8)
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f8.fbe_size
+
+      if (fbe_current_size + f9.fbe_size) <= fbe_struct_size
+        fbe_value.f9 = f9.get
+      else
+        fbe_value.f9 = 0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f9.fbe_size
+
+      if (fbe_current_size + f10.fbe_size) <= fbe_struct_size
+        fbe_value.f10 = f10.get(127)
+      else
+        fbe_value.f10 = 127
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f10.fbe_size
+
+      if (fbe_current_size + f11.fbe_size) <= fbe_struct_size
+        fbe_value.f11 = f11.get
+      else
+        fbe_value.f11 = 0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f11.fbe_size
+
+      if (fbe_current_size + f12.fbe_size) <= fbe_struct_size
+        fbe_value.f12 = f12.get(255)
+      else
+        fbe_value.f12 = 255
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f12.fbe_size
+
+      if (fbe_current_size + f13.fbe_size) <= fbe_struct_size
+        fbe_value.f13 = f13.get
+      else
+        fbe_value.f13 = 0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f13.fbe_size
+
+      if (fbe_current_size + f14.fbe_size) <= fbe_struct_size
+        fbe_value.f14 = f14.get(32767)
+      else
+        fbe_value.f14 = 32767
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f14.fbe_size
+
+      if (fbe_current_size + f15.fbe_size) <= fbe_struct_size
+        fbe_value.f15 = f15.get
+      else
+        fbe_value.f15 = 0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f15.fbe_size
+
+      if (fbe_current_size + f16.fbe_size) <= fbe_struct_size
+        fbe_value.f16 = f16.get(65535)
+      else
+        fbe_value.f16 = 65535
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f16.fbe_size
+
+      if (fbe_current_size + f17.fbe_size) <= fbe_struct_size
+        fbe_value.f17 = f17.get
+      else
+        fbe_value.f17 = 0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f17.fbe_size
+
+      if (fbe_current_size + f18.fbe_size) <= fbe_struct_size
+        fbe_value.f18 = f18.get(2147483647)
+      else
+        fbe_value.f18 = 2147483647
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f18.fbe_size
+
+      if (fbe_current_size + f19.fbe_size) <= fbe_struct_size
+        fbe_value.f19 = f19.get
+      else
+        fbe_value.f19 = 0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f19.fbe_size
+
+      if (fbe_current_size + f20.fbe_size) <= fbe_struct_size
+        fbe_value.f20 = f20.get(0xFFFFFFFF)
+      else
+        fbe_value.f20 = 0xFFFFFFFF
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f20.fbe_size
+
+      if (fbe_current_size + f21.fbe_size) <= fbe_struct_size
+        fbe_value.f21 = f21.get
+      else
+        fbe_value.f21 = 0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f21.fbe_size
+
+      if (fbe_current_size + f22.fbe_size) <= fbe_struct_size
+        fbe_value.f22 = f22.get(9223372036854775807)
+      else
+        fbe_value.f22 = 9223372036854775807
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f22.fbe_size
+
+      if (fbe_current_size + f23.fbe_size) <= fbe_struct_size
+        fbe_value.f23 = f23.get
+      else
+        fbe_value.f23 = 0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f23.fbe_size
+
+      if (fbe_current_size + f24.fbe_size) <= fbe_struct_size
+        fbe_value.f24 = f24.get(0xFFFFFFFFFFFFFFFF)
+      else
+        fbe_value.f24 = 0xFFFFFFFFFFFFFFFF
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f24.fbe_size
+
+      if (fbe_current_size + f25.fbe_size) <= fbe_struct_size
+        fbe_value.f25 = f25.get
+      else
+        fbe_value.f25 = 0.0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f25.fbe_size
+
+      if (fbe_current_size + f26.fbe_size) <= fbe_struct_size
+        fbe_value.f26 = f26.get(123.456)
+      else
+        fbe_value.f26 = 123.456
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f26.fbe_size
+
+      if (fbe_current_size + f27.fbe_size) <= fbe_struct_size
+        fbe_value.f27 = f27.get
+      else
+        fbe_value.f27 = 0.0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f27.fbe_size
+
+      if (fbe_current_size + f28.fbe_size) <= fbe_struct_size
+        fbe_value.f28 = f28.get(-123.456e+123)
+      else
+        fbe_value.f28 = -123.456e+123
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f28.fbe_size
+
+      if (fbe_current_size + f29.fbe_size) <= fbe_struct_size
+        fbe_value.f29 = f29.get
+      else
+        fbe_value.f29 = BigDecimal.new(0)
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f29.fbe_size
+
+      if (fbe_current_size + f30.fbe_size) <= fbe_struct_size
+        fbe_value.f30 = f30.get(BigDecimal.new("123456.123456"))
+      else
+        fbe_value.f30 = BigDecimal.new("123456.123456")
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f30.fbe_size
+
+      if (fbe_current_size + f31.fbe_size) <= fbe_struct_size
+        fbe_value.f31 = f31.get
+      else
+        fbe_value.f31 = ''
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f31.fbe_size
+
+      if (fbe_current_size + f32.fbe_size) <= fbe_struct_size
+        fbe_value.f32 = f32.get("Initial string!")
+      else
+        fbe_value.f32 = "Initial string!"
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f32.fbe_size
+
+      if (fbe_current_size + f33.fbe_size) <= fbe_struct_size
+        fbe_value.f33 = f33.get
+      else
+        fbe_value.f33 = Time.utc(1970)
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f33.fbe_size
+
+      if (fbe_current_size + f34.fbe_size) <= fbe_struct_size
+        fbe_value.f34 = f34.get(Time.utc(1970))
+      else
+        fbe_value.f34 = Time.utc(1970)
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f34.fbe_size
+
+      if (fbe_current_size + f35.fbe_size) <= fbe_struct_size
+        fbe_value.f35 = f35.get(Time.now.utc)
+      else
+        fbe_value.f35 = Time.now.utc
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f35.fbe_size
+
+      if (fbe_current_size + f36.fbe_size) <= fbe_struct_size
+        fbe_value.f36 = f36.get
+      else
+        fbe_value.f36 = UUIDTools::UUID.parse_int(0)
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f36.fbe_size
+
+      if (fbe_current_size + f37.fbe_size) <= fbe_struct_size
+        fbe_value.f37 = f37.get(UUIDTools::UUID.timestamp_create)
+      else
+        fbe_value.f37 = UUIDTools::UUID.timestamp_create
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f37.fbe_size
+
+      if (fbe_current_size + f38.fbe_size) <= fbe_struct_size
+        fbe_value.f38 = f38.get(UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000"))
+      else
+        fbe_value.f38 = UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000")
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f38.fbe_size
+
+      if (fbe_current_size + f39.fbe_size) <= fbe_struct_size
+        fbe_value.f39 = f39.get
+      else
+        fbe_value.f39 = Proto::OrderSide.new
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f39.fbe_size
+
+      if (fbe_current_size + f40.fbe_size) <= fbe_struct_size
+        fbe_value.f40 = f40.get
+      else
+        fbe_value.f40 = Proto::OrderType.new
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f40.fbe_size
+
+      if (fbe_current_size + f41.fbe_size) <= fbe_struct_size
+        fbe_value.f41 = f41.get
+      else
+        fbe_value.f41 = Proto::Order.new
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f41.fbe_size
+
+      if (fbe_current_size + f42.fbe_size) <= fbe_struct_size
+        fbe_value.f42 = f42.get
+      else
+        fbe_value.f42 = Proto::Balance.new
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f42.fbe_size
+
+      if (fbe_current_size + f43.fbe_size) <= fbe_struct_size
+        fbe_value.f43 = f43.get
+      else
+        fbe_value.f43 = Proto::State.new
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f43.fbe_size
+
+      if (fbe_current_size + f44.fbe_size) <= fbe_struct_size
+        fbe_value.f44 = f44.get
+      else
+        fbe_value.f44 = Proto::Account.new
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f44.fbe_size
+    end
+
+    # Set the struct value (begin phase)
+    def set_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_size = fbe_body
+      fbe_struct_offset = @_buffer.allocate(fbe_struct_size) - @_buffer.offset
+      if (fbe_struct_offset <= 0) || ((@_buffer.offset + fbe_struct_offset + fbe_struct_size) > @_buffer.size)
+        return 0
+      end
+
+      write_uint32(fbe_offset, fbe_struct_offset)
+      write_uint32(fbe_struct_offset, fbe_struct_size)
+      write_uint32(fbe_struct_offset + 4, fbe_type)
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Set the struct value (end phase)
+    def set_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      fbe_begin = set_begin
+      if fbe_begin == 0
+        return
+      end
+
+      set_fields(fbe_value)
+      set_end(fbe_begin)
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      uid.set(fbe_value.uid)
+      f1.set(fbe_value.f1)
+      f2.set(fbe_value.f2)
+      f3.set(fbe_value.f3)
+      f4.set(fbe_value.f4)
+      f5.set(fbe_value.f5)
+      f6.set(fbe_value.f6)
+      f7.set(fbe_value.f7)
+      f8.set(fbe_value.f8)
+      f9.set(fbe_value.f9)
+      f10.set(fbe_value.f10)
+      f11.set(fbe_value.f11)
+      f12.set(fbe_value.f12)
+      f13.set(fbe_value.f13)
+      f14.set(fbe_value.f14)
+      f15.set(fbe_value.f15)
+      f16.set(fbe_value.f16)
+      f17.set(fbe_value.f17)
+      f18.set(fbe_value.f18)
+      f19.set(fbe_value.f19)
+      f20.set(fbe_value.f20)
+      f21.set(fbe_value.f21)
+      f22.set(fbe_value.f22)
+      f23.set(fbe_value.f23)
+      f24.set(fbe_value.f24)
+      f25.set(fbe_value.f25)
+      f26.set(fbe_value.f26)
+      f27.set(fbe_value.f27)
+      f28.set(fbe_value.f28)
+      f29.set(fbe_value.f29)
+      f30.set(fbe_value.f30)
+      f31.set(fbe_value.f31)
+      f32.set(fbe_value.f32)
+      f33.set(fbe_value.f33)
+      f34.set(fbe_value.f34)
+      f35.set(fbe_value.f35)
+      f36.set(fbe_value.f36)
+      f37.set(fbe_value.f37)
+      f38.set(fbe_value.f38)
+      f39.set(fbe_value.f39)
+      f40.set(fbe_value.f40)
+      f41.set(fbe_value.f41)
+      f42.set(fbe_value.f42)
+      f43.set(fbe_value.f43)
+      f44.set(fbe_value.f44)
+    end
+  end
+
+  # Fast Binary Encoding StructSimple model class
+  class StructSimpleModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FieldModelStructSimple(self.buffer, 4)
+    end
+
+    def model
+      @_model
+    end
+
+    # Get the model size
+    def fbe_size
+      @_model.fbe_size + @_model.fbe_extra
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FieldModelStructSimple::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        return false
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        return false
+      end
+
+      @_model.verify
+    end
+
+    # Create a new model (begin phase)
+    def create_begin
+      buffer.allocate(4 + @_model.fbe_size)
+    end
+
+    # Create a new model (end phase)
+    def create_end(fbe_begin)
+      fbe_end = buffer.size
+      fbe_full_size = fbe_end - fbe_begin
+      write_uint32(@_model.fbe_offset - 4, fbe_full_size)
+      fbe_full_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_begin = create_begin
+      @_model.set(value)
+      create_end(fbe_begin)
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructSimple.new)
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        [StructSimple.new, 0]
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        [StructSimple.new, 0]
+      end
+
+      @_model.get(value)
+      [value, fbe_full_size]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalModelStructSimple < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_uid = FBE::FinalModelInt32(self.buffer, 0)
+      @_f1 = FBE::FinalModelBool(self.buffer, 0)
+      @_f2 = FBE::FinalModelBool(self.buffer, 0)
+      @_f3 = FBE::FinalModelByte(self.buffer, 0)
+      @_f4 = FBE::FinalModelByte(self.buffer, 0)
+      @_f5 = FBE::FinalModelChar(self.buffer, 0)
+      @_f6 = FBE::FinalModelChar(self.buffer, 0)
+      @_f7 = FBE::FinalModelWChar(self.buffer, 0)
+      @_f8 = FBE::FinalModelWChar(self.buffer, 0)
+      @_f9 = FBE::FinalModelInt8(self.buffer, 0)
+      @_f10 = FBE::FinalModelInt8(self.buffer, 0)
+      @_f11 = FBE::FinalModelUInt8(self.buffer, 0)
+      @_f12 = FBE::FinalModelUInt8(self.buffer, 0)
+      @_f13 = FBE::FinalModelInt16(self.buffer, 0)
+      @_f14 = FBE::FinalModelInt16(self.buffer, 0)
+      @_f15 = FBE::FinalModelUInt16(self.buffer, 0)
+      @_f16 = FBE::FinalModelUInt16(self.buffer, 0)
+      @_f17 = FBE::FinalModelInt32(self.buffer, 0)
+      @_f18 = FBE::FinalModelInt32(self.buffer, 0)
+      @_f19 = FBE::FinalModelUInt32(self.buffer, 0)
+      @_f20 = FBE::FinalModelUInt32(self.buffer, 0)
+      @_f21 = FBE::FinalModelInt64(self.buffer, 0)
+      @_f22 = FBE::FinalModelInt64(self.buffer, 0)
+      @_f23 = FBE::FinalModelUInt64(self.buffer, 0)
+      @_f24 = FBE::FinalModelUInt64(self.buffer, 0)
+      @_f25 = FBE::FinalModelFloat(self.buffer, 0)
+      @_f26 = FBE::FinalModelFloat(self.buffer, 0)
+      @_f27 = FBE::FinalModelDouble(self.buffer, 0)
+      @_f28 = FBE::FinalModelDouble(self.buffer, 0)
+      @_f29 = FBE::FinalModelDecimal(self.buffer, 0)
+      @_f30 = FBE::FinalModelDecimal(self.buffer, 0)
+      @_f31 = FBE::FinalModelString(self.buffer, 0)
+      @_f32 = FBE::FinalModelString(self.buffer, 0)
+      @_f33 = FBE::FinalModelTimestamp(self.buffer, 0)
+      @_f34 = FBE::FinalModelTimestamp(self.buffer, 0)
+      @_f35 = FBE::FinalModelTimestamp(self.buffer, 0)
+      @_f36 = FBE::FinalModelUUID(self.buffer, 0)
+      @_f37 = FBE::FinalModelUUID(self.buffer, 0)
+      @_f38 = FBE::FinalModelUUID(self.buffer, 0)
+      @_f39 = proto.FinalModelOrderSide(self.buffer, 0)
+      @_f40 = proto.FinalModelOrderType(self.buffer, 0)
+      @_f41 = proto.FinalModelOrder(self.buffer, 0)
+      @_f42 = proto.FinalModelBalance(self.buffer, 0)
+      @_f43 = proto.FinalModelState(self.buffer, 0)
+      @_f44 = proto.FinalModelAccount(self.buffer, 0)
+    end
+
+    def uid
+      @_uid
+    end
+
+    def f1
+      @_f1
+    end
+
+    def f2
+      @_f2
+    end
+
+    def f3
+      @_f3
+    end
+
+    def f4
+      @_f4
+    end
+
+    def f5
+      @_f5
+    end
+
+    def f6
+      @_f6
+    end
+
+    def f7
+      @_f7
+    end
+
+    def f8
+      @_f8
+    end
+
+    def f9
+      @_f9
+    end
+
+    def f10
+      @_f10
+    end
+
+    def f11
+      @_f11
+    end
+
+    def f12
+      @_f12
+    end
+
+    def f13
+      @_f13
+    end
+
+    def f14
+      @_f14
+    end
+
+    def f15
+      @_f15
+    end
+
+    def f16
+      @_f16
+    end
+
+    def f17
+      @_f17
+    end
+
+    def f18
+      @_f18
+    end
+
+    def f19
+      @_f19
+    end
+
+    def f20
+      @_f20
+    end
+
+    def f21
+      @_f21
+    end
+
+    def f22
+      @_f22
+    end
+
+    def f23
+      @_f23
+    end
+
+    def f24
+      @_f24
+    end
+
+    def f25
+      @_f25
+    end
+
+    def f26
+      @_f26
+    end
+
+    def f27
+      @_f27
+    end
+
+    def f28
+      @_f28
+    end
+
+    def f29
+      @_f29
+    end
+
+    def f30
+      @_f30
+    end
+
+    def f31
+      @_f31
+    end
+
+    def f32
+      @_f32
+    end
+
+    def f33
+      @_f33
+    end
+
+    def f34
+      @_f34
+    end
+
+    def f35
+      @_f35
+    end
+
+    def f36
+      @_f36
+    end
+
+    def f37
+      @_f37
+    end
+
+    def f38
+      @_f38
+    end
+
+    def f39
+      @_f39
+    end
+
+    def f40
+      @_f40
+    end
+
+    def f41
+      @_f41
+    end
+
+    def f42
+      @_f42
+    end
+
+    def f43
+      @_f43
+    end
+
+    def f44
+      @_f44
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(fbe_value)
+      0
+        + uid.fbe_allocation_size(fbe_value.uid)
+        + f1.fbe_allocation_size(fbe_value.f1)
+        + f2.fbe_allocation_size(fbe_value.f2)
+        + f3.fbe_allocation_size(fbe_value.f3)
+        + f4.fbe_allocation_size(fbe_value.f4)
+        + f5.fbe_allocation_size(fbe_value.f5)
+        + f6.fbe_allocation_size(fbe_value.f6)
+        + f7.fbe_allocation_size(fbe_value.f7)
+        + f8.fbe_allocation_size(fbe_value.f8)
+        + f9.fbe_allocation_size(fbe_value.f9)
+        + f10.fbe_allocation_size(fbe_value.f10)
+        + f11.fbe_allocation_size(fbe_value.f11)
+        + f12.fbe_allocation_size(fbe_value.f12)
+        + f13.fbe_allocation_size(fbe_value.f13)
+        + f14.fbe_allocation_size(fbe_value.f14)
+        + f15.fbe_allocation_size(fbe_value.f15)
+        + f16.fbe_allocation_size(fbe_value.f16)
+        + f17.fbe_allocation_size(fbe_value.f17)
+        + f18.fbe_allocation_size(fbe_value.f18)
+        + f19.fbe_allocation_size(fbe_value.f19)
+        + f20.fbe_allocation_size(fbe_value.f20)
+        + f21.fbe_allocation_size(fbe_value.f21)
+        + f22.fbe_allocation_size(fbe_value.f22)
+        + f23.fbe_allocation_size(fbe_value.f23)
+        + f24.fbe_allocation_size(fbe_value.f24)
+        + f25.fbe_allocation_size(fbe_value.f25)
+        + f26.fbe_allocation_size(fbe_value.f26)
+        + f27.fbe_allocation_size(fbe_value.f27)
+        + f28.fbe_allocation_size(fbe_value.f28)
+        + f29.fbe_allocation_size(fbe_value.f29)
+        + f30.fbe_allocation_size(fbe_value.f30)
+        + f31.fbe_allocation_size(fbe_value.f31)
+        + f32.fbe_allocation_size(fbe_value.f32)
+        + f33.fbe_allocation_size(fbe_value.f33)
+        + f34.fbe_allocation_size(fbe_value.f34)
+        + f35.fbe_allocation_size(fbe_value.f35)
+        + f36.fbe_allocation_size(fbe_value.f36)
+        + f37.fbe_allocation_size(fbe_value.f37)
+        + f38.fbe_allocation_size(fbe_value.f38)
+        + f39.fbe_allocation_size(fbe_value.f39)
+        + f40.fbe_allocation_size(fbe_value.f40)
+        + f41.fbe_allocation_size(fbe_value.f41)
+        + f42.fbe_allocation_size(fbe_value.f42)
+        + f43.fbe_allocation_size(fbe_value.f43)
+        + f44.fbe_allocation_size(fbe_value.f44)
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 110
+
+    # Check if the struct value is valid
+    def verify
+      @_buffer.shift(fbe_offset)
+      fbe_result = verify_fields
+      @_buffer.unshift(fbe_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields
+      fbe_current_offset = 0
+
+      uid.fbe_offset = fbe_current_offset
+      fbe_field_size = uid.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_field_size = f1.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_field_size = f2.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_field_size = f3.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_field_size = f4.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f5.fbe_offset = fbe_current_offset
+      fbe_field_size = f5.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f6.fbe_offset = fbe_current_offset
+      fbe_field_size = f6.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f7.fbe_offset = fbe_current_offset
+      fbe_field_size = f7.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f8.fbe_offset = fbe_current_offset
+      fbe_field_size = f8.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f9.fbe_offset = fbe_current_offset
+      fbe_field_size = f9.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f10.fbe_offset = fbe_current_offset
+      fbe_field_size = f10.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f11.fbe_offset = fbe_current_offset
+      fbe_field_size = f11.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f12.fbe_offset = fbe_current_offset
+      fbe_field_size = f12.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f13.fbe_offset = fbe_current_offset
+      fbe_field_size = f13.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f14.fbe_offset = fbe_current_offset
+      fbe_field_size = f14.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f15.fbe_offset = fbe_current_offset
+      fbe_field_size = f15.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f16.fbe_offset = fbe_current_offset
+      fbe_field_size = f16.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f17.fbe_offset = fbe_current_offset
+      fbe_field_size = f17.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f18.fbe_offset = fbe_current_offset
+      fbe_field_size = f18.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f19.fbe_offset = fbe_current_offset
+      fbe_field_size = f19.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f20.fbe_offset = fbe_current_offset
+      fbe_field_size = f20.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f21.fbe_offset = fbe_current_offset
+      fbe_field_size = f21.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f22.fbe_offset = fbe_current_offset
+      fbe_field_size = f22.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f23.fbe_offset = fbe_current_offset
+      fbe_field_size = f23.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f24.fbe_offset = fbe_current_offset
+      fbe_field_size = f24.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f25.fbe_offset = fbe_current_offset
+      fbe_field_size = f25.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f26.fbe_offset = fbe_current_offset
+      fbe_field_size = f26.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f27.fbe_offset = fbe_current_offset
+      fbe_field_size = f27.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f28.fbe_offset = fbe_current_offset
+      fbe_field_size = f28.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f29.fbe_offset = fbe_current_offset
+      fbe_field_size = f29.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f30.fbe_offset = fbe_current_offset
+      fbe_field_size = f30.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f31.fbe_offset = fbe_current_offset
+      fbe_field_size = f31.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f32.fbe_offset = fbe_current_offset
+      fbe_field_size = f32.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f33.fbe_offset = fbe_current_offset
+      fbe_field_size = f33.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f34.fbe_offset = fbe_current_offset
+      fbe_field_size = f34.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f35.fbe_offset = fbe_current_offset
+      fbe_field_size = f35.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f36.fbe_offset = fbe_current_offset
+      fbe_field_size = f36.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f37.fbe_offset = fbe_current_offset
+      fbe_field_size = f37.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f38.fbe_offset = fbe_current_offset
+      fbe_field_size = f38.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f39.fbe_offset = fbe_current_offset
+      fbe_field_size = f39.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f40.fbe_offset = fbe_current_offset
+      fbe_field_size = f40.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f41.fbe_offset = fbe_current_offset
+      fbe_field_size = f41.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f42.fbe_offset = fbe_current_offset
+      fbe_field_size = f42.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f43.fbe_offset = fbe_current_offset
+      fbe_field_size = f43.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f44.fbe_offset = fbe_current_offset
+      fbe_field_size = f44.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_offset
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructSimple.new)
+      @_buffer.shift(fbe_offset)
+      fbe_size = get_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      [fbe_value, fbe_size]
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      uid.fbe_offset = fbe_current_offset
+      fbe_result = uid.get
+      fbe_value.uid = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_result = f1.get
+      fbe_value.f1 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_result = f2.get
+      fbe_value.f2 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_result = f3.get
+      fbe_value.f3 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_result = f4.get
+      fbe_value.f4 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f5.fbe_offset = fbe_current_offset
+      fbe_result = f5.get
+      fbe_value.f5 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f6.fbe_offset = fbe_current_offset
+      fbe_result = f6.get
+      fbe_value.f6 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f7.fbe_offset = fbe_current_offset
+      fbe_result = f7.get
+      fbe_value.f7 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f8.fbe_offset = fbe_current_offset
+      fbe_result = f8.get
+      fbe_value.f8 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f9.fbe_offset = fbe_current_offset
+      fbe_result = f9.get
+      fbe_value.f9 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f10.fbe_offset = fbe_current_offset
+      fbe_result = f10.get
+      fbe_value.f10 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f11.fbe_offset = fbe_current_offset
+      fbe_result = f11.get
+      fbe_value.f11 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f12.fbe_offset = fbe_current_offset
+      fbe_result = f12.get
+      fbe_value.f12 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f13.fbe_offset = fbe_current_offset
+      fbe_result = f13.get
+      fbe_value.f13 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f14.fbe_offset = fbe_current_offset
+      fbe_result = f14.get
+      fbe_value.f14 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f15.fbe_offset = fbe_current_offset
+      fbe_result = f15.get
+      fbe_value.f15 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f16.fbe_offset = fbe_current_offset
+      fbe_result = f16.get
+      fbe_value.f16 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f17.fbe_offset = fbe_current_offset
+      fbe_result = f17.get
+      fbe_value.f17 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f18.fbe_offset = fbe_current_offset
+      fbe_result = f18.get
+      fbe_value.f18 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f19.fbe_offset = fbe_current_offset
+      fbe_result = f19.get
+      fbe_value.f19 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f20.fbe_offset = fbe_current_offset
+      fbe_result = f20.get
+      fbe_value.f20 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f21.fbe_offset = fbe_current_offset
+      fbe_result = f21.get
+      fbe_value.f21 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f22.fbe_offset = fbe_current_offset
+      fbe_result = f22.get
+      fbe_value.f22 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f23.fbe_offset = fbe_current_offset
+      fbe_result = f23.get
+      fbe_value.f23 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f24.fbe_offset = fbe_current_offset
+      fbe_result = f24.get
+      fbe_value.f24 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f25.fbe_offset = fbe_current_offset
+      fbe_result = f25.get
+      fbe_value.f25 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f26.fbe_offset = fbe_current_offset
+      fbe_result = f26.get
+      fbe_value.f26 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f27.fbe_offset = fbe_current_offset
+      fbe_result = f27.get
+      fbe_value.f27 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f28.fbe_offset = fbe_current_offset
+      fbe_result = f28.get
+      fbe_value.f28 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f29.fbe_offset = fbe_current_offset
+      fbe_result = f29.get
+      fbe_value.f29 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f30.fbe_offset = fbe_current_offset
+      fbe_result = f30.get
+      fbe_value.f30 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f31.fbe_offset = fbe_current_offset
+      fbe_result = f31.get
+      fbe_value.f31 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f32.fbe_offset = fbe_current_offset
+      fbe_result = f32.get
+      fbe_value.f32 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f33.fbe_offset = fbe_current_offset
+      fbe_result = f33.get
+      fbe_value.f33 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f34.fbe_offset = fbe_current_offset
+      fbe_result = f34.get
+      fbe_value.f34 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f35.fbe_offset = fbe_current_offset
+      fbe_result = f35.get
+      fbe_value.f35 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f36.fbe_offset = fbe_current_offset
+      fbe_result = f36.get
+      fbe_value.f36 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f37.fbe_offset = fbe_current_offset
+      fbe_result = f37.get
+      fbe_value.f37 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f38.fbe_offset = fbe_current_offset
+      fbe_result = f38.get
+      fbe_value.f38 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f39.fbe_offset = fbe_current_offset
+      fbe_result = f39.get
+      fbe_value.f39 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f40.fbe_offset = fbe_current_offset
+      fbe_result = f40.get
+      fbe_value.f40 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f41.fbe_offset = fbe_current_offset
+      fbe_result = f41.get
+      fbe_value.f41 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f42.fbe_offset = fbe_current_offset
+      fbe_result = f42.get
+      fbe_value.f42 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f43.fbe_offset = fbe_current_offset
+      fbe_result = f43.get
+      fbe_value.f43 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f44.fbe_offset = fbe_current_offset
+      fbe_result = f44.get
+      fbe_value.f44 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      @_buffer.shift(fbe_offset)
+      fbe_size = set_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      fbe_size
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      uid.fbe_offset = fbe_current_offset
+      fbe_field_size = uid.set(fbe_value.uid)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_field_size = f1.set(fbe_value.f1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_field_size = f2.set(fbe_value.f2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_field_size = f3.set(fbe_value.f3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_field_size = f4.set(fbe_value.f4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f5.fbe_offset = fbe_current_offset
+      fbe_field_size = f5.set(fbe_value.f5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f6.fbe_offset = fbe_current_offset
+      fbe_field_size = f6.set(fbe_value.f6)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f7.fbe_offset = fbe_current_offset
+      fbe_field_size = f7.set(fbe_value.f7)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f8.fbe_offset = fbe_current_offset
+      fbe_field_size = f8.set(fbe_value.f8)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f9.fbe_offset = fbe_current_offset
+      fbe_field_size = f9.set(fbe_value.f9)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f10.fbe_offset = fbe_current_offset
+      fbe_field_size = f10.set(fbe_value.f10)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f11.fbe_offset = fbe_current_offset
+      fbe_field_size = f11.set(fbe_value.f11)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f12.fbe_offset = fbe_current_offset
+      fbe_field_size = f12.set(fbe_value.f12)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f13.fbe_offset = fbe_current_offset
+      fbe_field_size = f13.set(fbe_value.f13)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f14.fbe_offset = fbe_current_offset
+      fbe_field_size = f14.set(fbe_value.f14)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f15.fbe_offset = fbe_current_offset
+      fbe_field_size = f15.set(fbe_value.f15)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f16.fbe_offset = fbe_current_offset
+      fbe_field_size = f16.set(fbe_value.f16)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f17.fbe_offset = fbe_current_offset
+      fbe_field_size = f17.set(fbe_value.f17)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f18.fbe_offset = fbe_current_offset
+      fbe_field_size = f18.set(fbe_value.f18)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f19.fbe_offset = fbe_current_offset
+      fbe_field_size = f19.set(fbe_value.f19)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f20.fbe_offset = fbe_current_offset
+      fbe_field_size = f20.set(fbe_value.f20)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f21.fbe_offset = fbe_current_offset
+      fbe_field_size = f21.set(fbe_value.f21)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f22.fbe_offset = fbe_current_offset
+      fbe_field_size = f22.set(fbe_value.f22)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f23.fbe_offset = fbe_current_offset
+      fbe_field_size = f23.set(fbe_value.f23)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f24.fbe_offset = fbe_current_offset
+      fbe_field_size = f24.set(fbe_value.f24)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f25.fbe_offset = fbe_current_offset
+      fbe_field_size = f25.set(fbe_value.f25)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f26.fbe_offset = fbe_current_offset
+      fbe_field_size = f26.set(fbe_value.f26)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f27.fbe_offset = fbe_current_offset
+      fbe_field_size = f27.set(fbe_value.f27)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f28.fbe_offset = fbe_current_offset
+      fbe_field_size = f28.set(fbe_value.f28)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f29.fbe_offset = fbe_current_offset
+      fbe_field_size = f29.set(fbe_value.f29)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f30.fbe_offset = fbe_current_offset
+      fbe_field_size = f30.set(fbe_value.f30)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f31.fbe_offset = fbe_current_offset
+      fbe_field_size = f31.set(fbe_value.f31)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f32.fbe_offset = fbe_current_offset
+      fbe_field_size = f32.set(fbe_value.f32)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f33.fbe_offset = fbe_current_offset
+      fbe_field_size = f33.set(fbe_value.f33)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f34.fbe_offset = fbe_current_offset
+      fbe_field_size = f34.set(fbe_value.f34)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f35.fbe_offset = fbe_current_offset
+      fbe_field_size = f35.set(fbe_value.f35)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f36.fbe_offset = fbe_current_offset
+      fbe_field_size = f36.set(fbe_value.f36)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f37.fbe_offset = fbe_current_offset
+      fbe_field_size = f37.set(fbe_value.f37)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f38.fbe_offset = fbe_current_offset
+      fbe_field_size = f38.set(fbe_value.f38)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f39.fbe_offset = fbe_current_offset
+      fbe_field_size = f39.set(fbe_value.f39)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f40.fbe_offset = fbe_current_offset
+      fbe_field_size = f40.set(fbe_value.f40)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f41.fbe_offset = fbe_current_offset
+      fbe_field_size = f41.set(fbe_value.f41)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f42.fbe_offset = fbe_current_offset
+      fbe_field_size = f42.set(fbe_value.f42)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f43.fbe_offset = fbe_current_offset
+      fbe_field_size = f43.set(fbe_value.f43)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f44.fbe_offset = fbe_current_offset
+      fbe_field_size = f44.set(fbe_value.f44)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+  end
+
+  # Fast Binary Encoding StructSimple final model class
+  class StructSimpleFinalModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FinalModelStructSimple(self.buffer, 8)
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FinalModelStructSimple::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        return false
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) or (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      (8 + @_model.verify) == fbe_struct_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_initial_size = buffer.size
+
+      fbe_struct_type = fbe_type
+      fbe_struct_size = 8 + @_model.fbe_allocation_size(value)
+      fbe_struct_offset = buffer.allocate(fbe_struct_size) - buffer.offset
+      if (buffer.offset + fbe_struct_offset + fbe_struct_size) > buffer.size
+        return 0
+      end
+
+      fbe_struct_size = 8 + @_model.set(value)
+      buffer.resize(fbe_initial_size + fbe_struct_size)
+
+      write_uint32(@_model.fbe_offset - 8, fbe_struct_size)
+      write_uint32(@_model.fbe_offset - 4, fbe_struct_type)
+
+      fbe_struct_size
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructSimple.new)
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        [StructSimple.new, 0]
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) || (fbe_struct_type != fbe_type)
+        [StructSimple.new, 8]
+      end
+
+      fbe_result = @_model.get(value)
+      [fbe_result[0], (8 + fbe_result[1])]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructOptional < StructSimple
     attr_accessor :f100
     attr_accessor :f101
@@ -1281,7 +3955,7 @@ module Test
     attr_accessor :f165
 
     def initialize(parent = StructSimple.new, f100 = nil, f101 = true, f102 = nil, f103 = nil, f104 = 255, f105 = nil, f106 = nil, f107 = '!', f108 = nil, f109 = nil, f110 = 0x0444.chr(Encoding::UTF_8), f111 = nil, f112 = nil, f113 = 127, f114 = nil, f115 = nil, f116 = 255, f117 = nil, f118 = nil, f119 = 32767, f120 = nil, f121 = nil, f122 = 65535, f123 = nil, f124 = nil, f125 = 2147483647, f126 = nil, f127 = nil, f128 = 0xFFFFFFFF, f129 = nil, f130 = nil, f131 = 9223372036854775807, f132 = nil, f133 = nil, f134 = 0xFFFFFFFFFFFFFFFF, f135 = nil, f136 = nil, f137 = 123.456, f138 = nil, f139 = nil, f140 = -123.456e+123, f141 = nil, f142 = nil, f143 = BigDecimal.new("123456.123456"), f144 = nil, f145 = nil, f146 = "Initial string!", f147 = nil, f148 = nil, f149 = Time.now.utc, f150 = nil, f151 = nil, f152 = UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000"), f153 = nil, f154 = nil, f155 = nil, f156 = nil, f157 = nil, f158 = nil, f159 = nil, f160 = nil, f161 = nil, f162 = nil, f163 = nil, f164 = nil, f165 = nil)
-      method(:copy).super_method.call(parent)
+      super(parent.clone)
       @f100 = f100
       @f101 = f101
       @f102 = f102
@@ -1865,7 +4539,3800 @@ module Test
     end
   end
 
-  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FieldModelStructOptional < FBE::FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_parent = FieldModelStructSimple(self.buffer, 4 + 4)
+      @_f100 = FBE::FieldModelOptional(FBE::FieldModelBool(self.buffer, @_parent.fbe_offset + @_parent.fbe_body - 4 - 4), self.buffer, @_parent.fbe_offset + @_parent.fbe_body - 4 - 4)
+      @_f101 = FBE::FieldModelOptional(FBE::FieldModelBool(self.buffer, @_f100.fbe_offset + @_f100.fbe_size), self.buffer, @_f100.fbe_offset + @_f100.fbe_size)
+      @_f102 = FBE::FieldModelOptional(FBE::FieldModelBool(self.buffer, @_f101.fbe_offset + @_f101.fbe_size), self.buffer, @_f101.fbe_offset + @_f101.fbe_size)
+      @_f103 = FBE::FieldModelOptional(FBE::FieldModelByte(self.buffer, @_f102.fbe_offset + @_f102.fbe_size), self.buffer, @_f102.fbe_offset + @_f102.fbe_size)
+      @_f104 = FBE::FieldModelOptional(FBE::FieldModelByte(self.buffer, @_f103.fbe_offset + @_f103.fbe_size), self.buffer, @_f103.fbe_offset + @_f103.fbe_size)
+      @_f105 = FBE::FieldModelOptional(FBE::FieldModelByte(self.buffer, @_f104.fbe_offset + @_f104.fbe_size), self.buffer, @_f104.fbe_offset + @_f104.fbe_size)
+      @_f106 = FBE::FieldModelOptional(FBE::FieldModelChar(self.buffer, @_f105.fbe_offset + @_f105.fbe_size), self.buffer, @_f105.fbe_offset + @_f105.fbe_size)
+      @_f107 = FBE::FieldModelOptional(FBE::FieldModelChar(self.buffer, @_f106.fbe_offset + @_f106.fbe_size), self.buffer, @_f106.fbe_offset + @_f106.fbe_size)
+      @_f108 = FBE::FieldModelOptional(FBE::FieldModelChar(self.buffer, @_f107.fbe_offset + @_f107.fbe_size), self.buffer, @_f107.fbe_offset + @_f107.fbe_size)
+      @_f109 = FBE::FieldModelOptional(FBE::FieldModelWChar(self.buffer, @_f108.fbe_offset + @_f108.fbe_size), self.buffer, @_f108.fbe_offset + @_f108.fbe_size)
+      @_f110 = FBE::FieldModelOptional(FBE::FieldModelWChar(self.buffer, @_f109.fbe_offset + @_f109.fbe_size), self.buffer, @_f109.fbe_offset + @_f109.fbe_size)
+      @_f111 = FBE::FieldModelOptional(FBE::FieldModelWChar(self.buffer, @_f110.fbe_offset + @_f110.fbe_size), self.buffer, @_f110.fbe_offset + @_f110.fbe_size)
+      @_f112 = FBE::FieldModelOptional(FBE::FieldModelInt8(self.buffer, @_f111.fbe_offset + @_f111.fbe_size), self.buffer, @_f111.fbe_offset + @_f111.fbe_size)
+      @_f113 = FBE::FieldModelOptional(FBE::FieldModelInt8(self.buffer, @_f112.fbe_offset + @_f112.fbe_size), self.buffer, @_f112.fbe_offset + @_f112.fbe_size)
+      @_f114 = FBE::FieldModelOptional(FBE::FieldModelInt8(self.buffer, @_f113.fbe_offset + @_f113.fbe_size), self.buffer, @_f113.fbe_offset + @_f113.fbe_size)
+      @_f115 = FBE::FieldModelOptional(FBE::FieldModelUInt8(self.buffer, @_f114.fbe_offset + @_f114.fbe_size), self.buffer, @_f114.fbe_offset + @_f114.fbe_size)
+      @_f116 = FBE::FieldModelOptional(FBE::FieldModelUInt8(self.buffer, @_f115.fbe_offset + @_f115.fbe_size), self.buffer, @_f115.fbe_offset + @_f115.fbe_size)
+      @_f117 = FBE::FieldModelOptional(FBE::FieldModelUInt8(self.buffer, @_f116.fbe_offset + @_f116.fbe_size), self.buffer, @_f116.fbe_offset + @_f116.fbe_size)
+      @_f118 = FBE::FieldModelOptional(FBE::FieldModelInt16(self.buffer, @_f117.fbe_offset + @_f117.fbe_size), self.buffer, @_f117.fbe_offset + @_f117.fbe_size)
+      @_f119 = FBE::FieldModelOptional(FBE::FieldModelInt16(self.buffer, @_f118.fbe_offset + @_f118.fbe_size), self.buffer, @_f118.fbe_offset + @_f118.fbe_size)
+      @_f120 = FBE::FieldModelOptional(FBE::FieldModelInt16(self.buffer, @_f119.fbe_offset + @_f119.fbe_size), self.buffer, @_f119.fbe_offset + @_f119.fbe_size)
+      @_f121 = FBE::FieldModelOptional(FBE::FieldModelUInt16(self.buffer, @_f120.fbe_offset + @_f120.fbe_size), self.buffer, @_f120.fbe_offset + @_f120.fbe_size)
+      @_f122 = FBE::FieldModelOptional(FBE::FieldModelUInt16(self.buffer, @_f121.fbe_offset + @_f121.fbe_size), self.buffer, @_f121.fbe_offset + @_f121.fbe_size)
+      @_f123 = FBE::FieldModelOptional(FBE::FieldModelUInt16(self.buffer, @_f122.fbe_offset + @_f122.fbe_size), self.buffer, @_f122.fbe_offset + @_f122.fbe_size)
+      @_f124 = FBE::FieldModelOptional(FBE::FieldModelInt32(self.buffer, @_f123.fbe_offset + @_f123.fbe_size), self.buffer, @_f123.fbe_offset + @_f123.fbe_size)
+      @_f125 = FBE::FieldModelOptional(FBE::FieldModelInt32(self.buffer, @_f124.fbe_offset + @_f124.fbe_size), self.buffer, @_f124.fbe_offset + @_f124.fbe_size)
+      @_f126 = FBE::FieldModelOptional(FBE::FieldModelInt32(self.buffer, @_f125.fbe_offset + @_f125.fbe_size), self.buffer, @_f125.fbe_offset + @_f125.fbe_size)
+      @_f127 = FBE::FieldModelOptional(FBE::FieldModelUInt32(self.buffer, @_f126.fbe_offset + @_f126.fbe_size), self.buffer, @_f126.fbe_offset + @_f126.fbe_size)
+      @_f128 = FBE::FieldModelOptional(FBE::FieldModelUInt32(self.buffer, @_f127.fbe_offset + @_f127.fbe_size), self.buffer, @_f127.fbe_offset + @_f127.fbe_size)
+      @_f129 = FBE::FieldModelOptional(FBE::FieldModelUInt32(self.buffer, @_f128.fbe_offset + @_f128.fbe_size), self.buffer, @_f128.fbe_offset + @_f128.fbe_size)
+      @_f130 = FBE::FieldModelOptional(FBE::FieldModelInt64(self.buffer, @_f129.fbe_offset + @_f129.fbe_size), self.buffer, @_f129.fbe_offset + @_f129.fbe_size)
+      @_f131 = FBE::FieldModelOptional(FBE::FieldModelInt64(self.buffer, @_f130.fbe_offset + @_f130.fbe_size), self.buffer, @_f130.fbe_offset + @_f130.fbe_size)
+      @_f132 = FBE::FieldModelOptional(FBE::FieldModelInt64(self.buffer, @_f131.fbe_offset + @_f131.fbe_size), self.buffer, @_f131.fbe_offset + @_f131.fbe_size)
+      @_f133 = FBE::FieldModelOptional(FBE::FieldModelUInt64(self.buffer, @_f132.fbe_offset + @_f132.fbe_size), self.buffer, @_f132.fbe_offset + @_f132.fbe_size)
+      @_f134 = FBE::FieldModelOptional(FBE::FieldModelUInt64(self.buffer, @_f133.fbe_offset + @_f133.fbe_size), self.buffer, @_f133.fbe_offset + @_f133.fbe_size)
+      @_f135 = FBE::FieldModelOptional(FBE::FieldModelUInt64(self.buffer, @_f134.fbe_offset + @_f134.fbe_size), self.buffer, @_f134.fbe_offset + @_f134.fbe_size)
+      @_f136 = FBE::FieldModelOptional(FBE::FieldModelFloat(self.buffer, @_f135.fbe_offset + @_f135.fbe_size), self.buffer, @_f135.fbe_offset + @_f135.fbe_size)
+      @_f137 = FBE::FieldModelOptional(FBE::FieldModelFloat(self.buffer, @_f136.fbe_offset + @_f136.fbe_size), self.buffer, @_f136.fbe_offset + @_f136.fbe_size)
+      @_f138 = FBE::FieldModelOptional(FBE::FieldModelFloat(self.buffer, @_f137.fbe_offset + @_f137.fbe_size), self.buffer, @_f137.fbe_offset + @_f137.fbe_size)
+      @_f139 = FBE::FieldModelOptional(FBE::FieldModelDouble(self.buffer, @_f138.fbe_offset + @_f138.fbe_size), self.buffer, @_f138.fbe_offset + @_f138.fbe_size)
+      @_f140 = FBE::FieldModelOptional(FBE::FieldModelDouble(self.buffer, @_f139.fbe_offset + @_f139.fbe_size), self.buffer, @_f139.fbe_offset + @_f139.fbe_size)
+      @_f141 = FBE::FieldModelOptional(FBE::FieldModelDouble(self.buffer, @_f140.fbe_offset + @_f140.fbe_size), self.buffer, @_f140.fbe_offset + @_f140.fbe_size)
+      @_f142 = FBE::FieldModelOptional(FBE::FieldModelDecimal(self.buffer, @_f141.fbe_offset + @_f141.fbe_size), self.buffer, @_f141.fbe_offset + @_f141.fbe_size)
+      @_f143 = FBE::FieldModelOptional(FBE::FieldModelDecimal(self.buffer, @_f142.fbe_offset + @_f142.fbe_size), self.buffer, @_f142.fbe_offset + @_f142.fbe_size)
+      @_f144 = FBE::FieldModelOptional(FBE::FieldModelDecimal(self.buffer, @_f143.fbe_offset + @_f143.fbe_size), self.buffer, @_f143.fbe_offset + @_f143.fbe_size)
+      @_f145 = FBE::FieldModelOptional(FBE::FieldModelString(self.buffer, @_f144.fbe_offset + @_f144.fbe_size), self.buffer, @_f144.fbe_offset + @_f144.fbe_size)
+      @_f146 = FBE::FieldModelOptional(FBE::FieldModelString(self.buffer, @_f145.fbe_offset + @_f145.fbe_size), self.buffer, @_f145.fbe_offset + @_f145.fbe_size)
+      @_f147 = FBE::FieldModelOptional(FBE::FieldModelString(self.buffer, @_f146.fbe_offset + @_f146.fbe_size), self.buffer, @_f146.fbe_offset + @_f146.fbe_size)
+      @_f148 = FBE::FieldModelOptional(FBE::FieldModelTimestamp(self.buffer, @_f147.fbe_offset + @_f147.fbe_size), self.buffer, @_f147.fbe_offset + @_f147.fbe_size)
+      @_f149 = FBE::FieldModelOptional(FBE::FieldModelTimestamp(self.buffer, @_f148.fbe_offset + @_f148.fbe_size), self.buffer, @_f148.fbe_offset + @_f148.fbe_size)
+      @_f150 = FBE::FieldModelOptional(FBE::FieldModelTimestamp(self.buffer, @_f149.fbe_offset + @_f149.fbe_size), self.buffer, @_f149.fbe_offset + @_f149.fbe_size)
+      @_f151 = FBE::FieldModelOptional(FBE::FieldModelUUID(self.buffer, @_f150.fbe_offset + @_f150.fbe_size), self.buffer, @_f150.fbe_offset + @_f150.fbe_size)
+      @_f152 = FBE::FieldModelOptional(FBE::FieldModelUUID(self.buffer, @_f151.fbe_offset + @_f151.fbe_size), self.buffer, @_f151.fbe_offset + @_f151.fbe_size)
+      @_f153 = FBE::FieldModelOptional(FBE::FieldModelUUID(self.buffer, @_f152.fbe_offset + @_f152.fbe_size), self.buffer, @_f152.fbe_offset + @_f152.fbe_size)
+      @_f154 = FBE::FieldModelOptional(proto.FieldModelOrderSide(self.buffer, @_f153.fbe_offset + @_f153.fbe_size), self.buffer, @_f153.fbe_offset + @_f153.fbe_size)
+      @_f155 = FBE::FieldModelOptional(proto.FieldModelOrderSide(self.buffer, @_f154.fbe_offset + @_f154.fbe_size), self.buffer, @_f154.fbe_offset + @_f154.fbe_size)
+      @_f156 = FBE::FieldModelOptional(proto.FieldModelOrderType(self.buffer, @_f155.fbe_offset + @_f155.fbe_size), self.buffer, @_f155.fbe_offset + @_f155.fbe_size)
+      @_f157 = FBE::FieldModelOptional(proto.FieldModelOrderType(self.buffer, @_f156.fbe_offset + @_f156.fbe_size), self.buffer, @_f156.fbe_offset + @_f156.fbe_size)
+      @_f158 = FBE::FieldModelOptional(proto.FieldModelOrder(self.buffer, @_f157.fbe_offset + @_f157.fbe_size), self.buffer, @_f157.fbe_offset + @_f157.fbe_size)
+      @_f159 = FBE::FieldModelOptional(proto.FieldModelOrder(self.buffer, @_f158.fbe_offset + @_f158.fbe_size), self.buffer, @_f158.fbe_offset + @_f158.fbe_size)
+      @_f160 = FBE::FieldModelOptional(proto.FieldModelBalance(self.buffer, @_f159.fbe_offset + @_f159.fbe_size), self.buffer, @_f159.fbe_offset + @_f159.fbe_size)
+      @_f161 = FBE::FieldModelOptional(proto.FieldModelBalance(self.buffer, @_f160.fbe_offset + @_f160.fbe_size), self.buffer, @_f160.fbe_offset + @_f160.fbe_size)
+      @_f162 = FBE::FieldModelOptional(proto.FieldModelState(self.buffer, @_f161.fbe_offset + @_f161.fbe_size), self.buffer, @_f161.fbe_offset + @_f161.fbe_size)
+      @_f163 = FBE::FieldModelOptional(proto.FieldModelState(self.buffer, @_f162.fbe_offset + @_f162.fbe_size), self.buffer, @_f162.fbe_offset + @_f162.fbe_size)
+      @_f164 = FBE::FieldModelOptional(proto.FieldModelAccount(self.buffer, @_f163.fbe_offset + @_f163.fbe_size), self.buffer, @_f163.fbe_offset + @_f163.fbe_size)
+      @_f165 = FBE::FieldModelOptional(proto.FieldModelAccount(self.buffer, @_f164.fbe_offset + @_f164.fbe_size), self.buffer, @_f164.fbe_offset + @_f164.fbe_size)
+    end
+
+    def parent
+      @_parent
+    end
+
+    def f100
+      @_f100
+    end
+
+    def f101
+      @_f101
+    end
+
+    def f102
+      @_f102
+    end
+
+    def f103
+      @_f103
+    end
+
+    def f104
+      @_f104
+    end
+
+    def f105
+      @_f105
+    end
+
+    def f106
+      @_f106
+    end
+
+    def f107
+      @_f107
+    end
+
+    def f108
+      @_f108
+    end
+
+    def f109
+      @_f109
+    end
+
+    def f110
+      @_f110
+    end
+
+    def f111
+      @_f111
+    end
+
+    def f112
+      @_f112
+    end
+
+    def f113
+      @_f113
+    end
+
+    def f114
+      @_f114
+    end
+
+    def f115
+      @_f115
+    end
+
+    def f116
+      @_f116
+    end
+
+    def f117
+      @_f117
+    end
+
+    def f118
+      @_f118
+    end
+
+    def f119
+      @_f119
+    end
+
+    def f120
+      @_f120
+    end
+
+    def f121
+      @_f121
+    end
+
+    def f122
+      @_f122
+    end
+
+    def f123
+      @_f123
+    end
+
+    def f124
+      @_f124
+    end
+
+    def f125
+      @_f125
+    end
+
+    def f126
+      @_f126
+    end
+
+    def f127
+      @_f127
+    end
+
+    def f128
+      @_f128
+    end
+
+    def f129
+      @_f129
+    end
+
+    def f130
+      @_f130
+    end
+
+    def f131
+      @_f131
+    end
+
+    def f132
+      @_f132
+    end
+
+    def f133
+      @_f133
+    end
+
+    def f134
+      @_f134
+    end
+
+    def f135
+      @_f135
+    end
+
+    def f136
+      @_f136
+    end
+
+    def f137
+      @_f137
+    end
+
+    def f138
+      @_f138
+    end
+
+    def f139
+      @_f139
+    end
+
+    def f140
+      @_f140
+    end
+
+    def f141
+      @_f141
+    end
+
+    def f142
+      @_f142
+    end
+
+    def f143
+      @_f143
+    end
+
+    def f144
+      @_f144
+    end
+
+    def f145
+      @_f145
+    end
+
+    def f146
+      @_f146
+    end
+
+    def f147
+      @_f147
+    end
+
+    def f148
+      @_f148
+    end
+
+    def f149
+      @_f149
+    end
+
+    def f150
+      @_f150
+    end
+
+    def f151
+      @_f151
+    end
+
+    def f152
+      @_f152
+    end
+
+    def f153
+      @_f153
+    end
+
+    def f154
+      @_f154
+    end
+
+    def f155
+      @_f155
+    end
+
+    def f156
+      @_f156
+    end
+
+    def f157
+      @_f157
+    end
+
+    def f158
+      @_f158
+    end
+
+    def f159
+      @_f159
+    end
+
+    def f160
+      @_f160
+    end
+
+    def f161
+      @_f161
+    end
+
+    def f162
+      @_f162
+    end
+
+    def f163
+      @_f163
+    end
+
+    def f164
+      @_f164
+    end
+
+    def f165
+      @_f165
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field body size
+    def fbe_body
+      4 + 4
+        + parent.fbe_body - 4 - 4
+        + f100.fbe_size
+        + f101.fbe_size
+        + f102.fbe_size
+        + f103.fbe_size
+        + f104.fbe_size
+        + f105.fbe_size
+        + f106.fbe_size
+        + f107.fbe_size
+        + f108.fbe_size
+        + f109.fbe_size
+        + f110.fbe_size
+        + f111.fbe_size
+        + f112.fbe_size
+        + f113.fbe_size
+        + f114.fbe_size
+        + f115.fbe_size
+        + f116.fbe_size
+        + f117.fbe_size
+        + f118.fbe_size
+        + f119.fbe_size
+        + f120.fbe_size
+        + f121.fbe_size
+        + f122.fbe_size
+        + f123.fbe_size
+        + f124.fbe_size
+        + f125.fbe_size
+        + f126.fbe_size
+        + f127.fbe_size
+        + f128.fbe_size
+        + f129.fbe_size
+        + f130.fbe_size
+        + f131.fbe_size
+        + f132.fbe_size
+        + f133.fbe_size
+        + f134.fbe_size
+        + f135.fbe_size
+        + f136.fbe_size
+        + f137.fbe_size
+        + f138.fbe_size
+        + f139.fbe_size
+        + f140.fbe_size
+        + f141.fbe_size
+        + f142.fbe_size
+        + f143.fbe_size
+        + f144.fbe_size
+        + f145.fbe_size
+        + f146.fbe_size
+        + f147.fbe_size
+        + f148.fbe_size
+        + f149.fbe_size
+        + f150.fbe_size
+        + f151.fbe_size
+        + f152.fbe_size
+        + f153.fbe_size
+        + f154.fbe_size
+        + f155.fbe_size
+        + f156.fbe_size
+        + f157.fbe_size
+        + f158.fbe_size
+        + f159.fbe_size
+        + f160.fbe_size
+        + f161.fbe_size
+        + f162.fbe_size
+        + f163.fbe_size
+        + f164.fbe_size
+        + f165.fbe_size
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+
+      fbe_result = fbe_body
+        + parent.fbe_extra
+        + f100.fbe_extra
+        + f101.fbe_extra
+        + f102.fbe_extra
+        + f103.fbe_extra
+        + f104.fbe_extra
+        + f105.fbe_extra
+        + f106.fbe_extra
+        + f107.fbe_extra
+        + f108.fbe_extra
+        + f109.fbe_extra
+        + f110.fbe_extra
+        + f111.fbe_extra
+        + f112.fbe_extra
+        + f113.fbe_extra
+        + f114.fbe_extra
+        + f115.fbe_extra
+        + f116.fbe_extra
+        + f117.fbe_extra
+        + f118.fbe_extra
+        + f119.fbe_extra
+        + f120.fbe_extra
+        + f121.fbe_extra
+        + f122.fbe_extra
+        + f123.fbe_extra
+        + f124.fbe_extra
+        + f125.fbe_extra
+        + f126.fbe_extra
+        + f127.fbe_extra
+        + f128.fbe_extra
+        + f129.fbe_extra
+        + f130.fbe_extra
+        + f131.fbe_extra
+        + f132.fbe_extra
+        + f133.fbe_extra
+        + f134.fbe_extra
+        + f135.fbe_extra
+        + f136.fbe_extra
+        + f137.fbe_extra
+        + f138.fbe_extra
+        + f139.fbe_extra
+        + f140.fbe_extra
+        + f141.fbe_extra
+        + f142.fbe_extra
+        + f143.fbe_extra
+        + f144.fbe_extra
+        + f145.fbe_extra
+        + f146.fbe_extra
+        + f147.fbe_extra
+        + f148.fbe_extra
+        + f149.fbe_extra
+        + f150.fbe_extra
+        + f151.fbe_extra
+        + f152.fbe_extra
+        + f153.fbe_extra
+        + f154.fbe_extra
+        + f155.fbe_extra
+        + f156.fbe_extra
+        + f157.fbe_extra
+        + f158.fbe_extra
+        + f159.fbe_extra
+        + f160.fbe_extra
+        + f161.fbe_extra
+        + f162.fbe_extra
+        + f163.fbe_extra
+        + f164.fbe_extra
+        + f165.fbe_extra
+
+      @_buffer.unshift(fbe_struct_offset)
+
+      fbe_result
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 111
+
+    # Check if the struct value is valid
+    def verify(fbe_verify_type = true)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return false
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return false
+      end
+
+      fbe_struct_type = read_uint32(fbe_struct_offset + 4)
+      if fbe_verify_type && (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_result = verify_fields(fbe_struct_size)
+      @_buffer.unshift(fbe_struct_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields(fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + parent.fbe_body - 4 - 4) > fbe_struct_size
+        return true
+      end
+      unless parent.verify_fields(fbe_struct_size)
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += parent.fbe_body - 4 - 4
+
+      if (fbe_current_size + f100.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f100.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f100.fbe_size
+
+      if (fbe_current_size + f101.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f101.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f101.fbe_size
+
+      if (fbe_current_size + f102.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f102.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f102.fbe_size
+
+      if (fbe_current_size + f103.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f103.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f103.fbe_size
+
+      if (fbe_current_size + f104.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f104.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f104.fbe_size
+
+      if (fbe_current_size + f105.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f105.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f105.fbe_size
+
+      if (fbe_current_size + f106.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f106.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f106.fbe_size
+
+      if (fbe_current_size + f107.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f107.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f107.fbe_size
+
+      if (fbe_current_size + f108.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f108.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f108.fbe_size
+
+      if (fbe_current_size + f109.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f109.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f109.fbe_size
+
+      if (fbe_current_size + f110.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f110.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f110.fbe_size
+
+      if (fbe_current_size + f111.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f111.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f111.fbe_size
+
+      if (fbe_current_size + f112.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f112.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f112.fbe_size
+
+      if (fbe_current_size + f113.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f113.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f113.fbe_size
+
+      if (fbe_current_size + f114.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f114.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f114.fbe_size
+
+      if (fbe_current_size + f115.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f115.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f115.fbe_size
+
+      if (fbe_current_size + f116.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f116.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f116.fbe_size
+
+      if (fbe_current_size + f117.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f117.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f117.fbe_size
+
+      if (fbe_current_size + f118.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f118.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f118.fbe_size
+
+      if (fbe_current_size + f119.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f119.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f119.fbe_size
+
+      if (fbe_current_size + f120.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f120.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f120.fbe_size
+
+      if (fbe_current_size + f121.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f121.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f121.fbe_size
+
+      if (fbe_current_size + f122.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f122.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f122.fbe_size
+
+      if (fbe_current_size + f123.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f123.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f123.fbe_size
+
+      if (fbe_current_size + f124.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f124.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f124.fbe_size
+
+      if (fbe_current_size + f125.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f125.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f125.fbe_size
+
+      if (fbe_current_size + f126.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f126.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f126.fbe_size
+
+      if (fbe_current_size + f127.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f127.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f127.fbe_size
+
+      if (fbe_current_size + f128.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f128.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f128.fbe_size
+
+      if (fbe_current_size + f129.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f129.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f129.fbe_size
+
+      if (fbe_current_size + f130.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f130.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f130.fbe_size
+
+      if (fbe_current_size + f131.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f131.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f131.fbe_size
+
+      if (fbe_current_size + f132.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f132.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f132.fbe_size
+
+      if (fbe_current_size + f133.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f133.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f133.fbe_size
+
+      if (fbe_current_size + f134.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f134.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f134.fbe_size
+
+      if (fbe_current_size + f135.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f135.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f135.fbe_size
+
+      if (fbe_current_size + f136.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f136.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f136.fbe_size
+
+      if (fbe_current_size + f137.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f137.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f137.fbe_size
+
+      if (fbe_current_size + f138.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f138.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f138.fbe_size
+
+      if (fbe_current_size + f139.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f139.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f139.fbe_size
+
+      if (fbe_current_size + f140.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f140.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f140.fbe_size
+
+      if (fbe_current_size + f141.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f141.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f141.fbe_size
+
+      if (fbe_current_size + f142.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f142.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f142.fbe_size
+
+      if (fbe_current_size + f143.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f143.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f143.fbe_size
+
+      if (fbe_current_size + f144.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f144.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f144.fbe_size
+
+      if (fbe_current_size + f145.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f145.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f145.fbe_size
+
+      if (fbe_current_size + f146.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f146.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f146.fbe_size
+
+      if (fbe_current_size + f147.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f147.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f147.fbe_size
+
+      if (fbe_current_size + f148.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f148.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f148.fbe_size
+
+      if (fbe_current_size + f149.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f149.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f149.fbe_size
+
+      if (fbe_current_size + f150.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f150.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f150.fbe_size
+
+      if (fbe_current_size + f151.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f151.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f151.fbe_size
+
+      if (fbe_current_size + f152.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f152.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f152.fbe_size
+
+      if (fbe_current_size + f153.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f153.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f153.fbe_size
+
+      if (fbe_current_size + f154.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f154.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f154.fbe_size
+
+      if (fbe_current_size + f155.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f155.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f155.fbe_size
+
+      if (fbe_current_size + f156.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f156.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f156.fbe_size
+
+      if (fbe_current_size + f157.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f157.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f157.fbe_size
+
+      if (fbe_current_size + f158.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f158.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f158.fbe_size
+
+      if (fbe_current_size + f159.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f159.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f159.fbe_size
+
+      if (fbe_current_size + f160.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f160.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f160.fbe_size
+
+      if (fbe_current_size + f161.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f161.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f161.fbe_size
+
+      if (fbe_current_size + f162.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f162.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f162.fbe_size
+
+      if (fbe_current_size + f163.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f163.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f163.fbe_size
+
+      if (fbe_current_size + f164.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f164.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f164.fbe_size
+
+      if (fbe_current_size + f165.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f165.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f165.fbe_size
+
+      true
+    end
+
+    # Get the struct value (begin phase)
+    def get_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Get the struct value (end phase)
+    def get_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructOptional.new)
+      fbe_begin = get_begin
+      if fbe_begin == 0
+        return fbe_value
+      end
+
+      fbe_struct_size = read_uint32(0)
+      get_fields(fbe_value, fbe_struct_size)
+      get_end(fbe_begin)
+      fbe_value
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value, fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + parent.fbe_body - 4 - 4) <= fbe_struct_size
+        parent.get_fields(fbe_value, fbe_struct_size)
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += parent.fbe_body - 4 - 4
+
+      if (fbe_current_size + f100.fbe_size) <= fbe_struct_size
+        fbe_value.f100 = f100.get
+      else
+        fbe_value.f100 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f100.fbe_size
+
+      if (fbe_current_size + f101.fbe_size) <= fbe_struct_size
+        fbe_value.f101 = f101.get(true)
+      else
+        fbe_value.f101 = true
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f101.fbe_size
+
+      if (fbe_current_size + f102.fbe_size) <= fbe_struct_size
+        fbe_value.f102 = f102.get(nil)
+      else
+        fbe_value.f102 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f102.fbe_size
+
+      if (fbe_current_size + f103.fbe_size) <= fbe_struct_size
+        fbe_value.f103 = f103.get
+      else
+        fbe_value.f103 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f103.fbe_size
+
+      if (fbe_current_size + f104.fbe_size) <= fbe_struct_size
+        fbe_value.f104 = f104.get(255)
+      else
+        fbe_value.f104 = 255
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f104.fbe_size
+
+      if (fbe_current_size + f105.fbe_size) <= fbe_struct_size
+        fbe_value.f105 = f105.get(nil)
+      else
+        fbe_value.f105 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f105.fbe_size
+
+      if (fbe_current_size + f106.fbe_size) <= fbe_struct_size
+        fbe_value.f106 = f106.get
+      else
+        fbe_value.f106 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f106.fbe_size
+
+      if (fbe_current_size + f107.fbe_size) <= fbe_struct_size
+        fbe_value.f107 = f107.get('!')
+      else
+        fbe_value.f107 = '!'
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f107.fbe_size
+
+      if (fbe_current_size + f108.fbe_size) <= fbe_struct_size
+        fbe_value.f108 = f108.get(nil)
+      else
+        fbe_value.f108 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f108.fbe_size
+
+      if (fbe_current_size + f109.fbe_size) <= fbe_struct_size
+        fbe_value.f109 = f109.get
+      else
+        fbe_value.f109 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f109.fbe_size
+
+      if (fbe_current_size + f110.fbe_size) <= fbe_struct_size
+        fbe_value.f110 = f110.get(0x0444.chr(Encoding::UTF_8))
+      else
+        fbe_value.f110 = 0x0444.chr(Encoding::UTF_8)
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f110.fbe_size
+
+      if (fbe_current_size + f111.fbe_size) <= fbe_struct_size
+        fbe_value.f111 = f111.get(nil)
+      else
+        fbe_value.f111 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f111.fbe_size
+
+      if (fbe_current_size + f112.fbe_size) <= fbe_struct_size
+        fbe_value.f112 = f112.get
+      else
+        fbe_value.f112 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f112.fbe_size
+
+      if (fbe_current_size + f113.fbe_size) <= fbe_struct_size
+        fbe_value.f113 = f113.get(127)
+      else
+        fbe_value.f113 = 127
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f113.fbe_size
+
+      if (fbe_current_size + f114.fbe_size) <= fbe_struct_size
+        fbe_value.f114 = f114.get(nil)
+      else
+        fbe_value.f114 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f114.fbe_size
+
+      if (fbe_current_size + f115.fbe_size) <= fbe_struct_size
+        fbe_value.f115 = f115.get
+      else
+        fbe_value.f115 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f115.fbe_size
+
+      if (fbe_current_size + f116.fbe_size) <= fbe_struct_size
+        fbe_value.f116 = f116.get(255)
+      else
+        fbe_value.f116 = 255
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f116.fbe_size
+
+      if (fbe_current_size + f117.fbe_size) <= fbe_struct_size
+        fbe_value.f117 = f117.get(nil)
+      else
+        fbe_value.f117 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f117.fbe_size
+
+      if (fbe_current_size + f118.fbe_size) <= fbe_struct_size
+        fbe_value.f118 = f118.get
+      else
+        fbe_value.f118 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f118.fbe_size
+
+      if (fbe_current_size + f119.fbe_size) <= fbe_struct_size
+        fbe_value.f119 = f119.get(32767)
+      else
+        fbe_value.f119 = 32767
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f119.fbe_size
+
+      if (fbe_current_size + f120.fbe_size) <= fbe_struct_size
+        fbe_value.f120 = f120.get(nil)
+      else
+        fbe_value.f120 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f120.fbe_size
+
+      if (fbe_current_size + f121.fbe_size) <= fbe_struct_size
+        fbe_value.f121 = f121.get
+      else
+        fbe_value.f121 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f121.fbe_size
+
+      if (fbe_current_size + f122.fbe_size) <= fbe_struct_size
+        fbe_value.f122 = f122.get(65535)
+      else
+        fbe_value.f122 = 65535
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f122.fbe_size
+
+      if (fbe_current_size + f123.fbe_size) <= fbe_struct_size
+        fbe_value.f123 = f123.get(nil)
+      else
+        fbe_value.f123 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f123.fbe_size
+
+      if (fbe_current_size + f124.fbe_size) <= fbe_struct_size
+        fbe_value.f124 = f124.get
+      else
+        fbe_value.f124 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f124.fbe_size
+
+      if (fbe_current_size + f125.fbe_size) <= fbe_struct_size
+        fbe_value.f125 = f125.get(2147483647)
+      else
+        fbe_value.f125 = 2147483647
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f125.fbe_size
+
+      if (fbe_current_size + f126.fbe_size) <= fbe_struct_size
+        fbe_value.f126 = f126.get(nil)
+      else
+        fbe_value.f126 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f126.fbe_size
+
+      if (fbe_current_size + f127.fbe_size) <= fbe_struct_size
+        fbe_value.f127 = f127.get
+      else
+        fbe_value.f127 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f127.fbe_size
+
+      if (fbe_current_size + f128.fbe_size) <= fbe_struct_size
+        fbe_value.f128 = f128.get(0xFFFFFFFF)
+      else
+        fbe_value.f128 = 0xFFFFFFFF
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f128.fbe_size
+
+      if (fbe_current_size + f129.fbe_size) <= fbe_struct_size
+        fbe_value.f129 = f129.get(nil)
+      else
+        fbe_value.f129 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f129.fbe_size
+
+      if (fbe_current_size + f130.fbe_size) <= fbe_struct_size
+        fbe_value.f130 = f130.get
+      else
+        fbe_value.f130 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f130.fbe_size
+
+      if (fbe_current_size + f131.fbe_size) <= fbe_struct_size
+        fbe_value.f131 = f131.get(9223372036854775807)
+      else
+        fbe_value.f131 = 9223372036854775807
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f131.fbe_size
+
+      if (fbe_current_size + f132.fbe_size) <= fbe_struct_size
+        fbe_value.f132 = f132.get(nil)
+      else
+        fbe_value.f132 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f132.fbe_size
+
+      if (fbe_current_size + f133.fbe_size) <= fbe_struct_size
+        fbe_value.f133 = f133.get
+      else
+        fbe_value.f133 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f133.fbe_size
+
+      if (fbe_current_size + f134.fbe_size) <= fbe_struct_size
+        fbe_value.f134 = f134.get(0xFFFFFFFFFFFFFFFF)
+      else
+        fbe_value.f134 = 0xFFFFFFFFFFFFFFFF
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f134.fbe_size
+
+      if (fbe_current_size + f135.fbe_size) <= fbe_struct_size
+        fbe_value.f135 = f135.get(nil)
+      else
+        fbe_value.f135 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f135.fbe_size
+
+      if (fbe_current_size + f136.fbe_size) <= fbe_struct_size
+        fbe_value.f136 = f136.get
+      else
+        fbe_value.f136 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f136.fbe_size
+
+      if (fbe_current_size + f137.fbe_size) <= fbe_struct_size
+        fbe_value.f137 = f137.get(123.456)
+      else
+        fbe_value.f137 = 123.456
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f137.fbe_size
+
+      if (fbe_current_size + f138.fbe_size) <= fbe_struct_size
+        fbe_value.f138 = f138.get(nil)
+      else
+        fbe_value.f138 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f138.fbe_size
+
+      if (fbe_current_size + f139.fbe_size) <= fbe_struct_size
+        fbe_value.f139 = f139.get
+      else
+        fbe_value.f139 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f139.fbe_size
+
+      if (fbe_current_size + f140.fbe_size) <= fbe_struct_size
+        fbe_value.f140 = f140.get(-123.456e+123)
+      else
+        fbe_value.f140 = -123.456e+123
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f140.fbe_size
+
+      if (fbe_current_size + f141.fbe_size) <= fbe_struct_size
+        fbe_value.f141 = f141.get(nil)
+      else
+        fbe_value.f141 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f141.fbe_size
+
+      if (fbe_current_size + f142.fbe_size) <= fbe_struct_size
+        fbe_value.f142 = f142.get
+      else
+        fbe_value.f142 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f142.fbe_size
+
+      if (fbe_current_size + f143.fbe_size) <= fbe_struct_size
+        fbe_value.f143 = f143.get(BigDecimal.new("123456.123456"))
+      else
+        fbe_value.f143 = BigDecimal.new("123456.123456")
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f143.fbe_size
+
+      if (fbe_current_size + f144.fbe_size) <= fbe_struct_size
+        fbe_value.f144 = f144.get(nil)
+      else
+        fbe_value.f144 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f144.fbe_size
+
+      if (fbe_current_size + f145.fbe_size) <= fbe_struct_size
+        fbe_value.f145 = f145.get
+      else
+        fbe_value.f145 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f145.fbe_size
+
+      if (fbe_current_size + f146.fbe_size) <= fbe_struct_size
+        fbe_value.f146 = f146.get("Initial string!")
+      else
+        fbe_value.f146 = "Initial string!"
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f146.fbe_size
+
+      if (fbe_current_size + f147.fbe_size) <= fbe_struct_size
+        fbe_value.f147 = f147.get(nil)
+      else
+        fbe_value.f147 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f147.fbe_size
+
+      if (fbe_current_size + f148.fbe_size) <= fbe_struct_size
+        fbe_value.f148 = f148.get
+      else
+        fbe_value.f148 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f148.fbe_size
+
+      if (fbe_current_size + f149.fbe_size) <= fbe_struct_size
+        fbe_value.f149 = f149.get(Time.now.utc)
+      else
+        fbe_value.f149 = Time.now.utc
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f149.fbe_size
+
+      if (fbe_current_size + f150.fbe_size) <= fbe_struct_size
+        fbe_value.f150 = f150.get(nil)
+      else
+        fbe_value.f150 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f150.fbe_size
+
+      if (fbe_current_size + f151.fbe_size) <= fbe_struct_size
+        fbe_value.f151 = f151.get
+      else
+        fbe_value.f151 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f151.fbe_size
+
+      if (fbe_current_size + f152.fbe_size) <= fbe_struct_size
+        fbe_value.f152 = f152.get(UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000"))
+      else
+        fbe_value.f152 = UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000")
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f152.fbe_size
+
+      if (fbe_current_size + f153.fbe_size) <= fbe_struct_size
+        fbe_value.f153 = f153.get(nil)
+      else
+        fbe_value.f153 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f153.fbe_size
+
+      if (fbe_current_size + f154.fbe_size) <= fbe_struct_size
+        fbe_value.f154 = f154.get
+      else
+        fbe_value.f154 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f154.fbe_size
+
+      if (fbe_current_size + f155.fbe_size) <= fbe_struct_size
+        fbe_value.f155 = f155.get(nil)
+      else
+        fbe_value.f155 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f155.fbe_size
+
+      if (fbe_current_size + f156.fbe_size) <= fbe_struct_size
+        fbe_value.f156 = f156.get
+      else
+        fbe_value.f156 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f156.fbe_size
+
+      if (fbe_current_size + f157.fbe_size) <= fbe_struct_size
+        fbe_value.f157 = f157.get(nil)
+      else
+        fbe_value.f157 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f157.fbe_size
+
+      if (fbe_current_size + f158.fbe_size) <= fbe_struct_size
+        fbe_value.f158 = f158.get
+      else
+        fbe_value.f158 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f158.fbe_size
+
+      if (fbe_current_size + f159.fbe_size) <= fbe_struct_size
+        fbe_value.f159 = f159.get(nil)
+      else
+        fbe_value.f159 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f159.fbe_size
+
+      if (fbe_current_size + f160.fbe_size) <= fbe_struct_size
+        fbe_value.f160 = f160.get
+      else
+        fbe_value.f160 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f160.fbe_size
+
+      if (fbe_current_size + f161.fbe_size) <= fbe_struct_size
+        fbe_value.f161 = f161.get(nil)
+      else
+        fbe_value.f161 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f161.fbe_size
+
+      if (fbe_current_size + f162.fbe_size) <= fbe_struct_size
+        fbe_value.f162 = f162.get
+      else
+        fbe_value.f162 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f162.fbe_size
+
+      if (fbe_current_size + f163.fbe_size) <= fbe_struct_size
+        fbe_value.f163 = f163.get(nil)
+      else
+        fbe_value.f163 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f163.fbe_size
+
+      if (fbe_current_size + f164.fbe_size) <= fbe_struct_size
+        fbe_value.f164 = f164.get
+      else
+        fbe_value.f164 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f164.fbe_size
+
+      if (fbe_current_size + f165.fbe_size) <= fbe_struct_size
+        fbe_value.f165 = f165.get(nil)
+      else
+        fbe_value.f165 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f165.fbe_size
+    end
+
+    # Set the struct value (begin phase)
+    def set_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_size = fbe_body
+      fbe_struct_offset = @_buffer.allocate(fbe_struct_size) - @_buffer.offset
+      if (fbe_struct_offset <= 0) || ((@_buffer.offset + fbe_struct_offset + fbe_struct_size) > @_buffer.size)
+        return 0
+      end
+
+      write_uint32(fbe_offset, fbe_struct_offset)
+      write_uint32(fbe_struct_offset, fbe_struct_size)
+      write_uint32(fbe_struct_offset + 4, fbe_type)
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Set the struct value (end phase)
+    def set_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      fbe_begin = set_begin
+      if fbe_begin == 0
+        return
+      end
+
+      set_fields(fbe_value)
+      set_end(fbe_begin)
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      parent.set_fields(fbe_value)
+      f100.set(fbe_value.f100)
+      f101.set(fbe_value.f101)
+      f102.set(fbe_value.f102)
+      f103.set(fbe_value.f103)
+      f104.set(fbe_value.f104)
+      f105.set(fbe_value.f105)
+      f106.set(fbe_value.f106)
+      f107.set(fbe_value.f107)
+      f108.set(fbe_value.f108)
+      f109.set(fbe_value.f109)
+      f110.set(fbe_value.f110)
+      f111.set(fbe_value.f111)
+      f112.set(fbe_value.f112)
+      f113.set(fbe_value.f113)
+      f114.set(fbe_value.f114)
+      f115.set(fbe_value.f115)
+      f116.set(fbe_value.f116)
+      f117.set(fbe_value.f117)
+      f118.set(fbe_value.f118)
+      f119.set(fbe_value.f119)
+      f120.set(fbe_value.f120)
+      f121.set(fbe_value.f121)
+      f122.set(fbe_value.f122)
+      f123.set(fbe_value.f123)
+      f124.set(fbe_value.f124)
+      f125.set(fbe_value.f125)
+      f126.set(fbe_value.f126)
+      f127.set(fbe_value.f127)
+      f128.set(fbe_value.f128)
+      f129.set(fbe_value.f129)
+      f130.set(fbe_value.f130)
+      f131.set(fbe_value.f131)
+      f132.set(fbe_value.f132)
+      f133.set(fbe_value.f133)
+      f134.set(fbe_value.f134)
+      f135.set(fbe_value.f135)
+      f136.set(fbe_value.f136)
+      f137.set(fbe_value.f137)
+      f138.set(fbe_value.f138)
+      f139.set(fbe_value.f139)
+      f140.set(fbe_value.f140)
+      f141.set(fbe_value.f141)
+      f142.set(fbe_value.f142)
+      f143.set(fbe_value.f143)
+      f144.set(fbe_value.f144)
+      f145.set(fbe_value.f145)
+      f146.set(fbe_value.f146)
+      f147.set(fbe_value.f147)
+      f148.set(fbe_value.f148)
+      f149.set(fbe_value.f149)
+      f150.set(fbe_value.f150)
+      f151.set(fbe_value.f151)
+      f152.set(fbe_value.f152)
+      f153.set(fbe_value.f153)
+      f154.set(fbe_value.f154)
+      f155.set(fbe_value.f155)
+      f156.set(fbe_value.f156)
+      f157.set(fbe_value.f157)
+      f158.set(fbe_value.f158)
+      f159.set(fbe_value.f159)
+      f160.set(fbe_value.f160)
+      f161.set(fbe_value.f161)
+      f162.set(fbe_value.f162)
+      f163.set(fbe_value.f163)
+      f164.set(fbe_value.f164)
+      f165.set(fbe_value.f165)
+    end
+  end
+
+  # Fast Binary Encoding StructOptional model class
+  class StructOptionalModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FieldModelStructOptional(self.buffer, 4)
+    end
+
+    def model
+      @_model
+    end
+
+    # Get the model size
+    def fbe_size
+      @_model.fbe_size + @_model.fbe_extra
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FieldModelStructOptional::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        return false
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        return false
+      end
+
+      @_model.verify
+    end
+
+    # Create a new model (begin phase)
+    def create_begin
+      buffer.allocate(4 + @_model.fbe_size)
+    end
+
+    # Create a new model (end phase)
+    def create_end(fbe_begin)
+      fbe_end = buffer.size
+      fbe_full_size = fbe_end - fbe_begin
+      write_uint32(@_model.fbe_offset - 4, fbe_full_size)
+      fbe_full_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_begin = create_begin
+      @_model.set(value)
+      create_end(fbe_begin)
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructOptional.new)
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        [StructOptional.new, 0]
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        [StructOptional.new, 0]
+      end
+
+      @_model.get(value)
+      [value, fbe_full_size]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalModelStructOptional < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_parent = FinalModelStructSimple(self.buffer, 0)
+      @_f100 = FBE::FinalModelOptional(FBE::FinalModelBool(self.buffer, 0), self.buffer, 0)
+      @_f101 = FBE::FinalModelOptional(FBE::FinalModelBool(self.buffer, 0), self.buffer, 0)
+      @_f102 = FBE::FinalModelOptional(FBE::FinalModelBool(self.buffer, 0), self.buffer, 0)
+      @_f103 = FBE::FinalModelOptional(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0)
+      @_f104 = FBE::FinalModelOptional(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0)
+      @_f105 = FBE::FinalModelOptional(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0)
+      @_f106 = FBE::FinalModelOptional(FBE::FinalModelChar(self.buffer, 0), self.buffer, 0)
+      @_f107 = FBE::FinalModelOptional(FBE::FinalModelChar(self.buffer, 0), self.buffer, 0)
+      @_f108 = FBE::FinalModelOptional(FBE::FinalModelChar(self.buffer, 0), self.buffer, 0)
+      @_f109 = FBE::FinalModelOptional(FBE::FinalModelWChar(self.buffer, 0), self.buffer, 0)
+      @_f110 = FBE::FinalModelOptional(FBE::FinalModelWChar(self.buffer, 0), self.buffer, 0)
+      @_f111 = FBE::FinalModelOptional(FBE::FinalModelWChar(self.buffer, 0), self.buffer, 0)
+      @_f112 = FBE::FinalModelOptional(FBE::FinalModelInt8(self.buffer, 0), self.buffer, 0)
+      @_f113 = FBE::FinalModelOptional(FBE::FinalModelInt8(self.buffer, 0), self.buffer, 0)
+      @_f114 = FBE::FinalModelOptional(FBE::FinalModelInt8(self.buffer, 0), self.buffer, 0)
+      @_f115 = FBE::FinalModelOptional(FBE::FinalModelUInt8(self.buffer, 0), self.buffer, 0)
+      @_f116 = FBE::FinalModelOptional(FBE::FinalModelUInt8(self.buffer, 0), self.buffer, 0)
+      @_f117 = FBE::FinalModelOptional(FBE::FinalModelUInt8(self.buffer, 0), self.buffer, 0)
+      @_f118 = FBE::FinalModelOptional(FBE::FinalModelInt16(self.buffer, 0), self.buffer, 0)
+      @_f119 = FBE::FinalModelOptional(FBE::FinalModelInt16(self.buffer, 0), self.buffer, 0)
+      @_f120 = FBE::FinalModelOptional(FBE::FinalModelInt16(self.buffer, 0), self.buffer, 0)
+      @_f121 = FBE::FinalModelOptional(FBE::FinalModelUInt16(self.buffer, 0), self.buffer, 0)
+      @_f122 = FBE::FinalModelOptional(FBE::FinalModelUInt16(self.buffer, 0), self.buffer, 0)
+      @_f123 = FBE::FinalModelOptional(FBE::FinalModelUInt16(self.buffer, 0), self.buffer, 0)
+      @_f124 = FBE::FinalModelOptional(FBE::FinalModelInt32(self.buffer, 0), self.buffer, 0)
+      @_f125 = FBE::FinalModelOptional(FBE::FinalModelInt32(self.buffer, 0), self.buffer, 0)
+      @_f126 = FBE::FinalModelOptional(FBE::FinalModelInt32(self.buffer, 0), self.buffer, 0)
+      @_f127 = FBE::FinalModelOptional(FBE::FinalModelUInt32(self.buffer, 0), self.buffer, 0)
+      @_f128 = FBE::FinalModelOptional(FBE::FinalModelUInt32(self.buffer, 0), self.buffer, 0)
+      @_f129 = FBE::FinalModelOptional(FBE::FinalModelUInt32(self.buffer, 0), self.buffer, 0)
+      @_f130 = FBE::FinalModelOptional(FBE::FinalModelInt64(self.buffer, 0), self.buffer, 0)
+      @_f131 = FBE::FinalModelOptional(FBE::FinalModelInt64(self.buffer, 0), self.buffer, 0)
+      @_f132 = FBE::FinalModelOptional(FBE::FinalModelInt64(self.buffer, 0), self.buffer, 0)
+      @_f133 = FBE::FinalModelOptional(FBE::FinalModelUInt64(self.buffer, 0), self.buffer, 0)
+      @_f134 = FBE::FinalModelOptional(FBE::FinalModelUInt64(self.buffer, 0), self.buffer, 0)
+      @_f135 = FBE::FinalModelOptional(FBE::FinalModelUInt64(self.buffer, 0), self.buffer, 0)
+      @_f136 = FBE::FinalModelOptional(FBE::FinalModelFloat(self.buffer, 0), self.buffer, 0)
+      @_f137 = FBE::FinalModelOptional(FBE::FinalModelFloat(self.buffer, 0), self.buffer, 0)
+      @_f138 = FBE::FinalModelOptional(FBE::FinalModelFloat(self.buffer, 0), self.buffer, 0)
+      @_f139 = FBE::FinalModelOptional(FBE::FinalModelDouble(self.buffer, 0), self.buffer, 0)
+      @_f140 = FBE::FinalModelOptional(FBE::FinalModelDouble(self.buffer, 0), self.buffer, 0)
+      @_f141 = FBE::FinalModelOptional(FBE::FinalModelDouble(self.buffer, 0), self.buffer, 0)
+      @_f142 = FBE::FinalModelOptional(FBE::FinalModelDecimal(self.buffer, 0), self.buffer, 0)
+      @_f143 = FBE::FinalModelOptional(FBE::FinalModelDecimal(self.buffer, 0), self.buffer, 0)
+      @_f144 = FBE::FinalModelOptional(FBE::FinalModelDecimal(self.buffer, 0), self.buffer, 0)
+      @_f145 = FBE::FinalModelOptional(FBE::FinalModelString(self.buffer, 0), self.buffer, 0)
+      @_f146 = FBE::FinalModelOptional(FBE::FinalModelString(self.buffer, 0), self.buffer, 0)
+      @_f147 = FBE::FinalModelOptional(FBE::FinalModelString(self.buffer, 0), self.buffer, 0)
+      @_f148 = FBE::FinalModelOptional(FBE::FinalModelTimestamp(self.buffer, 0), self.buffer, 0)
+      @_f149 = FBE::FinalModelOptional(FBE::FinalModelTimestamp(self.buffer, 0), self.buffer, 0)
+      @_f150 = FBE::FinalModelOptional(FBE::FinalModelTimestamp(self.buffer, 0), self.buffer, 0)
+      @_f151 = FBE::FinalModelOptional(FBE::FinalModelUUID(self.buffer, 0), self.buffer, 0)
+      @_f152 = FBE::FinalModelOptional(FBE::FinalModelUUID(self.buffer, 0), self.buffer, 0)
+      @_f153 = FBE::FinalModelOptional(FBE::FinalModelUUID(self.buffer, 0), self.buffer, 0)
+      @_f154 = FBE::FinalModelOptional(proto.FinalModelOrderSide(self.buffer, 0), self.buffer, 0)
+      @_f155 = FBE::FinalModelOptional(proto.FinalModelOrderSide(self.buffer, 0), self.buffer, 0)
+      @_f156 = FBE::FinalModelOptional(proto.FinalModelOrderType(self.buffer, 0), self.buffer, 0)
+      @_f157 = FBE::FinalModelOptional(proto.FinalModelOrderType(self.buffer, 0), self.buffer, 0)
+      @_f158 = FBE::FinalModelOptional(proto.FinalModelOrder(self.buffer, 0), self.buffer, 0)
+      @_f159 = FBE::FinalModelOptional(proto.FinalModelOrder(self.buffer, 0), self.buffer, 0)
+      @_f160 = FBE::FinalModelOptional(proto.FinalModelBalance(self.buffer, 0), self.buffer, 0)
+      @_f161 = FBE::FinalModelOptional(proto.FinalModelBalance(self.buffer, 0), self.buffer, 0)
+      @_f162 = FBE::FinalModelOptional(proto.FinalModelState(self.buffer, 0), self.buffer, 0)
+      @_f163 = FBE::FinalModelOptional(proto.FinalModelState(self.buffer, 0), self.buffer, 0)
+      @_f164 = FBE::FinalModelOptional(proto.FinalModelAccount(self.buffer, 0), self.buffer, 0)
+      @_f165 = FBE::FinalModelOptional(proto.FinalModelAccount(self.buffer, 0), self.buffer, 0)
+    end
+
+    def parent
+      @_parent
+    end
+
+    def f100
+      @_f100
+    end
+
+    def f101
+      @_f101
+    end
+
+    def f102
+      @_f102
+    end
+
+    def f103
+      @_f103
+    end
+
+    def f104
+      @_f104
+    end
+
+    def f105
+      @_f105
+    end
+
+    def f106
+      @_f106
+    end
+
+    def f107
+      @_f107
+    end
+
+    def f108
+      @_f108
+    end
+
+    def f109
+      @_f109
+    end
+
+    def f110
+      @_f110
+    end
+
+    def f111
+      @_f111
+    end
+
+    def f112
+      @_f112
+    end
+
+    def f113
+      @_f113
+    end
+
+    def f114
+      @_f114
+    end
+
+    def f115
+      @_f115
+    end
+
+    def f116
+      @_f116
+    end
+
+    def f117
+      @_f117
+    end
+
+    def f118
+      @_f118
+    end
+
+    def f119
+      @_f119
+    end
+
+    def f120
+      @_f120
+    end
+
+    def f121
+      @_f121
+    end
+
+    def f122
+      @_f122
+    end
+
+    def f123
+      @_f123
+    end
+
+    def f124
+      @_f124
+    end
+
+    def f125
+      @_f125
+    end
+
+    def f126
+      @_f126
+    end
+
+    def f127
+      @_f127
+    end
+
+    def f128
+      @_f128
+    end
+
+    def f129
+      @_f129
+    end
+
+    def f130
+      @_f130
+    end
+
+    def f131
+      @_f131
+    end
+
+    def f132
+      @_f132
+    end
+
+    def f133
+      @_f133
+    end
+
+    def f134
+      @_f134
+    end
+
+    def f135
+      @_f135
+    end
+
+    def f136
+      @_f136
+    end
+
+    def f137
+      @_f137
+    end
+
+    def f138
+      @_f138
+    end
+
+    def f139
+      @_f139
+    end
+
+    def f140
+      @_f140
+    end
+
+    def f141
+      @_f141
+    end
+
+    def f142
+      @_f142
+    end
+
+    def f143
+      @_f143
+    end
+
+    def f144
+      @_f144
+    end
+
+    def f145
+      @_f145
+    end
+
+    def f146
+      @_f146
+    end
+
+    def f147
+      @_f147
+    end
+
+    def f148
+      @_f148
+    end
+
+    def f149
+      @_f149
+    end
+
+    def f150
+      @_f150
+    end
+
+    def f151
+      @_f151
+    end
+
+    def f152
+      @_f152
+    end
+
+    def f153
+      @_f153
+    end
+
+    def f154
+      @_f154
+    end
+
+    def f155
+      @_f155
+    end
+
+    def f156
+      @_f156
+    end
+
+    def f157
+      @_f157
+    end
+
+    def f158
+      @_f158
+    end
+
+    def f159
+      @_f159
+    end
+
+    def f160
+      @_f160
+    end
+
+    def f161
+      @_f161
+    end
+
+    def f162
+      @_f162
+    end
+
+    def f163
+      @_f163
+    end
+
+    def f164
+      @_f164
+    end
+
+    def f165
+      @_f165
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(fbe_value)
+      0
+        + parent.fbe_allocation_size(fbe_value)
+        + f100.fbe_allocation_size(fbe_value.f100)
+        + f101.fbe_allocation_size(fbe_value.f101)
+        + f102.fbe_allocation_size(fbe_value.f102)
+        + f103.fbe_allocation_size(fbe_value.f103)
+        + f104.fbe_allocation_size(fbe_value.f104)
+        + f105.fbe_allocation_size(fbe_value.f105)
+        + f106.fbe_allocation_size(fbe_value.f106)
+        + f107.fbe_allocation_size(fbe_value.f107)
+        + f108.fbe_allocation_size(fbe_value.f108)
+        + f109.fbe_allocation_size(fbe_value.f109)
+        + f110.fbe_allocation_size(fbe_value.f110)
+        + f111.fbe_allocation_size(fbe_value.f111)
+        + f112.fbe_allocation_size(fbe_value.f112)
+        + f113.fbe_allocation_size(fbe_value.f113)
+        + f114.fbe_allocation_size(fbe_value.f114)
+        + f115.fbe_allocation_size(fbe_value.f115)
+        + f116.fbe_allocation_size(fbe_value.f116)
+        + f117.fbe_allocation_size(fbe_value.f117)
+        + f118.fbe_allocation_size(fbe_value.f118)
+        + f119.fbe_allocation_size(fbe_value.f119)
+        + f120.fbe_allocation_size(fbe_value.f120)
+        + f121.fbe_allocation_size(fbe_value.f121)
+        + f122.fbe_allocation_size(fbe_value.f122)
+        + f123.fbe_allocation_size(fbe_value.f123)
+        + f124.fbe_allocation_size(fbe_value.f124)
+        + f125.fbe_allocation_size(fbe_value.f125)
+        + f126.fbe_allocation_size(fbe_value.f126)
+        + f127.fbe_allocation_size(fbe_value.f127)
+        + f128.fbe_allocation_size(fbe_value.f128)
+        + f129.fbe_allocation_size(fbe_value.f129)
+        + f130.fbe_allocation_size(fbe_value.f130)
+        + f131.fbe_allocation_size(fbe_value.f131)
+        + f132.fbe_allocation_size(fbe_value.f132)
+        + f133.fbe_allocation_size(fbe_value.f133)
+        + f134.fbe_allocation_size(fbe_value.f134)
+        + f135.fbe_allocation_size(fbe_value.f135)
+        + f136.fbe_allocation_size(fbe_value.f136)
+        + f137.fbe_allocation_size(fbe_value.f137)
+        + f138.fbe_allocation_size(fbe_value.f138)
+        + f139.fbe_allocation_size(fbe_value.f139)
+        + f140.fbe_allocation_size(fbe_value.f140)
+        + f141.fbe_allocation_size(fbe_value.f141)
+        + f142.fbe_allocation_size(fbe_value.f142)
+        + f143.fbe_allocation_size(fbe_value.f143)
+        + f144.fbe_allocation_size(fbe_value.f144)
+        + f145.fbe_allocation_size(fbe_value.f145)
+        + f146.fbe_allocation_size(fbe_value.f146)
+        + f147.fbe_allocation_size(fbe_value.f147)
+        + f148.fbe_allocation_size(fbe_value.f148)
+        + f149.fbe_allocation_size(fbe_value.f149)
+        + f150.fbe_allocation_size(fbe_value.f150)
+        + f151.fbe_allocation_size(fbe_value.f151)
+        + f152.fbe_allocation_size(fbe_value.f152)
+        + f153.fbe_allocation_size(fbe_value.f153)
+        + f154.fbe_allocation_size(fbe_value.f154)
+        + f155.fbe_allocation_size(fbe_value.f155)
+        + f156.fbe_allocation_size(fbe_value.f156)
+        + f157.fbe_allocation_size(fbe_value.f157)
+        + f158.fbe_allocation_size(fbe_value.f158)
+        + f159.fbe_allocation_size(fbe_value.f159)
+        + f160.fbe_allocation_size(fbe_value.f160)
+        + f161.fbe_allocation_size(fbe_value.f161)
+        + f162.fbe_allocation_size(fbe_value.f162)
+        + f163.fbe_allocation_size(fbe_value.f163)
+        + f164.fbe_allocation_size(fbe_value.f164)
+        + f165.fbe_allocation_size(fbe_value.f165)
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 111
+
+    # Check if the struct value is valid
+    def verify
+      @_buffer.shift(fbe_offset)
+      fbe_result = verify_fields
+      @_buffer.unshift(fbe_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields
+      fbe_current_offset = 0
+
+      parent.fbe_offset = fbe_current_offset
+      fbe_field_size = parent.verify_fields
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f100.fbe_offset = fbe_current_offset
+      fbe_field_size = f100.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f101.fbe_offset = fbe_current_offset
+      fbe_field_size = f101.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f102.fbe_offset = fbe_current_offset
+      fbe_field_size = f102.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f103.fbe_offset = fbe_current_offset
+      fbe_field_size = f103.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f104.fbe_offset = fbe_current_offset
+      fbe_field_size = f104.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f105.fbe_offset = fbe_current_offset
+      fbe_field_size = f105.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f106.fbe_offset = fbe_current_offset
+      fbe_field_size = f106.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f107.fbe_offset = fbe_current_offset
+      fbe_field_size = f107.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f108.fbe_offset = fbe_current_offset
+      fbe_field_size = f108.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f109.fbe_offset = fbe_current_offset
+      fbe_field_size = f109.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f110.fbe_offset = fbe_current_offset
+      fbe_field_size = f110.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f111.fbe_offset = fbe_current_offset
+      fbe_field_size = f111.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f112.fbe_offset = fbe_current_offset
+      fbe_field_size = f112.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f113.fbe_offset = fbe_current_offset
+      fbe_field_size = f113.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f114.fbe_offset = fbe_current_offset
+      fbe_field_size = f114.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f115.fbe_offset = fbe_current_offset
+      fbe_field_size = f115.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f116.fbe_offset = fbe_current_offset
+      fbe_field_size = f116.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f117.fbe_offset = fbe_current_offset
+      fbe_field_size = f117.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f118.fbe_offset = fbe_current_offset
+      fbe_field_size = f118.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f119.fbe_offset = fbe_current_offset
+      fbe_field_size = f119.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f120.fbe_offset = fbe_current_offset
+      fbe_field_size = f120.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f121.fbe_offset = fbe_current_offset
+      fbe_field_size = f121.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f122.fbe_offset = fbe_current_offset
+      fbe_field_size = f122.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f123.fbe_offset = fbe_current_offset
+      fbe_field_size = f123.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f124.fbe_offset = fbe_current_offset
+      fbe_field_size = f124.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f125.fbe_offset = fbe_current_offset
+      fbe_field_size = f125.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f126.fbe_offset = fbe_current_offset
+      fbe_field_size = f126.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f127.fbe_offset = fbe_current_offset
+      fbe_field_size = f127.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f128.fbe_offset = fbe_current_offset
+      fbe_field_size = f128.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f129.fbe_offset = fbe_current_offset
+      fbe_field_size = f129.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f130.fbe_offset = fbe_current_offset
+      fbe_field_size = f130.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f131.fbe_offset = fbe_current_offset
+      fbe_field_size = f131.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f132.fbe_offset = fbe_current_offset
+      fbe_field_size = f132.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f133.fbe_offset = fbe_current_offset
+      fbe_field_size = f133.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f134.fbe_offset = fbe_current_offset
+      fbe_field_size = f134.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f135.fbe_offset = fbe_current_offset
+      fbe_field_size = f135.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f136.fbe_offset = fbe_current_offset
+      fbe_field_size = f136.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f137.fbe_offset = fbe_current_offset
+      fbe_field_size = f137.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f138.fbe_offset = fbe_current_offset
+      fbe_field_size = f138.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f139.fbe_offset = fbe_current_offset
+      fbe_field_size = f139.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f140.fbe_offset = fbe_current_offset
+      fbe_field_size = f140.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f141.fbe_offset = fbe_current_offset
+      fbe_field_size = f141.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f142.fbe_offset = fbe_current_offset
+      fbe_field_size = f142.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f143.fbe_offset = fbe_current_offset
+      fbe_field_size = f143.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f144.fbe_offset = fbe_current_offset
+      fbe_field_size = f144.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f145.fbe_offset = fbe_current_offset
+      fbe_field_size = f145.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f146.fbe_offset = fbe_current_offset
+      fbe_field_size = f146.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f147.fbe_offset = fbe_current_offset
+      fbe_field_size = f147.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f148.fbe_offset = fbe_current_offset
+      fbe_field_size = f148.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f149.fbe_offset = fbe_current_offset
+      fbe_field_size = f149.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f150.fbe_offset = fbe_current_offset
+      fbe_field_size = f150.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f151.fbe_offset = fbe_current_offset
+      fbe_field_size = f151.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f152.fbe_offset = fbe_current_offset
+      fbe_field_size = f152.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f153.fbe_offset = fbe_current_offset
+      fbe_field_size = f153.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f154.fbe_offset = fbe_current_offset
+      fbe_field_size = f154.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f155.fbe_offset = fbe_current_offset
+      fbe_field_size = f155.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f156.fbe_offset = fbe_current_offset
+      fbe_field_size = f156.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f157.fbe_offset = fbe_current_offset
+      fbe_field_size = f157.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f158.fbe_offset = fbe_current_offset
+      fbe_field_size = f158.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f159.fbe_offset = fbe_current_offset
+      fbe_field_size = f159.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f160.fbe_offset = fbe_current_offset
+      fbe_field_size = f160.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f161.fbe_offset = fbe_current_offset
+      fbe_field_size = f161.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f162.fbe_offset = fbe_current_offset
+      fbe_field_size = f162.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f163.fbe_offset = fbe_current_offset
+      fbe_field_size = f163.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f164.fbe_offset = fbe_current_offset
+      fbe_field_size = f164.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f165.fbe_offset = fbe_current_offset
+      fbe_field_size = f165.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_offset
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructOptional.new)
+      @_buffer.shift(fbe_offset)
+      fbe_size = get_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      [fbe_value, fbe_size]
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      parent.fbe_offset = fbe_current_offset
+      fbe_result = parent.get_fields(fbe_value)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result
+      fbe_current_size += fbe_result
+
+      f100.fbe_offset = fbe_current_offset
+      fbe_result = f100.get
+      fbe_value.f100 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f101.fbe_offset = fbe_current_offset
+      fbe_result = f101.get
+      fbe_value.f101 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f102.fbe_offset = fbe_current_offset
+      fbe_result = f102.get
+      fbe_value.f102 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f103.fbe_offset = fbe_current_offset
+      fbe_result = f103.get
+      fbe_value.f103 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f104.fbe_offset = fbe_current_offset
+      fbe_result = f104.get
+      fbe_value.f104 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f105.fbe_offset = fbe_current_offset
+      fbe_result = f105.get
+      fbe_value.f105 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f106.fbe_offset = fbe_current_offset
+      fbe_result = f106.get
+      fbe_value.f106 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f107.fbe_offset = fbe_current_offset
+      fbe_result = f107.get
+      fbe_value.f107 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f108.fbe_offset = fbe_current_offset
+      fbe_result = f108.get
+      fbe_value.f108 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f109.fbe_offset = fbe_current_offset
+      fbe_result = f109.get
+      fbe_value.f109 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f110.fbe_offset = fbe_current_offset
+      fbe_result = f110.get
+      fbe_value.f110 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f111.fbe_offset = fbe_current_offset
+      fbe_result = f111.get
+      fbe_value.f111 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f112.fbe_offset = fbe_current_offset
+      fbe_result = f112.get
+      fbe_value.f112 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f113.fbe_offset = fbe_current_offset
+      fbe_result = f113.get
+      fbe_value.f113 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f114.fbe_offset = fbe_current_offset
+      fbe_result = f114.get
+      fbe_value.f114 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f115.fbe_offset = fbe_current_offset
+      fbe_result = f115.get
+      fbe_value.f115 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f116.fbe_offset = fbe_current_offset
+      fbe_result = f116.get
+      fbe_value.f116 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f117.fbe_offset = fbe_current_offset
+      fbe_result = f117.get
+      fbe_value.f117 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f118.fbe_offset = fbe_current_offset
+      fbe_result = f118.get
+      fbe_value.f118 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f119.fbe_offset = fbe_current_offset
+      fbe_result = f119.get
+      fbe_value.f119 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f120.fbe_offset = fbe_current_offset
+      fbe_result = f120.get
+      fbe_value.f120 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f121.fbe_offset = fbe_current_offset
+      fbe_result = f121.get
+      fbe_value.f121 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f122.fbe_offset = fbe_current_offset
+      fbe_result = f122.get
+      fbe_value.f122 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f123.fbe_offset = fbe_current_offset
+      fbe_result = f123.get
+      fbe_value.f123 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f124.fbe_offset = fbe_current_offset
+      fbe_result = f124.get
+      fbe_value.f124 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f125.fbe_offset = fbe_current_offset
+      fbe_result = f125.get
+      fbe_value.f125 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f126.fbe_offset = fbe_current_offset
+      fbe_result = f126.get
+      fbe_value.f126 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f127.fbe_offset = fbe_current_offset
+      fbe_result = f127.get
+      fbe_value.f127 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f128.fbe_offset = fbe_current_offset
+      fbe_result = f128.get
+      fbe_value.f128 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f129.fbe_offset = fbe_current_offset
+      fbe_result = f129.get
+      fbe_value.f129 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f130.fbe_offset = fbe_current_offset
+      fbe_result = f130.get
+      fbe_value.f130 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f131.fbe_offset = fbe_current_offset
+      fbe_result = f131.get
+      fbe_value.f131 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f132.fbe_offset = fbe_current_offset
+      fbe_result = f132.get
+      fbe_value.f132 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f133.fbe_offset = fbe_current_offset
+      fbe_result = f133.get
+      fbe_value.f133 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f134.fbe_offset = fbe_current_offset
+      fbe_result = f134.get
+      fbe_value.f134 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f135.fbe_offset = fbe_current_offset
+      fbe_result = f135.get
+      fbe_value.f135 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f136.fbe_offset = fbe_current_offset
+      fbe_result = f136.get
+      fbe_value.f136 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f137.fbe_offset = fbe_current_offset
+      fbe_result = f137.get
+      fbe_value.f137 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f138.fbe_offset = fbe_current_offset
+      fbe_result = f138.get
+      fbe_value.f138 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f139.fbe_offset = fbe_current_offset
+      fbe_result = f139.get
+      fbe_value.f139 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f140.fbe_offset = fbe_current_offset
+      fbe_result = f140.get
+      fbe_value.f140 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f141.fbe_offset = fbe_current_offset
+      fbe_result = f141.get
+      fbe_value.f141 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f142.fbe_offset = fbe_current_offset
+      fbe_result = f142.get
+      fbe_value.f142 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f143.fbe_offset = fbe_current_offset
+      fbe_result = f143.get
+      fbe_value.f143 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f144.fbe_offset = fbe_current_offset
+      fbe_result = f144.get
+      fbe_value.f144 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f145.fbe_offset = fbe_current_offset
+      fbe_result = f145.get
+      fbe_value.f145 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f146.fbe_offset = fbe_current_offset
+      fbe_result = f146.get
+      fbe_value.f146 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f147.fbe_offset = fbe_current_offset
+      fbe_result = f147.get
+      fbe_value.f147 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f148.fbe_offset = fbe_current_offset
+      fbe_result = f148.get
+      fbe_value.f148 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f149.fbe_offset = fbe_current_offset
+      fbe_result = f149.get
+      fbe_value.f149 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f150.fbe_offset = fbe_current_offset
+      fbe_result = f150.get
+      fbe_value.f150 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f151.fbe_offset = fbe_current_offset
+      fbe_result = f151.get
+      fbe_value.f151 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f152.fbe_offset = fbe_current_offset
+      fbe_result = f152.get
+      fbe_value.f152 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f153.fbe_offset = fbe_current_offset
+      fbe_result = f153.get
+      fbe_value.f153 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f154.fbe_offset = fbe_current_offset
+      fbe_result = f154.get
+      fbe_value.f154 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f155.fbe_offset = fbe_current_offset
+      fbe_result = f155.get
+      fbe_value.f155 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f156.fbe_offset = fbe_current_offset
+      fbe_result = f156.get
+      fbe_value.f156 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f157.fbe_offset = fbe_current_offset
+      fbe_result = f157.get
+      fbe_value.f157 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f158.fbe_offset = fbe_current_offset
+      fbe_result = f158.get
+      fbe_value.f158 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f159.fbe_offset = fbe_current_offset
+      fbe_result = f159.get
+      fbe_value.f159 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f160.fbe_offset = fbe_current_offset
+      fbe_result = f160.get
+      fbe_value.f160 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f161.fbe_offset = fbe_current_offset
+      fbe_result = f161.get
+      fbe_value.f161 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f162.fbe_offset = fbe_current_offset
+      fbe_result = f162.get
+      fbe_value.f162 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f163.fbe_offset = fbe_current_offset
+      fbe_result = f163.get
+      fbe_value.f163 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f164.fbe_offset = fbe_current_offset
+      fbe_result = f164.get
+      fbe_value.f164 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f165.fbe_offset = fbe_current_offset
+      fbe_result = f165.get
+      fbe_value.f165 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      @_buffer.shift(fbe_offset)
+      fbe_size = set_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      fbe_size
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      parent.fbe_offset = fbe_current_offset
+      fbe_field_size = parent.set_fields(fbe_value)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f100.fbe_offset = fbe_current_offset
+      fbe_field_size = f100.set(fbe_value.f100)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f101.fbe_offset = fbe_current_offset
+      fbe_field_size = f101.set(fbe_value.f101)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f102.fbe_offset = fbe_current_offset
+      fbe_field_size = f102.set(fbe_value.f102)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f103.fbe_offset = fbe_current_offset
+      fbe_field_size = f103.set(fbe_value.f103)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f104.fbe_offset = fbe_current_offset
+      fbe_field_size = f104.set(fbe_value.f104)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f105.fbe_offset = fbe_current_offset
+      fbe_field_size = f105.set(fbe_value.f105)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f106.fbe_offset = fbe_current_offset
+      fbe_field_size = f106.set(fbe_value.f106)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f107.fbe_offset = fbe_current_offset
+      fbe_field_size = f107.set(fbe_value.f107)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f108.fbe_offset = fbe_current_offset
+      fbe_field_size = f108.set(fbe_value.f108)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f109.fbe_offset = fbe_current_offset
+      fbe_field_size = f109.set(fbe_value.f109)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f110.fbe_offset = fbe_current_offset
+      fbe_field_size = f110.set(fbe_value.f110)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f111.fbe_offset = fbe_current_offset
+      fbe_field_size = f111.set(fbe_value.f111)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f112.fbe_offset = fbe_current_offset
+      fbe_field_size = f112.set(fbe_value.f112)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f113.fbe_offset = fbe_current_offset
+      fbe_field_size = f113.set(fbe_value.f113)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f114.fbe_offset = fbe_current_offset
+      fbe_field_size = f114.set(fbe_value.f114)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f115.fbe_offset = fbe_current_offset
+      fbe_field_size = f115.set(fbe_value.f115)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f116.fbe_offset = fbe_current_offset
+      fbe_field_size = f116.set(fbe_value.f116)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f117.fbe_offset = fbe_current_offset
+      fbe_field_size = f117.set(fbe_value.f117)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f118.fbe_offset = fbe_current_offset
+      fbe_field_size = f118.set(fbe_value.f118)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f119.fbe_offset = fbe_current_offset
+      fbe_field_size = f119.set(fbe_value.f119)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f120.fbe_offset = fbe_current_offset
+      fbe_field_size = f120.set(fbe_value.f120)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f121.fbe_offset = fbe_current_offset
+      fbe_field_size = f121.set(fbe_value.f121)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f122.fbe_offset = fbe_current_offset
+      fbe_field_size = f122.set(fbe_value.f122)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f123.fbe_offset = fbe_current_offset
+      fbe_field_size = f123.set(fbe_value.f123)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f124.fbe_offset = fbe_current_offset
+      fbe_field_size = f124.set(fbe_value.f124)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f125.fbe_offset = fbe_current_offset
+      fbe_field_size = f125.set(fbe_value.f125)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f126.fbe_offset = fbe_current_offset
+      fbe_field_size = f126.set(fbe_value.f126)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f127.fbe_offset = fbe_current_offset
+      fbe_field_size = f127.set(fbe_value.f127)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f128.fbe_offset = fbe_current_offset
+      fbe_field_size = f128.set(fbe_value.f128)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f129.fbe_offset = fbe_current_offset
+      fbe_field_size = f129.set(fbe_value.f129)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f130.fbe_offset = fbe_current_offset
+      fbe_field_size = f130.set(fbe_value.f130)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f131.fbe_offset = fbe_current_offset
+      fbe_field_size = f131.set(fbe_value.f131)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f132.fbe_offset = fbe_current_offset
+      fbe_field_size = f132.set(fbe_value.f132)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f133.fbe_offset = fbe_current_offset
+      fbe_field_size = f133.set(fbe_value.f133)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f134.fbe_offset = fbe_current_offset
+      fbe_field_size = f134.set(fbe_value.f134)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f135.fbe_offset = fbe_current_offset
+      fbe_field_size = f135.set(fbe_value.f135)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f136.fbe_offset = fbe_current_offset
+      fbe_field_size = f136.set(fbe_value.f136)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f137.fbe_offset = fbe_current_offset
+      fbe_field_size = f137.set(fbe_value.f137)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f138.fbe_offset = fbe_current_offset
+      fbe_field_size = f138.set(fbe_value.f138)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f139.fbe_offset = fbe_current_offset
+      fbe_field_size = f139.set(fbe_value.f139)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f140.fbe_offset = fbe_current_offset
+      fbe_field_size = f140.set(fbe_value.f140)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f141.fbe_offset = fbe_current_offset
+      fbe_field_size = f141.set(fbe_value.f141)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f142.fbe_offset = fbe_current_offset
+      fbe_field_size = f142.set(fbe_value.f142)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f143.fbe_offset = fbe_current_offset
+      fbe_field_size = f143.set(fbe_value.f143)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f144.fbe_offset = fbe_current_offset
+      fbe_field_size = f144.set(fbe_value.f144)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f145.fbe_offset = fbe_current_offset
+      fbe_field_size = f145.set(fbe_value.f145)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f146.fbe_offset = fbe_current_offset
+      fbe_field_size = f146.set(fbe_value.f146)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f147.fbe_offset = fbe_current_offset
+      fbe_field_size = f147.set(fbe_value.f147)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f148.fbe_offset = fbe_current_offset
+      fbe_field_size = f148.set(fbe_value.f148)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f149.fbe_offset = fbe_current_offset
+      fbe_field_size = f149.set(fbe_value.f149)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f150.fbe_offset = fbe_current_offset
+      fbe_field_size = f150.set(fbe_value.f150)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f151.fbe_offset = fbe_current_offset
+      fbe_field_size = f151.set(fbe_value.f151)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f152.fbe_offset = fbe_current_offset
+      fbe_field_size = f152.set(fbe_value.f152)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f153.fbe_offset = fbe_current_offset
+      fbe_field_size = f153.set(fbe_value.f153)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f154.fbe_offset = fbe_current_offset
+      fbe_field_size = f154.set(fbe_value.f154)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f155.fbe_offset = fbe_current_offset
+      fbe_field_size = f155.set(fbe_value.f155)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f156.fbe_offset = fbe_current_offset
+      fbe_field_size = f156.set(fbe_value.f156)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f157.fbe_offset = fbe_current_offset
+      fbe_field_size = f157.set(fbe_value.f157)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f158.fbe_offset = fbe_current_offset
+      fbe_field_size = f158.set(fbe_value.f158)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f159.fbe_offset = fbe_current_offset
+      fbe_field_size = f159.set(fbe_value.f159)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f160.fbe_offset = fbe_current_offset
+      fbe_field_size = f160.set(fbe_value.f160)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f161.fbe_offset = fbe_current_offset
+      fbe_field_size = f161.set(fbe_value.f161)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f162.fbe_offset = fbe_current_offset
+      fbe_field_size = f162.set(fbe_value.f162)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f163.fbe_offset = fbe_current_offset
+      fbe_field_size = f163.set(fbe_value.f163)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f164.fbe_offset = fbe_current_offset
+      fbe_field_size = f164.set(fbe_value.f164)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f165.fbe_offset = fbe_current_offset
+      fbe_field_size = f165.set(fbe_value.f165)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+  end
+
+  # Fast Binary Encoding StructOptional final model class
+  class StructOptionalFinalModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FinalModelStructOptional(self.buffer, 8)
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FinalModelStructOptional::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        return false
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) or (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      (8 + @_model.verify) == fbe_struct_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_initial_size = buffer.size
+
+      fbe_struct_type = fbe_type
+      fbe_struct_size = 8 + @_model.fbe_allocation_size(value)
+      fbe_struct_offset = buffer.allocate(fbe_struct_size) - buffer.offset
+      if (buffer.offset + fbe_struct_offset + fbe_struct_size) > buffer.size
+        return 0
+      end
+
+      fbe_struct_size = 8 + @_model.set(value)
+      buffer.resize(fbe_initial_size + fbe_struct_size)
+
+      write_uint32(@_model.fbe_offset - 8, fbe_struct_size)
+      write_uint32(@_model.fbe_offset - 4, fbe_struct_type)
+
+      fbe_struct_size
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructOptional.new)
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        [StructOptional.new, 0]
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) || (fbe_struct_type != fbe_type)
+        [StructOptional.new, 8]
+      end
+
+      fbe_result = @_model.get(value)
+      [fbe_result[0], (8 + fbe_result[1])]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructNested < StructOptional
     attr_accessor :f1000
     attr_accessor :f1001
@@ -1881,7 +8348,7 @@ module Test
     attr_accessor :f1011
 
     def initialize(parent = StructOptional.new, f1000 = EnumSimple.new, f1001 = nil, f1002 = EnumTyped.ENUM_VALUE_2, f1003 = nil, f1004 = FlagsSimple.new, f1005 = nil, f1006 = FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6, f1007 = nil, f1008 = StructSimple.new, f1009 = nil, f1010 = StructOptional.new, f1011 = nil)
-      method(:copy).super_method.call(parent)
+      super(parent.clone)
       @f1000 = f1000
       @f1001 = f1001
       @f1002 = f1002
@@ -2033,7 +8500,1046 @@ module Test
     end
   end
 
-  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FieldModelStructNested < FBE::FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_parent = FieldModelStructOptional(self.buffer, 4 + 4)
+      @_f1000 = FieldModelEnumSimple(self.buffer, @_parent.fbe_offset + @_parent.fbe_body - 4 - 4)
+      @_f1001 = FBE::FieldModelOptional(FieldModelEnumSimple(self.buffer, @_f1000.fbe_offset + @_f1000.fbe_size), self.buffer, @_f1000.fbe_offset + @_f1000.fbe_size)
+      @_f1002 = FieldModelEnumTyped(self.buffer, @_f1001.fbe_offset + @_f1001.fbe_size)
+      @_f1003 = FBE::FieldModelOptional(FieldModelEnumTyped(self.buffer, @_f1002.fbe_offset + @_f1002.fbe_size), self.buffer, @_f1002.fbe_offset + @_f1002.fbe_size)
+      @_f1004 = FieldModelFlagsSimple(self.buffer, @_f1003.fbe_offset + @_f1003.fbe_size)
+      @_f1005 = FBE::FieldModelOptional(FieldModelFlagsSimple(self.buffer, @_f1004.fbe_offset + @_f1004.fbe_size), self.buffer, @_f1004.fbe_offset + @_f1004.fbe_size)
+      @_f1006 = FieldModelFlagsTyped(self.buffer, @_f1005.fbe_offset + @_f1005.fbe_size)
+      @_f1007 = FBE::FieldModelOptional(FieldModelFlagsTyped(self.buffer, @_f1006.fbe_offset + @_f1006.fbe_size), self.buffer, @_f1006.fbe_offset + @_f1006.fbe_size)
+      @_f1008 = FieldModelStructSimple(self.buffer, @_f1007.fbe_offset + @_f1007.fbe_size)
+      @_f1009 = FBE::FieldModelOptional(FieldModelStructSimple(self.buffer, @_f1008.fbe_offset + @_f1008.fbe_size), self.buffer, @_f1008.fbe_offset + @_f1008.fbe_size)
+      @_f1010 = FieldModelStructOptional(self.buffer, @_f1009.fbe_offset + @_f1009.fbe_size)
+      @_f1011 = FBE::FieldModelOptional(FieldModelStructOptional(self.buffer, @_f1010.fbe_offset + @_f1010.fbe_size), self.buffer, @_f1010.fbe_offset + @_f1010.fbe_size)
+    end
+
+    def parent
+      @_parent
+    end
+
+    def f1000
+      @_f1000
+    end
+
+    def f1001
+      @_f1001
+    end
+
+    def f1002
+      @_f1002
+    end
+
+    def f1003
+      @_f1003
+    end
+
+    def f1004
+      @_f1004
+    end
+
+    def f1005
+      @_f1005
+    end
+
+    def f1006
+      @_f1006
+    end
+
+    def f1007
+      @_f1007
+    end
+
+    def f1008
+      @_f1008
+    end
+
+    def f1009
+      @_f1009
+    end
+
+    def f1010
+      @_f1010
+    end
+
+    def f1011
+      @_f1011
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field body size
+    def fbe_body
+      4 + 4
+        + parent.fbe_body - 4 - 4
+        + f1000.fbe_size
+        + f1001.fbe_size
+        + f1002.fbe_size
+        + f1003.fbe_size
+        + f1004.fbe_size
+        + f1005.fbe_size
+        + f1006.fbe_size
+        + f1007.fbe_size
+        + f1008.fbe_size
+        + f1009.fbe_size
+        + f1010.fbe_size
+        + f1011.fbe_size
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+
+      fbe_result = fbe_body
+        + parent.fbe_extra
+        + f1000.fbe_extra
+        + f1001.fbe_extra
+        + f1002.fbe_extra
+        + f1003.fbe_extra
+        + f1004.fbe_extra
+        + f1005.fbe_extra
+        + f1006.fbe_extra
+        + f1007.fbe_extra
+        + f1008.fbe_extra
+        + f1009.fbe_extra
+        + f1010.fbe_extra
+        + f1011.fbe_extra
+
+      @_buffer.unshift(fbe_struct_offset)
+
+      fbe_result
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 112
+
+    # Check if the struct value is valid
+    def verify(fbe_verify_type = true)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return false
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return false
+      end
+
+      fbe_struct_type = read_uint32(fbe_struct_offset + 4)
+      if fbe_verify_type && (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_result = verify_fields(fbe_struct_size)
+      @_buffer.unshift(fbe_struct_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields(fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + parent.fbe_body - 4 - 4) > fbe_struct_size
+        return true
+      end
+      unless parent.verify_fields(fbe_struct_size)
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += parent.fbe_body - 4 - 4
+
+      if (fbe_current_size + f1000.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1000.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1000.fbe_size
+
+      if (fbe_current_size + f1001.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1001.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1001.fbe_size
+
+      if (fbe_current_size + f1002.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1002.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1002.fbe_size
+
+      if (fbe_current_size + f1003.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1003.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1003.fbe_size
+
+      if (fbe_current_size + f1004.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1004.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1004.fbe_size
+
+      if (fbe_current_size + f1005.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1005.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1005.fbe_size
+
+      if (fbe_current_size + f1006.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1006.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1006.fbe_size
+
+      if (fbe_current_size + f1007.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1007.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1007.fbe_size
+
+      if (fbe_current_size + f1008.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1008.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1008.fbe_size
+
+      if (fbe_current_size + f1009.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1009.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1009.fbe_size
+
+      if (fbe_current_size + f1010.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1010.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1010.fbe_size
+
+      if (fbe_current_size + f1011.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1011.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1011.fbe_size
+
+      true
+    end
+
+    # Get the struct value (begin phase)
+    def get_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Get the struct value (end phase)
+    def get_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructNested.new)
+      fbe_begin = get_begin
+      if fbe_begin == 0
+        return fbe_value
+      end
+
+      fbe_struct_size = read_uint32(0)
+      get_fields(fbe_value, fbe_struct_size)
+      get_end(fbe_begin)
+      fbe_value
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value, fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + parent.fbe_body - 4 - 4) <= fbe_struct_size
+        parent.get_fields(fbe_value, fbe_struct_size)
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += parent.fbe_body - 4 - 4
+
+      if (fbe_current_size + f1000.fbe_size) <= fbe_struct_size
+        fbe_value.f1000 = f1000.get
+      else
+        fbe_value.f1000 = EnumSimple.new
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1000.fbe_size
+
+      if (fbe_current_size + f1001.fbe_size) <= fbe_struct_size
+        fbe_value.f1001 = f1001.get
+      else
+        fbe_value.f1001 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1001.fbe_size
+
+      if (fbe_current_size + f1002.fbe_size) <= fbe_struct_size
+        fbe_value.f1002 = f1002.get(EnumTyped.ENUM_VALUE_2)
+      else
+        fbe_value.f1002 = EnumTyped.ENUM_VALUE_2
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1002.fbe_size
+
+      if (fbe_current_size + f1003.fbe_size) <= fbe_struct_size
+        fbe_value.f1003 = f1003.get(nil)
+      else
+        fbe_value.f1003 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1003.fbe_size
+
+      if (fbe_current_size + f1004.fbe_size) <= fbe_struct_size
+        fbe_value.f1004 = f1004.get
+      else
+        fbe_value.f1004 = FlagsSimple.new
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1004.fbe_size
+
+      if (fbe_current_size + f1005.fbe_size) <= fbe_struct_size
+        fbe_value.f1005 = f1005.get
+      else
+        fbe_value.f1005 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1005.fbe_size
+
+      if (fbe_current_size + f1006.fbe_size) <= fbe_struct_size
+        fbe_value.f1006 = f1006.get(FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6)
+      else
+        fbe_value.f1006 = FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1006.fbe_size
+
+      if (fbe_current_size + f1007.fbe_size) <= fbe_struct_size
+        fbe_value.f1007 = f1007.get(nil)
+      else
+        fbe_value.f1007 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1007.fbe_size
+
+      if (fbe_current_size + f1008.fbe_size) <= fbe_struct_size
+        fbe_value.f1008 = f1008.get
+      else
+        fbe_value.f1008 = StructSimple.new
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1008.fbe_size
+
+      if (fbe_current_size + f1009.fbe_size) <= fbe_struct_size
+        fbe_value.f1009 = f1009.get
+      else
+        fbe_value.f1009 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1009.fbe_size
+
+      if (fbe_current_size + f1010.fbe_size) <= fbe_struct_size
+        fbe_value.f1010 = f1010.get
+      else
+        fbe_value.f1010 = StructOptional.new
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1010.fbe_size
+
+      if (fbe_current_size + f1011.fbe_size) <= fbe_struct_size
+        fbe_value.f1011 = f1011.get(nil)
+      else
+        fbe_value.f1011 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1011.fbe_size
+    end
+
+    # Set the struct value (begin phase)
+    def set_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_size = fbe_body
+      fbe_struct_offset = @_buffer.allocate(fbe_struct_size) - @_buffer.offset
+      if (fbe_struct_offset <= 0) || ((@_buffer.offset + fbe_struct_offset + fbe_struct_size) > @_buffer.size)
+        return 0
+      end
+
+      write_uint32(fbe_offset, fbe_struct_offset)
+      write_uint32(fbe_struct_offset, fbe_struct_size)
+      write_uint32(fbe_struct_offset + 4, fbe_type)
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Set the struct value (end phase)
+    def set_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      fbe_begin = set_begin
+      if fbe_begin == 0
+        return
+      end
+
+      set_fields(fbe_value)
+      set_end(fbe_begin)
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      parent.set_fields(fbe_value)
+      f1000.set(fbe_value.f1000)
+      f1001.set(fbe_value.f1001)
+      f1002.set(fbe_value.f1002)
+      f1003.set(fbe_value.f1003)
+      f1004.set(fbe_value.f1004)
+      f1005.set(fbe_value.f1005)
+      f1006.set(fbe_value.f1006)
+      f1007.set(fbe_value.f1007)
+      f1008.set(fbe_value.f1008)
+      f1009.set(fbe_value.f1009)
+      f1010.set(fbe_value.f1010)
+      f1011.set(fbe_value.f1011)
+    end
+  end
+
+  # Fast Binary Encoding StructNested model class
+  class StructNestedModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FieldModelStructNested(self.buffer, 4)
+    end
+
+    def model
+      @_model
+    end
+
+    # Get the model size
+    def fbe_size
+      @_model.fbe_size + @_model.fbe_extra
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FieldModelStructNested::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        return false
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        return false
+      end
+
+      @_model.verify
+    end
+
+    # Create a new model (begin phase)
+    def create_begin
+      buffer.allocate(4 + @_model.fbe_size)
+    end
+
+    # Create a new model (end phase)
+    def create_end(fbe_begin)
+      fbe_end = buffer.size
+      fbe_full_size = fbe_end - fbe_begin
+      write_uint32(@_model.fbe_offset - 4, fbe_full_size)
+      fbe_full_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_begin = create_begin
+      @_model.set(value)
+      create_end(fbe_begin)
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructNested.new)
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        [StructNested.new, 0]
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        [StructNested.new, 0]
+      end
+
+      @_model.get(value)
+      [value, fbe_full_size]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalModelStructNested < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_parent = FinalModelStructOptional(self.buffer, 0)
+      @_f1000 = FinalModelEnumSimple(self.buffer, 0)
+      @_f1001 = FBE::FinalModelOptional(FinalModelEnumSimple(self.buffer, 0), self.buffer, 0)
+      @_f1002 = FinalModelEnumTyped(self.buffer, 0)
+      @_f1003 = FBE::FinalModelOptional(FinalModelEnumTyped(self.buffer, 0), self.buffer, 0)
+      @_f1004 = FinalModelFlagsSimple(self.buffer, 0)
+      @_f1005 = FBE::FinalModelOptional(FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0)
+      @_f1006 = FinalModelFlagsTyped(self.buffer, 0)
+      @_f1007 = FBE::FinalModelOptional(FinalModelFlagsTyped(self.buffer, 0), self.buffer, 0)
+      @_f1008 = FinalModelStructSimple(self.buffer, 0)
+      @_f1009 = FBE::FinalModelOptional(FinalModelStructSimple(self.buffer, 0), self.buffer, 0)
+      @_f1010 = FinalModelStructOptional(self.buffer, 0)
+      @_f1011 = FBE::FinalModelOptional(FinalModelStructOptional(self.buffer, 0), self.buffer, 0)
+    end
+
+    def parent
+      @_parent
+    end
+
+    def f1000
+      @_f1000
+    end
+
+    def f1001
+      @_f1001
+    end
+
+    def f1002
+      @_f1002
+    end
+
+    def f1003
+      @_f1003
+    end
+
+    def f1004
+      @_f1004
+    end
+
+    def f1005
+      @_f1005
+    end
+
+    def f1006
+      @_f1006
+    end
+
+    def f1007
+      @_f1007
+    end
+
+    def f1008
+      @_f1008
+    end
+
+    def f1009
+      @_f1009
+    end
+
+    def f1010
+      @_f1010
+    end
+
+    def f1011
+      @_f1011
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(fbe_value)
+      0
+        + parent.fbe_allocation_size(fbe_value)
+        + f1000.fbe_allocation_size(fbe_value.f1000)
+        + f1001.fbe_allocation_size(fbe_value.f1001)
+        + f1002.fbe_allocation_size(fbe_value.f1002)
+        + f1003.fbe_allocation_size(fbe_value.f1003)
+        + f1004.fbe_allocation_size(fbe_value.f1004)
+        + f1005.fbe_allocation_size(fbe_value.f1005)
+        + f1006.fbe_allocation_size(fbe_value.f1006)
+        + f1007.fbe_allocation_size(fbe_value.f1007)
+        + f1008.fbe_allocation_size(fbe_value.f1008)
+        + f1009.fbe_allocation_size(fbe_value.f1009)
+        + f1010.fbe_allocation_size(fbe_value.f1010)
+        + f1011.fbe_allocation_size(fbe_value.f1011)
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 112
+
+    # Check if the struct value is valid
+    def verify
+      @_buffer.shift(fbe_offset)
+      fbe_result = verify_fields
+      @_buffer.unshift(fbe_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields
+      fbe_current_offset = 0
+
+      parent.fbe_offset = fbe_current_offset
+      fbe_field_size = parent.verify_fields
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f1000.fbe_offset = fbe_current_offset
+      fbe_field_size = f1000.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f1001.fbe_offset = fbe_current_offset
+      fbe_field_size = f1001.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f1002.fbe_offset = fbe_current_offset
+      fbe_field_size = f1002.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f1003.fbe_offset = fbe_current_offset
+      fbe_field_size = f1003.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f1004.fbe_offset = fbe_current_offset
+      fbe_field_size = f1004.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f1005.fbe_offset = fbe_current_offset
+      fbe_field_size = f1005.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f1006.fbe_offset = fbe_current_offset
+      fbe_field_size = f1006.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f1007.fbe_offset = fbe_current_offset
+      fbe_field_size = f1007.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f1008.fbe_offset = fbe_current_offset
+      fbe_field_size = f1008.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f1009.fbe_offset = fbe_current_offset
+      fbe_field_size = f1009.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f1010.fbe_offset = fbe_current_offset
+      fbe_field_size = f1010.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f1011.fbe_offset = fbe_current_offset
+      fbe_field_size = f1011.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_offset
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructNested.new)
+      @_buffer.shift(fbe_offset)
+      fbe_size = get_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      [fbe_value, fbe_size]
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      parent.fbe_offset = fbe_current_offset
+      fbe_result = parent.get_fields(fbe_value)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result
+      fbe_current_size += fbe_result
+
+      f1000.fbe_offset = fbe_current_offset
+      fbe_result = f1000.get
+      fbe_value.f1000 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f1001.fbe_offset = fbe_current_offset
+      fbe_result = f1001.get
+      fbe_value.f1001 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f1002.fbe_offset = fbe_current_offset
+      fbe_result = f1002.get
+      fbe_value.f1002 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f1003.fbe_offset = fbe_current_offset
+      fbe_result = f1003.get
+      fbe_value.f1003 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f1004.fbe_offset = fbe_current_offset
+      fbe_result = f1004.get
+      fbe_value.f1004 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f1005.fbe_offset = fbe_current_offset
+      fbe_result = f1005.get
+      fbe_value.f1005 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f1006.fbe_offset = fbe_current_offset
+      fbe_result = f1006.get
+      fbe_value.f1006 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f1007.fbe_offset = fbe_current_offset
+      fbe_result = f1007.get
+      fbe_value.f1007 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f1008.fbe_offset = fbe_current_offset
+      fbe_result = f1008.get
+      fbe_value.f1008 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f1009.fbe_offset = fbe_current_offset
+      fbe_result = f1009.get
+      fbe_value.f1009 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f1010.fbe_offset = fbe_current_offset
+      fbe_result = f1010.get
+      fbe_value.f1010 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f1011.fbe_offset = fbe_current_offset
+      fbe_result = f1011.get
+      fbe_value.f1011 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      @_buffer.shift(fbe_offset)
+      fbe_size = set_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      fbe_size
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      parent.fbe_offset = fbe_current_offset
+      fbe_field_size = parent.set_fields(fbe_value)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f1000.fbe_offset = fbe_current_offset
+      fbe_field_size = f1000.set(fbe_value.f1000)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f1001.fbe_offset = fbe_current_offset
+      fbe_field_size = f1001.set(fbe_value.f1001)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f1002.fbe_offset = fbe_current_offset
+      fbe_field_size = f1002.set(fbe_value.f1002)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f1003.fbe_offset = fbe_current_offset
+      fbe_field_size = f1003.set(fbe_value.f1003)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f1004.fbe_offset = fbe_current_offset
+      fbe_field_size = f1004.set(fbe_value.f1004)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f1005.fbe_offset = fbe_current_offset
+      fbe_field_size = f1005.set(fbe_value.f1005)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f1006.fbe_offset = fbe_current_offset
+      fbe_field_size = f1006.set(fbe_value.f1006)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f1007.fbe_offset = fbe_current_offset
+      fbe_field_size = f1007.set(fbe_value.f1007)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f1008.fbe_offset = fbe_current_offset
+      fbe_field_size = f1008.set(fbe_value.f1008)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f1009.fbe_offset = fbe_current_offset
+      fbe_field_size = f1009.set(fbe_value.f1009)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f1010.fbe_offset = fbe_current_offset
+      fbe_field_size = f1010.set(fbe_value.f1010)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f1011.fbe_offset = fbe_current_offset
+      fbe_field_size = f1011.set(fbe_value.f1011)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+  end
+
+  # Fast Binary Encoding StructNested final model class
+  class StructNestedFinalModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FinalModelStructNested(self.buffer, 8)
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FinalModelStructNested::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        return false
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) or (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      (8 + @_model.verify) == fbe_struct_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_initial_size = buffer.size
+
+      fbe_struct_type = fbe_type
+      fbe_struct_size = 8 + @_model.fbe_allocation_size(value)
+      fbe_struct_offset = buffer.allocate(fbe_struct_size) - buffer.offset
+      if (buffer.offset + fbe_struct_offset + fbe_struct_size) > buffer.size
+        return 0
+      end
+
+      fbe_struct_size = 8 + @_model.set(value)
+      buffer.resize(fbe_initial_size + fbe_struct_size)
+
+      write_uint32(@_model.fbe_offset - 8, fbe_struct_size)
+      write_uint32(@_model.fbe_offset - 4, fbe_struct_type)
+
+      fbe_struct_size
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructNested.new)
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        [StructNested.new, 0]
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) || (fbe_struct_type != fbe_type)
+        [StructNested.new, 8]
+      end
+
+      fbe_result = @_model.get(value)
+      [fbe_result[0], (8 + fbe_result[1])]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructBytes
     attr_accessor :f1
     attr_accessor :f2
@@ -2112,7 +9618,539 @@ module Test
     end
   end
 
-  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FieldModelStructBytes < FBE::FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_f1 = FBE::FieldModelBytes(self.buffer, 4 + 4)
+      @_f2 = FBE::FieldModelOptional(FBE::FieldModelBytes(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
+      @_f3 = FBE::FieldModelOptional(FBE::FieldModelBytes(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
+    end
+
+    def f1
+      @_f1
+    end
+
+    def f2
+      @_f2
+    end
+
+    def f3
+      @_f3
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field body size
+    def fbe_body
+      4 + 4
+        + f1.fbe_size
+        + f2.fbe_size
+        + f3.fbe_size
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+
+      fbe_result = fbe_body
+        + f1.fbe_extra
+        + f2.fbe_extra
+        + f3.fbe_extra
+
+      @_buffer.unshift(fbe_struct_offset)
+
+      fbe_result
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 120
+
+    # Check if the struct value is valid
+    def verify(fbe_verify_type = true)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return false
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return false
+      end
+
+      fbe_struct_type = read_uint32(fbe_struct_offset + 4)
+      if fbe_verify_type && (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_result = verify_fields(fbe_struct_size)
+      @_buffer.unshift(fbe_struct_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields(fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + f1.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1.fbe_size
+
+      if (fbe_current_size + f2.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f2.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f2.fbe_size
+
+      if (fbe_current_size + f3.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f3.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f3.fbe_size
+
+      true
+    end
+
+    # Get the struct value (begin phase)
+    def get_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Get the struct value (end phase)
+    def get_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructBytes.new)
+      fbe_begin = get_begin
+      if fbe_begin == 0
+        return fbe_value
+      end
+
+      fbe_struct_size = read_uint32(0)
+      get_fields(fbe_value, fbe_struct_size)
+      get_end(fbe_begin)
+      fbe_value
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value, fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + f1.fbe_size) <= fbe_struct_size
+        fbe_value.f1 = f1.get
+      else
+        fbe_value.f1 = ''
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1.fbe_size
+
+      if (fbe_current_size + f2.fbe_size) <= fbe_struct_size
+        fbe_value.f2 = f2.get
+      else
+        fbe_value.f2 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f2.fbe_size
+
+      if (fbe_current_size + f3.fbe_size) <= fbe_struct_size
+        fbe_value.f3 = f3.get(nil)
+      else
+        fbe_value.f3 = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f3.fbe_size
+    end
+
+    # Set the struct value (begin phase)
+    def set_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_size = fbe_body
+      fbe_struct_offset = @_buffer.allocate(fbe_struct_size) - @_buffer.offset
+      if (fbe_struct_offset <= 0) || ((@_buffer.offset + fbe_struct_offset + fbe_struct_size) > @_buffer.size)
+        return 0
+      end
+
+      write_uint32(fbe_offset, fbe_struct_offset)
+      write_uint32(fbe_struct_offset, fbe_struct_size)
+      write_uint32(fbe_struct_offset + 4, fbe_type)
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Set the struct value (end phase)
+    def set_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      fbe_begin = set_begin
+      if fbe_begin == 0
+        return
+      end
+
+      set_fields(fbe_value)
+      set_end(fbe_begin)
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      f1.set(fbe_value.f1)
+      f2.set(fbe_value.f2)
+      f3.set(fbe_value.f3)
+    end
+  end
+
+  # Fast Binary Encoding StructBytes model class
+  class StructBytesModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FieldModelStructBytes(self.buffer, 4)
+    end
+
+    def model
+      @_model
+    end
+
+    # Get the model size
+    def fbe_size
+      @_model.fbe_size + @_model.fbe_extra
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FieldModelStructBytes::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        return false
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        return false
+      end
+
+      @_model.verify
+    end
+
+    # Create a new model (begin phase)
+    def create_begin
+      buffer.allocate(4 + @_model.fbe_size)
+    end
+
+    # Create a new model (end phase)
+    def create_end(fbe_begin)
+      fbe_end = buffer.size
+      fbe_full_size = fbe_end - fbe_begin
+      write_uint32(@_model.fbe_offset - 4, fbe_full_size)
+      fbe_full_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_begin = create_begin
+      @_model.set(value)
+      create_end(fbe_begin)
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructBytes.new)
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        [StructBytes.new, 0]
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        [StructBytes.new, 0]
+      end
+
+      @_model.get(value)
+      [value, fbe_full_size]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalModelStructBytes < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_f1 = FBE::FinalModelBytes(self.buffer, 0)
+      @_f2 = FBE::FinalModelOptional(FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0)
+      @_f3 = FBE::FinalModelOptional(FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0)
+    end
+
+    def f1
+      @_f1
+    end
+
+    def f2
+      @_f2
+    end
+
+    def f3
+      @_f3
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(fbe_value)
+      0
+        + f1.fbe_allocation_size(fbe_value.f1)
+        + f2.fbe_allocation_size(fbe_value.f2)
+        + f3.fbe_allocation_size(fbe_value.f3)
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 120
+
+    # Check if the struct value is valid
+    def verify
+      @_buffer.shift(fbe_offset)
+      fbe_result = verify_fields
+      @_buffer.unshift(fbe_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields
+      fbe_current_offset = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_field_size = f1.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_field_size = f2.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_field_size = f3.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_offset
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructBytes.new)
+      @_buffer.shift(fbe_offset)
+      fbe_size = get_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      [fbe_value, fbe_size]
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_result = f1.get
+      fbe_value.f1 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_result = f2.get
+      fbe_value.f2 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_result = f3.get
+      fbe_value.f3 = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      @_buffer.shift(fbe_offset)
+      fbe_size = set_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      fbe_size
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_field_size = f1.set(fbe_value.f1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_field_size = f2.set(fbe_value.f2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_field_size = f3.set(fbe_value.f3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+  end
+
+  # Fast Binary Encoding StructBytes final model class
+  class StructBytesFinalModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FinalModelStructBytes(self.buffer, 8)
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FinalModelStructBytes::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        return false
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) or (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      (8 + @_model.verify) == fbe_struct_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_initial_size = buffer.size
+
+      fbe_struct_type = fbe_type
+      fbe_struct_size = 8 + @_model.fbe_allocation_size(value)
+      fbe_struct_offset = buffer.allocate(fbe_struct_size) - buffer.offset
+      if (buffer.offset + fbe_struct_offset + fbe_struct_size) > buffer.size
+        return 0
+      end
+
+      fbe_struct_size = 8 + @_model.set(value)
+      buffer.resize(fbe_initial_size + fbe_struct_size)
+
+      write_uint32(@_model.fbe_offset - 8, fbe_struct_size)
+      write_uint32(@_model.fbe_offset - 4, fbe_struct_type)
+
+      fbe_struct_size
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructBytes.new)
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        [StructBytes.new, 0]
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) || (fbe_struct_type != fbe_type)
+        [StructBytes.new, 8]
+      end
+
+      fbe_result = @_model.get(value)
+      [fbe_result[0], (8 + fbe_result[1])]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructArray
     attr_accessor :f1
     attr_accessor :f2
@@ -2344,7 +10382,886 @@ module Test
     end
   end
 
-  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FieldModelStructArray < FBE::FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_f1 = FBE::FieldModelArray(FBE::FieldModelByte(self.buffer, 4 + 4), self.buffer, 4 + 4, 2)
+      @_f2 = FBE::FieldModelArray(FBE::FieldModelOptional(FBE::FieldModelByte(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size, 2)
+      @_f3 = FBE::FieldModelArray(FBE::FieldModelBytes(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size, 2)
+      @_f4 = FBE::FieldModelArray(FBE::FieldModelOptional(FBE::FieldModelBytes(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size, 2)
+      @_f5 = FBE::FieldModelArray(FieldModelEnumSimple(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), self.buffer, @_f4.fbe_offset + @_f4.fbe_size, 2)
+      @_f6 = FBE::FieldModelArray(FBE::FieldModelOptional(FieldModelEnumSimple(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size, 2)
+      @_f7 = FBE::FieldModelArray(FieldModelFlagsSimple(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), self.buffer, @_f6.fbe_offset + @_f6.fbe_size, 2)
+      @_f8 = FBE::FieldModelArray(FBE::FieldModelOptional(FieldModelFlagsSimple(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size, 2)
+      @_f9 = FBE::FieldModelArray(FieldModelStructSimple(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), self.buffer, @_f8.fbe_offset + @_f8.fbe_size, 2)
+      @_f10 = FBE::FieldModelArray(FBE::FieldModelOptional(FieldModelStructSimple(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size, 2)
+    end
+
+    def f1
+      @_f1
+    end
+
+    def f2
+      @_f2
+    end
+
+    def f3
+      @_f3
+    end
+
+    def f4
+      @_f4
+    end
+
+    def f5
+      @_f5
+    end
+
+    def f6
+      @_f6
+    end
+
+    def f7
+      @_f7
+    end
+
+    def f8
+      @_f8
+    end
+
+    def f9
+      @_f9
+    end
+
+    def f10
+      @_f10
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field body size
+    def fbe_body
+      4 + 4
+        + f1.fbe_size
+        + f2.fbe_size
+        + f3.fbe_size
+        + f4.fbe_size
+        + f5.fbe_size
+        + f6.fbe_size
+        + f7.fbe_size
+        + f8.fbe_size
+        + f9.fbe_size
+        + f10.fbe_size
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+
+      fbe_result = fbe_body
+        + f1.fbe_extra
+        + f2.fbe_extra
+        + f3.fbe_extra
+        + f4.fbe_extra
+        + f5.fbe_extra
+        + f6.fbe_extra
+        + f7.fbe_extra
+        + f8.fbe_extra
+        + f9.fbe_extra
+        + f10.fbe_extra
+
+      @_buffer.unshift(fbe_struct_offset)
+
+      fbe_result
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 125
+
+    # Check if the struct value is valid
+    def verify(fbe_verify_type = true)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return false
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return false
+      end
+
+      fbe_struct_type = read_uint32(fbe_struct_offset + 4)
+      if fbe_verify_type && (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_result = verify_fields(fbe_struct_size)
+      @_buffer.unshift(fbe_struct_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields(fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + f1.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1.fbe_size
+
+      if (fbe_current_size + f2.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f2.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f2.fbe_size
+
+      if (fbe_current_size + f3.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f3.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f3.fbe_size
+
+      if (fbe_current_size + f4.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f4.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f4.fbe_size
+
+      if (fbe_current_size + f5.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f5.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f5.fbe_size
+
+      if (fbe_current_size + f6.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f6.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f6.fbe_size
+
+      if (fbe_current_size + f7.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f7.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f7.fbe_size
+
+      if (fbe_current_size + f8.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f8.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f8.fbe_size
+
+      if (fbe_current_size + f9.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f9.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f9.fbe_size
+
+      if (fbe_current_size + f10.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f10.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f10.fbe_size
+
+      true
+    end
+
+    # Get the struct value (begin phase)
+    def get_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Get the struct value (end phase)
+    def get_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructArray.new)
+      fbe_begin = get_begin
+      if fbe_begin == 0
+        return fbe_value
+      end
+
+      fbe_struct_size = read_uint32(0)
+      get_fields(fbe_value, fbe_struct_size)
+      get_end(fbe_begin)
+      fbe_value
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value, fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + f1.fbe_size) <= fbe_struct_size
+        f1.get(fbe_value.f1)
+      else
+        fbe_value.f1.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1.fbe_size
+
+      if (fbe_current_size + f2.fbe_size) <= fbe_struct_size
+        f2.get(fbe_value.f2)
+      else
+        fbe_value.f2.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f2.fbe_size
+
+      if (fbe_current_size + f3.fbe_size) <= fbe_struct_size
+        f3.get(fbe_value.f3)
+      else
+        fbe_value.f3.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f3.fbe_size
+
+      if (fbe_current_size + f4.fbe_size) <= fbe_struct_size
+        f4.get(fbe_value.f4)
+      else
+        fbe_value.f4.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f4.fbe_size
+
+      if (fbe_current_size + f5.fbe_size) <= fbe_struct_size
+        f5.get(fbe_value.f5)
+      else
+        fbe_value.f5.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f5.fbe_size
+
+      if (fbe_current_size + f6.fbe_size) <= fbe_struct_size
+        f6.get(fbe_value.f6)
+      else
+        fbe_value.f6.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f6.fbe_size
+
+      if (fbe_current_size + f7.fbe_size) <= fbe_struct_size
+        f7.get(fbe_value.f7)
+      else
+        fbe_value.f7.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f7.fbe_size
+
+      if (fbe_current_size + f8.fbe_size) <= fbe_struct_size
+        f8.get(fbe_value.f8)
+      else
+        fbe_value.f8.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f8.fbe_size
+
+      if (fbe_current_size + f9.fbe_size) <= fbe_struct_size
+        f9.get(fbe_value.f9)
+      else
+        fbe_value.f9.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f9.fbe_size
+
+      if (fbe_current_size + f10.fbe_size) <= fbe_struct_size
+        f10.get(fbe_value.f10)
+      else
+        fbe_value.f10.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f10.fbe_size
+    end
+
+    # Set the struct value (begin phase)
+    def set_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_size = fbe_body
+      fbe_struct_offset = @_buffer.allocate(fbe_struct_size) - @_buffer.offset
+      if (fbe_struct_offset <= 0) || ((@_buffer.offset + fbe_struct_offset + fbe_struct_size) > @_buffer.size)
+        return 0
+      end
+
+      write_uint32(fbe_offset, fbe_struct_offset)
+      write_uint32(fbe_struct_offset, fbe_struct_size)
+      write_uint32(fbe_struct_offset + 4, fbe_type)
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Set the struct value (end phase)
+    def set_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      fbe_begin = set_begin
+      if fbe_begin == 0
+        return
+      end
+
+      set_fields(fbe_value)
+      set_end(fbe_begin)
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      f1.set(fbe_value.f1)
+      f2.set(fbe_value.f2)
+      f3.set(fbe_value.f3)
+      f4.set(fbe_value.f4)
+      f5.set(fbe_value.f5)
+      f6.set(fbe_value.f6)
+      f7.set(fbe_value.f7)
+      f8.set(fbe_value.f8)
+      f9.set(fbe_value.f9)
+      f10.set(fbe_value.f10)
+    end
+  end
+
+  # Fast Binary Encoding StructArray model class
+  class StructArrayModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FieldModelStructArray(self.buffer, 4)
+    end
+
+    def model
+      @_model
+    end
+
+    # Get the model size
+    def fbe_size
+      @_model.fbe_size + @_model.fbe_extra
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FieldModelStructArray::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        return false
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        return false
+      end
+
+      @_model.verify
+    end
+
+    # Create a new model (begin phase)
+    def create_begin
+      buffer.allocate(4 + @_model.fbe_size)
+    end
+
+    # Create a new model (end phase)
+    def create_end(fbe_begin)
+      fbe_end = buffer.size
+      fbe_full_size = fbe_end - fbe_begin
+      write_uint32(@_model.fbe_offset - 4, fbe_full_size)
+      fbe_full_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_begin = create_begin
+      @_model.set(value)
+      create_end(fbe_begin)
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructArray.new)
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        [StructArray.new, 0]
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        [StructArray.new, 0]
+      end
+
+      @_model.get(value)
+      [value, fbe_full_size]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalModelStructArray < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_f1 = FBE::FinalModelArray(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0, 2)
+      @_f2 = FBE::FinalModelArray(FBE::FinalModelOptional(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0), self.buffer, 0, 2)
+      @_f3 = FBE::FinalModelArray(FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0, 2)
+      @_f4 = FBE::FinalModelArray(FBE::FinalModelOptional(FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0), self.buffer, 0, 2)
+      @_f5 = FBE::FinalModelArray(FinalModelEnumSimple(self.buffer, 0), self.buffer, 0, 2)
+      @_f6 = FBE::FinalModelArray(FBE::FinalModelOptional(FinalModelEnumSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0, 2)
+      @_f7 = FBE::FinalModelArray(FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0, 2)
+      @_f8 = FBE::FinalModelArray(FBE::FinalModelOptional(FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0, 2)
+      @_f9 = FBE::FinalModelArray(FinalModelStructSimple(self.buffer, 0), self.buffer, 0, 2)
+      @_f10 = FBE::FinalModelArray(FBE::FinalModelOptional(FinalModelStructSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0, 2)
+    end
+
+    def f1
+      @_f1
+    end
+
+    def f2
+      @_f2
+    end
+
+    def f3
+      @_f3
+    end
+
+    def f4
+      @_f4
+    end
+
+    def f5
+      @_f5
+    end
+
+    def f6
+      @_f6
+    end
+
+    def f7
+      @_f7
+    end
+
+    def f8
+      @_f8
+    end
+
+    def f9
+      @_f9
+    end
+
+    def f10
+      @_f10
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(fbe_value)
+      0
+        + f1.fbe_allocation_size(fbe_value.f1)
+        + f2.fbe_allocation_size(fbe_value.f2)
+        + f3.fbe_allocation_size(fbe_value.f3)
+        + f4.fbe_allocation_size(fbe_value.f4)
+        + f5.fbe_allocation_size(fbe_value.f5)
+        + f6.fbe_allocation_size(fbe_value.f6)
+        + f7.fbe_allocation_size(fbe_value.f7)
+        + f8.fbe_allocation_size(fbe_value.f8)
+        + f9.fbe_allocation_size(fbe_value.f9)
+        + f10.fbe_allocation_size(fbe_value.f10)
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 125
+
+    # Check if the struct value is valid
+    def verify
+      @_buffer.shift(fbe_offset)
+      fbe_result = verify_fields
+      @_buffer.unshift(fbe_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields
+      fbe_current_offset = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_field_size = f1.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_field_size = f2.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_field_size = f3.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_field_size = f4.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f5.fbe_offset = fbe_current_offset
+      fbe_field_size = f5.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f6.fbe_offset = fbe_current_offset
+      fbe_field_size = f6.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f7.fbe_offset = fbe_current_offset
+      fbe_field_size = f7.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f8.fbe_offset = fbe_current_offset
+      fbe_field_size = f8.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f9.fbe_offset = fbe_current_offset
+      fbe_field_size = f9.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f10.fbe_offset = fbe_current_offset
+      fbe_field_size = f10.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_offset
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructArray.new)
+      @_buffer.shift(fbe_offset)
+      fbe_size = get_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      [fbe_value, fbe_size]
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_result = f1.get(fbe_value.f1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_result = f2.get(fbe_value.f2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_result = f3.get(fbe_value.f3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_result = f4.get(fbe_value.f4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f5.fbe_offset = fbe_current_offset
+      fbe_result = f5.get(fbe_value.f5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f6.fbe_offset = fbe_current_offset
+      fbe_result = f6.get(fbe_value.f6)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f7.fbe_offset = fbe_current_offset
+      fbe_result = f7.get(fbe_value.f7)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f8.fbe_offset = fbe_current_offset
+      fbe_result = f8.get(fbe_value.f8)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f9.fbe_offset = fbe_current_offset
+      fbe_result = f9.get(fbe_value.f9)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f10.fbe_offset = fbe_current_offset
+      fbe_result = f10.get(fbe_value.f10)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      @_buffer.shift(fbe_offset)
+      fbe_size = set_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      fbe_size
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_field_size = f1.set(fbe_value.f1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_field_size = f2.set(fbe_value.f2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_field_size = f3.set(fbe_value.f3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_field_size = f4.set(fbe_value.f4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f5.fbe_offset = fbe_current_offset
+      fbe_field_size = f5.set(fbe_value.f5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f6.fbe_offset = fbe_current_offset
+      fbe_field_size = f6.set(fbe_value.f6)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f7.fbe_offset = fbe_current_offset
+      fbe_field_size = f7.set(fbe_value.f7)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f8.fbe_offset = fbe_current_offset
+      fbe_field_size = f8.set(fbe_value.f8)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f9.fbe_offset = fbe_current_offset
+      fbe_field_size = f9.set(fbe_value.f9)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f10.fbe_offset = fbe_current_offset
+      fbe_field_size = f10.set(fbe_value.f10)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+  end
+
+  # Fast Binary Encoding StructArray final model class
+  class StructArrayFinalModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FinalModelStructArray(self.buffer, 8)
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FinalModelStructArray::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        return false
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) or (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      (8 + @_model.verify) == fbe_struct_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_initial_size = buffer.size
+
+      fbe_struct_type = fbe_type
+      fbe_struct_size = 8 + @_model.fbe_allocation_size(value)
+      fbe_struct_offset = buffer.allocate(fbe_struct_size) - buffer.offset
+      if (buffer.offset + fbe_struct_offset + fbe_struct_size) > buffer.size
+        return 0
+      end
+
+      fbe_struct_size = 8 + @_model.set(value)
+      buffer.resize(fbe_initial_size + fbe_struct_size)
+
+      write_uint32(@_model.fbe_offset - 8, fbe_struct_size)
+      write_uint32(@_model.fbe_offset - 4, fbe_struct_type)
+
+      fbe_struct_size
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructArray.new)
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        [StructArray.new, 0]
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) || (fbe_struct_type != fbe_type)
+        [StructArray.new, 8]
+      end
+
+      fbe_result = @_model.get(value)
+      [fbe_result[0], (8 + fbe_result[1])]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructVector
     attr_accessor :f1
     attr_accessor :f2
@@ -2576,7 +11493,886 @@ module Test
     end
   end
 
-  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FieldModelStructVector < FBE::FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_f1 = FBE::FieldModelVector(FBE::FieldModelByte(self.buffer, 4 + 4), self.buffer, 4 + 4)
+      @_f2 = FBE::FieldModelVector(FBE::FieldModelOptional(FBE::FieldModelByte(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
+      @_f3 = FBE::FieldModelVector(FBE::FieldModelBytes(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
+      @_f4 = FBE::FieldModelVector(FBE::FieldModelOptional(FBE::FieldModelBytes(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size)
+      @_f5 = FBE::FieldModelVector(FieldModelEnumSimple(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), self.buffer, @_f4.fbe_offset + @_f4.fbe_size)
+      @_f6 = FBE::FieldModelVector(FBE::FieldModelOptional(FieldModelEnumSimple(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size)
+      @_f7 = FBE::FieldModelVector(FieldModelFlagsSimple(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), self.buffer, @_f6.fbe_offset + @_f6.fbe_size)
+      @_f8 = FBE::FieldModelVector(FBE::FieldModelOptional(FieldModelFlagsSimple(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size)
+      @_f9 = FBE::FieldModelVector(FieldModelStructSimple(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), self.buffer, @_f8.fbe_offset + @_f8.fbe_size)
+      @_f10 = FBE::FieldModelVector(FBE::FieldModelOptional(FieldModelStructSimple(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size)
+    end
+
+    def f1
+      @_f1
+    end
+
+    def f2
+      @_f2
+    end
+
+    def f3
+      @_f3
+    end
+
+    def f4
+      @_f4
+    end
+
+    def f5
+      @_f5
+    end
+
+    def f6
+      @_f6
+    end
+
+    def f7
+      @_f7
+    end
+
+    def f8
+      @_f8
+    end
+
+    def f9
+      @_f9
+    end
+
+    def f10
+      @_f10
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field body size
+    def fbe_body
+      4 + 4
+        + f1.fbe_size
+        + f2.fbe_size
+        + f3.fbe_size
+        + f4.fbe_size
+        + f5.fbe_size
+        + f6.fbe_size
+        + f7.fbe_size
+        + f8.fbe_size
+        + f9.fbe_size
+        + f10.fbe_size
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+
+      fbe_result = fbe_body
+        + f1.fbe_extra
+        + f2.fbe_extra
+        + f3.fbe_extra
+        + f4.fbe_extra
+        + f5.fbe_extra
+        + f6.fbe_extra
+        + f7.fbe_extra
+        + f8.fbe_extra
+        + f9.fbe_extra
+        + f10.fbe_extra
+
+      @_buffer.unshift(fbe_struct_offset)
+
+      fbe_result
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 130
+
+    # Check if the struct value is valid
+    def verify(fbe_verify_type = true)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return false
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return false
+      end
+
+      fbe_struct_type = read_uint32(fbe_struct_offset + 4)
+      if fbe_verify_type && (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_result = verify_fields(fbe_struct_size)
+      @_buffer.unshift(fbe_struct_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields(fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + f1.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1.fbe_size
+
+      if (fbe_current_size + f2.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f2.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f2.fbe_size
+
+      if (fbe_current_size + f3.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f3.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f3.fbe_size
+
+      if (fbe_current_size + f4.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f4.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f4.fbe_size
+
+      if (fbe_current_size + f5.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f5.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f5.fbe_size
+
+      if (fbe_current_size + f6.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f6.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f6.fbe_size
+
+      if (fbe_current_size + f7.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f7.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f7.fbe_size
+
+      if (fbe_current_size + f8.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f8.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f8.fbe_size
+
+      if (fbe_current_size + f9.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f9.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f9.fbe_size
+
+      if (fbe_current_size + f10.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f10.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f10.fbe_size
+
+      true
+    end
+
+    # Get the struct value (begin phase)
+    def get_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Get the struct value (end phase)
+    def get_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructVector.new)
+      fbe_begin = get_begin
+      if fbe_begin == 0
+        return fbe_value
+      end
+
+      fbe_struct_size = read_uint32(0)
+      get_fields(fbe_value, fbe_struct_size)
+      get_end(fbe_begin)
+      fbe_value
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value, fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + f1.fbe_size) <= fbe_struct_size
+        f1.get(fbe_value.f1)
+      else
+        fbe_value.f1.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1.fbe_size
+
+      if (fbe_current_size + f2.fbe_size) <= fbe_struct_size
+        f2.get(fbe_value.f2)
+      else
+        fbe_value.f2.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f2.fbe_size
+
+      if (fbe_current_size + f3.fbe_size) <= fbe_struct_size
+        f3.get(fbe_value.f3)
+      else
+        fbe_value.f3.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f3.fbe_size
+
+      if (fbe_current_size + f4.fbe_size) <= fbe_struct_size
+        f4.get(fbe_value.f4)
+      else
+        fbe_value.f4.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f4.fbe_size
+
+      if (fbe_current_size + f5.fbe_size) <= fbe_struct_size
+        f5.get(fbe_value.f5)
+      else
+        fbe_value.f5.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f5.fbe_size
+
+      if (fbe_current_size + f6.fbe_size) <= fbe_struct_size
+        f6.get(fbe_value.f6)
+      else
+        fbe_value.f6.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f6.fbe_size
+
+      if (fbe_current_size + f7.fbe_size) <= fbe_struct_size
+        f7.get(fbe_value.f7)
+      else
+        fbe_value.f7.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f7.fbe_size
+
+      if (fbe_current_size + f8.fbe_size) <= fbe_struct_size
+        f8.get(fbe_value.f8)
+      else
+        fbe_value.f8.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f8.fbe_size
+
+      if (fbe_current_size + f9.fbe_size) <= fbe_struct_size
+        f9.get(fbe_value.f9)
+      else
+        fbe_value.f9.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f9.fbe_size
+
+      if (fbe_current_size + f10.fbe_size) <= fbe_struct_size
+        f10.get(fbe_value.f10)
+      else
+        fbe_value.f10.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f10.fbe_size
+    end
+
+    # Set the struct value (begin phase)
+    def set_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_size = fbe_body
+      fbe_struct_offset = @_buffer.allocate(fbe_struct_size) - @_buffer.offset
+      if (fbe_struct_offset <= 0) || ((@_buffer.offset + fbe_struct_offset + fbe_struct_size) > @_buffer.size)
+        return 0
+      end
+
+      write_uint32(fbe_offset, fbe_struct_offset)
+      write_uint32(fbe_struct_offset, fbe_struct_size)
+      write_uint32(fbe_struct_offset + 4, fbe_type)
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Set the struct value (end phase)
+    def set_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      fbe_begin = set_begin
+      if fbe_begin == 0
+        return
+      end
+
+      set_fields(fbe_value)
+      set_end(fbe_begin)
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      f1.set(fbe_value.f1)
+      f2.set(fbe_value.f2)
+      f3.set(fbe_value.f3)
+      f4.set(fbe_value.f4)
+      f5.set(fbe_value.f5)
+      f6.set(fbe_value.f6)
+      f7.set(fbe_value.f7)
+      f8.set(fbe_value.f8)
+      f9.set(fbe_value.f9)
+      f10.set(fbe_value.f10)
+    end
+  end
+
+  # Fast Binary Encoding StructVector model class
+  class StructVectorModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FieldModelStructVector(self.buffer, 4)
+    end
+
+    def model
+      @_model
+    end
+
+    # Get the model size
+    def fbe_size
+      @_model.fbe_size + @_model.fbe_extra
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FieldModelStructVector::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        return false
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        return false
+      end
+
+      @_model.verify
+    end
+
+    # Create a new model (begin phase)
+    def create_begin
+      buffer.allocate(4 + @_model.fbe_size)
+    end
+
+    # Create a new model (end phase)
+    def create_end(fbe_begin)
+      fbe_end = buffer.size
+      fbe_full_size = fbe_end - fbe_begin
+      write_uint32(@_model.fbe_offset - 4, fbe_full_size)
+      fbe_full_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_begin = create_begin
+      @_model.set(value)
+      create_end(fbe_begin)
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructVector.new)
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        [StructVector.new, 0]
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        [StructVector.new, 0]
+      end
+
+      @_model.get(value)
+      [value, fbe_full_size]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalModelStructVector < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_f1 = FBE::FinalModelVector(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0)
+      @_f2 = FBE::FinalModelVector(FBE::FinalModelOptional(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f3 = FBE::FinalModelVector(FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0)
+      @_f4 = FBE::FinalModelVector(FBE::FinalModelOptional(FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f5 = FBE::FinalModelVector(FinalModelEnumSimple(self.buffer, 0), self.buffer, 0)
+      @_f6 = FBE::FinalModelVector(FBE::FinalModelOptional(FinalModelEnumSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f7 = FBE::FinalModelVector(FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0)
+      @_f8 = FBE::FinalModelVector(FBE::FinalModelOptional(FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f9 = FBE::FinalModelVector(FinalModelStructSimple(self.buffer, 0), self.buffer, 0)
+      @_f10 = FBE::FinalModelVector(FBE::FinalModelOptional(FinalModelStructSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+    end
+
+    def f1
+      @_f1
+    end
+
+    def f2
+      @_f2
+    end
+
+    def f3
+      @_f3
+    end
+
+    def f4
+      @_f4
+    end
+
+    def f5
+      @_f5
+    end
+
+    def f6
+      @_f6
+    end
+
+    def f7
+      @_f7
+    end
+
+    def f8
+      @_f8
+    end
+
+    def f9
+      @_f9
+    end
+
+    def f10
+      @_f10
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(fbe_value)
+      0
+        + f1.fbe_allocation_size(fbe_value.f1)
+        + f2.fbe_allocation_size(fbe_value.f2)
+        + f3.fbe_allocation_size(fbe_value.f3)
+        + f4.fbe_allocation_size(fbe_value.f4)
+        + f5.fbe_allocation_size(fbe_value.f5)
+        + f6.fbe_allocation_size(fbe_value.f6)
+        + f7.fbe_allocation_size(fbe_value.f7)
+        + f8.fbe_allocation_size(fbe_value.f8)
+        + f9.fbe_allocation_size(fbe_value.f9)
+        + f10.fbe_allocation_size(fbe_value.f10)
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 130
+
+    # Check if the struct value is valid
+    def verify
+      @_buffer.shift(fbe_offset)
+      fbe_result = verify_fields
+      @_buffer.unshift(fbe_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields
+      fbe_current_offset = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_field_size = f1.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_field_size = f2.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_field_size = f3.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_field_size = f4.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f5.fbe_offset = fbe_current_offset
+      fbe_field_size = f5.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f6.fbe_offset = fbe_current_offset
+      fbe_field_size = f6.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f7.fbe_offset = fbe_current_offset
+      fbe_field_size = f7.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f8.fbe_offset = fbe_current_offset
+      fbe_field_size = f8.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f9.fbe_offset = fbe_current_offset
+      fbe_field_size = f9.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f10.fbe_offset = fbe_current_offset
+      fbe_field_size = f10.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_offset
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructVector.new)
+      @_buffer.shift(fbe_offset)
+      fbe_size = get_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      [fbe_value, fbe_size]
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_result = f1.get(fbe_value.f1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_result = f2.get(fbe_value.f2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_result = f3.get(fbe_value.f3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_result = f4.get(fbe_value.f4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f5.fbe_offset = fbe_current_offset
+      fbe_result = f5.get(fbe_value.f5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f6.fbe_offset = fbe_current_offset
+      fbe_result = f6.get(fbe_value.f6)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f7.fbe_offset = fbe_current_offset
+      fbe_result = f7.get(fbe_value.f7)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f8.fbe_offset = fbe_current_offset
+      fbe_result = f8.get(fbe_value.f8)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f9.fbe_offset = fbe_current_offset
+      fbe_result = f9.get(fbe_value.f9)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f10.fbe_offset = fbe_current_offset
+      fbe_result = f10.get(fbe_value.f10)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      @_buffer.shift(fbe_offset)
+      fbe_size = set_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      fbe_size
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_field_size = f1.set(fbe_value.f1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_field_size = f2.set(fbe_value.f2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_field_size = f3.set(fbe_value.f3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_field_size = f4.set(fbe_value.f4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f5.fbe_offset = fbe_current_offset
+      fbe_field_size = f5.set(fbe_value.f5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f6.fbe_offset = fbe_current_offset
+      fbe_field_size = f6.set(fbe_value.f6)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f7.fbe_offset = fbe_current_offset
+      fbe_field_size = f7.set(fbe_value.f7)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f8.fbe_offset = fbe_current_offset
+      fbe_field_size = f8.set(fbe_value.f8)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f9.fbe_offset = fbe_current_offset
+      fbe_field_size = f9.set(fbe_value.f9)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f10.fbe_offset = fbe_current_offset
+      fbe_field_size = f10.set(fbe_value.f10)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+  end
+
+  # Fast Binary Encoding StructVector final model class
+  class StructVectorFinalModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FinalModelStructVector(self.buffer, 8)
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FinalModelStructVector::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        return false
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) or (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      (8 + @_model.verify) == fbe_struct_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_initial_size = buffer.size
+
+      fbe_struct_type = fbe_type
+      fbe_struct_size = 8 + @_model.fbe_allocation_size(value)
+      fbe_struct_offset = buffer.allocate(fbe_struct_size) - buffer.offset
+      if (buffer.offset + fbe_struct_offset + fbe_struct_size) > buffer.size
+        return 0
+      end
+
+      fbe_struct_size = 8 + @_model.set(value)
+      buffer.resize(fbe_initial_size + fbe_struct_size)
+
+      write_uint32(@_model.fbe_offset - 8, fbe_struct_size)
+      write_uint32(@_model.fbe_offset - 4, fbe_struct_type)
+
+      fbe_struct_size
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructVector.new)
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        [StructVector.new, 0]
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) || (fbe_struct_type != fbe_type)
+        [StructVector.new, 8]
+      end
+
+      fbe_result = @_model.get(value)
+      [fbe_result[0], (8 + fbe_result[1])]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructList
     attr_accessor :f1
     attr_accessor :f2
@@ -2808,7 +12604,886 @@ module Test
     end
   end
 
-  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FieldModelStructList < FBE::FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_f1 = FBE::FieldModelVector(FBE::FieldModelByte(self.buffer, 4 + 4), self.buffer, 4 + 4)
+      @_f2 = FBE::FieldModelVector(FBE::FieldModelOptional(FBE::FieldModelByte(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
+      @_f3 = FBE::FieldModelVector(FBE::FieldModelBytes(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
+      @_f4 = FBE::FieldModelVector(FBE::FieldModelOptional(FBE::FieldModelBytes(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size)
+      @_f5 = FBE::FieldModelVector(FieldModelEnumSimple(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), self.buffer, @_f4.fbe_offset + @_f4.fbe_size)
+      @_f6 = FBE::FieldModelVector(FBE::FieldModelOptional(FieldModelEnumSimple(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size)
+      @_f7 = FBE::FieldModelVector(FieldModelFlagsSimple(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), self.buffer, @_f6.fbe_offset + @_f6.fbe_size)
+      @_f8 = FBE::FieldModelVector(FBE::FieldModelOptional(FieldModelFlagsSimple(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size)
+      @_f9 = FBE::FieldModelVector(FieldModelStructSimple(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), self.buffer, @_f8.fbe_offset + @_f8.fbe_size)
+      @_f10 = FBE::FieldModelVector(FBE::FieldModelOptional(FieldModelStructSimple(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size)
+    end
+
+    def f1
+      @_f1
+    end
+
+    def f2
+      @_f2
+    end
+
+    def f3
+      @_f3
+    end
+
+    def f4
+      @_f4
+    end
+
+    def f5
+      @_f5
+    end
+
+    def f6
+      @_f6
+    end
+
+    def f7
+      @_f7
+    end
+
+    def f8
+      @_f8
+    end
+
+    def f9
+      @_f9
+    end
+
+    def f10
+      @_f10
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field body size
+    def fbe_body
+      4 + 4
+        + f1.fbe_size
+        + f2.fbe_size
+        + f3.fbe_size
+        + f4.fbe_size
+        + f5.fbe_size
+        + f6.fbe_size
+        + f7.fbe_size
+        + f8.fbe_size
+        + f9.fbe_size
+        + f10.fbe_size
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+
+      fbe_result = fbe_body
+        + f1.fbe_extra
+        + f2.fbe_extra
+        + f3.fbe_extra
+        + f4.fbe_extra
+        + f5.fbe_extra
+        + f6.fbe_extra
+        + f7.fbe_extra
+        + f8.fbe_extra
+        + f9.fbe_extra
+        + f10.fbe_extra
+
+      @_buffer.unshift(fbe_struct_offset)
+
+      fbe_result
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 131
+
+    # Check if the struct value is valid
+    def verify(fbe_verify_type = true)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return false
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return false
+      end
+
+      fbe_struct_type = read_uint32(fbe_struct_offset + 4)
+      if fbe_verify_type && (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_result = verify_fields(fbe_struct_size)
+      @_buffer.unshift(fbe_struct_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields(fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + f1.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1.fbe_size
+
+      if (fbe_current_size + f2.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f2.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f2.fbe_size
+
+      if (fbe_current_size + f3.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f3.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f3.fbe_size
+
+      if (fbe_current_size + f4.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f4.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f4.fbe_size
+
+      if (fbe_current_size + f5.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f5.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f5.fbe_size
+
+      if (fbe_current_size + f6.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f6.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f6.fbe_size
+
+      if (fbe_current_size + f7.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f7.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f7.fbe_size
+
+      if (fbe_current_size + f8.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f8.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f8.fbe_size
+
+      if (fbe_current_size + f9.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f9.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f9.fbe_size
+
+      if (fbe_current_size + f10.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f10.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f10.fbe_size
+
+      true
+    end
+
+    # Get the struct value (begin phase)
+    def get_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Get the struct value (end phase)
+    def get_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructList.new)
+      fbe_begin = get_begin
+      if fbe_begin == 0
+        return fbe_value
+      end
+
+      fbe_struct_size = read_uint32(0)
+      get_fields(fbe_value, fbe_struct_size)
+      get_end(fbe_begin)
+      fbe_value
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value, fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + f1.fbe_size) <= fbe_struct_size
+        f1.get(fbe_value.f1)
+      else
+        fbe_value.f1.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1.fbe_size
+
+      if (fbe_current_size + f2.fbe_size) <= fbe_struct_size
+        f2.get(fbe_value.f2)
+      else
+        fbe_value.f2.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f2.fbe_size
+
+      if (fbe_current_size + f3.fbe_size) <= fbe_struct_size
+        f3.get(fbe_value.f3)
+      else
+        fbe_value.f3.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f3.fbe_size
+
+      if (fbe_current_size + f4.fbe_size) <= fbe_struct_size
+        f4.get(fbe_value.f4)
+      else
+        fbe_value.f4.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f4.fbe_size
+
+      if (fbe_current_size + f5.fbe_size) <= fbe_struct_size
+        f5.get(fbe_value.f5)
+      else
+        fbe_value.f5.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f5.fbe_size
+
+      if (fbe_current_size + f6.fbe_size) <= fbe_struct_size
+        f6.get(fbe_value.f6)
+      else
+        fbe_value.f6.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f6.fbe_size
+
+      if (fbe_current_size + f7.fbe_size) <= fbe_struct_size
+        f7.get(fbe_value.f7)
+      else
+        fbe_value.f7.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f7.fbe_size
+
+      if (fbe_current_size + f8.fbe_size) <= fbe_struct_size
+        f8.get(fbe_value.f8)
+      else
+        fbe_value.f8.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f8.fbe_size
+
+      if (fbe_current_size + f9.fbe_size) <= fbe_struct_size
+        f9.get(fbe_value.f9)
+      else
+        fbe_value.f9.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f9.fbe_size
+
+      if (fbe_current_size + f10.fbe_size) <= fbe_struct_size
+        f10.get(fbe_value.f10)
+      else
+        fbe_value.f10.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f10.fbe_size
+    end
+
+    # Set the struct value (begin phase)
+    def set_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_size = fbe_body
+      fbe_struct_offset = @_buffer.allocate(fbe_struct_size) - @_buffer.offset
+      if (fbe_struct_offset <= 0) || ((@_buffer.offset + fbe_struct_offset + fbe_struct_size) > @_buffer.size)
+        return 0
+      end
+
+      write_uint32(fbe_offset, fbe_struct_offset)
+      write_uint32(fbe_struct_offset, fbe_struct_size)
+      write_uint32(fbe_struct_offset + 4, fbe_type)
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Set the struct value (end phase)
+    def set_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      fbe_begin = set_begin
+      if fbe_begin == 0
+        return
+      end
+
+      set_fields(fbe_value)
+      set_end(fbe_begin)
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      f1.set(fbe_value.f1)
+      f2.set(fbe_value.f2)
+      f3.set(fbe_value.f3)
+      f4.set(fbe_value.f4)
+      f5.set(fbe_value.f5)
+      f6.set(fbe_value.f6)
+      f7.set(fbe_value.f7)
+      f8.set(fbe_value.f8)
+      f9.set(fbe_value.f9)
+      f10.set(fbe_value.f10)
+    end
+  end
+
+  # Fast Binary Encoding StructList model class
+  class StructListModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FieldModelStructList(self.buffer, 4)
+    end
+
+    def model
+      @_model
+    end
+
+    # Get the model size
+    def fbe_size
+      @_model.fbe_size + @_model.fbe_extra
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FieldModelStructList::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        return false
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        return false
+      end
+
+      @_model.verify
+    end
+
+    # Create a new model (begin phase)
+    def create_begin
+      buffer.allocate(4 + @_model.fbe_size)
+    end
+
+    # Create a new model (end phase)
+    def create_end(fbe_begin)
+      fbe_end = buffer.size
+      fbe_full_size = fbe_end - fbe_begin
+      write_uint32(@_model.fbe_offset - 4, fbe_full_size)
+      fbe_full_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_begin = create_begin
+      @_model.set(value)
+      create_end(fbe_begin)
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructList.new)
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        [StructList.new, 0]
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        [StructList.new, 0]
+      end
+
+      @_model.get(value)
+      [value, fbe_full_size]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalModelStructList < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_f1 = FBE::FinalModelVector(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0)
+      @_f2 = FBE::FinalModelVector(FBE::FinalModelOptional(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f3 = FBE::FinalModelVector(FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0)
+      @_f4 = FBE::FinalModelVector(FBE::FinalModelOptional(FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f5 = FBE::FinalModelVector(FinalModelEnumSimple(self.buffer, 0), self.buffer, 0)
+      @_f6 = FBE::FinalModelVector(FBE::FinalModelOptional(FinalModelEnumSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f7 = FBE::FinalModelVector(FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0)
+      @_f8 = FBE::FinalModelVector(FBE::FinalModelOptional(FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f9 = FBE::FinalModelVector(FinalModelStructSimple(self.buffer, 0), self.buffer, 0)
+      @_f10 = FBE::FinalModelVector(FBE::FinalModelOptional(FinalModelStructSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+    end
+
+    def f1
+      @_f1
+    end
+
+    def f2
+      @_f2
+    end
+
+    def f3
+      @_f3
+    end
+
+    def f4
+      @_f4
+    end
+
+    def f5
+      @_f5
+    end
+
+    def f6
+      @_f6
+    end
+
+    def f7
+      @_f7
+    end
+
+    def f8
+      @_f8
+    end
+
+    def f9
+      @_f9
+    end
+
+    def f10
+      @_f10
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(fbe_value)
+      0
+        + f1.fbe_allocation_size(fbe_value.f1)
+        + f2.fbe_allocation_size(fbe_value.f2)
+        + f3.fbe_allocation_size(fbe_value.f3)
+        + f4.fbe_allocation_size(fbe_value.f4)
+        + f5.fbe_allocation_size(fbe_value.f5)
+        + f6.fbe_allocation_size(fbe_value.f6)
+        + f7.fbe_allocation_size(fbe_value.f7)
+        + f8.fbe_allocation_size(fbe_value.f8)
+        + f9.fbe_allocation_size(fbe_value.f9)
+        + f10.fbe_allocation_size(fbe_value.f10)
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 131
+
+    # Check if the struct value is valid
+    def verify
+      @_buffer.shift(fbe_offset)
+      fbe_result = verify_fields
+      @_buffer.unshift(fbe_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields
+      fbe_current_offset = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_field_size = f1.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_field_size = f2.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_field_size = f3.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_field_size = f4.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f5.fbe_offset = fbe_current_offset
+      fbe_field_size = f5.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f6.fbe_offset = fbe_current_offset
+      fbe_field_size = f6.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f7.fbe_offset = fbe_current_offset
+      fbe_field_size = f7.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f8.fbe_offset = fbe_current_offset
+      fbe_field_size = f8.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f9.fbe_offset = fbe_current_offset
+      fbe_field_size = f9.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f10.fbe_offset = fbe_current_offset
+      fbe_field_size = f10.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_offset
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructList.new)
+      @_buffer.shift(fbe_offset)
+      fbe_size = get_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      [fbe_value, fbe_size]
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_result = f1.get(fbe_value.f1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_result = f2.get(fbe_value.f2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_result = f3.get(fbe_value.f3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_result = f4.get(fbe_value.f4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f5.fbe_offset = fbe_current_offset
+      fbe_result = f5.get(fbe_value.f5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f6.fbe_offset = fbe_current_offset
+      fbe_result = f6.get(fbe_value.f6)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f7.fbe_offset = fbe_current_offset
+      fbe_result = f7.get(fbe_value.f7)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f8.fbe_offset = fbe_current_offset
+      fbe_result = f8.get(fbe_value.f8)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f9.fbe_offset = fbe_current_offset
+      fbe_result = f9.get(fbe_value.f9)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f10.fbe_offset = fbe_current_offset
+      fbe_result = f10.get(fbe_value.f10)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      @_buffer.shift(fbe_offset)
+      fbe_size = set_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      fbe_size
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_field_size = f1.set(fbe_value.f1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_field_size = f2.set(fbe_value.f2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_field_size = f3.set(fbe_value.f3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_field_size = f4.set(fbe_value.f4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f5.fbe_offset = fbe_current_offset
+      fbe_field_size = f5.set(fbe_value.f5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f6.fbe_offset = fbe_current_offset
+      fbe_field_size = f6.set(fbe_value.f6)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f7.fbe_offset = fbe_current_offset
+      fbe_field_size = f7.set(fbe_value.f7)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f8.fbe_offset = fbe_current_offset
+      fbe_field_size = f8.set(fbe_value.f8)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f9.fbe_offset = fbe_current_offset
+      fbe_field_size = f9.set(fbe_value.f9)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f10.fbe_offset = fbe_current_offset
+      fbe_field_size = f10.set(fbe_value.f10)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+  end
+
+  # Fast Binary Encoding StructList final model class
+  class StructListFinalModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FinalModelStructList(self.buffer, 8)
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FinalModelStructList::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        return false
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) or (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      (8 + @_model.verify) == fbe_struct_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_initial_size = buffer.size
+
+      fbe_struct_type = fbe_type
+      fbe_struct_size = 8 + @_model.fbe_allocation_size(value)
+      fbe_struct_offset = buffer.allocate(fbe_struct_size) - buffer.offset
+      if (buffer.offset + fbe_struct_offset + fbe_struct_size) > buffer.size
+        return 0
+      end
+
+      fbe_struct_size = 8 + @_model.set(value)
+      buffer.resize(fbe_initial_size + fbe_struct_size)
+
+      write_uint32(@_model.fbe_offset - 8, fbe_struct_size)
+      write_uint32(@_model.fbe_offset - 4, fbe_struct_type)
+
+      fbe_struct_size
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructList.new)
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        [StructList.new, 0]
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) || (fbe_struct_type != fbe_type)
+        [StructList.new, 8]
+      end
+
+      fbe_result = @_model.get(value)
+      [fbe_result[0], (8 + fbe_result[1])]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructSet
     attr_accessor :f1
     attr_accessor :f2
@@ -2932,7 +13607,586 @@ module Test
     end
   end
 
-  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FieldModelStructSet < FBE::FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_f1 = FBE::FieldModelSet(FBE::FieldModelByte(self.buffer, 4 + 4), self.buffer, 4 + 4)
+      @_f2 = FBE::FieldModelSet(FieldModelEnumSimple(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
+      @_f3 = FBE::FieldModelSet(FieldModelFlagsSimple(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
+      @_f4 = FBE::FieldModelSet(FieldModelStructSimple(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size)
+    end
+
+    def f1
+      @_f1
+    end
+
+    def f2
+      @_f2
+    end
+
+    def f3
+      @_f3
+    end
+
+    def f4
+      @_f4
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field body size
+    def fbe_body
+      4 + 4
+        + f1.fbe_size
+        + f2.fbe_size
+        + f3.fbe_size
+        + f4.fbe_size
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+
+      fbe_result = fbe_body
+        + f1.fbe_extra
+        + f2.fbe_extra
+        + f3.fbe_extra
+        + f4.fbe_extra
+
+      @_buffer.unshift(fbe_struct_offset)
+
+      fbe_result
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 132
+
+    # Check if the struct value is valid
+    def verify(fbe_verify_type = true)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return false
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return false
+      end
+
+      fbe_struct_type = read_uint32(fbe_struct_offset + 4)
+      if fbe_verify_type && (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_result = verify_fields(fbe_struct_size)
+      @_buffer.unshift(fbe_struct_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields(fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + f1.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1.fbe_size
+
+      if (fbe_current_size + f2.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f2.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f2.fbe_size
+
+      if (fbe_current_size + f3.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f3.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f3.fbe_size
+
+      if (fbe_current_size + f4.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f4.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f4.fbe_size
+
+      true
+    end
+
+    # Get the struct value (begin phase)
+    def get_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Get the struct value (end phase)
+    def get_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructSet.new)
+      fbe_begin = get_begin
+      if fbe_begin == 0
+        return fbe_value
+      end
+
+      fbe_struct_size = read_uint32(0)
+      get_fields(fbe_value, fbe_struct_size)
+      get_end(fbe_begin)
+      fbe_value
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value, fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + f1.fbe_size) <= fbe_struct_size
+        f1.get(fbe_value.f1)
+      else
+        fbe_value.f1.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1.fbe_size
+
+      if (fbe_current_size + f2.fbe_size) <= fbe_struct_size
+        f2.get(fbe_value.f2)
+      else
+        fbe_value.f2.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f2.fbe_size
+
+      if (fbe_current_size + f3.fbe_size) <= fbe_struct_size
+        f3.get(fbe_value.f3)
+      else
+        fbe_value.f3.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f3.fbe_size
+
+      if (fbe_current_size + f4.fbe_size) <= fbe_struct_size
+        f4.get(fbe_value.f4)
+      else
+        fbe_value.f4.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f4.fbe_size
+    end
+
+    # Set the struct value (begin phase)
+    def set_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_size = fbe_body
+      fbe_struct_offset = @_buffer.allocate(fbe_struct_size) - @_buffer.offset
+      if (fbe_struct_offset <= 0) || ((@_buffer.offset + fbe_struct_offset + fbe_struct_size) > @_buffer.size)
+        return 0
+      end
+
+      write_uint32(fbe_offset, fbe_struct_offset)
+      write_uint32(fbe_struct_offset, fbe_struct_size)
+      write_uint32(fbe_struct_offset + 4, fbe_type)
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Set the struct value (end phase)
+    def set_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      fbe_begin = set_begin
+      if fbe_begin == 0
+        return
+      end
+
+      set_fields(fbe_value)
+      set_end(fbe_begin)
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      f1.set(fbe_value.f1)
+      f2.set(fbe_value.f2)
+      f3.set(fbe_value.f3)
+      f4.set(fbe_value.f4)
+    end
+  end
+
+  # Fast Binary Encoding StructSet model class
+  class StructSetModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FieldModelStructSet(self.buffer, 4)
+    end
+
+    def model
+      @_model
+    end
+
+    # Get the model size
+    def fbe_size
+      @_model.fbe_size + @_model.fbe_extra
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FieldModelStructSet::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        return false
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        return false
+      end
+
+      @_model.verify
+    end
+
+    # Create a new model (begin phase)
+    def create_begin
+      buffer.allocate(4 + @_model.fbe_size)
+    end
+
+    # Create a new model (end phase)
+    def create_end(fbe_begin)
+      fbe_end = buffer.size
+      fbe_full_size = fbe_end - fbe_begin
+      write_uint32(@_model.fbe_offset - 4, fbe_full_size)
+      fbe_full_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_begin = create_begin
+      @_model.set(value)
+      create_end(fbe_begin)
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructSet.new)
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        [StructSet.new, 0]
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        [StructSet.new, 0]
+      end
+
+      @_model.get(value)
+      [value, fbe_full_size]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalModelStructSet < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_f1 = FBE::FinalModelSet(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0)
+      @_f2 = FBE::FinalModelSet(FinalModelEnumSimple(self.buffer, 0), self.buffer, 0)
+      @_f3 = FBE::FinalModelSet(FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0)
+      @_f4 = FBE::FinalModelSet(FinalModelStructSimple(self.buffer, 0), self.buffer, 0)
+    end
+
+    def f1
+      @_f1
+    end
+
+    def f2
+      @_f2
+    end
+
+    def f3
+      @_f3
+    end
+
+    def f4
+      @_f4
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(fbe_value)
+      0
+        + f1.fbe_allocation_size(fbe_value.f1)
+        + f2.fbe_allocation_size(fbe_value.f2)
+        + f3.fbe_allocation_size(fbe_value.f3)
+        + f4.fbe_allocation_size(fbe_value.f4)
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 132
+
+    # Check if the struct value is valid
+    def verify
+      @_buffer.shift(fbe_offset)
+      fbe_result = verify_fields
+      @_buffer.unshift(fbe_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields
+      fbe_current_offset = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_field_size = f1.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_field_size = f2.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_field_size = f3.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_field_size = f4.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_offset
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructSet.new)
+      @_buffer.shift(fbe_offset)
+      fbe_size = get_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      [fbe_value, fbe_size]
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_result = f1.get(fbe_value.f1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_result = f2.get(fbe_value.f2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_result = f3.get(fbe_value.f3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_result = f4.get(fbe_value.f4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      @_buffer.shift(fbe_offset)
+      fbe_size = set_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      fbe_size
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_field_size = f1.set(fbe_value.f1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_field_size = f2.set(fbe_value.f2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_field_size = f3.set(fbe_value.f3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_field_size = f4.set(fbe_value.f4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+  end
+
+  # Fast Binary Encoding StructSet final model class
+  class StructSetFinalModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FinalModelStructSet(self.buffer, 8)
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FinalModelStructSet::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        return false
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) or (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      (8 + @_model.verify) == fbe_struct_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_initial_size = buffer.size
+
+      fbe_struct_type = fbe_type
+      fbe_struct_size = 8 + @_model.fbe_allocation_size(value)
+      fbe_struct_offset = buffer.allocate(fbe_struct_size) - buffer.offset
+      if (buffer.offset + fbe_struct_offset + fbe_struct_size) > buffer.size
+        return 0
+      end
+
+      fbe_struct_size = 8 + @_model.set(value)
+      buffer.resize(fbe_initial_size + fbe_struct_size)
+
+      write_uint32(@_model.fbe_offset - 8, fbe_struct_size)
+      write_uint32(@_model.fbe_offset - 4, fbe_struct_type)
+
+      fbe_struct_size
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructSet.new)
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        [StructSet.new, 0]
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) || (fbe_struct_type != fbe_type)
+        [StructSet.new, 8]
+      end
+
+      fbe_result = @_model.get(value)
+      [fbe_result[0], (8 + fbe_result[1])]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructMap
     attr_accessor :f1
     attr_accessor :f2
@@ -3234,7 +14488,886 @@ module Test
     end
   end
 
-  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FieldModelStructMap < FBE::FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_f1 = FBE::FieldModelMap(FBE::FieldModelInt32(self.buffer, 4 + 4), FBE::FieldModelByte(self.buffer, 4 + 4), self.buffer, 4 + 4)
+      @_f2 = FBE::FieldModelMap(FBE::FieldModelInt32(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), FBE::FieldModelOptional(FBE::FieldModelByte(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
+      @_f3 = FBE::FieldModelMap(FBE::FieldModelInt32(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), FBE::FieldModelBytes(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
+      @_f4 = FBE::FieldModelMap(FBE::FieldModelInt32(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), FBE::FieldModelOptional(FBE::FieldModelBytes(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size)
+      @_f5 = FBE::FieldModelMap(FBE::FieldModelInt32(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), FieldModelEnumSimple(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), self.buffer, @_f4.fbe_offset + @_f4.fbe_size)
+      @_f6 = FBE::FieldModelMap(FBE::FieldModelInt32(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), FBE::FieldModelOptional(FieldModelEnumSimple(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size)
+      @_f7 = FBE::FieldModelMap(FBE::FieldModelInt32(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), FieldModelFlagsSimple(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), self.buffer, @_f6.fbe_offset + @_f6.fbe_size)
+      @_f8 = FBE::FieldModelMap(FBE::FieldModelInt32(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), FBE::FieldModelOptional(FieldModelFlagsSimple(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size)
+      @_f9 = FBE::FieldModelMap(FBE::FieldModelInt32(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), FieldModelStructSimple(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), self.buffer, @_f8.fbe_offset + @_f8.fbe_size)
+      @_f10 = FBE::FieldModelMap(FBE::FieldModelInt32(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), FBE::FieldModelOptional(FieldModelStructSimple(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size)
+    end
+
+    def f1
+      @_f1
+    end
+
+    def f2
+      @_f2
+    end
+
+    def f3
+      @_f3
+    end
+
+    def f4
+      @_f4
+    end
+
+    def f5
+      @_f5
+    end
+
+    def f6
+      @_f6
+    end
+
+    def f7
+      @_f7
+    end
+
+    def f8
+      @_f8
+    end
+
+    def f9
+      @_f9
+    end
+
+    def f10
+      @_f10
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field body size
+    def fbe_body
+      4 + 4
+        + f1.fbe_size
+        + f2.fbe_size
+        + f3.fbe_size
+        + f4.fbe_size
+        + f5.fbe_size
+        + f6.fbe_size
+        + f7.fbe_size
+        + f8.fbe_size
+        + f9.fbe_size
+        + f10.fbe_size
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+
+      fbe_result = fbe_body
+        + f1.fbe_extra
+        + f2.fbe_extra
+        + f3.fbe_extra
+        + f4.fbe_extra
+        + f5.fbe_extra
+        + f6.fbe_extra
+        + f7.fbe_extra
+        + f8.fbe_extra
+        + f9.fbe_extra
+        + f10.fbe_extra
+
+      @_buffer.unshift(fbe_struct_offset)
+
+      fbe_result
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 140
+
+    # Check if the struct value is valid
+    def verify(fbe_verify_type = true)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return false
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return false
+      end
+
+      fbe_struct_type = read_uint32(fbe_struct_offset + 4)
+      if fbe_verify_type && (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_result = verify_fields(fbe_struct_size)
+      @_buffer.unshift(fbe_struct_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields(fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + f1.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1.fbe_size
+
+      if (fbe_current_size + f2.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f2.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f2.fbe_size
+
+      if (fbe_current_size + f3.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f3.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f3.fbe_size
+
+      if (fbe_current_size + f4.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f4.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f4.fbe_size
+
+      if (fbe_current_size + f5.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f5.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f5.fbe_size
+
+      if (fbe_current_size + f6.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f6.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f6.fbe_size
+
+      if (fbe_current_size + f7.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f7.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f7.fbe_size
+
+      if (fbe_current_size + f8.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f8.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f8.fbe_size
+
+      if (fbe_current_size + f9.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f9.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f9.fbe_size
+
+      if (fbe_current_size + f10.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f10.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f10.fbe_size
+
+      true
+    end
+
+    # Get the struct value (begin phase)
+    def get_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Get the struct value (end phase)
+    def get_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructMap.new)
+      fbe_begin = get_begin
+      if fbe_begin == 0
+        return fbe_value
+      end
+
+      fbe_struct_size = read_uint32(0)
+      get_fields(fbe_value, fbe_struct_size)
+      get_end(fbe_begin)
+      fbe_value
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value, fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + f1.fbe_size) <= fbe_struct_size
+        f1.get(fbe_value.f1)
+      else
+        fbe_value.f1.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1.fbe_size
+
+      if (fbe_current_size + f2.fbe_size) <= fbe_struct_size
+        f2.get(fbe_value.f2)
+      else
+        fbe_value.f2.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f2.fbe_size
+
+      if (fbe_current_size + f3.fbe_size) <= fbe_struct_size
+        f3.get(fbe_value.f3)
+      else
+        fbe_value.f3.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f3.fbe_size
+
+      if (fbe_current_size + f4.fbe_size) <= fbe_struct_size
+        f4.get(fbe_value.f4)
+      else
+        fbe_value.f4.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f4.fbe_size
+
+      if (fbe_current_size + f5.fbe_size) <= fbe_struct_size
+        f5.get(fbe_value.f5)
+      else
+        fbe_value.f5.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f5.fbe_size
+
+      if (fbe_current_size + f6.fbe_size) <= fbe_struct_size
+        f6.get(fbe_value.f6)
+      else
+        fbe_value.f6.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f6.fbe_size
+
+      if (fbe_current_size + f7.fbe_size) <= fbe_struct_size
+        f7.get(fbe_value.f7)
+      else
+        fbe_value.f7.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f7.fbe_size
+
+      if (fbe_current_size + f8.fbe_size) <= fbe_struct_size
+        f8.get(fbe_value.f8)
+      else
+        fbe_value.f8.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f8.fbe_size
+
+      if (fbe_current_size + f9.fbe_size) <= fbe_struct_size
+        f9.get(fbe_value.f9)
+      else
+        fbe_value.f9.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f9.fbe_size
+
+      if (fbe_current_size + f10.fbe_size) <= fbe_struct_size
+        f10.get(fbe_value.f10)
+      else
+        fbe_value.f10.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f10.fbe_size
+    end
+
+    # Set the struct value (begin phase)
+    def set_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_size = fbe_body
+      fbe_struct_offset = @_buffer.allocate(fbe_struct_size) - @_buffer.offset
+      if (fbe_struct_offset <= 0) || ((@_buffer.offset + fbe_struct_offset + fbe_struct_size) > @_buffer.size)
+        return 0
+      end
+
+      write_uint32(fbe_offset, fbe_struct_offset)
+      write_uint32(fbe_struct_offset, fbe_struct_size)
+      write_uint32(fbe_struct_offset + 4, fbe_type)
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Set the struct value (end phase)
+    def set_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      fbe_begin = set_begin
+      if fbe_begin == 0
+        return
+      end
+
+      set_fields(fbe_value)
+      set_end(fbe_begin)
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      f1.set(fbe_value.f1)
+      f2.set(fbe_value.f2)
+      f3.set(fbe_value.f3)
+      f4.set(fbe_value.f4)
+      f5.set(fbe_value.f5)
+      f6.set(fbe_value.f6)
+      f7.set(fbe_value.f7)
+      f8.set(fbe_value.f8)
+      f9.set(fbe_value.f9)
+      f10.set(fbe_value.f10)
+    end
+  end
+
+  # Fast Binary Encoding StructMap model class
+  class StructMapModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FieldModelStructMap(self.buffer, 4)
+    end
+
+    def model
+      @_model
+    end
+
+    # Get the model size
+    def fbe_size
+      @_model.fbe_size + @_model.fbe_extra
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FieldModelStructMap::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        return false
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        return false
+      end
+
+      @_model.verify
+    end
+
+    # Create a new model (begin phase)
+    def create_begin
+      buffer.allocate(4 + @_model.fbe_size)
+    end
+
+    # Create a new model (end phase)
+    def create_end(fbe_begin)
+      fbe_end = buffer.size
+      fbe_full_size = fbe_end - fbe_begin
+      write_uint32(@_model.fbe_offset - 4, fbe_full_size)
+      fbe_full_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_begin = create_begin
+      @_model.set(value)
+      create_end(fbe_begin)
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructMap.new)
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        [StructMap.new, 0]
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        [StructMap.new, 0]
+      end
+
+      @_model.get(value)
+      [value, fbe_full_size]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalModelStructMap < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_f1 = FBE::FinalModelMap(FBE::FinalModelInt32(self.buffer, 0), FBE::FinalModelByte(self.buffer, 0), self.buffer, 0)
+      @_f2 = FBE::FinalModelMap(FBE::FinalModelInt32(self.buffer, 0), FBE::FinalModelOptional(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f3 = FBE::FinalModelMap(FBE::FinalModelInt32(self.buffer, 0), FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0)
+      @_f4 = FBE::FinalModelMap(FBE::FinalModelInt32(self.buffer, 0), FBE::FinalModelOptional(FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f5 = FBE::FinalModelMap(FBE::FinalModelInt32(self.buffer, 0), FinalModelEnumSimple(self.buffer, 0), self.buffer, 0)
+      @_f6 = FBE::FinalModelMap(FBE::FinalModelInt32(self.buffer, 0), FBE::FinalModelOptional(FinalModelEnumSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f7 = FBE::FinalModelMap(FBE::FinalModelInt32(self.buffer, 0), FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0)
+      @_f8 = FBE::FinalModelMap(FBE::FinalModelInt32(self.buffer, 0), FBE::FinalModelOptional(FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f9 = FBE::FinalModelMap(FBE::FinalModelInt32(self.buffer, 0), FinalModelStructSimple(self.buffer, 0), self.buffer, 0)
+      @_f10 = FBE::FinalModelMap(FBE::FinalModelInt32(self.buffer, 0), FBE::FinalModelOptional(FinalModelStructSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+    end
+
+    def f1
+      @_f1
+    end
+
+    def f2
+      @_f2
+    end
+
+    def f3
+      @_f3
+    end
+
+    def f4
+      @_f4
+    end
+
+    def f5
+      @_f5
+    end
+
+    def f6
+      @_f6
+    end
+
+    def f7
+      @_f7
+    end
+
+    def f8
+      @_f8
+    end
+
+    def f9
+      @_f9
+    end
+
+    def f10
+      @_f10
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(fbe_value)
+      0
+        + f1.fbe_allocation_size(fbe_value.f1)
+        + f2.fbe_allocation_size(fbe_value.f2)
+        + f3.fbe_allocation_size(fbe_value.f3)
+        + f4.fbe_allocation_size(fbe_value.f4)
+        + f5.fbe_allocation_size(fbe_value.f5)
+        + f6.fbe_allocation_size(fbe_value.f6)
+        + f7.fbe_allocation_size(fbe_value.f7)
+        + f8.fbe_allocation_size(fbe_value.f8)
+        + f9.fbe_allocation_size(fbe_value.f9)
+        + f10.fbe_allocation_size(fbe_value.f10)
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 140
+
+    # Check if the struct value is valid
+    def verify
+      @_buffer.shift(fbe_offset)
+      fbe_result = verify_fields
+      @_buffer.unshift(fbe_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields
+      fbe_current_offset = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_field_size = f1.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_field_size = f2.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_field_size = f3.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_field_size = f4.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f5.fbe_offset = fbe_current_offset
+      fbe_field_size = f5.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f6.fbe_offset = fbe_current_offset
+      fbe_field_size = f6.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f7.fbe_offset = fbe_current_offset
+      fbe_field_size = f7.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f8.fbe_offset = fbe_current_offset
+      fbe_field_size = f8.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f9.fbe_offset = fbe_current_offset
+      fbe_field_size = f9.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f10.fbe_offset = fbe_current_offset
+      fbe_field_size = f10.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_offset
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructMap.new)
+      @_buffer.shift(fbe_offset)
+      fbe_size = get_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      [fbe_value, fbe_size]
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_result = f1.get(fbe_value.f1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_result = f2.get(fbe_value.f2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_result = f3.get(fbe_value.f3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_result = f4.get(fbe_value.f4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f5.fbe_offset = fbe_current_offset
+      fbe_result = f5.get(fbe_value.f5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f6.fbe_offset = fbe_current_offset
+      fbe_result = f6.get(fbe_value.f6)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f7.fbe_offset = fbe_current_offset
+      fbe_result = f7.get(fbe_value.f7)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f8.fbe_offset = fbe_current_offset
+      fbe_result = f8.get(fbe_value.f8)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f9.fbe_offset = fbe_current_offset
+      fbe_result = f9.get(fbe_value.f9)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f10.fbe_offset = fbe_current_offset
+      fbe_result = f10.get(fbe_value.f10)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      @_buffer.shift(fbe_offset)
+      fbe_size = set_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      fbe_size
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_field_size = f1.set(fbe_value.f1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_field_size = f2.set(fbe_value.f2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_field_size = f3.set(fbe_value.f3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_field_size = f4.set(fbe_value.f4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f5.fbe_offset = fbe_current_offset
+      fbe_field_size = f5.set(fbe_value.f5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f6.fbe_offset = fbe_current_offset
+      fbe_field_size = f6.set(fbe_value.f6)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f7.fbe_offset = fbe_current_offset
+      fbe_field_size = f7.set(fbe_value.f7)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f8.fbe_offset = fbe_current_offset
+      fbe_field_size = f8.set(fbe_value.f8)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f9.fbe_offset = fbe_current_offset
+      fbe_field_size = f9.set(fbe_value.f9)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f10.fbe_offset = fbe_current_offset
+      fbe_field_size = f10.set(fbe_value.f10)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+  end
+
+  # Fast Binary Encoding StructMap final model class
+  class StructMapFinalModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FinalModelStructMap(self.buffer, 8)
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FinalModelStructMap::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        return false
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) or (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      (8 + @_model.verify) == fbe_struct_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_initial_size = buffer.size
+
+      fbe_struct_type = fbe_type
+      fbe_struct_size = 8 + @_model.fbe_allocation_size(value)
+      fbe_struct_offset = buffer.allocate(fbe_struct_size) - buffer.offset
+      if (buffer.offset + fbe_struct_offset + fbe_struct_size) > buffer.size
+        return 0
+      end
+
+      fbe_struct_size = 8 + @_model.set(value)
+      buffer.resize(fbe_initial_size + fbe_struct_size)
+
+      write_uint32(@_model.fbe_offset - 8, fbe_struct_size)
+      write_uint32(@_model.fbe_offset - 4, fbe_struct_type)
+
+      fbe_struct_size
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructMap.new)
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        [StructMap.new, 0]
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) || (fbe_struct_type != fbe_type)
+        [StructMap.new, 8]
+      end
+
+      fbe_result = @_model.get(value)
+      [fbe_result[0], (8 + fbe_result[1])]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructHash
     attr_accessor :f1
     attr_accessor :f2
@@ -3536,7 +15669,886 @@ module Test
     end
   end
 
-  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FieldModelStructHash < FBE::FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_f1 = FBE::FieldModelMap(FBE::FieldModelString(self.buffer, 4 + 4), FBE::FieldModelByte(self.buffer, 4 + 4), self.buffer, 4 + 4)
+      @_f2 = FBE::FieldModelMap(FBE::FieldModelString(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), FBE::FieldModelOptional(FBE::FieldModelByte(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
+      @_f3 = FBE::FieldModelMap(FBE::FieldModelString(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), FBE::FieldModelBytes(self.buffer, @_f2.fbe_offset + @_f2.fbe_size), self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
+      @_f4 = FBE::FieldModelMap(FBE::FieldModelString(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), FBE::FieldModelOptional(FBE::FieldModelBytes(self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size), self.buffer, @_f3.fbe_offset + @_f3.fbe_size)
+      @_f5 = FBE::FieldModelMap(FBE::FieldModelString(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), FieldModelEnumSimple(self.buffer, @_f4.fbe_offset + @_f4.fbe_size), self.buffer, @_f4.fbe_offset + @_f4.fbe_size)
+      @_f6 = FBE::FieldModelMap(FBE::FieldModelString(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), FBE::FieldModelOptional(FieldModelEnumSimple(self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size), self.buffer, @_f5.fbe_offset + @_f5.fbe_size)
+      @_f7 = FBE::FieldModelMap(FBE::FieldModelString(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), FieldModelFlagsSimple(self.buffer, @_f6.fbe_offset + @_f6.fbe_size), self.buffer, @_f6.fbe_offset + @_f6.fbe_size)
+      @_f8 = FBE::FieldModelMap(FBE::FieldModelString(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), FBE::FieldModelOptional(FieldModelFlagsSimple(self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size), self.buffer, @_f7.fbe_offset + @_f7.fbe_size)
+      @_f9 = FBE::FieldModelMap(FBE::FieldModelString(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), FieldModelStructSimple(self.buffer, @_f8.fbe_offset + @_f8.fbe_size), self.buffer, @_f8.fbe_offset + @_f8.fbe_size)
+      @_f10 = FBE::FieldModelMap(FBE::FieldModelString(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), FBE::FieldModelOptional(FieldModelStructSimple(self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size), self.buffer, @_f9.fbe_offset + @_f9.fbe_size)
+    end
+
+    def f1
+      @_f1
+    end
+
+    def f2
+      @_f2
+    end
+
+    def f3
+      @_f3
+    end
+
+    def f4
+      @_f4
+    end
+
+    def f5
+      @_f5
+    end
+
+    def f6
+      @_f6
+    end
+
+    def f7
+      @_f7
+    end
+
+    def f8
+      @_f8
+    end
+
+    def f9
+      @_f9
+    end
+
+    def f10
+      @_f10
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field body size
+    def fbe_body
+      4 + 4
+        + f1.fbe_size
+        + f2.fbe_size
+        + f3.fbe_size
+        + f4.fbe_size
+        + f5.fbe_size
+        + f6.fbe_size
+        + f7.fbe_size
+        + f8.fbe_size
+        + f9.fbe_size
+        + f10.fbe_size
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+
+      fbe_result = fbe_body
+        + f1.fbe_extra
+        + f2.fbe_extra
+        + f3.fbe_extra
+        + f4.fbe_extra
+        + f5.fbe_extra
+        + f6.fbe_extra
+        + f7.fbe_extra
+        + f8.fbe_extra
+        + f9.fbe_extra
+        + f10.fbe_extra
+
+      @_buffer.unshift(fbe_struct_offset)
+
+      fbe_result
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 141
+
+    # Check if the struct value is valid
+    def verify(fbe_verify_type = true)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return false
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return false
+      end
+
+      fbe_struct_type = read_uint32(fbe_struct_offset + 4)
+      if fbe_verify_type && (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_result = verify_fields(fbe_struct_size)
+      @_buffer.unshift(fbe_struct_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields(fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + f1.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1.fbe_size
+
+      if (fbe_current_size + f2.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f2.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f2.fbe_size
+
+      if (fbe_current_size + f3.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f3.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f3.fbe_size
+
+      if (fbe_current_size + f4.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f4.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f4.fbe_size
+
+      if (fbe_current_size + f5.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f5.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f5.fbe_size
+
+      if (fbe_current_size + f6.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f6.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f6.fbe_size
+
+      if (fbe_current_size + f7.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f7.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f7.fbe_size
+
+      if (fbe_current_size + f8.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f8.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f8.fbe_size
+
+      if (fbe_current_size + f9.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f9.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f9.fbe_size
+
+      if (fbe_current_size + f10.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f10.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f10.fbe_size
+
+      true
+    end
+
+    # Get the struct value (begin phase)
+    def get_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Get the struct value (end phase)
+    def get_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructHash.new)
+      fbe_begin = get_begin
+      if fbe_begin == 0
+        return fbe_value
+      end
+
+      fbe_struct_size = read_uint32(0)
+      get_fields(fbe_value, fbe_struct_size)
+      get_end(fbe_begin)
+      fbe_value
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value, fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + f1.fbe_size) <= fbe_struct_size
+        f1.get(fbe_value.f1)
+      else
+        fbe_value.f1.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1.fbe_size
+
+      if (fbe_current_size + f2.fbe_size) <= fbe_struct_size
+        f2.get(fbe_value.f2)
+      else
+        fbe_value.f2.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f2.fbe_size
+
+      if (fbe_current_size + f3.fbe_size) <= fbe_struct_size
+        f3.get(fbe_value.f3)
+      else
+        fbe_value.f3.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f3.fbe_size
+
+      if (fbe_current_size + f4.fbe_size) <= fbe_struct_size
+        f4.get(fbe_value.f4)
+      else
+        fbe_value.f4.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f4.fbe_size
+
+      if (fbe_current_size + f5.fbe_size) <= fbe_struct_size
+        f5.get(fbe_value.f5)
+      else
+        fbe_value.f5.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f5.fbe_size
+
+      if (fbe_current_size + f6.fbe_size) <= fbe_struct_size
+        f6.get(fbe_value.f6)
+      else
+        fbe_value.f6.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f6.fbe_size
+
+      if (fbe_current_size + f7.fbe_size) <= fbe_struct_size
+        f7.get(fbe_value.f7)
+      else
+        fbe_value.f7.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f7.fbe_size
+
+      if (fbe_current_size + f8.fbe_size) <= fbe_struct_size
+        f8.get(fbe_value.f8)
+      else
+        fbe_value.f8.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f8.fbe_size
+
+      if (fbe_current_size + f9.fbe_size) <= fbe_struct_size
+        f9.get(fbe_value.f9)
+      else
+        fbe_value.f9.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f9.fbe_size
+
+      if (fbe_current_size + f10.fbe_size) <= fbe_struct_size
+        f10.get(fbe_value.f10)
+      else
+        fbe_value.f10.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f10.fbe_size
+    end
+
+    # Set the struct value (begin phase)
+    def set_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_size = fbe_body
+      fbe_struct_offset = @_buffer.allocate(fbe_struct_size) - @_buffer.offset
+      if (fbe_struct_offset <= 0) || ((@_buffer.offset + fbe_struct_offset + fbe_struct_size) > @_buffer.size)
+        return 0
+      end
+
+      write_uint32(fbe_offset, fbe_struct_offset)
+      write_uint32(fbe_struct_offset, fbe_struct_size)
+      write_uint32(fbe_struct_offset + 4, fbe_type)
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Set the struct value (end phase)
+    def set_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      fbe_begin = set_begin
+      if fbe_begin == 0
+        return
+      end
+
+      set_fields(fbe_value)
+      set_end(fbe_begin)
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      f1.set(fbe_value.f1)
+      f2.set(fbe_value.f2)
+      f3.set(fbe_value.f3)
+      f4.set(fbe_value.f4)
+      f5.set(fbe_value.f5)
+      f6.set(fbe_value.f6)
+      f7.set(fbe_value.f7)
+      f8.set(fbe_value.f8)
+      f9.set(fbe_value.f9)
+      f10.set(fbe_value.f10)
+    end
+  end
+
+  # Fast Binary Encoding StructHash model class
+  class StructHashModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FieldModelStructHash(self.buffer, 4)
+    end
+
+    def model
+      @_model
+    end
+
+    # Get the model size
+    def fbe_size
+      @_model.fbe_size + @_model.fbe_extra
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FieldModelStructHash::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        return false
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        return false
+      end
+
+      @_model.verify
+    end
+
+    # Create a new model (begin phase)
+    def create_begin
+      buffer.allocate(4 + @_model.fbe_size)
+    end
+
+    # Create a new model (end phase)
+    def create_end(fbe_begin)
+      fbe_end = buffer.size
+      fbe_full_size = fbe_end - fbe_begin
+      write_uint32(@_model.fbe_offset - 4, fbe_full_size)
+      fbe_full_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_begin = create_begin
+      @_model.set(value)
+      create_end(fbe_begin)
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructHash.new)
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        [StructHash.new, 0]
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        [StructHash.new, 0]
+      end
+
+      @_model.get(value)
+      [value, fbe_full_size]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalModelStructHash < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_f1 = FBE::FinalModelMap(FBE::FinalModelString(self.buffer, 0), FBE::FinalModelByte(self.buffer, 0), self.buffer, 0)
+      @_f2 = FBE::FinalModelMap(FBE::FinalModelString(self.buffer, 0), FBE::FinalModelOptional(FBE::FinalModelByte(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f3 = FBE::FinalModelMap(FBE::FinalModelString(self.buffer, 0), FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0)
+      @_f4 = FBE::FinalModelMap(FBE::FinalModelString(self.buffer, 0), FBE::FinalModelOptional(FBE::FinalModelBytes(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f5 = FBE::FinalModelMap(FBE::FinalModelString(self.buffer, 0), FinalModelEnumSimple(self.buffer, 0), self.buffer, 0)
+      @_f6 = FBE::FinalModelMap(FBE::FinalModelString(self.buffer, 0), FBE::FinalModelOptional(FinalModelEnumSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f7 = FBE::FinalModelMap(FBE::FinalModelString(self.buffer, 0), FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0)
+      @_f8 = FBE::FinalModelMap(FBE::FinalModelString(self.buffer, 0), FBE::FinalModelOptional(FinalModelFlagsSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+      @_f9 = FBE::FinalModelMap(FBE::FinalModelString(self.buffer, 0), FinalModelStructSimple(self.buffer, 0), self.buffer, 0)
+      @_f10 = FBE::FinalModelMap(FBE::FinalModelString(self.buffer, 0), FBE::FinalModelOptional(FinalModelStructSimple(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+    end
+
+    def f1
+      @_f1
+    end
+
+    def f2
+      @_f2
+    end
+
+    def f3
+      @_f3
+    end
+
+    def f4
+      @_f4
+    end
+
+    def f5
+      @_f5
+    end
+
+    def f6
+      @_f6
+    end
+
+    def f7
+      @_f7
+    end
+
+    def f8
+      @_f8
+    end
+
+    def f9
+      @_f9
+    end
+
+    def f10
+      @_f10
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(fbe_value)
+      0
+        + f1.fbe_allocation_size(fbe_value.f1)
+        + f2.fbe_allocation_size(fbe_value.f2)
+        + f3.fbe_allocation_size(fbe_value.f3)
+        + f4.fbe_allocation_size(fbe_value.f4)
+        + f5.fbe_allocation_size(fbe_value.f5)
+        + f6.fbe_allocation_size(fbe_value.f6)
+        + f7.fbe_allocation_size(fbe_value.f7)
+        + f8.fbe_allocation_size(fbe_value.f8)
+        + f9.fbe_allocation_size(fbe_value.f9)
+        + f10.fbe_allocation_size(fbe_value.f10)
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 141
+
+    # Check if the struct value is valid
+    def verify
+      @_buffer.shift(fbe_offset)
+      fbe_result = verify_fields
+      @_buffer.unshift(fbe_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields
+      fbe_current_offset = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_field_size = f1.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_field_size = f2.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_field_size = f3.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_field_size = f4.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f5.fbe_offset = fbe_current_offset
+      fbe_field_size = f5.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f6.fbe_offset = fbe_current_offset
+      fbe_field_size = f6.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f7.fbe_offset = fbe_current_offset
+      fbe_field_size = f7.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f8.fbe_offset = fbe_current_offset
+      fbe_field_size = f8.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f9.fbe_offset = fbe_current_offset
+      fbe_field_size = f9.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f10.fbe_offset = fbe_current_offset
+      fbe_field_size = f10.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_offset
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructHash.new)
+      @_buffer.shift(fbe_offset)
+      fbe_size = get_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      [fbe_value, fbe_size]
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_result = f1.get(fbe_value.f1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_result = f2.get(fbe_value.f2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_result = f3.get(fbe_value.f3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_result = f4.get(fbe_value.f4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f5.fbe_offset = fbe_current_offset
+      fbe_result = f5.get(fbe_value.f5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f6.fbe_offset = fbe_current_offset
+      fbe_result = f6.get(fbe_value.f6)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f7.fbe_offset = fbe_current_offset
+      fbe_result = f7.get(fbe_value.f7)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f8.fbe_offset = fbe_current_offset
+      fbe_result = f8.get(fbe_value.f8)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f9.fbe_offset = fbe_current_offset
+      fbe_result = f9.get(fbe_value.f9)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f10.fbe_offset = fbe_current_offset
+      fbe_result = f10.get(fbe_value.f10)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      @_buffer.shift(fbe_offset)
+      fbe_size = set_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      fbe_size
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_field_size = f1.set(fbe_value.f1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_field_size = f2.set(fbe_value.f2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f3.fbe_offset = fbe_current_offset
+      fbe_field_size = f3.set(fbe_value.f3)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f4.fbe_offset = fbe_current_offset
+      fbe_field_size = f4.set(fbe_value.f4)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f5.fbe_offset = fbe_current_offset
+      fbe_field_size = f5.set(fbe_value.f5)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f6.fbe_offset = fbe_current_offset
+      fbe_field_size = f6.set(fbe_value.f6)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f7.fbe_offset = fbe_current_offset
+      fbe_field_size = f7.set(fbe_value.f7)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f8.fbe_offset = fbe_current_offset
+      fbe_field_size = f8.set(fbe_value.f8)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f9.fbe_offset = fbe_current_offset
+      fbe_field_size = f9.set(fbe_value.f9)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f10.fbe_offset = fbe_current_offset
+      fbe_field_size = f10.set(fbe_value.f10)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+  end
+
+  # Fast Binary Encoding StructHash final model class
+  class StructHashFinalModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FinalModelStructHash(self.buffer, 8)
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FinalModelStructHash::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        return false
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) or (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      (8 + @_model.verify) == fbe_struct_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_initial_size = buffer.size
+
+      fbe_struct_type = fbe_type
+      fbe_struct_size = 8 + @_model.fbe_allocation_size(value)
+      fbe_struct_offset = buffer.allocate(fbe_struct_size) - buffer.offset
+      if (buffer.offset + fbe_struct_offset + fbe_struct_size) > buffer.size
+        return 0
+      end
+
+      fbe_struct_size = 8 + @_model.set(value)
+      buffer.resize(fbe_initial_size + fbe_struct_size)
+
+      write_uint32(@_model.fbe_offset - 8, fbe_struct_size)
+      write_uint32(@_model.fbe_offset - 4, fbe_struct_type)
+
+      fbe_struct_size
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructHash.new)
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        [StructHash.new, 0]
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) || (fbe_struct_type != fbe_type)
+        [StructHash.new, 8]
+      end
+
+      fbe_result = @_model.get(value)
+      [fbe_result[0], (8 + fbe_result[1])]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructHashEx
     attr_accessor :f1
     attr_accessor :f2
@@ -3635,6 +16647,485 @@ module Test
       end
       result << ")"
       result
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FieldModelStructHashEx < FBE::FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_f1 = FBE::FieldModelMap(FieldModelStructSimple(self.buffer, 4 + 4), FieldModelStructNested(self.buffer, 4 + 4), self.buffer, 4 + 4)
+      @_f2 = FBE::FieldModelMap(FieldModelStructSimple(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), FBE::FieldModelOptional(FieldModelStructNested(self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size), self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
+    end
+
+    def f1
+      @_f1
+    end
+
+    def f2
+      @_f2
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field body size
+    def fbe_body
+      4 + 4
+        + f1.fbe_size
+        + f2.fbe_size
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+
+      fbe_result = fbe_body
+        + f1.fbe_extra
+        + f2.fbe_extra
+
+      @_buffer.unshift(fbe_struct_offset)
+
+      fbe_result
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 142
+
+    # Check if the struct value is valid
+    def verify(fbe_verify_type = true)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return false
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return false
+      end
+
+      fbe_struct_type = read_uint32(fbe_struct_offset + 4)
+      if fbe_verify_type && (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_result = verify_fields(fbe_struct_size)
+      @_buffer.unshift(fbe_struct_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields(fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + f1.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f1.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1.fbe_size
+
+      if (fbe_current_size + f2.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless f2.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f2.fbe_size
+
+      true
+    end
+
+    # Get the struct value (begin phase)
+    def get_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Get the struct value (end phase)
+    def get_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructHashEx.new)
+      fbe_begin = get_begin
+      if fbe_begin == 0
+        return fbe_value
+      end
+
+      fbe_struct_size = read_uint32(0)
+      get_fields(fbe_value, fbe_struct_size)
+      get_end(fbe_begin)
+      fbe_value
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value, fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + f1.fbe_size) <= fbe_struct_size
+        f1.get(fbe_value.f1)
+      else
+        fbe_value.f1.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f1.fbe_size
+
+      if (fbe_current_size + f2.fbe_size) <= fbe_struct_size
+        f2.get(fbe_value.f2)
+      else
+        fbe_value.f2.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += f2.fbe_size
+    end
+
+    # Set the struct value (begin phase)
+    def set_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_size = fbe_body
+      fbe_struct_offset = @_buffer.allocate(fbe_struct_size) - @_buffer.offset
+      if (fbe_struct_offset <= 0) || ((@_buffer.offset + fbe_struct_offset + fbe_struct_size) > @_buffer.size)
+        return 0
+      end
+
+      write_uint32(fbe_offset, fbe_struct_offset)
+      write_uint32(fbe_struct_offset, fbe_struct_size)
+      write_uint32(fbe_struct_offset + 4, fbe_type)
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Set the struct value (end phase)
+    def set_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      fbe_begin = set_begin
+      if fbe_begin == 0
+        return
+      end
+
+      set_fields(fbe_value)
+      set_end(fbe_begin)
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      f1.set(fbe_value.f1)
+      f2.set(fbe_value.f2)
+    end
+  end
+
+  # Fast Binary Encoding StructHashEx model class
+  class StructHashExModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FieldModelStructHashEx(self.buffer, 4)
+    end
+
+    def model
+      @_model
+    end
+
+    # Get the model size
+    def fbe_size
+      @_model.fbe_size + @_model.fbe_extra
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FieldModelStructHashEx::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        return false
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        return false
+      end
+
+      @_model.verify
+    end
+
+    # Create a new model (begin phase)
+    def create_begin
+      buffer.allocate(4 + @_model.fbe_size)
+    end
+
+    # Create a new model (end phase)
+    def create_end(fbe_begin)
+      fbe_end = buffer.size
+      fbe_full_size = fbe_end - fbe_begin
+      write_uint32(@_model.fbe_offset - 4, fbe_full_size)
+      fbe_full_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_begin = create_begin
+      @_model.set(value)
+      create_end(fbe_begin)
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructHashEx.new)
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        [StructHashEx.new, 0]
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        [StructHashEx.new, 0]
+      end
+
+      @_model.get(value)
+      [value, fbe_full_size]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalModelStructHashEx < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_f1 = FBE::FinalModelMap(FinalModelStructSimple(self.buffer, 0), FinalModelStructNested(self.buffer, 0), self.buffer, 0)
+      @_f2 = FBE::FinalModelMap(FinalModelStructSimple(self.buffer, 0), FBE::FinalModelOptional(FinalModelStructNested(self.buffer, 0), self.buffer, 0), self.buffer, 0)
+    end
+
+    def f1
+      @_f1
+    end
+
+    def f2
+      @_f2
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(fbe_value)
+      0
+        + f1.fbe_allocation_size(fbe_value.f1)
+        + f2.fbe_allocation_size(fbe_value.f2)
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 142
+
+    # Check if the struct value is valid
+    def verify
+      @_buffer.shift(fbe_offset)
+      fbe_result = verify_fields
+      @_buffer.unshift(fbe_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields
+      fbe_current_offset = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_field_size = f1.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_field_size = f2.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_offset
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructHashEx.new)
+      @_buffer.shift(fbe_offset)
+      fbe_size = get_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      [fbe_value, fbe_size]
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_result = f1.get(fbe_value.f1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_result = f2.get(fbe_value.f2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      @_buffer.shift(fbe_offset)
+      fbe_size = set_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      fbe_size
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      f1.fbe_offset = fbe_current_offset
+      fbe_field_size = f1.set(fbe_value.f1)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      f2.fbe_offset = fbe_current_offset
+      fbe_field_size = f2.set(fbe_value.f2)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+  end
+
+  # Fast Binary Encoding StructHashEx final model class
+  class StructHashExFinalModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FinalModelStructHashEx(self.buffer, 8)
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FinalModelStructHashEx::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        return false
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) or (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      (8 + @_model.verify) == fbe_struct_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_initial_size = buffer.size
+
+      fbe_struct_type = fbe_type
+      fbe_struct_size = 8 + @_model.fbe_allocation_size(value)
+      fbe_struct_offset = buffer.allocate(fbe_struct_size) - buffer.offset
+      if (buffer.offset + fbe_struct_offset + fbe_struct_size) > buffer.size
+        return 0
+      end
+
+      fbe_struct_size = 8 + @_model.set(value)
+      buffer.resize(fbe_initial_size + fbe_struct_size)
+
+      write_uint32(@_model.fbe_offset - 8, fbe_struct_size)
+      write_uint32(@_model.fbe_offset - 4, fbe_struct_type)
+
+      fbe_struct_size
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructHashEx.new)
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        [StructHashEx.new, 0]
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) || (fbe_struct_type != fbe_type)
+        [StructHashEx.new, 8]
+      end
+
+      fbe_result = @_model.get(value)
+      [fbe_result[0], (8 + fbe_result[1])]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
     end
   end
 

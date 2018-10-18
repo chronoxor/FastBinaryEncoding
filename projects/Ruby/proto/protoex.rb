@@ -297,7 +297,7 @@ module Protoex
       def ^(flags) Flags.new(@value ^ flags.value) end
 
       def has_flags(flags)
-        ((@value & flags.value) != 0) && ((self.value & flags.value) == flags.value)
+        ((@value & flags.value) != 0) && ((@value & flags.value) == flags.value)
       end
 
       def set_flags(flags)
@@ -507,7 +507,7 @@ module Protoex
     end
   end
 
-  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Order
     attr_accessor :uid
     attr_accessor :symbol
@@ -636,12 +636,799 @@ module Protoex
     end
   end
 
-  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FieldModelOrder < FBE::FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_uid = FBE::FieldModelInt32(self.buffer, 4 + 4)
+      @_symbol = FBE::FieldModelString(self.buffer, @_uid.fbe_offset + @_uid.fbe_size)
+      @_side = FieldModelOrderSide(self.buffer, @_symbol.fbe_offset + @_symbol.fbe_size)
+      @_type = FieldModelOrderType(self.buffer, @_side.fbe_offset + @_side.fbe_size)
+      @_price = FBE::FieldModelDouble(self.buffer, @_type.fbe_offset + @_type.fbe_size)
+      @_volume = FBE::FieldModelDouble(self.buffer, @_price.fbe_offset + @_price.fbe_size)
+      @_tp = FBE::FieldModelDouble(self.buffer, @_volume.fbe_offset + @_volume.fbe_size)
+      @_sl = FBE::FieldModelDouble(self.buffer, @_tp.fbe_offset + @_tp.fbe_size)
+    end
+
+    def uid
+      @_uid
+    end
+
+    def symbol
+      @_symbol
+    end
+
+    def side
+      @_side
+    end
+
+    def type
+      @_type
+    end
+
+    def price
+      @_price
+    end
+
+    def volume
+      @_volume
+    end
+
+    def tp
+      @_tp
+    end
+
+    def sl
+      @_sl
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field body size
+    def fbe_body
+      4 + 4
+        + uid.fbe_size
+        + symbol.fbe_size
+        + side.fbe_size
+        + type.fbe_size
+        + price.fbe_size
+        + volume.fbe_size
+        + tp.fbe_size
+        + sl.fbe_size
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+
+      fbe_result = fbe_body
+        + uid.fbe_extra
+        + symbol.fbe_extra
+        + side.fbe_extra
+        + type.fbe_extra
+        + price.fbe_extra
+        + volume.fbe_extra
+        + tp.fbe_extra
+        + sl.fbe_extra
+
+      @_buffer.unshift(fbe_struct_offset)
+
+      fbe_result
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 1
+
+    # Check if the struct value is valid
+    def verify(fbe_verify_type = true)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return false
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return false
+      end
+
+      fbe_struct_type = read_uint32(fbe_struct_offset + 4)
+      if fbe_verify_type && (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_result = verify_fields(fbe_struct_size)
+      @_buffer.unshift(fbe_struct_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields(fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + uid.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uid.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uid.fbe_size
+
+      if (fbe_current_size + symbol.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless symbol.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += symbol.fbe_size
+
+      if (fbe_current_size + side.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless side.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += side.fbe_size
+
+      if (fbe_current_size + type.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless type.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += type.fbe_size
+
+      if (fbe_current_size + price.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless price.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += price.fbe_size
+
+      if (fbe_current_size + volume.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless volume.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += volume.fbe_size
+
+      if (fbe_current_size + tp.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless tp.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += tp.fbe_size
+
+      if (fbe_current_size + sl.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless sl.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += sl.fbe_size
+
+      true
+    end
+
+    # Get the struct value (begin phase)
+    def get_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Get the struct value (end phase)
+    def get_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Get the struct value
+    def get(fbe_value = Order.new)
+      fbe_begin = get_begin
+      if fbe_begin == 0
+        return fbe_value
+      end
+
+      fbe_struct_size = read_uint32(0)
+      get_fields(fbe_value, fbe_struct_size)
+      get_end(fbe_begin)
+      fbe_value
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value, fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + uid.fbe_size) <= fbe_struct_size
+        fbe_value.uid = uid.get
+      else
+        fbe_value.uid = 0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uid.fbe_size
+
+      if (fbe_current_size + symbol.fbe_size) <= fbe_struct_size
+        fbe_value.symbol = symbol.get
+      else
+        fbe_value.symbol = ''
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += symbol.fbe_size
+
+      if (fbe_current_size + side.fbe_size) <= fbe_struct_size
+        fbe_value.side = side.get
+      else
+        fbe_value.side = OrderSide.new
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += side.fbe_size
+
+      if (fbe_current_size + type.fbe_size) <= fbe_struct_size
+        fbe_value.type = type.get
+      else
+        fbe_value.type = OrderType.new
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += type.fbe_size
+
+      if (fbe_current_size + price.fbe_size) <= fbe_struct_size
+        fbe_value.price = price.get(0.0)
+      else
+        fbe_value.price = 0.0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += price.fbe_size
+
+      if (fbe_current_size + volume.fbe_size) <= fbe_struct_size
+        fbe_value.volume = volume.get(0.0)
+      else
+        fbe_value.volume = 0.0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += volume.fbe_size
+
+      if (fbe_current_size + tp.fbe_size) <= fbe_struct_size
+        fbe_value.tp = tp.get(10.0)
+      else
+        fbe_value.tp = 10.0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += tp.fbe_size
+
+      if (fbe_current_size + sl.fbe_size) <= fbe_struct_size
+        fbe_value.sl = sl.get(-10.0)
+      else
+        fbe_value.sl = -10.0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += sl.fbe_size
+    end
+
+    # Set the struct value (begin phase)
+    def set_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_size = fbe_body
+      fbe_struct_offset = @_buffer.allocate(fbe_struct_size) - @_buffer.offset
+      if (fbe_struct_offset <= 0) || ((@_buffer.offset + fbe_struct_offset + fbe_struct_size) > @_buffer.size)
+        return 0
+      end
+
+      write_uint32(fbe_offset, fbe_struct_offset)
+      write_uint32(fbe_struct_offset, fbe_struct_size)
+      write_uint32(fbe_struct_offset + 4, fbe_type)
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Set the struct value (end phase)
+    def set_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      fbe_begin = set_begin
+      if fbe_begin == 0
+        return
+      end
+
+      set_fields(fbe_value)
+      set_end(fbe_begin)
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      uid.set(fbe_value.uid)
+      symbol.set(fbe_value.symbol)
+      side.set(fbe_value.side)
+      type.set(fbe_value.type)
+      price.set(fbe_value.price)
+      volume.set(fbe_value.volume)
+      tp.set(fbe_value.tp)
+      sl.set(fbe_value.sl)
+    end
+  end
+
+  # Fast Binary Encoding Order model class
+  class OrderModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FieldModelOrder(self.buffer, 4)
+    end
+
+    def model
+      @_model
+    end
+
+    # Get the model size
+    def fbe_size
+      @_model.fbe_size + @_model.fbe_extra
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FieldModelOrder::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        return false
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        return false
+      end
+
+      @_model.verify
+    end
+
+    # Create a new model (begin phase)
+    def create_begin
+      buffer.allocate(4 + @_model.fbe_size)
+    end
+
+    # Create a new model (end phase)
+    def create_end(fbe_begin)
+      fbe_end = buffer.size
+      fbe_full_size = fbe_end - fbe_begin
+      write_uint32(@_model.fbe_offset - 4, fbe_full_size)
+      fbe_full_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_begin = create_begin
+      @_model.set(value)
+      create_end(fbe_begin)
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = Order.new)
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        [Order.new, 0]
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        [Order.new, 0]
+      end
+
+      @_model.get(value)
+      [value, fbe_full_size]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalModelOrder < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_uid = FBE::FinalModelInt32(self.buffer, 0)
+      @_symbol = FBE::FinalModelString(self.buffer, 0)
+      @_side = FinalModelOrderSide(self.buffer, 0)
+      @_type = FinalModelOrderType(self.buffer, 0)
+      @_price = FBE::FinalModelDouble(self.buffer, 0)
+      @_volume = FBE::FinalModelDouble(self.buffer, 0)
+      @_tp = FBE::FinalModelDouble(self.buffer, 0)
+      @_sl = FBE::FinalModelDouble(self.buffer, 0)
+    end
+
+    def uid
+      @_uid
+    end
+
+    def symbol
+      @_symbol
+    end
+
+    def side
+      @_side
+    end
+
+    def type
+      @_type
+    end
+
+    def price
+      @_price
+    end
+
+    def volume
+      @_volume
+    end
+
+    def tp
+      @_tp
+    end
+
+    def sl
+      @_sl
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(fbe_value)
+      0
+        + uid.fbe_allocation_size(fbe_value.uid)
+        + symbol.fbe_allocation_size(fbe_value.symbol)
+        + side.fbe_allocation_size(fbe_value.side)
+        + type.fbe_allocation_size(fbe_value.type)
+        + price.fbe_allocation_size(fbe_value.price)
+        + volume.fbe_allocation_size(fbe_value.volume)
+        + tp.fbe_allocation_size(fbe_value.tp)
+        + sl.fbe_allocation_size(fbe_value.sl)
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 1
+
+    # Check if the struct value is valid
+    def verify
+      @_buffer.shift(fbe_offset)
+      fbe_result = verify_fields
+      @_buffer.unshift(fbe_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields
+      fbe_current_offset = 0
+
+      uid.fbe_offset = fbe_current_offset
+      fbe_field_size = uid.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      symbol.fbe_offset = fbe_current_offset
+      fbe_field_size = symbol.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      side.fbe_offset = fbe_current_offset
+      fbe_field_size = side.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      type.fbe_offset = fbe_current_offset
+      fbe_field_size = type.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      price.fbe_offset = fbe_current_offset
+      fbe_field_size = price.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      volume.fbe_offset = fbe_current_offset
+      fbe_field_size = volume.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      tp.fbe_offset = fbe_current_offset
+      fbe_field_size = tp.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      sl.fbe_offset = fbe_current_offset
+      fbe_field_size = sl.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_offset
+    end
+
+    # Get the struct value
+    def get(fbe_value = Order.new)
+      @_buffer.shift(fbe_offset)
+      fbe_size = get_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      [fbe_value, fbe_size]
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      uid.fbe_offset = fbe_current_offset
+      fbe_result = uid.get
+      fbe_value.uid = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      symbol.fbe_offset = fbe_current_offset
+      fbe_result = symbol.get
+      fbe_value.symbol = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      side.fbe_offset = fbe_current_offset
+      fbe_result = side.get
+      fbe_value.side = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      type.fbe_offset = fbe_current_offset
+      fbe_result = type.get
+      fbe_value.type = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      price.fbe_offset = fbe_current_offset
+      fbe_result = price.get
+      fbe_value.price = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      volume.fbe_offset = fbe_current_offset
+      fbe_result = volume.get
+      fbe_value.volume = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      tp.fbe_offset = fbe_current_offset
+      fbe_result = tp.get
+      fbe_value.tp = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      sl.fbe_offset = fbe_current_offset
+      fbe_result = sl.get
+      fbe_value.sl = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      @_buffer.shift(fbe_offset)
+      fbe_size = set_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      fbe_size
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      uid.fbe_offset = fbe_current_offset
+      fbe_field_size = uid.set(fbe_value.uid)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      symbol.fbe_offset = fbe_current_offset
+      fbe_field_size = symbol.set(fbe_value.symbol)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      side.fbe_offset = fbe_current_offset
+      fbe_field_size = side.set(fbe_value.side)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      type.fbe_offset = fbe_current_offset
+      fbe_field_size = type.set(fbe_value.type)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      price.fbe_offset = fbe_current_offset
+      fbe_field_size = price.set(fbe_value.price)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      volume.fbe_offset = fbe_current_offset
+      fbe_field_size = volume.set(fbe_value.volume)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      tp.fbe_offset = fbe_current_offset
+      fbe_field_size = tp.set(fbe_value.tp)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      sl.fbe_offset = fbe_current_offset
+      fbe_field_size = sl.set(fbe_value.sl)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+  end
+
+  # Fast Binary Encoding Order final model class
+  class OrderFinalModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FinalModelOrder(self.buffer, 8)
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FinalModelOrder::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        return false
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) or (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      (8 + @_model.verify) == fbe_struct_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_initial_size = buffer.size
+
+      fbe_struct_type = fbe_type
+      fbe_struct_size = 8 + @_model.fbe_allocation_size(value)
+      fbe_struct_offset = buffer.allocate(fbe_struct_size) - buffer.offset
+      if (buffer.offset + fbe_struct_offset + fbe_struct_size) > buffer.size
+        return 0
+      end
+
+      fbe_struct_size = 8 + @_model.set(value)
+      buffer.resize(fbe_initial_size + fbe_struct_size)
+
+      write_uint32(@_model.fbe_offset - 8, fbe_struct_size)
+      write_uint32(@_model.fbe_offset - 4, fbe_struct_type)
+
+      fbe_struct_size
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = Order.new)
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        [Order.new, 0]
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) || (fbe_struct_type != fbe_type)
+        [Order.new, 8]
+      end
+
+      fbe_result = @_model.get(value)
+      [fbe_result[0], (8 + fbe_result[1])]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Balance < Proto::Balance
     attr_accessor :locked
 
     def initialize(parent = Proto::Balance.new, locked = 0.0)
-      method(:copy).super_method.call(parent)
+      super(parent.clone)
       @locked = locked
     end
 
@@ -705,7 +1492,485 @@ module Protoex
     end
   end
 
-  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FieldModelBalance < FBE::FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_parent = proto.FieldModelBalance(self.buffer, 4 + 4)
+      @_locked = FBE::FieldModelDouble(self.buffer, @_parent.fbe_offset + @_parent.fbe_body - 4 - 4)
+    end
+
+    def parent
+      @_parent
+    end
+
+    def locked
+      @_locked
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field body size
+    def fbe_body
+      4 + 4
+        + parent.fbe_body - 4 - 4
+        + locked.fbe_size
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+
+      fbe_result = fbe_body
+        + parent.fbe_extra
+        + locked.fbe_extra
+
+      @_buffer.unshift(fbe_struct_offset)
+
+      fbe_result
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = proto.FieldModelBalance::TYPE
+
+    # Check if the struct value is valid
+    def verify(fbe_verify_type = true)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return false
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return false
+      end
+
+      fbe_struct_type = read_uint32(fbe_struct_offset + 4)
+      if fbe_verify_type && (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_result = verify_fields(fbe_struct_size)
+      @_buffer.unshift(fbe_struct_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields(fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + parent.fbe_body - 4 - 4) > fbe_struct_size
+        return true
+      end
+      unless parent.verify_fields(fbe_struct_size)
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += parent.fbe_body - 4 - 4
+
+      if (fbe_current_size + locked.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless locked.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += locked.fbe_size
+
+      true
+    end
+
+    # Get the struct value (begin phase)
+    def get_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Get the struct value (end phase)
+    def get_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Get the struct value
+    def get(fbe_value = Balance.new)
+      fbe_begin = get_begin
+      if fbe_begin == 0
+        return fbe_value
+      end
+
+      fbe_struct_size = read_uint32(0)
+      get_fields(fbe_value, fbe_struct_size)
+      get_end(fbe_begin)
+      fbe_value
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value, fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + parent.fbe_body - 4 - 4) <= fbe_struct_size
+        parent.get_fields(fbe_value, fbe_struct_size)
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += parent.fbe_body - 4 - 4
+
+      if (fbe_current_size + locked.fbe_size) <= fbe_struct_size
+        fbe_value.locked = locked.get(0.0)
+      else
+        fbe_value.locked = 0.0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += locked.fbe_size
+    end
+
+    # Set the struct value (begin phase)
+    def set_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_size = fbe_body
+      fbe_struct_offset = @_buffer.allocate(fbe_struct_size) - @_buffer.offset
+      if (fbe_struct_offset <= 0) || ((@_buffer.offset + fbe_struct_offset + fbe_struct_size) > @_buffer.size)
+        return 0
+      end
+
+      write_uint32(fbe_offset, fbe_struct_offset)
+      write_uint32(fbe_struct_offset, fbe_struct_size)
+      write_uint32(fbe_struct_offset + 4, fbe_type)
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Set the struct value (end phase)
+    def set_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      fbe_begin = set_begin
+      if fbe_begin == 0
+        return
+      end
+
+      set_fields(fbe_value)
+      set_end(fbe_begin)
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      parent.set_fields(fbe_value)
+      locked.set(fbe_value.locked)
+    end
+  end
+
+  # Fast Binary Encoding Balance model class
+  class BalanceModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FieldModelBalance(self.buffer, 4)
+    end
+
+    def model
+      @_model
+    end
+
+    # Get the model size
+    def fbe_size
+      @_model.fbe_size + @_model.fbe_extra
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FieldModelBalance::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        return false
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        return false
+      end
+
+      @_model.verify
+    end
+
+    # Create a new model (begin phase)
+    def create_begin
+      buffer.allocate(4 + @_model.fbe_size)
+    end
+
+    # Create a new model (end phase)
+    def create_end(fbe_begin)
+      fbe_end = buffer.size
+      fbe_full_size = fbe_end - fbe_begin
+      write_uint32(@_model.fbe_offset - 4, fbe_full_size)
+      fbe_full_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_begin = create_begin
+      @_model.set(value)
+      create_end(fbe_begin)
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = Balance.new)
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        [Balance.new, 0]
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        [Balance.new, 0]
+      end
+
+      @_model.get(value)
+      [value, fbe_full_size]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalModelBalance < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_parent = proto.FinalModelBalance(self.buffer, 0)
+      @_locked = FBE::FinalModelDouble(self.buffer, 0)
+    end
+
+    def parent
+      @_parent
+    end
+
+    def locked
+      @_locked
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(fbe_value)
+      0
+        + parent.fbe_allocation_size(fbe_value)
+        + locked.fbe_allocation_size(fbe_value.locked)
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = proto.FinalModelBalance::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      @_buffer.shift(fbe_offset)
+      fbe_result = verify_fields
+      @_buffer.unshift(fbe_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields
+      fbe_current_offset = 0
+
+      parent.fbe_offset = fbe_current_offset
+      fbe_field_size = parent.verify_fields
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      locked.fbe_offset = fbe_current_offset
+      fbe_field_size = locked.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_offset
+    end
+
+    # Get the struct value
+    def get(fbe_value = Balance.new)
+      @_buffer.shift(fbe_offset)
+      fbe_size = get_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      [fbe_value, fbe_size]
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      parent.fbe_offset = fbe_current_offset
+      fbe_result = parent.get_fields(fbe_value)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result
+      fbe_current_size += fbe_result
+
+      locked.fbe_offset = fbe_current_offset
+      fbe_result = locked.get
+      fbe_value.locked = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      @_buffer.shift(fbe_offset)
+      fbe_size = set_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      fbe_size
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      parent.fbe_offset = fbe_current_offset
+      fbe_field_size = parent.set_fields(fbe_value)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      locked.fbe_offset = fbe_current_offset
+      fbe_field_size = locked.set(fbe_value.locked)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+  end
+
+  # Fast Binary Encoding Balance final model class
+  class BalanceFinalModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FinalModelBalance(self.buffer, 8)
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FinalModelBalance::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        return false
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) or (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      (8 + @_model.verify) == fbe_struct_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_initial_size = buffer.size
+
+      fbe_struct_type = fbe_type
+      fbe_struct_size = 8 + @_model.fbe_allocation_size(value)
+      fbe_struct_offset = buffer.allocate(fbe_struct_size) - buffer.offset
+      if (buffer.offset + fbe_struct_offset + fbe_struct_size) > buffer.size
+        return 0
+      end
+
+      fbe_struct_size = 8 + @_model.set(value)
+      buffer.resize(fbe_initial_size + fbe_struct_size)
+
+      write_uint32(@_model.fbe_offset - 8, fbe_struct_size)
+      write_uint32(@_model.fbe_offset - 4, fbe_struct_type)
+
+      fbe_struct_size
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = Balance.new)
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        [Balance.new, 0]
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) || (fbe_struct_type != fbe_type)
+        [Balance.new, 8]
+      end
+
+      fbe_result = @_model.get(value)
+      [fbe_result[0], (8 + fbe_result[1])]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Account
     attr_accessor :uid
     attr_accessor :name
@@ -822,6 +2087,690 @@ module Protoex
       end
       result << ")"
       result
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FieldModelAccount < FBE::FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_uid = FBE::FieldModelInt32(self.buffer, 4 + 4)
+      @_name = FBE::FieldModelString(self.buffer, @_uid.fbe_offset + @_uid.fbe_size)
+      @_state = FieldModelStateEx(self.buffer, @_name.fbe_offset + @_name.fbe_size)
+      @_wallet = FieldModelBalance(self.buffer, @_state.fbe_offset + @_state.fbe_size)
+      @_asset = FBE::FieldModelOptional(FieldModelBalance(self.buffer, @_wallet.fbe_offset + @_wallet.fbe_size), self.buffer, @_wallet.fbe_offset + @_wallet.fbe_size)
+      @_orders = FBE::FieldModelVector(FieldModelOrder(self.buffer, @_asset.fbe_offset + @_asset.fbe_size), self.buffer, @_asset.fbe_offset + @_asset.fbe_size)
+    end
+
+    def uid
+      @_uid
+    end
+
+    def name
+      @_name
+    end
+
+    def state
+      @_state
+    end
+
+    def wallet
+      @_wallet
+    end
+
+    def asset
+      @_asset
+    end
+
+    def orders
+      @_orders
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field body size
+    def fbe_body
+      4 + 4
+        + uid.fbe_size
+        + name.fbe_size
+        + state.fbe_size
+        + wallet.fbe_size
+        + asset.fbe_size
+        + orders.fbe_size
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+
+      fbe_result = fbe_body
+        + uid.fbe_extra
+        + name.fbe_extra
+        + state.fbe_extra
+        + wallet.fbe_extra
+        + asset.fbe_extra
+        + orders.fbe_extra
+
+      @_buffer.unshift(fbe_struct_offset)
+
+      fbe_result
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 3
+
+    # Check if the struct value is valid
+    def verify(fbe_verify_type = true)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return false
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return false
+      end
+
+      fbe_struct_type = read_uint32(fbe_struct_offset + 4)
+      if fbe_verify_type && (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_result = verify_fields(fbe_struct_size)
+      @_buffer.unshift(fbe_struct_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields(fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + uid.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless uid.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uid.fbe_size
+
+      if (fbe_current_size + name.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless name.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += name.fbe_size
+
+      if (fbe_current_size + state.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless state.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += state.fbe_size
+
+      if (fbe_current_size + wallet.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless wallet.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += wallet.fbe_size
+
+      if (fbe_current_size + asset.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless asset.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += asset.fbe_size
+
+      if (fbe_current_size + orders.fbe_size) > fbe_struct_size
+        return true
+      end
+      unless orders.verify
+        return false
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += orders.fbe_size
+
+      true
+    end
+
+    # Get the struct value (begin phase)
+    def get_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Get the struct value (end phase)
+    def get_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Get the struct value
+    def get(fbe_value = Account.new)
+      fbe_begin = get_begin
+      if fbe_begin == 0
+        return fbe_value
+      end
+
+      fbe_struct_size = read_uint32(0)
+      get_fields(fbe_value, fbe_struct_size)
+      get_end(fbe_begin)
+      fbe_value
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value, fbe_struct_size)
+      fbe_current_size = 4 + 4
+
+      if (fbe_current_size + uid.fbe_size) <= fbe_struct_size
+        fbe_value.uid = uid.get
+      else
+        fbe_value.uid = 0
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += uid.fbe_size
+
+      if (fbe_current_size + name.fbe_size) <= fbe_struct_size
+        fbe_value.name = name.get
+      else
+        fbe_value.name = ''
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += name.fbe_size
+
+      if (fbe_current_size + state.fbe_size) <= fbe_struct_size
+        fbe_value.state = state.get(StateEx.initialized | StateEx.bad | StateEx.sad)
+      else
+        fbe_value.state = StateEx.initialized | StateEx.bad | StateEx.sad
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += state.fbe_size
+
+      if (fbe_current_size + wallet.fbe_size) <= fbe_struct_size
+        fbe_value.wallet = wallet.get
+      else
+        fbe_value.wallet = Balance.new
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += wallet.fbe_size
+
+      if (fbe_current_size + asset.fbe_size) <= fbe_struct_size
+        fbe_value.asset = asset.get
+      else
+        fbe_value.asset = nil
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += asset.fbe_size
+
+      if (fbe_current_size + orders.fbe_size) <= fbe_struct_size
+        orders.get(fbe_value.orders)
+      else
+        fbe_value.orders.clear
+      end
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_size += orders.fbe_size
+    end
+
+    # Set the struct value (begin phase)
+    def set_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_size = fbe_body
+      fbe_struct_offset = @_buffer.allocate(fbe_struct_size) - @_buffer.offset
+      if (fbe_struct_offset <= 0) || ((@_buffer.offset + fbe_struct_offset + fbe_struct_size) > @_buffer.size)
+        return 0
+      end
+
+      write_uint32(fbe_offset, fbe_struct_offset)
+      write_uint32(fbe_struct_offset, fbe_struct_size)
+      write_uint32(fbe_struct_offset + 4, fbe_type)
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Set the struct value (end phase)
+    def set_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      fbe_begin = set_begin
+      if fbe_begin == 0
+        return
+      end
+
+      set_fields(fbe_value)
+      set_end(fbe_begin)
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      uid.set(fbe_value.uid)
+      name.set(fbe_value.name)
+      state.set(fbe_value.state)
+      wallet.set(fbe_value.wallet)
+      asset.set(fbe_value.asset)
+      orders.set(fbe_value.orders)
+    end
+  end
+
+  # Fast Binary Encoding Account model class
+  class AccountModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FieldModelAccount(self.buffer, 4)
+    end
+
+    def model
+      @_model
+    end
+
+    # Get the model size
+    def fbe_size
+      @_model.fbe_size + @_model.fbe_extra
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FieldModelAccount::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        return false
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        return false
+      end
+
+      @_model.verify
+    end
+
+    # Create a new model (begin phase)
+    def create_begin
+      buffer.allocate(4 + @_model.fbe_size)
+    end
+
+    # Create a new model (end phase)
+    def create_end(fbe_begin)
+      fbe_end = buffer.size
+      fbe_full_size = fbe_end - fbe_begin
+      write_uint32(@_model.fbe_offset - 4, fbe_full_size)
+      fbe_full_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_begin = create_begin
+      @_model.set(value)
+      create_end(fbe_begin)
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = Account.new)
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        [Account.new, 0]
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        [Account.new, 0]
+      end
+
+      @_model.get(value)
+      [value, fbe_full_size]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalModelAccount < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+      @_uid = FBE::FinalModelInt32(self.buffer, 0)
+      @_name = FBE::FinalModelString(self.buffer, 0)
+      @_state = FinalModelStateEx(self.buffer, 0)
+      @_wallet = FinalModelBalance(self.buffer, 0)
+      @_asset = FBE::FinalModelOptional(FinalModelBalance(self.buffer, 0), self.buffer, 0)
+      @_orders = FBE::FinalModelVector(FinalModelOrder(self.buffer, 0), self.buffer, 0)
+    end
+
+    def uid
+      @_uid
+    end
+
+    def name
+      @_name
+    end
+
+    def state
+      @_state
+    end
+
+    def wallet
+      @_wallet
+    end
+
+    def asset
+      @_asset
+    end
+
+    def orders
+      @_orders
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(fbe_value)
+      0
+        + uid.fbe_allocation_size(fbe_value.uid)
+        + name.fbe_allocation_size(fbe_value.name)
+        + state.fbe_allocation_size(fbe_value.state)
+        + wallet.fbe_allocation_size(fbe_value.wallet)
+        + asset.fbe_allocation_size(fbe_value.asset)
+        + orders.fbe_allocation_size(fbe_value.orders)
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 3
+
+    # Check if the struct value is valid
+    def verify
+      @_buffer.shift(fbe_offset)
+      fbe_result = verify_fields
+      @_buffer.unshift(fbe_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields
+      fbe_current_offset = 0
+
+      uid.fbe_offset = fbe_current_offset
+      fbe_field_size = uid.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      name.fbe_offset = fbe_current_offset
+      fbe_field_size = name.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      state.fbe_offset = fbe_current_offset
+      fbe_field_size = state.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      wallet.fbe_offset = fbe_current_offset
+      fbe_field_size = wallet.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      asset.fbe_offset = fbe_current_offset
+      fbe_field_size = asset.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      orders.fbe_offset = fbe_current_offset
+      fbe_field_size = orders.verify
+      if fbe_field_size == Fixnum::MAX
+        return Fixnum::MAX
+      end
+      fbe_current_offset += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_offset
+    end
+
+    # Get the struct value
+    def get(fbe_value = Account.new)
+      @_buffer.shift(fbe_offset)
+      fbe_size = get_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      [fbe_value, fbe_size]
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      uid.fbe_offset = fbe_current_offset
+      fbe_result = uid.get
+      fbe_value.uid = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      name.fbe_offset = fbe_current_offset
+      fbe_result = name.get
+      fbe_value.name = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      state.fbe_offset = fbe_current_offset
+      fbe_result = state.get
+      fbe_value.state = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      wallet.fbe_offset = fbe_current_offset
+      fbe_result = wallet.get
+      fbe_value.wallet = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      asset.fbe_offset = fbe_current_offset
+      fbe_result = asset.get
+      fbe_value.asset = fbe_result[0]
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      orders.fbe_offset = fbe_current_offset
+      fbe_result = orders.get(fbe_value.orders)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_result[1]
+      fbe_current_size += fbe_result[1]
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      @_buffer.shift(fbe_offset)
+      fbe_size = set_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      fbe_size
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      fbe_current_offset = 0
+      fbe_current_size = 0
+
+      uid.fbe_offset = fbe_current_offset
+      fbe_field_size = uid.set(fbe_value.uid)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      name.fbe_offset = fbe_current_offset
+      fbe_field_size = name.set(fbe_value.name)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      state.fbe_offset = fbe_current_offset
+      fbe_field_size = state.set(fbe_value.state)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      wallet.fbe_offset = fbe_current_offset
+      fbe_field_size = wallet.set(fbe_value.wallet)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      asset.fbe_offset = fbe_current_offset
+      fbe_field_size = asset.set(fbe_value.asset)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      orders.fbe_offset = fbe_current_offset
+      fbe_field_size = orders.set(fbe_value.orders)
+      # noinspection RubyUnusedLocalVariable
+      fbe_current_offset += fbe_field_size
+      fbe_current_size += fbe_field_size
+
+      # noinspection RubyUnnecessaryReturnValue
+      fbe_current_size
+    end
+  end
+
+  # Fast Binary Encoding Account final model class
+  class AccountFinalModel < FBE::Model
+    def initialize(buffer = WriteBuffer.new)
+      super(buffer)
+      @_model = FinalModelAccount(self.buffer, 8)
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FinalModelAccount::TYPE
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        return false
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) or (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      (8 + @_model.verify) == fbe_struct_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_initial_size = buffer.size
+
+      fbe_struct_type = fbe_type
+      fbe_struct_size = 8 + @_model.fbe_allocation_size(value)
+      fbe_struct_offset = buffer.allocate(fbe_struct_size) - buffer.offset
+      if (buffer.offset + fbe_struct_offset + fbe_struct_size) > buffer.size
+        return 0
+      end
+
+      fbe_struct_size = 8 + @_model.set(value)
+      buffer.resize(fbe_initial_size + fbe_struct_size)
+
+      write_uint32(@_model.fbe_offset - 8, fbe_struct_size)
+      write_uint32(@_model.fbe_offset - 4, fbe_struct_type)
+
+      fbe_struct_size
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = Account.new)
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        [Account.new, 0]
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) || (fbe_struct_type != fbe_type)
+        [Account.new, 8]
+      end
+
+      fbe_result = @_model.get(value)
+      [fbe_result[0], (8 + fbe_result[1])]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
     end
   end
 
