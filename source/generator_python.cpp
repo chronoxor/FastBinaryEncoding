@@ -3314,9 +3314,14 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
     WriteLine();
     WriteLineIndent("def clone(self):");
     Indent(1);
-    WriteLineIndent("clone = " + *s->name + "()");
-    WriteLineIndent("clone.copy(self)");
-    WriteLineIndent("return clone");
+    WriteLineIndent("# Serialize the struct to the FBE stream");
+    WriteLineIndent("writer = " + *s->name + "Model(fbe.WriteBuffer())");
+    WriteLineIndent("writer.serialize(self)");
+    WriteLine();
+    WriteLineIndent("# Deserialize the struct from the FBE stream");
+    WriteLineIndent("reader = " + *s->name + "Model(fbe.ReadBuffer())");
+    WriteLineIndent("reader.attach_buffer(writer.buffer)");
+    WriteLineIndent("return reader.deserialize()[0]");
     Indent(-1);
 
     // Generate struct __eq__ method

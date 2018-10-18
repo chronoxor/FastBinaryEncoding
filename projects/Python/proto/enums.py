@@ -1342,9 +1342,14 @@ class Enums(object):
         return self
 
     def clone(self):
-        clone = Enums()
-        clone.copy(self)
-        return clone
+        # Serialize the struct to the FBE stream
+        writer = EnumsModel(fbe.WriteBuffer())
+        writer.serialize(self)
+
+        # Deserialize the struct from the FBE stream
+        reader = EnumsModel(fbe.ReadBuffer())
+        reader.attach_buffer(writer.buffer)
+        return reader.deserialize()[0]
 
     def __eq__(self, other):
         if not isinstance(self, other.__class__):

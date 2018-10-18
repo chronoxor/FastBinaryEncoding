@@ -670,9 +670,14 @@ class StructSimple(object):
         return self
 
     def clone(self):
-        clone = StructSimple()
-        clone.copy(self)
-        return clone
+        # Serialize the struct to the FBE stream
+        writer = StructSimpleModel(fbe.WriteBuffer())
+        writer.serialize(self)
+
+        # Deserialize the struct from the FBE stream
+        reader = StructSimpleModel(fbe.ReadBuffer())
+        reader.attach_buffer(writer.buffer)
+        return reader.deserialize()[0]
 
     def __eq__(self, other):
         if not isinstance(self, other.__class__):
@@ -3392,9 +3397,14 @@ class StructOptional(StructSimple):
         return self
 
     def clone(self):
-        clone = StructOptional()
-        clone.copy(self)
-        return clone
+        # Serialize the struct to the FBE stream
+        writer = StructOptionalModel(fbe.WriteBuffer())
+        writer.serialize(self)
+
+        # Deserialize the struct from the FBE stream
+        reader = StructOptionalModel(fbe.ReadBuffer())
+        reader.attach_buffer(writer.buffer)
+        return reader.deserialize()[0]
 
     def __eq__(self, other):
         if not isinstance(self, other.__class__):
@@ -7218,9 +7228,14 @@ class StructNested(StructOptional):
         return self
 
     def clone(self):
-        clone = StructNested()
-        clone.copy(self)
-        return clone
+        # Serialize the struct to the FBE stream
+        writer = StructNestedModel(fbe.WriteBuffer())
+        writer.serialize(self)
+
+        # Deserialize the struct from the FBE stream
+        reader = StructNestedModel(fbe.ReadBuffer())
+        reader.attach_buffer(writer.buffer)
+        return reader.deserialize()[0]
 
     def __eq__(self, other):
         if not isinstance(self, other.__class__):
@@ -8273,9 +8288,14 @@ class StructBytes(object):
         return self
 
     def clone(self):
-        clone = StructBytes()
-        clone.copy(self)
-        return clone
+        # Serialize the struct to the FBE stream
+        writer = StructBytesModel(fbe.WriteBuffer())
+        writer.serialize(self)
+
+        # Deserialize the struct from the FBE stream
+        reader = StructBytesModel(fbe.ReadBuffer())
+        reader.attach_buffer(writer.buffer)
+        return reader.deserialize()[0]
 
     def __eq__(self, other):
         if not isinstance(self, other.__class__):
@@ -8885,9 +8905,14 @@ class StructArray(object):
         return self
 
     def clone(self):
-        clone = StructArray()
-        clone.copy(self)
-        return clone
+        # Serialize the struct to the FBE stream
+        writer = StructArrayModel(fbe.WriteBuffer())
+        writer.serialize(self)
+
+        # Deserialize the struct from the FBE stream
+        reader = StructArrayModel(fbe.ReadBuffer())
+        reader.attach_buffer(writer.buffer)
+        return reader.deserialize()[0]
 
     def __eq__(self, other):
         if not isinstance(self, other.__class__):
@@ -9913,9 +9938,14 @@ class StructVector(object):
         return self
 
     def clone(self):
-        clone = StructVector()
-        clone.copy(self)
-        return clone
+        # Serialize the struct to the FBE stream
+        writer = StructVectorModel(fbe.WriteBuffer())
+        writer.serialize(self)
+
+        # Deserialize the struct from the FBE stream
+        reader = StructVectorModel(fbe.ReadBuffer())
+        reader.attach_buffer(writer.buffer)
+        return reader.deserialize()[0]
 
     def __eq__(self, other):
         if not isinstance(self, other.__class__):
@@ -10941,9 +10971,14 @@ class StructList(object):
         return self
 
     def clone(self):
-        clone = StructList()
-        clone.copy(self)
-        return clone
+        # Serialize the struct to the FBE stream
+        writer = StructListModel(fbe.WriteBuffer())
+        writer.serialize(self)
+
+        # Deserialize the struct from the FBE stream
+        reader = StructListModel(fbe.ReadBuffer())
+        reader.attach_buffer(writer.buffer)
+        return reader.deserialize()[0]
 
     def __eq__(self, other):
         if not isinstance(self, other.__class__):
@@ -11945,9 +11980,14 @@ class StructSet(object):
         return self
 
     def clone(self):
-        clone = StructSet()
-        clone.copy(self)
-        return clone
+        # Serialize the struct to the FBE stream
+        writer = StructSetModel(fbe.WriteBuffer())
+        writer.serialize(self)
+
+        # Deserialize the struct from the FBE stream
+        reader = StructSetModel(fbe.ReadBuffer())
+        reader.attach_buffer(writer.buffer)
+        return reader.deserialize()[0]
 
     def __eq__(self, other):
         if not isinstance(self, other.__class__):
@@ -12621,9 +12661,14 @@ class StructMap(object):
         return self
 
     def clone(self):
-        clone = StructMap()
-        clone.copy(self)
-        return clone
+        # Serialize the struct to the FBE stream
+        writer = StructMapModel(fbe.WriteBuffer())
+        writer.serialize(self)
+
+        # Deserialize the struct from the FBE stream
+        reader = StructMapModel(fbe.ReadBuffer())
+        reader.attach_buffer(writer.buffer)
+        return reader.deserialize()[0]
 
     def __eq__(self, other):
         if not isinstance(self, other.__class__):
@@ -13679,9 +13724,14 @@ class StructHash(object):
         return self
 
     def clone(self):
-        clone = StructHash()
-        clone.copy(self)
-        return clone
+        # Serialize the struct to the FBE stream
+        writer = StructHashModel(fbe.WriteBuffer())
+        writer.serialize(self)
+
+        # Deserialize the struct from the FBE stream
+        reader = StructHashModel(fbe.ReadBuffer())
+        reader.attach_buffer(writer.buffer)
+        return reader.deserialize()[0]
 
     def __eq__(self, other):
         if not isinstance(self, other.__class__):
@@ -14755,9 +14805,14 @@ class StructHashEx(object):
         return self
 
     def clone(self):
-        clone = StructHashEx()
-        clone.copy(self)
-        return clone
+        # Serialize the struct to the FBE stream
+        writer = StructHashExModel(fbe.WriteBuffer())
+        writer.serialize(self)
+
+        # Deserialize the struct from the FBE stream
+        reader = StructHashExModel(fbe.ReadBuffer())
+        reader.attach_buffer(writer.buffer)
+        return reader.deserialize()[0]
 
     def __eq__(self, other):
         if not isinstance(self, other.__class__):

@@ -10,20 +10,51 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/Python$Unittests_in_test_clone_py.coverage" NAME="Unittests in test_clone.py Coverage Results" MODIFIED="1539850329692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Python$Unittests_in_test_serialization_py.coverage" NAME="Unittests in test_serialization.py Coverage Results" MODIFIED="1539802210026" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Python$create.coverage" NAME="create Coverage Results" MODIFIED="1538171870770" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
-    <SUITE FILE_PATH="coverage/Python$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1539803523343" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Python$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1539850559706" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Python$print_json.coverage" NAME="print_json Coverage Results" MODIFIED="1539797254122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/Python$print.coverage" NAME="print Coverage Results" MODIFIED="1539814597693" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/Python$Unittests_in_test_decimal_py.coverage" NAME="Unittests in test_decimal.py Coverage Results" MODIFIED="1539652256057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="print.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="print.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/print.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
               <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="proto.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/proto/proto.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="28">
+              <caret line="1647" lean-forward="true" selection-start-line="1647" selection-end-line="1647" />
+              <folding>
+                <element signature="e#130#143#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_clone.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_clone.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="289">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="protoex.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/proto/protoex.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="1773" lean-forward="true" selection-start-line="1773" selection-end-line="1773" />
             </state>
           </provider>
         </entry>
@@ -36,8 +67,8 @@
         <option value="$PROJECT_DIR$/tests/test_serialization.py" />
         <option value="$PROJECT_DIR$/examples/print_json.py" />
         <option value="$PROJECT_DIR$/proto/enums.py" />
-        <option value="$PROJECT_DIR$/proto/proto.py" />
         <option value="$PROJECT_DIR$/examples/print.py" />
+        <option value="$PROJECT_DIR$/proto/proto.py" />
       </list>
     </option>
   </component>
@@ -51,8 +82,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="512" />
-    <option name="y" value="278" />
+    <option name="x" value="1033" />
+    <option name="y" value="545" />
     <option name="width" value="1534" />
     <option name="height" value="1022" />
   </component>
@@ -107,7 +138,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.print">
+  <component name="RunManager" selected="Python tests.Unittests in tests">
     <configuration name="print" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Python" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -146,7 +177,7 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="Unittests in test_decimal.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="Unittests in test_clone.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="Python" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -157,7 +188,7 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/test_decimal.py&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/test_clone.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
     <configuration name="Unittests in test_serialization.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
@@ -191,17 +222,17 @@
     <list>
       <item itemvalue="Python tests.Unittests in tests" />
       <item itemvalue="Python.print" />
-      <item itemvalue="Python tests.Unittests in test_decimal.py" />
       <item itemvalue="Python.print_json" />
       <item itemvalue="Python tests.Unittests in test_serialization.py" />
+      <item itemvalue="Python tests.Unittests in test_clone.py" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.print" />
         <item itemvalue="Python tests.Unittests in tests" />
+        <item itemvalue="Python tests.Unittests in test_clone.py" />
+        <item itemvalue="Python.print" />
         <item itemvalue="Python tests.Unittests in test_serialization.py" />
         <item itemvalue="Python.print_json" />
-        <item itemvalue="Python tests.Unittests in test_decimal.py" />
       </list>
     </recent_temporary>
   </component>
@@ -219,21 +250,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_test_decimal_py - 2018.10.16 at 03h 52m 19s.xml">
-      <configuration name="Unittests in test_decimal.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_decimal_py - 2018.10.16 at 03h 52m 24s.xml">
-      <configuration name="Unittests in test_decimal.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_test_decimal_py - 2018.10.16 at 04h 10m 56s.xml">
-      <configuration name="Unittests in test_decimal.py" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 22m 57s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 31m 38s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_in_tests - 2018.10.17 at 21h 47m 22s.xml">
       <configuration name="Unittests in tests" configurationId="tests" />
     </history-entry>
@@ -249,9 +265,24 @@
     <history-entry file="Unittests_in_tests - 2018.10.17 at 22h 12m 05s.xml">
       <configuration name="Unittests in tests" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_in_tests - 2018.10.18 at 11h 10m 52s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_clone_py - 2018.10.18 at 11h 11m 11s.xml">
+      <configuration name="Unittests in test_clone.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_test_clone_py - 2018.10.18 at 11h 12m 17s.xml">
+      <configuration name="Unittests in test_clone.py" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_tests - 2018.10.18 at 11h 12m 22s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_tests - 2018.10.18 at 11h 16m 01s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="512" y="278" width="1534" height="1022" extended-state="0" />
+    <frame x="1033" y="545" width="1534" height="1022" extended-state="0" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
@@ -266,7 +297,7 @@
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39967638" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39907727" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -284,14 +315,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/proto/protoex.py</url>
-          <line>1738</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="7" />
+      <option name="time" value="9" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -530,9 +554,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_clone.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -619,23 +640,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proto/protoex.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="1750" column="12" selection-start-line="1750" selection-start-column="12" selection-end-line="1750" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/proto.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="430">
-          <caret line="1625" selection-start-line="1625" selection-end-line="1625" />
-          <folding>
-            <element signature="e#130#143#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/serialization_json.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -649,6 +653,30 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_clone.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/proto.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="1647" lean-forward="true" selection-start-line="1647" selection-end-line="1647" />
+          <folding>
+            <element signature="e#130#143#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/protoex.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="1773" lean-forward="true" selection-start-line="1773" selection-end-line="1773" />
         </state>
       </provider>
     </entry>

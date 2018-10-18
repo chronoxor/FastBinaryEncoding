@@ -387,9 +387,14 @@ class Order(object):
         return self
 
     def clone(self):
-        clone = Order()
-        clone.copy(self)
-        return clone
+        # Serialize the struct to the FBE stream
+        writer = OrderModel(fbe.WriteBuffer())
+        writer.serialize(self)
+
+        # Deserialize the struct from the FBE stream
+        reader = OrderModel(fbe.ReadBuffer())
+        reader.attach_buffer(writer.buffer)
+        return reader.deserialize()[0]
 
     def __eq__(self, other):
         if not isinstance(self, other.__class__):
@@ -1100,9 +1105,14 @@ class Balance(object):
         return self
 
     def clone(self):
-        clone = Balance()
-        clone.copy(self)
-        return clone
+        # Serialize the struct to the FBE stream
+        writer = BalanceModel(fbe.WriteBuffer())
+        writer.serialize(self)
+
+        # Deserialize the struct from the FBE stream
+        reader = BalanceModel(fbe.ReadBuffer())
+        reader.attach_buffer(writer.buffer)
+        return reader.deserialize()[0]
 
     def __eq__(self, other):
         if not isinstance(self, other.__class__):
@@ -1637,9 +1647,14 @@ class Account(object):
         return self
 
     def clone(self):
-        clone = Account()
-        clone.copy(self)
-        return clone
+        # Serialize the struct to the FBE stream
+        writer = AccountModel(fbe.WriteBuffer())
+        writer.serialize(self)
+
+        # Deserialize the struct from the FBE stream
+        reader = AccountModel(fbe.ReadBuffer())
+        reader.attach_buffer(writer.buffer)
+        return reader.deserialize()[0]
 
     def __eq__(self, other):
         if not isinstance(self, other.__class__):

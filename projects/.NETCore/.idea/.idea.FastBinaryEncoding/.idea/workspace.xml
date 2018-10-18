@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="edfd070c-0d53-4afa-88cb-34dff2e2435b" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../../include/generator_ruby.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_ruby.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../modules/CppBenchmark" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppBenchmark" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../modules/CppCommon" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppCommon" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/enums.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/enums.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/proto.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/proto.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/protoex.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/protoex.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_ruby.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_ruby.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,10 +16,11 @@
     <session id="-292042193">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
+          <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.3" value="2" />
-          <entry key="project.opened" value="3" />
+          <entry key="project.opened" value="4" />
         </counts>
       </usages-collector>
     </session>
@@ -43,8 +38,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="613" />
-    <option name="y" value="401" />
+    <option name="x" value="773" />
+    <option name="y" value="426" />
     <option name="width" value="1036" />
     <option name="height" value="773" />
   </component>
@@ -54,6 +49,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="FileSystemExplorer" />
       <pane id="SolutionExplorer">
         <subPane>
           <expand>
@@ -71,7 +67,6 @@
         </subPane>
         <option name="show-all-files" value="false" />
       </pane>
-      <pane id="FileSystemExplorer" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -151,12 +146,13 @@
       <workItem from="1538171599821" duration="646000" />
       <workItem from="1538592850345" duration="40000" />
       <workItem from="1539797978382" duration="52000" />
-      <workItem from="1539798104264" duration="1810000" />
+      <workItem from="1539798104264" duration="1812000" />
+      <workItem from="1539848931285" duration="273000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2548000" />
+    <option name="totallyTimeSpent" value="2823000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -168,14 +164,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="613" y="401" width="1036" height="773" extended-state="0" />
+    <frame x="773" y="426" width="1036" height="773" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3637295" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.37192622" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3296875" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3296875" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
