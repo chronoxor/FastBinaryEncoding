@@ -1897,7 +1897,7 @@ module Test
     end
 
     def copy(other)
-      super
+      super(other)
       @f1000 = other.f1000
       @f1001 = other.f1001
       @f1002 = other.f1002
