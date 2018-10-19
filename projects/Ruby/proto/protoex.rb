@@ -11,6 +11,7 @@
 # rubocop:disable Metrics/PerceivedComplexity
 
 require 'bigdecimal'
+require 'json'
 require 'set'
 require 'uuidtools'
 
@@ -699,6 +700,19 @@ module Protoex
       end
       result << ')'
       result
+    end
+
+    def to_json_map
+      result = {}
+      self.instance_variables.each do |key|
+        result[key] = self.instance_variable_get(key)
+      end
+      result
+    end
+
+    # Get struct JSON value
+    def to_json
+      JSON.generate(to_json_map)
     end
   end
 
@@ -1570,6 +1584,20 @@ module Protoex
       result << ')'
       result
     end
+
+    def to_json_map
+      result = {}
+      result.update(super)
+      self.instance_variables.each do |key|
+        result[key] = self.instance_variable_get(key)
+      end
+      result
+    end
+
+    # Get struct JSON value
+    def to_json
+      JSON.generate(to_json_map)
+    end
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
@@ -2181,6 +2209,19 @@ module Protoex
       end
       result << ')'
       result
+    end
+
+    def to_json_map
+      result = {}
+      self.instance_variables.each do |key|
+        result[key] = self.instance_variable_get(key)
+      end
+      result
+    end
+
+    # Get struct JSON value
+    def to_json
+      JSON.generate(to_json_map)
     end
   end
 

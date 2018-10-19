@@ -52,6 +52,7 @@ void GeneratorRuby::GenerateImports()
 {
     std::string code = R"CODE(
 require 'bigdecimal'
+require 'json'
 require 'set'
 require 'uuidtools'
 )CODE";
@@ -4183,6 +4184,37 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
     WriteLineIndent("result");
     Indent(-1);
     WriteLineIndent("end");
+
+    if (JSON())
+    {
+        // Generate struct to_json_map method
+        WriteLine();
+        WriteLineIndent("def to_json_map");
+        Indent(1);
+        WriteLineIndent("result = {}");
+        if (s->base && !s->base->empty())
+            WriteLineIndent("result.update(super)");
+        if (s->body)
+        {
+            WriteLineIndent("self.instance_variables.each do |key|");
+            Indent(1);
+            WriteLineIndent("result[key] = self.instance_variable_get(key)");
+            Indent(-1);
+            WriteLineIndent("end");
+        }
+        WriteLineIndent("result");
+        Indent(-1);
+        WriteLineIndent("end");
+
+        // Generate struct to_json method
+        WriteLine();
+        WriteLineIndent("# Get struct JSON value");
+        WriteLineIndent("def to_json");
+        Indent(1);
+        WriteLineIndent("JSON.generate(to_json_map)");
+        Indent(-1);
+        WriteLineIndent("end");
+    }
     /*
     if (JSON())
     {

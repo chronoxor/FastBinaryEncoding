@@ -11,6 +11,7 @@
 # rubocop:disable Metrics/PerceivedComplexity
 
 require 'bigdecimal'
+require 'json'
 require 'set'
 require 'uuidtools'
 
