@@ -44,39 +44,31 @@ benchmark = BenchmarkSerialization()
 iterations = 100000
 
 
+def report(name, duration):
+    print()
+    print("Phase: {}".format(name))
+    print("Average time: {:.3f} mcs / iteration".format(duration / iterations * 1000000))
+    print("Total time: {:.3f} s".format(duration))
+    print("Total iterations: {}".format(iterations))
+    print("Iterations throughput: {:.3f} / second".format(iterations / duration))
+    print()
+
+
 def main():
     # Benchmark verify() method
     times = timeit.repeat(setup='print("Benchmarking verify() method...")', stmt="benchmark.verify()", repeat=5, number=iterations, globals=globals())
     duration = min(times)
-    print()
-    print("Phase: Verify")
-    print("Average time: {:.3f} mcs / iteration".format(duration / iterations * 1000000))
-    print("Total time: {:.3f} s".format(duration))
-    print("Total iterations: {}".format(iterations))
-    print("Iterations throughput: {:.3f} / second".format(iterations / duration))
-    print()
+    report("Verify", duration)
 
     # Benchmark serialize() method
     times = timeit.repeat(setup='print("Benchmarking serialize() method...")', stmt="benchmark.serialize()", repeat=5, number=iterations, globals=globals())
     duration = min(times)
-    print()
-    print("Phase: Serialize")
-    print("Average time: {:.3f} mcs / iteration".format(duration / iterations * 1000000))
-    print("Total time: {:.3f} s".format(duration))
-    print("Total iterations: {}".format(iterations))
-    print("Iterations throughput: {:.3f} / second".format(iterations / duration))
-    print()
+    report("Serialize", duration)
 
     # Benchmark deserialize() method
     times = timeit.repeat(setup='print("Benchmarking deserialize() method...")', stmt="benchmark.deserialize()", repeat=5, number=iterations, globals=globals())
     duration = min(times)
-    print()
-    print("Phase: Deserialize")
-    print("Average time: {:.3f} mcs / iteration".format(duration / iterations * 1000000))
-    print("Total time: {:.3f} s".format(duration))
-    print("Total iterations: {}".format(iterations))
-    print("Iterations throughput: {:.3f} / second".format(iterations / duration))
-    print()
+    report("Deserialize", duration)
 
 
 if __name__ == "__main__":

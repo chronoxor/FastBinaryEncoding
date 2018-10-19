@@ -28,7 +28,7 @@ Typical usage workflow is the following:
 1. [Create domain model](#create-domain-model) using base types, enums,
    flags and structs
 2. [Generate domain model](#generate-domain-model) for any supported
-   programming languages (C++, C#, Java, JavaScript, Kotlin, Python)
+   programming languages (C++, C#, Java, JavaScript, Kotlin, Python, Ruby)
 3. [Build domain model](#build-domain-model) library
 4. [Serialize/Deserialize](#fbe-serialization) objects from the domain model
    in unified FastBinaryEncoding format (fast and compact)
@@ -44,6 +44,7 @@ Sample projects:
 * [JavaScript sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/JavaScript)
 * [Kotlin sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Kotlin)
 * [Python sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Python)
+* [Ruby sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Ruby)
 
 # Contents
   * [Features](#features)
@@ -68,7 +69,7 @@ Sample projects:
 
 # Features
 * Cross platform (Linux, OSX, Windows)
-* [Generators for C++, C#, Java, JavaScript, Kotlin, Python](#generate-domain-model)
+* [Generators for C++, C#, Java, JavaScript, Kotlin, Python, Ruby](#generate-domain-model)
 * [Fast binary encoding format](documents/FBE.md)
 * [Supported base types (byte, bool, char, wchar, int8, int16, int32, int64, float, double)](documents/FBE.md#base-types)
 * [Supported complex types (bytes, decimal, string, timestamp, uuid)](documents/FBE.md#complex-types)
@@ -238,6 +239,7 @@ Options:
   --javascript          Generate JavaScript code
   --kotlin              Generate Kotlin code
   --python              Generate Python code
+  --ruby                Generate Ruby code
   --final               Generate Final protocol code
   --json                Generate JSON protocol code
   --sender              Generate Sender/Receiver protocol code
@@ -285,6 +287,7 @@ dependencies that worth to be mentioned:
 ### Ruby
 * Some Ruby dependencies should be installed from Gems:
 ```shell
+gem install json
 gem install uuidtools
 ```
 
@@ -452,6 +455,7 @@ to get work with JSON:
 * C++ requires [RapidJSON](http://rapidjson.org)
 * C# requires [Json.NET](https://www.newtonsoft.com/json) or more faster [Utf8Json ](https://github.com/neuecc/Utf8Json)
 * Java and Kotlin requires [Gson](https://github.com/google/gson)
+* Ruby requires [json](https://rubygems.org/gems/json) gem
 
 Here is an exmple of JSON serialization in C++ language:
 ```c++
@@ -587,6 +591,7 @@ Package import is implemented using:
 * Packages in Java and Kotlin
 * Modules in JavaScript
 * Modules in Python
+* Ruby require statement
 
 # Struct keys
 Some of struct fileds (one or many) can be marked with '[key]' attribute. As
@@ -933,6 +938,7 @@ account.orders.emplace_back(3, "EURUSD", OrderSide::buy, OrderType::stop, 1.5, 1
 * [JavaScript benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/JavaScript/benchmarks) results were taken using [Benchmark.js library](https://benchmarkjs.com)
 * [Kotlin benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Kotlin/src/benchmarks) results were taken using [JMH library](http://openjdk.java.net/projects/code-tools/jmh)
 * [Python benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Python/benchmarks) results were taken using [timeit module](https://docs.python.org/3/library/timeit.html)
+* [Ruby benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Ruby/benchmarks) results were taken using [Benchmark module](http://ruby-doc.org/stdlib/libdoc/benchmark/rdoc/Benchmark.html)
 
 ## Benchmark 1: Serialization
 Serialization benchmark C++ code:
@@ -972,6 +978,9 @@ Serialization benchmark results:
 | Python Win64             |    252 bytes |        9 434 ops/s |         105 999 ns |
 | Python Win64 (Final)     |    152 bytes |       11 635 ops/s |          85 945 ns |
 | Python Win64 (JSON)      |    324 bytes |       61 737 ops/s |          16 198 ns |
+| Ruby Win64               |    252 bytes |       23 013 ops/s |          43 453 ns |
+| Ruby Win64 (Final)       |    152 bytes |       33 361 ops/s |          29 975 ns |
+| Ruby Win64 (JSON)        |    353 bytes |       50 842 ops/s |          19 669 ns |
 
 ## Benchmark 2: Deserialization
 Deserialization benchmark C++ code:
@@ -1008,6 +1017,9 @@ Deserialization benchmark results:
 | Python Win64             |    252 bytes |          8 305 ops/s |           120 411 ns |
 | Python Win64 (Final)     |    152 bytes |         11 661 ops/s |            85 758 ns |
 | Python Win64 (JSON)      |    324 bytes |         48 859 ops/s |            20 467 ns |
+| Ruby Win64               |    252 bytes |         24 351 ops/s |            41 066 ns |
+| Ruby Win64 (Final)       |    152 bytes |         33 555 ops/s |            29 802 ns |
+| Ruby Win64 (JSON)        |    353 bytes |         42 860 ops/s |            23 331 ns |
 
 ## Benchmark 3: Verify
 Verify benchmark C++ code:
@@ -1037,3 +1049,5 @@ Verify benchmark results:
 | Kotlin Win64 (Final)     |    152 bytes | 13 373 757 ops/s |       75 ns |
 | Python Win64             |    252 bytes |     20 825 ops/s |   48 019 ns |
 | Python Win64 (Final)     |    152 bytes |     23 590 ops/s |   42 391 ns |
+| Ruby Win64               |    252 bytes |     57 201 ops/s |   17 482 ns |
+| Ruby Win64 (Final)       |    152 bytes |     74 262 ops/s |   13 466 ns |
