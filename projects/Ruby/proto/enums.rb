@@ -11,6 +11,7 @@
 # rubocop:disable Metrics/PerceivedComplexity
 
 require 'bigdecimal'
+require 'set'
 require 'uuidtools'
 
 require_relative 'fbe'
@@ -35,6 +36,16 @@ module Enums
       # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value != value.value end
+
+      # Enum equals
+      def eql?(other)
+        self == other
+      end
+
+      # Enum hash code
+      def hash
+        @value.hash
+      end
 
       # Get enum integer value
       def to_i
@@ -183,6 +194,16 @@ module Enums
       def ==(value) @value == value.value end
       def !=(value) @value != value.value end
 
+      # Enum equals
+      def eql?(other)
+        self == other
+      end
+
+      # Enum hash code
+      def hash
+        @value.hash
+      end
+
       # Get enum integer value
       def to_i
         @value
@@ -329,6 +350,16 @@ module Enums
       # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value != value.value end
+
+      # Enum equals
+      def eql?(other)
+        self == other
+      end
+
+      # Enum hash code
+      def hash
+        @value.hash
+      end
 
       # Get enum integer value
       def to_i
@@ -477,6 +508,16 @@ module Enums
       def ==(value) @value == value.value end
       def !=(value) @value != value.value end
 
+      # Enum equals
+      def eql?(other)
+        self == other
+      end
+
+      # Enum hash code
+      def hash
+        @value.hash
+      end
+
       # Get enum integer value
       def to_i
         @value
@@ -623,6 +664,16 @@ module Enums
       # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value != value.value end
+
+      # Enum equals
+      def eql?(other)
+        self == other
+      end
+
+      # Enum hash code
+      def hash
+        @value.hash
+      end
 
       # Get enum integer value
       def to_i
@@ -771,6 +822,16 @@ module Enums
       def ==(value) @value == value.value end
       def !=(value) @value != value.value end
 
+      # Enum equals
+      def eql?(other)
+        self == other
+      end
+
+      # Enum hash code
+      def hash
+        @value.hash
+      end
+
       # Get enum integer value
       def to_i
         @value
@@ -917,6 +978,16 @@ module Enums
       # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value != value.value end
+
+      # Enum equals
+      def eql?(other)
+        self == other
+      end
+
+      # Enum hash code
+      def hash
+        @value.hash
+      end
 
       # Get enum integer value
       def to_i
@@ -1065,6 +1136,16 @@ module Enums
       def ==(value) @value == value.value end
       def !=(value) @value != value.value end
 
+      # Enum equals
+      def eql?(other)
+        self == other
+      end
+
+      # Enum hash code
+      def hash
+        @value.hash
+      end
+
       # Get enum integer value
       def to_i
         @value
@@ -1211,6 +1292,16 @@ module Enums
       # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value != value.value end
+
+      # Enum equals
+      def eql?(other)
+        self == other
+      end
+
+      # Enum hash code
+      def hash
+        @value.hash
+      end
 
       # Get enum integer value
       def to_i
@@ -1359,6 +1450,16 @@ module Enums
       def ==(value) @value == value.value end
       def !=(value) @value != value.value end
 
+      # Enum equals
+      def eql?(other)
+        self == other
+      end
+
+      # Enum hash code
+      def hash
+        @value.hash
+      end
+
       # Get enum integer value
       def to_i
         @value
@@ -1505,6 +1606,16 @@ module Enums
       # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value != value.value end
+
+      # Enum equals
+      def eql?(other)
+        self == other
+      end
+
+      # Enum hash code
+      def hash
+        @value.hash
+      end
 
       # Get enum integer value
       def to_i

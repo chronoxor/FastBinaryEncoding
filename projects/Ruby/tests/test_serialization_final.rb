@@ -2,9 +2,9 @@ require 'test/unit'
 
 require_relative '../proto/test'
 
-class TestSerialization < Test::Unit::TestCase
+class TestSerializationFinal < Test::Unit::TestCase
   # noinspection RubyInstanceMethodNamingConvention
-  def test_serialization_proto
+  def test_serialization_final_proto
     # Create a new account with some orders
     account1 = Proto::Account.new(1, 'Test', Proto::State.good, Proto::Balance.new('USD', 1000.0), Proto::Balance.new('EUR', 100.0))
     account1.orders.append(Proto::Order.new(1, 'EURUSD', Proto::OrderSide.buy, Proto::OrderType.market, 1.23456, 1000.0))
@@ -12,28 +12,24 @@ class TestSerialization < Test::Unit::TestCase
     account1.orders.append(Proto::Order.new(3, 'EURUSD', Proto::OrderSide.buy, Proto::OrderType.stop, 1.5, 10.0))
 
     # Serialize the account to the FBE stream
-    writer = Proto::AccountModel.new(FBE::WriteBuffer.new)
-    assert_equal(writer.model.fbe_offset, 4)
+    writer = Proto::AccountFinalModel.new(FBE::WriteBuffer.new)
     serialized = writer.serialize(account1)
     assert_equal(serialized, writer.buffer.size)
     assert_true(writer.verify)
     writer.next(serialized)
-    assert_equal(writer.model.fbe_offset, (4 + writer.buffer.size))
 
     # Check the serialized FBE size
-    assert_equal(writer.buffer.size, 252)
+    assert_equal(writer.buffer.size, 152)
 
     # Deserialize the account from the FBE stream
     # noinspection RubyUnusedLocalVariable
     account2 = Proto::Account.new
-    reader = Proto::AccountModel.new(FBE::ReadBuffer.new)
-    assert_equal(reader.model.fbe_offset, 4)
+    reader = Proto::AccountFinalModel.new(FBE::ReadBuffer.new)
     reader.attach_buffer(writer.buffer)
     assert_true(reader.verify)
     account2, deserialized = reader.deserialize(account2)
     assert_equal(deserialized, reader.buffer.size)
     reader.next(deserialized)
-    assert_equal(reader.model.fbe_offset, (4 + reader.buffer.size))
 
     assert_equal(account2.uid, 1)
     assert_equal(account2.name, 'Test')
@@ -65,35 +61,31 @@ class TestSerialization < Test::Unit::TestCase
   end
 
   # noinspection RubyInstanceMethodNamingConvention
-  def test_serialization_struct_simple
+  def test_serialization_final_struct_simple
     # Create a new struct
     struct1 = Test::StructSimple.new
 
     # Serialize the struct to the FBE stream
-    writer = Test::StructSimpleModel.new(FBE::WriteBuffer.new)
-    assert_equal(writer.model.fbe_type, 110)
-    assert_equal(writer.model.fbe_offset, 4)
+    writer = Test::StructSimpleFinalModel.new(FBE::WriteBuffer.new)
+    assert_equal(writer.fbe_type, 110)
     serialized = writer.serialize(struct1)
     assert_equal(serialized, writer.buffer.size)
     assert_true(writer.verify)
     writer.next(serialized)
-    assert_equal(writer.model.fbe_offset, (4 + writer.buffer.size))
 
     # Check the serialized FBE size
-    assert_equal(writer.buffer.size, 392)
+    assert_equal(writer.buffer.size, 304)
 
     # Deserialize the struct from the FBE stream
     # noinspection RubyUnusedLocalVariable
     struct2 = Test::StructSimple.new
-    reader = Test::StructSimpleModel.new(FBE::ReadBuffer.new)
-    assert_equal(reader.model.fbe_type, 110)
-    assert_equal(reader.model.fbe_offset, 4)
+    reader = Test::StructSimpleFinalModel.new(FBE::ReadBuffer.new)
+    assert_equal(reader.fbe_type, 110)
     reader.attach_buffer(writer.buffer)
     assert_true(reader.verify)
     struct2, deserialized = reader.deserialize(struct2)
     assert_equal(deserialized, reader.buffer.size)
     reader.next(deserialized)
-    assert_equal(reader.model.fbe_offset, (4 + reader.buffer.size))
 
     assert_equal(struct2.f1, false)
     assert_equal(struct2.f2, true)
@@ -178,35 +170,31 @@ class TestSerialization < Test::Unit::TestCase
   end
 
   # noinspection RubyInstanceMethodNamingConvention, RubyScope
-  def test_serialization_struct_optional
+  def test_serialization_final_struct_optional
     # Create a new struct
     struct1 = Test::StructOptional.new
 
     # Serialize the struct to the FBE stream
-    writer = Test::StructOptionalModel.new(FBE::WriteBuffer.new)
-    assert_equal(writer.model.fbe_type, 111)
-    assert_equal(writer.model.fbe_offset, 4)
+    writer = Test::StructOptionalFinalModel.new(FBE::WriteBuffer.new)
+    assert_equal(writer.fbe_type, 111)
     serialized = writer.serialize(struct1)
     assert_equal(serialized, writer.buffer.size)
     assert_true(writer.verify)
     writer.next(serialized)
-    assert_equal(writer.model.fbe_offset, (4 + writer.buffer.size))
 
     # Check the serialized FBE size
-    assert_equal(writer.buffer.size, 834)
+    assert_equal(writer.buffer.size, 478)
 
     # Deserialize the struct from the FBE stream
     # noinspection RubyUnusedLocalVariable
     struct2 = Test::StructOptional.new
-    reader = Test::StructOptionalModel.new(FBE::ReadBuffer.new)
-    assert_equal(reader.model.fbe_type, 111)
-    assert_equal(reader.model.fbe_offset, 4)
+    reader = Test::StructOptionalFinalModel.new(FBE::ReadBuffer.new)
+    assert_equal(reader.fbe_type, 111)
     reader.attach_buffer(writer.buffer)
     assert_true(reader.verify)
     struct2, deserialized = reader.deserialize(struct2)
     assert_equal(deserialized, reader.buffer.size)
     reader.next(deserialized)
-    assert_equal(reader.model.fbe_offset, (4 + reader.buffer.size))
 
     assert_equal(struct2.f1, false)
     assert_equal(struct2.f2, true)
@@ -436,35 +424,31 @@ class TestSerialization < Test::Unit::TestCase
   end
 
   # noinspection RubyInstanceMethodNamingConvention, RubyScope
-  def test_serialization_struct_nested
+  def test_serialization_final_struct_nested
     # Create a new struct
     struct1 = Test::StructNested.new
 
     # Serialize the struct to the FBE stream
-    writer = Test::StructNestedModel.new(FBE::WriteBuffer.new)
-    assert_equal(writer.model.fbe_type, 112)
-    assert_equal(writer.model.fbe_offset, 4)
+    writer = Test::StructNestedFinalModel.new(FBE::WriteBuffer.new)
+    assert_equal(writer.fbe_type, 112)
     serialized = writer.serialize(struct1)
     assert_equal(serialized, writer.buffer.size)
     assert_true(writer.verify)
     writer.next(serialized)
-    assert_equal(writer.model.fbe_offset, (4 + writer.buffer.size))
 
     # Check the serialized FBE size
-    assert_equal(writer.buffer.size, 2099)
+    assert_equal(writer.buffer.size, 1267)
 
     # Deserialize the struct from the FBE stream
     # noinspection RubyUnusedLocalVariable
     struct2 = Test::StructNested.new
-    reader = Test::StructNestedModel.new(FBE::ReadBuffer.new)
-    assert_equal(reader.model.fbe_type, 112)
-    assert_equal(reader.model.fbe_offset, 4)
+    reader = Test::StructNestedFinalModel.new(FBE::ReadBuffer.new)
+    assert_equal(reader.fbe_type, 112)
     reader.attach_buffer(writer.buffer)
     assert_true(reader.verify)
     struct2, deserialized = reader.deserialize(struct2)
     assert_equal(deserialized, reader.buffer.size)
     reader.next(deserialized)
-    assert_equal(reader.model.fbe_offset, (4 + reader.buffer.size))
 
     assert_true(struct2.f100.nil?)
     assert_false(struct2.f101.nil?)
@@ -674,37 +658,33 @@ class TestSerialization < Test::Unit::TestCase
   end
 
   # noinspection RubyInstanceMethodNamingConvention
-  def test_serialization_struct_bytes
+  def test_serialization_final_struct_bytes
     # Create a new struct
     struct1 = Test::StructBytes.new
     struct1.f1 = 'ABC'
     struct1.f2 = 'test'
 
     # Serialize the struct to the FBE stream
-    writer = Test::StructBytesModel.new(FBE::WriteBuffer.new)
-    assert_equal(writer.model.fbe_type, 120)
-    assert_equal(writer.model.fbe_offset, 4)
+    writer = Test::StructBytesFinalModel.new(FBE::WriteBuffer.new)
+    assert_equal(writer.fbe_type, 120)
     serialized = writer.serialize(struct1)
     assert_equal(serialized, writer.buffer.size)
     assert_true(writer.verify)
     writer.next(serialized)
-    assert_equal(writer.model.fbe_offset, (4 + writer.buffer.size))
 
     # Check the serialized FBE size
-    assert_equal(writer.buffer.size, 49)
+    assert_equal(writer.buffer.size, 25)
 
     # Deserialize the struct from the FBE stream
     # noinspection RubyUnusedLocalVariable
     struct2 = Test::StructBytes.new
-    reader = Test::StructBytesModel.new(FBE::ReadBuffer.new)
-    assert_equal(reader.model.fbe_type, 120)
-    assert_equal(reader.model.fbe_offset, 4)
+    reader = Test::StructBytesFinalModel.new(FBE::ReadBuffer.new)
+    assert_equal(reader.fbe_type, 120)
     reader.attach_buffer(writer.buffer)
     assert_true(reader.verify)
     struct2, deserialized = reader.deserialize(struct2)
     assert_equal(deserialized, reader.buffer.size)
     reader.next(deserialized)
-    assert_equal(reader.model.fbe_offset, (4 + reader.buffer.size))
 
     assert_equal(struct2.f1.length, 3)
     assert_equal(struct2.f1[0].chr, 'A')
@@ -720,7 +700,7 @@ class TestSerialization < Test::Unit::TestCase
   end
 
   # noinspection RubyInstanceMethodNamingConvention
-  def test_serialization_struct_array
+  def test_serialization_final_struct_array
     # Create a new struct
     struct1 = Test::StructArray.new
     struct1.f1[0] = 48
@@ -745,30 +725,26 @@ class TestSerialization < Test::Unit::TestCase
     struct1.f10[1] = nil
 
     # Serialize the struct to the FBE stream
-    writer = Test::StructArrayModel.new(FBE::WriteBuffer.new)
-    assert_equal(writer.model.fbe_type, 125)
-    assert_equal(writer.model.fbe_offset, 4)
+    writer = Test::StructArrayFinalModel.new(FBE::WriteBuffer.new)
+    assert_equal(writer.fbe_type, 125)
     serialized = writer.serialize(struct1)
     assert_equal(serialized, writer.buffer.size)
     assert_true(writer.verify)
     writer.next(serialized)
-    assert_equal(writer.model.fbe_offset, (4 + writer.buffer.size))
 
     # Check the serialized FBE size
-    assert_equal(writer.buffer.size, 1290)
+    assert_equal(writer.buffer.size, 954)
 
     # Deserialize the struct from the FBE stream
     # noinspection RubyUnusedLocalVariable
     struct2 = Test::StructArray.new
-    reader = Test::StructArrayModel.new(FBE::ReadBuffer.new)
-    assert_equal(reader.model.fbe_type, 125)
-    assert_equal(reader.model.fbe_offset, 4)
+    reader = Test::StructArrayFinalModel.new(FBE::ReadBuffer.new)
+    assert_equal(reader.fbe_type, 125)
     reader.attach_buffer(writer.buffer)
     assert_true(reader.verify)
     (struct2, deserialized) = reader.deserialize(struct2)
     assert_equal(deserialized, reader.buffer.size)
     reader.next(deserialized)
-    assert_equal(reader.model.fbe_offset, (4 + reader.buffer.size))
 
     assert_equal(struct2.f1.length, 2)
     assert_equal(struct2.f1[0], 48)
@@ -820,7 +796,7 @@ class TestSerialization < Test::Unit::TestCase
   end
 
   # noinspection RubyInstanceMethodNamingConvention
-  def test_serialization_struct_vector
+  def test_serialization_final_struct_vector
     # Create a new struct
     struct1 = Test::StructVector.new
     struct1.f1.append(48)
@@ -845,30 +821,26 @@ class TestSerialization < Test::Unit::TestCase
     struct1.f10.append(nil)
 
     # Serialize the struct to the FBE stream
-    writer = Test::StructVectorModel.new(FBE::WriteBuffer.new)
-    assert_equal(writer.model.fbe_type, 130)
-    assert_equal(writer.model.fbe_offset, 4)
+    writer = Test::StructVectorFinalModel.new(FBE::WriteBuffer.new)
+    assert_equal(writer.fbe_type, 130)
     serialized = writer.serialize(struct1)
     assert_equal(serialized, writer.buffer.size)
     assert_true(writer.verify)
     writer.next(serialized)
-    assert_equal(writer.model.fbe_offset, (4 + writer.buffer.size))
 
     # Check the serialized FBE size
-    assert_equal(writer.buffer.size, 1370)
+    assert_equal(writer.buffer.size, 994)
 
     # Deserialize the struct from the FBE stream
     # noinspection RubyUnusedLocalVariable
     struct2 = Test::StructVector.new
-    reader = Test::StructVectorModel.new(FBE::ReadBuffer.new)
-    assert_equal(reader.model.fbe_type, 130)
-    assert_equal(reader.model.fbe_offset, 4)
+    reader = Test::StructVectorFinalModel.new(FBE::ReadBuffer.new)
+    assert_equal(reader.fbe_type, 130)
     reader.attach_buffer(writer.buffer)
     assert_true(reader.verify)
     struct2, deserialized = reader.deserialize(struct2)
     assert_equal(deserialized, reader.buffer.size)
     reader.next(deserialized)
-    assert_equal(reader.model.fbe_offset, (4 + reader.buffer.size))
 
     assert_equal(struct2.f1.length, 2)
     assert_equal(struct2.f1[0], 48)
@@ -920,7 +892,7 @@ class TestSerialization < Test::Unit::TestCase
   end
 
   # noinspection RubyInstanceMethodNamingConvention
-  def test_serialization_struct_list
+  def test_serialization_final_struct_list
     # Create a new struct
     struct1 = Test::StructList.new
     struct1.f1.append(48)
@@ -945,30 +917,26 @@ class TestSerialization < Test::Unit::TestCase
     struct1.f10.append(nil)
 
     # Serialize the struct to the FBE stream
-    writer = Test::StructListModel.new(FBE::WriteBuffer.new)
-    assert_equal(writer.model.fbe_type, 131)
-    assert_equal(writer.model.fbe_offset, 4)
+    writer = Test::StructListFinalModel.new(FBE::WriteBuffer.new)
+    assert_equal(writer.fbe_type, 131)
     serialized = writer.serialize(struct1)
     assert_equal(serialized, writer.buffer.size)
     assert_true(writer.verify)
     writer.next(serialized)
-    assert_equal(writer.model.fbe_offset, (4 + writer.buffer.size))
 
     # Check the serialized FBE size
-    assert_equal(writer.buffer.size, 1370)
+    assert_equal(writer.buffer.size, 994)
 
     # Deserialize the struct from the FBE stream
     # noinspection RubyUnusedLocalVariable
     struct2 = Test::StructList.new
-    reader = Test::StructListModel.new(FBE::ReadBuffer.new)
-    assert_equal(reader.model.fbe_type, 131)
-    assert_equal(reader.model.fbe_offset, 4)
+    reader = Test::StructListFinalModel.new(FBE::ReadBuffer.new)
+    assert_equal(reader.fbe_type, 131)
     reader.attach_buffer(writer.buffer)
     assert_true(reader.verify)
     struct2, deserialized = reader.deserialize(struct2)
     assert_equal(deserialized, reader.buffer.size)
     reader.next(deserialized)
-    assert_equal(reader.model.fbe_offset, (4 + reader.buffer.size))
 
     assert_equal(struct2.f1.length, 2)
     assert_equal(struct2.f1[0], 48)
@@ -1020,7 +988,7 @@ class TestSerialization < Test::Unit::TestCase
   end
 
   # noinspection RubyInstanceMethodNamingConvention
-  def test_serialization_struct_set
+  def test_serialization_final_struct_set
     # Create a new struct
     struct1 = Test::StructSet.new
     struct1.f1.add(48)
@@ -1038,30 +1006,26 @@ class TestSerialization < Test::Unit::TestCase
     struct1.f4.add(s2)
 
     # Serialize the struct to the FBE stream
-    writer = Test::StructSetModel.new(FBE::WriteBuffer.new)
-    assert_equal(writer.model.fbe_type, 132)
-    assert_equal(writer.model.fbe_offset, 4)
+    writer = Test::StructSetFinalModel.new(FBE::WriteBuffer.new)
+    assert_equal(writer.fbe_type, 132)
     serialized = writer.serialize(struct1)
     assert_equal(serialized, writer.buffer.size)
     assert_true(writer.verify)
     writer.next(serialized)
-    assert_equal(writer.model.fbe_offset, (4 + writer.buffer.size))
 
     # Check the serialized FBE size
-    assert_equal(writer.buffer.size, 843)
+    assert_equal(writer.buffer.size, 635)
 
     # Deserialize the struct from the FBE stream
     # noinspection RubyUnusedLocalVariable
     struct2 = Test::StructSet.new
-    reader = Test::StructSetModel.new(FBE::ReadBuffer.new)
-    assert_equal(reader.model.fbe_type, 132)
-    assert_equal(reader.model.fbe_offset, 4)
+    reader = Test::StructSetFinalModel.new(FBE::ReadBuffer.new)
+    assert_equal(reader.fbe_type, 132)
     reader.attach_buffer(writer.buffer)
     assert_true(reader.verify)
     (struct2, deserialized) = reader.deserialize(struct2)
     assert_equal(deserialized, reader.buffer.size)
     reader.next(deserialized)
-    assert_equal(reader.model.fbe_offset, (4 + reader.buffer.size))
 
     assert_equal(struct2.f1.length, 3)
     assert_true(struct2.f1.include?(48))
@@ -1079,7 +1043,7 @@ class TestSerialization < Test::Unit::TestCase
   end
 
   # noinspection RubyInstanceMethodNamingConvention
-  def test_serialization_struct_map
+  def test_serialization_final_struct_map
     # Create a new struct
     struct1 = Test::StructMap.new
     struct1.f1[10] = 48
@@ -1108,30 +1072,26 @@ class TestSerialization < Test::Unit::TestCase
     struct1.f10[20] = nil
 
     # Serialize the struct to the FBE stream
-    writer = Test::StructMapModel.new(FBE::WriteBuffer.new)
-    assert_equal(writer.model.fbe_type, 140)
-    assert_equal(writer.model.fbe_offset, 4)
+    writer = Test::StructMapFinalModel.new(FBE::WriteBuffer.new)
+    assert_equal(writer.fbe_type, 140)
     serialized = writer.serialize(struct1)
     assert_equal(serialized, writer.buffer.size)
     assert_true(writer.verify)
     writer.next(serialized)
-    assert_equal(writer.model.fbe_offset, (4 + writer.buffer.size))
 
     # Check the serialized FBE size
-    assert_equal(writer.buffer.size, 1450)
+    assert_equal(writer.buffer.size, 1074)
 
     # Deserialize the struct from the FBE stream
     # noinspection RubyUnusedLocalVariable
     struct2 = Test::StructMap.new
-    reader = Test::StructMapModel.new(FBE::ReadBuffer.new)
-    assert_equal(reader.model.fbe_type, 140)
-    assert_equal(reader.model.fbe_offset, 4)
+    reader = Test::StructMapFinalModel.new(FBE::ReadBuffer.new)
+    assert_equal(reader.fbe_type, 140)
     reader.attach_buffer(writer.buffer)
     assert_true(reader.verify)
     struct2, deserialized = reader.deserialize(struct2)
     assert_equal(deserialized, reader.buffer.size)
     reader.next(deserialized)
-    assert_equal(reader.model.fbe_offset, (4 + reader.buffer.size))
 
     assert_equal(struct2.f1.length, 2)
     assert_equal(struct2.f1[10], 48)
@@ -1166,7 +1126,7 @@ class TestSerialization < Test::Unit::TestCase
   end
 
   # noinspection RubyInstanceMethodNamingConvention
-  def test_serialization_struct_hash
+  def test_serialization_final_struct_hash
     # Create a new struct
     struct1 = Test::StructHash.new
     struct1.f1['10'] = 48
@@ -1195,30 +1155,26 @@ class TestSerialization < Test::Unit::TestCase
     struct1.f10['20'] = nil
 
     # Serialize the struct to the FBE stream
-    writer = Test::StructHashModel.new(FBE::WriteBuffer.new)
-    assert_equal(writer.model.fbe_type, 141)
-    assert_equal(writer.model.fbe_offset, 4)
+    writer = Test::StructHashFinalModel.new(FBE::WriteBuffer.new)
+    assert_equal(writer.fbe_type, 141)
     serialized = writer.serialize(struct1)
     assert_equal(serialized, writer.buffer.size)
     assert_true(writer.verify)
     writer.next(serialized)
-    assert_equal(writer.model.fbe_offset, (4 + writer.buffer.size))
 
     # Check the serialized FBE size
-    assert_equal(writer.buffer.size, 1570)
+    assert_equal(writer.buffer.size, 1114)
 
     # Deserialize the struct from the FBE stream
     # noinspection RubyUnusedLocalVariable
     struct2 = Test::StructHash.new
-    reader = Test::StructHashModel.new(FBE::ReadBuffer.new)
-    assert_equal(reader.model.fbe_type, 141)
-    assert_equal(reader.model.fbe_offset, 4)
+    reader = Test::StructHashFinalModel.new(FBE::ReadBuffer.new)
+    assert_equal(reader.fbe_type, 141)
     reader.attach_buffer(writer.buffer)
     assert_true(reader.verify)
     struct2, deserialized = reader.deserialize(struct2)
     assert_equal(deserialized, reader.buffer.size)
     reader.next(deserialized)
-    assert_equal(reader.model.fbe_offset, (4 + reader.buffer.size))
 
     assert_equal(struct2.f1.length, 2)
     assert_equal(struct2.f1['10'], 48)
@@ -1253,7 +1209,7 @@ class TestSerialization < Test::Unit::TestCase
   end
 
   # noinspection RubyInstanceMethodNamingConvention
-  def test_serialization_struct_hash_extended
+  def test_serialization_final_struct_hash_extended
     # Create a new struct
     struct1 = Test::StructHashEx.new
     s1 = Test::StructSimple.new
@@ -1266,30 +1222,26 @@ class TestSerialization < Test::Unit::TestCase
     struct1.f2[s2] = nil
 
     # Serialize the struct to the FBE stream
-    writer = Test::StructHashExModel.new(FBE::WriteBuffer.new)
-    assert_equal(writer.model.fbe_type, 142)
-    assert_equal(writer.model.fbe_offset, 4)
+    writer = Test::StructHashExFinalModel.new(FBE::WriteBuffer.new)
+    assert_equal(writer.fbe_type, 142)
     serialized = writer.serialize(struct1)
     assert_equal(serialized, writer.buffer.size)
     assert_true(writer.verify)
     writer.next(serialized)
-    assert_equal(writer.model.fbe_offset, (4 + writer.buffer.size))
 
     # Check the serialized FBE size
-    assert_equal(writer.buffer.size, 7879)
+    assert_equal(writer.buffer.size, 4979)
 
     # Deserialize the struct from the FBE stream
     # noinspection RubyUnusedLocalVariable
     struct2 = Test::StructHashEx.new
-    reader = Test::StructHashExModel.new(FBE::ReadBuffer.new)
-    assert_equal(reader.model.fbe_type, 142)
-    assert_equal(reader.model.fbe_offset, 4)
+    reader = Test::StructHashExFinalModel.new(FBE::ReadBuffer.new)
+    assert_equal(reader.fbe_type, 142)
     reader.attach_buffer(writer.buffer)
     assert_true(reader.verify)
     struct2, deserialized = reader.deserialize(struct2)
     assert_equal(deserialized, reader.buffer.size)
     reader.next(deserialized)
-    assert_equal(reader.model.fbe_offset, (4 + reader.buffer.size))
 
     assert_equal(struct2.f1.length, 2)
     assert_equal(struct2.f1[s1].f1002, Test::EnumTyped.ENUM_VALUE_2)

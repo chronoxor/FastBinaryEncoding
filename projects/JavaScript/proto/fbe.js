@@ -2271,7 +2271,7 @@ class FieldModelOptional extends FieldModel {
       return 0
     }
 
-    this.writeBool(this.fbeOffset, hasValue)
+    this.writeUInt8(this.fbeOffset, (hasValue ? 1 : 0))
     if (!hasValue) {
       return 0
     }
@@ -4567,7 +4567,7 @@ class FinalModelOptional extends FinalModel {
     }
 
     let hasValue = (optional != null)
-    this.writeBool(this.fbeOffset, hasValue)
+    this.writeUInt8(this.fbeOffset, (hasValue ? 1 : 0))
     if (!hasValue) {
       return 1
     }

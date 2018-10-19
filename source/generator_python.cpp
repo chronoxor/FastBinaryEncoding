@@ -1073,7 +1073,7 @@ class FieldModelOptional(FieldModel):
             return 0
 
         fbe_has_value = 1 if has_value else 0
-        self.write_bool(self.fbe_offset, fbe_has_value)
+        self.write_uint8(self.fbe_offset, fbe_has_value)
         if fbe_has_value == 0:
             return 0
 
@@ -2031,7 +2031,7 @@ class FinalModelOptional(FinalModel):
             return 0
 
         fbe_has_value = 1 if optional else 0
-        self.write_bool(self.fbe_offset, fbe_has_value)
+        self.write_uint8(self.fbe_offset, fbe_has_value)
         if fbe_has_value == 0:
             return 1
 

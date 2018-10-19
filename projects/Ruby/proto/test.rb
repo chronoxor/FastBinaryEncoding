@@ -11,6 +11,7 @@
 # rubocop:disable Metrics/PerceivedComplexity
 
 require 'bigdecimal'
+require 'set'
 require 'uuidtools'
 
 require_relative 'fbe'
@@ -36,6 +37,16 @@ module Test
       # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value != value.value end
+
+      # Enum equals
+      def eql?(other)
+        self == other
+      end
+
+      # Enum hash code
+      def hash
+        @value.hash
+      end
 
       # Get enum integer value
       def to_i
@@ -183,6 +194,16 @@ module Test
       # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value != value.value end
+
+      # Enum equals
+      def eql?(other)
+        self == other
+      end
+
+      # Enum hash code
+      def hash
+        @value.hash
+      end
 
       # Get enum integer value
       def to_i
@@ -338,6 +359,16 @@ module Test
       def &(flags) Flags.new(@value & flags.value) end
       def |(flags) Flags.new(@value | flags.value) end
       def ^(flags) Flags.new(@value ^ flags.value) end
+
+      # Flags equals
+      def eql?(other)
+        self == other
+      end
+
+      # Flags hash code
+      def hash
+        @value.hash
+      end
 
       # Is flags set?
       def has_flags(flags)
@@ -552,6 +583,16 @@ module Test
       def &(flags) Flags.new(@value & flags.value) end
       def |(flags) Flags.new(@value | flags.value) end
       def ^(flags) Flags.new(@value ^ flags.value) end
+
+      # Flags equals
+      def eql?(other)
+        self == other
+      end
+
+      # Flags hash code
+      def hash
+        @value.hash
+      end
 
       # Is flags set?
       def has_flags(flags)
@@ -6514,7 +6555,7 @@ module Test
   class FinalModelStructOptional < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_parent = FieldModelStructSimple.new(self.buffer, 0)
+      @_parent = FinalModelStructSimple.new(self.buffer, 0)
       @_f100 = FBE::FinalModelOptional.new(FBE::FinalModelBool.new(self.buffer, 0), self.buffer, 0)
       @_f101 = FBE::FinalModelOptional.new(FBE::FinalModelBool.new(self.buffer, 0), self.buffer, 0)
       @_f102 = FBE::FinalModelOptional.new(FBE::FinalModelBool.new(self.buffer, 0), self.buffer, 0)
@@ -9139,7 +9180,7 @@ module Test
   class FinalModelStructNested < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_parent = FieldModelStructOptional.new(self.buffer, 0)
+      @_parent = FinalModelStructOptional.new(self.buffer, 0)
       @_f1000 = FinalModelEnumSimple.new(self.buffer, 0)
       @_f1001 = FBE::FinalModelOptional.new(FinalModelEnumSimple.new(self.buffer, 0), self.buffer, 0)
       @_f1002 = FinalModelEnumTyped.new(self.buffer, 0)

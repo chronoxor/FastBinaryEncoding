@@ -11,6 +11,7 @@
 # rubocop:disable Metrics/PerceivedComplexity
 
 require 'bigdecimal'
+require 'set'
 require 'uuidtools'
 
 module FBE
@@ -637,7 +638,7 @@ module FBE
     # Buffer I/O methods
 
     def read_bool(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('C')[0]
+      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('C')[0] != 0
     end
 
     def read_byte(offset)
@@ -1666,7 +1667,7 @@ module FBE
       end
 
       fbe_has_value = has_value ? 1 : 0
-      write_bool(fbe_offset, fbe_has_value)
+      write_uint8(fbe_offset, fbe_has_value)
       if fbe_has_value == 0
         return 0
       end
@@ -3286,7 +3287,7 @@ module FBE
       end
 
       fbe_has_value = optional ? 1 : 0
-      write_bool(fbe_offset, fbe_has_value)
+      write_uint8(fbe_offset, fbe_has_value)
       if fbe_has_value == 0
         return 1
       end
@@ -3309,7 +3310,7 @@ module FBE
     # Get the allocation size
     def fbe_allocation_size(values)
       size = 0
-      [values.length, @_size].times do |i|
+      [values.length, @_size].min.times do |i|
         size += @_model.fbe_allocation_size(values[i])
       end
       size

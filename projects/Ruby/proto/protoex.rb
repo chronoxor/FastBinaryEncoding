@@ -11,6 +11,7 @@
 # rubocop:disable Metrics/PerceivedComplexity
 
 require 'bigdecimal'
+require 'set'
 require 'uuidtools'
 
 require_relative 'fbe'
@@ -33,6 +34,16 @@ module Protoex
       # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value != value.value end
+
+      # Enum equals
+      def eql?(other)
+        self == other
+      end
+
+      # Enum hash code
+      def hash
+        @value.hash
+      end
 
       # Get enum integer value
       def to_i
@@ -163,6 +174,16 @@ module Protoex
       # Enum compare operators
       def ==(value) @value == value.value end
       def !=(value) @value != value.value end
+
+      # Enum equals
+      def eql?(other)
+        self == other
+      end
+
+      # Enum hash code
+      def hash
+        @value.hash
+      end
 
       # Get enum integer value
       def to_i
@@ -311,6 +332,16 @@ module Protoex
       def &(flags) Flags.new(@value & flags.value) end
       def |(flags) Flags.new(@value | flags.value) end
       def ^(flags) Flags.new(@value ^ flags.value) end
+
+      # Flags equals
+      def eql?(other)
+        self == other
+      end
+
+      # Flags hash code
+      def hash
+        @value.hash
+      end
 
       # Is flags set?
       def has_flags(flags)
@@ -1832,7 +1863,7 @@ module Protoex
   class FinalModelBalance < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_parent = Proto::FieldModelBalance.new(self.buffer, 0)
+      @_parent = Proto::FinalModelBalance.new(self.buffer, 0)
       @_locked = FBE::FinalModelDouble.new(self.buffer, 0)
     end
 
@@ -1856,7 +1887,7 @@ module Protoex
       TYPE
     end
 
-    TYPE = Proto::FieldModelBalance::TYPE
+    TYPE = Proto::FinalModelBalance::TYPE
 
     # Check if the struct value is valid
     def verify

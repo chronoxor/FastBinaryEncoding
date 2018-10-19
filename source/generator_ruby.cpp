@@ -52,6 +52,7 @@ void GeneratorRuby::GenerateImports()
 {
     std::string code = R"CODE(
 require 'bigdecimal'
+require 'set'
 require 'uuidtools'
 )CODE";
 
@@ -840,7 +841,7 @@ void GeneratorRuby::GenerateFBEFieldModelBase()
     # Buffer I/O methods
 
     def read_bool(offset)
-      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('C')[0]
+      @_buffer.buffer.slice(@_buffer.offset + offset, 1).unpack('C')[0] != 0
     end
 
     def read_byte(offset)
@@ -1483,7 +1484,7 @@ void GeneratorRuby::GenerateFBEFieldModelOptional()
       end
 
       fbe_has_value = has_value ? 1 : 0
-      write_bool(fbe_offset, fbe_has_value)
+      write_uint8(fbe_offset, fbe_has_value)
       if fbe_has_value == 0
         return 0
       end
@@ -2517,7 +2518,7 @@ void GeneratorRuby::GenerateFBEFinalModelOptional()
       end
 
       fbe_has_value = optional ? 1 : 0
-      write_bool(fbe_offset, fbe_has_value)
+      write_uint8(fbe_offset, fbe_has_value)
       if fbe_has_value == 0
         return 1
       end
@@ -2550,7 +2551,7 @@ void GeneratorRuby::GenerateFBEFinalModelArray()
     # Get the allocation size
     def fbe_allocation_size(values)
       size = 0
-      [values.length, @_size].times do |i|
+      [values.length, @_size].min.times do |i|
         size += @_model.fbe_allocation_size(values[i])
       end
       size
@@ -3407,7 +3408,7 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
         }
     }
 
-    // Generate enum class initialize method
+    // Generate enum initialize method
     WriteLine();
     WriteLineIndent("def initialize(value = 0)");
     Indent(1);
@@ -3415,13 +3416,29 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
     Indent(-1);
     WriteLineIndent("end");
 
-    // Generate enum class compare operators
+    // Generate enum compare operators
     WriteLine();
     WriteLineIndent("# Enum compare operators");
     WriteLineIndent("def ==(value) @value == value.value end");
     WriteLineIndent("def !=(value) @value != value.value end");
 
-    // Generate enum class to_i method
+    // Generate enum hash & equals methods
+    WriteLine();
+    WriteLineIndent("# Enum equals");
+    WriteLineIndent("def eql?(other)");
+    Indent(1);
+    WriteLineIndent("self == other");
+    Indent(-1);
+    WriteLineIndent("end");
+    WriteLine();
+    WriteLineIndent("# Enum hash code");
+    WriteLineIndent("def hash");
+    Indent(1);
+    WriteLineIndent("@value.hash");
+    Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate enum to_i method
     WriteLine();
     WriteLineIndent("# Get enum integer value");
     WriteLineIndent("def to_i");
@@ -3430,7 +3447,7 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
     Indent(-1);
     WriteLineIndent("end");
 
-    // Generate enum class to_s method
+    // Generate enum to_s method
     WriteLine();
     WriteLineIndent("# Get enum string value");
     WriteLineIndent("def to_s");
@@ -3635,7 +3652,7 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
         }
     }
 
-    // Generate flags class initialize method
+    // Generate flags initialize method
     WriteLine();
     WriteLineIndent("def initialize(value = 0)");
     Indent(1);
@@ -3643,13 +3660,13 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     Indent(-1);
     WriteLineIndent("end");
 
-    // Generate flags class compare operators
+    // Generate flags compare operators
     WriteLine();
     WriteLineIndent("# Flags compare operators");
     WriteLineIndent("def ==(flags) @value == flags.value end");
     WriteLineIndent("def !=(flags) @value != flags.value end");
 
-    // Generate flags class bit operators
+    // Generate flags bit operators
     WriteLine();
     WriteLineIndent("# Flags bit operators");
     WriteLineIndent("def ~");
@@ -3661,7 +3678,23 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     WriteLineIndent("def |(flags) Flags.new(@value | flags.value) end");
     WriteLineIndent("def ^(flags) Flags.new(@value ^ flags.value) end");
 
-    // Generate flags class manipulation methods
+    // Generate flags hash & equals methods
+    WriteLine();
+    WriteLineIndent("# Flags equals");
+    WriteLineIndent("def eql?(other)");
+    Indent(1);
+    WriteLineIndent("self == other");
+    Indent(-1);
+    WriteLineIndent("end");
+    WriteLine();
+    WriteLineIndent("# Flags hash code");
+    WriteLineIndent("def hash");
+    Indent(1);
+    WriteLineIndent("@value.hash");
+    Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate flags manipulation methods
     WriteLine();
     WriteLineIndent("# Is flags set?");
     WriteLineIndent("def has_flags(flags)");
@@ -3686,7 +3719,7 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     Indent(-1);
     WriteLineIndent("end");
 
-    // Generate flags class to_i method
+    // Generate flags to_i method
     WriteLine();
     WriteLineIndent("# Get flags integer value");
     WriteLineIndent("def to_i");
@@ -3695,7 +3728,7 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     Indent(-1);
     WriteLineIndent("end");
 
-    // Generate flags class to_s method
+    // Generate flags to_s method
     WriteLine();
     WriteLineIndent("# Get flags string value");
     WriteLineIndent("def to_s");
@@ -4006,7 +4039,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
     WriteLineIndent("def <=(other) (self <=> other) <= 0 end");
     WriteLineIndent("def >=(other) (self <=> other) >= 0 end");
 
-    // Generate struct hesh & equals methods
+    // Generate struct hash & equals methods
     WriteLine();
     WriteLineIndent("# Struct equals");
     WriteLineIndent("def eql?(other)");
@@ -4804,7 +4837,7 @@ void GeneratorRuby::GenerateStructModel(const std::shared_ptr<StructType>& s)
 void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& s)
 {
     std::string struct_name = ConvertTitle(*s->name);
-    std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeFieldName(*s->base, false) : "";
+    std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeFieldName(*s->base, true) : "";
 
     // Generate struct final model begin
     WriteLine();
