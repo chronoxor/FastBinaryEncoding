@@ -209,7 +209,6 @@ class TestEnums < Test::Unit::TestCase
     assert_equal(enums2.uint64b5, enums1.uint64b3)
   end
 
-=begin
   def test_serialization_json_enums
     enums1 = Enums::Enums.new
 
@@ -220,7 +219,7 @@ class TestEnums < Test::Unit::TestCase
     assert_true(json.length > 0)
 
     # Deserialize enums from the JSON string
-    enums2 = Enums::Enums::from_json(json)
+    enums2 = Enums::Enums.from_json(json)
 
     assert_equal(enums2.byte0, Enums::EnumByte.ENUM_VALUE_0)
     assert_equal(enums2.byte1, Enums::EnumByte.ENUM_VALUE_1)
@@ -299,5 +298,4 @@ class TestEnums < Test::Unit::TestCase
     assert_equal(enums2.uint64b4, Enums::EnumUInt64.ENUM_VALUE_4)
     assert_equal(enums2.uint64b5, enums1.uint64b3)
   end
-=end
 end

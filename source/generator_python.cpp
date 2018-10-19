@@ -3551,6 +3551,14 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
 
     if (JSON())
     {
+        // Generate struct to_json method
+        WriteLine();
+        WriteLineIndent("# Get struct JSON value");
+        WriteLineIndent("def to_json(self):");
+        Indent(1);
+        WriteLineIndent("return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))");
+        Indent(-1);
+
         // Generate struct __to_json__ method
         WriteLine();
         WriteLineIndent("def __to_json__(self):");
@@ -3568,6 +3576,15 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
             WriteLineIndent("))");
         }
         WriteLineIndent("return result");
+        Indent(-1);
+
+        // Generate struct from_json method
+        WriteLine();
+        WriteLineIndent("# Create struct from JSON value");
+        WriteLineIndent("@staticmethod");
+        WriteLineIndent("def from_json(document):");
+        Indent(1);
+        WriteLineIndent("return " + *s->name + ".__from_json__(json.loads(document))");
         Indent(-1);
 
         // Generate struct __from_json__ method
@@ -3637,23 +3654,6 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
         }
         Indent(-1);
         WriteLineIndent(")");
-        Indent(-1);
-
-        // Generate struct to_json method
-        WriteLine();
-        WriteLineIndent("# Get struct JSON value");
-        WriteLineIndent("def to_json(self):");
-        Indent(1);
-        WriteLineIndent("return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))");
-        Indent(-1);
-
-        // Generate struct from_json method
-        WriteLine();
-        WriteLineIndent("# Create struct from JSON value");
-        WriteLineIndent("@staticmethod");
-        WriteLineIndent("def from_json(document):");
-        Indent(1);
-        WriteLineIndent("return " + *s->name + ".__from_json__(json.loads(document))");
         Indent(-1);
     }
 

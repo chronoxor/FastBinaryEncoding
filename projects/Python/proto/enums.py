@@ -1511,6 +1511,10 @@ class Enums(object):
         sb.append(")")
         return "".join(sb)
 
+    # Get struct JSON value
+    def to_json(self):
+        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
+
     def __to_json__(self):
         result = dict()
         result.update(dict(
@@ -1582,6 +1586,11 @@ class Enums(object):
             uint64b5=self.uint64b5, 
         ))
         return result
+
+    # Create struct from JSON value
+    @staticmethod
+    def from_json(document):
+        return Enums.__from_json__(json.loads(document))
 
     @staticmethod
     def __from_json__(fields):
@@ -1655,15 +1664,6 @@ class Enums(object):
             None if "uint64b4" not in fields else EnumUInt64.__from_json__(fields["uint64b4"]),
             None if "uint64b5" not in fields else EnumUInt64.__from_json__(fields["uint64b5"]),
         )
-
-    # Get struct JSON value
-    def to_json(self):
-        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
-
-    # Create struct from JSON value
-    @staticmethod
-    def from_json(document):
-        return Enums.__from_json__(json.loads(document))
 
 
 class FieldModelEnums(fbe.FieldModel):

@@ -481,6 +481,10 @@ class Order(object):
         sb.append(")")
         return "".join(sb)
 
+    # Get struct JSON value
+    def to_json(self):
+        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
+
     def __to_json__(self):
         result = dict()
         result.update(dict(
@@ -494,6 +498,11 @@ class Order(object):
             sl=self.sl, 
         ))
         return result
+
+    # Create struct from JSON value
+    @staticmethod
+    def from_json(document):
+        return Order.__from_json__(json.loads(document))
 
     @staticmethod
     def __from_json__(fields):
@@ -509,15 +518,6 @@ class Order(object):
             None if "tp" not in fields else fields["tp"],
             None if "sl" not in fields else fields["sl"],
         )
-
-    # Get struct JSON value
-    def to_json(self):
-        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
-
-    # Create struct from JSON value
-    @staticmethod
-    def from_json(document):
-        return Order.__from_json__(json.loads(document))
 
 
 class FieldModelOrder(fbe.FieldModel):
@@ -1282,6 +1282,10 @@ class Balance(proto.Balance):
         sb.append(")")
         return "".join(sb)
 
+    # Get struct JSON value
+    def to_json(self):
+        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
+
     def __to_json__(self):
         result = dict()
         result.update(super().__to_json__())
@@ -1289,6 +1293,11 @@ class Balance(proto.Balance):
             locked=self.locked, 
         ))
         return result
+
+    # Create struct from JSON value
+    @staticmethod
+    def from_json(document):
+        return Balance.__from_json__(json.loads(document))
 
     @staticmethod
     def __from_json__(fields):
@@ -1298,15 +1307,6 @@ class Balance(proto.Balance):
             proto.Balance.__from_json__(fields),
             None if "locked" not in fields else fields["locked"],
         )
-
-    # Get struct JSON value
-    def to_json(self):
-        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
-
-    # Create struct from JSON value
-    @staticmethod
-    def from_json(document):
-        return Balance.__from_json__(json.loads(document))
 
 
 class FieldModelBalance(fbe.FieldModel):
@@ -1845,6 +1845,10 @@ class Account(object):
         sb.append(")")
         return "".join(sb)
 
+    # Get struct JSON value
+    def to_json(self):
+        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
+
     def __to_json__(self):
         result = dict()
         result.update(dict(
@@ -1856,6 +1860,11 @@ class Account(object):
             orders=self.orders, 
         ))
         return result
+
+    # Create struct from JSON value
+    @staticmethod
+    def from_json(document):
+        return Account.__from_json__(json.loads(document))
 
     @staticmethod
     def __from_json__(fields):
@@ -1869,15 +1878,6 @@ class Account(object):
             None if "asset" not in fields else Balance.__from_json__(fields["asset"]),
             None if "orders" not in fields else [Order.__from_json__(value) for value in fields["orders"]],
         )
-
-    # Get struct JSON value
-    def to_json(self):
-        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
-
-    # Create struct from JSON value
-    @staticmethod
-    def from_json(document):
-        return Account.__from_json__(json.loads(document))
 
 
 class FieldModelAccount(fbe.FieldModel):

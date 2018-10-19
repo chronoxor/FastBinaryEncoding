@@ -856,6 +856,10 @@ class StructSimple(object):
         sb.append(")")
         return "".join(sb)
 
+    # Get struct JSON value
+    def to_json(self):
+        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
+
     def __to_json__(self):
         result = dict()
         result.update(dict(
@@ -906,6 +910,11 @@ class StructSimple(object):
             f44=self.f44, 
         ))
         return result
+
+    # Create struct from JSON value
+    @staticmethod
+    def from_json(document):
+        return StructSimple.__from_json__(json.loads(document))
 
     @staticmethod
     def __from_json__(fields):
@@ -958,15 +967,6 @@ class StructSimple(object):
             None if "f43" not in fields else proto.State.__from_json__(fields["f43"]),
             None if "f44" not in fields else proto.Account.__from_json__(fields["f44"]),
         )
-
-    # Get struct JSON value
-    def to_json(self):
-        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
-
-    # Create struct from JSON value
-    @staticmethod
-    def from_json(document):
-        return StructSimple.__from_json__(json.loads(document))
 
 
 class FieldModelStructSimple(fbe.FieldModel):
@@ -3804,6 +3804,10 @@ class StructOptional(StructSimple):
         sb.append(")")
         return "".join(sb)
 
+    # Get struct JSON value
+    def to_json(self):
+        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
+
     def __to_json__(self):
         result = dict()
         result.update(super().__to_json__())
@@ -3876,6 +3880,11 @@ class StructOptional(StructSimple):
             f165=self.f165, 
         ))
         return result
+
+    # Create struct from JSON value
+    @staticmethod
+    def from_json(document):
+        return StructOptional.__from_json__(json.loads(document))
 
     @staticmethod
     def __from_json__(fields):
@@ -3950,15 +3959,6 @@ class StructOptional(StructSimple):
             None if "f164" not in fields else proto.Account.__from_json__(fields["f164"]),
             None if "f165" not in fields else proto.Account.__from_json__(fields["f165"]),
         )
-
-    # Get struct JSON value
-    def to_json(self):
-        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
-
-    # Create struct from JSON value
-    @staticmethod
-    def from_json(document):
-        return StructOptional.__from_json__(json.loads(document))
 
 
 class FieldModelStructOptional(fbe.FieldModel):
@@ -7327,6 +7327,10 @@ class StructNested(StructOptional):
         sb.append(")")
         return "".join(sb)
 
+    # Get struct JSON value
+    def to_json(self):
+        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
+
     def __to_json__(self):
         result = dict()
         result.update(super().__to_json__())
@@ -7345,6 +7349,11 @@ class StructNested(StructOptional):
             f1011=self.f1011, 
         ))
         return result
+
+    # Create struct from JSON value
+    @staticmethod
+    def from_json(document):
+        return StructNested.__from_json__(json.loads(document))
 
     @staticmethod
     def __from_json__(fields):
@@ -7365,15 +7374,6 @@ class StructNested(StructOptional):
             None if "f1010" not in fields else StructOptional.__from_json__(fields["f1010"]),
             None if "f1011" not in fields else StructOptional.__from_json__(fields["f1011"]),
         )
-
-    # Get struct JSON value
-    def to_json(self):
-        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
-
-    # Create struct from JSON value
-    @staticmethod
-    def from_json(document):
-        return StructNested.__from_json__(json.loads(document))
 
 
 class FieldModelStructNested(fbe.FieldModel):
@@ -8363,6 +8363,10 @@ class StructBytes(object):
         sb.append(")")
         return "".join(sb)
 
+    # Get struct JSON value
+    def to_json(self):
+        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
+
     def __to_json__(self):
         result = dict()
         result.update(dict(
@@ -8371,6 +8375,11 @@ class StructBytes(object):
             f3=self.f3, 
         ))
         return result
+
+    # Create struct from JSON value
+    @staticmethod
+    def from_json(document):
+        return StructBytes.__from_json__(json.loads(document))
 
     @staticmethod
     def __from_json__(fields):
@@ -8381,15 +8390,6 @@ class StructBytes(object):
             None if "f2" not in fields else None if fields["f2"] is None else base64.b64decode(fields["f2"].encode('ascii')),
             None if "f3" not in fields else None if fields["f3"] is None else base64.b64decode(fields["f3"].encode('ascii')),
         )
-
-    # Get struct JSON value
-    def to_json(self):
-        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
-
-    # Create struct from JSON value
-    @staticmethod
-    def from_json(document):
-        return StructBytes.__from_json__(json.loads(document))
 
 
 class FieldModelStructBytes(fbe.FieldModel):
@@ -9095,6 +9095,10 @@ class StructArray(object):
         sb.append(")")
         return "".join(sb)
 
+    # Get struct JSON value
+    def to_json(self):
+        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
+
     def __to_json__(self):
         result = dict()
         result.update(dict(
@@ -9110,6 +9114,11 @@ class StructArray(object):
             f10=self.f10, 
         ))
         return result
+
+    # Create struct from JSON value
+    @staticmethod
+    def from_json(document):
+        return StructArray.__from_json__(json.loads(document))
 
     @staticmethod
     def __from_json__(fields):
@@ -9127,15 +9136,6 @@ class StructArray(object):
             None if "f9" not in fields else [StructSimple.__from_json__(value) for value in fields["f9"]],
             None if "f10" not in fields else [StructSimple.__from_json__(value) for value in fields["f10"]],
         )
-
-    # Get struct JSON value
-    def to_json(self):
-        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
-
-    # Create struct from JSON value
-    @staticmethod
-    def from_json(document):
-        return StructArray.__from_json__(json.loads(document))
 
 
 class FieldModelStructArray(fbe.FieldModel):
@@ -10132,6 +10132,10 @@ class StructVector(object):
         sb.append(")")
         return "".join(sb)
 
+    # Get struct JSON value
+    def to_json(self):
+        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
+
     def __to_json__(self):
         result = dict()
         result.update(dict(
@@ -10147,6 +10151,11 @@ class StructVector(object):
             f10=self.f10, 
         ))
         return result
+
+    # Create struct from JSON value
+    @staticmethod
+    def from_json(document):
+        return StructVector.__from_json__(json.loads(document))
 
     @staticmethod
     def __from_json__(fields):
@@ -10164,15 +10173,6 @@ class StructVector(object):
             None if "f9" not in fields else [StructSimple.__from_json__(value) for value in fields["f9"]],
             None if "f10" not in fields else [StructSimple.__from_json__(value) for value in fields["f10"]],
         )
-
-    # Get struct JSON value
-    def to_json(self):
-        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
-
-    # Create struct from JSON value
-    @staticmethod
-    def from_json(document):
-        return StructVector.__from_json__(json.loads(document))
 
 
 class FieldModelStructVector(fbe.FieldModel):
@@ -11169,6 +11169,10 @@ class StructList(object):
         sb.append(")")
         return "".join(sb)
 
+    # Get struct JSON value
+    def to_json(self):
+        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
+
     def __to_json__(self):
         result = dict()
         result.update(dict(
@@ -11184,6 +11188,11 @@ class StructList(object):
             f10=self.f10, 
         ))
         return result
+
+    # Create struct from JSON value
+    @staticmethod
+    def from_json(document):
+        return StructList.__from_json__(json.loads(document))
 
     @staticmethod
     def __from_json__(fields):
@@ -11201,15 +11210,6 @@ class StructList(object):
             None if "f9" not in fields else [StructSimple.__from_json__(value) for value in fields["f9"]],
             None if "f10" not in fields else [StructSimple.__from_json__(value) for value in fields["f10"]],
         )
-
-    # Get struct JSON value
-    def to_json(self):
-        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
-
-    # Create struct from JSON value
-    @staticmethod
-    def from_json(document):
-        return StructList.__from_json__(json.loads(document))
 
 
 class FieldModelStructList(fbe.FieldModel):
@@ -12094,6 +12094,10 @@ class StructSet(object):
         sb.append(")")
         return "".join(sb)
 
+    # Get struct JSON value
+    def to_json(self):
+        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
+
     def __to_json__(self):
         result = dict()
         result.update(dict(
@@ -12103,6 +12107,11 @@ class StructSet(object):
             f4=self.f4, 
         ))
         return result
+
+    # Create struct from JSON value
+    @staticmethod
+    def from_json(document):
+        return StructSet.__from_json__(json.loads(document))
 
     @staticmethod
     def __from_json__(fields):
@@ -12114,15 +12123,6 @@ class StructSet(object):
             None if "f3" not in fields else {FlagsSimple.__from_json__(value) for value in fields["f3"]},
             None if "f4" not in fields else {StructSimple.__from_json__(value) for value in fields["f4"]},
         )
-
-    # Get struct JSON value
-    def to_json(self):
-        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
-
-    # Create struct from JSON value
-    @staticmethod
-    def from_json(document):
-        return StructSet.__from_json__(json.loads(document))
 
 
 class FieldModelStructSet(fbe.FieldModel):
@@ -12897,6 +12897,10 @@ class StructMap(object):
         sb.append(")")
         return "".join(sb)
 
+    # Get struct JSON value
+    def to_json(self):
+        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
+
     def __to_json__(self):
         result = dict()
         result.update(dict(
@@ -12912,6 +12916,11 @@ class StructMap(object):
             f10=self.f10, 
         ))
         return result
+
+    # Create struct from JSON value
+    @staticmethod
+    def from_json(document):
+        return StructMap.__from_json__(json.loads(document))
 
     @staticmethod
     def __from_json__(fields):
@@ -12929,15 +12938,6 @@ class StructMap(object):
             None if "f9" not in fields else {key: StructSimple.__from_json__(value) for key, value in fields["f9"].items()},
             None if "f10" not in fields else {key: StructSimple.__from_json__(value) for key, value in fields["f10"].items()},
         )
-
-    # Get struct JSON value
-    def to_json(self):
-        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
-
-    # Create struct from JSON value
-    @staticmethod
-    def from_json(document):
-        return StructMap.__from_json__(json.loads(document))
 
 
 class FieldModelStructMap(fbe.FieldModel):
@@ -14014,6 +14014,10 @@ class StructHash(object):
         sb.append(")")
         return "".join(sb)
 
+    # Get struct JSON value
+    def to_json(self):
+        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
+
     def __to_json__(self):
         result = dict()
         result.update(dict(
@@ -14029,6 +14033,11 @@ class StructHash(object):
             f10=self.f10, 
         ))
         return result
+
+    # Create struct from JSON value
+    @staticmethod
+    def from_json(document):
+        return StructHash.__from_json__(json.loads(document))
 
     @staticmethod
     def __from_json__(fields):
@@ -14046,15 +14055,6 @@ class StructHash(object):
             None if "f9" not in fields else {key: StructSimple.__from_json__(value) for key, value in fields["f9"].items()},
             None if "f10" not in fields else {key: StructSimple.__from_json__(value) for key, value in fields["f10"].items()},
         )
-
-    # Get struct JSON value
-    def to_json(self):
-        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
-
-    # Create struct from JSON value
-    @staticmethod
-    def from_json(document):
-        return StructHash.__from_json__(json.loads(document))
 
 
 class FieldModelStructHash(fbe.FieldModel):
@@ -14918,6 +14918,10 @@ class StructHashEx(object):
         sb.append(")")
         return "".join(sb)
 
+    # Get struct JSON value
+    def to_json(self):
+        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
+
     def __to_json__(self):
         result = dict()
         result.update(dict(
@@ -14925,6 +14929,11 @@ class StructHashEx(object):
             f2=self.f2, 
         ))
         return result
+
+    # Create struct from JSON value
+    @staticmethod
+    def from_json(document):
+        return StructHashEx.__from_json__(json.loads(document))
 
     @staticmethod
     def __from_json__(fields):
@@ -14934,15 +14943,6 @@ class StructHashEx(object):
             None if "f1" not in fields else {StructSimple.__from_json__(key): StructNested.__from_json__(value) for key, value in fields["f1"].items()},
             None if "f2" not in fields else {StructSimple.__from_json__(key): StructNested.__from_json__(value) for key, value in fields["f2"].items()},
         )
-
-    # Get struct JSON value
-    def to_json(self):
-        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
-
-    # Create struct from JSON value
-    @staticmethod
-    def from_json(document):
-        return StructHashEx.__from_json__(json.loads(document))
 
 
 class FieldModelStructHashEx(fbe.FieldModel):

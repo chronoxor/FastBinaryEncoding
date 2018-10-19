@@ -10,6 +10,7 @@
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/PerceivedComplexity
 
+require 'base64'
 require 'bigdecimal'
 require 'json'
 require 'set'
@@ -44,11 +45,6 @@ module Proto
         @value.hash
       end
 
-      # Get enum JSON value
-      def to_json_map
-        @value
-      end
-
       # Get enum integer value
       def to_i
         @value
@@ -64,6 +60,11 @@ module Proto
         end
         '<unknown>'
       end
+
+      # Get enum JSON value
+      def __to_json_map__
+        @value
+      end
     end
 
     class << self
@@ -76,6 +77,11 @@ module Proto
 
     def self.new(value = 0)
       Enum.new(value)
+    end
+
+    # Get enum value from JSON
+    def self.__from_json_map__(json)
+      Enum.new(json)
     end
   end
 
@@ -183,11 +189,6 @@ module Proto
         @value.hash
       end
 
-      # Get enum JSON value
-      def to_json_map
-        @value
-      end
-
       # Get enum integer value
       def to_i
         @value
@@ -206,6 +207,11 @@ module Proto
         end
         '<unknown>'
       end
+
+      # Get enum JSON value
+      def __to_json_map__
+        @value
+      end
     end
 
     class << self
@@ -220,6 +226,11 @@ module Proto
 
     def self.new(value = 0)
       Enum.new(value)
+    end
+
+    # Get enum value from JSON
+    def self.__from_json_map__(json)
+      Enum.new(json)
     end
   end
 
@@ -356,11 +367,6 @@ module Proto
         self
       end
 
-      # Get flags JSON value
-      def to_json_map
-        @value
-      end
-
       # Get flags integer value
       def to_i
         @value
@@ -435,6 +441,11 @@ module Proto
         end
         result
       end
+
+      # Get flags JSON value
+      def __to_json_map__
+        @value
+      end
     end
 
     class << self
@@ -457,6 +468,11 @@ module Proto
 
     def self.new(value = 0)
       Flags.new(value)
+    end
+
+    # Get flags value from JSON
+    def self.__from_json_map__(json)
+      Flags.new(json)
     end
   end
 
@@ -539,7 +555,7 @@ module Proto
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class Order < FBE::JsonBase
+  class Order
     attr_accessor :uid
     attr_accessor :symbol
     attr_accessor :side
@@ -664,7 +680,54 @@ module Proto
 
     # Get struct JSON value
     def to_json
-      JSON.generate(to_json_map)
+      JSON.generate(__to_json_map__)
+    end
+
+    # Get struct JSON map (internal method)
+    def __to_json_map__
+      result = {}
+      key = 'uid'
+      value = (uid.nil? ? nil : uid)
+      result.store(key, value)
+      key = 'symbol'
+      value = (symbol.nil? ? nil : symbol)
+      result.store(key, value)
+      key = 'side'
+      value = (side.nil? ? nil : side.__to_json_map__)
+      result.store(key, value)
+      key = 'type'
+      value = (type.nil? ? nil : type.__to_json_map__)
+      result.store(key, value)
+      key = 'price'
+      value = (price.nil? ? nil : price)
+      result.store(key, value)
+      key = 'volume'
+      value = (volume.nil? ? nil : volume)
+      result.store(key, value)
+      result
+    end
+
+    # Get struct from JSON
+    def self.from_json(json)
+      __from_json_map__(JSON.parse(json))
+    end
+
+    # Get struct map from JSON (internal method)
+    def self.__from_json_map__(json)
+      result = Order.new
+      value = json.fetch('uid', nil)
+      result.uid = (value.nil? ? nil : value)
+      value = json.fetch('symbol', nil)
+      result.symbol = (value.nil? ? nil : value)
+      value = json.fetch('side', nil)
+      result.side = (value.nil? ? nil : OrderSide.__from_json_map__(value))
+      value = json.fetch('type', nil)
+      result.type = (value.nil? ? nil : OrderType.__from_json_map__(value))
+      value = json.fetch('price', nil)
+      result.price = (value.nil? ? nil : value)
+      value = json.fetch('volume', nil)
+      result.volume = (value.nil? ? nil : value)
+      result
     end
   end
 
@@ -1354,7 +1417,7 @@ module Proto
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class Balance < FBE::JsonBase
+  class Balance
     attr_accessor :currency
     attr_accessor :amount
 
@@ -1443,7 +1506,34 @@ module Proto
 
     # Get struct JSON value
     def to_json
-      JSON.generate(to_json_map)
+      JSON.generate(__to_json_map__)
+    end
+
+    # Get struct JSON map (internal method)
+    def __to_json_map__
+      result = {}
+      key = 'currency'
+      value = (currency.nil? ? nil : currency)
+      result.store(key, value)
+      key = 'amount'
+      value = (amount.nil? ? nil : amount)
+      result.store(key, value)
+      result
+    end
+
+    # Get struct from JSON
+    def self.from_json(json)
+      __from_json_map__(JSON.parse(json))
+    end
+
+    # Get struct map from JSON (internal method)
+    def self.__from_json_map__(json)
+      result = Balance.new
+      value = json.fetch('currency', nil)
+      result.currency = (value.nil? ? nil : value)
+      value = json.fetch('amount', nil)
+      result.amount = (value.nil? ? nil : value)
+      result
     end
   end
 
@@ -1929,7 +2019,7 @@ module Proto
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class Account < FBE::JsonBase
+  class Account
     attr_accessor :uid
     attr_accessor :name
     attr_accessor :state
@@ -2063,7 +2153,54 @@ module Proto
 
     # Get struct JSON value
     def to_json
-      JSON.generate(to_json_map)
+      JSON.generate(__to_json_map__)
+    end
+
+    # Get struct JSON map (internal method)
+    def __to_json_map__
+      result = {}
+      key = 'uid'
+      value = (uid.nil? ? nil : uid)
+      result.store(key, value)
+      key = 'name'
+      value = (name.nil? ? nil : name)
+      result.store(key, value)
+      key = 'state'
+      value = (state.nil? ? nil : state.__to_json_map__)
+      result.store(key, value)
+      key = 'wallet'
+      value = (wallet.nil? ? nil : wallet.__to_json_map__)
+      result.store(key, value)
+      key = 'asset'
+      value = (asset.nil? ? nil : asset.__to_json_map__)
+      result.store(key, value)
+      key = 'orders'
+      value = orders.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      result
+    end
+
+    # Get struct from JSON
+    def self.from_json(json)
+      __from_json_map__(JSON.parse(json))
+    end
+
+    # Get struct map from JSON (internal method)
+    def self.__from_json_map__(json)
+      result = Account.new
+      value = json.fetch('uid', nil)
+      result.uid = (value.nil? ? nil : value)
+      value = json.fetch('name', nil)
+      result.name = (value.nil? ? nil : value)
+      value = json.fetch('state', nil)
+      result.state = (value.nil? ? nil : State.__from_json_map__(value))
+      value = json.fetch('wallet', nil)
+      result.wallet = (value.nil? ? nil : Balance.__from_json_map__(value))
+      value = json.fetch('asset', nil)
+      result.asset = (value.nil? ? nil : Balance.__from_json_map__(value))
+      value = json.fetch('orders', nil)
+      result.orders = value.map { |item| (item.nil? ? nil : Order.__from_json_map__(item)) }
+      result
     end
   end
 

@@ -6,9 +6,9 @@ class TestExtending < Test::Unit::TestCase
   def test_extending_old_new
     # Create a new account with some orders
     account1 = Proto::Account.new(1, 'Test', Proto::State.good, Proto::Balance.new('USD', 1000.0), Proto::Balance.new('EUR', 100.0))
-    account1.orders.append(Proto::Order.new(1, 'EURUSD', Proto::OrderSide.buy, Proto::OrderType.market, 1.23456, 1000.0))
-    account1.orders.append(Proto::Order.new(2, 'EURUSD', Proto::OrderSide.sell, Proto::OrderType.limit, 1.0, 100.0))
-    account1.orders.append(Proto::Order.new(3, 'EURUSD', Proto::OrderSide.buy, Proto::OrderType.stop, 1.5, 10.0))
+    account1.orders.push(Proto::Order.new(1, 'EURUSD', Proto::OrderSide.buy, Proto::OrderType.market, 1.23456, 1000.0))
+    account1.orders.push(Proto::Order.new(2, 'EURUSD', Proto::OrderSide.sell, Proto::OrderType.limit, 1.0, 100.0))
+    account1.orders.push(Proto::Order.new(3, 'EURUSD', Proto::OrderSide.buy, Proto::OrderType.stop, 1.5, 10.0))
 
     # Serialize the account to the FBE stream
     writer = Proto::AccountModel.new(FBE::WriteBuffer.new)
@@ -74,9 +74,9 @@ class TestExtending < Test::Unit::TestCase
   def test_extending_new_old
     # Create a new account with some orders
     account1 = Protoex::Account.new(1, 'Test', Protoex::StateEx.good | Protoex::StateEx.happy, Protoex::Balance.new(Proto::Balance.new('USD', 1000.0), 123.456), Protoex::Balance.new(Proto::Balance.new('EUR', 100.0), 12.34))
-    account1.orders.append(Protoex::Order.new(1, 'EURUSD', Protoex::OrderSide.buy, Protoex::OrderType.market, 1.23456, 1000.0, 0.0, 0.0))
-    account1.orders.append(Protoex::Order.new(2, 'EURUSD', Protoex::OrderSide.sell, Protoex::OrderType.limit, 1.0, 100.0, 0.1, -0.1))
-    account1.orders.append(Protoex::Order.new(3, 'EURUSD', Protoex::OrderSide.tell, Protoex::OrderType.stoplimit, 1.5, 10.0, 1.1, -1.1))
+    account1.orders.push(Protoex::Order.new(1, 'EURUSD', Protoex::OrderSide.buy, Protoex::OrderType.market, 1.23456, 1000.0, 0.0, 0.0))
+    account1.orders.push(Protoex::Order.new(2, 'EURUSD', Protoex::OrderSide.sell, Protoex::OrderType.limit, 1.0, 100.0, 0.1, -0.1))
+    account1.orders.push(Protoex::Order.new(3, 'EURUSD', Protoex::OrderSide.tell, Protoex::OrderType.stoplimit, 1.5, 10.0, 1.1, -1.1))
 
     # Serialize the account to the FBE stream
     writer = Protoex::AccountModel.new(FBE::WriteBuffer.new)

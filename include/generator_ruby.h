@@ -44,7 +44,6 @@ private:
     void GenerateFBEEnum();
     void GenerateFBEFlags();
     void GenerateFBEInteger();
-    void GenerateFBEJsonBase();
     void GenerateFBEWriteBuffer();
     void GenerateFBEReadBuffer();
     void GenerateFBEModel();
@@ -103,6 +102,9 @@ private:
     std::string ConvertConstant(const std::string& type, const std::string& value, bool optional);
     std::string ConvertDefault(const std::string& type, bool optional);
     std::string ConvertDefault(const StructField& field);
+    std::string ConvertValueToJson(const std::string& type, const std::string& value, bool optional);
+    std::string ConvertValueFromJson(const std::string& type, const std::string& value, bool optional);
+    std::string ConvertKeyFromJson(const std::string& type, const std::string& value, bool optional);
 
     void WriteOutputStreamType(const std::string& type, const std::string& name);
     void WriteOutputStreamItem(const std::string& type, const std::string& name);

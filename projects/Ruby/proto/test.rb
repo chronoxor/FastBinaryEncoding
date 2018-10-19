@@ -10,6 +10,7 @@
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/PerceivedComplexity
 
+require 'base64'
 require 'bigdecimal'
 require 'json'
 require 'set'
@@ -49,11 +50,6 @@ module Test
         @value.hash
       end
 
-      # Get enum JSON value
-      def to_json_map
-        @value
-      end
-
       # Get enum integer value
       def to_i
         @value
@@ -81,6 +77,11 @@ module Test
         end
         '<unknown>'
       end
+
+      # Get enum JSON value
+      def __to_json_map__
+        @value
+      end
     end
 
     class << self
@@ -101,6 +102,11 @@ module Test
 
     def self.new(value = 0)
       Enum.new(value)
+    end
+
+    # Get enum value from JSON
+    def self.__from_json_map__(json)
+      Enum.new(json)
     end
   end
 
@@ -211,11 +217,6 @@ module Test
         @value.hash
       end
 
-      # Get enum JSON value
-      def to_json_map
-        @value
-      end
-
       # Get enum integer value
       def to_i
         @value
@@ -243,6 +244,11 @@ module Test
         end
         '<unknown>'
       end
+
+      # Get enum JSON value
+      def __to_json_map__
+        @value
+      end
     end
 
     class << self
@@ -263,6 +269,11 @@ module Test
 
     def self.new(value = 0)
       Enum.new(value)
+    end
+
+    # Get enum value from JSON
+    def self.__from_json_map__(json)
+      Enum.new(json)
     end
   end
 
@@ -398,11 +409,6 @@ module Test
         self
       end
 
-      # Get flags JSON value
-      def to_json_map
-        @value
-      end
-
       # Get flags integer value
       def to_i
         @value
@@ -468,6 +474,11 @@ module Test
         end
         result
       end
+
+      # Get flags JSON value
+      def __to_json_map__
+        @value
+      end
     end
 
     class << self
@@ -488,6 +499,11 @@ module Test
 
     def self.new(value = 0)
       Flags.new(value)
+    end
+
+    # Get flags value from JSON
+    def self.__from_json_map__(json)
+      Flags.new(json)
     end
   end
 
@@ -627,11 +643,6 @@ module Test
         self
       end
 
-      # Get flags JSON value
-      def to_json_map
-        @value
-      end
-
       # Get flags integer value
       def to_i
         @value
@@ -733,6 +744,11 @@ module Test
         end
         result
       end
+
+      # Get flags JSON value
+      def __to_json_map__
+        @value
+      end
     end
 
     class << self
@@ -761,6 +777,11 @@ module Test
 
     def self.new(value = 0)
       Flags.new(value)
+    end
+
+    # Get flags value from JSON
+    def self.__from_json_map__(json)
+      Flags.new(json)
     end
   end
 
@@ -843,7 +864,7 @@ module Test
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class StructSimple < FBE::JsonBase
+  class StructSimple
     attr_accessor :uid
     attr_accessor :f1
     attr_accessor :f2
@@ -1319,7 +1340,249 @@ module Test
 
     # Get struct JSON value
     def to_json
-      JSON.generate(to_json_map)
+      JSON.generate(__to_json_map__)
+    end
+
+    # Get struct JSON map (internal method)
+    def __to_json_map__
+      result = {}
+      key = 'uid'
+      value = (uid.nil? ? nil : uid)
+      result.store(key, value)
+      key = 'f1'
+      value = (f1.nil? ? nil : f1)
+      result.store(key, value)
+      key = 'f2'
+      value = (f2.nil? ? nil : f2)
+      result.store(key, value)
+      key = 'f3'
+      value = (f3.nil? ? nil : f3)
+      result.store(key, value)
+      key = 'f4'
+      value = (f4.nil? ? nil : f4)
+      result.store(key, value)
+      key = 'f5'
+      value = (f5.nil? ? nil : f5)
+      result.store(key, value)
+      key = 'f6'
+      value = (f6.nil? ? nil : f6)
+      result.store(key, value)
+      key = 'f7'
+      value = (f7.nil? ? nil : f7)
+      result.store(key, value)
+      key = 'f8'
+      value = (f8.nil? ? nil : f8)
+      result.store(key, value)
+      key = 'f9'
+      value = (f9.nil? ? nil : f9)
+      result.store(key, value)
+      key = 'f10'
+      value = (f10.nil? ? nil : f10)
+      result.store(key, value)
+      key = 'f11'
+      value = (f11.nil? ? nil : f11)
+      result.store(key, value)
+      key = 'f12'
+      value = (f12.nil? ? nil : f12)
+      result.store(key, value)
+      key = 'f13'
+      value = (f13.nil? ? nil : f13)
+      result.store(key, value)
+      key = 'f14'
+      value = (f14.nil? ? nil : f14)
+      result.store(key, value)
+      key = 'f15'
+      value = (f15.nil? ? nil : f15)
+      result.store(key, value)
+      key = 'f16'
+      value = (f16.nil? ? nil : f16)
+      result.store(key, value)
+      key = 'f17'
+      value = (f17.nil? ? nil : f17)
+      result.store(key, value)
+      key = 'f18'
+      value = (f18.nil? ? nil : f18)
+      result.store(key, value)
+      key = 'f19'
+      value = (f19.nil? ? nil : f19)
+      result.store(key, value)
+      key = 'f20'
+      value = (f20.nil? ? nil : f20)
+      result.store(key, value)
+      key = 'f21'
+      value = (f21.nil? ? nil : f21)
+      result.store(key, value)
+      key = 'f22'
+      value = (f22.nil? ? nil : f22)
+      result.store(key, value)
+      key = 'f23'
+      value = (f23.nil? ? nil : f23)
+      result.store(key, value)
+      key = 'f24'
+      value = (f24.nil? ? nil : f24)
+      result.store(key, value)
+      key = 'f25'
+      value = (f25.nil? ? nil : f25)
+      result.store(key, value)
+      key = 'f26'
+      value = (f26.nil? ? nil : f26)
+      result.store(key, value)
+      key = 'f27'
+      value = (f27.nil? ? nil : f27)
+      result.store(key, value)
+      key = 'f28'
+      value = (f28.nil? ? nil : f28)
+      result.store(key, value)
+      key = 'f29'
+      value = (f29.nil? ? nil : f29.to_s('F'))
+      result.store(key, value)
+      key = 'f30'
+      value = (f30.nil? ? nil : f30.to_s('F'))
+      result.store(key, value)
+      key = 'f31'
+      value = (f31.nil? ? nil : f31)
+      result.store(key, value)
+      key = 'f32'
+      value = (f32.nil? ? nil : f32)
+      result.store(key, value)
+      key = 'f33'
+      value = (f33.nil? ? nil : (f33.to_i * 1000000000 + f33.nsec))
+      result.store(key, value)
+      key = 'f34'
+      value = (f34.nil? ? nil : (f34.to_i * 1000000000 + f34.nsec))
+      result.store(key, value)
+      key = 'f35'
+      value = (f35.nil? ? nil : (f35.to_i * 1000000000 + f35.nsec))
+      result.store(key, value)
+      key = 'f36'
+      value = (f36.nil? ? nil : f36)
+      result.store(key, value)
+      key = 'f37'
+      value = (f37.nil? ? nil : f37)
+      result.store(key, value)
+      key = 'f38'
+      value = (f38.nil? ? nil : f38)
+      result.store(key, value)
+      key = 'f39'
+      value = (f39.nil? ? nil : f39.__to_json_map__)
+      result.store(key, value)
+      key = 'f40'
+      value = (f40.nil? ? nil : f40.__to_json_map__)
+      result.store(key, value)
+      key = 'f41'
+      value = (f41.nil? ? nil : f41.__to_json_map__)
+      result.store(key, value)
+      key = 'f42'
+      value = (f42.nil? ? nil : f42.__to_json_map__)
+      result.store(key, value)
+      key = 'f43'
+      value = (f43.nil? ? nil : f43.__to_json_map__)
+      result.store(key, value)
+      key = 'f44'
+      value = (f44.nil? ? nil : f44.__to_json_map__)
+      result.store(key, value)
+      result
+    end
+
+    # Get struct from JSON
+    def self.from_json(json)
+      __from_json_map__(JSON.parse(json))
+    end
+
+    # Get struct map from JSON (internal method)
+    def self.__from_json_map__(json)
+      result = StructSimple.new
+      value = json.fetch('uid', nil)
+      result.uid = (value.nil? ? nil : value)
+      value = json.fetch('f1', nil)
+      result.f1 = (value.nil? ? nil : value)
+      value = json.fetch('f2', nil)
+      result.f2 = (value.nil? ? nil : value)
+      value = json.fetch('f3', nil)
+      result.f3 = (value.nil? ? nil : value)
+      value = json.fetch('f4', nil)
+      result.f4 = (value.nil? ? nil : value)
+      value = json.fetch('f5', nil)
+      result.f5 = (value.nil? ? nil : value)
+      value = json.fetch('f6', nil)
+      result.f6 = (value.nil? ? nil : value)
+      value = json.fetch('f7', nil)
+      result.f7 = (value.nil? ? nil : value)
+      value = json.fetch('f8', nil)
+      result.f8 = (value.nil? ? nil : value)
+      value = json.fetch('f9', nil)
+      result.f9 = (value.nil? ? nil : value)
+      value = json.fetch('f10', nil)
+      result.f10 = (value.nil? ? nil : value)
+      value = json.fetch('f11', nil)
+      result.f11 = (value.nil? ? nil : value)
+      value = json.fetch('f12', nil)
+      result.f12 = (value.nil? ? nil : value)
+      value = json.fetch('f13', nil)
+      result.f13 = (value.nil? ? nil : value)
+      value = json.fetch('f14', nil)
+      result.f14 = (value.nil? ? nil : value)
+      value = json.fetch('f15', nil)
+      result.f15 = (value.nil? ? nil : value)
+      value = json.fetch('f16', nil)
+      result.f16 = (value.nil? ? nil : value)
+      value = json.fetch('f17', nil)
+      result.f17 = (value.nil? ? nil : value)
+      value = json.fetch('f18', nil)
+      result.f18 = (value.nil? ? nil : value)
+      value = json.fetch('f19', nil)
+      result.f19 = (value.nil? ? nil : value)
+      value = json.fetch('f20', nil)
+      result.f20 = (value.nil? ? nil : value)
+      value = json.fetch('f21', nil)
+      result.f21 = (value.nil? ? nil : value)
+      value = json.fetch('f22', nil)
+      result.f22 = (value.nil? ? nil : value)
+      value = json.fetch('f23', nil)
+      result.f23 = (value.nil? ? nil : value)
+      value = json.fetch('f24', nil)
+      result.f24 = (value.nil? ? nil : value)
+      value = json.fetch('f25', nil)
+      result.f25 = (value.nil? ? nil : value)
+      value = json.fetch('f26', nil)
+      result.f26 = (value.nil? ? nil : value)
+      value = json.fetch('f27', nil)
+      result.f27 = (value.nil? ? nil : value)
+      value = json.fetch('f28', nil)
+      result.f28 = (value.nil? ? nil : value)
+      value = json.fetch('f29', nil)
+      result.f29 = (value.nil? ? nil : BigDecimal.new(value))
+      value = json.fetch('f30', nil)
+      result.f30 = (value.nil? ? nil : BigDecimal.new(value))
+      value = json.fetch('f31', nil)
+      result.f31 = (value.nil? ? nil : value)
+      value = json.fetch('f32', nil)
+      result.f32 = (value.nil? ? nil : value)
+      value = json.fetch('f33', nil)
+      result.f33 = (value.nil? ? nil : Time.at(value / 1000000000, (value % 1000000000) / 1000.0))
+      value = json.fetch('f34', nil)
+      result.f34 = (value.nil? ? nil : Time.at(value / 1000000000, (value % 1000000000) / 1000.0))
+      value = json.fetch('f35', nil)
+      result.f35 = (value.nil? ? nil : Time.at(value / 1000000000, (value % 1000000000) / 1000.0))
+      value = json.fetch('f36', nil)
+      result.f36 = (value.nil? ? nil : UUIDTools::UUID.parse(value))
+      value = json.fetch('f37', nil)
+      result.f37 = (value.nil? ? nil : UUIDTools::UUID.parse(value))
+      value = json.fetch('f38', nil)
+      result.f38 = (value.nil? ? nil : UUIDTools::UUID.parse(value))
+      value = json.fetch('f39', nil)
+      result.f39 = (value.nil? ? nil : Proto::OrderSide.__from_json_map__(value))
+      value = json.fetch('f40', nil)
+      result.f40 = (value.nil? ? nil : Proto::OrderType.__from_json_map__(value))
+      value = json.fetch('f41', nil)
+      result.f41 = (value.nil? ? nil : Proto::Order.__from_json_map__(value))
+      value = json.fetch('f42', nil)
+      result.f42 = (value.nil? ? nil : Proto::Balance.__from_json_map__(value))
+      value = json.fetch('f43', nil)
+      result.f43 = (value.nil? ? nil : Proto::State.__from_json_map__(value))
+      value = json.fetch('f44', nil)
+      result.f44 = (value.nil? ? nil : Proto::Account.__from_json_map__(value))
+      result
     end
   end
 
@@ -4666,7 +4929,356 @@ module Test
 
     # Get struct JSON value
     def to_json
-      JSON.generate(to_json_map)
+      JSON.generate(__to_json_map__)
+    end
+
+    # Get struct JSON map (internal method)
+    def __to_json_map__
+      result = {}
+      result.update(super)
+      key = 'f100'
+      value = (f100.nil? ? nil : f100)
+      result.store(key, value)
+      key = 'f101'
+      value = (f101.nil? ? nil : f101)
+      result.store(key, value)
+      key = 'f102'
+      value = (f102.nil? ? nil : f102)
+      result.store(key, value)
+      key = 'f103'
+      value = (f103.nil? ? nil : f103)
+      result.store(key, value)
+      key = 'f104'
+      value = (f104.nil? ? nil : f104)
+      result.store(key, value)
+      key = 'f105'
+      value = (f105.nil? ? nil : f105)
+      result.store(key, value)
+      key = 'f106'
+      value = (f106.nil? ? nil : f106)
+      result.store(key, value)
+      key = 'f107'
+      value = (f107.nil? ? nil : f107)
+      result.store(key, value)
+      key = 'f108'
+      value = (f108.nil? ? nil : f108)
+      result.store(key, value)
+      key = 'f109'
+      value = (f109.nil? ? nil : f109)
+      result.store(key, value)
+      key = 'f110'
+      value = (f110.nil? ? nil : f110)
+      result.store(key, value)
+      key = 'f111'
+      value = (f111.nil? ? nil : f111)
+      result.store(key, value)
+      key = 'f112'
+      value = (f112.nil? ? nil : f112)
+      result.store(key, value)
+      key = 'f113'
+      value = (f113.nil? ? nil : f113)
+      result.store(key, value)
+      key = 'f114'
+      value = (f114.nil? ? nil : f114)
+      result.store(key, value)
+      key = 'f115'
+      value = (f115.nil? ? nil : f115)
+      result.store(key, value)
+      key = 'f116'
+      value = (f116.nil? ? nil : f116)
+      result.store(key, value)
+      key = 'f117'
+      value = (f117.nil? ? nil : f117)
+      result.store(key, value)
+      key = 'f118'
+      value = (f118.nil? ? nil : f118)
+      result.store(key, value)
+      key = 'f119'
+      value = (f119.nil? ? nil : f119)
+      result.store(key, value)
+      key = 'f120'
+      value = (f120.nil? ? nil : f120)
+      result.store(key, value)
+      key = 'f121'
+      value = (f121.nil? ? nil : f121)
+      result.store(key, value)
+      key = 'f122'
+      value = (f122.nil? ? nil : f122)
+      result.store(key, value)
+      key = 'f123'
+      value = (f123.nil? ? nil : f123)
+      result.store(key, value)
+      key = 'f124'
+      value = (f124.nil? ? nil : f124)
+      result.store(key, value)
+      key = 'f125'
+      value = (f125.nil? ? nil : f125)
+      result.store(key, value)
+      key = 'f126'
+      value = (f126.nil? ? nil : f126)
+      result.store(key, value)
+      key = 'f127'
+      value = (f127.nil? ? nil : f127)
+      result.store(key, value)
+      key = 'f128'
+      value = (f128.nil? ? nil : f128)
+      result.store(key, value)
+      key = 'f129'
+      value = (f129.nil? ? nil : f129)
+      result.store(key, value)
+      key = 'f130'
+      value = (f130.nil? ? nil : f130)
+      result.store(key, value)
+      key = 'f131'
+      value = (f131.nil? ? nil : f131)
+      result.store(key, value)
+      key = 'f132'
+      value = (f132.nil? ? nil : f132)
+      result.store(key, value)
+      key = 'f133'
+      value = (f133.nil? ? nil : f133)
+      result.store(key, value)
+      key = 'f134'
+      value = (f134.nil? ? nil : f134)
+      result.store(key, value)
+      key = 'f135'
+      value = (f135.nil? ? nil : f135)
+      result.store(key, value)
+      key = 'f136'
+      value = (f136.nil? ? nil : f136)
+      result.store(key, value)
+      key = 'f137'
+      value = (f137.nil? ? nil : f137)
+      result.store(key, value)
+      key = 'f138'
+      value = (f138.nil? ? nil : f138)
+      result.store(key, value)
+      key = 'f139'
+      value = (f139.nil? ? nil : f139)
+      result.store(key, value)
+      key = 'f140'
+      value = (f140.nil? ? nil : f140)
+      result.store(key, value)
+      key = 'f141'
+      value = (f141.nil? ? nil : f141)
+      result.store(key, value)
+      key = 'f142'
+      value = (f142.nil? ? nil : f142.to_s('F'))
+      result.store(key, value)
+      key = 'f143'
+      value = (f143.nil? ? nil : f143.to_s('F'))
+      result.store(key, value)
+      key = 'f144'
+      value = (f144.nil? ? nil : f144.to_s('F'))
+      result.store(key, value)
+      key = 'f145'
+      value = (f145.nil? ? nil : f145)
+      result.store(key, value)
+      key = 'f146'
+      value = (f146.nil? ? nil : f146)
+      result.store(key, value)
+      key = 'f147'
+      value = (f147.nil? ? nil : f147)
+      result.store(key, value)
+      key = 'f148'
+      value = (f148.nil? ? nil : (f148.to_i * 1000000000 + f148.nsec))
+      result.store(key, value)
+      key = 'f149'
+      value = (f149.nil? ? nil : (f149.to_i * 1000000000 + f149.nsec))
+      result.store(key, value)
+      key = 'f150'
+      value = (f150.nil? ? nil : (f150.to_i * 1000000000 + f150.nsec))
+      result.store(key, value)
+      key = 'f151'
+      value = (f151.nil? ? nil : f151)
+      result.store(key, value)
+      key = 'f152'
+      value = (f152.nil? ? nil : f152)
+      result.store(key, value)
+      key = 'f153'
+      value = (f153.nil? ? nil : f153)
+      result.store(key, value)
+      key = 'f154'
+      value = (f154.nil? ? nil : f154.__to_json_map__)
+      result.store(key, value)
+      key = 'f155'
+      value = (f155.nil? ? nil : f155.__to_json_map__)
+      result.store(key, value)
+      key = 'f156'
+      value = (f156.nil? ? nil : f156.__to_json_map__)
+      result.store(key, value)
+      key = 'f157'
+      value = (f157.nil? ? nil : f157.__to_json_map__)
+      result.store(key, value)
+      key = 'f158'
+      value = (f158.nil? ? nil : f158.__to_json_map__)
+      result.store(key, value)
+      key = 'f159'
+      value = (f159.nil? ? nil : f159.__to_json_map__)
+      result.store(key, value)
+      key = 'f160'
+      value = (f160.nil? ? nil : f160.__to_json_map__)
+      result.store(key, value)
+      key = 'f161'
+      value = (f161.nil? ? nil : f161.__to_json_map__)
+      result.store(key, value)
+      key = 'f162'
+      value = (f162.nil? ? nil : f162.__to_json_map__)
+      result.store(key, value)
+      key = 'f163'
+      value = (f163.nil? ? nil : f163.__to_json_map__)
+      result.store(key, value)
+      key = 'f164'
+      value = (f164.nil? ? nil : f164.__to_json_map__)
+      result.store(key, value)
+      key = 'f165'
+      value = (f165.nil? ? nil : f165.__to_json_map__)
+      result.store(key, value)
+      result
+    end
+
+    # Get struct from JSON
+    def self.from_json(json)
+      __from_json_map__(JSON.parse(json))
+    end
+
+    # Get struct map from JSON (internal method)
+    def self.__from_json_map__(json)
+      result = StructOptional.new
+      result.method(:copy).super_method.call(StructOptional.method(:__from_json_map__).super_method.call(json))
+      value = json.fetch('f100', nil)
+      result.f100 = (value.nil? ? nil : value)
+      value = json.fetch('f101', nil)
+      result.f101 = (value.nil? ? nil : value)
+      value = json.fetch('f102', nil)
+      result.f102 = (value.nil? ? nil : value)
+      value = json.fetch('f103', nil)
+      result.f103 = (value.nil? ? nil : value)
+      value = json.fetch('f104', nil)
+      result.f104 = (value.nil? ? nil : value)
+      value = json.fetch('f105', nil)
+      result.f105 = (value.nil? ? nil : value)
+      value = json.fetch('f106', nil)
+      result.f106 = (value.nil? ? nil : value)
+      value = json.fetch('f107', nil)
+      result.f107 = (value.nil? ? nil : value)
+      value = json.fetch('f108', nil)
+      result.f108 = (value.nil? ? nil : value)
+      value = json.fetch('f109', nil)
+      result.f109 = (value.nil? ? nil : value)
+      value = json.fetch('f110', nil)
+      result.f110 = (value.nil? ? nil : value)
+      value = json.fetch('f111', nil)
+      result.f111 = (value.nil? ? nil : value)
+      value = json.fetch('f112', nil)
+      result.f112 = (value.nil? ? nil : value)
+      value = json.fetch('f113', nil)
+      result.f113 = (value.nil? ? nil : value)
+      value = json.fetch('f114', nil)
+      result.f114 = (value.nil? ? nil : value)
+      value = json.fetch('f115', nil)
+      result.f115 = (value.nil? ? nil : value)
+      value = json.fetch('f116', nil)
+      result.f116 = (value.nil? ? nil : value)
+      value = json.fetch('f117', nil)
+      result.f117 = (value.nil? ? nil : value)
+      value = json.fetch('f118', nil)
+      result.f118 = (value.nil? ? nil : value)
+      value = json.fetch('f119', nil)
+      result.f119 = (value.nil? ? nil : value)
+      value = json.fetch('f120', nil)
+      result.f120 = (value.nil? ? nil : value)
+      value = json.fetch('f121', nil)
+      result.f121 = (value.nil? ? nil : value)
+      value = json.fetch('f122', nil)
+      result.f122 = (value.nil? ? nil : value)
+      value = json.fetch('f123', nil)
+      result.f123 = (value.nil? ? nil : value)
+      value = json.fetch('f124', nil)
+      result.f124 = (value.nil? ? nil : value)
+      value = json.fetch('f125', nil)
+      result.f125 = (value.nil? ? nil : value)
+      value = json.fetch('f126', nil)
+      result.f126 = (value.nil? ? nil : value)
+      value = json.fetch('f127', nil)
+      result.f127 = (value.nil? ? nil : value)
+      value = json.fetch('f128', nil)
+      result.f128 = (value.nil? ? nil : value)
+      value = json.fetch('f129', nil)
+      result.f129 = (value.nil? ? nil : value)
+      value = json.fetch('f130', nil)
+      result.f130 = (value.nil? ? nil : value)
+      value = json.fetch('f131', nil)
+      result.f131 = (value.nil? ? nil : value)
+      value = json.fetch('f132', nil)
+      result.f132 = (value.nil? ? nil : value)
+      value = json.fetch('f133', nil)
+      result.f133 = (value.nil? ? nil : value)
+      value = json.fetch('f134', nil)
+      result.f134 = (value.nil? ? nil : value)
+      value = json.fetch('f135', nil)
+      result.f135 = (value.nil? ? nil : value)
+      value = json.fetch('f136', nil)
+      result.f136 = (value.nil? ? nil : value)
+      value = json.fetch('f137', nil)
+      result.f137 = (value.nil? ? nil : value)
+      value = json.fetch('f138', nil)
+      result.f138 = (value.nil? ? nil : value)
+      value = json.fetch('f139', nil)
+      result.f139 = (value.nil? ? nil : value)
+      value = json.fetch('f140', nil)
+      result.f140 = (value.nil? ? nil : value)
+      value = json.fetch('f141', nil)
+      result.f141 = (value.nil? ? nil : value)
+      value = json.fetch('f142', nil)
+      result.f142 = (value.nil? ? nil : BigDecimal.new(value))
+      value = json.fetch('f143', nil)
+      result.f143 = (value.nil? ? nil : BigDecimal.new(value))
+      value = json.fetch('f144', nil)
+      result.f144 = (value.nil? ? nil : BigDecimal.new(value))
+      value = json.fetch('f145', nil)
+      result.f145 = (value.nil? ? nil : value)
+      value = json.fetch('f146', nil)
+      result.f146 = (value.nil? ? nil : value)
+      value = json.fetch('f147', nil)
+      result.f147 = (value.nil? ? nil : value)
+      value = json.fetch('f148', nil)
+      result.f148 = (value.nil? ? nil : Time.at(value / 1000000000, (value % 1000000000) / 1000.0))
+      value = json.fetch('f149', nil)
+      result.f149 = (value.nil? ? nil : Time.at(value / 1000000000, (value % 1000000000) / 1000.0))
+      value = json.fetch('f150', nil)
+      result.f150 = (value.nil? ? nil : Time.at(value / 1000000000, (value % 1000000000) / 1000.0))
+      value = json.fetch('f151', nil)
+      result.f151 = (value.nil? ? nil : UUIDTools::UUID.parse(value))
+      value = json.fetch('f152', nil)
+      result.f152 = (value.nil? ? nil : UUIDTools::UUID.parse(value))
+      value = json.fetch('f153', nil)
+      result.f153 = (value.nil? ? nil : UUIDTools::UUID.parse(value))
+      value = json.fetch('f154', nil)
+      result.f154 = (value.nil? ? nil : Proto::OrderSide.__from_json_map__(value))
+      value = json.fetch('f155', nil)
+      result.f155 = (value.nil? ? nil : Proto::OrderSide.__from_json_map__(value))
+      value = json.fetch('f156', nil)
+      result.f156 = (value.nil? ? nil : Proto::OrderType.__from_json_map__(value))
+      value = json.fetch('f157', nil)
+      result.f157 = (value.nil? ? nil : Proto::OrderType.__from_json_map__(value))
+      value = json.fetch('f158', nil)
+      result.f158 = (value.nil? ? nil : Proto::Order.__from_json_map__(value))
+      value = json.fetch('f159', nil)
+      result.f159 = (value.nil? ? nil : Proto::Order.__from_json_map__(value))
+      value = json.fetch('f160', nil)
+      result.f160 = (value.nil? ? nil : Proto::Balance.__from_json_map__(value))
+      value = json.fetch('f161', nil)
+      result.f161 = (value.nil? ? nil : Proto::Balance.__from_json_map__(value))
+      value = json.fetch('f162', nil)
+      result.f162 = (value.nil? ? nil : Proto::State.__from_json_map__(value))
+      value = json.fetch('f163', nil)
+      result.f163 = (value.nil? ? nil : Proto::State.__from_json_map__(value))
+      value = json.fetch('f164', nil)
+      result.f164 = (value.nil? ? nil : Proto::Account.__from_json_map__(value))
+      value = json.fetch('f165', nil)
+      result.f165 = (value.nil? ? nil : Proto::Account.__from_json_map__(value))
+      result
     end
   end
 
@@ -8646,7 +9258,86 @@ module Test
 
     # Get struct JSON value
     def to_json
-      JSON.generate(to_json_map)
+      JSON.generate(__to_json_map__)
+    end
+
+    # Get struct JSON map (internal method)
+    def __to_json_map__
+      result = {}
+      result.update(super)
+      key = 'f1000'
+      value = (f1000.nil? ? nil : f1000.__to_json_map__)
+      result.store(key, value)
+      key = 'f1001'
+      value = (f1001.nil? ? nil : f1001.__to_json_map__)
+      result.store(key, value)
+      key = 'f1002'
+      value = (f1002.nil? ? nil : f1002.__to_json_map__)
+      result.store(key, value)
+      key = 'f1003'
+      value = (f1003.nil? ? nil : f1003.__to_json_map__)
+      result.store(key, value)
+      key = 'f1004'
+      value = (f1004.nil? ? nil : f1004.__to_json_map__)
+      result.store(key, value)
+      key = 'f1005'
+      value = (f1005.nil? ? nil : f1005.__to_json_map__)
+      result.store(key, value)
+      key = 'f1006'
+      value = (f1006.nil? ? nil : f1006.__to_json_map__)
+      result.store(key, value)
+      key = 'f1007'
+      value = (f1007.nil? ? nil : f1007.__to_json_map__)
+      result.store(key, value)
+      key = 'f1008'
+      value = (f1008.nil? ? nil : f1008.__to_json_map__)
+      result.store(key, value)
+      key = 'f1009'
+      value = (f1009.nil? ? nil : f1009.__to_json_map__)
+      result.store(key, value)
+      key = 'f1010'
+      value = (f1010.nil? ? nil : f1010.__to_json_map__)
+      result.store(key, value)
+      key = 'f1011'
+      value = (f1011.nil? ? nil : f1011.__to_json_map__)
+      result.store(key, value)
+      result
+    end
+
+    # Get struct from JSON
+    def self.from_json(json)
+      __from_json_map__(JSON.parse(json))
+    end
+
+    # Get struct map from JSON (internal method)
+    def self.__from_json_map__(json)
+      result = StructNested.new
+      result.method(:copy).super_method.call(StructNested.method(:__from_json_map__).super_method.call(json))
+      value = json.fetch('f1000', nil)
+      result.f1000 = (value.nil? ? nil : EnumSimple.__from_json_map__(value))
+      value = json.fetch('f1001', nil)
+      result.f1001 = (value.nil? ? nil : EnumSimple.__from_json_map__(value))
+      value = json.fetch('f1002', nil)
+      result.f1002 = (value.nil? ? nil : EnumTyped.__from_json_map__(value))
+      value = json.fetch('f1003', nil)
+      result.f1003 = (value.nil? ? nil : EnumTyped.__from_json_map__(value))
+      value = json.fetch('f1004', nil)
+      result.f1004 = (value.nil? ? nil : FlagsSimple.__from_json_map__(value))
+      value = json.fetch('f1005', nil)
+      result.f1005 = (value.nil? ? nil : FlagsSimple.__from_json_map__(value))
+      value = json.fetch('f1006', nil)
+      result.f1006 = (value.nil? ? nil : FlagsTyped.__from_json_map__(value))
+      value = json.fetch('f1007', nil)
+      result.f1007 = (value.nil? ? nil : FlagsTyped.__from_json_map__(value))
+      value = json.fetch('f1008', nil)
+      result.f1008 = (value.nil? ? nil : StructSimple.__from_json_map__(value))
+      value = json.fetch('f1009', nil)
+      result.f1009 = (value.nil? ? nil : StructSimple.__from_json_map__(value))
+      value = json.fetch('f1010', nil)
+      result.f1010 = (value.nil? ? nil : StructOptional.__from_json_map__(value))
+      value = json.fetch('f1011', nil)
+      result.f1011 = (value.nil? ? nil : StructOptional.__from_json_map__(value))
+      result
     end
   end
 
@@ -9690,7 +10381,7 @@ module Test
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class StructBytes < FBE::JsonBase
+  class StructBytes
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -9783,7 +10474,39 @@ module Test
 
     # Get struct JSON value
     def to_json
-      JSON.generate(to_json_map)
+      JSON.generate(__to_json_map__)
+    end
+
+    # Get struct JSON map (internal method)
+    def __to_json_map__
+      result = {}
+      key = 'f1'
+      value = (f1.nil? ? nil : Base64.encode64(f1))
+      result.store(key, value)
+      key = 'f2'
+      value = (f2.nil? ? nil : Base64.encode64(f2))
+      result.store(key, value)
+      key = 'f3'
+      value = (f3.nil? ? nil : Base64.encode64(f3))
+      result.store(key, value)
+      result
+    end
+
+    # Get struct from JSON
+    def self.from_json(json)
+      __from_json_map__(JSON.parse(json))
+    end
+
+    # Get struct map from JSON (internal method)
+    def self.__from_json_map__(json)
+      result = StructBytes.new
+      value = json.fetch('f1', nil)
+      result.f1 = (value.nil? ? nil : Base64.decode64(value))
+      value = json.fetch('f2', nil)
+      result.f2 = (value.nil? ? nil : Base64.decode64(value))
+      value = json.fetch('f3', nil)
+      result.f3 = (value.nil? ? nil : Base64.decode64(value))
+      result
     end
   end
 
@@ -10320,7 +11043,7 @@ module Test
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class StructArray < FBE::JsonBase
+  class StructArray
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -10566,7 +11289,74 @@ module Test
 
     # Get struct JSON value
     def to_json
-      JSON.generate(to_json_map)
+      JSON.generate(__to_json_map__)
+    end
+
+    # Get struct JSON map (internal method)
+    def __to_json_map__
+      result = {}
+      key = 'f1'
+      value = f1.map { |item| (item.nil? ? nil : item) }
+      result.store(key, value)
+      key = 'f2'
+      value = f2.map { |item| (item.nil? ? nil : item) }
+      result.store(key, value)
+      key = 'f3'
+      value = f3.map { |item| (item.nil? ? nil : Base64.encode64(item)) }
+      result.store(key, value)
+      key = 'f4'
+      value = f4.map { |item| (item.nil? ? nil : Base64.encode64(item)) }
+      result.store(key, value)
+      key = 'f5'
+      value = f5.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      key = 'f6'
+      value = f6.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      key = 'f7'
+      value = f7.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      key = 'f8'
+      value = f8.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      key = 'f9'
+      value = f9.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      key = 'f10'
+      value = f10.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      result
+    end
+
+    # Get struct from JSON
+    def self.from_json(json)
+      __from_json_map__(JSON.parse(json))
+    end
+
+    # Get struct map from JSON (internal method)
+    def self.__from_json_map__(json)
+      result = StructArray.new
+      value = json.fetch('f1', nil)
+      result.f1 = value.map { |item| (item.nil? ? nil : item) }
+      value = json.fetch('f2', nil)
+      result.f2 = value.map { |item| (item.nil? ? nil : item) }
+      value = json.fetch('f3', nil)
+      result.f3 = value.map { |item| (item.nil? ? nil : Base64.decode64(item)) }
+      value = json.fetch('f4', nil)
+      result.f4 = value.map { |item| (item.nil? ? nil : Base64.decode64(item)) }
+      value = json.fetch('f5', nil)
+      result.f5 = value.map { |item| (item.nil? ? nil : EnumSimple.__from_json_map__(item)) }
+      value = json.fetch('f6', nil)
+      result.f6 = value.map { |item| (item.nil? ? nil : EnumSimple.__from_json_map__(item)) }
+      value = json.fetch('f7', nil)
+      result.f7 = value.map { |item| (item.nil? ? nil : FlagsSimple.__from_json_map__(item)) }
+      value = json.fetch('f8', nil)
+      result.f8 = value.map { |item| (item.nil? ? nil : FlagsSimple.__from_json_map__(item)) }
+      value = json.fetch('f9', nil)
+      result.f9 = value.map { |item| (item.nil? ? nil : StructSimple.__from_json_map__(item)) }
+      value = json.fetch('f10', nil)
+      result.f10 = value.map { |item| (item.nil? ? nil : StructSimple.__from_json_map__(item)) }
+      result
     end
   end
 
@@ -11450,7 +12240,7 @@ module Test
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class StructVector < FBE::JsonBase
+  class StructVector
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -11696,7 +12486,74 @@ module Test
 
     # Get struct JSON value
     def to_json
-      JSON.generate(to_json_map)
+      JSON.generate(__to_json_map__)
+    end
+
+    # Get struct JSON map (internal method)
+    def __to_json_map__
+      result = {}
+      key = 'f1'
+      value = f1.map { |item| (item.nil? ? nil : item) }
+      result.store(key, value)
+      key = 'f2'
+      value = f2.map { |item| (item.nil? ? nil : item) }
+      result.store(key, value)
+      key = 'f3'
+      value = f3.map { |item| (item.nil? ? nil : Base64.encode64(item)) }
+      result.store(key, value)
+      key = 'f4'
+      value = f4.map { |item| (item.nil? ? nil : Base64.encode64(item)) }
+      result.store(key, value)
+      key = 'f5'
+      value = f5.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      key = 'f6'
+      value = f6.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      key = 'f7'
+      value = f7.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      key = 'f8'
+      value = f8.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      key = 'f9'
+      value = f9.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      key = 'f10'
+      value = f10.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      result
+    end
+
+    # Get struct from JSON
+    def self.from_json(json)
+      __from_json_map__(JSON.parse(json))
+    end
+
+    # Get struct map from JSON (internal method)
+    def self.__from_json_map__(json)
+      result = StructVector.new
+      value = json.fetch('f1', nil)
+      result.f1 = value.map { |item| (item.nil? ? nil : item) }
+      value = json.fetch('f2', nil)
+      result.f2 = value.map { |item| (item.nil? ? nil : item) }
+      value = json.fetch('f3', nil)
+      result.f3 = value.map { |item| (item.nil? ? nil : Base64.decode64(item)) }
+      value = json.fetch('f4', nil)
+      result.f4 = value.map { |item| (item.nil? ? nil : Base64.decode64(item)) }
+      value = json.fetch('f5', nil)
+      result.f5 = value.map { |item| (item.nil? ? nil : EnumSimple.__from_json_map__(item)) }
+      value = json.fetch('f6', nil)
+      result.f6 = value.map { |item| (item.nil? ? nil : EnumSimple.__from_json_map__(item)) }
+      value = json.fetch('f7', nil)
+      result.f7 = value.map { |item| (item.nil? ? nil : FlagsSimple.__from_json_map__(item)) }
+      value = json.fetch('f8', nil)
+      result.f8 = value.map { |item| (item.nil? ? nil : FlagsSimple.__from_json_map__(item)) }
+      value = json.fetch('f9', nil)
+      result.f9 = value.map { |item| (item.nil? ? nil : StructSimple.__from_json_map__(item)) }
+      value = json.fetch('f10', nil)
+      result.f10 = value.map { |item| (item.nil? ? nil : StructSimple.__from_json_map__(item)) }
+      result
     end
   end
 
@@ -12580,7 +13437,7 @@ module Test
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class StructList < FBE::JsonBase
+  class StructList
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -12826,7 +13683,74 @@ module Test
 
     # Get struct JSON value
     def to_json
-      JSON.generate(to_json_map)
+      JSON.generate(__to_json_map__)
+    end
+
+    # Get struct JSON map (internal method)
+    def __to_json_map__
+      result = {}
+      key = 'f1'
+      value = f1.map { |item| (item.nil? ? nil : item) }
+      result.store(key, value)
+      key = 'f2'
+      value = f2.map { |item| (item.nil? ? nil : item) }
+      result.store(key, value)
+      key = 'f3'
+      value = f3.map { |item| (item.nil? ? nil : Base64.encode64(item)) }
+      result.store(key, value)
+      key = 'f4'
+      value = f4.map { |item| (item.nil? ? nil : Base64.encode64(item)) }
+      result.store(key, value)
+      key = 'f5'
+      value = f5.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      key = 'f6'
+      value = f6.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      key = 'f7'
+      value = f7.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      key = 'f8'
+      value = f8.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      key = 'f9'
+      value = f9.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      key = 'f10'
+      value = f10.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      result
+    end
+
+    # Get struct from JSON
+    def self.from_json(json)
+      __from_json_map__(JSON.parse(json))
+    end
+
+    # Get struct map from JSON (internal method)
+    def self.__from_json_map__(json)
+      result = StructList.new
+      value = json.fetch('f1', nil)
+      result.f1 = value.map { |item| (item.nil? ? nil : item) }
+      value = json.fetch('f2', nil)
+      result.f2 = value.map { |item| (item.nil? ? nil : item) }
+      value = json.fetch('f3', nil)
+      result.f3 = value.map { |item| (item.nil? ? nil : Base64.decode64(item)) }
+      value = json.fetch('f4', nil)
+      result.f4 = value.map { |item| (item.nil? ? nil : Base64.decode64(item)) }
+      value = json.fetch('f5', nil)
+      result.f5 = value.map { |item| (item.nil? ? nil : EnumSimple.__from_json_map__(item)) }
+      value = json.fetch('f6', nil)
+      result.f6 = value.map { |item| (item.nil? ? nil : EnumSimple.__from_json_map__(item)) }
+      value = json.fetch('f7', nil)
+      result.f7 = value.map { |item| (item.nil? ? nil : FlagsSimple.__from_json_map__(item)) }
+      value = json.fetch('f8', nil)
+      result.f8 = value.map { |item| (item.nil? ? nil : FlagsSimple.__from_json_map__(item)) }
+      value = json.fetch('f9', nil)
+      result.f9 = value.map { |item| (item.nil? ? nil : StructSimple.__from_json_map__(item)) }
+      value = json.fetch('f10', nil)
+      result.f10 = value.map { |item| (item.nil? ? nil : StructSimple.__from_json_map__(item)) }
+      result
     end
   end
 
@@ -13710,7 +14634,7 @@ module Test
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class StructSet < FBE::JsonBase
+  class StructSet
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -13848,7 +14772,44 @@ module Test
 
     # Get struct JSON value
     def to_json
-      JSON.generate(to_json_map)
+      JSON.generate(__to_json_map__)
+    end
+
+    # Get struct JSON map (internal method)
+    def __to_json_map__
+      result = {}
+      key = 'f1'
+      value = f1.map { |item| (item.nil? ? nil : item) }
+      result.store(key, value)
+      key = 'f2'
+      value = f2.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      key = 'f3'
+      value = f3.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      key = 'f4'
+      value = f4.map { |item| (item.nil? ? nil : item.__to_json_map__) }
+      result.store(key, value)
+      result
+    end
+
+    # Get struct from JSON
+    def self.from_json(json)
+      __from_json_map__(JSON.parse(json))
+    end
+
+    # Get struct map from JSON (internal method)
+    def self.__from_json_map__(json)
+      result = StructSet.new
+      value = json.fetch('f1', nil)
+      result.f1 = (value.map { |item| (item.nil? ? nil : item) }).to_set
+      value = json.fetch('f2', nil)
+      result.f2 = (value.map { |item| (item.nil? ? nil : EnumSimple.__from_json_map__(item)) }).to_set
+      value = json.fetch('f3', nil)
+      result.f3 = (value.map { |item| (item.nil? ? nil : FlagsSimple.__from_json_map__(item)) }).to_set
+      value = json.fetch('f4', nil)
+      result.f4 = (value.map { |item| (item.nil? ? nil : StructSimple.__from_json_map__(item)) }).to_set
+      result
     end
   end
 
@@ -14432,7 +15393,7 @@ module Test
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class StructMap < FBE::JsonBase
+  class StructMap
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -14748,7 +15709,74 @@ module Test
 
     # Get struct JSON value
     def to_json
-      JSON.generate(to_json_map)
+      JSON.generate(__to_json_map__)
+    end
+
+    # Get struct JSON map (internal method)
+    def __to_json_map__
+      result = {}
+      key = 'f1'
+      value = f1.map { |key, value| [key.to_s, (value.nil? ? nil : value)] }.to_h
+      result.store(key, value)
+      key = 'f2'
+      value = f2.map { |key, value| [key.to_s, (value.nil? ? nil : value)] }.to_h
+      result.store(key, value)
+      key = 'f3'
+      value = f3.map { |key, value| [key.to_s, (value.nil? ? nil : Base64.encode64(value))] }.to_h
+      result.store(key, value)
+      key = 'f4'
+      value = f4.map { |key, value| [key.to_s, (value.nil? ? nil : Base64.encode64(value))] }.to_h
+      result.store(key, value)
+      key = 'f5'
+      value = f5.map { |key, value| [key.to_s, (value.nil? ? nil : value.__to_json_map__)] }.to_h
+      result.store(key, value)
+      key = 'f6'
+      value = f6.map { |key, value| [key.to_s, (value.nil? ? nil : value.__to_json_map__)] }.to_h
+      result.store(key, value)
+      key = 'f7'
+      value = f7.map { |key, value| [key.to_s, (value.nil? ? nil : value.__to_json_map__)] }.to_h
+      result.store(key, value)
+      key = 'f8'
+      value = f8.map { |key, value| [key.to_s, (value.nil? ? nil : value.__to_json_map__)] }.to_h
+      result.store(key, value)
+      key = 'f9'
+      value = f9.map { |key, value| [key.to_s, (value.nil? ? nil : value.__to_json_map__)] }.to_h
+      result.store(key, value)
+      key = 'f10'
+      value = f10.map { |key, value| [key.to_s, (value.nil? ? nil : value.__to_json_map__)] }.to_h
+      result.store(key, value)
+      result
+    end
+
+    # Get struct from JSON
+    def self.from_json(json)
+      __from_json_map__(JSON.parse(json))
+    end
+
+    # Get struct map from JSON (internal method)
+    def self.__from_json_map__(json)
+      result = StructMap.new
+      value = json.fetch('f1', nil)
+      result.f1 = (value.map { |key, value| [key.to_i, (value.nil? ? nil : value)] }).to_h
+      value = json.fetch('f2', nil)
+      result.f2 = (value.map { |key, value| [key.to_i, (value.nil? ? nil : value)] }).to_h
+      value = json.fetch('f3', nil)
+      result.f3 = (value.map { |key, value| [key.to_i, (value.nil? ? nil : Base64.decode64(value))] }).to_h
+      value = json.fetch('f4', nil)
+      result.f4 = (value.map { |key, value| [key.to_i, (value.nil? ? nil : Base64.decode64(value))] }).to_h
+      value = json.fetch('f5', nil)
+      result.f5 = (value.map { |key, value| [key.to_i, (value.nil? ? nil : EnumSimple.__from_json_map__(value))] }).to_h
+      value = json.fetch('f6', nil)
+      result.f6 = (value.map { |key, value| [key.to_i, (value.nil? ? nil : EnumSimple.__from_json_map__(value))] }).to_h
+      value = json.fetch('f7', nil)
+      result.f7 = (value.map { |key, value| [key.to_i, (value.nil? ? nil : FlagsSimple.__from_json_map__(value))] }).to_h
+      value = json.fetch('f8', nil)
+      result.f8 = (value.map { |key, value| [key.to_i, (value.nil? ? nil : FlagsSimple.__from_json_map__(value))] }).to_h
+      value = json.fetch('f9', nil)
+      result.f9 = (value.map { |key, value| [key.to_i, (value.nil? ? nil : StructSimple.__from_json_map__(value))] }).to_h
+      value = json.fetch('f10', nil)
+      result.f10 = (value.map { |key, value| [key.to_i, (value.nil? ? nil : StructSimple.__from_json_map__(value))] }).to_h
+      result
     end
   end
 
@@ -15632,7 +16660,7 @@ module Test
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class StructHash < FBE::JsonBase
+  class StructHash
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -15948,7 +16976,74 @@ module Test
 
     # Get struct JSON value
     def to_json
-      JSON.generate(to_json_map)
+      JSON.generate(__to_json_map__)
+    end
+
+    # Get struct JSON map (internal method)
+    def __to_json_map__
+      result = {}
+      key = 'f1'
+      value = f1.map { |key, value| [key.to_s, (value.nil? ? nil : value)] }.to_h
+      result.store(key, value)
+      key = 'f2'
+      value = f2.map { |key, value| [key.to_s, (value.nil? ? nil : value)] }.to_h
+      result.store(key, value)
+      key = 'f3'
+      value = f3.map { |key, value| [key.to_s, (value.nil? ? nil : Base64.encode64(value))] }.to_h
+      result.store(key, value)
+      key = 'f4'
+      value = f4.map { |key, value| [key.to_s, (value.nil? ? nil : Base64.encode64(value))] }.to_h
+      result.store(key, value)
+      key = 'f5'
+      value = f5.map { |key, value| [key.to_s, (value.nil? ? nil : value.__to_json_map__)] }.to_h
+      result.store(key, value)
+      key = 'f6'
+      value = f6.map { |key, value| [key.to_s, (value.nil? ? nil : value.__to_json_map__)] }.to_h
+      result.store(key, value)
+      key = 'f7'
+      value = f7.map { |key, value| [key.to_s, (value.nil? ? nil : value.__to_json_map__)] }.to_h
+      result.store(key, value)
+      key = 'f8'
+      value = f8.map { |key, value| [key.to_s, (value.nil? ? nil : value.__to_json_map__)] }.to_h
+      result.store(key, value)
+      key = 'f9'
+      value = f9.map { |key, value| [key.to_s, (value.nil? ? nil : value.__to_json_map__)] }.to_h
+      result.store(key, value)
+      key = 'f10'
+      value = f10.map { |key, value| [key.to_s, (value.nil? ? nil : value.__to_json_map__)] }.to_h
+      result.store(key, value)
+      result
+    end
+
+    # Get struct from JSON
+    def self.from_json(json)
+      __from_json_map__(JSON.parse(json))
+    end
+
+    # Get struct map from JSON (internal method)
+    def self.__from_json_map__(json)
+      result = StructHash.new
+      value = json.fetch('f1', nil)
+      result.f1 = (value.map { |key, value| [key, (value.nil? ? nil : value)] }).to_h
+      value = json.fetch('f2', nil)
+      result.f2 = (value.map { |key, value| [key, (value.nil? ? nil : value)] }).to_h
+      value = json.fetch('f3', nil)
+      result.f3 = (value.map { |key, value| [key, (value.nil? ? nil : Base64.decode64(value))] }).to_h
+      value = json.fetch('f4', nil)
+      result.f4 = (value.map { |key, value| [key, (value.nil? ? nil : Base64.decode64(value))] }).to_h
+      value = json.fetch('f5', nil)
+      result.f5 = (value.map { |key, value| [key, (value.nil? ? nil : EnumSimple.__from_json_map__(value))] }).to_h
+      value = json.fetch('f6', nil)
+      result.f6 = (value.map { |key, value| [key, (value.nil? ? nil : EnumSimple.__from_json_map__(value))] }).to_h
+      value = json.fetch('f7', nil)
+      result.f7 = (value.map { |key, value| [key, (value.nil? ? nil : FlagsSimple.__from_json_map__(value))] }).to_h
+      value = json.fetch('f8', nil)
+      result.f8 = (value.map { |key, value| [key, (value.nil? ? nil : FlagsSimple.__from_json_map__(value))] }).to_h
+      value = json.fetch('f9', nil)
+      result.f9 = (value.map { |key, value| [key, (value.nil? ? nil : StructSimple.__from_json_map__(value))] }).to_h
+      value = json.fetch('f10', nil)
+      result.f10 = (value.map { |key, value| [key, (value.nil? ? nil : StructSimple.__from_json_map__(value))] }).to_h
+      result
     end
   end
 
@@ -16832,7 +17927,7 @@ module Test
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class StructHashEx < FBE::JsonBase
+  class StructHashEx
     attr_accessor :f1
     attr_accessor :f2
 
@@ -16948,7 +18043,34 @@ module Test
 
     # Get struct JSON value
     def to_json
-      JSON.generate(to_json_map)
+      JSON.generate(__to_json_map__)
+    end
+
+    # Get struct JSON map (internal method)
+    def __to_json_map__
+      result = {}
+      key = 'f1'
+      value = f1.map { |key, value| [key.to_s, (value.nil? ? nil : value.__to_json_map__)] }.to_h
+      result.store(key, value)
+      key = 'f2'
+      value = f2.map { |key, value| [key.to_s, (value.nil? ? nil : value.__to_json_map__)] }.to_h
+      result.store(key, value)
+      result
+    end
+
+    # Get struct from JSON
+    def self.from_json(json)
+      __from_json_map__(JSON.parse(json))
+    end
+
+    # Get struct map from JSON (internal method)
+    def self.__from_json_map__(json)
+      result = StructHashEx.new
+      value = json.fetch('f1', nil)
+      result.f1 = (value.map { |key, value| [key, (value.nil? ? nil : StructNested.__from_json_map__(value))] }).to_h
+      value = json.fetch('f2', nil)
+      result.f2 = (value.map { |key, value| [key, (value.nil? ? nil : StructNested.__from_json_map__(value))] }).to_h
+      result
     end
   end
 

@@ -51,6 +51,7 @@ void GeneratorRuby::GenerateFooter()
 void GeneratorRuby::GenerateImports()
 {
     std::string code = R"CODE(
+require 'base64'
 require 'bigdecimal'
 require 'json'
 require 'set'
@@ -82,8 +83,6 @@ void GeneratorRuby::GenerateFBE(const CppCommon::Path& path)
     GenerateFBEEnum();
     GenerateFBEFlags();
     GenerateFBEInteger();
-    if (JSON())
-        GenerateFBEJsonBase();
     GenerateFBEWriteBuffer();
     GenerateFBEReadBuffer();
     GenerateFBEModel();
@@ -480,40 +479,6 @@ void GeneratorRuby::GenerateFBEInteger()
     N_BITS = N_BYTES * 16
     MAX = 2 ** (N_BITS - 2) - 1
     MIN = -MAX - 1
-  end
-)CODE";
-
-    // Prepare code template
-    code = std::regex_replace(code, std::regex("\n"), EndLine());
-
-    Write(code);
-}
-
-void GeneratorRuby::GenerateFBEJsonBase()
-{
-    std::string code = R"CODE(
-  # Fast Binary Encoding base Json class
-  class JsonBase
-    def to_json_map
-      instance_variables.map do |key|
-        value = instance_variable_get(:"#{key}")
-        [
-          key.to_s[1..-1],
-          case value
-          when Array
-            value.map do |item|
-              item.respond_to?(:to_json_map) ? item.to_json_map : item
-            end
-          when BigDecimal
-            value.to_s('F')
-          when Time
-            value.to_i * 1000000000 + value.nsec
-          else
-            value.respond_to?(:to_json_map) ? value.to_json_map : value
-          end
-        ]
-      end.to_h
-    end
   end
 )CODE";
 
@@ -3475,15 +3440,6 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
     Indent(-1);
     WriteLineIndent("end");
 
-    // Generate enum to_json_map method
-    WriteLine();
-    WriteLineIndent("# Get enum JSON value");
-    WriteLineIndent("def to_json_map");
-    Indent(1);
-    WriteLineIndent("@value");
-    Indent(-1);
-    WriteLineIndent("end");
-
     // Generate enum to_i method
     WriteLine();
     WriteLineIndent("# Get enum integer value");
@@ -3513,6 +3469,15 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
     Indent(-1);
     WriteLineIndent("end");
 
+    // Generate enum JSON methods
+    WriteLine();
+    WriteLineIndent("# Get enum JSON value");
+    WriteLineIndent("def __to_json_map__");
+    Indent(1);
+    WriteLineIndent("@value");
+    Indent(-1);
+    WriteLineIndent("end");
+
     // Generate enum class end
     Indent(-1);
     WriteLineIndent("end");
@@ -3538,6 +3503,15 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
     WriteLineIndent("def self.new(value = 0)");
     Indent(1);
     WriteLineIndent("Enum.new(value)");
+    Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate enum module JSON converter
+    WriteLine();
+    WriteLineIndent("# Get enum value from JSON");
+    WriteLineIndent("def self.__from_json_map__(json)");
+    Indent(1);
+    WriteLineIndent("Enum.new(json)");
     Indent(-1);
     WriteLineIndent("end");
 
@@ -3765,15 +3739,6 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     Indent(-1);
     WriteLineIndent("end");
 
-    // Generate flags to_json_map method
-    WriteLine();
-    WriteLineIndent("# Get flags JSON value");
-    WriteLineIndent("def to_json_map");
-    Indent(1);
-    WriteLineIndent("@value");
-    Indent(-1);
-    WriteLineIndent("end");
-
     // Generate flags to_i method
     WriteLine();
     WriteLineIndent("# Get flags integer value");
@@ -3815,6 +3780,15 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     Indent(-1);
     WriteLineIndent("end");
 
+    // Generate flags JSON methods
+    WriteLine();
+    WriteLineIndent("# Get flags JSON value");
+    WriteLineIndent("def __to_json_map__");
+    Indent(1);
+    WriteLineIndent("@value");
+    Indent(-1);
+    WriteLineIndent("end");
+
     // Generate flags class end
     Indent(-1);
     WriteLineIndent("end");
@@ -3840,6 +3814,15 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     WriteLineIndent("def self.new(value = 0)");
     Indent(1);
     WriteLineIndent("Flags.new(value)");
+    Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate flags module JSON converter
+    WriteLine();
+    WriteLineIndent("# Get flags value from JSON");
+    WriteLineIndent("def self.__from_json_map__(json)");
+    Indent(1);
+    WriteLineIndent("Flags.new(json)");
     Indent(-1);
     WriteLineIndent("end");
 
@@ -3978,7 +3961,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
     if (s->base && !s->base->empty())
         WriteLineIndent("class " + struct_name + " < " + base_type);
     else
-        WriteLineIndent("class " + struct_name + (JSON() ? " < FBE::JsonBase" : ""));
+        WriteLineIndent("class " + struct_name);
     Indent(1);
 
     // Generate struct accessors
@@ -4246,119 +4229,73 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
         WriteLineIndent("# Get struct JSON value");
         WriteLineIndent("def to_json");
         Indent(1);
-        WriteLineIndent("JSON.generate(to_json_map)");
+        WriteLineIndent("JSON.generate(__to_json_map__)");
         Indent(-1);
         WriteLineIndent("end");
-    }
-    /*
-    if (JSON())
-    {
-        // Generate struct __to_json__ method
-        WriteLine();
-        WriteLineIndent("def __to_json__(self):");
-        Indent(1);
-        WriteLineIndent("result = dict()");
-        if (s->base && !s->base->empty())
-            WriteLineIndent("result.update(super().__to_json__())");
-        if (s->body)
-        {
-            WriteLineIndent("result.update(dict(");
-            Indent(1);
-            for (const auto& field : s->body->fields)
-                WriteLineIndent(*field->name + "=self." + *field->name + ", ");
-            Indent(-1);
-            WriteLineIndent("))");
-        }
-        WriteLineIndent("return result");
-        Indent(-1);
 
-        // Generate struct __from_json__ method
+        // Generate struct __to_json_map__ method
         WriteLine();
-        WriteLineIndent("@staticmethod");
-        WriteLineIndent("def __from_json__(fields):");
+        WriteLineIndent("# Get struct JSON map (internal method)");
+        WriteLineIndent("def __to_json_map__");
         Indent(1);
-        WriteLineIndent("if fields is None:");
-        Indent(1);
-        WriteLineIndent("return None");
-        Indent(-1);
-        WriteLineIndent("return " + *s->name + "(");
-        Indent(1);
+        WriteLineIndent("result = {}");
         if (s->base && !s->base->empty())
-            WriteLineIndent(base_type + ".__from_json__(fields),");
+            WriteLineIndent("result.update(super)");
         if (s->body)
         {
             for (const auto& field : s->body->fields)
             {
-                std::string key;
-                if (field->key)
-                {
-                    if (*field->key == "bytes")
-                        key = "None if key is None else base64.b64decode(key.encode('ascii'))";
-                    else if (*field->key == "decimal")
-                        key = "None if key is None else decimal.Decimal(key)";
-                    else if (*field->key == "uuid")
-                        key = "None if key is None else uuid.UUID(key)";
-                    else if (IsRubyType(*field->key))
-                        key = "key";
-                    else
-                        key = *field->key + ".__from_json__(key)";
-                }
-
-                std::string value;
-                if (field->type)
-                {
-                    if (*field->type == "bytes")
-                        value = "None if value is None else base64.b64decode(value.encode('ascii'))";
-                    else if (*field->type == "decimal")
-                        value = "None if value is None else decimal.Decimal(value)";
-                    else if (*field->type == "uuid")
-                        value = "None if value is None else uuid.UUID(value)";
-                    else if (IsRubyType(*field->type))
-                        value = "value";
-                    else
-                        value = *field->type + ".__from_json__(value)";
-                }
-
-                if (field->array || field->vector || field->list)
-                    WriteLineIndent("None if \"" + *field->name + "\" not in fields else [" + value + " for value in fields[\"" + *field->name + "\"]],");
-                else if (field->set)
-                    WriteLineIndent("None if \"" + *field->name + "\" not in fields else {" + value + " for value in fields[\"" + *field->name + "\"]},");
+                WriteLineIndent("key = '" + *field->name + "'");
+                if (field->array || field->vector || field->list || field->set)
+                    WriteLineIndent("value = " + *field->name + ".map { |item| " + ConvertValueToJson(*field->type, "item", field->optional) + " }");
                 else if (field->map || field->hash)
-                    WriteLineIndent("None if \"" + *field->name + "\" not in fields else {" + key + ": " + value + " for key, value in fields[\"" + *field->name + "\"].items()},");
-                else if (*field->type == "bytes")
-                    WriteLineIndent("None if \"" + *field->name + "\" not in fields else None if fields[\"" + *field->name + "\"] is None else base64.b64decode(fields[\"" + *field->name + "\"].encode('ascii')),");
-                else if (*field->type == "decimal")
-                    WriteLineIndent("None if \"" + *field->name + "\" not in fields else None if fields[\"" + *field->name + "\"] is None else decimal.Decimal(fields[\"" + *field->name + "\"]),");
-                else if (*field->type == "uuid")
-                    WriteLineIndent("None if \"" + *field->name + "\" not in fields else None if fields[\"" + *field->name + "\"] is None else uuid.UUID(fields[\"" + *field->name + "\"]),");
-                else if (IsRubyType(*field->type))
-                    WriteLineIndent("None if \"" + *field->name + "\" not in fields else fields[\"" + *field->name + "\"],");
+                    WriteLineIndent("value = " + *field->name + ".map { |key, value| [key.to_s, " + ConvertValueToJson(*field->type, "value", field->optional) + "] }.to_h");
                 else
-                    WriteLineIndent("None if \"" + *field->name + "\" not in fields else " + *field->type + ".__from_json__(fields[\"" + *field->name + "\"]),");
+                    WriteLineIndent("value = " + ConvertValueToJson(*field->type, *field->name, field->optional));
+                WriteLineIndent("result.store(key, value)");
             }
         }
+        WriteLineIndent("result");
         Indent(-1);
-        WriteLineIndent(")");
-        Indent(-1);
-
-        // Generate struct to_json method
-        WriteLine();
-        WriteLineIndent("# Get struct JSON value");
-        WriteLineIndent("def to_json(self):");
-        Indent(1);
-        WriteLineIndent("return json.dumps(@__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))");
-        Indent(-1);
+        WriteLineIndent("end");
 
         // Generate struct from_json method
         WriteLine();
-        WriteLineIndent("# Create struct from JSON value");
-        WriteLineIndent("@staticmethod");
-        WriteLineIndent("def from_json(document):");
+        WriteLineIndent("# Get struct from JSON");
+        WriteLineIndent("def self.from_json(json)");
         Indent(1);
-        WriteLineIndent("return " + *s->name + ".__from_json__(json.loads(document))");
+        WriteLineIndent("__from_json_map__(JSON.parse(json))");
         Indent(-1);
+        WriteLineIndent("end");
+
+        // Generate struct __from_json_map__ method
+        WriteLine();
+        WriteLineIndent("# Get struct map from JSON (internal method)");
+        WriteLineIndent("def self.__from_json_map__(json)");
+        Indent(1);
+        WriteLineIndent("result = " + struct_name + ".new");
+        if (s->base && !s->base->empty())
+            WriteLineIndent("result.method(:copy).super_method.call(" + struct_name + ".method(:__from_json_map__).super_method.call(json))");
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLineIndent("value = json.fetch('" + *field->name + "', nil)");
+                if (field->array || field->vector || field->list)
+                    WriteLineIndent("result." + *field->name + " = value.map { |item| " + ConvertValueFromJson(*field->type, "item", field->optional) + " }");
+                else if (field->set)
+                    WriteLineIndent("result." + *field->name + " = (value.map { |item| " + ConvertValueFromJson(*field->type, "item", field->optional) + " }).to_set");
+                else if (field->map || field->hash)
+                    WriteLineIndent("result." + *field->name + " = (value.map { |key, value| [" + ConvertKeyFromJson(*field->key, "key", false) + ", " + ConvertValueFromJson(*field->type, "value", field->optional) + "] }).to_h");
+                else
+                    WriteLineIndent("result." + *field->name + " = " + ConvertValueFromJson(*field->type, "value", field->optional));
+            }
+        }
+        WriteLineIndent("result");
+        Indent(-1);
+        WriteLineIndent("end");
     }
-    */
+
     // Generate struct end
     Indent(-1);
     WriteLineIndent("end");
@@ -5836,6 +5773,56 @@ std::string GeneratorRuby::ConvertDefault(const StructField& field)
         return "''";
 
     return ConvertDefault(*field.type, field.optional);
+}
+
+std::string GeneratorRuby::ConvertValueToJson(const std::string& type, const std::string& value, bool optional)
+{
+    if (type == "bytes")
+        return "(" + value + ".nil? ? nil : Base64.encode64(" + value + "))";
+    else if (type == "decimal")
+        return "(" + value + ".nil? ? nil : " + value + ".to_s('F'))";
+    else if (type == "timestamp")
+        return "(" + value + ".nil? ? nil : (" + value + ".to_i * 1000000000 + " + value + ".nsec))";
+    else if (IsRubyType(type))
+        return "(" + value + ".nil? ? nil : " + value + ")";
+    else
+        return "(" + value + ".nil? ? nil : " + value + ".__to_json_map__)";
+}
+
+std::string GeneratorRuby::ConvertValueFromJson(const std::string& type, const std::string& value, bool optional)
+{
+    if (type == "bytes")
+        return "(" + value + ".nil? ? nil : Base64.decode64(" + value + "))";
+    else if (type == "decimal")
+        return "(" + value + ".nil? ? nil : BigDecimal.new(" + value + "))";
+    else if (type == "timestamp")
+        return "(" + value + ".nil? ? nil : Time.at(" + value + " / 1000000000, (" + value + " % 1000000000) / 1000.0))";
+    else if (type == "uuid")
+        return "(" + value + ".nil? ? nil : UUIDTools::UUID.parse(" + value + "))";
+    else if (IsRubyType(type))
+        return "(" + value + ".nil? ? nil : " + value + ")";
+    else
+        return "(" + value + ".nil? ? nil : " + ConvertTitle(type) + ".__from_json_map__(" + value + "))";
+}
+
+std::string GeneratorRuby::ConvertKeyFromJson(const std::string& type, const std::string& value, bool optional)
+{
+    if (type == "byte")
+        return value + ".to_i";
+    else if (type == "bytes")
+        return "Base64.decode64(" + value + ")";
+    if ((type == "int8") || (type == "uint8") || (type == "int16") || (type == "uint16") || (type == "int32") || (type == "uint32") || (type == "int64") || (type == "uint64"))
+        return value + ".to_i";
+    if ((type == "float") || (type == "double"))
+        return value + ".to_f";
+    else if (type == "decimal")
+        return "BigDecimal.new(" + value + ")";
+    else if (type == "timestamp")
+        return "Time.at(" + value + ".to_i / 1000000000, (" + value + ".to_i % 1000000000) / 1000.0)";
+    else if (type == "uuid")
+        return "UUIDTools::UUID.parse(" + value + ")";
+    else
+        return value;
 }
 
 void GeneratorRuby::WriteOutputStreamType(const std::string& type, const std::string& name)

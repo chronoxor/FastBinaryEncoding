@@ -10,6 +10,7 @@
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/PerceivedComplexity
 
+require 'base64'
 require 'bigdecimal'
 require 'json'
 require 'set'
@@ -48,11 +49,6 @@ module Enums
         @value.hash
       end
 
-      # Get enum JSON value
-      def to_json_map
-        @value
-      end
-
       # Get enum integer value
       def to_i
         @value
@@ -80,6 +76,11 @@ module Enums
         end
         '<unknown>'
       end
+
+      # Get enum JSON value
+      def __to_json_map__
+        @value
+      end
     end
 
     class << self
@@ -100,6 +101,11 @@ module Enums
 
     def self.new(value = 0)
       Enum.new(value)
+    end
+
+    # Get enum value from JSON
+    def self.__from_json_map__(json)
+      Enum.new(json)
     end
   end
 
@@ -210,11 +216,6 @@ module Enums
         @value.hash
       end
 
-      # Get enum JSON value
-      def to_json_map
-        @value
-      end
-
       # Get enum integer value
       def to_i
         @value
@@ -242,6 +243,11 @@ module Enums
         end
         '<unknown>'
       end
+
+      # Get enum JSON value
+      def __to_json_map__
+        @value
+      end
     end
 
     class << self
@@ -262,6 +268,11 @@ module Enums
 
     def self.new(value = 0)
       Enum.new(value)
+    end
+
+    # Get enum value from JSON
+    def self.__from_json_map__(json)
+      Enum.new(json)
     end
   end
 
@@ -372,11 +383,6 @@ module Enums
         @value.hash
       end
 
-      # Get enum JSON value
-      def to_json_map
-        @value
-      end
-
       # Get enum integer value
       def to_i
         @value
@@ -404,6 +410,11 @@ module Enums
         end
         '<unknown>'
       end
+
+      # Get enum JSON value
+      def __to_json_map__
+        @value
+      end
     end
 
     class << self
@@ -424,6 +435,11 @@ module Enums
 
     def self.new(value = 0)
       Enum.new(value)
+    end
+
+    # Get enum value from JSON
+    def self.__from_json_map__(json)
+      Enum.new(json)
     end
   end
 
@@ -534,11 +550,6 @@ module Enums
         @value.hash
       end
 
-      # Get enum JSON value
-      def to_json_map
-        @value
-      end
-
       # Get enum integer value
       def to_i
         @value
@@ -566,6 +577,11 @@ module Enums
         end
         '<unknown>'
       end
+
+      # Get enum JSON value
+      def __to_json_map__
+        @value
+      end
     end
 
     class << self
@@ -586,6 +602,11 @@ module Enums
 
     def self.new(value = 0)
       Enum.new(value)
+    end
+
+    # Get enum value from JSON
+    def self.__from_json_map__(json)
+      Enum.new(json)
     end
   end
 
@@ -696,11 +717,6 @@ module Enums
         @value.hash
       end
 
-      # Get enum JSON value
-      def to_json_map
-        @value
-      end
-
       # Get enum integer value
       def to_i
         @value
@@ -728,6 +744,11 @@ module Enums
         end
         '<unknown>'
       end
+
+      # Get enum JSON value
+      def __to_json_map__
+        @value
+      end
     end
 
     class << self
@@ -748,6 +769,11 @@ module Enums
 
     def self.new(value = 0)
       Enum.new(value)
+    end
+
+    # Get enum value from JSON
+    def self.__from_json_map__(json)
+      Enum.new(json)
     end
   end
 
@@ -858,11 +884,6 @@ module Enums
         @value.hash
       end
 
-      # Get enum JSON value
-      def to_json_map
-        @value
-      end
-
       # Get enum integer value
       def to_i
         @value
@@ -890,6 +911,11 @@ module Enums
         end
         '<unknown>'
       end
+
+      # Get enum JSON value
+      def __to_json_map__
+        @value
+      end
     end
 
     class << self
@@ -910,6 +936,11 @@ module Enums
 
     def self.new(value = 0)
       Enum.new(value)
+    end
+
+    # Get enum value from JSON
+    def self.__from_json_map__(json)
+      Enum.new(json)
     end
   end
 
@@ -1020,11 +1051,6 @@ module Enums
         @value.hash
       end
 
-      # Get enum JSON value
-      def to_json_map
-        @value
-      end
-
       # Get enum integer value
       def to_i
         @value
@@ -1052,6 +1078,11 @@ module Enums
         end
         '<unknown>'
       end
+
+      # Get enum JSON value
+      def __to_json_map__
+        @value
+      end
     end
 
     class << self
@@ -1072,6 +1103,11 @@ module Enums
 
     def self.new(value = 0)
       Enum.new(value)
+    end
+
+    # Get enum value from JSON
+    def self.__from_json_map__(json)
+      Enum.new(json)
     end
   end
 
@@ -1182,11 +1218,6 @@ module Enums
         @value.hash
       end
 
-      # Get enum JSON value
-      def to_json_map
-        @value
-      end
-
       # Get enum integer value
       def to_i
         @value
@@ -1214,6 +1245,11 @@ module Enums
         end
         '<unknown>'
       end
+
+      # Get enum JSON value
+      def __to_json_map__
+        @value
+      end
     end
 
     class << self
@@ -1234,6 +1270,11 @@ module Enums
 
     def self.new(value = 0)
       Enum.new(value)
+    end
+
+    # Get enum value from JSON
+    def self.__from_json_map__(json)
+      Enum.new(json)
     end
   end
 
@@ -1344,11 +1385,6 @@ module Enums
         @value.hash
       end
 
-      # Get enum JSON value
-      def to_json_map
-        @value
-      end
-
       # Get enum integer value
       def to_i
         @value
@@ -1376,6 +1412,11 @@ module Enums
         end
         '<unknown>'
       end
+
+      # Get enum JSON value
+      def __to_json_map__
+        @value
+      end
     end
 
     class << self
@@ -1396,6 +1437,11 @@ module Enums
 
     def self.new(value = 0)
       Enum.new(value)
+    end
+
+    # Get enum value from JSON
+    def self.__from_json_map__(json)
+      Enum.new(json)
     end
   end
 
@@ -1506,11 +1552,6 @@ module Enums
         @value.hash
       end
 
-      # Get enum JSON value
-      def to_json_map
-        @value
-      end
-
       # Get enum integer value
       def to_i
         @value
@@ -1538,6 +1579,11 @@ module Enums
         end
         '<unknown>'
       end
+
+      # Get enum JSON value
+      def __to_json_map__
+        @value
+      end
     end
 
     class << self
@@ -1558,6 +1604,11 @@ module Enums
 
     def self.new(value = 0)
       Enum.new(value)
+    end
+
+    # Get enum value from JSON
+    def self.__from_json_map__(json)
+      Enum.new(json)
     end
   end
 
@@ -1668,11 +1719,6 @@ module Enums
         @value.hash
       end
 
-      # Get enum JSON value
-      def to_json_map
-        @value
-      end
-
       # Get enum integer value
       def to_i
         @value
@@ -1700,6 +1746,11 @@ module Enums
         end
         '<unknown>'
       end
+
+      # Get enum JSON value
+      def __to_json_map__
+        @value
+      end
     end
 
     class << self
@@ -1720,6 +1771,11 @@ module Enums
 
     def self.new(value = 0)
       Enum.new(value)
+    end
+
+    # Get enum value from JSON
+    def self.__from_json_map__(json)
+      Enum.new(json)
     end
   end
 
@@ -1802,7 +1858,7 @@ module Enums
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class Enums < FBE::JsonBase
+  class Enums
     attr_accessor :byte0
     attr_accessor :byte1
     attr_accessor :byte2
@@ -2462,7 +2518,354 @@ module Enums
 
     # Get struct JSON value
     def to_json
-      JSON.generate(to_json_map)
+      JSON.generate(__to_json_map__)
+    end
+
+    # Get struct JSON map (internal method)
+    def __to_json_map__
+      result = {}
+      key = 'byte0'
+      value = (byte0.nil? ? nil : byte0.__to_json_map__)
+      result.store(key, value)
+      key = 'byte1'
+      value = (byte1.nil? ? nil : byte1.__to_json_map__)
+      result.store(key, value)
+      key = 'byte2'
+      value = (byte2.nil? ? nil : byte2.__to_json_map__)
+      result.store(key, value)
+      key = 'byte3'
+      value = (byte3.nil? ? nil : byte3.__to_json_map__)
+      result.store(key, value)
+      key = 'byte4'
+      value = (byte4.nil? ? nil : byte4.__to_json_map__)
+      result.store(key, value)
+      key = 'byte5'
+      value = (byte5.nil? ? nil : byte5.__to_json_map__)
+      result.store(key, value)
+      key = 'char0'
+      value = (char0.nil? ? nil : char0.__to_json_map__)
+      result.store(key, value)
+      key = 'char1'
+      value = (char1.nil? ? nil : char1.__to_json_map__)
+      result.store(key, value)
+      key = 'char2'
+      value = (char2.nil? ? nil : char2.__to_json_map__)
+      result.store(key, value)
+      key = 'char3'
+      value = (char3.nil? ? nil : char3.__to_json_map__)
+      result.store(key, value)
+      key = 'char4'
+      value = (char4.nil? ? nil : char4.__to_json_map__)
+      result.store(key, value)
+      key = 'char5'
+      value = (char5.nil? ? nil : char5.__to_json_map__)
+      result.store(key, value)
+      key = 'wchar0'
+      value = (wchar0.nil? ? nil : wchar0.__to_json_map__)
+      result.store(key, value)
+      key = 'wchar1'
+      value = (wchar1.nil? ? nil : wchar1.__to_json_map__)
+      result.store(key, value)
+      key = 'wchar2'
+      value = (wchar2.nil? ? nil : wchar2.__to_json_map__)
+      result.store(key, value)
+      key = 'wchar3'
+      value = (wchar3.nil? ? nil : wchar3.__to_json_map__)
+      result.store(key, value)
+      key = 'wchar4'
+      value = (wchar4.nil? ? nil : wchar4.__to_json_map__)
+      result.store(key, value)
+      key = 'wchar5'
+      value = (wchar5.nil? ? nil : wchar5.__to_json_map__)
+      result.store(key, value)
+      key = 'int8b0'
+      value = (int8b0.nil? ? nil : int8b0.__to_json_map__)
+      result.store(key, value)
+      key = 'int8b1'
+      value = (int8b1.nil? ? nil : int8b1.__to_json_map__)
+      result.store(key, value)
+      key = 'int8b2'
+      value = (int8b2.nil? ? nil : int8b2.__to_json_map__)
+      result.store(key, value)
+      key = 'int8b3'
+      value = (int8b3.nil? ? nil : int8b3.__to_json_map__)
+      result.store(key, value)
+      key = 'int8b4'
+      value = (int8b4.nil? ? nil : int8b4.__to_json_map__)
+      result.store(key, value)
+      key = 'int8b5'
+      value = (int8b5.nil? ? nil : int8b5.__to_json_map__)
+      result.store(key, value)
+      key = 'uint8b0'
+      value = (uint8b0.nil? ? nil : uint8b0.__to_json_map__)
+      result.store(key, value)
+      key = 'uint8b1'
+      value = (uint8b1.nil? ? nil : uint8b1.__to_json_map__)
+      result.store(key, value)
+      key = 'uint8b2'
+      value = (uint8b2.nil? ? nil : uint8b2.__to_json_map__)
+      result.store(key, value)
+      key = 'uint8b3'
+      value = (uint8b3.nil? ? nil : uint8b3.__to_json_map__)
+      result.store(key, value)
+      key = 'uint8b4'
+      value = (uint8b4.nil? ? nil : uint8b4.__to_json_map__)
+      result.store(key, value)
+      key = 'uint8b5'
+      value = (uint8b5.nil? ? nil : uint8b5.__to_json_map__)
+      result.store(key, value)
+      key = 'int16b0'
+      value = (int16b0.nil? ? nil : int16b0.__to_json_map__)
+      result.store(key, value)
+      key = 'int16b1'
+      value = (int16b1.nil? ? nil : int16b1.__to_json_map__)
+      result.store(key, value)
+      key = 'int16b2'
+      value = (int16b2.nil? ? nil : int16b2.__to_json_map__)
+      result.store(key, value)
+      key = 'int16b3'
+      value = (int16b3.nil? ? nil : int16b3.__to_json_map__)
+      result.store(key, value)
+      key = 'int16b4'
+      value = (int16b4.nil? ? nil : int16b4.__to_json_map__)
+      result.store(key, value)
+      key = 'int16b5'
+      value = (int16b5.nil? ? nil : int16b5.__to_json_map__)
+      result.store(key, value)
+      key = 'uint16b0'
+      value = (uint16b0.nil? ? nil : uint16b0.__to_json_map__)
+      result.store(key, value)
+      key = 'uint16b1'
+      value = (uint16b1.nil? ? nil : uint16b1.__to_json_map__)
+      result.store(key, value)
+      key = 'uint16b2'
+      value = (uint16b2.nil? ? nil : uint16b2.__to_json_map__)
+      result.store(key, value)
+      key = 'uint16b3'
+      value = (uint16b3.nil? ? nil : uint16b3.__to_json_map__)
+      result.store(key, value)
+      key = 'uint16b4'
+      value = (uint16b4.nil? ? nil : uint16b4.__to_json_map__)
+      result.store(key, value)
+      key = 'uint16b5'
+      value = (uint16b5.nil? ? nil : uint16b5.__to_json_map__)
+      result.store(key, value)
+      key = 'int32b0'
+      value = (int32b0.nil? ? nil : int32b0.__to_json_map__)
+      result.store(key, value)
+      key = 'int32b1'
+      value = (int32b1.nil? ? nil : int32b1.__to_json_map__)
+      result.store(key, value)
+      key = 'int32b2'
+      value = (int32b2.nil? ? nil : int32b2.__to_json_map__)
+      result.store(key, value)
+      key = 'int32b3'
+      value = (int32b3.nil? ? nil : int32b3.__to_json_map__)
+      result.store(key, value)
+      key = 'int32b4'
+      value = (int32b4.nil? ? nil : int32b4.__to_json_map__)
+      result.store(key, value)
+      key = 'int32b5'
+      value = (int32b5.nil? ? nil : int32b5.__to_json_map__)
+      result.store(key, value)
+      key = 'uint32b0'
+      value = (uint32b0.nil? ? nil : uint32b0.__to_json_map__)
+      result.store(key, value)
+      key = 'uint32b1'
+      value = (uint32b1.nil? ? nil : uint32b1.__to_json_map__)
+      result.store(key, value)
+      key = 'uint32b2'
+      value = (uint32b2.nil? ? nil : uint32b2.__to_json_map__)
+      result.store(key, value)
+      key = 'uint32b3'
+      value = (uint32b3.nil? ? nil : uint32b3.__to_json_map__)
+      result.store(key, value)
+      key = 'uint32b4'
+      value = (uint32b4.nil? ? nil : uint32b4.__to_json_map__)
+      result.store(key, value)
+      key = 'uint32b5'
+      value = (uint32b5.nil? ? nil : uint32b5.__to_json_map__)
+      result.store(key, value)
+      key = 'int64b0'
+      value = (int64b0.nil? ? nil : int64b0.__to_json_map__)
+      result.store(key, value)
+      key = 'int64b1'
+      value = (int64b1.nil? ? nil : int64b1.__to_json_map__)
+      result.store(key, value)
+      key = 'int64b2'
+      value = (int64b2.nil? ? nil : int64b2.__to_json_map__)
+      result.store(key, value)
+      key = 'int64b3'
+      value = (int64b3.nil? ? nil : int64b3.__to_json_map__)
+      result.store(key, value)
+      key = 'int64b4'
+      value = (int64b4.nil? ? nil : int64b4.__to_json_map__)
+      result.store(key, value)
+      key = 'int64b5'
+      value = (int64b5.nil? ? nil : int64b5.__to_json_map__)
+      result.store(key, value)
+      key = 'uint64b0'
+      value = (uint64b0.nil? ? nil : uint64b0.__to_json_map__)
+      result.store(key, value)
+      key = 'uint64b1'
+      value = (uint64b1.nil? ? nil : uint64b1.__to_json_map__)
+      result.store(key, value)
+      key = 'uint64b2'
+      value = (uint64b2.nil? ? nil : uint64b2.__to_json_map__)
+      result.store(key, value)
+      key = 'uint64b3'
+      value = (uint64b3.nil? ? nil : uint64b3.__to_json_map__)
+      result.store(key, value)
+      key = 'uint64b4'
+      value = (uint64b4.nil? ? nil : uint64b4.__to_json_map__)
+      result.store(key, value)
+      key = 'uint64b5'
+      value = (uint64b5.nil? ? nil : uint64b5.__to_json_map__)
+      result.store(key, value)
+      result
+    end
+
+    # Get struct from JSON
+    def self.from_json(json)
+      __from_json_map__(JSON.parse(json))
+    end
+
+    # Get struct map from JSON (internal method)
+    def self.__from_json_map__(json)
+      result = Enums.new
+      value = json.fetch('byte0', nil)
+      result.byte0 = (value.nil? ? nil : EnumByte.__from_json_map__(value))
+      value = json.fetch('byte1', nil)
+      result.byte1 = (value.nil? ? nil : EnumByte.__from_json_map__(value))
+      value = json.fetch('byte2', nil)
+      result.byte2 = (value.nil? ? nil : EnumByte.__from_json_map__(value))
+      value = json.fetch('byte3', nil)
+      result.byte3 = (value.nil? ? nil : EnumByte.__from_json_map__(value))
+      value = json.fetch('byte4', nil)
+      result.byte4 = (value.nil? ? nil : EnumByte.__from_json_map__(value))
+      value = json.fetch('byte5', nil)
+      result.byte5 = (value.nil? ? nil : EnumByte.__from_json_map__(value))
+      value = json.fetch('char0', nil)
+      result.char0 = (value.nil? ? nil : EnumChar.__from_json_map__(value))
+      value = json.fetch('char1', nil)
+      result.char1 = (value.nil? ? nil : EnumChar.__from_json_map__(value))
+      value = json.fetch('char2', nil)
+      result.char2 = (value.nil? ? nil : EnumChar.__from_json_map__(value))
+      value = json.fetch('char3', nil)
+      result.char3 = (value.nil? ? nil : EnumChar.__from_json_map__(value))
+      value = json.fetch('char4', nil)
+      result.char4 = (value.nil? ? nil : EnumChar.__from_json_map__(value))
+      value = json.fetch('char5', nil)
+      result.char5 = (value.nil? ? nil : EnumChar.__from_json_map__(value))
+      value = json.fetch('wchar0', nil)
+      result.wchar0 = (value.nil? ? nil : EnumWChar.__from_json_map__(value))
+      value = json.fetch('wchar1', nil)
+      result.wchar1 = (value.nil? ? nil : EnumWChar.__from_json_map__(value))
+      value = json.fetch('wchar2', nil)
+      result.wchar2 = (value.nil? ? nil : EnumWChar.__from_json_map__(value))
+      value = json.fetch('wchar3', nil)
+      result.wchar3 = (value.nil? ? nil : EnumWChar.__from_json_map__(value))
+      value = json.fetch('wchar4', nil)
+      result.wchar4 = (value.nil? ? nil : EnumWChar.__from_json_map__(value))
+      value = json.fetch('wchar5', nil)
+      result.wchar5 = (value.nil? ? nil : EnumWChar.__from_json_map__(value))
+      value = json.fetch('int8b0', nil)
+      result.int8b0 = (value.nil? ? nil : EnumInt8.__from_json_map__(value))
+      value = json.fetch('int8b1', nil)
+      result.int8b1 = (value.nil? ? nil : EnumInt8.__from_json_map__(value))
+      value = json.fetch('int8b2', nil)
+      result.int8b2 = (value.nil? ? nil : EnumInt8.__from_json_map__(value))
+      value = json.fetch('int8b3', nil)
+      result.int8b3 = (value.nil? ? nil : EnumInt8.__from_json_map__(value))
+      value = json.fetch('int8b4', nil)
+      result.int8b4 = (value.nil? ? nil : EnumInt8.__from_json_map__(value))
+      value = json.fetch('int8b5', nil)
+      result.int8b5 = (value.nil? ? nil : EnumInt8.__from_json_map__(value))
+      value = json.fetch('uint8b0', nil)
+      result.uint8b0 = (value.nil? ? nil : EnumUInt8.__from_json_map__(value))
+      value = json.fetch('uint8b1', nil)
+      result.uint8b1 = (value.nil? ? nil : EnumUInt8.__from_json_map__(value))
+      value = json.fetch('uint8b2', nil)
+      result.uint8b2 = (value.nil? ? nil : EnumUInt8.__from_json_map__(value))
+      value = json.fetch('uint8b3', nil)
+      result.uint8b3 = (value.nil? ? nil : EnumUInt8.__from_json_map__(value))
+      value = json.fetch('uint8b4', nil)
+      result.uint8b4 = (value.nil? ? nil : EnumUInt8.__from_json_map__(value))
+      value = json.fetch('uint8b5', nil)
+      result.uint8b5 = (value.nil? ? nil : EnumUInt8.__from_json_map__(value))
+      value = json.fetch('int16b0', nil)
+      result.int16b0 = (value.nil? ? nil : EnumInt16.__from_json_map__(value))
+      value = json.fetch('int16b1', nil)
+      result.int16b1 = (value.nil? ? nil : EnumInt16.__from_json_map__(value))
+      value = json.fetch('int16b2', nil)
+      result.int16b2 = (value.nil? ? nil : EnumInt16.__from_json_map__(value))
+      value = json.fetch('int16b3', nil)
+      result.int16b3 = (value.nil? ? nil : EnumInt16.__from_json_map__(value))
+      value = json.fetch('int16b4', nil)
+      result.int16b4 = (value.nil? ? nil : EnumInt16.__from_json_map__(value))
+      value = json.fetch('int16b5', nil)
+      result.int16b5 = (value.nil? ? nil : EnumInt16.__from_json_map__(value))
+      value = json.fetch('uint16b0', nil)
+      result.uint16b0 = (value.nil? ? nil : EnumUInt16.__from_json_map__(value))
+      value = json.fetch('uint16b1', nil)
+      result.uint16b1 = (value.nil? ? nil : EnumUInt16.__from_json_map__(value))
+      value = json.fetch('uint16b2', nil)
+      result.uint16b2 = (value.nil? ? nil : EnumUInt16.__from_json_map__(value))
+      value = json.fetch('uint16b3', nil)
+      result.uint16b3 = (value.nil? ? nil : EnumUInt16.__from_json_map__(value))
+      value = json.fetch('uint16b4', nil)
+      result.uint16b4 = (value.nil? ? nil : EnumUInt16.__from_json_map__(value))
+      value = json.fetch('uint16b5', nil)
+      result.uint16b5 = (value.nil? ? nil : EnumUInt16.__from_json_map__(value))
+      value = json.fetch('int32b0', nil)
+      result.int32b0 = (value.nil? ? nil : EnumInt32.__from_json_map__(value))
+      value = json.fetch('int32b1', nil)
+      result.int32b1 = (value.nil? ? nil : EnumInt32.__from_json_map__(value))
+      value = json.fetch('int32b2', nil)
+      result.int32b2 = (value.nil? ? nil : EnumInt32.__from_json_map__(value))
+      value = json.fetch('int32b3', nil)
+      result.int32b3 = (value.nil? ? nil : EnumInt32.__from_json_map__(value))
+      value = json.fetch('int32b4', nil)
+      result.int32b4 = (value.nil? ? nil : EnumInt32.__from_json_map__(value))
+      value = json.fetch('int32b5', nil)
+      result.int32b5 = (value.nil? ? nil : EnumInt32.__from_json_map__(value))
+      value = json.fetch('uint32b0', nil)
+      result.uint32b0 = (value.nil? ? nil : EnumUInt32.__from_json_map__(value))
+      value = json.fetch('uint32b1', nil)
+      result.uint32b1 = (value.nil? ? nil : EnumUInt32.__from_json_map__(value))
+      value = json.fetch('uint32b2', nil)
+      result.uint32b2 = (value.nil? ? nil : EnumUInt32.__from_json_map__(value))
+      value = json.fetch('uint32b3', nil)
+      result.uint32b3 = (value.nil? ? nil : EnumUInt32.__from_json_map__(value))
+      value = json.fetch('uint32b4', nil)
+      result.uint32b4 = (value.nil? ? nil : EnumUInt32.__from_json_map__(value))
+      value = json.fetch('uint32b5', nil)
+      result.uint32b5 = (value.nil? ? nil : EnumUInt32.__from_json_map__(value))
+      value = json.fetch('int64b0', nil)
+      result.int64b0 = (value.nil? ? nil : EnumInt64.__from_json_map__(value))
+      value = json.fetch('int64b1', nil)
+      result.int64b1 = (value.nil? ? nil : EnumInt64.__from_json_map__(value))
+      value = json.fetch('int64b2', nil)
+      result.int64b2 = (value.nil? ? nil : EnumInt64.__from_json_map__(value))
+      value = json.fetch('int64b3', nil)
+      result.int64b3 = (value.nil? ? nil : EnumInt64.__from_json_map__(value))
+      value = json.fetch('int64b4', nil)
+      result.int64b4 = (value.nil? ? nil : EnumInt64.__from_json_map__(value))
+      value = json.fetch('int64b5', nil)
+      result.int64b5 = (value.nil? ? nil : EnumInt64.__from_json_map__(value))
+      value = json.fetch('uint64b0', nil)
+      result.uint64b0 = (value.nil? ? nil : EnumUInt64.__from_json_map__(value))
+      value = json.fetch('uint64b1', nil)
+      result.uint64b1 = (value.nil? ? nil : EnumUInt64.__from_json_map__(value))
+      value = json.fetch('uint64b2', nil)
+      result.uint64b2 = (value.nil? ? nil : EnumUInt64.__from_json_map__(value))
+      value = json.fetch('uint64b3', nil)
+      result.uint64b3 = (value.nil? ? nil : EnumUInt64.__from_json_map__(value))
+      value = json.fetch('uint64b4', nil)
+      result.uint64b4 = (value.nil? ? nil : EnumUInt64.__from_json_map__(value))
+      value = json.fetch('uint64b5', nil)
+      result.uint64b5 = (value.nil? ? nil : EnumUInt64.__from_json_map__(value))
+      result
     end
   end
 

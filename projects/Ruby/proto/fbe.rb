@@ -10,6 +10,7 @@
 # rubocop:disable Metrics/MethodLength
 # rubocop:disable Metrics/PerceivedComplexity
 
+require 'base64'
 require 'bigdecimal'
 require 'json'
 require 'set'
@@ -315,31 +316,6 @@ module FBE
     N_BITS = N_BYTES * 16
     MAX = 2 ** (N_BITS - 2) - 1
     MIN = -MAX - 1
-  end
-
-  # Fast Binary Encoding base Json class
-  class JsonBase
-    def to_json_map
-      instance_variables.map do |key|
-        value = instance_variable_get(:"#{key}")
-        [
-          key.to_s[1..-1],
-          case value
-          when JsonBase then value.to_json_map
-          when Array
-            value.map do |item|
-              item.respond_to?(:to_json_map) ? item.to_json_map : item
-            end
-          when BigDecimal
-            value.to_s('F')
-          when Time
-            value.to_i * 1000000000 + value.nsec
-          else
-            value.respond_to?(:to_json_map) ? value.to_json_map : value
-          end
-        ]
-      end.to_h
-    end
   end
 
   # Fast Binary Encoding write buffer based on the dynamic byte array
