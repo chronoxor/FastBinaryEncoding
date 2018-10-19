@@ -49,6 +49,11 @@ module Test
         @value.hash
       end
 
+      # Get enum JSON value
+      def to_json_map
+        @value
+      end
+
       # Get enum integer value
       def to_i
         @value
@@ -204,6 +209,11 @@ module Test
       # Enum hash code
       def hash
         @value.hash
+      end
+
+      # Get enum JSON value
+      def to_json_map
+        @value
       end
 
       # Get enum integer value
@@ -386,6 +396,11 @@ module Test
       def remove_flags(flags)
         @value &= ~flags.value
         self
+      end
+
+      # Get flags JSON value
+      def to_json_map
+        @value
       end
 
       # Get flags integer value
@@ -612,6 +627,11 @@ module Test
         self
       end
 
+      # Get flags JSON value
+      def to_json_map
+        @value
+      end
+
       # Get flags integer value
       def to_i
         @value
@@ -823,7 +843,7 @@ module Test
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class StructSimple
+  class StructSimple < FBE::JsonBase
     attr_accessor :uid
     attr_accessor :f1
     attr_accessor :f2
@@ -1294,14 +1314,6 @@ module Test
         result << 'null'
       end
       result << ')'
-      result
-    end
-
-    def to_json_map
-      result = {}
-      self.instance_variables.each do |key|
-        result[key] = self.instance_variable_get(key)
-      end
       result
     end
 
@@ -4649,15 +4661,6 @@ module Test
         result << 'null'
       end
       result << ')'
-      result
-    end
-
-    def to_json_map
-      result = {}
-      result.update(super)
-      self.instance_variables.each do |key|
-        result[key] = self.instance_variable_get(key)
-      end
       result
     end
 
@@ -8641,15 +8644,6 @@ module Test
       result
     end
 
-    def to_json_map
-      result = {}
-      result.update(super)
-      self.instance_variables.each do |key|
-        result[key] = self.instance_variable_get(key)
-      end
-      result
-    end
-
     # Get struct JSON value
     def to_json
       JSON.generate(to_json_map)
@@ -9696,7 +9690,7 @@ module Test
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class StructBytes
+  class StructBytes < FBE::JsonBase
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -9784,14 +9778,6 @@ module Test
         result << 'null'
       end
       result << ')'
-      result
-    end
-
-    def to_json_map
-      result = {}
-      self.instance_variables.each do |key|
-        result[key] = self.instance_variable_get(key)
-      end
       result
     end
 
@@ -10334,7 +10320,7 @@ module Test
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class StructArray
+  class StructArray < FBE::JsonBase
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -10575,14 +10561,6 @@ module Test
         result << ']'
       end
       result << ')'
-      result
-    end
-
-    def to_json_map
-      result = {}
-      self.instance_variables.each do |key|
-        result[key] = self.instance_variable_get(key)
-      end
       result
     end
 
@@ -11472,7 +11450,7 @@ module Test
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class StructVector
+  class StructVector < FBE::JsonBase
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -11713,14 +11691,6 @@ module Test
         result << ']'
       end
       result << ')'
-      result
-    end
-
-    def to_json_map
-      result = {}
-      self.instance_variables.each do |key|
-        result[key] = self.instance_variable_get(key)
-      end
       result
     end
 
@@ -12610,7 +12580,7 @@ module Test
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class StructList
+  class StructList < FBE::JsonBase
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -12851,14 +12821,6 @@ module Test
         result << '>'
       end
       result << ')'
-      result
-    end
-
-    def to_json_map
-      result = {}
-      self.instance_variables.each do |key|
-        result[key] = self.instance_variable_get(key)
-      end
       result
     end
 
@@ -13748,7 +13710,7 @@ module Test
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class StructSet
+  class StructSet < FBE::JsonBase
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -13881,14 +13843,6 @@ module Test
         result << '}'
       end
       result << ')'
-      result
-    end
-
-    def to_json_map
-      result = {}
-      self.instance_variables.each do |key|
-        result[key] = self.instance_variable_get(key)
-      end
       result
     end
 
@@ -14478,7 +14432,7 @@ module Test
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class StructMap
+  class StructMap < FBE::JsonBase
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -14789,14 +14743,6 @@ module Test
         result << '}>'
       end
       result << ')'
-      result
-    end
-
-    def to_json_map
-      result = {}
-      self.instance_variables.each do |key|
-        result[key] = self.instance_variable_get(key)
-      end
       result
     end
 
@@ -15686,7 +15632,7 @@ module Test
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class StructHash
+  class StructHash < FBE::JsonBase
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -15997,14 +15943,6 @@ module Test
         result << '}]'
       end
       result << ')'
-      result
-    end
-
-    def to_json_map
-      result = {}
-      self.instance_variables.each do |key|
-        result[key] = self.instance_variable_get(key)
-      end
       result
     end
 
@@ -16894,7 +16832,7 @@ module Test
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class StructHashEx
+  class StructHashEx < FBE::JsonBase
     attr_accessor :f1
     attr_accessor :f2
 
@@ -17005,14 +16943,6 @@ module Test
         result << '}]'
       end
       result << ')'
-      result
-    end
-
-    def to_json_map
-      result = {}
-      self.instance_variables.each do |key|
-        result[key] = self.instance_variable_get(key)
-      end
       result
     end
 

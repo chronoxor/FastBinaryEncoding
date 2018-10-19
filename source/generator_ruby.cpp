@@ -82,6 +82,8 @@ void GeneratorRuby::GenerateFBE(const CppCommon::Path& path)
     GenerateFBEEnum();
     GenerateFBEFlags();
     GenerateFBEInteger();
+    if (JSON())
+        GenerateFBEJsonBase();
     GenerateFBEWriteBuffer();
     GenerateFBEReadBuffer();
     GenerateFBEModel();
@@ -478,6 +480,40 @@ void GeneratorRuby::GenerateFBEInteger()
     N_BITS = N_BYTES * 16
     MAX = 2 ** (N_BITS - 2) - 1
     MIN = -MAX - 1
+  end
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+}
+
+void GeneratorRuby::GenerateFBEJsonBase()
+{
+    std::string code = R"CODE(
+  # Fast Binary Encoding base Json class
+  class JsonBase
+    def to_json_map
+      instance_variables.map do |key|
+        value = instance_variable_get(:"#{key}")
+        [
+          key.to_s[1..-1],
+          case value
+          when Array
+            value.map do |item|
+              item.respond_to?(:to_json_map) ? item.to_json_map : item
+            end
+          when BigDecimal
+            value.to_s('F')
+          when Time
+            value.to_i * 1000000000 + value.nsec
+          else
+            value.respond_to?(:to_json_map) ? value.to_json_map : value
+          end
+        ]
+      end.to_h
+    end
   end
 )CODE";
 
@@ -3439,6 +3475,15 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
     Indent(-1);
     WriteLineIndent("end");
 
+    // Generate enum to_json_map method
+    WriteLine();
+    WriteLineIndent("# Get enum JSON value");
+    WriteLineIndent("def to_json_map");
+    Indent(1);
+    WriteLineIndent("@value");
+    Indent(-1);
+    WriteLineIndent("end");
+
     // Generate enum to_i method
     WriteLine();
     WriteLineIndent("# Get enum integer value");
@@ -3720,6 +3765,15 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     Indent(-1);
     WriteLineIndent("end");
 
+    // Generate flags to_json_map method
+    WriteLine();
+    WriteLineIndent("# Get flags JSON value");
+    WriteLineIndent("def to_json_map");
+    Indent(1);
+    WriteLineIndent("@value");
+    Indent(-1);
+    WriteLineIndent("end");
+
     // Generate flags to_i method
     WriteLine();
     WriteLineIndent("# Get flags integer value");
@@ -3924,7 +3978,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
     if (s->base && !s->base->empty())
         WriteLineIndent("class " + struct_name + " < " + base_type);
     else
-        WriteLineIndent("class " + struct_name);
+        WriteLineIndent("class " + struct_name + (JSON() ? " < FBE::JsonBase" : ""));
     Indent(1);
 
     // Generate struct accessors
@@ -4187,25 +4241,6 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
 
     if (JSON())
     {
-        // Generate struct to_json_map method
-        WriteLine();
-        WriteLineIndent("def to_json_map");
-        Indent(1);
-        WriteLineIndent("result = {}");
-        if (s->base && !s->base->empty())
-            WriteLineIndent("result.update(super)");
-        if (s->body)
-        {
-            WriteLineIndent("self.instance_variables.each do |key|");
-            Indent(1);
-            WriteLineIndent("result[key] = self.instance_variable_get(key)");
-            Indent(-1);
-            WriteLineIndent("end");
-        }
-        WriteLineIndent("result");
-        Indent(-1);
-        WriteLineIndent("end");
-
         // Generate struct to_json method
         WriteLine();
         WriteLineIndent("# Get struct JSON value");

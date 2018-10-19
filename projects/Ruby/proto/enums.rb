@@ -48,6 +48,11 @@ module Enums
         @value.hash
       end
 
+      # Get enum JSON value
+      def to_json_map
+        @value
+      end
+
       # Get enum integer value
       def to_i
         @value
@@ -203,6 +208,11 @@ module Enums
       # Enum hash code
       def hash
         @value.hash
+      end
+
+      # Get enum JSON value
+      def to_json_map
+        @value
       end
 
       # Get enum integer value
@@ -362,6 +372,11 @@ module Enums
         @value.hash
       end
 
+      # Get enum JSON value
+      def to_json_map
+        @value
+      end
+
       # Get enum integer value
       def to_i
         @value
@@ -517,6 +532,11 @@ module Enums
       # Enum hash code
       def hash
         @value.hash
+      end
+
+      # Get enum JSON value
+      def to_json_map
+        @value
       end
 
       # Get enum integer value
@@ -676,6 +696,11 @@ module Enums
         @value.hash
       end
 
+      # Get enum JSON value
+      def to_json_map
+        @value
+      end
+
       # Get enum integer value
       def to_i
         @value
@@ -831,6 +856,11 @@ module Enums
       # Enum hash code
       def hash
         @value.hash
+      end
+
+      # Get enum JSON value
+      def to_json_map
+        @value
       end
 
       # Get enum integer value
@@ -990,6 +1020,11 @@ module Enums
         @value.hash
       end
 
+      # Get enum JSON value
+      def to_json_map
+        @value
+      end
+
       # Get enum integer value
       def to_i
         @value
@@ -1145,6 +1180,11 @@ module Enums
       # Enum hash code
       def hash
         @value.hash
+      end
+
+      # Get enum JSON value
+      def to_json_map
+        @value
       end
 
       # Get enum integer value
@@ -1304,6 +1344,11 @@ module Enums
         @value.hash
       end
 
+      # Get enum JSON value
+      def to_json_map
+        @value
+      end
+
       # Get enum integer value
       def to_i
         @value
@@ -1459,6 +1504,11 @@ module Enums
       # Enum hash code
       def hash
         @value.hash
+      end
+
+      # Get enum JSON value
+      def to_json_map
+        @value
       end
 
       # Get enum integer value
@@ -1618,6 +1668,11 @@ module Enums
         @value.hash
       end
 
+      # Get enum JSON value
+      def to_json_map
+        @value
+      end
+
       # Get enum integer value
       def to_i
         @value
@@ -1747,7 +1802,7 @@ module Enums
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class Enums
+  class Enums < FBE::JsonBase
     attr_accessor :byte0
     attr_accessor :byte1
     attr_accessor :byte2
@@ -2402,14 +2457,6 @@ module Enums
         result << 'null'
       end
       result << ')'
-      result
-    end
-
-    def to_json_map
-      result = {}
-      self.instance_variables.each do |key|
-        result[key] = self.instance_variable_get(key)
-      end
       result
     end
 

@@ -44,6 +44,7 @@ private:
     void GenerateFBEEnum();
     void GenerateFBEFlags();
     void GenerateFBEInteger();
+    void GenerateFBEJsonBase();
     void GenerateFBEWriteBuffer();
     void GenerateFBEReadBuffer();
     void GenerateFBEModel();

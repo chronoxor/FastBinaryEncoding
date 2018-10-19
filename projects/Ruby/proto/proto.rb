@@ -44,6 +44,11 @@ module Proto
         @value.hash
       end
 
+      # Get enum JSON value
+      def to_json_map
+        @value
+      end
+
       # Get enum integer value
       def to_i
         @value
@@ -176,6 +181,11 @@ module Proto
       # Enum hash code
       def hash
         @value.hash
+      end
+
+      # Get enum JSON value
+      def to_json_map
+        @value
       end
 
       # Get enum integer value
@@ -344,6 +354,11 @@ module Proto
       def remove_flags(flags)
         @value &= ~flags.value
         self
+      end
+
+      # Get flags JSON value
+      def to_json_map
+        @value
       end
 
       # Get flags integer value
@@ -524,7 +539,7 @@ module Proto
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class Order
+  class Order < FBE::JsonBase
     attr_accessor :uid
     attr_accessor :symbol
     attr_accessor :side
@@ -644,14 +659,6 @@ module Proto
         result << 'null'
       end
       result << ')'
-      result
-    end
-
-    def to_json_map
-      result = {}
-      self.instance_variables.each do |key|
-        result[key] = self.instance_variable_get(key)
-      end
       result
     end
 
@@ -1347,7 +1354,7 @@ module Proto
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class Balance
+  class Balance < FBE::JsonBase
     attr_accessor :currency
     attr_accessor :amount
 
@@ -1431,14 +1438,6 @@ module Proto
         result << 'null'
       end
       result << ')'
-      result
-    end
-
-    def to_json_map
-      result = {}
-      self.instance_variables.each do |key|
-        result[key] = self.instance_variable_get(key)
-      end
       result
     end
 
@@ -1930,7 +1929,7 @@ module Proto
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class Account
+  class Account < FBE::JsonBase
     attr_accessor :uid
     attr_accessor :name
     attr_accessor :state
@@ -2059,14 +2058,6 @@ module Proto
         result << ']'
       end
       result << ')'
-      result
-    end
-
-    def to_json_map
-      result = {}
-      self.instance_variables.each do |key|
-        result[key] = self.instance_variable_get(key)
-      end
       result
     end
 

@@ -46,6 +46,11 @@ module Protoex
         @value.hash
       end
 
+      # Get enum JSON value
+      def to_json_map
+        @value
+      end
+
       # Get enum integer value
       def to_i
         @value
@@ -184,6 +189,11 @@ module Protoex
       # Enum hash code
       def hash
         @value.hash
+      end
+
+      # Get enum JSON value
+      def to_json_map
+        @value
       end
 
       # Get enum integer value
@@ -359,6 +369,11 @@ module Protoex
       def remove_flags(flags)
         @value &= ~flags.value
         self
+      end
+
+      # Get flags JSON value
+      def to_json_map
+        @value
       end
 
       # Get flags integer value
@@ -561,7 +576,7 @@ module Protoex
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class Order
+  class Order < FBE::JsonBase
     attr_accessor :uid
     attr_accessor :symbol
     attr_accessor :side
@@ -699,14 +714,6 @@ module Protoex
         result << 'null'
       end
       result << ')'
-      result
-    end
-
-    def to_json_map
-      result = {}
-      self.instance_variables.each do |key|
-        result[key] = self.instance_variable_get(key)
-      end
       result
     end
 
@@ -1585,15 +1592,6 @@ module Protoex
       result
     end
 
-    def to_json_map
-      result = {}
-      result.update(super)
-      self.instance_variables.each do |key|
-        result[key] = self.instance_variable_get(key)
-      end
-      result
-    end
-
     # Get struct JSON value
     def to_json
       JSON.generate(to_json_map)
@@ -2079,7 +2077,7 @@ module Protoex
   end
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class Account
+  class Account < FBE::JsonBase
     attr_accessor :uid
     attr_accessor :name
     attr_accessor :state
@@ -2208,14 +2206,6 @@ module Protoex
         result << ']'
       end
       result << ')'
-      result
-    end
-
-    def to_json_map
-      result = {}
-      self.instance_variables.each do |key|
-        result[key] = self.instance_variable_get(key)
-      end
       result
     end
 
