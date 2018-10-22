@@ -1,6 +1,6 @@
 # FastBinaryEncoding todo
 
 General
-- [ ] Kotlin
-- [ ] Ruby
+- [x] Kotlin
+- [x] Ruby
 - [ ] GoLang

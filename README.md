@@ -10,9 +10,9 @@ Fast Binary Encoding allows to define any domain models, complex data
 structures, client/server requests & responses and create models for
 different programming languages and platforms.
 
-[FastBinaryEncoding documentation](https://chronoxor.github.io/FastBinaryEncoding)<br/>
-[FastBinaryEncoding downloads](https://github.com/chronoxor/FastBinaryEncoding/releases)<br/>
-[FastBinaryEncoding specification](https://chronoxor.github.io/FastBinaryEncoding/documents/FBE.html)
+[Fast Binary Encoding documentation](https://chronoxor.github.io/FastBinaryEncoding)<br/>
+[Fast Binary Encoding downloads](https://github.com/chronoxor/FastBinaryEncoding/releases)<br/>
+[Fast Binary Encoding specification](https://chronoxor.github.io/FastBinaryEncoding/documents/FBE.html)
 
 Performance comparison to other protocols can be found [here](https://github.com/chronoxor/CppSerialization):
 
@@ -31,7 +31,7 @@ Typical usage workflow is the following:
    programming languages (C++, C#, Java, JavaScript, Kotlin, Python, Ruby)
 3. [Build domain model](#build-domain-model) library
 4. [Serialize/Deserialize](#fbe-serialization) objects from the domain model
-   in unified FastBinaryEncoding format (fast and compact)
+   in unified, fast and compact FastBinaryEncoding (FBE) format
 5. [JSON convert](#json-serialization) objects from the domain model in order
    to use them in Web API
 6. Implement [Sender/Receiver interfaces](#senderreceiver-protocol) to create a communication protocol
@@ -136,12 +136,12 @@ vs.bat
 ```
 
 # Create domain model
-The first step you should perform to use FastBinaryEncoding is to provide a
-domain model (aka business objects). Domain model is a set of enums, flags
+The first step you should perform to use Fast Binary Encoding is to provide
+a domain model (aka business objects). Domain model is a set of enums, flags
 and structures that related to each other and might be aggregated in some
 hierarchy.
 
-[FastBinaryEncoding format specification](documents/FBE.md)
+[Fast Binary Encoding (FBE) format specification](documents/FBE.md)
 
 There is an [sample domain model](https://github.com/chronoxor/FastBinaryEncoding/blob/master/proto/proto.fbe)
 which describes Account-Balance-Orders relation of some abstract trading
@@ -292,9 +292,9 @@ gem install uuidtools
 ```
 
 # FBE serialization
-FastBinaryEncoding is a fast and compact binary format of representing single
-domain models in different programming languages and platforms. Also FBE format
-[solves protocol versioning problem](#versioning).
+Fast Binary Encoding (FBE) is a fast and compact binary format of representing
+single domain models in different programming languages and platforms.
+Also FBE format [solves protocol versioning problem](#versioning).
 
 Follow the steps below in order to serialize any domain object:
 1. Create a new domain object and fill its fields and collections (*proto::Account account*);
