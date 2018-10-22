@@ -2,31 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28b38142-73b0-4ddb-b81e-352705299fce" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../include/generator_ruby.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_ruby.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/examples/serialization_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/examples/serialization_json.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/enums.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/enums.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/proto.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/proto.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/protoex.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/protoex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/send_receive.rb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/send_receive.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/serialization.rb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/serialization.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/serialization_final.rb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/serialization_final.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/enums.rb" beforeDir="false" afterPath="$PROJECT_DIR$/proto/enums.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe.rb" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/proto.rb" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/protoex.rb" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_clone.rb" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_clone.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_enums.rb" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_enums.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_extending.rb" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_extending.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_send_seceive.rb" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_send_seceive.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_send_seceive_final.rb" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_send_seceive_final.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_serialization.rb" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_serialization.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_serialization_final.rb" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_serialization_final.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_python.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_python.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_ruby.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_ruby.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -99,7 +75,7 @@
     <session id="1172603075">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.0" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.5" value="1" />
@@ -351,14 +327,11 @@
       <workItem from="1539819957500" duration="4587000" />
       <workItem from="1539853983477" duration="18434000" />
       <workItem from="1539892182247" duration="20484000" />
-      <workItem from="1539944214754" duration="16154000" />
+      <workItem from="1539944214754" duration="16764000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Run_test_'test_serialization_json'__Ruby - 2018.10.19 at 20h 10m 20s.xml">
-      <configuration name="Run test 'test_serialization_json': Ruby" configurationId="TestUnitRunConfigurationType" />
-    </history-entry>
     <history-entry file="Run_test_'test_serialization_json'__Ruby - 2018.10.19 at 20h 11m 21s.xml">
       <configuration name="Run test 'test_serialization_json': Ruby" configurationId="TestUnitRunConfigurationType" />
     </history-entry>
@@ -386,9 +359,12 @@
     <history-entry file="All_tests_in_tests__Ruby - 2018.10.19 at 20h 21m 43s.xml">
       <configuration name="All tests in tests: Ruby" configurationId="TestUnitRunConfigurationType" />
     </history-entry>
+    <history-entry file="All_tests_in_tests__Ruby - 2018.10.19 at 20h 25m 05s.xml">
+      <configuration name="All tests in tests: Ruby" configurationId="TestUnitRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="124973000" />
+    <option name="totallyTimeSpent" value="125583000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="408" y="135" width="1636" height="807" extended-state="0" />
@@ -399,7 +375,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.45616642" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.47102526" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.47102526" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
