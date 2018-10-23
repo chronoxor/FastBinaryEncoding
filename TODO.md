@@ -4,3 +4,4 @@ General
 - [x] Kotlin
 - [x] Ruby
 - [ ] GoLang
+- [ ] Rust
