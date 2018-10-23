@@ -6,9 +6,9 @@
 [![MinGW build status](https://img.shields.io/appveyor/ci/chronoxor/FastBinaryEncoding/master.svg?label=MinGW)](https://ci.appveyor.com/project/chronoxor/FastBinaryEncoding)
 [![Windows build status](https://img.shields.io/appveyor/ci/chronoxor/FastBinaryEncoding/master.svg?label=Windows)](https://ci.appveyor.com/project/chronoxor/FastBinaryEncoding)
 
-Fast Binary Encoding allows to define any domain models, complex data
-structures, client/server requests & responses and create models for
-different programming languages and platforms.
+Fast Binary Encoding allows to describe any domain models, business
+objects, complex data structures, client/server requests & responses
+and generate native code for different programming languages and platforms.
 
 [Fast Binary Encoding documentation](https://chronoxor.github.io/FastBinaryEncoding)<br/>
 [Fast Binary Encoding downloads](https://github.com/chronoxor/FastBinaryEncoding/releases)<br/>
