@@ -5,146 +5,7 @@
       <change beforePath="$PROJECT_DIR$/../../modules/CppBenchmark" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppBenchmark" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../modules/CppCommon" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppCommon" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumByte.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumByte.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumByteEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumByteEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumChar.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumChar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumCharEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumCharEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt16.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt16.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt16Enum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt16Enum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt32.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt32.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt32Enum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt32Enum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt64.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt64.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt64Enum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt64Enum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt8.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt8.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt8Enum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumInt8Enum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt16.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt16.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt16Enum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt16Enum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt32.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt32.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt32Enum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt32Enum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt64.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt64.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt64Enum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt64Enum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt8.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt8.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt8Enum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumUInt8Enum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumWChar.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumWChar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/EnumWCharEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/EnumWCharEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/Enums.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/Enums.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/Balance.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/Balance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/OrderSide.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/OrderSide.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/OrderSideEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/OrderSideEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/OrderType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/OrderType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/OrderTypeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/OrderTypeEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/State.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/StateEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/StateEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/Balance.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/Balance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/OrderSide.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/OrderSide.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/OrderSideEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/OrderSideEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/OrderType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/OrderType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/OrderTypeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/OrderTypeEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/StateEx.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/StateEx.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/StateExEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/StateExEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/EnumSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/EnumSimple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/EnumSimpleEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/EnumSimpleEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/EnumTyped.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/EnumTyped.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/EnumTypedEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/EnumTypedEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/FlagsSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/FlagsSimple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/FlagsSimpleEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/FlagsSimpleEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/FlagsTyped.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/FlagsTyped.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/FlagsTypedEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/FlagsTypedEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/StructArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructBytes.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/StructBytes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructHash.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/StructHash.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructHashEx.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/StructHashEx.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructList.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/StructList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/StructMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructNested.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/StructNested.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructOptional.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/StructOptional.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/StructSet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/StructSimple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructVector.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/StructVector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/enums.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/enums.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/proto.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/proto.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/protoex.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/protoex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumByte.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumByte.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumByteEnum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumByteEnum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumChar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumChar.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumCharEnum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumCharEnum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumInt16.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumInt16.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumInt16Enum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumInt16Enum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumInt32.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumInt32.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumInt32Enum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumInt32Enum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumInt64.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumInt64.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumInt64Enum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumInt64Enum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumInt8.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumInt8.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumInt8Enum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumInt8Enum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumUInt16.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumUInt16.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumUInt16Enum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumUInt16Enum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumUInt32.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumUInt32.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumUInt32Enum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumUInt32Enum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumUInt64.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumUInt64.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumUInt64Enum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumUInt64Enum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumUInt8.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumUInt8.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumUInt8Enum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumUInt8Enum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumWChar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumWChar.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumWCharEnum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/EnumWCharEnum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/enums/Enums.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/enums/Enums.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/Account.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/Account.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/Balance.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/Balance.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/Order.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/Order.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/OrderSide.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/OrderSide.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/OrderSideEnum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/OrderSideEnum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/OrderType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/OrderType.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/OrderTypeEnum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/OrderTypeEnum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/State.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/State.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/StateEnum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/StateEnum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/Account.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/Account.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/Balance.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/Balance.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/Order.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/Order.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/OrderSide.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/OrderSide.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/OrderSideEnum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/OrderSideEnum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/OrderType.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/OrderType.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/OrderTypeEnum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/OrderTypeEnum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/StateEx.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/StateEx.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/StateExEnum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/StateExEnum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/EnumSimple.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/EnumSimple.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/EnumSimpleEnum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/EnumSimpleEnum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/EnumTyped.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/EnumTyped.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/EnumTypedEnum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/EnumTypedEnum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/FlagsSimple.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/FlagsSimple.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/FlagsSimpleEnum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/FlagsSimpleEnum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/FlagsTyped.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/FlagsTyped.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/FlagsTypedEnum.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/FlagsTypedEnum.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructArray.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructArray.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructBytes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructBytes.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructHash.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructHash.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructHashEx.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructHashEx.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructList.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructList.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructMap.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructMap.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructNested.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructNested.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructOptional.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructOptional.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructSet.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructSet.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructSimple.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructSimple.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructVector.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructVector.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/enums.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/enums.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/proto.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/proto.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/protoex.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/protoex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/enums.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/enums.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/proto.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/proto.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/protoex.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/protoex.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_java.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_java.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_javascript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_javascript.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_python.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_python.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_ruby.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_ruby.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -156,20 +17,53 @@
     <session id="-292042193">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
-          <entry key="project.open.time.0" value="1" />
+          <entry key="project.closed" value="5" />
+          <entry key="project.open.time.0" value="2" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.3" value="2" />
-          <entry key="project.opened" value="4" />
+          <entry key="project.opened" value="5" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="cs" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="C#" value="1" />
         </counts>
       </usages-collector>
     </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Benchmarks/Serialization.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="253">
+              <caret line="45" column="16" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="16" />
+              <folding>
+                <marker date="1534991080142" expanded="false" signature="6:59" ph="..." />
+                <marker date="1534991080142" expanded="true" signature="81:2047" ph="{...}" />
+                <marker date="1534991080142" expanded="true" signature="114:2045" ph="{...}" />
+                <marker date="1534991080142" expanded="true" signature="306:1493" ph="{...}" />
+                <marker date="1534991080142" expanded="true" signature="1543:1627" ph="{...}" />
+                <marker date="1534991080142" expanded="true" signature="1680:1858" ph="{...}" />
+                <marker date="1534991080142" expanded="true" signature="1913:2039" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/../../proto/fbe.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Benchmarks/Serialization.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
@@ -200,7 +94,7 @@
             <path>
               <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
               <item name="FastBinaryEncoding" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Examples" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="Benchmarks" type="24d0babc:SolutionExplorerModelNode" />
             </path>
           </expand>
           <select />
@@ -287,12 +181,13 @@
       <workItem from="1538592850345" duration="40000" />
       <workItem from="1539797978382" duration="52000" />
       <workItem from="1539798104264" duration="1812000" />
-      <workItem from="1539848931285" duration="2139000" />
+      <workItem from="1539848931285" duration="2771000" />
+      <workItem from="1539975676863" duration="33000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4689000" />
+    <option name="totallyTimeSpent" value="5354000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -306,7 +201,7 @@
   <component name="ToolWindowManager">
     <frame x="773" y="426" width="1036" height="773" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.37192622" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.38012296" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -349,5 +244,23 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Benchmarks/Serialization.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="45" column="16" selection-start-line="45" selection-start-column="16" selection-end-line="45" selection-end-column="16" />
+          <folding>
+            <marker date="1534991080142" expanded="false" signature="6:59" ph="..." />
+            <marker date="1534991080142" expanded="true" signature="81:2047" ph="{...}" />
+            <marker date="1534991080142" expanded="true" signature="114:2045" ph="{...}" />
+            <marker date="1534991080142" expanded="true" signature="306:1493" ph="{...}" />
+            <marker date="1534991080142" expanded="true" signature="1543:1627" ph="{...}" />
+            <marker date="1534991080142" expanded="true" signature="1680:1858" ph="{...}" />
+            <marker date="1534991080142" expanded="true" signature="1913:2039" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>

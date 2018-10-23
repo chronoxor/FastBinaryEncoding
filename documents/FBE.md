@@ -1,7 +1,8 @@
-# FastBinaryEncoding format specification
+# Fast Binary Encoding (FBE) format specification
 
-FastBinaryEncoding format describes domain model with as a set of enums, flags and structs.
-Structs fields are described with a base or complex types or collection.
+Fast Binary Encoding (FBE) format describes domain model with as a set of
+enums, flags and structs. Structs fields are described with base or complex
+types, optional fields and collections.
 
 Example of the domain model:
 ```proto

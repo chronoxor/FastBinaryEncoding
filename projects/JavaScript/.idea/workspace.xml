@@ -32,7 +32,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="protoex.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="protoex.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proto/protoex.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
@@ -40,6 +40,15 @@
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="benchmark_serialization.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_serialization.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="33" column="13" lean-forward="true" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -97,6 +106,11 @@
             <path>
               <item name="JavaScript" type="b2602c69:ProjectViewProjectNode" />
               <item name="JavaScript" type="462c0819:PsiDirectoryNode" />
+              <item name="benchmarks" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="JavaScript" type="b2602c69:ProjectViewProjectNode" />
+              <item name="JavaScript" type="462c0819:PsiDirectoryNode" />
               <item name="proto" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -128,9 +142,9 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.print.js">
+  <component name="RunManager" selected="Node.js.benchmark_serialization.js">
+    <configuration name="benchmark_serialization.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="benchmark_serialization.js" working-dir="$PROJECT_DIR$/benchmarks" />
     <configuration name="print.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="print.js" working-dir="$PROJECT_DIR$/examples" />
-    <configuration name="test_send_seceive.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="test_send_seceive.js" working-dir="$PROJECT_DIR$/tests" />
     <configuration name="tests-browser-local" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -161,17 +175,17 @@
     <list>
       <item itemvalue="npm.tests-node" />
       <item itemvalue="npm.tests-standard" />
-      <item itemvalue="Node.js.test_send_seceive.js" />
       <item itemvalue="npm.tests-browser-local" />
       <item itemvalue="Node.js.print.js" />
+      <item itemvalue="Node.js.benchmark_serialization.js" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="npm.tests-node" />
         <item itemvalue="npm.tests-standard" />
+        <item itemvalue="Node.js.benchmark_serialization.js" />
         <item itemvalue="Node.js.print.js" />
         <item itemvalue="npm.tests-browser-local" />
-        <item itemvalue="Node.js.test_send_seceive.js" />
       </list>
     </recent_temporary>
   </component>
@@ -194,12 +208,12 @@
       <workItem from="1538703111323" duration="96000" />
       <workItem from="1539796825868" duration="136000" />
       <workItem from="1539797118671" duration="63000" />
-      <workItem from="1539798043102" duration="1293000" />
+      <workItem from="1539798043102" duration="1916000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5416000" />
+    <option name="totallyTimeSpent" value="6039000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="680" y="469" width="1318" height="773" extended-state="0" />
@@ -249,13 +263,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/node_modules/tape/lib/test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1598">
-          <caret line="94" column="9" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_serialization_final.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
@@ -590,6 +597,13 @@
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_serialization.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="33" column="13" lean-forward="true" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
         </state>
       </provider>
     </entry>

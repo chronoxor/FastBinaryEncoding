@@ -31,28 +31,26 @@ benchmark = BenchmarkSerializationJson()
 iterations = 100000
 
 
-def main():
-    # Benchmark serialize() method
-    times = timeit.repeat(setup='print("Benchmarking serialize() method...")', stmt="benchmark.serialize()", repeat=5, number=iterations, globals=globals())
-    duration = min(times)
+def report(name, duration):
     print()
-    print("Phase: Serialize (JSON)")
+    print("Phase: {}".format(name))
     print("Average time: {:.3f} mcs / iteration".format(duration / iterations * 1000000))
     print("Total time: {:.3f} s".format(duration))
     print("Total iterations: {}".format(iterations))
     print("Iterations throughput: {:.3f} / second".format(iterations / duration))
     print()
 
+
+def main():
+    # Benchmark serialize() method
+    times = timeit.repeat(setup='print("Benchmarking serialize() method...")', stmt="benchmark.serialize()", repeat=5, number=iterations, globals=globals())
+    duration = min(times)
+    report("Serialize (JSON)", duration)
+
     # Benchmark deserialize() method
     times = timeit.repeat(setup='print("Benchmarking deserialize() method...")', stmt="benchmark.deserialize()", repeat=5, number=iterations, globals=globals())
     duration = min(times)
-    print()
-    print("Phase: Deserialize (JSON)")
-    print("Average time: {:.3f} mcs / iteration".format(duration / iterations * 1000000))
-    print("Total time: {:.3f} s".format(duration))
-    print("Total iterations: {}".format(iterations))
-    print("Iterations throughput: {:.3f} / second".format(iterations / duration))
-    print()
+    report("Deserialize (JSON)", duration)
 
 
 if __name__ == "__main__":

@@ -117,50 +117,36 @@ benchmark = BenchmarkSendReceive()
 iterations = 100000
 
 
+def report(name, duration):
+    print()
+    print("Phase: {}".format(name))
+    print("Average time: {:.3f} mcs / iteration".format(duration / iterations * 1000000))
+    print("Total time: {:.3f} s".format(duration))
+    print("Total iterations: {}".format(iterations))
+    print("Iterations throughput: {:.3f} / second".format(iterations / duration))
+    print()
+
+
 def main():
     # Benchmark send() method
     times = timeit.repeat(setup='print("Benchmarking send() method...")', stmt="benchmark.send()", repeat=5, number=iterations, globals=globals())
     duration = min(times)
-    print()
-    print("Phase: Send")
-    print("Average time: {:.3f} mcs / iteration".format(duration / iterations * 1000000))
-    print("Total time: {:.3f} s".format(duration))
-    print("Total iterations: {}".format(iterations))
-    print("Iterations throughput: {:.3f} / second".format(iterations / duration))
-    print()
+    report("Send", duration)
 
     # Benchmark send_with_logs() method
     times = timeit.repeat(setup='print("Benchmarking send_with_logs() method...")', stmt="benchmark.send_with_logs()", repeat=5, number=iterations, globals=globals())
     duration = min(times)
-    print()
-    print("Phase: Send with logs")
-    print("Average time: {:.3f} mcs / iteration".format(duration / iterations * 1000000))
-    print("Total time: {:.3f} s".format(duration))
-    print("Total iterations: {}".format(iterations))
-    print("Iterations throughput: {:.3f} / second".format(iterations / duration))
-    print()
+    report("Send with logs", duration)
 
     # Benchmark receive() method
     times = timeit.repeat(setup='print("Benchmarking receive() method...")', stmt="benchmark.receive()", repeat=5, number=iterations, globals=globals())
     duration = min(times)
-    print()
-    print("Phase: Receive")
-    print("Average time: {:.3f} mcs / iteration".format(duration / iterations * 1000000))
-    print("Total time: {:.3f} s".format(duration))
-    print("Total iterations: {}".format(iterations))
-    print("Iterations throughput: {:.3f} / second".format(iterations / duration))
-    print()
+    report("Receive", duration)
 
     # Benchmark receive_with_logs() method
     times = timeit.repeat(setup='print("Benchmarking receive_with_logs() method...")', stmt="benchmark.receive_with_logs()", repeat=5, number=iterations, globals=globals())
     duration = min(times)
-    print()
-    print("Phase: Receive with logs")
-    print("Average time: {:.3f} mcs / iteration".format(duration / iterations * 1000000))
-    print("Total time: {:.3f} s".format(duration))
-    print("Total iterations: {}".format(iterations))
-    print("Iterations throughput: {:.3f} / second".format(iterations / duration))
-    print()
+    report("Receive with logs", duration)
 
 
 if __name__ == "__main__":
