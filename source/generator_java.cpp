@@ -808,7 +808,7 @@ public final class FieldModelDecimal extends FieldModel
     @Override
     public long fbeSize() { return 16; }
 
-    // Get the value
+    // Get the decimal value
     public BigDecimal get() { return get(BigDecimal.valueOf(0L)); }
     public BigDecimal get(BigDecimal defaults)
     {
@@ -836,7 +836,7 @@ public final class FieldModelDecimal extends FieldModel
         return new BigDecimal(unscaled, scale);
     }
 
-    // Set the value
+    // Set the decimal value
     public void set(BigDecimal value)
     {
         assert (value != null) : "Invalid decimal value!";
@@ -921,7 +921,7 @@ public final class FieldModelTimestamp extends FieldModel
     @Override
     public long fbeSize() { return 8; }
 
-    // Get the value
+    // Get the timestamp value
     public Instant get() { return get(Instant.EPOCH); }
     public Instant get(Instant defaults)
     {
@@ -936,7 +936,7 @@ public final class FieldModelTimestamp extends FieldModel
         return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
     }
 
-    // Set the value
+    // Set the timestamp value
     public void set(Instant value)
     {
         assert (value != null) : "Invalid timestamp value!";
@@ -2407,7 +2407,7 @@ public final class FinalModelDecimal extends FinalModel
     @Override
     public long fbeSize() { return 16; }
 
-    // Check if the value is valid
+    // Check if the decimal value is valid
     @Override
     public long verify()
     {
@@ -2417,7 +2417,7 @@ public final class FinalModelDecimal extends FinalModel
         return fbeSize();
     }
 
-    // Get the value
+    // Get the decimal value
     public BigDecimal get(Size size)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
@@ -2441,7 +2441,7 @@ public final class FinalModelDecimal extends FinalModel
         return new BigDecimal(unscaled, scale);
     }
 
-    // Set the value
+    // Set the decimal value
     public long set(BigDecimal value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";
@@ -2526,7 +2526,7 @@ public final class FinalModelTimestamp extends FinalModel
     @Override
     public long fbeSize() { return 8; }
 
-    // Check if the value is valid
+    // Check if the timestamp value is valid
     @Override
     public long verify()
     {
@@ -2536,7 +2536,7 @@ public final class FinalModelTimestamp extends FinalModel
         return fbeSize();
     }
 
-    // Get the value
+    // Get the timestamp value
     public Instant get(Size size)
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
@@ -2547,7 +2547,7 @@ public final class FinalModelTimestamp extends FinalModel
         return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000);
     }
 
-    // Set the value
+    // Set the timestamp value
     public long set(Instant value)
     {
         assert ((_buffer.getOffset() + fbeOffset() + fbeSize()) <= _buffer.getSize()) : "Model is broken!";

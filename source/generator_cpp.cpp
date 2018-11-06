@@ -1085,10 +1085,10 @@ public:
     // Unshift the current field offset
     void fbe_unshift(size_t size) noexcept { _offset -= size; }
 
-    // Check if the value is valid
+    // Check if the decimal value is valid
     bool verify() const noexcept { return true; }
 
-    // Get the field value
+    // Get the decimal value
     void get(decimal_t& value, decimal_t defaults = decimal_t()) const noexcept
     {
         if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
@@ -1113,7 +1113,7 @@ public:
         value = dValue;
     }
 
-    // Set the field value
+    // Set the decimal value
     void set(decimal_t value) noexcept
     {
         assert(((_buffer.offset() + fbe_offset() + fbe_size()) <= _buffer.size()) && "Model is broken!");
@@ -1351,10 +1351,10 @@ public:
     // Unshift the current field offset
     void fbe_unshift(size_t size) noexcept { _offset -= size; }
 
-    // Check if the value is valid
+    // Check if the UUID value is valid
     bool verify() const noexcept { return true; }
 
-    // Get the field value
+    // Get the UUID value
     void get(uuid_t& value, uuid_t defaults = uuid_t::nil()) const noexcept
     {
         if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
@@ -1366,7 +1366,7 @@ public:
         std::memcpy(value.data().data(), (const uint8_t*)(_buffer.data() + _buffer.offset() + fbe_offset()), fbe_size());
     }
 
-    // Set the field value
+    // Set the UUID value
     void set(uuid_t value) noexcept
     {
         assert(((_buffer.offset() + fbe_offset() + fbe_size()) <= _buffer.size()) && "Model is broken!");
@@ -2668,7 +2668,7 @@ public:
     // Unshift the current field offset
     void fbe_unshift(size_t size) noexcept { _offset -= size; }
 
-    // Check if the value is valid
+    // Check if the decimal value is valid
     size_t verify() const noexcept
     {
         if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
@@ -2677,7 +2677,7 @@ public:
         return fbe_size();
    }
 
-    // Get the field value
+    // Get the decimal value
     size_t get(decimal_t& value) const noexcept
     {
         if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
@@ -2700,7 +2700,7 @@ public:
         return fbe_size();
     }
 
-    // Set the field value
+    // Set the decimal value
     size_t set(decimal_t value) noexcept
     {
         assert(((_buffer.offset() + fbe_offset() + fbe_size()) <= _buffer.size()) && "Model is broken!");
@@ -2943,7 +2943,7 @@ public:
     // Unshift the current field offset
     void fbe_unshift(size_t size) noexcept { _offset -= size; }
 
-    // Check if the value is valid
+    // Check if the UUID value is valid
     size_t verify() const noexcept
     {
         if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
@@ -2952,7 +2952,7 @@ public:
         return fbe_size();
    }
 
-    // Get the field value
+    // Get the UUID value
     size_t get(uuid_t& value) const noexcept
     {
         if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
@@ -2962,7 +2962,7 @@ public:
         return fbe_size();
     }
 
-    // Set the field value
+    // Set the UUID value
     size_t set(uuid_t value) noexcept
     {
         assert(((_buffer.offset() + fbe_offset() + fbe_size()) <= _buffer.size()) && "Model is broken!");

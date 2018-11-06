@@ -4870,7 +4870,7 @@ class FieldModelDecimal extends FieldModel {
   }
 
   /**
-   * Get the value
+   * Get the decimal value
    * @this {!FieldModelDecimal}
    * @param {Big=} defaults Default value, defaults is new Big(0)
    * @returns {!Big} Result value
@@ -4902,7 +4902,7 @@ class FieldModelDecimal extends FieldModel {
   }
 
   /**
-   * Set the value
+   * Set the decimal value
    * @this {!FieldModelDecimal}
    * @param {!Big} value Value
    */
@@ -4979,7 +4979,7 @@ class FieldModelTimestamp extends FieldModel {
   }
 
   /**
-   * Get the value
+   * Get the timestamp value
    * @this {!FieldModelTimestamp}
    * @param {Date=} defaults Default value, defaults is new Date(0)
    * @returns {!Date} Result value
@@ -4994,7 +4994,7 @@ class FieldModelTimestamp extends FieldModel {
   }
 
   /**
-   * Set the value
+   * Set the timestamp value
    * @this {!FieldModelTimestamp}
    * @param {!Date} value Value
    */
@@ -5035,7 +5035,7 @@ class FieldModelUUID extends FieldModel {
   }
 
   /**
-   * Get the value
+   * Get the UUID value
    * @this {!FieldModelUUID}
    * @param {UUID=} defaults Default value, defaults is UUID.nil()
    * @returns {!UUID} Result value
@@ -5049,7 +5049,7 @@ class FieldModelUUID extends FieldModel {
   }
 
   /**
-   * Set the value
+   * Set the UUID value
    * @this {!FieldModelUUID}
    * @param {!UUID} value Value
    */
@@ -6467,7 +6467,7 @@ class FinalModelDecimal extends FinalModel {
   }
 
   /**
-   * Check if the value is valid
+   * Check if the decimal value is valid
    * @this {!FinalModelDecimal}
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
@@ -6480,7 +6480,7 @@ class FinalModelDecimal extends FinalModel {
   }
 
   /**
-   * Get the value
+   * Get the decimal value
    * @this {!FieldModelDecimal}
    * @returns {!object} Result decimal value and its size
    */
@@ -6511,7 +6511,7 @@ class FinalModelDecimal extends FinalModel {
   }
 
   /**
-   * Set the value
+   * Set the decimal value
    * @this {!FieldModelDecimal}
    * @param {!Big} value Value
    * @returns {!number} Final model size
@@ -6600,7 +6600,7 @@ class FinalModelTimestamp extends FinalModel {
   }
 
   /**
-   * Check if the value is valid
+   * Check if the timestamp value is valid
    * @this {!FinalModelTimestamp}
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
@@ -6613,7 +6613,7 @@ class FinalModelTimestamp extends FinalModel {
   }
 
   /**
-   * Get the value
+   * Get the timestamp value
    * @this {!FieldModelTimestamp}
    * @returns {!object} Result timestamp value and its size
    */
@@ -6627,7 +6627,7 @@ class FinalModelTimestamp extends FinalModel {
   }
 
   /**
-   * Set the value
+   * Set the timestamp value
    * @this {!FieldModelTimestamp}
    * @param {!Date} value Value
    * @returns {!number} Final model size
@@ -6680,7 +6680,7 @@ class FinalModelUUID extends FinalModel {
   }
 
   /**
-   * Check if the value is valid
+   * Check if the UUID value is valid
    * @this {!FinalModelUUID}
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
@@ -6693,7 +6693,7 @@ class FinalModelUUID extends FinalModel {
   }
 
   /**
-   * Get the value
+   * Get the UUID value
    * @this {!FieldModelUUID}
    * @returns {!object} Result UUID value and its size
    */
@@ -6706,7 +6706,7 @@ class FinalModelUUID extends FinalModel {
   }
 
   /**
-   * Set the value
+   * Set the UUID value
    * @this {!FieldModelUUID}
    * @param {!UUID} value Value
    * @returns {!number} Final model size

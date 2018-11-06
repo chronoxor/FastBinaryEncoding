@@ -705,7 +705,7 @@ class FieldModelDecimal(FieldModel):
     def fbe_size(self):
         return 16
 
-    # Get the value
+    # Get the decimal value
     def get(self, defaults=None):
         if defaults is None:
             defaults = decimal.Decimal(0)
@@ -731,7 +731,7 @@ class FieldModelDecimal(FieldModel):
 
         return result
 
-    # Set the value
+    # Set the decimal value
     def set(self, value):
         assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
         if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
@@ -1761,14 +1761,14 @@ class FinalModelDecimal(FieldModel):
     def fbe_size(self):
         return 16
 
-    # Check if the value is valid
+    # Check if the decimal value is valid
     def verify(self):
         if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
             return sys.maxsize
 
         return self.fbe_size
 
-    # Get the value
+    # Get the decimal value
     def get(self):
         if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
             return decimal.Decimal(0), 0
@@ -1791,7 +1791,7 @@ class FinalModelDecimal(FieldModel):
 
         return result, self.fbe_size
 
-    # Set the value
+    # Set the decimal value
     def set(self, value):
         assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
         if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:

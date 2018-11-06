@@ -1010,6 +1010,11 @@ void GeneratorRuby::GenerateFBEFieldModel()
       super(buffer, offset)
     end
 
+    # Is the value valid?
+    def valid?
+      verify
+    end
+
     # Check if the value is valid
     def verify
       true
@@ -1081,7 +1086,7 @@ void GeneratorRuby::GenerateFBEFieldModelDecimal()
       16
     end
 
-    # Get the value
+    # Get the decimal value
     def get(defaults = BigDecimal.new(0))
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return defaults
@@ -1106,7 +1111,7 @@ void GeneratorRuby::GenerateFBEFieldModelDecimal()
       result
     end
 
-    # Set the value
+    # Set the decimal value
     def set(value)
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return
@@ -1189,6 +1194,11 @@ void GeneratorRuby::GenerateFBEFieldModelBytes()
 
       fbe_bytes_size = read_uint32(fbe_bytes_offset)
       4 + fbe_bytes_size
+    end
+
+    # Is the bytes value valid?
+    def valid?
+      verify
     end
 
     # Check if the bytes value is valid
@@ -1293,6 +1303,11 @@ void GeneratorRuby::GenerateFBEFieldModelString()
 
       fbe_string_size = read_uint32(fbe_string_offset)
       4 + fbe_string_size
+    end
+
+    # Is the string value valid?
+    def valid?
+      verify
     end
 
     # Check if the string value is valid
@@ -1424,6 +1439,11 @@ void GeneratorRuby::GenerateFBEFieldModelOptional()
     # Get the base field model value
     def value
       @_model
+    end
+
+    # Is the optional value valid?
+    def valid?
+      verify
     end
 
     # Check if the optional value is valid
@@ -1567,6 +1587,11 @@ void GeneratorRuby::GenerateFBEFieldModelArray()
       @_model
     end
 
+    # Is the array valid?
+    def valid?
+      verify
+    end
+
     # Check if the array is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
@@ -1706,6 +1731,11 @@ void GeneratorRuby::GenerateFBEFieldModelVector()
 
       @_model.fbe_offset = fbe_vector_offset + 4
       @_model
+    end
+
+    # Is the vector valid?
+    def valid?
+      verify
     end
 
     # Check if the vector is valid
@@ -1863,6 +1893,11 @@ void GeneratorRuby::GenerateFBEFieldModelSet()
 
       @_model.fbe_offset = fbe_set_offset + 4
       @_model
+    end
+
+    # Is the set valid?
+    def valid?
+      verify
     end
 
     # Check if the set value is valid
@@ -2032,6 +2067,11 @@ void GeneratorRuby::GenerateFBEFieldModelMap()
       [@_model_key, @_model_value]
     end
 
+    # Is the map valid?
+    def valid?
+      verify
+    end
+
     # Check if the map is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
@@ -2120,6 +2160,11 @@ void GeneratorRuby::GenerateFBEFinalModel()
         super(buffer, offset)
     end
 
+    # Is the value valid?
+    def valid?
+      verify
+    end
+
     # Check if the value is valid
     def verify
       raise NotImplementedError, "verify() method not implemented!"
@@ -2151,6 +2196,11 @@ void GeneratorRuby::GenerateFBEFinalModel(const std::string& name, const std::st
     # Get the final size
     def fbe_size
       _SIZE_
+    end
+
+    # Is the value valid?
+    def valid?
+      verify
     end
 
     # Check if the value is valid
@@ -2213,7 +2263,12 @@ void GeneratorRuby::GenerateFBEFinalModelDecimal()
       16
     end
 
-    # Check if the value is valid
+    # Is the decimal value valid?
+    def valid?
+      verify
+    end
+
+    # Check if the decimal value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return Integer::MAX
@@ -2222,7 +2277,7 @@ void GeneratorRuby::GenerateFBEFinalModelDecimal()
       fbe_size
     end
 
-    # Get the value
+    # Get the decimal value
     def get
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return [BigDecimal.new(0), 0]
@@ -2247,7 +2302,7 @@ void GeneratorRuby::GenerateFBEFinalModelDecimal()
       [result, fbe_size]
     end
 
-    # Set the value
+    # Set the decimal value
     def set(value)
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return 0
@@ -2319,6 +2374,11 @@ void GeneratorRuby::GenerateFBEFinalModelBytes()
       4 + value.length
     end
 
+    # Is the bytes value valid?
+    def valid?
+      verify
+    end
+
     # Check if the bytes value is valid
     def verify
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
@@ -2385,6 +2445,11 @@ void GeneratorRuby::GenerateFBEFinalModelString()
     # Get the allocation size
     def fbe_allocation_size(value)
       4 + 3 * (value.length + 1)
+    end
+
+    # Is the string value valid?
+    def valid?
+      verify
     end
 
     # Check if the string value is valid
@@ -2480,6 +2545,11 @@ void GeneratorRuby::GenerateFBEFinalModelOptional()
       @_model
     end
 
+    # Is the optional value valid?
+    def valid?
+      verify
+    end
+
     # Check if the optional value is valid
     def verify
       if (@_buffer.offset + fbe_offset + 1) > @_buffer.size
@@ -2557,6 +2627,11 @@ void GeneratorRuby::GenerateFBEFinalModelArray()
         size += @_model.fbe_allocation_size(values[i])
       end
       size
+    end
+
+    # Is the array valid?
+    def valid?
+      verify
     end
 
     # Check if the array is valid
@@ -2640,6 +2715,11 @@ void GeneratorRuby::GenerateFBEFinalModelVector()
         size += @_model.fbe_allocation_size(value)
       end
       size
+    end
+
+    # Is the vector valid?
+    def valid?
+      verify
     end
 
     # Check if the vector is valid
@@ -2734,6 +2814,11 @@ void GeneratorRuby::GenerateFBEFinalModelSet()
       size
     end
 
+    # Is the set valid?
+    def valid?
+      verify
+    end
+
     # Check if the set value is valid
     def verify
       if (@_buffer.offset + fbe_offset + 4) > @_buffer.size
@@ -2826,6 +2911,11 @@ void GeneratorRuby::GenerateFBEFinalModelMap()
         size += @_model_value.fbe_allocation_size(value)
       end
       size
+    end
+
+    # Is the map valid?
+    def valid?
+      verify
     end
 
     # Check if the map is valid
@@ -3597,6 +3687,11 @@ void GeneratorRuby::GenerateEnumFinalModel(const std::shared_ptr<EnumType>& e)
       _ENUM_SIZE_
     end
 
+    # Is the enum value valid?
+    def valid?
+      verify
+    end
+
     # Check if the value is valid
     def verify
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
@@ -3906,6 +4001,11 @@ void GeneratorRuby::GenerateFlagsFinalModel(const std::shared_ptr<FlagsType>& f)
     # Get the final size
     def fbe_size
       _FLAGS_SIZE_
+    end
+
+    # Is the flags value valid?
+    def valid?
+      verify
     end
 
     # Check if the value is valid
@@ -4444,6 +4544,13 @@ void GeneratorRuby::GenerateStructFieldModel(const std::shared_ptr<StructType>& 
 
     // Generate struct field model verify() method
     WriteLine();
+    WriteLineIndent("# Is the struct value valid?");
+    WriteLineIndent("def valid?");
+    Indent(1);
+    WriteLineIndent("verify");
+    Indent(-1);
+    WriteLineIndent("end");
+    WriteLine();
     WriteLineIndent("# Check if the struct value is valid");
     WriteLineIndent("def verify(fbe_verify_type = true)");
     Indent(1);
@@ -4749,6 +4856,13 @@ void GeneratorRuby::GenerateStructModel(const std::shared_ptr<StructType>& s)
 
     // Generate struct model verify() method
     WriteLine();
+    WriteLineIndent("# Is the struct value valid?");
+    WriteLineIndent("def valid?");
+    Indent(1);
+    WriteLineIndent("verify");
+    Indent(-1);
+    WriteLineIndent("end");
+    WriteLine();
     WriteLineIndent("# Check if the struct value is valid");
     WriteLineIndent("def verify");
     Indent(1);
@@ -4915,6 +5029,13 @@ void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& 
         WriteLineIndent("TYPE = " + std::to_string(s->type));
 
     // Generate struct final model verify() method
+    WriteLine();
+    WriteLineIndent("# Is the struct value valid?");
+    WriteLineIndent("def valid?");
+    Indent(1);
+    WriteLineIndent("verify");
+    Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
     WriteLineIndent("# Check if the struct value is valid");
     WriteLineIndent("def verify");
@@ -5100,6 +5221,13 @@ void GeneratorRuby::GenerateStructModelFinal(const std::shared_ptr<StructType>& 
     WriteLineIndent("TYPE = FinalModel" + struct_name + "::TYPE");
 
     // Generate struct model final verify() method
+    WriteLine();
+    WriteLineIndent("# Is the struct value valid?");
+    WriteLineIndent("def valid?");
+    Indent(1);
+    WriteLineIndent("verify");
+    Indent(-1);
+    WriteLineIndent("end");
     WriteLine();
     WriteLineIndent("# Check if the struct value is valid");
     WriteLineIndent("def verify");

@@ -899,7 +899,7 @@ void GeneratorCSharp::GenerateFBEFieldModelTimestamp()
         // Clone the field model
         public override FieldModelValueType<DateTime> Clone() { return new FieldModelTimestamp(_buffer, _offset); }
 
-        // Get the value
+        // Get the timestamp value
         public override void Get(out DateTime value) { Get(out value, new DateTime(UnixEpoch, DateTimeKind.Utc)); }
         public override void Get(out DateTime value, DateTime defaults)
         {
@@ -913,7 +913,7 @@ void GeneratorCSharp::GenerateFBEFieldModelTimestamp()
             value = new DateTime((long)(UnixEpoch + ticks), DateTimeKind.Utc);
         }
 
-        // Set the value
+        // Set the timestamp value
         public override void Set(DateTime value)
         {
             Debug.Assert(((_buffer.Offset + FBEOffset + FBESize) <= _buffer.Size), "Model is broken!");
@@ -2221,7 +2221,7 @@ void GeneratorCSharp::GenerateFBEFinalModelTimestamp()
             return FBESize;
         }
 
-        // Get the value
+        // Get the timestamp value
         public override long Get(out DateTime value)
         {
             if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
@@ -2235,7 +2235,7 @@ void GeneratorCSharp::GenerateFBEFinalModelTimestamp()
             return FBESize;
         }
 
-        // Set the value
+        // Set the timestamp value
         public override long Set(DateTime value)
         {
             Debug.Assert(((_buffer.Offset + FBEOffset + FBESize) <= _buffer.Size), "Model is broken!");

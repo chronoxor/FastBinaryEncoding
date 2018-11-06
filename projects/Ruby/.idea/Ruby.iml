@@ -10,6 +10,7 @@
     </content>
     <orderEntry type="jdk" jdkName="ruby-2.5.1-p57" jdkType="RUBY_SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="json (v2.1.0, ruby-2.5.1-p57) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="power_assert (v1.1.1, ruby-2.5.1-p57) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="test-unit (v3.2.7, ruby-2.5.1-p57) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="uuidtools (v2.1.5, ruby-2.5.1-p57) [gem]" level="application" />

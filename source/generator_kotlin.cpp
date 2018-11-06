@@ -840,7 +840,7 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     // Field size
     override val fbeSize: Long = 16
 
-    // Get the value
+    // Get the decimal value
     fun get(defaults: BigDecimal = BigDecimal.valueOf(0L)): BigDecimal
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -863,7 +863,7 @@ class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
         return BigDecimal(unscaled, scale)
     }
 
-    // Set the value
+    // Set the decimal value
     fun set(value: BigDecimal)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
@@ -949,7 +949,7 @@ class FieldModelTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, off
     // Field size
     override val fbeSize: Long = 8
 
-    // Get the value
+    // Get the timestamp value
     fun get(defaults: Instant = Instant.EPOCH): Instant
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -959,7 +959,7 @@ class FieldModelTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, off
         return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
     }
 
-    // Set the value
+    // Set the timestamp value
     fun set(value: Instant)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
@@ -2311,7 +2311,7 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     // Final size
     override val fbeSize: Long = 16
 
-    // Check if the value is valid
+    // Check if the decimal value is valid
     override fun verify(): Long
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -2320,7 +2320,7 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
         return fbeSize
     }
 
-    // Get the value
+    // Get the decimal value
     fun get(size: Size): BigDecimal
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -2344,7 +2344,7 @@ class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
         return BigDecimal(unscaled, scale)
     }
 
-    // Set the value
+    // Set the decimal value
     fun set(value: BigDecimal): Long
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
@@ -2435,7 +2435,7 @@ class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     // Final size
     override val fbeSize: Long = 8
 
-    // Check if the value is valid
+    // Check if the timestamp value is valid
     override fun verify(): Long
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -2444,7 +2444,7 @@ class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, off
         return fbeSize
     }
 
-    // Get the value
+    // Get the timestamp value
     fun get(size: Size): Instant
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -2455,7 +2455,7 @@ class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, off
         return Instant.ofEpochSecond(nanoseconds / 1000000000, nanoseconds % 1000000000)
     }
 
-    // Set the value
+    // Set the timestamp value
     fun set(value: Instant): Long
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
