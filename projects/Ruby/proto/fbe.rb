@@ -1591,7 +1591,7 @@ module FBE
 
     # Get the field extra size
     def fbe_extra
-      unless has_value
+      unless has_value?
         return 0
       end
 
@@ -1608,11 +1608,11 @@ module FBE
 
     # Checks whether the object contains a value
     def empty?
-      has_value
+      has_value?
     end
 
     # Checks whether the object contains a value
-    def has_value
+    def has_value?
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return false
       end
@@ -1655,7 +1655,7 @@ module FBE
 
     # Get the optional value (being phase)
     def get_begin
-      unless has_value
+      unless has_value?
         return 0
       end
 
@@ -3373,11 +3373,11 @@ module FBE
 
     # Checks whether the object contains a value
     def empty?
-      has_value
+      has_value?
     end
 
     # Checks whether the object contains a value
-    def has_value
+    def has_value?
       if (@_buffer.offset + fbe_offset + 1) > @_buffer.size
         return false
       end
@@ -3419,7 +3419,7 @@ module FBE
         return [nil, 0]
       end
 
-      unless has_value
+      unless has_value?
         return [nil, 1]
       end
 
@@ -3825,7 +3825,7 @@ module FBE
     end
 
     # Get the logging flag
-    def logging
+    def logging?
       @_logging
     end
 
@@ -3835,7 +3835,7 @@ module FBE
     end
 
     # Get the final protocol flag
-    def final
+    def final?
       @_final
     end
 
@@ -3889,7 +3889,7 @@ module FBE
     end
 
     # Get the logging flag
-    def logging
+    def logging?
       @_logging
     end
 
@@ -3899,7 +3899,7 @@ module FBE
     end
 
     # Get the final protocol flag
-    def final
+    def final?
       @_final
     end
 

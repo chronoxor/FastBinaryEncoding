@@ -18916,7 +18916,7 @@ module Test
       raise RuntimeError, "Test.StructSimple validation failed!" unless structsimple_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -18932,7 +18932,7 @@ module Test
       raise RuntimeError, "Test.StructOptional validation failed!" unless structoptional_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -18948,7 +18948,7 @@ module Test
       raise RuntimeError, "Test.StructNested validation failed!" unless structnested_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -18964,7 +18964,7 @@ module Test
       raise RuntimeError, "Test.StructBytes validation failed!" unless structbytes_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -18980,7 +18980,7 @@ module Test
       raise RuntimeError, "Test.StructArray validation failed!" unless structarray_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -18996,7 +18996,7 @@ module Test
       raise RuntimeError, "Test.StructVector validation failed!" unless structvector_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -19012,7 +19012,7 @@ module Test
       raise RuntimeError, "Test.StructList validation failed!" unless structlist_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -19028,7 +19028,7 @@ module Test
       raise RuntimeError, "Test.StructSet validation failed!" unless structset_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -19044,7 +19044,7 @@ module Test
       raise RuntimeError, "Test.StructMap validation failed!" unless structmap_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -19060,7 +19060,7 @@ module Test
       raise RuntimeError, "Test.StructHash validation failed!" unless structhash_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -19076,7 +19076,7 @@ module Test
       raise RuntimeError, "Test.StructHashEx validation failed!" unless structhashex_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -19191,7 +19191,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structsimple_value.to_s
           on_receive_log(message)
         end
@@ -19213,7 +19213,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structoptional_value.to_s
           on_receive_log(message)
         end
@@ -19235,7 +19235,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structnested_value.to_s
           on_receive_log(message)
         end
@@ -19257,7 +19257,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structbytes_value.to_s
           on_receive_log(message)
         end
@@ -19279,7 +19279,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structarray_value.to_s
           on_receive_log(message)
         end
@@ -19301,7 +19301,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structvector_value.to_s
           on_receive_log(message)
         end
@@ -19323,7 +19323,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structlist_value.to_s
           on_receive_log(message)
         end
@@ -19345,7 +19345,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structset_value.to_s
           on_receive_log(message)
         end
@@ -19367,7 +19367,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structmap_value.to_s
           on_receive_log(message)
         end
@@ -19389,7 +19389,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structhash_value.to_s
           on_receive_log(message)
         end
@@ -19411,7 +19411,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structhashex_value.to_s
           on_receive_log(message)
         end
@@ -19550,7 +19550,7 @@ module Test
       raise RuntimeError, "Test.StructSimple validation failed!" unless structsimple_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -19566,7 +19566,7 @@ module Test
       raise RuntimeError, "Test.StructOptional validation failed!" unless structoptional_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -19582,7 +19582,7 @@ module Test
       raise RuntimeError, "Test.StructNested validation failed!" unless structnested_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -19598,7 +19598,7 @@ module Test
       raise RuntimeError, "Test.StructBytes validation failed!" unless structbytes_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -19614,7 +19614,7 @@ module Test
       raise RuntimeError, "Test.StructArray validation failed!" unless structarray_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -19630,7 +19630,7 @@ module Test
       raise RuntimeError, "Test.StructVector validation failed!" unless structvector_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -19646,7 +19646,7 @@ module Test
       raise RuntimeError, "Test.StructList validation failed!" unless structlist_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -19662,7 +19662,7 @@ module Test
       raise RuntimeError, "Test.StructSet validation failed!" unless structset_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -19678,7 +19678,7 @@ module Test
       raise RuntimeError, "Test.StructMap validation failed!" unless structmap_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -19694,7 +19694,7 @@ module Test
       raise RuntimeError, "Test.StructHash validation failed!" unless structhash_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -19710,7 +19710,7 @@ module Test
       raise RuntimeError, "Test.StructHashEx validation failed!" unless structhashex_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -19825,7 +19825,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structsimple_value.to_s
           on_receive_log(message)
         end
@@ -19847,7 +19847,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structoptional_value.to_s
           on_receive_log(message)
         end
@@ -19869,7 +19869,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structnested_value.to_s
           on_receive_log(message)
         end
@@ -19891,7 +19891,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structbytes_value.to_s
           on_receive_log(message)
         end
@@ -19913,7 +19913,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structarray_value.to_s
           on_receive_log(message)
         end
@@ -19935,7 +19935,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structvector_value.to_s
           on_receive_log(message)
         end
@@ -19957,7 +19957,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structlist_value.to_s
           on_receive_log(message)
         end
@@ -19979,7 +19979,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structset_value.to_s
           on_receive_log(message)
         end
@@ -20001,7 +20001,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structmap_value.to_s
           on_receive_log(message)
         end
@@ -20023,7 +20023,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structhash_value.to_s
           on_receive_log(message)
         end
@@ -20045,7 +20045,7 @@ module Test
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_structhashex_value.to_s
           on_receive_log(message)
         end

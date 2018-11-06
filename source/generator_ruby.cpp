@@ -1410,7 +1410,7 @@ void GeneratorRuby::GenerateFBEFieldModelOptional()
 
     # Get the field extra size
     def fbe_extra
-      unless has_value
+      unless has_value?
         return 0
       end
 
@@ -1427,11 +1427,11 @@ void GeneratorRuby::GenerateFBEFieldModelOptional()
 
     # Checks whether the object contains a value
     def empty?
-      has_value
+      has_value?
     end
 
     # Checks whether the object contains a value
-    def has_value
+    def has_value?
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return false
       end
@@ -1474,7 +1474,7 @@ void GeneratorRuby::GenerateFBEFieldModelOptional()
 
     # Get the optional value (being phase)
     def get_begin
-      unless has_value
+      unless has_value?
         return 0
       end
 
@@ -2531,11 +2531,11 @@ void GeneratorRuby::GenerateFBEFinalModelOptional()
 
     # Checks whether the object contains a value
     def empty?
-      has_value
+      has_value?
     end
 
     # Checks whether the object contains a value
-    def has_value
+    def has_value?
       if (@_buffer.offset + fbe_offset + 1) > @_buffer.size
         return false
       end
@@ -2577,7 +2577,7 @@ void GeneratorRuby::GenerateFBEFinalModelOptional()
         return [nil, 0]
       end
 
-      unless has_value
+      unless has_value?
         return [nil, 1]
       end
 
@@ -3033,7 +3033,7 @@ void GeneratorRuby::GenerateFBESender()
     end
 
     # Get the logging flag
-    def logging
+    def logging?
       @_logging
     end
 
@@ -3043,7 +3043,7 @@ void GeneratorRuby::GenerateFBESender()
     end
 
     # Get the final protocol flag
-    def final
+    def final?
       @_final
     end
 
@@ -3107,7 +3107,7 @@ void GeneratorRuby::GenerateFBEReceiver()
     end
 
     # Get the logging flag
-    def logging
+    def logging?
       @_logging
     end
 
@@ -3117,7 +3117,7 @@ void GeneratorRuby::GenerateFBEReceiver()
     end
 
     # Get the final protocol flag
-    def final
+    def final?
       @_final
     end
 
@@ -5431,7 +5431,7 @@ void GeneratorRuby::GenerateSender(const std::shared_ptr<Package>& p, bool final
             WriteLineIndent("raise RuntimeError, \"" + package + "." + ConvertTitle(*s->name) + " validation failed!\" unless " + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify");
             WriteLine();
             WriteLineIndent("# Log the value");
-            WriteLineIndent("if logging");
+            WriteLineIndent("if logging?");
             Indent(1);
             WriteLineIndent("message = value.to_s");
             WriteLineIndent("on_send_log(message)");
@@ -5560,7 +5560,7 @@ void GeneratorRuby::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
             WriteLineIndent("end");
             WriteLine();
             WriteLineIndent("# Log the value");
-            WriteLineIndent("if logging");
+            WriteLineIndent("if logging?");
             Indent(1);
             WriteLineIndent("message = @_" + CppCommon::StringUtils::ToLower(*s->name) + "_value.to_s");
             WriteLineIndent("on_receive_log(message)");

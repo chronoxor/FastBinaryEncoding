@@ -15,7 +15,7 @@
     <SUITE FILE_PATH="coverage/Python$benchmark_serialization.coverage" NAME="benchmark_serialization Coverage Results" MODIFIED="1539984262439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" />
     <SUITE FILE_PATH="coverage/Python$Unittests_in_test_serialization_py.coverage" NAME="Unittests in test_serialization.py Coverage Results" MODIFIED="1539802210026" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Python$create.coverage" NAME="create Coverage Results" MODIFIED="1538171870770" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
-    <SUITE FILE_PATH="coverage/Python$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1539976185210" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Python$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1541544002122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Python$print_json.coverage" NAME="print_json Coverage Results" MODIFIED="1539797254122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/Python$print.coverage" NAME="print Coverage Results" MODIFIED="1539814597693" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/Python$Unittests_in_test_decimal_py.coverage" NAME="Unittests in test_decimal.py Coverage Results" MODIFIED="1539652256057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
@@ -27,24 +27,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
               <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_extending.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/test_extending.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="99" selection-start-line="99" selection-end-line="99" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test_enums.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tests/test_enums.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1870">
-              <caret line="208" lean-forward="true" selection-start-line="208" selection-end-line="208" />
             </state>
           </provider>
         </entry>
@@ -139,8 +121,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="520" />
-    <option name="y" value="306" />
+    <option name="x" value="1033" />
+    <option name="y" value="545" />
     <option name="width" value="1534" />
     <option name="height" value="1022" />
   </component>
@@ -200,7 +182,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.benchmark_send_receive">
+  <component name="RunManager" selected="Python tests.Unittests in tests">
     <configuration name="benchmark_send_receive" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Python" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -295,9 +277,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Unittests in tests" />
         <item itemvalue="Python.benchmark_send_receive" />
         <item itemvalue="Python.benchmark_serialization" />
-        <item itemvalue="Python tests.Unittests in tests" />
         <item itemvalue="Python tests.Unittests in test_clone.py" />
         <item itemvalue="Python.print" />
       </list>
@@ -344,28 +326,21 @@
     <history-entry file="Unittests_in_tests - 2018.10.19 at 22h 09m 46s.xml">
       <configuration name="Unittests in tests" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.10.19 at 18h 37m 59s.xml">
+    <history-entry file="Unittests_in_tests - 2018.11.07 at 01h 40m 04s.xml">
       <configuration name="Unittests in tests" configurationId="tests" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="520" y="306" width="1534" height="1022" extended-state="0" />
-    <editor active="true" />
+    <frame x="1033" y="545" width="1534" height="1022" extended-state="0" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-<<<<<<< HEAD
-      <window_info anchor="bottom" id="Run" order="2" weight="0.40256044" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.40369087" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24830393" />
-=======
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.40369087" />
-      <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2449118" />
->>>>>>> e9529144b69baf2458f988d0302a4c4f70fa47b3
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2449118" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
@@ -600,6 +575,20 @@
     <entry file="file://$PROJECT_DIR$/tests/test_send_seceive.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_extending.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="99" selection-start-line="99" selection-end-line="99" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_enums.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_decimal.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -749,20 +738,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="350">
           <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_extending.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="99" selection-start-line="99" selection-end-line="99" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_enums.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1870">
-          <caret line="208" lean-forward="true" selection-start-line="208" selection-end-line="208" />
         </state>
       </provider>
     </entry>

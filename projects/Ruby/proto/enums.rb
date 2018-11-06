@@ -6721,7 +6721,7 @@ module Enums
       raise RuntimeError, "Enums.Enums validation failed!" unless enums_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -6765,7 +6765,7 @@ module Enums
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_enums_value.to_s
           on_receive_log(message)
         end
@@ -6809,7 +6809,7 @@ module Enums
       raise RuntimeError, "Enums.Enums validation failed!" unless enums_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -6853,7 +6853,7 @@ module Enums
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_enums_value.to_s
           on_receive_log(message)
         end

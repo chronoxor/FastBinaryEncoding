@@ -47,8 +47,8 @@
       <file leaf-file-name="benchmark_serialization.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_serialization.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="33" column="13" lean-forward="true" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+            <state relative-caret-position="104">
+              <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -85,8 +85,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="680" />
-    <option name="y" value="469" />
+    <option name="x" value="899" />
+    <option name="y" value="668" />
     <option name="width" value="1318" />
     <option name="height" value="773" />
   </component>
@@ -208,16 +208,15 @@
       <workItem from="1538703111323" duration="96000" />
       <workItem from="1539796825868" duration="136000" />
       <workItem from="1539797118671" duration="63000" />
-      <workItem from="1539798043102" duration="1916000" />
+      <workItem from="1539798043102" duration="2588000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6039000" />
+    <option name="totallyTimeSpent" value="6711000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="680" y="469" width="1318" height="773" extended-state="0" />
-    <editor active="true" />
+    <frame x="899" y="668" width="1318" height="773" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6043956" visible="true" weight="0.3859375" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -602,8 +601,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_serialization.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="33" column="13" lean-forward="true" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+        <state relative-caret-position="104">
+          <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
         </state>
       </provider>
     </entry>

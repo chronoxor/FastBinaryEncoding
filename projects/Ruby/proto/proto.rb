@@ -3011,7 +3011,7 @@ module Proto
       raise RuntimeError, "Proto.Order validation failed!" unless order_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -3027,7 +3027,7 @@ module Proto
       raise RuntimeError, "Proto.Balance validation failed!" unless balance_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -3043,7 +3043,7 @@ module Proto
       raise RuntimeError, "Proto.Account validation failed!" unless account_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -3099,7 +3099,7 @@ module Proto
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_order_value.to_s
           on_receive_log(message)
         end
@@ -3121,7 +3121,7 @@ module Proto
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_balance_value.to_s
           on_receive_log(message)
         end
@@ -3143,7 +3143,7 @@ module Proto
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_account_value.to_s
           on_receive_log(message)
         end
@@ -3203,7 +3203,7 @@ module Proto
       raise RuntimeError, "Proto.Order validation failed!" unless order_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -3219,7 +3219,7 @@ module Proto
       raise RuntimeError, "Proto.Balance validation failed!" unless balance_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -3235,7 +3235,7 @@ module Proto
       raise RuntimeError, "Proto.Account validation failed!" unless account_model.verify
 
       # Log the value
-      if logging
+      if logging?
         message = value.to_s
         on_send_log(message)
       end
@@ -3291,7 +3291,7 @@ module Proto
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_order_value.to_s
           on_receive_log(message)
         end
@@ -3313,7 +3313,7 @@ module Proto
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_balance_value.to_s
           on_receive_log(message)
         end
@@ -3335,7 +3335,7 @@ module Proto
         end
 
         # Log the value
-        if logging
+        if logging?
           message = @_account_value.to_s
           on_receive_log(message)
         end

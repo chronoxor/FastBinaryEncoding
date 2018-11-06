@@ -81,7 +81,7 @@ class TestCreate < Test::Unit::TestCase
     assert_equal(wallet_amount, 1000.0)
     reader.model.wallet.get_end(wallet_begin)
 
-    assert_true(reader.model.asset.has_value)
+    assert_true(reader.model.asset.has_value?)
     asset_begin = reader.model.asset.get_begin
     asset_wallet_begin = reader.model.asset.value.get_begin
     asset_wallet_currency = reader.model.asset.value.currency.get
