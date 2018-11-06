@@ -16,7 +16,7 @@ namespace FBE {
 class GeneratorCpp : public Generator
 {
 public:
-    GeneratorCpp(const std::string& output, int indent, char space);
+    GeneratorCpp(const std::string& input, const std::string& output, int indent, char space);
 
     // Final protocol code generation
     bool Final() const noexcept { return _final; }

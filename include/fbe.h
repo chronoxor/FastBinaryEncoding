@@ -9,6 +9,8 @@
 #ifndef FBE_H
 #define FBE_H
 
+#include "version.h"
+
 #include "filesystem/directory.h"
 #include "filesystem/file.h"
 #include "string/string_utils.h"

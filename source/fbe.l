@@ -166,7 +166,7 @@ extern int yyparse();
 
 int main(int argc, char** argv)
 {
-    auto parser = optparse::OptionParser().version("1.1.0.0");
+    auto parser = optparse::OptionParser().version(FBE::version);
 
     parser.add_option("-h", "--help").help("Show help");
     parser.add_option("-i", "--input").help("Input path");
@@ -267,43 +267,43 @@ int main(int argc, char** argv)
     if (cpp)
     {
         if (!quiet) std::cout << "Generating C++ code...";
-        FBE::GeneratorCpp(output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
+        FBE::GeneratorCpp(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (csharp)
     {
         if (!quiet) std::cout << "Generating C# code...";
-        FBE::GeneratorCSharp(output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
+        FBE::GeneratorCSharp(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (java)
     {
         if (!quiet) std::cout << "Generating Java code...";
-        FBE::GeneratorJava(output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
+        FBE::GeneratorJava(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (javascript)
     {
         if (!quiet) std::cout << "Generating JavaScript code...";
-        FBE::GeneratorJavaScript(output, (indent ? indent : 2), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
+        FBE::GeneratorJavaScript(input, output, (indent ? indent : 2), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (kotlin)
     {
         if (!quiet) std::cout << "Generating Kotlin code...";
-        FBE::GeneratorKotlin(output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
+        FBE::GeneratorKotlin(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (python)
     {
         if (!quiet) std::cout << "Generating Python code...";
-        FBE::GeneratorPython(output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
+        FBE::GeneratorPython(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (ruby)
     {
         if (!quiet) std::cout << "Generating Ruby code...";
-        FBE::GeneratorRuby(output, (indent ? indent : 2), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
+        FBE::GeneratorRuby(input, output, (indent ? indent : 2), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
 

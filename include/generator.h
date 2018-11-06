@@ -16,12 +16,13 @@ namespace FBE {
 class Generator
 {
 public:
-    Generator(const std::string& output, int indent, char space);
+    Generator(const std::string& input, const std::string& output, int indent, char space);
 
     virtual void Generate(const std::shared_ptr<Package>& package) = 0;
 
 protected:
     CppCommon::File _file;
+    std::string _input;
     std::string _output;
     int _cursor;
     int _indent;

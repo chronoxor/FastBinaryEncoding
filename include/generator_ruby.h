@@ -16,7 +16,7 @@ namespace FBE {
 class GeneratorRuby : public Generator
 {
 public:
-    GeneratorRuby(const std::string& output, int indent, char space);
+    GeneratorRuby(const std::string& input, const std::string& output, int indent, char space);
 
     // Final protocol code generation
     bool Final() const noexcept { return _final; }

@@ -16,7 +16,7 @@ namespace FBE {
 class GeneratorJava : public Generator
 {
 public:
-    GeneratorJava(const std::string& output, int indent, char space);
+    GeneratorJava(const std::string& input, const std::string& output, int indent, char space);
 
     // Final protocol code generation
     bool Final() const noexcept { return _final; }

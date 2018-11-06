@@ -8,8 +8,8 @@
 
 namespace FBE {
 
-inline GeneratorRuby::GeneratorRuby(const std::string& output, int indent, char space)
-    : Generator(output, indent, space), _final(false), _json(false), _sender(false)
+inline GeneratorRuby::GeneratorRuby(const std::string& input, const std::string& output, int indent, char space)
+    : Generator(input, output, indent, space), _final(false), _json(false), _sender(false)
 {
 }
 

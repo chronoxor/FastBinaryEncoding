@@ -16,7 +16,7 @@ namespace FBE {
 class GeneratorPython : public Generator
 {
 public:
-    GeneratorPython(const std::string& output, int indent, char space);
+    GeneratorPython(const std::string& input, const std::string& output, int indent, char space);
 
     // Final protocol code generation
     bool Final() const noexcept { return _final; }

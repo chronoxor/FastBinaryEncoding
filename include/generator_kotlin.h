@@ -16,7 +16,7 @@ namespace FBE {
 class GeneratorKotlin : public Generator
 {
 public:
-    GeneratorKotlin(const std::string& output, int indent, char space);
+    GeneratorKotlin(const std::string& input, const std::string& output, int indent, char space);
 
     // Final protocol code generation
     bool Final() const noexcept { return _final; }
