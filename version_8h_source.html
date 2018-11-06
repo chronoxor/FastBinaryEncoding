@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.6"/>
-<title>FastBinaryEncoding: include/generator_javascript.inl Source File</title>
+<title>FastBinaryEncoding: include/version.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -87,20 +87,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">generator_javascript.inl</div>  </div>
+<div class="title">version.h</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="generator__javascript_8inl.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span>FBE {</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="class_f_b_e_1_1_generator_java_script.html#a8f48c8a4cd7fd1b1bf88fa45c37eb4e1">   11</a></span>&#160;<span class="keyword">inline</span> <a class="code" href="class_f_b_e_1_1_generator_java_script.html#a8f48c8a4cd7fd1b1bf88fa45c37eb4e1">GeneratorJavaScript::GeneratorJavaScript</a>(<span class="keyword">const</span> std::string&amp; input, <span class="keyword">const</span> std::string&amp; output, <span class="keywordtype">int</span> indent, <span class="keywordtype">char</span> space)</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    : <a class="code" href="class_f_b_e_1_1_generator.html">Generator</a>(input, output, indent, space), _final(false), _json(false), _sender(false)</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;}</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;} <span class="comment">// namespace FBE</span></div>
-<div class="ttc" id="class_f_b_e_1_1_generator_html"><div class="ttname"><a href="class_f_b_e_1_1_generator.html">FBE::Generator</a></div><div class="ttdef"><b>Definition:</b> <a href="generator_8h_source.html#l00016">generator.h:16</a></div></div>
-<div class="ttc" id="class_f_b_e_1_1_generator_java_script_html_a8f48c8a4cd7fd1b1bf88fa45c37eb4e1"><div class="ttname"><a href="class_f_b_e_1_1_generator_java_script.html#a8f48c8a4cd7fd1b1bf88fa45c37eb4e1">FBE::GeneratorJavaScript::GeneratorJavaScript</a></div><div class="ttdeci">GeneratorJavaScript(const std::string &amp;input, const std::string &amp;output, int indent, char space)</div><div class="ttdef"><b>Definition:</b> <a href="generator__javascript_8inl_source.html#l00011">generator_javascript.inl:11</a></div></div>
+<a href="version_8h.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifndef VERSION_H</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define VERSION_H</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace </span>FBE {</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">// Fast binary encoding version</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="namespace_f_b_e.html#a29df7c46e2e10cb83211c546a25484de">   15</a></span>&#160;<span class="keyword">const</span> <span class="keywordtype">char</span> <a class="code" href="namespace_f_b_e.html#a29df7c46e2e10cb83211c546a25484de">version</a>[] = <span class="stringliteral">&quot;1.1.0.0&quot;</span>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;} <span class="comment">// namespace FBE</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor">#endif // VERSION_H</span></div>
+<div class="ttc" id="namespace_f_b_e_html_a29df7c46e2e10cb83211c546a25484de"><div class="ttname"><a href="namespace_f_b_e.html#a29df7c46e2e10cb83211c546a25484de">FBE::version</a></div><div class="ttdeci">const char version[]</div><div class="ttdef"><b>Definition:</b> <a href="version_8h_source.html#l00015">version.h:15</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
