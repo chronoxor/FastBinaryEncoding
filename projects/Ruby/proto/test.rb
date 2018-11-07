@@ -887,6 +887,8 @@ module Test
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructSimple
+    include Comparable
+
     attr_accessor :uid
     attr_accessor :f1
     attr_accessor :f2
@@ -1045,7 +1047,7 @@ module Test
 
     # Struct compare operators
     def <=>(other)
-      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructSimple)
+      return nil unless other.is_a?(StructSimple)
 
       # noinspection RubyUnusedLocalVariable
       result = 0
@@ -1056,13 +1058,6 @@ module Test
       # noinspection RubyUnnecessaryReturnValue
       result
     end
-
-    def ==(other) (self <=> other) == 0 end
-    def !=(other) (self <=> other) != 0 end
-    def  <(other) (self <=> other)  < 0 end
-    def  >(other) (self <=> other)  > 0 end
-    def <=(other) (self <=> other) <= 0 end
-    def >=(other) (self <=> other) >= 0 end
 
     # Struct equals
     def eql?(other)
@@ -4304,6 +4299,8 @@ module Test
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructOptional < StructSimple
+    include Comparable
+
     attr_accessor :f100
     attr_accessor :f101
     attr_accessor :f102
@@ -4527,7 +4524,7 @@ module Test
 
     # Struct compare operators
     def <=>(other)
-      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructOptional)
+      return nil unless other.is_a?(StructOptional)
 
       # noinspection RubyUnusedLocalVariable
       result = 0
@@ -4538,13 +4535,6 @@ module Test
       # noinspection RubyUnnecessaryReturnValue
       result
     end
-
-    def ==(other) (self <=> other) == 0 end
-    def !=(other) (self <=> other) != 0 end
-    def  <(other) (self <=> other)  < 0 end
-    def  >(other) (self <=> other)  > 0 end
-    def <=(other) (self <=> other) <= 0 end
-    def >=(other) (self <=> other) >= 0 end
 
     # Struct equals
     def eql?(other)
@@ -9139,6 +9129,8 @@ module Test
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructNested < StructOptional
+    include Comparable
+
     attr_accessor :f1000
     attr_accessor :f1001
     attr_accessor :f1002
@@ -9200,7 +9192,7 @@ module Test
 
     # Struct compare operators
     def <=>(other)
-      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructNested)
+      return nil unless other.is_a?(StructNested)
 
       # noinspection RubyUnusedLocalVariable
       result = 0
@@ -9211,13 +9203,6 @@ module Test
       # noinspection RubyUnnecessaryReturnValue
       result
     end
-
-    def ==(other) (self <=> other) == 0 end
-    def !=(other) (self <=> other) != 0 end
-    def  <(other) (self <=> other)  < 0 end
-    def  >(other) (self <=> other)  > 0 end
-    def <=(other) (self <=> other) <= 0 end
-    def >=(other) (self <=> other) >= 0 end
 
     # Struct equals
     def eql?(other)
@@ -10464,6 +10449,8 @@ module Test
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructBytes
+    include Comparable
+
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -10496,20 +10483,13 @@ module Test
 
     # Struct compare operators
     def <=>(other)
-      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructBytes)
+      return nil unless other.is_a?(StructBytes)
 
       # noinspection RubyUnusedLocalVariable
       result = 0
       # noinspection RubyUnnecessaryReturnValue
       result
     end
-
-    def ==(other) (self <=> other) == 0 end
-    def !=(other) (self <=> other) != 0 end
-    def  <(other) (self <=> other)  < 0 end
-    def  >(other) (self <=> other)  > 0 end
-    def <=(other) (self <=> other) <= 0 end
-    def >=(other) (self <=> other) >= 0 end
 
     # Struct equals
     def eql?(other)
@@ -11146,6 +11126,8 @@ module Test
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructArray
+    include Comparable
+
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -11199,20 +11181,13 @@ module Test
 
     # Struct compare operators
     def <=>(other)
-      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructArray)
+      return nil unless other.is_a?(StructArray)
 
       # noinspection RubyUnusedLocalVariable
       result = 0
       # noinspection RubyUnnecessaryReturnValue
       result
     end
-
-    def ==(other) (self <=> other) == 0 end
-    def !=(other) (self <=> other) != 0 end
-    def  <(other) (self <=> other)  < 0 end
-    def  >(other) (self <=> other)  > 0 end
-    def <=(other) (self <=> other) <= 0 end
-    def >=(other) (self <=> other) >= 0 end
 
     # Struct equals
     def eql?(other)
@@ -12363,6 +12338,8 @@ module Test
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructVector
+    include Comparable
+
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -12416,20 +12393,13 @@ module Test
 
     # Struct compare operators
     def <=>(other)
-      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructVector)
+      return nil unless other.is_a?(StructVector)
 
       # noinspection RubyUnusedLocalVariable
       result = 0
       # noinspection RubyUnnecessaryReturnValue
       result
     end
-
-    def ==(other) (self <=> other) == 0 end
-    def !=(other) (self <=> other) != 0 end
-    def  <(other) (self <=> other)  < 0 end
-    def  >(other) (self <=> other)  > 0 end
-    def <=(other) (self <=> other) <= 0 end
-    def >=(other) (self <=> other) >= 0 end
 
     # Struct equals
     def eql?(other)
@@ -13580,6 +13550,8 @@ module Test
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructList
+    include Comparable
+
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -13633,20 +13605,13 @@ module Test
 
     # Struct compare operators
     def <=>(other)
-      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructList)
+      return nil unless other.is_a?(StructList)
 
       # noinspection RubyUnusedLocalVariable
       result = 0
       # noinspection RubyUnnecessaryReturnValue
       result
     end
-
-    def ==(other) (self <=> other) == 0 end
-    def !=(other) (self <=> other) != 0 end
-    def  <(other) (self <=> other)  < 0 end
-    def  >(other) (self <=> other)  > 0 end
-    def <=(other) (self <=> other) <= 0 end
-    def >=(other) (self <=> other) >= 0 end
 
     # Struct equals
     def eql?(other)
@@ -14797,6 +14762,8 @@ module Test
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructSet
+    include Comparable
+
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -14832,20 +14799,13 @@ module Test
 
     # Struct compare operators
     def <=>(other)
-      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructSet)
+      return nil unless other.is_a?(StructSet)
 
       # noinspection RubyUnusedLocalVariable
       result = 0
       # noinspection RubyUnnecessaryReturnValue
       result
     end
-
-    def ==(other) (self <=> other) == 0 end
-    def !=(other) (self <=> other) != 0 end
-    def  <(other) (self <=> other)  < 0 end
-    def  >(other) (self <=> other)  > 0 end
-    def <=(other) (self <=> other) <= 0 end
-    def >=(other) (self <=> other) >= 0 end
 
     # Struct equals
     def eql?(other)
@@ -15576,6 +15536,8 @@ module Test
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructMap
+    include Comparable
+
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -15629,20 +15591,13 @@ module Test
 
     # Struct compare operators
     def <=>(other)
-      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructMap)
+      return nil unless other.is_a?(StructMap)
 
       # noinspection RubyUnusedLocalVariable
       result = 0
       # noinspection RubyUnnecessaryReturnValue
       result
     end
-
-    def ==(other) (self <=> other) == 0 end
-    def !=(other) (self <=> other) != 0 end
-    def  <(other) (self <=> other)  < 0 end
-    def  >(other) (self <=> other)  > 0 end
-    def <=(other) (self <=> other) <= 0 end
-    def >=(other) (self <=> other) >= 0 end
 
     # Struct equals
     def eql?(other)
@@ -16863,6 +16818,8 @@ module Test
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructHash
+    include Comparable
+
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -16916,20 +16873,13 @@ module Test
 
     # Struct compare operators
     def <=>(other)
-      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructHash)
+      return nil unless other.is_a?(StructHash)
 
       # noinspection RubyUnusedLocalVariable
       result = 0
       # noinspection RubyUnnecessaryReturnValue
       result
     end
-
-    def ==(other) (self <=> other) == 0 end
-    def !=(other) (self <=> other) != 0 end
-    def  <(other) (self <=> other)  < 0 end
-    def  >(other) (self <=> other)  > 0 end
-    def <=(other) (self <=> other) <= 0 end
-    def >=(other) (self <=> other) >= 0 end
 
     # Struct equals
     def eql?(other)
@@ -18150,6 +18100,8 @@ module Test
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class StructHashEx
+    include Comparable
+
     attr_accessor :f1
     attr_accessor :f2
 
@@ -18179,20 +18131,13 @@ module Test
 
     # Struct compare operators
     def <=>(other)
-      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(StructHashEx)
+      return nil unless other.is_a?(StructHashEx)
 
       # noinspection RubyUnusedLocalVariable
       result = 0
       # noinspection RubyUnnecessaryReturnValue
       result
     end
-
-    def ==(other) (self <=> other) == 0 end
-    def !=(other) (self <=> other) != 0 end
-    def  <(other) (self <=> other)  < 0 end
-    def  >(other) (self <=> other)  > 0 end
-    def <=(other) (self <=> other) <= 0 end
-    def >=(other) (self <=> other) >= 0 end
 
     # Struct equals
     def eql?(other)

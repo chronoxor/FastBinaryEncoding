@@ -4068,10 +4068,16 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
         WriteLineIndent("class " + struct_name);
     Indent(1);
 
+    // Generate struct include
+    WriteLineIndent("include Comparable");
+
     // Generate struct accessors
     if (s->body)
+    {
+        WriteLine();
         for (const auto& field : s->body->fields)
             WriteLineIndent("attr_accessor :" + *field->name);
+    }
 
     // Generate struct constructor
     WriteLine();
@@ -4141,7 +4147,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
     WriteLineIndent("# Struct compare operators");
     WriteLineIndent("def <=>(other)");
     Indent(1);
-    WriteLineIndent("raise NotImplementedError, \"Cannot compare structs of different types!\" unless other.is_a?(" + struct_name + ")");
+    WriteLineIndent("return nil unless other.is_a?(" + struct_name + ")");
     WriteLine();
     WriteLineIndent("# noinspection RubyUnusedLocalVariable");
     WriteLineIndent("result = 0");
@@ -4173,13 +4179,6 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
     WriteLineIndent("result");
     Indent(-1);
     WriteLineIndent("end");
-    WriteLine();
-    WriteLineIndent("def ==(other) (self <=> other) == 0 end");
-    WriteLineIndent("def !=(other) (self <=> other) != 0 end");
-    WriteLineIndent("def  <(other) (self <=> other)  < 0 end");
-    WriteLineIndent("def  >(other) (self <=> other)  > 0 end");
-    WriteLineIndent("def <=(other) (self <=> other) <= 0 end");
-    WriteLineIndent("def >=(other) (self <=> other) >= 0 end");
 
     // Generate struct hash & equals methods
     WriteLine();

@@ -573,6 +573,8 @@ module Proto
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Order
+    include Comparable
+
     attr_accessor :uid
     attr_accessor :symbol
     attr_accessor :side
@@ -614,7 +616,7 @@ module Proto
 
     # Struct compare operators
     def <=>(other)
-      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(Order)
+      return nil unless other.is_a?(Order)
 
       # noinspection RubyUnusedLocalVariable
       result = 0
@@ -625,13 +627,6 @@ module Proto
       # noinspection RubyUnnecessaryReturnValue
       result
     end
-
-    def ==(other) (self <=> other) == 0 end
-    def !=(other) (self <=> other) != 0 end
-    def  <(other) (self <=> other)  < 0 end
-    def  >(other) (self <=> other)  > 0 end
-    def <=(other) (self <=> other) <= 0 end
-    def >=(other) (self <=> other) >= 0 end
 
     # Struct equals
     def eql?(other)
@@ -1455,6 +1450,8 @@ module Proto
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Balance
+    include Comparable
+
     attr_accessor :currency
     attr_accessor :amount
 
@@ -1484,7 +1481,7 @@ module Proto
 
     # Struct compare operators
     def <=>(other)
-      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(Balance)
+      return nil unless other.is_a?(Balance)
 
       # noinspection RubyUnusedLocalVariable
       result = 0
@@ -1495,13 +1492,6 @@ module Proto
       # noinspection RubyUnnecessaryReturnValue
       result
     end
-
-    def ==(other) (self <=> other) == 0 end
-    def !=(other) (self <=> other) != 0 end
-    def  <(other) (self <=> other)  < 0 end
-    def  >(other) (self <=> other)  > 0 end
-    def <=(other) (self <=> other) <= 0 end
-    def >=(other) (self <=> other) >= 0 end
 
     # Struct equals
     def eql?(other)
@@ -2077,6 +2067,8 @@ module Proto
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Account
+    include Comparable
+
     attr_accessor :uid
     attr_accessor :name
     attr_accessor :state
@@ -2118,7 +2110,7 @@ module Proto
 
     # Struct compare operators
     def <=>(other)
-      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(Account)
+      return nil unless other.is_a?(Account)
 
       # noinspection RubyUnusedLocalVariable
       result = 0
@@ -2129,13 +2121,6 @@ module Proto
       # noinspection RubyUnnecessaryReturnValue
       result
     end
-
-    def ==(other) (self <=> other) == 0 end
-    def !=(other) (self <=> other) != 0 end
-    def  <(other) (self <=> other)  < 0 end
-    def  >(other) (self <=> other)  > 0 end
-    def <=(other) (self <=> other) <= 0 end
-    def >=(other) (self <=> other) >= 0 end
 
     # Struct equals
     def eql?(other)

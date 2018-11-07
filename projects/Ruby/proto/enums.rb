@@ -1916,6 +1916,8 @@ module Enums
 
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Enums
+    include Comparable
+
     attr_accessor :byte0
     attr_accessor :byte1
     attr_accessor :byte2
@@ -2137,20 +2139,13 @@ module Enums
 
     # Struct compare operators
     def <=>(other)
-      raise NotImplementedError, "Cannot compare structs of different types!" unless other.is_a?(Enums)
+      return nil unless other.is_a?(Enums)
 
       # noinspection RubyUnusedLocalVariable
       result = 0
       # noinspection RubyUnnecessaryReturnValue
       result
     end
-
-    def ==(other) (self <=> other) == 0 end
-    def !=(other) (self <=> other) != 0 end
-    def  <(other) (self <=> other)  < 0 end
-    def  >(other) (self <=> other)  > 0 end
-    def <=(other) (self <=> other) <= 0 end
-    def >=(other) (self <=> other) >= 0 end
 
     # Struct equals
     def eql?(other)
