@@ -6769,7 +6769,7 @@ module Enums
         on_receive_enums(@_enums_value)
         true
       else
-        raise ArgumentError, "Unknown FBE type - #{fbe_type}"
+        # Do nothing here...
       end
 
       false
@@ -6859,7 +6859,7 @@ module Enums
         on_receive_enums(@_enums_value)
         true
       else
-        raise ArgumentError, "Unknown FBE type - #{fbe_type}"
+        # Do nothing here...
       end
 
       false

@@ -19345,7 +19345,7 @@ module Test
         on_receive_structhashex(@_structhashex_value)
         true
       else
-        raise ArgumentError, "Unknown FBE type - #{fbe_type}"
+        # Do nothing here...
       end
 
       if !proto_receiver.nil? && proto_receiver.on_receive(type, buffer, offset, size)
@@ -19961,7 +19961,7 @@ module Test
         on_receive_structhashex(@_structhashex_value)
         true
       else
-        raise ArgumentError, "Unknown FBE type - #{fbe_type}"
+        # Do nothing here...
       end
 
       if !proto_receiver.nil? && proto_receiver.on_receive(type, buffer, offset, size)

@@ -5573,7 +5573,7 @@ void GeneratorRuby::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
         }
         WriteLineIndent("else");
         Indent(1);
-        WriteLineIndent("raise ArgumentError, \"Unknown FBE type - #{fbe_type}\"");
+        WriteLineIndent("# Do nothing here...");
         Indent(-1);
         WriteLineIndent("end");
     }

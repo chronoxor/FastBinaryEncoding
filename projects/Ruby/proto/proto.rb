@@ -3133,7 +3133,7 @@ module Proto
         on_receive_account(@_account_value)
         true
       else
-        raise ArgumentError, "Unknown FBE type - #{fbe_type}"
+        # Do nothing here...
       end
 
       false
@@ -3323,7 +3323,7 @@ module Proto
         on_receive_account(@_account_value)
         true
       else
-        raise ArgumentError, "Unknown FBE type - #{fbe_type}"
+        # Do nothing here...
       end
 
       false
