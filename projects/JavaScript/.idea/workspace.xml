@@ -85,8 +85,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="899" />
-    <option name="y" value="668" />
+    <option name="x" value="608" />
+    <option name="y" value="362" />
     <option name="width" value="1318" />
     <option name="height" value="773" />
   </component>
@@ -128,7 +128,7 @@
     <property name="node.js.selected.package.eslint" value="Z:\projects\CppProjects\FastBinaryEncoding\projects\JavaScript\node_modules\eslint" />
     <property name="node.js.selected.package.standard" value="Z:\projects\CppProjects\FastBinaryEncoding\projects\JavaScript\node_modules\standard" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
+    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -208,15 +208,15 @@
       <workItem from="1538703111323" duration="96000" />
       <workItem from="1539796825868" duration="136000" />
       <workItem from="1539797118671" duration="63000" />
-      <workItem from="1539798043102" duration="2588000" />
+      <workItem from="1539798043102" duration="3319000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6711000" />
+    <option name="totallyTimeSpent" value="7442000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="899" y="668" width="1318" height="773" extended-state="0" />
+    <frame x="608" y="362" width="1318" height="773" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6043956" visible="true" weight="0.3859375" />
       <window_info anchor="bottom" id="TODO" order="6" />
