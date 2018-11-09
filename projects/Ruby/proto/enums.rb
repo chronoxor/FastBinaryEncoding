@@ -6747,8 +6747,8 @@ module Enums
     end
 
     def on_receive(fbe_type, buffer, offset, size)
-
-      if fbe_type == EnumsModel::TYPE
+      case fbe_type
+      when EnumsModel::TYPE
         # Deserialize the value from the FBE stream
         @_enums_model.attach_buffer(buffer, offset)
         unless @_enums_model.verify
@@ -6768,6 +6768,8 @@ module Enums
         # Call receive handler with deserialized value
         on_receive_enums(@_enums_value)
         true
+      else
+        raise ArgumentError, "Unknown FBE type - #{fbe_type}"
       end
 
       false
@@ -6835,8 +6837,8 @@ module Enums
     end
 
     def on_receive(fbe_type, buffer, offset, size)
-
-      if fbe_type == EnumsFinalModel::TYPE
+      case fbe_type
+      when EnumsFinalModel::TYPE
         # Deserialize the value from the FBE stream
         @_enums_model.attach_buffer(buffer, offset)
         unless @_enums_model.verify
@@ -6856,6 +6858,8 @@ module Enums
         # Call receive handler with deserialized value
         on_receive_enums(@_enums_value)
         true
+      else
+        raise ArgumentError, "Unknown FBE type - #{fbe_type}"
       end
 
       false

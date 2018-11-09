@@ -3071,8 +3071,8 @@ module Proto
     end
 
     def on_receive(fbe_type, buffer, offset, size)
-
-      if fbe_type == OrderModel::TYPE
+      case fbe_type
+      when OrderModel::TYPE
         # Deserialize the value from the FBE stream
         @_order_model.attach_buffer(buffer, offset)
         unless @_order_model.verify
@@ -3092,9 +3092,7 @@ module Proto
         # Call receive handler with deserialized value
         on_receive_order(@_order_value)
         true
-      end
-
-      if fbe_type == BalanceModel::TYPE
+      when BalanceModel::TYPE
         # Deserialize the value from the FBE stream
         @_balance_model.attach_buffer(buffer, offset)
         unless @_balance_model.verify
@@ -3114,9 +3112,7 @@ module Proto
         # Call receive handler with deserialized value
         on_receive_balance(@_balance_value)
         true
-      end
-
-      if fbe_type == AccountModel::TYPE
+      when AccountModel::TYPE
         # Deserialize the value from the FBE stream
         @_account_model.attach_buffer(buffer, offset)
         unless @_account_model.verify
@@ -3136,6 +3132,8 @@ module Proto
         # Call receive handler with deserialized value
         on_receive_account(@_account_value)
         true
+      else
+        raise ArgumentError, "Unknown FBE type - #{fbe_type}"
       end
 
       false
@@ -3263,8 +3261,8 @@ module Proto
     end
 
     def on_receive(fbe_type, buffer, offset, size)
-
-      if fbe_type == OrderFinalModel::TYPE
+      case fbe_type
+      when OrderFinalModel::TYPE
         # Deserialize the value from the FBE stream
         @_order_model.attach_buffer(buffer, offset)
         unless @_order_model.verify
@@ -3284,9 +3282,7 @@ module Proto
         # Call receive handler with deserialized value
         on_receive_order(@_order_value)
         true
-      end
-
-      if fbe_type == BalanceFinalModel::TYPE
+      when BalanceFinalModel::TYPE
         # Deserialize the value from the FBE stream
         @_balance_model.attach_buffer(buffer, offset)
         unless @_balance_model.verify
@@ -3306,9 +3302,7 @@ module Proto
         # Call receive handler with deserialized value
         on_receive_balance(@_balance_value)
         true
-      end
-
-      if fbe_type == AccountFinalModel::TYPE
+      when AccountFinalModel::TYPE
         # Deserialize the value from the FBE stream
         @_account_model.attach_buffer(buffer, offset)
         unless @_account_model.verify
@@ -3328,6 +3322,8 @@ module Proto
         # Call receive handler with deserialized value
         on_receive_account(@_account_value)
         true
+      else
+        raise ArgumentError, "Unknown FBE type - #{fbe_type}"
       end
 
       false

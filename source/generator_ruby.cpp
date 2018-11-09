@@ -5539,10 +5539,10 @@ void GeneratorRuby::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     Indent(1);
     if (p->body)
     {
+        WriteLineIndent("case fbe_type");
         for (const auto& s : p->body->structs)
         {
-            WriteLine();
-            WriteLineIndent("if fbe_type == " + ConvertTitle(*s->name) + model + "::TYPE");
+            WriteLineIndent("when " + ConvertTitle(*s->name) + model + "::TYPE");
             Indent(1);
             WriteLineIndent("# Deserialize the value from the FBE stream");
             WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.attach_buffer(buffer, offset)");
@@ -5570,8 +5570,12 @@ void GeneratorRuby::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
             WriteLineIndent("on_receive_" + CppCommon::StringUtils::ToLower(*s->name) + "(@_" + CppCommon::StringUtils::ToLower(*s->name) + "_value)");
             WriteLineIndent("true");
             Indent(-1);
-            WriteLineIndent("end");
         }
+        WriteLineIndent("else");
+        Indent(1);
+        WriteLineIndent("raise ArgumentError, \"Unknown FBE type - #{fbe_type}\"");
+        Indent(-1);
+        WriteLineIndent("end");
     }
     if (p->import)
     {

@@ -19123,8 +19123,8 @@ module Test
     end
 
     def on_receive(fbe_type, buffer, offset, size)
-
-      if fbe_type == StructSimpleModel::TYPE
+      case fbe_type
+      when StructSimpleModel::TYPE
         # Deserialize the value from the FBE stream
         @_structsimple_model.attach_buffer(buffer, offset)
         unless @_structsimple_model.verify
@@ -19144,9 +19144,7 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structsimple(@_structsimple_value)
         true
-      end
-
-      if fbe_type == StructOptionalModel::TYPE
+      when StructOptionalModel::TYPE
         # Deserialize the value from the FBE stream
         @_structoptional_model.attach_buffer(buffer, offset)
         unless @_structoptional_model.verify
@@ -19166,9 +19164,7 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structoptional(@_structoptional_value)
         true
-      end
-
-      if fbe_type == StructNestedModel::TYPE
+      when StructNestedModel::TYPE
         # Deserialize the value from the FBE stream
         @_structnested_model.attach_buffer(buffer, offset)
         unless @_structnested_model.verify
@@ -19188,9 +19184,7 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structnested(@_structnested_value)
         true
-      end
-
-      if fbe_type == StructBytesModel::TYPE
+      when StructBytesModel::TYPE
         # Deserialize the value from the FBE stream
         @_structbytes_model.attach_buffer(buffer, offset)
         unless @_structbytes_model.verify
@@ -19210,9 +19204,7 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structbytes(@_structbytes_value)
         true
-      end
-
-      if fbe_type == StructArrayModel::TYPE
+      when StructArrayModel::TYPE
         # Deserialize the value from the FBE stream
         @_structarray_model.attach_buffer(buffer, offset)
         unless @_structarray_model.verify
@@ -19232,9 +19224,7 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structarray(@_structarray_value)
         true
-      end
-
-      if fbe_type == StructVectorModel::TYPE
+      when StructVectorModel::TYPE
         # Deserialize the value from the FBE stream
         @_structvector_model.attach_buffer(buffer, offset)
         unless @_structvector_model.verify
@@ -19254,9 +19244,7 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structvector(@_structvector_value)
         true
-      end
-
-      if fbe_type == StructListModel::TYPE
+      when StructListModel::TYPE
         # Deserialize the value from the FBE stream
         @_structlist_model.attach_buffer(buffer, offset)
         unless @_structlist_model.verify
@@ -19276,9 +19264,7 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structlist(@_structlist_value)
         true
-      end
-
-      if fbe_type == StructSetModel::TYPE
+      when StructSetModel::TYPE
         # Deserialize the value from the FBE stream
         @_structset_model.attach_buffer(buffer, offset)
         unless @_structset_model.verify
@@ -19298,9 +19284,7 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structset(@_structset_value)
         true
-      end
-
-      if fbe_type == StructMapModel::TYPE
+      when StructMapModel::TYPE
         # Deserialize the value from the FBE stream
         @_structmap_model.attach_buffer(buffer, offset)
         unless @_structmap_model.verify
@@ -19320,9 +19304,7 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structmap(@_structmap_value)
         true
-      end
-
-      if fbe_type == StructHashModel::TYPE
+      when StructHashModel::TYPE
         # Deserialize the value from the FBE stream
         @_structhash_model.attach_buffer(buffer, offset)
         unless @_structhash_model.verify
@@ -19342,9 +19324,7 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structhash(@_structhash_value)
         true
-      end
-
-      if fbe_type == StructHashExModel::TYPE
+      when StructHashExModel::TYPE
         # Deserialize the value from the FBE stream
         @_structhashex_model.attach_buffer(buffer, offset)
         unless @_structhashex_model.verify
@@ -19364,6 +19344,8 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structhashex(@_structhashex_value)
         true
+      else
+        raise ArgumentError, "Unknown FBE type - #{fbe_type}"
       end
 
       if !proto_receiver.nil? && proto_receiver.on_receive(type, buffer, offset, size)
@@ -19757,8 +19739,8 @@ module Test
     end
 
     def on_receive(fbe_type, buffer, offset, size)
-
-      if fbe_type == StructSimpleFinalModel::TYPE
+      case fbe_type
+      when StructSimpleFinalModel::TYPE
         # Deserialize the value from the FBE stream
         @_structsimple_model.attach_buffer(buffer, offset)
         unless @_structsimple_model.verify
@@ -19778,9 +19760,7 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structsimple(@_structsimple_value)
         true
-      end
-
-      if fbe_type == StructOptionalFinalModel::TYPE
+      when StructOptionalFinalModel::TYPE
         # Deserialize the value from the FBE stream
         @_structoptional_model.attach_buffer(buffer, offset)
         unless @_structoptional_model.verify
@@ -19800,9 +19780,7 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structoptional(@_structoptional_value)
         true
-      end
-
-      if fbe_type == StructNestedFinalModel::TYPE
+      when StructNestedFinalModel::TYPE
         # Deserialize the value from the FBE stream
         @_structnested_model.attach_buffer(buffer, offset)
         unless @_structnested_model.verify
@@ -19822,9 +19800,7 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structnested(@_structnested_value)
         true
-      end
-
-      if fbe_type == StructBytesFinalModel::TYPE
+      when StructBytesFinalModel::TYPE
         # Deserialize the value from the FBE stream
         @_structbytes_model.attach_buffer(buffer, offset)
         unless @_structbytes_model.verify
@@ -19844,9 +19820,7 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structbytes(@_structbytes_value)
         true
-      end
-
-      if fbe_type == StructArrayFinalModel::TYPE
+      when StructArrayFinalModel::TYPE
         # Deserialize the value from the FBE stream
         @_structarray_model.attach_buffer(buffer, offset)
         unless @_structarray_model.verify
@@ -19866,9 +19840,7 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structarray(@_structarray_value)
         true
-      end
-
-      if fbe_type == StructVectorFinalModel::TYPE
+      when StructVectorFinalModel::TYPE
         # Deserialize the value from the FBE stream
         @_structvector_model.attach_buffer(buffer, offset)
         unless @_structvector_model.verify
@@ -19888,9 +19860,7 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structvector(@_structvector_value)
         true
-      end
-
-      if fbe_type == StructListFinalModel::TYPE
+      when StructListFinalModel::TYPE
         # Deserialize the value from the FBE stream
         @_structlist_model.attach_buffer(buffer, offset)
         unless @_structlist_model.verify
@@ -19910,9 +19880,7 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structlist(@_structlist_value)
         true
-      end
-
-      if fbe_type == StructSetFinalModel::TYPE
+      when StructSetFinalModel::TYPE
         # Deserialize the value from the FBE stream
         @_structset_model.attach_buffer(buffer, offset)
         unless @_structset_model.verify
@@ -19932,9 +19900,7 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structset(@_structset_value)
         true
-      end
-
-      if fbe_type == StructMapFinalModel::TYPE
+      when StructMapFinalModel::TYPE
         # Deserialize the value from the FBE stream
         @_structmap_model.attach_buffer(buffer, offset)
         unless @_structmap_model.verify
@@ -19954,9 +19920,7 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structmap(@_structmap_value)
         true
-      end
-
-      if fbe_type == StructHashFinalModel::TYPE
+      when StructHashFinalModel::TYPE
         # Deserialize the value from the FBE stream
         @_structhash_model.attach_buffer(buffer, offset)
         unless @_structhash_model.verify
@@ -19976,9 +19940,7 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structhash(@_structhash_value)
         true
-      end
-
-      if fbe_type == StructHashExFinalModel::TYPE
+      when StructHashExFinalModel::TYPE
         # Deserialize the value from the FBE stream
         @_structhashex_model.attach_buffer(buffer, offset)
         unless @_structhashex_model.verify
@@ -19998,6 +19960,8 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structhashex(@_structhashex_value)
         true
+      else
+        raise ArgumentError, "Unknown FBE type - #{fbe_type}"
       end
 
       if !proto_receiver.nil? && proto_receiver.on_receive(type, buffer, offset, size)
