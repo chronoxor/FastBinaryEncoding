@@ -586,6 +586,8 @@ module FBE
       @_buffer.unshift(offset)
     end
 
+    protected
+
     # Buffer I/O methods
 
     def read_uint32(offset)
@@ -638,6 +640,8 @@ module FBE
     def fbe_unshift(offset)
       @_offset -= offset
     end
+
+    protected
 
     # Buffer I/O methods
 

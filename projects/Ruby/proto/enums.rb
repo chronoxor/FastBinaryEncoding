@@ -6725,6 +6725,8 @@ module Enums
       send_serialized(serialized)
     end
 
+    protected
+
     # Send message handler
     def on_send(buffer, offset, size)
       raise NotImplementedError, "Enums.Sender.on_send() not implemented!"
@@ -6739,13 +6741,6 @@ module Enums
       @_enums_value = Enums.new
       @_enums_model = EnumsModel.new
     end
-
-    # Receive handlers
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_enums(value)
-    end
-
     def on_receive(fbe_type, buffer, offset, size)
       case fbe_type
       when EnumsModel::TYPE
@@ -6774,6 +6769,15 @@ module Enums
 
       false
     end
+
+    protected
+
+    # Receive handlers
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_enums(value)
+    end
+
   end
 
   # Fast Binary Encoding Enums final sender class
@@ -6815,6 +6819,8 @@ module Enums
       send_serialized(serialized)
     end
 
+    protected
+
     # Send message handler
     def on_send(buffer, offset, size)
       raise NotImplementedError, "Enums.Sender.on_send() not implemented!"
@@ -6829,13 +6835,6 @@ module Enums
       @_enums_value = Enums.new
       @_enums_model = EnumsFinalModel.new
     end
-
-    # Receive handlers
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_enums(value)
-    end
-
     def on_receive(fbe_type, buffer, offset, size)
       case fbe_type
       when EnumsFinalModel::TYPE
@@ -6864,6 +6863,15 @@ module Enums
 
       false
     end
+
+    protected
+
+    # Receive handlers
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_enums(value)
+    end
+
   end
 
 end

@@ -781,6 +781,8 @@ void GeneratorRuby::GenerateFBEModel()
       @_buffer.unshift(offset)
     end
 
+    protected
+
     # Buffer I/O methods
 
     def read_uint32(offset)
@@ -843,6 +845,8 @@ void GeneratorRuby::GenerateFBEFieldModelBase()
     def fbe_unshift(offset)
       @_offset -= offset
     end
+
+    protected
 
     # Buffer I/O methods
 
@@ -5446,6 +5450,8 @@ void GeneratorRuby::GenerateSender(const std::shared_ptr<Package>& p, bool final
 
     // Generate sender message handler
     WriteLine();
+    WriteLineIndent("protected");
+    WriteLine();
     WriteLineIndent("# Send message handler");
     WriteLineIndent("def on_send(buffer, offset, size)");
     Indent(1);
@@ -5519,21 +5525,6 @@ void GeneratorRuby::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
         }
     }
 
-    // Generate receiver handlers
-    if (p->body)
-    {
-        WriteLine();
-        WriteLineIndent("# Receive handlers");
-        for (const auto& s : p->body->structs)
-        {
-            WriteLine();
-            WriteLineIndent("# noinspection RubyUnusedLocalVariable");
-            WriteLineIndent("def on_receive_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
-            WriteLineIndent("end");
-        }
-        WriteLine();
-    }
-
     // Generate receiver message handler
     WriteLineIndent("def on_receive(fbe_type, buffer, offset, size)");
     Indent(1);
@@ -5593,6 +5584,23 @@ void GeneratorRuby::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     WriteLineIndent("false");
     Indent(-1);
     WriteLineIndent("end");
+
+    // Generate receiver handlers
+    if (p->body)
+    {
+        WriteLine();
+        WriteLineIndent("protected");
+        WriteLine();
+        WriteLineIndent("# Receive handlers");
+        for (const auto& s : p->body->structs)
+        {
+            WriteLine();
+            WriteLineIndent("# noinspection RubyUnusedLocalVariable");
+            WriteLineIndent("def on_receive_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
+            WriteLineIndent("end");
+        }
+        WriteLine();
+    }
 
     // Generate receiver end
     Indent(-1);

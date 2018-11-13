@@ -19030,6 +19030,8 @@ module Test
       send_serialized(serialized)
     end
 
+    protected
+
     # Send message handler
     def on_send(buffer, offset, size)
       raise NotImplementedError, "Test.Sender.on_send() not implemented!"
@@ -19075,53 +19077,6 @@ module Test
     def proto_receiver=(receiver)
       @_proto_receiver = receiver
     end
-
-    # Receive handlers
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structsimple(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structoptional(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structnested(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structbytes(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structarray(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structvector(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structlist(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structset(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structmap(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structhash(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structhashex(value)
-    end
-
     def on_receive(fbe_type, buffer, offset, size)
       case fbe_type
       when StructSimpleModel::TYPE
@@ -19354,6 +19309,55 @@ module Test
 
       false
     end
+
+    protected
+
+    # Receive handlers
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structsimple(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structoptional(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structnested(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structbytes(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structarray(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structvector(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structlist(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structset(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structmap(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structhash(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structhashex(value)
+    end
+
   end
 
   # Fast Binary Encoding Test final sender class
@@ -19646,6 +19650,8 @@ module Test
       send_serialized(serialized)
     end
 
+    protected
+
     # Send message handler
     def on_send(buffer, offset, size)
       raise NotImplementedError, "Test.Sender.on_send() not implemented!"
@@ -19691,53 +19697,6 @@ module Test
     def proto_receiver=(receiver)
       @_proto_receiver = receiver
     end
-
-    # Receive handlers
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structsimple(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structoptional(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structnested(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structbytes(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structarray(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structvector(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structlist(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structset(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structmap(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structhash(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_structhashex(value)
-    end
-
     def on_receive(fbe_type, buffer, offset, size)
       case fbe_type
       when StructSimpleFinalModel::TYPE
@@ -19970,6 +19929,55 @@ module Test
 
       false
     end
+
+    protected
+
+    # Receive handlers
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structsimple(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structoptional(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structnested(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structbytes(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structarray(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structvector(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structlist(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structset(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structmap(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structhash(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structhashex(value)
+    end
+
   end
 
 end
