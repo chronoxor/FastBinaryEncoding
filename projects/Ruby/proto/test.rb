@@ -983,8 +983,7 @@ module Test
       @f44 = f44
     end
 
-    # Struct shallow copy
-    def copy(other)
+    def initialize_copy(other)
       @uid = other.uid
       @f1 = other.f1
       @f2 = other.f2
@@ -1030,19 +1029,20 @@ module Test
       @f42 = other.f42
       @f43 = other.f43
       @f44 = other.f44
+    end
+
+    # Struct shallow copy
+    def copy(other)
+      initialize_copy(other)
       self
     end
 
     # Struct deep clone
     def clone
-      # Serialize the struct to the FBE stream
-      writer = StructSimpleModel.new(FBE::WriteBuffer.new)
-      writer.serialize(self)
-
-      # Deserialize the struct from the FBE stream
-      reader = StructSimpleModel.new(FBE::ReadBuffer.new)
-      reader.attach_buffer(writer.buffer)
-      reader.deserialize[0]
+      data = Marshal.dump(self)
+      clone = Marshal.load(data)
+      clone.freeze if frozen?
+      clone
     end
 
     # Struct compare operators
@@ -1353,6 +1353,22 @@ module Test
       end
       result << ')'
       result
+    end
+
+    # Dump the struct
+    def marshal_dump
+      # Serialize the struct to the FBE stream
+      writer = StructSimpleModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+      writer.buffer
+    end
+
+    # Load the struct
+    def marshal_load(data)
+      # Deserialize the struct from the FBE stream
+      reader = StructSimpleModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(data)
+      initialize_copy(reader.deserialize[0])
     end
 
     # Get struct JSON value
@@ -4369,7 +4385,7 @@ module Test
     attr_accessor :f165
 
     def initialize(parent = StructSimple.new, f100 = nil, f101 = true, f102 = nil, f103 = nil, f104 = 255, f105 = nil, f106 = nil, f107 = '!', f108 = nil, f109 = nil, f110 = 0x0444.chr(Encoding::UTF_8), f111 = nil, f112 = nil, f113 = 127, f114 = nil, f115 = nil, f116 = 255, f117 = nil, f118 = nil, f119 = 32767, f120 = nil, f121 = nil, f122 = 65535, f123 = nil, f124 = nil, f125 = 2147483647, f126 = nil, f127 = nil, f128 = 0xFFFFFFFF, f129 = nil, f130 = nil, f131 = 9223372036854775807, f132 = nil, f133 = nil, f134 = 0xFFFFFFFFFFFFFFFF, f135 = nil, f136 = nil, f137 = 123.456, f138 = nil, f139 = nil, f140 = -123.456e+123, f141 = nil, f142 = nil, f143 = BigDecimal.new('123456.123456'), f144 = nil, f145 = nil, f146 = "Initial string!", f147 = nil, f148 = nil, f149 = Time.now.utc, f150 = nil, f151 = nil, f152 = UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000"), f153 = nil, f154 = nil, f155 = nil, f156 = nil, f157 = nil, f158 = nil, f159 = nil, f160 = nil, f161 = nil, f162 = nil, f163 = nil, f164 = nil, f165 = nil)
-      method(:copy).super_method.call(parent)
+      method(:initialize_copy).super_method.call(parent)
       @f100 = f100
       @f101 = f101
       @f102 = f102
@@ -4438,8 +4454,7 @@ module Test
       @f165 = f165
     end
 
-    # Struct shallow copy
-    def copy(other)
+    def initialize_copy(other)
       super(other)
       @f100 = other.f100
       @f101 = other.f101
@@ -4507,19 +4522,20 @@ module Test
       @f163 = other.f163
       @f164 = other.f164
       @f165 = other.f165
+    end
+
+    # Struct shallow copy
+    def copy(other)
+      initialize_copy(other)
       self
     end
 
     # Struct deep clone
     def clone
-      # Serialize the struct to the FBE stream
-      writer = StructOptionalModel.new(FBE::WriteBuffer.new)
-      writer.serialize(self)
-
-      # Deserialize the struct from the FBE stream
-      reader = StructOptionalModel.new(FBE::ReadBuffer.new)
-      reader.attach_buffer(writer.buffer)
-      reader.deserialize[0]
+      data = Marshal.dump(self)
+      clone = Marshal.load(data)
+      clone.freeze if frozen?
+      clone
     end
 
     # Struct compare operators
@@ -4959,6 +4975,22 @@ module Test
       result
     end
 
+    # Dump the struct
+    def marshal_dump
+      # Serialize the struct to the FBE stream
+      writer = StructOptionalModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+      writer.buffer
+    end
+
+    # Load the struct
+    def marshal_load(data)
+      # Deserialize the struct from the FBE stream
+      reader = StructOptionalModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(data)
+      initialize_copy(reader.deserialize[0])
+    end
+
     # Get struct JSON value
     def to_json
       JSON.generate(__to_json_map__)
@@ -5177,7 +5209,7 @@ module Test
     # Get struct map from JSON (internal method)
     def self.__from_json_map__(json)
       result = StructOptional.new
-      result.method(:copy).super_method.call(StructOptional.method(:__from_json_map__).super_method.call(json))
+      result.method(:initialize_copy).super_method.call(StructOptional.method(:__from_json_map__).super_method.call(json))
       value = json.fetch('f100', nil)
       result.f100 = (value.nil? ? nil : value)
       value = json.fetch('f101', nil)
@@ -9145,7 +9177,7 @@ module Test
     attr_accessor :f1011
 
     def initialize(parent = StructOptional.new, f1000 = EnumSimple.new, f1001 = nil, f1002 = EnumTyped.ENUM_VALUE_2, f1003 = nil, f1004 = FlagsSimple.new, f1005 = nil, f1006 = FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6, f1007 = nil, f1008 = StructSimple.new, f1009 = nil, f1010 = StructOptional.new, f1011 = nil)
-      method(:copy).super_method.call(parent)
+      method(:initialize_copy).super_method.call(parent)
       @f1000 = f1000
       @f1001 = f1001
       @f1002 = f1002
@@ -9160,8 +9192,7 @@ module Test
       @f1011 = f1011
     end
 
-    # Struct shallow copy
-    def copy(other)
+    def initialize_copy(other)
       super(other)
       @f1000 = other.f1000
       @f1001 = other.f1001
@@ -9175,19 +9206,20 @@ module Test
       @f1009 = other.f1009
       @f1010 = other.f1010
       @f1011 = other.f1011
+    end
+
+    # Struct shallow copy
+    def copy(other)
+      initialize_copy(other)
       self
     end
 
     # Struct deep clone
     def clone
-      # Serialize the struct to the FBE stream
-      writer = StructNestedModel.new(FBE::WriteBuffer.new)
-      writer.serialize(self)
-
-      # Deserialize the struct from the FBE stream
-      reader = StructNestedModel.new(FBE::ReadBuffer.new)
-      reader.attach_buffer(writer.buffer)
-      reader.deserialize[0]
+      data = Marshal.dump(self)
+      clone = Marshal.load(data)
+      clone.freeze if frozen?
+      clone
     end
 
     # Struct compare operators
@@ -9303,6 +9335,22 @@ module Test
       result
     end
 
+    # Dump the struct
+    def marshal_dump
+      # Serialize the struct to the FBE stream
+      writer = StructNestedModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+      writer.buffer
+    end
+
+    # Load the struct
+    def marshal_load(data)
+      # Deserialize the struct from the FBE stream
+      reader = StructNestedModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(data)
+      initialize_copy(reader.deserialize[0])
+    end
+
     # Get struct JSON value
     def to_json
       JSON.generate(__to_json_map__)
@@ -9359,7 +9407,7 @@ module Test
     # Get struct map from JSON (internal method)
     def self.__from_json_map__(json)
       result = StructNested.new
-      result.method(:copy).super_method.call(StructNested.method(:__from_json_map__).super_method.call(json))
+      result.method(:initialize_copy).super_method.call(StructNested.method(:__from_json_map__).super_method.call(json))
       value = json.fetch('f1000', nil)
       result.f1000 = (value.nil? ? nil : EnumSimple.__from_json_map__(value))
       value = json.fetch('f1001', nil)
@@ -10461,24 +10509,24 @@ module Test
       @f3 = f3
     end
 
-    # Struct shallow copy
-    def copy(other)
+    def initialize_copy(other)
       @f1 = other.f1
       @f2 = other.f2
       @f3 = other.f3
+    end
+
+    # Struct shallow copy
+    def copy(other)
+      initialize_copy(other)
       self
     end
 
     # Struct deep clone
     def clone
-      # Serialize the struct to the FBE stream
-      writer = StructBytesModel.new(FBE::WriteBuffer.new)
-      writer.serialize(self)
-
-      # Deserialize the struct from the FBE stream
-      reader = StructBytesModel.new(FBE::ReadBuffer.new)
-      reader.attach_buffer(writer.buffer)
-      reader.deserialize[0]
+      data = Marshal.dump(self)
+      clone = Marshal.load(data)
+      clone.freeze if frozen?
+      clone
     end
 
     # Struct compare operators
@@ -10532,6 +10580,22 @@ module Test
       end
       result << ')'
       result
+    end
+
+    # Dump the struct
+    def marshal_dump
+      # Serialize the struct to the FBE stream
+      writer = StructBytesModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+      writer.buffer
+    end
+
+    # Load the struct
+    def marshal_load(data)
+      # Deserialize the struct from the FBE stream
+      reader = StructBytesModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(data)
+      initialize_copy(reader.deserialize[0])
     end
 
     # Get struct JSON value
@@ -11152,8 +11216,7 @@ module Test
       @f10 = f10
     end
 
-    # Struct shallow copy
-    def copy(other)
+    def initialize_copy(other)
       @f1 = other.f1
       @f2 = other.f2
       @f3 = other.f3
@@ -11164,19 +11227,20 @@ module Test
       @f8 = other.f8
       @f9 = other.f9
       @f10 = other.f10
+    end
+
+    # Struct shallow copy
+    def copy(other)
+      initialize_copy(other)
       self
     end
 
     # Struct deep clone
     def clone
-      # Serialize the struct to the FBE stream
-      writer = StructArrayModel.new(FBE::WriteBuffer.new)
-      writer.serialize(self)
-
-      # Deserialize the struct from the FBE stream
-      reader = StructArrayModel.new(FBE::ReadBuffer.new)
-      reader.attach_buffer(writer.buffer)
-      reader.deserialize[0]
+      data = Marshal.dump(self)
+      clone = Marshal.load(data)
+      clone.freeze if frozen?
+      clone
     end
 
     # Struct compare operators
@@ -11362,6 +11426,22 @@ module Test
       end
       result << ')'
       result
+    end
+
+    # Dump the struct
+    def marshal_dump
+      # Serialize the struct to the FBE stream
+      writer = StructArrayModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+      writer.buffer
+    end
+
+    # Load the struct
+    def marshal_load(data)
+      # Deserialize the struct from the FBE stream
+      reader = StructArrayModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(data)
+      initialize_copy(reader.deserialize[0])
     end
 
     # Get struct JSON value
@@ -12364,8 +12444,7 @@ module Test
       @f10 = f10
     end
 
-    # Struct shallow copy
-    def copy(other)
+    def initialize_copy(other)
       @f1 = other.f1
       @f2 = other.f2
       @f3 = other.f3
@@ -12376,19 +12455,20 @@ module Test
       @f8 = other.f8
       @f9 = other.f9
       @f10 = other.f10
+    end
+
+    # Struct shallow copy
+    def copy(other)
+      initialize_copy(other)
       self
     end
 
     # Struct deep clone
     def clone
-      # Serialize the struct to the FBE stream
-      writer = StructVectorModel.new(FBE::WriteBuffer.new)
-      writer.serialize(self)
-
-      # Deserialize the struct from the FBE stream
-      reader = StructVectorModel.new(FBE::ReadBuffer.new)
-      reader.attach_buffer(writer.buffer)
-      reader.deserialize[0]
+      data = Marshal.dump(self)
+      clone = Marshal.load(data)
+      clone.freeze if frozen?
+      clone
     end
 
     # Struct compare operators
@@ -12574,6 +12654,22 @@ module Test
       end
       result << ')'
       result
+    end
+
+    # Dump the struct
+    def marshal_dump
+      # Serialize the struct to the FBE stream
+      writer = StructVectorModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+      writer.buffer
+    end
+
+    # Load the struct
+    def marshal_load(data)
+      # Deserialize the struct from the FBE stream
+      reader = StructVectorModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(data)
+      initialize_copy(reader.deserialize[0])
     end
 
     # Get struct JSON value
@@ -13576,8 +13672,7 @@ module Test
       @f10 = f10
     end
 
-    # Struct shallow copy
-    def copy(other)
+    def initialize_copy(other)
       @f1 = other.f1
       @f2 = other.f2
       @f3 = other.f3
@@ -13588,19 +13683,20 @@ module Test
       @f8 = other.f8
       @f9 = other.f9
       @f10 = other.f10
+    end
+
+    # Struct shallow copy
+    def copy(other)
+      initialize_copy(other)
       self
     end
 
     # Struct deep clone
     def clone
-      # Serialize the struct to the FBE stream
-      writer = StructListModel.new(FBE::WriteBuffer.new)
-      writer.serialize(self)
-
-      # Deserialize the struct from the FBE stream
-      reader = StructListModel.new(FBE::ReadBuffer.new)
-      reader.attach_buffer(writer.buffer)
-      reader.deserialize[0]
+      data = Marshal.dump(self)
+      clone = Marshal.load(data)
+      clone.freeze if frozen?
+      clone
     end
 
     # Struct compare operators
@@ -13786,6 +13882,22 @@ module Test
       end
       result << ')'
       result
+    end
+
+    # Dump the struct
+    def marshal_dump
+      # Serialize the struct to the FBE stream
+      writer = StructListModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+      writer.buffer
+    end
+
+    # Load the struct
+    def marshal_load(data)
+      # Deserialize the struct from the FBE stream
+      reader = StructListModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(data)
+      initialize_copy(reader.deserialize[0])
     end
 
     # Get struct JSON value
@@ -14776,25 +14888,25 @@ module Test
       @f4 = f4
     end
 
-    # Struct shallow copy
-    def copy(other)
+    def initialize_copy(other)
       @f1 = other.f1
       @f2 = other.f2
       @f3 = other.f3
       @f4 = other.f4
+    end
+
+    # Struct shallow copy
+    def copy(other)
+      initialize_copy(other)
       self
     end
 
     # Struct deep clone
     def clone
-      # Serialize the struct to the FBE stream
-      writer = StructSetModel.new(FBE::WriteBuffer.new)
-      writer.serialize(self)
-
-      # Deserialize the struct from the FBE stream
-      reader = StructSetModel.new(FBE::ReadBuffer.new)
-      reader.attach_buffer(writer.buffer)
-      reader.deserialize[0]
+      data = Marshal.dump(self)
+      clone = Marshal.load(data)
+      clone.freeze if frozen?
+      clone
     end
 
     # Struct compare operators
@@ -14890,6 +15002,22 @@ module Test
       end
       result << ')'
       result
+    end
+
+    # Dump the struct
+    def marshal_dump
+      # Serialize the struct to the FBE stream
+      writer = StructSetModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+      writer.buffer
+    end
+
+    # Load the struct
+    def marshal_load(data)
+      # Deserialize the struct from the FBE stream
+      reader = StructSetModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(data)
+      initialize_copy(reader.deserialize[0])
     end
 
     # Get struct JSON value
@@ -15562,8 +15690,7 @@ module Test
       @f10 = f10
     end
 
-    # Struct shallow copy
-    def copy(other)
+    def initialize_copy(other)
       @f1 = other.f1
       @f2 = other.f2
       @f3 = other.f3
@@ -15574,19 +15701,20 @@ module Test
       @f8 = other.f8
       @f9 = other.f9
       @f10 = other.f10
+    end
+
+    # Struct shallow copy
+    def copy(other)
+      initialize_copy(other)
       self
     end
 
     # Struct deep clone
     def clone
-      # Serialize the struct to the FBE stream
-      writer = StructMapModel.new(FBE::WriteBuffer.new)
-      writer.serialize(self)
-
-      # Deserialize the struct from the FBE stream
-      reader = StructMapModel.new(FBE::ReadBuffer.new)
-      reader.attach_buffer(writer.buffer)
-      reader.deserialize[0]
+      data = Marshal.dump(self)
+      clone = Marshal.load(data)
+      clone.freeze if frozen?
+      clone
     end
 
     # Struct compare operators
@@ -15842,6 +15970,22 @@ module Test
       end
       result << ')'
       result
+    end
+
+    # Dump the struct
+    def marshal_dump
+      # Serialize the struct to the FBE stream
+      writer = StructMapModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+      writer.buffer
+    end
+
+    # Load the struct
+    def marshal_load(data)
+      # Deserialize the struct from the FBE stream
+      reader = StructMapModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(data)
+      initialize_copy(reader.deserialize[0])
     end
 
     # Get struct JSON value
@@ -16844,8 +16988,7 @@ module Test
       @f10 = f10
     end
 
-    # Struct shallow copy
-    def copy(other)
+    def initialize_copy(other)
       @f1 = other.f1
       @f2 = other.f2
       @f3 = other.f3
@@ -16856,19 +16999,20 @@ module Test
       @f8 = other.f8
       @f9 = other.f9
       @f10 = other.f10
+    end
+
+    # Struct shallow copy
+    def copy(other)
+      initialize_copy(other)
       self
     end
 
     # Struct deep clone
     def clone
-      # Serialize the struct to the FBE stream
-      writer = StructHashModel.new(FBE::WriteBuffer.new)
-      writer.serialize(self)
-
-      # Deserialize the struct from the FBE stream
-      reader = StructHashModel.new(FBE::ReadBuffer.new)
-      reader.attach_buffer(writer.buffer)
-      reader.deserialize[0]
+      data = Marshal.dump(self)
+      clone = Marshal.load(data)
+      clone.freeze if frozen?
+      clone
     end
 
     # Struct compare operators
@@ -17124,6 +17268,22 @@ module Test
       end
       result << ')'
       result
+    end
+
+    # Dump the struct
+    def marshal_dump
+      # Serialize the struct to the FBE stream
+      writer = StructHashModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+      writer.buffer
+    end
+
+    # Load the struct
+    def marshal_load(data)
+      # Deserialize the struct from the FBE stream
+      reader = StructHashModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(data)
+      initialize_copy(reader.deserialize[0])
     end
 
     # Get struct JSON value
@@ -18110,23 +18270,23 @@ module Test
       @f2 = f2
     end
 
-    # Struct shallow copy
-    def copy(other)
+    def initialize_copy(other)
       @f1 = other.f1
       @f2 = other.f2
+    end
+
+    # Struct shallow copy
+    def copy(other)
+      initialize_copy(other)
       self
     end
 
     # Struct deep clone
     def clone
-      # Serialize the struct to the FBE stream
-      writer = StructHashExModel.new(FBE::WriteBuffer.new)
-      writer.serialize(self)
-
-      # Deserialize the struct from the FBE stream
-      reader = StructHashExModel.new(FBE::ReadBuffer.new)
-      reader.attach_buffer(writer.buffer)
-      reader.deserialize[0]
+      data = Marshal.dump(self)
+      clone = Marshal.load(data)
+      clone.freeze if frozen?
+      clone
     end
 
     # Struct compare operators
@@ -18206,6 +18366,22 @@ module Test
       end
       result << ')'
       result
+    end
+
+    # Dump the struct
+    def marshal_dump
+      # Serialize the struct to the FBE stream
+      writer = StructHashExModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+      writer.buffer
+    end
+
+    # Load the struct
+    def marshal_load(data)
+      # Deserialize the struct from the FBE stream
+      reader = StructHashExModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(data)
+      initialize_copy(reader.deserialize[0])
     end
 
     # Get struct JSON value

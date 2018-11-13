@@ -2054,8 +2054,7 @@ module Enums
       @uint64b5 = uint64b5
     end
 
-    # Struct shallow copy
-    def copy(other)
+    def initialize_copy(other)
       @byte0 = other.byte0
       @byte1 = other.byte1
       @byte2 = other.byte2
@@ -2122,19 +2121,20 @@ module Enums
       @uint64b3 = other.uint64b3
       @uint64b4 = other.uint64b4
       @uint64b5 = other.uint64b5
+    end
+
+    # Struct shallow copy
+    def copy(other)
+      initialize_copy(other)
       self
     end
 
     # Struct deep clone
     def clone
-      # Serialize the struct to the FBE stream
-      writer = EnumsModel.new(FBE::WriteBuffer.new)
-      writer.serialize(self)
-
-      # Deserialize the struct from the FBE stream
-      reader = EnumsModel.new(FBE::ReadBuffer.new)
-      reader.attach_buffer(writer.buffer)
-      reader.deserialize[0]
+      data = Marshal.dump(self)
+      clone = Marshal.load(data)
+      clone.freeze if frozen?
+      clone
     end
 
     # Struct compare operators
@@ -2566,6 +2566,22 @@ module Enums
       end
       result << ')'
       result
+    end
+
+    # Dump the struct
+    def marshal_dump
+      # Serialize the struct to the FBE stream
+      writer = EnumsModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+      writer.buffer
+    end
+
+    # Load the struct
+    def marshal_load(data)
+      # Deserialize the struct from the FBE stream
+      reader = EnumsModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(data)
+      initialize_copy(reader.deserialize[0])
     end
 
     # Get struct JSON value

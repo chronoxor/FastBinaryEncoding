@@ -4107,7 +4107,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
     WriteLine(")");
     Indent(1);
     if (s->base && !s->base->empty())
-        WriteLineIndent("method(:copy).super_method.call(parent)");
+        WriteLineIndent("method(:initialize_copy).super_method.call(parent)");
     if (s->body)
     {
         for (const auto& field : s->body->fields)
@@ -4116,16 +4116,24 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
     Indent(-1);
     WriteLineIndent("end");
 
-    // Generate struct copy() method
+    // Generate struct copy constructor
     WriteLine();
-    WriteLineIndent("# Struct shallow copy");
-    WriteLineIndent("def copy(other)");
+    WriteLineIndent("def initialize_copy(other)");
     Indent(1);
     if (s->base && !s->base->empty())
         WriteLineIndent("super(other)");
     if (s->body)
         for (const auto& field : s->body->fields)
             WriteLineIndent("@" + *field->name + " = other." + *field->name);
+    Indent(-1);
+    WriteLineIndent("end");
+
+    // Generate struct copy() method
+    WriteLine();
+    WriteLineIndent("# Struct shallow copy");
+    WriteLineIndent("def copy(other)");
+    Indent(1);
+    WriteLineIndent("initialize_copy(other)");
     WriteLineIndent("self");
     Indent(-1);
     WriteLineIndent("end");
@@ -4135,14 +4143,10 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
     WriteLineIndent("# Struct deep clone");
     WriteLineIndent("def clone");
     Indent(1);
-    WriteLineIndent("# Serialize the struct to the FBE stream");
-    WriteLineIndent("writer = " + *s->name + "Model.new(FBE::WriteBuffer.new)");
-    WriteLineIndent("writer.serialize(self)");
-    WriteLine();
-    WriteLineIndent("# Deserialize the struct from the FBE stream");
-    WriteLineIndent("reader = " + *s->name + "Model.new(FBE::ReadBuffer.new)");
-    WriteLineIndent("reader.attach_buffer(writer.buffer)");
-    WriteLineIndent("reader.deserialize[0]");
+    WriteLineIndent("data = Marshal.dump(self)");
+    WriteLineIndent("clone = Marshal.load(data)");
+    WriteLineIndent("clone.freeze if frozen?");
+    WriteLineIndent("clone");
     Indent(-1);
     WriteLineIndent("end");
 
@@ -4329,6 +4333,28 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
     Indent(-1);
     WriteLineIndent("end");
 
+    // Generate struct marshal_dump & marshal_load methods
+    WriteLine();
+    WriteLineIndent("# Dump the struct");
+    WriteLineIndent("def marshal_dump");
+    Indent(1);
+    WriteLineIndent("# Serialize the struct to the FBE stream");
+    WriteLineIndent("writer = " + *s->name + "Model.new(FBE::WriteBuffer.new)");
+    WriteLineIndent("writer.serialize(self)");
+    WriteLineIndent("writer.buffer");
+    Indent(-1);
+    WriteLineIndent("end");
+    WriteLine();
+    WriteLineIndent("# Load the struct");
+    WriteLineIndent("def marshal_load(data)");
+    Indent(1);
+    WriteLineIndent("# Deserialize the struct from the FBE stream");
+    WriteLineIndent("reader = " + *s->name + "Model.new(FBE::ReadBuffer.new)");
+    WriteLineIndent("reader.attach_buffer(data)");
+    WriteLineIndent("initialize_copy(reader.deserialize[0])");
+    Indent(-1);
+    WriteLineIndent("end");
+
     if (JSON())
     {
         // Generate struct to_json method
@@ -4382,7 +4408,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
         Indent(1);
         WriteLineIndent("result = " + struct_name + ".new");
         if (s->base && !s->base->empty())
-            WriteLineIndent("result.method(:copy).super_method.call(" + struct_name + ".method(:__from_json_map__).super_method.call(json))");
+            WriteLineIndent("result.method(:initialize_copy).super_method.call(" + struct_name + ".method(:__from_json_map__).super_method.call(json))");
         if (s->body)
         {
             for (const auto& field : s->body->fields)

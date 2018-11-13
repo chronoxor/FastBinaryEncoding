@@ -591,27 +591,27 @@ module Proto
       @volume = volume
     end
 
-    # Struct shallow copy
-    def copy(other)
+    def initialize_copy(other)
       @uid = other.uid
       @symbol = other.symbol
       @side = other.side
       @type = other.type
       @price = other.price
       @volume = other.volume
+    end
+
+    # Struct shallow copy
+    def copy(other)
+      initialize_copy(other)
       self
     end
 
     # Struct deep clone
     def clone
-      # Serialize the struct to the FBE stream
-      writer = OrderModel.new(FBE::WriteBuffer.new)
-      writer.serialize(self)
-
-      # Deserialize the struct from the FBE stream
-      reader = OrderModel.new(FBE::ReadBuffer.new)
-      reader.attach_buffer(writer.buffer)
-      reader.deserialize[0]
+      data = Marshal.dump(self)
+      clone = Marshal.load(data)
+      clone.freeze if frozen?
+      clone
     end
 
     # Struct compare operators
@@ -688,6 +688,22 @@ module Proto
       end
       result << ')'
       result
+    end
+
+    # Dump the struct
+    def marshal_dump
+      # Serialize the struct to the FBE stream
+      writer = OrderModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+      writer.buffer
+    end
+
+    # Load the struct
+    def marshal_load(data)
+      # Deserialize the struct from the FBE stream
+      reader = OrderModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(data)
+      initialize_copy(reader.deserialize[0])
     end
 
     # Get struct JSON value
@@ -1460,23 +1476,23 @@ module Proto
       @amount = amount
     end
 
-    # Struct shallow copy
-    def copy(other)
+    def initialize_copy(other)
       @currency = other.currency
       @amount = other.amount
+    end
+
+    # Struct shallow copy
+    def copy(other)
+      initialize_copy(other)
       self
     end
 
     # Struct deep clone
     def clone
-      # Serialize the struct to the FBE stream
-      writer = BalanceModel.new(FBE::WriteBuffer.new)
-      writer.serialize(self)
-
-      # Deserialize the struct from the FBE stream
-      reader = BalanceModel.new(FBE::ReadBuffer.new)
-      reader.attach_buffer(writer.buffer)
-      reader.deserialize[0]
+      data = Marshal.dump(self)
+      clone = Marshal.load(data)
+      clone.freeze if frozen?
+      clone
     end
 
     # Struct compare operators
@@ -1529,6 +1545,22 @@ module Proto
       end
       result << ')'
       result
+    end
+
+    # Dump the struct
+    def marshal_dump
+      # Serialize the struct to the FBE stream
+      writer = BalanceModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+      writer.buffer
+    end
+
+    # Load the struct
+    def marshal_load(data)
+      # Deserialize the struct from the FBE stream
+      reader = BalanceModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(data)
+      initialize_copy(reader.deserialize[0])
     end
 
     # Get struct JSON value
@@ -2085,27 +2117,27 @@ module Proto
       @orders = orders
     end
 
-    # Struct shallow copy
-    def copy(other)
+    def initialize_copy(other)
       @uid = other.uid
       @name = other.name
       @state = other.state
       @wallet = other.wallet
       @asset = other.asset
       @orders = other.orders
+    end
+
+    # Struct shallow copy
+    def copy(other)
+      initialize_copy(other)
       self
     end
 
     # Struct deep clone
     def clone
-      # Serialize the struct to the FBE stream
-      writer = AccountModel.new(FBE::WriteBuffer.new)
-      writer.serialize(self)
-
-      # Deserialize the struct from the FBE stream
-      reader = AccountModel.new(FBE::ReadBuffer.new)
-      reader.attach_buffer(writer.buffer)
-      reader.deserialize[0]
+      data = Marshal.dump(self)
+      clone = Marshal.load(data)
+      clone.freeze if frozen?
+      clone
     end
 
     # Struct compare operators
@@ -2191,6 +2223,22 @@ module Proto
       end
       result << ')'
       result
+    end
+
+    # Dump the struct
+    def marshal_dump
+      # Serialize the struct to the FBE stream
+      writer = AccountModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+      writer.buffer
+    end
+
+    # Load the struct
+    def marshal_load(data)
+      # Deserialize the struct from the FBE stream
+      reader = AccountModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(data)
+      initialize_copy(reader.deserialize[0])
     end
 
     # Get struct JSON value
