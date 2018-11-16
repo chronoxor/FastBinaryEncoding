@@ -58,7 +58,7 @@ Sample projects:
   * [JSON serialization](#json-serialization)
   * [Packages and import](#packages-and-import)
   * [Struct keys](#struct-keys)
-  * [Struct types](#struct-types)
+  * [Struct numeration](#struct-numeration)
   * [Struct inheritance](#struct-inheritance)
   * [Versioning](#versioning)
   * [Sender/Receiver protocol](#senderreceiver-protocol)
@@ -535,14 +535,14 @@ Here is an example of the simple package declaration:
 // Package declaration. Offset is 0.
 package proto
 
-// Struct type is 1
-struct Struct1 (proto offset 0 + 1)
+// Struct type number is 1 (proto offset 0 + 1)
+struct Struct1
 {
     ...
 }
 
-// Struct type is 2
-struct Struct2 (proto offset 0 + 2)
+// Struct type number is 2 (proto offset 0 + 2)
+struct Struct2
 {
     ...
 }
@@ -558,7 +558,7 @@ package protoex offset 10
 // Package import
 import proto
 
-// Struct type is 11 (protoex offset 10 + 1)
+// Struct type number is 11 (protoex offset 10 + 1)
 struct Struct11
 {
     // Struct1 is reused form the imported package
@@ -566,7 +566,7 @@ struct Struct11
     ...
 }
 
-// Struct type is 12 (protoex offset 10 + 2)
+// Struct type number is 12 (protoex offset 10 + 2)
 struct Struct12
 {
     ...
@@ -651,12 +651,12 @@ struct MyKeyStruct
 };
 ```
 
-# Struct types
-Struct types are automatically increased until you provide it manually. There
-are two possibilities:
-1. Shift the current struct type offset using '(+X)' suffix. As the result
+# Struct numeration
+Struct type numbers are automatically increased until you provide it manually.
+There are two possibilities:
+1. Shift the current struct type number using '(+X)' suffix. As the result
    all new structs will have incremented type.
-2. Force set struct type offset using '(X)' of '(base)' suffix. It will
+2. Force set struct type number using '(X)' of '(base)' suffix. It will
    affect only one struct.
 
 Example below demonstrates the idea:
@@ -664,37 +664,37 @@ Example below demonstrates the idea:
 // Package declaration. Offset is 0.
 package proto
 
-// Struct type is 1 (implicit declared)
+// Struct type number is 1 (implicit declared)
 struct Struct1
 {
     ...
 }
 
-// Struct type is 2 (implicit declared)
+// Struct type number is 2 (implicit declared)
 struct Struct2
 {
     ...
 }
 
-// Struct type is 10 (explicit declared, shifted to 10)
+// Struct type number is 10 (explicit declared, shifted to 10)
 struct Struct10(+10)
 {
     ...
 }
 
-// Struct type is 11 (implicit declared)
+// Struct type number is 11 (implicit declared)
 struct Struct11
 {
     ...
 }
 
-// Struct type is 100 (explicit declared, forced to 100)
+// Struct type number is 100 (explicit declared, forced to 100)
 struct Struct100(100)
 {
     ...
 }
 
-// Struct type is 12 (implicit declared)
+// Struct type number is 12 (implicit declared)
 struct Struct12
 {
     ...
@@ -707,14 +707,14 @@ base struct will be present in a child one.
 ```proto
 package proto
 
-// Struct type is 1
+// Struct type number is 1
 struct StructBase
 {
     bool f1;
     int8 f2;
 }
 
-// Struct type is 2
+// Struct type number is 2
 struct StructChild : StructBase
 {
     // bool f1 - will be inherited from StructBase
@@ -724,9 +724,9 @@ struct StructChild : StructBase
 }
 ```
 
-Also it is possible to reuse the base struct type in a child one using '= base'
-operator. It is useful when you extend the struct from third-party imported
-package:
+Also it is possible to reuse the base struct type number in a child one using
+'= base' operator. It is useful when you extend the struct from third-party
+imported package:
 ```proto
 // Package declaration. Offset is 10.
 package protoex offset 10
@@ -734,7 +734,7 @@ package protoex offset 10
 // Package import
 import proto
 
-// Struct type is 1
+// Struct type number is 1
 struct StructChild(base) : proto.StructBase
 {
     // bool f1 - will be inherited from proto.StructBase
