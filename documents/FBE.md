@@ -794,7 +794,7 @@ types into one logic structure. Moreover structs can be extended using
 inheritance.
 
 [Struct keys](../README.md#struct-keys)<br/>
-[Struct types](../README.md#struct-types)<br/>
+[Struct numeration](../README.md#struct-numeration)<br/>
 [Struct inheritance](../README.md#struct-inheritance)<br/>
 
 *Implementation of the struct type depends on equivalent type in each
