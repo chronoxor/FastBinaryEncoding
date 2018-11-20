@@ -37,7 +37,7 @@ private:
     bool _json;
     bool _sender;
 
-    void GenerateHeader();
+    void GenerateHeader(const std::string& source);
     void GenerateFooter();
     void GenerateImports();
     void GenerateFBE(const CppCommon::Path& path);

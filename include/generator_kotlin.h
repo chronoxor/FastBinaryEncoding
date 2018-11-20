@@ -37,7 +37,7 @@ private:
     bool _json;
     bool _sender;
 
-    void GenerateHeader();
+    void GenerateHeader(const std::string& source);
     void GenerateFooter();
     void GenerateImports(const std::string& package);
     void GenerateImports(const std::shared_ptr<Package>& p);

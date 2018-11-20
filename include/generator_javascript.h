@@ -37,7 +37,7 @@ private:
     bool _json;
     bool _sender;
 
-    void GenerateHeader();
+    void GenerateHeader(const std::string& source);
     void GenerateFooter();
     void GenerateBig(const CppCommon::Path& path);
     void GenerateInt64(const CppCommon::Path& path);
@@ -45,7 +45,7 @@ private:
     void GenerateIEEE754(const CppCommon::Path& path);
     void GenerateUTF8(const CppCommon::Path& path);
     void GenerateFBE(const CppCommon::Path& path);
-    void GenerateFBEBuffer();
+    void GenerateFBEBaseBuffer();
     void GenerateFBEWriteBuffer();
     void GenerateFBEReadBuffer();
     void GenerateFBEModel();

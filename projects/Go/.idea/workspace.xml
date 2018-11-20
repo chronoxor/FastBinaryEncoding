@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="ba8f4190-0800-4bce-b2eb-ad8ed5d1197a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../../CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../TODO.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../TODO.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/generator_cpp.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_cpp.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/generator_csharp.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_csharp.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/generator_java.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_java.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/generator_javascript.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_javascript.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/generator_kotlin.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_kotlin.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/generator_python.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_python.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/generator_ruby.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_ruby.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../modules/CppBenchmark" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppBenchmark" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../modules/CppCommon" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppCommon" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/fbe.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/fbe.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/Buffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/Buffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelBoolean.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelBoolean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelByte.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelByte.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelBytes.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelBytes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelChar.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelChar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelDecimal.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelDecimal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelDouble.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelDouble.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelFloat.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelFloat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelInt16.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelInt16.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelInt32.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelInt32.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelInt64.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelInt64.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelInt8.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelInt8.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelString.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelTimestamp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelTimestamp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelUUID.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelUUID.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelWChar.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelWChar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelBoolean.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelBoolean.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelByte.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelByte.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelBytes.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelBytes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelChar.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelChar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelDecimal.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelDecimal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelDouble.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelDouble.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelFloat.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelFloat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelInt16.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelInt16.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelInt32.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelInt32.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelInt64.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelInt64.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelInt8.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelInt8.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelString.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelTimestamp.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelTimestamp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelUUID.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelUUID.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelWChar.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FinalModelWChar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/Json.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/Json.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/Model.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/Pair.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/Pair.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/Receiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/Sender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/Size.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/Size.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/UUIDGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/UUIDGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/big.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/big.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/fbe.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/fbe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/ieee754.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/ieee754.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/int64.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/int64.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/utf8.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/utf8.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/uuid.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/uuid.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/Buffer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/Buffer.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelBoolean.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelBoolean.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelByte.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelByte.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelBytes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelBytes.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelChar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelChar.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelDecimal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelDecimal.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelDouble.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelDouble.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelFloat.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelFloat.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelInt16.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelInt16.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelInt32.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelInt32.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelInt64.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelInt64.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelInt8.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelInt8.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelString.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelString.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelTimestamp.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelTimestamp.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelUInt16.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelUInt16.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelUInt32.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelUInt32.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelUInt64.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelUInt64.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelUInt8.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelUInt8.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelUUID.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelUUID.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelWChar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelWChar.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelBoolean.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelBoolean.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelByte.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelByte.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelBytes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelBytes.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelChar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelChar.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelDecimal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelDecimal.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelDouble.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelDouble.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelFloat.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelFloat.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelInt16.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelInt16.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelInt32.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelInt32.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelInt64.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelInt64.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelInt8.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelInt8.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelString.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelString.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelTimestamp.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelTimestamp.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelUInt16.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelUInt16.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelUInt32.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelUInt32.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelUInt64.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelUInt64.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelUInt8.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelUInt8.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelUUID.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelUUID.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelWChar.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FinalModelWChar.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/Json.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/Json.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/Model.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/Model.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/Receiver.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/Receiver.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/Sender.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/Sender.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/Size.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/Size.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/UUIDGenerator.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/UUIDGenerator.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/proto/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/proto/fbe.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/fbe.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/fbe.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/fbe.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/fbe.l" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/fbe.l" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_cpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_cpp.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_csharp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_csharp.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_java.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_java.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_javascript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_javascript.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_python.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_python.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_ruby.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_ruby.cpp" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-1315255631">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="go" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Go" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="go" value="16" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Go" value="16" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/examples/buffer.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+              <folding>
+                <element signature="e#14#50#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="GOROOT" path="Z:\soft\Development\Go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/examples/buffer.go" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="531" />
+    <option name="y" value="269" />
+    <option name="width" value="1400" />
+    <option name="height" value="1000" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Go" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Go" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Go" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Go" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Go" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Go" type="462c0819:PsiDirectoryNode" />
+              <item name="proto" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Go" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Go" type="462c0819:PsiDirectoryNode" />
+              <item name="proto" type="462c0819:PsiDirectoryNode" />
+              <item name="fbe" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="go.gopath.indexing.explicitly.defined" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="go build buffer.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="Go" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/examples/buffer.go" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build buffer.go" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="531" y="269" width="1400" height="1000" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Favorites" side_tool="true" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3298731" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/proto/fbe/BaseBuffer.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/fbe/ReadBuffer.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/fbe/WriteBuffer.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="428">
+          <caret line="126" lean-forward="true" selection-start-line="126" selection-end-line="126" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/buffer.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+          <folding>
+            <element signature="e#14#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

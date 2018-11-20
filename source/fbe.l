@@ -9,6 +9,7 @@ E [Ee][+-]?{D}+
 #include "fbe-parser.hpp"
 #include "generator_cpp.h"
 #include "generator_csharp.h"
+#include "generator_go.h"
 #include "generator_java.h"
 #include "generator_javascript.h"
 #include "generator_kotlin.h"
@@ -176,6 +177,7 @@ int main(int argc, char** argv)
     parser.add_option("-t", "--tabs").action("store_true").set_default(0).help("Format with tabs. Default: off");
     parser.add_option("--cpp").action("store_true").set_default(0).help("Generate C++ code");
     parser.add_option("--csharp").action("store_true").set_default(0).help("Generate C# code");
+    parser.add_option("--go").action("store_true").set_default(0).help("Generate Go code");
     parser.add_option("--java").action("store_true").set_default(0).help("Generate Java code");
     parser.add_option("--javascript").action("store_true").set_default(0).help("Generate JavaScript code");
     parser.add_option("--kotlin").action("store_true").set_default(0).help("Generate Kotlin code");
@@ -203,6 +205,7 @@ int main(int argc, char** argv)
     bool quiet = options.get("quiet");
     bool cpp = options.get("cpp");
     bool csharp = options.get("csharp");
+    bool go = options.get("go");
     bool java = options.get("java");
     bool javascript = options.get("javascript");
     bool kotlin = options.get("kotlin");
@@ -274,6 +277,12 @@ int main(int argc, char** argv)
     {
         if (!quiet) std::cout << "Generating C# code...";
         FBE::GeneratorCSharp(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
+        if (!quiet) std::cout << "Done!" << std::endl;
+    }
+    if (go)
+    {
+        if (!quiet) std::cout << "Generating Go code...";
+        FBE::GeneratorGo(input, output, 1, false).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (java)

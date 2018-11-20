@@ -37,11 +37,10 @@ private:
     bool _json;
     bool _sender;
 
-    void GenerateHeader();
+    void GenerateHeader(const std::string& source);
     void GenerateFooter();
     void GenerateInit(const CppCommon::Path& path);
     void GenerateFBE(const CppCommon::Path& path);
-    void GenerateFBEBuffer();
     void GenerateFBEWriteBuffer();
     void GenerateFBEReadBuffer();
     void GenerateFBEModel();
