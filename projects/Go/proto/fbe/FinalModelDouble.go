@@ -5,6 +5,13 @@
 
 package fbe
 
+import "time"
+import "github.com/google/uuid"
+
+// Workaround for Go unused imports issue
+var _ = time.Unix(0, 0)
+var _ = uuid.Nil
+
 // Fast Binary Encoding float64 final model class
 type FinalModelDouble struct {
     buffer Buffer // Final model buffer

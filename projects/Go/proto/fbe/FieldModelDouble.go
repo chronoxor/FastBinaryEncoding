@@ -5,6 +5,13 @@
 
 package fbe
 
+import "time"
+import "github.com/google/uuid"
+
+// Workaround for Go unused imports issue
+var _ = time.Unix(0, 0)
+var _ = uuid.Nil
+
 // Fast Binary Encoding float64 field model class
 type FieldModelDouble struct {
     buffer Buffer // Field model buffer

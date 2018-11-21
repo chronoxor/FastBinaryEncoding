@@ -29,8 +29,8 @@ void GeneratorGo::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEFieldModel("fbe", "UInt64", "uint64", "8", "0");
     GenerateFBEFieldModel("fbe", "Float", "float32", "4", "0.0");
     GenerateFBEFieldModel("fbe", "Double", "float64", "8", "0.0");
-    //GenerateFBEFieldModel("Timestamp", "uint64", "8", "0");
-    //GenerateFBEFieldModel("UUID", "uuid", "16", "uuid.UUID(int=0)");
+    GenerateFBEFieldModel("fbe", "Timestamp", "time.Time", "8", "time.Unix(0, 0)");
+    GenerateFBEFieldModel("fbe", "UUID", "uuid.UUID", "16", "uuid.Nil");
     //GenerateFBEFieldModelDecimal();
     //GenerateFBEFieldModelBytes();
     //GenerateFBEFieldModelString();
@@ -55,8 +55,8 @@ void GeneratorGo::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModel("fbe", "UInt64", "uint64", "8", "0");
         GenerateFBEFinalModel("fbe", "Float", "float32", "4", "0.0");
         GenerateFBEFinalModel("fbe", "Double", "float64", "8", "0.0");
-        //GenerateFBEFinalModel("Timestamp", "uint64", "8", "0");
-        //GenerateFBEFinalModel("UUID", "uuid", "16", "uuid.UUID(int=0)");
+        GenerateFBEFinalModel("fbe", "Timestamp", "time.Time", "8", "time.Unix(0, 0)");
+        GenerateFBEFinalModel("fbe", "UUID", "uuid.UUID", "16", "uuid.Nil");
         //GenerateFBEFinalModelDecimal();
         //GenerateFBEFinalModelBytes();
         //GenerateFBEFinalModelString();
@@ -154,6 +154,7 @@ void GeneratorGo::GenerateFBEBuffer(const std::string& package)
 package fbe
 
 import "math"
+import "time"
 import "github.com/google/uuid"
 
 // Fast Binary Encoding buffer based on dynamic byte array
@@ -378,6 +379,11 @@ func ReadDouble(buffer []byte, offset int) float64 {
     return math.Float64frombits(bits)
 }
 
+func ReadTimestamp(buffer []byte, offset int) time.Time {
+    nanoseconds := ReadUInt64(buffer, offset)
+    return time.Unix(int64(nanoseconds / 1000000000), int64(nanoseconds % 1000000000))
+}
+
 func ReadUUID(buffer []byte, offset int) uuid.UUID {
     bytes := ReadBytes(buffer, offset, 16)
     result, _ := uuid.FromBytes(bytes)
@@ -474,6 +480,11 @@ func WriteDouble(buffer []byte, offset int, value float64) {
     WriteUInt64(buffer, offset, math.Float64bits(value))
 }
 
+func WriteTimestamp(buffer []byte, offset int, value time.Time) {
+    nanoseconds := value.UnixNano()
+    WriteUInt64(buffer, offset, uint64(nanoseconds))
+}
+
 func WriteUUID(buffer []byte, offset int, value uuid.UUID) {
     bytes, _ := value.MarshalBinary()
     WriteBytes(buffer, offset, bytes)
@@ -523,6 +534,13 @@ void GeneratorGo::GenerateFBEFieldModel(const std::string& package, const std::s
 
     std::string code = R"CODE(
 package fbe
+
+import "time"
+import "github.com/google/uuid"
+
+// Workaround for Go unused imports issue
+var _ = time.Unix(0, 0)
+var _ = uuid.Nil
 
 // Fast Binary Encoding _TYPE_ field model class
 type FieldModel_NAME_ struct {
@@ -1570,26 +1588,6 @@ class FieldModelMap(FieldModel):
     Write(code);
 }
 
-void GeneratorGo::GenerateFBEFinalModel()
-{
-    std::string code = R"CODE(
-
-# Fast Binary Encoding final model class
-class FinalModel(FieldModelBase):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
-
-    # Check if the value is valid
-    def verify(self):
-        raise NotImplementedError("verify() method not implemented!")
-)CODE";
-
-    // Prepare code template
-    code = std::regex_replace(code, std::regex("\n"), EndLine());
-
-    Write(code);
-}
-
 void GeneratorGo::GenerateFBEFinalModel(const std::string& package, const std::string& name, const std::string& type, const std::string& size, const std::string& defaults)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
@@ -1603,6 +1601,13 @@ void GeneratorGo::GenerateFBEFinalModel(const std::string& package, const std::s
 
     std::string code = R"CODE(
 package fbe
+
+import "time"
+import "github.com/google/uuid"
+
+// Workaround for Go unused imports issue
+var _ = time.Unix(0, 0)
+var _ = uuid.Nil
 
 // Fast Binary Encoding _TYPE_ final model class
 type FinalModel_NAME_ struct {

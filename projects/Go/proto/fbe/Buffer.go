@@ -6,6 +6,7 @@
 package fbe
 
 import "math"
+import "time"
 import "github.com/google/uuid"
 
 // Fast Binary Encoding buffer based on dynamic byte array
@@ -230,6 +231,11 @@ func ReadDouble(buffer []byte, offset int) float64 {
     return math.Float64frombits(bits)
 }
 
+func ReadTimestamp(buffer []byte, offset int) time.Time {
+    nanoseconds := ReadUInt64(buffer, offset)
+    return time.Unix(int64(nanoseconds / 1000000000), int64(nanoseconds % 1000000000))
+}
+
 func ReadUUID(buffer []byte, offset int) uuid.UUID {
     bytes := ReadBytes(buffer, offset, 16)
     result, _ := uuid.FromBytes(bytes)
@@ -324,6 +330,11 @@ func WriteFloat(buffer []byte, offset int, value float32) {
 
 func WriteDouble(buffer []byte, offset int, value float64) {
     WriteUInt64(buffer, offset, math.Float64bits(value))
+}
+
+func WriteTimestamp(buffer []byte, offset int, value time.Time) {
+    nanoseconds := value.UnixNano()
+    WriteUInt64(buffer, offset, uint64(nanoseconds))
 }
 
 func WriteUUID(buffer []byte, offset int, value uuid.UUID) {

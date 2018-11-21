@@ -51,7 +51,6 @@ private:
     void GenerateFBEFieldModelVector();
     void GenerateFBEFieldModelSet();
     void GenerateFBEFieldModelMap();
-    void GenerateFBEFinalModel();
     void GenerateFBEFinalModel(const std::string& package, const std::string& name, const std::string& type, const std::string& size, const std::string& defaults);
     void GenerateFBEFinalModelDecimal();
     void GenerateFBEFinalModelBytes();
