@@ -13,66 +13,60 @@ namespace FBE {
 void GeneratorGo::Generate(const std::shared_ptr<Package>& package)
 {
     GenerateFBEPackage("fbe");
-    GenerateFBEBaseBuffer("fbe");
-    GenerateFBEWriteBuffer("fbe");
-    GenerateFBEReadBuffer("fbe");
-
-    /*
-    GenerateFBEModel();
-    GenerateFBEFieldModelBase();
-    GenerateFBEFieldModel();
-    GenerateFBEFieldModel("Bool", "bool", "1", "False");
-    GenerateFBEFieldModel("Byte", "byte", "1", "0");
-    GenerateFBEFieldModel("Char", "char", "1", "'\\0'");
-    GenerateFBEFieldModel("WChar", "wchar", "4", "'\\0'");
-    GenerateFBEFieldModel("Int8", "int8", "1", "0");
-    GenerateFBEFieldModel("UInt8", "uint8", "1", "0");
-    GenerateFBEFieldModel("Int16", "int16", "2", "0");
-    GenerateFBEFieldModel("UInt16", "uint16", "2", "0");
-    GenerateFBEFieldModel("Int32", "int32", "4", "0");
-    GenerateFBEFieldModel("UInt32", "uint32", "4", "0");
-    GenerateFBEFieldModel("Int64", "int64", "8", "0");
-    GenerateFBEFieldModel("UInt64", "uint64", "8", "0");
-    GenerateFBEFieldModel("Float", "float", "4", "0.0");
-    GenerateFBEFieldModel("Double", "double", "8", "0.0");
-    GenerateFBEFieldModel("Timestamp", "uint64", "8", "0");
-    GenerateFBEFieldModel("UUID", "uuid", "16", "uuid.UUID(int=0)");
-    GenerateFBEFieldModelDecimal();
-    GenerateFBEFieldModelBytes();
-    GenerateFBEFieldModelString();
-    GenerateFBEFieldModelOptional();
-    GenerateFBEFieldModelArray();
-    GenerateFBEFieldModelVector();
-    GenerateFBEFieldModelSet();
-    GenerateFBEFieldModelMap();
+    GenerateFBEConstants("fbe");
+    GenerateFBEBuffer("fbe");
+    GenerateFBEFieldModel("fbe", "Bool", "bool", "1", "false");
+    GenerateFBEFieldModel("fbe", "Byte", "byte", "1", "0");
+    GenerateFBEFieldModel("fbe", "Char", "rune", "1", "'\\000'");
+    GenerateFBEFieldModel("fbe", "WChar", "rune", "4", "'\\000'");
+    GenerateFBEFieldModel("fbe", "Int8", "int8", "1", "0");
+    GenerateFBEFieldModel("fbe", "UInt8", "uint8", "1", "0");
+    GenerateFBEFieldModel("fbe", "Int16", "int16", "2", "0");
+    GenerateFBEFieldModel("fbe", "UInt16", "uint16", "2", "0");
+    GenerateFBEFieldModel("fbe", "Int32", "int32", "4", "0");
+    GenerateFBEFieldModel("fbe", "UInt32", "uint32", "4", "0");
+    GenerateFBEFieldModel("fbe", "Int64", "int64", "8", "0");
+    GenerateFBEFieldModel("fbe", "UInt64", "uint64", "8", "0");
+    GenerateFBEFieldModel("fbe", "Float", "float32", "4", "0.0");
+    GenerateFBEFieldModel("fbe", "Double", "float64", "8", "0.0");
+    //GenerateFBEFieldModel("Timestamp", "uint64", "8", "0");
+    //GenerateFBEFieldModel("UUID", "uuid", "16", "uuid.UUID(int=0)");
+    //GenerateFBEFieldModelDecimal();
+    //GenerateFBEFieldModelBytes();
+    //GenerateFBEFieldModelString();
+    //GenerateFBEFieldModelOptional();
+    //GenerateFBEFieldModelArray();
+    //GenerateFBEFieldModelVector();
+    //GenerateFBEFieldModelSet();
+    //GenerateFBEFieldModelMap();
     if (Final())
     {
-        GenerateFBEFinalModel();
-        GenerateFBEFinalModel("Bool", "bool", "1", "False");
-        GenerateFBEFinalModel("Byte", "byte", "1", "0");
-        GenerateFBEFinalModel("Char", "char", "1", "'\\0'");
-        GenerateFBEFinalModel("WChar", "wchar", "4", "'\\0'");
-        GenerateFBEFinalModel("Int8", "int8", "1", "0");
-        GenerateFBEFinalModel("UInt8", "uint8", "1", "0");
-        GenerateFBEFinalModel("Int16", "int16", "2", "0");
-        GenerateFBEFinalModel("UInt16", "uint16", "2", "0");
-        GenerateFBEFinalModel("Int32", "int32", "4", "0");
-        GenerateFBEFinalModel("UInt32", "uint32", "4", "0");
-        GenerateFBEFinalModel("Int64", "int64", "8", "0");
-        GenerateFBEFinalModel("UInt64", "uint64", "8", "0");
-        GenerateFBEFinalModel("Float", "float", "4", "0.0");
-        GenerateFBEFinalModel("Double", "double", "8", "0.0");
-        GenerateFBEFinalModel("Timestamp", "uint64", "8", "0");
-        GenerateFBEFinalModel("UUID", "uuid", "16", "uuid.UUID(int=0)");
-        GenerateFBEFinalModelDecimal();
-        GenerateFBEFinalModelBytes();
-        GenerateFBEFinalModelString();
-        GenerateFBEFinalModelOptional();
-        GenerateFBEFinalModelArray();
-        GenerateFBEFinalModelVector();
-        GenerateFBEFinalModelSet();
-        GenerateFBEFinalModelMap();
+        GenerateFBEFinalModel("fbe", "Bool", "bool", "1", "false");
+        GenerateFBEFinalModel("fbe", "Byte", "byte", "1", "0");
+        GenerateFBEFinalModel("fbe", "Char", "rune", "1", "'\\000'");
+        GenerateFBEFinalModel("fbe", "WChar", "rune", "4", "'\\000'");
+        GenerateFBEFinalModel("fbe", "Int8", "int8", "1", "0");
+        GenerateFBEFinalModel("fbe", "UInt8", "uint8", "1", "0");
+        GenerateFBEFinalModel("fbe", "Int16", "int16", "2", "0");
+        GenerateFBEFinalModel("fbe", "UInt16", "uint16", "2", "0");
+        GenerateFBEFinalModel("fbe", "Int32", "int32", "4", "0");
+        GenerateFBEFinalModel("fbe", "UInt32", "uint32", "4", "0");
+        GenerateFBEFinalModel("fbe", "Int64", "int64", "8", "0");
+        GenerateFBEFinalModel("fbe", "UInt64", "uint64", "8", "0");
+        GenerateFBEFinalModel("fbe", "Float", "float32", "4", "0.0");
+        GenerateFBEFinalModel("fbe", "Double", "float64", "8", "0.0");
+        //GenerateFBEFinalModel("Timestamp", "uint64", "8", "0");
+        //GenerateFBEFinalModel("UUID", "uuid", "16", "uuid.UUID(int=0)");
+        //GenerateFBEFinalModelDecimal();
+        //GenerateFBEFinalModelBytes();
+        //GenerateFBEFinalModelString();
+        //GenerateFBEFinalModelOptional();
+        //GenerateFBEFinalModelArray();
+        //GenerateFBEFinalModelVector();
+        //GenerateFBEFinalModelSet();
+        //GenerateFBEFinalModelMap();
     }
+    /*
     if (Sender())
     {
         GenerateFBESender();
@@ -112,12 +106,12 @@ void GeneratorGo::GenerateFBEPackage(const std::string& package)
     CppCommon::Directory::CreateTree(path);
 }
 
-void GeneratorGo::GenerateFBEBaseBuffer(const std::string& package)
+void GeneratorGo::GenerateFBEConstants(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / "BaseBuffer.go";
+    CppCommon::Path file = path / "Constants.go";
     Open(file);
 
     // Generate headers
@@ -126,29 +120,11 @@ void GeneratorGo::GenerateFBEBaseBuffer(const std::string& package)
     std::string code = R"CODE(
 package fbe
 
-// Fast Binary Encoding base buffer
-type BaseBuffer struct {
-    buffer []byte // Buffer of bytes
-    size   int    // Buffer length
-    offset int    // Buffer offset
-}
+const MaxInt = int(^uint(0) >> 1)
+const MinInt = -MaxInt - 1
 
-
-func (bb *BaseBuffer) Empty() bool    { return (bb == nil) || (bb.size <= 0) }
-func (bb *BaseBuffer) Buffer() []byte { return bb.buffer }
-func (bb *BaseBuffer) Capacity() int  { return len(bb.buffer) }
-func (bb *BaseBuffer) Size() int      { return bb.size }
-func (bb *BaseBuffer) Offset() int    { return bb.offset }
-
-// Shift the current buffer offset
-func (bb *BaseBuffer) Shift(offset int) {
-    bb.offset += offset
-}
-
-// Unshift the current buffer offset
-func (bb *BaseBuffer) Unshift(offset int) {
-    bb.offset -= offset
-}
+const MaxUint = ^uint(0)
+const MinUint = 0
 )CODE";
 
     // Prepare code template
@@ -163,12 +139,12 @@ func (bb *BaseBuffer) Unshift(offset int) {
     Close();
 }
 
-void GeneratorGo::GenerateFBEWriteBuffer(const std::string& package)
+void GeneratorGo::GenerateFBEBuffer(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / "WriteBuffer.go";
+    CppCommon::Path file = path / "Buffer.go";
     Open(file);
 
     // Generate headers
@@ -177,32 +153,57 @@ void GeneratorGo::GenerateFBEWriteBuffer(const std::string& package)
     std::string code = R"CODE(
 package fbe
 
-// Fast Binary Encoding write buffer based on the dynamic byte array
-type WriteBuffer struct {
-    BaseBuffer
+import "math"
+import "github.com/google/uuid"
+
+// Fast Binary Encoding buffer based on dynamic byte array
+type Buffer struct {
+    data   []byte // Bytes memory buffer
+    size   int    // Bytes memory buffer size
+    offset int    // Bytes memory buffer offset
 }
 
-//noinspection GoUnusedExportedFunction
-func NewWriteBuffer(capacity int) *WriteBuffer {
-    return &WriteBuffer{BaseBuffer{buffer: make([]byte, capacity)}}
+// Is the buffer empty?
+func (b Buffer) Empty() bool { return (b.data == nil) || (b.size <= 0) }
+// Get bytes memory buffer
+func (b Buffer) Data() []byte { return b.data }
+// Get bytes memory buffer capacity
+func (b Buffer) Capacity() int { return len(b.data) }
+// Get bytes memory buffer size
+func (b Buffer) Size() int { return b.size }
+// Get bytes memory buffer offset
+func (b Buffer) Offset() int { return b.offset }
+
+func NewEmptyBuffer() *Buffer {
+    return &Buffer{data: make([]byte, 0)}
+}
+
+func NewCapacityBuffer(capacity int) *Buffer {
+    return &Buffer{data: make([]byte, capacity)}
+}
+
+func NewAttachedBuffer(buffer []byte, offset int, size int) *Buffer {
+    result := NewEmptyBuffer()
+    result.AttachBuffer(buffer, offset, size)
+    return result
 }
 
 // Attach an empty memory buffer
-func (wb *WriteBuffer) AttachNew() {
-    wb.buffer = make([]byte, 0)
-    wb.size = 0
-    wb.offset = 0
+func (b *Buffer) AttachNew() {
+    b.data = make([]byte, 0)
+    b.size = 0
+    b.offset = 0
 }
 
 // Attach an empty memory buffer with a given capacity
-func (wb *WriteBuffer) AttachCapacity(capacity int) {
-    wb.buffer = make([]byte, capacity)
-    wb.size = 0
-    wb.offset = 0
+func (b *Buffer) AttachCapacity(capacity int) {
+    b.data = make([]byte, capacity)
+    b.size = 0
+    b.offset = 0
 }
 
 // Attach a given memory buffer
-func (wb *WriteBuffer) AttachBuffer(buffer []byte, offset int, size int) {
+func (b *Buffer) AttachBuffer(buffer []byte, offset int, size int) {
     if buffer == nil {
         panic("Invalid buffer!")
     }
@@ -213,88 +214,287 @@ func (wb *WriteBuffer) AttachBuffer(buffer []byte, offset int, size int) {
         panic("Invalid offset!")
     }
 
-    wb.buffer = buffer
-    wb.size = size
-    wb.offset = offset
+    b.data = buffer
+    b.size = size
+    b.offset = offset
 }
 
 // Allocate memory in the current write buffer and return offset to the allocated memory block
-func (wb *WriteBuffer) Allocate(size int) int {
+func (b *Buffer) Allocate(size int) int {
     if size < 0 {
         panic("Invalid allocation size!")
     }
 
-    offset := wb.size
+    offset := b.size
 
     // Calculate a new buffer size
-    total := wb.size + size
+    total := b.size + size
 
-    if total <= len(wb.buffer) {
-        wb.size = total
+    if total <= len(b.data) {
+        b.size = total
         return offset
     }
 
-    length := 2 * len(wb.buffer)
+    length := 2 * len(b.data)
     if length < total {
         length = total
     }
 
     data := make([]byte, length)
-    copy(data, wb.buffer[:wb.size])
-    wb.buffer = data
-    wb.size = total
+    copy(data, b.data[:b.size])
+    b.data = data
+    b.size = total
     return offset
 }
 
 // Remove some memory of the given size from the current write buffer
-func (wb *WriteBuffer) Remove(offset int, size int) {
-    if (offset + size) > len(wb.buffer) {
+func (b *Buffer) Remove(offset int, size int) {
+    if (offset + size) > len(b.data) {
         panic("Invalid offset & size!")
     }
 
-    wb.buffer = append(wb.buffer[:offset], wb.buffer[offset+size:]...)
-    wb.size -= size
-    if wb.offset >= (offset + size) {
-        wb.offset -= size
-    } else if wb.offset >= offset {
-        wb.offset -= wb.offset - offset
-        if wb.offset > wb.size {
-            wb.offset = wb.size
+    b.data = append(b.data[:offset], b.data[offset+size:]...)
+    b.size -= size
+    if b.offset >= (offset + size) {
+        b.offset -= size
+    } else if b.offset >= offset {
+        b.offset -= b.offset - offset
+        if b.offset > b.size {
+            b.offset = b.size
         }
     }
 }
 
 // Reserve memory of the given capacity in the current write bufferb
-func (wb *WriteBuffer) Reserve(capacity int) {
+func (b *Buffer) Reserve(capacity int) {
     if capacity < 0 {
         panic("Invalid reserve capacity!")
     }
 
-    if capacity > len(wb.buffer) {
-        length := 2 * len(wb.buffer)
+    if capacity > len(b.data) {
+        length := 2 * len(b.data)
         if length < capacity {
             length = capacity
         }
 
         data := make([]byte, length)
-        copy(data, wb.buffer[:wb.size])
-        wb.buffer = data
+        copy(data, b.data[:b.size])
+        b.data = data
     }
 }
 
 // Resize the current write buffer
-func (wb *WriteBuffer) Resize(size int) {
-    wb.Reserve(size)
-    wb.size = size
-    if wb.offset > wb.size {
-        wb.offset = wb.size
+func (b *Buffer) Resize(size int) {
+    b.Reserve(size)
+    b.size = size
+    if b.offset > b.size {
+        b.offset = b.size
     }
 }
 
 // Reset the current write buffer and its offset
-func (wb *WriteBuffer) Reset() {
-    wb.size = 0
-    wb.offset = 0
+func (b *Buffer) Reset() {
+    b.size = 0
+    b.offset = 0
+}
+
+// Buffer I/O methods
+
+func ReadBool(buffer []byte, offset int) bool {
+    return buffer[offset] != 0
+}
+
+func ReadByte(buffer []byte, offset int) byte {
+    return buffer[offset]
+}
+
+func ReadChar(buffer []byte, offset int) rune {
+    return rune(ReadUInt8(buffer, offset))
+}
+
+func ReadWChar(buffer []byte, offset int) rune {
+    return rune(ReadUInt32(buffer, offset))
+}
+
+func ReadInt8(buffer []byte, offset int) int8 {
+    return int8(buffer[offset])
+}
+
+func ReadUInt8(buffer []byte, offset int) uint8 {
+    return uint8(buffer[offset])
+}
+
+func ReadInt16(buffer []byte, offset int) int16 {
+    return (int16(buffer[offset + 0]) << 0) | (int16(buffer[offset + 1]) << 8)
+}
+
+func ReadUInt16(buffer []byte, offset int) uint16 {
+    return (uint16(buffer[offset + 0]) << 0) | (uint16(buffer[offset + 1]) << 8)
+}
+
+func ReadInt32(buffer []byte, offset int) int32 {
+    return (int32(buffer[offset + 0]) <<  0) |
+           (int32(buffer[offset + 1]) <<  8) |
+           (int32(buffer[offset + 2]) << 16) |
+           (int32(buffer[offset + 3]) << 24)
+}
+
+func ReadUInt32(buffer []byte, offset int) uint32 {
+    return (uint32(buffer[offset + 0]) <<  0) |
+           (uint32(buffer[offset + 1]) <<  8) |
+           (uint32(buffer[offset + 2]) << 16) |
+           (uint32(buffer[offset + 3]) << 24)
+}
+
+func ReadInt64(buffer []byte, offset int) int64 {
+    return (int64(buffer[offset + 0]) <<  0) |
+           (int64(buffer[offset + 1]) <<  8) |
+           (int64(buffer[offset + 2]) << 16) |
+           (int64(buffer[offset + 3]) << 24) |
+           (int64(buffer[offset + 4]) << 32) |
+           (int64(buffer[offset + 5]) << 40) |
+           (int64(buffer[offset + 6]) << 48) |
+           (int64(buffer[offset + 7]) << 56)
+}
+
+func ReadUInt64(buffer []byte, offset int) uint64 {
+    return (uint64(buffer[offset + 0]) <<  0) |
+           (uint64(buffer[offset + 1]) <<  8) |
+           (uint64(buffer[offset + 2]) << 16) |
+           (uint64(buffer[offset + 3]) << 24) |
+           (uint64(buffer[offset + 4]) << 32) |
+           (uint64(buffer[offset + 5]) << 40) |
+           (uint64(buffer[offset + 6]) << 48) |
+           (uint64(buffer[offset + 7]) << 56)
+}
+
+func ReadFloat(buffer []byte, offset int) float32 {
+    bits := ReadUInt32(buffer, offset)
+    return math.Float32frombits(bits)
+}
+
+func ReadDouble(buffer []byte, offset int) float64 {
+    bits := ReadUInt64(buffer, offset)
+    return math.Float64frombits(bits)
+}
+
+func ReadUUID(buffer []byte, offset int) uuid.UUID {
+    bytes := ReadBytes(buffer, offset, 16)
+    result, _ := uuid.FromBytes(bytes)
+    return result
+}
+
+func ReadBytes(buffer []byte, offset int, size int) []byte {
+    return buffer[offset:size]
+}
+
+func ReadString(buffer []byte, offset int, size int) string {
+    return string(buffer[offset:size])
+}
+
+func WriteBool(buffer []byte, offset int, value bool) {
+    if value {
+        buffer[offset] = 1
+    } else {
+        buffer[offset] = 0
+    }
+}
+
+func WriteByte(buffer []byte, offset int, value byte) {
+    buffer[offset] = value
+}
+
+func WriteChar(buffer []byte, offset int, value rune) {
+    WriteUInt8(buffer, offset, uint8(value))
+}
+
+func WriteWChar(buffer []byte, offset int, value rune) {
+    WriteUInt32(buffer, offset, uint32(value))
+}
+
+func WriteInt8(buffer []byte, offset int, value int8) {
+    buffer[offset] = byte(value)
+}
+
+func WriteUInt8(buffer []byte, offset int, value uint8) {
+    buffer[offset] = byte(value)
+}
+
+func WriteInt16(buffer []byte, offset int, value int16) {
+    buffer[offset + 0] = byte(value >> 0)
+    buffer[offset + 1] = byte(value >> 8)
+}
+
+func WriteUInt16(buffer []byte, offset int, value uint16) {
+    buffer[offset + 0] = byte(value >> 0)
+    buffer[offset + 1] = byte(value >> 8)
+}
+
+func WriteInt32(buffer []byte, offset int, value int32) {
+    buffer[offset + 0] = byte(value >>  0)
+    buffer[offset + 1] = byte(value >>  8)
+    buffer[offset + 2] = byte(value >> 16)
+    buffer[offset + 3] = byte(value >> 24)
+}
+
+func WriteUInt32(buffer []byte, offset int, value uint32) {
+    buffer[offset + 0] = byte(value >>  0)
+    buffer[offset + 1] = byte(value >>  8)
+    buffer[offset + 2] = byte(value >> 16)
+    buffer[offset + 3] = byte(value >> 24)
+}
+
+func WriteInt64(buffer []byte, offset int, value int64) {
+    buffer[offset + 0] = byte(value >>  0)
+    buffer[offset + 1] = byte(value >>  8)
+    buffer[offset + 2] = byte(value >> 16)
+    buffer[offset + 3] = byte(value >> 24)
+    buffer[offset + 4] = byte(value >> 32)
+    buffer[offset + 5] = byte(value >> 40)
+    buffer[offset + 6] = byte(value >> 48)
+    buffer[offset + 7] = byte(value >> 56)
+}
+
+func WriteUInt64(buffer []byte, offset int, value uint64) {
+    buffer[offset + 0] = byte(value >>  0)
+    buffer[offset + 1] = byte(value >>  8)
+    buffer[offset + 2] = byte(value >> 16)
+    buffer[offset + 3] = byte(value >> 24)
+    buffer[offset + 4] = byte(value >> 32)
+    buffer[offset + 5] = byte(value >> 40)
+    buffer[offset + 6] = byte(value >> 48)
+    buffer[offset + 7] = byte(value >> 56)
+}
+
+func WriteFloat(buffer []byte, offset int, value float32) {
+    WriteUInt32(buffer, offset, math.Float32bits(value))
+}
+
+func WriteDouble(buffer []byte, offset int, value float64) {
+    WriteUInt64(buffer, offset, math.Float64bits(value))
+}
+
+func WriteUUID(buffer []byte, offset int, value uuid.UUID) {
+    bytes, _ := value.MarshalBinary()
+    WriteBytes(buffer, offset, bytes)
+}
+
+func WriteBytes(buffer []byte, offset int, value []byte) {
+    copy(buffer[offset:len(value)], value)
+}
+
+func WriteSlice(buffer []byte, offset int, value []byte, valueOffset int, valueSize int) {
+    copy(buffer[offset:len(value)], value[valueOffset:valueSize])
+}
+
+func WriteCount(buffer []byte, offset int, value byte, valueCount int) {
+    for i := 0; i < valueCount; i++ {
+        buffer[offset + i] = value
+    }
+}
+
+func WriteString(buffer []byte, offset int, value string) {
+    WriteBytes(buffer, offset, []byte(value))
 }
 )CODE";
 
@@ -310,12 +510,12 @@ func (wb *WriteBuffer) Reset() {
     Close();
 }
 
-void GeneratorGo::GenerateFBEReadBuffer(const std::string& package)
+void GeneratorGo::GenerateFBEFieldModel(const std::string& package, const std::string& name, const std::string& type, const std::string& size, const std::string& defaults)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
 
     // Open the file
-    CppCommon::Path file = path / "ReadBuffer.go";
+    CppCommon::Path file = path / ("FieldModel" + name + ".go");
     Open(file);
 
     // Generate headers
@@ -324,322 +524,56 @@ void GeneratorGo::GenerateFBEReadBuffer(const std::string& package)
     std::string code = R"CODE(
 package fbe
 
-// Fast Binary Encoding read buffer based on the constant byte buffer
-type ReadBuffer struct {
-    BaseBuffer
+// Fast Binary Encoding _TYPE_ field model class
+type FieldModel_NAME_ struct {
+    buffer Buffer // Field model buffer
+    offset int    // Field model buffer offset
 }
 
-// Attach a given memory buffer
-func (rb *ReadBuffer) AttachBuffer(buffer []byte, offset int, size int) {
-    if buffer == nil {
-        panic("Invalid buffer!")
+// Get the field size
+func (fm FieldModel_NAME_) FBESize() int { return _SIZE_ }
+// Get the field extra size
+func (fm FieldModel_NAME_) FBEExtra() int { return 0 }
+
+// Get the field offset
+func (fm FieldModel_NAME_) FBEOffset() int { return fm.offset }
+// Set the field offset
+func (fm *FieldModel_NAME_) SetFBEOffset(value int) { fm.offset = value }
+
+// Shift the current field offset
+func (fm *FieldModel_NAME_) FBEShift(size int) { fm.offset += size }
+// Unshift the current field offset
+func (fm *FieldModel_NAME_) FBEUnshift(size int) { fm.offset -= size }
+
+func NewFieldModel_NAME_(buffer Buffer, offset int) *FieldModel_NAME_ {
+    return &FieldModel_NAME_{buffer: buffer, offset: offset}
+}
+
+// Check if the value is valid
+func (fm FieldModel_NAME_) Verify() bool { return true }
+
+// Get the value
+func (fm FieldModel_NAME_) Get() _TYPE_ {
+    return fm.GetDefault(_DEFAULTS_)
+}
+
+// Get the value with provided default value
+func (fm FieldModel_NAME_) GetDefault(defaults _TYPE_) _TYPE_ {
+    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
+        return defaults
     }
-    if size <= 0 {
-        panic("Invalid size!")
+
+    return Read_NAME_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())
+}
+
+// Set the value
+func (fm *FieldModel_NAME_) Set(value _TYPE_) {
+    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
+        return
     }
-    if offset > size {
-        panic("Invalid offset!")
-    }
 
-    rb.buffer = buffer
-    rb.size = size
-    rb.offset = offset
+    Write_NAME_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
 }
-
-// Reset the current read buffer and its offset
-func (rb *ReadBuffer) Reset() {
-    rb.size = 0
-    rb.offset = 0
-}
-)CODE";
-
-    // Prepare code template
-    code = std::regex_replace(code, std::regex("\n"), EndLine());
-
-    Write(code);
-
-    // Generate footer
-    GenerateFooter();
-
-    // Close the file
-    Close();
-}
-
-void GeneratorGo::GenerateFBEModel()
-{
-    std::string code = R"CODE(
-
-# Fast Binary Encoding base model class
-class Model(object):
-    __slots__ = "_buffer",
-
-    def __init__(self, buffer=None):
-        if buffer is None:
-            buffer = WriteBuffer()
-        self._buffer = buffer
-
-    @property
-    def buffer(self):
-        return self._buffer
-
-    # Attach an empty memory buffer
-    def attach_new(self):
-        self.buffer.attach_new()
-
-    # Attach an empty memory buffer with a given capacity
-    def attach_capacity(self, capacity):
-        self.buffer.attach_capacity(capacity)
-
-    # Attach a given memory buffer
-    def attach_buffer(self, buffer, offset=0, size=None):
-        self.buffer.attach_buffer(buffer, offset, size)
-
-    # Allocate memory in the current write buffer and return offset to the allocated memory block
-    def allocate(self, size):
-        return self.buffer.allocate(size)
-
-    # Remove some memory of the given size from the current write buffer
-    def remove(self, offset, size):
-        self.buffer.remove(offset, size)
-
-    # Reserve memory of the given capacity in the current write buffer
-    def reserve(self, capacity):
-        self.buffer.reserve(capacity)
-
-    # Resize the current write buffer
-    def resize(self, size):
-        self.buffer.resize(size)
-
-    # Reset the current write buffer and its offset
-    def reset(self):
-        self.buffer.reset()
-
-    # Shift the current write buffer offset
-    def shift(self, offset):
-        self.buffer.shift(offset)
-
-    # Unshift the current write buffer offset
-    def unshift(self, offset):
-        self.buffer.unshift(offset)
-
-    # Buffer I/O methods
-
-    def read_uint32(self, offset):
-        return struct.unpack_from("<I", self.buffer.buffer, self.buffer.offset + offset)[0]
-
-    def write_uint32(self, offset, value):
-        return struct.pack_into("<I", self.buffer.buffer, self.buffer.offset + offset, value)
-)CODE";
-
-    // Prepare code template
-    code = std::regex_replace(code, std::regex("\n"), EndLine());
-
-    Write(code);
-}
-
-void GeneratorGo::GenerateFBEFieldModelBase()
-{
-    std::string code = R"CODE(
-
-# Fast Binary Encoding base field model class
-class FieldModelBase(object):
-    __slots__ = "_buffer", "_offset",
-
-    def __init__(self, buffer, offset):
-        self._buffer = buffer
-        self._offset = offset
-
-    # Get the field offset
-    @property
-    def fbe_offset(self):
-        return self._offset
-
-    # Set the field offset
-    @fbe_offset.setter
-    def fbe_offset(self, offset):
-        self._offset = offset
-
-    # Get the field size
-    @property
-    def fbe_size(self):
-        return 0
-
-    # Get the field extra size
-    @property
-    def fbe_extra(self):
-        return 0
-
-    # Shift the current field offset
-    def fbe_shift(self, offset):
-        self._offset += offset
-
-    # Unshift the current field offset
-    def fbe_unshift(self, offset):
-        self._offset -= offset
-
-    # Buffer I/O methods
-
-    def read_bool(self, offset):
-        return struct.unpack_from("<?", self._buffer.buffer, self._buffer.offset + offset)[0]
-
-    def read_byte(self, offset):
-        return struct.unpack_from("<B", self._buffer.buffer, self._buffer.offset + offset)[0]
-
-    def read_char(self, offset):
-        return chr(struct.unpack_from("<B", self._buffer.buffer, self._buffer.offset + offset)[0])
-
-    def read_wchar(self, offset):
-        return chr(struct.unpack_from("<I", self._buffer.buffer, self._buffer.offset + offset)[0])
-
-    def read_int8(self, offset):
-        return struct.unpack_from("<b", self._buffer.buffer, self._buffer.offset + offset)[0]
-
-    def read_uint8(self, offset):
-        return struct.unpack_from("<B", self._buffer.buffer, self._buffer.offset + offset)[0]
-
-    def read_int16(self, offset):
-        return struct.unpack_from("<h", self._buffer.buffer, self._buffer.offset + offset)[0]
-
-    def read_uint16(self, offset):
-        return struct.unpack_from("<H", self._buffer.buffer, self._buffer.offset + offset)[0]
-
-    def read_int32(self, offset):
-        return struct.unpack_from("<i", self._buffer.buffer, self._buffer.offset + offset)[0]
-
-    def read_uint32(self, offset):
-        return struct.unpack_from("<I", self._buffer.buffer, self._buffer.offset + offset)[0]
-
-    def read_int64(self, offset):
-        return struct.unpack_from("<q", self._buffer.buffer, self._buffer.offset + offset)[0]
-
-    def read_uint64(self, offset):
-        return struct.unpack_from("<Q", self._buffer.buffer, self._buffer.offset + offset)[0]
-
-    def read_uint64_be(self, offset):
-        return struct.unpack_from(">Q", self._buffer.buffer, self._buffer.offset + offset)[0]
-
-    def read_float(self, offset):
-        return struct.unpack_from("<f", self._buffer.buffer, self._buffer.offset + offset)[0]
-
-    def read_double(self, offset):
-        return struct.unpack_from("<d", self._buffer.buffer, self._buffer.offset + offset)[0]
-
-    def read_uuid(self, offset):
-        return uuid.UUID(int=((self.read_uint64_be(offset) << 64) | self.read_uint64_be(offset + 8)))
-
-    def read_bytes(self, offset, size):
-        return self._buffer.buffer[self._buffer.offset + offset:self._buffer.offset + offset + size]
-
-    def write_bool(self, offset, value):
-        struct.pack_into("<?", self._buffer.buffer, self._buffer.offset + offset, value)
-
-    def write_byte(self, offset, value):
-        struct.pack_into("<B", self._buffer.buffer, self._buffer.offset + offset, value)
-
-    def write_char(self, offset, value):
-        struct.pack_into("<B", self._buffer.buffer, self._buffer.offset + offset, ord(value))
-
-    def write_wchar(self, offset, value):
-        struct.pack_into("<I", self._buffer.buffer, self._buffer.offset + offset, ord(value))
-
-    def write_int8(self, offset, value):
-        struct.pack_into("<b", self._buffer.buffer, self._buffer.offset + offset, value)
-
-    def write_uint8(self, offset, value):
-        struct.pack_into("<B", self._buffer.buffer, self._buffer.offset + offset, value)
-
-    def write_int16(self, offset, value):
-        struct.pack_into("<h", self._buffer.buffer, self._buffer.offset + offset, value)
-
-    def write_uint16(self, offset, value):
-        struct.pack_into("<H", self._buffer.buffer, self._buffer.offset + offset, value)
-
-    def write_int32(self, offset, value):
-        struct.pack_into("<i", self._buffer.buffer, self._buffer.offset + offset, value)
-
-    def write_uint32(self, offset, value):
-        struct.pack_into("<I", self._buffer.buffer, self._buffer.offset + offset, value)
-
-    def write_int64(self, offset, value):
-        struct.pack_into("<q", self._buffer.buffer, self._buffer.offset + offset, value)
-
-    def write_uint64(self, offset, value):
-        struct.pack_into("<Q", self._buffer.buffer, self._buffer.offset + offset, value)
-
-    def write_float(self, offset, value):
-        struct.pack_into("<f", self._buffer.buffer, self._buffer.offset + offset, value)
-
-    def write_double(self, offset, value):
-        struct.pack_into("<d", self._buffer.buffer, self._buffer.offset + offset, value)
-
-    def write_uuid(self, offset, value):
-        self._buffer.buffer[self._buffer.offset + offset:self._buffer.offset + offset + 16] = value.bytes
-
-    def write_bytes(self, offset, buffer):
-        self._buffer.buffer[self._buffer.offset + offset:self._buffer.offset + offset + len(buffer)] = buffer
-
-    def write_count(self, offset, value, value_count):
-        for i in range(value_count):
-            self._buffer.buffer[self._buffer.offset + offset + i] = value
-)CODE";
-
-    // Prepare code template
-    code = std::regex_replace(code, std::regex("\n"), EndLine());
-
-    Write(code);
-}
-
-void GeneratorGo::GenerateFBEFieldModel()
-{
-    std::string code = R"CODE(
-
-# Fast Binary Encoding field model class
-class FieldModel(FieldModelBase):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
-
-    # Check if the value is valid
-    def verify(self):
-        return True
-)CODE";
-
-    // Prepare code template
-    code = std::regex_replace(code, std::regex("\n"), EndLine());
-
-    Write(code);
-}
-
-void GeneratorGo::GenerateFBEFieldModel(const std::string& name, const std::string& type, const std::string& size, const std::string& defaults)
-{
-    std::string code = R"CODE(
-
-# Fast Binary Encoding _TYPE_ field model class
-class FieldModel_NAME_(FieldModel):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
-
-    # Get the field size
-    @property
-    def fbe_size(self):
-        return _SIZE_
-
-    # Get the value
-    def get(self, defaults=None):
-        if defaults is None:
-            defaults = _DEFAULTS_
-
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return defaults
-
-        return self.read__TYPE_(self.fbe_offset)
-
-    # Set the value
-    def set(self, value):
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return
-
-        self.write__TYPE_(self.fbe_offset, value)
 )CODE";
 
     // Prepare code template
@@ -650,6 +584,12 @@ class FieldModel_NAME_(FieldModel):
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
 }
 
 void GeneratorGo::GenerateFBEFieldModelDecimal()
@@ -1650,47 +1590,75 @@ class FinalModel(FieldModelBase):
     Write(code);
 }
 
-void GeneratorGo::GenerateFBEFinalModel(const std::string& name, const std::string& type, const std::string& size, const std::string& defaults)
+void GeneratorGo::GenerateFBEFinalModel(const std::string& package, const std::string& name, const std::string& type, const std::string& size, const std::string& defaults)
 {
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / ("FinalModel" + name + ".go");
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
     std::string code = R"CODE(
+package fbe
 
-# Fast Binary Encoding _TYPE_ final model class
-class FinalModel_NAME_(FinalModel):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
+// Fast Binary Encoding _TYPE_ final model class
+type FinalModel_NAME_ struct {
+    buffer Buffer // Final model buffer
+    offset int    // Final model buffer offset
+}
 
-    # Get the allocation size
-    # noinspection PyUnusedLocal
-    def fbe_allocation_size(self, value):
-        return self.fbe_size
+// Get the allocation size
+func (fm FinalModel_NAME_) FBEAllocationSize() int { return fm.FBESize() }
 
-    # Get the final size
-    @property
-    def fbe_size(self):
-        return _SIZE_
+// Get the final size
+func (fm FinalModel_NAME_) FBESize() int { return _SIZE_ }
+// Get the final extra size
+func (fm FinalModel_NAME_) FBEExtra() int { return 0 }
 
-    # Check if the value is valid
-    def verify(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return sys.maxsize
+// Get the final offset
+func (fm FinalModel_NAME_) FBEOffset() int { return fm.offset }
+// Set the final offset
+func (fm *FinalModel_NAME_) SetFBEOffset(value int) { fm.offset = value }
 
-        return self.fbe_size
+// Shift the current final offset
+func (fm *FinalModel_NAME_) FBEShift(size int) { fm.offset += size }
+// Unshift the current final offset
+func (fm *FinalModel_NAME_) FBEUnshift(size int) { fm.offset -= size }
 
-    # Get the value
-    def get(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return _DEFAULTS_, 0
+func NewFinalModel_NAME_(buffer Buffer, offset int) *FinalModel_NAME_ {
+    return &FinalModel_NAME_{buffer: buffer, offset: offset}
+}
 
-        return self.read__TYPE_(self.fbe_offset), self.fbe_size
+// Check if the value is valid
+func (fm FinalModel_NAME_) Verify() int {
+    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
+        return MaxInt
+    }
 
-    # Set the value
-    def set(self, value):
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return 0
+    return fm.FBESize()
+}
 
-        self.write__TYPE_(self.fbe_offset, value)
-        return self.fbe_size
+// Get the value
+func (fm FinalModel_NAME_) Get() (_TYPE_, int) {
+    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
+        return _DEFAULTS_, 0
+    }
+
+    return Read_NAME_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), fm.FBESize()
+}
+
+// Set the value
+func (fm *FinalModel_NAME_) Set(value _TYPE_) int {
+    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
+        return 0
+    }
+
+    Write_NAME_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
+    return fm.FBESize()
+}
 )CODE";
 
     // Prepare code template
@@ -1701,6 +1669,12 @@ class FinalModel_NAME_(FinalModel):
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
 }
 
 void GeneratorGo::GenerateFBEFinalModelDecimal()

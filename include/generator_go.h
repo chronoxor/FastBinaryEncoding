@@ -40,13 +40,9 @@ private:
     void GenerateHeader(const std::string& source);
     void GenerateFooter();
     void GenerateFBEPackage(const std::string& package);
-    void GenerateFBEBaseBuffer(const std::string& package);
-    void GenerateFBEWriteBuffer(const std::string& package);
-    void GenerateFBEReadBuffer(const std::string& package);
-    void GenerateFBEModel();
-    void GenerateFBEFieldModelBase();
-    void GenerateFBEFieldModel();
-    void GenerateFBEFieldModel(const std::string& name, const std::string& type, const std::string& size, const std::string& defaults);
+    void GenerateFBEConstants(const std::string& package);
+    void GenerateFBEBuffer(const std::string& package);
+    void GenerateFBEFieldModel(const std::string& package, const std::string& name, const std::string& type, const std::string& size, const std::string& defaults);
     void GenerateFBEFieldModelDecimal();
     void GenerateFBEFieldModelBytes();
     void GenerateFBEFieldModelString();
@@ -56,7 +52,7 @@ private:
     void GenerateFBEFieldModelSet();
     void GenerateFBEFieldModelMap();
     void GenerateFBEFinalModel();
-    void GenerateFBEFinalModel(const std::string& name, const std::string& type, const std::string& size, const std::string& defaults);
+    void GenerateFBEFinalModel(const std::string& package, const std::string& name, const std::string& type, const std::string& size, const std::string& defaults);
     void GenerateFBEFinalModelDecimal();
     void GenerateFBEFinalModelBytes();
     void GenerateFBEFinalModelString();

@@ -6,10 +6,10 @@ import (
 )
 
 func main() {
-	buffer := fbe.NewWriteBuffer(10)
+	buffer := fbe.NewCapacityBuffer(10)
 	buffer.Allocate(10)
 	for i := 0; i < buffer.Size(); i++ {
-		buffer.Buffer()[i] = byte(i)
+		buffer.Data()[i] = byte(i)
 	}
 	buffer.Allocate(5)
 	buffer.Remove(2, 3)
