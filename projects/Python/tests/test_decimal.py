@@ -52,7 +52,6 @@ class TestDecimal(TestCase):
         self.assertEqual(self.verify_decimal(0x075BCD15, 0x00000000, 0x00000000, False, 0x001B0000 >> 16), decimal.Decimal("0.000000000000000000123456789"))
         self.assertEqual(self.verify_decimal(0xFFFFFFFF, 0x00000000, 0x00000000, False, 0x00000000), decimal.Decimal("4294967295"))
         self.assertEqual(self.verify_decimal(0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, False, 0x00000000), decimal.Decimal("18446744073709551615"))
-        self.assertEqual(self.verify_decimal(0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, False, 0x00000000), decimal.Decimal("18446744073709551615"))
         self.assertEqual(self.verify_decimal(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, False, 0x00000000), decimal.Decimal("79228162514264337593543950335"))
         self.assertEqual(self.verify_decimal(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, True, 0x00000000), decimal.Decimal("-79228162514264337593543950335"))
         self.assertEqual(self.verify_decimal(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, True, 0x001C0000 >> 16), decimal.Decimal("-7.9228162514264337593543950335"))

@@ -14,8 +14,9 @@
     <SUITE FILE_PATH="coverage/Python$Unittests_in_test_clone_py.coverage" NAME="Unittests in test_clone.py Coverage Results" MODIFIED="1539850329692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Python$benchmark_serialization.coverage" NAME="benchmark_serialization Coverage Results" MODIFIED="1539984262439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" />
     <SUITE FILE_PATH="coverage/Python$Unittests_in_test_serialization_py.coverage" NAME="Unittests in test_serialization.py Coverage Results" MODIFIED="1539802210026" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/Python$create.coverage" NAME="create Coverage Results" MODIFIED="1538171870770" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
-    <SUITE FILE_PATH="coverage/Python$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1541544002122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Python$test_decimal.coverage" NAME="test_decimal Coverage Results" MODIFIED="1542829880652" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Python$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1542829647436" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Python$create.coverage" NAME="create Coverage Results" MODIFIED="1542829870298" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/Python$print_json.coverage" NAME="print_json Coverage Results" MODIFIED="1539797254122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/Python$print.coverage" NAME="print Coverage Results" MODIFIED="1539814597693" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/Python$Unittests_in_test_decimal_py.coverage" NAME="Unittests in test_decimal.py Coverage Results" MODIFIED="1539652256057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
@@ -34,7 +35,7 @@
       <file leaf-file-name="proto.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proto/proto.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="28101">
+            <state relative-caret-position="28237">
               <caret line="1661" selection-start-line="1661" selection-end-line="1661" />
             </state>
           </provider>
@@ -52,7 +53,7 @@
       <file leaf-file-name="protoex.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proto/protoex.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30192">
+            <state relative-caret-position="30226">
               <caret line="1787" selection-start-line="1787" selection-end-line="1787" />
             </state>
           </provider>
@@ -67,11 +68,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="benchmark_serialization_final.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="benchmark_serialization_final.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_serialization_final.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="700">
+            <state relative-caret-position="1224">
               <caret line="75" selection-start-line="75" selection-end-line="75" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_decimal.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/test_decimal.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="444">
+              <caret line="43" column="9" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="create.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/create.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
             </state>
           </provider>
         </entry>
@@ -118,10 +137,10 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1033" />
-    <option name="y" value="545" />
+    <option name="x" value="497" />
+    <option name="y" value="366" />
     <option name="width" value="1534" />
-    <option name="height" value="1022" />
+    <option name="height" value="1021" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -165,7 +184,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -179,7 +198,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in tests">
+  <component name="RunManager" selected="Python.test_decimal">
     <configuration name="benchmark_send_receive" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Python" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -218,7 +237,7 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="print" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="create" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Python" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -231,54 +250,60 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/print.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/create.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="Unittests in test_clone.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="test_decimal" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Python" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="Z:\projects\CppProjects\FastBinaryEncoding\projects\Python\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/test_clone.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/test_decimal.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
     </configuration>
     <configuration name="Unittests in tests" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="Python" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="Z:\projects\CppProjects\FastBinaryEncoding\projects\Python\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_pattern" value="&quot;&quot;" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;$PROJECT_DIR$/tests&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
     <list>
       <item itemvalue="Python tests.Unittests in tests" />
-      <item itemvalue="Python.print" />
-      <item itemvalue="Python tests.Unittests in test_clone.py" />
       <item itemvalue="Python.benchmark_serialization" />
       <item itemvalue="Python.benchmark_send_receive" />
+      <item itemvalue="Python.test_decimal" />
+      <item itemvalue="Python.create" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test_decimal" />
+        <item itemvalue="Python.create" />
         <item itemvalue="Python tests.Unittests in tests" />
         <item itemvalue="Python.benchmark_send_receive" />
         <item itemvalue="Python.benchmark_serialization" />
-        <item itemvalue="Python tests.Unittests in test_clone.py" />
-        <item itemvalue="Python.print" />
       </list>
     </recent_temporary>
   </component>
@@ -296,9 +321,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_tests - 2018.10.17 at 22h 12m 05s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_in_tests - 2018.10.18 at 11h 10m 52s.xml">
       <configuration name="Unittests in tests" configurationId="tests" />
     </history-entry>
@@ -326,9 +348,12 @@
     <history-entry file="Unittests_in_tests - 2018.11.07 at 01h 40m 04s.xml">
       <configuration name="Unittests in tests" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_in_tests - 2018.11.21 at 22h 47m 29s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1033" y="545" width="1534" height="1022" extended-state="0" />
+    <frame x="497" y="366" width="1534" height="1021" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -336,15 +361,15 @@
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.40369087" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.40300232" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24830393" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2550882" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39907727" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39838338" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -362,7 +387,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="9" />
+      <option name="time" value="12" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -530,13 +555,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_decimal.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_create.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -551,9 +569,6 @@
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/create.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/examples/print_json.py">
@@ -618,14 +633,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/proto/proto.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="28101">
+        <state relative-caret-position="28237">
           <caret line="1661" selection-start-line="1661" selection-end-line="1661" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/proto/protoex.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30192">
+        <state relative-caret-position="30226">
           <caret line="1787" selection-start-line="1787" selection-end-line="1787" />
         </state>
       </provider>
@@ -653,8 +668,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_serialization_final.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="700">
+        <state relative-caret-position="1224">
           <caret line="75" selection-start-line="75" selection-end-line="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/create.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_decimal.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="43" column="9" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
         </state>
       </provider>
     </entry>

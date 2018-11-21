@@ -31,7 +31,7 @@ void GeneratorGo::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEFieldModel("fbe", "Double", "float64", "8", "0.0");
     GenerateFBEFieldModel("fbe", "Timestamp", "time.Time", "8", "time.Unix(0, 0)");
     GenerateFBEFieldModel("fbe", "UUID", "uuid.UUID", "16", "uuid.Nil");
-    //GenerateFBEFieldModelDecimal();
+    GenerateFBEFieldModelDecimal("fbe");
     //GenerateFBEFieldModelBytes();
     //GenerateFBEFieldModelString();
     //GenerateFBEFieldModelOptional();
@@ -57,7 +57,7 @@ void GeneratorGo::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModel("fbe", "Double", "float64", "8", "0.0");
         GenerateFBEFinalModel("fbe", "Timestamp", "time.Time", "8", "time.Unix(0, 0)");
         GenerateFBEFinalModel("fbe", "UUID", "uuid.UUID", "16", "uuid.Nil");
-        //GenerateFBEFinalModelDecimal();
+        GenerateFBEFinalModelDecimal("fbe");
         //GenerateFBEFinalModelBytes();
         //GenerateFBEFinalModelString();
         //GenerateFBEFinalModelOptional();
@@ -175,14 +175,17 @@ func (b Buffer) Size() int { return b.size }
 // Get bytes memory buffer offset
 func (b Buffer) Offset() int { return b.offset }
 
+// Create an empty buffer
 func NewEmptyBuffer() *Buffer {
     return &Buffer{data: make([]byte, 0)}
 }
 
+// Create an empty buffer with a given capacity
 func NewCapacityBuffer(capacity int) *Buffer {
     return &Buffer{data: make([]byte, capacity)}
 }
 
+// Create a buffer with attached bytes memory buffer
 func NewAttachedBuffer(buffer []byte, offset int, size int) *Buffer {
     result := NewEmptyBuffer()
     result.AttachBuffer(buffer, offset, size)
@@ -563,6 +566,7 @@ func (fm *FieldModel_NAME_) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModel_NAME_) FBEUnshift(size int) { fm.offset -= size }
 
+// Create a new field model
 func NewFieldModel_NAME_(buffer Buffer, offset int) *FieldModel_NAME_ {
     return &FieldModel_NAME_{buffer: buffer, offset: offset}
 }
@@ -610,85 +614,149 @@ func (fm *FieldModel_NAME_) Set(value _TYPE_) {
     Close();
 }
 
-void GeneratorGo::GenerateFBEFieldModelDecimal()
+void GeneratorGo::GenerateFBEFieldModelDecimal(const std::string& package)
 {
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / ("FieldModelDecimal.go");
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
     std::string code = R"CODE(
+package fbe
 
-# Fast Binary Encoding decimal field model class
-class FieldModelDecimal(FieldModel):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
+import "math/big"
+import "github.com/shopspring/decimal"
 
-    # Get the field size
-    @property
-    def fbe_size(self):
-        return 16
+// Fast Binary Encoding decimal.Decimal field model class
+type FieldModelDecimal struct {
+    buffer Buffer // Field model buffer
+    offset int    // Field model buffer offset
+}
 
-    # Get the decimal value
-    def get(self, defaults=None):
-        if defaults is None:
-            defaults = decimal.Decimal(0)
+// Get the field size
+func (fm FieldModelDecimal) FBESize() int { return 16 }
+// Get the field extra size
+func (fm FieldModelDecimal) FBEExtra() int { return 0 }
 
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return defaults
+// Get the field offset
+func (fm FieldModelDecimal) FBEOffset() int { return fm.offset }
+// Set the field offset
+func (fm *FieldModelDecimal) SetFBEOffset(value int) { fm.offset = value }
 
-        # Read decimal parts
-        low = self.read_uint32(self.fbe_offset)
-        mid = self.read_uint32(self.fbe_offset + 4)
-        high = self.read_uint32(self.fbe_offset + 8)
-        flags = self.read_uint32(self.fbe_offset + 12)
+// Shift the current field offset
+func (fm *FieldModelDecimal) FBEShift(size int) { fm.offset += size }
+// Unshift the current field offset
+func (fm *FieldModelDecimal) FBEUnshift(size int) { fm.offset -= size }
 
-        # Calculate decimal value
-        negative = (flags & 0x80000000) != 0
-        scale = (flags & 0x7FFFFFFF) >> 16
-        result = decimal.Decimal(high) * 18446744073709551616
-        result += decimal.Decimal(mid) * 4294967296
-        result += decimal.Decimal(low)
-        result /= pow(10, scale)
-        if negative:
-            result = -result
+// Create a new decimal field model
+func NewFieldModelDecimal(buffer Buffer, offset int) *FieldModelDecimal {
+    return &FieldModelDecimal{buffer: buffer, offset: offset}
+}
 
-        return result
+// Check if the decimal value is valid
+func (fm FieldModelDecimal) Verify() bool { return true }
 
-    # Set the decimal value
-    def set(self, value):
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return
+// Get the decimal value
+func (fm FieldModelDecimal) Get() decimal.Decimal {
+    return fm.GetDefault(decimal.Zero)
+}
 
-        # Extract decimal parts
-        parts = value.as_tuple()
-        negative = True if parts.sign == 1 else False
-        number = int(''.join(map(str, parts.digits)))
-        scale = -parts.exponent
+// Get the decimal value with provided default value
+func (fm FieldModelDecimal) GetDefault(defaults decimal.Decimal) decimal.Decimal {
+    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
+        return defaults
+    }
 
-        # Check for decimal number overflow
-        bits = number.bit_length()
-        if (bits < 0) or (bits > 96):
-            # Value too big for .NET Decimal (bit length is limited to [0, 96])
-            self.write_count(self.fbe_offset, 0, self.fbe_size)
-            return
+    // Read decimal parts
+    low := ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())
+    mid := ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 4)
+    high := ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 8)
+    flags := ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 12)
 
-        # Check for decimal scale overflow
-        if (scale < 0) or (scale > 28):
-            # Value scale exceeds .NET Decimal limit of [0, 28]
-            self.write_count(self.fbe_offset, 0, self.fbe_size)
-            return
+    // Calculate decimal value
+    negative := (flags & 0x80000000) != 0
+    scale := (flags & 0x7FFFFFFF) >> 16
+    result := decimal.New(int64(high), 0).Mul(lowScaleField)
+    result = result.Add(decimal.New(int64(mid), 0).Mul(midScaleField))
+    result = result.Add(decimal.New(int64(low), 0))
+    result = result.Shift(-int32(scale))
+    if negative {
+        result = result.Neg()
+    }
 
-        # Write unscaled value to bytes 0-11
-        self.write_bytes(self.fbe_offset, number.to_bytes(12, "little"))
+    return result
+}
 
-        # Write scale at byte 14
-        self.write_byte(self.fbe_offset + 14, scale)
+// Set the decimal value
+func (fm *FieldModelDecimal) Set(value decimal.Decimal) {
+    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
+        return
+    }
 
-        # Write signum at byte 15
-        self.write_byte(self.fbe_offset + 15, 0x80 if negative else 0)
+    // Extract decimal parts
+    negative := value.IsNegative()
+    number := value.Coefficient()
+    scale := -value.Exponent()
+
+    // Check for decimal number overflow
+    bits := number.BitLen()
+    if (bits < 0) || (bits > 96) {
+        // Value too big for .NET Decimal (bit length is limited to [0, 96])
+        WriteCount(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), 0, fm.FBESize())
+        return
+    }
+
+    // Check for decimal scale overflow
+    if (scale < 0) || (scale > 28) {
+        // Value scale exceeds .NET Decimal limit of [0, 28]
+        WriteCount(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), 0, fm.FBESize())
+        return
+    }
+
+    // Write unscaled value to bytes 0-11
+    bytes := number.Bytes()
+    for i := range bytes {
+        WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + i, bytes[len(bytes) - i - 1])
+    }
+    WriteCount(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + len(bytes), 0, 12 - len(bytes))
+
+    // Write scale at byte 14
+    WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 14, byte(scale))
+
+    // Write signum at byte 15
+    if negative {
+        WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 15, 0x80)
+    } else {
+        WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 15, 0)
+    }
+}
+
+var lowScaleField decimal.Decimal
+var midScaleField decimal.Decimal
+
+func init()  {
+    var low, mid big.Int
+    low.SetString("18446744073709551616", 10)
+    mid.SetString("4294967296", 10)
+    lowScaleField = decimal.NewFromBigInt(&low, 0)
+    midScaleField = decimal.NewFromBigInt(&mid, 0)
+}
 )CODE";
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
 }
 
 void GeneratorGo::GenerateFBEFieldModelBytes()
@@ -1633,6 +1701,7 @@ func (fm *FinalModel_NAME_) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModel_NAME_) FBEUnshift(size int) { fm.offset -= size }
 
+// Create a new final model
 func NewFinalModel_NAME_(buffer Buffer, offset int) *FinalModel_NAME_ {
     return &FinalModel_NAME_{buffer: buffer, offset: offset}
 }
@@ -1682,94 +1751,154 @@ func (fm *FinalModel_NAME_) Set(value _TYPE_) int {
     Close();
 }
 
-void GeneratorGo::GenerateFBEFinalModelDecimal()
+void GeneratorGo::GenerateFBEFinalModelDecimal(const std::string& package)
 {
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / ("FinalModelDecimal.go");
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
     std::string code = R"CODE(
+package fbe
 
-# Fast Binary Encoding decimal final model class
-class FinalModelDecimal(FieldModel):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
+import "math/big"
+import "github.com/shopspring/decimal"
 
-    # Get the allocation size
-    # noinspection PyUnusedLocal
-    def fbe_allocation_size(self, value):
-        return self.fbe_size
+// Fast Binary Encoding decimal.Decimal final model class
+type FinalModelDecimal struct {
+    buffer Buffer // Final model buffer
+    offset int    // Final model buffer offset
+}
 
-    # Get the final size
-    @property
-    def fbe_size(self):
-        return 16
+// Get the allocation size
+func (fm FinalModelDecimal) FBEAllocationSize() int { return fm.FBESize() }
 
-    # Check if the decimal value is valid
-    def verify(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return sys.maxsize
+// Get the final size
+func (fm FinalModelDecimal) FBESize() int { return 16 }
+// Get the final extra size
+func (fm FinalModelDecimal) FBEExtra() int { return 0 }
 
-        return self.fbe_size
+// Get the final offset
+func (fm FinalModelDecimal) FBEOffset() int { return fm.offset }
+// Set the final offset
+func (fm *FinalModelDecimal) SetFBEOffset(value int) { fm.offset = value }
 
-    # Get the decimal value
-    def get(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return decimal.Decimal(0), 0
+// Shift the current final offset
+func (fm *FinalModelDecimal) FBEShift(size int) { fm.offset += size }
+// Unshift the current final offset
+func (fm *FinalModelDecimal) FBEUnshift(size int) { fm.offset -= size }
 
-        # Read decimal parts
-        low = self.read_uint32(self.fbe_offset)
-        mid = self.read_uint32(self.fbe_offset + 4)
-        high = self.read_uint32(self.fbe_offset + 8)
-        flags = self.read_uint32(self.fbe_offset + 12)
+// Create a new decimal final model
+func NewFinalModelDecimal(buffer Buffer, offset int) *FinalModelDecimal {
+    return &FinalModelDecimal{buffer: buffer, offset: offset}
+}
 
-        # Calculate decimal value
-        negative = (flags & 0x80000000) != 0
-        scale = (flags & 0x7FFFFFFF) >> 16
-        result = decimal.Decimal(high) * 18446744073709551616
-        result += decimal.Decimal(mid) * 4294967296
-        result += decimal.Decimal(low)
-        result /= pow(10, scale)
-        if negative:
-            result = -result
+// Check if the decimal value is valid
+func (fm FinalModelDecimal) Verify() int {
+    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
+        return MaxInt
+    }
 
-        return result, self.fbe_size
+    return fm.FBESize()
+}
 
-    # Set the decimal value
-    def set(self, value):
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return 0
+// Get the decimal value
+func (fm FinalModelDecimal) Get() (decimal.Decimal, int) {
+    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
+        return decimal.Zero, 0
+    }
 
-        # Extract decimal parts
-        parts = value.as_tuple()
-        negative = True if parts.sign == 1 else False
-        number = int(''.join(map(str, parts.digits)))
-        scale = -parts.exponent
+    // Read decimal parts
+    low := ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())
+    mid := ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 4)
+    high := ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 8)
+    flags := ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 12)
 
-        # Check for decimal number overflow
-        if (number.bit_length() < 0) or (number.bit_length() > 96):
-            # Value too big for .NET Decimal (bit length is limited to [0, 96])
-            self.write_count(self.fbe_offset, 0, self.fbe_size)
-            return self.fbe_size
+    // Calculate decimal value
+    negative := (flags & 0x80000000) != 0
+    scale := (flags & 0x7FFFFFFF) >> 16
+    result := decimal.New(int64(high), 0).Mul(lowScaleFinal)
+    result = result.Add(decimal.New(int64(mid), 0).Mul(midScaleFinal))
+    result = result.Add(decimal.New(int64(low), 0))
+    result = result.Shift(-int32(scale))
+    if negative {
+        result = result.Neg()
+    }
 
-        # Check for decimal scale overflow
-        if (scale < 0) or (scale > 28):
-            # Value scale exceeds .NET Decimal limit of [0, 28]
-            self.write_count(self.fbe_offset, 0, self.fbe_size)
-            return self.fbe_size
+    return result, fm.FBESize()
+}
 
-        # Write unscaled value to bytes 0-11
-        self.write_bytes(self.fbe_offset, number.to_bytes(12, "little"))
+// Set the decimal value
+func (fm *FinalModelDecimal) Set(value decimal.Decimal) int {
+    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
+        return 0
+    }
 
-        # Write scale at byte 14
-        self.write_byte(self.fbe_offset + 14, scale)
+    // Extract decimal parts
+    negative := value.IsNegative()
+    number := value.Coefficient()
+    scale := -value.Exponent()
 
-        # Write signum at byte 15
-        self.write_byte(self.fbe_offset + 15, 0x80 if negative else 0)
-        return self.fbe_size
+    // Check for decimal number overflow
+    bits := number.BitLen()
+    if (bits < 0) || (bits > 96) {
+        // Value too big for .NET Decimal (bit length is limited to [0, 96])
+        WriteCount(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), 0, fm.FBESize())
+        return fm.FBESize()
+    }
+
+    // Check for decimal scale overflow
+    if (scale < 0) || (scale > 28) {
+        // Value scale exceeds .NET Decimal limit of [0, 28]
+        WriteCount(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), 0, fm.FBESize())
+        return fm.FBESize()
+    }
+
+    // Write unscaled value to bytes 0-11
+    bytes := number.Bytes()
+    for i := range bytes {
+        WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + i, bytes[len(bytes) - i - 1])
+    }
+    WriteCount(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + len(bytes), 0, 12 - len(bytes))
+
+    // Write scale at byte 14
+    WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 14, byte(scale))
+
+    // Write signum at byte 15
+    if negative {
+        WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 15, 0x80)
+    } else {
+        WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 15, 0)
+    }
+    return fm.FBESize()
+}
+
+var lowScaleFinal decimal.Decimal
+var midScaleFinal decimal.Decimal
+
+func init()  {
+    var low, mid big.Int
+    low.SetString("18446744073709551616", 10)
+    mid.SetString("4294967296", 10)
+    lowScaleFinal = decimal.NewFromBigInt(&low, 0)
+    midScaleFinal = decimal.NewFromBigInt(&mid, 0)
+}
 )CODE";
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
 }
 
 void GeneratorGo::GenerateFBEFinalModelBytes()

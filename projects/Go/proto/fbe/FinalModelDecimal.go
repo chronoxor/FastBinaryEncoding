@@ -8,44 +8,48 @@ package fbe
 import "math/big"
 import "github.com/shopspring/decimal"
 
-// Fast Binary Encoding decimal.Decimal field model class
-type FieldModelDecimal struct {
-    buffer Buffer // Field model buffer
-    offset int    // Field model buffer offset
+// Fast Binary Encoding decimal.Decimal final model class
+type FinalModelDecimal struct {
+    buffer Buffer // Final model buffer
+    offset int    // Final model buffer offset
 }
 
-// Get the field size
-func (fm FieldModelDecimal) FBESize() int { return 16 }
-// Get the field extra size
-func (fm FieldModelDecimal) FBEExtra() int { return 0 }
+// Get the allocation size
+func (fm FinalModelDecimal) FBEAllocationSize() int { return fm.FBESize() }
 
-// Get the field offset
-func (fm FieldModelDecimal) FBEOffset() int { return fm.offset }
-// Set the field offset
-func (fm *FieldModelDecimal) SetFBEOffset(value int) { fm.offset = value }
+// Get the final size
+func (fm FinalModelDecimal) FBESize() int { return 16 }
+// Get the final extra size
+func (fm FinalModelDecimal) FBEExtra() int { return 0 }
 
-// Shift the current field offset
-func (fm *FieldModelDecimal) FBEShift(size int) { fm.offset += size }
-// Unshift the current field offset
-func (fm *FieldModelDecimal) FBEUnshift(size int) { fm.offset -= size }
+// Get the final offset
+func (fm FinalModelDecimal) FBEOffset() int { return fm.offset }
+// Set the final offset
+func (fm *FinalModelDecimal) SetFBEOffset(value int) { fm.offset = value }
 
-// Create a new decimal field model
-func NewFieldModelDecimal(buffer Buffer, offset int) *FieldModelDecimal {
-    return &FieldModelDecimal{buffer: buffer, offset: offset}
+// Shift the current final offset
+func (fm *FinalModelDecimal) FBEShift(size int) { fm.offset += size }
+// Unshift the current final offset
+func (fm *FinalModelDecimal) FBEUnshift(size int) { fm.offset -= size }
+
+// Create a new decimal final model
+func NewFinalModelDecimal(buffer Buffer, offset int) *FinalModelDecimal {
+    return &FinalModelDecimal{buffer: buffer, offset: offset}
 }
 
 // Check if the decimal value is valid
-func (fm FieldModelDecimal) Verify() bool { return true }
+func (fm FinalModelDecimal) Verify() int {
+    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
+        return MaxInt
+    }
 
-// Get the decimal value
-func (fm FieldModelDecimal) Get() decimal.Decimal {
-    return fm.GetDefault(decimal.Zero)
+    return fm.FBESize()
 }
 
-// Get the decimal value with provided default value
-func (fm FieldModelDecimal) GetDefault(defaults decimal.Decimal) decimal.Decimal {
+// Get the decimal value
+func (fm FinalModelDecimal) Get() (decimal.Decimal, int) {
     if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return defaults
+        return decimal.Zero, 0
     }
 
     // Read decimal parts
@@ -57,21 +61,21 @@ func (fm FieldModelDecimal) GetDefault(defaults decimal.Decimal) decimal.Decimal
     // Calculate decimal value
     negative := (flags & 0x80000000) != 0
     scale := (flags & 0x7FFFFFFF) >> 16
-    result := decimal.New(int64(high), 0).Mul(lowScaleField)
-    result = result.Add(decimal.New(int64(mid), 0).Mul(midScaleField))
+    result := decimal.New(int64(high), 0).Mul(lowScaleFinal)
+    result = result.Add(decimal.New(int64(mid), 0).Mul(midScaleFinal))
     result = result.Add(decimal.New(int64(low), 0))
     result = result.Shift(-int32(scale))
     if negative {
         result = result.Neg()
     }
 
-    return result
+    return result, fm.FBESize()
 }
 
 // Set the decimal value
-func (fm *FieldModelDecimal) Set(value decimal.Decimal) {
+func (fm *FinalModelDecimal) Set(value decimal.Decimal) int {
     if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return
+        return 0
     }
 
     // Extract decimal parts
@@ -84,14 +88,14 @@ func (fm *FieldModelDecimal) Set(value decimal.Decimal) {
     if (bits < 0) || (bits > 96) {
         // Value too big for .NET Decimal (bit length is limited to [0, 96])
         WriteCount(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), 0, fm.FBESize())
-        return
+        return fm.FBESize()
     }
 
     // Check for decimal scale overflow
     if (scale < 0) || (scale > 28) {
         // Value scale exceeds .NET Decimal limit of [0, 28]
         WriteCount(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), 0, fm.FBESize())
-        return
+        return fm.FBESize()
     }
 
     // Write unscaled value to bytes 0-11
@@ -110,15 +114,16 @@ func (fm *FieldModelDecimal) Set(value decimal.Decimal) {
     } else {
         WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 15, 0)
     }
+    return fm.FBESize()
 }
 
-var lowScaleField decimal.Decimal
-var midScaleField decimal.Decimal
+var lowScaleFinal decimal.Decimal
+var midScaleFinal decimal.Decimal
 
 func init()  {
     var low, mid big.Int
     low.SetString("18446744073709551616", 10)
     mid.SetString("4294967296", 10)
-    lowScaleField = decimal.NewFromBigInt(&low, 0)
-    midScaleField = decimal.NewFromBigInt(&mid, 0)
+    lowScaleFinal = decimal.NewFromBigInt(&low, 0)
+    midScaleFinal = decimal.NewFromBigInt(&mid, 0)
 }

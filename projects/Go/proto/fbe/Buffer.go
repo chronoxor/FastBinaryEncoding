@@ -27,14 +27,17 @@ func (b Buffer) Size() int { return b.size }
 // Get bytes memory buffer offset
 func (b Buffer) Offset() int { return b.offset }
 
+// Create an empty buffer
 func NewEmptyBuffer() *Buffer {
     return &Buffer{data: make([]byte, 0)}
 }
 
+// Create an empty buffer with a given capacity
 func NewCapacityBuffer(capacity int) *Buffer {
     return &Buffer{data: make([]byte, capacity)}
 }
 
+// Create a buffer with attached bytes memory buffer
 func NewAttachedBuffer(buffer []byte, offset int, size int) *Buffer {
     result := NewEmptyBuffer()
     result.AttachBuffer(buffer, offset, size)

@@ -54,7 +54,6 @@ public class TestDecimal
         Assert.assertEquals(verifyDecimal(0x075BCD15, 0x00000000, 0x00000000, false, (byte)(0x001B0000 >> 16)), new BigDecimal("0.000000000000000000123456789"));
         Assert.assertEquals(verifyDecimal(0xFFFFFFFF, 0x00000000, 0x00000000, false, (byte)0x00000000), new BigDecimal("4294967295"));
         Assert.assertEquals(verifyDecimal(0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, false, (byte)0x00000000), new BigDecimal("18446744073709551615"));
-        Assert.assertEquals(verifyDecimal(0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, false, (byte)0x00000000), new BigDecimal("18446744073709551615"));
         Assert.assertEquals(verifyDecimal(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, false, (byte)0x00000000), new BigDecimal("79228162514264337593543950335"));
         Assert.assertEquals(verifyDecimal(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, true, (byte)0x00000000), new BigDecimal("-79228162514264337593543950335"));
         Assert.assertEquals(verifyDecimal(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, true, (byte)(0x001C0000 >> 16)), new BigDecimal("-7.9228162514264337593543950335"));

@@ -36,6 +36,7 @@ func (fm *FinalModelInt64) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelInt64) FBEUnshift(size int) { fm.offset -= size }
 
+// Create a new final model
 func NewFinalModelInt64(buffer Buffer, offset int) *FinalModelInt64 {
     return &FinalModelInt64{buffer: buffer, offset: offset}
 }

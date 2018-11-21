@@ -48,7 +48,6 @@ class TestDecimal < Test::Unit::TestCase
     assert_equal(verify_decimal(0x075BCD15, 0x00000000, 0x00000000, false, 0x001B0000 >> 16), BigDecimal.new('0.000000000000000000123456789'))
     assert_equal(verify_decimal(0xFFFFFFFF, 0x00000000, 0x00000000, false, 0x00000000), BigDecimal.new('4294967295'))
     assert_equal(verify_decimal(0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, false, 0x00000000), BigDecimal.new('18446744073709551615'))
-    assert_equal(verify_decimal(0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, false, 0x00000000), BigDecimal.new('18446744073709551615'))
     assert_equal(verify_decimal(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, false, 0x00000000), BigDecimal.new('79228162514264337593543950335'))
     assert_equal(verify_decimal(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, true, 0x00000000), BigDecimal.new('-79228162514264337593543950335'))
     assert_equal(verify_decimal(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, true, 0x001C0000 >> 16), BigDecimal.new('-7.9228162514264337593543950335'))

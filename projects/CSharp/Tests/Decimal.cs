@@ -48,7 +48,6 @@ namespace Tests
             Assert.That(VerifyDecimal(0x075BCD15, 0x00000000, 0x00000000, false, 0x001B0000 >> 16) == 0.000000000000000000123456789M);
             Assert.That(VerifyDecimal(unchecked((int)0xFFFFFFFF), 0x00000000, 0x00000000, false, 0x00000000) == 4294967295M);
             Assert.That(VerifyDecimal(unchecked((int)0xFFFFFFFF), unchecked((int)0xFFFFFFFF), 0x00000000, false, 0x00000000) == 18446744073709551615M);
-            Assert.That(VerifyDecimal(unchecked((int)0xFFFFFFFF), unchecked((int)0xFFFFFFFF), 0x00000000, false, 0x00000000) == 18446744073709551615M);
             Assert.That(VerifyDecimal(unchecked((int)0xFFFFFFFF), unchecked((int)0xFFFFFFFF), unchecked((int)0xFFFFFFFF), false, 0x00000000) == decimal.MaxValue);
             Assert.That(VerifyDecimal(unchecked((int)0xFFFFFFFF), unchecked((int)0xFFFFFFFF), unchecked((int)0xFFFFFFFF), true, 0x00000000) == decimal.MinValue);
             Assert.That(VerifyDecimal(unchecked((int)0xFFFFFFFF), unchecked((int)0xFFFFFFFF), unchecked((int)0xFFFFFFFF), true, 0x001C0000 >> 16) == -7.9228162514264337593543950335M);

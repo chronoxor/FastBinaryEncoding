@@ -56,7 +56,6 @@ class TestDecimal
         assertEquals(verifyDecimal(0x075BCD15, 0x00000000, 0x00000000, false, (0x001B0000 shr 16).toByte()), BigDecimal("0.000000000000000000123456789"))
         assertEquals(verifyDecimal(-0x1, 0x00000000, 0x00000000, false, 0x00000000.toByte()), BigDecimal("4294967295"))
         assertEquals(verifyDecimal(-0x1, -0x1, 0x00000000, false, 0x00000000.toByte()), BigDecimal("18446744073709551615"))
-        assertEquals(verifyDecimal(-0x1, -0x1, 0x00000000, false, 0x00000000.toByte()), BigDecimal("18446744073709551615"))
         assertEquals(verifyDecimal(-0x1, -0x1, -0x1, false, 0x00000000.toByte()), BigDecimal("79228162514264337593543950335"))
         assertEquals(verifyDecimal(-0x1, -0x1, -0x1, true, 0x00000000.toByte()), BigDecimal("-79228162514264337593543950335"))
         assertEquals(verifyDecimal(-0x1, -0x1, -0x1, true, (0x001C0000 shr 16).toByte()), BigDecimal("-7.9228162514264337593543950335"))

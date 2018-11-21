@@ -36,6 +36,7 @@ func (fm *FinalModelTimestamp) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelTimestamp) FBEUnshift(size int) { fm.offset -= size }
 
+// Create a new final model
 func NewFinalModelTimestamp(buffer Buffer, offset int) *FinalModelTimestamp {
     return &FinalModelTimestamp{buffer: buffer, offset: offset}
 }

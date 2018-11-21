@@ -64,7 +64,6 @@ test('Decimal tests', function (t) {
   t.true(verifyDecimal(0x075BCD15, 0x00000000, 0x00000000, false, 0x001B0000 >> 16).eq(new Big('0.000000000000000000123456789')))
   t.true(verifyDecimal(0xFFFFFFFF, 0x00000000, 0x00000000, false, 0x00000000).eq(new Big('4294967295')))
   t.true(verifyDecimal(0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, false, 0x00000000).eq(new Big('18446744073709551615')))
-  t.true(verifyDecimal(0xFFFFFFFF, 0xFFFFFFFF, 0x00000000, false, 0x00000000).eq(new Big('18446744073709551615')))
   t.true(verifyDecimal(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, false, 0x00000000).eq(new Big('79228162514264337593543950335')))
   t.true(verifyDecimal(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, true, 0x00000000).eq(new Big('-79228162514264337593543950335')))
   t.true(verifyDecimal(0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF, true, 0x001C0000 >> 16).eq(new Big('-7.9228162514264337593543950335')))

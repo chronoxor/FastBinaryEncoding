@@ -33,6 +33,7 @@ func (fm *FieldModelUInt64) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelUInt64) FBEUnshift(size int) { fm.offset -= size }
 
+// Create a new field model
 func NewFieldModelUInt64(buffer Buffer, offset int) *FieldModelUInt64 {
     return &FieldModelUInt64{buffer: buffer, offset: offset}
 }

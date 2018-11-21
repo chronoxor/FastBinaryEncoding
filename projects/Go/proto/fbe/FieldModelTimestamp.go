@@ -33,6 +33,7 @@ func (fm *FieldModelTimestamp) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelTimestamp) FBEUnshift(size int) { fm.offset -= size }
 
+// Create a new field model
 func NewFieldModelTimestamp(buffer Buffer, offset int) *FieldModelTimestamp {
     return &FieldModelTimestamp{buffer: buffer, offset: offset}
 }
