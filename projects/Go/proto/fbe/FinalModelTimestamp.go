@@ -14,8 +14,8 @@ var _ = uuid.Nil
 
 // Fast Binary Encoding time.Time final model class
 type FinalModelTimestamp struct {
-    buffer Buffer // Final model buffer
-    offset int    // Final model buffer offset
+    buffer *Buffer  // Final model buffer
+    offset int      // Final model buffer offset
 }
 
 // Get the allocation size
@@ -37,7 +37,7 @@ func (fm *FinalModelTimestamp) FBEShift(size int) { fm.offset += size }
 func (fm *FinalModelTimestamp) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new final model
-func NewFinalModelTimestamp(buffer Buffer, offset int) *FinalModelTimestamp {
+func NewFinalModelTimestamp(buffer *Buffer, offset int) *FinalModelTimestamp {
     return &FinalModelTimestamp{buffer: buffer, offset: offset}
 }
 

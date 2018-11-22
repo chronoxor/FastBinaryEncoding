@@ -14,8 +14,8 @@ var _ = uuid.Nil
 
 // Fast Binary Encoding rune final model class
 type FinalModelWChar struct {
-    buffer Buffer // Final model buffer
-    offset int    // Final model buffer offset
+    buffer *Buffer  // Final model buffer
+    offset int      // Final model buffer offset
 }
 
 // Get the allocation size
@@ -37,7 +37,7 @@ func (fm *FinalModelWChar) FBEShift(size int) { fm.offset += size }
 func (fm *FinalModelWChar) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new final model
-func NewFinalModelWChar(buffer Buffer, offset int) *FinalModelWChar {
+func NewFinalModelWChar(buffer *Buffer, offset int) *FinalModelWChar {
     return &FinalModelWChar{buffer: buffer, offset: offset}
 }
 

@@ -14,8 +14,8 @@ var _ = uuid.Nil
 
 // Fast Binary Encoding rune field model class
 type FieldModelChar struct {
-    buffer Buffer // Field model buffer
-    offset int    // Field model buffer offset
+    buffer *Buffer  // Field model buffer
+    offset int      // Field model buffer offset
 }
 
 // Get the field size
@@ -34,7 +34,7 @@ func (fm *FieldModelChar) FBEShift(size int) { fm.offset += size }
 func (fm *FieldModelChar) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new field model
-func NewFieldModelChar(buffer Buffer, offset int) *FieldModelChar {
+func NewFieldModelChar(buffer *Buffer, offset int) *FieldModelChar {
     return &FieldModelChar{buffer: buffer, offset: offset}
 }
 

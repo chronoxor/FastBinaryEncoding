@@ -10,8 +10,8 @@ import "github.com/shopspring/decimal"
 
 // Fast Binary Encoding decimal.Decimal field model class
 type FieldModelDecimal struct {
-    buffer Buffer // Field model buffer
-    offset int    // Field model buffer offset
+    buffer *Buffer  // Field model buffer
+    offset int      // Field model buffer offset
 }
 
 // Get the field size
@@ -30,7 +30,7 @@ func (fm *FieldModelDecimal) FBEShift(size int) { fm.offset += size }
 func (fm *FieldModelDecimal) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new decimal field model
-func NewFieldModelDecimal(buffer Buffer, offset int) *FieldModelDecimal {
+func NewFieldModelDecimal(buffer *Buffer, offset int) *FieldModelDecimal {
     return &FieldModelDecimal{buffer: buffer, offset: offset}
 }
 

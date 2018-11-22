@@ -109,7 +109,7 @@ func (b *Buffer) Remove(offset int, size int) {
         panic("Invalid offset & size!")
     }
 
-    b.data = append(b.data[:offset], b.data[offset+size:]...)
+    copy(b.data[offset:], b.data[offset+size:])
     b.size -= size
     if b.offset >= (offset + size) {
         b.offset -= size

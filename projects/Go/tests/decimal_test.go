@@ -21,7 +21,7 @@ func VerifyDecimal(test *testing.T, low uint32, mid uint32, high uint32, negativ
 
 	readBuffer := fbe.NewAttachedBuffer(buffer, 0, len(buffer))
 
-	model := fbe.NewFieldModelDecimal(*readBuffer, 0)
+	model := fbe.NewFieldModelDecimal(readBuffer, 0)
 	value1 := model.Get()
 	model.Set(value1)
 	value2 := model.Get()
@@ -30,7 +30,7 @@ func VerifyDecimal(test *testing.T, low uint32, mid uint32, high uint32, negativ
 		test.Errorf("Invalid decimal serialization!")
 	}
 
-	finalModel := fbe.NewFinalModelDecimal(*readBuffer, 0)
+	finalModel := fbe.NewFinalModelDecimal(readBuffer, 0)
 	value3, _ := finalModel.Get()
 	finalModel.Set(value3)
 	value4, _ := finalModel.Get()

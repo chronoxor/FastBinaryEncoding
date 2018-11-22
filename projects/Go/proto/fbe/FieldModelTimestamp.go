@@ -14,8 +14,8 @@ var _ = uuid.Nil
 
 // Fast Binary Encoding time.Time field model class
 type FieldModelTimestamp struct {
-    buffer Buffer // Field model buffer
-    offset int    // Field model buffer offset
+    buffer *Buffer  // Field model buffer
+    offset int      // Field model buffer offset
 }
 
 // Get the field size
@@ -34,7 +34,7 @@ func (fm *FieldModelTimestamp) FBEShift(size int) { fm.offset += size }
 func (fm *FieldModelTimestamp) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new field model
-func NewFieldModelTimestamp(buffer Buffer, offset int) *FieldModelTimestamp {
+func NewFieldModelTimestamp(buffer *Buffer, offset int) *FieldModelTimestamp {
     return &FieldModelTimestamp{buffer: buffer, offset: offset}
 }
 

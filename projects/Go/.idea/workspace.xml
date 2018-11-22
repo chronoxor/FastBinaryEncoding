@@ -4,8 +4,41 @@
     <list default="true" id="ba8f4190-0800-4bce-b2eb-ad8ed5d1197a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proto/fbe/Buffer.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/Buffer.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelBool.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelBool.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelByte.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelByte.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelChar.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelChar.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelDecimal.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelDecimal.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelDouble.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelDouble.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelFloat.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelFloat.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelInt16.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelInt16.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelInt32.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelInt32.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelInt64.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelInt64.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelInt8.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelInt8.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelTimestamp.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelTimestamp.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelUInt16.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelUInt16.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelUInt32.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelUInt32.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelUInt64.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelUInt64.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelUInt8.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelUInt8.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelUUID.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelUUID.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelWChar.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelWChar.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelBool.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelBool.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelByte.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelByte.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelChar.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelChar.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelDecimal.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelDecimal.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelDouble.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelDouble.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelFloat.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelFloat.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelInt16.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelInt16.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelInt32.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelInt32.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelInt64.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelInt64.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelInt8.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelInt8.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelTimestamp.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelTimestamp.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelUInt16.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelUInt16.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelUInt32.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelUInt32.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelUInt64.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelUInt64.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelUInt8.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelUInt8.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelUUID.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelUUID.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelWChar.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelWChar.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/decimal_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/tests/decimal_test.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,13 +63,13 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="go" value="1194" />
+          <entry key="go" value="1251" />
           <entry key="txt" value="18" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Go" value="1194" />
+          <entry key="Go" value="1251" />
           <entry key="PLAIN_TEXT" value="18" />
         </counts>
       </usages-collector>
@@ -47,8 +80,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/examples/buffer.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="255">
+              <caret line="15" selection-start-line="15" selection-end-line="15" />
               <folding>
                 <element signature="e#14#47#0" expanded="true" />
               </folding>
@@ -59,8 +92,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proto/fbe/FieldModelDecimal.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="117" selection-start-line="117" selection-end-line="117" />
+            <state relative-caret-position="833">
+              <caret line="49" selection-start-line="49" selection-end-line="49" />
               <folding>
                 <element signature="e#180#236#0" expanded="true" />
               </folding>
@@ -71,8 +104,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proto/fbe/FinalModelDecimal.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="301">
-              <caret line="120" selection-start-line="120" selection-end-line="120" />
+            <state relative-caret-position="272">
+              <caret line="35" column="34" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -86,11 +119,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proto/fbe/Buffer.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="99" column="9" selection-start-line="99" selection-start-column="4" selection-end-line="99" selection-end-column="9" />
+            <state>
+              <caret line="84" selection-start-line="84" selection-end-line="84" />
               <folding>
                 <element signature="e#180#252#0" expanded="true" />
               </folding>
@@ -101,7 +134,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proto/fbe/FieldModelBool.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
+            <state relative-caret-position="-102">
               <caret line="9" selection-start-line="9" selection-end-line="9" />
               <folding>
                 <element signature="e#180#225#0" expanded="true" />
@@ -134,11 +167,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/decimal_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
+            <state relative-caret-position="513">
+              <caret line="50" selection-start-line="50" selection-end-line="50" />
               <folding>
                 <element signature="e#15#93#0" expanded="true" />
               </folding>
@@ -181,10 +214,10 @@
         <option value="$PROJECT_DIR$/proto/fbe/FieldModelTimestamp.go" />
         <option value="$PROJECT_DIR$/examples/buffer.go" />
         <option value="$PROJECT_DIR$/tests/test_decimal.go" />
-        <option value="$PROJECT_DIR$/tests/decimal_test.go" />
         <option value="$PROJECT_DIR$/proto/fbe/Buffer.go" />
         <option value="$PROJECT_DIR$/proto/fbe/FieldModelDecimal.go" />
         <option value="$PROJECT_DIR$/proto/fbe/FinalModelDecimal.go" />
+        <option value="$PROJECT_DIR$/tests/decimal_test.go" />
       </list>
     </option>
   </component>
@@ -370,27 +403,6 @@
     </recent_temporary>
   </component>
   <component name="TestHistory">
-    <history-entry file="decimal_test_go - 2018.11.22 at 00h 57m 04s.xml">
-      <configuration name="decimal_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="decimal_test_go - 2018.11.22 at 00h 57m 58s.xml">
-      <configuration name="decimal_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="decimal_test_go - 2018.11.22 at 00h 58m 07s.xml">
-      <configuration name="decimal_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="decimal_test_go - 2018.11.22 at 02h 17m 54s.xml">
-      <configuration name="decimal_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="decimal_test_go - 2018.11.22 at 02h 37m 34s.xml">
-      <configuration name="decimal_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="decimal_test_go - 2018.11.22 at 02h 37m 43s.xml">
-      <configuration name="decimal_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="decimal_test_go - 2018.11.22 at 02h 37m 45s.xml">
-      <configuration name="decimal_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
     <history-entry file="decimal_test_go - 2018.11.22 at 02h 44m 38s.xml">
       <configuration name="decimal_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
@@ -400,9 +412,31 @@
     <history-entry file="decimal_test_go - 2018.11.22 at 03h 10m 14s.xml">
       <configuration name="decimal_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
+    <history-entry file="decimal_test_go - 2018.11.22 at 03h 27m 46s.xml">
+      <configuration name="decimal_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="decimal_test_go - 2018.11.22 at 03h 31m 04s.xml">
+      <configuration name="decimal_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="decimal_test_go - 2018.11.22 at 03h 32m 17s.xml">
+      <configuration name="decimal_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="decimal_test_go - 2018.11.22 at 03h 33m 39s.xml">
+      <configuration name="decimal_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="decimal_test_go - 2018.11.22 at 03h 36m 42s.xml">
+      <configuration name="decimal_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="decimal_test_go - 2018.11.22 at 03h 36m 56s.xml">
+      <configuration name="decimal_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="decimal_test_go - 2018.11.22 at 03h 37m 01s.xml">
+      <configuration name="decimal_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="523" y="240" width="1589" height="1000" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.32766515" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -427,23 +461,6 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/tests/decimal_test.go</url>
-          <line>50</line>
-          <properties />
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-    <watches-manager>
-      <configuration name="GoTestRunConfiguration">
-        <watch expression="bytes[0]" language="go" />
-      </configuration>
-    </watches-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="watch">
@@ -676,47 +693,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/decimal_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="22" selection-start-line="22" selection-end-line="22" />
-          <folding>
-            <element signature="e#15#93#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/proto/fbe/FinalModelTimestamp.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-515">
           <caret line="14" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="e#180#225#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/examples/buffer.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-          <folding>
-            <element signature="e#14#47#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/fbe/FinalModelDecimal.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="120" selection-start-line="120" selection-end-line="120" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/fbe/FieldModelBool.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
           <folding>
             <element signature="e#180#225#0" expanded="true" />
           </folding>
@@ -733,22 +713,59 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/examples/buffer.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="e#14#47#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/fbe/FinalModelDecimal.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="35" column="34" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/fbe/Buffer.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="84" selection-start-line="84" selection-end-line="84" />
+          <folding>
+            <element signature="e#180#252#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/fbe/FieldModelBool.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-102">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#180#225#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/proto/fbe/FieldModelDecimal.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="117" selection-start-line="117" selection-end-line="117" />
+        <state relative-caret-position="833">
+          <caret line="49" selection-start-line="49" selection-end-line="49" />
           <folding>
             <element signature="e#180#236#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proto/fbe/Buffer.go">
+    <entry file="file://$PROJECT_DIR$/tests/decimal_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="99" column="9" selection-start-line="99" selection-start-column="4" selection-end-line="99" selection-end-column="9" />
+        <state relative-caret-position="513">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
           <folding>
-            <element signature="e#180#252#0" expanded="true" />
+            <element signature="e#15#93#0" expanded="true" />
           </folding>
         </state>
       </provider>

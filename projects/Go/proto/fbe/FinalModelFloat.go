@@ -14,8 +14,8 @@ var _ = uuid.Nil
 
 // Fast Binary Encoding float32 final model class
 type FinalModelFloat struct {
-    buffer Buffer // Final model buffer
-    offset int    // Final model buffer offset
+    buffer *Buffer  // Final model buffer
+    offset int      // Final model buffer offset
 }
 
 // Get the allocation size
@@ -37,7 +37,7 @@ func (fm *FinalModelFloat) FBEShift(size int) { fm.offset += size }
 func (fm *FinalModelFloat) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new final model
-func NewFinalModelFloat(buffer Buffer, offset int) *FinalModelFloat {
+func NewFinalModelFloat(buffer *Buffer, offset int) *FinalModelFloat {
     return &FinalModelFloat{buffer: buffer, offset: offset}
 }
 

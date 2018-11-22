@@ -14,8 +14,8 @@ var _ = uuid.Nil
 
 // Fast Binary Encoding uuid.UUID field model class
 type FieldModelUUID struct {
-    buffer Buffer // Field model buffer
-    offset int    // Field model buffer offset
+    buffer *Buffer  // Field model buffer
+    offset int      // Field model buffer offset
 }
 
 // Get the field size
@@ -34,7 +34,7 @@ func (fm *FieldModelUUID) FBEShift(size int) { fm.offset += size }
 func (fm *FieldModelUUID) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new field model
-func NewFieldModelUUID(buffer Buffer, offset int) *FieldModelUUID {
+func NewFieldModelUUID(buffer *Buffer, offset int) *FieldModelUUID {
     return &FieldModelUUID{buffer: buffer, offset: offset}
 }
 
