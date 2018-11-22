@@ -31,7 +31,7 @@ func (fm *FieldModelUUID) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new UUID field model
 func NewFieldModelUUID(buffer *Buffer, offset int) *FieldModelUUID {
-    return &FieldModelUUID{buffer: buffer, offset: offset}
+    return &FieldModelUUID{ buffer: buffer, offset: offset }
 }
 
 // Check if the UUID value is valid

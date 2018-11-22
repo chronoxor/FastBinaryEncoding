@@ -31,7 +31,7 @@ func (fm *FieldModelTimestamp) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new timestamp field model
 func NewFieldModelTimestamp(buffer *Buffer, offset int) *FieldModelTimestamp {
-    return &FieldModelTimestamp{buffer: buffer, offset: offset}
+    return &FieldModelTimestamp{ buffer: buffer, offset: offset }
 }
 
 // Check if the timestamp value is valid

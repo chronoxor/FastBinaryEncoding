@@ -31,7 +31,7 @@ func (fm *FinalModelInt32) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new final model
 func NewFinalModelInt32(buffer *Buffer, offset int) *FinalModelInt32 {
-    return &FinalModelInt32{buffer: buffer, offset: offset}
+    return &FinalModelInt32{ buffer: buffer, offset: offset }
 }
 
 // Check if the value is valid

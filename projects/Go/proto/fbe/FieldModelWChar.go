@@ -30,7 +30,7 @@ func (fm *FieldModelWChar) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new field model
 func NewFieldModelWChar(buffer *Buffer, offset int) *FieldModelWChar {
-    return &FieldModelWChar{buffer: buffer, offset: offset}
+    return &FieldModelWChar{ buffer: buffer, offset: offset }
 }
 
 // Check if the value is valid

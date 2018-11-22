@@ -53,6 +53,7 @@ private:
     void GenerateFBEFieldModelVector();
     void GenerateFBEFieldModelSet();
     void GenerateFBEFieldModelMap();
+    void GenerateFBEFieldModelEnumFlags(const std::string& package, const std::string& name, const std::string& type);
     void GenerateFBEFinalModel(const std::string& package, const std::string& name, const std::string& type, const std::string& size, const std::string& defaults);
     void GenerateFBEFinalModelDecimal(const std::string& package);
     void GenerateFBEFinalModelTimestamp(const std::string& package);
@@ -64,17 +65,14 @@ private:
     void GenerateFBEFinalModelVector();
     void GenerateFBEFinalModelSet();
     void GenerateFBEFinalModelMap();
+    void GenerateFBEFinalModelEnumFlags(const std::string& package, const std::string& name, const std::string& type);
     void GenerateFBESender();
     void GenerateFBEReceiver();
     void GenerateImports(const std::shared_ptr<Package>& p);
 
     void GeneratePackage(const std::shared_ptr<Package>& p);
-    void GenerateEnum(const std::shared_ptr<EnumType>& e);
-    void GenerateEnumFieldModel(const std::shared_ptr<EnumType>& e);
-    void GenerateEnumFinalModel(const std::shared_ptr<EnumType>& e);
+    void GenerateEnum(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e, const CppCommon::Path& path);
     void GenerateFlags(const std::shared_ptr<FlagsType>& f);
-    void GenerateFlagsFieldModel(const std::shared_ptr<FlagsType>& f);
-    void GenerateFlagsFinalModel(const std::shared_ptr<FlagsType>& f);
     void GenerateStruct(const std::shared_ptr<StructType>& s);
     void GenerateStructFieldModel(const std::shared_ptr<StructType>& s);
     void GenerateStructModel(const std::shared_ptr<StructType>& s);
@@ -86,6 +84,8 @@ private:
     bool IsPrimitiveType(const std::string& type);
     bool IsGoType(const std::string& type);
 
+    std::string ConvertCase(const std::string& type);
+    std::string ConvertEnumBase(const std::string& type);
     std::string ConvertEnumSize(const std::string& type);
     std::string ConvertEnumType(const std::string& type);
     std::string ConvertEnumConstant(const std::string& type, const std::string& value);

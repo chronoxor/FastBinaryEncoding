@@ -10,27 +10,33 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Python$Unittests_in_test_decimal_py.coverage" NAME="Unittests in test_decimal.py Coverage Results" MODIFIED="1539652256057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/Python$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1542902016122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/Python$print_json.coverage" NAME="print_json Coverage Results" MODIFIED="1539797254122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
-    <SUITE FILE_PATH="coverage/Python$print.coverage" NAME="print Coverage Results" MODIFIED="1539814597693" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/Python$benchmark_send_receive.coverage" NAME="benchmark_send_receive Coverage Results" MODIFIED="1539984486441" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" />
+    <SUITE FILE_PATH="coverage/Python$Unittests_in_test_clone_py.coverage" NAME="Unittests in test_clone.py Coverage Results" MODIFIED="1539850329692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Python$benchmark_serialization.coverage" NAME="benchmark_serialization Coverage Results" MODIFIED="1539984262439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" />
     <SUITE FILE_PATH="coverage/Python$Unittests_in_test_serialization_py.coverage" NAME="Unittests in test_serialization.py Coverage Results" MODIFIED="1539802210026" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Python$test_decimal.coverage" NAME="test_decimal Coverage Results" MODIFIED="1542829880652" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/Python$create.coverage" NAME="create Coverage Results" MODIFIED="1542902011509" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
-    <SUITE FILE_PATH="coverage/Python$Unittests_in_test_clone_py.coverage" NAME="Unittests in test_clone.py Coverage Results" MODIFIED="1539850329692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/Python$benchmark_send_receive.coverage" NAME="benchmark_send_receive Coverage Results" MODIFIED="1539984486441" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" />
+    <SUITE FILE_PATH="coverage/Python$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1542829647436" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Python$create.coverage" NAME="create Coverage Results" MODIFIED="1542829870298" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/Python$print_json.coverage" NAME="print_json Coverage Results" MODIFIED="1539797254122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/Python$print.coverage" NAME="print Coverage Results" MODIFIED="1539814597693" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/Python$Unittests_in_test_decimal_py.coverage" NAME="Unittests in test_decimal.py Coverage Results" MODIFIED="1539652256057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="proto.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="print.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/print.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" selection-start-line="11" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="proto.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proto/proto.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-              <folding>
-                <element signature="e#169#182#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="28237">
+              <caret line="1661" selection-start-line="1661" selection-end-line="1661" />
             </state>
           </provider>
         </entry>
@@ -47,8 +53,8 @@
       <file leaf-file-name="protoex.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proto/protoex.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30413">
-              <caret line="1789" selection-start-line="1789" selection-end-line="1789" />
+            <state relative-caret-position="30226">
+              <caret line="1787" selection-start-line="1787" selection-end-line="1787" />
             </state>
           </provider>
         </entry>
@@ -56,8 +62,8 @@
       <file leaf-file-name="benchmark_serialization.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_serialization.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1156">
-              <caret line="71" selection-start-line="71" selection-end-line="71" />
+            <state relative-caret-position="1224">
+              <caret line="75" selection-start-line="75" selection-end-line="75" />
             </state>
           </provider>
         </entry>
@@ -65,29 +71,17 @@
       <file leaf-file-name="benchmark_serialization_final.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_serialization_final.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1156">
-              <caret line="71" selection-start-line="71" selection-end-line="71" />
+            <state relative-caret-position="1224">
+              <caret line="75" selection-start-line="75" selection-end-line="75" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_decimal.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="test_decimal.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/test_decimal.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="484">
+            <state relative-caret-position="444">
               <caret line="43" column="9" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="fbe.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/proto/fbe.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="1311" lean-forward="true" selection-start-line="1311" selection-end-line="1311" />
-              <folding>
-                <element signature="e#163#176#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -104,8 +98,8 @@
       <file leaf-file-name="benchmark_serialization_json.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_serialization_json.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="901">
-              <caret line="55" selection-start-line="55" selection-end-line="55" />
+            <state relative-caret-position="935">
+              <caret line="57" selection-start-line="57" selection-end-line="57" />
             </state>
           </provider>
         </entry>
@@ -113,8 +107,8 @@
       <file leaf-file-name="benchmark_send_receive.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_send_receive.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2431">
-              <caret line="145" selection-start-line="145" selection-end-line="145" />
+            <state relative-caret-position="2567">
+              <caret line="153" selection-start-line="153" selection-end-line="153" />
             </state>
           </provider>
         </entry>
@@ -143,8 +137,8 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="504" />
-    <option name="y" value="63" />
+    <option name="x" value="1033" />
+    <option name="y" value="546" />
     <option name="width" value="1534" />
     <option name="height" value="1021" />
   </component>
@@ -153,6 +147,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -184,7 +179,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -204,7 +198,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in tests">
+  <component name="RunManager" selected="Python.test_decimal">
     <configuration name="benchmark_send_receive" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Python" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -285,7 +279,7 @@
       <module name="Python" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="C:\Users\ivan.shynkarenka\venv\Scripts\python.exe" />
+      <option name="SDK_HOME" value="Z:\projects\CppProjects\FastBinaryEncoding\projects\Python\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -297,17 +291,17 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
     </configuration>
     <list>
+      <item itemvalue="Python tests.Unittests in tests" />
       <item itemvalue="Python.benchmark_serialization" />
       <item itemvalue="Python.benchmark_send_receive" />
       <item itemvalue="Python.test_decimal" />
       <item itemvalue="Python.create" />
-      <item itemvalue="Python tests.Unittests in tests" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Unittests in tests" />
-        <item itemvalue="Python.create" />
         <item itemvalue="Python.test_decimal" />
+        <item itemvalue="Python.create" />
+        <item itemvalue="Python tests.Unittests in tests" />
         <item itemvalue="Python.benchmark_send_receive" />
         <item itemvalue="Python.benchmark_serialization" />
       </list>
@@ -327,6 +321,9 @@
     <servers />
   </component>
   <component name="TestHistory">
+    <history-entry file="Unittests_in_tests - 2018.10.18 at 11h 10m 52s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
     <history-entry file="Unittests_in_test_clone_py - 2018.10.18 at 11h 11m 11s.xml">
       <configuration name="Unittests in test_clone.py" configurationId="tests" />
     </history-entry>
@@ -354,27 +351,25 @@
     <history-entry file="Unittests_in_tests - 2018.11.21 at 22h 47m 29s.xml">
       <configuration name="Unittests in tests" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.11.22 at 18h 53m 37s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
-    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="504" y="63" width="1534" height="1021" extended-state="0" />
+    <frame x="1033" y="546" width="1534" height="1021" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.40269965" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.40300232" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25848034" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2550882" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39838338" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39838338" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -512,7 +507,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/Soft/Development/Python/bin/Lib/unittest/case.py" />
+    <entry file="file://Y:/Soft/Development/Python/bin/Lib/unittest/case.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_serialization_json.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="343">
@@ -596,6 +597,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/proto/fbe.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#130#143#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/proto/test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -620,38 +631,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/proto/proto.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28237">
+          <caret line="1661" selection-start-line="1661" selection-end-line="1661" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/proto/protoex.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30413">
-          <caret line="1789" selection-start-line="1789" selection-end-line="1789" />
+        <state relative-caret-position="30226">
+          <caret line="1787" selection-start-line="1787" selection-end-line="1787" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_send_receive.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2431">
-          <caret line="145" selection-start-line="145" selection-end-line="145" />
+        <state relative-caret-position="2567">
+          <caret line="153" selection-start-line="153" selection-end-line="153" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_serialization.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1156">
-          <caret line="71" selection-start-line="71" selection-end-line="71" />
+        <state relative-caret-position="1224">
+          <caret line="75" selection-start-line="75" selection-end-line="75" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_serialization_json.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="901">
-          <caret line="55" selection-start-line="55" selection-end-line="55" />
+        <state relative-caret-position="935">
+          <caret line="57" selection-start-line="57" selection-end-line="57" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_serialization_final.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1156">
-          <caret line="71" selection-start-line="71" selection-end-line="71" />
+        <state relative-caret-position="1224">
+          <caret line="75" selection-start-line="75" selection-end-line="75" />
         </state>
       </provider>
     </entry>
@@ -664,28 +682,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_decimal.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="484">
+        <state relative-caret-position="444">
           <caret line="43" column="9" selection-start-line="43" selection-start-column="9" selection-end-line="43" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/fbe.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="1311" lean-forward="true" selection-start-line="1311" selection-end-line="1311" />
-          <folding>
-            <element signature="e#163#176#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/proto.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="e#169#182#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

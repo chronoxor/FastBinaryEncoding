@@ -282,7 +282,7 @@ int main(int argc, char** argv)
     if (go)
     {
         if (!quiet) std::cout << "Generating Go code...";
-        FBE::GeneratorGo(input, output, 1, false).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
+        FBE::GeneratorGo(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (java)

@@ -29,12 +29,12 @@ func (b Buffer) Offset() int { return b.offset }
 
 // Create an empty buffer
 func NewEmptyBuffer() *Buffer {
-    return &Buffer{data: make([]byte, 0)}
+    return &Buffer{ data: make([]byte, 0) }
 }
 
 // Create an empty buffer with a given capacity
 func NewCapacityBuffer(capacity int) *Buffer {
-    return &Buffer{data: make([]byte, capacity)}
+    return &Buffer{ data: make([]byte, capacity) }
 }
 
 // Create a buffer with attached bytes memory buffer

@@ -32,7 +32,7 @@ func (fm *FinalModelUUID) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new UUID final model
 func NewFinalModelUUID(buffer *Buffer, offset int) *FinalModelUUID {
-    return &FinalModelUUID{buffer: buffer, offset: offset}
+    return &FinalModelUUID{ buffer: buffer, offset: offset }
 }
 
 // Check if the UUID value is valid

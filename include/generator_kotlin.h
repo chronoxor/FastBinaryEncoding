@@ -57,7 +57,7 @@ private:
     void GenerateFBEFieldModelArray(const std::string& package, const std::string& name, const std::string& type, const std::string& base, bool optional, const std::string& model);
     void GenerateFBEFieldModelVector(const std::string& package, const std::string& name, const std::string& type, const std::string& model);
     void GenerateFBEFieldModelMap(const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model);
-    void GenerateFBEFieldModelEnumFlags(const std::string& package, const std::string& name, const std::string& size, const std::string& read);
+    void GenerateFBEFieldModelEnumFlags(const std::string& package, const std::string& name, const std::string& type);
     void GenerateFBEFinalModel(const std::string& package);
     void GenerateFBEFinalModel(const std::string& package, const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults);
     void GenerateFBEFinalModelDecimal(const std::string& package);
@@ -68,7 +68,7 @@ private:
     void GenerateFBEFinalModelArray(const std::string& package, const std::string& name, const std::string& type, const std::string& base, bool optional, const std::string& model);
     void GenerateFBEFinalModelVector(const std::string& package, const std::string& name, const std::string& type, const std::string& model);
     void GenerateFBEFinalModelMap(const std::string& package, const std::string& key_name, const std::string& key_type, const std::string& key_model, const std::string& value_name, const std::string& value_type, const std::string& value_model);
-    void GenerateFBEFinalModelEnumFlags(const std::string& package, const std::string& name, const std::string& size, const std::string& read);
+    void GenerateFBEFinalModelEnumFlags(const std::string& package, const std::string& name, const std::string& type);
     void GenerateFBESender(const std::string& package);
     void GenerateFBEReceiver(const std::string& package);
     void GenerateFBEJson(const std::string& package);

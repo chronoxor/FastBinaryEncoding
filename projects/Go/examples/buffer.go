@@ -2,10 +2,17 @@ package main
 
 import (
 	"../proto/fbe"
+	"../proto/proto"
+	"encoding/json"
 	"fmt"
 )
 
 func main() {
+	var os = proto.OrderSide_buy
+	j, _ := json.Marshal(os)
+	json.Unmarshal(j, &os)
+	fmt.Println(os)
+
 	buffer := fbe.NewCapacityBuffer(10)
 	buffer.Allocate(10)
 	for i := 0; i < buffer.Size(); i++ {

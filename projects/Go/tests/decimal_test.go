@@ -1,9 +1,9 @@
 package tests
 
+import "../proto/fbe"
+
 import "testing"
 import "github.com/shopspring/decimal"
-
-import "../proto/fbe"
 
 func VerifyDecimal(test *testing.T, low uint32, mid uint32, high uint32, negative bool, scale uint32, value string) {
 	base, _ := decimal.NewFromString(value)

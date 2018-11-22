@@ -2118,7 +2118,7 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFieldModelEnumFlags(const std::string& package, const std::string& name, const std::string& size, const std::string& read)
+void GeneratorJava::GenerateFBEFieldModelEnumFlags(const std::string& package, const std::string& name, const std::string& type)
 {
     CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
 
@@ -2172,8 +2172,8 @@ public final class FieldModel_NAME_ extends FieldModel
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_SIZE_"), size);
-    code = std::regex_replace(code, std::regex("_READ_"), read);
+    code = std::regex_replace(code, std::regex("_SIZE_"), ConvertEnumSize(type));
+    code = std::regex_replace(code, std::regex("_READ_"), ConvertEnumRead(type));
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -3596,7 +3596,7 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends FinalModel
     Close();
 }
 
-void GeneratorJava::GenerateFBEFinalModelEnumFlags(const std::string& package, const std::string& name, const std::string& size, const std::string& read)
+void GeneratorJava::GenerateFBEFinalModelEnumFlags(const std::string& package, const std::string& name, const std::string& type)
 {
     CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
 
@@ -3664,8 +3664,8 @@ public final class FinalModel_NAME_ extends FinalModel
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_SIZE_"), size);
-    code = std::regex_replace(code, std::regex("_READ_"), read);
+    code = std::regex_replace(code, std::regex("_SIZE_"), ConvertEnumSize(type));
+    code = std::regex_replace(code, std::regex("_READ_"), ConvertEnumRead(type));
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -4375,11 +4375,11 @@ void GeneratorJava::GenerateEnum(const std::shared_ptr<Package>& p, const std::s
         GenerateEnumJson(p, e);
 
     // Generate enum field model
-    GenerateFBEFieldModelEnumFlags(*p->name, *e->name, ConvertEnumSize(enum_type), ConvertEnumRead(enum_type));
+    GenerateFBEFieldModelEnumFlags(*p->name, *e->name, enum_type);
 
     // Generate enum final model
     if (Final())
-        GenerateFBEFinalModelEnumFlags(*p->name, *e->name, ConvertEnumSize(enum_type), ConvertEnumRead(enum_type));
+        GenerateFBEFinalModelEnumFlags(*p->name, *e->name, enum_type);
 }
 
 void GeneratorJava::GenerateEnumClass(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e, const CppCommon::Path& path)
@@ -4721,11 +4721,11 @@ void GeneratorJava::GenerateFlags(const std::shared_ptr<Package>& p, const std::
         GenerateFlagsJson(p, f);
 
     // Generate flags field model
-    GenerateFBEFieldModelEnumFlags(*p->name, *f->name, ConvertEnumSize(flags_type), ConvertEnumRead(flags_type));
+    GenerateFBEFieldModelEnumFlags(*p->name, *f->name, flags_type);
 
     // Generate flags final model
     if (Final())
-        GenerateFBEFinalModelEnumFlags(*p->name, *f->name, ConvertEnumSize(flags_type), ConvertEnumRead(flags_type));
+        GenerateFBEFinalModelEnumFlags(*p->name, *f->name, flags_type);
 }
 
 void GeneratorJava::GenerateFlagsClass(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f, const CppCommon::Path& path)

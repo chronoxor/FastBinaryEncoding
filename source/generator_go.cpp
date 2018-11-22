@@ -34,11 +34,6 @@ void GeneratorGo::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEFieldModelUUID("fbe");
     GenerateFBEFieldModelBytes("fbe");
     GenerateFBEFieldModelString("fbe");
-    //GenerateFBEFieldModelOptional();
-    //GenerateFBEFieldModelArray();
-    //GenerateFBEFieldModelVector();
-    //GenerateFBEFieldModelSet();
-    //GenerateFBEFieldModelMap();
     if (Final())
     {
         GenerateFBEFinalModel("fbe", "Bool", "bool", "1", "false");
@@ -60,11 +55,6 @@ void GeneratorGo::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModelUUID("fbe");
         GenerateFBEFinalModelBytes("fbe");
         GenerateFBEFinalModelString("fbe");
-        //GenerateFBEFinalModelOptional();
-        //GenerateFBEFinalModelArray();
-        //GenerateFBEFinalModelVector();
-        //GenerateFBEFinalModelSet();
-        //GenerateFBEFinalModelMap();
     }
     /*
     if (Sender())
@@ -74,7 +64,7 @@ void GeneratorGo::Generate(const std::shared_ptr<Package>& package)
     }
     */
 
-    // GeneratePackage(package);
+    GeneratePackage(package);
 }
 
 void GeneratorGo::GenerateHeader(const std::string& source)
@@ -177,12 +167,12 @@ func (b Buffer) Offset() int { return b.offset }
 
 // Create an empty buffer
 func NewEmptyBuffer() *Buffer {
-    return &Buffer{data: make([]byte, 0)}
+    return &Buffer{ data: make([]byte, 0) }
 }
 
 // Create an empty buffer with a given capacity
 func NewCapacityBuffer(capacity int) *Buffer {
-    return &Buffer{data: make([]byte, capacity)}
+    return &Buffer{ data: make([]byte, capacity) }
 }
 
 // Create a buffer with attached bytes memory buffer
@@ -563,7 +553,7 @@ func (fm *FieldModel_NAME_) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new field model
 func NewFieldModel_NAME_(buffer *Buffer, offset int) *FieldModel_NAME_ {
-    return &FieldModel_NAME_{buffer: buffer, offset: offset}
+    return &FieldModel_NAME_{ buffer: buffer, offset: offset }
 }
 
 // Check if the value is valid
@@ -651,7 +641,7 @@ func (fm *FieldModelDecimal) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new decimal field model
 func NewFieldModelDecimal(buffer *Buffer, offset int) *FieldModelDecimal {
-    return &FieldModelDecimal{buffer: buffer, offset: offset}
+    return &FieldModelDecimal{ buffer: buffer, offset: offset }
 }
 
 // Check if the decimal value is valid
@@ -796,7 +786,7 @@ func (fm *FieldModelTimestamp) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new timestamp field model
 func NewFieldModelTimestamp(buffer *Buffer, offset int) *FieldModelTimestamp {
-    return &FieldModelTimestamp{buffer: buffer, offset: offset}
+    return &FieldModelTimestamp{ buffer: buffer, offset: offset }
 }
 
 // Check if the timestamp value is valid
@@ -879,7 +869,7 @@ func (fm *FieldModelUUID) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new UUID field model
 func NewFieldModelUUID(buffer *Buffer, offset int) *FieldModelUUID {
-    return &FieldModelUUID{buffer: buffer, offset: offset}
+    return &FieldModelUUID{ buffer: buffer, offset: offset }
 }
 
 // Check if the UUID value is valid
@@ -973,7 +963,7 @@ func (fm *FieldModelBytes) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new bytes field model
 func NewFieldModelBytes(buffer *Buffer, offset int) *FieldModelBytes {
-    return &FieldModelBytes{buffer: buffer, offset: offset}
+    return &FieldModelBytes{ buffer: buffer, offset: offset }
 }
 
 // Check if the bytes value is valid
@@ -1109,7 +1099,7 @@ func (fm *FieldModelString) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new string field model
 func NewFieldModelString(buffer *Buffer, offset int) *FieldModelString {
-    return &FieldModelString{buffer: buffer, offset: offset}
+    return &FieldModelString{ buffer: buffer, offset: offset }
 }
 
 // Check if the string value is valid
@@ -1895,6 +1885,98 @@ class FieldModelMap(FieldModel):
     Write(code);
 }
 
+void GeneratorGo::GenerateFBEFieldModelEnumFlags(const std::string& package, const std::string& name, const std::string& type)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / ("FieldModel" + name + ".go");
+    Open(file);
+
+    // Generate header
+    GenerateHeader(CppCommon::Path(_input).filename().string());
+
+    // Generate package
+    WriteLine();
+    WriteLineIndent("package " + package);
+
+    // Generate imports
+    WriteLine();
+    WriteLineIndent("import \"../fbe\"");
+
+    std::string code = R"CODE(
+import "errors"
+
+// Fast Binary Encoding _NAME_ field model class
+type FieldModel_NAME_ struct {
+    buffer *fbe.Buffer  // Field model buffer
+    offset int          // Field model buffer offset
+}
+
+// Get the field size
+func (fm FieldModel_NAME_) FBESize() int { return _SIZE_ }
+// Get the field extra size
+func (fm FieldModel_NAME_) FBEExtra() int { return 0 }
+
+// Get the field offset
+func (fm FieldModel_NAME_) FBEOffset() int { return fm.offset }
+// Set the field offset
+func (fm *FieldModel_NAME_) SetFBEOffset(value int) { fm.offset = value }
+
+// Shift the current field offset
+func (fm *FieldModel_NAME_) FBEShift(size int) { fm.offset += size }
+// Unshift the current field offset
+func (fm *FieldModel_NAME_) FBEUnshift(size int) { fm.offset -= size }
+
+// Create a new field model
+func NewFieldModel_NAME_(buffer *fbe.Buffer, offset int) *FieldModel_NAME_ {
+    return &FieldModel_NAME_{ buffer: buffer, offset: offset }
+}
+
+// Check if the value is valid
+func (fm FieldModel_NAME_) Verify() bool { return true }
+
+// Get the value
+func (fm FieldModel_NAME_) Get() (_NAME_, error) {
+    return fm.GetDefault(0)
+}
+
+// Get the value with provided default value
+func (fm FieldModel_NAME_) GetDefault(defaults _NAME_) (_NAME_, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return _NAME_(0), nil
+    }
+
+    return _NAME_(fbe.Read_BASE_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())), nil
+}
+
+// Set the value
+func (fm *FieldModel_NAME_) Set(value _NAME_) error {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return errors.New("model is broken")
+    }
+
+    fbe.Write_BASE_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), _TYPE_(value))
+    return nil
+}
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("_NAME_"), name);
+    code = std::regex_replace(code, std::regex("_TYPE_"), ConvertEnumType(type));
+    code = std::regex_replace(code, std::regex("_BASE_"), ConvertEnumBase(type));
+    code = std::regex_replace(code, std::regex("_SIZE_"), ConvertEnumSize(type));
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
 void GeneratorGo::GenerateFBEFinalModel(const std::string& package, const std::string& name, const std::string& type, const std::string& size, const std::string& defaults)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
@@ -1935,7 +2017,7 @@ func (fm *FinalModel_NAME_) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new final model
 func NewFinalModel_NAME_(buffer *Buffer, offset int) *FinalModel_NAME_ {
-    return &FinalModel_NAME_{buffer: buffer, offset: offset}
+    return &FinalModel_NAME_{ buffer: buffer, offset: offset }
 }
 
 // Check if the value is valid
@@ -2025,7 +2107,7 @@ func (fm *FinalModelDecimal) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new decimal final model
 func NewFinalModelDecimal(buffer *Buffer, offset int) *FinalModelDecimal {
-    return &FinalModelDecimal{buffer: buffer, offset: offset}
+    return &FinalModelDecimal{ buffer: buffer, offset: offset }
 }
 
 // Check if the decimal value is valid
@@ -2172,7 +2254,7 @@ func (fm *FinalModelTimestamp) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new timestamp final model
 func NewFinalModelTimestamp(buffer *Buffer, offset int) *FinalModelTimestamp {
-    return &FinalModelTimestamp{buffer: buffer, offset: offset}
+    return &FinalModelTimestamp{ buffer: buffer, offset: offset }
 }
 
 // Check if the timestamp value is valid
@@ -2257,7 +2339,7 @@ func (fm *FinalModelUUID) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new UUID final model
 func NewFinalModelUUID(buffer *Buffer, offset int) *FinalModelUUID {
-    return &FinalModelUUID{buffer: buffer, offset: offset}
+    return &FinalModelUUID{ buffer: buffer, offset: offset }
 }
 
 // Check if the UUID value is valid
@@ -2338,7 +2420,7 @@ func (fm *FinalModelBytes) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new bytes final model
 func NewFinalModelBytes(buffer *Buffer, offset int) *FinalModelBytes {
-    return &FinalModelBytes{buffer: buffer, offset: offset}
+    return &FinalModelBytes{ buffer: buffer, offset: offset }
 }
 
 // Check if the bytes value is valid
@@ -2435,7 +2517,7 @@ func (fm *FinalModelString) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new string final model
 func NewFinalModelString(buffer *Buffer, offset int) *FinalModelString {
-    return &FinalModelString{buffer: buffer, offset: offset}
+    return &FinalModelString{ buffer: buffer, offset: offset }
 }
 
 // Check if the string value is valid
@@ -2951,6 +3033,100 @@ class FinalModelMap(FinalModel):
     Write(code);
 }
 
+void GeneratorGo::GenerateFBEFinalModelEnumFlags(const std::string& package, const std::string& name, const std::string& type)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / ("FinalModel" + name + ".go");
+    Open(file);
+
+    // Generate header
+    GenerateHeader(CppCommon::Path(_input).filename().string());
+
+    // Generate package
+    WriteLine();
+    WriteLineIndent("package " + package);
+
+    // Generate imports
+    WriteLine();
+    WriteLineIndent("import \"../fbe\"");
+
+    std::string code = R"CODE(
+import "errors"
+
+// Fast Binary Encoding _NAME_ final model class
+type FinalModel_NAME_ struct {
+    buffer *fbe.Buffer  // Final model buffer
+    offset int          // Final model buffer offset
+}
+
+// Get the allocation size
+func (fm FinalModel_NAME_) FBEAllocationSize(value _NAME_) int { return fm.FBESize() }
+
+// Get the final size
+func (fm FinalModel_NAME_) FBESize() int { return _SIZE_ }
+
+// Get the final offset
+func (fm FinalModel_NAME_) FBEOffset() int { return fm.offset }
+// Set the final offset
+func (fm *FinalModel_NAME_) SetFBEOffset(value int) { fm.offset = value }
+
+// Shift the current final offset
+func (fm *FinalModel_NAME_) FBEShift(size int) { fm.offset += size }
+// Unshift the current final offset
+func (fm *FinalModel_NAME_) FBEUnshift(size int) { fm.offset -= size }
+
+// Create a new final model
+func NewFinalModel_NAME_(buffer *fbe.Buffer, offset int) *FinalModel_NAME_ {
+    return &FinalModel_NAME_{ buffer: buffer, offset: offset }
+}
+
+// Check if the value is valid
+func (fm FinalModel_NAME_) Verify() (bool, int) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return false, 0
+    }
+
+    return true, fm.FBESize()
+}
+
+// Get the value
+func (fm FinalModel_NAME_) Get() (_NAME_, int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return _NAME_(0), 0, errors.New("model is broken")
+    }
+
+    return _NAME_(fbe.Read_BASE_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())), fm.FBESize(), nil
+}
+
+// Set the value
+func (fm *FinalModel_NAME_) Set(value _NAME_) (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
+    }
+
+    fbe.Write_BASE_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), _TYPE_(value))
+    return fm.FBESize(), nil
+}
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("_NAME_"), name);
+    code = std::regex_replace(code, std::regex("_TYPE_"), ConvertEnumType(type));
+    code = std::regex_replace(code, std::regex("_BASE_"), ConvertEnumBase(type));
+    code = std::regex_replace(code, std::regex("_SIZE_"), ConvertEnumSize(type));
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
 void GeneratorGo::GenerateFBESender()
 {
     std::string code = R"CODE(
@@ -3279,26 +3455,10 @@ class Receiver(object):
 
 void GeneratorGo::GenerateImports(const std::shared_ptr<Package>& p)
 {
-    // Generate common import
-    WriteLine();
-    if (JSON())
-        WriteLineIndent("import base64");
-    WriteLineIndent("import decimal");
-    WriteLineIndent("import enum");
-    WriteLineIndent("import functools");
-    if (JSON())
-        WriteLineIndent("import json");
-    WriteLineIndent("import sys");
-    WriteLineIndent("import uuid");
-
-    // Generate FBE import
-    WriteLine();
-    WriteLineIndent("import fbe");
-
     // Generate packages import
     if (p->import)
         for (const auto& import : p->import->imports)
-            WriteLineIndent("from . import " + *import);
+            WriteLineIndent("import _ \"../" + *import + "\"");
 }
 
 void GeneratorGo::GeneratePackage(const std::shared_ptr<Package>& p)
@@ -3308,30 +3468,28 @@ void GeneratorGo::GeneratePackage(const std::shared_ptr<Package>& p)
     // Create package path
     CppCommon::Directory::CreateTree(path);
 
-    /*
-    // Open the output file
-    output /= *p->name + ".py";
-    Open(output);
-
-    // Generate package header
-    GenerateHeader(CppCommon::Path(_input).filename().string());
-    GenerateImports(p);
-
     // Generate namespace
     if (p->body)
     {
         // Generate child enums
         for (const auto& child_e : p->body->enums)
-            GenerateEnum(child_e);
-
+            GenerateEnum(p, child_e, path);
+        /*
         // Generate child flags
         for (const auto& child_f : p->body->flags)
-            GenerateFlags(child_f);
+            GenerateFlags(p, child_f, path);
 
         // Generate child structs
         for (const auto& child_s : p->body->structs)
-            GenerateStruct(child_s);
+            GenerateStruct(p, child_s, path);
+        */
     }
+
+    /*
+    // Generate containers
+    GenerateContainers(p, false);
+    if (Final())
+        GenerateContainers(p, true);
 
     // Generate sender & receiver
     if (Sender())
@@ -3345,212 +3503,135 @@ void GeneratorGo::GeneratePackage(const std::shared_ptr<Package>& p)
         }
     }
 
-    // Generate package footer
-    GenerateFooter();
-
-    // Close the output file
-    Close();
+    // Generate JSON engine
+    if (JSON())
+        GenerateJson(p);
     */
 }
 
-void GeneratorGo::GenerateEnum(const std::shared_ptr<EnumType>& e)
+void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e, const CppCommon::Path& path)
 {
-    // Generate enum begin
+    std::string enum_name = ConvertCase(*e->name);
+
+    // Open the output file
+    CppCommon::Path output = path / (enum_name + ".go");
+    Open(output);
+
+    // Generate header
+    GenerateHeader(CppCommon::Path(_input).filename().string());
+
+    // Generate package
     WriteLine();
+    WriteLineIndent("package " + *p->name);
+
+    // Generate imports
+    GenerateImports(p);
+
+    // Generate other imports
     WriteLine();
-    WriteLineIndent("class " + *e->name + "(enum.IntEnum, metaclass=fbe.DefaultEnumMeta):");
-    Indent(1);
+    WriteLineIndent("import \"encoding/json\"");
 
     std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
+
+    // Generate enum type
+    WriteLine();
+    WriteLineIndent("type " + enum_name + " " + ConvertEnumType(enum_type));
 
     // Generate enum body
     if (e->body)
     {
+        WriteLine();
+        WriteLineIndent("const (");
+        Indent(1);
+
         int index = 0;
         std::string last = ConvertEnumConstant("int32", "0");
         for (const auto& value : e->body->values)
         {
-            WriteIndent(*value->name + " = ");
+            WriteIndent(enum_name + "_" + *value->name + " = ");
             if (value->value)
             {
                 if (value->value->constant && !value->value->constant->empty())
                 {
                     index = 0;
                     last = ConvertEnumConstant(enum_type, *value->value->constant);
-                    Write(last + " + " + std::to_string(index++));
+                    Write(enum_name + "(" + last + ") + " + std::to_string(index++));
                 }
                 else if (value->value->reference && !value->value->reference->empty())
                 {
                     index = 0;
                     last = ConvertEnumConstant("", *value->value->reference);
-                    Write(last);
+                    Write(enum_name + "_" + last);
                 }
             }
             else
-                Write(last + " + " + std::to_string(index++));
+                Write(enum_name + "(" + last + ") + " + std::to_string(index++));
             WriteLine();
         }
-        WriteLineIndent("unknown = ~0");
+
+        Indent(-1);
+        WriteLineIndent(")");
     }
 
-    // Generate enum __slots__
+    // Generate enum String() method
     WriteLine();
-    WriteLineIndent("__slots__ = ()");
-
-    // Generate enum __format__ method
-    WriteLine();
-    WriteLineIndent("def __format__(self, format_spec):");
-    Indent(1);
-    WriteLineIndent("return self.__str__()");
-    Indent(-1);
-
-    // Generate enum __str__ method
-    WriteLine();
-    WriteLineIndent("def __str__(self):");
+    WriteLineIndent("func (e " + enum_name + ") String() string {");
     Indent(1);
     if (e->body)
     {
+        WriteLineIndent("switch e {");
         for (auto it = e->body->values.begin(); it != e->body->values.end(); ++it)
         {
-            WriteLineIndent("if self.value == " + *e->name + "." + *(*it)->name + ":");
+            WriteLineIndent("case " + enum_name + "_" + *(*it)->name + ":");
             Indent(1);
             WriteLineIndent("return \"" + *(*it)->name + "\"");
             Indent(-1);
         }
+        WriteLineIndent("}");
     }
     WriteLineIndent("return \"<unknown>\"");
     Indent(-1);
-
-    // Generate enum __format__ method
-    WriteLine();
-    WriteLineIndent("@classmethod");
-    WriteLineIndent("def _missing_(cls, value):");
-    Indent(1);
-    WriteLineIndent("return " + *e->name + ".unknown");
-    Indent(-1);
+    WriteLineIndent("}");
 
     if (JSON())
     {
-        // Generate enum __from_json__ method
+        // Generate enum MarshalJSON() method
         WriteLine();
-        WriteLineIndent("@staticmethod");
-        WriteLineIndent("def __from_json__(value):");
+        WriteLineIndent("func (e " + enum_name + ") MarshalJSON() ([]byte, error) {");
         Indent(1);
-        WriteLineIndent("if value is None:");
+        WriteLineIndent("return json.Marshal(" + ConvertEnumType(enum_type) + "(e))");
+        Indent(-1);
+        WriteLineIndent("}");
+
+        // Generate enum UnmarshalJSON() method
+        WriteLine();
+        WriteLineIndent("func (e *" + enum_name + ") UnmarshalJSON(b []byte) error {");
         Indent(1);
-        WriteLineIndent("return None");
+        WriteLineIndent("var value " + ConvertEnumType(enum_type));
+        WriteLineIndent("err := json.Unmarshal(b, &value)");
+        WriteLineIndent("if err != nil {");
+        Indent(1);
+        WriteLineIndent("return err");
         Indent(-1);
-        WriteLineIndent("return " + *e->name + "(value)");
+        WriteLineIndent("}");
+        WriteLineIndent("*e = " + enum_name + "(value)");
+        WriteLineIndent("return nil");
         Indent(-1);
+        WriteLineIndent("}");
     }
 
-    // Generate enum end
-    Indent(-1);
+    // Generate enum footer
+    GenerateFooter();
+
+    // Close the output file
+    Close();
 
     // Generate enum field model
-    GenerateEnumFieldModel(e);
+    GenerateFBEFieldModelEnumFlags(*p->name, enum_name, enum_type);
 
     // Generate enum final model
     if (Final())
-        GenerateEnumFinalModel(e);
-}
-
-void GeneratorGo::GenerateEnumFieldModel(const std::shared_ptr<EnumType>& e)
-{
-    std::string code = R"CODE(
-
-# Fast Binary Encoding _ENUM_NAME_ field model class
-class FieldModel_ENUM_NAME_(fbe.FieldModel):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
-
-    # Get the field size
-    @property
-    def fbe_size(self):
-        return _ENUM_SIZE_
-
-    # Get the value
-    def get(self, defaults=None):
-        if defaults is None:
-            defaults = _ENUM_NAME_()
-
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return defaults
-
-        return _ENUM_NAME_(self.read__ENUM_TYPE_(self.fbe_offset))
-
-    # Set the value
-    def set(self, value):
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return
-
-        self.write__ENUM_TYPE_(self.fbe_offset, value)
-)CODE";
-
-    std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
-
-    // Prepare code template
-    code = std::regex_replace(code, std::regex("_ENUM_NAME_"), *e->name);
-    code = std::regex_replace(code, std::regex("_ENUM_TYPE_"), ConvertEnumType(enum_type));
-    code = std::regex_replace(code, std::regex("_ENUM_SIZE_"), ConvertEnumSize(enum_type));
-    code = std::regex_replace(code, std::regex("\n"), EndLine());
-
-    Write(code);
-}
-
-void GeneratorGo::GenerateEnumFinalModel(const std::shared_ptr<EnumType>& e)
-{
-    std::string code = R"CODE(
-
-# Fast Binary Encoding _ENUM_NAME_ final model class
-class FinalModel_ENUM_NAME_(fbe.FinalModel):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
-
-    # Get the allocation size
-    # noinspection PyUnusedLocal
-    def fbe_allocation_size(self, value):
-        return self.fbe_size
-
-    # Get the final size
-    @property
-    def fbe_size(self):
-        return _ENUM_SIZE_
-
-    # Check if the value is valid
-    def verify(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return sys.maxsize
-
-        return self.fbe_size
-
-    # Get the value
-    def get(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return _ENUM_NAME_(), 0
-
-        return _ENUM_NAME_(self.read__ENUM_TYPE_(self.fbe_offset)), self.fbe_size
-
-    # Set the value
-    def set(self, value):
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return 0
-
-        self.write__ENUM_TYPE_(self.fbe_offset, value)
-        return self.fbe_size
-)CODE";
-
-    std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
-
-    // Prepare code template
-    code = std::regex_replace(code, std::regex("_ENUM_NAME_"), *e->name);
-    code = std::regex_replace(code, std::regex("_ENUM_TYPE_"), ConvertEnumType(enum_type));
-    code = std::regex_replace(code, std::regex("_ENUM_SIZE_"), ConvertEnumSize(enum_type));
-    code = std::regex_replace(code, std::regex("\n"), EndLine());
-
-    Write(code);
+        GenerateFBEFinalModelEnumFlags(*p->name, enum_name, enum_type);
 }
 
 void GeneratorGo::GenerateFlags(const std::shared_ptr<FlagsType>& f)
@@ -3663,110 +3744,14 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     // Generate flags end
     Indent(-1);
 
+    /*
     // Generate flags field model
-    GenerateFlagsFieldModel(f);
+    GenerateFBEFieldModelEnumFlags(*p->name, flags_name, flags_type);
 
     // Generate flags final model
     if (Final())
-        GenerateFlagsFinalModel(f);
-}
-
-void GeneratorGo::GenerateFlagsFieldModel(const std::shared_ptr<FlagsType>& f)
-{
-    std::string code = R"CODE(
-
-# Fast Binary Encoding _FLAGS_NAME_ field model class
-class FieldModel_FLAGS_NAME_(fbe.FieldModel):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
-
-    # Get the field size
-    @property
-    def fbe_size(self):
-        return _FLAGS_SIZE_
-
-    # Get the value
-    def get(self, defaults=None):
-        if defaults is None:
-            defaults = _FLAGS_NAME_()
-
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return defaults
-
-        return _FLAGS_NAME_(self.read__FLAGS_TYPE_(self.fbe_offset))
-
-    # Set the value
-    def set(self, value):
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return
-
-        self.write__FLAGS_TYPE_(self.fbe_offset, value)
-)CODE";
-
-    std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
-
-    // Prepare code template
-    code = std::regex_replace(code, std::regex("_FLAGS_NAME_"), *f->name);
-    code = std::regex_replace(code, std::regex("_FLAGS_TYPE_"), ConvertEnumType(flags_type));
-    code = std::regex_replace(code, std::regex("_FLAGS_SIZE_"), ConvertEnumSize(flags_type));
-    code = std::regex_replace(code, std::regex("\n"), EndLine());
-
-    Write(code);
-}
-
-void GeneratorGo::GenerateFlagsFinalModel(const std::shared_ptr<FlagsType>& f)
-{
-    std::string code = R"CODE(
-
-# Fast Binary Encoding _FLAGS_NAME_ final model class
-class FinalModel_FLAGS_NAME_(fbe.FinalModel):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
-
-    # Get the allocation size
-    # noinspection PyUnusedLocal
-    def fbe_allocation_size(self, value):
-        return self.fbe_size
-
-    # Get the final size
-    @property
-    def fbe_size(self):
-        return _FLAGS_SIZE_
-
-    # Check if the value is valid
-    def verify(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return sys.maxsize
-
-        return self.fbe_size
-
-    # Get the value
-    def get(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return _FLAGS_NAME_(), 0
-
-        return _FLAGS_NAME_(self.read__FLAGS_TYPE_(self.fbe_offset)), self.fbe_size
-
-    # Set the value
-    def set(self, value):
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return 0
-
-        self.write__FLAGS_TYPE_(self.fbe_offset, value)
-        return self.fbe_size
-)CODE";
-
-    std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
-
-    // Prepare code template
-    code = std::regex_replace(code, std::regex("_FLAGS_NAME_"), *f->name);
-    code = std::regex_replace(code, std::regex("_FLAGS_TYPE_"), ConvertEnumType(flags_type));
-    code = std::regex_replace(code, std::regex("_FLAGS_SIZE_"), ConvertEnumSize(flags_type));
-    code = std::regex_replace(code, std::regex("\n"), EndLine());
-
-    Write(code);
+        GenerateFBEFinalModelEnumFlags(*p->name, flags_name, flags_type);
+    */
 }
 
 void GeneratorGo::GenerateStruct(const std::shared_ptr<StructType>& s)
@@ -5361,6 +5346,42 @@ bool GeneratorGo::IsGoType(const std::string& type)
     return IsPrimitiveType(type) || (type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid");
 }
 
+std::string GeneratorGo::ConvertCase(const std::string& type)
+{
+    std::string result = CppCommon::StringUtils::ToTrim(type);
+    result[0] = std::toupper(result[0]);
+    return result;
+}
+
+std::string GeneratorGo::ConvertEnumBase(const std::string& type)
+{
+    if (type == "byte")
+        return "Byte";
+    else if (type == "char")
+        return "UInt8";
+    else if (type == "wchar")
+        return "UInt32";
+    else if (type == "int8")
+        return "Int8";
+    else if (type == "uint8")
+        return "UInt8";
+    else if (type == "int16")
+        return "Int16";
+    else if (type == "uint16")
+        return "UInt16";
+    else if (type == "int32")
+        return "Int32";
+    else if (type == "uint32")
+        return "UInt32";
+    else if (type == "int64")
+        return "Int64";
+    else if (type == "uint64")
+        return "UInt64";
+
+    yyerror("Unsupported enum base type - " + type);
+    return "";
+}
+
 std::string GeneratorGo::ConvertEnumSize(const std::string& type)
 {
     if (type == "byte")
@@ -5422,11 +5443,9 @@ std::string GeneratorGo::ConvertEnumType(const std::string& type)
 std::string GeneratorGo::ConvertEnumConstant(const std::string& type, const std::string& value)
 {
     if (((type == "char") || (type == "wchar")) && CppCommon::StringUtils::StartsWith(value, "'"))
-        return "ord(" + value + ")";
-    else if (type.empty())
-        return value;
+        return "int(" + value + ")";
 
-    return "int(" + value + ")";
+    return value;
 }
 
 std::string GeneratorGo::ConvertTypeName(const std::string& type, bool optional)
