@@ -9,19 +9,21 @@ import "encoding/json"
 
 type OrderType byte
 
+//noinspection GoSnakeCaseUsage
 const (
-    OrderType_market = OrderType(0) + 0
-    OrderType_limit = OrderType(0) + 1
-    OrderType_stop = OrderType(0) + 2
+    OrderType_market = OrderType(0 + 0)
+    OrderType_limit = OrderType(0 + 1)
+    OrderType_stop = OrderType(0 + 2)
 )
 
 func (e OrderType) String() string {
-    switch e {
-    case OrderType_market:
+    if e == OrderType_market {
         return "market"
-    case OrderType_limit:
+    }
+    if e == OrderType_limit {
         return "limit"
-    case OrderType_stop:
+    }
+    if e == OrderType_stop {
         return "stop"
     }
     return "<unknown>"

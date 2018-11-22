@@ -4,25 +4,26 @@
 // Version: 1.1.0.0
 
 package protoex
-import _ "../proto"
 
 import "encoding/json"
 
 type OrderSide byte
 
+//noinspection GoSnakeCaseUsage
 const (
-    OrderSide_buy = OrderSide(0) + 0
-    OrderSide_sell = OrderSide(0) + 1
-    OrderSide_tell = OrderSide(0) + 2
+    OrderSide_buy = OrderSide(0 + 0)
+    OrderSide_sell = OrderSide(0 + 1)
+    OrderSide_tell = OrderSide(0 + 2)
 )
 
 func (e OrderSide) String() string {
-    switch e {
-    case OrderSide_buy:
+    if e == OrderSide_buy {
         return "buy"
-    case OrderSide_sell:
+    }
+    if e == OrderSide_sell {
         return "sell"
-    case OrderSide_tell:
+    }
+    if e == OrderSide_tell {
         return "tell"
     }
     return "<unknown>"

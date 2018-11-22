@@ -3457,8 +3457,11 @@ void GeneratorGo::GenerateImports(const std::shared_ptr<Package>& p)
 {
     // Generate packages import
     if (p->import)
+    {
+        WriteLine();
         for (const auto& import : p->import->imports)
-            WriteLineIndent("import _ \"../" + *import + "\"");
+            WriteLineIndent("import \"../" + *import + "\"");
+    }
 }
 
 void GeneratorGo::GeneratePackage(const std::shared_ptr<Package>& p)
@@ -3474,11 +3477,11 @@ void GeneratorGo::GeneratePackage(const std::shared_ptr<Package>& p)
         // Generate child enums
         for (const auto& child_e : p->body->enums)
             GenerateEnum(p, child_e, path);
-        /*
+
         // Generate child flags
         for (const auto& child_f : p->body->flags)
             GenerateFlags(p, child_f, path);
-
+        /*
         // Generate child structs
         for (const auto& child_s : p->body->structs)
             GenerateStruct(p, child_s, path);
@@ -3524,9 +3527,6 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
     WriteLine();
     WriteLineIndent("package " + *p->name);
 
-    // Generate imports
-    GenerateImports(p);
-
     // Generate other imports
     WriteLine();
     WriteLineIndent("import \"encoding/json\"");
@@ -3541,31 +3541,33 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
     if (e->body)
     {
         WriteLine();
+        WriteLineIndent("//noinspection GoSnakeCaseUsage");
         WriteLineIndent("const (");
         Indent(1);
 
         int index = 0;
-        std::string last = ConvertEnumConstant("int32", "0");
+        std::string last = ConvertEnumConstant(enum_name, "int32", "0");
         for (const auto& value : e->body->values)
         {
-            WriteIndent(enum_name + "_" + *value->name + " = ");
+            WriteIndent(enum_name + "_" + *value->name + " = " + enum_name + "(");
             if (value->value)
             {
                 if (value->value->constant && !value->value->constant->empty())
                 {
                     index = 0;
-                    last = ConvertEnumConstant(enum_type, *value->value->constant);
-                    Write(enum_name + "(" + last + ") + " + std::to_string(index++));
+                    last = ConvertEnumConstant(enum_name, enum_type, *value->value->constant);
+                    Write(last + " + " + std::to_string(index++));
                 }
                 else if (value->value->reference && !value->value->reference->empty())
                 {
                     index = 0;
-                    last = ConvertEnumConstant("", *value->value->reference);
-                    Write(enum_name + "_" + last);
+                    last = ConvertEnumConstant(enum_name, "", *value->value->reference);
+                    Write(last);
                 }
             }
             else
-                Write(enum_name + "(" + last + ") + " + std::to_string(index++));
+                Write(last + " + " + std::to_string(index++));
+            Write(")");
             WriteLine();
         }
 
@@ -3579,15 +3581,14 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
     Indent(1);
     if (e->body)
     {
-        WriteLineIndent("switch e {");
         for (auto it = e->body->values.begin(); it != e->body->values.end(); ++it)
         {
-            WriteLineIndent("case " + enum_name + "_" + *(*it)->name + ":");
+            WriteLineIndent("if e == " + enum_name + "_" + *(*it)->name + " {");
             Indent(1);
             WriteLineIndent("return \"" + *(*it)->name + "\"");
             Indent(-1);
+            WriteLineIndent("}");
         }
-        WriteLineIndent("}");
     }
     WriteLineIndent("return \"<unknown>\"");
     Indent(-1);
@@ -3634,124 +3635,129 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
         GenerateFBEFinalModelEnumFlags(*p->name, enum_name, enum_type);
 }
 
-void GeneratorGo::GenerateFlags(const std::shared_ptr<FlagsType>& f)
+void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f, const CppCommon::Path& path)
 {
-    // Generate flags begin
-    WriteLine();
-    WriteLine();
-    WriteLineIndent("class " + *f->name + "(enum.IntFlag, metaclass=fbe.DefaultEnumMeta):");
-    Indent(1);
+    std::string flags_name = ConvertCase(*f->name);
 
-    std::string enum_type = (f->base && !f->base->empty()) ? *f->base : "int32";
+    // Open the output file
+    CppCommon::Path output = path / (flags_name + ".go");
+    Open(output);
+
+    // Generate header
+    GenerateHeader(CppCommon::Path(_input).filename().string());
+
+    // Generate package
+    WriteLine();
+    WriteLineIndent("package " + *p->name);
+
+    // Generate other imports
+    WriteLine();
+    WriteLineIndent("import \"strings\"");
+    WriteLineIndent("import \"encoding/json\"");
+
+    std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
+
+    // Generate flags type
+    WriteLine();
+    WriteLineIndent("type " + flags_name + " " + ConvertEnumType(flags_type));
 
     // Generate flags body
     if (f->body)
     {
+        WriteLine();
+        WriteLineIndent("//noinspection GoSnakeCaseUsage");
+        WriteLineIndent("const (");
+        Indent(1);
+
         for (const auto& value : f->body->values)
         {
-            WriteIndent(*value->name + " = ");
+            WriteIndent(flags_name + "_" + *value->name + " = " + flags_name + "(");
             if (value->value)
             {
                 if (value->value->constant && !value->value->constant->empty())
-                    Write(ConvertEnumConstant(enum_type, *value->value->constant));
+                    Write(ConvertEnumConstant(flags_name, flags_type, *value->value->constant));
                 else if (value->value->reference && !value->value->reference->empty())
-                    Write(ConvertEnumConstant("", *value->value->reference));
+                    Write(ConvertEnumConstant(flags_name, "", *value->value->reference));
             }
+            Write(")");
             WriteLine();
         }
+
+        Indent(-1);
+        WriteLineIndent(")");
     }
 
-    // Generate flags __slots__
+    // Generate flags String() method
     WriteLine();
-    WriteLineIndent("__slots__ = ()");
-
-    // Generate flags has_flags() method
-    WriteLine();
-    WriteLineIndent("# Is flags set?");
-    WriteLineIndent("def has_flags(self, flags):");
+    WriteLineIndent("//noinspection GoBoolExpressions");
+    WriteLineIndent("func (f " + flags_name + ") String() string {");
     Indent(1);
-    WriteLineIndent("return ((self.value & flags.value) != 0) and ((self.value & flags.value) == flags.value)");
-    Indent(-1);
-
-    // Generate flags set_flags() method
-    WriteLine();
-    WriteLineIndent("# Set flags");
-    WriteLineIndent("def set_flags(self, flags):");
-    Indent(1);
-    WriteLineIndent("self.value |= flags.value");
-    WriteLineIndent("return self");
-    Indent(-1);
-
-    // Generate flags remove_flags() method
-    WriteLine();
-    WriteLineIndent("# Remove flags");
-    WriteLineIndent("def remove_flags(self, flags):");
-    Indent(1);
-    WriteLineIndent("self.value &= ~flags.value");
-    WriteLineIndent("return self");
-    Indent(-1);
-
-    // Generate flags __format__ method
-    WriteLine();
-    WriteLineIndent("def __format__(self, format_spec):");
-    Indent(1);
-    WriteLineIndent("return self.__str__()");
-    Indent(-1);
-
-    // Generate flags __str__ method
-    WriteLine();
-    WriteLineIndent("def __str__(self):");
-    Indent(1);
-    WriteLineIndent("sb = list()");
-    WriteLineIndent("first = True");
+    WriteLineIndent("var sb strings.Builder");
     if (f->body)
     {
+        WriteLineIndent("first := true");
         for (auto it = f->body->values.begin(); it != f->body->values.end(); ++it)
         {
-            WriteLineIndent("if (self.value & " + *f->name + "." + *(*it)->name + ".value) and ((self.value & " + *f->name + "." + *(*it)->name + ".value) == " + *f->name + "." + *(*it)->name + ".value):");
+            std::string flag = flags_name + "_" + *(*it)->name;
+            WriteLineIndent("if ((f & " + flag + ") != 0) && ((f & " + flag + ") == " + flag + ") {");
             Indent(1);
-            WriteLineIndent("if first:");
+            WriteLineIndent("if first {");
             Indent(1);
-            WriteLineIndent("# noinspection PyUnusedLocal");
-            WriteLineIndent("first = False");
+            WriteLineIndent("first = false");
             Indent(-1);
-            WriteLineIndent("else:");
+            WriteLineIndent("} else {");
             Indent(1);
-            WriteLineIndent("sb.append(\"|\")");
+            WriteLineIndent("sb.WriteRune('|')");
             Indent(-1);
-            WriteLineIndent("sb.append(\"" + *(*it)->name + "\")");
+            WriteLineIndent("}");
+            WriteLineIndent("sb.WriteString(\"" + *(*it)->name + "\")");
             Indent(-1);
+            WriteLineIndent("}");
         }
     }
-    WriteLineIndent("return \"\".join(sb)");
+    WriteLineIndent("return sb.String()");
     Indent(-1);
+    WriteLineIndent("}");
 
     if (JSON())
     {
-        // Generate flags __from_json__ method
+        // Generate flags MarshalJSON() method
         WriteLine();
-        WriteLineIndent("@staticmethod");
-        WriteLineIndent("def __from_json__(value):");
+        WriteLineIndent("func (f " + flags_name + ") MarshalJSON() ([]byte, error) {");
         Indent(1);
-        WriteLineIndent("if value is None:");
+        WriteLineIndent("return json.Marshal(" + ConvertEnumType(flags_type) + "(f))");
+        Indent(-1);
+        WriteLineIndent("}");
+
+        // Generate flags UnmarshalJSON() method
+        WriteLine();
+        WriteLineIndent("func (f *" + flags_name + ") UnmarshalJSON(b []byte) error {");
         Indent(1);
-        WriteLineIndent("return None");
+        WriteLineIndent("var value " + ConvertEnumType(flags_type));
+        WriteLineIndent("err := json.Unmarshal(b, &value)");
+        WriteLineIndent("if err != nil {");
+        Indent(1);
+        WriteLineIndent("return err");
         Indent(-1);
-        WriteLineIndent("return " + *f->name + "(value)");
+        WriteLineIndent("}");
+        WriteLineIndent("*f = " + flags_name + "(value)");
+        WriteLineIndent("return nil");
         Indent(-1);
+        WriteLineIndent("}");
     }
 
-    // Generate flags end
-    Indent(-1);
+    // Generate flags footer
+    GenerateFooter();
 
-    /*
+    // Close the output file
+    Close();
+
     // Generate flags field model
     GenerateFBEFieldModelEnumFlags(*p->name, flags_name, flags_type);
 
     // Generate flags final model
     if (Final())
         GenerateFBEFinalModelEnumFlags(*p->name, flags_name, flags_type);
-    */
 }
 
 void GeneratorGo::GenerateStruct(const std::shared_ptr<StructType>& s)
@@ -5440,12 +5446,32 @@ std::string GeneratorGo::ConvertEnumType(const std::string& type)
     return "";
 }
 
-std::string GeneratorGo::ConvertEnumConstant(const std::string& type, const std::string& value)
+std::string GeneratorGo::ConvertEnumConstant(const std::string& name, const std::string& type, const std::string& value)
 {
     if (((type == "char") || (type == "wchar")) && CppCommon::StringUtils::StartsWith(value, "'"))
-        return "int(" + value + ")";
+        return name + "(" + value + ")";
 
-    return value;
+    std::string result = value;
+
+    if (type.empty())
+    {
+        // Fill flags values
+        std::vector<std::string> flags = CppCommon::StringUtils::Split(value, '|', true);
+
+        // Generate flags combination
+        if (!flags.empty())
+        {
+            result = "";
+            bool first = true;
+            for (const auto& it : flags)
+            {
+                result += (first ? "" : " | ") + name + "_" + CppCommon::StringUtils::ToTrim(it);
+                first = false;
+            }
+        }
+    }
+
+    return result;
 }
 
 std::string GeneratorGo::ConvertTypeName(const std::string& type, bool optional)

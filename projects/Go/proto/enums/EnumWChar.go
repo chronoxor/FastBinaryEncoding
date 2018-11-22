@@ -9,28 +9,33 @@ import "encoding/json"
 
 type EnumWChar uint32
 
+//noinspection GoSnakeCaseUsage
 const (
-    EnumWChar_ENUM_VALUE_0 = EnumWChar(0) + 0
-    EnumWChar_ENUM_VALUE_1 = EnumWChar(0x0444) + 0
-    EnumWChar_ENUM_VALUE_2 = EnumWChar(0x0444) + 1
-    EnumWChar_ENUM_VALUE_3 = EnumWChar(0x0555) + 0
-    EnumWChar_ENUM_VALUE_4 = EnumWChar(0x0555) + 1
-    EnumWChar_ENUM_VALUE_5 = EnumWChar_ENUM_VALUE_3
+    EnumWChar_ENUM_VALUE_0 = EnumWChar(0 + 0)
+    EnumWChar_ENUM_VALUE_1 = EnumWChar(0x0444 + 0)
+    EnumWChar_ENUM_VALUE_2 = EnumWChar(0x0444 + 1)
+    EnumWChar_ENUM_VALUE_3 = EnumWChar(0x0555 + 0)
+    EnumWChar_ENUM_VALUE_4 = EnumWChar(0x0555 + 1)
+    EnumWChar_ENUM_VALUE_5 = EnumWChar(EnumWChar_ENUM_VALUE_3)
 )
 
 func (e EnumWChar) String() string {
-    switch e {
-    case EnumWChar_ENUM_VALUE_0:
+    if e == EnumWChar_ENUM_VALUE_0 {
         return "ENUM_VALUE_0"
-    case EnumWChar_ENUM_VALUE_1:
+    }
+    if e == EnumWChar_ENUM_VALUE_1 {
         return "ENUM_VALUE_1"
-    case EnumWChar_ENUM_VALUE_2:
+    }
+    if e == EnumWChar_ENUM_VALUE_2 {
         return "ENUM_VALUE_2"
-    case EnumWChar_ENUM_VALUE_3:
+    }
+    if e == EnumWChar_ENUM_VALUE_3 {
         return "ENUM_VALUE_3"
-    case EnumWChar_ENUM_VALUE_4:
+    }
+    if e == EnumWChar_ENUM_VALUE_4 {
         return "ENUM_VALUE_4"
-    case EnumWChar_ENUM_VALUE_5:
+    }
+    if e == EnumWChar_ENUM_VALUE_5 {
         return "ENUM_VALUE_5"
     }
     return "<unknown>"

@@ -72,7 +72,7 @@ private:
 
     void GeneratePackage(const std::shared_ptr<Package>& p);
     void GenerateEnum(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e, const CppCommon::Path& path);
-    void GenerateFlags(const std::shared_ptr<FlagsType>& f);
+    void GenerateFlags(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f, const CppCommon::Path& path);
     void GenerateStruct(const std::shared_ptr<StructType>& s);
     void GenerateStructFieldModel(const std::shared_ptr<StructType>& s);
     void GenerateStructModel(const std::shared_ptr<StructType>& s);
@@ -88,7 +88,7 @@ private:
     std::string ConvertEnumBase(const std::string& type);
     std::string ConvertEnumSize(const std::string& type);
     std::string ConvertEnumType(const std::string& type);
-    std::string ConvertEnumConstant(const std::string& type, const std::string& value);
+    std::string ConvertEnumConstant(const std::string& name, const std::string& type, const std::string& value);
     std::string ConvertTypeName(const std::string& type, bool optional);
     std::string ConvertTypeName(const StructField& field);
     std::string ConvertTypeFieldName(const std::string& type, bool final);

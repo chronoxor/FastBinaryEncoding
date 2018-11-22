@@ -4,28 +4,30 @@
 // Version: 1.1.0.0
 
 package protoex
-import _ "../proto"
 
 import "encoding/json"
 
 type OrderType byte
 
+//noinspection GoSnakeCaseUsage
 const (
-    OrderType_market = OrderType(0) + 0
-    OrderType_limit = OrderType(0) + 1
-    OrderType_stop = OrderType(0) + 2
-    OrderType_stoplimit = OrderType(0) + 3
+    OrderType_market = OrderType(0 + 0)
+    OrderType_limit = OrderType(0 + 1)
+    OrderType_stop = OrderType(0 + 2)
+    OrderType_stoplimit = OrderType(0 + 3)
 )
 
 func (e OrderType) String() string {
-    switch e {
-    case OrderType_market:
+    if e == OrderType_market {
         return "market"
-    case OrderType_limit:
+    }
+    if e == OrderType_limit {
         return "limit"
-    case OrderType_stop:
+    }
+    if e == OrderType_stop {
         return "stop"
-    case OrderType_stoplimit:
+    }
+    if e == OrderType_stoplimit {
         return "stoplimit"
     }
     return "<unknown>"

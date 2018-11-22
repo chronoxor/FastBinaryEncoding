@@ -9,28 +9,33 @@ import "encoding/json"
 
 type EnumInt8 int8
 
+//noinspection GoSnakeCaseUsage
 const (
-    EnumInt8_ENUM_VALUE_0 = EnumInt8(0) + 0
-    EnumInt8_ENUM_VALUE_1 = EnumInt8(-128) + 0
-    EnumInt8_ENUM_VALUE_2 = EnumInt8(-128) + 1
-    EnumInt8_ENUM_VALUE_3 = EnumInt8(126) + 0
-    EnumInt8_ENUM_VALUE_4 = EnumInt8(126) + 1
-    EnumInt8_ENUM_VALUE_5 = EnumInt8_ENUM_VALUE_3
+    EnumInt8_ENUM_VALUE_0 = EnumInt8(0 + 0)
+    EnumInt8_ENUM_VALUE_1 = EnumInt8(-128 + 0)
+    EnumInt8_ENUM_VALUE_2 = EnumInt8(-128 + 1)
+    EnumInt8_ENUM_VALUE_3 = EnumInt8(126 + 0)
+    EnumInt8_ENUM_VALUE_4 = EnumInt8(126 + 1)
+    EnumInt8_ENUM_VALUE_5 = EnumInt8(EnumInt8_ENUM_VALUE_3)
 )
 
 func (e EnumInt8) String() string {
-    switch e {
-    case EnumInt8_ENUM_VALUE_0:
+    if e == EnumInt8_ENUM_VALUE_0 {
         return "ENUM_VALUE_0"
-    case EnumInt8_ENUM_VALUE_1:
+    }
+    if e == EnumInt8_ENUM_VALUE_1 {
         return "ENUM_VALUE_1"
-    case EnumInt8_ENUM_VALUE_2:
+    }
+    if e == EnumInt8_ENUM_VALUE_2 {
         return "ENUM_VALUE_2"
-    case EnumInt8_ENUM_VALUE_3:
+    }
+    if e == EnumInt8_ENUM_VALUE_3 {
         return "ENUM_VALUE_3"
-    case EnumInt8_ENUM_VALUE_4:
+    }
+    if e == EnumInt8_ENUM_VALUE_4 {
         return "ENUM_VALUE_4"
-    case EnumInt8_ENUM_VALUE_5:
+    }
+    if e == EnumInt8_ENUM_VALUE_5 {
         return "ENUM_VALUE_5"
     }
     return "<unknown>"

@@ -9,28 +9,33 @@ import "encoding/json"
 
 type EnumUInt32 uint32
 
+//noinspection GoSnakeCaseUsage
 const (
-    EnumUInt32_ENUM_VALUE_0 = EnumUInt32(0) + 0
-    EnumUInt32_ENUM_VALUE_1 = EnumUInt32(0) + 0
-    EnumUInt32_ENUM_VALUE_2 = EnumUInt32(0) + 1
-    EnumUInt32_ENUM_VALUE_3 = EnumUInt32(0xFFFFFFFE) + 0
-    EnumUInt32_ENUM_VALUE_4 = EnumUInt32(0xFFFFFFFE) + 1
-    EnumUInt32_ENUM_VALUE_5 = EnumUInt32_ENUM_VALUE_3
+    EnumUInt32_ENUM_VALUE_0 = EnumUInt32(0 + 0)
+    EnumUInt32_ENUM_VALUE_1 = EnumUInt32(0 + 0)
+    EnumUInt32_ENUM_VALUE_2 = EnumUInt32(0 + 1)
+    EnumUInt32_ENUM_VALUE_3 = EnumUInt32(0xFFFFFFFE + 0)
+    EnumUInt32_ENUM_VALUE_4 = EnumUInt32(0xFFFFFFFE + 1)
+    EnumUInt32_ENUM_VALUE_5 = EnumUInt32(EnumUInt32_ENUM_VALUE_3)
 )
 
 func (e EnumUInt32) String() string {
-    switch e {
-    case EnumUInt32_ENUM_VALUE_0:
+    if e == EnumUInt32_ENUM_VALUE_0 {
         return "ENUM_VALUE_0"
-    case EnumUInt32_ENUM_VALUE_1:
+    }
+    if e == EnumUInt32_ENUM_VALUE_1 {
         return "ENUM_VALUE_1"
-    case EnumUInt32_ENUM_VALUE_2:
+    }
+    if e == EnumUInt32_ENUM_VALUE_2 {
         return "ENUM_VALUE_2"
-    case EnumUInt32_ENUM_VALUE_3:
+    }
+    if e == EnumUInt32_ENUM_VALUE_3 {
         return "ENUM_VALUE_3"
-    case EnumUInt32_ENUM_VALUE_4:
+    }
+    if e == EnumUInt32_ENUM_VALUE_4 {
         return "ENUM_VALUE_4"
-    case EnumUInt32_ENUM_VALUE_5:
+    }
+    if e == EnumUInt32_ENUM_VALUE_5 {
         return "ENUM_VALUE_5"
     }
     return "<unknown>"

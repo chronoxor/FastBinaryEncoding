@@ -9,16 +9,17 @@ import "encoding/json"
 
 type OrderSide byte
 
+//noinspection GoSnakeCaseUsage
 const (
-    OrderSide_buy = OrderSide(0) + 0
-    OrderSide_sell = OrderSide(0) + 1
+    OrderSide_buy = OrderSide(0 + 0)
+    OrderSide_sell = OrderSide(0 + 1)
 )
 
 func (e OrderSide) String() string {
-    switch e {
-    case OrderSide_buy:
+    if e == OrderSide_buy {
         return "buy"
-    case OrderSide_sell:
+    }
+    if e == OrderSide_sell {
         return "sell"
     }
     return "<unknown>"
