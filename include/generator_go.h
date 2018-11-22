@@ -44,8 +44,10 @@ private:
     void GenerateFBEBuffer(const std::string& package);
     void GenerateFBEFieldModel(const std::string& package, const std::string& name, const std::string& type, const std::string& size, const std::string& defaults);
     void GenerateFBEFieldModelDecimal(const std::string& package);
-    void GenerateFBEFieldModelBytes();
-    void GenerateFBEFieldModelString();
+    void GenerateFBEFieldModelTimestamp(const std::string& package);
+    void GenerateFBEFieldModelUUID(const std::string& package);
+    void GenerateFBEFieldModelBytes(const std::string& package);
+    void GenerateFBEFieldModelString(const std::string& package);
     void GenerateFBEFieldModelOptional();
     void GenerateFBEFieldModelArray();
     void GenerateFBEFieldModelVector();
@@ -53,8 +55,10 @@ private:
     void GenerateFBEFieldModelMap();
     void GenerateFBEFinalModel(const std::string& package, const std::string& name, const std::string& type, const std::string& size, const std::string& defaults);
     void GenerateFBEFinalModelDecimal(const std::string& package);
-    void GenerateFBEFinalModelBytes();
-    void GenerateFBEFinalModelString();
+    void GenerateFBEFinalModelTimestamp(const std::string& package);
+    void GenerateFBEFinalModelUUID(const std::string& package);
+    void GenerateFBEFinalModelBytes(const std::string& package);
+    void GenerateFBEFinalModelString(const std::string& package);
     void GenerateFBEFinalModelOptional();
     void GenerateFBEFinalModelArray();
     void GenerateFBEFinalModelVector();

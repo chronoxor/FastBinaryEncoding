@@ -5,26 +5,20 @@
 
 package fbe
 
-import "time"
+import "errors"
 import "github.com/google/uuid"
 
-// Workaround for Go unused imports issue
-var _ = time.Unix(0, 0)
-var _ = uuid.Nil
-
-// Fast Binary Encoding uuid.UUID final model class
+// Fast Binary Encoding UUID final model class
 type FinalModelUUID struct {
     buffer *Buffer  // Final model buffer
     offset int      // Final model buffer offset
 }
 
 // Get the allocation size
-func (fm FinalModelUUID) FBEAllocationSize() int { return fm.FBESize() }
+func (fm FinalModelUUID) FBEAllocationSize(value uuid.UUID) int { return fm.FBESize() }
 
 // Get the final size
 func (fm FinalModelUUID) FBESize() int { return 16 }
-// Get the final extra size
-func (fm FinalModelUUID) FBEExtra() int { return 0 }
 
 // Get the final offset
 func (fm FinalModelUUID) FBEOffset() int { return fm.offset }
@@ -36,35 +30,35 @@ func (fm *FinalModelUUID) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelUUID) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new final model
+// Create a new UUID final model
 func NewFinalModelUUID(buffer *Buffer, offset int) *FinalModelUUID {
     return &FinalModelUUID{buffer: buffer, offset: offset}
 }
 
-// Check if the value is valid
-func (fm FinalModelUUID) Verify() int {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return MaxInt
+// Check if the UUID value is valid
+func (fm FinalModelUUID) Verify() (bool, int) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return false, 0
     }
 
-    return fm.FBESize()
+    return true, fm.FBESize()
 }
 
-// Get the value
-func (fm FinalModelUUID) Get() (uuid.UUID, int) {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return uuid.Nil, 0
+// Get the UUID value
+func (fm FinalModelUUID) Get() (uuid.UUID, int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return uuid.Nil, 0, errors.New("model is broken")
     }
 
-    return ReadUUID(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), fm.FBESize()
+    return ReadUUID(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), fm.FBESize(), nil
 }
 
-// Set the value
-func (fm *FinalModelUUID) Set(value uuid.UUID) int {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return 0
+// Set the UUID value
+func (fm *FinalModelUUID) Set(value uuid.UUID) (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
     }
 
     WriteUUID(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
-    return fm.FBESize()
+    return fm.FBESize(), nil
 }

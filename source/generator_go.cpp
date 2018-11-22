@@ -29,11 +29,11 @@ void GeneratorGo::Generate(const std::shared_ptr<Package>& package)
     GenerateFBEFieldModel("fbe", "UInt64", "uint64", "8", "0");
     GenerateFBEFieldModel("fbe", "Float", "float32", "4", "0.0");
     GenerateFBEFieldModel("fbe", "Double", "float64", "8", "0.0");
-    GenerateFBEFieldModel("fbe", "Timestamp", "time.Time", "8", "time.Unix(0, 0)");
-    GenerateFBEFieldModel("fbe", "UUID", "uuid.UUID", "16", "uuid.Nil");
     GenerateFBEFieldModelDecimal("fbe");
-    //GenerateFBEFieldModelBytes();
-    //GenerateFBEFieldModelString();
+    GenerateFBEFieldModelTimestamp("fbe");
+    GenerateFBEFieldModelUUID("fbe");
+    GenerateFBEFieldModelBytes("fbe");
+    GenerateFBEFieldModelString("fbe");
     //GenerateFBEFieldModelOptional();
     //GenerateFBEFieldModelArray();
     //GenerateFBEFieldModelVector();
@@ -55,11 +55,11 @@ void GeneratorGo::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModel("fbe", "UInt64", "uint64", "8", "0");
         GenerateFBEFinalModel("fbe", "Float", "float32", "4", "0.0");
         GenerateFBEFinalModel("fbe", "Double", "float64", "8", "0.0");
-        GenerateFBEFinalModel("fbe", "Timestamp", "time.Time", "8", "time.Unix(0, 0)");
-        GenerateFBEFinalModel("fbe", "UUID", "uuid.UUID", "16", "uuid.Nil");
         GenerateFBEFinalModelDecimal("fbe");
-        //GenerateFBEFinalModelBytes();
-        //GenerateFBEFinalModelString();
+        GenerateFBEFinalModelTimestamp("fbe");
+        GenerateFBEFinalModelUUID("fbe");
+        GenerateFBEFinalModelBytes("fbe");
+        GenerateFBEFinalModelString("fbe");
         //GenerateFBEFinalModelOptional();
         //GenerateFBEFinalModelArray();
         //GenerateFBEFinalModelVector();
@@ -538,12 +538,7 @@ void GeneratorGo::GenerateFBEFieldModel(const std::string& package, const std::s
     std::string code = R"CODE(
 package fbe
 
-import "time"
-import "github.com/google/uuid"
-
-// Workaround for Go unused imports issue
-var _ = time.Unix(0, 0)
-var _ = uuid.Nil
+import "errors"
 
 // Fast Binary Encoding _TYPE_ field model class
 type FieldModel_NAME_ struct {
@@ -575,26 +570,27 @@ func NewFieldModel_NAME_(buffer *Buffer, offset int) *FieldModel_NAME_ {
 func (fm FieldModel_NAME_) Verify() bool { return true }
 
 // Get the value
-func (fm FieldModel_NAME_) Get() _TYPE_ {
+func (fm FieldModel_NAME_) Get() (_TYPE_, error) {
     return fm.GetDefault(_DEFAULTS_)
 }
 
 // Get the value with provided default value
-func (fm FieldModel_NAME_) GetDefault(defaults _TYPE_) _TYPE_ {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return defaults
+func (fm FieldModel_NAME_) GetDefault(defaults _TYPE_) (_TYPE_, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return defaults, nil
     }
 
-    return Read_NAME_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())
+    return Read_NAME_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), nil
 }
 
 // Set the value
-func (fm *FieldModel_NAME_) Set(value _TYPE_) {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return
+func (fm *FieldModel_NAME_) Set(value _TYPE_) error {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return errors.New("model is broken")
     }
 
     Write_NAME_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
+    return nil
 }
 )CODE";
 
@@ -628,10 +624,11 @@ void GeneratorGo::GenerateFBEFieldModelDecimal(const std::string& package)
     std::string code = R"CODE(
 package fbe
 
+import "errors"
 import "math/big"
 import "github.com/shopspring/decimal"
 
-// Fast Binary Encoding decimal.Decimal field model class
+// Fast Binary Encoding decimal field model class
 type FieldModelDecimal struct {
     buffer *Buffer  // Field model buffer
     offset int      // Field model buffer offset
@@ -661,14 +658,14 @@ func NewFieldModelDecimal(buffer *Buffer, offset int) *FieldModelDecimal {
 func (fm FieldModelDecimal) Verify() bool { return true }
 
 // Get the decimal value
-func (fm FieldModelDecimal) Get() decimal.Decimal {
+func (fm FieldModelDecimal) Get() (decimal.Decimal, error) {
     return fm.GetDefault(decimal.Zero)
 }
 
 // Get the decimal value with provided default value
-func (fm FieldModelDecimal) GetDefault(defaults decimal.Decimal) decimal.Decimal {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return defaults
+func (fm FieldModelDecimal) GetDefault(defaults decimal.Decimal) (decimal.Decimal, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return defaults, nil
     }
 
     // Read decimal parts
@@ -688,13 +685,13 @@ func (fm FieldModelDecimal) GetDefault(defaults decimal.Decimal) decimal.Decimal
         result = result.Neg()
     }
 
-    return result
+    return result, nil
 }
 
 // Set the decimal value
-func (fm *FieldModelDecimal) Set(value decimal.Decimal) {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return
+func (fm *FieldModelDecimal) Set(value decimal.Decimal) error {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return errors.New("model is broken")
     }
 
     // Extract decimal parts
@@ -707,14 +704,14 @@ func (fm *FieldModelDecimal) Set(value decimal.Decimal) {
     if (bits < 0) || (bits > 96) {
         // Value too big for .NET Decimal (bit length is limited to [0, 96])
         WriteCount(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), 0, fm.FBESize())
-        return
+        return errors.New("value too big for .NET Decimal (bit length is limited to [0, 96])")
     }
 
     // Check for decimal scale overflow
     if (scale < 0) || (scale > 28) {
         // Value scale exceeds .NET Decimal limit of [0, 28]
         WriteCount(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), 0, fm.FBESize())
-        return
+        return errors.New("value scale exceeds .NET Decimal limit of [0, 28]")
     }
 
     // Write unscaled value to bytes 0-11
@@ -733,6 +730,7 @@ func (fm *FieldModelDecimal) Set(value decimal.Decimal) {
     } else {
         WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 15, 0)
     }
+    return nil
 }
 
 var lowScaleField, midScaleField decimal.Decimal
@@ -758,203 +756,445 @@ func init()  {
     Close();
 }
 
-void GeneratorGo::GenerateFBEFieldModelBytes()
+void GeneratorGo::GenerateFBEFieldModelTimestamp(const std::string& package)
 {
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / ("FieldModelTimestamp.go");
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
     std::string code = R"CODE(
+package fbe
 
-# Fast Binary Encoding bytes field model class
-class FieldModelBytes(FieldModel):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
+import "errors"
+import "time"
 
-    # Get the field size
-    @property
-    def fbe_size(self):
-        return 4
-
-    # Get the field extra size
-    @property
-    def fbe_extra(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return 0
-
-        fbe_bytes_offset = self.read_uint32(self.fbe_offset)
-        if (fbe_bytes_offset == 0) or ((self._buffer.offset + fbe_bytes_offset + 4) > self._buffer.size):
-            return 0
-
-        fbe_bytes_size = self.read_uint32(fbe_bytes_offset)
-        return 4 + fbe_bytes_size
-
-    # Check if the bytes value is valid
-    def verify(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return True
-
-        fbe_bytes_offset = self.read_uint32(self.fbe_offset)
-        if fbe_bytes_offset == 0:
-            return True
-
-        if (self._buffer.offset + fbe_bytes_offset + 4) > self._buffer.size:
-            return False
-
-        fbe_bytes_size = self.read_uint32(fbe_bytes_offset)
-        if (self._buffer.offset + fbe_bytes_offset + 4 + fbe_bytes_size) > self._buffer.size:
-            return False
-
-        return True
-
-    # Get the bytes value
-    def get(self, defaults=None):
-        if defaults is None:
-            defaults = bytearray()
-
-        value = defaults
-
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return value
-
-        fbe_bytes_offset = self.read_uint32(self.fbe_offset)
-        if fbe_bytes_offset == 0:
-            return value
-
-        assert ((self._buffer.offset + fbe_bytes_offset + 4) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + fbe_bytes_offset + 4) > self._buffer.size:
-            return value
-
-        fbe_bytes_size = self.read_uint32(fbe_bytes_offset)
-        assert ((self._buffer.offset + fbe_bytes_offset + 4 + fbe_bytes_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + fbe_bytes_offset + 4 + fbe_bytes_size) > self._buffer.size:
-            return value
-
-        value = self.read_bytes(fbe_bytes_offset + 4, fbe_bytes_size)
-        return value
-
-    # Set the bytes value
-    def set(self, value):
-        assert (value is not None), "Invalid bytes value!"
-        if value is None:
-            raise ValueError("Invalid bytes value!")
-
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return
-
-        fbe_bytes_size = len(value)
-        fbe_bytes_offset = self._buffer.allocate(4 + fbe_bytes_size) - self._buffer.offset
-        assert ((fbe_bytes_offset > 0) and ((self._buffer.offset + fbe_bytes_offset + 4 + fbe_bytes_size) <= self._buffer.size)), "Model is broken!"
-        if (fbe_bytes_offset <= 0) or ((self._buffer.offset + fbe_bytes_offset + 4 + fbe_bytes_size) > self._buffer.size):
-            return
-
-        self.write_uint32(self.fbe_offset, fbe_bytes_offset)
-        self.write_uint32(fbe_bytes_offset, fbe_bytes_size)
-        self.write_bytes(fbe_bytes_offset + 4, value)
-)CODE";
-
-    // Prepare code template
-    code = std::regex_replace(code, std::regex("\n"), EndLine());
-
-    Write(code);
+// Fast Binary Encoding timestamp field model class
+type FieldModelTimestamp struct {
+    buffer *Buffer  // Field model buffer
+    offset int      // Field model buffer offset
 }
 
-void GeneratorGo::GenerateFBEFieldModelString()
-{
-    std::string code = R"CODE(
+// Get the field size
+func (fm FieldModelTimestamp) FBESize() int { return 8 }
+// Get the field extra size
+func (fm FieldModelTimestamp) FBEExtra() int { return 0 }
 
-# Fast Binary Encoding string field model class
-class FieldModelString(FieldModel):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
+// Get the field offset
+func (fm FieldModelTimestamp) FBEOffset() int { return fm.offset }
+// Set the field offset
+func (fm *FieldModelTimestamp) SetFBEOffset(value int) { fm.offset = value }
 
-    # Get the field size
-    @property
-    def fbe_size(self):
-        return 4
+// Shift the current field offset
+func (fm *FieldModelTimestamp) FBEShift(size int) { fm.offset += size }
+// Unshift the current field offset
+func (fm *FieldModelTimestamp) FBEUnshift(size int) { fm.offset -= size }
 
-    # Get the field extra size
-    @property
-    def fbe_extra(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return 0
+// Create a new timestamp field model
+func NewFieldModelTimestamp(buffer *Buffer, offset int) *FieldModelTimestamp {
+    return &FieldModelTimestamp{buffer: buffer, offset: offset}
+}
 
-        fbe_string_offset = self.read_uint32(self.fbe_offset)
-        if (fbe_string_offset == 0) or ((self._buffer.offset + fbe_string_offset + 4) > self._buffer.size):
-            return 0
+// Check if the timestamp value is valid
+func (fm FieldModelTimestamp) Verify() bool { return true }
 
-        fbe_string_size = self.read_uint32(fbe_string_offset)
-        return 4 + fbe_string_size
+// Get the timestamp value
+func (fm FieldModelTimestamp) Get() (time.Time, error) {
+    return fm.GetDefault(time.Unix(0, 0))
+}
 
-    # Check if the string value is valid
-    def verify(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return True
+// Get the timestamp value with provided default value
+func (fm FieldModelTimestamp) GetDefault(defaults time.Time) (time.Time, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return defaults, nil
+    }
 
-        fbe_string_offset = self.read_uint32(self.fbe_offset)
-        if fbe_string_offset == 0:
-            return True
+    return ReadTimestamp(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), nil
+}
 
-        if (self._buffer.offset + fbe_string_offset + 4) > self._buffer.size:
-            return False
+// Set the timestamp value
+func (fm *FieldModelTimestamp) Set(value time.Time) error {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return errors.New("model is broken")
+    }
 
-        fbe_string_size = self.read_uint32(fbe_string_offset)
-        if (self._buffer.offset + fbe_string_offset + 4 + fbe_string_size) > self._buffer.size:
-            return False
-
-        return True
-
-    # Get the string value
-    def get(self, defaults=None):
-        if defaults is None:
-            defaults = ""
-
-        value = defaults
-
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return value
-
-        fbe_string_offset = self.read_uint32(self.fbe_offset)
-        if fbe_string_offset == 0:
-            return value
-
-        assert ((self._buffer.offset + fbe_string_offset + 4) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + fbe_string_offset + 4) > self._buffer.size:
-            return value
-
-        fbe_string_size = self.read_uint32(fbe_string_offset)
-        assert ((self._buffer.offset + fbe_string_offset + 4 + fbe_string_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + fbe_string_offset + 4 + fbe_string_size) > self._buffer.size:
-            return value
-
-        data = self.read_bytes(fbe_string_offset + 4, fbe_string_size)
-        value = data.decode("utf-8")
-        return value
-
-    # Set the string value
-    def set(self, value):
-        assert (value is not None), "Invalid string value!"
-        if value is None:
-            raise ValueError("Invalid string value!")
-
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return
-
-        data = value.encode("utf-8")
-
-        fbe_string_size = len(data)
-        fbe_string_offset = self._buffer.allocate(4 + fbe_string_size) - self._buffer.offset
-        assert ((fbe_string_offset > 0) and ((self._buffer.offset + fbe_string_offset + 4 + fbe_string_size) <= self._buffer.size)), "Model is broken!"
-        if (fbe_string_offset <= 0) or ((self._buffer.offset + fbe_string_offset + 4 + fbe_string_size) > self._buffer.size):
-            return
-
-        self.write_uint32(self.fbe_offset, fbe_string_offset)
-        self.write_uint32(fbe_string_offset, fbe_string_size)
-        self.write_bytes(fbe_string_offset + 4, data)
+    WriteTimestamp(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
+    return nil
+}
 )CODE";
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorGo::GenerateFBEFieldModelUUID(const std::string& package)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / ("FieldModelUUID.go");
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
+    std::string code = R"CODE(
+package fbe
+
+import "errors"
+import "github.com/google/uuid"
+
+// Fast Binary Encoding UUID field model class
+type FieldModelUUID struct {
+    buffer *Buffer  // Field model buffer
+    offset int      // Field model buffer offset
+}
+
+// Get the field size
+func (fm FieldModelUUID) FBESize() int { return 16 }
+// Get the field extra size
+func (fm FieldModelUUID) FBEExtra() int { return 0 }
+
+// Get the field offset
+func (fm FieldModelUUID) FBEOffset() int { return fm.offset }
+// Set the field offset
+func (fm *FieldModelUUID) SetFBEOffset(value int) { fm.offset = value }
+
+// Shift the current field offset
+func (fm *FieldModelUUID) FBEShift(size int) { fm.offset += size }
+// Unshift the current field offset
+func (fm *FieldModelUUID) FBEUnshift(size int) { fm.offset -= size }
+
+// Create a new UUID field model
+func NewFieldModelUUID(buffer *Buffer, offset int) *FieldModelUUID {
+    return &FieldModelUUID{buffer: buffer, offset: offset}
+}
+
+// Check if the UUID value is valid
+func (fm FieldModelUUID) Verify() bool { return true }
+
+// Get the UUID value
+func (fm FieldModelUUID) Get() (uuid.UUID, error) {
+    return fm.GetDefault(uuid.Nil)
+}
+
+// Get the UUID value with provided default value
+func (fm FieldModelUUID) GetDefault(defaults uuid.UUID) (uuid.UUID, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return defaults, nil
+    }
+
+    return ReadUUID(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), nil
+}
+
+// Set the UUID value
+func (fm *FieldModelUUID) Set(value uuid.UUID) error {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return errors.New("model is broken")
+    }
+
+    WriteUUID(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
+    return nil
+}
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorGo::GenerateFBEFieldModelBytes(const std::string& package)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / ("FieldModelBytes.go");
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
+    std::string code = R"CODE(
+package fbe
+
+import "errors"
+
+// Fast Binary Encoding bytes field model class
+type FieldModelBytes struct {
+    buffer *Buffer  // Field model buffer
+    offset int      // Field model buffer offset
+}
+
+// Get the field size
+func (fm FieldModelBytes) FBESize() int { return 4 }
+// Get the field extra size
+func (fm FieldModelBytes) FBEExtra() int {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0
+    }
+
+    fbeBytesOffset := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    if (fbeBytesOffset == 0) || ((fm.buffer.Offset() + fbeBytesOffset + 4) > fm.buffer.Size()) {
+        return 0
+    }
+
+    fbeBytesSize := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeBytesOffset))
+    return 4 + fbeBytesSize
+}
+
+// Get the field offset
+func (fm FieldModelBytes) FBEOffset() int { return fm.offset }
+// Set the field offset
+func (fm *FieldModelBytes) SetFBEOffset(value int) { fm.offset = value }
+
+// Shift the current field offset
+func (fm *FieldModelBytes) FBEShift(size int) { fm.offset += size }
+// Unshift the current field offset
+func (fm *FieldModelBytes) FBEUnshift(size int) { fm.offset -= size }
+
+// Create a new bytes field model
+func NewFieldModelBytes(buffer *Buffer, offset int) *FieldModelBytes {
+    return &FieldModelBytes{buffer: buffer, offset: offset}
+}
+
+// Check if the bytes value is valid
+func (fm FieldModelBytes) Verify() bool {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return true
+    }
+
+    fbeBytesOffset := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    if fbeBytesOffset == 0 {
+        return true
+    }
+
+    if (fm.buffer.Offset() + fbeBytesOffset + 4) > fm.buffer.Size() {
+        return false
+    }
+
+    fbeBytesSize := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeBytesOffset))
+    if (fm.buffer.Offset() + fbeBytesOffset + 4 + fbeBytesSize) > fm.buffer.Size() {
+        return false
+    }
+
+    return true
+}
+
+// Get the bytes value
+func (fm FieldModelBytes) Get() ([]byte, error) {
+    return fm.GetDefault(make([]byte, 0))
+}
+
+// Get the bytes value with provided default value
+func (fm FieldModelBytes) GetDefault(defaults []byte) ([]byte, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return defaults, nil
+    }
+
+    fbeBytesOffset := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    if fbeBytesOffset == 0 {
+        return defaults, nil
+    }
+
+    if (fm.buffer.Offset() + fbeBytesOffset + 4) > fm.buffer.Size() {
+        return defaults, errors.New("model is broken")
+    }
+
+    fbeBytesSize := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeBytesOffset))
+    if (fm.buffer.Offset() + fbeBytesOffset + 4 + fbeBytesSize) > fm.buffer.Size() {
+        return defaults, errors.New("model is broken")
+    }
+
+    return ReadBytes(fm.buffer.Data(), fm.buffer.Offset() + fbeBytesOffset + 4, fbeBytesSize), nil
+}
+
+// Set the bytes value
+func (fm *FieldModelBytes) Set(value []byte) error {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return errors.New("model is broken")
+    }
+
+    fbeBytesSize := len(value)
+    fbeBytesOffset := fm.buffer.Allocate(4 + fbeBytesSize) - fm.buffer.Offset()
+    if (fbeBytesOffset <= 0) || ((fm.buffer.Offset() + fbeBytesOffset + 4 + fbeBytesSize) > fm.buffer.Size()) {
+        return errors.New("model is broken")
+    }
+
+    WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint32(fbeBytesOffset))
+    WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeBytesOffset, uint32(fbeBytesSize))
+    WriteBytes(fm.buffer.Data(), fm.buffer.Offset() + fbeBytesOffset + 4, value)
+    return nil
+}
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorGo::GenerateFBEFieldModelString(const std::string& package)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / ("FieldModelString.go");
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
+    std::string code = R"CODE(
+package fbe
+
+import "errors"
+
+// Fast Binary Encoding string field model class
+type FieldModelString struct {
+    buffer *Buffer  // Field model buffer
+    offset int      // Field model buffer offset
+}
+
+// Get the field size
+func (fm FieldModelString) FBESize() int { return 4 }
+// Get the field extra size
+func (fm FieldModelString) FBEExtra() int {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0
+    }
+
+    fbeStringOffset := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    if (fbeStringOffset == 0) || ((fm.buffer.Offset() + fbeStringOffset + 4) > fm.buffer.Size()) {
+        return 0
+    }
+
+    fbeStringSize := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeStringOffset))
+    return 4 + fbeStringSize
+}
+
+// Get the field offset
+func (fm FieldModelString) FBEOffset() int { return fm.offset }
+// Set the field offset
+func (fm *FieldModelString) SetFBEOffset(value int) { fm.offset = value }
+
+// Shift the current field offset
+func (fm *FieldModelString) FBEShift(size int) { fm.offset += size }
+// Unshift the current field offset
+func (fm *FieldModelString) FBEUnshift(size int) { fm.offset -= size }
+
+// Create a new string field model
+func NewFieldModelString(buffer *Buffer, offset int) *FieldModelString {
+    return &FieldModelString{buffer: buffer, offset: offset}
+}
+
+// Check if the string value is valid
+func (fm FieldModelString) Verify() bool {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return true
+    }
+
+    fbeStringOffset := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    if fbeStringOffset == 0 {
+        return true
+    }
+
+    if (fm.buffer.Offset() + fbeStringOffset + 4) > fm.buffer.Size() {
+        return false
+    }
+
+    fbeStringSize := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeStringOffset))
+    if (fm.buffer.Offset() + fbeStringOffset + 4 + fbeStringSize) > fm.buffer.Size() {
+        return false
+    }
+
+    return true
+}
+
+// Get the string value
+func (fm FieldModelString) Get() (string, error) {
+    return fm.GetDefault("")
+}
+
+// Get the string value with provided default value
+func (fm FieldModelString) GetDefault(defaults string) (string, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return defaults, nil
+    }
+
+    fbeStringOffset := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    if fbeStringOffset == 0 {
+        return defaults, nil
+    }
+
+    if (fm.buffer.Offset() + fbeStringOffset + 4) > fm.buffer.Size() {
+        return defaults, errors.New("model is broken")
+    }
+
+    fbeStringSize := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeStringOffset))
+    if (fm.buffer.Offset() + fbeStringOffset + 4 + fbeStringSize) > fm.buffer.Size() {
+        return defaults, errors.New("model is broken")
+    }
+
+    data := ReadBytes(fm.buffer.Data(), fm.buffer.Offset() + fbeStringOffset + 4, fbeStringSize)
+    return string(data), nil
+}
+
+// Set the string value
+func (fm *FieldModelString) Set(value string) error {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return errors.New("model is broken")
+    }
+
+    data := []byte(value)
+
+    fbeStringSize := len(data)
+    fbeStringOffset := fm.buffer.Allocate(4 + fbeStringSize) - fm.buffer.Offset()
+    if (fbeStringOffset <= 0) || ((fm.buffer.Offset() + fbeStringOffset + 4 + fbeStringSize) > fm.buffer.Size()) {
+        return errors.New("model is broken")
+    }
+
+    WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint32(fbeStringOffset))
+    WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeStringOffset, uint32(fbeStringSize))
+    WriteBytes(fm.buffer.Data(), fm.buffer.Offset() + fbeStringOffset + 4, data)
+    return nil
+}
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
 }
 
 void GeneratorGo::GenerateFBEFieldModelOptional()
@@ -1669,12 +1909,7 @@ void GeneratorGo::GenerateFBEFinalModel(const std::string& package, const std::s
     std::string code = R"CODE(
 package fbe
 
-import "time"
-import "github.com/google/uuid"
-
-// Workaround for Go unused imports issue
-var _ = time.Unix(0, 0)
-var _ = uuid.Nil
+import "errors"
 
 // Fast Binary Encoding _TYPE_ final model class
 type FinalModel_NAME_ struct {
@@ -1683,12 +1918,10 @@ type FinalModel_NAME_ struct {
 }
 
 // Get the allocation size
-func (fm FinalModel_NAME_) FBEAllocationSize() int { return fm.FBESize() }
+func (fm FinalModel_NAME_) FBEAllocationSize(value _TYPE_) int { return fm.FBESize() }
 
 // Get the final size
 func (fm FinalModel_NAME_) FBESize() int { return _SIZE_ }
-// Get the final extra size
-func (fm FinalModel_NAME_) FBEExtra() int { return 0 }
 
 // Get the final offset
 func (fm FinalModel_NAME_) FBEOffset() int { return fm.offset }
@@ -1706,31 +1939,31 @@ func NewFinalModel_NAME_(buffer *Buffer, offset int) *FinalModel_NAME_ {
 }
 
 // Check if the value is valid
-func (fm FinalModel_NAME_) Verify() int {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return MaxInt
+func (fm FinalModel_NAME_) Verify() (bool, int) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return false, 0
     }
 
-    return fm.FBESize()
+    return true, fm.FBESize()
 }
 
 // Get the value
-func (fm FinalModel_NAME_) Get() (_TYPE_, int) {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return _DEFAULTS_, 0
+func (fm FinalModel_NAME_) Get() (_TYPE_, int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return _DEFAULTS_, 0, errors.New("model is broken")
     }
 
-    return Read_NAME_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), fm.FBESize()
+    return Read_NAME_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), fm.FBESize(), nil
 }
 
 // Set the value
-func (fm *FinalModel_NAME_) Set(value _TYPE_) int {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return 0
+func (fm *FinalModel_NAME_) Set(value _TYPE_) (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
     }
 
     Write_NAME_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
-    return fm.FBESize()
+    return fm.FBESize(), nil
 }
 )CODE";
 
@@ -1764,22 +1997,21 @@ void GeneratorGo::GenerateFBEFinalModelDecimal(const std::string& package)
     std::string code = R"CODE(
 package fbe
 
+import "errors"
 import "math/big"
 import "github.com/shopspring/decimal"
 
-// Fast Binary Encoding decimal.Decimal final model class
+// Fast Binary Encoding decimal final model class
 type FinalModelDecimal struct {
     buffer *Buffer  // Final model buffer
     offset int      // Final model buffer offset
 }
 
 // Get the allocation size
-func (fm FinalModelDecimal) FBEAllocationSize() int { return fm.FBESize() }
+func (fm FinalModelDecimal) FBEAllocationSize(value decimal.Decimal) int { return fm.FBESize() }
 
 // Get the final size
 func (fm FinalModelDecimal) FBESize() int { return 16 }
-// Get the final extra size
-func (fm FinalModelDecimal) FBEExtra() int { return 0 }
 
 // Get the final offset
 func (fm FinalModelDecimal) FBEOffset() int { return fm.offset }
@@ -1797,18 +2029,18 @@ func NewFinalModelDecimal(buffer *Buffer, offset int) *FinalModelDecimal {
 }
 
 // Check if the decimal value is valid
-func (fm FinalModelDecimal) Verify() int {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return MaxInt
+func (fm FinalModelDecimal) Verify() (bool, int) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return false, 0
     }
 
-    return fm.FBESize()
+    return true, fm.FBESize()
 }
 
 // Get the decimal value
-func (fm FinalModelDecimal) Get() (decimal.Decimal, int) {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return decimal.Zero, 0
+func (fm FinalModelDecimal) Get() (decimal.Decimal, int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return decimal.Zero, 0, errors.New("model is broken")
     }
 
     // Read decimal parts
@@ -1828,13 +2060,13 @@ func (fm FinalModelDecimal) Get() (decimal.Decimal, int) {
         result = result.Neg()
     }
 
-    return result, fm.FBESize()
+    return result, fm.FBESize(), nil
 }
 
 // Set the decimal value
-func (fm *FinalModelDecimal) Set(value decimal.Decimal) int {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return 0
+func (fm *FinalModelDecimal) Set(value decimal.Decimal) (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
     }
 
     // Extract decimal parts
@@ -1847,14 +2079,14 @@ func (fm *FinalModelDecimal) Set(value decimal.Decimal) int {
     if (bits < 0) || (bits > 96) {
         // Value too big for .NET Decimal (bit length is limited to [0, 96])
         WriteCount(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), 0, fm.FBESize())
-        return fm.FBESize()
+        return fm.FBESize(), errors.New("value too big for .NET Decimal (bit length is limited to [0, 96])")
     }
 
     // Check for decimal scale overflow
     if (scale < 0) || (scale > 28) {
         // Value scale exceeds .NET Decimal limit of [0, 28]
         WriteCount(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), 0, fm.FBESize())
-        return fm.FBESize()
+        return fm.FBESize(), errors.New("value scale exceeds .NET Decimal limit of [0, 28]")
     }
 
     // Write unscaled value to bytes 0-11
@@ -1873,7 +2105,7 @@ func (fm *FinalModelDecimal) Set(value decimal.Decimal) int {
     } else {
         WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 15, 0)
     }
-    return fm.FBESize()
+    return fm.FBESize(), nil
 }
 
 var lowScaleFinal, midScaleFinal decimal.Decimal
@@ -1899,133 +2131,371 @@ func init()  {
     Close();
 }
 
-void GeneratorGo::GenerateFBEFinalModelBytes()
+void GeneratorGo::GenerateFBEFinalModelTimestamp(const std::string& package)
 {
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / ("FinalModelTimestamp.go");
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
     std::string code = R"CODE(
+package fbe
 
-# Fast Binary Encoding bytes final model class
-class FinalModelBytes(FinalModel):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
+import "errors"
+import "time"
 
-    # Get the allocation size
-    # noinspection PyMethodMayBeStatic
-    def fbe_allocation_size(self, value):
-        return 4 + len(value)
-
-    # Check if the bytes value is valid
-    def verify(self):
-        if (self._buffer.offset + self.fbe_offset + 4) > self._buffer.size:
-            return sys.maxsize
-
-        fbe_bytes_size = self.read_uint32(self.fbe_offset)
-        if (self._buffer.offset + self.fbe_offset + 4 + fbe_bytes_size) > self._buffer.size:
-            return sys.maxsize
-
-        return 4 + fbe_bytes_size
-
-    # Get the bytes value
-    def get(self):
-        if (self._buffer.offset + self.fbe_offset + 4) > self._buffer.size:
-            return bytearray(), 0
-
-        fbe_bytes_size = self.read_uint32(self.fbe_offset)
-        assert ((self._buffer.offset + self.fbe_offset + 4 + fbe_bytes_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + 4 + fbe_bytes_size) > self._buffer.size:
-            return bytearray(), 4
-
-        return self.read_bytes(self.fbe_offset + 4, fbe_bytes_size), (4 + fbe_bytes_size)
-
-    # Set the bytes value
-    def set(self, value):
-        assert (value is not None), "Invalid bytes value!"
-        if value is None:
-            raise ValueError("Invalid bytes value!")
-
-        assert ((self._buffer.offset + self.fbe_offset + 4) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + 4) > self._buffer.size:
-            return 0
-
-        fbe_bytes_size = len(value)
-        assert ((self._buffer.offset + self.fbe_offset + 4 + fbe_bytes_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + 4 + fbe_bytes_size) > self._buffer.size:
-            return 4
-
-        self.write_uint32(self.fbe_offset, fbe_bytes_size)
-        self.write_bytes(self.fbe_offset + 4, value)
-        return 4 + fbe_bytes_size
-)CODE";
-
-    // Prepare code template
-    code = std::regex_replace(code, std::regex("\n"), EndLine());
-
-    Write(code);
+// Fast Binary Encoding timestamp final model class
+type FinalModelTimestamp struct {
+    buffer *Buffer  // Final model buffer
+    offset int      // Final model buffer offset
 }
 
-void GeneratorGo::GenerateFBEFinalModelString()
-{
-    std::string code = R"CODE(
+// Get the allocation size
+func (fm FinalModelTimestamp) FBEAllocationSize(value time.Time) int { return fm.FBESize() }
 
-# Fast Binary Encoding string final model class
-class FinalModelString(FinalModel):
-    def __init__(self, buffer, offset):
-        super().__init__(buffer, offset)
+// Get the final size
+func (fm FinalModelTimestamp) FBESize() int { return 8 }
 
-    # Get the allocation size
-    # noinspection PyMethodMayBeStatic
-    def fbe_allocation_size(self, value):
-        return 4 + 3 * (len(value) + 1)
+// Get the final offset
+func (fm FinalModelTimestamp) FBEOffset() int { return fm.offset }
+// Set the final offset
+func (fm *FinalModelTimestamp) SetFBEOffset(value int) { fm.offset = value }
 
-    # Check if the string value is valid
-    def verify(self):
-        if (self._buffer.offset + self.fbe_offset + 4) > self._buffer.size:
-            return sys.maxsize
+// Shift the current final offset
+func (fm *FinalModelTimestamp) FBEShift(size int) { fm.offset += size }
+// Unshift the current final offset
+func (fm *FinalModelTimestamp) FBEUnshift(size int) { fm.offset -= size }
 
-        fbe_string_size = self.read_uint32(self.fbe_offset)
-        if (self._buffer.offset + self.fbe_offset + 4 + fbe_string_size) > self._buffer.size:
-            return sys.maxsize
+// Create a new timestamp final model
+func NewFinalModelTimestamp(buffer *Buffer, offset int) *FinalModelTimestamp {
+    return &FinalModelTimestamp{buffer: buffer, offset: offset}
+}
 
-        return 4 + fbe_string_size
+// Check if the timestamp value is valid
+func (fm FinalModelTimestamp) Verify() (bool, int) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return false, 0
+    }
 
-    # Get the string value
-    def get(self):
-        if (self._buffer.offset + self.fbe_offset + 4) > self._buffer.size:
-            return '', 0
+    return true, fm.FBESize()
+}
 
-        fbe_string_size = self.read_uint32(self.fbe_offset)
-        assert ((self._buffer.offset + self.fbe_offset + 4 + fbe_string_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + 4 + fbe_string_size) > self._buffer.size:
-            return '', 4
+// Get the timestamp value
+func (fm FinalModelTimestamp) Get() (time.Time, int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return time.Unix(0, 0), 0, errors.New("model is broken")
+    }
 
-        data = self.read_bytes(self.fbe_offset + 4, fbe_string_size)
-        return data.decode("utf-8"), (4 + fbe_string_size)
+    return ReadTimestamp(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), fm.FBESize(), nil
+}
 
-    # Set the string value
-    def set(self, value):
-        assert (value is not None), "Invalid string value!"
-        if value is None:
-            raise ValueError("Invalid string value!")
+// Set the timestamp value
+func (fm *FinalModelTimestamp) Set(value time.Time) (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
+    }
 
-        assert ((self._buffer.offset + self.fbe_offset + 4) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + 4) > self._buffer.size:
-            return 0
-
-        data = value.encode("utf-8")
-
-        fbe_string_size = len(data)
-        assert ((self._buffer.offset + self.fbe_offset + 4 + fbe_string_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + 4 + fbe_string_size) > self._buffer.size:
-            return 4
-
-        self.write_uint32(self.fbe_offset, fbe_string_size)
-        self.write_bytes(self.fbe_offset + 4, data)
-        return 4 + fbe_string_size
+    WriteTimestamp(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
+    return fm.FBESize(), nil
+}
 )CODE";
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorGo::GenerateFBEFinalModelUUID(const std::string& package)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / ("FinalModelUUID.go");
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
+    std::string code = R"CODE(
+package fbe
+
+import "errors"
+import "github.com/google/uuid"
+
+// Fast Binary Encoding UUID final model class
+type FinalModelUUID struct {
+    buffer *Buffer  // Final model buffer
+    offset int      // Final model buffer offset
+}
+
+// Get the allocation size
+func (fm FinalModelUUID) FBEAllocationSize(value uuid.UUID) int { return fm.FBESize() }
+
+// Get the final size
+func (fm FinalModelUUID) FBESize() int { return 16 }
+
+// Get the final offset
+func (fm FinalModelUUID) FBEOffset() int { return fm.offset }
+// Set the final offset
+func (fm *FinalModelUUID) SetFBEOffset(value int) { fm.offset = value }
+
+// Shift the current final offset
+func (fm *FinalModelUUID) FBEShift(size int) { fm.offset += size }
+// Unshift the current final offset
+func (fm *FinalModelUUID) FBEUnshift(size int) { fm.offset -= size }
+
+// Create a new UUID final model
+func NewFinalModelUUID(buffer *Buffer, offset int) *FinalModelUUID {
+    return &FinalModelUUID{buffer: buffer, offset: offset}
+}
+
+// Check if the UUID value is valid
+func (fm FinalModelUUID) Verify() (bool, int) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return false, 0
+    }
+
+    return true, fm.FBESize()
+}
+
+// Get the UUID value
+func (fm FinalModelUUID) Get() (uuid.UUID, int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return uuid.Nil, 0, errors.New("model is broken")
+    }
+
+    return ReadUUID(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), fm.FBESize(), nil
+}
+
+// Set the UUID value
+func (fm *FinalModelUUID) Set(value uuid.UUID) (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
+    }
+
+    WriteUUID(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
+    return fm.FBESize(), nil
+}
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorGo::GenerateFBEFinalModelBytes(const std::string& package)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / ("FinalModelBytes.go");
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
+    std::string code = R"CODE(
+package fbe
+
+import "errors"
+
+// Fast Binary Encoding bytes final model class
+type FinalModelBytes struct {
+    buffer *Buffer  // Final model buffer
+    offset int      // Final model buffer offset
+}
+
+// Get the allocation size
+func (fm FinalModelBytes) FBEAllocationSize(value []byte) int { return 4 + len(value) }
+
+// Get the final offset
+func (fm FinalModelBytes) FBEOffset() int { return fm.offset }
+// Set the final offset
+func (fm *FinalModelBytes) SetFBEOffset(value int) { fm.offset = value }
+
+// Shift the current final offset
+func (fm *FinalModelBytes) FBEShift(size int) { fm.offset += size }
+// Unshift the current final offset
+func (fm *FinalModelBytes) FBEUnshift(size int) { fm.offset -= size }
+
+// Create a new bytes final model
+func NewFinalModelBytes(buffer *Buffer, offset int) *FinalModelBytes {
+    return &FinalModelBytes{buffer: buffer, offset: offset}
+}
+
+// Check if the bytes value is valid
+func (fm FinalModelBytes) Verify() (bool, int) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
+        return false, 0
+    }
+
+    fbeBytesSize := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset()))
+    if (fm.buffer.Offset() + fm.FBEOffset() + 4 + fbeBytesSize) > fm.buffer.Size() {
+        return false, 0
+    }
+
+    return true, 4 + fbeBytesSize
+}
+
+// Get the bytes value
+func (fm FinalModelBytes) Get() ([]byte, int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
+        return make([]byte, 0), 0, nil
+    }
+
+    fbeBytesSize := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    if (fm.buffer.Offset() + fm.FBEOffset() + 4 + fbeBytesSize) > fm.buffer.Size() {
+        return make([]byte, 0), 4, errors.New("model is broken")
+    }
+
+    return ReadBytes(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 4, fbeBytesSize), 4 + fbeBytesSize, nil
+}
+
+// Set the bytes value
+func (fm *FinalModelBytes) Set(value []byte) (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
+    }
+
+    fbeBytesSize := len(value)
+    if (fm.buffer.Offset() + fm.FBEOffset() + 4 + fbeBytesSize) > fm.buffer.Size() {
+        return 4, errors.New("model is broken")
+    }
+
+    WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint32(fbeBytesSize))
+    WriteBytes(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 4, value)
+    return 4 + fbeBytesSize, nil
+}
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorGo::GenerateFBEFinalModelString(const std::string& package)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / ("FinalModelString.go");
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
+    std::string code = R"CODE(
+package fbe
+
+import "errors"
+
+// Fast Binary Encoding string final model class
+type FinalModelString struct {
+    buffer *Buffer  // Final model buffer
+    offset int      // Final model buffer offset
+}
+
+// Get the allocation size
+func (fm FinalModelString) FBEAllocationSize(value string) int { return 4 + 3 * (len(value) + 1) }
+
+// Get the final offset
+func (fm FinalModelString) FBEOffset() int { return fm.offset }
+// Set the final offset
+func (fm *FinalModelString) SetFBEOffset(value int) { fm.offset = value }
+
+// Shift the current final offset
+func (fm *FinalModelString) FBEShift(size int) { fm.offset += size }
+// Unshift the current final offset
+func (fm *FinalModelString) FBEUnshift(size int) { fm.offset -= size }
+
+// Create a new string final model
+func NewFinalModelString(buffer *Buffer, offset int) *FinalModelString {
+    return &FinalModelString{buffer: buffer, offset: offset}
+}
+
+// Check if the string value is valid
+func (fm FinalModelString) Verify() (bool, int) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
+        return false, 0
+    }
+
+    fbeStringSize := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset()))
+    if (fm.buffer.Offset() + fm.FBEOffset() + 4 + fbeStringSize) > fm.buffer.Size() {
+        return false, 0
+    }
+
+    return true, 4 + fbeStringSize
+}
+
+// Get the string value
+func (fm FinalModelString) Get() (string, int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
+        return "", 0, nil
+    }
+
+    fbeStringSize := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    if (fm.buffer.Offset() + fm.FBEOffset() + 4 + fbeStringSize) > fm.buffer.Size() {
+        return "", 4, errors.New("model is broken")
+    }
+
+    data := ReadBytes(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 4, fbeStringSize)
+    return string(data), 4 + fbeStringSize, nil
+}
+
+// Set the string value
+func (fm *FinalModelString) Set(value string) (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
+    }
+
+    data := []byte(value)
+
+    fbeStringSize := len(data)
+    if (fm.buffer.Offset() + fm.FBEOffset() + 4 + fbeStringSize) > fm.buffer.Size() {
+        return 4, errors.New("model is broken")
+    }
+
+    WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint32(fbeStringSize))
+    WriteBytes(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 4, data)
+    return 4 + fbeStringSize, nil
+}
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
 }
 
 void GeneratorGo::GenerateFBEFinalModelOptional()

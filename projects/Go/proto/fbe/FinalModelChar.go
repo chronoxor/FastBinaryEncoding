@@ -5,12 +5,7 @@
 
 package fbe
 
-import "time"
-import "github.com/google/uuid"
-
-// Workaround for Go unused imports issue
-var _ = time.Unix(0, 0)
-var _ = uuid.Nil
+import "errors"
 
 // Fast Binary Encoding rune final model class
 type FinalModelChar struct {
@@ -19,12 +14,10 @@ type FinalModelChar struct {
 }
 
 // Get the allocation size
-func (fm FinalModelChar) FBEAllocationSize() int { return fm.FBESize() }
+func (fm FinalModelChar) FBEAllocationSize(value rune) int { return fm.FBESize() }
 
 // Get the final size
 func (fm FinalModelChar) FBESize() int { return 1 }
-// Get the final extra size
-func (fm FinalModelChar) FBEExtra() int { return 0 }
 
 // Get the final offset
 func (fm FinalModelChar) FBEOffset() int { return fm.offset }
@@ -42,29 +35,29 @@ func NewFinalModelChar(buffer *Buffer, offset int) *FinalModelChar {
 }
 
 // Check if the value is valid
-func (fm FinalModelChar) Verify() int {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return MaxInt
+func (fm FinalModelChar) Verify() (bool, int) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return false, 0
     }
 
-    return fm.FBESize()
+    return true, fm.FBESize()
 }
 
 // Get the value
-func (fm FinalModelChar) Get() (rune, int) {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return '\000', 0
+func (fm FinalModelChar) Get() (rune, int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return '\000', 0, errors.New("model is broken")
     }
 
-    return ReadChar(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), fm.FBESize()
+    return ReadChar(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), fm.FBESize(), nil
 }
 
 // Set the value
-func (fm *FinalModelChar) Set(value rune) int {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return 0
+func (fm *FinalModelChar) Set(value rune) (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
     }
 
     WriteChar(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
-    return fm.FBESize()
+    return fm.FBESize(), nil
 }

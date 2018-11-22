@@ -5,12 +5,7 @@
 
 package fbe
 
-import "time"
-import "github.com/google/uuid"
-
-// Workaround for Go unused imports issue
-var _ = time.Unix(0, 0)
-var _ = uuid.Nil
+import "errors"
 
 // Fast Binary Encoding uint8 field model class
 type FieldModelUInt8 struct {
@@ -42,24 +37,25 @@ func NewFieldModelUInt8(buffer *Buffer, offset int) *FieldModelUInt8 {
 func (fm FieldModelUInt8) Verify() bool { return true }
 
 // Get the value
-func (fm FieldModelUInt8) Get() uint8 {
+func (fm FieldModelUInt8) Get() (uint8, error) {
     return fm.GetDefault(0)
 }
 
 // Get the value with provided default value
-func (fm FieldModelUInt8) GetDefault(defaults uint8) uint8 {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return defaults
+func (fm FieldModelUInt8) GetDefault(defaults uint8) (uint8, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return defaults, nil
     }
 
-    return ReadUInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())
+    return ReadUInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), nil
 }
 
 // Set the value
-func (fm *FieldModelUInt8) Set(value uint8) {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return
+func (fm *FieldModelUInt8) Set(value uint8) error {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return errors.New("model is broken")
     }
 
     WriteUInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
+    return nil
 }

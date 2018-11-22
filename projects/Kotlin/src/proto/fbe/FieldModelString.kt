@@ -58,26 +58,23 @@ class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     // Get the string value
     fun get(defaults: String = ""): String
     {
-        var value: String = defaults
-
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
-            return value
+            return defaults
 
         val fbeStringOffset = readUInt32(fbeOffset).toLong()
         if (fbeStringOffset == 0L)
-            return value
+            return defaults
 
         assert((_buffer.offset + fbeStringOffset + 4) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeStringOffset + 4) > _buffer.size)
-            return value
+            return defaults
 
         val fbeStringSize = readUInt32(fbeStringOffset).toLong()
         assert((_buffer.offset + fbeStringOffset + 4 + fbeStringSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeStringOffset + 4 + fbeStringSize) > _buffer.size)
-            return value
+            return defaults
 
-        value = readString(fbeStringOffset + 4, fbeStringSize)
-        return value
+        return readString(fbeStringOffset + 4, fbeStringSize)
     }
 
     // Set the string value

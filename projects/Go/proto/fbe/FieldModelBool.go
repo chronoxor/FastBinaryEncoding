@@ -5,12 +5,7 @@
 
 package fbe
 
-import "time"
-import "github.com/google/uuid"
-
-// Workaround for Go unused imports issue
-var _ = time.Unix(0, 0)
-var _ = uuid.Nil
+import "errors"
 
 // Fast Binary Encoding bool field model class
 type FieldModelBool struct {
@@ -42,24 +37,25 @@ func NewFieldModelBool(buffer *Buffer, offset int) *FieldModelBool {
 func (fm FieldModelBool) Verify() bool { return true }
 
 // Get the value
-func (fm FieldModelBool) Get() bool {
+func (fm FieldModelBool) Get() (bool, error) {
     return fm.GetDefault(false)
 }
 
 // Get the value with provided default value
-func (fm FieldModelBool) GetDefault(defaults bool) bool {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return defaults
+func (fm FieldModelBool) GetDefault(defaults bool) (bool, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return defaults, nil
     }
 
-    return ReadBool(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())
+    return ReadBool(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), nil
 }
 
 // Set the value
-func (fm *FieldModelBool) Set(value bool) {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return
+func (fm *FieldModelBool) Set(value bool) error {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return errors.New("model is broken")
     }
 
     WriteBool(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
+    return nil
 }

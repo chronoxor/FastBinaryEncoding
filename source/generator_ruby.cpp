@@ -1234,24 +1234,22 @@ void GeneratorRuby::GenerateFBEFieldModelBytes()
 
     # Get the bytes value
     def get(defaults = '')
-      value = defaults
-
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return value
+        return defaults
       end
 
       fbe_bytes_offset = read_uint32(fbe_offset)
       if fbe_bytes_offset == 0
-        return value
+        return defaults
       end
 
       if (@_buffer.offset + fbe_bytes_offset + 4) > @_buffer.size
-        return value
+        return defaults
       end
 
       fbe_bytes_size = read_uint32(fbe_bytes_offset)
       if (@_buffer.offset + fbe_bytes_offset + 4 + fbe_bytes_size) > @_buffer.size
-        return value
+        return defaults
       end
 
       read_bytes(fbe_bytes_offset + 4, fbe_bytes_size)
@@ -1343,24 +1341,22 @@ void GeneratorRuby::GenerateFBEFieldModelString()
 
     # Get the string value
     def get(defaults = '')
-      value = defaults
-
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return value
+        return defaults
       end
 
       fbe_string_offset = read_uint32(fbe_offset)
       if fbe_string_offset == 0
-        return value
+        return defaults
       end
 
       if (@_buffer.offset + fbe_string_offset + 4) > @_buffer.size
-        return value
+        return defaults
       end
 
       fbe_string_size = read_uint32(fbe_string_offset)
       if (@_buffer.offset + fbe_string_offset + 4 + fbe_string_size) > @_buffer.size
-        return value
+        return defaults
       end
 
       data = read_bytes(fbe_string_offset + 4, fbe_string_size)

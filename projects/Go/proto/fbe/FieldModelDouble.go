@@ -5,12 +5,7 @@
 
 package fbe
 
-import "time"
-import "github.com/google/uuid"
-
-// Workaround for Go unused imports issue
-var _ = time.Unix(0, 0)
-var _ = uuid.Nil
+import "errors"
 
 // Fast Binary Encoding float64 field model class
 type FieldModelDouble struct {
@@ -42,24 +37,25 @@ func NewFieldModelDouble(buffer *Buffer, offset int) *FieldModelDouble {
 func (fm FieldModelDouble) Verify() bool { return true }
 
 // Get the value
-func (fm FieldModelDouble) Get() float64 {
+func (fm FieldModelDouble) Get() (float64, error) {
     return fm.GetDefault(0.0)
 }
 
 // Get the value with provided default value
-func (fm FieldModelDouble) GetDefault(defaults float64) float64 {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return defaults
+func (fm FieldModelDouble) GetDefault(defaults float64) (float64, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return defaults, nil
     }
 
-    return ReadDouble(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())
+    return ReadDouble(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), nil
 }
 
 // Set the value
-func (fm *FieldModelDouble) Set(value float64) {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return
+func (fm *FieldModelDouble) Set(value float64) error {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return errors.New("model is broken")
     }
 
     WriteDouble(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
+    return nil
 }

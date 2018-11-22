@@ -1044,26 +1044,23 @@ class FieldModelBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     // Get the bytes value
     fun get(defaults: ByteArray = ByteArray(0)): ByteArray
     {
-        var value: ByteArray = defaults
-
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
-            return value
+            return defaults
 
         val fbeBytesOffset = readUInt32(fbeOffset).toLong()
         if (fbeBytesOffset == 0L)
-            return value
+            return defaults
 
         assert((_buffer.offset + fbeBytesOffset + 4) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeBytesOffset + 4) > _buffer.size)
-            return value
+            return defaults
 
         val fbeBytesSize = readUInt32(fbeBytesOffset).toLong()
         assert((_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.size)
-            return value
+            return defaults
 
-        value = readBytes(fbeBytesOffset + 4, fbeBytesSize)
-        return value
+        return readBytes(fbeBytesOffset + 4, fbeBytesSize)
     }
 
     // Set the bytes value
@@ -1154,26 +1151,23 @@ class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset
     // Get the string value
     fun get(defaults: String = ""): String
     {
-        var value: String = defaults
-
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
-            return value
+            return defaults
 
         val fbeStringOffset = readUInt32(fbeOffset).toLong()
         if (fbeStringOffset == 0L)
-            return value
+            return defaults
 
         assert((_buffer.offset + fbeStringOffset + 4) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeStringOffset + 4) > _buffer.size)
-            return value
+            return defaults
 
         val fbeStringSize = readUInt32(fbeStringOffset).toLong()
         assert((_buffer.offset + fbeStringOffset + 4 + fbeStringSize) <= _buffer.size) { "Model is broken!" }
         if ((_buffer.offset + fbeStringOffset + 4 + fbeStringSize) > _buffer.size)
-            return value
+            return defaults
 
-        value = readString(fbeStringOffset + 4, fbeStringSize)
-        return value
+        return readString(fbeStringOffset + 4, fbeStringSize)
     }
 
     // Set the string value

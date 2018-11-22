@@ -5,12 +5,7 @@
 
 package fbe
 
-import "time"
-import "github.com/google/uuid"
-
-// Workaround for Go unused imports issue
-var _ = time.Unix(0, 0)
-var _ = uuid.Nil
+import "errors"
 
 // Fast Binary Encoding float64 final model class
 type FinalModelDouble struct {
@@ -19,12 +14,10 @@ type FinalModelDouble struct {
 }
 
 // Get the allocation size
-func (fm FinalModelDouble) FBEAllocationSize() int { return fm.FBESize() }
+func (fm FinalModelDouble) FBEAllocationSize(value float64) int { return fm.FBESize() }
 
 // Get the final size
 func (fm FinalModelDouble) FBESize() int { return 8 }
-// Get the final extra size
-func (fm FinalModelDouble) FBEExtra() int { return 0 }
 
 // Get the final offset
 func (fm FinalModelDouble) FBEOffset() int { return fm.offset }
@@ -42,29 +35,29 @@ func NewFinalModelDouble(buffer *Buffer, offset int) *FinalModelDouble {
 }
 
 // Check if the value is valid
-func (fm FinalModelDouble) Verify() int {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return MaxInt
+func (fm FinalModelDouble) Verify() (bool, int) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return false, 0
     }
 
-    return fm.FBESize()
+    return true, fm.FBESize()
 }
 
 // Get the value
-func (fm FinalModelDouble) Get() (float64, int) {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return 0.0, 0
+func (fm FinalModelDouble) Get() (float64, int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0.0, 0, errors.New("model is broken")
     }
 
-    return ReadDouble(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), fm.FBESize()
+    return ReadDouble(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), fm.FBESize(), nil
 }
 
 // Set the value
-func (fm *FinalModelDouble) Set(value float64) int {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return 0
+func (fm *FinalModelDouble) Set(value float64) (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
     }
 
     WriteDouble(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
-    return fm.FBESize()
+    return fm.FBESize(), nil
 }

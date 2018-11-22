@@ -826,26 +826,23 @@ class FieldModelBytes(FieldModel):
         if defaults is None:
             defaults = bytearray()
 
-        value = defaults
-
         if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return value
+            return defaults
 
         fbe_bytes_offset = self.read_uint32(self.fbe_offset)
         if fbe_bytes_offset == 0:
-            return value
+            return defaults
 
         assert ((self._buffer.offset + fbe_bytes_offset + 4) <= self._buffer.size), "Model is broken!"
         if (self._buffer.offset + fbe_bytes_offset + 4) > self._buffer.size:
-            return value
+            return defaults
 
         fbe_bytes_size = self.read_uint32(fbe_bytes_offset)
         assert ((self._buffer.offset + fbe_bytes_offset + 4 + fbe_bytes_size) <= self._buffer.size), "Model is broken!"
         if (self._buffer.offset + fbe_bytes_offset + 4 + fbe_bytes_size) > self._buffer.size:
-            return value
+            return defaults
 
-        value = self.read_bytes(fbe_bytes_offset + 4, fbe_bytes_size)
-        return value
+        return self.read_bytes(fbe_bytes_offset + 4, fbe_bytes_size)
 
     # Set the bytes value
     def set(self, value):
@@ -924,27 +921,24 @@ class FieldModelString(FieldModel):
         if defaults is None:
             defaults = ""
 
-        value = defaults
-
         if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return value
+            return defaults
 
         fbe_string_offset = self.read_uint32(self.fbe_offset)
         if fbe_string_offset == 0:
-            return value
+            return defaults
 
         assert ((self._buffer.offset + fbe_string_offset + 4) <= self._buffer.size), "Model is broken!"
         if (self._buffer.offset + fbe_string_offset + 4) > self._buffer.size:
-            return value
+            return defaults
 
         fbe_string_size = self.read_uint32(fbe_string_offset)
         assert ((self._buffer.offset + fbe_string_offset + 4 + fbe_string_size) <= self._buffer.size), "Model is broken!"
         if (self._buffer.offset + fbe_string_offset + 4 + fbe_string_size) > self._buffer.size:
-            return value
+            return defaults
 
         data = self.read_bytes(fbe_string_offset + 4, fbe_string_size)
-        value = data.decode("utf-8")
-        return value
+        return data.decode("utf-8")
 
     # Set the string value
     def set(self, value):

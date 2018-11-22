@@ -5,12 +5,7 @@
 
 package fbe
 
-import "time"
-import "github.com/google/uuid"
-
-// Workaround for Go unused imports issue
-var _ = time.Unix(0, 0)
-var _ = uuid.Nil
+import "errors"
 
 // Fast Binary Encoding byte field model class
 type FieldModelByte struct {
@@ -42,24 +37,25 @@ func NewFieldModelByte(buffer *Buffer, offset int) *FieldModelByte {
 func (fm FieldModelByte) Verify() bool { return true }
 
 // Get the value
-func (fm FieldModelByte) Get() byte {
+func (fm FieldModelByte) Get() (byte, error) {
     return fm.GetDefault(0)
 }
 
 // Get the value with provided default value
-func (fm FieldModelByte) GetDefault(defaults byte) byte {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return defaults
+func (fm FieldModelByte) GetDefault(defaults byte) (byte, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return defaults, nil
     }
 
-    return ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())
+    return ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), nil
 }
 
 // Set the value
-func (fm *FieldModelByte) Set(value byte) {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return
+func (fm *FieldModelByte) Set(value byte) error {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return errors.New("model is broken")
     }
 
     WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
+    return nil
 }

@@ -26,7 +26,7 @@
       <file leaf-file-name="test_create.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/test_create.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="196">
+            <state relative-caret-position="1105">
               <caret line="65" column="38" selection-start-line="65" selection-start-column="38" selection-end-line="65" selection-end-column="38" />
             </state>
           </provider>
@@ -35,8 +35,8 @@
       <file leaf-file-name="protoex.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/proto/protoex.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+            <state relative-caret-position="306">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -44,11 +44,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="benchmark_serialization.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="benchmark_serialization.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_serialization.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+            <state relative-caret-position="291">
+              <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fbe.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/proto/fbe.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-347">
+              <caret line="1925" lean-forward="true" selection-start-line="1925" selection-end-line="1925" />
             </state>
           </provider>
         </entry>
@@ -85,8 +94,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="608" />
-    <option name="y" value="362" />
+    <option name="x" value="556" />
+    <option name="y" value="84" />
     <option name="width" value="1318" />
     <option name="height" value="773" />
   </component>
@@ -209,22 +218,23 @@
       <workItem from="1539796825868" duration="136000" />
       <workItem from="1539797118671" duration="63000" />
       <workItem from="1539798043102" duration="3319000" />
+      <workItem from="1542901757299" duration="147000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7442000" />
+    <option name="totallyTimeSpent" value="7589000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="608" y="362" width="1318" height="773" extended-state="0" />
+    <frame x="556" y="84" width="1318" height="773" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6043956" visible="true" weight="0.3859375" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6021841" visible="true" weight="0.3859375" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.43213728" />
-      <window_info id="npm" order="2" sideWeight="0.3956044" side_tool="true" visible="true" weight="0.3859375" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3650546" />
+      <window_info id="npm" order="2" sideWeight="0.3978159" side_tool="true" visible="true" weight="0.3859375" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -262,21 +272,21 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_serialization_final.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_serialization_final.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_create.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_create.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="969">
           <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/proto.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/proto.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69394">
           <caret line="4083" column="7" selection-start-line="4083" selection-start-column="7" selection-end-line="4083" selection-end-column="7" />
@@ -293,7 +303,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_send_seceive.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_send_seceive.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1071">
           <caret line="63" column="10" selection-start-line="63" selection-start-column="10" selection-end-line="63" selection-end-column="10" />
@@ -327,28 +337,28 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/node_modules/tape/lib/test.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/node_modules/tape/lib/test.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1598">
           <caret line="94" column="9" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_serialization_final.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_serialization_final.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_create.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_create.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="969">
           <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/proto.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/proto.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69394">
           <caret line="4083" column="7" lean-forward="true" selection-start-line="4083" selection-start-column="7" selection-end-line="4083" selection-end-column="7" />
@@ -365,21 +375,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/int64.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/int64.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30362">
           <caret line="1787" column="70" selection-start-line="1787" selection-start-column="70" selection-end-line="1787" selection-end-column="70" />
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/uuid.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/uuid.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4930">
           <caret line="290" column="66" selection-start-line="290" selection-start-column="66" selection-end-line="290" selection-end-column="66" />
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/protoex.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/protoex.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="35105">
           <caret line="2065" column="36" selection-start-line="2065" selection-start-column="4" selection-end-line="2065" selection-end-column="36" />
@@ -392,14 +402,14 @@
     <entry file="file://$PROJECT_DIR$/proto/utf8.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/test.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/test.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180625">
           <caret line="10625" column="11" selection-start-line="10625" selection-start-column="11" selection-end-line="10625" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_int64.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_int64.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
@@ -413,21 +423,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/int64.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/int64.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30362">
           <caret line="1787" column="70" selection-start-line="1787" selection-start-column="70" selection-end-line="1787" selection-end-column="70" />
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/uuid.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/uuid.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4964">
           <caret line="293" column="66" selection-start-line="293" selection-start-column="66" selection-end-line="293" selection-end-column="66" />
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/protoex.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/protoex.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="35105">
           <caret line="2065" column="36" lean-forward="true" selection-start-line="2065" selection-start-column="4" selection-end-line="2065" selection-end-column="36" />
@@ -440,14 +450,14 @@
     <entry file="file://$PROJECT_DIR$/proto/utf8.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/test.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/test.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180625">
           <caret line="10625" column="11" selection-start-line="10625" selection-start-column="11" selection-end-line="10625" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_int64.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_int64.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
@@ -461,43 +471,40 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/int64.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/int64.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30362">
           <caret line="1787" column="70" selection-start-line="1787" selection-start-column="70" selection-end-line="1787" selection-end-column="70" />
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/uuid.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/uuid.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4913">
           <caret line="290" column="66" selection-start-line="290" selection-start-column="66" selection-end-line="290" selection-end-column="66" />
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/test.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/test.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180608">
           <caret line="10625" column="11" selection-start-line="10625" selection-start-column="11" selection-end-line="10625" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_int64.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_int64.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
           <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/protoex.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/protoex.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="35088">
           <caret line="2065" column="36" selection-start-line="2065" selection-start-column="36" selection-end-line="2065" selection-end-column="36" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/fbe.js">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/proto/utf8.js">
       <provider selected="true" editor-type-id="text-editor" />
@@ -509,14 +516,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_send_seceive.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_send_seceive.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1071">
           <caret line="63" column="10" selection-start-line="63" selection-start-column="10" selection-end-line="63" selection-end-column="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_create.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_create.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="969">
           <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
@@ -537,21 +544,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/node_modules/tape/lib/test.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/node_modules/tape/lib/test.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1598">
           <caret line="94" column="9" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_serialization_final.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_serialization_final.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
           <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/proto.js">
+    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/proto.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="69394">
           <caret line="4083" column="7" selection-start-line="4083" selection-start-column="7" selection-end-line="4083" selection-end-column="7" />
@@ -584,15 +591,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_create.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="196">
+        <state relative-caret-position="1105">
           <caret line="65" column="38" selection-start-line="65" selection-start-column="38" selection-end-line="65" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/proto/protoex.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        <state relative-caret-position="306">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
@@ -601,8 +608,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_serialization.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+        <state relative-caret-position="291">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/fbe.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-347">
+          <caret line="1925" lean-forward="true" selection-start-line="1925" selection-end-line="1925" />
         </state>
       </provider>
     </entry>

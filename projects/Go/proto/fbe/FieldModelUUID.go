@@ -5,14 +5,10 @@
 
 package fbe
 
-import "time"
+import "errors"
 import "github.com/google/uuid"
 
-// Workaround for Go unused imports issue
-var _ = time.Unix(0, 0)
-var _ = uuid.Nil
-
-// Fast Binary Encoding uuid.UUID field model class
+// Fast Binary Encoding UUID field model class
 type FieldModelUUID struct {
     buffer *Buffer  // Field model buffer
     offset int      // Field model buffer offset
@@ -33,33 +29,34 @@ func (fm *FieldModelUUID) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelUUID) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new field model
+// Create a new UUID field model
 func NewFieldModelUUID(buffer *Buffer, offset int) *FieldModelUUID {
     return &FieldModelUUID{buffer: buffer, offset: offset}
 }
 
-// Check if the value is valid
+// Check if the UUID value is valid
 func (fm FieldModelUUID) Verify() bool { return true }
 
-// Get the value
-func (fm FieldModelUUID) Get() uuid.UUID {
+// Get the UUID value
+func (fm FieldModelUUID) Get() (uuid.UUID, error) {
     return fm.GetDefault(uuid.Nil)
 }
 
-// Get the value with provided default value
-func (fm FieldModelUUID) GetDefault(defaults uuid.UUID) uuid.UUID {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return defaults
+// Get the UUID value with provided default value
+func (fm FieldModelUUID) GetDefault(defaults uuid.UUID) (uuid.UUID, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return defaults, nil
     }
 
-    return ReadUUID(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())
+    return ReadUUID(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), nil
 }
 
-// Set the value
-func (fm *FieldModelUUID) Set(value uuid.UUID) {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return
+// Set the UUID value
+func (fm *FieldModelUUID) Set(value uuid.UUID) error {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return errors.New("model is broken")
     }
 
     WriteUUID(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
+    return nil
 }

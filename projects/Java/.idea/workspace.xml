@@ -2,14 +2,67 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="783b2918-92f4-46d2-9a41-0a253625844f" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../../include/generator_go.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_go.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../modules/Catch2" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/Catch2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../modules/CppBenchmark" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppBenchmark" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../modules/CppCommon" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppCommon" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/riderModule.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelBool.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelBool.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelByte.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelByte.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelChar.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelChar.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelDecimal.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelDecimal.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelDouble.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelDouble.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelFloat.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelFloat.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt16.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt16.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt32.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt32.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt64.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt64.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt8.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt8.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelTimestamp.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelTimestamp.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt16.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt16.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt32.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt32.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt64.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt64.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt8.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt8.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUUID.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUUID.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelWChar.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelWChar.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelBool.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelBool.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelByte.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelByte.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelChar.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelChar.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelDecimal.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelDecimal.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelDouble.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelDouble.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelFloat.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelFloat.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt16.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt16.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt32.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt32.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt64.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt64.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt8.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt8.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelTimestamp.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelTimestamp.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt16.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt16.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt32.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt32.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt64.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt64.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt8.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt8.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUUID.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUUID.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelWChar.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelWChar.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/tests/decimal_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/decimal_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelBytes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proto/fbe/FieldModelBytes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proto/fbe/FieldModelString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/fbe.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/fbe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelBytes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelBytes.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelString.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelString.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/proto/fbe.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/fbe.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_java.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_java.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_javascript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_javascript.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_python.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_python.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_ruby.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_ruby.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -52,10 +105,29 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="754988224">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JAVA" value="1" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/benchmarks/BenchmarkSerialization.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="178">
@@ -63,6 +135,15 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/proto/fbe/FieldModelBytes.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="108" lean-forward="true" selection-start-line="108" selection-end-line="108" />
             </state>
           </provider>
         </entry>
@@ -96,10 +177,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="451" />
-    <option name="y" value="277" />
+    <option name="x" value="486" />
+    <option name="y" value="113" />
     <option name="width" value="1709" />
-    <option name="height" value="887" />
+    <option name="height" value="820" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -107,8 +188,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -125,18 +204,27 @@
               <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
               <item name="Java" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="benchmarks" type="462c0819:PsiDirectoryNode" />
+              <item name="proto" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="proto" type="462c0819:PsiDirectoryNode" />
+              <item name="fbe" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539976037546" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542901197798" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -155,7 +243,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Jmh.BenchmarkSerialization.serialize">
+  <component name="RunManager" selected="TestNG.&lt;default&gt;">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">
@@ -220,8 +308,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Jmh.BenchmarkSerialization.serialize" />
         <item itemvalue="TestNG.&lt;default&gt;" />
+        <item itemvalue="Jmh.BenchmarkSerialization.serialize" />
         <item itemvalue="Jmh.BenchmarkSerializationJson.deserialize" />
         <item itemvalue="Jmh.BenchmarkSerializationJson.serialize" />
         <item itemvalue="Jmh.BenchmarkSerializationFinal.verify" />
@@ -254,13 +342,11 @@
       <workItem from="1539213622879" duration="1232000" />
       <workItem from="1539639628544" duration="54000" />
       <workItem from="1539975948259" duration="38000" />
+      <workItem from="1542901052144" duration="174000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="_default_ - 2018.09.29 at 00h 56m 37s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
     <history-entry file="_default_ - 2018.10.03 at 22h 10m 21s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
@@ -288,14 +374,18 @@
     <history-entry file="_default_ - 2018.10.19 at 22h 06m 10s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
+    <history-entry file="_default_ - 2018.11.22 at 18h 40m 02s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5187000" />
+    <option name="totallyTimeSpent" value="5361000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="451" y="277" width="1709" height="887" extended-state="0" />
+    <frame x="486" y="113" width="1709" height="820" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.30624622" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3098848" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -304,7 +394,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4936325" weight="0.4562334" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49302608" weight="0.45560408" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -313,7 +403,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="JProfiler" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4996968" weight="0.32891247" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5063675" side_tool="true" visible="true" weight="0.4562334" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5069739" side_tool="true" visible="true" weight="0.45560408" />
       <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49727106" weight="0.32891247" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -550,6 +640,13 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/proto/fbe/FieldModelBytes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="108" lean-forward="true" selection-start-line="108" selection-end-line="108" />
         </state>
       </provider>
     </entry>
