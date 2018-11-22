@@ -1,46 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba8f4190-0800-4bce-b2eb-ad8ed5d1197a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/Buffer.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/Buffer.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelBool.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelBool.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelByte.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelByte.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelChar.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelChar.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelDecimal.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelDecimal.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelDouble.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelDouble.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelFloat.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelFloat.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelInt16.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelInt16.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelInt32.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelInt32.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelInt64.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelInt64.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelInt8.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelInt8.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelTimestamp.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelTimestamp.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelUInt16.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelUInt16.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelUInt32.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelUInt32.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelUInt64.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelUInt64.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelUInt8.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelUInt8.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelUUID.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelUUID.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FieldModelWChar.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FieldModelWChar.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelBool.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelBool.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelByte.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelByte.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelChar.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelChar.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelDecimal.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelDecimal.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelDouble.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelDouble.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelFloat.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelFloat.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelInt16.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelInt16.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelInt32.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelInt32.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelInt64.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelInt64.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelInt8.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelInt8.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelTimestamp.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelTimestamp.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelUInt16.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelUInt16.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelUInt32.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelUInt32.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelUInt64.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelUInt64.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelUInt8.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelUInt8.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelUUID.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelUUID.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe/FinalModelWChar.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/FinalModelWChar.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/decimal_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/tests/decimal_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="ba8f4190-0800-4bce-b2eb-ad8ed5d1197a" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,11 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/proto/fbe/Buffer.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="84" selection-start-line="84" selection-end-line="84" />
+            <state relative-caret-position="238">
+              <caret line="29" column="20" lean-forward="true" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
               <folding>
                 <element signature="e#180#252#0" expanded="true" />
               </folding>
@@ -167,7 +128,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/decimal_test.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="513">
@@ -438,12 +399,12 @@
     <frame x="523" y="240" width="1589" height="1000" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.32766515" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32766515" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4977109" visible="true" weight="0.3194925" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4977109" visible="true" weight="0.3194925" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39907727" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -730,16 +691,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proto/fbe/Buffer.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="84" selection-start-line="84" selection-end-line="84" />
-          <folding>
-            <element signature="e#180#252#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/proto/fbe/FieldModelBool.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-102">
@@ -766,6 +717,16 @@
           <caret line="50" selection-start-line="50" selection-end-line="50" />
           <folding>
             <element signature="e#15#93#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/fbe/Buffer.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="29" column="20" lean-forward="true" selection-start-line="29" selection-start-column="20" selection-end-line="29" selection-end-column="20" />
+          <folding>
+            <element signature="e#180#252#0" expanded="true" />
           </folding>
         </state>
       </provider>
