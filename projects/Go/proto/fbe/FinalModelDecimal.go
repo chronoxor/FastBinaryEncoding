@@ -117,8 +117,7 @@ func (fm *FinalModelDecimal) Set(value decimal.Decimal) int {
     return fm.FBESize()
 }
 
-var lowScaleFinal decimal.Decimal
-var midScaleFinal decimal.Decimal
+var lowScaleFinal, midScaleFinal decimal.Decimal
 
 func init()  {
     var low, mid big.Int

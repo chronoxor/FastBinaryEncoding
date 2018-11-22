@@ -112,8 +112,7 @@ func (fm *FieldModelDecimal) Set(value decimal.Decimal) {
     }
 }
 
-var lowScaleField decimal.Decimal
-var midScaleField decimal.Decimal
+var lowScaleField, midScaleField decimal.Decimal
 
 func init()  {
     var low, mid big.Int

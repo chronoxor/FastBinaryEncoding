@@ -165,7 +165,7 @@ type Buffer struct {
 }
 
 // Is the buffer empty?
-func (b Buffer) Empty() bool { return (b.data == nil) || (b.size <= 0) }
+func (b Buffer) Empty() bool { return (len(b.data) == 0) || (b.size <= 0) }
 // Get bytes memory buffer
 func (b Buffer) Data() []byte { return b.data }
 // Get bytes memory buffer capacity
@@ -208,7 +208,7 @@ func (b *Buffer) AttachCapacity(capacity int) {
 
 // Attach a given memory buffer
 func (b *Buffer) AttachBuffer(buffer []byte, offset int, size int) {
-    if buffer == nil {
+    if len(buffer) < size {
         panic("Invalid buffer!")
     }
     if size <= 0 {
@@ -394,11 +394,11 @@ func ReadUUID(buffer []byte, offset int) uuid.UUID {
 }
 
 func ReadBytes(buffer []byte, offset int, size int) []byte {
-    return buffer[offset:size]
+    return buffer[offset:offset + size]
 }
 
 func ReadString(buffer []byte, offset int, size int) string {
-    return string(buffer[offset:size])
+    return string(buffer[offset:offset + size])
 }
 
 func WriteBool(buffer []byte, offset int, value bool) {
@@ -494,11 +494,11 @@ func WriteUUID(buffer []byte, offset int, value uuid.UUID) {
 }
 
 func WriteBytes(buffer []byte, offset int, value []byte) {
-    copy(buffer[offset:len(value)], value)
+    copy(buffer[offset:offset + len(value)], value)
 }
 
 func WriteSlice(buffer []byte, offset int, value []byte, valueOffset int, valueSize int) {
-    copy(buffer[offset:len(value)], value[valueOffset:valueSize])
+    copy(buffer[offset:offset + len(value)], value[valueOffset:valueOffset + valueSize])
 }
 
 func WriteCount(buffer []byte, offset int, value byte, valueCount int) {
@@ -735,8 +735,7 @@ func (fm *FieldModelDecimal) Set(value decimal.Decimal) {
     }
 }
 
-var lowScaleField decimal.Decimal
-var midScaleField decimal.Decimal
+var lowScaleField, midScaleField decimal.Decimal
 
 func init()  {
     var low, mid big.Int
@@ -1877,8 +1876,7 @@ func (fm *FinalModelDecimal) Set(value decimal.Decimal) int {
     return fm.FBESize()
 }
 
-var lowScaleFinal decimal.Decimal
-var midScaleFinal decimal.Decimal
+var lowScaleFinal, midScaleFinal decimal.Decimal
 
 func init()  {
     var low, mid big.Int
