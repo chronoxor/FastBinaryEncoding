@@ -65,26 +65,23 @@ public final class FieldModelBytes extends FieldModel
         if (defaults == null)
             throw new IllegalArgumentException("Invalid default bytes value!");
 
-        byte[] value = defaults;
-
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
-            return value;
+            return defaults;
 
         int fbeBytesOffset = readInt32(fbeOffset());
         if (fbeBytesOffset == 0)
-            return value;
+            return defaults;
 
         assert ((_buffer.getOffset() + fbeBytesOffset + 4) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeBytesOffset + 4) > _buffer.getSize())
-            return value;
+            return defaults;
 
         int fbeBytesSize = readInt32(fbeBytesOffset);
         assert ((_buffer.getOffset() + fbeBytesOffset + 4 + fbeBytesSize) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.getSize())
-            return value;
+            return defaults;
 
-        value = readBytes(fbeBytesOffset + 4, fbeBytesSize);
-        return value;
+        return readBytes(fbeBytesOffset + 4, fbeBytesSize);
     }
 
     // Set the bytes value

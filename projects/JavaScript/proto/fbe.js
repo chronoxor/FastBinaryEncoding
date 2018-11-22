@@ -1954,30 +1954,27 @@ class FieldModelBytes extends FieldModel {
    * @returns {!Uint8Array} Result value
    */
   get (defaults = new Uint8Array(0)) {
-    let value = defaults
-
     if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
-      return value
+      return defaults
     }
 
     let fbeBytesOffset = this.readUInt32(this.fbeOffset)
     if (fbeBytesOffset === 0) {
-      return value
+      return defaults
     }
 
     console.assert(((this._buffer.offset + fbeBytesOffset + 4) <= this._buffer.size), 'Model is broken!')
     if ((this._buffer.offset + fbeBytesOffset + 4) > this._buffer.size) {
-      return value
+      return defaults
     }
 
     let fbeBytesSize = this.readUInt32(fbeBytesOffset)
     console.assert(((this._buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) <= this._buffer.size), 'Model is broken!')
     if ((this._buffer.offset + fbeBytesOffset + 4 + fbeBytesSize) > this._buffer.size) {
-      return value
+      return defaults
     }
 
-    value = this.readBytes(fbeBytesOffset + 4, fbeBytesSize)
-    return value
+    return this.readBytes(fbeBytesOffset + 4, fbeBytesSize)
   }
 
   /**
@@ -2068,30 +2065,27 @@ class FieldModelString extends FieldModel {
    * @returns {!string} Result value
    */
   get (defaults = '') {
-    let value = defaults
-
     if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
-      return value
+      return defaults
     }
 
     let fbeStringOffset = this.readUInt32(this.fbeOffset)
     if (fbeStringOffset === 0) {
-      return value
+      return defaults
     }
 
     console.assert(((this._buffer.offset + fbeStringOffset + 4) <= this._buffer.size), 'Model is broken!')
     if ((this._buffer.offset + fbeStringOffset + 4) > this._buffer.size) {
-      return value
+      return defaults
     }
 
     let fbeStringSize = this.readUInt32(fbeStringOffset)
     console.assert(((this._buffer.offset + fbeStringOffset + 4 + fbeStringSize) <= this._buffer.size), 'Model is broken!')
     if ((this._buffer.offset + fbeStringOffset + 4 + fbeStringSize) > this._buffer.size) {
-      return value
+      return defaults
     }
 
-    value = this.readString(fbeStringOffset + 4, fbeStringSize)
-    return value
+    return this.readString(fbeStringOffset + 4, fbeStringSize)
   }
 
   /**

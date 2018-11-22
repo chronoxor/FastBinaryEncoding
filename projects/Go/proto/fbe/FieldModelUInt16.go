@@ -5,12 +5,7 @@
 
 package fbe
 
-import "time"
-import "github.com/google/uuid"
-
-// Workaround for Go unused imports issue
-var _ = time.Unix(0, 0)
-var _ = uuid.Nil
+import "errors"
 
 // Fast Binary Encoding uint16 field model class
 type FieldModelUInt16 struct {
@@ -42,24 +37,25 @@ func NewFieldModelUInt16(buffer *Buffer, offset int) *FieldModelUInt16 {
 func (fm FieldModelUInt16) Verify() bool { return true }
 
 // Get the value
-func (fm FieldModelUInt16) Get() uint16 {
+func (fm FieldModelUInt16) Get() (uint16, error) {
     return fm.GetDefault(0)
 }
 
 // Get the value with provided default value
-func (fm FieldModelUInt16) GetDefault(defaults uint16) uint16 {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return defaults
+func (fm FieldModelUInt16) GetDefault(defaults uint16) (uint16, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return defaults, nil
     }
 
-    return ReadUInt16(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())
+    return ReadUInt16(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), nil
 }
 
 // Set the value
-func (fm *FieldModelUInt16) Set(value uint16) {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return
+func (fm *FieldModelUInt16) Set(value uint16) error {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return errors.New("model is broken")
     }
 
     WriteUInt16(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
+    return nil
 }

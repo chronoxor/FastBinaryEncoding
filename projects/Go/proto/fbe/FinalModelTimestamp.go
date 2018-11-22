@@ -5,26 +5,20 @@
 
 package fbe
 
+import "errors"
 import "time"
-import "github.com/google/uuid"
 
-// Workaround for Go unused imports issue
-var _ = time.Unix(0, 0)
-var _ = uuid.Nil
-
-// Fast Binary Encoding time.Time final model class
+// Fast Binary Encoding timestamp final model class
 type FinalModelTimestamp struct {
     buffer *Buffer  // Final model buffer
     offset int      // Final model buffer offset
 }
 
 // Get the allocation size
-func (fm FinalModelTimestamp) FBEAllocationSize() int { return fm.FBESize() }
+func (fm FinalModelTimestamp) FBEAllocationSize(value time.Time) int { return fm.FBESize() }
 
 // Get the final size
 func (fm FinalModelTimestamp) FBESize() int { return 8 }
-// Get the final extra size
-func (fm FinalModelTimestamp) FBEExtra() int { return 0 }
 
 // Get the final offset
 func (fm FinalModelTimestamp) FBEOffset() int { return fm.offset }
@@ -36,35 +30,35 @@ func (fm *FinalModelTimestamp) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelTimestamp) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new final model
+// Create a new timestamp final model
 func NewFinalModelTimestamp(buffer *Buffer, offset int) *FinalModelTimestamp {
     return &FinalModelTimestamp{buffer: buffer, offset: offset}
 }
 
-// Check if the value is valid
-func (fm FinalModelTimestamp) Verify() int {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return MaxInt
+// Check if the timestamp value is valid
+func (fm FinalModelTimestamp) Verify() (bool, int) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return false, 0
     }
 
-    return fm.FBESize()
+    return true, fm.FBESize()
 }
 
-// Get the value
-func (fm FinalModelTimestamp) Get() (time.Time, int) {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return time.Unix(0, 0), 0
+// Get the timestamp value
+func (fm FinalModelTimestamp) Get() (time.Time, int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return time.Unix(0, 0), 0, errors.New("model is broken")
     }
 
-    return ReadTimestamp(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), fm.FBESize()
+    return ReadTimestamp(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), fm.FBESize(), nil
 }
 
-// Set the value
-func (fm *FinalModelTimestamp) Set(value time.Time) int {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return 0
+// Set the timestamp value
+func (fm *FinalModelTimestamp) Set(value time.Time) (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
     }
 
     WriteTimestamp(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
-    return fm.FBESize()
+    return fm.FBESize(), nil
 }

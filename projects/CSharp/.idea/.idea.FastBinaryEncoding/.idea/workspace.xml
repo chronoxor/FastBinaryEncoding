@@ -2,15 +2,69 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e46b070-39ae-4a9c-ad72-9d071bc18831" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../include/generator_go.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_go.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../modules/Catch2" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/Catch2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../modules/CppBenchmark" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppBenchmark" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../modules/CppCommon" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppCommon" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/riderModule.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelBool.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelBool.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelByte.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelByte.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelChar.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelChar.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelDecimal.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelDecimal.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelDouble.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelDouble.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelFloat.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelFloat.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt16.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt16.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt32.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt32.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt64.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt64.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt8.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt8.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelTimestamp.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelTimestamp.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt16.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt16.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt32.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt32.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt64.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt64.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt8.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt8.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUUID.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUUID.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelWChar.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelWChar.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelBool.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelBool.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelByte.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelByte.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelChar.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelChar.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelDecimal.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelDecimal.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelDouble.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelDouble.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelFloat.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelFloat.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt16.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt16.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt32.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt32.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt64.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt64.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt8.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt8.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelTimestamp.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelTimestamp.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt16.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt16.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt32.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt32.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt64.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt64.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt8.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt8.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUUID.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUUID.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelWChar.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelWChar.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/tests/decimal_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/decimal_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelBytes.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelBytes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelString.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/fbe/FieldModelString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/fbe.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/fbe.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelBytes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelBytes.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelString.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelString.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/proto/fbe.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/fbe.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_java.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_java.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_javascript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_javascript.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_python.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_python.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_ruby.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_ruby.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,10 +91,13 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="1531" />
-    <option name="y" value="565" />
-    <option name="width" value="1036" />
+    <option name="x" value="652" />
+    <option name="y" value="148" />
+    <option name="width" value="1301" />
     <option name="height" value="773" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -49,8 +106,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="SolutionExplorer">
-        <option name="show-all-files" value="false" />
+        <subPane>
+          <expand>
+            <path>
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="FastBinaryEncoding (10 projects)" type="977d5f41:SolutionExplorerNodeRider" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
       </pane>
       <pane id="FileSystemExplorer" />
     </panes>
@@ -80,16 +146,12 @@
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
-      <option name="RUNTIME_ARGUMENTS" value="" />
       <option name="PROJECT_PATH" value="" />
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
       <option name="PROJECT_KIND" value="None" />
       <option name="PROJECT_TFM" value="" />
-      <method v="2">
-        <option name="Build" enabled="true" />
-      </method>
     </configuration>
     <list>
       <item itemvalue=".NET Project.Default" />
@@ -107,11 +169,12 @@
       <updated>1538594957348</updated>
       <workItem from="1538594959625" duration="45000" />
       <workItem from="1539975712908" duration="620000" />
+      <workItem from="1542900650278" duration="899000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="665000" />
+    <option name="totallyTimeSpent" value="1564000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -123,31 +186,31 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1531" y="565" width="1036" height="773" extended-state="0" />
+    <frame x="652" y="148" width="1301" height="773" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25512296" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="NuGet" order="7" />
-      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Unit Tests" order="11" weight="0.39375" />
-      <window_info anchor="bottom" id="Terminal" order="12" />
+      <window_info anchor="right" id="Errors In Solution" order="3" />
       <window_info anchor="bottom" id="Event Log" order="13" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Build" order="14" visible="true" weight="0.3296875" />
+      <window_info active="true" anchor="bottom" id="Unit Tests" order="11" visible="true" weight="0.39313573" />
+      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="12" />
+      <window_info anchor="bottom" id="NuGet" order="7" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20467365" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Build" order="14" weight="0.3296875" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Errors In Solution" order="3" />
-      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Unit Tests Coverage" order="5" />
     </layout>
   </component>

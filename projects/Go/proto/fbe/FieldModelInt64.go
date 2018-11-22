@@ -5,12 +5,7 @@
 
 package fbe
 
-import "time"
-import "github.com/google/uuid"
-
-// Workaround for Go unused imports issue
-var _ = time.Unix(0, 0)
-var _ = uuid.Nil
+import "errors"
 
 // Fast Binary Encoding int64 field model class
 type FieldModelInt64 struct {
@@ -42,24 +37,25 @@ func NewFieldModelInt64(buffer *Buffer, offset int) *FieldModelInt64 {
 func (fm FieldModelInt64) Verify() bool { return true }
 
 // Get the value
-func (fm FieldModelInt64) Get() int64 {
+func (fm FieldModelInt64) Get() (int64, error) {
     return fm.GetDefault(0)
 }
 
 // Get the value with provided default value
-func (fm FieldModelInt64) GetDefault(defaults int64) int64 {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return defaults
+func (fm FieldModelInt64) GetDefault(defaults int64) (int64, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return defaults, nil
     }
 
-    return ReadInt64(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())
+    return ReadInt64(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), nil
 }
 
 // Set the value
-func (fm *FieldModelInt64) Set(value int64) {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return
+func (fm *FieldModelInt64) Set(value int64) error {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return errors.New("model is broken")
     }
 
     WriteInt64(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
+    return nil
 }

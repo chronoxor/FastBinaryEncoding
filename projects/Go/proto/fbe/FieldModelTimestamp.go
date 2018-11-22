@@ -5,14 +5,10 @@
 
 package fbe
 
+import "errors"
 import "time"
-import "github.com/google/uuid"
 
-// Workaround for Go unused imports issue
-var _ = time.Unix(0, 0)
-var _ = uuid.Nil
-
-// Fast Binary Encoding time.Time field model class
+// Fast Binary Encoding timestamp field model class
 type FieldModelTimestamp struct {
     buffer *Buffer  // Field model buffer
     offset int      // Field model buffer offset
@@ -33,33 +29,34 @@ func (fm *FieldModelTimestamp) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelTimestamp) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new field model
+// Create a new timestamp field model
 func NewFieldModelTimestamp(buffer *Buffer, offset int) *FieldModelTimestamp {
     return &FieldModelTimestamp{buffer: buffer, offset: offset}
 }
 
-// Check if the value is valid
+// Check if the timestamp value is valid
 func (fm FieldModelTimestamp) Verify() bool { return true }
 
-// Get the value
-func (fm FieldModelTimestamp) Get() time.Time {
+// Get the timestamp value
+func (fm FieldModelTimestamp) Get() (time.Time, error) {
     return fm.GetDefault(time.Unix(0, 0))
 }
 
-// Get the value with provided default value
-func (fm FieldModelTimestamp) GetDefault(defaults time.Time) time.Time {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return defaults
+// Get the timestamp value with provided default value
+func (fm FieldModelTimestamp) GetDefault(defaults time.Time) (time.Time, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return defaults, nil
     }
 
-    return ReadTimestamp(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())
+    return ReadTimestamp(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), nil
 }
 
-// Set the value
-func (fm *FieldModelTimestamp) Set(value time.Time) {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return
+// Set the timestamp value
+func (fm *FieldModelTimestamp) Set(value time.Time) error {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return errors.New("model is broken")
     }
 
     WriteTimestamp(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
+    return nil
 }

@@ -5,22 +5,21 @@
 
 package fbe
 
+import "errors"
 import "math/big"
 import "github.com/shopspring/decimal"
 
-// Fast Binary Encoding decimal.Decimal final model class
+// Fast Binary Encoding decimal final model class
 type FinalModelDecimal struct {
     buffer *Buffer  // Final model buffer
     offset int      // Final model buffer offset
 }
 
 // Get the allocation size
-func (fm FinalModelDecimal) FBEAllocationSize() int { return fm.FBESize() }
+func (fm FinalModelDecimal) FBEAllocationSize(value decimal.Decimal) int { return fm.FBESize() }
 
 // Get the final size
 func (fm FinalModelDecimal) FBESize() int { return 16 }
-// Get the final extra size
-func (fm FinalModelDecimal) FBEExtra() int { return 0 }
 
 // Get the final offset
 func (fm FinalModelDecimal) FBEOffset() int { return fm.offset }
@@ -38,18 +37,18 @@ func NewFinalModelDecimal(buffer *Buffer, offset int) *FinalModelDecimal {
 }
 
 // Check if the decimal value is valid
-func (fm FinalModelDecimal) Verify() int {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return MaxInt
+func (fm FinalModelDecimal) Verify() (bool, int) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return false, 0
     }
 
-    return fm.FBESize()
+    return true, fm.FBESize()
 }
 
 // Get the decimal value
-func (fm FinalModelDecimal) Get() (decimal.Decimal, int) {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return decimal.Zero, 0
+func (fm FinalModelDecimal) Get() (decimal.Decimal, int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return decimal.Zero, 0, errors.New("model is broken")
     }
 
     // Read decimal parts
@@ -69,13 +68,13 @@ func (fm FinalModelDecimal) Get() (decimal.Decimal, int) {
         result = result.Neg()
     }
 
-    return result, fm.FBESize()
+    return result, fm.FBESize(), nil
 }
 
 // Set the decimal value
-func (fm *FinalModelDecimal) Set(value decimal.Decimal) int {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return 0
+func (fm *FinalModelDecimal) Set(value decimal.Decimal) (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
     }
 
     // Extract decimal parts
@@ -88,14 +87,14 @@ func (fm *FinalModelDecimal) Set(value decimal.Decimal) int {
     if (bits < 0) || (bits > 96) {
         // Value too big for .NET Decimal (bit length is limited to [0, 96])
         WriteCount(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), 0, fm.FBESize())
-        return fm.FBESize()
+        return fm.FBESize(), errors.New("value too big for .NET Decimal (bit length is limited to [0, 96])")
     }
 
     // Check for decimal scale overflow
     if (scale < 0) || (scale > 28) {
         // Value scale exceeds .NET Decimal limit of [0, 28]
         WriteCount(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), 0, fm.FBESize())
-        return fm.FBESize()
+        return fm.FBESize(), errors.New("value scale exceeds .NET Decimal limit of [0, 28]")
     }
 
     // Write unscaled value to bytes 0-11
@@ -114,7 +113,7 @@ func (fm *FinalModelDecimal) Set(value decimal.Decimal) int {
     } else {
         WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 15, 0)
     }
-    return fm.FBESize()
+    return fm.FBESize(), nil
 }
 
 var lowScaleFinal, midScaleFinal decimal.Decimal

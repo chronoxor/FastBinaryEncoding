@@ -5,12 +5,7 @@
 
 package fbe
 
-import "time"
-import "github.com/google/uuid"
-
-// Workaround for Go unused imports issue
-var _ = time.Unix(0, 0)
-var _ = uuid.Nil
+import "errors"
 
 // Fast Binary Encoding uint64 final model class
 type FinalModelUInt64 struct {
@@ -19,12 +14,10 @@ type FinalModelUInt64 struct {
 }
 
 // Get the allocation size
-func (fm FinalModelUInt64) FBEAllocationSize() int { return fm.FBESize() }
+func (fm FinalModelUInt64) FBEAllocationSize(value uint64) int { return fm.FBESize() }
 
 // Get the final size
 func (fm FinalModelUInt64) FBESize() int { return 8 }
-// Get the final extra size
-func (fm FinalModelUInt64) FBEExtra() int { return 0 }
 
 // Get the final offset
 func (fm FinalModelUInt64) FBEOffset() int { return fm.offset }
@@ -42,29 +35,29 @@ func NewFinalModelUInt64(buffer *Buffer, offset int) *FinalModelUInt64 {
 }
 
 // Check if the value is valid
-func (fm FinalModelUInt64) Verify() int {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return MaxInt
+func (fm FinalModelUInt64) Verify() (bool, int) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return false, 0
     }
 
-    return fm.FBESize()
+    return true, fm.FBESize()
 }
 
 // Get the value
-func (fm FinalModelUInt64) Get() (uint64, int) {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return 0, 0
+func (fm FinalModelUInt64) Get() (uint64, int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0, 0, errors.New("model is broken")
     }
 
-    return ReadUInt64(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), fm.FBESize()
+    return ReadUInt64(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), fm.FBESize(), nil
 }
 
 // Set the value
-func (fm *FinalModelUInt64) Set(value uint64) int {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return 0
+func (fm *FinalModelUInt64) Set(value uint64) (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
     }
 
     WriteUInt64(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), value)
-    return fm.FBESize()
+    return fm.FBESize(), nil
 }

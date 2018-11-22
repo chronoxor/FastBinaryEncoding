@@ -65,26 +65,23 @@ public final class FieldModelString extends FieldModel
         if (defaults == null)
             throw new IllegalArgumentException("Invalid default string value!");
 
-        String value = defaults;
-
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
-            return value;
+            return defaults;
 
         int fbeStringOffset = readInt32(fbeOffset());
         if (fbeStringOffset == 0)
-            return value;
+            return defaults;
 
         assert ((_buffer.getOffset() + fbeStringOffset + 4) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeStringOffset + 4) > _buffer.getSize())
-            return value;
+            return defaults;
 
         int fbeStringSize = readInt32(fbeStringOffset);
         assert ((_buffer.getOffset() + fbeStringOffset + 4 + fbeStringSize) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeStringOffset + 4 + fbeStringSize) > _buffer.getSize())
-            return value;
+            return defaults;
 
-        value = readString(fbeStringOffset + 4, fbeStringSize);
-        return value;
+        return readString(fbeStringOffset + 4, fbeStringSize);
     }
 
     // Set the string value

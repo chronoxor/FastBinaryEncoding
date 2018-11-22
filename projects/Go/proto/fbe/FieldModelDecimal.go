@@ -5,10 +5,11 @@
 
 package fbe
 
+import "errors"
 import "math/big"
 import "github.com/shopspring/decimal"
 
-// Fast Binary Encoding decimal.Decimal field model class
+// Fast Binary Encoding decimal field model class
 type FieldModelDecimal struct {
     buffer *Buffer  // Field model buffer
     offset int      // Field model buffer offset
@@ -38,14 +39,14 @@ func NewFieldModelDecimal(buffer *Buffer, offset int) *FieldModelDecimal {
 func (fm FieldModelDecimal) Verify() bool { return true }
 
 // Get the decimal value
-func (fm FieldModelDecimal) Get() decimal.Decimal {
+func (fm FieldModelDecimal) Get() (decimal.Decimal, error) {
     return fm.GetDefault(decimal.Zero)
 }
 
 // Get the decimal value with provided default value
-func (fm FieldModelDecimal) GetDefault(defaults decimal.Decimal) decimal.Decimal {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return defaults
+func (fm FieldModelDecimal) GetDefault(defaults decimal.Decimal) (decimal.Decimal, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return defaults, nil
     }
 
     // Read decimal parts
@@ -65,13 +66,13 @@ func (fm FieldModelDecimal) GetDefault(defaults decimal.Decimal) decimal.Decimal
         result = result.Neg()
     }
 
-    return result
+    return result, nil
 }
 
 // Set the decimal value
-func (fm *FieldModelDecimal) Set(value decimal.Decimal) {
-    if fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize() > fm.buffer.Size() {
-        return
+func (fm *FieldModelDecimal) Set(value decimal.Decimal) error {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return errors.New("model is broken")
     }
 
     // Extract decimal parts
@@ -84,14 +85,14 @@ func (fm *FieldModelDecimal) Set(value decimal.Decimal) {
     if (bits < 0) || (bits > 96) {
         // Value too big for .NET Decimal (bit length is limited to [0, 96])
         WriteCount(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), 0, fm.FBESize())
-        return
+        return errors.New("value too big for .NET Decimal (bit length is limited to [0, 96])")
     }
 
     // Check for decimal scale overflow
     if (scale < 0) || (scale > 28) {
         // Value scale exceeds .NET Decimal limit of [0, 28]
         WriteCount(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), 0, fm.FBESize())
-        return
+        return errors.New("value scale exceeds .NET Decimal limit of [0, 28]")
     }
 
     // Write unscaled value to bytes 0-11
@@ -110,6 +111,7 @@ func (fm *FieldModelDecimal) Set(value decimal.Decimal) {
     } else {
         WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 15, 0)
     }
+    return nil
 }
 
 var lowScaleField, midScaleField decimal.Decimal
