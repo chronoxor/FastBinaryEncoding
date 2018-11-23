@@ -31,7 +31,7 @@ func (fm *FieldModelEnumUInt32) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new field model
 func NewFieldModelEnumUInt32(buffer *fbe.Buffer, offset int) *FieldModelEnumUInt32 {
-    return &FieldModelEnumUInt32{ buffer: buffer, offset: offset }
+    return &FieldModelEnumUInt32{buffer: buffer, offset: offset}
 }
 
 // Check if the value is valid

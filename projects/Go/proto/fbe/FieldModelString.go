@@ -42,7 +42,7 @@ func (fm *FieldModelString) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new string field model
 func NewFieldModelString(buffer *Buffer, offset int) *FieldModelString {
-    return &FieldModelString{ buffer: buffer, offset: offset }
+    return &FieldModelString{buffer: buffer, offset: offset}
 }
 
 // Check if the string value is valid

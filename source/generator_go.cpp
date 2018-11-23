@@ -200,12 +200,12 @@ func (b Buffer) Offset() int { return b.offset }
 
 // Create an empty buffer
 func NewEmptyBuffer() *Buffer {
-    return &Buffer{ data: make([]byte, 0) }
+    return &Buffer{data: make([]byte, 0)}
 }
 
 // Create an empty buffer with a given capacity
 func NewCapacityBuffer(capacity int) *Buffer {
-    return &Buffer{ data: make([]byte, capacity) }
+    return &Buffer{data: make([]byte, capacity)}
 }
 
 // Create a buffer with attached bytes memory buffer
@@ -586,7 +586,7 @@ func (fm *FieldModel_NAME_) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new field model
 func NewFieldModel_NAME_(buffer *Buffer, offset int) *FieldModel_NAME_ {
-    return &FieldModel_NAME_{ buffer: buffer, offset: offset }
+    return &FieldModel_NAME_{buffer: buffer, offset: offset}
 }
 
 // Check if the value is valid
@@ -674,7 +674,7 @@ func (fm *FieldModelDecimal) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new decimal field model
 func NewFieldModelDecimal(buffer *Buffer, offset int) *FieldModelDecimal {
-    return &FieldModelDecimal{ buffer: buffer, offset: offset }
+    return &FieldModelDecimal{buffer: buffer, offset: offset}
 }
 
 // Check if the decimal value is valid
@@ -819,7 +819,7 @@ func (fm *FieldModelTimestamp) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new timestamp field model
 func NewFieldModelTimestamp(buffer *Buffer, offset int) *FieldModelTimestamp {
-    return &FieldModelTimestamp{ buffer: buffer, offset: offset }
+    return &FieldModelTimestamp{buffer: buffer, offset: offset}
 }
 
 // Check if the timestamp value is valid
@@ -902,7 +902,7 @@ func (fm *FieldModelUUID) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new UUID field model
 func NewFieldModelUUID(buffer *Buffer, offset int) *FieldModelUUID {
-    return &FieldModelUUID{ buffer: buffer, offset: offset }
+    return &FieldModelUUID{buffer: buffer, offset: offset}
 }
 
 // Check if the UUID value is valid
@@ -996,7 +996,7 @@ func (fm *FieldModelBytes) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new bytes field model
 func NewFieldModelBytes(buffer *Buffer, offset int) *FieldModelBytes {
-    return &FieldModelBytes{ buffer: buffer, offset: offset }
+    return &FieldModelBytes{buffer: buffer, offset: offset}
 }
 
 // Check if the bytes value is valid
@@ -1132,7 +1132,7 @@ func (fm *FieldModelString) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new string field model
 func NewFieldModelString(buffer *Buffer, offset int) *FieldModelString {
-    return &FieldModelString{ buffer: buffer, offset: offset }
+    return &FieldModelString{buffer: buffer, offset: offset}
 }
 
 // Check if the string value is valid
@@ -1962,7 +1962,7 @@ func (fm *FieldModel_NAME_) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new field model
 func NewFieldModel_NAME_(buffer *fbe.Buffer, offset int) *FieldModel_NAME_ {
-    return &FieldModel_NAME_{ buffer: buffer, offset: offset }
+    return &FieldModel_NAME_{buffer: buffer, offset: offset}
 }
 
 // Check if the value is valid
@@ -2049,7 +2049,7 @@ func (fm *FinalModel_NAME_) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new final model
 func NewFinalModel_NAME_(buffer *Buffer, offset int) *FinalModel_NAME_ {
-    return &FinalModel_NAME_{ buffer: buffer, offset: offset }
+    return &FinalModel_NAME_{buffer: buffer, offset: offset}
 }
 
 // Check if the value is valid
@@ -2139,7 +2139,7 @@ func (fm *FinalModelDecimal) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new decimal final model
 func NewFinalModelDecimal(buffer *Buffer, offset int) *FinalModelDecimal {
-    return &FinalModelDecimal{ buffer: buffer, offset: offset }
+    return &FinalModelDecimal{buffer: buffer, offset: offset}
 }
 
 // Check if the decimal value is valid
@@ -2286,7 +2286,7 @@ func (fm *FinalModelTimestamp) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new timestamp final model
 func NewFinalModelTimestamp(buffer *Buffer, offset int) *FinalModelTimestamp {
-    return &FinalModelTimestamp{ buffer: buffer, offset: offset }
+    return &FinalModelTimestamp{buffer: buffer, offset: offset}
 }
 
 // Check if the timestamp value is valid
@@ -2371,7 +2371,7 @@ func (fm *FinalModelUUID) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new UUID final model
 func NewFinalModelUUID(buffer *Buffer, offset int) *FinalModelUUID {
-    return &FinalModelUUID{ buffer: buffer, offset: offset }
+    return &FinalModelUUID{buffer: buffer, offset: offset}
 }
 
 // Check if the UUID value is valid
@@ -2452,7 +2452,7 @@ func (fm *FinalModelBytes) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new bytes final model
 func NewFinalModelBytes(buffer *Buffer, offset int) *FinalModelBytes {
-    return &FinalModelBytes{ buffer: buffer, offset: offset }
+    return &FinalModelBytes{buffer: buffer, offset: offset}
 }
 
 // Check if the bytes value is valid
@@ -2549,7 +2549,7 @@ func (fm *FinalModelString) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new string final model
 func NewFinalModelString(buffer *Buffer, offset int) *FinalModelString {
-    return &FinalModelString{ buffer: buffer, offset: offset }
+    return &FinalModelString{buffer: buffer, offset: offset}
 }
 
 // Check if the string value is valid
@@ -3110,7 +3110,7 @@ func (fm *FinalModel_NAME_) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new final model
 func NewFinalModel_NAME_(buffer *fbe.Buffer, offset int) *FinalModel_NAME_ {
-    return &FinalModel_NAME_{ buffer: buffer, offset: offset }
+    return &FinalModel_NAME_{buffer: buffer, offset: offset}
 }
 
 // Check if the value is valid
@@ -3578,7 +3578,7 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
 
     // Generate enum type
     WriteLine();
-    WriteLineIndent("// " + enum_name + " enum type");
+    WriteLineIndent("// " + enum_name + " enum");
     WriteLineIndent("type " + enum_name + " " + ConvertEnumType(enum_type));
 
     // Generate enum body
@@ -3620,6 +3620,15 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
         WriteLineIndent(")");
     }
 
+    // Generate enum constructor
+    WriteLine();
+    WriteLineIndent("// Create a new " + enum_name + " enum");
+    WriteLineIndent("func New" + enum_name + "() *" + enum_name + " {");
+    Indent(1);
+    WriteLineIndent("return new(" + enum_name + ")");
+    Indent(-1);
+    WriteLineIndent("}");
+
     // Generate enum String() method
     WriteLine();
     WriteLineIndent("// Convert enum to string");
@@ -3656,14 +3665,14 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
         WriteLineIndent("// Convert JSON to enum");
         WriteLineIndent("func (e *" + enum_name + ") UnmarshalJSON(b []byte) error {");
         Indent(1);
-        WriteLineIndent("var value " + ConvertEnumType(enum_type));
-        WriteLineIndent("err := json.Unmarshal(b, &value)");
+        WriteLineIndent("var result " + ConvertEnumType(enum_type));
+        WriteLineIndent("err := json.Unmarshal(b, &result)");
         WriteLineIndent("if err != nil {");
         Indent(1);
         WriteLineIndent("return err");
         Indent(-1);
         WriteLineIndent("}");
-        WriteLineIndent("*e = " + enum_name + "(value)");
+        WriteLineIndent("*e = " + enum_name + "(result)");
         WriteLineIndent("return nil");
         Indent(-1);
         WriteLineIndent("}");
@@ -3708,7 +3717,7 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::sh
 
     // Generate flags type
     WriteLine();
-    WriteLineIndent("// " + flags_name + " flags type");
+    WriteLineIndent("// " + flags_name + " flags");
     WriteLineIndent("type " + flags_name + " " + ConvertEnumType(flags_type));
 
     // Generate flags body
@@ -3737,6 +3746,15 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::sh
         Indent(-1);
         WriteLineIndent(")");
     }
+
+    // Generate flags constructor
+    WriteLine();
+    WriteLineIndent("// Create a new " + flags_name + " flags");
+    WriteLineIndent("func New" + flags_name + "() *" + flags_name + " {");
+    Indent(1);
+    WriteLineIndent("return new(" + flags_name + ")");
+    Indent(-1);
+    WriteLineIndent("}");
 
     // Generate flags String() method
     WriteLine();
@@ -3787,14 +3805,14 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::sh
         WriteLineIndent("// Convert JSON to flags");
         WriteLineIndent("func (f *" + flags_name + ") UnmarshalJSON(b []byte) error {");
         Indent(1);
-        WriteLineIndent("var value " + ConvertEnumType(flags_type));
-        WriteLineIndent("err := json.Unmarshal(b, &value)");
+        WriteLineIndent("var result " + ConvertEnumType(flags_type));
+        WriteLineIndent("err := json.Unmarshal(b, &result)");
         WriteLineIndent("if err != nil {");
         Indent(1);
         WriteLineIndent("return err");
         Indent(-1);
         WriteLineIndent("}");
-        WriteLineIndent("*f = " + flags_name + "(value)");
+        WriteLineIndent("*f = " + flags_name + "(result)");
         WriteLineIndent("return nil");
         Indent(-1);
         WriteLineIndent("}");

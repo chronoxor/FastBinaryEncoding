@@ -14,7 +14,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// FlagsSimple flags type
+// FlagsSimple flags
 type FlagsSimple int32
 
 // FlagsSimple flags values
@@ -27,6 +27,11 @@ const (
     FlagsSimple_FLAG_VALUE_4 = FlagsSimple(FlagsSimple_FLAG_VALUE_3)
     FlagsSimple_FLAG_VALUE_5 = FlagsSimple(FlagsSimple_FLAG_VALUE_1 | FlagsSimple_FLAG_VALUE_3)
 )
+
+// Create a new FlagsSimple flags
+func NewFlagsSimple() *FlagsSimple {
+    return new(FlagsSimple)
+}
 
 // Convert flags to string
 //noinspection GoBoolExpressions
@@ -91,11 +96,11 @@ func (f FlagsSimple) MarshalJSON() ([]byte, error) {
 
 // Convert JSON to flags
 func (f *FlagsSimple) UnmarshalJSON(b []byte) error {
-    var value int32
-    err := json.Unmarshal(b, &value)
+    var result int32
+    err := json.Unmarshal(b, &result)
     if err != nil {
         return err
     }
-    *f = FlagsSimple(value)
+    *f = FlagsSimple(result)
     return nil
 }

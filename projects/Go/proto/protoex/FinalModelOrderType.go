@@ -32,7 +32,7 @@ func (fm *FinalModelOrderType) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new final model
 func NewFinalModelOrderType(buffer *fbe.Buffer, offset int) *FinalModelOrderType {
-    return &FinalModelOrderType{ buffer: buffer, offset: offset }
+    return &FinalModelOrderType{buffer: buffer, offset: offset}
 }
 
 // Check if the value is valid

@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// OrderType enum type
+// OrderType enum
 type OrderType byte
 
 // OrderType enum values
@@ -24,6 +24,11 @@ const (
     OrderType_stop = OrderType(0 + 2)
     OrderType_stoplimit = OrderType(0 + 3)
 )
+
+// Create a new OrderType enum
+func NewOrderType() *OrderType {
+    return new(OrderType)
+}
 
 // Convert enum to string
 func (e OrderType) String() string {
@@ -49,11 +54,11 @@ func (e OrderType) MarshalJSON() ([]byte, error) {
 
 // Convert JSON to enum
 func (e *OrderType) UnmarshalJSON(b []byte) error {
-    var value byte
-    err := json.Unmarshal(b, &value)
+    var result byte
+    err := json.Unmarshal(b, &result)
     if err != nil {
         return err
     }
-    *e = OrderType(value)
+    *e = OrderType(result)
     return nil
 }

@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// EnumTyped enum type
+// EnumTyped enum
 type EnumTyped uint8
 
 // EnumTyped enum values
@@ -26,6 +26,11 @@ const (
     EnumTyped_ENUM_VALUE_4 = EnumTyped(EnumTyped('3') + 1)
     EnumTyped_ENUM_VALUE_5 = EnumTyped(EnumTyped_ENUM_VALUE_3)
 )
+
+// Create a new EnumTyped enum
+func NewEnumTyped() *EnumTyped {
+    return new(EnumTyped)
+}
 
 // Convert enum to string
 func (e EnumTyped) String() string {
@@ -57,11 +62,11 @@ func (e EnumTyped) MarshalJSON() ([]byte, error) {
 
 // Convert JSON to enum
 func (e *EnumTyped) UnmarshalJSON(b []byte) error {
-    var value uint8
-    err := json.Unmarshal(b, &value)
+    var result uint8
+    err := json.Unmarshal(b, &result)
     if err != nil {
         return err
     }
-    *e = EnumTyped(value)
+    *e = EnumTyped(result)
     return nil
 }

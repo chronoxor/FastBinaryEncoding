@@ -14,7 +14,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// StateEx flags type
+// StateEx flags
 type StateEx byte
 
 // StateEx flags values
@@ -30,6 +30,11 @@ const (
     StateEx_good = StateEx(StateEx_initialized | StateEx_calculated)
     StateEx_bad = StateEx(StateEx_unknown | StateEx_invalid | StateEx_broken)
 )
+
+// Create a new StateEx flags
+func NewStateEx() *StateEx {
+    return new(StateEx)
+}
 
 // Convert flags to string
 //noinspection GoBoolExpressions
@@ -118,11 +123,11 @@ func (f StateEx) MarshalJSON() ([]byte, error) {
 
 // Convert JSON to flags
 func (f *StateEx) UnmarshalJSON(b []byte) error {
-    var value byte
-    err := json.Unmarshal(b, &value)
+    var result byte
+    err := json.Unmarshal(b, &result)
     if err != nil {
         return err
     }
-    *f = StateEx(value)
+    *f = StateEx(result)
     return nil
 }

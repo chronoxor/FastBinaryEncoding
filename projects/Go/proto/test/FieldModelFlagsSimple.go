@@ -31,7 +31,7 @@ func (fm *FieldModelFlagsSimple) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new field model
 func NewFieldModelFlagsSimple(buffer *fbe.Buffer, offset int) *FieldModelFlagsSimple {
-    return &FieldModelFlagsSimple{ buffer: buffer, offset: offset }
+    return &FieldModelFlagsSimple{buffer: buffer, offset: offset}
 }
 
 // Check if the value is valid

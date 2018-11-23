@@ -11,7 +11,7 @@ import "../fbe"
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 
-// EnumUInt32 enum type
+// EnumUInt32 enum
 type EnumUInt32 uint32
 
 // EnumUInt32 enum values
@@ -24,6 +24,11 @@ const (
     EnumUInt32_ENUM_VALUE_4 = EnumUInt32(0xFFFFFFFE + 1)
     EnumUInt32_ENUM_VALUE_5 = EnumUInt32(EnumUInt32_ENUM_VALUE_3)
 )
+
+// Create a new EnumUInt32 enum
+func NewEnumUInt32() *EnumUInt32 {
+    return new(EnumUInt32)
+}
 
 // Convert enum to string
 func (e EnumUInt32) String() string {
@@ -55,11 +60,11 @@ func (e EnumUInt32) MarshalJSON() ([]byte, error) {
 
 // Convert JSON to enum
 func (e *EnumUInt32) UnmarshalJSON(b []byte) error {
-    var value uint32
-    err := json.Unmarshal(b, &value)
+    var result uint32
+    err := json.Unmarshal(b, &result)
     if err != nil {
         return err
     }
-    *e = EnumUInt32(value)
+    *e = EnumUInt32(result)
     return nil
 }

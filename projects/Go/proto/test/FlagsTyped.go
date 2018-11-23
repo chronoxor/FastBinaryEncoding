@@ -14,7 +14,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// FlagsTyped flags type
+// FlagsTyped flags
 type FlagsTyped uint64
 
 // FlagsTyped flags values
@@ -31,6 +31,11 @@ const (
     FlagsTyped_FLAG_VALUE_8 = FlagsTyped(FlagsTyped_FLAG_VALUE_7)
     FlagsTyped_FLAG_VALUE_9 = FlagsTyped(FlagsTyped_FLAG_VALUE_2 | FlagsTyped_FLAG_VALUE_4 | FlagsTyped_FLAG_VALUE_6)
 )
+
+// Create a new FlagsTyped flags
+func NewFlagsTyped() *FlagsTyped {
+    return new(FlagsTyped)
+}
 
 // Convert flags to string
 //noinspection GoBoolExpressions
@@ -127,11 +132,11 @@ func (f FlagsTyped) MarshalJSON() ([]byte, error) {
 
 // Convert JSON to flags
 func (f *FlagsTyped) UnmarshalJSON(b []byte) error {
-    var value uint64
-    err := json.Unmarshal(b, &value)
+    var result uint64
+    err := json.Unmarshal(b, &result)
     if err != nil {
         return err
     }
-    *f = FlagsTyped(value)
+    *f = FlagsTyped(result)
     return nil
 }

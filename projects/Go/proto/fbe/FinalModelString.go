@@ -28,7 +28,7 @@ func (fm *FinalModelString) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new string final model
 func NewFinalModelString(buffer *Buffer, offset int) *FinalModelString {
-    return &FinalModelString{ buffer: buffer, offset: offset }
+    return &FinalModelString{buffer: buffer, offset: offset}
 }
 
 // Check if the string value is valid

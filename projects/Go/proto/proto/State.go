@@ -12,7 +12,7 @@ import "../fbe"
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 
-// State flags type
+// State flags
 type State byte
 
 // State flags values
@@ -26,6 +26,11 @@ const (
     State_good = State(State_initialized | State_calculated)
     State_bad = State(State_unknown | State_invalid | State_broken)
 )
+
+// Create a new State flags
+func NewState() *State {
+    return new(State)
+}
 
 // Convert flags to string
 //noinspection GoBoolExpressions
@@ -98,11 +103,11 @@ func (f State) MarshalJSON() ([]byte, error) {
 
 // Convert JSON to flags
 func (f *State) UnmarshalJSON(b []byte) error {
-    var value byte
-    err := json.Unmarshal(b, &value)
+    var result byte
+    err := json.Unmarshal(b, &result)
     if err != nil {
         return err
     }
-    *f = State(value)
+    *f = State(result)
     return nil
 }

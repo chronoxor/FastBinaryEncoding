@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// EnumSimple enum type
+// EnumSimple enum
 type EnumSimple int32
 
 // EnumSimple enum values
@@ -26,6 +26,11 @@ const (
     EnumSimple_ENUM_VALUE_4 = EnumSimple(0x4 + 0)
     EnumSimple_ENUM_VALUE_5 = EnumSimple(EnumSimple_ENUM_VALUE_3)
 )
+
+// Create a new EnumSimple enum
+func NewEnumSimple() *EnumSimple {
+    return new(EnumSimple)
+}
 
 // Convert enum to string
 func (e EnumSimple) String() string {
@@ -57,11 +62,11 @@ func (e EnumSimple) MarshalJSON() ([]byte, error) {
 
 // Convert JSON to enum
 func (e *EnumSimple) UnmarshalJSON(b []byte) error {
-    var value int32
-    err := json.Unmarshal(b, &value)
+    var result int32
+    err := json.Unmarshal(b, &result)
     if err != nil {
         return err
     }
-    *e = EnumSimple(value)
+    *e = EnumSimple(result)
     return nil
 }

@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// OrderSide enum type
+// OrderSide enum
 type OrderSide byte
 
 // OrderSide enum values
@@ -23,6 +23,11 @@ const (
     OrderSide_sell = OrderSide(0 + 1)
     OrderSide_tell = OrderSide(0 + 2)
 )
+
+// Create a new OrderSide enum
+func NewOrderSide() *OrderSide {
+    return new(OrderSide)
+}
 
 // Convert enum to string
 func (e OrderSide) String() string {
@@ -45,11 +50,11 @@ func (e OrderSide) MarshalJSON() ([]byte, error) {
 
 // Convert JSON to enum
 func (e *OrderSide) UnmarshalJSON(b []byte) error {
-    var value byte
-    err := json.Unmarshal(b, &value)
+    var result byte
+    err := json.Unmarshal(b, &result)
     if err != nil {
         return err
     }
-    *e = OrderSide(value)
+    *e = OrderSide(result)
     return nil
 }

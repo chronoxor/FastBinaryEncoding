@@ -33,7 +33,7 @@ func (fm *FinalModelDecimal) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new decimal final model
 func NewFinalModelDecimal(buffer *Buffer, offset int) *FinalModelDecimal {
-    return &FinalModelDecimal{ buffer: buffer, offset: offset }
+    return &FinalModelDecimal{buffer: buffer, offset: offset}
 }
 
 // Check if the decimal value is valid

@@ -30,7 +30,7 @@ func (fm *FieldModelDouble) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new field model
 func NewFieldModelDouble(buffer *Buffer, offset int) *FieldModelDouble {
-    return &FieldModelDouble{ buffer: buffer, offset: offset }
+    return &FieldModelDouble{buffer: buffer, offset: offset}
 }
 
 // Check if the value is valid

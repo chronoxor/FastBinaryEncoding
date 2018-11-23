@@ -31,7 +31,7 @@ func (fm *FinalModelChar) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new final model
 func NewFinalModelChar(buffer *Buffer, offset int) *FinalModelChar {
-    return &FinalModelChar{ buffer: buffer, offset: offset }
+    return &FinalModelChar{buffer: buffer, offset: offset}
 }
 
 // Check if the value is valid

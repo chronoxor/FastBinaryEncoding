@@ -32,7 +32,7 @@ func (fm *FinalModelTimestamp) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new timestamp final model
 func NewFinalModelTimestamp(buffer *Buffer, offset int) *FinalModelTimestamp {
-    return &FinalModelTimestamp{ buffer: buffer, offset: offset }
+    return &FinalModelTimestamp{buffer: buffer, offset: offset}
 }
 
 // Check if the timestamp value is valid

@@ -31,7 +31,7 @@ func (fm *FieldModelOrderSide) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new field model
 func NewFieldModelOrderSide(buffer *fbe.Buffer, offset int) *FieldModelOrderSide {
-    return &FieldModelOrderSide{ buffer: buffer, offset: offset }
+    return &FieldModelOrderSide{buffer: buffer, offset: offset}
 }
 
 // Check if the value is valid

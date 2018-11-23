@@ -3,21 +3,21 @@ package main
 import (
 	"../proto/fbe"
 	"../proto/proto"
-	"encoding/json"
 	"fmt"
 )
 
 func main() {
-	var s = proto.State_bad
-	fmt.Println(s)
-	j1, _ := json.Marshal(s)
-	json.Unmarshal(j1, &s)
-	fmt.Println(s)
+	o1 := proto.NewOrder()
+	o1.Symbol = "EURUSD"
+	o1.Price = 123.456
+	o1.Volume = 987.654
+	j, _ := o1.JSON()
+	fmt.Println(string(j))
+	o2, _ := proto.NewOrderFromJSON(j)
+	fmt.Println(o2)
 
-	var os = proto.OrderSide_buy
-	j, _ := json.Marshal(os)
-	json.Unmarshal(j, &os)
-	fmt.Println(os)
+	m := map[proto.OrderKey]string{}
+	m[o1.Key()] = o1.String()
 
 	buffer := fbe.NewCapacityBuffer(10)
 	buffer.Allocate(10)

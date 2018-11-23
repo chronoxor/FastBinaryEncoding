@@ -32,7 +32,7 @@ func (fm *FinalModelEnumSimple) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new final model
 func NewFinalModelEnumSimple(buffer *fbe.Buffer, offset int) *FinalModelEnumSimple {
-    return &FinalModelEnumSimple{ buffer: buffer, offset: offset }
+    return &FinalModelEnumSimple{buffer: buffer, offset: offset}
 }
 
 // Check if the value is valid

@@ -32,7 +32,7 @@ func (fm *FinalModelEnumUInt64) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new final model
 func NewFinalModelEnumUInt64(buffer *fbe.Buffer, offset int) *FinalModelEnumUInt64 {
-    return &FinalModelEnumUInt64{ buffer: buffer, offset: offset }
+    return &FinalModelEnumUInt64{buffer: buffer, offset: offset}
 }
 
 // Check if the value is valid

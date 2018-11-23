@@ -32,7 +32,7 @@ func (fm *FieldModelDecimal) FBEUnshift(size int) { fm.offset -= size }
 
 // Create a new decimal field model
 func NewFieldModelDecimal(buffer *Buffer, offset int) *FieldModelDecimal {
-    return &FieldModelDecimal{ buffer: buffer, offset: offset }
+    return &FieldModelDecimal{buffer: buffer, offset: offset}
 }
 
 // Check if the decimal value is valid
