@@ -12,6 +12,14 @@ import "../fbe"
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 
+// State flags key
+type StateKey byte
+
+// Convert State flags key to string
+func (k StateKey) String() string {
+    return State(k).String()
+}
+
 // State flags
 type State byte
 
@@ -30,6 +38,11 @@ const (
 // Create a new State flags
 func NewState() *State {
     return new(State)
+}
+
+// Get the flags key
+func (f State) Key() StateKey {
+    return StateKey(f)
 }
 
 // Convert flags to string

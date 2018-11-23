@@ -11,6 +11,14 @@ import "../fbe"
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 
+// EnumUInt16 enum key
+type EnumUInt16Key uint16
+
+// Convert EnumUInt16 enum key to string
+func (k EnumUInt16Key) String() string {
+    return EnumUInt16(k).String()
+}
+
 // EnumUInt16 enum
 type EnumUInt16 uint16
 
@@ -28,6 +36,11 @@ const (
 // Create a new EnumUInt16 enum
 func NewEnumUInt16() *EnumUInt16 {
     return new(EnumUInt16)
+}
+
+// Get the enum key
+func (e EnumUInt16) Key() EnumUInt16Key {
+    return EnumUInt16Key(e)
 }
 
 // Convert enum to string

@@ -3,10 +3,17 @@ package main
 import (
 	"../proto/fbe"
 	"../proto/proto"
+	"encoding/json"
 	"fmt"
 )
 
 func main() {
+	jjj, _ := json.Marshal([]byte{49, 50, 51, 52, 53, 54, 55, 56})
+	fmt.Println(string(jjj))
+	var bbb []byte
+	_ = json.Unmarshal(jjj, &bbb)
+	fmt.Println(string(bbb))
+
 	o1 := proto.NewOrder()
 	o1.Symbol = "EURUSD"
 	o1.Price = 123.456

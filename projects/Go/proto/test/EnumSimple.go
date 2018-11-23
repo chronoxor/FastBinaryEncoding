@@ -13,6 +13,14 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
+// EnumSimple enum key
+type EnumSimpleKey int32
+
+// Convert EnumSimple enum key to string
+func (k EnumSimpleKey) String() string {
+    return EnumSimple(k).String()
+}
+
 // EnumSimple enum
 type EnumSimple int32
 
@@ -30,6 +38,11 @@ const (
 // Create a new EnumSimple enum
 func NewEnumSimple() *EnumSimple {
     return new(EnumSimple)
+}
+
+// Get the enum key
+func (e EnumSimple) Key() EnumSimpleKey {
+    return EnumSimpleKey(e)
 }
 
 // Convert enum to string

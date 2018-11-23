@@ -11,6 +11,14 @@ import "../fbe"
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 
+// EnumByte enum key
+type EnumByteKey byte
+
+// Convert EnumByte enum key to string
+func (k EnumByteKey) String() string {
+    return EnumByte(k).String()
+}
+
 // EnumByte enum
 type EnumByte byte
 
@@ -28,6 +36,11 @@ const (
 // Create a new EnumByte enum
 func NewEnumByte() *EnumByte {
     return new(EnumByte)
+}
+
+// Get the enum key
+func (e EnumByte) Key() EnumByteKey {
+    return EnumByteKey(e)
 }
 
 // Convert enum to string

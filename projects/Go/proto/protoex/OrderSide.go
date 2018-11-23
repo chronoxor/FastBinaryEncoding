@@ -13,6 +13,14 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
+// OrderSide enum key
+type OrderSideKey byte
+
+// Convert OrderSide enum key to string
+func (k OrderSideKey) String() string {
+    return OrderSide(k).String()
+}
+
 // OrderSide enum
 type OrderSide byte
 
@@ -27,6 +35,11 @@ const (
 // Create a new OrderSide enum
 func NewOrderSide() *OrderSide {
     return new(OrderSide)
+}
+
+// Get the enum key
+func (e OrderSide) Key() OrderSideKey {
+    return OrderSideKey(e)
 }
 
 // Convert enum to string

@@ -11,6 +11,14 @@ import "../fbe"
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 
+// OrderType enum key
+type OrderTypeKey byte
+
+// Convert OrderType enum key to string
+func (k OrderTypeKey) String() string {
+    return OrderType(k).String()
+}
+
 // OrderType enum
 type OrderType byte
 
@@ -25,6 +33,11 @@ const (
 // Create a new OrderType enum
 func NewOrderType() *OrderType {
     return new(OrderType)
+}
+
+// Get the enum key
+func (e OrderType) Key() OrderTypeKey {
+    return OrderTypeKey(e)
 }
 
 // Convert enum to string

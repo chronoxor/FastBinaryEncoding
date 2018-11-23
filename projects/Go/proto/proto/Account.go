@@ -13,12 +13,12 @@ import "../fbe"
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 
-// Order struct
-type Order struct {
+// Account struct
+type Account struct {
     Uid int32
-    Symbol string
-    Side OrderSide
-    Type OrderType
-    Price float64
-    Volume float64
+    Name string
+    State State
+    Wallet Balance
+    Asset *Balance
+    Orders []Order
 }

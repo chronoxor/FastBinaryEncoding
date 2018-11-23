@@ -1219,7 +1219,7 @@ func (fm *FieldModelString) Set(value string) error {
     // Close the file
     Close();
 }
-
+/*
 void GeneratorGo::GenerateFBEFieldModelOptional()
 {
     std::string code = R"CODE(
@@ -1917,7 +1917,7 @@ class FieldModelMap(FieldModel):
 
     Write(code);
 }
-
+*/
 void GeneratorGo::GenerateFBEFieldModelEnumFlags(const std::string& package, const std::string& name, const std::string& type)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
@@ -2611,7 +2611,7 @@ func (fm *FinalModelString) Set(value string) (int, error) {
     // Close the file
     Close();
 }
-
+/*
 void GeneratorGo::GenerateFBEFinalModelOptional()
 {
     std::string code = R"CODE(
@@ -3064,7 +3064,7 @@ class FinalModelMap(FinalModel):
 
     Write(code);
 }
-
+*/
 void GeneratorGo::GenerateFBEFinalModelEnumFlags(const std::string& package, const std::string& name, const std::string& type)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
@@ -3157,7 +3157,7 @@ func (fm *FinalModel_NAME_) Set(value _NAME_) (int, error) {
     // Close the file
     Close();
 }
-
+/*
 void GeneratorGo::GenerateFBESender()
 {
     std::string code = R"CODE(
@@ -3483,7 +3483,7 @@ class Receiver(object):
 
     Write(code);
 }
-
+*/
 void GeneratorGo::GenerateImports(const std::shared_ptr<Package>& p)
 {
     // Generate fbe import
@@ -3523,11 +3523,10 @@ void GeneratorGo::GeneratePackage(const std::shared_ptr<Package>& p)
         // Generate child flags
         for (const auto& child_f : p->body->flags)
             GenerateFlags(p, child_f, path);
-        /*
+
         // Generate child structs
         for (const auto& child_s : p->body->structs)
             GenerateStruct(p, child_s, path);
-        */
     }
 
     /*
@@ -3575,6 +3574,20 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
     GenerateImports(p);
 
     std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
+
+    // Generate enum key
+    WriteLine();
+    WriteLineIndent("// " + enum_name + " enum key");
+    WriteLineIndent("type " + enum_name + "Key " + ConvertEnumType(enum_type));
+
+    // Generate enum key String() method
+    WriteLine();
+    WriteLineIndent("// Convert " + enum_name + " enum key to string");
+    WriteLineIndent("func (k " + enum_name + "Key) String() string {");
+    Indent(1);
+    WriteLineIndent("return " + enum_name + "(k).String()");
+    Indent(-1);
+    WriteLineIndent("}");
 
     // Generate enum type
     WriteLine();
@@ -3626,6 +3639,15 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
     WriteLineIndent("func New" + enum_name + "() *" + enum_name + " {");
     Indent(1);
     WriteLineIndent("return new(" + enum_name + ")");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate enum Key() method
+    WriteLine();
+    WriteLineIndent("// Get the enum key");
+    WriteLineIndent("func (e " + enum_name + ") Key() " + enum_name + "Key {");
+    Indent(1);
+    WriteLineIndent("return " + enum_name + "Key(e)");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -3715,6 +3737,20 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::sh
 
     std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
 
+    // Generate flags key
+    WriteLine();
+    WriteLineIndent("// " + flags_name + " flags key");
+    WriteLineIndent("type " + flags_name + "Key " + ConvertEnumType(flags_type));
+
+    // Generate flags key String() method
+    WriteLine();
+    WriteLineIndent("// Convert " + flags_name + " flags key to string");
+    WriteLineIndent("func (k " + flags_name + "Key) String() string {");
+    Indent(1);
+    WriteLineIndent("return " + flags_name + "(k).String()");
+    Indent(-1);
+    WriteLineIndent("}");
+
     // Generate flags type
     WriteLine();
     WriteLineIndent("// " + flags_name + " flags");
@@ -3753,6 +3789,15 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::sh
     WriteLineIndent("func New" + flags_name + "() *" + flags_name + " {");
     Indent(1);
     WriteLineIndent("return new(" + flags_name + ")");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate flags Key() method
+    WriteLine();
+    WriteLineIndent("// Get the flags key");
+    WriteLineIndent("func (f " + flags_name + ") Key() " + flags_name + "Key {");
+    Indent(1);
+    WriteLineIndent("return " + flags_name + "Key(f)");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -3832,8 +3877,44 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::sh
         GenerateFBEFinalModelEnumFlags(*p->name, flags_name, flags_type);
 }
 
-void GeneratorGo::GenerateStruct(const std::shared_ptr<StructType>& s)
+void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path)
 {
+    std::string struct_name = ConvertCase(*s->name);
+
+    // Open the output file
+    CppCommon::Path output = path / (struct_name + ".go");
+    Open(output);
+
+    // Generate header
+    GenerateHeader(CppCommon::Path(_input).filename().string());
+
+    // Generate package
+    WriteLine();
+    WriteLineIndent("package " + *p->name);
+
+    // Generate imports
+    WriteLine();
+    WriteLineIndent("import \"strconv\"");
+    WriteLineIndent("import \"strings\"");
+    WriteLineIndent("import \"encoding/json\"");
+    GenerateImports(p);
+
+    std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "";
+
+    // Generate struct body
+    WriteLine();
+    WriteLineIndent("// " + struct_name + " struct");
+    WriteLineIndent("type " + struct_name + " struct {");
+    Indent(1);
+    if (!base_type.empty())
+        WriteLineIndent(base_type);
+    if (s->body)
+        for (const auto& field : s->body->fields)
+            WriteLineIndent(ConvertCase(*field->name) + " " + ConvertTypeName(*field));
+    Indent(-1);
+    WriteLineIndent("}");
+
+/*
     std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "object";
 
     // Generate struct begin
@@ -4268,8 +4349,9 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<StructType>& s)
         GenerateStructFinalModel(s);
         GenerateStructModelFinal(s);
     }
+    */
 }
-
+/*
 void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<StructType>& s)
 {
     // Generate struct field model begin
@@ -5407,7 +5489,7 @@ void GeneratorGo::GenerateReceiver(const std::shared_ptr<Package>& p, bool final
     // Generate receiver end
     Indent(-1);
 }
-
+*/
 bool GeneratorGo::IsPrimitiveType(const std::string& type)
 {
     return ((type == "bool") || (type == "byte") ||
@@ -5546,44 +5628,72 @@ std::string GeneratorGo::ConvertEnumConstant(const std::string& name, const std:
     return result;
 }
 
+std::string GeneratorGo::ConvertKeyName(const std::string& type)
+{
+    if (IsGoType(type))
+        return type;
+
+    std::string ns = "";
+    std::string t = type;
+
+    size_t pos = type.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        ns.assign(type, 0, pos + 1);
+        t.assign(type, pos + 1, type.size() - pos);
+    }
+
+    return ns + ConvertCase(t) + "Key";
+}
+
 std::string GeneratorGo::ConvertTypeName(const std::string& type, bool optional)
 {
-    if (type == "bool")
-        return "bool";
-    else if ((type == "byte") || (type == "int8") || (type == "uint8") || (type == "int16") || (type == "uint16") || (type == "int32") || (type == "uint32") || (type == "int64") || (type == "uint64") || (type == "timestamp"))
-        return "int";
-    else if (type == "bytes")
-        return "bytearray";
-    else if ((type == "float") || (type == "double"))
-        return "float";
-    else if (type == "decimal")
-        return "decimal.Decimal";
-    else if (type == "string")
-        return "str";
-    else if (type == "uuid")
-        return "uuid.UUID";
+    std::string opt = optional ? "*" : "";
 
-    return type;
+    if ((type == "bool") || (type == "byte") || (type == "int8") || (type == "uint8") || (type == "int16") || (type == "uint16") || (type == "int32") || (type == "uint32") || (type == "int64") || (type == "uint64") || (type == "string"))
+        return opt + type;
+    else if ((type == "char") || (type == "wchar"))
+        return opt + "rune";
+    else if (type == "bytes")
+        return opt + "[]byte";
+    else if (type == "float")
+        return opt + "float32";
+    else if (type == "double")
+        return opt + "float64";
+    else if (type == "decimal")
+        return opt + "decimal.Decimal";
+    else if (type == "timestamp")
+        return opt + "time.Time";
+    else if (type == "uuid")
+        return opt + "uuid.UUID";
+
+    std::string ns = "";
+    std::string t = type;
+
+    size_t pos = type.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        ns.assign(type, 0, pos + 1);
+        t.assign(type, pos + 1, type.size() - pos);
+    }
+
+    return opt + ns + ConvertCase(t);
 }
 
 std::string GeneratorGo::ConvertTypeName(const StructField& field)
 {
     if (field.array)
-        return "list";
-    else if (field.vector)
-        return "list";
-    else if (field.list)
-        return "list";
+        return "[" + std::to_string(field.N) + "]" + ConvertTypeName(*field.type, field.optional);
+    else if ((field.vector) || (field.list))
+        return "[]" + ConvertTypeName(*field.type, field.optional);
     else if (field.set)
-        return "set";
-    else if (field.map)
-        return "dict";
-    else if (field.hash)
-        return "dict";
+        return "map[" + ConvertKeyName(*field.key) + "]bool";
+    else if ((field.map) || (field.hash))
+        return "map[" + ConvertKeyName(*field.key) + "]" + ConvertTypeName(*field.type, field.optional);
 
     return ConvertTypeName(*field.type, field.optional);
 }
-
+/*
 std::string GeneratorGo::ConvertTypeFieldName(const std::string& type, bool final)
 {
     std::string modelType = (final ? "Final" : "Field");
@@ -5839,5 +5949,5 @@ void GeneratorGo::WriteOutputStreamValue(const std::string& type, const std::str
     else
         WriteOutputStreamType(type, name, false);
 }
-
+*/
 } // namespace FBE

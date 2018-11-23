@@ -11,6 +11,14 @@ import "../fbe"
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 
+// EnumWChar enum key
+type EnumWCharKey uint32
+
+// Convert EnumWChar enum key to string
+func (k EnumWCharKey) String() string {
+    return EnumWChar(k).String()
+}
+
 // EnumWChar enum
 type EnumWChar uint32
 
@@ -28,6 +36,11 @@ const (
 // Create a new EnumWChar enum
 func NewEnumWChar() *EnumWChar {
     return new(EnumWChar)
+}
+
+// Get the enum key
+func (e EnumWChar) Key() EnumWCharKey {
+    return EnumWCharKey(e)
 }
 
 // Convert enum to string

@@ -14,6 +14,14 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
+// FlagsTyped flags key
+type FlagsTypedKey uint64
+
+// Convert FlagsTyped flags key to string
+func (k FlagsTypedKey) String() string {
+    return FlagsTyped(k).String()
+}
+
 // FlagsTyped flags
 type FlagsTyped uint64
 
@@ -35,6 +43,11 @@ const (
 // Create a new FlagsTyped flags
 func NewFlagsTyped() *FlagsTyped {
     return new(FlagsTyped)
+}
+
+// Get the flags key
+func (f FlagsTyped) Key() FlagsTypedKey {
+    return FlagsTypedKey(f)
 }
 
 // Convert flags to string

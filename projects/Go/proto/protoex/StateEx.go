@@ -14,6 +14,14 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
+// StateEx flags key
+type StateExKey byte
+
+// Convert StateEx flags key to string
+func (k StateExKey) String() string {
+    return StateEx(k).String()
+}
+
 // StateEx flags
 type StateEx byte
 
@@ -34,6 +42,11 @@ const (
 // Create a new StateEx flags
 func NewStateEx() *StateEx {
     return new(StateEx)
+}
+
+// Get the flags key
+func (f StateEx) Key() StateExKey {
+    return StateExKey(f)
 }
 
 // Convert flags to string

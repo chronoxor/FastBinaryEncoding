@@ -49,11 +49,11 @@ private:
     void GenerateFBEFieldModelUUID(const std::string& package);
     void GenerateFBEFieldModelBytes(const std::string& package);
     void GenerateFBEFieldModelString(const std::string& package);
-    void GenerateFBEFieldModelOptional();
-    void GenerateFBEFieldModelArray();
-    void GenerateFBEFieldModelVector();
-    void GenerateFBEFieldModelSet();
-    void GenerateFBEFieldModelMap();
+    //void GenerateFBEFieldModelOptional();
+    //void GenerateFBEFieldModelArray();
+    //void GenerateFBEFieldModelVector();
+    //void GenerateFBEFieldModelSet();
+    //void GenerateFBEFieldModelMap();
     void GenerateFBEFieldModelEnumFlags(const std::string& package, const std::string& name, const std::string& type);
     void GenerateFBEFinalModel(const std::string& package, const std::string& name, const std::string& type, const std::string& size, const std::string& defaults);
     void GenerateFBEFinalModelDecimal(const std::string& package);
@@ -61,20 +61,20 @@ private:
     void GenerateFBEFinalModelUUID(const std::string& package);
     void GenerateFBEFinalModelBytes(const std::string& package);
     void GenerateFBEFinalModelString(const std::string& package);
-    void GenerateFBEFinalModelOptional();
-    void GenerateFBEFinalModelArray();
-    void GenerateFBEFinalModelVector();
-    void GenerateFBEFinalModelSet();
-    void GenerateFBEFinalModelMap();
+    //void GenerateFBEFinalModelOptional();
+    //void GenerateFBEFinalModelArray();
+    //void GenerateFBEFinalModelVector();
+    //void GenerateFBEFinalModelSet();
+    //void GenerateFBEFinalModelMap();
     void GenerateFBEFinalModelEnumFlags(const std::string& package, const std::string& name, const std::string& type);
-    void GenerateFBESender();
-    void GenerateFBEReceiver();
+    //void GenerateFBESender();
+    //void GenerateFBEReceiver();
     void GenerateImports(const std::shared_ptr<Package>& p);
 
     void GeneratePackage(const std::shared_ptr<Package>& p);
     void GenerateEnum(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e, const CppCommon::Path& path);
     void GenerateFlags(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f, const CppCommon::Path& path);
-    void GenerateStruct(const std::shared_ptr<StructType>& s);
+    void GenerateStruct(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path);
     void GenerateStructFieldModel(const std::shared_ptr<StructType>& s);
     void GenerateStructModel(const std::shared_ptr<StructType>& s);
     void GenerateStructFinalModel(const std::shared_ptr<StructType>& s);
@@ -90,19 +90,20 @@ private:
     std::string ConvertEnumSize(const std::string& type);
     std::string ConvertEnumType(const std::string& type);
     std::string ConvertEnumConstant(const std::string& name, const std::string& type, const std::string& value);
+    std::string ConvertKeyName(const std::string& type);
     std::string ConvertTypeName(const std::string& type, bool optional);
     std::string ConvertTypeName(const StructField& field);
-    std::string ConvertTypeFieldName(const std::string& type, bool final);
-    std::string ConvertTypeFieldInitialization(const std::string& type, bool optional, const std::string& offset, bool final);
-    std::string ConvertTypeFieldInitialization(const StructField& field, const std::string& offset, bool final);
-    std::string ConvertConstant(const std::string& type, const std::string& value, bool optional);
-    std::string ConvertDefaultOrNone(const std::string& type, bool optional);
-    std::string ConvertDefault(const std::string& type, bool optional);
-    std::string ConvertDefault(const StructField& field);
+    //std::string ConvertTypeFieldName(const std::string& type, bool final);
+    //std::string ConvertTypeFieldInitialization(const std::string& type, bool optional, const std::string& offset, bool final);
+    //std::string ConvertTypeFieldInitialization(const StructField& field, const std::string& offset, bool final);
+    //std::string ConvertConstant(const std::string& type, const std::string& value, bool optional);
+    //std::string ConvertDefaultOrNone(const std::string& type, bool optional);
+    //std::string ConvertDefault(const std::string& type, bool optional);
+    //std::string ConvertDefault(const StructField& field);
 
-    void WriteOutputStreamType(const std::string& type, const std::string& name, bool optional);
-    void WriteOutputStreamItem(const std::string& type, const std::string& name, bool optional);
-    void WriteOutputStreamValue(const std::string& type, const std::string& name, bool optional);
+    //void WriteOutputStreamType(const std::string& type, const std::string& name, bool optional);
+    //void WriteOutputStreamItem(const std::string& type, const std::string& name, bool optional);
+    //void WriteOutputStreamValue(const std::string& type, const std::string& name, bool optional);
 };
 
 } // namespace FBE

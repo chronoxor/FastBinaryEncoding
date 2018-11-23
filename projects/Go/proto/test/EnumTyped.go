@@ -13,6 +13,14 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
+// EnumTyped enum key
+type EnumTypedKey uint8
+
+// Convert EnumTyped enum key to string
+func (k EnumTypedKey) String() string {
+    return EnumTyped(k).String()
+}
+
 // EnumTyped enum
 type EnumTyped uint8
 
@@ -30,6 +38,11 @@ const (
 // Create a new EnumTyped enum
 func NewEnumTyped() *EnumTyped {
     return new(EnumTyped)
+}
+
+// Get the enum key
+func (e EnumTyped) Key() EnumTypedKey {
+    return EnumTypedKey(e)
 }
 
 // Convert enum to string
