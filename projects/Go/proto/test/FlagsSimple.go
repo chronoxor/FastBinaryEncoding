@@ -7,9 +7,17 @@ package test
 
 import "strings"
 import "encoding/json"
+import "../fbe"
+import "../proto"
 
+// Workaround for Go unused imports issue
+var _ = fbe.Version
+var _ = proto.Version
+
+// FlagsSimple flags type
 type FlagsSimple int32
 
+// FlagsSimple flags values
 //noinspection GoSnakeCaseUsage
 const (
     FlagsSimple_FLAG_VALUE_0 = FlagsSimple(0x0)
@@ -20,6 +28,7 @@ const (
     FlagsSimple_FLAG_VALUE_5 = FlagsSimple(FlagsSimple_FLAG_VALUE_1 | FlagsSimple_FLAG_VALUE_3)
 )
 
+// Convert flags to string
 //noinspection GoBoolExpressions
 func (f FlagsSimple) String() string {
     var sb strings.Builder
@@ -75,10 +84,12 @@ func (f FlagsSimple) String() string {
     return sb.String()
 }
 
+// Convert flags to JSON
 func (f FlagsSimple) MarshalJSON() ([]byte, error) {
     return json.Marshal(int32(f))
 }
 
+// Convert JSON to flags
 func (f *FlagsSimple) UnmarshalJSON(b []byte) error {
     var value int32
     err := json.Unmarshal(b, &value)

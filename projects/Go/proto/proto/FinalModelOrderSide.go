@@ -5,9 +5,8 @@
 
 package proto
 
-import "../fbe"
-
 import "errors"
+import "../fbe"
 
 // Fast Binary Encoding OrderSide final model class
 type FinalModelOrderSide struct {

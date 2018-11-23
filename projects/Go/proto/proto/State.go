@@ -7,9 +7,15 @@ package proto
 
 import "strings"
 import "encoding/json"
+import "../fbe"
 
+// Workaround for Go unused imports issue
+var _ = fbe.Version
+
+// State flags type
 type State byte
 
+// State flags values
 //noinspection GoSnakeCaseUsage
 const (
     State_unknown = State(0x00)
@@ -21,6 +27,7 @@ const (
     State_bad = State(State_unknown | State_invalid | State_broken)
 )
 
+// Convert flags to string
 //noinspection GoBoolExpressions
 func (f State) String() string {
     var sb strings.Builder
@@ -84,10 +91,12 @@ func (f State) String() string {
     return sb.String()
 }
 
+// Convert flags to JSON
 func (f State) MarshalJSON() ([]byte, error) {
     return json.Marshal(byte(f))
 }
 
+// Convert JSON to flags
 func (f *State) UnmarshalJSON(b []byte) error {
     var value byte
     err := json.Unmarshal(b, &value)

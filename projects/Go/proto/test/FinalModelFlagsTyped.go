@@ -5,9 +5,8 @@
 
 package test
 
-import "../fbe"
-
 import "errors"
+import "../fbe"
 
 // Fast Binary Encoding FlagsTyped final model class
 type FinalModelFlagsTyped struct {

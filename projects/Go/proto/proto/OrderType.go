@@ -6,9 +6,15 @@
 package proto
 
 import "encoding/json"
+import "../fbe"
 
+// Workaround for Go unused imports issue
+var _ = fbe.Version
+
+// OrderType enum type
 type OrderType byte
 
+// OrderType enum values
 //noinspection GoSnakeCaseUsage
 const (
     OrderType_market = OrderType(0 + 0)
@@ -16,6 +22,7 @@ const (
     OrderType_stop = OrderType(0 + 2)
 )
 
+// Convert enum to string
 func (e OrderType) String() string {
     if e == OrderType_market {
         return "market"
@@ -29,10 +36,12 @@ func (e OrderType) String() string {
     return "<unknown>"
 }
 
+// Convert enum to JSON
 func (e OrderType) MarshalJSON() ([]byte, error) {
     return json.Marshal(byte(e))
 }
 
+// Convert JSON to enum
 func (e *OrderType) UnmarshalJSON(b []byte) error {
     var value byte
     err := json.Unmarshal(b, &value)

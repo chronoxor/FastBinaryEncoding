@@ -5,9 +5,8 @@
 
 package proto
 
-import "../fbe"
-
 import "errors"
+import "../fbe"
 
 // Fast Binary Encoding State final model class
 type FinalModelState struct {

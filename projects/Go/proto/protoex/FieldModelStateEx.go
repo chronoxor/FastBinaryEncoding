@@ -5,9 +5,8 @@
 
 package protoex
 
-import "../fbe"
-
 import "errors"
+import "../fbe"
 
 // Fast Binary Encoding StateEx field model class
 type FieldModelStateEx struct {

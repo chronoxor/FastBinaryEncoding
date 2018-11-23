@@ -6,9 +6,17 @@
 package test
 
 import "encoding/json"
+import "../fbe"
+import "../proto"
 
+// Workaround for Go unused imports issue
+var _ = fbe.Version
+var _ = proto.Version
+
+// EnumSimple enum type
 type EnumSimple int32
 
+// EnumSimple enum values
 //noinspection GoSnakeCaseUsage
 const (
     EnumSimple_ENUM_VALUE_0 = EnumSimple(0 + 0)
@@ -19,6 +27,7 @@ const (
     EnumSimple_ENUM_VALUE_5 = EnumSimple(EnumSimple_ENUM_VALUE_3)
 )
 
+// Convert enum to string
 func (e EnumSimple) String() string {
     if e == EnumSimple_ENUM_VALUE_0 {
         return "ENUM_VALUE_0"
@@ -41,10 +50,12 @@ func (e EnumSimple) String() string {
     return "<unknown>"
 }
 
+// Convert enum to JSON
 func (e EnumSimple) MarshalJSON() ([]byte, error) {
     return json.Marshal(int32(e))
 }
 
+// Convert JSON to enum
 func (e *EnumSimple) UnmarshalJSON(b []byte) error {
     var value int32
     err := json.Unmarshal(b, &value)

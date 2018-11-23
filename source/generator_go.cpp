@@ -13,6 +13,7 @@ namespace FBE {
 void GeneratorGo::Generate(const std::shared_ptr<Package>& package)
 {
     GenerateFBEPackage("fbe");
+    GenerateFBEVersion("fbe", "fbe");
     GenerateFBEConstants("fbe");
     GenerateFBEBuffer("fbe");
     GenerateFBEFieldModel("fbe", "Bool", "bool", "1", "false");
@@ -94,6 +95,38 @@ void GeneratorGo::GenerateFBEPackage(const std::string& package)
 
     // Create FBE package path
     CppCommon::Directory::CreateTree(path);
+}
+
+void GeneratorGo::GenerateFBEVersion(const std::string& package, const std::string& source)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / "Version.go";
+    Open(file);
+
+    // Generate headers
+    GenerateHeader(source);
+
+    std::string code = R"CODE(
+package _PACKAGE_
+
+// Package version
+const Version = "_VERSION_"
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("_PACKAGE_"), package);
+    code = std::regex_replace(code, std::regex("_VERSION_"), version);
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
 }
 
 void GeneratorGo::GenerateFBEConstants(const std::string& package)
@@ -1902,11 +1935,10 @@ void GeneratorGo::GenerateFBEFieldModelEnumFlags(const std::string& package, con
 
     // Generate imports
     WriteLine();
+    WriteLineIndent("import \"errors\"");
     WriteLineIndent("import \"../fbe\"");
 
     std::string code = R"CODE(
-import "errors"
-
 // Fast Binary Encoding _NAME_ field model class
 type FieldModel_NAME_ struct {
     buffer *fbe.Buffer  // Field model buffer
@@ -3050,11 +3082,10 @@ void GeneratorGo::GenerateFBEFinalModelEnumFlags(const std::string& package, con
 
     // Generate imports
     WriteLine();
+    WriteLineIndent("import \"errors\"");
     WriteLineIndent("import \"../fbe\"");
 
     std::string code = R"CODE(
-import "errors"
-
 // Fast Binary Encoding _NAME_ final model class
 type FinalModel_NAME_ struct {
     buffer *fbe.Buffer  // Final model buffer
@@ -3455,13 +3486,21 @@ class Receiver(object):
 
 void GeneratorGo::GenerateImports(const std::shared_ptr<Package>& p)
 {
+    // Generate fbe import
+    WriteLineIndent("import \"../fbe\"");
+
     // Generate packages import
     if (p->import)
-    {
-        WriteLine();
         for (const auto& import : p->import->imports)
             WriteLineIndent("import \"../" + *import + "\"");
-    }
+
+    // Generate workaround for Go unused imports issue
+    WriteLine();
+    WriteLineIndent("// Workaround for Go unused imports issue");
+    WriteLineIndent("var _ = fbe.Version");
+    if (p->import)
+        for (const auto& import : p->import->imports)
+            WriteLineIndent("var _ = " + *import + ".Version");
 }
 
 void GeneratorGo::GeneratePackage(const std::shared_ptr<Package>& p)
@@ -3470,6 +3509,9 @@ void GeneratorGo::GeneratePackage(const std::shared_ptr<Package>& p)
 
     // Create package path
     CppCommon::Directory::CreateTree(path);
+
+    // Generate package version
+    GenerateFBEVersion(*p->name, CppCommon::Path(_input).filename().string());
 
     // Generate namespace
     if (p->body)
@@ -3527,20 +3569,23 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
     WriteLine();
     WriteLineIndent("package " + *p->name);
 
-    // Generate other imports
+    // Generate imports
     WriteLine();
     WriteLineIndent("import \"encoding/json\"");
+    GenerateImports(p);
 
     std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
 
     // Generate enum type
     WriteLine();
+    WriteLineIndent("// " + enum_name + " enum type");
     WriteLineIndent("type " + enum_name + " " + ConvertEnumType(enum_type));
 
     // Generate enum body
     if (e->body)
     {
         WriteLine();
+        WriteLineIndent("// " + enum_name + " enum values");
         WriteLineIndent("//noinspection GoSnakeCaseUsage");
         WriteLineIndent("const (");
         Indent(1);
@@ -3577,6 +3622,7 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
 
     // Generate enum String() method
     WriteLine();
+    WriteLineIndent("// Convert enum to string");
     WriteLineIndent("func (e " + enum_name + ") String() string {");
     Indent(1);
     if (e->body)
@@ -3598,6 +3644,7 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
     {
         // Generate enum MarshalJSON() method
         WriteLine();
+        WriteLineIndent("// Convert enum to JSON");
         WriteLineIndent("func (e " + enum_name + ") MarshalJSON() ([]byte, error) {");
         Indent(1);
         WriteLineIndent("return json.Marshal(" + ConvertEnumType(enum_type) + "(e))");
@@ -3606,6 +3653,7 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
 
         // Generate enum UnmarshalJSON() method
         WriteLine();
+        WriteLineIndent("// Convert JSON to enum");
         WriteLineIndent("func (e *" + enum_name + ") UnmarshalJSON(b []byte) error {");
         Indent(1);
         WriteLineIndent("var value " + ConvertEnumType(enum_type));
@@ -3650,21 +3698,24 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::sh
     WriteLine();
     WriteLineIndent("package " + *p->name);
 
-    // Generate other imports
+    // Generate imports
     WriteLine();
     WriteLineIndent("import \"strings\"");
     WriteLineIndent("import \"encoding/json\"");
+    GenerateImports(p);
 
     std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
 
     // Generate flags type
     WriteLine();
+    WriteLineIndent("// " + flags_name + " flags type");
     WriteLineIndent("type " + flags_name + " " + ConvertEnumType(flags_type));
 
     // Generate flags body
     if (f->body)
     {
         WriteLine();
+        WriteLineIndent("// " + flags_name + " flags values");
         WriteLineIndent("//noinspection GoSnakeCaseUsage");
         WriteLineIndent("const (");
         Indent(1);
@@ -3689,6 +3740,7 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::sh
 
     // Generate flags String() method
     WriteLine();
+    WriteLineIndent("// Convert flags to string");
     WriteLineIndent("//noinspection GoBoolExpressions");
     WriteLineIndent("func (f " + flags_name + ") String() string {");
     Indent(1);
@@ -3723,6 +3775,7 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::sh
     {
         // Generate flags MarshalJSON() method
         WriteLine();
+        WriteLineIndent("// Convert flags to JSON");
         WriteLineIndent("func (f " + flags_name + ") MarshalJSON() ([]byte, error) {");
         Indent(1);
         WriteLineIndent("return json.Marshal(" + ConvertEnumType(flags_type) + "(f))");
@@ -3731,6 +3784,7 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::sh
 
         // Generate flags UnmarshalJSON() method
         WriteLine();
+        WriteLineIndent("// Convert JSON to flags");
         WriteLineIndent("func (f *" + flags_name + ") UnmarshalJSON(b []byte) error {");
         Indent(1);
         WriteLineIndent("var value " + ConvertEnumType(flags_type));

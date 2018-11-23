@@ -5,9 +5,8 @@
 
 package test
 
-import "../fbe"
-
 import "errors"
+import "../fbe"
 
 // Fast Binary Encoding EnumSimple field model class
 type FieldModelEnumSimple struct {

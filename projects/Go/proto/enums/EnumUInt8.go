@@ -6,9 +6,15 @@
 package enums
 
 import "encoding/json"
+import "../fbe"
 
+// Workaround for Go unused imports issue
+var _ = fbe.Version
+
+// EnumUInt8 enum type
 type EnumUInt8 uint8
 
+// EnumUInt8 enum values
 //noinspection GoSnakeCaseUsage
 const (
     EnumUInt8_ENUM_VALUE_0 = EnumUInt8(0 + 0)
@@ -19,6 +25,7 @@ const (
     EnumUInt8_ENUM_VALUE_5 = EnumUInt8(EnumUInt8_ENUM_VALUE_3)
 )
 
+// Convert enum to string
 func (e EnumUInt8) String() string {
     if e == EnumUInt8_ENUM_VALUE_0 {
         return "ENUM_VALUE_0"
@@ -41,10 +48,12 @@ func (e EnumUInt8) String() string {
     return "<unknown>"
 }
 
+// Convert enum to JSON
 func (e EnumUInt8) MarshalJSON() ([]byte, error) {
     return json.Marshal(uint8(e))
 }
 
+// Convert JSON to enum
 func (e *EnumUInt8) UnmarshalJSON(b []byte) error {
     var value uint8
     err := json.Unmarshal(b, &value)

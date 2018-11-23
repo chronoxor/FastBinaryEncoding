@@ -40,6 +40,7 @@ private:
     void GenerateHeader(const std::string& source);
     void GenerateFooter();
     void GenerateFBEPackage(const std::string& package);
+    void GenerateFBEVersion(const std::string& package, const std::string& source);
     void GenerateFBEConstants(const std::string& package);
     void GenerateFBEBuffer(const std::string& package);
     void GenerateFBEFieldModel(const std::string& package, const std::string& name, const std::string& type, const std::string& size, const std::string& defaults);

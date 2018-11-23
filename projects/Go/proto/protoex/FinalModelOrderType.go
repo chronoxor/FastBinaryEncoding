@@ -5,9 +5,8 @@
 
 package protoex
 
-import "../fbe"
-
 import "errors"
+import "../fbe"
 
 // Fast Binary Encoding OrderType final model class
 type FinalModelOrderType struct {
