@@ -13,8 +13,9 @@ namespace FBE {
 void GeneratorGo::Generate(const std::shared_ptr<Package>& package)
 {
     GenerateFBEPackage("fbe");
-    GenerateFBEVersion("fbe", "fbe");
     GenerateFBEConstants("fbe");
+    GenerateFBETypes("fbe");
+    GenerateFBEVersion("fbe", "fbe");
     GenerateFBEBuffer("fbe");
     GenerateFBEFieldModel("fbe", "Bool", "bool", "1", "false");
     GenerateFBEFieldModel("fbe", "Byte", "byte", "1", "0");
@@ -97,6 +98,155 @@ void GeneratorGo::GenerateFBEPackage(const std::string& package)
     CppCommon::Directory::CreateTree(path);
 }
 
+void GeneratorGo::GenerateFBEConstants(const std::string& package)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / "Constants.go";
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
+    std::string code = R"CODE(
+package fbe
+
+// Maximal signed integer value
+const MaxInt = int(^uint(0) >> 1)
+// Minimal signed integer value
+const MinInt = -MaxInt - 1
+
+// Maximal unsigned integer value
+const MaxUint = ^uint(0)
+// Minimal unsigned integer value
+const MinUint = 0
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorGo::GenerateFBETypes(const std::string& package)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / "Types.go";
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
+    std::string code = R"CODE(
+package fbe
+
+import "time"
+import "encoding/json"
+import "github.com/google/uuid"
+import "github.com/shopspring/decimal"
+
+// Decimal struct
+type Decimal struct {
+    decimal.Decimal
+}
+
+// Create a new decimal from the given string
+func DecimalFromString(value string) Decimal {
+    result, _ := decimal.NewFromString(value)
+    return Decimal{result}
+}
+
+// Create zero decimal
+func DecimalZero() Decimal {
+    return Decimal{decimal.Zero}
+}
+
+// Timestamp struct
+type Timestamp struct {
+    time.Time
+}
+
+// Create Unix Epoch timestamp
+func TimestampEpoch() Timestamp {
+    return Timestamp{time.Unix(0, 0)}
+}
+
+// Create the current UTC timestamp
+func TimestampNow() Timestamp {
+    return Timestamp{time.Unix(0, 0)}
+}
+
+// Create a new timestamp from the given nanoseconds
+func TimestampFromNanoseconds(nanoseconds uint64) Timestamp {
+    return Timestamp{time.Unix(int64(nanoseconds / 1000000000), int64(nanoseconds % 1000000000))}
+}
+
+// Convert timestamp to JSON
+func (t Timestamp) MarshalJSON() ([]byte, error) {
+    return json.Marshal(t.UnixNano())
+}
+
+// Convert JSON to timestamp
+func (t *Timestamp) UnmarshalJSON(buffer []byte) error {
+    var nanoseconds int64
+    err := json.Unmarshal(buffer, &nanoseconds)
+    if err != nil {
+        return err
+    }
+    *t = TimestampFromNanoseconds(uint64(nanoseconds))
+    return nil
+}
+
+// UUID struct
+type UUID struct {
+    uuid.UUID
+}
+
+// Create a new UUID from the given bytes buffer
+func UUIDFromBytes(buffer []byte) UUID {
+    result, _ := uuid.FromBytes(buffer)
+    return UUID{result}
+}
+
+// Create nil UUID0 (all bits set to zero)
+func UUIDNil() UUID {
+    return UUID{uuid.Nil}
+}
+
+// Create sequential UUID1 (time based version)
+func UUIDSequential() UUID {
+    result, _ := uuid.NewUUID()
+    return UUID{result}
+}
+
+// Create random UUID4 (randomly or pseudo-randomly generated version)
+func UUIDRandom() UUID {
+    result, _ := uuid.NewRandom()
+    return UUID{result}
+}
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
 void GeneratorGo::GenerateFBEVersion(const std::string& package, const std::string& source)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
@@ -129,39 +279,6 @@ const Version = "_VERSION_"
     Close();
 }
 
-void GeneratorGo::GenerateFBEConstants(const std::string& package)
-{
-    CppCommon::Path path = CppCommon::Path(_output) / package;
-
-    // Open the file
-    CppCommon::Path file = path / "Constants.go";
-    Open(file);
-
-    // Generate headers
-    GenerateHeader("fbe");
-
-    std::string code = R"CODE(
-package fbe
-
-const MaxInt = int(^uint(0) >> 1)
-const MinInt = -MaxInt - 1
-
-const MaxUint = ^uint(0)
-const MinUint = 0
-)CODE";
-
-    // Prepare code template
-    code = std::regex_replace(code, std::regex("\n"), EndLine());
-
-    Write(code);
-
-    // Generate footer
-    GenerateFooter();
-
-    // Close the file
-    Close();
-}
-
 void GeneratorGo::GenerateFBEBuffer(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
@@ -177,8 +294,6 @@ void GeneratorGo::GenerateFBEBuffer(const std::string& package)
 package fbe
 
 import "math"
-import "time"
-import "github.com/google/uuid"
 
 // Fast Binary Encoding buffer based on dynamic byte array
 type Buffer struct {
@@ -327,38 +442,47 @@ func (b *Buffer) Reset() {
 
 // Buffer I/O methods
 
+// Read bool from the buffer
 func ReadBool(buffer []byte, offset int) bool {
     return buffer[offset] != 0
 }
 
+// Read byte from the buffer
 func ReadByte(buffer []byte, offset int) byte {
     return buffer[offset]
 }
 
+// Read single byte character from the buffer
 func ReadChar(buffer []byte, offset int) rune {
     return rune(ReadUInt8(buffer, offset))
 }
 
+// Read four bytes character from the buffer
 func ReadWChar(buffer []byte, offset int) rune {
     return rune(ReadUInt32(buffer, offset))
 }
 
+// Read signed 8-bits integer from the buffer
 func ReadInt8(buffer []byte, offset int) int8 {
     return int8(buffer[offset])
 }
 
+// Read unsigned 8-bits integer from the buffer
 func ReadUInt8(buffer []byte, offset int) uint8 {
     return uint8(buffer[offset])
 }
 
+// Read signed 16-bits integer from the buffer
 func ReadInt16(buffer []byte, offset int) int16 {
     return (int16(buffer[offset + 0]) << 0) | (int16(buffer[offset + 1]) << 8)
 }
 
+// Read unsigned 16-bits integer from the buffer
 func ReadUInt16(buffer []byte, offset int) uint16 {
     return (uint16(buffer[offset + 0]) << 0) | (uint16(buffer[offset + 1]) << 8)
 }
 
+// Read signed 32-bits integer from the buffer
 func ReadInt32(buffer []byte, offset int) int32 {
     return (int32(buffer[offset + 0]) <<  0) |
            (int32(buffer[offset + 1]) <<  8) |
@@ -366,6 +490,7 @@ func ReadInt32(buffer []byte, offset int) int32 {
            (int32(buffer[offset + 3]) << 24)
 }
 
+// Read unsigned 32-bits integer from the buffer
 func ReadUInt32(buffer []byte, offset int) uint32 {
     return (uint32(buffer[offset + 0]) <<  0) |
            (uint32(buffer[offset + 1]) <<  8) |
@@ -373,6 +498,7 @@ func ReadUInt32(buffer []byte, offset int) uint32 {
            (uint32(buffer[offset + 3]) << 24)
 }
 
+// Read signed 64-bits integer from the buffer
 func ReadInt64(buffer []byte, offset int) int64 {
     return (int64(buffer[offset + 0]) <<  0) |
            (int64(buffer[offset + 1]) <<  8) |
@@ -384,6 +510,7 @@ func ReadInt64(buffer []byte, offset int) int64 {
            (int64(buffer[offset + 7]) << 56)
 }
 
+// Read unsigned 64-bits integer from the buffer
 func ReadUInt64(buffer []byte, offset int) uint64 {
     return (uint64(buffer[offset + 0]) <<  0) |
            (uint64(buffer[offset + 1]) <<  8) |
@@ -395,35 +522,41 @@ func ReadUInt64(buffer []byte, offset int) uint64 {
            (uint64(buffer[offset + 7]) << 56)
 }
 
+// Read float from the buffer
 func ReadFloat(buffer []byte, offset int) float32 {
     bits := ReadUInt32(buffer, offset)
     return math.Float32frombits(bits)
 }
 
+// Read double from the buffer
 func ReadDouble(buffer []byte, offset int) float64 {
     bits := ReadUInt64(buffer, offset)
     return math.Float64frombits(bits)
 }
 
-func ReadTimestamp(buffer []byte, offset int) time.Time {
-    nanoseconds := ReadUInt64(buffer, offset)
-    return time.Unix(int64(nanoseconds / 1000000000), int64(nanoseconds % 1000000000))
-}
-
-func ReadUUID(buffer []byte, offset int) uuid.UUID {
-    bytes := ReadBytes(buffer, offset, 16)
-    result, _ := uuid.FromBytes(bytes)
-    return result
-}
-
+// Read bytes from the buffer
 func ReadBytes(buffer []byte, offset int, size int) []byte {
     return buffer[offset:offset + size]
 }
 
+// Read string from the buffer
 func ReadString(buffer []byte, offset int, size int) string {
     return string(buffer[offset:offset + size])
 }
 
+// Read timestamp from the buffer
+func ReadTimestamp(buffer []byte, offset int) Timestamp {
+    nanoseconds := ReadUInt64(buffer, offset)
+    return TimestampFromNanoseconds(nanoseconds)
+}
+
+// Read UUID from the buffer
+func ReadUUID(buffer []byte, offset int) UUID {
+    bytes := ReadBytes(buffer, offset, 16)
+    return UUIDFromBytes(bytes)
+}
+
+// Write bool into the buffer
 func WriteBool(buffer []byte, offset int, value bool) {
     if value {
         buffer[offset] = 1
@@ -432,36 +565,44 @@ func WriteBool(buffer []byte, offset int, value bool) {
     }
 }
 
+// Write byte into the buffer
 func WriteByte(buffer []byte, offset int, value byte) {
     buffer[offset] = value
 }
 
+// Write single byte character into the buffer
 func WriteChar(buffer []byte, offset int, value rune) {
     WriteUInt8(buffer, offset, uint8(value))
 }
 
+// Write four bytes character into the buffer
 func WriteWChar(buffer []byte, offset int, value rune) {
     WriteUInt32(buffer, offset, uint32(value))
 }
 
+// Write signed 8-bits integer into the buffer
 func WriteInt8(buffer []byte, offset int, value int8) {
     buffer[offset] = byte(value)
 }
 
+// Write unsigned 8-bits integer into the buffer
 func WriteUInt8(buffer []byte, offset int, value uint8) {
     buffer[offset] = byte(value)
 }
 
+// Write signed 16-bits integer into the buffer
 func WriteInt16(buffer []byte, offset int, value int16) {
     buffer[offset + 0] = byte(value >> 0)
     buffer[offset + 1] = byte(value >> 8)
 }
 
+// Write unsigned 16-bits integer into the buffer
 func WriteUInt16(buffer []byte, offset int, value uint16) {
     buffer[offset + 0] = byte(value >> 0)
     buffer[offset + 1] = byte(value >> 8)
 }
 
+// Write signed 32-bits integer into the buffer
 func WriteInt32(buffer []byte, offset int, value int32) {
     buffer[offset + 0] = byte(value >>  0)
     buffer[offset + 1] = byte(value >>  8)
@@ -469,6 +610,7 @@ func WriteInt32(buffer []byte, offset int, value int32) {
     buffer[offset + 3] = byte(value >> 24)
 }
 
+// Write unsigned 32-bits integer into the buffer
 func WriteUInt32(buffer []byte, offset int, value uint32) {
     buffer[offset + 0] = byte(value >>  0)
     buffer[offset + 1] = byte(value >>  8)
@@ -476,6 +618,7 @@ func WriteUInt32(buffer []byte, offset int, value uint32) {
     buffer[offset + 3] = byte(value >> 24)
 }
 
+// Write signed 64-bits integer into the buffer
 func WriteInt64(buffer []byte, offset int, value int64) {
     buffer[offset + 0] = byte(value >>  0)
     buffer[offset + 1] = byte(value >>  8)
@@ -487,6 +630,7 @@ func WriteInt64(buffer []byte, offset int, value int64) {
     buffer[offset + 7] = byte(value >> 56)
 }
 
+// Write unsigned 64-bits integer into the buffer
 func WriteUInt64(buffer []byte, offset int, value uint64) {
     buffer[offset + 0] = byte(value >>  0)
     buffer[offset + 1] = byte(value >>  8)
@@ -498,40 +642,48 @@ func WriteUInt64(buffer []byte, offset int, value uint64) {
     buffer[offset + 7] = byte(value >> 56)
 }
 
+// Write float into the buffer
 func WriteFloat(buffer []byte, offset int, value float32) {
     WriteUInt32(buffer, offset, math.Float32bits(value))
 }
 
+// Write double into the buffer
 func WriteDouble(buffer []byte, offset int, value float64) {
     WriteUInt64(buffer, offset, math.Float64bits(value))
 }
 
-func WriteTimestamp(buffer []byte, offset int, value time.Time) {
-    nanoseconds := value.UnixNano()
-    WriteUInt64(buffer, offset, uint64(nanoseconds))
-}
-
-func WriteUUID(buffer []byte, offset int, value uuid.UUID) {
-    bytes, _ := value.MarshalBinary()
-    WriteBytes(buffer, offset, bytes)
-}
-
+// Write bytes into the buffer
 func WriteBytes(buffer []byte, offset int, value []byte) {
     copy(buffer[offset:offset + len(value)], value)
 }
 
+// Write slice into the buffer
 func WriteSlice(buffer []byte, offset int, value []byte, valueOffset int, valueSize int) {
     copy(buffer[offset:offset + len(value)], value[valueOffset:valueOffset + valueSize])
 }
 
+// Write count of single byte into the buffer
 func WriteCount(buffer []byte, offset int, value byte, valueCount int) {
     for i := 0; i < valueCount; i++ {
         buffer[offset + i] = value
     }
 }
 
+// Write string into the buffer
 func WriteString(buffer []byte, offset int, value string) {
     WriteBytes(buffer, offset, []byte(value))
+}
+
+// Write timestamp into the buffer
+func WriteTimestamp(buffer []byte, offset int, value Timestamp) {
+    nanoseconds := uint64(value.UnixNano())
+    WriteUInt64(buffer, offset, nanoseconds)
+}
+
+// Write UUID into the buffer
+func WriteUUID(buffer []byte, offset int, value UUID) {
+    bytes, _ := value.MarshalBinary()
+    WriteBytes(buffer, offset, bytes)
 }
 )CODE";
 
@@ -681,12 +833,12 @@ func NewFieldModelDecimal(buffer *Buffer, offset int) *FieldModelDecimal {
 func (fm FieldModelDecimal) Verify() bool { return true }
 
 // Get the decimal value
-func (fm FieldModelDecimal) Get() (decimal.Decimal, error) {
-    return fm.GetDefault(decimal.Zero)
+func (fm FieldModelDecimal) Get() (Decimal, error) {
+    return fm.GetDefault(DecimalZero())
 }
 
 // Get the decimal value with provided default value
-func (fm FieldModelDecimal) GetDefault(defaults decimal.Decimal) (decimal.Decimal, error) {
+func (fm FieldModelDecimal) GetDefault(defaults Decimal) (Decimal, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }
@@ -708,11 +860,11 @@ func (fm FieldModelDecimal) GetDefault(defaults decimal.Decimal) (decimal.Decima
         result = result.Neg()
     }
 
-    return result, nil
+    return Decimal{result}, nil
 }
 
 // Set the decimal value
-func (fm *FieldModelDecimal) Set(value decimal.Decimal) error {
+func (fm *FieldModelDecimal) Set(value Decimal) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
@@ -794,7 +946,6 @@ void GeneratorGo::GenerateFBEFieldModelTimestamp(const std::string& package)
 package fbe
 
 import "errors"
-import "time"
 
 // Fast Binary Encoding timestamp field model class
 type FieldModelTimestamp struct {
@@ -826,12 +977,12 @@ func NewFieldModelTimestamp(buffer *Buffer, offset int) *FieldModelTimestamp {
 func (fm FieldModelTimestamp) Verify() bool { return true }
 
 // Get the timestamp value
-func (fm FieldModelTimestamp) Get() (time.Time, error) {
-    return fm.GetDefault(time.Unix(0, 0))
+func (fm FieldModelTimestamp) Get() (Timestamp, error) {
+    return fm.GetDefault(TimestampEpoch())
 }
 
 // Get the timestamp value with provided default value
-func (fm FieldModelTimestamp) GetDefault(defaults time.Time) (time.Time, error) {
+func (fm FieldModelTimestamp) GetDefault(defaults Timestamp) (Timestamp, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }
@@ -840,7 +991,7 @@ func (fm FieldModelTimestamp) GetDefault(defaults time.Time) (time.Time, error) 
 }
 
 // Set the timestamp value
-func (fm *FieldModelTimestamp) Set(value time.Time) error {
+func (fm *FieldModelTimestamp) Set(value Timestamp) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
@@ -877,7 +1028,6 @@ void GeneratorGo::GenerateFBEFieldModelUUID(const std::string& package)
 package fbe
 
 import "errors"
-import "github.com/google/uuid"
 
 // Fast Binary Encoding UUID field model class
 type FieldModelUUID struct {
@@ -909,12 +1059,12 @@ func NewFieldModelUUID(buffer *Buffer, offset int) *FieldModelUUID {
 func (fm FieldModelUUID) Verify() bool { return true }
 
 // Get the UUID value
-func (fm FieldModelUUID) Get() (uuid.UUID, error) {
-    return fm.GetDefault(uuid.Nil)
+func (fm FieldModelUUID) Get() (UUID, error) {
+    return fm.GetDefault(UUIDNil())
 }
 
 // Get the UUID value with provided default value
-func (fm FieldModelUUID) GetDefault(defaults uuid.UUID) (uuid.UUID, error) {
+func (fm FieldModelUUID) GetDefault(defaults UUID) (UUID, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }
@@ -923,7 +1073,7 @@ func (fm FieldModelUUID) GetDefault(defaults uuid.UUID) (uuid.UUID, error) {
 }
 
 // Set the UUID value
-func (fm *FieldModelUUID) Set(value uuid.UUID) error {
+func (fm *FieldModelUUID) Set(value UUID) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
@@ -2122,7 +2272,7 @@ type FinalModelDecimal struct {
 }
 
 // Get the allocation size
-func (fm FinalModelDecimal) FBEAllocationSize(value decimal.Decimal) int { return fm.FBESize() }
+func (fm FinalModelDecimal) FBEAllocationSize(value Decimal) int { return fm.FBESize() }
 
 // Get the final size
 func (fm FinalModelDecimal) FBESize() int { return 16 }
@@ -2152,9 +2302,9 @@ func (fm FinalModelDecimal) Verify() (bool, int) {
 }
 
 // Get the decimal value
-func (fm FinalModelDecimal) Get() (decimal.Decimal, int, error) {
+func (fm FinalModelDecimal) Get() (Decimal, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return decimal.Zero, 0, errors.New("model is broken")
+        return DecimalZero(), 0, errors.New("model is broken")
     }
 
     // Read decimal parts
@@ -2174,11 +2324,11 @@ func (fm FinalModelDecimal) Get() (decimal.Decimal, int, error) {
         result = result.Neg()
     }
 
-    return result, fm.FBESize(), nil
+    return Decimal{result}, fm.FBESize(), nil
 }
 
 // Set the decimal value
-func (fm *FinalModelDecimal) Set(value decimal.Decimal) (int, error) {
+func (fm *FinalModelDecimal) Set(value Decimal) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0, errors.New("model is broken")
     }
@@ -2260,7 +2410,6 @@ void GeneratorGo::GenerateFBEFinalModelTimestamp(const std::string& package)
 package fbe
 
 import "errors"
-import "time"
 
 // Fast Binary Encoding timestamp final model class
 type FinalModelTimestamp struct {
@@ -2269,7 +2418,7 @@ type FinalModelTimestamp struct {
 }
 
 // Get the allocation size
-func (fm FinalModelTimestamp) FBEAllocationSize(value time.Time) int { return fm.FBESize() }
+func (fm FinalModelTimestamp) FBEAllocationSize(value Timestamp) int { return fm.FBESize() }
 
 // Get the final size
 func (fm FinalModelTimestamp) FBESize() int { return 8 }
@@ -2299,16 +2448,16 @@ func (fm FinalModelTimestamp) Verify() (bool, int) {
 }
 
 // Get the timestamp value
-func (fm FinalModelTimestamp) Get() (time.Time, int, error) {
+func (fm FinalModelTimestamp) Get() (Timestamp, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return time.Unix(0, 0), 0, errors.New("model is broken")
+        return TimestampEpoch(), 0, errors.New("model is broken")
     }
 
     return ReadTimestamp(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), fm.FBESize(), nil
 }
 
 // Set the timestamp value
-func (fm *FinalModelTimestamp) Set(value time.Time) (int, error) {
+func (fm *FinalModelTimestamp) Set(value Timestamp) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0, errors.New("model is broken")
     }
@@ -2345,7 +2494,6 @@ void GeneratorGo::GenerateFBEFinalModelUUID(const std::string& package)
 package fbe
 
 import "errors"
-import "github.com/google/uuid"
 
 // Fast Binary Encoding UUID final model class
 type FinalModelUUID struct {
@@ -2354,7 +2502,7 @@ type FinalModelUUID struct {
 }
 
 // Get the allocation size
-func (fm FinalModelUUID) FBEAllocationSize(value uuid.UUID) int { return fm.FBESize() }
+func (fm FinalModelUUID) FBEAllocationSize(value UUID) int { return fm.FBESize() }
 
 // Get the final size
 func (fm FinalModelUUID) FBESize() int { return 16 }
@@ -2384,16 +2532,16 @@ func (fm FinalModelUUID) Verify() (bool, int) {
 }
 
 // Get the UUID value
-func (fm FinalModelUUID) Get() (uuid.UUID, int, error) {
+func (fm FinalModelUUID) Get() (UUID, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return uuid.Nil, 0, errors.New("model is broken")
+        return UUIDNil(), 0, errors.New("model is broken")
     }
 
     return ReadUUID(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), fm.FBESize(), nil
 }
 
 // Set the UUID value
-func (fm *FinalModelUUID) Set(value uuid.UUID) (int, error) {
+func (fm *FinalModelUUID) Set(value UUID) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0, errors.New("model is broken")
     }
@@ -3685,10 +3833,10 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
         // Generate enum UnmarshalJSON() method
         WriteLine();
         WriteLineIndent("// Convert JSON to enum");
-        WriteLineIndent("func (e *" + enum_name + ") UnmarshalJSON(b []byte) error {");
+        WriteLineIndent("func (e *" + enum_name + ") UnmarshalJSON(buffer []byte) error {");
         Indent(1);
         WriteLineIndent("var result " + ConvertEnumType(enum_type));
-        WriteLineIndent("err := json.Unmarshal(b, &result)");
+        WriteLineIndent("err := json.Unmarshal(buffer, &result)");
         WriteLineIndent("if err != nil {");
         Indent(1);
         WriteLineIndent("return err");
@@ -3848,10 +3996,10 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::sh
         // Generate flags UnmarshalJSON() method
         WriteLine();
         WriteLineIndent("// Convert JSON to flags");
-        WriteLineIndent("func (f *" + flags_name + ") UnmarshalJSON(b []byte) error {");
+        WriteLineIndent("func (f *" + flags_name + ") UnmarshalJSON(buffer []byte) error {");
         Indent(1);
         WriteLineIndent("var result " + ConvertEnumType(flags_type));
-        WriteLineIndent("err := json.Unmarshal(b, &result)");
+        WriteLineIndent("err := json.Unmarshal(buffer, &result)");
         WriteLineIndent("if err != nil {");
         Indent(1);
         WriteLineIndent("return err");
@@ -3901,6 +4049,30 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
 
     std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "";
 
+    // Generate struct key
+    WriteLine();
+    WriteLineIndent("// " + struct_name + " key");
+    WriteLineIndent("type " + struct_name + "Key struct {");
+    Indent(1);
+    if (!base_type.empty())
+        WriteLineIndent(base_type + "Key");
+    if (s->body)
+        for (const auto& field : s->body->fields)
+            if (field->keys)
+                WriteLineIndent(ConvertCase(*field->name) + " " + ConvertTypeName(*field));
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate struct key String() method
+    WriteLine();
+    WriteLineIndent("// Convert " + struct_name + " flags key to string");
+    WriteLineIndent("func (k " + struct_name + "Key) String() string {");
+    Indent(1);
+    WriteLineIndent("var sb strings.Builder");
+    WriteLineIndent("return sb.String()");
+    Indent(-1);
+    WriteLineIndent("}");
+
     // Generate struct body
     WriteLine();
     WriteLineIndent("// " + struct_name + " struct");
@@ -3914,6 +4086,58 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     Indent(-1);
     WriteLineIndent("}");
 
+    // Generate struct JSON constructor
+    WriteLine();
+    WriteLineIndent("// Create a new " + struct_name + " struct from JSON");
+    WriteLineIndent("func New" + struct_name + "FromJSON(buffer []byte) (*" + struct_name + ", error) {");
+    Indent(1);
+    WriteLineIndent("var result " + struct_name);
+    WriteLineIndent("err := json.Unmarshal(buffer, &result)");
+    WriteLineIndent("if err != nil {");
+    Indent(1);
+    WriteLineIndent("return nil, err");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLineIndent("return &result, nil");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate struct Key() method
+    WriteLine();
+    WriteLineIndent("// Get the struct key");
+    WriteLineIndent("func (s " + struct_name + ") Key() " + struct_name + "Key {");
+    Indent(1);
+    WriteLineIndent("return " + struct_name + "Key{");
+    Indent(1);
+    if (!base_type.empty())
+        WriteLineIndent("s." + ConvertBaseName(base_type) + ".Key(),");
+    if (s->body)
+        for (const auto& field : s->body->fields)
+            if (field->keys)
+                WriteLineIndent(ConvertCase(*field->name) + ": s." + ConvertCase(*field->name) + ",");
+    Indent(-1);
+    WriteLineIndent("}");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate struct String() method
+    WriteLine();
+    WriteLineIndent("// Convert struct to string");
+    WriteLineIndent("func (s " + struct_name + ") String() string {");
+    Indent(1);
+    WriteLineIndent("var sb strings.Builder");
+    WriteLineIndent("return sb.String()");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate struct JSON() method
+    WriteLine();
+    WriteLineIndent("// Convert struct to JSON");
+    WriteLineIndent("func (s " + struct_name + ") JSON() ([]byte, error) {");
+    Indent(1);
+    WriteLineIndent("return json.Marshal(s)");
+    Indent(-1);
+    WriteLineIndent("}");
 /*
     std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "object";
 
@@ -5628,6 +5852,24 @@ std::string GeneratorGo::ConvertEnumConstant(const std::string& name, const std:
     return result;
 }
 
+std::string GeneratorGo::ConvertBaseName(const std::string& type)
+{
+    if (IsGoType(type))
+        return type;
+
+    std::string ns = "";
+    std::string t = type;
+
+    size_t pos = type.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        ns.assign(type, 0, pos + 1);
+        t.assign(type, pos + 1, type.size() - pos);
+    }
+
+    return ConvertCase(t);
+}
+
 std::string GeneratorGo::ConvertKeyName(const std::string& type)
 {
     if (IsGoType(type))
@@ -5661,11 +5903,11 @@ std::string GeneratorGo::ConvertTypeName(const std::string& type, bool optional)
     else if (type == "double")
         return opt + "float64";
     else if (type == "decimal")
-        return opt + "decimal.Decimal";
+        return opt + "fbe.Decimal";
     else if (type == "timestamp")
-        return opt + "time.Time";
+        return opt + "fbe.Timestamp";
     else if (type == "uuid")
-        return opt + "uuid.UUID";
+        return opt + "fbe.UUID";
 
     std::string ns = "";
     std::string t = type;

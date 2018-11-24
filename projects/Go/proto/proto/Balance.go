@@ -5,7 +5,6 @@
 
 package proto
 
-import "strconv"
 import "strings"
 import "encoding/json"
 import "../fbe"
@@ -13,8 +12,47 @@ import "../fbe"
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 
+// Balance key
+type BalanceKey struct {
+    Currency string
+}
+
+// Convert Balance flags key to string
+func (k BalanceKey) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
+
 // Balance struct
 type Balance struct {
     Currency string
     Amount float64
+}
+
+// Create a new Balance struct from JSON
+func NewBalanceFromJSON(buffer []byte) (*Balance, error) {
+    var result Balance
+    err := json.Unmarshal(buffer, &result)
+    if err != nil {
+        return nil, err
+    }
+    return &result, nil
+}
+
+// Get the struct key
+func (s Balance) Key() BalanceKey {
+    return BalanceKey{
+        Currency: s.Currency,
+    }
+}
+
+// Convert struct to string
+func (s Balance) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
+
+// Convert struct to JSON
+func (s Balance) JSON() ([]byte, error) {
+    return json.Marshal(s)
 }

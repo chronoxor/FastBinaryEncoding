@@ -710,6 +710,10 @@ module FBE
       @_buffer.buffer.slice(@_buffer.offset + offset, 8).unpack('E')[0]
     end
 
+    def read_bytes(offset, size)
+      @_buffer.buffer.slice(@_buffer.offset + offset, size)
+    end
+
     def read_timestamp(offset)
       nanoseconds = read_uint64(offset)
       Time.at(nanoseconds / 1000000000, (nanoseconds % 1000000000) / 1000.0)
@@ -717,10 +721,6 @@ module FBE
 
     def read_uuid(offset)
       UUIDTools::UUID.parse_raw(@_buffer.buffer.slice(@_buffer.offset + offset, 16))
-    end
-
-    def read_bytes(offset, size)
-      @_buffer.buffer.slice(@_buffer.offset + offset, size)
     end
 
     def write_bool(offset, value)
@@ -779,6 +779,14 @@ module FBE
       @_buffer.buffer[@_buffer.offset + offset, 8] = [value].pack('E')
     end
 
+    def write_bytes(offset, buffer)
+      @_buffer.buffer[@_buffer.offset + offset, buffer.length] = buffer
+    end
+
+    def write_count(offset, value, value_count)
+      (0...value_count).each { |i| @_buffer.buffer[@_buffer.offset + offset + i] = value.chr }
+    end
+
     def write_timestamp(offset, value)
       nanoseconds = value.to_i * 1000000000 + value.nsec
       write_uint64(offset, nanoseconds)
@@ -786,14 +794,6 @@ module FBE
 
     def write_uuid(offset, value)
       @_buffer.buffer[@_buffer.offset + offset, 16] = value.raw
-    end
-
-    def write_bytes(offset, buffer)
-      @_buffer.buffer[@_buffer.offset + offset, buffer.length] = buffer
-    end
-
-    def write_count(offset, value, value_count)
-      (0...value_count).each { |i| @_buffer.buffer[@_buffer.offset + offset + i] = value.chr }
     end
   end
 

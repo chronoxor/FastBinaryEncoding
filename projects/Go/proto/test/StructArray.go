@@ -5,12 +5,25 @@
 
 package test
 
+import "strconv"
+import "strings"
+import "encoding/json"
 import "../fbe"
 import "../proto"
 
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 var _ = proto.Version
+
+// StructArray key
+type StructArrayKey struct {
+}
+
+// Convert StructArray flags key to string
+func (k StructArrayKey) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
 
 // StructArray struct
 type StructArray struct {
@@ -24,4 +37,31 @@ type StructArray struct {
     F8 [2]*FlagsSimple
     F9 [2]StructSimple
     F10 [2]*StructSimple
+}
+
+// Create a new StructArray struct from JSON
+func NewStructArrayFromJSON(buffer []byte) (*StructArray, error) {
+    var result StructArray
+    err := json.Unmarshal(buffer, &result)
+    if err != nil {
+        return nil, err
+    }
+    return &result, nil
+}
+
+// Get the struct key
+func (s StructArray) Key() StructArrayKey {
+    return StructArrayKey{
+    }
+}
+
+// Convert struct to string
+func (s StructArray) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
+
+// Convert struct to JSON
+func (s StructArray) JSON() ([]byte, error) {
+    return json.Marshal(s)
 }

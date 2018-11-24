@@ -6,7 +6,6 @@
 package fbe
 
 import "errors"
-import "github.com/google/uuid"
 
 // Fast Binary Encoding UUID final model class
 type FinalModelUUID struct {
@@ -15,7 +14,7 @@ type FinalModelUUID struct {
 }
 
 // Get the allocation size
-func (fm FinalModelUUID) FBEAllocationSize(value uuid.UUID) int { return fm.FBESize() }
+func (fm FinalModelUUID) FBEAllocationSize(value UUID) int { return fm.FBESize() }
 
 // Get the final size
 func (fm FinalModelUUID) FBESize() int { return 16 }
@@ -45,16 +44,16 @@ func (fm FinalModelUUID) Verify() (bool, int) {
 }
 
 // Get the UUID value
-func (fm FinalModelUUID) Get() (uuid.UUID, int, error) {
+func (fm FinalModelUUID) Get() (UUID, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return uuid.Nil, 0, errors.New("model is broken")
+        return UUIDNil(), 0, errors.New("model is broken")
     }
 
     return ReadUUID(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), fm.FBESize(), nil
 }
 
 // Set the UUID value
-func (fm *FinalModelUUID) Set(value uuid.UUID) (int, error) {
+func (fm *FinalModelUUID) Set(value UUID) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0, errors.New("model is broken")
     }

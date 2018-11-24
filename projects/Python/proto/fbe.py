@@ -398,11 +398,11 @@ class FieldModelBase(object):
     def read_double(self, offset):
         return struct.unpack_from("<d", self._buffer.buffer, self._buffer.offset + offset)[0]
 
-    def read_uuid(self, offset):
-        return uuid.UUID(int=((self.read_uint64_be(offset) << 64) | self.read_uint64_be(offset + 8)))
-
     def read_bytes(self, offset, size):
         return self._buffer.buffer[self._buffer.offset + offset:self._buffer.offset + offset + size]
+
+    def read_uuid(self, offset):
+        return uuid.UUID(int=((self.read_uint64_be(offset) << 64) | self.read_uint64_be(offset + 8)))
 
     def write_bool(self, offset, value):
         struct.pack_into("<?", self._buffer.buffer, self._buffer.offset + offset, value)
@@ -446,15 +446,15 @@ class FieldModelBase(object):
     def write_double(self, offset, value):
         struct.pack_into("<d", self._buffer.buffer, self._buffer.offset + offset, value)
 
-    def write_uuid(self, offset, value):
-        self._buffer.buffer[self._buffer.offset + offset:self._buffer.offset + offset + 16] = value.bytes
-
     def write_bytes(self, offset, buffer):
         self._buffer.buffer[self._buffer.offset + offset:self._buffer.offset + offset + len(buffer)] = buffer
 
     def write_count(self, offset, value, value_count):
         for i in range(value_count):
             self._buffer.buffer[self._buffer.offset + offset + i] = value
+
+    def write_uuid(self, offset, value):
+        self._buffer.buffer[self._buffer.offset + offset:self._buffer.offset + offset + 16] = value.bytes
 
 
 # Fast Binary Encoding field model class

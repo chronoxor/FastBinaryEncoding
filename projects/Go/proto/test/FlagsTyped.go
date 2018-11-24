@@ -144,9 +144,9 @@ func (f FlagsTyped) MarshalJSON() ([]byte, error) {
 }
 
 // Convert JSON to flags
-func (f *FlagsTyped) UnmarshalJSON(b []byte) error {
+func (f *FlagsTyped) UnmarshalJSON(buffer []byte) error {
     var result uint64
-    err := json.Unmarshal(b, &result)
+    err := json.Unmarshal(buffer, &result)
     if err != nil {
         return err
     }

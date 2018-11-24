@@ -15,6 +15,16 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
+// StructVector key
+type StructVectorKey struct {
+}
+
+// Convert StructVector flags key to string
+func (k StructVectorKey) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
+
 // StructVector struct
 type StructVector struct {
     F1 []byte
@@ -27,4 +37,31 @@ type StructVector struct {
     F8 []*FlagsSimple
     F9 []StructSimple
     F10 []*StructSimple
+}
+
+// Create a new StructVector struct from JSON
+func NewStructVectorFromJSON(buffer []byte) (*StructVector, error) {
+    var result StructVector
+    err := json.Unmarshal(buffer, &result)
+    if err != nil {
+        return nil, err
+    }
+    return &result, nil
+}
+
+// Get the struct key
+func (s StructVector) Key() StructVectorKey {
+    return StructVectorKey{
+    }
+}
+
+// Convert struct to string
+func (s StructVector) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
+
+// Convert struct to JSON
+func (s StructVector) JSON() ([]byte, error) {
+    return json.Marshal(s)
 }

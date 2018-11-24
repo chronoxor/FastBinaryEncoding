@@ -15,6 +15,17 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
+// StructSimple key
+type StructSimpleKey struct {
+    Uid int32
+}
+
+// Convert StructSimple flags key to string
+func (k StructSimpleKey) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
+
 // StructSimple struct
 type StructSimple struct {
     Uid int32
@@ -46,20 +57,48 @@ type StructSimple struct {
     F26 float32
     F27 float64
     F28 float64
-    F29 decimal.Decimal
-    F30 decimal.Decimal
+    F29 fbe.Decimal
+    F30 fbe.Decimal
     F31 string
     F32 string
-    F33 time.Time
-    F34 time.Time
-    F35 time.Time
-    F36 uuid.UUID
-    F37 uuid.UUID
-    F38 uuid.UUID
+    F33 fbe.Timestamp
+    F34 fbe.Timestamp
+    F35 fbe.Timestamp
+    F36 fbe.UUID
+    F37 fbe.UUID
+    F38 fbe.UUID
     F39 proto.OrderSide
     F40 proto.OrderType
     F41 proto.Order
     F42 proto.Balance
     F43 proto.State
     F44 proto.Account
+}
+
+// Create a new StructSimple struct from JSON
+func NewStructSimpleFromJSON(buffer []byte) (*StructSimple, error) {
+    var result StructSimple
+    err := json.Unmarshal(buffer, &result)
+    if err != nil {
+        return nil, err
+    }
+    return &result, nil
+}
+
+// Get the struct key
+func (s StructSimple) Key() StructSimpleKey {
+    return StructSimpleKey{
+        Uid: s.Uid,
+    }
+}
+
+// Convert struct to string
+func (s StructSimple) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
+
+// Convert struct to JSON
+func (s StructSimple) JSON() ([]byte, error) {
+    return json.Marshal(s)
 }

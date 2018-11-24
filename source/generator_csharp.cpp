@@ -389,14 +389,6 @@ void GeneratorCSharp::GenerateFBEBuffer()
             return bits.DecimalData;
         }
 
-        public static Guid ReadUUID(byte[] buffer, long offset)
-        {
-            var bits = default(GuidUnion);
-            bits.ULongHigh = ReadUInt64(buffer, offset);
-            bits.ULongLow = ReadUInt64(buffer, offset + 8);
-            return bits.GuidData;
-        }
-
         public static byte[] ReadBytes(byte[] buffer, long offset, long size)
         {
             byte[] result = new byte[size];
@@ -407,6 +399,14 @@ void GeneratorCSharp::GenerateFBEBuffer()
         public static string ReadString(byte[] buffer, long offset, long size)
         {
             return Encoding.UTF8.GetString(buffer, (int)offset, (int)size);
+        }
+
+        public static Guid ReadUUID(byte[] buffer, long offset)
+        {
+            var bits = default(GuidUnion);
+            bits.ULongHigh = ReadUInt64(buffer, offset);
+            bits.ULongLow = ReadUInt64(buffer, offset + 8);
+            return bits.GuidData;
         }
 
         public static void Write(byte[] buffer, long offset, bool value)
@@ -500,14 +500,6 @@ void GeneratorCSharp::GenerateFBEBuffer()
             Write(buffer, offset + 12, bits.UIntFlags);
         }
 
-        public static void Write(byte[] buffer, long offset, Guid value)
-        {
-            var bits = default(GuidUnion);
-            bits.GuidData = value;
-            Write(buffer, offset, bits.ULongHigh);
-            Write(buffer, offset + 8, bits.ULongLow);
-        }
-
         public static void Write(byte[] buffer, long offset, byte[] value)
         {
             Array.Copy(value, 0, buffer, offset, value.Length);
@@ -527,6 +519,14 @@ void GeneratorCSharp::GenerateFBEBuffer()
         public static long Write(byte[] buffer, long offset, string value)
         {
             return Encoding.UTF8.GetBytes(value, 0, value.Length, buffer, (int)offset);
+        }
+
+        public static void Write(byte[] buffer, long offset, Guid value)
+        {
+            var bits = default(GuidUnion);
+            bits.GuidData = value;
+            Write(buffer, offset, bits.ULongHigh);
+            Write(buffer, offset + 8, bits.ULongLow);
         }
 
         #endregion
@@ -706,9 +706,9 @@ void GeneratorCSharp::GenerateFBEFieldModelBase()
         protected float ReadFloat(long offset) { return Buffer.ReadFloat(_buffer.Data, _buffer.Offset + offset); }
         protected double ReadDouble(long offset) { return Buffer.ReadDouble(_buffer.Data, _buffer.Offset + offset); }
         protected decimal ReadDecimal(long offset) { return Buffer.ReadDecimal(_buffer.Data, _buffer.Offset + offset); }
-        protected Guid ReadUUID(long offset) { return Buffer.ReadUUID(_buffer.Data, _buffer.Offset + offset); }
         protected byte[] ReadBytes(long offset, long size) { return Buffer.ReadBytes(_buffer.Data, _buffer.Offset + offset, size); }
         protected string ReadString(long offset, long size) { return Buffer.ReadString(_buffer.Data, _buffer.Offset + offset, size); }
+        protected Guid ReadUUID(long offset) { return Buffer.ReadUUID(_buffer.Data, _buffer.Offset + offset); }
         protected void Write(long offset, bool value) { Buffer.Write(_buffer.Data, _buffer.Offset + offset, value); }
         protected void Write(long offset, sbyte value) { Buffer.Write(_buffer.Data, _buffer.Offset + offset, value); }
         protected void Write(long offset, byte value) { Buffer.Write(_buffer.Data, _buffer.Offset + offset, value); }
@@ -721,11 +721,11 @@ void GeneratorCSharp::GenerateFBEFieldModelBase()
         protected void Write(long offset, float value) { Buffer.Write(_buffer.Data, _buffer.Offset + offset, value); }
         protected void Write(long offset, double value) { Buffer.Write(_buffer.Data, _buffer.Offset + offset, value); }
         protected void Write(long offset, decimal value) { Buffer.Write(_buffer.Data, _buffer.Offset + offset, value); }
-        protected void Write(long offset, Guid value) { Buffer.Write(_buffer.Data, _buffer.Offset + offset, value); }
         protected void Write(long offset, byte[] value) { Buffer.Write(_buffer.Data, _buffer.Offset + offset, value); }
         protected void Write(long offset, byte[] value, long valueOffset, long valueSize) { Buffer.Write(_buffer.Data, _buffer.Offset + offset, value, valueOffset, valueSize); }
         protected void Write(long offset, byte value, long valueCount) { Buffer.Write(_buffer.Data, _buffer.Offset + offset, value, valueCount); }
         protected long Write(long offset, string value) { return Buffer.Write(_buffer.Data, _buffer.Offset + offset, value); }
+        protected void Write(long offset, Guid value) { Buffer.Write(_buffer.Data, _buffer.Offset + offset, value); }
 
         #endregion
     }

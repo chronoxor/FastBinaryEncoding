@@ -72,9 +72,9 @@ func (e EnumWChar) MarshalJSON() ([]byte, error) {
 }
 
 // Convert JSON to enum
-func (e *EnumWChar) UnmarshalJSON(b []byte) error {
+func (e *EnumWChar) UnmarshalJSON(buffer []byte) error {
     var result uint32
-    err := json.Unmarshal(b, &result)
+    err := json.Unmarshal(buffer, &result)
     if err != nil {
         return err
     }

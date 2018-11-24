@@ -16,7 +16,7 @@ type FinalModelDecimal struct {
 }
 
 // Get the allocation size
-func (fm FinalModelDecimal) FBEAllocationSize(value decimal.Decimal) int { return fm.FBESize() }
+func (fm FinalModelDecimal) FBEAllocationSize(value Decimal) int { return fm.FBESize() }
 
 // Get the final size
 func (fm FinalModelDecimal) FBESize() int { return 16 }
@@ -46,9 +46,9 @@ func (fm FinalModelDecimal) Verify() (bool, int) {
 }
 
 // Get the decimal value
-func (fm FinalModelDecimal) Get() (decimal.Decimal, int, error) {
+func (fm FinalModelDecimal) Get() (Decimal, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return decimal.Zero, 0, errors.New("model is broken")
+        return DecimalZero(), 0, errors.New("model is broken")
     }
 
     // Read decimal parts
@@ -68,11 +68,11 @@ func (fm FinalModelDecimal) Get() (decimal.Decimal, int, error) {
         result = result.Neg()
     }
 
-    return result, fm.FBESize(), nil
+    return Decimal{result}, fm.FBESize(), nil
 }
 
 // Set the decimal value
-func (fm *FinalModelDecimal) Set(value decimal.Decimal) (int, error) {
+func (fm *FinalModelDecimal) Set(value Decimal) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0, errors.New("model is broken")
     }

@@ -6,7 +6,6 @@
 package fbe
 
 import "errors"
-import "github.com/google/uuid"
 
 // Fast Binary Encoding UUID field model class
 type FieldModelUUID struct {
@@ -38,12 +37,12 @@ func NewFieldModelUUID(buffer *Buffer, offset int) *FieldModelUUID {
 func (fm FieldModelUUID) Verify() bool { return true }
 
 // Get the UUID value
-func (fm FieldModelUUID) Get() (uuid.UUID, error) {
-    return fm.GetDefault(uuid.Nil)
+func (fm FieldModelUUID) Get() (UUID, error) {
+    return fm.GetDefault(UUIDNil())
 }
 
 // Get the UUID value with provided default value
-func (fm FieldModelUUID) GetDefault(defaults uuid.UUID) (uuid.UUID, error) {
+func (fm FieldModelUUID) GetDefault(defaults UUID) (UUID, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }
@@ -52,7 +51,7 @@ func (fm FieldModelUUID) GetDefault(defaults uuid.UUID) (uuid.UUID, error) {
 }
 
 // Set the UUID value
-func (fm *FieldModelUUID) Set(value uuid.UUID) error {
+func (fm *FieldModelUUID) Set(value UUID) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }

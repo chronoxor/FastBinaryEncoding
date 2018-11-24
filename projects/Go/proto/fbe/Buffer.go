@@ -6,8 +6,6 @@
 package fbe
 
 import "math"
-import "time"
-import "github.com/google/uuid"
 
 // Fast Binary Encoding buffer based on dynamic byte array
 type Buffer struct {
@@ -156,38 +154,47 @@ func (b *Buffer) Reset() {
 
 // Buffer I/O methods
 
+// Read bool from the buffer
 func ReadBool(buffer []byte, offset int) bool {
     return buffer[offset] != 0
 }
 
+// Read byte from the buffer
 func ReadByte(buffer []byte, offset int) byte {
     return buffer[offset]
 }
 
+// Read single byte character from the buffer
 func ReadChar(buffer []byte, offset int) rune {
     return rune(ReadUInt8(buffer, offset))
 }
 
+// Read four bytes character from the buffer
 func ReadWChar(buffer []byte, offset int) rune {
     return rune(ReadUInt32(buffer, offset))
 }
 
+// Read signed 8-bits integer from the buffer
 func ReadInt8(buffer []byte, offset int) int8 {
     return int8(buffer[offset])
 }
 
+// Read unsigned 8-bits integer from the buffer
 func ReadUInt8(buffer []byte, offset int) uint8 {
     return uint8(buffer[offset])
 }
 
+// Read signed 16-bits integer from the buffer
 func ReadInt16(buffer []byte, offset int) int16 {
     return (int16(buffer[offset + 0]) << 0) | (int16(buffer[offset + 1]) << 8)
 }
 
+// Read unsigned 16-bits integer from the buffer
 func ReadUInt16(buffer []byte, offset int) uint16 {
     return (uint16(buffer[offset + 0]) << 0) | (uint16(buffer[offset + 1]) << 8)
 }
 
+// Read signed 32-bits integer from the buffer
 func ReadInt32(buffer []byte, offset int) int32 {
     return (int32(buffer[offset + 0]) <<  0) |
            (int32(buffer[offset + 1]) <<  8) |
@@ -195,6 +202,7 @@ func ReadInt32(buffer []byte, offset int) int32 {
            (int32(buffer[offset + 3]) << 24)
 }
 
+// Read unsigned 32-bits integer from the buffer
 func ReadUInt32(buffer []byte, offset int) uint32 {
     return (uint32(buffer[offset + 0]) <<  0) |
            (uint32(buffer[offset + 1]) <<  8) |
@@ -202,6 +210,7 @@ func ReadUInt32(buffer []byte, offset int) uint32 {
            (uint32(buffer[offset + 3]) << 24)
 }
 
+// Read signed 64-bits integer from the buffer
 func ReadInt64(buffer []byte, offset int) int64 {
     return (int64(buffer[offset + 0]) <<  0) |
            (int64(buffer[offset + 1]) <<  8) |
@@ -213,6 +222,7 @@ func ReadInt64(buffer []byte, offset int) int64 {
            (int64(buffer[offset + 7]) << 56)
 }
 
+// Read unsigned 64-bits integer from the buffer
 func ReadUInt64(buffer []byte, offset int) uint64 {
     return (uint64(buffer[offset + 0]) <<  0) |
            (uint64(buffer[offset + 1]) <<  8) |
@@ -224,35 +234,41 @@ func ReadUInt64(buffer []byte, offset int) uint64 {
            (uint64(buffer[offset + 7]) << 56)
 }
 
+// Read float from the buffer
 func ReadFloat(buffer []byte, offset int) float32 {
     bits := ReadUInt32(buffer, offset)
     return math.Float32frombits(bits)
 }
 
+// Read double from the buffer
 func ReadDouble(buffer []byte, offset int) float64 {
     bits := ReadUInt64(buffer, offset)
     return math.Float64frombits(bits)
 }
 
-func ReadTimestamp(buffer []byte, offset int) time.Time {
-    nanoseconds := ReadUInt64(buffer, offset)
-    return time.Unix(int64(nanoseconds / 1000000000), int64(nanoseconds % 1000000000))
-}
-
-func ReadUUID(buffer []byte, offset int) uuid.UUID {
-    bytes := ReadBytes(buffer, offset, 16)
-    result, _ := uuid.FromBytes(bytes)
-    return result
-}
-
+// Read bytes from the buffer
 func ReadBytes(buffer []byte, offset int, size int) []byte {
     return buffer[offset:offset + size]
 }
 
+// Read string from the buffer
 func ReadString(buffer []byte, offset int, size int) string {
     return string(buffer[offset:offset + size])
 }
 
+// Read timestamp from the buffer
+func ReadTimestamp(buffer []byte, offset int) Timestamp {
+    nanoseconds := ReadUInt64(buffer, offset)
+    return TimestampFromNanoseconds(nanoseconds)
+}
+
+// Read UUID from the buffer
+func ReadUUID(buffer []byte, offset int) UUID {
+    bytes := ReadBytes(buffer, offset, 16)
+    return UUIDFromBytes(bytes)
+}
+
+// Write bool into the buffer
 func WriteBool(buffer []byte, offset int, value bool) {
     if value {
         buffer[offset] = 1
@@ -261,36 +277,44 @@ func WriteBool(buffer []byte, offset int, value bool) {
     }
 }
 
+// Write byte into the buffer
 func WriteByte(buffer []byte, offset int, value byte) {
     buffer[offset] = value
 }
 
+// Write single byte character into the buffer
 func WriteChar(buffer []byte, offset int, value rune) {
     WriteUInt8(buffer, offset, uint8(value))
 }
 
+// Write four bytes character into the buffer
 func WriteWChar(buffer []byte, offset int, value rune) {
     WriteUInt32(buffer, offset, uint32(value))
 }
 
+// Write signed 8-bits integer into the buffer
 func WriteInt8(buffer []byte, offset int, value int8) {
     buffer[offset] = byte(value)
 }
 
+// Write unsigned 8-bits integer into the buffer
 func WriteUInt8(buffer []byte, offset int, value uint8) {
     buffer[offset] = byte(value)
 }
 
+// Write signed 16-bits integer into the buffer
 func WriteInt16(buffer []byte, offset int, value int16) {
     buffer[offset + 0] = byte(value >> 0)
     buffer[offset + 1] = byte(value >> 8)
 }
 
+// Write unsigned 16-bits integer into the buffer
 func WriteUInt16(buffer []byte, offset int, value uint16) {
     buffer[offset + 0] = byte(value >> 0)
     buffer[offset + 1] = byte(value >> 8)
 }
 
+// Write signed 32-bits integer into the buffer
 func WriteInt32(buffer []byte, offset int, value int32) {
     buffer[offset + 0] = byte(value >>  0)
     buffer[offset + 1] = byte(value >>  8)
@@ -298,6 +322,7 @@ func WriteInt32(buffer []byte, offset int, value int32) {
     buffer[offset + 3] = byte(value >> 24)
 }
 
+// Write unsigned 32-bits integer into the buffer
 func WriteUInt32(buffer []byte, offset int, value uint32) {
     buffer[offset + 0] = byte(value >>  0)
     buffer[offset + 1] = byte(value >>  8)
@@ -305,6 +330,7 @@ func WriteUInt32(buffer []byte, offset int, value uint32) {
     buffer[offset + 3] = byte(value >> 24)
 }
 
+// Write signed 64-bits integer into the buffer
 func WriteInt64(buffer []byte, offset int, value int64) {
     buffer[offset + 0] = byte(value >>  0)
     buffer[offset + 1] = byte(value >>  8)
@@ -316,6 +342,7 @@ func WriteInt64(buffer []byte, offset int, value int64) {
     buffer[offset + 7] = byte(value >> 56)
 }
 
+// Write unsigned 64-bits integer into the buffer
 func WriteUInt64(buffer []byte, offset int, value uint64) {
     buffer[offset + 0] = byte(value >>  0)
     buffer[offset + 1] = byte(value >>  8)
@@ -327,38 +354,46 @@ func WriteUInt64(buffer []byte, offset int, value uint64) {
     buffer[offset + 7] = byte(value >> 56)
 }
 
+// Write float into the buffer
 func WriteFloat(buffer []byte, offset int, value float32) {
     WriteUInt32(buffer, offset, math.Float32bits(value))
 }
 
+// Write double into the buffer
 func WriteDouble(buffer []byte, offset int, value float64) {
     WriteUInt64(buffer, offset, math.Float64bits(value))
 }
 
-func WriteTimestamp(buffer []byte, offset int, value time.Time) {
-    nanoseconds := value.UnixNano()
-    WriteUInt64(buffer, offset, uint64(nanoseconds))
-}
-
-func WriteUUID(buffer []byte, offset int, value uuid.UUID) {
-    bytes, _ := value.MarshalBinary()
-    WriteBytes(buffer, offset, bytes)
-}
-
+// Write bytes into the buffer
 func WriteBytes(buffer []byte, offset int, value []byte) {
     copy(buffer[offset:offset + len(value)], value)
 }
 
+// Write slice into the buffer
 func WriteSlice(buffer []byte, offset int, value []byte, valueOffset int, valueSize int) {
     copy(buffer[offset:offset + len(value)], value[valueOffset:valueOffset + valueSize])
 }
 
+// Write count of single byte into the buffer
 func WriteCount(buffer []byte, offset int, value byte, valueCount int) {
     for i := 0; i < valueCount; i++ {
         buffer[offset + i] = value
     }
 }
 
+// Write string into the buffer
 func WriteString(buffer []byte, offset int, value string) {
     WriteBytes(buffer, offset, []byte(value))
+}
+
+// Write timestamp into the buffer
+func WriteTimestamp(buffer []byte, offset int, value Timestamp) {
+    nanoseconds := uint64(value.UnixNano())
+    WriteUInt64(buffer, offset, nanoseconds)
+}
+
+// Write UUID into the buffer
+func WriteUUID(buffer []byte, offset int, value UUID) {
+    bytes, _ := value.MarshalBinary()
+    WriteBytes(buffer, offset, bytes)
 }

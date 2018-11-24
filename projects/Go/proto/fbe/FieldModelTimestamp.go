@@ -6,7 +6,6 @@
 package fbe
 
 import "errors"
-import "time"
 
 // Fast Binary Encoding timestamp field model class
 type FieldModelTimestamp struct {
@@ -38,12 +37,12 @@ func NewFieldModelTimestamp(buffer *Buffer, offset int) *FieldModelTimestamp {
 func (fm FieldModelTimestamp) Verify() bool { return true }
 
 // Get the timestamp value
-func (fm FieldModelTimestamp) Get() (time.Time, error) {
-    return fm.GetDefault(time.Unix(0, 0))
+func (fm FieldModelTimestamp) Get() (Timestamp, error) {
+    return fm.GetDefault(TimestampEpoch())
 }
 
 // Get the timestamp value with provided default value
-func (fm FieldModelTimestamp) GetDefault(defaults time.Time) (time.Time, error) {
+func (fm FieldModelTimestamp) GetDefault(defaults Timestamp) (Timestamp, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }
@@ -52,7 +51,7 @@ func (fm FieldModelTimestamp) GetDefault(defaults time.Time) (time.Time, error) 
 }
 
 // Set the timestamp value
-func (fm *FieldModelTimestamp) Set(value time.Time) error {
+func (fm *FieldModelTimestamp) Set(value Timestamp) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }

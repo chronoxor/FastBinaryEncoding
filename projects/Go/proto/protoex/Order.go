@@ -15,6 +15,17 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
+// Order key
+type OrderKey struct {
+    Uid int32
+}
+
+// Convert Order flags key to string
+func (k OrderKey) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
+
 // Order struct
 type Order struct {
     Uid int32
@@ -25,4 +36,32 @@ type Order struct {
     Volume float64
     Tp float64
     Sl float64
+}
+
+// Create a new Order struct from JSON
+func NewOrderFromJSON(buffer []byte) (*Order, error) {
+    var result Order
+    err := json.Unmarshal(buffer, &result)
+    if err != nil {
+        return nil, err
+    }
+    return &result, nil
+}
+
+// Get the struct key
+func (s Order) Key() OrderKey {
+    return OrderKey{
+        Uid: s.Uid,
+    }
+}
+
+// Convert struct to string
+func (s Order) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
+
+// Convert struct to JSON
+func (s Order) JSON() ([]byte, error) {
+    return json.Marshal(s)
 }

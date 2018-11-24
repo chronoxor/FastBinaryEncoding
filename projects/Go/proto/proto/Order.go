@@ -5,20 +5,88 @@
 
 package proto
 
+import (
+    "encoding/json"
+    "github.com/google/uuid"
+    "time"
+)
 import "strconv"
 import "strings"
-import "encoding/json"
 import "../fbe"
 
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 
+// Order key
+type OrderKey struct {
+    Uid int
+}
+
+// Get the struct key
+func (s Order) Key() OrderKey {
+    return OrderKey{Uid: s.Uid}
+}
+
+// Convert struct to string
+func (k OrderKey) String() string {
+    var sb strings.Builder
+    sb.WriteString(strconv.FormatInt(int64(k.Uid), 10))
+    return sb.String()
+}
+
 // Order struct
 type Order struct {
-    Uid int32
-    Symbol string
-    Side OrderSide
-    Type OrderType
-    Price float64
-    Volume float64
+    Uid int `json:"uid"`
+    Symbol string `json:"symbol"`
+    Side OrderSide `json:"side"`
+    Type OrderType `json:"type"`
+    Price float64 `json:"price"`
+    Volume float64 `json:"volume"`
+    Uuid uuid.UUID `json:"uuid"`
+    Timestamp fbe.Timestamp `json:"timestamp"`
+    Dec fbe.Decimal `json:"dec"`
+}
+
+// Create a new Order struct
+func NewOrder() *Order {
+    return &Order{
+        Uid: 0,
+        Symbol: "",
+        Side: *NewOrderSide(),
+        Type: *NewOrderType(),
+        Price: 0.0,
+        Volume: 0.0,
+        Uuid: uuid.Nil,
+        Timestamp: fbe.Timestamp{Time: time.Now()},
+        Dec: fbe.DecimalFromString("123456789.12345678912345"),
+    }
+}
+
+// Create a new Order struct from JSON
+func NewOrderFromJSON(b []byte) (*Order, error) {
+    var result Order
+    err := json.Unmarshal(b, &result)
+    if err != nil {
+        return nil, err
+    }
+    return &result, nil
+}
+
+// Convert struct to string
+func (s Order) String() string {
+    var sb strings.Builder
+    sb.WriteString("Order(")
+    sb.WriteString("uid="); sb.WriteString(strconv.FormatInt(int64(s.Uid), 10))
+    sb.WriteString(",symbol="); sb.WriteString("\""); sb.WriteString(s.Symbol); sb.WriteString("\"")
+    sb.WriteString(",side="); sb.WriteString(s.Side.String())
+    sb.WriteString(",type="); sb.WriteString(s.Type.String())
+    sb.WriteString(",price="); sb.WriteString(strconv.FormatFloat(s.Price, 'f', -1, 64))
+    sb.WriteString(",volume="); sb.WriteString(strconv.FormatFloat(s.Volume, 'f', -1, 64))
+    sb.WriteString(")")
+    return sb.String()
+}
+
+// Convert struct to JSON
+func (s Order) JSON() ([]byte, error) {
+    return json.Marshal(s)
 }

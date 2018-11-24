@@ -13,6 +13,16 @@ import "../fbe"
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 
+// Enums key
+type EnumsKey struct {
+}
+
+// Convert Enums flags key to string
+func (k EnumsKey) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
+
 // Enums struct
 type Enums struct {
     Byte0 EnumByte
@@ -81,4 +91,31 @@ type Enums struct {
     Uint64b3 EnumUInt64
     Uint64b4 EnumUInt64
     Uint64b5 EnumUInt64
+}
+
+// Create a new Enums struct from JSON
+func NewEnumsFromJSON(buffer []byte) (*Enums, error) {
+    var result Enums
+    err := json.Unmarshal(buffer, &result)
+    if err != nil {
+        return nil, err
+    }
+    return &result, nil
+}
+
+// Get the struct key
+func (s Enums) Key() EnumsKey {
+    return EnumsKey{
+    }
+}
+
+// Convert struct to string
+func (s Enums) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
+
+// Convert struct to JSON
+func (s Enums) JSON() ([]byte, error) {
+    return json.Marshal(s)
 }

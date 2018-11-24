@@ -5,17 +5,26 @@
 
 package test
 
-import (
-    "github.com/google/uuid"
-    "github.com/shopspring/decimal"
-    "time"
-)
+import "strconv"
+import "strings"
+import "encoding/json"
 import "../fbe"
 import "../proto"
 
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 var _ = proto.Version
+
+// StructOptional key
+type StructOptionalKey struct {
+    StructSimpleKey
+}
+
+// Convert StructOptional flags key to string
+func (k StructOptionalKey) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
 
 // StructOptional struct
 type StructOptional struct {
@@ -62,18 +71,18 @@ type StructOptional struct {
     F139 *float64
     F140 *float64
     F141 *float64
-    F142 *decimal.Decimal
-    F143 *decimal.Decimal
-    F144 *decimal.Decimal
+    F142 *fbe.Decimal
+    F143 *fbe.Decimal
+    F144 *fbe.Decimal
     F145 *string
     F146 *string
     F147 *string
-    F148 *time.Time
-    F149 *time.Time
-    F150 *time.Time
-    F151 *uuid.UUID
-    F152 *uuid.UUID
-    F153 *uuid.UUID
+    F148 *fbe.Timestamp
+    F149 *fbe.Timestamp
+    F150 *fbe.Timestamp
+    F151 *fbe.UUID
+    F152 *fbe.UUID
+    F153 *fbe.UUID
     F154 *proto.OrderSide
     F155 *proto.OrderSide
     F156 *proto.OrderType
@@ -86,4 +95,32 @@ type StructOptional struct {
     F163 *proto.State
     F164 *proto.Account
     F165 *proto.Account
+}
+
+// Create a new StructOptional struct from JSON
+func NewStructOptionalFromJSON(buffer []byte) (*StructOptional, error) {
+    var result StructOptional
+    err := json.Unmarshal(buffer, &result)
+    if err != nil {
+        return nil, err
+    }
+    return &result, nil
+}
+
+// Get the struct key
+func (s StructOptional) Key() StructOptionalKey {
+    return StructOptionalKey{
+        s.StructSimple.Key(),
+    }
+}
+
+// Convert struct to string
+func (s StructOptional) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
+
+// Convert struct to JSON
+func (s StructOptional) JSON() ([]byte, error) {
+    return json.Marshal(s)
 }

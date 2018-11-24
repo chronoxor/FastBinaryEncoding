@@ -253,11 +253,6 @@ class Buffer
             return java.lang.Double.longBitsToDouble(bits)
         }
 
-        fun readUUID(buffer: ByteArray, offset: Long): UUID
-        {
-            return UUID(readInt64BE(buffer, offset), readInt64BE(buffer, offset + 8))
-        }
-
         fun readBytes(buffer: ByteArray, offset: Long, size: Long): ByteArray
         {
             val result = ByteArray(size.toInt())
@@ -268,6 +263,11 @@ class Buffer
         fun readString(buffer: ByteArray, offset: Long, size: Long): String
         {
             return kotlin.text.String(buffer, offset.toInt(), size.toInt(), StandardCharsets.UTF_8)
+        }
+
+        fun readUUID(buffer: ByteArray, offset: Long): UUID
+        {
+            return UUID(readInt64BE(buffer, offset), readInt64BE(buffer, offset + 8))
         }
 
         fun write(buffer: ByteArray, offset: Long, value: Boolean)
@@ -361,12 +361,6 @@ class Buffer
             write(buffer, offset, bits)
         }
 
-        fun write(buffer: ByteArray, offset: Long, value: UUID)
-        {
-            writeBE(buffer, offset, value.mostSignificantBits)
-            writeBE(buffer, offset + 8, value.leastSignificantBits)
-        }
-
         fun write(buffer: ByteArray, offset: Long, value: ByteArray)
         {
             System.arraycopy(value, 0, buffer, offset.toInt(), value.size)
@@ -381,6 +375,12 @@ class Buffer
         {
             for (i in 0 until valueCount)
                 buffer[(offset + i).toInt()] = value
+        }
+
+        fun write(buffer: ByteArray, offset: Long, value: UUID)
+        {
+            writeBE(buffer, offset, value.mostSignificantBits)
+            writeBE(buffer, offset + 8, value.leastSignificantBits)
         }
     }
 }

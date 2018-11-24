@@ -6,7 +6,6 @@
 package fbe
 
 import "errors"
-import "time"
 
 // Fast Binary Encoding timestamp final model class
 type FinalModelTimestamp struct {
@@ -15,7 +14,7 @@ type FinalModelTimestamp struct {
 }
 
 // Get the allocation size
-func (fm FinalModelTimestamp) FBEAllocationSize(value time.Time) int { return fm.FBESize() }
+func (fm FinalModelTimestamp) FBEAllocationSize(value Timestamp) int { return fm.FBESize() }
 
 // Get the final size
 func (fm FinalModelTimestamp) FBESize() int { return 8 }
@@ -45,16 +44,16 @@ func (fm FinalModelTimestamp) Verify() (bool, int) {
 }
 
 // Get the timestamp value
-func (fm FinalModelTimestamp) Get() (time.Time, int, error) {
+func (fm FinalModelTimestamp) Get() (Timestamp, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return time.Unix(0, 0), 0, errors.New("model is broken")
+        return TimestampEpoch(), 0, errors.New("model is broken")
     }
 
     return ReadTimestamp(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()), fm.FBESize(), nil
 }
 
 // Set the timestamp value
-func (fm *FinalModelTimestamp) Set(value time.Time) (int, error) {
+func (fm *FinalModelTimestamp) Set(value Timestamp) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0, errors.New("model is broken")
     }

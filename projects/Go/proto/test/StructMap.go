@@ -15,6 +15,16 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
+// StructMap key
+type StructMapKey struct {
+}
+
+// Convert StructMap flags key to string
+func (k StructMapKey) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
+
 // StructMap struct
 type StructMap struct {
     F1 map[int32]byte
@@ -27,4 +37,31 @@ type StructMap struct {
     F8 map[int32]*FlagsSimple
     F9 map[int32]StructSimple
     F10 map[int32]*StructSimple
+}
+
+// Create a new StructMap struct from JSON
+func NewStructMapFromJSON(buffer []byte) (*StructMap, error) {
+    var result StructMap
+    err := json.Unmarshal(buffer, &result)
+    if err != nil {
+        return nil, err
+    }
+    return &result, nil
+}
+
+// Get the struct key
+func (s StructMap) Key() StructMapKey {
+    return StructMapKey{
+    }
+}
+
+// Convert struct to string
+func (s StructMap) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
+
+// Convert struct to JSON
+func (s StructMap) JSON() ([]byte, error) {
+    return json.Marshal(s)
 }

@@ -135,9 +135,9 @@ func (f StateEx) MarshalJSON() ([]byte, error) {
 }
 
 // Convert JSON to flags
-func (f *StateEx) UnmarshalJSON(b []byte) error {
+func (f *StateEx) UnmarshalJSON(buffer []byte) error {
     var result byte
-    err := json.Unmarshal(b, &result)
+    err := json.Unmarshal(buffer, &result)
     if err != nil {
         return err
     }

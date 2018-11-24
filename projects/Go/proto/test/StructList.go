@@ -15,6 +15,16 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
+// StructList key
+type StructListKey struct {
+}
+
+// Convert StructList flags key to string
+func (k StructListKey) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
+
 // StructList struct
 type StructList struct {
     F1 []byte
@@ -27,4 +37,31 @@ type StructList struct {
     F8 []*FlagsSimple
     F9 []StructSimple
     F10 []*StructSimple
+}
+
+// Create a new StructList struct from JSON
+func NewStructListFromJSON(buffer []byte) (*StructList, error) {
+    var result StructList
+    err := json.Unmarshal(buffer, &result)
+    if err != nil {
+        return nil, err
+    }
+    return &result, nil
+}
+
+// Get the struct key
+func (s StructList) Key() StructListKey {
+    return StructListKey{
+    }
+}
+
+// Convert struct to string
+func (s StructList) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
+
+// Convert struct to JSON
+func (s StructList) JSON() ([]byte, error) {
+    return json.Marshal(s)
 }

@@ -5,12 +5,26 @@
 
 package test
 
+import "strconv"
+import "strings"
+import "encoding/json"
 import "../fbe"
 import "../proto"
 
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 var _ = proto.Version
+
+// StructNested key
+type StructNestedKey struct {
+    StructOptionalKey
+}
+
+// Convert StructNested flags key to string
+func (k StructNestedKey) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
 
 // StructNested struct
 type StructNested struct {
@@ -27,4 +41,32 @@ type StructNested struct {
     F1009 *StructSimple
     F1010 StructOptional
     F1011 *StructOptional
+}
+
+// Create a new StructNested struct from JSON
+func NewStructNestedFromJSON(buffer []byte) (*StructNested, error) {
+    var result StructNested
+    err := json.Unmarshal(buffer, &result)
+    if err != nil {
+        return nil, err
+    }
+    return &result, nil
+}
+
+// Get the struct key
+func (s StructNested) Key() StructNestedKey {
+    return StructNestedKey{
+        s.StructOptional.Key(),
+    }
+}
+
+// Convert struct to string
+func (s StructNested) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
+
+// Convert struct to JSON
+func (s StructNested) JSON() ([]byte, error) {
+    return json.Marshal(s)
 }

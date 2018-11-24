@@ -108,9 +108,9 @@ func (f FlagsSimple) MarshalJSON() ([]byte, error) {
 }
 
 // Convert JSON to flags
-func (f *FlagsSimple) UnmarshalJSON(b []byte) error {
+func (f *FlagsSimple) UnmarshalJSON(buffer []byte) error {
     var result int32
-    err := json.Unmarshal(b, &result)
+    err := json.Unmarshal(buffer, &result)
     if err != nil {
         return err
     }

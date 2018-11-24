@@ -205,11 +205,6 @@ public class Buffer
         return Double.longBitsToDouble(bits);
     }
 
-    public static UUID readUUID(byte[] buffer, long offset)
-    {
-        return new UUID(readInt64BE(buffer, offset), readInt64BE(buffer, offset + 8));
-    }
-
     public static byte[] readBytes(byte[] buffer, long offset, long size)
     {
         byte[] result = new byte[(int)size];
@@ -220,6 +215,11 @@ public class Buffer
     public static String readString(byte[] buffer, long offset, long size)
     {
         return new String(buffer, (int)offset, (int)size, StandardCharsets.UTF_8);
+    }
+
+    public static UUID readUUID(byte[] buffer, long offset)
+    {
+        return new UUID(readInt64BE(buffer, offset), readInt64BE(buffer, offset + 8));
     }
 
     public static void write(byte[] buffer, long offset, boolean value)
@@ -282,12 +282,6 @@ public class Buffer
         write(buffer, offset, bits);
     }
 
-    public static void write(byte[] buffer, long offset, UUID value)
-    {
-        writeBE(buffer, offset, value.getMostSignificantBits());
-        writeBE(buffer, offset + 8, value.getLeastSignificantBits());
-    }
-
     public static void write(byte[] buffer, long offset, byte[] value)
     {
         System.arraycopy(value, 0, buffer, (int)offset, value.length);
@@ -302,5 +296,11 @@ public class Buffer
     {
         for (long i = 0; i < valueCount; i++)
             buffer[(int)(offset + i)] = value;
+    }
+
+    public static void write(byte[] buffer, long offset, UUID value)
+    {
+        writeBE(buffer, offset, value.getMostSignificantBits());
+        writeBE(buffer, offset + 8, value.getLeastSignificantBits());
     }
 }

@@ -39,12 +39,12 @@ func NewFieldModelDecimal(buffer *Buffer, offset int) *FieldModelDecimal {
 func (fm FieldModelDecimal) Verify() bool { return true }
 
 // Get the decimal value
-func (fm FieldModelDecimal) Get() (decimal.Decimal, error) {
-    return fm.GetDefault(decimal.Zero)
+func (fm FieldModelDecimal) Get() (Decimal, error) {
+    return fm.GetDefault(DecimalZero())
 }
 
 // Get the decimal value with provided default value
-func (fm FieldModelDecimal) GetDefault(defaults decimal.Decimal) (decimal.Decimal, error) {
+func (fm FieldModelDecimal) GetDefault(defaults Decimal) (Decimal, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }
@@ -66,11 +66,11 @@ func (fm FieldModelDecimal) GetDefault(defaults decimal.Decimal) (decimal.Decima
         result = result.Neg()
     }
 
-    return result, nil
+    return Decimal{result}, nil
 }
 
 // Set the decimal value
-func (fm *FieldModelDecimal) Set(value decimal.Decimal) error {
+func (fm *FieldModelDecimal) Set(value Decimal) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }

@@ -60,9 +60,9 @@ func (e OrderType) MarshalJSON() ([]byte, error) {
 }
 
 // Convert JSON to enum
-func (e *OrderType) UnmarshalJSON(b []byte) error {
+func (e *OrderType) UnmarshalJSON(buffer []byte) error {
     var result byte
-    err := json.Unmarshal(b, &result)
+    err := json.Unmarshal(buffer, &result)
     if err != nil {
         return err
     }

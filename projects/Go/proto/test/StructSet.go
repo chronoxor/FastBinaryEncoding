@@ -15,10 +15,47 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
+// StructSet key
+type StructSetKey struct {
+}
+
+// Convert StructSet flags key to string
+func (k StructSetKey) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
+
 // StructSet struct
 type StructSet struct {
     F1 map[byte]bool
     F2 map[EnumSimpleKey]bool
     F3 map[FlagsSimpleKey]bool
     F4 map[StructSimpleKey]bool
+}
+
+// Create a new StructSet struct from JSON
+func NewStructSetFromJSON(buffer []byte) (*StructSet, error) {
+    var result StructSet
+    err := json.Unmarshal(buffer, &result)
+    if err != nil {
+        return nil, err
+    }
+    return &result, nil
+}
+
+// Get the struct key
+func (s StructSet) Key() StructSetKey {
+    return StructSetKey{
+    }
+}
+
+// Convert struct to string
+func (s StructSet) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
+
+// Convert struct to JSON
+func (s StructSet) JSON() ([]byte, error) {
+    return json.Marshal(s)
 }

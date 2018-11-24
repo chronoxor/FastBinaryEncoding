@@ -40,8 +40,9 @@ private:
     void GenerateHeader(const std::string& source);
     void GenerateFooter();
     void GenerateFBEPackage(const std::string& package);
-    void GenerateFBEVersion(const std::string& package, const std::string& source);
     void GenerateFBEConstants(const std::string& package);
+    void GenerateFBETypes(const std::string& package);
+    void GenerateFBEVersion(const std::string& package, const std::string& source);
     void GenerateFBEBuffer(const std::string& package);
     void GenerateFBEFieldModel(const std::string& package, const std::string& name, const std::string& type, const std::string& size, const std::string& defaults);
     void GenerateFBEFieldModelDecimal(const std::string& package);
@@ -90,6 +91,7 @@ private:
     std::string ConvertEnumSize(const std::string& type);
     std::string ConvertEnumType(const std::string& type);
     std::string ConvertEnumConstant(const std::string& name, const std::string& type, const std::string& value);
+    std::string ConvertBaseName(const std::string& type);
     std::string ConvertKeyName(const std::string& type);
     std::string ConvertTypeName(const std::string& type, bool optional);
     std::string ConvertTypeName(const StructField& field);

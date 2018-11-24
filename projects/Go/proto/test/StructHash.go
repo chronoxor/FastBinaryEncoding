@@ -5,12 +5,25 @@
 
 package test
 
+import "strconv"
+import "strings"
+import "encoding/json"
 import "../fbe"
 import "../proto"
 
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 var _ = proto.Version
+
+// StructHash key
+type StructHashKey struct {
+}
+
+// Convert StructHash flags key to string
+func (k StructHashKey) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
 
 // StructHash struct
 type StructHash struct {
@@ -24,4 +37,31 @@ type StructHash struct {
     F8 map[string]*FlagsSimple
     F9 map[string]StructSimple
     F10 map[string]*StructSimple
+}
+
+// Create a new StructHash struct from JSON
+func NewStructHashFromJSON(buffer []byte) (*StructHash, error) {
+    var result StructHash
+    err := json.Unmarshal(buffer, &result)
+    if err != nil {
+        return nil, err
+    }
+    return &result, nil
+}
+
+// Get the struct key
+func (s StructHash) Key() StructHashKey {
+    return StructHashKey{
+    }
+}
+
+// Convert struct to string
+func (s StructHash) String() string {
+    var sb strings.Builder
+    return sb.String()
+}
+
+// Convert struct to JSON
+func (s StructHash) JSON() ([]byte, error) {
+    return json.Marshal(s)
 }
