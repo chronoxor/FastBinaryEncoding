@@ -5,11 +5,11 @@ require_relative '../proto/test'
 class TestSerializationJson < Test::Unit::TestCase
   # noinspection RubyInstanceMethodNamingConvention
   def test_serialization_json_proto
-    # Create a new account with some orders
-    account1 = Proto::Account.new(1, 'Test', Proto::State.good, Proto::Balance.new('USD', 1000.0), Proto::Balance.new('EUR', 100.0))
-    account1.orders.push(Proto::Order.new(1, 'EURUSD', Proto::OrderSide.buy, Proto::OrderType.market, 1.23456, 1000.0))
-    account1.orders.push(Proto::Order.new(2, 'EURUSD', Proto::OrderSide.sell, Proto::OrderType.limit, 1.0, 100.0))
-    account1.orders.push(Proto::Order.new(3, 'EURUSD', Proto::OrderSide.buy, Proto::OrderType.stop, 1.5, 10.0))
+    # Define source JSON
+    json = %({"uid":1,"name":"Test","state":6,"wallet":{"currency":"USD","amount":1000.0},"asset":{"currency":"EUR","amount":100.0},"orders":[{"uid":1,"symbol":"EURUSD","side":0,"type":0,"price":1.23456,"volume":1000.0},{"uid":2,"symbol":"EURUSD","side":1,"type":1,"price":1.0,"volume":100.0},{"uid":3,"symbol":"EURUSD","side":0,"type":2,"price":1.5,"volume":10.0}]})
+
+    # Create a new account from the source JSON
+    account1 = Proto::Account.from_json(json)
 
     # Serialize the account to the JSON string
     json = account1.to_json
@@ -51,8 +51,11 @@ class TestSerializationJson < Test::Unit::TestCase
 
   # noinspection RubyInstanceMethodNamingConvention
   def test_serialization_json_struct_simple
-    # Create a new struct
-    struct1 = Test::StructSimple.new
+    # Define source JSON
+    json = %({"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145597933463000,"f36":"00000000-0000-0000-0000-000000000000","f37":"e7854072-f0a5-11e8-8f69-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}})
+
+    # Create a new struct from the source JSON
+    struct1 = Test::StructSimple.from_json(json)
 
     # Serialize the struct to the JSON string
     json = struct1.to_json
@@ -147,8 +150,11 @@ class TestSerializationJson < Test::Unit::TestCase
 
   # noinspection RubyInstanceMethodNamingConvention, RubyScope
   def test_serialization_json_struct_optional
-    # Create a new struct
-    struct1 = Test::StructOptional.new
+    # Define source JSON
+    json = %({"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145860677797000,"f36":"00000000-0000-0000-0000-000000000000","f37":"8420d1c6-f0a6-11e8-80fc-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]},"f100":null,"f101":true,"f102":null,"f103":null,"f104":255,"f105":null,"f106":null,"f107":33,"f108":null,"f109":null,"f110":1092,"f111":null,"f112":null,"f113":127,"f114":null,"f115":null,"f116":255,"f117":null,"f118":null,"f119":32767,"f120":null,"f121":null,"f122":65535,"f123":null,"f124":null,"f125":2147483647,"f126":null,"f127":null,"f128":4294967295,"f129":null,"f130":null,"f131":9223372036854775807,"f132":null,"f133":null,"f134":18446744073709551615,"f135":null,"f136":null,"f137":123.456,"f138":null,"f139":null,"f140":-1.23456e+125,"f141":null,"f142":null,"f143":"123456.123456","f144":null,"f145":null,"f146":"Initial string!","f147":null,"f148":null,"f149":1543145860678429000,"f150":null,"f151":null,"f152":"123e4567-e89b-12d3-a456-426655440000","f153":null,"f154":null,"f155":null,"f156":null,"f157":null,"f158":null,"f159":null,"f160":null,"f161":null,"f162":null,"f163":null,"f164":null,"f165":null})
+
+    # Create a new struct from the source JSON
+    struct1 = Test::StructOptional.from_json(json)
 
     # Serialize the struct to the JSON string
     json = struct1.to_json
@@ -388,8 +394,11 @@ class TestSerializationJson < Test::Unit::TestCase
 
   # noinspection RubyInstanceMethodNamingConvention, RubyScope
   def test_serialization_json_struct_nested
-    # Create a new struct
-    struct1 = Test::StructNested.new
+    # Define source JSON
+    json = %({"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145901646321000,"f36":"00000000-0000-0000-0000-000000000000","f37":"9c8c268e-f0a6-11e8-a777-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]},"f100":null,"f101":true,"f102":null,"f103":null,"f104":255,"f105":null,"f106":null,"f107":33,"f108":null,"f109":null,"f110":1092,"f111":null,"f112":null,"f113":127,"f114":null,"f115":null,"f116":255,"f117":null,"f118":null,"f119":32767,"f120":null,"f121":null,"f122":65535,"f123":null,"f124":null,"f125":2147483647,"f126":null,"f127":null,"f128":4294967295,"f129":null,"f130":null,"f131":9223372036854775807,"f132":null,"f133":null,"f134":18446744073709551615,"f135":null,"f136":null,"f137":123.456,"f138":null,"f139":null,"f140":-1.23456e+125,"f141":null,"f142":null,"f143":"123456.123456","f144":null,"f145":null,"f146":"Initial string!","f147":null,"f148":null,"f149":1543145901647155000,"f150":null,"f151":null,"f152":"123e4567-e89b-12d3-a456-426655440000","f153":null,"f154":null,"f155":null,"f156":null,"f157":null,"f158":null,"f159":null,"f160":null,"f161":null,"f162":null,"f163":null,"f164":null,"f165":null,"f1000":0,"f1001":null,"f1002":50,"f1003":null,"f1004":0,"f1005":null,"f1006":42,"f1007":null,"f1008":{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145901647367000,"f36":"00000000-0000-0000-0000-000000000000","f37":"9c8c54c4-f0a6-11e8-a777-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"f1009":null,"f1010":{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145901648310000,"f36":"00000000-0000-0000-0000-000000000000","f37":"9c8c6b76-f0a6-11e8-a777-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]},"f100":null,"f101":true,"f102":null,"f103":null,"f104":255,"f105":null,"f106":null,"f107":33,"f108":null,"f109":null,"f110":1092,"f111":null,"f112":null,"f113":127,"f114":null,"f115":null,"f116":255,"f117":null,"f118":null,"f119":32767,"f120":null,"f121":null,"f122":65535,"f123":null,"f124":null,"f125":2147483647,"f126":null,"f127":null,"f128":4294967295,"f129":null,"f130":null,"f131":9223372036854775807,"f132":null,"f133":null,"f134":18446744073709551615,"f135":null,"f136":null,"f137":123.456,"f138":null,"f139":null,"f140":-1.23456e+125,"f141":null,"f142":null,"f143":"123456.123456","f144":null,"f145":null,"f146":"Initial string!","f147":null,"f148":null,"f149":1543145901648871000,"f150":null,"f151":null,"f152":"123e4567-e89b-12d3-a456-426655440000","f153":null,"f154":null,"f155":null,"f156":null,"f157":null,"f158":null,"f159":null,"f160":null,"f161":null,"f162":null,"f163":null,"f164":null,"f165":null},"f1011":null})
+
+    # Create a new struct from the source JSON
+    struct1 = Test::StructNested.from_json(json)
 
     # Serialize the struct to the JSON string
     json = struct1.to_json
@@ -609,10 +618,11 @@ class TestSerializationJson < Test::Unit::TestCase
 
   # noinspection RubyInstanceMethodNamingConvention
   def test_serialization_json_struct_bytes
-    # Create a new struct
-    struct1 = Test::StructBytes.new
-    struct1.f1 = 'ABC'
-    struct1.f2 = 'test'
+    # Define source JSON
+    json = %({"f1":"QUJD\\n","f2":"dGVzdA==\\n","f3":null})
+
+    # Create a new struct from the source JSON
+    struct1 = Test::StructBytes.from_json(json)
 
     # Serialize the struct to the JSON string
     json = struct1.to_json
@@ -638,28 +648,11 @@ class TestSerializationJson < Test::Unit::TestCase
 
   # noinspection RubyInstanceMethodNamingConvention
   def test_serialization_json_struct_array
-    # Create a new struct
-    struct1 = Test::StructArray.new
-    struct1.f1[0] = 48
-    struct1.f1[1] = 65
-    struct1.f2[0] = 97
-    struct1.f2[1] = nil
-    struct1.f3[0] = '000'
-    struct1.f3[1] = 'AAA'
-    struct1.f4[0] = 'aaa'
-    struct1.f4[1] = nil
-    struct1.f5[0] = Test::EnumSimple.ENUM_VALUE_1
-    struct1.f5[1] = Test::EnumSimple.ENUM_VALUE_2
-    struct1.f6[0] = Test::EnumSimple.ENUM_VALUE_1
-    struct1.f6[1] = nil
-    struct1.f7[0] = Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2
-    struct1.f7[1] = Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2 | Test::FlagsSimple.FLAG_VALUE_3
-    struct1.f8[0] = Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2
-    struct1.f8[1] = nil
-    struct1.f9[0] = Test::StructSimple.new
-    struct1.f9[1] = Test::StructSimple.new
-    struct1.f10[0] = Test::StructSimple.new
-    struct1.f10[1] = nil
+    # Define source JSON
+    json = %({"f1":[48,65],"f2":[97,null],"f3":["MDAw\\n","QUFB\\n"],"f4":["YWFh\\n",null],"f5":[1,2],"f6":[1,null],"f7":[3,7],"f8":[3,null],"f9":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145986060361000,"f36":"00000000-0000-0000-0000-000000000000","f37":"cedcad98-f0a6-11e8-9f47-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145986060910000,"f36":"00000000-0000-0000-0000-000000000000","f37":"cedcc274-f0a6-11e8-9f47-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}],"f10":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145986061436000,"f36":"00000000-0000-0000-0000-000000000000","f37":"cedcd714-f0a6-11e8-9f47-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},null]})
+
+    # Create a new struct from the source JSON
+    struct1 = Test::StructArray.from_json(json)
 
     # Serialize the struct to the JSON string
     json = struct1.to_json
@@ -721,28 +714,11 @@ class TestSerializationJson < Test::Unit::TestCase
 
   # noinspection RubyInstanceMethodNamingConvention
   def test_serialization_json_struct_vector
-    # Create a new struct
-    struct1 = Test::StructVector.new
-    struct1.f1.push(48)
-    struct1.f1.push(65)
-    struct1.f2.push(97)
-    struct1.f2.push(nil)
-    struct1.f3.push('000')
-    struct1.f3.push('AAA')
-    struct1.f4.push('aaa')
-    struct1.f4.push(nil)
-    struct1.f5.push(Test::EnumSimple.ENUM_VALUE_1)
-    struct1.f5.push(Test::EnumSimple.ENUM_VALUE_2)
-    struct1.f6.push(Test::EnumSimple.ENUM_VALUE_1)
-    struct1.f6.push(nil)
-    struct1.f7.push(Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2)
-    struct1.f7.push(Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2 | Test::FlagsSimple.FLAG_VALUE_3)
-    struct1.f8.push(Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2)
-    struct1.f8.push(nil)
-    struct1.f9.push(Test::StructSimple.new)
-    struct1.f9.push(Test::StructSimple.new)
-    struct1.f10.push(Test::StructSimple.new)
-    struct1.f10.push(nil)
+    # Define source JSON
+    json = %({"f1":[48,65],"f2":[97,null],"f3":["MDAw\\n","QUFB\\n"],"f4":["YWFh\\n",null],"f5":[1,2],"f6":[1,null],"f7":[3,7],"f8":[3,null],"f9":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146157127964000,"f36":"00000000-0000-0000-0000-000000000000","f37":"34d38702-f0a7-11e8-b30e-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146157128572000,"f36":"00000000-0000-0000-0000-000000000000","f37":"34d39c88-f0a7-11e8-b30e-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}],"f10":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146157129063000,"f36":"00000000-0000-0000-0000-000000000000","f37":"34d3b038-f0a7-11e8-b30e-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},null]})
+
+    # Create a new struct from the source JSON
+    struct1 = Test::StructVector.from_json(json)
 
     # Serialize the struct to the JSON string
     json = struct1.to_json
@@ -804,28 +780,11 @@ class TestSerializationJson < Test::Unit::TestCase
 
   # noinspection RubyInstanceMethodNamingConvention
   def test_serialization_json_struct_list
-    # Create a new struct
-    struct1 = Test::StructList.new
-    struct1.f1.push(48)
-    struct1.f1.push(65)
-    struct1.f2.push(97)
-    struct1.f2.push(nil)
-    struct1.f3.push('000')
-    struct1.f3.push('AAA')
-    struct1.f4.push('aaa')
-    struct1.f4.push(nil)
-    struct1.f5.push(Test::EnumSimple.ENUM_VALUE_1)
-    struct1.f5.push(Test::EnumSimple.ENUM_VALUE_2)
-    struct1.f6.push(Test::EnumSimple.ENUM_VALUE_1)
-    struct1.f6.push(nil)
-    struct1.f7.push(Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2)
-    struct1.f7.push(Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2 | Test::FlagsSimple.FLAG_VALUE_3)
-    struct1.f8.push(Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2)
-    struct1.f8.push(nil)
-    struct1.f9.push(Test::StructSimple.new)
-    struct1.f9.push(Test::StructSimple.new)
-    struct1.f10.push(Test::StructSimple.new)
-    struct1.f10.push(nil)
+    # Define source JSON
+    json = %({"f1":[48,65],"f2":[97,null],"f3":["MDAw\\n","QUFB\\n"],"f4":["YWFh\\n",null],"f5":[1,2],"f6":[1,null],"f7":[3,7],"f8":[3,null],"f9":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146220253760000,"f36":"00000000-0000-0000-0000-000000000000","f37":"5a73e7fe-f0a7-11e8-89e6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146220255725000,"f36":"00000000-0000-0000-0000-000000000000","f37":"5a741990-f0a7-11e8-89e6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}],"f10":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146220256802000,"f36":"00000000-0000-0000-0000-000000000000","f37":"5a74e4b0-f0a7-11e8-89e6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},null]})
+
+    # Create a new struct from the source JSON
+    struct1 = Test::StructList.from_json(json)
 
     # Serialize the struct to the JSON string
     json = struct1.to_json
@@ -887,21 +846,11 @@ class TestSerializationJson < Test::Unit::TestCase
 
   # noinspection RubyInstanceMethodNamingConvention
   def test_serialization_json_struct_set
-    # Create a new struct
-    struct1 = Test::StructSet.new
-    struct1.f1.add(48)
-    struct1.f1.add(65)
-    struct1.f1.add(97)
-    struct1.f2.add(Test::EnumSimple.ENUM_VALUE_1)
-    struct1.f2.add(Test::EnumSimple.ENUM_VALUE_2)
-    struct1.f3.add(Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2)
-    struct1.f3.add(Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2 | Test::FlagsSimple.FLAG_VALUE_3)
-    s1 = Test::StructSimple.new
-    s1.uid = 48
-    struct1.f4.add(s1)
-    s2 = Test::StructSimple.new
-    s2.uid = 65
-    struct1.f4.add(s2)
+    # Define source JSON
+    json = %({"f1":[48,65,97],"f2":[1,2],"f3":[3,7],"f4":[{"uid":48,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146299848353000,"f36":"00000000-0000-0000-0000-000000000000","f37":"89e4edd0-f0a7-11e8-9dde-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},{"uid":65,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146299848966000,"f36":"00000000-0000-0000-0000-000000000000","f37":"89e503f6-f0a7-11e8-9dde-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}]})
+
+    # Create a new struct from the source JSON
+    struct1 = Test::StructSet.from_json(json)
 
     # Serialize the struct to the JSON string
     json = struct1.to_json
@@ -923,38 +872,21 @@ class TestSerializationJson < Test::Unit::TestCase
     assert_true(struct2.f3.include?(Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2))
     assert_true(struct2.f3.include?(Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2 | Test::FlagsSimple.FLAG_VALUE_3))
     assert_equal(struct2.f4.length, 2)
+    s1 = Test::StructSimple.new
+    s1.uid = 48
     assert_true(struct2.f4.include?(s1))
+    s2 = Test::StructSimple.new
+    s2.uid = 65
     assert_true(struct2.f4.include?(s2))
   end
 
   # noinspection RubyInstanceMethodNamingConvention
   def test_serialization_json_struct_map
-    # Create a new struct
-    struct1 = Test::StructMap.new
-    struct1.f1[10] = 48
-    struct1.f1[20] = 65
-    struct1.f2[10] = 97
-    struct1.f2[20] = nil
-    struct1.f3[10] = '000'
-    struct1.f3[20] = 'AAA'
-    struct1.f4[10] = 'aaa'
-    struct1.f4[20] = nil
-    struct1.f5[10] = Test::EnumSimple.ENUM_VALUE_1
-    struct1.f5[20] = Test::EnumSimple.ENUM_VALUE_2
-    struct1.f6[10] = Test::EnumSimple.ENUM_VALUE_1
-    struct1.f6[20] = nil
-    struct1.f7[10] = Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2
-    struct1.f7[20] = Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2 | Test::FlagsSimple.FLAG_VALUE_3
-    struct1.f8[10] = Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2
-    struct1.f8[20] = nil
-    s1 = Test::StructSimple.new
-    s1.uid = 48
-    struct1.f9[10] = s1
-    s2 = Test::StructSimple.new
-    s2.uid = 65
-    struct1.f9[20] = s2
-    struct1.f10[10] = s1
-    struct1.f10[20] = nil
+    # Define source JSON
+    json = %({"f1":{"10":48,"20":65},"f2":{"10":97,"20":null},"f3":{"10":"MDAw\\n","20":"QUFB\\n"},"f4":{"10":"YWFh\\n","20":null},"f5":{"10":1,"20":2},"f6":{"10":1,"20":null},"f7":{"10":3,"20":7},"f8":{"10":3,"20":null},"f9":{"10":{"uid":48,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146345803483000,"f36":"00000000-0000-0000-0000-000000000000","f37":"a549215e-f0a7-11e8-90f6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"20":{"uid":65,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146345804184000,"f36":"00000000-0000-0000-0000-000000000000","f37":"a54942ce-f0a7-11e8-90f6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}},"f10":{"10":{"uid":48,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146345803483000,"f36":"00000000-0000-0000-0000-000000000000","f37":"a549215e-f0a7-11e8-90f6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"20":null}})
+
+    # Create a new struct from the source JSON
+    struct1 = Test::StructMap.from_json(json)
 
     # Serialize the struct to the JSON string
     json = struct1.to_json
@@ -999,32 +931,11 @@ class TestSerializationJson < Test::Unit::TestCase
 
   # noinspection RubyInstanceMethodNamingConvention
   def test_serialization_json_struct_hash
-    # Create a new struct
-    struct1 = Test::StructHash.new
-    struct1.f1['10'] = 48
-    struct1.f1['20'] = 65
-    struct1.f2['10'] = 97
-    struct1.f2['20'] = nil
-    struct1.f3['10'] = '000'
-    struct1.f3['20'] = 'AAA'
-    struct1.f4['10'] = 'aaa'
-    struct1.f4['20'] = nil
-    struct1.f5['10'] = Test::EnumSimple.ENUM_VALUE_1
-    struct1.f5['20'] = Test::EnumSimple.ENUM_VALUE_2
-    struct1.f6['10'] = Test::EnumSimple.ENUM_VALUE_1
-    struct1.f6['20'] = nil
-    struct1.f7['10'] = Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2
-    struct1.f7['20'] = Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2 | Test::FlagsSimple.FLAG_VALUE_3
-    struct1.f8['10'] = Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2
-    struct1.f8['20'] = nil
-    s1 = Test::StructSimple.new
-    s1.uid = 48
-    struct1.f9['10'] = s1
-    s2 = Test::StructSimple.new
-    s2.uid = 65
-    struct1.f9['20'] = s2
-    struct1.f10['10'] = s1
-    struct1.f10['20'] = nil
+    # Define source JSON
+    json = %({"f1":{"10":48,"20":65},"f2":{"10":97,"20":null},"f3":{"10":"MDAw\\n","20":"QUFB\\n"},"f4":{"10":"YWFh\\n","20":null},"f5":{"10":1,"20":2},"f6":{"10":1,"20":null},"f7":{"10":3,"20":7},"f8":{"10":3,"20":null},"f9":{"10":{"uid":48,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146381450913000,"f36":"00000000-0000-0000-0000-000000000000","f37":"ba8885d2-f0a7-11e8-81fa-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"20":{"uid":65,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146381452825000,"f36":"00000000-0000-0000-0000-000000000000","f37":"ba88ced4-f0a7-11e8-81fa-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}},"f10":{"10":{"uid":48,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146381450913000,"f36":"00000000-0000-0000-0000-000000000000","f37":"ba8885d2-f0a7-11e8-81fa-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"20":null}})
+
+    # Create a new struct from the source JSON
+    struct1 = Test::StructHash.from_json(json)
 
     # Serialize the struct to the JSON string
     json = struct1.to_json

@@ -5938,7 +5938,9 @@ std::string GeneratorRuby::ConvertDefault(const StructField& field)
 
 std::string GeneratorRuby::ConvertValueToJson(const std::string& type, const std::string& value, bool optional)
 {
-    if (type == "bytes")
+    if ((type == "char") || (type == "wchar"))
+        return "(" + value + ".nil? ? nil : " + value + ".ord)";
+    else if (type == "bytes")
         return "(" + value + ".nil? ? nil : Base64.encode64(" + value + "))";
     else if (type == "decimal")
         return "(" + value + ".nil? ? nil : " + value + ".to_s('F'))";
@@ -5952,7 +5954,11 @@ std::string GeneratorRuby::ConvertValueToJson(const std::string& type, const std
 
 std::string GeneratorRuby::ConvertValueFromJson(const std::string& type, const std::string& value, bool optional)
 {
-    if (type == "bytes")
+    if (type == "char")
+        return "(" + value + ".nil? ? nil : " + value + ".chr)";
+    if (type == "wchar")
+        return "(" + value + ".nil? ? nil : " + value + ".chr(Encoding::UTF_8))";
+    else if (type == "bytes")
         return "(" + value + ".nil? ? nil : Base64.decode64(" + value + "))";
     else if (type == "decimal")
         return "(" + value + ".nil? ? nil : BigDecimal.new(" + value + "))";
