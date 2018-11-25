@@ -3569,7 +3569,12 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
             WriteLineIndent("result.update(dict(");
             Indent(1);
             for (const auto& field : s->body->fields)
-                WriteLineIndent(*field->name + "=self." + *field->name + ", ");
+            {
+                if ((*field->type == "char") || (*field->type == "wchar"))
+                    WriteLineIndent(*field->name + "=None if self." + *field->name + " is None else ord(self." + *field->name + "), ");
+                else
+                    WriteLineIndent(*field->name + "=self." + *field->name + ", ");
+            }
             Indent(-1);
             WriteLineIndent("))");
         }
@@ -3605,7 +3610,9 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
                 std::string key;
                 if (field->key)
                 {
-                    if (*field->key == "bytes")
+                    if ((*field->key == "char") || (*field->key == "wchar"))
+                        key = "None if key is None else chr(key)";
+                    else if (*field->key == "bytes")
                         key = "None if key is None else base64.b64decode(key.encode('ascii'))";
                     else if (*field->key == "decimal")
                         key = "None if key is None else decimal.Decimal(key)";
@@ -3620,7 +3627,9 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
                 std::string value;
                 if (field->type)
                 {
-                    if (*field->type == "bytes")
+                    if ((*field->type == "char") || (*field->type == "wchar"))
+                        value = "None if value is None else chr(value)";
+                    else if (*field->type == "bytes")
                         value = "None if value is None else base64.b64decode(value.encode('ascii'))";
                     else if (*field->type == "decimal")
                         value = "None if value is None else decimal.Decimal(value)";
@@ -3638,6 +3647,8 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
                     WriteLineIndent("None if \"" + *field->name + "\" not in fields else {" + value + " for value in fields[\"" + *field->name + "\"]},");
                 else if (field->map || field->hash)
                     WriteLineIndent("None if \"" + *field->name + "\" not in fields else {" + key + ": " + value + " for key, value in fields[\"" + *field->name + "\"].items()},");
+                else if ((*field->type == "char") || (*field->type == "wchar"))
+                    WriteLineIndent("None if \"" + *field->name + "\" not in fields else None if fields[\"" + *field->name + "\"] is None else chr(fields[\"" + *field->name + "\"]),");
                 else if (*field->type == "bytes")
                     WriteLineIndent("None if \"" + *field->name + "\" not in fields else None if fields[\"" + *field->name + "\"] is None else base64.b64decode(fields[\"" + *field->name + "\"].encode('ascii')),");
                 else if (*field->type == "decimal")
