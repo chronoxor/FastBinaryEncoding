@@ -9,6 +9,7 @@ import java.io.*;
 import java.lang.*;
 import java.lang.reflect.*;
 import java.math.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
@@ -20,8 +21,8 @@ public class StructArray implements Comparable<Object>
 {
     public byte[] f1 = new byte[2];
     public Byte[] f2 = new Byte[2];
-    public byte[][] f3 = new byte[2][];
-    public byte[][] f4 = new byte[2][];
+    public ByteBuffer[] f3 = new ByteBuffer[2];
+    public ByteBuffer[] f4 = new ByteBuffer[2];
     public EnumSimple[] f5 = new EnumSimple[2];
     public EnumSimple[] f6 = new EnumSimple[2];
     public FlagsSimple[] f7 = new FlagsSimple[2];
@@ -31,7 +32,7 @@ public class StructArray implements Comparable<Object>
 
     public StructArray() {}
 
-    public StructArray(byte[] f1, Byte[] f2, byte[][] f3, byte[][] f4, EnumSimple[] f5, EnumSimple[] f6, FlagsSimple[] f7, FlagsSimple[] f8, StructSimple[] f9, StructSimple[] f10)
+    public StructArray(byte[] f1, Byte[] f2, ByteBuffer[] f3, ByteBuffer[] f4, EnumSimple[] f5, EnumSimple[] f6, FlagsSimple[] f7, FlagsSimple[] f8, StructSimple[] f9, StructSimple[] f10)
     {
         this.f1 = f1;
         this.f2 = f2;
@@ -140,7 +141,7 @@ public class StructArray implements Comparable<Object>
             sb.append(",f3=[").append(f3.length).append("][");
             for (var item : f3)
             {
-                if (item != null) sb.append(first ? "" : ",").append("bytes[").append(item.length).append("]"); else sb.append("null");
+                if (item != null) sb.append(first ? "" : ",").append("bytes[").append(item.array().length).append("]"); else sb.append("null");
                 first = false;
             }
             sb.append("]");
@@ -151,7 +152,7 @@ public class StructArray implements Comparable<Object>
             sb.append(",f4=[").append(f4.length).append("][");
             for (var item : f4)
             {
-                if (item != null) sb.append(first ? "" : ",").append("bytes[").append(item.length).append("]"); else sb.append("null");
+                if (item != null) sb.append(first ? "" : ",").append("bytes[").append(item.array().length).append("]"); else sb.append("null");
                 first = false;
             }
             sb.append("]");

@@ -9,6 +9,7 @@ import java.io.*;
 import java.lang.*;
 import java.lang.reflect.*;
 import java.math.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
@@ -58,8 +59,8 @@ public final class FieldModelBytes extends FieldModel
     }
 
     // Get the bytes value
-    public byte[] get() { return get(new byte[0]); }
-    public byte[] get(byte[] defaults)
+    public ByteBuffer get() { return get(ByteBuffer.allocate(0)); }
+    public ByteBuffer get(ByteBuffer defaults)
     {
         assert (defaults != null) : "Invalid default bytes value!";
         if (defaults == null)
@@ -81,11 +82,11 @@ public final class FieldModelBytes extends FieldModel
         if ((_buffer.getOffset() + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.getSize())
             return defaults;
 
-        return readBytes(fbeBytesOffset + 4, fbeBytesSize);
+        return ByteBuffer.wrap(readBytes(fbeBytesOffset + 4, fbeBytesSize));
     }
 
     // Set the bytes value
-    public void set(byte[] value)
+    public void set(ByteBuffer value)
     {
         assert (value != null) : "Invalid bytes value!";
         if (value == null)
@@ -95,7 +96,7 @@ public final class FieldModelBytes extends FieldModel
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
-        int fbeBytesSize = value.length;
+        int fbeBytesSize = value.array().length;
         int fbeBytesOffset = (int)(_buffer.allocate(4 + fbeBytesSize) - _buffer.getOffset());
         assert ((fbeBytesOffset > 0) && ((_buffer.getOffset() + fbeBytesOffset + 4 + fbeBytesSize) <= _buffer.getSize())) : "Model is broken!";
         if ((fbeBytesOffset <= 0) || ((_buffer.getOffset() + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.getSize()))
@@ -103,6 +104,6 @@ public final class FieldModelBytes extends FieldModel
 
         write(fbeOffset(), fbeBytesOffset);
         write(fbeBytesOffset, fbeBytesSize);
-        write(fbeBytesOffset + 4, value);
+        write(fbeBytesOffset + 4, value.array());
     }
 }

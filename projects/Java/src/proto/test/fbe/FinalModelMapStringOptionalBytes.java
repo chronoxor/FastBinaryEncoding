@@ -9,6 +9,7 @@ import java.io.*;
 import java.lang.*;
 import java.lang.reflect.*;
 import java.math.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
@@ -30,7 +31,7 @@ public final class FinalModelMapStringOptionalBytes extends FinalModel
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(TreeMap<String, byte[]> values)
+    public long fbeAllocationSize(TreeMap<String, ByteBuffer> values)
     {
         long size = 4;
         for (var value : values.entrySet())
@@ -40,7 +41,7 @@ public final class FinalModelMapStringOptionalBytes extends FinalModel
         }
         return size;
     }
-    public long fbeAllocationSize(HashMap<String, byte[]> values)
+    public long fbeAllocationSize(HashMap<String, ByteBuffer> values)
     {
         long size = 4;
         for (var value : values.entrySet())
@@ -82,7 +83,7 @@ public final class FinalModelMapStringOptionalBytes extends FinalModel
     }
 
     // Get the map as TreeMap
-    public long get(TreeMap<String, byte[]> values)
+    public long get(TreeMap<String, ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -110,7 +111,7 @@ public final class FinalModelMapStringOptionalBytes extends FinalModel
             _modelValue.fbeShift(offset.value);
             size += offset.value;
             offset.value = 0;
-            byte[] value = _modelValue.get(offset);
+            ByteBuffer value = _modelValue.get(offset);
             _modelKey.fbeShift(offset.value);
             _modelValue.fbeShift(offset.value);
             size += offset.value;
@@ -120,7 +121,7 @@ public final class FinalModelMapStringOptionalBytes extends FinalModel
     }
 
     // Get the map as HashMap
-    public long get(HashMap<String, byte[]> values)
+    public long get(HashMap<String, ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -148,7 +149,7 @@ public final class FinalModelMapStringOptionalBytes extends FinalModel
             _modelValue.fbeShift(offset.value);
             size += offset.value;
             offset.value = 0;
-            byte[] value = _modelValue.get(offset);
+            ByteBuffer value = _modelValue.get(offset);
             _modelKey.fbeShift(offset.value);
             _modelValue.fbeShift(offset.value);
             size += offset.value;
@@ -159,7 +160,7 @@ public final class FinalModelMapStringOptionalBytes extends FinalModel
     }
 
     // Set the map as TreeMap
-    public long set(TreeMap<String, byte[]> values)
+    public long set(TreeMap<String, ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -188,7 +189,7 @@ public final class FinalModelMapStringOptionalBytes extends FinalModel
     }
 
     // Set the vector as HashMap
-    public long set(HashMap<String, byte[]> values)
+    public long set(HashMap<String, ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

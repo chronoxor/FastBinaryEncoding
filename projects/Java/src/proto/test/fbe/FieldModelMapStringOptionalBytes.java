@@ -9,6 +9,7 @@ import java.io.*;
 import java.lang.*;
 import java.lang.reflect.*;
 import java.math.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
@@ -152,7 +153,7 @@ public final class FieldModelMapStringOptionalBytes extends FieldModel
     }
 
     // Get the map as TreeMap
-    public void get(TreeMap<String, byte[]> values)
+    public void get(TreeMap<String, ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -168,7 +169,7 @@ public final class FieldModelMapStringOptionalBytes extends FieldModel
         for (long i = fbeMapSize; i-- > 0;)
         {
             String key = fbeModel.getKey().get();
-            byte[] value = fbeModel.getValue().get();
+            ByteBuffer value = fbeModel.getValue().get();
             values.put(key, value);
             fbeModel.getKey().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
             fbeModel.getValue().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
@@ -176,7 +177,7 @@ public final class FieldModelMapStringOptionalBytes extends FieldModel
     }
 
     // Get the map as HashMap
-    public void get(HashMap<String, byte[]> values)
+    public void get(HashMap<String, ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -192,7 +193,7 @@ public final class FieldModelMapStringOptionalBytes extends FieldModel
         for (long i = fbeMapSize; i-- > 0;)
         {
             String key = fbeModel.getKey().get();
-            byte[] value = fbeModel.getValue().get();
+            ByteBuffer value = fbeModel.getValue().get();
             values.put(key, value);
             fbeModel.getKey().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
             fbeModel.getValue().fbeShift(fbeModel.getKey().fbeSize() + fbeModel.getValue().fbeSize());
@@ -200,7 +201,7 @@ public final class FieldModelMapStringOptionalBytes extends FieldModel
     }
 
     // Set the map as TreeMap
-    public void set(TreeMap<String, byte[]> values)
+    public void set(TreeMap<String, ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -221,7 +222,7 @@ public final class FieldModelMapStringOptionalBytes extends FieldModel
     }
 
     // Set the vector as HashMap
-    public void set(HashMap<String, byte[]> values)
+    public void set(HashMap<String, ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

@@ -9,6 +9,7 @@ import java.io.*;
 import java.lang.*;
 import java.lang.reflect.*;
 import java.math.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
@@ -28,28 +29,28 @@ public final class FinalModelVectorOptionalBytes extends FinalModel
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(byte[][] values)
+    public long fbeAllocationSize(ByteBuffer[] values)
     {
         long size = 4;
         for (var value : values)
             size += _model.fbeAllocationSize(value);
         return size;
     }
-    public long fbeAllocationSize(ArrayList<byte[]> values)
+    public long fbeAllocationSize(ArrayList<ByteBuffer> values)
     {
         long size = 4;
         for (var value : values)
             size += _model.fbeAllocationSize(value);
         return size;
     }
-    public long fbeAllocationSize(LinkedList<byte[]> values)
+    public long fbeAllocationSize(LinkedList<ByteBuffer> values)
     {
         long size = 4;
         for (var value : values)
             size += _model.fbeAllocationSize(value);
         return size;
     }
-    public long fbeAllocationSize(HashSet<byte[]> values)
+    public long fbeAllocationSize(HashSet<ByteBuffer> values)
     {
         long size = 4;
         for (var value : values)
@@ -80,7 +81,7 @@ public final class FinalModelVectorOptionalBytes extends FinalModel
     }
 
     // Get the vector as ArrayList
-    public long get(ArrayList<byte[]> values)
+    public long get(ArrayList<ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -104,7 +105,7 @@ public final class FinalModelVectorOptionalBytes extends FinalModel
         for (long i = 0; i < fbeVectorSize; i++)
         {
             offset.value = 0;
-            byte[] value = _model.get(offset);
+            ByteBuffer value = _model.get(offset);
             values.add(value);
             _model.fbeShift(offset.value);
             size += offset.value;
@@ -113,7 +114,7 @@ public final class FinalModelVectorOptionalBytes extends FinalModel
     }
 
     // Get the vector as LinkedList
-    public long get(LinkedList<byte[]> values)
+    public long get(LinkedList<ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -135,7 +136,7 @@ public final class FinalModelVectorOptionalBytes extends FinalModel
         for (long i = 0; i < fbeVectorSize; i++)
         {
             offset.value = 0;
-            byte[] value = _model.get(offset);
+            ByteBuffer value = _model.get(offset);
             values.add(value);
             _model.fbeShift(offset.value);
             size += offset.value;
@@ -144,7 +145,7 @@ public final class FinalModelVectorOptionalBytes extends FinalModel
     }
 
     // Get the vector as HashSet
-    public long get(HashSet<byte[]> values)
+    public long get(HashSet<ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -166,7 +167,7 @@ public final class FinalModelVectorOptionalBytes extends FinalModel
         for (long i = 0; i < fbeVectorSize; i++)
         {
             offset.value = 0;
-            byte[] value = _model.get(offset);
+            ByteBuffer value = _model.get(offset);
             values.add(value);
             _model.fbeShift(offset.value);
             size += offset.value;
@@ -175,7 +176,7 @@ public final class FinalModelVectorOptionalBytes extends FinalModel
     }
 
     // Set the vector as ArrayList
-    public long set(ArrayList<byte[]> values)
+    public long set(ArrayList<ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -199,7 +200,7 @@ public final class FinalModelVectorOptionalBytes extends FinalModel
     }
 
     // Set the vector as LinkedList
-    public long set(LinkedList<byte[]> values)
+    public long set(LinkedList<ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -223,7 +224,7 @@ public final class FinalModelVectorOptionalBytes extends FinalModel
     }
 
     // Set the vector as HashSet
-    public long set(HashSet<byte[]> values)
+    public long set(HashSet<ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

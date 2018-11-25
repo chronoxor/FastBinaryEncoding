@@ -9,6 +9,7 @@ import java.io.*;
 import java.lang.*;
 import java.lang.reflect.*;
 import java.math.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
@@ -20,8 +21,8 @@ public class StructList implements Comparable<Object>
 {
     public LinkedList<Byte> f1 = new LinkedList<Byte>();
     public LinkedList<Byte> f2 = new LinkedList<Byte>();
-    public LinkedList<byte[]> f3 = new LinkedList<byte[]>();
-    public LinkedList<byte[]> f4 = new LinkedList<byte[]>();
+    public LinkedList<ByteBuffer> f3 = new LinkedList<ByteBuffer>();
+    public LinkedList<ByteBuffer> f4 = new LinkedList<ByteBuffer>();
     public LinkedList<EnumSimple> f5 = new LinkedList<EnumSimple>();
     public LinkedList<EnumSimple> f6 = new LinkedList<EnumSimple>();
     public LinkedList<FlagsSimple> f7 = new LinkedList<FlagsSimple>();
@@ -31,7 +32,7 @@ public class StructList implements Comparable<Object>
 
     public StructList() {}
 
-    public StructList(LinkedList<Byte> f1, LinkedList<Byte> f2, LinkedList<byte[]> f3, LinkedList<byte[]> f4, LinkedList<EnumSimple> f5, LinkedList<EnumSimple> f6, LinkedList<FlagsSimple> f7, LinkedList<FlagsSimple> f8, LinkedList<StructSimple> f9, LinkedList<StructSimple> f10)
+    public StructList(LinkedList<Byte> f1, LinkedList<Byte> f2, LinkedList<ByteBuffer> f3, LinkedList<ByteBuffer> f4, LinkedList<EnumSimple> f5, LinkedList<EnumSimple> f6, LinkedList<FlagsSimple> f7, LinkedList<FlagsSimple> f8, LinkedList<StructSimple> f9, LinkedList<StructSimple> f10)
     {
         this.f1 = f1;
         this.f2 = f2;
@@ -140,7 +141,7 @@ public class StructList implements Comparable<Object>
             sb.append(",f3=[").append(f3.size()).append("]<");
             for (var item : f3)
             {
-                if (item != null) sb.append(first ? "" : ",").append("bytes[").append(item.length).append("]"); else sb.append("null");
+                if (item != null) sb.append(first ? "" : ",").append("bytes[").append(item.array().length).append("]"); else sb.append("null");
                 first = false;
             }
             sb.append(">");
@@ -151,7 +152,7 @@ public class StructList implements Comparable<Object>
             sb.append(",f4=[").append(f4.size()).append("]<");
             for (var item : f4)
             {
-                if (item != null) sb.append(first ? "" : ",").append("bytes[").append(item.length).append("]"); else sb.append("null");
+                if (item != null) sb.append(first ? "" : ",").append("bytes[").append(item.array().length).append("]"); else sb.append("null");
                 first = false;
             }
             sb.append(">");

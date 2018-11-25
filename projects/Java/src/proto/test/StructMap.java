@@ -9,6 +9,7 @@ import java.io.*;
 import java.lang.*;
 import java.lang.reflect.*;
 import java.math.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
@@ -20,8 +21,8 @@ public class StructMap implements Comparable<Object>
 {
     public TreeMap<Integer, Byte> f1 = new TreeMap<Integer, Byte>();
     public TreeMap<Integer, Byte> f2 = new TreeMap<Integer, Byte>();
-    public TreeMap<Integer, byte[]> f3 = new TreeMap<Integer, byte[]>();
-    public TreeMap<Integer, byte[]> f4 = new TreeMap<Integer, byte[]>();
+    public TreeMap<Integer, ByteBuffer> f3 = new TreeMap<Integer, ByteBuffer>();
+    public TreeMap<Integer, ByteBuffer> f4 = new TreeMap<Integer, ByteBuffer>();
     public TreeMap<Integer, EnumSimple> f5 = new TreeMap<Integer, EnumSimple>();
     public TreeMap<Integer, EnumSimple> f6 = new TreeMap<Integer, EnumSimple>();
     public TreeMap<Integer, FlagsSimple> f7 = new TreeMap<Integer, FlagsSimple>();
@@ -31,7 +32,7 @@ public class StructMap implements Comparable<Object>
 
     public StructMap() {}
 
-    public StructMap(TreeMap<Integer, Byte> f1, TreeMap<Integer, Byte> f2, TreeMap<Integer, byte[]> f3, TreeMap<Integer, byte[]> f4, TreeMap<Integer, EnumSimple> f5, TreeMap<Integer, EnumSimple> f6, TreeMap<Integer, FlagsSimple> f7, TreeMap<Integer, FlagsSimple> f8, TreeMap<Integer, StructSimple> f9, TreeMap<Integer, StructSimple> f10)
+    public StructMap(TreeMap<Integer, Byte> f1, TreeMap<Integer, Byte> f2, TreeMap<Integer, ByteBuffer> f3, TreeMap<Integer, ByteBuffer> f4, TreeMap<Integer, EnumSimple> f5, TreeMap<Integer, EnumSimple> f6, TreeMap<Integer, FlagsSimple> f7, TreeMap<Integer, FlagsSimple> f8, TreeMap<Integer, StructSimple> f9, TreeMap<Integer, StructSimple> f10)
     {
         this.f1 = f1;
         this.f2 = f2;
@@ -146,7 +147,7 @@ public class StructMap implements Comparable<Object>
             {
                 sb.append(first ? "" : ",").append(item.getKey());
                 sb.append("->");
-                if (item.getValue() != null) sb.append("bytes[").append(item.getValue().length).append("]"); else sb.append("null");
+                if (item.getValue() != null) sb.append("bytes[").append(item.getValue().array().length).append("]"); else sb.append("null");
                 first = false;
             }
             sb.append("}>");
@@ -159,7 +160,7 @@ public class StructMap implements Comparable<Object>
             {
                 sb.append(first ? "" : ",").append(item.getKey());
                 sb.append("->");
-                if (item.getValue() != null) sb.append("bytes[").append(item.getValue().length).append("]"); else sb.append("null");
+                if (item.getValue() != null) sb.append("bytes[").append(item.getValue().array().length).append("]"); else sb.append("null");
                 first = false;
             }
             sb.append("}>");

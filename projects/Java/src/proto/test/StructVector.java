@@ -9,6 +9,7 @@ import java.io.*;
 import java.lang.*;
 import java.lang.reflect.*;
 import java.math.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
@@ -20,8 +21,8 @@ public class StructVector implements Comparable<Object>
 {
     public ArrayList<Byte> f1 = new ArrayList<Byte>();
     public ArrayList<Byte> f2 = new ArrayList<Byte>();
-    public ArrayList<byte[]> f3 = new ArrayList<byte[]>();
-    public ArrayList<byte[]> f4 = new ArrayList<byte[]>();
+    public ArrayList<ByteBuffer> f3 = new ArrayList<ByteBuffer>();
+    public ArrayList<ByteBuffer> f4 = new ArrayList<ByteBuffer>();
     public ArrayList<EnumSimple> f5 = new ArrayList<EnumSimple>();
     public ArrayList<EnumSimple> f6 = new ArrayList<EnumSimple>();
     public ArrayList<FlagsSimple> f7 = new ArrayList<FlagsSimple>();
@@ -31,7 +32,7 @@ public class StructVector implements Comparable<Object>
 
     public StructVector() {}
 
-    public StructVector(ArrayList<Byte> f1, ArrayList<Byte> f2, ArrayList<byte[]> f3, ArrayList<byte[]> f4, ArrayList<EnumSimple> f5, ArrayList<EnumSimple> f6, ArrayList<FlagsSimple> f7, ArrayList<FlagsSimple> f8, ArrayList<StructSimple> f9, ArrayList<StructSimple> f10)
+    public StructVector(ArrayList<Byte> f1, ArrayList<Byte> f2, ArrayList<ByteBuffer> f3, ArrayList<ByteBuffer> f4, ArrayList<EnumSimple> f5, ArrayList<EnumSimple> f6, ArrayList<FlagsSimple> f7, ArrayList<FlagsSimple> f8, ArrayList<StructSimple> f9, ArrayList<StructSimple> f10)
     {
         this.f1 = f1;
         this.f2 = f2;
@@ -140,7 +141,7 @@ public class StructVector implements Comparable<Object>
             sb.append(",f3=[").append(f3.size()).append("][");
             for (var item : f3)
             {
-                if (item != null) sb.append(first ? "" : ",").append("bytes[").append(item.length).append("]"); else sb.append("null");
+                if (item != null) sb.append(first ? "" : ",").append("bytes[").append(item.array().length).append("]"); else sb.append("null");
                 first = false;
             }
             sb.append("]");
@@ -151,7 +152,7 @@ public class StructVector implements Comparable<Object>
             sb.append(",f4=[").append(f4.size()).append("][");
             for (var item : f4)
             {
-                if (item != null) sb.append(first ? "" : ",").append("bytes[").append(item.length).append("]"); else sb.append("null");
+                if (item != null) sb.append(first ? "" : ",").append("bytes[").append(item.array().length).append("]"); else sb.append("null");
                 first = false;
             }
             sb.append("]");

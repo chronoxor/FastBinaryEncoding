@@ -9,6 +9,7 @@ import java.io.*;
 import java.lang.*;
 import java.lang.reflect.*;
 import java.math.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
@@ -30,14 +31,14 @@ public final class FinalModelArrayOptionalBytes extends FinalModel
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(byte[][] values)
+    public long fbeAllocationSize(ByteBuffer[] values)
     {
         long size = 0;
         for (long i = 0; (i < values.length) && (i < _size); i++)
             size += _model.fbeAllocationSize(values[(int)i]);
         return size;
     }
-    public long fbeAllocationSize(ArrayList<byte[]> values)
+    public long fbeAllocationSize(ArrayList<ByteBuffer> values)
     {
         long size = 0;
         for (long i = 0; (i < values.size()) && (i < _size); i++)
@@ -66,9 +67,9 @@ public final class FinalModelArrayOptionalBytes extends FinalModel
     }
 
     // Get the array
-    public byte[][] get(Size size)
+    public ByteBuffer[] get(Size size)
     {
-        var values = new byte[(int)_size][];
+        var values = new ByteBuffer[(int)_size];
 
         assert ((_buffer.getOffset() + fbeOffset()) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset()) > _buffer.getSize())
@@ -91,7 +92,7 @@ public final class FinalModelArrayOptionalBytes extends FinalModel
     }
 
     // Get the array
-    public long get(byte[][] values)
+    public long get(ByteBuffer[] values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -115,7 +116,7 @@ public final class FinalModelArrayOptionalBytes extends FinalModel
     }
 
     // Get the array as ArrayList
-    public long get(ArrayList<byte[]> values)
+    public long get(ArrayList<ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -135,7 +136,7 @@ public final class FinalModelArrayOptionalBytes extends FinalModel
         for (long i = _size; i-- > 0;)
         {
             offset.value = 0;
-            byte[] value = _model.get(offset);
+            ByteBuffer value = _model.get(offset);
             values.add(value);
             _model.fbeShift(offset.value);
             size += offset.value;
@@ -144,7 +145,7 @@ public final class FinalModelArrayOptionalBytes extends FinalModel
     }
 
     // Set the array
-    public long set(byte[][] values)
+    public long set(ByteBuffer[] values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -166,7 +167,7 @@ public final class FinalModelArrayOptionalBytes extends FinalModel
     }
 
     // Set the array as List
-    public long set(ArrayList<byte[]> values)
+    public long set(ArrayList<ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

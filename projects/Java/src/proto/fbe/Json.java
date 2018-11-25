@@ -9,24 +9,25 @@ import java.io.*;
 import java.lang.*;
 import java.lang.reflect.*;
 import java.math.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
 
 import com.google.gson.*;
 
-final class BytesJson implements JsonSerializer<byte[]>, JsonDeserializer<byte[]>
+final class ByteBufferJson implements JsonSerializer<ByteBuffer>, JsonDeserializer<ByteBuffer>
 {
     @Override
-    public JsonElement serialize(byte[] src, Type typeOfSrc, JsonSerializationContext context)
+    public JsonElement serialize(ByteBuffer src, Type typeOfSrc, JsonSerializationContext context)
     {
-        return new JsonPrimitive(Base64.getEncoder().encodeToString(src));
+        return new JsonPrimitive(Base64.getEncoder().encodeToString(src.array()));
     }
 
     @Override
-    public byte[] deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+    public ByteBuffer deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
     {
-        return Base64.getDecoder().decode(json.getAsString());
+        return ByteBuffer.wrap(Base64.getDecoder().decode(json.getAsString()));
     }
 }
 
@@ -110,7 +111,7 @@ public final class Json
     public static GsonBuilder register(GsonBuilder builder)
     {
         builder.serializeNulls();
-        builder.registerTypeAdapter(byte[].class, new BytesJson());
+        builder.registerTypeAdapter(ByteBuffer.class, new ByteBufferJson());
         builder.registerTypeAdapter(char.class, new CharacterJson());
         builder.registerTypeAdapter(Character.class, new CharacterJson());
         builder.registerTypeAdapter(Instant.class, new InstantJson());

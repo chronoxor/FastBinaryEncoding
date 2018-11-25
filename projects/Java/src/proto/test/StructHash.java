@@ -9,6 +9,7 @@ import java.io.*;
 import java.lang.*;
 import java.lang.reflect.*;
 import java.math.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
@@ -20,8 +21,8 @@ public class StructHash implements Comparable<Object>
 {
     public HashMap<String, Byte> f1 = new HashMap<String, Byte>();
     public HashMap<String, Byte> f2 = new HashMap<String, Byte>();
-    public HashMap<String, byte[]> f3 = new HashMap<String, byte[]>();
-    public HashMap<String, byte[]> f4 = new HashMap<String, byte[]>();
+    public HashMap<String, ByteBuffer> f3 = new HashMap<String, ByteBuffer>();
+    public HashMap<String, ByteBuffer> f4 = new HashMap<String, ByteBuffer>();
     public HashMap<String, EnumSimple> f5 = new HashMap<String, EnumSimple>();
     public HashMap<String, EnumSimple> f6 = new HashMap<String, EnumSimple>();
     public HashMap<String, FlagsSimple> f7 = new HashMap<String, FlagsSimple>();
@@ -31,7 +32,7 @@ public class StructHash implements Comparable<Object>
 
     public StructHash() {}
 
-    public StructHash(HashMap<String, Byte> f1, HashMap<String, Byte> f2, HashMap<String, byte[]> f3, HashMap<String, byte[]> f4, HashMap<String, EnumSimple> f5, HashMap<String, EnumSimple> f6, HashMap<String, FlagsSimple> f7, HashMap<String, FlagsSimple> f8, HashMap<String, StructSimple> f9, HashMap<String, StructSimple> f10)
+    public StructHash(HashMap<String, Byte> f1, HashMap<String, Byte> f2, HashMap<String, ByteBuffer> f3, HashMap<String, ByteBuffer> f4, HashMap<String, EnumSimple> f5, HashMap<String, EnumSimple> f6, HashMap<String, FlagsSimple> f7, HashMap<String, FlagsSimple> f8, HashMap<String, StructSimple> f9, HashMap<String, StructSimple> f10)
     {
         this.f1 = f1;
         this.f2 = f2;
@@ -146,7 +147,7 @@ public class StructHash implements Comparable<Object>
             {
                 if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append("null");
                 sb.append("->");
-                if (item.getValue() != null) sb.append("bytes[").append(item.getValue().length).append("]"); else sb.append("null");
+                if (item.getValue() != null) sb.append("bytes[").append(item.getValue().array().length).append("]"); else sb.append("null");
                 first = false;
             }
             sb.append("}]");
@@ -159,7 +160,7 @@ public class StructHash implements Comparable<Object>
             {
                 if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append("null");
                 sb.append("->");
-                if (item.getValue() != null) sb.append("bytes[").append(item.getValue().length).append("]"); else sb.append("null");
+                if (item.getValue() != null) sb.append("bytes[").append(item.getValue().array().length).append("]"); else sb.append("null");
                 first = false;
             }
             sb.append("}]");

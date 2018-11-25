@@ -96,6 +96,7 @@ void GeneratorJava::GenerateImports(const std::string& package)
     WriteLineIndent("import java.lang.*;");
     WriteLineIndent("import java.lang.reflect.*;");
     WriteLineIndent("import java.math.*;");
+    WriteLineIndent("import java.nio.ByteBuffer;");
     WriteLineIndent("import java.nio.charset.*;");
     WriteLineIndent("import java.time.*;");
     WriteLineIndent("import java.util.*;");
@@ -1027,8 +1028,8 @@ public final class FieldModelBytes extends FieldModel
     }
 
     // Get the bytes value
-    public byte[] get() { return get(new byte[0]); }
-    public byte[] get(byte[] defaults)
+    public ByteBuffer get() { return get(ByteBuffer.allocate(0)); }
+    public ByteBuffer get(ByteBuffer defaults)
     {
         assert (defaults != null) : "Invalid default bytes value!";
         if (defaults == null)
@@ -1050,11 +1051,11 @@ public final class FieldModelBytes extends FieldModel
         if ((_buffer.getOffset() + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.getSize())
             return defaults;
 
-        return readBytes(fbeBytesOffset + 4, fbeBytesSize);
+        return ByteBuffer.wrap(readBytes(fbeBytesOffset + 4, fbeBytesSize));
     }
 
     // Set the bytes value
-    public void set(byte[] value)
+    public void set(ByteBuffer value)
     {
         assert (value != null) : "Invalid bytes value!";
         if (value == null)
@@ -1064,7 +1065,7 @@ public final class FieldModelBytes extends FieldModel
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
             return;
 
-        int fbeBytesSize = value.length;
+        int fbeBytesSize = value.array().length;
         int fbeBytesOffset = (int)(_buffer.allocate(4 + fbeBytesSize) - _buffer.getOffset());
         assert ((fbeBytesOffset > 0) && ((_buffer.getOffset() + fbeBytesOffset + 4 + fbeBytesSize) <= _buffer.getSize())) : "Model is broken!";
         if ((fbeBytesOffset <= 0) || ((_buffer.getOffset() + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.getSize()))
@@ -1072,7 +1073,7 @@ public final class FieldModelBytes extends FieldModel
 
         write(fbeOffset(), fbeBytesOffset);
         write(fbeBytesOffset, fbeBytesSize);
-        write(fbeBytesOffset + 4, value);
+        write(fbeBytesOffset + 4, value.array());
     }
 }
 )CODE";
@@ -2590,7 +2591,7 @@ public final class FinalModelBytes extends FinalModel
     public FinalModelBytes(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long fbeAllocationSize(byte[] value) { return 4 + value.length; }
+    public long fbeAllocationSize(ByteBuffer value) { return 4 + value.array().length; }
 
     // Check if the bytes value is valid
     @Override
@@ -2607,12 +2608,12 @@ public final class FinalModelBytes extends FinalModel
     }
 
     // Get the bytes value
-    public byte[] get(Size size)
+    public ByteBuffer get(Size size)
     {
         if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
         {
             size.value = 0;
-            return new byte[0];
+            return ByteBuffer.allocate(0);
         }
 
         int fbeBytesSize = readInt32(fbeOffset());
@@ -2620,15 +2621,15 @@ public final class FinalModelBytes extends FinalModel
         if ((_buffer.getOffset() + fbeOffset() + 4 + fbeBytesSize) > _buffer.getSize())
         {
             size.value = 4;
-            return new byte[0];
+            return ByteBuffer.allocate(0);
         }
 
         size.value = 4 + fbeBytesSize;
-        return readBytes(fbeOffset() + 4, fbeBytesSize);
+        return ByteBuffer.wrap(readBytes(fbeOffset() + 4, fbeBytesSize));
     }
 
     // Set the bytes value
-    public long set(byte[] value)
+    public long set(ByteBuffer value)
     {
         assert (value != null) : "Invalid bytes value!";
         if (value == null)
@@ -2638,13 +2639,13 @@ public final class FinalModelBytes extends FinalModel
         if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
-        int fbeBytesSize = value.length;
+        int fbeBytesSize = value.array().length;
         assert ((_buffer.getOffset() + fbeOffset() + 4 + fbeBytesSize) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + 4 + fbeBytesSize) > _buffer.getSize())
             return 4;
 
         write(fbeOffset(), fbeBytesSize);
-        write(fbeOffset() + 4, value);
+        write(fbeOffset() + 4, value.array());
         return 4 + fbeBytesSize;
     }
 }
@@ -4061,18 +4062,18 @@ void GeneratorJava::GenerateFBEJson(const std::string& package)
     WriteLineIndent("import com.google.gson.*;");
 
     std::string code = R"CODE(
-final class BytesJson implements JsonSerializer<byte[]>, JsonDeserializer<byte[]>
+final class ByteBufferJson implements JsonSerializer<ByteBuffer>, JsonDeserializer<ByteBuffer>
 {
     @Override
-    public JsonElement serialize(byte[] src, Type typeOfSrc, JsonSerializationContext context)
+    public JsonElement serialize(ByteBuffer src, Type typeOfSrc, JsonSerializationContext context)
     {
-        return new JsonPrimitive(Base64.getEncoder().encodeToString(src));
+        return new JsonPrimitive(Base64.getEncoder().encodeToString(src.array()));
     }
 
     @Override
-    public byte[] deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+    public ByteBuffer deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
     {
-        return Base64.getDecoder().decode(json.getAsString());
+        return ByteBuffer.wrap(Base64.getDecoder().decode(json.getAsString()));
     }
 }
 
@@ -4156,7 +4157,7 @@ public final class Json
     public static GsonBuilder register(GsonBuilder builder)
     {
         builder.serializeNulls();
-        builder.registerTypeAdapter(byte[].class, new BytesJson());
+        builder.registerTypeAdapter(ByteBuffer.class, new ByteBufferJson());
         builder.registerTypeAdapter(char.class, new CharacterJson());
         builder.registerTypeAdapter(Character.class, new CharacterJson());
         builder.registerTypeAdapter(Instant.class, new InstantJson());
@@ -6997,7 +6998,7 @@ std::string GeneratorJava::ConvertTypeName(const std::string& type, bool optiona
     else if (type == "byte")
         return "byte";
     else if (type == "bytes")
-        return "byte[]";
+        return "ByteBuffer";
     else if (type == "char")
         return "char";
     else if (type == "wchar")
@@ -7123,7 +7124,7 @@ std::string GeneratorJava::ConvertTypeFieldType(const std::string& type, bool op
     else if (type == "byte")
         return "Byte";
     else if (type == "bytes")
-        return "byte[]";
+        return "ByteBuffer";
     else if (type == "char")
         return "Character";
     else if (type == "wchar")
@@ -7337,7 +7338,7 @@ std::string GeneratorJava::ConvertDefault(const std::string& type)
     else if (type == "byte")
         return "(byte)0";
     else if (type == "bytes")
-        return "new byte[0]";
+        return "ByteBuffer.allocate(0)";
     else if ((type == "char") || (type == "wchar"))
         return "'\\0'";
     else if ((type == "int8") || (type == "uint8"))
@@ -7370,12 +7371,7 @@ std::string GeneratorJava::ConvertDefault(const StructField& field)
         return ConvertConstant(*field.type, *field.value, field.optional);
 
     if (field.array)
-    {
-        if (*field.type == "bytes")
-            return "new byte[" + std::to_string(field.N) + "][]";
-        else
-            return "new " + ConvertTypeName(*field.type, field.optional) + "[" + std::to_string(field.N) + "]";
-    }
+        return "new " + ConvertTypeName(*field.type, field.optional) + "[" + std::to_string(field.N) + "]";
     else if (field.vector || field.list || field.set || field.map || field.hash)
         return "new " + ConvertTypeName(field) + "()";
     else if (field.optional)
@@ -7391,7 +7387,7 @@ std::string GeneratorJava::ConvertOutputStreamType(const std::string& type, cons
     if (type == "bool")
         return ".append(" + name + " ? \"true\" : \"false\")";
     else if (type == "bytes")
-        return ".append(\"bytes[\").append(" + name + ".length).append(\"]\")";
+        return ".append(\"bytes[\").append(" + name + ".array().length).append(\"]\")";
     else if ((type == "char") || (type == "wchar"))
         return ".append(\"'\").append(" + name + ").append(\"'\")";
     else if ((type == "string") || (type == "uuid"))

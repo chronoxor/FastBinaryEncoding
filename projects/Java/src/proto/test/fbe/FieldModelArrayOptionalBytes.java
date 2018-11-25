@@ -9,6 +9,7 @@ import java.io.*;
 import java.lang.*;
 import java.lang.reflect.*;
 import java.math.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
@@ -71,9 +72,9 @@ public final class FieldModelArrayOptionalBytes extends FieldModel
     }
 
     // Get the array
-    public byte[][] get()
+    public ByteBuffer[] get()
     {
-        var values = new byte[(int)_size][];
+        var values = new ByteBuffer[(int)_size];
 
         var fbeModel = getItem(0);
         for (long i = 0; i < _size; i++)
@@ -85,7 +86,7 @@ public final class FieldModelArrayOptionalBytes extends FieldModel
     }
 
     // Get the array
-    public void get(byte[][] values)
+    public void get(ByteBuffer[] values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -100,7 +101,7 @@ public final class FieldModelArrayOptionalBytes extends FieldModel
     }
 
     // Get the array as ArrayList
-    public void get(ArrayList<byte[]> values)
+    public void get(ArrayList<ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -112,14 +113,14 @@ public final class FieldModelArrayOptionalBytes extends FieldModel
         var fbeModel = getItem(0);
         for (long i = _size; i-- > 0;)
         {
-            byte[] value = fbeModel.get();
+            ByteBuffer value = fbeModel.get();
             values.add(value);
             fbeModel.fbeShift(fbeModel.fbeSize());
         }
     }
 
     // Set the array
-    public void set(byte[][] values)
+    public void set(ByteBuffer[] values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)
@@ -138,7 +139,7 @@ public final class FieldModelArrayOptionalBytes extends FieldModel
     }
 
     // Set the array as List
-    public void set(ArrayList<byte[]> values)
+    public void set(ArrayList<ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";
         if (values == null)

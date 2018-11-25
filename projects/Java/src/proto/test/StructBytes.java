@@ -9,6 +9,7 @@ import java.io.*;
 import java.lang.*;
 import java.lang.reflect.*;
 import java.math.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
@@ -18,13 +19,13 @@ import proto.*;
 
 public class StructBytes implements Comparable<Object>
 {
-    public byte[] f1 = new byte[0];
-    public byte[] f2 = null;
-    public byte[] f3 = null;
+    public ByteBuffer f1 = ByteBuffer.allocate(0);
+    public ByteBuffer f2 = null;
+    public ByteBuffer f3 = null;
 
     public StructBytes() {}
 
-    public StructBytes(byte[] f1, byte[] f2, byte[] f3)
+    public StructBytes(ByteBuffer f1, ByteBuffer f2, ByteBuffer f3)
     {
         this.f1 = f1;
         this.f2 = f2;
@@ -91,9 +92,9 @@ public class StructBytes implements Comparable<Object>
     {
         var sb = new StringBuilder();
         sb.append("StructBytes(");
-        sb.append("f1="); if (f1 != null) sb.append("bytes[").append(f1.length).append("]"); else sb.append("null");
-        sb.append(",f2="); if (f2 != null) sb.append("bytes[").append(f2.length).append("]"); else sb.append("null");
-        sb.append(",f3="); if (f3 != null) sb.append("bytes[").append(f3.length).append("]"); else sb.append("null");
+        sb.append("f1="); if (f1 != null) sb.append("bytes[").append(f1.array().length).append("]"); else sb.append("null");
+        sb.append(",f2="); if (f2 != null) sb.append("bytes[").append(f2.array().length).append("]"); else sb.append("null");
+        sb.append(",f3="); if (f3 != null) sb.append("bytes[").append(f3.array().length).append("]"); else sb.append("null");
         sb.append(")");
         return sb.toString();
     }

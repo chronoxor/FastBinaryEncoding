@@ -9,6 +9,7 @@ import java.io.*;
 import java.lang.*;
 import java.lang.reflect.*;
 import java.math.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
@@ -19,7 +20,7 @@ public final class FinalModelBytes extends FinalModel
     public FinalModelBytes(Buffer buffer, long offset) { super(buffer, offset); }
 
     // Get the allocation size
-    public long fbeAllocationSize(byte[] value) { return 4 + value.length; }
+    public long fbeAllocationSize(ByteBuffer value) { return 4 + value.array().length; }
 
     // Check if the bytes value is valid
     @Override
@@ -36,12 +37,12 @@ public final class FinalModelBytes extends FinalModel
     }
 
     // Get the bytes value
-    public byte[] get(Size size)
+    public ByteBuffer get(Size size)
     {
         if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
         {
             size.value = 0;
-            return new byte[0];
+            return ByteBuffer.allocate(0);
         }
 
         int fbeBytesSize = readInt32(fbeOffset());
@@ -49,15 +50,15 @@ public final class FinalModelBytes extends FinalModel
         if ((_buffer.getOffset() + fbeOffset() + 4 + fbeBytesSize) > _buffer.getSize())
         {
             size.value = 4;
-            return new byte[0];
+            return ByteBuffer.allocate(0);
         }
 
         size.value = 4 + fbeBytesSize;
-        return readBytes(fbeOffset() + 4, fbeBytesSize);
+        return ByteBuffer.wrap(readBytes(fbeOffset() + 4, fbeBytesSize));
     }
 
     // Set the bytes value
-    public long set(byte[] value)
+    public long set(ByteBuffer value)
     {
         assert (value != null) : "Invalid bytes value!";
         if (value == null)
@@ -67,13 +68,13 @@ public final class FinalModelBytes extends FinalModel
         if ((_buffer.getOffset() + fbeOffset() + 4) > _buffer.getSize())
             return 0;
 
-        int fbeBytesSize = value.length;
+        int fbeBytesSize = value.array().length;
         assert ((_buffer.getOffset() + fbeOffset() + 4 + fbeBytesSize) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + 4 + fbeBytesSize) > _buffer.getSize())
             return 4;
 
         write(fbeOffset(), fbeBytesSize);
-        write(fbeOffset() + 4, value);
+        write(fbeOffset() + 4, value.array());
         return 4 + fbeBytesSize;
     }
 }

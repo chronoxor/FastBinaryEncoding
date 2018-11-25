@@ -9,6 +9,7 @@ import java.io.*;
 import java.lang.*;
 import java.lang.reflect.*;
 import java.math.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
@@ -101,14 +102,14 @@ public final class FieldModelOptionalBytes extends FieldModel
     }
 
     // Get the optional value
-    public byte[] get() { return get(null); }
-    public byte[] get(byte[] defaults)
+    public ByteBuffer get() { return get(null); }
+    public ByteBuffer get(ByteBuffer defaults)
     {
         long fbeBegin = getBegin();
         if (fbeBegin == 0)
             return defaults;
 
-        byte[] optional = value.get();
+        ByteBuffer optional = value.get();
 
         getEnd(fbeBegin);
 
@@ -146,7 +147,7 @@ public final class FieldModelOptionalBytes extends FieldModel
     }
 
     // Set the optional value
-    public void set(byte[] optional)
+    public void set(ByteBuffer optional)
     {
         long fbeBegin = setBegin(optional != null);
         if (fbeBegin == 0)

@@ -9,6 +9,7 @@ import java.io.*;
 import java.lang.*;
 import java.lang.reflect.*;
 import java.math.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
@@ -253,13 +254,13 @@ public final class FieldModelStructArray extends FieldModel
         if ((fbeCurrentSize + f3.fbeSize()) <= fbeStructSize)
             f3.get(fbeValue.f3);
         else
-            fbeValue.f3 = new byte[2][];
+            fbeValue.f3 = new ByteBuffer[2];
         fbeCurrentSize += f3.fbeSize();
 
         if ((fbeCurrentSize + f4.fbeSize()) <= fbeStructSize)
             f4.get(fbeValue.f4);
         else
-            fbeValue.f4 = new byte[2][];
+            fbeValue.f4 = new ByteBuffer[2];
         fbeCurrentSize += f4.fbeSize();
 
         if ((fbeCurrentSize + f5.fbeSize()) <= fbeStructSize)

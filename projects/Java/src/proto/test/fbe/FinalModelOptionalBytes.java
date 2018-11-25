@@ -9,6 +9,7 @@ import java.io.*;
 import java.lang.*;
 import java.lang.reflect.*;
 import java.math.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
@@ -26,7 +27,7 @@ public final class FinalModelOptionalBytes extends FinalModel
     }
 
     // Get the allocation size
-    public long fbeAllocationSize(byte[] optional) { return 1 + ((optional != null) ? value.fbeAllocationSize(optional) : 0); }
+    public long fbeAllocationSize(ByteBuffer optional) { return 1 + ((optional != null) ? value.fbeAllocationSize(optional) : 0); }
 
     // Checks whether the object contains a value
     public boolean hasValue()
@@ -59,7 +60,7 @@ public final class FinalModelOptionalBytes extends FinalModel
     }
 
     // Get the optional value
-    public byte[] get(Size size)
+    public ByteBuffer get(Size size)
     {
         assert ((_buffer.getOffset() + fbeOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())
@@ -75,14 +76,14 @@ public final class FinalModelOptionalBytes extends FinalModel
         }
 
         _buffer.shift(fbeOffset() + 1);
-        byte[] optional = value.get(size);
+        ByteBuffer optional = value.get(size);
         _buffer.unshift(fbeOffset() + 1);
         size.value += 1;
         return optional;
     }
 
     // Set the optional value
-    public long set(byte[] optional)
+    public long set(ByteBuffer optional)
     {
         assert ((_buffer.getOffset() + fbeOffset() + 1) <= _buffer.getSize()) : "Model is broken!";
         if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())

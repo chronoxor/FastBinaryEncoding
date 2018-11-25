@@ -9,6 +9,7 @@ import java.io.*;
 import java.lang.*;
 import java.lang.reflect.*;
 import java.math.*;
+import java.nio.ByteBuffer;
 import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
@@ -171,7 +172,7 @@ public final class FieldModelStructBytes extends FieldModel
         if ((fbeCurrentSize + f1.fbeSize()) <= fbeStructSize)
             fbeValue.f1 = f1.get();
         else
-            fbeValue.f1 = new byte[0];
+            fbeValue.f1 = ByteBuffer.allocate(0);
         fbeCurrentSize += f1.fbeSize();
 
         if ((fbeCurrentSize + f2.fbeSize()) <= fbeStructSize)
