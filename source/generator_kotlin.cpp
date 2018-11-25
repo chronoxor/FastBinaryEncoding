@@ -3959,6 +3959,7 @@ object Json
     {
         builder.serializeNulls()
         builder.registerTypeAdapter(ByteArray::class.java, BytesJson())
+        builder.registerTypeAdapter(Char::class.java, CharacterJson())
         builder.registerTypeAdapter(Character::class.java, CharacterJson())
         builder.registerTypeAdapter(Instant::class.java, InstantJson())
         builder.registerTypeAdapter(BigDecimal::class.java, BigDecimalJson())
