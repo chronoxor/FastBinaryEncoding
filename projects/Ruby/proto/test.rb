@@ -10607,13 +10607,13 @@ module Test
     def __to_json_map__
       result = {}
       key = 'f1'
-      value = (f1.nil? ? nil : Base64.encode64(f1))
+      value = (f1.nil? ? nil : Base64.encode64(f1).chomp!)
       result.store(key, value)
       key = 'f2'
-      value = (f2.nil? ? nil : Base64.encode64(f2))
+      value = (f2.nil? ? nil : Base64.encode64(f2).chomp!)
       result.store(key, value)
       key = 'f3'
-      value = (f3.nil? ? nil : Base64.encode64(f3))
+      value = (f3.nil? ? nil : Base64.encode64(f3).chomp!)
       result.store(key, value)
       result
     end
@@ -11459,10 +11459,10 @@ module Test
       value = f2.map { |item| (item.nil? ? nil : item) }
       result.store(key, value)
       key = 'f3'
-      value = f3.map { |item| (item.nil? ? nil : Base64.encode64(item)) }
+      value = f3.map { |item| (item.nil? ? nil : Base64.encode64(item).chomp!) }
       result.store(key, value)
       key = 'f4'
-      value = f4.map { |item| (item.nil? ? nil : Base64.encode64(item)) }
+      value = f4.map { |item| (item.nil? ? nil : Base64.encode64(item).chomp!) }
       result.store(key, value)
       key = 'f5'
       value = f5.map { |item| (item.nil? ? nil : item.__to_json_map__) }
@@ -12687,10 +12687,10 @@ module Test
       value = f2.map { |item| (item.nil? ? nil : item) }
       result.store(key, value)
       key = 'f3'
-      value = f3.map { |item| (item.nil? ? nil : Base64.encode64(item)) }
+      value = f3.map { |item| (item.nil? ? nil : Base64.encode64(item).chomp!) }
       result.store(key, value)
       key = 'f4'
-      value = f4.map { |item| (item.nil? ? nil : Base64.encode64(item)) }
+      value = f4.map { |item| (item.nil? ? nil : Base64.encode64(item).chomp!) }
       result.store(key, value)
       key = 'f5'
       value = f5.map { |item| (item.nil? ? nil : item.__to_json_map__) }
@@ -13915,10 +13915,10 @@ module Test
       value = f2.map { |item| (item.nil? ? nil : item) }
       result.store(key, value)
       key = 'f3'
-      value = f3.map { |item| (item.nil? ? nil : Base64.encode64(item)) }
+      value = f3.map { |item| (item.nil? ? nil : Base64.encode64(item).chomp!) }
       result.store(key, value)
       key = 'f4'
-      value = f4.map { |item| (item.nil? ? nil : Base64.encode64(item)) }
+      value = f4.map { |item| (item.nil? ? nil : Base64.encode64(item).chomp!) }
       result.store(key, value)
       key = 'f5'
       value = f5.map { |item| (item.nil? ? nil : item.__to_json_map__) }
@@ -16003,10 +16003,10 @@ module Test
       value = f2.map { |key, value| [key.to_s, (value.nil? ? nil : value)] }.to_h
       result.store(key, value)
       key = 'f3'
-      value = f3.map { |key, value| [key.to_s, (value.nil? ? nil : Base64.encode64(value))] }.to_h
+      value = f3.map { |key, value| [key.to_s, (value.nil? ? nil : Base64.encode64(value).chomp!)] }.to_h
       result.store(key, value)
       key = 'f4'
-      value = f4.map { |key, value| [key.to_s, (value.nil? ? nil : Base64.encode64(value))] }.to_h
+      value = f4.map { |key, value| [key.to_s, (value.nil? ? nil : Base64.encode64(value).chomp!)] }.to_h
       result.store(key, value)
       key = 'f5'
       value = f5.map { |key, value| [key.to_s, (value.nil? ? nil : value.__to_json_map__)] }.to_h
@@ -17301,10 +17301,10 @@ module Test
       value = f2.map { |key, value| [key.to_s, (value.nil? ? nil : value)] }.to_h
       result.store(key, value)
       key = 'f3'
-      value = f3.map { |key, value| [key.to_s, (value.nil? ? nil : Base64.encode64(value))] }.to_h
+      value = f3.map { |key, value| [key.to_s, (value.nil? ? nil : Base64.encode64(value).chomp!)] }.to_h
       result.store(key, value)
       key = 'f4'
-      value = f4.map { |key, value| [key.to_s, (value.nil? ? nil : Base64.encode64(value))] }.to_h
+      value = f4.map { |key, value| [key.to_s, (value.nil? ? nil : Base64.encode64(value).chomp!)] }.to_h
       result.store(key, value)
       key = 'f5'
       value = f5.map { |key, value| [key.to_s, (value.nil? ? nil : value.__to_json_map__)] }.to_h

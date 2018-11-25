@@ -5941,7 +5941,7 @@ std::string GeneratorRuby::ConvertValueToJson(const std::string& type, const std
     if ((type == "char") || (type == "wchar"))
         return "(" + value + ".nil? ? nil : " + value + ".ord)";
     else if (type == "bytes")
-        return "(" + value + ".nil? ? nil : Base64.encode64(" + value + "))";
+        return "(" + value + ".nil? ? nil : Base64.encode64(" + value + ").chomp!)";
     else if (type == "decimal")
         return "(" + value + ".nil? ? nil : " + value + ".to_s('F'))";
     else if (type == "timestamp")

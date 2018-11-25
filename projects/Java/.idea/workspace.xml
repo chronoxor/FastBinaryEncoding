@@ -2,66 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="783b2918-92f4-46d2-9a41-0a253625844f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../../include/generator_go.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_go.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../modules/Catch2" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/Catch2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../modules/CppBenchmark" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppBenchmark" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../modules/CppCommon" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppCommon" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelBool.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelBool.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelByte.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelByte.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelChar.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelChar.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelDecimal.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelDecimal.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelDouble.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelDouble.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelFloat.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelFloat.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt16.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt16.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt32.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt32.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt64.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt64.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt8.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelInt8.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelTimestamp.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelTimestamp.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt16.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt16.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt32.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt32.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt64.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt64.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt8.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUInt8.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUUID.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelUUID.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelWChar.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FieldModelWChar.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelBool.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelBool.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelByte.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelByte.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelChar.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelChar.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelDecimal.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelDecimal.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelDouble.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelDouble.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelFloat.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelFloat.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt16.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt16.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt32.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt32.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt64.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt64.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt8.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelInt8.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelTimestamp.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelTimestamp.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt16.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt16.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt32.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt32.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt64.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt64.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt8.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUInt8.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUUID.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelUUID.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelWChar.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/FinalModelWChar.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/tests/decimal_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/decimal_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelBytes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proto/fbe/FieldModelBytes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proto/fbe/FieldModelString.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proto/fbe/FieldModelString.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/fbe.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/fbe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelBytes.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelBytes.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelString.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/fbe/FieldModelString.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/fbe.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/fbe.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/fbe/Json.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/proto/fbe/Json.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestSerializationJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerializationJson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/tests/test_serialization_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/tests/test_serialization_json.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/proto/test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/test.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_serialization_json.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_serialization_json.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_java.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_java.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_javascript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_javascript.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_python.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_python.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_ruby.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_ruby.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
@@ -75,33 +24,35 @@
     <session id="478061424">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="14" />
+          <entry key="project.closed" value="15" />
           <entry key="project.open.time.0" value="5" />
           <entry key="project.open.time.1" value="5" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.7" value="1" />
-          <entry key="project.open.time.8" value="2" />
-          <entry key="project.opened" value="14" />
+          <entry key="project.open.time.8" value="3" />
+          <entry key="project.opened" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="25" />
+          <entry key="class" value="8" />
+          <entry key="java" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="25" />
+          <entry key="CLASS" value="8" />
+          <entry key="JAVA" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="4" />
+          <entry key="java" value="616" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="4" />
+          <entry key="JAVA" value="616" />
         </counts>
       </usages-collector>
     </session>
@@ -128,10 +79,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/benchmarks/BenchmarkSerialization.java">
+        <entry file="file://$PROJECT_DIR$/src/proto/fbe/Json.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="42" column="20" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="20" />
+            <state relative-caret-position="341">
+              <caret line="114" column="29" selection-start-line="114" selection-start-column="29" selection-end-line="114" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -139,11 +90,83 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/proto/fbe/FieldModelBytes.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/lib/gson-2.8.5.jar!/com/google/gson/internal/bind/TreeTypeAdapter.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="108" lean-forward="true" selection-start-line="108" selection-end-line="108" />
+            <state relative-caret-position="195">
+              <caret line="46" selection-start-line="46" selection-end-line="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/tests/TestSerializationJson.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="733" selection-start-line="733" selection-end-line="733" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/examples/PrintJson.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="29" lean-forward="true" selection-start-line="6" selection-end-line="7" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/proto/test/StructArray.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/lib/testng-7.0.0-beta1.jar!/org/testng/internal/Invoker.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="483" selection-start-line="483" selection-end-line="483" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/examples/Print.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="29" lean-forward="true" selection-start-line="6" selection-end-line="7" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/lib/gson-2.8.5.jar!/com/google/gson/Gson.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="178">
+              <caret line="539" selection-start-line="539" selection-end-line="539" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/lib/gson-2.8.5.jar!/com/google/gson/internal/bind/ReflectiveTypeAdapterFactory.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="178">
+              <caret line="208" selection-start-line="208" selection-end-line="208" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/proto/test/StructSimple.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="412">
+              <caret line="275" selection-start-line="275" selection-end-line="275" />
             </state>
           </provider>
         </entry>
@@ -160,6 +183,8 @@
         <option value="$PROJECT_DIR$/src/proto/proto/fbe/Receiver.java" />
         <option value="$PROJECT_DIR$/src/tests/TestSendReceiveFinal.java" />
         <option value="$PROJECT_DIR$/src/tests/TestSendReceive.java" />
+        <option value="$PROJECT_DIR$/src/proto/fbe/Json.java" />
+        <option value="$PROJECT_DIR$/src/tests/TestSerializationJson.java" />
       </list>
     </option>
   </component>
@@ -177,10 +202,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="486" />
-    <option name="y" value="113" />
-    <option name="width" value="1709" />
-    <option name="height" value="820" />
+    <option name="x" value="327" />
+    <option name="y" value="148" />
+    <option name="width" value="2008" />
+    <option name="height" value="1259" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -188,6 +213,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -204,6 +231,12 @@
               <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
               <item name="Java" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="proto" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -213,18 +246,30 @@
               <item name="proto" type="462c0819:PsiDirectoryNode" />
               <item name="fbe" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="proto" type="462c0819:PsiDirectoryNode" />
+              <item name="fbe" type="462c0819:PsiDirectoryNode" />
+              <item name="Json.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </path>
+            <path>
+              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Java" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1542901197798" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543159687224" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -243,7 +288,21 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="TestNG.&lt;default&gt;">
+  <component name="RunManager" selected="Application.PrintJson">
+    <configuration name="PrintJson" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="examples.PrintJson" />
+      <module name="FastBinaryEncoding" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="examples.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <method v="2">
@@ -252,6 +311,65 @@
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestSerializationJson" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="FastBinaryEncoding" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="tests.TestSerializationJson" />
+      <option name="METHOD_NAME" value="serializationJsonStructSimple" />
+      <option name="PARAMETERS" value="0" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestSerializationJson.serializationJsonStructArray" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="FastBinaryEncoding" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="tests.TestSerializationJson" />
+      <option name="METHOD_NAME" value="serializationJsonStructArray" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="PARAMETERS" value="0" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestSerializationJson.serializationJsonStructVector" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="FastBinaryEncoding" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="tests.TestSerializationJson" />
+      <option name="METHOD_NAME" value="serializationJsonStructVector" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="PARAMETERS" value="0" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -275,44 +393,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BenchmarkSerializationFinal.verify" type="jmh-id" factoryName="Jmh" temporary="true" program-parameters="benchmarks.BenchmarkSerializationFinal.verify" working-dir="Z:\projects\CppProjects\FastBinaryEncoding\projects\Java" benchmark-type="METHOD" benchmark-class="benchmarks.BenchmarkSerializationFinal">
-      <module name="FastBinaryEncoding" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BenchmarkSerializationJson.deserialize" type="jmh-id" factoryName="Jmh" temporary="true" program-parameters="benchmarks.BenchmarkSerializationJson.deserialize" working-dir="Z:\projects\CppProjects\FastBinaryEncoding\projects\Java" benchmark-type="METHOD" benchmark-class="benchmarks.BenchmarkSerializationJson">
-      <module name="FastBinaryEncoding" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BenchmarkSerializationJson.serialize" type="jmh-id" factoryName="Jmh" temporary="true" program-parameters="benchmarks.BenchmarkSerializationJson.serialize" working-dir="Z:\projects\CppProjects\FastBinaryEncoding\projects\Java" benchmark-type="METHOD" benchmark-class="benchmarks.BenchmarkSerializationJson">
-      <module name="FastBinaryEncoding" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BenchmarkSerialization.serialize" type="jmh-id" factoryName="Jmh" temporary="true" program-parameters="benchmarks.BenchmarkSerialization.serialize" working-dir="Z:\projects\CppProjects\FastBinaryEncoding\projects\Java" benchmark-type="METHOD" benchmark-class="benchmarks.BenchmarkSerialization">
-      <module name="FastBinaryEncoding" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
-      <item itemvalue="Jmh.BenchmarkSerializationFinal.verify" />
-      <item itemvalue="Jmh.BenchmarkSerializationJson.serialize" />
-      <item itemvalue="Jmh.BenchmarkSerializationJson.deserialize" />
       <item itemvalue="TestNG.&lt;default&gt;" />
-      <item itemvalue="Jmh.BenchmarkSerialization.serialize" />
+      <item itemvalue="TestNG.TestSerializationJson" />
+      <item itemvalue="TestNG.TestSerializationJson.serializationJsonStructArray" />
+      <item itemvalue="TestNG.TestSerializationJson.serializationJsonStructVector" />
+      <item itemvalue="Application.PrintJson" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.PrintJson" />
         <item itemvalue="TestNG.&lt;default&gt;" />
-        <item itemvalue="Jmh.BenchmarkSerialization.serialize" />
-        <item itemvalue="Jmh.BenchmarkSerializationJson.deserialize" />
-        <item itemvalue="Jmh.BenchmarkSerializationJson.serialize" />
-        <item itemvalue="Jmh.BenchmarkSerializationFinal.verify" />
+        <item itemvalue="TestNG.TestSerializationJson.serializationJsonStructVector" />
+        <item itemvalue="TestNG.TestSerializationJson.serializationJsonStructArray" />
+        <item itemvalue="TestNG.TestSerializationJson" />
       </list>
     </recent_temporary>
   </component>
@@ -343,49 +437,50 @@
       <workItem from="1539639628544" duration="54000" />
       <workItem from="1539975948259" duration="38000" />
       <workItem from="1542901052144" duration="174000" />
+      <workItem from="1543153715073" duration="5978000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="_default_ - 2018.10.03 at 22h 10m 21s.xml">
+    <history-entry file="TestSerializationJson - 2018.11.25 at 18h 07m 50s.xml">
+      <configuration name="TestSerializationJson" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="_default_ - 2018.11.25 at 18h 12m 59s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2018.10.04 at 03h 10m 29s.xml">
+    <history-entry file="_default_ - 2018.11.25 at 18h 13m 29s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2018.10.04 at 04h 09m 04s.xml">
+    <history-entry file="_default_ - 2018.11.25 at 18h 14m 22s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2018.10.04 at 04h 16m 37s.xml">
+    <history-entry file="_default_ - 2018.11.25 at 18h 18m 11s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2018.10.11 at 00h 05m 19s.xml">
+    <history-entry file="_default_ - 2018.11.25 at 18h 19m 57s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2018.10.11 at 00h 53m 04s.xml">
+    <history-entry file="_default_ - 2018.11.25 at 18h 21m 14s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2018.10.11 at 02h 40m 49s.xml">
+    <history-entry file="_default_ - 2018.11.25 at 18h 22m 40s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2018.10.16 at 00h 41m 13s.xml">
+    <history-entry file="_default_ - 2018.11.25 at 18h 25m 34s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2018.10.19 at 22h 06m 10s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="_default_ - 2018.11.22 at 18h 40m 02s.xml">
+    <history-entry file="_default_ - 2018.11.25 at 18h 27m 37s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5361000" />
+    <option name="totallyTimeSpent" value="11339000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="486" y="113" width="1709" height="820" extended-state="0" />
+    <frame x="327" y="148" width="2008" height="1259" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3098848" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2654004" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -394,8 +489,8 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49302608" weight="0.45560408" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48870638" weight="0.45559502" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49691993" weight="0.39964476" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -403,8 +498,8 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="JProfiler" order="9" />
       <window_info anchor="bottom" id="Terminal" order="10" sideWeight="0.4996968" weight="0.32891247" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5069739" side_tool="true" visible="true" weight="0.45560408" />
-      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49727106" weight="0.32891247" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.51129365" side_tool="true" visible="true" weight="0.45559502" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.49691993" weight="0.3285968" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -521,27 +616,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/examples/Print.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/examples/PrintJson.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/fbe/Json.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1717">
-          <caret line="102" selection-start-line="102" selection-end-line="102" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/proto/proto/fbe/OrderModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -635,7 +709,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/benchmarks/BenchmarkSerialization.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
+        <state relative-caret-position="697">
           <caret line="42" column="20" selection-start-line="42" selection-start-column="20" selection-end-line="42" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -645,8 +719,109 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/proto/fbe/FieldModelBytes.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="108" lean-forward="true" selection-start-line="108" selection-end-line="108" />
+        <state relative-caret-position="1259">
+          <caret line="107" selection-start-line="107" selection-end-line="107" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/gson-2.8.5.jar!/com/google/gson/TypeAdapter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="73" column="63" selection-start-line="73" selection-start-column="4" selection-end-line="73" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/gson-2.8.5.jar!/com/google/gson/JsonDeserializer.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/gson-2.8.5.jar!/com/google/gson/internal/bind/TypeAdapters.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="301">
+          <caret line="466" selection-start-line="466" selection-end-line="466" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/proto/test/StructSimple.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="275" selection-start-line="275" selection-end-line="275" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/gson-2.8.5.jar!/com/google/gson/internal/bind/TreeTypeAdapter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/gson-2.8.5.jar!/com/google/gson/GsonBuilder.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-366">
+          <caret line="196" column="23" selection-start-line="196" selection-start-column="23" selection-end-line="196" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/proto/fbe/Json.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="114" column="29" selection-start-line="114" selection-start-column="29" selection-end-line="114" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/testng-7.0.0-beta1.jar!/org/testng/internal/Invoker.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="483" selection-start-line="483" selection-end-line="483" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/gson-2.8.5.jar!/com/google/gson/Gson.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="539" selection-start-line="539" selection-end-line="539" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/gson-2.8.5.jar!/com/google/gson/internal/bind/ReflectiveTypeAdapterFactory.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="208" selection-start-line="208" selection-end-line="208" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/examples/Print.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="29" lean-forward="true" selection-start-line="6" selection-end-line="7" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/proto/test/StructArray.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="20" column="18" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/examples/PrintJson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="29" lean-forward="true" selection-start-line="6" selection-end-line="7" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/TestSerializationJson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="733" selection-start-line="733" selection-end-line="733" />
         </state>
       </provider>
     </entry>

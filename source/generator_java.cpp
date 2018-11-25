@@ -4076,6 +4076,21 @@ final class BytesJson implements JsonSerializer<byte[]>, JsonDeserializer<byte[]
     }
 }
 
+final class CharacterJson implements JsonSerializer<Character>, JsonDeserializer<Character>
+{
+    @Override
+    public JsonElement serialize(Character src, Type typeOfSrc, JsonSerializationContext context)
+    {
+        return new JsonPrimitive((long)src);
+    }
+
+    @Override
+    public Character deserialize(JsonElement json, Type type, JsonDeserializationContext context) throws JsonParseException
+    {
+        return (char)json.getAsLong();
+    }
+}
+
 final class InstantJson implements JsonSerializer<Instant>, JsonDeserializer<Instant>
 {
     @Override
@@ -4142,6 +4157,8 @@ public final class Json
     {
         builder.serializeNulls();
         builder.registerTypeAdapter(byte[].class, new BytesJson());
+        builder.registerTypeAdapter(char.class, new CharacterJson());
+        builder.registerTypeAdapter(Character.class, new CharacterJson());
         builder.registerTypeAdapter(Instant.class, new InstantJson());
         builder.registerTypeAdapter(BigDecimal.class, new BigDecimalJson());
         builder.registerTypeAdapter(UUID.class, new UUIDJson());

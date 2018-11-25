@@ -1,5 +1,6 @@
 package tests;
 
+import java.io.Console;
 import java.math.*;
 import java.util.*;
 import org.testng.*;
@@ -10,14 +11,14 @@ public class TestSerializationJson
     @Test()
     public void serializationJsonProto()
     {
-        // Create a new account with some orders
-        var account1 = new proto.Account(1, "Test", proto.State.good, new proto.Balance("USD", 1000.0), new proto.Balance("EUR", 100.0), new ArrayList<proto.Order>());
-        account1.orders.add(new proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0));
-        account1.orders.add(new proto.Order(2, "EURUSD", proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0));
-        account1.orders.add(new proto.Order(3, "EURUSD", proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0));
+        // Define a source JSON string
+        var json = "{\"uid\":1,\"name\":\"Test\",\"state\":6,\"wallet\":{\"currency\":\"USD\",\"amount\":1000.0},\"asset\":{\"currency\":\"EUR\",\"amount\":100.0},\"orders\":[{\"uid\":1,\"symbol\":\"EURUSD\",\"side\":0,\"type\":0,\"price\":1.23456,\"volume\":1000.0},{\"uid\":2,\"symbol\":\"EURUSD\",\"side\":1,\"type\":1,\"price\":1.0,\"volume\":100.0},{\"uid\":3,\"symbol\":\"EURUSD\",\"side\":0,\"type\":2,\"price\":1.5,\"volume\":10.0}]}";
+
+        // Create a new account from the source JSON string
+        var account1 = proto.Account.fromJson(json);
 
         // Serialize the account to the JSON string
-        var json = account1.toJson();
+        json = account1.toJson();
 
         // Check the serialized JSON size
         Assert.assertTrue(json.length() > 0);
@@ -57,11 +58,14 @@ public class TestSerializationJson
     @Test()
     public void serializationJsonStructSimple()
     {
-        // Create a new struct
-        var struct1 = new test.StructSimple();
+        // Define a source JSON string
+        var json = "{\"uid\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543145597933463000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"e7854072-f0a5-11e8-8f69-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}}";
+
+        // Create a new struct from the source JSON string
+        var struct1 = test.StructSimple.fromJson(json);
 
         // Serialize the struct to the JSON string
-        var json = struct1.toJson();
+        json = struct1.toJson();
 
         // Check the serialized JSON size
         Assert.assertTrue(json.length() > 0);
@@ -153,11 +157,14 @@ public class TestSerializationJson
     @Test()
     public void serializationJsonStructOptional()
     {
-        // Create a new struct
-        var struct1 = new test.StructOptional();
+        // Define a source JSON string
+        var json = "{\"uid\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543145860677797000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"8420d1c6-f0a6-11e8-80fc-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]},\"f100\":null,\"f101\":true,\"f102\":null,\"f103\":null,\"f104\":255,\"f105\":null,\"f106\":null,\"f107\":33,\"f108\":null,\"f109\":null,\"f110\":1092,\"f111\":null,\"f112\":null,\"f113\":127,\"f114\":null,\"f115\":null,\"f116\":-1,\"f117\":null,\"f118\":null,\"f119\":32767,\"f120\":null,\"f121\":null,\"f122\":-1,\"f123\":null,\"f124\":null,\"f125\":2147483647,\"f126\":null,\"f127\":null,\"f128\":-1,\"f129\":null,\"f130\":null,\"f131\":9223372036854775807,\"f132\":null,\"f133\":null,\"f134\":-1,\"f135\":null,\"f136\":null,\"f137\":123.456,\"f138\":null,\"f139\":null,\"f140\":-1.23456e+125,\"f141\":null,\"f142\":null,\"f143\":\"123456.123456\",\"f144\":null,\"f145\":null,\"f146\":\"Initial string!\",\"f147\":null,\"f148\":null,\"f149\":1543145860678429000,\"f150\":null,\"f151\":null,\"f152\":\"123e4567-e89b-12d3-a456-426655440000\",\"f153\":null,\"f154\":null,\"f155\":null,\"f156\":null,\"f157\":null,\"f158\":null,\"f159\":null,\"f160\":null,\"f161\":null,\"f162\":null,\"f163\":null,\"f164\":null,\"f165\":null}";
+
+        // Create a new struct from the source JSON string
+        var struct1 = test.StructOptional.fromJson(json);
 
         // Serialize the struct to the JSON string
-        var json = struct1.toJson();
+        json = struct1.toJson();
 
         // Check the serialized JSON size
         Assert.assertTrue(json.length() > 0);
@@ -393,11 +400,14 @@ public class TestSerializationJson
     @Test()
     public void serializationJsonStructNested()
     {
-        // Create a new struct
-        var struct1 = new test.StructNested();
+        // Define a source JSON string
+        var json = "{\"uid\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543145901646321000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"9c8c268e-f0a6-11e8-a777-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]},\"f100\":null,\"f101\":true,\"f102\":null,\"f103\":null,\"f104\":255,\"f105\":null,\"f106\":null,\"f107\":33,\"f108\":null,\"f109\":null,\"f110\":1092,\"f111\":null,\"f112\":null,\"f113\":127,\"f114\":null,\"f115\":null,\"f116\":-1,\"f117\":null,\"f118\":null,\"f119\":32767,\"f120\":null,\"f121\":null,\"f122\":-1,\"f123\":null,\"f124\":null,\"f125\":2147483647,\"f126\":null,\"f127\":null,\"f128\":-1,\"f129\":null,\"f130\":null,\"f131\":9223372036854775807,\"f132\":null,\"f133\":null,\"f134\":-1,\"f135\":null,\"f136\":null,\"f137\":123.456,\"f138\":null,\"f139\":null,\"f140\":-1.23456e+125,\"f141\":null,\"f142\":null,\"f143\":\"123456.123456\",\"f144\":null,\"f145\":null,\"f146\":\"Initial string!\",\"f147\":null,\"f148\":null,\"f149\":1543145901647155000,\"f150\":null,\"f151\":null,\"f152\":\"123e4567-e89b-12d3-a456-426655440000\",\"f153\":null,\"f154\":null,\"f155\":null,\"f156\":null,\"f157\":null,\"f158\":null,\"f159\":null,\"f160\":null,\"f161\":null,\"f162\":null,\"f163\":null,\"f164\":null,\"f165\":null,\"f1000\":0,\"f1001\":null,\"f1002\":50,\"f1003\":null,\"f1004\":0,\"f1005\":null,\"f1006\":42,\"f1007\":null,\"f1008\":{\"uid\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543145901647367000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"9c8c54c4-f0a6-11e8-a777-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},\"f1009\":null,\"f1010\":{\"uid\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543145901648310000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"9c8c6b76-f0a6-11e8-a777-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]},\"f100\":null,\"f101\":true,\"f102\":null,\"f103\":null,\"f104\":255,\"f105\":null,\"f106\":null,\"f107\":33,\"f108\":null,\"f109\":null,\"f110\":1092,\"f111\":null,\"f112\":null,\"f113\":127,\"f114\":null,\"f115\":null,\"f116\":-1,\"f117\":null,\"f118\":null,\"f119\":32767,\"f120\":null,\"f121\":null,\"f122\":-1,\"f123\":null,\"f124\":null,\"f125\":2147483647,\"f126\":null,\"f127\":null,\"f128\":-1,\"f129\":null,\"f130\":null,\"f131\":9223372036854775807,\"f132\":null,\"f133\":null,\"f134\":-1,\"f135\":null,\"f136\":null,\"f137\":123.456,\"f138\":null,\"f139\":null,\"f140\":-1.23456e+125,\"f141\":null,\"f142\":null,\"f143\":\"123456.123456\",\"f144\":null,\"f145\":null,\"f146\":\"Initial string!\",\"f147\":null,\"f148\":null,\"f149\":1543145901648871000,\"f150\":null,\"f151\":null,\"f152\":\"123e4567-e89b-12d3-a456-426655440000\",\"f153\":null,\"f154\":null,\"f155\":null,\"f156\":null,\"f157\":null,\"f158\":null,\"f159\":null,\"f160\":null,\"f161\":null,\"f162\":null,\"f163\":null,\"f164\":null,\"f165\":null},\"f1011\":null}";
+
+        // Create a new struct from the source JSON string
+        var struct1 = test.StructNested.fromJson(json);
 
         // Serialize the struct to the JSON string
-        var json = struct1.toJson();
+        json = struct1.toJson();
 
         // Check the serialized JSON size
         Assert.assertTrue(json.length() > 0);
@@ -653,13 +663,14 @@ public class TestSerializationJson
     @Test()
     public void serializationJsonStructBytes()
     {
-        // Create a new struct
-        var struct1 = new test.StructBytes();
-        struct1.f1 = "ABC".getBytes();
-        struct1.f2 = "test".getBytes();
+        // Define a source JSON string
+        var json = "{\"f1\":\"QUJD\",\"f2\":\"dGVzdA==\",\"f3\":null}";
+
+        // Create a new struct from the source JSON string
+        var struct1 = test.StructBytes.fromJson(json);
 
         // Serialize the struct to the JSON string
-        var json = struct1.toJson();
+        json = struct1.toJson();
 
         // Check the serialized JSON size
         Assert.assertTrue(json.length() > 0);
@@ -683,31 +694,14 @@ public class TestSerializationJson
     @Test()
     public void serializationJsonStructArray()
     {
-        // Create a new struct
-        var struct1 = new test.StructArray();
-        struct1.f1[0] = 48;
-        struct1.f1[1] = 65;
-        struct1.f2[0] = 97;
-        struct1.f2[1] = null;
-        struct1.f3[0] = "000".getBytes();
-        struct1.f3[1] = "AAA".getBytes();
-        struct1.f4[0] = "aaa".getBytes();
-        struct1.f4[1] = null;
-        struct1.f5[0] = test.EnumSimple.ENUM_VALUE_1;
-        struct1.f5[1] = test.EnumSimple.ENUM_VALUE_2;
-        struct1.f6[0] = test.EnumSimple.ENUM_VALUE_1;
-        struct1.f6[1] = null;
-        struct1.f7[0] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum()));
-        struct1.f7[1] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum()));
-        struct1.f8[0] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum()));
-        struct1.f8[1] = null;
-        struct1.f9[0] = new test.StructSimple();
-        struct1.f9[1] = new test.StructSimple();
-        struct1.f10[0] = new test.StructSimple();
-        struct1.f10[1] = null;
+        // Define a source JSON string
+        var json = "{\"f1\":\"MEE\\u003d\",\"f2\":[97,null],\"f3\":[\"MDAw\",\"QUFB\"],\"f4\":[\"YWFh\",null],\"f5\":[1,2],\"f6\":[1,null],\"f7\":[3,7],\"f8\":[3,null],\"f9\":[{\"uid\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543145986060361000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"cedcad98-f0a6-11e8-9f47-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},{\"uid\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543145986060910000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"cedcc274-f0a6-11e8-9f47-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}}],\"f10\":[{\"uid\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543145986061436000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"cedcd714-f0a6-11e8-9f47-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},null]}";
+
+        // Create a new struct from the source JSON string
+        var struct1 = test.StructArray.fromJson(json);
 
         // Serialize the struct to the JSON string
-        var json = struct1.toJson();
+        json = struct1.toJson();
 
         // Check the serialized JSON size
         Assert.assertTrue(json.length() > 0);
@@ -767,31 +761,14 @@ public class TestSerializationJson
     @Test()
     public void serializationJsonStructVector()
     {
-        // Create a new struct
-        var struct1 = new test.StructVector();
-        struct1.f1.add((byte)48);
-        struct1.f1.add((byte)65);
-        struct1.f2.add((byte)97);
-        struct1.f2.add(null);
-        struct1.f3.add("000".getBytes());
-        struct1.f3.add("AAA".getBytes());
-        struct1.f4.add("aaa".getBytes());
-        struct1.f4.add(null);
-        struct1.f5.add(test.EnumSimple.ENUM_VALUE_1);
-        struct1.f5.add(test.EnumSimple.ENUM_VALUE_2);
-        struct1.f6.add(test.EnumSimple.ENUM_VALUE_1);
-        struct1.f6.add(null);
-        struct1.f7.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
-        struct1.f7.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum())));
-        struct1.f8.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
-        struct1.f8.add(null);
-        struct1.f9.add(new test.StructSimple());
-        struct1.f9.add(new test.StructSimple());
-        struct1.f10.add(new test.StructSimple());
-        struct1.f10.add(null);
+        // Define a source JSON string
+        var json = "{\"f1\":[48,65],\"f2\":[97,null],\"f3\":[\"MDAw\",\"QUFB\"],\"f4\":[\"YWFh\",null],\"f5\":[1,2],\"f6\":[1,null],\"f7\":[3,7],\"f8\":[3,null],\"f9\":[{\"uid\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146157127964000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"34d38702-f0a7-11e8-b30e-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},{\"uid\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146157128572000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"34d39c88-f0a7-11e8-b30e-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}}],\"f10\":[{\"uid\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146157129063000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"34d3b038-f0a7-11e8-b30e-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},null]}";
+
+        // Create a new struct from the source JSON string
+        var struct1 = test.StructVector.fromJson(json);
 
         // Serialize the struct to the JSON string
-        var json = struct1.toJson();
+        json = struct1.toJson();
 
         // Check the serialized JSON size
         Assert.assertTrue(json.length() > 0);
@@ -851,31 +828,14 @@ public class TestSerializationJson
     @Test()
     public void serializationJsonStructList()
     {
-        // Create a new struct
-        var struct1 = new test.StructList();
-        struct1.f1.addLast((byte)48);
-        struct1.f1.addLast((byte)65);
-        struct1.f2.addLast((byte)97);
-        struct1.f2.addLast(null);
-        struct1.f3.addLast("000".getBytes());
-        struct1.f3.addLast("AAA".getBytes());
-        struct1.f4.addLast("aaa".getBytes());
-        struct1.f4.addLast(null);
-        struct1.f5.addLast(test.EnumSimple.ENUM_VALUE_1);
-        struct1.f5.addLast(test.EnumSimple.ENUM_VALUE_2);
-        struct1.f6.addLast(test.EnumSimple.ENUM_VALUE_1);
-        struct1.f6.addLast(null);
-        struct1.f7.addLast(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
-        struct1.f7.addLast(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum())));
-        struct1.f8.addLast(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
-        struct1.f8.addLast(null);
-        struct1.f9.addLast(new test.StructSimple());
-        struct1.f9.addLast(new test.StructSimple());
-        struct1.f10.addLast(new test.StructSimple());
-        struct1.f10.addLast(null);
+        // Define a source JSON string
+        var json = "{\"f1\":[48,65],\"f2\":[97,null],\"f3\":[\"MDAw\",\"QUFB\"],\"f4\":[\"YWFh\",null],\"f5\":[1,2],\"f6\":[1,null],\"f7\":[3,7],\"f8\":[3,null],\"f9\":[{\"uid\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146157127964000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"34d38702-f0a7-11e8-b30e-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},{\"uid\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146157128572000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"34d39c88-f0a7-11e8-b30e-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}}],\"f10\":[{\"uid\":0,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146157129063000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"34d3b038-f0a7-11e8-b30e-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},null]}";
+
+        // Create a new struct from the source JSON string
+        var struct1 = test.StructList.fromJson(json);
 
         // Serialize the struct to the JSON string
-        var json = struct1.toJson();
+        json = struct1.toJson();
 
         // Check the serialized JSON size
         Assert.assertTrue(json.length() > 0);
@@ -935,24 +895,14 @@ public class TestSerializationJson
     @Test()
     public void serializationJsonStructSet()
     {
-        // Create a new struct
-        var struct1 = new test.StructSet();
-        struct1.f1.add((byte)48);
-        struct1.f1.add((byte)65);
-        struct1.f1.add((byte)97);
-        struct1.f2.add(test.EnumSimple.ENUM_VALUE_1);
-        struct1.f2.add(test.EnumSimple.ENUM_VALUE_2);
-        struct1.f3.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
-        struct1.f3.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum())));
-        var s1 = new test.StructSimple();
-        s1.uid = 48;
-        struct1.f4.add(s1);
-        var s2 = new test.StructSimple();
-        s2.uid = 65;
-        struct1.f4.add(s2);
+        // Define a source JSON string
+        var json = "{\"f1\":[48,65,97],\"f2\":[1,2],\"f3\":[3,7],\"f4\":[{\"uid\":48,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146299848353000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"89e4edd0-f0a7-11e8-9dde-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},{\"uid\":65,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146299848966000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"89e503f6-f0a7-11e8-9dde-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}}]}";
+
+        // Create a new struct from the source JSON string
+        var struct1 = test.StructSet.fromJson(json);
 
         // Serialize the struct to the JSON string
-        var json = struct1.toJson();
+        json = struct1.toJson();
 
         // Check the serialized JSON size
         Assert.assertTrue(json.length() > 0);
@@ -971,42 +921,25 @@ public class TestSerializationJson
         Assert.assertTrue(struct2.f3.contains(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum()))));
         Assert.assertTrue(struct2.f3.contains(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum()))));
         Assert.assertEquals(struct2.f4.size(), 2);
+        var s1 = new test.StructSimple();
+        s1.uid = 48;
         Assert.assertTrue(struct2.f4.contains(s1));
+        var s2 = new test.StructSimple();
+        s2.uid = 65;
         Assert.assertTrue(struct2.f4.contains(s2));
     }
 
     @Test()
     public void serializationJsonStructMap()
     {
-        // Create a new struct
-        var struct1 = new test.StructMap();
-        struct1.f1.put(10, (byte)48);
-        struct1.f1.put(20, (byte)65);
-        struct1.f2.put(10, (byte)97);
-        struct1.f2.put(20, null);
-        struct1.f3.put(10, "000".getBytes());
-        struct1.f3.put(20, "AAA".getBytes());
-        struct1.f4.put(10, "aaa".getBytes());
-        struct1.f4.put(20, null);
-        struct1.f5.put(10, test.EnumSimple.ENUM_VALUE_1);
-        struct1.f5.put(20, test.EnumSimple.ENUM_VALUE_2);
-        struct1.f6.put(10, test.EnumSimple.ENUM_VALUE_1);
-        struct1.f6.put(20, null);
-        struct1.f7.put(10, test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
-        struct1.f7.put(20, test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum())));
-        struct1.f8.put(10, test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
-        struct1.f8.put(20, null);
-        var s1 = new test.StructSimple();
-        s1.uid = 48;
-        struct1.f9.put(10, s1);
-        var s2 = new test.StructSimple();
-        s2.uid = 65;
-        struct1.f9.put(20, s2);
-        struct1.f10.put(10, s1);
-        struct1.f10.put(20, null);
+        // Define a source JSON string
+        var json = "{\"f1\":{\"10\":48,\"20\":65},\"f2\":{\"10\":97,\"20\":null},\"f3\":{\"10\":\"MDAw\",\"20\":\"QUFB\"},\"f4\":{\"10\":\"YWFh\",\"20\":null},\"f5\":{\"10\":1,\"20\":2},\"f6\":{\"10\":1,\"20\":null},\"f7\":{\"10\":3,\"20\":7},\"f8\":{\"10\":3,\"20\":null},\"f9\":{\"10\":{\"uid\":48,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146345803483000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"a549215e-f0a7-11e8-90f6-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},\"20\":{\"uid\":65,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146345804184000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"a54942ce-f0a7-11e8-90f6-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}}},\"f10\":{\"10\":{\"uid\":48,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146345803483000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"a549215e-f0a7-11e8-90f6-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},\"20\":null}}";
+
+        // Create a new struct from the source JSON string
+        var struct1 = test.StructMap.fromJson(json);
 
         // Serialize the struct to the JSON string
-        var json = struct1.toJson();
+        json = struct1.toJson();
 
         // Check the serialized JSON size
         Assert.assertTrue(json.length() > 0);
@@ -1049,35 +982,14 @@ public class TestSerializationJson
     @Test()
     public void serializationJsonStructHash()
     {
-        // Create a new struct
-        var struct1 = new test.StructHash();
-        struct1.f1.put("10", (byte)48);
-        struct1.f1.put("20", (byte)65);
-        struct1.f2.put("10", (byte)97);
-        struct1.f2.put("20", null);
-        struct1.f3.put("10", "000".getBytes());
-        struct1.f3.put("20", "AAA".getBytes());
-        struct1.f4.put("10", "aaa".getBytes());
-        struct1.f4.put("20", null);
-        struct1.f5.put("10", test.EnumSimple.ENUM_VALUE_1);
-        struct1.f5.put("20", test.EnumSimple.ENUM_VALUE_2);
-        struct1.f6.put("10", test.EnumSimple.ENUM_VALUE_1);
-        struct1.f6.put("20", null);
-        struct1.f7.put("10", test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
-        struct1.f7.put("20", test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum())));
-        struct1.f8.put("10", test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
-        struct1.f8.put("20", null);
-        var s1 = new test.StructSimple();
-        s1.uid = 48;
-        struct1.f9.put("10", s1);
-        var s2 = new test.StructSimple();
-        s2.uid = 65;
-        struct1.f9.put("20", s2);
-        struct1.f10.put("10", s1);
-        struct1.f10.put("20", null);
+        // Define a source JSON string
+        var json = "{\"f1\":{\"10\":48,\"20\":65},\"f2\":{\"10\":97,\"20\":null},\"f3\":{\"10\":\"MDAw\",\"20\":\"QUFB\"},\"f4\":{\"10\":\"YWFh\",\"20\":null},\"f5\":{\"10\":1,\"20\":2},\"f6\":{\"10\":1,\"20\":null},\"f7\":{\"10\":3,\"20\":7},\"f8\":{\"10\":3,\"20\":null},\"f9\":{\"10\":{\"uid\":48,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146345803483000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"a549215e-f0a7-11e8-90f6-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},\"20\":{\"uid\":65,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146345804184000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"a54942ce-f0a7-11e8-90f6-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}}},\"f10\":{\"10\":{\"uid\":48,\"f1\":false,\"f2\":true,\"f3\":0,\"f4\":-1,\"f5\":0,\"f6\":33,\"f7\":0,\"f8\":1092,\"f9\":0,\"f10\":127,\"f11\":0,\"f12\":-1,\"f13\":0,\"f14\":32767,\"f15\":0,\"f16\":-1,\"f17\":0,\"f18\":2147483647,\"f19\":0,\"f20\":-1,\"f21\":0,\"f22\":9223372036854775807,\"f23\":0,\"f24\":-1,\"f25\":0.0,\"f26\":123.456,\"f27\":0.0,\"f28\":-1.23456e+125,\"f29\":\"0\",\"f30\":\"123456.123456\",\"f31\":\"\",\"f32\":\"Initial string!\",\"f33\":0,\"f34\":0,\"f35\":1543146345803483000,\"f36\":\"00000000-0000-0000-0000-000000000000\",\"f37\":\"a549215e-f0a7-11e8-90f6-ac220bcdd8e0\",\"f38\":\"123e4567-e89b-12d3-a456-426655440000\",\"f39\":0,\"f40\":0,\"f41\":{\"uid\":0,\"symbol\":\"\",\"side\":0,\"type\":0,\"price\":0.0,\"volume\":0.0},\"f42\":{\"currency\":\"\",\"amount\":0.0},\"f43\":0,\"f44\":{\"uid\":0,\"name\":\"\",\"state\":11,\"wallet\":{\"currency\":\"\",\"amount\":0.0},\"asset\":null,\"orders\":[]}},\"20\":null}}";
+
+        // Create a new struct from the source JSON string
+        var struct1 = test.StructHash.fromJson(json);
 
         // Serialize the struct to the JSON string
-        var json = struct1.toJson();
+        json = struct1.toJson();
 
         // Check the serialized JSON size
         Assert.assertTrue(json.length() > 0);
