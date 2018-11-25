@@ -14,6 +14,7 @@ void GeneratorGo::Generate(const std::shared_ptr<Package>& package)
 {
     GenerateFBEPackage("fbe");
     GenerateFBEConstants("fbe");
+    GenerateFBEOptional("fbe");
     GenerateFBETypes("fbe");
     GenerateFBEVersion("fbe", "fbe");
     GenerateFBEBuffer("fbe");
@@ -135,6 +136,123 @@ const MinUint = 0
     Close();
 }
 
+void GeneratorGo::GenerateFBEOptional(const std::string& package)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / "Optional.go";
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
+    std::string code = R"CODE(
+package fbe
+
+// Create an optional bool
+func OptionalBool(value bool) *bool {
+    return &value
+}
+
+// Create an optional byte
+func OptionalByte(value byte) *byte {
+    return &value
+}
+
+// Create an optional bytes
+func OptionalBytes(value []byte) *[]byte {
+    return &value
+}
+
+// Create an optional rune
+func OptionalRune(value rune) *rune {
+    return &value
+}
+
+// Create an optional int8
+func OptionalInt8(value int8) *int8 {
+    return &value
+}
+
+// Create an optional uint8
+func OptionalUInt8(value uint8) *uint8 {
+    return &value
+}
+
+// Create an optional int16
+func OptionalInt16(value int16) *int16 {
+    return &value
+}
+
+// Create an optional uint16
+func OptionalUInt16(value uint16) *uint16 {
+    return &value
+}
+
+// Create an optional int32
+func OptionalInt32(value int32) *int32 {
+    return &value
+}
+
+// Create an optional uint32
+func OptionalUInt32(value uint32) *uint32 {
+    return &value
+}
+
+// Create an optional int64
+func OptionalInt64(value int64) *int64 {
+    return &value
+}
+
+// Create an optional uint64
+func OptionalUInt64(value uint64) *uint64 {
+    return &value
+}
+
+// Create an optional float32
+func OptionalFloat32(value float32) *float32 {
+    return &value
+}
+
+// Create an optional float64
+func OptionalFloat64(value float64) *float64 {
+    return &value
+}
+
+// Create an optional decimal
+func OptionalDecimal(value Decimal) *Decimal {
+    return &value
+}
+
+// Create an optional timestamp
+func OptionalTimestamp(value Timestamp) *Timestamp {
+    return &value
+}
+
+// Create an optional string
+func OptionalString(value string) *string {
+    return &value
+}
+
+// Create an optional UUID
+func OptionalUUID(value UUID) *UUID {
+    return &value
+}
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
 void GeneratorGo::GenerateFBETypes(const std::string& package)
 {
     CppCommon::Path path = CppCommon::Path(_output) / package;
@@ -159,6 +277,12 @@ type Decimal struct {
     decimal.Decimal
 }
 
+// Create a new decimal from the given float value
+func DecimalFromFloat(value float64) Decimal {
+    result := decimal.NewFromFloat(value)
+    return Decimal{result}
+}
+
 // Create a new decimal from the given string
 func DecimalFromString(value string) Decimal {
     result, _ := decimal.NewFromString(value)
@@ -175,19 +299,19 @@ type Timestamp struct {
     time.Time
 }
 
+// Create a new timestamp from the given nanoseconds
+func TimestampFromNanoseconds(nanoseconds uint64) Timestamp {
+    return Timestamp{time.Unix(int64(nanoseconds / 1000000000), int64(nanoseconds % 1000000000))}
+}
+
 // Create Unix Epoch timestamp
 func TimestampEpoch() Timestamp {
     return Timestamp{time.Unix(0, 0)}
 }
 
 // Create the current UTC timestamp
-func TimestampNow() Timestamp {
-    return Timestamp{time.Unix(0, 0)}
-}
-
-// Create a new timestamp from the given nanoseconds
-func TimestampFromNanoseconds(nanoseconds uint64) Timestamp {
-    return Timestamp{time.Unix(int64(nanoseconds / 1000000000), int64(nanoseconds % 1000000000))}
+func TimestampUTC() Timestamp {
+    return Timestamp{time.Now().UTC()}
 }
 
 // Convert timestamp to JSON
@@ -214,6 +338,12 @@ type UUID struct {
 // Create a new UUID from the given bytes buffer
 func UUIDFromBytes(buffer []byte) UUID {
     result, _ := uuid.FromBytes(buffer)
+    return UUID{result}
+}
+
+// Create a new UUID from the given string
+func UUIDFromString(value string) UUID {
+    result, _ := uuid.Parse(value)
     return UUID{result}
 }
 
@@ -3799,6 +3929,15 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
     Indent(-1);
     WriteLineIndent("}");
 
+    // Generate enum Optional() method
+    WriteLine();
+    WriteLineIndent("// Convert enum to optional");
+    WriteLineIndent("func (e " + enum_name + ") Optional() *" + enum_name + " {");
+    Indent(1);
+    WriteLineIndent("return &e");
+    Indent(-1);
+    WriteLineIndent("}");
+
     // Generate enum String() method
     WriteLine();
     WriteLineIndent("// Convert enum to string");
@@ -3940,12 +4079,50 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::sh
     Indent(-1);
     WriteLineIndent("}");
 
+    // Generate flags HasFlags() method
+    WriteLine();
+    WriteLineIndent("// Is flags set?");
+    WriteLineIndent("func (f " + flags_name + ") HasFlags(flags " + flags_name + ") bool {");
+    Indent(1);
+    WriteLineIndent("return ((f & flags) != 0) && ((f & flags) == flags)");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate flags SetFlags() method
+    WriteLine();
+    WriteLineIndent("// Set flags");
+    WriteLineIndent("func (f *" + flags_name + ") SetFlags(flags " + flags_name + ") *" + flags_name + " {");
+    Indent(1);
+    WriteLineIndent("*f |= flags");
+    WriteLineIndent("return f");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate flags RemoveFlags() method
+    WriteLine();
+    WriteLineIndent("// Remove flags");
+    WriteLineIndent("func (f *" + flags_name + ") RemoveFlags(flags " + flags_name + ") *" + flags_name + " {");
+    Indent(1);
+    WriteLineIndent("*f &^= flags");
+    WriteLineIndent("return f");
+    Indent(-1);
+    WriteLineIndent("}");
+
     // Generate flags Key() method
     WriteLine();
     WriteLineIndent("// Get the flags key");
     WriteLineIndent("func (f " + flags_name + ") Key() " + flags_name + "Key {");
     Indent(1);
     WriteLineIndent("return " + flags_name + "Key(f)");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate flags Optional() method
+    WriteLine();
+    WriteLineIndent("// Convert flags to optional");
+    WriteLineIndent("func (f " + flags_name + ") Optional() *" + flags_name + " {");
+    Indent(1);
+    WriteLineIndent("return &f");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -4082,23 +4259,72 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
         WriteLineIndent(base_type);
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent(ConvertCase(*field->name) + " " + ConvertTypeName(*field));
+            WriteLineIndent(ConvertCase(*field->name) + " " + ConvertTypeName(*field) + " `json:\"" + *field->name + "\"`");
     Indent(-1);
     WriteLineIndent("}");
 
-    // Generate struct JSON constructor
+    // Generate struct constructor
     WriteLine();
-    WriteLineIndent("// Create a new " + struct_name + " struct from JSON");
-    WriteLineIndent("func New" + struct_name + "FromJSON(buffer []byte) (*" + struct_name + ", error) {");
+    WriteLineIndent("// Create a new " + struct_name + " struct");
+    WriteLineIndent("func New" + struct_name + "() *" + struct_name + " {");
     Indent(1);
-    WriteLineIndent("var result " + struct_name);
-    WriteLineIndent("err := json.Unmarshal(buffer, &result)");
-    WriteLineIndent("if err != nil {");
+    WriteLineIndent("return &" + struct_name + "{");
     Indent(1);
-    WriteLineIndent("return nil, err");
+    if (!base_type.empty())
+        WriteLineIndent(ConvertBaseName(base_type) + ": " + ConvertBaseNew(base_type) + ",");
+    if (s->body)
+    {
+        for (const auto& field : s->body->fields)
+        {
+            WriteIndent(ConvertCase(*field->name) + ": ");
+            if (field->value)
+                Write(ConvertConstant(*field->type, *field->value, field->optional));
+            else
+                Write(ConvertDefault(*field));
+            WriteLine(",");
+        }
+    }
     Indent(-1);
     WriteLineIndent("}");
-    WriteLineIndent("return &result, nil");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    if (JSON())
+    {
+        // Generate struct JSON constructor
+        WriteLine();
+        WriteLineIndent("// Create a new " + struct_name + " struct from JSON");
+        WriteLineIndent("func New" + struct_name + "FromJSON(buffer []byte) (*" + struct_name + ", error) {");
+        Indent(1);
+        WriteLineIndent("var result " + struct_name);
+        WriteLineIndent("err := json.Unmarshal(buffer, &result)");
+        WriteLineIndent("if err != nil {");
+        Indent(1);
+        WriteLineIndent("return nil, err");
+        Indent(-1);
+        WriteLineIndent("}");
+        WriteLineIndent("return &result, nil");
+        Indent(-1);
+        WriteLineIndent("}");
+    }
+
+    // Generate struct Copy() method
+    WriteLine();
+    WriteLineIndent("// Struct shallow copy");
+    WriteLineIndent("func (s " + struct_name + ") Copy() *" + struct_name + " {");
+    Indent(1);
+    WriteLineIndent("var result = s");
+    WriteLineIndent("return &result");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate struct Clone() method
+    WriteLine();
+    WriteLineIndent("// Struct deep clone");
+    WriteLineIndent("func (s " + struct_name + ") Clone() *" + struct_name + " {");
+    Indent(1);
+    WriteLineIndent("var result = s");
+    WriteLineIndent("return &result");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -4120,6 +4346,15 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     Indent(-1);
     WriteLineIndent("}");
 
+    // Generate struct Optional() method
+    WriteLine();
+    WriteLineIndent("// Convert struct to optional");
+    WriteLineIndent("func (s " + struct_name + ") Optional() *" + struct_name + " {");
+    Indent(1);
+    WriteLineIndent("return &s");
+    Indent(-1);
+    WriteLineIndent("}");
+
     // Generate struct String() method
     WriteLine();
     WriteLineIndent("// Convert struct to string");
@@ -4130,14 +4365,17 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     Indent(-1);
     WriteLineIndent("}");
 
-    // Generate struct JSON() method
-    WriteLine();
-    WriteLineIndent("// Convert struct to JSON");
-    WriteLineIndent("func (s " + struct_name + ") JSON() ([]byte, error) {");
-    Indent(1);
-    WriteLineIndent("return json.Marshal(s)");
-    Indent(-1);
-    WriteLineIndent("}");
+    if (JSON())
+    {
+        // Generate struct JSON() method
+        WriteLine();
+        WriteLineIndent("// Convert struct to JSON");
+        WriteLineIndent("func (s " + struct_name + ") JSON() ([]byte, error) {");
+        Indent(1);
+        WriteLineIndent("return json.Marshal(s)");
+        Indent(-1);
+        WriteLineIndent("}");
+    }
 /*
     std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "object";
 
@@ -4192,7 +4430,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
             {
                 WriteLineIndent("if " + *field->name + " is None:");
                 Indent(1);
-                WriteLineIndent(*field->name + " = " + ConvertDefault(*field.get()));
+                WriteLineIndent(*field->name + " = " + ConvertDefault(*field));
                 Indent(-1);
             }
         }
@@ -4873,7 +5111,7 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<StructType>& s)
             if (field->array || field->vector || field->list || field->set || field->map || field->hash)
                 WriteLineIndent("fbe_value." + *field->name + ".clear()");
             else
-                WriteLineIndent("fbe_value." + *field->name + " = " + ConvertDefault(*field.get()));
+                WriteLineIndent("fbe_value." + *field->name + " = " + ConvertDefault(*field));
             Indent(-1);
             WriteLineIndent("fbe_current_size += self." + *field->name + ".fbe_size");
         }
@@ -5824,6 +6062,29 @@ std::string GeneratorGo::ConvertEnumType(const std::string& type)
     return "";
 }
 
+std::string GeneratorGo::ConvertEnumConstant(const std::string& value)
+{
+    std::string ns = "";
+    std::string t = "";
+    std::string v = "";
+
+    size_t pos = value.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        t.assign(value, 0, pos);
+        v.assign(value, pos + 1, value.size() - pos);
+    }
+
+    pos = t.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        ns.assign(t, 0, pos);
+        t.assign(t, pos + 1, t.size() - pos);
+    }
+
+    return ns + ConvertCase(t) + "_" + v;
+}
+
 std::string GeneratorGo::ConvertEnumConstant(const std::string& name, const std::string& type, const std::string& value)
 {
     if (((type == "char") || (type == "wchar")) && CppCommon::StringUtils::StartsWith(value, "'"))
@@ -5870,6 +6131,21 @@ std::string GeneratorGo::ConvertBaseName(const std::string& type)
     return ConvertCase(t);
 }
 
+std::string GeneratorGo::ConvertBaseNew(const std::string& type)
+{
+    std::string ns = "";
+    std::string t = type;
+
+    size_t pos = type.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        ns.assign(type, 0, pos + 1);
+        t.assign(type, pos + 1, type.size() - pos);
+    }
+
+    return "*" + ns + "New" + ConvertCase(t) + "()";
+}
+
 std::string GeneratorGo::ConvertKeyName(const std::string& type)
 {
     if (IsGoType(type))
@@ -5886,6 +6162,51 @@ std::string GeneratorGo::ConvertKeyName(const std::string& type)
     }
 
     return ns + ConvertCase(t) + "Key";
+}
+
+std::string GeneratorGo::ConvertOptional(const std::string& type, const std::string& value)
+{
+    if (value == "null")
+        return "nil";
+
+    if (type == "bool")
+        return "fbe.OptionalBool(" + ConvertConstant(type, value, false) + ")";
+    else if (type == "byte")
+        return "fbe.OptionalByte(" + ConvertConstant(type, value, false) + ")";
+    else if (type == "bytes")
+        return "fbe.OptionalBytes(" + ConvertConstant(type, value, false) + ")";
+    else if ((type == "char") || (type == "wchar"))
+        return "fbe.OptionalRune(" + ConvertConstant(type, value, false) + ")";
+    else if (type == "int8")
+        return "fbe.OptionalInt8(" + ConvertConstant(type, value, false) + ")";
+    else if (type == "uint8")
+        return "fbe.OptionalUInt8(" + ConvertConstant(type, value, false) + ")";
+    else if (type == "int16")
+        return "fbe.OptionalInt16(" + ConvertConstant(type, value, false) + ")";
+    else if (type == "uint16")
+        return "fbe.OptionalUInt16(" + ConvertConstant(type, value, false) + ")";
+    else if (type == "int32")
+        return "fbe.OptionalInt32(" + ConvertConstant(type, value, false) + ")";
+    else if (type == "uint32")
+        return "fbe.OptionalUInt32(" + ConvertConstant(type, value, false) + ")";
+    else if (type == "int64")
+        return "fbe.OptionalInt64(" + ConvertConstant(type, value, false) + ")";
+    else if (type == "uint64")
+        return "fbe.OptionalUInt64(" + ConvertConstant(type, value, false) + ")";
+    else if (type == "float")
+        return "fbe.OptionalFloat32(" + ConvertConstant(type, value, false) + ")";
+    else if (type == "double")
+        return "fbe.OptionalFloat64(" + ConvertConstant(type, value, false) + ")";
+    else if (type == "decimal")
+        return "fbe.OptionalDecimal(" + ConvertConstant(type, value, false) + ")";
+    else if (type == "timestamp")
+        return "fbe.OptionalTimestamp(" + ConvertConstant(type, value, false) + ")";
+    else if (type == "string")
+        return "fbe.OptionalString(" + ConvertConstant(type, value, false) + ")";
+    else if (type == "uuid")
+        return "fbe.OptionalUUID(" + ConvertConstant(type, value, false) + ")";
+
+    return ConvertConstant(type, value, false) + ".Optional()";
 }
 
 std::string GeneratorGo::ConvertTypeName(const std::string& type, bool optional)
@@ -6017,98 +6338,95 @@ std::string GeneratorGo::ConvertTypeFieldInitialization(const StructField& field
     else
         return ConvertTypeFieldInitialization(*field.type, field.optional, offset, final);
 }
-
+*/
 std::string GeneratorGo::ConvertConstant(const std::string& type, const std::string& value, bool optional)
 {
-    if (value == "true")
-        return "True";
-    else if (value == "false")
-        return "False";
-    else if (value == "null")
-        return "None";
-    else if (value == "epoch")
-        return "fbe.epoch()";
-    else if (value == "utc")
-        return "fbe.utc()";
-    else if (value == "uuid0")
-        return "uuid.UUID(int=0)";
-    else if (value == "uuid1")
-        return "uuid.uuid1()";
-    else if (value == "uuid4")
-        return "uuid.uuid4()";
-
-    if (type == "bool")
-        return "bool(" + value + ")";
-    else if (((type == "char") || (type == "wchar")) && !CppCommon::StringUtils::StartsWith(value, "'"))
-        return "chr(" + value + ")";
-    else if ((type == "byte") || (type == "int8") || (type == "uint8") || (type == "int16") || (type == "uint16") || (type == "int32") || (type == "uint32") || (type == "int64") || (type == "uint64") || (type == "timestamp"))
-        return "int(" + value + ")";
-    else if ((type == "float") || (type == "double"))
-        return "float(" + value + ")";
-    else if (type == "decimal")
-        return "decimal.Decimal(\"" + value + "\")";
-    else if (type == "uuid")
-        return "uuid.UUID(" + value + ")";
-
-    return value;
-}
-
-std::string GeneratorGo::ConvertDefaultOrNone(const std::string& type, bool optional)
-{
     if (optional)
-        return "None";
+        return ConvertOptional(type, value);
 
-    if (type == "bool")
-        return "False";
-    else if (type == "byte")
-        return "0";
-    else if (type == "bytes")
-        return "None";
-    else if ((type == "char") || (type == "wchar"))
-        return "'\\0'";
-    else if ((type == "int8") || (type == "uint8") || (type == "int16") || (type == "uint16") || (type == "int32") || (type == "uint32") || (type == "int64") || (type == "uint64"))
-        return "0";
-    else if ((type == "float") || (type == "double"))
-        return "0.0";
+    if (value == "true")
+        return "true";
+    else if (value == "false")
+        return "false";
+    else if (value == "null")
+        return "nil";
+    else if (value == "epoch")
+        return "fbe.TimestampEpoch()";
+    else if (value == "utc")
+        return "fbe.TimestampUTC()";
+    else if (value == "uuid0")
+        return "fbe.UUIDNil()";
+    else if (value == "uuid1")
+        return "fbe.UUIDSequential()";
+    else if (value == "uuid4")
+        return "fbe.UUIDRandom()";
+
+    if ((type == "bool") || (type == "byte") || (type == "int8") || (type == "uint8") || (type == "int16") || (type == "uint16") || (type == "int32") || (type == "uint32") || (type == "int64") || (type == "uint64"))
+        return type + "(" + value + ")";
+    else if (((type == "char") || (type == "wchar")) && !CppCommon::StringUtils::StartsWith(value, "'"))
+        return "rune(" + value + ")";
+    else if (type == "float")
+        return "float32(" + value + ")";
+    else if (type == "double")
+        return "float64(" + value + ")";
     else if (type == "decimal")
-        return "decimal.Decimal(0)";
-    else if (type == "timestamp")
-        return "fbe.epoch()";
-    else if (type == "string")
-        return "\"\"";
+        return "fbe.DecimalFromString(\"" + value + "\")";
     else if (type == "uuid")
-        return "uuid.UUID(int=0)";
+        return "fbe.UUIDFromString(" + value + ")";
 
-    return "None";
+    std::string result = value;
+
+    if (!IsGoType(type))
+    {
+        // Fill flags values
+        std::vector<std::string> flags = CppCommon::StringUtils::Split(value, '|', true);
+
+        // Generate flags combination
+        if (flags.size() > 1)
+        {
+            result = "";
+            bool first = true;
+            for (const auto& it : flags)
+            {
+                result += (first ? "" : " | ") + ConvertEnumConstant(CppCommon::StringUtils::ToTrim(it));
+                first = false;
+            }
+        }
+        // Generate single flag
+        else if (flags.size() > 0)
+            result = ConvertEnumConstant(CppCommon::StringUtils::ToTrim(flags.front()));
+    }
+
+    return result;
 }
 
 std::string GeneratorGo::ConvertDefault(const std::string& type, bool optional)
 {
     if (optional)
-        return "None";
+        return "nil";
 
     if (type == "bool")
-        return "False";
+        return "false";
     else if (type == "byte")
         return "0";
     else if (type == "bytes")
-        return "bytearray()";
+        return "make([]byte, 0)";
     else if ((type == "char") || (type == "wchar"))
-        return "'\\0'";
+        return "'\\000'";
     else if ((type == "int8") || (type == "uint8") || (type == "int16") || (type == "uint16") || (type == "int32") || (type == "uint32") || (type == "int64") || (type == "uint64"))
         return "0";
     else if ((type == "float") || (type == "double"))
         return "0.0";
     else if (type == "decimal")
-        return "decimal.Decimal(0)";
+        return "fbe.DecimalZero()";
     else if (type == "timestamp")
-        return "fbe.epoch()";
+        return "fbe.TimestampEpoch()";
     else if (type == "string")
         return "\"\"";
     else if (type == "uuid")
-        return "uuid.UUID(int=0)";
+        return "fbe.UUIDNil()";
 
-    return type + "()";
+    return ConvertBaseNew(type);
 }
 
 std::string GeneratorGo::ConvertDefault(const StructField& field)
@@ -6117,17 +6435,15 @@ std::string GeneratorGo::ConvertDefault(const StructField& field)
         return ConvertConstant(*field.type, *field.value, field.optional);
 
     if (field.array)
-        return "[" + ConvertDefault(*field.type, field.optional) + "]*" + std::to_string(field.N);
-    else if (field.vector || field.list || field.set || field.map || field.hash)
-        return ConvertTypeName(field) + "()";
-    else if (field.optional)
-        return "None";
-    else if (*field.type == "bytes")
-        return "bytearray()";
+        return ConvertTypeName(field) + "{}";
+    else if (field.vector || field.list)
+        return "make(" + ConvertTypeName(field) + ", 0)";
+    else if (field.set || field.map || field.hash)
+        return "make(" + ConvertTypeName(field) + ")";
 
     return ConvertDefault(*field.type, field.optional);
 }
-
+/*
 void GeneratorGo::WriteOutputStreamType(const std::string& type, const std::string& name, bool optional)
 {
     if (type == "bool")

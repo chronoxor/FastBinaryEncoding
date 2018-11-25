@@ -5970,7 +5970,7 @@ void GeneratorCpp::GenerateStruct(const std::shared_ptr<Package>& p, const std::
     // Generate struct body
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent(ConvertTypeName(*p->name, *field.get()) + " " + *field->name + ";");
+            WriteLineIndent(ConvertTypeName(*p->name, *field) + " " + *field->name + ";");
 
     // Generate struct default constructor
     bool first = true;
@@ -5986,7 +5986,7 @@ void GeneratorCpp::GenerateStruct(const std::shared_ptr<Package>& p, const std::
     {
         for (const auto& field : s->body->fields)
         {
-            WriteLineIndent(std::string(first ? ": " : ", ") + *field->name + "(" + ((field->value || IsPrimitiveType(*field->type, field->optional)) ? ConvertDefault(*p->name, *field.get()) : "") + ")");
+            WriteLineIndent(std::string(first ? ": " : ", ") + *field->name + "(" + ((field->value || IsPrimitiveType(*field->type, field->optional)) ? ConvertDefault(*p->name, *field) : "") + ")");
             first = false;
         }
     }
@@ -6005,7 +6005,7 @@ void GeneratorCpp::GenerateStruct(const std::shared_ptr<Package>& p, const std::
     {
         for (const auto& field : s->body->fields)
         {
-            Write(std::string(first ? "" : ", ") + ConvertTypeNameAsArgument(*p->name, *field.get()) + " arg_" + *field->name);
+            Write(std::string(first ? "" : ", ") + ConvertTypeNameAsArgument(*p->name, *field) + " arg_" + *field->name);
             first = false;
         }
     }
@@ -6729,7 +6729,7 @@ void GeneratorCpp::GenerateStructFieldModel(const std::shared_ptr<Package>& p, c
             else if (field->vector || field->list || field->set || field->map || field->hash || ((*field->type == "bytes") && !field->optional))
                 WriteLineIndent("fbe_value." + *field->name + ".clear();");
             else
-                WriteLineIndent("fbe_value." + *field->name + " = " + ConvertDefault(*p->name, *field.get()) + ";");
+                WriteLineIndent("fbe_value." + *field->name + " = " + ConvertDefault(*p->name, *field) + ";");
             Indent(-1);
             WriteLineIndent("fbe_current_size += " + *field->name + ".fbe_size();");
         }

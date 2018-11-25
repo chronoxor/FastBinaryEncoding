@@ -43,6 +43,11 @@ func (e EnumByte) Key() EnumByteKey {
     return EnumByteKey(e)
 }
 
+// Convert enum to optional
+func (e EnumByte) Optional() *EnumByte {
+    return &e
+}
+
 // Convert enum to string
 func (e EnumByte) String() string {
     if e == EnumByte_ENUM_VALUE_0 {

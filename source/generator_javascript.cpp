@@ -8979,7 +8979,7 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
     {
         for (const auto& field : s->body->fields)
         {
-            Write(std::string(first ? "" : ", ") + *field->name + " = " + ConvertDefault(*field.get()));
+            Write(std::string(first ? "" : ", ") + *field->name + " = " + ConvertDefault(*field));
             first = false;
         }
     }
@@ -9772,7 +9772,7 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
             else if (field->set || field->map || field->hash)
                 WriteLineIndent("fbeValue." + *field->name + ".clear()");
             else
-                WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field.get()));
+                WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field));
             Indent(-1);
             WriteLineIndent("}");
             WriteLineIndent("// noinspection JSUnusedAssignment");

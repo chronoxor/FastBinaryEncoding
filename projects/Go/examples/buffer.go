@@ -3,6 +3,7 @@ package main
 import (
 	"../proto/fbe"
 	"../proto/proto"
+	"../proto/protoex"
 	"encoding/json"
 	"fmt"
 )
@@ -25,6 +26,15 @@ func main() {
 
 	m := map[proto.OrderKey]string{}
 	m[o1.Key()] = o1.String()
+
+	b1 := protoex.NewBalance()
+	b1.Currency = "EUR"
+	b1.Amount = 123.456
+	b1.Locked = 987.654
+	j, _ = b1.JSON()
+	fmt.Println(string(j))
+	b2, _ := protoex.NewBalanceFromJSON(j)
+	fmt.Println(b2)
 
 	buffer := fbe.NewCapacityBuffer(10)
 	buffer.Allocate(10)

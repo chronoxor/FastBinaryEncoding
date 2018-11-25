@@ -27,16 +27,32 @@ func (k StructHashKey) String() string {
 
 // StructHash struct
 type StructHash struct {
-    F1 map[string]byte
-    F2 map[string]*byte
-    F3 map[string][]byte
-    F4 map[string]*[]byte
-    F5 map[string]EnumSimple
-    F6 map[string]*EnumSimple
-    F7 map[string]FlagsSimple
-    F8 map[string]*FlagsSimple
-    F9 map[string]StructSimple
-    F10 map[string]*StructSimple
+    F1 map[string]byte `json:"f1"`
+    F2 map[string]*byte `json:"f2"`
+    F3 map[string][]byte `json:"f3"`
+    F4 map[string]*[]byte `json:"f4"`
+    F5 map[string]EnumSimple `json:"f5"`
+    F6 map[string]*EnumSimple `json:"f6"`
+    F7 map[string]FlagsSimple `json:"f7"`
+    F8 map[string]*FlagsSimple `json:"f8"`
+    F9 map[string]StructSimple `json:"f9"`
+    F10 map[string]*StructSimple `json:"f10"`
+}
+
+// Create a new StructHash struct
+func NewStructHash() *StructHash {
+    return &StructHash{
+        F1: make(map[string]byte),
+        F2: make(map[string]*byte),
+        F3: make(map[string][]byte),
+        F4: make(map[string]*[]byte),
+        F5: make(map[string]EnumSimple),
+        F6: make(map[string]*EnumSimple),
+        F7: make(map[string]FlagsSimple),
+        F8: make(map[string]*FlagsSimple),
+        F9: make(map[string]StructSimple),
+        F10: make(map[string]*StructSimple),
+    }
 }
 
 // Create a new StructHash struct from JSON
@@ -49,10 +65,27 @@ func NewStructHashFromJSON(buffer []byte) (*StructHash, error) {
     return &result, nil
 }
 
+// Struct shallow copy
+func (s StructHash) Copy() *StructHash {
+    var result = s
+    return &result
+}
+
+// Struct deep clone
+func (s StructHash) Clone() *StructHash {
+    var result = s
+    return &result
+}
+
 // Get the struct key
 func (s StructHash) Key() StructHashKey {
     return StructHashKey{
     }
+}
+
+// Convert struct to optional
+func (s StructHash) Optional() *StructHash {
+    return &s
 }
 
 // Convert struct to string

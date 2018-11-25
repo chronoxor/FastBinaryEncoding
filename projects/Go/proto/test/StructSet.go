@@ -5,7 +5,6 @@
 
 package test
 
-import "strconv"
 import "strings"
 import "encoding/json"
 import "../fbe"
@@ -27,10 +26,20 @@ func (k StructSetKey) String() string {
 
 // StructSet struct
 type StructSet struct {
-    F1 map[byte]bool
-    F2 map[EnumSimpleKey]bool
-    F3 map[FlagsSimpleKey]bool
-    F4 map[StructSimpleKey]bool
+    F1 map[byte]bool `json:"f1"`
+    F2 map[EnumSimpleKey]bool `json:"f2"`
+    F3 map[FlagsSimpleKey]bool `json:"f3"`
+    F4 map[StructSimpleKey]bool `json:"f4"`
+}
+
+// Create a new StructSet struct
+func NewStructSet() *StructSet {
+    return &StructSet{
+        F1: make(map[byte]bool),
+        F2: make(map[EnumSimpleKey]bool),
+        F3: make(map[FlagsSimpleKey]bool),
+        F4: make(map[StructSimpleKey]bool),
+    }
 }
 
 // Create a new StructSet struct from JSON
@@ -43,10 +52,27 @@ func NewStructSetFromJSON(buffer []byte) (*StructSet, error) {
     return &result, nil
 }
 
+// Struct shallow copy
+func (s StructSet) Copy() *StructSet {
+    var result = s
+    return &result
+}
+
+// Struct deep clone
+func (s StructSet) Clone() *StructSet {
+    var result = s
+    return &result
+}
+
 // Get the struct key
 func (s StructSet) Key() StructSetKey {
     return StructSetKey{
     }
+}
+
+// Convert struct to optional
+func (s StructSet) Optional() *StructSet {
+    return &s
 }
 
 // Convert struct to string

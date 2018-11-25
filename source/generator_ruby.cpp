@@ -4096,7 +4096,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
             if (field->value)
                 Write(ConvertConstant(*field->type, *field->value, field->optional));
             else
-                Write(ConvertDefault(*field.get()));
+                Write(ConvertDefault(*field));
             first = false;
         }
     }
@@ -4755,7 +4755,7 @@ void GeneratorRuby::GenerateStructFieldModel(const std::shared_ptr<StructType>& 
             if (field->array || field->vector || field->list || field->set || field->map || field->hash)
                 WriteLineIndent("fbe_value." + *field->name + ".clear");
             else
-                WriteLineIndent("fbe_value." + *field->name + " = " + ConvertDefault(*field.get()));
+                WriteLineIndent("fbe_value." + *field->name + " = " + ConvertDefault(*field));
             Indent(-1);
             WriteLineIndent("end");
             WriteLineIndent("# noinspection RubyUnusedLocalVariable");
@@ -5932,10 +5932,6 @@ std::string GeneratorRuby::ConvertDefault(const StructField& field)
         return "Array.new(" + std::to_string(field.N) + ", " + ConvertDefault(*field.type, field.optional) + ")";
     else if (field.vector || field.list || field.set || field.map || field.hash)
         return ConvertTypeName(field) + ".new";
-    else if (field.optional)
-        return "nil";
-    else if (*field.type == "bytes")
-        return "''";
 
     return ConvertDefault(*field.type, field.optional);
 }

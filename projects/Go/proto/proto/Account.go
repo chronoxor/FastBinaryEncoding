@@ -5,6 +5,7 @@
 
 package proto
 
+import "strconv"
 import "strings"
 import "encoding/json"
 import "../fbe"
@@ -25,12 +26,24 @@ func (k AccountKey) String() string {
 
 // Account struct
 type Account struct {
-    Uid int32
-    Name string
-    State State
-    Wallet Balance
-    Asset *Balance
-    Orders []Order
+    Uid int32 `json:"uid"`
+    Name string `json:"name"`
+    State State `json:"state"`
+    Wallet Balance `json:"wallet"`
+    Asset *Balance `json:"asset"`
+    Orders []Order `json:"orders"`
+}
+
+// Create a new Account struct
+func NewAccount() *Account {
+    return &Account{
+        Uid: 0,
+        Name: "",
+        State: State_initialized | State_bad,
+        Wallet: *NewBalance(),
+        Asset: nil,
+        Orders: make([]Order, 0),
+    }
 }
 
 // Create a new Account struct from JSON
@@ -43,11 +56,28 @@ func NewAccountFromJSON(buffer []byte) (*Account, error) {
     return &result, nil
 }
 
+// Struct shallow copy
+func (s Account) Copy() *Account {
+    var result = s
+    return &result
+}
+
+// Struct deep clone
+func (s Account) Clone() *Account {
+    var result = s
+    return &result
+}
+
 // Get the struct key
 func (s Account) Key() AccountKey {
     return AccountKey{
         Uid: s.Uid,
     }
+}
+
+// Convert struct to optional
+func (s Account) Optional() *Account {
+    return &s
 }
 
 // Convert struct to string

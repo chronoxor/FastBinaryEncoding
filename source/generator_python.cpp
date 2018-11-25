@@ -3289,7 +3289,7 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
             {
                 WriteLineIndent("if " + *field->name + " is None:");
                 Indent(1);
-                WriteLineIndent(*field->name + " = " + ConvertDefault(*field.get()));
+                WriteLineIndent(*field->name + " = " + ConvertDefault(*field));
                 Indent(-1);
             }
         }
@@ -3969,7 +3969,7 @@ void GeneratorPython::GenerateStructFieldModel(const std::shared_ptr<StructType>
             if (field->array || field->vector || field->list || field->set || field->map || field->hash)
                 WriteLineIndent("fbe_value." + *field->name + ".clear()");
             else
-                WriteLineIndent("fbe_value." + *field->name + " = " + ConvertDefault(*field.get()));
+                WriteLineIndent("fbe_value." + *field->name + " = " + ConvertDefault(*field));
             Indent(-1);
             WriteLineIndent("fbe_current_size += self." + *field->name + ".fbe_size");
         }
@@ -5116,10 +5116,6 @@ std::string GeneratorPython::ConvertDefault(const StructField& field)
         return "[" + ConvertDefault(*field.type, field.optional) + "]*" + std::to_string(field.N);
     else if (field.vector || field.list || field.set || field.map || field.hash)
         return ConvertTypeName(field) + "()";
-    else if (field.optional)
-        return "None";
-    else if (*field.type == "bytes")
-        return "bytearray()";
 
     return ConvertDefault(*field.type, field.optional);
 }

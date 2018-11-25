@@ -43,6 +43,11 @@ func (e EnumUInt64) Key() EnumUInt64Key {
     return EnumUInt64Key(e)
 }
 
+// Convert enum to optional
+func (e EnumUInt64) Optional() *EnumUInt64 {
+    return &e
+}
+
 // Convert enum to string
 func (e EnumUInt64) String() string {
     if e == EnumUInt64_ENUM_VALUE_0 {

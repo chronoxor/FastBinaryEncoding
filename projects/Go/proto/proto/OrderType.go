@@ -40,6 +40,11 @@ func (e OrderType) Key() OrderTypeKey {
     return OrderTypeKey(e)
 }
 
+// Convert enum to optional
+func (e OrderType) Optional() *OrderType {
+    return &e
+}
+
 // Convert enum to string
 func (e OrderType) String() string {
     if e == OrderType_market {

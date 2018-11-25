@@ -41,9 +41,31 @@ func NewFlagsSimple() *FlagsSimple {
     return new(FlagsSimple)
 }
 
+// Is flags set?
+func (f FlagsSimple) HasFlags(flags FlagsSimple) bool {
+    return ((f & flags) != 0) && ((f & flags) == flags)
+}
+
+// Set flags
+func (f *FlagsSimple) SetFlags(flags FlagsSimple) *FlagsSimple {
+    *f |= flags
+    return f
+}
+
+// Remove flags
+func (f *FlagsSimple) RemoveFlags(flags FlagsSimple) *FlagsSimple {
+    *f &^= flags
+    return f
+}
+
 // Get the flags key
 func (f FlagsSimple) Key() FlagsSimpleKey {
     return FlagsSimpleKey(f)
+}
+
+// Convert flags to optional
+func (f FlagsSimple) Optional() *FlagsSimple {
+    return &f
 }
 
 // Convert flags to string

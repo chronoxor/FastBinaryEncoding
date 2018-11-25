@@ -27,16 +27,32 @@ func (k StructVectorKey) String() string {
 
 // StructVector struct
 type StructVector struct {
-    F1 []byte
-    F2 []*byte
-    F3 [][]byte
-    F4 []*[]byte
-    F5 []EnumSimple
-    F6 []*EnumSimple
-    F7 []FlagsSimple
-    F8 []*FlagsSimple
-    F9 []StructSimple
-    F10 []*StructSimple
+    F1 []byte `json:"f1"`
+    F2 []*byte `json:"f2"`
+    F3 [][]byte `json:"f3"`
+    F4 []*[]byte `json:"f4"`
+    F5 []EnumSimple `json:"f5"`
+    F6 []*EnumSimple `json:"f6"`
+    F7 []FlagsSimple `json:"f7"`
+    F8 []*FlagsSimple `json:"f8"`
+    F9 []StructSimple `json:"f9"`
+    F10 []*StructSimple `json:"f10"`
+}
+
+// Create a new StructVector struct
+func NewStructVector() *StructVector {
+    return &StructVector{
+        F1: make([]byte, 0),
+        F2: make([]*byte, 0),
+        F3: make([][]byte, 0),
+        F4: make([]*[]byte, 0),
+        F5: make([]EnumSimple, 0),
+        F6: make([]*EnumSimple, 0),
+        F7: make([]FlagsSimple, 0),
+        F8: make([]*FlagsSimple, 0),
+        F9: make([]StructSimple, 0),
+        F10: make([]*StructSimple, 0),
+    }
 }
 
 // Create a new StructVector struct from JSON
@@ -49,10 +65,27 @@ func NewStructVectorFromJSON(buffer []byte) (*StructVector, error) {
     return &result, nil
 }
 
+// Struct shallow copy
+func (s StructVector) Copy() *StructVector {
+    var result = s
+    return &result
+}
+
+// Struct deep clone
+func (s StructVector) Clone() *StructVector {
+    var result = s
+    return &result
+}
+
 // Get the struct key
 func (s StructVector) Key() StructVectorKey {
     return StructVectorKey{
     }
+}
+
+// Convert struct to optional
+func (s StructVector) Optional() *StructVector {
+    return &s
 }
 
 // Convert struct to string

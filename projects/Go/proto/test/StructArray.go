@@ -27,16 +27,32 @@ func (k StructArrayKey) String() string {
 
 // StructArray struct
 type StructArray struct {
-    F1 [2]byte
-    F2 [2]*byte
-    F3 [2][]byte
-    F4 [2]*[]byte
-    F5 [2]EnumSimple
-    F6 [2]*EnumSimple
-    F7 [2]FlagsSimple
-    F8 [2]*FlagsSimple
-    F9 [2]StructSimple
-    F10 [2]*StructSimple
+    F1 [2]byte `json:"f1"`
+    F2 [2]*byte `json:"f2"`
+    F3 [2][]byte `json:"f3"`
+    F4 [2]*[]byte `json:"f4"`
+    F5 [2]EnumSimple `json:"f5"`
+    F6 [2]*EnumSimple `json:"f6"`
+    F7 [2]FlagsSimple `json:"f7"`
+    F8 [2]*FlagsSimple `json:"f8"`
+    F9 [2]StructSimple `json:"f9"`
+    F10 [2]*StructSimple `json:"f10"`
+}
+
+// Create a new StructArray struct
+func NewStructArray() *StructArray {
+    return &StructArray{
+        F1: [2]byte{},
+        F2: [2]*byte{},
+        F3: [2][]byte{},
+        F4: [2]*[]byte{},
+        F5: [2]EnumSimple{},
+        F6: [2]*EnumSimple{},
+        F7: [2]FlagsSimple{},
+        F8: [2]*FlagsSimple{},
+        F9: [2]StructSimple{},
+        F10: [2]*StructSimple{},
+    }
 }
 
 // Create a new StructArray struct from JSON
@@ -49,10 +65,27 @@ func NewStructArrayFromJSON(buffer []byte) (*StructArray, error) {
     return &result, nil
 }
 
+// Struct shallow copy
+func (s StructArray) Copy() *StructArray {
+    var result = s
+    return &result
+}
+
+// Struct deep clone
+func (s StructArray) Clone() *StructArray {
+    var result = s
+    return &result
+}
+
 // Get the struct key
 func (s StructArray) Key() StructArrayKey {
     return StructArrayKey{
     }
+}
+
+// Convert struct to optional
+func (s StructArray) Optional() *StructArray {
+    return &s
 }
 
 // Convert struct to string

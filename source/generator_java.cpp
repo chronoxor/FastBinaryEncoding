@@ -5004,7 +5004,7 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
     // Generate struct body
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("public " + ConvertTypeName(*field.get()) + " " + *field->name + " = " + ConvertDefault(*field.get()) + ";");
+            WriteLineIndent("public " + ConvertTypeName(*field) + " " + *field->name + " = " + ConvertDefault(*field) + ";");
 
     // Generate struct default constructor
     WriteLine();
@@ -5023,7 +5023,7 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
     {
         for (const auto& field : s->body->fields)
         {
-            Write(std::string(first ? "" : ", ") + ConvertTypeName(*field.get()) + " " + *field->name);
+            Write(std::string(first ? "" : ", ") + ConvertTypeName(*field) + " " + *field->name);
             first = false;
         }
     }
@@ -5651,7 +5651,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
             if (field->vector || field->list || field->set || field->map || field->hash)
                 WriteLineIndent("fbeValue." + *field->name + ".clear();");
             else
-                WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field.get()) + ";");
+                WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field) + ";");
             Indent(-1);
             WriteLineIndent("fbeCurrentSize += " + *field->name + ".fbeSize();");
         }

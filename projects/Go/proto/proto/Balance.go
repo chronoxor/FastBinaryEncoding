@@ -5,6 +5,7 @@
 
 package proto
 
+import "strconv"
 import "strings"
 import "encoding/json"
 import "../fbe"
@@ -25,8 +26,16 @@ func (k BalanceKey) String() string {
 
 // Balance struct
 type Balance struct {
-    Currency string
-    Amount float64
+    Currency string `json:"currency"`
+    Amount float64 `json:"amount"`
+}
+
+// Create a new Balance struct
+func NewBalance() *Balance {
+    return &Balance{
+        Currency: "",
+        Amount: float64(0.0),
+    }
 }
 
 // Create a new Balance struct from JSON
@@ -39,11 +48,28 @@ func NewBalanceFromJSON(buffer []byte) (*Balance, error) {
     return &result, nil
 }
 
+// Struct shallow copy
+func (s Balance) Copy() *Balance {
+    var result = s
+    return &result
+}
+
+// Struct deep clone
+func (s Balance) Clone() *Balance {
+    var result = s
+    return &result
+}
+
 // Get the struct key
 func (s Balance) Key() BalanceKey {
     return BalanceKey{
         Currency: s.Currency,
     }
+}
+
+// Convert struct to optional
+func (s Balance) Optional() *Balance {
+    return &s
 }
 
 // Convert struct to string

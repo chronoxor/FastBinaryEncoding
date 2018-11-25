@@ -4530,7 +4530,7 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
         WriteLineIndent("public " + ConvertTypeName(*s->base, false) + " parent;");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("public " + ConvertTypeName(*field.get()) + " " + *field->name + ";");
+            WriteLineIndent("public " + ConvertTypeName(*field) + " " + *field->name + ";");
 
     // Generate struct initialization property
     WriteLine();
@@ -4547,7 +4547,7 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
     {
         for (const auto& field : s->body->fields)
         {
-            WriteLineIndent(std::string(first ? "" : ", ") + *field->name + " = " + ConvertDefault(*field.get()));
+            WriteLineIndent(std::string(first ? "" : ", ") + *field->name + " = " + ConvertDefault(*field));
             first = false;
         }
     }
@@ -4567,7 +4567,7 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
     {
         for (const auto& field : s->body->fields)
         {
-            Write(std::string(first ? "" : ", ") + ConvertTypeName(*field.get()) + " " + *field->name);
+            Write(std::string(first ? "" : ", ") + ConvertTypeName(*field) + " " + *field->name);
             first = false;
         }
     }
@@ -5209,7 +5209,7 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::shared_ptr<Package>& p
             if (field->vector || field->list || field->set || field->map || field->hash)
                 WriteLineIndent("fbeValue." + *field->name + ".Clear();");
             else
-                WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field.get()) + ";");
+                WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field) + ";");
             Indent(-1);
             WriteLineIndent("fbeCurrentSize += " + *field->name + ".FBESize;");
         }

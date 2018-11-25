@@ -43,6 +43,11 @@ func (e EnumUInt16) Key() EnumUInt16Key {
     return EnumUInt16Key(e)
 }
 
+// Convert enum to optional
+func (e EnumUInt16) Optional() *EnumUInt16 {
+    return &e
+}
+
 // Convert enum to string
 func (e EnumUInt16) String() string {
     if e == EnumUInt16_ENUM_VALUE_0 {

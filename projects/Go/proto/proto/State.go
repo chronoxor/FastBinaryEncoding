@@ -40,9 +40,31 @@ func NewState() *State {
     return new(State)
 }
 
+// Is flags set?
+func (f State) HasFlags(flags State) bool {
+    return ((f & flags) != 0) && ((f & flags) == flags)
+}
+
+// Set flags
+func (f *State) SetFlags(flags State) *State {
+    *f |= flags
+    return f
+}
+
+// Remove flags
+func (f *State) RemoveFlags(flags State) *State {
+    *f &^= flags
+    return f
+}
+
 // Get the flags key
 func (f State) Key() StateKey {
     return StateKey(f)
+}
+
+// Convert flags to optional
+func (f State) Optional() *State {
+    return &f
 }
 
 // Convert flags to string

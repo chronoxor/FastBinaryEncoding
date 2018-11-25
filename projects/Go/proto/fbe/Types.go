@@ -15,6 +15,12 @@ type Decimal struct {
     decimal.Decimal
 }
 
+// Create a new decimal from the given float value
+func DecimalFromFloat(value float64) Decimal {
+    result := decimal.NewFromFloat(value)
+    return Decimal{result}
+}
+
 // Create a new decimal from the given string
 func DecimalFromString(value string) Decimal {
     result, _ := decimal.NewFromString(value)
@@ -31,19 +37,19 @@ type Timestamp struct {
     time.Time
 }
 
+// Create a new timestamp from the given nanoseconds
+func TimestampFromNanoseconds(nanoseconds uint64) Timestamp {
+    return Timestamp{time.Unix(int64(nanoseconds / 1000000000), int64(nanoseconds % 1000000000))}
+}
+
 // Create Unix Epoch timestamp
 func TimestampEpoch() Timestamp {
     return Timestamp{time.Unix(0, 0)}
 }
 
 // Create the current UTC timestamp
-func TimestampNow() Timestamp {
-    return Timestamp{time.Unix(0, 0)}
-}
-
-// Create a new timestamp from the given nanoseconds
-func TimestampFromNanoseconds(nanoseconds uint64) Timestamp {
-    return Timestamp{time.Unix(int64(nanoseconds / 1000000000), int64(nanoseconds % 1000000000))}
+func TimestampUTC() Timestamp {
+    return Timestamp{time.Now().UTC()}
 }
 
 // Convert timestamp to JSON
@@ -70,6 +76,12 @@ type UUID struct {
 // Create a new UUID from the given bytes buffer
 func UUIDFromBytes(buffer []byte) UUID {
     result, _ := uuid.FromBytes(buffer)
+    return UUID{result}
+}
+
+// Create a new UUID from the given string
+func UUIDFromString(value string) UUID {
+    result, _ := uuid.Parse(value)
     return UUID{result}
 }
 

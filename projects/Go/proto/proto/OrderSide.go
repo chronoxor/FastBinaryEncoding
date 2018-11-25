@@ -39,6 +39,11 @@ func (e OrderSide) Key() OrderSideKey {
     return OrderSideKey(e)
 }
 
+// Convert enum to optional
+func (e OrderSide) Optional() *OrderSide {
+    return &e
+}
+
 // Convert enum to string
 func (e OrderSide) String() string {
     if e == OrderSide_buy {

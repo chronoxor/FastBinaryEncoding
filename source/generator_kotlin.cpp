@@ -4871,7 +4871,7 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
     // Generate struct body
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("var " + *field->name + ": " + ConvertTypeName(*field.get(), false) + " = " + ConvertDefault(*field.get()));
+            WriteLineIndent("var " + *field->name + ": " + ConvertTypeName(*field, false) + " = " + ConvertDefault(*field));
 
     // Generate struct default constructor
     WriteLine();
@@ -4890,7 +4890,7 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
     {
         for (const auto& field : s->body->fields)
         {
-            Write(std::string(first ? "" : ", ") + *field->name + ": " + ConvertTypeName(*field.get(), false));
+            Write(std::string(first ? "" : ", ") + *field->name + ": " + ConvertTypeName(*field, false));
             first = false;
         }
     }
@@ -5512,7 +5512,7 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
             if (field->vector || field->list || field->set || field->map || field->hash)
                 WriteLineIndent("fbeValue." + *field->name + ".clear()");
             else
-                WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field.get()));
+                WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field));
             Indent(-1);
             WriteLineIndent("fbeCurrentSize += " + *field->name + ".fbeSize");
         }

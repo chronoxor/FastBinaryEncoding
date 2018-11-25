@@ -43,6 +43,11 @@ func (e EnumInt8) Key() EnumInt8Key {
     return EnumInt8Key(e)
 }
 
+// Convert enum to optional
+func (e EnumInt8) Optional() *EnumInt8 {
+    return &e
+}
+
 // Convert enum to string
 func (e EnumInt8) String() string {
     if e == EnumInt8_ENUM_VALUE_0 {

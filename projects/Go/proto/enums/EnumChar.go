@@ -43,6 +43,11 @@ func (e EnumChar) Key() EnumCharKey {
     return EnumCharKey(e)
 }
 
+// Convert enum to optional
+func (e EnumChar) Optional() *EnumChar {
+    return &e
+}
+
 // Convert enum to string
 func (e EnumChar) String() string {
     if e == EnumChar_ENUM_VALUE_0 {

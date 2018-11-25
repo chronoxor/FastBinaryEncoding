@@ -44,9 +44,31 @@ func NewStateEx() *StateEx {
     return new(StateEx)
 }
 
+// Is flags set?
+func (f StateEx) HasFlags(flags StateEx) bool {
+    return ((f & flags) != 0) && ((f & flags) == flags)
+}
+
+// Set flags
+func (f *StateEx) SetFlags(flags StateEx) *StateEx {
+    *f |= flags
+    return f
+}
+
+// Remove flags
+func (f *StateEx) RemoveFlags(flags StateEx) *StateEx {
+    *f &^= flags
+    return f
+}
+
 // Get the flags key
 func (f StateEx) Key() StateExKey {
     return StateExKey(f)
+}
+
+// Convert flags to optional
+func (f StateEx) Optional() *StateEx {
+    return &f
 }
 
 // Convert flags to string

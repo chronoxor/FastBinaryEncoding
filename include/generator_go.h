@@ -41,6 +41,7 @@ private:
     void GenerateFooter();
     void GenerateFBEPackage(const std::string& package);
     void GenerateFBEConstants(const std::string& package);
+    void GenerateFBEOptional(const std::string& package);
     void GenerateFBETypes(const std::string& package);
     void GenerateFBEVersion(const std::string& package, const std::string& source);
     void GenerateFBEBuffer(const std::string& package);
@@ -90,18 +91,20 @@ private:
     std::string ConvertEnumBase(const std::string& type);
     std::string ConvertEnumSize(const std::string& type);
     std::string ConvertEnumType(const std::string& type);
+    std::string ConvertEnumConstant(const std::string& value);
     std::string ConvertEnumConstant(const std::string& name, const std::string& type, const std::string& value);
     std::string ConvertBaseName(const std::string& type);
+    std::string ConvertBaseNew(const std::string& type);
     std::string ConvertKeyName(const std::string& type);
+    std::string ConvertOptional(const std::string& type, const std::string& value);
     std::string ConvertTypeName(const std::string& type, bool optional);
     std::string ConvertTypeName(const StructField& field);
     //std::string ConvertTypeFieldName(const std::string& type, bool final);
     //std::string ConvertTypeFieldInitialization(const std::string& type, bool optional, const std::string& offset, bool final);
     //std::string ConvertTypeFieldInitialization(const StructField& field, const std::string& offset, bool final);
-    //std::string ConvertConstant(const std::string& type, const std::string& value, bool optional);
-    //std::string ConvertDefaultOrNone(const std::string& type, bool optional);
-    //std::string ConvertDefault(const std::string& type, bool optional);
-    //std::string ConvertDefault(const StructField& field);
+    std::string ConvertConstant(const std::string& type, const std::string& value, bool optional);
+    std::string ConvertDefault(const std::string& type, bool optional);
+    std::string ConvertDefault(const StructField& field);
 
     //void WriteOutputStreamType(const std::string& type, const std::string& name, bool optional);
     //void WriteOutputStreamItem(const std::string& type, const std::string& name, bool optional);

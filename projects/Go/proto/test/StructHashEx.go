@@ -27,8 +27,16 @@ func (k StructHashExKey) String() string {
 
 // StructHashEx struct
 type StructHashEx struct {
-    F1 map[StructSimpleKey]StructNested
-    F2 map[StructSimpleKey]*StructNested
+    F1 map[StructSimpleKey]StructNested `json:"f1"`
+    F2 map[StructSimpleKey]*StructNested `json:"f2"`
+}
+
+// Create a new StructHashEx struct
+func NewStructHashEx() *StructHashEx {
+    return &StructHashEx{
+        F1: make(map[StructSimpleKey]StructNested),
+        F2: make(map[StructSimpleKey]*StructNested),
+    }
 }
 
 // Create a new StructHashEx struct from JSON
@@ -41,10 +49,27 @@ func NewStructHashExFromJSON(buffer []byte) (*StructHashEx, error) {
     return &result, nil
 }
 
+// Struct shallow copy
+func (s StructHashEx) Copy() *StructHashEx {
+    var result = s
+    return &result
+}
+
+// Struct deep clone
+func (s StructHashEx) Clone() *StructHashEx {
+    var result = s
+    return &result
+}
+
 // Get the struct key
 func (s StructHashEx) Key() StructHashExKey {
     return StructHashExKey{
     }
+}
+
+// Convert struct to optional
+func (s StructHashEx) Optional() *StructHashEx {
+    return &s
 }
 
 // Convert struct to string

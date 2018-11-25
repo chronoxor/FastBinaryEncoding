@@ -43,6 +43,11 @@ func (e EnumInt32) Key() EnumInt32Key {
     return EnumInt32Key(e)
 }
 
+// Convert enum to optional
+func (e EnumInt32) Optional() *EnumInt32 {
+    return &e
+}
+
 // Convert enum to string
 func (e EnumInt32) String() string {
     if e == EnumInt32_ENUM_VALUE_0 {

@@ -27,16 +27,32 @@ func (k StructMapKey) String() string {
 
 // StructMap struct
 type StructMap struct {
-    F1 map[int32]byte
-    F2 map[int32]*byte
-    F3 map[int32][]byte
-    F4 map[int32]*[]byte
-    F5 map[int32]EnumSimple
-    F6 map[int32]*EnumSimple
-    F7 map[int32]FlagsSimple
-    F8 map[int32]*FlagsSimple
-    F9 map[int32]StructSimple
-    F10 map[int32]*StructSimple
+    F1 map[int32]byte `json:"f1"`
+    F2 map[int32]*byte `json:"f2"`
+    F3 map[int32][]byte `json:"f3"`
+    F4 map[int32]*[]byte `json:"f4"`
+    F5 map[int32]EnumSimple `json:"f5"`
+    F6 map[int32]*EnumSimple `json:"f6"`
+    F7 map[int32]FlagsSimple `json:"f7"`
+    F8 map[int32]*FlagsSimple `json:"f8"`
+    F9 map[int32]StructSimple `json:"f9"`
+    F10 map[int32]*StructSimple `json:"f10"`
+}
+
+// Create a new StructMap struct
+func NewStructMap() *StructMap {
+    return &StructMap{
+        F1: make(map[int32]byte),
+        F2: make(map[int32]*byte),
+        F3: make(map[int32][]byte),
+        F4: make(map[int32]*[]byte),
+        F5: make(map[int32]EnumSimple),
+        F6: make(map[int32]*EnumSimple),
+        F7: make(map[int32]FlagsSimple),
+        F8: make(map[int32]*FlagsSimple),
+        F9: make(map[int32]StructSimple),
+        F10: make(map[int32]*StructSimple),
+    }
 }
 
 // Create a new StructMap struct from JSON
@@ -49,10 +65,27 @@ func NewStructMapFromJSON(buffer []byte) (*StructMap, error) {
     return &result, nil
 }
 
+// Struct shallow copy
+func (s StructMap) Copy() *StructMap {
+    var result = s
+    return &result
+}
+
+// Struct deep clone
+func (s StructMap) Clone() *StructMap {
+    var result = s
+    return &result
+}
+
 // Get the struct key
 func (s StructMap) Key() StructMapKey {
     return StructMapKey{
     }
+}
+
+// Convert struct to optional
+func (s StructMap) Optional() *StructMap {
+    return &s
 }
 
 // Convert struct to string

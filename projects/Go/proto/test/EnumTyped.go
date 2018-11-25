@@ -45,6 +45,11 @@ func (e EnumTyped) Key() EnumTypedKey {
     return EnumTypedKey(e)
 }
 
+// Convert enum to optional
+func (e EnumTyped) Optional() *EnumTyped {
+    return &e
+}
+
 // Convert enum to string
 func (e EnumTyped) String() string {
     if e == EnumTyped_ENUM_VALUE_0 {

@@ -27,9 +27,18 @@ func (k StructBytesKey) String() string {
 
 // StructBytes struct
 type StructBytes struct {
-    F1 []byte
-    F2 *[]byte
-    F3 *[]byte
+    F1 []byte `json:"f1"`
+    F2 *[]byte `json:"f2"`
+    F3 *[]byte `json:"f3"`
+}
+
+// Create a new StructBytes struct
+func NewStructBytes() *StructBytes {
+    return &StructBytes{
+        F1: make([]byte, 0),
+        F2: nil,
+        F3: nil,
+    }
 }
 
 // Create a new StructBytes struct from JSON
@@ -42,10 +51,27 @@ func NewStructBytesFromJSON(buffer []byte) (*StructBytes, error) {
     return &result, nil
 }
 
+// Struct shallow copy
+func (s StructBytes) Copy() *StructBytes {
+    var result = s
+    return &result
+}
+
+// Struct deep clone
+func (s StructBytes) Clone() *StructBytes {
+    var result = s
+    return &result
+}
+
 // Get the struct key
 func (s StructBytes) Key() StructBytesKey {
     return StructBytesKey{
     }
+}
+
+// Convert struct to optional
+func (s StructBytes) Optional() *StructBytes {
+    return &s
 }
 
 // Convert struct to string

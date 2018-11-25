@@ -28,14 +28,28 @@ func (k OrderKey) String() string {
 
 // Order struct
 type Order struct {
-    Uid int32
-    Symbol string
-    Side OrderSide
-    Type OrderType
-    Price float64
-    Volume float64
-    Tp float64
-    Sl float64
+    Uid int32 `json:"uid"`
+    Symbol string `json:"symbol"`
+    Side OrderSide `json:"side"`
+    Type OrderType `json:"type"`
+    Price float64 `json:"price"`
+    Volume float64 `json:"volume"`
+    Tp float64 `json:"tp"`
+    Sl float64 `json:"sl"`
+}
+
+// Create a new Order struct
+func NewOrder() *Order {
+    return &Order{
+        Uid: 0,
+        Symbol: "",
+        Side: *NewOrderSide(),
+        Type: *NewOrderType(),
+        Price: float64(0.0),
+        Volume: float64(0.0),
+        Tp: float64(10.0),
+        Sl: float64(-10.0),
+    }
 }
 
 // Create a new Order struct from JSON
@@ -48,11 +62,28 @@ func NewOrderFromJSON(buffer []byte) (*Order, error) {
     return &result, nil
 }
 
+// Struct shallow copy
+func (s Order) Copy() *Order {
+    var result = s
+    return &result
+}
+
+// Struct deep clone
+func (s Order) Clone() *Order {
+    var result = s
+    return &result
+}
+
 // Get the struct key
 func (s Order) Key() OrderKey {
     return OrderKey{
         Uid: s.Uid,
     }
+}
+
+// Convert struct to optional
+func (s Order) Optional() *Order {
+    return &s
 }
 
 // Convert struct to string

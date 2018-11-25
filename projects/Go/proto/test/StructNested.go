@@ -29,18 +29,37 @@ func (k StructNestedKey) String() string {
 // StructNested struct
 type StructNested struct {
     StructOptional
-    F1000 EnumSimple
-    F1001 *EnumSimple
-    F1002 EnumTyped
-    F1003 *EnumTyped
-    F1004 FlagsSimple
-    F1005 *FlagsSimple
-    F1006 FlagsTyped
-    F1007 *FlagsTyped
-    F1008 StructSimple
-    F1009 *StructSimple
-    F1010 StructOptional
-    F1011 *StructOptional
+    F1000 EnumSimple `json:"f1000"`
+    F1001 *EnumSimple `json:"f1001"`
+    F1002 EnumTyped `json:"f1002"`
+    F1003 *EnumTyped `json:"f1003"`
+    F1004 FlagsSimple `json:"f1004"`
+    F1005 *FlagsSimple `json:"f1005"`
+    F1006 FlagsTyped `json:"f1006"`
+    F1007 *FlagsTyped `json:"f1007"`
+    F1008 StructSimple `json:"f1008"`
+    F1009 *StructSimple `json:"f1009"`
+    F1010 StructOptional `json:"f1010"`
+    F1011 *StructOptional `json:"f1011"`
+}
+
+// Create a new StructNested struct
+func NewStructNested() *StructNested {
+    return &StructNested{
+        StructOptional: *NewStructOptional(),
+        F1000: *NewEnumSimple(),
+        F1001: nil,
+        F1002: EnumTyped_ENUM_VALUE_2,
+        F1003: nil,
+        F1004: *NewFlagsSimple(),
+        F1005: nil,
+        F1006: FlagsTyped_FLAG_VALUE_2 | FlagsTyped_FLAG_VALUE_4 | FlagsTyped_FLAG_VALUE_6,
+        F1007: nil,
+        F1008: *NewStructSimple(),
+        F1009: nil,
+        F1010: *NewStructOptional(),
+        F1011: nil,
+    }
 }
 
 // Create a new StructNested struct from JSON
@@ -53,11 +72,28 @@ func NewStructNestedFromJSON(buffer []byte) (*StructNested, error) {
     return &result, nil
 }
 
+// Struct shallow copy
+func (s StructNested) Copy() *StructNested {
+    var result = s
+    return &result
+}
+
+// Struct deep clone
+func (s StructNested) Clone() *StructNested {
+    var result = s
+    return &result
+}
+
 // Get the struct key
 func (s StructNested) Key() StructNestedKey {
     return StructNestedKey{
         s.StructOptional.Key(),
     }
+}
+
+// Convert struct to optional
+func (s StructNested) Optional() *StructNested {
+    return &s
 }
 
 // Convert struct to string
