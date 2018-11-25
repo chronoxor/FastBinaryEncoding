@@ -31,6 +31,20 @@ internal class BytesJson : JsonSerializer<ByteArray>, JsonDeserializer<ByteArray
     }
 }
 
+internal class CharacterJson : JsonSerializer<Char>, JsonDeserializer<Char>
+{
+    override fun serialize(src: Char, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    {
+        return JsonPrimitive(src.toLong())
+    }
+
+    @Throws(JsonParseException::class)
+    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): Char
+    {
+        return json.asLong.toChar()
+    }
+}
+
 internal class InstantJson : JsonSerializer<Instant>, JsonDeserializer<Instant>
 {
     override fun serialize(src: Instant, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
@@ -85,6 +99,7 @@ object Json
     {
         builder.serializeNulls()
         builder.registerTypeAdapter(ByteArray::class.java, BytesJson())
+        builder.registerTypeAdapter(Character::class.java, CharacterJson())
         builder.registerTypeAdapter(Instant::class.java, InstantJson())
         builder.registerTypeAdapter(BigDecimal::class.java, BigDecimalJson())
         builder.registerTypeAdapter(UUID::class.java, UUIDJson())

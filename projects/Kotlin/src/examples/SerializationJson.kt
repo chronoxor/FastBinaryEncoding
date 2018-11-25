@@ -18,7 +18,7 @@ object SerializationJson
 
         // Show the serialized JSON and its size
         println("JSON: $json")
-        System.out.println("JSON size: " + json.length)
+        println("JSON size: " + json.length)
 
         // Deserialize the account from the JSON string
         account = proto.Account.fromJson(json)
