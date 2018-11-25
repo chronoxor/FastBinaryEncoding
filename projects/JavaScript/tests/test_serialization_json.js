@@ -14,14 +14,14 @@ const UInt64 = int64.UInt64
 const UUID = uuid.UUID
 
 test('Serialization (JSON): proto', function (t) {
-  // Create a new account with some orders
-  let account1 = new proto.Account(1, 'Test', proto.State.good, new proto.Balance('USD', 1000.0), new proto.Balance('EUR', 100.0))
-  account1.orders.push(new proto.Order(1, 'EURUSD', proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0))
-  account1.orders.push(new proto.Order(2, 'EURUSD', proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0))
-  account1.orders.push(new proto.Order(3, 'EURUSD', proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0))
+  // Define a source JSON string
+  let json = String.raw`{"uid":1,"name":"Test","state":6,"wallet":{"currency":"USD","amount":1000.0},"asset":{"currency":"EUR","amount":100.0},"orders":[{"uid":1,"symbol":"EURUSD","side":0,"type":0,"price":1.23456,"volume":1000.0},{"uid":2,"symbol":"EURUSD","side":1,"type":1,"price":1.0,"volume":100.0},{"uid":3,"symbol":"EURUSD","side":0,"type":2,"price":1.5,"volume":10.0}]}`
+
+  // Create a new account from the source JSON string
+  let account1 = proto.Account.fromJSON(json)
 
   // Serialize the account to the JSON stream
-  let json = JSON.stringify(account1)
+  json = JSON.stringify(account1)
 
   // Check the serialized JSON size
   t.true(json.length > 0)
@@ -60,11 +60,14 @@ test('Serialization (JSON): proto', function (t) {
 })
 
 test('Serialization (JSON): struct simple', function (t) {
-  // Create a new struct
-  let struct1 = new prototest.StructSimple()
+  // Define a source JSON string
+  let json = String.raw`{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145597933463000,"f36":"00000000-0000-0000-0000-000000000000","f37":"e7854072-f0a5-11e8-8f69-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}`
+
+  // Create a new struct from the source JSON string
+  let struct1 = prototest.StructSimple.fromJSON(json)
 
   // Serialize the struct to the JSON string
-  let json = JSON.stringify(struct1)
+  json = JSON.stringify(struct1)
 
   // Check the serialized JSON size
   t.true(json.length > 0)
@@ -155,11 +158,14 @@ test('Serialization (JSON): struct simple', function (t) {
 })
 
 test('Serialization (JSON): struct optional', function (t) {
-  // Create a new struct
-  let struct1 = new prototest.StructOptional()
+  // Define a source JSON string
+  let json = String.raw`{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145860677797000,"f36":"00000000-0000-0000-0000-000000000000","f37":"8420d1c6-f0a6-11e8-80fc-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]},"f100":null,"f101":true,"f102":null,"f103":null,"f104":255,"f105":null,"f106":null,"f107":33,"f108":null,"f109":null,"f110":1092,"f111":null,"f112":null,"f113":127,"f114":null,"f115":null,"f116":255,"f117":null,"f118":null,"f119":32767,"f120":null,"f121":null,"f122":65535,"f123":null,"f124":null,"f125":2147483647,"f126":null,"f127":null,"f128":4294967295,"f129":null,"f130":null,"f131":9223372036854775807,"f132":null,"f133":null,"f134":18446744073709551615,"f135":null,"f136":null,"f137":123.456,"f138":null,"f139":null,"f140":-1.23456e+125,"f141":null,"f142":null,"f143":"123456.123456","f144":null,"f145":null,"f146":"Initial string!","f147":null,"f148":null,"f149":1543145860678429000,"f150":null,"f151":null,"f152":"123e4567-e89b-12d3-a456-426655440000","f153":null,"f154":null,"f155":null,"f156":null,"f157":null,"f158":null,"f159":null,"f160":null,"f161":null,"f162":null,"f163":null,"f164":null,"f165":null}`
+
+  // Create a new struct from the source JSON string
+  let struct1 = prototest.StructOptional.fromJSON(json)
 
   // Serialize the struct to the JSON string
-  let json = JSON.stringify(struct1)
+  json = JSON.stringify(struct1)
 
   // Check the serialized JSON size
   t.true(json.length > 0)
@@ -394,11 +400,14 @@ test('Serialization (JSON): struct optional', function (t) {
 })
 
 test('Serialization (JSON): struct nested', function (t) {
-  // Create a new struct
-  let struct1 = new prototest.StructNested()
+  // Define a source JSON string
+  let json = String.raw`{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145901646321000,"f36":"00000000-0000-0000-0000-000000000000","f37":"9c8c268e-f0a6-11e8-a777-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]},"f100":null,"f101":true,"f102":null,"f103":null,"f104":255,"f105":null,"f106":null,"f107":33,"f108":null,"f109":null,"f110":1092,"f111":null,"f112":null,"f113":127,"f114":null,"f115":null,"f116":255,"f117":null,"f118":null,"f119":32767,"f120":null,"f121":null,"f122":65535,"f123":null,"f124":null,"f125":2147483647,"f126":null,"f127":null,"f128":4294967295,"f129":null,"f130":null,"f131":9223372036854775807,"f132":null,"f133":null,"f134":18446744073709551615,"f135":null,"f136":null,"f137":123.456,"f138":null,"f139":null,"f140":-1.23456e+125,"f141":null,"f142":null,"f143":"123456.123456","f144":null,"f145":null,"f146":"Initial string!","f147":null,"f148":null,"f149":1543145901647155000,"f150":null,"f151":null,"f152":"123e4567-e89b-12d3-a456-426655440000","f153":null,"f154":null,"f155":null,"f156":null,"f157":null,"f158":null,"f159":null,"f160":null,"f161":null,"f162":null,"f163":null,"f164":null,"f165":null,"f1000":0,"f1001":null,"f1002":50,"f1003":null,"f1004":0,"f1005":null,"f1006":42,"f1007":null,"f1008":{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145901647367000,"f36":"00000000-0000-0000-0000-000000000000","f37":"9c8c54c4-f0a6-11e8-a777-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"f1009":null,"f1010":{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145901648310000,"f36":"00000000-0000-0000-0000-000000000000","f37":"9c8c6b76-f0a6-11e8-a777-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]},"f100":null,"f101":true,"f102":null,"f103":null,"f104":255,"f105":null,"f106":null,"f107":33,"f108":null,"f109":null,"f110":1092,"f111":null,"f112":null,"f113":127,"f114":null,"f115":null,"f116":255,"f117":null,"f118":null,"f119":32767,"f120":null,"f121":null,"f122":65535,"f123":null,"f124":null,"f125":2147483647,"f126":null,"f127":null,"f128":4294967295,"f129":null,"f130":null,"f131":9223372036854775807,"f132":null,"f133":null,"f134":18446744073709551615,"f135":null,"f136":null,"f137":123.456,"f138":null,"f139":null,"f140":-1.23456e+125,"f141":null,"f142":null,"f143":"123456.123456","f144":null,"f145":null,"f146":"Initial string!","f147":null,"f148":null,"f149":1543145901648871000,"f150":null,"f151":null,"f152":"123e4567-e89b-12d3-a456-426655440000","f153":null,"f154":null,"f155":null,"f156":null,"f157":null,"f158":null,"f159":null,"f160":null,"f161":null,"f162":null,"f163":null,"f164":null,"f165":null},"f1011":null}`
+
+  // Create a new struct from the source JSON string
+  let struct1 = prototest.StructNested.fromJSON(json)
 
   // Serialize the struct to the JSON string
-  let json = JSON.stringify(struct1)
+  json = JSON.stringify(struct1)
 
   // Check the serialized JSON size
   t.true(json.length > 0)
@@ -653,15 +662,14 @@ test('Serialization (JSON): struct nested', function (t) {
 })
 
 test('Serialization (JSON): struct bytes', function (t) {
-  // Create a new struct
-  let struct1 = new prototest.StructBytes()
-  // noinspection JSUnresolvedFunction
-  struct1.f1 = Uint8Array.from('ABC', x => x.charCodeAt(0))
-  // noinspection JSUnresolvedFunction
-  struct1.f2 = Uint8Array.from('test', x => x.charCodeAt(0))
+  // Define a source JSON string
+  let json = String.raw`{"f1":"QUJD\n","f2":"dGVzdA==\n","f3":null}`
+
+  // Create a new struct from the source JSON string
+  let struct1 = prototest.StructBytes.fromJSON(json)
 
   // Serialize the struct to the JSON string
-  let json = JSON.stringify(struct1)
+  json = JSON.stringify(struct1)
 
   // Check the serialized JSON size
   t.true(json.length > 0)
@@ -684,31 +692,14 @@ test('Serialization (JSON): struct bytes', function (t) {
 })
 
 test('Serialization (JSON): struct array', function (t) {
-  // Create a new struct
-  let struct1 = new prototest.StructArray()
-  struct1.f1[0] = 48
-  struct1.f1[1] = 65
-  struct1.f2[0] = 97
-  struct1.f2[1] = undefined
-  struct1.f3[0] = Array.from('000', x => x.charCodeAt(0))
-  struct1.f3[1] = Array.from('AAA', x => x.charCodeAt(0))
-  struct1.f4[0] = Array.from('aaa', x => x.charCodeAt(0))
-  struct1.f4[1] = undefined
-  struct1.f5[0] = prototest.EnumSimple.ENUM_VALUE_1
-  struct1.f5[1] = prototest.EnumSimple.ENUM_VALUE_2
-  struct1.f6[0] = prototest.EnumSimple.ENUM_VALUE_1
-  struct1.f6[1] = undefined
-  struct1.f7[0] = prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2)
-  struct1.f7[1] = prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2 | prototest.FlagsSimple.FLAG_VALUE_3)
-  struct1.f8[0] = prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2)
-  struct1.f8[1] = undefined
-  struct1.f9[0] = new prototest.StructSimple()
-  struct1.f9[1] = new prototest.StructSimple()
-  struct1.f10[0] = new prototest.StructSimple()
-  struct1.f10[1] = undefined
+  // Define a source JSON string
+  let json = String.raw`{"f1":[48,65],"f2":[97,null],"f3":["MDAw\\n","QUFB\\n"],"f4":["YWFh\\n",null],"f5":[1,2],"f6":[1,null],"f7":[3,7],"f8":[3,null],"f9":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145986060361000,"f36":"00000000-0000-0000-0000-000000000000","f37":"cedcad98-f0a6-11e8-9f47-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145986060910000,"f36":"00000000-0000-0000-0000-000000000000","f37":"cedcc274-f0a6-11e8-9f47-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}],"f10":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145986061436000,"f36":"00000000-0000-0000-0000-000000000000","f37":"cedcd714-f0a6-11e8-9f47-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},null]}`
+
+  // Create a new struct from the source JSON string
+  let struct1 = prototest.StructArray.fromJSON(json)
 
   // Serialize the struct to the JSON string
-  let json = JSON.stringify(struct1)
+  json = JSON.stringify(struct1)
 
   // Check the serialized JSON size
   t.true(json.length > 0)
@@ -767,31 +758,14 @@ test('Serialization (JSON): struct array', function (t) {
 })
 
 test('Serialization (JSON): struct vector', function (t) {
-  // Create a new struct
-  let struct1 = new prototest.StructVector()
-  struct1.f1[0] = 48
-  struct1.f1[1] = 65
-  struct1.f2[0] = 97
-  struct1.f2[1] = undefined
-  struct1.f3[0] = Array.from('000', x => x.charCodeAt(0))
-  struct1.f3[1] = Array.from('AAA', x => x.charCodeAt(0))
-  struct1.f4[0] = Array.from('aaa', x => x.charCodeAt(0))
-  struct1.f4[1] = undefined
-  struct1.f5[0] = prototest.EnumSimple.ENUM_VALUE_1
-  struct1.f5[1] = prototest.EnumSimple.ENUM_VALUE_2
-  struct1.f6[0] = prototest.EnumSimple.ENUM_VALUE_1
-  struct1.f6[1] = undefined
-  struct1.f7[0] = prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2)
-  struct1.f7[1] = prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2 | prototest.FlagsSimple.FLAG_VALUE_3)
-  struct1.f8[0] = prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2)
-  struct1.f8[1] = undefined
-  struct1.f9[0] = new prototest.StructSimple()
-  struct1.f9[1] = new prototest.StructSimple()
-  struct1.f10[0] = new prototest.StructSimple()
-  struct1.f10[1] = undefined
+  // Define a source JSON string
+  let json = String.raw`{"f1":[48,65],"f2":[97,null],"f3":["MDAw\\n","QUFB\\n"],"f4":["YWFh\\n",null],"f5":[1,2],"f6":[1,null],"f7":[3,7],"f8":[3,null],"f9":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146157127964000,"f36":"00000000-0000-0000-0000-000000000000","f37":"34d38702-f0a7-11e8-b30e-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146157128572000,"f36":"00000000-0000-0000-0000-000000000000","f37":"34d39c88-f0a7-11e8-b30e-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}],"f10":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146157129063000,"f36":"00000000-0000-0000-0000-000000000000","f37":"34d3b038-f0a7-11e8-b30e-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},null]}`
+
+  // Create a new struct from the source JSON string
+  let struct1 = prototest.StructVector.fromJSON(json)
 
   // Serialize the struct to the JSON string
-  let json = JSON.stringify(struct1)
+  json = JSON.stringify(struct1)
 
   // Check the serialized JSON size
   t.true(json.length > 0)
@@ -850,31 +824,14 @@ test('Serialization (JSON): struct vector', function (t) {
 })
 
 test('Serialization (JSON): struct list', function (t) {
-  // Create a new struct
-  let struct1 = new prototest.StructList()
-  struct1.f1[0] = 48
-  struct1.f1[1] = 65
-  struct1.f2[0] = 97
-  struct1.f2[1] = undefined
-  struct1.f3[0] = Array.from('000', x => x.charCodeAt(0))
-  struct1.f3[1] = Array.from('AAA', x => x.charCodeAt(0))
-  struct1.f4[0] = Array.from('aaa', x => x.charCodeAt(0))
-  struct1.f4[1] = undefined
-  struct1.f5[0] = prototest.EnumSimple.ENUM_VALUE_1
-  struct1.f5[1] = prototest.EnumSimple.ENUM_VALUE_2
-  struct1.f6[0] = prototest.EnumSimple.ENUM_VALUE_1
-  struct1.f6[1] = undefined
-  struct1.f7[0] = prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2)
-  struct1.f7[1] = prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2 | prototest.FlagsSimple.FLAG_VALUE_3)
-  struct1.f8[0] = prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2)
-  struct1.f8[1] = undefined
-  struct1.f9[0] = new prototest.StructSimple()
-  struct1.f9[1] = new prototest.StructSimple()
-  struct1.f10[0] = new prototest.StructSimple()
-  struct1.f10[1] = undefined
+  // Define a source JSON string
+  let json = String.raw`{"f1":[48,65],"f2":[97,null],"f3":["MDAw\\n","QUFB\\n"],"f4":["YWFh\\n",null],"f5":[1,2],"f6":[1,null],"f7":[3,7],"f8":[3,null],"f9":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146220253760000,"f36":"00000000-0000-0000-0000-000000000000","f37":"5a73e7fe-f0a7-11e8-89e6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146220255725000,"f36":"00000000-0000-0000-0000-000000000000","f37":"5a741990-f0a7-11e8-89e6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}],"f10":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146220256802000,"f36":"00000000-0000-0000-0000-000000000000","f37":"5a74e4b0-f0a7-11e8-89e6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},null]}`
+
+  // Create a new struct from the source JSON string
+  let struct1 = prototest.StructList.fromJSON(json)
 
   // Serialize the struct to the JSON string
-  let json = JSON.stringify(struct1)
+  json = JSON.stringify(struct1)
 
   // Check the serialized JSON size
   t.true(json.length > 0)
@@ -933,24 +890,14 @@ test('Serialization (JSON): struct list', function (t) {
 })
 
 test('Serialization (JSON): struct set', function (t) {
-  // Create a new struct
-  let struct1 = new prototest.StructSet()
-  struct1.f1.add(48)
-  struct1.f1.add(65)
-  struct1.f1.add(97)
-  struct1.f2.add(prototest.EnumSimple.ENUM_VALUE_1)
-  struct1.f2.add(prototest.EnumSimple.ENUM_VALUE_2)
-  struct1.f3.add(prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2))
-  struct1.f3.add(prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2 | prototest.FlagsSimple.FLAG_VALUE_3))
-  let s1 = new prototest.StructSimple()
-  s1.uid = 48
-  struct1.f4.add(s1)
-  let s2 = new prototest.StructSimple()
-  s2.uid = 65
-  struct1.f4.add(s2)
+  // Define a source JSON string
+  let json = String.raw`{"f1":[48,65,97],"f2":[1,2],"f3":[3,7],"f4":[{"uid":48,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146299848353000,"f36":"00000000-0000-0000-0000-000000000000","f37":"89e4edd0-f0a7-11e8-9dde-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},{"uid":65,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146299848966000,"f36":"00000000-0000-0000-0000-000000000000","f37":"89e503f6-f0a7-11e8-9dde-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}]}`
+
+  // Create a new struct from the source JSON string
+  let struct1 = prototest.StructSet.fromJSON(json)
 
   // Serialize the struct to the JSON string
-  let json = JSON.stringify(struct1)
+  json = JSON.stringify(struct1)
 
   // Check the serialized JSON size
   t.true(json.length > 0)
@@ -969,41 +916,24 @@ test('Serialization (JSON): struct set', function (t) {
   // t.true(struct2.f3.has(prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2)))
   // t.true(struct2.f3.has(prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2 | prototest.FlagsSimple.FLAG_VALUE_3)))
   t.equal(struct2.f4.size, 2)
+  // let s1 = new prototest.StructSimple()
+  // s1.uid = 48
   // t.true(struct2.f4.has(s1))
+  // let s2 = new prototest.StructSimple()
+  // s2.uid = 65
   // t.true(struct2.f4.has(s2))
   t.end()
 })
 
 test('Serialization (JSON): struct map', function (t) {
-  // Create a new struct
-  let struct1 = new prototest.StructMap()
-  struct1.f1.set('10', 48)
-  struct1.f1.set('20', 65)
-  struct1.f2.set('10', 97)
-  struct1.f2.set('20', undefined)
-  struct1.f3.set('10', Array.from('000', x => x.charCodeAt(0)))
-  struct1.f3.set('20', Array.from('AAA', x => x.charCodeAt(0)))
-  struct1.f4.set('10', Array.from('aaa', x => x.charCodeAt(0)))
-  struct1.f4.set('20', undefined)
-  struct1.f5.set('10', prototest.EnumSimple.ENUM_VALUE_1)
-  struct1.f5.set('20', prototest.EnumSimple.ENUM_VALUE_2)
-  struct1.f6.set('10', prototest.EnumSimple.ENUM_VALUE_1)
-  struct1.f6.set('20', undefined)
-  struct1.f7.set('10', prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2))
-  struct1.f7.set('20', prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2 | prototest.FlagsSimple.FLAG_VALUE_3))
-  struct1.f8.set('10', prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2))
-  struct1.f8.set('20', undefined)
-  let s1 = new prototest.StructSimple()
-  s1.uid = 48
-  struct1.f9.set('10', s1)
-  let s2 = new prototest.StructSimple()
-  s2.uid = 65
-  struct1.f9.set('20', s2)
-  struct1.f10.set('10', s1)
-  struct1.f10.set('20', undefined)
+  // Define a source JSON string
+  let json = String.raw`{"f1":{"10":48,"20":65},"f2":{"10":97,"20":null},"f3":{"10":"MDAw\\n","20":"QUFB\\n"},"f4":{"10":"YWFh\\n","20":null},"f5":{"10":1,"20":2},"f6":{"10":1,"20":null},"f7":{"10":3,"20":7},"f8":{"10":3,"20":null},"f9":{"10":{"uid":48,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146345803483000,"f36":"00000000-0000-0000-0000-000000000000","f37":"a549215e-f0a7-11e8-90f6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"20":{"uid":65,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146345804184000,"f36":"00000000-0000-0000-0000-000000000000","f37":"a54942ce-f0a7-11e8-90f6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}},"f10":{"10":{"uid":48,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146345803483000,"f36":"00000000-0000-0000-0000-000000000000","f37":"a549215e-f0a7-11e8-90f6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"20":null}}`
+
+  // Create a new struct from the source JSON string
+  let struct1 = prototest.StructMap.fromJSON(json)
 
   // Serialize the struct to the JSON string
-  let json = JSON.stringify(struct1)
+  json = JSON.stringify(struct1)
 
   // Check the serialized JSON size
   t.true(json.length > 0)
@@ -1045,35 +975,14 @@ test('Serialization (JSON): struct map', function (t) {
 })
 
 test('Serialization (JSON): struct hash', function (t) {
-  // Create a new struct
-  let struct1 = new prototest.StructHash()
-  struct1.f1.set('10', 48)
-  struct1.f1.set('20', 65)
-  struct1.f2.set('10', 97)
-  struct1.f2.set('20', undefined)
-  struct1.f3.set('10', Array.from('000', x => x.charCodeAt(0)))
-  struct1.f3.set('20', Array.from('AAA', x => x.charCodeAt(0)))
-  struct1.f4.set('10', Array.from('aaa', x => x.charCodeAt(0)))
-  struct1.f4.set('20', undefined)
-  struct1.f5.set('10', prototest.EnumSimple.ENUM_VALUE_1)
-  struct1.f5.set('20', prototest.EnumSimple.ENUM_VALUE_2)
-  struct1.f6.set('10', prototest.EnumSimple.ENUM_VALUE_1)
-  struct1.f6.set('20', undefined)
-  struct1.f7.set('10', prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2))
-  struct1.f7.set('20', prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2 | prototest.FlagsSimple.FLAG_VALUE_3))
-  struct1.f8.set('10', prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2))
-  struct1.f8.set('20', undefined)
-  let s1 = new prototest.StructSimple()
-  s1.uid = 48
-  struct1.f9.set('10', s1)
-  let s2 = new prototest.StructSimple()
-  s2.uid = 65
-  struct1.f9.set('20', s2)
-  struct1.f10.set('10', s1)
-  struct1.f10.set('20', undefined)
+  // Define a source JSON string
+  let json = String.raw`{"f1":{"10":48,"20":65},"f2":{"10":97,"20":null},"f3":{"10":"MDAw\\n","20":"QUFB\\n"},"f4":{"10":"YWFh\\n","20":null},"f5":{"10":1,"20":2},"f6":{"10":1,"20":null},"f7":{"10":3,"20":7},"f8":{"10":3,"20":null},"f9":{"10":{"uid":48,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146381450913000,"f36":"00000000-0000-0000-0000-000000000000","f37":"ba8885d2-f0a7-11e8-81fa-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"20":{"uid":65,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146381452825000,"f36":"00000000-0000-0000-0000-000000000000","f37":"ba88ced4-f0a7-11e8-81fa-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}},"f10":{"10":{"uid":48,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146381450913000,"f36":"00000000-0000-0000-0000-000000000000","f37":"ba8885d2-f0a7-11e8-81fa-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"20":null}}`
+
+  // Create a new struct from the source JSON string
+  let struct1 = prototest.StructHash.fromJSON(json)
 
   // Serialize the struct to the JSON string
-  let json = JSON.stringify(struct1)
+  json = JSON.stringify(struct1)
 
   // Check the serialized JSON size
   t.true(json.length > 0)

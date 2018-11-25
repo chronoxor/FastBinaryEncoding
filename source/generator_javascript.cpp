@@ -11218,7 +11218,9 @@ std::string GeneratorJavaScript::ConvertString(const std::string& value)
 
 std::string GeneratorJavaScript::ConvertVariable(const std::string& type, const std::string& name, bool optional)
 {
-    if ((type == "int64") || (type == "uint64"))
+    if ((type == "char") || (type == "wchar"))
+        return "((" + name + " != null) ? " + name + ".charCodeAt(0) : null)";
+    else if ((type == "int64") || (type == "uint64"))
         return "((" + name + " != null) ? " + name + ".toNumber() : null)";
     else if (type == "bytes")
         return "((" + name + " != null) ? Buffer.from(" + name + ").toString('base64') : null)";
@@ -11234,7 +11236,19 @@ std::string GeneratorJavaScript::ConvertVariable(const std::string& type, const 
 
 void GeneratorJavaScript::CopyValueToVariable(const std::string& type, const std::string& name, const std::string& variable, bool optional)
 {
-    if (type == "int64")
+    if ((type == "char") || (type == "wchar"))
+    {
+        WriteLineIndent("if ((typeof " + name + " === 'string') || (" + name + " instanceof String)) {");
+        Indent(1);
+        WriteLineIndent(variable + " = " + name);
+        Indent(-1);
+        WriteLineIndent("} else {");
+        Indent(1);
+        WriteLineIndent(variable + " = String.fromCharCode(" + name + ")");
+        Indent(-1);
+        WriteLineIndent("}");
+    }
+    else if (type == "int64")
         WriteLineIndent(variable + " = Int64.fromNumber(" + name + ")");
     else if (type == "uint64")
         WriteLineIndent(variable + " = UInt64.fromNumber(" + name + ")");

@@ -1185,22 +1185,38 @@ class StructSimple {
       this.f4 = undefined
     }
     if (other.f5 != null) {
-      this.f5 = other.f5
+      if ((typeof other.f5 === 'string') || (other.f5 instanceof String)) {
+        this.f5 = other.f5
+      } else {
+        this.f5 = String.fromCharCode(other.f5)
+      }
     } else {
       this.f5 = undefined
     }
     if (other.f6 != null) {
-      this.f6 = other.f6
+      if ((typeof other.f6 === 'string') || (other.f6 instanceof String)) {
+        this.f6 = other.f6
+      } else {
+        this.f6 = String.fromCharCode(other.f6)
+      }
     } else {
       this.f6 = undefined
     }
     if (other.f7 != null) {
-      this.f7 = other.f7
+      if ((typeof other.f7 === 'string') || (other.f7 instanceof String)) {
+        this.f7 = other.f7
+      } else {
+        this.f7 = String.fromCharCode(other.f7)
+      }
     } else {
       this.f7 = undefined
     }
     if (other.f8 != null) {
-      this.f8 = other.f8
+      if ((typeof other.f8 === 'string') || (other.f8 instanceof String)) {
+        this.f8 = other.f8
+      } else {
+        this.f8 = String.fromCharCode(other.f8)
+      }
     } else {
       this.f8 = undefined
     }
@@ -1613,10 +1629,10 @@ class StructSimple {
       f2: ((this.f2 != null) ? this.f2 : null),
       f3: ((this.f3 != null) ? this.f3 : null),
       f4: ((this.f4 != null) ? this.f4 : null),
-      f5: ((this.f5 != null) ? this.f5 : null),
-      f6: ((this.f6 != null) ? this.f6 : null),
-      f7: ((this.f7 != null) ? this.f7 : null),
-      f8: ((this.f8 != null) ? this.f8 : null),
+      f5: ((this.f5 != null) ? this.f5.charCodeAt(0) : null),
+      f6: ((this.f6 != null) ? this.f6.charCodeAt(0) : null),
+      f7: ((this.f7 != null) ? this.f7.charCodeAt(0) : null),
+      f8: ((this.f8 != null) ? this.f8.charCodeAt(0) : null),
       f9: ((this.f9 != null) ? this.f9 : null),
       f10: ((this.f10 != null) ? this.f10 : null),
       f11: ((this.f11 != null) ? this.f11 : null),
@@ -5083,32 +5099,56 @@ class StructOptional extends StructSimple {
       this.f105 = undefined
     }
     if (other.f106 != null) {
-      this.f106 = other.f106
+      if ((typeof other.f106 === 'string') || (other.f106 instanceof String)) {
+        this.f106 = other.f106
+      } else {
+        this.f106 = String.fromCharCode(other.f106)
+      }
     } else {
       this.f106 = undefined
     }
     if (other.f107 != null) {
-      this.f107 = other.f107
+      if ((typeof other.f107 === 'string') || (other.f107 instanceof String)) {
+        this.f107 = other.f107
+      } else {
+        this.f107 = String.fromCharCode(other.f107)
+      }
     } else {
       this.f107 = undefined
     }
     if (other.f108 != null) {
-      this.f108 = other.f108
+      if ((typeof other.f108 === 'string') || (other.f108 instanceof String)) {
+        this.f108 = other.f108
+      } else {
+        this.f108 = String.fromCharCode(other.f108)
+      }
     } else {
       this.f108 = undefined
     }
     if (other.f109 != null) {
-      this.f109 = other.f109
+      if ((typeof other.f109 === 'string') || (other.f109 instanceof String)) {
+        this.f109 = other.f109
+      } else {
+        this.f109 = String.fromCharCode(other.f109)
+      }
     } else {
       this.f109 = undefined
     }
     if (other.f110 != null) {
-      this.f110 = other.f110
+      if ((typeof other.f110 === 'string') || (other.f110 instanceof String)) {
+        this.f110 = other.f110
+      } else {
+        this.f110 = String.fromCharCode(other.f110)
+      }
     } else {
       this.f110 = undefined
     }
     if (other.f111 != null) {
-      this.f111 = other.f111
+      if ((typeof other.f111 === 'string') || (other.f111 instanceof String)) {
+        this.f111 = other.f111
+      } else {
+        this.f111 = String.fromCharCode(other.f111)
+      }
     } else {
       this.f111 = undefined
     }
@@ -5886,12 +5926,12 @@ class StructOptional extends StructSimple {
       f103: ((this.f103 != null) ? this.f103 : null),
       f104: ((this.f104 != null) ? this.f104 : null),
       f105: ((this.f105 != null) ? this.f105 : null),
-      f106: ((this.f106 != null) ? this.f106 : null),
-      f107: ((this.f107 != null) ? this.f107 : null),
-      f108: ((this.f108 != null) ? this.f108 : null),
-      f109: ((this.f109 != null) ? this.f109 : null),
-      f110: ((this.f110 != null) ? this.f110 : null),
-      f111: ((this.f111 != null) ? this.f111 : null),
+      f106: ((this.f106 != null) ? this.f106.charCodeAt(0) : null),
+      f107: ((this.f107 != null) ? this.f107.charCodeAt(0) : null),
+      f108: ((this.f108 != null) ? this.f108.charCodeAt(0) : null),
+      f109: ((this.f109 != null) ? this.f109.charCodeAt(0) : null),
+      f110: ((this.f110 != null) ? this.f110.charCodeAt(0) : null),
+      f111: ((this.f111 != null) ? this.f111.charCodeAt(0) : null),
       f112: ((this.f112 != null) ? this.f112 : null),
       f113: ((this.f113 != null) ? this.f113 : null),
       f114: ((this.f114 != null) ? this.f114 : null),
