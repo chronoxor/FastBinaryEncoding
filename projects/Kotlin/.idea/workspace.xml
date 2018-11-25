@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a777d28d-c4fb-4aae-88ff-091d764fff06" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proto/fbe/Json.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/proto/fbe/Json.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tests/TestSerializationJson.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerializationJson.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,28 +29,28 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="11" />
-          <entry key="java" value="40" />
-          <entry key="kt" value="204" />
+          <entry key="class" value="16" />
+          <entry key="java" value="41" />
+          <entry key="kt" value="211" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="11" />
-          <entry key="JAVA" value="40" />
-          <entry key="Kotlin" value="204" />
+          <entry key="CLASS" value="16" />
+          <entry key="JAVA" value="41" />
+          <entry key="Kotlin" value="211" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="java" value="91" />
-          <entry key="kt" value="4049" />
+          <entry key="kt" value="4476" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="91" />
-          <entry key="Kotlin" value="4049" />
+          <entry key="Kotlin" value="4476" />
         </counts>
       </usages-collector>
     </session>
@@ -78,38 +76,53 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/proto/fbe/Json.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="31" selection-start-line="31" selection-end-line="31" />
+            <state relative-caret-position="599">
+              <caret line="107" column="5" lean-forward="true" selection-start-line="97" selection-end-line="107" selection-end-column="5" />
+              <folding>
+                <element signature="e#222#393#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/proto/proto/Account.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2278">
+              <caret line="134" selection-start-line="134" selection-end-line="134" />
+              <folding>
+                <element signature="e#230#389#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/proto/fbe/FinalModelUInt8.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tests/TestSerializationJson.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="568">
-              <caret line="179" selection-start-line="179" selection-end-line="179" />
+            <state relative-caret-position="391">
+              <caret line="173" selection-start-line="173" selection-end-line="173" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/testng/testng/7.0.0-beta1/testng-7.0.0-beta1.jar!/org/testng/internal/MethodInvocationHelper.class">
+        <entry file="file://$PROJECT_DIR$/src/examples/Print.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="108" selection-start-line="108" selection-end-line="108" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/testng/testng/7.0.0-beta1/testng-7.0.0-beta1.jar!/org/testng/internal/Invoker.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1221">
-              <caret line="483" selection-start-line="483" selection-end-line="483" />
+            <state relative-caret-position="272">
+              <caret line="16" column="1" lean-forward="true" selection-start-line="2" selection-end-line="16" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -117,17 +130,34 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/internal/bind/ReflectiveTypeAdapterFactory.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="559">
-              <caret line="208" selection-start-line="208" selection-end-line="208" />
+            <state relative-caret-position="338">
+              <caret line="110" selection-start-line="110" selection-end-line="110" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/proto/test/StructArray.kt">
+        <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/internal/bind/TypeAdapters.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3995">
-              <caret line="244" selection-start-line="244" selection-end-line="244" />
+            <state relative-caret-position="202">
+              <caret line="327" selection-start-line="327" selection-end-line="327" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/stream/JsonWriter.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="231" selection-start-line="231" selection-end-line="231" />
+              <folding>
+                <element signature="e#1298#1299#0" expanded="true" />
+                <element signature="e#1336#1337#0" expanded="true" />
+                <element signature="e#1370#1371#0" expanded="true" />
+                <element signature="e#1405#1406#0" expanded="true" />
+                <element signature="e#3628#3629#0" expanded="true" />
+                <element signature="e#3687#3688#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -135,40 +165,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/internal/bind/TypeAdapterRuntimeTypeWrapper.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="29" selection-start-line="29" selection-end-line="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/Gson.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7378">
-              <caret line="487" selection-start-line="487" selection-end-line="487" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/internal/bind/ArrayTypeAdapter.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="833">
-              <caret line="52" selection-start-line="52" selection-end-line="52" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk-11/lib/src.zip!/java.base/java/lang/reflect/Field.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="12291">
-              <caret line="779" selection-start-line="779" selection-end-line="779" />
+            <state relative-caret-position="317">
+              <caret line="46" selection-start-line="46" selection-end-line="46" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin File" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -184,7 +194,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/proto/enums/EnumUInt8Enum.kt" />
         <option value="$PROJECT_DIR$/src/proto/enums/EnumUInt64Enum.kt" />
         <option value="$PROJECT_DIR$/src/proto/enums/EnumByteEnum.kt" />
         <option value="$PROJECT_DIR$/src/proto/enums/EnumCharEnum.kt" />
@@ -234,6 +243,7 @@
         <option value="$PROJECT_DIR$/src/benchmarks/BenchmarkSendReceive.kt" />
         <option value="$PROJECT_DIR$/src/examples/PrintJson.kt" />
         <option value="$PROJECT_DIR$/src/proto/fbe/Json.kt" />
+        <option value="$PROJECT_DIR$/src/examples/Test.kt" />
         <option value="$PROJECT_DIR$/src/tests/TestSerializationJson.kt" />
       </list>
     </option>
@@ -274,6 +284,12 @@
               <item name="Kotlin" type="b2602c69:ProjectViewProjectNode" />
               <item name="Kotlin" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Kotlin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Kotlin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="proto" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -282,6 +298,13 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="proto" type="462c0819:PsiDirectoryNode" />
               <item name="fbe" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Kotlin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Kotlin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="proto" type="462c0819:PsiDirectoryNode" />
+              <item name="proto" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Kotlin" type="b2602c69:ProjectViewProjectNode" />
@@ -301,7 +324,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543178453745" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543182039478" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -323,15 +346,15 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="TestNG.TestSerializationJson.serializationJsonStructOptional">
-    <configuration name="examples.PrintJson" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="TestNG.&lt;default&gt;">
+    <configuration name="examples.Test" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
       <module name="Kotlin" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" value="examples.PrintJson" />
+      <option name="MAIN_CLASS_NAME" value="examples.Test" />
       <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -405,18 +428,18 @@
     </configuration>
     <list>
       <item itemvalue="TestNG.&lt;default&gt;" />
-      <item itemvalue="Kotlin.examples.PrintJson" />
       <item itemvalue="TestNG.TestSerializationJson.serializationJsonStructSimple" />
       <item itemvalue="TestNG.TestSerializationJson" />
       <item itemvalue="TestNG.TestSerializationJson.serializationJsonStructOptional" />
+      <item itemvalue="Kotlin.examples.Test" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.TestSerializationJson.serializationJsonStructOptional" />
         <item itemvalue="TestNG.&lt;default&gt;" />
+        <item itemvalue="Kotlin.examples.Test" />
         <item itemvalue="TestNG.TestSerializationJson" />
+        <item itemvalue="TestNG.TestSerializationJson.serializationJsonStructOptional" />
         <item itemvalue="TestNG.TestSerializationJson.serializationJsonStructSimple" />
-        <item itemvalue="Kotlin.examples.PrintJson" />
       </list>
     </recent_temporary>
   </component>
@@ -466,44 +489,44 @@
       <workItem from="1543162759039" duration="109000" />
       <workItem from="1543162871179" duration="50000" />
       <workItem from="1543162949841" duration="3155000" />
-      <workItem from="1543177613519" duration="956000" />
+      <workItem from="1543177613519" duration="4261000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="_default_ - 2018.11.25 at 19h 28m 27s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="TestSerializationJson - 2018.11.25 at 22h 26m 02s.xml">
-      <configuration name="TestSerializationJson" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="TestSerializationJson_serializationJsonStructOptional - 2018.11.25 at 22h 38m 20s.xml">
+    <history-entry file="TestSerializationJson_serializationJsonStructOptional - 2018.11.26 at 00h 05m 28s.xml">
       <configuration name="TestSerializationJson.serializationJsonStructOptional" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="TestSerializationJson - 2018.11.25 at 22h 38m 20s.xml">
+    <history-entry file="TestSerializationJson - 2018.11.26 at 00h 07m 55s.xml">
       <configuration name="TestSerializationJson" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2018.11.25 at 22h 49m 46s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    <history-entry file="TestSerializationJson - 2018.11.26 at 00h 08m 27s.xml">
+      <configuration name="TestSerializationJson" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2018.11.25 at 23h 29m 09s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    <history-entry file="TestSerializationJson - 2018.11.26 at 00h 11m 31s.xml">
+      <configuration name="TestSerializationJson" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2018.11.25 at 23h 30m 20s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    <history-entry file="TestSerializationJson - 2018.11.26 at 00h 14m 32s.xml">
+      <configuration name="TestSerializationJson" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2018.11.25 at 23h 32m 37s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    <history-entry file="TestSerializationJson - 2018.11.26 at 00h 14m 59s.xml">
+      <configuration name="TestSerializationJson" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="TestSerializationJson_serializationJsonStructOptional - 2018.11.25 at 23h 37m 49s.xml">
+    <history-entry file="TestSerializationJson_serializationJsonStructOptional - 2018.11.26 at 00h 19m 45s.xml">
       <configuration name="TestSerializationJson.serializationJsonStructOptional" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="_default_ - 2018.11.25 at 23h 38m 03s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    <history-entry file="TestSerializationJson - 2018.11.26 at 00h 21m 09s.xml">
+      <configuration name="TestSerializationJson" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="TestSerializationJson_serializationJsonStructOptional - 2018.11.26 at 00h 22m 00s.xml">
+      <configuration name="TestSerializationJson.serializationJsonStructOptional" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="TestSerializationJson - 2018.11.26 at 00h 22m 55s.xml">
+      <configuration name="TestSerializationJson" configurationId="TestNG" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="62903000" />
+    <option name="totallyTimeSpent" value="66208000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -516,7 +539,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="424" y="140" width="1709" height="1272" extended-state="0" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.388114" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -527,17 +549,17 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48696178" weight="0.3546971" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49545178" visible="true" weight="0.39947322" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48635536" visible="true" weight="0.3546971" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49241966" weight="0.39947322" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49909034" weight="0.32891247" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32891247" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5045482" side_tool="true" visible="true" weight="0.39947322" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.51364464" side_tool="true" visible="true" weight="0.3546971" />
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="JProfiler" order="11" />
-      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.4202547" weight="0.19397117" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.41479686" weight="0.19315189" />
       <window_info anchor="bottom" id="Inspection Results" order="13" sideWeight="0.49727106" weight="0.3294025" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -556,54 +578,7 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/tests/TestSerializationJson.kt</url>
-          <line>179</line>
-          <properties />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/proto/enums/fbe/EnumUInt8Json.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="24" column="46" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/enums/fbe/EnumUInt16Json.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="46" selection-start-line="24" selection-start-column="46" selection-end-line="24" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/enums/fbe/EnumUInt32Json.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/enums/fbe/EnumByteJson.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/enums/fbe/EnumCharJson.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="24" column="37" selection-start-line="24" selection-start-column="37" selection-end-line="24" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/proto/enums/fbe/EnumInt32Json.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -688,13 +663,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/proto/Account.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2159">
-          <caret line="134" selection-start-line="134" selection-end-line="134" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/proto/proto/Balance.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="769">
@@ -747,6 +715,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="9" column="1" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
+          <folding>
+            <element signature="e#15#105#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -754,6 +725,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="7" column="51" selection-start-line="7" selection-end-line="7" selection-end-column="51" />
+          <folding>
+            <element signature="e#15#105#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -791,20 +765,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/proto/fbe/Json.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="36" selection-start-line="36" selection-end-line="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/internal/bind/TypeAdapters.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4556">
-          <caret line="319" selection-start-line="319" selection-end-line="319" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/JsonNull.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -823,13 +783,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="17" selection-start-line="7" selection-end-line="8" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/examples/Print.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -861,45 +814,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/test/StructOptional.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6052">
-          <caret line="365" selection-start-line="365" selection-end-line="365" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/proto/test/StructArray.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3995">
-          <caret line="244" selection-start-line="244" selection-end-line="244" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/internal/bind/TypeAdapterRuntimeTypeWrapper.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/Gson.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7378">
-          <caret line="487" selection-start-line="487" selection-end-line="487" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/internal/bind/ArrayTypeAdapter.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="833">
           <caret line="52" selection-start-line="52" selection-end-line="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-11/lib/src.zip!/java.base/java/lang/reflect/Field.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12291">
-          <caret line="779" selection-start-line="779" selection-end-line="779" />
         </state>
       </provider>
     </entry>
@@ -917,24 +835,142 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tests/TestSerializationJson.kt">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/internal/bind/TreeTypeAdapter.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="568">
-          <caret line="179" selection-start-line="179" selection-end-line="179" />
+        <state relative-caret-position="218">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/proto/test/StructArray.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="497">
+          <caret line="244" selection-start-line="244" selection-end-line="244" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/proto/test/StructOptional.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="622">
+          <caret line="365" selection-start-line="365" selection-end-line="365" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/reflect/TypeToken.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="48" selection-start-line="48" selection-end-line="48" />
+          <folding>
+            <element signature="e#1539#1540#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-11/lib/src.zip!/java.base/java/lang/reflect/Field.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="779" selection-start-line="779" selection-end-line="779" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/proto/proto/fbe/Json.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/Gson.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="416" selection-start-line="416" selection-end-line="416" />
         </state>
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/internal/bind/ReflectiveTypeAdapterFactory.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="559">
-          <caret line="208" selection-start-line="208" selection-end-line="208" />
+        <state relative-caret-position="338">
+          <caret line="110" selection-start-line="110" selection-end-line="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/stream/JsonWriter.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="231" selection-start-line="231" selection-end-line="231" />
+          <folding>
+            <element signature="e#1298#1299#0" expanded="true" />
+            <element signature="e#1336#1337#0" expanded="true" />
+            <element signature="e#1370#1371#0" expanded="true" />
+            <element signature="e#1405#1406#0" expanded="true" />
+            <element signature="e#3628#3629#0" expanded="true" />
+            <element signature="e#3687#3688#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/internal/bind/TypeAdapters.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="327" selection-start-line="327" selection-end-line="327" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar!/com/google/gson/internal/bind/TypeAdapterRuntimeTypeWrapper.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/examples/Print.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="1" lean-forward="true" selection-start-line="2" selection-end-line="16" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/proto/proto/Account.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2278">
+          <caret line="134" selection-start-line="134" selection-end-line="134" />
+          <folding>
+            <element signature="e#230#389#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/proto/fbe/Json.kt">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="599">
+          <caret line="107" column="5" lean-forward="true" selection-start-line="97" selection-end-line="107" selection-end-column="5" />
+          <folding>
+            <element signature="e#222#393#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/examples/Test.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" column="32" lean-forward="true" selection-start-line="18" selection-end-line="20" selection-end-column="32" />
+          <folding>
+            <element signature="e#18#80#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/proto/fbe/FinalModelUInt8.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/TestSerializationJson.kt">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
+          <caret line="173" selection-start-line="173" selection-end-line="173" />
         </state>
       </provider>
     </entry>
