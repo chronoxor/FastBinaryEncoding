@@ -289,7 +289,7 @@ dependencies that worth to be mentioned:
   Therefore it should be imported using Maven;
 
 ### Python
-* Only Python 3.7 is supported ([time.time_ns()](https://docs.python.org/3/library/time.html#time.time_ns));
+* Python 3.7 is required because of [time.time_ns()](https://docs.python.org/3/library/time.html#time.time_ns);
 
 ### Ruby
 * Some Ruby dependencies should be installed from Gems:
