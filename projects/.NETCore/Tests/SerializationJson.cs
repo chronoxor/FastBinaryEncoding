@@ -14,20 +14,14 @@ namespace Tests
         [Fact(DisplayName = "Serialization (JSON): proto")]
         public void SerializationJsonProto()
         {
-            // Create a new account with some orders
-            var account1 = proto.Account.Default;
-            account1.uid = 1;
-            account1.name = "Test";
-            account1.state = proto.State.good;
-            account1.wallet.currency = "USD";
-            account1.wallet.amount = 1000.0;
-            account1.asset = new proto.Balance("EUR", 100.0);
-            account1.orders.Add(new proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0));
-            account1.orders.Add(new proto.Order(2, "EURUSD", proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0));
-            account1.orders.Add(new proto.Order(3, "EURUSD", proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0));
+            // Define a source JSON string
+            var json = @"{""uid"":1,""name"":""Test"",""state"":6,""wallet"":{""currency"":""USD"",""amount"":1000.0},""asset"":{""currency"":""EUR"",""amount"":100.0},""orders"":[{""uid"":1,""symbol"":""EURUSD"",""side"":0,""type"":0,""price"":1.23456,""volume"":1000.0},{""uid"":2,""symbol"":""EURUSD"",""side"":1,""type"":1,""price"":1.0,""volume"":100.0},{""uid"":3,""symbol"":""EURUSD"",""side"":0,""type"":2,""price"":1.5,""volume"":10.0}]}";
+
+            // Create a new account from the source JSON string
+            var account1 = proto.Account.FromJson(json);
 
             // Serialize the account to the JSON string
-            var json = account1.ToJson();
+            json = account1.ToJson();
 
             // Check the serialized JSON and its size
             Assert.True(json.Length > 0);
@@ -67,11 +61,14 @@ namespace Tests
         [Fact(DisplayName = "Serialization (JSON): struct simple")]
         public void SerializationJsonStructSimple()
         {
-            // Create a new struct
-            var struct1 = test.StructSimple.Default;
+            // Define a source JSON string
+            var json = @"{""uid"":0,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543145597933463000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""e7854072-f0a5-11e8-8f69-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]}}";
+
+            // Create a new struct from the source JSON string
+            var struct1 = test.StructSimple.FromJson(json);
 
             // Serialize the struct to the JSON string
-            var json = struct1.ToJson();
+            json = struct1.ToJson();
 
             // Check the serialized JSON and its size
             Assert.True(json.Length > 0);
@@ -164,11 +161,14 @@ namespace Tests
         [Fact(DisplayName = "Serialization (JSON): struct optional")]
         public void SerializationJsonStructOptional()
         {
-            // Create a new struct
-            var struct1 = test.StructOptional.Default;
+            // Define a source JSON string
+            var json = @"{""uid"":0,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543145860677797000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""8420d1c6-f0a6-11e8-80fc-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]},""f100"":null,""f101"":true,""f102"":null,""f103"":null,""f104"":255,""f105"":null,""f106"":null,""f107"":33,""f108"":null,""f109"":null,""f110"":1092,""f111"":null,""f112"":null,""f113"":127,""f114"":null,""f115"":null,""f116"":255,""f117"":null,""f118"":null,""f119"":32767,""f120"":null,""f121"":null,""f122"":65535,""f123"":null,""f124"":null,""f125"":2147483647,""f126"":null,""f127"":null,""f128"":4294967295,""f129"":null,""f130"":null,""f131"":9223372036854775807,""f132"":null,""f133"":null,""f134"":18446744073709551615,""f135"":null,""f136"":null,""f137"":123.456,""f138"":null,""f139"":null,""f140"":-1.23456e+125,""f141"":null,""f142"":null,""f143"":""123456.123456"",""f144"":null,""f145"":null,""f146"":""Initial string!"",""f147"":null,""f148"":null,""f149"":1543145860678429000,""f150"":null,""f151"":null,""f152"":""123e4567-e89b-12d3-a456-426655440000"",""f153"":null,""f154"":null,""f155"":null,""f156"":null,""f157"":null,""f158"":null,""f159"":null,""f160"":null,""f161"":null,""f162"":null,""f163"":null,""f164"":null,""f165"":null}";
+
+            // Create a new struct from the source JSON string
+            var struct1 = test.StructOptional.FromJson(json);
 
             // Serialize the struct to the JSON string
-            var json = struct1.ToJson();
+            json = struct1.ToJson();
 
             // Check the serialized JSON and its size
             Assert.True(json.Length > 0);
@@ -404,11 +404,14 @@ namespace Tests
         [Fact(DisplayName = "Serialization (JSON): struct nested")]
         public void SerializationJsonStructNested()
         {
-            // Create a new struct
-            var struct1 = test.StructNested.Default;
+            // Define a source JSON string
+            var json = @"{""uid"":0,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543145901646321000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""9c8c268e-f0a6-11e8-a777-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]},""f100"":null,""f101"":true,""f102"":null,""f103"":null,""f104"":255,""f105"":null,""f106"":null,""f107"":33,""f108"":null,""f109"":null,""f110"":1092,""f111"":null,""f112"":null,""f113"":127,""f114"":null,""f115"":null,""f116"":255,""f117"":null,""f118"":null,""f119"":32767,""f120"":null,""f121"":null,""f122"":65535,""f123"":null,""f124"":null,""f125"":2147483647,""f126"":null,""f127"":null,""f128"":4294967295,""f129"":null,""f130"":null,""f131"":9223372036854775807,""f132"":null,""f133"":null,""f134"":18446744073709551615,""f135"":null,""f136"":null,""f137"":123.456,""f138"":null,""f139"":null,""f140"":-1.23456e+125,""f141"":null,""f142"":null,""f143"":""123456.123456"",""f144"":null,""f145"":null,""f146"":""Initial string!"",""f147"":null,""f148"":null,""f149"":1543145901647155000,""f150"":null,""f151"":null,""f152"":""123e4567-e89b-12d3-a456-426655440000"",""f153"":null,""f154"":null,""f155"":null,""f156"":null,""f157"":null,""f158"":null,""f159"":null,""f160"":null,""f161"":null,""f162"":null,""f163"":null,""f164"":null,""f165"":null,""f1000"":0,""f1001"":null,""f1002"":50,""f1003"":null,""f1004"":0,""f1005"":null,""f1006"":42,""f1007"":null,""f1008"":{""uid"":0,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543145901647367000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""9c8c54c4-f0a6-11e8-a777-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]}},""f1009"":null,""f1010"":{""uid"":0,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543145901648310000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""9c8c6b76-f0a6-11e8-a777-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]},""f100"":null,""f101"":true,""f102"":null,""f103"":null,""f104"":255,""f105"":null,""f106"":null,""f107"":33,""f108"":null,""f109"":null,""f110"":1092,""f111"":null,""f112"":null,""f113"":127,""f114"":null,""f115"":null,""f116"":255,""f117"":null,""f118"":null,""f119"":32767,""f120"":null,""f121"":null,""f122"":65535,""f123"":null,""f124"":null,""f125"":2147483647,""f126"":null,""f127"":null,""f128"":4294967295,""f129"":null,""f130"":null,""f131"":9223372036854775807,""f132"":null,""f133"":null,""f134"":18446744073709551615,""f135"":null,""f136"":null,""f137"":123.456,""f138"":null,""f139"":null,""f140"":-1.23456e+125,""f141"":null,""f142"":null,""f143"":""123456.123456"",""f144"":null,""f145"":null,""f146"":""Initial string!"",""f147"":null,""f148"":null,""f149"":1543145901648871000,""f150"":null,""f151"":null,""f152"":""123e4567-e89b-12d3-a456-426655440000"",""f153"":null,""f154"":null,""f155"":null,""f156"":null,""f157"":null,""f158"":null,""f159"":null,""f160"":null,""f161"":null,""f162"":null,""f163"":null,""f164"":null,""f165"":null},""f1011"":null}";
+
+            // Create a new struct from the source JSON string
+            var struct1 = test.StructNested.FromJson(json);
 
             // Serialize the struct to the JSON string
-            var json = struct1.ToJson();
+            json = struct1.ToJson();
 
             // Check the serialized JSON and its size
             Assert.True(json.Length > 0);
@@ -664,13 +667,14 @@ namespace Tests
         [Fact(DisplayName = "Serialization (JSON): struct bytes")]
         public void SerializationJsonStructBytes()
         {
-            // Create a new struct
-            var struct1 = test.StructBytes.Default;
-            struct1.f1 = new [] { (byte)'A', (byte)'B', (byte)'C' };
-            struct1.f2 = new[] { (byte)'t', (byte)'e', (byte)'s', (byte)'t' };
+            // Define a source JSON string
+            var json = @"{""f1"":""QUJD"",""f2"":""dGVzdA=="",""f3"":null}";
+
+            // Create a new struct from the source JSON string
+            var struct1 = test.StructBytes.FromJson(json);
 
             // Serialize the struct to the JSON string
-            var json = struct1.ToJson();
+            json = struct1.ToJson();
 
             // Check the serialized JSON and its size
             Assert.True(json.Length > 0);
@@ -679,46 +683,29 @@ namespace Tests
             var struct2 = test.StructBytes.FromJson(json);
 
             Assert.True(struct2.f1.Length == 3);
-            Assert.True(struct2.f1[0] == (byte)'A');
-            Assert.True(struct2.f1[1] == (byte)'B');
-            Assert.True(struct2.f1[2] == (byte)'C');
+            Assert.True(struct2.f1.GetBuffer()[0] == (byte)'A');
+            Assert.True(struct2.f1.GetBuffer()[1] == (byte)'B');
+            Assert.True(struct2.f1.GetBuffer()[2] == (byte)'C');
             Assert.True(struct2.f2 != null);
             Assert.True(struct2.f2.Length == 4);
-            Assert.True(struct2.f2[0] == (byte)'t');
-            Assert.True(struct2.f2[1] == (byte)'e');
-            Assert.True(struct2.f2[2] == (byte)'s');
-            Assert.True(struct2.f2[3] == (byte)'t');
+            Assert.True(struct2.f2.GetBuffer()[0] == (byte)'t');
+            Assert.True(struct2.f2.GetBuffer()[1] == (byte)'e');
+            Assert.True(struct2.f2.GetBuffer()[2] == (byte)'s');
+            Assert.True(struct2.f2.GetBuffer()[3] == (byte)'t');
             Assert.True(struct2.f3 == null);
         }
 
         [Fact(DisplayName = "Serialization (JSON): struct array")]
         public void SerializationJsonStructArray()
         {
-            // Create a new struct
-            var struct1 = test.StructArray.Default;
-            struct1.f1[0] = 48;
-            struct1.f1[1] = 65;
-            struct1.f2[0] = 97;
-            struct1.f2[1] = null;
-            struct1.f3[0] = new[] { (byte)48, (byte)48, (byte)48 };
-            struct1.f3[1] = new[] { (byte)65, (byte)65, (byte)65 };
-            struct1.f4[0] = new[] { (byte)97, (byte)97, (byte)97 };
-            struct1.f4[1] = null;
-            struct1.f5[0] = test.EnumSimple.ENUM_VALUE_1;
-            struct1.f5[1] = test.EnumSimple.ENUM_VALUE_2;
-            struct1.f6[0] = test.EnumSimple.ENUM_VALUE_1;
-            struct1.f6[1] = null;
-            struct1.f7[0] = test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2;
-            struct1.f7[1] = test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3;
-            struct1.f8[0] = test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2;
-            struct1.f8[1] = null;
-            struct1.f9[0] = test.StructSimple.Default;
-            struct1.f9[1] = test.StructSimple.Default;
-            struct1.f10[0] = test.StructSimple.Default;
-            struct1.f10[1] = null;
+            // Define a source JSON string
+            var json = @"{""f1"":[48,65],""f2"":[97,null],""f3"":[""MDAw"",""QUFB""],""f4"":[""YWFh"",null],""f5"":[1,2],""f6"":[1,null],""f7"":[3,7],""f8"":[3,null],""f9"":[{""uid"":0,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543145986060361000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""cedcad98-f0a6-11e8-9f47-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]}},{""uid"":0,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543145986060910000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""cedcc274-f0a6-11e8-9f47-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]}}],""f10"":[{""uid"":0,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543145986061436000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""cedcd714-f0a6-11e8-9f47-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]}},null]}";
+
+            // Create a new struct from the source JSON string
+            var struct1 = test.StructArray.FromJson(json);
 
             // Serialize the struct to the JSON string
-            var json = struct1.ToJson();
+            json = struct1.ToJson();
 
             // Check the serialized JSON and its size
             Assert.True(json.Length > 0);
@@ -734,19 +721,19 @@ namespace Tests
             Assert.True(struct2.f2[1] == null);
             Assert.True(struct2.f3.Length == 2);
             Assert.True(struct2.f3[0].Length == 3);
-            Assert.True(struct2.f3[0][0] == 48);
-            Assert.True(struct2.f3[0][1] == 48);
-            Assert.True(struct2.f3[0][2] == 48);
+            Assert.True(struct2.f3[0].GetBuffer()[0] == 48);
+            Assert.True(struct2.f3[0].GetBuffer()[1] == 48);
+            Assert.True(struct2.f3[0].GetBuffer()[2] == 48);
             Assert.True(struct2.f3[1].Length == 3);
-            Assert.True(struct2.f3[1][0] == 65);
-            Assert.True(struct2.f3[1][1] == 65);
-            Assert.True(struct2.f3[1][2] == 65);
+            Assert.True(struct2.f3[1].GetBuffer()[0] == 65);
+            Assert.True(struct2.f3[1].GetBuffer()[1] == 65);
+            Assert.True(struct2.f3[1].GetBuffer()[2] == 65);
             Assert.True(struct2.f4.Length == 2);
             Assert.True(struct2.f4[0] != null);
             Assert.True(struct2.f4[0].Length == 3);
-            Assert.True(struct2.f4[0][0] == 97);
-            Assert.True(struct2.f4[0][1] == 97);
-            Assert.True(struct2.f4[0][2] == 97);
+            Assert.True(struct2.f4[0].GetBuffer()[0] == 97);
+            Assert.True(struct2.f4[0].GetBuffer()[1] == 97);
+            Assert.True(struct2.f4[0].GetBuffer()[2] == 97);
             Assert.True(struct2.f4[1] == null);
             Assert.True(struct2.f5.Length == 2);
             Assert.True(struct2.f5[0] == test.EnumSimple.ENUM_VALUE_1);
@@ -778,31 +765,14 @@ namespace Tests
         [Fact(DisplayName = "Serialization (JSON): struct vector")]
         public void SerializationJsonStructVector()
         {
-            // Create a new struct
-            var struct1 = test.StructVector.Default;
-            struct1.f1.Add(48);
-            struct1.f1.Add(65);
-            struct1.f2.Add(97);
-            struct1.f2.Add(null);
-            struct1.f3.Add(new[] { (byte)48, (byte)48, (byte)48 });
-            struct1.f3.Add(new[] { (byte)65, (byte)65, (byte)65 });
-            struct1.f4.Add(new[] { (byte)97, (byte)97, (byte)97 });
-            struct1.f4.Add(null);
-            struct1.f5.Add(test.EnumSimple.ENUM_VALUE_1);
-            struct1.f5.Add(test.EnumSimple.ENUM_VALUE_2);
-            struct1.f6.Add(test.EnumSimple.ENUM_VALUE_1);
-            struct1.f6.Add(null);
-            struct1.f7.Add(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
-            struct1.f7.Add(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3);
-            struct1.f8.Add(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
-            struct1.f8.Add(null);
-            struct1.f9.Add(test.StructSimple.Default);
-            struct1.f9.Add(test.StructSimple.Default);
-            struct1.f10.Add(test.StructSimple.Default);
-            struct1.f10.Add(null);
+            // Define a source JSON string
+            var json = @"{""f1"":[48,65],""f2"":[97,null],""f3"":[""MDAw"",""QUFB""],""f4"":[""YWFh"",null],""f5"":[1,2],""f6"":[1,null],""f7"":[3,7],""f8"":[3,null],""f9"":[{""uid"":0,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543146157127964000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""34d38702-f0a7-11e8-b30e-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]}},{""uid"":0,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543146157128572000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""34d39c88-f0a7-11e8-b30e-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]}}],""f10"":[{""uid"":0,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543146157129063000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""34d3b038-f0a7-11e8-b30e-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]}},null]}";
+
+            // Create a new struct from the source JSON string
+            var struct1 = test.StructVector.FromJson(json);
 
             // Serialize the struct to the JSON string
-            var json = struct1.ToJson();
+            json = struct1.ToJson();
 
             // Check the serialized JSON and its size
             Assert.True(json.Length > 0);
@@ -818,19 +788,19 @@ namespace Tests
             Assert.True(struct2.f2[1] == null);
             Assert.True(struct2.f3.Count == 2);
             Assert.True(struct2.f3[0].Length == 3);
-            Assert.True(struct2.f3[0][0] == 48);
-            Assert.True(struct2.f3[0][1] == 48);
-            Assert.True(struct2.f3[0][2] == 48);
+            Assert.True(struct2.f3[0].GetBuffer()[0] == 48);
+            Assert.True(struct2.f3[0].GetBuffer()[1] == 48);
+            Assert.True(struct2.f3[0].GetBuffer()[2] == 48);
             Assert.True(struct2.f3[1].Length == 3);
-            Assert.True(struct2.f3[1][0] == 65);
-            Assert.True(struct2.f3[1][1] == 65);
-            Assert.True(struct2.f3[1][2] == 65);
+            Assert.True(struct2.f3[1].GetBuffer()[0] == 65);
+            Assert.True(struct2.f3[1].GetBuffer()[1] == 65);
+            Assert.True(struct2.f3[1].GetBuffer()[2] == 65);
             Assert.True(struct2.f4.Count == 2);
             Assert.True(struct2.f4[0] != null);
             Assert.True(struct2.f4[0].Length == 3);
-            Assert.True(struct2.f4[0][0] == 97);
-            Assert.True(struct2.f4[0][1] == 97);
-            Assert.True(struct2.f4[0][2] == 97);
+            Assert.True(struct2.f4[0].GetBuffer()[0] == 97);
+            Assert.True(struct2.f4[0].GetBuffer()[1] == 97);
+            Assert.True(struct2.f4[0].GetBuffer()[2] == 97);
             Assert.True(struct2.f4[1] == null);
             Assert.True(struct2.f5.Count == 2);
             Assert.True(struct2.f5[0] == test.EnumSimple.ENUM_VALUE_1);
@@ -862,31 +832,14 @@ namespace Tests
         [Fact(DisplayName = "Serialization (JSON): struct list")]
         public void SerializationJsonStructList()
         {
-            // Create a new struct
-            var struct1 = test.StructList.Default;
-            struct1.f1.AddLast(48);
-            struct1.f1.AddLast(65);
-            struct1.f2.AddLast(97);
-            struct1.f2.AddLast((byte?)null);
-            struct1.f3.AddLast(new[] { (byte)48, (byte)48, (byte)48 });
-            struct1.f3.AddLast(new[] { (byte)65, (byte)65, (byte)65 });
-            struct1.f4.AddLast(new[] { (byte)97, (byte)97, (byte)97 });
-            struct1.f4.AddLast((byte[])null);
-            struct1.f5.AddLast(test.EnumSimple.ENUM_VALUE_1);
-            struct1.f5.AddLast(test.EnumSimple.ENUM_VALUE_2);
-            struct1.f6.AddLast(test.EnumSimple.ENUM_VALUE_1);
-            struct1.f6.AddLast((test.EnumSimple?)null);
-            struct1.f7.AddLast(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
-            struct1.f7.AddLast(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3);
-            struct1.f8.AddLast(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
-            struct1.f8.AddLast((test.FlagsSimple?)null);
-            struct1.f9.AddLast(test.StructSimple.Default);
-            struct1.f9.AddLast(test.StructSimple.Default);
-            struct1.f10.AddLast(test.StructSimple.Default);
-            struct1.f10.AddLast((test.StructSimple?)null);
+            // Define a source JSON string
+            var json = @"{""f1"":[48,65],""f2"":[97,null],""f3"":[""MDAw"",""QUFB""],""f4"":[""YWFh"",null],""f5"":[1,2],""f6"":[1,null],""f7"":[3,7],""f8"":[3,null],""f9"":[{""uid"":0,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543146220253760000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""5a73e7fe-f0a7-11e8-89e6-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]}},{""uid"":0,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543146220255725000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""5a741990-f0a7-11e8-89e6-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]}}],""f10"":[{""uid"":0,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543146220256802000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""5a74e4b0-f0a7-11e8-89e6-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]}},null]}";
+
+            // Create a new struct from the source JSON string
+            var struct1 = test.StructList.FromJson(json);
 
             // Serialize the struct to the JSON string
-            var json = struct1.ToJson();
+            json = struct1.ToJson();
 
             // Check the serialized JSON and its size
             Assert.True(json.Length > 0);
@@ -902,19 +855,19 @@ namespace Tests
             Assert.True(struct2.f2.Last.Value == null);
             Assert.True(struct2.f3.Count == 2);
             Assert.True(struct2.f3.First.Value.Length == 3);
-            Assert.True(struct2.f3.First.Value[0] == 48);
-            Assert.True(struct2.f3.First.Value[1] == 48);
-            Assert.True(struct2.f3.First.Value[2] == 48);
+            Assert.True(struct2.f3.First.Value.GetBuffer()[0] == 48);
+            Assert.True(struct2.f3.First.Value.GetBuffer()[1] == 48);
+            Assert.True(struct2.f3.First.Value.GetBuffer()[2] == 48);
             Assert.True(struct2.f3.Last.Value.Length == 3);
-            Assert.True(struct2.f3.Last.Value[0] == 65);
-            Assert.True(struct2.f3.Last.Value[1] == 65);
-            Assert.True(struct2.f3.Last.Value[2] == 65);
+            Assert.True(struct2.f3.Last.Value.GetBuffer()[0] == 65);
+            Assert.True(struct2.f3.Last.Value.GetBuffer()[1] == 65);
+            Assert.True(struct2.f3.Last.Value.GetBuffer()[2] == 65);
             Assert.True(struct2.f4.Count == 2);
             Assert.True(struct2.f4.First.Value != null);
             Assert.True(struct2.f4.First.Value.Length == 3);
-            Assert.True(struct2.f4.First.Value[0] == 97);
-            Assert.True(struct2.f4.First.Value[1] == 97);
-            Assert.True(struct2.f4.First.Value[2] == 97);
+            Assert.True(struct2.f4.First.Value.GetBuffer()[0] == 97);
+            Assert.True(struct2.f4.First.Value.GetBuffer()[1] == 97);
+            Assert.True(struct2.f4.First.Value.GetBuffer()[2] == 97);
             Assert.True(struct2.f4.Last.Value == null);
             Assert.True(struct2.f5.Count == 2);
             Assert.True(struct2.f5.First.Value == test.EnumSimple.ENUM_VALUE_1);
@@ -946,24 +899,14 @@ namespace Tests
         [Fact(DisplayName = "Serialization (JSON): struct set")]
         public void SerializationJsonStructSet()
         {
-            // Create a new struct
-            var struct1 = test.StructSet.Default;
-            struct1.f1.Add(48);
-            struct1.f1.Add(65);
-            struct1.f1.Add(97);
-            struct1.f2.Add(test.EnumSimple.ENUM_VALUE_1);
-            struct1.f2.Add(test.EnumSimple.ENUM_VALUE_2);
-            struct1.f3.Add(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
-            struct1.f3.Add(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3);
-            var s1 = test.StructSimple.Default;
-            s1.uid = 48;
-            struct1.f4.Add(s1);
-            var s2 = test.StructSimple.Default;
-            s2.uid = 65;
-            struct1.f4.Add(s2);
+            // Define a source JSON string
+            var json = @"{""f1"":[48,65,97],""f2"":[1,2],""f3"":[3,7],""f4"":[{""uid"":48,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543146299848353000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""89e4edd0-f0a7-11e8-9dde-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]}},{""uid"":65,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543146299848966000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""89e503f6-f0a7-11e8-9dde-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]}}]}";
+
+            // Create a new struct from the source JSON string
+            var struct1 = test.StructSet.FromJson(json);
 
             // Serialize the struct to the JSON string
-            var json = struct1.ToJson();
+            json = struct1.ToJson();
 
             // Check the serialized JSON and its size
             Assert.True(json.Length > 0);
@@ -982,42 +925,25 @@ namespace Tests
             Assert.True(struct2.f3.Contains(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2));
             Assert.True(struct2.f3.Contains(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3));
             Assert.True(struct2.f4.Count == 2);
+            var s1 = test.StructSimple.Default;
+            s1.uid = 48;
             Assert.True(struct2.f4.Contains(s1));
+            var s2 = test.StructSimple.Default;
+            s2.uid = 65;
             Assert.True(struct2.f4.Contains(s2));
         }
 
         [Fact(DisplayName = "Serialization (JSON): struct map")]
         public void SerializationJsonStructMap()
         {
-            // Create a new struct
-            var struct1 = test.StructMap.Default;
-            struct1.f1.Add(10, 48);
-            struct1.f1.Add(20, 65);
-            struct1.f2.Add(10, 97);
-            struct1.f2.Add(20, null);
-            struct1.f3.Add(10, new[] { (byte)48, (byte)48, (byte)48 });
-            struct1.f3.Add(20, new[] { (byte)65, (byte)65, (byte)65 });
-            struct1.f4.Add(10, new[] { (byte)97, (byte)97, (byte)97 });
-            struct1.f4.Add(20, null);
-            struct1.f5.Add(10, test.EnumSimple.ENUM_VALUE_1);
-            struct1.f5.Add(20, test.EnumSimple.ENUM_VALUE_2);
-            struct1.f6.Add(10, test.EnumSimple.ENUM_VALUE_1);
-            struct1.f6.Add(20, null);
-            struct1.f7.Add(10, test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
-            struct1.f7.Add(20, test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3);
-            struct1.f8.Add(10, test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
-            struct1.f8.Add(20, null);
-            var s1 = test.StructSimple.Default;
-            s1.uid = 48;
-            struct1.f9.Add(10, s1);
-            var s2 = test.StructSimple.Default;
-            s2.uid = 65;
-            struct1.f9.Add(20, s2);
-            struct1.f10.Add(10, s1);
-            struct1.f10.Add(20, null);
+            // Define a source JSON string
+            var json = @"{""f1"":{""10"":48,""20"":65},""f2"":{""10"":97,""20"":null},""f3"":{""10"":""MDAw"",""20"":""QUFB""},""f4"":{""10"":""YWFh"",""20"":null},""f5"":{""10"":1,""20"":2},""f6"":{""10"":1,""20"":null},""f7"":{""10"":3,""20"":7},""f8"":{""10"":3,""20"":null},""f9"":{""10"":{""uid"":48,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543146345803483000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""a549215e-f0a7-11e8-90f6-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]}},""20"":{""uid"":65,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543146345804184000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""a54942ce-f0a7-11e8-90f6-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]}}},""f10"":{""10"":{""uid"":48,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543146345803483000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""a549215e-f0a7-11e8-90f6-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]}},""20"":null}}";
+
+            // Create a new struct from the source JSON string
+            var struct1 = test.StructMap.FromJson(json);
 
             // Serialize the struct to the JSON string
-            var json = struct1.ToJson();
+            json = struct1.ToJson();
 
             // Check the serialized JSON and its size
             Assert.True(json.Length > 0);
@@ -1060,35 +986,14 @@ namespace Tests
         [Fact(DisplayName = "Serialization (JSON): struct hash")]
         public void SerializationJsonStructHash()
         {
-            // Create a new struct
-            var struct1 = test.StructHash.Default;
-            struct1.f1.Add("10", 48);
-            struct1.f1.Add("20", 65);
-            struct1.f2.Add("10", 97);
-            struct1.f2.Add("20", null);
-            struct1.f3.Add("10", new[] { (byte)48, (byte)48, (byte)48 });
-            struct1.f3.Add("20", new[] { (byte)65, (byte)65, (byte)65 });
-            struct1.f4.Add("10", new[] { (byte)97, (byte)97, (byte)97 });
-            struct1.f4.Add("20", null);
-            struct1.f5.Add("10", test.EnumSimple.ENUM_VALUE_1);
-            struct1.f5.Add("20", test.EnumSimple.ENUM_VALUE_2);
-            struct1.f6.Add("10", test.EnumSimple.ENUM_VALUE_1);
-            struct1.f6.Add("20", null);
-            struct1.f7.Add("10", test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
-            struct1.f7.Add("20", test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3);
-            struct1.f8.Add("10", test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
-            struct1.f8.Add("20", null);
-            var s1 = test.StructSimple.Default;
-            s1.uid = 48;
-            struct1.f9.Add("10", s1);
-            var s2 = test.StructSimple.Default;
-            s2.uid = 65;
-            struct1.f9.Add("20", s2);
-            struct1.f10.Add("10", s1);
-            struct1.f10.Add("20", null);
+            // Define a source JSON string
+            var json = @"{""f1"":{""10"":48,""20"":65},""f2"":{""10"":97,""20"":null},""f3"":{""10"":""MDAw"",""20"":""QUFB""},""f4"":{""10"":""YWFh"",""20"":null},""f5"":{""10"":1,""20"":2},""f6"":{""10"":1,""20"":null},""f7"":{""10"":3,""20"":7},""f8"":{""10"":3,""20"":null},""f9"":{""10"":{""uid"":48,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543146381450913000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""ba8885d2-f0a7-11e8-81fa-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]}},""20"":{""uid"":65,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543146381452825000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""ba88ced4-f0a7-11e8-81fa-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]}}},""f10"":{""10"":{""uid"":48,""f1"":false,""f2"":true,""f3"":0,""f4"":255,""f5"":0,""f6"":33,""f7"":0,""f8"":1092,""f9"":0,""f10"":127,""f11"":0,""f12"":255,""f13"":0,""f14"":32767,""f15"":0,""f16"":65535,""f17"":0,""f18"":2147483647,""f19"":0,""f20"":4294967295,""f21"":0,""f22"":9223372036854775807,""f23"":0,""f24"":18446744073709551615,""f25"":0.0,""f26"":123.456,""f27"":0.0,""f28"":-1.23456e+125,""f29"":""0.0"",""f30"":""123456.123456"",""f31"":"""",""f32"":""Initial string!"",""f33"":0,""f34"":0,""f35"":1543146381450913000,""f36"":""00000000-0000-0000-0000-000000000000"",""f37"":""ba8885d2-f0a7-11e8-81fa-ac220bcdd8e0"",""f38"":""123e4567-e89b-12d3-a456-426655440000"",""f39"":0,""f40"":0,""f41"":{""uid"":0,""symbol"":"""",""side"":0,""type"":0,""price"":0.0,""volume"":0.0},""f42"":{""currency"":"""",""amount"":0.0},""f43"":0,""f44"":{""uid"":0,""name"":"""",""state"":11,""wallet"":{""currency"":"""",""amount"":0.0},""asset"":null,""orders"":[]}},""20"":null}}";
+
+            // Create a new struct from the source JSON string
+            var struct1 = test.StructHash.FromJson(json);
 
             // Serialize the struct to the JSON string
-            var json = struct1.ToJson();
+            json = struct1.ToJson();
 
             // Check the serialized JSON and its size
             Assert.True(json.Length > 0);
