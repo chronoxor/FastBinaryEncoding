@@ -113,9 +113,9 @@ public:
     void pop_back() { _data.pop_back(); }
 
     template <class... Args>
-    iterator emplace(const_iterator position, Args&&... args) { return _data.emplace(position, args); }
+    iterator emplace(const_iterator position, Args&&... args) { return _data.emplace(position, args...); }
     template <class... Args>
-    void emplace_back(Args&&... args) { _data.emplace_back(args); }
+    void emplace_back(Args&&... args) { _data.emplace_back(args...); }
 
     iterator begin() noexcept { return _data.begin(); }
     const_iterator begin() const noexcept { return _data.begin(); }
