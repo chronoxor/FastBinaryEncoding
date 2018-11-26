@@ -6,7 +6,6 @@
 package test
 
 import "strings"
-import "encoding/json"
 import "../fbe"
 import "../proto"
 
@@ -64,7 +63,7 @@ func NewStructNested() *StructNested {
 // Create a new StructNested struct from JSON
 func NewStructNestedFromJSON(buffer []byte) (*StructNested, error) {
     var result StructNested
-    err := json.Unmarshal(buffer, &result)
+    err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err
     }
@@ -103,5 +102,5 @@ func (s StructNested) String() string {
 
 // Convert struct to JSON
 func (s StructNested) JSON() ([]byte, error) {
-    return json.Marshal(s)
+    return fbe.Json.Marshal(&s)
 }

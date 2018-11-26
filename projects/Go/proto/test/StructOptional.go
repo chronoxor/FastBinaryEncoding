@@ -6,7 +6,6 @@
 package test
 
 import "strings"
-import "encoding/json"
 import "../fbe"
 import "../proto"
 
@@ -172,7 +171,7 @@ func NewStructOptional() *StructOptional {
 // Create a new StructOptional struct from JSON
 func NewStructOptionalFromJSON(buffer []byte) (*StructOptional, error) {
     var result StructOptional
-    err := json.Unmarshal(buffer, &result)
+    err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err
     }
@@ -211,5 +210,5 @@ func (s StructOptional) String() string {
 
 // Convert struct to JSON
 func (s StructOptional) JSON() ([]byte, error) {
-    return json.Marshal(s)
+    return fbe.Json.Marshal(&s)
 }

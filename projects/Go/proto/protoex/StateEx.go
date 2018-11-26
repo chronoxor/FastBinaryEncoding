@@ -6,7 +6,6 @@
 package protoex
 
 import "strings"
-import "encoding/json"
 import "../fbe"
 import "../proto"
 
@@ -153,13 +152,14 @@ func (f StateEx) String() string {
 
 // Convert flags to JSON
 func (f StateEx) MarshalJSON() ([]byte, error) {
-    return json.Marshal(byte(f))
+    value := byte(f)
+    return fbe.Json.Marshal(&value)
 }
 
 // Convert JSON to flags
 func (f *StateEx) UnmarshalJSON(buffer []byte) error {
     var result byte
-    err := json.Unmarshal(buffer, &result)
+    err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return err
     }

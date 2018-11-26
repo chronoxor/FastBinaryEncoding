@@ -5,7 +5,6 @@
 
 package enums
 
-import "encoding/json"
 import "../fbe"
 
 // Workaround for Go unused imports issue
@@ -73,13 +72,14 @@ func (e EnumByte) String() string {
 
 // Convert enum to JSON
 func (e EnumByte) MarshalJSON() ([]byte, error) {
-    return json.Marshal(byte(e))
+    value := byte(e)
+    return fbe.Json.Marshal(&value)
 }
 
 // Convert JSON to enum
 func (e *EnumByte) UnmarshalJSON(buffer []byte) error {
     var result byte
-    err := json.Unmarshal(buffer, &result)
+    err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return err
     }

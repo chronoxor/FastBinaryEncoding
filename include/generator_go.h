@@ -41,6 +41,7 @@ private:
     void GenerateFooter();
     void GenerateFBEPackage(const std::string& package);
     void GenerateFBEConstants(const std::string& package);
+    void GenerateFBEJson(const std::string& package);
     void GenerateFBEOptional(const std::string& package);
     void GenerateFBETypes(const std::string& package);
     void GenerateFBEVersion(const std::string& package, const std::string& source);

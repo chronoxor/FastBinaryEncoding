@@ -6,7 +6,6 @@
 package test
 
 import "strings"
-import "encoding/json"
 import "../fbe"
 import "../proto"
 
@@ -57,7 +56,7 @@ func NewStructMap() *StructMap {
 // Create a new StructMap struct from JSON
 func NewStructMapFromJSON(buffer []byte) (*StructMap, error) {
     var result StructMap
-    err := json.Unmarshal(buffer, &result)
+    err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err
     }
@@ -95,5 +94,5 @@ func (s StructMap) String() string {
 
 // Convert struct to JSON
 func (s StructMap) JSON() ([]byte, error) {
-    return json.Marshal(s)
+    return fbe.Json.Marshal(&s)
 }

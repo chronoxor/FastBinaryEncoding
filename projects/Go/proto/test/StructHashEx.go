@@ -6,7 +6,6 @@
 package test
 
 import "strings"
-import "encoding/json"
 import "../fbe"
 import "../proto"
 
@@ -41,7 +40,7 @@ func NewStructHashEx() *StructHashEx {
 // Create a new StructHashEx struct from JSON
 func NewStructHashExFromJSON(buffer []byte) (*StructHashEx, error) {
     var result StructHashEx
-    err := json.Unmarshal(buffer, &result)
+    err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err
     }
@@ -79,5 +78,5 @@ func (s StructHashEx) String() string {
 
 // Convert struct to JSON
 func (s StructHashEx) JSON() ([]byte, error) {
-    return json.Marshal(s)
+    return fbe.Json.Marshal(&s)
 }

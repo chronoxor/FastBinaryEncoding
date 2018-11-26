@@ -6,7 +6,6 @@
 package test
 
 import "strings"
-import "encoding/json"
 import "../fbe"
 import "../proto"
 
@@ -57,7 +56,7 @@ func NewStructVector() *StructVector {
 // Create a new StructVector struct from JSON
 func NewStructVectorFromJSON(buffer []byte) (*StructVector, error) {
     var result StructVector
-    err := json.Unmarshal(buffer, &result)
+    err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err
     }
@@ -95,5 +94,5 @@ func (s StructVector) String() string {
 
 // Convert struct to JSON
 func (s StructVector) JSON() ([]byte, error) {
-    return json.Marshal(s)
+    return fbe.Json.Marshal(&s)
 }

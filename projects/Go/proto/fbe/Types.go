@@ -6,7 +6,6 @@
 package fbe
 
 import "time"
-import "encoding/json"
 import "github.com/google/uuid"
 import "github.com/shopspring/decimal"
 
@@ -64,13 +63,14 @@ func TimestampUTC() Timestamp {
 
 // Convert timestamp to JSON
 func (t Timestamp) MarshalJSON() ([]byte, error) {
-    return json.Marshal(t.UnixNano())
+    timestamp := t.UnixNano()
+    return Json.Marshal(&timestamp)
 }
 
 // Convert JSON to timestamp
 func (t *Timestamp) UnmarshalJSON(buffer []byte) error {
     var nanoseconds int64
-    err := json.Unmarshal(buffer, &nanoseconds)
+    err := Json.Unmarshal(buffer, &nanoseconds)
     if err != nil {
         return err
     }

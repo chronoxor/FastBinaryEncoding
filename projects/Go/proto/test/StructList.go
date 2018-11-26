@@ -6,7 +6,6 @@
 package test
 
 import "strings"
-import "encoding/json"
 import "../fbe"
 import "../proto"
 
@@ -57,7 +56,7 @@ func NewStructList() *StructList {
 // Create a new StructList struct from JSON
 func NewStructListFromJSON(buffer []byte) (*StructList, error) {
     var result StructList
-    err := json.Unmarshal(buffer, &result)
+    err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err
     }
@@ -95,5 +94,5 @@ func (s StructList) String() string {
 
 // Convert struct to JSON
 func (s StructList) JSON() ([]byte, error) {
-    return json.Marshal(s)
+    return fbe.Json.Marshal(&s)
 }

@@ -5,7 +5,6 @@
 
 package protoex
 
-import "encoding/json"
 import "../fbe"
 import "../proto"
 
@@ -67,13 +66,14 @@ func (e OrderType) String() string {
 
 // Convert enum to JSON
 func (e OrderType) MarshalJSON() ([]byte, error) {
-    return json.Marshal(byte(e))
+    value := byte(e)
+    return fbe.Json.Marshal(&value)
 }
 
 // Convert JSON to enum
 func (e *OrderType) UnmarshalJSON(buffer []byte) error {
     var result byte
-    err := json.Unmarshal(buffer, &result)
+    err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return err
     }

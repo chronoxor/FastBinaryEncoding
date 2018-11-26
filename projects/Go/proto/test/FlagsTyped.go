@@ -6,7 +6,6 @@
 package test
 
 import "strings"
-import "encoding/json"
 import "../fbe"
 import "../proto"
 
@@ -162,13 +161,14 @@ func (f FlagsTyped) String() string {
 
 // Convert flags to JSON
 func (f FlagsTyped) MarshalJSON() ([]byte, error) {
-    return json.Marshal(uint64(f))
+    value := uint64(f)
+    return fbe.Json.Marshal(&value)
 }
 
 // Convert JSON to flags
 func (f *FlagsTyped) UnmarshalJSON(buffer []byte) error {
     var result uint64
-    err := json.Unmarshal(buffer, &result)
+    err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return err
     }

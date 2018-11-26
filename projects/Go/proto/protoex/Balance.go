@@ -6,7 +6,6 @@
 package protoex
 
 import "strings"
-import "encoding/json"
 import "../fbe"
 import "../proto"
 
@@ -42,7 +41,7 @@ func NewBalance() *Balance {
 // Create a new Balance struct from JSON
 func NewBalanceFromJSON(buffer []byte) (*Balance, error) {
     var result Balance
-    err := json.Unmarshal(buffer, &result)
+    err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err
     }
@@ -81,5 +80,5 @@ func (s Balance) String() string {
 
 // Convert struct to JSON
 func (s Balance) JSON() ([]byte, error) {
-    return json.Marshal(s)
+    return fbe.Json.Marshal(&s)
 }

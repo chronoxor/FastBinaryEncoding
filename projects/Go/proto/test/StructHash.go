@@ -6,7 +6,6 @@
 package test
 
 import "strings"
-import "encoding/json"
 import "../fbe"
 import "../proto"
 
@@ -57,7 +56,7 @@ func NewStructHash() *StructHash {
 // Create a new StructHash struct from JSON
 func NewStructHashFromJSON(buffer []byte) (*StructHash, error) {
     var result StructHash
-    err := json.Unmarshal(buffer, &result)
+    err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err
     }
@@ -95,5 +94,5 @@ func (s StructHash) String() string {
 
 // Convert struct to JSON
 func (s StructHash) JSON() ([]byte, error) {
-    return json.Marshal(s)
+    return fbe.Json.Marshal(&s)
 }

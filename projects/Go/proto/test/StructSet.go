@@ -6,7 +6,6 @@
 package test
 
 import "strings"
-import "encoding/json"
 import "../fbe"
 import "../proto"
 
@@ -26,26 +25,26 @@ func (k StructSetKey) String() string {
 
 // StructSet struct
 type StructSet struct {
-    F1 map[byte]bool `json:"f1"`
-    F2 map[EnumSimpleKey]bool `json:"f2"`
-    F3 map[FlagsSimpleKey]bool `json:"f3"`
-    F4 map[StructSimpleKey]bool `json:"f4"`
+    F1 map[byte]byte `json:"f1"`
+    F2 map[EnumSimpleKey]EnumSimple `json:"f2"`
+    F3 map[FlagsSimpleKey]FlagsSimple `json:"f3"`
+    F4 map[StructSimpleKey]StructSimple `json:"f4"`
 }
 
 // Create a new StructSet struct
 func NewStructSet() *StructSet {
     return &StructSet{
-        F1: make(map[byte]bool),
-        F2: make(map[EnumSimpleKey]bool),
-        F3: make(map[FlagsSimpleKey]bool),
-        F4: make(map[StructSimpleKey]bool),
+        F1: make(map[byte]byte),
+        F2: make(map[EnumSimpleKey]EnumSimple),
+        F3: make(map[FlagsSimpleKey]FlagsSimple),
+        F4: make(map[StructSimpleKey]StructSimple),
     }
 }
 
 // Create a new StructSet struct from JSON
 func NewStructSetFromJSON(buffer []byte) (*StructSet, error) {
     var result StructSet
-    err := json.Unmarshal(buffer, &result)
+    err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err
     }
@@ -83,5 +82,5 @@ func (s StructSet) String() string {
 
 // Convert struct to JSON
 func (s StructSet) JSON() ([]byte, error) {
-    return json.Marshal(s)
+    return fbe.Json.Marshal(&s)
 }

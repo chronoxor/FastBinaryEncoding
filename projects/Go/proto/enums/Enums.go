@@ -6,7 +6,6 @@
 package enums
 
 import "strings"
-import "encoding/json"
 import "../fbe"
 
 // Workaround for Go unused imports issue
@@ -167,7 +166,7 @@ func NewEnums() *Enums {
 // Create a new Enums struct from JSON
 func NewEnumsFromJSON(buffer []byte) (*Enums, error) {
     var result Enums
-    err := json.Unmarshal(buffer, &result)
+    err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err
     }
@@ -205,5 +204,5 @@ func (s Enums) String() string {
 
 // Convert struct to JSON
 func (s Enums) JSON() ([]byte, error) {
-    return json.Marshal(s)
+    return fbe.Json.Marshal(&s)
 }

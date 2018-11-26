@@ -6,7 +6,6 @@
 package test
 
 import "strings"
-import "encoding/json"
 import "../fbe"
 import "../proto"
 
@@ -57,7 +56,7 @@ func NewStructArray() *StructArray {
 // Create a new StructArray struct from JSON
 func NewStructArrayFromJSON(buffer []byte) (*StructArray, error) {
     var result StructArray
-    err := json.Unmarshal(buffer, &result)
+    err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err
     }
@@ -95,5 +94,5 @@ func (s StructArray) String() string {
 
 // Convert struct to JSON
 func (s StructArray) JSON() ([]byte, error) {
-    return json.Marshal(s)
+    return fbe.Json.Marshal(&s)
 }

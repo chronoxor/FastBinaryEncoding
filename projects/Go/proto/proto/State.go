@@ -6,7 +6,6 @@
 package proto
 
 import "strings"
-import "encoding/json"
 import "../fbe"
 
 // Workaround for Go unused imports issue
@@ -133,13 +132,14 @@ func (f State) String() string {
 
 // Convert flags to JSON
 func (f State) MarshalJSON() ([]byte, error) {
-    return json.Marshal(byte(f))
+    value := byte(f)
+    return fbe.Json.Marshal(&value)
 }
 
 // Convert JSON to flags
 func (f *State) UnmarshalJSON(buffer []byte) error {
     var result byte
-    err := json.Unmarshal(buffer, &result)
+    err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return err
     }

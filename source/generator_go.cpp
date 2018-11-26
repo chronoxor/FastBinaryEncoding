@@ -14,6 +14,7 @@ void GeneratorGo::Generate(const std::shared_ptr<Package>& package)
 {
     GenerateFBEPackage("fbe");
     GenerateFBEConstants("fbe");
+    GenerateFBEJson("fbe");
     GenerateFBEOptional("fbe");
     GenerateFBETypes("fbe");
     GenerateFBEVersion("fbe", "fbe");
@@ -122,6 +123,38 @@ const MinInt = -MaxInt - 1
 const MaxUint = ^uint(0)
 // Minimal unsigned integer value
 const MinUint = 0
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorGo::GenerateFBEJson(const std::string& package)
+{
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / "Json.go";
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
+    std::string code = R"CODE(
+package fbe
+
+import "github.com/json-iterator/go"
+
+// Json engine
+var Json = jsoniter.ConfigCompatibleWithStandardLibrary
 )CODE";
 
     // Prepare code template
@@ -268,7 +301,6 @@ void GeneratorGo::GenerateFBETypes(const std::string& package)
 package fbe
 
 import "time"
-import "encoding/json"
 import "github.com/google/uuid"
 import "github.com/shopspring/decimal"
 
@@ -326,13 +358,14 @@ func TimestampUTC() Timestamp {
 
 // Convert timestamp to JSON
 func (t Timestamp) MarshalJSON() ([]byte, error) {
-    return json.Marshal(t.UnixNano())
+    timestamp := t.UnixNano()
+    return Json.Marshal(&timestamp)
 }
 
 // Convert JSON to timestamp
 func (t *Timestamp) UnmarshalJSON(buffer []byte) error {
     var nanoseconds int64
-    err := json.Unmarshal(buffer, &nanoseconds)
+    err := Json.Unmarshal(buffer, &nanoseconds)
     if err != nil {
         return err
     }
@@ -3858,7 +3891,6 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"encoding/json\"");
     GenerateImports(p);
 
     std::string enum_type = (e->base && !e->base->empty()) ? *e->base : "int32";
@@ -3975,7 +4007,8 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
         WriteLineIndent("// Convert enum to JSON");
         WriteLineIndent("func (e " + enum_name + ") MarshalJSON() ([]byte, error) {");
         Indent(1);
-        WriteLineIndent("return json.Marshal(" + ConvertEnumType(enum_type) + "(e))");
+        WriteLineIndent("value := " + ConvertEnumType(enum_type) + "(e)");
+        WriteLineIndent("return fbe.Json.Marshal(&value)");
         Indent(-1);
         WriteLineIndent("}");
 
@@ -3985,7 +4018,7 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
         WriteLineIndent("func (e *" + enum_name + ") UnmarshalJSON(buffer []byte) error {");
         Indent(1);
         WriteLineIndent("var result " + ConvertEnumType(enum_type));
-        WriteLineIndent("err := json.Unmarshal(buffer, &result)");
+        WriteLineIndent("err := fbe.Json.Unmarshal(buffer, &result)");
         WriteLineIndent("if err != nil {");
         Indent(1);
         WriteLineIndent("return err");
@@ -4029,7 +4062,6 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::sh
     // Generate imports
     WriteLine();
     WriteLineIndent("import \"strings\"");
-    WriteLineIndent("import \"encoding/json\"");
     GenerateImports(p);
 
     std::string flags_type = (f->base && !f->base->empty()) ? *f->base : "int32";
@@ -4176,7 +4208,8 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::sh
         WriteLineIndent("// Convert flags to JSON");
         WriteLineIndent("func (f " + flags_name + ") MarshalJSON() ([]byte, error) {");
         Indent(1);
-        WriteLineIndent("return json.Marshal(" + ConvertEnumType(flags_type) + "(f))");
+        WriteLineIndent("value := " + ConvertEnumType(flags_type) + "(f)");
+        WriteLineIndent("return fbe.Json.Marshal(&value)");
         Indent(-1);
         WriteLineIndent("}");
 
@@ -4186,7 +4219,7 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::sh
         WriteLineIndent("func (f *" + flags_name + ") UnmarshalJSON(buffer []byte) error {");
         Indent(1);
         WriteLineIndent("var result " + ConvertEnumType(flags_type));
-        WriteLineIndent("err := json.Unmarshal(buffer, &result)");
+        WriteLineIndent("err := fbe.Json.Unmarshal(buffer, &result)");
         WriteLineIndent("if err != nil {");
         Indent(1);
         WriteLineIndent("return err");
@@ -4230,7 +4263,6 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     // Generate imports
     WriteLine();
     WriteLineIndent("import \"strings\"");
-    WriteLineIndent("import \"encoding/json\"");
     GenerateImports(p);
 
     std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "";
@@ -4306,7 +4338,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
         WriteLineIndent("func New" + struct_name + "FromJSON(buffer []byte) (*" + struct_name + ", error) {");
         Indent(1);
         WriteLineIndent("var result " + struct_name);
-        WriteLineIndent("err := json.Unmarshal(buffer, &result)");
+        WriteLineIndent("err := fbe.Json.Unmarshal(buffer, &result)");
         WriteLineIndent("if err != nil {");
         Indent(1);
         WriteLineIndent("return nil, err");
@@ -4381,7 +4413,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
         WriteLineIndent("// Convert struct to JSON");
         WriteLineIndent("func (s " + struct_name + ") JSON() ([]byte, error) {");
         Indent(1);
-        WriteLineIndent("return json.Marshal(s)");
+        WriteLineIndent("return fbe.Json.Marshal(&s)");
         Indent(-1);
         WriteLineIndent("}");
     }

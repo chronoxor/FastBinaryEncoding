@@ -6,7 +6,6 @@
 package test
 
 import "strings"
-import "encoding/json"
 import "../fbe"
 import "../proto"
 
@@ -128,7 +127,7 @@ func NewStructSimple() *StructSimple {
 // Create a new StructSimple struct from JSON
 func NewStructSimpleFromJSON(buffer []byte) (*StructSimple, error) {
     var result StructSimple
-    err := json.Unmarshal(buffer, &result)
+    err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err
     }
@@ -167,5 +166,5 @@ func (s StructSimple) String() string {
 
 // Convert struct to JSON
 func (s StructSimple) JSON() ([]byte, error) {
-    return json.Marshal(s)
+    return fbe.Json.Marshal(&s)
 }

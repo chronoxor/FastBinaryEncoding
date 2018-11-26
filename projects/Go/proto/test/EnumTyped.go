@@ -5,7 +5,6 @@
 
 package test
 
-import "encoding/json"
 import "../fbe"
 import "../proto"
 
@@ -75,13 +74,14 @@ func (e EnumTyped) String() string {
 
 // Convert enum to JSON
 func (e EnumTyped) MarshalJSON() ([]byte, error) {
-    return json.Marshal(uint8(e))
+    value := uint8(e)
+    return fbe.Json.Marshal(&value)
 }
 
 // Convert JSON to enum
 func (e *EnumTyped) UnmarshalJSON(buffer []byte) error {
     var result uint8
-    err := json.Unmarshal(buffer, &result)
+    err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return err
     }

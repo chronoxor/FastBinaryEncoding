@@ -6,7 +6,6 @@
 package proto
 
 import "strings"
-import "encoding/json"
 import "../fbe"
 
 // Workaround for Go unused imports issue
@@ -48,7 +47,7 @@ func NewAccount() *Account {
 // Create a new Account struct from JSON
 func NewAccountFromJSON(buffer []byte) (*Account, error) {
     var result Account
-    err := json.Unmarshal(buffer, &result)
+    err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err
     }
@@ -87,5 +86,5 @@ func (s Account) String() string {
 
 // Convert struct to JSON
 func (s Account) JSON() ([]byte, error) {
-    return json.Marshal(s)
+    return fbe.Json.Marshal(&s)
 }
