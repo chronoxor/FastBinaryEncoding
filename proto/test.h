@@ -7700,16 +7700,16 @@ namespace test {
 
 struct StructBytes
 {
-    std::vector<uint8_t> f1;
-    std::optional<std::vector<uint8_t>> f2;
-    std::optional<std::vector<uint8_t>> f3;
+    FBE::buffer_t f1;
+    std::optional<FBE::buffer_t> f2;
+    std::optional<FBE::buffer_t> f3;
 
     StructBytes()
         : f1()
         , f2()
         , f3(std::nullopt)
     {}
-    StructBytes(const std::vector<uint8_t>& arg_f1, const std::optional<std::vector<uint8_t>>& arg_f2, const std::optional<std::vector<uint8_t>>& arg_f3)
+    StructBytes(const FBE::buffer_t& arg_f1, const std::optional<FBE::buffer_t>& arg_f2, const std::optional<FBE::buffer_t>& arg_f3)
         : f1(arg_f1)
         , f2(arg_f2)
         , f3(arg_f3)
@@ -8056,9 +8056,9 @@ private:
     size_t _offset;
 
 public:
-    FieldModel<TBuffer, std::vector<uint8_t>> f1;
-    FieldModel<TBuffer, std::optional<std::vector<uint8_t>>> f2;
-    FieldModel<TBuffer, std::optional<std::vector<uint8_t>>> f3;
+    FieldModel<TBuffer, FBE::buffer_t> f1;
+    FieldModel<TBuffer, std::optional<FBE::buffer_t>> f2;
+    FieldModel<TBuffer, std::optional<FBE::buffer_t>> f3;
 };
 
 } // namespace FBE
@@ -8290,9 +8290,9 @@ private:
     mutable size_t _offset;
 
 public:
-    FinalModel<TBuffer, std::vector<uint8_t>> f1;
-    FinalModel<TBuffer, std::optional<std::vector<uint8_t>>> f2;
-    FinalModel<TBuffer, std::optional<std::vector<uint8_t>>> f3;
+    FinalModel<TBuffer, FBE::buffer_t> f1;
+    FinalModel<TBuffer, std::optional<FBE::buffer_t>> f2;
+    FinalModel<TBuffer, std::optional<FBE::buffer_t>> f3;
 };
 
 } // namespace FBE
@@ -8381,8 +8381,8 @@ struct StructArray
 {
     std::array<uint8_t, 2> f1;
     std::array<std::optional<uint8_t>, 2> f2;
-    std::array<std::vector<uint8_t>, 2> f3;
-    std::array<std::optional<std::vector<uint8_t>>, 2> f4;
+    std::array<FBE::buffer_t, 2> f3;
+    std::array<std::optional<FBE::buffer_t>, 2> f4;
     std::array<::test::EnumSimple, 2> f5;
     std::array<std::optional<::test::EnumSimple>, 2> f6;
     std::array<::test::FlagsSimple, 2> f7;
@@ -8402,7 +8402,7 @@ struct StructArray
         , f9()
         , f10()
     {}
-    StructArray(const std::array<uint8_t, 2>& arg_f1, const std::array<std::optional<uint8_t>, 2>& arg_f2, const std::array<std::vector<uint8_t>, 2>& arg_f3, const std::array<std::optional<std::vector<uint8_t>>, 2>& arg_f4, const std::array<::test::EnumSimple, 2>& arg_f5, const std::array<std::optional<::test::EnumSimple>, 2>& arg_f6, const std::array<::test::FlagsSimple, 2>& arg_f7, const std::array<std::optional<::test::FlagsSimple>, 2>& arg_f8, const std::array<::test::StructSimple, 2>& arg_f9, const std::array<std::optional<::test::StructSimple>, 2>& arg_f10)
+    StructArray(const std::array<uint8_t, 2>& arg_f1, const std::array<std::optional<uint8_t>, 2>& arg_f2, const std::array<FBE::buffer_t, 2>& arg_f3, const std::array<std::optional<FBE::buffer_t>, 2>& arg_f4, const std::array<::test::EnumSimple, 2>& arg_f5, const std::array<std::optional<::test::EnumSimple>, 2>& arg_f6, const std::array<::test::FlagsSimple, 2>& arg_f7, const std::array<std::optional<::test::FlagsSimple>, 2>& arg_f8, const std::array<::test::StructSimple, 2>& arg_f9, const std::array<std::optional<::test::StructSimple>, 2>& arg_f10)
         : f1(arg_f1)
         , f2(arg_f2)
         , f3(arg_f3)
@@ -8992,8 +8992,8 @@ private:
 public:
     FieldModelArray<TBuffer, uint8_t, 2> f1;
     FieldModelArray<TBuffer, std::optional<uint8_t>, 2> f2;
-    FieldModelArray<TBuffer, std::vector<uint8_t>, 2> f3;
-    FieldModelArray<TBuffer, std::optional<std::vector<uint8_t>>, 2> f4;
+    FieldModelArray<TBuffer, FBE::buffer_t, 2> f3;
+    FieldModelArray<TBuffer, std::optional<FBE::buffer_t>, 2> f4;
     FieldModelArray<TBuffer, ::test::EnumSimple, 2> f5;
     FieldModelArray<TBuffer, std::optional<::test::EnumSimple>, 2> f6;
     FieldModelArray<TBuffer, ::test::FlagsSimple, 2> f7;
@@ -9359,8 +9359,8 @@ private:
 public:
     FinalModelArray<TBuffer, uint8_t, 2> f1;
     FinalModelArray<TBuffer, std::optional<uint8_t>, 2> f2;
-    FinalModelArray<TBuffer, std::vector<uint8_t>, 2> f3;
-    FinalModelArray<TBuffer, std::optional<std::vector<uint8_t>>, 2> f4;
+    FinalModelArray<TBuffer, FBE::buffer_t, 2> f3;
+    FinalModelArray<TBuffer, std::optional<FBE::buffer_t>, 2> f4;
     FinalModelArray<TBuffer, ::test::EnumSimple, 2> f5;
     FinalModelArray<TBuffer, std::optional<::test::EnumSimple>, 2> f6;
     FinalModelArray<TBuffer, ::test::FlagsSimple, 2> f7;
@@ -9455,8 +9455,8 @@ struct StructVector
 {
     std::vector<uint8_t> f1;
     std::vector<std::optional<uint8_t>> f2;
-    std::vector<std::vector<uint8_t>> f3;
-    std::vector<std::optional<std::vector<uint8_t>>> f4;
+    std::vector<FBE::buffer_t> f3;
+    std::vector<std::optional<FBE::buffer_t>> f4;
     std::vector<::test::EnumSimple> f5;
     std::vector<std::optional<::test::EnumSimple>> f6;
     std::vector<::test::FlagsSimple> f7;
@@ -9476,7 +9476,7 @@ struct StructVector
         , f9()
         , f10()
     {}
-    StructVector(const std::vector<uint8_t>& arg_f1, const std::vector<std::optional<uint8_t>>& arg_f2, const std::vector<std::vector<uint8_t>>& arg_f3, const std::vector<std::optional<std::vector<uint8_t>>>& arg_f4, const std::vector<::test::EnumSimple>& arg_f5, const std::vector<std::optional<::test::EnumSimple>>& arg_f6, const std::vector<::test::FlagsSimple>& arg_f7, const std::vector<std::optional<::test::FlagsSimple>>& arg_f8, const std::vector<::test::StructSimple>& arg_f9, const std::vector<std::optional<::test::StructSimple>>& arg_f10)
+    StructVector(const std::vector<uint8_t>& arg_f1, const std::vector<std::optional<uint8_t>>& arg_f2, const std::vector<FBE::buffer_t>& arg_f3, const std::vector<std::optional<FBE::buffer_t>>& arg_f4, const std::vector<::test::EnumSimple>& arg_f5, const std::vector<std::optional<::test::EnumSimple>>& arg_f6, const std::vector<::test::FlagsSimple>& arg_f7, const std::vector<std::optional<::test::FlagsSimple>>& arg_f8, const std::vector<::test::StructSimple>& arg_f9, const std::vector<std::optional<::test::StructSimple>>& arg_f10)
         : f1(arg_f1)
         , f2(arg_f2)
         , f3(arg_f3)
@@ -10076,8 +10076,8 @@ private:
 public:
     FieldModelVector<TBuffer, uint8_t> f1;
     FieldModelVector<TBuffer, std::optional<uint8_t>> f2;
-    FieldModelVector<TBuffer, std::vector<uint8_t>> f3;
-    FieldModelVector<TBuffer, std::optional<std::vector<uint8_t>>> f4;
+    FieldModelVector<TBuffer, FBE::buffer_t> f3;
+    FieldModelVector<TBuffer, std::optional<FBE::buffer_t>> f4;
     FieldModelVector<TBuffer, ::test::EnumSimple> f5;
     FieldModelVector<TBuffer, std::optional<::test::EnumSimple>> f6;
     FieldModelVector<TBuffer, ::test::FlagsSimple> f7;
@@ -10443,8 +10443,8 @@ private:
 public:
     FinalModelVector<TBuffer, uint8_t> f1;
     FinalModelVector<TBuffer, std::optional<uint8_t>> f2;
-    FinalModelVector<TBuffer, std::vector<uint8_t>> f3;
-    FinalModelVector<TBuffer, std::optional<std::vector<uint8_t>>> f4;
+    FinalModelVector<TBuffer, FBE::buffer_t> f3;
+    FinalModelVector<TBuffer, std::optional<FBE::buffer_t>> f4;
     FinalModelVector<TBuffer, ::test::EnumSimple> f5;
     FinalModelVector<TBuffer, std::optional<::test::EnumSimple>> f6;
     FinalModelVector<TBuffer, ::test::FlagsSimple> f7;
@@ -10539,8 +10539,8 @@ struct StructList
 {
     std::list<uint8_t> f1;
     std::list<std::optional<uint8_t>> f2;
-    std::list<std::vector<uint8_t>> f3;
-    std::list<std::optional<std::vector<uint8_t>>> f4;
+    std::list<FBE::buffer_t> f3;
+    std::list<std::optional<FBE::buffer_t>> f4;
     std::list<::test::EnumSimple> f5;
     std::list<std::optional<::test::EnumSimple>> f6;
     std::list<::test::FlagsSimple> f7;
@@ -10560,7 +10560,7 @@ struct StructList
         , f9()
         , f10()
     {}
-    StructList(const std::list<uint8_t>& arg_f1, const std::list<std::optional<uint8_t>>& arg_f2, const std::list<std::vector<uint8_t>>& arg_f3, const std::list<std::optional<std::vector<uint8_t>>>& arg_f4, const std::list<::test::EnumSimple>& arg_f5, const std::list<std::optional<::test::EnumSimple>>& arg_f6, const std::list<::test::FlagsSimple>& arg_f7, const std::list<std::optional<::test::FlagsSimple>>& arg_f8, const std::list<::test::StructSimple>& arg_f9, const std::list<std::optional<::test::StructSimple>>& arg_f10)
+    StructList(const std::list<uint8_t>& arg_f1, const std::list<std::optional<uint8_t>>& arg_f2, const std::list<FBE::buffer_t>& arg_f3, const std::list<std::optional<FBE::buffer_t>>& arg_f4, const std::list<::test::EnumSimple>& arg_f5, const std::list<std::optional<::test::EnumSimple>>& arg_f6, const std::list<::test::FlagsSimple>& arg_f7, const std::list<std::optional<::test::FlagsSimple>>& arg_f8, const std::list<::test::StructSimple>& arg_f9, const std::list<std::optional<::test::StructSimple>>& arg_f10)
         : f1(arg_f1)
         , f2(arg_f2)
         , f3(arg_f3)
@@ -11160,8 +11160,8 @@ private:
 public:
     FieldModelVector<TBuffer, uint8_t> f1;
     FieldModelVector<TBuffer, std::optional<uint8_t>> f2;
-    FieldModelVector<TBuffer, std::vector<uint8_t>> f3;
-    FieldModelVector<TBuffer, std::optional<std::vector<uint8_t>>> f4;
+    FieldModelVector<TBuffer, FBE::buffer_t> f3;
+    FieldModelVector<TBuffer, std::optional<FBE::buffer_t>> f4;
     FieldModelVector<TBuffer, ::test::EnumSimple> f5;
     FieldModelVector<TBuffer, std::optional<::test::EnumSimple>> f6;
     FieldModelVector<TBuffer, ::test::FlagsSimple> f7;
@@ -11527,8 +11527,8 @@ private:
 public:
     FinalModelVector<TBuffer, uint8_t> f1;
     FinalModelVector<TBuffer, std::optional<uint8_t>> f2;
-    FinalModelVector<TBuffer, std::vector<uint8_t>> f3;
-    FinalModelVector<TBuffer, std::optional<std::vector<uint8_t>>> f4;
+    FinalModelVector<TBuffer, FBE::buffer_t> f3;
+    FinalModelVector<TBuffer, std::optional<FBE::buffer_t>> f4;
     FinalModelVector<TBuffer, ::test::EnumSimple> f5;
     FinalModelVector<TBuffer, std::optional<::test::EnumSimple>> f6;
     FinalModelVector<TBuffer, ::test::FlagsSimple> f7;
@@ -12383,8 +12383,8 @@ struct StructMap
 {
     std::map<int32_t, uint8_t> f1;
     std::map<int32_t, std::optional<uint8_t>> f2;
-    std::map<int32_t, std::vector<uint8_t>> f3;
-    std::map<int32_t, std::optional<std::vector<uint8_t>>> f4;
+    std::map<int32_t, FBE::buffer_t> f3;
+    std::map<int32_t, std::optional<FBE::buffer_t>> f4;
     std::map<int32_t, ::test::EnumSimple> f5;
     std::map<int32_t, std::optional<::test::EnumSimple>> f6;
     std::map<int32_t, ::test::FlagsSimple> f7;
@@ -12404,7 +12404,7 @@ struct StructMap
         , f9()
         , f10()
     {}
-    StructMap(const std::map<int32_t, uint8_t>& arg_f1, const std::map<int32_t, std::optional<uint8_t>>& arg_f2, const std::map<int32_t, std::vector<uint8_t>>& arg_f3, const std::map<int32_t, std::optional<std::vector<uint8_t>>>& arg_f4, const std::map<int32_t, ::test::EnumSimple>& arg_f5, const std::map<int32_t, std::optional<::test::EnumSimple>>& arg_f6, const std::map<int32_t, ::test::FlagsSimple>& arg_f7, const std::map<int32_t, std::optional<::test::FlagsSimple>>& arg_f8, const std::map<int32_t, ::test::StructSimple>& arg_f9, const std::map<int32_t, std::optional<::test::StructSimple>>& arg_f10)
+    StructMap(const std::map<int32_t, uint8_t>& arg_f1, const std::map<int32_t, std::optional<uint8_t>>& arg_f2, const std::map<int32_t, FBE::buffer_t>& arg_f3, const std::map<int32_t, std::optional<FBE::buffer_t>>& arg_f4, const std::map<int32_t, ::test::EnumSimple>& arg_f5, const std::map<int32_t, std::optional<::test::EnumSimple>>& arg_f6, const std::map<int32_t, ::test::FlagsSimple>& arg_f7, const std::map<int32_t, std::optional<::test::FlagsSimple>>& arg_f8, const std::map<int32_t, ::test::StructSimple>& arg_f9, const std::map<int32_t, std::optional<::test::StructSimple>>& arg_f10)
         : f1(arg_f1)
         , f2(arg_f2)
         , f3(arg_f3)
@@ -13024,8 +13024,8 @@ private:
 public:
     FieldModelMap<TBuffer, int32_t, uint8_t> f1;
     FieldModelMap<TBuffer, int32_t, std::optional<uint8_t>> f2;
-    FieldModelMap<TBuffer, int32_t, std::vector<uint8_t>> f3;
-    FieldModelMap<TBuffer, int32_t, std::optional<std::vector<uint8_t>>> f4;
+    FieldModelMap<TBuffer, int32_t, FBE::buffer_t> f3;
+    FieldModelMap<TBuffer, int32_t, std::optional<FBE::buffer_t>> f4;
     FieldModelMap<TBuffer, int32_t, ::test::EnumSimple> f5;
     FieldModelMap<TBuffer, int32_t, std::optional<::test::EnumSimple>> f6;
     FieldModelMap<TBuffer, int32_t, ::test::FlagsSimple> f7;
@@ -13391,8 +13391,8 @@ private:
 public:
     FinalModelMap<TBuffer, int32_t, uint8_t> f1;
     FinalModelMap<TBuffer, int32_t, std::optional<uint8_t>> f2;
-    FinalModelMap<TBuffer, int32_t, std::vector<uint8_t>> f3;
-    FinalModelMap<TBuffer, int32_t, std::optional<std::vector<uint8_t>>> f4;
+    FinalModelMap<TBuffer, int32_t, FBE::buffer_t> f3;
+    FinalModelMap<TBuffer, int32_t, std::optional<FBE::buffer_t>> f4;
     FinalModelMap<TBuffer, int32_t, ::test::EnumSimple> f5;
     FinalModelMap<TBuffer, int32_t, std::optional<::test::EnumSimple>> f6;
     FinalModelMap<TBuffer, int32_t, ::test::FlagsSimple> f7;
@@ -13487,8 +13487,8 @@ struct StructHash
 {
     std::unordered_map<std::string, uint8_t> f1;
     std::unordered_map<std::string, std::optional<uint8_t>> f2;
-    std::unordered_map<std::string, std::vector<uint8_t>> f3;
-    std::unordered_map<std::string, std::optional<std::vector<uint8_t>>> f4;
+    std::unordered_map<std::string, FBE::buffer_t> f3;
+    std::unordered_map<std::string, std::optional<FBE::buffer_t>> f4;
     std::unordered_map<std::string, ::test::EnumSimple> f5;
     std::unordered_map<std::string, std::optional<::test::EnumSimple>> f6;
     std::unordered_map<std::string, ::test::FlagsSimple> f7;
@@ -13508,7 +13508,7 @@ struct StructHash
         , f9()
         , f10()
     {}
-    StructHash(const std::unordered_map<std::string, uint8_t>& arg_f1, const std::unordered_map<std::string, std::optional<uint8_t>>& arg_f2, const std::unordered_map<std::string, std::vector<uint8_t>>& arg_f3, const std::unordered_map<std::string, std::optional<std::vector<uint8_t>>>& arg_f4, const std::unordered_map<std::string, ::test::EnumSimple>& arg_f5, const std::unordered_map<std::string, std::optional<::test::EnumSimple>>& arg_f6, const std::unordered_map<std::string, ::test::FlagsSimple>& arg_f7, const std::unordered_map<std::string, std::optional<::test::FlagsSimple>>& arg_f8, const std::unordered_map<std::string, ::test::StructSimple>& arg_f9, const std::unordered_map<std::string, std::optional<::test::StructSimple>>& arg_f10)
+    StructHash(const std::unordered_map<std::string, uint8_t>& arg_f1, const std::unordered_map<std::string, std::optional<uint8_t>>& arg_f2, const std::unordered_map<std::string, FBE::buffer_t>& arg_f3, const std::unordered_map<std::string, std::optional<FBE::buffer_t>>& arg_f4, const std::unordered_map<std::string, ::test::EnumSimple>& arg_f5, const std::unordered_map<std::string, std::optional<::test::EnumSimple>>& arg_f6, const std::unordered_map<std::string, ::test::FlagsSimple>& arg_f7, const std::unordered_map<std::string, std::optional<::test::FlagsSimple>>& arg_f8, const std::unordered_map<std::string, ::test::StructSimple>& arg_f9, const std::unordered_map<std::string, std::optional<::test::StructSimple>>& arg_f10)
         : f1(arg_f1)
         , f2(arg_f2)
         , f3(arg_f3)
@@ -14128,8 +14128,8 @@ private:
 public:
     FieldModelMap<TBuffer, std::string, uint8_t> f1;
     FieldModelMap<TBuffer, std::string, std::optional<uint8_t>> f2;
-    FieldModelMap<TBuffer, std::string, std::vector<uint8_t>> f3;
-    FieldModelMap<TBuffer, std::string, std::optional<std::vector<uint8_t>>> f4;
+    FieldModelMap<TBuffer, std::string, FBE::buffer_t> f3;
+    FieldModelMap<TBuffer, std::string, std::optional<FBE::buffer_t>> f4;
     FieldModelMap<TBuffer, std::string, ::test::EnumSimple> f5;
     FieldModelMap<TBuffer, std::string, std::optional<::test::EnumSimple>> f6;
     FieldModelMap<TBuffer, std::string, ::test::FlagsSimple> f7;
@@ -14495,8 +14495,8 @@ private:
 public:
     FinalModelMap<TBuffer, std::string, uint8_t> f1;
     FinalModelMap<TBuffer, std::string, std::optional<uint8_t>> f2;
-    FinalModelMap<TBuffer, std::string, std::vector<uint8_t>> f3;
-    FinalModelMap<TBuffer, std::string, std::optional<std::vector<uint8_t>>> f4;
+    FinalModelMap<TBuffer, std::string, FBE::buffer_t> f3;
+    FinalModelMap<TBuffer, std::string, std::optional<FBE::buffer_t>> f4;
     FinalModelMap<TBuffer, std::string, ::test::EnumSimple> f5;
     FinalModelMap<TBuffer, std::string, std::optional<::test::EnumSimple>> f6;
     FinalModelMap<TBuffer, std::string, ::test::FlagsSimple> f7;

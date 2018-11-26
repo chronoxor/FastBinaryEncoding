@@ -15,14 +15,17 @@ int main(int argc, char** argv)
     rapidjson::StringBuffer buffer;
     rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
 
+	buffer.Clear();
     writer.Reset(buffer);
     FBE::JSON::to_json(writer, test::StructSimple());
     std::cout << buffer.GetString() << std::endl << std::endl;
 
+	buffer.Clear();
     writer.Reset(buffer);
     FBE::JSON::to_json(writer, test::StructOptional());
     std::cout << buffer.GetString() << std::endl << std::endl;
 
+	buffer.Clear();
     writer.Reset(buffer);
     FBE::JSON::to_json(writer, test::StructNested());
     std::cout << buffer.GetString() << std::endl << std::endl;

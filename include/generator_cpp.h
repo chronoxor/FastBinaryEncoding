@@ -41,6 +41,7 @@ private:
     void GenerateFooter();
     void GenerateImports();
     void GenerateImports(const std::shared_ptr<Package>& p);
+    void GenerateBufferWrapper();
     void GenerateDecimalWrapper();
     void GenerateFlagsWrapper();
     void GenerateTimeWrapper();

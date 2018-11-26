@@ -125,6 +125,108 @@ void GeneratorCpp::GenerateImports(const std::shared_ptr<Package>& p)
     WriteLineIndent("} // namespace FBE");
 }
 
+void GeneratorCpp::GenerateBufferWrapper()
+{
+    std::string code = R"CODE(
+//! Bytes buffer type
+/*!
+    Represents bytes buffer which is a lightweight wrapper around std::vector<uint8_t>
+    with similar interface.
+*/
+class buffer_t
+{
+public:
+    typedef std::vector<uint8_t>::iterator iterator;
+    typedef std::vector<uint8_t>::const_iterator const_iterator;
+    typedef std::vector<uint8_t>::reverse_iterator reverse_iterator;
+    typedef std::vector<uint8_t>::const_reverse_iterator const_reverse_iterator;
+
+    buffer_t() = default;
+    buffer_t(size_t capacity) { reserve(capacity); }
+    buffer_t(size_t size, uint8_t value) { resize(size, value); }
+    buffer_t(const std::vector<uint8_t>& other) : _data(other) {}
+    buffer_t(std::vector<uint8_t>&& other) : _data(std::move(other)) {}
+    buffer_t(const buffer_t& other) = default;
+    buffer_t(buffer_t&& other) = default;
+    ~buffer_t() = default;
+
+    buffer_t& operator=(const std::vector<uint8_t>& other) { _data = other; return *this; }
+    buffer_t& operator=(std::vector<uint8_t>&& other) { _data = std::move(other); return *this; }
+    buffer_t& operator=(const buffer_t& other) = default;
+    buffer_t& operator=(buffer_t&& other) = default;
+
+    uint8_t& operator[](size_t index) { return _data[index]; }
+    const uint8_t& operator[](size_t index) const { return _data[index]; }
+
+    bool empty() const { return _data.empty(); }
+    size_t capacity() const { return _data.capacity(); }
+    size_t size() const { return _data.size(); }
+    size_t max_size() const { return _data.max_size(); }
+
+    std::vector<uint8_t>& buffer() noexcept { return _data; }
+    const std::vector<uint8_t>& buffer() const noexcept { return _data; }
+    uint8_t* data() noexcept { return _data.data(); }
+    const uint8_t* data() const noexcept { return _data.data(); }
+    uint8_t& at(size_t index) { return _data.at(index); }
+    const uint8_t& at(size_t index) const { return _data.at(index); }
+    uint8_t& front() { return _data.front(); }
+    const uint8_t& front() const { return _data.front(); }
+    uint8_t& back() { return _data.back(); }
+    const uint8_t& back() const { return _data.back(); }
+
+    void reserve(size_t capacity) { _data.reserve(capacity); }
+    void resize(size_t size, uint8_t value = 0) { _data.resize(size, value); }
+    void shrink_to_fit() { _data.shrink_to_fit(); }
+
+    template <class InputIterator>
+    void assign(InputIterator first, InputIterator last) { _data.assign(first, last); }
+    void assign(size_t size, uint8_t value) { _data.assign(size, value); }
+    iterator insert(const_iterator position, uint8_t value) { return _data.insert(position, value); }
+    iterator insert(const_iterator position, size_t size, uint8_t value) { return _data.insert(position, size, value); }
+    template <class InputIterator>
+    iterator insert(const_iterator position, InputIterator first, InputIterator last) { return _data.insert(position, first, last); }
+    iterator erase(const_iterator position) { return _data.erase(position); }
+    iterator erase(const_iterator first, const_iterator last) { return _data.erase(first, last); }
+    void clear() noexcept { _data.clear(); }
+
+    void push_back(uint8_t value) { _data.push_back(value); }
+    void pop_back() { _data.pop_back(); }
+
+    template <class... Args>
+    iterator emplace(const_iterator position, Args&&... args) { return _data.emplace(position, args); }
+    template <class... Args>
+    void emplace_back(Args&&... args) { _data.emplace_back(args); }
+
+    iterator begin() noexcept { return _data.begin(); }
+    const_iterator begin() const noexcept { return _data.begin(); }
+    const_iterator cbegin() const noexcept { return _data.cbegin(); }
+    reverse_iterator rbegin() noexcept { return _data.rbegin(); }
+    const_reverse_iterator rbegin() const noexcept { return _data.rbegin(); }
+    const_reverse_iterator crbegin() const noexcept { return _data.crbegin(); }
+    iterator end() noexcept { return _data.end(); }
+    const_iterator end() const noexcept { return _data.end(); }
+    const_iterator cend() const noexcept { return _data.cend(); }
+    reverse_iterator rend() noexcept { return _data.rend(); }
+    const_reverse_iterator rend() const noexcept { return _data.rend(); }
+    const_reverse_iterator crend() const noexcept { return _data.crend(); }
+
+    //! Swap two instances
+    void swap(buffer_t& value) noexcept
+    { using std::swap; swap(_data, value._data); }
+    friend void swap(buffer_t& value1, buffer_t& value2) noexcept
+    { value1.swap(value2); }
+
+private:
+    std::vector<uint8_t> _data;
+};
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+}
+
 void GeneratorCpp::GenerateDecimalWrapper()
 {
     std::string code = R"CODE(
@@ -1397,7 +1499,7 @@ void GeneratorCpp::GenerateFBEFieldModelBytes()
     std::string code = R"CODE(
 // Fast Binary Encoding field model class bytes specialization
 template <class TBuffer>
-class FieldModel<TBuffer, std::vector<uint8_t>>
+class FieldModel<TBuffer, buffer_t>
 {
 public:
     FieldModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset) {}
@@ -1506,6 +1608,9 @@ public:
         value.assign(fbe_bytes, fbe_bytes + fbe_bytes_size);
     }
 
+    // Get the bytes value
+    void get(buffer_t& value) const noexcept { get(value.buffer()); }
+
     // Set the bytes value
     void set(const void* data, size_t size)
     {
@@ -1539,6 +1644,9 @@ public:
 
     // Set the bytes value
     void set(const std::vector<uint8_t>& value) { set(value.data(), value.size()); }
+
+    // Set the bytes value
+    void set(const buffer_t& value) { set(value.buffer()); }
 
 private:
     TBuffer& _buffer;
@@ -2994,7 +3102,7 @@ void GeneratorCpp::GenerateFBEFinalModelBytes()
     std::string code = R"CODE(
 // Fast Binary Encoding final model class bytes specialization
 template <class TBuffer>
-class FinalModel<TBuffer, std::vector<uint8_t>>
+class FinalModel<TBuffer, buffer_t>
 {
 public:
     FinalModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset) {}
@@ -3006,6 +3114,7 @@ public:
     template <size_t N>
     size_t fbe_allocation_size(const std::array<uint8_t, N>& data) const noexcept { return 4 + N; }
     size_t fbe_allocation_size(const std::vector<uint8_t>& value) const noexcept { return 4 + value.size(); }
+    size_t fbe_allocation_size(const buffer_t& value) const noexcept { return 4 + value.size(); }
 
     // Get the field offset
     size_t fbe_offset() const noexcept { return _offset; }
@@ -3078,6 +3187,9 @@ public:
         return 4 + fbe_bytes_size;
     }
 
+    // Get the bytes value
+    size_t get(buffer_t& value) const noexcept { return get(value.buffer()); }
+
     // Set the bytes value
     size_t set(const void* data, size_t size)
     {
@@ -3110,6 +3222,9 @@ public:
 
     // Set the bytes value
     size_t set(const std::vector<uint8_t>& value) { return set(value.data(), value.size()); }
+
+    // Set the bytes value
+    size_t set(const buffer_t& value) { return set(value.buffer()); }
 
 private:
     TBuffer& _buffer;
@@ -4448,9 +4563,7 @@ struct ValueWriter<TOutputStream, char>
 {
     static bool to_json(rapidjson::Writer<TOutputStream>& writer, const char& value, bool scope = true)
     {
-        std::stringstream ss;
-        ss << "\\u" << std::setfill('0') << std::setw(4) << std::hex << (uint32_t)value;
-        return writer.String(ss.str());
+        return writer.Uint(value);
     }
 };
 
@@ -4459,9 +4572,7 @@ struct ValueWriter<TOutputStream, wchar_t>
 {
     static bool to_json(rapidjson::Writer<TOutputStream>& writer, const wchar_t& value, bool scope = true)
     {
-        std::stringstream ss;
-        ss << "\\u" << std::setfill('0') << std::setw(4) << std::hex << (uint32_t)value;
-        return writer.String(ss.str());
+        return writer.Uint(value);
     }
 };
 
@@ -4604,9 +4715,9 @@ struct ValueWriter<TOutputStream, std::optional<T>>
 };
 
 template <class TOutputStream>
-struct ValueWriter<TOutputStream, std::vector<uint8_t>>
+struct ValueWriter<TOutputStream, buffer_t>
 {
-    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const std::vector<uint8_t>& values, bool scope = true)
+    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const buffer_t& values, bool scope = true)
     {
         std::string base64;
 
@@ -4828,34 +4939,12 @@ struct ValueReader<TJson, char>
         value = '\0';
 
         // Schema validation
-        if (json.IsNull() || !json.IsString())
+        if (json.IsNull() || !json.IsUint())
             return false;
 
-        // Parse 'X' or '\uXXXX' character forms
-        if (json.GetStringLength() == 1)
-        {
-            value = (char)json.GetString()[0];
-            return true;
-        }
-        else if ((json.GetStringLength() == 6) && (json.GetString()[0] == '\\') && (json.GetString()[1] == 'u'))
-        {
-            char result = 0;
-            for (size_t i = 2; i < 6; ++i)
-            {
-                result <<= 4;
-                char tmp = (char)std::tolower(json.GetString()[i]);
-                if ((tmp >= '0') && (tmp <= '9'))
-                    result |= (tmp - '0') & 0xFF;
-                else if ((tmp >= 'a') && (tmp <= 'f'))
-                    result |= (tmp - 'a' + 10) & 0xFF;
-                else
-                    return false;
-            }
-            value = result;
-            return true;
-        }
-
-        return false;
+        // Save the value
+        value = (char)json.GetUint();
+        return true;
     }
 };
 
@@ -4867,34 +4956,12 @@ struct ValueReader<TJson, wchar_t>
         value = L'\0';
 
         // Schema validation
-        if (json.IsNull() || !json.IsString())
+        if (json.IsNull() || !json.IsUint())
             return false;
 
-        // Parse 'X' or '\uXXXX' character forms
-        if (json.GetStringLength() == 1)
-        {
-            value = (wchar_t)json.GetString()[0];
-            return true;
-        }
-        else if ((json.GetStringLength() == 6) && (json.GetString()[0] == '\\') && (json.GetString()[1] == 'u'))
-        {
-            wchar_t result = 0;
-            for (size_t i = 2; i < 6; ++i)
-            {
-                result <<= 4;
-                char tmp = (char)std::tolower(json.GetString()[i]);
-                if ((tmp >= '0') && (tmp <= '9'))
-                    result |= (tmp - '0') & 0xFF;
-                else if ((tmp >= 'a') && (tmp <= 'f'))
-                    result |= (tmp - 'a' + 10) & 0xFF;
-                else
-                    return false;
-            }
-            value = result;
-            return true;
-        }
-
-        return false;
+        // Save the value
+        value = (wchar_t)json.GetUint();
+        return true;
     }
 };
 
@@ -5177,9 +5244,9 @@ struct ValueReader<TJson, std::optional<T>>
 };
 
 template <class TJson>
-struct ValueReader<TJson, std::vector<uint8_t>>
+struct ValueReader<TJson, buffer_t>
 {
-    static bool from_json(const TJson& json, std::vector<uint8_t>& value)
+    static bool from_json(const TJson& json, buffer_t& value)
     {
         value.clear();
 
@@ -5445,6 +5512,7 @@ void GeneratorCpp::GenerateFBE(const CppCommon::Path& path)
     WriteLineIndent("namespace FBE {");
 
     // Generate common body
+    GenerateBufferWrapper();
     GenerateDecimalWrapper();
     GenerateFlagsWrapper();
     GenerateTimeWrapper();
@@ -7694,7 +7762,7 @@ std::string GeneratorCpp::ConvertTypeName(const std::string& package, const std:
     else if (type == "byte")
         return "uint8_t";
     else if (type == "bytes")
-        return "std::vector<uint8_t>";
+        return "FBE::buffer_t";
     else if (type == "char")
         return "char";
     else if (type == "wchar")

@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a777d28d-c4fb-4aae-88ff-091d764fff06" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../examples/print_json.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/print_json.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/Order.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/Order.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/TestSerializationJson.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerializationJson.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/fbe.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/fbe.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_cpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_cpp.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../tests/test_serialization_json.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../tests/test_serialization_json.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,13 +48,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="java" value="91" />
-          <entry key="kt" value="4476" />
+          <entry key="kt" value="4478" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="91" />
-          <entry key="Kotlin" value="4476" />
+          <entry key="Kotlin" value="4478" />
         </counts>
       </usages-collector>
     </session>
@@ -80,7 +84,7 @@
         <entry file="file://$PROJECT_DIR$/src/proto/fbe/Json.kt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="599">
-              <caret line="107" column="5" lean-forward="true" selection-start-line="97" selection-end-line="107" selection-end-column="5" />
+              <caret line="107" column="5" selection-start-line="97" selection-end-line="107" selection-end-column="5" />
               <folding>
                 <element signature="e#222#393#0" expanded="true" />
               </folding>
@@ -112,8 +116,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tests/TestSerializationJson.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="173" selection-start-line="173" selection-end-line="173" />
+            <state relative-caret-position="289">
+              <caret line="404" column="19" selection-start-line="404" selection-start-column="19" selection-end-line="404" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -122,7 +126,7 @@
         <entry file="file://$PROJECT_DIR$/src/examples/Print.kt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="272">
-              <caret line="16" column="1" lean-forward="true" selection-start-line="2" selection-end-line="16" selection-end-column="1" />
+              <caret line="16" column="1" selection-start-line="2" selection-end-line="16" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -324,7 +328,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543182039478" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543182206740" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -346,7 +350,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="TestNG.&lt;default&gt;">
+  <component name="RunManager" selected="Kotlin.examples.PrintJson">
+    <configuration name="examples.PrintJson" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
+      <module name="Kotlin" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="examples.PrintJson" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="examples.Test" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
       <module name="Kotlin" />
       <option name="VM_PARAMETERS" />
@@ -397,25 +414,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestSerializationJson.serializationJsonStructSimple" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="Kotlin" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="tests.TestSerializationJson" />
-      <option name="METHOD_NAME" value="serializationJsonStructSimple" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <option name="PARAMETERS" value="0" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="&lt;default&gt;" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <module name="Kotlin" />
       <option name="PACKAGE_NAME" value="" />
@@ -428,18 +426,18 @@
     </configuration>
     <list>
       <item itemvalue="TestNG.&lt;default&gt;" />
-      <item itemvalue="TestNG.TestSerializationJson.serializationJsonStructSimple" />
       <item itemvalue="TestNG.TestSerializationJson" />
       <item itemvalue="TestNG.TestSerializationJson.serializationJsonStructOptional" />
       <item itemvalue="Kotlin.examples.Test" />
+      <item itemvalue="Kotlin.examples.PrintJson" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Kotlin.examples.PrintJson" />
         <item itemvalue="TestNG.&lt;default&gt;" />
         <item itemvalue="Kotlin.examples.Test" />
         <item itemvalue="TestNG.TestSerializationJson" />
         <item itemvalue="TestNG.TestSerializationJson.serializationJsonStructOptional" />
-        <item itemvalue="TestNG.TestSerializationJson.serializationJsonStructSimple" />
       </list>
     </recent_temporary>
   </component>
@@ -489,23 +487,11 @@
       <workItem from="1543162759039" duration="109000" />
       <workItem from="1543162871179" duration="50000" />
       <workItem from="1543162949841" duration="3155000" />
-      <workItem from="1543177613519" duration="4261000" />
+      <workItem from="1543177613519" duration="5180000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TestSerializationJson_serializationJsonStructOptional - 2018.11.26 at 00h 05m 28s.xml">
-      <configuration name="TestSerializationJson.serializationJsonStructOptional" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="TestSerializationJson - 2018.11.26 at 00h 07m 55s.xml">
-      <configuration name="TestSerializationJson" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="TestSerializationJson - 2018.11.26 at 00h 08m 27s.xml">
-      <configuration name="TestSerializationJson" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="TestSerializationJson - 2018.11.26 at 00h 11m 31s.xml">
-      <configuration name="TestSerializationJson" configurationId="TestNG" />
-    </history-entry>
     <history-entry file="TestSerializationJson - 2018.11.26 at 00h 14m 32s.xml">
       <configuration name="TestSerializationJson" configurationId="TestNG" />
     </history-entry>
@@ -524,9 +510,21 @@
     <history-entry file="TestSerializationJson - 2018.11.26 at 00h 22m 55s.xml">
       <configuration name="TestSerializationJson" configurationId="TestNG" />
     </history-entry>
+    <history-entry file="_default_ - 2018.11.26 at 00h 38m 13s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="_default_ - 2018.11.26 at 00h 39m 31s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="_default_ - 2018.11.26 at 00h 40m 11s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="_default_ - 2018.11.26 at 00h 40m 41s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66208000" />
+    <option name="totallyTimeSpent" value="67127000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -549,17 +547,17 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48635536" visible="true" weight="0.3546971" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48453608" visible="true" weight="0.3546971" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49241966" weight="0.39947322" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49909034" weight="0.32891247" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32891247" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.51364464" side_tool="true" visible="true" weight="0.3546971" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.5154639" side_tool="true" visible="true" weight="0.3546971" />
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="JProfiler" order="11" />
-      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.41479686" weight="0.19315189" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.41297758" weight="0.19315189" />
       <window_info anchor="bottom" id="Inspection Results" order="13" sideWeight="0.49727106" weight="0.3294025" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -926,7 +924,7 @@
     <entry file="file://$PROJECT_DIR$/src/examples/Print.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
-          <caret line="16" column="1" lean-forward="true" selection-start-line="2" selection-end-line="16" selection-end-column="1" />
+          <caret line="16" column="1" selection-start-line="2" selection-end-line="16" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -943,7 +941,7 @@
     <entry file="file://$PROJECT_DIR$/src/proto/fbe/Json.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="599">
-          <caret line="107" column="5" lean-forward="true" selection-start-line="97" selection-end-line="107" selection-end-column="5" />
+          <caret line="107" column="5" selection-start-line="97" selection-end-line="107" selection-end-column="5" />
           <folding>
             <element signature="e#222#393#0" expanded="true" />
           </folding>
@@ -969,8 +967,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tests/TestSerializationJson.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="173" selection-start-line="173" selection-end-line="173" />
+        <state relative-caret-position="289">
+          <caret line="404" column="19" selection-start-line="404" selection-start-column="19" selection-end-line="404" selection-end-column="19" />
         </state>
       </provider>
     </entry>
