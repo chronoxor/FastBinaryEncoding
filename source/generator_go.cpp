@@ -299,6 +299,16 @@ type Timestamp struct {
     time.Time
 }
 
+// Create a new timestamp from the given date
+func TimestampFromDate(year, month, day int) Timestamp {
+    return Timestamp{time.Date(year, time.Month(month + 1), day, 0, 0, 0, 0, time.UTC)}
+}
+
+// Create a new timestamp from the given date
+func TimestampFromDateTime(year, month, day, hour, minute, second, nanoseconds int) Timestamp {
+    return Timestamp{time.Date(year, time.Month(month + 1), day, hour, minute, second, nanoseconds, time.UTC)}
+}
+
 // Create a new timestamp from the given nanoseconds
 func TimestampFromNanoseconds(nanoseconds uint64) Timestamp {
     return Timestamp{time.Unix(int64(nanoseconds / 1000000000), int64(nanoseconds % 1000000000))}
@@ -4219,7 +4229,6 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
 
     // Generate imports
     WriteLine();
-    WriteLineIndent("import \"strconv\"");
     WriteLineIndent("import \"strings\"");
     WriteLineIndent("import \"encoding/json\"");
     GenerateImports(p);
@@ -6249,9 +6258,7 @@ std::string GeneratorGo::ConvertTypeName(const StructField& field)
         return "[" + std::to_string(field.N) + "]" + ConvertTypeName(*field.type, field.optional);
     else if ((field.vector) || (field.list))
         return "[]" + ConvertTypeName(*field.type, field.optional);
-    else if (field.set)
-        return "map[" + ConvertKeyName(*field.key) + "]bool";
-    else if ((field.map) || (field.hash))
+    else if ((field.set) || (field.map) || (field.hash))
         return "map[" + ConvertKeyName(*field.key) + "]" + ConvertTypeName(*field.type, field.optional);
 
     return ConvertTypeName(*field.type, field.optional);

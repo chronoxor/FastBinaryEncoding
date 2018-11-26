@@ -37,6 +37,16 @@ type Timestamp struct {
     time.Time
 }
 
+// Create a new timestamp from the given date
+func TimestampFromDate(year, month, day int) Timestamp {
+    return Timestamp{time.Date(year, time.Month(month + 1), day, 0, 0, 0, 0, time.UTC)}
+}
+
+// Create a new timestamp from the given date
+func TimestampFromDateTime(year, month, day, hour, minute, second, nanoseconds int) Timestamp {
+    return Timestamp{time.Date(year, time.Month(month + 1), day, hour, minute, second, nanoseconds, time.UTC)}
+}
+
 // Create a new timestamp from the given nanoseconds
 func TimestampFromNanoseconds(nanoseconds uint64) Timestamp {
     return Timestamp{time.Unix(int64(nanoseconds / 1000000000), int64(nanoseconds % 1000000000))}

@@ -5,7 +5,6 @@
 
 package proto
 
-import "strconv"
 import "strings"
 import "encoding/json"
 import "../fbe"

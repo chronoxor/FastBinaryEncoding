@@ -9,11 +9,15 @@ import (
 )
 
 func main() {
-	jjj, _ := json.Marshal([]byte{49, 50, 51, 52, 53, 54, 55, 56})
+	var StringSet map[string]bool
+	StringSet = make(map[string]bool)
+	StringSet["Test1"] = true
+	StringSet["Test2"] = true
+	StringSet["Test3"] = true
+	jjj, _ := json.Marshal(StringSet)
 	fmt.Println(string(jjj))
-	var bbb []byte
-	_ = json.Unmarshal(jjj, &bbb)
-	fmt.Println(string(bbb))
+	_ = json.Unmarshal(jjj, &StringSet)
+	fmt.Println(StringSet)
 
 	o1 := proto.NewOrder()
 	o1.Symbol = "EURUSD"

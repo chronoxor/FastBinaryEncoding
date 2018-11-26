@@ -5,7 +5,6 @@
 
 package protoex
 
-import "strconv"
 import "strings"
 import "encoding/json"
 import "../fbe"
