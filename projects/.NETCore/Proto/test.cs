@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Numerics;
+using System.Runtime.Serialization;
 using System.Text;
 #if UTF8JSON
 using Utf8Json;
@@ -1344,8 +1345,17 @@ namespace test {
             return sb.ToString();
         }
 
-        public string ToJson() { return FBE.Json.ToJson(this); }
-        public static StructSimple FromJson(string json) { return FBE.Json.FromJson<StructSimple>(json); }
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            return json;
+        }
+
+        public static StructSimple FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<StructSimple>(json);
+            return result;
+        }
 
         public static FBE.FieldModelValueType<StructSimple> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructSimple(buffer, offset); }
     }
@@ -3422,6 +3432,11 @@ namespace test {
 
     public struct StructOptional : IComparable, IComparable<StructOptional>, IEquatable<StructOptional>
     {
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
         public StructSimple parent;
         public bool? f100;
         public bool? f101;
@@ -3761,8 +3776,20 @@ namespace test {
             return sb.ToString();
         }
 
-        public string ToJson() { return FBE.Json.ToJson(this); }
-        public static StructOptional FromJson(string json) { return FBE.Json.FromJson<StructOptional>(json); }
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            var jsonParent = parent.ToJson();
+            json = json.Substring(0, json.Length - 1) + "," + jsonParent.Substring(1, jsonParent.Length - 2) + "}";
+            return json;
+        }
+
+        public static StructOptional FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<StructOptional>(json);
+            result.parent = StructSimple.FromJson(json);
+            return result;
+        }
 
         public static FBE.FieldModelValueType<StructOptional> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructOptional(buffer, offset); }
     }
@@ -6629,6 +6656,11 @@ namespace test {
 
     public struct StructNested : IComparable, IComparable<StructNested>, IEquatable<StructNested>
     {
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
         public StructOptional parent;
         public EnumSimple f1000;
         public EnumSimple? f1001;
@@ -6752,8 +6784,20 @@ namespace test {
             return sb.ToString();
         }
 
-        public string ToJson() { return FBE.Json.ToJson(this); }
-        public static StructNested FromJson(string json) { return FBE.Json.FromJson<StructNested>(json); }
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            var jsonParent = parent.ToJson();
+            json = json.Substring(0, json.Length - 1) + "," + jsonParent.Substring(1, jsonParent.Length - 2) + "}";
+            return json;
+        }
+
+        public static StructNested FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<StructNested>(json);
+            result.parent = StructOptional.FromJson(json);
+            return result;
+        }
 
         public static FBE.FieldModelValueType<StructNested> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructNested(buffer, offset); }
     }
@@ -7748,8 +7792,17 @@ namespace test {
             return sb.ToString();
         }
 
-        public string ToJson() { return FBE.Json.ToJson(this); }
-        public static StructBytes FromJson(string json) { return FBE.Json.FromJson<StructBytes>(json); }
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            return json;
+        }
+
+        public static StructBytes FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<StructBytes>(json);
+            return result;
+        }
 
         public static FBE.FieldModelValueType<StructBytes> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructBytes(buffer, offset); }
     }
@@ -8514,8 +8567,17 @@ namespace test {
             return sb.ToString();
         }
 
-        public string ToJson() { return FBE.Json.ToJson(this); }
-        public static StructArray FromJson(string json) { return FBE.Json.FromJson<StructArray>(json); }
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            return json;
+        }
+
+        public static StructArray FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<StructArray>(json);
+            return result;
+        }
 
         public static FBE.FieldModelValueType<StructArray> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructArray(buffer, offset); }
     }
@@ -9532,8 +9594,17 @@ namespace test {
             return sb.ToString();
         }
 
-        public string ToJson() { return FBE.Json.ToJson(this); }
-        public static StructVector FromJson(string json) { return FBE.Json.FromJson<StructVector>(json); }
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            return json;
+        }
+
+        public static StructVector FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<StructVector>(json);
+            return result;
+        }
 
         public static FBE.FieldModelValueType<StructVector> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructVector(buffer, offset); }
     }
@@ -10550,8 +10621,17 @@ namespace test {
             return sb.ToString();
         }
 
-        public string ToJson() { return FBE.Json.ToJson(this); }
-        public static StructList FromJson(string json) { return FBE.Json.FromJson<StructList>(json); }
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            return json;
+        }
+
+        public static StructList FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<StructList>(json);
+            return result;
+        }
 
         public static FBE.FieldModelValueType<StructList> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructList(buffer, offset); }
     }
@@ -11484,8 +11564,17 @@ namespace test {
             return sb.ToString();
         }
 
-        public string ToJson() { return FBE.Json.ToJson(this); }
-        public static StructSet FromJson(string json) { return FBE.Json.FromJson<StructSet>(json); }
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            return json;
+        }
+
+        public static StructSet FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<StructSet>(json);
+            return result;
+        }
 
         public static FBE.FieldModelValueType<StructSet> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructSet(buffer, offset); }
     }
@@ -12306,8 +12395,17 @@ namespace test {
             return sb.ToString();
         }
 
-        public string ToJson() { return FBE.Json.ToJson(this); }
-        public static StructMap FromJson(string json) { return FBE.Json.FromJson<StructMap>(json); }
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            return json;
+        }
+
+        public static StructMap FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<StructMap>(json);
+            return result;
+        }
 
         public static FBE.FieldModelValueType<StructMap> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructMap(buffer, offset); }
     }
@@ -13344,8 +13442,17 @@ namespace test {
             return sb.ToString();
         }
 
-        public string ToJson() { return FBE.Json.ToJson(this); }
-        public static StructHash FromJson(string json) { return FBE.Json.FromJson<StructHash>(json); }
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            return json;
+        }
+
+        public static StructHash FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<StructHash>(json);
+            return result;
+        }
 
         public static FBE.FieldModelValueType<StructHash> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructHash(buffer, offset); }
     }
@@ -14254,8 +14361,17 @@ namespace test {
             return sb.ToString();
         }
 
-        public string ToJson() { return FBE.Json.ToJson(this); }
-        public static StructHashEx FromJson(string json) { return FBE.Json.FromJson<StructHashEx>(json); }
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            return json;
+        }
+
+        public static StructHashEx FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<StructHashEx>(json);
+            return result;
+        }
 
         public static FBE.FieldModelValueType<StructHashEx> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructHashEx(buffer, offset); }
     }

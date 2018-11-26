@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Numerics;
+using System.Runtime.Serialization;
 using System.Text;
 #if UTF8JSON
 using Utf8Json;
@@ -2897,8 +2898,17 @@ namespace enums {
             return sb.ToString();
         }
 
-        public string ToJson() { return FBE.Json.ToJson(this); }
-        public static Enums FromJson(string json) { return FBE.Json.FromJson<Enums>(json); }
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            return json;
+        }
+
+        public static Enums FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<Enums>(json);
+            return result;
+        }
 
         public static FBE.FieldModelValueType<Enums> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.enums.FieldModelEnums(buffer, offset); }
     }

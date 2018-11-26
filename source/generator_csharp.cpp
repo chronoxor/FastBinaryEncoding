@@ -45,6 +45,7 @@ void GeneratorCSharp::GenerateImports()
     WriteLineIndent("using System.Globalization;");
     WriteLineIndent("using System.IO;");
     WriteLineIndent("using System.Numerics;");
+    WriteLineIndent("using System.Runtime.Serialization;");
     WriteLineIndent("using System.Text;");
     if (JSON())
     {
@@ -3686,7 +3687,7 @@ void GeneratorCSharp::GenerateFBEJson()
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            writer.WriteValue((uint)(char)value);
+            writer.WriteValue((long)(char)value);
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
@@ -3694,7 +3695,7 @@ void GeneratorCSharp::GenerateFBEJson()
             if (reader.Value == null)
                 return null;
 
-            return (char)(uint)reader.Value;
+            return (char)(long)reader.Value;
         }
     }
 
@@ -4713,7 +4714,17 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
 
     // Generate struct body
     if (s->base && !s->base->empty())
+    {
+        if (JSON())
+        {
+            WriteLineIndent("#if UTF8JSON");
+            WriteLineIndent("[IgnoreDataMember]");
+            WriteLineIndent("#else");
+            WriteLineIndent("[JsonIgnore]");
+            WriteLineIndent("#endif");
+        }
         WriteLineIndent("public " + ConvertTypeName(*s->base, false) + " parent;");
+    }
     if (s->body)
         for (const auto& field : s->body->fields)
             WriteLineIndent("public " + ConvertTypeName(*field) + " " + *field->name + ";");
@@ -5066,8 +5077,28 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
     if (JSON())
     {
         WriteLine();
-        WriteLineIndent("public string ToJson() { return FBE.Json.ToJson(this); }");
-        WriteLineIndent("public static " + *s->name + " FromJson(string json) { return FBE.Json.FromJson<" + *s->name + ">(json); }");
+        WriteLineIndent("public string ToJson()");
+        WriteLineIndent("{");
+        Indent(1);
+        WriteLineIndent("var json = FBE.Json.ToJson(this);");
+        if (s->base && !s->base->empty())
+        {
+            WriteLineIndent("var jsonParent = parent.ToJson();");
+            WriteLineIndent("json = json.Substring(0, json.Length - 1) + \",\" + jsonParent.Substring(1, jsonParent.Length - 2) + \"}\";");
+        }
+        WriteLineIndent("return json;");
+        Indent(-1);
+        WriteLineIndent("}");
+        WriteLine();
+        WriteLineIndent("public static " + *s->name + " FromJson(string json)");
+        WriteLineIndent("{");
+        Indent(1);
+        WriteLineIndent("var result = FBE.Json.FromJson<" + *s->name + ">(json);");
+        if (s->base && !s->base->empty())
+            WriteLineIndent("result.parent = " + ConvertTypeName(*s->base, false) + ".FromJson(json);");
+        WriteLineIndent("return result;");
+        Indent(-1);
+        WriteLineIndent("}");
     }
 
     // Generate struct CreateFieldModel() method

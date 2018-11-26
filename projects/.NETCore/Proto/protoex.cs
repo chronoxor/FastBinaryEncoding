@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Numerics;
+using System.Runtime.Serialization;
 using System.Text;
 #if UTF8JSON
 using Utf8Json;
@@ -889,8 +890,17 @@ namespace protoex {
             return sb.ToString();
         }
 
-        public string ToJson() { return FBE.Json.ToJson(this); }
-        public static Order FromJson(string json) { return FBE.Json.FromJson<Order>(json); }
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            return json;
+        }
+
+        public static Order FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<Order>(json);
+            return result;
+        }
 
         public static FBE.FieldModelValueType<Order> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.protoex.FieldModelOrder(buffer, offset); }
     }
@@ -1635,6 +1645,11 @@ namespace protoex {
 
     public struct Balance : IComparable, IComparable<Balance>, IEquatable<Balance>
     {
+        #if UTF8JSON
+        [IgnoreDataMember]
+        #else
+        [JsonIgnore]
+        #endif
         public global::proto.Balance parent;
         public double locked;
 
@@ -1714,8 +1729,20 @@ namespace protoex {
             return sb.ToString();
         }
 
-        public string ToJson() { return FBE.Json.ToJson(this); }
-        public static Balance FromJson(string json) { return FBE.Json.FromJson<Balance>(json); }
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            var jsonParent = parent.ToJson();
+            json = json.Substring(0, json.Length - 1) + "," + jsonParent.Substring(1, jsonParent.Length - 2) + "}";
+            return json;
+        }
+
+        public static Balance FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<Balance>(json);
+            result.parent = global::proto.Balance.FromJson(json);
+            return result;
+        }
 
         public static FBE.FieldModelValueType<Balance> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.protoex.FieldModelBalance(buffer, offset); }
     }
@@ -2347,8 +2374,17 @@ namespace protoex {
             return sb.ToString();
         }
 
-        public string ToJson() { return FBE.Json.ToJson(this); }
-        public static Account FromJson(string json) { return FBE.Json.FromJson<Account>(json); }
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            return json;
+        }
+
+        public static Account FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<Account>(json);
+            return result;
+        }
 
         public static FBE.FieldModelValueType<Account> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.protoex.FieldModelAccount(buffer, offset); }
     }

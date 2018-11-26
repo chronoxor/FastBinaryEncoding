@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Numerics;
+using System.Runtime.Serialization;
 using System.Text;
 #if UTF8JSON
 using Utf8Json;
@@ -10086,10 +10087,10 @@ namespace FBE {
                 return null;
 
             var buffer = System.Convert.FromBase64String((string)reader.Value);
-            return new MemoryStream(buffer, 0, buffer.Length, true, true);            
+            return new MemoryStream(buffer, 0, buffer.Length, true, true);
         }
-    }    
-    
+    }
+
     public class CharConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
@@ -10188,9 +10189,9 @@ namespace FBE {
                 Converters = new List<JsonConverter>
                 {
                     new BytesConverter(),
-                    new CharConverter(), 
-                    new DateTimeConverter(), 
-                    new DecimalConverter(), 
+                    new CharConverter(),
+                    new DateTimeConverter(),
+                    new DecimalConverter(),
                     new GuidConverter()
                 }
             };

@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Numerics;
+using System.Runtime.Serialization;
 using System.Text;
 #if UTF8JSON
 using Utf8Json;
@@ -863,8 +864,17 @@ namespace proto {
             return sb.ToString();
         }
 
-        public string ToJson() { return FBE.Json.ToJson(this); }
-        public static Order FromJson(string json) { return FBE.Json.FromJson<Order>(json); }
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            return json;
+        }
+
+        public static Order FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<Order>(json);
+            return result;
+        }
 
         public static FBE.FieldModelValueType<Order> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.proto.FieldModelOrder(buffer, offset); }
     }
@@ -1616,8 +1626,17 @@ namespace proto {
             return sb.ToString();
         }
 
-        public string ToJson() { return FBE.Json.ToJson(this); }
-        public static Balance FromJson(string json) { return FBE.Json.FromJson<Balance>(json); }
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            return json;
+        }
+
+        public static Balance FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<Balance>(json);
+            return result;
+        }
 
         public static FBE.FieldModelValueType<Balance> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.proto.FieldModelBalance(buffer, offset); }
     }
@@ -2251,8 +2270,17 @@ namespace proto {
             return sb.ToString();
         }
 
-        public string ToJson() { return FBE.Json.ToJson(this); }
-        public static Account FromJson(string json) { return FBE.Json.FromJson<Account>(json); }
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            return json;
+        }
+
+        public static Account FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<Account>(json);
+            return result;
+        }
 
         public static FBE.FieldModelValueType<Account> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.proto.FieldModelAccount(buffer, offset); }
     }
