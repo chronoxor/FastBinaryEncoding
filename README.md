@@ -269,12 +269,9 @@ dependencies that worth to be mentioned:
   with 'UTF8JSON' definition;
 
 ### Go
-* JSON serialization is based on [jsoniter](https://github.com/json-iterator/go) package.
-  Therefore it should be imported using 'go get github.com/json-iterator/go'
-* Decimal type is based on [shopspring/decimal](https://github.com/shopspring/decimal) package.
-  Therefore it should be imported using 'go get github.com/shopspring/decimal'
-* UUID type is based on [goolge/uuid](https://github.com/google/uuid) package.
-  Therefore it should be imported using 'go get github.com/google/uuid'
+* JSON serialization is based on [jsoniter](https://github.com/json-iterator/go) package (*go get github.com/json-iterator/go*)
+* Decimal type is based on [shopspring/decimal](https://github.com/shopspring/decimal) package (*go get github.com/shopspring/decimal*)
+* UUID type is based on [goolge/uuid](https://github.com/google/uuid) package (*go get github.com/google/uuid*)
 
 ### Java
 * JSON serialization is implemented using [Gson](https://github.com/google/gson) package.
@@ -1072,3 +1069,4 @@ Verify benchmark results:
 | Python Win64 (Final)     |    152 bytes |     23 590 ops/s |   42 391 ns |
 | Ruby Win64               |    252 bytes |     57 201 ops/s |   17 482 ns |
 | Ruby Win64 (Final)       |    152 bytes |     74 262 ops/s |   13 466 ns |
+..
