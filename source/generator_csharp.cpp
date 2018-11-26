@@ -3461,7 +3461,73 @@ void GeneratorCSharp::GenerateFBEJson()
     std::string code = R"CODE(
 #if UTF8JSON
 
-    public class CharConverter : IJsonFormatter<Char>
+    public sealed class ByteArrayFormatter : IJsonFormatter<byte[]>
+    {
+        public void Serialize(ref JsonWriter writer, byte[] value, IJsonFormatterResolver formatterResolver)
+        {
+            if (value == null)
+            {
+                writer.WriteNull();
+                return;
+            }
+
+            writer.WriteBeginArray();
+
+            if (value.Length != 0)
+                writer.WriteByte(value[0]);
+            for (int i = 1; i < value.Length; i++)
+            {
+                writer.WriteValueSeparator();
+                writer.WriteByte(value[i]);
+            }
+
+            writer.WriteEndArray();
+        }
+
+        public byte[] Deserialize(ref JsonReader reader, IJsonFormatterResolver formatterResolver)
+        {
+            if (reader.ReadIsNull())
+                return null;
+
+            reader.ReadIsBeginArrayWithVerify();
+            var array = new byte[4];
+            var count = 0;
+            while (!reader.ReadIsEndArrayWithSkipValueSeparator(ref count))
+            {
+                if (array.Length < count)
+                    Array.Resize(ref array, count * 2);
+                array[count - 1] = reader.ReadByte();
+            }
+
+            Array.Resize(ref array, count);
+            return array;
+        }
+    }
+
+    public class BytesFormatter : IJsonFormatter<MemoryStream>
+    {
+        public void Serialize(ref JsonWriter writer, MemoryStream value, IJsonFormatterResolver jsonFormatterResolver)
+        {
+            if (value == null)
+            {
+                writer.WriteNull();
+                return;
+            }
+
+            writer.WriteString(System.Convert.ToBase64String(value.GetBuffer()));
+        }
+
+        public MemoryStream Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
+        {
+            if (reader.ReadIsNull())
+                return null;
+
+            var buffer = System.Convert.FromBase64String(reader.ReadString());
+            return new MemoryStream(buffer, 0, buffer.Length, true, true);
+        }
+    }
+
+    public class CharFormatter : IJsonFormatter<Char>
     {
         public void Serialize(ref JsonWriter writer, Char value, IJsonFormatterResolver jsonFormatterResolver)
         {
@@ -3474,13 +3540,35 @@ void GeneratorCSharp::GenerateFBEJson()
         }
     }
 
-    public class DateTimeConverter : IJsonFormatter<DateTime>
+    public class CharNullableFormatter : IJsonFormatter<Char?>
+    {
+        public void Serialize(ref JsonWriter writer, Char? value, IJsonFormatterResolver jsonFormatterResolver)
+        {
+            if (!value.HasValue)
+            {
+                writer.WriteNull();
+                return;
+            }
+
+            writer.WriteUInt32(value.Value);
+        }
+
+        public Char? Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
+        {
+            if (reader.ReadIsNull())
+                return null;
+
+            return (char)reader.ReadUInt32();
+        }
+    }
+
+    public class DateTimeFormatter : IJsonFormatter<DateTime>
     {
         private const long UnixEpoch = 621355968000000000;
 
         public void Serialize(ref JsonWriter writer, DateTime value, IJsonFormatterResolver jsonFormatterResolver)
         {
-            ulong nanoseconds = (ulong)((((DateTime)value).Ticks - UnixEpoch) * 100);
+            ulong nanoseconds = (ulong)((value.Ticks - UnixEpoch) * 100);
             writer.WriteUInt64(nanoseconds);
         }
 
@@ -3491,7 +3579,33 @@ void GeneratorCSharp::GenerateFBEJson()
         }
     }
 
-    public class DecimalConverter : IJsonFormatter<Decimal>
+    public class DateTimeNullableFormatter : IJsonFormatter<DateTime?>
+    {
+        private const long UnixEpoch = 621355968000000000;
+
+        public void Serialize(ref JsonWriter writer, DateTime? value, IJsonFormatterResolver jsonFormatterResolver)
+        {
+            if (!value.HasValue)
+            {
+                writer.WriteNull();
+                return;
+            }
+
+            ulong nanoseconds = (ulong)((value.Value.Ticks - UnixEpoch) * 100);
+            writer.WriteUInt64(nanoseconds);
+        }
+
+        public DateTime? Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
+        {
+            if (reader.ReadIsNull())
+                return null;
+
+            ulong ticks = (ulong)(long)reader.ReadUInt64() / 100;
+            return new DateTime((long)(UnixEpoch + ticks), DateTimeKind.Utc);
+        }
+    }
+
+    public class DecimalFormatter : IJsonFormatter<Decimal>
     {
         public void Serialize(ref JsonWriter writer, Decimal value, IJsonFormatterResolver jsonFormatterResolver)
         {
@@ -3504,7 +3618,7 @@ void GeneratorCSharp::GenerateFBEJson()
         }
     }
 
-    public class GuidConverter : IJsonFormatter<Guid>
+    public class GuidFormatter : IJsonFormatter<Guid>
     {
         public void Serialize(ref JsonWriter writer, Guid value, IJsonFormatterResolver jsonFormatterResolver)
         {
@@ -3522,7 +3636,17 @@ void GeneratorCSharp::GenerateFBEJson()
     {
         static Json()
         {
-            CompositeResolver.RegisterAndSetAsDefault(new IJsonFormatter[] { new CharConverter(), new DateTimeConverter(), new DecimalConverter(), new GuidConverter() }, new[] { StandardResolver.Default });
+            CompositeResolver.RegisterAndSetAsDefault(new IJsonFormatter[]
+            {
+                new ByteArrayFormatter(),
+                new BytesFormatter(),
+                new CharFormatter(),
+                new CharNullableFormatter(),
+                new DateTimeFormatter(),
+                new DateTimeNullableFormatter(),
+                new DecimalFormatter(),
+                new GuidFormatter()
+            }, new[] { StandardResolver.Default });
         }
 
         public static string ToJson<T>(T value) { return Encoding.UTF8.GetString(JsonSerializer.Serialize(value)); }

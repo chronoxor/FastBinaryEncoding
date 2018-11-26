@@ -9,6 +9,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proto/fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/fbe.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/Serialization.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Serialization.cs" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -52,11 +54,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SerializationJson.cs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SerializationJson.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Tests/SerializationJson.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4703">
-              <caret line="409" column="30" selection-start-line="409" selection-start-column="30" selection-end-line="409" selection-end-column="30" />
+            <state relative-caret-position="117">
+              <caret line="403" column="20" selection-start-line="403" selection-start-column="20" selection-end-line="403" selection-end-column="20" />
               <folding>
                 <marker date="1543227268904" expanded="true" signature="0:151" ph="/* ReSharper disable CompareOfFloatsByEqualityOperator ... */" />
                 <marker date="1543227268904" expanded="false" signature="159:189" ph="..." />
@@ -90,17 +92,26 @@
       <file leaf-file-name="fbe.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Proto/fbe.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="1436" column="12" selection-start-line="1436" selection-start-column="12" selection-end-line="1436" selection-end-column="12" />
+            <state relative-caret-position="187">
+              <caret line="10064" column="101" lean-forward="true" selection-start-line="10064" selection-start-column="101" selection-end-line="10064" selection-end-column="101" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MemoryStream.cs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Guid.cs" pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C3E4200C-CDA7-4037-B5FC-8C34C9135930/9b/20d4dd76/Guid.cs">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MemoryStream.cs" pinned="false" current-in-tab="false">
         <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C3E4200C-CDA7-4037-B5FC-8C34C9135930/09/0ed7f6ea/MemoryStream.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="264" column="8" selection-start-line="264" selection-start-column="8" selection-end-line="264" selection-end-column="8" />
+            <state relative-caret-position="-27">
+              <caret line="18" column="15" selection-start-line="18" selection-start-column="15" selection-end-line="18" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -108,8 +119,8 @@
       <file leaf-file-name="test.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Proto/test.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
-              <caret line="7679" column="15" selection-start-line="7679" selection-start-column="15" selection-end-line="7679" selection-end-column="15" />
+            <state relative-caret-position="165">
+              <caret line="8316" column="25" selection-start-line="8316" selection-start-column="25" selection-end-line="8316" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -117,25 +128,25 @@
       <file leaf-file-name="Serialization.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tests/Serialization.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="796" column="12" selection-start-line="796" selection-start-column="12" selection-end-line="796" selection-end-column="12" />
+            <state relative-caret-position="127">
+              <caret line="767" column="20" selection-start-line="767" selection-start-column="20" selection-end-line="767" selection-end-column="20" />
               <folding>
-                <marker date="1543227268900" expanded="true" signature="0:151" ph="/* ReSharper disable CompareOfFloatsByEqualityOperator ... */" />
-                <marker date="1543227268900" expanded="false" signature="159:206" ph="..." />
-                <marker date="1543227268900" expanded="true" signature="223:73324" ph="{...}" />
-                <marker date="1543227268900" expanded="true" signature="274:73322" ph="{...}" />
-                <marker date="1543227268900" expanded="true" signature="375:3835" ph="{...}" />
-                <marker date="1543227268900" expanded="true" signature="3946:9488" ph="{...}" />
-                <marker date="1543227268900" expanded="true" signature="9603:23503" ph="{...}" />
-                <marker date="1543227268900" expanded="true" signature="23614:40845" ph="{...}" />
-                <marker date="1543227268900" expanded="true" signature="40954:43034" ph="{...}" />
-                <marker date="1543227268900" expanded="true" signature="43143:48332" ph="{...}" />
-                <marker date="1543227268900" expanded="true" signature="48443:53625" ph="{...}" />
-                <marker date="1543227268900" expanded="true" signature="53732:59384" ph="{...}" />
-                <marker date="1543227268900" expanded="true" signature="59489:62217" ph="{...}" />
-                <marker date="1543227268900" expanded="true" signature="62322:66660" ph="{...}" />
-                <marker date="1543227268900" expanded="true" signature="66767:71188" ph="{...}" />
-                <marker date="1543227268900" expanded="true" signature="71312:73316" ph="{...}" />
+                <marker date="1543229355058" expanded="true" signature="0:151" ph="/* ReSharper disable CompareOfFloatsByEqualityOperator ... */" />
+                <marker date="1543229355058" expanded="false" signature="159:206" ph="..." />
+                <marker date="1543229355058" expanded="true" signature="223:73630" ph="{...}" />
+                <marker date="1543229355058" expanded="true" signature="274:73628" ph="{...}" />
+                <marker date="1543229355058" expanded="true" signature="375:3835" ph="{...}" />
+                <marker date="1543229355058" expanded="true" signature="3946:9488" ph="{...}" />
+                <marker date="1543229355058" expanded="true" signature="9603:23503" ph="{...}" />
+                <marker date="1543229355058" expanded="true" signature="23614:40845" ph="{...}" />
+                <marker date="1543229355058" expanded="true" signature="40954:43070" ph="{...}" />
+                <marker date="1543229355058" expanded="true" signature="43179:48422" ph="{...}" />
+                <marker date="1543229355058" expanded="true" signature="48533:53769" ph="{...}" />
+                <marker date="1543229355058" expanded="true" signature="53876:59582" ph="{...}" />
+                <marker date="1543229355058" expanded="true" signature="59687:62415" ph="{...}" />
+                <marker date="1543229355058" expanded="true" signature="62520:66912" ph="{...}" />
+                <marker date="1543229355058" expanded="true" signature="67019:71494" ph="{...}" />
+                <marker date="1543229355058" expanded="true" signature="71618:73622" ph="{...}" />
               </folding>
             </state>
           </provider>
@@ -165,6 +176,7 @@
     <setting file="file://$USER_HOME$/AppData/Local/Symbols/src/nunit/nunit/502a844c0b104731c7f5d57ef6d0df436d4b75af/src/NUnitFramework/framework/Internal/Reflect.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C3E4200C-CDA7-4037-B5FC-8C34C9135930/09/0ed7f6ea/MemoryStream.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Proto/fbe.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C3E4200C-CDA7-4037-B5FC-8C34C9135930/9b/20d4dd76/Guid.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/Serialization.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Proto/test.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Tests/SerializationJson.cs" root0="FORCE_HIGHLIGHTING" />
@@ -172,10 +184,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/Proto/fbe.cs" />
         <option value="$PROJECT_DIR$/Tests/Serialization.cs" />
         <option value="$PROJECT_DIR$/Tests/SerializationJson.cs" />
         <option value="$PROJECT_DIR$/Tests/SerializationFinal.cs" />
+        <option value="$PROJECT_DIR$/Proto/fbe.cs" />
       </list>
     </option>
   </component>
@@ -270,12 +282,12 @@
       <workItem from="1539975712908" duration="620000" />
       <workItem from="1542900650278" duration="899000" />
       <workItem from="1543192699474" duration="4329000" />
-      <workItem from="1543227824168" duration="1369000" />
+      <workItem from="1543227824168" duration="5091000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="7262000" />
+    <option name="totallyTimeSpent" value="10984000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -292,8 +304,8 @@
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="right" id="Errors In Solution" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.5008955" side_tool="true" visible="true" weight="0.39889196" />
-      <window_info anchor="bottom" id="Unit Tests" order="11" sideWeight="0.4997015" weight="0.43074793" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.32895523" side_tool="true" visible="true" weight="0.47368422" />
+      <window_info active="true" anchor="bottom" id="Unit Tests" order="11" sideWeight="0.67104477" visible="true" weight="0.47368422" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="9" />
@@ -301,10 +313,10 @@
       <window_info anchor="bottom" id="NuGet" order="7" />
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15582089" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Build" order="14" weight="0.3294893" />
+      <window_info anchor="bottom" id="Build" order="14" sideWeight="0.4997015" weight="0.32825485" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49910447" visible="true" weight="0.39889196" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4967164" weight="0.39889196" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -332,32 +344,20 @@
           <option name="timeStamp" value="1" />
         </breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Tests/Serialization.cs</url>
-          <line>793</line>
-          <properties documentPath="$PROJECT_DIR$/Tests/Serialization.cs" initialLine="793">
+          <url>file://$PROJECT_DIR$/Tests/SerializationJson.cs</url>
+          <line>703</line>
+          <properties documentPath="$PROJECT_DIR$/Tests/SerializationJson.cs" initialLine="703">
             <startOffsets>
-              <startOffset value="44478" />
+              <startOffset value="50498" />
             </startOffsets>
             <endOffsets>
-              <endOffset value="44523" />
+              <endOffset value="50544" />
             </endOffsets>
           </properties>
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Proto/fbe.cs</url>
-          <line>1420</line>
-          <properties documentPath="$PROJECT_DIR$/Proto/fbe.cs" initialLine="1420">
-            <startOffsets>
-              <startOffset value="52300" />
-            </startOffsets>
-            <endOffsets>
-              <endOffset value="52354" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="1" />
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="2" />
+      <option name="time" value="5" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -411,22 +411,22 @@
         <state relative-caret-position="12240">
           <caret line="816" column="32" selection-start-line="816" selection-start-column="32" selection-end-line="816" selection-end-column="32" />
           <folding>
-            <marker date="1543227268900" expanded="true" signature="0:151" ph="/* ReSharper disable CompareOfFloatsByEqualityOperator ... */" />
-            <marker date="1543227268900" expanded="false" signature="159:206" ph="..." />
-            <marker date="1543227268900" expanded="true" signature="223:73324" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="274:73322" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="375:3835" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="3946:9488" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="9603:23503" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="23614:40845" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="40954:43034" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="43143:48332" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="48443:53625" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="53732:59384" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="59489:62217" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="62322:66660" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="66767:71188" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="71312:73316" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="0:151" ph="/* ReSharper disable CompareOfFloatsByEqualityOperator ... */" />
+            <marker date="1543229355058" expanded="false" signature="159:206" ph="..." />
+            <marker date="1543229355058" expanded="true" signature="223:73630" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="274:73628" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="375:3835" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="3946:9488" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="9603:23503" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="23614:40845" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="40954:43070" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="43179:48422" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="48533:53769" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="53876:59582" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="59687:62415" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="62520:66912" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="67019:71494" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="71618:73622" ph="{...}" />
           </folding>
         </state>
       </provider>
@@ -438,6 +438,52 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Tests/Serialization.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="767" column="20" selection-start-line="767" selection-start-column="20" selection-end-line="767" selection-end-column="20" />
+          <folding>
+            <marker date="1543229355058" expanded="true" signature="0:151" ph="/* ReSharper disable CompareOfFloatsByEqualityOperator ... */" />
+            <marker date="1543229355058" expanded="false" signature="159:206" ph="..." />
+            <marker date="1543229355058" expanded="true" signature="223:73630" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="274:73628" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="375:3835" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="3946:9488" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="9603:23503" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="23614:40845" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="40954:43070" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="43179:48422" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="48533:53769" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="53876:59582" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="59687:62415" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="62520:66912" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="67019:71494" ph="{...}" />
+            <marker date="1543229355058" expanded="true" signature="71618:73622" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C3E4200C-CDA7-4037-B5FC-8C34C9135930/09/0ed7f6ea/MemoryStream.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-27">
+          <caret line="18" column="15" selection-start-line="18" selection-start-column="15" selection-end-line="18" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Proto/test.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="8316" column="25" selection-start-line="8316" selection-start-column="25" selection-end-line="8316" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C3E4200C-CDA7-4037-B5FC-8C34C9135930/9b/20d4dd76/Guid.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Symbols/src/nunit/nunit/502a844c0b104731c7f5d57ef6d0df436d4b75af/src/NUnitFramework/framework/Internal/Reflect.cs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -445,17 +491,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Proto/test.cs">
+    <entry file="file://$PROJECT_DIR$/Proto/fbe.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="7679" column="15" selection-start-line="7679" selection-start-column="15" selection-end-line="7679" selection-end-column="15" />
+        <state relative-caret-position="187">
+          <caret line="10064" column="101" lean-forward="true" selection-start-line="10064" selection-start-column="101" selection-end-line="10064" selection-end-column="101" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Tests/SerializationJson.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4703">
-          <caret line="409" column="30" selection-start-line="409" selection-start-column="30" selection-end-line="409" selection-end-column="30" />
+        <state relative-caret-position="117">
+          <caret line="403" column="20" selection-start-line="403" selection-start-column="20" selection-end-line="403" selection-end-column="20" />
           <folding>
             <marker date="1543227268904" expanded="true" signature="0:151" ph="/* ReSharper disable CompareOfFloatsByEqualityOperator ... */" />
             <marker date="1543227268904" expanded="false" signature="159:189" ph="..." />
@@ -473,45 +519,6 @@
             <marker date="1543227268904" expanded="true" signature="70430:75855" ph="{...}" />
             <marker date="1543227268904" expanded="true" signature="75973:81440" ph="{...}" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Tests/Serialization.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="796" column="12" selection-start-line="796" selection-start-column="12" selection-end-line="796" selection-end-column="12" />
-          <folding>
-            <marker date="1543227268900" expanded="true" signature="0:151" ph="/* ReSharper disable CompareOfFloatsByEqualityOperator ... */" />
-            <marker date="1543227268900" expanded="false" signature="159:206" ph="..." />
-            <marker date="1543227268900" expanded="true" signature="223:73324" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="274:73322" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="375:3835" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="3946:9488" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="9603:23503" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="23614:40845" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="40954:43034" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="43143:48332" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="48443:53625" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="53732:59384" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="59489:62217" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="62322:66660" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="66767:71188" ph="{...}" />
-            <marker date="1543227268900" expanded="true" signature="71312:73316" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Proto/fbe.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="1436" column="12" selection-start-line="1436" selection-start-column="12" selection-end-line="1436" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/C3E4200C-CDA7-4037-B5FC-8C34C9135930/09/0ed7f6ea/MemoryStream.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="264" column="8" selection-start-line="264" selection-start-column="8" selection-end-line="264" selection-end-column="8" />
         </state>
       </provider>
     </entry>
