@@ -28,7 +28,7 @@ Typical usage workflow is the following:
 1. [Create domain model](#create-domain-model) using base types, enums,
    flags and structs
 2. [Generate domain model](#generate-domain-model) for any supported
-   programming languages (C++, C#, Java, JavaScript, Kotlin, Python, Ruby)
+   programming languages (C++, C#, Go, Java, JavaScript, Kotlin, Python, Ruby)
 3. [Build domain model](#build-domain-model) library
 4. [Serialize/Deserialize](#fbe-serialization) objects from the domain model
    in unified, fast and compact FastBinaryEncoding (FBE) format
@@ -40,6 +40,7 @@ Sample projects:
 * [C++ sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/examples)
 * [C# sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/CSharp)
 * [.NET Core sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/.NETCore)
+* [Go sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Go)
 * [Java sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Java)
 * [JavaScript sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/JavaScript)
 * [Kotlin sample](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Kotlin)
@@ -69,7 +70,7 @@ Sample projects:
 
 # Features
 * Cross platform (Linux, OSX, Windows)
-* [Generators for C++, C#, Java, JavaScript, Kotlin, Python, Ruby](#generate-domain-model)
+* [Generators for C++, C#, Go, Java, JavaScript, Kotlin, Python, Ruby](#generate-domain-model)
 * [Fast binary encoding format](documents/FBE.md)
 * [Supported base types (byte, bool, char, wchar, int8, int16, int32, int64, float, double)](documents/FBE.md#base-types)
 * [Supported complex types (bytes, decimal, string, timestamp, uuid)](documents/FBE.md#complex-types)
@@ -235,13 +236,14 @@ Options:
   -t, --tabs            Format with tabs. Default: off
   --cpp                 Generate C++ code
   --csharp              Generate C# code
+  --go                  Generate Go code
   --java                Generate Java code
   --javascript          Generate JavaScript code
   --kotlin              Generate Kotlin code
   --python              Generate Python code
   --ruby                Generate Ruby code
-  --final               Generate Final protocol code
-  --json                Generate JSON protocol code
+  --final               Generate Final serialization code
+  --json                Generate JSON serialization code
   --sender              Generate Sender/Receiver protocol code
 ```
 
@@ -256,19 +258,27 @@ dependencies that worth to be mentioned:
 * C++ has no native support for decimal type. Currently decimal type is
   emulated with a double type. FBE does not use [GMPLib](https://gmplib.org)
   because of heavy dependency in generated source code;
-* JSON protocol is implemented using [RapidJSON](http://rapidjson.org) library.
+* JSON serialization is implemented using [RapidJSON](http://rapidjson.org) library.
   Therefore its headers should be available (header only library);
 
 ### C#
-* JSON protocol is implemented using [Json.NET](https://www.newtonsoft.com/json)
-  library. Therefore its package should be imported using NuGet;
+* JSON serialization is implemented using [Json.NET](https://www.newtonsoft.com/json) library.
+  Therefore it should be imported using NuGet;
 * Fast JSON serialization libraty is also available - [Utf8Json ](https://github.com/neuecc/Utf8Json).
   If you want to try it, you should import is with NuGet and build domain model
   with 'UTF8JSON' definition;
 
+### Go
+* JSON serialization is based on [jsoniter](https://github.com/json-iterator/go) package.
+  Therefore it should be imported using 'go get github.com/json-iterator/go'
+* Decimal type is based on [shopspring/decimal](https://github.com/shopspring/decimal) package.
+  Therefore it should be imported using 'go get github.com/shopspring/decimal'
+* UUID type is based on [goolge/uuid](https://github.com/google/uuid) package.
+  Therefore it should be imported using 'go get github.com/google/uuid'
+
 ### Java
-* JSON protocol is implemented using [Gson](https://github.com/google/gson)
-  library. Therefore its package should be imported using Maven;
+* JSON serialization is implemented using [Gson](https://github.com/google/gson) package.
+  Therefore it should be imported using Maven;
 
 ### JavaScript
 * JavaScript domain model is implemented using [ECMAScript 6](http://es6-features.org)
@@ -278,11 +288,11 @@ dependencies that worth to be mentioned:
 * Starting from the version 1.3 [Kotlin supports unsigned integer numbers (UByte, UShort, UInt, ULong)](https://github.com/Kotlin/KEEP/blob/unsigned_types/proposals/unsigned-types.md).
   This gives ability to represent FBE domain model more accurately than Java
   language does.
-* JSON protocol is implemented using [Gson](https://github.com/google/gson)
-  library. Therefore its package should be imported using Maven;
+* JSON serialization is implemented using [Gson](https://github.com/google/gson) package.
+  Therefore it should be imported using Maven;
 
 ### Python
-* Python domain model is implemented using Python 3.7 ([time.time_ns()](https://docs.python.org/3/library/time.html#time.time_ns));
+* Only Python 3.7 is supported ([time.time_ns()](https://docs.python.org/3/library/time.html#time.time_ns));
 
 ### Ruby
 * Some Ruby dependencies should be installed from Gems:
@@ -445,16 +455,17 @@ Account(
 
 # JSON serialization
 If the domain model compiled with [--json](#generate-domain-model) flag,
-then JSON protocol code will be generated in all domain objects.
+then JSON serialization code will be generated in all domain objects.
 As the result each domain object can be serialized/deserialized into/from
 [JSON format](https://www.json.org).
 
 Please note that some programming languages have native JSON support
 (JavaScript, Python). Other languages requires third-party library
 to get work with JSON:
-* C++ requires [RapidJSON](http://rapidjson.org)
-* C# requires [Json.NET](https://www.newtonsoft.com/json) or more faster [Utf8Json ](https://github.com/neuecc/Utf8Json)
-* Java and Kotlin requires [Gson](https://github.com/google/gson)
+* C++ requires [RapidJSON](http://rapidjson.org) library
+* C# requires [Json.NET](https://www.newtonsoft.com/json) package or more faster [Utf8Json](https://github.com/neuecc/Utf8Json) package
+* Go requires [jsoniter](https://github.com/json-iterator/go) package
+* Java and Kotlin requires [Gson](https://github.com/google/gson) package
 * Ruby requires [json](https://rubygems.org/gems/json) gem
 
 Here is an exmple of JSON serialization in C++ language:
@@ -588,6 +599,7 @@ import protoex
 Package import is implemented using:
 * #include "..." directive in C++
 * Namespaces in C#
+* Packages in Go
 * Packages in Java and Kotlin
 * Modules in JavaScript
 * Modules in Python
@@ -934,6 +946,7 @@ account.orders.emplace_back(3, "EURUSD", OrderSide::buy, OrderType::stop, 1.5, 1
 * [C++ benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/performance) results were taken using [CppBenchmark library](https://github.com/chronoxor/CppBenchmark)
 * [C# benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/CSharp/Benchmarks) results were taken using [BenchmarkDotNet library](https://benchmarkdotnet.org)
 * [.NET Core benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/.NETCore/Benchmarks) results were taken using [BenchmarkDotNet library](https://benchmarkdotnet.org)
+* [Go benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Go/benchmarks) results were taken using [testing package](https://golang.org/pkg/testing)
 * [Java benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Java/src/benchmarks) results were taken using [JMH library](http://openjdk.java.net/projects/code-tools/jmh)
 * [JavaScript benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/JavaScript/benchmarks) results were taken using [Benchmark.js library](https://benchmarkjs.com)
 * [Kotlin benchmarks](https://github.com/chronoxor/FastBinaryEncoding/tree/master/projects/Kotlin/src/benchmarks) results were taken using [JMH library](http://openjdk.java.net/projects/code-tools/jmh)
@@ -966,6 +979,9 @@ Serialization benchmark results:
 | .NET Core Linux          |    252 bytes |    1 189 768 ops/s |             841 ns |
 | .NET Core Linux (Final)  |    152 bytes |    1 315 270 ops/s |             760 ns |
 | .NET Core Linux (JSON)   |    341 bytes |      366 435 ops/s |           2 729 ns |
+| Go Win64                 |    ??? bytes |          ??? ops/s |             ??? ns |
+| Go Win64 (Final)         |    ??? bytes |          ??? ops/s |             ??? ns |
+| Go Win64 (JSON)          |    ??? bytes |          ??? ops/s |             ??? ns |
 | Java Win64               |    252 bytes |    4 247 162 ops/s |             236 ns |
 | Java Win64 (Final)       |    152 bytes |    4 883 205 ops/s |             205 ns |
 | Java Win64 (JSON)        |    353 bytes |      213 983 ops/s |           4 673 ns |
@@ -1005,6 +1021,9 @@ Deserialization benchmark results:
 | .NET Core Linux          |    252 bytes |        804 052 ops/s |             1 244 ns |
 | .NET Core Linux (Final)  |    152 bytes |      1 343 544 ops/s |               744 ns |
 | .NET Core Linux (JSON)   |    341 bytes |        222 074 ops/s |             4 503 ns |
+| Go Win64                 |    ??? bytes |            ??? ops/s |               ??? ns |
+| Go Win64 (Final)         |    ??? bytes |            ??? ops/s |               ??? ns |
+| Go Win64 (JSON)          |    ??? bytes |            ??? ops/s |               ??? ns |
 | Java Win64               |    252 bytes |      2 688 084 ops/s |               372 ns |
 | Java Win64 (Final)       |    152 bytes |      3 036 020 ops/s |               329 ns |
 | Java Win64 (JSON)        |    353 bytes |        308 675 ops/s |             3 240 ns |
@@ -1041,6 +1060,8 @@ Verify benchmark results:
 | C# Win64 (Final)         |    152 bytes |  8 064 516 ops/s |      124 ns |
 | .NET Core Linux          |    252 bytes |  3 718 855 ops/s |      269 ns |
 | .NET Core Linux (Final)  |    152 bytes |  6 653 360 ops/s |      150 ns |
+| Go Win64                 |    ??? bytes |        ??? ops/s |      ??? ns |
+| Go Win64 (Final)         |    ??? bytes |        ??? ops/s |      ??? ns |
 | Java Win64               |    252 bytes | 11 790 374 ops/s |       85 ns |
 | Java Win64 (Final)       |    152 bytes | 16 205 533 ops/s |       62 ns |
 | JavaScript Win64         |    252 bytes |  1 105 627 ops/s |      905 ns |
