@@ -9,6 +9,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proto/Proto.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/Proto.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Proto/fbe.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/fbe.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/Serialization.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/Serialization.cs" afterDir="false" />
     </list>
@@ -54,11 +55,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="SerializationJson.cs" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SerializationJson.cs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Tests/SerializationJson.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="117">
-              <caret line="403" column="20" selection-start-line="403" selection-start-column="20" selection-end-line="403" selection-end-column="20" />
+            <state relative-caret-position="121">
+              <caret line="697" column="20" selection-start-line="697" selection-start-column="20" selection-end-line="697" selection-end-column="20" />
               <folding>
                 <marker date="1543227268904" expanded="true" signature="0:151" ph="/* ReSharper disable CompareOfFloatsByEqualityOperator ... */" />
                 <marker date="1543227268904" expanded="false" signature="159:189" ph="..." />
@@ -89,11 +90,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="fbe.cs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="fbe.cs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Proto/fbe.cs">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="10064" column="101" lean-forward="true" selection-start-line="10064" selection-start-column="101" selection-end-line="10064" selection-end-column="101" />
+            <state relative-caret-position="260">
+              <caret line="10088" column="14" selection-start-line="10088" selection-start-column="14" selection-end-line="10088" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -282,12 +283,12 @@
       <workItem from="1539975712908" duration="620000" />
       <workItem from="1542900650278" duration="899000" />
       <workItem from="1543192699474" duration="4329000" />
-      <workItem from="1543227824168" duration="5091000" />
+      <workItem from="1543227824168" duration="7092000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10984000" />
+    <option name="totallyTimeSpent" value="12985000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -304,8 +305,8 @@
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="right" id="Errors In Solution" order="3" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.32895523" side_tool="true" visible="true" weight="0.47368422" />
-      <window_info active="true" anchor="bottom" id="Unit Tests" order="11" sideWeight="0.67104477" visible="true" weight="0.47368422" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.33074626" side_tool="true" visible="true" weight="0.45567867" />
+      <window_info active="true" anchor="bottom" id="Unit Tests" order="11" sideWeight="0.6692537" visible="true" weight="0.45567867" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Version Control" order="9" />
@@ -316,7 +317,7 @@
       <window_info anchor="bottom" id="Build" order="14" sideWeight="0.4997015" weight="0.32825485" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4967164" weight="0.39889196" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49492538" weight="0.39889196" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -356,8 +357,47 @@
           </properties>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Tests/SerializationJson.cs</url>
+          <line>66</line>
+          <properties documentPath="$PROJECT_DIR$/Tests/SerializationJson.cs" initialLine="66">
+            <startOffsets>
+              <startOffset value="4214" />
+            </startOffsets>
+            <endOffsets>
+              <endOffset value="4261" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Proto/fbe.cs</url>
+          <line>10079</line>
+          <properties documentPath="$PROJECT_DIR$/Proto/fbe.cs" initialLine="10079">
+            <startOffsets>
+              <startOffset value="367174" />
+            </startOffsets>
+            <endOffsets>
+              <endOffset value="367253" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Proto/fbe.cs</url>
+          <line>10088</line>
+          <properties documentPath="$PROJECT_DIR$/Proto/fbe.cs" initialLine="10088">
+            <startOffsets>
+              <startOffset value="367552" />
+            </startOffsets>
+            <endOffsets>
+              <endOffset value="367614" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="5" />
+      <option name="time" value="11" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -491,17 +531,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Proto/fbe.cs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="10064" column="101" lean-forward="true" selection-start-line="10064" selection-start-column="101" selection-end-line="10064" selection-end-column="101" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Tests/SerializationJson.cs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="117">
-          <caret line="403" column="20" selection-start-line="403" selection-start-column="20" selection-end-line="403" selection-end-column="20" />
+        <state relative-caret-position="121">
+          <caret line="697" column="20" selection-start-line="697" selection-start-column="20" selection-end-line="697" selection-end-column="20" />
           <folding>
             <marker date="1543227268904" expanded="true" signature="0:151" ph="/* ReSharper disable CompareOfFloatsByEqualityOperator ... */" />
             <marker date="1543227268904" expanded="false" signature="159:189" ph="..." />
@@ -519,6 +552,13 @@
             <marker date="1543227268904" expanded="true" signature="70430:75855" ph="{...}" />
             <marker date="1543227268904" expanded="true" signature="75973:81440" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Proto/fbe.cs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="10088" column="14" selection-start-line="10088" selection-start-column="14" selection-end-line="10088" selection-end-column="14" />
         </state>
       </provider>
     </entry>

@@ -3655,6 +3655,28 @@ void GeneratorCSharp::GenerateFBEJson()
 
 #else
 
+    public class BytesConverter : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            return (objectType == typeof(MemoryStream));
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(System.Convert.ToBase64String(((MemoryStream)value).GetBuffer()));
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.Value == null)
+                return null;
+
+            var buffer = System.Convert.FromBase64String((string)reader.Value);
+            return new MemoryStream(buffer, 0, buffer.Length, true, true);
+        }
+    }
+
     public class CharConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
@@ -3750,7 +3772,14 @@ void GeneratorCSharp::GenerateFBEJson()
         {
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings
             {
-                Converters = new List<JsonConverter> { new CharConverter(), new DateTimeConverter(), new DecimalConverter(), new GuidConverter() }
+                Converters = new List<JsonConverter>
+                {
+                    new BytesConverter(),
+                    new CharConverter(),
+                    new DateTimeConverter(),
+                    new DecimalConverter(),
+                    new GuidConverter()
+                }
             };
         }
 
