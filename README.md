@@ -269,9 +269,9 @@ dependencies that worth to be mentioned:
   with 'UTF8JSON' definition;
 
 ### Go
-* JSON serialization is based on [jsoniter](https://github.com/json-iterator/go) package (`go get github.com/json-iterator/go`)
-* Decimal type is based on [shopspring/decimal](https://github.com/shopspring/decimal) package (`go get github.com/shopspring/decimal`)
-* UUID type is based on [goolge/uuid](https://github.com/google/uuid) package (`go get github.com/google/uuid`)
+* JSON serialization is based on [jsoniter](https://github.com/json-iterator/go) package (`go get github.com/json-iterator/go`);
+* Decimal type is based on [shopspring/decimal](https://github.com/shopspring/decimal) package (`go get github.com/shopspring/decimal`);
+* UUID type is based on [goolge/uuid](https://github.com/google/uuid) package (`go get github.com/google/uuid`);
 
 ### Java
 * JSON serialization is implemented using [Gson](https://github.com/google/gson) package.
@@ -284,7 +284,7 @@ dependencies that worth to be mentioned:
 ### Kotlin
 * Starting from the version 1.3 [Kotlin supports unsigned integer numbers (UByte, UShort, UInt, ULong)](https://github.com/Kotlin/KEEP/blob/unsigned_types/proposals/unsigned-types.md).
   This gives ability to represent FBE domain model more accurately than Java
-  language does.
+  language does;
 * JSON serialization is implemented using [Gson](https://github.com/google/gson) package.
   Therefore it should be imported using Maven;
 
