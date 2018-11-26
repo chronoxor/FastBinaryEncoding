@@ -50,7 +50,8 @@ namespace FBE {
 
 //! Bytes buffer type
 /*!
-    Represents bytes buffer
+    Represents bytes buffer which is a lightweight wrapper around std::vector<uint8_t>
+    with similar interface.
 */
 class buffer_t
 {

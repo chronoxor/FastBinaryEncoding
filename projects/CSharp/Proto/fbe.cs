@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Numerics;
 using System.Text;
 #if UTF8JSON
@@ -1338,7 +1339,7 @@ namespace FBE {
     }
 
     // Fast Binary Encoding bytes field model class
-    public class FieldModelBytes : FieldModelReferenceType<byte[]>
+    public class FieldModelBytes : FieldModelReferenceType<MemoryStream>
     {
         public FieldModelBytes(Buffer buffer, long offset) : base(buffer, offset) {}
 
@@ -1362,7 +1363,7 @@ namespace FBE {
         }
 
         // Clone the field model
-        public override FieldModelReferenceType<byte[]> Clone() { return new FieldModelBytes(_buffer, _offset); }
+        public override FieldModelReferenceType<MemoryStream> Clone() { return new FieldModelBytes(_buffer, _offset); }
 
         // Check if the bytes value is valid
         public override bool Verify()
@@ -1385,8 +1386,8 @@ namespace FBE {
         }
 
         // Get the bytes value
-        public override void Get(out byte[] value) { Get(out value, new byte[0]); }
-        public override void Get(out byte[] value, byte[] defaults)
+        public override void Get(out MemoryStream value) { Get(out value, new MemoryStream(0)); }
+        public override void Get(out MemoryStream value, MemoryStream defaults)
         {
             Debug.Assert((defaults != null), "Invalid default bytes value!");
             if (defaults == null)
@@ -1410,11 +1411,12 @@ namespace FBE {
             if ((_buffer.Offset + fbeBytesOffset + 4 + fbeBytesSize) > _buffer.Size)
                 return;
 
-            value = ReadBytes(fbeBytesOffset + 4, fbeBytesSize);
+            var buffer = ReadBytes(fbeBytesOffset + 4, fbeBytesSize);
+            value.Write(buffer, 0, buffer.Length);
         }
 
         // Set the bytes value
-        public override void Set(byte[] value)
+        public override void Set(MemoryStream value)
         {
             Debug.Assert((value != null), "Invalid bytes value!");
             if (value == null)
@@ -1432,7 +1434,7 @@ namespace FBE {
 
             Write(FBEOffset, fbeBytesOffset);
             Write(fbeBytesOffset, fbeBytesSize);
-            Write(fbeBytesOffset + 4, value);
+            Write(fbeBytesOffset + 4, value.GetBuffer());
         }
     }
 
@@ -6264,15 +6266,15 @@ namespace FBE {
     }
 
     // Fast Binary Encoding bytes final model class
-    public class FinalModelBytes : FinalModelReferenceType<byte[]>
+    public class FinalModelBytes : FinalModelReferenceType<MemoryStream>
     {
         public FinalModelBytes(Buffer buffer, long offset) : base(buffer, offset) {}
 
         // Get the allocation size
-        public override long FBEAllocationSize(byte[] value) { return 4 + value.Length; }
+        public override long FBEAllocationSize(MemoryStream value) { return 4 + value.Length; }
 
         // Clone the final model
-        public override FinalModelReferenceType<byte[]> Clone() { return new FinalModelBytes(_buffer, _offset); }
+        public override FinalModelReferenceType<MemoryStream> Clone() { return new FinalModelBytes(_buffer, _offset); }
 
         // Check if the bytes value is valid
         public override long Verify()
@@ -6288,29 +6290,26 @@ namespace FBE {
         }
 
         // Get the bytes value
-        public override long Get(out byte[] value)
+        public override long Get(out MemoryStream value)
         {
+            value = new MemoryStream(0);
+
             Debug.Assert(((_buffer.Offset + FBEOffset + 4) <= _buffer.Size), "Model is broken!");
             if ((_buffer.Offset + FBEOffset + 4) > _buffer.Size)
-            {
-                value = new byte[0];
                 return 0;
-            }
 
             uint fbeBytesSize = ReadUInt32(FBEOffset);
             Debug.Assert(((_buffer.Offset + FBEOffset + 4 + fbeBytesSize) <= _buffer.Size), "Model is broken!");
             if ((_buffer.Offset + FBEOffset + 4 + fbeBytesSize) > _buffer.Size)
-            {
-                value = new byte[0];
                 return 4;
-            }
 
-            value = ReadBytes(FBEOffset + 4, fbeBytesSize);
+            var buffer = ReadBytes(FBEOffset + 4, fbeBytesSize);
+            value.Write(buffer, 0, buffer.Length);
             return 4 + fbeBytesSize;
         }
 
         // Set the bytes value
-        public override long Set(byte[] value)
+        public override long Set(MemoryStream value)
         {
             Debug.Assert((value != null), "Invalid bytes value!");
             if (value == null)
@@ -6326,7 +6325,7 @@ namespace FBE {
                 return 4;
 
             Write(FBEOffset, fbeBytesSize);
-            Write(FBEOffset + 4, value);
+            Write(FBEOffset + 4, value.GetBuffer());
             return 4 + fbeBytesSize;
         }
     }
@@ -9875,6 +9874,19 @@ namespace FBE {
 
 #if UTF8JSON
 
+    public class CharConverter : IJsonFormatter<Char>
+    {
+        public void Serialize(ref JsonWriter writer, Char value, IJsonFormatterResolver jsonFormatterResolver)
+        {
+            writer.WriteUInt32(value);
+        }
+
+        public Char Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
+        {
+            return (char)reader.ReadUInt32();
+        }
+    }
+
     public class DateTimeConverter : IJsonFormatter<DateTime>
     {
         private const long UnixEpoch = 621355968000000000;
@@ -9923,7 +9935,7 @@ namespace FBE {
     {
         static Json()
         {
-            CompositeResolver.RegisterAndSetAsDefault(new IJsonFormatter[] { new DateTimeConverter(), new DecimalConverter(), new GuidConverter() }, new[] { StandardResolver.Default });
+            CompositeResolver.RegisterAndSetAsDefault(new IJsonFormatter[] { new CharConverter(), new DateTimeConverter(), new DecimalConverter(), new GuidConverter() }, new[] { StandardResolver.Default });
         }
 
         public static string ToJson<T>(T value) { return Encoding.UTF8.GetString(JsonSerializer.Serialize(value)); }
@@ -9931,6 +9943,27 @@ namespace FBE {
     }
 
 #else
+
+    public class CharConverter : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            return (objectType == typeof(Char)) || (objectType == typeof(Char?));
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue((uint)(char)value);
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.Value == null)
+                return null;
+
+            return (char)(uint)reader.Value;
+        }
+    }
 
     public class DateTimeConverter : JsonConverter
     {
@@ -10006,7 +10039,7 @@ namespace FBE {
         {
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings
             {
-                Converters = new List<JsonConverter> { new DateTimeConverter(), new DecimalConverter(), new GuidConverter() }
+                Converters = new List<JsonConverter> { new CharConverter(), new DateTimeConverter(), new DecimalConverter(), new GuidConverter() }
             };
         }
 

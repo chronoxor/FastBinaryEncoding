@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Numerics;
 using System.Text;
 #if UTF8JSON
@@ -7675,18 +7676,18 @@ namespace test {
 
     public struct StructBytes : IComparable, IComparable<StructBytes>, IEquatable<StructBytes>
     {
-        public byte[] f1;
-        public byte[] f2;
-        public byte[] f3;
+        public MemoryStream f1;
+        public MemoryStream f2;
+        public MemoryStream f3;
 
         public static StructBytes Default => new StructBytes
         {
-            f1 = new byte[0]
+            f1 = new MemoryStream(0)
             , f2 = null
             , f3 = null
         };
 
-        public StructBytes(byte[] f1, byte[] f2, byte[] f3)
+        public StructBytes(MemoryStream f1, MemoryStream f2, MemoryStream f3)
         {
             this.f1 = f1;
             this.f2 = f2;
@@ -7763,15 +7764,15 @@ namespace test {
     // Fast Binary Encoding StructBytes field model class
     public class FieldModelStructBytes : FieldModelValueType<StructBytes>
     {
-        public readonly FieldModelReferenceType<byte[]> f1;
-        public readonly FieldModelOptionalReferenceType<byte[], FieldModelReferenceType<byte[]>> f2;
-        public readonly FieldModelOptionalReferenceType<byte[], FieldModelReferenceType<byte[]>> f3;
+        public readonly FieldModelReferenceType<MemoryStream> f1;
+        public readonly FieldModelOptionalReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>> f2;
+        public readonly FieldModelOptionalReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>> f3;
 
         public FieldModelStructBytes(Buffer buffer, long offset) : base(buffer, offset)
         {
-            f1 = FieldModelReferenceType<byte[]>.CreateFieldModel(BaseTypes.BYTES, buffer, 4 + 4);
-            f2 = new FieldModelOptionalReferenceType<byte[], FieldModelReferenceType<byte[]>>(FieldModelReferenceType<byte[]>.CreateFieldModel(BaseTypes.BYTES, buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize);
-            f3 = new FieldModelOptionalReferenceType<byte[], FieldModelReferenceType<byte[]>>(FieldModelReferenceType<byte[]>.CreateFieldModel(BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
+            f1 = FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, 4 + 4);
+            f2 = new FieldModelOptionalReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize);
+            f3 = new FieldModelOptionalReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
         }
 
         // Get the field size
@@ -7924,7 +7925,7 @@ namespace test {
             if ((fbeCurrentSize + f1.FBESize) <= fbeStructSize)
                 f1.Get(out fbeValue.f1);
             else
-                fbeValue.f1 = new byte[0];
+                fbeValue.f1 = new MemoryStream(0);
             fbeCurrentSize += f1.FBESize;
 
             if ((fbeCurrentSize + f2.FBESize) <= fbeStructSize)
@@ -8086,15 +8087,15 @@ namespace test {
     // Fast Binary Encoding StructBytes final model class
     public class FinalModelStructBytes : FinalModelValueType<StructBytes>
     {
-        public readonly FinalModelReferenceType<byte[]> f1;
-        public readonly FinalModelOptionalReferenceType<byte[], FinalModelReferenceType<byte[]>> f2;
-        public readonly FinalModelOptionalReferenceType<byte[], FinalModelReferenceType<byte[]>> f3;
+        public readonly FinalModelReferenceType<MemoryStream> f1;
+        public readonly FinalModelOptionalReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>> f2;
+        public readonly FinalModelOptionalReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>> f3;
 
         public FinalModelStructBytes(Buffer buffer, long offset) : base(buffer, offset)
         {
-            f1 = FinalModelReferenceType<byte[]>.CreateFinalModel(BaseTypes.BYTES, buffer, 0);
-            f2 = new FinalModelOptionalReferenceType<byte[], FinalModelReferenceType<byte[]>>(FinalModelReferenceType<byte[]>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
-            f3 = new FinalModelOptionalReferenceType<byte[], FinalModelReferenceType<byte[]>>(FinalModelReferenceType<byte[]>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
+            f1 = FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0);
+            f2 = new FinalModelOptionalReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
+            f3 = new FinalModelOptionalReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
         }
 
         // Get the allocation size
@@ -8315,8 +8316,8 @@ namespace test {
     {
         public byte[] f1;
         public byte?[] f2;
-        public byte[][] f3;
-        public byte[][] f4;
+        public MemoryStream[] f3;
+        public MemoryStream[] f4;
         public EnumSimple[] f5;
         public EnumSimple?[] f6;
         public FlagsSimple[] f7;
@@ -8328,8 +8329,8 @@ namespace test {
         {
             f1 = new byte[2]
             , f2 = new byte?[2]
-            , f3 = new byte[2][]
-            , f4 = new byte[2][]
+            , f3 = new MemoryStream[2]
+            , f4 = new MemoryStream[2]
             , f5 = new EnumSimple[2]
             , f6 = new EnumSimple?[2]
             , f7 = new FlagsSimple[2]
@@ -8338,7 +8339,7 @@ namespace test {
             , f10 = new StructSimple?[2]
         };
 
-        public StructArray(byte[] f1, byte?[] f2, byte[][] f3, byte[][] f4, EnumSimple[] f5, EnumSimple?[] f6, FlagsSimple[] f7, FlagsSimple?[] f8, StructSimple[] f9, StructSimple?[] f10)
+        public StructArray(byte[] f1, byte?[] f2, MemoryStream[] f3, MemoryStream[] f4, EnumSimple[] f5, EnumSimple?[] f6, FlagsSimple[] f7, FlagsSimple?[] f8, StructSimple[] f9, StructSimple?[] f10)
         {
             this.f1 = f1;
             this.f2 = f2;
@@ -8531,8 +8532,8 @@ namespace test {
     {
         public readonly FieldModelArrayValueType<byte, FieldModelValueType<byte>> f1;
         public readonly FieldModelArrayOptionalValueType<byte, FieldModelValueType<byte>> f2;
-        public readonly FieldModelArrayReferenceType<byte[], FieldModelReferenceType<byte[]>> f3;
-        public readonly FieldModelArrayOptionalReferenceType<byte[], FieldModelReferenceType<byte[]>> f4;
+        public readonly FieldModelArrayReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>> f3;
+        public readonly FieldModelArrayOptionalReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>> f4;
         public readonly FieldModelArrayValueType<EnumSimple, FieldModelEnumSimple> f5;
         public readonly FieldModelArrayOptionalValueType<EnumSimple, FieldModelEnumSimple> f6;
         public readonly FieldModelArrayValueType<FlagsSimple, FieldModelFlagsSimple> f7;
@@ -8544,8 +8545,8 @@ namespace test {
         {
             f1 = new FieldModelArrayValueType<byte, FieldModelValueType<byte>>(FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, 4 + 4), buffer, 4 + 4, 2);
             f2 = new FieldModelArrayOptionalValueType<byte, FieldModelValueType<byte>>(FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize, 2);
-            f3 = new FieldModelArrayReferenceType<byte[], FieldModelReferenceType<byte[]>>(FieldModelReferenceType<byte[]>.CreateFieldModel(BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize, 2);
-            f4 = new FieldModelArrayOptionalReferenceType<byte[], FieldModelReferenceType<byte[]>>(FieldModelReferenceType<byte[]>.CreateFieldModel(BaseTypes.BYTES, buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize, 2);
+            f3 = new FieldModelArrayReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize, 2);
+            f4 = new FieldModelArrayOptionalReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize, 2);
             f5 = new FieldModelArrayValueType<EnumSimple, FieldModelEnumSimple>(new FieldModelEnumSimple(buffer, f4.FBEOffset + f4.FBESize), buffer, f4.FBEOffset + f4.FBESize, 2);
             f6 = new FieldModelArrayOptionalValueType<EnumSimple, FieldModelEnumSimple>(new FieldModelEnumSimple(buffer, f5.FBEOffset + f5.FBESize), buffer, f5.FBEOffset + f5.FBESize, 2);
             f7 = new FieldModelArrayValueType<FlagsSimple, FieldModelFlagsSimple>(new FieldModelFlagsSimple(buffer, f6.FBEOffset + f6.FBESize), buffer, f6.FBEOffset + f6.FBESize, 2);
@@ -8772,13 +8773,13 @@ namespace test {
             if ((fbeCurrentSize + f3.FBESize) <= fbeStructSize)
                 f3.Get(ref fbeValue.f3);
             else
-                fbeValue.f3 = new byte[2][];
+                fbeValue.f3 = new MemoryStream[2];
             fbeCurrentSize += f3.FBESize;
 
             if ((fbeCurrentSize + f4.FBESize) <= fbeStructSize)
                 f4.Get(ref fbeValue.f4);
             else
-                fbeValue.f4 = new byte[2][];
+                fbeValue.f4 = new MemoryStream[2];
             fbeCurrentSize += f4.FBESize;
 
             if ((fbeCurrentSize + f5.FBESize) <= fbeStructSize)
@@ -8973,8 +8974,8 @@ namespace test {
     {
         public readonly FinalModelArrayValueType<byte, FinalModelValueType<byte>> f1;
         public readonly FinalModelArrayOptionalValueType<byte, FinalModelValueType<byte>> f2;
-        public readonly FinalModelArrayReferenceType<byte[], FinalModelReferenceType<byte[]>> f3;
-        public readonly FinalModelArrayOptionalReferenceType<byte[], FinalModelReferenceType<byte[]>> f4;
+        public readonly FinalModelArrayReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>> f3;
+        public readonly FinalModelArrayOptionalReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>> f4;
         public readonly FinalModelArrayValueType<EnumSimple, FinalModelEnumSimple> f5;
         public readonly FinalModelArrayOptionalValueType<EnumSimple, FinalModelEnumSimple> f6;
         public readonly FinalModelArrayValueType<FlagsSimple, FinalModelFlagsSimple> f7;
@@ -8986,8 +8987,8 @@ namespace test {
         {
             f1 = new FinalModelArrayValueType<byte, FinalModelValueType<byte>>(FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0, 2);
             f2 = new FinalModelArrayOptionalValueType<byte, FinalModelValueType<byte>>(FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0, 2);
-            f3 = new FinalModelArrayReferenceType<byte[], FinalModelReferenceType<byte[]>>(FinalModelReferenceType<byte[]>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0, 2);
-            f4 = new FinalModelArrayOptionalReferenceType<byte[], FinalModelReferenceType<byte[]>>(FinalModelReferenceType<byte[]>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0, 2);
+            f3 = new FinalModelArrayReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0, 2);
+            f4 = new FinalModelArrayOptionalReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0, 2);
             f5 = new FinalModelArrayValueType<EnumSimple, FinalModelEnumSimple>(new FinalModelEnumSimple(buffer, 0), buffer, 0, 2);
             f6 = new FinalModelArrayOptionalValueType<EnumSimple, FinalModelEnumSimple>(new FinalModelEnumSimple(buffer, 0), buffer, 0, 2);
             f7 = new FinalModelArrayValueType<FlagsSimple, FinalModelFlagsSimple>(new FinalModelFlagsSimple(buffer, 0), buffer, 0, 2);
@@ -9333,8 +9334,8 @@ namespace test {
     {
         public List<byte> f1;
         public List<byte?> f2;
-        public List<byte[]> f3;
-        public List<byte[]> f4;
+        public List<MemoryStream> f3;
+        public List<MemoryStream> f4;
         public List<EnumSimple> f5;
         public List<EnumSimple?> f6;
         public List<FlagsSimple> f7;
@@ -9346,8 +9347,8 @@ namespace test {
         {
             f1 = new List<byte>()
             , f2 = new List<byte?>()
-            , f3 = new List<byte[]>()
-            , f4 = new List<byte[]>()
+            , f3 = new List<MemoryStream>()
+            , f4 = new List<MemoryStream>()
             , f5 = new List<EnumSimple>()
             , f6 = new List<EnumSimple?>()
             , f7 = new List<FlagsSimple>()
@@ -9356,7 +9357,7 @@ namespace test {
             , f10 = new List<StructSimple?>()
         };
 
-        public StructVector(List<byte> f1, List<byte?> f2, List<byte[]> f3, List<byte[]> f4, List<EnumSimple> f5, List<EnumSimple?> f6, List<FlagsSimple> f7, List<FlagsSimple?> f8, List<StructSimple> f9, List<StructSimple?> f10)
+        public StructVector(List<byte> f1, List<byte?> f2, List<MemoryStream> f3, List<MemoryStream> f4, List<EnumSimple> f5, List<EnumSimple?> f6, List<FlagsSimple> f7, List<FlagsSimple?> f8, List<StructSimple> f9, List<StructSimple?> f10)
         {
             this.f1 = f1;
             this.f2 = f2;
@@ -9549,8 +9550,8 @@ namespace test {
     {
         public readonly FieldModelVectorValueType<byte, FieldModelValueType<byte>> f1;
         public readonly FieldModelVectorOptionalValueType<byte, FieldModelValueType<byte>> f2;
-        public readonly FieldModelVectorReferenceType<byte[], FieldModelReferenceType<byte[]>> f3;
-        public readonly FieldModelVectorOptionalReferenceType<byte[], FieldModelReferenceType<byte[]>> f4;
+        public readonly FieldModelVectorReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>> f3;
+        public readonly FieldModelVectorOptionalReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>> f4;
         public readonly FieldModelVectorValueType<EnumSimple, FieldModelEnumSimple> f5;
         public readonly FieldModelVectorOptionalValueType<EnumSimple, FieldModelEnumSimple> f6;
         public readonly FieldModelVectorValueType<FlagsSimple, FieldModelFlagsSimple> f7;
@@ -9562,8 +9563,8 @@ namespace test {
         {
             f1 = new FieldModelVectorValueType<byte, FieldModelValueType<byte>>(FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, 4 + 4), buffer, 4 + 4);
             f2 = new FieldModelVectorOptionalValueType<byte, FieldModelValueType<byte>>(FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize);
-            f3 = new FieldModelVectorReferenceType<byte[], FieldModelReferenceType<byte[]>>(FieldModelReferenceType<byte[]>.CreateFieldModel(BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
-            f4 = new FieldModelVectorOptionalReferenceType<byte[], FieldModelReferenceType<byte[]>>(FieldModelReferenceType<byte[]>.CreateFieldModel(BaseTypes.BYTES, buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize);
+            f3 = new FieldModelVectorReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
+            f4 = new FieldModelVectorOptionalReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize);
             f5 = new FieldModelVectorValueType<EnumSimple, FieldModelEnumSimple>(new FieldModelEnumSimple(buffer, f4.FBEOffset + f4.FBESize), buffer, f4.FBEOffset + f4.FBESize);
             f6 = new FieldModelVectorOptionalValueType<EnumSimple, FieldModelEnumSimple>(new FieldModelEnumSimple(buffer, f5.FBEOffset + f5.FBESize), buffer, f5.FBEOffset + f5.FBESize);
             f7 = new FieldModelVectorValueType<FlagsSimple, FieldModelFlagsSimple>(new FieldModelFlagsSimple(buffer, f6.FBEOffset + f6.FBESize), buffer, f6.FBEOffset + f6.FBESize);
@@ -9991,8 +9992,8 @@ namespace test {
     {
         public readonly FinalModelVectorValueType<byte, FinalModelValueType<byte>> f1;
         public readonly FinalModelVectorOptionalValueType<byte, FinalModelValueType<byte>> f2;
-        public readonly FinalModelVectorReferenceType<byte[], FinalModelReferenceType<byte[]>> f3;
-        public readonly FinalModelVectorOptionalReferenceType<byte[], FinalModelReferenceType<byte[]>> f4;
+        public readonly FinalModelVectorReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>> f3;
+        public readonly FinalModelVectorOptionalReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>> f4;
         public readonly FinalModelVectorValueType<EnumSimple, FinalModelEnumSimple> f5;
         public readonly FinalModelVectorOptionalValueType<EnumSimple, FinalModelEnumSimple> f6;
         public readonly FinalModelVectorValueType<FlagsSimple, FinalModelFlagsSimple> f7;
@@ -10004,8 +10005,8 @@ namespace test {
         {
             f1 = new FinalModelVectorValueType<byte, FinalModelValueType<byte>>(FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0);
             f2 = new FinalModelVectorOptionalValueType<byte, FinalModelValueType<byte>>(FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0);
-            f3 = new FinalModelVectorReferenceType<byte[], FinalModelReferenceType<byte[]>>(FinalModelReferenceType<byte[]>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
-            f4 = new FinalModelVectorOptionalReferenceType<byte[], FinalModelReferenceType<byte[]>>(FinalModelReferenceType<byte[]>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
+            f3 = new FinalModelVectorReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
+            f4 = new FinalModelVectorOptionalReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
             f5 = new FinalModelVectorValueType<EnumSimple, FinalModelEnumSimple>(new FinalModelEnumSimple(buffer, 0), buffer, 0);
             f6 = new FinalModelVectorOptionalValueType<EnumSimple, FinalModelEnumSimple>(new FinalModelEnumSimple(buffer, 0), buffer, 0);
             f7 = new FinalModelVectorValueType<FlagsSimple, FinalModelFlagsSimple>(new FinalModelFlagsSimple(buffer, 0), buffer, 0);
@@ -10351,8 +10352,8 @@ namespace test {
     {
         public LinkedList<byte> f1;
         public LinkedList<byte?> f2;
-        public LinkedList<byte[]> f3;
-        public LinkedList<byte[]> f4;
+        public LinkedList<MemoryStream> f3;
+        public LinkedList<MemoryStream> f4;
         public LinkedList<EnumSimple> f5;
         public LinkedList<EnumSimple?> f6;
         public LinkedList<FlagsSimple> f7;
@@ -10364,8 +10365,8 @@ namespace test {
         {
             f1 = new LinkedList<byte>()
             , f2 = new LinkedList<byte?>()
-            , f3 = new LinkedList<byte[]>()
-            , f4 = new LinkedList<byte[]>()
+            , f3 = new LinkedList<MemoryStream>()
+            , f4 = new LinkedList<MemoryStream>()
             , f5 = new LinkedList<EnumSimple>()
             , f6 = new LinkedList<EnumSimple?>()
             , f7 = new LinkedList<FlagsSimple>()
@@ -10374,7 +10375,7 @@ namespace test {
             , f10 = new LinkedList<StructSimple?>()
         };
 
-        public StructList(LinkedList<byte> f1, LinkedList<byte?> f2, LinkedList<byte[]> f3, LinkedList<byte[]> f4, LinkedList<EnumSimple> f5, LinkedList<EnumSimple?> f6, LinkedList<FlagsSimple> f7, LinkedList<FlagsSimple?> f8, LinkedList<StructSimple> f9, LinkedList<StructSimple?> f10)
+        public StructList(LinkedList<byte> f1, LinkedList<byte?> f2, LinkedList<MemoryStream> f3, LinkedList<MemoryStream> f4, LinkedList<EnumSimple> f5, LinkedList<EnumSimple?> f6, LinkedList<FlagsSimple> f7, LinkedList<FlagsSimple?> f8, LinkedList<StructSimple> f9, LinkedList<StructSimple?> f10)
         {
             this.f1 = f1;
             this.f2 = f2;
@@ -10567,8 +10568,8 @@ namespace test {
     {
         public readonly FieldModelVectorValueType<byte, FieldModelValueType<byte>> f1;
         public readonly FieldModelVectorOptionalValueType<byte, FieldModelValueType<byte>> f2;
-        public readonly FieldModelVectorReferenceType<byte[], FieldModelReferenceType<byte[]>> f3;
-        public readonly FieldModelVectorOptionalReferenceType<byte[], FieldModelReferenceType<byte[]>> f4;
+        public readonly FieldModelVectorReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>> f3;
+        public readonly FieldModelVectorOptionalReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>> f4;
         public readonly FieldModelVectorValueType<EnumSimple, FieldModelEnumSimple> f5;
         public readonly FieldModelVectorOptionalValueType<EnumSimple, FieldModelEnumSimple> f6;
         public readonly FieldModelVectorValueType<FlagsSimple, FieldModelFlagsSimple> f7;
@@ -10580,8 +10581,8 @@ namespace test {
         {
             f1 = new FieldModelVectorValueType<byte, FieldModelValueType<byte>>(FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, 4 + 4), buffer, 4 + 4);
             f2 = new FieldModelVectorOptionalValueType<byte, FieldModelValueType<byte>>(FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize);
-            f3 = new FieldModelVectorReferenceType<byte[], FieldModelReferenceType<byte[]>>(FieldModelReferenceType<byte[]>.CreateFieldModel(BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
-            f4 = new FieldModelVectorOptionalReferenceType<byte[], FieldModelReferenceType<byte[]>>(FieldModelReferenceType<byte[]>.CreateFieldModel(BaseTypes.BYTES, buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize);
+            f3 = new FieldModelVectorReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
+            f4 = new FieldModelVectorOptionalReferenceType<MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize);
             f5 = new FieldModelVectorValueType<EnumSimple, FieldModelEnumSimple>(new FieldModelEnumSimple(buffer, f4.FBEOffset + f4.FBESize), buffer, f4.FBEOffset + f4.FBESize);
             f6 = new FieldModelVectorOptionalValueType<EnumSimple, FieldModelEnumSimple>(new FieldModelEnumSimple(buffer, f5.FBEOffset + f5.FBESize), buffer, f5.FBEOffset + f5.FBESize);
             f7 = new FieldModelVectorValueType<FlagsSimple, FieldModelFlagsSimple>(new FieldModelFlagsSimple(buffer, f6.FBEOffset + f6.FBESize), buffer, f6.FBEOffset + f6.FBESize);
@@ -11009,8 +11010,8 @@ namespace test {
     {
         public readonly FinalModelVectorValueType<byte, FinalModelValueType<byte>> f1;
         public readonly FinalModelVectorOptionalValueType<byte, FinalModelValueType<byte>> f2;
-        public readonly FinalModelVectorReferenceType<byte[], FinalModelReferenceType<byte[]>> f3;
-        public readonly FinalModelVectorOptionalReferenceType<byte[], FinalModelReferenceType<byte[]>> f4;
+        public readonly FinalModelVectorReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>> f3;
+        public readonly FinalModelVectorOptionalReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>> f4;
         public readonly FinalModelVectorValueType<EnumSimple, FinalModelEnumSimple> f5;
         public readonly FinalModelVectorOptionalValueType<EnumSimple, FinalModelEnumSimple> f6;
         public readonly FinalModelVectorValueType<FlagsSimple, FinalModelFlagsSimple> f7;
@@ -11022,8 +11023,8 @@ namespace test {
         {
             f1 = new FinalModelVectorValueType<byte, FinalModelValueType<byte>>(FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0);
             f2 = new FinalModelVectorOptionalValueType<byte, FinalModelValueType<byte>>(FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0);
-            f3 = new FinalModelVectorReferenceType<byte[], FinalModelReferenceType<byte[]>>(FinalModelReferenceType<byte[]>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
-            f4 = new FinalModelVectorOptionalReferenceType<byte[], FinalModelReferenceType<byte[]>>(FinalModelReferenceType<byte[]>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
+            f3 = new FinalModelVectorReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
+            f4 = new FinalModelVectorOptionalReferenceType<MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
             f5 = new FinalModelVectorValueType<EnumSimple, FinalModelEnumSimple>(new FinalModelEnumSimple(buffer, 0), buffer, 0);
             f6 = new FinalModelVectorOptionalValueType<EnumSimple, FinalModelEnumSimple>(new FinalModelEnumSimple(buffer, 0), buffer, 0);
             f7 = new FinalModelVectorValueType<FlagsSimple, FinalModelFlagsSimple>(new FinalModelFlagsSimple(buffer, 0), buffer, 0);
@@ -12087,8 +12088,8 @@ namespace test {
     {
         public SortedDictionary<int, byte> f1;
         public SortedDictionary<int, byte?> f2;
-        public SortedDictionary<int, byte[]> f3;
-        public SortedDictionary<int, byte[]> f4;
+        public SortedDictionary<int, MemoryStream> f3;
+        public SortedDictionary<int, MemoryStream> f4;
         public SortedDictionary<int, EnumSimple> f5;
         public SortedDictionary<int, EnumSimple?> f6;
         public SortedDictionary<int, FlagsSimple> f7;
@@ -12100,8 +12101,8 @@ namespace test {
         {
             f1 = new SortedDictionary<int, byte>()
             , f2 = new SortedDictionary<int, byte?>()
-            , f3 = new SortedDictionary<int, byte[]>()
-            , f4 = new SortedDictionary<int, byte[]>()
+            , f3 = new SortedDictionary<int, MemoryStream>()
+            , f4 = new SortedDictionary<int, MemoryStream>()
             , f5 = new SortedDictionary<int, EnumSimple>()
             , f6 = new SortedDictionary<int, EnumSimple?>()
             , f7 = new SortedDictionary<int, FlagsSimple>()
@@ -12110,7 +12111,7 @@ namespace test {
             , f10 = new SortedDictionary<int, StructSimple?>()
         };
 
-        public StructMap(SortedDictionary<int, byte> f1, SortedDictionary<int, byte?> f2, SortedDictionary<int, byte[]> f3, SortedDictionary<int, byte[]> f4, SortedDictionary<int, EnumSimple> f5, SortedDictionary<int, EnumSimple?> f6, SortedDictionary<int, FlagsSimple> f7, SortedDictionary<int, FlagsSimple?> f8, SortedDictionary<int, StructSimple> f9, SortedDictionary<int, StructSimple?> f10)
+        public StructMap(SortedDictionary<int, byte> f1, SortedDictionary<int, byte?> f2, SortedDictionary<int, MemoryStream> f3, SortedDictionary<int, MemoryStream> f4, SortedDictionary<int, EnumSimple> f5, SortedDictionary<int, EnumSimple?> f6, SortedDictionary<int, FlagsSimple> f7, SortedDictionary<int, FlagsSimple?> f8, SortedDictionary<int, StructSimple> f9, SortedDictionary<int, StructSimple?> f10)
         {
             this.f1 = f1;
             this.f2 = f2;
@@ -12323,8 +12324,8 @@ namespace test {
     {
         public readonly FieldModelMapValueTypeKeyValueTypeValue<int, FieldModelValueType<int>, byte, FieldModelValueType<byte>> f1;
         public readonly FieldModelMapValueTypeKeyOptionalValueTypeValue<int, FieldModelValueType<int>, byte, FieldModelValueType<byte>> f2;
-        public readonly FieldModelMapValueTypeKeyReferenceTypeValue<int, FieldModelValueType<int>, byte[], FieldModelReferenceType<byte[]>> f3;
-        public readonly FieldModelMapValueTypeKeyOptionalReferenceTypeValue<int, FieldModelValueType<int>, byte[], FieldModelReferenceType<byte[]>> f4;
+        public readonly FieldModelMapValueTypeKeyReferenceTypeValue<int, FieldModelValueType<int>, MemoryStream, FieldModelReferenceType<MemoryStream>> f3;
+        public readonly FieldModelMapValueTypeKeyOptionalReferenceTypeValue<int, FieldModelValueType<int>, MemoryStream, FieldModelReferenceType<MemoryStream>> f4;
         public readonly FieldModelMapValueTypeKeyValueTypeValue<int, FieldModelValueType<int>, EnumSimple, FieldModelEnumSimple> f5;
         public readonly FieldModelMapValueTypeKeyOptionalValueTypeValue<int, FieldModelValueType<int>, EnumSimple, FieldModelEnumSimple> f6;
         public readonly FieldModelMapValueTypeKeyValueTypeValue<int, FieldModelValueType<int>, FlagsSimple, FieldModelFlagsSimple> f7;
@@ -12336,8 +12337,8 @@ namespace test {
         {
             f1 = new FieldModelMapValueTypeKeyValueTypeValue<int, FieldModelValueType<int>, byte, FieldModelValueType<byte>>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, 4 + 4), FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, 4 + 4), buffer, 4 + 4);
             f2 = new FieldModelMapValueTypeKeyOptionalValueTypeValue<int, FieldModelValueType<int>, byte, FieldModelValueType<byte>>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f1.FBEOffset + f1.FBESize), FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize);
-            f3 = new FieldModelMapValueTypeKeyReferenceTypeValue<int, FieldModelValueType<int>, byte[], FieldModelReferenceType<byte[]>>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f2.FBEOffset + f2.FBESize), FieldModelReferenceType<byte[]>.CreateFieldModel(BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
-            f4 = new FieldModelMapValueTypeKeyOptionalReferenceTypeValue<int, FieldModelValueType<int>, byte[], FieldModelReferenceType<byte[]>>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f3.FBEOffset + f3.FBESize), FieldModelReferenceType<byte[]>.CreateFieldModel(BaseTypes.BYTES, buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize);
+            f3 = new FieldModelMapValueTypeKeyReferenceTypeValue<int, FieldModelValueType<int>, MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f2.FBEOffset + f2.FBESize), FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
+            f4 = new FieldModelMapValueTypeKeyOptionalReferenceTypeValue<int, FieldModelValueType<int>, MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f3.FBEOffset + f3.FBESize), FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize);
             f5 = new FieldModelMapValueTypeKeyValueTypeValue<int, FieldModelValueType<int>, EnumSimple, FieldModelEnumSimple>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f4.FBEOffset + f4.FBESize), new FieldModelEnumSimple(buffer, f4.FBEOffset + f4.FBESize), buffer, f4.FBEOffset + f4.FBESize);
             f6 = new FieldModelMapValueTypeKeyOptionalValueTypeValue<int, FieldModelValueType<int>, EnumSimple, FieldModelEnumSimple>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f5.FBEOffset + f5.FBESize), new FieldModelEnumSimple(buffer, f5.FBEOffset + f5.FBESize), buffer, f5.FBEOffset + f5.FBESize);
             f7 = new FieldModelMapValueTypeKeyValueTypeValue<int, FieldModelValueType<int>, FlagsSimple, FieldModelFlagsSimple>(FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, f6.FBEOffset + f6.FBESize), new FieldModelFlagsSimple(buffer, f6.FBEOffset + f6.FBESize), buffer, f6.FBEOffset + f6.FBESize);
@@ -12765,8 +12766,8 @@ namespace test {
     {
         public readonly FinalModelMapValueTypeKeyValueTypeValue<int, FinalModelValueType<int>, byte, FinalModelValueType<byte>> f1;
         public readonly FinalModelMapValueTypeKeyOptionalValueTypeValue<int, FinalModelValueType<int>, byte, FinalModelValueType<byte>> f2;
-        public readonly FinalModelMapValueTypeKeyReferenceTypeValue<int, FinalModelValueType<int>, byte[], FinalModelReferenceType<byte[]>> f3;
-        public readonly FinalModelMapValueTypeKeyOptionalReferenceTypeValue<int, FinalModelValueType<int>, byte[], FinalModelReferenceType<byte[]>> f4;
+        public readonly FinalModelMapValueTypeKeyReferenceTypeValue<int, FinalModelValueType<int>, MemoryStream, FinalModelReferenceType<MemoryStream>> f3;
+        public readonly FinalModelMapValueTypeKeyOptionalReferenceTypeValue<int, FinalModelValueType<int>, MemoryStream, FinalModelReferenceType<MemoryStream>> f4;
         public readonly FinalModelMapValueTypeKeyValueTypeValue<int, FinalModelValueType<int>, EnumSimple, FinalModelEnumSimple> f5;
         public readonly FinalModelMapValueTypeKeyOptionalValueTypeValue<int, FinalModelValueType<int>, EnumSimple, FinalModelEnumSimple> f6;
         public readonly FinalModelMapValueTypeKeyValueTypeValue<int, FinalModelValueType<int>, FlagsSimple, FinalModelFlagsSimple> f7;
@@ -12778,8 +12779,8 @@ namespace test {
         {
             f1 = new FinalModelMapValueTypeKeyValueTypeValue<int, FinalModelValueType<int>, byte, FinalModelValueType<byte>>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0);
             f2 = new FinalModelMapValueTypeKeyOptionalValueTypeValue<int, FinalModelValueType<int>, byte, FinalModelValueType<byte>>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0);
-            f3 = new FinalModelMapValueTypeKeyReferenceTypeValue<int, FinalModelValueType<int>, byte[], FinalModelReferenceType<byte[]>>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), FinalModelReferenceType<byte[]>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
-            f4 = new FinalModelMapValueTypeKeyOptionalReferenceTypeValue<int, FinalModelValueType<int>, byte[], FinalModelReferenceType<byte[]>>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), FinalModelReferenceType<byte[]>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
+            f3 = new FinalModelMapValueTypeKeyReferenceTypeValue<int, FinalModelValueType<int>, MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
+            f4 = new FinalModelMapValueTypeKeyOptionalReferenceTypeValue<int, FinalModelValueType<int>, MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
             f5 = new FinalModelMapValueTypeKeyValueTypeValue<int, FinalModelValueType<int>, EnumSimple, FinalModelEnumSimple>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), new FinalModelEnumSimple(buffer, 0), buffer, 0);
             f6 = new FinalModelMapValueTypeKeyOptionalValueTypeValue<int, FinalModelValueType<int>, EnumSimple, FinalModelEnumSimple>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), new FinalModelEnumSimple(buffer, 0), buffer, 0);
             f7 = new FinalModelMapValueTypeKeyValueTypeValue<int, FinalModelValueType<int>, FlagsSimple, FinalModelFlagsSimple>(FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0), new FinalModelFlagsSimple(buffer, 0), buffer, 0);
@@ -13125,8 +13126,8 @@ namespace test {
     {
         public Dictionary<string, byte> f1;
         public Dictionary<string, byte?> f2;
-        public Dictionary<string, byte[]> f3;
-        public Dictionary<string, byte[]> f4;
+        public Dictionary<string, MemoryStream> f3;
+        public Dictionary<string, MemoryStream> f4;
         public Dictionary<string, EnumSimple> f5;
         public Dictionary<string, EnumSimple?> f6;
         public Dictionary<string, FlagsSimple> f7;
@@ -13138,8 +13139,8 @@ namespace test {
         {
             f1 = new Dictionary<string, byte>()
             , f2 = new Dictionary<string, byte?>()
-            , f3 = new Dictionary<string, byte[]>()
-            , f4 = new Dictionary<string, byte[]>()
+            , f3 = new Dictionary<string, MemoryStream>()
+            , f4 = new Dictionary<string, MemoryStream>()
             , f5 = new Dictionary<string, EnumSimple>()
             , f6 = new Dictionary<string, EnumSimple?>()
             , f7 = new Dictionary<string, FlagsSimple>()
@@ -13148,7 +13149,7 @@ namespace test {
             , f10 = new Dictionary<string, StructSimple?>()
         };
 
-        public StructHash(Dictionary<string, byte> f1, Dictionary<string, byte?> f2, Dictionary<string, byte[]> f3, Dictionary<string, byte[]> f4, Dictionary<string, EnumSimple> f5, Dictionary<string, EnumSimple?> f6, Dictionary<string, FlagsSimple> f7, Dictionary<string, FlagsSimple?> f8, Dictionary<string, StructSimple> f9, Dictionary<string, StructSimple?> f10)
+        public StructHash(Dictionary<string, byte> f1, Dictionary<string, byte?> f2, Dictionary<string, MemoryStream> f3, Dictionary<string, MemoryStream> f4, Dictionary<string, EnumSimple> f5, Dictionary<string, EnumSimple?> f6, Dictionary<string, FlagsSimple> f7, Dictionary<string, FlagsSimple?> f8, Dictionary<string, StructSimple> f9, Dictionary<string, StructSimple?> f10)
         {
             this.f1 = f1;
             this.f2 = f2;
@@ -13361,8 +13362,8 @@ namespace test {
     {
         public readonly FieldModelMapReferenceTypeKeyValueTypeValue<string, FieldModelReferenceType<string>, byte, FieldModelValueType<byte>> f1;
         public readonly FieldModelMapReferenceTypeKeyOptionalValueTypeValue<string, FieldModelReferenceType<string>, byte, FieldModelValueType<byte>> f2;
-        public readonly FieldModelMapReferenceTypeKeyReferenceTypeValue<string, FieldModelReferenceType<string>, byte[], FieldModelReferenceType<byte[]>> f3;
-        public readonly FieldModelMapReferenceTypeKeyOptionalReferenceTypeValue<string, FieldModelReferenceType<string>, byte[], FieldModelReferenceType<byte[]>> f4;
+        public readonly FieldModelMapReferenceTypeKeyReferenceTypeValue<string, FieldModelReferenceType<string>, MemoryStream, FieldModelReferenceType<MemoryStream>> f3;
+        public readonly FieldModelMapReferenceTypeKeyOptionalReferenceTypeValue<string, FieldModelReferenceType<string>, MemoryStream, FieldModelReferenceType<MemoryStream>> f4;
         public readonly FieldModelMapReferenceTypeKeyValueTypeValue<string, FieldModelReferenceType<string>, EnumSimple, FieldModelEnumSimple> f5;
         public readonly FieldModelMapReferenceTypeKeyOptionalValueTypeValue<string, FieldModelReferenceType<string>, EnumSimple, FieldModelEnumSimple> f6;
         public readonly FieldModelMapReferenceTypeKeyValueTypeValue<string, FieldModelReferenceType<string>, FlagsSimple, FieldModelFlagsSimple> f7;
@@ -13374,8 +13375,8 @@ namespace test {
         {
             f1 = new FieldModelMapReferenceTypeKeyValueTypeValue<string, FieldModelReferenceType<string>, byte, FieldModelValueType<byte>>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, 4 + 4), FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, 4 + 4), buffer, 4 + 4);
             f2 = new FieldModelMapReferenceTypeKeyOptionalValueTypeValue<string, FieldModelReferenceType<string>, byte, FieldModelValueType<byte>>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f1.FBEOffset + f1.FBESize), FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, f1.FBEOffset + f1.FBESize), buffer, f1.FBEOffset + f1.FBESize);
-            f3 = new FieldModelMapReferenceTypeKeyReferenceTypeValue<string, FieldModelReferenceType<string>, byte[], FieldModelReferenceType<byte[]>>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f2.FBEOffset + f2.FBESize), FieldModelReferenceType<byte[]>.CreateFieldModel(BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
-            f4 = new FieldModelMapReferenceTypeKeyOptionalReferenceTypeValue<string, FieldModelReferenceType<string>, byte[], FieldModelReferenceType<byte[]>>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f3.FBEOffset + f3.FBESize), FieldModelReferenceType<byte[]>.CreateFieldModel(BaseTypes.BYTES, buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize);
+            f3 = new FieldModelMapReferenceTypeKeyReferenceTypeValue<string, FieldModelReferenceType<string>, MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f2.FBEOffset + f2.FBESize), FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f2.FBEOffset + f2.FBESize), buffer, f2.FBEOffset + f2.FBESize);
+            f4 = new FieldModelMapReferenceTypeKeyOptionalReferenceTypeValue<string, FieldModelReferenceType<string>, MemoryStream, FieldModelReferenceType<MemoryStream>>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f3.FBEOffset + f3.FBESize), FieldModelReferenceType<MemoryStream>.CreateFieldModel(BaseTypes.BYTES, buffer, f3.FBEOffset + f3.FBESize), buffer, f3.FBEOffset + f3.FBESize);
             f5 = new FieldModelMapReferenceTypeKeyValueTypeValue<string, FieldModelReferenceType<string>, EnumSimple, FieldModelEnumSimple>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f4.FBEOffset + f4.FBESize), new FieldModelEnumSimple(buffer, f4.FBEOffset + f4.FBESize), buffer, f4.FBEOffset + f4.FBESize);
             f6 = new FieldModelMapReferenceTypeKeyOptionalValueTypeValue<string, FieldModelReferenceType<string>, EnumSimple, FieldModelEnumSimple>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f5.FBEOffset + f5.FBESize), new FieldModelEnumSimple(buffer, f5.FBEOffset + f5.FBESize), buffer, f5.FBEOffset + f5.FBESize);
             f7 = new FieldModelMapReferenceTypeKeyValueTypeValue<string, FieldModelReferenceType<string>, FlagsSimple, FieldModelFlagsSimple>(FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, f6.FBEOffset + f6.FBESize), new FieldModelFlagsSimple(buffer, f6.FBEOffset + f6.FBESize), buffer, f6.FBEOffset + f6.FBESize);
@@ -13803,8 +13804,8 @@ namespace test {
     {
         public readonly FinalModelMapReferenceTypeKeyValueTypeValue<string, FinalModelReferenceType<string>, byte, FinalModelValueType<byte>> f1;
         public readonly FinalModelMapReferenceTypeKeyOptionalValueTypeValue<string, FinalModelReferenceType<string>, byte, FinalModelValueType<byte>> f2;
-        public readonly FinalModelMapReferenceTypeKeyReferenceTypeValue<string, FinalModelReferenceType<string>, byte[], FinalModelReferenceType<byte[]>> f3;
-        public readonly FinalModelMapReferenceTypeKeyOptionalReferenceTypeValue<string, FinalModelReferenceType<string>, byte[], FinalModelReferenceType<byte[]>> f4;
+        public readonly FinalModelMapReferenceTypeKeyReferenceTypeValue<string, FinalModelReferenceType<string>, MemoryStream, FinalModelReferenceType<MemoryStream>> f3;
+        public readonly FinalModelMapReferenceTypeKeyOptionalReferenceTypeValue<string, FinalModelReferenceType<string>, MemoryStream, FinalModelReferenceType<MemoryStream>> f4;
         public readonly FinalModelMapReferenceTypeKeyValueTypeValue<string, FinalModelReferenceType<string>, EnumSimple, FinalModelEnumSimple> f5;
         public readonly FinalModelMapReferenceTypeKeyOptionalValueTypeValue<string, FinalModelReferenceType<string>, EnumSimple, FinalModelEnumSimple> f6;
         public readonly FinalModelMapReferenceTypeKeyValueTypeValue<string, FinalModelReferenceType<string>, FlagsSimple, FinalModelFlagsSimple> f7;
@@ -13816,8 +13817,8 @@ namespace test {
         {
             f1 = new FinalModelMapReferenceTypeKeyValueTypeValue<string, FinalModelReferenceType<string>, byte, FinalModelValueType<byte>>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0);
             f2 = new FinalModelMapReferenceTypeKeyOptionalValueTypeValue<string, FinalModelReferenceType<string>, byte, FinalModelValueType<byte>>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0), buffer, 0);
-            f3 = new FinalModelMapReferenceTypeKeyReferenceTypeValue<string, FinalModelReferenceType<string>, byte[], FinalModelReferenceType<byte[]>>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), FinalModelReferenceType<byte[]>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
-            f4 = new FinalModelMapReferenceTypeKeyOptionalReferenceTypeValue<string, FinalModelReferenceType<string>, byte[], FinalModelReferenceType<byte[]>>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), FinalModelReferenceType<byte[]>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
+            f3 = new FinalModelMapReferenceTypeKeyReferenceTypeValue<string, FinalModelReferenceType<string>, MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
+            f4 = new FinalModelMapReferenceTypeKeyOptionalReferenceTypeValue<string, FinalModelReferenceType<string>, MemoryStream, FinalModelReferenceType<MemoryStream>>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), FinalModelReferenceType<MemoryStream>.CreateFinalModel(BaseTypes.BYTES, buffer, 0), buffer, 0);
             f5 = new FinalModelMapReferenceTypeKeyValueTypeValue<string, FinalModelReferenceType<string>, EnumSimple, FinalModelEnumSimple>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), new FinalModelEnumSimple(buffer, 0), buffer, 0);
             f6 = new FinalModelMapReferenceTypeKeyOptionalValueTypeValue<string, FinalModelReferenceType<string>, EnumSimple, FinalModelEnumSimple>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), new FinalModelEnumSimple(buffer, 0), buffer, 0);
             f7 = new FinalModelMapReferenceTypeKeyValueTypeValue<string, FinalModelReferenceType<string>, FlagsSimple, FinalModelFlagsSimple>(FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0), new FinalModelFlagsSimple(buffer, 0), buffer, 0);

@@ -3,6 +3,7 @@
 // ReSharper disable RedundantBoolCompare
 
 using System;
+using System.IO;
 using NUnit.Framework;
 
 namespace Tests
@@ -707,8 +708,8 @@ namespace Tests
         {
             // Create a new struct
             var struct1 = test.StructBytes.Default;
-            struct1.f1 = new [] { (byte)'A', (byte)'B', (byte)'C' };
-            struct1.f2 = new[] { (byte)'t', (byte)'e', (byte)'s', (byte)'t' };
+            struct1.f1 = new MemoryStream(new [] { (byte)'A', (byte)'B', (byte)'C' });
+            struct1.f2 = new MemoryStream(new[] { (byte)'t', (byte)'e', (byte)'s', (byte)'t' });
 
             // Serialize the struct to the FBE stream
             var writer = new FBE.test.StructBytesFinalModel();
@@ -731,15 +732,15 @@ namespace Tests
             reader.Next(deserialized);
 
             Assert.That(struct2.f1.Length == 3);
-            Assert.That(struct2.f1[0] == (byte)'A');
-            Assert.That(struct2.f1[1] == (byte)'B');
-            Assert.That(struct2.f1[2] == (byte)'C');
+            Assert.That(struct2.f1.GetBuffer()[0] == (byte)'A');
+            Assert.That(struct2.f1.GetBuffer()[1] == (byte)'B');
+            Assert.That(struct2.f1.GetBuffer()[2] == (byte)'C');
             Assert.That(struct2.f2 != null);
             Assert.That(struct2.f2.Length == 4);
-            Assert.That(struct2.f2[0] == (byte)'t');
-            Assert.That(struct2.f2[1] == (byte)'e');
-            Assert.That(struct2.f2[2] == (byte)'s');
-            Assert.That(struct2.f2[3] == (byte)'t');
+            Assert.That(struct2.f2.GetBuffer()[0] == (byte)'t');
+            Assert.That(struct2.f2.GetBuffer()[1] == (byte)'e');
+            Assert.That(struct2.f2.GetBuffer()[2] == (byte)'s');
+            Assert.That(struct2.f2.GetBuffer()[3] == (byte)'t');
             Assert.That(struct2.f3 == null);
         }
 
@@ -752,9 +753,9 @@ namespace Tests
             struct1.f1[1] = 65;
             struct1.f2[0] = 97;
             struct1.f2[1] = null;
-            struct1.f3[0] = new[] { (byte)48, (byte)48, (byte)48 };
-            struct1.f3[1] = new[] { (byte)65, (byte)65, (byte)65 };
-            struct1.f4[0] = new[] { (byte)97, (byte)97, (byte)97 };
+            struct1.f3[0] = new MemoryStream(new[] { (byte)48, (byte)48, (byte)48 });
+            struct1.f3[1] = new MemoryStream(new[] { (byte)65, (byte)65, (byte)65 });
+            struct1.f4[0] = new MemoryStream(new[] { (byte)97, (byte)97, (byte)97 });
             struct1.f4[1] = null;
             struct1.f5[0] = test.EnumSimple.ENUM_VALUE_1;
             struct1.f5[1] = test.EnumSimple.ENUM_VALUE_2;
@@ -797,19 +798,19 @@ namespace Tests
             Assert.That(struct2.f2[1] == null);
             Assert.That(struct2.f3.Length == 2);
             Assert.That(struct2.f3[0].Length == 3);
-            Assert.That(struct2.f3[0][0] == 48);
-            Assert.That(struct2.f3[0][1] == 48);
-            Assert.That(struct2.f3[0][2] == 48);
+            Assert.That(struct2.f3[0].GetBuffer()[0] == 48);
+            Assert.That(struct2.f3[0].GetBuffer()[1] == 48);
+            Assert.That(struct2.f3[0].GetBuffer()[2] == 48);
             Assert.That(struct2.f3[1].Length == 3);
-            Assert.That(struct2.f3[1][0] == 65);
-            Assert.That(struct2.f3[1][1] == 65);
-            Assert.That(struct2.f3[1][2] == 65);
+            Assert.That(struct2.f3[1].GetBuffer()[0] == 65);
+            Assert.That(struct2.f3[1].GetBuffer()[1] == 65);
+            Assert.That(struct2.f3[1].GetBuffer()[2] == 65);
             Assert.That(struct2.f4.Length == 2);
             Assert.That(struct2.f4[0] != null);
             Assert.That(struct2.f4[0].Length == 3);
-            Assert.That(struct2.f4[0][0] == 97);
-            Assert.That(struct2.f4[0][1] == 97);
-            Assert.That(struct2.f4[0][2] == 97);
+            Assert.That(struct2.f4[0].GetBuffer()[0] == 97);
+            Assert.That(struct2.f4[0].GetBuffer()[1] == 97);
+            Assert.That(struct2.f4[0].GetBuffer()[2] == 97);
             Assert.That(struct2.f4[1] == null);
             Assert.That(struct2.f5.Length == 2);
             Assert.That(struct2.f5[0] == test.EnumSimple.ENUM_VALUE_1);
@@ -847,9 +848,9 @@ namespace Tests
             struct1.f1.Add(65);
             struct1.f2.Add(97);
             struct1.f2.Add(null);
-            struct1.f3.Add(new[] { (byte)48, (byte)48, (byte)48 });
-            struct1.f3.Add(new[] { (byte)65, (byte)65, (byte)65 });
-            struct1.f4.Add(new[] { (byte)97, (byte)97, (byte)97 });
+            struct1.f3.Add(new MemoryStream(new[] { (byte)48, (byte)48, (byte)48 }));
+            struct1.f3.Add(new MemoryStream(new[] { (byte)65, (byte)65, (byte)65 }));
+            struct1.f4.Add(new MemoryStream(new[] { (byte)97, (byte)97, (byte)97 }));
             struct1.f4.Add(null);
             struct1.f5.Add(test.EnumSimple.ENUM_VALUE_1);
             struct1.f5.Add(test.EnumSimple.ENUM_VALUE_2);
@@ -892,19 +893,19 @@ namespace Tests
             Assert.That(struct2.f2[1] == null);
             Assert.That(struct2.f3.Count == 2);
             Assert.That(struct2.f3[0].Length == 3);
-            Assert.That(struct2.f3[0][0] == 48);
-            Assert.That(struct2.f3[0][1] == 48);
-            Assert.That(struct2.f3[0][2] == 48);
+            Assert.That(struct2.f3[0].GetBuffer()[0] == 48);
+            Assert.That(struct2.f3[0].GetBuffer()[1] == 48);
+            Assert.That(struct2.f3[0].GetBuffer()[2] == 48);
             Assert.That(struct2.f3[1].Length == 3);
-            Assert.That(struct2.f3[1][0] == 65);
-            Assert.That(struct2.f3[1][1] == 65);
-            Assert.That(struct2.f3[1][2] == 65);
+            Assert.That(struct2.f3[1].GetBuffer()[0] == 65);
+            Assert.That(struct2.f3[1].GetBuffer()[1] == 65);
+            Assert.That(struct2.f3[1].GetBuffer()[2] == 65);
             Assert.That(struct2.f4.Count == 2);
             Assert.That(struct2.f4[0] != null);
             Assert.That(struct2.f4[0].Length == 3);
-            Assert.That(struct2.f4[0][0] == 97);
-            Assert.That(struct2.f4[0][1] == 97);
-            Assert.That(struct2.f4[0][2] == 97);
+            Assert.That(struct2.f4[0].GetBuffer()[0] == 97);
+            Assert.That(struct2.f4[0].GetBuffer()[1] == 97);
+            Assert.That(struct2.f4[0].GetBuffer()[2] == 97);
             Assert.That(struct2.f4[1] == null);
             Assert.That(struct2.f5.Count == 2);
             Assert.That(struct2.f5[0] == test.EnumSimple.ENUM_VALUE_1);
@@ -942,10 +943,10 @@ namespace Tests
             struct1.f1.AddLast(65);
             struct1.f2.AddLast(97);
             struct1.f2.AddLast((byte?)null);
-            struct1.f3.AddLast(new[] { (byte)48, (byte)48, (byte)48 });
-            struct1.f3.AddLast(new[] { (byte)65, (byte)65, (byte)65 });
-            struct1.f4.AddLast(new[] { (byte)97, (byte)97, (byte)97 });
-            struct1.f4.AddLast((byte[])null);
+            struct1.f3.AddLast(new MemoryStream(new[] { (byte)48, (byte)48, (byte)48 }));
+            struct1.f3.AddLast(new MemoryStream(new[] { (byte)65, (byte)65, (byte)65 }));
+            struct1.f4.AddLast(new MemoryStream(new[] { (byte)97, (byte)97, (byte)97 }));
+            struct1.f4.AddLast((MemoryStream)null);
             struct1.f5.AddLast(test.EnumSimple.ENUM_VALUE_1);
             struct1.f5.AddLast(test.EnumSimple.ENUM_VALUE_2);
             struct1.f6.AddLast(test.EnumSimple.ENUM_VALUE_1);
@@ -987,19 +988,19 @@ namespace Tests
             Assert.That(struct2.f2.Last.Value == null);
             Assert.That(struct2.f3.Count == 2);
             Assert.That(struct2.f3.First.Value.Length == 3);
-            Assert.That(struct2.f3.First.Value[0] == 48);
-            Assert.That(struct2.f3.First.Value[1] == 48);
-            Assert.That(struct2.f3.First.Value[2] == 48);
+            Assert.That(struct2.f3.First.Value.GetBuffer()[0] == 48);
+            Assert.That(struct2.f3.First.Value.GetBuffer()[1] == 48);
+            Assert.That(struct2.f3.First.Value.GetBuffer()[2] == 48);
             Assert.That(struct2.f3.Last.Value.Length == 3);
-            Assert.That(struct2.f3.Last.Value[0] == 65);
-            Assert.That(struct2.f3.Last.Value[1] == 65);
-            Assert.That(struct2.f3.Last.Value[2] == 65);
+            Assert.That(struct2.f3.Last.Value.GetBuffer()[0] == 65);
+            Assert.That(struct2.f3.Last.Value.GetBuffer()[1] == 65);
+            Assert.That(struct2.f3.Last.Value.GetBuffer()[2] == 65);
             Assert.That(struct2.f4.Count == 2);
             Assert.That(struct2.f4.First.Value != null);
             Assert.That(struct2.f4.First.Value.Length == 3);
-            Assert.That(struct2.f4.First.Value[0] == 97);
-            Assert.That(struct2.f4.First.Value[1] == 97);
-            Assert.That(struct2.f4.First.Value[2] == 97);
+            Assert.That(struct2.f4.First.Value.GetBuffer()[0] == 97);
+            Assert.That(struct2.f4.First.Value.GetBuffer()[1] == 97);
+            Assert.That(struct2.f4.First.Value.GetBuffer()[2] == 97);
             Assert.That(struct2.f4.Last.Value == null);
             Assert.That(struct2.f5.Count == 2);
             Assert.That(struct2.f5.First.Value == test.EnumSimple.ENUM_VALUE_1);
@@ -1091,9 +1092,9 @@ namespace Tests
             struct1.f1.Add(20, 65);
             struct1.f2.Add(10, 97);
             struct1.f2.Add(20, null);
-            struct1.f3.Add(10, new[] { (byte)48, (byte)48, (byte)48 });
-            struct1.f3.Add(20, new[] { (byte)65, (byte)65, (byte)65 });
-            struct1.f4.Add(10, new[] { (byte)97, (byte)97, (byte)97 });
+            struct1.f3.Add(10, new MemoryStream(new[] { (byte)48, (byte)48, (byte)48 }));
+            struct1.f3.Add(20, new MemoryStream(new[] { (byte)65, (byte)65, (byte)65 }));
+            struct1.f4.Add(10, new MemoryStream(new[] { (byte)97, (byte)97, (byte)97 }));
             struct1.f4.Add(20, null);
             struct1.f5.Add(10, test.EnumSimple.ENUM_VALUE_1);
             struct1.f5.Add(20, test.EnumSimple.ENUM_VALUE_2);
@@ -1173,9 +1174,9 @@ namespace Tests
             struct1.f1.Add("20", 65);
             struct1.f2.Add("10", 97);
             struct1.f2.Add("20", null);
-            struct1.f3.Add("10", new[] { (byte)48, (byte)48, (byte)48 });
-            struct1.f3.Add("20", new[] { (byte)65, (byte)65, (byte)65 });
-            struct1.f4.Add("10", new[] { (byte)97, (byte)97, (byte)97 });
+            struct1.f3.Add("10", new MemoryStream(new[] { (byte)48, (byte)48, (byte)48 }));
+            struct1.f3.Add("20", new MemoryStream(new[] { (byte)65, (byte)65, (byte)65 }));
+            struct1.f4.Add("10", new MemoryStream(new[] { (byte)97, (byte)97, (byte)97 }));
             struct1.f4.Add("20", null);
             struct1.f5.Add("10", test.EnumSimple.ENUM_VALUE_1);
             struct1.f5.Add("20", test.EnumSimple.ENUM_VALUE_2);
