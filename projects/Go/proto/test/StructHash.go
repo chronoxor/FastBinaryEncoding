@@ -55,7 +55,7 @@ func NewStructHash() *StructHash {
 
 // Create a new StructHash struct from JSON
 func NewStructHashFromJSON(buffer []byte) (*StructHash, error) {
-    var result StructHash
+    result := *NewStructHash()
     err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err

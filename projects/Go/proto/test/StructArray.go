@@ -55,7 +55,7 @@ func NewStructArray() *StructArray {
 
 // Create a new StructArray struct from JSON
 func NewStructArrayFromJSON(buffer []byte) (*StructArray, error) {
-    var result StructArray
+    result := *NewStructArray()
     err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err

@@ -55,7 +55,7 @@ func NewStructVector() *StructVector {
 
 // Create a new StructVector struct from JSON
 func NewStructVectorFromJSON(buffer []byte) (*StructVector, error) {
-    var result StructVector
+    result := *NewStructVector()
     err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err

@@ -165,7 +165,7 @@ func NewEnums() *Enums {
 
 // Create a new Enums struct from JSON
 func NewEnumsFromJSON(buffer []byte) (*Enums, error) {
-    var result Enums
+    result := *NewEnums()
     err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err

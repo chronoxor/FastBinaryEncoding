@@ -126,7 +126,7 @@ func NewStructSimple() *StructSimple {
 
 // Create a new StructSimple struct from JSON
 func NewStructSimpleFromJSON(buffer []byte) (*StructSimple, error) {
-    var result StructSimple
+    result := *NewStructSimple()
     err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err

@@ -4337,7 +4337,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
         WriteLineIndent("// Create a new " + struct_name + " struct from JSON");
         WriteLineIndent("func New" + struct_name + "FromJSON(buffer []byte) (*" + struct_name + ", error) {");
         Indent(1);
-        WriteLineIndent("var result " + struct_name);
+        WriteLineIndent("result := *New" + struct_name + "()");
         WriteLineIndent("err := fbe.Json.Unmarshal(buffer, &result)");
         WriteLineIndent("if err != nil {");
         Indent(1);
@@ -4416,6 +4416,145 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
         WriteLineIndent("return fbe.Json.Marshal(&s)");
         Indent(-1);
         WriteLineIndent("}");
+    }
+
+    // Generate set wrappers
+    for (const auto& field : s->body->fields)
+    {
+        if (field->set)
+        {
+            WriteLine();
+            WriteLineIndent("// Set wrapper for the field " + ConvertCase(*field->name));
+            WriteLineIndent("type set" + ConvertCase(*field->name) + " map[" + ConvertKeyName(*field->key) + "]" + ConvertTypeName(*field->type, field->optional));
+
+            if (JSON())
+            {
+                // Generate set wrapper IsEmpty() method
+                WriteLine();
+                WriteLineIndent("// Is the set empty?");
+                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") IsEmpty() bool {");
+                Indent(1);
+                WriteLineIndent("return s.Size() > 0");
+                Indent(-1);
+                WriteLineIndent("}");
+
+                // Generate set wrapper Size() method
+                WriteLine();
+                WriteLineIndent("// Get the set size");
+                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Size() int {");
+                Indent(1);
+                WriteLineIndent("return len(s)");
+                Indent(-1);
+                WriteLineIndent("}");
+
+                // Generate set wrapper Add() method
+                WriteLine();
+                WriteLineIndent("// Add the given item to the set");
+                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Add(item " + ConvertTypeName(*field->type, field->optional) + ") {");
+                Indent(1);
+                if (IsGoType(*field->key))
+                    WriteLineIndent("s[item] = item");
+                else
+                    WriteLineIndent("s[item.Key()] = item");
+                Indent(-1);
+                WriteLineIndent("}");
+
+                // Generate set wrapper Contains() method
+                WriteLine();
+                WriteLineIndent("// Contains the given item in the set?");
+                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Contains(item " + ConvertTypeName(*field->type, field->optional) + ") bool {");
+                Indent(1);
+                if (IsGoType(*field->key))
+                    WriteLineIndent("_, exists := s[item]");
+                else
+                    WriteLineIndent("_, exists := s[item.Key()]");
+                Indent(-1);
+                WriteLineIndent("return exists");
+                WriteLineIndent("}");
+
+                // Generate set wrapper Remove() method
+                WriteLine();
+                WriteLineIndent("// Remove the given item from the set");
+                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Remove(item " + ConvertTypeName(*field->type, field->optional) + ") {");
+                Indent(1);
+                if (IsGoType(*field->key))
+                    WriteLineIndent("delete(s, item)");
+                else
+                    WriteLineIndent("delete(s, item.Key())");
+                Indent(-1);
+                WriteLineIndent("}");
+
+                // Generate set wrapper Clear() method
+                WriteLine();
+                WriteLineIndent("// Clear the set");
+                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Clear() {");
+                Indent(1);
+                WriteLineIndent("for i := range s {");
+                Indent(1);
+                WriteLineIndent("delete(s, i)");
+                Indent(-1);
+                WriteLineIndent("}");
+                Indent(-1);
+                WriteLineIndent("}");
+
+                // Generate set wrapper Enumerate() method
+                WriteLine();
+                WriteLineIndent("// Enumerate the set");
+                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Enumerate() []" + ConvertTypeName(*field->type, field->optional) + " {");
+                Indent(1);
+                WriteLineIndent("array := make([]" + ConvertTypeName(*field->type, field->optional) + ", 0)");
+                WriteLineIndent("for _, v := range s {");
+                Indent(1);
+                WriteLineIndent("array = append(array, v)");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("return array");
+                Indent(-1);
+                WriteLineIndent("}");
+
+                // Generate set wrapper MarshalJSON() method
+                WriteLine();
+                WriteLineIndent("// Convert set to JSON");
+                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") MarshalJSON() ([]byte, error) {");
+                Indent(1);
+                WriteLineIndent("array := make([]" + ConvertTypeName(*field->type, field->optional) + ", 0)");
+                WriteLineIndent("for _, v := range s {");
+                Indent(1);
+                WriteLineIndent("array = append(array, v)");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("return fbe.Json.Marshal(&array)");
+                Indent(-1);
+                WriteLineIndent("}");
+
+                // Generate set wrapper UnmarshalJSON() method
+                WriteLine();
+                WriteLineIndent("// Convert JSON to set");
+                WriteLineIndent("func (s *set" + ConvertCase(*field->name) + ") UnmarshalJSON(body []byte) error {");
+                Indent(1);
+                WriteLineIndent("var array []" + ConvertTypeName(*field->type, field->optional));
+                WriteLineIndent("err := fbe.Json.Unmarshal(body, &array)");
+                WriteLineIndent("if err != nil {");
+                Indent(1);
+                WriteLineIndent("return err");
+                Indent(-1);
+                WriteLineIndent("} else {");
+                Indent(1);
+                WriteLineIndent("for _, v := range array {");
+                Indent(1);
+                if (IsGoType(*field->key))
+                    WriteLineIndent("(*s)[v] = v");
+                else
+                    WriteLineIndent("(*s)[v.Key()] = v");
+                Indent(-1);
+                WriteLineIndent("}");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("return nil");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
+        }
     }
 /*
     std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "object";
@@ -6290,6 +6429,8 @@ std::string GeneratorGo::ConvertTypeName(const StructField& field)
         return "[" + std::to_string(field.N) + "]" + ConvertTypeName(*field.type, field.optional);
     else if ((field.vector) || (field.list))
         return "[]" + ConvertTypeName(*field.type, field.optional);
+    else if (field.set)
+        return "set" + ConvertCase(*field.name);
     else if ((field.set) || (field.map) || (field.hash))
         return "map[" + ConvertKeyName(*field.key) + "]" + ConvertTypeName(*field.type, field.optional);
 
@@ -6477,7 +6618,9 @@ std::string GeneratorGo::ConvertDefault(const StructField& field)
         return ConvertTypeName(field) + "{}";
     else if (field.vector || field.list)
         return "make(" + ConvertTypeName(field) + ", 0)";
-    else if (field.set || field.map || field.hash)
+    else if (field.set)
+        return "make(set" + ConvertCase(*field.name) + ")";
+    else if (field.map || field.hash)
         return "make(" + ConvertTypeName(field) + ")";
 
     return ConvertDefault(*field.type, field.optional);

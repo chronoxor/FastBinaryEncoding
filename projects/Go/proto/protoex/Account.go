@@ -48,7 +48,7 @@ func NewAccount() *Account {
 
 // Create a new Account struct from JSON
 func NewAccountFromJSON(buffer []byte) (*Account, error) {
-    var result Account
+    result := *NewAccount()
     err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err

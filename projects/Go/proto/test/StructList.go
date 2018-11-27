@@ -55,7 +55,7 @@ func NewStructList() *StructList {
 
 // Create a new StructList struct from JSON
 func NewStructListFromJSON(buffer []byte) (*StructList, error) {
-    var result StructList
+    result := *NewStructList()
     err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err

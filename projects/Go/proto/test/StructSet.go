@@ -5,9 +5,7 @@
 
 package test
 
-import (
-    "strings"
-)
+import "strings"
 import "../fbe"
 import "../proto"
 
@@ -87,89 +85,272 @@ func (s StructSet) JSON() ([]byte, error) {
     return fbe.Json.Marshal(&s)
 }
 
+// Set wrapper for the field F1
 type setF1 map[byte]byte
-type setF2 map[EnumSimpleKey]EnumSimple
-type setF3 map[FlagsSimpleKey]FlagsSimple
-type setF4 map[StructSimpleKey]StructSimple
 
-func (s setF1) MarshalJSON() ([]byte, error) {
-    set := make([]byte, 0)
-    for _, v := range s {
-        set = append(set, v)
-    }
-    return fbe.Json.Marshal(&set)
+// Is the set empty?
+func (s setF1) IsEmpty() bool {
+    return s.Size() > 0
 }
 
+// Get the set size
+func (s setF1) Size() int {
+    return len(s)
+}
+
+// Add the given item to the set
+func (s setF1) Add(item byte) {
+    s[item] = item
+}
+
+// Contains the given item in the set?
+func (s setF1) Contains(item byte) bool {
+    _, exists := s[item]
+return exists
+}
+
+// Remove the given item from the set
+func (s setF1) Remove(item byte) {
+    delete(s, item)
+}
+
+// Clear the set
+func (s setF1) Clear() {
+    for i := range s {
+        delete(s, i)
+    }
+}
+
+// Enumerate the set
+func (s setF1) Enumerate() []byte {
+    array := make([]byte, 0)
+    for _, v := range s {
+        array = append(array, v)
+    }
+    return array
+}
+
+// Convert set to JSON
+func (s setF1) MarshalJSON() ([]byte, error) {
+    array := make([]byte, 0)
+    for _, v := range s {
+        array = append(array, v)
+    }
+    return fbe.Json.Marshal(&array)
+}
+
+// Convert JSON to set
 func (s *setF1) UnmarshalJSON(body []byte) error {
-    var set []byte
-    err := fbe.Json.Unmarshal(body, &set)
+    var array []byte
+    err := fbe.Json.Unmarshal(body, &array)
     if err != nil {
         return err
     } else {
-        for _, v := range set {
+        for _, v := range array {
             (*s)[v] = v
         }
     }
     return nil
 }
 
+// Set wrapper for the field F2
+type setF2 map[EnumSimpleKey]EnumSimple
+
+// Is the set empty?
+func (s setF2) IsEmpty() bool {
+    return s.Size() > 0
+}
+
+// Get the set size
+func (s setF2) Size() int {
+    return len(s)
+}
+
+// Add the given item to the set
+func (s setF2) Add(item EnumSimple) {
+    s[item.Key()] = item
+}
+
+// Contains the given item in the set?
+func (s setF2) Contains(item EnumSimple) bool {
+    _, exists := s[item.Key()]
+return exists
+}
+
+// Remove the given item from the set
+func (s setF2) Remove(item EnumSimple) {
+    delete(s, item.Key())
+}
+
+// Clear the set
+func (s setF2) Clear() {
+    for i := range s {
+        delete(s, i)
+    }
+}
+
+// Enumerate the set
+func (s setF2) Enumerate() []EnumSimple {
+    array := make([]EnumSimple, 0)
+    for _, v := range s {
+        array = append(array, v)
+    }
+    return array
+}
+
+// Convert set to JSON
 func (s setF2) MarshalJSON() ([]byte, error) {
-    set := make([]EnumSimple, 0)
+    array := make([]EnumSimple, 0)
     for _, v := range s {
-        set = append(set, v)
+        array = append(array, v)
     }
-    return fbe.Json.Marshal(&set)
+    return fbe.Json.Marshal(&array)
 }
 
+// Convert JSON to set
 func (s *setF2) UnmarshalJSON(body []byte) error {
-    var set []EnumSimple
-    err := fbe.Json.Unmarshal(body, &set)
+    var array []EnumSimple
+    err := fbe.Json.Unmarshal(body, &array)
     if err != nil {
         return err
     } else {
-        for _, v := range set {
+        for _, v := range array {
             (*s)[v.Key()] = v
         }
     }
     return nil
 }
 
+// Set wrapper for the field F3
+type setF3 map[FlagsSimpleKey]FlagsSimple
+
+// Is the set empty?
+func (s setF3) IsEmpty() bool {
+    return s.Size() > 0
+}
+
+// Get the set size
+func (s setF3) Size() int {
+    return len(s)
+}
+
+// Add the given item to the set
+func (s setF3) Add(item FlagsSimple) {
+    s[item.Key()] = item
+}
+
+// Contains the given item in the set?
+func (s setF3) Contains(item FlagsSimple) bool {
+    _, exists := s[item.Key()]
+return exists
+}
+
+// Remove the given item from the set
+func (s setF3) Remove(item FlagsSimple) {
+    delete(s, item.Key())
+}
+
+// Clear the set
+func (s setF3) Clear() {
+    for i := range s {
+        delete(s, i)
+    }
+}
+
+// Enumerate the set
+func (s setF3) Enumerate() []FlagsSimple {
+    array := make([]FlagsSimple, 0)
+    for _, v := range s {
+        array = append(array, v)
+    }
+    return array
+}
+
+// Convert set to JSON
 func (s setF3) MarshalJSON() ([]byte, error) {
-    set := make([]FlagsSimple, 0)
+    array := make([]FlagsSimple, 0)
     for _, v := range s {
-        set = append(set, v)
+        array = append(array, v)
     }
-    return fbe.Json.Marshal(&set)
+    return fbe.Json.Marshal(&array)
 }
 
+// Convert JSON to set
 func (s *setF3) UnmarshalJSON(body []byte) error {
-    var set []FlagsSimple
-    err := fbe.Json.Unmarshal(body, &set)
+    var array []FlagsSimple
+    err := fbe.Json.Unmarshal(body, &array)
     if err != nil {
         return err
     } else {
-        for _, v := range set {
+        for _, v := range array {
             (*s)[v.Key()] = v
         }
     }
     return nil
 }
 
-func (s setF4) MarshalJSON() ([]byte, error) {
-    set := make([]StructSimple, 0)
-    for _, v := range s {
-        set = append(set, v)
-    }
-    return fbe.Json.Marshal(&set)
+// Set wrapper for the field F4
+type setF4 map[StructSimpleKey]StructSimple
+
+// Is the set empty?
+func (s setF4) IsEmpty() bool {
+    return s.Size() > 0
 }
 
+// Get the set size
+func (s setF4) Size() int {
+    return len(s)
+}
+
+// Add the given item to the set
+func (s setF4) Add(item StructSimple) {
+    s[item.Key()] = item
+}
+
+// Contains the given item in the set?
+func (s setF4) Contains(item StructSimple) bool {
+    _, exists := s[item.Key()]
+return exists
+}
+
+// Remove the given item from the set
+func (s setF4) Remove(item StructSimple) {
+    delete(s, item.Key())
+}
+
+// Clear the set
+func (s setF4) Clear() {
+    for i := range s {
+        delete(s, i)
+    }
+}
+
+// Enumerate the set
+func (s setF4) Enumerate() []StructSimple {
+    array := make([]StructSimple, 0)
+    for _, v := range s {
+        array = append(array, v)
+    }
+    return array
+}
+
+// Convert set to JSON
+func (s setF4) MarshalJSON() ([]byte, error) {
+    array := make([]StructSimple, 0)
+    for _, v := range s {
+        array = append(array, v)
+    }
+    return fbe.Json.Marshal(&array)
+}
+
+// Convert JSON to set
 func (s *setF4) UnmarshalJSON(body []byte) error {
-    var set []StructSimple
-    err := fbe.Json.Unmarshal(body, &set)
+    var array []StructSimple
+    err := fbe.Json.Unmarshal(body, &array)
     if err != nil {
         return err
     } else {
-        for _, v := range set {
+        for _, v := range array {
             (*s)[v.Key()] = v
         }
     }

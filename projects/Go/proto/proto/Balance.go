@@ -38,7 +38,7 @@ func NewBalance() *Balance {
 
 // Create a new Balance struct from JSON
 func NewBalanceFromJSON(buffer []byte) (*Balance, error) {
-    var result Balance
+    result := *NewBalance()
     err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err

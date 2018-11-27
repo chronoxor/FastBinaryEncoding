@@ -62,7 +62,7 @@ func NewStructNested() *StructNested {
 
 // Create a new StructNested struct from JSON
 func NewStructNestedFromJSON(buffer []byte) (*StructNested, error) {
-    var result StructNested
+    result := *NewStructNested()
     err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err

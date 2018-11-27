@@ -55,7 +55,7 @@ func NewStructMap() *StructMap {
 
 // Create a new StructMap struct from JSON
 func NewStructMapFromJSON(buffer []byte) (*StructMap, error) {
-    var result StructMap
+    result := *NewStructMap()
     err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err

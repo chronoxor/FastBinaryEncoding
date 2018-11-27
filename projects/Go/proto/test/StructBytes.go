@@ -41,7 +41,7 @@ func NewStructBytes() *StructBytes {
 
 // Create a new StructBytes struct from JSON
 func NewStructBytesFromJSON(buffer []byte) (*StructBytes, error) {
-    var result StructBytes
+    result := *NewStructBytes()
     err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err

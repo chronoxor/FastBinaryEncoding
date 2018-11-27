@@ -862,22 +862,22 @@ func TestSerializationJsonStructSet(t *testing.T) {
 	struct2, _ := test.NewStructSetFromJSON(json)
 
 	assert.EqualValues(t, len(struct2.F1), 3)
-	assert.Contains(t, struct2.F1, byte(48))
-	assert.Contains(t, struct2.F1, byte(65))
-	assert.Contains(t, struct2.F1, byte(97))
+	assert.True(t, struct2.F1.Contains(48))
+	assert.True(t, struct2.F1.Contains(65))
+	assert.True(t, struct2.F1.Contains(97))
 	assert.EqualValues(t, len(struct2.F2), 2)
-	assert.Contains(t, struct2.F2, test.EnumSimple_ENUM_VALUE_1.Key())
-	assert.Contains(t, struct2.F2, test.EnumSimple_ENUM_VALUE_2.Key())
+	assert.True(t, struct2.F2.Contains(test.EnumSimple_ENUM_VALUE_1))
+	assert.True(t, struct2.F2.Contains(test.EnumSimple_ENUM_VALUE_2))
 	assert.EqualValues(t, len(struct2.F3), 2)
-	assert.Contains(t, struct2.F3, (test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2).Key())
-	assert.Contains(t, struct2.F3, (test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3).Key())
+	assert.True(t, struct2.F3.Contains(test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2))
+	assert.True(t, struct2.F3.Contains(test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3))
 	assert.EqualValues(t, len(struct2.F4), 2)
-	s1 := test.NewStructSimple()
+	s1 := *test.NewStructSimple()
 	s1.Uid = 48
-	assert.Contains(t, struct2.F4, s1.Key())
-	s2 := test.NewStructSimple()
+	assert.True(t, struct2.F4.Contains(s1))
+	s2 := *test.NewStructSimple()
 	s2.Uid = 65
-	assert.Contains(t, struct2.F4, s2.Key())
+	assert.True(t, struct2.F4.Contains(s2))
 }
 
 func TestSerializationJsonStructMap(t *testing.T) {

@@ -39,7 +39,7 @@ func NewStructHashEx() *StructHashEx {
 
 // Create a new StructHashEx struct from JSON
 func NewStructHashExFromJSON(buffer []byte) (*StructHashEx, error) {
-    var result StructHashEx
+    result := *NewStructHashEx()
     err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err

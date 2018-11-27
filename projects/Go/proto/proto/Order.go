@@ -46,7 +46,7 @@ func NewOrder() *Order {
 
 // Create a new Order struct from JSON
 func NewOrderFromJSON(buffer []byte) (*Order, error) {
-    var result Order
+    result := *NewOrder()
     err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err

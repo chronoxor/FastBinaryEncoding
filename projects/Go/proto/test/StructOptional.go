@@ -170,7 +170,7 @@ func NewStructOptional() *StructOptional {
 
 // Create a new StructOptional struct from JSON
 func NewStructOptionalFromJSON(buffer []byte) (*StructOptional, error) {
-    var result StructOptional
+    result := *NewStructOptional()
     err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err
