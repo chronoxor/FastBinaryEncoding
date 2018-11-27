@@ -81,7 +81,6 @@ func (s Account) Optional() *Account {
 // Convert struct to string
 func (s Account) String() string {
     var sb strings.Builder
-    sb.WriteString("Account()")
     return sb.String()
 }
 
