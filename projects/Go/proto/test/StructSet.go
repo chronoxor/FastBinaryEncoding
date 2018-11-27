@@ -5,7 +5,9 @@
 
 package test
 
-import "strings"
+import (
+    "strings"
+)
 import "../fbe"
 import "../proto"
 
@@ -25,25 +27,25 @@ func (k StructSetKey) String() string {
 
 // StructSet struct
 type StructSet struct {
-    F1 map[byte]byte `json:"f1"`
-    F2 map[EnumSimpleKey]EnumSimple `json:"f2"`
-    F3 map[FlagsSimpleKey]FlagsSimple `json:"f3"`
-    F4 map[StructSimpleKey]StructSimple `json:"f4"`
+    F1 setF1 `json:"f1"`
+    F2 setF2 `json:"f2"`
+    F3 setF3 `json:"f3"`
+    F4 setF4 `json:"f4"`
 }
 
 // Create a new StructSet struct
 func NewStructSet() *StructSet {
     return &StructSet{
-        F1: make(map[byte]byte),
-        F2: make(map[EnumSimpleKey]EnumSimple),
-        F3: make(map[FlagsSimpleKey]FlagsSimple),
-        F4: make(map[StructSimpleKey]StructSimple),
+        F1: make(setF1),
+        F2: make(setF2),
+        F3: make(setF3),
+        F4: make(setF4),
     }
 }
 
 // Create a new StructSet struct from JSON
 func NewStructSetFromJSON(buffer []byte) (*StructSet, error) {
-    var result StructSet
+    result := *NewStructSet()
     err := fbe.Json.Unmarshal(buffer, &result)
     if err != nil {
         return nil, err
@@ -83,4 +85,93 @@ func (s StructSet) String() string {
 // Convert struct to JSON
 func (s StructSet) JSON() ([]byte, error) {
     return fbe.Json.Marshal(&s)
+}
+
+type setF1 map[byte]byte
+type setF2 map[EnumSimpleKey]EnumSimple
+type setF3 map[FlagsSimpleKey]FlagsSimple
+type setF4 map[StructSimpleKey]StructSimple
+
+func (s setF1) MarshalJSON() ([]byte, error) {
+    set := make([]byte, 0)
+    for _, v := range s {
+        set = append(set, v)
+    }
+    return fbe.Json.Marshal(&set)
+}
+
+func (s *setF1) UnmarshalJSON(body []byte) error {
+    var set []byte
+    err := fbe.Json.Unmarshal(body, &set)
+    if err != nil {
+        return err
+    } else {
+        for _, v := range set {
+            (*s)[v] = v
+        }
+    }
+    return nil
+}
+
+func (s setF2) MarshalJSON() ([]byte, error) {
+    set := make([]EnumSimple, 0)
+    for _, v := range s {
+        set = append(set, v)
+    }
+    return fbe.Json.Marshal(&set)
+}
+
+func (s *setF2) UnmarshalJSON(body []byte) error {
+    var set []EnumSimple
+    err := fbe.Json.Unmarshal(body, &set)
+    if err != nil {
+        return err
+    } else {
+        for _, v := range set {
+            (*s)[v.Key()] = v
+        }
+    }
+    return nil
+}
+
+func (s setF3) MarshalJSON() ([]byte, error) {
+    set := make([]FlagsSimple, 0)
+    for _, v := range s {
+        set = append(set, v)
+    }
+    return fbe.Json.Marshal(&set)
+}
+
+func (s *setF3) UnmarshalJSON(body []byte) error {
+    var set []FlagsSimple
+    err := fbe.Json.Unmarshal(body, &set)
+    if err != nil {
+        return err
+    } else {
+        for _, v := range set {
+            (*s)[v.Key()] = v
+        }
+    }
+    return nil
+}
+
+func (s setF4) MarshalJSON() ([]byte, error) {
+    set := make([]StructSimple, 0)
+    for _, v := range s {
+        set = append(set, v)
+    }
+    return fbe.Json.Marshal(&set)
+}
+
+func (s *setF4) UnmarshalJSON(body []byte) error {
+    var set []StructSimple
+    err := fbe.Json.Unmarshal(body, &set)
+    if err != nil {
+        return err
+    } else {
+        for _, v := range set {
+            (*s)[v.Key()] = v
+        }
+    }
+    return nil
 }

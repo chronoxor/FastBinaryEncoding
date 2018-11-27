@@ -844,7 +844,7 @@ func TestSerializationJsonStructList(t *testing.T) {
 	assert.EqualValues(t, struct2.F10[0].F32, "Initial string!")
 	assert.Nil(t, struct2.F10[1])
 }
-/*
+
 func TestSerializationJsonStructSet(t *testing.T) {
 	// Define a source JSON string
 	json := []byte(`{"f1":[48,65,97],"f2":[1,2],"f3":[3,7],"f4":[{"uid":48,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146299848353000,"f36":"00000000-0000-0000-0000-000000000000","f37":"89e4edd0-f0a7-11e8-9dde-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},{"uid":65,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146299848966000,"f36":"00000000-0000-0000-0000-000000000000","f37":"89e503f6-f0a7-11e8-9dde-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}]}`)
@@ -862,24 +862,24 @@ func TestSerializationJsonStructSet(t *testing.T) {
 	struct2, _ := test.NewStructSetFromJSON(json)
 
 	assert.EqualValues(t, len(struct2.F1), 3)
-	assert.Contains(t, struct2.F1, 48)
-	assert.Contains(t, struct2.F1, 65)
-	assert.Contains(t, struct2.F1, 97)
+	assert.Contains(t, struct2.F1, byte(48))
+	assert.Contains(t, struct2.F1, byte(65))
+	assert.Contains(t, struct2.F1, byte(97))
 	assert.EqualValues(t, len(struct2.F2), 2)
-	assert.Contains(t, struct2.F2, test.EnumSimple_ENUM_VALUE_1)
-	assert.Contains(t, struct2.F2, test.EnumSimple_ENUM_VALUE_2)
+	assert.Contains(t, struct2.F2, test.EnumSimple_ENUM_VALUE_1.Key())
+	assert.Contains(t, struct2.F2, test.EnumSimple_ENUM_VALUE_2.Key())
 	assert.EqualValues(t, len(struct2.F3), 2)
-	assert.Contains(t, struct2.F3, (test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2))
-	assert.Contains(t, struct2.F3, (test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3))
+	assert.Contains(t, struct2.F3, (test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2).Key())
+	assert.Contains(t, struct2.F3, (test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3).Key())
 	assert.EqualValues(t, len(struct2.F4), 2)
 	s1 := test.NewStructSimple()
 	s1.Uid = 48
-	assert.Contains(t, struct2.F4, s1)
+	assert.Contains(t, struct2.F4, s1.Key())
 	s2 := test.NewStructSimple()
 	s2.Uid = 65
-	assert.Contains(t, struct2.F4, s2)
+	assert.Contains(t, struct2.F4, s2.Key())
 }
-*/
+
 func TestSerializationJsonStructMap(t *testing.T) {
 	// Define a source JSON string
 	json := []byte(`{"f1":{"10":48,"20":65},"f2":{"10":97,"20":null},"f3":{"10":"MDAw","20":"QUFB"},"f4":{"10":"YWFh","20":null},"f5":{"10":1,"20":2},"f6":{"10":1,"20":null},"f7":{"10":3,"20":7},"f8":{"10":3,"20":null},"f9":{"10":{"uid":48,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146345803483000,"f36":"00000000-0000-0000-0000-000000000000","f37":"a549215e-f0a7-11e8-90f6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"20":{"uid":65,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146345804184000,"f36":"00000000-0000-0000-0000-000000000000","f37":"a54942ce-f0a7-11e8-90f6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}},"f10":{"10":{"uid":48,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146345803483000,"f36":"00000000-0000-0000-0000-000000000000","f37":"a549215e-f0a7-11e8-90f6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"20":null}}`)
