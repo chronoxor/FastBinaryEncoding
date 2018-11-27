@@ -30,6 +30,7 @@ protected:
 
     void Open(const CppCommon::Path& filename);
     void Write(const std::string& str);
+    void WriteIndent();
     void WriteIndent(const std::string& str);
     void WriteLine();
     void WriteLine(const std::string& str);

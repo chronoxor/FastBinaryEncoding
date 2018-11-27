@@ -728,21 +728,13 @@ class StructSimple(object):
         sb.append(",f4=")
         sb.append(str(self.f4))
         sb.append(",f5=")
-        sb.append("'")
-        sb.append(str(self.f5))
-        sb.append("'")
+        sb.append("'" + str(self.f5) + "'")
         sb.append(",f6=")
-        sb.append("'")
-        sb.append(str(self.f6))
-        sb.append("'")
+        sb.append("'" + str(self.f6) + "'")
         sb.append(",f7=")
-        sb.append("'")
-        sb.append(str(self.f7))
-        sb.append("'")
+        sb.append("'" + str(self.f7) + "'")
         sb.append(",f8=")
-        sb.append("'")
-        sb.append(str(self.f8))
-        sb.append("'")
+        sb.append("'" + str(self.f8) + "'")
         sb.append(",f9=")
         sb.append(str(self.f9))
         sb.append(",f10=")
@@ -795,16 +787,12 @@ class StructSimple(object):
             sb.append("null")
         sb.append(",f31=")
         if self.f31 is not None:
-            sb.append("\"")
-            sb.append(str(self.f31))
-            sb.append("\"")
+            sb.append("\"" + str(self.f31) + "\"")
         else:
             sb.append("null")
         sb.append(",f32=")
         if self.f32 is not None:
-            sb.append("\"")
-            sb.append(str(self.f32))
-            sb.append("\"")
+            sb.append("\"" + str(self.f32) + "\"")
         else:
             sb.append("null")
         sb.append(",f33=")
@@ -824,23 +812,17 @@ class StructSimple(object):
             sb.append("null")
         sb.append(",f36=")
         if self.f36 is not None:
-            sb.append("\"")
-            sb.append(str(self.f36))
-            sb.append("\"")
+            sb.append("\"" + str(self.f36) + "\"")
         else:
             sb.append("null")
         sb.append(",f37=")
         if self.f37 is not None:
-            sb.append("\"")
-            sb.append(str(self.f37))
-            sb.append("\"")
+            sb.append("\"" + str(self.f37) + "\"")
         else:
             sb.append("null")
         sb.append(",f38=")
         if self.f38 is not None:
-            sb.append("\"")
-            sb.append(str(self.f38))
-            sb.append("\"")
+            sb.append("\"" + str(self.f38) + "\"")
         else:
             sb.append("null")
         sb.append(",f39=")
@@ -3481,44 +3463,32 @@ class StructOptional(StructSimple):
             sb.append("null")
         sb.append(",f106=")
         if self.f106 is not None:
-            sb.append("'")
-            sb.append(str(self.f106))
-            sb.append("'")
+            sb.append("'" + str(self.f106) + "'")
         else:
             sb.append("null")
         sb.append(",f107=")
         if self.f107 is not None:
-            sb.append("'")
-            sb.append(str(self.f107))
-            sb.append("'")
+            sb.append("'" + str(self.f107) + "'")
         else:
             sb.append("null")
         sb.append(",f108=")
         if self.f108 is not None:
-            sb.append("'")
-            sb.append(str(self.f108))
-            sb.append("'")
+            sb.append("'" + str(self.f108) + "'")
         else:
             sb.append("null")
         sb.append(",f109=")
         if self.f109 is not None:
-            sb.append("'")
-            sb.append(str(self.f109))
-            sb.append("'")
+            sb.append("'" + str(self.f109) + "'")
         else:
             sb.append("null")
         sb.append(",f110=")
         if self.f110 is not None:
-            sb.append("'")
-            sb.append(str(self.f110))
-            sb.append("'")
+            sb.append("'" + str(self.f110) + "'")
         else:
             sb.append("null")
         sb.append(",f111=")
         if self.f111 is not None:
-            sb.append("'")
-            sb.append(str(self.f111))
-            sb.append("'")
+            sb.append("'" + str(self.f111) + "'")
         else:
             sb.append("null")
         sb.append(",f112=")
@@ -3688,23 +3658,17 @@ class StructOptional(StructSimple):
             sb.append("null")
         sb.append(",f145=")
         if self.f145 is not None:
-            sb.append("\"")
-            sb.append(str(self.f145))
-            sb.append("\"")
+            sb.append("\"" + str(self.f145) + "\"")
         else:
             sb.append("null")
         sb.append(",f146=")
         if self.f146 is not None:
-            sb.append("\"")
-            sb.append(str(self.f146))
-            sb.append("\"")
+            sb.append("\"" + str(self.f146) + "\"")
         else:
             sb.append("null")
         sb.append(",f147=")
         if self.f147 is not None:
-            sb.append("\"")
-            sb.append(str(self.f147))
-            sb.append("\"")
+            sb.append("\"" + str(self.f147) + "\"")
         else:
             sb.append("null")
         sb.append(",f148=")
@@ -3724,23 +3688,17 @@ class StructOptional(StructSimple):
             sb.append("null")
         sb.append(",f151=")
         if self.f151 is not None:
-            sb.append("\"")
-            sb.append(str(self.f151))
-            sb.append("\"")
+            sb.append("\"" + str(self.f151) + "\"")
         else:
             sb.append("null")
         sb.append(",f152=")
         if self.f152 is not None:
-            sb.append("\"")
-            sb.append(str(self.f152))
-            sb.append("\"")
+            sb.append("\"" + str(self.f152) + "\"")
         else:
             sb.append("null")
         sb.append(",f153=")
         if self.f153 is not None:
-            sb.append("\"")
-            sb.append(str(self.f153))
-            sb.append("\"")
+            sb.append("\"" + str(self.f153) + "\"")
         else:
             sb.append("null")
         sb.append(",f154=")
@@ -8343,23 +8301,17 @@ class StructBytes(object):
         sb.append("StructBytes(")
         sb.append("f1=")
         if self.f1 is not None:
-            sb.append("bytes[")
-            sb.append(str(len(self.f1)))
-            sb.append("]")
+            sb.append("bytes[" + str(len(self.f1)) + "]")
         else:
             sb.append("null")
         sb.append(",f2=")
         if self.f2 is not None:
-            sb.append("bytes[")
-            sb.append(str(len(self.f2)))
-            sb.append("]")
+            sb.append("bytes[" + str(len(self.f2)) + "]")
         else:
             sb.append("null")
         sb.append(",f3=")
         if self.f3 is not None:
-            sb.append("bytes[")
-            sb.append(str(len(self.f3)))
-            sb.append("]")
+            sb.append("bytes[" + str(len(self.f3)) + "]")
         else:
             sb.append("null")
         sb.append(")")
@@ -8965,9 +8917,7 @@ class StructArray(object):
         sb.append("f1=")
         if self.f1 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f1)))
-            sb.append("][")
+            sb.append("[" + str(len(self.f1)) + "][")
             for item in self.f1:
                 sb.append("" if first else ",")
                 sb.append(str(item))
@@ -8976,9 +8926,7 @@ class StructArray(object):
         sb.append(",f2=")
         if self.f2 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f2)))
-            sb.append("][")
+            sb.append("[" + str(len(self.f2)) + "][")
             for item in self.f2:
                 if item is not None:
                     sb.append("" if first else ",")
@@ -8990,15 +8938,11 @@ class StructArray(object):
         sb.append(",f3=")
         if self.f3 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f3)))
-            sb.append("][")
+            sb.append("[" + str(len(self.f3)) + "][")
             for item in self.f3:
                 if item is not None:
                     sb.append("" if first else ",")
-                    sb.append("bytes[")
-                    sb.append(str(len(item)))
-                    sb.append("]")
+                    sb.append("bytes[" + str(len(item)) + "]")
                 else:
                     sb.append("null")
                 first = False
@@ -9006,15 +8950,11 @@ class StructArray(object):
         sb.append(",f4=")
         if self.f4 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f4)))
-            sb.append("][")
+            sb.append("[" + str(len(self.f4)) + "][")
             for item in self.f4:
                 if item is not None:
                     sb.append("" if first else ",")
-                    sb.append("bytes[")
-                    sb.append(str(len(item)))
-                    sb.append("]")
+                    sb.append("bytes[" + str(len(item)) + "]")
                 else:
                     sb.append("null")
                 first = False
@@ -9022,9 +8962,7 @@ class StructArray(object):
         sb.append(",f5=")
         if self.f5 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f5)))
-            sb.append("][")
+            sb.append("[" + str(len(self.f5)) + "][")
             for item in self.f5:
                 sb.append("" if first else ",")
                 sb.append(str(item))
@@ -9033,9 +8971,7 @@ class StructArray(object):
         sb.append(",f6=")
         if self.f6 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f6)))
-            sb.append("][")
+            sb.append("[" + str(len(self.f6)) + "][")
             for item in self.f6:
                 if item is not None:
                     sb.append("" if first else ",")
@@ -9047,9 +8983,7 @@ class StructArray(object):
         sb.append(",f7=")
         if self.f7 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f7)))
-            sb.append("][")
+            sb.append("[" + str(len(self.f7)) + "][")
             for item in self.f7:
                 sb.append("" if first else ",")
                 sb.append(str(item))
@@ -9058,9 +8992,7 @@ class StructArray(object):
         sb.append(",f8=")
         if self.f8 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f8)))
-            sb.append("][")
+            sb.append("[" + str(len(self.f8)) + "][")
             for item in self.f8:
                 if item is not None:
                     sb.append("" if first else ",")
@@ -9072,9 +9004,7 @@ class StructArray(object):
         sb.append(",f9=")
         if self.f9 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f9)))
-            sb.append("][")
+            sb.append("[" + str(len(self.f9)) + "][")
             for item in self.f9:
                 sb.append("" if first else ",")
                 sb.append(str(item))
@@ -9083,9 +9013,7 @@ class StructArray(object):
         sb.append(",f10=")
         if self.f10 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f10)))
-            sb.append("][")
+            sb.append("[" + str(len(self.f10)) + "][")
             for item in self.f10:
                 if item is not None:
                     sb.append("" if first else ",")
@@ -10002,9 +9930,7 @@ class StructVector(object):
         sb.append("f1=")
         if self.f1 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f1)))
-            sb.append("][")
+            sb.append("[" + str(len(self.f1)) + "][")
             for item in self.f1:
                 sb.append("" if first else ",")
                 sb.append(str(item))
@@ -10013,9 +9939,7 @@ class StructVector(object):
         sb.append(",f2=")
         if self.f2 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f2)))
-            sb.append("][")
+            sb.append("[" + str(len(self.f2)) + "][")
             for item in self.f2:
                 if item is not None:
                     sb.append("" if first else ",")
@@ -10027,15 +9951,11 @@ class StructVector(object):
         sb.append(",f3=")
         if self.f3 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f3)))
-            sb.append("][")
+            sb.append("[" + str(len(self.f3)) + "][")
             for item in self.f3:
                 if item is not None:
                     sb.append("" if first else ",")
-                    sb.append("bytes[")
-                    sb.append(str(len(item)))
-                    sb.append("]")
+                    sb.append("bytes[" + str(len(item)) + "]")
                 else:
                     sb.append("null")
                 first = False
@@ -10043,15 +9963,11 @@ class StructVector(object):
         sb.append(",f4=")
         if self.f4 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f4)))
-            sb.append("][")
+            sb.append("[" + str(len(self.f4)) + "][")
             for item in self.f4:
                 if item is not None:
                     sb.append("" if first else ",")
-                    sb.append("bytes[")
-                    sb.append(str(len(item)))
-                    sb.append("]")
+                    sb.append("bytes[" + str(len(item)) + "]")
                 else:
                     sb.append("null")
                 first = False
@@ -10059,9 +9975,7 @@ class StructVector(object):
         sb.append(",f5=")
         if self.f5 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f5)))
-            sb.append("][")
+            sb.append("[" + str(len(self.f5)) + "][")
             for item in self.f5:
                 sb.append("" if first else ",")
                 sb.append(str(item))
@@ -10070,9 +9984,7 @@ class StructVector(object):
         sb.append(",f6=")
         if self.f6 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f6)))
-            sb.append("][")
+            sb.append("[" + str(len(self.f6)) + "][")
             for item in self.f6:
                 if item is not None:
                     sb.append("" if first else ",")
@@ -10084,9 +9996,7 @@ class StructVector(object):
         sb.append(",f7=")
         if self.f7 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f7)))
-            sb.append("][")
+            sb.append("[" + str(len(self.f7)) + "][")
             for item in self.f7:
                 sb.append("" if first else ",")
                 sb.append(str(item))
@@ -10095,9 +10005,7 @@ class StructVector(object):
         sb.append(",f8=")
         if self.f8 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f8)))
-            sb.append("][")
+            sb.append("[" + str(len(self.f8)) + "][")
             for item in self.f8:
                 if item is not None:
                     sb.append("" if first else ",")
@@ -10109,9 +10017,7 @@ class StructVector(object):
         sb.append(",f9=")
         if self.f9 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f9)))
-            sb.append("][")
+            sb.append("[" + str(len(self.f9)) + "][")
             for item in self.f9:
                 sb.append("" if first else ",")
                 sb.append(str(item))
@@ -10120,9 +10026,7 @@ class StructVector(object):
         sb.append(",f10=")
         if self.f10 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f10)))
-            sb.append("][")
+            sb.append("[" + str(len(self.f10)) + "][")
             for item in self.f10:
                 if item is not None:
                     sb.append("" if first else ",")
@@ -11039,9 +10943,7 @@ class StructList(object):
         sb.append("f1=")
         if self.f1 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f1)))
-            sb.append("]<")
+            sb.append("[" + str(len(self.f1)) + "]<")
             for item in self.f1:
                 sb.append("" if first else ",")
                 sb.append(str(item))
@@ -11050,9 +10952,7 @@ class StructList(object):
         sb.append(",f2=")
         if self.f2 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f2)))
-            sb.append("]<")
+            sb.append("[" + str(len(self.f2)) + "]<")
             for item in self.f2:
                 if item is not None:
                     sb.append("" if first else ",")
@@ -11064,15 +10964,11 @@ class StructList(object):
         sb.append(",f3=")
         if self.f3 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f3)))
-            sb.append("]<")
+            sb.append("[" + str(len(self.f3)) + "]<")
             for item in self.f3:
                 if item is not None:
                     sb.append("" if first else ",")
-                    sb.append("bytes[")
-                    sb.append(str(len(item)))
-                    sb.append("]")
+                    sb.append("bytes[" + str(len(item)) + "]")
                 else:
                     sb.append("null")
                 first = False
@@ -11080,15 +10976,11 @@ class StructList(object):
         sb.append(",f4=")
         if self.f4 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f4)))
-            sb.append("]<")
+            sb.append("[" + str(len(self.f4)) + "]<")
             for item in self.f4:
                 if item is not None:
                     sb.append("" if first else ",")
-                    sb.append("bytes[")
-                    sb.append(str(len(item)))
-                    sb.append("]")
+                    sb.append("bytes[" + str(len(item)) + "]")
                 else:
                     sb.append("null")
                 first = False
@@ -11096,9 +10988,7 @@ class StructList(object):
         sb.append(",f5=")
         if self.f5 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f5)))
-            sb.append("]<")
+            sb.append("[" + str(len(self.f5)) + "]<")
             for item in self.f5:
                 sb.append("" if first else ",")
                 sb.append(str(item))
@@ -11107,9 +10997,7 @@ class StructList(object):
         sb.append(",f6=")
         if self.f6 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f6)))
-            sb.append("]<")
+            sb.append("[" + str(len(self.f6)) + "]<")
             for item in self.f6:
                 if item is not None:
                     sb.append("" if first else ",")
@@ -11121,9 +11009,7 @@ class StructList(object):
         sb.append(",f7=")
         if self.f7 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f7)))
-            sb.append("]<")
+            sb.append("[" + str(len(self.f7)) + "]<")
             for item in self.f7:
                 sb.append("" if first else ",")
                 sb.append(str(item))
@@ -11132,9 +11018,7 @@ class StructList(object):
         sb.append(",f8=")
         if self.f8 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f8)))
-            sb.append("]<")
+            sb.append("[" + str(len(self.f8)) + "]<")
             for item in self.f8:
                 if item is not None:
                     sb.append("" if first else ",")
@@ -11146,9 +11030,7 @@ class StructList(object):
         sb.append(",f9=")
         if self.f9 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f9)))
-            sb.append("]<")
+            sb.append("[" + str(len(self.f9)) + "]<")
             for item in self.f9:
                 sb.append("" if first else ",")
                 sb.append(str(item))
@@ -11157,9 +11039,7 @@ class StructList(object):
         sb.append(",f10=")
         if self.f10 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f10)))
-            sb.append("]<")
+            sb.append("[" + str(len(self.f10)) + "]<")
             for item in self.f10:
                 if item is not None:
                     sb.append("" if first else ",")
@@ -12052,9 +11932,7 @@ class StructSet(object):
         sb.append("f1=")
         if self.f1 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f1)))
-            sb.append("]{")
+            sb.append("[" + str(len(self.f1)) + "]{")
             for item in self.f1:
                 sb.append("" if first else ",")
                 sb.append(str(item))
@@ -12063,9 +11941,7 @@ class StructSet(object):
         sb.append(",f2=")
         if self.f2 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f2)))
-            sb.append("]{")
+            sb.append("[" + str(len(self.f2)) + "]{")
             for item in self.f2:
                 sb.append("" if first else ",")
                 sb.append(str(item))
@@ -12074,9 +11950,7 @@ class StructSet(object):
         sb.append(",f3=")
         if self.f3 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f3)))
-            sb.append("]{")
+            sb.append("[" + str(len(self.f3)) + "]{")
             for item in self.f3:
                 sb.append("" if first else ",")
                 sb.append(str(item))
@@ -12085,9 +11959,7 @@ class StructSet(object):
         sb.append(",f4=")
         if self.f4 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f4)))
-            sb.append("]{")
+            sb.append("[" + str(len(self.f4)) + "]{")
             for item in self.f4:
                 sb.append("" if first else ",")
                 sb.append(str(item))
@@ -12737,29 +12609,23 @@ class StructMap(object):
         sb.append("f1=")
         if self.f1 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f1)))
-            sb.append("]<{")
+            sb.append("[" + str(len(self.f1)) + "]<{")
             for key, value in self.f1.items():
                 sb.append("" if first else ",")
                 sb.append(str(key))
                 sb.append("->")
-                sb.append("" if first else ",")
                 sb.append(str(value))
                 first = False
             sb.append("}>")
         sb.append(",f2=")
         if self.f2 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f2)))
-            sb.append("]<{")
+            sb.append("[" + str(len(self.f2)) + "]<{")
             for key, value in self.f2.items():
                 sb.append("" if first else ",")
                 sb.append(str(key))
                 sb.append("->")
                 if value is not None:
-                    sb.append("" if first else ",")
                     sb.append(str(value))
                 else:
                     sb.append("null")
@@ -12768,18 +12634,13 @@ class StructMap(object):
         sb.append(",f3=")
         if self.f3 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f3)))
-            sb.append("]<{")
+            sb.append("[" + str(len(self.f3)) + "]<{")
             for key, value in self.f3.items():
                 sb.append("" if first else ",")
                 sb.append(str(key))
                 sb.append("->")
                 if value is not None:
-                    sb.append("" if first else ",")
-                    sb.append("bytes[")
-                    sb.append(str(len(value)))
-                    sb.append("]")
+                    sb.append("bytes[" + str(len(value)) + "]")
                 else:
                     sb.append("null")
                 first = False
@@ -12787,18 +12648,13 @@ class StructMap(object):
         sb.append(",f4=")
         if self.f4 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f4)))
-            sb.append("]<{")
+            sb.append("[" + str(len(self.f4)) + "]<{")
             for key, value in self.f4.items():
                 sb.append("" if first else ",")
                 sb.append(str(key))
                 sb.append("->")
                 if value is not None:
-                    sb.append("" if first else ",")
-                    sb.append("bytes[")
-                    sb.append(str(len(value)))
-                    sb.append("]")
+                    sb.append("bytes[" + str(len(value)) + "]")
                 else:
                     sb.append("null")
                 first = False
@@ -12806,29 +12662,23 @@ class StructMap(object):
         sb.append(",f5=")
         if self.f5 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f5)))
-            sb.append("]<{")
+            sb.append("[" + str(len(self.f5)) + "]<{")
             for key, value in self.f5.items():
                 sb.append("" if first else ",")
                 sb.append(str(key))
                 sb.append("->")
-                sb.append("" if first else ",")
                 sb.append(str(value))
                 first = False
             sb.append("}>")
         sb.append(",f6=")
         if self.f6 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f6)))
-            sb.append("]<{")
+            sb.append("[" + str(len(self.f6)) + "]<{")
             for key, value in self.f6.items():
                 sb.append("" if first else ",")
                 sb.append(str(key))
                 sb.append("->")
                 if value is not None:
-                    sb.append("" if first else ",")
                     sb.append(str(value))
                 else:
                     sb.append("null")
@@ -12837,29 +12687,23 @@ class StructMap(object):
         sb.append(",f7=")
         if self.f7 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f7)))
-            sb.append("]<{")
+            sb.append("[" + str(len(self.f7)) + "]<{")
             for key, value in self.f7.items():
                 sb.append("" if first else ",")
                 sb.append(str(key))
                 sb.append("->")
-                sb.append("" if first else ",")
                 sb.append(str(value))
                 first = False
             sb.append("}>")
         sb.append(",f8=")
         if self.f8 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f8)))
-            sb.append("]<{")
+            sb.append("[" + str(len(self.f8)) + "]<{")
             for key, value in self.f8.items():
                 sb.append("" if first else ",")
                 sb.append(str(key))
                 sb.append("->")
                 if value is not None:
-                    sb.append("" if first else ",")
                     sb.append(str(value))
                 else:
                     sb.append("null")
@@ -12868,29 +12712,23 @@ class StructMap(object):
         sb.append(",f9=")
         if self.f9 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f9)))
-            sb.append("]<{")
+            sb.append("[" + str(len(self.f9)) + "]<{")
             for key, value in self.f9.items():
                 sb.append("" if first else ",")
                 sb.append(str(key))
                 sb.append("->")
-                sb.append("" if first else ",")
                 sb.append(str(value))
                 first = False
             sb.append("}>")
         sb.append(",f10=")
         if self.f10 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f10)))
-            sb.append("]<{")
+            sb.append("[" + str(len(self.f10)) + "]<{")
             for key, value in self.f10.items():
                 sb.append("" if first else ",")
                 sb.append(str(key))
                 sb.append("->")
                 if value is not None:
-                    sb.append("" if first else ",")
                     sb.append(str(value))
                 else:
                     sb.append("null")
@@ -13804,39 +13642,29 @@ class StructHash(object):
         sb.append("f1=")
         if self.f1 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f1)))
-            sb.append("][{")
+            sb.append("[" + str(len(self.f1)) + "][{")
             for key, value in self.f1.items():
                 if key is not None:
                     sb.append("" if first else ",")
-                    sb.append("\"")
-                    sb.append(str(key))
-                    sb.append("\"")
+                    sb.append("\"" + str(key) + "\"")
                 else:
                     sb.append("null")
                 sb.append("->")
-                sb.append("" if first else ",")
                 sb.append(str(value))
                 first = False
             sb.append("}]")
         sb.append(",f2=")
         if self.f2 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f2)))
-            sb.append("][{")
+            sb.append("[" + str(len(self.f2)) + "][{")
             for key, value in self.f2.items():
                 if key is not None:
                     sb.append("" if first else ",")
-                    sb.append("\"")
-                    sb.append(str(key))
-                    sb.append("\"")
+                    sb.append("\"" + str(key) + "\"")
                 else:
                     sb.append("null")
                 sb.append("->")
                 if value is not None:
-                    sb.append("" if first else ",")
                     sb.append(str(value))
                 else:
                     sb.append("null")
@@ -13845,23 +13673,16 @@ class StructHash(object):
         sb.append(",f3=")
         if self.f3 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f3)))
-            sb.append("][{")
+            sb.append("[" + str(len(self.f3)) + "][{")
             for key, value in self.f3.items():
                 if key is not None:
                     sb.append("" if first else ",")
-                    sb.append("\"")
-                    sb.append(str(key))
-                    sb.append("\"")
+                    sb.append("\"" + str(key) + "\"")
                 else:
                     sb.append("null")
                 sb.append("->")
                 if value is not None:
-                    sb.append("" if first else ",")
-                    sb.append("bytes[")
-                    sb.append(str(len(value)))
-                    sb.append("]")
+                    sb.append("bytes[" + str(len(value)) + "]")
                 else:
                     sb.append("null")
                 first = False
@@ -13869,23 +13690,16 @@ class StructHash(object):
         sb.append(",f4=")
         if self.f4 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f4)))
-            sb.append("][{")
+            sb.append("[" + str(len(self.f4)) + "][{")
             for key, value in self.f4.items():
                 if key is not None:
                     sb.append("" if first else ",")
-                    sb.append("\"")
-                    sb.append(str(key))
-                    sb.append("\"")
+                    sb.append("\"" + str(key) + "\"")
                 else:
                     sb.append("null")
                 sb.append("->")
                 if value is not None:
-                    sb.append("" if first else ",")
-                    sb.append("bytes[")
-                    sb.append(str(len(value)))
-                    sb.append("]")
+                    sb.append("bytes[" + str(len(value)) + "]")
                 else:
                     sb.append("null")
                 first = False
@@ -13893,39 +13707,29 @@ class StructHash(object):
         sb.append(",f5=")
         if self.f5 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f5)))
-            sb.append("][{")
+            sb.append("[" + str(len(self.f5)) + "][{")
             for key, value in self.f5.items():
                 if key is not None:
                     sb.append("" if first else ",")
-                    sb.append("\"")
-                    sb.append(str(key))
-                    sb.append("\"")
+                    sb.append("\"" + str(key) + "\"")
                 else:
                     sb.append("null")
                 sb.append("->")
-                sb.append("" if first else ",")
                 sb.append(str(value))
                 first = False
             sb.append("}]")
         sb.append(",f6=")
         if self.f6 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f6)))
-            sb.append("][{")
+            sb.append("[" + str(len(self.f6)) + "][{")
             for key, value in self.f6.items():
                 if key is not None:
                     sb.append("" if first else ",")
-                    sb.append("\"")
-                    sb.append(str(key))
-                    sb.append("\"")
+                    sb.append("\"" + str(key) + "\"")
                 else:
                     sb.append("null")
                 sb.append("->")
                 if value is not None:
-                    sb.append("" if first else ",")
                     sb.append(str(value))
                 else:
                     sb.append("null")
@@ -13934,39 +13738,29 @@ class StructHash(object):
         sb.append(",f7=")
         if self.f7 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f7)))
-            sb.append("][{")
+            sb.append("[" + str(len(self.f7)) + "][{")
             for key, value in self.f7.items():
                 if key is not None:
                     sb.append("" if first else ",")
-                    sb.append("\"")
-                    sb.append(str(key))
-                    sb.append("\"")
+                    sb.append("\"" + str(key) + "\"")
                 else:
                     sb.append("null")
                 sb.append("->")
-                sb.append("" if first else ",")
                 sb.append(str(value))
                 first = False
             sb.append("}]")
         sb.append(",f8=")
         if self.f8 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f8)))
-            sb.append("][{")
+            sb.append("[" + str(len(self.f8)) + "][{")
             for key, value in self.f8.items():
                 if key is not None:
                     sb.append("" if first else ",")
-                    sb.append("\"")
-                    sb.append(str(key))
-                    sb.append("\"")
+                    sb.append("\"" + str(key) + "\"")
                 else:
                     sb.append("null")
                 sb.append("->")
                 if value is not None:
-                    sb.append("" if first else ",")
                     sb.append(str(value))
                 else:
                     sb.append("null")
@@ -13975,39 +13769,29 @@ class StructHash(object):
         sb.append(",f9=")
         if self.f9 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f9)))
-            sb.append("][{")
+            sb.append("[" + str(len(self.f9)) + "][{")
             for key, value in self.f9.items():
                 if key is not None:
                     sb.append("" if first else ",")
-                    sb.append("\"")
-                    sb.append(str(key))
-                    sb.append("\"")
+                    sb.append("\"" + str(key) + "\"")
                 else:
                     sb.append("null")
                 sb.append("->")
-                sb.append("" if first else ",")
                 sb.append(str(value))
                 first = False
             sb.append("}]")
         sb.append(",f10=")
         if self.f10 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f10)))
-            sb.append("][{")
+            sb.append("[" + str(len(self.f10)) + "][{")
             for key, value in self.f10.items():
                 if key is not None:
                     sb.append("" if first else ",")
-                    sb.append("\"")
-                    sb.append(str(key))
-                    sb.append("\"")
+                    sb.append("\"" + str(key) + "\"")
                 else:
                     sb.append("null")
                 sb.append("->")
                 if value is not None:
-                    sb.append("" if first else ",")
                     sb.append(str(value))
                 else:
                     sb.append("null")
@@ -14889,29 +14673,23 @@ class StructHashEx(object):
         sb.append("f1=")
         if self.f1 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f1)))
-            sb.append("][{")
+            sb.append("[" + str(len(self.f1)) + "][{")
             for key, value in self.f1.items():
                 sb.append("" if first else ",")
                 sb.append(str(key))
                 sb.append("->")
-                sb.append("" if first else ",")
                 sb.append(str(value))
                 first = False
             sb.append("}]")
         sb.append(",f2=")
         if self.f2 is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.f2)))
-            sb.append("][{")
+            sb.append("[" + str(len(self.f2)) + "][{")
             for key, value in self.f2.items():
                 sb.append("" if first else ",")
                 sb.append(str(key))
                 sb.append("->")
                 if value is not None:
-                    sb.append("" if first else ",")
                     sb.append(str(value))
                 else:
                     sb.append("null")

@@ -4951,7 +4951,7 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
     {
         for (const auto& field : s->body->fields)
         {
-            if (field->array)
+            if (field->array || field->vector)
             {
                 WriteLineIndent("if (" + *field->name + " != null)");
                 WriteLineIndent("{");
@@ -4961,25 +4961,7 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 WriteLineIndent("foreach (var item in " + *field->name + ")");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamItem(*field->type, "item", field->optional));
-                WriteLineIndent("first = false;");
-                Indent(-1);
-                WriteLineIndent("}");
-                WriteLineIndent("sb.Append(\"]\");");
-                Indent(-1);
-                WriteLineIndent("}");
-            }
-            else if (field->vector)
-            {
-                WriteLineIndent("if (" + *field->name + " != null)");
-                WriteLineIndent("{");
-                Indent(1);
-                WriteLineIndent("bool first = true;");
-                WriteLineIndent("sb.Append(\"" + std::string(first ? "" : ",") + *field->name + "=[\").Append(" + *field->name + ".Count" + ").Append(\"][\");");
-                WriteLineIndent("foreach (var item in " + *field->name + ")");
-                WriteLineIndent("{");
-                Indent(1);
-                WriteLineIndent(ConvertOutputStreamItem(*field->type, "item", field->optional));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true));
                 WriteLineIndent("first = false;");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -4997,7 +4979,7 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 WriteLineIndent("foreach (var item in " + *field->name + ")");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamItem(*field->type, "item", field->optional));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true));
                 WriteLineIndent("first = false;");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -5015,7 +4997,7 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 WriteLineIndent("foreach (var item in " + *field->name + ")");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamItem(*field->type, "item", field->optional));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true));
                 WriteLineIndent("first = false;");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -5033,9 +5015,9 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 WriteLineIndent("foreach (var item in " + *field->name + ")");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamItem(*field->key, "item.Key", false));
+                WriteLineIndent(ConvertOutputStreamValue(*field->key, "item.Key", false, true));
                 WriteLineIndent("sb.Append(\"->\");");
-                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item.Value", field->optional));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item.Value", field->optional, false));
                 WriteLineIndent("first = false;");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -5053,9 +5035,9 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 WriteLineIndent("foreach (var item in " + *field->name + ")");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamItem(*field->key, "item.Key", false));
+                WriteLineIndent(ConvertOutputStreamValue(*field->key, "item.Key", false, true));
                 WriteLineIndent("sb.Append(\"->\");");
-                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item.Value", field->optional));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item.Value", field->optional, false));
                 WriteLineIndent("first = false;");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -5064,7 +5046,7 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 WriteLineIndent("}");
             }
             else
-                WriteLineIndent("sb.Append(\"" + std::string(first ? "" : ",") + *field->name + "=\"); " + ConvertOutputStreamValue(*field->type, *field->name, field->optional));
+                WriteLineIndent("sb.Append(\"" + std::string(first ? "" : ",") + *field->name + "=\"); " + ConvertOutputStreamValue(*field->type, *field->name, field->optional, false));
             first = false;
         }
     }
@@ -6850,20 +6832,14 @@ std::string GeneratorCSharp::ConvertOutputStreamType(const std::string& type, co
         return ".Append(" + name + ")";
 }
 
-std::string GeneratorCSharp::ConvertOutputStreamItem(const std::string& type, const std::string& name, bool optional)
+std::string GeneratorCSharp::ConvertOutputStreamValue(const std::string& type, const std::string& name, bool optional, bool separate)
 {
-    if ((type == "bytes") || (type == "string") || optional)
-        return "if (" + name + " != null) sb.Append(first ? \"\" : \",\")" + ConvertOutputStreamType(type, name, true) + "; else sb.Append(\"null\");";
-    else
-        return "sb.Append(first ? \"\" : \",\")" + ConvertOutputStreamType(type, name, false) + ";";
-}
+    std::string comma = separate ? ".Append(first ? \"\" : \",\")" : "";
 
-std::string GeneratorCSharp::ConvertOutputStreamValue(const std::string& type, const std::string& name, bool optional)
-{
-    if ((type == "bytes") || (type == "string") || optional)
-        return "if (" + name + " != null) sb" + ConvertOutputStreamType(type, name, true) + "; else sb.Append(\"null\");";
+    if (optional || (type == "bytes") || (type == "string"))
+        return "if (" + name + " != null) sb" + comma + ConvertOutputStreamType(type, name, true) + "; else sb.Append(\"null\");";
     else
-        return "sb" + ConvertOutputStreamType(type, name, false) + ";";
+        return "sb" + comma + ConvertOutputStreamType(type, name, false) + ";";
 }
 
 } // namespace FBE

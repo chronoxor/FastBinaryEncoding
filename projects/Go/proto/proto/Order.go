@@ -5,11 +5,17 @@
 
 package proto
 
+import "fmt"
+import "strconv"
 import "strings"
 import "../fbe"
 
 // Workaround for Go unused imports issue
 var _ = fbe.Version
+
+// Workaround for Go unused imports issue
+var _ = fmt.Print
+var _ = strconv.FormatInt
 
 // Order key
 type OrderKey struct {
@@ -81,6 +87,20 @@ func (s Order) Optional() *Order {
 // Convert struct to string
 func (s Order) String() string {
     var sb strings.Builder
+    sb.WriteString("Order(")
+    sb.WriteString("uid=")
+    sb.WriteString(strconv.FormatInt(int64(s.Uid), 10))
+    sb.WriteString(",symbol=")
+    sb.WriteString("\"" + s.Symbol + "\"")
+    sb.WriteString(",side=")
+    sb.WriteString(fmt.Sprintf("%v", s.Side))
+    sb.WriteString(",type=")
+    sb.WriteString(fmt.Sprintf("%v", s.Type))
+    sb.WriteString(",price=")
+    sb.WriteString(strconv.FormatFloat(float64(s.Price), 'g', -1, 64))
+    sb.WriteString(",volume=")
+    sb.WriteString(strconv.FormatFloat(float64(s.Volume), 'g', -1, 64))
+    sb.WriteString(")")
     return sb.String()
 }
 

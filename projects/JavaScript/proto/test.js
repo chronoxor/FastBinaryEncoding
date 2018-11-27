@@ -1467,21 +1467,13 @@ class StructSimple {
     result += ',f4='
     result += this.f4.toString()
     result += ',f5='
-    result += "'"
-    result += this.f5.toString()
-    result += "'"
+    result += "'"this.f5.toString() + "'"
     result += ',f6='
-    result += "'"
-    result += this.f6.toString()
-    result += "'"
+    result += "'"this.f6.toString() + "'"
     result += ',f7='
-    result += "'"
-    result += this.f7.toString()
-    result += "'"
+    result += "'"this.f7.toString() + "'"
     result += ',f8='
-    result += "'"
-    result += this.f8.toString()
-    result += "'"
+    result += "'"this.f8.toString() + "'"
     result += ',f9='
     result += this.f9.toString()
     result += ',f10='
@@ -1536,17 +1528,13 @@ class StructSimple {
     }
     result += ',f31='
     if (this.f31 != null) {
-      result += '"'
-      result += this.f31.toString()
-      result += '"'
+      result += '"'this.f31.toString() + '"'
     } else {
       result += 'null'
     }
     result += ',f32='
     if (this.f32 != null) {
-      result += '"'
-      result += this.f32.toString()
-      result += '"'
+      result += '"'this.f32.toString() + '"'
     } else {
       result += 'null'
     }
@@ -1570,25 +1558,19 @@ class StructSimple {
     }
     result += ',f36='
     if (this.f36 != null) {
-      result += '"'
-      result += this.f36.toString()
-      result += '"'
+      result += '"'this.f36.toString() + '"'
     } else {
       result += 'null'
     }
     result += ',f37='
     if (this.f37 != null) {
-      result += '"'
-      result += this.f37.toString()
-      result += '"'
+      result += '"'this.f37.toString() + '"'
     } else {
       result += 'null'
     }
     result += ',f38='
     if (this.f38 != null) {
-      result += '"'
-      result += this.f38.toString()
-      result += '"'
+      result += '"'this.f38.toString() + '"'
     } else {
       result += 'null'
     }
@@ -5517,49 +5499,37 @@ class StructOptional extends StructSimple {
     }
     result += ',f106='
     if (this.f106 != null) {
-      result += "'"
-      result += this.f106.toString()
-      result += "'"
+      result += "'"this.f106.toString() + "'"
     } else {
       result += 'null'
     }
     result += ',f107='
     if (this.f107 != null) {
-      result += "'"
-      result += this.f107.toString()
-      result += "'"
+      result += "'"this.f107.toString() + "'"
     } else {
       result += 'null'
     }
     result += ',f108='
     if (this.f108 != null) {
-      result += "'"
-      result += this.f108.toString()
-      result += "'"
+      result += "'"this.f108.toString() + "'"
     } else {
       result += 'null'
     }
     result += ',f109='
     if (this.f109 != null) {
-      result += "'"
-      result += this.f109.toString()
-      result += "'"
+      result += "'"this.f109.toString() + "'"
     } else {
       result += 'null'
     }
     result += ',f110='
     if (this.f110 != null) {
-      result += "'"
-      result += this.f110.toString()
-      result += "'"
+      result += "'"this.f110.toString() + "'"
     } else {
       result += 'null'
     }
     result += ',f111='
     if (this.f111 != null) {
-      result += "'"
-      result += this.f111.toString()
-      result += "'"
+      result += "'"this.f111.toString() + "'"
     } else {
       result += 'null'
     }
@@ -5763,25 +5733,19 @@ class StructOptional extends StructSimple {
     }
     result += ',f145='
     if (this.f145 != null) {
-      result += '"'
-      result += this.f145.toString()
-      result += '"'
+      result += '"'this.f145.toString() + '"'
     } else {
       result += 'null'
     }
     result += ',f146='
     if (this.f146 != null) {
-      result += '"'
-      result += this.f146.toString()
-      result += '"'
+      result += '"'this.f146.toString() + '"'
     } else {
       result += 'null'
     }
     result += ',f147='
     if (this.f147 != null) {
-      result += '"'
-      result += this.f147.toString()
-      result += '"'
+      result += '"'this.f147.toString() + '"'
     } else {
       result += 'null'
     }
@@ -5805,25 +5769,19 @@ class StructOptional extends StructSimple {
     }
     result += ',f151='
     if (this.f151 != null) {
-      result += '"'
-      result += this.f151.toString()
-      result += '"'
+      result += '"'this.f151.toString() + '"'
     } else {
       result += 'null'
     }
     result += ',f152='
     if (this.f152 != null) {
-      result += '"'
-      result += this.f152.toString()
-      result += '"'
+      result += '"'this.f152.toString() + '"'
     } else {
       result += 'null'
     }
     result += ',f153='
     if (this.f153 != null) {
-      result += '"'
-      result += this.f153.toString()
-      result += '"'
+      result += '"'this.f153.toString() + '"'
     } else {
       result += 'null'
     }
@@ -12220,25 +12178,19 @@ class StructBytes {
     result += 'StructBytes('
     result += 'f1='
     if (this.f1 != null) {
-      result += 'bytes['
-      result += this.f1.length
-      result += ']'
+      result += 'bytes[' + this.f1.length + ']'
     } else {
       result += 'null'
     }
     result += ',f2='
     if (this.f2 != null) {
-      result += 'bytes['
-      result += this.f2.length
-      result += ']'
+      result += 'bytes[' + this.f2.length + ']'
     } else {
       result += 'null'
     }
     result += ',f3='
     if (this.f3 != null) {
-      result += 'bytes['
-      result += this.f3.length
-      result += ']'
+      result += 'bytes[' + this.f3.length + ']'
     } else {
       result += 'null'
     }
@@ -13305,9 +13257,7 @@ class StructArray {
     result += 'f1='
     if (this.f1 != null) {
       let first = true
-      result += '['
-      result += this.f1.length
-      result += ']['
+      result += '[' + this.f1.length + ']['
       for (let item of this.f1) {
         result += first ? '' : ','
         result += item.toString()
@@ -13318,9 +13268,7 @@ class StructArray {
     result += ',f2='
     if (this.f2 != null) {
       let first = true
-      result += '['
-      result += this.f2.length
-      result += ']['
+      result += '[' + this.f2.length + ']['
       for (let item of this.f2) {
         if (item != null) {
           result += first ? '' : ','
@@ -13335,15 +13283,11 @@ class StructArray {
     result += ',f3='
     if (this.f3 != null) {
       let first = true
-      result += '['
-      result += this.f3.length
-      result += ']['
+      result += '[' + this.f3.length + ']['
       for (let item of this.f3) {
         if (item != null) {
           result += first ? '' : ','
-          result += 'bytes['
-          result += item.length
-          result += ']'
+          result += 'bytes[' + item.length + ']'
         } else {
           result += 'null'
         }
@@ -13354,15 +13298,11 @@ class StructArray {
     result += ',f4='
     if (this.f4 != null) {
       let first = true
-      result += '['
-      result += this.f4.length
-      result += ']['
+      result += '[' + this.f4.length + ']['
       for (let item of this.f4) {
         if (item != null) {
           result += first ? '' : ','
-          result += 'bytes['
-          result += item.length
-          result += ']'
+          result += 'bytes[' + item.length + ']'
         } else {
           result += 'null'
         }
@@ -13373,9 +13313,7 @@ class StructArray {
     result += ',f5='
     if (this.f5 != null) {
       let first = true
-      result += '['
-      result += this.f5.length
-      result += ']['
+      result += '[' + this.f5.length + ']['
       for (let item of this.f5) {
         result += first ? '' : ','
         result += item.toString()
@@ -13386,9 +13324,7 @@ class StructArray {
     result += ',f6='
     if (this.f6 != null) {
       let first = true
-      result += '['
-      result += this.f6.length
-      result += ']['
+      result += '[' + this.f6.length + ']['
       for (let item of this.f6) {
         if (item != null) {
           result += first ? '' : ','
@@ -13403,9 +13339,7 @@ class StructArray {
     result += ',f7='
     if (this.f7 != null) {
       let first = true
-      result += '['
-      result += this.f7.length
-      result += ']['
+      result += '[' + this.f7.length + ']['
       for (let item of this.f7) {
         result += first ? '' : ','
         result += item.toString()
@@ -13416,9 +13350,7 @@ class StructArray {
     result += ',f8='
     if (this.f8 != null) {
       let first = true
-      result += '['
-      result += this.f8.length
-      result += ']['
+      result += '[' + this.f8.length + ']['
       for (let item of this.f8) {
         if (item != null) {
           result += first ? '' : ','
@@ -13433,9 +13365,7 @@ class StructArray {
     result += ',f9='
     if (this.f9 != null) {
       let first = true
-      result += '['
-      result += this.f9.length
-      result += ']['
+      result += '[' + this.f9.length + ']['
       for (let item of this.f9) {
         result += first ? '' : ','
         result += item.toString()
@@ -13446,9 +13376,7 @@ class StructArray {
     result += ',f10='
     if (this.f10 != null) {
       let first = true
-      result += '['
-      result += this.f10.length
-      result += ']['
+      result += '[' + this.f10.length + ']['
       for (let item of this.f10) {
         if (item != null) {
           result += first ? '' : ','
@@ -14926,9 +14854,7 @@ class StructVector {
     result += 'f1='
     if (this.f1 != null) {
       let first = true
-      result += '['
-      result += this.f1.length
-      result += ']['
+      result += '[' + this.f1.length + ']['
       for (let item of this.f1) {
         result += first ? '' : ','
         result += item.toString()
@@ -14939,9 +14865,7 @@ class StructVector {
     result += ',f2='
     if (this.f2 != null) {
       let first = true
-      result += '['
-      result += this.f2.length
-      result += ']['
+      result += '[' + this.f2.length + ']['
       for (let item of this.f2) {
         if (item != null) {
           result += first ? '' : ','
@@ -14956,15 +14880,11 @@ class StructVector {
     result += ',f3='
     if (this.f3 != null) {
       let first = true
-      result += '['
-      result += this.f3.length
-      result += ']['
+      result += '[' + this.f3.length + ']['
       for (let item of this.f3) {
         if (item != null) {
           result += first ? '' : ','
-          result += 'bytes['
-          result += item.length
-          result += ']'
+          result += 'bytes[' + item.length + ']'
         } else {
           result += 'null'
         }
@@ -14975,15 +14895,11 @@ class StructVector {
     result += ',f4='
     if (this.f4 != null) {
       let first = true
-      result += '['
-      result += this.f4.length
-      result += ']['
+      result += '[' + this.f4.length + ']['
       for (let item of this.f4) {
         if (item != null) {
           result += first ? '' : ','
-          result += 'bytes['
-          result += item.length
-          result += ']'
+          result += 'bytes[' + item.length + ']'
         } else {
           result += 'null'
         }
@@ -14994,9 +14910,7 @@ class StructVector {
     result += ',f5='
     if (this.f5 != null) {
       let first = true
-      result += '['
-      result += this.f5.length
-      result += ']['
+      result += '[' + this.f5.length + ']['
       for (let item of this.f5) {
         result += first ? '' : ','
         result += item.toString()
@@ -15007,9 +14921,7 @@ class StructVector {
     result += ',f6='
     if (this.f6 != null) {
       let first = true
-      result += '['
-      result += this.f6.length
-      result += ']['
+      result += '[' + this.f6.length + ']['
       for (let item of this.f6) {
         if (item != null) {
           result += first ? '' : ','
@@ -15024,9 +14936,7 @@ class StructVector {
     result += ',f7='
     if (this.f7 != null) {
       let first = true
-      result += '['
-      result += this.f7.length
-      result += ']['
+      result += '[' + this.f7.length + ']['
       for (let item of this.f7) {
         result += first ? '' : ','
         result += item.toString()
@@ -15037,9 +14947,7 @@ class StructVector {
     result += ',f8='
     if (this.f8 != null) {
       let first = true
-      result += '['
-      result += this.f8.length
-      result += ']['
+      result += '[' + this.f8.length + ']['
       for (let item of this.f8) {
         if (item != null) {
           result += first ? '' : ','
@@ -15054,9 +14962,7 @@ class StructVector {
     result += ',f9='
     if (this.f9 != null) {
       let first = true
-      result += '['
-      result += this.f9.length
-      result += ']['
+      result += '[' + this.f9.length + ']['
       for (let item of this.f9) {
         result += first ? '' : ','
         result += item.toString()
@@ -15067,9 +14973,7 @@ class StructVector {
     result += ',f10='
     if (this.f10 != null) {
       let first = true
-      result += '['
-      result += this.f10.length
-      result += ']['
+      result += '[' + this.f10.length + ']['
       for (let item of this.f10) {
         if (item != null) {
           result += first ? '' : ','
@@ -16547,9 +16451,7 @@ class StructList {
     result += 'f1='
     if (this.f1 != null) {
       let first = true
-      result += '['
-      result += this.f1.length
-      result += ']<'
+      result += '[' + this.f1.length + ']<'
       for (let item of this.f1) {
         result += first ? '' : ','
         result += item.toString()
@@ -16560,9 +16462,7 @@ class StructList {
     result += ',f2='
     if (this.f2 != null) {
       let first = true
-      result += '['
-      result += this.f2.length
-      result += ']<'
+      result += '[' + this.f2.length + ']<'
       for (let item of this.f2) {
         if (item != null) {
           result += first ? '' : ','
@@ -16577,15 +16477,11 @@ class StructList {
     result += ',f3='
     if (this.f3 != null) {
       let first = true
-      result += '['
-      result += this.f3.length
-      result += ']<'
+      result += '[' + this.f3.length + ']<'
       for (let item of this.f3) {
         if (item != null) {
           result += first ? '' : ','
-          result += 'bytes['
-          result += item.length
-          result += ']'
+          result += 'bytes[' + item.length + ']'
         } else {
           result += 'null'
         }
@@ -16596,15 +16492,11 @@ class StructList {
     result += ',f4='
     if (this.f4 != null) {
       let first = true
-      result += '['
-      result += this.f4.length
-      result += ']<'
+      result += '[' + this.f4.length + ']<'
       for (let item of this.f4) {
         if (item != null) {
           result += first ? '' : ','
-          result += 'bytes['
-          result += item.length
-          result += ']'
+          result += 'bytes[' + item.length + ']'
         } else {
           result += 'null'
         }
@@ -16615,9 +16507,7 @@ class StructList {
     result += ',f5='
     if (this.f5 != null) {
       let first = true
-      result += '['
-      result += this.f5.length
-      result += ']<'
+      result += '[' + this.f5.length + ']<'
       for (let item of this.f5) {
         result += first ? '' : ','
         result += item.toString()
@@ -16628,9 +16518,7 @@ class StructList {
     result += ',f6='
     if (this.f6 != null) {
       let first = true
-      result += '['
-      result += this.f6.length
-      result += ']<'
+      result += '[' + this.f6.length + ']<'
       for (let item of this.f6) {
         if (item != null) {
           result += first ? '' : ','
@@ -16645,9 +16533,7 @@ class StructList {
     result += ',f7='
     if (this.f7 != null) {
       let first = true
-      result += '['
-      result += this.f7.length
-      result += ']<'
+      result += '[' + this.f7.length + ']<'
       for (let item of this.f7) {
         result += first ? '' : ','
         result += item.toString()
@@ -16658,9 +16544,7 @@ class StructList {
     result += ',f8='
     if (this.f8 != null) {
       let first = true
-      result += '['
-      result += this.f8.length
-      result += ']<'
+      result += '[' + this.f8.length + ']<'
       for (let item of this.f8) {
         if (item != null) {
           result += first ? '' : ','
@@ -16675,9 +16559,7 @@ class StructList {
     result += ',f9='
     if (this.f9 != null) {
       let first = true
-      result += '['
-      result += this.f9.length
-      result += ']<'
+      result += '[' + this.f9.length + ']<'
       for (let item of this.f9) {
         result += first ? '' : ','
         result += item.toString()
@@ -16688,9 +16570,7 @@ class StructList {
     result += ',f10='
     if (this.f10 != null) {
       let first = true
-      result += '['
-      result += this.f10.length
-      result += ']<'
+      result += '[' + this.f10.length + ']<'
       for (let item of this.f10) {
         if (item != null) {
           result += first ? '' : ','
@@ -18062,9 +17942,7 @@ class StructSet {
     result += 'f1='
     if (this.f1 != null) {
       let first = true
-      result += '['
-      result += this.f1.size
-      result += ']{'
+      result += '[' + this.f1.size + ']{'
       for (let item of this.f1) {
         result += first ? '' : ','
         result += item.toString()
@@ -18075,9 +17953,7 @@ class StructSet {
     result += ',f2='
     if (this.f2 != null) {
       let first = true
-      result += '['
-      result += this.f2.size
-      result += ']{'
+      result += '[' + this.f2.size + ']{'
       for (let item of this.f2) {
         result += first ? '' : ','
         result += item.toString()
@@ -18088,9 +17964,7 @@ class StructSet {
     result += ',f3='
     if (this.f3 != null) {
       let first = true
-      result += '['
-      result += this.f3.size
-      result += ']{'
+      result += '[' + this.f3.size + ']{'
       for (let item of this.f3) {
         result += first ? '' : ','
         result += item.toString()
@@ -18101,9 +17975,7 @@ class StructSet {
     result += ',f4='
     if (this.f4 != null) {
       let first = true
-      result += '['
-      result += this.f4.size
-      result += ']{'
+      result += '[' + this.f4.size + ']{'
       for (let item of this.f4) {
         result += first ? '' : ','
         result += item.toString()
@@ -19269,14 +19141,11 @@ class StructMap {
     result += 'f1='
     if (this.f1 != null) {
       let first = true
-      result += '['
-      result += this.f1.size
-      result += ']<{'
+      result += '[' + this.f1.size + ']<{'
       for (let [key, value] of this.f1) {
         result += first ? '' : ','
         result += key.toString()
         result += '->'
-        result += first ? '' : ','
         result += value.toString()
         first = false
       }
@@ -19285,15 +19154,12 @@ class StructMap {
     result += ',f2='
     if (this.f2 != null) {
       let first = true
-      result += '['
-      result += this.f2.size
-      result += ']<{'
+      result += '[' + this.f2.size + ']<{'
       for (let [key, value] of this.f2) {
         result += first ? '' : ','
         result += key.toString()
         result += '->'
         if (value != null) {
-          result += first ? '' : ','
           result += value.toString()
         } else {
           result += 'null'
@@ -19305,18 +19171,13 @@ class StructMap {
     result += ',f3='
     if (this.f3 != null) {
       let first = true
-      result += '['
-      result += this.f3.size
-      result += ']<{'
+      result += '[' + this.f3.size + ']<{'
       for (let [key, value] of this.f3) {
         result += first ? '' : ','
         result += key.toString()
         result += '->'
         if (value != null) {
-          result += first ? '' : ','
-          result += 'bytes['
-          result += value.length
-          result += ']'
+          result += 'bytes[' + value.length + ']'
         } else {
           result += 'null'
         }
@@ -19327,18 +19188,13 @@ class StructMap {
     result += ',f4='
     if (this.f4 != null) {
       let first = true
-      result += '['
-      result += this.f4.size
-      result += ']<{'
+      result += '[' + this.f4.size + ']<{'
       for (let [key, value] of this.f4) {
         result += first ? '' : ','
         result += key.toString()
         result += '->'
         if (value != null) {
-          result += first ? '' : ','
-          result += 'bytes['
-          result += value.length
-          result += ']'
+          result += 'bytes[' + value.length + ']'
         } else {
           result += 'null'
         }
@@ -19349,14 +19205,11 @@ class StructMap {
     result += ',f5='
     if (this.f5 != null) {
       let first = true
-      result += '['
-      result += this.f5.size
-      result += ']<{'
+      result += '[' + this.f5.size + ']<{'
       for (let [key, value] of this.f5) {
         result += first ? '' : ','
         result += key.toString()
         result += '->'
-        result += first ? '' : ','
         result += value.toString()
         first = false
       }
@@ -19365,15 +19218,12 @@ class StructMap {
     result += ',f6='
     if (this.f6 != null) {
       let first = true
-      result += '['
-      result += this.f6.size
-      result += ']<{'
+      result += '[' + this.f6.size + ']<{'
       for (let [key, value] of this.f6) {
         result += first ? '' : ','
         result += key.toString()
         result += '->'
         if (value != null) {
-          result += first ? '' : ','
           result += value.toString()
         } else {
           result += 'null'
@@ -19385,14 +19235,11 @@ class StructMap {
     result += ',f7='
     if (this.f7 != null) {
       let first = true
-      result += '['
-      result += this.f7.size
-      result += ']<{'
+      result += '[' + this.f7.size + ']<{'
       for (let [key, value] of this.f7) {
         result += first ? '' : ','
         result += key.toString()
         result += '->'
-        result += first ? '' : ','
         result += value.toString()
         first = false
       }
@@ -19401,15 +19248,12 @@ class StructMap {
     result += ',f8='
     if (this.f8 != null) {
       let first = true
-      result += '['
-      result += this.f8.size
-      result += ']<{'
+      result += '[' + this.f8.size + ']<{'
       for (let [key, value] of this.f8) {
         result += first ? '' : ','
         result += key.toString()
         result += '->'
         if (value != null) {
-          result += first ? '' : ','
           result += value.toString()
         } else {
           result += 'null'
@@ -19421,14 +19265,11 @@ class StructMap {
     result += ',f9='
     if (this.f9 != null) {
       let first = true
-      result += '['
-      result += this.f9.size
-      result += ']<{'
+      result += '[' + this.f9.size + ']<{'
       for (let [key, value] of this.f9) {
         result += first ? '' : ','
         result += key.toString()
         result += '->'
-        result += first ? '' : ','
         result += value.toString()
         first = false
       }
@@ -19437,15 +19278,12 @@ class StructMap {
     result += ',f10='
     if (this.f10 != null) {
       let first = true
-      result += '['
-      result += this.f10.size
-      result += ']<{'
+      result += '[' + this.f10.size + ']<{'
       for (let [key, value] of this.f10) {
         result += first ? '' : ','
         result += key.toString()
         result += '->'
         if (value != null) {
-          result += first ? '' : ','
           result += value.toString()
         } else {
           result += 'null'
@@ -20960,20 +20798,15 @@ class StructHash {
     result += 'f1='
     if (this.f1 != null) {
       let first = true
-      result += '['
-      result += this.f1.size
-      result += '][{'
+      result += '[' + this.f1.size + '][{'
       for (let [key, value] of this.f1) {
         if (key != null) {
           result += first ? '' : ','
-          result += '"'
-          result += key.toString()
-          result += '"'
+          result += '"'key.toString() + '"'
         } else {
           result += 'null'
         }
         result += '->'
-        result += first ? '' : ','
         result += value.toString()
         first = false
       }
@@ -20982,21 +20815,16 @@ class StructHash {
     result += ',f2='
     if (this.f2 != null) {
       let first = true
-      result += '['
-      result += this.f2.size
-      result += '][{'
+      result += '[' + this.f2.size + '][{'
       for (let [key, value] of this.f2) {
         if (key != null) {
           result += first ? '' : ','
-          result += '"'
-          result += key.toString()
-          result += '"'
+          result += '"'key.toString() + '"'
         } else {
           result += 'null'
         }
         result += '->'
         if (value != null) {
-          result += first ? '' : ','
           result += value.toString()
         } else {
           result += 'null'
@@ -21008,24 +20836,17 @@ class StructHash {
     result += ',f3='
     if (this.f3 != null) {
       let first = true
-      result += '['
-      result += this.f3.size
-      result += '][{'
+      result += '[' + this.f3.size + '][{'
       for (let [key, value] of this.f3) {
         if (key != null) {
           result += first ? '' : ','
-          result += '"'
-          result += key.toString()
-          result += '"'
+          result += '"'key.toString() + '"'
         } else {
           result += 'null'
         }
         result += '->'
         if (value != null) {
-          result += first ? '' : ','
-          result += 'bytes['
-          result += value.length
-          result += ']'
+          result += 'bytes[' + value.length + ']'
         } else {
           result += 'null'
         }
@@ -21036,24 +20857,17 @@ class StructHash {
     result += ',f4='
     if (this.f4 != null) {
       let first = true
-      result += '['
-      result += this.f4.size
-      result += '][{'
+      result += '[' + this.f4.size + '][{'
       for (let [key, value] of this.f4) {
         if (key != null) {
           result += first ? '' : ','
-          result += '"'
-          result += key.toString()
-          result += '"'
+          result += '"'key.toString() + '"'
         } else {
           result += 'null'
         }
         result += '->'
         if (value != null) {
-          result += first ? '' : ','
-          result += 'bytes['
-          result += value.length
-          result += ']'
+          result += 'bytes[' + value.length + ']'
         } else {
           result += 'null'
         }
@@ -21064,20 +20878,15 @@ class StructHash {
     result += ',f5='
     if (this.f5 != null) {
       let first = true
-      result += '['
-      result += this.f5.size
-      result += '][{'
+      result += '[' + this.f5.size + '][{'
       for (let [key, value] of this.f5) {
         if (key != null) {
           result += first ? '' : ','
-          result += '"'
-          result += key.toString()
-          result += '"'
+          result += '"'key.toString() + '"'
         } else {
           result += 'null'
         }
         result += '->'
-        result += first ? '' : ','
         result += value.toString()
         first = false
       }
@@ -21086,21 +20895,16 @@ class StructHash {
     result += ',f6='
     if (this.f6 != null) {
       let first = true
-      result += '['
-      result += this.f6.size
-      result += '][{'
+      result += '[' + this.f6.size + '][{'
       for (let [key, value] of this.f6) {
         if (key != null) {
           result += first ? '' : ','
-          result += '"'
-          result += key.toString()
-          result += '"'
+          result += '"'key.toString() + '"'
         } else {
           result += 'null'
         }
         result += '->'
         if (value != null) {
-          result += first ? '' : ','
           result += value.toString()
         } else {
           result += 'null'
@@ -21112,20 +20916,15 @@ class StructHash {
     result += ',f7='
     if (this.f7 != null) {
       let first = true
-      result += '['
-      result += this.f7.size
-      result += '][{'
+      result += '[' + this.f7.size + '][{'
       for (let [key, value] of this.f7) {
         if (key != null) {
           result += first ? '' : ','
-          result += '"'
-          result += key.toString()
-          result += '"'
+          result += '"'key.toString() + '"'
         } else {
           result += 'null'
         }
         result += '->'
-        result += first ? '' : ','
         result += value.toString()
         first = false
       }
@@ -21134,21 +20933,16 @@ class StructHash {
     result += ',f8='
     if (this.f8 != null) {
       let first = true
-      result += '['
-      result += this.f8.size
-      result += '][{'
+      result += '[' + this.f8.size + '][{'
       for (let [key, value] of this.f8) {
         if (key != null) {
           result += first ? '' : ','
-          result += '"'
-          result += key.toString()
-          result += '"'
+          result += '"'key.toString() + '"'
         } else {
           result += 'null'
         }
         result += '->'
         if (value != null) {
-          result += first ? '' : ','
           result += value.toString()
         } else {
           result += 'null'
@@ -21160,20 +20954,15 @@ class StructHash {
     result += ',f9='
     if (this.f9 != null) {
       let first = true
-      result += '['
-      result += this.f9.size
-      result += '][{'
+      result += '[' + this.f9.size + '][{'
       for (let [key, value] of this.f9) {
         if (key != null) {
           result += first ? '' : ','
-          result += '"'
-          result += key.toString()
-          result += '"'
+          result += '"'key.toString() + '"'
         } else {
           result += 'null'
         }
         result += '->'
-        result += first ? '' : ','
         result += value.toString()
         first = false
       }
@@ -21182,21 +20971,16 @@ class StructHash {
     result += ',f10='
     if (this.f10 != null) {
       let first = true
-      result += '['
-      result += this.f10.size
-      result += '][{'
+      result += '[' + this.f10.size + '][{'
       for (let [key, value] of this.f10) {
         if (key != null) {
           result += first ? '' : ','
-          result += '"'
-          result += key.toString()
-          result += '"'
+          result += '"'key.toString() + '"'
         } else {
           result += 'null'
         }
         result += '->'
         if (value != null) {
-          result += first ? '' : ','
           result += value.toString()
         } else {
           result += 'null'
@@ -22541,14 +22325,11 @@ class StructHashEx {
     result += 'f1='
     if (this.f1 != null) {
       let first = true
-      result += '['
-      result += this.f1.size
-      result += '][{'
+      result += '[' + this.f1.size + '][{'
       for (let [key, value] of this.f1) {
         result += first ? '' : ','
         result += key.toString()
         result += '->'
-        result += first ? '' : ','
         result += value.toString()
         first = false
       }
@@ -22557,15 +22338,12 @@ class StructHashEx {
     result += ',f2='
     if (this.f2 != null) {
       let first = true
-      result += '['
-      result += this.f2.size
-      result += '][{'
+      result += '[' + this.f2.size + '][{'
       for (let [key, value] of this.f2) {
         result += first ? '' : ','
         result += key.toString()
         result += '->'
         if (value != null) {
-          result += first ? '' : ','
           result += value.toString()
         } else {
           result += 'null'

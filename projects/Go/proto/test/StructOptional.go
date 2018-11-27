@@ -5,6 +5,8 @@
 
 package test
 
+import "fmt"
+import "strconv"
 import "strings"
 import "../fbe"
 import "../proto"
@@ -12,6 +14,10 @@ import "../proto"
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 var _ = proto.Version
+
+// Workaround for Go unused imports issue
+var _ = fmt.Print
+var _ = strconv.FormatInt
 
 // StructOptional key
 type StructOptionalKey struct {
@@ -205,6 +211,405 @@ func (s StructOptional) Optional() *StructOptional {
 // Convert struct to string
 func (s StructOptional) String() string {
     var sb strings.Builder
+    sb.WriteString("StructOptional(")
+    sb.WriteString(s.StructSimple.String())
+    sb.WriteString(",f100=")
+    if s.F100 != nil { 
+        sb.WriteString(strconv.FormatBool(*s.F100))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f101=")
+    if s.F101 != nil { 
+        sb.WriteString(strconv.FormatBool(*s.F101))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f102=")
+    if s.F102 != nil { 
+        sb.WriteString(strconv.FormatBool(*s.F102))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f103=")
+    if s.F103 != nil { 
+        sb.WriteString(strconv.FormatUint(uint64(*s.F103), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f104=")
+    if s.F104 != nil { 
+        sb.WriteString(strconv.FormatUint(uint64(*s.F104), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f105=")
+    if s.F105 != nil { 
+        sb.WriteString(strconv.FormatUint(uint64(*s.F105), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f106=")
+    if s.F106 != nil { 
+        sb.WriteString("'" + string(*s.F106) + "'")
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f107=")
+    if s.F107 != nil { 
+        sb.WriteString("'" + string(*s.F107) + "'")
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f108=")
+    if s.F108 != nil { 
+        sb.WriteString("'" + string(*s.F108) + "'")
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f109=")
+    if s.F109 != nil { 
+        sb.WriteString("'" + string(*s.F109) + "'")
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f110=")
+    if s.F110 != nil { 
+        sb.WriteString("'" + string(*s.F110) + "'")
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f111=")
+    if s.F111 != nil { 
+        sb.WriteString("'" + string(*s.F111) + "'")
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f112=")
+    if s.F112 != nil { 
+        sb.WriteString(strconv.FormatInt(int64(*s.F112), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f113=")
+    if s.F113 != nil { 
+        sb.WriteString(strconv.FormatInt(int64(*s.F113), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f114=")
+    if s.F114 != nil { 
+        sb.WriteString(strconv.FormatInt(int64(*s.F114), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f115=")
+    if s.F115 != nil { 
+        sb.WriteString(strconv.FormatUint(uint64(*s.F115), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f116=")
+    if s.F116 != nil { 
+        sb.WriteString(strconv.FormatUint(uint64(*s.F116), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f117=")
+    if s.F117 != nil { 
+        sb.WriteString(strconv.FormatUint(uint64(*s.F117), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f118=")
+    if s.F118 != nil { 
+        sb.WriteString(strconv.FormatInt(int64(*s.F118), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f119=")
+    if s.F119 != nil { 
+        sb.WriteString(strconv.FormatInt(int64(*s.F119), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f120=")
+    if s.F120 != nil { 
+        sb.WriteString(strconv.FormatInt(int64(*s.F120), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f121=")
+    if s.F121 != nil { 
+        sb.WriteString(strconv.FormatUint(uint64(*s.F121), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f122=")
+    if s.F122 != nil { 
+        sb.WriteString(strconv.FormatUint(uint64(*s.F122), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f123=")
+    if s.F123 != nil { 
+        sb.WriteString(strconv.FormatUint(uint64(*s.F123), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f124=")
+    if s.F124 != nil { 
+        sb.WriteString(strconv.FormatInt(int64(*s.F124), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f125=")
+    if s.F125 != nil { 
+        sb.WriteString(strconv.FormatInt(int64(*s.F125), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f126=")
+    if s.F126 != nil { 
+        sb.WriteString(strconv.FormatInt(int64(*s.F126), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f127=")
+    if s.F127 != nil { 
+        sb.WriteString(strconv.FormatUint(uint64(*s.F127), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f128=")
+    if s.F128 != nil { 
+        sb.WriteString(strconv.FormatUint(uint64(*s.F128), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f129=")
+    if s.F129 != nil { 
+        sb.WriteString(strconv.FormatUint(uint64(*s.F129), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f130=")
+    if s.F130 != nil { 
+        sb.WriteString(strconv.FormatInt(int64(*s.F130), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f131=")
+    if s.F131 != nil { 
+        sb.WriteString(strconv.FormatInt(int64(*s.F131), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f132=")
+    if s.F132 != nil { 
+        sb.WriteString(strconv.FormatInt(int64(*s.F132), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f133=")
+    if s.F133 != nil { 
+        sb.WriteString(strconv.FormatUint(uint64(*s.F133), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f134=")
+    if s.F134 != nil { 
+        sb.WriteString(strconv.FormatUint(uint64(*s.F134), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f135=")
+    if s.F135 != nil { 
+        sb.WriteString(strconv.FormatUint(uint64(*s.F135), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f136=")
+    if s.F136 != nil { 
+        sb.WriteString(strconv.FormatFloat(float64(*s.F136), 'g', -1, 32))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f137=")
+    if s.F137 != nil { 
+        sb.WriteString(strconv.FormatFloat(float64(*s.F137), 'g', -1, 32))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f138=")
+    if s.F138 != nil { 
+        sb.WriteString(strconv.FormatFloat(float64(*s.F138), 'g', -1, 32))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f139=")
+    if s.F139 != nil { 
+        sb.WriteString(strconv.FormatFloat(float64(*s.F139), 'g', -1, 64))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f140=")
+    if s.F140 != nil { 
+        sb.WriteString(strconv.FormatFloat(float64(*s.F140), 'g', -1, 64))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f141=")
+    if s.F141 != nil { 
+        sb.WriteString(strconv.FormatFloat(float64(*s.F141), 'g', -1, 64))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f142=")
+    if s.F142 != nil { 
+        sb.WriteString("\"" + (*s.F142).String() + "\"")
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f143=")
+    if s.F143 != nil { 
+        sb.WriteString("\"" + (*s.F143).String() + "\"")
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f144=")
+    if s.F144 != nil { 
+        sb.WriteString("\"" + (*s.F144).String() + "\"")
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f145=")
+    if s.F145 != nil { 
+        sb.WriteString("\"" + *s.F145 + "\"")
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f146=")
+    if s.F146 != nil { 
+        sb.WriteString("\"" + *s.F146 + "\"")
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f147=")
+    if s.F147 != nil { 
+        sb.WriteString("\"" + *s.F147 + "\"")
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f148=")
+    if s.F148 != nil { 
+        sb.WriteString(strconv.FormatInt((*s.F148).UnixNano(), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f149=")
+    if s.F149 != nil { 
+        sb.WriteString(strconv.FormatInt((*s.F149).UnixNano(), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f150=")
+    if s.F150 != nil { 
+        sb.WriteString(strconv.FormatInt((*s.F150).UnixNano(), 10))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f151=")
+    if s.F151 != nil { 
+        sb.WriteString("\"" + (*s.F151).String() + "\"")
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f152=")
+    if s.F152 != nil { 
+        sb.WriteString("\"" + (*s.F152).String() + "\"")
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f153=")
+    if s.F153 != nil { 
+        sb.WriteString("\"" + (*s.F153).String() + "\"")
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f154=")
+    if s.F154 != nil { 
+        sb.WriteString(fmt.Sprintf("%v", *s.F154))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f155=")
+    if s.F155 != nil { 
+        sb.WriteString(fmt.Sprintf("%v", *s.F155))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f156=")
+    if s.F156 != nil { 
+        sb.WriteString(fmt.Sprintf("%v", *s.F156))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f157=")
+    if s.F157 != nil { 
+        sb.WriteString(fmt.Sprintf("%v", *s.F157))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f158=")
+    if s.F158 != nil { 
+        sb.WriteString(fmt.Sprintf("%v", *s.F158))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f159=")
+    if s.F159 != nil { 
+        sb.WriteString(fmt.Sprintf("%v", *s.F159))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f160=")
+    if s.F160 != nil { 
+        sb.WriteString(fmt.Sprintf("%v", *s.F160))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f161=")
+    if s.F161 != nil { 
+        sb.WriteString(fmt.Sprintf("%v", *s.F161))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f162=")
+    if s.F162 != nil { 
+        sb.WriteString(fmt.Sprintf("%v", *s.F162))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f163=")
+    if s.F163 != nil { 
+        sb.WriteString(fmt.Sprintf("%v", *s.F163))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f164=")
+    if s.F164 != nil { 
+        sb.WriteString(fmt.Sprintf("%v", *s.F164))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f165=")
+    if s.F165 != nil { 
+        sb.WriteString(fmt.Sprintf("%v", *s.F165))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(")")
     return sb.String()
 }
 

@@ -5,11 +5,17 @@
 
 package proto
 
+import "fmt"
+import "strconv"
 import "strings"
 import "../fbe"
 
 // Workaround for Go unused imports issue
 var _ = fbe.Version
+
+// Workaround for Go unused imports issue
+var _ = fmt.Print
+var _ = strconv.FormatInt
 
 // Balance key
 type BalanceKey struct {
@@ -73,6 +79,12 @@ func (s Balance) Optional() *Balance {
 // Convert struct to string
 func (s Balance) String() string {
     var sb strings.Builder
+    sb.WriteString("Balance(")
+    sb.WriteString("currency=")
+    sb.WriteString("\"" + s.Currency + "\"")
+    sb.WriteString(",amount=")
+    sb.WriteString(strconv.FormatFloat(float64(s.Amount), 'g', -1, 64))
+    sb.WriteString(")")
     return sb.String()
 }
 

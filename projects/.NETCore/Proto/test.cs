@@ -9483,7 +9483,7 @@ namespace test {
             if (f1 != null)
             {
                 bool first = true;
-                sb.Append("f1=[").Append(f1.Count).Append("][");
+                sb.Append("f1=[").Append(f1.Length).Append("][");
                 foreach (var item in f1)
                 {
                     sb.Append(first ? "" : ",").Append(item);
@@ -9494,7 +9494,7 @@ namespace test {
             if (f2 != null)
             {
                 bool first = true;
-                sb.Append(",f2=[").Append(f2.Count).Append("][");
+                sb.Append(",f2=[").Append(f2.Length).Append("][");
                 foreach (var item in f2)
                 {
                     if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append("null");
@@ -9505,7 +9505,7 @@ namespace test {
             if (f3 != null)
             {
                 bool first = true;
-                sb.Append(",f3=[").Append(f3.Count).Append("][");
+                sb.Append(",f3=[").Append(f3.Length).Append("][");
                 foreach (var item in f3)
                 {
                     if (item != null) sb.Append(first ? "" : ",").Append("bytes[").Append(item.Length).Append("]"); else sb.Append("null");
@@ -9516,7 +9516,7 @@ namespace test {
             if (f4 != null)
             {
                 bool first = true;
-                sb.Append(",f4=[").Append(f4.Count).Append("][");
+                sb.Append(",f4=[").Append(f4.Length).Append("][");
                 foreach (var item in f4)
                 {
                     if (item != null) sb.Append(first ? "" : ",").Append("bytes[").Append(item.Length).Append("]"); else sb.Append("null");
@@ -9527,7 +9527,7 @@ namespace test {
             if (f5 != null)
             {
                 bool first = true;
-                sb.Append(",f5=[").Append(f5.Count).Append("][");
+                sb.Append(",f5=[").Append(f5.Length).Append("][");
                 foreach (var item in f5)
                 {
                     sb.Append(first ? "" : ",").Append(item);
@@ -9538,7 +9538,7 @@ namespace test {
             if (f6 != null)
             {
                 bool first = true;
-                sb.Append(",f6=[").Append(f6.Count).Append("][");
+                sb.Append(",f6=[").Append(f6.Length).Append("][");
                 foreach (var item in f6)
                 {
                     if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append("null");
@@ -9549,7 +9549,7 @@ namespace test {
             if (f7 != null)
             {
                 bool first = true;
-                sb.Append(",f7=[").Append(f7.Count).Append("][");
+                sb.Append(",f7=[").Append(f7.Length).Append("][");
                 foreach (var item in f7)
                 {
                     sb.Append(first ? "" : ",").Append(item);
@@ -9560,7 +9560,7 @@ namespace test {
             if (f8 != null)
             {
                 bool first = true;
-                sb.Append(",f8=[").Append(f8.Count).Append("][");
+                sb.Append(",f8=[").Append(f8.Length).Append("][");
                 foreach (var item in f8)
                 {
                     if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append("null");
@@ -9571,7 +9571,7 @@ namespace test {
             if (f9 != null)
             {
                 bool first = true;
-                sb.Append(",f9=[").Append(f9.Count).Append("][");
+                sb.Append(",f9=[").Append(f9.Length).Append("][");
                 foreach (var item in f9)
                 {
                     sb.Append(first ? "" : ",").Append(item);
@@ -9582,7 +9582,7 @@ namespace test {
             if (f10 != null)
             {
                 bool first = true;
-                sb.Append(",f10=[").Append(f10.Count).Append("][");
+                sb.Append(",f10=[").Append(f10.Length).Append("][");
                 foreach (var item in f10)
                 {
                     if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append("null");

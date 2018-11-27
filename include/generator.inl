@@ -29,6 +29,12 @@ inline void Generator::Write(const std::string& str)
     _file.Write(str);
 }
 
+inline void Generator::WriteIndent()
+{
+    for (int i = 0; i < _cursor; ++i)
+        _file.Write(&_space, 1);
+}
+
 inline void Generator::WriteIndent(const std::string& str)
 {
     for (int i = 0; i < _cursor; ++i)

@@ -3459,12 +3459,10 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("if self." + *field->name + " is not None:");
                 Indent(1);
                 WriteLineIndent("first = True");
-                WriteLineIndent("sb.append(\"[\")");
-                WriteLineIndent("sb.append(str(len(self." + *field->name + "))" + ")");
-                WriteLineIndent("sb.append(\"][\")");
+                WriteLineIndent("sb.append(\"[\" + str(len(self." + *field->name + "))" + " + \"][\")");
                 WriteLineIndent("for item in self." + *field->name + ":");
                 Indent(1);
-                WriteOutputStreamItem(*field->type, "item", field->optional);
+                WriteOutputStreamValue(*field->type, "item", field->optional, true);
                 WriteLineIndent("first = False");
                 Indent(-1);
                 WriteLineIndent("sb.append(\"]\")");
@@ -3475,12 +3473,10 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("if self." + *field->name + " is not None:");
                 Indent(1);
                 WriteLineIndent("first = True");
-                WriteLineIndent("sb.append(\"[\")");
-                WriteLineIndent("sb.append(str(len(self." + *field->name + "))" + ")");
-                WriteLineIndent("sb.append(\"]<\")");
+                WriteLineIndent("sb.append(\"[\" + str(len(self." + *field->name + "))" + " + \"]<\")");
                 WriteLineIndent("for item in self." + *field->name + ":");
                 Indent(1);
-                WriteOutputStreamItem(*field->type, "item", field->optional);
+                WriteOutputStreamValue(*field->type, "item", field->optional, true);
                 WriteLineIndent("first = False");
                 Indent(-1);
                 WriteLineIndent("sb.append(\">\")");
@@ -3491,12 +3487,10 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("if self." + *field->name + " is not None:");
                 Indent(1);
                 WriteLineIndent("first = True");
-                WriteLineIndent("sb.append(\"[\")");
-                WriteLineIndent("sb.append(str(len(self." + *field->name + "))" + ")");
-                WriteLineIndent("sb.append(\"]{\")");
+                WriteLineIndent("sb.append(\"[\" + str(len(self." + *field->name + "))" + " + \"]{\")");
                 WriteLineIndent("for item in self." + *field->name + ":");
                 Indent(1);
-                WriteOutputStreamItem(*field->type, "item", field->optional);
+                WriteOutputStreamValue(*field->type, "item", field->optional, true);
                 WriteLineIndent("first = False");
                 Indent(-1);
                 WriteLineIndent("sb.append(\"}\")");
@@ -3507,14 +3501,12 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("if self." + *field->name + " is not None:");
                 Indent(1);
                 WriteLineIndent("first = True");
-                WriteLineIndent("sb.append(\"[\")");
-                WriteLineIndent("sb.append(str(len(self." + *field->name + "))" + ")");
-                WriteLineIndent("sb.append(\"]<{\")");
+                WriteLineIndent("sb.append(\"[\" + str(len(self." + *field->name + "))" + " + \"]<{\")");
                 WriteLineIndent("for key, value in self." + *field->name + ".items():");
                 Indent(1);
-                WriteOutputStreamItem(*field->key, "key", false);
+                WriteOutputStreamValue(*field->key, "key", false, true);
                 WriteLineIndent("sb.append(\"->\")");
-                WriteOutputStreamItem(*field->type, "value", field->optional);
+                WriteOutputStreamValue(*field->type, "value", field->optional, false);
                 WriteLineIndent("first = False");
                 Indent(-1);
                 WriteLineIndent("sb.append(\"}>\")");
@@ -3525,21 +3517,19 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("if self." + *field->name + " is not None:");
                 Indent(1);
                 WriteLineIndent("first = True");
-                WriteLineIndent("sb.append(\"[\")");
-                WriteLineIndent("sb.append(str(len(self." + *field->name + "))" + ")");
-                WriteLineIndent("sb.append(\"][{\")");
+                WriteLineIndent("sb.append(\"[\" + str(len(self." + *field->name + "))" + " + \"][{\")");
                 WriteLineIndent("for key, value in self." + *field->name + ".items():");
                 Indent(1);
-                WriteOutputStreamItem(*field->key, "key", false);
+                WriteOutputStreamValue(*field->key, "key", false, true);
                 WriteLineIndent("sb.append(\"->\")");
-                WriteOutputStreamItem(*field->type, "value", field->optional);
+                WriteOutputStreamValue(*field->type, "value", field->optional, false);
                 WriteLineIndent("first = False");
                 Indent(-1);
                 WriteLineIndent("sb.append(\"}]\")");
                 Indent(-1);
             }
             else
-                WriteOutputStreamValue(*field->type, "self." + *field->name, field->optional);
+                WriteOutputStreamValue(*field->type, "self." + *field->name, field->optional, false);
             first = false;
         }
     }
@@ -5136,34 +5126,23 @@ void GeneratorPython::WriteOutputStreamType(const std::string& type, const std::
     if (type == "bool")
         WriteLineIndent("sb.append(\"true\" if " + name + " else \"false\")");
     else if (type == "bytes")
-    {
-        WriteLineIndent("sb.append(\"bytes[\")");
-        WriteLineIndent("sb.append(str(len(" + name + ")))");
-        WriteLineIndent("sb.append(\"]\")");
-    }
+        WriteLineIndent("sb.append(\"bytes[\" + str(len(" + name + ")) + \"]\")");
     else if ((type == "char") || (type == "wchar"))
-    {
-        WriteLineIndent("sb.append(\"'\")");
-        WriteLineIndent("sb.append(str(" + name + "))");
-        WriteLineIndent("sb.append(\"'\")");
-    }
+        WriteLineIndent("sb.append(\"'\" + str(" + name + ") + \"'\")");
     else if ((type == "string") || (type == "uuid"))
-    {
-        WriteLineIndent("sb.append(\"\\\"\")");
-        WriteLineIndent("sb.append(str(" + name + "))");
-        WriteLineIndent("sb.append(\"\\\"\")");
-    }
+        WriteLineIndent("sb.append(\"\\\"\" + str(" + name + ") + \"\\\"\")");
     else
         WriteLineIndent("sb.append(str(" + name + "))");
 }
 
-void GeneratorPython::WriteOutputStreamItem(const std::string& type, const std::string& name, bool optional)
+void GeneratorPython::WriteOutputStreamValue(const std::string& type, const std::string& name, bool optional, bool separate)
 {
-    if ((type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid") || optional)
+    if (optional || (type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid"))
     {
         WriteLineIndent("if " + name + " is not None:");
         Indent(1);
-        WriteLineIndent("sb.append(\"\" if first else \",\")");
+        if (separate)
+            WriteLineIndent("sb.append(\"\" if first else \",\")");
         WriteOutputStreamType(type, name, true);
         Indent(-1);
         WriteLineIndent("else:");
@@ -5173,26 +5152,10 @@ void GeneratorPython::WriteOutputStreamItem(const std::string& type, const std::
     }
     else
     {
-        WriteLineIndent("sb.append(\"\" if first else \",\")");
+        if (separate)
+            WriteLineIndent("sb.append(\"\" if first else \",\")");
         WriteOutputStreamType(type, name, false);
     }
-}
-
-void GeneratorPython::WriteOutputStreamValue(const std::string& type, const std::string& name, bool optional)
-{
-    if ((type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid") || optional)
-    {
-        WriteLineIndent("if " + name + " is not None:");
-        Indent(1);
-        WriteOutputStreamType(type, name, true);
-        Indent(-1);
-        WriteLineIndent("else:");
-        Indent(1);
-        WriteLineIndent("sb.append(\"null\")");
-        Indent(-1);
-    }
-    else
-        WriteOutputStreamType(type, name, false);
 }
 
 } // namespace FBE

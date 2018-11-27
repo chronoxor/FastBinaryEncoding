@@ -5,6 +5,8 @@
 
 package test
 
+import "fmt"
+import "strconv"
 import "strings"
 import "../fbe"
 import "../proto"
@@ -12,6 +14,10 @@ import "../proto"
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 var _ = proto.Version
+
+// Workaround for Go unused imports issue
+var _ = fmt.Print
+var _ = strconv.FormatInt
 
 // StructBytes key
 type StructBytesKey struct {
@@ -75,6 +81,26 @@ func (s StructBytes) Optional() *StructBytes {
 // Convert struct to string
 func (s StructBytes) String() string {
     var sb strings.Builder
+    sb.WriteString("StructBytes(")
+    sb.WriteString("f1=")
+    if s.F1 != nil { 
+        sb.WriteString("bytes[" + strconv.FormatInt(int64(len(s.F1)), 10) + "]")
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f2=")
+    if s.F2 != nil { 
+        sb.WriteString("bytes[" + strconv.FormatInt(int64(len(*s.F2)), 10) + "]")
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f3=")
+    if s.F3 != nil { 
+        sb.WriteString("bytes[" + strconv.FormatInt(int64(len(*s.F3)), 10) + "]")
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(")")
     return sb.String()
 }
 

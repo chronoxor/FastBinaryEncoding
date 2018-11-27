@@ -116,7 +116,7 @@ public class StructVector implements Comparable<Object>
         if (f1 != null)
         {
             boolean first = true;
-            sb.append("f1=[").append(f1.size()).append("][");
+            sb.append("f1=[").append(f1.length).append("][");
             for (var item : f1)
             {
                 sb.append(first ? "" : ",").append(item);
@@ -127,7 +127,7 @@ public class StructVector implements Comparable<Object>
         if (f2 != null)
         {
             boolean first = true;
-            sb.append(",f2=[").append(f2.size()).append("][");
+            sb.append(",f2=[").append(f2.length).append("][");
             for (var item : f2)
             {
                 if (item != null) sb.append(first ? "" : ",").append(item); else sb.append("null");
@@ -138,7 +138,7 @@ public class StructVector implements Comparable<Object>
         if (f3 != null)
         {
             boolean first = true;
-            sb.append(",f3=[").append(f3.size()).append("][");
+            sb.append(",f3=[").append(f3.length).append("][");
             for (var item : f3)
             {
                 if (item != null) sb.append(first ? "" : ",").append("bytes[").append(item.array().length).append("]"); else sb.append("null");
@@ -149,7 +149,7 @@ public class StructVector implements Comparable<Object>
         if (f4 != null)
         {
             boolean first = true;
-            sb.append(",f4=[").append(f4.size()).append("][");
+            sb.append(",f4=[").append(f4.length).append("][");
             for (var item : f4)
             {
                 if (item != null) sb.append(first ? "" : ",").append("bytes[").append(item.array().length).append("]"); else sb.append("null");
@@ -160,7 +160,7 @@ public class StructVector implements Comparable<Object>
         if (f5 != null)
         {
             boolean first = true;
-            sb.append(",f5=[").append(f5.size()).append("][");
+            sb.append(",f5=[").append(f5.length).append("][");
             for (var item : f5)
             {
                 sb.append(first ? "" : ",").append(item);
@@ -171,7 +171,7 @@ public class StructVector implements Comparable<Object>
         if (f6 != null)
         {
             boolean first = true;
-            sb.append(",f6=[").append(f6.size()).append("][");
+            sb.append(",f6=[").append(f6.length).append("][");
             for (var item : f6)
             {
                 if (item != null) sb.append(first ? "" : ",").append(item); else sb.append("null");
@@ -182,7 +182,7 @@ public class StructVector implements Comparable<Object>
         if (f7 != null)
         {
             boolean first = true;
-            sb.append(",f7=[").append(f7.size()).append("][");
+            sb.append(",f7=[").append(f7.length).append("][");
             for (var item : f7)
             {
                 sb.append(first ? "" : ",").append(item);
@@ -193,7 +193,7 @@ public class StructVector implements Comparable<Object>
         if (f8 != null)
         {
             boolean first = true;
-            sb.append(",f8=[").append(f8.size()).append("][");
+            sb.append(",f8=[").append(f8.length).append("][");
             for (var item : f8)
             {
                 if (item != null) sb.append(first ? "" : ",").append(item); else sb.append("null");
@@ -204,7 +204,7 @@ public class StructVector implements Comparable<Object>
         if (f9 != null)
         {
             boolean first = true;
-            sb.append(",f9=[").append(f9.size()).append("][");
+            sb.append(",f9=[").append(f9.length).append("][");
             for (var item : f9)
             {
                 sb.append(first ? "" : ",").append(item);
@@ -215,7 +215,7 @@ public class StructVector implements Comparable<Object>
         if (f10 != null)
         {
             boolean first = true;
-            sb.append(",f10=[").append(f10.size()).append("][");
+            sb.append(",f10=[").append(f10.length).append("][");
             for (var item : f10)
             {
                 if (item != null) sb.append(first ? "" : ",").append(item); else sb.append("null");

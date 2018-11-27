@@ -117,8 +117,7 @@ private:
     void CopyValueToVariable(const std::string& type, const std::string& name, const std::string& variable, bool optional);
 
     void WriteOutputStreamType(const std::string& type, const std::string& name, bool optional);
-    void WriteOutputStreamItem(const std::string& type, const std::string& name, bool optional);
-    void WriteOutputStreamValue(const std::string& type, const std::string& name, bool optional);
+    void WriteOutputStreamValue(const std::string& type, const std::string& name, bool optional, bool separate);
 };
 
 } // namespace FBE

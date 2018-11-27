@@ -4243,7 +4243,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("result << '[' << @" + *field->name + ".length.to_s << ']['");
                 WriteLineIndent("@" + *field->name + ".each do |item|");
                 Indent(1);
-                WriteOutputStreamItem(*field->type, "item");
+                WriteOutputStreamValue(*field->type, "item", true);
                 WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("end");
@@ -4259,7 +4259,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("result << '[' << @" + *field->name + ".length.to_s << ']<'");
                 WriteLineIndent("@" + *field->name + ".each do |item|");
                 Indent(1);
-                WriteOutputStreamItem(*field->type, "item");
+                WriteOutputStreamValue(*field->type, "item", true);
                 WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("end");
@@ -4275,7 +4275,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("result << '[' << @" + *field->name + ".length.to_s << ']{'");
                 WriteLineIndent("@" + *field->name + ".each do |item|");
                 Indent(1);
-                WriteOutputStreamItem(*field->type, "item");
+                WriteOutputStreamValue(*field->type, "item", true);
                 WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("end");
@@ -4291,10 +4291,10 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("result << '[' << @" + *field->name + ".length.to_s << ']<{'");
                 WriteLineIndent("@" + *field->name + ".each do |key, value|");
                 Indent(1);
-                WriteOutputStreamItem(*field->type, "key");
-                WriteLineIndent("first = false");
+                WriteOutputStreamValue(*field->type, "key", true);
                 WriteLineIndent("result << '->'");
-                WriteOutputStreamItem(*field->type, "value");
+                WriteOutputStreamValue(*field->type, "value", false);
+                WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("end");
                 WriteLineIndent("result << '}>'");
@@ -4309,10 +4309,10 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("result << '[' << @" + *field->name + ".length.to_s << '][{'");
                 WriteLineIndent("@" + *field->name + ".each do |key, value|");
                 Indent(1);
-                WriteOutputStreamItem(*field->type, "key");
-                WriteLineIndent("first = false");
+                WriteOutputStreamValue(*field->type, "key", true);
                 WriteLineIndent("result << '->'");
-                WriteOutputStreamItem(*field->type, "value");
+                WriteOutputStreamValue(*field->type, "value", false);
+                WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("end");
                 WriteLineIndent("result << '}]'");
@@ -4320,7 +4320,7 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("end");
             }
             else
-                WriteOutputStreamValue(*field->type, "@" + *field->name);
+                WriteOutputStreamValue(*field->type, "@" + *field->name, false);
             first = false;
         }
     }
@@ -6010,24 +6010,12 @@ void GeneratorRuby::WriteOutputStreamType(const std::string& type, const std::st
         WriteLineIndent("result << " + name + ".to_s");
 }
 
-void GeneratorRuby::WriteOutputStreamItem(const std::string& type, const std::string& name)
+void GeneratorRuby::WriteOutputStreamValue(const std::string& type, const std::string& name, bool separate)
 {
     WriteLineIndent("if !" + name + ".nil?");
     Indent(1);
-    WriteLineIndent("result << (first ? '' : ',')");
-    WriteOutputStreamType(type, name);
-    Indent(-1);
-    WriteLineIndent("else");
-    Indent(1);
-    WriteLineIndent("result << 'null'");
-    Indent(-1);
-    WriteLineIndent("end");
-}
-
-void GeneratorRuby::WriteOutputStreamValue(const std::string& type, const std::string& name)
-{
-    WriteLineIndent("if !" + name + ".nil?");
-    Indent(1);
+    if (separate)
+        WriteLineIndent("result << (first ? '' : ',')");
     WriteOutputStreamType(type, name);
     Indent(-1);
     WriteLineIndent("else");

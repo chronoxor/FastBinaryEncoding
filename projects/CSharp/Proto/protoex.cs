@@ -2362,7 +2362,7 @@ namespace protoex {
             if (orders != null)
             {
                 bool first = true;
-                sb.Append(",orders=[").Append(orders.Count).Append("][");
+                sb.Append(",orders=[").Append(orders.Length).Append("][");
                 foreach (var item in orders)
                 {
                     sb.Append(first ? "" : ",").Append(item);

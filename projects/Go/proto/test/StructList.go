@@ -5,6 +5,8 @@
 
 package test
 
+import "fmt"
+import "strconv"
 import "strings"
 import "../fbe"
 import "../proto"
@@ -12,6 +14,10 @@ import "../proto"
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 var _ = proto.Version
+
+// Workaround for Go unused imports issue
+var _ = fmt.Print
+var _ = strconv.FormatInt
 
 // StructList key
 type StructListKey struct {
@@ -89,6 +95,18 @@ func (s StructList) Optional() *StructList {
 // Convert struct to string
 func (s StructList) String() string {
     var sb strings.Builder
+    sb.WriteString("StructList(")
+    sb.WriteString("f1=")
+    sb.WriteString(",f2=")
+    sb.WriteString(",f3=")
+    sb.WriteString(",f4=")
+    sb.WriteString(",f5=")
+    sb.WriteString(",f6=")
+    sb.WriteString(",f7=")
+    sb.WriteString(",f8=")
+    sb.WriteString(",f9=")
+    sb.WriteString(",f10=")
+    sb.WriteString(")")
     return sb.String()
 }
 

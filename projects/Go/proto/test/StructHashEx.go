@@ -5,6 +5,8 @@
 
 package test
 
+import "fmt"
+import "strconv"
 import "strings"
 import "../fbe"
 import "../proto"
@@ -12,6 +14,10 @@ import "../proto"
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 var _ = proto.Version
+
+// Workaround for Go unused imports issue
+var _ = fmt.Print
+var _ = strconv.FormatInt
 
 // StructHashEx key
 type StructHashExKey struct {
@@ -73,6 +79,10 @@ func (s StructHashEx) Optional() *StructHashEx {
 // Convert struct to string
 func (s StructHashEx) String() string {
     var sb strings.Builder
+    sb.WriteString("StructHashEx(")
+    sb.WriteString("f1=")
+    sb.WriteString(",f2=")
+    sb.WriteString(")")
     return sb.String()
 }
 

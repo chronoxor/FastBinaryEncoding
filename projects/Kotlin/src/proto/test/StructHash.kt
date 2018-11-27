@@ -138,7 +138,7 @@ open class StructHash : Comparable<Any?>
             {
                 sb.append(if (first) "" else ",").append("\"").append(item.key).append("\"")
                 sb.append("->")
-                if (item.value != null) sb.append(item.value!!); else sb.append("null")
+                if (item.value != null) sb.append(item.value); else sb.append("null")
                 first = false
             }
             sb.append("}]")
@@ -166,7 +166,7 @@ open class StructHash : Comparable<Any?>
             {
                 sb.append(if (first) "" else ",").append("\"").append(item.key).append("\"")
                 sb.append("->")
-                if (item.value != null) sb.append("bytes[").append(item.value!!.size).append("]"); else sb.append("null")
+                if (item.value != null) sb.append("bytes[").append(item.value.size).append("]"); else sb.append("null")
                 first = false
             }
             sb.append("}]")
@@ -194,7 +194,7 @@ open class StructHash : Comparable<Any?>
             {
                 sb.append(if (first) "" else ",").append("\"").append(item.key).append("\"")
                 sb.append("->")
-                if (item.value != null) sb.append(item.value!!); else sb.append("null")
+                if (item.value != null) sb.append(item.value); else sb.append("null")
                 first = false
             }
             sb.append("}]")
@@ -222,7 +222,7 @@ open class StructHash : Comparable<Any?>
             {
                 sb.append(if (first) "" else ",").append("\"").append(item.key).append("\"")
                 sb.append("->")
-                if (item.value != null) sb.append(item.value!!); else sb.append("null")
+                if (item.value != null) sb.append(item.value); else sb.append("null")
                 first = false
             }
             sb.append("}]")
@@ -250,7 +250,7 @@ open class StructHash : Comparable<Any?>
             {
                 sb.append(if (first) "" else ",").append("\"").append(item.key).append("\"")
                 sb.append("->")
-                if (item.value != null) sb.append(item.value!!); else sb.append("null")
+                if (item.value != null) sb.append(item.value); else sb.append("null")
                 first = false
             }
             sb.append("}]")

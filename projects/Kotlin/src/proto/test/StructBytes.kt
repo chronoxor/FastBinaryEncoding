@@ -95,8 +95,8 @@ open class StructBytes : Comparable<Any?>
         val sb = StringBuilder()
         sb.append("StructBytes(")
         sb.append("f1="); sb.append("bytes[").append(f1.size).append("]")
-        sb.append(",f2="); if (f2 != null) sb.append("bytes[").append(f2!!.size).append("]"); else sb.append("null")
-        sb.append(",f3="); if (f3 != null) sb.append("bytes[").append(f3!!.size).append("]"); else sb.append("null")
+        sb.append(",f2="); if (f2 != null) sb.append("bytes[").append(f2.size).append("]"); else sb.append("null")
+        sb.append(",f3="); if (f3 != null) sb.append("bytes[").append(f3.size).append("]"); else sb.append("null")
         sb.append(")")
         return sb.toString()
     }

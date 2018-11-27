@@ -5,6 +5,8 @@
 
 package test
 
+import "fmt"
+import "strconv"
 import "strings"
 import "../fbe"
 import "../proto"
@@ -12,6 +14,10 @@ import "../proto"
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 var _ = proto.Version
+
+// Workaround for Go unused imports issue
+var _ = fmt.Print
+var _ = strconv.FormatInt
 
 // StructSimple key
 type StructSimpleKey struct {
@@ -161,6 +167,98 @@ func (s StructSimple) Optional() *StructSimple {
 // Convert struct to string
 func (s StructSimple) String() string {
     var sb strings.Builder
+    sb.WriteString("StructSimple(")
+    sb.WriteString("uid=")
+    sb.WriteString(strconv.FormatInt(int64(s.Uid), 10))
+    sb.WriteString(",f1=")
+    sb.WriteString(strconv.FormatBool(s.F1))
+    sb.WriteString(",f2=")
+    sb.WriteString(strconv.FormatBool(s.F2))
+    sb.WriteString(",f3=")
+    sb.WriteString(strconv.FormatUint(uint64(s.F3), 10))
+    sb.WriteString(",f4=")
+    sb.WriteString(strconv.FormatUint(uint64(s.F4), 10))
+    sb.WriteString(",f5=")
+    sb.WriteString("'" + string(s.F5) + "'")
+    sb.WriteString(",f6=")
+    sb.WriteString("'" + string(s.F6) + "'")
+    sb.WriteString(",f7=")
+    sb.WriteString("'" + string(s.F7) + "'")
+    sb.WriteString(",f8=")
+    sb.WriteString("'" + string(s.F8) + "'")
+    sb.WriteString(",f9=")
+    sb.WriteString(strconv.FormatInt(int64(s.F9), 10))
+    sb.WriteString(",f10=")
+    sb.WriteString(strconv.FormatInt(int64(s.F10), 10))
+    sb.WriteString(",f11=")
+    sb.WriteString(strconv.FormatUint(uint64(s.F11), 10))
+    sb.WriteString(",f12=")
+    sb.WriteString(strconv.FormatUint(uint64(s.F12), 10))
+    sb.WriteString(",f13=")
+    sb.WriteString(strconv.FormatInt(int64(s.F13), 10))
+    sb.WriteString(",f14=")
+    sb.WriteString(strconv.FormatInt(int64(s.F14), 10))
+    sb.WriteString(",f15=")
+    sb.WriteString(strconv.FormatUint(uint64(s.F15), 10))
+    sb.WriteString(",f16=")
+    sb.WriteString(strconv.FormatUint(uint64(s.F16), 10))
+    sb.WriteString(",f17=")
+    sb.WriteString(strconv.FormatInt(int64(s.F17), 10))
+    sb.WriteString(",f18=")
+    sb.WriteString(strconv.FormatInt(int64(s.F18), 10))
+    sb.WriteString(",f19=")
+    sb.WriteString(strconv.FormatUint(uint64(s.F19), 10))
+    sb.WriteString(",f20=")
+    sb.WriteString(strconv.FormatUint(uint64(s.F20), 10))
+    sb.WriteString(",f21=")
+    sb.WriteString(strconv.FormatInt(int64(s.F21), 10))
+    sb.WriteString(",f22=")
+    sb.WriteString(strconv.FormatInt(int64(s.F22), 10))
+    sb.WriteString(",f23=")
+    sb.WriteString(strconv.FormatUint(uint64(s.F23), 10))
+    sb.WriteString(",f24=")
+    sb.WriteString(strconv.FormatUint(uint64(s.F24), 10))
+    sb.WriteString(",f25=")
+    sb.WriteString(strconv.FormatFloat(float64(s.F25), 'g', -1, 32))
+    sb.WriteString(",f26=")
+    sb.WriteString(strconv.FormatFloat(float64(s.F26), 'g', -1, 32))
+    sb.WriteString(",f27=")
+    sb.WriteString(strconv.FormatFloat(float64(s.F27), 'g', -1, 64))
+    sb.WriteString(",f28=")
+    sb.WriteString(strconv.FormatFloat(float64(s.F28), 'g', -1, 64))
+    sb.WriteString(",f29=")
+    sb.WriteString("\"" + s.F29.String() + "\"")
+    sb.WriteString(",f30=")
+    sb.WriteString("\"" + s.F30.String() + "\"")
+    sb.WriteString(",f31=")
+    sb.WriteString("\"" + s.F31 + "\"")
+    sb.WriteString(",f32=")
+    sb.WriteString("\"" + s.F32 + "\"")
+    sb.WriteString(",f33=")
+    sb.WriteString(strconv.FormatInt(s.F33.UnixNano(), 10))
+    sb.WriteString(",f34=")
+    sb.WriteString(strconv.FormatInt(s.F34.UnixNano(), 10))
+    sb.WriteString(",f35=")
+    sb.WriteString(strconv.FormatInt(s.F35.UnixNano(), 10))
+    sb.WriteString(",f36=")
+    sb.WriteString("\"" + s.F36.String() + "\"")
+    sb.WriteString(",f37=")
+    sb.WriteString("\"" + s.F37.String() + "\"")
+    sb.WriteString(",f38=")
+    sb.WriteString("\"" + s.F38.String() + "\"")
+    sb.WriteString(",f39=")
+    sb.WriteString(fmt.Sprintf("%v", s.F39))
+    sb.WriteString(",f40=")
+    sb.WriteString(fmt.Sprintf("%v", s.F40))
+    sb.WriteString(",f41=")
+    sb.WriteString(fmt.Sprintf("%v", s.F41))
+    sb.WriteString(",f42=")
+    sb.WriteString(fmt.Sprintf("%v", s.F42))
+    sb.WriteString(",f43=")
+    sb.WriteString(fmt.Sprintf("%v", s.F43))
+    sb.WriteString(",f44=")
+    sb.WriteString(fmt.Sprintf("%v", s.F44))
+    sb.WriteString(")")
     return sb.String()
 }
 

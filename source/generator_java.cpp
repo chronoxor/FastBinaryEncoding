@@ -5222,7 +5222,7 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
     {
         for (const auto& field : s->body->fields)
         {
-            if (field->array)
+            if (field->array || field->vector)
             {
                 WriteLineIndent("if (" + *field->name + " != null)");
                 WriteLineIndent("{");
@@ -5232,25 +5232,7 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
                 WriteLineIndent("for (var item : " + *field->name + ")");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamItem(*field->type, "item", field->optional));
-                WriteLineIndent("first = false;");
-                Indent(-1);
-                WriteLineIndent("}");
-                WriteLineIndent("sb.append(\"]\");");
-                Indent(-1);
-                WriteLineIndent("}");
-            }
-            else if (field->vector)
-            {
-                WriteLineIndent("if (" + *field->name + " != null)");
-                WriteLineIndent("{");
-                Indent(1);
-                WriteLineIndent("boolean first = true;");
-                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\").append(" + *field->name + ".size()" + ").append(\"][\");");
-                WriteLineIndent("for (var item : " + *field->name + ")");
-                WriteLineIndent("{");
-                Indent(1);
-                WriteLineIndent(ConvertOutputStreamItem(*field->type, "item", field->optional));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true));
                 WriteLineIndent("first = false;");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -5268,7 +5250,7 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
                 WriteLineIndent("for (var item : " + *field->name + ")");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamItem(*field->type, "item", field->optional));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true));
                 WriteLineIndent("first = false;");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -5286,7 +5268,7 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
                 WriteLineIndent("for (var item : " + *field->name + ")");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamItem(*field->type, "item", field->optional));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true));
                 WriteLineIndent("first = false;");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -5304,9 +5286,9 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
                 WriteLineIndent("for (var item : " + *field->name + ".entrySet())");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamItem(*field->key, "item.getKey()", false));
+                WriteLineIndent(ConvertOutputStreamValue(*field->key, "item.getKey()", false, true));
                 WriteLineIndent("sb.append(\"->\");");
-                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item.getValue()", field->optional));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item.getValue()", field->optional, false));
                 WriteLineIndent("first = false;");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -5324,9 +5306,9 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
                 WriteLineIndent("for (var item : " + *field->name + ".entrySet())");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamItem(*field->key, "item.getKey()", false));
+                WriteLineIndent(ConvertOutputStreamValue(*field->key, "item.getKey()", false, true));
                 WriteLineIndent("sb.append(\"->\");");
-                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item.getValue()", field->optional));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item.getValue()", field->optional, false));
                 WriteLineIndent("first = false;");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -5335,7 +5317,7 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
                 WriteLineIndent("}");
             }
             else
-                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=\"); " + ConvertOutputStreamValue(*field->type, *field->name, field->optional));
+                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=\"); " + ConvertOutputStreamValue(*field->type, *field->name, field->optional, false));
             first = false;
         }
     }
@@ -7398,20 +7380,14 @@ std::string GeneratorJava::ConvertOutputStreamType(const std::string& type, cons
         return ".append(" + name + ")";
 }
 
-std::string GeneratorJava::ConvertOutputStreamItem(const std::string& type, const std::string& name, bool optional)
+std::string GeneratorJava::ConvertOutputStreamValue(const std::string& type, const std::string& name, bool optional, bool separate)
 {
-    if ((type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid") || optional)
-        return "if (" + name + " != null) sb.append(first ? \"\" : \",\")" + ConvertOutputStreamType(type, name, true) + "; else sb.append(\"null\");";
-    else
-        return "sb.append(first ? \"\" : \",\")" + ConvertOutputStreamType(type, name, false) + ";";
-}
+    std::string comma = separate ? ".append(first ? \"\" : \",\")" : "";
 
-std::string GeneratorJava::ConvertOutputStreamValue(const std::string& type, const std::string& name, bool optional)
-{
-    if ((type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid") || optional)
-        return "if (" + name + " != null) sb" + ConvertOutputStreamType(type, name, true) + "; else sb.append(\"null\");";
+    if (optional || (type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid"))
+        return "if (" + name + " != null) sb" + comma + ConvertOutputStreamType(type, name, true) + "; else sb.append(\"null\");";
     else
-        return "sb" + ConvertOutputStreamType(type, name, false) + ";";
+        return "sb" + comma + ConvertOutputStreamType(type, name, false) + ";";
 }
 
 } // namespace FBE

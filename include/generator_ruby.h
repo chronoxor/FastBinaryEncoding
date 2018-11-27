@@ -107,8 +107,7 @@ private:
     std::string ConvertKeyFromJson(const std::string& type, const std::string& value, bool optional);
 
     void WriteOutputStreamType(const std::string& type, const std::string& name);
-    void WriteOutputStreamItem(const std::string& type, const std::string& name);
-    void WriteOutputStreamValue(const std::string& type, const std::string& name);
+    void WriteOutputStreamValue(const std::string& type, const std::string& name, bool separate);
 };
 
 } // namespace FBE

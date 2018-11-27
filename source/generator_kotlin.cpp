@@ -5084,7 +5084,7 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
     {
         for (const auto& field : s->body->fields)
         {
-            if (field->array)
+            if (field->array || field->vector)
             {
                 WriteLineIndent("@Suppress(\"ConstantConditionIf\")");
                 WriteLineIndent("if (true)");
@@ -5095,26 +5095,7 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 WriteLineIndent("for (item in " + *field->name + ")");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamItem(*field->type, "item", field->optional));
-                WriteLineIndent("first = false");
-                Indent(-1);
-                WriteLineIndent("}");
-                WriteLineIndent("sb.append(\"]\")");
-                Indent(-1);
-                WriteLineIndent("}");
-            }
-            else if (field->vector)
-            {
-                WriteLineIndent("@Suppress(\"ConstantConditionIf\")");
-                WriteLineIndent("if (true)");
-                WriteLineIndent("{");
-                Indent(1);
-                WriteLineIndent("var first = true");
-                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\").append(" + *field->name + ".size" + ").append(\"][\")");
-                WriteLineIndent("for (item in " + *field->name + ")");
-                WriteLineIndent("{");
-                Indent(1);
-                WriteLineIndent(ConvertOutputStreamItem(*field->type, "item", field->optional));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true));
                 WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -5133,7 +5114,7 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 WriteLineIndent("for (item in " + *field->name + ")");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamItem(*field->type, "item", field->optional));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true));
                 WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -5152,7 +5133,7 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 WriteLineIndent("for (item in " + *field->name + ")");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamItem(*field->type, "item", field->optional));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true));
                 WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -5171,9 +5152,9 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 WriteLineIndent("for (item in " + *field->name + ".entries)");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamItem(*field->key, "item.key", false));
+                WriteLineIndent(ConvertOutputStreamValue(*field->key, "item.key", false, true));
                 WriteLineIndent("sb.append(\"->\")");
-                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item.value", field->optional));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item.value", field->optional, false));
                 WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -5192,9 +5173,9 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 WriteLineIndent("for (item in " + *field->name + ".entries)");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamItem(*field->key, "item.key", false));
+                WriteLineIndent(ConvertOutputStreamValue(*field->key, "item.key", false, true));
                 WriteLineIndent("sb.append(\"->\")");
-                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item.value", field->optional));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item.value", field->optional, false));
                 WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -5203,7 +5184,7 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 WriteLineIndent("}");
             }
             else
-                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=\"); " + ConvertOutputStreamValue(*field->type, *field->name, field->optional));
+                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=\"); " + ConvertOutputStreamValue(*field->type, *field->name, field->optional, false));
             first = false;
         }
     }
@@ -7259,20 +7240,14 @@ std::string GeneratorKotlin::ConvertOutputStreamType(const std::string& type, co
         return ".append(" + name + opt + ")";
 }
 
-std::string GeneratorKotlin::ConvertOutputStreamItem(const std::string& type, const std::string& name, bool optional)
+std::string GeneratorKotlin::ConvertOutputStreamValue(const std::string& type, const std::string& name, bool optional, bool separate)
 {
-    if (optional)
-        return "if (" + name + " != null) sb.append(if (first) \"\" else \",\")" + ConvertOutputStreamType(type, name, false) + "; else sb.append(\"null\")";
-    else
-        return "sb.append(if (first) \"\" else \",\")" + ConvertOutputStreamType(type, name, false);
-}
+    std::string comma = separate ? ".append(if (first) \"\" else \",\")" : "";
 
-std::string GeneratorKotlin::ConvertOutputStreamValue(const std::string& type, const std::string& name, bool optional)
-{
     if (optional)
-        return "if (" + name + " != null) sb" + ConvertOutputStreamType(type, name, true) + "; else sb.append(\"null\")";
+        return "if (" + name + " != null) sb" + comma + ConvertOutputStreamType(type, name, false) + "; else sb.append(\"null\")";
     else
-        return "sb" + ConvertOutputStreamType(type, name, false);
+        return "sb" + comma + ConvertOutputStreamType(type, name, false);
 }
 
 } // namespace FBE

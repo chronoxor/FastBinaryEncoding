@@ -108,8 +108,7 @@ private:
     std::string ConvertDefault(const std::string& package, const StructField& field);
 
     std::string ConvertOutputStreamType(const std::string& type, const std::string& name, bool optional);
-    std::string ConvertOutputStreamItem(const std::string& type, const std::string& name, bool optional);
-    std::string ConvertOutputStreamValue(const std::string& type, const std::string& name, bool optional);
+    std::string ConvertOutputStreamValue(const std::string& type, const std::string& name, bool optional, bool separate);
 };
 
 } // namespace FBE

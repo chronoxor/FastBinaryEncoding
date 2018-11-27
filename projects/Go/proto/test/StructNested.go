@@ -5,6 +5,8 @@
 
 package test
 
+import "fmt"
+import "strconv"
 import "strings"
 import "../fbe"
 import "../proto"
@@ -12,6 +14,10 @@ import "../proto"
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 var _ = proto.Version
+
+// Workaround for Go unused imports issue
+var _ = fmt.Print
+var _ = strconv.FormatInt
 
 // StructNested key
 type StructNestedKey struct {
@@ -97,6 +103,57 @@ func (s StructNested) Optional() *StructNested {
 // Convert struct to string
 func (s StructNested) String() string {
     var sb strings.Builder
+    sb.WriteString("StructNested(")
+    sb.WriteString(s.StructOptional.String())
+    sb.WriteString(",f1000=")
+    sb.WriteString(fmt.Sprintf("%v", s.F1000))
+    sb.WriteString(",f1001=")
+    if s.F1001 != nil { 
+        sb.WriteString(fmt.Sprintf("%v", *s.F1001))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f1002=")
+    sb.WriteString(fmt.Sprintf("%v", s.F1002))
+    sb.WriteString(",f1003=")
+    if s.F1003 != nil { 
+        sb.WriteString(fmt.Sprintf("%v", *s.F1003))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f1004=")
+    sb.WriteString(fmt.Sprintf("%v", s.F1004))
+    sb.WriteString(",f1005=")
+    if s.F1005 != nil { 
+        sb.WriteString(fmt.Sprintf("%v", *s.F1005))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f1006=")
+    sb.WriteString(fmt.Sprintf("%v", s.F1006))
+    sb.WriteString(",f1007=")
+    if s.F1007 != nil { 
+        sb.WriteString(fmt.Sprintf("%v", *s.F1007))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f1008=")
+    sb.WriteString(fmt.Sprintf("%v", s.F1008))
+    sb.WriteString(",f1009=")
+    if s.F1009 != nil { 
+        sb.WriteString(fmt.Sprintf("%v", *s.F1009))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(",f1010=")
+    sb.WriteString(fmt.Sprintf("%v", s.F1010))
+    sb.WriteString(",f1011=")
+    if s.F1011 != nil { 
+        sb.WriteString(fmt.Sprintf("%v", *s.F1011))
+    } else {
+        sb.WriteString("null")
+    }
+    sb.WriteString(")")
     return sb.String()
 }
 

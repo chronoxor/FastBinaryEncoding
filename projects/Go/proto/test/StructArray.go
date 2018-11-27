@@ -5,6 +5,8 @@
 
 package test
 
+import "fmt"
+import "strconv"
 import "strings"
 import "../fbe"
 import "../proto"
@@ -12,6 +14,10 @@ import "../proto"
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 var _ = proto.Version
+
+// Workaround for Go unused imports issue
+var _ = fmt.Print
+var _ = strconv.FormatInt
 
 // StructArray key
 type StructArrayKey struct {
@@ -89,6 +95,142 @@ func (s StructArray) Optional() *StructArray {
 // Convert struct to string
 func (s StructArray) String() string {
     var sb strings.Builder
+    sb.WriteString("StructArray(")
+    sb.WriteString("f1=")
+    if true {
+        first := true
+        sb.WriteString("f1=[" + strconv.FormatInt(int64(len(s.F1)), 10) + "][")
+        for _, v := range s.F1 {
+            if first { sb.WriteString("") } else { sb.WriteString(",") }
+            sb.WriteString(strconv.FormatUint(uint64(v), 10))
+            first = false
+        }
+        sb.WriteString("]")
+    }
+    sb.WriteString(",f2=")
+    if true {
+        first := true
+        sb.WriteString(",f2=[" + strconv.FormatInt(int64(len(s.F2)), 10) + "][")
+        for _, v := range s.F2 {
+            if v != nil { 
+                if first { sb.WriteString("") } else { sb.WriteString(",") }
+                sb.WriteString(strconv.FormatUint(uint64(*v), 10))
+            } else {
+                sb.WriteString("null")
+            }
+            first = false
+        }
+        sb.WriteString("]")
+    }
+    sb.WriteString(",f3=")
+    if true {
+        first := true
+        sb.WriteString(",f3=[" + strconv.FormatInt(int64(len(s.F3)), 10) + "][")
+        for _, v := range s.F3 {
+            if v != nil { 
+                if first { sb.WriteString("") } else { sb.WriteString(",") }
+                sb.WriteString("bytes[" + strconv.FormatInt(int64(len(v)), 10) + "]")
+            } else {
+                sb.WriteString("null")
+            }
+            first = false
+        }
+        sb.WriteString("]")
+    }
+    sb.WriteString(",f4=")
+    if true {
+        first := true
+        sb.WriteString(",f4=[" + strconv.FormatInt(int64(len(s.F4)), 10) + "][")
+        for _, v := range s.F4 {
+            if v != nil { 
+                if first { sb.WriteString("") } else { sb.WriteString(",") }
+                sb.WriteString("bytes[" + strconv.FormatInt(int64(len(*v)), 10) + "]")
+            } else {
+                sb.WriteString("null")
+            }
+            first = false
+        }
+        sb.WriteString("]")
+    }
+    sb.WriteString(",f5=")
+    if true {
+        first := true
+        sb.WriteString(",f5=[" + strconv.FormatInt(int64(len(s.F5)), 10) + "][")
+        for _, v := range s.F5 {
+            if first { sb.WriteString("") } else { sb.WriteString(",") }
+            sb.WriteString(fmt.Sprintf("%v", v))
+            first = false
+        }
+        sb.WriteString("]")
+    }
+    sb.WriteString(",f6=")
+    if true {
+        first := true
+        sb.WriteString(",f6=[" + strconv.FormatInt(int64(len(s.F6)), 10) + "][")
+        for _, v := range s.F6 {
+            if v != nil { 
+                if first { sb.WriteString("") } else { sb.WriteString(",") }
+                sb.WriteString(fmt.Sprintf("%v", *v))
+            } else {
+                sb.WriteString("null")
+            }
+            first = false
+        }
+        sb.WriteString("]")
+    }
+    sb.WriteString(",f7=")
+    if true {
+        first := true
+        sb.WriteString(",f7=[" + strconv.FormatInt(int64(len(s.F7)), 10) + "][")
+        for _, v := range s.F7 {
+            if first { sb.WriteString("") } else { sb.WriteString(",") }
+            sb.WriteString(fmt.Sprintf("%v", v))
+            first = false
+        }
+        sb.WriteString("]")
+    }
+    sb.WriteString(",f8=")
+    if true {
+        first := true
+        sb.WriteString(",f8=[" + strconv.FormatInt(int64(len(s.F8)), 10) + "][")
+        for _, v := range s.F8 {
+            if v != nil { 
+                if first { sb.WriteString("") } else { sb.WriteString(",") }
+                sb.WriteString(fmt.Sprintf("%v", *v))
+            } else {
+                sb.WriteString("null")
+            }
+            first = false
+        }
+        sb.WriteString("]")
+    }
+    sb.WriteString(",f9=")
+    if true {
+        first := true
+        sb.WriteString(",f9=[" + strconv.FormatInt(int64(len(s.F9)), 10) + "][")
+        for _, v := range s.F9 {
+            if first { sb.WriteString("") } else { sb.WriteString(",") }
+            sb.WriteString(fmt.Sprintf("%v", v))
+            first = false
+        }
+        sb.WriteString("]")
+    }
+    sb.WriteString(",f10=")
+    if true {
+        first := true
+        sb.WriteString(",f10=[" + strconv.FormatInt(int64(len(s.F10)), 10) + "][")
+        for _, v := range s.F10 {
+            if v != nil { 
+                if first { sb.WriteString("") } else { sb.WriteString(",") }
+                sb.WriteString(fmt.Sprintf("%v", *v))
+            } else {
+                sb.WriteString("null")
+            }
+            first = false
+        }
+        sb.WriteString("]")
+    }
+    sb.WriteString(")")
     return sb.String()
 }
 

@@ -107,9 +107,8 @@ private:
     std::string ConvertDefault(const std::string& type, bool optional);
     std::string ConvertDefault(const StructField& field);
 
-    //void WriteOutputStreamType(const std::string& type, const std::string& name, bool optional);
-    //void WriteOutputStreamItem(const std::string& type, const std::string& name, bool optional);
-    //void WriteOutputStreamValue(const std::string& type, const std::string& name, bool optional);
+    void WriteOutputStreamType(const std::string& type, const std::string& name, bool optional);
+    void WriteOutputStreamValue(const std::string& type, const std::string& name, bool optional, bool separate);
 };
 
 } // namespace FBE

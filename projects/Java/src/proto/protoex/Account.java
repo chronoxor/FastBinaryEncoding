@@ -115,7 +115,7 @@ public class Account implements Comparable<Object>
         if (orders != null)
         {
             boolean first = true;
-            sb.append(",orders=[").append(orders.size()).append("][");
+            sb.append(",orders=[").append(orders.length).append("][");
             for (var item : orders)
             {
                 sb.append(first ? "" : ",").append(item);

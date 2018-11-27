@@ -9198,12 +9198,10 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("if (this." + *field->name + " != null) {");
                 Indent(1);
                 WriteLineIndent("let first = true");
-                WriteLineIndent("result += '['");
-                WriteLineIndent("result += this." + *field->name + ".length");
-                WriteLineIndent("result += ']['");
+                WriteLineIndent("result += '[' + this." + *field->name + ".length + ']['");
                 WriteLineIndent("for (let item of this." + *field->name + ") {");
                 Indent(1);
-                WriteOutputStreamItem(*field->type, "item", field->optional);
+                WriteOutputStreamValue(*field->type, "item", field->optional, true);
                 WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -9216,12 +9214,10 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("if (this." + *field->name + " != null) {");
                 Indent(1);
                 WriteLineIndent("let first = true");
-                WriteLineIndent("result += '['");
-                WriteLineIndent("result += this." + *field->name + ".length");
-                WriteLineIndent("result += ']<'");
+                WriteLineIndent("result += '[' + this." + *field->name + ".length + ']<'");
                 WriteLineIndent("for (let item of this." + *field->name + ") {");
                 Indent(1);
-                WriteOutputStreamItem(*field->type, "item", field->optional);
+                WriteOutputStreamValue(*field->type, "item", field->optional, true);
                 WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -9234,12 +9230,10 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("if (this." + *field->name + " != null) {");
                 Indent(1);
                 WriteLineIndent("let first = true");
-                WriteLineIndent("result += '['");
-                WriteLineIndent("result += this." + *field->name + ".size");
-                WriteLineIndent("result += ']{'");
+                WriteLineIndent("result += '[' + this." + *field->name + ".size + ']{'");
                 WriteLineIndent("for (let item of this." + *field->name + ") {");
                 Indent(1);
-                WriteOutputStreamItem(*field->type, "item", field->optional);
+                WriteOutputStreamValue(*field->type, "item", field->optional, true);
                 WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -9252,14 +9246,12 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("if (this." + *field->name + " != null) {");
                 Indent(1);
                 WriteLineIndent("let first = true");
-                WriteLineIndent("result += '['");
-                WriteLineIndent("result += this." + *field->name + ".size");
-                WriteLineIndent("result += ']<{'");
+                WriteLineIndent("result += '[' + this." + *field->name + ".size + ']<{'");
                 WriteLineIndent("for (let [key, value] of this." + *field->name + ") {");
                 Indent(1);
-                WriteOutputStreamItem(*field->key, "key", false);
+                WriteOutputStreamValue(*field->key, "key", false, true);
                 WriteLineIndent("result += '->'");
-                WriteOutputStreamItem(*field->type, "value", field->optional);
+                WriteOutputStreamValue(*field->type, "value", field->optional, false);
                 WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -9272,14 +9264,12 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("if (this." + *field->name + " != null) {");
                 Indent(1);
                 WriteLineIndent("let first = true");
-                WriteLineIndent("result += '['");
-                WriteLineIndent("result += this." + *field->name + ".size");
-                WriteLineIndent("result += '][{'");
+                WriteLineIndent("result += '[' + this." + *field->name + ".size + '][{'");
                 WriteLineIndent("for (let [key, value] of this." + *field->name + ") {");
                 Indent(1);
-                WriteOutputStreamItem(*field->key, "key", false);
+                WriteOutputStreamValue(*field->key, "key", false, true);
                 WriteLineIndent("result += '->'");
-                WriteOutputStreamItem(*field->type, "value", field->optional);
+                WriteOutputStreamValue(*field->type, "value", field->optional, false);
                 WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -9288,7 +9278,7 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("}");
             }
             else
-                WriteOutputStreamValue(*field->type, "this." + *field->name, field->optional);
+                WriteOutputStreamValue(*field->type, "this." + *field->name, field->optional, false);
             first = false;
         }
     }
@@ -11292,38 +11282,27 @@ void GeneratorJavaScript::WriteOutputStreamType(const std::string& type, const s
     if (type == "bool")
         WriteLineIndent("result += " + name + " ? 'true' : 'false'");
     else if (type == "bytes")
-    {
-        WriteLineIndent("result += 'bytes['");
-        WriteLineIndent("result += " + name + ".length");
-        WriteLineIndent("result += ']'");
-    }
+        WriteLineIndent("result += 'bytes[' + " + name + ".length + ']'");
     else if ((type == "char") || (type == "wchar"))
-    {
-        WriteLineIndent("result += \"'\"");
-        WriteLineIndent("result += " + name + ".toString()");
-        WriteLineIndent("result += \"'\"");
-    }
+        WriteLineIndent("result += \"'\"" + name + ".toString() + \"'\"");
     else if (type == "decimal")
         WriteLineIndent("result += " + name + ".toFixed()");
     else if ((type == "string") || (type == "uuid"))
-    {
-        WriteLineIndent("result += '\"'");
-        WriteLineIndent("result += " + name + ".toString()");
-        WriteLineIndent("result += '\"'");
-    }
+        WriteLineIndent("result += '\"'" + name + ".toString() + '\"'");
     else if (type == "timestamp")
         WriteLineIndent("result += " + name + ".getTime() * 1000000");
     else
         WriteLineIndent("result += " + name + ".toString()");
 }
 
-void GeneratorJavaScript::WriteOutputStreamItem(const std::string& type, const std::string& name, bool optional)
+void GeneratorJavaScript::WriteOutputStreamValue(const std::string& type, const std::string& name, bool optional, bool separate)
 {
-    if ((type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid") || optional)
+    if (optional || (type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid"))
     {
         WriteLineIndent("if (" + name + " != null) {");
         Indent(1);
-        WriteLineIndent("result += first ? '' : ','");
+        if (separate)
+            WriteLineIndent("result += first ? '' : ','");
         WriteOutputStreamType(type, name, true);
         Indent(-1);
         WriteLineIndent("} else {");
@@ -11334,27 +11313,10 @@ void GeneratorJavaScript::WriteOutputStreamItem(const std::string& type, const s
     }
     else
     {
-        WriteLineIndent("result += first ? '' : ','");
+        if (separate)
+            WriteLineIndent("result += first ? '' : ','");
         WriteOutputStreamType(type, name, false);
     }
-}
-
-void GeneratorJavaScript::WriteOutputStreamValue(const std::string& type, const std::string& name, bool optional)
-{
-    if ((type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid") || optional)
-    {
-        WriteLineIndent("if (" + name + " != null) {");
-        Indent(1);
-        WriteOutputStreamType(type, name, true);
-        Indent(-1);
-        WriteLineIndent("} else {");
-        Indent(1);
-        WriteLineIndent("result += 'null'");
-        Indent(-1);
-        WriteLineIndent("}");
-    }
-    else
-        WriteOutputStreamType(type, name, false);
 }
 
 } // namespace FBE

@@ -819,9 +819,7 @@ class Order {
     result += this.uid.toString()
     result += ',symbol='
     if (this.symbol != null) {
-      result += '"'
-      result += this.symbol.toString()
-      result += '"'
+      result += '"'this.symbol.toString() + '"'
     } else {
       result += 'null'
     }
@@ -1920,9 +1918,7 @@ class Balance {
     result += 'Balance('
     result += 'currency='
     if (this.currency != null) {
-      result += '"'
-      result += this.currency.toString()
-      result += '"'
+      result += '"'this.currency.toString() + '"'
     } else {
       result += 'null'
     }
@@ -2818,9 +2814,7 @@ class Account {
     result += this.uid.toString()
     result += ',name='
     if (this.name != null) {
-      result += '"'
-      result += this.name.toString()
-      result += '"'
+      result += '"'this.name.toString() + '"'
     } else {
       result += 'null'
     }
@@ -2837,9 +2831,7 @@ class Account {
     result += ',orders='
     if (this.orders != null) {
       let first = true
-      result += '['
-      result += this.orders.length
-      result += ']['
+      result += '[' + this.orders.length + ']['
       for (let item of this.orders) {
         result += first ? '' : ','
         result += item.toString()

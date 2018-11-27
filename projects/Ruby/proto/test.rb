@@ -15759,14 +15759,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << value.to_s
           else
             result << 'null'
           end
+          first = false
         end
         result << '}>'
       end
@@ -15781,14 +15780,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << value.to_s
           else
             result << 'null'
           end
+          first = false
         end
         result << '}>'
       end
@@ -15803,14 +15801,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << 'bytes[' << value.length.to_s << ']'
           else
             result << 'null'
           end
+          first = false
         end
         result << '}>'
       end
@@ -15825,14 +15822,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << 'bytes[' << value.length.to_s << ']'
           else
             result << 'null'
           end
+          first = false
         end
         result << '}>'
       end
@@ -15847,14 +15843,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << value.to_s
           else
             result << 'null'
           end
+          first = false
         end
         result << '}>'
       end
@@ -15869,14 +15864,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << value.to_s
           else
             result << 'null'
           end
+          first = false
         end
         result << '}>'
       end
@@ -15891,14 +15885,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << value.to_s
           else
             result << 'null'
           end
+          first = false
         end
         result << '}>'
       end
@@ -15913,14 +15906,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << value.to_s
           else
             result << 'null'
           end
+          first = false
         end
         result << '}>'
       end
@@ -15935,14 +15927,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << value.to_s
           else
             result << 'null'
           end
+          first = false
         end
         result << '}>'
       end
@@ -15957,14 +15948,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << value.to_s
           else
             result << 'null'
           end
+          first = false
         end
         result << '}>'
       end
@@ -17057,14 +17047,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << value.to_s
           else
             result << 'null'
           end
+          first = false
         end
         result << '}]'
       end
@@ -17079,14 +17068,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << value.to_s
           else
             result << 'null'
           end
+          first = false
         end
         result << '}]'
       end
@@ -17101,14 +17089,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << 'bytes[' << value.length.to_s << ']'
           else
             result << 'null'
           end
+          first = false
         end
         result << '}]'
       end
@@ -17123,14 +17110,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << 'bytes[' << value.length.to_s << ']'
           else
             result << 'null'
           end
+          first = false
         end
         result << '}]'
       end
@@ -17145,14 +17131,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << value.to_s
           else
             result << 'null'
           end
+          first = false
         end
         result << '}]'
       end
@@ -17167,14 +17152,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << value.to_s
           else
             result << 'null'
           end
+          first = false
         end
         result << '}]'
       end
@@ -17189,14 +17173,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << value.to_s
           else
             result << 'null'
           end
+          first = false
         end
         result << '}]'
       end
@@ -17211,14 +17194,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << value.to_s
           else
             result << 'null'
           end
+          first = false
         end
         result << '}]'
       end
@@ -17233,14 +17215,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << value.to_s
           else
             result << 'null'
           end
+          first = false
         end
         result << '}]'
       end
@@ -17255,14 +17236,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << value.to_s
           else
             result << 'null'
           end
+          first = false
         end
         result << '}]'
       end
@@ -18331,14 +18311,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << value.to_s
           else
             result << 'null'
           end
+          first = false
         end
         result << '}]'
       end
@@ -18353,14 +18332,13 @@ module Test
           else
             result << 'null'
           end
-          first = false
           result << '->'
           if !value.nil?
-            result << (first ? '' : ',')
             result << value.to_s
           else
             result << 'null'
           end
+          first = false
         end
         result << '}]'
       end

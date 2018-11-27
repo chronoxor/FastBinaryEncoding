@@ -4262,8 +4262,16 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
 
     // Generate imports
     WriteLine();
+    WriteLineIndent("import \"fmt\"");
+    WriteLineIndent("import \"strconv\"");
     WriteLineIndent("import \"strings\"");
     GenerateImports(p);
+
+    // Generate workaround for Go unused imports issue
+    WriteLine();
+    WriteLineIndent("// Workaround for Go unused imports issue");
+    WriteLineIndent("var _ = fmt.Print");
+    WriteLineIndent("var _ = strconv.FormatInt");
 
     std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "";
 
@@ -4402,6 +4410,60 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     WriteLineIndent("func (s " + struct_name + ") String() string {");
     Indent(1);
     WriteLineIndent("var sb strings.Builder");
+    WriteLineIndent("sb.WriteString(\"" + *s->name + "(\")");
+    bool first = true;
+    if (s->base && !s->base->empty())
+    {
+        WriteLineIndent("sb.WriteString(s." + ConvertBaseName(base_type) + ".String())");
+        first = false;
+    }
+    if (s->body)
+    {
+        for (const auto& field : s->body->fields)
+        {
+            WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=\")");
+            if (field->array)
+            {
+                WriteLineIndent("if true {");
+                Indent(1);
+                WriteLineIndent("first := true");
+                WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=[\" + strconv.FormatInt(int64(len(s." + ConvertCase(*field->name) + ")), 10) + \"][\")");
+                WriteLineIndent("for _, v := range s." + ConvertCase(*field->name) + " {");
+                Indent(1);
+                WriteOutputStreamValue(*field->type, "v", field->optional, true);
+                WriteLineIndent("first = false");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("sb.WriteString(\"]\")");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
+            else if (field->vector)
+            {
+                WriteLineIndent("if s." + ConvertCase(*field->name) + " != nil {");
+                Indent(1);
+                WriteLineIndent("first := true");
+                WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=[\" + strconv.FormatInt(int64(len(s." + ConvertCase(*field->name) + ")), 10) + \"][\")");
+                WriteLineIndent("for _, v := range s." + ConvertCase(*field->name) + " {");
+                Indent(1);
+                WriteOutputStreamValue(*field->type, "v", field->optional, true);
+                WriteLineIndent("first = false");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("sb.WriteString(\"]\")");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
+            else if (field->list || field->set || field->map || field->hash)
+            {
+
+            }
+            else
+                WriteOutputStreamValue(*field->type, "s." + ConvertCase(*field->name), field->optional, false);
+            first = false;
+        }
+    }
+    WriteLineIndent("sb.WriteString(\")\")");
     WriteLineIndent("return sb.String()");
     Indent(-1);
     WriteLineIndent("}");
@@ -6712,69 +6774,61 @@ std::string GeneratorGo::ConvertDefault(const StructField& field)
 
     return ConvertDefault(*field.type, field.optional);
 }
-/*
+
 void GeneratorGo::WriteOutputStreamType(const std::string& type, const std::string& name, bool optional)
 {
     if (type == "bool")
-        WriteLineIndent("sb.append(\"true\" if " + name + " else \"false\")");
-    else if (type == "bytes")
-    {
-        WriteLineIndent("sb.append(\"bytes[\")");
-        WriteLineIndent("sb.append(str(len(" + name + ")))");
-        WriteLineIndent("sb.append(\"]\")");
-    }
+        Write("sb.WriteString(strconv.FormatBool(" + std::string(optional ? "*" : "") + name + "))");
+    else if (type == "byte")
+        Write("sb.WriteString(strconv.FormatUint(uint64(" + std::string(optional ? "*" : "") + name + "), 10))");
+    else if ((type == "int8") || (type == "int16") || (type == "int32") || (type == "int64"))
+        Write("sb.WriteString(strconv.FormatInt(int64(" + std::string(optional ? "*" : "") + name + "), 10))");
+    else if ((type == "uint8") || (type == "uint16") || (type == "uint32") || (type == "uint64"))
+        Write("sb.WriteString(strconv.FormatUint(uint64(" + std::string(optional ? "*" : "") + name + "), 10))");
     else if ((type == "char") || (type == "wchar"))
-    {
-        WriteLineIndent("sb.append(\"'\")");
-        WriteLineIndent("sb.append(str(" + name + "))");
-        WriteLineIndent("sb.append(\"'\")");
-    }
-    else if ((type == "string") || (type == "uuid"))
-    {
-        WriteLineIndent("sb.append(\"\\\"\")");
-        WriteLineIndent("sb.append(str(" + name + "))");
-        WriteLineIndent("sb.append(\"\\\"\")");
-    }
+        Write("sb.WriteString(\"'\" + string(" + std::string(optional ? "*" : "") + name + ") + \"'\")");
+    else if (type == "float")
+        Write("sb.WriteString(strconv.FormatFloat(float64(" + std::string(optional ? "*" : "") + name + "), 'g', -1, 32))");
+    else if (type == "double")
+        Write("sb.WriteString(strconv.FormatFloat(float64(" + std::string(optional ? "*" : "") + name + "), 'g', -1, 64))");
+    else if (type == "bytes")
+        Write("sb.WriteString(\"bytes[\" + strconv.FormatInt(int64(len(" + std::string(optional ? "*" : "") + name + ")), 10) + \"]\")");
+    else if (type == "string")
+        Write("sb.WriteString(\"\\\"\" + " + std::string(optional ? "*" : "") + name + " + \"\\\"\")");
+    else if ((type == "decimal") || (type == "uuid"))
+        Write("sb.WriteString(\"\\\"\" + " + std::string(optional ? "(*" : "") + name + std::string(optional ? ")" : "") + ".String() + \"\\\"\")");
+    else if (type == "timestamp")
+        Write("sb.WriteString(strconv.FormatInt(" + std::string(optional ? "(*" : "") + name + std::string(optional ? ")" : "") +  + ".UnixNano(), 10))");
     else
-        WriteLineIndent("sb.append(str(" + name + "))");
+        Write("sb.WriteString(fmt.Sprintf(\"%v\", " + std::string(optional ? "*" : "") + name + "))");
 }
 
-void GeneratorGo::WriteOutputStreamItem(const std::string& type, const std::string& name, bool optional)
+void GeneratorGo::WriteOutputStreamValue(const std::string& type, const std::string& name, bool optional, bool separate)
 {
-    if ((type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid") || optional)
+    if (optional || (type == "bytes"))
     {
-        WriteLineIndent("if " + name + " is not None:");
+        WriteLineIndent("if " + name + " != nil { ");
         Indent(1);
-        WriteLineIndent("sb.append(\"\" if first else \",\")");
-        WriteOutputStreamType(type, name, true);
+        if (separate)
+            WriteLineIndent("if first { sb.WriteString(\"\") } else { sb.WriteString(\",\") }");
+        WriteIndent();
+        WriteOutputStreamType(type, name, optional);
+        WriteLine();
         Indent(-1);
-        WriteLineIndent("else:");
+        WriteLineIndent("} else {");
         Indent(1);
-        WriteLineIndent("sb.append(\"null\")");
+        WriteLineIndent("sb.WriteString(\"null\")");
         Indent(-1);
+        WriteLineIndent("}");
     }
     else
     {
-        WriteLineIndent("sb.append(\"\" if first else \",\")");
-        WriteOutputStreamType(type, name, false);
+        if (separate)
+            WriteLineIndent("if first { sb.WriteString(\"\") } else { sb.WriteString(\",\") }");
+        WriteIndent();
+        WriteOutputStreamType(type, name, optional);
+        WriteLine();
     }
 }
 
-void GeneratorGo::WriteOutputStreamValue(const std::string& type, const std::string& name, bool optional)
-{
-    if ((type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid") || optional)
-    {
-        WriteLineIndent("if " + name + " is not None:");
-        Indent(1);
-        WriteOutputStreamType(type, name, true);
-        Indent(-1);
-        WriteLineIndent("else:");
-        Indent(1);
-        WriteLineIndent("sb.append(\"null\")");
-        Indent(-1);
-    }
-    else
-        WriteOutputStreamType(type, name, false);
-}
-*/
 } // namespace FBE

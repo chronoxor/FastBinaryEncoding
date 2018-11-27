@@ -436,9 +436,7 @@ class Order(object):
         sb.append(str(self.uid))
         sb.append(",symbol=")
         if self.symbol is not None:
-            sb.append("\"")
-            sb.append(str(self.symbol))
-            sb.append("\"")
+            sb.append("\"" + str(self.symbol) + "\"")
         else:
             sb.append("null")
         sb.append(",side=")
@@ -1156,9 +1154,7 @@ class Balance(object):
         sb.append("Balance(")
         sb.append("currency=")
         if self.currency is not None:
-            sb.append("\"")
-            sb.append(str(self.currency))
-            sb.append("\"")
+            sb.append("\"" + str(self.currency) + "\"")
         else:
             sb.append("null")
         sb.append(",amount=")
@@ -1704,9 +1700,7 @@ class Account(object):
         sb.append(str(self.uid))
         sb.append(",name=")
         if self.name is not None:
-            sb.append("\"")
-            sb.append(str(self.name))
-            sb.append("\"")
+            sb.append("\"" + str(self.name) + "\"")
         else:
             sb.append("null")
         sb.append(",state=")
@@ -1721,9 +1715,7 @@ class Account(object):
         sb.append(",orders=")
         if self.orders is not None:
             first = True
-            sb.append("[")
-            sb.append(str(len(self.orders)))
-            sb.append("][")
+            sb.append("[" + str(len(self.orders)) + "][")
             for item in self.orders:
                 sb.append("" if first else ",")
                 sb.append(str(item))
