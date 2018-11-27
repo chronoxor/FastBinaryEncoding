@@ -271,7 +271,6 @@ dependencies that worth to be mentioned:
 ### Go
 * Assert testing is based on [stretchr/testify](https://github.com/stretchr/testify) package (`go get github.com/stretchr/testify`);
 * JSON serialization is based on [jsoniter](https://github.com/json-iterator/go) package (`go get github.com/json-iterator/go`);
-* JSON serialization of sets is not implemented for Go because native set type is not supported;
 * Decimal type is based on [shopspring/decimal](https://github.com/shopspring/decimal) package (`go get github.com/shopspring/decimal`);
 * UUID type is based on [goolge/uuid](https://github.com/google/uuid) package (`go get github.com/google/uuid`);
 
@@ -982,7 +981,7 @@ Serialization benchmark results:
 | .NET Core Linux (JSON)   |    341 bytes |      366 435 ops/s |           2 729 ns |
 | Go Win64                 |    ??? bytes |          ??? ops/s |             ??? ns |
 | Go Win64 (Final)         |    ??? bytes |          ??? ops/s |             ??? ns |
-| Go Win64 (JSON)          |    ??? bytes |          ??? ops/s |             ??? ns |
+| Go Win64 (JSON)          |    341 bytes |      258 732 ops/s |           3 865 ns |
 | Java Win64               |    252 bytes |    4 247 162 ops/s |             236 ns |
 | Java Win64 (Final)       |    152 bytes |    4 883 205 ops/s |             205 ns |
 | Java Win64 (JSON)        |    353 bytes |      213 983 ops/s |           4 673 ns |
@@ -1024,7 +1023,7 @@ Deserialization benchmark results:
 | .NET Core Linux (JSON)   |    341 bytes |        222 074 ops/s |             4 503 ns |
 | Go Win64                 |    ??? bytes |            ??? ops/s |               ??? ns |
 | Go Win64 (Final)         |    ??? bytes |            ??? ops/s |               ??? ns |
-| Go Win64 (JSON)          |    ??? bytes |            ??? ops/s |               ??? ns |
+| Go Win64 (JSON)          |    341 bytes |        251 825 ops/s |             3 971 ns |
 | Java Win64               |    252 bytes |      2 688 084 ops/s |               372 ns |
 | Java Win64 (Final)       |    152 bytes |      3 036 020 ops/s |               329 ns |
 | Java Win64 (JSON)        |    353 bytes |        308 675 ops/s |             3 240 ns |
