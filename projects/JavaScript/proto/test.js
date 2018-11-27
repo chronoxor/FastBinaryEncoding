@@ -13264,6 +13264,8 @@ class StructArray {
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ',f2='
     if (this.f2 != null) {
@@ -13274,11 +13276,14 @@ class StructArray {
           result += first ? '' : ','
           result += item.toString()
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ',f3='
     if (this.f3 != null) {
@@ -13289,11 +13294,14 @@ class StructArray {
           result += first ? '' : ','
           result += 'bytes[' + item.length + ']'
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ',f4='
     if (this.f4 != null) {
@@ -13304,11 +13312,14 @@ class StructArray {
           result += first ? '' : ','
           result += 'bytes[' + item.length + ']'
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ',f5='
     if (this.f5 != null) {
@@ -13320,6 +13331,8 @@ class StructArray {
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ',f6='
     if (this.f6 != null) {
@@ -13330,11 +13343,14 @@ class StructArray {
           result += first ? '' : ','
           result += item.toString()
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ',f7='
     if (this.f7 != null) {
@@ -13346,6 +13362,8 @@ class StructArray {
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ',f8='
     if (this.f8 != null) {
@@ -13356,11 +13374,14 @@ class StructArray {
           result += first ? '' : ','
           result += item.toString()
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ',f9='
     if (this.f9 != null) {
@@ -13372,6 +13393,8 @@ class StructArray {
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ',f10='
     if (this.f10 != null) {
@@ -13382,11 +13405,14 @@ class StructArray {
           result += first ? '' : ','
           result += item.toString()
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ')'
     return result
@@ -14861,6 +14887,8 @@ class StructVector {
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ',f2='
     if (this.f2 != null) {
@@ -14871,11 +14899,14 @@ class StructVector {
           result += first ? '' : ','
           result += item.toString()
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ',f3='
     if (this.f3 != null) {
@@ -14886,11 +14917,14 @@ class StructVector {
           result += first ? '' : ','
           result += 'bytes[' + item.length + ']'
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ',f4='
     if (this.f4 != null) {
@@ -14901,11 +14935,14 @@ class StructVector {
           result += first ? '' : ','
           result += 'bytes[' + item.length + ']'
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ',f5='
     if (this.f5 != null) {
@@ -14917,6 +14954,8 @@ class StructVector {
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ',f6='
     if (this.f6 != null) {
@@ -14927,11 +14966,14 @@ class StructVector {
           result += first ? '' : ','
           result += item.toString()
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ',f7='
     if (this.f7 != null) {
@@ -14943,6 +14985,8 @@ class StructVector {
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ',f8='
     if (this.f8 != null) {
@@ -14953,11 +14997,14 @@ class StructVector {
           result += first ? '' : ','
           result += item.toString()
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ',f9='
     if (this.f9 != null) {
@@ -14969,6 +15016,8 @@ class StructVector {
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ',f10='
     if (this.f10 != null) {
@@ -14979,11 +15028,14 @@ class StructVector {
           result += first ? '' : ','
           result += item.toString()
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ')'
     return result
@@ -16458,6 +16510,8 @@ class StructList {
         first = false
       }
       result += '>'
+    } else {
+      result += '[0]<>'
     }
     result += ',f2='
     if (this.f2 != null) {
@@ -16468,11 +16522,14 @@ class StructList {
           result += first ? '' : ','
           result += item.toString()
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         first = false
       }
       result += '>'
+    } else {
+      result += '[0]<>'
     }
     result += ',f3='
     if (this.f3 != null) {
@@ -16483,11 +16540,14 @@ class StructList {
           result += first ? '' : ','
           result += 'bytes[' + item.length + ']'
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         first = false
       }
       result += '>'
+    } else {
+      result += '[0]<>'
     }
     result += ',f4='
     if (this.f4 != null) {
@@ -16498,11 +16558,14 @@ class StructList {
           result += first ? '' : ','
           result += 'bytes[' + item.length + ']'
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         first = false
       }
       result += '>'
+    } else {
+      result += '[0]<>'
     }
     result += ',f5='
     if (this.f5 != null) {
@@ -16514,6 +16577,8 @@ class StructList {
         first = false
       }
       result += '>'
+    } else {
+      result += '[0]<>'
     }
     result += ',f6='
     if (this.f6 != null) {
@@ -16524,11 +16589,14 @@ class StructList {
           result += first ? '' : ','
           result += item.toString()
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         first = false
       }
       result += '>'
+    } else {
+      result += '[0]<>'
     }
     result += ',f7='
     if (this.f7 != null) {
@@ -16540,6 +16608,8 @@ class StructList {
         first = false
       }
       result += '>'
+    } else {
+      result += '[0]<>'
     }
     result += ',f8='
     if (this.f8 != null) {
@@ -16550,11 +16620,14 @@ class StructList {
           result += first ? '' : ','
           result += item.toString()
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         first = false
       }
       result += '>'
+    } else {
+      result += '[0]<>'
     }
     result += ',f9='
     if (this.f9 != null) {
@@ -16566,6 +16639,8 @@ class StructList {
         first = false
       }
       result += '>'
+    } else {
+      result += '[0]<>'
     }
     result += ',f10='
     if (this.f10 != null) {
@@ -16576,11 +16651,14 @@ class StructList {
           result += first ? '' : ','
           result += item.toString()
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         first = false
       }
       result += '>'
+    } else {
+      result += '[0]<>'
     }
     result += ')'
     return result
@@ -17949,6 +18027,8 @@ class StructSet {
         first = false
       }
       result += '}'
+    } else {
+      result += '[0]{}'
     }
     result += ',f2='
     if (this.f2 != null) {
@@ -17960,6 +18040,8 @@ class StructSet {
         first = false
       }
       result += '}'
+    } else {
+      result += '[0]{}'
     }
     result += ',f3='
     if (this.f3 != null) {
@@ -17971,6 +18053,8 @@ class StructSet {
         first = false
       }
       result += '}'
+    } else {
+      result += '[0]{}'
     }
     result += ',f4='
     if (this.f4 != null) {
@@ -17982,6 +18066,8 @@ class StructSet {
         first = false
       }
       result += '}'
+    } else {
+      result += '[0]{}'
     }
     result += ')'
     return result
@@ -19150,6 +19236,8 @@ class StructMap {
         first = false
       }
       result += '}>'
+    } else {
+      result += '[0]<{}>'
     }
     result += ',f2='
     if (this.f2 != null) {
@@ -19167,6 +19255,8 @@ class StructMap {
         first = false
       }
       result += '}>'
+    } else {
+      result += '[0]<{}>'
     }
     result += ',f3='
     if (this.f3 != null) {
@@ -19184,6 +19274,8 @@ class StructMap {
         first = false
       }
       result += '}>'
+    } else {
+      result += '[0]<{}>'
     }
     result += ',f4='
     if (this.f4 != null) {
@@ -19201,6 +19293,8 @@ class StructMap {
         first = false
       }
       result += '}>'
+    } else {
+      result += '[0]<{}>'
     }
     result += ',f5='
     if (this.f5 != null) {
@@ -19214,6 +19308,8 @@ class StructMap {
         first = false
       }
       result += '}>'
+    } else {
+      result += '[0]<{}>'
     }
     result += ',f6='
     if (this.f6 != null) {
@@ -19231,6 +19327,8 @@ class StructMap {
         first = false
       }
       result += '}>'
+    } else {
+      result += '[0]<{}>'
     }
     result += ',f7='
     if (this.f7 != null) {
@@ -19244,6 +19342,8 @@ class StructMap {
         first = false
       }
       result += '}>'
+    } else {
+      result += '[0]<{}>'
     }
     result += ',f8='
     if (this.f8 != null) {
@@ -19261,6 +19361,8 @@ class StructMap {
         first = false
       }
       result += '}>'
+    } else {
+      result += '[0]<{}>'
     }
     result += ',f9='
     if (this.f9 != null) {
@@ -19274,6 +19376,8 @@ class StructMap {
         first = false
       }
       result += '}>'
+    } else {
+      result += '[0]<{}>'
     }
     result += ',f10='
     if (this.f10 != null) {
@@ -19291,6 +19395,8 @@ class StructMap {
         first = false
       }
       result += '}>'
+    } else {
+      result += '[0]<{}>'
     }
     result += ')'
     return result
@@ -20804,6 +20910,7 @@ class StructHash {
           result += first ? '' : ','
           result += '"'key.toString() + '"'
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         result += '->'
@@ -20811,6 +20918,8 @@ class StructHash {
         first = false
       }
       result += '}]'
+    } else {
+      result += '[0][{}]'
     }
     result += ',f2='
     if (this.f2 != null) {
@@ -20821,6 +20930,7 @@ class StructHash {
           result += first ? '' : ','
           result += '"'key.toString() + '"'
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         result += '->'
@@ -20832,6 +20942,8 @@ class StructHash {
         first = false
       }
       result += '}]'
+    } else {
+      result += '[0][{}]'
     }
     result += ',f3='
     if (this.f3 != null) {
@@ -20842,6 +20954,7 @@ class StructHash {
           result += first ? '' : ','
           result += '"'key.toString() + '"'
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         result += '->'
@@ -20853,6 +20966,8 @@ class StructHash {
         first = false
       }
       result += '}]'
+    } else {
+      result += '[0][{}]'
     }
     result += ',f4='
     if (this.f4 != null) {
@@ -20863,6 +20978,7 @@ class StructHash {
           result += first ? '' : ','
           result += '"'key.toString() + '"'
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         result += '->'
@@ -20874,6 +20990,8 @@ class StructHash {
         first = false
       }
       result += '}]'
+    } else {
+      result += '[0][{}]'
     }
     result += ',f5='
     if (this.f5 != null) {
@@ -20884,6 +21002,7 @@ class StructHash {
           result += first ? '' : ','
           result += '"'key.toString() + '"'
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         result += '->'
@@ -20891,6 +21010,8 @@ class StructHash {
         first = false
       }
       result += '}]'
+    } else {
+      result += '[0][{}]'
     }
     result += ',f6='
     if (this.f6 != null) {
@@ -20901,6 +21022,7 @@ class StructHash {
           result += first ? '' : ','
           result += '"'key.toString() + '"'
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         result += '->'
@@ -20912,6 +21034,8 @@ class StructHash {
         first = false
       }
       result += '}]'
+    } else {
+      result += '[0][{}]'
     }
     result += ',f7='
     if (this.f7 != null) {
@@ -20922,6 +21046,7 @@ class StructHash {
           result += first ? '' : ','
           result += '"'key.toString() + '"'
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         result += '->'
@@ -20929,6 +21054,8 @@ class StructHash {
         first = false
       }
       result += '}]'
+    } else {
+      result += '[0][{}]'
     }
     result += ',f8='
     if (this.f8 != null) {
@@ -20939,6 +21066,7 @@ class StructHash {
           result += first ? '' : ','
           result += '"'key.toString() + '"'
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         result += '->'
@@ -20950,6 +21078,8 @@ class StructHash {
         first = false
       }
       result += '}]'
+    } else {
+      result += '[0][{}]'
     }
     result += ',f9='
     if (this.f9 != null) {
@@ -20960,6 +21090,7 @@ class StructHash {
           result += first ? '' : ','
           result += '"'key.toString() + '"'
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         result += '->'
@@ -20967,6 +21098,8 @@ class StructHash {
         first = false
       }
       result += '}]'
+    } else {
+      result += '[0][{}]'
     }
     result += ',f10='
     if (this.f10 != null) {
@@ -20977,6 +21110,7 @@ class StructHash {
           result += first ? '' : ','
           result += '"'key.toString() + '"'
         } else {
+          result += first ? '' : ','
           result += 'null'
         }
         result += '->'
@@ -20988,6 +21122,8 @@ class StructHash {
         first = false
       }
       result += '}]'
+    } else {
+      result += '[0][{}]'
     }
     result += ')'
     return result
@@ -22334,6 +22470,8 @@ class StructHashEx {
         first = false
       }
       result += '}]'
+    } else {
+      result += '[0][{}]'
     }
     result += ',f2='
     if (this.f2 != null) {
@@ -22351,6 +22489,8 @@ class StructHashEx {
         first = false
       }
       result += '}]'
+    } else {
+      result += '[0][{}]'
     }
     result += ')'
     return result

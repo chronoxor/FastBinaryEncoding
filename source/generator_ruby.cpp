@@ -4237,7 +4237,11 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
             WriteLineIndent("result << '" + std::string(first ? "" : ",") + *field->name + "='");
             if (field->array || field->vector)
             {
-                WriteLineIndent("unless @" + *field->name + ".nil?");
+                WriteLineIndent("if @" + *field->name + ".nil?");
+                Indent(1);
+                WriteLineIndent("result << '[0][]'");
+                Indent(-1);
+                WriteLineIndent("else");
                 Indent(1);
                 WriteLineIndent("first = true");
                 WriteLineIndent("result << '[' << @" + *field->name + ".length.to_s << ']['");
@@ -4253,7 +4257,11 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
             }
             else if (field->list)
             {
-                WriteLineIndent("unless @" + *field->name + ".nil?");
+                WriteLineIndent("if @" + *field->name + ".nil?");
+                Indent(1);
+                WriteLineIndent("result << '[0]<>'");
+                Indent(-1);
+                WriteLineIndent("else");
                 Indent(1);
                 WriteLineIndent("first = true");
                 WriteLineIndent("result << '[' << @" + *field->name + ".length.to_s << ']<'");
@@ -4269,7 +4277,11 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
             }
             else if (field->set)
             {
-                WriteLineIndent("unless @" + *field->name + ".nil?");
+                WriteLineIndent("if @" + *field->name + ".nil?");
+                Indent(1);
+                WriteLineIndent("result << '[0]{}'");
+                Indent(-1);
+                WriteLineIndent("else");
                 Indent(1);
                 WriteLineIndent("first = true");
                 WriteLineIndent("result << '[' << @" + *field->name + ".length.to_s << ']{'");
@@ -4285,13 +4297,17 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
             }
             else if (field->map)
             {
-                WriteLineIndent("unless @" + *field->name + ".nil?");
+                WriteLineIndent("if @" + *field->name + ".nil?");
+                Indent(1);
+                WriteLineIndent("result << '[0]<{}>'");
+                Indent(-1);
+                WriteLineIndent("else");
                 Indent(1);
                 WriteLineIndent("first = true");
                 WriteLineIndent("result << '[' << @" + *field->name + ".length.to_s << ']<{'");
                 WriteLineIndent("@" + *field->name + ".each do |key, value|");
                 Indent(1);
-                WriteOutputStreamValue(*field->type, "key", true);
+                WriteOutputStreamValue(*field->key, "key", true);
                 WriteLineIndent("result << '->'");
                 WriteOutputStreamValue(*field->type, "value", false);
                 WriteLineIndent("first = false");
@@ -4303,13 +4319,17 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
             }
             else if (field->hash)
             {
-                WriteLineIndent("unless @" + *field->name + ".nil?");
+                WriteLineIndent("if @" + *field->name + ".nil?");
+                Indent(1);
+                WriteLineIndent("result << '[0][{}]'");
+                Indent(-1);
+                WriteLineIndent("else");
                 Indent(1);
                 WriteLineIndent("first = true");
                 WriteLineIndent("result << '[' << @" + *field->name + ".length.to_s << '][{'");
                 WriteLineIndent("@" + *field->name + ".each do |key, value|");
                 Indent(1);
-                WriteOutputStreamValue(*field->type, "key", true);
+                WriteOutputStreamValue(*field->key, "key", true);
                 WriteLineIndent("result << '->'");
                 WriteOutputStreamValue(*field->type, "value", false);
                 WriteLineIndent("first = false");
@@ -6020,6 +6040,8 @@ void GeneratorRuby::WriteOutputStreamValue(const std::string& type, const std::s
     Indent(-1);
     WriteLineIndent("else");
     Indent(1);
+    if (separate)
+        WriteLineIndent("result << (first ? '' : ',')");
     WriteLineIndent("result << 'null'");
     Indent(-1);
     WriteLineIndent("end");

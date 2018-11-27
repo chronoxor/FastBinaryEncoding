@@ -2207,7 +2207,9 @@ module Proto
         result << 'null'
       end
       result << ',orders='
-      unless @orders.nil?
+      if @orders.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @orders.length.to_s << ']['
         @orders.each do |item|
@@ -2215,6 +2217,7 @@ module Proto
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false

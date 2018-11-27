@@ -8486,7 +8486,7 @@ inline TOutputStream& operator<<(TOutputStream& stream, const StructArray& value
         stream << ",f2=[2][";
         for (size_t i = 0; i < 2; ++i)
         {
-            if (value.f2[i]) stream << std::string(first ? "" : ",") << (int)*value.f2[i]; else stream << "null";
+            if (value.f2[i]) stream << std::string(first ? "" : ",") << (int)*value.f2[i]; else stream << std::string(first ? "" : ",") << "null";
             first = false;
         }
         stream << "]";
@@ -8506,7 +8506,7 @@ inline TOutputStream& operator<<(TOutputStream& stream, const StructArray& value
         stream << ",f4=[2][";
         for (size_t i = 0; i < 2; ++i)
         {
-            if (value.f4[i]) stream << std::string(first ? "" : ",") << "bytes[" << value.f4[i]->size() << "]"; else stream << "null";
+            if (value.f4[i]) stream << std::string(first ? "" : ",") << "bytes[" << value.f4[i]->size() << "]"; else stream << std::string(first ? "" : ",") << "null";
             first = false;
         }
         stream << "]";
@@ -8526,7 +8526,7 @@ inline TOutputStream& operator<<(TOutputStream& stream, const StructArray& value
         stream << ",f6=[2][";
         for (size_t i = 0; i < 2; ++i)
         {
-            if (value.f6[i]) stream << std::string(first ? "" : ",") << *value.f6[i]; else stream << "null";
+            if (value.f6[i]) stream << std::string(first ? "" : ",") << *value.f6[i]; else stream << std::string(first ? "" : ",") << "null";
             first = false;
         }
         stream << "]";
@@ -8546,7 +8546,7 @@ inline TOutputStream& operator<<(TOutputStream& stream, const StructArray& value
         stream << ",f8=[2][";
         for (size_t i = 0; i < 2; ++i)
         {
-            if (value.f8[i]) stream << std::string(first ? "" : ",") << *value.f8[i]; else stream << "null";
+            if (value.f8[i]) stream << std::string(first ? "" : ",") << *value.f8[i]; else stream << std::string(first ? "" : ",") << "null";
             first = false;
         }
         stream << "]";
@@ -8566,7 +8566,7 @@ inline TOutputStream& operator<<(TOutputStream& stream, const StructArray& value
         stream << ",f10=[2][";
         for (size_t i = 0; i < 2; ++i)
         {
-            if (value.f10[i]) stream << std::string(first ? "" : ",") << *value.f10[i]; else stream << "null";
+            if (value.f10[i]) stream << std::string(first ? "" : ",") << *value.f10[i]; else stream << std::string(first ? "" : ",") << "null";
             first = false;
         }
         stream << "]";
@@ -9560,7 +9560,7 @@ inline TOutputStream& operator<<(TOutputStream& stream, const StructVector& valu
         stream << ",f2=[" << value.f2.size() << "][";
         for (auto const& it : value.f2)
         {
-            if (it) stream << std::string(first ? "" : ",") << (int)*it; else stream << "null";
+            if (it) stream << std::string(first ? "" : ",") << (int)*it; else stream << std::string(first ? "" : ",") << "null";
             first = false;
         }
         stream << "]";
@@ -9580,7 +9580,7 @@ inline TOutputStream& operator<<(TOutputStream& stream, const StructVector& valu
         stream << ",f4=[" << value.f4.size() << "][";
         for (auto const& it : value.f4)
         {
-            if (it) stream << std::string(first ? "" : ",") << "bytes[" << it->size() << "]"; else stream << "null";
+            if (it) stream << std::string(first ? "" : ",") << "bytes[" << it->size() << "]"; else stream << std::string(first ? "" : ",") << "null";
             first = false;
         }
         stream << "]";
@@ -9600,7 +9600,7 @@ inline TOutputStream& operator<<(TOutputStream& stream, const StructVector& valu
         stream << ",f6=[" << value.f6.size() << "][";
         for (auto const& it : value.f6)
         {
-            if (it) stream << std::string(first ? "" : ",") << *it; else stream << "null";
+            if (it) stream << std::string(first ? "" : ",") << *it; else stream << std::string(first ? "" : ",") << "null";
             first = false;
         }
         stream << "]";
@@ -9620,7 +9620,7 @@ inline TOutputStream& operator<<(TOutputStream& stream, const StructVector& valu
         stream << ",f8=[" << value.f8.size() << "][";
         for (auto const& it : value.f8)
         {
-            if (it) stream << std::string(first ? "" : ",") << *it; else stream << "null";
+            if (it) stream << std::string(first ? "" : ",") << *it; else stream << std::string(first ? "" : ",") << "null";
             first = false;
         }
         stream << "]";
@@ -9640,7 +9640,7 @@ inline TOutputStream& operator<<(TOutputStream& stream, const StructVector& valu
         stream << ",f10=[" << value.f10.size() << "][";
         for (auto const& it : value.f10)
         {
-            if (it) stream << std::string(first ? "" : ",") << *it; else stream << "null";
+            if (it) stream << std::string(first ? "" : ",") << *it; else stream << std::string(first ? "" : ",") << "null";
             first = false;
         }
         stream << "]";
@@ -10644,7 +10644,7 @@ inline TOutputStream& operator<<(TOutputStream& stream, const StructList& value)
         stream << ",f2=[" << value.f2.size()<< "]<";
         for (auto const& it : value.f2)
         {
-            if (it) stream << std::string(first ? "" : ",") << (int)*it; else stream << "null";
+            if (it) stream << std::string(first ? "" : ",") << (int)*it; else stream << std::string(first ? "" : ",") << "null";
             first = false;
         }
         stream << ">";
@@ -10664,7 +10664,7 @@ inline TOutputStream& operator<<(TOutputStream& stream, const StructList& value)
         stream << ",f4=[" << value.f4.size()<< "]<";
         for (auto const& it : value.f4)
         {
-            if (it) stream << std::string(first ? "" : ",") << "bytes[" << it->size() << "]"; else stream << "null";
+            if (it) stream << std::string(first ? "" : ",") << "bytes[" << it->size() << "]"; else stream << std::string(first ? "" : ",") << "null";
             first = false;
         }
         stream << ">";
@@ -10684,7 +10684,7 @@ inline TOutputStream& operator<<(TOutputStream& stream, const StructList& value)
         stream << ",f6=[" << value.f6.size()<< "]<";
         for (auto const& it : value.f6)
         {
-            if (it) stream << std::string(first ? "" : ",") << *it; else stream << "null";
+            if (it) stream << std::string(first ? "" : ",") << *it; else stream << std::string(first ? "" : ",") << "null";
             first = false;
         }
         stream << ">";
@@ -10704,7 +10704,7 @@ inline TOutputStream& operator<<(TOutputStream& stream, const StructList& value)
         stream << ",f8=[" << value.f8.size()<< "]<";
         for (auto const& it : value.f8)
         {
-            if (it) stream << std::string(first ? "" : ",") << *it; else stream << "null";
+            if (it) stream << std::string(first ? "" : ",") << *it; else stream << std::string(first ? "" : ",") << "null";
             first = false;
         }
         stream << ">";
@@ -10724,7 +10724,7 @@ inline TOutputStream& operator<<(TOutputStream& stream, const StructList& value)
         stream << ",f10=[" << value.f10.size()<< "]<";
         for (auto const& it : value.f10)
         {
-            if (it) stream << std::string(first ? "" : ",") << *it; else stream << "null";
+            if (it) stream << std::string(first ? "" : ",") << *it; else stream << std::string(first ? "" : ",") << "null";
             first = false;
         }
         stream << ">";

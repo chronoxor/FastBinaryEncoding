@@ -4951,7 +4951,7 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
     {
         for (const auto& field : s->body->fields)
         {
-            if (field->array || field->vector)
+            if (field->array)
             {
                 WriteLineIndent("if (" + *field->name + " != null)");
                 WriteLineIndent("{");
@@ -4966,6 +4966,36 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 Indent(-1);
                 WriteLineIndent("}");
                 WriteLineIndent("sb.Append(\"]\");");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("else");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("sb.Append(\"" + std::string(first ? "" : ",") + *field->name + "=[0][]\");");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
+            else if (field->vector)
+            {
+                WriteLineIndent("if (" + *field->name + " != null)");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("bool first = true;");
+                WriteLineIndent("sb.Append(\"" + std::string(first ? "" : ",") + *field->name + "=[\").Append(" + *field->name + ".Count" + ").Append(\"][\");");
+                WriteLineIndent("foreach (var item in " + *field->name + ")");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true));
+                WriteLineIndent("first = false;");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("sb.Append(\"]\");");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("else");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("sb.Append(\"" + std::string(first ? "" : ",") + *field->name + "=[0][]\");");
                 Indent(-1);
                 WriteLineIndent("}");
             }
@@ -4986,6 +5016,12 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 WriteLineIndent("sb.Append(\">\");");
                 Indent(-1);
                 WriteLineIndent("}");
+                WriteLineIndent("else");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("sb.Append(\"" + std::string(first ? "" : ",") + *field->name + "=[0]<>\");");
+                Indent(-1);
+                WriteLineIndent("}");
             }
             else if (field->set)
             {
@@ -5002,6 +5038,12 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 Indent(-1);
                 WriteLineIndent("}");
                 WriteLineIndent("sb.Append(\"}\");");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("else");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("sb.Append(\"" + std::string(first ? "" : ",") + *field->name + "=[0]{}\");");
                 Indent(-1);
                 WriteLineIndent("}");
             }
@@ -5024,6 +5066,12 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 WriteLineIndent("sb.Append(\"}>\");");
                 Indent(-1);
                 WriteLineIndent("}");
+                WriteLineIndent("else");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("sb.Append(\"" + std::string(first ? "" : ",") + *field->name + "=[0]<{}>\");");
+                Indent(-1);
+                WriteLineIndent("}");
             }
             else if (field->hash)
             {
@@ -5042,6 +5090,12 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 Indent(-1);
                 WriteLineIndent("}");
                 WriteLineIndent("sb.Append(\"}]\");");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("else");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("sb.Append(\"" + std::string(first ? "" : ",") + *field->name + "=[0][{}]\");");
                 Indent(-1);
                 WriteLineIndent("}");
             }
@@ -6837,7 +6891,7 @@ std::string GeneratorCSharp::ConvertOutputStreamValue(const std::string& type, c
     std::string comma = separate ? ".Append(first ? \"\" : \",\")" : "";
 
     if (optional || (type == "bytes") || (type == "string"))
-        return "if (" + name + " != null) sb" + comma + ConvertOutputStreamType(type, name, true) + "; else sb.Append(\"null\");";
+        return "if (" + name + " != null) sb" + comma + ConvertOutputStreamType(type, name, true) + "; else sb" + comma + ".Append(\"null\");";
     else
         return "sb" + comma + ConvertOutputStreamType(type, name, false) + ";";
 }

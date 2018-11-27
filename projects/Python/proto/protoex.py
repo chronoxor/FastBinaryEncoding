@@ -1838,6 +1838,8 @@ class Account(object):
                 sb.append(str(item))
                 first = False
             sb.append("]")
+        else:
+            sb.append("[0][]");
         sb.append(")")
         return "".join(sb)
 

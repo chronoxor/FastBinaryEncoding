@@ -3467,6 +3467,10 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
                 Indent(-1);
                 WriteLineIndent("sb.append(\"]\")");
                 Indent(-1);
+                WriteLineIndent("else:");
+                Indent(1);
+                WriteLineIndent("sb.append(\"[0][]\");");
+                Indent(-1);
             }
             else if (field->list)
             {
@@ -3481,6 +3485,10 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
                 Indent(-1);
                 WriteLineIndent("sb.append(\">\")");
                 Indent(-1);
+                WriteLineIndent("else:");
+                Indent(1);
+                WriteLineIndent("sb.append(\"[0]<>\");");
+                Indent(-1);
             }
             else if (field->set)
             {
@@ -3494,6 +3502,10 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("first = False");
                 Indent(-1);
                 WriteLineIndent("sb.append(\"}\")");
+                Indent(-1);
+                WriteLineIndent("else:");
+                Indent(1);
+                WriteLineIndent("sb.append(\"[0]{}\");");
                 Indent(-1);
             }
             else if (field->map)
@@ -3511,6 +3523,10 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
                 Indent(-1);
                 WriteLineIndent("sb.append(\"}>\")");
                 Indent(-1);
+                WriteLineIndent("else:");
+                Indent(1);
+                WriteLineIndent("sb.append(\"[0]<{}>\");");
+                Indent(-1);
             }
             else if (field->hash)
             {
@@ -3526,6 +3542,10 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("first = False");
                 Indent(-1);
                 WriteLineIndent("sb.append(\"}]\")");
+                Indent(-1);
+                WriteLineIndent("else:");
+                Indent(1);
+                WriteLineIndent("sb.append(\"[0][{}]\");");
                 Indent(-1);
             }
             else
@@ -5147,6 +5167,8 @@ void GeneratorPython::WriteOutputStreamValue(const std::string& type, const std:
         Indent(-1);
         WriteLineIndent("else:");
         Indent(1);
+        if (separate)
+            WriteLineIndent("sb.append(\"\" if first else \",\")");
         WriteLineIndent("sb.append(\"null\")");
         Indent(-1);
     }

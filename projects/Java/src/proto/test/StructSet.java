@@ -106,6 +106,10 @@ public class StructSet implements Comparable<Object>
             }
             sb.append("}");
         }
+        else
+        {
+            sb.append("f1=[0]{}");
+        }
         if (f2 != null)
         {
             boolean first = true;
@@ -116,6 +120,10 @@ public class StructSet implements Comparable<Object>
                 first = false;
             }
             sb.append("}");
+        }
+        else
+        {
+            sb.append(",f2=[0]{}");
         }
         if (f3 != null)
         {
@@ -128,6 +136,10 @@ public class StructSet implements Comparable<Object>
             }
             sb.append("}");
         }
+        else
+        {
+            sb.append(",f3=[0]{}");
+        }
         if (f4 != null)
         {
             boolean first = true;
@@ -138,6 +150,10 @@ public class StructSet implements Comparable<Object>
                 first = false;
             }
             sb.append("}");
+        }
+        else
+        {
+            sb.append(",f4=[0]{}");
         }
         sb.append(")");
         return sb.toString();

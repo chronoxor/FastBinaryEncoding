@@ -7245,7 +7245,7 @@ std::string GeneratorKotlin::ConvertOutputStreamValue(const std::string& type, c
     std::string comma = separate ? ".append(if (first) \"\" else \",\")" : "";
 
     if (optional)
-        return "if (" + name + " != null) sb" + comma + ConvertOutputStreamType(type, name, false) + "; else sb.append(\"null\")";
+        return "if (" + name + " != null) sb" + comma + ConvertOutputStreamType(type, name, false) + "; else sb" + comma + ".append(\"null\")";
     else
         return "sb" + comma + ConvertOutputStreamType(type, name, false);
 }

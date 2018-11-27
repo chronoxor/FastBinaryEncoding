@@ -4436,6 +4436,10 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                 WriteLineIndent("}");
                 WriteLineIndent("sb.WriteString(\"]\")");
                 Indent(-1);
+                WriteLineIndent("} else {");
+                Indent(1);
+                WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=[0][]\");");
+                Indent(-1);
                 WriteLineIndent("}");
             }
             else if (field->vector)
@@ -4451,6 +4455,10 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                 Indent(-1);
                 WriteLineIndent("}");
                 WriteLineIndent("sb.WriteString(\"]\")");
+                Indent(-1);
+                WriteLineIndent("} else {");
+                Indent(1);
+                WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=[0][]\");");
                 Indent(-1);
                 WriteLineIndent("}");
             }
@@ -6817,6 +6825,8 @@ void GeneratorGo::WriteOutputStreamValue(const std::string& type, const std::str
         Indent(-1);
         WriteLineIndent("} else {");
         Indent(1);
+        if (separate)
+            WriteLineIndent("if first { sb.WriteString(\"\") } else { sb.WriteString(\",\") }");
         WriteLineIndent("sb.WriteString(\"null\")");
         Indent(-1);
         WriteLineIndent("}");

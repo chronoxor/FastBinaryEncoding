@@ -9207,6 +9207,10 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("}");
                 WriteLineIndent("result += ']'");
                 Indent(-1);
+                WriteLineIndent("} else {");
+                Indent(1);
+                WriteLineIndent("result += '[0][]'");
+                Indent(-1);
                 WriteLineIndent("}");
             }
             else if (field->list)
@@ -9223,6 +9227,10 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("}");
                 WriteLineIndent("result += '>'");
                 Indent(-1);
+                WriteLineIndent("} else {");
+                Indent(1);
+                WriteLineIndent("result += '[0]<>'");
+                Indent(-1);
                 WriteLineIndent("}");
             }
             else if (field->set)
@@ -9238,6 +9246,10 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
                 Indent(-1);
                 WriteLineIndent("}");
                 WriteLineIndent("result += '}'");
+                Indent(-1);
+                WriteLineIndent("} else {");
+                Indent(1);
+                WriteLineIndent("result += '[0]{}'");
                 Indent(-1);
                 WriteLineIndent("}");
             }
@@ -9257,6 +9269,10 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
                 WriteLineIndent("}");
                 WriteLineIndent("result += '}>'");
                 Indent(-1);
+                WriteLineIndent("} else {");
+                Indent(1);
+                WriteLineIndent("result += '[0]<{}>'");
+                Indent(-1);
                 WriteLineIndent("}");
             }
             else if (field->hash)
@@ -9274,6 +9290,10 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
                 Indent(-1);
                 WriteLineIndent("}");
                 WriteLineIndent("result += '}]'");
+                Indent(-1);
+                WriteLineIndent("} else {");
+                Indent(1);
+                WriteLineIndent("result += '[0][{}]'");
                 Indent(-1);
                 WriteLineIndent("}");
             }
@@ -11307,6 +11327,8 @@ void GeneratorJavaScript::WriteOutputStreamValue(const std::string& type, const 
         Indent(-1);
         WriteLineIndent("} else {");
         Indent(1);
+        if (separate)
+            WriteLineIndent("result += first ? '' : ','");
         WriteLineIndent("result += 'null'");
         Indent(-1);
         WriteLineIndent("}");

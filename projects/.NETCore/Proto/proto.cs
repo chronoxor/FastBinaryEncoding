@@ -2258,13 +2258,17 @@ namespace proto {
             if (orders != null)
             {
                 bool first = true;
-                sb.Append(",orders=[").Append(orders.Length).Append("][");
+                sb.Append(",orders=[").Append(orders.Count).Append("][");
                 foreach (var item in orders)
                 {
                     sb.Append(first ? "" : ",").Append(item);
                     first = false;
                 }
                 sb.Append("]");
+            }
+            else
+            {
+                sb.Append(",orders=[0][]");
             }
             sb.Append(")");
             return sb.ToString();

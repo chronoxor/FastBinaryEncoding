@@ -134,7 +134,7 @@ open class StructArray : Comparable<Any?>
             sb.append(",f2=[").append(f2.size).append("][")
             for (item in f2)
             {
-                if (item != null) sb.append(if (first) "" else ",").append(item); else sb.append("null")
+                if (item != null) sb.append(if (first) "" else ",").append(item); else sb.append(if (first) "" else ",").append("null")
                 first = false
             }
             sb.append("]")
@@ -158,7 +158,7 @@ open class StructArray : Comparable<Any?>
             sb.append(",f4=[").append(f4.size).append("][")
             for (item in f4)
             {
-                if (item != null) sb.append(if (first) "" else ",").append("bytes[").append(item.size).append("]"); else sb.append("null")
+                if (item != null) sb.append(if (first) "" else ",").append("bytes[").append(item.size).append("]"); else sb.append(if (first) "" else ",").append("null")
                 first = false
             }
             sb.append("]")
@@ -182,7 +182,7 @@ open class StructArray : Comparable<Any?>
             sb.append(",f6=[").append(f6.size).append("][")
             for (item in f6)
             {
-                if (item != null) sb.append(if (first) "" else ",").append(item); else sb.append("null")
+                if (item != null) sb.append(if (first) "" else ",").append(item); else sb.append(if (first) "" else ",").append("null")
                 first = false
             }
             sb.append("]")
@@ -206,7 +206,7 @@ open class StructArray : Comparable<Any?>
             sb.append(",f8=[").append(f8.size).append("][")
             for (item in f8)
             {
-                if (item != null) sb.append(if (first) "" else ",").append(item); else sb.append("null")
+                if (item != null) sb.append(if (first) "" else ",").append(item); else sb.append(if (first) "" else ",").append("null")
                 first = false
             }
             sb.append("]")
@@ -230,7 +230,7 @@ open class StructArray : Comparable<Any?>
             sb.append(",f10=[").append(f10.size).append("][")
             for (item in f10)
             {
-                if (item != null) sb.append(if (first) "" else ",").append(item); else sb.append("null")
+                if (item != null) sb.append(if (first) "" else ",").append(item); else sb.append(if (first) "" else ",").append("null")
                 first = false
             }
             sb.append("]")

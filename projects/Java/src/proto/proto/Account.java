@@ -122,6 +122,10 @@ public class Account implements Comparable<Object>
             }
             sb.append("]");
         }
+        else
+        {
+            sb.append(",orders=[0][]");
+        }
         sb.append(")");
         return sb.toString();
     }

@@ -7978,7 +7978,7 @@ std::string GeneratorCpp::ConvertOutputStreamValue(const std::string& type, cons
     std::string comma = separate ? "<< std::string(first ? \"\" : \",\") " : "";
 
     if (optional)
-        return "if (" + name + ") stream " + comma + "<< " + ConvertOutputStreamType(type, name, true) + "; else stream << \"null\";";
+        return "if (" + name + ") stream " + comma + "<< " + ConvertOutputStreamType(type, name, true) + "; else stream " + comma + "<< \"null\";";
     else
         return "stream " + comma + "<< " + ConvertOutputStreamType(type, name, false) + ";";
 }

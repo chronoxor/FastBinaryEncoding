@@ -11275,7 +11275,9 @@ module Test
       result = ''
       result << 'StructArray('
       result << 'f1='
-      unless @f1.nil?
+      if @f1.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @f1.length.to_s << ']['
         @f1.each do |item|
@@ -11283,6 +11285,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -11290,7 +11293,9 @@ module Test
         result << ']'
       end
       result << ',f2='
-      unless @f2.nil?
+      if @f2.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @f2.length.to_s << ']['
         @f2.each do |item|
@@ -11298,6 +11303,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -11305,7 +11311,9 @@ module Test
         result << ']'
       end
       result << ',f3='
-      unless @f3.nil?
+      if @f3.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @f3.length.to_s << ']['
         @f3.each do |item|
@@ -11313,6 +11321,7 @@ module Test
             result << (first ? '' : ',')
             result << 'bytes[' << item.length.to_s << ']'
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -11320,7 +11329,9 @@ module Test
         result << ']'
       end
       result << ',f4='
-      unless @f4.nil?
+      if @f4.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @f4.length.to_s << ']['
         @f4.each do |item|
@@ -11328,6 +11339,7 @@ module Test
             result << (first ? '' : ',')
             result << 'bytes[' << item.length.to_s << ']'
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -11335,7 +11347,9 @@ module Test
         result << ']'
       end
       result << ',f5='
-      unless @f5.nil?
+      if @f5.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @f5.length.to_s << ']['
         @f5.each do |item|
@@ -11343,6 +11357,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -11350,7 +11365,9 @@ module Test
         result << ']'
       end
       result << ',f6='
-      unless @f6.nil?
+      if @f6.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @f6.length.to_s << ']['
         @f6.each do |item|
@@ -11358,6 +11375,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -11365,7 +11383,9 @@ module Test
         result << ']'
       end
       result << ',f7='
-      unless @f7.nil?
+      if @f7.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @f7.length.to_s << ']['
         @f7.each do |item|
@@ -11373,6 +11393,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -11380,7 +11401,9 @@ module Test
         result << ']'
       end
       result << ',f8='
-      unless @f8.nil?
+      if @f8.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @f8.length.to_s << ']['
         @f8.each do |item|
@@ -11388,6 +11411,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -11395,7 +11419,9 @@ module Test
         result << ']'
       end
       result << ',f9='
-      unless @f9.nil?
+      if @f9.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @f9.length.to_s << ']['
         @f9.each do |item|
@@ -11403,6 +11429,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -11410,7 +11437,9 @@ module Test
         result << ']'
       end
       result << ',f10='
-      unless @f10.nil?
+      if @f10.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @f10.length.to_s << ']['
         @f10.each do |item|
@@ -11418,6 +11447,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -12503,7 +12533,9 @@ module Test
       result = ''
       result << 'StructVector('
       result << 'f1='
-      unless @f1.nil?
+      if @f1.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @f1.length.to_s << ']['
         @f1.each do |item|
@@ -12511,6 +12543,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -12518,7 +12551,9 @@ module Test
         result << ']'
       end
       result << ',f2='
-      unless @f2.nil?
+      if @f2.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @f2.length.to_s << ']['
         @f2.each do |item|
@@ -12526,6 +12561,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -12533,7 +12569,9 @@ module Test
         result << ']'
       end
       result << ',f3='
-      unless @f3.nil?
+      if @f3.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @f3.length.to_s << ']['
         @f3.each do |item|
@@ -12541,6 +12579,7 @@ module Test
             result << (first ? '' : ',')
             result << 'bytes[' << item.length.to_s << ']'
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -12548,7 +12587,9 @@ module Test
         result << ']'
       end
       result << ',f4='
-      unless @f4.nil?
+      if @f4.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @f4.length.to_s << ']['
         @f4.each do |item|
@@ -12556,6 +12597,7 @@ module Test
             result << (first ? '' : ',')
             result << 'bytes[' << item.length.to_s << ']'
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -12563,7 +12605,9 @@ module Test
         result << ']'
       end
       result << ',f5='
-      unless @f5.nil?
+      if @f5.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @f5.length.to_s << ']['
         @f5.each do |item|
@@ -12571,6 +12615,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -12578,7 +12623,9 @@ module Test
         result << ']'
       end
       result << ',f6='
-      unless @f6.nil?
+      if @f6.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @f6.length.to_s << ']['
         @f6.each do |item|
@@ -12586,6 +12633,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -12593,7 +12641,9 @@ module Test
         result << ']'
       end
       result << ',f7='
-      unless @f7.nil?
+      if @f7.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @f7.length.to_s << ']['
         @f7.each do |item|
@@ -12601,6 +12651,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -12608,7 +12659,9 @@ module Test
         result << ']'
       end
       result << ',f8='
-      unless @f8.nil?
+      if @f8.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @f8.length.to_s << ']['
         @f8.each do |item|
@@ -12616,6 +12669,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -12623,7 +12677,9 @@ module Test
         result << ']'
       end
       result << ',f9='
-      unless @f9.nil?
+      if @f9.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @f9.length.to_s << ']['
         @f9.each do |item|
@@ -12631,6 +12687,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -12638,7 +12695,9 @@ module Test
         result << ']'
       end
       result << ',f10='
-      unless @f10.nil?
+      if @f10.nil?
+        result << '[0][]'
+      else
         first = true
         result << '[' << @f10.length.to_s << ']['
         @f10.each do |item|
@@ -12646,6 +12705,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -13731,7 +13791,9 @@ module Test
       result = ''
       result << 'StructList('
       result << 'f1='
-      unless @f1.nil?
+      if @f1.nil?
+        result << '[0]<>'
+      else
         first = true
         result << '[' << @f1.length.to_s << ']<'
         @f1.each do |item|
@@ -13739,6 +13801,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -13746,7 +13809,9 @@ module Test
         result << '>'
       end
       result << ',f2='
-      unless @f2.nil?
+      if @f2.nil?
+        result << '[0]<>'
+      else
         first = true
         result << '[' << @f2.length.to_s << ']<'
         @f2.each do |item|
@@ -13754,6 +13819,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -13761,7 +13827,9 @@ module Test
         result << '>'
       end
       result << ',f3='
-      unless @f3.nil?
+      if @f3.nil?
+        result << '[0]<>'
+      else
         first = true
         result << '[' << @f3.length.to_s << ']<'
         @f3.each do |item|
@@ -13769,6 +13837,7 @@ module Test
             result << (first ? '' : ',')
             result << 'bytes[' << item.length.to_s << ']'
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -13776,7 +13845,9 @@ module Test
         result << '>'
       end
       result << ',f4='
-      unless @f4.nil?
+      if @f4.nil?
+        result << '[0]<>'
+      else
         first = true
         result << '[' << @f4.length.to_s << ']<'
         @f4.each do |item|
@@ -13784,6 +13855,7 @@ module Test
             result << (first ? '' : ',')
             result << 'bytes[' << item.length.to_s << ']'
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -13791,7 +13863,9 @@ module Test
         result << '>'
       end
       result << ',f5='
-      unless @f5.nil?
+      if @f5.nil?
+        result << '[0]<>'
+      else
         first = true
         result << '[' << @f5.length.to_s << ']<'
         @f5.each do |item|
@@ -13799,6 +13873,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -13806,7 +13881,9 @@ module Test
         result << '>'
       end
       result << ',f6='
-      unless @f6.nil?
+      if @f6.nil?
+        result << '[0]<>'
+      else
         first = true
         result << '[' << @f6.length.to_s << ']<'
         @f6.each do |item|
@@ -13814,6 +13891,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -13821,7 +13899,9 @@ module Test
         result << '>'
       end
       result << ',f7='
-      unless @f7.nil?
+      if @f7.nil?
+        result << '[0]<>'
+      else
         first = true
         result << '[' << @f7.length.to_s << ']<'
         @f7.each do |item|
@@ -13829,6 +13909,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -13836,7 +13917,9 @@ module Test
         result << '>'
       end
       result << ',f8='
-      unless @f8.nil?
+      if @f8.nil?
+        result << '[0]<>'
+      else
         first = true
         result << '[' << @f8.length.to_s << ']<'
         @f8.each do |item|
@@ -13844,6 +13927,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -13851,7 +13935,9 @@ module Test
         result << '>'
       end
       result << ',f9='
-      unless @f9.nil?
+      if @f9.nil?
+        result << '[0]<>'
+      else
         first = true
         result << '[' << @f9.length.to_s << ']<'
         @f9.each do |item|
@@ -13859,6 +13945,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -13866,7 +13953,9 @@ module Test
         result << '>'
       end
       result << ',f10='
-      unless @f10.nil?
+      if @f10.nil?
+        result << '[0]<>'
+      else
         first = true
         result << '[' << @f10.length.to_s << ']<'
         @f10.each do |item|
@@ -13874,6 +13963,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -14941,7 +15031,9 @@ module Test
       result = ''
       result << 'StructSet('
       result << 'f1='
-      unless @f1.nil?
+      if @f1.nil?
+        result << '[0]{}'
+      else
         first = true
         result << '[' << @f1.length.to_s << ']{'
         @f1.each do |item|
@@ -14949,6 +15041,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -14956,7 +15049,9 @@ module Test
         result << '}'
       end
       result << ',f2='
-      unless @f2.nil?
+      if @f2.nil?
+        result << '[0]{}'
+      else
         first = true
         result << '[' << @f2.length.to_s << ']{'
         @f2.each do |item|
@@ -14964,6 +15059,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -14971,7 +15067,9 @@ module Test
         result << '}'
       end
       result << ',f3='
-      unless @f3.nil?
+      if @f3.nil?
+        result << '[0]{}'
+      else
         first = true
         result << '[' << @f3.length.to_s << ']{'
         @f3.each do |item|
@@ -14979,6 +15077,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -14986,7 +15085,9 @@ module Test
         result << '}'
       end
       result << ',f4='
-      unless @f4.nil?
+      if @f4.nil?
+        result << '[0]{}'
+      else
         first = true
         result << '[' << @f4.length.to_s << ']{'
         @f4.each do |item|
@@ -14994,6 +15095,7 @@ module Test
             result << (first ? '' : ',')
             result << item.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           first = false
@@ -15749,7 +15851,9 @@ module Test
       result = ''
       result << 'StructMap('
       result << 'f1='
-      unless @f1.nil?
+      if @f1.nil?
+        result << '[0]<{}>'
+      else
         first = true
         result << '[' << @f1.length.to_s << ']<{'
         @f1.each do |key, value|
@@ -15757,6 +15861,7 @@ module Test
             result << (first ? '' : ',')
             result << key.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -15770,7 +15875,9 @@ module Test
         result << '}>'
       end
       result << ',f2='
-      unless @f2.nil?
+      if @f2.nil?
+        result << '[0]<{}>'
+      else
         first = true
         result << '[' << @f2.length.to_s << ']<{'
         @f2.each do |key, value|
@@ -15778,6 +15885,7 @@ module Test
             result << (first ? '' : ',')
             result << key.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -15791,14 +15899,17 @@ module Test
         result << '}>'
       end
       result << ',f3='
-      unless @f3.nil?
+      if @f3.nil?
+        result << '[0]<{}>'
+      else
         first = true
         result << '[' << @f3.length.to_s << ']<{'
         @f3.each do |key, value|
           if !key.nil?
             result << (first ? '' : ',')
-            result << 'bytes[' << key.length.to_s << ']'
+            result << key.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -15812,14 +15923,17 @@ module Test
         result << '}>'
       end
       result << ',f4='
-      unless @f4.nil?
+      if @f4.nil?
+        result << '[0]<{}>'
+      else
         first = true
         result << '[' << @f4.length.to_s << ']<{'
         @f4.each do |key, value|
           if !key.nil?
             result << (first ? '' : ',')
-            result << 'bytes[' << key.length.to_s << ']'
+            result << key.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -15833,7 +15947,9 @@ module Test
         result << '}>'
       end
       result << ',f5='
-      unless @f5.nil?
+      if @f5.nil?
+        result << '[0]<{}>'
+      else
         first = true
         result << '[' << @f5.length.to_s << ']<{'
         @f5.each do |key, value|
@@ -15841,6 +15957,7 @@ module Test
             result << (first ? '' : ',')
             result << key.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -15854,7 +15971,9 @@ module Test
         result << '}>'
       end
       result << ',f6='
-      unless @f6.nil?
+      if @f6.nil?
+        result << '[0]<{}>'
+      else
         first = true
         result << '[' << @f6.length.to_s << ']<{'
         @f6.each do |key, value|
@@ -15862,6 +15981,7 @@ module Test
             result << (first ? '' : ',')
             result << key.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -15875,7 +15995,9 @@ module Test
         result << '}>'
       end
       result << ',f7='
-      unless @f7.nil?
+      if @f7.nil?
+        result << '[0]<{}>'
+      else
         first = true
         result << '[' << @f7.length.to_s << ']<{'
         @f7.each do |key, value|
@@ -15883,6 +16005,7 @@ module Test
             result << (first ? '' : ',')
             result << key.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -15896,7 +16019,9 @@ module Test
         result << '}>'
       end
       result << ',f8='
-      unless @f8.nil?
+      if @f8.nil?
+        result << '[0]<{}>'
+      else
         first = true
         result << '[' << @f8.length.to_s << ']<{'
         @f8.each do |key, value|
@@ -15904,6 +16029,7 @@ module Test
             result << (first ? '' : ',')
             result << key.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -15917,7 +16043,9 @@ module Test
         result << '}>'
       end
       result << ',f9='
-      unless @f9.nil?
+      if @f9.nil?
+        result << '[0]<{}>'
+      else
         first = true
         result << '[' << @f9.length.to_s << ']<{'
         @f9.each do |key, value|
@@ -15925,6 +16053,7 @@ module Test
             result << (first ? '' : ',')
             result << key.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -15938,7 +16067,9 @@ module Test
         result << '}>'
       end
       result << ',f10='
-      unless @f10.nil?
+      if @f10.nil?
+        result << '[0]<{}>'
+      else
         first = true
         result << '[' << @f10.length.to_s << ']<{'
         @f10.each do |key, value|
@@ -15946,6 +16077,7 @@ module Test
             result << (first ? '' : ',')
             result << key.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -17037,14 +17169,17 @@ module Test
       result = ''
       result << 'StructHash('
       result << 'f1='
-      unless @f1.nil?
+      if @f1.nil?
+        result << '[0][{}]'
+      else
         first = true
         result << '[' << @f1.length.to_s << '][{'
         @f1.each do |key, value|
           if !key.nil?
             result << (first ? '' : ',')
-            result << key.to_s
+            result << '"' << key.to_s << '"'
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -17058,14 +17193,17 @@ module Test
         result << '}]'
       end
       result << ',f2='
-      unless @f2.nil?
+      if @f2.nil?
+        result << '[0][{}]'
+      else
         first = true
         result << '[' << @f2.length.to_s << '][{'
         @f2.each do |key, value|
           if !key.nil?
             result << (first ? '' : ',')
-            result << key.to_s
+            result << '"' << key.to_s << '"'
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -17079,14 +17217,17 @@ module Test
         result << '}]'
       end
       result << ',f3='
-      unless @f3.nil?
+      if @f3.nil?
+        result << '[0][{}]'
+      else
         first = true
         result << '[' << @f3.length.to_s << '][{'
         @f3.each do |key, value|
           if !key.nil?
             result << (first ? '' : ',')
-            result << 'bytes[' << key.length.to_s << ']'
+            result << '"' << key.to_s << '"'
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -17100,14 +17241,17 @@ module Test
         result << '}]'
       end
       result << ',f4='
-      unless @f4.nil?
+      if @f4.nil?
+        result << '[0][{}]'
+      else
         first = true
         result << '[' << @f4.length.to_s << '][{'
         @f4.each do |key, value|
           if !key.nil?
             result << (first ? '' : ',')
-            result << 'bytes[' << key.length.to_s << ']'
+            result << '"' << key.to_s << '"'
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -17121,14 +17265,17 @@ module Test
         result << '}]'
       end
       result << ',f5='
-      unless @f5.nil?
+      if @f5.nil?
+        result << '[0][{}]'
+      else
         first = true
         result << '[' << @f5.length.to_s << '][{'
         @f5.each do |key, value|
           if !key.nil?
             result << (first ? '' : ',')
-            result << key.to_s
+            result << '"' << key.to_s << '"'
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -17142,14 +17289,17 @@ module Test
         result << '}]'
       end
       result << ',f6='
-      unless @f6.nil?
+      if @f6.nil?
+        result << '[0][{}]'
+      else
         first = true
         result << '[' << @f6.length.to_s << '][{'
         @f6.each do |key, value|
           if !key.nil?
             result << (first ? '' : ',')
-            result << key.to_s
+            result << '"' << key.to_s << '"'
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -17163,14 +17313,17 @@ module Test
         result << '}]'
       end
       result << ',f7='
-      unless @f7.nil?
+      if @f7.nil?
+        result << '[0][{}]'
+      else
         first = true
         result << '[' << @f7.length.to_s << '][{'
         @f7.each do |key, value|
           if !key.nil?
             result << (first ? '' : ',')
-            result << key.to_s
+            result << '"' << key.to_s << '"'
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -17184,14 +17337,17 @@ module Test
         result << '}]'
       end
       result << ',f8='
-      unless @f8.nil?
+      if @f8.nil?
+        result << '[0][{}]'
+      else
         first = true
         result << '[' << @f8.length.to_s << '][{'
         @f8.each do |key, value|
           if !key.nil?
             result << (first ? '' : ',')
-            result << key.to_s
+            result << '"' << key.to_s << '"'
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -17205,14 +17361,17 @@ module Test
         result << '}]'
       end
       result << ',f9='
-      unless @f9.nil?
+      if @f9.nil?
+        result << '[0][{}]'
+      else
         first = true
         result << '[' << @f9.length.to_s << '][{'
         @f9.each do |key, value|
           if !key.nil?
             result << (first ? '' : ',')
-            result << key.to_s
+            result << '"' << key.to_s << '"'
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -17226,14 +17385,17 @@ module Test
         result << '}]'
       end
       result << ',f10='
-      unless @f10.nil?
+      if @f10.nil?
+        result << '[0][{}]'
+      else
         first = true
         result << '[' << @f10.length.to_s << '][{'
         @f10.each do |key, value|
           if !key.nil?
             result << (first ? '' : ',')
-            result << key.to_s
+            result << '"' << key.to_s << '"'
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -18301,7 +18463,9 @@ module Test
       result = ''
       result << 'StructHashEx('
       result << 'f1='
-      unless @f1.nil?
+      if @f1.nil?
+        result << '[0][{}]'
+      else
         first = true
         result << '[' << @f1.length.to_s << '][{'
         @f1.each do |key, value|
@@ -18309,6 +18473,7 @@ module Test
             result << (first ? '' : ',')
             result << key.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'
@@ -18322,7 +18487,9 @@ module Test
         result << '}]'
       end
       result << ',f2='
-      unless @f2.nil?
+      if @f2.nil?
+        result << '[0][{}]'
+      else
         first = true
         result << '[' << @f2.length.to_s << '][{'
         @f2.each do |key, value|
@@ -18330,6 +18497,7 @@ module Test
             result << (first ? '' : ',')
             result << key.to_s
           else
+            result << (first ? '' : ',')
             result << 'null'
           end
           result << '->'

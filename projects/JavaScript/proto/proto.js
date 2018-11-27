@@ -2838,6 +2838,8 @@ class Account {
         first = false
       }
       result += ']'
+    } else {
+      result += '[0][]'
     }
     result += ')'
     return result

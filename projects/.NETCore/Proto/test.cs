@@ -8464,16 +8464,24 @@ namespace test {
                 }
                 sb.Append("]");
             }
+            else
+            {
+                sb.Append("f1=[0][]");
+            }
             if (f2 != null)
             {
                 bool first = true;
                 sb.Append(",f2=[").Append(f2.Length).Append("][");
                 foreach (var item in f2)
                 {
-                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append("null");
+                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append(first ? "" : ",").Append("null");
                     first = false;
                 }
                 sb.Append("]");
+            }
+            else
+            {
+                sb.Append(",f2=[0][]");
             }
             if (f3 != null)
             {
@@ -8481,10 +8489,14 @@ namespace test {
                 sb.Append(",f3=[").Append(f3.Length).Append("][");
                 foreach (var item in f3)
                 {
-                    if (item != null) sb.Append(first ? "" : ",").Append("bytes[").Append(item.Length).Append("]"); else sb.Append("null");
+                    if (item != null) sb.Append(first ? "" : ",").Append("bytes[").Append(item.Length).Append("]"); else sb.Append(first ? "" : ",").Append("null");
                     first = false;
                 }
                 sb.Append("]");
+            }
+            else
+            {
+                sb.Append(",f3=[0][]");
             }
             if (f4 != null)
             {
@@ -8492,10 +8504,14 @@ namespace test {
                 sb.Append(",f4=[").Append(f4.Length).Append("][");
                 foreach (var item in f4)
                 {
-                    if (item != null) sb.Append(first ? "" : ",").Append("bytes[").Append(item.Length).Append("]"); else sb.Append("null");
+                    if (item != null) sb.Append(first ? "" : ",").Append("bytes[").Append(item.Length).Append("]"); else sb.Append(first ? "" : ",").Append("null");
                     first = false;
                 }
                 sb.Append("]");
+            }
+            else
+            {
+                sb.Append(",f4=[0][]");
             }
             if (f5 != null)
             {
@@ -8508,16 +8524,24 @@ namespace test {
                 }
                 sb.Append("]");
             }
+            else
+            {
+                sb.Append(",f5=[0][]");
+            }
             if (f6 != null)
             {
                 bool first = true;
                 sb.Append(",f6=[").Append(f6.Length).Append("][");
                 foreach (var item in f6)
                 {
-                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append("null");
+                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append(first ? "" : ",").Append("null");
                     first = false;
                 }
                 sb.Append("]");
+            }
+            else
+            {
+                sb.Append(",f6=[0][]");
             }
             if (f7 != null)
             {
@@ -8530,16 +8554,24 @@ namespace test {
                 }
                 sb.Append("]");
             }
+            else
+            {
+                sb.Append(",f7=[0][]");
+            }
             if (f8 != null)
             {
                 bool first = true;
                 sb.Append(",f8=[").Append(f8.Length).Append("][");
                 foreach (var item in f8)
                 {
-                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append("null");
+                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append(first ? "" : ",").Append("null");
                     first = false;
                 }
                 sb.Append("]");
+            }
+            else
+            {
+                sb.Append(",f8=[0][]");
             }
             if (f9 != null)
             {
@@ -8552,16 +8584,24 @@ namespace test {
                 }
                 sb.Append("]");
             }
+            else
+            {
+                sb.Append(",f9=[0][]");
+            }
             if (f10 != null)
             {
                 bool first = true;
                 sb.Append(",f10=[").Append(f10.Length).Append("][");
                 foreach (var item in f10)
                 {
-                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append("null");
+                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append(first ? "" : ",").Append("null");
                     first = false;
                 }
                 sb.Append("]");
+            }
+            else
+            {
+                sb.Append(",f10=[0][]");
             }
             sb.Append(")");
             return sb.ToString();
@@ -9483,7 +9523,7 @@ namespace test {
             if (f1 != null)
             {
                 bool first = true;
-                sb.Append("f1=[").Append(f1.Length).Append("][");
+                sb.Append("f1=[").Append(f1.Count).Append("][");
                 foreach (var item in f1)
                 {
                     sb.Append(first ? "" : ",").Append(item);
@@ -9491,43 +9531,59 @@ namespace test {
                 }
                 sb.Append("]");
             }
+            else
+            {
+                sb.Append("f1=[0][]");
+            }
             if (f2 != null)
             {
                 bool first = true;
-                sb.Append(",f2=[").Append(f2.Length).Append("][");
+                sb.Append(",f2=[").Append(f2.Count).Append("][");
                 foreach (var item in f2)
                 {
-                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append("null");
+                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append(first ? "" : ",").Append("null");
                     first = false;
                 }
                 sb.Append("]");
+            }
+            else
+            {
+                sb.Append(",f2=[0][]");
             }
             if (f3 != null)
             {
                 bool first = true;
-                sb.Append(",f3=[").Append(f3.Length).Append("][");
+                sb.Append(",f3=[").Append(f3.Count).Append("][");
                 foreach (var item in f3)
                 {
-                    if (item != null) sb.Append(first ? "" : ",").Append("bytes[").Append(item.Length).Append("]"); else sb.Append("null");
+                    if (item != null) sb.Append(first ? "" : ",").Append("bytes[").Append(item.Length).Append("]"); else sb.Append(first ? "" : ",").Append("null");
                     first = false;
                 }
                 sb.Append("]");
+            }
+            else
+            {
+                sb.Append(",f3=[0][]");
             }
             if (f4 != null)
             {
                 bool first = true;
-                sb.Append(",f4=[").Append(f4.Length).Append("][");
+                sb.Append(",f4=[").Append(f4.Count).Append("][");
                 foreach (var item in f4)
                 {
-                    if (item != null) sb.Append(first ? "" : ",").Append("bytes[").Append(item.Length).Append("]"); else sb.Append("null");
+                    if (item != null) sb.Append(first ? "" : ",").Append("bytes[").Append(item.Length).Append("]"); else sb.Append(first ? "" : ",").Append("null");
                     first = false;
                 }
                 sb.Append("]");
             }
+            else
+            {
+                sb.Append(",f4=[0][]");
+            }
             if (f5 != null)
             {
                 bool first = true;
-                sb.Append(",f5=[").Append(f5.Length).Append("][");
+                sb.Append(",f5=[").Append(f5.Count).Append("][");
                 foreach (var item in f5)
                 {
                     sb.Append(first ? "" : ",").Append(item);
@@ -9535,21 +9591,29 @@ namespace test {
                 }
                 sb.Append("]");
             }
+            else
+            {
+                sb.Append(",f5=[0][]");
+            }
             if (f6 != null)
             {
                 bool first = true;
-                sb.Append(",f6=[").Append(f6.Length).Append("][");
+                sb.Append(",f6=[").Append(f6.Count).Append("][");
                 foreach (var item in f6)
                 {
-                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append("null");
+                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append(first ? "" : ",").Append("null");
                     first = false;
                 }
                 sb.Append("]");
             }
+            else
+            {
+                sb.Append(",f6=[0][]");
+            }
             if (f7 != null)
             {
                 bool first = true;
-                sb.Append(",f7=[").Append(f7.Length).Append("][");
+                sb.Append(",f7=[").Append(f7.Count).Append("][");
                 foreach (var item in f7)
                 {
                     sb.Append(first ? "" : ",").Append(item);
@@ -9557,21 +9621,29 @@ namespace test {
                 }
                 sb.Append("]");
             }
+            else
+            {
+                sb.Append(",f7=[0][]");
+            }
             if (f8 != null)
             {
                 bool first = true;
-                sb.Append(",f8=[").Append(f8.Length).Append("][");
+                sb.Append(",f8=[").Append(f8.Count).Append("][");
                 foreach (var item in f8)
                 {
-                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append("null");
+                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append(first ? "" : ",").Append("null");
                     first = false;
                 }
                 sb.Append("]");
             }
+            else
+            {
+                sb.Append(",f8=[0][]");
+            }
             if (f9 != null)
             {
                 bool first = true;
-                sb.Append(",f9=[").Append(f9.Length).Append("][");
+                sb.Append(",f9=[").Append(f9.Count).Append("][");
                 foreach (var item in f9)
                 {
                     sb.Append(first ? "" : ",").Append(item);
@@ -9579,16 +9651,24 @@ namespace test {
                 }
                 sb.Append("]");
             }
+            else
+            {
+                sb.Append(",f9=[0][]");
+            }
             if (f10 != null)
             {
                 bool first = true;
-                sb.Append(",f10=[").Append(f10.Length).Append("][");
+                sb.Append(",f10=[").Append(f10.Count).Append("][");
                 foreach (var item in f10)
                 {
-                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append("null");
+                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append(first ? "" : ",").Append("null");
                     first = false;
                 }
                 sb.Append("]");
+            }
+            else
+            {
+                sb.Append(",f10=[0][]");
             }
             sb.Append(")");
             return sb.ToString();
@@ -10518,16 +10598,24 @@ namespace test {
                 }
                 sb.Append(">");
             }
+            else
+            {
+                sb.Append("f1=[0]<>");
+            }
             if (f2 != null)
             {
                 bool first = true;
                 sb.Append(",f2=[").Append(f2.Count).Append("]<");
                 foreach (var item in f2)
                 {
-                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append("null");
+                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append(first ? "" : ",").Append("null");
                     first = false;
                 }
                 sb.Append(">");
+            }
+            else
+            {
+                sb.Append(",f2=[0]<>");
             }
             if (f3 != null)
             {
@@ -10535,10 +10623,14 @@ namespace test {
                 sb.Append(",f3=[").Append(f3.Count).Append("]<");
                 foreach (var item in f3)
                 {
-                    if (item != null) sb.Append(first ? "" : ",").Append("bytes[").Append(item.Length).Append("]"); else sb.Append("null");
+                    if (item != null) sb.Append(first ? "" : ",").Append("bytes[").Append(item.Length).Append("]"); else sb.Append(first ? "" : ",").Append("null");
                     first = false;
                 }
                 sb.Append(">");
+            }
+            else
+            {
+                sb.Append(",f3=[0]<>");
             }
             if (f4 != null)
             {
@@ -10546,10 +10638,14 @@ namespace test {
                 sb.Append(",f4=[").Append(f4.Count).Append("]<");
                 foreach (var item in f4)
                 {
-                    if (item != null) sb.Append(first ? "" : ",").Append("bytes[").Append(item.Length).Append("]"); else sb.Append("null");
+                    if (item != null) sb.Append(first ? "" : ",").Append("bytes[").Append(item.Length).Append("]"); else sb.Append(first ? "" : ",").Append("null");
                     first = false;
                 }
                 sb.Append(">");
+            }
+            else
+            {
+                sb.Append(",f4=[0]<>");
             }
             if (f5 != null)
             {
@@ -10562,16 +10658,24 @@ namespace test {
                 }
                 sb.Append(">");
             }
+            else
+            {
+                sb.Append(",f5=[0]<>");
+            }
             if (f6 != null)
             {
                 bool first = true;
                 sb.Append(",f6=[").Append(f6.Count).Append("]<");
                 foreach (var item in f6)
                 {
-                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append("null");
+                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append(first ? "" : ",").Append("null");
                     first = false;
                 }
                 sb.Append(">");
+            }
+            else
+            {
+                sb.Append(",f6=[0]<>");
             }
             if (f7 != null)
             {
@@ -10584,16 +10688,24 @@ namespace test {
                 }
                 sb.Append(">");
             }
+            else
+            {
+                sb.Append(",f7=[0]<>");
+            }
             if (f8 != null)
             {
                 bool first = true;
                 sb.Append(",f8=[").Append(f8.Count).Append("]<");
                 foreach (var item in f8)
                 {
-                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append("null");
+                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append(first ? "" : ",").Append("null");
                     first = false;
                 }
                 sb.Append(">");
+            }
+            else
+            {
+                sb.Append(",f8=[0]<>");
             }
             if (f9 != null)
             {
@@ -10606,16 +10718,24 @@ namespace test {
                 }
                 sb.Append(">");
             }
+            else
+            {
+                sb.Append(",f9=[0]<>");
+            }
             if (f10 != null)
             {
                 bool first = true;
                 sb.Append(",f10=[").Append(f10.Count).Append("]<");
                 foreach (var item in f10)
                 {
-                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append("null");
+                    if (item != null) sb.Append(first ? "" : ",").Append(item); else sb.Append(first ? "" : ",").Append("null");
                     first = false;
                 }
                 sb.Append(">");
+            }
+            else
+            {
+                sb.Append(",f10=[0]<>");
             }
             sb.Append(")");
             return sb.ToString();
@@ -11527,6 +11647,10 @@ namespace test {
                 }
                 sb.Append("}");
             }
+            else
+            {
+                sb.Append("f1=[0]{}");
+            }
             if (f2 != null)
             {
                 bool first = true;
@@ -11537,6 +11661,10 @@ namespace test {
                     first = false;
                 }
                 sb.Append("}");
+            }
+            else
+            {
+                sb.Append(",f2=[0]{}");
             }
             if (f3 != null)
             {
@@ -11549,6 +11677,10 @@ namespace test {
                 }
                 sb.Append("}");
             }
+            else
+            {
+                sb.Append(",f3=[0]{}");
+            }
             if (f4 != null)
             {
                 bool first = true;
@@ -11559,6 +11691,10 @@ namespace test {
                     first = false;
                 }
                 sb.Append("}");
+            }
+            else
+            {
+                sb.Append(",f4=[0]{}");
             }
             sb.Append(")");
             return sb.ToString();
@@ -12274,6 +12410,10 @@ namespace test {
                 }
                 sb.Append("}>");
             }
+            else
+            {
+                sb.Append("f1=[0]<{}>");
+            }
             if (f2 != null)
             {
                 bool first = true;
@@ -12286,6 +12426,10 @@ namespace test {
                     first = false;
                 }
                 sb.Append("}>");
+            }
+            else
+            {
+                sb.Append(",f2=[0]<{}>");
             }
             if (f3 != null)
             {
@@ -12300,6 +12444,10 @@ namespace test {
                 }
                 sb.Append("}>");
             }
+            else
+            {
+                sb.Append(",f3=[0]<{}>");
+            }
             if (f4 != null)
             {
                 bool first = true;
@@ -12312,6 +12460,10 @@ namespace test {
                     first = false;
                 }
                 sb.Append("}>");
+            }
+            else
+            {
+                sb.Append(",f4=[0]<{}>");
             }
             if (f5 != null)
             {
@@ -12326,6 +12478,10 @@ namespace test {
                 }
                 sb.Append("}>");
             }
+            else
+            {
+                sb.Append(",f5=[0]<{}>");
+            }
             if (f6 != null)
             {
                 bool first = true;
@@ -12338,6 +12494,10 @@ namespace test {
                     first = false;
                 }
                 sb.Append("}>");
+            }
+            else
+            {
+                sb.Append(",f6=[0]<{}>");
             }
             if (f7 != null)
             {
@@ -12352,6 +12512,10 @@ namespace test {
                 }
                 sb.Append("}>");
             }
+            else
+            {
+                sb.Append(",f7=[0]<{}>");
+            }
             if (f8 != null)
             {
                 bool first = true;
@@ -12364,6 +12528,10 @@ namespace test {
                     first = false;
                 }
                 sb.Append("}>");
+            }
+            else
+            {
+                sb.Append(",f8=[0]<{}>");
             }
             if (f9 != null)
             {
@@ -12378,6 +12546,10 @@ namespace test {
                 }
                 sb.Append("}>");
             }
+            else
+            {
+                sb.Append(",f9=[0]<{}>");
+            }
             if (f10 != null)
             {
                 bool first = true;
@@ -12390,6 +12562,10 @@ namespace test {
                     first = false;
                 }
                 sb.Append("}>");
+            }
+            else
+            {
+                sb.Append(",f10=[0]<{}>");
             }
             sb.Append(")");
             return sb.ToString();
@@ -13314,12 +13490,16 @@ namespace test {
                 sb.Append("f1=[").Append(f1.Count).Append("][{");
                 foreach (var item in f1)
                 {
-                    if (item.Key != null) sb.Append(first ? "" : ",").Append("\"").Append(item.Key).Append("\""); else sb.Append("null");
+                    if (item.Key != null) sb.Append(first ? "" : ",").Append("\"").Append(item.Key).Append("\""); else sb.Append(first ? "" : ",").Append("null");
                     sb.Append("->");
                     sb.Append(item.Value);
                     first = false;
                 }
                 sb.Append("}]");
+            }
+            else
+            {
+                sb.Append("f1=[0][{}]");
             }
             if (f2 != null)
             {
@@ -13327,12 +13507,16 @@ namespace test {
                 sb.Append(",f2=[").Append(f2.Count).Append("][{");
                 foreach (var item in f2)
                 {
-                    if (item.Key != null) sb.Append(first ? "" : ",").Append("\"").Append(item.Key).Append("\""); else sb.Append("null");
+                    if (item.Key != null) sb.Append(first ? "" : ",").Append("\"").Append(item.Key).Append("\""); else sb.Append(first ? "" : ",").Append("null");
                     sb.Append("->");
                     if (item.Value != null) sb.Append(item.Value); else sb.Append("null");
                     first = false;
                 }
                 sb.Append("}]");
+            }
+            else
+            {
+                sb.Append(",f2=[0][{}]");
             }
             if (f3 != null)
             {
@@ -13340,12 +13524,16 @@ namespace test {
                 sb.Append(",f3=[").Append(f3.Count).Append("][{");
                 foreach (var item in f3)
                 {
-                    if (item.Key != null) sb.Append(first ? "" : ",").Append("\"").Append(item.Key).Append("\""); else sb.Append("null");
+                    if (item.Key != null) sb.Append(first ? "" : ",").Append("\"").Append(item.Key).Append("\""); else sb.Append(first ? "" : ",").Append("null");
                     sb.Append("->");
                     if (item.Value != null) sb.Append("bytes[").Append(item.Value.Length).Append("]"); else sb.Append("null");
                     first = false;
                 }
                 sb.Append("}]");
+            }
+            else
+            {
+                sb.Append(",f3=[0][{}]");
             }
             if (f4 != null)
             {
@@ -13353,12 +13541,16 @@ namespace test {
                 sb.Append(",f4=[").Append(f4.Count).Append("][{");
                 foreach (var item in f4)
                 {
-                    if (item.Key != null) sb.Append(first ? "" : ",").Append("\"").Append(item.Key).Append("\""); else sb.Append("null");
+                    if (item.Key != null) sb.Append(first ? "" : ",").Append("\"").Append(item.Key).Append("\""); else sb.Append(first ? "" : ",").Append("null");
                     sb.Append("->");
                     if (item.Value != null) sb.Append("bytes[").Append(item.Value.Length).Append("]"); else sb.Append("null");
                     first = false;
                 }
                 sb.Append("}]");
+            }
+            else
+            {
+                sb.Append(",f4=[0][{}]");
             }
             if (f5 != null)
             {
@@ -13366,12 +13558,16 @@ namespace test {
                 sb.Append(",f5=[").Append(f5.Count).Append("][{");
                 foreach (var item in f5)
                 {
-                    if (item.Key != null) sb.Append(first ? "" : ",").Append("\"").Append(item.Key).Append("\""); else sb.Append("null");
+                    if (item.Key != null) sb.Append(first ? "" : ",").Append("\"").Append(item.Key).Append("\""); else sb.Append(first ? "" : ",").Append("null");
                     sb.Append("->");
                     sb.Append(item.Value);
                     first = false;
                 }
                 sb.Append("}]");
+            }
+            else
+            {
+                sb.Append(",f5=[0][{}]");
             }
             if (f6 != null)
             {
@@ -13379,12 +13575,16 @@ namespace test {
                 sb.Append(",f6=[").Append(f6.Count).Append("][{");
                 foreach (var item in f6)
                 {
-                    if (item.Key != null) sb.Append(first ? "" : ",").Append("\"").Append(item.Key).Append("\""); else sb.Append("null");
+                    if (item.Key != null) sb.Append(first ? "" : ",").Append("\"").Append(item.Key).Append("\""); else sb.Append(first ? "" : ",").Append("null");
                     sb.Append("->");
                     if (item.Value != null) sb.Append(item.Value); else sb.Append("null");
                     first = false;
                 }
                 sb.Append("}]");
+            }
+            else
+            {
+                sb.Append(",f6=[0][{}]");
             }
             if (f7 != null)
             {
@@ -13392,12 +13592,16 @@ namespace test {
                 sb.Append(",f7=[").Append(f7.Count).Append("][{");
                 foreach (var item in f7)
                 {
-                    if (item.Key != null) sb.Append(first ? "" : ",").Append("\"").Append(item.Key).Append("\""); else sb.Append("null");
+                    if (item.Key != null) sb.Append(first ? "" : ",").Append("\"").Append(item.Key).Append("\""); else sb.Append(first ? "" : ",").Append("null");
                     sb.Append("->");
                     sb.Append(item.Value);
                     first = false;
                 }
                 sb.Append("}]");
+            }
+            else
+            {
+                sb.Append(",f7=[0][{}]");
             }
             if (f8 != null)
             {
@@ -13405,12 +13609,16 @@ namespace test {
                 sb.Append(",f8=[").Append(f8.Count).Append("][{");
                 foreach (var item in f8)
                 {
-                    if (item.Key != null) sb.Append(first ? "" : ",").Append("\"").Append(item.Key).Append("\""); else sb.Append("null");
+                    if (item.Key != null) sb.Append(first ? "" : ",").Append("\"").Append(item.Key).Append("\""); else sb.Append(first ? "" : ",").Append("null");
                     sb.Append("->");
                     if (item.Value != null) sb.Append(item.Value); else sb.Append("null");
                     first = false;
                 }
                 sb.Append("}]");
+            }
+            else
+            {
+                sb.Append(",f8=[0][{}]");
             }
             if (f9 != null)
             {
@@ -13418,12 +13626,16 @@ namespace test {
                 sb.Append(",f9=[").Append(f9.Count).Append("][{");
                 foreach (var item in f9)
                 {
-                    if (item.Key != null) sb.Append(first ? "" : ",").Append("\"").Append(item.Key).Append("\""); else sb.Append("null");
+                    if (item.Key != null) sb.Append(first ? "" : ",").Append("\"").Append(item.Key).Append("\""); else sb.Append(first ? "" : ",").Append("null");
                     sb.Append("->");
                     sb.Append(item.Value);
                     first = false;
                 }
                 sb.Append("}]");
+            }
+            else
+            {
+                sb.Append(",f9=[0][{}]");
             }
             if (f10 != null)
             {
@@ -13431,12 +13643,16 @@ namespace test {
                 sb.Append(",f10=[").Append(f10.Count).Append("][{");
                 foreach (var item in f10)
                 {
-                    if (item.Key != null) sb.Append(first ? "" : ",").Append("\"").Append(item.Key).Append("\""); else sb.Append("null");
+                    if (item.Key != null) sb.Append(first ? "" : ",").Append("\"").Append(item.Key).Append("\""); else sb.Append(first ? "" : ",").Append("null");
                     sb.Append("->");
                     if (item.Value != null) sb.Append(item.Value); else sb.Append("null");
                     first = false;
                 }
                 sb.Append("}]");
+            }
+            else
+            {
+                sb.Append(",f10=[0][{}]");
             }
             sb.Append(")");
             return sb.ToString();
@@ -14344,6 +14560,10 @@ namespace test {
                 }
                 sb.Append("}]");
             }
+            else
+            {
+                sb.Append("f1=[0][{}]");
+            }
             if (f2 != null)
             {
                 bool first = true;
@@ -14356,6 +14576,10 @@ namespace test {
                     first = false;
                 }
                 sb.Append("}]");
+            }
+            else
+            {
+                sb.Append(",f2=[0][{}]");
             }
             sb.Append(")");
             return sb.ToString();

@@ -106,6 +106,8 @@ func (s StructVector) String() string {
             first = false
         }
         sb.WriteString("]")
+    } else {
+        sb.WriteString("f1=[0][]");
     }
     sb.WriteString(",f2=")
     if s.F2 != nil {
@@ -116,11 +118,14 @@ func (s StructVector) String() string {
                 if first { sb.WriteString("") } else { sb.WriteString(",") }
                 sb.WriteString(strconv.FormatUint(uint64(*v), 10))
             } else {
+                if first { sb.WriteString("") } else { sb.WriteString(",") }
                 sb.WriteString("null")
             }
             first = false
         }
         sb.WriteString("]")
+    } else {
+        sb.WriteString(",f2=[0][]");
     }
     sb.WriteString(",f3=")
     if s.F3 != nil {
@@ -131,11 +136,14 @@ func (s StructVector) String() string {
                 if first { sb.WriteString("") } else { sb.WriteString(",") }
                 sb.WriteString("bytes[" + strconv.FormatInt(int64(len(v)), 10) + "]")
             } else {
+                if first { sb.WriteString("") } else { sb.WriteString(",") }
                 sb.WriteString("null")
             }
             first = false
         }
         sb.WriteString("]")
+    } else {
+        sb.WriteString(",f3=[0][]");
     }
     sb.WriteString(",f4=")
     if s.F4 != nil {
@@ -146,11 +154,14 @@ func (s StructVector) String() string {
                 if first { sb.WriteString("") } else { sb.WriteString(",") }
                 sb.WriteString("bytes[" + strconv.FormatInt(int64(len(*v)), 10) + "]")
             } else {
+                if first { sb.WriteString("") } else { sb.WriteString(",") }
                 sb.WriteString("null")
             }
             first = false
         }
         sb.WriteString("]")
+    } else {
+        sb.WriteString(",f4=[0][]");
     }
     sb.WriteString(",f5=")
     if s.F5 != nil {
@@ -162,6 +173,8 @@ func (s StructVector) String() string {
             first = false
         }
         sb.WriteString("]")
+    } else {
+        sb.WriteString(",f5=[0][]");
     }
     sb.WriteString(",f6=")
     if s.F6 != nil {
@@ -172,11 +185,14 @@ func (s StructVector) String() string {
                 if first { sb.WriteString("") } else { sb.WriteString(",") }
                 sb.WriteString(fmt.Sprintf("%v", *v))
             } else {
+                if first { sb.WriteString("") } else { sb.WriteString(",") }
                 sb.WriteString("null")
             }
             first = false
         }
         sb.WriteString("]")
+    } else {
+        sb.WriteString(",f6=[0][]");
     }
     sb.WriteString(",f7=")
     if s.F7 != nil {
@@ -188,6 +204,8 @@ func (s StructVector) String() string {
             first = false
         }
         sb.WriteString("]")
+    } else {
+        sb.WriteString(",f7=[0][]");
     }
     sb.WriteString(",f8=")
     if s.F8 != nil {
@@ -198,11 +216,14 @@ func (s StructVector) String() string {
                 if first { sb.WriteString("") } else { sb.WriteString(",") }
                 sb.WriteString(fmt.Sprintf("%v", *v))
             } else {
+                if first { sb.WriteString("") } else { sb.WriteString(",") }
                 sb.WriteString("null")
             }
             first = false
         }
         sb.WriteString("]")
+    } else {
+        sb.WriteString(",f8=[0][]");
     }
     sb.WriteString(",f9=")
     if s.F9 != nil {
@@ -214,6 +235,8 @@ func (s StructVector) String() string {
             first = false
         }
         sb.WriteString("]")
+    } else {
+        sb.WriteString(",f9=[0][]");
     }
     sb.WriteString(",f10=")
     if s.F10 != nil {
@@ -224,11 +247,14 @@ func (s StructVector) String() string {
                 if first { sb.WriteString("") } else { sb.WriteString(",") }
                 sb.WriteString(fmt.Sprintf("%v", *v))
             } else {
+                if first { sb.WriteString("") } else { sb.WriteString(",") }
                 sb.WriteString("null")
             }
             first = false
         }
         sb.WriteString("]")
+    } else {
+        sb.WriteString(",f10=[0][]");
     }
     sb.WriteString(")")
     return sb.String()

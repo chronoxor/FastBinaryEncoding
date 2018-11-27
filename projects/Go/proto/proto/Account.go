@@ -112,6 +112,8 @@ func (s Account) String() string {
             first = false
         }
         sb.WriteString("]")
+    } else {
+        sb.WriteString(",orders=[0][]");
     }
     sb.WriteString(")")
     return sb.String()

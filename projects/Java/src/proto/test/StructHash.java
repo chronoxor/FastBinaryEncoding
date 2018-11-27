@@ -119,12 +119,16 @@ public class StructHash implements Comparable<Object>
             sb.append("f1=[").append(f1.size()).append("][{");
             for (var item : f1.entrySet())
             {
-                if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append("null");
+                if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append(first ? "" : ",").append("null");
                 sb.append("->");
                 sb.append(item.getValue());
                 first = false;
             }
             sb.append("}]");
+        }
+        else
+        {
+            sb.append("f1=[0][{}]");
         }
         if (f2 != null)
         {
@@ -132,12 +136,16 @@ public class StructHash implements Comparable<Object>
             sb.append(",f2=[").append(f2.size()).append("][{");
             for (var item : f2.entrySet())
             {
-                if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append("null");
+                if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append(first ? "" : ",").append("null");
                 sb.append("->");
                 if (item.getValue() != null) sb.append(item.getValue()); else sb.append("null");
                 first = false;
             }
             sb.append("}]");
+        }
+        else
+        {
+            sb.append(",f2=[0][{}]");
         }
         if (f3 != null)
         {
@@ -145,12 +153,16 @@ public class StructHash implements Comparable<Object>
             sb.append(",f3=[").append(f3.size()).append("][{");
             for (var item : f3.entrySet())
             {
-                if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append("null");
+                if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append(first ? "" : ",").append("null");
                 sb.append("->");
                 if (item.getValue() != null) sb.append("bytes[").append(item.getValue().array().length).append("]"); else sb.append("null");
                 first = false;
             }
             sb.append("}]");
+        }
+        else
+        {
+            sb.append(",f3=[0][{}]");
         }
         if (f4 != null)
         {
@@ -158,12 +170,16 @@ public class StructHash implements Comparable<Object>
             sb.append(",f4=[").append(f4.size()).append("][{");
             for (var item : f4.entrySet())
             {
-                if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append("null");
+                if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append(first ? "" : ",").append("null");
                 sb.append("->");
                 if (item.getValue() != null) sb.append("bytes[").append(item.getValue().array().length).append("]"); else sb.append("null");
                 first = false;
             }
             sb.append("}]");
+        }
+        else
+        {
+            sb.append(",f4=[0][{}]");
         }
         if (f5 != null)
         {
@@ -171,12 +187,16 @@ public class StructHash implements Comparable<Object>
             sb.append(",f5=[").append(f5.size()).append("][{");
             for (var item : f5.entrySet())
             {
-                if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append("null");
+                if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append(first ? "" : ",").append("null");
                 sb.append("->");
                 sb.append(item.getValue());
                 first = false;
             }
             sb.append("}]");
+        }
+        else
+        {
+            sb.append(",f5=[0][{}]");
         }
         if (f6 != null)
         {
@@ -184,12 +204,16 @@ public class StructHash implements Comparable<Object>
             sb.append(",f6=[").append(f6.size()).append("][{");
             for (var item : f6.entrySet())
             {
-                if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append("null");
+                if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append(first ? "" : ",").append("null");
                 sb.append("->");
                 if (item.getValue() != null) sb.append(item.getValue()); else sb.append("null");
                 first = false;
             }
             sb.append("}]");
+        }
+        else
+        {
+            sb.append(",f6=[0][{}]");
         }
         if (f7 != null)
         {
@@ -197,12 +221,16 @@ public class StructHash implements Comparable<Object>
             sb.append(",f7=[").append(f7.size()).append("][{");
             for (var item : f7.entrySet())
             {
-                if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append("null");
+                if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append(first ? "" : ",").append("null");
                 sb.append("->");
                 sb.append(item.getValue());
                 first = false;
             }
             sb.append("}]");
+        }
+        else
+        {
+            sb.append(",f7=[0][{}]");
         }
         if (f8 != null)
         {
@@ -210,12 +238,16 @@ public class StructHash implements Comparable<Object>
             sb.append(",f8=[").append(f8.size()).append("][{");
             for (var item : f8.entrySet())
             {
-                if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append("null");
+                if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append(first ? "" : ",").append("null");
                 sb.append("->");
                 if (item.getValue() != null) sb.append(item.getValue()); else sb.append("null");
                 first = false;
             }
             sb.append("}]");
+        }
+        else
+        {
+            sb.append(",f8=[0][{}]");
         }
         if (f9 != null)
         {
@@ -223,12 +255,16 @@ public class StructHash implements Comparable<Object>
             sb.append(",f9=[").append(f9.size()).append("][{");
             for (var item : f9.entrySet())
             {
-                if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append("null");
+                if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append(first ? "" : ",").append("null");
                 sb.append("->");
                 sb.append(item.getValue());
                 first = false;
             }
             sb.append("}]");
+        }
+        else
+        {
+            sb.append(",f9=[0][{}]");
         }
         if (f10 != null)
         {
@@ -236,12 +272,16 @@ public class StructHash implements Comparable<Object>
             sb.append(",f10=[").append(f10.size()).append("][{");
             for (var item : f10.entrySet())
             {
-                if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append("null");
+                if (item.getKey() != null) sb.append(first ? "" : ",").append("\"").append(item.getKey()).append("\""); else sb.append(first ? "" : ",").append("null");
                 sb.append("->");
                 if (item.getValue() != null) sb.append(item.getValue()); else sb.append("null");
                 first = false;
             }
             sb.append("}]");
+        }
+        else
+        {
+            sb.append(",f10=[0][{}]");
         }
         sb.append(")");
         return sb.toString();

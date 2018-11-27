@@ -5239,6 +5239,12 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
                 WriteLineIndent("sb.append(\"]\");");
                 Indent(-1);
                 WriteLineIndent("}");
+                WriteLineIndent("else");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[0][]\");");
+                Indent(-1);
+                WriteLineIndent("}");
             }
             else if (field->list)
             {
@@ -5257,6 +5263,12 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
                 WriteLineIndent("sb.append(\">\");");
                 Indent(-1);
                 WriteLineIndent("}");
+                WriteLineIndent("else");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[0]<>\");");
+                Indent(-1);
+                WriteLineIndent("}");
             }
             else if (field->set)
             {
@@ -5273,6 +5285,12 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
                 Indent(-1);
                 WriteLineIndent("}");
                 WriteLineIndent("sb.append(\"}\");");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("else");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[0]{}\");");
                 Indent(-1);
                 WriteLineIndent("}");
             }
@@ -5295,6 +5313,12 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
                 WriteLineIndent("sb.append(\"}>\");");
                 Indent(-1);
                 WriteLineIndent("}");
+                WriteLineIndent("else");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[0]<{}>\");");
+                Indent(-1);
+                WriteLineIndent("}");
             }
             else if (field->hash)
             {
@@ -5313,6 +5337,12 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
                 Indent(-1);
                 WriteLineIndent("}");
                 WriteLineIndent("sb.append(\"}]\");");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("else");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[0][{}]\");");
                 Indent(-1);
                 WriteLineIndent("}");
             }
@@ -7385,7 +7415,7 @@ std::string GeneratorJava::ConvertOutputStreamValue(const std::string& type, con
     std::string comma = separate ? ".append(first ? \"\" : \",\")" : "";
 
     if (optional || (type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid"))
-        return "if (" + name + " != null) sb" + comma + ConvertOutputStreamType(type, name, true) + "; else sb.append(\"null\");";
+        return "if (" + name + " != null) sb" + comma + ConvertOutputStreamType(type, name, true) + "; else sb" + comma + ".append(\"null\");";
     else
         return "sb" + comma + ConvertOutputStreamType(type, name, false) + ";";
 }
