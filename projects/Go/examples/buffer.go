@@ -4,20 +4,34 @@ import (
 	"../proto/fbe"
 	"../proto/proto"
 	"../proto/protoex"
+	"../proto/test"
 	"encoding/json"
 	"fmt"
+	"github.com/deckarep/golang-set"
 )
 
+type MyTest struct {
+	F1 mapset.Set
+}
+
 func main() {
-	var StringSet map[string]bool
-	StringSet = make(map[string]bool)
-	StringSet["Test1"] = true
-	StringSet["Test2"] = true
-	StringSet["Test3"] = true
-	jjj, _ := json.Marshal(StringSet)
+	s := MyTest{F1:mapset.NewSet()}
+	s.F1.Add(123)
+	s.F1.Add(456)
+	s.F1.Add(test.NewStructSimple())
+	s.F1.Add(test.NewStructSimple())
+
+	a := s.F1.Contains(123)
+	println(a)
+
+	jjj, _ := json.Marshal(s)
 	fmt.Println(string(jjj))
-	_ = json.Unmarshal(jjj, &StringSet)
-	fmt.Println(StringSet)
+	var s2 MyTest = MyTest{F1:mapset.NewSet()}
+	_ = json.Unmarshal(jjj, &s2)
+	fmt.Println(s)
+
+	a = s2.F1.Contains(123)
+	println(a)
 
 	o1 := proto.NewOrder()
 	o1.Symbol = "EURUSD"

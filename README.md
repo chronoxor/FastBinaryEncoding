@@ -269,7 +269,9 @@ dependencies that worth to be mentioned:
   with 'UTF8JSON' definition;
 
 ### Go
+* Assert testing is based on [stretchr/testify](https://github.com/stretchr/testify) package (`go get github.com/stretchr/testify`);
 * JSON serialization is based on [jsoniter](https://github.com/json-iterator/go) package (`go get github.com/json-iterator/go`);
+* JSON serialization of sets is not implemented for Go because native set type is not supported;
 * Decimal type is based on [shopspring/decimal](https://github.com/shopspring/decimal) package (`go get github.com/shopspring/decimal`);
 * UUID type is based on [goolge/uuid](https://github.com/google/uuid) package (`go get github.com/google/uuid`);
 
@@ -280,6 +282,7 @@ dependencies that worth to be mentioned:
 ### JavaScript
 * JavaScript domain model is implemented using [ECMAScript 6](http://es6-features.org)
   (classes, etc.);
+* JSON serialization of set, map and hash types is limited to key with string type;
 
 ### Kotlin
 * Starting from the version 1.3 [Kotlin supports unsigned integer numbers (UByte, UShort, UInt, ULong)](https://github.com/Kotlin/KEEP/blob/unsigned_types/proposals/unsigned-types.md).
@@ -287,6 +290,7 @@ dependencies that worth to be mentioned:
   language does;
 * JSON serialization is implemented using [Gson](https://github.com/google/gson) package.
   Therefore it should be imported using Maven;
+* JSON serialization of UByte?, UShort? UInt?, ULong? types has bug [Gson: Invalid JSON serialization of nullable unsigned integer property](https://youtrack.jetbrains.com/issue/KT-28420)
 
 ### Python
 * Python 3.7 is required because of [time.time_ns()](https://docs.python.org/3/library/time.html#time.time_ns);
