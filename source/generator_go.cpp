@@ -4512,6 +4512,93 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                 Indent(-1);
                 WriteLineIndent("}");
 
+                // Generate set wrapper Subset() method
+                WriteLine();
+                WriteLineIndent("// Is the current set a subset of the given set?");
+                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Subset(set set" + ConvertCase(*field->name) + ") bool {");
+                Indent(1);
+                WriteLineIndent("result := true");
+                WriteLineIndent("for _, v := range s {");
+                Indent(1);
+                WriteLineIndent("if !set.Contains(v) {");
+                Indent(1);
+                WriteLineIndent("result = false");
+                WriteLineIndent("break");
+                Indent(-1);
+                WriteLineIndent("}");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("return result");
+                Indent(-1);
+                WriteLineIndent("}");
+
+                // Generate set wrapper Union() method
+                WriteLine();
+                WriteLineIndent("// Union of the current set and the given set");
+                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Union(set set" + ConvertCase(*field->name) + ") set" + ConvertCase(*field->name) + " {");
+                Indent(1);
+                WriteLineIndent("result := make(set" + ConvertCase(*field->name) + ")");
+                WriteLineIndent("for _, v := range s {");
+                Indent(1);
+                WriteLineIndent("result.Add(v)");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("for _, v := range set {");
+                Indent(1);
+                WriteLineIndent("result.Add(v)");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("return result");
+                Indent(-1);
+                WriteLineIndent("}");
+
+                // Generate set wrapper Intersection() method
+                WriteLine();
+                WriteLineIndent("// Intersection of the current set and the given set");
+                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Intersection(set set" + ConvertCase(*field->name) + ") set" + ConvertCase(*field->name) + " {");
+                Indent(1);
+                WriteLineIndent("result := make(set" + ConvertCase(*field->name) + ")");
+                WriteLineIndent("for _, v := range set {");
+                Indent(1);
+                WriteLineIndent("if s.Contains(v) {");
+                Indent(1);
+                WriteLineIndent("result.Add(v)");
+                Indent(-1);
+                WriteLineIndent("}");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("return result");
+                Indent(-1);
+                WriteLineIndent("}");
+
+                // Generate set wrapper Difference() method
+                WriteLine();
+                WriteLineIndent("// Difference between the current set and the given set");
+                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Difference(set set" + ConvertCase(*field->name) + ") set" + ConvertCase(*field->name) + " {");
+                Indent(1);
+                WriteLineIndent("result := make(set" + ConvertCase(*field->name) + ")");
+                WriteLineIndent("for _, v := range set {");
+                Indent(1);
+                WriteLineIndent("if !s.Contains(v) {");
+                Indent(1);
+                WriteLineIndent("result.Add(v)");
+                Indent(-1);
+                WriteLineIndent("}");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("for _, v := range s {");
+                Indent(1);
+                WriteLineIndent("if !set.Contains(v) {");
+                Indent(1);
+                WriteLineIndent("result.Add(v)");
+                Indent(-1);
+                WriteLineIndent("}");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("return result");
+                Indent(-1);
+                WriteLineIndent("}");
+
                 // Generate set wrapper MarshalJSON() method
                 WriteLine();
                 WriteLineIndent("// Convert set to JSON");

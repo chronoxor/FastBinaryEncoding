@@ -130,6 +130,57 @@ func (s setF1) Enumerate() []byte {
     return array
 }
 
+// Is the current set a subset of the given set?
+func (s setF1) Subset(set setF1) bool {
+    result := true
+    for _, v := range s {
+        if !set.Contains(v) {
+            result = false
+            break
+        }
+    }
+    return result
+}
+
+// Union of the current set and the given set
+func (s setF1) Union(set setF1) setF1 {
+    result := make(setF1)
+    for _, v := range s {
+        result.Add(v)
+    }
+    for _, v := range set {
+        result.Add(v)
+    }
+    return result
+}
+
+// Intersection of the current set and the given set
+func (s setF1) Intersection(set setF1) setF1 {
+    result := make(setF1)
+    for _, v := range set {
+        if s.Contains(v) {
+            result.Add(v)
+        }
+    }
+    return result
+}
+
+// Difference between the current set and the given set
+func (s setF1) Difference(set setF1) setF1 {
+    result := make(setF1)
+    for _, v := range set {
+        if !s.Contains(v) {
+            result.Add(v)
+        }
+    }
+    for _, v := range s {
+        if !set.Contains(v) {
+            result.Add(v)
+        }
+    }
+    return result
+}
+
 // Convert set to JSON
 func (s setF1) MarshalJSON() ([]byte, error) {
     array := make([]byte, 0)
@@ -196,6 +247,57 @@ func (s setF2) Enumerate() []EnumSimple {
         array = append(array, v)
     }
     return array
+}
+
+// Is the current set a subset of the given set?
+func (s setF2) Subset(set setF2) bool {
+    result := true
+    for _, v := range s {
+        if !set.Contains(v) {
+            result = false
+            break
+        }
+    }
+    return result
+}
+
+// Union of the current set and the given set
+func (s setF2) Union(set setF2) setF2 {
+    result := make(setF2)
+    for _, v := range s {
+        result.Add(v)
+    }
+    for _, v := range set {
+        result.Add(v)
+    }
+    return result
+}
+
+// Intersection of the current set and the given set
+func (s setF2) Intersection(set setF2) setF2 {
+    result := make(setF2)
+    for _, v := range set {
+        if s.Contains(v) {
+            result.Add(v)
+        }
+    }
+    return result
+}
+
+// Difference between the current set and the given set
+func (s setF2) Difference(set setF2) setF2 {
+    result := make(setF2)
+    for _, v := range set {
+        if !s.Contains(v) {
+            result.Add(v)
+        }
+    }
+    for _, v := range s {
+        if !set.Contains(v) {
+            result.Add(v)
+        }
+    }
+    return result
 }
 
 // Convert set to JSON
@@ -266,6 +368,57 @@ func (s setF3) Enumerate() []FlagsSimple {
     return array
 }
 
+// Is the current set a subset of the given set?
+func (s setF3) Subset(set setF3) bool {
+    result := true
+    for _, v := range s {
+        if !set.Contains(v) {
+            result = false
+            break
+        }
+    }
+    return result
+}
+
+// Union of the current set and the given set
+func (s setF3) Union(set setF3) setF3 {
+    result := make(setF3)
+    for _, v := range s {
+        result.Add(v)
+    }
+    for _, v := range set {
+        result.Add(v)
+    }
+    return result
+}
+
+// Intersection of the current set and the given set
+func (s setF3) Intersection(set setF3) setF3 {
+    result := make(setF3)
+    for _, v := range set {
+        if s.Contains(v) {
+            result.Add(v)
+        }
+    }
+    return result
+}
+
+// Difference between the current set and the given set
+func (s setF3) Difference(set setF3) setF3 {
+    result := make(setF3)
+    for _, v := range set {
+        if !s.Contains(v) {
+            result.Add(v)
+        }
+    }
+    for _, v := range s {
+        if !set.Contains(v) {
+            result.Add(v)
+        }
+    }
+    return result
+}
+
 // Convert set to JSON
 func (s setF3) MarshalJSON() ([]byte, error) {
     array := make([]FlagsSimple, 0)
@@ -332,6 +485,57 @@ func (s setF4) Enumerate() []StructSimple {
         array = append(array, v)
     }
     return array
+}
+
+// Is the current set a subset of the given set?
+func (s setF4) Subset(set setF4) bool {
+    result := true
+    for _, v := range s {
+        if !set.Contains(v) {
+            result = false
+            break
+        }
+    }
+    return result
+}
+
+// Union of the current set and the given set
+func (s setF4) Union(set setF4) setF4 {
+    result := make(setF4)
+    for _, v := range s {
+        result.Add(v)
+    }
+    for _, v := range set {
+        result.Add(v)
+    }
+    return result
+}
+
+// Intersection of the current set and the given set
+func (s setF4) Intersection(set setF4) setF4 {
+    result := make(setF4)
+    for _, v := range set {
+        if s.Contains(v) {
+            result.Add(v)
+        }
+    }
+    return result
+}
+
+// Difference between the current set and the given set
+func (s setF4) Difference(set setF4) setF4 {
+    result := make(setF4)
+    for _, v := range set {
+        if !s.Contains(v) {
+            result.Add(v)
+        }
+    }
+    for _, v := range s {
+        if !set.Contains(v) {
+            result.Add(v)
+        }
+    }
+    return result
 }
 
 // Convert set to JSON
