@@ -44,7 +44,7 @@
     <session id="-1813862984">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="5" />
+          <entry key="project.closed" value="6" />
           <entry key="project.open.time.0" value="5" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.4" value="1" />
@@ -341,12 +341,12 @@
       <workItem from="1543356183911" duration="15000" />
       <workItem from="1543356226890" duration="34000" />
       <workItem from="1543356263623" duration="12000" />
-      <workItem from="1543356313070" duration="1827000" />
+      <workItem from="1543356313070" duration="2433000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19387000" />
+    <option name="totallyTimeSpent" value="19993000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -360,12 +360,12 @@
   <component name="ToolWindowManager">
     <frame x="406" y="251" width="1735" height="1048" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16119403" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16119403" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49731344" visible="true" weight="0.32896176" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49731344" weight="0.32896176" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4877612" weight="0.39889196" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -374,9 +374,9 @@
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Unit Tests" order="11" sideWeight="0.65850747" weight="0.4546448" />
+      <window_info active="true" anchor="bottom" id="Unit Tests" order="11" sideWeight="0.65791047" visible="true" weight="0.4546448" />
       <window_info anchor="bottom" id="Terminal" order="12" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.50268656" side_tool="true" visible="true" weight="0.32896176" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.34208956" side_tool="true" visible="true" weight="0.4546448" />
       <window_info anchor="bottom" id="Build" order="14" sideWeight="0.4967164" weight="0.32677597" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />

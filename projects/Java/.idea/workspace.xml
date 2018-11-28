@@ -5,35 +5,6 @@
       <change beforePath="$PROJECT_DIR$/../../modules/Catch2" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/Catch2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../modules/CppBenchmark" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppBenchmark" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../modules/CppCommon" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppCommon" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/examples/print.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/examples/print.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/enums/Enums.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/enums/Enums.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/Account.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/Account.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/Balance.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/Balance.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/Order.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/Order.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/Account.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/Account.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/Balance.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/Balance.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/Order.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/Order.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/test/StructArray.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/StructArray.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/test/StructBytes.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/StructBytes.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/test/StructHash.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/StructHash.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/test/StructHashEx.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/StructHashEx.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/test/StructList.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/StructList.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/test/StructMap.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/StructMap.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/test/StructNested.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/StructNested.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/test/StructOptional.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/StructOptional.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/test/StructSet.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/StructSet.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/test/StructSimple.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/StructSimple.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/test/StructVector.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/StructVector.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/Python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/Python.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/proto.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/proto.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/protoex.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/protoex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_python.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_python.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,7 +17,7 @@
     <session id="478061424">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="17" />
+          <entry key="project.closed" value="18" />
           <entry key="project.open.time.0" value="5" />
           <entry key="project.open.time.1" value="7" />
           <entry key="project.open.time.3" value="1" />
@@ -266,7 +237,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543370173439" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543370192042" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -432,14 +403,11 @@
       <workItem from="1543153715073" duration="5978000" />
       <workItem from="1543162730746" duration="25000" />
       <workItem from="1543175420660" duration="2187000" />
-      <workItem from="1543363535098" duration="1361000" />
+      <workItem from="1543363535098" duration="1978000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="_default_ - 2018.11.25 at 18h 21m 14s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
     <history-entry file="_default_ - 2018.11.25 at 18h 22m 40s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
@@ -467,14 +435,17 @@
     <history-entry file="_default_ - 2018.11.28 at 03h 18m 02s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
+    <history-entry file="_default_ - 2018.11.28 at 04h 56m 28s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14912000" />
+    <option name="totallyTimeSpent" value="15529000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="327" y="148" width="2008" height="1259" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2731006" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2731006" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -483,7 +454,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48665297" visible="true" weight="0.45559502" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48665297" weight="0.45559502" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49691993" weight="0.39964476" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
