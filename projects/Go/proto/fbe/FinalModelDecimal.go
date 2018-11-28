@@ -16,13 +16,13 @@ type FinalModelDecimal struct {
 }
 
 // Get the allocation size
-func (fm FinalModelDecimal) FBEAllocationSize(value Decimal) int { return fm.FBESize() }
+func (fm *FinalModelDecimal) FBEAllocationSize(value Decimal) int { return fm.FBESize() }
 
 // Get the final size
-func (fm FinalModelDecimal) FBESize() int { return 16 }
+func (fm *FinalModelDecimal) FBESize() int { return 16 }
 
 // Get the final offset
-func (fm FinalModelDecimal) FBEOffset() int { return fm.offset }
+func (fm *FinalModelDecimal) FBEOffset() int { return fm.offset }
 // Set the final offset
 func (fm *FinalModelDecimal) SetFBEOffset(value int) { fm.offset = value }
 
@@ -37,7 +37,7 @@ func NewFinalModelDecimal(buffer *Buffer, offset int) *FinalModelDecimal {
 }
 
 // Check if the decimal value is valid
-func (fm FinalModelDecimal) Verify() (bool, int) {
+func (fm *FinalModelDecimal) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return false, 0
     }
@@ -46,7 +46,7 @@ func (fm FinalModelDecimal) Verify() (bool, int) {
 }
 
 // Get the decimal value
-func (fm FinalModelDecimal) Get() (Decimal, int, error) {
+func (fm *FinalModelDecimal) Get() (Decimal, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return DecimalZero(), 0, errors.New("model is broken")
     }

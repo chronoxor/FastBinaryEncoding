@@ -66,8 +66,8 @@ func (f StateEx) Key() StateExKey {
 }
 
 // Convert flags to optional
-func (f StateEx) Optional() *StateEx {
-    return &f
+func (f *StateEx) Optional() *StateEx {
+    return f
 }
 
 // Convert flags to string

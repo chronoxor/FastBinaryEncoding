@@ -43,8 +43,8 @@ func (e OrderType) Key() OrderTypeKey {
 }
 
 // Convert enum to optional
-func (e OrderType) Optional() *OrderType {
-    return &e
+func (e *OrderType) Optional() *OrderType {
+    return e
 }
 
 // Convert enum to string

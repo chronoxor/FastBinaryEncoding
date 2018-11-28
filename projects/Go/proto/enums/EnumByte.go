@@ -43,8 +43,8 @@ func (e EnumByte) Key() EnumByteKey {
 }
 
 // Convert enum to optional
-func (e EnumByte) Optional() *EnumByte {
-    return &e
+func (e *EnumByte) Optional() *EnumByte {
+    return e
 }
 
 // Convert enum to string

@@ -15,12 +15,12 @@ type FieldModelFlagsSimple struct {
 }
 
 // Get the field size
-func (fm FieldModelFlagsSimple) FBESize() int { return 4 }
+func (fm *FieldModelFlagsSimple) FBESize() int { return 4 }
 // Get the field extra size
-func (fm FieldModelFlagsSimple) FBEExtra() int { return 0 }
+func (fm *FieldModelFlagsSimple) FBEExtra() int { return 0 }
 
 // Get the field offset
-func (fm FieldModelFlagsSimple) FBEOffset() int { return fm.offset }
+func (fm *FieldModelFlagsSimple) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModelFlagsSimple) SetFBEOffset(value int) { fm.offset = value }
 
@@ -35,15 +35,15 @@ func NewFieldModelFlagsSimple(buffer *fbe.Buffer, offset int) *FieldModelFlagsSi
 }
 
 // Check if the value is valid
-func (fm FieldModelFlagsSimple) Verify() bool { return true }
+func (fm *FieldModelFlagsSimple) Verify() bool { return true }
 
 // Get the value
-func (fm FieldModelFlagsSimple) Get() (FlagsSimple, error) {
+func (fm *FieldModelFlagsSimple) Get() (FlagsSimple, error) {
     return fm.GetDefault(0)
 }
 
 // Get the value with provided default value
-func (fm FieldModelFlagsSimple) GetDefault(defaults FlagsSimple) (FlagsSimple, error) {
+func (fm *FieldModelFlagsSimple) GetDefault(defaults FlagsSimple) (FlagsSimple, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return FlagsSimple(0), nil
     }

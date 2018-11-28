@@ -45,8 +45,8 @@ func (e EnumTyped) Key() EnumTypedKey {
 }
 
 // Convert enum to optional
-func (e EnumTyped) Optional() *EnumTyped {
-    return &e
+func (e *EnumTyped) Optional() *EnumTyped {
+    return e
 }
 
 // Convert enum to string

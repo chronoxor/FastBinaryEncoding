@@ -15,13 +15,13 @@ type FinalModelFlagsSimple struct {
 }
 
 // Get the allocation size
-func (fm FinalModelFlagsSimple) FBEAllocationSize(value FlagsSimple) int { return fm.FBESize() }
+func (fm *FinalModelFlagsSimple) FBEAllocationSize(value FlagsSimple) int { return fm.FBESize() }
 
 // Get the final size
-func (fm FinalModelFlagsSimple) FBESize() int { return 4 }
+func (fm *FinalModelFlagsSimple) FBESize() int { return 4 }
 
 // Get the final offset
-func (fm FinalModelFlagsSimple) FBEOffset() int { return fm.offset }
+func (fm *FinalModelFlagsSimple) FBEOffset() int { return fm.offset }
 // Set the final offset
 func (fm *FinalModelFlagsSimple) SetFBEOffset(value int) { fm.offset = value }
 
@@ -36,7 +36,7 @@ func NewFinalModelFlagsSimple(buffer *fbe.Buffer, offset int) *FinalModelFlagsSi
 }
 
 // Check if the value is valid
-func (fm FinalModelFlagsSimple) Verify() (bool, int) {
+func (fm *FinalModelFlagsSimple) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return false, 0
     }
@@ -45,7 +45,7 @@ func (fm FinalModelFlagsSimple) Verify() (bool, int) {
 }
 
 // Get the value
-func (fm FinalModelFlagsSimple) Get() (FlagsSimple, int, error) {
+func (fm *FinalModelFlagsSimple) Get() (FlagsSimple, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return FlagsSimple(0), 0, errors.New("model is broken")
     }

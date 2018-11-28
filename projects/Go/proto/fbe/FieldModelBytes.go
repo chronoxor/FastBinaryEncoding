@@ -14,9 +14,9 @@ type FieldModelBytes struct {
 }
 
 // Get the field size
-func (fm FieldModelBytes) FBESize() int { return 4 }
+func (fm *FieldModelBytes) FBESize() int { return 4 }
 // Get the field extra size
-func (fm FieldModelBytes) FBEExtra() int {
+func (fm *FieldModelBytes) FBEExtra() int {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0
     }
@@ -31,7 +31,7 @@ func (fm FieldModelBytes) FBEExtra() int {
 }
 
 // Get the field offset
-func (fm FieldModelBytes) FBEOffset() int { return fm.offset }
+func (fm *FieldModelBytes) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModelBytes) SetFBEOffset(value int) { fm.offset = value }
 
@@ -46,7 +46,7 @@ func NewFieldModelBytes(buffer *Buffer, offset int) *FieldModelBytes {
 }
 
 // Check if the bytes value is valid
-func (fm FieldModelBytes) Verify() bool {
+func (fm *FieldModelBytes) Verify() bool {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return true
     }
@@ -69,12 +69,12 @@ func (fm FieldModelBytes) Verify() bool {
 }
 
 // Get the bytes value
-func (fm FieldModelBytes) Get() ([]byte, error) {
+func (fm *FieldModelBytes) Get() ([]byte, error) {
     return fm.GetDefault(make([]byte, 0))
 }
 
 // Get the bytes value with provided default value
-func (fm FieldModelBytes) GetDefault(defaults []byte) ([]byte, error) {
+func (fm *FieldModelBytes) GetDefault(defaults []byte) ([]byte, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }

@@ -14,12 +14,12 @@ type FieldModelDouble struct {
 }
 
 // Get the field size
-func (fm FieldModelDouble) FBESize() int { return 8 }
+func (fm *FieldModelDouble) FBESize() int { return 8 }
 // Get the field extra size
-func (fm FieldModelDouble) FBEExtra() int { return 0 }
+func (fm *FieldModelDouble) FBEExtra() int { return 0 }
 
 // Get the field offset
-func (fm FieldModelDouble) FBEOffset() int { return fm.offset }
+func (fm *FieldModelDouble) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModelDouble) SetFBEOffset(value int) { fm.offset = value }
 
@@ -34,15 +34,15 @@ func NewFieldModelDouble(buffer *Buffer, offset int) *FieldModelDouble {
 }
 
 // Check if the value is valid
-func (fm FieldModelDouble) Verify() bool { return true }
+func (fm *FieldModelDouble) Verify() bool { return true }
 
 // Get the value
-func (fm FieldModelDouble) Get() (float64, error) {
+func (fm *FieldModelDouble) Get() (float64, error) {
     return fm.GetDefault(0.0)
 }
 
 // Get the value with provided default value
-func (fm FieldModelDouble) GetDefault(defaults float64) (float64, error) {
+func (fm *FieldModelDouble) GetDefault(defaults float64) (float64, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }

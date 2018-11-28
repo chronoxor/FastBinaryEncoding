@@ -14,10 +14,10 @@ type FinalModelBytes struct {
 }
 
 // Get the allocation size
-func (fm FinalModelBytes) FBEAllocationSize(value []byte) int { return 4 + len(value) }
+func (fm *FinalModelBytes) FBEAllocationSize(value []byte) int { return 4 + len(value) }
 
 // Get the final offset
-func (fm FinalModelBytes) FBEOffset() int { return fm.offset }
+func (fm *FinalModelBytes) FBEOffset() int { return fm.offset }
 // Set the final offset
 func (fm *FinalModelBytes) SetFBEOffset(value int) { fm.offset = value }
 
@@ -32,7 +32,7 @@ func NewFinalModelBytes(buffer *Buffer, offset int) *FinalModelBytes {
 }
 
 // Check if the bytes value is valid
-func (fm FinalModelBytes) Verify() (bool, int) {
+func (fm *FinalModelBytes) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
         return false, 0
     }
@@ -46,7 +46,7 @@ func (fm FinalModelBytes) Verify() (bool, int) {
 }
 
 // Get the bytes value
-func (fm FinalModelBytes) Get() ([]byte, int, error) {
+func (fm *FinalModelBytes) Get() ([]byte, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
         return make([]byte, 0), 0, nil
     }

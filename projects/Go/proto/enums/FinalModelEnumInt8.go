@@ -15,13 +15,13 @@ type FinalModelEnumInt8 struct {
 }
 
 // Get the allocation size
-func (fm FinalModelEnumInt8) FBEAllocationSize(value EnumInt8) int { return fm.FBESize() }
+func (fm *FinalModelEnumInt8) FBEAllocationSize(value EnumInt8) int { return fm.FBESize() }
 
 // Get the final size
-func (fm FinalModelEnumInt8) FBESize() int { return 1 }
+func (fm *FinalModelEnumInt8) FBESize() int { return 1 }
 
 // Get the final offset
-func (fm FinalModelEnumInt8) FBEOffset() int { return fm.offset }
+func (fm *FinalModelEnumInt8) FBEOffset() int { return fm.offset }
 // Set the final offset
 func (fm *FinalModelEnumInt8) SetFBEOffset(value int) { fm.offset = value }
 
@@ -36,7 +36,7 @@ func NewFinalModelEnumInt8(buffer *fbe.Buffer, offset int) *FinalModelEnumInt8 {
 }
 
 // Check if the value is valid
-func (fm FinalModelEnumInt8) Verify() (bool, int) {
+func (fm *FinalModelEnumInt8) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return false, 0
     }
@@ -45,7 +45,7 @@ func (fm FinalModelEnumInt8) Verify() (bool, int) {
 }
 
 // Get the value
-func (fm FinalModelEnumInt8) Get() (EnumInt8, int, error) {
+func (fm *FinalModelEnumInt8) Get() (EnumInt8, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return EnumInt8(0), 0, errors.New("model is broken")
     }

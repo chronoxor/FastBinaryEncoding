@@ -15,13 +15,13 @@ type FinalModelOrderSide struct {
 }
 
 // Get the allocation size
-func (fm FinalModelOrderSide) FBEAllocationSize(value OrderSide) int { return fm.FBESize() }
+func (fm *FinalModelOrderSide) FBEAllocationSize(value OrderSide) int { return fm.FBESize() }
 
 // Get the final size
-func (fm FinalModelOrderSide) FBESize() int { return 1 }
+func (fm *FinalModelOrderSide) FBESize() int { return 1 }
 
 // Get the final offset
-func (fm FinalModelOrderSide) FBEOffset() int { return fm.offset }
+func (fm *FinalModelOrderSide) FBEOffset() int { return fm.offset }
 // Set the final offset
 func (fm *FinalModelOrderSide) SetFBEOffset(value int) { fm.offset = value }
 
@@ -36,7 +36,7 @@ func NewFinalModelOrderSide(buffer *fbe.Buffer, offset int) *FinalModelOrderSide
 }
 
 // Check if the value is valid
-func (fm FinalModelOrderSide) Verify() (bool, int) {
+func (fm *FinalModelOrderSide) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return false, 0
     }
@@ -45,7 +45,7 @@ func (fm FinalModelOrderSide) Verify() (bool, int) {
 }
 
 // Get the value
-func (fm FinalModelOrderSide) Get() (OrderSide, int, error) {
+func (fm *FinalModelOrderSide) Get() (OrderSide, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return OrderSide(0), 0, errors.New("model is broken")
     }

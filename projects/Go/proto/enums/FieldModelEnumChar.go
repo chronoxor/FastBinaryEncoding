@@ -15,12 +15,12 @@ type FieldModelEnumChar struct {
 }
 
 // Get the field size
-func (fm FieldModelEnumChar) FBESize() int { return 1 }
+func (fm *FieldModelEnumChar) FBESize() int { return 1 }
 // Get the field extra size
-func (fm FieldModelEnumChar) FBEExtra() int { return 0 }
+func (fm *FieldModelEnumChar) FBEExtra() int { return 0 }
 
 // Get the field offset
-func (fm FieldModelEnumChar) FBEOffset() int { return fm.offset }
+func (fm *FieldModelEnumChar) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModelEnumChar) SetFBEOffset(value int) { fm.offset = value }
 
@@ -35,15 +35,15 @@ func NewFieldModelEnumChar(buffer *fbe.Buffer, offset int) *FieldModelEnumChar {
 }
 
 // Check if the value is valid
-func (fm FieldModelEnumChar) Verify() bool { return true }
+func (fm *FieldModelEnumChar) Verify() bool { return true }
 
 // Get the value
-func (fm FieldModelEnumChar) Get() (EnumChar, error) {
+func (fm *FieldModelEnumChar) Get() (EnumChar, error) {
     return fm.GetDefault(0)
 }
 
 // Get the value with provided default value
-func (fm FieldModelEnumChar) GetDefault(defaults EnumChar) (EnumChar, error) {
+func (fm *FieldModelEnumChar) GetDefault(defaults EnumChar) (EnumChar, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return EnumChar(0), nil
     }

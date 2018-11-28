@@ -25,7 +25,7 @@ type AccountKey struct {
 }
 
 // Convert Account flags key to string
-func (k AccountKey) String() string {
+func (k *AccountKey) String() string {
     var sb strings.Builder
     sb.WriteString("AccountKey(")
     sb.WriteString("uid=")
@@ -67,31 +67,31 @@ func NewAccountFromJSON(buffer []byte) (*Account, error) {
 }
 
 // Struct shallow copy
-func (s Account) Copy() *Account {
-    var result = s
+func (s *Account) Copy() *Account {
+    var result = *s
     return &result
 }
 
 // Struct deep clone
-func (s Account) Clone() *Account {
-    var result = s
+func (s *Account) Clone() *Account {
+    var result = *s
     return &result
 }
 
 // Get the struct key
-func (s Account) Key() AccountKey {
+func (s *Account) Key() AccountKey {
     return AccountKey{
         Uid: s.Uid,
     }
 }
 
 // Convert struct to optional
-func (s Account) Optional() *Account {
-    return &s
+func (s *Account) Optional() *Account {
+    return s
 }
 
 // Convert struct to string
-func (s Account) String() string {
+func (s *Account) String() string {
     var sb strings.Builder
     sb.WriteString("Account(")
     sb.WriteString("uid=")
@@ -126,6 +126,6 @@ func (s Account) String() string {
 }
 
 // Convert struct to JSON
-func (s Account) JSON() ([]byte, error) {
-    return fbe.Json.Marshal(&s)
+func (s *Account) JSON() ([]byte, error) {
+    return fbe.Json.Marshal(s)
 }

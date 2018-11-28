@@ -25,7 +25,7 @@ type StructNestedKey struct {
 }
 
 // Convert StructNested flags key to string
-func (k StructNestedKey) String() string {
+func (k *StructNestedKey) String() string {
     var sb strings.Builder
     sb.WriteString("StructNestedKey(")
     sb.WriteString(k.StructOptionalKey.String())
@@ -80,31 +80,31 @@ func NewStructNestedFromJSON(buffer []byte) (*StructNested, error) {
 }
 
 // Struct shallow copy
-func (s StructNested) Copy() *StructNested {
-    var result = s
+func (s *StructNested) Copy() *StructNested {
+    var result = *s
     return &result
 }
 
 // Struct deep clone
-func (s StructNested) Clone() *StructNested {
-    var result = s
+func (s *StructNested) Clone() *StructNested {
+    var result = *s
     return &result
 }
 
 // Get the struct key
-func (s StructNested) Key() StructNestedKey {
+func (s *StructNested) Key() StructNestedKey {
     return StructNestedKey{
         s.StructOptional.Key(),
     }
 }
 
 // Convert struct to optional
-func (s StructNested) Optional() *StructNested {
-    return &s
+func (s *StructNested) Optional() *StructNested {
+    return s
 }
 
 // Convert struct to string
-func (s StructNested) String() string {
+func (s *StructNested) String() string {
     var sb strings.Builder
     sb.WriteString("StructNested(")
     sb.WriteString(s.StructOptional.String())
@@ -161,6 +161,6 @@ func (s StructNested) String() string {
 }
 
 // Convert struct to JSON
-func (s StructNested) JSON() ([]byte, error) {
-    return fbe.Json.Marshal(&s)
+func (s *StructNested) JSON() ([]byte, error) {
+    return fbe.Json.Marshal(s)
 }

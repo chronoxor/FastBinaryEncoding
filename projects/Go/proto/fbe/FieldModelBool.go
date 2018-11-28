@@ -14,12 +14,12 @@ type FieldModelBool struct {
 }
 
 // Get the field size
-func (fm FieldModelBool) FBESize() int { return 1 }
+func (fm *FieldModelBool) FBESize() int { return 1 }
 // Get the field extra size
-func (fm FieldModelBool) FBEExtra() int { return 0 }
+func (fm *FieldModelBool) FBEExtra() int { return 0 }
 
 // Get the field offset
-func (fm FieldModelBool) FBEOffset() int { return fm.offset }
+func (fm *FieldModelBool) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModelBool) SetFBEOffset(value int) { fm.offset = value }
 
@@ -34,15 +34,15 @@ func NewFieldModelBool(buffer *Buffer, offset int) *FieldModelBool {
 }
 
 // Check if the value is valid
-func (fm FieldModelBool) Verify() bool { return true }
+func (fm *FieldModelBool) Verify() bool { return true }
 
 // Get the value
-func (fm FieldModelBool) Get() (bool, error) {
+func (fm *FieldModelBool) Get() (bool, error) {
     return fm.GetDefault(false)
 }
 
 // Get the value with provided default value
-func (fm FieldModelBool) GetDefault(defaults bool) (bool, error) {
+func (fm *FieldModelBool) GetDefault(defaults bool) (bool, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }

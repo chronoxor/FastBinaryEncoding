@@ -24,7 +24,7 @@ type StructMapKey struct {
 }
 
 // Convert StructMap flags key to string
-func (k StructMapKey) String() string {
+func (k *StructMapKey) String() string {
     var sb strings.Builder
     sb.WriteString("StructMapKey(")
     sb.WriteString(")")
@@ -72,30 +72,30 @@ func NewStructMapFromJSON(buffer []byte) (*StructMap, error) {
 }
 
 // Struct shallow copy
-func (s StructMap) Copy() *StructMap {
-    var result = s
+func (s *StructMap) Copy() *StructMap {
+    var result = *s
     return &result
 }
 
 // Struct deep clone
-func (s StructMap) Clone() *StructMap {
-    var result = s
+func (s *StructMap) Clone() *StructMap {
+    var result = *s
     return &result
 }
 
 // Get the struct key
-func (s StructMap) Key() StructMapKey {
+func (s *StructMap) Key() StructMapKey {
     return StructMapKey{
     }
 }
 
 // Convert struct to optional
-func (s StructMap) Optional() *StructMap {
-    return &s
+func (s *StructMap) Optional() *StructMap {
+    return s
 }
 
 // Convert struct to string
-func (s StructMap) String() string {
+func (s *StructMap) String() string {
     var sb strings.Builder
     sb.WriteString("StructMap(")
     sb.WriteString("f1=")
@@ -277,6 +277,6 @@ func (s StructMap) String() string {
 }
 
 // Convert struct to JSON
-func (s StructMap) JSON() ([]byte, error) {
-    return fbe.Json.Marshal(&s)
+func (s *StructMap) JSON() ([]byte, error) {
+    return fbe.Json.Marshal(s)
 }

@@ -25,7 +25,7 @@ type BalanceKey struct {
 }
 
 // Convert Balance flags key to string
-func (k BalanceKey) String() string {
+func (k *BalanceKey) String() string {
     var sb strings.Builder
     sb.WriteString("BalanceKey(")
     sb.WriteString(k.BalanceKey.String())
@@ -58,31 +58,31 @@ func NewBalanceFromJSON(buffer []byte) (*Balance, error) {
 }
 
 // Struct shallow copy
-func (s Balance) Copy() *Balance {
-    var result = s
+func (s *Balance) Copy() *Balance {
+    var result = *s
     return &result
 }
 
 // Struct deep clone
-func (s Balance) Clone() *Balance {
-    var result = s
+func (s *Balance) Clone() *Balance {
+    var result = *s
     return &result
 }
 
 // Get the struct key
-func (s Balance) Key() BalanceKey {
+func (s *Balance) Key() BalanceKey {
     return BalanceKey{
         s.Balance.Key(),
     }
 }
 
 // Convert struct to optional
-func (s Balance) Optional() *Balance {
-    return &s
+func (s *Balance) Optional() *Balance {
+    return s
 }
 
 // Convert struct to string
-func (s Balance) String() string {
+func (s *Balance) String() string {
     var sb strings.Builder
     sb.WriteString("Balance(")
     sb.WriteString(s.Balance.String())
@@ -93,6 +93,6 @@ func (s Balance) String() string {
 }
 
 // Convert struct to JSON
-func (s Balance) JSON() ([]byte, error) {
-    return fbe.Json.Marshal(&s)
+func (s *Balance) JSON() ([]byte, error) {
+    return fbe.Json.Marshal(s)
 }

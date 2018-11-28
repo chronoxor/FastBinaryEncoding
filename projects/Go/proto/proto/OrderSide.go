@@ -39,8 +39,8 @@ func (e OrderSide) Key() OrderSideKey {
 }
 
 // Convert enum to optional
-func (e OrderSide) Optional() *OrderSide {
-    return &e
+func (e *OrderSide) Optional() *OrderSide {
+    return e
 }
 
 // Convert enum to string

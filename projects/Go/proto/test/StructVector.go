@@ -24,7 +24,7 @@ type StructVectorKey struct {
 }
 
 // Convert StructVector flags key to string
-func (k StructVectorKey) String() string {
+func (k *StructVectorKey) String() string {
     var sb strings.Builder
     sb.WriteString("StructVectorKey(")
     sb.WriteString(")")
@@ -72,30 +72,30 @@ func NewStructVectorFromJSON(buffer []byte) (*StructVector, error) {
 }
 
 // Struct shallow copy
-func (s StructVector) Copy() *StructVector {
-    var result = s
+func (s *StructVector) Copy() *StructVector {
+    var result = *s
     return &result
 }
 
 // Struct deep clone
-func (s StructVector) Clone() *StructVector {
-    var result = s
+func (s *StructVector) Clone() *StructVector {
+    var result = *s
     return &result
 }
 
 // Get the struct key
-func (s StructVector) Key() StructVectorKey {
+func (s *StructVector) Key() StructVectorKey {
     return StructVectorKey{
     }
 }
 
 // Convert struct to optional
-func (s StructVector) Optional() *StructVector {
-    return &s
+func (s *StructVector) Optional() *StructVector {
+    return s
 }
 
 // Convert struct to string
-func (s StructVector) String() string {
+func (s *StructVector) String() string {
     var sb strings.Builder
     sb.WriteString("StructVector(")
     sb.WriteString("f1=")
@@ -263,6 +263,6 @@ func (s StructVector) String() string {
 }
 
 // Convert struct to JSON
-func (s StructVector) JSON() ([]byte, error) {
-    return fbe.Json.Marshal(&s)
+func (s *StructVector) JSON() ([]byte, error) {
+    return fbe.Json.Marshal(s)
 }

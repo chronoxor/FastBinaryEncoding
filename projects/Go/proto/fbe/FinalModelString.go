@@ -14,10 +14,10 @@ type FinalModelString struct {
 }
 
 // Get the allocation size
-func (fm FinalModelString) FBEAllocationSize(value string) int { return 4 + 3 * (len(value) + 1) }
+func (fm *FinalModelString) FBEAllocationSize(value string) int { return 4 + 3 * (len(value) + 1) }
 
 // Get the final offset
-func (fm FinalModelString) FBEOffset() int { return fm.offset }
+func (fm *FinalModelString) FBEOffset() int { return fm.offset }
 // Set the final offset
 func (fm *FinalModelString) SetFBEOffset(value int) { fm.offset = value }
 
@@ -32,7 +32,7 @@ func NewFinalModelString(buffer *Buffer, offset int) *FinalModelString {
 }
 
 // Check if the string value is valid
-func (fm FinalModelString) Verify() (bool, int) {
+func (fm *FinalModelString) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
         return false, 0
     }
@@ -46,7 +46,7 @@ func (fm FinalModelString) Verify() (bool, int) {
 }
 
 // Get the string value
-func (fm FinalModelString) Get() (string, int, error) {
+func (fm *FinalModelString) Get() (string, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
         return "", 0, nil
     }

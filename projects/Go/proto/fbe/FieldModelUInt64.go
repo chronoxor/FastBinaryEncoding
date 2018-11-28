@@ -14,12 +14,12 @@ type FieldModelUInt64 struct {
 }
 
 // Get the field size
-func (fm FieldModelUInt64) FBESize() int { return 8 }
+func (fm *FieldModelUInt64) FBESize() int { return 8 }
 // Get the field extra size
-func (fm FieldModelUInt64) FBEExtra() int { return 0 }
+func (fm *FieldModelUInt64) FBEExtra() int { return 0 }
 
 // Get the field offset
-func (fm FieldModelUInt64) FBEOffset() int { return fm.offset }
+func (fm *FieldModelUInt64) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModelUInt64) SetFBEOffset(value int) { fm.offset = value }
 
@@ -34,15 +34,15 @@ func NewFieldModelUInt64(buffer *Buffer, offset int) *FieldModelUInt64 {
 }
 
 // Check if the value is valid
-func (fm FieldModelUInt64) Verify() bool { return true }
+func (fm *FieldModelUInt64) Verify() bool { return true }
 
 // Get the value
-func (fm FieldModelUInt64) Get() (uint64, error) {
+func (fm *FieldModelUInt64) Get() (uint64, error) {
     return fm.GetDefault(0)
 }
 
 // Get the value with provided default value
-func (fm FieldModelUInt64) GetDefault(defaults uint64) (uint64, error) {
+func (fm *FieldModelUInt64) GetDefault(defaults uint64) (uint64, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }

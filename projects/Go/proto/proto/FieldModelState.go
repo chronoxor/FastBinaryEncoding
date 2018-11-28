@@ -15,12 +15,12 @@ type FieldModelState struct {
 }
 
 // Get the field size
-func (fm FieldModelState) FBESize() int { return 1 }
+func (fm *FieldModelState) FBESize() int { return 1 }
 // Get the field extra size
-func (fm FieldModelState) FBEExtra() int { return 0 }
+func (fm *FieldModelState) FBEExtra() int { return 0 }
 
 // Get the field offset
-func (fm FieldModelState) FBEOffset() int { return fm.offset }
+func (fm *FieldModelState) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModelState) SetFBEOffset(value int) { fm.offset = value }
 
@@ -35,15 +35,15 @@ func NewFieldModelState(buffer *fbe.Buffer, offset int) *FieldModelState {
 }
 
 // Check if the value is valid
-func (fm FieldModelState) Verify() bool { return true }
+func (fm *FieldModelState) Verify() bool { return true }
 
 // Get the value
-func (fm FieldModelState) Get() (State, error) {
+func (fm *FieldModelState) Get() (State, error) {
     return fm.GetDefault(0)
 }
 
 // Get the value with provided default value
-func (fm FieldModelState) GetDefault(defaults State) (State, error) {
+func (fm *FieldModelState) GetDefault(defaults State) (State, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return State(0), nil
     }

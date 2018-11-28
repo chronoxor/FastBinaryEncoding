@@ -14,13 +14,13 @@ type FinalModelWChar struct {
 }
 
 // Get the allocation size
-func (fm FinalModelWChar) FBEAllocationSize(value rune) int { return fm.FBESize() }
+func (fm *FinalModelWChar) FBEAllocationSize(value rune) int { return fm.FBESize() }
 
 // Get the final size
-func (fm FinalModelWChar) FBESize() int { return 4 }
+func (fm *FinalModelWChar) FBESize() int { return 4 }
 
 // Get the final offset
-func (fm FinalModelWChar) FBEOffset() int { return fm.offset }
+func (fm *FinalModelWChar) FBEOffset() int { return fm.offset }
 // Set the final offset
 func (fm *FinalModelWChar) SetFBEOffset(value int) { fm.offset = value }
 
@@ -35,7 +35,7 @@ func NewFinalModelWChar(buffer *Buffer, offset int) *FinalModelWChar {
 }
 
 // Check if the value is valid
-func (fm FinalModelWChar) Verify() (bool, int) {
+func (fm *FinalModelWChar) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return false, 0
     }
@@ -44,7 +44,7 @@ func (fm FinalModelWChar) Verify() (bool, int) {
 }
 
 // Get the value
-func (fm FinalModelWChar) Get() (rune, int, error) {
+func (fm *FinalModelWChar) Get() (rune, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return '\000', 0, errors.New("model is broken")
     }

@@ -357,7 +357,7 @@ func TimestampUTC() Timestamp {
 }
 
 // Convert timestamp to JSON
-func (t Timestamp) MarshalJSON() ([]byte, error) {
+func (t *Timestamp) MarshalJSON() ([]byte, error) {
     timestamp := t.UnixNano()
     return Json.Marshal(&timestamp)
 }
@@ -476,15 +476,15 @@ type Buffer struct {
 }
 
 // Is the buffer empty?
-func (b Buffer) Empty() bool { return (len(b.data) == 0) || (b.size <= 0) }
+func (b *Buffer) Empty() bool { return (len(b.data) == 0) || (b.size <= 0) }
 // Get bytes memory buffer
-func (b Buffer) Data() []byte { return b.data }
+func (b *Buffer) Data() []byte { return b.data }
 // Get bytes memory buffer capacity
-func (b Buffer) Capacity() int { return len(b.data) }
+func (b *Buffer) Capacity() int { return len(b.data) }
 // Get bytes memory buffer size
-func (b Buffer) Size() int { return b.size }
+func (b *Buffer) Size() int { return b.size }
 // Get bytes memory buffer offset
-func (b Buffer) Offset() int { return b.offset }
+func (b *Buffer) Offset() int { return b.offset }
 
 // Create an empty buffer
 func NewEmptyBuffer() *Buffer {
@@ -895,12 +895,12 @@ type FieldModel_NAME_ struct {
 }
 
 // Get the field size
-func (fm FieldModel_NAME_) FBESize() int { return _SIZE_ }
+func (fm *FieldModel_NAME_) FBESize() int { return _SIZE_ }
 // Get the field extra size
-func (fm FieldModel_NAME_) FBEExtra() int { return 0 }
+func (fm *FieldModel_NAME_) FBEExtra() int { return 0 }
 
 // Get the field offset
-func (fm FieldModel_NAME_) FBEOffset() int { return fm.offset }
+func (fm *FieldModel_NAME_) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModel_NAME_) SetFBEOffset(value int) { fm.offset = value }
 
@@ -915,15 +915,15 @@ func NewFieldModel_NAME_(buffer *Buffer, offset int) *FieldModel_NAME_ {
 }
 
 // Check if the value is valid
-func (fm FieldModel_NAME_) Verify() bool { return true }
+func (fm *FieldModel_NAME_) Verify() bool { return true }
 
 // Get the value
-func (fm FieldModel_NAME_) Get() (_TYPE_, error) {
+func (fm *FieldModel_NAME_) Get() (_TYPE_, error) {
     return fm.GetDefault(_DEFAULTS_)
 }
 
 // Get the value with provided default value
-func (fm FieldModel_NAME_) GetDefault(defaults _TYPE_) (_TYPE_, error) {
+func (fm *FieldModel_NAME_) GetDefault(defaults _TYPE_) (_TYPE_, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }
@@ -983,12 +983,12 @@ type FieldModelDecimal struct {
 }
 
 // Get the field size
-func (fm FieldModelDecimal) FBESize() int { return 16 }
+func (fm *FieldModelDecimal) FBESize() int { return 16 }
 // Get the field extra size
-func (fm FieldModelDecimal) FBEExtra() int { return 0 }
+func (fm *FieldModelDecimal) FBEExtra() int { return 0 }
 
 // Get the field offset
-func (fm FieldModelDecimal) FBEOffset() int { return fm.offset }
+func (fm *FieldModelDecimal) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModelDecimal) SetFBEOffset(value int) { fm.offset = value }
 
@@ -1003,15 +1003,15 @@ func NewFieldModelDecimal(buffer *Buffer, offset int) *FieldModelDecimal {
 }
 
 // Check if the decimal value is valid
-func (fm FieldModelDecimal) Verify() bool { return true }
+func (fm *FieldModelDecimal) Verify() bool { return true }
 
 // Get the decimal value
-func (fm FieldModelDecimal) Get() (Decimal, error) {
+func (fm *FieldModelDecimal) Get() (Decimal, error) {
     return fm.GetDefault(DecimalZero())
 }
 
 // Get the decimal value with provided default value
-func (fm FieldModelDecimal) GetDefault(defaults Decimal) (Decimal, error) {
+func (fm *FieldModelDecimal) GetDefault(defaults Decimal) (Decimal, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }
@@ -1127,12 +1127,12 @@ type FieldModelTimestamp struct {
 }
 
 // Get the field size
-func (fm FieldModelTimestamp) FBESize() int { return 8 }
+func (fm *FieldModelTimestamp) FBESize() int { return 8 }
 // Get the field extra size
-func (fm FieldModelTimestamp) FBEExtra() int { return 0 }
+func (fm *FieldModelTimestamp) FBEExtra() int { return 0 }
 
 // Get the field offset
-func (fm FieldModelTimestamp) FBEOffset() int { return fm.offset }
+func (fm *FieldModelTimestamp) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModelTimestamp) SetFBEOffset(value int) { fm.offset = value }
 
@@ -1147,15 +1147,15 @@ func NewFieldModelTimestamp(buffer *Buffer, offset int) *FieldModelTimestamp {
 }
 
 // Check if the timestamp value is valid
-func (fm FieldModelTimestamp) Verify() bool { return true }
+func (fm *FieldModelTimestamp) Verify() bool { return true }
 
 // Get the timestamp value
-func (fm FieldModelTimestamp) Get() (Timestamp, error) {
+func (fm *FieldModelTimestamp) Get() (Timestamp, error) {
     return fm.GetDefault(TimestampEpoch())
 }
 
 // Get the timestamp value with provided default value
-func (fm FieldModelTimestamp) GetDefault(defaults Timestamp) (Timestamp, error) {
+func (fm *FieldModelTimestamp) GetDefault(defaults Timestamp) (Timestamp, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }
@@ -1209,12 +1209,12 @@ type FieldModelUUID struct {
 }
 
 // Get the field size
-func (fm FieldModelUUID) FBESize() int { return 16 }
+func (fm *FieldModelUUID) FBESize() int { return 16 }
 // Get the field extra size
-func (fm FieldModelUUID) FBEExtra() int { return 0 }
+func (fm *FieldModelUUID) FBEExtra() int { return 0 }
 
 // Get the field offset
-func (fm FieldModelUUID) FBEOffset() int { return fm.offset }
+func (fm *FieldModelUUID) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModelUUID) SetFBEOffset(value int) { fm.offset = value }
 
@@ -1229,15 +1229,15 @@ func NewFieldModelUUID(buffer *Buffer, offset int) *FieldModelUUID {
 }
 
 // Check if the UUID value is valid
-func (fm FieldModelUUID) Verify() bool { return true }
+func (fm *FieldModelUUID) Verify() bool { return true }
 
 // Get the UUID value
-func (fm FieldModelUUID) Get() (UUID, error) {
+func (fm *FieldModelUUID) Get() (UUID, error) {
     return fm.GetDefault(UUIDNil())
 }
 
 // Get the UUID value with provided default value
-func (fm FieldModelUUID) GetDefault(defaults UUID) (UUID, error) {
+func (fm *FieldModelUUID) GetDefault(defaults UUID) (UUID, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }
@@ -1291,9 +1291,9 @@ type FieldModelBytes struct {
 }
 
 // Get the field size
-func (fm FieldModelBytes) FBESize() int { return 4 }
+func (fm *FieldModelBytes) FBESize() int { return 4 }
 // Get the field extra size
-func (fm FieldModelBytes) FBEExtra() int {
+func (fm *FieldModelBytes) FBEExtra() int {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0
     }
@@ -1308,7 +1308,7 @@ func (fm FieldModelBytes) FBEExtra() int {
 }
 
 // Get the field offset
-func (fm FieldModelBytes) FBEOffset() int { return fm.offset }
+func (fm *FieldModelBytes) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModelBytes) SetFBEOffset(value int) { fm.offset = value }
 
@@ -1323,7 +1323,7 @@ func NewFieldModelBytes(buffer *Buffer, offset int) *FieldModelBytes {
 }
 
 // Check if the bytes value is valid
-func (fm FieldModelBytes) Verify() bool {
+func (fm *FieldModelBytes) Verify() bool {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return true
     }
@@ -1346,12 +1346,12 @@ func (fm FieldModelBytes) Verify() bool {
 }
 
 // Get the bytes value
-func (fm FieldModelBytes) Get() ([]byte, error) {
+func (fm *FieldModelBytes) Get() ([]byte, error) {
     return fm.GetDefault(make([]byte, 0))
 }
 
 // Get the bytes value with provided default value
-func (fm FieldModelBytes) GetDefault(defaults []byte) ([]byte, error) {
+func (fm *FieldModelBytes) GetDefault(defaults []byte) ([]byte, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }
@@ -1427,9 +1427,9 @@ type FieldModelString struct {
 }
 
 // Get the field size
-func (fm FieldModelString) FBESize() int { return 4 }
+func (fm *FieldModelString) FBESize() int { return 4 }
 // Get the field extra size
-func (fm FieldModelString) FBEExtra() int {
+func (fm *FieldModelString) FBEExtra() int {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0
     }
@@ -1444,7 +1444,7 @@ func (fm FieldModelString) FBEExtra() int {
 }
 
 // Get the field offset
-func (fm FieldModelString) FBEOffset() int { return fm.offset }
+func (fm *FieldModelString) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModelString) SetFBEOffset(value int) { fm.offset = value }
 
@@ -1459,7 +1459,7 @@ func NewFieldModelString(buffer *Buffer, offset int) *FieldModelString {
 }
 
 // Check if the string value is valid
-func (fm FieldModelString) Verify() bool {
+func (fm *FieldModelString) Verify() bool {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return true
     }
@@ -1482,12 +1482,12 @@ func (fm FieldModelString) Verify() bool {
 }
 
 // Get the string value
-func (fm FieldModelString) Get() (string, error) {
+func (fm *FieldModelString) Get() (string, error) {
     return fm.GetDefault("")
 }
 
 // Get the string value with provided default value
-func (fm FieldModelString) GetDefault(defaults string) (string, error) {
+func (fm *FieldModelString) GetDefault(defaults string) (string, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }
@@ -2269,12 +2269,12 @@ type FieldModel_NAME_ struct {
 }
 
 // Get the field size
-func (fm FieldModel_NAME_) FBESize() int { return _SIZE_ }
+func (fm *FieldModel_NAME_) FBESize() int { return _SIZE_ }
 // Get the field extra size
-func (fm FieldModel_NAME_) FBEExtra() int { return 0 }
+func (fm *FieldModel_NAME_) FBEExtra() int { return 0 }
 
 // Get the field offset
-func (fm FieldModel_NAME_) FBEOffset() int { return fm.offset }
+func (fm *FieldModel_NAME_) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModel_NAME_) SetFBEOffset(value int) { fm.offset = value }
 
@@ -2289,15 +2289,15 @@ func NewFieldModel_NAME_(buffer *fbe.Buffer, offset int) *FieldModel_NAME_ {
 }
 
 // Check if the value is valid
-func (fm FieldModel_NAME_) Verify() bool { return true }
+func (fm *FieldModel_NAME_) Verify() bool { return true }
 
 // Get the value
-func (fm FieldModel_NAME_) Get() (_NAME_, error) {
+func (fm *FieldModel_NAME_) Get() (_NAME_, error) {
     return fm.GetDefault(0)
 }
 
 // Get the value with provided default value
-func (fm FieldModel_NAME_) GetDefault(defaults _NAME_) (_NAME_, error) {
+func (fm *FieldModel_NAME_) GetDefault(defaults _NAME_) (_NAME_, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return _NAME_(0), nil
     }
@@ -2355,13 +2355,13 @@ type FinalModel_NAME_ struct {
 }
 
 // Get the allocation size
-func (fm FinalModel_NAME_) FBEAllocationSize(value _TYPE_) int { return fm.FBESize() }
+func (fm *FinalModel_NAME_) FBEAllocationSize(value _TYPE_) int { return fm.FBESize() }
 
 // Get the final size
-func (fm FinalModel_NAME_) FBESize() int { return _SIZE_ }
+func (fm *FinalModel_NAME_) FBESize() int { return _SIZE_ }
 
 // Get the final offset
-func (fm FinalModel_NAME_) FBEOffset() int { return fm.offset }
+func (fm *FinalModel_NAME_) FBEOffset() int { return fm.offset }
 // Set the final offset
 func (fm *FinalModel_NAME_) SetFBEOffset(value int) { fm.offset = value }
 
@@ -2376,7 +2376,7 @@ func NewFinalModel_NAME_(buffer *Buffer, offset int) *FinalModel_NAME_ {
 }
 
 // Check if the value is valid
-func (fm FinalModel_NAME_) Verify() (bool, int) {
+func (fm *FinalModel_NAME_) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return false, 0
     }
@@ -2385,7 +2385,7 @@ func (fm FinalModel_NAME_) Verify() (bool, int) {
 }
 
 // Get the value
-func (fm FinalModel_NAME_) Get() (_TYPE_, int, error) {
+func (fm *FinalModel_NAME_) Get() (_TYPE_, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return _DEFAULTS_, 0, errors.New("model is broken")
     }
@@ -2445,13 +2445,13 @@ type FinalModelDecimal struct {
 }
 
 // Get the allocation size
-func (fm FinalModelDecimal) FBEAllocationSize(value Decimal) int { return fm.FBESize() }
+func (fm *FinalModelDecimal) FBEAllocationSize(value Decimal) int { return fm.FBESize() }
 
 // Get the final size
-func (fm FinalModelDecimal) FBESize() int { return 16 }
+func (fm *FinalModelDecimal) FBESize() int { return 16 }
 
 // Get the final offset
-func (fm FinalModelDecimal) FBEOffset() int { return fm.offset }
+func (fm *FinalModelDecimal) FBEOffset() int { return fm.offset }
 // Set the final offset
 func (fm *FinalModelDecimal) SetFBEOffset(value int) { fm.offset = value }
 
@@ -2466,7 +2466,7 @@ func NewFinalModelDecimal(buffer *Buffer, offset int) *FinalModelDecimal {
 }
 
 // Check if the decimal value is valid
-func (fm FinalModelDecimal) Verify() (bool, int) {
+func (fm *FinalModelDecimal) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return false, 0
     }
@@ -2475,7 +2475,7 @@ func (fm FinalModelDecimal) Verify() (bool, int) {
 }
 
 // Get the decimal value
-func (fm FinalModelDecimal) Get() (Decimal, int, error) {
+func (fm *FinalModelDecimal) Get() (Decimal, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return DecimalZero(), 0, errors.New("model is broken")
     }
@@ -2591,13 +2591,13 @@ type FinalModelTimestamp struct {
 }
 
 // Get the allocation size
-func (fm FinalModelTimestamp) FBEAllocationSize(value Timestamp) int { return fm.FBESize() }
+func (fm *FinalModelTimestamp) FBEAllocationSize(value Timestamp) int { return fm.FBESize() }
 
 // Get the final size
-func (fm FinalModelTimestamp) FBESize() int { return 8 }
+func (fm *FinalModelTimestamp) FBESize() int { return 8 }
 
 // Get the final offset
-func (fm FinalModelTimestamp) FBEOffset() int { return fm.offset }
+func (fm *FinalModelTimestamp) FBEOffset() int { return fm.offset }
 // Set the final offset
 func (fm *FinalModelTimestamp) SetFBEOffset(value int) { fm.offset = value }
 
@@ -2612,7 +2612,7 @@ func NewFinalModelTimestamp(buffer *Buffer, offset int) *FinalModelTimestamp {
 }
 
 // Check if the timestamp value is valid
-func (fm FinalModelTimestamp) Verify() (bool, int) {
+func (fm *FinalModelTimestamp) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return false, 0
     }
@@ -2621,7 +2621,7 @@ func (fm FinalModelTimestamp) Verify() (bool, int) {
 }
 
 // Get the timestamp value
-func (fm FinalModelTimestamp) Get() (Timestamp, int, error) {
+func (fm *FinalModelTimestamp) Get() (Timestamp, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return TimestampEpoch(), 0, errors.New("model is broken")
     }
@@ -2675,13 +2675,13 @@ type FinalModelUUID struct {
 }
 
 // Get the allocation size
-func (fm FinalModelUUID) FBEAllocationSize(value UUID) int { return fm.FBESize() }
+func (fm *FinalModelUUID) FBEAllocationSize(value UUID) int { return fm.FBESize() }
 
 // Get the final size
-func (fm FinalModelUUID) FBESize() int { return 16 }
+func (fm *FinalModelUUID) FBESize() int { return 16 }
 
 // Get the final offset
-func (fm FinalModelUUID) FBEOffset() int { return fm.offset }
+func (fm *FinalModelUUID) FBEOffset() int { return fm.offset }
 // Set the final offset
 func (fm *FinalModelUUID) SetFBEOffset(value int) { fm.offset = value }
 
@@ -2696,7 +2696,7 @@ func NewFinalModelUUID(buffer *Buffer, offset int) *FinalModelUUID {
 }
 
 // Check if the UUID value is valid
-func (fm FinalModelUUID) Verify() (bool, int) {
+func (fm *FinalModelUUID) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return false, 0
     }
@@ -2705,7 +2705,7 @@ func (fm FinalModelUUID) Verify() (bool, int) {
 }
 
 // Get the UUID value
-func (fm FinalModelUUID) Get() (UUID, int, error) {
+func (fm *FinalModelUUID) Get() (UUID, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return UUIDNil(), 0, errors.New("model is broken")
     }
@@ -2759,10 +2759,10 @@ type FinalModelBytes struct {
 }
 
 // Get the allocation size
-func (fm FinalModelBytes) FBEAllocationSize(value []byte) int { return 4 + len(value) }
+func (fm *FinalModelBytes) FBEAllocationSize(value []byte) int { return 4 + len(value) }
 
 // Get the final offset
-func (fm FinalModelBytes) FBEOffset() int { return fm.offset }
+func (fm *FinalModelBytes) FBEOffset() int { return fm.offset }
 // Set the final offset
 func (fm *FinalModelBytes) SetFBEOffset(value int) { fm.offset = value }
 
@@ -2777,7 +2777,7 @@ func NewFinalModelBytes(buffer *Buffer, offset int) *FinalModelBytes {
 }
 
 // Check if the bytes value is valid
-func (fm FinalModelBytes) Verify() (bool, int) {
+func (fm *FinalModelBytes) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
         return false, 0
     }
@@ -2791,7 +2791,7 @@ func (fm FinalModelBytes) Verify() (bool, int) {
 }
 
 // Get the bytes value
-func (fm FinalModelBytes) Get() ([]byte, int, error) {
+func (fm *FinalModelBytes) Get() ([]byte, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
         return make([]byte, 0), 0, nil
     }
@@ -2856,10 +2856,10 @@ type FinalModelString struct {
 }
 
 // Get the allocation size
-func (fm FinalModelString) FBEAllocationSize(value string) int { return 4 + 3 * (len(value) + 1) }
+func (fm *FinalModelString) FBEAllocationSize(value string) int { return 4 + 3 * (len(value) + 1) }
 
 // Get the final offset
-func (fm FinalModelString) FBEOffset() int { return fm.offset }
+func (fm *FinalModelString) FBEOffset() int { return fm.offset }
 // Set the final offset
 func (fm *FinalModelString) SetFBEOffset(value int) { fm.offset = value }
 
@@ -2874,7 +2874,7 @@ func NewFinalModelString(buffer *Buffer, offset int) *FinalModelString {
 }
 
 // Check if the string value is valid
-func (fm FinalModelString) Verify() (bool, int) {
+func (fm *FinalModelString) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
         return false, 0
     }
@@ -2888,7 +2888,7 @@ func (fm FinalModelString) Verify() (bool, int) {
 }
 
 // Get the string value
-func (fm FinalModelString) Get() (string, int, error) {
+func (fm *FinalModelString) Get() (string, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
         return "", 0, nil
     }
@@ -3414,13 +3414,13 @@ type FinalModel_NAME_ struct {
 }
 
 // Get the allocation size
-func (fm FinalModel_NAME_) FBEAllocationSize(value _NAME_) int { return fm.FBESize() }
+func (fm *FinalModel_NAME_) FBEAllocationSize(value _NAME_) int { return fm.FBESize() }
 
 // Get the final size
-func (fm FinalModel_NAME_) FBESize() int { return _SIZE_ }
+func (fm *FinalModel_NAME_) FBESize() int { return _SIZE_ }
 
 // Get the final offset
-func (fm FinalModel_NAME_) FBEOffset() int { return fm.offset }
+func (fm *FinalModel_NAME_) FBEOffset() int { return fm.offset }
 // Set the final offset
 func (fm *FinalModel_NAME_) SetFBEOffset(value int) { fm.offset = value }
 
@@ -3435,7 +3435,7 @@ func NewFinalModel_NAME_(buffer *fbe.Buffer, offset int) *FinalModel_NAME_ {
 }
 
 // Check if the value is valid
-func (fm FinalModel_NAME_) Verify() (bool, int) {
+func (fm *FinalModel_NAME_) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return false, 0
     }
@@ -3444,7 +3444,7 @@ func (fm FinalModel_NAME_) Verify() (bool, int) {
 }
 
 // Get the value
-func (fm FinalModel_NAME_) Get() (_NAME_, int, error) {
+func (fm *FinalModel_NAME_) Get() (_NAME_, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return _NAME_(0), 0, errors.New("model is broken")
     }
@@ -3974,9 +3974,9 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
     // Generate enum Optional() method
     WriteLine();
     WriteLineIndent("// Convert enum to optional");
-    WriteLineIndent("func (e " + enum_name + ") Optional() *" + enum_name + " {");
+    WriteLineIndent("func (e *" + enum_name + ") Optional() *" + enum_name + " {");
     Indent(1);
-    WriteLineIndent("return &e");
+    WriteLineIndent("return e");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -4162,9 +4162,9 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::sh
     // Generate flags Optional() method
     WriteLine();
     WriteLineIndent("// Convert flags to optional");
-    WriteLineIndent("func (f " + flags_name + ") Optional() *" + flags_name + " {");
+    WriteLineIndent("func (f *" + flags_name + ") Optional() *" + flags_name + " {");
     Indent(1);
-    WriteLineIndent("return &f");
+    WriteLineIndent("return f");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -4292,7 +4292,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     // Generate struct key String() method
     WriteLine();
     WriteLineIndent("// Convert " + struct_name + " flags key to string");
-    WriteLineIndent("func (k " + struct_name + "Key) String() string {");
+    WriteLineIndent("func (k *" + struct_name + "Key) String() string {");
     Indent(1);
     WriteLineIndent("var sb strings.Builder");
     WriteLineIndent("sb.WriteString(\"" + *s->name + "Key(\")");
@@ -4505,9 +4505,9 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     // Generate struct Copy() method
     WriteLine();
     WriteLineIndent("// Struct shallow copy");
-    WriteLineIndent("func (s " + struct_name + ") Copy() *" + struct_name + " {");
+    WriteLineIndent("func (s *" + struct_name + ") Copy() *" + struct_name + " {");
     Indent(1);
-    WriteLineIndent("var result = s");
+    WriteLineIndent("var result = *s");
     WriteLineIndent("return &result");
     Indent(-1);
     WriteLineIndent("}");
@@ -4515,9 +4515,9 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     // Generate struct Clone() method
     WriteLine();
     WriteLineIndent("// Struct deep clone");
-    WriteLineIndent("func (s " + struct_name + ") Clone() *" + struct_name + " {");
+    WriteLineIndent("func (s *" + struct_name + ") Clone() *" + struct_name + " {");
     Indent(1);
-    WriteLineIndent("var result = s");
+    WriteLineIndent("var result = *s");
     WriteLineIndent("return &result");
     Indent(-1);
     WriteLineIndent("}");
@@ -4525,7 +4525,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     // Generate struct Key() method
     WriteLine();
     WriteLineIndent("// Get the struct key");
-    WriteLineIndent("func (s " + struct_name + ") Key() " + struct_name + "Key {");
+    WriteLineIndent("func (s *" + struct_name + ") Key() " + struct_name + "Key {");
     Indent(1);
     WriteLineIndent("return " + struct_name + "Key{");
     Indent(1);
@@ -4543,16 +4543,16 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     // Generate struct Optional() method
     WriteLine();
     WriteLineIndent("// Convert struct to optional");
-    WriteLineIndent("func (s " + struct_name + ") Optional() *" + struct_name + " {");
+    WriteLineIndent("func (s *" + struct_name + ") Optional() *" + struct_name + " {");
     Indent(1);
-    WriteLineIndent("return &s");
+    WriteLineIndent("return s");
     Indent(-1);
     WriteLineIndent("}");
 
     // Generate struct String() method
     WriteLine();
     WriteLineIndent("// Convert struct to string");
-    WriteLineIndent("func (s " + struct_name + ") String() string {");
+    WriteLineIndent("func (s *" + struct_name + ") String() string {");
     Indent(1);
     WriteLineIndent("var sb strings.Builder");
     WriteLineIndent("sb.WriteString(\"" + *s->name + "(\")");
@@ -4706,9 +4706,9 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
         // Generate struct JSON() method
         WriteLine();
         WriteLineIndent("// Convert struct to JSON");
-        WriteLineIndent("func (s " + struct_name + ") JSON() ([]byte, error) {");
+        WriteLineIndent("func (s *" + struct_name + ") JSON() ([]byte, error) {");
         Indent(1);
-        WriteLineIndent("return fbe.Json.Marshal(&s)");
+        WriteLineIndent("return fbe.Json.Marshal(s)");
         Indent(-1);
         WriteLineIndent("}");
     }
@@ -4941,429 +4941,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
             }
         }
     }
-/*
-    std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "object";
-
-    // Generate struct begin
-    WriteLine();
-    WriteLine();
-    WriteLineIndent("@functools.total_ordering");
-    WriteLineIndent("class " + *s->name + "(" + base_type + "):");
-    Indent(1);
-
-    // Generate struct __slots__
-    WriteIndent("__slots__ = ");
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            Write("\"" + *field->name + "\", ");
-    WriteLine();
-
-    // Generate struct constructor
-    WriteLine();
-    WriteIndent("def __init__(self");
-    if (s->base && !s->base->empty())
-        Write(", parent=None");
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
-        {
-            Write(", " + *field->name + "=");
-            if (field->value)
-                Write(ConvertConstant(*field->type, *field->value, field->optional));
-            else if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                Write("None");
-            else
-                Write(ConvertDefaultOrNone(*field->type, field->optional));
-        }
-    }
-    WriteLine("):");
-    Indent(1);
-    if (s->base && !s->base->empty())
-    {
-        WriteLineIndent("super().__init__()");
-        WriteLineIndent("if parent is None:");
-        Indent(1);
-        WriteLineIndent("parent = " + base_type + "()");
-        Indent(-1);
-        WriteLineIndent("super().copy(parent)");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
-        {
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash || (!field->value && !field->optional && !IsPrimitiveType(*field->type) && (*field->type != "string") && (*field->type != "timestamp")))
-            {
-                WriteLineIndent("if " + *field->name + " is None:");
-                Indent(1);
-                WriteLineIndent(*field->name + " = " + ConvertDefault(*field));
-                Indent(-1);
-            }
-        }
-        for (const auto& field : s->body->fields)
-            WriteLineIndent("self." + *field->name + " = " + *field->name);
-    }
-    Indent(-1);
-
-    // Generate struct copy() method
-    WriteLine();
-    WriteLineIndent("# Struct shallow copy");
-    WriteLineIndent("def copy(self, other):");
-    Indent(1);
-    if (s->base && !s->base->empty())
-        WriteLineIndent("super().copy(other)");
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            WriteLineIndent("self." + *field->name + " = other." + *field->name);
-    WriteLineIndent("return self");
-    Indent(-1);
-
-    // Generate struct clone() method
-    WriteLine();
-    WriteLineIndent("# Struct deep clone");
-    WriteLineIndent("def clone(self):");
-    Indent(1);
-    WriteLineIndent("# Serialize the struct to the FBE stream");
-    WriteLineIndent("writer = " + *s->name + "Model(fbe.WriteBuffer())");
-    WriteLineIndent("writer.serialize(self)");
-    WriteLine();
-    WriteLineIndent("# Deserialize the struct from the FBE stream");
-    WriteLineIndent("reader = " + *s->name + "Model(fbe.ReadBuffer())");
-    WriteLineIndent("reader.attach_buffer(writer.buffer)");
-    WriteLineIndent("return reader.deserialize()[0]");
-    Indent(-1);
-
-    // Generate struct __eq__ method
-    WriteLine();
-    WriteLineIndent("def __eq__(self, other):");
-    Indent(1);
-    WriteLineIndent("if not isinstance(self, other.__class__):");
-    Indent(1);
-    WriteLineIndent("return NotImplemented");
-    Indent(-1);
-    if (s->base && !s->base->empty())
-    {
-        WriteLineIndent("if not super().__eq__(other):");
-        Indent(1);
-        WriteLineIndent("return False");
-        Indent(-1);
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
-        {
-            if (field->keys)
-            {
-                WriteLineIndent("if not self." + *field->name + " == other." + *field->name + ":");
-                Indent(1);
-                WriteLineIndent("return False");
-                Indent(-1);
-            }
-        }
-    }
-    WriteLineIndent("return True");
-    Indent(-1);
-
-    // Generate struct __lt__ method
-    WriteLine();
-    WriteLineIndent("def __lt__(self, other):");
-    Indent(1);
-    WriteLineIndent("if not isinstance(self, other.__class__):");
-    Indent(1);
-    WriteLineIndent("return NotImplemented");
-    Indent(-1);
-    if (s->base && !s->base->empty())
-    {
-        WriteLineIndent("if super().__lt__(other):");
-        Indent(1);
-        WriteLineIndent("return True");
-        Indent(-1);
-        WriteLineIndent("if super().__eq__(other):");
-        Indent(1);
-        WriteLineIndent("return False");
-        Indent(-1);
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
-        {
-            if (field->keys)
-            {
-                WriteLineIndent("if self." + *field->name + " < other." + *field->name + ":");
-                Indent(1);
-                WriteLineIndent("return True");
-                Indent(-1);
-                WriteLineIndent("if self." + *field->name + " == other." + *field->name + ":");
-                Indent(1);
-                WriteLineIndent("return False");
-                Indent(-1);
-            }
-        }
-    }
-    WriteLineIndent("return False");
-    Indent(-1);
-
-    // Generate struct __key__ property
-    WriteLine();
-    WriteLineIndent("@property");
-    WriteLineIndent("def __key__(self):");
-    Indent(1);
-    WriteIndent("return ");
-    if (s->base && !s->base->empty())
-        Write("super().__key__ + (");
-    bool empty = true;
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
-        {
-            if (field->keys)
-            {
-                Write("self." + *field->name + ", ");
-                empty = false;
-            }
-        }
-    }
-    if (s->base && !s->base->empty())
-        Write(")");
-    else if (empty)
-        Write("()");
-    WriteLine();
-    Indent(-1);
-
-    // Generate struct __hash__ method
-    WriteLine();
-    WriteLineIndent("def __hash__(self):");
-    Indent(1);
-    WriteLineIndent("return hash(self.__key__)");
-    Indent(-1);
-
-    // Generate flags __format__ method
-    WriteLine();
-    WriteLineIndent("def __format__(self, format_spec):");
-    Indent(1);
-    WriteLineIndent("return self.__str__()");
-    Indent(-1);
-
-    // Generate struct __str__ method
-    WriteLine();
-    WriteLineIndent("def __str__(self):");
-    Indent(1);
-    WriteLineIndent("sb = list()");
-    WriteLineIndent("sb.append(\"" + *s->name + "(\")");
-    bool first = true;
-    if (s->base && !s->base->empty())
-    {
-        WriteLineIndent("sb.append(" + base_type + ".__str__(self))");
-        first = false;
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
-        {
-            WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=\")");
-            if (field->array || field->vector)
-            {
-                WriteLineIndent("if self." + *field->name + " is not None:");
-                Indent(1);
-                WriteLineIndent("first = True");
-                WriteLineIndent("sb.append(\"[\")");
-                WriteLineIndent("sb.append(str(len(self." + *field->name + "))" + ")");
-                WriteLineIndent("sb.append(\"][\")");
-                WriteLineIndent("for item in self." + *field->name + ":");
-                Indent(1);
-                WriteOutputStreamItem(*field->type, "item", field->optional);
-                WriteLineIndent("first = False");
-                Indent(-1);
-                WriteLineIndent("sb.append(\"]\")");
-                Indent(-1);
-            }
-            else if (field->list)
-            {
-                WriteLineIndent("if self." + *field->name + " is not None:");
-                Indent(1);
-                WriteLineIndent("first = True");
-                WriteLineIndent("sb.append(\"[\")");
-                WriteLineIndent("sb.append(str(len(self." + *field->name + "))" + ")");
-                WriteLineIndent("sb.append(\"]<\")");
-                WriteLineIndent("for item in self." + *field->name + ":");
-                Indent(1);
-                WriteOutputStreamItem(*field->type, "item", field->optional);
-                WriteLineIndent("first = False");
-                Indent(-1);
-                WriteLineIndent("sb.append(\">\")");
-                Indent(-1);
-            }
-            else if (field->set)
-            {
-                WriteLineIndent("if self." + *field->name + " is not None:");
-                Indent(1);
-                WriteLineIndent("first = True");
-                WriteLineIndent("sb.append(\"[\")");
-                WriteLineIndent("sb.append(str(len(self." + *field->name + "))" + ")");
-                WriteLineIndent("sb.append(\"]{\")");
-                WriteLineIndent("for item in self." + *field->name + ":");
-                Indent(1);
-                WriteOutputStreamItem(*field->type, "item", field->optional);
-                WriteLineIndent("first = False");
-                Indent(-1);
-                WriteLineIndent("sb.append(\"}\")");
-                Indent(-1);
-            }
-            else if (field->map)
-            {
-                WriteLineIndent("if self." + *field->name + " is not None:");
-                Indent(1);
-                WriteLineIndent("first = True");
-                WriteLineIndent("sb.append(\"[\")");
-                WriteLineIndent("sb.append(str(len(self." + *field->name + "))" + ")");
-                WriteLineIndent("sb.append(\"]<{\")");
-                WriteLineIndent("for key, value in self." + *field->name + ".items():");
-                Indent(1);
-                WriteOutputStreamItem(*field->key, "key", false);
-                WriteLineIndent("sb.append(\"->\")");
-                WriteOutputStreamItem(*field->type, "value", field->optional);
-                WriteLineIndent("first = False");
-                Indent(-1);
-                WriteLineIndent("sb.append(\"}>\")");
-                Indent(-1);
-            }
-            else if (field->hash)
-            {
-                WriteLineIndent("if self." + *field->name + " is not None:");
-                Indent(1);
-                WriteLineIndent("first = True");
-                WriteLineIndent("sb.append(\"[\")");
-                WriteLineIndent("sb.append(str(len(self." + *field->name + "))" + ")");
-                WriteLineIndent("sb.append(\"][{\")");
-                WriteLineIndent("for key, value in self." + *field->name + ".items():");
-                Indent(1);
-                WriteOutputStreamItem(*field->key, "key", false);
-                WriteLineIndent("sb.append(\"->\")");
-                WriteOutputStreamItem(*field->type, "value", field->optional);
-                WriteLineIndent("first = False");
-                Indent(-1);
-                WriteLineIndent("sb.append(\"}]\")");
-                Indent(-1);
-            }
-            else
-                WriteOutputStreamValue(*field->type, "self." + *field->name, field->optional);
-            first = false;
-        }
-    }
-    WriteLineIndent("sb.append(\")\")");
-    WriteLineIndent("return \"\".join(sb)");
-    Indent(-1);
-
-    if (JSON())
-    {
-        // Generate struct to_json method
-        WriteLine();
-        WriteLineIndent("# Get struct JSON value");
-        WriteLineIndent("def to_json(self):");
-        Indent(1);
-        WriteLineIndent("return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))");
-        Indent(-1);
-
-        // Generate struct __to_json__ method
-        WriteLine();
-        WriteLineIndent("def __to_json__(self):");
-        Indent(1);
-        WriteLineIndent("result = dict()");
-        if (s->base && !s->base->empty())
-            WriteLineIndent("result.update(super().__to_json__())");
-        if (s->body)
-        {
-            WriteLineIndent("result.update(dict(");
-            Indent(1);
-            for (const auto& field : s->body->fields)
-                WriteLineIndent(*field->name + "=self." + *field->name + ", ");
-            Indent(-1);
-            WriteLineIndent("))");
-        }
-        WriteLineIndent("return result");
-        Indent(-1);
-
-        // Generate struct from_json method
-        WriteLine();
-        WriteLineIndent("# Create struct from JSON value");
-        WriteLineIndent("@staticmethod");
-        WriteLineIndent("def from_json(document):");
-        Indent(1);
-        WriteLineIndent("return " + *s->name + ".__from_json__(json.loads(document))");
-        Indent(-1);
-
-        // Generate struct __from_json__ method
-        WriteLine();
-        WriteLineIndent("@staticmethod");
-        WriteLineIndent("def __from_json__(fields):");
-        Indent(1);
-        WriteLineIndent("if fields is None:");
-        Indent(1);
-        WriteLineIndent("return None");
-        Indent(-1);
-        WriteLineIndent("return " + *s->name + "(");
-        Indent(1);
-        if (s->base && !s->base->empty())
-            WriteLineIndent(base_type + ".__from_json__(fields),");
-        if (s->body)
-        {
-            for (const auto& field : s->body->fields)
-            {
-                std::string key;
-                if (field->key)
-                {
-                    if (*field->key == "bytes")
-                        key = "None if key is None else base64.b64decode(key.encode('ascii'))";
-                    else if (*field->key == "decimal")
-                        key = "None if key is None else decimal.Decimal(key)";
-                    else if (*field->key == "uuid")
-                        key = "None if key is None else uuid.UUID(key)";
-                    else if (IsGoType(*field->key))
-                        key = "key";
-                    else
-                        key = *field->key + ".__from_json__(key)";
-                }
-
-                std::string value;
-                if (field->type)
-                {
-                    if (*field->type == "bytes")
-                        value = "None if value is None else base64.b64decode(value.encode('ascii'))";
-                    else if (*field->type == "decimal")
-                        value = "None if value is None else decimal.Decimal(value)";
-                    else if (*field->type == "uuid")
-                        value = "None if value is None else uuid.UUID(value)";
-                    else if (IsGoType(*field->type))
-                        value = "value";
-                    else
-                        value = *field->type + ".__from_json__(value)";
-                }
-
-                if (field->array || field->vector || field->list)
-                    WriteLineIndent("None if \"" + *field->name + "\" not in fields else [" + value + " for value in fields[\"" + *field->name + "\"]],");
-                else if (field->set)
-                    WriteLineIndent("None if \"" + *field->name + "\" not in fields else {" + value + " for value in fields[\"" + *field->name + "\"]},");
-                else if (field->map || field->hash)
-                    WriteLineIndent("None if \"" + *field->name + "\" not in fields else {" + key + ": " + value + " for key, value in fields[\"" + *field->name + "\"].items()},");
-                else if (*field->type == "bytes")
-                    WriteLineIndent("None if \"" + *field->name + "\" not in fields else None if fields[\"" + *field->name + "\"] is None else base64.b64decode(fields[\"" + *field->name + "\"].encode('ascii')),");
-                else if (*field->type == "decimal")
-                    WriteLineIndent("None if \"" + *field->name + "\" not in fields else None if fields[\"" + *field->name + "\"] is None else decimal.Decimal(fields[\"" + *field->name + "\"]),");
-                else if (*field->type == "uuid")
-                    WriteLineIndent("None if \"" + *field->name + "\" not in fields else None if fields[\"" + *field->name + "\"] is None else uuid.UUID(fields[\"" + *field->name + "\"]),");
-                else if (IsGoType(*field->type))
-                    WriteLineIndent("None if \"" + *field->name + "\" not in fields else fields[\"" + *field->name + "\"],");
-                else
-                    WriteLineIndent("None if \"" + *field->name + "\" not in fields else " + *field->type + ".__from_json__(fields[\"" + *field->name + "\"]),");
-            }
-        }
-        Indent(-1);
-        WriteLineIndent(")");
-        Indent(-1);
-    }
-
-    // Generate struct end
-    Indent(-1);
-
+    /*
     // Generate struct field model
     GenerateStructFieldModel(s);
 

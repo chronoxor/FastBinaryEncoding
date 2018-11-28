@@ -22,7 +22,7 @@ type EnumsKey struct {
 }
 
 // Convert Enums flags key to string
-func (k EnumsKey) String() string {
+func (k *EnumsKey) String() string {
     var sb strings.Builder
     sb.WriteString("EnumsKey(")
     sb.WriteString(")")
@@ -182,30 +182,30 @@ func NewEnumsFromJSON(buffer []byte) (*Enums, error) {
 }
 
 // Struct shallow copy
-func (s Enums) Copy() *Enums {
-    var result = s
+func (s *Enums) Copy() *Enums {
+    var result = *s
     return &result
 }
 
 // Struct deep clone
-func (s Enums) Clone() *Enums {
-    var result = s
+func (s *Enums) Clone() *Enums {
+    var result = *s
     return &result
 }
 
 // Get the struct key
-func (s Enums) Key() EnumsKey {
+func (s *Enums) Key() EnumsKey {
     return EnumsKey{
     }
 }
 
 // Convert struct to optional
-func (s Enums) Optional() *Enums {
-    return &s
+func (s *Enums) Optional() *Enums {
+    return s
 }
 
 // Convert struct to string
-func (s Enums) String() string {
+func (s *Enums) String() string {
     var sb strings.Builder
     sb.WriteString("Enums(")
     sb.WriteString("byte0=")
@@ -345,6 +345,6 @@ func (s Enums) String() string {
 }
 
 // Convert struct to JSON
-func (s Enums) JSON() ([]byte, error) {
-    return fbe.Json.Marshal(&s)
+func (s *Enums) JSON() ([]byte, error) {
+    return fbe.Json.Marshal(s)
 }

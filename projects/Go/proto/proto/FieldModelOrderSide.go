@@ -15,12 +15,12 @@ type FieldModelOrderSide struct {
 }
 
 // Get the field size
-func (fm FieldModelOrderSide) FBESize() int { return 1 }
+func (fm *FieldModelOrderSide) FBESize() int { return 1 }
 // Get the field extra size
-func (fm FieldModelOrderSide) FBEExtra() int { return 0 }
+func (fm *FieldModelOrderSide) FBEExtra() int { return 0 }
 
 // Get the field offset
-func (fm FieldModelOrderSide) FBEOffset() int { return fm.offset }
+func (fm *FieldModelOrderSide) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModelOrderSide) SetFBEOffset(value int) { fm.offset = value }
 
@@ -35,15 +35,15 @@ func NewFieldModelOrderSide(buffer *fbe.Buffer, offset int) *FieldModelOrderSide
 }
 
 // Check if the value is valid
-func (fm FieldModelOrderSide) Verify() bool { return true }
+func (fm *FieldModelOrderSide) Verify() bool { return true }
 
 // Get the value
-func (fm FieldModelOrderSide) Get() (OrderSide, error) {
+func (fm *FieldModelOrderSide) Get() (OrderSide, error) {
     return fm.GetDefault(0)
 }
 
 // Get the value with provided default value
-func (fm FieldModelOrderSide) GetDefault(defaults OrderSide) (OrderSide, error) {
+func (fm *FieldModelOrderSide) GetDefault(defaults OrderSide) (OrderSide, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return OrderSide(0), nil
     }

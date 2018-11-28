@@ -16,12 +16,12 @@ type FieldModelDecimal struct {
 }
 
 // Get the field size
-func (fm FieldModelDecimal) FBESize() int { return 16 }
+func (fm *FieldModelDecimal) FBESize() int { return 16 }
 // Get the field extra size
-func (fm FieldModelDecimal) FBEExtra() int { return 0 }
+func (fm *FieldModelDecimal) FBEExtra() int { return 0 }
 
 // Get the field offset
-func (fm FieldModelDecimal) FBEOffset() int { return fm.offset }
+func (fm *FieldModelDecimal) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModelDecimal) SetFBEOffset(value int) { fm.offset = value }
 
@@ -36,15 +36,15 @@ func NewFieldModelDecimal(buffer *Buffer, offset int) *FieldModelDecimal {
 }
 
 // Check if the decimal value is valid
-func (fm FieldModelDecimal) Verify() bool { return true }
+func (fm *FieldModelDecimal) Verify() bool { return true }
 
 // Get the decimal value
-func (fm FieldModelDecimal) Get() (Decimal, error) {
+func (fm *FieldModelDecimal) Get() (Decimal, error) {
     return fm.GetDefault(DecimalZero())
 }
 
 // Get the decimal value with provided default value
-func (fm FieldModelDecimal) GetDefault(defaults Decimal) (Decimal, error) {
+func (fm *FieldModelDecimal) GetDefault(defaults Decimal) (Decimal, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }

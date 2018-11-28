@@ -14,12 +14,12 @@ type FieldModelTimestamp struct {
 }
 
 // Get the field size
-func (fm FieldModelTimestamp) FBESize() int { return 8 }
+func (fm *FieldModelTimestamp) FBESize() int { return 8 }
 // Get the field extra size
-func (fm FieldModelTimestamp) FBEExtra() int { return 0 }
+func (fm *FieldModelTimestamp) FBEExtra() int { return 0 }
 
 // Get the field offset
-func (fm FieldModelTimestamp) FBEOffset() int { return fm.offset }
+func (fm *FieldModelTimestamp) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModelTimestamp) SetFBEOffset(value int) { fm.offset = value }
 
@@ -34,15 +34,15 @@ func NewFieldModelTimestamp(buffer *Buffer, offset int) *FieldModelTimestamp {
 }
 
 // Check if the timestamp value is valid
-func (fm FieldModelTimestamp) Verify() bool { return true }
+func (fm *FieldModelTimestamp) Verify() bool { return true }
 
 // Get the timestamp value
-func (fm FieldModelTimestamp) Get() (Timestamp, error) {
+func (fm *FieldModelTimestamp) Get() (Timestamp, error) {
     return fm.GetDefault(TimestampEpoch())
 }
 
 // Get the timestamp value with provided default value
-func (fm FieldModelTimestamp) GetDefault(defaults Timestamp) (Timestamp, error) {
+func (fm *FieldModelTimestamp) GetDefault(defaults Timestamp) (Timestamp, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }

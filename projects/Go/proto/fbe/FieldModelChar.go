@@ -14,12 +14,12 @@ type FieldModelChar struct {
 }
 
 // Get the field size
-func (fm FieldModelChar) FBESize() int { return 1 }
+func (fm *FieldModelChar) FBESize() int { return 1 }
 // Get the field extra size
-func (fm FieldModelChar) FBEExtra() int { return 0 }
+func (fm *FieldModelChar) FBEExtra() int { return 0 }
 
 // Get the field offset
-func (fm FieldModelChar) FBEOffset() int { return fm.offset }
+func (fm *FieldModelChar) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModelChar) SetFBEOffset(value int) { fm.offset = value }
 
@@ -34,15 +34,15 @@ func NewFieldModelChar(buffer *Buffer, offset int) *FieldModelChar {
 }
 
 // Check if the value is valid
-func (fm FieldModelChar) Verify() bool { return true }
+func (fm *FieldModelChar) Verify() bool { return true }
 
 // Get the value
-func (fm FieldModelChar) Get() (rune, error) {
+func (fm *FieldModelChar) Get() (rune, error) {
     return fm.GetDefault('\000')
 }
 
 // Get the value with provided default value
-func (fm FieldModelChar) GetDefault(defaults rune) (rune, error) {
+func (fm *FieldModelChar) GetDefault(defaults rune) (rune, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }

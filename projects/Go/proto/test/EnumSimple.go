@@ -45,8 +45,8 @@ func (e EnumSimple) Key() EnumSimpleKey {
 }
 
 // Convert enum to optional
-func (e EnumSimple) Optional() *EnumSimple {
-    return &e
+func (e *EnumSimple) Optional() *EnumSimple {
+    return e
 }
 
 // Convert enum to string

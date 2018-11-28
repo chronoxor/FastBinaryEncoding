@@ -23,7 +23,7 @@ type OrderKey struct {
 }
 
 // Convert Order flags key to string
-func (k OrderKey) String() string {
+func (k *OrderKey) String() string {
     var sb strings.Builder
     sb.WriteString("OrderKey(")
     sb.WriteString("uid=")
@@ -65,31 +65,31 @@ func NewOrderFromJSON(buffer []byte) (*Order, error) {
 }
 
 // Struct shallow copy
-func (s Order) Copy() *Order {
-    var result = s
+func (s *Order) Copy() *Order {
+    var result = *s
     return &result
 }
 
 // Struct deep clone
-func (s Order) Clone() *Order {
-    var result = s
+func (s *Order) Clone() *Order {
+    var result = *s
     return &result
 }
 
 // Get the struct key
-func (s Order) Key() OrderKey {
+func (s *Order) Key() OrderKey {
     return OrderKey{
         Uid: s.Uid,
     }
 }
 
 // Convert struct to optional
-func (s Order) Optional() *Order {
-    return &s
+func (s *Order) Optional() *Order {
+    return s
 }
 
 // Convert struct to string
-func (s Order) String() string {
+func (s *Order) String() string {
     var sb strings.Builder
     sb.WriteString("Order(")
     sb.WriteString("uid=")
@@ -109,6 +109,6 @@ func (s Order) String() string {
 }
 
 // Convert struct to JSON
-func (s Order) JSON() ([]byte, error) {
-    return fbe.Json.Marshal(&s)
+func (s *Order) JSON() ([]byte, error) {
+    return fbe.Json.Marshal(s)
 }

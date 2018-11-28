@@ -14,13 +14,13 @@ type FinalModelBool struct {
 }
 
 // Get the allocation size
-func (fm FinalModelBool) FBEAllocationSize(value bool) int { return fm.FBESize() }
+func (fm *FinalModelBool) FBEAllocationSize(value bool) int { return fm.FBESize() }
 
 // Get the final size
-func (fm FinalModelBool) FBESize() int { return 1 }
+func (fm *FinalModelBool) FBESize() int { return 1 }
 
 // Get the final offset
-func (fm FinalModelBool) FBEOffset() int { return fm.offset }
+func (fm *FinalModelBool) FBEOffset() int { return fm.offset }
 // Set the final offset
 func (fm *FinalModelBool) SetFBEOffset(value int) { fm.offset = value }
 
@@ -35,7 +35,7 @@ func NewFinalModelBool(buffer *Buffer, offset int) *FinalModelBool {
 }
 
 // Check if the value is valid
-func (fm FinalModelBool) Verify() (bool, int) {
+func (fm *FinalModelBool) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return false, 0
     }
@@ -44,7 +44,7 @@ func (fm FinalModelBool) Verify() (bool, int) {
 }
 
 // Get the value
-func (fm FinalModelBool) Get() (bool, int, error) {
+func (fm *FinalModelBool) Get() (bool, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return false, 0, errors.New("model is broken")
     }

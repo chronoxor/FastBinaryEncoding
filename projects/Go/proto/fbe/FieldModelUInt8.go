@@ -14,12 +14,12 @@ type FieldModelUInt8 struct {
 }
 
 // Get the field size
-func (fm FieldModelUInt8) FBESize() int { return 1 }
+func (fm *FieldModelUInt8) FBESize() int { return 1 }
 // Get the field extra size
-func (fm FieldModelUInt8) FBEExtra() int { return 0 }
+func (fm *FieldModelUInt8) FBEExtra() int { return 0 }
 
 // Get the field offset
-func (fm FieldModelUInt8) FBEOffset() int { return fm.offset }
+func (fm *FieldModelUInt8) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModelUInt8) SetFBEOffset(value int) { fm.offset = value }
 
@@ -34,15 +34,15 @@ func NewFieldModelUInt8(buffer *Buffer, offset int) *FieldModelUInt8 {
 }
 
 // Check if the value is valid
-func (fm FieldModelUInt8) Verify() bool { return true }
+func (fm *FieldModelUInt8) Verify() bool { return true }
 
 // Get the value
-func (fm FieldModelUInt8) Get() (uint8, error) {
+func (fm *FieldModelUInt8) Get() (uint8, error) {
     return fm.GetDefault(0)
 }
 
 // Get the value with provided default value
-func (fm FieldModelUInt8) GetDefault(defaults uint8) (uint8, error) {
+func (fm *FieldModelUInt8) GetDefault(defaults uint8) (uint8, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }

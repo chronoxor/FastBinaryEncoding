@@ -63,8 +63,8 @@ func (f FlagsSimple) Key() FlagsSimpleKey {
 }
 
 // Convert flags to optional
-func (f FlagsSimple) Optional() *FlagsSimple {
-    return &f
+func (f *FlagsSimple) Optional() *FlagsSimple {
+    return f
 }
 
 // Convert flags to string

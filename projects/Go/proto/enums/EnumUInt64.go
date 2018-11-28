@@ -43,8 +43,8 @@ func (e EnumUInt64) Key() EnumUInt64Key {
 }
 
 // Convert enum to optional
-func (e EnumUInt64) Optional() *EnumUInt64 {
-    return &e
+func (e *EnumUInt64) Optional() *EnumUInt64 {
+    return e
 }
 
 // Convert enum to string

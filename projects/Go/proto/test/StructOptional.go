@@ -25,7 +25,7 @@ type StructOptionalKey struct {
 }
 
 // Convert StructOptional flags key to string
-func (k StructOptionalKey) String() string {
+func (k *StructOptionalKey) String() string {
     var sb strings.Builder
     sb.WriteString("StructOptionalKey(")
     sb.WriteString(k.StructSimpleKey.String())
@@ -188,31 +188,31 @@ func NewStructOptionalFromJSON(buffer []byte) (*StructOptional, error) {
 }
 
 // Struct shallow copy
-func (s StructOptional) Copy() *StructOptional {
-    var result = s
+func (s *StructOptional) Copy() *StructOptional {
+    var result = *s
     return &result
 }
 
 // Struct deep clone
-func (s StructOptional) Clone() *StructOptional {
-    var result = s
+func (s *StructOptional) Clone() *StructOptional {
+    var result = *s
     return &result
 }
 
 // Get the struct key
-func (s StructOptional) Key() StructOptionalKey {
+func (s *StructOptional) Key() StructOptionalKey {
     return StructOptionalKey{
         s.StructSimple.Key(),
     }
 }
 
 // Convert struct to optional
-func (s StructOptional) Optional() *StructOptional {
-    return &s
+func (s *StructOptional) Optional() *StructOptional {
+    return s
 }
 
 // Convert struct to string
-func (s StructOptional) String() string {
+func (s *StructOptional) String() string {
     var sb strings.Builder
     sb.WriteString("StructOptional(")
     sb.WriteString(s.StructSimple.String())
@@ -617,6 +617,6 @@ func (s StructOptional) String() string {
 }
 
 // Convert struct to JSON
-func (s StructOptional) JSON() ([]byte, error) {
-    return fbe.Json.Marshal(&s)
+func (s *StructOptional) JSON() ([]byte, error) {
+    return fbe.Json.Marshal(s)
 }

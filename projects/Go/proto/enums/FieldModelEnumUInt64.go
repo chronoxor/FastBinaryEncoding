@@ -15,12 +15,12 @@ type FieldModelEnumUInt64 struct {
 }
 
 // Get the field size
-func (fm FieldModelEnumUInt64) FBESize() int { return 8 }
+func (fm *FieldModelEnumUInt64) FBESize() int { return 8 }
 // Get the field extra size
-func (fm FieldModelEnumUInt64) FBEExtra() int { return 0 }
+func (fm *FieldModelEnumUInt64) FBEExtra() int { return 0 }
 
 // Get the field offset
-func (fm FieldModelEnumUInt64) FBEOffset() int { return fm.offset }
+func (fm *FieldModelEnumUInt64) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModelEnumUInt64) SetFBEOffset(value int) { fm.offset = value }
 
@@ -35,15 +35,15 @@ func NewFieldModelEnumUInt64(buffer *fbe.Buffer, offset int) *FieldModelEnumUInt
 }
 
 // Check if the value is valid
-func (fm FieldModelEnumUInt64) Verify() bool { return true }
+func (fm *FieldModelEnumUInt64) Verify() bool { return true }
 
 // Get the value
-func (fm FieldModelEnumUInt64) Get() (EnumUInt64, error) {
+func (fm *FieldModelEnumUInt64) Get() (EnumUInt64, error) {
     return fm.GetDefault(0)
 }
 
 // Get the value with provided default value
-func (fm FieldModelEnumUInt64) GetDefault(defaults EnumUInt64) (EnumUInt64, error) {
+func (fm *FieldModelEnumUInt64) GetDefault(defaults EnumUInt64) (EnumUInt64, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return EnumUInt64(0), nil
     }

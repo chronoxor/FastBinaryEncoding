@@ -62,7 +62,7 @@ func TimestampUTC() Timestamp {
 }
 
 // Convert timestamp to JSON
-func (t Timestamp) MarshalJSON() ([]byte, error) {
+func (t *Timestamp) MarshalJSON() ([]byte, error) {
     timestamp := t.UnixNano()
     return Json.Marshal(&timestamp)
 }

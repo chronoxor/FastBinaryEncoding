@@ -24,7 +24,7 @@ type StructArrayKey struct {
 }
 
 // Convert StructArray flags key to string
-func (k StructArrayKey) String() string {
+func (k *StructArrayKey) String() string {
     var sb strings.Builder
     sb.WriteString("StructArrayKey(")
     sb.WriteString(")")
@@ -72,30 +72,30 @@ func NewStructArrayFromJSON(buffer []byte) (*StructArray, error) {
 }
 
 // Struct shallow copy
-func (s StructArray) Copy() *StructArray {
-    var result = s
+func (s *StructArray) Copy() *StructArray {
+    var result = *s
     return &result
 }
 
 // Struct deep clone
-func (s StructArray) Clone() *StructArray {
-    var result = s
+func (s *StructArray) Clone() *StructArray {
+    var result = *s
     return &result
 }
 
 // Get the struct key
-func (s StructArray) Key() StructArrayKey {
+func (s *StructArray) Key() StructArrayKey {
     return StructArrayKey{
     }
 }
 
 // Convert struct to optional
-func (s StructArray) Optional() *StructArray {
-    return &s
+func (s *StructArray) Optional() *StructArray {
+    return s
 }
 
 // Convert struct to string
-func (s StructArray) String() string {
+func (s *StructArray) String() string {
     var sb strings.Builder
     sb.WriteString("StructArray(")
     sb.WriteString("f1=")
@@ -263,6 +263,6 @@ func (s StructArray) String() string {
 }
 
 // Convert struct to JSON
-func (s StructArray) JSON() ([]byte, error) {
-    return fbe.Json.Marshal(&s)
+func (s *StructArray) JSON() ([]byte, error) {
+    return fbe.Json.Marshal(s)
 }

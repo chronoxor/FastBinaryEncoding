@@ -15,15 +15,15 @@ type Buffer struct {
 }
 
 // Is the buffer empty?
-func (b Buffer) Empty() bool { return (len(b.data) == 0) || (b.size <= 0) }
+func (b *Buffer) Empty() bool { return (len(b.data) == 0) || (b.size <= 0) }
 // Get bytes memory buffer
-func (b Buffer) Data() []byte { return b.data }
+func (b *Buffer) Data() []byte { return b.data }
 // Get bytes memory buffer capacity
-func (b Buffer) Capacity() int { return len(b.data) }
+func (b *Buffer) Capacity() int { return len(b.data) }
 // Get bytes memory buffer size
-func (b Buffer) Size() int { return b.size }
+func (b *Buffer) Size() int { return b.size }
 // Get bytes memory buffer offset
-func (b Buffer) Offset() int { return b.offset }
+func (b *Buffer) Offset() int { return b.offset }
 
 // Create an empty buffer
 func NewEmptyBuffer() *Buffer {
@@ -59,13 +59,13 @@ func (b *Buffer) AttachCapacity(capacity int) {
 // Attach a given memory buffer
 func (b *Buffer) AttachBuffer(buffer []byte, offset int, size int) {
     if len(buffer) < size {
-        panic("Invalid buffer!")
+        panic("invalid buffer")
     }
     if size <= 0 {
-        panic("Invalid size!")
+        panic("invalid size")
     }
     if offset > size {
-        panic("Invalid offset!")
+        panic("invalid offset")
     }
 
     b.data = buffer
@@ -76,7 +76,7 @@ func (b *Buffer) AttachBuffer(buffer []byte, offset int, size int) {
 // Allocate memory in the current write buffer and return offset to the allocated memory block
 func (b *Buffer) Allocate(size int) int {
     if size < 0 {
-        panic("Invalid allocation size!")
+        panic("invalid allocation size")
     }
 
     offset := b.size
@@ -104,7 +104,7 @@ func (b *Buffer) Allocate(size int) int {
 // Remove some memory of the given size from the current write buffer
 func (b *Buffer) Remove(offset int, size int) {
     if (offset + size) > len(b.data) {
-        panic("Invalid offset & size!")
+        panic("invalid offset & size")
     }
 
     copy(b.data[offset:], b.data[offset+size:])
@@ -122,7 +122,7 @@ func (b *Buffer) Remove(offset int, size int) {
 // Reserve memory of the given capacity in the current write bufferb
 func (b *Buffer) Reserve(capacity int) {
     if capacity < 0 {
-        panic("Invalid reserve capacity!")
+        panic("invalid reserve capacity")
     }
 
     if capacity > len(b.data) {

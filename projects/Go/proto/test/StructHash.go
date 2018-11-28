@@ -24,7 +24,7 @@ type StructHashKey struct {
 }
 
 // Convert StructHash flags key to string
-func (k StructHashKey) String() string {
+func (k *StructHashKey) String() string {
     var sb strings.Builder
     sb.WriteString("StructHashKey(")
     sb.WriteString(")")
@@ -72,30 +72,30 @@ func NewStructHashFromJSON(buffer []byte) (*StructHash, error) {
 }
 
 // Struct shallow copy
-func (s StructHash) Copy() *StructHash {
-    var result = s
+func (s *StructHash) Copy() *StructHash {
+    var result = *s
     return &result
 }
 
 // Struct deep clone
-func (s StructHash) Clone() *StructHash {
-    var result = s
+func (s *StructHash) Clone() *StructHash {
+    var result = *s
     return &result
 }
 
 // Get the struct key
-func (s StructHash) Key() StructHashKey {
+func (s *StructHash) Key() StructHashKey {
     return StructHashKey{
     }
 }
 
 // Convert struct to optional
-func (s StructHash) Optional() *StructHash {
-    return &s
+func (s *StructHash) Optional() *StructHash {
+    return s
 }
 
 // Convert struct to string
-func (s StructHash) String() string {
+func (s *StructHash) String() string {
     var sb strings.Builder
     sb.WriteString("StructHash(")
     sb.WriteString("f1=")
@@ -277,6 +277,6 @@ func (s StructHash) String() string {
 }
 
 // Convert struct to JSON
-func (s StructHash) JSON() ([]byte, error) {
-    return fbe.Json.Marshal(&s)
+func (s *StructHash) JSON() ([]byte, error) {
+    return fbe.Json.Marshal(s)
 }

@@ -14,13 +14,13 @@ type FinalModelTimestamp struct {
 }
 
 // Get the allocation size
-func (fm FinalModelTimestamp) FBEAllocationSize(value Timestamp) int { return fm.FBESize() }
+func (fm *FinalModelTimestamp) FBEAllocationSize(value Timestamp) int { return fm.FBESize() }
 
 // Get the final size
-func (fm FinalModelTimestamp) FBESize() int { return 8 }
+func (fm *FinalModelTimestamp) FBESize() int { return 8 }
 
 // Get the final offset
-func (fm FinalModelTimestamp) FBEOffset() int { return fm.offset }
+func (fm *FinalModelTimestamp) FBEOffset() int { return fm.offset }
 // Set the final offset
 func (fm *FinalModelTimestamp) SetFBEOffset(value int) { fm.offset = value }
 
@@ -35,7 +35,7 @@ func NewFinalModelTimestamp(buffer *Buffer, offset int) *FinalModelTimestamp {
 }
 
 // Check if the timestamp value is valid
-func (fm FinalModelTimestamp) Verify() (bool, int) {
+func (fm *FinalModelTimestamp) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return false, 0
     }
@@ -44,7 +44,7 @@ func (fm FinalModelTimestamp) Verify() (bool, int) {
 }
 
 // Get the timestamp value
-func (fm FinalModelTimestamp) Get() (Timestamp, int, error) {
+func (fm *FinalModelTimestamp) Get() (Timestamp, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return TimestampEpoch(), 0, errors.New("model is broken")
     }

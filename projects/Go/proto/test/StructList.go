@@ -24,7 +24,7 @@ type StructListKey struct {
 }
 
 // Convert StructList flags key to string
-func (k StructListKey) String() string {
+func (k *StructListKey) String() string {
     var sb strings.Builder
     sb.WriteString("StructListKey(")
     sb.WriteString(")")
@@ -72,30 +72,30 @@ func NewStructListFromJSON(buffer []byte) (*StructList, error) {
 }
 
 // Struct shallow copy
-func (s StructList) Copy() *StructList {
-    var result = s
+func (s *StructList) Copy() *StructList {
+    var result = *s
     return &result
 }
 
 // Struct deep clone
-func (s StructList) Clone() *StructList {
-    var result = s
+func (s *StructList) Clone() *StructList {
+    var result = *s
     return &result
 }
 
 // Get the struct key
-func (s StructList) Key() StructListKey {
+func (s *StructList) Key() StructListKey {
     return StructListKey{
     }
 }
 
 // Convert struct to optional
-func (s StructList) Optional() *StructList {
-    return &s
+func (s *StructList) Optional() *StructList {
+    return s
 }
 
 // Convert struct to string
-func (s StructList) String() string {
+func (s *StructList) String() string {
     var sb strings.Builder
     sb.WriteString("StructList(")
     sb.WriteString("f1=")
@@ -263,6 +263,6 @@ func (s StructList) String() string {
 }
 
 // Convert struct to JSON
-func (s StructList) JSON() ([]byte, error) {
-    return fbe.Json.Marshal(&s)
+func (s *StructList) JSON() ([]byte, error) {
+    return fbe.Json.Marshal(s)
 }

@@ -14,13 +14,13 @@ type FinalModelByte struct {
 }
 
 // Get the allocation size
-func (fm FinalModelByte) FBEAllocationSize(value byte) int { return fm.FBESize() }
+func (fm *FinalModelByte) FBEAllocationSize(value byte) int { return fm.FBESize() }
 
 // Get the final size
-func (fm FinalModelByte) FBESize() int { return 1 }
+func (fm *FinalModelByte) FBESize() int { return 1 }
 
 // Get the final offset
-func (fm FinalModelByte) FBEOffset() int { return fm.offset }
+func (fm *FinalModelByte) FBEOffset() int { return fm.offset }
 // Set the final offset
 func (fm *FinalModelByte) SetFBEOffset(value int) { fm.offset = value }
 
@@ -35,7 +35,7 @@ func NewFinalModelByte(buffer *Buffer, offset int) *FinalModelByte {
 }
 
 // Check if the value is valid
-func (fm FinalModelByte) Verify() (bool, int) {
+func (fm *FinalModelByte) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return false, 0
     }
@@ -44,7 +44,7 @@ func (fm FinalModelByte) Verify() (bool, int) {
 }
 
 // Get the value
-func (fm FinalModelByte) Get() (byte, int, error) {
+func (fm *FinalModelByte) Get() (byte, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0, 0, errors.New("model is broken")
     }

@@ -14,9 +14,9 @@ type FieldModelString struct {
 }
 
 // Get the field size
-func (fm FieldModelString) FBESize() int { return 4 }
+func (fm *FieldModelString) FBESize() int { return 4 }
 // Get the field extra size
-func (fm FieldModelString) FBEExtra() int {
+func (fm *FieldModelString) FBEExtra() int {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0
     }
@@ -31,7 +31,7 @@ func (fm FieldModelString) FBEExtra() int {
 }
 
 // Get the field offset
-func (fm FieldModelString) FBEOffset() int { return fm.offset }
+func (fm *FieldModelString) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModelString) SetFBEOffset(value int) { fm.offset = value }
 
@@ -46,7 +46,7 @@ func NewFieldModelString(buffer *Buffer, offset int) *FieldModelString {
 }
 
 // Check if the string value is valid
-func (fm FieldModelString) Verify() bool {
+func (fm *FieldModelString) Verify() bool {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return true
     }
@@ -69,12 +69,12 @@ func (fm FieldModelString) Verify() bool {
 }
 
 // Get the string value
-func (fm FieldModelString) Get() (string, error) {
+func (fm *FieldModelString) Get() (string, error) {
     return fm.GetDefault("")
 }
 
 // Get the string value with provided default value
-func (fm FieldModelString) GetDefault(defaults string) (string, error) {
+func (fm *FieldModelString) GetDefault(defaults string) (string, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }

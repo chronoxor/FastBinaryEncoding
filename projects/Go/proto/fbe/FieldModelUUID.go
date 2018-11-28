@@ -14,12 +14,12 @@ type FieldModelUUID struct {
 }
 
 // Get the field size
-func (fm FieldModelUUID) FBESize() int { return 16 }
+func (fm *FieldModelUUID) FBESize() int { return 16 }
 // Get the field extra size
-func (fm FieldModelUUID) FBEExtra() int { return 0 }
+func (fm *FieldModelUUID) FBEExtra() int { return 0 }
 
 // Get the field offset
-func (fm FieldModelUUID) FBEOffset() int { return fm.offset }
+func (fm *FieldModelUUID) FBEOffset() int { return fm.offset }
 // Set the field offset
 func (fm *FieldModelUUID) SetFBEOffset(value int) { fm.offset = value }
 
@@ -34,15 +34,15 @@ func NewFieldModelUUID(buffer *Buffer, offset int) *FieldModelUUID {
 }
 
 // Check if the UUID value is valid
-func (fm FieldModelUUID) Verify() bool { return true }
+func (fm *FieldModelUUID) Verify() bool { return true }
 
 // Get the UUID value
-func (fm FieldModelUUID) Get() (UUID, error) {
+func (fm *FieldModelUUID) Get() (UUID, error) {
     return fm.GetDefault(UUIDNil())
 }
 
 // Get the UUID value with provided default value
-func (fm FieldModelUUID) GetDefault(defaults UUID) (UUID, error) {
+func (fm *FieldModelUUID) GetDefault(defaults UUID) (UUID, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return defaults, nil
     }

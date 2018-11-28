@@ -43,8 +43,8 @@ func (e EnumInt8) Key() EnumInt8Key {
 }
 
 // Convert enum to optional
-func (e EnumInt8) Optional() *EnumInt8 {
-    return &e
+func (e *EnumInt8) Optional() *EnumInt8 {
+    return e
 }
 
 // Convert enum to string

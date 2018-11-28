@@ -25,7 +25,7 @@ type StructSimpleKey struct {
 }
 
 // Convert StructSimple flags key to string
-func (k StructSimpleKey) String() string {
+func (k *StructSimpleKey) String() string {
     var sb strings.Builder
     sb.WriteString("StructSimpleKey(")
     sb.WriteString("uid=")
@@ -145,31 +145,31 @@ func NewStructSimpleFromJSON(buffer []byte) (*StructSimple, error) {
 }
 
 // Struct shallow copy
-func (s StructSimple) Copy() *StructSimple {
-    var result = s
+func (s *StructSimple) Copy() *StructSimple {
+    var result = *s
     return &result
 }
 
 // Struct deep clone
-func (s StructSimple) Clone() *StructSimple {
-    var result = s
+func (s *StructSimple) Clone() *StructSimple {
+    var result = *s
     return &result
 }
 
 // Get the struct key
-func (s StructSimple) Key() StructSimpleKey {
+func (s *StructSimple) Key() StructSimpleKey {
     return StructSimpleKey{
         Uid: s.Uid,
     }
 }
 
 // Convert struct to optional
-func (s StructSimple) Optional() *StructSimple {
-    return &s
+func (s *StructSimple) Optional() *StructSimple {
+    return s
 }
 
 // Convert struct to string
-func (s StructSimple) String() string {
+func (s *StructSimple) String() string {
     var sb strings.Builder
     sb.WriteString("StructSimple(")
     sb.WriteString("uid=")
@@ -267,6 +267,6 @@ func (s StructSimple) String() string {
 }
 
 // Convert struct to JSON
-func (s StructSimple) JSON() ([]byte, error) {
-    return fbe.Json.Marshal(&s)
+func (s *StructSimple) JSON() ([]byte, error) {
+    return fbe.Json.Marshal(s)
 }

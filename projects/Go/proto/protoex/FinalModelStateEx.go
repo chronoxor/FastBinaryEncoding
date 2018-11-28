@@ -15,13 +15,13 @@ type FinalModelStateEx struct {
 }
 
 // Get the allocation size
-func (fm FinalModelStateEx) FBEAllocationSize(value StateEx) int { return fm.FBESize() }
+func (fm *FinalModelStateEx) FBEAllocationSize(value StateEx) int { return fm.FBESize() }
 
 // Get the final size
-func (fm FinalModelStateEx) FBESize() int { return 1 }
+func (fm *FinalModelStateEx) FBESize() int { return 1 }
 
 // Get the final offset
-func (fm FinalModelStateEx) FBEOffset() int { return fm.offset }
+func (fm *FinalModelStateEx) FBEOffset() int { return fm.offset }
 // Set the final offset
 func (fm *FinalModelStateEx) SetFBEOffset(value int) { fm.offset = value }
 
@@ -36,7 +36,7 @@ func NewFinalModelStateEx(buffer *fbe.Buffer, offset int) *FinalModelStateEx {
 }
 
 // Check if the value is valid
-func (fm FinalModelStateEx) Verify() (bool, int) {
+func (fm *FinalModelStateEx) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return false, 0
     }
@@ -45,7 +45,7 @@ func (fm FinalModelStateEx) Verify() (bool, int) {
 }
 
 // Get the value
-func (fm FinalModelStateEx) Get() (StateEx, int, error) {
+func (fm *FinalModelStateEx) Get() (StateEx, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return StateEx(0), 0, errors.New("model is broken")
     }
