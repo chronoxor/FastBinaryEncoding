@@ -27,6 +27,10 @@ type StructSimpleKey struct {
 // Convert StructSimple flags key to string
 func (k StructSimpleKey) String() string {
     var sb strings.Builder
+    sb.WriteString("StructSimpleKey(")
+    sb.WriteString("uid=")
+    sb.WriteString(strconv.FormatInt(int64(k.Uid), 10))
+    sb.WriteString(")")
     return sb.String()
 }
 
@@ -227,9 +231,9 @@ func (s StructSimple) String() string {
     sb.WriteString(",f28=")
     sb.WriteString(strconv.FormatFloat(float64(s.F28), 'g', -1, 64))
     sb.WriteString(",f29=")
-    sb.WriteString("\"" + s.F29.String() + "\"")
+    sb.WriteString(s.F29.String())
     sb.WriteString(",f30=")
-    sb.WriteString("\"" + s.F30.String() + "\"")
+    sb.WriteString(s.F30.String())
     sb.WriteString(",f31=")
     sb.WriteString("\"" + s.F31 + "\"")
     sb.WriteString(",f32=")

@@ -25,6 +25,10 @@ type OrderKey struct {
 // Convert Order flags key to string
 func (k OrderKey) String() string {
     var sb strings.Builder
+    sb.WriteString("OrderKey(")
+    sb.WriteString("uid=")
+    sb.WriteString(strconv.FormatInt(int64(k.Uid), 10))
+    sb.WriteString(")")
     return sb.String()
 }
 

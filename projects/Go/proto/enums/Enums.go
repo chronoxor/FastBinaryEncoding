@@ -24,6 +24,8 @@ type EnumsKey struct {
 // Convert Enums flags key to string
 func (k EnumsKey) String() string {
     var sb strings.Builder
+    sb.WriteString("EnumsKey(")
+    sb.WriteString(")")
     return sb.String()
 }
 

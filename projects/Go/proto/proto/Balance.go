@@ -25,6 +25,10 @@ type BalanceKey struct {
 // Convert Balance flags key to string
 func (k BalanceKey) String() string {
     var sb strings.Builder
+    sb.WriteString("BalanceKey(")
+    sb.WriteString("currency=")
+    sb.WriteString("\"" + k.Currency + "\"")
+    sb.WriteString(")")
     return sb.String()
 }
 

@@ -8924,7 +8924,7 @@ class StructArray(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(",f2=")
         if self.f2 is not None:
             first = True
@@ -8939,7 +8939,7 @@ class StructArray(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(",f3=")
         if self.f3 is not None:
             first = True
@@ -8954,7 +8954,7 @@ class StructArray(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(",f4=")
         if self.f4 is not None:
             first = True
@@ -8969,7 +8969,7 @@ class StructArray(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(",f5=")
         if self.f5 is not None:
             first = True
@@ -8980,7 +8980,7 @@ class StructArray(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(",f6=")
         if self.f6 is not None:
             first = True
@@ -8995,7 +8995,7 @@ class StructArray(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(",f7=")
         if self.f7 is not None:
             first = True
@@ -9006,7 +9006,7 @@ class StructArray(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(",f8=")
         if self.f8 is not None:
             first = True
@@ -9021,7 +9021,7 @@ class StructArray(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(",f9=")
         if self.f9 is not None:
             first = True
@@ -9032,7 +9032,7 @@ class StructArray(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(",f10=")
         if self.f10 is not None:
             first = True
@@ -9047,7 +9047,7 @@ class StructArray(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(")")
         return "".join(sb)
 
@@ -9963,7 +9963,7 @@ class StructVector(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(",f2=")
         if self.f2 is not None:
             first = True
@@ -9978,7 +9978,7 @@ class StructVector(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(",f3=")
         if self.f3 is not None:
             first = True
@@ -9993,7 +9993,7 @@ class StructVector(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(",f4=")
         if self.f4 is not None:
             first = True
@@ -10008,7 +10008,7 @@ class StructVector(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(",f5=")
         if self.f5 is not None:
             first = True
@@ -10019,7 +10019,7 @@ class StructVector(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(",f6=")
         if self.f6 is not None:
             first = True
@@ -10034,7 +10034,7 @@ class StructVector(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(",f7=")
         if self.f7 is not None:
             first = True
@@ -10045,7 +10045,7 @@ class StructVector(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(",f8=")
         if self.f8 is not None:
             first = True
@@ -10060,7 +10060,7 @@ class StructVector(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(",f9=")
         if self.f9 is not None:
             first = True
@@ -10071,7 +10071,7 @@ class StructVector(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(",f10=")
         if self.f10 is not None:
             first = True
@@ -10086,7 +10086,7 @@ class StructVector(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(")")
         return "".join(sb)
 
@@ -11002,7 +11002,7 @@ class StructList(object):
                 first = False
             sb.append(">")
         else:
-            sb.append("[0]<>");
+            sb.append("[0]<>")
         sb.append(",f2=")
         if self.f2 is not None:
             first = True
@@ -11017,7 +11017,7 @@ class StructList(object):
                 first = False
             sb.append(">")
         else:
-            sb.append("[0]<>");
+            sb.append("[0]<>")
         sb.append(",f3=")
         if self.f3 is not None:
             first = True
@@ -11032,7 +11032,7 @@ class StructList(object):
                 first = False
             sb.append(">")
         else:
-            sb.append("[0]<>");
+            sb.append("[0]<>")
         sb.append(",f4=")
         if self.f4 is not None:
             first = True
@@ -11047,7 +11047,7 @@ class StructList(object):
                 first = False
             sb.append(">")
         else:
-            sb.append("[0]<>");
+            sb.append("[0]<>")
         sb.append(",f5=")
         if self.f5 is not None:
             first = True
@@ -11058,7 +11058,7 @@ class StructList(object):
                 first = False
             sb.append(">")
         else:
-            sb.append("[0]<>");
+            sb.append("[0]<>")
         sb.append(",f6=")
         if self.f6 is not None:
             first = True
@@ -11073,7 +11073,7 @@ class StructList(object):
                 first = False
             sb.append(">")
         else:
-            sb.append("[0]<>");
+            sb.append("[0]<>")
         sb.append(",f7=")
         if self.f7 is not None:
             first = True
@@ -11084,7 +11084,7 @@ class StructList(object):
                 first = False
             sb.append(">")
         else:
-            sb.append("[0]<>");
+            sb.append("[0]<>")
         sb.append(",f8=")
         if self.f8 is not None:
             first = True
@@ -11099,7 +11099,7 @@ class StructList(object):
                 first = False
             sb.append(">")
         else:
-            sb.append("[0]<>");
+            sb.append("[0]<>")
         sb.append(",f9=")
         if self.f9 is not None:
             first = True
@@ -11110,7 +11110,7 @@ class StructList(object):
                 first = False
             sb.append(">")
         else:
-            sb.append("[0]<>");
+            sb.append("[0]<>")
         sb.append(",f10=")
         if self.f10 is not None:
             first = True
@@ -11125,7 +11125,7 @@ class StructList(object):
                 first = False
             sb.append(">")
         else:
-            sb.append("[0]<>");
+            sb.append("[0]<>")
         sb.append(")")
         return "".join(sb)
 
@@ -12017,7 +12017,7 @@ class StructSet(object):
                 first = False
             sb.append("}")
         else:
-            sb.append("[0]{}");
+            sb.append("[0]{}")
         sb.append(",f2=")
         if self.f2 is not None:
             first = True
@@ -12028,7 +12028,7 @@ class StructSet(object):
                 first = False
             sb.append("}")
         else:
-            sb.append("[0]{}");
+            sb.append("[0]{}")
         sb.append(",f3=")
         if self.f3 is not None:
             first = True
@@ -12039,7 +12039,7 @@ class StructSet(object):
                 first = False
             sb.append("}")
         else:
-            sb.append("[0]{}");
+            sb.append("[0]{}")
         sb.append(",f4=")
         if self.f4 is not None:
             first = True
@@ -12050,7 +12050,7 @@ class StructSet(object):
                 first = False
             sb.append("}")
         else:
-            sb.append("[0]{}");
+            sb.append("[0]{}")
         sb.append(")")
         return "".join(sb)
 
@@ -12704,7 +12704,7 @@ class StructMap(object):
                 first = False
             sb.append("}>")
         else:
-            sb.append("[0]<{}>");
+            sb.append("[0]<{}>")
         sb.append(",f2=")
         if self.f2 is not None:
             first = True
@@ -12720,7 +12720,7 @@ class StructMap(object):
                 first = False
             sb.append("}>")
         else:
-            sb.append("[0]<{}>");
+            sb.append("[0]<{}>")
         sb.append(",f3=")
         if self.f3 is not None:
             first = True
@@ -12736,7 +12736,7 @@ class StructMap(object):
                 first = False
             sb.append("}>")
         else:
-            sb.append("[0]<{}>");
+            sb.append("[0]<{}>")
         sb.append(",f4=")
         if self.f4 is not None:
             first = True
@@ -12752,7 +12752,7 @@ class StructMap(object):
                 first = False
             sb.append("}>")
         else:
-            sb.append("[0]<{}>");
+            sb.append("[0]<{}>")
         sb.append(",f5=")
         if self.f5 is not None:
             first = True
@@ -12765,7 +12765,7 @@ class StructMap(object):
                 first = False
             sb.append("}>")
         else:
-            sb.append("[0]<{}>");
+            sb.append("[0]<{}>")
         sb.append(",f6=")
         if self.f6 is not None:
             first = True
@@ -12781,7 +12781,7 @@ class StructMap(object):
                 first = False
             sb.append("}>")
         else:
-            sb.append("[0]<{}>");
+            sb.append("[0]<{}>")
         sb.append(",f7=")
         if self.f7 is not None:
             first = True
@@ -12794,7 +12794,7 @@ class StructMap(object):
                 first = False
             sb.append("}>")
         else:
-            sb.append("[0]<{}>");
+            sb.append("[0]<{}>")
         sb.append(",f8=")
         if self.f8 is not None:
             first = True
@@ -12810,7 +12810,7 @@ class StructMap(object):
                 first = False
             sb.append("}>")
         else:
-            sb.append("[0]<{}>");
+            sb.append("[0]<{}>")
         sb.append(",f9=")
         if self.f9 is not None:
             first = True
@@ -12823,7 +12823,7 @@ class StructMap(object):
                 first = False
             sb.append("}>")
         else:
-            sb.append("[0]<{}>");
+            sb.append("[0]<{}>")
         sb.append(",f10=")
         if self.f10 is not None:
             first = True
@@ -12839,7 +12839,7 @@ class StructMap(object):
                 first = False
             sb.append("}>")
         else:
-            sb.append("[0]<{}>");
+            sb.append("[0]<{}>")
         sb.append(")")
         return "".join(sb)
 
@@ -13761,7 +13761,7 @@ class StructHash(object):
                 first = False
             sb.append("}]")
         else:
-            sb.append("[0][{}]");
+            sb.append("[0][{}]")
         sb.append(",f2=")
         if self.f2 is not None:
             first = True
@@ -13781,7 +13781,7 @@ class StructHash(object):
                 first = False
             sb.append("}]")
         else:
-            sb.append("[0][{}]");
+            sb.append("[0][{}]")
         sb.append(",f3=")
         if self.f3 is not None:
             first = True
@@ -13801,7 +13801,7 @@ class StructHash(object):
                 first = False
             sb.append("}]")
         else:
-            sb.append("[0][{}]");
+            sb.append("[0][{}]")
         sb.append(",f4=")
         if self.f4 is not None:
             first = True
@@ -13821,7 +13821,7 @@ class StructHash(object):
                 first = False
             sb.append("}]")
         else:
-            sb.append("[0][{}]");
+            sb.append("[0][{}]")
         sb.append(",f5=")
         if self.f5 is not None:
             first = True
@@ -13838,7 +13838,7 @@ class StructHash(object):
                 first = False
             sb.append("}]")
         else:
-            sb.append("[0][{}]");
+            sb.append("[0][{}]")
         sb.append(",f6=")
         if self.f6 is not None:
             first = True
@@ -13858,7 +13858,7 @@ class StructHash(object):
                 first = False
             sb.append("}]")
         else:
-            sb.append("[0][{}]");
+            sb.append("[0][{}]")
         sb.append(",f7=")
         if self.f7 is not None:
             first = True
@@ -13875,7 +13875,7 @@ class StructHash(object):
                 first = False
             sb.append("}]")
         else:
-            sb.append("[0][{}]");
+            sb.append("[0][{}]")
         sb.append(",f8=")
         if self.f8 is not None:
             first = True
@@ -13895,7 +13895,7 @@ class StructHash(object):
                 first = False
             sb.append("}]")
         else:
-            sb.append("[0][{}]");
+            sb.append("[0][{}]")
         sb.append(",f9=")
         if self.f9 is not None:
             first = True
@@ -13912,7 +13912,7 @@ class StructHash(object):
                 first = False
             sb.append("}]")
         else:
-            sb.append("[0][{}]");
+            sb.append("[0][{}]")
         sb.append(",f10=")
         if self.f10 is not None:
             first = True
@@ -13932,7 +13932,7 @@ class StructHash(object):
                 first = False
             sb.append("}]")
         else:
-            sb.append("[0][{}]");
+            sb.append("[0][{}]")
         sb.append(")")
         return "".join(sb)
 
@@ -14818,7 +14818,7 @@ class StructHashEx(object):
                 first = False
             sb.append("}]")
         else:
-            sb.append("[0][{}]");
+            sb.append("[0][{}]")
         sb.append(",f2=")
         if self.f2 is not None:
             first = True
@@ -14834,7 +14834,7 @@ class StructHashEx(object):
                 first = False
             sb.append("}]")
         else:
-            sb.append("[0][{}]");
+            sb.append("[0][{}]")
         sb.append(")")
         return "".join(sb)
 

@@ -25,6 +25,10 @@ type AccountKey struct {
 // Convert Account flags key to string
 func (k AccountKey) String() string {
     var sb strings.Builder
+    sb.WriteString("AccountKey(")
+    sb.WriteString("uid=")
+    sb.WriteString(strconv.FormatInt(int64(k.Uid), 10))
+    sb.WriteString(")")
     return sb.String()
 }
 
@@ -105,7 +109,7 @@ func (s Account) String() string {
     sb.WriteString(",orders=")
     if s.Orders != nil {
         first := true
-        sb.WriteString(",orders=[" + strconv.FormatInt(int64(len(s.Orders)), 10) + "][")
+        sb.WriteString("[" + strconv.FormatInt(int64(len(s.Orders)), 10) + "][")
         for _, v := range s.Orders {
             if first { sb.WriteString("") } else { sb.WriteString(",") }
             sb.WriteString(fmt.Sprintf("%v", v))
@@ -113,7 +117,7 @@ func (s Account) String() string {
         }
         sb.WriteString("]")
     } else {
-        sb.WriteString(",orders=[0][]");
+        sb.WriteString(",orders=[0][]")
     }
     sb.WriteString(")")
     return sb.String()

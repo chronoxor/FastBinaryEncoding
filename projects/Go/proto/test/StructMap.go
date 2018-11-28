@@ -26,6 +26,8 @@ type StructMapKey struct {
 // Convert StructMap flags key to string
 func (k StructMapKey) String() string {
     var sb strings.Builder
+    sb.WriteString("StructMapKey(")
+    sb.WriteString(")")
     return sb.String()
 }
 
@@ -97,15 +99,179 @@ func (s StructMap) String() string {
     var sb strings.Builder
     sb.WriteString("StructMap(")
     sb.WriteString("f1=")
+    if s.F1 != nil {
+        first := true
+        sb.WriteString("[" + strconv.FormatInt(int64(len(s.F1)), 10) + "]<{")
+        for k, v := range s.F1 {
+            if first { sb.WriteString("") } else { sb.WriteString(",") }
+            sb.WriteString(strconv.FormatInt(int64(k), 10))
+            sb.WriteString("->")
+            sb.WriteString(strconv.FormatUint(uint64(v), 10))
+            first = false
+        }
+        sb.WriteString("}>")
+    } else {
+        sb.WriteString("f1=[0]<{}>")
+    }
     sb.WriteString(",f2=")
+    if s.F2 != nil {
+        first := true
+        sb.WriteString("[" + strconv.FormatInt(int64(len(s.F2)), 10) + "]<{")
+        for k, v := range s.F2 {
+            if first { sb.WriteString("") } else { sb.WriteString(",") }
+            sb.WriteString(strconv.FormatInt(int64(k), 10))
+            sb.WriteString("->")
+            if v != nil { 
+                sb.WriteString(strconv.FormatUint(uint64(*v), 10))
+            } else {
+                sb.WriteString("null")
+            }
+            first = false
+        }
+        sb.WriteString("}>")
+    } else {
+        sb.WriteString(",f2=[0]<{}>")
+    }
     sb.WriteString(",f3=")
+    if s.F3 != nil {
+        first := true
+        sb.WriteString("[" + strconv.FormatInt(int64(len(s.F3)), 10) + "]<{")
+        for k, v := range s.F3 {
+            if first { sb.WriteString("") } else { sb.WriteString(",") }
+            sb.WriteString(strconv.FormatInt(int64(k), 10))
+            sb.WriteString("->")
+            if v != nil { 
+                sb.WriteString("bytes[" + strconv.FormatInt(int64(len(v)), 10) + "]")
+            } else {
+                sb.WriteString("null")
+            }
+            first = false
+        }
+        sb.WriteString("}>")
+    } else {
+        sb.WriteString(",f3=[0]<{}>")
+    }
     sb.WriteString(",f4=")
+    if s.F4 != nil {
+        first := true
+        sb.WriteString("[" + strconv.FormatInt(int64(len(s.F4)), 10) + "]<{")
+        for k, v := range s.F4 {
+            if first { sb.WriteString("") } else { sb.WriteString(",") }
+            sb.WriteString(strconv.FormatInt(int64(k), 10))
+            sb.WriteString("->")
+            if v != nil { 
+                sb.WriteString("bytes[" + strconv.FormatInt(int64(len(*v)), 10) + "]")
+            } else {
+                sb.WriteString("null")
+            }
+            first = false
+        }
+        sb.WriteString("}>")
+    } else {
+        sb.WriteString(",f4=[0]<{}>")
+    }
     sb.WriteString(",f5=")
+    if s.F5 != nil {
+        first := true
+        sb.WriteString("[" + strconv.FormatInt(int64(len(s.F5)), 10) + "]<{")
+        for k, v := range s.F5 {
+            if first { sb.WriteString("") } else { sb.WriteString(",") }
+            sb.WriteString(strconv.FormatInt(int64(k), 10))
+            sb.WriteString("->")
+            sb.WriteString(fmt.Sprintf("%v", v))
+            first = false
+        }
+        sb.WriteString("}>")
+    } else {
+        sb.WriteString(",f5=[0]<{}>")
+    }
     sb.WriteString(",f6=")
+    if s.F6 != nil {
+        first := true
+        sb.WriteString("[" + strconv.FormatInt(int64(len(s.F6)), 10) + "]<{")
+        for k, v := range s.F6 {
+            if first { sb.WriteString("") } else { sb.WriteString(",") }
+            sb.WriteString(strconv.FormatInt(int64(k), 10))
+            sb.WriteString("->")
+            if v != nil { 
+                sb.WriteString(fmt.Sprintf("%v", *v))
+            } else {
+                sb.WriteString("null")
+            }
+            first = false
+        }
+        sb.WriteString("}>")
+    } else {
+        sb.WriteString(",f6=[0]<{}>")
+    }
     sb.WriteString(",f7=")
+    if s.F7 != nil {
+        first := true
+        sb.WriteString("[" + strconv.FormatInt(int64(len(s.F7)), 10) + "]<{")
+        for k, v := range s.F7 {
+            if first { sb.WriteString("") } else { sb.WriteString(",") }
+            sb.WriteString(strconv.FormatInt(int64(k), 10))
+            sb.WriteString("->")
+            sb.WriteString(fmt.Sprintf("%v", v))
+            first = false
+        }
+        sb.WriteString("}>")
+    } else {
+        sb.WriteString(",f7=[0]<{}>")
+    }
     sb.WriteString(",f8=")
+    if s.F8 != nil {
+        first := true
+        sb.WriteString("[" + strconv.FormatInt(int64(len(s.F8)), 10) + "]<{")
+        for k, v := range s.F8 {
+            if first { sb.WriteString("") } else { sb.WriteString(",") }
+            sb.WriteString(strconv.FormatInt(int64(k), 10))
+            sb.WriteString("->")
+            if v != nil { 
+                sb.WriteString(fmt.Sprintf("%v", *v))
+            } else {
+                sb.WriteString("null")
+            }
+            first = false
+        }
+        sb.WriteString("}>")
+    } else {
+        sb.WriteString(",f8=[0]<{}>")
+    }
     sb.WriteString(",f9=")
+    if s.F9 != nil {
+        first := true
+        sb.WriteString("[" + strconv.FormatInt(int64(len(s.F9)), 10) + "]<{")
+        for k, v := range s.F9 {
+            if first { sb.WriteString("") } else { sb.WriteString(",") }
+            sb.WriteString(strconv.FormatInt(int64(k), 10))
+            sb.WriteString("->")
+            sb.WriteString(fmt.Sprintf("%v", v))
+            first = false
+        }
+        sb.WriteString("}>")
+    } else {
+        sb.WriteString(",f9=[0]<{}>")
+    }
     sb.WriteString(",f10=")
+    if s.F10 != nil {
+        first := true
+        sb.WriteString("[" + strconv.FormatInt(int64(len(s.F10)), 10) + "]<{")
+        for k, v := range s.F10 {
+            if first { sb.WriteString("") } else { sb.WriteString(",") }
+            sb.WriteString(strconv.FormatInt(int64(k), 10))
+            sb.WriteString("->")
+            if v != nil { 
+                sb.WriteString(fmt.Sprintf("%v", *v))
+            } else {
+                sb.WriteString("null")
+            }
+            first = false
+        }
+        sb.WriteString("}>")
+    } else {
+        sb.WriteString(",f10=[0]<{}>")
+    }
     sb.WriteString(")")
     return sb.String()
 }

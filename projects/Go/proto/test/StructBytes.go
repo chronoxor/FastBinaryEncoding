@@ -26,6 +26,8 @@ type StructBytesKey struct {
 // Convert StructBytes flags key to string
 func (k StructBytesKey) String() string {
     var sb strings.Builder
+    sb.WriteString("StructBytesKey(")
+    sb.WriteString(")")
     return sb.String()
 }
 

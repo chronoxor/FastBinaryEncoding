@@ -4295,6 +4295,151 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     WriteLineIndent("func (k " + struct_name + "Key) String() string {");
     Indent(1);
     WriteLineIndent("var sb strings.Builder");
+    WriteLineIndent("sb.WriteString(\"" + *s->name + "Key(\")");
+    bool first = true;
+    if (!base_type.empty())
+    {
+        WriteLineIndent("sb.WriteString(k." + ConvertBaseName(base_type) + "Key.String())");
+        first = false;
+    }
+    if (s->body)
+    {
+        for (const auto& field : s->body->fields)
+        {
+            if (field->keys)
+            {
+                WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=\")");
+                if (field->array)
+                {
+                    WriteLineIndent("if true {");
+                    Indent(1);
+                    WriteLineIndent("first := true");
+                    WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(k." + ConvertCase(*field->name) + ")), 10) + \"][\")");
+                    WriteLineIndent("for _, v := range k." + ConvertCase(*field->name) + " {");
+                    Indent(1);
+                    WriteOutputStreamValue(*field->type, "v", field->optional, true);
+                    WriteLineIndent("first = false");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    WriteLineIndent("sb.WriteString(\"]\")");
+                    Indent(-1);
+                    WriteLineIndent("} else {");
+                    Indent(1);
+                    WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=[0][]\")");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                }
+                else if (field->vector)
+                {
+                    WriteLineIndent("if k." + ConvertCase(*field->name) + " != nil {");
+                    Indent(1);
+                    WriteLineIndent("first := true");
+                    WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(k." + ConvertCase(*field->name) + ")), 10) + \"][\")");
+                    WriteLineIndent("for _, v := range k." + ConvertCase(*field->name) + " {");
+                    Indent(1);
+                    WriteOutputStreamValue(*field->type, "v", field->optional, true);
+                    WriteLineIndent("first = false");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    WriteLineIndent("sb.WriteString(\"]\")");
+                    Indent(-1);
+                    WriteLineIndent("} else {");
+                    Indent(1);
+                    WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=[0][]\")");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                }
+                else if (field->list)
+                {
+                    WriteLineIndent("if k." + ConvertCase(*field->name) + " != nil {");
+                    Indent(1);
+                    WriteLineIndent("first := true");
+                    WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(k." + ConvertCase(*field->name) + ")), 10) + \"]<\")");
+                    WriteLineIndent("for _, v := range k." + ConvertCase(*field->name) + " {");
+                    Indent(1);
+                    WriteOutputStreamValue(*field->type, "v", field->optional, true);
+                    WriteLineIndent("first = false");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    WriteLineIndent("sb.WriteString(\">\")");
+                    Indent(-1);
+                    WriteLineIndent("} else {");
+                    Indent(1);
+                    WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=[0]<>\")");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                }
+                else if (field->set)
+                {
+                    WriteLineIndent("if k." + ConvertCase(*field->name) + " != nil {");
+                    Indent(1);
+                    WriteLineIndent("first := true");
+                    WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(k." + ConvertCase(*field->name) + ".Size()), 10) + \"]{\")");
+                    WriteLineIndent("for _, v := range k." + ConvertCase(*field->name) + " {");
+                    Indent(1);
+                    WriteOutputStreamValue(*field->type, "v", field->optional, true);
+                    WriteLineIndent("first = false");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    WriteLineIndent("sb.WriteString(\"}\")");
+                    Indent(-1);
+                    WriteLineIndent("} else {");
+                    Indent(1);
+                    WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=[0]{}\")");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                }
+                else if (field->map)
+                {
+                    WriteLineIndent("if k." + ConvertCase(*field->name) + " != nil {");
+                    Indent(1);
+                    WriteLineIndent("first := true");
+                    WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(k." + ConvertCase(*field->name) + ")), 10) + \"]<{\")");
+                    WriteLineIndent("for k, v := range k." + ConvertCase(*field->name) + " {");
+                    Indent(1);
+                    WriteOutputStreamValue(*field->key, "k", false, true);
+                    WriteLineIndent("sb.WriteString(\"->\")");
+                    WriteOutputStreamValue(*field->type, "v", field->optional, false);
+                    WriteLineIndent("first = false");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    WriteLineIndent("sb.WriteString(\"}>\")");
+                    Indent(-1);
+                    WriteLineIndent("} else {");
+                    Indent(1);
+                    WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=[0]<{}>\")");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                }
+                else if (field->hash)
+                {
+                    WriteLineIndent("if k." + ConvertCase(*field->name) + " != nil {");
+                    Indent(1);
+                    WriteLineIndent("first := true");
+                    WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(k." + ConvertCase(*field->name) + ")), 10) + \"][{\")");
+                    WriteLineIndent("for k, v := range k." + ConvertCase(*field->name) + " {");
+                    Indent(1);
+                    WriteOutputStreamValue(*field->key, "k", false, true);
+                    WriteLineIndent("sb.WriteString(\"->\")");
+                    WriteOutputStreamValue(*field->type, "v", field->optional, false);
+                    WriteLineIndent("first = false");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    WriteLineIndent("sb.WriteString(\"}]\")");
+                    Indent(-1);
+                    WriteLineIndent("} else {");
+                    Indent(1);
+                    WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=[0][{}]\")");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                }
+                else
+                    WriteOutputStreamValue(*field->type, "k." + ConvertCase(*field->name), field->optional, false);
+                first = false;
+            }
+        }
+    }
+    WriteLineIndent("sb.WriteString(\")\")");
     WriteLineIndent("return sb.String()");
     Indent(-1);
     WriteLineIndent("}");
@@ -4411,8 +4556,8 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     Indent(1);
     WriteLineIndent("var sb strings.Builder");
     WriteLineIndent("sb.WriteString(\"" + *s->name + "(\")");
-    bool first = true;
-    if (s->base && !s->base->empty())
+    first = true;
+    if (!base_type.empty())
     {
         WriteLineIndent("sb.WriteString(s." + ConvertBaseName(base_type) + ".String())");
         first = false;
@@ -4427,7 +4572,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                 WriteLineIndent("if true {");
                 Indent(1);
                 WriteLineIndent("first := true");
-                WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=[\" + strconv.FormatInt(int64(len(s." + ConvertCase(*field->name) + ")), 10) + \"][\")");
+                WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(s." + ConvertCase(*field->name) + ")), 10) + \"][\")");
                 WriteLineIndent("for _, v := range s." + ConvertCase(*field->name) + " {");
                 Indent(1);
                 WriteOutputStreamValue(*field->type, "v", field->optional, true);
@@ -4438,7 +4583,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                 Indent(-1);
                 WriteLineIndent("} else {");
                 Indent(1);
-                WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=[0][]\");");
+                WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=[0][]\")");
                 Indent(-1);
                 WriteLineIndent("}");
             }
@@ -4447,7 +4592,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                 WriteLineIndent("if s." + ConvertCase(*field->name) + " != nil {");
                 Indent(1);
                 WriteLineIndent("first := true");
-                WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=[\" + strconv.FormatInt(int64(len(s." + ConvertCase(*field->name) + ")), 10) + \"][\")");
+                WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(s." + ConvertCase(*field->name) + ")), 10) + \"][\")");
                 WriteLineIndent("for _, v := range s." + ConvertCase(*field->name) + " {");
                 Indent(1);
                 WriteOutputStreamValue(*field->type, "v", field->optional, true);
@@ -4458,13 +4603,93 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                 Indent(-1);
                 WriteLineIndent("} else {");
                 Indent(1);
-                WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=[0][]\");");
+                WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=[0][]\")");
                 Indent(-1);
                 WriteLineIndent("}");
             }
-            else if (field->list || field->set || field->map || field->hash)
+            else if (field->list)
             {
-
+                WriteLineIndent("if s." + ConvertCase(*field->name) + " != nil {");
+                Indent(1);
+                WriteLineIndent("first := true");
+                WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(s." + ConvertCase(*field->name) + ")), 10) + \"]<\")");
+                WriteLineIndent("for _, v := range s." + ConvertCase(*field->name) + " {");
+                Indent(1);
+                WriteOutputStreamValue(*field->type, "v", field->optional, true);
+                WriteLineIndent("first = false");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("sb.WriteString(\">\")");
+                Indent(-1);
+                WriteLineIndent("} else {");
+                Indent(1);
+                WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=[0]<>\")");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
+            else if (field->set)
+            {
+                WriteLineIndent("if s." + ConvertCase(*field->name) + " != nil {");
+                Indent(1);
+                WriteLineIndent("first := true");
+                WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(s." + ConvertCase(*field->name) + ".Size()), 10) + \"]{\")");
+                WriteLineIndent("for _, v := range s." + ConvertCase(*field->name) + " {");
+                Indent(1);
+                WriteOutputStreamValue(*field->type, "v", field->optional, true);
+                WriteLineIndent("first = false");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("sb.WriteString(\"}\")");
+                Indent(-1);
+                WriteLineIndent("} else {");
+                Indent(1);
+                WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=[0]{}\")");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
+            else if (field->map)
+            {
+                WriteLineIndent("if s." + ConvertCase(*field->name) + " != nil {");
+                Indent(1);
+                WriteLineIndent("first := true");
+                WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(s." + ConvertCase(*field->name) + ")), 10) + \"]<{\")");
+                WriteLineIndent("for k, v := range s." + ConvertCase(*field->name) + " {");
+                Indent(1);
+                WriteOutputStreamValue(*field->key, "k", false, true);
+                WriteLineIndent("sb.WriteString(\"->\")");
+                WriteOutputStreamValue(*field->type, "v", field->optional, false);
+                WriteLineIndent("first = false");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("sb.WriteString(\"}>\")");
+                Indent(-1);
+                WriteLineIndent("} else {");
+                Indent(1);
+                WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=[0]<{}>\")");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
+            else if (field->hash)
+            {
+                WriteLineIndent("if s." + ConvertCase(*field->name) + " != nil {");
+                Indent(1);
+                WriteLineIndent("first := true");
+                WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(s." + ConvertCase(*field->name) + ")), 10) + \"][{\")");
+                WriteLineIndent("for k, v := range s." + ConvertCase(*field->name) + " {");
+                Indent(1);
+                WriteOutputStreamValue(*field->key, "k", false, true);
+                WriteLineIndent("sb.WriteString(\"->\")");
+                WriteOutputStreamValue(*field->type, "v", field->optional, false);
+                WriteLineIndent("first = false");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("sb.WriteString(\"}]\")");
+                Indent(-1);
+                WriteLineIndent("} else {");
+                Indent(1);
+                WriteLineIndent("sb.WriteString(\"" + std::string(first ? "" : ",") + *field->name + "=[0][{}]\")");
+                Indent(-1);
+                WriteLineIndent("}");
             }
             else
                 WriteOutputStreamValue(*field->type, "s." + ConvertCase(*field->name), field->optional, false);
@@ -4489,227 +4714,230 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     }
 
     // Generate set wrappers
-    for (const auto& field : s->body->fields)
+    if (s->body)
     {
-        if (field->set)
+        for (const auto& field : s->body->fields)
         {
-            WriteLine();
-            WriteLineIndent("// Set wrapper for the field " + ConvertCase(*field->name));
-            WriteLineIndent("type set" + ConvertCase(*field->name) + " map[" + ConvertKeyName(*field->key) + "]" + ConvertTypeName(*field->type, field->optional));
-
-            if (JSON())
+            if (field->set)
             {
-                // Generate set wrapper IsEmpty() method
                 WriteLine();
-                WriteLineIndent("// Is the set empty?");
-                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") IsEmpty() bool {");
-                Indent(1);
-                WriteLineIndent("return s.Size() > 0");
-                Indent(-1);
-                WriteLineIndent("}");
+                WriteLineIndent("// Set wrapper for the field " + ConvertCase(*field->name));
+                WriteLineIndent("type set" + ConvertCase(*field->name) + " map[" + ConvertKeyName(*field->key) + "]" + ConvertTypeName(*field->type, field->optional));
 
-                // Generate set wrapper Size() method
-                WriteLine();
-                WriteLineIndent("// Get the set size");
-                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Size() int {");
-                Indent(1);
-                WriteLineIndent("return len(s)");
-                Indent(-1);
-                WriteLineIndent("}");
+                if (JSON())
+                {
+                    // Generate set wrapper IsEmpty() method
+                    WriteLine();
+                    WriteLineIndent("// Is the set empty?");
+                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") IsEmpty() bool {");
+                    Indent(1);
+                    WriteLineIndent("return s.Size() > 0");
+                    Indent(-1);
+                    WriteLineIndent("}");
 
-                // Generate set wrapper Add() method
-                WriteLine();
-                WriteLineIndent("// Add the given item to the set");
-                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Add(item " + ConvertTypeName(*field->type, field->optional) + ") {");
-                Indent(1);
-                if (IsGoType(*field->key))
-                    WriteLineIndent("s[item] = item");
-                else
-                    WriteLineIndent("s[item.Key()] = item");
-                Indent(-1);
-                WriteLineIndent("}");
+                    // Generate set wrapper Size() method
+                    WriteLine();
+                    WriteLineIndent("// Get the set size");
+                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Size() int {");
+                    Indent(1);
+                    WriteLineIndent("return len(s)");
+                    Indent(-1);
+                    WriteLineIndent("}");
 
-                // Generate set wrapper Contains() method
-                WriteLine();
-                WriteLineIndent("// Contains the given item in the set?");
-                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Contains(item " + ConvertTypeName(*field->type, field->optional) + ") bool {");
-                Indent(1);
-                if (IsGoType(*field->key))
-                    WriteLineIndent("_, exists := s[item]");
-                else
-                    WriteLineIndent("_, exists := s[item.Key()]");
-                Indent(-1);
-                WriteLineIndent("return exists");
-                WriteLineIndent("}");
+                    // Generate set wrapper Add() method
+                    WriteLine();
+                    WriteLineIndent("// Add the given item to the set");
+                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Add(item " + ConvertTypeName(*field->type, field->optional) + ") {");
+                    Indent(1);
+                    if (IsGoType(*field->key))
+                        WriteLineIndent("s[item] = item");
+                    else
+                        WriteLineIndent("s[item.Key()] = item");
+                    Indent(-1);
+                    WriteLineIndent("}");
 
-                // Generate set wrapper Remove() method
-                WriteLine();
-                WriteLineIndent("// Remove the given item from the set");
-                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Remove(item " + ConvertTypeName(*field->type, field->optional) + ") {");
-                Indent(1);
-                if (IsGoType(*field->key))
-                    WriteLineIndent("delete(s, item)");
-                else
-                    WriteLineIndent("delete(s, item.Key())");
-                Indent(-1);
-                WriteLineIndent("}");
+                    // Generate set wrapper Contains() method
+                    WriteLine();
+                    WriteLineIndent("// Contains the given item in the set?");
+                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Contains(item " + ConvertTypeName(*field->type, field->optional) + ") bool {");
+                    Indent(1);
+                    if (IsGoType(*field->key))
+                        WriteLineIndent("_, exists := s[item]");
+                    else
+                        WriteLineIndent("_, exists := s[item.Key()]");
+                    Indent(-1);
+                    WriteLineIndent("return exists");
+                    WriteLineIndent("}");
 
-                // Generate set wrapper Clear() method
-                WriteLine();
-                WriteLineIndent("// Clear the set");
-                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Clear() {");
-                Indent(1);
-                WriteLineIndent("for i := range s {");
-                Indent(1);
-                WriteLineIndent("delete(s, i)");
-                Indent(-1);
-                WriteLineIndent("}");
-                Indent(-1);
-                WriteLineIndent("}");
+                    // Generate set wrapper Remove() method
+                    WriteLine();
+                    WriteLineIndent("// Remove the given item from the set");
+                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Remove(item " + ConvertTypeName(*field->type, field->optional) + ") {");
+                    Indent(1);
+                    if (IsGoType(*field->key))
+                        WriteLineIndent("delete(s, item)");
+                    else
+                        WriteLineIndent("delete(s, item.Key())");
+                    Indent(-1);
+                    WriteLineIndent("}");
 
-                // Generate set wrapper Enumerate() method
-                WriteLine();
-                WriteLineIndent("// Enumerate the set");
-                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Enumerate() []" + ConvertTypeName(*field->type, field->optional) + " {");
-                Indent(1);
-                WriteLineIndent("array := make([]" + ConvertTypeName(*field->type, field->optional) + ", 0)");
-                WriteLineIndent("for _, v := range s {");
-                Indent(1);
-                WriteLineIndent("array = append(array, v)");
-                Indent(-1);
-                WriteLineIndent("}");
-                WriteLineIndent("return array");
-                Indent(-1);
-                WriteLineIndent("}");
+                    // Generate set wrapper Clear() method
+                    WriteLine();
+                    WriteLineIndent("// Clear the set");
+                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Clear() {");
+                    Indent(1);
+                    WriteLineIndent("for i := range s {");
+                    Indent(1);
+                    WriteLineIndent("delete(s, i)");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    Indent(-1);
+                    WriteLineIndent("}");
 
-                // Generate set wrapper Subset() method
-                WriteLine();
-                WriteLineIndent("// Is the current set a subset of the given set?");
-                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Subset(set set" + ConvertCase(*field->name) + ") bool {");
-                Indent(1);
-                WriteLineIndent("result := true");
-                WriteLineIndent("for _, v := range s {");
-                Indent(1);
-                WriteLineIndent("if !set.Contains(v) {");
-                Indent(1);
-                WriteLineIndent("result = false");
-                WriteLineIndent("break");
-                Indent(-1);
-                WriteLineIndent("}");
-                Indent(-1);
-                WriteLineIndent("}");
-                WriteLineIndent("return result");
-                Indent(-1);
-                WriteLineIndent("}");
+                    // Generate set wrapper Enumerate() method
+                    WriteLine();
+                    WriteLineIndent("// Enumerate the set");
+                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Enumerate() []" + ConvertTypeName(*field->type, field->optional) + " {");
+                    Indent(1);
+                    WriteLineIndent("array := make([]" + ConvertTypeName(*field->type, field->optional) + ", 0)");
+                    WriteLineIndent("for _, v := range s {");
+                    Indent(1);
+                    WriteLineIndent("array = append(array, v)");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    WriteLineIndent("return array");
+                    Indent(-1);
+                    WriteLineIndent("}");
 
-                // Generate set wrapper Union() method
-                WriteLine();
-                WriteLineIndent("// Union of the current set and the given set");
-                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Union(set set" + ConvertCase(*field->name) + ") set" + ConvertCase(*field->name) + " {");
-                Indent(1);
-                WriteLineIndent("result := make(set" + ConvertCase(*field->name) + ")");
-                WriteLineIndent("for _, v := range s {");
-                Indent(1);
-                WriteLineIndent("result.Add(v)");
-                Indent(-1);
-                WriteLineIndent("}");
-                WriteLineIndent("for _, v := range set {");
-                Indent(1);
-                WriteLineIndent("result.Add(v)");
-                Indent(-1);
-                WriteLineIndent("}");
-                WriteLineIndent("return result");
-                Indent(-1);
-                WriteLineIndent("}");
+                    // Generate set wrapper Subset() method
+                    WriteLine();
+                    WriteLineIndent("// Is the current set a subset of the given set?");
+                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Subset(set set" + ConvertCase(*field->name) + ") bool {");
+                    Indent(1);
+                    WriteLineIndent("result := true");
+                    WriteLineIndent("for _, v := range s {");
+                    Indent(1);
+                    WriteLineIndent("if !set.Contains(v) {");
+                    Indent(1);
+                    WriteLineIndent("result = false");
+                    WriteLineIndent("break");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    WriteLineIndent("return result");
+                    Indent(-1);
+                    WriteLineIndent("}");
 
-                // Generate set wrapper Intersection() method
-                WriteLine();
-                WriteLineIndent("// Intersection of the current set and the given set");
-                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Intersection(set set" + ConvertCase(*field->name) + ") set" + ConvertCase(*field->name) + " {");
-                Indent(1);
-                WriteLineIndent("result := make(set" + ConvertCase(*field->name) + ")");
-                WriteLineIndent("for _, v := range set {");
-                Indent(1);
-                WriteLineIndent("if s.Contains(v) {");
-                Indent(1);
-                WriteLineIndent("result.Add(v)");
-                Indent(-1);
-                WriteLineIndent("}");
-                Indent(-1);
-                WriteLineIndent("}");
-                WriteLineIndent("return result");
-                Indent(-1);
-                WriteLineIndent("}");
+                    // Generate set wrapper Union() method
+                    WriteLine();
+                    WriteLineIndent("// Union of the current set and the given set");
+                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Union(set set" + ConvertCase(*field->name) + ") set" + ConvertCase(*field->name) + " {");
+                    Indent(1);
+                    WriteLineIndent("result := make(set" + ConvertCase(*field->name) + ")");
+                    WriteLineIndent("for _, v := range s {");
+                    Indent(1);
+                    WriteLineIndent("result.Add(v)");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    WriteLineIndent("for _, v := range set {");
+                    Indent(1);
+                    WriteLineIndent("result.Add(v)");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    WriteLineIndent("return result");
+                    Indent(-1);
+                    WriteLineIndent("}");
 
-                // Generate set wrapper Difference() method
-                WriteLine();
-                WriteLineIndent("// Difference between the current set and the given set");
-                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Difference(set set" + ConvertCase(*field->name) + ") set" + ConvertCase(*field->name) + " {");
-                Indent(1);
-                WriteLineIndent("result := make(set" + ConvertCase(*field->name) + ")");
-                WriteLineIndent("for _, v := range set {");
-                Indent(1);
-                WriteLineIndent("if !s.Contains(v) {");
-                Indent(1);
-                WriteLineIndent("result.Add(v)");
-                Indent(-1);
-                WriteLineIndent("}");
-                Indent(-1);
-                WriteLineIndent("}");
-                WriteLineIndent("for _, v := range s {");
-                Indent(1);
-                WriteLineIndent("if !set.Contains(v) {");
-                Indent(1);
-                WriteLineIndent("result.Add(v)");
-                Indent(-1);
-                WriteLineIndent("}");
-                Indent(-1);
-                WriteLineIndent("}");
-                WriteLineIndent("return result");
-                Indent(-1);
-                WriteLineIndent("}");
+                    // Generate set wrapper Intersection() method
+                    WriteLine();
+                    WriteLineIndent("// Intersection of the current set and the given set");
+                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Intersection(set set" + ConvertCase(*field->name) + ") set" + ConvertCase(*field->name) + " {");
+                    Indent(1);
+                    WriteLineIndent("result := make(set" + ConvertCase(*field->name) + ")");
+                    WriteLineIndent("for _, v := range set {");
+                    Indent(1);
+                    WriteLineIndent("if s.Contains(v) {");
+                    Indent(1);
+                    WriteLineIndent("result.Add(v)");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    WriteLineIndent("return result");
+                    Indent(-1);
+                    WriteLineIndent("}");
 
-                // Generate set wrapper MarshalJSON() method
-                WriteLine();
-                WriteLineIndent("// Convert set to JSON");
-                WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") MarshalJSON() ([]byte, error) {");
-                Indent(1);
-                WriteLineIndent("array := make([]" + ConvertTypeName(*field->type, field->optional) + ", 0)");
-                WriteLineIndent("for _, v := range s {");
-                Indent(1);
-                WriteLineIndent("array = append(array, v)");
-                Indent(-1);
-                WriteLineIndent("}");
-                WriteLineIndent("return fbe.Json.Marshal(&array)");
-                Indent(-1);
-                WriteLineIndent("}");
+                    // Generate set wrapper Difference() method
+                    WriteLine();
+                    WriteLineIndent("// Difference between the current set and the given set");
+                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Difference(set set" + ConvertCase(*field->name) + ") set" + ConvertCase(*field->name) + " {");
+                    Indent(1);
+                    WriteLineIndent("result := make(set" + ConvertCase(*field->name) + ")");
+                    WriteLineIndent("for _, v := range set {");
+                    Indent(1);
+                    WriteLineIndent("if !s.Contains(v) {");
+                    Indent(1);
+                    WriteLineIndent("result.Add(v)");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    WriteLineIndent("for _, v := range s {");
+                    Indent(1);
+                    WriteLineIndent("if !set.Contains(v) {");
+                    Indent(1);
+                    WriteLineIndent("result.Add(v)");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    WriteLineIndent("return result");
+                    Indent(-1);
+                    WriteLineIndent("}");
 
-                // Generate set wrapper UnmarshalJSON() method
-                WriteLine();
-                WriteLineIndent("// Convert JSON to set");
-                WriteLineIndent("func (s *set" + ConvertCase(*field->name) + ") UnmarshalJSON(body []byte) error {");
-                Indent(1);
-                WriteLineIndent("var array []" + ConvertTypeName(*field->type, field->optional));
-                WriteLineIndent("err := fbe.Json.Unmarshal(body, &array)");
-                WriteLineIndent("if err != nil {");
-                Indent(1);
-                WriteLineIndent("return err");
-                Indent(-1);
-                WriteLineIndent("} else {");
-                Indent(1);
-                WriteLineIndent("for _, v := range array {");
-                Indent(1);
-                if (IsGoType(*field->key))
-                    WriteLineIndent("(*s)[v] = v");
-                else
-                    WriteLineIndent("(*s)[v.Key()] = v");
-                Indent(-1);
-                WriteLineIndent("}");
-                Indent(-1);
-                WriteLineIndent("}");
-                WriteLineIndent("return nil");
-                Indent(-1);
-                WriteLineIndent("}");
+                    // Generate set wrapper MarshalJSON() method
+                    WriteLine();
+                    WriteLineIndent("// Convert set to JSON");
+                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") MarshalJSON() ([]byte, error) {");
+                    Indent(1);
+                    WriteLineIndent("array := make([]" + ConvertTypeName(*field->type, field->optional) + ", 0)");
+                    WriteLineIndent("for _, v := range s {");
+                    Indent(1);
+                    WriteLineIndent("array = append(array, v)");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    WriteLineIndent("return fbe.Json.Marshal(&array)");
+                    Indent(-1);
+                    WriteLineIndent("}");
+
+                    // Generate set wrapper UnmarshalJSON() method
+                    WriteLine();
+                    WriteLineIndent("// Convert JSON to set");
+                    WriteLineIndent("func (s *set" + ConvertCase(*field->name) + ") UnmarshalJSON(body []byte) error {");
+                    Indent(1);
+                    WriteLineIndent("var array []" + ConvertTypeName(*field->type, field->optional));
+                    WriteLineIndent("err := fbe.Json.Unmarshal(body, &array)");
+                    WriteLineIndent("if err != nil {");
+                    Indent(1);
+                    WriteLineIndent("return err");
+                    Indent(-1);
+                    WriteLineIndent("} else {");
+                    Indent(1);
+                    WriteLineIndent("for _, v := range array {");
+                    Indent(1);
+                    if (IsGoType(*field->key))
+                        WriteLineIndent("(*s)[v] = v");
+                    else
+                        WriteLineIndent("(*s)[v.Key()] = v");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    WriteLineIndent("return nil");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                }
             }
         }
     }
@@ -6803,10 +7031,12 @@ void GeneratorGo::WriteOutputStreamType(const std::string& type, const std::stri
         Write("sb.WriteString(\"bytes[\" + strconv.FormatInt(int64(len(" + std::string(optional ? "*" : "") + name + ")), 10) + \"]\")");
     else if (type == "string")
         Write("sb.WriteString(\"\\\"\" + " + std::string(optional ? "*" : "") + name + " + \"\\\"\")");
-    else if ((type == "decimal") || (type == "uuid"))
-        Write("sb.WriteString(\"\\\"\" + " + std::string(optional ? "(*" : "") + name + std::string(optional ? ")" : "") + ".String() + \"\\\"\")");
+    else if (type == "decimal")
+        Write("sb.WriteString(" + std::string(optional ? "(*" : "") + name + std::string(optional ? ")" : "") + ".String())");
     else if (type == "timestamp")
         Write("sb.WriteString(strconv.FormatInt(" + std::string(optional ? "(*" : "") + name + std::string(optional ? ")" : "") +  + ".UnixNano(), 10))");
+    else if (type == "uuid")
+        Write("sb.WriteString(\"\\\"\" + " + std::string(optional ? "(*" : "") + name + std::string(optional ? ")" : "") + ".String() + \"\\\"\")");
     else
         Write("sb.WriteString(fmt.Sprintf(\"%v\", " + std::string(optional ? "*" : "") + name + "))");
 }

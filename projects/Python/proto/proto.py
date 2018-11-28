@@ -1722,7 +1722,7 @@ class Account(object):
                 first = False
             sb.append("]")
         else:
-            sb.append("[0][]");
+            sb.append("[0][]")
         sb.append(")")
         return "".join(sb)
 

@@ -27,6 +27,9 @@ type StructNestedKey struct {
 // Convert StructNested flags key to string
 func (k StructNestedKey) String() string {
     var sb strings.Builder
+    sb.WriteString("StructNestedKey(")
+    sb.WriteString(k.StructOptionalKey.String())
+    sb.WriteString(")")
     return sb.String()
 }
 

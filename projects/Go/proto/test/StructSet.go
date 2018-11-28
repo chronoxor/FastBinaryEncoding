@@ -26,6 +26,8 @@ type StructSetKey struct {
 // Convert StructSet flags key to string
 func (k StructSetKey) String() string {
     var sb strings.Builder
+    sb.WriteString("StructSetKey(")
+    sb.WriteString(")")
     return sb.String()
 }
 
@@ -85,9 +87,57 @@ func (s StructSet) String() string {
     var sb strings.Builder
     sb.WriteString("StructSet(")
     sb.WriteString("f1=")
+    if s.F1 != nil {
+        first := true
+        sb.WriteString("[" + strconv.FormatInt(int64(s.F1.Size()), 10) + "]{")
+        for _, v := range s.F1 {
+            if first { sb.WriteString("") } else { sb.WriteString(",") }
+            sb.WriteString(strconv.FormatUint(uint64(v), 10))
+            first = false
+        }
+        sb.WriteString("}")
+    } else {
+        sb.WriteString("f1=[0]{}")
+    }
     sb.WriteString(",f2=")
+    if s.F2 != nil {
+        first := true
+        sb.WriteString("[" + strconv.FormatInt(int64(s.F2.Size()), 10) + "]{")
+        for _, v := range s.F2 {
+            if first { sb.WriteString("") } else { sb.WriteString(",") }
+            sb.WriteString(fmt.Sprintf("%v", v))
+            first = false
+        }
+        sb.WriteString("}")
+    } else {
+        sb.WriteString(",f2=[0]{}")
+    }
     sb.WriteString(",f3=")
+    if s.F3 != nil {
+        first := true
+        sb.WriteString("[" + strconv.FormatInt(int64(s.F3.Size()), 10) + "]{")
+        for _, v := range s.F3 {
+            if first { sb.WriteString("") } else { sb.WriteString(",") }
+            sb.WriteString(fmt.Sprintf("%v", v))
+            first = false
+        }
+        sb.WriteString("}")
+    } else {
+        sb.WriteString(",f3=[0]{}")
+    }
     sb.WriteString(",f4=")
+    if s.F4 != nil {
+        first := true
+        sb.WriteString("[" + strconv.FormatInt(int64(s.F4.Size()), 10) + "]{")
+        for _, v := range s.F4 {
+            if first { sb.WriteString("") } else { sb.WriteString(",") }
+            sb.WriteString(fmt.Sprintf("%v", v))
+            first = false
+        }
+        sb.WriteString("}")
+    } else {
+        sb.WriteString(",f4=[0]{}")
+    }
     sb.WriteString(")")
     return sb.String()
 }

@@ -198,9 +198,17 @@
     </option>
   </component>
   <component name="RunManager" selected="Node.js.print.js">
-    <configuration name="json.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="json.js" working-dir="$PROJECT_DIR$/examples" />
     <configuration name="print.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="print.js" working-dir="$PROJECT_DIR$/examples" />
     <configuration name="print_json.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="print_json.js" working-dir="$PROJECT_DIR$/examples" />
+    <configuration name="tests-browser-local" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="tests-browser-local" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+    </configuration>
     <configuration name="tests-node" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -222,17 +230,17 @@
     <list>
       <item itemvalue="npm.tests-node" />
       <item itemvalue="npm.tests-standard" />
-      <item itemvalue="Node.js.json.js" />
       <item itemvalue="Node.js.print_json.js" />
       <item itemvalue="Node.js.print.js" />
+      <item itemvalue="npm.tests-browser-local" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Node.js.print.js" />
+        <item itemvalue="npm.tests-browser-local" />
         <item itemvalue="npm.tests-node" />
         <item itemvalue="npm.tests-standard" />
+        <item itemvalue="Node.js.print.js" />
         <item itemvalue="Node.js.print_json.js" />
-        <item itemvalue="Node.js.json.js" />
       </list>
     </recent_temporary>
   </component>
@@ -257,23 +265,22 @@
       <workItem from="1539797118671" duration="63000" />
       <workItem from="1539798043102" duration="3319000" />
       <workItem from="1542829920590" duration="599000" />
-      <workItem from="1543151546075" duration="4119000" />
+      <workItem from="1543151546075" duration="4728000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12160000" />
+    <option name="totallyTimeSpent" value="12769000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="359" y="257" width="1827" height="934" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.60087717" visible="true" weight="0.27613193" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.60087717" visible="true" weight="0.27613193" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.43142146" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.43142146" />
       <window_info id="npm" order="2" sideWeight="0.3991228" side_tool="true" visible="true" weight="0.27613193" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />

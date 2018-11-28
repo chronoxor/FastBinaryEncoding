@@ -26,6 +26,8 @@ type StructHashExKey struct {
 // Convert StructHashEx flags key to string
 func (k StructHashExKey) String() string {
     var sb strings.Builder
+    sb.WriteString("StructHashExKey(")
+    sb.WriteString(")")
     return sb.String()
 }
 
@@ -81,7 +83,39 @@ func (s StructHashEx) String() string {
     var sb strings.Builder
     sb.WriteString("StructHashEx(")
     sb.WriteString("f1=")
+    if s.F1 != nil {
+        first := true
+        sb.WriteString("[" + strconv.FormatInt(int64(len(s.F1)), 10) + "][{")
+        for k, v := range s.F1 {
+            if first { sb.WriteString("") } else { sb.WriteString(",") }
+            sb.WriteString(fmt.Sprintf("%v", k))
+            sb.WriteString("->")
+            sb.WriteString(fmt.Sprintf("%v", v))
+            first = false
+        }
+        sb.WriteString("}]")
+    } else {
+        sb.WriteString("f1=[0][{}]")
+    }
     sb.WriteString(",f2=")
+    if s.F2 != nil {
+        first := true
+        sb.WriteString("[" + strconv.FormatInt(int64(len(s.F2)), 10) + "][{")
+        for k, v := range s.F2 {
+            if first { sb.WriteString("") } else { sb.WriteString(",") }
+            sb.WriteString(fmt.Sprintf("%v", k))
+            sb.WriteString("->")
+            if v != nil { 
+                sb.WriteString(fmt.Sprintf("%v", *v))
+            } else {
+                sb.WriteString("null")
+            }
+            first = false
+        }
+        sb.WriteString("}]")
+    } else {
+        sb.WriteString(",f2=[0][{}]")
+    }
     sb.WriteString(")")
     return sb.String()
 }

@@ -27,6 +27,9 @@ type StructOptionalKey struct {
 // Convert StructOptional flags key to string
 func (k StructOptionalKey) String() string {
     var sb strings.Builder
+    sb.WriteString("StructOptionalKey(")
+    sb.WriteString(k.StructSimpleKey.String())
+    sb.WriteString(")")
     return sb.String()
 }
 
@@ -467,19 +470,19 @@ func (s StructOptional) String() string {
     }
     sb.WriteString(",f142=")
     if s.F142 != nil { 
-        sb.WriteString("\"" + (*s.F142).String() + "\"")
+        sb.WriteString((*s.F142).String())
     } else {
         sb.WriteString("null")
     }
     sb.WriteString(",f143=")
     if s.F143 != nil { 
-        sb.WriteString("\"" + (*s.F143).String() + "\"")
+        sb.WriteString((*s.F143).String())
     } else {
         sb.WriteString("null")
     }
     sb.WriteString(",f144=")
     if s.F144 != nil { 
-        sb.WriteString("\"" + (*s.F144).String() + "\"")
+        sb.WriteString((*s.F144).String())
     } else {
         sb.WriteString("null")
     }
