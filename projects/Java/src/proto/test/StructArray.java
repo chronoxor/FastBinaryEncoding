@@ -125,9 +125,7 @@ public class StructArray implements Comparable<Object>
             sb.append("]");
         }
         else
-        {
             sb.append("f1=[0][]");
-        }
         if (f2 != null)
         {
             boolean first = true;
@@ -140,9 +138,7 @@ public class StructArray implements Comparable<Object>
             sb.append("]");
         }
         else
-        {
             sb.append(",f2=[0][]");
-        }
         if (f3 != null)
         {
             boolean first = true;
@@ -155,9 +151,7 @@ public class StructArray implements Comparable<Object>
             sb.append("]");
         }
         else
-        {
             sb.append(",f3=[0][]");
-        }
         if (f4 != null)
         {
             boolean first = true;
@@ -170,9 +164,7 @@ public class StructArray implements Comparable<Object>
             sb.append("]");
         }
         else
-        {
             sb.append(",f4=[0][]");
-        }
         if (f5 != null)
         {
             boolean first = true;
@@ -185,9 +177,7 @@ public class StructArray implements Comparable<Object>
             sb.append("]");
         }
         else
-        {
             sb.append(",f5=[0][]");
-        }
         if (f6 != null)
         {
             boolean first = true;
@@ -200,9 +190,7 @@ public class StructArray implements Comparable<Object>
             sb.append("]");
         }
         else
-        {
             sb.append(",f6=[0][]");
-        }
         if (f7 != null)
         {
             boolean first = true;
@@ -215,9 +203,7 @@ public class StructArray implements Comparable<Object>
             sb.append("]");
         }
         else
-        {
             sb.append(",f7=[0][]");
-        }
         if (f8 != null)
         {
             boolean first = true;
@@ -230,9 +216,7 @@ public class StructArray implements Comparable<Object>
             sb.append("]");
         }
         else
-        {
             sb.append(",f8=[0][]");
-        }
         if (f9 != null)
         {
             boolean first = true;
@@ -245,9 +229,7 @@ public class StructArray implements Comparable<Object>
             sb.append("]");
         }
         else
-        {
             sb.append(",f9=[0][]");
-        }
         if (f10 != null)
         {
             boolean first = true;
@@ -260,9 +242,7 @@ public class StructArray implements Comparable<Object>
             sb.append("]");
         }
         else
-        {
             sb.append(",f10=[0][]");
-        }
         sb.append(")");
         return sb.toString();
     }

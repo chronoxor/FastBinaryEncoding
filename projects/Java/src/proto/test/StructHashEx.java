@@ -103,9 +103,7 @@ public class StructHashEx implements Comparable<Object>
             sb.append("}]");
         }
         else
-        {
             sb.append("f1=[0][{}]");
-        }
         if (f2 != null)
         {
             boolean first = true;
@@ -120,9 +118,7 @@ public class StructHashEx implements Comparable<Object>
             sb.append("}]");
         }
         else
-        {
             sb.append(",f2=[0][{}]");
-        }
         sb.append(")");
         return sb.toString();
     }

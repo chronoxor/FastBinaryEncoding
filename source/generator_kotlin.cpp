@@ -5095,7 +5095,7 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 WriteLineIndent("for (item in " + *field->name + ")");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true, false));
                 WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -5114,7 +5114,7 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 WriteLineIndent("for (item in " + *field->name + ")");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true, false));
                 WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -5133,7 +5133,7 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 WriteLineIndent("for (item in " + *field->name + ")");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true, false));
                 WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -5152,9 +5152,9 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 WriteLineIndent("for (item in " + *field->name + ".entries)");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamValue(*field->key, "item.key", false, true));
+                WriteLineIndent(ConvertOutputStreamValue(*field->key, "item.key", false, true, false));
                 WriteLineIndent("sb.append(\"->\")");
-                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item.value", field->optional, false));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item.value", field->optional, false, true));
                 WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -5173,9 +5173,9 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 WriteLineIndent("for (item in " + *field->name + ".entries)");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamValue(*field->key, "item.key", false, true));
+                WriteLineIndent(ConvertOutputStreamValue(*field->key, "item.key", false, true, false));
                 WriteLineIndent("sb.append(\"->\")");
-                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item.value", field->optional, false));
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item.value", field->optional, false, true));
                 WriteLineIndent("first = false");
                 Indent(-1);
                 WriteLineIndent("}");
@@ -5184,7 +5184,7 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
                 WriteLineIndent("}");
             }
             else
-                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=\"); " + ConvertOutputStreamValue(*field->type, *field->name, field->optional, false));
+                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=\"); " + ConvertOutputStreamValue(*field->type, *field->name, field->optional, false, true));
             first = false;
         }
     }
@@ -7240,12 +7240,12 @@ std::string GeneratorKotlin::ConvertOutputStreamType(const std::string& type, co
         return ".append(" + name + opt + ")";
 }
 
-std::string GeneratorKotlin::ConvertOutputStreamValue(const std::string& type, const std::string& name, bool optional, bool separate)
+std::string GeneratorKotlin::ConvertOutputStreamValue(const std::string& type, const std::string& name, bool optional, bool separate, bool nullable)
 {
     std::string comma = separate ? ".append(if (first) \"\" else \",\")" : "";
 
     if (optional)
-        return "if (" + name + " != null) sb" + comma + ConvertOutputStreamType(type, name, false) + "; else sb" + comma + ".append(\"null\")";
+        return "if (" + name + " != null) sb" + comma + ConvertOutputStreamType(type, name, nullable) + "; else sb" + comma + ".append(\"null\")";
     else
         return "sb" + comma + ConvertOutputStreamType(type, name, false);
 }

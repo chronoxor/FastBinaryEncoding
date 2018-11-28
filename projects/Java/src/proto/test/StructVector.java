@@ -116,7 +116,7 @@ public class StructVector implements Comparable<Object>
         if (f1 != null)
         {
             boolean first = true;
-            sb.append("f1=[").append(f1.length).append("][");
+            sb.append("f1=[").append(f1.size()).append("][");
             for (var item : f1)
             {
                 sb.append(first ? "" : ",").append(item);
@@ -125,13 +125,11 @@ public class StructVector implements Comparable<Object>
             sb.append("]");
         }
         else
-        {
             sb.append("f1=[0][]");
-        }
         if (f2 != null)
         {
             boolean first = true;
-            sb.append(",f2=[").append(f2.length).append("][");
+            sb.append(",f2=[").append(f2.size()).append("][");
             for (var item : f2)
             {
                 if (item != null) sb.append(first ? "" : ",").append(item); else sb.append(first ? "" : ",").append("null");
@@ -140,13 +138,11 @@ public class StructVector implements Comparable<Object>
             sb.append("]");
         }
         else
-        {
             sb.append(",f2=[0][]");
-        }
         if (f3 != null)
         {
             boolean first = true;
-            sb.append(",f3=[").append(f3.length).append("][");
+            sb.append(",f3=[").append(f3.size()).append("][");
             for (var item : f3)
             {
                 if (item != null) sb.append(first ? "" : ",").append("bytes[").append(item.array().length).append("]"); else sb.append(first ? "" : ",").append("null");
@@ -155,13 +151,11 @@ public class StructVector implements Comparable<Object>
             sb.append("]");
         }
         else
-        {
             sb.append(",f3=[0][]");
-        }
         if (f4 != null)
         {
             boolean first = true;
-            sb.append(",f4=[").append(f4.length).append("][");
+            sb.append(",f4=[").append(f4.size()).append("][");
             for (var item : f4)
             {
                 if (item != null) sb.append(first ? "" : ",").append("bytes[").append(item.array().length).append("]"); else sb.append(first ? "" : ",").append("null");
@@ -170,13 +164,11 @@ public class StructVector implements Comparable<Object>
             sb.append("]");
         }
         else
-        {
             sb.append(",f4=[0][]");
-        }
         if (f5 != null)
         {
             boolean first = true;
-            sb.append(",f5=[").append(f5.length).append("][");
+            sb.append(",f5=[").append(f5.size()).append("][");
             for (var item : f5)
             {
                 sb.append(first ? "" : ",").append(item);
@@ -185,13 +177,11 @@ public class StructVector implements Comparable<Object>
             sb.append("]");
         }
         else
-        {
             sb.append(",f5=[0][]");
-        }
         if (f6 != null)
         {
             boolean first = true;
-            sb.append(",f6=[").append(f6.length).append("][");
+            sb.append(",f6=[").append(f6.size()).append("][");
             for (var item : f6)
             {
                 if (item != null) sb.append(first ? "" : ",").append(item); else sb.append(first ? "" : ",").append("null");
@@ -200,13 +190,11 @@ public class StructVector implements Comparable<Object>
             sb.append("]");
         }
         else
-        {
             sb.append(",f6=[0][]");
-        }
         if (f7 != null)
         {
             boolean first = true;
-            sb.append(",f7=[").append(f7.length).append("][");
+            sb.append(",f7=[").append(f7.size()).append("][");
             for (var item : f7)
             {
                 sb.append(first ? "" : ",").append(item);
@@ -215,13 +203,11 @@ public class StructVector implements Comparable<Object>
             sb.append("]");
         }
         else
-        {
             sb.append(",f7=[0][]");
-        }
         if (f8 != null)
         {
             boolean first = true;
-            sb.append(",f8=[").append(f8.length).append("][");
+            sb.append(",f8=[").append(f8.size()).append("][");
             for (var item : f8)
             {
                 if (item != null) sb.append(first ? "" : ",").append(item); else sb.append(first ? "" : ",").append("null");
@@ -230,13 +216,11 @@ public class StructVector implements Comparable<Object>
             sb.append("]");
         }
         else
-        {
             sb.append(",f8=[0][]");
-        }
         if (f9 != null)
         {
             boolean first = true;
-            sb.append(",f9=[").append(f9.length).append("][");
+            sb.append(",f9=[").append(f9.size()).append("][");
             for (var item : f9)
             {
                 sb.append(first ? "" : ",").append(item);
@@ -245,13 +229,11 @@ public class StructVector implements Comparable<Object>
             sb.append("]");
         }
         else
-        {
             sb.append(",f9=[0][]");
-        }
         if (f10 != null)
         {
             boolean first = true;
-            sb.append(",f10=[").append(f10.length).append("][");
+            sb.append(",f10=[").append(f10.size()).append("][");
             for (var item : f10)
             {
                 if (item != null) sb.append(first ? "" : ",").append(item); else sb.append(first ? "" : ",").append("null");
@@ -260,9 +242,7 @@ public class StructVector implements Comparable<Object>
             sb.append("]");
         }
         else
-        {
             sb.append(",f10=[0][]");
-        }
         sb.append(")");
         return sb.toString();
     }

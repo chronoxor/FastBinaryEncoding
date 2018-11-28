@@ -113,7 +113,7 @@ open class Account : Comparable<Any?>
         sb.append(",name="); sb.append("\"").append(name).append("\"")
         sb.append(",state="); sb.append(state)
         sb.append(",wallet="); sb.append(wallet)
-        sb.append(",asset="); if (asset != null) sb.append(asset); else sb.append("null")
+        sb.append(",asset="); if (asset != null) sb.append(asset!!); else sb.append("null")
         @Suppress("ConstantConditionIf")
         if (true)
         {

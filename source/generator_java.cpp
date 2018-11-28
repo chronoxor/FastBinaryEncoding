@@ -5222,7 +5222,7 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
     {
         for (const auto& field : s->body->fields)
         {
-            if (field->array || field->vector)
+            if (field->array)
             {
                 WriteLineIndent("if (" + *field->name + " != null)");
                 WriteLineIndent("{");
@@ -5240,11 +5240,31 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
                 Indent(-1);
                 WriteLineIndent("}");
                 WriteLineIndent("else");
-                WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[0][]\");");
                 Indent(-1);
+            }
+            else if (field->vector)
+            {
+                WriteLineIndent("if (" + *field->name + " != null)");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("boolean first = true;");
+                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[\").append(" + *field->name + ".size()" + ").append(\"][\");");
+                WriteLineIndent("for (var item : " + *field->name + ")");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "item", field->optional, true));
+                WriteLineIndent("first = false;");
+                Indent(-1);
                 WriteLineIndent("}");
+                WriteLineIndent("sb.append(\"]\");");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("else");
+                Indent(1);
+                WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[0][]\");");
+                Indent(-1);
             }
             else if (field->list)
             {
@@ -5264,11 +5284,9 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
                 Indent(-1);
                 WriteLineIndent("}");
                 WriteLineIndent("else");
-                WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[0]<>\");");
                 Indent(-1);
-                WriteLineIndent("}");
             }
             else if (field->set)
             {
@@ -5288,11 +5306,9 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
                 Indent(-1);
                 WriteLineIndent("}");
                 WriteLineIndent("else");
-                WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[0]{}\");");
                 Indent(-1);
-                WriteLineIndent("}");
             }
             else if (field->map)
             {
@@ -5314,11 +5330,9 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
                 Indent(-1);
                 WriteLineIndent("}");
                 WriteLineIndent("else");
-                WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[0]<{}>\");");
                 Indent(-1);
-                WriteLineIndent("}");
             }
             else if (field->hash)
             {
@@ -5340,11 +5354,9 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
                 Indent(-1);
                 WriteLineIndent("}");
                 WriteLineIndent("else");
-                WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=[0][{}]\");");
                 Indent(-1);
-                WriteLineIndent("}");
             }
             else
                 WriteLineIndent("sb.append(\"" + std::string(first ? "" : ",") + *field->name + "=\"); " + ConvertOutputStreamValue(*field->type, *field->name, field->optional, false));

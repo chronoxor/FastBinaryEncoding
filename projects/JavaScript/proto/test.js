@@ -1467,13 +1467,13 @@ class StructSimple {
     result += ',f4='
     result += this.f4.toString()
     result += ',f5='
-    result += "'"this.f5.toString() + "'"
+    result += "'" + this.f5.toString() + "'"
     result += ',f6='
-    result += "'"this.f6.toString() + "'"
+    result += "'" + this.f6.toString() + "'"
     result += ',f7='
-    result += "'"this.f7.toString() + "'"
+    result += "'" + this.f7.toString() + "'"
     result += ',f8='
-    result += "'"this.f8.toString() + "'"
+    result += "'" + this.f8.toString() + "'"
     result += ',f9='
     result += this.f9.toString()
     result += ',f10='
@@ -1528,13 +1528,13 @@ class StructSimple {
     }
     result += ',f31='
     if (this.f31 != null) {
-      result += '"'this.f31.toString() + '"'
+      result += '"' + this.f31.toString() + '"'
     } else {
       result += 'null'
     }
     result += ',f32='
     if (this.f32 != null) {
-      result += '"'this.f32.toString() + '"'
+      result += '"' + this.f32.toString() + '"'
     } else {
       result += 'null'
     }
@@ -1558,19 +1558,19 @@ class StructSimple {
     }
     result += ',f36='
     if (this.f36 != null) {
-      result += '"'this.f36.toString() + '"'
+      result += '"' + this.f36.toString() + '"'
     } else {
       result += 'null'
     }
     result += ',f37='
     if (this.f37 != null) {
-      result += '"'this.f37.toString() + '"'
+      result += '"' + this.f37.toString() + '"'
     } else {
       result += 'null'
     }
     result += ',f38='
     if (this.f38 != null) {
-      result += '"'this.f38.toString() + '"'
+      result += '"' + this.f38.toString() + '"'
     } else {
       result += 'null'
     }
@@ -5499,37 +5499,37 @@ class StructOptional extends StructSimple {
     }
     result += ',f106='
     if (this.f106 != null) {
-      result += "'"this.f106.toString() + "'"
+      result += "'" + this.f106.toString() + "'"
     } else {
       result += 'null'
     }
     result += ',f107='
     if (this.f107 != null) {
-      result += "'"this.f107.toString() + "'"
+      result += "'" + this.f107.toString() + "'"
     } else {
       result += 'null'
     }
     result += ',f108='
     if (this.f108 != null) {
-      result += "'"this.f108.toString() + "'"
+      result += "'" + this.f108.toString() + "'"
     } else {
       result += 'null'
     }
     result += ',f109='
     if (this.f109 != null) {
-      result += "'"this.f109.toString() + "'"
+      result += "'" + this.f109.toString() + "'"
     } else {
       result += 'null'
     }
     result += ',f110='
     if (this.f110 != null) {
-      result += "'"this.f110.toString() + "'"
+      result += "'" + this.f110.toString() + "'"
     } else {
       result += 'null'
     }
     result += ',f111='
     if (this.f111 != null) {
-      result += "'"this.f111.toString() + "'"
+      result += "'" + this.f111.toString() + "'"
     } else {
       result += 'null'
     }
@@ -5733,19 +5733,19 @@ class StructOptional extends StructSimple {
     }
     result += ',f145='
     if (this.f145 != null) {
-      result += '"'this.f145.toString() + '"'
+      result += '"' + this.f145.toString() + '"'
     } else {
       result += 'null'
     }
     result += ',f146='
     if (this.f146 != null) {
-      result += '"'this.f146.toString() + '"'
+      result += '"' + this.f146.toString() + '"'
     } else {
       result += 'null'
     }
     result += ',f147='
     if (this.f147 != null) {
-      result += '"'this.f147.toString() + '"'
+      result += '"' + this.f147.toString() + '"'
     } else {
       result += 'null'
     }
@@ -5769,19 +5769,19 @@ class StructOptional extends StructSimple {
     }
     result += ',f151='
     if (this.f151 != null) {
-      result += '"'this.f151.toString() + '"'
+      result += '"' + this.f151.toString() + '"'
     } else {
       result += 'null'
     }
     result += ',f152='
     if (this.f152 != null) {
-      result += '"'this.f152.toString() + '"'
+      result += '"' + this.f152.toString() + '"'
     } else {
       result += 'null'
     }
     result += ',f153='
     if (this.f153 != null) {
-      result += '"'this.f153.toString() + '"'
+      result += '"' + this.f153.toString() + '"'
     } else {
       result += 'null'
     }
@@ -20908,7 +20908,7 @@ class StructHash {
       for (let [key, value] of this.f1) {
         if (key != null) {
           result += first ? '' : ','
-          result += '"'key.toString() + '"'
+          result += '"' + key.toString() + '"'
         } else {
           result += first ? '' : ','
           result += 'null'
@@ -20928,7 +20928,7 @@ class StructHash {
       for (let [key, value] of this.f2) {
         if (key != null) {
           result += first ? '' : ','
-          result += '"'key.toString() + '"'
+          result += '"' + key.toString() + '"'
         } else {
           result += first ? '' : ','
           result += 'null'
@@ -20952,7 +20952,7 @@ class StructHash {
       for (let [key, value] of this.f3) {
         if (key != null) {
           result += first ? '' : ','
-          result += '"'key.toString() + '"'
+          result += '"' + key.toString() + '"'
         } else {
           result += first ? '' : ','
           result += 'null'
@@ -20976,7 +20976,7 @@ class StructHash {
       for (let [key, value] of this.f4) {
         if (key != null) {
           result += first ? '' : ','
-          result += '"'key.toString() + '"'
+          result += '"' + key.toString() + '"'
         } else {
           result += first ? '' : ','
           result += 'null'
@@ -21000,7 +21000,7 @@ class StructHash {
       for (let [key, value] of this.f5) {
         if (key != null) {
           result += first ? '' : ','
-          result += '"'key.toString() + '"'
+          result += '"' + key.toString() + '"'
         } else {
           result += first ? '' : ','
           result += 'null'
@@ -21020,7 +21020,7 @@ class StructHash {
       for (let [key, value] of this.f6) {
         if (key != null) {
           result += first ? '' : ','
-          result += '"'key.toString() + '"'
+          result += '"' + key.toString() + '"'
         } else {
           result += first ? '' : ','
           result += 'null'
@@ -21044,7 +21044,7 @@ class StructHash {
       for (let [key, value] of this.f7) {
         if (key != null) {
           result += first ? '' : ','
-          result += '"'key.toString() + '"'
+          result += '"' + key.toString() + '"'
         } else {
           result += first ? '' : ','
           result += 'null'
@@ -21064,7 +21064,7 @@ class StructHash {
       for (let [key, value] of this.f8) {
         if (key != null) {
           result += first ? '' : ','
-          result += '"'key.toString() + '"'
+          result += '"' + key.toString() + '"'
         } else {
           result += first ? '' : ','
           result += 'null'
@@ -21088,7 +21088,7 @@ class StructHash {
       for (let [key, value] of this.f9) {
         if (key != null) {
           result += first ? '' : ','
-          result += '"'key.toString() + '"'
+          result += '"' + key.toString() + '"'
         } else {
           result += first ? '' : ','
           result += 'null'
@@ -21108,7 +21108,7 @@ class StructHash {
       for (let [key, value] of this.f10) {
         if (key != null) {
           result += first ? '' : ','
-          result += '"'key.toString() + '"'
+          result += '"' + key.toString() + '"'
         } else {
           result += first ? '' : ','
           result += 'null'

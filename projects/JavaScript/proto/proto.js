@@ -819,7 +819,7 @@ class Order {
     result += this.uid.toString()
     result += ',symbol='
     if (this.symbol != null) {
-      result += '"'this.symbol.toString() + '"'
+      result += '"' + this.symbol.toString() + '"'
     } else {
       result += 'null'
     }
@@ -1918,7 +1918,7 @@ class Balance {
     result += 'Balance('
     result += 'currency='
     if (this.currency != null) {
-      result += '"'this.currency.toString() + '"'
+      result += '"' + this.currency.toString() + '"'
     } else {
       result += 'null'
     }
@@ -2814,7 +2814,7 @@ class Account {
     result += this.uid.toString()
     result += ',name='
     if (this.name != null) {
-      result += '"'this.name.toString() + '"'
+      result += '"' + this.name.toString() + '"'
     } else {
       result += 'null'
     }

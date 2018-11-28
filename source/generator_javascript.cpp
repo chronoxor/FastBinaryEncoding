@@ -11304,11 +11304,11 @@ void GeneratorJavaScript::WriteOutputStreamType(const std::string& type, const s
     else if (type == "bytes")
         WriteLineIndent("result += 'bytes[' + " + name + ".length + ']'");
     else if ((type == "char") || (type == "wchar"))
-        WriteLineIndent("result += \"'\"" + name + ".toString() + \"'\"");
+        WriteLineIndent("result += \"'\" + " + name + ".toString() + \"'\"");
     else if (type == "decimal")
         WriteLineIndent("result += " + name + ".toFixed()");
     else if ((type == "string") || (type == "uuid"))
-        WriteLineIndent("result += '\"'" + name + ".toString() + '\"'");
+        WriteLineIndent("result += '\"' + " + name + ".toString() + '\"'");
     else if (type == "timestamp")
         WriteLineIndent("result += " + name + ".getTime() * 1000000");
     else

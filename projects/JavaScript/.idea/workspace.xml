@@ -53,11 +53,50 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="test_serialization_json.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="test_serialization_json.js" pinned="false" current-in-tab="false">
         <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_serialization_json.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2482">
               <caret line="1024" lean-forward="true" selection-start-line="1024" selection-end-line="1024" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="proto.js" pinned="false" current-in-tab="false">
+        <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/proto.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="241">
+              <caret line="821" selection-start-line="821" selection-end-line="821" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.js" pinned="false" current-in-tab="false">
+        <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/test.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="269">
+              <caret line="1469" selection-start-line="1469" selection-end-line="1469" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="print.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/examples/print.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="303">
+              <caret line="166" lean-forward="true" selection-start-line="166" selection-end-line="166" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/proto/test.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="232">
+              <caret line="21056" column="12" lean-forward="true" selection-start-line="21056" selection-start-column="12" selection-end-line="21056" selection-end-column="12" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -75,6 +114,7 @@
         <option value="$PROJECT_DIR$/proto/proto.js" />
         <option value="Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/proto.js" />
         <option value="Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_serialization_json.js" />
+        <option value="$PROJECT_DIR$/examples/print.js" />
       </list>
     </option>
   </component>
@@ -95,8 +135,8 @@
     </packageJsonPaths>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="349" />
-    <option name="y" value="265" />
+    <option name="x" value="359" />
+    <option name="y" value="257" />
     <option name="width" value="1827" />
     <option name="height" value="934" />
   </component>
@@ -157,9 +197,9 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.print_json.js">
-    <configuration name="benchmark_serialization.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="benchmark_serialization.js" working-dir="$PROJECT_DIR$/benchmarks" />
+  <component name="RunManager" selected="Node.js.print.js">
     <configuration name="json.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="json.js" working-dir="$PROJECT_DIR$/examples" />
+    <configuration name="print.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="print.js" working-dir="$PROJECT_DIR$/examples" />
     <configuration name="print_json.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="print_json.js" working-dir="$PROJECT_DIR$/examples" />
     <configuration name="tests-node" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
@@ -182,17 +222,17 @@
     <list>
       <item itemvalue="npm.tests-node" />
       <item itemvalue="npm.tests-standard" />
-      <item itemvalue="Node.js.benchmark_serialization.js" />
       <item itemvalue="Node.js.json.js" />
       <item itemvalue="Node.js.print_json.js" />
+      <item itemvalue="Node.js.print.js" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Node.js.print_json.js" />
+        <item itemvalue="Node.js.print.js" />
         <item itemvalue="npm.tests-node" />
         <item itemvalue="npm.tests-standard" />
+        <item itemvalue="Node.js.print_json.js" />
         <item itemvalue="Node.js.json.js" />
-        <item itemvalue="Node.js.benchmark_serialization.js" />
       </list>
     </recent_temporary>
   </component>
@@ -217,23 +257,23 @@
       <workItem from="1539797118671" duration="63000" />
       <workItem from="1539798043102" duration="3319000" />
       <workItem from="1542829920590" duration="599000" />
-      <workItem from="1543151546075" duration="2982000" />
+      <workItem from="1543151546075" duration="4119000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11023000" />
+    <option name="totallyTimeSpent" value="12160000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="349" y="265" width="1827" height="934" extended-state="0" />
+    <frame x="359" y="257" width="1827" height="934" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.60087717" visible="true" weight="0.27613193" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.60087717" visible="true" weight="0.27613193" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.43142146" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.43142146" />
       <window_info id="npm" order="2" sideWeight="0.3991228" side_tool="true" visible="true" weight="0.27613193" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
@@ -272,20 +312,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_create.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/proto.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69394">
-          <caret line="4083" column="7" selection-start-line="4083" selection-start-column="7" selection-end-line="4083" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/proto/protoex.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="37383">
@@ -475,13 +501,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180608">
-          <caret line="10625" column="11" selection-start-line="10625" selection-start-column="11" selection-end-line="10625" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_int64.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -551,13 +570,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/proto.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69394">
-          <caret line="4083" column="7" selection-start-line="4083" selection-start-column="7" selection-end-line="4083" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package-lock.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -607,6 +619,37 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2482">
           <caret line="1024" lean-forward="true" selection-start-line="1024" selection-end-line="1024" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/proto.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="821" selection-start-line="821" selection-end-line="821" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="1469" selection-start-line="1469" selection-end-line="1469" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/print.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="166" lean-forward="true" selection-start-line="166" selection-end-line="166" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="21056" column="12" lean-forward="true" selection-start-line="21056" selection-start-column="12" selection-end-line="21056" selection-end-column="12" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
