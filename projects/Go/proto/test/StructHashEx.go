@@ -88,9 +88,9 @@ func (s *StructHashEx) String() string {
         sb.WriteString("[" + strconv.FormatInt(int64(len(s.F1)), 10) + "][{")
         for k, v := range s.F1 {
             if first { sb.WriteString("") } else { sb.WriteString(",") }
-            sb.WriteString(fmt.Sprintf("%v", k))
+            sb.WriteString(k.String())
             sb.WriteString("->")
-            sb.WriteString(fmt.Sprintf("%v", v))
+            sb.WriteString(v.String())
             first = false
         }
         sb.WriteString("}]")
@@ -103,10 +103,10 @@ func (s *StructHashEx) String() string {
         sb.WriteString("[" + strconv.FormatInt(int64(len(s.F2)), 10) + "][{")
         for k, v := range s.F2 {
             if first { sb.WriteString("") } else { sb.WriteString(",") }
-            sb.WriteString(fmt.Sprintf("%v", k))
+            sb.WriteString(k.String())
             sb.WriteString("->")
             if v != nil { 
-                sb.WriteString(fmt.Sprintf("%v", *v))
+                sb.WriteString(v.String())
             } else {
                 sb.WriteString("null")
             }

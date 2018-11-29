@@ -178,7 +178,7 @@ func (s *StructHash) String() string {
             if first { sb.WriteString("") } else { sb.WriteString(",") }
             sb.WriteString("\"" + k + "\"")
             sb.WriteString("->")
-            sb.WriteString(fmt.Sprintf("%v", v))
+            sb.WriteString(v.String())
             first = false
         }
         sb.WriteString("}]")
@@ -194,7 +194,7 @@ func (s *StructHash) String() string {
             sb.WriteString("\"" + k + "\"")
             sb.WriteString("->")
             if v != nil { 
-                sb.WriteString(fmt.Sprintf("%v", *v))
+                sb.WriteString(v.String())
             } else {
                 sb.WriteString("null")
             }
@@ -212,7 +212,7 @@ func (s *StructHash) String() string {
             if first { sb.WriteString("") } else { sb.WriteString(",") }
             sb.WriteString("\"" + k + "\"")
             sb.WriteString("->")
-            sb.WriteString(fmt.Sprintf("%v", v))
+            sb.WriteString(v.String())
             first = false
         }
         sb.WriteString("}]")
@@ -228,7 +228,7 @@ func (s *StructHash) String() string {
             sb.WriteString("\"" + k + "\"")
             sb.WriteString("->")
             if v != nil { 
-                sb.WriteString(fmt.Sprintf("%v", *v))
+                sb.WriteString(v.String())
             } else {
                 sb.WriteString("null")
             }
@@ -246,7 +246,7 @@ func (s *StructHash) String() string {
             if first { sb.WriteString("") } else { sb.WriteString(",") }
             sb.WriteString("\"" + k + "\"")
             sb.WriteString("->")
-            sb.WriteString(fmt.Sprintf("%v", v))
+            sb.WriteString(v.String())
             first = false
         }
         sb.WriteString("}]")
@@ -262,7 +262,7 @@ func (s *StructHash) String() string {
             sb.WriteString("\"" + k + "\"")
             sb.WriteString("->")
             if v != nil { 
-                sb.WriteString(fmt.Sprintf("%v", *v))
+                sb.WriteString(v.String())
             } else {
                 sb.WriteString("null")
             }

@@ -109,50 +109,50 @@ func (s *StructNested) String() string {
     sb.WriteString("StructNested(")
     sb.WriteString(s.StructOptional.String())
     sb.WriteString(",f1000=")
-    sb.WriteString(fmt.Sprintf("%v", s.F1000))
+    sb.WriteString(s.F1000.String())
     sb.WriteString(",f1001=")
     if s.F1001 != nil { 
-        sb.WriteString(fmt.Sprintf("%v", *s.F1001))
+        sb.WriteString(s.F1001.String())
     } else {
         sb.WriteString("null")
     }
     sb.WriteString(",f1002=")
-    sb.WriteString(fmt.Sprintf("%v", s.F1002))
+    sb.WriteString(s.F1002.String())
     sb.WriteString(",f1003=")
     if s.F1003 != nil { 
-        sb.WriteString(fmt.Sprintf("%v", *s.F1003))
+        sb.WriteString(s.F1003.String())
     } else {
         sb.WriteString("null")
     }
     sb.WriteString(",f1004=")
-    sb.WriteString(fmt.Sprintf("%v", s.F1004))
+    sb.WriteString(s.F1004.String())
     sb.WriteString(",f1005=")
     if s.F1005 != nil { 
-        sb.WriteString(fmt.Sprintf("%v", *s.F1005))
+        sb.WriteString(s.F1005.String())
     } else {
         sb.WriteString("null")
     }
     sb.WriteString(",f1006=")
-    sb.WriteString(fmt.Sprintf("%v", s.F1006))
+    sb.WriteString(s.F1006.String())
     sb.WriteString(",f1007=")
     if s.F1007 != nil { 
-        sb.WriteString(fmt.Sprintf("%v", *s.F1007))
+        sb.WriteString(s.F1007.String())
     } else {
         sb.WriteString("null")
     }
     sb.WriteString(",f1008=")
-    sb.WriteString(fmt.Sprintf("%v", s.F1008))
+    sb.WriteString(s.F1008.String())
     sb.WriteString(",f1009=")
     if s.F1009 != nil { 
-        sb.WriteString(fmt.Sprintf("%v", *s.F1009))
+        sb.WriteString(s.F1009.String())
     } else {
         sb.WriteString("null")
     }
     sb.WriteString(",f1010=")
-    sb.WriteString(fmt.Sprintf("%v", s.F1010))
+    sb.WriteString(s.F1010.String())
     sb.WriteString(",f1011=")
     if s.F1011 != nil { 
-        sb.WriteString(fmt.Sprintf("%v", *s.F1011))
+        sb.WriteString(s.F1011.String())
     } else {
         sb.WriteString("null")
     }

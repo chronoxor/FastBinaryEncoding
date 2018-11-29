@@ -105,7 +105,7 @@ func (s *StructSet) String() string {
         sb.WriteString("[" + strconv.FormatInt(int64(s.F2.Size()), 10) + "]{")
         for _, v := range s.F2 {
             if first { sb.WriteString("") } else { sb.WriteString(",") }
-            sb.WriteString(fmt.Sprintf("%v", v))
+            sb.WriteString(v.String())
             first = false
         }
         sb.WriteString("}")
@@ -118,7 +118,7 @@ func (s *StructSet) String() string {
         sb.WriteString("[" + strconv.FormatInt(int64(s.F3.Size()), 10) + "]{")
         for _, v := range s.F3 {
             if first { sb.WriteString("") } else { sb.WriteString(",") }
-            sb.WriteString(fmt.Sprintf("%v", v))
+            sb.WriteString(v.String())
             first = false
         }
         sb.WriteString("}")
@@ -131,7 +131,7 @@ func (s *StructSet) String() string {
         sb.WriteString("[" + strconv.FormatInt(int64(s.F4.Size()), 10) + "]{")
         for _, v := range s.F4 {
             if first { sb.WriteString("") } else { sb.WriteString(",") }
-            sb.WriteString(fmt.Sprintf("%v", v))
+            sb.WriteString(v.String())
             first = false
         }
         sb.WriteString("}")

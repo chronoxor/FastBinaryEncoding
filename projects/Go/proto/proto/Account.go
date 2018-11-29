@@ -97,12 +97,12 @@ func (s *Account) String() string {
     sb.WriteString(",name=")
     sb.WriteString("\"" + s.Name + "\"")
     sb.WriteString(",state=")
-    sb.WriteString(fmt.Sprintf("%v", s.State))
+    sb.WriteString(s.State.String())
     sb.WriteString(",wallet=")
-    sb.WriteString(fmt.Sprintf("%v", s.Wallet))
+    sb.WriteString(s.Wallet.String())
     sb.WriteString(",asset=")
     if s.Asset != nil { 
-        sb.WriteString(fmt.Sprintf("%v", *s.Asset))
+        sb.WriteString(s.Asset.String())
     } else {
         sb.WriteString("null")
     }
@@ -112,7 +112,7 @@ func (s *Account) String() string {
         sb.WriteString("[" + strconv.FormatInt(int64(len(s.Orders)), 10) + "][")
         for _, v := range s.Orders {
             if first { sb.WriteString("") } else { sb.WriteString(",") }
-            sb.WriteString(fmt.Sprintf("%v", v))
+            sb.WriteString(v.String())
             first = false
         }
         sb.WriteString("]")

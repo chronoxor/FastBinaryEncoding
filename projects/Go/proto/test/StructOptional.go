@@ -542,73 +542,73 @@ func (s *StructOptional) String() string {
     }
     sb.WriteString(",f154=")
     if s.F154 != nil { 
-        sb.WriteString(fmt.Sprintf("%v", *s.F154))
+        sb.WriteString(s.F154.String())
     } else {
         sb.WriteString("null")
     }
     sb.WriteString(",f155=")
     if s.F155 != nil { 
-        sb.WriteString(fmt.Sprintf("%v", *s.F155))
+        sb.WriteString(s.F155.String())
     } else {
         sb.WriteString("null")
     }
     sb.WriteString(",f156=")
     if s.F156 != nil { 
-        sb.WriteString(fmt.Sprintf("%v", *s.F156))
+        sb.WriteString(s.F156.String())
     } else {
         sb.WriteString("null")
     }
     sb.WriteString(",f157=")
     if s.F157 != nil { 
-        sb.WriteString(fmt.Sprintf("%v", *s.F157))
+        sb.WriteString(s.F157.String())
     } else {
         sb.WriteString("null")
     }
     sb.WriteString(",f158=")
     if s.F158 != nil { 
-        sb.WriteString(fmt.Sprintf("%v", *s.F158))
+        sb.WriteString(s.F158.String())
     } else {
         sb.WriteString("null")
     }
     sb.WriteString(",f159=")
     if s.F159 != nil { 
-        sb.WriteString(fmt.Sprintf("%v", *s.F159))
+        sb.WriteString(s.F159.String())
     } else {
         sb.WriteString("null")
     }
     sb.WriteString(",f160=")
     if s.F160 != nil { 
-        sb.WriteString(fmt.Sprintf("%v", *s.F160))
+        sb.WriteString(s.F160.String())
     } else {
         sb.WriteString("null")
     }
     sb.WriteString(",f161=")
     if s.F161 != nil { 
-        sb.WriteString(fmt.Sprintf("%v", *s.F161))
+        sb.WriteString(s.F161.String())
     } else {
         sb.WriteString("null")
     }
     sb.WriteString(",f162=")
     if s.F162 != nil { 
-        sb.WriteString(fmt.Sprintf("%v", *s.F162))
+        sb.WriteString(s.F162.String())
     } else {
         sb.WriteString("null")
     }
     sb.WriteString(",f163=")
     if s.F163 != nil { 
-        sb.WriteString(fmt.Sprintf("%v", *s.F163))
+        sb.WriteString(s.F163.String())
     } else {
         sb.WriteString("null")
     }
     sb.WriteString(",f164=")
     if s.F164 != nil { 
-        sb.WriteString(fmt.Sprintf("%v", *s.F164))
+        sb.WriteString(s.F164.String())
     } else {
         sb.WriteString("null")
     }
     sb.WriteString(",f165=")
     if s.F165 != nil { 
-        sb.WriteString(fmt.Sprintf("%v", *s.F165))
+        sb.WriteString(s.F165.String())
     } else {
         sb.WriteString("null")
     }

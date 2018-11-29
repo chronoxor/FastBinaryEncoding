@@ -6616,7 +6616,7 @@ void GeneratorGo::WriteOutputStreamType(const std::string& type, const std::stri
     else if (type == "uuid")
         Write("sb.WriteString(\"\\\"\" + " + std::string(optional ? "(*" : "") + name + std::string(optional ? ")" : "") + ".String() + \"\\\"\")");
     else
-        Write("sb.WriteString(fmt.Sprintf(\"%v\", " + std::string(optional ? "*" : "") + name + "))");
+        Write("sb.WriteString(" + name + ".String())");
 }
 
 void GeneratorGo::WriteOutputStreamValue(const std::string& type, const std::string& name, bool optional, bool separate)

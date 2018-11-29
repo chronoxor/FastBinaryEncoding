@@ -171,7 +171,7 @@ func (s *StructArray) String() string {
         sb.WriteString("[" + strconv.FormatInt(int64(len(s.F5)), 10) + "][")
         for _, v := range s.F5 {
             if first { sb.WriteString("") } else { sb.WriteString(",") }
-            sb.WriteString(fmt.Sprintf("%v", v))
+            sb.WriteString(v.String())
             first = false
         }
         sb.WriteString("]")
@@ -185,7 +185,7 @@ func (s *StructArray) String() string {
         for _, v := range s.F6 {
             if v != nil { 
                 if first { sb.WriteString("") } else { sb.WriteString(",") }
-                sb.WriteString(fmt.Sprintf("%v", *v))
+                sb.WriteString(v.String())
             } else {
                 if first { sb.WriteString("") } else { sb.WriteString(",") }
                 sb.WriteString("null")
@@ -202,7 +202,7 @@ func (s *StructArray) String() string {
         sb.WriteString("[" + strconv.FormatInt(int64(len(s.F7)), 10) + "][")
         for _, v := range s.F7 {
             if first { sb.WriteString("") } else { sb.WriteString(",") }
-            sb.WriteString(fmt.Sprintf("%v", v))
+            sb.WriteString(v.String())
             first = false
         }
         sb.WriteString("]")
@@ -216,7 +216,7 @@ func (s *StructArray) String() string {
         for _, v := range s.F8 {
             if v != nil { 
                 if first { sb.WriteString("") } else { sb.WriteString(",") }
-                sb.WriteString(fmt.Sprintf("%v", *v))
+                sb.WriteString(v.String())
             } else {
                 if first { sb.WriteString("") } else { sb.WriteString(",") }
                 sb.WriteString("null")
@@ -233,7 +233,7 @@ func (s *StructArray) String() string {
         sb.WriteString("[" + strconv.FormatInt(int64(len(s.F9)), 10) + "][")
         for _, v := range s.F9 {
             if first { sb.WriteString("") } else { sb.WriteString(",") }
-            sb.WriteString(fmt.Sprintf("%v", v))
+            sb.WriteString(v.String())
             first = false
         }
         sb.WriteString("]")
@@ -247,7 +247,7 @@ func (s *StructArray) String() string {
         for _, v := range s.F10 {
             if v != nil { 
                 if first { sb.WriteString("") } else { sb.WriteString(",") }
-                sb.WriteString(fmt.Sprintf("%v", *v))
+                sb.WriteString(v.String())
             } else {
                 if first { sb.WriteString("") } else { sb.WriteString(",") }
                 sb.WriteString("null")
