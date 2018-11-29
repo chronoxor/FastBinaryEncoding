@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import protoex.*;
 
-// Fast Binary Encoding OrderSide field model class
+// Fast Binary Encoding OrderSide field model
 public final class FieldModelOrderSide extends FieldModel
 {
     public FieldModelOrderSide(Buffer buffer, long offset) { super(buffer, offset); }

@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import enums.*
 
-// Fast Binary Encoding Enums final model class
+// Fast Binary Encoding Enums final model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FinalModelEnums(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {

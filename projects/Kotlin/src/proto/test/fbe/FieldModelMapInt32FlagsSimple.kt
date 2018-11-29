@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding Int32->FlagsSimple map field model class
+// Fast Binary Encoding Int32->FlagsSimple map field model
 class FieldModelMapInt32FlagsSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     private val _modelKey = FieldModelInt32(buffer, offset)

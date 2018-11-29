@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import protoex.*
 
-// Fast Binary Encoding optional Balance field model class
+// Fast Binary Encoding optional Balance field model
 class FieldModelOptionalBalance(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size

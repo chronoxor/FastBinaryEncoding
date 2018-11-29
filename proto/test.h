@@ -86,7 +86,7 @@ struct ValueReader<TJson, ::test::EnumSimple>
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::EnumSimple field model class
+// Fast Binary Encoding ::test::EnumSimple field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::test::EnumSimple> : public FieldModelBase<TBuffer, ::test::EnumSimple, int32_t>
 {
@@ -98,7 +98,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::EnumSimple final model class
+// Fast Binary Encoding ::test::EnumSimple final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::test::EnumSimple> : public FinalModelBase<TBuffer, ::test::EnumSimple, int32_t>
 {
@@ -168,7 +168,7 @@ struct ValueReader<TJson, ::test::EnumTyped>
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::EnumTyped field model class
+// Fast Binary Encoding ::test::EnumTyped field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::test::EnumTyped> : public FieldModelBase<TBuffer, ::test::EnumTyped, uint8_t>
 {
@@ -180,7 +180,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::EnumTyped final model class
+// Fast Binary Encoding ::test::EnumTyped final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::test::EnumTyped> : public FinalModelBase<TBuffer, ::test::EnumTyped, uint8_t>
 {
@@ -275,7 +275,7 @@ struct ValueReader<TJson, ::test::FlagsSimple>
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::FlagsSimple field model class
+// Fast Binary Encoding ::test::FlagsSimple field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::test::FlagsSimple> : public FieldModelBase<TBuffer, ::test::FlagsSimple, int32_t>
 {
@@ -287,7 +287,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::FlagsSimple final model class
+// Fast Binary Encoding ::test::FlagsSimple final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::test::FlagsSimple> : public FinalModelBase<TBuffer, ::test::FlagsSimple, int32_t>
 {
@@ -406,7 +406,7 @@ struct ValueReader<TJson, ::test::FlagsTyped>
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::FlagsTyped field model class
+// Fast Binary Encoding ::test::FlagsTyped field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::test::FlagsTyped> : public FieldModelBase<TBuffer, ::test::FlagsTyped, uint64_t>
 {
@@ -418,7 +418,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::FlagsTyped final model class
+// Fast Binary Encoding ::test::FlagsTyped final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::test::FlagsTyped> : public FinalModelBase<TBuffer, ::test::FlagsTyped, uint64_t>
 {
@@ -953,7 +953,7 @@ struct ValueReader<TJson, ::test::StructSimple>
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructSimple field model class
+// Fast Binary Encoding ::test::StructSimple field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::test::StructSimple>
 {
@@ -1895,7 +1895,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructSimple model class
+// Fast Binary Encoding StructSimple model
 template <class TBuffer>
 class StructSimpleModel : public FBE::Model<TBuffer>
 {
@@ -1976,7 +1976,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructSimple final model class
+// Fast Binary Encoding ::test::StructSimple final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::test::StructSimple>
 {
@@ -2927,7 +2927,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructSimple final model class
+// Fast Binary Encoding StructSimple final model
 template <class TBuffer>
 class StructSimpleFinalModel : public FBE::Model<TBuffer>
 {
@@ -3725,7 +3725,7 @@ struct ValueReader<TJson, ::test::StructOptional>
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructOptional field model class
+// Fast Binary Encoding ::test::StructOptional field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::test::StructOptional>
 {
@@ -5039,7 +5039,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructOptional model class
+// Fast Binary Encoding StructOptional model
 template <class TBuffer>
 class StructOptionalModel : public FBE::Model<TBuffer>
 {
@@ -5120,7 +5120,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructOptional final model class
+// Fast Binary Encoding ::test::StructOptional final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::test::StructOptional>
 {
@@ -6489,7 +6489,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructOptional final model class
+// Fast Binary Encoding StructOptional final model
 template <class TBuffer>
 class StructOptionalFinalModel : public FBE::Model<TBuffer>
 {
@@ -6801,7 +6801,7 @@ struct ValueReader<TJson, ::test::StructNested>
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructNested field model class
+// Fast Binary Encoding ::test::StructNested field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::test::StructNested>
 {
@@ -7197,7 +7197,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructNested model class
+// Fast Binary Encoding StructNested model
 template <class TBuffer>
 class StructNestedModel : public FBE::Model<TBuffer>
 {
@@ -7278,7 +7278,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructNested final model class
+// Fast Binary Encoding ::test::StructNested final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::test::StructNested>
 {
@@ -7621,7 +7621,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructNested final model class
+// Fast Binary Encoding StructNested final model
 template <class TBuffer>
 class StructNestedFinalModel : public FBE::Model<TBuffer>
 {
@@ -7838,7 +7838,7 @@ struct ValueReader<TJson, ::test::StructBytes>
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructBytes field model class
+// Fast Binary Encoding ::test::StructBytes field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::test::StructBytes>
 {
@@ -8066,7 +8066,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructBytes model class
+// Fast Binary Encoding StructBytes model
 template <class TBuffer>
 class StructBytesModel : public FBE::Model<TBuffer>
 {
@@ -8147,7 +8147,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructBytes final model class
+// Fast Binary Encoding ::test::StructBytes final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::test::StructBytes>
 {
@@ -8300,7 +8300,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructBytes final model class
+// Fast Binary Encoding StructBytes final model
 template <class TBuffer>
 class StructBytesFinalModel : public FBE::Model<TBuffer>
 {
@@ -8670,7 +8670,7 @@ struct ValueReader<TJson, ::test::StructArray>
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructArray field model class
+// Fast Binary Encoding ::test::StructArray field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::test::StructArray>
 {
@@ -9007,7 +9007,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructArray model class
+// Fast Binary Encoding StructArray model
 template <class TBuffer>
 class StructArrayModel : public FBE::Model<TBuffer>
 {
@@ -9088,7 +9088,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructArray final model class
+// Fast Binary Encoding ::test::StructArray final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::test::StructArray>
 {
@@ -9374,7 +9374,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructArray final model class
+// Fast Binary Encoding StructArray final model
 template <class TBuffer>
 class StructArrayFinalModel : public FBE::Model<TBuffer>
 {
@@ -9744,7 +9744,7 @@ struct ValueReader<TJson, ::test::StructVector>
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructVector field model class
+// Fast Binary Encoding ::test::StructVector field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::test::StructVector>
 {
@@ -10091,7 +10091,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructVector model class
+// Fast Binary Encoding StructVector model
 template <class TBuffer>
 class StructVectorModel : public FBE::Model<TBuffer>
 {
@@ -10172,7 +10172,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructVector final model class
+// Fast Binary Encoding ::test::StructVector final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::test::StructVector>
 {
@@ -10458,7 +10458,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructVector final model class
+// Fast Binary Encoding StructVector final model
 template <class TBuffer>
 class StructVectorFinalModel : public FBE::Model<TBuffer>
 {
@@ -10828,7 +10828,7 @@ struct ValueReader<TJson, ::test::StructList>
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructList field model class
+// Fast Binary Encoding ::test::StructList field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::test::StructList>
 {
@@ -11175,7 +11175,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructList model class
+// Fast Binary Encoding StructList model
 template <class TBuffer>
 class StructListModel : public FBE::Model<TBuffer>
 {
@@ -11256,7 +11256,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructList final model class
+// Fast Binary Encoding ::test::StructList final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::test::StructList>
 {
@@ -11542,7 +11542,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructList final model class
+// Fast Binary Encoding StructList final model
 template <class TBuffer>
 class StructListFinalModel : public FBE::Model<TBuffer>
 {
@@ -11804,7 +11804,7 @@ struct ValueReader<TJson, ::test::StructSet>
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructSet field model class
+// Fast Binary Encoding ::test::StructSet field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::test::StructSet>
 {
@@ -12049,7 +12049,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructSet model class
+// Fast Binary Encoding StructSet model
 template <class TBuffer>
 class StructSetModel : public FBE::Model<TBuffer>
 {
@@ -12130,7 +12130,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructSet final model class
+// Fast Binary Encoding ::test::StructSet final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::test::StructSet>
 {
@@ -12302,7 +12302,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructSet final model class
+// Fast Binary Encoding StructSet final model
 template <class TBuffer>
 class StructSetFinalModel : public FBE::Model<TBuffer>
 {
@@ -12692,7 +12692,7 @@ struct ValueReader<TJson, ::test::StructMap>
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructMap field model class
+// Fast Binary Encoding ::test::StructMap field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::test::StructMap>
 {
@@ -13039,7 +13039,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructMap model class
+// Fast Binary Encoding StructMap model
 template <class TBuffer>
 class StructMapModel : public FBE::Model<TBuffer>
 {
@@ -13120,7 +13120,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructMap final model class
+// Fast Binary Encoding ::test::StructMap final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::test::StructMap>
 {
@@ -13406,7 +13406,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructMap final model class
+// Fast Binary Encoding StructMap final model
 template <class TBuffer>
 class StructMapFinalModel : public FBE::Model<TBuffer>
 {
@@ -13796,7 +13796,7 @@ struct ValueReader<TJson, ::test::StructHash>
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructHash field model class
+// Fast Binary Encoding ::test::StructHash field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::test::StructHash>
 {
@@ -14143,7 +14143,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructHash model class
+// Fast Binary Encoding StructHash model
 template <class TBuffer>
 class StructHashModel : public FBE::Model<TBuffer>
 {
@@ -14224,7 +14224,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructHash final model class
+// Fast Binary Encoding ::test::StructHash final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::test::StructHash>
 {
@@ -14510,7 +14510,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructHash final model class
+// Fast Binary Encoding StructHash final model
 template <class TBuffer>
 class StructHashFinalModel : public FBE::Model<TBuffer>
 {
@@ -14740,7 +14740,7 @@ struct ValueReader<TJson, ::test::StructHashEx>
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructHashEx field model class
+// Fast Binary Encoding ::test::StructHashEx field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::test::StructHashEx>
 {
@@ -14951,7 +14951,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructHashEx model class
+// Fast Binary Encoding StructHashEx model
 template <class TBuffer>
 class StructHashExModel : public FBE::Model<TBuffer>
 {
@@ -15032,7 +15032,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::test::StructHashEx final model class
+// Fast Binary Encoding ::test::StructHashEx final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::test::StructHashEx>
 {
@@ -15166,7 +15166,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding StructHashEx final model class
+// Fast Binary Encoding StructHashEx final model
 template <class TBuffer>
 class StructHashExFinalModel : public FBE::Model<TBuffer>
 {
@@ -15244,7 +15244,7 @@ private:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding test sender class
+// Fast Binary Encoding test sender
 template <class TBuffer>
 class Sender : public virtual FBE::Sender<TBuffer>
     , public proto::Sender<TBuffer>
@@ -15491,7 +15491,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding test receiver class
+// Fast Binary Encoding test receiver
 template <class TBuffer>
 class Receiver : public virtual FBE::Receiver<TBuffer>
     , public proto::Receiver<TBuffer>
@@ -15778,7 +15778,7 @@ private:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding test final sender class
+// Fast Binary Encoding test final sender
 template <class TBuffer>
 class FinalSender : public virtual FBE::Sender<TBuffer>
     , public proto::FinalSender<TBuffer>
@@ -16025,7 +16025,7 @@ public:
 namespace FBE {
 namespace test {
 
-// Fast Binary Encoding test final receiver class
+// Fast Binary Encoding test final receiver
 template <class TBuffer>
 class FinalReceiver : public virtual FBE::Receiver<TBuffer>
     , public proto::FinalReceiver<TBuffer>

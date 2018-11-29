@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding StructNested model class
+// Fast Binary Encoding StructNested model
 public final class StructNestedModel extends Model
 {
     public final FieldModelStructNested model;

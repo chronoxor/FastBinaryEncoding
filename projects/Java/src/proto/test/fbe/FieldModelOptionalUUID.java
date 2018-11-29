@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional UUID field model class
+// Fast Binary Encoding optional UUID field model
 public final class FieldModelOptionalUUID extends FieldModel
 {
     public FieldModelOptionalUUID(Buffer buffer, long offset)

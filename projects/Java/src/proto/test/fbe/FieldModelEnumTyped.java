@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding EnumTyped field model class
+// Fast Binary Encoding EnumTyped field model
 public final class FieldModelEnumTyped extends FieldModel
 {
     public FieldModelEnumTyped(Buffer buffer, long offset) { super(buffer, offset); }

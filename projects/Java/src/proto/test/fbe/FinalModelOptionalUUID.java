@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional UUID final model class
+// Fast Binary Encoding optional UUID final model
 public final class FinalModelOptionalUUID extends FinalModel
 {
     public FinalModelOptionalUUID(Buffer buffer, long offset)

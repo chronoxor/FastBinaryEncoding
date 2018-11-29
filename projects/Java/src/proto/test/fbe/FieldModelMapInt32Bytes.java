@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding Int32->Bytes map field model class
+// Fast Binary Encoding Int32->Bytes map field model
 public final class FieldModelMapInt32Bytes extends FieldModel
 {
     private final FieldModelInt32 _modelKey;

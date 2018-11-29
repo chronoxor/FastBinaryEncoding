@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructList model class
+// Fast Binary Encoding StructList model
 class StructListModel : Model
 {
     val model: FieldModelStructList

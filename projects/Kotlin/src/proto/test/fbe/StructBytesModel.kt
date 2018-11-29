@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructBytes model class
+// Fast Binary Encoding StructBytes model
 class StructBytesModel : Model
 {
     val model: FieldModelStructBytes

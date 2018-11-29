@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructVector model class
+// Fast Binary Encoding StructVector model
 class StructVectorModel : Model
 {
     val model: FieldModelStructVector

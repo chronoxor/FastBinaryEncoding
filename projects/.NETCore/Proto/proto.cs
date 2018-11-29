@@ -146,7 +146,7 @@ namespace proto {
 
     using global::proto;
 
-    // Fast Binary Encoding OrderSide field model class
+    // Fast Binary Encoding OrderSide field model
     public class FieldModelOrderSide : FieldModelValueType<OrderSide>
     {
         public FieldModelOrderSide(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -190,7 +190,7 @@ namespace proto {
 
     using global::proto;
 
-    // Fast Binary Encoding OrderSide final model class
+    // Fast Binary Encoding OrderSide final model
     public class FinalModelOrderSide : FinalModelValueType<OrderSide>
     {
         public FinalModelOrderSide(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -372,7 +372,7 @@ namespace proto {
 
     using global::proto;
 
-    // Fast Binary Encoding OrderType field model class
+    // Fast Binary Encoding OrderType field model
     public class FieldModelOrderType : FieldModelValueType<OrderType>
     {
         public FieldModelOrderType(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -416,7 +416,7 @@ namespace proto {
 
     using global::proto;
 
-    // Fast Binary Encoding OrderType final model class
+    // Fast Binary Encoding OrderType final model
     public class FinalModelOrderType : FinalModelValueType<OrderType>
     {
         public FinalModelOrderType(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -669,7 +669,7 @@ namespace proto {
 
     using global::proto;
 
-    // Fast Binary Encoding State field model class
+    // Fast Binary Encoding State field model
     public class FieldModelState : FieldModelValueType<State>
     {
         public FieldModelState(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -713,7 +713,7 @@ namespace proto {
 
     using global::proto;
 
-    // Fast Binary Encoding State final model class
+    // Fast Binary Encoding State final model
     public class FinalModelState : FinalModelValueType<State>
     {
         public FinalModelState(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -886,7 +886,7 @@ namespace proto {
 
     using global::proto;
 
-    // Fast Binary Encoding Order field model class
+    // Fast Binary Encoding Order field model
     public class FieldModelOrder : FieldModelValueType<Order>
     {
         public readonly FieldModelValueType<int> uid;
@@ -1172,7 +1172,7 @@ namespace proto {
 
     using global::proto;
 
-    // Fast Binary Encoding Order model class
+    // Fast Binary Encoding Order model
     public class OrderModel : Model
     {
         public readonly FieldModelOrder model;
@@ -1260,7 +1260,7 @@ namespace proto {
 
     using global::proto;
 
-    // Fast Binary Encoding Order final model class
+    // Fast Binary Encoding Order final model
     public class FinalModelOrder : FinalModelValueType<Order>
     {
         public readonly FinalModelValueType<int> uid;
@@ -1464,7 +1464,7 @@ namespace proto {
 
     using global::proto;
 
-    // Fast Binary Encoding Order final model class
+    // Fast Binary Encoding Order final model
     public class OrderFinalModel : Model
     {
         private readonly FinalModelOrder _model;
@@ -1648,7 +1648,7 @@ namespace proto {
 
     using global::proto;
 
-    // Fast Binary Encoding Balance field model class
+    // Fast Binary Encoding Balance field model
     public class FieldModelBalance : FieldModelValueType<Balance>
     {
         public readonly FieldModelReferenceType<string> currency;
@@ -1866,7 +1866,7 @@ namespace proto {
 
     using global::proto;
 
-    // Fast Binary Encoding Balance model class
+    // Fast Binary Encoding Balance model
     public class BalanceModel : Model
     {
         public readonly FieldModelBalance model;
@@ -1954,7 +1954,7 @@ namespace proto {
 
     using global::proto;
 
-    // Fast Binary Encoding Balance final model class
+    // Fast Binary Encoding Balance final model
     public class FinalModelBalance : FinalModelValueType<Balance>
     {
         public readonly FinalModelReferenceType<string> currency;
@@ -2082,7 +2082,7 @@ namespace proto {
 
     using global::proto;
 
-    // Fast Binary Encoding Balance final model class
+    // Fast Binary Encoding Balance final model
     public class BalanceFinalModel : Model
     {
         private readonly FinalModelBalance _model;
@@ -2296,7 +2296,7 @@ namespace proto {
 
     using global::proto;
 
-    // Fast Binary Encoding Account field model class
+    // Fast Binary Encoding Account field model
     public class FieldModelAccount : FieldModelValueType<Account>
     {
         public readonly FieldModelValueType<int> uid;
@@ -2582,7 +2582,7 @@ namespace proto {
 
     using global::proto;
 
-    // Fast Binary Encoding Account model class
+    // Fast Binary Encoding Account model
     public class AccountModel : Model
     {
         public readonly FieldModelAccount model;
@@ -2670,7 +2670,7 @@ namespace proto {
 
     using global::proto;
 
-    // Fast Binary Encoding Account final model class
+    // Fast Binary Encoding Account final model
     public class FinalModelAccount : FinalModelValueType<Account>
     {
         public readonly FinalModelValueType<int> uid;
@@ -2874,7 +2874,7 @@ namespace proto {
 
     using global::proto;
 
-    // Fast Binary Encoding Account final model class
+    // Fast Binary Encoding Account final model
     public class AccountFinalModel : Model
     {
         private readonly FinalModelAccount _model;
@@ -2956,7 +2956,7 @@ namespace proto {
 namespace FBE {
 namespace proto {
 
-    // Fast Binary Encoding proto sender class
+    // Fast Binary Encoding proto sender
     public class Sender : FBE.Sender
     {
         // Sender models accessors
@@ -3039,7 +3039,7 @@ namespace proto {
 namespace FBE {
 namespace proto {
 
-    // Fast Binary Encoding proto receiver class
+    // Fast Binary Encoding proto receiver
     public class Receiver : FBE.Receiver
     {
         // Receiver values accessors
@@ -3149,7 +3149,7 @@ namespace proto {
 namespace FBE {
 namespace proto {
 
-    // Fast Binary Encoding proto final sender class
+    // Fast Binary Encoding proto final sender
     public class FinalSender : FBE.Sender
     {
         // Sender models accessors
@@ -3234,7 +3234,7 @@ namespace proto {
 namespace FBE {
 namespace proto {
 
-    // Fast Binary Encoding proto final receiver class
+    // Fast Binary Encoding proto final receiver
     public class FinalReceiver : FBE.Receiver
     {
         // Receiver values accessors

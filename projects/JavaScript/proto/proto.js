@@ -106,7 +106,7 @@ OrderSide.sell = new OrderSide(0 + 1)
 exports.OrderSide = OrderSide
 
 /**
- * Fast Binary Encoding OrderSide field model class
+ * Fast Binary Encoding OrderSide field model
  */
 class FieldModelOrderSide extends fbe.FieldModel {
   /**
@@ -149,7 +149,7 @@ class FieldModelOrderSide extends fbe.FieldModel {
 exports.FieldModelOrderSide = FieldModelOrderSide
 
 /**
- * Fast Binary Encoding OrderSide final model class
+ * Fast Binary Encoding OrderSide final model
  */
 class FinalModelOrderSide extends fbe.FinalModel {
   /**
@@ -311,7 +311,7 @@ OrderType.stop = new OrderType(0 + 2)
 exports.OrderType = OrderType
 
 /**
- * Fast Binary Encoding OrderType field model class
+ * Fast Binary Encoding OrderType field model
  */
 class FieldModelOrderType extends fbe.FieldModel {
   /**
@@ -354,7 +354,7 @@ class FieldModelOrderType extends fbe.FieldModel {
 exports.FieldModelOrderType = FieldModelOrderType
 
 /**
- * Fast Binary Encoding OrderType final model class
+ * Fast Binary Encoding OrderType final model
  */
 class FinalModelOrderType extends fbe.FinalModel {
   /**
@@ -600,7 +600,7 @@ State.bad = new State(State.unknown | State.invalid | State.broken)
 exports.State = State
 
 /**
- * Fast Binary Encoding State field model class
+ * Fast Binary Encoding State field model
  */
 class FieldModelState extends fbe.FieldModel {
   /**
@@ -644,7 +644,7 @@ class FieldModelState extends fbe.FieldModel {
 exports.FieldModelState = FieldModelState
 
 /**
- * Fast Binary Encoding State final model class
+ * Fast Binary Encoding State final model
  */
 class FinalModelState extends fbe.FinalModel {
   /**
@@ -882,7 +882,7 @@ class Order {
 exports.Order = Order
 
 /**
- * Fast Binary Encoding Order field model class
+ * Fast Binary Encoding Order field model
  */
 class FieldModelOrder extends fbe.FieldModel {
   /**
@@ -1292,7 +1292,7 @@ class FieldModelOrder extends fbe.FieldModel {
 exports.FieldModelOrder = FieldModelOrder
 
 /**
- * Fast Binary Encoding Order model class
+ * Fast Binary Encoding Order model
  */
 class OrderModel extends fbe.Model {
   /**
@@ -1426,7 +1426,7 @@ class OrderModel extends fbe.Model {
 exports.OrderModel = OrderModel
 
 /**
- * Fast Binary Encoding Order final model class
+ * Fast Binary Encoding Order final model
  */
 class FinalModelOrder extends fbe.FinalModel {
   /**
@@ -1729,7 +1729,7 @@ class FinalModelOrder extends fbe.FinalModel {
 exports.FinalModelOrder = FinalModelOrder
 
 /**
- * Fast Binary Encoding Order final model class
+ * Fast Binary Encoding Order final model
  */
 class OrderFinalModel extends fbe.Model {
   /**
@@ -1971,7 +1971,7 @@ class Balance {
 exports.Balance = Balance
 
 /**
- * Fast Binary Encoding Balance field model class
+ * Fast Binary Encoding Balance field model
  */
 class FieldModelBalance extends fbe.FieldModel {
   /**
@@ -2269,7 +2269,7 @@ class FieldModelBalance extends fbe.FieldModel {
 exports.FieldModelBalance = FieldModelBalance
 
 /**
- * Fast Binary Encoding Balance model class
+ * Fast Binary Encoding Balance model
  */
 class BalanceModel extends fbe.Model {
   /**
@@ -2403,7 +2403,7 @@ class BalanceModel extends fbe.Model {
 exports.BalanceModel = BalanceModel
 
 /**
- * Fast Binary Encoding Balance final model class
+ * Fast Binary Encoding Balance final model
  */
 class FinalModelBalance extends fbe.FinalModel {
   /**
@@ -2586,7 +2586,7 @@ class FinalModelBalance extends fbe.FinalModel {
 exports.FinalModelBalance = FinalModelBalance
 
 /**
- * Fast Binary Encoding Balance final model class
+ * Fast Binary Encoding Balance final model
  */
 class BalanceFinalModel extends fbe.Model {
   /**
@@ -2892,7 +2892,7 @@ class Account {
 exports.Account = Account
 
 /**
- * Fast Binary Encoding Account field model class
+ * Fast Binary Encoding Account field model
  */
 class FieldModelAccount extends fbe.FieldModel {
   /**
@@ -3302,7 +3302,7 @@ class FieldModelAccount extends fbe.FieldModel {
 exports.FieldModelAccount = FieldModelAccount
 
 /**
- * Fast Binary Encoding Account model class
+ * Fast Binary Encoding Account model
  */
 class AccountModel extends fbe.Model {
   /**
@@ -3436,7 +3436,7 @@ class AccountModel extends fbe.Model {
 exports.AccountModel = AccountModel
 
 /**
- * Fast Binary Encoding Account final model class
+ * Fast Binary Encoding Account final model
  */
 class FinalModelAccount extends fbe.FinalModel {
   /**
@@ -3738,7 +3738,7 @@ class FinalModelAccount extends fbe.FinalModel {
 exports.FinalModelAccount = FinalModelAccount
 
 /**
- * Fast Binary Encoding Account final model class
+ * Fast Binary Encoding Account final model
  */
 class AccountFinalModel extends fbe.Model {
   /**
@@ -3850,7 +3850,7 @@ class AccountFinalModel extends fbe.Model {
 exports.AccountFinalModel = AccountFinalModel
 
 /**
- * Fast Binary Encoding proto sender class
+ * Fast Binary Encoding proto sender
  */
 class Sender extends fbe.Sender {
   /**
@@ -3995,7 +3995,7 @@ class Sender extends fbe.Sender {
 exports.Sender = Sender
 
 /**
- * Fast Binary Encoding proto receiver class
+ * Fast Binary Encoding proto receiver
  */
 class Receiver extends fbe.Receiver {
   /**
@@ -4103,7 +4103,7 @@ class Receiver extends fbe.Receiver {
 exports.Receiver = Receiver
 
 /**
- * Fast Binary Encoding proto final sender class
+ * Fast Binary Encoding proto final sender
  */
 class FinalSender extends fbe.Sender {
   /**
@@ -4248,7 +4248,7 @@ class FinalSender extends fbe.Sender {
 exports.FinalSender = FinalSender
 
 /**
- * Fast Binary Encoding proto final receiver class
+ * Fast Binary Encoding proto final receiver
  */
 class FinalReceiver extends fbe.Receiver {
   /**

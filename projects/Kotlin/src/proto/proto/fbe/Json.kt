@@ -20,7 +20,7 @@ import proto.*
 
 import com.google.gson.*
 
-// Fast Binary Encoding proto JSON class
+// Fast Binary Encoding proto JSON engine
 object Json
 {
     // Get the JSON engine

@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructSimple->StructNested map final model class
+// Fast Binary Encoding StructSimple->StructNested map final model
 class FinalModelMapStructSimpleStructNested(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     private val _modelKey = FinalModelStructSimple(buffer, offset)

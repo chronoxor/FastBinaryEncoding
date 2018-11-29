@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional StructNested final model class
+// Fast Binary Encoding optional StructNested final model
 public final class FinalModelOptionalStructNested extends FinalModel
 {
     public FinalModelOptionalStructNested(Buffer buffer, long offset)

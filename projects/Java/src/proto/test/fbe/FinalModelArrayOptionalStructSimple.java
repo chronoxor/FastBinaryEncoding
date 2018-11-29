@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding OptionalStructSimple array final model class
+// Fast Binary Encoding OptionalStructSimple array final model
 public final class FinalModelArrayOptionalStructSimple extends FinalModel
 {
     private final FinalModelOptionalStructSimple _model;

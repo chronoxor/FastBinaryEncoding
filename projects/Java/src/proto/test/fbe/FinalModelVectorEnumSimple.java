@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding EnumSimple vector final model class
+// Fast Binary Encoding EnumSimple vector final model
 public final class FinalModelVectorEnumSimple extends FinalModel
 {
     private final FinalModelEnumSimple _model;

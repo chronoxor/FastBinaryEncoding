@@ -14,7 +14,7 @@ import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
 
-// Fast Binary Encoding timestamp final model class
+// Fast Binary Encoding timestamp final model
 public final class FinalModelTimestamp extends FinalModel
 {
     public FinalModelTimestamp(Buffer buffer, long offset) { super(buffer, offset); }

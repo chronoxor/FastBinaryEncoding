@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructNested final model class
+// Fast Binary Encoding StructNested final model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FinalModelStructNested(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {

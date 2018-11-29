@@ -598,7 +598,7 @@ void GeneratorJava::GenerateFBEModel(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding base model class
+// Fast Binary Encoding base model
 public class Model
 {
     private Buffer _buffer;
@@ -659,7 +659,7 @@ void GeneratorJava::GenerateFBEFieldModel(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding base field model class
+// Fast Binary Encoding base field model
 public abstract class FieldModel
 {
     protected Buffer _buffer;
@@ -743,7 +743,7 @@ void GeneratorJava::GenerateFBEFieldModel(const std::string& package, const std:
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding _TYPE_ field model class
+// Fast Binary Encoding _TYPE_ field model
 public final class FieldModel_NAME_ extends FieldModel
 {
     public FieldModel_NAME_(Buffer buffer, long offset) { super(buffer, offset); }
@@ -804,7 +804,7 @@ void GeneratorJava::GenerateFBEFieldModelDecimal(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding decimal field model class
+// Fast Binary Encoding decimal field model
 public final class FieldModelDecimal extends FieldModel
 {
     public FieldModelDecimal(Buffer buffer, long offset) { super(buffer, offset); }
@@ -917,7 +917,7 @@ void GeneratorJava::GenerateFBEFieldModelTimestamp(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding timestamp field model class
+// Fast Binary Encoding timestamp field model
 public final class FieldModelTimestamp extends FieldModel
 {
     public FieldModelTimestamp(Buffer buffer, long offset) { super(buffer, offset); }
@@ -983,7 +983,7 @@ void GeneratorJava::GenerateFBEFieldModelBytes(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding bytes field model class
+// Fast Binary Encoding bytes field model
 public final class FieldModelBytes extends FieldModel
 {
     public FieldModelBytes(Buffer buffer, long offset) { super(buffer, offset); }
@@ -1103,7 +1103,7 @@ void GeneratorJava::GenerateFBEFieldModelString(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding string field model class
+// Fast Binary Encoding string field model
 public final class FieldModelString extends FieldModel
 {
     public FieldModelString(Buffer buffer, long offset) { super(buffer, offset); }
@@ -1233,7 +1233,7 @@ void GeneratorJava::GenerateFBEFieldModelOptional(const std::string& package, co
     WriteLineIndent("import " + package + ".*;");
 
     std::string code = R"CODE(
-// Fast Binary Encoding optional _NAME_ field model class
+// Fast Binary Encoding optional _NAME_ field model
 public final class FieldModelOptional_NAME_ extends FieldModel
 {
     public FieldModelOptional_NAME_(Buffer buffer, long offset)
@@ -1412,7 +1412,7 @@ void GeneratorJava::GenerateFBEFieldModelArray(const std::string& package, const
     WriteLineIndent("import " + package + ".*;");
 
     std::string code = R"CODE(
-// Fast Binary Encoding _NAME_ array field model class
+// Fast Binary Encoding _NAME_ array field model
 public final class FieldModelArray_NAME_ extends FieldModel
 {
     private final _MODEL_ _model;
@@ -1592,7 +1592,7 @@ void GeneratorJava::GenerateFBEFieldModelVector(const std::string& package, cons
     WriteLineIndent("import " + package + ".*;");
 
     std::string code = R"CODE(
-// Fast Binary Encoding _NAME_ vector field model class
+// Fast Binary Encoding _NAME_ vector field model
 public final class FieldModelVector_NAME_ extends FieldModel
 {
     private final _MODEL_ _model;
@@ -1874,7 +1874,7 @@ void GeneratorJava::GenerateFBEFieldModelMap(const std::string& package, const s
     WriteLineIndent("import " + package + ".*;");
 
     std::string code = R"CODE(
-// Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map field model class
+// Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map field model
 public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
 {
     private final _KEY_MODEL_ _modelKey;
@@ -2140,7 +2140,7 @@ void GeneratorJava::GenerateFBEFieldModelEnumFlags(const std::string& package, c
     WriteLineIndent("import " + package + ".*;");
 
     std::string code = R"CODE(
-// Fast Binary Encoding _NAME_ field model class
+// Fast Binary Encoding _NAME_ field model
 public final class FieldModel_NAME_ extends FieldModel
 {
     public FieldModel_NAME_(Buffer buffer, long offset) { super(buffer, offset); }
@@ -2199,7 +2199,7 @@ void GeneratorJava::GenerateFBESize(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding size class
+// Fast Binary Encoding size
 public class Size
 {
     public long value;
@@ -2235,7 +2235,7 @@ void GeneratorJava::GenerateFBEFinalModel(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding base final model class
+// Fast Binary Encoding base final model
 public abstract class FinalModel
 {
     protected Buffer _buffer;
@@ -2319,7 +2319,7 @@ void GeneratorJava::GenerateFBEFinalModel(const std::string& package, const std:
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding _TYPE_ final model class
+// Fast Binary Encoding _TYPE_ final model
 public final class FinalModel_NAME_ extends FinalModel
 {
     public FinalModel_NAME_(Buffer buffer, long offset) { super(buffer, offset); }
@@ -2394,7 +2394,7 @@ void GeneratorJava::GenerateFBEFinalModelDecimal(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding decimal final model class
+// Fast Binary Encoding decimal final model
 public final class FinalModelDecimal extends FinalModel
 {
     public FinalModelDecimal(Buffer buffer, long offset) { super(buffer, offset); }
@@ -2513,7 +2513,7 @@ void GeneratorJava::GenerateFBEFinalModelTimestamp(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding timestamp final model class
+// Fast Binary Encoding timestamp final model
 public final class FinalModelTimestamp extends FinalModel
 {
     public FinalModelTimestamp(Buffer buffer, long offset) { super(buffer, offset); }
@@ -2585,7 +2585,7 @@ void GeneratorJava::GenerateFBEFinalModelBytes(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding bytes final model class
+// Fast Binary Encoding bytes final model
 public final class FinalModelBytes extends FinalModel
 {
     public FinalModelBytes(Buffer buffer, long offset) { super(buffer, offset); }
@@ -2676,7 +2676,7 @@ void GeneratorJava::GenerateFBEFinalModelString(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding string final model class
+// Fast Binary Encoding string final model
 public final class FinalModelString extends FinalModel
 {
     public FinalModelString(Buffer buffer, long offset) { super(buffer, offset); }
@@ -2777,7 +2777,7 @@ void GeneratorJava::GenerateFBEFinalModelOptional(const std::string& package, co
     WriteLineIndent("import " + package + ".*;");
 
     std::string code = R"CODE(
-// Fast Binary Encoding optional _NAME_ final model class
+// Fast Binary Encoding optional _NAME_ final model
 public final class FinalModelOptional_NAME_ extends FinalModel
 {
     public FinalModelOptional_NAME_(Buffer buffer, long offset)
@@ -2898,7 +2898,7 @@ void GeneratorJava::GenerateFBEFinalModelArray(const std::string& package, const
     WriteLineIndent("import " + package + ".*;");
 
     std::string code = R"CODE(
-// Fast Binary Encoding _NAME_ array final model class
+// Fast Binary Encoding _NAME_ array final model
 public final class FinalModelArray_NAME_ extends FinalModel
 {
     private final _MODEL_ _model;
@@ -3109,7 +3109,7 @@ void GeneratorJava::GenerateFBEFinalModelVector(const std::string& package, cons
     WriteLineIndent("import " + package + ".*;");
 
     std::string code = R"CODE(
-// Fast Binary Encoding _NAME_ vector final model class
+// Fast Binary Encoding _NAME_ vector final model
 public final class FinalModelVector_NAME_ extends FinalModel
 {
     private final _MODEL_ _model;
@@ -3377,7 +3377,7 @@ void GeneratorJava::GenerateFBEFinalModelMap(const std::string& package, const s
     WriteLineIndent("import " + package + ".*;");
 
     std::string code = R"CODE(
-// Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map final model class
+// Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map final model
 public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends FinalModel
 {
     private final _KEY_MODEL_ _modelKey;
@@ -3618,7 +3618,7 @@ void GeneratorJava::GenerateFBEFinalModelEnumFlags(const std::string& package, c
     WriteLineIndent("import " + package + ".*;");
 
     std::string code = R"CODE(
-// Fast Binary Encoding _NAME_ final model class
+// Fast Binary Encoding _NAME_ final model
 public final class FinalModel_NAME_ extends FinalModel
 {
     public FinalModel_NAME_(Buffer buffer, long offset) { super(buffer, offset); }
@@ -3691,7 +3691,7 @@ void GeneratorJava::GenerateFBESender(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding base sender class
+// Fast Binary Encoding base sender
 public abstract class Sender
 {
     private Buffer _buffer;
@@ -3762,7 +3762,7 @@ void GeneratorJava::GenerateFBEReceiver(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding base receiver class
+// Fast Binary Encoding base receiver
 public abstract class Receiver
 {
     private Buffer _buffer;
@@ -4139,7 +4139,7 @@ final class UUIDJson implements JsonSerializer<UUID>, JsonDeserializer<UUID>
     }
 }
 
-// Fast Binary Encoding base JSON class
+// Fast Binary Encoding base JSON engine
 public final class Json
 {
     private static final Gson _engine;
@@ -5422,7 +5422,7 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
 
     // Generate struct field model begin
     WriteLine();
-    WriteLineIndent("// Fast Binary Encoding " + *s->name + " field model class");
+    WriteLineIndent("// Fast Binary Encoding " + *s->name + " field model");
     WriteLineIndent("public final class FieldModel" + *s->name + " extends FieldModel");
     WriteLineIndent("{");
     Indent(1);
@@ -5806,7 +5806,7 @@ void GeneratorJava::GenerateStructModel(const std::shared_ptr<Package>& p, const
 
     // Generate struct model begin
     WriteLine();
-    WriteLineIndent("// Fast Binary Encoding " + *s->name + " model class");
+    WriteLineIndent("// Fast Binary Encoding " + *s->name + " model");
     WriteLineIndent("public final class " + *s->name + "Model extends Model");
     WriteLineIndent("{");
     Indent(1);
@@ -5960,7 +5960,7 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
 
     // Generate struct final model begin
     WriteLine();
-    WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model class");
+    WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model");
     WriteLineIndent("public final class FinalModel" + *s->name + " extends FinalModel");
     WriteLineIndent("{");
     Indent(1);
@@ -6195,7 +6195,7 @@ void GeneratorJava::GenerateStructModelFinal(const std::shared_ptr<Package>& p, 
 
     // Generate struct model final begin
     WriteLine();
-    WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model class");
+    WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model");
     WriteLineIndent("public final class " + *s->name + "FinalModel extends Model");
     WriteLineIndent("{");
     Indent(1);
@@ -6339,9 +6339,9 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
     // Generate sender begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final sender class");
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final sender");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " sender class");
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " sender");
     WriteLineIndent("public class " + sender + " extends fbe.Sender");
     WriteLineIndent("{");
     Indent(1);
@@ -6477,9 +6477,9 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     // Generate receiver begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final receiver class");
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final receiver");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " receiver class");
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " receiver");
     WriteLineIndent("public class " + receiver + " extends fbe.Receiver");
     WriteLineIndent("{");
     Indent(1);
@@ -6659,7 +6659,7 @@ void GeneratorJava::GenerateJson(const std::shared_ptr<Package>& p)
 
     // Generate JSON engine begin
     WriteLine();
-    WriteLineIndent("// Fast Binary Encoding " + *p->name + " JSON class");
+    WriteLineIndent("// Fast Binary Encoding " + *p->name + " JSON engine");
     WriteLineIndent("public final class Json");
     WriteLineIndent("{");
     Indent(1);

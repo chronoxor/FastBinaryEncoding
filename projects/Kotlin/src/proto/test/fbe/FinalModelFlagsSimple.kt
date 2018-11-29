@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding FlagsSimple final model class
+// Fast Binary Encoding FlagsSimple final model
 class FinalModelFlagsSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size

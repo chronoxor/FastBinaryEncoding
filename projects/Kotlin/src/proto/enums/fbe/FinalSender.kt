@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import enums.*
 
-// Fast Binary Encoding enums final sender class
+// Fast Binary Encoding enums final sender
 @Suppress("MemberVisibilityCanBePrivate", "PropertyName")
 open class FinalSender : fbe.Sender
 {

@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import protoex.*
 
-// Fast Binary Encoding Order final model class
+// Fast Binary Encoding Order final model
 class OrderFinalModel : Model
 {
     private val _model: FinalModelOrder

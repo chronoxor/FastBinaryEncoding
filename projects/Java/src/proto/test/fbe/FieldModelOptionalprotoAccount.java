@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional protoAccount field model class
+// Fast Binary Encoding optional protoAccount field model
 public final class FieldModelOptionalprotoAccount extends FieldModel
 {
     public FieldModelOptionalprotoAccount(Buffer buffer, long offset)

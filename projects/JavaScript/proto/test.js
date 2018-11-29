@@ -127,7 +127,7 @@ EnumSimple.ENUM_VALUE_5 = new EnumSimple(EnumSimple.ENUM_VALUE_3)
 exports.EnumSimple = EnumSimple
 
 /**
- * Fast Binary Encoding EnumSimple field model class
+ * Fast Binary Encoding EnumSimple field model
  */
 class FieldModelEnumSimple extends fbe.FieldModel {
   /**
@@ -170,7 +170,7 @@ class FieldModelEnumSimple extends fbe.FieldModel {
 exports.FieldModelEnumSimple = FieldModelEnumSimple
 
 /**
- * Fast Binary Encoding EnumSimple final model class
+ * Fast Binary Encoding EnumSimple final model
  */
 class FinalModelEnumSimple extends fbe.FinalModel {
   /**
@@ -347,7 +347,7 @@ EnumTyped.ENUM_VALUE_5 = new EnumTyped(EnumTyped.ENUM_VALUE_3)
 exports.EnumTyped = EnumTyped
 
 /**
- * Fast Binary Encoding EnumTyped field model class
+ * Fast Binary Encoding EnumTyped field model
  */
 class FieldModelEnumTyped extends fbe.FieldModel {
   /**
@@ -390,7 +390,7 @@ class FieldModelEnumTyped extends fbe.FieldModel {
 exports.FieldModelEnumTyped = FieldModelEnumTyped
 
 /**
- * Fast Binary Encoding EnumTyped final model class
+ * Fast Binary Encoding EnumTyped final model
  */
 class FinalModelEnumTyped extends fbe.FinalModel {
   /**
@@ -629,7 +629,7 @@ FlagsSimple.FLAG_VALUE_5 = new FlagsSimple(FlagsSimple.FLAG_VALUE_1 | FlagsSimpl
 exports.FlagsSimple = FlagsSimple
 
 /**
- * Fast Binary Encoding FlagsSimple field model class
+ * Fast Binary Encoding FlagsSimple field model
  */
 class FieldModelFlagsSimple extends fbe.FieldModel {
   /**
@@ -673,7 +673,7 @@ class FieldModelFlagsSimple extends fbe.FieldModel {
 exports.FieldModelFlagsSimple = FieldModelFlagsSimple
 
 /**
- * Fast Binary Encoding FlagsSimple final model class
+ * Fast Binary Encoding FlagsSimple final model
  */
 class FinalModelFlagsSimple extends fbe.FinalModel {
   /**
@@ -940,7 +940,7 @@ FlagsTyped.FLAG_VALUE_9 = new FlagsTyped(FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FL
 exports.FlagsTyped = FlagsTyped
 
 /**
- * Fast Binary Encoding FlagsTyped field model class
+ * Fast Binary Encoding FlagsTyped field model
  */
 class FieldModelFlagsTyped extends fbe.FieldModel {
   /**
@@ -984,7 +984,7 @@ class FieldModelFlagsTyped extends fbe.FieldModel {
 exports.FieldModelFlagsTyped = FieldModelFlagsTyped
 
 /**
- * Fast Binary Encoding FlagsTyped final model class
+ * Fast Binary Encoding FlagsTyped final model
  */
 class FinalModelFlagsTyped extends fbe.FinalModel {
   /**
@@ -1676,7 +1676,7 @@ class StructSimple {
 exports.StructSimple = StructSimple
 
 /**
- * Fast Binary Encoding StructSimple field model class
+ * Fast Binary Encoding StructSimple field model
  */
 class FieldModelStructSimple extends fbe.FieldModel {
   /**
@@ -3178,7 +3178,7 @@ class FieldModelStructSimple extends fbe.FieldModel {
 exports.FieldModelStructSimple = FieldModelStructSimple
 
 /**
- * Fast Binary Encoding StructSimple model class
+ * Fast Binary Encoding StructSimple model
  */
 class StructSimpleModel extends fbe.Model {
   /**
@@ -3312,7 +3312,7 @@ class StructSimpleModel extends fbe.Model {
 exports.StructSimpleModel = StructSimpleModel
 
 /**
- * Fast Binary Encoding StructSimple final model class
+ * Fast Binary Encoding StructSimple final model
  */
 class FinalModelStructSimple extends fbe.FinalModel {
   /**
@@ -4785,7 +4785,7 @@ class FinalModelStructSimple extends fbe.FinalModel {
 exports.FinalModelStructSimple = FinalModelStructSimple
 
 /**
- * Fast Binary Encoding StructSimple final model class
+ * Fast Binary Encoding StructSimple final model
  */
 class StructSimpleFinalModel extends fbe.Model {
   /**
@@ -5970,7 +5970,7 @@ class StructOptional extends StructSimple {
 exports.StructOptional = StructOptional
 
 /**
- * Fast Binary Encoding StructOptional field model class
+ * Fast Binary Encoding StructOptional field model
  */
 class FieldModelStructOptional extends fbe.FieldModel {
   /**
@@ -8086,7 +8086,7 @@ class FieldModelStructOptional extends fbe.FieldModel {
 exports.FieldModelStructOptional = FieldModelStructOptional
 
 /**
- * Fast Binary Encoding StructOptional model class
+ * Fast Binary Encoding StructOptional model
  */
 class StructOptionalModel extends fbe.Model {
   /**
@@ -8220,7 +8220,7 @@ class StructOptionalModel extends fbe.Model {
 exports.StructOptionalModel = StructOptionalModel
 
 /**
- * Fast Binary Encoding StructOptional final model class
+ * Fast Binary Encoding StructOptional final model
  */
 class FinalModelStructOptional extends fbe.FinalModel {
   /**
@@ -10352,7 +10352,7 @@ class FinalModelStructOptional extends fbe.FinalModel {
 exports.FinalModelStructOptional = FinalModelStructOptional
 
 /**
- * Fast Binary Encoding StructOptional final model class
+ * Fast Binary Encoding StructOptional final model
  */
 class StructOptionalFinalModel extends fbe.Model {
   /**
@@ -10721,7 +10721,7 @@ class StructNested extends StructOptional {
 exports.StructNested = StructNested
 
 /**
- * Fast Binary Encoding StructNested field model class
+ * Fast Binary Encoding StructNested field model
  */
 class FieldModelStructNested extends fbe.FieldModel {
   /**
@@ -11325,7 +11325,7 @@ class FieldModelStructNested extends fbe.FieldModel {
 exports.FieldModelStructNested = FieldModelStructNested
 
 /**
- * Fast Binary Encoding StructNested model class
+ * Fast Binary Encoding StructNested model
  */
 class StructNestedModel extends fbe.Model {
   /**
@@ -11459,7 +11459,7 @@ class StructNestedModel extends fbe.Model {
 exports.StructNestedModel = StructNestedModel
 
 /**
- * Fast Binary Encoding StructNested final model class
+ * Fast Binary Encoding StructNested final model
  */
 class FinalModelStructNested extends fbe.FinalModel {
   /**
@@ -11971,7 +11971,7 @@ class FinalModelStructNested extends fbe.FinalModel {
 exports.FinalModelStructNested = FinalModelStructNested
 
 /**
- * Fast Binary Encoding StructNested final model class
+ * Fast Binary Encoding StructNested final model
  */
 class StructNestedFinalModel extends fbe.Model {
   /**
@@ -12242,7 +12242,7 @@ class StructBytes {
 exports.StructBytes = StructBytes
 
 /**
- * Fast Binary Encoding StructBytes field model class
+ * Fast Binary Encoding StructBytes field model
  */
 class FieldModelStructBytes extends fbe.FieldModel {
   /**
@@ -12568,7 +12568,7 @@ class FieldModelStructBytes extends fbe.FieldModel {
 exports.FieldModelStructBytes = FieldModelStructBytes
 
 /**
- * Fast Binary Encoding StructBytes model class
+ * Fast Binary Encoding StructBytes model
  */
 class StructBytesModel extends fbe.Model {
   /**
@@ -12702,7 +12702,7 @@ class StructBytesModel extends fbe.Model {
 exports.StructBytesModel = StructBytesModel
 
 /**
- * Fast Binary Encoding StructBytes final model class
+ * Fast Binary Encoding StructBytes final model
  */
 class FinalModelStructBytes extends fbe.FinalModel {
   /**
@@ -12915,7 +12915,7 @@ class FinalModelStructBytes extends fbe.FinalModel {
 exports.FinalModelStructBytes = FinalModelStructBytes
 
 /**
- * Fast Binary Encoding StructBytes final model class
+ * Fast Binary Encoding StructBytes final model
  */
 class StructBytesFinalModel extends fbe.Model {
   /**
@@ -13469,7 +13469,7 @@ class StructArray {
 exports.StructArray = StructArray
 
 /**
- * Fast Binary Encoding StructArray field model class
+ * Fast Binary Encoding StructArray field model
  */
 class FieldModelStructArray extends fbe.FieldModel {
   /**
@@ -13991,7 +13991,7 @@ class FieldModelStructArray extends fbe.FieldModel {
 exports.FieldModelStructArray = FieldModelStructArray
 
 /**
- * Fast Binary Encoding StructArray model class
+ * Fast Binary Encoding StructArray model
  */
 class StructArrayModel extends fbe.Model {
   /**
@@ -14125,7 +14125,7 @@ class StructArrayModel extends fbe.Model {
 exports.StructArrayModel = StructArrayModel
 
 /**
- * Fast Binary Encoding StructArray final model class
+ * Fast Binary Encoding StructArray final model
  */
 class FinalModelStructArray extends fbe.FinalModel {
   /**
@@ -14538,7 +14538,7 @@ class FinalModelStructArray extends fbe.FinalModel {
 exports.FinalModelStructArray = FinalModelStructArray
 
 /**
- * Fast Binary Encoding StructArray final model class
+ * Fast Binary Encoding StructArray final model
  */
 class StructArrayFinalModel extends fbe.Model {
   /**
@@ -15092,7 +15092,7 @@ class StructVector {
 exports.StructVector = StructVector
 
 /**
- * Fast Binary Encoding StructVector field model class
+ * Fast Binary Encoding StructVector field model
  */
 class FieldModelStructVector extends fbe.FieldModel {
   /**
@@ -15614,7 +15614,7 @@ class FieldModelStructVector extends fbe.FieldModel {
 exports.FieldModelStructVector = FieldModelStructVector
 
 /**
- * Fast Binary Encoding StructVector model class
+ * Fast Binary Encoding StructVector model
  */
 class StructVectorModel extends fbe.Model {
   /**
@@ -15748,7 +15748,7 @@ class StructVectorModel extends fbe.Model {
 exports.StructVectorModel = StructVectorModel
 
 /**
- * Fast Binary Encoding StructVector final model class
+ * Fast Binary Encoding StructVector final model
  */
 class FinalModelStructVector extends fbe.FinalModel {
   /**
@@ -16161,7 +16161,7 @@ class FinalModelStructVector extends fbe.FinalModel {
 exports.FinalModelStructVector = FinalModelStructVector
 
 /**
- * Fast Binary Encoding StructVector final model class
+ * Fast Binary Encoding StructVector final model
  */
 class StructVectorFinalModel extends fbe.Model {
   /**
@@ -16715,7 +16715,7 @@ class StructList {
 exports.StructList = StructList
 
 /**
- * Fast Binary Encoding StructList field model class
+ * Fast Binary Encoding StructList field model
  */
 class FieldModelStructList extends fbe.FieldModel {
   /**
@@ -17237,7 +17237,7 @@ class FieldModelStructList extends fbe.FieldModel {
 exports.FieldModelStructList = FieldModelStructList
 
 /**
- * Fast Binary Encoding StructList model class
+ * Fast Binary Encoding StructList model
  */
 class StructListModel extends fbe.Model {
   /**
@@ -17371,7 +17371,7 @@ class StructListModel extends fbe.Model {
 exports.StructListModel = StructListModel
 
 /**
- * Fast Binary Encoding StructList final model class
+ * Fast Binary Encoding StructList final model
  */
 class FinalModelStructList extends fbe.FinalModel {
   /**
@@ -17784,7 +17784,7 @@ class FinalModelStructList extends fbe.FinalModel {
 exports.FinalModelStructList = FinalModelStructList
 
 /**
- * Fast Binary Encoding StructList final model class
+ * Fast Binary Encoding StructList final model
  */
 class StructListFinalModel extends fbe.Model {
   /**
@@ -18118,7 +18118,7 @@ class StructSet {
 exports.StructSet = StructSet
 
 /**
- * Fast Binary Encoding StructSet field model class
+ * Fast Binary Encoding StructSet field model
  */
 class FieldModelStructSet extends fbe.FieldModel {
   /**
@@ -18472,7 +18472,7 @@ class FieldModelStructSet extends fbe.FieldModel {
 exports.FieldModelStructSet = FieldModelStructSet
 
 /**
- * Fast Binary Encoding StructSet model class
+ * Fast Binary Encoding StructSet model
  */
 class StructSetModel extends fbe.Model {
   /**
@@ -18606,7 +18606,7 @@ class StructSetModel extends fbe.Model {
 exports.StructSetModel = StructSetModel
 
 /**
- * Fast Binary Encoding StructSet final model class
+ * Fast Binary Encoding StructSet final model
  */
 class FinalModelStructSet extends fbe.FinalModel {
   /**
@@ -18845,7 +18845,7 @@ class FinalModelStructSet extends fbe.FinalModel {
 exports.FinalModelStructSet = FinalModelStructSet
 
 /**
- * Fast Binary Encoding StructSet final model class
+ * Fast Binary Encoding StructSet final model
  */
 class StructSetFinalModel extends fbe.Model {
   /**
@@ -19453,7 +19453,7 @@ class StructMap {
 exports.StructMap = StructMap
 
 /**
- * Fast Binary Encoding StructMap field model class
+ * Fast Binary Encoding StructMap field model
  */
 class FieldModelStructMap extends fbe.FieldModel {
   /**
@@ -19975,7 +19975,7 @@ class FieldModelStructMap extends fbe.FieldModel {
 exports.FieldModelStructMap = FieldModelStructMap
 
 /**
- * Fast Binary Encoding StructMap model class
+ * Fast Binary Encoding StructMap model
  */
 class StructMapModel extends fbe.Model {
   /**
@@ -20109,7 +20109,7 @@ class StructMapModel extends fbe.Model {
 exports.StructMapModel = StructMapModel
 
 /**
- * Fast Binary Encoding StructMap final model class
+ * Fast Binary Encoding StructMap final model
  */
 class FinalModelStructMap extends fbe.FinalModel {
   /**
@@ -20522,7 +20522,7 @@ class FinalModelStructMap extends fbe.FinalModel {
 exports.FinalModelStructMap = FinalModelStructMap
 
 /**
- * Fast Binary Encoding StructMap final model class
+ * Fast Binary Encoding StructMap final model
  */
 class StructMapFinalModel extends fbe.Model {
   /**
@@ -21180,7 +21180,7 @@ class StructHash {
 exports.StructHash = StructHash
 
 /**
- * Fast Binary Encoding StructHash field model class
+ * Fast Binary Encoding StructHash field model
  */
 class FieldModelStructHash extends fbe.FieldModel {
   /**
@@ -21702,7 +21702,7 @@ class FieldModelStructHash extends fbe.FieldModel {
 exports.FieldModelStructHash = FieldModelStructHash
 
 /**
- * Fast Binary Encoding StructHash model class
+ * Fast Binary Encoding StructHash model
  */
 class StructHashModel extends fbe.Model {
   /**
@@ -21836,7 +21836,7 @@ class StructHashModel extends fbe.Model {
 exports.StructHashModel = StructHashModel
 
 /**
- * Fast Binary Encoding StructHash final model class
+ * Fast Binary Encoding StructHash final model
  */
 class FinalModelStructHash extends fbe.FinalModel {
   /**
@@ -22249,7 +22249,7 @@ class FinalModelStructHash extends fbe.FinalModel {
 exports.FinalModelStructHash = FinalModelStructHash
 
 /**
- * Fast Binary Encoding StructHash final model class
+ * Fast Binary Encoding StructHash final model
  */
 class StructHashFinalModel extends fbe.Model {
   /**
@@ -22539,7 +22539,7 @@ class StructHashEx {
 exports.StructHashEx = StructHashEx
 
 /**
- * Fast Binary Encoding StructHashEx field model class
+ * Fast Binary Encoding StructHashEx field model
  */
 class FieldModelStructHashEx extends fbe.FieldModel {
   /**
@@ -22837,7 +22837,7 @@ class FieldModelStructHashEx extends fbe.FieldModel {
 exports.FieldModelStructHashEx = FieldModelStructHashEx
 
 /**
- * Fast Binary Encoding StructHashEx model class
+ * Fast Binary Encoding StructHashEx model
  */
 class StructHashExModel extends fbe.Model {
   /**
@@ -22971,7 +22971,7 @@ class StructHashExModel extends fbe.Model {
 exports.StructHashExModel = StructHashExModel
 
 /**
- * Fast Binary Encoding StructHashEx final model class
+ * Fast Binary Encoding StructHashEx final model
  */
 class FinalModelStructHashEx extends fbe.FinalModel {
   /**
@@ -23152,7 +23152,7 @@ class FinalModelStructHashEx extends fbe.FinalModel {
 exports.FinalModelStructHashEx = FinalModelStructHashEx
 
 /**
- * Fast Binary Encoding StructHashEx final model class
+ * Fast Binary Encoding StructHashEx final model
  */
 class StructHashExFinalModel extends fbe.Model {
   /**
@@ -23264,7 +23264,7 @@ class StructHashExFinalModel extends fbe.Model {
 exports.StructHashExFinalModel = StructHashExFinalModel
 
 /**
- * Fast Binary Encoding test sender class
+ * Fast Binary Encoding test sender
  */
 class Sender extends fbe.Sender {
   /**
@@ -23697,7 +23697,7 @@ class Sender extends fbe.Sender {
 exports.Sender = Sender
 
 /**
- * Fast Binary Encoding test receiver class
+ * Fast Binary Encoding test receiver
  */
 class Receiver extends fbe.Receiver {
   /**
@@ -24031,7 +24031,7 @@ class Receiver extends fbe.Receiver {
 exports.Receiver = Receiver
 
 /**
- * Fast Binary Encoding test final sender class
+ * Fast Binary Encoding test final sender
  */
 class FinalSender extends fbe.Sender {
   /**
@@ -24464,7 +24464,7 @@ class FinalSender extends fbe.Sender {
 exports.FinalSender = FinalSender
 
 /**
- * Fast Binary Encoding test final receiver class
+ * Fast Binary Encoding test final receiver
  */
 class FinalReceiver extends fbe.Receiver {
   /**

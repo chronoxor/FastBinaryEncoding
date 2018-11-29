@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding StructHash field model class
+// Fast Binary Encoding StructHash field model
 public final class FieldModelStructHash extends FieldModel
 {
     public final FieldModelMapStringByte f1;

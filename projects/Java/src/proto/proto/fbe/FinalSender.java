@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import proto.*;
 
-// Fast Binary Encoding proto final sender class
+// Fast Binary Encoding proto final sender
 public class FinalSender extends fbe.Sender
 {
     // Sender models accessors

@@ -15,7 +15,7 @@ import java.nio.charset.*
 import java.time.*
 import java.util.*
 
-// Fast Binary Encoding base sender class
+// Fast Binary Encoding base sender
 @Suppress("MemberVisibilityCanBePrivate")
 abstract class Sender
 {

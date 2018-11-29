@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional Int64 field model class
+// Fast Binary Encoding optional Int64 field model
 public final class FieldModelOptionalInt64 extends FieldModel
 {
     public FieldModelOptionalInt64(Buffer buffer, long offset)

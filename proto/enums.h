@@ -83,7 +83,7 @@ struct ValueReader<TJson, ::enums::EnumByte>
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumByte field model class
+// Fast Binary Encoding ::enums::EnumByte field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::enums::EnumByte> : public FieldModelBase<TBuffer, ::enums::EnumByte, uint8_t>
 {
@@ -95,7 +95,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumByte final model class
+// Fast Binary Encoding ::enums::EnumByte final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::enums::EnumByte> : public FinalModelBase<TBuffer, ::enums::EnumByte, uint8_t>
 {
@@ -165,7 +165,7 @@ struct ValueReader<TJson, ::enums::EnumChar>
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumChar field model class
+// Fast Binary Encoding ::enums::EnumChar field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::enums::EnumChar> : public FieldModelBase<TBuffer, ::enums::EnumChar, uint8_t>
 {
@@ -177,7 +177,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumChar final model class
+// Fast Binary Encoding ::enums::EnumChar final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::enums::EnumChar> : public FinalModelBase<TBuffer, ::enums::EnumChar, uint8_t>
 {
@@ -247,7 +247,7 @@ struct ValueReader<TJson, ::enums::EnumWChar>
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumWChar field model class
+// Fast Binary Encoding ::enums::EnumWChar field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::enums::EnumWChar> : public FieldModelBase<TBuffer, ::enums::EnumWChar, uint32_t>
 {
@@ -259,7 +259,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumWChar final model class
+// Fast Binary Encoding ::enums::EnumWChar final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::enums::EnumWChar> : public FinalModelBase<TBuffer, ::enums::EnumWChar, uint32_t>
 {
@@ -329,7 +329,7 @@ struct ValueReader<TJson, ::enums::EnumInt8>
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumInt8 field model class
+// Fast Binary Encoding ::enums::EnumInt8 field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::enums::EnumInt8> : public FieldModelBase<TBuffer, ::enums::EnumInt8, int8_t>
 {
@@ -341,7 +341,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumInt8 final model class
+// Fast Binary Encoding ::enums::EnumInt8 final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::enums::EnumInt8> : public FinalModelBase<TBuffer, ::enums::EnumInt8, int8_t>
 {
@@ -411,7 +411,7 @@ struct ValueReader<TJson, ::enums::EnumUInt8>
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumUInt8 field model class
+// Fast Binary Encoding ::enums::EnumUInt8 field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::enums::EnumUInt8> : public FieldModelBase<TBuffer, ::enums::EnumUInt8, uint8_t>
 {
@@ -423,7 +423,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumUInt8 final model class
+// Fast Binary Encoding ::enums::EnumUInt8 final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::enums::EnumUInt8> : public FinalModelBase<TBuffer, ::enums::EnumUInt8, uint8_t>
 {
@@ -493,7 +493,7 @@ struct ValueReader<TJson, ::enums::EnumInt16>
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumInt16 field model class
+// Fast Binary Encoding ::enums::EnumInt16 field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::enums::EnumInt16> : public FieldModelBase<TBuffer, ::enums::EnumInt16, int16_t>
 {
@@ -505,7 +505,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumInt16 final model class
+// Fast Binary Encoding ::enums::EnumInt16 final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::enums::EnumInt16> : public FinalModelBase<TBuffer, ::enums::EnumInt16, int16_t>
 {
@@ -575,7 +575,7 @@ struct ValueReader<TJson, ::enums::EnumUInt16>
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumUInt16 field model class
+// Fast Binary Encoding ::enums::EnumUInt16 field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::enums::EnumUInt16> : public FieldModelBase<TBuffer, ::enums::EnumUInt16, uint16_t>
 {
@@ -587,7 +587,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumUInt16 final model class
+// Fast Binary Encoding ::enums::EnumUInt16 final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::enums::EnumUInt16> : public FinalModelBase<TBuffer, ::enums::EnumUInt16, uint16_t>
 {
@@ -657,7 +657,7 @@ struct ValueReader<TJson, ::enums::EnumInt32>
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumInt32 field model class
+// Fast Binary Encoding ::enums::EnumInt32 field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::enums::EnumInt32> : public FieldModelBase<TBuffer, ::enums::EnumInt32, int32_t>
 {
@@ -669,7 +669,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumInt32 final model class
+// Fast Binary Encoding ::enums::EnumInt32 final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::enums::EnumInt32> : public FinalModelBase<TBuffer, ::enums::EnumInt32, int32_t>
 {
@@ -739,7 +739,7 @@ struct ValueReader<TJson, ::enums::EnumUInt32>
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumUInt32 field model class
+// Fast Binary Encoding ::enums::EnumUInt32 field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::enums::EnumUInt32> : public FieldModelBase<TBuffer, ::enums::EnumUInt32, uint32_t>
 {
@@ -751,7 +751,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumUInt32 final model class
+// Fast Binary Encoding ::enums::EnumUInt32 final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::enums::EnumUInt32> : public FinalModelBase<TBuffer, ::enums::EnumUInt32, uint32_t>
 {
@@ -821,7 +821,7 @@ struct ValueReader<TJson, ::enums::EnumInt64>
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumInt64 field model class
+// Fast Binary Encoding ::enums::EnumInt64 field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::enums::EnumInt64> : public FieldModelBase<TBuffer, ::enums::EnumInt64, int64_t>
 {
@@ -833,7 +833,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumInt64 final model class
+// Fast Binary Encoding ::enums::EnumInt64 final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::enums::EnumInt64> : public FinalModelBase<TBuffer, ::enums::EnumInt64, int64_t>
 {
@@ -903,7 +903,7 @@ struct ValueReader<TJson, ::enums::EnumUInt64>
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumUInt64 field model class
+// Fast Binary Encoding ::enums::EnumUInt64 field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::enums::EnumUInt64> : public FieldModelBase<TBuffer, ::enums::EnumUInt64, uint64_t>
 {
@@ -915,7 +915,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::EnumUInt64 final model class
+// Fast Binary Encoding ::enums::EnumUInt64 final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::enums::EnumUInt64> : public FinalModelBase<TBuffer, ::enums::EnumUInt64, uint64_t>
 {
@@ -1634,7 +1634,7 @@ struct ValueReader<TJson, ::enums::Enums>
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::Enums field model class
+// Fast Binary Encoding ::enums::Enums field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::enums::Enums>
 {
@@ -2933,7 +2933,7 @@ public:
 namespace FBE {
 namespace enums {
 
-// Fast Binary Encoding Enums model class
+// Fast Binary Encoding Enums model
 template <class TBuffer>
 class EnumsModel : public FBE::Model<TBuffer>
 {
@@ -3014,7 +3014,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::enums::Enums final model class
+// Fast Binary Encoding ::enums::Enums final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::enums::Enums>
 {
@@ -4364,7 +4364,7 @@ public:
 namespace FBE {
 namespace enums {
 
-// Fast Binary Encoding Enums final model class
+// Fast Binary Encoding Enums final model
 template <class TBuffer>
 class EnumsFinalModel : public FBE::Model<TBuffer>
 {
@@ -4442,7 +4442,7 @@ private:
 namespace FBE {
 namespace enums {
 
-// Fast Binary Encoding enums sender class
+// Fast Binary Encoding enums sender
 template <class TBuffer>
 class Sender : public virtual FBE::Sender<TBuffer>
 {
@@ -4486,7 +4486,7 @@ public:
 namespace FBE {
 namespace enums {
 
-// Fast Binary Encoding enums receiver class
+// Fast Binary Encoding enums receiver
 template <class TBuffer>
 class Receiver : public virtual FBE::Receiver<TBuffer>
 {
@@ -4546,7 +4546,7 @@ private:
 namespace FBE {
 namespace enums {
 
-// Fast Binary Encoding enums final sender class
+// Fast Binary Encoding enums final sender
 template <class TBuffer>
 class FinalSender : public virtual FBE::Sender<TBuffer>
 {
@@ -4590,7 +4590,7 @@ public:
 namespace FBE {
 namespace enums {
 
-// Fast Binary Encoding enums final receiver class
+// Fast Binary Encoding enums final receiver
 template <class TBuffer>
 class FinalReceiver : public virtual FBE::Receiver<TBuffer>
 {

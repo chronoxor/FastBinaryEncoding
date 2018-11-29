@@ -8,10 +8,15 @@ package proto
 import "errors"
 import "../fbe"
 
-// Fast Binary Encoding State final model class
+// Fast Binary Encoding State final model
 type FinalModelState struct {
     buffer *fbe.Buffer  // Final model buffer
     offset int          // Final model buffer offset
+}
+
+// Create a new final model
+func NewFinalModelState(buffer *fbe.Buffer, offset int) *FinalModelState {
+    return &FinalModelState{buffer: buffer, offset: offset}
 }
 
 // Get the allocation size
@@ -30,11 +35,6 @@ func (fm *FinalModelState) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelState) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new final model
-func NewFinalModelState(buffer *fbe.Buffer, offset int) *FinalModelState {
-    return &FinalModelState{buffer: buffer, offset: offset}
-}
-
 // Check if the value is valid
 func (fm *FinalModelState) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
@@ -45,20 +45,33 @@ func (fm *FinalModelState) Verify() (bool, int) {
 }
 
 // Get the value
-func (fm *FinalModelState) Get() (State, int, error) {
+func (fm *FinalModelState) Get() (*State, int, error) {
+    return fm.GetDefault(State(0))
+}
+
+// Get the value with provided default value
+func (fm *FinalModelState) GetDefault(defaults State) (*State, int, error) {
+    result := defaults
+    return fm.GetValue(&result)
+}
+
+// Get the value by pointer
+func (fm *FinalModelState) GetValue(value *State) (*State, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return State(0), 0, errors.New("model is broken")
+        return value, 0, errors.New("model is broken")
     }
 
-    return State(fbe.ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())), fm.FBESize(), nil
+    result := State(fbe.ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    value = &result
+    return value, fm.FBESize(), nil
 }
 
 // Set the value
-func (fm *FinalModelState) Set(value State) (int, error) {
+func (fm *FinalModelState) Set(value *State) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0, errors.New("model is broken")
     }
 
-    fbe.WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), byte(value))
+    fbe.WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), byte(*value))
     return fm.FBESize(), nil
 }

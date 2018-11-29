@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructOptional final model class
+// Fast Binary Encoding StructOptional final model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FinalModelStructOptional(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {

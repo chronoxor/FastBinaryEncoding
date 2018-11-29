@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import enums.*;
 
-// Fast Binary Encoding EnumUInt64 final model class
+// Fast Binary Encoding EnumUInt64 final model
 public final class FinalModelEnumUInt64 extends FinalModel
 {
     public FinalModelEnumUInt64(Buffer buffer, long offset) { super(buffer, offset); }

@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import proto.*;
 
-// Fast Binary Encoding State final model class
+// Fast Binary Encoding State final model
 public final class FinalModelState extends FinalModel
 {
     public FinalModelState(Buffer buffer, long offset) { super(buffer, offset); }

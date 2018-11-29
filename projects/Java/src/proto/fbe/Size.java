@@ -14,7 +14,7 @@ import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
 
-// Fast Binary Encoding size class
+// Fast Binary Encoding size
 public class Size
 {
     public long value;

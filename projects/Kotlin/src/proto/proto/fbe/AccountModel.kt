@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import proto.*
 
-// Fast Binary Encoding Account model class
+// Fast Binary Encoding Account model
 class AccountModel : Model
 {
     val model: FieldModelAccount

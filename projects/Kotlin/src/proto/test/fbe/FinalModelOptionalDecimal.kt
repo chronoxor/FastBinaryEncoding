@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding optional Decimal final model class
+// Fast Binary Encoding optional Decimal final model
 class FinalModelOptionalDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size

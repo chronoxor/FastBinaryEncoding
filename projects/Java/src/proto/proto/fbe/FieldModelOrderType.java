@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import proto.*;
 
-// Fast Binary Encoding OrderType field model class
+// Fast Binary Encoding OrderType field model
 public final class FieldModelOrderType extends FieldModel
 {
     public FieldModelOrderType(Buffer buffer, long offset) { super(buffer, offset); }

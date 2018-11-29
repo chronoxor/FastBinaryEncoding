@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding OptionalEnumSimple array field model class
+// Fast Binary Encoding OptionalEnumSimple array field model
 class FieldModelArrayOptionalEnumSimple(buffer: Buffer, offset: Long, val size: Long) : FieldModel(buffer, offset)
 {
     private val _model = FieldModelOptionalEnumSimple(buffer, offset)

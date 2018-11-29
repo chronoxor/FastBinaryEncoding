@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import proto.*;
 
-// Fast Binary Encoding Order final model class
+// Fast Binary Encoding Order final model
 public final class OrderFinalModel extends Model
 {
     private final FinalModelOrder _model;

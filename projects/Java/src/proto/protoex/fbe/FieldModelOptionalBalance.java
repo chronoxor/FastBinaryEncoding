@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import protoex.*;
 
-// Fast Binary Encoding optional Balance field model class
+// Fast Binary Encoding optional Balance field model
 public final class FieldModelOptionalBalance extends FieldModel
 {
     public FieldModelOptionalBalance(Buffer buffer, long offset)

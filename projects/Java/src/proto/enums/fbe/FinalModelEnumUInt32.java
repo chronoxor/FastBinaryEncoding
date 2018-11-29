@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import enums.*;
 
-// Fast Binary Encoding EnumUInt32 final model class
+// Fast Binary Encoding EnumUInt32 final model
 public final class FinalModelEnumUInt32 extends FinalModel
 {
     public FinalModelEnumUInt32(Buffer buffer, long offset) { super(buffer, offset); }

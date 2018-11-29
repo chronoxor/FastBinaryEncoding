@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import protoex.*;
 
-// Fast Binary Encoding Balance model class
+// Fast Binary Encoding Balance model
 public final class BalanceModel extends Model
 {
     public final FieldModelBalance model;

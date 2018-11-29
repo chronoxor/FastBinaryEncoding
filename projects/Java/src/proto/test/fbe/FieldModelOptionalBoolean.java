@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional Boolean field model class
+// Fast Binary Encoding optional Boolean field model
 public final class FieldModelOptionalBoolean extends FieldModel
 {
     public FieldModelOptionalBoolean(Buffer buffer, long offset)

@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructHash field model class
+// Fast Binary Encoding StructHash field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FieldModelStructHash(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {

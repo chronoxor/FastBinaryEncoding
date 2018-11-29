@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding StructList model class
+// Fast Binary Encoding StructList model
 public final class StructListModel extends Model
 {
     public final FieldModelStructList model;

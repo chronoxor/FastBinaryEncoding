@@ -7,10 +7,15 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding int16 field model class
+// Fast Binary Encoding int16 field model
 type FieldModelInt16 struct {
     buffer *Buffer  // Field model buffer
     offset int      // Field model buffer offset
+}
+
+// Create a new field model
+func NewFieldModelInt16(buffer *Buffer, offset int) *FieldModelInt16 {
+    return &FieldModelInt16{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -27,11 +32,6 @@ func (fm *FieldModelInt16) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FieldModelInt16) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelInt16) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new field model
-func NewFieldModelInt16(buffer *Buffer, offset int) *FieldModelInt16 {
-    return &FieldModelInt16{buffer: buffer, offset: offset}
-}
 
 // Check if the value is valid
 func (fm *FieldModelInt16) Verify() bool { return true }

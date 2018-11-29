@@ -96,7 +96,7 @@ module Protoex
 
   OrderSide.freeze
 
-  # Fast Binary Encoding OrderSide field model class
+  # Fast Binary Encoding OrderSide field model
   class FieldModelOrderSide < FBE::FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -126,7 +126,7 @@ module Protoex
     end
   end
 
-  # Fast Binary Encoding OrderSide final model class
+  # Fast Binary Encoding OrderSide final model
   class FinalModelOrderSide < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -256,7 +256,7 @@ module Protoex
 
   OrderType.freeze
 
-  # Fast Binary Encoding OrderType field model class
+  # Fast Binary Encoding OrderType field model
   class FieldModelOrderType < FBE::FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -286,7 +286,7 @@ module Protoex
     end
   end
 
-  # Fast Binary Encoding OrderType final model class
+  # Fast Binary Encoding OrderType final model
   class FinalModelOrderType < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -527,7 +527,7 @@ module Protoex
 
   StateEx.freeze
 
-  # Fast Binary Encoding StateEx field model class
+  # Fast Binary Encoding StateEx field model
   class FieldModelStateEx < FBE::FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -557,7 +557,7 @@ module Protoex
     end
   end
 
-  # Fast Binary Encoding StateEx final model class
+  # Fast Binary Encoding StateEx final model
   class FinalModelStateEx < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1190,7 +1190,7 @@ module Protoex
     end
   end
 
-  # Fast Binary Encoding Order model class
+  # Fast Binary Encoding Order model
   class OrderModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -1555,7 +1555,7 @@ module Protoex
     end
   end
 
-  # Fast Binary Encoding Order final model class
+  # Fast Binary Encoding Order final model
   class OrderFinalModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -1968,7 +1968,7 @@ module Protoex
     end
   end
 
-  # Fast Binary Encoding Balance model class
+  # Fast Binary Encoding Balance model
   class BalanceModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -2176,7 +2176,7 @@ module Protoex
     end
   end
 
-  # Fast Binary Encoding Balance final model class
+  # Fast Binary Encoding Balance final model
   class BalanceFinalModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -2768,7 +2768,7 @@ module Protoex
     end
   end
 
-  # Fast Binary Encoding Account model class
+  # Fast Binary Encoding Account model
   class AccountModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -3080,7 +3080,7 @@ module Protoex
     end
   end
 
-  # Fast Binary Encoding Account final model class
+  # Fast Binary Encoding Account final model
   class AccountFinalModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -3156,7 +3156,7 @@ module Protoex
     end
   end
 
-  # Fast Binary Encoding Protoex sender class
+  # Fast Binary Encoding Protoex sender
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Sender < FBE::Sender
     def initialize(buffer = FBE::WriteBuffer.new)
@@ -3262,7 +3262,7 @@ module Protoex
     end
   end
 
-  # Fast Binary Encoding Protoex receiver class
+  # Fast Binary Encoding Protoex receiver
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Receiver < FBE::Receiver
     def initialize(buffer = FBE::WriteBuffer.new)
@@ -3376,7 +3376,7 @@ module Protoex
 
   end
 
-  # Fast Binary Encoding Protoex final sender class
+  # Fast Binary Encoding Protoex final sender
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class FinalSender < FBE::Sender
     def initialize(buffer = FBE::WriteBuffer.new)
@@ -3482,7 +3482,7 @@ module Protoex
     end
   end
 
-  # Fast Binary Encoding Protoex final receiver class
+  # Fast Binary Encoding Protoex final receiver
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class FinalReceiver < FBE::Receiver
     def initialize(buffer = FBE::WriteBuffer.new)

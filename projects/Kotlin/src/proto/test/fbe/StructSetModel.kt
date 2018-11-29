@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructSet model class
+// Fast Binary Encoding StructSet model
 class StructSetModel : Model
 {
     val model: FieldModelStructSet

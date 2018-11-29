@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding Bytes vector field model class
+// Fast Binary Encoding Bytes vector field model
 public final class FieldModelVectorBytes extends FieldModel
 {
     private final FieldModelBytes _model;

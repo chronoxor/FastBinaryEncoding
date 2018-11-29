@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import proto.*
 
-// Fast Binary Encoding Balance final model class
+// Fast Binary Encoding Balance final model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FinalModelBalance(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {

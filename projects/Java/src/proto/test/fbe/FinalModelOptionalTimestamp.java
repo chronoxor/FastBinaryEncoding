@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional Timestamp final model class
+// Fast Binary Encoding optional Timestamp final model
 public final class FinalModelOptionalTimestamp extends FinalModel
 {
     public FinalModelOptionalTimestamp(Buffer buffer, long offset)

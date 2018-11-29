@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructSimple model class
+// Fast Binary Encoding StructSimple model
 class StructSimpleModel : Model
 {
     val model: FieldModelStructSimple

@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import enums.*
 
-// Fast Binary Encoding Enums model class
+// Fast Binary Encoding Enums model
 class EnumsModel : Model
 {
     val model: FieldModelEnums

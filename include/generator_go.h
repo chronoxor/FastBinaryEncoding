@@ -78,7 +78,7 @@ private:
     void GenerateEnum(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e, const CppCommon::Path& path);
     void GenerateFlags(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f, const CppCommon::Path& path);
     void GenerateStruct(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path);
-    void GenerateStructFieldModel(const std::shared_ptr<StructType>& s);
+    void GenerateStructFieldModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path);
     void GenerateStructModel(const std::shared_ptr<StructType>& s);
     void GenerateStructFinalModel(const std::shared_ptr<StructType>& s);
     void GenerateStructModelFinal(const std::shared_ptr<StructType>& s);
@@ -98,11 +98,14 @@ private:
     std::string ConvertBaseNew(const std::string& type);
     std::string ConvertKeyName(const std::string& type);
     std::string ConvertOptional(const std::string& type, const std::string& value);
+    std::string ConvertModelName(const std::string& type, const std::string& model);
     std::string ConvertTypeName(const std::string& type, bool optional);
     std::string ConvertTypeName(const StructField& field);
-    //std::string ConvertTypeFieldName(const std::string& type, bool final);
-    //std::string ConvertTypeFieldInitialization(const std::string& type, bool optional, const std::string& offset, bool final);
-    //std::string ConvertTypeFieldInitialization(const StructField& field, const std::string& offset, bool final);
+    std::string ConvertTypeFieldName(const std::string& type);
+    std::string ConvertTypeFieldDeclaration(const std::string& type, bool optional, bool final);
+    std::string ConvertTypeFieldDeclaration(const StructField& field, bool final);
+    std::string ConvertTypeFieldInitialization(const std::string& type, bool optional, const std::string& offset, bool final);
+    std::string ConvertTypeFieldInitialization(const StructField& field, const std::string& offset, bool final);
     std::string ConvertConstant(const std::string& type, const std::string& value, bool optional);
     std::string ConvertDefault(const std::string& type, bool optional);
     std::string ConvertDefault(const StructField& field);

@@ -15,7 +15,7 @@ import java.nio.charset.*
 import java.time.*
 import java.util.*
 
-// Fast Binary Encoding bytes final model class
+// Fast Binary Encoding bytes final model
 class FinalModelBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size

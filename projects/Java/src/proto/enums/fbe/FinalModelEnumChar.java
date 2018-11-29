@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import enums.*;
 
-// Fast Binary Encoding EnumChar final model class
+// Fast Binary Encoding EnumChar final model
 public final class FinalModelEnumChar extends FinalModel
 {
     public FinalModelEnumChar(Buffer buffer, long offset) { super(buffer, offset); }

@@ -7,10 +7,15 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding UUID final model class
+// Fast Binary Encoding UUID final model
 type FinalModelUUID struct {
     buffer *Buffer  // Final model buffer
     offset int      // Final model buffer offset
+}
+
+// Create a new UUID final model
+func NewFinalModelUUID(buffer *Buffer, offset int) *FinalModelUUID {
+    return &FinalModelUUID{buffer: buffer, offset: offset}
 }
 
 // Get the allocation size
@@ -28,11 +33,6 @@ func (fm *FinalModelUUID) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FinalModelUUID) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelUUID) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new UUID final model
-func NewFinalModelUUID(buffer *Buffer, offset int) *FinalModelUUID {
-    return &FinalModelUUID{buffer: buffer, offset: offset}
-}
 
 // Check if the UUID value is valid
 func (fm *FinalModelUUID) Verify() (bool, int) {

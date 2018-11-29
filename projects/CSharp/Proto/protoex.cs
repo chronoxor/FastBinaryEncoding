@@ -150,7 +150,7 @@ namespace protoex {
 
     using global::protoex;
 
-    // Fast Binary Encoding OrderSide field model class
+    // Fast Binary Encoding OrderSide field model
     public class FieldModelOrderSide : FieldModelValueType<OrderSide>
     {
         public FieldModelOrderSide(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -194,7 +194,7 @@ namespace protoex {
 
     using global::protoex;
 
-    // Fast Binary Encoding OrderSide final model class
+    // Fast Binary Encoding OrderSide final model
     public class FinalModelOrderSide : FinalModelValueType<OrderSide>
     {
         public FinalModelOrderSide(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -378,7 +378,7 @@ namespace protoex {
 
     using global::protoex;
 
-    // Fast Binary Encoding OrderType field model class
+    // Fast Binary Encoding OrderType field model
     public class FieldModelOrderType : FieldModelValueType<OrderType>
     {
         public FieldModelOrderType(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -422,7 +422,7 @@ namespace protoex {
 
     using global::protoex;
 
-    // Fast Binary Encoding OrderType final model class
+    // Fast Binary Encoding OrderType final model
     public class FinalModelOrderType : FinalModelValueType<OrderType>
     {
         public FinalModelOrderType(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -687,7 +687,7 @@ namespace protoex {
 
     using global::protoex;
 
-    // Fast Binary Encoding StateEx field model class
+    // Fast Binary Encoding StateEx field model
     public class FieldModelStateEx : FieldModelValueType<StateEx>
     {
         public FieldModelStateEx(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -731,7 +731,7 @@ namespace protoex {
 
     using global::protoex;
 
-    // Fast Binary Encoding StateEx final model class
+    // Fast Binary Encoding StateEx final model
     public class FinalModelStateEx : FinalModelValueType<StateEx>
     {
         public FinalModelStateEx(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -912,7 +912,7 @@ namespace protoex {
 
     using global::protoex;
 
-    // Fast Binary Encoding Order field model class
+    // Fast Binary Encoding Order field model
     public class FieldModelOrder : FieldModelValueType<Order>
     {
         public readonly FieldModelValueType<int> uid;
@@ -1232,7 +1232,7 @@ namespace protoex {
 
     using global::protoex;
 
-    // Fast Binary Encoding Order model class
+    // Fast Binary Encoding Order model
     public class OrderModel : Model
     {
         public readonly FieldModelOrder model;
@@ -1320,7 +1320,7 @@ namespace protoex {
 
     using global::protoex;
 
-    // Fast Binary Encoding Order final model class
+    // Fast Binary Encoding Order final model
     public class FinalModelOrder : FinalModelValueType<Order>
     {
         public readonly FinalModelValueType<int> uid;
@@ -1562,7 +1562,7 @@ namespace protoex {
 
     using global::protoex;
 
-    // Fast Binary Encoding Order final model class
+    // Fast Binary Encoding Order final model
     public class OrderFinalModel : Model
     {
         private readonly FinalModelOrder _model;
@@ -1754,7 +1754,7 @@ namespace protoex {
 
     using global::protoex;
 
-    // Fast Binary Encoding Balance field model class
+    // Fast Binary Encoding Balance field model
     public class FieldModelBalance : FieldModelValueType<Balance>
     {
         public readonly proto.FieldModelBalance parent;
@@ -1970,7 +1970,7 @@ namespace protoex {
 
     using global::protoex;
 
-    // Fast Binary Encoding Balance model class
+    // Fast Binary Encoding Balance model
     public class BalanceModel : Model
     {
         public readonly FieldModelBalance model;
@@ -2058,7 +2058,7 @@ namespace protoex {
 
     using global::protoex;
 
-    // Fast Binary Encoding Balance final model class
+    // Fast Binary Encoding Balance final model
     public class FinalModelBalance : FinalModelValueType<Balance>
     {
         public readonly proto.FinalModelBalance parent;
@@ -2186,7 +2186,7 @@ namespace protoex {
 
     using global::protoex;
 
-    // Fast Binary Encoding Balance final model class
+    // Fast Binary Encoding Balance final model
     public class BalanceFinalModel : Model
     {
         private readonly FinalModelBalance _model;
@@ -2400,7 +2400,7 @@ namespace protoex {
 
     using global::protoex;
 
-    // Fast Binary Encoding Account field model class
+    // Fast Binary Encoding Account field model
     public class FieldModelAccount : FieldModelValueType<Account>
     {
         public readonly FieldModelValueType<int> uid;
@@ -2686,7 +2686,7 @@ namespace protoex {
 
     using global::protoex;
 
-    // Fast Binary Encoding Account model class
+    // Fast Binary Encoding Account model
     public class AccountModel : Model
     {
         public readonly FieldModelAccount model;
@@ -2774,7 +2774,7 @@ namespace protoex {
 
     using global::protoex;
 
-    // Fast Binary Encoding Account final model class
+    // Fast Binary Encoding Account final model
     public class FinalModelAccount : FinalModelValueType<Account>
     {
         public readonly FinalModelValueType<int> uid;
@@ -2978,7 +2978,7 @@ namespace protoex {
 
     using global::protoex;
 
-    // Fast Binary Encoding Account final model class
+    // Fast Binary Encoding Account final model
     public class AccountFinalModel : Model
     {
         private readonly FinalModelAccount _model;
@@ -3060,7 +3060,7 @@ namespace protoex {
 namespace FBE {
 namespace protoex {
 
-    // Fast Binary Encoding protoex sender class
+    // Fast Binary Encoding protoex sender
     public class Sender : FBE.Sender
     {
         // Imported senders
@@ -3148,7 +3148,7 @@ namespace protoex {
 namespace FBE {
 namespace protoex {
 
-    // Fast Binary Encoding protoex receiver class
+    // Fast Binary Encoding protoex receiver
     public class Receiver : FBE.Receiver
     {
         // Imported receivers
@@ -3266,7 +3266,7 @@ namespace protoex {
 namespace FBE {
 namespace protoex {
 
-    // Fast Binary Encoding protoex final sender class
+    // Fast Binary Encoding protoex final sender
     public class FinalSender : FBE.Sender
     {
         // Imported senders
@@ -3356,7 +3356,7 @@ namespace protoex {
 namespace FBE {
 namespace protoex {
 
-    // Fast Binary Encoding protoex final receiver class
+    // Fast Binary Encoding protoex final receiver
     public class FinalReceiver : FBE.Receiver
     {
         // Imported receivers

@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding Bytes array final model class
+// Fast Binary Encoding Bytes array final model
 public final class FinalModelArrayBytes extends FinalModel
 {
     private final FinalModelBytes _model;

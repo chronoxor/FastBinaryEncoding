@@ -55,7 +55,7 @@ class EnumSimple(enum.IntEnum, metaclass=fbe.DefaultEnumMeta):
         return EnumSimple(value)
 
 
-# Fast Binary Encoding EnumSimple field model class
+# Fast Binary Encoding EnumSimple field model
 class FieldModelEnumSimple(fbe.FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -84,7 +84,7 @@ class FieldModelEnumSimple(fbe.FieldModel):
         self.write_int32(self.fbe_offset, value)
 
 
-# Fast Binary Encoding EnumSimple final model class
+# Fast Binary Encoding EnumSimple final model
 class FinalModelEnumSimple(fbe.FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -163,7 +163,7 @@ class EnumTyped(enum.IntEnum, metaclass=fbe.DefaultEnumMeta):
         return EnumTyped(value)
 
 
-# Fast Binary Encoding EnumTyped field model class
+# Fast Binary Encoding EnumTyped field model
 class FieldModelEnumTyped(fbe.FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -192,7 +192,7 @@ class FieldModelEnumTyped(fbe.FieldModel):
         self.write_uint8(self.fbe_offset, value)
 
 
-# Fast Binary Encoding EnumTyped final model class
+# Fast Binary Encoding EnumTyped final model
 class FinalModelEnumTyped(fbe.FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -312,7 +312,7 @@ class FlagsSimple(enum.IntFlag, metaclass=fbe.DefaultEnumMeta):
         return FlagsSimple(value)
 
 
-# Fast Binary Encoding FlagsSimple field model class
+# Fast Binary Encoding FlagsSimple field model
 class FieldModelFlagsSimple(fbe.FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -341,7 +341,7 @@ class FieldModelFlagsSimple(fbe.FieldModel):
         self.write_int32(self.fbe_offset, value)
 
 
-# Fast Binary Encoding FlagsSimple final model class
+# Fast Binary Encoding FlagsSimple final model
 class FinalModelFlagsSimple(fbe.FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -493,7 +493,7 @@ class FlagsTyped(enum.IntFlag, metaclass=fbe.DefaultEnumMeta):
         return FlagsTyped(value)
 
 
-# Fast Binary Encoding FlagsTyped field model class
+# Fast Binary Encoding FlagsTyped field model
 class FieldModelFlagsTyped(fbe.FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -522,7 +522,7 @@ class FieldModelFlagsTyped(fbe.FieldModel):
         self.write_uint64(self.fbe_offset, value)
 
 
-# Fast Binary Encoding FlagsTyped final model class
+# Fast Binary Encoding FlagsTyped final model
 class FinalModelFlagsTyped(fbe.FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -2000,7 +2000,7 @@ class FieldModelStructSimple(fbe.FieldModel):
         self.f44.set(fbe_value.f44)
 
 
-# Fast Binary Encoding StructSimple model class
+# Fast Binary Encoding StructSimple model
 class StructSimpleModel(fbe.Model):
     __slots__ = "_model",
 
@@ -3174,7 +3174,7 @@ class FinalModelStructSimple(fbe.FinalModel):
         return fbe_current_size
 
 
-# Fast Binary Encoding StructSimple final model class
+# Fast Binary Encoding StructSimple final model
 class StructSimpleFinalModel(fbe.Model):
     __slots__ = "_model",
 
@@ -5406,7 +5406,7 @@ class FieldModelStructOptional(fbe.FieldModel):
         self.f165.set(fbe_value.f165)
 
 
-# Fast Binary Encoding StructOptional model class
+# Fast Binary Encoding StructOptional model
 class StructOptionalModel(fbe.Model):
     __slots__ = "_model",
 
@@ -7085,7 +7085,7 @@ class FinalModelStructOptional(fbe.FinalModel):
         return fbe_current_size
 
 
-# Fast Binary Encoding StructOptional final model class
+# Fast Binary Encoding StructOptional final model
 class StructOptionalFinalModel(fbe.Model):
     __slots__ = "_model",
 
@@ -7741,7 +7741,7 @@ class FieldModelStructNested(fbe.FieldModel):
         self.f1011.set(fbe_value.f1011)
 
 
-# Fast Binary Encoding StructNested model class
+# Fast Binary Encoding StructNested model
 class StructNestedModel(fbe.Model):
     __slots__ = "_model",
 
@@ -8178,7 +8178,7 @@ class FinalModelStructNested(fbe.FinalModel):
         return fbe_current_size
 
 
-# Fast Binary Encoding StructNested final model class
+# Fast Binary Encoding StructNested final model
 class StructNestedFinalModel(fbe.Model):
     __slots__ = "_model",
 
@@ -8553,7 +8553,7 @@ class FieldModelStructBytes(fbe.FieldModel):
         self.f3.set(fbe_value.f3)
 
 
-# Fast Binary Encoding StructBytes model class
+# Fast Binary Encoding StructBytes model
 class StructBytesModel(fbe.Model):
     __slots__ = "_model",
 
@@ -8761,7 +8761,7 @@ class FinalModelStructBytes(fbe.FinalModel):
         return fbe_current_size
 
 
-# Fast Binary Encoding StructBytes final model class
+# Fast Binary Encoding StructBytes final model
 class StructBytesFinalModel(fbe.Model):
     __slots__ = "_model",
 
@@ -9441,7 +9441,7 @@ class FieldModelStructArray(fbe.FieldModel):
         self.f10.set(fbe_value.f10)
 
 
-# Fast Binary Encoding StructArray model class
+# Fast Binary Encoding StructArray model
 class StructArrayModel(fbe.Model):
     __slots__ = "_model",
 
@@ -9800,7 +9800,7 @@ class FinalModelStructArray(fbe.FinalModel):
         return fbe_current_size
 
 
-# Fast Binary Encoding StructArray final model class
+# Fast Binary Encoding StructArray final model
 class StructArrayFinalModel(fbe.Model):
     __slots__ = "_model",
 
@@ -10480,7 +10480,7 @@ class FieldModelStructVector(fbe.FieldModel):
         self.f10.set(fbe_value.f10)
 
 
-# Fast Binary Encoding StructVector model class
+# Fast Binary Encoding StructVector model
 class StructVectorModel(fbe.Model):
     __slots__ = "_model",
 
@@ -10839,7 +10839,7 @@ class FinalModelStructVector(fbe.FinalModel):
         return fbe_current_size
 
 
-# Fast Binary Encoding StructVector final model class
+# Fast Binary Encoding StructVector final model
 class StructVectorFinalModel(fbe.Model):
     __slots__ = "_model",
 
@@ -11519,7 +11519,7 @@ class FieldModelStructList(fbe.FieldModel):
         self.f10.set(fbe_value.f10)
 
 
-# Fast Binary Encoding StructList model class
+# Fast Binary Encoding StructList model
 class StructListModel(fbe.Model):
     __slots__ = "_model",
 
@@ -11878,7 +11878,7 @@ class FinalModelStructList(fbe.FinalModel):
         return fbe_current_size
 
 
-# Fast Binary Encoding StructList final model class
+# Fast Binary Encoding StructList final model
 class StructListFinalModel(fbe.Model):
     __slots__ = "_model",
 
@@ -12312,7 +12312,7 @@ class FieldModelStructSet(fbe.FieldModel):
         self.f4.set(fbe_value.f4)
 
 
-# Fast Binary Encoding StructSet model class
+# Fast Binary Encoding StructSet model
 class StructSetModel(fbe.Model):
     __slots__ = "_model",
 
@@ -12539,7 +12539,7 @@ class FinalModelStructSet(fbe.FinalModel):
         return fbe_current_size
 
 
-# Fast Binary Encoding StructSet final model class
+# Fast Binary Encoding StructSet final model
 class StructSetFinalModel(fbe.Model):
     __slots__ = "_model",
 
@@ -13233,7 +13233,7 @@ class FieldModelStructMap(fbe.FieldModel):
         self.f10.set(fbe_value.f10)
 
 
-# Fast Binary Encoding StructMap model class
+# Fast Binary Encoding StructMap model
 class StructMapModel(fbe.Model):
     __slots__ = "_model",
 
@@ -13592,7 +13592,7 @@ class FinalModelStructMap(fbe.FinalModel):
         return fbe_current_size
 
 
-# Fast Binary Encoding StructMap final model class
+# Fast Binary Encoding StructMap final model
 class StructMapFinalModel(fbe.Model):
     __slots__ = "_model",
 
@@ -14326,7 +14326,7 @@ class FieldModelStructHash(fbe.FieldModel):
         self.f10.set(fbe_value.f10)
 
 
-# Fast Binary Encoding StructHash model class
+# Fast Binary Encoding StructHash model
 class StructHashModel(fbe.Model):
     __slots__ = "_model",
 
@@ -14685,7 +14685,7 @@ class FinalModelStructHash(fbe.FinalModel):
         return fbe_current_size
 
 
-# Fast Binary Encoding StructHash final model class
+# Fast Binary Encoding StructHash final model
 class StructHashFinalModel(fbe.Model):
     __slots__ = "_model",
 
@@ -15052,7 +15052,7 @@ class FieldModelStructHashEx(fbe.FieldModel):
         self.f2.set(fbe_value.f2)
 
 
-# Fast Binary Encoding StructHashEx model class
+# Fast Binary Encoding StructHashEx model
 class StructHashExModel(fbe.Model):
     __slots__ = "_model",
 
@@ -15235,7 +15235,7 @@ class FinalModelStructHashEx(fbe.FinalModel):
         return fbe_current_size
 
 
-# Fast Binary Encoding StructHashEx final model class
+# Fast Binary Encoding StructHashEx final model
 class StructHashExFinalModel(fbe.Model):
     __slots__ = "_model",
 
@@ -15304,7 +15304,7 @@ class StructHashExFinalModel(fbe.Model):
         self._model.fbe_shift(prev)
 
 
-# Fast Binary Encoding test sender class
+# Fast Binary Encoding test sender
 class Sender(fbe.Sender):
     __slots__ = "_proto_sender", "_structsimple_model", "_structoptional_model", "_structnested_model", "_structbytes_model", "_structarray_model", "_structvector_model", "_structlist_model", "_structset_model", "_structmap_model", "_structhash_model", "_structhashex_model", 
 
@@ -15564,7 +15564,7 @@ class Sender(fbe.Sender):
         raise NotImplementedError("test.Sender.on_send() not implemented!")
 
 
-# Fast Binary Encoding test receiver class
+# Fast Binary Encoding test receiver
 class Receiver(fbe.Receiver):
     __slots__ = "_proto_receiver", "_structsimple_value", "_structsimple_model", "_structoptional_value", "_structoptional_model", "_structnested_value", "_structnested_model", "_structbytes_value", "_structbytes_model", "_structarray_value", "_structarray_model", "_structvector_value", "_structvector_model", "_structlist_value", "_structlist_model", "_structset_value", "_structset_model", "_structmap_value", "_structmap_model", "_structhash_value", "_structhash_model", "_structhashex_value", "_structhashex_model", 
 
@@ -15823,7 +15823,7 @@ class Receiver(fbe.Receiver):
         return False
 
 
-# Fast Binary Encoding test final sender class
+# Fast Binary Encoding test final sender
 class FinalSender(fbe.Sender):
     __slots__ = "_proto_sender", "_structsimple_model", "_structoptional_model", "_structnested_model", "_structbytes_model", "_structarray_model", "_structvector_model", "_structlist_model", "_structset_model", "_structmap_model", "_structhash_model", "_structhashex_model", 
 
@@ -16083,7 +16083,7 @@ class FinalSender(fbe.Sender):
         raise NotImplementedError("test.Sender.on_send() not implemented!")
 
 
-# Fast Binary Encoding test final receiver class
+# Fast Binary Encoding test final receiver
 class FinalReceiver(fbe.Receiver):
     __slots__ = "_proto_receiver", "_structsimple_value", "_structsimple_model", "_structoptional_value", "_structoptional_model", "_structnested_value", "_structnested_model", "_structbytes_value", "_structbytes_model", "_structarray_value", "_structarray_model", "_structvector_value", "_structvector_model", "_structlist_value", "_structlist_model", "_structset_value", "_structset_model", "_structmap_value", "_structmap_model", "_structhash_value", "_structhash_model", "_structhashex_value", "_structhashex_model", 
 

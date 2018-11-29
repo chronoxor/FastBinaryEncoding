@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding FlagsTyped field model class
+// Fast Binary Encoding FlagsTyped field model
 public final class FieldModelFlagsTyped extends FieldModel
 {
     public FieldModelFlagsTyped(Buffer buffer, long offset) { super(buffer, offset); }

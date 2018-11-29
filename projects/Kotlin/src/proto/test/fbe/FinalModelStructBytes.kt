@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructBytes final model class
+// Fast Binary Encoding StructBytes final model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FinalModelStructBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {

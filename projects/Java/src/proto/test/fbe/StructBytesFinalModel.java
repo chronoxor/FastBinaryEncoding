@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding StructBytes final model class
+// Fast Binary Encoding StructBytes final model
 public final class StructBytesFinalModel extends Model
 {
     private final FinalModelStructBytes _model;

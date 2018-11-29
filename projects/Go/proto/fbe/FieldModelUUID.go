@@ -7,10 +7,15 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding UUID field model class
+// Fast Binary Encoding UUID field model
 type FieldModelUUID struct {
     buffer *Buffer  // Field model buffer
     offset int      // Field model buffer offset
+}
+
+// Create a new UUID field model
+func NewFieldModelUUID(buffer *Buffer, offset int) *FieldModelUUID {
+    return &FieldModelUUID{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -27,11 +32,6 @@ func (fm *FieldModelUUID) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FieldModelUUID) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelUUID) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new UUID field model
-func NewFieldModelUUID(buffer *Buffer, offset int) *FieldModelUUID {
-    return &FieldModelUUID{buffer: buffer, offset: offset}
-}
 
 // Check if the UUID value is valid
 func (fm *FieldModelUUID) Verify() bool { return true }

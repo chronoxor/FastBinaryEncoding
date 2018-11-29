@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding Int32->OptionalBytes map field model class
+// Fast Binary Encoding Int32->OptionalBytes map field model
 class FieldModelMapInt32OptionalBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     private val _modelKey = FieldModelInt32(buffer, offset)

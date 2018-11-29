@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding OptionalEnumSimple vector final model class
+// Fast Binary Encoding OptionalEnumSimple vector final model
 class FinalModelVectorOptionalEnumSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     private val _model = FinalModelOptionalEnumSimple(buffer, offset)

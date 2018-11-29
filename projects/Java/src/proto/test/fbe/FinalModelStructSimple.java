@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding StructSimple final model class
+// Fast Binary Encoding StructSimple final model
 public final class FinalModelStructSimple extends FinalModel
 {
     public final FinalModelInt32 uid;

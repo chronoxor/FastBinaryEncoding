@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding optional UInt64 field model class
+// Fast Binary Encoding optional UInt64 field model
 class FieldModelOptionalUInt64(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size

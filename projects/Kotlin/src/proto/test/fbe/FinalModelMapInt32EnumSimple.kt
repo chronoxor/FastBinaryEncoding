@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding Int32->EnumSimple map final model class
+// Fast Binary Encoding Int32->EnumSimple map final model
 class FinalModelMapInt32EnumSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     private val _modelKey = FinalModelInt32(buffer, offset)

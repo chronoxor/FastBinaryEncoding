@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import protoex.*
 
-// Fast Binary Encoding protoex receiver class
+// Fast Binary Encoding protoex receiver
 @Suppress("MemberVisibilityCanBePrivate", "PrivatePropertyName", "UNUSED_PARAMETER")
 open class Receiver : fbe.Receiver
 {

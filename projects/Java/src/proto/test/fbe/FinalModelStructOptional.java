@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding StructOptional final model class
+// Fast Binary Encoding StructOptional final model
 public final class FinalModelStructOptional extends FinalModel
 {
     public final FinalModelStructSimple parent;

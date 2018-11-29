@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding FlagsSimple field model class
+// Fast Binary Encoding FlagsSimple field model
 class FieldModelFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size

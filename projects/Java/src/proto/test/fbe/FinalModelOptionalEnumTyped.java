@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional EnumTyped final model class
+// Fast Binary Encoding optional EnumTyped final model
 public final class FinalModelOptionalEnumTyped extends FinalModel
 {
     public FinalModelOptionalEnumTyped(Buffer buffer, long offset)

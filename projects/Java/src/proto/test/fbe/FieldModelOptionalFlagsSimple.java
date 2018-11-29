@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional FlagsSimple field model class
+// Fast Binary Encoding optional FlagsSimple field model
 public final class FieldModelOptionalFlagsSimple extends FieldModel
 {
     public FieldModelOptionalFlagsSimple(Buffer buffer, long offset)

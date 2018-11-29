@@ -93,7 +93,7 @@ final class UUIDJson implements JsonSerializer<UUID>, JsonDeserializer<UUID>
     }
 }
 
-// Fast Binary Encoding base JSON class
+// Fast Binary Encoding base JSON engine
 public final class Json
 {
     private static final Gson _engine;

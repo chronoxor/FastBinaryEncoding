@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructMap model class
+// Fast Binary Encoding StructMap model
 class StructMapModel : Model
 {
     val model: FieldModelStructMap

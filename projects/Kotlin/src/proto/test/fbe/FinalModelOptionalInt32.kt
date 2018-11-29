@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding optional Int32 final model class
+// Fast Binary Encoding optional Int32 final model
 class FinalModelOptionalInt32(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size

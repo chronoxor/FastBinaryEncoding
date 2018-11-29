@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructHashEx final model class
+// Fast Binary Encoding StructHashEx final model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FinalModelStructHashEx(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {

@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding optional Timestamp final model class
+// Fast Binary Encoding optional Timestamp final model
 class FinalModelOptionalTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size

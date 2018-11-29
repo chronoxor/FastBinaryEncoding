@@ -8,10 +8,15 @@ package test
 import "errors"
 import "../fbe"
 
-// Fast Binary Encoding FlagsSimple field model class
+// Fast Binary Encoding FlagsSimple field model
 type FieldModelFlagsSimple struct {
     buffer *fbe.Buffer  // Field model buffer
     offset int          // Field model buffer offset
+}
+
+// Create a new field model
+func NewFieldModelFlagsSimple(buffer *fbe.Buffer, offset int) *FieldModelFlagsSimple {
+    return &FieldModelFlagsSimple{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -29,34 +34,37 @@ func (fm *FieldModelFlagsSimple) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelFlagsSimple) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new field model
-func NewFieldModelFlagsSimple(buffer *fbe.Buffer, offset int) *FieldModelFlagsSimple {
-    return &FieldModelFlagsSimple{buffer: buffer, offset: offset}
-}
-
 // Check if the value is valid
 func (fm *FieldModelFlagsSimple) Verify() bool { return true }
 
 // Get the value
-func (fm *FieldModelFlagsSimple) Get() (FlagsSimple, error) {
-    return fm.GetDefault(0)
+func (fm *FieldModelFlagsSimple) Get() (*FlagsSimple, error) {
+    return fm.GetDefault(FlagsSimple(0))
 }
 
 // Get the value with provided default value
-func (fm *FieldModelFlagsSimple) GetDefault(defaults FlagsSimple) (FlagsSimple, error) {
+func (fm *FieldModelFlagsSimple) GetDefault(defaults FlagsSimple) (*FlagsSimple, error) {
+    result := defaults
+    return fm.GetValue(&result)
+}
+
+// Get the value by pointer
+func (fm *FieldModelFlagsSimple) GetValue(value *FlagsSimple) (*FlagsSimple, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return FlagsSimple(0), nil
+        return value, nil
     }
 
-    return FlagsSimple(fbe.ReadInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())), nil
+    result := FlagsSimple(fbe.ReadInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    value = &result
+    return value, nil
 }
 
 // Set the value
-func (fm *FieldModelFlagsSimple) Set(value FlagsSimple) error {
+func (fm *FieldModelFlagsSimple) Set(value *FlagsSimple) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
 
-    fbe.WriteInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), int32(value))
+    fbe.WriteInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), int32(*value))
     return nil
 }

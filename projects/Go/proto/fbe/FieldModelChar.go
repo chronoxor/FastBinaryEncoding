@@ -7,10 +7,15 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding rune field model class
+// Fast Binary Encoding rune field model
 type FieldModelChar struct {
     buffer *Buffer  // Field model buffer
     offset int      // Field model buffer offset
+}
+
+// Create a new field model
+func NewFieldModelChar(buffer *Buffer, offset int) *FieldModelChar {
+    return &FieldModelChar{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -27,11 +32,6 @@ func (fm *FieldModelChar) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FieldModelChar) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelChar) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new field model
-func NewFieldModelChar(buffer *Buffer, offset int) *FieldModelChar {
-    return &FieldModelChar{buffer: buffer, offset: offset}
-}
 
 // Check if the value is valid
 func (fm *FieldModelChar) Verify() bool { return true }

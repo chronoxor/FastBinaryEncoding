@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding Int32->OptionalEnumSimple map field model class
+// Fast Binary Encoding Int32->OptionalEnumSimple map field model
 class FieldModelMapInt32OptionalEnumSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     private val _modelKey = FieldModelInt32(buffer, offset)

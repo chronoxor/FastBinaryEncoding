@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional protoBalance final model class
+// Fast Binary Encoding optional protoBalance final model
 public final class FinalModelOptionalprotoBalance extends FinalModel
 {
     public FinalModelOptionalprotoBalance(Buffer buffer, long offset)

@@ -15,7 +15,7 @@ import java.nio.charset.*
 import java.time.*
 import java.util.*
 
-// Fast Binary Encoding base model class
+// Fast Binary Encoding base model
 open class Model
 {
     // Get bytes buffer

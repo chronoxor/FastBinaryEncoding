@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding String->OptionalByte map final model class
+// Fast Binary Encoding String->OptionalByte map final model
 public final class FinalModelMapStringOptionalByte extends FinalModel
 {
     private final FinalModelString _modelKey;

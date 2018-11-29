@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional Double field model class
+// Fast Binary Encoding optional Double field model
 public final class FieldModelOptionalDouble extends FieldModel
 {
     public FieldModelOptionalDouble(Buffer buffer, long offset)

@@ -126,7 +126,7 @@ EnumByte.ENUM_VALUE_5 = new EnumByte(EnumByte.ENUM_VALUE_3)
 exports.EnumByte = EnumByte
 
 /**
- * Fast Binary Encoding EnumByte field model class
+ * Fast Binary Encoding EnumByte field model
  */
 class FieldModelEnumByte extends fbe.FieldModel {
   /**
@@ -169,7 +169,7 @@ class FieldModelEnumByte extends fbe.FieldModel {
 exports.FieldModelEnumByte = FieldModelEnumByte
 
 /**
- * Fast Binary Encoding EnumByte final model class
+ * Fast Binary Encoding EnumByte final model
  */
 class FinalModelEnumByte extends fbe.FinalModel {
   /**
@@ -346,7 +346,7 @@ EnumChar.ENUM_VALUE_5 = new EnumChar(EnumChar.ENUM_VALUE_3)
 exports.EnumChar = EnumChar
 
 /**
- * Fast Binary Encoding EnumChar field model class
+ * Fast Binary Encoding EnumChar field model
  */
 class FieldModelEnumChar extends fbe.FieldModel {
   /**
@@ -389,7 +389,7 @@ class FieldModelEnumChar extends fbe.FieldModel {
 exports.FieldModelEnumChar = FieldModelEnumChar
 
 /**
- * Fast Binary Encoding EnumChar final model class
+ * Fast Binary Encoding EnumChar final model
  */
 class FinalModelEnumChar extends fbe.FinalModel {
   /**
@@ -566,7 +566,7 @@ EnumWChar.ENUM_VALUE_5 = new EnumWChar(EnumWChar.ENUM_VALUE_3)
 exports.EnumWChar = EnumWChar
 
 /**
- * Fast Binary Encoding EnumWChar field model class
+ * Fast Binary Encoding EnumWChar field model
  */
 class FieldModelEnumWChar extends fbe.FieldModel {
   /**
@@ -609,7 +609,7 @@ class FieldModelEnumWChar extends fbe.FieldModel {
 exports.FieldModelEnumWChar = FieldModelEnumWChar
 
 /**
- * Fast Binary Encoding EnumWChar final model class
+ * Fast Binary Encoding EnumWChar final model
  */
 class FinalModelEnumWChar extends fbe.FinalModel {
   /**
@@ -786,7 +786,7 @@ EnumInt8.ENUM_VALUE_5 = new EnumInt8(EnumInt8.ENUM_VALUE_3)
 exports.EnumInt8 = EnumInt8
 
 /**
- * Fast Binary Encoding EnumInt8 field model class
+ * Fast Binary Encoding EnumInt8 field model
  */
 class FieldModelEnumInt8 extends fbe.FieldModel {
   /**
@@ -829,7 +829,7 @@ class FieldModelEnumInt8 extends fbe.FieldModel {
 exports.FieldModelEnumInt8 = FieldModelEnumInt8
 
 /**
- * Fast Binary Encoding EnumInt8 final model class
+ * Fast Binary Encoding EnumInt8 final model
  */
 class FinalModelEnumInt8 extends fbe.FinalModel {
   /**
@@ -1006,7 +1006,7 @@ EnumUInt8.ENUM_VALUE_5 = new EnumUInt8(EnumUInt8.ENUM_VALUE_3)
 exports.EnumUInt8 = EnumUInt8
 
 /**
- * Fast Binary Encoding EnumUInt8 field model class
+ * Fast Binary Encoding EnumUInt8 field model
  */
 class FieldModelEnumUInt8 extends fbe.FieldModel {
   /**
@@ -1049,7 +1049,7 @@ class FieldModelEnumUInt8 extends fbe.FieldModel {
 exports.FieldModelEnumUInt8 = FieldModelEnumUInt8
 
 /**
- * Fast Binary Encoding EnumUInt8 final model class
+ * Fast Binary Encoding EnumUInt8 final model
  */
 class FinalModelEnumUInt8 extends fbe.FinalModel {
   /**
@@ -1226,7 +1226,7 @@ EnumInt16.ENUM_VALUE_5 = new EnumInt16(EnumInt16.ENUM_VALUE_3)
 exports.EnumInt16 = EnumInt16
 
 /**
- * Fast Binary Encoding EnumInt16 field model class
+ * Fast Binary Encoding EnumInt16 field model
  */
 class FieldModelEnumInt16 extends fbe.FieldModel {
   /**
@@ -1269,7 +1269,7 @@ class FieldModelEnumInt16 extends fbe.FieldModel {
 exports.FieldModelEnumInt16 = FieldModelEnumInt16
 
 /**
- * Fast Binary Encoding EnumInt16 final model class
+ * Fast Binary Encoding EnumInt16 final model
  */
 class FinalModelEnumInt16 extends fbe.FinalModel {
   /**
@@ -1446,7 +1446,7 @@ EnumUInt16.ENUM_VALUE_5 = new EnumUInt16(EnumUInt16.ENUM_VALUE_3)
 exports.EnumUInt16 = EnumUInt16
 
 /**
- * Fast Binary Encoding EnumUInt16 field model class
+ * Fast Binary Encoding EnumUInt16 field model
  */
 class FieldModelEnumUInt16 extends fbe.FieldModel {
   /**
@@ -1489,7 +1489,7 @@ class FieldModelEnumUInt16 extends fbe.FieldModel {
 exports.FieldModelEnumUInt16 = FieldModelEnumUInt16
 
 /**
- * Fast Binary Encoding EnumUInt16 final model class
+ * Fast Binary Encoding EnumUInt16 final model
  */
 class FinalModelEnumUInt16 extends fbe.FinalModel {
   /**
@@ -1666,7 +1666,7 @@ EnumInt32.ENUM_VALUE_5 = new EnumInt32(EnumInt32.ENUM_VALUE_3)
 exports.EnumInt32 = EnumInt32
 
 /**
- * Fast Binary Encoding EnumInt32 field model class
+ * Fast Binary Encoding EnumInt32 field model
  */
 class FieldModelEnumInt32 extends fbe.FieldModel {
   /**
@@ -1709,7 +1709,7 @@ class FieldModelEnumInt32 extends fbe.FieldModel {
 exports.FieldModelEnumInt32 = FieldModelEnumInt32
 
 /**
- * Fast Binary Encoding EnumInt32 final model class
+ * Fast Binary Encoding EnumInt32 final model
  */
 class FinalModelEnumInt32 extends fbe.FinalModel {
   /**
@@ -1886,7 +1886,7 @@ EnumUInt32.ENUM_VALUE_5 = new EnumUInt32(EnumUInt32.ENUM_VALUE_3)
 exports.EnumUInt32 = EnumUInt32
 
 /**
- * Fast Binary Encoding EnumUInt32 field model class
+ * Fast Binary Encoding EnumUInt32 field model
  */
 class FieldModelEnumUInt32 extends fbe.FieldModel {
   /**
@@ -1929,7 +1929,7 @@ class FieldModelEnumUInt32 extends fbe.FieldModel {
 exports.FieldModelEnumUInt32 = FieldModelEnumUInt32
 
 /**
- * Fast Binary Encoding EnumUInt32 final model class
+ * Fast Binary Encoding EnumUInt32 final model
  */
 class FinalModelEnumUInt32 extends fbe.FinalModel {
   /**
@@ -2106,7 +2106,7 @@ EnumInt64.ENUM_VALUE_5 = new EnumInt64(EnumInt64.ENUM_VALUE_3)
 exports.EnumInt64 = EnumInt64
 
 /**
- * Fast Binary Encoding EnumInt64 field model class
+ * Fast Binary Encoding EnumInt64 field model
  */
 class FieldModelEnumInt64 extends fbe.FieldModel {
   /**
@@ -2149,7 +2149,7 @@ class FieldModelEnumInt64 extends fbe.FieldModel {
 exports.FieldModelEnumInt64 = FieldModelEnumInt64
 
 /**
- * Fast Binary Encoding EnumInt64 final model class
+ * Fast Binary Encoding EnumInt64 final model
  */
 class FinalModelEnumInt64 extends fbe.FinalModel {
   /**
@@ -2326,7 +2326,7 @@ EnumUInt64.ENUM_VALUE_5 = new EnumUInt64(EnumUInt64.ENUM_VALUE_3)
 exports.EnumUInt64 = EnumUInt64
 
 /**
- * Fast Binary Encoding EnumUInt64 field model class
+ * Fast Binary Encoding EnumUInt64 field model
  */
 class FieldModelEnumUInt64 extends fbe.FieldModel {
   /**
@@ -2369,7 +2369,7 @@ class FieldModelEnumUInt64 extends fbe.FieldModel {
 exports.FieldModelEnumUInt64 = FieldModelEnumUInt64
 
 /**
- * Fast Binary Encoding EnumUInt64 final model class
+ * Fast Binary Encoding EnumUInt64 final model
  */
 class FinalModelEnumUInt64 extends fbe.FinalModel {
   /**
@@ -3199,7 +3199,7 @@ class Enums {
 exports.Enums = Enums
 
 /**
- * Fast Binary Encoding Enums field model class
+ * Fast Binary Encoding Enums field model
  */
 class FieldModelEnums extends fbe.FieldModel {
   /**
@@ -5289,7 +5289,7 @@ class FieldModelEnums extends fbe.FieldModel {
 exports.FieldModelEnums = FieldModelEnums
 
 /**
- * Fast Binary Encoding Enums model class
+ * Fast Binary Encoding Enums model
  */
 class EnumsModel extends fbe.Model {
   /**
@@ -5423,7 +5423,7 @@ class EnumsModel extends fbe.Model {
 exports.EnumsModel = EnumsModel
 
 /**
- * Fast Binary Encoding Enums final model class
+ * Fast Binary Encoding Enums final model
  */
 class FinalModelEnums extends fbe.FinalModel {
   /**
@@ -7526,7 +7526,7 @@ class FinalModelEnums extends fbe.FinalModel {
 exports.FinalModelEnums = FinalModelEnums
 
 /**
- * Fast Binary Encoding Enums final model class
+ * Fast Binary Encoding Enums final model
  */
 class EnumsFinalModel extends fbe.Model {
   /**
@@ -7638,7 +7638,7 @@ class EnumsFinalModel extends fbe.Model {
 exports.EnumsFinalModel = EnumsFinalModel
 
 /**
- * Fast Binary Encoding enums sender class
+ * Fast Binary Encoding enums sender
  */
 class Sender extends fbe.Sender {
   /**
@@ -7715,7 +7715,7 @@ class Sender extends fbe.Sender {
 exports.Sender = Sender
 
 /**
- * Fast Binary Encoding enums receiver class
+ * Fast Binary Encoding enums receiver
  */
 class Receiver extends fbe.Receiver {
   /**
@@ -7773,7 +7773,7 @@ class Receiver extends fbe.Receiver {
 exports.Receiver = Receiver
 
 /**
- * Fast Binary Encoding enums final sender class
+ * Fast Binary Encoding enums final sender
  */
 class FinalSender extends fbe.Sender {
   /**
@@ -7850,7 +7850,7 @@ class FinalSender extends fbe.Sender {
 exports.FinalSender = FinalSender
 
 /**
- * Fast Binary Encoding enums final receiver class
+ * Fast Binary Encoding enums final receiver
  */
 class FinalReceiver extends fbe.Receiver {
   /**

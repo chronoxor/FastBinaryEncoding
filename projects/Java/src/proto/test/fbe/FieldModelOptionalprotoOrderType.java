@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional protoOrderType field model class
+// Fast Binary Encoding optional protoOrderType field model
 public final class FieldModelOptionalprotoOrderType extends FieldModel
 {
     public FieldModelOptionalprotoOrderType(Buffer buffer, long offset)

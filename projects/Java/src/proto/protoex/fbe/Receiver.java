@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import protoex.*;
 
-// Fast Binary Encoding protoex receiver class
+// Fast Binary Encoding protoex receiver
 public class Receiver extends fbe.Receiver
 {
     // Imported receivers

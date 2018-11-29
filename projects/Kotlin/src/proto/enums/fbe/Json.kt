@@ -20,7 +20,7 @@ import enums.*
 
 import com.google.gson.*
 
-// Fast Binary Encoding enums JSON class
+// Fast Binary Encoding enums JSON engine
 object Json
 {
     // Get the JSON engine

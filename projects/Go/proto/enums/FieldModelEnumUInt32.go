@@ -8,10 +8,15 @@ package enums
 import "errors"
 import "../fbe"
 
-// Fast Binary Encoding EnumUInt32 field model class
+// Fast Binary Encoding EnumUInt32 field model
 type FieldModelEnumUInt32 struct {
     buffer *fbe.Buffer  // Field model buffer
     offset int          // Field model buffer offset
+}
+
+// Create a new field model
+func NewFieldModelEnumUInt32(buffer *fbe.Buffer, offset int) *FieldModelEnumUInt32 {
+    return &FieldModelEnumUInt32{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -29,34 +34,37 @@ func (fm *FieldModelEnumUInt32) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelEnumUInt32) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new field model
-func NewFieldModelEnumUInt32(buffer *fbe.Buffer, offset int) *FieldModelEnumUInt32 {
-    return &FieldModelEnumUInt32{buffer: buffer, offset: offset}
-}
-
 // Check if the value is valid
 func (fm *FieldModelEnumUInt32) Verify() bool { return true }
 
 // Get the value
-func (fm *FieldModelEnumUInt32) Get() (EnumUInt32, error) {
-    return fm.GetDefault(0)
+func (fm *FieldModelEnumUInt32) Get() (*EnumUInt32, error) {
+    return fm.GetDefault(EnumUInt32(0))
 }
 
 // Get the value with provided default value
-func (fm *FieldModelEnumUInt32) GetDefault(defaults EnumUInt32) (EnumUInt32, error) {
+func (fm *FieldModelEnumUInt32) GetDefault(defaults EnumUInt32) (*EnumUInt32, error) {
+    result := defaults
+    return fm.GetValue(&result)
+}
+
+// Get the value by pointer
+func (fm *FieldModelEnumUInt32) GetValue(value *EnumUInt32) (*EnumUInt32, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return EnumUInt32(0), nil
+        return value, nil
     }
 
-    return EnumUInt32(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())), nil
+    result := EnumUInt32(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    value = &result
+    return value, nil
 }
 
 // Set the value
-func (fm *FieldModelEnumUInt32) Set(value EnumUInt32) error {
+func (fm *FieldModelEnumUInt32) Set(value *EnumUInt32) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
 
-    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint32(value))
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint32(*value))
     return nil
 }

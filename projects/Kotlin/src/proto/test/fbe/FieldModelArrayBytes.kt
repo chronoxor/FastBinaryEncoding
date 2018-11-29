@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding Bytes array field model class
+// Fast Binary Encoding Bytes array field model
 class FieldModelArrayBytes(buffer: Buffer, offset: Long, val size: Long) : FieldModel(buffer, offset)
 {
     private val _model = FieldModelBytes(buffer, offset)

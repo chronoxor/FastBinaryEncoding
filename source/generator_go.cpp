@@ -475,17 +475,6 @@ type Buffer struct {
     offset int    // Bytes memory buffer offset
 }
 
-// Is the buffer empty?
-func (b *Buffer) Empty() bool { return (len(b.data) == 0) || (b.size <= 0) }
-// Get bytes memory buffer
-func (b *Buffer) Data() []byte { return b.data }
-// Get bytes memory buffer capacity
-func (b *Buffer) Capacity() int { return len(b.data) }
-// Get bytes memory buffer size
-func (b *Buffer) Size() int { return b.size }
-// Get bytes memory buffer offset
-func (b *Buffer) Offset() int { return b.offset }
-
 // Create an empty buffer
 func NewEmptyBuffer() *Buffer {
     return &Buffer{data: make([]byte, 0)}
@@ -502,6 +491,17 @@ func NewAttachedBuffer(buffer []byte, offset int, size int) *Buffer {
     result.AttachBuffer(buffer, offset, size)
     return result
 }
+
+// Is the buffer empty?
+func (b *Buffer) Empty() bool { return (len(b.data) == 0) || (b.size <= 0) }
+// Get bytes memory buffer
+func (b *Buffer) Data() []byte { return b.data }
+// Get bytes memory buffer capacity
+func (b *Buffer) Capacity() int { return len(b.data) }
+// Get bytes memory buffer size
+func (b *Buffer) Size() int { return b.size }
+// Get bytes memory buffer offset
+func (b *Buffer) Offset() int { return b.offset }
 
 // Attach an empty memory buffer
 func (b *Buffer) AttachNew() {
@@ -611,6 +611,16 @@ func (b *Buffer) Resize(size int) {
 func (b *Buffer) Reset() {
     b.size = 0
     b.offset = 0
+}
+
+// Shift the current write buffer offset
+func (b *Buffer) Shift(offset int) {
+    b.offset += offset
+}
+
+// Unshift the current write buffer offset
+func (b *Buffer) Unshift(offset int) {
+    b.offset -= offset
 }
 
 // Buffer I/O methods
@@ -888,10 +898,15 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding _TYPE_ field model class
+// Fast Binary Encoding _TYPE_ field model
 type FieldModel_NAME_ struct {
     buffer *Buffer  // Field model buffer
     offset int      // Field model buffer offset
+}
+
+// Create a new field model
+func NewFieldModel_NAME_(buffer *Buffer, offset int) *FieldModel_NAME_ {
+    return &FieldModel_NAME_{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -908,11 +923,6 @@ func (fm *FieldModel_NAME_) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FieldModel_NAME_) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModel_NAME_) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new field model
-func NewFieldModel_NAME_(buffer *Buffer, offset int) *FieldModel_NAME_ {
-    return &FieldModel_NAME_{buffer: buffer, offset: offset}
-}
 
 // Check if the value is valid
 func (fm *FieldModel_NAME_) Verify() bool { return true }
@@ -976,10 +986,15 @@ import "errors"
 import "math/big"
 import "github.com/shopspring/decimal"
 
-// Fast Binary Encoding decimal field model class
+// Fast Binary Encoding decimal field model
 type FieldModelDecimal struct {
     buffer *Buffer  // Field model buffer
     offset int      // Field model buffer offset
+}
+
+// Create a new decimal field model
+func NewFieldModelDecimal(buffer *Buffer, offset int) *FieldModelDecimal {
+    return &FieldModelDecimal{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -996,11 +1011,6 @@ func (fm *FieldModelDecimal) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FieldModelDecimal) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelDecimal) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new decimal field model
-func NewFieldModelDecimal(buffer *Buffer, offset int) *FieldModelDecimal {
-    return &FieldModelDecimal{buffer: buffer, offset: offset}
-}
 
 // Check if the decimal value is valid
 func (fm *FieldModelDecimal) Verify() bool { return true }
@@ -1120,10 +1130,15 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding timestamp field model class
+// Fast Binary Encoding timestamp field model
 type FieldModelTimestamp struct {
     buffer *Buffer  // Field model buffer
     offset int      // Field model buffer offset
+}
+
+// Create a new timestamp field model
+func NewFieldModelTimestamp(buffer *Buffer, offset int) *FieldModelTimestamp {
+    return &FieldModelTimestamp{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -1140,11 +1155,6 @@ func (fm *FieldModelTimestamp) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FieldModelTimestamp) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelTimestamp) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new timestamp field model
-func NewFieldModelTimestamp(buffer *Buffer, offset int) *FieldModelTimestamp {
-    return &FieldModelTimestamp{buffer: buffer, offset: offset}
-}
 
 // Check if the timestamp value is valid
 func (fm *FieldModelTimestamp) Verify() bool { return true }
@@ -1202,10 +1212,15 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding UUID field model class
+// Fast Binary Encoding UUID field model
 type FieldModelUUID struct {
     buffer *Buffer  // Field model buffer
     offset int      // Field model buffer offset
+}
+
+// Create a new UUID field model
+func NewFieldModelUUID(buffer *Buffer, offset int) *FieldModelUUID {
+    return &FieldModelUUID{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -1222,11 +1237,6 @@ func (fm *FieldModelUUID) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FieldModelUUID) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelUUID) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new UUID field model
-func NewFieldModelUUID(buffer *Buffer, offset int) *FieldModelUUID {
-    return &FieldModelUUID{buffer: buffer, offset: offset}
-}
 
 // Check if the UUID value is valid
 func (fm *FieldModelUUID) Verify() bool { return true }
@@ -1284,10 +1294,15 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding bytes field model class
+// Fast Binary Encoding bytes field model
 type FieldModelBytes struct {
     buffer *Buffer  // Field model buffer
     offset int      // Field model buffer offset
+}
+
+// Create a new bytes field model
+func NewFieldModelBytes(buffer *Buffer, offset int) *FieldModelBytes {
+    return &FieldModelBytes{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -1316,11 +1331,6 @@ func (fm *FieldModelBytes) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FieldModelBytes) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelBytes) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new bytes field model
-func NewFieldModelBytes(buffer *Buffer, offset int) *FieldModelBytes {
-    return &FieldModelBytes{buffer: buffer, offset: offset}
-}
 
 // Check if the bytes value is valid
 func (fm *FieldModelBytes) Verify() bool {
@@ -1420,10 +1430,15 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding string field model class
+// Fast Binary Encoding string field model
 type FieldModelString struct {
     buffer *Buffer  // Field model buffer
     offset int      // Field model buffer offset
+}
+
+// Create a new string field model
+func NewFieldModelString(buffer *Buffer, offset int) *FieldModelString {
+    return &FieldModelString{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -1452,11 +1467,6 @@ func (fm *FieldModelString) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FieldModelString) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelString) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new string field model
-func NewFieldModelString(buffer *Buffer, offset int) *FieldModelString {
-    return &FieldModelString{buffer: buffer, offset: offset}
-}
 
 // Check if the string value is valid
 func (fm *FieldModelString) Verify() bool {
@@ -1683,7 +1693,7 @@ void GeneratorGo::GenerateFBEFieldModelArray()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding array field model class
+# Fast Binary Encoding array field model
 class FieldModelArray(FieldModel):
     __slots__ = "_model", "_size",
 
@@ -1777,7 +1787,7 @@ void GeneratorGo::GenerateFBEFieldModelVector()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding vector field model class
+# Fast Binary Encoding vector field model
 class FieldModelVector(FieldModel):
     __slots__ = "_model",
 
@@ -1927,7 +1937,7 @@ void GeneratorGo::GenerateFBEFieldModelSet()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding set field model class
+# Fast Binary Encoding set field model
 class FieldModelSet(FieldModel):
     __slots__ = "_model",
 
@@ -2077,7 +2087,7 @@ void GeneratorGo::GenerateFBEFieldModelMap()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding map field model class
+# Fast Binary Encoding map field model
 class FieldModelMap(FieldModel):
     __slots__ = "_model_key", "_model_value",
 
@@ -2262,10 +2272,15 @@ void GeneratorGo::GenerateFBEFieldModelEnumFlags(const std::string& package, con
     WriteLineIndent("import \"../fbe\"");
 
     std::string code = R"CODE(
-// Fast Binary Encoding _NAME_ field model class
+// Fast Binary Encoding _NAME_ field model
 type FieldModel_NAME_ struct {
     buffer *fbe.Buffer  // Field model buffer
     offset int          // Field model buffer offset
+}
+
+// Create a new field model
+func NewFieldModel_NAME_(buffer *fbe.Buffer, offset int) *FieldModel_NAME_ {
+    return &FieldModel_NAME_{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -2283,35 +2298,38 @@ func (fm *FieldModel_NAME_) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModel_NAME_) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new field model
-func NewFieldModel_NAME_(buffer *fbe.Buffer, offset int) *FieldModel_NAME_ {
-    return &FieldModel_NAME_{buffer: buffer, offset: offset}
-}
-
 // Check if the value is valid
 func (fm *FieldModel_NAME_) Verify() bool { return true }
 
 // Get the value
-func (fm *FieldModel_NAME_) Get() (_NAME_, error) {
-    return fm.GetDefault(0)
+func (fm *FieldModel_NAME_) Get() (*_NAME_, error) {
+    return fm.GetDefault(_NAME_(0))
 }
 
 // Get the value with provided default value
-func (fm *FieldModel_NAME_) GetDefault(defaults _NAME_) (_NAME_, error) {
+func (fm *FieldModel_NAME_) GetDefault(defaults _NAME_) (*_NAME_, error) {
+    result := defaults
+    return fm.GetValue(&result)
+}
+
+// Get the value by pointer
+func (fm *FieldModel_NAME_) GetValue(value *_NAME_) (*_NAME_, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return _NAME_(0), nil
+        return value, nil
     }
 
-    return _NAME_(fbe.Read_BASE_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())), nil
+    result := _NAME_(fbe.Read_BASE_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    value = &result
+    return value, nil
 }
 
 // Set the value
-func (fm *FieldModel_NAME_) Set(value _NAME_) error {
+func (fm *FieldModel_NAME_) Set(value *_NAME_) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
 
-    fbe.Write_BASE_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), _TYPE_(value))
+    fbe.Write_BASE_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), _TYPE_(*value))
     return nil
 }
 )CODE";
@@ -2348,10 +2366,15 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding _TYPE_ final model class
+// Fast Binary Encoding _TYPE_ final model
 type FinalModel_NAME_ struct {
     buffer *Buffer  // Final model buffer
     offset int      // Final model buffer offset
+}
+
+// Create a new final model
+func NewFinalModel_NAME_(buffer *Buffer, offset int) *FinalModel_NAME_ {
+    return &FinalModel_NAME_{buffer: buffer, offset: offset}
 }
 
 // Get the allocation size
@@ -2369,11 +2392,6 @@ func (fm *FinalModel_NAME_) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FinalModel_NAME_) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModel_NAME_) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new final model
-func NewFinalModel_NAME_(buffer *Buffer, offset int) *FinalModel_NAME_ {
-    return &FinalModel_NAME_{buffer: buffer, offset: offset}
-}
 
 // Check if the value is valid
 func (fm *FinalModel_NAME_) Verify() (bool, int) {
@@ -2438,10 +2456,15 @@ import "errors"
 import "math/big"
 import "github.com/shopspring/decimal"
 
-// Fast Binary Encoding decimal final model class
+// Fast Binary Encoding decimal final model
 type FinalModelDecimal struct {
     buffer *Buffer  // Final model buffer
     offset int      // Final model buffer offset
+}
+
+// Create a new decimal final model
+func NewFinalModelDecimal(buffer *Buffer, offset int) *FinalModelDecimal {
+    return &FinalModelDecimal{buffer: buffer, offset: offset}
 }
 
 // Get the allocation size
@@ -2459,11 +2482,6 @@ func (fm *FinalModelDecimal) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FinalModelDecimal) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelDecimal) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new decimal final model
-func NewFinalModelDecimal(buffer *Buffer, offset int) *FinalModelDecimal {
-    return &FinalModelDecimal{buffer: buffer, offset: offset}
-}
 
 // Check if the decimal value is valid
 func (fm *FinalModelDecimal) Verify() (bool, int) {
@@ -2584,10 +2602,15 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding timestamp final model class
+// Fast Binary Encoding timestamp final model
 type FinalModelTimestamp struct {
     buffer *Buffer  // Final model buffer
     offset int      // Final model buffer offset
+}
+
+// Create a new timestamp final model
+func NewFinalModelTimestamp(buffer *Buffer, offset int) *FinalModelTimestamp {
+    return &FinalModelTimestamp{buffer: buffer, offset: offset}
 }
 
 // Get the allocation size
@@ -2605,11 +2628,6 @@ func (fm *FinalModelTimestamp) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FinalModelTimestamp) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelTimestamp) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new timestamp final model
-func NewFinalModelTimestamp(buffer *Buffer, offset int) *FinalModelTimestamp {
-    return &FinalModelTimestamp{buffer: buffer, offset: offset}
-}
 
 // Check if the timestamp value is valid
 func (fm *FinalModelTimestamp) Verify() (bool, int) {
@@ -2668,10 +2686,15 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding UUID final model class
+// Fast Binary Encoding UUID final model
 type FinalModelUUID struct {
     buffer *Buffer  // Final model buffer
     offset int      // Final model buffer offset
+}
+
+// Create a new UUID final model
+func NewFinalModelUUID(buffer *Buffer, offset int) *FinalModelUUID {
+    return &FinalModelUUID{buffer: buffer, offset: offset}
 }
 
 // Get the allocation size
@@ -2689,11 +2712,6 @@ func (fm *FinalModelUUID) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FinalModelUUID) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelUUID) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new UUID final model
-func NewFinalModelUUID(buffer *Buffer, offset int) *FinalModelUUID {
-    return &FinalModelUUID{buffer: buffer, offset: offset}
-}
 
 // Check if the UUID value is valid
 func (fm *FinalModelUUID) Verify() (bool, int) {
@@ -2752,10 +2770,15 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding bytes final model class
+// Fast Binary Encoding bytes final model
 type FinalModelBytes struct {
     buffer *Buffer  // Final model buffer
     offset int      // Final model buffer offset
+}
+
+// Create a new bytes final model
+func NewFinalModelBytes(buffer *Buffer, offset int) *FinalModelBytes {
+    return &FinalModelBytes{buffer: buffer, offset: offset}
 }
 
 // Get the allocation size
@@ -2770,11 +2793,6 @@ func (fm *FinalModelBytes) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FinalModelBytes) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelBytes) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new bytes final model
-func NewFinalModelBytes(buffer *Buffer, offset int) *FinalModelBytes {
-    return &FinalModelBytes{buffer: buffer, offset: offset}
-}
 
 // Check if the bytes value is valid
 func (fm *FinalModelBytes) Verify() (bool, int) {
@@ -2849,10 +2867,15 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding string final model class
+// Fast Binary Encoding string final model
 type FinalModelString struct {
     buffer *Buffer  // Final model buffer
     offset int      // Final model buffer offset
+}
+
+// Create a new string final model
+func NewFinalModelString(buffer *Buffer, offset int) *FinalModelString {
+    return &FinalModelString{buffer: buffer, offset: offset}
 }
 
 // Get the allocation size
@@ -2867,11 +2890,6 @@ func (fm *FinalModelString) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FinalModelString) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelString) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new string final model
-func NewFinalModelString(buffer *Buffer, offset int) *FinalModelString {
-    return &FinalModelString{buffer: buffer, offset: offset}
-}
 
 // Check if the string value is valid
 func (fm *FinalModelString) Verify() (bool, int) {
@@ -3023,7 +3041,7 @@ void GeneratorGo::GenerateFBEFinalModelArray()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding array final model class
+# Fast Binary Encoding array final model
 class FinalModelArray(FinalModel):
     __slots__ = "_model", "_size",
 
@@ -3104,7 +3122,7 @@ void GeneratorGo::GenerateFBEFinalModelVector()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding vector final model class
+# Fast Binary Encoding vector final model
 class FinalModelVector(FinalModel):
     __slots__ = "_model",
 
@@ -3192,7 +3210,7 @@ void GeneratorGo::GenerateFBEFinalModelSet()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding set final model class
+# Fast Binary Encoding set final model
 class FinalModelSet(FinalModel):
     __slots__ = "_model",
 
@@ -3280,7 +3298,7 @@ void GeneratorGo::GenerateFBEFinalModelMap()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding map final model class
+# Fast Binary Encoding map final model
 class FinalModelMap(FinalModel):
     __slots__ = "_model_key", "_model_value",
 
@@ -3407,10 +3425,15 @@ void GeneratorGo::GenerateFBEFinalModelEnumFlags(const std::string& package, con
     WriteLineIndent("import \"../fbe\"");
 
     std::string code = R"CODE(
-// Fast Binary Encoding _NAME_ final model class
+// Fast Binary Encoding _NAME_ final model
 type FinalModel_NAME_ struct {
     buffer *fbe.Buffer  // Final model buffer
     offset int          // Final model buffer offset
+}
+
+// Create a new final model
+func NewFinalModel_NAME_(buffer *fbe.Buffer, offset int) *FinalModel_NAME_ {
+    return &FinalModel_NAME_{buffer: buffer, offset: offset}
 }
 
 // Get the allocation size
@@ -3429,11 +3452,6 @@ func (fm *FinalModel_NAME_) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModel_NAME_) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new final model
-func NewFinalModel_NAME_(buffer *fbe.Buffer, offset int) *FinalModel_NAME_ {
-    return &FinalModel_NAME_{buffer: buffer, offset: offset}
-}
-
 // Check if the value is valid
 func (fm *FinalModel_NAME_) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
@@ -3444,21 +3462,34 @@ func (fm *FinalModel_NAME_) Verify() (bool, int) {
 }
 
 // Get the value
-func (fm *FinalModel_NAME_) Get() (_NAME_, int, error) {
+func (fm *FinalModel_NAME_) Get() (*_NAME_, int, error) {
+    return fm.GetDefault(_NAME_(0))
+}
+
+// Get the value with provided default value
+func (fm *FinalModel_NAME_) GetDefault(defaults _NAME_) (*_NAME_, int, error) {
+    result := defaults
+    return fm.GetValue(&result)
+}
+
+// Get the value by pointer
+func (fm *FinalModel_NAME_) GetValue(value *_NAME_) (*_NAME_, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return _NAME_(0), 0, errors.New("model is broken")
+        return value, 0, errors.New("model is broken")
     }
 
-    return _NAME_(fbe.Read_BASE_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())), fm.FBESize(), nil
+    result := _NAME_(fbe.Read_BASE_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    value = &result
+    return value, fm.FBESize(), nil
 }
 
 // Set the value
-func (fm *FinalModel_NAME_) Set(value _NAME_) (int, error) {
+func (fm *FinalModel_NAME_) Set(value *_NAME_) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0, errors.New("model is broken")
     }
 
-    fbe.Write_BASE_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), _TYPE_(value))
+    fbe.Write_BASE_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), _TYPE_(*value))
     return fm.FBESize(), nil
 }
 )CODE";
@@ -3483,7 +3514,7 @@ void GeneratorGo::GenerateFBESender()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding base sender class
+# Fast Binary Encoding base sender
 class Sender(object):
     __slots__ = "_buffer", "_logging", "_final",
 
@@ -3549,7 +3580,7 @@ void GeneratorGo::GenerateFBEReceiver()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding base receiver class
+# Fast Binary Encoding base receiver
 class Receiver(object):
     __slots__ = "_buffer", "_logging", "_final",
 
@@ -4030,7 +4061,7 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
         WriteLineIndent("}");
     }
 
-    // Generate enum footer
+    // Generate footer
     GenerateFooter();
 
     // Close the output file
@@ -4231,7 +4262,7 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::sh
         WriteLineIndent("}");
     }
 
-    // Generate flags footer
+    // Generate footer
     GenerateFooter();
 
     // Close the output file
@@ -4941,10 +4972,16 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
             }
         }
     }
-    /*
-    // Generate struct field model
-    GenerateStructFieldModel(s);
 
+    // Generate footer
+    GenerateFooter();
+
+    // Close the output file
+    Close();
+
+    // Generate struct field model
+    GenerateStructFieldModel(p, s, path);
+    /*
     // Generate struct model
     GenerateStructModel(s);
 
@@ -4956,9 +4993,345 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     }
     */
 }
-/*
-void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<StructType>& s)
+
+void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path)
 {
+    std::string struct_name = ConvertCase(*s->name);
+    std::string field_model_name = "FieldModel" + struct_name;
+
+    // Open the output file
+    CppCommon::Path output = path / (field_model_name + ".go");
+    Open(output);
+
+    // Generate header
+    GenerateHeader(CppCommon::Path(_input).filename().string());
+
+    // Generate package
+    WriteLine();
+    WriteLineIndent("package " + *p->name);
+
+    // Generate imports
+    WriteLine();
+    WriteLineIndent("import \"errors\"");
+    GenerateImports(p);
+
+    std::string base_type = (s->base && !s->base->empty()) ? ConvertTypeName(*s->base, false) : "";
+    std::string base_field_model = (s->base && !s->base->empty()) ? ConvertModelName(*s->base, "FieldModel") : "";
+    std::string base_field_name = "FieldModel" + ConvertBaseName(base_type);
+
+    // Generate struct field model type
+    WriteLine();
+    WriteLineIndent("// Fast Binary Encoding " + struct_name + " field model");
+    WriteLineIndent("type " + field_model_name + " struct {");
+    Indent(1);
+    WriteLineIndent("buffer *fbe.Buffer  // Field model buffer");
+    WriteLineIndent("offset int          // Field model buffer offset");
+    WriteLine();
+    if (!base_type.empty())
+        WriteLineIndent(base_field_model);
+    if (s->body)
+        for (const auto& field : s->body->fields)
+            WriteLineIndent(ConvertCase(*field->name) + " *" + ConvertTypeFieldDeclaration(*field, false));
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate struct field model constructor
+    WriteLine();
+    WriteLineIndent("// Create a new " + struct_name + " field model");
+    WriteLineIndent("func New" + field_model_name + "(buffer *fbe.Buffer, offset int) *" + field_model_name + " {");
+    Indent(1);
+    std::string prev_offset("4");
+    std::string prev_size("4");
+    WriteLineIndent("fbeResult := " + field_model_name + "{buffer: buffer, offset: offset}");
+    if (!base_type.empty())
+    {
+        WriteLineIndent("fbeResult." + base_field_name + " = *" + ConvertModelName(*s->base, "NewFieldModel") + "(buffer, " + prev_offset + " + " + prev_size + ")");
+        prev_offset = "fbeResult." + base_field_name + ".FBEOffset()";
+        prev_size = "fbeResult." + base_field_name + ".FBEBody() - 4 - 4";
+    }
+    if (s->body)
+    {
+        for (const auto& field : s->body->fields)
+        {
+            WriteLineIndent("fbeResult." + ConvertCase(*field->name) + " = " + ConvertTypeFieldInitialization(*field, prev_offset + " + " + prev_size, false));
+            prev_offset = "fbeResult." + ConvertCase(*field->name) + ".FBEOffset()";
+            prev_size = "fbeResult." + ConvertCase(*field->name) + ".FBESize()";
+        }
+    }
+    WriteLineIndent("return &fbeResult");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate struct field FBESize() method
+    WriteLine();
+    WriteLineIndent("// Get the field size");
+    WriteLineIndent("func (fm *" + field_model_name + ") FBESize() int { return 1 }");
+
+    // Generate struct field FBEBody() method
+    WriteLine();
+    WriteLineIndent("// Get the field body size");
+    WriteLineIndent("func (fm *" + field_model_name + ") FBEBody() int {");
+    Indent(1);
+    WriteLineIndent("fbeResult := 4 + 4 +");
+    Indent(1);
+    if (!base_type.empty())
+        WriteLineIndent("fm." + base_field_name + ".FBEBody() - 4 - 4 +");
+    if (s->body)
+        for (const auto& field : s->body->fields)
+            prev_size = "fm." + ConvertCase(*field->name) + ".FBESize() +";
+    WriteLineIndent("0");
+    Indent(-1);
+    WriteLineIndent("return fbeResult");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate struct field FBEExtra() method
+    WriteLine();
+    WriteLineIndent("// Get the field extra size");
+    WriteLineIndent("func (fm *" + field_model_name + ") FBEExtra() int {");
+    Indent(1);
+    WriteLineIndent("if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {");
+    Indent(1);
+    WriteLineIndent("return 0");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("fbeStructOffset := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))");
+    WriteLineIndent("if (fbeStructOffset == 0) || ((fm.buffer.Offset() + fbeStructOffset + 4) > fm.buffer.Size()) {");
+    Indent(1);
+    WriteLineIndent("return 0");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("fm.buffer.Shift(fbeStructOffset)");
+    WriteLine();
+    WriteLineIndent("fbeResult := fm.FBEBody() +");
+    Indent(1);
+    if (!base_type.empty())
+        WriteLineIndent("fm." + base_field_name + ".FBEExtra() + ");
+    if (s->body)
+        for (const auto& field : s->body->fields)
+            prev_size = "fm." + ConvertCase(*field->name) + ".FBEExtra() +";
+    WriteLineIndent("0");
+    Indent(-1);
+    WriteLine();
+    WriteLineIndent("fm.buffer.Unshift(fbeStructOffset)");
+    WriteLine();
+    WriteLineIndent("return fbeResult");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate struct field FBEType() method
+    WriteLine();
+    WriteLineIndent("// Get the field type");
+    WriteLineIndent("func (fm *" + field_model_name + ") FBEType() int { return " + std::to_string(s->type) + " }");
+
+    // Generate struct field FBEOffset() methods
+    WriteLine();
+    WriteLineIndent("// Get the field offset");
+    WriteLineIndent("func (fm *" + field_model_name + ") FBEOffset() int { return fm.offset }");
+    WriteLineIndent("// Set the field offset");
+    WriteLineIndent("func (fm *" + field_model_name + ") SetFBEOffset(value int) { fm.offset = value }");
+
+    // Generate struct field FBEShift() methods
+    WriteLine();
+    WriteLineIndent("// Shift the current field offset");
+    WriteLineIndent("func (fm *" + field_model_name + ") FBEShift(size int) { fm.offset += size }");
+    WriteLineIndent("// Unshift the current field offset");
+    WriteLineIndent("func (fm *" + field_model_name + ") FBEUnshift(size int) { fm.offset -= size }");
+
+    // Generate struct field Verify() methods
+    WriteLine();
+    WriteLineIndent("// Check if the struct value is valid");
+    WriteLineIndent("func (fm *" + field_model_name + ") Verify() bool { return fm.VerifyType(true) }");
+    WriteLine();
+    WriteLineIndent("// Check if the struct value and its type are valid");
+    WriteLineIndent("func (fm *" + field_model_name + ") VerifyType(fbeVerifyType bool) bool {");
+    Indent(1);
+    WriteLineIndent("if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {");
+    Indent(1);
+    WriteLineIndent("return true");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("fbeStructOffset := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))");
+    WriteLineIndent("if (fbeStructOffset == 0) || ((fm.buffer.Offset() + fbeStructOffset + 4 + 4) > fm.buffer.Size()) {");
+    Indent(1);
+    WriteLineIndent("return false");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("fbeStructSize := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeStructOffset))");
+    WriteLineIndent("if fbeStructSize < (4 + 4) {");
+    Indent(1);
+    WriteLineIndent("return false");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("fbeStructType := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeStructOffset + 4))");
+    WriteLineIndent("if fbeVerifyType && (fbeStructType != fm.FBEType()) {");
+    Indent(1);
+    WriteLineIndent("return false");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("fm.buffer.Shift(fbeStructOffset)");
+    WriteLineIndent("fbeResult := fm.VerifyFields(fbeStructSize)");
+    WriteLineIndent("fm.buffer.Unshift(fbeStructOffset)");
+    WriteLineIndent("return fbeResult");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("// // Check if the struct value fields are valid");
+    WriteLineIndent("func (fm *" + field_model_name + ") VerifyFields(fbeStructSize int) bool {");
+    Indent(1);
+    WriteLineIndent("fbeCurrentSize := 4 + 4");
+    if (!base_type.empty())
+    {
+        WriteLineIndent("fm." + base_field_name + ".FBEExtra() + ");
+
+        WriteLine();
+        WriteLineIndent("if (fbeCurrentSize + fm." + base_field_name + ".FBEBody() - 4 - 4) > fbeStructSize {");
+        Indent(1);
+        WriteLineIndent("return true");
+        Indent(-1);
+        WriteLineIndent("}");
+        WriteLineIndent("if !fm." + base_field_name + ".VerifyFields(fbeStructSize) {");
+        Indent(1);
+        WriteLineIndent("return false");
+        Indent(-1);
+        WriteLineIndent("}");
+        WriteLineIndent("fbeCurrentSize += fm." + base_field_name + ".FBEBody() - 4 - 4");
+    }
+    if (s->body)
+    {
+        for (const auto& field : s->body->fields)
+        {
+            WriteLine();
+            WriteLineIndent("if (fbeCurrentSize + fm." + ConvertCase(*field->name) + ".FBESize()) > fbeStructSize {");
+            Indent(1);
+            WriteLineIndent("return true");
+            Indent(-1);
+            WriteLineIndent("}");
+            WriteLineIndent("if !fm." + ConvertCase(*field->name) + ".Verify() {");
+            Indent(1);
+            WriteLineIndent("return false");
+            Indent(-1);
+            WriteLineIndent("}");
+            WriteLineIndent("fbeCurrentSize += fm." + ConvertCase(*field->name) + ".FBESize()");
+        }
+    }
+    WriteLine();
+    WriteLineIndent("return true");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate struct field Get() methods
+    WriteLine();
+    WriteLineIndent("// Get the struct value (begin phase)");
+    WriteLineIndent("func (fm *" + field_model_name + ") GetBegin() (int, error) {");
+    Indent(1);
+    WriteLineIndent("if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {");
+    Indent(1);
+    WriteLineIndent("return 0, nil");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("fbeStructOffset := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))");
+    WriteLineIndent("if (fbeStructOffset == 0) || ((fm.buffer.Offset() + fbeStructOffset + 4 + 4) > fm.buffer.Size()) {");
+    Indent(1);
+    WriteLineIndent("return 0, errors.New(\"model is broken\")");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("fbeStructSize := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeStructOffset))");
+    WriteLineIndent("if fbeStructSize < (4 + 4) {");
+    Indent(1);
+    WriteLineIndent("return 0, errors.New(\"model is broken\")");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("fm.buffer.Shift(fbeStructOffset)");
+    WriteLineIndent("return fbeStructOffset, nil");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("// Get the struct value (end phase)");
+    WriteLineIndent("func (fm *" + field_model_name + ") GetEnd(fbeBegin int) {");
+    Indent(1);
+    WriteLineIndent("fm.buffer.Unshift(fbeBegin)");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+
+    WriteLineIndent("// Get the struct value");
+    WriteLineIndent("func (fm *" + field_model_name + ") Get() (*" + struct_name + ", error) {");
+    Indent(1);
+    WriteLineIndent("fbeResult := New" + struct_name + "()");
+    WriteLineIndent("return fm.GetValue(fbeResult)");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("// Get the struct value by pointer");
+    WriteLineIndent("func (fm *" + field_model_name + ") GetValue(fbeValue *" + struct_name + ") (*" + struct_name + ", error) {");
+    Indent(1);
+    WriteLineIndent("fbeBegin, err := fm.GetBegin()");
+    WriteLineIndent("if fbeBegin == 0 {");
+    Indent(1);
+    WriteLineIndent("return fbeValue, err");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("fbeStructSize := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset()))");
+    WriteLineIndent("fm.GetFields(fbeValue, fbeStructSize)");
+    WriteLineIndent("fm.GetEnd(fbeBegin)");
+    WriteLineIndent("return fbeValue, nil");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("// Get the struct fields values");
+    WriteLineIndent("func (fm *" + field_model_name + ") GetFields(fbeValue *" + struct_name + ", fbeStructSize int) {");
+    Indent(1);
+    WriteLineIndent("fbeCurrentSize := 4 + 4");
+    if (!base_type.empty())
+    {
+        WriteLine();
+        WriteLineIndent("if (fbeCurrentSize + fm." + base_field_name + ".FBEBody() - 4 - 4) > fbeStructSize {");
+        Indent(1);
+        WriteLineIndent("fm." + base_field_name + ".GetFields(fbeValue, fbeStructSize)");
+        Indent(-1);
+        WriteLineIndent("}");
+        WriteLineIndent("fbeCurrentSize += fm." + base_field_name + ".FBEBody() - 4 - 4");
+    }
+    if (s->body)
+    {
+        for (const auto& field : s->body->fields)
+        {
+            WriteLine();
+            WriteLineIndent("if (fbeCurrentSize + fm." + ConvertCase(*field->name) + ".FBESize()) <= fbeStructSize {");
+            Indent(1);
+            //...
+            Indent(-1);
+            WriteLineIndent("} else {");
+            Indent(1);
+            if (field->array || field->vector || field->list || field->set || field->map || field->hash)
+                WriteLineIndent("fbeValue." + ConvertCase(*field->name) + ".Clear()");
+            else
+                WriteLineIndent("fbeValue." + ConvertCase(*field->name) + " = " + ConvertDefault(*field));
+            Indent(-1);
+            WriteLineIndent("}");
+            WriteLineIndent("fbeCurrentSize += fm." + ConvertCase(*field->name) + ".FBESize()");
+        }
+    }
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the output file
+    Close();
+    /*
     // Generate struct field model begin
     WriteLine();
     WriteLine();
@@ -5325,14 +5698,15 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<StructType>& s)
 
     // Generate struct field model end
     Indent(-1);
+    */
 }
-
+/*
 void GeneratorGo::GenerateStructModel(const std::shared_ptr<StructType>& s)
 {
     // Generate struct model begin
     WriteLine();
     WriteLine();
-    WriteLineIndent("# Fast Binary Encoding " + *s->name + " model class");
+    WriteLineIndent("# Fast Binary Encoding " + *s->name + " model");
     WriteLineIndent("class " + *s->name + "Model(fbe.Model):");
     Indent(1);
 
@@ -5694,7 +6068,7 @@ void GeneratorGo::GenerateStructModelFinal(const std::shared_ptr<StructType>& s)
     // Generate struct model final begin
     WriteLine();
     WriteLine();
-    WriteLineIndent("# Fast Binary Encoding " + *s->name + " final model class");
+    WriteLineIndent("# Fast Binary Encoding " + *s->name + " final model");
     WriteLineIndent("class " + *s->name + "FinalModel(fbe.Model):");
     Indent(1);
 
@@ -5816,9 +6190,9 @@ void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, bool final)
     WriteLine();
     WriteLine();
     if (final)
-        WriteLineIndent("# Fast Binary Encoding " + *p->name + " final sender class");
+        WriteLineIndent("# Fast Binary Encoding " + *p->name + " final sender");
     else
-        WriteLineIndent("# Fast Binary Encoding " + *p->name + " sender class");
+        WriteLineIndent("# Fast Binary Encoding " + *p->name + " sender");
     WriteLineIndent("class " + sender + "(fbe.Sender):");
     Indent(1);
 
@@ -5963,9 +6337,9 @@ void GeneratorGo::GenerateReceiver(const std::shared_ptr<Package>& p, bool final
     WriteLine();
     WriteLine();
     if (final)
-        WriteLineIndent("# Fast Binary Encoding " + *p->name + " final receiver class");
+        WriteLineIndent("# Fast Binary Encoding " + *p->name + " final receiver");
     else
-        WriteLineIndent("# Fast Binary Encoding " + *p->name + " receiver class");
+        WriteLineIndent("# Fast Binary Encoding " + *p->name + " receiver");
     WriteLineIndent("class " + receiver + "(fbe.Receiver):");
     Indent(1);
 
@@ -6352,6 +6726,21 @@ std::string GeneratorGo::ConvertOptional(const std::string& type, const std::str
     return ConvertConstant(type, value, false) + ".Optional()";
 }
 
+std::string GeneratorGo::ConvertModelName(const std::string& type, const std::string& model)
+{
+    std::string ns = "";
+    std::string t = type;
+
+    size_t pos = type.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        ns.assign(type, 0, pos + 1);
+        t.assign(type, pos + 1, type.size() - pos);
+    }
+
+    return ns + model + ConvertCase(t);
+}
+
 std::string GeneratorGo::ConvertTypeName(const std::string& type, bool optional)
 {
     std::string opt = optional ? "*" : "";
@@ -6399,6 +6788,177 @@ std::string GeneratorGo::ConvertTypeName(const StructField& field)
 
     return ConvertTypeName(*field.type, field.optional);
 }
+
+std::string GeneratorGo::ConvertTypeFieldName(const std::string& type)
+{
+    if (type == "bool")
+        return "Bool";
+    else if (type == "byte")
+        return "Byte";
+    else if (type == "bytes")
+        return "Bytes";
+    else if (type == "char")
+        return "Char";
+    else if (type == "wchar")
+        return "WChar";
+    else if (type == "int8")
+        return "Int8";
+    else if (type == "uint8")
+        return "UInt8";
+    else if (type == "int16")
+        return "Int16";
+    else if (type == "uint16")
+        return "UInt16";
+    else if (type == "int32")
+        return "Int32";
+    else if (type == "uint32")
+        return "UInt32";
+    else if (type == "int64")
+        return "Int64";
+    else if (type == "uint64")
+        return "UInt64";
+    else if (type == "float")
+        return "Float";
+    else if (type == "double")
+        return "Double";
+    else if (type == "decimal")
+        return "Decimal";
+    else if (type == "timestamp")
+        return "Timestamp";
+    else if (type == "string")
+        return "String";
+    else if (type == "uuid")
+        return "UUID";
+
+    std::string ns = "";
+    std::string t = type;
+
+    size_t pos = type.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        ns.assign(type, 0, pos + 1);
+        t.assign(type, pos + 1, type.size() - pos);
+    }
+
+    return ConvertCase(t);
+}
+
+std::string GeneratorGo::ConvertTypeFieldDeclaration(const std::string& type, bool optional, bool final)
+{
+    std::string modelType = (final ? "Final" : "Field");
+
+    if (IsGoType(type))
+        return "fbe." + modelType + "Model" + ConvertTypeFieldName(type);
+
+    std::string ns = "";
+    std::string t = type;
+
+    size_t pos = type.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        ns.assign(type, 0, pos + 1);
+        t.assign(type, pos + 1, type.size() - pos);
+    }
+
+    return ns + modelType + "Model" + ConvertTypeFieldName(t);
+}
+
+std::string GeneratorGo::ConvertTypeFieldDeclaration(const StructField& field, bool final)
+{
+    std::string modelType = (final ? "Final" : "Field");
+
+    std::string key = (field.key != nullptr) ? *field.key : "";
+    std::string type = (field.type != nullptr) ? *field.type : "";
+
+    std::string ns = "";
+    std::string t = type;
+
+    size_t pos = type.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        ns.assign(type, 0, pos + 1);
+        t.assign(type, pos + 1, type.size() - pos);
+    }
+
+    std::string k = key;
+
+    pos = key.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        ns.assign(key, 0, pos + 1);
+        k.assign(key, pos + 1, type.size() - pos);
+    }
+
+    if (field.array)
+        return modelType + "ModelArray" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(t);
+    else if (field.vector || field.list || field.set)
+        return modelType + "ModelVector" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(t);
+    else if (field.map || field.hash)
+        return modelType + "ModelMap" + ConvertTypeFieldName(k) + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(t);
+    else if (field.optional)
+        return modelType + "ModelOptional" + ConvertTypeFieldName(t);
+
+    return ConvertTypeFieldDeclaration(*field.type, field.optional, final);
+}
+
+std::string GeneratorGo::ConvertTypeFieldInitialization(const std::string& type, bool optional, const std::string& offset, bool final)
+{
+    std::string modelType = (final ? "Final" : "Field");
+
+    if (IsGoType(type))
+        return "fbe.New" + modelType + "Model" + ConvertTypeFieldName(type) + "(buffer, " + offset + ")";
+
+    std::string ns = "";
+    std::string t = type;
+
+    size_t pos = type.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        ns.assign(type, 0, pos + 1);
+        t.assign(type, pos + 1, type.size() - pos);
+    }
+
+    return ns + "New" + modelType + "Model" + ConvertTypeFieldName(t) + "(buffer, " + offset + ")";
+}
+
+std::string GeneratorGo::ConvertTypeFieldInitialization(const StructField& field, const std::string& offset, bool final)
+{
+    std::string modelType = (final ? "Final" : "Field");
+
+    std::string key = (field.key != nullptr) ? *field.key : "";
+    std::string type = (field.type != nullptr) ? *field.type : "";
+
+    std::string ns = "";
+    std::string t = type;
+
+    size_t pos = type.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        ns.assign(type, 0, pos + 1);
+        t.assign(type, pos + 1, type.size() - pos);
+    }
+
+    std::string k = key;
+
+    pos = key.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        ns.assign(key, 0, pos + 1);
+        k.assign(key, pos + 1, type.size() - pos);
+    }
+
+    if (field.array)
+        return "New" + modelType + "ModelArray" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(t) + "(buffer, " + offset + ")";
+    else if (field.vector || field.list || field.set)
+        return "New" + modelType + "ModelVector" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(t) + "(buffer, " + offset + ")";
+    else if (field.map || field.hash)
+        return "New" + modelType + "ModelMap" + ConvertTypeFieldName(k) + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(t) + "(buffer, " + offset + ")";
+    else if (field.optional)
+        return "New" + modelType + "ModelOptional" + ConvertTypeFieldName(t) + "(buffer, " + offset + ")";
+
+    return ConvertTypeFieldInitialization(*field.type, field.optional, offset, final);
+}
+
 /*
 std::string GeneratorGo::ConvertTypeFieldName(const std::string& type, bool final)
 {

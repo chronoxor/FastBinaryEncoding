@@ -14,7 +14,7 @@ import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
 
-// Fast Binary Encoding base field model class
+// Fast Binary Encoding base field model
 public abstract class FieldModel
 {
     protected Buffer _buffer;

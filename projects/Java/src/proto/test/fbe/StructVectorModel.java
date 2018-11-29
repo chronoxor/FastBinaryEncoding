@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding StructVector model class
+// Fast Binary Encoding StructVector model
 public final class StructVectorModel extends Model
 {
     public final FieldModelStructVector model;

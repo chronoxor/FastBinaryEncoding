@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import enums.*
 
-// Fast Binary Encoding EnumUInt32 final model class
+// Fast Binary Encoding EnumUInt32 final model
 class FinalModelEnumUInt32(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size

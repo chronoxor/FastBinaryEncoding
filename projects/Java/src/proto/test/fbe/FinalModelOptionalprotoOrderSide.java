@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional protoOrderSide final model class
+// Fast Binary Encoding optional protoOrderSide final model
 public final class FinalModelOptionalprotoOrderSide extends FinalModel
 {
     public FinalModelOptionalprotoOrderSide(Buffer buffer, long offset)

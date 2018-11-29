@@ -884,7 +884,7 @@ private:
     size_t _offset;
 };
 
-// Fast Binary Encoding base model class
+// Fast Binary Encoding base model
 template <class TBuffer>
 class Model
 {
@@ -921,7 +921,7 @@ private:
     std::shared_ptr<TBuffer> _buffer;
 };
 
-// Fast Binary Encoding base field model class
+// Fast Binary Encoding base field model
 template <class TBuffer, typename T, typename TBase = T>
 class FieldModelBase
 {
@@ -970,7 +970,7 @@ private:
     size_t _offset;
 };
 
-// Fast Binary Encoding field model class
+// Fast Binary Encoding field model
 template <class TBuffer, typename T>
 class FieldModel : public FieldModelBase<TBuffer, T>
 {
@@ -978,7 +978,7 @@ public:
     using FieldModelBase<TBuffer, T>::FieldModelBase;
 };
 
-// Fast Binary Encoding field model class bool specialization
+// Fast Binary Encoding field model bool specialization
 template <class TBuffer>
 class FieldModel<TBuffer, bool> : public FieldModelBase<TBuffer, bool, uint8_t>
 {
@@ -986,7 +986,7 @@ public:
     using FieldModelBase<TBuffer, bool, uint8_t>::FieldModelBase;
 };
 
-// Fast Binary Encoding field model class char specialization
+// Fast Binary Encoding field model char specialization
 template <class TBuffer>
 class FieldModel<TBuffer, char> : public FieldModelBase<TBuffer, char, uint8_t>
 {
@@ -994,7 +994,7 @@ public:
     using FieldModelBase<TBuffer, char, uint8_t>::FieldModelBase;
 };
 
-// Fast Binary Encoding field model class wchar specialization
+// Fast Binary Encoding field model wchar specialization
 template <class TBuffer>
 class FieldModel<TBuffer, wchar_t> : public FieldModelBase<TBuffer, wchar_t, uint32_t>
 {
@@ -1002,7 +1002,7 @@ public:
     using FieldModelBase<TBuffer, wchar_t, uint32_t>::FieldModelBase;
 };
 
-// Fast Binary Encoding field model class decimal specialization
+// Fast Binary Encoding field model decimal specialization
 template <class TBuffer>
 class FieldModel<TBuffer, decimal_t>
 {
@@ -1258,7 +1258,7 @@ private:
     }
 };
 
-// Fast Binary Encoding field model class UUID specialization
+// Fast Binary Encoding field model UUID specialization
 template <class TBuffer>
 class FieldModel<TBuffer, uuid_t>
 {
@@ -1307,7 +1307,7 @@ private:
     size_t _offset;
 };
 
-// Fast Binary Encoding field model class bytes specialization
+// Fast Binary Encoding field model bytes specialization
 template <class TBuffer>
 class FieldModel<TBuffer, buffer_t>
 {
@@ -1463,7 +1463,7 @@ private:
     size_t _offset;
 };
 
-// Fast Binary Encoding field model class string specialization
+// Fast Binary Encoding field model string specialization
 template <class TBuffer>
 class FieldModel<TBuffer, std::string>
 {
@@ -1652,7 +1652,7 @@ private:
     size_t _offset;
 };
 
-// Fast Binary Encoding field model class optional specialization
+// Fast Binary Encoding field model optional specialization
 template <class TBuffer, typename T>
 class FieldModel<TBuffer, std::optional<T>>
 {
@@ -1806,7 +1806,7 @@ public:
     FieldModel<TBuffer, T> value;
 };
 
-// Fast Binary Encoding field model array class
+// Fast Binary Encoding field model array
 template <class TBuffer, typename T, size_t N>
 class FieldModelArray
 {
@@ -1963,7 +1963,7 @@ private:
     FieldModel<TBuffer, T> _model;
 };
 
-// Fast Binary Encoding field model vector class
+// Fast Binary Encoding field model vector
 template <class TBuffer, typename T>
 class FieldModelVector
 {
@@ -2193,7 +2193,7 @@ private:
     size_t _offset;
 };
 
-// Fast Binary Encoding field model map class
+// Fast Binary Encoding field model map
 template <class TBuffer, typename TKey, typename TValue>
 class FieldModelMap
 {
@@ -2407,7 +2407,7 @@ private:
     size_t _offset;
 };
 
-// Fast Binary Encoding base final model class
+// Fast Binary Encoding base final model
 template <class TBuffer, typename T, typename TBase = T>
 class FinalModelBase
 {
@@ -2465,7 +2465,7 @@ private:
     mutable size_t _offset;
 };
 
-// Fast Binary Encoding final model class
+// Fast Binary Encoding final model
 template <class TBuffer, typename T>
 class FinalModel : public FinalModelBase<TBuffer, T>
 {
@@ -2473,7 +2473,7 @@ public:
     using FinalModelBase<TBuffer, T>::FinalModelBase;
 };
 
-// Fast Binary Encoding final model class bool specialization
+// Fast Binary Encoding final model bool specialization
 template <class TBuffer>
 class FinalModel<TBuffer, bool> : public FinalModelBase<TBuffer, bool, uint8_t>
 {
@@ -2481,7 +2481,7 @@ public:
     using FinalModelBase<TBuffer, bool, uint8_t>::FinalModelBase;
 };
 
-// Fast Binary Encoding final model class char specialization
+// Fast Binary Encoding final model char specialization
 template <class TBuffer>
 class FinalModel<TBuffer, char> : public FinalModelBase<TBuffer, char, uint8_t>
 {
@@ -2489,7 +2489,7 @@ public:
     using FinalModelBase<TBuffer, char, uint8_t>::FinalModelBase;
 };
 
-// Fast Binary Encoding final model class wchar specialization
+// Fast Binary Encoding final model wchar specialization
 template <class TBuffer>
 class FinalModel<TBuffer, wchar_t> : public FinalModelBase<TBuffer, wchar_t, uint32_t>
 {
@@ -2497,7 +2497,7 @@ public:
     using FinalModelBase<TBuffer, wchar_t, uint32_t>::FinalModelBase;
 };
 
-// Fast Binary Encoding final model class decimal specialization
+// Fast Binary Encoding final model decimal specialization
 template <class TBuffer>
 class FinalModel<TBuffer, decimal_t>
 {
@@ -2762,7 +2762,7 @@ private:
     }
 };
 
-// Fast Binary Encoding final model class UUID specialization
+// Fast Binary Encoding final model UUID specialization
 template <class TBuffer>
 class FinalModel<TBuffer, uuid_t>
 {
@@ -2820,7 +2820,7 @@ private:
     mutable size_t _offset;
 };
 
-// Fast Binary Encoding final model class bytes specialization
+// Fast Binary Encoding final model bytes specialization
 template <class TBuffer>
 class FinalModel<TBuffer, buffer_t>
 {
@@ -2951,7 +2951,7 @@ private:
     mutable size_t _offset;
 };
 
-// Fast Binary Encoding final model class string specialization
+// Fast Binary Encoding final model string specialization
 template <class TBuffer>
 class FinalModel<TBuffer, std::string>
 {
@@ -3089,7 +3089,7 @@ private:
     mutable size_t _offset;
 };
 
-// Fast Binary Encoding final model class optional specialization
+// Fast Binary Encoding final model optional specialization
 template <class TBuffer, typename T>
 class FinalModel<TBuffer, std::optional<T>>
 {
@@ -3187,7 +3187,7 @@ public:
     FinalModel<TBuffer, T> value;
 };
 
-// Fast Binary Encoding final model array class
+// Fast Binary Encoding final model array
 template <class TBuffer, typename T, size_t N>
 class FinalModelArray
 {
@@ -3374,7 +3374,7 @@ private:
     mutable size_t _offset;
 };
 
-// Fast Binary Encoding final model vector class
+// Fast Binary Encoding final model vector
 template <class TBuffer, typename T>
 class FinalModelVector
 {
@@ -3583,7 +3583,7 @@ private:
     mutable size_t _offset;
 };
 
-// Fast Binary Encoding final model map class
+// Fast Binary Encoding final model map
 template <class TBuffer, typename TKey, typename TValue>
 class FinalModelMap
 {
@@ -3774,7 +3774,7 @@ private:
     mutable size_t _offset;
 };
 
-// Fast Binary Encoding base sender class
+// Fast Binary Encoding base sender
 template <class TBuffer>
 class Sender
 {
@@ -3833,7 +3833,7 @@ protected:
     void final(bool enable) noexcept { _final = enable; }
 };
 
-// Fast Binary Encoding base receiver class
+// Fast Binary Encoding base receiver
 template <class TBuffer>
 class Receiver
 {

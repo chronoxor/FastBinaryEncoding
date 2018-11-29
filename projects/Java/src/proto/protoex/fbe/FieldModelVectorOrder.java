@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import protoex.*;
 
-// Fast Binary Encoding Order vector field model class
+// Fast Binary Encoding Order vector field model
 public final class FieldModelVectorOrder extends FieldModel
 {
     private final FieldModelOrder _model;

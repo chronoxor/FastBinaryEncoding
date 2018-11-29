@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional String field model class
+// Fast Binary Encoding optional String field model
 public final class FieldModelOptionalString extends FieldModel
 {
     public FieldModelOptionalString(Buffer buffer, long offset)

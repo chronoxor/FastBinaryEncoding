@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructSimple array final model class
+// Fast Binary Encoding StructSimple array final model
 class FinalModelArrayStructSimple(buffer: Buffer, offset: Long, private val _size: Long) : FinalModel(buffer, offset)
 {
     private val _model = FinalModelStructSimple(buffer, offset)

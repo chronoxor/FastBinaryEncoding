@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding FlagsSimple final model class
+// Fast Binary Encoding FlagsSimple final model
 public final class FinalModelFlagsSimple extends FinalModel
 {
     public FinalModelFlagsSimple(Buffer buffer, long offset) { super(buffer, offset); }

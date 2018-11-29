@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructVector field model class
+// Fast Binary Encoding StructVector field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FieldModelStructVector(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {

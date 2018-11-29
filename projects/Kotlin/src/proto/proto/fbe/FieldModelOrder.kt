@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import proto.*
 
-// Fast Binary Encoding Order field model class
+// Fast Binary Encoding Order field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FieldModelOrder(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {

@@ -412,7 +412,7 @@ void GeneratorPython::GenerateFBEModel()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding base model class
+# Fast Binary Encoding base model
 class Model(object):
     __slots__ = "_buffer",
 
@@ -484,7 +484,7 @@ void GeneratorPython::GenerateFBEFieldModelBase()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding base field model class
+# Fast Binary Encoding base field model
 class FieldModelBase(object):
     __slots__ = "_buffer", "_offset",
 
@@ -636,7 +636,7 @@ void GeneratorPython::GenerateFBEFieldModel()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding field model class
+# Fast Binary Encoding field model
 class FieldModel(FieldModelBase):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -656,7 +656,7 @@ void GeneratorPython::GenerateFBEFieldModel(const std::string& name, const std::
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding _TYPE_ field model class
+# Fast Binary Encoding _TYPE_ field model
 class FieldModel_NAME_(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -699,7 +699,7 @@ void GeneratorPython::GenerateFBEFieldModelDecimal()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding decimal field model class
+# Fast Binary Encoding decimal field model
 class FieldModelDecimal(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -780,7 +780,7 @@ void GeneratorPython::GenerateFBEFieldModelBytes()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding bytes field model class
+# Fast Binary Encoding bytes field model
 class FieldModelBytes(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -875,7 +875,7 @@ void GeneratorPython::GenerateFBEFieldModelString()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding string field model class
+# Fast Binary Encoding string field model
 class FieldModelString(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -1109,7 +1109,7 @@ void GeneratorPython::GenerateFBEFieldModelArray()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding array field model class
+# Fast Binary Encoding array field model
 class FieldModelArray(FieldModel):
     __slots__ = "_model", "_size",
 
@@ -1203,7 +1203,7 @@ void GeneratorPython::GenerateFBEFieldModelVector()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding vector field model class
+# Fast Binary Encoding vector field model
 class FieldModelVector(FieldModel):
     __slots__ = "_model",
 
@@ -1353,7 +1353,7 @@ void GeneratorPython::GenerateFBEFieldModelSet()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding set field model class
+# Fast Binary Encoding set field model
 class FieldModelSet(FieldModel):
     __slots__ = "_model",
 
@@ -1503,7 +1503,7 @@ void GeneratorPython::GenerateFBEFieldModelMap()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding map field model class
+# Fast Binary Encoding map field model
 class FieldModelMap(FieldModel):
     __slots__ = "_model_key", "_model_value",
 
@@ -1671,7 +1671,7 @@ void GeneratorPython::GenerateFBEFinalModel()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding final model class
+# Fast Binary Encoding final model
 class FinalModel(FieldModelBase):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -1691,7 +1691,7 @@ void GeneratorPython::GenerateFBEFinalModel(const std::string& name, const std::
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding _TYPE_ final model class
+# Fast Binary Encoding _TYPE_ final model
 class FinalModel_NAME_(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -1744,7 +1744,7 @@ void GeneratorPython::GenerateFBEFinalModelDecimal()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding decimal final model class
+# Fast Binary Encoding decimal final model
 class FinalModelDecimal(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -1834,7 +1834,7 @@ void GeneratorPython::GenerateFBEFinalModelBytes()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding bytes final model class
+# Fast Binary Encoding bytes final model
 class FinalModelBytes(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -1897,7 +1897,7 @@ void GeneratorPython::GenerateFBEFinalModelString()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding string final model class
+# Fast Binary Encoding string final model
 class FinalModelString(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -2049,7 +2049,7 @@ void GeneratorPython::GenerateFBEFinalModelArray()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding array final model class
+# Fast Binary Encoding array final model
 class FinalModelArray(FinalModel):
     __slots__ = "_model", "_size",
 
@@ -2130,7 +2130,7 @@ void GeneratorPython::GenerateFBEFinalModelVector()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding vector final model class
+# Fast Binary Encoding vector final model
 class FinalModelVector(FinalModel):
     __slots__ = "_model",
 
@@ -2218,7 +2218,7 @@ void GeneratorPython::GenerateFBEFinalModelSet()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding set final model class
+# Fast Binary Encoding set final model
 class FinalModelSet(FinalModel):
     __slots__ = "_model",
 
@@ -2306,7 +2306,7 @@ void GeneratorPython::GenerateFBEFinalModelMap()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding map final model class
+# Fast Binary Encoding map final model
 class FinalModelMap(FinalModel):
     __slots__ = "_model_key", "_model_value",
 
@@ -2416,7 +2416,7 @@ void GeneratorPython::GenerateFBESender()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding base sender class
+# Fast Binary Encoding base sender
 class Sender(object):
     __slots__ = "_buffer", "_logging", "_final",
 
@@ -2482,7 +2482,7 @@ void GeneratorPython::GenerateFBEReceiver()
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding base receiver class
+# Fast Binary Encoding base receiver
 class Receiver(object):
     __slots__ = "_buffer", "_logging", "_final",
 
@@ -2924,7 +2924,7 @@ void GeneratorPython::GenerateEnumFieldModel(const std::shared_ptr<EnumType>& e)
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding _ENUM_NAME_ field model class
+# Fast Binary Encoding _ENUM_NAME_ field model
 class FieldModel_ENUM_NAME_(fbe.FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -2968,7 +2968,7 @@ void GeneratorPython::GenerateEnumFinalModel(const std::shared_ptr<EnumType>& e)
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding _ENUM_NAME_ final model class
+# Fast Binary Encoding _ENUM_NAME_ final model
 class FinalModel_ENUM_NAME_(fbe.FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -3140,7 +3140,7 @@ void GeneratorPython::GenerateFlagsFieldModel(const std::shared_ptr<FlagsType>& 
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding _FLAGS_NAME_ field model class
+# Fast Binary Encoding _FLAGS_NAME_ field model
 class FieldModel_FLAGS_NAME_(fbe.FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -3184,7 +3184,7 @@ void GeneratorPython::GenerateFlagsFinalModel(const std::shared_ptr<FlagsType>& 
 {
     std::string code = R"CODE(
 
-# Fast Binary Encoding _FLAGS_NAME_ final model class
+# Fast Binary Encoding _FLAGS_NAME_ final model
 class FinalModel_FLAGS_NAME_(fbe.FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -4068,7 +4068,7 @@ void GeneratorPython::GenerateStructModel(const std::shared_ptr<StructType>& s)
     // Generate struct model begin
     WriteLine();
     WriteLine();
-    WriteLineIndent("# Fast Binary Encoding " + *s->name + " model class");
+    WriteLineIndent("# Fast Binary Encoding " + *s->name + " model");
     WriteLineIndent("class " + *s->name + "Model(fbe.Model):");
     Indent(1);
 
@@ -4430,7 +4430,7 @@ void GeneratorPython::GenerateStructModelFinal(const std::shared_ptr<StructType>
     // Generate struct model final begin
     WriteLine();
     WriteLine();
-    WriteLineIndent("# Fast Binary Encoding " + *s->name + " final model class");
+    WriteLineIndent("# Fast Binary Encoding " + *s->name + " final model");
     WriteLineIndent("class " + *s->name + "FinalModel(fbe.Model):");
     Indent(1);
 
@@ -4552,9 +4552,9 @@ void GeneratorPython::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     WriteLine();
     WriteLine();
     if (final)
-        WriteLineIndent("# Fast Binary Encoding " + *p->name + " final sender class");
+        WriteLineIndent("# Fast Binary Encoding " + *p->name + " final sender");
     else
-        WriteLineIndent("# Fast Binary Encoding " + *p->name + " sender class");
+        WriteLineIndent("# Fast Binary Encoding " + *p->name + " sender");
     WriteLineIndent("class " + sender + "(fbe.Sender):");
     Indent(1);
 
@@ -4699,9 +4699,9 @@ void GeneratorPython::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     WriteLine();
     WriteLine();
     if (final)
-        WriteLineIndent("# Fast Binary Encoding " + *p->name + " final receiver class");
+        WriteLineIndent("# Fast Binary Encoding " + *p->name + " final receiver");
     else
-        WriteLineIndent("# Fast Binary Encoding " + *p->name + " receiver class");
+        WriteLineIndent("# Fast Binary Encoding " + *p->name + " receiver");
     WriteLineIndent("class " + receiver + "(fbe.Receiver):");
     Indent(1);
 

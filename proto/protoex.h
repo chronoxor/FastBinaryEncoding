@@ -80,7 +80,7 @@ struct ValueReader<TJson, ::protoex::OrderSide>
 
 namespace FBE {
 
-// Fast Binary Encoding ::protoex::OrderSide field model class
+// Fast Binary Encoding ::protoex::OrderSide field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::protoex::OrderSide> : public FieldModelBase<TBuffer, ::protoex::OrderSide, uint8_t>
 {
@@ -92,7 +92,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::protoex::OrderSide final model class
+// Fast Binary Encoding ::protoex::OrderSide final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::protoex::OrderSide> : public FinalModelBase<TBuffer, ::protoex::OrderSide, uint8_t>
 {
@@ -158,7 +158,7 @@ struct ValueReader<TJson, ::protoex::OrderType>
 
 namespace FBE {
 
-// Fast Binary Encoding ::protoex::OrderType field model class
+// Fast Binary Encoding ::protoex::OrderType field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::protoex::OrderType> : public FieldModelBase<TBuffer, ::protoex::OrderType, uint8_t>
 {
@@ -170,7 +170,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::protoex::OrderType final model class
+// Fast Binary Encoding ::protoex::OrderType final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::protoex::OrderType> : public FinalModelBase<TBuffer, ::protoex::OrderType, uint8_t>
 {
@@ -283,7 +283,7 @@ struct ValueReader<TJson, ::protoex::StateEx>
 
 namespace FBE {
 
-// Fast Binary Encoding ::protoex::StateEx field model class
+// Fast Binary Encoding ::protoex::StateEx field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::protoex::StateEx> : public FieldModelBase<TBuffer, ::protoex::StateEx, uint8_t>
 {
@@ -295,7 +295,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::protoex::StateEx final model class
+// Fast Binary Encoding ::protoex::StateEx final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::protoex::StateEx> : public FinalModelBase<TBuffer, ::protoex::StateEx, uint8_t>
 {
@@ -497,7 +497,7 @@ struct ValueReader<TJson, ::protoex::Order>
 
 namespace FBE {
 
-// Fast Binary Encoding ::protoex::Order field model class
+// Fast Binary Encoding ::protoex::Order field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::protoex::Order>
 {
@@ -810,7 +810,7 @@ public:
 namespace FBE {
 namespace protoex {
 
-// Fast Binary Encoding Order model class
+// Fast Binary Encoding Order model
 template <class TBuffer>
 class OrderModel : public FBE::Model<TBuffer>
 {
@@ -891,7 +891,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::protoex::Order final model class
+// Fast Binary Encoding ::protoex::Order final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::protoex::Order>
 {
@@ -1139,7 +1139,7 @@ public:
 namespace FBE {
 namespace protoex {
 
-// Fast Binary Encoding Order final model class
+// Fast Binary Encoding Order final model
 template <class TBuffer>
 class OrderFinalModel : public FBE::Model<TBuffer>
 {
@@ -1352,7 +1352,7 @@ struct ValueReader<TJson, ::protoex::Balance>
 
 namespace FBE {
 
-// Fast Binary Encoding ::protoex::Balance field model class
+// Fast Binary Encoding ::protoex::Balance field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::protoex::Balance>
 {
@@ -1561,7 +1561,7 @@ public:
 namespace FBE {
 namespace protoex {
 
-// Fast Binary Encoding Balance model class
+// Fast Binary Encoding Balance model
 template <class TBuffer>
 class BalanceModel : public FBE::Model<TBuffer>
 {
@@ -1642,7 +1642,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::protoex::Balance final model class
+// Fast Binary Encoding ::protoex::Balance final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::protoex::Balance>
 {
@@ -1776,7 +1776,7 @@ public:
 namespace FBE {
 namespace protoex {
 
-// Fast Binary Encoding Balance final model class
+// Fast Binary Encoding Balance final model
 template <class TBuffer>
 class BalanceFinalModel : public FBE::Model<TBuffer>
 {
@@ -2034,7 +2034,7 @@ struct ValueReader<TJson, ::protoex::Account>
 
 namespace FBE {
 
-// Fast Binary Encoding ::protoex::Account field model class
+// Fast Binary Encoding ::protoex::Account field model
 template <class TBuffer>
 class FieldModel<TBuffer, ::protoex::Account>
 {
@@ -2313,7 +2313,7 @@ public:
 namespace FBE {
 namespace protoex {
 
-// Fast Binary Encoding Account model class
+// Fast Binary Encoding Account model
 template <class TBuffer>
 class AccountModel : public FBE::Model<TBuffer>
 {
@@ -2394,7 +2394,7 @@ public:
 
 namespace FBE {
 
-// Fast Binary Encoding ::protoex::Account final model class
+// Fast Binary Encoding ::protoex::Account final model
 template <class TBuffer>
 class FinalModel<TBuffer, ::protoex::Account>
 {
@@ -2604,7 +2604,7 @@ public:
 namespace FBE {
 namespace protoex {
 
-// Fast Binary Encoding Account final model class
+// Fast Binary Encoding Account final model
 template <class TBuffer>
 class AccountFinalModel : public FBE::Model<TBuffer>
 {
@@ -2682,7 +2682,7 @@ private:
 namespace FBE {
 namespace protoex {
 
-// Fast Binary Encoding protoex sender class
+// Fast Binary Encoding protoex sender
 template <class TBuffer>
 class Sender : public virtual FBE::Sender<TBuffer>
     , public proto::Sender<TBuffer>
@@ -2769,7 +2769,7 @@ public:
 namespace FBE {
 namespace protoex {
 
-// Fast Binary Encoding protoex receiver class
+// Fast Binary Encoding protoex receiver
 template <class TBuffer>
 class Receiver : public virtual FBE::Receiver<TBuffer>
     , public proto::Receiver<TBuffer>
@@ -2880,7 +2880,7 @@ private:
 namespace FBE {
 namespace protoex {
 
-// Fast Binary Encoding protoex final sender class
+// Fast Binary Encoding protoex final sender
 template <class TBuffer>
 class FinalSender : public virtual FBE::Sender<TBuffer>
     , public proto::FinalSender<TBuffer>
@@ -2967,7 +2967,7 @@ public:
 namespace FBE {
 namespace protoex {
 
-// Fast Binary Encoding protoex final receiver class
+// Fast Binary Encoding protoex final receiver
 template <class TBuffer>
 class FinalReceiver : public virtual FBE::Receiver<TBuffer>
     , public proto::FinalReceiver<TBuffer>

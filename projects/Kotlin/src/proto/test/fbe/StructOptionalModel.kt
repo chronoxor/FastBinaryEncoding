@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructOptional model class
+// Fast Binary Encoding StructOptional model
 class StructOptionalModel : Model
 {
     val model: FieldModelStructOptional

@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional Char final model class
+// Fast Binary Encoding optional Char final model
 public final class FinalModelOptionalChar extends FinalModel
 {
     public FinalModelOptionalChar(Buffer buffer, long offset)

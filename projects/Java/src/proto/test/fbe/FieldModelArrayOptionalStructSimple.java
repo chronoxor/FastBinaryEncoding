@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding OptionalStructSimple array field model class
+// Fast Binary Encoding OptionalStructSimple array field model
 public final class FieldModelArrayOptionalStructSimple extends FieldModel
 {
     private final FieldModelOptionalStructSimple _model;

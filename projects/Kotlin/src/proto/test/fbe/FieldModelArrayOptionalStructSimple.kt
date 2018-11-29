@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding OptionalStructSimple array field model class
+// Fast Binary Encoding OptionalStructSimple array field model
 class FieldModelArrayOptionalStructSimple(buffer: Buffer, offset: Long, val size: Long) : FieldModel(buffer, offset)
 {
     private val _model = FieldModelOptionalStructSimple(buffer, offset)

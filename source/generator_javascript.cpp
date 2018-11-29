@@ -4028,7 +4028,7 @@ void GeneratorJavaScript::GenerateFBEModel()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding base model class
+ * Fast Binary Encoding base model
  */
 class Model {
   /**
@@ -4191,7 +4191,7 @@ void GeneratorJavaScript::GenerateFBEFieldModelBase()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding base field model class
+ * Fast Binary Encoding base field model
  */
 class FieldModelBase {
   /**
@@ -4776,7 +4776,7 @@ void GeneratorJavaScript::GenerateFBEFieldModel()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding field model class
+ * Fast Binary Encoding field model
  */
 class FieldModel extends FieldModelBase {
   /**
@@ -4802,7 +4802,7 @@ void GeneratorJavaScript::GenerateFBEFieldModel(const std::string& name, const s
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding _TYPE_ field model class
+ * Fast Binary Encoding _TYPE_ field model
  */
 class FieldModel_NAME_ extends FieldModel {
   /**
@@ -4861,7 +4861,7 @@ void GeneratorJavaScript::GenerateFBEFieldModelDecimal()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding decimal field model class
+ * Fast Binary Encoding decimal field model
  */
 class FieldModelDecimal extends FieldModel {
   /**
@@ -4970,7 +4970,7 @@ void GeneratorJavaScript::GenerateFBEFieldModelTimestamp()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding timestamp field model class
+ * Fast Binary Encoding timestamp field model
  */
 class FieldModelTimestamp extends FieldModel {
   /**
@@ -5026,7 +5026,7 @@ void GeneratorJavaScript::GenerateFBEFieldModelUUID()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding UUID field model class
+ * Fast Binary Encoding UUID field model
  */
 class FieldModelUUID extends FieldModel {
   /**
@@ -5080,7 +5080,7 @@ void GeneratorJavaScript::GenerateFBEFieldModelBytes()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding bytes field model class
+ * Fast Binary Encoding bytes field model
  */
 class FieldModelBytes extends FieldModel {
   /**
@@ -5201,7 +5201,7 @@ void GeneratorJavaScript::GenerateFBEFieldModelString()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding string field model class
+ * Fast Binary Encoding string field model
  */
 class FieldModelString extends FieldModel {
   /**
@@ -5322,7 +5322,7 @@ void GeneratorJavaScript::GenerateFBEFieldModelOptional()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding optional field model class
+ * Fast Binary Encoding optional field model
  */
 class FieldModelOptional extends FieldModel {
   /**
@@ -5529,7 +5529,7 @@ void GeneratorJavaScript::GenerateFBEFieldModelArray()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding array field model class
+ * Fast Binary Encoding array field model
  */
 class FieldModelArray extends FieldModel {
   /**
@@ -5671,7 +5671,7 @@ void GeneratorJavaScript::GenerateFBEFieldModelVector()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding vector field model class
+ * Fast Binary Encoding vector field model
  */
 class FieldModelVector extends FieldModel {
   /**
@@ -5885,7 +5885,7 @@ void GeneratorJavaScript::GenerateFBEFieldModelSet()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding set field model class
+ * Fast Binary Encoding set field model
  */
 class FieldModelSet extends FieldModel {
   /**
@@ -6099,7 +6099,7 @@ void GeneratorJavaScript::GenerateFBEFieldModelMap()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding map field model class
+ * Fast Binary Encoding map field model
  */
 class FieldModelMap extends FieldModel {
   /**
@@ -6333,7 +6333,7 @@ void GeneratorJavaScript::GenerateFBEFinalModel()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding final model class
+ * Fast Binary Encoding final model
  */
 class FinalModel extends FieldModelBase {
   /**
@@ -6359,7 +6359,7 @@ void GeneratorJavaScript::GenerateFBEFinalModel(const std::string& name, const s
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding _TYPE_ final model class
+ * Fast Binary Encoding _TYPE_ final model
  */
 class FinalModel_NAME_ extends FinalModel {
   /**
@@ -6442,7 +6442,7 @@ void GeneratorJavaScript::GenerateFBEFinalModelDecimal()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding decimal final model class
+ * Fast Binary Encoding decimal final model
  */
 class FinalModelDecimal extends FinalModel {
   /**
@@ -6575,7 +6575,7 @@ void GeneratorJavaScript::GenerateFBEFinalModelTimestamp()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding timestamp final model class
+ * Fast Binary Encoding timestamp final model
  */
 class FinalModelTimestamp extends FinalModel {
   /**
@@ -6655,7 +6655,7 @@ void GeneratorJavaScript::GenerateFBEFinalModelUUID()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding UUID final model class
+ * Fast Binary Encoding UUID final model
  */
 class FinalModelUUID extends FinalModel {
   /**
@@ -6733,7 +6733,7 @@ void GeneratorJavaScript::GenerateFBEFinalModelBytes()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding bytes final model class
+ * Fast Binary Encoding bytes final model
  */
 class FinalModelBytes extends FinalModel {
   /**
@@ -6820,7 +6820,7 @@ void GeneratorJavaScript::GenerateFBEFinalModelString()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding string final model class
+ * Fast Binary Encoding string final model
  */
 class FinalModelString extends FinalModel {
   /**
@@ -6907,7 +6907,7 @@ void GeneratorJavaScript::GenerateFBEFinalModelOptional()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding optional final model class
+ * Fast Binary Encoding optional final model
  */
 class FinalModelOptional extends FinalModel {
   /**
@@ -7036,7 +7036,7 @@ void GeneratorJavaScript::GenerateFBEFinalModelArray()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding array final model class
+ * Fast Binary Encoding array final model
  */
 class FinalModelArray extends FinalModel {
   /**
@@ -7151,7 +7151,7 @@ void GeneratorJavaScript::GenerateFBEFinalModelVector()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding vector final model class
+ * Fast Binary Encoding vector final model
  */
 class FinalModelVector extends FinalModel {
   /**
@@ -7273,7 +7273,7 @@ void GeneratorJavaScript::GenerateFBEFinalModelSet()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding set final model class
+ * Fast Binary Encoding set final model
  */
 class FinalModelSet extends FinalModel {
   /**
@@ -7395,7 +7395,7 @@ void GeneratorJavaScript::GenerateFBEFinalModelMap()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding map final model class
+ * Fast Binary Encoding map final model
  */
 class FinalModelMap extends FinalModel {
   /**
@@ -7541,7 +7541,7 @@ void GeneratorJavaScript::GenerateFBESender()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding base sender class
+ * Fast Binary Encoding base sender
  */
 class Sender {
   /**
@@ -7650,7 +7650,7 @@ void GeneratorJavaScript::GenerateFBEReceiver()
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding base receiver class
+ * Fast Binary Encoding base receiver
  */
 class Receiver {
   /**
@@ -8343,7 +8343,7 @@ void GeneratorJavaScript::GenerateEnumFieldModel(const std::shared_ptr<EnumType>
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding _ENUM_NAME_ field model class
+ * Fast Binary Encoding _ENUM_NAME_ field model
  */
 class FieldModel_ENUM_NAME_ extends fbe.FieldModel {
   /**
@@ -8421,7 +8421,7 @@ void GeneratorJavaScript::GenerateEnumFinalModel(const std::shared_ptr<EnumType>
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding _ENUM_NAME_ final model class
+ * Fast Binary Encoding _ENUM_NAME_ final model
  */
 class FinalModel_ENUM_NAME_ extends fbe.FinalModel {
   /**
@@ -8767,7 +8767,7 @@ void GeneratorJavaScript::GenerateFlagsFieldModel(const std::shared_ptr<FlagsTyp
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding _FLAGS_NAME_ field model class
+ * Fast Binary Encoding _FLAGS_NAME_ field model
  */
 class FieldModel_FLAGS_NAME_ extends fbe.FieldModel {
   /**
@@ -8846,7 +8846,7 @@ void GeneratorJavaScript::GenerateFlagsFinalModel(const std::shared_ptr<FlagsTyp
 {
     std::string code = R"CODE(
 /**
- * Fast Binary Encoding _FLAGS_NAME_ final model class
+ * Fast Binary Encoding _FLAGS_NAME_ final model
  */
 class FinalModel_FLAGS_NAME_ extends fbe.FinalModel {
   /**
@@ -9412,7 +9412,7 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     // Generate struct field model begin
     WriteLine();
     WriteLineIndent("/**");
-    WriteLineIndent(" * Fast Binary Encoding " + *s->name + " field model class");
+    WriteLineIndent(" * Fast Binary Encoding " + *s->name + " field model");
     WriteLineIndent(" */");
     WriteLineIndent("class FieldModel" + *s->name + " extends fbe.FieldModel {");
     Indent(1);
@@ -9891,7 +9891,7 @@ void GeneratorJavaScript::GenerateStructModel(const std::shared_ptr<StructType>&
     // Generate struct model begin
     WriteLine();
     WriteLineIndent("/**");
-    WriteLineIndent(" * Fast Binary Encoding " + *s->name + " model class");
+    WriteLineIndent(" * Fast Binary Encoding " + *s->name + " model");
     WriteLineIndent(" */");
     WriteLineIndent("class " + *s->name + "Model extends fbe.Model {");
     Indent(1);
@@ -10084,7 +10084,7 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
     // Generate struct final model begin
     WriteLine();
     WriteLineIndent("/**");
-    WriteLineIndent(" * Fast Binary Encoding " + *s->name + " final model class");
+    WriteLineIndent(" * Fast Binary Encoding " + *s->name + " final model");
     WriteLineIndent(" */");
     WriteLineIndent("class FinalModel" + *s->name + " extends fbe.FinalModel {");
     Indent(1);
@@ -10376,7 +10376,7 @@ void GeneratorJavaScript::GenerateStructModelFinal(const std::shared_ptr<StructT
     // Generate struct model final begin
     WriteLine();
     WriteLineIndent("/**");
-    WriteLineIndent(" * Fast Binary Encoding " + *s->name + " final model class");
+    WriteLineIndent(" * Fast Binary Encoding " + *s->name + " final model");
     WriteLineIndent(" */");
     WriteLineIndent("class " + *s->name + "FinalModel extends fbe.Model {");
     Indent(1);
@@ -10539,9 +10539,9 @@ void GeneratorJavaScript::GenerateSender(const std::shared_ptr<Package>& p, bool
     WriteLine();
     WriteLineIndent("/**");
     if (final)
-        WriteLineIndent(" * Fast Binary Encoding " + *p->name + " final sender class");
+        WriteLineIndent(" * Fast Binary Encoding " + *p->name + " final sender");
     else
-        WriteLineIndent(" * Fast Binary Encoding " + *p->name + " sender class");
+        WriteLineIndent(" * Fast Binary Encoding " + *p->name + " sender");
     WriteLineIndent(" */");
     WriteLineIndent("class " + sender + " extends fbe.Sender {");
     Indent(1);
@@ -10718,9 +10718,9 @@ void GeneratorJavaScript::GenerateReceiver(const std::shared_ptr<Package>& p, bo
     WriteLine();
     WriteLineIndent("/**");
     if (final)
-        WriteLineIndent(" * Fast Binary Encoding " + *p->name + " final receiver class");
+        WriteLineIndent(" * Fast Binary Encoding " + *p->name + " final receiver");
     else
-        WriteLineIndent(" * Fast Binary Encoding " + *p->name + " receiver class");
+        WriteLineIndent(" * Fast Binary Encoding " + *p->name + " receiver");
     WriteLineIndent(" */");
     WriteLineIndent("class " + receiver + " extends fbe.Receiver {");
     Indent(1);

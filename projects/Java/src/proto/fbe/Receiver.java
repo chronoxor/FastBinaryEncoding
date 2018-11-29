@@ -14,7 +14,7 @@ import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
 
-// Fast Binary Encoding base receiver class
+// Fast Binary Encoding base receiver
 public abstract class Receiver
 {
     private Buffer _buffer;

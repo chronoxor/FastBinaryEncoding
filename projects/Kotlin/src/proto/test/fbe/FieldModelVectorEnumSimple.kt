@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding EnumSimple vector field model class
+// Fast Binary Encoding EnumSimple vector field model
 class FieldModelVectorEnumSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     private val _model = FieldModelEnumSimple(buffer, offset)

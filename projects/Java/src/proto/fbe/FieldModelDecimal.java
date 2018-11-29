@@ -14,7 +14,7 @@ import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
 
-// Fast Binary Encoding decimal field model class
+// Fast Binary Encoding decimal field model
 public final class FieldModelDecimal extends FieldModel
 {
     public FieldModelDecimal(Buffer buffer, long offset) { super(buffer, offset); }

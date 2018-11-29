@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import protoex.*
 
-// Fast Binary Encoding StateEx field model class
+// Fast Binary Encoding StateEx field model
 class FieldModelStateEx(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size

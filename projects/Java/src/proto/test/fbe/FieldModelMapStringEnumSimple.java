@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding String->EnumSimple map field model class
+// Fast Binary Encoding String->EnumSimple map field model
 public final class FieldModelMapStringEnumSimple extends FieldModel
 {
     private final FieldModelString _modelKey;

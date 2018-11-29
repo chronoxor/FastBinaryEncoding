@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional Double final model class
+// Fast Binary Encoding optional Double final model
 public final class FinalModelOptionalDouble extends FinalModel
 {
     public FinalModelOptionalDouble(Buffer buffer, long offset)

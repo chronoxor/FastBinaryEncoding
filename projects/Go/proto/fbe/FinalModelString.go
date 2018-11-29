@@ -7,10 +7,15 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding string final model class
+// Fast Binary Encoding string final model
 type FinalModelString struct {
     buffer *Buffer  // Final model buffer
     offset int      // Final model buffer offset
+}
+
+// Create a new string final model
+func NewFinalModelString(buffer *Buffer, offset int) *FinalModelString {
+    return &FinalModelString{buffer: buffer, offset: offset}
 }
 
 // Get the allocation size
@@ -25,11 +30,6 @@ func (fm *FinalModelString) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FinalModelString) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelString) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new string final model
-func NewFinalModelString(buffer *Buffer, offset int) *FinalModelString {
-    return &FinalModelString{buffer: buffer, offset: offset}
-}
 
 // Check if the string value is valid
 func (fm *FinalModelString) Verify() (bool, int) {

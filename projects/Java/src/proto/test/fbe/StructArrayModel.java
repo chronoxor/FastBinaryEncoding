@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding StructArray model class
+// Fast Binary Encoding StructArray model
 public final class StructArrayModel extends Model
 {
     public final FieldModelStructArray model;

@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructMap final model class
+// Fast Binary Encoding StructMap final model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FinalModelStructMap(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {

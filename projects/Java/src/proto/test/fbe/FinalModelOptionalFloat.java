@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional Float final model class
+// Fast Binary Encoding optional Float final model
 public final class FinalModelOptionalFloat extends FinalModel
 {
     public FinalModelOptionalFloat(Buffer buffer, long offset)

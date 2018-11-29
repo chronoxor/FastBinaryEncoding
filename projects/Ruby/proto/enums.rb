@@ -113,7 +113,7 @@ module Enums
 
   EnumByte.freeze
 
-  # Fast Binary Encoding EnumByte field model class
+  # Fast Binary Encoding EnumByte field model
   class FieldModelEnumByte < FBE::FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -143,7 +143,7 @@ module Enums
     end
   end
 
-  # Fast Binary Encoding EnumByte final model class
+  # Fast Binary Encoding EnumByte final model
   class FinalModelEnumByte < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -285,7 +285,7 @@ module Enums
 
   EnumChar.freeze
 
-  # Fast Binary Encoding EnumChar field model class
+  # Fast Binary Encoding EnumChar field model
   class FieldModelEnumChar < FBE::FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -315,7 +315,7 @@ module Enums
     end
   end
 
-  # Fast Binary Encoding EnumChar final model class
+  # Fast Binary Encoding EnumChar final model
   class FinalModelEnumChar < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -457,7 +457,7 @@ module Enums
 
   EnumWChar.freeze
 
-  # Fast Binary Encoding EnumWChar field model class
+  # Fast Binary Encoding EnumWChar field model
   class FieldModelEnumWChar < FBE::FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -487,7 +487,7 @@ module Enums
     end
   end
 
-  # Fast Binary Encoding EnumWChar final model class
+  # Fast Binary Encoding EnumWChar final model
   class FinalModelEnumWChar < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -629,7 +629,7 @@ module Enums
 
   EnumInt8.freeze
 
-  # Fast Binary Encoding EnumInt8 field model class
+  # Fast Binary Encoding EnumInt8 field model
   class FieldModelEnumInt8 < FBE::FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -659,7 +659,7 @@ module Enums
     end
   end
 
-  # Fast Binary Encoding EnumInt8 final model class
+  # Fast Binary Encoding EnumInt8 final model
   class FinalModelEnumInt8 < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -801,7 +801,7 @@ module Enums
 
   EnumUInt8.freeze
 
-  # Fast Binary Encoding EnumUInt8 field model class
+  # Fast Binary Encoding EnumUInt8 field model
   class FieldModelEnumUInt8 < FBE::FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -831,7 +831,7 @@ module Enums
     end
   end
 
-  # Fast Binary Encoding EnumUInt8 final model class
+  # Fast Binary Encoding EnumUInt8 final model
   class FinalModelEnumUInt8 < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -973,7 +973,7 @@ module Enums
 
   EnumInt16.freeze
 
-  # Fast Binary Encoding EnumInt16 field model class
+  # Fast Binary Encoding EnumInt16 field model
   class FieldModelEnumInt16 < FBE::FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -1003,7 +1003,7 @@ module Enums
     end
   end
 
-  # Fast Binary Encoding EnumInt16 final model class
+  # Fast Binary Encoding EnumInt16 final model
   class FinalModelEnumInt16 < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1145,7 +1145,7 @@ module Enums
 
   EnumUInt16.freeze
 
-  # Fast Binary Encoding EnumUInt16 field model class
+  # Fast Binary Encoding EnumUInt16 field model
   class FieldModelEnumUInt16 < FBE::FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -1175,7 +1175,7 @@ module Enums
     end
   end
 
-  # Fast Binary Encoding EnumUInt16 final model class
+  # Fast Binary Encoding EnumUInt16 final model
   class FinalModelEnumUInt16 < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1317,7 +1317,7 @@ module Enums
 
   EnumInt32.freeze
 
-  # Fast Binary Encoding EnumInt32 field model class
+  # Fast Binary Encoding EnumInt32 field model
   class FieldModelEnumInt32 < FBE::FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -1347,7 +1347,7 @@ module Enums
     end
   end
 
-  # Fast Binary Encoding EnumInt32 final model class
+  # Fast Binary Encoding EnumInt32 final model
   class FinalModelEnumInt32 < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1489,7 +1489,7 @@ module Enums
 
   EnumUInt32.freeze
 
-  # Fast Binary Encoding EnumUInt32 field model class
+  # Fast Binary Encoding EnumUInt32 field model
   class FieldModelEnumUInt32 < FBE::FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -1519,7 +1519,7 @@ module Enums
     end
   end
 
-  # Fast Binary Encoding EnumUInt32 final model class
+  # Fast Binary Encoding EnumUInt32 final model
   class FinalModelEnumUInt32 < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1661,7 +1661,7 @@ module Enums
 
   EnumInt64.freeze
 
-  # Fast Binary Encoding EnumInt64 field model class
+  # Fast Binary Encoding EnumInt64 field model
   class FieldModelEnumInt64 < FBE::FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -1691,7 +1691,7 @@ module Enums
     end
   end
 
-  # Fast Binary Encoding EnumInt64 final model class
+  # Fast Binary Encoding EnumInt64 final model
   class FinalModelEnumInt64 < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1833,7 +1833,7 @@ module Enums
 
   EnumUInt64.freeze
 
-  # Fast Binary Encoding EnumUInt64 field model class
+  # Fast Binary Encoding EnumUInt64 field model
   class FieldModelEnumUInt64 < FBE::FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -1863,7 +1863,7 @@ module Enums
     end
   end
 
-  # Fast Binary Encoding EnumUInt64 final model class
+  # Fast Binary Encoding EnumUInt64 final model
   class FinalModelEnumUInt64 < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -4753,7 +4753,7 @@ module Enums
     end
   end
 
-  # Fast Binary Encoding Enums model class
+  # Fast Binary Encoding Enums model
   class EnumsModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -6626,7 +6626,7 @@ module Enums
     end
   end
 
-  # Fast Binary Encoding Enums final model class
+  # Fast Binary Encoding Enums final model
   class EnumsFinalModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -6702,7 +6702,7 @@ module Enums
     end
   end
 
-  # Fast Binary Encoding Enums sender class
+  # Fast Binary Encoding Enums sender
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Sender < FBE::Sender
     def initialize(buffer = FBE::WriteBuffer.new)
@@ -6749,7 +6749,7 @@ module Enums
     end
   end
 
-  # Fast Binary Encoding Enums receiver class
+  # Fast Binary Encoding Enums receiver
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Receiver < FBE::Receiver
     def initialize(buffer = FBE::WriteBuffer.new)
@@ -6796,7 +6796,7 @@ module Enums
 
   end
 
-  # Fast Binary Encoding Enums final sender class
+  # Fast Binary Encoding Enums final sender
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class FinalSender < FBE::Sender
     def initialize(buffer = FBE::WriteBuffer.new)
@@ -6843,7 +6843,7 @@ module Enums
     end
   end
 
-  # Fast Binary Encoding Enums final receiver class
+  # Fast Binary Encoding Enums final receiver
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class FinalReceiver < FBE::Receiver
     def initialize(buffer = FBE::WriteBuffer.new)

@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import proto.*;
 
-// Fast Binary Encoding State field model class
+// Fast Binary Encoding State field model
 public final class FieldModelState extends FieldModel
 {
     public FieldModelState(Buffer buffer, long offset) { super(buffer, offset); }

@@ -1034,7 +1034,7 @@ private:
 void GeneratorCpp::GenerateFBEBaseModel()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding base model class
+// Fast Binary Encoding base model
 template <class TBuffer>
 class Model
 {
@@ -1081,7 +1081,7 @@ private:
 void GeneratorCpp::GenerateFBEFieldModel()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding base field model class
+// Fast Binary Encoding base field model
 template <class TBuffer, typename T, typename TBase = T>
 class FieldModelBase
 {
@@ -1130,7 +1130,7 @@ private:
     size_t _offset;
 };
 
-// Fast Binary Encoding field model class
+// Fast Binary Encoding field model
 template <class TBuffer, typename T>
 class FieldModel : public FieldModelBase<TBuffer, T>
 {
@@ -1138,7 +1138,7 @@ public:
     using FieldModelBase<TBuffer, T>::FieldModelBase;
 };
 
-// Fast Binary Encoding field model class bool specialization
+// Fast Binary Encoding field model bool specialization
 template <class TBuffer>
 class FieldModel<TBuffer, bool> : public FieldModelBase<TBuffer, bool, uint8_t>
 {
@@ -1146,7 +1146,7 @@ public:
     using FieldModelBase<TBuffer, bool, uint8_t>::FieldModelBase;
 };
 
-// Fast Binary Encoding field model class char specialization
+// Fast Binary Encoding field model char specialization
 template <class TBuffer>
 class FieldModel<TBuffer, char> : public FieldModelBase<TBuffer, char, uint8_t>
 {
@@ -1154,7 +1154,7 @@ public:
     using FieldModelBase<TBuffer, char, uint8_t>::FieldModelBase;
 };
 
-// Fast Binary Encoding field model class wchar specialization
+// Fast Binary Encoding field model wchar specialization
 template <class TBuffer>
 class FieldModel<TBuffer, wchar_t> : public FieldModelBase<TBuffer, wchar_t, uint32_t>
 {
@@ -1172,7 +1172,7 @@ public:
 void GeneratorCpp::GenerateFBEFieldModelDecimal()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding field model class decimal specialization
+// Fast Binary Encoding field model decimal specialization
 template <class TBuffer>
 class FieldModel<TBuffer, decimal_t>
 {
@@ -1438,7 +1438,7 @@ private:
 void GeneratorCpp::GenerateFBEFieldModelUUID()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding field model class UUID specialization
+// Fast Binary Encoding field model UUID specialization
 template <class TBuffer>
 class FieldModel<TBuffer, uuid_t>
 {
@@ -1497,7 +1497,7 @@ private:
 void GeneratorCpp::GenerateFBEFieldModelBytes()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding field model class bytes specialization
+// Fast Binary Encoding field model bytes specialization
 template <class TBuffer>
 class FieldModel<TBuffer, buffer_t>
 {
@@ -1663,7 +1663,7 @@ private:
 void GeneratorCpp::GenerateFBEFieldModelString()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding field model class string specialization
+// Fast Binary Encoding field model string specialization
 template <class TBuffer>
 class FieldModel<TBuffer, std::string>
 {
@@ -1862,7 +1862,7 @@ private:
 void GeneratorCpp::GenerateFBEFieldModelOptional()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding field model class optional specialization
+// Fast Binary Encoding field model optional specialization
 template <class TBuffer, typename T>
 class FieldModel<TBuffer, std::optional<T>>
 {
@@ -2026,7 +2026,7 @@ public:
 void GeneratorCpp::GenerateFBEFieldModelArray()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding field model array class
+// Fast Binary Encoding field model array
 template <class TBuffer, typename T, size_t N>
 class FieldModelArray
 {
@@ -2193,7 +2193,7 @@ private:
 void GeneratorCpp::GenerateFBEFieldModelVector()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding field model vector class
+// Fast Binary Encoding field model vector
 template <class TBuffer, typename T>
 class FieldModelVector
 {
@@ -2433,7 +2433,7 @@ private:
 void GeneratorCpp::GenerateFBEFieldModelMap()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding field model map class
+// Fast Binary Encoding field model map
 template <class TBuffer, typename TKey, typename TValue>
 class FieldModelMap
 {
@@ -2657,7 +2657,7 @@ private:
 void GeneratorCpp::GenerateFBEFinalModel()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding base final model class
+// Fast Binary Encoding base final model
 template <class TBuffer, typename T, typename TBase = T>
 class FinalModelBase
 {
@@ -2715,7 +2715,7 @@ private:
     mutable size_t _offset;
 };
 
-// Fast Binary Encoding final model class
+// Fast Binary Encoding final model
 template <class TBuffer, typename T>
 class FinalModel : public FinalModelBase<TBuffer, T>
 {
@@ -2723,7 +2723,7 @@ public:
     using FinalModelBase<TBuffer, T>::FinalModelBase;
 };
 
-// Fast Binary Encoding final model class bool specialization
+// Fast Binary Encoding final model bool specialization
 template <class TBuffer>
 class FinalModel<TBuffer, bool> : public FinalModelBase<TBuffer, bool, uint8_t>
 {
@@ -2731,7 +2731,7 @@ public:
     using FinalModelBase<TBuffer, bool, uint8_t>::FinalModelBase;
 };
 
-// Fast Binary Encoding final model class char specialization
+// Fast Binary Encoding final model char specialization
 template <class TBuffer>
 class FinalModel<TBuffer, char> : public FinalModelBase<TBuffer, char, uint8_t>
 {
@@ -2739,7 +2739,7 @@ public:
     using FinalModelBase<TBuffer, char, uint8_t>::FinalModelBase;
 };
 
-// Fast Binary Encoding final model class wchar specialization
+// Fast Binary Encoding final model wchar specialization
 template <class TBuffer>
 class FinalModel<TBuffer, wchar_t> : public FinalModelBase<TBuffer, wchar_t, uint32_t>
 {
@@ -2757,7 +2757,7 @@ public:
 void GeneratorCpp::GenerateFBEFinalModelDecimal()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding final model class decimal specialization
+// Fast Binary Encoding final model decimal specialization
 template <class TBuffer>
 class FinalModel<TBuffer, decimal_t>
 {
@@ -3032,7 +3032,7 @@ private:
 void GeneratorCpp::GenerateFBEFinalModelUUID()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding final model class UUID specialization
+// Fast Binary Encoding final model UUID specialization
 template <class TBuffer>
 class FinalModel<TBuffer, uuid_t>
 {
@@ -3100,7 +3100,7 @@ private:
 void GeneratorCpp::GenerateFBEFinalModelBytes()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding final model class bytes specialization
+// Fast Binary Encoding final model bytes specialization
 template <class TBuffer>
 class FinalModel<TBuffer, buffer_t>
 {
@@ -3241,7 +3241,7 @@ private:
 void GeneratorCpp::GenerateFBEFinalModelString()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding final model class string specialization
+// Fast Binary Encoding final model string specialization
 template <class TBuffer>
 class FinalModel<TBuffer, std::string>
 {
@@ -3389,7 +3389,7 @@ private:
 void GeneratorCpp::GenerateFBEFinalModelOptional()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding final model class optional specialization
+// Fast Binary Encoding final model optional specialization
 template <class TBuffer, typename T>
 class FinalModel<TBuffer, std::optional<T>>
 {
@@ -3497,7 +3497,7 @@ public:
 void GeneratorCpp::GenerateFBEFinalModelArray()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding final model array class
+// Fast Binary Encoding final model array
 template <class TBuffer, typename T, size_t N>
 class FinalModelArray
 {
@@ -3694,7 +3694,7 @@ private:
 void GeneratorCpp::GenerateFBEFinalModelVector()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding final model vector class
+// Fast Binary Encoding final model vector
 template <class TBuffer, typename T>
 class FinalModelVector
 {
@@ -3913,7 +3913,7 @@ private:
 void GeneratorCpp::GenerateFBEFinalModelMap()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding final model map class
+// Fast Binary Encoding final model map
 template <class TBuffer, typename TKey, typename TValue>
 class FinalModelMap
 {
@@ -4114,7 +4114,7 @@ private:
 void GeneratorCpp::GenerateFBESender()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding base sender class
+// Fast Binary Encoding base sender
 template <class TBuffer>
 class Sender
 {
@@ -4183,7 +4183,7 @@ protected:
 void GeneratorCpp::GenerateFBEReceiver()
 {
     std::string code = R"CODE(
-// Fast Binary Encoding base receiver class
+// Fast Binary Encoding base receiver
 template <class TBuffer>
 class Receiver
 {
@@ -5758,7 +5758,7 @@ void GeneratorCpp::GenerateEnumFieldModel(const std::shared_ptr<Package>& p, con
     std::string enum_base_type = ConvertEnumType(enum_type);
 
     std::string code = R"CODE(
-// Fast Binary Encoding _ENUM_NAME_ field model class
+// Fast Binary Encoding _ENUM_NAME_ field model
 template <class TBuffer>
 class FieldModel<TBuffer, _ENUM_NAME_> : public FieldModelBase<TBuffer, _ENUM_NAME_, _ENUM_TYPE_>
 {
@@ -5791,7 +5791,7 @@ void GeneratorCpp::GenerateEnumFinalModel(const std::shared_ptr<Package>& p, con
     std::string enum_base_type = ConvertEnumType(enum_type);
 
     std::string code = R"CODE(
-// Fast Binary Encoding _ENUM_NAME_ final model class
+// Fast Binary Encoding _ENUM_NAME_ final model
 template <class TBuffer>
 class FinalModel<TBuffer, _ENUM_NAME_> : public FinalModelBase<TBuffer, _ENUM_NAME_, _ENUM_TYPE_>
 {
@@ -5965,7 +5965,7 @@ void GeneratorCpp::GenerateFlagsFieldModel(const std::shared_ptr<Package>& p, co
     std::string flags_base_type = ConvertEnumType(flags_type);
 
     std::string code = R"CODE(
-// Fast Binary Encoding _FLAGS_NAME_ field model class
+// Fast Binary Encoding _FLAGS_NAME_ field model
 template <class TBuffer>
 class FieldModel<TBuffer, _FLAGS_NAME_> : public FieldModelBase<TBuffer, _FLAGS_NAME_, _FLAGS_TYPE_>
 {
@@ -5998,7 +5998,7 @@ void GeneratorCpp::GenerateFlagsFinalModel(const std::shared_ptr<Package>& p, co
     std::string flags_base_type = ConvertEnumType(flags_type);
 
     std::string code = R"CODE(
-// Fast Binary Encoding _FLAGS_NAME_ final model class
+// Fast Binary Encoding _FLAGS_NAME_ final model
 template <class TBuffer>
 class FinalModel<TBuffer, _FLAGS_NAME_> : public FinalModelBase<TBuffer, _FLAGS_NAME_, _FLAGS_TYPE_>
 {
@@ -6533,7 +6533,7 @@ void GeneratorCpp::GenerateStructFieldModel(const std::shared_ptr<Package>& p, c
 
     // Generate struct field model begin
     WriteLine();
-    WriteLineIndent("// Fast Binary Encoding " + struct_name + " field model class");
+    WriteLineIndent("// Fast Binary Encoding " + struct_name + " field model");
     WriteLineIndent("template <class TBuffer>");
     WriteLineIndent("class FieldModel<TBuffer, " + struct_name + ">");
     WriteLineIndent("{");
@@ -6925,7 +6925,7 @@ void GeneratorCpp::GenerateStructModel(const std::shared_ptr<Package>& p, const 
 
     // Generate struct model begin
     WriteLine();
-    WriteLineIndent("// Fast Binary Encoding " + *s->name + " model class");
+    WriteLineIndent("// Fast Binary Encoding " + *s->name + " model");
     WriteLineIndent("template <class TBuffer>");
     WriteLineIndent("class " + *s->name + "Model : public FBE::Model<TBuffer>");
     WriteLineIndent("{");
@@ -7061,7 +7061,7 @@ void GeneratorCpp::GenerateStructFinalModel(const std::shared_ptr<Package>& p, c
 
     // Generate struct final model begin
     WriteLine();
-    WriteLineIndent("// Fast Binary Encoding " + struct_name + " final model class");
+    WriteLineIndent("// Fast Binary Encoding " + struct_name + " final model");
     WriteLineIndent("template <class TBuffer>");
     WriteLineIndent("class FinalModel<TBuffer, " + struct_name + ">");
     WriteLineIndent("{");
@@ -7306,7 +7306,7 @@ void GeneratorCpp::GenerateStructModelFinal(const std::shared_ptr<Package>& p, c
 
     // Generate struct model final begin
     WriteLine();
-    WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model class");
+    WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model");
     WriteLineIndent("template <class TBuffer>");
     WriteLineIndent("class " + *s->name + "FinalModel : public FBE::Model<TBuffer>");
     WriteLineIndent("{");
@@ -7435,9 +7435,9 @@ void GeneratorCpp::GenerateSender(const std::shared_ptr<Package>& p, bool final)
     // Generate sender begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final sender class");
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final sender");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " sender class");
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " sender");
     WriteLineIndent("template <class TBuffer>");
     WriteLineIndent("class " + sender + " : public virtual FBE::Sender<TBuffer>");
     if (p->import)
@@ -7551,9 +7551,9 @@ void GeneratorCpp::GenerateReceiver(const std::shared_ptr<Package>& p, bool fina
     // Generate receiver begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final receiver class");
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final receiver");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " receiver class");
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " receiver");
     WriteLineIndent("template <class TBuffer>");
     WriteLineIndent("class " + receiver + " : public virtual FBE::Receiver<TBuffer>");
     if (p->import)

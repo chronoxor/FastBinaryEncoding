@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding optional UInt16 final model class
+// Fast Binary Encoding optional UInt16 final model
 class FinalModelOptionalUInt16(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size

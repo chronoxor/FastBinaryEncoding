@@ -721,7 +721,7 @@ void GeneratorRuby::GenerateFBEReadBuffer()
 void GeneratorRuby::GenerateFBEModel()
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding base model class
+  # Fast Binary Encoding base model
   class Model
     def initialize(buffer = WriteBuffer.new)
       @_buffer = buffer
@@ -804,7 +804,7 @@ void GeneratorRuby::GenerateFBEModel()
 void GeneratorRuby::GenerateFBEFieldModelBase()
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding base field model class
+  # Fast Binary Encoding base field model
   # noinspection RubyTooManyMethodsInspection
   class FieldModelBase
     def initialize(buffer, offset)
@@ -1012,7 +1012,7 @@ void GeneratorRuby::GenerateFBEFieldModelBase()
 void GeneratorRuby::GenerateFBEFieldModel()
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding field model class
+  # Fast Binary Encoding field model
   class FieldModel < FieldModelBase
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1039,7 +1039,7 @@ void GeneratorRuby::GenerateFBEFieldModel()
 void GeneratorRuby::GenerateFBEFieldModel(const std::string& name, const std::string& type, const std::string& size, const std::string& defaults)
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding _TYPE_ field model class
+  # Fast Binary Encoding _TYPE_ field model
   class FieldModel_NAME_ < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1083,7 +1083,7 @@ void GeneratorRuby::GenerateFBEFieldModel(const std::string& name, const std::st
 void GeneratorRuby::GenerateFBEFieldModelDecimal()
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding decimal field model class
+  # Fast Binary Encoding decimal field model
   class FieldModelDecimal < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1178,7 +1178,7 @@ void GeneratorRuby::GenerateFBEFieldModelDecimal()
 void GeneratorRuby::GenerateFBEFieldModelBytes()
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding bytes field model class
+  # Fast Binary Encoding bytes field model
   class FieldModelBytes < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1285,7 +1285,7 @@ void GeneratorRuby::GenerateFBEFieldModelBytes()
 void GeneratorRuby::GenerateFBEFieldModelString()
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding string field model class
+  # Fast Binary Encoding string field model
   class FieldModelString < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1553,7 +1553,7 @@ void GeneratorRuby::GenerateFBEFieldModelOptional()
 void GeneratorRuby::GenerateFBEFieldModelArray()
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding array field model class
+  # Fast Binary Encoding array field model
   class FieldModelArray < FieldModel
     def initialize(model, buffer, offset, size)
         super(buffer, offset)
@@ -1653,7 +1653,7 @@ void GeneratorRuby::GenerateFBEFieldModelArray()
 void GeneratorRuby::GenerateFBEFieldModelVector()
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding vector field model class
+  # Fast Binary Encoding vector field model
   class FieldModelVector < FieldModel
     def initialize(model, buffer, offset)
       super(buffer, offset)
@@ -1815,7 +1815,7 @@ void GeneratorRuby::GenerateFBEFieldModelVector()
 void GeneratorRuby::GenerateFBEFieldModelSet()
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding set field model class
+  # Fast Binary Encoding set field model
   class FieldModelSet < FieldModel
     def initialize(model, buffer, offset)
       super(buffer, offset)
@@ -1977,7 +1977,7 @@ void GeneratorRuby::GenerateFBEFieldModelSet()
 void GeneratorRuby::GenerateFBEFieldModelMap()
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding map field model class
+  # Fast Binary Encoding map field model
   class FieldModelMap < FieldModel
     def initialize(model_key, model_value, buffer, offset)
       super(buffer, offset)
@@ -2158,7 +2158,7 @@ void GeneratorRuby::GenerateFBEFieldModelMap()
 void GeneratorRuby::GenerateFBEFinalModel()
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding final model class
+  # Fast Binary Encoding final model
   class FinalModel < FieldModelBase
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -2185,7 +2185,7 @@ void GeneratorRuby::GenerateFBEFinalModel()
 void GeneratorRuby::GenerateFBEFinalModel(const std::string& name, const std::string& type, const std::string& size, const std::string& defaults)
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding _TYPE_ final model class
+  # Fast Binary Encoding _TYPE_ final model
   class FinalModel_NAME_ < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -2250,7 +2250,7 @@ void GeneratorRuby::GenerateFBEFinalModel(const std::string& name, const std::st
 void GeneratorRuby::GenerateFBEFinalModelDecimal()
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding decimal final model class
+  # Fast Binary Encoding decimal final model
   class FinalModelDecimal < FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -2367,7 +2367,7 @@ void GeneratorRuby::GenerateFBEFinalModelDecimal()
 void GeneratorRuby::GenerateFBEFinalModelBytes()
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding bytes final model class
+  # Fast Binary Encoding bytes final model
   class FinalModelBytes < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -2440,7 +2440,7 @@ void GeneratorRuby::GenerateFBEFinalModelBytes()
 void GeneratorRuby::GenerateFBEFinalModelString()
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding string final model class
+  # Fast Binary Encoding string final model
   class FinalModelString < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -2616,7 +2616,7 @@ void GeneratorRuby::GenerateFBEFinalModelOptional()
 void GeneratorRuby::GenerateFBEFinalModelArray()
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding array final model class
+  # Fast Binary Encoding array final model
   class FinalModelArray < FinalModel
     def initialize(model, buffer, offset, size)
       super(buffer, offset)
@@ -2705,7 +2705,7 @@ void GeneratorRuby::GenerateFBEFinalModelArray()
 void GeneratorRuby::GenerateFBEFinalModelVector()
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding vector final model class
+  # Fast Binary Encoding vector final model
   class FinalModelVector < FinalModel
     def initialize(model, buffer, offset)
       super(buffer, offset)
@@ -2802,7 +2802,7 @@ void GeneratorRuby::GenerateFBEFinalModelVector()
 void GeneratorRuby::GenerateFBEFinalModelSet()
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding set final model class
+  # Fast Binary Encoding set final model
   class FinalModelSet < FinalModel
     def initialize(model, buffer, offset)
       super(buffer, offset)
@@ -2899,7 +2899,7 @@ void GeneratorRuby::GenerateFBEFinalModelSet()
 void GeneratorRuby::GenerateFBEFinalModelMap()
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding map final model class
+  # Fast Binary Encoding map final model
   class FinalModelMap < FinalModel
     def initialize(model_key, model_value, buffer, offset)
       super(buffer, offset)
@@ -3019,7 +3019,7 @@ void GeneratorRuby::GenerateFBEFinalModelMap()
 void GeneratorRuby::GenerateFBESender()
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding base sender class
+  # Fast Binary Encoding base sender
   class Sender
     def initialize(buffer = WriteBuffer.new, logging = false, final = false)
       @_buffer = buffer
@@ -3093,7 +3093,7 @@ void GeneratorRuby::GenerateFBESender()
 void GeneratorRuby::GenerateFBEReceiver()
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding base receiver class
+  # Fast Binary Encoding base receiver
   class Receiver
     def initialize(buffer = WriteBuffer.new, logging = false, final = false)
       @_buffer = buffer
@@ -3628,7 +3628,7 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
 void GeneratorRuby::GenerateEnumFieldModel(const std::shared_ptr<EnumType>& e)
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding _ENUM_NAME_ field model class
+  # Fast Binary Encoding _ENUM_NAME_ field model
   class FieldModel_ENUM_NAME_ < FBE::FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -3674,7 +3674,7 @@ void GeneratorRuby::GenerateEnumFieldModel(const std::shared_ptr<EnumType>& e)
 void GeneratorRuby::GenerateEnumFinalModel(const std::shared_ptr<EnumType>& e)
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding _ENUM_NAME_ final model class
+  # Fast Binary Encoding _ENUM_NAME_ final model
   class FinalModel_ENUM_NAME_ < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -3944,7 +3944,7 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
 void GeneratorRuby::GenerateFlagsFieldModel(const std::shared_ptr<FlagsType>& f)
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding _FLAGS_NAME_ field model class
+  # Fast Binary Encoding _FLAGS_NAME_ field model
   class FieldModel_FLAGS_NAME_ < FBE::FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -3990,7 +3990,7 @@ void GeneratorRuby::GenerateFlagsFieldModel(const std::shared_ptr<FlagsType>& f)
 void GeneratorRuby::GenerateFlagsFinalModel(const std::shared_ptr<FlagsType>& f)
 {
     std::string code = R"CODE(
-  # Fast Binary Encoding _FLAGS_NAME_ final model class
+  # Fast Binary Encoding _FLAGS_NAME_ final model
   class FinalModel_FLAGS_NAME_ < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -4863,7 +4863,7 @@ void GeneratorRuby::GenerateStructModel(const std::shared_ptr<StructType>& s)
 
     // Generate struct model begin
     WriteLine();
-    WriteLineIndent("# Fast Binary Encoding " + struct_name + " model class");
+    WriteLineIndent("# Fast Binary Encoding " + struct_name + " model");
     WriteLineIndent("class " + struct_name + "Model < FBE::Model");
     Indent(1);
 
@@ -5244,7 +5244,7 @@ void GeneratorRuby::GenerateStructModelFinal(const std::shared_ptr<StructType>& 
 
     // Generate struct model final begin
     WriteLine();
-    WriteLineIndent("# Fast Binary Encoding " + struct_name + " final model class");
+    WriteLineIndent("# Fast Binary Encoding " + struct_name + " final model");
     WriteLineIndent("class " + struct_name + "FinalModel < FBE::Model");
     Indent(1);
 
@@ -5372,9 +5372,9 @@ void GeneratorRuby::GenerateSender(const std::shared_ptr<Package>& p, bool final
     // Generate sender begin
     WriteLine();
     if (final)
-        WriteLineIndent("# Fast Binary Encoding " + package + " final sender class");
+        WriteLineIndent("# Fast Binary Encoding " + package + " final sender");
     else
-        WriteLineIndent("# Fast Binary Encoding " + package + " sender class");
+        WriteLineIndent("# Fast Binary Encoding " + package + " sender");
     WriteLineIndent("# noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection");
     WriteLineIndent("class " + sender + " < FBE::Sender");
     Indent(1);
@@ -5515,9 +5515,9 @@ void GeneratorRuby::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     // Generate receiver begin
     WriteLine();
     if (final)
-        WriteLineIndent("# Fast Binary Encoding " + package + " final receiver class");
+        WriteLineIndent("# Fast Binary Encoding " + package + " final receiver");
     else
-        WriteLineIndent("# Fast Binary Encoding " + package + " receiver class");
+        WriteLineIndent("# Fast Binary Encoding " + package + " receiver");
     WriteLineIndent("# noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection");
     WriteLineIndent("class " + receiver + " < FBE::Receiver");
     Indent(1);

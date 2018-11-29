@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding OptionalByte array field model class
+// Fast Binary Encoding OptionalByte array field model
 class FieldModelArrayOptionalByte(buffer: Buffer, offset: Long, val size: Long) : FieldModel(buffer, offset)
 {
     private val _model = FieldModelOptionalByte(buffer, offset)

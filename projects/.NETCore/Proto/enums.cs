@@ -154,7 +154,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumByte field model class
+    // Fast Binary Encoding EnumByte field model
     public class FieldModelEnumByte : FieldModelValueType<EnumByte>
     {
         public FieldModelEnumByte(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -198,7 +198,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumByte final model class
+    // Fast Binary Encoding EnumByte final model
     public class FinalModelEnumByte : FinalModelValueType<EnumByte>
     {
         public FinalModelEnumByte(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -386,7 +386,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumChar field model class
+    // Fast Binary Encoding EnumChar field model
     public class FieldModelEnumChar : FieldModelValueType<EnumChar>
     {
         public FieldModelEnumChar(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -430,7 +430,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumChar final model class
+    // Fast Binary Encoding EnumChar final model
     public class FinalModelEnumChar : FinalModelValueType<EnumChar>
     {
         public FinalModelEnumChar(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -618,7 +618,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumWChar field model class
+    // Fast Binary Encoding EnumWChar field model
     public class FieldModelEnumWChar : FieldModelValueType<EnumWChar>
     {
         public FieldModelEnumWChar(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -662,7 +662,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumWChar final model class
+    // Fast Binary Encoding EnumWChar final model
     public class FinalModelEnumWChar : FinalModelValueType<EnumWChar>
     {
         public FinalModelEnumWChar(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -850,7 +850,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumInt8 field model class
+    // Fast Binary Encoding EnumInt8 field model
     public class FieldModelEnumInt8 : FieldModelValueType<EnumInt8>
     {
         public FieldModelEnumInt8(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -894,7 +894,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumInt8 final model class
+    // Fast Binary Encoding EnumInt8 final model
     public class FinalModelEnumInt8 : FinalModelValueType<EnumInt8>
     {
         public FinalModelEnumInt8(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1082,7 +1082,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumUInt8 field model class
+    // Fast Binary Encoding EnumUInt8 field model
     public class FieldModelEnumUInt8 : FieldModelValueType<EnumUInt8>
     {
         public FieldModelEnumUInt8(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1126,7 +1126,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumUInt8 final model class
+    // Fast Binary Encoding EnumUInt8 final model
     public class FinalModelEnumUInt8 : FinalModelValueType<EnumUInt8>
     {
         public FinalModelEnumUInt8(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1314,7 +1314,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumInt16 field model class
+    // Fast Binary Encoding EnumInt16 field model
     public class FieldModelEnumInt16 : FieldModelValueType<EnumInt16>
     {
         public FieldModelEnumInt16(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1358,7 +1358,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumInt16 final model class
+    // Fast Binary Encoding EnumInt16 final model
     public class FinalModelEnumInt16 : FinalModelValueType<EnumInt16>
     {
         public FinalModelEnumInt16(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1546,7 +1546,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumUInt16 field model class
+    // Fast Binary Encoding EnumUInt16 field model
     public class FieldModelEnumUInt16 : FieldModelValueType<EnumUInt16>
     {
         public FieldModelEnumUInt16(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1590,7 +1590,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumUInt16 final model class
+    // Fast Binary Encoding EnumUInt16 final model
     public class FinalModelEnumUInt16 : FinalModelValueType<EnumUInt16>
     {
         public FinalModelEnumUInt16(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1778,7 +1778,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumInt32 field model class
+    // Fast Binary Encoding EnumInt32 field model
     public class FieldModelEnumInt32 : FieldModelValueType<EnumInt32>
     {
         public FieldModelEnumInt32(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1822,7 +1822,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumInt32 final model class
+    // Fast Binary Encoding EnumInt32 final model
     public class FinalModelEnumInt32 : FinalModelValueType<EnumInt32>
     {
         public FinalModelEnumInt32(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -2010,7 +2010,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumUInt32 field model class
+    // Fast Binary Encoding EnumUInt32 field model
     public class FieldModelEnumUInt32 : FieldModelValueType<EnumUInt32>
     {
         public FieldModelEnumUInt32(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -2054,7 +2054,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumUInt32 final model class
+    // Fast Binary Encoding EnumUInt32 final model
     public class FinalModelEnumUInt32 : FinalModelValueType<EnumUInt32>
     {
         public FinalModelEnumUInt32(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -2242,7 +2242,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumInt64 field model class
+    // Fast Binary Encoding EnumInt64 field model
     public class FieldModelEnumInt64 : FieldModelValueType<EnumInt64>
     {
         public FieldModelEnumInt64(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -2286,7 +2286,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumInt64 final model class
+    // Fast Binary Encoding EnumInt64 final model
     public class FinalModelEnumInt64 : FinalModelValueType<EnumInt64>
     {
         public FinalModelEnumInt64(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -2474,7 +2474,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumUInt64 field model class
+    // Fast Binary Encoding EnumUInt64 field model
     public class FieldModelEnumUInt64 : FieldModelValueType<EnumUInt64>
     {
         public FieldModelEnumUInt64(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -2518,7 +2518,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding EnumUInt64 final model class
+    // Fast Binary Encoding EnumUInt64 final model
     public class FinalModelEnumUInt64 : FinalModelValueType<EnumUInt64>
     {
         public FinalModelEnumUInt64(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -2920,7 +2920,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding Enums field model class
+    // Fast Binary Encoding Enums field model
     public class FieldModelEnums : FieldModelValueType<Enums>
     {
         public readonly FieldModelEnumByte byte0;
@@ -4226,7 +4226,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding Enums model class
+    // Fast Binary Encoding Enums model
     public class EnumsModel : Model
     {
         public readonly FieldModelEnums model;
@@ -4314,7 +4314,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding Enums final model class
+    // Fast Binary Encoding Enums final model
     public class FinalModelEnums : FinalModelValueType<Enums>
     {
         public readonly FinalModelEnumByte byte0;
@@ -5658,7 +5658,7 @@ namespace enums {
 
     using global::enums;
 
-    // Fast Binary Encoding Enums final model class
+    // Fast Binary Encoding Enums final model
     public class EnumsFinalModel : Model
     {
         private readonly FinalModelEnums _model;
@@ -5740,7 +5740,7 @@ namespace enums {
 namespace FBE {
 namespace enums {
 
-    // Fast Binary Encoding enums sender class
+    // Fast Binary Encoding enums sender
     public class Sender : FBE.Sender
     {
         // Sender models accessors
@@ -5783,7 +5783,7 @@ namespace enums {
 namespace FBE {
 namespace enums {
 
-    // Fast Binary Encoding enums receiver class
+    // Fast Binary Encoding enums receiver
     public class Receiver : FBE.Receiver
     {
         // Receiver values accessors
@@ -5841,7 +5841,7 @@ namespace enums {
 namespace FBE {
 namespace enums {
 
-    // Fast Binary Encoding enums final sender class
+    // Fast Binary Encoding enums final sender
     public class FinalSender : FBE.Sender
     {
         // Sender models accessors
@@ -5886,7 +5886,7 @@ namespace enums {
 namespace FBE {
 namespace enums {
 
-    // Fast Binary Encoding enums final receiver class
+    // Fast Binary Encoding enums final receiver
     public class FinalReceiver : FBE.Receiver
     {
         // Receiver values accessors

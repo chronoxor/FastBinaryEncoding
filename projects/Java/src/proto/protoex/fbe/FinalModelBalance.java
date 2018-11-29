@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import protoex.*;
 
-// Fast Binary Encoding Balance final model class
+// Fast Binary Encoding Balance final model
 public final class FinalModelBalance extends FinalModel
 {
     public final proto.fbe.FinalModelBalance parent;

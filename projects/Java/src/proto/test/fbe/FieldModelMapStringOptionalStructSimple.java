@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding String->OptionalStructSimple map field model class
+// Fast Binary Encoding String->OptionalStructSimple map field model
 public final class FieldModelMapStringOptionalStructSimple extends FieldModel
 {
     private final FieldModelString _modelKey;

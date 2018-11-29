@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import proto.*;
 
-// Fast Binary Encoding Balance field model class
+// Fast Binary Encoding Balance field model
 public final class FieldModelBalance extends FieldModel
 {
     public final FieldModelString currency;

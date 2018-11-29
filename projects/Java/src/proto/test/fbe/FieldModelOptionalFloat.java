@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional Float field model class
+// Fast Binary Encoding optional Float field model
 public final class FieldModelOptionalFloat extends FieldModel
 {
     public FieldModelOptionalFloat(Buffer buffer, long offset)

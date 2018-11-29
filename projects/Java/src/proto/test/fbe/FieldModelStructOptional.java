@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding StructOptional field model class
+// Fast Binary Encoding StructOptional field model
 public final class FieldModelStructOptional extends FieldModel
 {
     public final FieldModelStructSimple parent;

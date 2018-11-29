@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import enums.*
 
-// Fast Binary Encoding Enums field model class
+// Fast Binary Encoding Enums field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FieldModelEnums(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {

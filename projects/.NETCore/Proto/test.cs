@@ -156,7 +156,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding EnumSimple field model class
+    // Fast Binary Encoding EnumSimple field model
     public class FieldModelEnumSimple : FieldModelValueType<EnumSimple>
     {
         public FieldModelEnumSimple(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -200,7 +200,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding EnumSimple final model class
+    // Fast Binary Encoding EnumSimple final model
     public class FinalModelEnumSimple : FinalModelValueType<EnumSimple>
     {
         public FinalModelEnumSimple(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -388,7 +388,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding EnumTyped field model class
+    // Fast Binary Encoding EnumTyped field model
     public class FieldModelEnumTyped : FieldModelValueType<EnumTyped>
     {
         public FieldModelEnumTyped(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -432,7 +432,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding EnumTyped final model class
+    // Fast Binary Encoding EnumTyped final model
     public class FinalModelEnumTyped : FinalModelValueType<EnumTyped>
     {
         public FinalModelEnumTyped(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -679,7 +679,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding FlagsSimple field model class
+    // Fast Binary Encoding FlagsSimple field model
     public class FieldModelFlagsSimple : FieldModelValueType<FlagsSimple>
     {
         public FieldModelFlagsSimple(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -723,7 +723,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding FlagsSimple final model class
+    // Fast Binary Encoding FlagsSimple final model
     public class FinalModelFlagsSimple : FinalModelValueType<FlagsSimple>
     {
         public FinalModelFlagsSimple(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -994,7 +994,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding FlagsTyped field model class
+    // Fast Binary Encoding FlagsTyped field model
     public class FieldModelFlagsTyped : FieldModelValueType<FlagsTyped>
     {
         public FieldModelFlagsTyped(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1038,7 +1038,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding FlagsTyped final model class
+    // Fast Binary Encoding FlagsTyped final model
     public class FinalModelFlagsTyped : FinalModelValueType<FlagsTyped>
     {
         public FinalModelFlagsTyped(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1367,7 +1367,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructSimple field model class
+    // Fast Binary Encoding StructSimple field model
     public class FieldModelStructSimple : FieldModelValueType<StructSimple>
     {
         public readonly FieldModelValueType<int> uid;
@@ -2316,7 +2316,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructSimple model class
+    // Fast Binary Encoding StructSimple model
     public class StructSimpleModel : Model
     {
         public readonly FieldModelStructSimple model;
@@ -2404,7 +2404,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructSimple final model class
+    // Fast Binary Encoding StructSimple final model
     public class FinalModelStructSimple : FinalModelValueType<StructSimple>
     {
         public readonly FinalModelValueType<int> uid;
@@ -3349,7 +3349,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructSimple final model class
+    // Fast Binary Encoding StructSimple final model
     public class StructSimpleFinalModel : Model
     {
         private readonly FinalModelStructSimple _model;
@@ -3801,7 +3801,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructOptional field model class
+    // Fast Binary Encoding StructOptional field model
     public class FieldModelStructOptional : FieldModelValueType<StructOptional>
     {
         public readonly FieldModelStructSimple parent;
@@ -5122,7 +5122,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructOptional model class
+    // Fast Binary Encoding StructOptional model
     public class StructOptionalModel : Model
     {
         public readonly FieldModelStructOptional model;
@@ -5210,7 +5210,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructOptional final model class
+    // Fast Binary Encoding StructOptional final model
     public class FinalModelStructOptional : FinalModelValueType<StructOptional>
     {
         public readonly FinalModelStructSimple parent;
@@ -6573,7 +6573,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructOptional final model class
+    // Fast Binary Encoding StructOptional final model
     public class StructOptionalFinalModel : Model
     {
         private readonly FinalModelStructOptional _model;
@@ -6809,7 +6809,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructNested field model class
+    // Fast Binary Encoding StructNested field model
     public class FieldModelStructNested : FieldModelValueType<StructNested>
     {
         public readonly FieldModelStructOptional parent;
@@ -7212,7 +7212,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructNested model class
+    // Fast Binary Encoding StructNested model
     public class StructNestedModel : Model
     {
         public readonly FieldModelStructNested model;
@@ -7300,7 +7300,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructNested final model class
+    // Fast Binary Encoding StructNested final model
     public class FinalModelStructNested : FinalModelValueType<StructNested>
     {
         public readonly FinalModelStructOptional parent;
@@ -7637,7 +7637,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructNested final model class
+    // Fast Binary Encoding StructNested final model
     public class StructNestedFinalModel : Model
     {
         private readonly FinalModelStructNested _model;
@@ -7814,7 +7814,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructBytes field model class
+    // Fast Binary Encoding StructBytes field model
     public class FieldModelStructBytes : FieldModelValueType<StructBytes>
     {
         public readonly FieldModelReferenceType<MemoryStream> f1;
@@ -8049,7 +8049,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructBytes model class
+    // Fast Binary Encoding StructBytes model
     public class StructBytesModel : Model
     {
         public readonly FieldModelStructBytes model;
@@ -8137,7 +8137,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructBytes final model class
+    // Fast Binary Encoding StructBytes final model
     public class FinalModelStructBytes : FinalModelValueType<StructBytes>
     {
         public readonly FinalModelReferenceType<MemoryStream> f1;
@@ -8284,7 +8284,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructBytes final model class
+    // Fast Binary Encoding StructBytes final model
     public class StructBytesFinalModel : Model
     {
         private readonly FinalModelStructBytes _model;
@@ -8629,7 +8629,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructArray field model class
+    // Fast Binary Encoding StructArray field model
     public class FieldModelStructArray : FieldModelValueType<StructArray>
     {
         public readonly FieldModelArrayValueType<byte, FieldModelValueType<byte>> f1;
@@ -8983,7 +8983,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructArray model class
+    // Fast Binary Encoding StructArray model
     public class StructArrayModel : Model
     {
         public readonly FieldModelStructArray model;
@@ -9071,7 +9071,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructArray final model class
+    // Fast Binary Encoding StructArray final model
     public class FinalModelStructArray : FinalModelValueType<StructArray>
     {
         public readonly FinalModelArrayValueType<byte, FinalModelValueType<byte>> f1;
@@ -9351,7 +9351,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructArray final model class
+    // Fast Binary Encoding StructArray final model
     public class StructArrayFinalModel : Model
     {
         private readonly FinalModelStructArray _model;
@@ -9696,7 +9696,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructVector field model class
+    // Fast Binary Encoding StructVector field model
     public class FieldModelStructVector : FieldModelValueType<StructVector>
     {
         public readonly FieldModelVectorValueType<byte, FieldModelValueType<byte>> f1;
@@ -10050,7 +10050,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructVector model class
+    // Fast Binary Encoding StructVector model
     public class StructVectorModel : Model
     {
         public readonly FieldModelStructVector model;
@@ -10138,7 +10138,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructVector final model class
+    // Fast Binary Encoding StructVector final model
     public class FinalModelStructVector : FinalModelValueType<StructVector>
     {
         public readonly FinalModelVectorValueType<byte, FinalModelValueType<byte>> f1;
@@ -10418,7 +10418,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructVector final model class
+    // Fast Binary Encoding StructVector final model
     public class StructVectorFinalModel : Model
     {
         private readonly FinalModelStructVector _model;
@@ -10763,7 +10763,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructList field model class
+    // Fast Binary Encoding StructList field model
     public class FieldModelStructList : FieldModelValueType<StructList>
     {
         public readonly FieldModelVectorValueType<byte, FieldModelValueType<byte>> f1;
@@ -11117,7 +11117,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructList model class
+    // Fast Binary Encoding StructList model
     public class StructListModel : Model
     {
         public readonly FieldModelStructList model;
@@ -11205,7 +11205,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructList final model class
+    // Fast Binary Encoding StructList final model
     public class FinalModelStructList : FinalModelValueType<StructList>
     {
         public readonly FinalModelVectorValueType<byte, FinalModelValueType<byte>> f1;
@@ -11485,7 +11485,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructList final model class
+    // Fast Binary Encoding StructList final model
     public class StructListFinalModel : Model
     {
         private readonly FinalModelStructList _model;
@@ -11722,7 +11722,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructSet field model class
+    // Fast Binary Encoding StructSet field model
     public class FieldModelStructSet : FieldModelValueType<StructSet>
     {
         public readonly FieldModelVectorValueType<byte, FieldModelValueType<byte>> f1;
@@ -11974,7 +11974,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructSet model class
+    // Fast Binary Encoding StructSet model
     public class StructSetModel : Model
     {
         public readonly FieldModelStructSet model;
@@ -12062,7 +12062,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructSet final model class
+    // Fast Binary Encoding StructSet final model
     public class FinalModelStructSet : FinalModelValueType<StructSet>
     {
         public readonly FinalModelVectorValueType<byte, FinalModelValueType<byte>> f1;
@@ -12228,7 +12228,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructSet final model class
+    // Fast Binary Encoding StructSet final model
     public class StructSetFinalModel : Model
     {
         private readonly FinalModelStructSet _model;
@@ -12593,7 +12593,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructMap field model class
+    // Fast Binary Encoding StructMap field model
     public class FieldModelStructMap : FieldModelValueType<StructMap>
     {
         public readonly FieldModelMapValueTypeKeyValueTypeValue<int, FieldModelValueType<int>, byte, FieldModelValueType<byte>> f1;
@@ -12947,7 +12947,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructMap model class
+    // Fast Binary Encoding StructMap model
     public class StructMapModel : Model
     {
         public readonly FieldModelStructMap model;
@@ -13035,7 +13035,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructMap final model class
+    // Fast Binary Encoding StructMap final model
     public class FinalModelStructMap : FinalModelValueType<StructMap>
     {
         public readonly FinalModelMapValueTypeKeyValueTypeValue<int, FinalModelValueType<int>, byte, FinalModelValueType<byte>> f1;
@@ -13315,7 +13315,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructMap final model class
+    // Fast Binary Encoding StructMap final model
     public class StructMapFinalModel : Model
     {
         private readonly FinalModelStructMap _model;
@@ -13680,7 +13680,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructHash field model class
+    // Fast Binary Encoding StructHash field model
     public class FieldModelStructHash : FieldModelValueType<StructHash>
     {
         public readonly FieldModelMapReferenceTypeKeyValueTypeValue<string, FieldModelReferenceType<string>, byte, FieldModelValueType<byte>> f1;
@@ -14034,7 +14034,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructHash model class
+    // Fast Binary Encoding StructHash model
     public class StructHashModel : Model
     {
         public readonly FieldModelStructHash model;
@@ -14122,7 +14122,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructHash final model class
+    // Fast Binary Encoding StructHash final model
     public class FinalModelStructHash : FinalModelValueType<StructHash>
     {
         public readonly FinalModelMapReferenceTypeKeyValueTypeValue<string, FinalModelReferenceType<string>, byte, FinalModelValueType<byte>> f1;
@@ -14402,7 +14402,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructHash final model class
+    // Fast Binary Encoding StructHash final model
     public class StructHashFinalModel : Model
     {
         private readonly FinalModelStructHash _model;
@@ -14607,7 +14607,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructHashEx field model class
+    // Fast Binary Encoding StructHashEx field model
     public class FieldModelStructHashEx : FieldModelValueType<StructHashEx>
     {
         public readonly FieldModelMapValueTypeKeyValueTypeValue<StructSimple, FieldModelStructSimple, StructNested, FieldModelStructNested> f1;
@@ -14825,7 +14825,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructHashEx model class
+    // Fast Binary Encoding StructHashEx model
     public class StructHashExModel : Model
     {
         public readonly FieldModelStructHashEx model;
@@ -14913,7 +14913,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructHashEx final model class
+    // Fast Binary Encoding StructHashEx final model
     public class FinalModelStructHashEx : FinalModelValueType<StructHashEx>
     {
         public readonly FinalModelMapValueTypeKeyValueTypeValue<StructSimple, FinalModelStructSimple, StructNested, FinalModelStructNested> f1;
@@ -15041,7 +15041,7 @@ namespace test {
 
     using global::test;
 
-    // Fast Binary Encoding StructHashEx final model class
+    // Fast Binary Encoding StructHashEx final model
     public class StructHashExFinalModel : Model
     {
         private readonly FinalModelStructHashEx _model;
@@ -15123,7 +15123,7 @@ namespace test {
 namespace FBE {
 namespace test {
 
-    // Fast Binary Encoding test sender class
+    // Fast Binary Encoding test sender
     public class Sender : FBE.Sender
     {
         // Imported senders
@@ -15371,7 +15371,7 @@ namespace test {
 namespace FBE {
 namespace test {
 
-    // Fast Binary Encoding test receiver class
+    // Fast Binary Encoding test receiver
     public class Receiver : FBE.Receiver
     {
         // Imported receivers
@@ -15697,7 +15697,7 @@ namespace test {
 namespace FBE {
 namespace test {
 
-    // Fast Binary Encoding test final sender class
+    // Fast Binary Encoding test final sender
     public class FinalSender : FBE.Sender
     {
         // Imported senders
@@ -15947,7 +15947,7 @@ namespace test {
 namespace FBE {
 namespace test {
 
-    // Fast Binary Encoding test final receiver class
+    // Fast Binary Encoding test final receiver
     public class FinalReceiver : FBE.Receiver
     {
         // Imported receivers

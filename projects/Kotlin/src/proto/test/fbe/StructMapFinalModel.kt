@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructMap final model class
+// Fast Binary Encoding StructMap final model
 class StructMapFinalModel : Model
 {
     private val _model: FinalModelStructMap

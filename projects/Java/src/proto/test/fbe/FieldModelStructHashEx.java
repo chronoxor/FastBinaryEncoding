@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding StructHashEx field model class
+// Fast Binary Encoding StructHashEx field model
 public final class FieldModelStructHashEx extends FieldModel
 {
     public final FieldModelMapStructSimpleStructNested f1;

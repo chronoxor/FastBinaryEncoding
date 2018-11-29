@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding optional Char field model class
+// Fast Binary Encoding optional Char field model
 class FieldModelOptionalChar(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size

@@ -14,7 +14,7 @@ import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
 
-// Fast Binary Encoding float field model class
+// Fast Binary Encoding float field model
 public final class FieldModelFloat extends FieldModel
 {
     public FieldModelFloat(Buffer buffer, long offset) { super(buffer, offset); }

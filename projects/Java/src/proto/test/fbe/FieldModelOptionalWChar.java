@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional WChar field model class
+// Fast Binary Encoding optional WChar field model
 public final class FieldModelOptionalWChar extends FieldModel
 {
     public FieldModelOptionalWChar(Buffer buffer, long offset)

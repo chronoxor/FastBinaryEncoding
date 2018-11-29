@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructArray final model class
+// Fast Binary Encoding StructArray final model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FinalModelStructArray(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {

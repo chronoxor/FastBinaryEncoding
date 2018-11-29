@@ -8,10 +8,15 @@ package enums
 import "errors"
 import "../fbe"
 
-// Fast Binary Encoding EnumInt8 final model class
+// Fast Binary Encoding EnumInt8 final model
 type FinalModelEnumInt8 struct {
     buffer *fbe.Buffer  // Final model buffer
     offset int          // Final model buffer offset
+}
+
+// Create a new final model
+func NewFinalModelEnumInt8(buffer *fbe.Buffer, offset int) *FinalModelEnumInt8 {
+    return &FinalModelEnumInt8{buffer: buffer, offset: offset}
 }
 
 // Get the allocation size
@@ -30,11 +35,6 @@ func (fm *FinalModelEnumInt8) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelEnumInt8) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new final model
-func NewFinalModelEnumInt8(buffer *fbe.Buffer, offset int) *FinalModelEnumInt8 {
-    return &FinalModelEnumInt8{buffer: buffer, offset: offset}
-}
-
 // Check if the value is valid
 func (fm *FinalModelEnumInt8) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
@@ -45,20 +45,33 @@ func (fm *FinalModelEnumInt8) Verify() (bool, int) {
 }
 
 // Get the value
-func (fm *FinalModelEnumInt8) Get() (EnumInt8, int, error) {
+func (fm *FinalModelEnumInt8) Get() (*EnumInt8, int, error) {
+    return fm.GetDefault(EnumInt8(0))
+}
+
+// Get the value with provided default value
+func (fm *FinalModelEnumInt8) GetDefault(defaults EnumInt8) (*EnumInt8, int, error) {
+    result := defaults
+    return fm.GetValue(&result)
+}
+
+// Get the value by pointer
+func (fm *FinalModelEnumInt8) GetValue(value *EnumInt8) (*EnumInt8, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return EnumInt8(0), 0, errors.New("model is broken")
+        return value, 0, errors.New("model is broken")
     }
 
-    return EnumInt8(fbe.ReadInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())), fm.FBESize(), nil
+    result := EnumInt8(fbe.ReadInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    value = &result
+    return value, fm.FBESize(), nil
 }
 
 // Set the value
-func (fm *FinalModelEnumInt8) Set(value EnumInt8) (int, error) {
+func (fm *FinalModelEnumInt8) Set(value *EnumInt8) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0, errors.New("model is broken")
     }
 
-    fbe.WriteInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), int8(value))
+    fbe.WriteInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), int8(*value))
     return fm.FBESize(), nil
 }

@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import enums.*;
 
-// Fast Binary Encoding enums sender class
+// Fast Binary Encoding enums sender
 public class Sender extends fbe.Sender
 {
     // Sender models accessors

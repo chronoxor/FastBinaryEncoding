@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import enums.*;
 
-// Fast Binary Encoding EnumInt16 field model class
+// Fast Binary Encoding EnumInt16 field model
 public final class FieldModelEnumInt16 extends FieldModel
 {
     public FieldModelEnumInt16(Buffer buffer, long offset) { super(buffer, offset); }

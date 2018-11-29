@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import protoex.*
 
-// Fast Binary Encoding Account field model class
+// Fast Binary Encoding Account field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FieldModelAccount(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {

@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding optional UUID final model class
+// Fast Binary Encoding optional UUID final model
 class FinalModelOptionalUUID(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size

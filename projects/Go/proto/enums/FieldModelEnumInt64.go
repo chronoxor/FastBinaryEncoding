@@ -8,10 +8,15 @@ package enums
 import "errors"
 import "../fbe"
 
-// Fast Binary Encoding EnumInt64 field model class
+// Fast Binary Encoding EnumInt64 field model
 type FieldModelEnumInt64 struct {
     buffer *fbe.Buffer  // Field model buffer
     offset int          // Field model buffer offset
+}
+
+// Create a new field model
+func NewFieldModelEnumInt64(buffer *fbe.Buffer, offset int) *FieldModelEnumInt64 {
+    return &FieldModelEnumInt64{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -29,34 +34,37 @@ func (fm *FieldModelEnumInt64) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelEnumInt64) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new field model
-func NewFieldModelEnumInt64(buffer *fbe.Buffer, offset int) *FieldModelEnumInt64 {
-    return &FieldModelEnumInt64{buffer: buffer, offset: offset}
-}
-
 // Check if the value is valid
 func (fm *FieldModelEnumInt64) Verify() bool { return true }
 
 // Get the value
-func (fm *FieldModelEnumInt64) Get() (EnumInt64, error) {
-    return fm.GetDefault(0)
+func (fm *FieldModelEnumInt64) Get() (*EnumInt64, error) {
+    return fm.GetDefault(EnumInt64(0))
 }
 
 // Get the value with provided default value
-func (fm *FieldModelEnumInt64) GetDefault(defaults EnumInt64) (EnumInt64, error) {
+func (fm *FieldModelEnumInt64) GetDefault(defaults EnumInt64) (*EnumInt64, error) {
+    result := defaults
+    return fm.GetValue(&result)
+}
+
+// Get the value by pointer
+func (fm *FieldModelEnumInt64) GetValue(value *EnumInt64) (*EnumInt64, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return EnumInt64(0), nil
+        return value, nil
     }
 
-    return EnumInt64(fbe.ReadInt64(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())), nil
+    result := EnumInt64(fbe.ReadInt64(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    value = &result
+    return value, nil
 }
 
 // Set the value
-func (fm *FieldModelEnumInt64) Set(value EnumInt64) error {
+func (fm *FieldModelEnumInt64) Set(value *EnumInt64) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
 
-    fbe.WriteInt64(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), int64(value))
+    fbe.WriteInt64(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), int64(*value))
     return nil
 }

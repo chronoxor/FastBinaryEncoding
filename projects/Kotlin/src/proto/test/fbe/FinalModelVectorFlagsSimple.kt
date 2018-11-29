@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding FlagsSimple vector final model class
+// Fast Binary Encoding FlagsSimple vector final model
 class FinalModelVectorFlagsSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     private val _model = FinalModelFlagsSimple(buffer, offset)

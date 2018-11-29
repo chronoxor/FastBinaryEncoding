@@ -8,10 +8,15 @@ package protoex
 import "errors"
 import "../fbe"
 
-// Fast Binary Encoding OrderSide field model class
+// Fast Binary Encoding OrderSide field model
 type FieldModelOrderSide struct {
     buffer *fbe.Buffer  // Field model buffer
     offset int          // Field model buffer offset
+}
+
+// Create a new field model
+func NewFieldModelOrderSide(buffer *fbe.Buffer, offset int) *FieldModelOrderSide {
+    return &FieldModelOrderSide{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -29,34 +34,37 @@ func (fm *FieldModelOrderSide) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelOrderSide) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new field model
-func NewFieldModelOrderSide(buffer *fbe.Buffer, offset int) *FieldModelOrderSide {
-    return &FieldModelOrderSide{buffer: buffer, offset: offset}
-}
-
 // Check if the value is valid
 func (fm *FieldModelOrderSide) Verify() bool { return true }
 
 // Get the value
-func (fm *FieldModelOrderSide) Get() (OrderSide, error) {
-    return fm.GetDefault(0)
+func (fm *FieldModelOrderSide) Get() (*OrderSide, error) {
+    return fm.GetDefault(OrderSide(0))
 }
 
 // Get the value with provided default value
-func (fm *FieldModelOrderSide) GetDefault(defaults OrderSide) (OrderSide, error) {
+func (fm *FieldModelOrderSide) GetDefault(defaults OrderSide) (*OrderSide, error) {
+    result := defaults
+    return fm.GetValue(&result)
+}
+
+// Get the value by pointer
+func (fm *FieldModelOrderSide) GetValue(value *OrderSide) (*OrderSide, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return OrderSide(0), nil
+        return value, nil
     }
 
-    return OrderSide(fbe.ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())), nil
+    result := OrderSide(fbe.ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    value = &result
+    return value, nil
 }
 
 // Set the value
-func (fm *FieldModelOrderSide) Set(value OrderSide) error {
+func (fm *FieldModelOrderSide) Set(value *OrderSide) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
 
-    fbe.WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), byte(value))
+    fbe.WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), byte(*value))
     return nil
 }

@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import enums.*;
 
-// Fast Binary Encoding EnumUInt32 field model class
+// Fast Binary Encoding EnumUInt32 field model
 public final class FieldModelEnumUInt32 extends FieldModel
 {
     public FieldModelEnumUInt32(Buffer buffer, long offset) { super(buffer, offset); }

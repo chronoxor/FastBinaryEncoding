@@ -7,10 +7,15 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding uint32 final model class
+// Fast Binary Encoding uint32 final model
 type FinalModelUInt32 struct {
     buffer *Buffer  // Final model buffer
     offset int      // Final model buffer offset
+}
+
+// Create a new final model
+func NewFinalModelUInt32(buffer *Buffer, offset int) *FinalModelUInt32 {
+    return &FinalModelUInt32{buffer: buffer, offset: offset}
 }
 
 // Get the allocation size
@@ -28,11 +33,6 @@ func (fm *FinalModelUInt32) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FinalModelUInt32) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelUInt32) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new final model
-func NewFinalModelUInt32(buffer *Buffer, offset int) *FinalModelUInt32 {
-    return &FinalModelUInt32{buffer: buffer, offset: offset}
-}
 
 // Check if the value is valid
 func (fm *FinalModelUInt32) Verify() (bool, int) {

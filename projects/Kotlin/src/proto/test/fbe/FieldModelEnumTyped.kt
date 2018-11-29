@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding EnumTyped field model class
+// Fast Binary Encoding EnumTyped field model
 class FieldModelEnumTyped(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size

@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import proto.*
 
-// Fast Binary Encoding Order model class
+// Fast Binary Encoding Order model
 class OrderModel : Model
 {
     val model: FieldModelOrder

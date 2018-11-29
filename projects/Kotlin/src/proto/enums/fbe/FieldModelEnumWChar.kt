@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import enums.*
 
-// Fast Binary Encoding EnumWChar field model class
+// Fast Binary Encoding EnumWChar field model
 class FieldModelEnumWChar(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size

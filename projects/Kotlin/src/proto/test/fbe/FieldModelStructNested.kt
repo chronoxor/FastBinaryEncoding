@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructNested field model class
+// Fast Binary Encoding StructNested field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FieldModelStructNested(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {

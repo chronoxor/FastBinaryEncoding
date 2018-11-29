@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding StructSet field model class
+// Fast Binary Encoding StructSet field model
 public final class FieldModelStructSet extends FieldModel
 {
     public final FieldModelVectorByte f1;

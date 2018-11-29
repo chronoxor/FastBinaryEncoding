@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import proto.*
 
-// Fast Binary Encoding OrderType final model class
+// Fast Binary Encoding OrderType final model
 class FinalModelOrderType(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size

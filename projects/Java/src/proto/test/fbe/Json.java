@@ -19,7 +19,7 @@ import test.*;
 
 import com.google.gson.*;
 
-// Fast Binary Encoding test JSON class
+// Fast Binary Encoding test JSON engine
 public final class Json
 {
     private static final Gson _engine;

@@ -344,7 +344,7 @@ class ReadBuffer extends BaseBuffer {
 exports.ReadBuffer = ReadBuffer
 
 /**
- * Fast Binary Encoding base model class
+ * Fast Binary Encoding base model
  */
 class Model {
   /**
@@ -497,7 +497,7 @@ class Model {
 exports.Model = Model
 
 /**
- * Fast Binary Encoding base field model class
+ * Fast Binary Encoding base field model
  */
 class FieldModelBase {
   /**
@@ -1072,7 +1072,7 @@ class FieldModelBase {
 exports.FieldModelBase = FieldModelBase
 
 /**
- * Fast Binary Encoding field model class
+ * Fast Binary Encoding field model
  */
 class FieldModel extends FieldModelBase {
   /**
@@ -1088,7 +1088,7 @@ class FieldModel extends FieldModelBase {
 exports.FieldModel = FieldModel
 
 /**
- * Fast Binary Encoding bool field model class
+ * Fast Binary Encoding bool field model
  */
 class FieldModelBool extends FieldModel {
   /**
@@ -1132,7 +1132,7 @@ class FieldModelBool extends FieldModel {
 exports.FieldModelBool = FieldModelBool
 
 /**
- * Fast Binary Encoding byte field model class
+ * Fast Binary Encoding byte field model
  */
 class FieldModelByte extends FieldModel {
   /**
@@ -1176,7 +1176,7 @@ class FieldModelByte extends FieldModel {
 exports.FieldModelByte = FieldModelByte
 
 /**
- * Fast Binary Encoding char field model class
+ * Fast Binary Encoding char field model
  */
 class FieldModelChar extends FieldModel {
   /**
@@ -1220,7 +1220,7 @@ class FieldModelChar extends FieldModel {
 exports.FieldModelChar = FieldModelChar
 
 /**
- * Fast Binary Encoding wchar field model class
+ * Fast Binary Encoding wchar field model
  */
 class FieldModelWChar extends FieldModel {
   /**
@@ -1264,7 +1264,7 @@ class FieldModelWChar extends FieldModel {
 exports.FieldModelWChar = FieldModelWChar
 
 /**
- * Fast Binary Encoding int8 field model class
+ * Fast Binary Encoding int8 field model
  */
 class FieldModelInt8 extends FieldModel {
   /**
@@ -1308,7 +1308,7 @@ class FieldModelInt8 extends FieldModel {
 exports.FieldModelInt8 = FieldModelInt8
 
 /**
- * Fast Binary Encoding uint8 field model class
+ * Fast Binary Encoding uint8 field model
  */
 class FieldModelUInt8 extends FieldModel {
   /**
@@ -1352,7 +1352,7 @@ class FieldModelUInt8 extends FieldModel {
 exports.FieldModelUInt8 = FieldModelUInt8
 
 /**
- * Fast Binary Encoding int16 field model class
+ * Fast Binary Encoding int16 field model
  */
 class FieldModelInt16 extends FieldModel {
   /**
@@ -1396,7 +1396,7 @@ class FieldModelInt16 extends FieldModel {
 exports.FieldModelInt16 = FieldModelInt16
 
 /**
- * Fast Binary Encoding uint16 field model class
+ * Fast Binary Encoding uint16 field model
  */
 class FieldModelUInt16 extends FieldModel {
   /**
@@ -1440,7 +1440,7 @@ class FieldModelUInt16 extends FieldModel {
 exports.FieldModelUInt16 = FieldModelUInt16
 
 /**
- * Fast Binary Encoding int32 field model class
+ * Fast Binary Encoding int32 field model
  */
 class FieldModelInt32 extends FieldModel {
   /**
@@ -1484,7 +1484,7 @@ class FieldModelInt32 extends FieldModel {
 exports.FieldModelInt32 = FieldModelInt32
 
 /**
- * Fast Binary Encoding uint32 field model class
+ * Fast Binary Encoding uint32 field model
  */
 class FieldModelUInt32 extends FieldModel {
   /**
@@ -1528,7 +1528,7 @@ class FieldModelUInt32 extends FieldModel {
 exports.FieldModelUInt32 = FieldModelUInt32
 
 /**
- * Fast Binary Encoding int64 field model class
+ * Fast Binary Encoding int64 field model
  */
 class FieldModelInt64 extends FieldModel {
   /**
@@ -1572,7 +1572,7 @@ class FieldModelInt64 extends FieldModel {
 exports.FieldModelInt64 = FieldModelInt64
 
 /**
- * Fast Binary Encoding uint64 field model class
+ * Fast Binary Encoding uint64 field model
  */
 class FieldModelUInt64 extends FieldModel {
   /**
@@ -1616,7 +1616,7 @@ class FieldModelUInt64 extends FieldModel {
 exports.FieldModelUInt64 = FieldModelUInt64
 
 /**
- * Fast Binary Encoding float field model class
+ * Fast Binary Encoding float field model
  */
 class FieldModelFloat extends FieldModel {
   /**
@@ -1660,7 +1660,7 @@ class FieldModelFloat extends FieldModel {
 exports.FieldModelFloat = FieldModelFloat
 
 /**
- * Fast Binary Encoding double field model class
+ * Fast Binary Encoding double field model
  */
 class FieldModelDouble extends FieldModel {
   /**
@@ -1704,7 +1704,7 @@ class FieldModelDouble extends FieldModel {
 exports.FieldModelDouble = FieldModelDouble
 
 /**
- * Fast Binary Encoding decimal field model class
+ * Fast Binary Encoding decimal field model
  */
 class FieldModelDecimal extends FieldModel {
   /**
@@ -1803,7 +1803,7 @@ class FieldModelDecimal extends FieldModel {
 exports.FieldModelDecimal = FieldModelDecimal
 
 /**
- * Fast Binary Encoding timestamp field model class
+ * Fast Binary Encoding timestamp field model
  */
 class FieldModelTimestamp extends FieldModel {
   /**
@@ -1849,7 +1849,7 @@ class FieldModelTimestamp extends FieldModel {
 exports.FieldModelTimestamp = FieldModelTimestamp
 
 /**
- * Fast Binary Encoding UUID field model class
+ * Fast Binary Encoding UUID field model
  */
 class FieldModelUUID extends FieldModel {
   /**
@@ -1893,7 +1893,7 @@ class FieldModelUUID extends FieldModel {
 exports.FieldModelUUID = FieldModelUUID
 
 /**
- * Fast Binary Encoding bytes field model class
+ * Fast Binary Encoding bytes field model
  */
 class FieldModelBytes extends FieldModel {
   /**
@@ -2004,7 +2004,7 @@ class FieldModelBytes extends FieldModel {
 exports.FieldModelBytes = FieldModelBytes
 
 /**
- * Fast Binary Encoding string field model class
+ * Fast Binary Encoding string field model
  */
 class FieldModelString extends FieldModel {
   /**
@@ -2115,7 +2115,7 @@ class FieldModelString extends FieldModel {
 exports.FieldModelString = FieldModelString
 
 /**
- * Fast Binary Encoding optional field model class
+ * Fast Binary Encoding optional field model
  */
 class FieldModelOptional extends FieldModel {
   /**
@@ -2312,7 +2312,7 @@ class FieldModelOptional extends FieldModel {
 exports.FieldModelOptional = FieldModelOptional
 
 /**
- * Fast Binary Encoding array field model class
+ * Fast Binary Encoding array field model
  */
 class FieldModelArray extends FieldModel {
   /**
@@ -2444,7 +2444,7 @@ class FieldModelArray extends FieldModel {
 exports.FieldModelArray = FieldModelArray
 
 /**
- * Fast Binary Encoding vector field model class
+ * Fast Binary Encoding vector field model
  */
 class FieldModelVector extends FieldModel {
   /**
@@ -2648,7 +2648,7 @@ class FieldModelVector extends FieldModel {
 exports.FieldModelVector = FieldModelVector
 
 /**
- * Fast Binary Encoding set field model class
+ * Fast Binary Encoding set field model
  */
 class FieldModelSet extends FieldModel {
   /**
@@ -2852,7 +2852,7 @@ class FieldModelSet extends FieldModel {
 exports.FieldModelSet = FieldModelSet
 
 /**
- * Fast Binary Encoding map field model class
+ * Fast Binary Encoding map field model
  */
 class FieldModelMap extends FieldModel {
   /**
@@ -3076,7 +3076,7 @@ class FieldModelMap extends FieldModel {
 exports.FieldModelMap = FieldModelMap
 
 /**
- * Fast Binary Encoding final model class
+ * Fast Binary Encoding final model
  */
 class FinalModel extends FieldModelBase {
   /**
@@ -3092,7 +3092,7 @@ class FinalModel extends FieldModelBase {
 exports.FinalModel = FinalModel
 
 /**
- * Fast Binary Encoding bool final model class
+ * Fast Binary Encoding bool final model
  */
 class FinalModelBool extends FinalModel {
   /**
@@ -3160,7 +3160,7 @@ class FinalModelBool extends FinalModel {
 exports.FinalModelBool = FinalModelBool
 
 /**
- * Fast Binary Encoding byte final model class
+ * Fast Binary Encoding byte final model
  */
 class FinalModelByte extends FinalModel {
   /**
@@ -3228,7 +3228,7 @@ class FinalModelByte extends FinalModel {
 exports.FinalModelByte = FinalModelByte
 
 /**
- * Fast Binary Encoding char final model class
+ * Fast Binary Encoding char final model
  */
 class FinalModelChar extends FinalModel {
   /**
@@ -3296,7 +3296,7 @@ class FinalModelChar extends FinalModel {
 exports.FinalModelChar = FinalModelChar
 
 /**
- * Fast Binary Encoding wchar final model class
+ * Fast Binary Encoding wchar final model
  */
 class FinalModelWChar extends FinalModel {
   /**
@@ -3364,7 +3364,7 @@ class FinalModelWChar extends FinalModel {
 exports.FinalModelWChar = FinalModelWChar
 
 /**
- * Fast Binary Encoding int8 final model class
+ * Fast Binary Encoding int8 final model
  */
 class FinalModelInt8 extends FinalModel {
   /**
@@ -3432,7 +3432,7 @@ class FinalModelInt8 extends FinalModel {
 exports.FinalModelInt8 = FinalModelInt8
 
 /**
- * Fast Binary Encoding uint8 final model class
+ * Fast Binary Encoding uint8 final model
  */
 class FinalModelUInt8 extends FinalModel {
   /**
@@ -3500,7 +3500,7 @@ class FinalModelUInt8 extends FinalModel {
 exports.FinalModelUInt8 = FinalModelUInt8
 
 /**
- * Fast Binary Encoding int16 final model class
+ * Fast Binary Encoding int16 final model
  */
 class FinalModelInt16 extends FinalModel {
   /**
@@ -3568,7 +3568,7 @@ class FinalModelInt16 extends FinalModel {
 exports.FinalModelInt16 = FinalModelInt16
 
 /**
- * Fast Binary Encoding uint16 final model class
+ * Fast Binary Encoding uint16 final model
  */
 class FinalModelUInt16 extends FinalModel {
   /**
@@ -3636,7 +3636,7 @@ class FinalModelUInt16 extends FinalModel {
 exports.FinalModelUInt16 = FinalModelUInt16
 
 /**
- * Fast Binary Encoding int32 final model class
+ * Fast Binary Encoding int32 final model
  */
 class FinalModelInt32 extends FinalModel {
   /**
@@ -3704,7 +3704,7 @@ class FinalModelInt32 extends FinalModel {
 exports.FinalModelInt32 = FinalModelInt32
 
 /**
- * Fast Binary Encoding uint32 final model class
+ * Fast Binary Encoding uint32 final model
  */
 class FinalModelUInt32 extends FinalModel {
   /**
@@ -3772,7 +3772,7 @@ class FinalModelUInt32 extends FinalModel {
 exports.FinalModelUInt32 = FinalModelUInt32
 
 /**
- * Fast Binary Encoding int64 final model class
+ * Fast Binary Encoding int64 final model
  */
 class FinalModelInt64 extends FinalModel {
   /**
@@ -3840,7 +3840,7 @@ class FinalModelInt64 extends FinalModel {
 exports.FinalModelInt64 = FinalModelInt64
 
 /**
- * Fast Binary Encoding uint64 final model class
+ * Fast Binary Encoding uint64 final model
  */
 class FinalModelUInt64 extends FinalModel {
   /**
@@ -3908,7 +3908,7 @@ class FinalModelUInt64 extends FinalModel {
 exports.FinalModelUInt64 = FinalModelUInt64
 
 /**
- * Fast Binary Encoding float final model class
+ * Fast Binary Encoding float final model
  */
 class FinalModelFloat extends FinalModel {
   /**
@@ -3976,7 +3976,7 @@ class FinalModelFloat extends FinalModel {
 exports.FinalModelFloat = FinalModelFloat
 
 /**
- * Fast Binary Encoding double final model class
+ * Fast Binary Encoding double final model
  */
 class FinalModelDouble extends FinalModel {
   /**
@@ -4044,7 +4044,7 @@ class FinalModelDouble extends FinalModel {
 exports.FinalModelDouble = FinalModelDouble
 
 /**
- * Fast Binary Encoding decimal final model class
+ * Fast Binary Encoding decimal final model
  */
 class FinalModelDecimal extends FinalModel {
   /**
@@ -4167,7 +4167,7 @@ class FinalModelDecimal extends FinalModel {
 exports.FinalModelDecimal = FinalModelDecimal
 
 /**
- * Fast Binary Encoding timestamp final model class
+ * Fast Binary Encoding timestamp final model
  */
 class FinalModelTimestamp extends FinalModel {
   /**
@@ -4237,7 +4237,7 @@ class FinalModelTimestamp extends FinalModel {
 exports.FinalModelTimestamp = FinalModelTimestamp
 
 /**
- * Fast Binary Encoding UUID final model class
+ * Fast Binary Encoding UUID final model
  */
 class FinalModelUUID extends FinalModel {
   /**
@@ -4305,7 +4305,7 @@ class FinalModelUUID extends FinalModel {
 exports.FinalModelUUID = FinalModelUUID
 
 /**
- * Fast Binary Encoding bytes final model class
+ * Fast Binary Encoding bytes final model
  */
 class FinalModelBytes extends FinalModel {
   /**
@@ -4382,7 +4382,7 @@ class FinalModelBytes extends FinalModel {
 exports.FinalModelBytes = FinalModelBytes
 
 /**
- * Fast Binary Encoding string final model class
+ * Fast Binary Encoding string final model
  */
 class FinalModelString extends FinalModel {
   /**
@@ -4459,7 +4459,7 @@ class FinalModelString extends FinalModel {
 exports.FinalModelString = FinalModelString
 
 /**
- * Fast Binary Encoding optional final model class
+ * Fast Binary Encoding optional final model
  */
 class FinalModelOptional extends FinalModel {
   /**
@@ -4578,7 +4578,7 @@ class FinalModelOptional extends FinalModel {
 exports.FinalModelOptional = FinalModelOptional
 
 /**
- * Fast Binary Encoding array final model class
+ * Fast Binary Encoding array final model
  */
 class FinalModelArray extends FinalModel {
   /**
@@ -4683,7 +4683,7 @@ class FinalModelArray extends FinalModel {
 exports.FinalModelArray = FinalModelArray
 
 /**
- * Fast Binary Encoding vector final model class
+ * Fast Binary Encoding vector final model
  */
 class FinalModelVector extends FinalModel {
   /**
@@ -4795,7 +4795,7 @@ class FinalModelVector extends FinalModel {
 exports.FinalModelVector = FinalModelVector
 
 /**
- * Fast Binary Encoding set final model class
+ * Fast Binary Encoding set final model
  */
 class FinalModelSet extends FinalModel {
   /**
@@ -4907,7 +4907,7 @@ class FinalModelSet extends FinalModel {
 exports.FinalModelSet = FinalModelSet
 
 /**
- * Fast Binary Encoding map final model class
+ * Fast Binary Encoding map final model
  */
 class FinalModelMap extends FinalModel {
   /**
@@ -5043,7 +5043,7 @@ class FinalModelMap extends FinalModel {
 exports.FinalModelMap = FinalModelMap
 
 /**
- * Fast Binary Encoding base sender class
+ * Fast Binary Encoding base sender
  */
 class Sender {
   /**
@@ -5142,7 +5142,7 @@ class Sender {
 exports.Sender = Sender
 
 /**
- * Fast Binary Encoding base receiver class
+ * Fast Binary Encoding base receiver
  */
 class Receiver {
   /**

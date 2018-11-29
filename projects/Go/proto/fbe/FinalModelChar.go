@@ -7,10 +7,15 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding rune final model class
+// Fast Binary Encoding rune final model
 type FinalModelChar struct {
     buffer *Buffer  // Final model buffer
     offset int      // Final model buffer offset
+}
+
+// Create a new final model
+func NewFinalModelChar(buffer *Buffer, offset int) *FinalModelChar {
+    return &FinalModelChar{buffer: buffer, offset: offset}
 }
 
 // Get the allocation size
@@ -28,11 +33,6 @@ func (fm *FinalModelChar) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FinalModelChar) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelChar) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new final model
-func NewFinalModelChar(buffer *Buffer, offset int) *FinalModelChar {
-    return &FinalModelChar{buffer: buffer, offset: offset}
-}
 
 // Check if the value is valid
 func (fm *FinalModelChar) Verify() (bool, int) {

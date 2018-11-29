@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import protoex.*
 
-// Fast Binary Encoding optional Balance final model class
+// Fast Binary Encoding optional Balance final model
 class FinalModelOptionalBalance(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size

@@ -54,7 +54,7 @@ class EnumByte(enum.IntEnum, metaclass=fbe.DefaultEnumMeta):
         return EnumByte(value)
 
 
-# Fast Binary Encoding EnumByte field model class
+# Fast Binary Encoding EnumByte field model
 class FieldModelEnumByte(fbe.FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -83,7 +83,7 @@ class FieldModelEnumByte(fbe.FieldModel):
         self.write_byte(self.fbe_offset, value)
 
 
-# Fast Binary Encoding EnumByte final model class
+# Fast Binary Encoding EnumByte final model
 class FinalModelEnumByte(fbe.FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -162,7 +162,7 @@ class EnumChar(enum.IntEnum, metaclass=fbe.DefaultEnumMeta):
         return EnumChar(value)
 
 
-# Fast Binary Encoding EnumChar field model class
+# Fast Binary Encoding EnumChar field model
 class FieldModelEnumChar(fbe.FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -191,7 +191,7 @@ class FieldModelEnumChar(fbe.FieldModel):
         self.write_uint8(self.fbe_offset, value)
 
 
-# Fast Binary Encoding EnumChar final model class
+# Fast Binary Encoding EnumChar final model
 class FinalModelEnumChar(fbe.FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -270,7 +270,7 @@ class EnumWChar(enum.IntEnum, metaclass=fbe.DefaultEnumMeta):
         return EnumWChar(value)
 
 
-# Fast Binary Encoding EnumWChar field model class
+# Fast Binary Encoding EnumWChar field model
 class FieldModelEnumWChar(fbe.FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -299,7 +299,7 @@ class FieldModelEnumWChar(fbe.FieldModel):
         self.write_uint32(self.fbe_offset, value)
 
 
-# Fast Binary Encoding EnumWChar final model class
+# Fast Binary Encoding EnumWChar final model
 class FinalModelEnumWChar(fbe.FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -378,7 +378,7 @@ class EnumInt8(enum.IntEnum, metaclass=fbe.DefaultEnumMeta):
         return EnumInt8(value)
 
 
-# Fast Binary Encoding EnumInt8 field model class
+# Fast Binary Encoding EnumInt8 field model
 class FieldModelEnumInt8(fbe.FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -407,7 +407,7 @@ class FieldModelEnumInt8(fbe.FieldModel):
         self.write_int8(self.fbe_offset, value)
 
 
-# Fast Binary Encoding EnumInt8 final model class
+# Fast Binary Encoding EnumInt8 final model
 class FinalModelEnumInt8(fbe.FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -486,7 +486,7 @@ class EnumUInt8(enum.IntEnum, metaclass=fbe.DefaultEnumMeta):
         return EnumUInt8(value)
 
 
-# Fast Binary Encoding EnumUInt8 field model class
+# Fast Binary Encoding EnumUInt8 field model
 class FieldModelEnumUInt8(fbe.FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -515,7 +515,7 @@ class FieldModelEnumUInt8(fbe.FieldModel):
         self.write_uint8(self.fbe_offset, value)
 
 
-# Fast Binary Encoding EnumUInt8 final model class
+# Fast Binary Encoding EnumUInt8 final model
 class FinalModelEnumUInt8(fbe.FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -594,7 +594,7 @@ class EnumInt16(enum.IntEnum, metaclass=fbe.DefaultEnumMeta):
         return EnumInt16(value)
 
 
-# Fast Binary Encoding EnumInt16 field model class
+# Fast Binary Encoding EnumInt16 field model
 class FieldModelEnumInt16(fbe.FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -623,7 +623,7 @@ class FieldModelEnumInt16(fbe.FieldModel):
         self.write_int16(self.fbe_offset, value)
 
 
-# Fast Binary Encoding EnumInt16 final model class
+# Fast Binary Encoding EnumInt16 final model
 class FinalModelEnumInt16(fbe.FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -702,7 +702,7 @@ class EnumUInt16(enum.IntEnum, metaclass=fbe.DefaultEnumMeta):
         return EnumUInt16(value)
 
 
-# Fast Binary Encoding EnumUInt16 field model class
+# Fast Binary Encoding EnumUInt16 field model
 class FieldModelEnumUInt16(fbe.FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -731,7 +731,7 @@ class FieldModelEnumUInt16(fbe.FieldModel):
         self.write_uint16(self.fbe_offset, value)
 
 
-# Fast Binary Encoding EnumUInt16 final model class
+# Fast Binary Encoding EnumUInt16 final model
 class FinalModelEnumUInt16(fbe.FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -810,7 +810,7 @@ class EnumInt32(enum.IntEnum, metaclass=fbe.DefaultEnumMeta):
         return EnumInt32(value)
 
 
-# Fast Binary Encoding EnumInt32 field model class
+# Fast Binary Encoding EnumInt32 field model
 class FieldModelEnumInt32(fbe.FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -839,7 +839,7 @@ class FieldModelEnumInt32(fbe.FieldModel):
         self.write_int32(self.fbe_offset, value)
 
 
-# Fast Binary Encoding EnumInt32 final model class
+# Fast Binary Encoding EnumInt32 final model
 class FinalModelEnumInt32(fbe.FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -918,7 +918,7 @@ class EnumUInt32(enum.IntEnum, metaclass=fbe.DefaultEnumMeta):
         return EnumUInt32(value)
 
 
-# Fast Binary Encoding EnumUInt32 field model class
+# Fast Binary Encoding EnumUInt32 field model
 class FieldModelEnumUInt32(fbe.FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -947,7 +947,7 @@ class FieldModelEnumUInt32(fbe.FieldModel):
         self.write_uint32(self.fbe_offset, value)
 
 
-# Fast Binary Encoding EnumUInt32 final model class
+# Fast Binary Encoding EnumUInt32 final model
 class FinalModelEnumUInt32(fbe.FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -1026,7 +1026,7 @@ class EnumInt64(enum.IntEnum, metaclass=fbe.DefaultEnumMeta):
         return EnumInt64(value)
 
 
-# Fast Binary Encoding EnumInt64 field model class
+# Fast Binary Encoding EnumInt64 field model
 class FieldModelEnumInt64(fbe.FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -1055,7 +1055,7 @@ class FieldModelEnumInt64(fbe.FieldModel):
         self.write_int64(self.fbe_offset, value)
 
 
-# Fast Binary Encoding EnumInt64 final model class
+# Fast Binary Encoding EnumInt64 final model
 class FinalModelEnumInt64(fbe.FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -1134,7 +1134,7 @@ class EnumUInt64(enum.IntEnum, metaclass=fbe.DefaultEnumMeta):
         return EnumUInt64(value)
 
 
-# Fast Binary Encoding EnumUInt64 field model class
+# Fast Binary Encoding EnumUInt64 field model
 class FieldModelEnumUInt64(fbe.FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -1163,7 +1163,7 @@ class FieldModelEnumUInt64(fbe.FieldModel):
         self.write_uint64(self.fbe_offset, value)
 
 
-# Fast Binary Encoding EnumUInt64 final model class
+# Fast Binary Encoding EnumUInt64 final model
 class FinalModelEnumUInt64(fbe.FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -3135,7 +3135,7 @@ class FieldModelEnums(fbe.FieldModel):
         self.uint64b5.set(fbe_value.uint64b5)
 
 
-# Fast Binary Encoding Enums model class
+# Fast Binary Encoding Enums model
 class EnumsModel(fbe.Model):
     __slots__ = "_model",
 
@@ -4792,7 +4792,7 @@ class FinalModelEnums(fbe.FinalModel):
         return fbe_current_size
 
 
-# Fast Binary Encoding Enums final model class
+# Fast Binary Encoding Enums final model
 class EnumsFinalModel(fbe.Model):
     __slots__ = "_model",
 
@@ -4861,7 +4861,7 @@ class EnumsFinalModel(fbe.Model):
         self._model.fbe_shift(prev)
 
 
-# Fast Binary Encoding enums sender class
+# Fast Binary Encoding enums sender
 class Sender(fbe.Sender):
     __slots__ = "_enums_model", 
 
@@ -4901,7 +4901,7 @@ class Sender(fbe.Sender):
         raise NotImplementedError("enums.Sender.on_send() not implemented!")
 
 
-# Fast Binary Encoding enums receiver class
+# Fast Binary Encoding enums receiver
 class Receiver(fbe.Receiver):
     __slots__ = "_enums_value", "_enums_model", 
 
@@ -4936,7 +4936,7 @@ class Receiver(fbe.Receiver):
         return False
 
 
-# Fast Binary Encoding enums final sender class
+# Fast Binary Encoding enums final sender
 class FinalSender(fbe.Sender):
     __slots__ = "_enums_model", 
 
@@ -4976,7 +4976,7 @@ class FinalSender(fbe.Sender):
         raise NotImplementedError("enums.Sender.on_send() not implemented!")
 
 
-# Fast Binary Encoding enums final receiver class
+# Fast Binary Encoding enums final receiver
 class FinalReceiver(fbe.Receiver):
     __slots__ = "_enums_value", "_enums_model", 
 

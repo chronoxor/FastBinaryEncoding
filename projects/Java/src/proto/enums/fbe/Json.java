@@ -19,7 +19,7 @@ import enums.*;
 
 import com.google.gson.*;
 
-// Fast Binary Encoding enums JSON class
+// Fast Binary Encoding enums JSON engine
 public final class Json
 {
     private static final Gson _engine;

@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding StructList final model class
+// Fast Binary Encoding StructList final model
 public final class FinalModelStructList extends FinalModel
 {
     public final FinalModelVectorByte f1;

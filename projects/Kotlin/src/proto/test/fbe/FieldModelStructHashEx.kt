@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructHashEx field model class
+// Fast Binary Encoding StructHashEx field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FieldModelStructHashEx(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {

@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import enums.*
 
-// Fast Binary Encoding EnumUInt8 field model class
+// Fast Binary Encoding EnumUInt8 field model
 class FieldModelEnumUInt8(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size

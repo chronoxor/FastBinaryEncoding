@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import protoex.*
 
-// Fast Binary Encoding Order final model class
+// Fast Binary Encoding Order final model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FinalModelOrder(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {

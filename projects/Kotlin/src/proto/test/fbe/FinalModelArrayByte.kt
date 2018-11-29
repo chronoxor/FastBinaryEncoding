@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding Byte array final model class
+// Fast Binary Encoding Byte array final model
 class FinalModelArrayByte(buffer: Buffer, offset: Long, private val _size: Long) : FinalModel(buffer, offset)
 {
     private val _model = FinalModelByte(buffer, offset)

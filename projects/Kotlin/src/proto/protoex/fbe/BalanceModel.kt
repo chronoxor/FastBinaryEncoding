@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import protoex.*
 
-// Fast Binary Encoding Balance model class
+// Fast Binary Encoding Balance model
 class BalanceModel : Model
 {
     val model: FieldModelBalance

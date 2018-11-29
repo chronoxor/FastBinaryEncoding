@@ -8,10 +8,15 @@ package enums
 import "errors"
 import "../fbe"
 
-// Fast Binary Encoding EnumWChar field model class
+// Fast Binary Encoding EnumWChar field model
 type FieldModelEnumWChar struct {
     buffer *fbe.Buffer  // Field model buffer
     offset int          // Field model buffer offset
+}
+
+// Create a new field model
+func NewFieldModelEnumWChar(buffer *fbe.Buffer, offset int) *FieldModelEnumWChar {
+    return &FieldModelEnumWChar{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -29,34 +34,37 @@ func (fm *FieldModelEnumWChar) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelEnumWChar) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new field model
-func NewFieldModelEnumWChar(buffer *fbe.Buffer, offset int) *FieldModelEnumWChar {
-    return &FieldModelEnumWChar{buffer: buffer, offset: offset}
-}
-
 // Check if the value is valid
 func (fm *FieldModelEnumWChar) Verify() bool { return true }
 
 // Get the value
-func (fm *FieldModelEnumWChar) Get() (EnumWChar, error) {
-    return fm.GetDefault(0)
+func (fm *FieldModelEnumWChar) Get() (*EnumWChar, error) {
+    return fm.GetDefault(EnumWChar(0))
 }
 
 // Get the value with provided default value
-func (fm *FieldModelEnumWChar) GetDefault(defaults EnumWChar) (EnumWChar, error) {
+func (fm *FieldModelEnumWChar) GetDefault(defaults EnumWChar) (*EnumWChar, error) {
+    result := defaults
+    return fm.GetValue(&result)
+}
+
+// Get the value by pointer
+func (fm *FieldModelEnumWChar) GetValue(value *EnumWChar) (*EnumWChar, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return EnumWChar(0), nil
+        return value, nil
     }
 
-    return EnumWChar(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())), nil
+    result := EnumWChar(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    value = &result
+    return value, nil
 }
 
 // Set the value
-func (fm *FieldModelEnumWChar) Set(value EnumWChar) error {
+func (fm *FieldModelEnumWChar) Set(value *EnumWChar) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
 
-    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint32(value))
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint32(*value))
     return nil
 }

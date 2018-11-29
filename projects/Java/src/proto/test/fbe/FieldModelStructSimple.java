@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding StructSimple field model class
+// Fast Binary Encoding StructSimple field model
 public final class FieldModelStructSimple extends FieldModel
 {
     public final FieldModelInt32 uid;

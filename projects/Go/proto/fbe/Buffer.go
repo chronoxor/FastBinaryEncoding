@@ -14,17 +14,6 @@ type Buffer struct {
     offset int    // Bytes memory buffer offset
 }
 
-// Is the buffer empty?
-func (b *Buffer) Empty() bool { return (len(b.data) == 0) || (b.size <= 0) }
-// Get bytes memory buffer
-func (b *Buffer) Data() []byte { return b.data }
-// Get bytes memory buffer capacity
-func (b *Buffer) Capacity() int { return len(b.data) }
-// Get bytes memory buffer size
-func (b *Buffer) Size() int { return b.size }
-// Get bytes memory buffer offset
-func (b *Buffer) Offset() int { return b.offset }
-
 // Create an empty buffer
 func NewEmptyBuffer() *Buffer {
     return &Buffer{data: make([]byte, 0)}
@@ -41,6 +30,17 @@ func NewAttachedBuffer(buffer []byte, offset int, size int) *Buffer {
     result.AttachBuffer(buffer, offset, size)
     return result
 }
+
+// Is the buffer empty?
+func (b *Buffer) Empty() bool { return (len(b.data) == 0) || (b.size <= 0) }
+// Get bytes memory buffer
+func (b *Buffer) Data() []byte { return b.data }
+// Get bytes memory buffer capacity
+func (b *Buffer) Capacity() int { return len(b.data) }
+// Get bytes memory buffer size
+func (b *Buffer) Size() int { return b.size }
+// Get bytes memory buffer offset
+func (b *Buffer) Offset() int { return b.offset }
 
 // Attach an empty memory buffer
 func (b *Buffer) AttachNew() {
@@ -150,6 +150,16 @@ func (b *Buffer) Resize(size int) {
 func (b *Buffer) Reset() {
     b.size = 0
     b.offset = 0
+}
+
+// Shift the current write buffer offset
+func (b *Buffer) Shift(offset int) {
+    b.offset += offset
+}
+
+// Unshift the current write buffer offset
+func (b *Buffer) Unshift(offset int) {
+    b.offset -= offset
 }
 
 // Buffer I/O methods

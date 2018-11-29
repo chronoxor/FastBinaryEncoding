@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import proto.*
 
-// Fast Binary Encoding Balance field model class
+// Fast Binary Encoding Balance field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FieldModelBalance(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {

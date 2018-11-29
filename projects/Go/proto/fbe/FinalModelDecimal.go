@@ -9,10 +9,15 @@ import "errors"
 import "math/big"
 import "github.com/shopspring/decimal"
 
-// Fast Binary Encoding decimal final model class
+// Fast Binary Encoding decimal final model
 type FinalModelDecimal struct {
     buffer *Buffer  // Final model buffer
     offset int      // Final model buffer offset
+}
+
+// Create a new decimal final model
+func NewFinalModelDecimal(buffer *Buffer, offset int) *FinalModelDecimal {
+    return &FinalModelDecimal{buffer: buffer, offset: offset}
 }
 
 // Get the allocation size
@@ -30,11 +35,6 @@ func (fm *FinalModelDecimal) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FinalModelDecimal) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelDecimal) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new decimal final model
-func NewFinalModelDecimal(buffer *Buffer, offset int) *FinalModelDecimal {
-    return &FinalModelDecimal{buffer: buffer, offset: offset}
-}
 
 // Check if the decimal value is valid
 func (fm *FinalModelDecimal) Verify() (bool, int) {

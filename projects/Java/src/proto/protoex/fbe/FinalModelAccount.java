@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import protoex.*;
 
-// Fast Binary Encoding Account final model class
+// Fast Binary Encoding Account final model
 public final class FinalModelAccount extends FinalModel
 {
     public final FinalModelInt32 uid;

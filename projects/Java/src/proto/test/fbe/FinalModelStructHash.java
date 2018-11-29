@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding StructHash final model class
+// Fast Binary Encoding StructHash final model
 public final class FinalModelStructHash extends FinalModel
 {
     public final FinalModelMapStringByte f1;

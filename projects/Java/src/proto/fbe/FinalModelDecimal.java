@@ -14,7 +14,7 @@ import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
 
-// Fast Binary Encoding decimal final model class
+// Fast Binary Encoding decimal final model
 public final class FinalModelDecimal extends FinalModel
 {
     public FinalModelDecimal(Buffer buffer, long offset) { super(buffer, offset); }

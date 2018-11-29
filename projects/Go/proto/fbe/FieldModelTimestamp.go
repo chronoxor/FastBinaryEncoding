@@ -7,10 +7,15 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding timestamp field model class
+// Fast Binary Encoding timestamp field model
 type FieldModelTimestamp struct {
     buffer *Buffer  // Field model buffer
     offset int      // Field model buffer offset
+}
+
+// Create a new timestamp field model
+func NewFieldModelTimestamp(buffer *Buffer, offset int) *FieldModelTimestamp {
+    return &FieldModelTimestamp{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -27,11 +32,6 @@ func (fm *FieldModelTimestamp) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FieldModelTimestamp) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelTimestamp) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new timestamp field model
-func NewFieldModelTimestamp(buffer *Buffer, offset int) *FieldModelTimestamp {
-    return &FieldModelTimestamp{buffer: buffer, offset: offset}
-}
 
 // Check if the timestamp value is valid
 func (fm *FieldModelTimestamp) Verify() bool { return true }

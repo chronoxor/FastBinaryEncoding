@@ -14,7 +14,7 @@ import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
 
-// Fast Binary Encoding UUID field model class
+// Fast Binary Encoding UUID field model
 public final class FieldModelUUID extends FieldModel
 {
     public FieldModelUUID(Buffer buffer, long offset) { super(buffer, offset); }

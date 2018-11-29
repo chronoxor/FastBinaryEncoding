@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional protoState field model class
+// Fast Binary Encoding optional protoState field model
 public final class FieldModelOptionalprotoState extends FieldModel
 {
     public FieldModelOptionalprotoState(Buffer buffer, long offset)

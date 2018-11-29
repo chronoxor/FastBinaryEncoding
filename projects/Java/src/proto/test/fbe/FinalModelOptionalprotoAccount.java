@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional protoAccount final model class
+// Fast Binary Encoding optional protoAccount final model
 public final class FinalModelOptionalprotoAccount extends FinalModel
 {
     public FinalModelOptionalprotoAccount(Buffer buffer, long offset)

@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional FlagsTyped field model class
+// Fast Binary Encoding optional FlagsTyped field model
 public final class FieldModelOptionalFlagsTyped extends FieldModel
 {
     public FieldModelOptionalFlagsTyped(Buffer buffer, long offset)

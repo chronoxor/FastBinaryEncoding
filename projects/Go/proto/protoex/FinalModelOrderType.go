@@ -8,10 +8,15 @@ package protoex
 import "errors"
 import "../fbe"
 
-// Fast Binary Encoding OrderType final model class
+// Fast Binary Encoding OrderType final model
 type FinalModelOrderType struct {
     buffer *fbe.Buffer  // Final model buffer
     offset int          // Final model buffer offset
+}
+
+// Create a new final model
+func NewFinalModelOrderType(buffer *fbe.Buffer, offset int) *FinalModelOrderType {
+    return &FinalModelOrderType{buffer: buffer, offset: offset}
 }
 
 // Get the allocation size
@@ -30,11 +35,6 @@ func (fm *FinalModelOrderType) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelOrderType) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new final model
-func NewFinalModelOrderType(buffer *fbe.Buffer, offset int) *FinalModelOrderType {
-    return &FinalModelOrderType{buffer: buffer, offset: offset}
-}
-
 // Check if the value is valid
 func (fm *FinalModelOrderType) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
@@ -45,20 +45,33 @@ func (fm *FinalModelOrderType) Verify() (bool, int) {
 }
 
 // Get the value
-func (fm *FinalModelOrderType) Get() (OrderType, int, error) {
+func (fm *FinalModelOrderType) Get() (*OrderType, int, error) {
+    return fm.GetDefault(OrderType(0))
+}
+
+// Get the value with provided default value
+func (fm *FinalModelOrderType) GetDefault(defaults OrderType) (*OrderType, int, error) {
+    result := defaults
+    return fm.GetValue(&result)
+}
+
+// Get the value by pointer
+func (fm *FinalModelOrderType) GetValue(value *OrderType) (*OrderType, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return OrderType(0), 0, errors.New("model is broken")
+        return value, 0, errors.New("model is broken")
     }
 
-    return OrderType(fbe.ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())), fm.FBESize(), nil
+    result := OrderType(fbe.ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    value = &result
+    return value, fm.FBESize(), nil
 }
 
 // Set the value
-func (fm *FinalModelOrderType) Set(value OrderType) (int, error) {
+func (fm *FinalModelOrderType) Set(value *OrderType) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0, errors.New("model is broken")
     }
 
-    fbe.WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), byte(value))
+    fbe.WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), byte(*value))
     return fm.FBESize(), nil
 }

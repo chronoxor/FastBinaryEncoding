@@ -15,7 +15,7 @@ import java.nio.charset.*
 import java.time.*
 import java.util.*
 
-// Fast Binary Encoding Double final model class
+// Fast Binary Encoding Double final model
 class FinalModelDouble(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size

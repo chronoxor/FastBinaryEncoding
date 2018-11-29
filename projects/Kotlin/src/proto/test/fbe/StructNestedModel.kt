@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructNested model class
+// Fast Binary Encoding StructNested model
 class StructNestedModel : Model
 {
     val model: FieldModelStructNested

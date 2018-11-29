@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructMap field model class
+// Fast Binary Encoding StructMap field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FieldModelStructMap(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {

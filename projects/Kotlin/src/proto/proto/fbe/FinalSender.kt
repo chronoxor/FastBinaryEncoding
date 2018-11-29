@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import proto.*
 
-// Fast Binary Encoding proto final sender class
+// Fast Binary Encoding proto final sender
 @Suppress("MemberVisibilityCanBePrivate", "PropertyName")
 open class FinalSender : fbe.Sender
 {

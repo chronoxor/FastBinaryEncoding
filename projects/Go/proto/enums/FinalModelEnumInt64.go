@@ -8,10 +8,15 @@ package enums
 import "errors"
 import "../fbe"
 
-// Fast Binary Encoding EnumInt64 final model class
+// Fast Binary Encoding EnumInt64 final model
 type FinalModelEnumInt64 struct {
     buffer *fbe.Buffer  // Final model buffer
     offset int          // Final model buffer offset
+}
+
+// Create a new final model
+func NewFinalModelEnumInt64(buffer *fbe.Buffer, offset int) *FinalModelEnumInt64 {
+    return &FinalModelEnumInt64{buffer: buffer, offset: offset}
 }
 
 // Get the allocation size
@@ -30,11 +35,6 @@ func (fm *FinalModelEnumInt64) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelEnumInt64) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new final model
-func NewFinalModelEnumInt64(buffer *fbe.Buffer, offset int) *FinalModelEnumInt64 {
-    return &FinalModelEnumInt64{buffer: buffer, offset: offset}
-}
-
 // Check if the value is valid
 func (fm *FinalModelEnumInt64) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
@@ -45,20 +45,33 @@ func (fm *FinalModelEnumInt64) Verify() (bool, int) {
 }
 
 // Get the value
-func (fm *FinalModelEnumInt64) Get() (EnumInt64, int, error) {
+func (fm *FinalModelEnumInt64) Get() (*EnumInt64, int, error) {
+    return fm.GetDefault(EnumInt64(0))
+}
+
+// Get the value with provided default value
+func (fm *FinalModelEnumInt64) GetDefault(defaults EnumInt64) (*EnumInt64, int, error) {
+    result := defaults
+    return fm.GetValue(&result)
+}
+
+// Get the value by pointer
+func (fm *FinalModelEnumInt64) GetValue(value *EnumInt64) (*EnumInt64, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return EnumInt64(0), 0, errors.New("model is broken")
+        return value, 0, errors.New("model is broken")
     }
 
-    return EnumInt64(fbe.ReadInt64(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())), fm.FBESize(), nil
+    result := EnumInt64(fbe.ReadInt64(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    value = &result
+    return value, fm.FBESize(), nil
 }
 
 // Set the value
-func (fm *FinalModelEnumInt64) Set(value EnumInt64) (int, error) {
+func (fm *FinalModelEnumInt64) Set(value *EnumInt64) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0, errors.New("model is broken")
     }
 
-    fbe.WriteInt64(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), int64(value))
+    fbe.WriteInt64(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), int64(*value))
     return fm.FBESize(), nil
 }

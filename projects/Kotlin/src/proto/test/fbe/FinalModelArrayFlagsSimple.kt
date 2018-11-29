@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding FlagsSimple array final model class
+// Fast Binary Encoding FlagsSimple array final model
 class FinalModelArrayFlagsSimple(buffer: Buffer, offset: Long, private val _size: Long) : FinalModel(buffer, offset)
 {
     private val _model = FinalModelFlagsSimple(buffer, offset)

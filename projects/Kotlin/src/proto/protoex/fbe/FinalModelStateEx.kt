@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import protoex.*
 
-// Fast Binary Encoding StateEx final model class
+// Fast Binary Encoding StateEx final model
 class FinalModelStateEx(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size

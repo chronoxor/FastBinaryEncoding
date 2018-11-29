@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional Timestamp field model class
+// Fast Binary Encoding optional Timestamp field model
 public final class FieldModelOptionalTimestamp extends FieldModel
 {
     public FieldModelOptionalTimestamp(Buffer buffer, long offset)

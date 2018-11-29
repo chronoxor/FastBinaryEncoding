@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding StructVector final model class
+// Fast Binary Encoding StructVector final model
 public final class StructVectorFinalModel extends Model
 {
     private final FinalModelStructVector _model;

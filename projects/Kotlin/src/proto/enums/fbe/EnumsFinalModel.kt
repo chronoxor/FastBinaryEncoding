@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import enums.*
 
-// Fast Binary Encoding Enums final model class
+// Fast Binary Encoding Enums final model
 class EnumsFinalModel : Model
 {
     private val _model: FinalModelEnums

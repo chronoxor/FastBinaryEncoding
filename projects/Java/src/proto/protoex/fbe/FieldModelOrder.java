@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import protoex.*;
 
-// Fast Binary Encoding Order field model class
+// Fast Binary Encoding Order field model
 public final class FieldModelOrder extends FieldModel
 {
     public final FieldModelInt32 uid;

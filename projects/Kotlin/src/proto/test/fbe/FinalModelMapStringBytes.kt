@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding String->Bytes map final model class
+// Fast Binary Encoding String->Bytes map final model
 class FinalModelMapStringBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     private val _modelKey = FinalModelString(buffer, offset)

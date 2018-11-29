@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding OptionalStructSimple vector final model class
+// Fast Binary Encoding OptionalStructSimple vector final model
 class FinalModelVectorOptionalStructSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     private val _model = FinalModelOptionalStructSimple(buffer, offset)

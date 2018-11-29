@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding StructMap final model class
+// Fast Binary Encoding StructMap final model
 public final class FinalModelStructMap extends FinalModel
 {
     public final FinalModelMapInt32Byte f1;

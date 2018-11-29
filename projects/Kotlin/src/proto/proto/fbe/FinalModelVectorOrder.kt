@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import proto.*
 
-// Fast Binary Encoding Order vector final model class
+// Fast Binary Encoding Order vector final model
 class FinalModelVectorOrder(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     private val _model = FinalModelOrder(buffer, offset)

@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding StructSimple->StructNested map field model class
+// Fast Binary Encoding StructSimple->StructNested map field model
 public final class FieldModelMapStructSimpleStructNested extends FieldModel
 {
     private final FieldModelStructSimple _modelKey;

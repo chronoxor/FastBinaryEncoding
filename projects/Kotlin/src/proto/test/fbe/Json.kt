@@ -20,7 +20,7 @@ import test.*
 
 import com.google.gson.*
 
-// Fast Binary Encoding test JSON class
+// Fast Binary Encoding test JSON engine
 object Json
 {
     // Get the JSON engine

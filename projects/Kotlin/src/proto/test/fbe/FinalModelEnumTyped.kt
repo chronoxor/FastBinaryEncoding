@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding EnumTyped final model class
+// Fast Binary Encoding EnumTyped final model
 class FinalModelEnumTyped(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size

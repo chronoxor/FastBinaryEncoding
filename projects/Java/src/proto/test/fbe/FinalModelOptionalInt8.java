@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional Int8 final model class
+// Fast Binary Encoding optional Int8 final model
 public final class FinalModelOptionalInt8 extends FinalModel
 {
     public FinalModelOptionalInt8(Buffer buffer, long offset)

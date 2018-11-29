@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding StructSimple->OptionalStructNested map final model class
+// Fast Binary Encoding StructSimple->OptionalStructNested map final model
 public final class FinalModelMapStructSimpleOptionalStructNested extends FinalModel
 {
     private final FinalModelStructSimple _modelKey;

@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding OptionalFlagsSimple vector final model class
+// Fast Binary Encoding OptionalFlagsSimple vector final model
 public final class FinalModelVectorOptionalFlagsSimple extends FinalModel
 {
     private final FinalModelOptionalFlagsSimple _model;

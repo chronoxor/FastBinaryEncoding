@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding String->OptionalStructSimple map final model class
+// Fast Binary Encoding String->OptionalStructSimple map final model
 class FinalModelMapStringOptionalStructSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     private val _modelKey = FinalModelString(buffer, offset)

@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructVector final model class
+// Fast Binary Encoding StructVector final model
 class StructVectorFinalModel : Model
 {
     private val _model: FinalModelStructVector

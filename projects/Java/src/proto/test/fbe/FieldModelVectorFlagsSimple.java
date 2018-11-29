@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding FlagsSimple vector field model class
+// Fast Binary Encoding FlagsSimple vector field model
 public final class FieldModelVectorFlagsSimple extends FieldModel
 {
     private final FieldModelFlagsSimple _model;

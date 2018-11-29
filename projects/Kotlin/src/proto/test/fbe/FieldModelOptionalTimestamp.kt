@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding optional Timestamp field model class
+// Fast Binary Encoding optional Timestamp field model
 class FieldModelOptionalTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size

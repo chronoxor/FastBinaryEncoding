@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding optional protoOrderType field model class
+// Fast Binary Encoding optional protoOrderType field model
 class FieldModelOptionalprotoOrderType(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size

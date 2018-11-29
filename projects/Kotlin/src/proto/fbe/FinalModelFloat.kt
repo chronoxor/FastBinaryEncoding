@@ -15,7 +15,7 @@ import java.nio.charset.*
 import java.time.*
 import java.util.*
 
-// Fast Binary Encoding Float final model class
+// Fast Binary Encoding Float final model
 class FinalModelFloat(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size

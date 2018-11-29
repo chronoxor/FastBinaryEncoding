@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding StructMap field model class
+// Fast Binary Encoding StructMap field model
 public final class FieldModelStructMap extends FieldModel
 {
     public final FieldModelMapInt32Byte f1;

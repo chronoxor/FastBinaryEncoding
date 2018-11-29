@@ -8,10 +8,15 @@ package enums
 import "errors"
 import "../fbe"
 
-// Fast Binary Encoding EnumInt16 field model class
+// Fast Binary Encoding EnumInt16 field model
 type FieldModelEnumInt16 struct {
     buffer *fbe.Buffer  // Field model buffer
     offset int          // Field model buffer offset
+}
+
+// Create a new field model
+func NewFieldModelEnumInt16(buffer *fbe.Buffer, offset int) *FieldModelEnumInt16 {
+    return &FieldModelEnumInt16{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -29,34 +34,37 @@ func (fm *FieldModelEnumInt16) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelEnumInt16) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new field model
-func NewFieldModelEnumInt16(buffer *fbe.Buffer, offset int) *FieldModelEnumInt16 {
-    return &FieldModelEnumInt16{buffer: buffer, offset: offset}
-}
-
 // Check if the value is valid
 func (fm *FieldModelEnumInt16) Verify() bool { return true }
 
 // Get the value
-func (fm *FieldModelEnumInt16) Get() (EnumInt16, error) {
-    return fm.GetDefault(0)
+func (fm *FieldModelEnumInt16) Get() (*EnumInt16, error) {
+    return fm.GetDefault(EnumInt16(0))
 }
 
 // Get the value with provided default value
-func (fm *FieldModelEnumInt16) GetDefault(defaults EnumInt16) (EnumInt16, error) {
+func (fm *FieldModelEnumInt16) GetDefault(defaults EnumInt16) (*EnumInt16, error) {
+    result := defaults
+    return fm.GetValue(&result)
+}
+
+// Get the value by pointer
+func (fm *FieldModelEnumInt16) GetValue(value *EnumInt16) (*EnumInt16, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return EnumInt16(0), nil
+        return value, nil
     }
 
-    return EnumInt16(fbe.ReadInt16(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())), nil
+    result := EnumInt16(fbe.ReadInt16(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    value = &result
+    return value, nil
 }
 
 // Set the value
-func (fm *FieldModelEnumInt16) Set(value EnumInt16) error {
+func (fm *FieldModelEnumInt16) Set(value *EnumInt16) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
 
-    fbe.WriteInt16(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), int16(value))
+    fbe.WriteInt16(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), int16(*value))
     return nil
 }

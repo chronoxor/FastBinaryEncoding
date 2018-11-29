@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding StructHashEx final model class
+// Fast Binary Encoding StructHashEx final model
 public final class StructHashExFinalModel extends Model
 {
     private final FinalModelStructHashEx _model;

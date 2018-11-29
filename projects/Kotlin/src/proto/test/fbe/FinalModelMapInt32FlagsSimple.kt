@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding Int32->FlagsSimple map final model class
+// Fast Binary Encoding Int32->FlagsSimple map final model
 class FinalModelMapInt32FlagsSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     private val _modelKey = FinalModelInt32(buffer, offset)

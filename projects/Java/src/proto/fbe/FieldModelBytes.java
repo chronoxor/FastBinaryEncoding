@@ -14,7 +14,7 @@ import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
 
-// Fast Binary Encoding bytes field model class
+// Fast Binary Encoding bytes field model
 public final class FieldModelBytes extends FieldModel
 {
     public FieldModelBytes(Buffer buffer, long offset) { super(buffer, offset); }

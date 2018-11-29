@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import enums.*;
 
-// Fast Binary Encoding enums final receiver class
+// Fast Binary Encoding enums final receiver
 public class FinalReceiver extends fbe.Receiver
 {
     // Receiver values accessors

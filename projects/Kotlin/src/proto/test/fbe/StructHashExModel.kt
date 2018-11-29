@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructHashEx model class
+// Fast Binary Encoding StructHashEx model
 class StructHashExModel : Model
 {
     val model: FieldModelStructHashEx

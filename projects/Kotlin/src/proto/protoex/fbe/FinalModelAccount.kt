@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import protoex.*
 
-// Fast Binary Encoding Account final model class
+// Fast Binary Encoding Account final model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FinalModelAccount(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {

@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional StructSimple final model class
+// Fast Binary Encoding optional StructSimple final model
 public final class FinalModelOptionalStructSimple extends FinalModel
 {
     public FinalModelOptionalStructSimple(Buffer buffer, long offset)

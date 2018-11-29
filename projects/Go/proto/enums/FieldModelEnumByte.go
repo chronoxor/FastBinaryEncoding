@@ -8,10 +8,15 @@ package enums
 import "errors"
 import "../fbe"
 
-// Fast Binary Encoding EnumByte field model class
+// Fast Binary Encoding EnumByte field model
 type FieldModelEnumByte struct {
     buffer *fbe.Buffer  // Field model buffer
     offset int          // Field model buffer offset
+}
+
+// Create a new field model
+func NewFieldModelEnumByte(buffer *fbe.Buffer, offset int) *FieldModelEnumByte {
+    return &FieldModelEnumByte{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -29,34 +34,37 @@ func (fm *FieldModelEnumByte) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelEnumByte) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new field model
-func NewFieldModelEnumByte(buffer *fbe.Buffer, offset int) *FieldModelEnumByte {
-    return &FieldModelEnumByte{buffer: buffer, offset: offset}
-}
-
 // Check if the value is valid
 func (fm *FieldModelEnumByte) Verify() bool { return true }
 
 // Get the value
-func (fm *FieldModelEnumByte) Get() (EnumByte, error) {
-    return fm.GetDefault(0)
+func (fm *FieldModelEnumByte) Get() (*EnumByte, error) {
+    return fm.GetDefault(EnumByte(0))
 }
 
 // Get the value with provided default value
-func (fm *FieldModelEnumByte) GetDefault(defaults EnumByte) (EnumByte, error) {
+func (fm *FieldModelEnumByte) GetDefault(defaults EnumByte) (*EnumByte, error) {
+    result := defaults
+    return fm.GetValue(&result)
+}
+
+// Get the value by pointer
+func (fm *FieldModelEnumByte) GetValue(value *EnumByte) (*EnumByte, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return EnumByte(0), nil
+        return value, nil
     }
 
-    return EnumByte(fbe.ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())), nil
+    result := EnumByte(fbe.ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    value = &result
+    return value, nil
 }
 
 // Set the value
-func (fm *FieldModelEnumByte) Set(value EnumByte) error {
+func (fm *FieldModelEnumByte) Set(value *EnumByte) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
 
-    fbe.WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), byte(value))
+    fbe.WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), byte(*value))
     return nil
 }

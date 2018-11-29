@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding OptionalBytes array field model class
+// Fast Binary Encoding OptionalBytes array field model
 public final class FieldModelArrayOptionalBytes extends FieldModel
 {
     private final FieldModelOptionalBytes _model;

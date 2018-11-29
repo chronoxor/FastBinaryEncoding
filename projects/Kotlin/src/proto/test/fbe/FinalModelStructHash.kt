@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructHash final model class
+// Fast Binary Encoding StructHash final model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FinalModelStructHash(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {

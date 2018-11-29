@@ -15,7 +15,7 @@ import java.nio.charset.*
 import java.time.*
 import java.util.*
 
-// Fast Binary Encoding ULong field model class
+// Fast Binary Encoding ULong field model
 class FieldModelUInt64(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size

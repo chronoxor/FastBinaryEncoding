@@ -14,7 +14,7 @@ import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
 
-// Fast Binary Encoding long final model class
+// Fast Binary Encoding long final model
 public final class FinalModelInt64 extends FinalModel
 {
     public FinalModelInt64(Buffer buffer, long offset) { super(buffer, offset); }

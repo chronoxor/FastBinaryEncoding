@@ -7,10 +7,15 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding timestamp final model class
+// Fast Binary Encoding timestamp final model
 type FinalModelTimestamp struct {
     buffer *Buffer  // Final model buffer
     offset int      // Final model buffer offset
+}
+
+// Create a new timestamp final model
+func NewFinalModelTimestamp(buffer *Buffer, offset int) *FinalModelTimestamp {
+    return &FinalModelTimestamp{buffer: buffer, offset: offset}
 }
 
 // Get the allocation size
@@ -28,11 +33,6 @@ func (fm *FinalModelTimestamp) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FinalModelTimestamp) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelTimestamp) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new timestamp final model
-func NewFinalModelTimestamp(buffer *Buffer, offset int) *FinalModelTimestamp {
-    return &FinalModelTimestamp{buffer: buffer, offset: offset}
-}
 
 // Check if the timestamp value is valid
 func (fm *FinalModelTimestamp) Verify() (bool, int) {

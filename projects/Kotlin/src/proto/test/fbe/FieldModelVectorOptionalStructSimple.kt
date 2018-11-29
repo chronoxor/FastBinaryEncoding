@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding OptionalStructSimple vector field model class
+// Fast Binary Encoding OptionalStructSimple vector field model
 class FieldModelVectorOptionalStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     private val _model = FieldModelOptionalStructSimple(buffer, offset)

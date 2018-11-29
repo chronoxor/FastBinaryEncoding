@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding OptionalByte vector final model class
+// Fast Binary Encoding OptionalByte vector final model
 class FinalModelVectorOptionalByte(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     private val _model = FinalModelOptionalByte(buffer, offset)

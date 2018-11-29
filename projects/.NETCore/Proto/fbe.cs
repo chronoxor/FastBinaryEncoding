@@ -510,7 +510,7 @@ namespace FBE {
         #endregion
     }
 
-    // Fast Binary Encoding base model class
+    // Fast Binary Encoding base model
     public class Model
     {
         // Bytes buffer
@@ -575,7 +575,7 @@ namespace FBE {
         TIMESTAMP
     }
 
-    // Fast Binary Encoding base field model class
+    // Fast Binary Encoding base field model
     public abstract class FieldModelBase
     {
         protected Buffer _buffer;
@@ -640,7 +640,7 @@ namespace FBE {
         #endregion
     }
 
-    // Fast Binary Encoding field model value type class
+    // Fast Binary Encoding field model value type
     public abstract class FieldModelValueType<T> : FieldModelBase
         where T : struct
     {
@@ -659,7 +659,7 @@ namespace FBE {
         // Set the value
         public abstract void Set(T value);
 
-        // Create field model class of the given type
+        // Create field model of the given type
         public static FieldModelValueType<T> CreateFieldModel(BaseTypes type, Buffer buffer, long offset)
         {
             switch (type)
@@ -705,7 +705,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding field model reference type class
+    // Fast Binary Encoding field model reference type
     public abstract class FieldModelReferenceType<T> : FieldModelBase
         where T : class
     {
@@ -724,7 +724,7 @@ namespace FBE {
         // Set the value
         public abstract void Set(T value);
 
-        // Create field model class of the given type
+        // Create field model of the given type
         public static FieldModelReferenceType<T> CreateFieldModel(BaseTypes type, Buffer buffer, long offset)
         {
             switch (type)
@@ -740,7 +740,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding bool field model class
+    // Fast Binary Encoding bool field model
     public class FieldModelBool : FieldModelValueType<bool>
     {
         public FieldModelBool(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -775,7 +775,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding byte field model class
+    // Fast Binary Encoding byte field model
     public class FieldModelByte : FieldModelValueType<byte>
     {
         public FieldModelByte(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -810,7 +810,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding char field model class
+    // Fast Binary Encoding char field model
     public class FieldModelChar : FieldModelValueType<char>
     {
         public FieldModelChar(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -845,7 +845,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding char field model class
+    // Fast Binary Encoding char field model
     public class FieldModelWChar : FieldModelValueType<char>
     {
         public FieldModelWChar(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -880,7 +880,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding sbyte field model class
+    // Fast Binary Encoding sbyte field model
     public class FieldModelInt8 : FieldModelValueType<sbyte>
     {
         public FieldModelInt8(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -915,7 +915,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding byte field model class
+    // Fast Binary Encoding byte field model
     public class FieldModelUInt8 : FieldModelValueType<byte>
     {
         public FieldModelUInt8(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -950,7 +950,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding short field model class
+    // Fast Binary Encoding short field model
     public class FieldModelInt16 : FieldModelValueType<short>
     {
         public FieldModelInt16(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -985,7 +985,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding ushort field model class
+    // Fast Binary Encoding ushort field model
     public class FieldModelUInt16 : FieldModelValueType<ushort>
     {
         public FieldModelUInt16(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1020,7 +1020,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding int field model class
+    // Fast Binary Encoding int field model
     public class FieldModelInt32 : FieldModelValueType<int>
     {
         public FieldModelInt32(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1055,7 +1055,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding uint field model class
+    // Fast Binary Encoding uint field model
     public class FieldModelUInt32 : FieldModelValueType<uint>
     {
         public FieldModelUInt32(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1090,7 +1090,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding long field model class
+    // Fast Binary Encoding long field model
     public class FieldModelInt64 : FieldModelValueType<long>
     {
         public FieldModelInt64(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1125,7 +1125,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding ulong field model class
+    // Fast Binary Encoding ulong field model
     public class FieldModelUInt64 : FieldModelValueType<ulong>
     {
         public FieldModelUInt64(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1160,7 +1160,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding float field model class
+    // Fast Binary Encoding float field model
     public class FieldModelFloat : FieldModelValueType<float>
     {
         public FieldModelFloat(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1195,7 +1195,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding double field model class
+    // Fast Binary Encoding double field model
     public class FieldModelDouble : FieldModelValueType<double>
     {
         public FieldModelDouble(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1230,7 +1230,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding decimal field model class
+    // Fast Binary Encoding decimal field model
     public class FieldModelDecimal : FieldModelValueType<decimal>
     {
         public FieldModelDecimal(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1265,7 +1265,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding Guid field model class
+    // Fast Binary Encoding Guid field model
     public class FieldModelUUID : FieldModelValueType<Guid>
     {
         public FieldModelUUID(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1300,7 +1300,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding timestamp field model class
+    // Fast Binary Encoding timestamp field model
     public class FieldModelTimestamp : FieldModelValueType<DateTime>
     {
         private const long UnixEpoch = 621355968000000000;
@@ -1339,7 +1339,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding bytes field model class
+    // Fast Binary Encoding bytes field model
     public class FieldModelBytes : FieldModelReferenceType<MemoryStream>
     {
         public FieldModelBytes(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1439,7 +1439,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding string field model class
+    // Fast Binary Encoding string field model
     public class FieldModelString : FieldModelReferenceType<string>
     {
         public FieldModelString(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1538,7 +1538,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding field model optional class (value type)
+    // Fast Binary Encoding field model optional (value type)
     public class FieldModelOptionalValueType<T, TModel> : FieldModelBase
         where T : struct
         where TModel : FieldModelValueType<T>
@@ -1694,7 +1694,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding field model optional class (reference type)
+    // Fast Binary Encoding field model optional (reference type)
     public class FieldModelOptionalReferenceType<T, TModel> : FieldModelBase
         where T : class
         where TModel : FieldModelReferenceType<T>
@@ -1850,7 +1850,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding field model array class (value type)
+    // Fast Binary Encoding field model array (value type)
     public class FieldModelArrayValueType<T, TModel> : FieldModelBase
         where T : struct
         where TModel : FieldModelValueType<T>
@@ -1983,7 +1983,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding field model array class (reference type)
+    // Fast Binary Encoding field model array (reference type)
     public class FieldModelArrayReferenceType<T, TModel> : FieldModelBase
         where T : class
         where TModel : FieldModelReferenceType<T>
@@ -2116,7 +2116,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding field model array class (optional value type)
+    // Fast Binary Encoding field model array (optional value type)
     public class FieldModelArrayOptionalValueType<T, TModel> : FieldModelBase
         where T : struct
         where TModel : FieldModelValueType<T>
@@ -2249,7 +2249,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding field model array class (optional reference type)
+    // Fast Binary Encoding field model array (optional reference type)
     public class FieldModelArrayOptionalReferenceType<T, TModel> : FieldModelBase
         where T : class
         where TModel : FieldModelReferenceType<T>
@@ -2382,7 +2382,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding field model vector class (value type)
+    // Fast Binary Encoding field model vector (value type)
     public class FieldModelVectorValueType<T, TModel> : FieldModelBase
         where T : struct
         where TModel : FieldModelValueType<T>
@@ -2640,7 +2640,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding field model vector class (reference type)
+    // Fast Binary Encoding field model vector (reference type)
     public class FieldModelVectorReferenceType<T, TModel> : FieldModelBase
         where T : class
         where TModel : FieldModelReferenceType<T>
@@ -2898,7 +2898,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding field model vector class (optional value type)
+    // Fast Binary Encoding field model vector (optional value type)
     public class FieldModelVectorOptionalValueType<T, TModel> : FieldModelBase
         where T : struct
         where TModel : FieldModelValueType<T>
@@ -3156,7 +3156,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding field model vector class (optional reference type)
+    // Fast Binary Encoding field model vector (optional reference type)
     public class FieldModelVectorOptionalReferenceType<T, TModel> : FieldModelBase
         where T : class
         where TModel : FieldModelReferenceType<T>
@@ -3414,7 +3414,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding field model map class (value type key, value type value)
+    // Fast Binary Encoding field model map (value type key, value type value)
     public class FieldModelMapValueTypeKeyValueTypeValue<TKey, TKeyModel, TValue, TValueModel> : FieldModelBase
         where TKey : struct
         where TKeyModel : FieldModelValueType<TKey>
@@ -3655,7 +3655,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding field model map class (value type key, reference type value)
+    // Fast Binary Encoding field model map (value type key, reference type value)
     public class FieldModelMapValueTypeKeyReferenceTypeValue<TKey, TKeyModel, TValue, TValueModel> : FieldModelBase
         where TKey : struct
         where TKeyModel : FieldModelValueType<TKey>
@@ -3896,7 +3896,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding field model map class (value type key, optional value type value)
+    // Fast Binary Encoding field model map (value type key, optional value type value)
     public class FieldModelMapValueTypeKeyOptionalValueTypeValue<TKey, TKeyModel, TValue, TValueModel> : FieldModelBase
         where TKey : struct
         where TKeyModel : FieldModelValueType<TKey>
@@ -4137,7 +4137,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding field model map class (value type key, optional reference type value)
+    // Fast Binary Encoding field model map (value type key, optional reference type value)
     public class FieldModelMapValueTypeKeyOptionalReferenceTypeValue<TKey, TKeyModel, TValue, TValueModel> : FieldModelBase
         where TKey : struct
         where TKeyModel : FieldModelValueType<TKey>
@@ -4378,7 +4378,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding field model map class (reference type key, value type value)
+    // Fast Binary Encoding field model map (reference type key, value type value)
     public class FieldModelMapReferenceTypeKeyValueTypeValue<TKey, TKeyModel, TValue, TValueModel> : FieldModelBase
         where TKey : class
         where TKeyModel : FieldModelReferenceType<TKey>
@@ -4619,7 +4619,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding field model map class (reference type key, reference type value)
+    // Fast Binary Encoding field model map (reference type key, reference type value)
     public class FieldModelMapReferenceTypeKeyReferenceTypeValue<TKey, TKeyModel, TValue, TValueModel> : FieldModelBase
         where TKey : class
         where TKeyModel : FieldModelReferenceType<TKey>
@@ -4860,7 +4860,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding field model map class (reference type key, optional value type value)
+    // Fast Binary Encoding field model map (reference type key, optional value type value)
     public class FieldModelMapReferenceTypeKeyOptionalValueTypeValue<TKey, TKeyModel, TValue, TValueModel> : FieldModelBase
         where TKey : class
         where TKeyModel : FieldModelReferenceType<TKey>
@@ -5101,7 +5101,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding field model map class (reference type key, optional reference type value)
+    // Fast Binary Encoding field model map (reference type key, optional reference type value)
     public class FieldModelMapReferenceTypeKeyOptionalReferenceTypeValue<TKey, TKeyModel, TValue, TValueModel> : FieldModelBase
         where TKey : class
         where TKeyModel : FieldModelReferenceType<TKey>
@@ -5342,7 +5342,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding final model value type class
+    // Fast Binary Encoding final model value type
     public abstract class FinalModelValueType<T> : FieldModelBase
         where T : struct
     {
@@ -5363,7 +5363,7 @@ namespace FBE {
         // Set the value
         public abstract long Set(T value);
 
-        // Create final model class of the given type
+        // Create final model of the given type
         public static FinalModelValueType<T> CreateFinalModel(BaseTypes type, Buffer buffer, long offset)
         {
             switch (type)
@@ -5409,7 +5409,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding final model reference type class
+    // Fast Binary Encoding final model reference type
     public abstract class FinalModelReferenceType<T> : FieldModelBase
         where T : class
     {
@@ -5430,7 +5430,7 @@ namespace FBE {
         // Set the value
         public abstract long Set(T value);
 
-        // Create final model class of the given type
+        // Create final model of the given type
         public static FinalModelReferenceType<T> CreateFinalModel(BaseTypes type, Buffer buffer, long offset)
         {
             switch (type)
@@ -5446,7 +5446,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding bool final model class
+    // Fast Binary Encoding bool final model
     public class FinalModelBool : FinalModelValueType<bool>
     {
         public FinalModelBool(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -5494,7 +5494,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding byte final model class
+    // Fast Binary Encoding byte final model
     public class FinalModelByte : FinalModelValueType<byte>
     {
         public FinalModelByte(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -5542,7 +5542,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding char final model class
+    // Fast Binary Encoding char final model
     public class FinalModelChar : FinalModelValueType<char>
     {
         public FinalModelChar(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -5590,7 +5590,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding char final model class
+    // Fast Binary Encoding char final model
     public class FinalModelWChar : FinalModelValueType<char>
     {
         public FinalModelWChar(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -5638,7 +5638,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding sbyte final model class
+    // Fast Binary Encoding sbyte final model
     public class FinalModelInt8 : FinalModelValueType<sbyte>
     {
         public FinalModelInt8(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -5686,7 +5686,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding byte final model class
+    // Fast Binary Encoding byte final model
     public class FinalModelUInt8 : FinalModelValueType<byte>
     {
         public FinalModelUInt8(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -5734,7 +5734,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding short final model class
+    // Fast Binary Encoding short final model
     public class FinalModelInt16 : FinalModelValueType<short>
     {
         public FinalModelInt16(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -5782,7 +5782,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding ushort final model class
+    // Fast Binary Encoding ushort final model
     public class FinalModelUInt16 : FinalModelValueType<ushort>
     {
         public FinalModelUInt16(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -5830,7 +5830,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding int final model class
+    // Fast Binary Encoding int final model
     public class FinalModelInt32 : FinalModelValueType<int>
     {
         public FinalModelInt32(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -5878,7 +5878,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding uint final model class
+    // Fast Binary Encoding uint final model
     public class FinalModelUInt32 : FinalModelValueType<uint>
     {
         public FinalModelUInt32(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -5926,7 +5926,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding long final model class
+    // Fast Binary Encoding long final model
     public class FinalModelInt64 : FinalModelValueType<long>
     {
         public FinalModelInt64(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -5974,7 +5974,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding ulong final model class
+    // Fast Binary Encoding ulong final model
     public class FinalModelUInt64 : FinalModelValueType<ulong>
     {
         public FinalModelUInt64(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -6022,7 +6022,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding float final model class
+    // Fast Binary Encoding float final model
     public class FinalModelFloat : FinalModelValueType<float>
     {
         public FinalModelFloat(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -6070,7 +6070,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding double final model class
+    // Fast Binary Encoding double final model
     public class FinalModelDouble : FinalModelValueType<double>
     {
         public FinalModelDouble(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -6118,7 +6118,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding decimal final model class
+    // Fast Binary Encoding decimal final model
     public class FinalModelDecimal : FinalModelValueType<decimal>
     {
         public FinalModelDecimal(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -6166,7 +6166,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding Guid final model class
+    // Fast Binary Encoding Guid final model
     public class FinalModelUUID : FinalModelValueType<Guid>
     {
         public FinalModelUUID(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -6214,7 +6214,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding timestamp final model class
+    // Fast Binary Encoding timestamp final model
     public class FinalModelTimestamp : FinalModelValueType<DateTime>
     {
         private const long UnixEpoch = 621355968000000000;
@@ -6266,7 +6266,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding bytes final model class
+    // Fast Binary Encoding bytes final model
     public class FinalModelBytes : FinalModelReferenceType<MemoryStream>
     {
         public FinalModelBytes(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -6331,7 +6331,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding string final model class
+    // Fast Binary Encoding string final model
     public class FinalModelString : FinalModelReferenceType<string>
     {
         public FinalModelString(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -6398,7 +6398,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding final model optional class (value type)
+    // Fast Binary Encoding final model optional (value type)
     public class FinalModelOptionalValueType<T, TModel> : FieldModelBase
         where T : struct
         where TModel : FinalModelValueType<T>
@@ -6492,7 +6492,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding final model optional class (reference type)
+    // Fast Binary Encoding final model optional (reference type)
     public class FinalModelOptionalReferenceType<T, TModel> : FieldModelBase
         where T : class
         where TModel : FinalModelReferenceType<T>
@@ -6586,7 +6586,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding final model array class (value type)
+    // Fast Binary Encoding final model array (value type)
     public class FinalModelArrayValueType<T, TModel> : FieldModelBase
         where T : struct
         where TModel : FinalModelValueType<T>
@@ -6724,7 +6724,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding final model array class (reference type)
+    // Fast Binary Encoding final model array (reference type)
     public class FinalModelArrayReferenceType<T, TModel> : FieldModelBase
         where T : class
         where TModel : FinalModelReferenceType<T>
@@ -6862,7 +6862,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding final model array class (optional value type)
+    // Fast Binary Encoding final model array (optional value type)
     public class FinalModelArrayOptionalValueType<T, TModel> : FieldModelBase
         where T : struct
         where TModel : FinalModelValueType<T>
@@ -7000,7 +7000,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding final model array class (optional reference type)
+    // Fast Binary Encoding final model array (optional reference type)
     public class FinalModelArrayOptionalReferenceType<T, TModel> : FieldModelBase
         where T : class
         where TModel : FinalModelReferenceType<T>
@@ -7138,7 +7138,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding final model vector class (value type)
+    // Fast Binary Encoding final model vector (value type)
     public class FinalModelVectorValueType<T, TModel> : FieldModelBase
         where T : struct
         where TModel : FinalModelValueType<T>
@@ -7357,7 +7357,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding final model vector class (reference type)
+    // Fast Binary Encoding final model vector (reference type)
     public class FinalModelVectorReferenceType<T, TModel> : FieldModelBase
         where T : class
         where TModel : FinalModelReferenceType<T>
@@ -7576,7 +7576,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding final model vector class (optional value type)
+    // Fast Binary Encoding final model vector (optional value type)
     public class FinalModelVectorOptionalValueType<T, TModel> : FieldModelBase
         where T : struct
         where TModel : FinalModelValueType<T>
@@ -7795,7 +7795,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding final model vector class (optional reference type)
+    // Fast Binary Encoding final model vector (optional reference type)
     public class FinalModelVectorOptionalReferenceType<T, TModel> : FieldModelBase
         where T : class
         where TModel : FinalModelReferenceType<T>
@@ -8014,7 +8014,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding final model map class (value type key, value type value)
+    // Fast Binary Encoding final model map (value type key, value type value)
     public class FinalModelMapValueTypeKeyValueTypeValue<TKey, TKeyModel, TValue, TValueModel> : FieldModelBase
         where TKey : struct
         where TKeyModel : FinalModelValueType<TKey>
@@ -8209,7 +8209,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding final model map class (value type key, reference type value)
+    // Fast Binary Encoding final model map (value type key, reference type value)
     public class FinalModelMapValueTypeKeyReferenceTypeValue<TKey, TKeyModel, TValue, TValueModel> : FieldModelBase
         where TKey : struct
         where TKeyModel : FinalModelValueType<TKey>
@@ -8404,7 +8404,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding final model map class (value type key, optional value type value)
+    // Fast Binary Encoding final model map (value type key, optional value type value)
     public class FinalModelMapValueTypeKeyOptionalValueTypeValue<TKey, TKeyModel, TValue, TValueModel> : FieldModelBase
         where TKey : struct
         where TKeyModel : FinalModelValueType<TKey>
@@ -8599,7 +8599,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding final model map class (value type key, optional reference type value)
+    // Fast Binary Encoding final model map (value type key, optional reference type value)
     public class FinalModelMapValueTypeKeyOptionalReferenceTypeValue<TKey, TKeyModel, TValue, TValueModel> : FieldModelBase
         where TKey : struct
         where TKeyModel : FinalModelValueType<TKey>
@@ -8794,7 +8794,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding final model map class (reference type key, value type value)
+    // Fast Binary Encoding final model map (reference type key, value type value)
     public class FinalModelMapReferenceTypeKeyValueTypeValue<TKey, TKeyModel, TValue, TValueModel> : FieldModelBase
         where TKey : class
         where TKeyModel : FinalModelReferenceType<TKey>
@@ -8989,7 +8989,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding final model map class (reference type key, reference type value)
+    // Fast Binary Encoding final model map (reference type key, reference type value)
     public class FinalModelMapReferenceTypeKeyReferenceTypeValue<TKey, TKeyModel, TValue, TValueModel> : FieldModelBase
         where TKey : class
         where TKeyModel : FinalModelReferenceType<TKey>
@@ -9184,7 +9184,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding final model map class (reference type key, optional value type value)
+    // Fast Binary Encoding final model map (reference type key, optional value type value)
     public class FinalModelMapReferenceTypeKeyOptionalValueTypeValue<TKey, TKeyModel, TValue, TValueModel> : FieldModelBase
         where TKey : class
         where TKeyModel : FinalModelReferenceType<TKey>
@@ -9379,7 +9379,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding final model map class (reference type key, optional reference type value)
+    // Fast Binary Encoding final model map (reference type key, optional reference type value)
     public class FinalModelMapReferenceTypeKeyOptionalReferenceTypeValue<TKey, TKeyModel, TValue, TValueModel> : FieldModelBase
         where TKey : class
         where TKeyModel : FinalModelReferenceType<TKey>
@@ -9574,7 +9574,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding base sender class
+    // Fast Binary Encoding base sender
     public abstract class Sender
     {
         // Bytes buffer
@@ -9611,7 +9611,7 @@ namespace FBE {
         protected virtual void OnSendLog(string message) {}
     }
 
-    // Fast Binary Encoding base receiver class
+    // Fast Binary Encoding base receiver
     public abstract class Receiver
     {
         // Bytes buffer
@@ -10045,7 +10045,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding base JSON class
+    // Fast Binary Encoding base JSON converter
     public static class Json
     {
         static Json()
@@ -10179,7 +10179,7 @@ namespace FBE {
         }
     }
 
-    // Fast Binary Encoding base JSON class
+    // Fast Binary Encoding base JSON converter
     public static class Json
     {
         static Json()

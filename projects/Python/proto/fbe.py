@@ -253,7 +253,7 @@ class ReadBuffer(object):
         self._offset -= offset
 
 
-# Fast Binary Encoding base model class
+# Fast Binary Encoding base model
 class Model(object):
     __slots__ = "_buffer",
 
@@ -315,7 +315,7 @@ class Model(object):
         return struct.pack_into("<I", self.buffer.buffer, self.buffer.offset + offset, value)
 
 
-# Fast Binary Encoding base field model class
+# Fast Binary Encoding base field model
 class FieldModelBase(object):
     __slots__ = "_buffer", "_offset",
 
@@ -457,7 +457,7 @@ class FieldModelBase(object):
         self._buffer.buffer[self._buffer.offset + offset:self._buffer.offset + offset + 16] = value.bytes
 
 
-# Fast Binary Encoding field model class
+# Fast Binary Encoding field model
 class FieldModel(FieldModelBase):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -467,7 +467,7 @@ class FieldModel(FieldModelBase):
         return True
 
 
-# Fast Binary Encoding bool field model class
+# Fast Binary Encoding bool field model
 class FieldModelBool(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -496,7 +496,7 @@ class FieldModelBool(FieldModel):
         self.write_bool(self.fbe_offset, value)
 
 
-# Fast Binary Encoding byte field model class
+# Fast Binary Encoding byte field model
 class FieldModelByte(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -525,7 +525,7 @@ class FieldModelByte(FieldModel):
         self.write_byte(self.fbe_offset, value)
 
 
-# Fast Binary Encoding char field model class
+# Fast Binary Encoding char field model
 class FieldModelChar(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -554,7 +554,7 @@ class FieldModelChar(FieldModel):
         self.write_char(self.fbe_offset, value)
 
 
-# Fast Binary Encoding wchar field model class
+# Fast Binary Encoding wchar field model
 class FieldModelWChar(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -583,7 +583,7 @@ class FieldModelWChar(FieldModel):
         self.write_wchar(self.fbe_offset, value)
 
 
-# Fast Binary Encoding int8 field model class
+# Fast Binary Encoding int8 field model
 class FieldModelInt8(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -612,7 +612,7 @@ class FieldModelInt8(FieldModel):
         self.write_int8(self.fbe_offset, value)
 
 
-# Fast Binary Encoding uint8 field model class
+# Fast Binary Encoding uint8 field model
 class FieldModelUInt8(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -641,7 +641,7 @@ class FieldModelUInt8(FieldModel):
         self.write_uint8(self.fbe_offset, value)
 
 
-# Fast Binary Encoding int16 field model class
+# Fast Binary Encoding int16 field model
 class FieldModelInt16(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -670,7 +670,7 @@ class FieldModelInt16(FieldModel):
         self.write_int16(self.fbe_offset, value)
 
 
-# Fast Binary Encoding uint16 field model class
+# Fast Binary Encoding uint16 field model
 class FieldModelUInt16(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -699,7 +699,7 @@ class FieldModelUInt16(FieldModel):
         self.write_uint16(self.fbe_offset, value)
 
 
-# Fast Binary Encoding int32 field model class
+# Fast Binary Encoding int32 field model
 class FieldModelInt32(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -728,7 +728,7 @@ class FieldModelInt32(FieldModel):
         self.write_int32(self.fbe_offset, value)
 
 
-# Fast Binary Encoding uint32 field model class
+# Fast Binary Encoding uint32 field model
 class FieldModelUInt32(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -757,7 +757,7 @@ class FieldModelUInt32(FieldModel):
         self.write_uint32(self.fbe_offset, value)
 
 
-# Fast Binary Encoding int64 field model class
+# Fast Binary Encoding int64 field model
 class FieldModelInt64(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -786,7 +786,7 @@ class FieldModelInt64(FieldModel):
         self.write_int64(self.fbe_offset, value)
 
 
-# Fast Binary Encoding uint64 field model class
+# Fast Binary Encoding uint64 field model
 class FieldModelUInt64(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -815,7 +815,7 @@ class FieldModelUInt64(FieldModel):
         self.write_uint64(self.fbe_offset, value)
 
 
-# Fast Binary Encoding float field model class
+# Fast Binary Encoding float field model
 class FieldModelFloat(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -844,7 +844,7 @@ class FieldModelFloat(FieldModel):
         self.write_float(self.fbe_offset, value)
 
 
-# Fast Binary Encoding double field model class
+# Fast Binary Encoding double field model
 class FieldModelDouble(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -873,7 +873,7 @@ class FieldModelDouble(FieldModel):
         self.write_double(self.fbe_offset, value)
 
 
-# Fast Binary Encoding uint64 field model class
+# Fast Binary Encoding uint64 field model
 class FieldModelTimestamp(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -902,7 +902,7 @@ class FieldModelTimestamp(FieldModel):
         self.write_uint64(self.fbe_offset, value)
 
 
-# Fast Binary Encoding uuid field model class
+# Fast Binary Encoding uuid field model
 class FieldModelUUID(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -931,7 +931,7 @@ class FieldModelUUID(FieldModel):
         self.write_uuid(self.fbe_offset, value)
 
 
-# Fast Binary Encoding decimal field model class
+# Fast Binary Encoding decimal field model
 class FieldModelDecimal(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -1002,7 +1002,7 @@ class FieldModelDecimal(FieldModel):
         self.write_byte(self.fbe_offset + 15, 0x80 if negative else 0)
 
 
-# Fast Binary Encoding bytes field model class
+# Fast Binary Encoding bytes field model
 class FieldModelBytes(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -1087,7 +1087,7 @@ class FieldModelBytes(FieldModel):
         self.write_bytes(fbe_bytes_offset + 4, value)
 
 
-# Fast Binary Encoding string field model class
+# Fast Binary Encoding string field model
 class FieldModelString(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -1301,7 +1301,7 @@ class FieldModelOptional(FieldModel):
         self.set_end(fbe_begin)
 
 
-# Fast Binary Encoding array field model class
+# Fast Binary Encoding array field model
 class FieldModelArray(FieldModel):
     __slots__ = "_model", "_size",
 
@@ -1385,7 +1385,7 @@ class FieldModelArray(FieldModel):
             fbe_model.fbe_shift(fbe_model.fbe_size)
 
 
-# Fast Binary Encoding vector field model class
+# Fast Binary Encoding vector field model
 class FieldModelVector(FieldModel):
     __slots__ = "_model",
 
@@ -1525,7 +1525,7 @@ class FieldModelVector(FieldModel):
             fbe_model.fbe_shift(fbe_model.fbe_size)
 
 
-# Fast Binary Encoding set field model class
+# Fast Binary Encoding set field model
 class FieldModelSet(FieldModel):
     __slots__ = "_model",
 
@@ -1665,7 +1665,7 @@ class FieldModelSet(FieldModel):
             fbe_model.fbe_shift(fbe_model.fbe_size)
 
 
-# Fast Binary Encoding map field model class
+# Fast Binary Encoding map field model
 class FieldModelMap(FieldModel):
     __slots__ = "_model_key", "_model_value",
 
@@ -1823,7 +1823,7 @@ class FieldModelMap(FieldModel):
             fbe_model_value.fbe_shift(fbe_model_key.fbe_size + fbe_model_value.fbe_size)
 
 
-# Fast Binary Encoding final model class
+# Fast Binary Encoding final model
 class FinalModel(FieldModelBase):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -1833,7 +1833,7 @@ class FinalModel(FieldModelBase):
         raise NotImplementedError("verify() method not implemented!")
 
 
-# Fast Binary Encoding bool final model class
+# Fast Binary Encoding bool final model
 class FinalModelBool(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -1872,7 +1872,7 @@ class FinalModelBool(FinalModel):
         return self.fbe_size
 
 
-# Fast Binary Encoding byte final model class
+# Fast Binary Encoding byte final model
 class FinalModelByte(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -1911,7 +1911,7 @@ class FinalModelByte(FinalModel):
         return self.fbe_size
 
 
-# Fast Binary Encoding char final model class
+# Fast Binary Encoding char final model
 class FinalModelChar(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -1950,7 +1950,7 @@ class FinalModelChar(FinalModel):
         return self.fbe_size
 
 
-# Fast Binary Encoding wchar final model class
+# Fast Binary Encoding wchar final model
 class FinalModelWChar(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -1989,7 +1989,7 @@ class FinalModelWChar(FinalModel):
         return self.fbe_size
 
 
-# Fast Binary Encoding int8 final model class
+# Fast Binary Encoding int8 final model
 class FinalModelInt8(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -2028,7 +2028,7 @@ class FinalModelInt8(FinalModel):
         return self.fbe_size
 
 
-# Fast Binary Encoding uint8 final model class
+# Fast Binary Encoding uint8 final model
 class FinalModelUInt8(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -2067,7 +2067,7 @@ class FinalModelUInt8(FinalModel):
         return self.fbe_size
 
 
-# Fast Binary Encoding int16 final model class
+# Fast Binary Encoding int16 final model
 class FinalModelInt16(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -2106,7 +2106,7 @@ class FinalModelInt16(FinalModel):
         return self.fbe_size
 
 
-# Fast Binary Encoding uint16 final model class
+# Fast Binary Encoding uint16 final model
 class FinalModelUInt16(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -2145,7 +2145,7 @@ class FinalModelUInt16(FinalModel):
         return self.fbe_size
 
 
-# Fast Binary Encoding int32 final model class
+# Fast Binary Encoding int32 final model
 class FinalModelInt32(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -2184,7 +2184,7 @@ class FinalModelInt32(FinalModel):
         return self.fbe_size
 
 
-# Fast Binary Encoding uint32 final model class
+# Fast Binary Encoding uint32 final model
 class FinalModelUInt32(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -2223,7 +2223,7 @@ class FinalModelUInt32(FinalModel):
         return self.fbe_size
 
 
-# Fast Binary Encoding int64 final model class
+# Fast Binary Encoding int64 final model
 class FinalModelInt64(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -2262,7 +2262,7 @@ class FinalModelInt64(FinalModel):
         return self.fbe_size
 
 
-# Fast Binary Encoding uint64 final model class
+# Fast Binary Encoding uint64 final model
 class FinalModelUInt64(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -2301,7 +2301,7 @@ class FinalModelUInt64(FinalModel):
         return self.fbe_size
 
 
-# Fast Binary Encoding float final model class
+# Fast Binary Encoding float final model
 class FinalModelFloat(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -2340,7 +2340,7 @@ class FinalModelFloat(FinalModel):
         return self.fbe_size
 
 
-# Fast Binary Encoding double final model class
+# Fast Binary Encoding double final model
 class FinalModelDouble(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -2379,7 +2379,7 @@ class FinalModelDouble(FinalModel):
         return self.fbe_size
 
 
-# Fast Binary Encoding uint64 final model class
+# Fast Binary Encoding uint64 final model
 class FinalModelTimestamp(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -2418,7 +2418,7 @@ class FinalModelTimestamp(FinalModel):
         return self.fbe_size
 
 
-# Fast Binary Encoding uuid final model class
+# Fast Binary Encoding uuid final model
 class FinalModelUUID(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -2457,7 +2457,7 @@ class FinalModelUUID(FinalModel):
         return self.fbe_size
 
 
-# Fast Binary Encoding decimal final model class
+# Fast Binary Encoding decimal final model
 class FinalModelDecimal(FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -2537,7 +2537,7 @@ class FinalModelDecimal(FieldModel):
         return self.fbe_size
 
 
-# Fast Binary Encoding bytes final model class
+# Fast Binary Encoding bytes final model
 class FinalModelBytes(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -2590,7 +2590,7 @@ class FinalModelBytes(FinalModel):
         return 4 + fbe_bytes_size
 
 
-# Fast Binary Encoding string final model class
+# Fast Binary Encoding string final model
 class FinalModelString(FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -2722,7 +2722,7 @@ class FinalModelOptional(FinalModel):
         return 1 + size
 
 
-# Fast Binary Encoding array final model class
+# Fast Binary Encoding array final model
 class FinalModelArray(FinalModel):
     __slots__ = "_model", "_size",
 
@@ -2793,7 +2793,7 @@ class FinalModelArray(FinalModel):
         return size
 
 
-# Fast Binary Encoding vector final model class
+# Fast Binary Encoding vector final model
 class FinalModelVector(FinalModel):
     __slots__ = "_model",
 
@@ -2871,7 +2871,7 @@ class FinalModelVector(FinalModel):
         return size
 
 
-# Fast Binary Encoding set final model class
+# Fast Binary Encoding set final model
 class FinalModelSet(FinalModel):
     __slots__ = "_model",
 
@@ -2949,7 +2949,7 @@ class FinalModelSet(FinalModel):
         return size
 
 
-# Fast Binary Encoding map final model class
+# Fast Binary Encoding map final model
 class FinalModelMap(FinalModel):
     __slots__ = "_model_key", "_model_value",
 
@@ -3049,7 +3049,7 @@ class FinalModelMap(FinalModel):
         return size
 
 
-# Fast Binary Encoding base sender class
+# Fast Binary Encoding base sender
 class Sender(object):
     __slots__ = "_buffer", "_logging", "_final",
 
@@ -3105,7 +3105,7 @@ class Sender(object):
         pass
 
 
-# Fast Binary Encoding base receiver class
+# Fast Binary Encoding base receiver
 class Receiver(object):
     __slots__ = "_buffer", "_logging", "_final",
 

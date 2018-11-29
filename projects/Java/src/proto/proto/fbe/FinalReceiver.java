@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import proto.*;
 
-// Fast Binary Encoding proto final receiver class
+// Fast Binary Encoding proto final receiver
 public class FinalReceiver extends fbe.Receiver
 {
     // Receiver values accessors

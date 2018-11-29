@@ -8,10 +8,15 @@ package test
 import "errors"
 import "../fbe"
 
-// Fast Binary Encoding FlagsSimple final model class
+// Fast Binary Encoding FlagsSimple final model
 type FinalModelFlagsSimple struct {
     buffer *fbe.Buffer  // Final model buffer
     offset int          // Final model buffer offset
+}
+
+// Create a new final model
+func NewFinalModelFlagsSimple(buffer *fbe.Buffer, offset int) *FinalModelFlagsSimple {
+    return &FinalModelFlagsSimple{buffer: buffer, offset: offset}
 }
 
 // Get the allocation size
@@ -30,11 +35,6 @@ func (fm *FinalModelFlagsSimple) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelFlagsSimple) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new final model
-func NewFinalModelFlagsSimple(buffer *fbe.Buffer, offset int) *FinalModelFlagsSimple {
-    return &FinalModelFlagsSimple{buffer: buffer, offset: offset}
-}
-
 // Check if the value is valid
 func (fm *FinalModelFlagsSimple) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
@@ -45,20 +45,33 @@ func (fm *FinalModelFlagsSimple) Verify() (bool, int) {
 }
 
 // Get the value
-func (fm *FinalModelFlagsSimple) Get() (FlagsSimple, int, error) {
+func (fm *FinalModelFlagsSimple) Get() (*FlagsSimple, int, error) {
+    return fm.GetDefault(FlagsSimple(0))
+}
+
+// Get the value with provided default value
+func (fm *FinalModelFlagsSimple) GetDefault(defaults FlagsSimple) (*FlagsSimple, int, error) {
+    result := defaults
+    return fm.GetValue(&result)
+}
+
+// Get the value by pointer
+func (fm *FinalModelFlagsSimple) GetValue(value *FlagsSimple) (*FlagsSimple, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return FlagsSimple(0), 0, errors.New("model is broken")
+        return value, 0, errors.New("model is broken")
     }
 
-    return FlagsSimple(fbe.ReadInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())), fm.FBESize(), nil
+    result := FlagsSimple(fbe.ReadInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    value = &result
+    return value, fm.FBESize(), nil
 }
 
 // Set the value
-func (fm *FinalModelFlagsSimple) Set(value FlagsSimple) (int, error) {
+func (fm *FinalModelFlagsSimple) Set(value *FlagsSimple) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0, errors.New("model is broken")
     }
 
-    fbe.WriteInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), int32(value))
+    fbe.WriteInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), int32(*value))
     return fm.FBESize(), nil
 }

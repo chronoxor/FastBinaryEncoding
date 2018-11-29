@@ -20,7 +20,7 @@ import protoex.*
 
 import com.google.gson.*
 
-// Fast Binary Encoding protoex JSON class
+// Fast Binary Encoding protoex JSON engine
 object Json
 {
     // Get the JSON engine

@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional Decimal field model class
+// Fast Binary Encoding optional Decimal field model
 public final class FieldModelOptionalDecimal extends FieldModel
 {
     public FieldModelOptionalDecimal(Buffer buffer, long offset)

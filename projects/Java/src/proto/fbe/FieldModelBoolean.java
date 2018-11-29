@@ -14,7 +14,7 @@ import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
 
-// Fast Binary Encoding boolean field model class
+// Fast Binary Encoding boolean field model
 public final class FieldModelBoolean extends FieldModel
 {
     public FieldModelBoolean(Buffer buffer, long offset) { super(buffer, offset); }

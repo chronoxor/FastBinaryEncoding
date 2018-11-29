@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding OptionalFlagsSimple array field model class
+// Fast Binary Encoding OptionalFlagsSimple array field model
 class FieldModelArrayOptionalFlagsSimple(buffer: Buffer, offset: Long, val size: Long) : FieldModel(buffer, offset)
 {
     private val _model = FieldModelOptionalFlagsSimple(buffer, offset)

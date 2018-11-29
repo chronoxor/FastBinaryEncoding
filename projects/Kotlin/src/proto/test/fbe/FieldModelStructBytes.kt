@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructBytes field model class
+// Fast Binary Encoding StructBytes field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FieldModelStructBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {

@@ -8,10 +8,15 @@ package test
 import "errors"
 import "../fbe"
 
-// Fast Binary Encoding FlagsTyped final model class
+// Fast Binary Encoding FlagsTyped final model
 type FinalModelFlagsTyped struct {
     buffer *fbe.Buffer  // Final model buffer
     offset int          // Final model buffer offset
+}
+
+// Create a new final model
+func NewFinalModelFlagsTyped(buffer *fbe.Buffer, offset int) *FinalModelFlagsTyped {
+    return &FinalModelFlagsTyped{buffer: buffer, offset: offset}
 }
 
 // Get the allocation size
@@ -30,11 +35,6 @@ func (fm *FinalModelFlagsTyped) FBEShift(size int) { fm.offset += size }
 // Unshift the current final offset
 func (fm *FinalModelFlagsTyped) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new final model
-func NewFinalModelFlagsTyped(buffer *fbe.Buffer, offset int) *FinalModelFlagsTyped {
-    return &FinalModelFlagsTyped{buffer: buffer, offset: offset}
-}
-
 // Check if the value is valid
 func (fm *FinalModelFlagsTyped) Verify() (bool, int) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
@@ -45,20 +45,33 @@ func (fm *FinalModelFlagsTyped) Verify() (bool, int) {
 }
 
 // Get the value
-func (fm *FinalModelFlagsTyped) Get() (FlagsTyped, int, error) {
+func (fm *FinalModelFlagsTyped) Get() (*FlagsTyped, int, error) {
+    return fm.GetDefault(FlagsTyped(0))
+}
+
+// Get the value with provided default value
+func (fm *FinalModelFlagsTyped) GetDefault(defaults FlagsTyped) (*FlagsTyped, int, error) {
+    result := defaults
+    return fm.GetValue(&result)
+}
+
+// Get the value by pointer
+func (fm *FinalModelFlagsTyped) GetValue(value *FlagsTyped) (*FlagsTyped, int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return FlagsTyped(0), 0, errors.New("model is broken")
+        return value, 0, errors.New("model is broken")
     }
 
-    return FlagsTyped(fbe.ReadUInt64(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())), fm.FBESize(), nil
+    result := FlagsTyped(fbe.ReadUInt64(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    value = &result
+    return value, fm.FBESize(), nil
 }
 
 // Set the value
-func (fm *FinalModelFlagsTyped) Set(value FlagsTyped) (int, error) {
+func (fm *FinalModelFlagsTyped) Set(value *FlagsTyped) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0, errors.New("model is broken")
     }
 
-    fbe.WriteUInt64(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint64(value))
+    fbe.WriteUInt64(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint64(*value))
     return fm.FBESize(), nil
 }

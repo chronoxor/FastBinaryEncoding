@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import proto.*;
 
-// Fast Binary Encoding Account field model class
+// Fast Binary Encoding Account field model
 public final class FieldModelAccount extends FieldModel
 {
     public final FieldModelInt32 uid;

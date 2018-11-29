@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional Int8 field model class
+// Fast Binary Encoding optional Int8 field model
 public final class FieldModelOptionalInt8 extends FieldModel
 {
     public FieldModelOptionalInt8(Buffer buffer, long offset)

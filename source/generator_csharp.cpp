@@ -592,7 +592,7 @@ void GeneratorCSharp::GenerateFBEBuffer()
 void GeneratorCSharp::GenerateFBEBaseModel()
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding base model class
+    // Fast Binary Encoding base model
     public class Model
     {
         // Bytes buffer
@@ -667,7 +667,7 @@ void GeneratorCSharp::GenerateFBEFieldModelBase()
         TIMESTAMP
     }
 
-    // Fast Binary Encoding base field model class
+    // Fast Binary Encoding base field model
     public abstract class FieldModelBase
     {
         protected Buffer _buffer;
@@ -732,7 +732,7 @@ void GeneratorCSharp::GenerateFBEFieldModelBase()
         #endregion
     }
 
-    // Fast Binary Encoding field model value type class
+    // Fast Binary Encoding field model value type
     public abstract class FieldModelValueType<T> : FieldModelBase
         where T : struct
     {
@@ -751,7 +751,7 @@ void GeneratorCSharp::GenerateFBEFieldModelBase()
         // Set the value
         public abstract void Set(T value);
 
-        // Create field model class of the given type
+        // Create field model of the given type
         public static FieldModelValueType<T> CreateFieldModel(BaseTypes type, Buffer buffer, long offset)
         {
             switch (type)
@@ -797,7 +797,7 @@ void GeneratorCSharp::GenerateFBEFieldModelBase()
         }
     }
 
-    // Fast Binary Encoding field model reference type class
+    // Fast Binary Encoding field model reference type
     public abstract class FieldModelReferenceType<T> : FieldModelBase
         where T : class
     {
@@ -816,7 +816,7 @@ void GeneratorCSharp::GenerateFBEFieldModelBase()
         // Set the value
         public abstract void Set(T value);
 
-        // Create field model class of the given type
+        // Create field model of the given type
         public static FieldModelReferenceType<T> CreateFieldModel(BaseTypes type, Buffer buffer, long offset)
         {
             switch (type)
@@ -842,7 +842,7 @@ void GeneratorCSharp::GenerateFBEFieldModelBase()
 void GeneratorCSharp::GenerateFBEFieldModel(const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults)
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding _TYPE_ field model class
+    // Fast Binary Encoding _TYPE_ field model
     public class FieldModel_NAME_ : FieldModelValueType<_TYPE_>
     {
         public FieldModel_NAME_(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -892,7 +892,7 @@ void GeneratorCSharp::GenerateFBEFieldModel(const std::string& name, const std::
 void GeneratorCSharp::GenerateFBEFieldModelTimestamp()
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding timestamp field model class
+    // Fast Binary Encoding timestamp field model
     public class FieldModelTimestamp : FieldModelValueType<DateTime>
     {
         private const long UnixEpoch = 621355968000000000;
@@ -941,7 +941,7 @@ void GeneratorCSharp::GenerateFBEFieldModelTimestamp()
 void GeneratorCSharp::GenerateFBEFieldModelBytes()
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding bytes field model class
+    // Fast Binary Encoding bytes field model
     public class FieldModelBytes : FieldModelReferenceType<MemoryStream>
     {
         public FieldModelBytes(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1051,7 +1051,7 @@ void GeneratorCSharp::GenerateFBEFieldModelBytes()
 void GeneratorCSharp::GenerateFBEFieldModelString()
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding string field model class
+    // Fast Binary Encoding string field model
     public class FieldModelString : FieldModelReferenceType<string>
     {
         public FieldModelString(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -1160,7 +1160,7 @@ void GeneratorCSharp::GenerateFBEFieldModelString()
 void GeneratorCSharp::GenerateFBEFieldModelOptional(bool valueType)
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding field model optional class (_NAME_)
+    // Fast Binary Encoding field model optional (_NAME_)
     public class FieldModelOptional_TYPE_<T, TModel> : FieldModelBase
         where T : _BASE_
         where TModel : FieldModel_TYPE_<T>
@@ -1332,7 +1332,7 @@ void GeneratorCSharp::GenerateFBEFieldModelOptional(bool valueType)
 void GeneratorCSharp::GenerateFBEFieldModelArray(bool valueType, bool optional)
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding field model array class (_NAME_)
+    // Fast Binary Encoding field model array (_NAME_)
     public class FieldModelArray_TYPE_<T, TModel> : FieldModelBase
         where T : _BASE_
         where TModel : FieldModel_MODEL_REF_<T>
@@ -1483,7 +1483,7 @@ void GeneratorCSharp::GenerateFBEFieldModelArray(bool valueType, bool optional)
 void GeneratorCSharp::GenerateFBEFieldModelVector(bool valueType, bool optional)
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding field model vector class (_NAME_)
+    // Fast Binary Encoding field model vector (_NAME_)
     public class FieldModelVector_TYPE_<T, TModel> : FieldModelBase
         where T : _BASE_
         where TModel : FieldModel_MODEL_REF_<T>
@@ -1759,7 +1759,7 @@ void GeneratorCSharp::GenerateFBEFieldModelVector(bool valueType, bool optional)
 void GeneratorCSharp::GenerateFBEFieldModelMap(bool valueTypeKey, bool valueTypeValue, bool optional)
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding field model map class (_NAME_KEY_, _NAME_VALUE_)
+    // Fast Binary Encoding field model map (_NAME_KEY_, _NAME_VALUE_)
     public class FieldModelMap_TYPE_KEY__TYPE_VALUE_<TKey, TKeyModel, TValue, TValueModel> : FieldModelBase
         where TKey : _BASE_KEY_
         where TKeyModel : FieldModel_MODEL_KEY_REF_<TKey>
@@ -2026,7 +2026,7 @@ void GeneratorCSharp::GenerateFBEFieldModelMap(bool valueTypeKey, bool valueType
 void GeneratorCSharp::GenerateFBEFinalModelBase()
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding final model value type class
+    // Fast Binary Encoding final model value type
     public abstract class FinalModelValueType<T> : FieldModelBase
         where T : struct
     {
@@ -2047,7 +2047,7 @@ void GeneratorCSharp::GenerateFBEFinalModelBase()
         // Set the value
         public abstract long Set(T value);
 
-        // Create final model class of the given type
+        // Create final model of the given type
         public static FinalModelValueType<T> CreateFinalModel(BaseTypes type, Buffer buffer, long offset)
         {
             switch (type)
@@ -2093,7 +2093,7 @@ void GeneratorCSharp::GenerateFBEFinalModelBase()
         }
     }
 
-    // Fast Binary Encoding final model reference type class
+    // Fast Binary Encoding final model reference type
     public abstract class FinalModelReferenceType<T> : FieldModelBase
         where T : class
     {
@@ -2114,7 +2114,7 @@ void GeneratorCSharp::GenerateFBEFinalModelBase()
         // Set the value
         public abstract long Set(T value);
 
-        // Create final model class of the given type
+        // Create final model of the given type
         public static FinalModelReferenceType<T> CreateFinalModel(BaseTypes type, Buffer buffer, long offset)
         {
             switch (type)
@@ -2140,7 +2140,7 @@ void GeneratorCSharp::GenerateFBEFinalModelBase()
 void GeneratorCSharp::GenerateFBEFinalModel(const std::string& name, const std::string& type, const std::string& base, const std::string& size, const std::string& defaults)
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding _TYPE_ final model class
+    // Fast Binary Encoding _TYPE_ final model
     public class FinalModel_NAME_ : FinalModelValueType<_TYPE_>
     {
         public FinalModel_NAME_(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -2203,7 +2203,7 @@ void GeneratorCSharp::GenerateFBEFinalModel(const std::string& name, const std::
 void GeneratorCSharp::GenerateFBEFinalModelTimestamp()
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding timestamp final model class
+    // Fast Binary Encoding timestamp final model
     public class FinalModelTimestamp : FinalModelValueType<DateTime>
     {
         private const long UnixEpoch = 621355968000000000;
@@ -2265,7 +2265,7 @@ void GeneratorCSharp::GenerateFBEFinalModelTimestamp()
 void GeneratorCSharp::GenerateFBEFinalModelBytes()
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding bytes final model class
+    // Fast Binary Encoding bytes final model
     public class FinalModelBytes : FinalModelReferenceType<MemoryStream>
     {
         public FinalModelBytes(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -2340,7 +2340,7 @@ void GeneratorCSharp::GenerateFBEFinalModelBytes()
 void GeneratorCSharp::GenerateFBEFinalModelString()
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding string final model class
+    // Fast Binary Encoding string final model
     public class FinalModelString : FinalModelReferenceType<string>
     {
         public FinalModelString(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -2417,7 +2417,7 @@ void GeneratorCSharp::GenerateFBEFinalModelString()
 void GeneratorCSharp::GenerateFBEFinalModelOptional(bool valueType)
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding final model optional class (_NAME_)
+    // Fast Binary Encoding final model optional (_NAME_)
     public class FinalModelOptional_TYPE_<T, TModel> : FieldModelBase
         where T : _BASE_
         where TModel : FinalModel_TYPE_<T>
@@ -2527,7 +2527,7 @@ void GeneratorCSharp::GenerateFBEFinalModelOptional(bool valueType)
 void GeneratorCSharp::GenerateFBEFinalModelArray(bool valueType, bool optional)
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding final model array class (_NAME_)
+    // Fast Binary Encoding final model array (_NAME_)
     public class FinalModelArray_TYPE_<T, TModel> : FieldModelBase
         where T : _BASE_
         where TModel : FinalModel_MODEL_REF_<T>
@@ -2683,7 +2683,7 @@ void GeneratorCSharp::GenerateFBEFinalModelArray(bool valueType, bool optional)
 void GeneratorCSharp::GenerateFBEFinalModelVector(bool valueType, bool optional)
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding final model vector class (_NAME_)
+    // Fast Binary Encoding final model vector (_NAME_)
     public class FinalModelVector_TYPE_<T, TModel> : FieldModelBase
         where T : _BASE_
         where TModel : FinalModel_MODEL_REF_<T>
@@ -2920,7 +2920,7 @@ void GeneratorCSharp::GenerateFBEFinalModelVector(bool valueType, bool optional)
 void GeneratorCSharp::GenerateFBEFinalModelMap(bool valueTypeKey, bool valueTypeValue, bool optional)
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding final model map class (_NAME_KEY_, _NAME_VALUE_)
+    // Fast Binary Encoding final model map (_NAME_KEY_, _NAME_VALUE_)
     public class FinalModelMap_TYPE_KEY__TYPE_VALUE_<TKey, TKeyModel, TValue, TValueModel> : FieldModelBase
         where TKey : _BASE_KEY_
         where TKeyModel : FinalModel_MODEL_KEY_REF_<TKey>
@@ -3141,7 +3141,7 @@ void GeneratorCSharp::GenerateFBEFinalModelMap(bool valueTypeKey, bool valueType
 void GeneratorCSharp::GenerateFBESender()
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding base sender class
+    // Fast Binary Encoding base sender
     public abstract class Sender
     {
         // Bytes buffer
@@ -3188,7 +3188,7 @@ void GeneratorCSharp::GenerateFBESender()
 void GeneratorCSharp::GenerateFBEReceiver()
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding base receiver class
+    // Fast Binary Encoding base receiver
     public abstract class Receiver
     {
         // Bytes buffer
@@ -3632,7 +3632,7 @@ void GeneratorCSharp::GenerateFBEJson()
         }
     }
 
-    // Fast Binary Encoding base JSON class
+    // Fast Binary Encoding base JSON converter
     public static class Json
     {
         static Json()
@@ -3766,7 +3766,7 @@ void GeneratorCSharp::GenerateFBEJson()
         }
     }
 
-    // Fast Binary Encoding base JSON class
+    // Fast Binary Encoding base JSON converter
     public static class Json
     {
         static Json()
@@ -4179,7 +4179,7 @@ void GeneratorCSharp::GenerateEnumFieldModel(const std::shared_ptr<Package>& p, 
     std::string code = R"CODE(
     using global::_PACKAGE_;
 
-    // Fast Binary Encoding _ENUM_NAME_ field model class
+    // Fast Binary Encoding _ENUM_NAME_ field model
     public class FieldModel_ENUM_NAME_ : FieldModelValueType<_ENUM_NAME_>
     {
         public FieldModel_ENUM_NAME_(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -4248,7 +4248,7 @@ void GeneratorCSharp::GenerateEnumFinalModel(const std::shared_ptr<Package>& p, 
     std::string code = R"CODE(
     using global::_PACKAGE_;
 
-    // Fast Binary Encoding _ENUM_NAME_ final model class
+    // Fast Binary Encoding _ENUM_NAME_ final model
     public class FinalModel_ENUM_NAME_ : FinalModelValueType<_ENUM_NAME_>
     {
         public FinalModel_ENUM_NAME_(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -4558,7 +4558,7 @@ void GeneratorCSharp::GenerateFlagsFieldModel(const std::shared_ptr<Package>& p,
     std::string code = R"CODE(
     using global::_PACKAGE_;
 
-    // Fast Binary Encoding _FLAGS_NAME_ field model class
+    // Fast Binary Encoding _FLAGS_NAME_ field model
     public class FieldModel_FLAGS_NAME_ : FieldModelValueType<_FLAGS_NAME_>
     {
         public FieldModel_FLAGS_NAME_(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -4627,7 +4627,7 @@ void GeneratorCSharp::GenerateFlagsFinalModel(const std::shared_ptr<Package>& p,
     std::string code = R"CODE(
     using global::_PACKAGE_;
 
-    // Fast Binary Encoding _FLAGS_NAME_ final model class
+    // Fast Binary Encoding _FLAGS_NAME_ final model
     public class FinalModel_FLAGS_NAME_ : FinalModelValueType<_FLAGS_NAME_>
     {
         public FinalModel_FLAGS_NAME_(Buffer buffer, long offset) : base(buffer, offset) {}
@@ -5176,7 +5176,7 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::shared_ptr<Package>& p
 
     // Generate struct field model begin
     WriteLine();
-    WriteLineIndent("// Fast Binary Encoding " + *s->name + " field model class");
+    WriteLineIndent("// Fast Binary Encoding " + *s->name + " field model");
     WriteLineIndent("public class FieldModel" + *s->name + " : FieldModelValueType<" + *s->name + ">");
     WriteLineIndent("{");
     Indent(1);
@@ -5565,7 +5565,7 @@ void GeneratorCSharp::GenerateStructModel(const std::shared_ptr<Package>& p, con
 
     // Generate struct model begin
     WriteLine();
-    WriteLineIndent("// Fast Binary Encoding " + *s->name + " model class");
+    WriteLineIndent("// Fast Binary Encoding " + *s->name + " model");
     WriteLineIndent("public class " + *s->name + "Model : Model");
     WriteLineIndent("{");
     Indent(1);
@@ -5708,7 +5708,7 @@ void GeneratorCSharp::GenerateStructFinalModel(const std::shared_ptr<Package>& p
 
     // Generate struct final model begin
     WriteLine();
-    WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model class");
+    WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model");
     WriteLineIndent("public class FinalModel" + *s->name + " : FinalModelValueType<" + *s->name + ">");
     WriteLineIndent("{");
     Indent(1);
@@ -5934,7 +5934,7 @@ void GeneratorCSharp::GenerateStructModelFinal(const std::shared_ptr<Package>& p
 
     // Generate struct model final begin
     WriteLine();
-    WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model class");
+    WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model");
     WriteLineIndent("public class " + *s->name + "FinalModel : Model");
     WriteLineIndent("{");
     Indent(1);
@@ -6067,9 +6067,9 @@ void GeneratorCSharp::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     // Generate sender begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final sender class");
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final sender");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " sender class");
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " sender");
     WriteLineIndent("public class " + sender + " : FBE.Sender");
     WriteLineIndent("{");
     Indent(1);
@@ -6189,9 +6189,9 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     // Generate receiver begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final receiver class");
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final receiver");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " receiver class");
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " receiver");
     WriteLineIndent("public class " + receiver + " : FBE.Receiver");
     WriteLineIndent("{");
     Indent(1);

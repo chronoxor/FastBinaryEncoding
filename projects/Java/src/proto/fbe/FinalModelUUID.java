@@ -14,7 +14,7 @@ import java.nio.charset.*;
 import java.time.*;
 import java.util.*;
 
-// Fast Binary Encoding UUID final model class
+// Fast Binary Encoding UUID final model
 public final class FinalModelUUID extends FinalModel
 {
     public FinalModelUUID(Buffer buffer, long offset) { super(buffer, offset); }

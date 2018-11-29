@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding optional Boolean field model class
+// Fast Binary Encoding optional Boolean field model
 class FieldModelOptionalBoolean(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size

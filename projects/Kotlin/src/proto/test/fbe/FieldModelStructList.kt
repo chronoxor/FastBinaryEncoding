@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructList field model class
+// Fast Binary Encoding StructList field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FieldModelStructList(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {

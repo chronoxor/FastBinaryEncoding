@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding optional UInt16 field model class
+// Fast Binary Encoding optional UInt16 field model
 class FieldModelOptionalUInt16(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size

@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional Decimal final model class
+// Fast Binary Encoding optional Decimal final model
 public final class FinalModelOptionalDecimal extends FinalModel
 {
     public FinalModelOptionalDecimal(Buffer buffer, long offset)

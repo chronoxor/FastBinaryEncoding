@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import protoex.*
 
-// Fast Binary Encoding Balance final model class
+// Fast Binary Encoding Balance final model
 class BalanceFinalModel : Model
 {
     private val _model: FinalModelBalance

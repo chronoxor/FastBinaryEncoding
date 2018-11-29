@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding Int32->Bytes map final model class
+// Fast Binary Encoding Int32->Bytes map final model
 class FinalModelMapInt32Bytes(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     private val _modelKey = FinalModelInt32(buffer, offset)

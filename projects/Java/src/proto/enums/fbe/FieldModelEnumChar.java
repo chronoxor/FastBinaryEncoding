@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import enums.*;
 
-// Fast Binary Encoding EnumChar field model class
+// Fast Binary Encoding EnumChar field model
 public final class FieldModelEnumChar extends FieldModel
 {
     public FieldModelEnumChar(Buffer buffer, long offset) { super(buffer, offset); }

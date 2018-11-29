@@ -114,7 +114,7 @@ module Test
 
   EnumSimple.freeze
 
-  # Fast Binary Encoding EnumSimple field model class
+  # Fast Binary Encoding EnumSimple field model
   class FieldModelEnumSimple < FBE::FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -144,7 +144,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding EnumSimple final model class
+  # Fast Binary Encoding EnumSimple final model
   class FinalModelEnumSimple < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -286,7 +286,7 @@ module Test
 
   EnumTyped.freeze
 
-  # Fast Binary Encoding EnumTyped field model class
+  # Fast Binary Encoding EnumTyped field model
   class FieldModelEnumTyped < FBE::FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -316,7 +316,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding EnumTyped final model class
+  # Fast Binary Encoding EnumTyped final model
   class FinalModelEnumTyped < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -521,7 +521,7 @@ module Test
 
   FlagsSimple.freeze
 
-  # Fast Binary Encoding FlagsSimple field model class
+  # Fast Binary Encoding FlagsSimple field model
   class FieldModelFlagsSimple < FBE::FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -551,7 +551,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding FlagsSimple final model class
+  # Fast Binary Encoding FlagsSimple final model
   class FinalModelFlagsSimple < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -804,7 +804,7 @@ module Test
 
   FlagsTyped.freeze
 
-  # Fast Binary Encoding FlagsTyped field model class
+  # Fast Binary Encoding FlagsTyped field model
   class FieldModelFlagsTyped < FBE::FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -834,7 +834,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding FlagsTyped final model class
+  # Fast Binary Encoding FlagsTyped final model
   class FinalModelFlagsTyped < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -2910,7 +2910,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructSimple model class
+  # Fast Binary Encoding StructSimple model
   class StructSimpleModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -4237,7 +4237,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructSimple final model class
+  # Fast Binary Encoding StructSimple final model
   class StructSimpleFinalModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -7185,7 +7185,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructOptional model class
+  # Fast Binary Encoding StructOptional model
   class StructOptionalModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -9083,7 +9083,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructOptional final model class
+  # Fast Binary Encoding StructOptional final model
   class StructOptionalFinalModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -9925,7 +9925,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructNested model class
+  # Fast Binary Encoding StructNested model
   class StructNestedModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -10419,7 +10419,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructNested final model class
+  # Fast Binary Encoding StructNested final model
   class StructNestedFinalModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -10877,7 +10877,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructBytes model class
+  # Fast Binary Encoding StructBytes model
   class StructBytesModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -11112,7 +11112,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructBytes final model class
+  # Fast Binary Encoding StructBytes final model
   class StructBytesFinalModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -11963,7 +11963,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructArray model class
+  # Fast Binary Encoding StructArray model
   class StructArrayModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -12370,7 +12370,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructArray final model class
+  # Fast Binary Encoding StructArray final model
   class StructArrayFinalModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -13221,7 +13221,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructVector model class
+  # Fast Binary Encoding StructVector model
   class StructVectorModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -13628,7 +13628,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructVector final model class
+  # Fast Binary Encoding StructVector final model
   class StructVectorFinalModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -14479,7 +14479,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructList model class
+  # Fast Binary Encoding StructList model
   class StructListModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -14886,7 +14886,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructList final model class
+  # Fast Binary Encoding StructList final model
   class StructListFinalModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -15431,7 +15431,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructSet model class
+  # Fast Binary Encoding StructSet model
   class StructSetModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -15688,7 +15688,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructSet final model class
+  # Fast Binary Encoding StructSet final model
   class StructSetFinalModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -16599,7 +16599,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructMap model class
+  # Fast Binary Encoding StructMap model
   class StructMapModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -17006,7 +17006,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructMap final model class
+  # Fast Binary Encoding StructMap final model
   class StructMapFinalModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -17917,7 +17917,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructHash model class
+  # Fast Binary Encoding StructHash model
   class StructHashModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -18324,7 +18324,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructHash final model class
+  # Fast Binary Encoding StructHash final model
   class StructHashFinalModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -18779,7 +18779,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructHashEx model class
+  # Fast Binary Encoding StructHashEx model
   class StructHashExModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -18986,7 +18986,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding StructHashEx final model class
+  # Fast Binary Encoding StructHashEx final model
   class StructHashExFinalModel < FBE::Model
     def initialize(buffer = FBE::WriteBuffer.new)
       super(buffer)
@@ -19062,7 +19062,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding Test sender class
+  # Fast Binary Encoding Test sender
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Sender < FBE::Sender
     def initialize(buffer = FBE::WriteBuffer.new)
@@ -19360,7 +19360,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding Test receiver class
+  # Fast Binary Encoding Test receiver
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Receiver < FBE::Receiver
     def initialize(buffer = FBE::WriteBuffer.new)
@@ -19682,7 +19682,7 @@ module Test
 
   end
 
-  # Fast Binary Encoding Test final sender class
+  # Fast Binary Encoding Test final sender
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class FinalSender < FBE::Sender
     def initialize(buffer = FBE::WriteBuffer.new)
@@ -19980,7 +19980,7 @@ module Test
     end
   end
 
-  # Fast Binary Encoding Test final receiver class
+  # Fast Binary Encoding Test final receiver
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class FinalReceiver < FBE::Receiver
     def initialize(buffer = FBE::WriteBuffer.new)

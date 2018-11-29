@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructSimple array field model class
+// Fast Binary Encoding StructSimple array field model
 class FieldModelArrayStructSimple(buffer: Buffer, offset: Long, val size: Long) : FieldModel(buffer, offset)
 {
     private val _model = FieldModelStructSimple(buffer, offset)

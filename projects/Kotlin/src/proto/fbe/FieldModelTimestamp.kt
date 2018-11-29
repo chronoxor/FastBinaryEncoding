@@ -15,7 +15,7 @@ import java.nio.charset.*
 import java.time.*
 import java.util.*
 
-// Fast Binary Encoding timestamp field model class
+// Fast Binary Encoding timestamp field model
 class FieldModelTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size

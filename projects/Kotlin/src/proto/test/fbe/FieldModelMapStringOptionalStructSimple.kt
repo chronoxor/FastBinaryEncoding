@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding String->OptionalStructSimple map field model class
+// Fast Binary Encoding String->OptionalStructSimple map field model
 class FieldModelMapStringOptionalStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     private val _modelKey = FieldModelString(buffer, offset)

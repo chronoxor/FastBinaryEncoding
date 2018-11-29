@@ -15,7 +15,7 @@ import java.nio.charset.*
 import java.time.*
 import java.util.*
 
-// Fast Binary Encoding UByte field model class
+// Fast Binary Encoding UByte field model
 class FieldModelUInt8(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size

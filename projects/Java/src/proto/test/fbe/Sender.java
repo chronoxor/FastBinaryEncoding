@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding test sender class
+// Fast Binary Encoding test sender
 public class Sender extends fbe.Sender
 {
     // Imported senders

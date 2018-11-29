@@ -88,7 +88,7 @@ internal class UUIDJson : JsonSerializer<UUID>, JsonDeserializer<UUID>
     }
 }
 
-// Fast Binary Encoding base JSON class
+// Fast Binary Encoding base JSON engine
 @Suppress("MemberVisibilityCanBePrivate")
 object Json
 {

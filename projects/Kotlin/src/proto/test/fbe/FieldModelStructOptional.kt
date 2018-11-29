@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructOptional field model class
+// Fast Binary Encoding StructOptional field model
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FieldModelStructOptional(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {

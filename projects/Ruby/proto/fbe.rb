@@ -526,7 +526,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding base model class
+  # Fast Binary Encoding base model
   class Model
     def initialize(buffer = WriteBuffer.new)
       @_buffer = buffer
@@ -599,7 +599,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding base field model class
+  # Fast Binary Encoding base field model
   # noinspection RubyTooManyMethodsInspection
   class FieldModelBase
     def initialize(buffer, offset)
@@ -797,7 +797,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding field model class
+  # Fast Binary Encoding field model
   class FieldModel < FieldModelBase
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -814,7 +814,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding bool field model class
+  # Fast Binary Encoding bool field model
   class FieldModelBool < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -844,7 +844,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding byte field model class
+  # Fast Binary Encoding byte field model
   class FieldModelByte < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -874,7 +874,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding char field model class
+  # Fast Binary Encoding char field model
   class FieldModelChar < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -904,7 +904,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding wchar field model class
+  # Fast Binary Encoding wchar field model
   class FieldModelWChar < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -934,7 +934,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding int8 field model class
+  # Fast Binary Encoding int8 field model
   class FieldModelInt8 < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -964,7 +964,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding uint8 field model class
+  # Fast Binary Encoding uint8 field model
   class FieldModelUInt8 < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -994,7 +994,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding int16 field model class
+  # Fast Binary Encoding int16 field model
   class FieldModelInt16 < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1024,7 +1024,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding uint16 field model class
+  # Fast Binary Encoding uint16 field model
   class FieldModelUInt16 < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1054,7 +1054,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding int32 field model class
+  # Fast Binary Encoding int32 field model
   class FieldModelInt32 < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1084,7 +1084,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding uint32 field model class
+  # Fast Binary Encoding uint32 field model
   class FieldModelUInt32 < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1114,7 +1114,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding int64 field model class
+  # Fast Binary Encoding int64 field model
   class FieldModelInt64 < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1144,7 +1144,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding uint64 field model class
+  # Fast Binary Encoding uint64 field model
   class FieldModelUInt64 < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1174,7 +1174,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding float field model class
+  # Fast Binary Encoding float field model
   class FieldModelFloat < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1204,7 +1204,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding double field model class
+  # Fast Binary Encoding double field model
   class FieldModelDouble < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1234,7 +1234,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding timestamp field model class
+  # Fast Binary Encoding timestamp field model
   class FieldModelTimestamp < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1264,7 +1264,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding uuid field model class
+  # Fast Binary Encoding uuid field model
   class FieldModelUUID < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1294,7 +1294,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding decimal field model class
+  # Fast Binary Encoding decimal field model
   class FieldModelDecimal < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1379,7 +1379,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding bytes field model class
+  # Fast Binary Encoding bytes field model
   class FieldModelBytes < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1476,7 +1476,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding string field model class
+  # Fast Binary Encoding string field model
   class FieldModelString < FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -1724,7 +1724,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding array field model class
+  # Fast Binary Encoding array field model
   class FieldModelArray < FieldModel
     def initialize(model, buffer, offset, size)
         super(buffer, offset)
@@ -1814,7 +1814,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding vector field model class
+  # Fast Binary Encoding vector field model
   class FieldModelVector < FieldModel
     def initialize(model, buffer, offset)
       super(buffer, offset)
@@ -1966,7 +1966,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding set field model class
+  # Fast Binary Encoding set field model
   class FieldModelSet < FieldModel
     def initialize(model, buffer, offset)
       super(buffer, offset)
@@ -2118,7 +2118,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding map field model class
+  # Fast Binary Encoding map field model
   class FieldModelMap < FieldModel
     def initialize(model_key, model_value, buffer, offset)
       super(buffer, offset)
@@ -2289,7 +2289,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding final model class
+  # Fast Binary Encoding final model
   class FinalModel < FieldModelBase
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -2306,7 +2306,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding bool final model class
+  # Fast Binary Encoding bool final model
   class FinalModelBool < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -2357,7 +2357,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding byte final model class
+  # Fast Binary Encoding byte final model
   class FinalModelByte < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -2408,7 +2408,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding char final model class
+  # Fast Binary Encoding char final model
   class FinalModelChar < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -2459,7 +2459,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding wchar final model class
+  # Fast Binary Encoding wchar final model
   class FinalModelWChar < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -2510,7 +2510,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding int8 final model class
+  # Fast Binary Encoding int8 final model
   class FinalModelInt8 < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -2561,7 +2561,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding uint8 final model class
+  # Fast Binary Encoding uint8 final model
   class FinalModelUInt8 < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -2612,7 +2612,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding int16 final model class
+  # Fast Binary Encoding int16 final model
   class FinalModelInt16 < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -2663,7 +2663,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding uint16 final model class
+  # Fast Binary Encoding uint16 final model
   class FinalModelUInt16 < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -2714,7 +2714,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding int32 final model class
+  # Fast Binary Encoding int32 final model
   class FinalModelInt32 < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -2765,7 +2765,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding uint32 final model class
+  # Fast Binary Encoding uint32 final model
   class FinalModelUInt32 < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -2816,7 +2816,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding int64 final model class
+  # Fast Binary Encoding int64 final model
   class FinalModelInt64 < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -2867,7 +2867,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding uint64 final model class
+  # Fast Binary Encoding uint64 final model
   class FinalModelUInt64 < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -2918,7 +2918,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding float final model class
+  # Fast Binary Encoding float final model
   class FinalModelFloat < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -2969,7 +2969,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding double final model class
+  # Fast Binary Encoding double final model
   class FinalModelDouble < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -3020,7 +3020,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding timestamp final model class
+  # Fast Binary Encoding timestamp final model
   class FinalModelTimestamp < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -3071,7 +3071,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding uuid final model class
+  # Fast Binary Encoding uuid final model
   class FinalModelUUID < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -3122,7 +3122,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding decimal final model class
+  # Fast Binary Encoding decimal final model
   class FinalModelDecimal < FieldModel
     def initialize(buffer, offset)
         super(buffer, offset)
@@ -3229,7 +3229,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding bytes final model class
+  # Fast Binary Encoding bytes final model
   class FinalModelBytes < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -3292,7 +3292,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding string final model class
+  # Fast Binary Encoding string final model
   class FinalModelString < FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
@@ -3448,7 +3448,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding array final model class
+  # Fast Binary Encoding array final model
   class FinalModelArray < FinalModel
     def initialize(model, buffer, offset, size)
       super(buffer, offset)
@@ -3527,7 +3527,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding vector final model class
+  # Fast Binary Encoding vector final model
   class FinalModelVector < FinalModel
     def initialize(model, buffer, offset)
       super(buffer, offset)
@@ -3614,7 +3614,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding set final model class
+  # Fast Binary Encoding set final model
   class FinalModelSet < FinalModel
     def initialize(model, buffer, offset)
       super(buffer, offset)
@@ -3701,7 +3701,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding map final model class
+  # Fast Binary Encoding map final model
   class FinalModelMap < FinalModel
     def initialize(model_key, model_value, buffer, offset)
       super(buffer, offset)
@@ -3811,7 +3811,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding base sender class
+  # Fast Binary Encoding base sender
   class Sender
     def initialize(buffer = WriteBuffer.new, logging = false, final = false)
       @_buffer = buffer
@@ -3875,7 +3875,7 @@ module FBE
     end
   end
 
-  # Fast Binary Encoding base receiver class
+  # Fast Binary Encoding base receiver
   class Receiver
     def initialize(buffer = WriteBuffer.new, logging = false, final = false)
       @_buffer = buffer

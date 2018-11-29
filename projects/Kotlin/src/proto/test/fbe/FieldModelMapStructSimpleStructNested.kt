@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructSimple->StructNested map field model class
+// Fast Binary Encoding StructSimple->StructNested map field model
 class FieldModelMapStructSimpleStructNested(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     private val _modelKey = FieldModelStructSimple(buffer, offset)

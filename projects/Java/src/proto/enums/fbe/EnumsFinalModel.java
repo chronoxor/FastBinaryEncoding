@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import enums.*;
 
-// Fast Binary Encoding Enums final model class
+// Fast Binary Encoding Enums final model
 public final class EnumsFinalModel extends Model
 {
     private final FinalModelEnums _model;

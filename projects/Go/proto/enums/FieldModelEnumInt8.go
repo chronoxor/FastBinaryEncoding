@@ -8,10 +8,15 @@ package enums
 import "errors"
 import "../fbe"
 
-// Fast Binary Encoding EnumInt8 field model class
+// Fast Binary Encoding EnumInt8 field model
 type FieldModelEnumInt8 struct {
     buffer *fbe.Buffer  // Field model buffer
     offset int          // Field model buffer offset
+}
+
+// Create a new field model
+func NewFieldModelEnumInt8(buffer *fbe.Buffer, offset int) *FieldModelEnumInt8 {
+    return &FieldModelEnumInt8{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -29,34 +34,37 @@ func (fm *FieldModelEnumInt8) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelEnumInt8) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new field model
-func NewFieldModelEnumInt8(buffer *fbe.Buffer, offset int) *FieldModelEnumInt8 {
-    return &FieldModelEnumInt8{buffer: buffer, offset: offset}
-}
-
 // Check if the value is valid
 func (fm *FieldModelEnumInt8) Verify() bool { return true }
 
 // Get the value
-func (fm *FieldModelEnumInt8) Get() (EnumInt8, error) {
-    return fm.GetDefault(0)
+func (fm *FieldModelEnumInt8) Get() (*EnumInt8, error) {
+    return fm.GetDefault(EnumInt8(0))
 }
 
 // Get the value with provided default value
-func (fm *FieldModelEnumInt8) GetDefault(defaults EnumInt8) (EnumInt8, error) {
+func (fm *FieldModelEnumInt8) GetDefault(defaults EnumInt8) (*EnumInt8, error) {
+    result := defaults
+    return fm.GetValue(&result)
+}
+
+// Get the value by pointer
+func (fm *FieldModelEnumInt8) GetValue(value *EnumInt8) (*EnumInt8, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return EnumInt8(0), nil
+        return value, nil
     }
 
-    return EnumInt8(fbe.ReadInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())), nil
+    result := EnumInt8(fbe.ReadInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    value = &result
+    return value, nil
 }
 
 // Set the value
-func (fm *FieldModelEnumInt8) Set(value EnumInt8) error {
+func (fm *FieldModelEnumInt8) Set(value *EnumInt8) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
 
-    fbe.WriteInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), int8(value))
+    fbe.WriteInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), int8(*value))
     return nil
 }

@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import test.*
 
-// Fast Binary Encoding StructSimple final model class
+// Fast Binary Encoding StructSimple final model
 class StructSimpleFinalModel : Model
 {
     private val _model: FinalModelStructSimple

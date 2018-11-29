@@ -8,10 +8,15 @@ package proto
 import "errors"
 import "../fbe"
 
-// Fast Binary Encoding State field model class
+// Fast Binary Encoding State field model
 type FieldModelState struct {
     buffer *fbe.Buffer  // Field model buffer
     offset int          // Field model buffer offset
+}
+
+// Create a new field model
+func NewFieldModelState(buffer *fbe.Buffer, offset int) *FieldModelState {
+    return &FieldModelState{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -29,34 +34,37 @@ func (fm *FieldModelState) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelState) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new field model
-func NewFieldModelState(buffer *fbe.Buffer, offset int) *FieldModelState {
-    return &FieldModelState{buffer: buffer, offset: offset}
-}
-
 // Check if the value is valid
 func (fm *FieldModelState) Verify() bool { return true }
 
 // Get the value
-func (fm *FieldModelState) Get() (State, error) {
-    return fm.GetDefault(0)
+func (fm *FieldModelState) Get() (*State, error) {
+    return fm.GetDefault(State(0))
 }
 
 // Get the value with provided default value
-func (fm *FieldModelState) GetDefault(defaults State) (State, error) {
+func (fm *FieldModelState) GetDefault(defaults State) (*State, error) {
+    result := defaults
+    return fm.GetValue(&result)
+}
+
+// Get the value by pointer
+func (fm *FieldModelState) GetValue(value *State) (*State, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return State(0), nil
+        return value, nil
     }
 
-    return State(fbe.ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())), nil
+    result := State(fbe.ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    value = &result
+    return value, nil
 }
 
 // Set the value
-func (fm *FieldModelState) Set(value State) error {
+func (fm *FieldModelState) Set(value *State) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
 
-    fbe.WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), byte(value))
+    fbe.WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), byte(*value))
     return nil
 }

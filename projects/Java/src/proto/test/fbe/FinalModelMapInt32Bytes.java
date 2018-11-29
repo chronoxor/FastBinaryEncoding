@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding Int32->Bytes map final model class
+// Fast Binary Encoding Int32->Bytes map final model
 public final class FinalModelMapInt32Bytes extends FinalModel
 {
     private final FinalModelInt32 _modelKey;

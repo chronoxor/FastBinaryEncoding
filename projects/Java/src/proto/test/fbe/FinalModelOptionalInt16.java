@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional Int16 final model class
+// Fast Binary Encoding optional Int16 final model
 public final class FinalModelOptionalInt16 extends FinalModel
 {
     public FinalModelOptionalInt16(Buffer buffer, long offset)

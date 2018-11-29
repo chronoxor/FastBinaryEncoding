@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import enums.*;
 
-// Fast Binary Encoding Enums field model class
+// Fast Binary Encoding Enums field model
 public final class FieldModelEnums extends FieldModel
 {
     public final FieldModelEnumByte byte0;

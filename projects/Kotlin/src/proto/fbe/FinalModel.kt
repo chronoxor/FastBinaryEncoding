@@ -15,7 +15,7 @@ import java.nio.charset.*
 import java.time.*
 import java.util.*
 
-// Fast Binary Encoding base final model class
+// Fast Binary Encoding base final model
 @Suppress("MemberVisibilityCanBePrivate")
 abstract class FinalModel protected constructor(protected var _buffer: Buffer, protected var _offset: Long)
 {

@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding OptionalBytes vector final model class
+// Fast Binary Encoding OptionalBytes vector final model
 public final class FinalModelVectorOptionalBytes extends FinalModel
 {
     private final FinalModelOptionalBytes _model;

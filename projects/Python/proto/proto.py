@@ -42,7 +42,7 @@ class OrderSide(enum.IntEnum, metaclass=fbe.DefaultEnumMeta):
         return OrderSide(value)
 
 
-# Fast Binary Encoding OrderSide field model class
+# Fast Binary Encoding OrderSide field model
 class FieldModelOrderSide(fbe.FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -71,7 +71,7 @@ class FieldModelOrderSide(fbe.FieldModel):
         self.write_byte(self.fbe_offset, value)
 
 
-# Fast Binary Encoding OrderSide final model class
+# Fast Binary Encoding OrderSide final model
 class FinalModelOrderSide(fbe.FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -141,7 +141,7 @@ class OrderType(enum.IntEnum, metaclass=fbe.DefaultEnumMeta):
         return OrderType(value)
 
 
-# Fast Binary Encoding OrderType field model class
+# Fast Binary Encoding OrderType field model
 class FieldModelOrderType(fbe.FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -170,7 +170,7 @@ class FieldModelOrderType(fbe.FieldModel):
         self.write_byte(self.fbe_offset, value)
 
 
-# Fast Binary Encoding OrderType final model class
+# Fast Binary Encoding OrderType final model
 class FinalModelOrderType(fbe.FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -298,7 +298,7 @@ class State(enum.IntFlag, metaclass=fbe.DefaultEnumMeta):
         return State(value)
 
 
-# Fast Binary Encoding State field model class
+# Fast Binary Encoding State field model
 class FieldModelState(fbe.FieldModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -327,7 +327,7 @@ class FieldModelState(fbe.FieldModel):
         self.write_byte(self.fbe_offset, value)
 
 
-# Fast Binary Encoding State final model class
+# Fast Binary Encoding State final model
 class FinalModelState(fbe.FinalModel):
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
@@ -752,7 +752,7 @@ class FieldModelOrder(fbe.FieldModel):
         self.volume.set(fbe_value.volume)
 
 
-# Fast Binary Encoding Order model class
+# Fast Binary Encoding Order model
 class OrderModel(fbe.Model):
     __slots__ = "_model",
 
@@ -1029,7 +1029,7 @@ class FinalModelOrder(fbe.FinalModel):
         return fbe_current_size
 
 
-# Fast Binary Encoding Order final model class
+# Fast Binary Encoding Order final model
 class OrderFinalModel(fbe.Model):
     __slots__ = "_model",
 
@@ -1376,7 +1376,7 @@ class FieldModelBalance(fbe.FieldModel):
         self.amount.set(fbe_value.amount)
 
 
-# Fast Binary Encoding Balance model class
+# Fast Binary Encoding Balance model
 class BalanceModel(fbe.Model):
     __slots__ = "_model",
 
@@ -1561,7 +1561,7 @@ class FinalModelBalance(fbe.FinalModel):
         return fbe_current_size
 
 
-# Fast Binary Encoding Balance final model class
+# Fast Binary Encoding Balance final model
 class BalanceFinalModel(fbe.Model):
     __slots__ = "_model",
 
@@ -2028,7 +2028,7 @@ class FieldModelAccount(fbe.FieldModel):
         self.orders.set(fbe_value.orders)
 
 
-# Fast Binary Encoding Account model class
+# Fast Binary Encoding Account model
 class AccountModel(fbe.Model):
     __slots__ = "_model",
 
@@ -2304,7 +2304,7 @@ class FinalModelAccount(fbe.FinalModel):
         return fbe_current_size
 
 
-# Fast Binary Encoding Account final model class
+# Fast Binary Encoding Account final model
 class AccountFinalModel(fbe.Model):
     __slots__ = "_model",
 
@@ -2373,7 +2373,7 @@ class AccountFinalModel(fbe.Model):
         self._model.fbe_shift(prev)
 
 
-# Fast Binary Encoding proto sender class
+# Fast Binary Encoding proto sender
 class Sender(fbe.Sender):
     __slots__ = "_order_model", "_balance_model", "_account_model", 
 
@@ -2455,7 +2455,7 @@ class Sender(fbe.Sender):
         raise NotImplementedError("proto.Sender.on_send() not implemented!")
 
 
-# Fast Binary Encoding proto receiver class
+# Fast Binary Encoding proto receiver
 class Receiver(fbe.Receiver):
     __slots__ = "_order_value", "_order_model", "_balance_value", "_balance_model", "_account_value", "_account_model", 
 
@@ -2532,7 +2532,7 @@ class Receiver(fbe.Receiver):
         return False
 
 
-# Fast Binary Encoding proto final sender class
+# Fast Binary Encoding proto final sender
 class FinalSender(fbe.Sender):
     __slots__ = "_order_model", "_balance_model", "_account_model", 
 
@@ -2614,7 +2614,7 @@ class FinalSender(fbe.Sender):
         raise NotImplementedError("proto.Sender.on_send() not implemented!")
 
 
-# Fast Binary Encoding proto final receiver class
+# Fast Binary Encoding proto final receiver
 class FinalReceiver(fbe.Receiver):
     __slots__ = "_order_value", "_order_model", "_balance_value", "_balance_model", "_account_value", "_account_model", 
 

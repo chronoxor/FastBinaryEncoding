@@ -18,7 +18,7 @@ import java.util.*
 import fbe.*
 import protoex.*
 
-// Fast Binary Encoding Account final model class
+// Fast Binary Encoding Account final model
 class AccountFinalModel : Model
 {
     private val _model: FinalModelAccount

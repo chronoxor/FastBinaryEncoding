@@ -8,10 +8,15 @@ package proto
 import "errors"
 import "../fbe"
 
-// Fast Binary Encoding OrderType field model class
+// Fast Binary Encoding OrderType field model
 type FieldModelOrderType struct {
     buffer *fbe.Buffer  // Field model buffer
     offset int          // Field model buffer offset
+}
+
+// Create a new field model
+func NewFieldModelOrderType(buffer *fbe.Buffer, offset int) *FieldModelOrderType {
+    return &FieldModelOrderType{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -29,34 +34,37 @@ func (fm *FieldModelOrderType) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelOrderType) FBEUnshift(size int) { fm.offset -= size }
 
-// Create a new field model
-func NewFieldModelOrderType(buffer *fbe.Buffer, offset int) *FieldModelOrderType {
-    return &FieldModelOrderType{buffer: buffer, offset: offset}
-}
-
 // Check if the value is valid
 func (fm *FieldModelOrderType) Verify() bool { return true }
 
 // Get the value
-func (fm *FieldModelOrderType) Get() (OrderType, error) {
-    return fm.GetDefault(0)
+func (fm *FieldModelOrderType) Get() (*OrderType, error) {
+    return fm.GetDefault(OrderType(0))
 }
 
 // Get the value with provided default value
-func (fm *FieldModelOrderType) GetDefault(defaults OrderType) (OrderType, error) {
+func (fm *FieldModelOrderType) GetDefault(defaults OrderType) (*OrderType, error) {
+    result := defaults
+    return fm.GetValue(&result)
+}
+
+// Get the value by pointer
+func (fm *FieldModelOrderType) GetValue(value *OrderType) (*OrderType, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return OrderType(0), nil
+        return value, nil
     }
 
-    return OrderType(fbe.ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())), nil
+    result := OrderType(fbe.ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    value = &result
+    return value, nil
 }
 
 // Set the value
-func (fm *FieldModelOrderType) Set(value OrderType) error {
+func (fm *FieldModelOrderType) Set(value *OrderType) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
 
-    fbe.WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), byte(value))
+    fbe.WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), byte(*value))
     return nil
 }

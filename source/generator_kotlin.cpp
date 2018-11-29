@@ -639,7 +639,7 @@ void GeneratorKotlin::GenerateFBEModel(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding base model class
+// Fast Binary Encoding base model
 open class Model
 {
     // Get bytes buffer
@@ -699,7 +699,7 @@ void GeneratorKotlin::GenerateFBEFieldModel(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding base field model class
+// Fast Binary Encoding base field model
 @Suppress("MemberVisibilityCanBePrivate")
 abstract class FieldModel protected constructor(protected var _buffer: Buffer, protected var _offset: Long)
 {
@@ -781,7 +781,7 @@ void GeneratorKotlin::GenerateFBEFieldModel(const std::string& package, const st
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding _TYPE_ field model class
+// Fast Binary Encoding _TYPE_ field model
 class FieldModel_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size
@@ -838,7 +838,7 @@ void GeneratorKotlin::GenerateFBEFieldModelDecimal(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding decimal field model class
+// Fast Binary Encoding decimal field model
 class FieldModelDecimal(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size
@@ -947,7 +947,7 @@ void GeneratorKotlin::GenerateFBEFieldModelTimestamp(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding timestamp field model class
+// Fast Binary Encoding timestamp field model
 class FieldModelTimestamp(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size
@@ -1001,7 +1001,7 @@ void GeneratorKotlin::GenerateFBEFieldModelBytes(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding bytes field model class
+// Fast Binary Encoding bytes field model
 class FieldModelBytes(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size
@@ -1108,7 +1108,7 @@ void GeneratorKotlin::GenerateFBEFieldModelString(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding string field model class
+// Fast Binary Encoding string field model
 class FieldModelString(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size
@@ -1225,7 +1225,7 @@ void GeneratorKotlin::GenerateFBEFieldModelOptional(const std::string& package, 
     WriteLineIndent("import " + package + ".*");
 
     std::string code = R"CODE(
-// Fast Binary Encoding optional _NAME_ field model class
+// Fast Binary Encoding optional _NAME_ field model
 class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size
@@ -1395,7 +1395,7 @@ void GeneratorKotlin::GenerateFBEFieldModelArray(const std::string& package, con
     WriteLineIndent("import " + package + ".*");
 
     std::string code = R"CODE(
-// Fast Binary Encoding _NAME_ array field model class
+// Fast Binary Encoding _NAME_ array field model
 class FieldModelArray_NAME_(buffer: Buffer, offset: Long, val size: Long) : FieldModel(buffer, offset)
 {
     private val _model = _MODEL_(buffer, offset)
@@ -1558,7 +1558,7 @@ void GeneratorKotlin::GenerateFBEFieldModelVector(const std::string& package, co
     WriteLineIndent("import " + package + ".*");
 
     std::string code = R"CODE(
-// Fast Binary Encoding _NAME_ vector field model class
+// Fast Binary Encoding _NAME_ vector field model
 class FieldModelVector_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     private val _model = _MODEL_(buffer, offset)
@@ -1811,7 +1811,7 @@ void GeneratorKotlin::GenerateFBEFieldModelMap(const std::string& package, const
     WriteLineIndent("import " + package + ".*");
 
     std::string code = R"CODE(
-// Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map field model class
+// Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map field model
 class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     private val _modelKey = _KEY_MODEL_(buffer, offset)
@@ -2054,7 +2054,7 @@ void GeneratorKotlin::GenerateFBEFieldModelEnumFlags(const std::string& package,
     WriteLineIndent("import " + package + ".*");
 
     std::string code = R"CODE(
-// Fast Binary Encoding _NAME_ field model class
+// Fast Binary Encoding _NAME_ field model
 class FieldModel_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
     // Field size
@@ -2109,7 +2109,7 @@ void GeneratorKotlin::GenerateFBESize(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding size class
+// Fast Binary Encoding size
 class Size
 {
     var value: Long = 0
@@ -2145,7 +2145,7 @@ void GeneratorKotlin::GenerateFBEFinalModel(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding base final model class
+// Fast Binary Encoding base final model
 @Suppress("MemberVisibilityCanBePrivate")
 abstract class FinalModel protected constructor(protected var _buffer: Buffer, protected var _offset: Long)
 {
@@ -2227,7 +2227,7 @@ void GeneratorKotlin::GenerateFBEFinalModel(const std::string& package, const st
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding _TYPE_ final model class
+// Fast Binary Encoding _TYPE_ final model
 class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
@@ -2299,7 +2299,7 @@ void GeneratorKotlin::GenerateFBEFinalModelDecimal(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding decimal final model class
+// Fast Binary Encoding decimal final model
 class FinalModelDecimal(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
@@ -2423,7 +2423,7 @@ void GeneratorKotlin::GenerateFBEFinalModelTimestamp(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding timestamp final model class
+// Fast Binary Encoding timestamp final model
 class FinalModelTimestamp(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
@@ -2492,7 +2492,7 @@ void GeneratorKotlin::GenerateFBEFinalModelBytes(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding bytes final model class
+// Fast Binary Encoding bytes final model
 class FinalModelBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
@@ -2576,7 +2576,7 @@ void GeneratorKotlin::GenerateFBEFinalModelString(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding string final model class
+// Fast Binary Encoding string final model
 class FinalModelString(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
@@ -2670,7 +2670,7 @@ void GeneratorKotlin::GenerateFBEFinalModelOptional(const std::string& package, 
     WriteLineIndent("import " + package + ".*");
 
     std::string code = R"CODE(
-// Fast Binary Encoding optional _NAME_ final model class
+// Fast Binary Encoding optional _NAME_ final model
 class FinalModelOptional_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
@@ -2784,7 +2784,7 @@ void GeneratorKotlin::GenerateFBEFinalModelArray(const std::string& package, con
     WriteLineIndent("import " + package + ".*");
 
     std::string code = R"CODE(
-// Fast Binary Encoding _NAME_ array final model class
+// Fast Binary Encoding _NAME_ array final model
 class FinalModelArray_NAME_(buffer: Buffer, offset: Long, private val _size: Long) : FinalModel(buffer, offset)
 {
     private val _model = _MODEL_(buffer, offset)
@@ -2989,7 +2989,7 @@ void GeneratorKotlin::GenerateFBEFinalModelVector(const std::string& package, co
     WriteLineIndent("import " + package + ".*");
 
     std::string code = R"CODE(
-// Fast Binary Encoding _NAME_ vector final model class
+// Fast Binary Encoding _NAME_ vector final model
 class FinalModelVector_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     private val _model = _MODEL_(buffer, offset)
@@ -3220,7 +3220,7 @@ void GeneratorKotlin::GenerateFBEFinalModelMap(const std::string& package, const
     WriteLineIndent("import " + package + ".*");
 
     std::string code = R"CODE(
-// Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map final model class
+// Fast Binary Encoding _KEY_NAME_->_VALUE_NAME_ map final model
 class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     private val _modelKey = _KEY_MODEL_(buffer, offset)
@@ -3440,7 +3440,7 @@ void GeneratorKotlin::GenerateFBEFinalModelEnumFlags(const std::string& package,
     WriteLineIndent("import " + package + ".*");
 
     std::string code = R"CODE(
-// Fast Binary Encoding _NAME_ final model class
+// Fast Binary Encoding _NAME_ final model
 class FinalModel_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
     // Get the allocation size
@@ -3510,7 +3510,7 @@ void GeneratorKotlin::GenerateFBESender(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding base sender class
+// Fast Binary Encoding base sender
 @Suppress("MemberVisibilityCanBePrivate")
 abstract class Sender
 {
@@ -3578,7 +3578,7 @@ void GeneratorKotlin::GenerateFBEReceiver(const std::string& package)
     GenerateImports(package);
 
     std::string code = R"CODE(
-// Fast Binary Encoding base receiver class
+// Fast Binary Encoding base receiver
 @Suppress("MemberVisibilityCanBePrivate")
 abstract class Receiver
 {
@@ -3948,7 +3948,7 @@ internal class UUIDJson : JsonSerializer<UUID>, JsonDeserializer<UUID>
     }
 }
 
-// Fast Binary Encoding base JSON class
+// Fast Binary Encoding base JSON engine
 @Suppress("MemberVisibilityCanBePrivate")
 object Json
 {
@@ -5253,7 +5253,7 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
 
     // Generate struct field model begin
     WriteLine();
-    WriteLineIndent("// Fast Binary Encoding " + *s->name + " field model class");
+    WriteLineIndent("// Fast Binary Encoding " + *s->name + " field model");
     WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"RemoveRedundantCallsOfConversionMethods\", \"ReplaceGetOrSet\")");
     WriteLineIndent("class FieldModel" + *s->name + "(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)");
     WriteLineIndent("{");
@@ -5622,7 +5622,7 @@ void GeneratorKotlin::GenerateStructModel(const std::shared_ptr<Package>& p, con
 
     // Generate struct model begin
     WriteLine();
-    WriteLineIndent("// Fast Binary Encoding " + *s->name + " model class");
+    WriteLineIndent("// Fast Binary Encoding " + *s->name + " model");
     WriteLineIndent("class " + *s->name + "Model : Model");
     WriteLineIndent("{");
     Indent(1);
@@ -5783,7 +5783,7 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
 
     // Generate struct final model begin
     WriteLine();
-    WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model class");
+    WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model");
     WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"RemoveRedundantCallsOfConversionMethods\", \"ReplaceGetOrSet\")");
     WriteLineIndent("class FinalModel" + *s->name + "(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)");
     WriteLineIndent("{");
@@ -6004,7 +6004,7 @@ void GeneratorKotlin::GenerateStructModelFinal(const std::shared_ptr<Package>& p
 
     // Generate struct model final begin
     WriteLine();
-    WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model class");
+    WriteLineIndent("// Fast Binary Encoding " + *s->name + " final model");
     WriteLineIndent("class " + *s->name + "FinalModel : Model");
     WriteLineIndent("{");
     Indent(1);
@@ -6157,9 +6157,9 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     // Generate sender begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final sender class");
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final sender");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " sender class");
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " sender");
     WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"PropertyName\")");
     WriteLineIndent("open class " + sender + " : fbe.Sender");
     WriteLineIndent("{");
@@ -6295,9 +6295,9 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     // Generate receiver begin
     WriteLine();
     if (final)
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final receiver class");
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final receiver");
     else
-        WriteLineIndent("// Fast Binary Encoding " + *p->name + " receiver class");
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " receiver");
     WriteLineIndent("@Suppress(\"MemberVisibilityCanBePrivate\", \"PrivatePropertyName\", \"UNUSED_PARAMETER\")");
     WriteLineIndent("open class " + receiver + " : fbe.Receiver");
     WriteLineIndent("{");
@@ -6477,7 +6477,7 @@ void GeneratorKotlin::GenerateJson(const std::shared_ptr<Package>& p)
 
     // Generate JSON engine begin
     WriteLine();
-    WriteLineIndent("// Fast Binary Encoding " + *p->name + " JSON class");
+    WriteLineIndent("// Fast Binary Encoding " + *p->name + " JSON engine");
     WriteLineIndent("object Json");
     WriteLineIndent("{");
     Indent(1);

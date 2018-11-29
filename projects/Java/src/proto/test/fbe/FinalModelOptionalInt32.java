@@ -17,7 +17,7 @@ import java.util.*;
 import fbe.*;
 import test.*;
 
-// Fast Binary Encoding optional Int32 final model class
+// Fast Binary Encoding optional Int32 final model
 public final class FinalModelOptionalInt32 extends FinalModel
 {
     public FinalModelOptionalInt32(Buffer buffer, long offset)

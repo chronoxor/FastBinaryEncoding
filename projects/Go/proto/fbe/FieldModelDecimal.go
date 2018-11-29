@@ -9,10 +9,15 @@ import "errors"
 import "math/big"
 import "github.com/shopspring/decimal"
 
-// Fast Binary Encoding decimal field model class
+// Fast Binary Encoding decimal field model
 type FieldModelDecimal struct {
     buffer *Buffer  // Field model buffer
     offset int      // Field model buffer offset
+}
+
+// Create a new decimal field model
+func NewFieldModelDecimal(buffer *Buffer, offset int) *FieldModelDecimal {
+    return &FieldModelDecimal{buffer: buffer, offset: offset}
 }
 
 // Get the field size
@@ -29,11 +34,6 @@ func (fm *FieldModelDecimal) SetFBEOffset(value int) { fm.offset = value }
 func (fm *FieldModelDecimal) FBEShift(size int) { fm.offset += size }
 // Unshift the current field offset
 func (fm *FieldModelDecimal) FBEUnshift(size int) { fm.offset -= size }
-
-// Create a new decimal field model
-func NewFieldModelDecimal(buffer *Buffer, offset int) *FieldModelDecimal {
-    return &FieldModelDecimal{buffer: buffer, offset: offset}
-}
 
 // Check if the decimal value is valid
 func (fm *FieldModelDecimal) Verify() bool { return true }
