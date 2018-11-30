@@ -35,12 +35,12 @@ func (fm *FinalModelUUID) FBEShift(size int) { fm.offset += size }
 func (fm *FinalModelUUID) FBEUnshift(size int) { fm.offset -= size }
 
 // Check if the UUID value is valid
-func (fm *FinalModelUUID) Verify() (bool, int) {
+func (fm *FinalModelUUID) Verify() int {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return false, 0
+        return MaxInt
     }
 
-    return true, fm.FBESize()
+    return fm.FBESize()
 }
 
 // Get the UUID value

@@ -117,7 +117,7 @@ func NewFieldModelStructSimple(buffer *fbe.Buffer, offset int) *FieldModelStruct
 }
 
 // Get the field size
-func (fm *FieldModelStructSimple) FBESize() int { return 1 }
+func (fm *FieldModelStructSimple) FBESize() int { return 4 }
 
 // Get the field body size
 func (fm *FieldModelStructSimple) FBEBody() int {
@@ -585,20 +585,20 @@ func (fm *FieldModelStructSimple) GetEnd(fbeBegin int) {
 // Get the struct value
 func (fm *FieldModelStructSimple) Get() (*StructSimple, error) {
     fbeResult := NewStructSimple()
-    return fm.GetValue(fbeResult)
+    return fbeResult, fm.GetValue(fbeResult)
 }
 
-// Get the struct value by pointer
-func (fm *FieldModelStructSimple) GetValue(fbeValue *StructSimple) (*StructSimple, error) {
+// Get the struct value by the given pointer
+func (fm *FieldModelStructSimple) GetValue(fbeValue *StructSimple) error {
     fbeBegin, err := fm.GetBegin()
     if fbeBegin == 0 {
-        return fbeValue, err
+        return err
     }
 
     fbeStructSize := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset()))
     fm.GetFields(fbeValue, fbeStructSize)
     fm.GetEnd(fbeBegin)
-    return fbeValue, nil
+    return nil
 }
 
 // Get the struct fields values
@@ -606,272 +606,496 @@ func (fm *FieldModelStructSimple) GetFields(fbeValue *StructSimple, fbeStructSiz
     fbeCurrentSize := 4 + 4
 
     if (fbeCurrentSize + fm.Uid.FBESize()) <= fbeStructSize {
+        fbeValue.Uid, _ = fm.Uid.Get()
     } else {
         fbeValue.Uid = 0
     }
     fbeCurrentSize += fm.Uid.FBESize()
 
     if (fbeCurrentSize + fm.F1.FBESize()) <= fbeStructSize {
+        fbeValue.F1, _ = fm.F1.Get()
     } else {
         fbeValue.F1 = false
     }
     fbeCurrentSize += fm.F1.FBESize()
 
     if (fbeCurrentSize + fm.F2.FBESize()) <= fbeStructSize {
+        fbeValue.F2, _ = fm.F2.GetDefault(true)
     } else {
         fbeValue.F2 = true
     }
     fbeCurrentSize += fm.F2.FBESize()
 
     if (fbeCurrentSize + fm.F3.FBESize()) <= fbeStructSize {
+        fbeValue.F3, _ = fm.F3.Get()
     } else {
         fbeValue.F3 = 0
     }
     fbeCurrentSize += fm.F3.FBESize()
 
     if (fbeCurrentSize + fm.F4.FBESize()) <= fbeStructSize {
+        fbeValue.F4, _ = fm.F4.GetDefault(byte(255))
     } else {
         fbeValue.F4 = byte(255)
     }
     fbeCurrentSize += fm.F4.FBESize()
 
     if (fbeCurrentSize + fm.F5.FBESize()) <= fbeStructSize {
+        fbeValue.F5, _ = fm.F5.Get()
     } else {
         fbeValue.F5 = '\000'
     }
     fbeCurrentSize += fm.F5.FBESize()
 
     if (fbeCurrentSize + fm.F6.FBESize()) <= fbeStructSize {
+        fbeValue.F6, _ = fm.F6.GetDefault('!')
     } else {
         fbeValue.F6 = '!'
     }
     fbeCurrentSize += fm.F6.FBESize()
 
     if (fbeCurrentSize + fm.F7.FBESize()) <= fbeStructSize {
+        fbeValue.F7, _ = fm.F7.Get()
     } else {
         fbeValue.F7 = '\000'
     }
     fbeCurrentSize += fm.F7.FBESize()
 
     if (fbeCurrentSize + fm.F8.FBESize()) <= fbeStructSize {
+        fbeValue.F8, _ = fm.F8.GetDefault(rune(0x0444))
     } else {
         fbeValue.F8 = rune(0x0444)
     }
     fbeCurrentSize += fm.F8.FBESize()
 
     if (fbeCurrentSize + fm.F9.FBESize()) <= fbeStructSize {
+        fbeValue.F9, _ = fm.F9.Get()
     } else {
         fbeValue.F9 = 0
     }
     fbeCurrentSize += fm.F9.FBESize()
 
     if (fbeCurrentSize + fm.F10.FBESize()) <= fbeStructSize {
+        fbeValue.F10, _ = fm.F10.GetDefault(int8(127))
     } else {
         fbeValue.F10 = int8(127)
     }
     fbeCurrentSize += fm.F10.FBESize()
 
     if (fbeCurrentSize + fm.F11.FBESize()) <= fbeStructSize {
+        fbeValue.F11, _ = fm.F11.Get()
     } else {
         fbeValue.F11 = 0
     }
     fbeCurrentSize += fm.F11.FBESize()
 
     if (fbeCurrentSize + fm.F12.FBESize()) <= fbeStructSize {
+        fbeValue.F12, _ = fm.F12.GetDefault(uint8(255))
     } else {
         fbeValue.F12 = uint8(255)
     }
     fbeCurrentSize += fm.F12.FBESize()
 
     if (fbeCurrentSize + fm.F13.FBESize()) <= fbeStructSize {
+        fbeValue.F13, _ = fm.F13.Get()
     } else {
         fbeValue.F13 = 0
     }
     fbeCurrentSize += fm.F13.FBESize()
 
     if (fbeCurrentSize + fm.F14.FBESize()) <= fbeStructSize {
+        fbeValue.F14, _ = fm.F14.GetDefault(int16(32767))
     } else {
         fbeValue.F14 = int16(32767)
     }
     fbeCurrentSize += fm.F14.FBESize()
 
     if (fbeCurrentSize + fm.F15.FBESize()) <= fbeStructSize {
+        fbeValue.F15, _ = fm.F15.Get()
     } else {
         fbeValue.F15 = 0
     }
     fbeCurrentSize += fm.F15.FBESize()
 
     if (fbeCurrentSize + fm.F16.FBESize()) <= fbeStructSize {
+        fbeValue.F16, _ = fm.F16.GetDefault(uint16(65535))
     } else {
         fbeValue.F16 = uint16(65535)
     }
     fbeCurrentSize += fm.F16.FBESize()
 
     if (fbeCurrentSize + fm.F17.FBESize()) <= fbeStructSize {
+        fbeValue.F17, _ = fm.F17.Get()
     } else {
         fbeValue.F17 = 0
     }
     fbeCurrentSize += fm.F17.FBESize()
 
     if (fbeCurrentSize + fm.F18.FBESize()) <= fbeStructSize {
+        fbeValue.F18, _ = fm.F18.GetDefault(int32(2147483647))
     } else {
         fbeValue.F18 = int32(2147483647)
     }
     fbeCurrentSize += fm.F18.FBESize()
 
     if (fbeCurrentSize + fm.F19.FBESize()) <= fbeStructSize {
+        fbeValue.F19, _ = fm.F19.Get()
     } else {
         fbeValue.F19 = 0
     }
     fbeCurrentSize += fm.F19.FBESize()
 
     if (fbeCurrentSize + fm.F20.FBESize()) <= fbeStructSize {
+        fbeValue.F20, _ = fm.F20.GetDefault(uint32(0xFFFFFFFF))
     } else {
         fbeValue.F20 = uint32(0xFFFFFFFF)
     }
     fbeCurrentSize += fm.F20.FBESize()
 
     if (fbeCurrentSize + fm.F21.FBESize()) <= fbeStructSize {
+        fbeValue.F21, _ = fm.F21.Get()
     } else {
         fbeValue.F21 = 0
     }
     fbeCurrentSize += fm.F21.FBESize()
 
     if (fbeCurrentSize + fm.F22.FBESize()) <= fbeStructSize {
+        fbeValue.F22, _ = fm.F22.GetDefault(int64(9223372036854775807))
     } else {
         fbeValue.F22 = int64(9223372036854775807)
     }
     fbeCurrentSize += fm.F22.FBESize()
 
     if (fbeCurrentSize + fm.F23.FBESize()) <= fbeStructSize {
+        fbeValue.F23, _ = fm.F23.Get()
     } else {
         fbeValue.F23 = 0
     }
     fbeCurrentSize += fm.F23.FBESize()
 
     if (fbeCurrentSize + fm.F24.FBESize()) <= fbeStructSize {
+        fbeValue.F24, _ = fm.F24.GetDefault(uint64(0xFFFFFFFFFFFFFFFF))
     } else {
         fbeValue.F24 = uint64(0xFFFFFFFFFFFFFFFF)
     }
     fbeCurrentSize += fm.F24.FBESize()
 
     if (fbeCurrentSize + fm.F25.FBESize()) <= fbeStructSize {
+        fbeValue.F25, _ = fm.F25.Get()
     } else {
         fbeValue.F25 = 0.0
     }
     fbeCurrentSize += fm.F25.FBESize()
 
     if (fbeCurrentSize + fm.F26.FBESize()) <= fbeStructSize {
+        fbeValue.F26, _ = fm.F26.GetDefault(float32(123.456))
     } else {
         fbeValue.F26 = float32(123.456)
     }
     fbeCurrentSize += fm.F26.FBESize()
 
     if (fbeCurrentSize + fm.F27.FBESize()) <= fbeStructSize {
+        fbeValue.F27, _ = fm.F27.Get()
     } else {
         fbeValue.F27 = 0.0
     }
     fbeCurrentSize += fm.F27.FBESize()
 
     if (fbeCurrentSize + fm.F28.FBESize()) <= fbeStructSize {
+        fbeValue.F28, _ = fm.F28.GetDefault(float64(-123.456e+123))
     } else {
         fbeValue.F28 = float64(-123.456e+123)
     }
     fbeCurrentSize += fm.F28.FBESize()
 
     if (fbeCurrentSize + fm.F29.FBESize()) <= fbeStructSize {
+        fbeValue.F29, _ = fm.F29.Get()
     } else {
         fbeValue.F29 = fbe.DecimalZero()
     }
     fbeCurrentSize += fm.F29.FBESize()
 
     if (fbeCurrentSize + fm.F30.FBESize()) <= fbeStructSize {
+        fbeValue.F30, _ = fm.F30.GetDefault(fbe.DecimalFromString("123456.123456"))
     } else {
         fbeValue.F30 = fbe.DecimalFromString("123456.123456")
     }
     fbeCurrentSize += fm.F30.FBESize()
 
     if (fbeCurrentSize + fm.F31.FBESize()) <= fbeStructSize {
+        fbeValue.F31, _ = fm.F31.Get()
     } else {
         fbeValue.F31 = ""
     }
     fbeCurrentSize += fm.F31.FBESize()
 
     if (fbeCurrentSize + fm.F32.FBESize()) <= fbeStructSize {
+        fbeValue.F32, _ = fm.F32.GetDefault("Initial string!")
     } else {
         fbeValue.F32 = "Initial string!"
     }
     fbeCurrentSize += fm.F32.FBESize()
 
     if (fbeCurrentSize + fm.F33.FBESize()) <= fbeStructSize {
+        fbeValue.F33, _ = fm.F33.Get()
     } else {
         fbeValue.F33 = fbe.TimestampEpoch()
     }
     fbeCurrentSize += fm.F33.FBESize()
 
     if (fbeCurrentSize + fm.F34.FBESize()) <= fbeStructSize {
+        fbeValue.F34, _ = fm.F34.GetDefault(fbe.TimestampEpoch())
     } else {
         fbeValue.F34 = fbe.TimestampEpoch()
     }
     fbeCurrentSize += fm.F34.FBESize()
 
     if (fbeCurrentSize + fm.F35.FBESize()) <= fbeStructSize {
+        fbeValue.F35, _ = fm.F35.GetDefault(fbe.TimestampUTC())
     } else {
         fbeValue.F35 = fbe.TimestampUTC()
     }
     fbeCurrentSize += fm.F35.FBESize()
 
     if (fbeCurrentSize + fm.F36.FBESize()) <= fbeStructSize {
+        fbeValue.F36, _ = fm.F36.Get()
     } else {
         fbeValue.F36 = fbe.UUIDNil()
     }
     fbeCurrentSize += fm.F36.FBESize()
 
     if (fbeCurrentSize + fm.F37.FBESize()) <= fbeStructSize {
+        fbeValue.F37, _ = fm.F37.GetDefault(fbe.UUIDSequential())
     } else {
         fbeValue.F37 = fbe.UUIDSequential()
     }
     fbeCurrentSize += fm.F37.FBESize()
 
     if (fbeCurrentSize + fm.F38.FBESize()) <= fbeStructSize {
+        fbeValue.F38, _ = fm.F38.GetDefault(fbe.UUIDFromString("123e4567-e89b-12d3-a456-426655440000"))
     } else {
         fbeValue.F38 = fbe.UUIDFromString("123e4567-e89b-12d3-a456-426655440000")
     }
     fbeCurrentSize += fm.F38.FBESize()
 
     if (fbeCurrentSize + fm.F39.FBESize()) <= fbeStructSize {
+        _ = fm.F39.GetValue(&fbeValue.F39)
     } else {
         fbeValue.F39 = *proto.NewOrderSide()
     }
     fbeCurrentSize += fm.F39.FBESize()
 
     if (fbeCurrentSize + fm.F40.FBESize()) <= fbeStructSize {
+        _ = fm.F40.GetValue(&fbeValue.F40)
     } else {
         fbeValue.F40 = *proto.NewOrderType()
     }
     fbeCurrentSize += fm.F40.FBESize()
 
     if (fbeCurrentSize + fm.F41.FBESize()) <= fbeStructSize {
+        _ = fm.F41.GetValue(&fbeValue.F41)
     } else {
         fbeValue.F41 = *proto.NewOrder()
     }
     fbeCurrentSize += fm.F41.FBESize()
 
     if (fbeCurrentSize + fm.F42.FBESize()) <= fbeStructSize {
+        _ = fm.F42.GetValue(&fbeValue.F42)
     } else {
         fbeValue.F42 = *proto.NewBalance()
     }
     fbeCurrentSize += fm.F42.FBESize()
 
     if (fbeCurrentSize + fm.F43.FBESize()) <= fbeStructSize {
+        _ = fm.F43.GetValue(&fbeValue.F43)
     } else {
         fbeValue.F43 = *proto.NewState()
     }
     fbeCurrentSize += fm.F43.FBESize()
 
     if (fbeCurrentSize + fm.F44.FBESize()) <= fbeStructSize {
+        _ = fm.F44.GetValue(&fbeValue.F44)
     } else {
         fbeValue.F44 = *proto.NewAccount()
     }
     fbeCurrentSize += fm.F44.FBESize()
+}
+
+// Set the struct value (begin phase)
+func (fm *FieldModelStructSimple) SetBegin() (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
+    }
+
+    fbeStructSize := fm.FBEBody()
+    fbeStructOffset := fm.buffer.Allocate(fbeStructSize) - fm.buffer.Offset()
+    if (fbeStructOffset <= 0) || ((fm.buffer.Offset() + fbeStructOffset + fbeStructSize) > fm.buffer.Size()) {
+        return 0, errors.New("model is broken")
+    }
+
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint32(fbeStructOffset))
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeStructOffset, uint32(fbeStructSize))
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeStructOffset + 4, uint32(fm.FBEType()))
+
+    fm.buffer.Shift(fbeStructOffset)
+    return fbeStructOffset, nil
+}
+
+// Set the struct value (end phase)
+func (fm *FieldModelStructSimple) SetEnd(fbeBegin int) {
+    fm.buffer.Unshift(fbeBegin)
+}
+
+// Set the struct value
+func (fm *FieldModelStructSimple) Set(fbeValue *StructSimple) error {
+    fbeBegin, err := fm.SetBegin()
+    if fbeBegin == 0 {
+        return err
+    }
+
+    err = fm.SetFields(fbeValue)
+    fm.SetEnd(fbeBegin)
+    return err
+}
+
+// Set the struct fields values
+func (fm *FieldModelStructSimple) SetFields(fbeValue *StructSimple) error {
+    var err error = nil
+
+    if err = fm.Uid.Set(fbeValue.Uid); err != nil {
+        return err
+    }
+    if err = fm.F1.Set(fbeValue.F1); err != nil {
+        return err
+    }
+    if err = fm.F2.Set(fbeValue.F2); err != nil {
+        return err
+    }
+    if err = fm.F3.Set(fbeValue.F3); err != nil {
+        return err
+    }
+    if err = fm.F4.Set(fbeValue.F4); err != nil {
+        return err
+    }
+    if err = fm.F5.Set(fbeValue.F5); err != nil {
+        return err
+    }
+    if err = fm.F6.Set(fbeValue.F6); err != nil {
+        return err
+    }
+    if err = fm.F7.Set(fbeValue.F7); err != nil {
+        return err
+    }
+    if err = fm.F8.Set(fbeValue.F8); err != nil {
+        return err
+    }
+    if err = fm.F9.Set(fbeValue.F9); err != nil {
+        return err
+    }
+    if err = fm.F10.Set(fbeValue.F10); err != nil {
+        return err
+    }
+    if err = fm.F11.Set(fbeValue.F11); err != nil {
+        return err
+    }
+    if err = fm.F12.Set(fbeValue.F12); err != nil {
+        return err
+    }
+    if err = fm.F13.Set(fbeValue.F13); err != nil {
+        return err
+    }
+    if err = fm.F14.Set(fbeValue.F14); err != nil {
+        return err
+    }
+    if err = fm.F15.Set(fbeValue.F15); err != nil {
+        return err
+    }
+    if err = fm.F16.Set(fbeValue.F16); err != nil {
+        return err
+    }
+    if err = fm.F17.Set(fbeValue.F17); err != nil {
+        return err
+    }
+    if err = fm.F18.Set(fbeValue.F18); err != nil {
+        return err
+    }
+    if err = fm.F19.Set(fbeValue.F19); err != nil {
+        return err
+    }
+    if err = fm.F20.Set(fbeValue.F20); err != nil {
+        return err
+    }
+    if err = fm.F21.Set(fbeValue.F21); err != nil {
+        return err
+    }
+    if err = fm.F22.Set(fbeValue.F22); err != nil {
+        return err
+    }
+    if err = fm.F23.Set(fbeValue.F23); err != nil {
+        return err
+    }
+    if err = fm.F24.Set(fbeValue.F24); err != nil {
+        return err
+    }
+    if err = fm.F25.Set(fbeValue.F25); err != nil {
+        return err
+    }
+    if err = fm.F26.Set(fbeValue.F26); err != nil {
+        return err
+    }
+    if err = fm.F27.Set(fbeValue.F27); err != nil {
+        return err
+    }
+    if err = fm.F28.Set(fbeValue.F28); err != nil {
+        return err
+    }
+    if err = fm.F29.Set(fbeValue.F29); err != nil {
+        return err
+    }
+    if err = fm.F30.Set(fbeValue.F30); err != nil {
+        return err
+    }
+    if err = fm.F31.Set(fbeValue.F31); err != nil {
+        return err
+    }
+    if err = fm.F32.Set(fbeValue.F32); err != nil {
+        return err
+    }
+    if err = fm.F33.Set(fbeValue.F33); err != nil {
+        return err
+    }
+    if err = fm.F34.Set(fbeValue.F34); err != nil {
+        return err
+    }
+    if err = fm.F35.Set(fbeValue.F35); err != nil {
+        return err
+    }
+    if err = fm.F36.Set(fbeValue.F36); err != nil {
+        return err
+    }
+    if err = fm.F37.Set(fbeValue.F37); err != nil {
+        return err
+    }
+    if err = fm.F38.Set(fbeValue.F38); err != nil {
+        return err
+    }
+    if err = fm.F39.Set(&fbeValue.F39); err != nil {
+        return err
+    }
+    if err = fm.F40.Set(&fbeValue.F40); err != nil {
+        return err
+    }
+    if err = fm.F41.Set(&fbeValue.F41); err != nil {
+        return err
+    }
+    if err = fm.F42.Set(&fbeValue.F42); err != nil {
+        return err
+    }
+    if err = fm.F43.Set(&fbeValue.F43); err != nil {
+        return err
+    }
+    if err = fm.F44.Set(&fbeValue.F44); err != nil {
+        return err
+    }
+    return err
 }

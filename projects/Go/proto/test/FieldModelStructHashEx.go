@@ -31,7 +31,7 @@ func NewFieldModelStructHashEx(buffer *fbe.Buffer, offset int) *FieldModelStruct
 }
 
 // Get the field size
-func (fm *FieldModelStructHashEx) FBESize() int { return 1 }
+func (fm *FieldModelStructHashEx) FBESize() int { return 4 }
 
 // Get the field body size
 func (fm *FieldModelStructHashEx) FBEBody() int {
@@ -155,20 +155,20 @@ func (fm *FieldModelStructHashEx) GetEnd(fbeBegin int) {
 // Get the struct value
 func (fm *FieldModelStructHashEx) Get() (*StructHashEx, error) {
     fbeResult := NewStructHashEx()
-    return fm.GetValue(fbeResult)
+    return fbeResult, fm.GetValue(fbeResult)
 }
 
-// Get the struct value by pointer
-func (fm *FieldModelStructHashEx) GetValue(fbeValue *StructHashEx) (*StructHashEx, error) {
+// Get the struct value by the given pointer
+func (fm *FieldModelStructHashEx) GetValue(fbeValue *StructHashEx) error {
     fbeBegin, err := fm.GetBegin()
     if fbeBegin == 0 {
-        return fbeValue, err
+        return err
     }
 
     fbeStructSize := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset()))
     fm.GetFields(fbeValue, fbeStructSize)
     fm.GetEnd(fbeBegin)
-    return fbeValue, nil
+    return nil
 }
 
 // Get the struct fields values
@@ -176,14 +176,66 @@ func (fm *FieldModelStructHashEx) GetFields(fbeValue *StructHashEx, fbeStructSiz
     fbeCurrentSize := 4 + 4
 
     if (fbeCurrentSize + fm.F1.FBESize()) <= fbeStructSize {
+        _ = fm.F1.GetValue(fbeValue.F1)
     } else {
-        fbeValue.F1.Clear()
+        fbeValue.F1 = make(map[StructSimpleKey]StructNested)
     }
     fbeCurrentSize += fm.F1.FBESize()
 
     if (fbeCurrentSize + fm.F2.FBESize()) <= fbeStructSize {
+        _ = fm.F2.GetValue(fbeValue.F2)
     } else {
-        fbeValue.F2.Clear()
+        fbeValue.F2 = make(map[StructSimpleKey]*StructNested)
     }
     fbeCurrentSize += fm.F2.FBESize()
+}
+
+// Set the struct value (begin phase)
+func (fm *FieldModelStructHashEx) SetBegin() (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
+    }
+
+    fbeStructSize := fm.FBEBody()
+    fbeStructOffset := fm.buffer.Allocate(fbeStructSize) - fm.buffer.Offset()
+    if (fbeStructOffset <= 0) || ((fm.buffer.Offset() + fbeStructOffset + fbeStructSize) > fm.buffer.Size()) {
+        return 0, errors.New("model is broken")
+    }
+
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint32(fbeStructOffset))
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeStructOffset, uint32(fbeStructSize))
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeStructOffset + 4, uint32(fm.FBEType()))
+
+    fm.buffer.Shift(fbeStructOffset)
+    return fbeStructOffset, nil
+}
+
+// Set the struct value (end phase)
+func (fm *FieldModelStructHashEx) SetEnd(fbeBegin int) {
+    fm.buffer.Unshift(fbeBegin)
+}
+
+// Set the struct value
+func (fm *FieldModelStructHashEx) Set(fbeValue *StructHashEx) error {
+    fbeBegin, err := fm.SetBegin()
+    if fbeBegin == 0 {
+        return err
+    }
+
+    err = fm.SetFields(fbeValue)
+    fm.SetEnd(fbeBegin)
+    return err
+}
+
+// Set the struct fields values
+func (fm *FieldModelStructHashEx) SetFields(fbeValue *StructHashEx) error {
+    var err error = nil
+
+    if err = fm.F1.Set(fbeValue.F1); err != nil {
+        return err
+    }
+    if err = fm.F2.Set(fbeValue.F2); err != nil {
+        return err
+    }
+    return err
 }

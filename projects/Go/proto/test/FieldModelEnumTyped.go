@@ -39,24 +39,31 @@ func (fm *FieldModelEnumTyped) Verify() bool { return true }
 
 // Get the value
 func (fm *FieldModelEnumTyped) Get() (*EnumTyped, error) {
-    return fm.GetDefault(EnumTyped(0))
+    var value EnumTyped
+    return &value, fm.GetValueDefault(&value, EnumTyped(0))
 }
 
 // Get the value with provided default value
 func (fm *FieldModelEnumTyped) GetDefault(defaults EnumTyped) (*EnumTyped, error) {
-    result := defaults
-    return fm.GetValue(&result)
+    var value EnumTyped
+    err := fm.GetValueDefault(&value, defaults)
+    return &value, err
 }
 
-// Get the value by pointer
-func (fm *FieldModelEnumTyped) GetValue(value *EnumTyped) (*EnumTyped, error) {
+// Get the value by the given pointer
+func (fm *FieldModelEnumTyped) GetValue(value *EnumTyped) error {
+    return fm.GetValueDefault(value, EnumTyped(0))
+}
+
+// Get the value by the given pointer with provided default value
+func (fm *FieldModelEnumTyped) GetValueDefault(value *EnumTyped, defaults EnumTyped) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return value, nil
+        *value = defaults
+        return nil
     }
 
-    result := EnumTyped(fbe.ReadUInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
-    value = &result
-    return value, nil
+    *value = EnumTyped(fbe.ReadUInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    return nil
 }
 
 // Set the value

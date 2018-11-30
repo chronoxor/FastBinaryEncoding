@@ -39,24 +39,31 @@ func (fm *FieldModelOrderType) Verify() bool { return true }
 
 // Get the value
 func (fm *FieldModelOrderType) Get() (*OrderType, error) {
-    return fm.GetDefault(OrderType(0))
+    var value OrderType
+    return &value, fm.GetValueDefault(&value, OrderType(0))
 }
 
 // Get the value with provided default value
 func (fm *FieldModelOrderType) GetDefault(defaults OrderType) (*OrderType, error) {
-    result := defaults
-    return fm.GetValue(&result)
+    var value OrderType
+    err := fm.GetValueDefault(&value, defaults)
+    return &value, err
 }
 
-// Get the value by pointer
-func (fm *FieldModelOrderType) GetValue(value *OrderType) (*OrderType, error) {
+// Get the value by the given pointer
+func (fm *FieldModelOrderType) GetValue(value *OrderType) error {
+    return fm.GetValueDefault(value, OrderType(0))
+}
+
+// Get the value by the given pointer with provided default value
+func (fm *FieldModelOrderType) GetValueDefault(value *OrderType, defaults OrderType) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return value, nil
+        *value = defaults
+        return nil
     }
 
-    result := OrderType(fbe.ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
-    value = &result
-    return value, nil
+    *value = OrderType(fbe.ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    return nil
 }
 
 // Set the value

@@ -157,7 +157,7 @@ func NewFieldModelEnums(buffer *fbe.Buffer, offset int) *FieldModelEnums {
 }
 
 // Get the field size
-func (fm *FieldModelEnums) FBESize() int { return 1 }
+func (fm *FieldModelEnums) FBESize() int { return 4 }
 
 // Get the field body size
 func (fm *FieldModelEnums) FBEBody() int {
@@ -793,20 +793,20 @@ func (fm *FieldModelEnums) GetEnd(fbeBegin int) {
 // Get the struct value
 func (fm *FieldModelEnums) Get() (*Enums, error) {
     fbeResult := NewEnums()
-    return fm.GetValue(fbeResult)
+    return fbeResult, fm.GetValue(fbeResult)
 }
 
-// Get the struct value by pointer
-func (fm *FieldModelEnums) GetValue(fbeValue *Enums) (*Enums, error) {
+// Get the struct value by the given pointer
+func (fm *FieldModelEnums) GetValue(fbeValue *Enums) error {
     fbeBegin, err := fm.GetBegin()
     if fbeBegin == 0 {
-        return fbeValue, err
+        return err
     }
 
     fbeStructSize := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset()))
     fm.GetFields(fbeValue, fbeStructSize)
     fm.GetEnd(fbeBegin)
-    return fbeValue, nil
+    return nil
 }
 
 // Get the struct fields values
@@ -814,398 +814,706 @@ func (fm *FieldModelEnums) GetFields(fbeValue *Enums, fbeStructSize int) {
     fbeCurrentSize := 4 + 4
 
     if (fbeCurrentSize + fm.Byte0.FBESize()) <= fbeStructSize {
+        _ = fm.Byte0.GetValueDefault(&fbeValue.Byte0, EnumByte_ENUM_VALUE_0)
     } else {
         fbeValue.Byte0 = EnumByte_ENUM_VALUE_0
     }
     fbeCurrentSize += fm.Byte0.FBESize()
 
     if (fbeCurrentSize + fm.Byte1.FBESize()) <= fbeStructSize {
+        _ = fm.Byte1.GetValueDefault(&fbeValue.Byte1, EnumByte_ENUM_VALUE_1)
     } else {
         fbeValue.Byte1 = EnumByte_ENUM_VALUE_1
     }
     fbeCurrentSize += fm.Byte1.FBESize()
 
     if (fbeCurrentSize + fm.Byte2.FBESize()) <= fbeStructSize {
+        _ = fm.Byte2.GetValueDefault(&fbeValue.Byte2, EnumByte_ENUM_VALUE_2)
     } else {
         fbeValue.Byte2 = EnumByte_ENUM_VALUE_2
     }
     fbeCurrentSize += fm.Byte2.FBESize()
 
     if (fbeCurrentSize + fm.Byte3.FBESize()) <= fbeStructSize {
+        _ = fm.Byte3.GetValueDefault(&fbeValue.Byte3, EnumByte_ENUM_VALUE_3)
     } else {
         fbeValue.Byte3 = EnumByte_ENUM_VALUE_3
     }
     fbeCurrentSize += fm.Byte3.FBESize()
 
     if (fbeCurrentSize + fm.Byte4.FBESize()) <= fbeStructSize {
+        _ = fm.Byte4.GetValueDefault(&fbeValue.Byte4, EnumByte_ENUM_VALUE_4)
     } else {
         fbeValue.Byte4 = EnumByte_ENUM_VALUE_4
     }
     fbeCurrentSize += fm.Byte4.FBESize()
 
     if (fbeCurrentSize + fm.Byte5.FBESize()) <= fbeStructSize {
+        _ = fm.Byte5.GetValueDefault(&fbeValue.Byte5, EnumByte_ENUM_VALUE_5)
     } else {
         fbeValue.Byte5 = EnumByte_ENUM_VALUE_5
     }
     fbeCurrentSize += fm.Byte5.FBESize()
 
     if (fbeCurrentSize + fm.Char0.FBESize()) <= fbeStructSize {
+        _ = fm.Char0.GetValueDefault(&fbeValue.Char0, EnumChar_ENUM_VALUE_0)
     } else {
         fbeValue.Char0 = EnumChar_ENUM_VALUE_0
     }
     fbeCurrentSize += fm.Char0.FBESize()
 
     if (fbeCurrentSize + fm.Char1.FBESize()) <= fbeStructSize {
+        _ = fm.Char1.GetValueDefault(&fbeValue.Char1, EnumChar_ENUM_VALUE_1)
     } else {
         fbeValue.Char1 = EnumChar_ENUM_VALUE_1
     }
     fbeCurrentSize += fm.Char1.FBESize()
 
     if (fbeCurrentSize + fm.Char2.FBESize()) <= fbeStructSize {
+        _ = fm.Char2.GetValueDefault(&fbeValue.Char2, EnumChar_ENUM_VALUE_2)
     } else {
         fbeValue.Char2 = EnumChar_ENUM_VALUE_2
     }
     fbeCurrentSize += fm.Char2.FBESize()
 
     if (fbeCurrentSize + fm.Char3.FBESize()) <= fbeStructSize {
+        _ = fm.Char3.GetValueDefault(&fbeValue.Char3, EnumChar_ENUM_VALUE_3)
     } else {
         fbeValue.Char3 = EnumChar_ENUM_VALUE_3
     }
     fbeCurrentSize += fm.Char3.FBESize()
 
     if (fbeCurrentSize + fm.Char4.FBESize()) <= fbeStructSize {
+        _ = fm.Char4.GetValueDefault(&fbeValue.Char4, EnumChar_ENUM_VALUE_4)
     } else {
         fbeValue.Char4 = EnumChar_ENUM_VALUE_4
     }
     fbeCurrentSize += fm.Char4.FBESize()
 
     if (fbeCurrentSize + fm.Char5.FBESize()) <= fbeStructSize {
+        _ = fm.Char5.GetValueDefault(&fbeValue.Char5, EnumChar_ENUM_VALUE_5)
     } else {
         fbeValue.Char5 = EnumChar_ENUM_VALUE_5
     }
     fbeCurrentSize += fm.Char5.FBESize()
 
     if (fbeCurrentSize + fm.Wchar0.FBESize()) <= fbeStructSize {
+        _ = fm.Wchar0.GetValueDefault(&fbeValue.Wchar0, EnumWChar_ENUM_VALUE_0)
     } else {
         fbeValue.Wchar0 = EnumWChar_ENUM_VALUE_0
     }
     fbeCurrentSize += fm.Wchar0.FBESize()
 
     if (fbeCurrentSize + fm.Wchar1.FBESize()) <= fbeStructSize {
+        _ = fm.Wchar1.GetValueDefault(&fbeValue.Wchar1, EnumWChar_ENUM_VALUE_1)
     } else {
         fbeValue.Wchar1 = EnumWChar_ENUM_VALUE_1
     }
     fbeCurrentSize += fm.Wchar1.FBESize()
 
     if (fbeCurrentSize + fm.Wchar2.FBESize()) <= fbeStructSize {
+        _ = fm.Wchar2.GetValueDefault(&fbeValue.Wchar2, EnumWChar_ENUM_VALUE_2)
     } else {
         fbeValue.Wchar2 = EnumWChar_ENUM_VALUE_2
     }
     fbeCurrentSize += fm.Wchar2.FBESize()
 
     if (fbeCurrentSize + fm.Wchar3.FBESize()) <= fbeStructSize {
+        _ = fm.Wchar3.GetValueDefault(&fbeValue.Wchar3, EnumWChar_ENUM_VALUE_3)
     } else {
         fbeValue.Wchar3 = EnumWChar_ENUM_VALUE_3
     }
     fbeCurrentSize += fm.Wchar3.FBESize()
 
     if (fbeCurrentSize + fm.Wchar4.FBESize()) <= fbeStructSize {
+        _ = fm.Wchar4.GetValueDefault(&fbeValue.Wchar4, EnumWChar_ENUM_VALUE_4)
     } else {
         fbeValue.Wchar4 = EnumWChar_ENUM_VALUE_4
     }
     fbeCurrentSize += fm.Wchar4.FBESize()
 
     if (fbeCurrentSize + fm.Wchar5.FBESize()) <= fbeStructSize {
+        _ = fm.Wchar5.GetValueDefault(&fbeValue.Wchar5, EnumWChar_ENUM_VALUE_5)
     } else {
         fbeValue.Wchar5 = EnumWChar_ENUM_VALUE_5
     }
     fbeCurrentSize += fm.Wchar5.FBESize()
 
     if (fbeCurrentSize + fm.Int8b0.FBESize()) <= fbeStructSize {
+        _ = fm.Int8b0.GetValueDefault(&fbeValue.Int8b0, EnumInt8_ENUM_VALUE_0)
     } else {
         fbeValue.Int8b0 = EnumInt8_ENUM_VALUE_0
     }
     fbeCurrentSize += fm.Int8b0.FBESize()
 
     if (fbeCurrentSize + fm.Int8b1.FBESize()) <= fbeStructSize {
+        _ = fm.Int8b1.GetValueDefault(&fbeValue.Int8b1, EnumInt8_ENUM_VALUE_1)
     } else {
         fbeValue.Int8b1 = EnumInt8_ENUM_VALUE_1
     }
     fbeCurrentSize += fm.Int8b1.FBESize()
 
     if (fbeCurrentSize + fm.Int8b2.FBESize()) <= fbeStructSize {
+        _ = fm.Int8b2.GetValueDefault(&fbeValue.Int8b2, EnumInt8_ENUM_VALUE_2)
     } else {
         fbeValue.Int8b2 = EnumInt8_ENUM_VALUE_2
     }
     fbeCurrentSize += fm.Int8b2.FBESize()
 
     if (fbeCurrentSize + fm.Int8b3.FBESize()) <= fbeStructSize {
+        _ = fm.Int8b3.GetValueDefault(&fbeValue.Int8b3, EnumInt8_ENUM_VALUE_3)
     } else {
         fbeValue.Int8b3 = EnumInt8_ENUM_VALUE_3
     }
     fbeCurrentSize += fm.Int8b3.FBESize()
 
     if (fbeCurrentSize + fm.Int8b4.FBESize()) <= fbeStructSize {
+        _ = fm.Int8b4.GetValueDefault(&fbeValue.Int8b4, EnumInt8_ENUM_VALUE_4)
     } else {
         fbeValue.Int8b4 = EnumInt8_ENUM_VALUE_4
     }
     fbeCurrentSize += fm.Int8b4.FBESize()
 
     if (fbeCurrentSize + fm.Int8b5.FBESize()) <= fbeStructSize {
+        _ = fm.Int8b5.GetValueDefault(&fbeValue.Int8b5, EnumInt8_ENUM_VALUE_5)
     } else {
         fbeValue.Int8b5 = EnumInt8_ENUM_VALUE_5
     }
     fbeCurrentSize += fm.Int8b5.FBESize()
 
     if (fbeCurrentSize + fm.Uint8b0.FBESize()) <= fbeStructSize {
+        _ = fm.Uint8b0.GetValueDefault(&fbeValue.Uint8b0, EnumUInt8_ENUM_VALUE_0)
     } else {
         fbeValue.Uint8b0 = EnumUInt8_ENUM_VALUE_0
     }
     fbeCurrentSize += fm.Uint8b0.FBESize()
 
     if (fbeCurrentSize + fm.Uint8b1.FBESize()) <= fbeStructSize {
+        _ = fm.Uint8b1.GetValueDefault(&fbeValue.Uint8b1, EnumUInt8_ENUM_VALUE_1)
     } else {
         fbeValue.Uint8b1 = EnumUInt8_ENUM_VALUE_1
     }
     fbeCurrentSize += fm.Uint8b1.FBESize()
 
     if (fbeCurrentSize + fm.Uint8b2.FBESize()) <= fbeStructSize {
+        _ = fm.Uint8b2.GetValueDefault(&fbeValue.Uint8b2, EnumUInt8_ENUM_VALUE_2)
     } else {
         fbeValue.Uint8b2 = EnumUInt8_ENUM_VALUE_2
     }
     fbeCurrentSize += fm.Uint8b2.FBESize()
 
     if (fbeCurrentSize + fm.Uint8b3.FBESize()) <= fbeStructSize {
+        _ = fm.Uint8b3.GetValueDefault(&fbeValue.Uint8b3, EnumUInt8_ENUM_VALUE_3)
     } else {
         fbeValue.Uint8b3 = EnumUInt8_ENUM_VALUE_3
     }
     fbeCurrentSize += fm.Uint8b3.FBESize()
 
     if (fbeCurrentSize + fm.Uint8b4.FBESize()) <= fbeStructSize {
+        _ = fm.Uint8b4.GetValueDefault(&fbeValue.Uint8b4, EnumUInt8_ENUM_VALUE_4)
     } else {
         fbeValue.Uint8b4 = EnumUInt8_ENUM_VALUE_4
     }
     fbeCurrentSize += fm.Uint8b4.FBESize()
 
     if (fbeCurrentSize + fm.Uint8b5.FBESize()) <= fbeStructSize {
+        _ = fm.Uint8b5.GetValueDefault(&fbeValue.Uint8b5, EnumUInt8_ENUM_VALUE_5)
     } else {
         fbeValue.Uint8b5 = EnumUInt8_ENUM_VALUE_5
     }
     fbeCurrentSize += fm.Uint8b5.FBESize()
 
     if (fbeCurrentSize + fm.Int16b0.FBESize()) <= fbeStructSize {
+        _ = fm.Int16b0.GetValueDefault(&fbeValue.Int16b0, EnumInt16_ENUM_VALUE_0)
     } else {
         fbeValue.Int16b0 = EnumInt16_ENUM_VALUE_0
     }
     fbeCurrentSize += fm.Int16b0.FBESize()
 
     if (fbeCurrentSize + fm.Int16b1.FBESize()) <= fbeStructSize {
+        _ = fm.Int16b1.GetValueDefault(&fbeValue.Int16b1, EnumInt16_ENUM_VALUE_1)
     } else {
         fbeValue.Int16b1 = EnumInt16_ENUM_VALUE_1
     }
     fbeCurrentSize += fm.Int16b1.FBESize()
 
     if (fbeCurrentSize + fm.Int16b2.FBESize()) <= fbeStructSize {
+        _ = fm.Int16b2.GetValueDefault(&fbeValue.Int16b2, EnumInt16_ENUM_VALUE_2)
     } else {
         fbeValue.Int16b2 = EnumInt16_ENUM_VALUE_2
     }
     fbeCurrentSize += fm.Int16b2.FBESize()
 
     if (fbeCurrentSize + fm.Int16b3.FBESize()) <= fbeStructSize {
+        _ = fm.Int16b3.GetValueDefault(&fbeValue.Int16b3, EnumInt16_ENUM_VALUE_3)
     } else {
         fbeValue.Int16b3 = EnumInt16_ENUM_VALUE_3
     }
     fbeCurrentSize += fm.Int16b3.FBESize()
 
     if (fbeCurrentSize + fm.Int16b4.FBESize()) <= fbeStructSize {
+        _ = fm.Int16b4.GetValueDefault(&fbeValue.Int16b4, EnumInt16_ENUM_VALUE_4)
     } else {
         fbeValue.Int16b4 = EnumInt16_ENUM_VALUE_4
     }
     fbeCurrentSize += fm.Int16b4.FBESize()
 
     if (fbeCurrentSize + fm.Int16b5.FBESize()) <= fbeStructSize {
+        _ = fm.Int16b5.GetValueDefault(&fbeValue.Int16b5, EnumInt16_ENUM_VALUE_5)
     } else {
         fbeValue.Int16b5 = EnumInt16_ENUM_VALUE_5
     }
     fbeCurrentSize += fm.Int16b5.FBESize()
 
     if (fbeCurrentSize + fm.Uint16b0.FBESize()) <= fbeStructSize {
+        _ = fm.Uint16b0.GetValueDefault(&fbeValue.Uint16b0, EnumUInt16_ENUM_VALUE_0)
     } else {
         fbeValue.Uint16b0 = EnumUInt16_ENUM_VALUE_0
     }
     fbeCurrentSize += fm.Uint16b0.FBESize()
 
     if (fbeCurrentSize + fm.Uint16b1.FBESize()) <= fbeStructSize {
+        _ = fm.Uint16b1.GetValueDefault(&fbeValue.Uint16b1, EnumUInt16_ENUM_VALUE_1)
     } else {
         fbeValue.Uint16b1 = EnumUInt16_ENUM_VALUE_1
     }
     fbeCurrentSize += fm.Uint16b1.FBESize()
 
     if (fbeCurrentSize + fm.Uint16b2.FBESize()) <= fbeStructSize {
+        _ = fm.Uint16b2.GetValueDefault(&fbeValue.Uint16b2, EnumUInt16_ENUM_VALUE_2)
     } else {
         fbeValue.Uint16b2 = EnumUInt16_ENUM_VALUE_2
     }
     fbeCurrentSize += fm.Uint16b2.FBESize()
 
     if (fbeCurrentSize + fm.Uint16b3.FBESize()) <= fbeStructSize {
+        _ = fm.Uint16b3.GetValueDefault(&fbeValue.Uint16b3, EnumUInt16_ENUM_VALUE_3)
     } else {
         fbeValue.Uint16b3 = EnumUInt16_ENUM_VALUE_3
     }
     fbeCurrentSize += fm.Uint16b3.FBESize()
 
     if (fbeCurrentSize + fm.Uint16b4.FBESize()) <= fbeStructSize {
+        _ = fm.Uint16b4.GetValueDefault(&fbeValue.Uint16b4, EnumUInt16_ENUM_VALUE_4)
     } else {
         fbeValue.Uint16b4 = EnumUInt16_ENUM_VALUE_4
     }
     fbeCurrentSize += fm.Uint16b4.FBESize()
 
     if (fbeCurrentSize + fm.Uint16b5.FBESize()) <= fbeStructSize {
+        _ = fm.Uint16b5.GetValueDefault(&fbeValue.Uint16b5, EnumUInt16_ENUM_VALUE_5)
     } else {
         fbeValue.Uint16b5 = EnumUInt16_ENUM_VALUE_5
     }
     fbeCurrentSize += fm.Uint16b5.FBESize()
 
     if (fbeCurrentSize + fm.Int32b0.FBESize()) <= fbeStructSize {
+        _ = fm.Int32b0.GetValueDefault(&fbeValue.Int32b0, EnumInt32_ENUM_VALUE_0)
     } else {
         fbeValue.Int32b0 = EnumInt32_ENUM_VALUE_0
     }
     fbeCurrentSize += fm.Int32b0.FBESize()
 
     if (fbeCurrentSize + fm.Int32b1.FBESize()) <= fbeStructSize {
+        _ = fm.Int32b1.GetValueDefault(&fbeValue.Int32b1, EnumInt32_ENUM_VALUE_1)
     } else {
         fbeValue.Int32b1 = EnumInt32_ENUM_VALUE_1
     }
     fbeCurrentSize += fm.Int32b1.FBESize()
 
     if (fbeCurrentSize + fm.Int32b2.FBESize()) <= fbeStructSize {
+        _ = fm.Int32b2.GetValueDefault(&fbeValue.Int32b2, EnumInt32_ENUM_VALUE_2)
     } else {
         fbeValue.Int32b2 = EnumInt32_ENUM_VALUE_2
     }
     fbeCurrentSize += fm.Int32b2.FBESize()
 
     if (fbeCurrentSize + fm.Int32b3.FBESize()) <= fbeStructSize {
+        _ = fm.Int32b3.GetValueDefault(&fbeValue.Int32b3, EnumInt32_ENUM_VALUE_3)
     } else {
         fbeValue.Int32b3 = EnumInt32_ENUM_VALUE_3
     }
     fbeCurrentSize += fm.Int32b3.FBESize()
 
     if (fbeCurrentSize + fm.Int32b4.FBESize()) <= fbeStructSize {
+        _ = fm.Int32b4.GetValueDefault(&fbeValue.Int32b4, EnumInt32_ENUM_VALUE_4)
     } else {
         fbeValue.Int32b4 = EnumInt32_ENUM_VALUE_4
     }
     fbeCurrentSize += fm.Int32b4.FBESize()
 
     if (fbeCurrentSize + fm.Int32b5.FBESize()) <= fbeStructSize {
+        _ = fm.Int32b5.GetValueDefault(&fbeValue.Int32b5, EnumInt32_ENUM_VALUE_5)
     } else {
         fbeValue.Int32b5 = EnumInt32_ENUM_VALUE_5
     }
     fbeCurrentSize += fm.Int32b5.FBESize()
 
     if (fbeCurrentSize + fm.Uint32b0.FBESize()) <= fbeStructSize {
+        _ = fm.Uint32b0.GetValueDefault(&fbeValue.Uint32b0, EnumUInt32_ENUM_VALUE_0)
     } else {
         fbeValue.Uint32b0 = EnumUInt32_ENUM_VALUE_0
     }
     fbeCurrentSize += fm.Uint32b0.FBESize()
 
     if (fbeCurrentSize + fm.Uint32b1.FBESize()) <= fbeStructSize {
+        _ = fm.Uint32b1.GetValueDefault(&fbeValue.Uint32b1, EnumUInt32_ENUM_VALUE_1)
     } else {
         fbeValue.Uint32b1 = EnumUInt32_ENUM_VALUE_1
     }
     fbeCurrentSize += fm.Uint32b1.FBESize()
 
     if (fbeCurrentSize + fm.Uint32b2.FBESize()) <= fbeStructSize {
+        _ = fm.Uint32b2.GetValueDefault(&fbeValue.Uint32b2, EnumUInt32_ENUM_VALUE_2)
     } else {
         fbeValue.Uint32b2 = EnumUInt32_ENUM_VALUE_2
     }
     fbeCurrentSize += fm.Uint32b2.FBESize()
 
     if (fbeCurrentSize + fm.Uint32b3.FBESize()) <= fbeStructSize {
+        _ = fm.Uint32b3.GetValueDefault(&fbeValue.Uint32b3, EnumUInt32_ENUM_VALUE_3)
     } else {
         fbeValue.Uint32b3 = EnumUInt32_ENUM_VALUE_3
     }
     fbeCurrentSize += fm.Uint32b3.FBESize()
 
     if (fbeCurrentSize + fm.Uint32b4.FBESize()) <= fbeStructSize {
+        _ = fm.Uint32b4.GetValueDefault(&fbeValue.Uint32b4, EnumUInt32_ENUM_VALUE_4)
     } else {
         fbeValue.Uint32b4 = EnumUInt32_ENUM_VALUE_4
     }
     fbeCurrentSize += fm.Uint32b4.FBESize()
 
     if (fbeCurrentSize + fm.Uint32b5.FBESize()) <= fbeStructSize {
+        _ = fm.Uint32b5.GetValueDefault(&fbeValue.Uint32b5, EnumUInt32_ENUM_VALUE_5)
     } else {
         fbeValue.Uint32b5 = EnumUInt32_ENUM_VALUE_5
     }
     fbeCurrentSize += fm.Uint32b5.FBESize()
 
     if (fbeCurrentSize + fm.Int64b0.FBESize()) <= fbeStructSize {
+        _ = fm.Int64b0.GetValueDefault(&fbeValue.Int64b0, EnumInt64_ENUM_VALUE_0)
     } else {
         fbeValue.Int64b0 = EnumInt64_ENUM_VALUE_0
     }
     fbeCurrentSize += fm.Int64b0.FBESize()
 
     if (fbeCurrentSize + fm.Int64b1.FBESize()) <= fbeStructSize {
+        _ = fm.Int64b1.GetValueDefault(&fbeValue.Int64b1, EnumInt64_ENUM_VALUE_1)
     } else {
         fbeValue.Int64b1 = EnumInt64_ENUM_VALUE_1
     }
     fbeCurrentSize += fm.Int64b1.FBESize()
 
     if (fbeCurrentSize + fm.Int64b2.FBESize()) <= fbeStructSize {
+        _ = fm.Int64b2.GetValueDefault(&fbeValue.Int64b2, EnumInt64_ENUM_VALUE_2)
     } else {
         fbeValue.Int64b2 = EnumInt64_ENUM_VALUE_2
     }
     fbeCurrentSize += fm.Int64b2.FBESize()
 
     if (fbeCurrentSize + fm.Int64b3.FBESize()) <= fbeStructSize {
+        _ = fm.Int64b3.GetValueDefault(&fbeValue.Int64b3, EnumInt64_ENUM_VALUE_3)
     } else {
         fbeValue.Int64b3 = EnumInt64_ENUM_VALUE_3
     }
     fbeCurrentSize += fm.Int64b3.FBESize()
 
     if (fbeCurrentSize + fm.Int64b4.FBESize()) <= fbeStructSize {
+        _ = fm.Int64b4.GetValueDefault(&fbeValue.Int64b4, EnumInt64_ENUM_VALUE_4)
     } else {
         fbeValue.Int64b4 = EnumInt64_ENUM_VALUE_4
     }
     fbeCurrentSize += fm.Int64b4.FBESize()
 
     if (fbeCurrentSize + fm.Int64b5.FBESize()) <= fbeStructSize {
+        _ = fm.Int64b5.GetValueDefault(&fbeValue.Int64b5, EnumInt64_ENUM_VALUE_5)
     } else {
         fbeValue.Int64b5 = EnumInt64_ENUM_VALUE_5
     }
     fbeCurrentSize += fm.Int64b5.FBESize()
 
     if (fbeCurrentSize + fm.Uint64b0.FBESize()) <= fbeStructSize {
+        _ = fm.Uint64b0.GetValueDefault(&fbeValue.Uint64b0, EnumUInt64_ENUM_VALUE_0)
     } else {
         fbeValue.Uint64b0 = EnumUInt64_ENUM_VALUE_0
     }
     fbeCurrentSize += fm.Uint64b0.FBESize()
 
     if (fbeCurrentSize + fm.Uint64b1.FBESize()) <= fbeStructSize {
+        _ = fm.Uint64b1.GetValueDefault(&fbeValue.Uint64b1, EnumUInt64_ENUM_VALUE_1)
     } else {
         fbeValue.Uint64b1 = EnumUInt64_ENUM_VALUE_1
     }
     fbeCurrentSize += fm.Uint64b1.FBESize()
 
     if (fbeCurrentSize + fm.Uint64b2.FBESize()) <= fbeStructSize {
+        _ = fm.Uint64b2.GetValueDefault(&fbeValue.Uint64b2, EnumUInt64_ENUM_VALUE_2)
     } else {
         fbeValue.Uint64b2 = EnumUInt64_ENUM_VALUE_2
     }
     fbeCurrentSize += fm.Uint64b2.FBESize()
 
     if (fbeCurrentSize + fm.Uint64b3.FBESize()) <= fbeStructSize {
+        _ = fm.Uint64b3.GetValueDefault(&fbeValue.Uint64b3, EnumUInt64_ENUM_VALUE_3)
     } else {
         fbeValue.Uint64b3 = EnumUInt64_ENUM_VALUE_3
     }
     fbeCurrentSize += fm.Uint64b3.FBESize()
 
     if (fbeCurrentSize + fm.Uint64b4.FBESize()) <= fbeStructSize {
+        _ = fm.Uint64b4.GetValueDefault(&fbeValue.Uint64b4, EnumUInt64_ENUM_VALUE_4)
     } else {
         fbeValue.Uint64b4 = EnumUInt64_ENUM_VALUE_4
     }
     fbeCurrentSize += fm.Uint64b4.FBESize()
 
     if (fbeCurrentSize + fm.Uint64b5.FBESize()) <= fbeStructSize {
+        _ = fm.Uint64b5.GetValueDefault(&fbeValue.Uint64b5, EnumUInt64_ENUM_VALUE_5)
     } else {
         fbeValue.Uint64b5 = EnumUInt64_ENUM_VALUE_5
     }
     fbeCurrentSize += fm.Uint64b5.FBESize()
+}
+
+// Set the struct value (begin phase)
+func (fm *FieldModelEnums) SetBegin() (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
+    }
+
+    fbeStructSize := fm.FBEBody()
+    fbeStructOffset := fm.buffer.Allocate(fbeStructSize) - fm.buffer.Offset()
+    if (fbeStructOffset <= 0) || ((fm.buffer.Offset() + fbeStructOffset + fbeStructSize) > fm.buffer.Size()) {
+        return 0, errors.New("model is broken")
+    }
+
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint32(fbeStructOffset))
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeStructOffset, uint32(fbeStructSize))
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeStructOffset + 4, uint32(fm.FBEType()))
+
+    fm.buffer.Shift(fbeStructOffset)
+    return fbeStructOffset, nil
+}
+
+// Set the struct value (end phase)
+func (fm *FieldModelEnums) SetEnd(fbeBegin int) {
+    fm.buffer.Unshift(fbeBegin)
+}
+
+// Set the struct value
+func (fm *FieldModelEnums) Set(fbeValue *Enums) error {
+    fbeBegin, err := fm.SetBegin()
+    if fbeBegin == 0 {
+        return err
+    }
+
+    err = fm.SetFields(fbeValue)
+    fm.SetEnd(fbeBegin)
+    return err
+}
+
+// Set the struct fields values
+func (fm *FieldModelEnums) SetFields(fbeValue *Enums) error {
+    var err error = nil
+
+    if err = fm.Byte0.Set(&fbeValue.Byte0); err != nil {
+        return err
+    }
+    if err = fm.Byte1.Set(&fbeValue.Byte1); err != nil {
+        return err
+    }
+    if err = fm.Byte2.Set(&fbeValue.Byte2); err != nil {
+        return err
+    }
+    if err = fm.Byte3.Set(&fbeValue.Byte3); err != nil {
+        return err
+    }
+    if err = fm.Byte4.Set(&fbeValue.Byte4); err != nil {
+        return err
+    }
+    if err = fm.Byte5.Set(&fbeValue.Byte5); err != nil {
+        return err
+    }
+    if err = fm.Char0.Set(&fbeValue.Char0); err != nil {
+        return err
+    }
+    if err = fm.Char1.Set(&fbeValue.Char1); err != nil {
+        return err
+    }
+    if err = fm.Char2.Set(&fbeValue.Char2); err != nil {
+        return err
+    }
+    if err = fm.Char3.Set(&fbeValue.Char3); err != nil {
+        return err
+    }
+    if err = fm.Char4.Set(&fbeValue.Char4); err != nil {
+        return err
+    }
+    if err = fm.Char5.Set(&fbeValue.Char5); err != nil {
+        return err
+    }
+    if err = fm.Wchar0.Set(&fbeValue.Wchar0); err != nil {
+        return err
+    }
+    if err = fm.Wchar1.Set(&fbeValue.Wchar1); err != nil {
+        return err
+    }
+    if err = fm.Wchar2.Set(&fbeValue.Wchar2); err != nil {
+        return err
+    }
+    if err = fm.Wchar3.Set(&fbeValue.Wchar3); err != nil {
+        return err
+    }
+    if err = fm.Wchar4.Set(&fbeValue.Wchar4); err != nil {
+        return err
+    }
+    if err = fm.Wchar5.Set(&fbeValue.Wchar5); err != nil {
+        return err
+    }
+    if err = fm.Int8b0.Set(&fbeValue.Int8b0); err != nil {
+        return err
+    }
+    if err = fm.Int8b1.Set(&fbeValue.Int8b1); err != nil {
+        return err
+    }
+    if err = fm.Int8b2.Set(&fbeValue.Int8b2); err != nil {
+        return err
+    }
+    if err = fm.Int8b3.Set(&fbeValue.Int8b3); err != nil {
+        return err
+    }
+    if err = fm.Int8b4.Set(&fbeValue.Int8b4); err != nil {
+        return err
+    }
+    if err = fm.Int8b5.Set(&fbeValue.Int8b5); err != nil {
+        return err
+    }
+    if err = fm.Uint8b0.Set(&fbeValue.Uint8b0); err != nil {
+        return err
+    }
+    if err = fm.Uint8b1.Set(&fbeValue.Uint8b1); err != nil {
+        return err
+    }
+    if err = fm.Uint8b2.Set(&fbeValue.Uint8b2); err != nil {
+        return err
+    }
+    if err = fm.Uint8b3.Set(&fbeValue.Uint8b3); err != nil {
+        return err
+    }
+    if err = fm.Uint8b4.Set(&fbeValue.Uint8b4); err != nil {
+        return err
+    }
+    if err = fm.Uint8b5.Set(&fbeValue.Uint8b5); err != nil {
+        return err
+    }
+    if err = fm.Int16b0.Set(&fbeValue.Int16b0); err != nil {
+        return err
+    }
+    if err = fm.Int16b1.Set(&fbeValue.Int16b1); err != nil {
+        return err
+    }
+    if err = fm.Int16b2.Set(&fbeValue.Int16b2); err != nil {
+        return err
+    }
+    if err = fm.Int16b3.Set(&fbeValue.Int16b3); err != nil {
+        return err
+    }
+    if err = fm.Int16b4.Set(&fbeValue.Int16b4); err != nil {
+        return err
+    }
+    if err = fm.Int16b5.Set(&fbeValue.Int16b5); err != nil {
+        return err
+    }
+    if err = fm.Uint16b0.Set(&fbeValue.Uint16b0); err != nil {
+        return err
+    }
+    if err = fm.Uint16b1.Set(&fbeValue.Uint16b1); err != nil {
+        return err
+    }
+    if err = fm.Uint16b2.Set(&fbeValue.Uint16b2); err != nil {
+        return err
+    }
+    if err = fm.Uint16b3.Set(&fbeValue.Uint16b3); err != nil {
+        return err
+    }
+    if err = fm.Uint16b4.Set(&fbeValue.Uint16b4); err != nil {
+        return err
+    }
+    if err = fm.Uint16b5.Set(&fbeValue.Uint16b5); err != nil {
+        return err
+    }
+    if err = fm.Int32b0.Set(&fbeValue.Int32b0); err != nil {
+        return err
+    }
+    if err = fm.Int32b1.Set(&fbeValue.Int32b1); err != nil {
+        return err
+    }
+    if err = fm.Int32b2.Set(&fbeValue.Int32b2); err != nil {
+        return err
+    }
+    if err = fm.Int32b3.Set(&fbeValue.Int32b3); err != nil {
+        return err
+    }
+    if err = fm.Int32b4.Set(&fbeValue.Int32b4); err != nil {
+        return err
+    }
+    if err = fm.Int32b5.Set(&fbeValue.Int32b5); err != nil {
+        return err
+    }
+    if err = fm.Uint32b0.Set(&fbeValue.Uint32b0); err != nil {
+        return err
+    }
+    if err = fm.Uint32b1.Set(&fbeValue.Uint32b1); err != nil {
+        return err
+    }
+    if err = fm.Uint32b2.Set(&fbeValue.Uint32b2); err != nil {
+        return err
+    }
+    if err = fm.Uint32b3.Set(&fbeValue.Uint32b3); err != nil {
+        return err
+    }
+    if err = fm.Uint32b4.Set(&fbeValue.Uint32b4); err != nil {
+        return err
+    }
+    if err = fm.Uint32b5.Set(&fbeValue.Uint32b5); err != nil {
+        return err
+    }
+    if err = fm.Int64b0.Set(&fbeValue.Int64b0); err != nil {
+        return err
+    }
+    if err = fm.Int64b1.Set(&fbeValue.Int64b1); err != nil {
+        return err
+    }
+    if err = fm.Int64b2.Set(&fbeValue.Int64b2); err != nil {
+        return err
+    }
+    if err = fm.Int64b3.Set(&fbeValue.Int64b3); err != nil {
+        return err
+    }
+    if err = fm.Int64b4.Set(&fbeValue.Int64b4); err != nil {
+        return err
+    }
+    if err = fm.Int64b5.Set(&fbeValue.Int64b5); err != nil {
+        return err
+    }
+    if err = fm.Uint64b0.Set(&fbeValue.Uint64b0); err != nil {
+        return err
+    }
+    if err = fm.Uint64b1.Set(&fbeValue.Uint64b1); err != nil {
+        return err
+    }
+    if err = fm.Uint64b2.Set(&fbeValue.Uint64b2); err != nil {
+        return err
+    }
+    if err = fm.Uint64b3.Set(&fbeValue.Uint64b3); err != nil {
+        return err
+    }
+    if err = fm.Uint64b4.Set(&fbeValue.Uint64b4); err != nil {
+        return err
+    }
+    if err = fm.Uint64b5.Set(&fbeValue.Uint64b5); err != nil {
+        return err
+    }
+    return err
 }

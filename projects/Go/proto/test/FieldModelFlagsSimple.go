@@ -39,24 +39,31 @@ func (fm *FieldModelFlagsSimple) Verify() bool { return true }
 
 // Get the value
 func (fm *FieldModelFlagsSimple) Get() (*FlagsSimple, error) {
-    return fm.GetDefault(FlagsSimple(0))
+    var value FlagsSimple
+    return &value, fm.GetValueDefault(&value, FlagsSimple(0))
 }
 
 // Get the value with provided default value
 func (fm *FieldModelFlagsSimple) GetDefault(defaults FlagsSimple) (*FlagsSimple, error) {
-    result := defaults
-    return fm.GetValue(&result)
+    var value FlagsSimple
+    err := fm.GetValueDefault(&value, defaults)
+    return &value, err
 }
 
-// Get the value by pointer
-func (fm *FieldModelFlagsSimple) GetValue(value *FlagsSimple) (*FlagsSimple, error) {
+// Get the value by the given pointer
+func (fm *FieldModelFlagsSimple) GetValue(value *FlagsSimple) error {
+    return fm.GetValueDefault(value, FlagsSimple(0))
+}
+
+// Get the value by the given pointer with provided default value
+func (fm *FieldModelFlagsSimple) GetValueDefault(value *FlagsSimple, defaults FlagsSimple) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return value, nil
+        *value = defaults
+        return nil
     }
 
-    result := FlagsSimple(fbe.ReadInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
-    value = &result
-    return value, nil
+    *value = FlagsSimple(fbe.ReadInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    return nil
 }
 
 // Set the value

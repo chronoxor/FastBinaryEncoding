@@ -53,7 +53,7 @@ func NewFieldModelStructNested(buffer *fbe.Buffer, offset int) *FieldModelStruct
 }
 
 // Get the field size
-func (fm *FieldModelStructNested) FBESize() int { return 1 }
+func (fm *FieldModelStructNested) FBESize() int { return 4 }
 
 // Get the field body size
 func (fm *FieldModelStructNested) FBEBody() int {
@@ -131,7 +131,6 @@ func (fm *FieldModelStructNested) VerifyType(fbeVerifyType bool) bool {
 // // Check if the struct value fields are valid
 func (fm *FieldModelStructNested) VerifyFields(fbeStructSize int) bool {
     fbeCurrentSize := 4 + 4
-    fm.FieldModelStructOptional.FBEExtra() + 
 
     if (fbeCurrentSize + fm.FieldModelStructOptional.FBEBody() - 4 - 4) > fbeStructSize {
         return true
@@ -268,20 +267,20 @@ func (fm *FieldModelStructNested) GetEnd(fbeBegin int) {
 // Get the struct value
 func (fm *FieldModelStructNested) Get() (*StructNested, error) {
     fbeResult := NewStructNested()
-    return fm.GetValue(fbeResult)
+    return fbeResult, fm.GetValue(fbeResult)
 }
 
-// Get the struct value by pointer
-func (fm *FieldModelStructNested) GetValue(fbeValue *StructNested) (*StructNested, error) {
+// Get the struct value by the given pointer
+func (fm *FieldModelStructNested) GetValue(fbeValue *StructNested) error {
     fbeBegin, err := fm.GetBegin()
     if fbeBegin == 0 {
-        return fbeValue, err
+        return err
     }
 
     fbeStructSize := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset()))
     fm.GetFields(fbeValue, fbeStructSize)
     fm.GetEnd(fbeBegin)
-    return fbeValue, nil
+    return nil
 }
 
 // Get the struct fields values
@@ -289,79 +288,174 @@ func (fm *FieldModelStructNested) GetFields(fbeValue *StructNested, fbeStructSiz
     fbeCurrentSize := 4 + 4
 
     if (fbeCurrentSize + fm.FieldModelStructOptional.FBEBody() - 4 - 4) > fbeStructSize {
-        fm.FieldModelStructOptional.GetFields(fbeValue, fbeStructSize)
+        fm.FieldModelStructOptional.GetFields(&fbeValue.StructOptional, fbeStructSize)
     }
     fbeCurrentSize += fm.FieldModelStructOptional.FBEBody() - 4 - 4
 
     if (fbeCurrentSize + fm.F1000.FBESize()) <= fbeStructSize {
+        _ = fm.F1000.GetValue(&fbeValue.F1000)
     } else {
         fbeValue.F1000 = *NewEnumSimple()
     }
     fbeCurrentSize += fm.F1000.FBESize()
 
     if (fbeCurrentSize + fm.F1001.FBESize()) <= fbeStructSize {
+        _ = fm.F1001.GetValue(fbeValue.F1001)
     } else {
         fbeValue.F1001 = nil
     }
     fbeCurrentSize += fm.F1001.FBESize()
 
     if (fbeCurrentSize + fm.F1002.FBESize()) <= fbeStructSize {
+        _ = fm.F1002.GetValueDefault(&fbeValue.F1002, EnumTyped_ENUM_VALUE_2)
     } else {
         fbeValue.F1002 = EnumTyped_ENUM_VALUE_2
     }
     fbeCurrentSize += fm.F1002.FBESize()
 
     if (fbeCurrentSize + fm.F1003.FBESize()) <= fbeStructSize {
+        _ = fm.F1003.GetValueDefault(fbeValue.F1003, nil)
     } else {
         fbeValue.F1003 = nil
     }
     fbeCurrentSize += fm.F1003.FBESize()
 
     if (fbeCurrentSize + fm.F1004.FBESize()) <= fbeStructSize {
+        _ = fm.F1004.GetValue(&fbeValue.F1004)
     } else {
         fbeValue.F1004 = *NewFlagsSimple()
     }
     fbeCurrentSize += fm.F1004.FBESize()
 
     if (fbeCurrentSize + fm.F1005.FBESize()) <= fbeStructSize {
+        _ = fm.F1005.GetValue(fbeValue.F1005)
     } else {
         fbeValue.F1005 = nil
     }
     fbeCurrentSize += fm.F1005.FBESize()
 
     if (fbeCurrentSize + fm.F1006.FBESize()) <= fbeStructSize {
+        _ = fm.F1006.GetValueDefault(&fbeValue.F1006, FlagsTyped_FLAG_VALUE_2 | FlagsTyped_FLAG_VALUE_4 | FlagsTyped_FLAG_VALUE_6)
     } else {
         fbeValue.F1006 = FlagsTyped_FLAG_VALUE_2 | FlagsTyped_FLAG_VALUE_4 | FlagsTyped_FLAG_VALUE_6
     }
     fbeCurrentSize += fm.F1006.FBESize()
 
     if (fbeCurrentSize + fm.F1007.FBESize()) <= fbeStructSize {
+        _ = fm.F1007.GetValueDefault(fbeValue.F1007, nil)
     } else {
         fbeValue.F1007 = nil
     }
     fbeCurrentSize += fm.F1007.FBESize()
 
     if (fbeCurrentSize + fm.F1008.FBESize()) <= fbeStructSize {
+        _ = fm.F1008.GetValue(&fbeValue.F1008)
     } else {
         fbeValue.F1008 = *NewStructSimple()
     }
     fbeCurrentSize += fm.F1008.FBESize()
 
     if (fbeCurrentSize + fm.F1009.FBESize()) <= fbeStructSize {
+        _ = fm.F1009.GetValue(fbeValue.F1009)
     } else {
         fbeValue.F1009 = nil
     }
     fbeCurrentSize += fm.F1009.FBESize()
 
     if (fbeCurrentSize + fm.F1010.FBESize()) <= fbeStructSize {
+        _ = fm.F1010.GetValue(&fbeValue.F1010)
     } else {
         fbeValue.F1010 = *NewStructOptional()
     }
     fbeCurrentSize += fm.F1010.FBESize()
 
     if (fbeCurrentSize + fm.F1011.FBESize()) <= fbeStructSize {
+        _ = fm.F1011.GetValueDefault(fbeValue.F1011, nil)
     } else {
         fbeValue.F1011 = nil
     }
     fbeCurrentSize += fm.F1011.FBESize()
+}
+
+// Set the struct value (begin phase)
+func (fm *FieldModelStructNested) SetBegin() (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
+    }
+
+    fbeStructSize := fm.FBEBody()
+    fbeStructOffset := fm.buffer.Allocate(fbeStructSize) - fm.buffer.Offset()
+    if (fbeStructOffset <= 0) || ((fm.buffer.Offset() + fbeStructOffset + fbeStructSize) > fm.buffer.Size()) {
+        return 0, errors.New("model is broken")
+    }
+
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint32(fbeStructOffset))
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeStructOffset, uint32(fbeStructSize))
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeStructOffset + 4, uint32(fm.FBEType()))
+
+    fm.buffer.Shift(fbeStructOffset)
+    return fbeStructOffset, nil
+}
+
+// Set the struct value (end phase)
+func (fm *FieldModelStructNested) SetEnd(fbeBegin int) {
+    fm.buffer.Unshift(fbeBegin)
+}
+
+// Set the struct value
+func (fm *FieldModelStructNested) Set(fbeValue *StructNested) error {
+    fbeBegin, err := fm.SetBegin()
+    if fbeBegin == 0 {
+        return err
+    }
+
+    err = fm.SetFields(fbeValue)
+    fm.SetEnd(fbeBegin)
+    return err
+}
+
+// Set the struct fields values
+func (fm *FieldModelStructNested) SetFields(fbeValue *StructNested) error {
+    var err error = nil
+
+    if err = fm.FieldModelStructOptional.SetFields(&fbeValue.StructOptional); err != nil {
+        return err
+    }
+    if err = fm.F1000.Set(&fbeValue.F1000); err != nil {
+        return err
+    }
+    if err = fm.F1001.Set(fbeValue.F1001); err != nil {
+        return err
+    }
+    if err = fm.F1002.Set(&fbeValue.F1002); err != nil {
+        return err
+    }
+    if err = fm.F1003.Set(fbeValue.F1003); err != nil {
+        return err
+    }
+    if err = fm.F1004.Set(&fbeValue.F1004); err != nil {
+        return err
+    }
+    if err = fm.F1005.Set(fbeValue.F1005); err != nil {
+        return err
+    }
+    if err = fm.F1006.Set(&fbeValue.F1006); err != nil {
+        return err
+    }
+    if err = fm.F1007.Set(fbeValue.F1007); err != nil {
+        return err
+    }
+    if err = fm.F1008.Set(&fbeValue.F1008); err != nil {
+        return err
+    }
+    if err = fm.F1009.Set(fbeValue.F1009); err != nil {
+        return err
+    }
+    if err = fm.F1010.Set(&fbeValue.F1010); err != nil {
+        return err
+    }
+    if err = fm.F1011.Set(fbeValue.F1011); err != nil {
+        return err
+    }
+    return err
 }

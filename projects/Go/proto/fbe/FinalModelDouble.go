@@ -35,12 +35,12 @@ func (fm *FinalModelDouble) FBEShift(size int) { fm.offset += size }
 func (fm *FinalModelDouble) FBEUnshift(size int) { fm.offset -= size }
 
 // Check if the value is valid
-func (fm *FinalModelDouble) Verify() (bool, int) {
+func (fm *FinalModelDouble) Verify() int {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return false, 0
+        return MaxInt
     }
 
-    return true, fm.FBESize()
+    return fm.FBESize()
 }
 
 // Get the value

@@ -39,24 +39,31 @@ func (fm *FieldModelEnumUInt8) Verify() bool { return true }
 
 // Get the value
 func (fm *FieldModelEnumUInt8) Get() (*EnumUInt8, error) {
-    return fm.GetDefault(EnumUInt8(0))
+    var value EnumUInt8
+    return &value, fm.GetValueDefault(&value, EnumUInt8(0))
 }
 
 // Get the value with provided default value
 func (fm *FieldModelEnumUInt8) GetDefault(defaults EnumUInt8) (*EnumUInt8, error) {
-    result := defaults
-    return fm.GetValue(&result)
+    var value EnumUInt8
+    err := fm.GetValueDefault(&value, defaults)
+    return &value, err
 }
 
-// Get the value by pointer
-func (fm *FieldModelEnumUInt8) GetValue(value *EnumUInt8) (*EnumUInt8, error) {
+// Get the value by the given pointer
+func (fm *FieldModelEnumUInt8) GetValue(value *EnumUInt8) error {
+    return fm.GetValueDefault(value, EnumUInt8(0))
+}
+
+// Get the value by the given pointer with provided default value
+func (fm *FieldModelEnumUInt8) GetValueDefault(value *EnumUInt8, defaults EnumUInt8) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return value, nil
+        *value = defaults
+        return nil
     }
 
-    result := EnumUInt8(fbe.ReadUInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
-    value = &result
-    return value, nil
+    *value = EnumUInt8(fbe.ReadUInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    return nil
 }
 
 // Set the value

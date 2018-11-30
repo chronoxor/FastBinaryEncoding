@@ -39,24 +39,31 @@ func (fm *FieldModelState) Verify() bool { return true }
 
 // Get the value
 func (fm *FieldModelState) Get() (*State, error) {
-    return fm.GetDefault(State(0))
+    var value State
+    return &value, fm.GetValueDefault(&value, State(0))
 }
 
 // Get the value with provided default value
 func (fm *FieldModelState) GetDefault(defaults State) (*State, error) {
-    result := defaults
-    return fm.GetValue(&result)
+    var value State
+    err := fm.GetValueDefault(&value, defaults)
+    return &value, err
 }
 
-// Get the value by pointer
-func (fm *FieldModelState) GetValue(value *State) (*State, error) {
+// Get the value by the given pointer
+func (fm *FieldModelState) GetValue(value *State) error {
+    return fm.GetValueDefault(value, State(0))
+}
+
+// Get the value by the given pointer with provided default value
+func (fm *FieldModelState) GetValueDefault(value *State, defaults State) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return value, nil
+        *value = defaults
+        return nil
     }
 
-    result := State(fbe.ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
-    value = &result
-    return value, nil
+    *value = State(fbe.ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    return nil
 }
 
 // Set the value

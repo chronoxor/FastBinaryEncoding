@@ -37,7 +37,7 @@ func NewFieldModelOrder(buffer *fbe.Buffer, offset int) *FieldModelOrder {
 }
 
 // Get the field size
-func (fm *FieldModelOrder) FBESize() int { return 1 }
+func (fm *FieldModelOrder) FBESize() int { return 4 }
 
 // Get the field body size
 func (fm *FieldModelOrder) FBEBody() int {
@@ -193,20 +193,20 @@ func (fm *FieldModelOrder) GetEnd(fbeBegin int) {
 // Get the struct value
 func (fm *FieldModelOrder) Get() (*Order, error) {
     fbeResult := NewOrder()
-    return fm.GetValue(fbeResult)
+    return fbeResult, fm.GetValue(fbeResult)
 }
 
-// Get the struct value by pointer
-func (fm *FieldModelOrder) GetValue(fbeValue *Order) (*Order, error) {
+// Get the struct value by the given pointer
+func (fm *FieldModelOrder) GetValue(fbeValue *Order) error {
     fbeBegin, err := fm.GetBegin()
     if fbeBegin == 0 {
-        return fbeValue, err
+        return err
     }
 
     fbeStructSize := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset()))
     fm.GetFields(fbeValue, fbeStructSize)
     fm.GetEnd(fbeBegin)
-    return fbeValue, nil
+    return nil
 }
 
 // Get the struct fields values
@@ -214,38 +214,106 @@ func (fm *FieldModelOrder) GetFields(fbeValue *Order, fbeStructSize int) {
     fbeCurrentSize := 4 + 4
 
     if (fbeCurrentSize + fm.Uid.FBESize()) <= fbeStructSize {
+        fbeValue.Uid, _ = fm.Uid.Get()
     } else {
         fbeValue.Uid = 0
     }
     fbeCurrentSize += fm.Uid.FBESize()
 
     if (fbeCurrentSize + fm.Symbol.FBESize()) <= fbeStructSize {
+        fbeValue.Symbol, _ = fm.Symbol.Get()
     } else {
         fbeValue.Symbol = ""
     }
     fbeCurrentSize += fm.Symbol.FBESize()
 
     if (fbeCurrentSize + fm.Side.FBESize()) <= fbeStructSize {
+        _ = fm.Side.GetValue(&fbeValue.Side)
     } else {
         fbeValue.Side = *NewOrderSide()
     }
     fbeCurrentSize += fm.Side.FBESize()
 
     if (fbeCurrentSize + fm.Type.FBESize()) <= fbeStructSize {
+        _ = fm.Type.GetValue(&fbeValue.Type)
     } else {
         fbeValue.Type = *NewOrderType()
     }
     fbeCurrentSize += fm.Type.FBESize()
 
     if (fbeCurrentSize + fm.Price.FBESize()) <= fbeStructSize {
+        fbeValue.Price, _ = fm.Price.GetDefault(float64(0.0))
     } else {
         fbeValue.Price = float64(0.0)
     }
     fbeCurrentSize += fm.Price.FBESize()
 
     if (fbeCurrentSize + fm.Volume.FBESize()) <= fbeStructSize {
+        fbeValue.Volume, _ = fm.Volume.GetDefault(float64(0.0))
     } else {
         fbeValue.Volume = float64(0.0)
     }
     fbeCurrentSize += fm.Volume.FBESize()
+}
+
+// Set the struct value (begin phase)
+func (fm *FieldModelOrder) SetBegin() (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
+    }
+
+    fbeStructSize := fm.FBEBody()
+    fbeStructOffset := fm.buffer.Allocate(fbeStructSize) - fm.buffer.Offset()
+    if (fbeStructOffset <= 0) || ((fm.buffer.Offset() + fbeStructOffset + fbeStructSize) > fm.buffer.Size()) {
+        return 0, errors.New("model is broken")
+    }
+
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint32(fbeStructOffset))
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeStructOffset, uint32(fbeStructSize))
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeStructOffset + 4, uint32(fm.FBEType()))
+
+    fm.buffer.Shift(fbeStructOffset)
+    return fbeStructOffset, nil
+}
+
+// Set the struct value (end phase)
+func (fm *FieldModelOrder) SetEnd(fbeBegin int) {
+    fm.buffer.Unshift(fbeBegin)
+}
+
+// Set the struct value
+func (fm *FieldModelOrder) Set(fbeValue *Order) error {
+    fbeBegin, err := fm.SetBegin()
+    if fbeBegin == 0 {
+        return err
+    }
+
+    err = fm.SetFields(fbeValue)
+    fm.SetEnd(fbeBegin)
+    return err
+}
+
+// Set the struct fields values
+func (fm *FieldModelOrder) SetFields(fbeValue *Order) error {
+    var err error = nil
+
+    if err = fm.Uid.Set(fbeValue.Uid); err != nil {
+        return err
+    }
+    if err = fm.Symbol.Set(fbeValue.Symbol); err != nil {
+        return err
+    }
+    if err = fm.Side.Set(&fbeValue.Side); err != nil {
+        return err
+    }
+    if err = fm.Type.Set(&fbeValue.Type); err != nil {
+        return err
+    }
+    if err = fm.Price.Set(fbeValue.Price); err != nil {
+        return err
+    }
+    if err = fm.Volume.Set(fbeValue.Volume); err != nil {
+        return err
+    }
+    return err
 }

@@ -32,17 +32,17 @@ func (fm *FinalModelString) FBEShift(size int) { fm.offset += size }
 func (fm *FinalModelString) FBEUnshift(size int) { fm.offset -= size }
 
 // Check if the string value is valid
-func (fm *FinalModelString) Verify() (bool, int) {
+func (fm *FinalModelString) Verify() int {
     if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
-        return false, 0
+        return MaxInt
     }
 
     fbeStringSize := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset()))
     if (fm.buffer.Offset() + fm.FBEOffset() + 4 + fbeStringSize) > fm.buffer.Size() {
-        return false, 0
+        return MaxInt
     }
 
-    return true, 4 + fbeStringSize
+    return 4 + fbeStringSize
 }
 
 // Get the string value

@@ -35,12 +35,12 @@ func (fm *FinalModelUInt16) FBEShift(size int) { fm.offset += size }
 func (fm *FinalModelUInt16) FBEUnshift(size int) { fm.offset -= size }
 
 // Check if the value is valid
-func (fm *FinalModelUInt16) Verify() (bool, int) {
+func (fm *FinalModelUInt16) Verify() int {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return false, 0
+        return MaxInt
     }
 
-    return true, fm.FBESize()
+    return fm.FBESize()
 }
 
 // Get the value

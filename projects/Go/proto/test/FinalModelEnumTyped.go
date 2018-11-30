@@ -20,7 +20,7 @@ func NewFinalModelEnumTyped(buffer *fbe.Buffer, offset int) *FinalModelEnumTyped
 }
 
 // Get the allocation size
-func (fm *FinalModelEnumTyped) FBEAllocationSize(value EnumTyped) int { return fm.FBESize() }
+func (fm *FinalModelEnumTyped) FBEAllocationSize(value *EnumTyped) int { return fm.FBESize() }
 
 // Get the final size
 func (fm *FinalModelEnumTyped) FBESize() int { return 1 }
@@ -36,34 +36,41 @@ func (fm *FinalModelEnumTyped) FBEShift(size int) { fm.offset += size }
 func (fm *FinalModelEnumTyped) FBEUnshift(size int) { fm.offset -= size }
 
 // Check if the value is valid
-func (fm *FinalModelEnumTyped) Verify() (bool, int) {
+func (fm *FinalModelEnumTyped) Verify() int {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return false, 0
+        return fbe.MaxInt
     }
 
-    return true, fm.FBESize()
+    return fm.FBESize()
 }
 
 // Get the value
 func (fm *FinalModelEnumTyped) Get() (*EnumTyped, int, error) {
-    return fm.GetDefault(EnumTyped(0))
+    var value EnumTyped
+    return &value, fm.GetValueDefault(&value, EnumTyped(0))
 }
 
 // Get the value with provided default value
 func (fm *FinalModelEnumTyped) GetDefault(defaults EnumTyped) (*EnumTyped, int, error) {
-    result := defaults
-    return fm.GetValue(&result)
+    var value EnumTyped
+    err := fm.GetValueDefault(&value, defaults)
+    return &value, err
 }
 
-// Get the value by pointer
-func (fm *FinalModelEnumTyped) GetValue(value *EnumTyped) (*EnumTyped, int, error) {
+// Get the value by the given pointer
+func (fm *FinalModelEnumTyped) GetValue(value *EnumTyped) (int, error) {
+    return fm.GetValueDefault(value, EnumTyped(0))
+}
+
+// Get the value by the given pointer with provided default value
+func (fm *FinalModelEnumTyped) GetValueDefault(value *EnumTyped, defaults EnumTyped) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return value, 0, errors.New("model is broken")
+        *value = defaults
+        return 0, errors.New("model is broken")
     }
 
-    result := EnumTyped(fbe.ReadUInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
-    value = &result
-    return value, fm.FBESize(), nil
+    *value = EnumTyped(fbe.ReadUInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    return fm.FBESize(), nil
 }
 
 // Set the value

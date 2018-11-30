@@ -39,24 +39,31 @@ func (fm *FieldModelOrderSide) Verify() bool { return true }
 
 // Get the value
 func (fm *FieldModelOrderSide) Get() (*OrderSide, error) {
-    return fm.GetDefault(OrderSide(0))
+    var value OrderSide
+    return &value, fm.GetValueDefault(&value, OrderSide(0))
 }
 
 // Get the value with provided default value
 func (fm *FieldModelOrderSide) GetDefault(defaults OrderSide) (*OrderSide, error) {
-    result := defaults
-    return fm.GetValue(&result)
+    var value OrderSide
+    err := fm.GetValueDefault(&value, defaults)
+    return &value, err
 }
 
-// Get the value by pointer
-func (fm *FieldModelOrderSide) GetValue(value *OrderSide) (*OrderSide, error) {
+// Get the value by the given pointer
+func (fm *FieldModelOrderSide) GetValue(value *OrderSide) error {
+    return fm.GetValueDefault(value, OrderSide(0))
+}
+
+// Get the value by the given pointer with provided default value
+func (fm *FieldModelOrderSide) GetValueDefault(value *OrderSide, defaults OrderSide) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return value, nil
+        *value = defaults
+        return nil
     }
 
-    result := OrderSide(fbe.ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
-    value = &result
-    return value, nil
+    *value = OrderSide(fbe.ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    return nil
 }
 
 // Set the value

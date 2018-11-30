@@ -39,24 +39,31 @@ func (fm *FieldModelEnumSimple) Verify() bool { return true }
 
 // Get the value
 func (fm *FieldModelEnumSimple) Get() (*EnumSimple, error) {
-    return fm.GetDefault(EnumSimple(0))
+    var value EnumSimple
+    return &value, fm.GetValueDefault(&value, EnumSimple(0))
 }
 
 // Get the value with provided default value
 func (fm *FieldModelEnumSimple) GetDefault(defaults EnumSimple) (*EnumSimple, error) {
-    result := defaults
-    return fm.GetValue(&result)
+    var value EnumSimple
+    err := fm.GetValueDefault(&value, defaults)
+    return &value, err
 }
 
-// Get the value by pointer
-func (fm *FieldModelEnumSimple) GetValue(value *EnumSimple) (*EnumSimple, error) {
+// Get the value by the given pointer
+func (fm *FieldModelEnumSimple) GetValue(value *EnumSimple) error {
+    return fm.GetValueDefault(value, EnumSimple(0))
+}
+
+// Get the value by the given pointer with provided default value
+func (fm *FieldModelEnumSimple) GetValueDefault(value *EnumSimple, defaults EnumSimple) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return value, nil
+        *value = defaults
+        return nil
     }
 
-    result := EnumSimple(fbe.ReadInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
-    value = &result
-    return value, nil
+    *value = EnumSimple(fbe.ReadInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    return nil
 }
 
 // Set the value

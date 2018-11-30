@@ -32,17 +32,17 @@ func (fm *FinalModelBytes) FBEShift(size int) { fm.offset += size }
 func (fm *FinalModelBytes) FBEUnshift(size int) { fm.offset -= size }
 
 // Check if the bytes value is valid
-func (fm *FinalModelBytes) Verify() (bool, int) {
+func (fm *FinalModelBytes) Verify() int {
     if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
-        return false, 0
+        return MaxInt
     }
 
     fbeBytesSize := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset()))
     if (fm.buffer.Offset() + fm.FBEOffset() + 4 + fbeBytesSize) > fm.buffer.Size() {
-        return false, 0
+        return MaxInt
     }
 
-    return true, 4 + fbeBytesSize
+    return 4 + fbeBytesSize
 }
 
 // Get the bytes value

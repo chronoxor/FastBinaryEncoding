@@ -39,7 +39,7 @@ func NewFieldModelAccount(buffer *fbe.Buffer, offset int) *FieldModelAccount {
 }
 
 // Get the field size
-func (fm *FieldModelAccount) FBESize() int { return 1 }
+func (fm *FieldModelAccount) FBESize() int { return 4 }
 
 // Get the field body size
 func (fm *FieldModelAccount) FBEBody() int {
@@ -195,20 +195,20 @@ func (fm *FieldModelAccount) GetEnd(fbeBegin int) {
 // Get the struct value
 func (fm *FieldModelAccount) Get() (*Account, error) {
     fbeResult := NewAccount()
-    return fm.GetValue(fbeResult)
+    return fbeResult, fm.GetValue(fbeResult)
 }
 
-// Get the struct value by pointer
-func (fm *FieldModelAccount) GetValue(fbeValue *Account) (*Account, error) {
+// Get the struct value by the given pointer
+func (fm *FieldModelAccount) GetValue(fbeValue *Account) error {
     fbeBegin, err := fm.GetBegin()
     if fbeBegin == 0 {
-        return fbeValue, err
+        return err
     }
 
     fbeStructSize := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset()))
     fm.GetFields(fbeValue, fbeStructSize)
     fm.GetEnd(fbeBegin)
-    return fbeValue, nil
+    return nil
 }
 
 // Get the struct fields values
@@ -216,38 +216,106 @@ func (fm *FieldModelAccount) GetFields(fbeValue *Account, fbeStructSize int) {
     fbeCurrentSize := 4 + 4
 
     if (fbeCurrentSize + fm.Uid.FBESize()) <= fbeStructSize {
+        fbeValue.Uid, _ = fm.Uid.Get()
     } else {
         fbeValue.Uid = 0
     }
     fbeCurrentSize += fm.Uid.FBESize()
 
     if (fbeCurrentSize + fm.Name.FBESize()) <= fbeStructSize {
+        fbeValue.Name, _ = fm.Name.Get()
     } else {
         fbeValue.Name = ""
     }
     fbeCurrentSize += fm.Name.FBESize()
 
     if (fbeCurrentSize + fm.State.FBESize()) <= fbeStructSize {
+        _ = fm.State.GetValueDefault(&fbeValue.State, StateEx_initialized | StateEx_bad | StateEx_sad)
     } else {
         fbeValue.State = StateEx_initialized | StateEx_bad | StateEx_sad
     }
     fbeCurrentSize += fm.State.FBESize()
 
     if (fbeCurrentSize + fm.Wallet.FBESize()) <= fbeStructSize {
+        _ = fm.Wallet.GetValue(&fbeValue.Wallet)
     } else {
         fbeValue.Wallet = *NewBalance()
     }
     fbeCurrentSize += fm.Wallet.FBESize()
 
     if (fbeCurrentSize + fm.Asset.FBESize()) <= fbeStructSize {
+        _ = fm.Asset.GetValue(fbeValue.Asset)
     } else {
         fbeValue.Asset = nil
     }
     fbeCurrentSize += fm.Asset.FBESize()
 
     if (fbeCurrentSize + fm.Orders.FBESize()) <= fbeStructSize {
+        _ = fm.Orders.GetValue(fbeValue.Orders)
     } else {
-        fbeValue.Orders.Clear()
+        fbeValue.Orders = make([]Order, 0)
     }
     fbeCurrentSize += fm.Orders.FBESize()
+}
+
+// Set the struct value (begin phase)
+func (fm *FieldModelAccount) SetBegin() (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
+    }
+
+    fbeStructSize := fm.FBEBody()
+    fbeStructOffset := fm.buffer.Allocate(fbeStructSize) - fm.buffer.Offset()
+    if (fbeStructOffset <= 0) || ((fm.buffer.Offset() + fbeStructOffset + fbeStructSize) > fm.buffer.Size()) {
+        return 0, errors.New("model is broken")
+    }
+
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint32(fbeStructOffset))
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeStructOffset, uint32(fbeStructSize))
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeStructOffset + 4, uint32(fm.FBEType()))
+
+    fm.buffer.Shift(fbeStructOffset)
+    return fbeStructOffset, nil
+}
+
+// Set the struct value (end phase)
+func (fm *FieldModelAccount) SetEnd(fbeBegin int) {
+    fm.buffer.Unshift(fbeBegin)
+}
+
+// Set the struct value
+func (fm *FieldModelAccount) Set(fbeValue *Account) error {
+    fbeBegin, err := fm.SetBegin()
+    if fbeBegin == 0 {
+        return err
+    }
+
+    err = fm.SetFields(fbeValue)
+    fm.SetEnd(fbeBegin)
+    return err
+}
+
+// Set the struct fields values
+func (fm *FieldModelAccount) SetFields(fbeValue *Account) error {
+    var err error = nil
+
+    if err = fm.Uid.Set(fbeValue.Uid); err != nil {
+        return err
+    }
+    if err = fm.Name.Set(fbeValue.Name); err != nil {
+        return err
+    }
+    if err = fm.State.Set(&fbeValue.State); err != nil {
+        return err
+    }
+    if err = fm.Wallet.Set(&fbeValue.Wallet); err != nil {
+        return err
+    }
+    if err = fm.Asset.Set(fbeValue.Asset); err != nil {
+        return err
+    }
+    if err = fm.Orders.Set(fbeValue.Orders); err != nil {
+        return err
+    }
+    return err
 }

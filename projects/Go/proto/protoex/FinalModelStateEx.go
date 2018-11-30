@@ -20,7 +20,7 @@ func NewFinalModelStateEx(buffer *fbe.Buffer, offset int) *FinalModelStateEx {
 }
 
 // Get the allocation size
-func (fm *FinalModelStateEx) FBEAllocationSize(value StateEx) int { return fm.FBESize() }
+func (fm *FinalModelStateEx) FBEAllocationSize(value *StateEx) int { return fm.FBESize() }
 
 // Get the final size
 func (fm *FinalModelStateEx) FBESize() int { return 1 }
@@ -36,34 +36,41 @@ func (fm *FinalModelStateEx) FBEShift(size int) { fm.offset += size }
 func (fm *FinalModelStateEx) FBEUnshift(size int) { fm.offset -= size }
 
 // Check if the value is valid
-func (fm *FinalModelStateEx) Verify() (bool, int) {
+func (fm *FinalModelStateEx) Verify() int {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return false, 0
+        return fbe.MaxInt
     }
 
-    return true, fm.FBESize()
+    return fm.FBESize()
 }
 
 // Get the value
 func (fm *FinalModelStateEx) Get() (*StateEx, int, error) {
-    return fm.GetDefault(StateEx(0))
+    var value StateEx
+    return &value, fm.GetValueDefault(&value, StateEx(0))
 }
 
 // Get the value with provided default value
 func (fm *FinalModelStateEx) GetDefault(defaults StateEx) (*StateEx, int, error) {
-    result := defaults
-    return fm.GetValue(&result)
+    var value StateEx
+    err := fm.GetValueDefault(&value, defaults)
+    return &value, err
 }
 
-// Get the value by pointer
-func (fm *FinalModelStateEx) GetValue(value *StateEx) (*StateEx, int, error) {
+// Get the value by the given pointer
+func (fm *FinalModelStateEx) GetValue(value *StateEx) (int, error) {
+    return fm.GetValueDefault(value, StateEx(0))
+}
+
+// Get the value by the given pointer with provided default value
+func (fm *FinalModelStateEx) GetValueDefault(value *StateEx, defaults StateEx) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return value, 0, errors.New("model is broken")
+        *value = defaults
+        return 0, errors.New("model is broken")
     }
 
-    result := StateEx(fbe.ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
-    value = &result
-    return value, fm.FBESize(), nil
+    *value = StateEx(fbe.ReadByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    return fm.FBESize(), nil
 }
 
 // Set the value

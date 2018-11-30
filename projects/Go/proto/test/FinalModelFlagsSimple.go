@@ -20,7 +20,7 @@ func NewFinalModelFlagsSimple(buffer *fbe.Buffer, offset int) *FinalModelFlagsSi
 }
 
 // Get the allocation size
-func (fm *FinalModelFlagsSimple) FBEAllocationSize(value FlagsSimple) int { return fm.FBESize() }
+func (fm *FinalModelFlagsSimple) FBEAllocationSize(value *FlagsSimple) int { return fm.FBESize() }
 
 // Get the final size
 func (fm *FinalModelFlagsSimple) FBESize() int { return 4 }
@@ -36,34 +36,41 @@ func (fm *FinalModelFlagsSimple) FBEShift(size int) { fm.offset += size }
 func (fm *FinalModelFlagsSimple) FBEUnshift(size int) { fm.offset -= size }
 
 // Check if the value is valid
-func (fm *FinalModelFlagsSimple) Verify() (bool, int) {
+func (fm *FinalModelFlagsSimple) Verify() int {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return false, 0
+        return fbe.MaxInt
     }
 
-    return true, fm.FBESize()
+    return fm.FBESize()
 }
 
 // Get the value
 func (fm *FinalModelFlagsSimple) Get() (*FlagsSimple, int, error) {
-    return fm.GetDefault(FlagsSimple(0))
+    var value FlagsSimple
+    return &value, fm.GetValueDefault(&value, FlagsSimple(0))
 }
 
 // Get the value with provided default value
 func (fm *FinalModelFlagsSimple) GetDefault(defaults FlagsSimple) (*FlagsSimple, int, error) {
-    result := defaults
-    return fm.GetValue(&result)
+    var value FlagsSimple
+    err := fm.GetValueDefault(&value, defaults)
+    return &value, err
 }
 
-// Get the value by pointer
-func (fm *FinalModelFlagsSimple) GetValue(value *FlagsSimple) (*FlagsSimple, int, error) {
+// Get the value by the given pointer
+func (fm *FinalModelFlagsSimple) GetValue(value *FlagsSimple) (int, error) {
+    return fm.GetValueDefault(value, FlagsSimple(0))
+}
+
+// Get the value by the given pointer with provided default value
+func (fm *FinalModelFlagsSimple) GetValueDefault(value *FlagsSimple, defaults FlagsSimple) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
-        return value, 0, errors.New("model is broken")
+        *value = defaults
+        return 0, errors.New("model is broken")
     }
 
-    result := FlagsSimple(fbe.ReadInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
-    value = &result
-    return value, fm.FBESize(), nil
+    *value = FlagsSimple(fbe.ReadInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    return fm.FBESize(), nil
 }
 
 // Set the value
