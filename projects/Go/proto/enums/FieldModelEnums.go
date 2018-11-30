@@ -13,8 +13,10 @@ var _ = fbe.Version
 
 // Fast Binary Encoding Enums field model
 type FieldModelEnums struct {
-    buffer *fbe.Buffer  // Field model buffer
-    offset int          // Field model buffer offset
+    // Field model buffer
+    buffer *fbe.Buffer
+    // Field model buffer offset
+    offset int
 
     Byte0 *FieldModelEnumByte
     Byte1 *FieldModelEnumByte
@@ -162,6 +164,72 @@ func (fm *FieldModelEnums) FBESize() int { return 4 }
 // Get the field body size
 func (fm *FieldModelEnums) FBEBody() int {
     fbeResult := 4 + 4 +
+        fm.Byte0.FBESize() +
+        fm.Byte1.FBESize() +
+        fm.Byte2.FBESize() +
+        fm.Byte3.FBESize() +
+        fm.Byte4.FBESize() +
+        fm.Byte5.FBESize() +
+        fm.Char0.FBESize() +
+        fm.Char1.FBESize() +
+        fm.Char2.FBESize() +
+        fm.Char3.FBESize() +
+        fm.Char4.FBESize() +
+        fm.Char5.FBESize() +
+        fm.Wchar0.FBESize() +
+        fm.Wchar1.FBESize() +
+        fm.Wchar2.FBESize() +
+        fm.Wchar3.FBESize() +
+        fm.Wchar4.FBESize() +
+        fm.Wchar5.FBESize() +
+        fm.Int8b0.FBESize() +
+        fm.Int8b1.FBESize() +
+        fm.Int8b2.FBESize() +
+        fm.Int8b3.FBESize() +
+        fm.Int8b4.FBESize() +
+        fm.Int8b5.FBESize() +
+        fm.Uint8b0.FBESize() +
+        fm.Uint8b1.FBESize() +
+        fm.Uint8b2.FBESize() +
+        fm.Uint8b3.FBESize() +
+        fm.Uint8b4.FBESize() +
+        fm.Uint8b5.FBESize() +
+        fm.Int16b0.FBESize() +
+        fm.Int16b1.FBESize() +
+        fm.Int16b2.FBESize() +
+        fm.Int16b3.FBESize() +
+        fm.Int16b4.FBESize() +
+        fm.Int16b5.FBESize() +
+        fm.Uint16b0.FBESize() +
+        fm.Uint16b1.FBESize() +
+        fm.Uint16b2.FBESize() +
+        fm.Uint16b3.FBESize() +
+        fm.Uint16b4.FBESize() +
+        fm.Uint16b5.FBESize() +
+        fm.Int32b0.FBESize() +
+        fm.Int32b1.FBESize() +
+        fm.Int32b2.FBESize() +
+        fm.Int32b3.FBESize() +
+        fm.Int32b4.FBESize() +
+        fm.Int32b5.FBESize() +
+        fm.Uint32b0.FBESize() +
+        fm.Uint32b1.FBESize() +
+        fm.Uint32b2.FBESize() +
+        fm.Uint32b3.FBESize() +
+        fm.Uint32b4.FBESize() +
+        fm.Uint32b5.FBESize() +
+        fm.Int64b0.FBESize() +
+        fm.Int64b1.FBESize() +
+        fm.Int64b2.FBESize() +
+        fm.Int64b3.FBESize() +
+        fm.Int64b4.FBESize() +
+        fm.Int64b5.FBESize() +
+        fm.Uint64b0.FBESize() +
+        fm.Uint64b1.FBESize() +
+        fm.Uint64b2.FBESize() +
+        fm.Uint64b3.FBESize() +
+        fm.Uint64b4.FBESize() +
+        fm.Uint64b5.FBESize() +
         0
     return fbeResult
 }
@@ -180,6 +248,72 @@ func (fm *FieldModelEnums) FBEExtra() int {
     fm.buffer.Shift(fbeStructOffset)
 
     fbeResult := fm.FBEBody() +
+        fm.Byte0.FBEExtra() +
+        fm.Byte1.FBEExtra() +
+        fm.Byte2.FBEExtra() +
+        fm.Byte3.FBEExtra() +
+        fm.Byte4.FBEExtra() +
+        fm.Byte5.FBEExtra() +
+        fm.Char0.FBEExtra() +
+        fm.Char1.FBEExtra() +
+        fm.Char2.FBEExtra() +
+        fm.Char3.FBEExtra() +
+        fm.Char4.FBEExtra() +
+        fm.Char5.FBEExtra() +
+        fm.Wchar0.FBEExtra() +
+        fm.Wchar1.FBEExtra() +
+        fm.Wchar2.FBEExtra() +
+        fm.Wchar3.FBEExtra() +
+        fm.Wchar4.FBEExtra() +
+        fm.Wchar5.FBEExtra() +
+        fm.Int8b0.FBEExtra() +
+        fm.Int8b1.FBEExtra() +
+        fm.Int8b2.FBEExtra() +
+        fm.Int8b3.FBEExtra() +
+        fm.Int8b4.FBEExtra() +
+        fm.Int8b5.FBEExtra() +
+        fm.Uint8b0.FBEExtra() +
+        fm.Uint8b1.FBEExtra() +
+        fm.Uint8b2.FBEExtra() +
+        fm.Uint8b3.FBEExtra() +
+        fm.Uint8b4.FBEExtra() +
+        fm.Uint8b5.FBEExtra() +
+        fm.Int16b0.FBEExtra() +
+        fm.Int16b1.FBEExtra() +
+        fm.Int16b2.FBEExtra() +
+        fm.Int16b3.FBEExtra() +
+        fm.Int16b4.FBEExtra() +
+        fm.Int16b5.FBEExtra() +
+        fm.Uint16b0.FBEExtra() +
+        fm.Uint16b1.FBEExtra() +
+        fm.Uint16b2.FBEExtra() +
+        fm.Uint16b3.FBEExtra() +
+        fm.Uint16b4.FBEExtra() +
+        fm.Uint16b5.FBEExtra() +
+        fm.Int32b0.FBEExtra() +
+        fm.Int32b1.FBEExtra() +
+        fm.Int32b2.FBEExtra() +
+        fm.Int32b3.FBEExtra() +
+        fm.Int32b4.FBEExtra() +
+        fm.Int32b5.FBEExtra() +
+        fm.Uint32b0.FBEExtra() +
+        fm.Uint32b1.FBEExtra() +
+        fm.Uint32b2.FBEExtra() +
+        fm.Uint32b3.FBEExtra() +
+        fm.Uint32b4.FBEExtra() +
+        fm.Uint32b5.FBEExtra() +
+        fm.Int64b0.FBEExtra() +
+        fm.Int64b1.FBEExtra() +
+        fm.Int64b2.FBEExtra() +
+        fm.Int64b3.FBEExtra() +
+        fm.Int64b4.FBEExtra() +
+        fm.Int64b5.FBEExtra() +
+        fm.Uint64b0.FBEExtra() +
+        fm.Uint64b1.FBEExtra() +
+        fm.Uint64b2.FBEExtra() +
+        fm.Uint64b3.FBEExtra() +
+        fm.Uint64b4.FBEExtra() +
+        fm.Uint64b5.FBEExtra() +
         0
 
     fm.buffer.Unshift(fbeStructOffset)

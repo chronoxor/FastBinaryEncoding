@@ -262,397 +262,397 @@ func (fm *FinalModelEnums) VerifyFields() int {
 
 
     fm.Byte0.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Byte0.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Byte0.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Byte1.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Byte1.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Byte1.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Byte2.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Byte2.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Byte2.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Byte3.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Byte3.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Byte3.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Byte4.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Byte4.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Byte4.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Byte5.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Byte5.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Byte5.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Char0.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Char0.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Char0.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Char1.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Char1.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Char1.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Char2.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Char2.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Char2.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Char3.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Char3.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Char3.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Char4.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Char4.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Char4.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Char5.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Char5.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Char5.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Wchar0.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Wchar0.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Wchar0.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Wchar1.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Wchar1.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Wchar1.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Wchar2.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Wchar2.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Wchar2.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Wchar3.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Wchar3.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Wchar3.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Wchar4.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Wchar4.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Wchar4.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Wchar5.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Wchar5.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Wchar5.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int8b0.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int8b0.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int8b0.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int8b1.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int8b1.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int8b1.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int8b2.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int8b2.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int8b2.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int8b3.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int8b3.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int8b3.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int8b4.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int8b4.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int8b4.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int8b5.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int8b5.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int8b5.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint8b0.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint8b0.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint8b0.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint8b1.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint8b1.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint8b1.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint8b2.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint8b2.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint8b2.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint8b3.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint8b3.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint8b3.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint8b4.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint8b4.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint8b4.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint8b5.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint8b5.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint8b5.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int16b0.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int16b0.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int16b0.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int16b1.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int16b1.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int16b1.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int16b2.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int16b2.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int16b2.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int16b3.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int16b3.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int16b3.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int16b4.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int16b4.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int16b4.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int16b5.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int16b5.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int16b5.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint16b0.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint16b0.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint16b0.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint16b1.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint16b1.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint16b1.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint16b2.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint16b2.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint16b2.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint16b3.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint16b3.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint16b3.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint16b4.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint16b4.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint16b4.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint16b5.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint16b5.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint16b5.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int32b0.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int32b0.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int32b0.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int32b1.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int32b1.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int32b1.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int32b2.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int32b2.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int32b2.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int32b3.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int32b3.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int32b3.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int32b4.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int32b4.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int32b4.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int32b5.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int32b5.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int32b5.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint32b0.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint32b0.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint32b0.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint32b1.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint32b1.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint32b1.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint32b2.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint32b2.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint32b2.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint32b3.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint32b3.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint32b3.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint32b4.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint32b4.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint32b4.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint32b5.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint32b5.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint32b5.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int64b0.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int64b0.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int64b0.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int64b1.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int64b1.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int64b1.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int64b2.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int64b2.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int64b2.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int64b3.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int64b3.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int64b3.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int64b4.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int64b4.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int64b4.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Int64b5.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Int64b5.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Int64b5.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint64b0.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint64b0.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint64b0.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint64b1.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint64b1.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint64b1.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint64b2.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint64b2.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint64b2.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint64b3.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint64b3.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint64b3.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint64b4.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint64b4.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint64b4.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Uint64b5.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uint64b5.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uint64b5.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize

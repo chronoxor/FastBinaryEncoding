@@ -72,13 +72,13 @@ func (fm *FinalModelStructHashEx) VerifyFields() int {
 
 
     fm.F1.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.F1.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.F1.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.F2.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.F2.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.F2.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize

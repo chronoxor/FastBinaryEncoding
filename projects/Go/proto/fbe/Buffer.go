@@ -19,15 +19,22 @@ func NewEmptyBuffer() *Buffer {
     return &Buffer{data: make([]byte, 0)}
 }
 
-// Create an empty buffer with a given capacity
+// Create an empty buffer with the given capacity
 func NewCapacityBuffer(capacity int) *Buffer {
     return &Buffer{data: make([]byte, capacity)}
 }
 
 // Create a buffer with attached bytes memory buffer
-func NewAttachedBuffer(buffer []byte, offset int, size int) *Buffer {
+func NewAttached(buffer []byte, offset int, size int) *Buffer {
     result := NewEmptyBuffer()
-    result.AttachBuffer(buffer, offset, size)
+    result.Attach(buffer, offset, size)
+    return result
+}
+
+// Create a buffer with another attached buffer
+func NewAttachedBuffer(buffer *Buffer) *Buffer {
+    result := NewEmptyBuffer()
+    result.AttachBuffer(buffer)
     return result
 }
 
@@ -49,15 +56,15 @@ func (b *Buffer) AttachNew() {
     b.offset = 0
 }
 
-// Attach an empty memory buffer with a given capacity
+// Attach an empty memory buffer with the given capacity
 func (b *Buffer) AttachCapacity(capacity int) {
     b.data = make([]byte, capacity)
     b.size = 0
     b.offset = 0
 }
 
-// Attach a given memory buffer
-func (b *Buffer) AttachBuffer(buffer []byte, offset int, size int) {
+// Attach the given memory buffer
+func (b *Buffer) Attach(buffer []byte, offset int, size int) {
     if len(buffer) < size {
         panic("invalid buffer")
     }
@@ -71,6 +78,11 @@ func (b *Buffer) AttachBuffer(buffer []byte, offset int, size int) {
     b.data = buffer
     b.size = size
     b.offset = offset
+}
+
+// Attach another buffer
+func (b *Buffer) AttachBuffer(buffer *Buffer) {
+    b.Attach(buffer.data, 0, buffer.size)
 }
 
 // Allocate memory in the current write buffer and return offset to the allocated memory block

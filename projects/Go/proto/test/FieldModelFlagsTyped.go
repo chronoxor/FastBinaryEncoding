@@ -10,8 +10,10 @@ import "../fbe"
 
 // Fast Binary Encoding FlagsTyped field model
 type FieldModelFlagsTyped struct {
-    buffer *fbe.Buffer  // Field model buffer
-    offset int          // Field model buffer offset
+    // Field model buffer
+    buffer *fbe.Buffer
+    // Field model buffer offset
+    offset int
 }
 
 // Create a new field model

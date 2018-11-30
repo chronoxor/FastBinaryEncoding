@@ -9,8 +9,10 @@ import "errors"
 
 // Fast Binary Encoding string final model
 type FinalModelString struct {
-    buffer *Buffer  // Final model buffer
-    offset int      // Final model buffer offset
+    // Final model buffer
+    buffer *Buffer
+    // Final model buffer offset
+    offset int
 }
 
 // Create a new string final model
@@ -37,7 +39,7 @@ func (fm *FinalModelString) Verify() int {
         return MaxInt
     }
 
-    fbeStringSize := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset()))
+    fbeStringSize := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
     if (fm.buffer.Offset() + fm.FBEOffset() + 4 + fbeStringSize) > fm.buffer.Size() {
         return MaxInt
     }

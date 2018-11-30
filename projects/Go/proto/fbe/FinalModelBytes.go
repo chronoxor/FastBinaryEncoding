@@ -9,8 +9,10 @@ import "errors"
 
 // Fast Binary Encoding bytes final model
 type FinalModelBytes struct {
-    buffer *Buffer  // Final model buffer
-    offset int      // Final model buffer offset
+    // Final model buffer
+    buffer *Buffer
+    // Final model buffer offset
+    offset int
 }
 
 // Create a new bytes final model
@@ -37,7 +39,7 @@ func (fm *FinalModelBytes) Verify() int {
         return MaxInt
     }
 
-    fbeBytesSize := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset()))
+    fbeBytesSize := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
     if (fm.buffer.Offset() + fm.FBEOffset() + 4 + fbeBytesSize) > fm.buffer.Size() {
         return MaxInt
     }

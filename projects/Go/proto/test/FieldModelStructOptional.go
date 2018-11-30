@@ -15,8 +15,10 @@ var _ = proto.Version
 
 // Fast Binary Encoding StructOptional field model
 type FieldModelStructOptional struct {
-    buffer *fbe.Buffer  // Field model buffer
-    offset int          // Field model buffer offset
+    // Field model buffer
+    buffer *fbe.Buffer
+    // Field model buffer offset
+    offset int
 
     FieldModelStructSimple
     F100 *FieldModelOptionalBool
@@ -167,6 +169,72 @@ func (fm *FieldModelStructOptional) FBESize() int { return 4 }
 func (fm *FieldModelStructOptional) FBEBody() int {
     fbeResult := 4 + 4 +
         fm.FieldModelStructSimple.FBEBody() - 4 - 4 +
+        fm.F100.FBESize() +
+        fm.F101.FBESize() +
+        fm.F102.FBESize() +
+        fm.F103.FBESize() +
+        fm.F104.FBESize() +
+        fm.F105.FBESize() +
+        fm.F106.FBESize() +
+        fm.F107.FBESize() +
+        fm.F108.FBESize() +
+        fm.F109.FBESize() +
+        fm.F110.FBESize() +
+        fm.F111.FBESize() +
+        fm.F112.FBESize() +
+        fm.F113.FBESize() +
+        fm.F114.FBESize() +
+        fm.F115.FBESize() +
+        fm.F116.FBESize() +
+        fm.F117.FBESize() +
+        fm.F118.FBESize() +
+        fm.F119.FBESize() +
+        fm.F120.FBESize() +
+        fm.F121.FBESize() +
+        fm.F122.FBESize() +
+        fm.F123.FBESize() +
+        fm.F124.FBESize() +
+        fm.F125.FBESize() +
+        fm.F126.FBESize() +
+        fm.F127.FBESize() +
+        fm.F128.FBESize() +
+        fm.F129.FBESize() +
+        fm.F130.FBESize() +
+        fm.F131.FBESize() +
+        fm.F132.FBESize() +
+        fm.F133.FBESize() +
+        fm.F134.FBESize() +
+        fm.F135.FBESize() +
+        fm.F136.FBESize() +
+        fm.F137.FBESize() +
+        fm.F138.FBESize() +
+        fm.F139.FBESize() +
+        fm.F140.FBESize() +
+        fm.F141.FBESize() +
+        fm.F142.FBESize() +
+        fm.F143.FBESize() +
+        fm.F144.FBESize() +
+        fm.F145.FBESize() +
+        fm.F146.FBESize() +
+        fm.F147.FBESize() +
+        fm.F148.FBESize() +
+        fm.F149.FBESize() +
+        fm.F150.FBESize() +
+        fm.F151.FBESize() +
+        fm.F152.FBESize() +
+        fm.F153.FBESize() +
+        fm.F154.FBESize() +
+        fm.F155.FBESize() +
+        fm.F156.FBESize() +
+        fm.F157.FBESize() +
+        fm.F158.FBESize() +
+        fm.F159.FBESize() +
+        fm.F160.FBESize() +
+        fm.F161.FBESize() +
+        fm.F162.FBESize() +
+        fm.F163.FBESize() +
+        fm.F164.FBESize() +
+        fm.F165.FBESize() +
         0
     return fbeResult
 }
@@ -186,6 +254,72 @@ func (fm *FieldModelStructOptional) FBEExtra() int {
 
     fbeResult := fm.FBEBody() +
         fm.FieldModelStructSimple.FBEExtra() + 
+        fm.F100.FBEExtra() +
+        fm.F101.FBEExtra() +
+        fm.F102.FBEExtra() +
+        fm.F103.FBEExtra() +
+        fm.F104.FBEExtra() +
+        fm.F105.FBEExtra() +
+        fm.F106.FBEExtra() +
+        fm.F107.FBEExtra() +
+        fm.F108.FBEExtra() +
+        fm.F109.FBEExtra() +
+        fm.F110.FBEExtra() +
+        fm.F111.FBEExtra() +
+        fm.F112.FBEExtra() +
+        fm.F113.FBEExtra() +
+        fm.F114.FBEExtra() +
+        fm.F115.FBEExtra() +
+        fm.F116.FBEExtra() +
+        fm.F117.FBEExtra() +
+        fm.F118.FBEExtra() +
+        fm.F119.FBEExtra() +
+        fm.F120.FBEExtra() +
+        fm.F121.FBEExtra() +
+        fm.F122.FBEExtra() +
+        fm.F123.FBEExtra() +
+        fm.F124.FBEExtra() +
+        fm.F125.FBEExtra() +
+        fm.F126.FBEExtra() +
+        fm.F127.FBEExtra() +
+        fm.F128.FBEExtra() +
+        fm.F129.FBEExtra() +
+        fm.F130.FBEExtra() +
+        fm.F131.FBEExtra() +
+        fm.F132.FBEExtra() +
+        fm.F133.FBEExtra() +
+        fm.F134.FBEExtra() +
+        fm.F135.FBEExtra() +
+        fm.F136.FBEExtra() +
+        fm.F137.FBEExtra() +
+        fm.F138.FBEExtra() +
+        fm.F139.FBEExtra() +
+        fm.F140.FBEExtra() +
+        fm.F141.FBEExtra() +
+        fm.F142.FBEExtra() +
+        fm.F143.FBEExtra() +
+        fm.F144.FBEExtra() +
+        fm.F145.FBEExtra() +
+        fm.F146.FBEExtra() +
+        fm.F147.FBEExtra() +
+        fm.F148.FBEExtra() +
+        fm.F149.FBEExtra() +
+        fm.F150.FBEExtra() +
+        fm.F151.FBEExtra() +
+        fm.F152.FBEExtra() +
+        fm.F153.FBEExtra() +
+        fm.F154.FBEExtra() +
+        fm.F155.FBEExtra() +
+        fm.F156.FBEExtra() +
+        fm.F157.FBEExtra() +
+        fm.F158.FBEExtra() +
+        fm.F159.FBEExtra() +
+        fm.F160.FBEExtra() +
+        fm.F161.FBEExtra() +
+        fm.F162.FBEExtra() +
+        fm.F163.FBEExtra() +
+        fm.F164.FBEExtra() +
+        fm.F165.FBEExtra() +
         0
 
     fm.buffer.Unshift(fbeStructOffset)

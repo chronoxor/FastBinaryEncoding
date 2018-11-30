@@ -480,15 +480,22 @@ func NewEmptyBuffer() *Buffer {
     return &Buffer{data: make([]byte, 0)}
 }
 
-// Create an empty buffer with a given capacity
+// Create an empty buffer with the given capacity
 func NewCapacityBuffer(capacity int) *Buffer {
     return &Buffer{data: make([]byte, capacity)}
 }
 
 // Create a buffer with attached bytes memory buffer
-func NewAttachedBuffer(buffer []byte, offset int, size int) *Buffer {
+func NewAttached(buffer []byte, offset int, size int) *Buffer {
     result := NewEmptyBuffer()
-    result.AttachBuffer(buffer, offset, size)
+    result.Attach(buffer, offset, size)
+    return result
+}
+
+// Create a buffer with another attached buffer
+func NewAttachedBuffer(buffer *Buffer) *Buffer {
+    result := NewEmptyBuffer()
+    result.AttachBuffer(buffer)
     return result
 }
 
@@ -510,15 +517,15 @@ func (b *Buffer) AttachNew() {
     b.offset = 0
 }
 
-// Attach an empty memory buffer with a given capacity
+// Attach an empty memory buffer with the given capacity
 func (b *Buffer) AttachCapacity(capacity int) {
     b.data = make([]byte, capacity)
     b.size = 0
     b.offset = 0
 }
 
-// Attach a given memory buffer
-func (b *Buffer) AttachBuffer(buffer []byte, offset int, size int) {
+// Attach the given memory buffer
+func (b *Buffer) Attach(buffer []byte, offset int, size int) {
     if len(buffer) < size {
         panic("invalid buffer")
     }
@@ -532,6 +539,11 @@ func (b *Buffer) AttachBuffer(buffer []byte, offset int, size int) {
     b.data = buffer
     b.size = size
     b.offset = offset
+}
+
+// Attach another buffer
+func (b *Buffer) AttachBuffer(buffer *Buffer) {
+    b.Attach(buffer.data, 0, buffer.size)
 }
 
 // Allocate memory in the current write buffer and return offset to the allocated memory block
@@ -900,8 +912,10 @@ import "errors"
 
 // Fast Binary Encoding _TYPE_ field model
 type FieldModel_NAME_ struct {
-    buffer *Buffer  // Field model buffer
-    offset int      // Field model buffer offset
+    // Field model buffer
+    buffer *Buffer
+    // Field model buffer offset
+    offset int
 }
 
 // Create a new field model
@@ -988,8 +1002,10 @@ import "github.com/shopspring/decimal"
 
 // Fast Binary Encoding decimal field model
 type FieldModelDecimal struct {
-    buffer *Buffer  // Field model buffer
-    offset int      // Field model buffer offset
+    // Field model buffer
+    buffer *Buffer
+    // Field model buffer offset
+    offset int
 }
 
 // Create a new decimal field model
@@ -1132,8 +1148,10 @@ import "errors"
 
 // Fast Binary Encoding timestamp field model
 type FieldModelTimestamp struct {
-    buffer *Buffer  // Field model buffer
-    offset int      // Field model buffer offset
+    // Field model buffer
+    buffer *Buffer
+    // Field model buffer offset
+    offset int
 }
 
 // Create a new timestamp field model
@@ -1214,8 +1232,10 @@ import "errors"
 
 // Fast Binary Encoding UUID field model
 type FieldModelUUID struct {
-    buffer *Buffer  // Field model buffer
-    offset int      // Field model buffer offset
+    // Field model buffer
+    buffer *Buffer
+    // Field model buffer offset
+    offset int
 }
 
 // Create a new UUID field model
@@ -1296,8 +1316,10 @@ import "errors"
 
 // Fast Binary Encoding bytes field model
 type FieldModelBytes struct {
-    buffer *Buffer  // Field model buffer
-    offset int      // Field model buffer offset
+    // Field model buffer
+    buffer *Buffer
+    // Field model buffer offset
+    offset int
 }
 
 // Create a new bytes field model
@@ -1432,8 +1454,10 @@ import "errors"
 
 // Fast Binary Encoding string field model
 type FieldModelString struct {
-    buffer *Buffer  // Field model buffer
-    offset int      // Field model buffer offset
+    // Field model buffer
+    buffer *Buffer
+    // Field model buffer offset
+    offset int
 }
 
 // Create a new string field model
@@ -2274,8 +2298,10 @@ void GeneratorGo::GenerateFBEFieldModelEnumFlags(const std::string& package, con
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ field model
 type FieldModel_NAME_ struct {
-    buffer *fbe.Buffer  // Field model buffer
-    offset int          // Field model buffer offset
+    // Field model buffer
+    buffer *fbe.Buffer
+    // Field model buffer offset
+    offset int
 }
 
 // Create a new field model
@@ -2375,8 +2401,10 @@ import "errors"
 
 // Fast Binary Encoding _TYPE_ final model
 type FinalModel_NAME_ struct {
-    buffer *Buffer  // Final model buffer
-    offset int      // Final model buffer offset
+    // Final model buffer
+    buffer *Buffer
+    // Final model buffer offset
+    offset int
 }
 
 // Create a new final model
@@ -2465,8 +2493,10 @@ import "github.com/shopspring/decimal"
 
 // Fast Binary Encoding decimal final model
 type FinalModelDecimal struct {
-    buffer *Buffer  // Final model buffer
-    offset int      // Final model buffer offset
+    // Final model buffer
+    buffer *Buffer
+    // Final model buffer offset
+    offset int
 }
 
 // Create a new decimal final model
@@ -2611,8 +2641,10 @@ import "errors"
 
 // Fast Binary Encoding timestamp final model
 type FinalModelTimestamp struct {
-    buffer *Buffer  // Final model buffer
-    offset int      // Final model buffer offset
+    // Final model buffer
+    buffer *Buffer
+    // Final model buffer offset
+    offset int
 }
 
 // Create a new timestamp final model
@@ -2695,8 +2727,10 @@ import "errors"
 
 // Fast Binary Encoding UUID final model
 type FinalModelUUID struct {
-    buffer *Buffer  // Final model buffer
-    offset int      // Final model buffer offset
+    // Final model buffer
+    buffer *Buffer
+    // Final model buffer offset
+    offset int
 }
 
 // Create a new UUID final model
@@ -2779,8 +2813,10 @@ import "errors"
 
 // Fast Binary Encoding bytes final model
 type FinalModelBytes struct {
-    buffer *Buffer  // Final model buffer
-    offset int      // Final model buffer offset
+    // Final model buffer
+    buffer *Buffer
+    // Final model buffer offset
+    offset int
 }
 
 // Create a new bytes final model
@@ -2807,7 +2843,7 @@ func (fm *FinalModelBytes) Verify() int {
         return MaxInt
     }
 
-    fbeBytesSize := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset()))
+    fbeBytesSize := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
     if (fm.buffer.Offset() + fm.FBEOffset() + 4 + fbeBytesSize) > fm.buffer.Size() {
         return MaxInt
     }
@@ -2876,8 +2912,10 @@ import "errors"
 
 // Fast Binary Encoding string final model
 type FinalModelString struct {
-    buffer *Buffer  // Final model buffer
-    offset int      // Final model buffer offset
+    // Final model buffer
+    buffer *Buffer
+    // Final model buffer offset
+    offset int
 }
 
 // Create a new string final model
@@ -2904,7 +2942,7 @@ func (fm *FinalModelString) Verify() int {
         return MaxInt
     }
 
-    fbeStringSize := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset()))
+    fbeStringSize := int(ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
     if (fm.buffer.Offset() + fm.FBEOffset() + 4 + fbeStringSize) > fm.buffer.Size() {
         return MaxInt
     }
@@ -3434,8 +3472,10 @@ void GeneratorGo::GenerateFBEFinalModelEnumFlags(const std::string& package, con
     std::string code = R"CODE(
 // Fast Binary Encoding _NAME_ final model
 type FinalModel_NAME_ struct {
-    buffer *fbe.Buffer  // Final model buffer
-    offset int          // Final model buffer offset
+    // Final model buffer
+    buffer *fbe.Buffer
+    // Final model buffer offset
+    offset int
 }
 
 // Create a new final model
@@ -3471,14 +3511,15 @@ func (fm *FinalModel_NAME_) Verify() int {
 // Get the value
 func (fm *FinalModel_NAME_) Get() (*_NAME_, int, error) {
     var value _NAME_
-    return &value, fm.GetValueDefault(&value, _NAME_(0))
+    size, err := fm.GetValueDefault(&value, _NAME_(0))
+    return &value, size, err
 }
 
 // Get the value with provided default value
 func (fm *FinalModel_NAME_) GetDefault(defaults _NAME_) (*_NAME_, int, error) {
     var value _NAME_
-    err := fm.GetValueDefault(&value, defaults)
-    return &value, err
+    size, err := fm.GetValueDefault(&value, defaults)
+    return &value, size, err
 }
 
 // Get the value by the given pointer
@@ -4997,13 +5038,13 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     GenerateStructFieldModel(p, s, path);
 
     // Generate struct model
-    //GenerateStructModel(s);
+    GenerateStructModel(p, s, path);
 
     // Generate struct final models
     if (Final())
     {
         GenerateStructFinalModel(p, s, path);
-        //GenerateStructModelFinal(s);
+        GenerateStructModelFinal(p, s, path);
     }
 }
 
@@ -5037,8 +5078,10 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
     WriteLineIndent("// Fast Binary Encoding " + struct_name + " field model");
     WriteLineIndent("type " + field_model_name + " struct {");
     Indent(1);
-    WriteLineIndent("buffer *fbe.Buffer  // Field model buffer");
-    WriteLineIndent("offset int          // Field model buffer offset");
+    WriteLineIndent("// Field model buffer");
+    WriteLineIndent("buffer *fbe.Buffer");
+    WriteLineIndent("// Field model buffer offset");
+    WriteLineIndent("offset int");
     WriteLine();
     if (!base_type.empty())
         WriteLineIndent(base_field_model);
@@ -5091,7 +5134,7 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
         WriteLineIndent("fm." + base_field_name + ".FBEBody() - 4 - 4 +");
     if (s->body)
         for (const auto& field : s->body->fields)
-            prev_size = "fm." + ConvertCase(*field->name) + ".FBESize() +";
+            WriteLineIndent("fm." + ConvertCase(*field->name) + ".FBESize() +");
     WriteLineIndent("0");
     Indent(-1);
     WriteLineIndent("return fbeResult");
@@ -5124,7 +5167,7 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
         WriteLineIndent("fm." + base_field_name + ".FBEExtra() + ");
     if (s->body)
         for (const auto& field : s->body->fields)
-            prev_size = "fm." + ConvertCase(*field->name) + ".FBEExtra() +";
+            WriteLineIndent("fm." + ConvertCase(*field->name) + ".FBEExtra() +");
     WriteLineIndent("0");
     Indent(-1);
     WriteLine();
@@ -5441,143 +5484,173 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
     // Close the output file
     Close();
 }
-/*
-void GeneratorGo::GenerateStructModel(const std::shared_ptr<StructType>& s)
+
+void GeneratorGo::GenerateStructModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path)
 {
-    // Generate struct model begin
-    WriteLine();
-    WriteLine();
-    WriteLineIndent("# Fast Binary Encoding " + *s->name + " model");
-    WriteLineIndent("class " + *s->name + "Model(fbe.Model):");
-    Indent(1);
+    std::string struct_name = ConvertCase(*s->name);
+    std::string model_name = struct_name + "Model";
+    std::string field_model_name = "FieldModel" + struct_name;
 
-    // Generate struct model __slots__
-    WriteLineIndent("__slots__ = \"_model\",");
+    // Open the output file
+    CppCommon::Path output = path / (model_name + ".go");
+    Open(output);
 
-    // Generate struct model constructor
-    WriteLine();
-    WriteLineIndent("def __init__(self, buffer=None):");
-    Indent(1);
-    WriteLineIndent("super().__init__(buffer)");
-    WriteLineIndent("self._model = FieldModel" + *s->name + "(self.buffer, 4)");
-    Indent(-1);
+    // Generate header
+    GenerateHeader(CppCommon::Path(_input).filename().string());
 
-    // Generate struct model accessor
+    // Generate package
     WriteLine();
-    WriteLineIndent("@property");
-    WriteLineIndent("def model(self):");
-    Indent(1);
-    WriteLineIndent("return self._model");
-    Indent(-1);
+    WriteLineIndent("package " + *p->name);
 
-    // Generate struct model FBE properties
+    // Generate imports
     WriteLine();
-    WriteLineIndent("# Get the model size");
-    WriteLineIndent("def fbe_size(self):");
-    Indent(1);
-    WriteLineIndent("return self._model.fbe_size + self._model.fbe_extra");
-    Indent(-1);
-    WriteLine();
-    WriteLineIndent("# Get the model type");
-    WriteLineIndent("def fbe_type(self):");
-    Indent(1);
-    WriteLineIndent("return self.TYPE");
-    Indent(-1);
+    WriteLineIndent("import \"errors\"");
+    GenerateImports(p);
 
     // Generate struct model type
     WriteLine();
-    WriteLineIndent("TYPE = FieldModel" + *s->name + ".TYPE");
+    WriteLineIndent("// Fast Binary Encoding " + struct_name + " model");
+    WriteLineIndent("type " + model_name + " struct {");
+    Indent(1);
+    WriteLineIndent("// Model buffer");
+    WriteLineIndent("buffer *fbe.Buffer");
+    WriteLine();
+    WriteLineIndent("// Field model");
+    WriteLineIndent("model *" + field_model_name);
+    Indent(-1);
+    WriteLineIndent("}");
 
-    // Generate struct model verify() method
+    // Generate struct model constructor
     WriteLine();
-    WriteLineIndent("# Check if the struct value is valid");
-    WriteLineIndent("def verify(self):");
+    WriteLineIndent("// Create a new " + struct_name + " model");
+    WriteLineIndent("func New" + model_name + "(buffer *fbe.Buffer) *" + model_name + " {");
     Indent(1);
-    WriteLineIndent("if (self.buffer.offset + self._model.fbe_offset - 4) > self.buffer.size:");
-    Indent(1);
-    WriteLineIndent("return False");
+    WriteLineIndent("return &" + model_name + "{buffer: buffer, model: New" + field_model_name + "(buffer, 4)}");
     Indent(-1);
-    WriteLine();
-    WriteLineIndent("fbe_full_size = self.read_uint32(self._model.fbe_offset - 4)");
-    WriteLineIndent("if fbe_full_size < self._model.fbe_size:");
-    Indent(1);
-    WriteLineIndent("return False");
-    Indent(-1);
-    WriteLine();
-    WriteLineIndent("return self._model.verify()");
-    Indent(-1);
+    WriteLineIndent("}");
 
-    // Generate struct model create_begin() method
+    // Generate struct model Buffer() & Model() methods
     WriteLine();
-    WriteLineIndent("# Create a new model (begin phase)");
-    WriteLineIndent("def create_begin(self):");
-    Indent(1);
-    WriteLineIndent("fbe_begin = self.buffer.allocate(4 + self._model.fbe_size)");
-    WriteLineIndent("return fbe_begin");
-    Indent(-1);
+    WriteLineIndent("// Get the model buffer");
+    WriteLineIndent("func (m *" + model_name + ") Buffer() *fbe.Buffer { return m.buffer }");
+    WriteLineIndent("// Get the field model");
+    WriteLineIndent("func (m *" + model_name + ") Model() *" + field_model_name + " { return m.model }");
 
-    // Generate struct model create_end() method
+    // Generate struct model FBESize() & FBEType() methods
     WriteLine();
-    WriteLineIndent("# Create a new model (end phase)");
-    WriteLineIndent("def create_end(self, fbe_begin):");
-    Indent(1);
-    WriteLineIndent("fbe_end = self.buffer.size");
-    WriteLineIndent("fbe_full_size = fbe_end - fbe_begin");
-    WriteLineIndent("self.write_uint32(self._model.fbe_offset - 4, fbe_full_size)");
-    WriteLineIndent("return fbe_full_size");
-    Indent(-1);
+    WriteLineIndent("// Get the model size");
+    WriteLineIndent("func (m *" + model_name + ") FBESize() int { return m.model.FBESize() + m.model.FBEExtra() }");
+    WriteLineIndent("// // Get the model type");
+    WriteLineIndent("func (m *" + model_name + ") FBEType() int { return m.model.FBEType() }");
 
-    // Generate struct model serialize() method
+    // Generate struct model Verify() method
     WriteLine();
-    WriteLineIndent("# Serialize the struct value");
-    WriteLineIndent("def serialize(self, value):");
+    WriteLineIndent("// Check if the struct value is valid");
+    WriteLineIndent("func (m *" + model_name + ") Verify() bool {");
     Indent(1);
-    WriteLineIndent("fbe_begin = self.create_begin()");
-    WriteLineIndent("self._model.set(value)");
-    WriteLineIndent("fbe_full_size = self.create_end(fbe_begin)");
-    WriteLineIndent("return fbe_full_size");
+    WriteLineIndent("if (m.buffer.Offset() + m.model.FBEOffset() - 4) > m.buffer.Size() {");
+    Indent(1);
+    WriteLineIndent("return false");
     Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("fbeFullSize := int(fbe.ReadUInt32(m.buffer.Data(), m.buffer.Offset() + m.model.FBEOffset() - 4))");
+    WriteLineIndent("if fbeFullSize < m.model.FBESize() {");
+    Indent(1);
+    WriteLineIndent("return false");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("return m.model.Verify()");
+    Indent(-1);
+    WriteLineIndent("}");
 
-    // Generate struct model deserialize() methods
+    // Generate struct model CreateBegin() method
     WriteLine();
-    WriteLineIndent("# Deserialize the struct value");
-    WriteLineIndent("def deserialize(self, value=None):");
+    WriteLineIndent("// Create a new model (begin phase)");
+    WriteLineIndent("func (m *" + model_name + ") CreateBegin() int {");
     Indent(1);
-    WriteLineIndent("if value is None:");
-    Indent(1);
-    WriteLineIndent("value = " + *s->name + "()");
+    WriteLineIndent("fbeBegin := m.buffer.Allocate(4 + m.model.FBESize())");
+    WriteLineIndent("return fbeBegin");
     Indent(-1);
-    WriteLine();
-    WriteLineIndent("if (self.buffer.offset + self._model.fbe_offset - 4) > self.buffer.size:");
-    Indent(1);
-    WriteLineIndent("value = " + *s->name + "()");
-    WriteLineIndent("return value, 0");
-    Indent(-1);
-    WriteLine();
-    WriteLineIndent("fbe_full_size = self.read_uint32(self._model.fbe_offset - 4)");
-    WriteLineIndent("assert (fbe_full_size >= self._model.fbe_size), \"Model is broken!\"");
-    WriteLineIndent("if fbe_full_size < self._model.fbe_size:");
-    Indent(1);
-    WriteLineIndent("value = " + *s->name + "()");
-    WriteLineIndent("return value, 0");
-    Indent(-1);
-    WriteLine();
-    WriteLineIndent("self._model.get(value)");
-    WriteLineIndent("return value, fbe_full_size");
-    Indent(-1);
+    WriteLineIndent("}");
 
-    // Generate struct model next() method
+    // Generate struct model CreateEnd() method
     WriteLine();
-    WriteLineIndent("# Move to the next struct value");
-    WriteLineIndent("def next(self, prev):");
+    WriteLineIndent("// Create a new model (end phase)");
+    WriteLineIndent("func (m *" + model_name + ") CreateEnd(fbeBegin int) int {");
     Indent(1);
-    WriteLineIndent("self._model.fbe_shift(prev)");
+    WriteLineIndent("fbeEnd := m.buffer.Size()");
+    WriteLineIndent("fbeFullSize := fbeEnd - fbeBegin");
+    WriteLineIndent("fbe.WriteUInt32(m.buffer.Data(), m.buffer.Offset() + m.model.FBEOffset() - 4, uint32(fbeFullSize))");
+    WriteLineIndent("return fbeFullSize");
     Indent(-1);
+    WriteLineIndent("}");
 
-    // Generate struct model end
+    // Generate struct model Serialize() method
+    WriteLine();
+    WriteLineIndent("// Serialize the struct value");
+    WriteLineIndent("func (m *" + model_name + ") Serialize(value *" + struct_name + ") (int, error) {");
+    Indent(1);
+    WriteLineIndent("fbeBegin := m.CreateBegin()");
+    WriteLineIndent("err := m.model.Set(value)");
+    WriteLineIndent("fbeFullSize := m.CreateEnd(fbeBegin)");
+    WriteLineIndent("return fbeFullSize, err");
     Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate struct model Deserialize() method
+    WriteLine();
+    WriteLineIndent("// Deserialize the struct value");
+    WriteLineIndent("func (m *" + model_name + ") Deserialize() (*" + struct_name + ", int, error) {");
+    Indent(1);
+    WriteLineIndent("value := New" + struct_name + "()");
+    WriteLineIndent("fbeFullSize, err := m.DeserializeValue(value)");
+    WriteLineIndent("return value, fbeFullSize, err");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate struct model DeserializeValue() method
+    WriteLine();
+    WriteLineIndent("// Deserialize the struct value by the given pointer");
+    WriteLineIndent("func (m *" + model_name + ") DeserializeValue(value *" + struct_name + ") (int, error) {");
+    Indent(1);
+    WriteLineIndent("if (m.buffer.Offset() + m.model.FBEOffset() - 4) > m.buffer.Size() {");
+    Indent(1);
+    WriteLineIndent("value = New" + struct_name + "()");
+    WriteLineIndent("return 0, nil");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("fbeFullSize := int(fbe.ReadUInt32(m.buffer.Data(), m.buffer.Offset() + m.model.FBEOffset() - 4))");
+    WriteLineIndent("if fbeFullSize < m.model.FBESize() {");
+    Indent(1);
+    WriteLineIndent("value = New" + struct_name + "()");
+    WriteLineIndent("return 0, errors.New(\"model is broken\")");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("err := m.model.GetValue(value)");
+    WriteLineIndent("return fbeFullSize, err");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate struct model Next() method
+    WriteLine();
+    WriteLineIndent("// Move to the next struct value");
+    WriteLineIndent("func (m *" + model_name + ") Next(prev int) {");
+    Indent(1);
+    WriteLineIndent("m.model.FBEShift(prev)");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the output file
+    Close();
 }
-*/
+
 void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path)
 {
     std::string struct_name = ConvertCase(*s->name);
@@ -5714,7 +5787,7 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
     {
         WriteLine();
         WriteLineIndent("fm." + base_final_name + ".SetFBEOffset(fbeCurrentOffset)");
-        WriteLineIndent("if fbeFieldSize := fm." + base_final_name + ".VerifyFields(); fbeFieldSize == fbe.MaxInt {");
+        WriteLineIndent("if fbeFieldSize = fm." + base_final_name + ".VerifyFields(); fbeFieldSize == fbe.MaxInt {");
         Indent(1);
         WriteLineIndent("return fbe.MaxInt");
         Indent(-1);
@@ -5727,7 +5800,7 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
         {
             WriteLine();
             WriteLineIndent("fm." + ConvertCase(*field->name) + ".SetFBEOffset(fbeCurrentOffset)");
-            WriteLineIndent("if fbeFieldSize := fm." + ConvertCase(*field->name) + ".Verify(); fbeFieldSize == fbe.MaxInt {");
+            WriteLineIndent("if fbeFieldSize = fm." + ConvertCase(*field->name) + ".Verify(); fbeFieldSize == fbe.MaxInt {");
             Indent(1);
             WriteLineIndent("return fbe.MaxInt");
             Indent(-1);
@@ -5862,125 +5935,188 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
     // Close the output file
     Close();
 }
-/*
-void GeneratorGo::GenerateStructModelFinal(const std::shared_ptr<StructType>& s)
-{
-    // Generate struct model final begin
-    WriteLine();
-    WriteLine();
-    WriteLineIndent("# Fast Binary Encoding " + *s->name + " final model");
-    WriteLineIndent("class " + *s->name + "FinalModel(fbe.Model):");
-    Indent(1);
 
-    // Generate struct model final __slots__
-    WriteLineIndent("__slots__ = \"_model\",");
+void GeneratorGo::GenerateStructModelFinal(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path)
+{
+    std::string struct_name = ConvertCase(*s->name);
+    std::string model_name = struct_name + "FinalModel";
+    std::string final_model_name = "FinalModel" + struct_name;
+
+    // Open the output file
+    CppCommon::Path output = path / (model_name + ".go");
+    Open(output);
+
+    // Generate header
+    GenerateHeader(CppCommon::Path(_input).filename().string());
+
+    // Generate package
+    WriteLine();
+    WriteLineIndent("package " + *p->name);
+
+    // Generate imports
+    WriteLine();
+    WriteLineIndent("import \"errors\"");
+    GenerateImports(p);
+
+    // Generate struct model final type
+    WriteLine();
+    WriteLineIndent("// Fast Binary Encoding " + struct_name + " final model");
+    WriteLineIndent("type " + model_name + " struct {");
+    Indent(1);
+    WriteLineIndent("// Model buffer");
+    WriteLineIndent("buffer *fbe.Buffer");
+    WriteLine();
+    WriteLineIndent("// Final model");
+    WriteLineIndent("model *" + final_model_name);
+    Indent(-1);
+    WriteLineIndent("}");
 
     // Generate struct model final constructor
     WriteLine();
-    WriteLineIndent("def __init__(self, buffer=None):");
+    WriteLineIndent("// Create a new " + struct_name + " final model");
+    WriteLineIndent("func New" + model_name + "(buffer *fbe.Buffer) *" + model_name + " {");
     Indent(1);
-    WriteLineIndent("super().__init__(buffer)");
-    WriteLineIndent("self._model = FinalModel" + *s->name + "(self.buffer, 8)");
+    WriteLineIndent("return &" + model_name + "{buffer: buffer, model: New" + final_model_name + "(buffer, 8)}");
     Indent(-1);
+    WriteLineIndent("}");
 
-    // Generate struct model final FBE properties
+    // Generate struct model final Buffer() & Model() methods
     WriteLine();
-    WriteLineIndent("# Get the model type");
-    WriteLineIndent("@property");
-    WriteLineIndent("def fbe_type(self):");
-    Indent(1);
-    WriteLineIndent("return self.TYPE");
-    Indent(-1);
+    WriteLineIndent("// Get the final model buffer");
+    WriteLineIndent("func (m *" + model_name + ") Buffer() *fbe.Buffer { return m.buffer }");
+    WriteLineIndent("// Get the final model");
+    WriteLineIndent("func (m *" + model_name + ") Model() *" + final_model_name + " { return m.model }");
 
-    // Generate struct model type
+    // Generate struct model final FBEType() method
     WriteLine();
-    WriteLineIndent("TYPE = FinalModel" + *s->name + ".TYPE");
+    WriteLineIndent("// // Get the final model type");
+    WriteLineIndent("func (m *" + model_name + ") FBEType() int { return m.model.FBEType() }");
 
-    // Generate struct model final verify() method
+    // Generate struct model final Verify() method
     WriteLine();
-    WriteLineIndent("# Check if the struct value is valid");
-    WriteLineIndent("def verify(self):");
+    WriteLineIndent("// Check if the struct value is valid");
+    WriteLineIndent("func (m *" + model_name + ") Verify() bool {");
     Indent(1);
-    WriteLineIndent("if (self.buffer.offset + self._model.fbe_offset) > self.buffer.size:");
+    WriteLineIndent("if (m.buffer.Offset() + m.model.FBEOffset() - 4) > m.buffer.Size() {");
     Indent(1);
-    WriteLineIndent("return False");
+    WriteLineIndent("return false");
     Indent(-1);
+    WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("fbe_struct_size = self.read_uint32(self._model.fbe_offset - 8)");
-    WriteLineIndent("fbe_struct_type = self.read_uint32(self._model.fbe_offset - 4)");
-    WriteLineIndent("if (fbe_struct_size <= 0) or (fbe_struct_type != self.fbe_type):");
+    WriteLineIndent("fbeStructSize := int(fbe.ReadUInt32(m.buffer.Data(), m.buffer.Offset() + m.model.FBEOffset() - 8))");
+    WriteLineIndent("fbeStructType := int(fbe.ReadUInt32(m.buffer.Data(), m.buffer.Offset() + m.model.FBEOffset() - 4))");
+    WriteLineIndent("if (fbeStructSize <= 0) || (fbeStructType != m.FBEType()) {");
     Indent(1);
-    WriteLineIndent("return False");
+    WriteLineIndent("return false");
     Indent(-1);
+    WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("return (8 + self._model.verify()) == fbe_struct_size");
+    WriteLineIndent("return (8 + m.model.Verify()) == fbeStructSize");
     Indent(-1);
+    WriteLineIndent("}");
 
-    // Generate struct model final serialize() method
+    // Generate struct model final CreateBegin() method
     WriteLine();
-    WriteLineIndent("# Serialize the struct value");
-    WriteLineIndent("def serialize(self, value):");
+    WriteLineIndent("// Create a new final model (begin phase)");
+    WriteLineIndent("func (m *" + model_name + ") CreateBegin() int {");
     Indent(1);
-    WriteLineIndent("fbe_initial_size = self.buffer.size");
-    WriteLine();
-    WriteLineIndent("fbe_struct_type = self.fbe_type");
-    WriteLineIndent("fbe_struct_size = 8 + self._model.fbe_allocation_size(value)");
-    WriteLineIndent("fbe_struct_offset = self.buffer.allocate(fbe_struct_size) - self.buffer.offset");
-    WriteLineIndent("assert ((self.buffer.offset + fbe_struct_offset + fbe_struct_size) <= self.buffer.size), \"Model is broken!\"");
-    WriteLineIndent("if (self.buffer.offset + fbe_struct_offset + fbe_struct_size) > self.buffer.size:");
-    Indent(1);
-    WriteLineIndent("return 0");
+    WriteLineIndent("fbeBegin := m.buffer.Allocate(4 + m.model.FBESize())");
+    WriteLineIndent("return fbeBegin");
     Indent(-1);
-    WriteLine();
-    WriteLineIndent("fbe_struct_size = 8 + self._model.set(value)");
-    WriteLineIndent("self.buffer.resize(fbe_initial_size + fbe_struct_size)");
-    WriteLine();
-    WriteLineIndent("self.write_uint32(self._model.fbe_offset - 8, fbe_struct_size)");
-    WriteLineIndent("self.write_uint32(self._model.fbe_offset - 4, fbe_struct_type)");
-    WriteLine();
-    WriteLineIndent("return fbe_struct_size");
-    Indent(-1);
+    WriteLineIndent("}");
 
-    // Generate struct model final deserialize() methods
+    // Generate struct model final CreateEnd() method
     WriteLine();
-    WriteLineIndent("# Deserialize the struct value");
-    WriteLineIndent("def deserialize(self, value=None):");
+    WriteLineIndent("// Create a new final model (end phase)");
+    WriteLineIndent("func (m *" + model_name + ") CreateEnd(fbeBegin int) int {");
     Indent(1);
-    WriteLineIndent("if value is None:");
-    Indent(1);
-    WriteLineIndent("value = " + *s->name + "()");
+    WriteLineIndent("fbeEnd := m.buffer.Size()");
+    WriteLineIndent("fbeFullSize := fbeEnd - fbeBegin");
+    WriteLineIndent("fbe.WriteUInt32(m.buffer.Data(), m.buffer.Offset() + m.model.FBEOffset() - 4, uint32(fbeFullSize))");
+    WriteLineIndent("return fbeFullSize");
     Indent(-1);
-    WriteLine();
-    WriteLineIndent("assert ((self.buffer.offset + self._model.fbe_offset) <= self.buffer.size), \"Model is broken!\"");
-    WriteLineIndent("if (self.buffer.offset + self._model.fbe_offset) > self.buffer.size:");
-    Indent(1);
-    WriteLineIndent("return " + *s->name + "(), 0");
-    Indent(-1);
-    WriteLine();
-    WriteLineIndent("fbe_struct_size = self.read_uint32(self._model.fbe_offset - 8)");
-    WriteLineIndent("fbe_struct_type = self.read_uint32(self._model.fbe_offset - 4)");
-    WriteLineIndent("assert ((fbe_struct_size > 0) and (fbe_struct_type == self.fbe_type)), \"Model is broken!\"");
-    WriteLineIndent("if (fbe_struct_size <= 0) or (fbe_struct_type != self.fbe_type):");
-    Indent(1);
-    WriteLineIndent("return " + *s->name + "(), 8");
-    Indent(-1);
-    WriteLine();
-    WriteLineIndent("fbe_result = self._model.get(value)");
-    WriteLineIndent("return fbe_result[0], (8 + fbe_result[1])");
-    Indent(-1);
+    WriteLineIndent("}");
 
-    // Generate struct model final next() method
+    // Generate struct model final Serialize() method
     WriteLine();
-    WriteLineIndent("# Move to the next struct value");
-    WriteLineIndent("def next(self, prev):");
+    WriteLineIndent("// Serialize the struct value");
+    WriteLineIndent("func (m *" + model_name + ") Serialize(value *" + struct_name + ") (int, error) {");
     Indent(1);
-    WriteLineIndent("self._model.fbe_shift(prev)");
+    WriteLineIndent("fbeInitialSize := m.buffer.Size()");
+    WriteLine();
+    WriteLineIndent("fbeStructType := m.FBEType()");
+    WriteLineIndent("fbeStructSize := 8 + m.model.FBEAllocationSize(value)");
+    WriteLineIndent("fbeStructOffset := m.buffer.Allocate(fbeStructSize) - m.buffer.Offset()");
+    WriteLineIndent("if (m.buffer.Offset() + fbeStructOffset + fbeStructSize) > m.buffer.Size() {");
+    Indent(1);
+    WriteLineIndent("return 0, errors.New(\"model is broken\")");
     Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("fbeStructSize, err := m.model.Set(value)");
+    WriteLineIndent("fbeStructSize += 8");
+    WriteLineIndent("m.buffer.Resize(fbeInitialSize + fbeStructSize)");
+    WriteLine();
+    WriteLineIndent("fbe.WriteUInt32(m.buffer.Data(), m.buffer.Offset() + m.model.FBEOffset() - 8, uint32(fbeStructSize))");
+    WriteLineIndent("fbe.WriteUInt32(m.buffer.Data(), m.buffer.Offset() + m.model.FBEOffset() - 4, uint32(fbeStructType))");
+    WriteLine();
+    WriteLineIndent("return fbeStructSize, err");
+    Indent(-1);
+    WriteLineIndent("}");
 
-    // Generate struct model final end
+    // Generate struct model final Deserialize() method
+    WriteLine();
+    WriteLineIndent("// Deserialize the struct value");
+    WriteLineIndent("func (m *" + model_name + ") Deserialize() (*" + struct_name + ", int, error) {");
+    Indent(1);
+    WriteLineIndent("value := New" + struct_name + "()");
+    WriteLineIndent("fbeFullSize, err := m.DeserializeValue(value)");
+    WriteLineIndent("return value, fbeFullSize, err");
     Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate struct model final DeserializeValue() method
+    WriteLine();
+    WriteLineIndent("// Deserialize the struct value by the given pointer");
+    WriteLineIndent("func (m *" + model_name + ") DeserializeValue(value *" + struct_name + ") (int, error) {");
+    Indent(1);
+    WriteLineIndent("if (m.buffer.Offset() + m.model.FBEOffset()) > m.buffer.Size() {");
+    Indent(1);
+    WriteLineIndent("value = New" + struct_name + "()");
+    WriteLineIndent("return 0, errors.New(\"model is broken\")");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("fbeStructSize := int(fbe.ReadUInt32(m.buffer.Data(), m.buffer.Offset() + m.model.FBEOffset() - 8))");
+    WriteLineIndent("fbeStructType := int(fbe.ReadUInt32(m.buffer.Data(), m.buffer.Offset() + m.model.FBEOffset() - 4))");
+    WriteLineIndent("if (fbeStructSize <= 0) || (fbeStructType != m.FBEType()) {");
+    Indent(1);
+    WriteLineIndent("value = New" + struct_name + "()");
+    WriteLineIndent("return 8, errors.New(\"model is broken\")");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("fbeStructSize, err := m.model.GetValue(value)");
+    WriteLineIndent("return 8 + fbeStructSize, err");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate struct model final Next() method
+    WriteLine();
+    WriteLineIndent("// Move to the next struct value");
+    WriteLineIndent("func (m *" + model_name + ") Next(prev int) {");
+    Indent(1);
+    WriteLineIndent("m.model.FBEShift(prev)");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the output file
+    Close();
 }
-
+/*
 void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, bool final)
 {
     std::string sender = (final ? "FinalSender" : "Sender");

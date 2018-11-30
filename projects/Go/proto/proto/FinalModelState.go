@@ -10,8 +10,10 @@ import "../fbe"
 
 // Fast Binary Encoding State final model
 type FinalModelState struct {
-    buffer *fbe.Buffer  // Final model buffer
-    offset int          // Final model buffer offset
+    // Final model buffer
+    buffer *fbe.Buffer
+    // Final model buffer offset
+    offset int
 }
 
 // Create a new final model
@@ -47,14 +49,15 @@ func (fm *FinalModelState) Verify() int {
 // Get the value
 func (fm *FinalModelState) Get() (*State, int, error) {
     var value State
-    return &value, fm.GetValueDefault(&value, State(0))
+    size, err := fm.GetValueDefault(&value, State(0))
+    return &value, size, err
 }
 
 // Get the value with provided default value
 func (fm *FinalModelState) GetDefault(defaults State) (*State, int, error) {
     var value State
-    err := fm.GetValueDefault(&value, defaults)
-    return &value, err
+    size, err := fm.GetValueDefault(&value, defaults)
+    return &value, size, err
 }
 
 // Get the value by the given pointer

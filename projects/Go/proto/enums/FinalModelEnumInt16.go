@@ -10,8 +10,10 @@ import "../fbe"
 
 // Fast Binary Encoding EnumInt16 final model
 type FinalModelEnumInt16 struct {
-    buffer *fbe.Buffer  // Final model buffer
-    offset int          // Final model buffer offset
+    // Final model buffer
+    buffer *fbe.Buffer
+    // Final model buffer offset
+    offset int
 }
 
 // Create a new final model
@@ -47,14 +49,15 @@ func (fm *FinalModelEnumInt16) Verify() int {
 // Get the value
 func (fm *FinalModelEnumInt16) Get() (*EnumInt16, int, error) {
     var value EnumInt16
-    return &value, fm.GetValueDefault(&value, EnumInt16(0))
+    size, err := fm.GetValueDefault(&value, EnumInt16(0))
+    return &value, size, err
 }
 
 // Get the value with provided default value
 func (fm *FinalModelEnumInt16) GetDefault(defaults EnumInt16) (*EnumInt16, int, error) {
     var value EnumInt16
-    err := fm.GetValueDefault(&value, defaults)
-    return &value, err
+    size, err := fm.GetValueDefault(&value, defaults)
+    return &value, size, err
 }
 
 // Get the value by the given pointer

@@ -15,8 +15,10 @@ var _ = proto.Version
 
 // Fast Binary Encoding StructVector field model
 type FieldModelStructVector struct {
-    buffer *fbe.Buffer  // Field model buffer
-    offset int          // Field model buffer offset
+    // Field model buffer
+    buffer *fbe.Buffer
+    // Field model buffer offset
+    offset int
 
     F1 *FieldModelVectorByte
     F2 *FieldModelVectorOptionalByte
@@ -52,6 +54,16 @@ func (fm *FieldModelStructVector) FBESize() int { return 4 }
 // Get the field body size
 func (fm *FieldModelStructVector) FBEBody() int {
     fbeResult := 4 + 4 +
+        fm.F1.FBESize() +
+        fm.F2.FBESize() +
+        fm.F3.FBESize() +
+        fm.F4.FBESize() +
+        fm.F5.FBESize() +
+        fm.F6.FBESize() +
+        fm.F7.FBESize() +
+        fm.F8.FBESize() +
+        fm.F9.FBESize() +
+        fm.F10.FBESize() +
         0
     return fbeResult
 }
@@ -70,6 +82,16 @@ func (fm *FieldModelStructVector) FBEExtra() int {
     fm.buffer.Shift(fbeStructOffset)
 
     fbeResult := fm.FBEBody() +
+        fm.F1.FBEExtra() +
+        fm.F2.FBEExtra() +
+        fm.F3.FBEExtra() +
+        fm.F4.FBEExtra() +
+        fm.F5.FBEExtra() +
+        fm.F6.FBEExtra() +
+        fm.F7.FBEExtra() +
+        fm.F8.FBEExtra() +
+        fm.F9.FBEExtra() +
+        fm.F10.FBEExtra() +
         0
 
     fm.buffer.Unshift(fbeStructOffset)

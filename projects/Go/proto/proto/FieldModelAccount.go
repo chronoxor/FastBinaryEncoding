@@ -13,15 +13,17 @@ var _ = fbe.Version
 
 // Fast Binary Encoding Account field model
 type FieldModelAccount struct {
-    buffer *fbe.Buffer  // Field model buffer
-    offset int          // Field model buffer offset
+    // Field model buffer
+    buffer *fbe.Buffer
+    // Field model buffer offset
+    offset int
 
     Uid *fbe.FieldModelInt32
     Name *fbe.FieldModelString
     State *FieldModelState
     Wallet *FieldModelBalance
-    Asset *FieldModelOptionalBalance
-    Orders *FieldModelVectorOrder
+    //Asset *FieldModelOptionalBalance
+    //Orders *FieldModelVectorOrder
 }
 
 // Create a new Account field model
@@ -31,8 +33,8 @@ func NewFieldModelAccount(buffer *fbe.Buffer, offset int) *FieldModelAccount {
     fbeResult.Name = fbe.NewFieldModelString(buffer, fbeResult.Uid.FBEOffset() + fbeResult.Uid.FBESize())
     fbeResult.State = NewFieldModelState(buffer, fbeResult.Name.FBEOffset() + fbeResult.Name.FBESize())
     fbeResult.Wallet = NewFieldModelBalance(buffer, fbeResult.State.FBEOffset() + fbeResult.State.FBESize())
-    fbeResult.Asset = NewFieldModelOptionalBalance(buffer, fbeResult.Wallet.FBEOffset() + fbeResult.Wallet.FBESize())
-    fbeResult.Orders = NewFieldModelVectorOrder(buffer, fbeResult.Asset.FBEOffset() + fbeResult.Asset.FBESize())
+    //fbeResult.Asset = NewFieldModelOptionalBalance(buffer, fbeResult.Wallet.FBEOffset() + fbeResult.Wallet.FBESize())
+    //fbeResult.Orders = NewFieldModelVectorOrder(buffer, fbeResult.Asset.FBEOffset() + fbeResult.Asset.FBESize())
     return &fbeResult
 }
 
@@ -42,6 +44,12 @@ func (fm *FieldModelAccount) FBESize() int { return 4 }
 // Get the field body size
 func (fm *FieldModelAccount) FBEBody() int {
     fbeResult := 4 + 4 +
+        fm.Uid.FBESize() +
+        fm.Name.FBESize() +
+        fm.State.FBESize() +
+        fm.Wallet.FBESize() +
+        //fm.Asset.FBESize() +
+        //fm.Orders.FBESize() +
         0
     return fbeResult
 }
@@ -60,6 +68,12 @@ func (fm *FieldModelAccount) FBEExtra() int {
     fm.buffer.Shift(fbeStructOffset)
 
     fbeResult := fm.FBEBody() +
+        fm.Uid.FBEExtra() +
+        fm.Name.FBEExtra() +
+        fm.State.FBEExtra() +
+        fm.Wallet.FBEExtra() +
+        //fm.Asset.FBEExtra() +
+        //fm.Orders.FBEExtra() +
         0
 
     fm.buffer.Unshift(fbeStructOffset)
@@ -145,7 +159,7 @@ func (fm *FieldModelAccount) VerifyFields(fbeStructSize int) bool {
         return false
     }
     fbeCurrentSize += fm.Wallet.FBESize()
-
+/*
     if (fbeCurrentSize + fm.Asset.FBESize()) > fbeStructSize {
         return true
     }
@@ -161,7 +175,7 @@ func (fm *FieldModelAccount) VerifyFields(fbeStructSize int) bool {
         return false
     }
     fbeCurrentSize += fm.Orders.FBESize()
-
+*/
     return true
 }
 
@@ -240,7 +254,7 @@ func (fm *FieldModelAccount) GetFields(fbeValue *Account, fbeStructSize int) {
         fbeValue.Wallet = *NewBalance()
     }
     fbeCurrentSize += fm.Wallet.FBESize()
-
+/*
     if (fbeCurrentSize + fm.Asset.FBESize()) <= fbeStructSize {
         _ = fm.Asset.GetValue(fbeValue.Asset)
     } else {
@@ -254,6 +268,7 @@ func (fm *FieldModelAccount) GetFields(fbeValue *Account, fbeStructSize int) {
         fbeValue.Orders = make([]Order, 0)
     }
     fbeCurrentSize += fm.Orders.FBESize()
+*/
 }
 
 // Set the struct value (begin phase)
@@ -309,11 +324,13 @@ func (fm *FieldModelAccount) SetFields(fbeValue *Account) error {
     if err = fm.Wallet.Set(&fbeValue.Wallet); err != nil {
         return err
     }
+/*
     if err = fm.Asset.Set(fbeValue.Asset); err != nil {
         return err
     }
     if err = fm.Orders.Set(fbeValue.Orders); err != nil {
         return err
     }
+*/
     return err
 }

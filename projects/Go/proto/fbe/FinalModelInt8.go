@@ -9,8 +9,10 @@ import "errors"
 
 // Fast Binary Encoding int8 final model
 type FinalModelInt8 struct {
-    buffer *Buffer  // Final model buffer
-    offset int      // Final model buffer offset
+    // Final model buffer
+    buffer *Buffer
+    // Final model buffer offset
+    offset int
 }
 
 // Create a new final model

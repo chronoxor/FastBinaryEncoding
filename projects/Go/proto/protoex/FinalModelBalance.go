@@ -72,13 +72,13 @@ func (fm *FinalModelBalance) VerifyFields() int {
 
 
     fm.FinalModelBalance.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.FinalModelBalance.VerifyFields(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.FinalModelBalance.VerifyFields(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Locked.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Locked.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Locked.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize

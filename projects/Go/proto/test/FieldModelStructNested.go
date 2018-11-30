@@ -15,8 +15,10 @@ var _ = proto.Version
 
 // Fast Binary Encoding StructNested field model
 type FieldModelStructNested struct {
-    buffer *fbe.Buffer  // Field model buffer
-    offset int          // Field model buffer offset
+    // Field model buffer
+    buffer *fbe.Buffer
+    // Field model buffer offset
+    offset int
 
     FieldModelStructOptional
     F1000 *FieldModelEnumSimple
@@ -59,6 +61,18 @@ func (fm *FieldModelStructNested) FBESize() int { return 4 }
 func (fm *FieldModelStructNested) FBEBody() int {
     fbeResult := 4 + 4 +
         fm.FieldModelStructOptional.FBEBody() - 4 - 4 +
+        fm.F1000.FBESize() +
+        fm.F1001.FBESize() +
+        fm.F1002.FBESize() +
+        fm.F1003.FBESize() +
+        fm.F1004.FBESize() +
+        fm.F1005.FBESize() +
+        fm.F1006.FBESize() +
+        fm.F1007.FBESize() +
+        fm.F1008.FBESize() +
+        fm.F1009.FBESize() +
+        fm.F1010.FBESize() +
+        fm.F1011.FBESize() +
         0
     return fbeResult
 }
@@ -78,6 +92,18 @@ func (fm *FieldModelStructNested) FBEExtra() int {
 
     fbeResult := fm.FBEBody() +
         fm.FieldModelStructOptional.FBEExtra() + 
+        fm.F1000.FBEExtra() +
+        fm.F1001.FBEExtra() +
+        fm.F1002.FBEExtra() +
+        fm.F1003.FBEExtra() +
+        fm.F1004.FBEExtra() +
+        fm.F1005.FBEExtra() +
+        fm.F1006.FBEExtra() +
+        fm.F1007.FBEExtra() +
+        fm.F1008.FBEExtra() +
+        fm.F1009.FBEExtra() +
+        fm.F1010.FBEExtra() +
+        fm.F1011.FBEExtra() +
         0
 
     fm.buffer.Unshift(fbeStructOffset)

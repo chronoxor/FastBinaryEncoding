@@ -15,8 +15,10 @@ var _ = proto.Version
 
 // Fast Binary Encoding Balance field model
 type FieldModelBalance struct {
-    buffer *fbe.Buffer  // Field model buffer
-    offset int          // Field model buffer offset
+    // Field model buffer
+    buffer *fbe.Buffer
+    // Field model buffer offset
+    offset int
 
     proto.FieldModelBalance
     Locked *fbe.FieldModelDouble
@@ -37,6 +39,7 @@ func (fm *FieldModelBalance) FBESize() int { return 4 }
 func (fm *FieldModelBalance) FBEBody() int {
     fbeResult := 4 + 4 +
         fm.FieldModelBalance.FBEBody() - 4 - 4 +
+        fm.Locked.FBESize() +
         0
     return fbeResult
 }
@@ -56,6 +59,7 @@ func (fm *FieldModelBalance) FBEExtra() int {
 
     fbeResult := fm.FBEBody() +
         fm.FieldModelBalance.FBEExtra() + 
+        fm.Locked.FBEExtra() +
         0
 
     fm.buffer.Unshift(fbeStructOffset)

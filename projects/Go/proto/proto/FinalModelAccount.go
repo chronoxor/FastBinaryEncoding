@@ -19,8 +19,8 @@ type FinalModelAccount struct {
     Name *fbe.FinalModelString
     State *FinalModelState
     Wallet *FinalModelBalance
-    Asset *FinalModelOptionalBalance
-    Orders *FinalModelVectorOrder
+    //Asset *FinalModelOptionalBalance
+    //Orders *FinalModelVectorOrder
 }
 
 // Create a new Account final model
@@ -30,8 +30,8 @@ func NewFinalModelAccount(buffer *fbe.Buffer, offset int) *FinalModelAccount {
     fbeResult.Name = fbe.NewFinalModelString(buffer, 0)
     fbeResult.State = NewFinalModelState(buffer, 0)
     fbeResult.Wallet = NewFinalModelBalance(buffer, 0)
-    fbeResult.Asset = NewFinalModelOptionalBalance(buffer, 0)
-    fbeResult.Orders = NewFinalModelVectorOrder(buffer, 0)
+    //fbeResult.Asset = NewFinalModelOptionalBalance(buffer, 0)
+    //fbeResult.Orders = NewFinalModelVectorOrder(buffer, 0)
     return &fbeResult
 }
 
@@ -42,8 +42,8 @@ func (fm *FinalModelAccount) FBEAllocationSize(fbeValue *Account) int {
         fm.Name.FBEAllocationSize(fbeValue.Name) +
         fm.State.FBEAllocationSize(&fbeValue.State) +
         fm.Wallet.FBEAllocationSize(&fbeValue.Wallet) +
-        fm.Asset.FBEAllocationSize(fbeValue.Asset) +
-        fm.Orders.FBEAllocationSize(fbeValue.Orders) +
+        //fm.Asset.FBEAllocationSize(fbeValue.Asset) +
+        //fm.Orders.FBEAllocationSize(fbeValue.Orders) +
         0
     return fbeResult
 }
@@ -82,41 +82,41 @@ func (fm *FinalModelAccount) VerifyFields() int {
 
 
     fm.Uid.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uid.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uid.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Name.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Name.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Name.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.State.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.State.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.State.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Wallet.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Wallet.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Wallet.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
-
+/*
     fm.Asset.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Asset.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Asset.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Orders.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Orders.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Orders.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
-
+*/
     return fbeCurrentOffset
 }
 
@@ -169,7 +169,7 @@ func (fm *FinalModelAccount) GetFields(fbeValue *Account) (int, error) {
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
-
+/*
     fm.Asset.SetFBEOffset(fbeCurrentOffset)
     if fbeFieldSize, err = fm.Asset.GetValue(fbeValue.Asset); err != nil {
         return fbeCurrentSize, err
@@ -183,7 +183,7 @@ func (fm *FinalModelAccount) GetFields(fbeValue *Account) (int, error) {
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
-
+*/
     return fbeCurrentSize, nil
 }
 
@@ -229,7 +229,7 @@ func (fm *FinalModelAccount) SetFields(fbeValue *Account) (int, error) {
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
-
+/*
     fm.Asset.SetFBEOffset(fbeCurrentOffset)
     if fbeFieldSize, err = fm.Asset.Set(fbeValue.Asset); err != nil {
         return fbeCurrentSize, err
@@ -243,6 +243,6 @@ func (fm *FinalModelAccount) SetFields(fbeValue *Account) (int, error) {
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
-
+*/
     return fbeCurrentSize, nil
 }

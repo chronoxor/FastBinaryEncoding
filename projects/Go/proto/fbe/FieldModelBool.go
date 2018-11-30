@@ -9,8 +9,10 @@ import "errors"
 
 // Fast Binary Encoding bool field model
 type FieldModelBool struct {
-    buffer *Buffer  // Field model buffer
-    offset int      // Field model buffer offset
+    // Field model buffer
+    buffer *Buffer
+    // Field model buffer offset
+    offset int
 }
 
 // Create a new field model

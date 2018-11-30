@@ -15,8 +15,10 @@ var _ = proto.Version
 
 // Fast Binary Encoding StructHashEx field model
 type FieldModelStructHashEx struct {
-    buffer *fbe.Buffer  // Field model buffer
-    offset int          // Field model buffer offset
+    // Field model buffer
+    buffer *fbe.Buffer
+    // Field model buffer offset
+    offset int
 
     F1 *FieldModelMapStructSimpleStructNested
     F2 *FieldModelMapStructSimpleOptionalStructNested
@@ -36,6 +38,8 @@ func (fm *FieldModelStructHashEx) FBESize() int { return 4 }
 // Get the field body size
 func (fm *FieldModelStructHashEx) FBEBody() int {
     fbeResult := 4 + 4 +
+        fm.F1.FBESize() +
+        fm.F2.FBESize() +
         0
     return fbeResult
 }
@@ -54,6 +58,8 @@ func (fm *FieldModelStructHashEx) FBEExtra() int {
     fm.buffer.Shift(fbeStructOffset)
 
     fbeResult := fm.FBEBody() +
+        fm.F1.FBEExtra() +
+        fm.F2.FBEExtra() +
         0
 
     fm.buffer.Unshift(fbeStructOffset)

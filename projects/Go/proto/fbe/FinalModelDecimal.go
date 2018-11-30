@@ -11,8 +11,10 @@ import "github.com/shopspring/decimal"
 
 // Fast Binary Encoding decimal final model
 type FinalModelDecimal struct {
-    buffer *Buffer  // Final model buffer
-    offset int      // Final model buffer offset
+    // Final model buffer
+    buffer *Buffer
+    // Final model buffer offset
+    offset int
 }
 
 // Create a new decimal final model

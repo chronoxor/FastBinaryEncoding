@@ -13,8 +13,10 @@ var _ = fbe.Version
 
 // Fast Binary Encoding Balance field model
 type FieldModelBalance struct {
-    buffer *fbe.Buffer  // Field model buffer
-    offset int          // Field model buffer offset
+    // Field model buffer
+    buffer *fbe.Buffer
+    // Field model buffer offset
+    offset int
 
     Currency *fbe.FieldModelString
     Amount *fbe.FieldModelDouble
@@ -34,6 +36,8 @@ func (fm *FieldModelBalance) FBESize() int { return 4 }
 // Get the field body size
 func (fm *FieldModelBalance) FBEBody() int {
     fbeResult := 4 + 4 +
+        fm.Currency.FBESize() +
+        fm.Amount.FBESize() +
         0
     return fbeResult
 }
@@ -52,6 +56,8 @@ func (fm *FieldModelBalance) FBEExtra() int {
     fm.buffer.Shift(fbeStructOffset)
 
     fbeResult := fm.FBEBody() +
+        fm.Currency.FBEExtra() +
+        fm.Amount.FBEExtra() +
         0
 
     fm.buffer.Unshift(fbeStructOffset)

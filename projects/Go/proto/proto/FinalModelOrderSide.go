@@ -10,8 +10,10 @@ import "../fbe"
 
 // Fast Binary Encoding OrderSide final model
 type FinalModelOrderSide struct {
-    buffer *fbe.Buffer  // Final model buffer
-    offset int          // Final model buffer offset
+    // Final model buffer
+    buffer *fbe.Buffer
+    // Final model buffer offset
+    offset int
 }
 
 // Create a new final model
@@ -47,14 +49,15 @@ func (fm *FinalModelOrderSide) Verify() int {
 // Get the value
 func (fm *FinalModelOrderSide) Get() (*OrderSide, int, error) {
     var value OrderSide
-    return &value, fm.GetValueDefault(&value, OrderSide(0))
+    size, err := fm.GetValueDefault(&value, OrderSide(0))
+    return &value, size, err
 }
 
 // Get the value with provided default value
 func (fm *FinalModelOrderSide) GetDefault(defaults OrderSide) (*OrderSide, int, error) {
     var value OrderSide
-    err := fm.GetValueDefault(&value, defaults)
-    return &value, err
+    size, err := fm.GetValueDefault(&value, defaults)
+    return &value, size, err
 }
 
 // Get the value by the given pointer

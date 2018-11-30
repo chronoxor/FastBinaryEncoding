@@ -15,8 +15,10 @@ var _ = proto.Version
 
 // Fast Binary Encoding Account field model
 type FieldModelAccount struct {
-    buffer *fbe.Buffer  // Field model buffer
-    offset int          // Field model buffer offset
+    // Field model buffer
+    buffer *fbe.Buffer
+    // Field model buffer offset
+    offset int
 
     Uid *fbe.FieldModelInt32
     Name *fbe.FieldModelString
@@ -44,6 +46,12 @@ func (fm *FieldModelAccount) FBESize() int { return 4 }
 // Get the field body size
 func (fm *FieldModelAccount) FBEBody() int {
     fbeResult := 4 + 4 +
+        fm.Uid.FBESize() +
+        fm.Name.FBESize() +
+        fm.State.FBESize() +
+        fm.Wallet.FBESize() +
+        fm.Asset.FBESize() +
+        fm.Orders.FBESize() +
         0
     return fbeResult
 }
@@ -62,6 +70,12 @@ func (fm *FieldModelAccount) FBEExtra() int {
     fm.buffer.Shift(fbeStructOffset)
 
     fbeResult := fm.FBEBody() +
+        fm.Uid.FBEExtra() +
+        fm.Name.FBEExtra() +
+        fm.State.FBEExtra() +
+        fm.Wallet.FBEExtra() +
+        fm.Asset.FBEExtra() +
+        fm.Orders.FBEExtra() +
         0
 
     fm.buffer.Unshift(fbeStructOffset)

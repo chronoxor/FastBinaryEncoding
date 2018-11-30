@@ -15,8 +15,10 @@ var _ = proto.Version
 
 // Fast Binary Encoding Order field model
 type FieldModelOrder struct {
-    buffer *fbe.Buffer  // Field model buffer
-    offset int          // Field model buffer offset
+    // Field model buffer
+    buffer *fbe.Buffer
+    // Field model buffer offset
+    offset int
 
     Uid *fbe.FieldModelInt32
     Symbol *fbe.FieldModelString
@@ -48,6 +50,14 @@ func (fm *FieldModelOrder) FBESize() int { return 4 }
 // Get the field body size
 func (fm *FieldModelOrder) FBEBody() int {
     fbeResult := 4 + 4 +
+        fm.Uid.FBESize() +
+        fm.Symbol.FBESize() +
+        fm.Side.FBESize() +
+        fm.Type.FBESize() +
+        fm.Price.FBESize() +
+        fm.Volume.FBESize() +
+        fm.Tp.FBESize() +
+        fm.Sl.FBESize() +
         0
     return fbeResult
 }
@@ -66,6 +76,14 @@ func (fm *FieldModelOrder) FBEExtra() int {
     fm.buffer.Shift(fbeStructOffset)
 
     fbeResult := fm.FBEBody() +
+        fm.Uid.FBEExtra() +
+        fm.Symbol.FBEExtra() +
+        fm.Side.FBEExtra() +
+        fm.Type.FBEExtra() +
+        fm.Price.FBEExtra() +
+        fm.Volume.FBEExtra() +
+        fm.Tp.FBEExtra() +
+        fm.Sl.FBEExtra() +
         0
 
     fm.buffer.Unshift(fbeStructOffset)

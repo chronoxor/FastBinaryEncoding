@@ -15,8 +15,10 @@ var _ = proto.Version
 
 // Fast Binary Encoding StructSimple field model
 type FieldModelStructSimple struct {
-    buffer *fbe.Buffer  // Field model buffer
-    offset int          // Field model buffer offset
+    // Field model buffer
+    buffer *fbe.Buffer
+    // Field model buffer offset
+    offset int
 
     Uid *fbe.FieldModelInt32
     F1 *fbe.FieldModelBool
@@ -122,6 +124,51 @@ func (fm *FieldModelStructSimple) FBESize() int { return 4 }
 // Get the field body size
 func (fm *FieldModelStructSimple) FBEBody() int {
     fbeResult := 4 + 4 +
+        fm.Uid.FBESize() +
+        fm.F1.FBESize() +
+        fm.F2.FBESize() +
+        fm.F3.FBESize() +
+        fm.F4.FBESize() +
+        fm.F5.FBESize() +
+        fm.F6.FBESize() +
+        fm.F7.FBESize() +
+        fm.F8.FBESize() +
+        fm.F9.FBESize() +
+        fm.F10.FBESize() +
+        fm.F11.FBESize() +
+        fm.F12.FBESize() +
+        fm.F13.FBESize() +
+        fm.F14.FBESize() +
+        fm.F15.FBESize() +
+        fm.F16.FBESize() +
+        fm.F17.FBESize() +
+        fm.F18.FBESize() +
+        fm.F19.FBESize() +
+        fm.F20.FBESize() +
+        fm.F21.FBESize() +
+        fm.F22.FBESize() +
+        fm.F23.FBESize() +
+        fm.F24.FBESize() +
+        fm.F25.FBESize() +
+        fm.F26.FBESize() +
+        fm.F27.FBESize() +
+        fm.F28.FBESize() +
+        fm.F29.FBESize() +
+        fm.F30.FBESize() +
+        fm.F31.FBESize() +
+        fm.F32.FBESize() +
+        fm.F33.FBESize() +
+        fm.F34.FBESize() +
+        fm.F35.FBESize() +
+        fm.F36.FBESize() +
+        fm.F37.FBESize() +
+        fm.F38.FBESize() +
+        fm.F39.FBESize() +
+        fm.F40.FBESize() +
+        fm.F41.FBESize() +
+        fm.F42.FBESize() +
+        fm.F43.FBESize() +
+        fm.F44.FBESize() +
         0
     return fbeResult
 }
@@ -140,6 +187,51 @@ func (fm *FieldModelStructSimple) FBEExtra() int {
     fm.buffer.Shift(fbeStructOffset)
 
     fbeResult := fm.FBEBody() +
+        fm.Uid.FBEExtra() +
+        fm.F1.FBEExtra() +
+        fm.F2.FBEExtra() +
+        fm.F3.FBEExtra() +
+        fm.F4.FBEExtra() +
+        fm.F5.FBEExtra() +
+        fm.F6.FBEExtra() +
+        fm.F7.FBEExtra() +
+        fm.F8.FBEExtra() +
+        fm.F9.FBEExtra() +
+        fm.F10.FBEExtra() +
+        fm.F11.FBEExtra() +
+        fm.F12.FBEExtra() +
+        fm.F13.FBEExtra() +
+        fm.F14.FBEExtra() +
+        fm.F15.FBEExtra() +
+        fm.F16.FBEExtra() +
+        fm.F17.FBEExtra() +
+        fm.F18.FBEExtra() +
+        fm.F19.FBEExtra() +
+        fm.F20.FBEExtra() +
+        fm.F21.FBEExtra() +
+        fm.F22.FBEExtra() +
+        fm.F23.FBEExtra() +
+        fm.F24.FBEExtra() +
+        fm.F25.FBEExtra() +
+        fm.F26.FBEExtra() +
+        fm.F27.FBEExtra() +
+        fm.F28.FBEExtra() +
+        fm.F29.FBEExtra() +
+        fm.F30.FBEExtra() +
+        fm.F31.FBEExtra() +
+        fm.F32.FBEExtra() +
+        fm.F33.FBEExtra() +
+        fm.F34.FBEExtra() +
+        fm.F35.FBEExtra() +
+        fm.F36.FBEExtra() +
+        fm.F37.FBEExtra() +
+        fm.F38.FBEExtra() +
+        fm.F39.FBEExtra() +
+        fm.F40.FBEExtra() +
+        fm.F41.FBEExtra() +
+        fm.F42.FBEExtra() +
+        fm.F43.FBEExtra() +
+        fm.F44.FBEExtra() +
         0
 
     fm.buffer.Unshift(fbeStructOffset)

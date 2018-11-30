@@ -84,37 +84,37 @@ func (fm *FinalModelAccount) VerifyFields() int {
 
 
     fm.Uid.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Uid.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Uid.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Name.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Name.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Name.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.State.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.State.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.State.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Wallet.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Wallet.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Wallet.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Asset.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Asset.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Asset.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.Orders.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.Orders.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.Orders.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize

@@ -96,61 +96,61 @@ func (fm *FinalModelStructHash) VerifyFields() int {
 
 
     fm.F1.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.F1.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.F1.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.F2.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.F2.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.F2.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.F3.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.F3.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.F3.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.F4.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.F4.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.F4.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.F5.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.F5.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.F5.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.F6.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.F6.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.F6.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.F7.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.F7.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.F7.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.F8.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.F8.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.F8.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.F9.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.F9.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.F9.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
 
     fm.F10.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize := fm.F10.Verify(); fbeFieldSize == fbe.MaxInt {
+    if fbeFieldSize = fm.F10.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize

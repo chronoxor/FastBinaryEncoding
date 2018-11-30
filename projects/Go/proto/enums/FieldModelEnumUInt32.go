@@ -10,8 +10,10 @@ import "../fbe"
 
 // Fast Binary Encoding EnumUInt32 field model
 type FieldModelEnumUInt32 struct {
-    buffer *fbe.Buffer  // Field model buffer
-    offset int          // Field model buffer offset
+    // Field model buffer
+    buffer *fbe.Buffer
+    // Field model buffer offset
+    offset int
 }
 
 // Create a new field model

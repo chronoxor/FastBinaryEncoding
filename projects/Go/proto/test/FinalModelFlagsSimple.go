@@ -10,8 +10,10 @@ import "../fbe"
 
 // Fast Binary Encoding FlagsSimple final model
 type FinalModelFlagsSimple struct {
-    buffer *fbe.Buffer  // Final model buffer
-    offset int          // Final model buffer offset
+    // Final model buffer
+    buffer *fbe.Buffer
+    // Final model buffer offset
+    offset int
 }
 
 // Create a new final model
@@ -47,14 +49,15 @@ func (fm *FinalModelFlagsSimple) Verify() int {
 // Get the value
 func (fm *FinalModelFlagsSimple) Get() (*FlagsSimple, int, error) {
     var value FlagsSimple
-    return &value, fm.GetValueDefault(&value, FlagsSimple(0))
+    size, err := fm.GetValueDefault(&value, FlagsSimple(0))
+    return &value, size, err
 }
 
 // Get the value with provided default value
 func (fm *FinalModelFlagsSimple) GetDefault(defaults FlagsSimple) (*FlagsSimple, int, error) {
     var value FlagsSimple
-    err := fm.GetValueDefault(&value, defaults)
-    return &value, err
+    size, err := fm.GetValueDefault(&value, defaults)
+    return &value, size, err
 }
 
 // Get the value by the given pointer
