@@ -40,7 +40,7 @@ class FieldModelOptionalFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(b
         return fbeResult
     }
 
-    // Checks whether the object contains a value
+    // Checks if the object contains a value
     fun hasValue(): Boolean
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -63,7 +63,7 @@ class FieldModelOptionalFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(b
         if (fbeHasValue == 0)
             return true
 
-        val fbeOptionalOffset = readUInt32(fbeOffset).toLong()
+        val fbeOptionalOffset = readUInt32(fbeOffset + 1).toLong()
         if (fbeOptionalOffset == 0L)
             return false
 
@@ -102,9 +102,7 @@ class FieldModelOptionalFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(b
             return defaults
 
         val optional = value.get()
-
         getEnd(fbeBegin)
-
         return optional
     }
 
@@ -146,7 +144,6 @@ class FieldModelOptionalFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(b
             return
 
         value.set(optional!!)
-
         setEnd(fbeBegin)
     }
 }

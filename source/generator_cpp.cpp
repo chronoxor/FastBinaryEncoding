@@ -1897,7 +1897,7 @@ public:
     //! Is the value present?
     explicit operator bool() const noexcept { return has_value(); }
 
-    // Checks whether the object contains a value
+    // Checks if the object contains a value
     bool has_value() const noexcept
     {
         if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
@@ -3412,7 +3412,7 @@ public:
     //! Is the value present?
     explicit operator bool() const noexcept { return has_value(); }
 
-    // Checks whether the object contains a value
+    // Checks if the object contains a value
     bool has_value() const noexcept
     {
         if ((_buffer.offset() + fbe_offset() + 1) > _buffer.size())

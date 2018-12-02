@@ -1576,143 +1576,212 @@ func (fm *FieldModelString) Set(value string) error {
     // Close the file
     Close();
 }
-/*
-void GeneratorGo::GenerateFBEFieldModelOptional()
+
+void GeneratorGo::GenerateFBEFieldModelOptional(const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& model, const CppCommon::Path& path)
 {
+    // Open the output file
+    CppCommon::Path output = path / ("FieldModelOptional" + name + ".go");
+    Open(output);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
+    // Generate package
+    WriteLine();
+    WriteLineIndent("package " + *p->name);
+
+    // Generate imports
+    WriteLine();
+    WriteLineIndent("import \"errors\"");
+    GenerateImports(p);
+
     std::string code = R"CODE(
+// Fast Binary Encoding optional _TYPE_ field model
+type FieldModelOptional_NAME_ struct {
+    // Field model buffer
+    buffer *fbe.Buffer
+    // Field model buffer offset
+    offset int
 
-# Fast Binary Encoding optional field model
-class FieldModelOptional(FieldModel):
-    __slots__ = "_model",
+    // Base field model value
+    value *_MODEL_
+}
 
-    def __init__(self, model, buffer, offset):
-        super().__init__(buffer, offset)
-        self._model = model
-        self._model.fbe_offset = 0
+// Create a new optional _TYPE_ field model
+func NewFieldModelOptional_NAME_(buffer *fbe.Buffer, offset int) *FieldModelOptional_NAME_ {
+    fbeResult := FieldModelOptional_NAME_{buffer: buffer, offset: offset}
+    fbeResult.value = _MODEL_NEW_(buffer, 0)
+    return &fbeResult
+}
 
-    # Get the field size
-    @property
-    def fbe_size(self):
-        return 1 + 4
+// Get the optional field model value
+func (fm *FieldModelOptional_NAME_) Value() *_MODEL_ { return fm.value }
 
-    # Get the field extra size
-    @property
-    def fbe_extra(self):
-        if not self.has_value:
-            return 0
+// Get the field size
+func (fm *FieldModelOptional_NAME_) FBESize() int { return 1 + 4 }
 
-        fbe_optional_offset = self.read_uint32(self.fbe_offset + 1)
-        if (fbe_optional_offset == 0) or ((self._buffer.offset + fbe_optional_offset + 4) > self._buffer.size):
-            return 0
+// Get the field extra size
+func (fm *FieldModelOptional_NAME_) FBEExtra() int {
+    if !fm.HasValue() {
+        return 0
+    }
 
-        self._buffer.shift(fbe_optional_offset)
-        fbe_result = self.value.fbe_size + self.value.fbe_extra
-        self._buffer.unshift(fbe_optional_offset)
-        return fbe_result
+    fbeOptionalOffset := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 1))
+    if (fbeOptionalOffset == 0) || ((fm.buffer.Offset() + fbeOptionalOffset + 4) > fm.buffer.Size()) {
+        return 0
+    }
 
-    # Checks whether the object contains a value
-    def __bool__(self):
-        return self.has_value()
+    fm.buffer.Shift(fbeOptionalOffset)
+    fbeResult := fm.value.FBESize() + fm.value.FBEExtra()
+    fm.buffer.Unshift(fbeOptionalOffset)
+    return fbeResult
+}
 
-    # Checks whether the object contains a value
-    @property
-    def has_value(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return False
+// Get the field offset
+func (fm *FieldModelOptional_NAME_) FBEOffset() int { return fm.offset }
+// Set the field offset
+func (fm *FieldModelOptional_NAME_) SetFBEOffset(value int) { fm.offset = value }
 
-        fbe_has_value = self.read_uint8(self.fbe_offset)
-        return fbe_has_value != 0
+// Shift the current field offset
+func (fm *FieldModelOptional_NAME_) FBEShift(size int) { fm.offset += size }
+// Unshift the current field offset
+func (fm *FieldModelOptional_NAME_) FBEUnshift(size int) { fm.offset -= size }
 
-    # Get the base field model value
-    @property
-    def value(self):
-        return self._model
+// Check if the object contains a value
+func (fm *FieldModelOptional_NAME_) HasValue() bool {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return false
+    }
 
-    # Check if the optional value is valid
-    def verify(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return True
+    fbeHasValue := fbe.ReadUInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())
+    return fbeHasValue != 0
+}
 
-        fbe_has_value = self.read_uint8(self.fbe_offset)
-        if fbe_has_value == 0:
-            return True
+// Check if the optional value is valid
+func (fm *FieldModelOptional_NAME_) Verify() bool {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return true
+    }
 
-        fbe_optional_offset = self.read_uint32(self.fbe_offset)
-        if fbe_optional_offset == 0:
-            return False
+    fbeHasValue := fbe.ReadUInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())
+    if fbeHasValue == 0 {
+        return true
+    }
 
-        self._buffer.shift(fbe_optional_offset)
-        fbe_result = self.value.verify()
-        self._buffer.unshift(fbe_optional_offset)
-        return fbe_result
+    fbeOptionalOffset := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 1))
+    if fbeOptionalOffset == 0 {
+        return false
+    }
 
-    # Get the optional value (being phase)
-    def get_begin(self):
-        if not self.has_value:
-            return 0
+    fm.buffer.Shift(fbeOptionalOffset)
+    fbeResult := fm.value.Verify()
+    fm.buffer.Unshift(fbeOptionalOffset)
+    return fbeResult
+}
 
-        fbe_optional_offset = self.read_uint32(self.fbe_offset + 1)
-        assert (fbe_optional_offset > 0), "Model is broken!"
-        if fbe_optional_offset <= 0:
-            return 0
+// Get the optional value (being phase)
+func (fm *FieldModelOptional_NAME_) GetBegin() (int, error) {
+    if !fm.HasValue() {
+        return 0, nil
+    }
 
-        self._buffer.shift(fbe_optional_offset)
-        return fbe_optional_offset
+    fbeOptionalOffset := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 1))
+    if fbeOptionalOffset <= 0 {
+        return 0, errors.New("model is broken")
+    }
 
-    # Get the optional value (end phase)
-    def get_end(self, fbe_begin):
-        self._buffer.unshift(fbe_begin)
+    fm.buffer.Shift(fbeOptionalOffset)
+    return fbeOptionalOffset, nil
+}
 
-    # Get the optional value
-    def get(self, defaults=None):
-        fbe_begin = self.get_begin()
-        if fbe_begin == 0:
-            return defaults
-        optional = self.value.get()
-        self.get_end(fbe_begin)
-        return optional
+// Get the optional value (end phase)
+func (fm *FieldModelOptional_NAME_) GetEnd(fbeBegin int) {
+    fm.buffer.Unshift(fbeBegin)
+}
 
-    # Set the optional value (begin phase)
-    def set_begin(self, has_value):
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return 0
+// Get the optional value
+func (fm *FieldModelOptional_NAME_) Get() (_TYPE_ARG_, error) {
+    fbeResult := _TYPE_NEW_
+    return fbeResult, fm.GetValue(fbeResult)
+}
 
-        fbe_has_value = 1 if has_value else 0
-        self.write_uint8(self.fbe_offset, fbe_has_value)
-        if fbe_has_value == 0:
-            return 0
+// Get the optional value by the given pointer
+func (fm *FieldModelOptional_NAME_) GetValue(fbeValue _TYPE_ARG_) error {
+    fbeBegin, err := fm.GetBegin()
+    if fbeBegin == 0 {
+        return err
+    }
 
-        fbe_optional_size = self.value.fbe_size
-        fbe_optional_offset = self._buffer.allocate(fbe_optional_size) - self._buffer.offset
-        assert ((fbe_optional_offset > 0) and ((self._buffer.offset + fbe_optional_offset + fbe_optional_size) <= self._buffer.size)), "Model is broken!"
-        if (fbe_optional_offset <= 0) or ((self._buffer.offset + fbe_optional_offset + fbe_optional_size) > self._buffer.size):
-            return 0
+    _GET_VALUE_
+    fm.GetEnd(fbeBegin)
+    return err
+}
 
-        self.write_uint32(self.fbe_offset + 1, fbe_optional_offset)
+// Set the optional value (begin phase)
+func (fm *FieldModelOptional_NAME_) SetBegin(hasValue bool) (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0, nil
+    }
 
-        self._buffer.shift(fbe_optional_offset)
-        return fbe_optional_offset
+    fbeHasValue := uint8(0)
+    if hasValue {
+        fbeHasValue = uint8(1)
+    }
+    fbe.WriteUInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), fbeHasValue)
+    if fbeHasValue == 0 {
+        return 0, nil
+    }
 
-    # Set the optional value (end phase)
-    def set_end(self, fbe_begin):
-        self._buffer.unshift(fbe_begin)
+    fbeOptionalSize := fm.value.FBESize()
+    fbeOptionalOffset := fm.buffer.Allocate(fbeOptionalSize) - fm.buffer.Offset()
+    if (fbeOptionalOffset <= 0) || ((fm.buffer.Offset() + fbeOptionalOffset + fbeOptionalSize) > fm.buffer.Size()) {
+        return 0, errors.New("model is broken")
+    }
 
-    # Set the optional value
-    def set(self, optional):
-        fbe_begin = self.set_begin(optional is not None)
-        if fbe_begin == 0:
-            return
-        self.value.set(optional)
-        self.set_end(fbe_begin)
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset() + 1, uint32(fbeOptionalOffset))
+
+    fm.buffer.Shift(fbeOptionalOffset)
+    return fbeOptionalOffset, nil
+}
+
+// Set the optional value (end phase)
+func (fm *FieldModelOptional_NAME_) SetEnd(fbeBegin int) {
+    fm.buffer.Unshift(fbeBegin)
+}
+
+// Set the optional value
+func (fm *FieldModelOptional_NAME_) Set(fbeValue _TYPE_ARG_) error {
+    fbeBegin, err := fm.SetBegin(fbeValue != nil)
+    if fbeBegin == 0 {
+        return err
+    }
+
+    _SET_VALUE_
+    fm.SetEnd(fbeBegin)
+    return err
+}
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_NAME_"), name);
+    code = std::regex_replace(code, std::regex("_TYPE_ARG_"), ConvertTypeName(type, true));
+    code = std::regex_replace(code, std::regex("_TYPE_NEW_"), IsGoType(type) ? ConvertOptional(type) : (ConvertNewName(type) + "()"));
+    code = std::regex_replace(code, std::regex("_TYPE_"), type);
+    code = std::regex_replace(code, std::regex("_MODEL_NEW_"), ConvertNewName(model));
+    code = std::regex_replace(code, std::regex("_MODEL_"), model);
+    code = std::regex_replace(code, std::regex("_GET_VALUE_"), IsGoType(type) ? "*fbeValue, err = fm.value.Get()" : "err = fm.value.GetValue(fbeValue)");
+    code = std::regex_replace(code, std::regex("_SET_VALUE_"), IsGoType(type) ? "err = fm.value.Set(*fbeValue)" : "err = fm.value.Set(fbeValue)");
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
-}
 
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+/*
 void GeneratorGo::GenerateFBEFieldModelArray()
 {
     std::string code = R"CODE(
@@ -2995,93 +3064,168 @@ func (fm *FinalModelString) Set(value string) (int, error) {
     // Close the file
     Close();
 }
-/*
-void GeneratorGo::GenerateFBEFinalModelOptional()
+
+void GeneratorGo::GenerateFBEFinalModelOptional(const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& model, const CppCommon::Path& path)
 {
+    // Open the output file
+    CppCommon::Path output = path / ("FinalModelOptional" + name + ".go");
+    Open(output);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
+    // Generate package
+    WriteLine();
+    WriteLineIndent("package " + *p->name);
+
+    // Generate imports
+    WriteLine();
+    WriteLineIndent("import \"errors\"");
+    GenerateImports(p);
+
     std::string code = R"CODE(
+// Fast Binary Encoding optional _TYPE_ final model
+type FinalModelOptional_NAME_ struct {
+    // Final model buffer
+    buffer *fbe.Buffer
+    // Final model buffer offset
+    offset int
 
-# Fast Binary Encoding optional final model
-class FinalModelOptional(FinalModel):
-    __slots__ = "_model",
+    // Base final model value
+    value *_MODEL_
+}
 
-    def __init__(self, model, buffer, offset):
-        super().__init__(buffer, offset)
-        self._model = model
-        self._model.fbe_offset = 0
+// Create a new optional _TYPE_ final model
+func NewFinalModelOptional_NAME_(buffer *fbe.Buffer, offset int) *FinalModelOptional_NAME_ {
+    fbeResult := FinalModelOptional_NAME_{buffer: buffer, offset: offset}
+    fbeResult.value = _MODEL_NEW_(buffer, 0)
+    return &fbeResult
+}
 
-    # Get the allocation size
-    # noinspection PyMethodMayBeStatic
-    def fbe_allocation_size(self, optional):
-        return 1 + (self.value.fbe_allocation_size(optional) if optional else 0)
+// Get the optional final model value
+func (fm *FinalModelOptional_NAME_) Value() *_MODEL_ { return fm.value }
 
-    # Checks whether the object contains a value
-    def __bool__(self):
-        return self.has_value()
+// Get the allocation size
+func (fm *FinalModelOptional_NAME_) FBEAllocationSize(fbeValue _TYPE_ARG_) int {
+    if fbeValue != nil {
+        return 1 + fm.value.FBEAllocationSize(_VALUE_)
+    } else {
+        return 1
+    }
+}
 
-    # Checks whether the object contains a value
-    @property
-    def has_value(self):
-        if (self._buffer.offset + self.fbe_offset + 1) > self._buffer.size:
-            return False
+// Get the field size
+func (fm *FinalModelOptional_NAME_) FBESize() int { return 0 }
 
-        fbe_has_value = self.read_uint8(self.fbe_offset)
-        return fbe_has_value != 0
+// Get the field extra size
+func (fm *FinalModelOptional_NAME_) FBEExtra() int { return 0 }
 
-    # Get the base final model value
-    @property
-    def value(self):
-        return self._model
+// Get the field offset
+func (fm *FinalModelOptional_NAME_) FBEOffset() int { return fm.offset }
+// Set the field offset
+func (fm *FinalModelOptional_NAME_) SetFBEOffset(value int) { fm.offset = value }
 
-    # Check if the optional value is valid
-    def verify(self):
-        if (self._buffer.offset + self.fbe_offset + 1) > self._buffer.size:
-            return sys.maxsize
+// Shift the current field offset
+func (fm *FinalModelOptional_NAME_) FBEShift(size int) { fm.offset += size }
+// Unshift the current field offset
+func (fm *FinalModelOptional_NAME_) FBEUnshift(size int) { fm.offset -= size }
 
-        fbe_has_value = self.read_uint8(self.fbe_offset)
-        if fbe_has_value == 0:
-            return 1
+// Check if the object contains a value
+func (fm *FinalModelOptional_NAME_) HasValue() bool {
+    if (fm.buffer.Offset() + fm.FBEOffset() + 1) > fm.buffer.Size() {
+        return false
+    }
 
-        self._buffer.shift(self.fbe_offset + 1)
-        fbe_result = self.value.verify()
-        self._buffer.unshift(self.fbe_offset + 1)
-        return 1 + fbe_result
+    fbeHasValue := fbe.ReadUInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())
+    return fbeHasValue != 0
+}
 
-    # Get the optional value
-    def get(self):
-        if (self._buffer.offset + self.fbe_offset + 1) > self._buffer.size:
-            return None, 0
+// Check if the optional value is valid
+func (fm *FinalModelOptional_NAME_) Verify() int {
+    if (fm.buffer.Offset() + fm.FBEOffset() + 1) > fm.buffer.Size() {
+        return fbe.MaxInt
+    }
 
-        if not self.has_value:
-            return None, 1
+    fbeHasValue := fbe.ReadUInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset())
+    if fbeHasValue == 0 {
+        return 1
+    }
 
-        self._buffer.shift(self.fbe_offset + 1)
-        optional = self.value.get()
-        self._buffer.unshift(self.fbe_offset + 1)
-        return optional[0], (1 + optional[1])
+    fm.buffer.Shift(fm.FBEOffset() + 1)
+    fbeResult := fm.value.Verify()
+    fm.buffer.Unshift(fm.FBEOffset() + 1)
+    return fbeResult
+}
 
-    # Set the optional value
-    def set(self, optional):
-        assert ((self._buffer.offset + self.fbe_offset + 1) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + 1) > self._buffer.size:
-            return 0
+// Get the optional value
+func (fm *FinalModelOptional_NAME_) Get() (_TYPE_ARG_, int, error) {
+    fbeResult := _TYPE_NEW_
+    fbeSize, err := fm.GetValue(fbeResult)
+    return fbeResult, fbeSize, err
+}
 
-        fbe_has_value = 1 if optional else 0
-        self.write_uint8(self.fbe_offset, fbe_has_value)
-        if fbe_has_value == 0:
-            return 1
+// Get the optional value by the given pointer
+func (fm *FinalModelOptional_NAME_) GetValue(fbeValue _TYPE_ARG_) (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + 1) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
+    }
 
-        self._buffer.shift(self.fbe_offset + 1)
-        size = self.value.set(optional)
-        self._buffer.unshift(self.fbe_offset + 1)
-        return 1 + size
+    if !fm.HasValue() {
+        return 1, nil
+    }
+
+    var fbeResult int
+    var err error
+
+    fm.buffer.Shift(fm.FBEOffset() + 1)
+    _GET_VALUE_
+    fm.buffer.Unshift(fm.FBEOffset() + 1)
+    return fbeResult, err
+}
+
+// Set the optional value
+func (fm *FinalModelOptional_NAME_) Set(fbeValue _TYPE_ARG_) (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + 1) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
+    }
+
+    fbeHasValue := uint8(0)
+    if fbeValue != nil {
+        fbeHasValue = uint8(1)
+    }
+    fbe.WriteUInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), fbeHasValue)
+    if fbeHasValue == 0 {
+        return 1, nil
+    }
+
+    fm.buffer.Shift(fm.FBEOffset() + 1)
+    _SET_VALUE_
+    fm.buffer.Unshift(fm.FBEOffset() + 1)
+    return 1 + fbeResult, err
+}
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_NAME_"), name);
+    code = std::regex_replace(code, std::regex("_TYPE_ARG_"), ConvertTypeName(type, true));
+    code = std::regex_replace(code, std::regex("_TYPE_NEW_"), IsGoType(type) ? ConvertOptional(type) : (ConvertNewName(type) + "()"));
+    code = std::regex_replace(code, std::regex("_TYPE_"), type);
+    code = std::regex_replace(code, std::regex("_MODEL_NEW_"), ConvertNewName(model));
+    code = std::regex_replace(code, std::regex("_MODEL_"), model);
+    code = std::regex_replace(code, std::regex("_GET_VALUE_"), IsGoType(type) ? "*fbeValue, fbeResult, err = fm.value.Get()" : "fbeResult, err = fm.value.GetValue(fbeValue)");
+    code = std::regex_replace(code, std::regex("_SET_VALUE_"), IsGoType(type) ? "fbeResult, err := fm.value.Set(*fbeValue)" : "fbeResult, err := fm.value.Set(fbeValue)");
+    code = std::regex_replace(code, std::regex("_VALUE_"), IsGoType(type) ? "*fbeValue" : "fbeValue");
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
-}
 
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+/*
 void GeneratorGo::GenerateFBEFinalModelArray()
 {
     std::string code = R"CODE(
@@ -3910,6 +4054,58 @@ void GeneratorGo::GenerateImports(const std::shared_ptr<Package>& p)
             WriteLineIndent("var _ = " + *import + ".Version");
 }
 
+void GeneratorGo::GenerateContainers(const std::shared_ptr<Package>& p, const CppCommon::Path& path, bool final)
+{
+    if (p->body)
+    {
+        // Check all structs in the package
+        for (const auto& s : p->body->structs)
+        {
+            if (s->body)
+            {
+                // Check all fields in the struct
+                for (const auto& field : s->body->fields)
+                {
+                    if (field->array)
+                    {
+                        /*
+                        if (final)
+                            GenerateFBEFinalModelArray(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final), ((*field->type == "byte") && !field->optional));
+                        else
+                            GenerateFBEFieldModelArray(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final), ((*field->type == "byte") && !field->optional));
+                        */
+                    }
+                    if (field->vector || field->list || field->set)
+                    {
+                        /*
+                        if (final)
+                            GenerateFBEFinalModelVector(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final));
+                        else
+                            GenerateFBEFieldModelVector(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final));
+                        */
+                    }
+                    if (field->map || field->hash)
+                    {
+                        /*
+                        if (final)
+                            GenerateFBEFinalModelMap(*p->name, ConvertTypeFieldName(*field->key), ConvertTypeFieldType(*field->key, false), ConvertTypeFieldDeclaration(*field->key, false, final), (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final));
+                        else
+                            GenerateFBEFieldModelMap(*p->name, ConvertTypeFieldName(*field->key), ConvertTypeFieldType(*field->key, false), ConvertTypeFieldDeclaration(*field->key, false, final), (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final));
+                        */
+                    }
+                    if (field->optional)
+                    {
+                        if (final)
+                            GenerateFBEFinalModelOptional(p, ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, false, final), path);
+                        else
+                            GenerateFBEFieldModelOptional(p, ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, false, final), path);
+                    }
+                }
+            }
+        }
+    }
+}
+
 void GeneratorGo::GeneratePackage(const std::shared_ptr<Package>& p)
 {
     CppCommon::Path path = CppCommon::Path(_output) / *p->name;
@@ -3936,12 +4132,11 @@ void GeneratorGo::GeneratePackage(const std::shared_ptr<Package>& p)
             GenerateStruct(p, child_s, path);
     }
 
-    /*
     // Generate containers
-    GenerateContainers(p, false);
+    GenerateContainers(p, path, false);
     if (Final())
-        GenerateContainers(p, true);
-
+        GenerateContainers(p, path, true);
+    /*
     // Generate sender & receiver
     if (Sender())
     {
@@ -4551,7 +4746,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     WriteLineIndent("return &" + struct_name + "{");
     Indent(1);
     if (!base_type.empty())
-        WriteLineIndent(ConvertBaseName(base_type) + ": " + ConvertBaseNew(base_type) + ",");
+        WriteLineIndent(ConvertBaseName(base_type) + ": *" + ConvertNewName(base_type) + "(),");
     if (s->body)
     {
         for (const auto& field : s->body->fields)
@@ -6584,21 +6779,6 @@ std::string GeneratorGo::ConvertBaseName(const std::string& type)
     return ConvertCase(t);
 }
 
-std::string GeneratorGo::ConvertBaseNew(const std::string& type)
-{
-    std::string ns = "";
-    std::string t = type;
-
-    size_t pos = type.find_last_of('.');
-    if (pos != std::string::npos)
-    {
-        ns.assign(type, 0, pos + 1);
-        t.assign(type, pos + 1, type.size() - pos);
-    }
-
-    return "*" + ns + "New" + ConvertCase(t) + "()";
-}
-
 std::string GeneratorGo::ConvertKeyName(const std::string& type)
 {
     if (IsGoType(type))
@@ -6615,6 +6795,78 @@ std::string GeneratorGo::ConvertKeyName(const std::string& type)
     }
 
     return ns + ConvertCase(t) + "Key";
+}
+
+std::string GeneratorGo::ConvertModelName(const std::string& type, const std::string& model)
+{
+    std::string ns = "";
+    std::string t = type;
+
+    size_t pos = type.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        ns.assign(type, 0, pos + 1);
+        t.assign(type, pos + 1, type.size() - pos);
+    }
+
+    return ns + model + ConvertCase(t);
+}
+
+std::string GeneratorGo::ConvertNewName(const std::string& type)
+{
+    std::string ns = "";
+    std::string t = type;
+
+    size_t pos = type.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        ns.assign(type, 0, pos + 1);
+        t.assign(type, pos + 1, type.size() - pos);
+    }
+
+    return ns + "New" + ConvertCase(t);
+}
+
+std::string GeneratorGo::ConvertOptional(const std::string& type)
+{
+    if (type == "bool")
+        return "fbe.OptionalBool(false)";
+    else if (type == "byte")
+        return "fbe.OptionalByte(0)";
+    else if (type == "bytes")
+        return "fbe.OptionalBytes(make([]byte, 0))";
+    else if ((type == "char") || (type == "wchar"))
+        return "fbe.OptionalRune('\\000')";
+    else if (type == "int8")
+        return "fbe.OptionalInt8(0)";
+    else if (type == "uint8")
+        return "fbe.OptionalUInt8(0)";
+    else if (type == "int16")
+        return "fbe.OptionalInt16(0)";
+    else if (type == "uint16")
+        return "fbe.OptionalUInt16(0)";
+    else if (type == "int32")
+        return "fbe.OptionalInt32(0)";
+    else if (type == "uint32")
+        return "fbe.OptionalUInt32(0)";
+    else if (type == "int64")
+        return "fbe.OptionalInt64(0)";
+    else if (type == "uint64")
+        return "fbe.OptionalUInt64(0)";
+    else if (type == "float")
+        return "fbe.OptionalFloat32(0.0)";
+    else if (type == "double")
+        return "fbe.OptionalFloat64(0.0)";
+    else if (type == "decimal")
+        return "fbe.OptionalDecimal(fbe.DecimalZero())";
+    else if (type == "timestamp")
+        return "fbe.OptionalTimestamp(fbe.TimestampEpoch())";
+    else if (type == "string")
+        return "fbe.OptionalString(\"\")";
+    else if (type == "uuid")
+        return "fbe.OptionalUUID(fbe.UUIDNil())";
+
+    return ConvertNewName(type) + "()" + ".Optional()";
 }
 
 std::string GeneratorGo::ConvertOptional(const std::string& type, const std::string& value)
@@ -6660,21 +6912,6 @@ std::string GeneratorGo::ConvertOptional(const std::string& type, const std::str
         return "fbe.OptionalUUID(" + ConvertConstant(type, value, false) + ")";
 
     return ConvertConstant(type, value, false) + ".Optional()";
-}
-
-std::string GeneratorGo::ConvertModelName(const std::string& type, const std::string& model)
-{
-    std::string ns = "";
-    std::string t = type;
-
-    size_t pos = type.find_last_of('.');
-    if (pos != std::string::npos)
-    {
-        ns.assign(type, 0, pos + 1);
-        t.assign(type, pos + 1, type.size() - pos);
-    }
-
-    return ns + model + ConvertCase(t);
 }
 
 std::string GeneratorGo::ConvertTypeName(const std::string& type, bool optional)
@@ -6776,7 +7013,26 @@ std::string GeneratorGo::ConvertTypeFieldName(const std::string& type)
         t.assign(type, pos + 1, type.size() - pos);
     }
 
-    return ConvertCase(t);
+    CppCommon::StringUtils::ReplaceAll(ns, ".", "");
+    return ns + ConvertCase(t);
+}
+
+std::string GeneratorGo::ConvertTypeFieldType(const std::string& type, bool optional)
+{
+    if (IsGoType(type))
+        return type;
+
+    std::string ns = "";
+    std::string t = type;
+
+    size_t pos = type.find_last_of('.');
+    if (pos != std::string::npos)
+    {
+        ns.assign(type, 0, pos + 1);
+        t.assign(type, pos + 1, type.size() - pos);
+    }
+
+    return ns + ConvertCase(t);
 }
 
 std::string GeneratorGo::ConvertTypeFieldDeclaration(const std::string& type, bool optional, bool final)
@@ -7065,7 +7321,7 @@ std::string GeneratorGo::ConvertDefault(const std::string& type, bool optional)
     else if (type == "uuid")
         return "fbe.UUIDNil()";
 
-    return ConvertBaseNew(type);
+    return "*" + ConvertNewName(type) + "()";
 }
 
 std::string GeneratorGo::ConvertDefault(const StructField& field)

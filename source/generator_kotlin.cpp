@@ -1247,7 +1247,7 @@ class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer
         return fbeResult
     }
 
-    // Checks whether the object contains a value
+    // Checks if the object contains a value
     fun hasValue(): Boolean
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -1270,7 +1270,7 @@ class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer
         if (fbeHasValue == 0)
             return true
 
-        val fbeOptionalOffset = readUInt32(fbeOffset).toLong()
+        val fbeOptionalOffset = readUInt32(fbeOffset + 1).toLong()
         if (fbeOptionalOffset == 0L)
             return false
 
@@ -1309,9 +1309,7 @@ class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer
             return defaults
 
         val optional = value.get()
-
         getEnd(fbeBegin)
-
         return optional
     }
 
@@ -1353,7 +1351,6 @@ class FieldModelOptional_NAME_(buffer: Buffer, offset: Long) : FieldModel(buffer
             return
 
         value.set(optional!!)
-
         setEnd(fbeBegin)
     }
 }
@@ -2676,7 +2673,7 @@ class FinalModelOptional_NAME_(buffer: Buffer, offset: Long) : FinalModel(buffer
     // Get the allocation size
     fun fbeAllocationSize(optional: _TYPE_): Long = 1 + (if (optional != null) value.fbeAllocationSize(optional) else 0)
 
-    // Checks whether the object contains a value
+    // Checks if the object contains a value
     fun hasValue(): Boolean
     {
         if ((_buffer.offset + fbeOffset + 1) > _buffer.size)

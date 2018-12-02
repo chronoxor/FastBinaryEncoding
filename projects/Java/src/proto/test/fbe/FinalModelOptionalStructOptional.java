@@ -29,7 +29,7 @@ public final class FinalModelOptionalStructOptional extends FinalModel
     // Get the allocation size
     public long fbeAllocationSize(StructOptional optional) { return 1 + ((optional != null) ? value.fbeAllocationSize(optional) : 0); }
 
-    // Checks whether the object contains a value
+    // Checks if the object contains a value
     public boolean hasValue()
     {
         if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())

@@ -1204,11 +1204,11 @@ class FieldModelOptional(FieldModel):
         self._buffer.unshift(fbe_optional_offset)
         return fbe_result
 
-    # Checks whether the object contains a value
+    # Checks if the object contains a value
     def __bool__(self):
         return self.has_value()
 
-    # Checks whether the object contains a value
+    # Checks if the object contains a value
     @property
     def has_value(self):
         if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
@@ -1231,7 +1231,7 @@ class FieldModelOptional(FieldModel):
         if fbe_has_value == 0:
             return True
 
-        fbe_optional_offset = self.read_uint32(self.fbe_offset)
+        fbe_optional_offset = self.read_uint32(self.fbe_offset + 1)
         if fbe_optional_offset == 0:
             return False
 
@@ -2660,11 +2660,11 @@ class FinalModelOptional(FinalModel):
     def fbe_allocation_size(self, optional):
         return 1 + (self.value.fbe_allocation_size(optional) if optional else 0)
 
-    # Checks whether the object contains a value
+    # Checks if the object contains a value
     def __bool__(self):
         return self.has_value()
 
-    # Checks whether the object contains a value
+    # Checks if the object contains a value
     @property
     def has_value(self):
         if (self._buffer.offset + self.fbe_offset + 1) > self._buffer.size:

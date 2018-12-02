@@ -1578,7 +1578,7 @@ namespace FBE {
         //! Is the value present?
         public static implicit operator bool(FieldModelOptionalValueType<T, TModel> optional) { return !ReferenceEquals(optional, null) && optional.HasValue; }
 
-        // Checks whether the object contains a value
+        // Checks if the object contains a value
         public bool HasValue
         {
             get
@@ -1604,7 +1604,7 @@ namespace FBE {
             if (fbeHasValue == 0)
                 return true;
 
-            uint fbeOptionalOffset = ReadUInt32(FBEOffset);
+            uint fbeOptionalOffset = ReadUInt32(FBEOffset + 1);
             if (fbeOptionalOffset == 0)
                 return false;
 
@@ -1734,7 +1734,7 @@ namespace FBE {
         //! Is the value present?
         public static implicit operator bool(FieldModelOptionalReferenceType<T, TModel> optional) { return !ReferenceEquals(optional, null) && optional.HasValue; }
 
-        // Checks whether the object contains a value
+        // Checks if the object contains a value
         public bool HasValue
         {
             get
@@ -1760,7 +1760,7 @@ namespace FBE {
             if (fbeHasValue == 0)
                 return true;
 
-            uint fbeOptionalOffset = ReadUInt32(FBEOffset);
+            uint fbeOptionalOffset = ReadUInt32(FBEOffset + 1);
             if (fbeOptionalOffset == 0)
                 return false;
 
@@ -6420,7 +6420,7 @@ namespace FBE {
         //! Is the value present?
         public static implicit operator bool(FinalModelOptionalValueType<T, TModel> optional) { return !ReferenceEquals(optional, null) && optional.HasValue; }
 
-        // Checks whether the object contains a value
+        // Checks if the object contains a value
         public bool HasValue
         {
             get
@@ -6514,7 +6514,7 @@ namespace FBE {
         //! Is the value present?
         public static implicit operator bool(FinalModelOptionalReferenceType<T, TModel> optional) { return !ReferenceEquals(optional, null) && optional.HasValue; }
 
-        // Checks whether the object contains a value
+        // Checks if the object contains a value
         public bool HasValue
         {
             get

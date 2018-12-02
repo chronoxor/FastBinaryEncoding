@@ -46,7 +46,7 @@ public final class FieldModelOptionalInt32 extends FieldModel
         return fbeResult;
     }
 
-    // Checks whether the object contains a value
+    // Checks if the object contains a value
     public boolean hasValue()
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
@@ -70,7 +70,7 @@ public final class FieldModelOptionalInt32 extends FieldModel
         if (fbeHasValue == 0)
             return true;
 
-        int fbeOptionalOffset = readInt32(fbeOffset());
+        int fbeOptionalOffset = readInt32(fbeOffset() + 1);
         if (fbeOptionalOffset == 0)
             return false;
 
@@ -110,9 +110,7 @@ public final class FieldModelOptionalInt32 extends FieldModel
             return defaults;
 
         Integer optional = value.get();
-
         getEnd(fbeBegin);
-
         return optional;
     }
 
@@ -154,7 +152,6 @@ public final class FieldModelOptionalInt32 extends FieldModel
             return;
 
         value.set(optional);
-
         setEnd(fbeBegin);
     }
 }

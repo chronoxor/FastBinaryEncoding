@@ -40,7 +40,7 @@ class FieldModelOptionalprotoBalance(buffer: Buffer, offset: Long) : FieldModel(
         return fbeResult
     }
 
-    // Checks whether the object contains a value
+    // Checks if the object contains a value
     fun hasValue(): Boolean
     {
         if ((_buffer.offset + fbeOffset + fbeSize) > _buffer.size)
@@ -63,7 +63,7 @@ class FieldModelOptionalprotoBalance(buffer: Buffer, offset: Long) : FieldModel(
         if (fbeHasValue == 0)
             return true
 
-        val fbeOptionalOffset = readUInt32(fbeOffset).toLong()
+        val fbeOptionalOffset = readUInt32(fbeOffset + 1).toLong()
         if (fbeOptionalOffset == 0L)
             return false
 
@@ -102,9 +102,7 @@ class FieldModelOptionalprotoBalance(buffer: Buffer, offset: Long) : FieldModel(
             return defaults
 
         val optional = value.get()
-
         getEnd(fbeBegin)
-
         return optional
     }
 
@@ -146,7 +144,6 @@ class FieldModelOptionalprotoBalance(buffer: Buffer, offset: Long) : FieldModel(
             return
 
         value.set(optional!!)
-
         setEnd(fbeBegin)
     }
 }

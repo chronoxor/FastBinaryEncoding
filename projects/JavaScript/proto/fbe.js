@@ -2162,7 +2162,7 @@ class FieldModelOptional extends FieldModel {
   }
 
   /**
-   * Checks whether the object contains a value
+   * Checks if the object contains a value
    * @this {!FieldModelOptional}
    * @returns {!boolean} Optional has value flag
    */
@@ -2199,7 +2199,7 @@ class FieldModelOptional extends FieldModel {
       return true
     }
 
-    let fbeOptionalOffset = this.readUInt32(this.fbeOffset)
+    let fbeOptionalOffset = this.readUInt32(this.fbeOffset + 1)
     if (fbeOptionalOffset === 0) {
       return false
     }
@@ -4486,7 +4486,7 @@ class FinalModelOptional extends FinalModel {
   }
 
   /**
-   * Checks whether the object contains a value
+   * Checks if the object contains a value
    * @this {!FinalModelOptional}
    * @returns {!boolean} Optional has value flag
    */

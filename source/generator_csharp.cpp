@@ -1200,7 +1200,7 @@ void GeneratorCSharp::GenerateFBEFieldModelOptional(bool valueType)
         //! Is the value present?
         public static implicit operator bool(FieldModelOptional_TYPE_<T, TModel> optional) { return !ReferenceEquals(optional, null) && optional.HasValue; }
 
-        // Checks whether the object contains a value
+        // Checks if the object contains a value
         public bool HasValue
         {
             get
@@ -1226,7 +1226,7 @@ void GeneratorCSharp::GenerateFBEFieldModelOptional(bool valueType)
             if (fbeHasValue == 0)
                 return true;
 
-            uint fbeOptionalOffset = ReadUInt32(FBEOffset);
+            uint fbeOptionalOffset = ReadUInt32(FBEOffset + 1);
             if (fbeOptionalOffset == 0)
                 return false;
 
@@ -2439,7 +2439,7 @@ void GeneratorCSharp::GenerateFBEFinalModelOptional(bool valueType)
         //! Is the value present?
         public static implicit operator bool(FinalModelOptional_TYPE_<T, TModel> optional) { return !ReferenceEquals(optional, null) && optional.HasValue; }
 
-        // Checks whether the object contains a value
+        // Checks if the object contains a value
         public bool HasValue
         {
             get

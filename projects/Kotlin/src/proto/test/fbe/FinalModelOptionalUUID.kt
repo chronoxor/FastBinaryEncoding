@@ -24,7 +24,7 @@ class FinalModelOptionalUUID(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     // Get the allocation size
     fun fbeAllocationSize(optional: UUID?): Long = 1 + (if (optional != null) value.fbeAllocationSize(optional) else 0)
 
-    // Checks whether the object contains a value
+    // Checks if the object contains a value
     fun hasValue(): Boolean
     {
         if ((_buffer.offset + fbeOffset + 1) > _buffer.size)

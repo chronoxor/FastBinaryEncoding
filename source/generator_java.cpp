@@ -1262,7 +1262,7 @@ public final class FieldModelOptional_NAME_ extends FieldModel
         return fbeResult;
     }
 
-    // Checks whether the object contains a value
+    // Checks if the object contains a value
     public boolean hasValue()
     {
         if ((_buffer.getOffset() + fbeOffset() + fbeSize()) > _buffer.getSize())
@@ -1286,7 +1286,7 @@ public final class FieldModelOptional_NAME_ extends FieldModel
         if (fbeHasValue == 0)
             return true;
 
-        int fbeOptionalOffset = readInt32(fbeOffset());
+        int fbeOptionalOffset = readInt32(fbeOffset() + 1);
         if (fbeOptionalOffset == 0)
             return false;
 
@@ -1326,9 +1326,7 @@ public final class FieldModelOptional_NAME_ extends FieldModel
             return defaults;
 
         _TYPE_ optional = value.get();
-
         getEnd(fbeBegin);
-
         return optional;
     }
 
@@ -1370,7 +1368,6 @@ public final class FieldModelOptional_NAME_ extends FieldModel
             return;
 
         value.set(optional);
-
         setEnd(fbeBegin);
     }
 }
@@ -2789,7 +2786,7 @@ public final class FinalModelOptional_NAME_ extends FinalModel
     // Get the allocation size
     public long fbeAllocationSize(_TYPE_ optional) { return 1 + ((optional != null) ? value.fbeAllocationSize(optional) : 0); }
 
-    // Checks whether the object contains a value
+    // Checks if the object contains a value
     public boolean hasValue()
     {
         if ((_buffer.getOffset() + fbeOffset() + 1) > _buffer.getSize())

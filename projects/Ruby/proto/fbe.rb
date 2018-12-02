@@ -1606,12 +1606,12 @@ module FBE
       fbe_result
     end
 
-    # Checks whether the object contains a value
+    # Checks if the object contains a value
     def empty?
       has_value?
     end
 
-    # Checks whether the object contains a value
+    # Checks if the object contains a value
     def has_value?
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return false
@@ -1642,7 +1642,7 @@ module FBE
         return true
       end
 
-      fbe_optional_offset = read_uint32(fbe_offset)
+      fbe_optional_offset = read_uint32(fbe_offset + 1)
       if fbe_optional_offset == 0
         return false
       end
@@ -3371,12 +3371,12 @@ module FBE
       1 + (optional ? value.fbe_allocation_size(optional) : 0)
     end
 
-    # Checks whether the object contains a value
+    # Checks if the object contains a value
     def empty?
       has_value?
     end
 
-    # Checks whether the object contains a value
+    # Checks if the object contains a value
     def has_value?
       if (@_buffer.offset + fbe_offset + 1) > @_buffer.size
         return false

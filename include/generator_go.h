@@ -52,7 +52,7 @@ private:
     void GenerateFBEFieldModelUUID(const std::string& package);
     void GenerateFBEFieldModelBytes(const std::string& package);
     void GenerateFBEFieldModelString(const std::string& package);
-    //void GenerateFBEFieldModelOptional();
+    void GenerateFBEFieldModelOptional(const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& model, const CppCommon::Path& path);
     //void GenerateFBEFieldModelArray();
     //void GenerateFBEFieldModelVector();
     //void GenerateFBEFieldModelSet();
@@ -64,7 +64,7 @@ private:
     void GenerateFBEFinalModelUUID(const std::string& package);
     void GenerateFBEFinalModelBytes(const std::string& package);
     void GenerateFBEFinalModelString(const std::string& package);
-    //void GenerateFBEFinalModelOptional();
+    void GenerateFBEFinalModelOptional(const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& model, const CppCommon::Path& path);
     //void GenerateFBEFinalModelArray();
     //void GenerateFBEFinalModelVector();
     //void GenerateFBEFinalModelSet();
@@ -74,6 +74,7 @@ private:
     //void GenerateFBEReceiver();
     void GenerateImports(const std::shared_ptr<Package>& p);
 
+    void GenerateContainers(const std::shared_ptr<Package>& p, const CppCommon::Path& path, bool final);
     void GeneratePackage(const std::shared_ptr<Package>& p);
     void GenerateEnum(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e, const CppCommon::Path& path);
     void GenerateFlags(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f, const CppCommon::Path& path);
@@ -95,13 +96,15 @@ private:
     std::string ConvertEnumConstant(const std::string& value);
     std::string ConvertEnumConstant(const std::string& name, const std::string& type, const std::string& value);
     std::string ConvertBaseName(const std::string& type);
-    std::string ConvertBaseNew(const std::string& type);
     std::string ConvertKeyName(const std::string& type);
-    std::string ConvertOptional(const std::string& type, const std::string& value);
     std::string ConvertModelName(const std::string& type, const std::string& model);
+    std::string ConvertNewName(const std::string& type);
+    std::string ConvertOptional(const std::string& type);
+    std::string ConvertOptional(const std::string& type, const std::string& value);
     std::string ConvertTypeName(const std::string& type, bool optional);
     std::string ConvertTypeName(const StructField& field);
     std::string ConvertTypeFieldName(const std::string& type);
+    std::string ConvertTypeFieldType(const std::string& type, bool optional);
     std::string ConvertTypeFieldDeclaration(const std::string& type, bool optional, bool final);
     std::string ConvertTypeFieldDeclaration(const StructField& field, bool final);
     std::string ConvertTypeFieldInitialization(const std::string& type, bool optional, const std::string& offset, bool final);
