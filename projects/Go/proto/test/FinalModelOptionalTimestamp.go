@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional timestamp final model
+// Fast Binary Encoding optional *fbe.Timestamp final model
 type FinalModelOptionalTimestamp struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalTimestamp struct {
     value *fbe.FinalModelTimestamp
 }
 
-// Create a new optional timestamp final model
+// Create a new optional *fbe.Timestamp final model
 func NewFinalModelOptionalTimestamp(buffer *fbe.Buffer, offset int) *FinalModelOptionalTimestamp {
     fbeResult := FinalModelOptionalTimestamp{buffer: buffer, offset: offset}
     fbeResult.value = fbe.NewFinalModelTimestamp(buffer, 0)
@@ -43,20 +43,14 @@ func (fm *FinalModelOptionalTimestamp) FBEAllocationSize(fbeValue *fbe.Timestamp
     }
 }
 
-// Get the field size
-func (fm *FinalModelOptionalTimestamp) FBESize() int { return 0 }
-
-// Get the field extra size
-func (fm *FinalModelOptionalTimestamp) FBEExtra() int { return 0 }
-
-// Get the field offset
+// Get the final offset
 func (fm *FinalModelOptionalTimestamp) FBEOffset() int { return fm.offset }
-// Set the field offset
+// Set the final offset
 func (fm *FinalModelOptionalTimestamp) SetFBEOffset(value int) { fm.offset = value }
 
-// Shift the current field offset
+// Shift the current final offset
 func (fm *FinalModelOptionalTimestamp) FBEShift(size int) { fm.offset += size }
-// Unshift the current field offset
+// Unshift the current final offset
 func (fm *FinalModelOptionalTimestamp) FBEUnshift(size int) { fm.offset -= size }
 
 // Check if the object contains a value

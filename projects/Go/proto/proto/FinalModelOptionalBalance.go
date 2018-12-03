@@ -11,7 +11,7 @@ import "../fbe"
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 
-// Fast Binary Encoding optional Balance final model
+// Fast Binary Encoding optional *Balance final model
 type FinalModelOptionalBalance struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -22,7 +22,7 @@ type FinalModelOptionalBalance struct {
     value *FinalModelBalance
 }
 
-// Create a new optional Balance final model
+// Create a new optional *Balance final model
 func NewFinalModelOptionalBalance(buffer *fbe.Buffer, offset int) *FinalModelOptionalBalance {
     fbeResult := FinalModelOptionalBalance{buffer: buffer, offset: offset}
     fbeResult.value = NewFinalModelBalance(buffer, 0)
@@ -41,20 +41,14 @@ func (fm *FinalModelOptionalBalance) FBEAllocationSize(fbeValue *Balance) int {
     }
 }
 
-// Get the field size
-func (fm *FinalModelOptionalBalance) FBESize() int { return 0 }
-
-// Get the field extra size
-func (fm *FinalModelOptionalBalance) FBEExtra() int { return 0 }
-
-// Get the field offset
+// Get the final offset
 func (fm *FinalModelOptionalBalance) FBEOffset() int { return fm.offset }
-// Set the field offset
+// Set the final offset
 func (fm *FinalModelOptionalBalance) SetFBEOffset(value int) { fm.offset = value }
 
-// Shift the current field offset
+// Shift the current final offset
 func (fm *FinalModelOptionalBalance) FBEShift(size int) { fm.offset += size }
-// Unshift the current field offset
+// Unshift the current final offset
 func (fm *FinalModelOptionalBalance) FBEUnshift(size int) { fm.offset -= size }
 
 // Check if the object contains a value

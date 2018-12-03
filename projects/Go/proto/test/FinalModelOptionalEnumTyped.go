@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional EnumTyped final model
+// Fast Binary Encoding optional *EnumTyped final model
 type FinalModelOptionalEnumTyped struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalEnumTyped struct {
     value *FinalModelEnumTyped
 }
 
-// Create a new optional EnumTyped final model
+// Create a new optional *EnumTyped final model
 func NewFinalModelOptionalEnumTyped(buffer *fbe.Buffer, offset int) *FinalModelOptionalEnumTyped {
     fbeResult := FinalModelOptionalEnumTyped{buffer: buffer, offset: offset}
     fbeResult.value = NewFinalModelEnumTyped(buffer, 0)
@@ -43,20 +43,14 @@ func (fm *FinalModelOptionalEnumTyped) FBEAllocationSize(fbeValue *EnumTyped) in
     }
 }
 
-// Get the field size
-func (fm *FinalModelOptionalEnumTyped) FBESize() int { return 0 }
-
-// Get the field extra size
-func (fm *FinalModelOptionalEnumTyped) FBEExtra() int { return 0 }
-
-// Get the field offset
+// Get the final offset
 func (fm *FinalModelOptionalEnumTyped) FBEOffset() int { return fm.offset }
-// Set the field offset
+// Set the final offset
 func (fm *FinalModelOptionalEnumTyped) SetFBEOffset(value int) { fm.offset = value }
 
-// Shift the current field offset
+// Shift the current final offset
 func (fm *FinalModelOptionalEnumTyped) FBEShift(size int) { fm.offset += size }
-// Unshift the current field offset
+// Unshift the current final offset
 func (fm *FinalModelOptionalEnumTyped) FBEUnshift(size int) { fm.offset -= size }
 
 // Check if the object contains a value

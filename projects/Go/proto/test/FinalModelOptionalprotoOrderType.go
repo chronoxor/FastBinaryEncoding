@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional proto.OrderType final model
+// Fast Binary Encoding optional proto.*OrderType final model
 type FinalModelOptionalprotoOrderType struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalprotoOrderType struct {
     value *proto.FinalModelOrderType
 }
 
-// Create a new optional proto.OrderType final model
+// Create a new optional proto.*OrderType final model
 func NewFinalModelOptionalprotoOrderType(buffer *fbe.Buffer, offset int) *FinalModelOptionalprotoOrderType {
     fbeResult := FinalModelOptionalprotoOrderType{buffer: buffer, offset: offset}
     fbeResult.value = proto.NewFinalModelOrderType(buffer, 0)
@@ -43,20 +43,14 @@ func (fm *FinalModelOptionalprotoOrderType) FBEAllocationSize(fbeValue *proto.Or
     }
 }
 
-// Get the field size
-func (fm *FinalModelOptionalprotoOrderType) FBESize() int { return 0 }
-
-// Get the field extra size
-func (fm *FinalModelOptionalprotoOrderType) FBEExtra() int { return 0 }
-
-// Get the field offset
+// Get the final offset
 func (fm *FinalModelOptionalprotoOrderType) FBEOffset() int { return fm.offset }
-// Set the field offset
+// Set the final offset
 func (fm *FinalModelOptionalprotoOrderType) SetFBEOffset(value int) { fm.offset = value }
 
-// Shift the current field offset
+// Shift the current final offset
 func (fm *FinalModelOptionalprotoOrderType) FBEShift(size int) { fm.offset += size }
-// Unshift the current field offset
+// Unshift the current final offset
 func (fm *FinalModelOptionalprotoOrderType) FBEUnshift(size int) { fm.offset -= size }
 
 // Check if the object contains a value

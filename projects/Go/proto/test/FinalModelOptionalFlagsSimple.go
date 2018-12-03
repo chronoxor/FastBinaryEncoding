@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional FlagsSimple final model
+// Fast Binary Encoding optional *FlagsSimple final model
 type FinalModelOptionalFlagsSimple struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalFlagsSimple struct {
     value *FinalModelFlagsSimple
 }
 
-// Create a new optional FlagsSimple final model
+// Create a new optional *FlagsSimple final model
 func NewFinalModelOptionalFlagsSimple(buffer *fbe.Buffer, offset int) *FinalModelOptionalFlagsSimple {
     fbeResult := FinalModelOptionalFlagsSimple{buffer: buffer, offset: offset}
     fbeResult.value = NewFinalModelFlagsSimple(buffer, 0)
@@ -43,20 +43,14 @@ func (fm *FinalModelOptionalFlagsSimple) FBEAllocationSize(fbeValue *FlagsSimple
     }
 }
 
-// Get the field size
-func (fm *FinalModelOptionalFlagsSimple) FBESize() int { return 0 }
-
-// Get the field extra size
-func (fm *FinalModelOptionalFlagsSimple) FBEExtra() int { return 0 }
-
-// Get the field offset
+// Get the final offset
 func (fm *FinalModelOptionalFlagsSimple) FBEOffset() int { return fm.offset }
-// Set the field offset
+// Set the final offset
 func (fm *FinalModelOptionalFlagsSimple) SetFBEOffset(value int) { fm.offset = value }
 
-// Shift the current field offset
+// Shift the current final offset
 func (fm *FinalModelOptionalFlagsSimple) FBEShift(size int) { fm.offset += size }
-// Unshift the current field offset
+// Unshift the current final offset
 func (fm *FinalModelOptionalFlagsSimple) FBEUnshift(size int) { fm.offset -= size }
 
 // Check if the object contains a value

@@ -72,18 +72,18 @@ type FinalModelStructOptional struct {
     F151 *FinalModelOptionalUUID
     F152 *FinalModelOptionalUUID
     F153 *FinalModelOptionalUUID
-    F154 *FinalModelOptionalOrderSide
-    F155 *FinalModelOptionalOrderSide
-    F156 *FinalModelOptionalOrderType
-    F157 *FinalModelOptionalOrderType
-    F158 *FinalModelOptionalOrder
-    F159 *FinalModelOptionalOrder
-    F160 *FinalModelOptionalBalance
-    F161 *FinalModelOptionalBalance
-    F162 *FinalModelOptionalState
-    F163 *FinalModelOptionalState
-    F164 *FinalModelOptionalAccount
-    F165 *FinalModelOptionalAccount
+    F154 *FinalModelOptionalprotoOrderSide
+    F155 *FinalModelOptionalprotoOrderSide
+    F156 *FinalModelOptionalprotoOrderType
+    F157 *FinalModelOptionalprotoOrderType
+    F158 *FinalModelOptionalprotoOrder
+    F159 *FinalModelOptionalprotoOrder
+    F160 *FinalModelOptionalprotoBalance
+    F161 *FinalModelOptionalprotoBalance
+    F162 *FinalModelOptionalprotoState
+    F163 *FinalModelOptionalprotoState
+    F164 *FinalModelOptionalprotoAccount
+    F165 *FinalModelOptionalprotoAccount
 }
 
 // Create a new StructOptional final model
@@ -144,18 +144,18 @@ func NewFinalModelStructOptional(buffer *fbe.Buffer, offset int) *FinalModelStru
     fbeResult.F151 = NewFinalModelOptionalUUID(buffer, 0)
     fbeResult.F152 = NewFinalModelOptionalUUID(buffer, 0)
     fbeResult.F153 = NewFinalModelOptionalUUID(buffer, 0)
-    fbeResult.F154 = NewFinalModelOptionalOrderSide(buffer, 0)
-    fbeResult.F155 = NewFinalModelOptionalOrderSide(buffer, 0)
-    fbeResult.F156 = NewFinalModelOptionalOrderType(buffer, 0)
-    fbeResult.F157 = NewFinalModelOptionalOrderType(buffer, 0)
-    fbeResult.F158 = NewFinalModelOptionalOrder(buffer, 0)
-    fbeResult.F159 = NewFinalModelOptionalOrder(buffer, 0)
-    fbeResult.F160 = NewFinalModelOptionalBalance(buffer, 0)
-    fbeResult.F161 = NewFinalModelOptionalBalance(buffer, 0)
-    fbeResult.F162 = NewFinalModelOptionalState(buffer, 0)
-    fbeResult.F163 = NewFinalModelOptionalState(buffer, 0)
-    fbeResult.F164 = NewFinalModelOptionalAccount(buffer, 0)
-    fbeResult.F165 = NewFinalModelOptionalAccount(buffer, 0)
+    fbeResult.F154 = NewFinalModelOptionalprotoOrderSide(buffer, 0)
+    fbeResult.F155 = NewFinalModelOptionalprotoOrderSide(buffer, 0)
+    fbeResult.F156 = NewFinalModelOptionalprotoOrderType(buffer, 0)
+    fbeResult.F157 = NewFinalModelOptionalprotoOrderType(buffer, 0)
+    fbeResult.F158 = NewFinalModelOptionalprotoOrder(buffer, 0)
+    fbeResult.F159 = NewFinalModelOptionalprotoOrder(buffer, 0)
+    fbeResult.F160 = NewFinalModelOptionalprotoBalance(buffer, 0)
+    fbeResult.F161 = NewFinalModelOptionalprotoBalance(buffer, 0)
+    fbeResult.F162 = NewFinalModelOptionalprotoState(buffer, 0)
+    fbeResult.F163 = NewFinalModelOptionalprotoState(buffer, 0)
+    fbeResult.F164 = NewFinalModelOptionalprotoAccount(buffer, 0)
+    fbeResult.F165 = NewFinalModelOptionalprotoAccount(buffer, 0)
     return &fbeResult
 }
 

@@ -340,7 +340,7 @@ func (fm *FieldModelStructNested) GetFields(fbeValue *StructNested, fbeStructSiz
     fbeCurrentSize += fm.F1002.FBESize()
 
     if (fbeCurrentSize + fm.F1003.FBESize()) <= fbeStructSize {
-        _ = fm.F1003.GetValueDefault(fbeValue.F1003, nil)
+        _ = fm.F1003.GetValue(fbeValue.F1003)
     } else {
         fbeValue.F1003 = nil
     }
@@ -368,7 +368,7 @@ func (fm *FieldModelStructNested) GetFields(fbeValue *StructNested, fbeStructSiz
     fbeCurrentSize += fm.F1006.FBESize()
 
     if (fbeCurrentSize + fm.F1007.FBESize()) <= fbeStructSize {
-        _ = fm.F1007.GetValueDefault(fbeValue.F1007, nil)
+        _ = fm.F1007.GetValue(fbeValue.F1007)
     } else {
         fbeValue.F1007 = nil
     }
@@ -396,7 +396,7 @@ func (fm *FieldModelStructNested) GetFields(fbeValue *StructNested, fbeStructSiz
     fbeCurrentSize += fm.F1010.FBESize()
 
     if (fbeCurrentSize + fm.F1011.FBESize()) <= fbeStructSize {
-        _ = fm.F1011.GetValueDefault(fbeValue.F1011, nil)
+        _ = fm.F1011.GetValue(fbeValue.F1011)
     } else {
         fbeValue.F1011 = nil
     }

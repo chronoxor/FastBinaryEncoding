@@ -52,8 +52,8 @@ private:
     void GenerateFBEFieldModelUUID(const std::string& package);
     void GenerateFBEFieldModelBytes(const std::string& package);
     void GenerateFBEFieldModelString(const std::string& package);
-    void GenerateFBEFieldModelOptional(const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& model, const CppCommon::Path& path);
-    //void GenerateFBEFieldModelArray();
+    void GenerateFBEFieldModelOptional(const std::shared_ptr<Package>& p, const std::string& name, const StructField& field, const std::string& model, const CppCommon::Path& path);
+    void GenerateFBEFieldModelArray(const std::shared_ptr<Package>& p, const std::string& name, const StructField& field, const std::string& model, const CppCommon::Path& path);
     //void GenerateFBEFieldModelVector();
     //void GenerateFBEFieldModelSet();
     //void GenerateFBEFieldModelMap();
@@ -64,8 +64,8 @@ private:
     void GenerateFBEFinalModelUUID(const std::string& package);
     void GenerateFBEFinalModelBytes(const std::string& package);
     void GenerateFBEFinalModelString(const std::string& package);
-    void GenerateFBEFinalModelOptional(const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& model, const CppCommon::Path& path);
-    //void GenerateFBEFinalModelArray();
+    void GenerateFBEFinalModelOptional(const std::shared_ptr<Package>& p, const std::string& name, const StructField& field, const std::string& model, const CppCommon::Path& path);
+    void GenerateFBEFinalModelArray(const std::shared_ptr<Package>& p, const std::string& name, const StructField& field, const std::string& model, const CppCommon::Path& path);
     //void GenerateFBEFinalModelVector();
     //void GenerateFBEFinalModelSet();
     //void GenerateFBEFinalModelMap();

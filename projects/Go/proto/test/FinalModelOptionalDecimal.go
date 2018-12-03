@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional decimal final model
+// Fast Binary Encoding optional *fbe.Decimal final model
 type FinalModelOptionalDecimal struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalDecimal struct {
     value *fbe.FinalModelDecimal
 }
 
-// Create a new optional decimal final model
+// Create a new optional *fbe.Decimal final model
 func NewFinalModelOptionalDecimal(buffer *fbe.Buffer, offset int) *FinalModelOptionalDecimal {
     fbeResult := FinalModelOptionalDecimal{buffer: buffer, offset: offset}
     fbeResult.value = fbe.NewFinalModelDecimal(buffer, 0)
@@ -43,20 +43,14 @@ func (fm *FinalModelOptionalDecimal) FBEAllocationSize(fbeValue *fbe.Decimal) in
     }
 }
 
-// Get the field size
-func (fm *FinalModelOptionalDecimal) FBESize() int { return 0 }
-
-// Get the field extra size
-func (fm *FinalModelOptionalDecimal) FBEExtra() int { return 0 }
-
-// Get the field offset
+// Get the final offset
 func (fm *FinalModelOptionalDecimal) FBEOffset() int { return fm.offset }
-// Set the field offset
+// Set the final offset
 func (fm *FinalModelOptionalDecimal) SetFBEOffset(value int) { fm.offset = value }
 
-// Shift the current field offset
+// Shift the current final offset
 func (fm *FinalModelOptionalDecimal) FBEShift(size int) { fm.offset += size }
-// Unshift the current field offset
+// Unshift the current final offset
 func (fm *FinalModelOptionalDecimal) FBEUnshift(size int) { fm.offset -= size }
 
 // Check if the object contains a value

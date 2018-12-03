@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional proto.Balance final model
+// Fast Binary Encoding optional proto.*Balance final model
 type FinalModelOptionalprotoBalance struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalprotoBalance struct {
     value *proto.FinalModelBalance
 }
 
-// Create a new optional proto.Balance final model
+// Create a new optional proto.*Balance final model
 func NewFinalModelOptionalprotoBalance(buffer *fbe.Buffer, offset int) *FinalModelOptionalprotoBalance {
     fbeResult := FinalModelOptionalprotoBalance{buffer: buffer, offset: offset}
     fbeResult.value = proto.NewFinalModelBalance(buffer, 0)
@@ -43,20 +43,14 @@ func (fm *FinalModelOptionalprotoBalance) FBEAllocationSize(fbeValue *proto.Bala
     }
 }
 
-// Get the field size
-func (fm *FinalModelOptionalprotoBalance) FBESize() int { return 0 }
-
-// Get the field extra size
-func (fm *FinalModelOptionalprotoBalance) FBEExtra() int { return 0 }
-
-// Get the field offset
+// Get the final offset
 func (fm *FinalModelOptionalprotoBalance) FBEOffset() int { return fm.offset }
-// Set the field offset
+// Set the final offset
 func (fm *FinalModelOptionalprotoBalance) SetFBEOffset(value int) { fm.offset = value }
 
-// Shift the current field offset
+// Shift the current final offset
 func (fm *FinalModelOptionalprotoBalance) FBEShift(size int) { fm.offset += size }
-// Unshift the current field offset
+// Unshift the current final offset
 func (fm *FinalModelOptionalprotoBalance) FBEUnshift(size int) { fm.offset -= size }
 
 // Check if the object contains a value

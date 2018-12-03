@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional StructNested final model
+// Fast Binary Encoding optional *StructNested final model
 type FinalModelOptionalStructNested struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalStructNested struct {
     value *FinalModelStructNested
 }
 
-// Create a new optional StructNested final model
+// Create a new optional *StructNested final model
 func NewFinalModelOptionalStructNested(buffer *fbe.Buffer, offset int) *FinalModelOptionalStructNested {
     fbeResult := FinalModelOptionalStructNested{buffer: buffer, offset: offset}
     fbeResult.value = NewFinalModelStructNested(buffer, 0)
@@ -43,20 +43,14 @@ func (fm *FinalModelOptionalStructNested) FBEAllocationSize(fbeValue *StructNest
     }
 }
 
-// Get the field size
-func (fm *FinalModelOptionalStructNested) FBESize() int { return 0 }
-
-// Get the field extra size
-func (fm *FinalModelOptionalStructNested) FBEExtra() int { return 0 }
-
-// Get the field offset
+// Get the final offset
 func (fm *FinalModelOptionalStructNested) FBEOffset() int { return fm.offset }
-// Set the field offset
+// Set the final offset
 func (fm *FinalModelOptionalStructNested) SetFBEOffset(value int) { fm.offset = value }
 
-// Shift the current field offset
+// Shift the current final offset
 func (fm *FinalModelOptionalStructNested) FBEShift(size int) { fm.offset += size }
-// Unshift the current field offset
+// Unshift the current final offset
 func (fm *FinalModelOptionalStructNested) FBEUnshift(size int) { fm.offset -= size }
 
 // Check if the object contains a value

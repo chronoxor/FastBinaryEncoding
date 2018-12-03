@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional uuid field model
+// Fast Binary Encoding optional *fbe.UUID field model
 type FieldModelOptionalUUID struct {
     // Field model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FieldModelOptionalUUID struct {
     value *fbe.FieldModelUUID
 }
 
-// Create a new optional uuid field model
+// Create a new optional *fbe.UUID field model
 func NewFieldModelOptionalUUID(buffer *fbe.Buffer, offset int) *FieldModelOptionalUUID {
     fbeResult := FieldModelOptionalUUID{buffer: buffer, offset: offset}
     fbeResult.value = fbe.NewFieldModelUUID(buffer, 0)

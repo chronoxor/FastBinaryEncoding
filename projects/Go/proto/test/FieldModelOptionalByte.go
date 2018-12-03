@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional byte field model
+// Fast Binary Encoding optional *byte field model
 type FieldModelOptionalByte struct {
     // Field model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FieldModelOptionalByte struct {
     value *fbe.FieldModelByte
 }
 
-// Create a new optional byte field model
+// Create a new optional *byte field model
 func NewFieldModelOptionalByte(buffer *fbe.Buffer, offset int) *FieldModelOptionalByte {
     fbeResult := FieldModelOptionalByte{buffer: buffer, offset: offset}
     fbeResult.value = fbe.NewFieldModelByte(buffer, 0)

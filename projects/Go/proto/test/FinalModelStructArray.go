@@ -32,32 +32,32 @@ type FinalModelStructArray struct {
 // Create a new StructArray final model
 func NewFinalModelStructArray(buffer *fbe.Buffer, offset int) *FinalModelStructArray {
     fbeResult := FinalModelStructArray{buffer: buffer, offset: offset}
-    fbeResult.F1 = NewFinalModelArrayByte(buffer, 0)
-    fbeResult.F2 = NewFinalModelArrayOptionalByte(buffer, 0)
-    fbeResult.F3 = NewFinalModelArrayBytes(buffer, 0)
-    fbeResult.F4 = NewFinalModelArrayOptionalBytes(buffer, 0)
-    fbeResult.F5 = NewFinalModelArrayEnumSimple(buffer, 0)
-    fbeResult.F6 = NewFinalModelArrayOptionalEnumSimple(buffer, 0)
-    fbeResult.F7 = NewFinalModelArrayFlagsSimple(buffer, 0)
-    fbeResult.F8 = NewFinalModelArrayOptionalFlagsSimple(buffer, 0)
-    fbeResult.F9 = NewFinalModelArrayStructSimple(buffer, 0)
-    fbeResult.F10 = NewFinalModelArrayOptionalStructSimple(buffer, 0)
+    fbeResult.F1 = NewFinalModelArrayByte(buffer, 0, 2)
+    fbeResult.F2 = NewFinalModelArrayOptionalByte(buffer, 0, 2)
+    fbeResult.F3 = NewFinalModelArrayBytes(buffer, 0, 2)
+    fbeResult.F4 = NewFinalModelArrayOptionalBytes(buffer, 0, 2)
+    fbeResult.F5 = NewFinalModelArrayEnumSimple(buffer, 0, 2)
+    fbeResult.F6 = NewFinalModelArrayOptionalEnumSimple(buffer, 0, 2)
+    fbeResult.F7 = NewFinalModelArrayFlagsSimple(buffer, 0, 2)
+    fbeResult.F8 = NewFinalModelArrayOptionalFlagsSimple(buffer, 0, 2)
+    fbeResult.F9 = NewFinalModelArrayStructSimple(buffer, 0, 2)
+    fbeResult.F10 = NewFinalModelArrayOptionalStructSimple(buffer, 0, 2)
     return &fbeResult
 }
 
 // Get the allocation size
 func (fm *FinalModelStructArray) FBEAllocationSize(fbeValue *StructArray) int {
     fbeResult := 0 +
-        fm.F1.FBEAllocationSize(fbeValue.F1) +
-        fm.F2.FBEAllocationSize(fbeValue.F2) +
-        fm.F3.FBEAllocationSize(fbeValue.F3) +
-        fm.F4.FBEAllocationSize(fbeValue.F4) +
-        fm.F5.FBEAllocationSize(fbeValue.F5) +
-        fm.F6.FBEAllocationSize(fbeValue.F6) +
-        fm.F7.FBEAllocationSize(fbeValue.F7) +
-        fm.F8.FBEAllocationSize(fbeValue.F8) +
-        fm.F9.FBEAllocationSize(fbeValue.F9) +
-        fm.F10.FBEAllocationSize(fbeValue.F10) +
+        fm.F1.FBEAllocationSize(fbeValue.F1[:]) +
+        fm.F2.FBEAllocationSize(fbeValue.F2[:]) +
+        fm.F3.FBEAllocationSize(fbeValue.F3[:]) +
+        fm.F4.FBEAllocationSize(fbeValue.F4[:]) +
+        fm.F5.FBEAllocationSize(fbeValue.F5[:]) +
+        fm.F6.FBEAllocationSize(fbeValue.F6[:]) +
+        fm.F7.FBEAllocationSize(fbeValue.F7[:]) +
+        fm.F8.FBEAllocationSize(fbeValue.F8[:]) +
+        fm.F9.FBEAllocationSize(fbeValue.F9[:]) +
+        fm.F10.FBEAllocationSize(fbeValue.F10[:]) +
         0
     return fbeResult
 }
@@ -181,70 +181,70 @@ func (fm *FinalModelStructArray) GetFields(fbeValue *StructArray) (int, error) {
     fbeFieldSize := 0
 
     fm.F1.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F1.GetValue(fbeValue.F1); err != nil {
+    if fbeFieldSize, err = fm.F1.Get(fbeValue.F1[:]); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F2.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F2.GetValue(fbeValue.F2); err != nil {
+    if fbeFieldSize, err = fm.F2.Get(fbeValue.F2[:]); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F3.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F3.GetValue(fbeValue.F3); err != nil {
+    if fbeFieldSize, err = fm.F3.Get(fbeValue.F3[:]); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F4.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F4.GetValue(fbeValue.F4); err != nil {
+    if fbeFieldSize, err = fm.F4.Get(fbeValue.F4[:]); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F5.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F5.GetValue(fbeValue.F5); err != nil {
+    if fbeFieldSize, err = fm.F5.Get(fbeValue.F5[:]); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F6.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F6.GetValue(fbeValue.F6); err != nil {
+    if fbeFieldSize, err = fm.F6.Get(fbeValue.F6[:]); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F7.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F7.GetValue(fbeValue.F7); err != nil {
+    if fbeFieldSize, err = fm.F7.Get(fbeValue.F7[:]); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F8.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F8.GetValue(fbeValue.F8); err != nil {
+    if fbeFieldSize, err = fm.F8.Get(fbeValue.F8[:]); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F9.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F9.GetValue(fbeValue.F9); err != nil {
+    if fbeFieldSize, err = fm.F9.Get(fbeValue.F9[:]); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F10.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F10.GetValue(fbeValue.F10); err != nil {
+    if fbeFieldSize, err = fm.F10.Get(fbeValue.F10[:]); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
@@ -269,70 +269,70 @@ func (fm *FinalModelStructArray) SetFields(fbeValue *StructArray) (int, error) {
     fbeFieldSize := 0
 
     fm.F1.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F1.Set(fbeValue.F1); err != nil {
+    if fbeFieldSize, err = fm.F1.Set(fbeValue.F1[:]); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F2.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F2.Set(fbeValue.F2); err != nil {
+    if fbeFieldSize, err = fm.F2.Set(fbeValue.F2[:]); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F3.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F3.Set(fbeValue.F3); err != nil {
+    if fbeFieldSize, err = fm.F3.Set(fbeValue.F3[:]); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F4.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F4.Set(fbeValue.F4); err != nil {
+    if fbeFieldSize, err = fm.F4.Set(fbeValue.F4[:]); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F5.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F5.Set(fbeValue.F5); err != nil {
+    if fbeFieldSize, err = fm.F5.Set(fbeValue.F5[:]); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F6.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F6.Set(fbeValue.F6); err != nil {
+    if fbeFieldSize, err = fm.F6.Set(fbeValue.F6[:]); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F7.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F7.Set(fbeValue.F7); err != nil {
+    if fbeFieldSize, err = fm.F7.Set(fbeValue.F7[:]); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F8.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F8.Set(fbeValue.F8); err != nil {
+    if fbeFieldSize, err = fm.F8.Set(fbeValue.F8[:]); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F9.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F9.Set(fbeValue.F9); err != nil {
+    if fbeFieldSize, err = fm.F9.Set(fbeValue.F9[:]); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F10.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F10.Set(fbeValue.F10); err != nil {
+    if fbeFieldSize, err = fm.F10.Set(fbeValue.F10[:]); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize

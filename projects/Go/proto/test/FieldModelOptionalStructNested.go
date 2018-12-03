@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional StructNested field model
+// Fast Binary Encoding optional *StructNested field model
 type FieldModelOptionalStructNested struct {
     // Field model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FieldModelOptionalStructNested struct {
     value *FieldModelStructNested
 }
 
-// Create a new optional StructNested field model
+// Create a new optional *StructNested field model
 func NewFieldModelOptionalStructNested(buffer *fbe.Buffer, offset int) *FieldModelOptionalStructNested {
     fbeResult := FieldModelOptionalStructNested{buffer: buffer, offset: offset}
     fbeResult.value = NewFieldModelStructNested(buffer, 0)

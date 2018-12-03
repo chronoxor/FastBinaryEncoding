@@ -208,7 +208,7 @@ func (fm *FieldModelStructBytes) GetFields(fbeValue *StructBytes, fbeStructSize 
     fbeCurrentSize += fm.F2.FBESize()
 
     if (fbeCurrentSize + fm.F3.FBESize()) <= fbeStructSize {
-        _ = fm.F3.GetValueDefault(fbeValue.F3, nil)
+        _ = fm.F3.GetValue(fbeValue.F3)
     } else {
         fbeValue.F3 = nil
     }

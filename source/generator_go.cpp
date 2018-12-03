@@ -1577,7 +1577,7 @@ func (fm *FieldModelString) Set(value string) error {
     Close();
 }
 
-void GeneratorGo::GenerateFBEFieldModelOptional(const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& model, const CppCommon::Path& path)
+void GeneratorGo::GenerateFBEFieldModelOptional(const std::shared_ptr<Package>& p, const std::string& name, const StructField& field, const std::string& model, const CppCommon::Path& path)
 {
     // Open the output file
     CppCommon::Path output = path / ("FieldModelOptional" + name + ".go");
@@ -1764,13 +1764,172 @@ func (fm *FieldModelOptional_NAME_) Set(fbeValue _TYPE_ARG_) error {
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_TYPE_ARG_"), ConvertTypeName(type, true));
-    code = std::regex_replace(code, std::regex("_TYPE_NEW_"), IsGoType(type) ? ConvertOptional(type) : (ConvertNewName(type) + "()"));
-    code = std::regex_replace(code, std::regex("_TYPE_"), type);
+    code = std::regex_replace(code, std::regex("_TYPE_ARG_"), ConvertTypeName(*field.type, field.optional));
+    code = std::regex_replace(code, std::regex("_TYPE_NEW_"), IsGoType(*field.type) ? ConvertOptional(*field.type) : (ConvertNewName(*field.type) + "()"));
+    code = std::regex_replace(code, std::regex("_TYPE_"), ConvertTypeFieldType(*field.type, field.optional));
     code = std::regex_replace(code, std::regex("_MODEL_NEW_"), ConvertNewName(model));
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
-    code = std::regex_replace(code, std::regex("_GET_VALUE_"), IsGoType(type) ? "*fbeValue, err = fm.value.Get()" : "err = fm.value.GetValue(fbeValue)");
-    code = std::regex_replace(code, std::regex("_SET_VALUE_"), IsGoType(type) ? "err = fm.value.Set(*fbeValue)" : "err = fm.value.Set(fbeValue)");
+    code = std::regex_replace(code, std::regex("_GET_VALUE_"), IsGoType(*field.type) ? "*fbeValue, err = fm.value.Get()" : "err = fm.value.GetValue(fbeValue)");
+    code = std::regex_replace(code, std::regex("_SET_VALUE_"), IsGoType(*field.type) ? "err = fm.value.Set(*fbeValue)" : "err = fm.value.Set(fbeValue)");
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorGo::GenerateFBEFieldModelArray(const std::shared_ptr<Package>& p, const std::string& name, const StructField& field, const std::string& model, const CppCommon::Path& path)
+{
+    // Open the output file
+    CppCommon::Path output = path / ("FieldModelArray" + name + ".go");
+    Open(output);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
+    // Generate package
+    WriteLine();
+    WriteLineIndent("package " + *p->name);
+
+    // Generate imports
+    WriteLine();
+    WriteLineIndent("import \"errors\"");
+    GenerateImports(p);
+
+    std::string code = R"CODE(
+// Fast Binary Encoding _TYPE_ array field model
+type FieldModelArray_NAME_ struct {
+    // Field model buffer
+    buffer *fbe.Buffer
+    // Field model buffer offset
+    offset int
+
+    // Array item field model
+    model *_MODEL_
+    // Array size
+    size int
+}
+
+// Create a new _TYPE_ array field model
+func NewFieldModelArray_NAME_(buffer *fbe.Buffer, offset int, size int) *FieldModelArray_NAME_ {
+    fbeResult := FieldModelArray_NAME_{buffer: buffer, offset: offset}
+    fbeResult.model = _MODEL_NEW_(buffer, offset)
+    fbeResult.size = size
+    return &fbeResult
+}
+
+// Get the field size
+func (fm *FieldModelArray_NAME_) FBESize() int { return fm.size * fm.model.FBESize() }
+
+// Get the field extra size
+func (fm *FieldModelArray_NAME_) FBEExtra() int { return 0 }
+
+// Get the field offset
+func (fm *FieldModelArray_NAME_) FBEOffset() int { return fm.offset }
+// Set the field offset
+func (fm *FieldModelArray_NAME_) SetFBEOffset(value int) { fm.offset = value }
+
+// Shift the current field offset
+func (fm *FieldModelArray_NAME_) FBEShift(size int) { fm.offset += size }
+// Unshift the current field offset
+func (fm *FieldModelArray_NAME_) FBEUnshift(size int) { fm.offset -= size }
+
+// Get the array offset
+func (fm *FieldModelArray_NAME_) Offset() int { return 0 }
+// Get the array size
+func (fm *FieldModelArray_NAME_) Size() int { return fm.size }
+
+// Array index operator
+func (fm *FieldModelArray_NAME_) GetItem(index int) (*_MODEL_, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return nil, errors.New("model is broken")
+    }
+    if index >= fm.size {
+        return nil, errors.New("index is out of bounds")
+    }
+
+    fm.model.SetFBEOffset(fm.FBEOffset())
+    fm.model.FBEShift(index * fm.model.FBESize())
+    return fm.model, nil
+}
+
+// Check if the array is valid
+func (fm *FieldModelArray_NAME_) Verify() bool {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return false
+    }
+
+    fm.model.SetFBEOffset(fm.FBEOffset())
+    for i := 0; i < fm.size; i++ {
+        if !fm.model.Verify() {
+            return false
+        }
+        fm.model.FBEShift(fm.model.FBESize())
+    }
+
+    return true
+}
+
+// Get the array
+func (fm *FieldModelArray_NAME_) Get(values []_TYPE_) error {
+    values = values[:0]
+
+    fbeModel, err := fm.GetItem(0)
+    if err != nil {
+        return err
+    }
+
+    for i := 0; i < fm.size; i++ {
+        value, err := fbeModel.Get()
+        if err == nil {
+            return err
+        }
+        values = append(values, _GET_VALUE_)
+        fbeModel.FBEShift(fbeModel.FBESize())
+    }
+
+    return nil
+}
+
+// Set the array
+func (fm *FieldModelArray_NAME_) Set(values []_TYPE_) error {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return errors.New("model is broken")
+    }
+
+    fbeModel, err := fm.GetItem(0)
+    if err != nil {
+        return err
+    }
+
+    size := len(values)
+    if size > fm.size {
+        size = fm.size
+    }
+
+    for i := 0; i < size; i++ {
+        err := fbeModel.Set(_SET_VALUE_)
+        if err == nil {
+            return err
+        }
+        fbeModel.FBEShift(fbeModel.FBESize())
+    }
+
+    return nil
+}
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("_NAME_"), name);
+    code = std::regex_replace(code, std::regex("_TYPE_"), ConvertTypeFieldType(*field.type, field.optional));
+    code = std::regex_replace(code, std::regex("_MODEL_NEW_"), ConvertNewName(model));
+    code = std::regex_replace(code, std::regex("_MODEL_"), model);
+    code = std::regex_replace(code, std::regex("_GET_VALUE_"), (IsGoType(*field.type) || field.optional) ? "value" : "*value");
+    code = std::regex_replace(code, std::regex("_SET_VALUE_"), (IsGoType(*field.type) || field.optional) ? "values[i]" : "&values[i]");
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -1782,100 +1941,6 @@ func (fm *FieldModelOptional_NAME_) Set(fbeValue _TYPE_ARG_) error {
     Close();
 }
 /*
-void GeneratorGo::GenerateFBEFieldModelArray()
-{
-    std::string code = R"CODE(
-
-# Fast Binary Encoding array field model
-class FieldModelArray(FieldModel):
-    __slots__ = "_model", "_size",
-
-    def __init__(self, model, buffer, offset, size):
-        super().__init__(buffer, offset)
-        self._model = model
-        self._size = size
-
-    # Get the field size
-    @property
-    def fbe_size(self):
-        return self._size * self._model.fbe_size
-
-    # Get the field extra size
-    @property
-    def fbe_extra(self):
-        return 0
-
-    # Get the array offset
-    @property
-    def offset(self):
-        return 0
-
-    # Get the array size
-    @property
-    def size(self):
-        return self._size
-
-    # Array index operator
-    def __getitem__(self, index):
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        assert (index < self._size), "Index is out of bounds!"
-        if index >= self._size:
-            raise IndexError("Index is out of bounds!")
-
-        self._model.fbe_offset = self.fbe_offset
-        self._model.fbe_shift(index * self._model.fbe_size)
-        return self._model
-
-    # Check if the array is valid
-    def verify(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return False
-
-        self._model.fbe_offset = self.fbe_offset
-        for i in range(self._size):
-            if not self._model.verify():
-                return False
-            self._model.fbe_shift(self._model.fbe_size)
-
-        return True
-
-    # Get the array
-    def get(self, values=None):
-        if values is None:
-            values = list()
-
-        values.clear()
-
-        fbe_model = self[0]
-        for i in range(self._size):
-            value = fbe_model.get()
-            values.append(value)
-            fbe_model.fbe_shift(fbe_model.fbe_size)
-
-        return values
-
-    # Set the array
-    def set(self, values):
-        assert (values is not None), "Invalid values parameter!"
-        if values is None:
-            raise ValueError("Invalid values parameter!")
-
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return
-
-        fbe_model = self[0]
-        for i in range(min(len(values), self._size)):
-            fbe_model.set(values[i])
-            fbe_model.fbe_shift(fbe_model.fbe_size)
-)CODE";
-
-    // Prepare code template
-    code = std::regex_replace(code, std::regex("\n"), EndLine());
-
-    Write(code);
-}
-
 void GeneratorGo::GenerateFBEFieldModelVector()
 {
     std::string code = R"CODE(
@@ -3065,7 +3130,7 @@ func (fm *FinalModelString) Set(value string) (int, error) {
     Close();
 }
 
-void GeneratorGo::GenerateFBEFinalModelOptional(const std::shared_ptr<Package>& p, const std::string& name, const std::string& type, const std::string& model, const CppCommon::Path& path)
+void GeneratorGo::GenerateFBEFinalModelOptional(const std::shared_ptr<Package>& p, const std::string& name, const StructField& field, const std::string& model, const CppCommon::Path& path)
 {
     // Open the output file
     CppCommon::Path output = path / ("FinalModelOptional" + name + ".go");
@@ -3114,20 +3179,14 @@ func (fm *FinalModelOptional_NAME_) FBEAllocationSize(fbeValue _TYPE_ARG_) int {
     }
 }
 
-// Get the field size
-func (fm *FinalModelOptional_NAME_) FBESize() int { return 0 }
-
-// Get the field extra size
-func (fm *FinalModelOptional_NAME_) FBEExtra() int { return 0 }
-
-// Get the field offset
+// Get the final offset
 func (fm *FinalModelOptional_NAME_) FBEOffset() int { return fm.offset }
-// Set the field offset
+// Set the final offset
 func (fm *FinalModelOptional_NAME_) SetFBEOffset(value int) { fm.offset = value }
 
-// Shift the current field offset
+// Shift the current final offset
 func (fm *FinalModelOptional_NAME_) FBEShift(size int) { fm.offset += size }
-// Unshift the current field offset
+// Unshift the current final offset
 func (fm *FinalModelOptional_NAME_) FBEUnshift(size int) { fm.offset -= size }
 
 // Check if the object contains a value
@@ -3207,14 +3266,169 @@ func (fm *FinalModelOptional_NAME_) Set(fbeValue _TYPE_ARG_) (int, error) {
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("_NAME_"), name);
-    code = std::regex_replace(code, std::regex("_TYPE_ARG_"), ConvertTypeName(type, true));
-    code = std::regex_replace(code, std::regex("_TYPE_NEW_"), IsGoType(type) ? ConvertOptional(type) : (ConvertNewName(type) + "()"));
-    code = std::regex_replace(code, std::regex("_TYPE_"), type);
+    code = std::regex_replace(code, std::regex("_TYPE_ARG_"), ConvertTypeName(*field.type, field.optional));
+    code = std::regex_replace(code, std::regex("_TYPE_NEW_"), IsGoType(*field.type) ? ConvertOptional(*field.type) : (ConvertNewName(*field.type) + "()"));
+    code = std::regex_replace(code, std::regex("_TYPE_"), ConvertTypeFieldType(*field.type, field.optional));
     code = std::regex_replace(code, std::regex("_MODEL_NEW_"), ConvertNewName(model));
     code = std::regex_replace(code, std::regex("_MODEL_"), model);
-    code = std::regex_replace(code, std::regex("_GET_VALUE_"), IsGoType(type) ? "*fbeValue, fbeResult, err = fm.value.Get()" : "fbeResult, err = fm.value.GetValue(fbeValue)");
-    code = std::regex_replace(code, std::regex("_SET_VALUE_"), IsGoType(type) ? "fbeResult, err := fm.value.Set(*fbeValue)" : "fbeResult, err := fm.value.Set(fbeValue)");
-    code = std::regex_replace(code, std::regex("_VALUE_"), IsGoType(type) ? "*fbeValue" : "fbeValue");
+    code = std::regex_replace(code, std::regex("_GET_VALUE_"), IsGoType(*field.type) ? "*fbeValue, fbeResult, err = fm.value.Get()" : "fbeResult, err = fm.value.GetValue(fbeValue)");
+    code = std::regex_replace(code, std::regex("_SET_VALUE_"), IsGoType(*field.type) ? "fbeResult, err := fm.value.Set(*fbeValue)" : "fbeResult, err := fm.value.Set(fbeValue)");
+    code = std::regex_replace(code, std::regex("_VALUE_"), IsGoType(*field.type) ? "*fbeValue" : "fbeValue");
+    code = std::regex_replace(code, std::regex("\n"), EndLine());
+
+    Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorGo::GenerateFBEFinalModelArray(const std::shared_ptr<Package>& p, const std::string& name, const StructField& field, const std::string& model, const CppCommon::Path& path)
+{
+    // Open the output file
+    CppCommon::Path output = path / ("FinalModelArray" + name + ".go");
+    Open(output);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
+    // Generate package
+    WriteLine();
+    WriteLineIndent("package " + *p->name);
+
+    // Generate imports
+    WriteLine();
+    WriteLineIndent("import \"errors\"");
+    GenerateImports(p);
+
+    std::string code = R"CODE(
+// Fast Binary Encoding _TYPE_ array final model
+type FinalModelArray_NAME_ struct {
+    // Final model buffer
+    buffer *fbe.Buffer
+    // Final model buffer offset
+    offset int
+
+    // Array item final model
+    model *_MODEL_
+    // Array size
+    size int
+}
+
+// Create a new _TYPE_ array final model
+func NewFinalModelArray_NAME_(buffer *fbe.Buffer, offset int, size int) *FinalModelArray_NAME_ {
+    fbeResult := FinalModelArray_NAME_{buffer: buffer, offset: offset}
+    fbeResult.model = _MODEL_NEW_(buffer, offset)
+    fbeResult.size = size
+    return &fbeResult
+}
+
+// Get the allocation size
+func (fm *FinalModelArray_NAME_) FBEAllocationSize(values []_TYPE_) int {
+    result := 0
+
+    size := len(values)
+    if size > fm.size {
+        size = fm.size
+    }
+
+    for i := 0; i < size; i++ {
+        result += fm.model.FBEAllocationSize(_SET_VALUE_)
+    }
+
+    return result
+}
+
+// Get the final offset
+func (fm *FinalModelArray_NAME_) FBEOffset() int { return fm.offset }
+// Set the final offset
+func (fm *FinalModelArray_NAME_) SetFBEOffset(value int) { fm.offset = value }
+
+// Shift the current final offset
+func (fm *FinalModelArray_NAME_) FBEShift(size int) { fm.offset += size }
+// Unshift the current final offset
+func (fm *FinalModelArray_NAME_) FBEUnshift(size int) { fm.offset -= size }
+
+// Get the array offset
+func (fm *FinalModelArray_NAME_) Offset() int { return 0 }
+// Get the array size
+func (fm *FinalModelArray_NAME_) Size() int { return fm.size }
+
+// Check if the array is valid
+func (fm *FinalModelArray_NAME_) Verify() int {
+    if (fm.buffer.Offset() + fm.FBEOffset()) > fm.buffer.Size() {
+        return fbe.MaxInt
+    }
+
+    result := 0
+    fm.model.SetFBEOffset(fm.FBEOffset())
+    for i := 0; i < fm.size; i++ {
+        offset := fm.model.Verify()
+        if offset == fbe.MaxInt {
+            return fbe.MaxInt
+        }
+        fm.model.FBEShift(offset)
+        result += offset
+    }
+    return result
+}
+
+// Get the array
+func (fm *FinalModelArray_NAME_) Get(values []_TYPE_) (int, error) {
+    values = values[:0]
+
+    if (fm.buffer.Offset() + fm.FBEOffset()) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
+    }
+
+    result := 0
+    fm.model.SetFBEOffset(fm.FBEOffset())
+    for i := 0; i < fm.size; i++ {
+        value, offset, err := fm.model.Get()
+        if err != nil {
+            return result, err
+        }
+        values = append(values, _GET_VALUE_)
+        fm.model.FBEShift(offset)
+        result += offset
+    }
+    return result, nil
+}
+
+// Set the array
+func (fm *FinalModelArray_NAME_) Set(values []_TYPE_) (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset()) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
+    }
+
+    size := len(values)
+    if size > fm.size {
+        size = fm.size
+    }
+
+    result := 0
+    fm.model.SetFBEOffset(fm.FBEOffset())
+    for i := 0; i < size; i++ {
+        offset, err := fm.model.Set(_SET_VALUE_)
+        if err == nil {
+            return result, err
+        }
+        fm.model.FBEShift(offset)
+        result += offset
+    }
+    return result, nil
+}
+)CODE";
+
+    // Prepare code template
+    code = std::regex_replace(code, std::regex("_NAME_"), name);
+    code = std::regex_replace(code, std::regex("_TYPE_"), ConvertTypeFieldType(*field.type, field.optional));
+    code = std::regex_replace(code, std::regex("_MODEL_NEW_"), ConvertNewName(model));
+    code = std::regex_replace(code, std::regex("_MODEL_"), model);
+    code = std::regex_replace(code, std::regex("_GET_VALUE_"), (IsGoType(*field.type) || field.optional) ? "value" : "*value");
+    code = std::regex_replace(code, std::regex("_SET_VALUE_"), (IsGoType(*field.type) || field.optional) ? "values[i]" : "&values[i]");
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
@@ -3226,87 +3440,6 @@ func (fm *FinalModelOptional_NAME_) Set(fbeValue _TYPE_ARG_) (int, error) {
     Close();
 }
 /*
-void GeneratorGo::GenerateFBEFinalModelArray()
-{
-    std::string code = R"CODE(
-
-# Fast Binary Encoding array final model
-class FinalModelArray(FinalModel):
-    __slots__ = "_model", "_size",
-
-    def __init__(self, model, buffer, offset, size):
-        super().__init__(buffer, offset)
-        self._model = model
-        self._size = size
-
-    # Get the allocation size
-    # noinspection PyMethodMayBeStatic
-    def fbe_allocation_size(self, values):
-        size = 0
-        for i in range(min(len(values), self._size)):
-            size += self._model.fbe_allocation_size(values[i])
-        return size
-
-    # Check if the array is valid
-    def verify(self):
-        if (self._buffer.offset + self.fbe_offset) > self._buffer.size:
-            return sys.maxsize
-
-        size = 0
-        self._model.fbe_offset = self.fbe_offset
-        for i in range(self._size):
-            offset = self._model.verify()
-            if offset == sys.maxsize:
-                return sys.maxsize
-            self._model.fbe_shift(offset)
-            size += offset
-        return size
-
-    # Get the array
-    def get(self, values=None):
-        if values is None:
-            values = list()
-
-        values.clear()
-
-        assert ((self._buffer.offset + self.fbe_offset) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset) > self._buffer.size:
-            return values, 0
-
-        size = 0
-        self._model.fbe_offset = self.fbe_offset
-        for i in range(self._size):
-            value = self._model.get()
-            values.append(value[0])
-            self._model.fbe_shift(value[1])
-            size += value[1]
-        return values, size
-
-    # Set the array
-    def set(self, values):
-        assert (values is not None), "Invalid values parameter!"
-        if values is None:
-            raise ValueError("Invalid values parameter!")
-
-        assert ((self._buffer.offset + self.fbe_offset) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset) > self._buffer.size:
-            return 0
-
-        size = 0
-        self._model.fbe_offset = self.fbe_offset
-        for i in range(min(len(values), self._size)):
-            offset = self._model.set(values[i])
-            self._model.fbe_shift(offset)
-            size += offset
-        return size
-)CODE";
-
-    // Prepare code template
-    code = std::regex_replace(code, std::regex("\n"), EndLine());
-
-    Write(code);
-}
-
 void GeneratorGo::GenerateFBEFinalModelVector()
 {
     std::string code = R"CODE(
@@ -4068,12 +4201,10 @@ void GeneratorGo::GenerateContainers(const std::shared_ptr<Package>& p, const Cp
                 {
                     if (field->array)
                     {
-                        /*
                         if (final)
-                            GenerateFBEFinalModelArray(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final), ((*field->type == "byte") && !field->optional));
+                            GenerateFBEFinalModelArray(p, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), *field, ConvertTypeFieldDeclaration(*field->type, field->optional, final), path);
                         else
-                            GenerateFBEFieldModelArray(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final), ((*field->type == "byte") && !field->optional));
-                        */
+                            GenerateFBEFieldModelArray(p, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), *field, ConvertTypeFieldDeclaration(*field->type, field->optional, final), path);
                     }
                     if (field->vector || field->list || field->set)
                     {
@@ -4096,9 +4227,9 @@ void GeneratorGo::GenerateContainers(const std::shared_ptr<Package>& p, const Cp
                     if (field->optional)
                     {
                         if (final)
-                            GenerateFBEFinalModelOptional(p, ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, false, final), path);
+                            GenerateFBEFinalModelOptional(p, ConvertTypeFieldName(*field->type), *field, ConvertTypeFieldDeclaration(*field->type, false, final), path);
                         else
-                            GenerateFBEFieldModelOptional(p, ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, false, final), path);
+                            GenerateFBEFieldModelOptional(p, ConvertTypeFieldName(*field->type), *field, ConvertTypeFieldDeclaration(*field->type, false, final), path);
                     }
                 }
             }
@@ -5561,13 +5692,17 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
             WriteLine();
             WriteLineIndent("if (fbeCurrentSize + fm." + ConvertCase(*field->name) + ".FBESize()) <= fbeStructSize {");
             Indent(1);
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash || field->optional)
+            if (field->array)
+                WriteLineIndent("_ = fm." + ConvertCase(*field->name) + ".Get(fbeValue." + ConvertCase(*field->name) + "[:])");
+            else if (field->vector || field->list || field->set || field->map || field->hash)
             {
                 if (field->value)
                     WriteLineIndent("_ = fm." + ConvertCase(*field->name) + ".GetValueDefault(fbeValue." + ConvertCase(*field->name) + ", " + ConvertConstant(*field->type, *field->value, field->optional) + ")");
                 else
                     WriteLineIndent("_ = fm." + ConvertCase(*field->name) + ".GetValue(fbeValue." + ConvertCase(*field->name) + ")");
             }
+            else if (field->optional)
+                WriteLineIndent("_ = fm." + ConvertCase(*field->name) + ".GetValue(fbeValue." + ConvertCase(*field->name) + ")");
             else if (!IsGoType(*field->type))
             {
                 if (field->value)
@@ -5662,7 +5797,10 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
     {
         for (const auto& field : s->body->fields)
         {
-            WriteLineIndent("if err = fm." + ConvertCase(*field->name) + ".Set(" + ((IsGoType(*field->type) || field->array || field->vector || field->list || field->set || field->map || field->hash || field->optional) ? "" : "&") + "fbeValue." + ConvertCase(*field->name) + "); err != nil {");
+            if (field->array)
+                WriteLineIndent("if err = fm." + ConvertCase(*field->name) + ".Set(fbeValue." + ConvertCase(*field->name) + "[:]); err != nil {");
+            else
+                WriteLineIndent("if err = fm." + ConvertCase(*field->name) + ".Set(" + ((IsGoType(*field->type) || field->vector || field->list || field->set || field->map || field->hash || field->optional) ? "" : "&") + "fbeValue." + ConvertCase(*field->name) + "); err != nil {");
             Indent(1);
             WriteLineIndent("return err");
             Indent(-1);
@@ -5914,7 +6052,9 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
     {
         for (const auto& field : s->body->fields)
         {
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash || field->optional)
+            if (field->array)
+                WriteLineIndent("fm." + ConvertCase(*field->name) + ".FBEAllocationSize(fbeValue." + ConvertCase(*field->name) + "[:]) +");
+            else if (field->vector || field->list || field->set || field->map || field->hash || field->optional)
                 WriteLineIndent("fm." + ConvertCase(*field->name) + ".FBEAllocationSize(fbeValue." + ConvertCase(*field->name) + ") +");
             else if (!IsGoType(*field->type))
                 WriteLineIndent("fm." + ConvertCase(*field->name) + ".FBEAllocationSize(&fbeValue." + ConvertCase(*field->name) + ") +");
@@ -6054,7 +6194,9 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
         {
             WriteLine();
             WriteLineIndent("fm." + ConvertCase(*field->name) + ".SetFBEOffset(fbeCurrentOffset)");
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash || field->optional)
+            if (field->array)
+                WriteLineIndent("if fbeFieldSize, err = fm." + ConvertCase(*field->name) + ".Get(fbeValue." + ConvertCase(*field->name) + "[:]); err != nil {");
+            else if (field->vector || field->list || field->set || field->map || field->hash || field->optional)
                 WriteLineIndent("if fbeFieldSize, err = fm." + ConvertCase(*field->name) + ".GetValue(fbeValue." + ConvertCase(*field->name) + "); err != nil {");
             else if (!IsGoType(*field->type))
                 WriteLineIndent("if fbeFieldSize, err = fm." + ConvertCase(*field->name) + ".GetValue(&fbeValue." + ConvertCase(*field->name) + "); err != nil {");
@@ -6110,7 +6252,10 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
         {
             WriteLine();
             WriteLineIndent("fm." + ConvertCase(*field->name) + ".SetFBEOffset(fbeCurrentOffset)");
-            WriteLineIndent("if fbeFieldSize, err = fm." + ConvertCase(*field->name) + ".Set(" + ((IsGoType(*field->type) || field->array || field->vector || field->list || field->set || field->map || field->hash || field->optional) ? "" : "&") + "fbeValue." + ConvertCase(*field->name) + "); err != nil {");
+            if (field->array)
+                WriteLineIndent("if fbeFieldSize, err = fm." + ConvertCase(*field->name) + ".Set(fbeValue." + ConvertCase(*field->name) + "[:]); err != nil {");
+            else
+                WriteLineIndent("if fbeFieldSize, err = fm." + ConvertCase(*field->name) + ".Set(" + ((IsGoType(*field->type) || field->vector || field->list || field->set || field->map || field->hash || field->optional) ? "" : "&") + "fbeValue." + ConvertCase(*field->name) + "); err != nil {");
             Indent(1);
             WriteLineIndent("return fbeCurrentSize, err");
             Indent(-1);
@@ -7020,9 +7165,10 @@ std::string GeneratorGo::ConvertTypeFieldName(const std::string& type)
 std::string GeneratorGo::ConvertTypeFieldType(const std::string& type, bool optional)
 {
     if (IsGoType(type))
-        return type;
+        return ConvertTypeName(type, optional);
 
     std::string ns = "";
+    std::string opt = optional ? "*" : "";
     std::string t = type;
 
     size_t pos = type.find_last_of('.');
@@ -7032,17 +7178,18 @@ std::string GeneratorGo::ConvertTypeFieldType(const std::string& type, bool opti
         t.assign(type, pos + 1, type.size() - pos);
     }
 
-    return ns + ConvertCase(t);
+    return ns + opt + ConvertCase(t);
 }
 
 std::string GeneratorGo::ConvertTypeFieldDeclaration(const std::string& type, bool optional, bool final)
 {
     std::string modelType = (final ? "Final" : "Field");
 
-    if (IsGoType(type))
+    if (IsGoType(type) && !optional)
         return "fbe." + modelType + "Model" + ConvertTypeFieldName(type);
 
     std::string ns = "";
+    std::string opt = optional ? "Optional" : "";
     std::string t = type;
 
     size_t pos = type.find_last_of('.');
@@ -7052,43 +7199,21 @@ std::string GeneratorGo::ConvertTypeFieldDeclaration(const std::string& type, bo
         t.assign(type, pos + 1, type.size() - pos);
     }
 
-    return ns + modelType + "Model" + ConvertTypeFieldName(t);
+    return ns + modelType + "Model" + opt + ConvertTypeFieldName(t);
 }
 
 std::string GeneratorGo::ConvertTypeFieldDeclaration(const StructField& field, bool final)
 {
     std::string modelType = (final ? "Final" : "Field");
 
-    std::string key = (field.key != nullptr) ? *field.key : "";
-    std::string type = (field.type != nullptr) ? *field.type : "";
-
-    std::string ns = "";
-    std::string t = type;
-
-    size_t pos = type.find_last_of('.');
-    if (pos != std::string::npos)
-    {
-        ns.assign(type, 0, pos + 1);
-        t.assign(type, pos + 1, type.size() - pos);
-    }
-
-    std::string k = key;
-
-    pos = key.find_last_of('.');
-    if (pos != std::string::npos)
-    {
-        ns.assign(key, 0, pos + 1);
-        k.assign(key, pos + 1, type.size() - pos);
-    }
-
     if (field.array)
-        return modelType + "ModelArray" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(t);
+        return modelType + "ModelArray" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type);
     else if (field.vector || field.list || field.set)
-        return modelType + "ModelVector" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(t);
+        return modelType + "ModelVector" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type);
     else if (field.map || field.hash)
-        return modelType + "ModelMap" + ConvertTypeFieldName(k) + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(t);
+        return modelType + "ModelMap" + ConvertTypeFieldName(*field.key) + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type);
     else if (field.optional)
-        return modelType + "ModelOptional" + ConvertTypeFieldName(t);
+        return modelType + "ModelOptional" + ConvertTypeFieldName(*field.type);
 
     return ConvertTypeFieldDeclaration(*field.type, field.optional, final);
 }
@@ -7117,123 +7242,18 @@ std::string GeneratorGo::ConvertTypeFieldInitialization(const StructField& field
 {
     std::string modelType = (final ? "Final" : "Field");
 
-    std::string key = (field.key != nullptr) ? *field.key : "";
-    std::string type = (field.type != nullptr) ? *field.type : "";
-
-    std::string ns = "";
-    std::string t = type;
-
-    size_t pos = type.find_last_of('.');
-    if (pos != std::string::npos)
-    {
-        ns.assign(type, 0, pos + 1);
-        t.assign(type, pos + 1, type.size() - pos);
-    }
-
-    std::string k = key;
-
-    pos = key.find_last_of('.');
-    if (pos != std::string::npos)
-    {
-        ns.assign(key, 0, pos + 1);
-        k.assign(key, pos + 1, type.size() - pos);
-    }
-
     if (field.array)
-        return "New" + modelType + "ModelArray" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(t) + "(buffer, " + offset + ")";
+        return "New" + modelType + "ModelArray" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type) + "(buffer, " + offset + ", " + std::to_string(field.N) + ")";
     else if (field.vector || field.list || field.set)
-        return "New" + modelType + "ModelVector" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(t) + "(buffer, " + offset + ")";
+        return "New" + modelType + "ModelVector" + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type) + "(buffer, " + offset + ")";
     else if (field.map || field.hash)
-        return "New" + modelType + "ModelMap" + ConvertTypeFieldName(k) + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(t) + "(buffer, " + offset + ")";
+        return "New" + modelType + "ModelMap" + ConvertTypeFieldName(*field.key) + std::string(field.optional ? "Optional" : "") + ConvertTypeFieldName(*field.type) + "(buffer, " + offset + ")";
     else if (field.optional)
-        return "New" + modelType + "ModelOptional" + ConvertTypeFieldName(t) + "(buffer, " + offset + ")";
+        return "New" + modelType + "ModelOptional" + ConvertTypeFieldName(*field.type) + "(buffer, " + offset + ")";
 
     return ConvertTypeFieldInitialization(*field.type, field.optional, offset, final);
 }
 
-/*
-std::string GeneratorGo::ConvertTypeFieldName(const std::string& type, bool final)
-{
-    std::string modelType = (final ? "Final" : "Field");
-
-    if (type == "bool")
-        return "fbe." + modelType + "ModelBool";
-    else if (type == "byte")
-        return "fbe." + modelType + "ModelByte";
-    else if (type == "bytes")
-        return "fbe." + modelType + "ModelBytes";
-    else if (type == "char")
-        return "fbe." + modelType + "ModelChar";
-    else if (type == "wchar")
-        return "fbe." + modelType + "ModelWChar";
-    else if (type == "int8")
-        return "fbe." + modelType + "ModelInt8";
-    else if (type == "uint8")
-        return "fbe." + modelType + "ModelUInt8";
-    else if (type == "int16")
-        return "fbe." + modelType + "ModelInt16";
-    else if (type == "uint16")
-        return "fbe." + modelType + "ModelUInt16";
-    else if (type == "int32")
-        return "fbe." + modelType + "ModelInt32";
-    else if (type == "uint32")
-        return "fbe." + modelType + "ModelUInt32";
-    else if (type == "int64")
-        return "fbe." + modelType + "ModelInt64";
-    else if (type == "uint64")
-        return "fbe." + modelType + "ModelUInt64";
-    else if (type == "float")
-        return "fbe." + modelType + "ModelFloat";
-    else if (type == "double")
-        return "fbe." + modelType + "ModelDouble";
-    else if (type == "decimal")
-        return "fbe." + modelType + "ModelDecimal";
-    else if (type == "timestamp")
-        return "fbe." + modelType + "ModelTimestamp";
-    else if (type == "string")
-        return "fbe." + modelType + "ModelString";
-    else if (type == "uuid")
-        return "fbe." + modelType + "ModelUUID";
-
-    std::string ns = "";
-    std::string t = type;
-
-    size_t pos = type.find_last_of('.');
-    if (pos != std::string::npos)
-    {
-        ns.assign(type, 0, pos + 1);
-        t.assign(type, pos + 1, type.size() - pos);
-    }
-
-    return ns + modelType + "Model" + ConvertTypeName(t, false);
-}
-
-std::string GeneratorGo::ConvertTypeFieldInitialization(const std::string& type, bool optional, const std::string& offset, bool final)
-{
-    std::string modelType = (final ? "Final" : "Field");
-
-    if (optional)
-        return "fbe." + modelType + "ModelOptional(" + ConvertTypeFieldInitialization(type, false, offset, final)+ ", buffer, " + offset + ")";
-    else
-        return ConvertTypeFieldName(type, final) + "(buffer, " + offset + ")";
-}
-
-std::string GeneratorGo::ConvertTypeFieldInitialization(const StructField& field, const std::string& offset, bool final)
-{
-    std::string modelType = (final ? "Final" : "Field");
-
-    if (field.array)
-        return "fbe." + modelType + "ModelArray(" + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", buffer, " + offset + ", " + std::to_string(field.N) + ")";
-    else if (field.vector || field.list)
-        return "fbe." + modelType + "ModelVector(" + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", buffer, " + offset + ")";
-    else if (field.set)
-        return "fbe." + modelType + "ModelSet(" + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", buffer, " + offset + ")";
-    else if (field.map || field.hash)
-        return "fbe." + modelType + "ModelMap(" + ConvertTypeFieldInitialization(*field.key, false, offset, final) + ", " + ConvertTypeFieldInitialization(*field.type, field.optional, offset, final) + ", buffer, " + offset + ")";
-    else
-        return ConvertTypeFieldInitialization(*field.type, field.optional, offset, final);
-}
-*/
 std::string GeneratorGo::ConvertConstant(const std::string& type, const std::string& value, bool optional)
 {
     if (optional)

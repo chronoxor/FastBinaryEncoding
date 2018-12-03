@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional double final model
+// Fast Binary Encoding optional *float64 final model
 type FinalModelOptionalDouble struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalDouble struct {
     value *fbe.FinalModelDouble
 }
 
-// Create a new optional double final model
+// Create a new optional *float64 final model
 func NewFinalModelOptionalDouble(buffer *fbe.Buffer, offset int) *FinalModelOptionalDouble {
     fbeResult := FinalModelOptionalDouble{buffer: buffer, offset: offset}
     fbeResult.value = fbe.NewFinalModelDouble(buffer, 0)
@@ -43,20 +43,14 @@ func (fm *FinalModelOptionalDouble) FBEAllocationSize(fbeValue *float64) int {
     }
 }
 
-// Get the field size
-func (fm *FinalModelOptionalDouble) FBESize() int { return 0 }
-
-// Get the field extra size
-func (fm *FinalModelOptionalDouble) FBEExtra() int { return 0 }
-
-// Get the field offset
+// Get the final offset
 func (fm *FinalModelOptionalDouble) FBEOffset() int { return fm.offset }
-// Set the field offset
+// Set the final offset
 func (fm *FinalModelOptionalDouble) SetFBEOffset(value int) { fm.offset = value }
 
-// Shift the current field offset
+// Shift the current final offset
 func (fm *FinalModelOptionalDouble) FBEShift(size int) { fm.offset += size }
-// Unshift the current field offset
+// Unshift the current final offset
 func (fm *FinalModelOptionalDouble) FBEUnshift(size int) { fm.offset -= size }
 
 // Check if the object contains a value

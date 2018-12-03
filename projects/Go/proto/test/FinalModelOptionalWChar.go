@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional wchar final model
+// Fast Binary Encoding optional *rune final model
 type FinalModelOptionalWChar struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalWChar struct {
     value *fbe.FinalModelWChar
 }
 
-// Create a new optional wchar final model
+// Create a new optional *rune final model
 func NewFinalModelOptionalWChar(buffer *fbe.Buffer, offset int) *FinalModelOptionalWChar {
     fbeResult := FinalModelOptionalWChar{buffer: buffer, offset: offset}
     fbeResult.value = fbe.NewFinalModelWChar(buffer, 0)
@@ -43,20 +43,14 @@ func (fm *FinalModelOptionalWChar) FBEAllocationSize(fbeValue *rune) int {
     }
 }
 
-// Get the field size
-func (fm *FinalModelOptionalWChar) FBESize() int { return 0 }
-
-// Get the field extra size
-func (fm *FinalModelOptionalWChar) FBEExtra() int { return 0 }
-
-// Get the field offset
+// Get the final offset
 func (fm *FinalModelOptionalWChar) FBEOffset() int { return fm.offset }
-// Set the field offset
+// Set the final offset
 func (fm *FinalModelOptionalWChar) SetFBEOffset(value int) { fm.offset = value }
 
-// Shift the current field offset
+// Shift the current final offset
 func (fm *FinalModelOptionalWChar) FBEShift(size int) { fm.offset += size }
-// Unshift the current field offset
+// Unshift the current final offset
 func (fm *FinalModelOptionalWChar) FBEUnshift(size int) { fm.offset -= size }
 
 // Check if the object contains a value

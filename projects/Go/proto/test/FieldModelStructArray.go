@@ -35,16 +35,16 @@ type FieldModelStructArray struct {
 // Create a new StructArray field model
 func NewFieldModelStructArray(buffer *fbe.Buffer, offset int) *FieldModelStructArray {
     fbeResult := FieldModelStructArray{buffer: buffer, offset: offset}
-    fbeResult.F1 = NewFieldModelArrayByte(buffer, 4 + 4)
-    fbeResult.F2 = NewFieldModelArrayOptionalByte(buffer, fbeResult.F1.FBEOffset() + fbeResult.F1.FBESize())
-    fbeResult.F3 = NewFieldModelArrayBytes(buffer, fbeResult.F2.FBEOffset() + fbeResult.F2.FBESize())
-    fbeResult.F4 = NewFieldModelArrayOptionalBytes(buffer, fbeResult.F3.FBEOffset() + fbeResult.F3.FBESize())
-    fbeResult.F5 = NewFieldModelArrayEnumSimple(buffer, fbeResult.F4.FBEOffset() + fbeResult.F4.FBESize())
-    fbeResult.F6 = NewFieldModelArrayOptionalEnumSimple(buffer, fbeResult.F5.FBEOffset() + fbeResult.F5.FBESize())
-    fbeResult.F7 = NewFieldModelArrayFlagsSimple(buffer, fbeResult.F6.FBEOffset() + fbeResult.F6.FBESize())
-    fbeResult.F8 = NewFieldModelArrayOptionalFlagsSimple(buffer, fbeResult.F7.FBEOffset() + fbeResult.F7.FBESize())
-    fbeResult.F9 = NewFieldModelArrayStructSimple(buffer, fbeResult.F8.FBEOffset() + fbeResult.F8.FBESize())
-    fbeResult.F10 = NewFieldModelArrayOptionalStructSimple(buffer, fbeResult.F9.FBEOffset() + fbeResult.F9.FBESize())
+    fbeResult.F1 = NewFieldModelArrayByte(buffer, 4 + 4, 2)
+    fbeResult.F2 = NewFieldModelArrayOptionalByte(buffer, fbeResult.F1.FBEOffset() + fbeResult.F1.FBESize(), 2)
+    fbeResult.F3 = NewFieldModelArrayBytes(buffer, fbeResult.F2.FBEOffset() + fbeResult.F2.FBESize(), 2)
+    fbeResult.F4 = NewFieldModelArrayOptionalBytes(buffer, fbeResult.F3.FBEOffset() + fbeResult.F3.FBESize(), 2)
+    fbeResult.F5 = NewFieldModelArrayEnumSimple(buffer, fbeResult.F4.FBEOffset() + fbeResult.F4.FBESize(), 2)
+    fbeResult.F6 = NewFieldModelArrayOptionalEnumSimple(buffer, fbeResult.F5.FBEOffset() + fbeResult.F5.FBESize(), 2)
+    fbeResult.F7 = NewFieldModelArrayFlagsSimple(buffer, fbeResult.F6.FBEOffset() + fbeResult.F6.FBESize(), 2)
+    fbeResult.F8 = NewFieldModelArrayOptionalFlagsSimple(buffer, fbeResult.F7.FBEOffset() + fbeResult.F7.FBESize(), 2)
+    fbeResult.F9 = NewFieldModelArrayStructSimple(buffer, fbeResult.F8.FBEOffset() + fbeResult.F8.FBESize(), 2)
+    fbeResult.F10 = NewFieldModelArrayOptionalStructSimple(buffer, fbeResult.F9.FBEOffset() + fbeResult.F9.FBESize(), 2)
     return &fbeResult
 }
 
@@ -278,70 +278,70 @@ func (fm *FieldModelStructArray) GetFields(fbeValue *StructArray, fbeStructSize 
     fbeCurrentSize := 4 + 4
 
     if (fbeCurrentSize + fm.F1.FBESize()) <= fbeStructSize {
-        _ = fm.F1.GetValue(fbeValue.F1)
+        _ = fm.F1.Get(fbeValue.F1[:])
     } else {
         fbeValue.F1 = [2]byte{}
     }
     fbeCurrentSize += fm.F1.FBESize()
 
     if (fbeCurrentSize + fm.F2.FBESize()) <= fbeStructSize {
-        _ = fm.F2.GetValue(fbeValue.F2)
+        _ = fm.F2.Get(fbeValue.F2[:])
     } else {
         fbeValue.F2 = [2]*byte{}
     }
     fbeCurrentSize += fm.F2.FBESize()
 
     if (fbeCurrentSize + fm.F3.FBESize()) <= fbeStructSize {
-        _ = fm.F3.GetValue(fbeValue.F3)
+        _ = fm.F3.Get(fbeValue.F3[:])
     } else {
         fbeValue.F3 = [2][]byte{}
     }
     fbeCurrentSize += fm.F3.FBESize()
 
     if (fbeCurrentSize + fm.F4.FBESize()) <= fbeStructSize {
-        _ = fm.F4.GetValue(fbeValue.F4)
+        _ = fm.F4.Get(fbeValue.F4[:])
     } else {
         fbeValue.F4 = [2]*[]byte{}
     }
     fbeCurrentSize += fm.F4.FBESize()
 
     if (fbeCurrentSize + fm.F5.FBESize()) <= fbeStructSize {
-        _ = fm.F5.GetValue(fbeValue.F5)
+        _ = fm.F5.Get(fbeValue.F5[:])
     } else {
         fbeValue.F5 = [2]EnumSimple{}
     }
     fbeCurrentSize += fm.F5.FBESize()
 
     if (fbeCurrentSize + fm.F6.FBESize()) <= fbeStructSize {
-        _ = fm.F6.GetValue(fbeValue.F6)
+        _ = fm.F6.Get(fbeValue.F6[:])
     } else {
         fbeValue.F6 = [2]*EnumSimple{}
     }
     fbeCurrentSize += fm.F6.FBESize()
 
     if (fbeCurrentSize + fm.F7.FBESize()) <= fbeStructSize {
-        _ = fm.F7.GetValue(fbeValue.F7)
+        _ = fm.F7.Get(fbeValue.F7[:])
     } else {
         fbeValue.F7 = [2]FlagsSimple{}
     }
     fbeCurrentSize += fm.F7.FBESize()
 
     if (fbeCurrentSize + fm.F8.FBESize()) <= fbeStructSize {
-        _ = fm.F8.GetValue(fbeValue.F8)
+        _ = fm.F8.Get(fbeValue.F8[:])
     } else {
         fbeValue.F8 = [2]*FlagsSimple{}
     }
     fbeCurrentSize += fm.F8.FBESize()
 
     if (fbeCurrentSize + fm.F9.FBESize()) <= fbeStructSize {
-        _ = fm.F9.GetValue(fbeValue.F9)
+        _ = fm.F9.Get(fbeValue.F9[:])
     } else {
         fbeValue.F9 = [2]StructSimple{}
     }
     fbeCurrentSize += fm.F9.FBESize()
 
     if (fbeCurrentSize + fm.F10.FBESize()) <= fbeStructSize {
-        _ = fm.F10.GetValue(fbeValue.F10)
+        _ = fm.F10.Get(fbeValue.F10[:])
     } else {
         fbeValue.F10 = [2]*StructSimple{}
     }
@@ -389,34 +389,34 @@ func (fm *FieldModelStructArray) Set(fbeValue *StructArray) error {
 func (fm *FieldModelStructArray) SetFields(fbeValue *StructArray) error {
     var err error = nil
 
-    if err = fm.F1.Set(fbeValue.F1); err != nil {
+    if err = fm.F1.Set(fbeValue.F1[:]); err != nil {
         return err
     }
-    if err = fm.F2.Set(fbeValue.F2); err != nil {
+    if err = fm.F2.Set(fbeValue.F2[:]); err != nil {
         return err
     }
-    if err = fm.F3.Set(fbeValue.F3); err != nil {
+    if err = fm.F3.Set(fbeValue.F3[:]); err != nil {
         return err
     }
-    if err = fm.F4.Set(fbeValue.F4); err != nil {
+    if err = fm.F4.Set(fbeValue.F4[:]); err != nil {
         return err
     }
-    if err = fm.F5.Set(fbeValue.F5); err != nil {
+    if err = fm.F5.Set(fbeValue.F5[:]); err != nil {
         return err
     }
-    if err = fm.F6.Set(fbeValue.F6); err != nil {
+    if err = fm.F6.Set(fbeValue.F6[:]); err != nil {
         return err
     }
-    if err = fm.F7.Set(fbeValue.F7); err != nil {
+    if err = fm.F7.Set(fbeValue.F7[:]); err != nil {
         return err
     }
-    if err = fm.F8.Set(fbeValue.F8); err != nil {
+    if err = fm.F8.Set(fbeValue.F8[:]); err != nil {
         return err
     }
-    if err = fm.F9.Set(fbeValue.F9); err != nil {
+    if err = fm.F9.Set(fbeValue.F9[:]); err != nil {
         return err
     }
-    if err = fm.F10.Set(fbeValue.F10); err != nil {
+    if err = fm.F10.Set(fbeValue.F10[:]); err != nil {
         return err
     }
     return err

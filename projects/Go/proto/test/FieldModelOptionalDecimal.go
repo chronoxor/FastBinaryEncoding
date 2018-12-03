@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional decimal field model
+// Fast Binary Encoding optional *fbe.Decimal field model
 type FieldModelOptionalDecimal struct {
     // Field model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FieldModelOptionalDecimal struct {
     value *fbe.FieldModelDecimal
 }
 
-// Create a new optional decimal field model
+// Create a new optional *fbe.Decimal field model
 func NewFieldModelOptionalDecimal(buffer *fbe.Buffer, offset int) *FieldModelOptionalDecimal {
     fbeResult := FieldModelOptionalDecimal{buffer: buffer, offset: offset}
     fbeResult.value = fbe.NewFieldModelDecimal(buffer, 0)
