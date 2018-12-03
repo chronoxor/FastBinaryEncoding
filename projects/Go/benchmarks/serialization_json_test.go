@@ -3,7 +3,7 @@ package benchmarks
 import "testing"
 import "../proto/proto"
 
-func SetupBenchmark() (*proto.Account, []byte) {
+func SetupBenchmarkJson() (*proto.Account, []byte) {
 	// Create a new account with some orders
 	var account = proto.NewAccount()
 	account.Uid = 1
@@ -29,7 +29,7 @@ func SetupBenchmark() (*proto.Account, []byte) {
 func BenchmarkJsonSerialize(b *testing.B) {
 	// Setup the benchmark
 	b.ReportAllocs()
-	account, _ := SetupBenchmark()
+	account, _ := SetupBenchmarkJson()
 
 	// Perform the benchmark
 	b.ResetTimer()
@@ -43,7 +43,7 @@ func BenchmarkJsonSerialize(b *testing.B) {
 func BenchmarkJsonDeserialize(b *testing.B) {
 	// Setup the benchmark
 	b.ReportAllocs()
-	_, json := SetupBenchmark()
+	_, json := SetupBenchmarkJson()
 
 	// Perform the benchmark
 	b.ResetTimer()
