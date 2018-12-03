@@ -118,20 +118,18 @@ func (fm *FieldModelOptionalStructOptional) GetEnd(fbeBegin int) {
 
 // Get the optional value
 func (fm *FieldModelOptionalStructOptional) Get() (*StructOptional, error) {
-    fbeResult := NewStructOptional()
-    return fbeResult, fm.GetValue(fbeResult)
-}
+    var fbeValue *StructOptional = nil
 
-// Get the optional value by the given pointer
-func (fm *FieldModelOptionalStructOptional) GetValue(fbeValue *StructOptional) error {
     fbeBegin, err := fm.GetBegin()
     if fbeBegin == 0 {
-        return err
+        return fbeValue, err
     }
+
+    fbeValue = NewStructOptional()
 
     err = fm.value.GetValue(fbeValue)
     fm.GetEnd(fbeBegin)
-    return err
+    return fbeValue, err
 }
 
 // Set the optional value (begin phase)

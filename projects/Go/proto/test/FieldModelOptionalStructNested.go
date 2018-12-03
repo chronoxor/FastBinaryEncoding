@@ -118,20 +118,18 @@ func (fm *FieldModelOptionalStructNested) GetEnd(fbeBegin int) {
 
 // Get the optional value
 func (fm *FieldModelOptionalStructNested) Get() (*StructNested, error) {
-    fbeResult := NewStructNested()
-    return fbeResult, fm.GetValue(fbeResult)
-}
+    var fbeValue *StructNested = nil
 
-// Get the optional value by the given pointer
-func (fm *FieldModelOptionalStructNested) GetValue(fbeValue *StructNested) error {
     fbeBegin, err := fm.GetBegin()
     if fbeBegin == 0 {
-        return err
+        return fbeValue, err
     }
+
+    fbeValue = NewStructNested()
 
     err = fm.value.GetValue(fbeValue)
     fm.GetEnd(fbeBegin)
-    return err
+    return fbeValue, err
 }
 
 // Set the optional value (begin phase)

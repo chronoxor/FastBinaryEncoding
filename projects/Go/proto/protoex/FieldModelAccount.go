@@ -258,14 +258,14 @@ func (fm *FieldModelAccount) GetFields(fbeValue *Account, fbeStructSize int) {
     fbeCurrentSize += fm.Wallet.FBESize()
 
     if (fbeCurrentSize + fm.Asset.FBESize()) <= fbeStructSize {
-        _ = fm.Asset.GetValue(fbeValue.Asset)
+        fbeValue.Asset, _ = fm.Asset.Get()
     } else {
         fbeValue.Asset = nil
     }
     fbeCurrentSize += fm.Asset.FBESize()
 
     if (fbeCurrentSize + fm.Orders.FBESize()) <= fbeStructSize {
-        _ = fm.Orders.GetValue(fbeValue.Orders)
+        fbeValue.Orders, _ = fm.Orders.Get()
     } else {
         fbeValue.Orders = make([]Order, 0)
     }

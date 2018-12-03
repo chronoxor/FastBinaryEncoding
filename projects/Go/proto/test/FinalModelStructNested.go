@@ -222,7 +222,7 @@ func (fm *FinalModelStructNested) GetFields(fbeValue *StructNested) (int, error)
     fbeCurrentSize += fbeFieldSize
 
     fm.F1001.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F1001.GetValue(fbeValue.F1001); err != nil {
+    if fbeValue.F1001, fbeFieldSize, err = fm.F1001.Get(); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
@@ -236,7 +236,7 @@ func (fm *FinalModelStructNested) GetFields(fbeValue *StructNested) (int, error)
     fbeCurrentSize += fbeFieldSize
 
     fm.F1003.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F1003.GetValue(fbeValue.F1003); err != nil {
+    if fbeValue.F1003, fbeFieldSize, err = fm.F1003.Get(); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
@@ -250,7 +250,7 @@ func (fm *FinalModelStructNested) GetFields(fbeValue *StructNested) (int, error)
     fbeCurrentSize += fbeFieldSize
 
     fm.F1005.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F1005.GetValue(fbeValue.F1005); err != nil {
+    if fbeValue.F1005, fbeFieldSize, err = fm.F1005.Get(); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
@@ -264,7 +264,7 @@ func (fm *FinalModelStructNested) GetFields(fbeValue *StructNested) (int, error)
     fbeCurrentSize += fbeFieldSize
 
     fm.F1007.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F1007.GetValue(fbeValue.F1007); err != nil {
+    if fbeValue.F1007, fbeFieldSize, err = fm.F1007.Get(); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
@@ -278,7 +278,7 @@ func (fm *FinalModelStructNested) GetFields(fbeValue *StructNested) (int, error)
     fbeCurrentSize += fbeFieldSize
 
     fm.F1009.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F1009.GetValue(fbeValue.F1009); err != nil {
+    if fbeValue.F1009, fbeFieldSize, err = fm.F1009.Get(); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
@@ -292,7 +292,7 @@ func (fm *FinalModelStructNested) GetFields(fbeValue *StructNested) (int, error)
     fbeCurrentSize += fbeFieldSize
 
     fm.F1011.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F1011.GetValue(fbeValue.F1011); err != nil {
+    if fbeValue.F1011, fbeFieldSize, err = fm.F1011.Get(); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize

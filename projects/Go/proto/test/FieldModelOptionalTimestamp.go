@@ -118,20 +118,18 @@ func (fm *FieldModelOptionalTimestamp) GetEnd(fbeBegin int) {
 
 // Get the optional value
 func (fm *FieldModelOptionalTimestamp) Get() (*fbe.Timestamp, error) {
-    fbeResult := fbe.OptionalTimestamp(fbe.TimestampEpoch())
-    return fbeResult, fm.GetValue(fbeResult)
-}
+    var fbeValue *fbe.Timestamp = nil
 
-// Get the optional value by the given pointer
-func (fm *FieldModelOptionalTimestamp) GetValue(fbeValue *fbe.Timestamp) error {
     fbeBegin, err := fm.GetBegin()
     if fbeBegin == 0 {
-        return err
+        return fbeValue, err
     }
+
+    fbeValue = fbe.OptionalTimestamp(fbe.TimestampEpoch())
 
     *fbeValue, err = fm.value.Get()
     fm.GetEnd(fbeBegin)
-    return err
+    return fbeValue, err
 }
 
 // Set the optional value (begin phase)

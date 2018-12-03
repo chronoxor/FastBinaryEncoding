@@ -118,20 +118,18 @@ func (fm *FieldModelOptionalUInt64) GetEnd(fbeBegin int) {
 
 // Get the optional value
 func (fm *FieldModelOptionalUInt64) Get() (*uint64, error) {
-    fbeResult := fbe.OptionalUInt64(0)
-    return fbeResult, fm.GetValue(fbeResult)
-}
+    var fbeValue *uint64 = nil
 
-// Get the optional value by the given pointer
-func (fm *FieldModelOptionalUInt64) GetValue(fbeValue *uint64) error {
     fbeBegin, err := fm.GetBegin()
     if fbeBegin == 0 {
-        return err
+        return fbeValue, err
     }
+
+    fbeValue = fbe.OptionalUInt64(0)
 
     *fbeValue, err = fm.value.Get()
     fm.GetEnd(fbeBegin)
-    return err
+    return fbeValue, err
 }
 
 // Set the optional value (begin phase)

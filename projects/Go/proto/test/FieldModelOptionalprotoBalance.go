@@ -118,20 +118,18 @@ func (fm *FieldModelOptionalprotoBalance) GetEnd(fbeBegin int) {
 
 // Get the optional value
 func (fm *FieldModelOptionalprotoBalance) Get() (*proto.Balance, error) {
-    fbeResult := proto.NewBalance()
-    return fbeResult, fm.GetValue(fbeResult)
-}
+    var fbeValue *proto.Balance = nil
 
-// Get the optional value by the given pointer
-func (fm *FieldModelOptionalprotoBalance) GetValue(fbeValue *proto.Balance) error {
     fbeBegin, err := fm.GetBegin()
     if fbeBegin == 0 {
-        return err
+        return fbeValue, err
     }
+
+    fbeValue = proto.NewBalance()
 
     err = fm.value.GetValue(fbeValue)
     fm.GetEnd(fbeBegin)
-    return err
+    return fbeValue, err
 }
 
 // Set the optional value (begin phase)

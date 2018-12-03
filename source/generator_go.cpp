@@ -1701,20 +1701,18 @@ func (fm *FieldModelOptional_NAME_) GetEnd(fbeBegin int) {
 
 // Get the optional value
 func (fm *FieldModelOptional_NAME_) Get() (_TYPE_ARG_, error) {
-    fbeResult := _TYPE_NEW_
-    return fbeResult, fm.GetValue(fbeResult)
-}
+    var fbeValue _TYPE_ARG_ = nil
 
-// Get the optional value by the given pointer
-func (fm *FieldModelOptional_NAME_) GetValue(fbeValue _TYPE_ARG_) error {
     fbeBegin, err := fm.GetBegin()
     if fbeBegin == 0 {
-        return err
+        return fbeValue, err
     }
+
+    fbeValue = _TYPE_NEW_
 
     _GET_VALUE_
     fm.GetEnd(fbeBegin)
-    return err
+    return fbeValue, err
 }
 
 // Set the optional value (begin phase)
@@ -1875,24 +1873,24 @@ func (fm *FieldModelArray_NAME_) Verify() bool {
 }
 
 // Get the array
-func (fm *FieldModelArray_NAME_) Get(values []_TYPE_) error {
-    values = values[:0]
+func (fm *FieldModelArray_NAME_) Get() ([]_TYPE_, error) {
+    values := make([]_TYPE_, 0, fm.size)
 
     fbeModel, err := fm.GetItem(0)
     if err != nil {
-        return err
+        return values, err
     }
 
     for i := 0; i < fm.size; i++ {
         value, err := fbeModel.Get()
-        if err == nil {
-            return err
+        if err != nil {
+            return values, err
         }
         values = append(values, _GET_VALUE_)
         fbeModel.FBEShift(fbeModel.FBESize())
     }
 
-    return nil
+    return values, nil
 }
 
 // Set the array
@@ -1913,7 +1911,7 @@ func (fm *FieldModelArray_NAME_) Set(values []_TYPE_) error {
 
     for i := 0; i < size; i++ {
         err := fbeModel.Set(_SET_VALUE_)
-        if err == nil {
+        if err != nil {
             return err
         }
         fbeModel.FBEShift(fbeModel.FBESize())
@@ -1940,157 +1938,238 @@ func (fm *FieldModelArray_NAME_) Set(values []_TYPE_) error {
     // Close the file
     Close();
 }
-/*
-void GeneratorGo::GenerateFBEFieldModelVector()
+
+void GeneratorGo::GenerateFBEFieldModelVector(const std::shared_ptr<Package>& p, const std::string& name, const StructField& field, const std::string& model, const CppCommon::Path& path)
 {
+    // Open the output file
+    CppCommon::Path output = path / ("FieldModelVector" + name + ".go");
+    Open(output);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
+    // Generate package
+    WriteLine();
+    WriteLineIndent("package " + *p->name);
+
+    // Generate imports
+    WriteLine();
+    WriteLineIndent("import \"errors\"");
+    GenerateImports(p);
+
     std::string code = R"CODE(
+// Fast Binary Encoding _TYPE_ vector field model
+type FieldModelVector_NAME_ struct {
+    // Field model buffer
+    buffer *fbe.Buffer
+    // Field model buffer offset
+    offset int
 
-# Fast Binary Encoding vector field model
-class FieldModelVector(FieldModel):
-    __slots__ = "_model",
+    // Vector item field model
+    model *_MODEL_
+}
 
-    def __init__(self, model, buffer, offset):
-        super().__init__(buffer, offset)
-        self._model = model
+// Create a new _TYPE_ vector field model
+func NewFieldModelVector_NAME_(buffer *fbe.Buffer, offset int) *FieldModelVector_NAME_ {
+    fbeResult := FieldModelVector_NAME_{buffer: buffer, offset: offset}
+    fbeResult.model = _MODEL_NEW_(buffer, offset)
+    return &fbeResult
+}
 
-    # Get the field size
-    @property
-    def fbe_size(self):
-        return 4
+// Get the field size
+func (fm *FieldModelVector_NAME_) FBESize() int { return 4 }
 
-    # Get the field extra size
-    @property
-    def fbe_extra(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return 0
+// Get the field extra size
+func (fm *FieldModelVector_NAME_) FBEExtra() int {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0
+    }
 
-        fbe_vector_offset = self.read_uint32(self.fbe_offset)
-        if (fbe_vector_offset == 0) or ((self._buffer.offset + fbe_vector_offset + 4) > self._buffer.size):
-            return 0
+    fbeVectorOffset := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    if (fbeVectorOffset == 0) || ((fm.buffer.Offset() + fbeVectorOffset + 4) > fm.buffer.Size()) {
+        return 0
+    }
 
-        fbe_vector_size = self.read_uint32(fbe_vector_offset)
+    fbeVectorSize := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeVectorOffset))
 
-        fbe_result = 4
-        self._model.fbe_offset = fbe_vector_offset + 4
-        for i in range(fbe_vector_size):
-            fbe_result += self._model.fbe_size + self._model.fbe_extra
-            self._model.fbe_shift(self._model.fbe_size)
-        return fbe_result
+    fbeResult := 0
+    fm.model.SetFBEOffset(fbeVectorOffset + 4)
+    for i := fbeVectorSize; i > 0; i-- {
+        fbeResult += fm.model.FBESize() + fm.model.FBEExtra()
+        fm.model.FBEShift(fm.model.FBESize())
+    }
+    return fbeResult
+}
 
-    # Get the vector offset
-    @property
-    def offset(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return 0
+// Get the field offset
+func (fm *FieldModelVector_NAME_) FBEOffset() int { return fm.offset }
+// Set the field offset
+func (fm *FieldModelVector_NAME_) SetFBEOffset(value int) { fm.offset = value }
 
-        fbe_vector_offset = self.read_uint32(self.fbe_offset)
-        return fbe_vector_offset
+// Shift the current field offset
+func (fm *FieldModelVector_NAME_) FBEShift(size int) { fm.offset += size }
+// Unshift the current field offset
+func (fm *FieldModelVector_NAME_) FBEUnshift(size int) { fm.offset -= size }
 
-    # Get the vector size
-    @property
-    def size(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return 0
+// Get the vector offset
+func (fm *FieldModelVector_NAME_) Offset() int {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0
+    }
 
-        fbe_vector_offset = self.read_uint32(self.fbe_offset)
-        if (fbe_vector_offset == 0) or ((self._buffer.offset + fbe_vector_offset + 4) > self._buffer.size):
-            return 0
+    fbeVectorOffset := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    return fbeVectorOffset
+}
 
-        fbe_vector_size = self.read_uint32(fbe_vector_offset)
-        return fbe_vector_size
+// Get the vector size
+func (fm *FieldModelVector_NAME_) Size() int {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return 0
+    }
 
-    # Vector index operator
-    def __getitem__(self, index):
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
+    fbeVectorOffset := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    if (fbeVectorOffset == 0) || ((fm.buffer.Offset() + fbeVectorOffset + 4) > fm.buffer.Size()) {
+        return 0
+    }
 
-        fbe_vector_offset = self.read_uint32(self.fbe_offset)
-        assert ((fbe_vector_offset > 0) and ((self._buffer.offset + fbe_vector_offset + 4) <= self._buffer.size)), "Model is broken!"
+    fbeVectorSize := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeVectorOffset))
+    return fbeVectorSize
+}
 
-        fbe_vector_size = self.read_uint32(fbe_vector_offset)
-        assert (index < fbe_vector_size), "Index is out of bounds!"
-        if index >= fbe_vector_size:
-            raise IndexError("Index is out of bounds!")
+// Array index operator
+func (fm *FieldModelVector_NAME_) GetItem(index int) (*_MODEL_, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return nil, errors.New("model is broken")
+    }
 
-        self._model.fbe_offset = fbe_vector_offset + 4
-        self._model.fbe_shift(index * self._model.fbe_size)
-        return self._model
+    fbeVectorOffset := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    if (fbeVectorOffset == 0) || ((fm.buffer.Offset() + fbeVectorOffset + 4) > fm.buffer.Size()) {
+        return nil, errors.New("model is broken")
+    }
 
-    # Resize the vector and get its first model
-    def resize(self, size):
-        fbe_vector_size = size * self._model.fbe_size
-        fbe_vector_offset = self._buffer.allocate(4 + fbe_vector_size) - self._buffer.offset
-        assert ((fbe_vector_offset > 0) and ((self._buffer.offset + fbe_vector_offset + 4) <= self._buffer.size)), "Model is broken!"
+    fbeVectorSize := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeVectorOffset))
+    if index >= fbeVectorSize {
+        return nil, errors.New("index is out of bounds")
+    }
 
-        self.write_uint32(self.fbe_offset, fbe_vector_offset)
-        self.write_uint32(fbe_vector_offset, size)
-        self.write_count(fbe_vector_offset + 4, 0, fbe_vector_size)
+    fm.model.SetFBEOffset(fbeVectorOffset + 4)
+    fm.model.FBEShift(index * fm.model.FBESize())
+    return fm.model, nil
+}
 
-        self._model.fbe_offset = fbe_vector_offset + 4
-        return self._model
+// Resize the vector and get its first model
+func (fm *FieldModelVector_NAME_) Resize(size int) (*_MODEL_, error) {
+    fbeVectorSize := size * fm.model.FBESize()
+    fbeVectorOffset := fm.buffer.Allocate(4 + fbeVectorSize) - fm.buffer.Offset()
+    if (fbeVectorOffset == 0) || ((fm.buffer.Offset() + fbeVectorOffset + 4) > fm.buffer.Size()) {
+        return nil, errors.New("model is broken")
+    }
 
-    # Check if the vector is valid
-    def verify(self):
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return True
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint32(fbeVectorOffset))
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeVectorOffset, uint32(size))
+    fbe.WriteCount(fm.buffer.Data(), fm.buffer.Offset() + fbeVectorOffset + 4, 0, fbeVectorSize)
 
-        fbe_vector_offset = self.read_uint32(self.fbe_offset)
-        if fbe_vector_offset == 0:
-            return True
+    fm.model.SetFBEOffset(fbeVectorOffset + 4)
+    return fm.model, nil
+}
 
-        if (self._buffer.offset + fbe_vector_offset + 4) > self._buffer.size:
-            return False
+// Check if the vector is valid
+func (fm *FieldModelVector_NAME_) Verify() bool {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return true
+    }
 
-        fbe_vector_size = self.read_uint32(fbe_vector_offset)
+    fbeVectorOffset := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    if fbeVectorOffset == 0 {
+        return true
+    }
 
-        self._model.fbe_offset = fbe_vector_offset + 4
-        for i in range(fbe_vector_size):
-            if not self._model.verify():
-                return False
-            self._model.fbe_shift(self._model.fbe_size)
+    if (fm.buffer.Offset() + fbeVectorOffset + 4) > fm.buffer.Size() {
+        return false
+    }
 
-        return True
+    fbeVectorSize := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fbeVectorOffset))
 
-    # Get the vector
-    def get(self, values=None):
-        if values is None:
-            values = list()
+    fm.model.SetFBEOffset(fbeVectorOffset + 4)
+    for i := fbeVectorSize; i > 0; i-- {
+        if !fm.model.Verify() {
+            return false
+        }
+        fm.model.FBEShift(fm.model.FBESize())
+    }
 
-        values.clear()
+    return true
+}
 
-        fbe_vector_size = self.size
-        if fbe_vector_size == 0:
-            return values
+// Get the vector
+func (fm *FieldModelVector_NAME_) Get() ([]_TYPE_, error) {
+    values := make([]_TYPE_, 0)
 
-        fbe_model = self[0]
-        for i in range(fbe_vector_size):
-            value = fbe_model.get()
-            values.append(value)
-            fbe_model.fbe_shift(fbe_model.fbe_size)
+    fbeVectorSize := fm.Size()
+    if fbeVectorSize == 0 {
+        return values, nil
+    }
 
-        return values
+    values = make([]_TYPE_, 0, fbeVectorSize)
 
-    # Set the vector
-    def set(self, values):
-        assert (values is not None), "Invalid values parameter!"
-        if values is None:
-            raise ValueError("Invalid values parameter!")
+    fbeModel, err := fm.GetItem(0)
+    if err != nil {
+        return values, err
+    }
 
-        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
-            return
+    for i := fbeVectorSize; i > 0; i-- {
+        value, err := fbeModel.Get()
+        if err != nil {
+            return values, err
+        }
+        values = append(values, _GET_VALUE_)
+        fbeModel.FBEShift(fbeModel.FBESize())
+    }
 
-        fbe_model = self.resize(len(values))
-        for value in values:
-            fbe_model.set(value)
-            fbe_model.fbe_shift(fbe_model.fbe_size)
+    return values, nil
+}
+
+// Set the vector
+func (fm *FieldModelVector_NAME_) Set(values []_TYPE_) error {
+    if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
+        return errors.New("model is broken")
+    }
+
+    fbeModel, err := fm.Resize(len(values))
+    if err != nil {
+        return err
+    }
+
+    for _, value := range values {
+        err := fbeModel.Set(_SET_VALUE_)
+        if err != nil {
+            return err
+        }
+        fbeModel.FBEShift(fbeModel.FBESize())
+    }
+
+    return nil
+}
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_NAME_"), name);
+    code = std::regex_replace(code, std::regex("_TYPE_"), ConvertTypeFieldType(*field.type, field.optional));
+    code = std::regex_replace(code, std::regex("_MODEL_NEW_"), ConvertNewName(model));
+    code = std::regex_replace(code, std::regex("_MODEL_"), model);
+    code = std::regex_replace(code, std::regex("_GET_VALUE_"), (IsGoType(*field.type) || field.optional) ? "value" : "*value");
+    code = std::regex_replace(code, std::regex("_SET_VALUE_"), (IsGoType(*field.type) || field.optional) ? "value" : "&value");
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
-}
 
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+/*
 void GeneratorGo::GenerateFBEFieldModelSet()
 {
     std::string code = R"CODE(
@@ -3213,33 +3292,30 @@ func (fm *FinalModelOptional_NAME_) Verify() int {
     fm.buffer.Shift(fm.FBEOffset() + 1)
     fbeResult := fm.value.Verify()
     fm.buffer.Unshift(fm.FBEOffset() + 1)
-    return fbeResult
+    return 1 + fbeResult
 }
 
 // Get the optional value
 func (fm *FinalModelOptional_NAME_) Get() (_TYPE_ARG_, int, error) {
-    fbeResult := _TYPE_NEW_
-    fbeSize, err := fm.GetValue(fbeResult)
-    return fbeResult, fbeSize, err
-}
+    var fbeValue _TYPE_ARG_ = nil
 
-// Get the optional value by the given pointer
-func (fm *FinalModelOptional_NAME_) GetValue(fbeValue _TYPE_ARG_) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + 1) > fm.buffer.Size() {
-        return 0, errors.New("model is broken")
+        return fbeValue, 0, errors.New("model is broken")
     }
 
     if !fm.HasValue() {
-        return 1, nil
+        return fbeValue, 1, nil
     }
 
     var fbeResult int
     var err error
 
+    fbeValue = _TYPE_NEW_
+
     fm.buffer.Shift(fm.FBEOffset() + 1)
     _GET_VALUE_
     fm.buffer.Unshift(fm.FBEOffset() + 1)
-    return fbeResult, err
+    return fbeValue, 1 + fbeResult, err
 }
 
 // Set the optional value
@@ -3376,11 +3452,11 @@ func (fm *FinalModelArray_NAME_) Verify() int {
 }
 
 // Get the array
-func (fm *FinalModelArray_NAME_) Get(values []_TYPE_) (int, error) {
-    values = values[:0]
+func (fm *FinalModelArray_NAME_) Get() ([]_TYPE_, int, error) {
+    values := make([]_TYPE_, 0, fm.size)
 
     if (fm.buffer.Offset() + fm.FBEOffset()) > fm.buffer.Size() {
-        return 0, errors.New("model is broken")
+        return values, 0, errors.New("model is broken")
     }
 
     result := 0
@@ -3388,13 +3464,13 @@ func (fm *FinalModelArray_NAME_) Get(values []_TYPE_) (int, error) {
     for i := 0; i < fm.size; i++ {
         value, offset, err := fm.model.Get()
         if err != nil {
-            return result, err
+            return values, result, err
         }
         values = append(values, _GET_VALUE_)
         fm.model.FBEShift(offset)
         result += offset
     }
-    return result, nil
+    return values, result, nil
 }
 
 // Set the array
@@ -3412,7 +3488,7 @@ func (fm *FinalModelArray_NAME_) Set(values []_TYPE_) (int, error) {
     fm.model.SetFBEOffset(fm.FBEOffset())
     for i := 0; i < size; i++ {
         offset, err := fm.model.Set(_SET_VALUE_)
-        if err == nil {
+        if err != nil {
             return result, err
         }
         fm.model.FBEShift(offset)
@@ -3439,95 +3515,153 @@ func (fm *FinalModelArray_NAME_) Set(values []_TYPE_) (int, error) {
     // Close the file
     Close();
 }
-/*
-void GeneratorGo::GenerateFBEFinalModelVector()
+
+void GeneratorGo::GenerateFBEFinalModelVector(const std::shared_ptr<Package>& p, const std::string& name, const StructField& field, const std::string& model, const CppCommon::Path& path)
 {
+    // Open the output file
+    CppCommon::Path output = path / ("FinalModelVector" + name + ".go");
+    Open(output);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
+    // Generate package
+    WriteLine();
+    WriteLineIndent("package " + *p->name);
+
+    // Generate imports
+    WriteLine();
+    WriteLineIndent("import \"errors\"");
+    GenerateImports(p);
+
     std::string code = R"CODE(
+// Fast Binary Encoding _TYPE_ vector final model
+type FinalModelVector_NAME_ struct {
+    // Final model buffer
+    buffer *fbe.Buffer
+    // Final model buffer offset
+    offset int
 
-# Fast Binary Encoding vector final model
-class FinalModelVector(FinalModel):
-    __slots__ = "_model",
+    // Vector item final model
+    model *_MODEL_
+}
 
-    def __init__(self, model, buffer, offset):
-        super().__init__(buffer, offset)
-        self._model = model
+// Create a new _TYPE_ vector final model
+func NewFinalModelVector_NAME_(buffer *fbe.Buffer, offset int) *FinalModelVector_NAME_ {
+    fbeResult := FinalModelVector_NAME_{buffer: buffer, offset: offset}
+    fbeResult.model = _MODEL_NEW_(buffer, offset)
+    return &fbeResult
+}
 
-    # Get the allocation size
-    # noinspection PyMethodMayBeStatic
-    def fbe_allocation_size(self, values):
-        size = 4
-        for value in values:
-            size += self._model.fbe_allocation_size(value)
-        return size
+// Get the allocation size
+func (fm *FinalModelVector_NAME_) FBEAllocationSize(values []_TYPE_) int {
+    size := 4
+    for _, value := range values {
+        size += fm.model.FBEAllocationSize(_SET_VALUE_)
+    }
+    return size
+}
 
-    # Check if the vector is valid
-    def verify(self):
-        if (self._buffer.offset + self.fbe_offset + 4) > self._buffer.size:
-            return sys.maxsize
+// Get the final offset
+func (fm *FinalModelVector_NAME_) FBEOffset() int { return fm.offset }
+// Set the final offset
+func (fm *FinalModelVector_NAME_) SetFBEOffset(value int) { fm.offset = value }
 
-        fbe_vector_size = self.read_uint32(self.fbe_offset)
+// Shift the current final offset
+func (fm *FinalModelVector_NAME_) FBEShift(size int) { fm.offset += size }
+// Unshift the current final offset
+func (fm *FinalModelVector_NAME_) FBEUnshift(size int) { fm.offset -= size }
 
-        size = 4
-        self._model.fbe_offset = self.fbe_offset + 4
-        for i in range(fbe_vector_size):
-            offset = self._model.verify()
-            if offset == sys.maxsize:
-                return sys.maxsize
-            self._model.fbe_shift(offset)
-            size += offset
-        return size
+// Check if the vector is valid
+func (fm *FinalModelVector_NAME_) Verify() int {
+    if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
+        return fbe.MaxInt
+    }
 
-    # Get the vector
-    def get(self, values=None):
-        if values is None:
-            values = list()
+    fbeVectorSize := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
 
-        values.clear()
+    size := 4
+    fm.model.SetFBEOffset(fm.FBEOffset() + 4)
+    for i := fbeVectorSize; i > 0; i-- {
+        offset := fm.model.Verify()
+        if offset == fbe.MaxInt {
+            return fbe.MaxInt
+        }
+        fm.model.FBEShift(offset)
+        size += offset
+    }
+    return size
+}
 
-        assert ((self._buffer.offset + self.fbe_offset + 4) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + 4) > self._buffer.size:
-            return values, 0
+// Get the vector
+func (fm *FinalModelVector_NAME_) Get() ([]_TYPE_, int, error) {
+    values := make([]_TYPE_, 0)
 
-        fbe_vector_size = self.read_uint32(self.fbe_offset)
-        if fbe_vector_size == 0:
-            return values, 4
+    if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
+        return values, 0, errors.New("model is broken")
+    }
 
-        size = 4
-        self._model.fbe_offset = self.fbe_offset + 4
-        for i in range(fbe_vector_size):
-            value = self._model.get()
-            values.append(value[0])
-            self._model.fbe_shift(value[1])
-            size += value[1]
-        return values, size
+    fbeVectorSize := int(fbe.ReadUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset()))
+    if fbeVectorSize == 0 {
+        return values, 4, nil
+    }
 
-    # Set the vector
-    def set(self, values):
-        assert (values is not None), "Invalid values parameter!"
-        if values is None:
-            raise ValueError("Invalid values parameter!")
+    values = make([]_TYPE_, 0, fbeVectorSize)
 
-        assert ((self._buffer.offset + self.fbe_offset + 4) <= self._buffer.size), "Model is broken!"
-        if (self._buffer.offset + self.fbe_offset + 4) > self._buffer.size:
-            return 0
+    size := 4
+    fm.model.SetFBEOffset(fm.FBEOffset() + 4)
+    for i := 0; i < fbeVectorSize; i++ {
+        value, offset, err := fm.model.Get()
+        if err != nil {
+            return values, size, err
+        }
+        values = append(values, _GET_VALUE_)
+        fm.model.FBEShift(offset)
+        size += offset
+    }
+    return values, size, nil
+}
 
-        self.write_uint32(self.fbe_offset, len(values))
+// Set the vector
+func (fm *FinalModelVector_NAME_) Set(values []_TYPE_) (int, error) {
+    if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
+        return 0, errors.New("model is broken")
+    }
 
-        size = 4
-        self._model.fbe_offset = self.fbe_offset + 4
-        for value in values:
-            offset = self._model.set(value)
-            self._model.fbe_shift(offset)
-            size += offset
-        return size
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint32(len(values)))
+
+    size := 4
+    fm.model.SetFBEOffset(fm.FBEOffset() + 4)
+    for _, value := range values {
+        offset, err := fm.model.Set(_SET_VALUE_)
+        if err != nil {
+            return size, err
+        }
+        fm.model.FBEShift(offset)
+        size += offset
+    }
+    return size, nil
+}
 )CODE";
 
     // Prepare code template
+    code = std::regex_replace(code, std::regex("_NAME_"), name);
+    code = std::regex_replace(code, std::regex("_TYPE_"), ConvertTypeFieldType(*field.type, field.optional));
+    code = std::regex_replace(code, std::regex("_MODEL_NEW_"), ConvertNewName(model));
+    code = std::regex_replace(code, std::regex("_MODEL_"), model);
+    code = std::regex_replace(code, std::regex("_GET_VALUE_"), (IsGoType(*field.type) || field.optional) ? "value" : "*value");
+    code = std::regex_replace(code, std::regex("_SET_VALUE_"), (IsGoType(*field.type) || field.optional) ? "value" : "&value");
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
-}
 
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+/*
 void GeneratorGo::GenerateFBEFinalModelSet()
 {
     std::string code = R"CODE(
@@ -4206,13 +4340,20 @@ void GeneratorGo::GenerateContainers(const std::shared_ptr<Package>& p, const Cp
                         else
                             GenerateFBEFieldModelArray(p, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), *field, ConvertTypeFieldDeclaration(*field->type, field->optional, final), path);
                     }
-                    if (field->vector || field->list || field->set)
+                    if (field->vector || field->list)
+                    {
+                        if (final)
+                            GenerateFBEFinalModelVector(p, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), *field, ConvertTypeFieldDeclaration(*field->type, field->optional, final), path);
+                        else
+                            GenerateFBEFieldModelVector(p, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), *field, ConvertTypeFieldDeclaration(*field->type, field->optional, final), path);
+                    }
+                    if (field->set)
                     {
                         /*
                         if (final)
-                            GenerateFBEFinalModelVector(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final));
+                            GenerateFBEFinalModelVector(p, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), *field, ConvertTypeFieldDeclaration(*field->type, field->optional, final), path);
                         else
-                            GenerateFBEFieldModelVector(*p->name, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), ConvertTypeFieldType(*field->type, field->optional), ConvertTypeFieldDeclaration(*field->type, field->optional, final));
+                            GenerateFBEFieldModelVector(p, (field->optional ? "Optional" : "") + ConvertTypeFieldName(*field->type), *field, ConvertTypeFieldDeclaration(*field->type, field->optional, final), path);
                         */
                     }
                     if (field->map || field->hash)
@@ -5692,17 +5833,8 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
             WriteLine();
             WriteLineIndent("if (fbeCurrentSize + fm." + ConvertCase(*field->name) + ".FBESize()) <= fbeStructSize {");
             Indent(1);
-            if (field->array)
-                WriteLineIndent("_ = fm." + ConvertCase(*field->name) + ".Get(fbeValue." + ConvertCase(*field->name) + "[:])");
-            else if (field->vector || field->list || field->set || field->map || field->hash)
-            {
-                if (field->value)
-                    WriteLineIndent("_ = fm." + ConvertCase(*field->name) + ".GetValueDefault(fbeValue." + ConvertCase(*field->name) + ", " + ConvertConstant(*field->type, *field->value, field->optional) + ")");
-                else
-                    WriteLineIndent("_ = fm." + ConvertCase(*field->name) + ".GetValue(fbeValue." + ConvertCase(*field->name) + ")");
-            }
-            else if (field->optional)
-                WriteLineIndent("_ = fm." + ConvertCase(*field->name) + ".GetValue(fbeValue." + ConvertCase(*field->name) + ")");
+            if (field->array || field->vector || field->list || field->set || field->map || field->hash || field->optional)
+                WriteLineIndent("fbeValue." + ConvertCase(*field->name) + ", _ = fm." + ConvertCase(*field->name) + ".Get()");
             else if (!IsGoType(*field->type))
             {
                 if (field->value)
@@ -6194,10 +6326,8 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
         {
             WriteLine();
             WriteLineIndent("fm." + ConvertCase(*field->name) + ".SetFBEOffset(fbeCurrentOffset)");
-            if (field->array)
-                WriteLineIndent("if fbeFieldSize, err = fm." + ConvertCase(*field->name) + ".Get(fbeValue." + ConvertCase(*field->name) + "[:]); err != nil {");
-            else if (field->vector || field->list || field->set || field->map || field->hash || field->optional)
-                WriteLineIndent("if fbeFieldSize, err = fm." + ConvertCase(*field->name) + ".GetValue(fbeValue." + ConvertCase(*field->name) + "); err != nil {");
+            if (field->array || field->vector || field->list || field->set || field->map || field->hash || field->optional)
+                WriteLineIndent("if fbeValue." + ConvertCase(*field->name) + ", fbeFieldSize, err = fm." + ConvertCase(*field->name) + ".Get(); err != nil {");
             else if (!IsGoType(*field->type))
                 WriteLineIndent("if fbeFieldSize, err = fm." + ConvertCase(*field->name) + ".GetValue(&fbeValue." + ConvertCase(*field->name) + "); err != nil {");
             else

@@ -206,28 +206,28 @@ func (fm *FieldModelStructSet) GetFields(fbeValue *StructSet, fbeStructSize int)
     fbeCurrentSize := 4 + 4
 
     if (fbeCurrentSize + fm.F1.FBESize()) <= fbeStructSize {
-        _ = fm.F1.GetValue(fbeValue.F1)
+        fbeValue.F1, _ = fm.F1.Get()
     } else {
         fbeValue.F1 = make(setF1)
     }
     fbeCurrentSize += fm.F1.FBESize()
 
     if (fbeCurrentSize + fm.F2.FBESize()) <= fbeStructSize {
-        _ = fm.F2.GetValue(fbeValue.F2)
+        fbeValue.F2, _ = fm.F2.Get()
     } else {
         fbeValue.F2 = make(setF2)
     }
     fbeCurrentSize += fm.F2.FBESize()
 
     if (fbeCurrentSize + fm.F3.FBESize()) <= fbeStructSize {
-        _ = fm.F3.GetValue(fbeValue.F3)
+        fbeValue.F3, _ = fm.F3.Get()
     } else {
         fbeValue.F3 = make(setF3)
     }
     fbeCurrentSize += fm.F3.FBESize()
 
     if (fbeCurrentSize + fm.F4.FBESize()) <= fbeStructSize {
-        _ = fm.F4.GetValue(fbeValue.F4)
+        fbeValue.F4, _ = fm.F4.Get()
     } else {
         fbeValue.F4 = make(setF4)
     }

@@ -85,11 +85,11 @@ func (fm *FinalModelArrayOptionalEnumSimple) Verify() int {
 }
 
 // Get the array
-func (fm *FinalModelArrayOptionalEnumSimple) Get(values []*EnumSimple) (int, error) {
-    values = values[:0]
+func (fm *FinalModelArrayOptionalEnumSimple) Get() ([]*EnumSimple, int, error) {
+    values := make([]*EnumSimple, 0, fm.size)
 
     if (fm.buffer.Offset() + fm.FBEOffset()) > fm.buffer.Size() {
-        return 0, errors.New("model is broken")
+        return values, 0, errors.New("model is broken")
     }
 
     result := 0
@@ -97,13 +97,13 @@ func (fm *FinalModelArrayOptionalEnumSimple) Get(values []*EnumSimple) (int, err
     for i := 0; i < fm.size; i++ {
         value, offset, err := fm.model.Get()
         if err != nil {
-            return result, err
+            return values, result, err
         }
         values = append(values, value)
         fm.model.FBEShift(offset)
         result += offset
     }
-    return result, nil
+    return values, result, nil
 }
 
 // Set the array
@@ -121,7 +121,7 @@ func (fm *FinalModelArrayOptionalEnumSimple) Set(values []*EnumSimple) (int, err
     fm.model.SetFBEOffset(fm.FBEOffset())
     for i := 0; i < size; i++ {
         offset, err := fm.model.Set(values[i])
-        if err == nil {
+        if err != nil {
             return result, err
         }
         fm.model.FBEShift(offset)

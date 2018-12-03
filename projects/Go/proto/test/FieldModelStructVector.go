@@ -278,70 +278,70 @@ func (fm *FieldModelStructVector) GetFields(fbeValue *StructVector, fbeStructSiz
     fbeCurrentSize := 4 + 4
 
     if (fbeCurrentSize + fm.F1.FBESize()) <= fbeStructSize {
-        _ = fm.F1.GetValue(fbeValue.F1)
+        fbeValue.F1, _ = fm.F1.Get()
     } else {
         fbeValue.F1 = make([]byte, 0)
     }
     fbeCurrentSize += fm.F1.FBESize()
 
     if (fbeCurrentSize + fm.F2.FBESize()) <= fbeStructSize {
-        _ = fm.F2.GetValue(fbeValue.F2)
+        fbeValue.F2, _ = fm.F2.Get()
     } else {
         fbeValue.F2 = make([]*byte, 0)
     }
     fbeCurrentSize += fm.F2.FBESize()
 
     if (fbeCurrentSize + fm.F3.FBESize()) <= fbeStructSize {
-        _ = fm.F3.GetValue(fbeValue.F3)
+        fbeValue.F3, _ = fm.F3.Get()
     } else {
         fbeValue.F3 = make([][]byte, 0)
     }
     fbeCurrentSize += fm.F3.FBESize()
 
     if (fbeCurrentSize + fm.F4.FBESize()) <= fbeStructSize {
-        _ = fm.F4.GetValue(fbeValue.F4)
+        fbeValue.F4, _ = fm.F4.Get()
     } else {
         fbeValue.F4 = make([]*[]byte, 0)
     }
     fbeCurrentSize += fm.F4.FBESize()
 
     if (fbeCurrentSize + fm.F5.FBESize()) <= fbeStructSize {
-        _ = fm.F5.GetValue(fbeValue.F5)
+        fbeValue.F5, _ = fm.F5.Get()
     } else {
         fbeValue.F5 = make([]EnumSimple, 0)
     }
     fbeCurrentSize += fm.F5.FBESize()
 
     if (fbeCurrentSize + fm.F6.FBESize()) <= fbeStructSize {
-        _ = fm.F6.GetValue(fbeValue.F6)
+        fbeValue.F6, _ = fm.F6.Get()
     } else {
         fbeValue.F6 = make([]*EnumSimple, 0)
     }
     fbeCurrentSize += fm.F6.FBESize()
 
     if (fbeCurrentSize + fm.F7.FBESize()) <= fbeStructSize {
-        _ = fm.F7.GetValue(fbeValue.F7)
+        fbeValue.F7, _ = fm.F7.Get()
     } else {
         fbeValue.F7 = make([]FlagsSimple, 0)
     }
     fbeCurrentSize += fm.F7.FBESize()
 
     if (fbeCurrentSize + fm.F8.FBESize()) <= fbeStructSize {
-        _ = fm.F8.GetValue(fbeValue.F8)
+        fbeValue.F8, _ = fm.F8.Get()
     } else {
         fbeValue.F8 = make([]*FlagsSimple, 0)
     }
     fbeCurrentSize += fm.F8.FBESize()
 
     if (fbeCurrentSize + fm.F9.FBESize()) <= fbeStructSize {
-        _ = fm.F9.GetValue(fbeValue.F9)
+        fbeValue.F9, _ = fm.F9.Get()
     } else {
         fbeValue.F9 = make([]StructSimple, 0)
     }
     fbeCurrentSize += fm.F9.FBESize()
 
     if (fbeCurrentSize + fm.F10.FBESize()) <= fbeStructSize {
-        _ = fm.F10.GetValue(fbeValue.F10)
+        fbeValue.F10, _ = fm.F10.Get()
     } else {
         fbeValue.F10 = make([]*StructSimple, 0)
     }

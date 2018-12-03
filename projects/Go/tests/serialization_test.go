@@ -1,99 +1,44 @@
 package tests
 
-import (
-	"github.com/stretchr/testify/assert"
-	"testing"
-)
+import "testing"
+import "github.com/stretchr/testify/assert"
 import "../proto/fbe"
 import "../proto/proto"
 
-func TestSerializationOrder(t *testing.T) {
-	// Create a new struct
-	struct1 := proto.NewOrder()
-	struct1.Uid = 123
-	struct1.Symbol = "EURUSD"
-	struct1.Side = proto.OrderSide_sell
-	struct1.Type = proto.OrderType_stop
-	struct1.Price = 123.456
-	struct1.Volume = 987.654
+func TestSerializationDomain(t *testing.T) {
+	// Create a new account with some orders
+	var account = proto.NewAccount()
+	account.Uid = 1
+	account.Name = "Test"
+	account.State = proto.State_good
+	account.Wallet = proto.Balance{Currency: "USD", Amount: 1000.0}
+	account.Asset = &proto.Balance{Currency: "EUR", Amount: 100.0}
+	account.Orders = append(account.Orders, proto.Order{Uid: 1, Symbol: "EURUSD", Side: proto.OrderSide_buy, Type: proto.OrderType_market, Price: 1.23456, Volume: 1000.0})
+	account.Orders = append(account.Orders, proto.Order{Uid: 2, Symbol: "EURUSD", Side: proto.OrderSide_sell, Type: proto.OrderType_limit, Price: 1.0, Volume: 100.0})
+	account.Orders = append(account.Orders, proto.Order{Uid: 3, Symbol: "EURUSD", Side: proto.OrderSide_buy, Type: proto.OrderType_stop, Price: 1.5, Volume: 10.0})
 
 	// Serialize the struct to the FBE stream
-	writer := proto.NewOrderModel(fbe.NewEmptyBuffer())
-	assert.EqualValues(t, writer.Model().FBEType(), 1)
+	writer := proto.NewAccountModel(fbe.NewEmptyBuffer())
 	assert.EqualValues(t, writer.Model().FBEOffset(), 4)
-	serialized, err := writer.Serialize(struct1)
+	serialized, err := writer.Serialize(account)
 	assert.Nil(t, err)
 	assert.EqualValues(t, serialized, writer.Buffer().Size())
 	assert.True(t, writer.Verify())
 	writer.Next(serialized)
-	assert.EqualValues(t, writer.Model().FBEOffset(), 4+writer.Buffer().Size())
+	assert.EqualValues(t, writer.Model().FBEOffset(), 4 + writer.Buffer().Size())
 
 	// Check the serialized FBE size
-	assert.EqualValues(t, writer.Buffer().Size(), 52)
+	assert.EqualValues(t, writer.Buffer().Size(), 252)
 
 	// Deserialize the struct from the FBE stream
-	reader := proto.NewOrderModel(fbe.NewAttachedBuffer(writer.Buffer()))
-	assert.EqualValues(t, reader.Model().FBEType(), 1)
+	reader := proto.NewAccountModel(fbe.NewAttachedBuffer(writer.Buffer()))
 	assert.EqualValues(t, reader.Model().FBEOffset(), 4)
 	assert.True(t, reader.Verify())
-	struct2, deserialized, err := reader.Deserialize()
+	account2, deserialized, err := reader.Deserialize()
 	assert.Nil(t, err)
 	assert.EqualValues(t, deserialized, reader.Buffer().Size())
 	reader.Next(deserialized)
-	assert.EqualValues(t, reader.Model().FBEOffset(), 4+reader.Buffer().Size())
-
-	println(struct2)
-}
-
-func TestSerializationFinalOrder(t *testing.T) {
-	// Create a new struct
-	struct1 := proto.NewOrder()
-	struct1.Uid = 123
-	struct1.Symbol = "EURUSD"
-	struct1.Side = proto.OrderSide_sell
-	struct1.Type = proto.OrderType_stop
-	struct1.Price = 123.456
-	struct1.Volume = 987.654
-
-	// Serialize the struct to the FBE stream
-	writer := proto.NewOrderFinalModel(fbe.NewEmptyBuffer())
-	assert.EqualValues(t, writer.Model().FBEType(), 1)
-	serialized, err := writer.Serialize(struct1)
-	assert.Nil(t, err)
-	assert.EqualValues(t, serialized, writer.Buffer().Size())
-	assert.True(t, writer.Verify())
-	writer.Next(serialized)
-
-	// Check the serialized FBE size
-	assert.EqualValues(t, writer.Buffer().Size(), 40)
-
-	// Deserialize the struct from the FBE stream
-	reader := proto.NewOrderFinalModel(fbe.NewAttachedBuffer(writer.Buffer()))
-	assert.EqualValues(t, reader.Model().FBEType(), 1)
-	assert.True(t, reader.Verify())
-	struct2, deserialized, err := reader.Deserialize()
-	assert.Nil(t, err)
-	assert.EqualValues(t, deserialized, reader.Buffer().Size())
-	reader.Next(deserialized)
-
-	println(struct2)
-}
-/*
-func TestSerializationDomain(t *testing.T) {
-	// Define a source JSON string
-	json := []byte(`{"uid":1,"name":"Test","state":6,"wallet":{"currency":"USD","amount":1000.0},"asset":{"currency":"EUR","amount":100.0},"orders":[{"uid":1,"symbol":"EURUSD","side":0,"type":0,"price":1.23456,"volume":1000.0},{"uid":2,"symbol":"EURUSD","side":1,"type":1,"price":1.0,"volume":100.0},{"uid":3,"symbol":"EURUSD","side":0,"type":2,"price":1.5,"volume":10.0}]}`)
-
-	// Create a new account from the source JSON string
-	account1, _ := proto.NewAccountFromJSON(json)
-
-	// Serialize the account to the JSON string
-	json, _ = account1.JSON()
-
-	// Check the serialized JSON size
-	assert.NotEmpty(t, json)
-
-	// Deserialize the account from the JSON string
-	account2, _ := proto.NewAccountFromJSON(json)
+	assert.EqualValues(t, reader.Model().FBEOffset(), 4 + reader.Buffer().Size())
 
 	assert.EqualValues(t, account2.Uid, 1)
 	assert.EqualValues(t, account2.Name, "Test")
@@ -123,7 +68,7 @@ func TestSerializationDomain(t *testing.T) {
 	assert.EqualValues(t, account2.Orders[2].Price, 1.5)
 	assert.EqualValues(t, account2.Orders[2].Volume, 10.0)
 }
-
+/*
 func TestSerializationStructSimple(t *testing.T) {
 	// Create a new struct
 	struct1 := test.NewStructSimple()

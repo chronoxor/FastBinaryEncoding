@@ -118,20 +118,18 @@ func (fm *FieldModelOptionalprotoOrderSide) GetEnd(fbeBegin int) {
 
 // Get the optional value
 func (fm *FieldModelOptionalprotoOrderSide) Get() (*proto.OrderSide, error) {
-    fbeResult := proto.NewOrderSide()
-    return fbeResult, fm.GetValue(fbeResult)
-}
+    var fbeValue *proto.OrderSide = nil
 
-// Get the optional value by the given pointer
-func (fm *FieldModelOptionalprotoOrderSide) GetValue(fbeValue *proto.OrderSide) error {
     fbeBegin, err := fm.GetBegin()
     if fbeBegin == 0 {
-        return err
+        return fbeValue, err
     }
+
+    fbeValue = proto.NewOrderSide()
 
     err = fm.value.GetValue(fbeValue)
     fm.GetEnd(fbeBegin)
-    return err
+    return fbeValue, err
 }
 
 // Set the optional value (begin phase)

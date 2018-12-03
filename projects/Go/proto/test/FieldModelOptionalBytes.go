@@ -118,20 +118,18 @@ func (fm *FieldModelOptionalBytes) GetEnd(fbeBegin int) {
 
 // Get the optional value
 func (fm *FieldModelOptionalBytes) Get() (*[]byte, error) {
-    fbeResult := fbe.OptionalBytes(make([]byte, 0))
-    return fbeResult, fm.GetValue(fbeResult)
-}
+    var fbeValue *[]byte = nil
 
-// Get the optional value by the given pointer
-func (fm *FieldModelOptionalBytes) GetValue(fbeValue *[]byte) error {
     fbeBegin, err := fm.GetBegin()
     if fbeBegin == 0 {
-        return err
+        return fbeValue, err
     }
+
+    fbeValue = fbe.OptionalBytes(make([]byte, 0))
 
     *fbeValue, err = fm.value.Get()
     fm.GetEnd(fbeBegin)
-    return err
+    return fbeValue, err
 }
 
 // Set the optional value (begin phase)

@@ -127,28 +127,28 @@ func (fm *FinalModelStructSet) GetFields(fbeValue *StructSet) (int, error) {
     fbeFieldSize := 0
 
     fm.F1.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F1.GetValue(fbeValue.F1); err != nil {
+    if fbeValue.F1, fbeFieldSize, err = fm.F1.Get(); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F2.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F2.GetValue(fbeValue.F2); err != nil {
+    if fbeValue.F2, fbeFieldSize, err = fm.F2.Get(); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F3.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F3.GetValue(fbeValue.F3); err != nil {
+    if fbeValue.F3, fbeFieldSize, err = fm.F3.Get(); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F4.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F4.GetValue(fbeValue.F4); err != nil {
+    if fbeValue.F4, fbeFieldSize, err = fm.F4.Get(); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize

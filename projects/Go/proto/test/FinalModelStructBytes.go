@@ -125,14 +125,14 @@ func (fm *FinalModelStructBytes) GetFields(fbeValue *StructBytes) (int, error) {
     fbeCurrentSize += fbeFieldSize
 
     fm.F2.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F2.GetValue(fbeValue.F2); err != nil {
+    if fbeValue.F2, fbeFieldSize, err = fm.F2.Get(); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F3.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F3.GetValue(fbeValue.F3); err != nil {
+    if fbeValue.F3, fbeFieldSize, err = fm.F3.Get(); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize

@@ -54,7 +54,7 @@ private:
     void GenerateFBEFieldModelString(const std::string& package);
     void GenerateFBEFieldModelOptional(const std::shared_ptr<Package>& p, const std::string& name, const StructField& field, const std::string& model, const CppCommon::Path& path);
     void GenerateFBEFieldModelArray(const std::shared_ptr<Package>& p, const std::string& name, const StructField& field, const std::string& model, const CppCommon::Path& path);
-    //void GenerateFBEFieldModelVector();
+    void GenerateFBEFieldModelVector(const std::shared_ptr<Package>& p, const std::string& name, const StructField& field, const std::string& model, const CppCommon::Path& path);
     //void GenerateFBEFieldModelSet();
     //void GenerateFBEFieldModelMap();
     void GenerateFBEFieldModelEnumFlags(const std::string& package, const std::string& name, const std::string& type);
@@ -66,7 +66,7 @@ private:
     void GenerateFBEFinalModelString(const std::string& package);
     void GenerateFBEFinalModelOptional(const std::shared_ptr<Package>& p, const std::string& name, const StructField& field, const std::string& model, const CppCommon::Path& path);
     void GenerateFBEFinalModelArray(const std::shared_ptr<Package>& p, const std::string& name, const StructField& field, const std::string& model, const CppCommon::Path& path);
-    //void GenerateFBEFinalModelVector();
+    void GenerateFBEFinalModelVector(const std::shared_ptr<Package>& p, const std::string& name, const StructField& field, const std::string& model, const CppCommon::Path& path);
     //void GenerateFBEFinalModelSet();
     //void GenerateFBEFinalModelMap();
     void GenerateFBEFinalModelEnumFlags(const std::string& package, const std::string& name, const std::string& type);

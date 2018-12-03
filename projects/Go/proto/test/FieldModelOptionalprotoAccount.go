@@ -118,20 +118,18 @@ func (fm *FieldModelOptionalprotoAccount) GetEnd(fbeBegin int) {
 
 // Get the optional value
 func (fm *FieldModelOptionalprotoAccount) Get() (*proto.Account, error) {
-    fbeResult := proto.NewAccount()
-    return fbeResult, fm.GetValue(fbeResult)
-}
+    var fbeValue *proto.Account = nil
 
-// Get the optional value by the given pointer
-func (fm *FieldModelOptionalprotoAccount) GetValue(fbeValue *proto.Account) error {
     fbeBegin, err := fm.GetBegin()
     if fbeBegin == 0 {
-        return err
+        return fbeValue, err
     }
+
+    fbeValue = proto.NewAccount()
 
     err = fm.value.GetValue(fbeValue)
     fm.GetEnd(fbeBegin)
-    return err
+    return fbeValue, err
 }
 
 // Set the optional value (begin phase)

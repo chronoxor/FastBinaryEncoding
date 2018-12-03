@@ -118,20 +118,18 @@ func (fm *FieldModelOptionalFlagsSimple) GetEnd(fbeBegin int) {
 
 // Get the optional value
 func (fm *FieldModelOptionalFlagsSimple) Get() (*FlagsSimple, error) {
-    fbeResult := NewFlagsSimple()
-    return fbeResult, fm.GetValue(fbeResult)
-}
+    var fbeValue *FlagsSimple = nil
 
-// Get the optional value by the given pointer
-func (fm *FieldModelOptionalFlagsSimple) GetValue(fbeValue *FlagsSimple) error {
     fbeBegin, err := fm.GetBegin()
     if fbeBegin == 0 {
-        return err
+        return fbeValue, err
     }
+
+    fbeValue = NewFlagsSimple()
 
     err = fm.value.GetValue(fbeValue)
     fm.GetEnd(fbeBegin)
-    return err
+    return fbeValue, err
 }
 
 // Set the optional value (begin phase)

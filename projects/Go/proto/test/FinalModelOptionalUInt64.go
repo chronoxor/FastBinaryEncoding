@@ -77,33 +77,30 @@ func (fm *FinalModelOptionalUInt64) Verify() int {
     fm.buffer.Shift(fm.FBEOffset() + 1)
     fbeResult := fm.value.Verify()
     fm.buffer.Unshift(fm.FBEOffset() + 1)
-    return fbeResult
+    return 1 + fbeResult
 }
 
 // Get the optional value
 func (fm *FinalModelOptionalUInt64) Get() (*uint64, int, error) {
-    fbeResult := fbe.OptionalUInt64(0)
-    fbeSize, err := fm.GetValue(fbeResult)
-    return fbeResult, fbeSize, err
-}
+    var fbeValue *uint64 = nil
 
-// Get the optional value by the given pointer
-func (fm *FinalModelOptionalUInt64) GetValue(fbeValue *uint64) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + 1) > fm.buffer.Size() {
-        return 0, errors.New("model is broken")
+        return fbeValue, 0, errors.New("model is broken")
     }
 
     if !fm.HasValue() {
-        return 1, nil
+        return fbeValue, 1, nil
     }
 
     var fbeResult int
     var err error
 
+    fbeValue = fbe.OptionalUInt64(0)
+
     fm.buffer.Shift(fm.FBEOffset() + 1)
     *fbeValue, fbeResult, err = fm.value.Get()
     fm.buffer.Unshift(fm.FBEOffset() + 1)
-    return fbeResult, err
+    return fbeValue, 1 + fbeResult, err
 }
 
 // Set the optional value

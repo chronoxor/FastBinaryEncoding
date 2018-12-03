@@ -118,20 +118,18 @@ func (fm *FieldModelOptionalEnumTyped) GetEnd(fbeBegin int) {
 
 // Get the optional value
 func (fm *FieldModelOptionalEnumTyped) Get() (*EnumTyped, error) {
-    fbeResult := NewEnumTyped()
-    return fbeResult, fm.GetValue(fbeResult)
-}
+    var fbeValue *EnumTyped = nil
 
-// Get the optional value by the given pointer
-func (fm *FieldModelOptionalEnumTyped) GetValue(fbeValue *EnumTyped) error {
     fbeBegin, err := fm.GetBegin()
     if fbeBegin == 0 {
-        return err
+        return fbeValue, err
     }
+
+    fbeValue = NewEnumTyped()
 
     err = fm.value.GetValue(fbeValue)
     fm.GetEnd(fbeBegin)
-    return err
+    return fbeValue, err
 }
 
 // Set the optional value (begin phase)

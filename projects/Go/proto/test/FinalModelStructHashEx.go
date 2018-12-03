@@ -109,14 +109,14 @@ func (fm *FinalModelStructHashEx) GetFields(fbeValue *StructHashEx) (int, error)
     fbeFieldSize := 0
 
     fm.F1.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F1.GetValue(fbeValue.F1); err != nil {
+    if fbeValue.F1, fbeFieldSize, err = fm.F1.Get(); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.F2.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.F2.GetValue(fbeValue.F2); err != nil {
+    if fbeValue.F2, fbeFieldSize, err = fm.F2.Get(); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize

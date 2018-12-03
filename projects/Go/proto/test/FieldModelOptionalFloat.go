@@ -118,20 +118,18 @@ func (fm *FieldModelOptionalFloat) GetEnd(fbeBegin int) {
 
 // Get the optional value
 func (fm *FieldModelOptionalFloat) Get() (*float32, error) {
-    fbeResult := fbe.OptionalFloat32(0.0)
-    return fbeResult, fm.GetValue(fbeResult)
-}
+    var fbeValue *float32 = nil
 
-// Get the optional value by the given pointer
-func (fm *FieldModelOptionalFloat) GetValue(fbeValue *float32) error {
     fbeBegin, err := fm.GetBegin()
     if fbeBegin == 0 {
-        return err
+        return fbeValue, err
     }
+
+    fbeValue = fbe.OptionalFloat32(0.0)
 
     *fbeValue, err = fm.value.Get()
     fm.GetEnd(fbeBegin)
-    return err
+    return fbeValue, err
 }
 
 // Set the optional value (begin phase)

@@ -173,14 +173,14 @@ func (fm *FinalModelAccount) GetFields(fbeValue *Account) (int, error) {
     fbeCurrentSize += fbeFieldSize
 
     fm.Asset.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.Asset.GetValue(fbeValue.Asset); err != nil {
+    if fbeValue.Asset, fbeFieldSize, err = fm.Asset.Get(); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
     fm.Orders.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.Orders.GetValue(fbeValue.Orders); err != nil {
+    if fbeValue.Orders, fbeFieldSize, err = fm.Orders.Get(); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize

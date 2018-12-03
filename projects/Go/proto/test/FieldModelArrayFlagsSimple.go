@@ -87,24 +87,24 @@ func (fm *FieldModelArrayFlagsSimple) Verify() bool {
 }
 
 // Get the array
-func (fm *FieldModelArrayFlagsSimple) Get(values []FlagsSimple) error {
-    values = values[:0]
+func (fm *FieldModelArrayFlagsSimple) Get() ([]FlagsSimple, error) {
+    values := make([]FlagsSimple, 0, fm.size)
 
     fbeModel, err := fm.GetItem(0)
     if err != nil {
-        return err
+        return values, err
     }
 
     for i := 0; i < fm.size; i++ {
         value, err := fbeModel.Get()
-        if err == nil {
-            return err
+        if err != nil {
+            return values, err
         }
         values = append(values, *value)
         fbeModel.FBEShift(fbeModel.FBESize())
     }
 
-    return nil
+    return values, nil
 }
 
 // Set the array
@@ -125,7 +125,7 @@ func (fm *FieldModelArrayFlagsSimple) Set(values []FlagsSimple) error {
 
     for i := 0; i < size; i++ {
         err := fbeModel.Set(&values[i])
-        if err == nil {
+        if err != nil {
             return err
         }
         fbeModel.FBEShift(fbeModel.FBESize())
