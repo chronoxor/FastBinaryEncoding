@@ -979,8 +979,8 @@ Serialization benchmark results:
 | .NET Core Linux          |    252 bytes |    1 189 768 ops/s |             841 ns |
 | .NET Core Linux (Final)  |    152 bytes |    1 315 270 ops/s |             760 ns |
 | .NET Core Linux (JSON)   |    341 bytes |      366 435 ops/s |           2 729 ns |
-| Go Win64                 |    ??? bytes |    2 739 726 ops/s |             365 ns |
-| Go Win64 (Final)         |    ??? bytes |    2 949 852 ops/s |             339 ns |
+| Go Win64                 |    252 bytes |    2 739 726 ops/s |             365 ns |
+| Go Win64 (Final)         |    152 bytes |    2 949 852 ops/s |             339 ns |
 | Go Win64 (JSON)          |    341 bytes |      258 732 ops/s |           3 865 ns |
 | Java Win64               |    252 bytes |    4 247 162 ops/s |             236 ns |
 | Java Win64 (Final)       |    152 bytes |    4 883 205 ops/s |             205 ns |
@@ -1021,8 +1021,8 @@ Deserialization benchmark results:
 | .NET Core Linux          |    252 bytes |        804 052 ops/s |             1 244 ns |
 | .NET Core Linux (Final)  |    152 bytes |      1 343 544 ops/s |               744 ns |
 | .NET Core Linux (JSON)   |    341 bytes |        222 074 ops/s |             4 503 ns |
-| Go Win64                 |    ??? bytes |      1 510 574 ops/s |               662 ns |
-| Go Win64 (Final)         |    ??? bytes |      1 540 832 ops/s |               649 ns |
+| Go Win64                 |    252 bytes |      1 510 574 ops/s |               662 ns |
+| Go Win64 (Final)         |    152 bytes |      1 540 832 ops/s |               649 ns |
 | Go Win64 (JSON)          |    341 bytes |        251 825 ops/s |             3 971 ns |
 | Java Win64               |    252 bytes |      2 688 084 ops/s |               372 ns |
 | Java Win64 (Final)       |    152 bytes |      3 036 020 ops/s |               329 ns |
@@ -1060,8 +1060,8 @@ Verify benchmark results:
 | C# Win64 (Final)         |    152 bytes |  8 064 516 ops/s |      124 ns |
 | .NET Core Linux          |    252 bytes |  3 718 855 ops/s |      269 ns |
 | .NET Core Linux (Final)  |    152 bytes |  6 653 360 ops/s |      150 ns |
-| Go Win64                 |    ??? bytes |  8 474 576 ops/s |      118 ns |
-| Go Win64 (Final)         |    ??? bytes |  9 090 909 ops/s |      110 ns |
+| Go Win64                 |    252 bytes |  8 474 576 ops/s |      118 ns |
+| Go Win64 (Final)         |    152 bytes |  9 090 909 ops/s |      110 ns |
 | Java Win64               |    252 bytes | 11 790 374 ops/s |       85 ns |
 | Java Win64 (Final)       |    152 bytes | 16 205 533 ops/s |       62 ns |
 | JavaScript Win64         |    252 bytes |  1 105 627 ops/s |      905 ns |
