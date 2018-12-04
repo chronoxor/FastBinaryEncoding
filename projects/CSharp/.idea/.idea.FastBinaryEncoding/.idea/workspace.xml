@@ -2,23 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e46b070-39ae-4a9c-ad72-9d071bc18831" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Java/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Kotlin/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../modules/Catch2" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/Catch2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../modules/CppBenchmark" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppBenchmark" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../modules/CppCommon" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppCommon" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/riderModule.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/Enums.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/riderModule.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/tests/TestSerializationJson.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/tests/TestSerializationJson.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/Python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/Python.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/FieldModelBalance.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/FieldModelBalance.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/test/FieldModelStructNested.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/FieldModelStructNested.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/test/FieldModelStructOptional.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/FieldModelStructOptional.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/tests/enums_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/enums_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../tests/test_enums.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../tests/test_enums.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -59,7 +61,7 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -94,11 +96,14 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="406" />
-    <option name="y" value="251" />
+    <option name="x" value="420" />
+    <option name="y" value="116" />
     <option name="width" value="1735" />
-    <option name="height" value="1048" />
+    <option name="height" value="789" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -106,22 +111,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="SolutionExplorer">
         <subPane>
           <expand>
             <path>
-              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="FastBinaryEncoding" type="24d0babc:SolutionExplorerModelNode" />
-            </path>
-            <path>
-              <item name="Project" type="784c90a0:SolutionExplorerRootNode" />
-              <item name="FastBinaryEncoding" type="24d0babc:SolutionExplorerModelNode" />
-              <item name="Examples" type="24d0babc:SolutionExplorerModelNode" />
+              <item name="" type="13324e5d:SolutionExplorerViewPane$ProjectViewPaneTreeStructure$createRoot$1" />
+              <item name="FastBinaryEncoding (10 projects)" type="977d5f41:SolutionExplorerNodeRider" />
             </path>
           </expand>
           <select />
         </subPane>
-        <option name="show-all-files" value="false" />
       </pane>
       <pane id="FileSystemExplorer" />
     </panes>
@@ -151,16 +151,12 @@
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
-      <option name="RUNTIME_ARGUMENTS" value="" />
       <option name="PROJECT_PATH" value="$PROJECT_DIR$/Examples/Serialization/Serialization.csproj" />
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
       <option name="PROJECT_KIND" value="Console" />
       <option name="PROJECT_TFM" value=".NETFramework,Version=v4.6" />
-      <method v="2">
-        <option name="Build" enabled="true" />
-      </method>
     </configuration>
     <configuration name="Examples\Print" type="DotNetProject" factoryName=".NET Project" temporary="true">
       <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/Print/bin/Release/Print.exe" />
@@ -169,16 +165,12 @@
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
-      <option name="RUNTIME_ARGUMENTS" value="" />
       <option name="PROJECT_PATH" value="$PROJECT_DIR$/Examples/Print/Print.csproj" />
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
       <option name="PROJECT_KIND" value="Console" />
       <option name="PROJECT_TFM" value=".NETFramework,Version=v4.6" />
-      <method v="2">
-        <option name="Build" enabled="true" />
-      </method>
     </configuration>
     <configuration name="Examples\PrintJson" type="DotNetProject" factoryName=".NET Project" temporary="true">
       <option name="EXE_PATH" value="$PROJECT_DIR$/Examples/PrintJson/bin/Debug/PrintJson.exe" />
@@ -187,16 +179,12 @@
       <option name="PASS_PARENT_ENVS" value="1" />
       <option name="USE_EXTERNAL_CONSOLE" value="0" />
       <option name="USE_MONO" value="0" />
-      <option name="RUNTIME_ARGUMENTS" value="" />
       <option name="PROJECT_PATH" value="$PROJECT_DIR$/Examples/PrintJson/PrintJson.csproj" />
       <option name="PROJECT_EXE_PATH_TRACKING" value="1" />
       <option name="PROJECT_ARGUMENTS_TRACKING" value="1" />
       <option name="PROJECT_WORKING_DIRECTORY_TRACKING" value="1" />
       <option name="PROJECT_KIND" value="Console" />
       <option name="PROJECT_TFM" value=".NETFramework,Version=v4.6" />
-      <method v="2">
-        <option name="Build" enabled="true" />
-      </method>
     </configuration>
     <list>
       <item itemvalue=".NET Project.Default" />
@@ -230,11 +218,12 @@
       <workItem from="1543356263623" duration="12000" />
       <workItem from="1543356313070" duration="2433000" />
       <workItem from="1543453963191" duration="58000" />
+      <workItem from="1543926859952" duration="198000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20051000" />
+    <option name="totallyTimeSpent" value="20249000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -246,31 +235,31 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="406" y="251" width="1735" height="1048" extended-state="0" />
+    <frame x="420" y="116" width="1735" height="789" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16298507" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4961194" weight="0.32896176" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4877612" weight="0.39889196" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="NuGet" order="7" />
-      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="right" id="Errors In Solution" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.3438806" side_tool="true" visible="true" weight="0.45357686" />
+      <window_info active="true" anchor="bottom" id="Unit Tests" order="11" sideWeight="0.6561194" visible="true" weight="0.45357686" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Unit Tests" order="11" sideWeight="0.6567164" weight="0.4546448" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4961194" weight="0.32896176" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Terminal" order="12" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.5038806" side_tool="true" visible="true" weight="0.32677597" />
+      <window_info anchor="bottom" id="NuGet" order="7" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16477612" />
+      <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Build" order="14" sideWeight="0.49492538" weight="0.32677597" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4877612" weight="0.39889196" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Errors In Solution" order="3" />
-      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="right" id="Unit Tests Coverage" order="5" />
     </layout>
   </component>
@@ -294,10 +283,10 @@
           <line>703</line>
           <properties documentPath="$PROJECT_DIR$/Tests/SerializationJson.cs" initialLine="703">
             <startOffsets>
-              <option value="50498" />
+              <startOffset value="50498" />
             </startOffsets>
             <endOffsets>
-              <option value="50544" />
+              <endOffset value="50544" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="3" />
@@ -307,10 +296,10 @@
           <line>66</line>
           <properties documentPath="$PROJECT_DIR$/Tests/SerializationJson.cs" initialLine="66">
             <startOffsets>
-              <option value="4214" />
+              <startOffset value="4214" />
             </startOffsets>
             <endOffsets>
-              <option value="4261" />
+              <endOffset value="4261" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="6" />
@@ -320,10 +309,10 @@
           <line>409</line>
           <properties documentPath="$PROJECT_DIR$/Tests/SerializationJson.cs" initialLine="409">
             <startOffsets>
-              <option value="29543" />
+              <startOffset value="29543" />
             </startOffsets>
             <endOffsets>
-              <option value="29590" />
+              <endOffset value="29590" />
             </endOffsets>
           </properties>
           <option name="timeStamp" value="15" />
@@ -341,23 +330,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="14739">
           <caret line="868" column="58" selection-start-line="868" selection-start-column="58" selection-end-line="868" selection-end-column="58" />
-          <folding>
-            <marker date="1543196706926" expanded="true" signature="0:151" ph="/* ReSharper disable CompareOfFloatsByEqualityOperator ... */" />
-            <marker date="1543196706926" expanded="false" signature="159:189" ph="..." />
-            <marker date="1543196706926" expanded="true" signature="206:81448" ph="{...}" />
-            <marker date="1543196706926" expanded="true" signature="261:81446" ph="{...}" />
-            <marker date="1543196706926" expanded="true" signature="373:2990" ph="{...}" />
-            <marker date="1543196706926" expanded="true" signature="3112:8867" ph="{...}" />
-            <marker date="1543196706926" expanded="true" signature="8993:24159" ph="{...}" />
-            <marker date="1543196706926" expanded="true" signature="24281:45884" ph="{...}" />
-            <marker date="1543196706926" expanded="true" signature="46004:47220" ph="{...}" />
-            <marker date="1543196706926" expanded="true" signature="47340:53628" ph="{...}" />
-            <marker date="1543196706926" expanded="true" signature="53750:60030" ph="{...}" />
-            <marker date="1543196706926" expanded="true" signature="60148:66742" ph="{...}" />
-            <marker date="1543196706926" expanded="true" signature="66858:70314" ph="{...}" />
-            <marker date="1543196706926" expanded="true" signature="70430:75855" ph="{...}" />
-            <marker date="1543196706926" expanded="true" signature="75973:81440" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -365,19 +337,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="12070">
           <caret line="710" column="36" selection-start-line="710" selection-start-column="36" selection-end-line="710" selection-end-column="36" />
-          <folding>
-            <marker date="1543267049160" expanded="true" signature="0:151" ph="/* ReSharper disable CompareOfFloatsByEqualityOperator ... */" />
-            <marker date="1543267049160" expanded="true" signature="159:206" ph="..." />
-            <marker date="1543267049160" expanded="true" signature="223:70572" ph="{...}" />
-            <marker date="1543267049160" expanded="true" signature="279:70570" ph="{...}" />
-            <marker date="1543267049160" expanded="true" signature="388:3596" ph="{...}" />
-            <marker date="1543267049160" expanded="true" signature="3715:8993" ph="{...}" />
-            <marker date="1543267049160" expanded="true" signature="9116:22752" ph="{...}" />
-            <marker date="1543267049160" expanded="true" signature="22871:39838" ph="{...}" />
-            <marker date="1543267049160" expanded="true" signature="39955:40137" ph="{...}" />
-            <marker date="1543267049160" expanded="true" signature="65058:68692" ph="{...}" />
-            <marker date="1543267049160" expanded="true" signature="68824:70564" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -406,24 +365,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="335">
           <caret line="753" column="16" selection-start-line="753" selection-start-column="16" selection-end-line="753" selection-end-column="16" />
-          <folding>
-            <marker date="1543267049158" expanded="true" signature="0:151" ph="/* ReSharper disable CompareOfFloatsByEqualityOperator ... */" />
-            <marker date="1543267049158" expanded="false" signature="159:206" ph="..." />
-            <marker date="1543267049158" expanded="true" signature="223:73630" ph="{...}" />
-            <marker date="1543267049158" expanded="true" signature="274:73628" ph="{...}" />
-            <marker date="1543267049158" expanded="true" signature="375:3835" ph="{...}" />
-            <marker date="1543267049158" expanded="true" signature="3946:9488" ph="{...}" />
-            <marker date="1543267049158" expanded="true" signature="9603:23503" ph="{...}" />
-            <marker date="1543267049158" expanded="true" signature="23614:40845" ph="{...}" />
-            <marker date="1543267049158" expanded="true" signature="40954:43070" ph="{...}" />
-            <marker date="1543267049158" expanded="true" signature="43179:48422" ph="{...}" />
-            <marker date="1543267049158" expanded="true" signature="48533:53769" ph="{...}" />
-            <marker date="1543267049158" expanded="true" signature="53876:59582" ph="{...}" />
-            <marker date="1543267049158" expanded="true" signature="59687:62415" ph="{...}" />
-            <marker date="1543267049158" expanded="true" signature="62520:66912" ph="{...}" />
-            <marker date="1543267049158" expanded="true" signature="67019:71494" ph="{...}" />
-            <marker date="1543267049158" expanded="true" signature="71618:73622" ph="{...}" />
-          </folding>
         </state>
       </provider>
     </entry>

@@ -181,7 +181,7 @@ func (fm *FieldModelBalance) GetValue(fbeValue *Balance) error {
 func (fm *FieldModelBalance) GetFields(fbeValue *Balance, fbeStructSize int) {
     fbeCurrentSize := 4 + 4
 
-    if (fbeCurrentSize + fm.FieldModelBalance.FBEBody() - 4 - 4) > fbeStructSize {
+    if (fbeCurrentSize + fm.FieldModelBalance.FBEBody() - 4 - 4) <= fbeStructSize {
         fm.FieldModelBalance.GetFields(&fbeValue.Balance, fbeStructSize)
     }
     fbeCurrentSize += fm.FieldModelBalance.FBEBody() - 4 - 4

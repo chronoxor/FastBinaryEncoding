@@ -961,7 +961,7 @@ func (fm *FieldModelStructOptional) GetValue(fbeValue *StructOptional) error {
 func (fm *FieldModelStructOptional) GetFields(fbeValue *StructOptional, fbeStructSize int) {
     fbeCurrentSize := 4 + 4
 
-    if (fbeCurrentSize + fm.FieldModelStructSimple.FBEBody() - 4 - 4) > fbeStructSize {
+    if (fbeCurrentSize + fm.FieldModelStructSimple.FBEBody() - 4 - 4) <= fbeStructSize {
         fm.FieldModelStructSimple.GetFields(&fbeValue.StructSimple, fbeStructSize)
     }
     fbeCurrentSize += fm.FieldModelStructSimple.FBEBody() - 4 - 4

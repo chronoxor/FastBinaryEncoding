@@ -5835,7 +5835,7 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
     if (!base_type.empty())
     {
         WriteLine();
-        WriteLineIndent("if (fbeCurrentSize + fm." + base_field_name + ".FBEBody() - 4 - 4) > fbeStructSize {");
+        WriteLineIndent("if (fbeCurrentSize + fm." + base_field_name + ".FBEBody() - 4 - 4) <= fbeStructSize {");
         Indent(1);
         WriteLineIndent("fm." + base_field_name + ".GetFields(&fbeValue." + ConvertBaseName(base_type) + ", fbeStructSize)");
         Indent(-1);

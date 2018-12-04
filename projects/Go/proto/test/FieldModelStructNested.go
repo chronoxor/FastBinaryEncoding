@@ -313,7 +313,7 @@ func (fm *FieldModelStructNested) GetValue(fbeValue *StructNested) error {
 func (fm *FieldModelStructNested) GetFields(fbeValue *StructNested, fbeStructSize int) {
     fbeCurrentSize := 4 + 4
 
-    if (fbeCurrentSize + fm.FieldModelStructOptional.FBEBody() - 4 - 4) > fbeStructSize {
+    if (fbeCurrentSize + fm.FieldModelStructOptional.FBEBody() - 4 - 4) <= fbeStructSize {
         fm.FieldModelStructOptional.GetFields(&fbeValue.StructOptional, fbeStructSize)
     }
     fbeCurrentSize += fm.FieldModelStructOptional.FBEBody() - 4 - 4
