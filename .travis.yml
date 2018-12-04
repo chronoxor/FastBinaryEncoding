@@ -64,6 +64,8 @@ before_install:
   - if [ "$OS" == "osx" ]; then brew update; fi
   - if [ "$OS" == "osx" ]; then brew install doxygen; fi
   - if [ "$OS" == "osx" ]; then brew install graphviz; fi
+  # Doxygen support
+  - export doxygen=yes
   # The missing libc++ headers for Xcode9
   - if [ "$OS" == "osx" ]; then git clone "https://github.com/youknowone/xcode-libcxx.git"; cd ./xcode-libcxx; make all; cd ..; fi
   - if [ "$OS" == "osx" ]; then ln -s '/usr/local/opt/llvm@5/include/c++/v1/any' '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1/any'; fi

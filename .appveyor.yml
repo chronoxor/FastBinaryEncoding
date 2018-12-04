@@ -44,6 +44,7 @@ install:
   - choco install --cache "C:\ProgramData\chocolatey\cache" --force ghostscript
   - choco install --cache "C:\ProgramData\chocolatey\cache" --force graphviz
   - choco install --cache "C:\ProgramData\chocolatey\cache" --force miktex
+  - set doxygen=yes
   # Win flex-bison
   - choco install --cache "C:\ProgramData\chocolatey\cache" --force winflexbison3
   # Cygwin
