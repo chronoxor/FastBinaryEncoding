@@ -1,35 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba8f4190-0800-4bce-b2eb-ad8ed5d1197a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../modules/Catch2" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/Catch2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../modules/CppBenchmark" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppBenchmark" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../modules/CppCommon" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppCommon" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Serialization.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/Serialization.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SerializationFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SerializationFinal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SerializationJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SerializationJson.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/Serialization.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/Serialization.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SerializationFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SerializationFinal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SerializationJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SerializationJson.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/tests/TestEnums.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/tests/TestEnums.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/tests/TestSerialization.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/tests/TestSerialization.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/tests/TestSerializationFinal.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/tests/TestSerializationFinal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/tests/TestSerializationJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/tests/TestSerializationJson.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_serialization.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_serialization.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_serialization_final.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_serialization_final.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_serialization_json.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_serialization_json.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/tests/TestSerialization.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/tests/TestSerialization.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/tests/TestSerializationFinal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/tests/TestSerializationFinal.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/tests/TestSerializationJson.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/tests/TestSerializationJson.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/tests/test_serialization.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/tests/test_serialization.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/tests/test_serialization_final.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/tests/test_serialization_final.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/tests/test_serialization_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/tests/test_serialization_json.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_serialization.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_serialization.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_serialization_final.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_serialization_final.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_serialization_json.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_serialization_json.rb" afterDir="false" />
-    </list>
+    <list default="true" id="ba8f4190-0800-4bce-b2eb-ad8ed5d1197a" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,100 +11,61 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/clone_test.go">
+        <entry file="file://$PROJECT_DIR$/benchmarks/serialization_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="850">
-              <caret line="52" selection-start-line="52" selection-end-line="52" />
+            <state relative-caret-position="182">
+              <caret line="58" selection-start-line="58" selection-end-line="58" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/create_test.go">
+        <entry file="file://$PROJECT_DIR$/examples/create.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="279">
-              <caret line="146" selection-start-line="146" selection-end-line="146" />
+            <state relative-caret-position="544">
+              <caret line="32" selection-start-line="32" selection-end-line="32" />
               <folding>
-                <element signature="e#15#99#0" expanded="true" />
+                <element signature="e#14#72#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/proto/proto/Order.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="83" selection-start-line="83" selection-end-line="83" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tests/enums_test.go">
+        <entry file="file://$PROJECT_DIR$/tests/clone_test.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="215" column="20" selection-start-line="215" selection-start-column="20" selection-end-line="215" selection-end-column="20" />
+            <state relative-caret-position="656">
+              <caret line="52" selection-start-line="52" selection-end-line="52" />
               <folding>
-                <element signature="e#15#99#0" expanded="true" />
+                <element signature="e#15#121#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/extending_test.go">
+        <entry file="file://$PROJECT_DIR$/proto/proto/Account.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
-              <folding>
-                <element signature="e#15#145#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="174">
+              <caret line="71" selection-start-line="71" selection-end-line="71" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/go/src/github.com/stretchr/testify/assert/assertions.go">
+        <entry file="file://$PROJECT_DIR$/proto/proto/FinalModelOrderSide.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1142">
-              <caret line="368" column="5" selection-start-line="368" selection-start-column="5" selection-end-line="368" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/proto/protoex/Balance.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="36" column="5" selection-start-line="36" selection-start-column="5" selection-end-line="36" selection-end-column="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/proto/protoex/AccountModel.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="95" column="23" selection-start-line="95" selection-start-column="23" selection-end-line="95" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/proto/protoex/FieldModelAccount.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="123">
-              <caret line="253" selection-start-line="253" selection-end-line="253" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/proto/protoex/FieldModelBalance.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="191" selection-start-line="191" selection-end-line="191" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/benchmarks/serialization_test.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="58" selection-start-line="58" selection-end-line="58" />
+            <state relative-caret-position="505">
+              <caret line="82" selection-start-line="82" selection-end-line="82" />
             </state>
           </provider>
         </entry>
@@ -208,10 +141,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="296" />
-    <option name="y" value="97" />
-    <option name="width" value="2016" />
-    <option name="height" value="880" />
+    <option name="x" value="352" />
+    <option name="y" value="151" />
+    <option name="width" value="1846" />
+    <option name="height" value="1241" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -239,7 +172,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -265,12 +197,19 @@
             <path>
               <item name="Go" type="b2602c69:ProjectViewProjectNode" />
               <item name="Go" type="462c0819:PsiDirectoryNode" />
+              <item name="proto" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Go" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Go" type="462c0819:PsiDirectoryNode" />
               <item name="tests" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -367,11 +306,11 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Go Test.TestSerializationJsonEnums in enums_test.go" />
       <item itemvalue="Go Test.Tests" />
       <item itemvalue="Go Test.clone_test.go" />
       <item itemvalue="Go Test.create_test.go" />
       <item itemvalue="Go Test.enums_test.go" />
-      <item itemvalue="Go Test.TestSerializationJsonEnums in enums_test.go" />
       <item itemvalue="Go Test.extending_test.go" />
     </list>
     <recent_temporary>
@@ -417,15 +356,14 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="296" y="97" width="2016" height="880" extended-state="0" />
-    <editor active="true" />
+    <frame x="352" y="151" width="1846" height="1241" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18813907" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20380738" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4977109" visible="true" weight="0.4257028" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4977109" visible="true" weight="0.2698556" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39759037" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -456,7 +394,6 @@
         <line-breakpoint enabled="true" type="DlvLineBreakpoint">
           <url>file://$PROJECT_DIR$/tests/create_test.go</url>
           <line>103</line>
-          <properties />
           <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
@@ -765,8 +702,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/clone_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="850">
+        <state relative-caret-position="656">
           <caret line="52" selection-start-line="52" selection-end-line="52" />
+          <folding>
+            <element signature="e#15#121#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
