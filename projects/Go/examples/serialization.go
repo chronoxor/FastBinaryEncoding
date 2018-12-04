@@ -29,7 +29,7 @@ func main() {
 	fmt.Printf("FBE size: %d\n", writer.Buffer().Size())
 
 	// Deserialize the account from the FBE stream
-	reader := proto.NewAccountModel(fbe.NewAttachedBuffer(writer.Buffer()))
+	reader := proto.NewAccountModel(writer.Buffer())
 	if ok := reader.Verify(); !ok {
 		panic("verify error")
 	}

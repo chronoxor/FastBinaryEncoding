@@ -29,7 +29,7 @@ func TestSerializationFinalDomain(t *testing.T) {
 	assert.EqualValues(t, writer.Buffer().Size(), 152)
 
 	// Deserialize the struct from the FBE stream
-	reader := proto.NewAccountFinalModel(fbe.NewAttachedBuffer(writer.Buffer()))
+	reader := proto.NewAccountFinalModel(writer.Buffer())
 	assert.True(t, reader.Verify())
 	account2, deserialized, err := reader.Deserialize()
 	assert.Nil(t, err)
@@ -84,7 +84,7 @@ func TestSerializationStructSimple(t *testing.T) {
 	assert.EqualValues(t, writer.Buffer().Size(), 392)
 
 	// Deserialize the struct from the FBE stream
-	reader := test.NewStructSimpleModel(fbe.NewAttachedBuffer(writer.Buffer()))
+	reader := test.NewStructSimpleModel(writer.Buffer())
 	assert.EqualValues(t, reader.Model().FBEType(), 110)
 	assert.EqualValues(t, reader.Model().FBEOffset(), 4)
 	assert.True(t, reader.Verify())

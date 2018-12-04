@@ -26,7 +26,7 @@ func main() {
 	fmt.Printf("FBE size: %d\n", account.Buffer().Size())
 
 	// Access the account using the FBE model
-	access := proto.NewAccountModel(fbe.NewAttachedBuffer(account.Buffer()))
+	access := proto.NewAccountModel(account.Buffer())
 	if ok := access.Verify(); !ok {
 		panic("verify error")
 	}

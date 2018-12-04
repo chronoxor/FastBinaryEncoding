@@ -17,10 +17,10 @@ func TestClone(t *testing.T) {
 	account.Orders = append(account.Orders, proto.Order{Uid: 3, Symbol: "EURUSD", Side: proto.OrderSide_buy, Type: proto.OrderType_stop, Price: 1.5, Volume: 10.0})
 
 	// Clone the account
-    account2 := account.Clone()
+	account2 := account.Clone()
 
-    // Clear the source account
-    account = proto.NewAccount()
+	// Clear the source account
+	account = proto.NewAccount()
 
 	assert.EqualValues(t, account2.Uid, 1)
 	assert.EqualValues(t, account2.Name, "Test")
