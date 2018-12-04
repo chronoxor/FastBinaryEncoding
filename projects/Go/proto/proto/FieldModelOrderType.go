@@ -68,12 +68,17 @@ func (fm *FieldModelOrderType) GetValueDefault(value *OrderType, defaults OrderT
     return nil
 }
 
-// Set the value
+// Set the value by the given pointer
 func (fm *FieldModelOrderType) Set(value *OrderType) error {
+    return fm.SetValue(*value)
+}
+
+// Set the value
+func (fm *FieldModelOrderType) SetValue(value OrderType) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
 
-    fbe.WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), byte(*value))
+    fbe.WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), byte(value))
     return nil
 }

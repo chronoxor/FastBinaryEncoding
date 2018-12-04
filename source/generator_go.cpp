@@ -2569,13 +2569,18 @@ func (fm *FieldModel_NAME_) GetValueDefault(value *_NAME_, defaults _NAME_) erro
     return nil
 }
 
-// Set the value
+// Set the value by the given pointer
 func (fm *FieldModel_NAME_) Set(value *_NAME_) error {
+    return fm.SetValue(*value)
+}
+
+// Set the value
+func (fm *FieldModel_NAME_) SetValue(value _NAME_) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
 
-    fbe.Write_BASE_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), _TYPE_(*value))
+    fbe.Write_BASE_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), _TYPE_(value))
     return nil
 }
 )CODE";
@@ -3949,13 +3954,18 @@ func (fm *FinalModel_NAME_) GetValueDefault(value *_NAME_, defaults _NAME_) (int
     return fm.FBESize(), nil
 }
 
-// Set the value
+// Set the value by the given pointer
 func (fm *FinalModel_NAME_) Set(value *_NAME_) (int, error) {
+    return fm.SetValue(*value)
+}
+
+// Set the value
+func (fm *FinalModel_NAME_) SetValue(value _NAME_) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0, errors.New("model is broken")
     }
 
-    fbe.Write_BASE_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), _TYPE_(*value))
+    fbe.Write_BASE_(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), _TYPE_(value))
     return fm.FBESize(), nil
 }
 )CODE";
@@ -5070,8 +5080,14 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     WriteLineIndent("// Struct deep clone");
     WriteLineIndent("func (s *" + struct_name + ") Clone() *" + struct_name + " {");
     Indent(1);
-    WriteLineIndent("var result = *s");
-    WriteLineIndent("return &result");
+    WriteLineIndent("// Serialize the struct to the FBE stream");
+    WriteLineIndent("writer := New" + struct_name + "Model(fbe.NewEmptyBuffer())");
+    WriteLineIndent("_, _ = writer.Serialize(s)");
+    WriteLine();
+    WriteLineIndent("// Deserialize the struct from the FBE stream");
+    WriteLineIndent("reader := New" + struct_name + "Model(writer.Buffer())");
+    WriteLineIndent("result, _, _ := reader.Deserialize()");
+    WriteLineIndent("return result");
     Indent(-1);
     WriteLineIndent("}");
 

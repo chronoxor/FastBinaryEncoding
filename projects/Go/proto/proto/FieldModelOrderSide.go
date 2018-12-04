@@ -68,12 +68,17 @@ func (fm *FieldModelOrderSide) GetValueDefault(value *OrderSide, defaults OrderS
     return nil
 }
 
-// Set the value
+// Set the value by the given pointer
 func (fm *FieldModelOrderSide) Set(value *OrderSide) error {
+    return fm.SetValue(*value)
+}
+
+// Set the value
+func (fm *FieldModelOrderSide) SetValue(value OrderSide) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
 
-    fbe.WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), byte(*value))
+    fbe.WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), byte(value))
     return nil
 }

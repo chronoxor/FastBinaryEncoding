@@ -76,12 +76,17 @@ func (fm *FinalModelEnumUInt8) GetValueDefault(value *EnumUInt8, defaults EnumUI
     return fm.FBESize(), nil
 }
 
-// Set the value
+// Set the value by the given pointer
 func (fm *FinalModelEnumUInt8) Set(value *EnumUInt8) (int, error) {
+    return fm.SetValue(*value)
+}
+
+// Set the value
+func (fm *FinalModelEnumUInt8) SetValue(value EnumUInt8) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0, errors.New("model is broken")
     }
 
-    fbe.WriteUInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint8(*value))
+    fbe.WriteUInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint8(value))
     return fm.FBESize(), nil
 }

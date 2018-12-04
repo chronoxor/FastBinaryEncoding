@@ -189,8 +189,14 @@ func (s *Enums) Copy() *Enums {
 
 // Struct deep clone
 func (s *Enums) Clone() *Enums {
-    var result = *s
-    return &result
+    // Serialize the struct to the FBE stream
+    writer := NewEnumsModel(fbe.NewEmptyBuffer())
+    _, _ = writer.Serialize(s)
+
+    // Deserialize the struct from the FBE stream
+    reader := NewEnumsModel(writer.Buffer())
+    result, _, _ := reader.Deserialize()
+    return result
 }
 
 // Get the struct key

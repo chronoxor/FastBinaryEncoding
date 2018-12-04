@@ -79,8 +79,14 @@ func (s *StructMap) Copy() *StructMap {
 
 // Struct deep clone
 func (s *StructMap) Clone() *StructMap {
-    var result = *s
-    return &result
+    // Serialize the struct to the FBE stream
+    writer := NewStructMapModel(fbe.NewEmptyBuffer())
+    _, _ = writer.Serialize(s)
+
+    // Deserialize the struct from the FBE stream
+    reader := NewStructMapModel(writer.Buffer())
+    result, _, _ := reader.Deserialize()
+    return result
 }
 
 // Get the struct key

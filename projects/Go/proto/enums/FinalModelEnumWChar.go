@@ -76,12 +76,17 @@ func (fm *FinalModelEnumWChar) GetValueDefault(value *EnumWChar, defaults EnumWC
     return fm.FBESize(), nil
 }
 
-// Set the value
+// Set the value by the given pointer
 func (fm *FinalModelEnumWChar) Set(value *EnumWChar) (int, error) {
+    return fm.SetValue(*value)
+}
+
+// Set the value
+func (fm *FinalModelEnumWChar) SetValue(value EnumWChar) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0, errors.New("model is broken")
     }
 
-    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint32(*value))
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint32(value))
     return fm.FBESize(), nil
 }

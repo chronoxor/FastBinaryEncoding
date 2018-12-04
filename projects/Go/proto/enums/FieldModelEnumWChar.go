@@ -68,12 +68,17 @@ func (fm *FieldModelEnumWChar) GetValueDefault(value *EnumWChar, defaults EnumWC
     return nil
 }
 
-// Set the value
+// Set the value by the given pointer
 func (fm *FieldModelEnumWChar) Set(value *EnumWChar) error {
+    return fm.SetValue(*value)
+}
+
+// Set the value
+func (fm *FieldModelEnumWChar) SetValue(value EnumWChar) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
 
-    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint32(*value))
+    fbe.WriteUInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint32(value))
     return nil
 }

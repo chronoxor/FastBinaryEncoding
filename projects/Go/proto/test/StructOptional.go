@@ -195,8 +195,14 @@ func (s *StructOptional) Copy() *StructOptional {
 
 // Struct deep clone
 func (s *StructOptional) Clone() *StructOptional {
-    var result = *s
-    return &result
+    // Serialize the struct to the FBE stream
+    writer := NewStructOptionalModel(fbe.NewEmptyBuffer())
+    _, _ = writer.Serialize(s)
+
+    // Deserialize the struct from the FBE stream
+    reader := NewStructOptionalModel(writer.Buffer())
+    result, _, _ := reader.Deserialize()
+    return result
 }
 
 // Get the struct key

@@ -68,12 +68,17 @@ func (fm *FieldModelEnumInt8) GetValueDefault(value *EnumInt8, defaults EnumInt8
     return nil
 }
 
-// Set the value
+// Set the value by the given pointer
 func (fm *FieldModelEnumInt8) Set(value *EnumInt8) error {
+    return fm.SetValue(*value)
+}
+
+// Set the value
+func (fm *FieldModelEnumInt8) SetValue(value EnumInt8) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
 
-    fbe.WriteInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), int8(*value))
+    fbe.WriteInt8(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), int8(value))
     return nil
 }

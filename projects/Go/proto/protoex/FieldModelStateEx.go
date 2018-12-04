@@ -68,12 +68,17 @@ func (fm *FieldModelStateEx) GetValueDefault(value *StateEx, defaults StateEx) e
     return nil
 }
 
-// Set the value
+// Set the value by the given pointer
 func (fm *FieldModelStateEx) Set(value *StateEx) error {
+    return fm.SetValue(*value)
+}
+
+// Set the value
+func (fm *FieldModelStateEx) SetValue(value StateEx) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
 
-    fbe.WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), byte(*value))
+    fbe.WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), byte(value))
     return nil
 }

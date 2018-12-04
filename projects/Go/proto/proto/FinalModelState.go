@@ -76,12 +76,17 @@ func (fm *FinalModelState) GetValueDefault(value *State, defaults State) (int, e
     return fm.FBESize(), nil
 }
 
-// Set the value
+// Set the value by the given pointer
 func (fm *FinalModelState) Set(value *State) (int, error) {
+    return fm.SetValue(*value)
+}
+
+// Set the value
+func (fm *FinalModelState) SetValue(value State) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0, errors.New("model is broken")
     }
 
-    fbe.WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), byte(*value))
+    fbe.WriteByte(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), byte(value))
     return fm.FBESize(), nil
 }

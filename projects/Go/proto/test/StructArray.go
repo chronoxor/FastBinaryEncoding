@@ -79,8 +79,14 @@ func (s *StructArray) Copy() *StructArray {
 
 // Struct deep clone
 func (s *StructArray) Clone() *StructArray {
-    var result = *s
-    return &result
+    // Serialize the struct to the FBE stream
+    writer := NewStructArrayModel(fbe.NewEmptyBuffer())
+    _, _ = writer.Serialize(s)
+
+    // Deserialize the struct from the FBE stream
+    reader := NewStructArrayModel(writer.Buffer())
+    result, _, _ := reader.Deserialize()
+    return result
 }
 
 // Get the struct key

@@ -76,12 +76,17 @@ func (fm *FinalModelFlagsTyped) GetValueDefault(value *FlagsTyped, defaults Flag
     return fm.FBESize(), nil
 }
 
-// Set the value
+// Set the value by the given pointer
 func (fm *FinalModelFlagsTyped) Set(value *FlagsTyped) (int, error) {
+    return fm.SetValue(*value)
+}
+
+// Set the value
+func (fm *FinalModelFlagsTyped) SetValue(value FlagsTyped) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return 0, errors.New("model is broken")
     }
 
-    fbe.WriteUInt64(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint64(*value))
+    fbe.WriteUInt64(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), uint64(value))
     return fm.FBESize(), nil
 }

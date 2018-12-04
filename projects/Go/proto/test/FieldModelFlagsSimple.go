@@ -68,12 +68,17 @@ func (fm *FieldModelFlagsSimple) GetValueDefault(value *FlagsSimple, defaults Fl
     return nil
 }
 
-// Set the value
+// Set the value by the given pointer
 func (fm *FieldModelFlagsSimple) Set(value *FlagsSimple) error {
+    return fm.SetValue(*value)
+}
+
+// Set the value
+func (fm *FieldModelFlagsSimple) SetValue(value FlagsSimple) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
 
-    fbe.WriteInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), int32(*value))
+    fbe.WriteInt32(fm.buffer.Data(), fm.buffer.Offset() + fm.FBEOffset(), int32(value))
     return nil
 }

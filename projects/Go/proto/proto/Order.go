@@ -72,8 +72,14 @@ func (s *Order) Copy() *Order {
 
 // Struct deep clone
 func (s *Order) Clone() *Order {
-    var result = *s
-    return &result
+    // Serialize the struct to the FBE stream
+    writer := NewOrderModel(fbe.NewEmptyBuffer())
+    _, _ = writer.Serialize(s)
+
+    // Deserialize the struct from the FBE stream
+    reader := NewOrderModel(writer.Buffer())
+    result, _, _ := reader.Deserialize()
+    return result
 }
 
 // Get the struct key

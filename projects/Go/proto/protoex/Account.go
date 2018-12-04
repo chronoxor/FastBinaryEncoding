@@ -74,8 +74,14 @@ func (s *Account) Copy() *Account {
 
 // Struct deep clone
 func (s *Account) Clone() *Account {
-    var result = *s
-    return &result
+    // Serialize the struct to the FBE stream
+    writer := NewAccountModel(fbe.NewEmptyBuffer())
+    _, _ = writer.Serialize(s)
+
+    // Deserialize the struct from the FBE stream
+    reader := NewAccountModel(writer.Buffer())
+    result, _, _ := reader.Deserialize()
+    return result
 }
 
 // Get the struct key

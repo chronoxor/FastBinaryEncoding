@@ -87,8 +87,14 @@ func (s *StructNested) Copy() *StructNested {
 
 // Struct deep clone
 func (s *StructNested) Clone() *StructNested {
-    var result = *s
-    return &result
+    // Serialize the struct to the FBE stream
+    writer := NewStructNestedModel(fbe.NewEmptyBuffer())
+    _, _ = writer.Serialize(s)
+
+    // Deserialize the struct from the FBE stream
+    reader := NewStructNestedModel(writer.Buffer())
+    result, _, _ := reader.Deserialize()
+    return result
 }
 
 // Get the struct key

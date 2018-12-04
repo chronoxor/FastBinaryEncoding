@@ -63,8 +63,14 @@ func (s *StructHashEx) Copy() *StructHashEx {
 
 // Struct deep clone
 func (s *StructHashEx) Clone() *StructHashEx {
-    var result = *s
-    return &result
+    // Serialize the struct to the FBE stream
+    writer := NewStructHashExModel(fbe.NewEmptyBuffer())
+    _, _ = writer.Serialize(s)
+
+    // Deserialize the struct from the FBE stream
+    reader := NewStructHashExModel(writer.Buffer())
+    result, _, _ := reader.Deserialize()
+    return result
 }
 
 // Get the struct key

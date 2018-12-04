@@ -152,8 +152,14 @@ func (s *StructSimple) Copy() *StructSimple {
 
 // Struct deep clone
 func (s *StructSimple) Clone() *StructSimple {
-    var result = *s
-    return &result
+    // Serialize the struct to the FBE stream
+    writer := NewStructSimpleModel(fbe.NewEmptyBuffer())
+    _, _ = writer.Serialize(s)
+
+    // Deserialize the struct from the FBE stream
+    reader := NewStructSimpleModel(writer.Buffer())
+    result, _, _ := reader.Deserialize()
+    return result
 }
 
 // Get the struct key

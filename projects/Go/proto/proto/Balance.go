@@ -64,8 +64,14 @@ func (s *Balance) Copy() *Balance {
 
 // Struct deep clone
 func (s *Balance) Clone() *Balance {
-    var result = *s
-    return &result
+    // Serialize the struct to the FBE stream
+    writer := NewBalanceModel(fbe.NewEmptyBuffer())
+    _, _ = writer.Serialize(s)
+
+    // Deserialize the struct from the FBE stream
+    reader := NewBalanceModel(writer.Buffer())
+    result, _, _ := reader.Deserialize()
+    return result
 }
 
 // Get the struct key
