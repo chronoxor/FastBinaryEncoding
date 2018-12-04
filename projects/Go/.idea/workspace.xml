@@ -5,12 +5,30 @@
       <change beforePath="$PROJECT_DIR$/../../modules/Catch2" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/Catch2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../modules/CppBenchmark" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppBenchmark" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../modules/CppCommon" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppCommon" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/protoex/FieldModelBalance.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex/FieldModelBalance.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/test/FieldModelStructNested.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/FieldModelStructNested.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/test/FieldModelStructOptional.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/FieldModelStructOptional.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/enums_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/tests/enums_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Serialization.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/Serialization.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SerializationFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SerializationFinal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SerializationJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SerializationJson.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/Serialization.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/Serialization.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SerializationFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SerializationFinal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SerializationJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SerializationJson.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/tests/TestEnums.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/tests/TestEnums.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/tests/TestSerialization.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/tests/TestSerialization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/tests/TestSerializationFinal.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/tests/TestSerializationFinal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/tests/TestSerializationJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/tests/TestSerializationJson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_serialization.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_serialization.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_serialization_final.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_serialization_final.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_serialization_json.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_serialization_json.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/tests/TestSerialization.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/tests/TestSerialization.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/tests/TestSerializationFinal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/tests/TestSerializationFinal.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/tests/TestSerializationJson.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/tests/TestSerializationJson.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/tests/test_serialization.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/tests/test_serialization.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/tests/test_serialization_final.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/tests/test_serialization_final.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/tests/test_serialization_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/tests/test_serialization_json.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_serialization.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_serialization.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_serialization_final.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_serialization_final.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_serialization_json.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_serialization_json.rb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -367,9 +385,6 @@
     </recent_temporary>
   </component>
   <component name="TestHistory">
-    <history-entry file="enums_test_go - 2018.12.04 at 14h 36m 20s.xml">
-      <configuration name="enums_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
     <history-entry file="extending_test_go - 2018.12.04 at 14h 52m 45s.xml">
       <configuration name="extending_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
@@ -397,18 +412,21 @@
     <history-entry file="extending_test_go - 2018.12.04 at 15h 07m 15s.xml">
       <configuration name="extending_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
+    <history-entry file="enums_test_go - 2018.12.04 at 15h 15m 36s.xml">
+      <configuration name="enums_test.go" configurationId="GoTestRunConfiguration" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="296" y="97" width="2016" height="880" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18813907" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18813907" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4977109" weight="0.4257028" />
-      <window_info anchor="bottom" id="Debug" order="3" visible="true" weight="0.39759037" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4977109" visible="true" weight="0.4257028" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39759037" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />

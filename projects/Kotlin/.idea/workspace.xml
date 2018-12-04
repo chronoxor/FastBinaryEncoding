@@ -5,34 +5,9 @@
       <change beforePath="$PROJECT_DIR$/../../modules/Catch2" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/Catch2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../modules/CppBenchmark" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppBenchmark" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../modules/CppCommon" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppCommon" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/Enums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/Enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/Enums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/FieldModelBalance.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/FieldModelBalance.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/test/FieldModelStructNested.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/FieldModelStructNested.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/test/FieldModelStructOptional.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/FieldModelStructOptional.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/tests/enums_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/enums_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_enums.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_enums.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/TestEnums.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestEnums.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/Python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/Python.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/tests/test_enums.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/tests/test_enums.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_enums.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_enums.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../tests/test_enums.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../tests/test_enums.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestSerialization.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerialization.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestSerializationFinal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerializationFinal.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/TestSerializationJson.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerializationJson.kt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,7 +19,7 @@
     <session id="2021039068">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.6" value="2" />
           <entry key="project.opened" value="2" />
         </counts>
@@ -72,26 +47,7 @@
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tests/TestEnums.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="234" selection-start-line="234" selection-end-line="234" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/tests/TestSerializationJson.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6052">
-              <caret line="404" column="19" selection-start-line="404" selection-start-column="19" selection-end-line="404" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -218,7 +174,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543928089969" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1543928564396" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -376,26 +332,11 @@
       <workItem from="1543452288287" duration="151000" />
       <workItem from="1543607762613" duration="148000" />
       <workItem from="1543927692407" duration="102000" />
-      <workItem from="1543927816297" duration="274000" />
+      <workItem from="1543927816297" duration="754000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="_default_ - 2018.11.26 at 00h 39m 31s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="_default_ - 2018.11.26 at 00h 40m 11s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="_default_ - 2018.11.26 at 00h 40m 41s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="_default_ - 2018.11.28 at 03h 02m 21s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="_default_ - 2018.11.28 at 03h 05m 23s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
     <history-entry file="_default_ - 2018.11.29 at 03h 42m 42s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
@@ -411,9 +352,24 @@
     <history-entry file="TestEnums_serializationJsonEnums - 2018.12.04 at 15h 54m 25s.xml">
       <configuration name="TestEnums.serializationJsonEnums" configurationId="TestNG" />
     </history-entry>
+    <history-entry file="_default_ - 2018.12.04 at 15h 55m 00s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="_default_ - 2018.12.04 at 16h 01m 13s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="_default_ - 2018.12.04 at 16h 01m 43s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="_default_ - 2018.12.04 at 16h 02m 28s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="_default_ - 2018.12.04 at 16h 02m 46s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70079000" />
+    <option name="totallyTimeSpent" value="70559000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -427,7 +383,7 @@
   <component name="ToolWindowManager">
     <frame x="401" y="91" width="1709" height="896" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23165555" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23165555" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -436,17 +392,17 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.48150393" weight="0.41939712" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4918132" visible="true" weight="0.39842725" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.57004243" weight="0.41939712" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4918132" weight="0.39842725" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49909034" weight="0.32891247" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32891247" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50818676" side_tool="true" visible="true" weight="0.39842725" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.42995754" side_tool="true" visible="true" weight="0.41939712" />
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="JProfiler" order="11" />
-      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.40873256" weight="0.19266056" />
+      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.40691328" weight="0.19266056" />
       <window_info anchor="bottom" id="Inspection Results" order="13" sideWeight="0.49727106" weight="0.3294025" />
       <window_info anchor="bottom" id="Docker" order="14" show_stripe_button="false" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -814,8 +770,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tests/TestSerializationJson.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6052">
-          <caret line="404" column="19" selection-start-line="404" selection-start-column="19" selection-end-line="404" selection-end-column="19" />
+        <state relative-caret-position="102">
+          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
         </state>
       </provider>
     </entry>

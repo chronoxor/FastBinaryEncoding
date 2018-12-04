@@ -9,7 +9,7 @@ from unittest import TestCase
 
 class TestSerializationJson(TestCase):
 
-    def test_serialization_json_proto(self):
+    def test_serialization_json_domain(self):
         # Define a source JSON string
         json = r'{"uid":1,"name":"Test","state":6,"wallet":{"currency":"USD","amount":1000.0},"asset":{"currency":"EUR","amount":100.0},"orders":[{"uid":1,"symbol":"EURUSD","side":0,"type":0,"price":1.23456,"volume":1000.0},{"uid":2,"symbol":"EURUSD","side":1,"type":1,"price":1.0,"volume":100.0},{"uid":3,"symbol":"EURUSD","side":0,"type":2,"price":1.5,"volume":10.0}]}'
 

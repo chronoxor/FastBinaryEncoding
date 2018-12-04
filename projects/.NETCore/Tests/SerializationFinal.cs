@@ -12,8 +12,8 @@ namespace Tests
 {
     public class SerializationFinal
     {
-        [Fact(DisplayName = "Serialization (Final): proto")]
-        public void SerializationProto()
+        [Fact(DisplayName = "Serialization (Final): domain")]
+        public void SerializationDomain()
         {
             // Create a new account with some orders
             var account1 = proto.Account.Default;

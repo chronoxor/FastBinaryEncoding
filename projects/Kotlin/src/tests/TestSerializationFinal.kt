@@ -9,7 +9,7 @@ import org.testng.annotations.*
 class TestSerializationFinal
 {
     @Test
-    fun serializationProto()
+    fun serializationDomain()
     {
         // Create a new account with some orders
         val account1 = proto.Account(1, "Test", proto.State.good, proto.Balance("USD", 1000.0), proto.Balance("EUR", 100.0), ArrayList())

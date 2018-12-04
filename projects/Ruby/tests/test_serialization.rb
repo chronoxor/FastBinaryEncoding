@@ -4,7 +4,7 @@ require_relative '../proto/test'
 
 class TestSerialization < Test::Unit::TestCase
   # noinspection RubyInstanceMethodNamingConvention
-  def test_serialization_proto
+  def test_serialization_domain
     # Create a new account with some orders
     account1 = Proto::Account.new(1, 'Test', Proto::State.good, Proto::Balance.new('USD', 1000.0), Proto::Balance.new('EUR', 100.0))
     account1.orders.push(Proto::Order.new(1, 'EURUSD', Proto::OrderSide.buy, Proto::OrderType.market, 1.23456, 1000.0))

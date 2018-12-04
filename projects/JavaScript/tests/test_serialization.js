@@ -14,7 +14,7 @@ const Int64 = int64.Int64
 const UInt64 = int64.UInt64
 const UUID = uuid.UUID
 
-test('Serialization: proto', function (t) {
+test('Serialization: domain', function (t) {
   // Create a new account with some orders
   let account1 = new proto.Account(1, 'Test', proto.State.good, new proto.Balance('USD', 1000.0), new proto.Balance('EUR', 100.0))
   account1.orders.push(new proto.Order(1, 'EURUSD', proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0))

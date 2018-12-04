@@ -10,7 +10,7 @@ from unittest import TestCase
 
 class TestSerializationFinal(TestCase):
 
-    def test_serialization_final_proto(self):
+    def test_serialization_final_domain(self):
         # Create a new account with some orders
         account1 = proto.Account(1, "Test", proto.State.good, proto.Balance("USD", 1000.0), proto.Balance("EUR", 100.0))
         account1.orders.append(proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0))

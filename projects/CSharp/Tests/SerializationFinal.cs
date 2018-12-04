@@ -11,8 +11,8 @@ namespace Tests
     [TestFixture]
     public class SerializationFinal
     {
-        [TestCase(TestName = "Serialization (Final): proto")]
-        public void SerializationProto()
+        [TestCase(TestName = "Serialization (Final): domain")]
+        public void SerializationDomain()
         {
             // Create a new account with some orders
             var account1 = proto.Account.Default;
