@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding *StructSimple vector final model
+// Fast Binary Encoding OptionalStructSimple vector final model
 type FinalModelVectorOptionalStructSimple struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelVectorOptionalStructSimple struct {
     model *FinalModelOptionalStructSimple
 }
 
-// Create a new *StructSimple vector final model
+// Create a new OptionalStructSimple vector final model
 func NewFinalModelVectorOptionalStructSimple(buffer *fbe.Buffer, offset int) *FinalModelVectorOptionalStructSimple {
     fbeResult := FinalModelVectorOptionalStructSimple{buffer: buffer, offset: offset}
     fbeResult.model = NewFinalModelOptionalStructSimple(buffer, offset)

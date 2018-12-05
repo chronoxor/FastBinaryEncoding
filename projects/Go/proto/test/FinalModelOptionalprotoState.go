@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional proto.*State final model
+// Fast Binary Encoding optional protoState final model
 type FinalModelOptionalprotoState struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalprotoState struct {
     value *proto.FinalModelState
 }
 
-// Create a new optional proto.*State final model
+// Create a new optional protoState final model
 func NewFinalModelOptionalprotoState(buffer *fbe.Buffer, offset int) *FinalModelOptionalprotoState {
     fbeResult := FinalModelOptionalprotoState{buffer: buffer, offset: offset}
     fbeResult.value = proto.NewFinalModelState(buffer, 0)

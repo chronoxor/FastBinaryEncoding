@@ -172,7 +172,7 @@ class FinalModelMapInt32Byte(buffer: Buffer, offset: Long) : FinalModel(buffer, 
         return size
     }
 
-    // Set the vector as HashMap
+    // Set the map as HashMap
     fun set(values: HashMap<Int, Byte>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }

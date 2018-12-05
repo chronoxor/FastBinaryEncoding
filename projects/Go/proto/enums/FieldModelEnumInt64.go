@@ -16,7 +16,7 @@ type FieldModelEnumInt64 struct {
     offset int
 }
 
-// Create a new field model
+// Create a new EnumInt64 field model
 func NewFieldModelEnumInt64(buffer *fbe.Buffer, offset int) *FieldModelEnumInt64 {
     return &FieldModelEnumInt64{buffer: buffer, offset: offset}
 }

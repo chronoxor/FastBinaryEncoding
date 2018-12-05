@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional proto.*Account final model
+// Fast Binary Encoding optional protoAccount final model
 type FinalModelOptionalprotoAccount struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalprotoAccount struct {
     value *proto.FinalModelAccount
 }
 
-// Create a new optional proto.*Account final model
+// Create a new optional protoAccount final model
 func NewFinalModelOptionalprotoAccount(buffer *fbe.Buffer, offset int) *FinalModelOptionalprotoAccount {
     fbeResult := FinalModelOptionalprotoAccount{buffer: buffer, offset: offset}
     fbeResult.value = proto.NewFinalModelAccount(buffer, 0)

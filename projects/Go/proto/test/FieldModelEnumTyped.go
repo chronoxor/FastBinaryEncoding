@@ -16,7 +16,7 @@ type FieldModelEnumTyped struct {
     offset int
 }
 
-// Create a new field model
+// Create a new EnumTyped field model
 func NewFieldModelEnumTyped(buffer *fbe.Buffer, offset int) *FieldModelEnumTyped {
     return &FieldModelEnumTyped{buffer: buffer, offset: offset}
 }

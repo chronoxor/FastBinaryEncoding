@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional *rune final model
+// Fast Binary Encoding optional WChar final model
 type FinalModelOptionalWChar struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalWChar struct {
     value *fbe.FinalModelWChar
 }
 
-// Create a new optional *rune final model
+// Create a new optional WChar final model
 func NewFinalModelOptionalWChar(buffer *fbe.Buffer, offset int) *FinalModelOptionalWChar {
     fbeResult := FinalModelOptionalWChar{buffer: buffer, offset: offset}
     fbeResult.value = fbe.NewFinalModelWChar(buffer, 0)

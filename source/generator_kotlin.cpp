@@ -1887,9 +1887,6 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
     // Resize the map and get its first model
     fun resize(size: Long): Pair<_KEY_MODEL_, _VALUE_MODEL_>
     {
-        _modelKey.fbeOffset = fbeOffset
-        _modelValue.fbeOffset = fbeOffset + _modelKey.fbeSize
-
         val fbeMapSize = size * (_modelKey.fbeSize + _modelValue.fbeSize)
         val fbeMapOffset = _buffer.allocate(4 + fbeMapSize) - _buffer.offset
         assert((fbeMapOffset > 0) && ((_buffer.offset + fbeMapOffset + 4) <= _buffer.size)) { "Model is broken!" }
@@ -1993,7 +1990,7 @@ class FieldModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FieldM
         }
     }
 
-    // Set the vector as HashMap
+    // Set the map as HashMap
     fun set(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }
@@ -3371,7 +3368,7 @@ class FinalModelMap_KEY_NAME__VALUE_NAME_(buffer: Buffer, offset: Long) : FinalM
         return size
     }
 
-    // Set the vector as HashMap
+    // Set the map as HashMap
     fun set(values: HashMap<_KEY_TYPE_, _VALUE_TYPE_>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }

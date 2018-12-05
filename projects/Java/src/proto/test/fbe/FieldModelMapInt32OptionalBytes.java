@@ -105,9 +105,6 @@ public final class FieldModelMapInt32OptionalBytes extends FieldModel
     // Resize the map and get its first model
     public Pair<FieldModelInt32, FieldModelOptionalBytes> resize(long size)
     {
-        _modelKey.fbeOffset(fbeOffset());
-        _modelValue.fbeOffset(fbeOffset() + _modelKey.fbeSize());
-
         int fbeMapSize = (int)(size * (_modelKey.fbeSize() + _modelValue.fbeSize()));
         int fbeMapOffset = (int)(_buffer.allocate(4 + fbeMapSize) - _buffer.getOffset());
         assert ((fbeMapOffset > 0) && ((_buffer.getOffset() + fbeMapOffset + 4) <= _buffer.getSize())) : "Model is broken!";
@@ -221,7 +218,7 @@ public final class FieldModelMapInt32OptionalBytes extends FieldModel
         }
     }
 
-    // Set the vector as HashMap
+    // Set the map as HashMap
     public void set(HashMap<Integer, ByteBuffer> values)
     {
         assert (values != null) : "Invalid values parameter!";

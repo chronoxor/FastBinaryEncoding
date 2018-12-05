@@ -91,7 +91,7 @@ func (fm *FieldModelVectorFlagsSimple) Size() int {
     return fbeVectorSize
 }
 
-// Array index operator
+// Vector index operator
 func (fm *FieldModelVectorFlagsSimple) GetItem(index int) (*FieldModelFlagsSimple, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return nil, errors.New("model is broken")

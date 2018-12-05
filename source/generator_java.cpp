@@ -1959,9 +1959,6 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
     // Resize the map and get its first model
     public Pair<_KEY_MODEL_, _VALUE_MODEL_> resize(long size)
     {
-        _modelKey.fbeOffset(fbeOffset());
-        _modelValue.fbeOffset(fbeOffset() + _modelKey.fbeSize());
-
         int fbeMapSize = (int)(size * (_modelKey.fbeSize() + _modelValue.fbeSize()));
         int fbeMapOffset = (int)(_buffer.allocate(4 + fbeMapSize) - _buffer.getOffset());
         assert ((fbeMapOffset > 0) && ((_buffer.getOffset() + fbeMapOffset + 4) <= _buffer.getSize())) : "Model is broken!";
@@ -2075,7 +2072,7 @@ public final class FieldModelMap_KEY_NAME__VALUE_NAME_ extends FieldModel
         }
     }
 
-    // Set the vector as HashMap
+    // Set the map as HashMap
     public void set(HashMap<_KEY_TYPE_, _VALUE_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";
@@ -3545,7 +3542,7 @@ public final class FinalModelMap_KEY_NAME__VALUE_NAME_ extends FinalModel
         return size;
     }
 
-    // Set the vector as HashMap
+    // Set the map as HashMap
     public long set(HashMap<_KEY_TYPE_, _VALUE_TYPE_> values)
     {
         assert (values != null) : "Invalid values parameter!";

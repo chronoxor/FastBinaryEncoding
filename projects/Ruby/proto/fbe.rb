@@ -2196,9 +2196,6 @@ module FBE
 
     # Resize the map and get its first model
     def resize(size)
-      @_model_key.fbe_offset = fbe_offset
-      @_model_value.fbe_offset = fbe_offset + @_model_key.fbe_size
-
       fbe_map_size = size * (@_model_key.fbe_size + @_model_value.fbe_size)
       fbe_map_offset = @_buffer.allocate(4 + fbe_map_size) - @_buffer.offset
       raise RuntimeError, "Model is broken!" if (fbe_map_offset <= 0) || ((@_buffer.offset + fbe_map_offset + 4) > @_buffer.size)

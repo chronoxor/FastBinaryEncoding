@@ -172,7 +172,7 @@ class FinalModelMapStructSimpleStructNested(buffer: Buffer, offset: Long) : Fina
         return size
     }
 
-    // Set the vector as HashMap
+    // Set the map as HashMap
     fun set(values: HashMap<StructSimple, StructNested>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }

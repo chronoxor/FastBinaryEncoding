@@ -20,19 +20,19 @@ type FieldModelStructSet struct {
     // Field model buffer offset
     offset int
 
-    F1 *FieldModelVectorByte
-    F2 *FieldModelVectorEnumSimple
-    F3 *FieldModelVectorFlagsSimple
-    F4 *FieldModelVectorStructSimple
+    F1 *FieldModelSetByte
+    F2 *FieldModelSetEnumSimple
+    F3 *FieldModelSetFlagsSimple
+    F4 *FieldModelSetStructSimple
 }
 
 // Create a new StructSet field model
 func NewFieldModelStructSet(buffer *fbe.Buffer, offset int) *FieldModelStructSet {
     fbeResult := FieldModelStructSet{buffer: buffer, offset: offset}
-    fbeResult.F1 = NewFieldModelVectorByte(buffer, 4 + 4)
-    fbeResult.F2 = NewFieldModelVectorEnumSimple(buffer, fbeResult.F1.FBEOffset() + fbeResult.F1.FBESize())
-    fbeResult.F3 = NewFieldModelVectorFlagsSimple(buffer, fbeResult.F2.FBEOffset() + fbeResult.F2.FBESize())
-    fbeResult.F4 = NewFieldModelVectorStructSimple(buffer, fbeResult.F3.FBEOffset() + fbeResult.F3.FBESize())
+    fbeResult.F1 = NewFieldModelSetByte(buffer, 4 + 4)
+    fbeResult.F2 = NewFieldModelSetEnumSimple(buffer, fbeResult.F1.FBEOffset() + fbeResult.F1.FBESize())
+    fbeResult.F3 = NewFieldModelSetFlagsSimple(buffer, fbeResult.F2.FBEOffset() + fbeResult.F2.FBESize())
+    fbeResult.F4 = NewFieldModelSetStructSimple(buffer, fbeResult.F3.FBEOffset() + fbeResult.F3.FBESize())
     return &fbeResult
 }
 

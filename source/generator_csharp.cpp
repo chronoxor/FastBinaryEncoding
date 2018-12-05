@@ -1863,9 +1863,6 @@ void GeneratorCSharp::GenerateFBEFieldModelMap(bool valueTypeKey, bool valueType
         // Resize the map and get its first model
         public KeyValuePair<_MODEL_KEY_DECL_, _MODEL_VALUE_DECL_> Resize(long size)
         {
-            _modelKey.FBEOffset = FBEOffset;
-            _modelValue.FBEOffset = FBEOffset + _modelKey.FBESize;
-
             uint fbeMapSize = (uint)(size * (_modelKey.FBESize + _modelValue.FBESize));
             uint fbeMapOffset = (uint)(_buffer.Allocate(4 + fbeMapSize) - _buffer.Offset);
             Debug.Assert(((fbeMapOffset > 0) && ((_buffer.Offset + fbeMapOffset + 4) <= _buffer.Size)), "Model is broken!");

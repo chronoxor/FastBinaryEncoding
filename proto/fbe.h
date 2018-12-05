@@ -1910,7 +1910,7 @@ public:
         }
     }
 
-    // Set the vector as C-array
+    // Set the array as C-array
     template <size_t S>
     void set(const T (&values)[S]) noexcept
     {
@@ -1926,7 +1926,7 @@ public:
         }
     }
 
-    // Set the vector as std::array
+    // Set the array as std::array
     template <size_t S>
     void set(const std::array<T, S>& values) noexcept
     {
@@ -1942,7 +1942,7 @@ public:
         }
     }
 
-    // Set the vector as std::vector
+    // Set the array as std::vector
     void set(const std::vector<T>& values) noexcept
     {
         assert(((_buffer.offset() + fbe_offset() + fbe_size()) <= _buffer.size()) && "Model is broken!");
@@ -3313,7 +3313,7 @@ public:
         return size;
     }
 
-    // Set the vector as C-array
+    // Set the array as C-array
     template <size_t S>
     size_t set(const T (&values)[S]) noexcept
     {
@@ -3332,7 +3332,7 @@ public:
         return size;
     }
 
-    // Set the vector as std::array
+    // Set the array as std::array
     template <size_t S>
     size_t set(const std::array<T, S>& values) noexcept
     {
@@ -3351,7 +3351,7 @@ public:
         return size;
     }
 
-    // Set the vector as std::vector
+    // Set the array as std::vector
     size_t set(const std::vector<T>& values) noexcept
     {
         assert(((_buffer.offset() + fbe_offset()) <= _buffer.size()) && "Model is broken!");

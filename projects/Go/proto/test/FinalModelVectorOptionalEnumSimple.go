@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding *EnumSimple vector final model
+// Fast Binary Encoding OptionalEnumSimple vector final model
 type FinalModelVectorOptionalEnumSimple struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelVectorOptionalEnumSimple struct {
     model *FinalModelOptionalEnumSimple
 }
 
-// Create a new *EnumSimple vector final model
+// Create a new OptionalEnumSimple vector final model
 func NewFinalModelVectorOptionalEnumSimple(buffer *fbe.Buffer, offset int) *FinalModelVectorOptionalEnumSimple {
     fbeResult := FinalModelVectorOptionalEnumSimple{buffer: buffer, offset: offset}
     fbeResult.model = NewFinalModelOptionalEnumSimple(buffer, offset)

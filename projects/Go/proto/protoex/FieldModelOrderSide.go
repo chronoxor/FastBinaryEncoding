@@ -16,7 +16,7 @@ type FieldModelOrderSide struct {
     offset int
 }
 
-// Create a new field model
+// Create a new OrderSide field model
 func NewFieldModelOrderSide(buffer *fbe.Buffer, offset int) *FieldModelOrderSide {
     return &FieldModelOrderSide{buffer: buffer, offset: offset}
 }

@@ -16,7 +16,7 @@ type FinalModelStateEx struct {
     offset int
 }
 
-// Create a new final model
+// Create a new StateEx final model
 func NewFinalModelStateEx(buffer *fbe.Buffer, offset int) *FinalModelStateEx {
     return &FinalModelStateEx{buffer: buffer, offset: offset}
 }

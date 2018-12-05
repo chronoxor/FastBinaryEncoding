@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional *float32 final model
+// Fast Binary Encoding optional Float final model
 type FinalModelOptionalFloat struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalFloat struct {
     value *fbe.FinalModelFloat
 }
 
-// Create a new optional *float32 final model
+// Create a new optional Float final model
 func NewFinalModelOptionalFloat(buffer *fbe.Buffer, offset int) *FinalModelOptionalFloat {
     fbeResult := FinalModelOptionalFloat{buffer: buffer, offset: offset}
     fbeResult.value = fbe.NewFinalModelFloat(buffer, 0)

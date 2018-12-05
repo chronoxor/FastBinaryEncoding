@@ -21,6 +21,12 @@ var _ = strconv.FormatInt
 
 // StructHash key
 type StructHashKey struct {
+    value *StructHash
+}
+
+// // Get StructHash value
+func (k *StructHashKey) Value() *StructHash {
+    return k.value
 }
 
 // Convert StructHash flags key to string

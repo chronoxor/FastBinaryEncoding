@@ -21,6 +21,12 @@ var _ = strconv.FormatInt
 
 // StructList key
 type StructListKey struct {
+    value *StructList
+}
+
+// // Get StructList value
+func (k *StructListKey) Value() *StructList {
+    return k.value
 }
 
 // Convert StructList flags key to string

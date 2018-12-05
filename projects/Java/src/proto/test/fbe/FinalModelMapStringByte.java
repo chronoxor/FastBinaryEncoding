@@ -188,7 +188,7 @@ public final class FinalModelMapStringByte extends FinalModel
         return size;
     }
 
-    // Set the vector as HashMap
+    // Set the map as HashMap
     public long set(HashMap<String, Byte> values)
     {
         assert (values != null) : "Invalid values parameter!";

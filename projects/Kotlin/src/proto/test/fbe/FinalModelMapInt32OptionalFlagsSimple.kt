@@ -172,7 +172,7 @@ class FinalModelMapInt32OptionalFlagsSimple(buffer: Buffer, offset: Long) : Fina
         return size
     }
 
-    // Set the vector as HashMap
+    // Set the map as HashMap
     fun set(values: HashMap<Int, FlagsSimple?>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }

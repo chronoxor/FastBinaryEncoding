@@ -16,7 +16,7 @@ type FieldModelStateEx struct {
     offset int
 }
 
-// Create a new field model
+// Create a new StateEx field model
 func NewFieldModelStateEx(buffer *fbe.Buffer, offset int) *FieldModelStateEx {
     return &FieldModelStateEx{buffer: buffer, offset: offset}
 }

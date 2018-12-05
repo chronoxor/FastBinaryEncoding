@@ -3518,9 +3518,6 @@ namespace FBE {
         // Resize the map and get its first model
         public KeyValuePair<TKeyModel, TValueModel> Resize(long size)
         {
-            _modelKey.FBEOffset = FBEOffset;
-            _modelValue.FBEOffset = FBEOffset + _modelKey.FBESize;
-
             uint fbeMapSize = (uint)(size * (_modelKey.FBESize + _modelValue.FBESize));
             uint fbeMapOffset = (uint)(_buffer.Allocate(4 + fbeMapSize) - _buffer.Offset);
             Debug.Assert(((fbeMapOffset > 0) && ((_buffer.Offset + fbeMapOffset + 4) <= _buffer.Size)), "Model is broken!");
@@ -3759,9 +3756,6 @@ namespace FBE {
         // Resize the map and get its first model
         public KeyValuePair<TKeyModel, TValueModel> Resize(long size)
         {
-            _modelKey.FBEOffset = FBEOffset;
-            _modelValue.FBEOffset = FBEOffset + _modelKey.FBESize;
-
             uint fbeMapSize = (uint)(size * (_modelKey.FBESize + _modelValue.FBESize));
             uint fbeMapOffset = (uint)(_buffer.Allocate(4 + fbeMapSize) - _buffer.Offset);
             Debug.Assert(((fbeMapOffset > 0) && ((_buffer.Offset + fbeMapOffset + 4) <= _buffer.Size)), "Model is broken!");
@@ -4000,9 +3994,6 @@ namespace FBE {
         // Resize the map and get its first model
         public KeyValuePair<TKeyModel, FieldModelOptionalValueType<TValue, TValueModel>> Resize(long size)
         {
-            _modelKey.FBEOffset = FBEOffset;
-            _modelValue.FBEOffset = FBEOffset + _modelKey.FBESize;
-
             uint fbeMapSize = (uint)(size * (_modelKey.FBESize + _modelValue.FBESize));
             uint fbeMapOffset = (uint)(_buffer.Allocate(4 + fbeMapSize) - _buffer.Offset);
             Debug.Assert(((fbeMapOffset > 0) && ((_buffer.Offset + fbeMapOffset + 4) <= _buffer.Size)), "Model is broken!");
@@ -4241,9 +4232,6 @@ namespace FBE {
         // Resize the map and get its first model
         public KeyValuePair<TKeyModel, FieldModelOptionalReferenceType<TValue, TValueModel>> Resize(long size)
         {
-            _modelKey.FBEOffset = FBEOffset;
-            _modelValue.FBEOffset = FBEOffset + _modelKey.FBESize;
-
             uint fbeMapSize = (uint)(size * (_modelKey.FBESize + _modelValue.FBESize));
             uint fbeMapOffset = (uint)(_buffer.Allocate(4 + fbeMapSize) - _buffer.Offset);
             Debug.Assert(((fbeMapOffset > 0) && ((_buffer.Offset + fbeMapOffset + 4) <= _buffer.Size)), "Model is broken!");
@@ -4482,9 +4470,6 @@ namespace FBE {
         // Resize the map and get its first model
         public KeyValuePair<TKeyModel, TValueModel> Resize(long size)
         {
-            _modelKey.FBEOffset = FBEOffset;
-            _modelValue.FBEOffset = FBEOffset + _modelKey.FBESize;
-
             uint fbeMapSize = (uint)(size * (_modelKey.FBESize + _modelValue.FBESize));
             uint fbeMapOffset = (uint)(_buffer.Allocate(4 + fbeMapSize) - _buffer.Offset);
             Debug.Assert(((fbeMapOffset > 0) && ((_buffer.Offset + fbeMapOffset + 4) <= _buffer.Size)), "Model is broken!");
@@ -4723,9 +4708,6 @@ namespace FBE {
         // Resize the map and get its first model
         public KeyValuePair<TKeyModel, TValueModel> Resize(long size)
         {
-            _modelKey.FBEOffset = FBEOffset;
-            _modelValue.FBEOffset = FBEOffset + _modelKey.FBESize;
-
             uint fbeMapSize = (uint)(size * (_modelKey.FBESize + _modelValue.FBESize));
             uint fbeMapOffset = (uint)(_buffer.Allocate(4 + fbeMapSize) - _buffer.Offset);
             Debug.Assert(((fbeMapOffset > 0) && ((_buffer.Offset + fbeMapOffset + 4) <= _buffer.Size)), "Model is broken!");
@@ -4964,9 +4946,6 @@ namespace FBE {
         // Resize the map and get its first model
         public KeyValuePair<TKeyModel, FieldModelOptionalValueType<TValue, TValueModel>> Resize(long size)
         {
-            _modelKey.FBEOffset = FBEOffset;
-            _modelValue.FBEOffset = FBEOffset + _modelKey.FBESize;
-
             uint fbeMapSize = (uint)(size * (_modelKey.FBESize + _modelValue.FBESize));
             uint fbeMapOffset = (uint)(_buffer.Allocate(4 + fbeMapSize) - _buffer.Offset);
             Debug.Assert(((fbeMapOffset > 0) && ((_buffer.Offset + fbeMapOffset + 4) <= _buffer.Size)), "Model is broken!");
@@ -5205,9 +5184,6 @@ namespace FBE {
         // Resize the map and get its first model
         public KeyValuePair<TKeyModel, FieldModelOptionalReferenceType<TValue, TValueModel>> Resize(long size)
         {
-            _modelKey.FBEOffset = FBEOffset;
-            _modelValue.FBEOffset = FBEOffset + _modelKey.FBESize;
-
             uint fbeMapSize = (uint)(size * (_modelKey.FBESize + _modelValue.FBESize));
             uint fbeMapOffset = (uint)(_buffer.Allocate(4 + fbeMapSize) - _buffer.Offset);
             Debug.Assert(((fbeMapOffset > 0) && ((_buffer.Offset + fbeMapOffset + 4) <= _buffer.Size)), "Model is broken!");

@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional *fbe.Timestamp field model
+// Fast Binary Encoding optional Timestamp field model
 type FieldModelOptionalTimestamp struct {
     // Field model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FieldModelOptionalTimestamp struct {
     value *fbe.FieldModelTimestamp
 }
 
-// Create a new optional *fbe.Timestamp field model
+// Create a new optional Timestamp field model
 func NewFieldModelOptionalTimestamp(buffer *fbe.Buffer, offset int) *FieldModelOptionalTimestamp {
     fbeResult := FieldModelOptionalTimestamp{buffer: buffer, offset: offset}
     fbeResult.value = fbe.NewFieldModelTimestamp(buffer, 0)

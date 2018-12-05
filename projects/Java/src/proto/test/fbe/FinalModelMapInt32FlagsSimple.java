@@ -188,7 +188,7 @@ public final class FinalModelMapInt32FlagsSimple extends FinalModel
         return size;
     }
 
-    // Set the vector as HashMap
+    // Set the map as HashMap
     public long set(HashMap<Integer, FlagsSimple> values)
     {
         assert (values != null) : "Invalid values parameter!";

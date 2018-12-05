@@ -7,7 +7,7 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding bool final model
+// Fast Binary Encoding Bool final model
 type FinalModelBool struct {
     // Final model buffer
     buffer *Buffer
@@ -15,7 +15,7 @@ type FinalModelBool struct {
     offset int
 }
 
-// Create a new final model
+// Create a new Bool final model
 func NewFinalModelBool(buffer *Buffer, offset int) *FinalModelBool {
     return &FinalModelBool{buffer: buffer, offset: offset}
 }

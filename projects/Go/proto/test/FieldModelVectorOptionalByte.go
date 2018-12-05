@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding *byte vector field model
+// Fast Binary Encoding OptionalByte vector field model
 type FieldModelVectorOptionalByte struct {
     // Field model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FieldModelVectorOptionalByte struct {
     model *FieldModelOptionalByte
 }
 
-// Create a new *byte vector field model
+// Create a new OptionalByte vector field model
 func NewFieldModelVectorOptionalByte(buffer *fbe.Buffer, offset int) *FieldModelVectorOptionalByte {
     fbeResult := FieldModelVectorOptionalByte{buffer: buffer, offset: offset}
     fbeResult.model = NewFieldModelOptionalByte(buffer, offset)
@@ -91,7 +91,7 @@ func (fm *FieldModelVectorOptionalByte) Size() int {
     return fbeVectorSize
 }
 
-// Array index operator
+// Vector index operator
 func (fm *FieldModelVectorOptionalByte) GetItem(index int) (*FieldModelOptionalByte, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return nil, errors.New("model is broken")

@@ -16,7 +16,7 @@ type FinalModelEnumInt32 struct {
     offset int
 }
 
-// Create a new final model
+// Create a new EnumInt32 final model
 func NewFinalModelEnumInt32(buffer *fbe.Buffer, offset int) *FinalModelEnumInt32 {
     return &FinalModelEnumInt32{buffer: buffer, offset: offset}
 }

@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional *fbe.Timestamp final model
+// Fast Binary Encoding optional Timestamp final model
 type FinalModelOptionalTimestamp struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalTimestamp struct {
     value *fbe.FinalModelTimestamp
 }
 
-// Create a new optional *fbe.Timestamp final model
+// Create a new optional Timestamp final model
 func NewFinalModelOptionalTimestamp(buffer *fbe.Buffer, offset int) *FinalModelOptionalTimestamp {
     fbeResult := FinalModelOptionalTimestamp{buffer: buffer, offset: offset}
     fbeResult.value = fbe.NewFinalModelTimestamp(buffer, 0)

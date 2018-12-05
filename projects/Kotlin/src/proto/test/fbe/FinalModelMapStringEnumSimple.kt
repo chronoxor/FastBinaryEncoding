@@ -172,7 +172,7 @@ class FinalModelMapStringEnumSimple(buffer: Buffer, offset: Long) : FinalModel(b
         return size
     }
 
-    // Set the vector as HashMap
+    // Set the map as HashMap
     fun set(values: HashMap<String, EnumSimple>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }

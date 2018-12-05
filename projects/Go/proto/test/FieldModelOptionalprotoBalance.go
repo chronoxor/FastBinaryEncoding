@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional proto.*Balance field model
+// Fast Binary Encoding optional protoBalance field model
 type FieldModelOptionalprotoBalance struct {
     // Field model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FieldModelOptionalprotoBalance struct {
     value *proto.FieldModelBalance
 }
 
-// Create a new optional proto.*Balance field model
+// Create a new optional protoBalance field model
 func NewFieldModelOptionalprotoBalance(buffer *fbe.Buffer, offset int) *FieldModelOptionalprotoBalance {
     fbeResult := FieldModelOptionalprotoBalance{buffer: buffer, offset: offset}
     fbeResult.value = proto.NewFieldModelBalance(buffer, 0)

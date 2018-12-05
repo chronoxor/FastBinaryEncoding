@@ -21,6 +21,12 @@ var _ = strconv.FormatInt
 
 // StructSet key
 type StructSetKey struct {
+    value *StructSet
+}
+
+// // Get StructSet value
+func (k *StructSetKey) Value() *StructSet {
+    return k.value
 }
 
 // Convert StructSet flags key to string

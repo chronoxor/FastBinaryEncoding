@@ -97,9 +97,6 @@ class FieldModelMapStringFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(
     // Resize the map and get its first model
     fun resize(size: Long): Pair<FieldModelString, FieldModelFlagsSimple>
     {
-        _modelKey.fbeOffset = fbeOffset
-        _modelValue.fbeOffset = fbeOffset + _modelKey.fbeSize
-
         val fbeMapSize = size * (_modelKey.fbeSize + _modelValue.fbeSize)
         val fbeMapOffset = _buffer.allocate(4 + fbeMapSize) - _buffer.offset
         assert((fbeMapOffset > 0) && ((_buffer.offset + fbeMapOffset + 4) <= _buffer.size)) { "Model is broken!" }
@@ -203,7 +200,7 @@ class FieldModelMapStringFlagsSimple(buffer: Buffer, offset: Long) : FieldModel(
         }
     }
 
-    // Set the vector as HashMap
+    // Set the map as HashMap
     fun set(values: HashMap<String, FlagsSimple>)
     {
         assert((_buffer.offset + fbeOffset + fbeSize) <= _buffer.size) { "Model is broken!" }

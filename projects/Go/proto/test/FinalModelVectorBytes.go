@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding []byte vector final model
+// Fast Binary Encoding Bytes vector final model
 type FinalModelVectorBytes struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelVectorBytes struct {
     model *fbe.FinalModelBytes
 }
 
-// Create a new []byte vector final model
+// Create a new Bytes vector final model
 func NewFinalModelVectorBytes(buffer *fbe.Buffer, offset int) *FinalModelVectorBytes {
     fbeResult := FinalModelVectorBytes{buffer: buffer, offset: offset}
     fbeResult.model = fbe.NewFinalModelBytes(buffer, offset)

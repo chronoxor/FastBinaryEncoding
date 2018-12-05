@@ -7,7 +7,7 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding rune final model
+// Fast Binary Encoding Char final model
 type FinalModelChar struct {
     // Final model buffer
     buffer *Buffer
@@ -15,7 +15,7 @@ type FinalModelChar struct {
     offset int
 }
 
-// Create a new final model
+// Create a new Char final model
 func NewFinalModelChar(buffer *Buffer, offset int) *FinalModelChar {
     return &FinalModelChar{buffer: buffer, offset: offset}
 }

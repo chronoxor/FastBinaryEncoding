@@ -16,7 +16,7 @@ type FinalModelOrderType struct {
     offset int
 }
 
-// Create a new final model
+// Create a new OrderType final model
 func NewFinalModelOrderType(buffer *fbe.Buffer, offset int) *FinalModelOrderType {
     return &FinalModelOrderType{buffer: buffer, offset: offset}
 }

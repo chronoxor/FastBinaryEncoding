@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional proto.*OrderSide final model
+// Fast Binary Encoding optional protoOrderSide final model
 type FinalModelOptionalprotoOrderSide struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalprotoOrderSide struct {
     value *proto.FinalModelOrderSide
 }
 
-// Create a new optional proto.*OrderSide final model
+// Create a new optional protoOrderSide final model
 func NewFinalModelOptionalprotoOrderSide(buffer *fbe.Buffer, offset int) *FinalModelOptionalprotoOrderSide {
     fbeResult := FinalModelOptionalprotoOrderSide{buffer: buffer, offset: offset}
     fbeResult.value = proto.NewFinalModelOrderSide(buffer, 0)

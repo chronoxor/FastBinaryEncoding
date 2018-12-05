@@ -16,7 +16,7 @@ type FieldModelFlagsTyped struct {
     offset int
 }
 
-// Create a new field model
+// Create a new FlagsTyped field model
 func NewFieldModelFlagsTyped(buffer *fbe.Buffer, offset int) *FieldModelFlagsTyped {
     return &FieldModelFlagsTyped{buffer: buffer, offset: offset}
 }

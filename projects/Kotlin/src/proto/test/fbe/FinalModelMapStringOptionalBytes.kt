@@ -172,7 +172,7 @@ class FinalModelMapStringOptionalBytes(buffer: Buffer, offset: Long) : FinalMode
         return size
     }
 
-    // Set the vector as HashMap
+    // Set the map as HashMap
     fun set(values: HashMap<String, ByteArray?>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }

@@ -188,7 +188,7 @@ public final class FinalModelMapStructSimpleOptionalStructNested extends FinalMo
         return size;
     }
 
-    // Set the vector as HashMap
+    // Set the map as HashMap
     public long set(HashMap<StructSimple, StructNested> values)
     {
         assert (values != null) : "Invalid values parameter!";

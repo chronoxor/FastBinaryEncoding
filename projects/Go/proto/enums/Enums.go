@@ -19,6 +19,12 @@ var _ = strconv.FormatInt
 
 // Enums key
 type EnumsKey struct {
+    value *Enums
+}
+
+// // Get Enums value
+func (k *EnumsKey) Value() *Enums {
+    return k.value
 }
 
 // Convert Enums flags key to string

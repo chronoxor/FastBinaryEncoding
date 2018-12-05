@@ -6012,7 +6012,7 @@ class FieldModelSet extends FieldModel {
   }
 
   /**
-   * Check if the set is valid
+   * Check if the set value is valid
    * @this {!FieldModelSet}
    * @returns {!boolean} Field model valid state
    */
@@ -6044,7 +6044,7 @@ class FieldModelSet extends FieldModel {
   }
 
   /**
-   * Get the set
+   * Get the set value
    * @this {!FieldModelSet}
    * @param {Set=} values Set values, defaults is new Set()
    * @returns {!Set} Result set values
@@ -6068,7 +6068,7 @@ class FieldModelSet extends FieldModel {
   }
 
   /**
-   * Set the set
+   * Set the set value
    * @this {!FieldModelSet}
    * @param {!Set} values Set values
    */
@@ -6220,9 +6220,6 @@ class FieldModelMap extends FieldModel {
    * @returns {[!FieldModel]} Base field model value
    */
   resize (size) {
-    this._modelKey.fbeOffset = this.fbeOffset
-    this._modelValue.fbeOffset = this.fbeOffset + this._modelKey.fbeSize
-
     let fbeMapSize = size * (this._modelKey.fbeSize + this._modelValue.fbeSize)
     let fbeMapOffset = this._buffer.allocate(4 + fbeMapSize) - this._buffer.offset
     console.assert(((fbeMapOffset > 0) && ((this._buffer.offset + fbeMapOffset + 4) <= this._buffer.size)), 'Model is broken!')
@@ -7303,7 +7300,7 @@ class FinalModelSet extends FinalModel {
   }
 
   /**
-   * Check if the set is valid
+   * Check if the set value is valid
    * @this {!FinalModelSet}
    * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
    */
@@ -7328,7 +7325,7 @@ class FinalModelSet extends FinalModel {
   }
 
   /**
-   * Get the set
+   * Get the set value
    * @this {!FinalModelSet}
    * @param {Set=} values Set values, defaults is new Set()
    * @returns {!object} Result set values and their size
@@ -7358,7 +7355,7 @@ class FinalModelSet extends FinalModel {
   }
 
   /**
-   * Set the set
+   * Set the set value
    * @this {!FinalModelSet}
    * @param {!Set} values Set values
    * @returns {!number} Final model size

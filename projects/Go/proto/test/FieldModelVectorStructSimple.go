@@ -91,7 +91,7 @@ func (fm *FieldModelVectorStructSimple) Size() int {
     return fbeVectorSize
 }
 
-// Array index operator
+// Vector index operator
 func (fm *FieldModelVectorStructSimple) GetItem(index int) (*FieldModelStructSimple, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return nil, errors.New("model is broken")

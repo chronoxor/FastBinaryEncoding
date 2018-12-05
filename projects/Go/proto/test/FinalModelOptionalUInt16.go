@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional *uint16 final model
+// Fast Binary Encoding optional UInt16 final model
 type FinalModelOptionalUInt16 struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalUInt16 struct {
     value *fbe.FinalModelUInt16
 }
 
-// Create a new optional *uint16 final model
+// Create a new optional UInt16 final model
 func NewFinalModelOptionalUInt16(buffer *fbe.Buffer, offset int) *FinalModelOptionalUInt16 {
     fbeResult := FinalModelOptionalUInt16{buffer: buffer, offset: offset}
     fbeResult.value = fbe.NewFinalModelUInt16(buffer, 0)

@@ -22,6 +22,12 @@ var _ = strconv.FormatInt
 // StructOptional key
 type StructOptionalKey struct {
     StructSimpleKey
+    value *StructOptional
+}
+
+// // Get StructOptional value
+func (k *StructOptionalKey) Value() *StructOptional {
+    return k.value
 }
 
 // Convert StructOptional flags key to string

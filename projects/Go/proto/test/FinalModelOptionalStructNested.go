@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional *StructNested final model
+// Fast Binary Encoding optional StructNested final model
 type FinalModelOptionalStructNested struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalStructNested struct {
     value *FinalModelStructNested
 }
 
-// Create a new optional *StructNested final model
+// Create a new optional StructNested final model
 func NewFinalModelOptionalStructNested(buffer *fbe.Buffer, offset int) *FinalModelOptionalStructNested {
     fbeResult := FinalModelOptionalStructNested{buffer: buffer, offset: offset}
     fbeResult.value = NewFinalModelStructNested(buffer, 0)

@@ -16,7 +16,7 @@ type FinalModelFlagsSimple struct {
     offset int
 }
 
-// Create a new final model
+// Create a new FlagsSimple final model
 func NewFinalModelFlagsSimple(buffer *fbe.Buffer, offset int) *FinalModelFlagsSimple {
     return &FinalModelFlagsSimple{buffer: buffer, offset: offset}
 }

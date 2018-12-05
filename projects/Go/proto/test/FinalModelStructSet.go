@@ -17,19 +17,19 @@ type FinalModelStructSet struct {
     buffer *fbe.Buffer  // Final model buffer
     offset int          // Final model buffer offset
 
-    F1 *FinalModelVectorByte
-    F2 *FinalModelVectorEnumSimple
-    F3 *FinalModelVectorFlagsSimple
-    F4 *FinalModelVectorStructSimple
+    F1 *FinalModelSetByte
+    F2 *FinalModelSetEnumSimple
+    F3 *FinalModelSetFlagsSimple
+    F4 *FinalModelSetStructSimple
 }
 
 // Create a new StructSet final model
 func NewFinalModelStructSet(buffer *fbe.Buffer, offset int) *FinalModelStructSet {
     fbeResult := FinalModelStructSet{buffer: buffer, offset: offset}
-    fbeResult.F1 = NewFinalModelVectorByte(buffer, 0)
-    fbeResult.F2 = NewFinalModelVectorEnumSimple(buffer, 0)
-    fbeResult.F3 = NewFinalModelVectorFlagsSimple(buffer, 0)
-    fbeResult.F4 = NewFinalModelVectorStructSimple(buffer, 0)
+    fbeResult.F1 = NewFinalModelSetByte(buffer, 0)
+    fbeResult.F2 = NewFinalModelSetEnumSimple(buffer, 0)
+    fbeResult.F3 = NewFinalModelSetFlagsSimple(buffer, 0)
+    fbeResult.F4 = NewFinalModelSetStructSimple(buffer, 0)
     return &fbeResult
 }
 

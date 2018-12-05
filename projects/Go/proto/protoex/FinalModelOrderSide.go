@@ -16,7 +16,7 @@ type FinalModelOrderSide struct {
     offset int
 }
 
-// Create a new final model
+// Create a new OrderSide final model
 func NewFinalModelOrderSide(buffer *fbe.Buffer, offset int) *FinalModelOrderSide {
     return &FinalModelOrderSide{buffer: buffer, offset: offset}
 }

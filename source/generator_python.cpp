@@ -1581,9 +1581,6 @@ class FieldModelMap(FieldModel):
 
     # Resize the map and get its first model
     def resize(self, size):
-        self._model_key.fbe_offset = self.fbe_offset
-        self._model_value.fbe_offset = self.fbe_offset + self._model_key.fbe_size
-
         fbe_map_size = size * (self._model_key.fbe_size + self._model_value.fbe_size)
         fbe_map_offset = self._buffer.allocate(4 + fbe_map_size) - self._buffer.offset
         assert ((fbe_map_offset > 0) and ((self._buffer.offset + fbe_map_offset + 4) <= self._buffer.size)), "Model is broken!"

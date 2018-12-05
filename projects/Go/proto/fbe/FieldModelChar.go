@@ -7,7 +7,7 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding rune field model
+// Fast Binary Encoding Char field model
 type FieldModelChar struct {
     // Field model buffer
     buffer *Buffer
@@ -15,7 +15,7 @@ type FieldModelChar struct {
     offset int
 }
 
-// Create a new field model
+// Create a new Char field model
 func NewFieldModelChar(buffer *Buffer, offset int) *FieldModelChar {
     return &FieldModelChar{buffer: buffer, offset: offset}
 }

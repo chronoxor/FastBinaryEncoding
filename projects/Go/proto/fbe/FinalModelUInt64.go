@@ -7,7 +7,7 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding uint64 final model
+// Fast Binary Encoding UInt64 final model
 type FinalModelUInt64 struct {
     // Final model buffer
     buffer *Buffer
@@ -15,7 +15,7 @@ type FinalModelUInt64 struct {
     offset int
 }
 
-// Create a new final model
+// Create a new UInt64 final model
 func NewFinalModelUInt64(buffer *Buffer, offset int) *FinalModelUInt64 {
     return &FinalModelUInt64{buffer: buffer, offset: offset}
 }

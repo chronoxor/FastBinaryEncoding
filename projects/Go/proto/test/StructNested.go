@@ -22,6 +22,12 @@ var _ = strconv.FormatInt
 // StructNested key
 type StructNestedKey struct {
     StructOptionalKey
+    value *StructNested
+}
+
+// // Get StructNested value
+func (k *StructNestedKey) Value() *StructNested {
+    return k.value
 }
 
 // Convert StructNested flags key to string

@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional *fbe.Decimal final model
+// Fast Binary Encoding optional Decimal final model
 type FinalModelOptionalDecimal struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalDecimal struct {
     value *fbe.FinalModelDecimal
 }
 
-// Create a new optional *fbe.Decimal final model
+// Create a new optional Decimal final model
 func NewFinalModelOptionalDecimal(buffer *fbe.Buffer, offset int) *FinalModelOptionalDecimal {
     fbeResult := FinalModelOptionalDecimal{buffer: buffer, offset: offset}
     fbeResult.value = fbe.NewFinalModelDecimal(buffer, 0)

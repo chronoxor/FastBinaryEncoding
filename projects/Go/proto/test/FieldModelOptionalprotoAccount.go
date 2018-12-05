@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional proto.*Account field model
+// Fast Binary Encoding optional protoAccount field model
 type FieldModelOptionalprotoAccount struct {
     // Field model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FieldModelOptionalprotoAccount struct {
     value *proto.FieldModelAccount
 }
 
-// Create a new optional proto.*Account field model
+// Create a new optional protoAccount field model
 func NewFieldModelOptionalprotoAccount(buffer *fbe.Buffer, offset int) *FieldModelOptionalprotoAccount {
     fbeResult := FieldModelOptionalprotoAccount{buffer: buffer, offset: offset}
     fbeResult.value = proto.NewFieldModelAccount(buffer, 0)

@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding *[]byte array final model
+// Fast Binary Encoding OptionalBytes array final model
 type FinalModelArrayOptionalBytes struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -26,7 +26,7 @@ type FinalModelArrayOptionalBytes struct {
     size int
 }
 
-// Create a new *[]byte array final model
+// Create a new OptionalBytes array final model
 func NewFinalModelArrayOptionalBytes(buffer *fbe.Buffer, offset int, size int) *FinalModelArrayOptionalBytes {
     fbeResult := FinalModelArrayOptionalBytes{buffer: buffer, offset: offset}
     fbeResult.model = NewFinalModelOptionalBytes(buffer, offset)

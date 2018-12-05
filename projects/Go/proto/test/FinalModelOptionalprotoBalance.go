@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional proto.*Balance final model
+// Fast Binary Encoding optional protoBalance final model
 type FinalModelOptionalprotoBalance struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalprotoBalance struct {
     value *proto.FinalModelBalance
 }
 
-// Create a new optional proto.*Balance final model
+// Create a new optional protoBalance final model
 func NewFinalModelOptionalprotoBalance(buffer *fbe.Buffer, offset int) *FinalModelOptionalprotoBalance {
     fbeResult := FinalModelOptionalprotoBalance{buffer: buffer, offset: offset}
     fbeResult.value = proto.NewFinalModelBalance(buffer, 0)

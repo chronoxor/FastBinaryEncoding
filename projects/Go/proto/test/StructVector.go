@@ -21,6 +21,12 @@ var _ = strconv.FormatInt
 
 // StructVector key
 type StructVectorKey struct {
+    value *StructVector
+}
+
+// // Get StructVector value
+func (k *StructVectorKey) Value() *StructVector {
+    return k.value
 }
 
 // Convert StructVector flags key to string

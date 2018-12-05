@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional proto.*OrderType field model
+// Fast Binary Encoding optional protoOrderType field model
 type FieldModelOptionalprotoOrderType struct {
     // Field model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FieldModelOptionalprotoOrderType struct {
     value *proto.FieldModelOrderType
 }
 
-// Create a new optional proto.*OrderType field model
+// Create a new optional protoOrderType field model
 func NewFieldModelOptionalprotoOrderType(buffer *fbe.Buffer, offset int) *FieldModelOptionalprotoOrderType {
     fbeResult := FieldModelOptionalprotoOrderType{buffer: buffer, offset: offset}
     fbeResult.value = proto.NewFieldModelOrderType(buffer, 0)

@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding *EnumSimple array field model
+// Fast Binary Encoding OptionalEnumSimple array field model
 type FieldModelArrayOptionalEnumSimple struct {
     // Field model buffer
     buffer *fbe.Buffer
@@ -26,7 +26,7 @@ type FieldModelArrayOptionalEnumSimple struct {
     size int
 }
 
-// Create a new *EnumSimple array field model
+// Create a new OptionalEnumSimple array field model
 func NewFieldModelArrayOptionalEnumSimple(buffer *fbe.Buffer, offset int, size int) *FieldModelArrayOptionalEnumSimple {
     fbeResult := FieldModelArrayOptionalEnumSimple{buffer: buffer, offset: offset}
     fbeResult.model = NewFieldModelOptionalEnumSimple(buffer, offset)

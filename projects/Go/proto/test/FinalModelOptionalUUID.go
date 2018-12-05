@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional *fbe.UUID final model
+// Fast Binary Encoding optional UUID final model
 type FinalModelOptionalUUID struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalUUID struct {
     value *fbe.FinalModelUUID
 }
 
-// Create a new optional *fbe.UUID final model
+// Create a new optional UUID final model
 func NewFinalModelOptionalUUID(buffer *fbe.Buffer, offset int) *FinalModelOptionalUUID {
     fbeResult := FinalModelOptionalUUID{buffer: buffer, offset: offset}
     fbeResult.value = fbe.NewFinalModelUUID(buffer, 0)

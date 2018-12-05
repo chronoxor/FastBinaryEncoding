@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding *EnumSimple vector field model
+// Fast Binary Encoding OptionalEnumSimple vector field model
 type FieldModelVectorOptionalEnumSimple struct {
     // Field model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FieldModelVectorOptionalEnumSimple struct {
     model *FieldModelOptionalEnumSimple
 }
 
-// Create a new *EnumSimple vector field model
+// Create a new OptionalEnumSimple vector field model
 func NewFieldModelVectorOptionalEnumSimple(buffer *fbe.Buffer, offset int) *FieldModelVectorOptionalEnumSimple {
     fbeResult := FieldModelVectorOptionalEnumSimple{buffer: buffer, offset: offset}
     fbeResult.model = NewFieldModelOptionalEnumSimple(buffer, offset)
@@ -91,7 +91,7 @@ func (fm *FieldModelVectorOptionalEnumSimple) Size() int {
     return fbeVectorSize
 }
 
-// Array index operator
+// Vector index operator
 func (fm *FieldModelVectorOptionalEnumSimple) GetItem(index int) (*FieldModelOptionalEnumSimple, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return nil, errors.New("model is broken")

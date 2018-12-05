@@ -13,7 +13,7 @@ import "../proto"
 var _ = fbe.Version
 var _ = proto.Version
 
-// Fast Binary Encoding optional *FlagsTyped final model
+// Fast Binary Encoding optional FlagsTyped final model
 type FinalModelOptionalFlagsTyped struct {
     // Final model buffer
     buffer *fbe.Buffer
@@ -24,7 +24,7 @@ type FinalModelOptionalFlagsTyped struct {
     value *FinalModelFlagsTyped
 }
 
-// Create a new optional *FlagsTyped final model
+// Create a new optional FlagsTyped final model
 func NewFinalModelOptionalFlagsTyped(buffer *fbe.Buffer, offset int) *FinalModelOptionalFlagsTyped {
     fbeResult := FinalModelOptionalFlagsTyped{buffer: buffer, offset: offset}
     fbeResult.value = NewFinalModelFlagsTyped(buffer, 0)

@@ -7,7 +7,7 @@ package fbe
 
 import "errors"
 
-// Fast Binary Encoding byte field model
+// Fast Binary Encoding Byte field model
 type FieldModelByte struct {
     // Field model buffer
     buffer *Buffer
@@ -15,7 +15,7 @@ type FieldModelByte struct {
     offset int
 }
 
-// Create a new field model
+// Create a new Byte field model
 func NewFieldModelByte(buffer *Buffer, offset int) *FieldModelByte {
     return &FieldModelByte{buffer: buffer, offset: offset}
 }

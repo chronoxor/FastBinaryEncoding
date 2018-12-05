@@ -172,7 +172,7 @@ class FinalModelMapStringFlagsSimple(buffer: Buffer, offset: Long) : FinalModel(
         return size
     }
 
-    // Set the vector as HashMap
+    // Set the map as HashMap
     fun set(values: HashMap<String, FlagsSimple>): Long
     {
         assert((_buffer.offset + fbeOffset + 4) <= _buffer.size) { "Model is broken!" }
