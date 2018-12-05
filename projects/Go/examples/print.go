@@ -196,7 +196,7 @@ func main() {
 	s2.Uid = 65
 	structHashEx.F1[s2.Key()] = struct{Key test.StructSimple; Value test.StructNested}{*s2, *test.NewStructNested()}
 	structHashEx.F2[s1.Key()] = struct{Key test.StructSimple; Value *test.StructNested}{*s1, test.NewStructNested()}
-	structHashEx.F2[s2.Key()] = struct{Key test.StructSimple; Value *test.StructNested}{*s1, nil}
+	structHashEx.F2[s2.Key()] = struct{Key test.StructSimple; Value *test.StructNested}{*s2, nil}
 	fmt.Println(structHashEx)
 	fmt.Println()
 }

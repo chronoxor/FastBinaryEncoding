@@ -1252,3 +1252,44 @@ func TestSerializationFinalStructHash(t *testing.T) {
 	assert.EqualValues(t, struct2.F10["10"].Uid, 48)
 	assert.Nil(t, struct2.F10["20"])
 }
+
+func TestSerializationFinalStructHashEx(t *testing.T) {
+	// Create a new struct
+	struct1 := test.NewStructHashEx()
+	s1 := test.NewStructSimple()
+	s1.Uid = 48
+	struct1.F1[s1.Key()] = struct{Key test.StructSimple; Value test.StructNested}{*s1, *test.NewStructNested()}
+	s2 := test.NewStructSimple()
+	s2.Uid = 65
+	struct1.F1[s2.Key()] = struct{Key test.StructSimple; Value test.StructNested}{*s2, *test.NewStructNested()}
+	struct1.F2[s1.Key()] = struct{Key test.StructSimple; Value *test.StructNested}{*s1, test.NewStructNested()}
+	struct1.F2[s2.Key()] = struct{Key test.StructSimple; Value *test.StructNested}{*s2, nil}
+
+	// Serialize the struct to the FBE stream
+	writer := test.NewStructHashExFinalModel(fbe.NewEmptyBuffer())
+	assert.EqualValues(t, writer.Model().FBEType(), 142)
+	serialized, err := writer.Serialize(struct1)
+	assert.Nil(t, err)
+	assert.EqualValues(t, serialized, writer.Buffer().Size())
+	assert.True(t, writer.Verify())
+	writer.Next(serialized)
+
+	// Check the serialized FBE size
+	assert.EqualValues(t, writer.Buffer().Size(), 4979)
+
+	// Deserialize the struct from the FBE stream
+	reader := test.NewStructHashExFinalModel(writer.Buffer())
+	assert.EqualValues(t, reader.Model().FBEType(), 142)
+	assert.True(t, reader.Verify())
+	struct2, deserialized, err := reader.Deserialize()
+	assert.Nil(t, err)
+	assert.EqualValues(t, deserialized, reader.Buffer().Size())
+	reader.Next(deserialized)
+
+	assert.EqualValues(t, len(struct2.F1), 2)
+	assert.EqualValues(t, struct2.F1[s1.Key()].Value.F1002, test.EnumTyped_ENUM_VALUE_2)
+	assert.EqualValues(t, struct2.F1[s2.Key()].Value.F1002, test.EnumTyped_ENUM_VALUE_2)
+	assert.EqualValues(t, len(struct2.F2), 2)
+	assert.EqualValues(t, struct2.F2[s1.Key()].Value.F1002, test.EnumTyped_ENUM_VALUE_2)
+	assert.Nil(t, struct2.F2[s2.Key()].Value)
+}
