@@ -323,7 +323,7 @@ func DecimalFromString(value string) Decimal {
 
 // Create zero decimal
 func DecimalZero() Decimal {
-    return Decimal{decimal.Zero}
+    return Decimal{decimal.New(0, 0)}
 }
 
 // Timestamp struct
@@ -343,12 +343,12 @@ func TimestampFromDateTime(year, month, day, hour, minute, second, nanoseconds i
 
 // Create a new timestamp from the given nanoseconds
 func TimestampFromNanoseconds(nanoseconds uint64) Timestamp {
-    return Timestamp{time.Unix(int64(nanoseconds / 1000000000), int64(nanoseconds % 1000000000))}
+    return Timestamp{time.Unix(int64(nanoseconds / 1000000000), int64(nanoseconds % 1000000000)).UTC()}
 }
 
 // Create Unix Epoch timestamp
 func TimestampEpoch() Timestamp {
-    return Timestamp{time.Unix(0, 0)}
+    return Timestamp{time.Unix(0, 0).UTC()}
 }
 
 // Create the current UTC timestamp

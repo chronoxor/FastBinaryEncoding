@@ -4,6 +4,7 @@ import "testing"
 import "github.com/stretchr/testify/assert"
 import "../proto/fbe"
 import "../proto/proto"
+import "../proto/test"
 
 func TestSerializationDomain(t *testing.T) {
 	// Create a new account with some orders
@@ -68,7 +69,7 @@ func TestSerializationDomain(t *testing.T) {
 	assert.EqualValues(t, account2.Orders[2].Price, 1.5)
 	assert.EqualValues(t, account2.Orders[2].Volume, 10.0)
 }
-/*
+
 func TestSerializationStructSimple(t *testing.T) {
 	// Create a new struct
 	struct1 := test.NewStructSimple()
@@ -180,20 +181,33 @@ func TestSerializationStructSimple(t *testing.T) {
 }
 
 func TestSerializationStructOptional(t *testing.T) {
-	// Define a source JSON string
-	json := []byte(`{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145860677797000,"f36":"00000000-0000-0000-0000-000000000000","f37":"8420d1c6-f0a6-11e8-80fc-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]},"f100":null,"f101":true,"f102":null,"f103":null,"f104":255,"f105":null,"f106":null,"f107":33,"f108":null,"f109":null,"f110":1092,"f111":null,"f112":null,"f113":127,"f114":null,"f115":null,"f116":255,"f117":null,"f118":null,"f119":32767,"f120":null,"f121":null,"f122":65535,"f123":null,"f124":null,"f125":2147483647,"f126":null,"f127":null,"f128":4294967295,"f129":null,"f130":null,"f131":9223372036854775807,"f132":null,"f133":null,"f134":18446744073709551615,"f135":null,"f136":null,"f137":123.456,"f138":null,"f139":null,"f140":-1.23456e+125,"f141":null,"f142":null,"f143":"123456.123456","f144":null,"f145":null,"f146":"Initial string!","f147":null,"f148":null,"f149":1543145860678429000,"f150":null,"f151":null,"f152":"123e4567-e89b-12d3-a456-426655440000","f153":null,"f154":null,"f155":null,"f156":null,"f157":null,"f158":null,"f159":null,"f160":null,"f161":null,"f162":null,"f163":null,"f164":null,"f165":null}`)
+	// Create a new struct
+	struct1 := test.NewStructOptional()
 
-	// Create a new struct from the source JSON string
-	struct1, _ := test.NewStructOptionalFromJSON(json)
+	// Serialize the struct to the FBE stream
+	writer := test.NewStructOptionalModel(fbe.NewEmptyBuffer())
+	assert.EqualValues(t, writer.Model().FBEType(), 111)
+	assert.EqualValues(t, writer.Model().FBEOffset(), 4)
+	serialized, err := writer.Serialize(struct1)
+	assert.Nil(t, err)
+	assert.EqualValues(t, serialized, writer.Buffer().Size())
+	assert.True(t, writer.Verify())
+	writer.Next(serialized)
+	assert.EqualValues(t, writer.Model().FBEOffset(), 4 + writer.Buffer().Size())
 
-	// Serialize the struct to the JSON string
-	json, _ = struct1.JSON()
+	// Check the serialized FBE size
+	assert.EqualValues(t, writer.Buffer().Size(), 834)
 
-	// Check the serialized JSON size
-	assert.NotEmpty(t, json)
-
-	// Deserialize the struct from the JSON string
-	struct2, _ := test.NewStructOptionalFromJSON(json)
+	// Deserialize the struct from the FBE stream
+	reader := test.NewStructOptionalModel(writer.Buffer())
+	assert.EqualValues(t, reader.Model().FBEType(), 111)
+	assert.EqualValues(t, reader.Model().FBEOffset(), 4)
+	assert.True(t, reader.Verify())
+	struct2, deserialized, err := reader.Deserialize()
+	assert.Nil(t, err)
+	assert.EqualValues(t, deserialized, reader.Buffer().Size())
+	reader.Next(deserialized)
+	assert.EqualValues(t, reader.Model().FBEOffset(), 4 + reader.Buffer().Size())
 
 	assert.EqualValues(t, struct2.F1, false)
 	assert.EqualValues(t, struct2.F2, true)
@@ -421,20 +435,33 @@ func TestSerializationStructOptional(t *testing.T) {
 }
 
 func TestSerializationStructNested(t *testing.T) {
-	// Define a source JSON string
-	json := []byte(`{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145901646321000,"f36":"00000000-0000-0000-0000-000000000000","f37":"9c8c268e-f0a6-11e8-a777-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]},"f100":null,"f101":true,"f102":null,"f103":null,"f104":255,"f105":null,"f106":null,"f107":33,"f108":null,"f109":null,"f110":1092,"f111":null,"f112":null,"f113":127,"f114":null,"f115":null,"f116":255,"f117":null,"f118":null,"f119":32767,"f120":null,"f121":null,"f122":65535,"f123":null,"f124":null,"f125":2147483647,"f126":null,"f127":null,"f128":4294967295,"f129":null,"f130":null,"f131":9223372036854775807,"f132":null,"f133":null,"f134":18446744073709551615,"f135":null,"f136":null,"f137":123.456,"f138":null,"f139":null,"f140":-1.23456e+125,"f141":null,"f142":null,"f143":"123456.123456","f144":null,"f145":null,"f146":"Initial string!","f147":null,"f148":null,"f149":1543145901647155000,"f150":null,"f151":null,"f152":"123e4567-e89b-12d3-a456-426655440000","f153":null,"f154":null,"f155":null,"f156":null,"f157":null,"f158":null,"f159":null,"f160":null,"f161":null,"f162":null,"f163":null,"f164":null,"f165":null,"f1000":0,"f1001":null,"f1002":50,"f1003":null,"f1004":0,"f1005":null,"f1006":42,"f1007":null,"f1008":{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145901647367000,"f36":"00000000-0000-0000-0000-000000000000","f37":"9c8c54c4-f0a6-11e8-a777-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"f1009":null,"f1010":{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145901648310000,"f36":"00000000-0000-0000-0000-000000000000","f37":"9c8c6b76-f0a6-11e8-a777-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]},"f100":null,"f101":true,"f102":null,"f103":null,"f104":255,"f105":null,"f106":null,"f107":33,"f108":null,"f109":null,"f110":1092,"f111":null,"f112":null,"f113":127,"f114":null,"f115":null,"f116":255,"f117":null,"f118":null,"f119":32767,"f120":null,"f121":null,"f122":65535,"f123":null,"f124":null,"f125":2147483647,"f126":null,"f127":null,"f128":4294967295,"f129":null,"f130":null,"f131":9223372036854775807,"f132":null,"f133":null,"f134":18446744073709551615,"f135":null,"f136":null,"f137":123.456,"f138":null,"f139":null,"f140":-1.23456e+125,"f141":null,"f142":null,"f143":"123456.123456","f144":null,"f145":null,"f146":"Initial string!","f147":null,"f148":null,"f149":1543145901648871000,"f150":null,"f151":null,"f152":"123e4567-e89b-12d3-a456-426655440000","f153":null,"f154":null,"f155":null,"f156":null,"f157":null,"f158":null,"f159":null,"f160":null,"f161":null,"f162":null,"f163":null,"f164":null,"f165":null},"f1011":null}`)
+	// Create a new struct
+	struct1 := test.NewStructNested()
 
-	// Create a new struct from the source JSON string
-	struct1, _ := test.NewStructNestedFromJSON(json)
+	// Serialize the struct to the FBE stream
+	writer := test.NewStructNestedModel(fbe.NewEmptyBuffer())
+	assert.EqualValues(t, writer.Model().FBEType(), 112)
+	assert.EqualValues(t, writer.Model().FBEOffset(), 4)
+	serialized, err := writer.Serialize(struct1)
+	assert.Nil(t, err)
+	assert.EqualValues(t, serialized, writer.Buffer().Size())
+	assert.True(t, writer.Verify())
+	writer.Next(serialized)
+	assert.EqualValues(t, writer.Model().FBEOffset(), 4 + writer.Buffer().Size())
 
-	// Serialize the struct to the JSON string
-	json, _ = struct1.JSON()
+	// Check the serialized FBE size
+	assert.EqualValues(t, writer.Buffer().Size(), 2099)
 
-	// Check the serialized JSON size
-	assert.NotEmpty(t, json)
-
-	// Deserialize the struct from the JSON string
-	struct2, _ := test.NewStructNestedFromJSON(json)
+	// Deserialize the struct from the FBE stream
+	reader := test.NewStructNestedModel(writer.Buffer())
+	assert.EqualValues(t, reader.Model().FBEType(), 112)
+	assert.EqualValues(t, reader.Model().FBEOffset(), 4)
+	assert.True(t, reader.Verify())
+	struct2, deserialized, err := reader.Deserialize()
+	assert.Nil(t, err)
+	assert.EqualValues(t, deserialized, reader.Buffer().Size())
+	reader.Next(deserialized)
+	assert.EqualValues(t, reader.Model().FBEOffset(), 4 + reader.Buffer().Size())
 
 	assert.EqualValues(t, struct2.F1, false)
 	assert.EqualValues(t, struct2.F2, true)
@@ -566,7 +593,7 @@ func TestSerializationStructNested(t *testing.T) {
 	assert.Nil(t, struct2.F1003)
 	assert.EqualValues(t, struct2.F1004, test.FlagsSimple_FLAG_VALUE_0)
 	assert.Nil(t, struct2.F1005)
-	assert.EqualValues(t, struct2.F1006, test.FlagsTyped_FLAG_VALUE_2|test.FlagsTyped_FLAG_VALUE_4|test.FlagsTyped_FLAG_VALUE_6)
+	assert.EqualValues(t, struct2.F1006, test.FlagsTyped_FLAG_VALUE_2 | test.FlagsTyped_FLAG_VALUE_4 | test.FlagsTyped_FLAG_VALUE_6)
 	assert.Nil(t, struct2.F1007)
 	assert.Nil(t, struct2.F1009)
 	assert.Nil(t, struct2.F1011)
@@ -680,7 +707,7 @@ func TestSerializationStructNested(t *testing.T) {
 	assert.EqualValues(t, struct2.F1006, struct1.F1006)
 	assert.EqualValues(t, struct2.F1007, struct1.F1007)
 }
-
+/*
 func TestSerializationStructArray(t *testing.T) {
 	// Define a source JSON string
 	json := []byte(`{"f1":[48,65],"f2":[97,null],"f3":["MDAw","QUFB"],"f4":["YWFh",null],"f5":[1,2],"f6":[1,null],"f7":[3,7],"f8":[3,null],"f9":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145986060361000,"f36":"00000000-0000-0000-0000-000000000000","f37":"cedcad98-f0a6-11e8-9f47-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145986060910000,"f36":"00000000-0000-0000-0000-000000000000","f37":"cedcc274-f0a6-11e8-9f47-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}],"f10":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145986061436000,"f36":"00000000-0000-0000-0000-000000000000","f37":"cedcd714-f0a6-11e8-9f47-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},null]}`)
@@ -727,7 +754,7 @@ func TestSerializationStructArray(t *testing.T) {
 	assert.Nil(t, struct2.F6[1])
 	assert.EqualValues(t, len(struct2.F7), 2)
 	assert.EqualValues(t, struct2.F7[0], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
-	assert.EqualValues(t, struct2.F7[1], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2|test.FlagsSimple_FLAG_VALUE_3)
+	assert.EqualValues(t, struct2.F7[1], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3)
 	assert.EqualValues(t, len(struct2.F8), 2)
 	assert.EqualValues(t, *struct2.F8[0], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
 	assert.Nil(t, struct2.F8[1])
@@ -792,7 +819,7 @@ func TestSerializationStructVector(t *testing.T) {
 	assert.Nil(t, struct2.F6[1])
 	assert.EqualValues(t, len(struct2.F7), 2)
 	assert.EqualValues(t, struct2.F7[0], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
-	assert.EqualValues(t, struct2.F7[1], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2|test.FlagsSimple_FLAG_VALUE_3)
+	assert.EqualValues(t, struct2.F7[1], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3)
 	assert.EqualValues(t, len(struct2.F8), 2)
 	assert.EqualValues(t, *struct2.F8[0], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
 	assert.Nil(t, struct2.F8[1])
@@ -857,7 +884,7 @@ func TestSerializationStructList(t *testing.T) {
 	assert.Nil(t, struct2.F6[1])
 	assert.EqualValues(t, len(struct2.F7), 2)
 	assert.EqualValues(t, struct2.F7[0], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
-	assert.EqualValues(t, struct2.F7[1], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2|test.FlagsSimple_FLAG_VALUE_3)
+	assert.EqualValues(t, struct2.F7[1], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3)
 	assert.EqualValues(t, len(struct2.F8), 2)
 	assert.EqualValues(t, *struct2.F8[0], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
 	assert.Nil(t, struct2.F8[1])
@@ -901,7 +928,7 @@ func TestSerializationStructSet(t *testing.T) {
 	assert.True(t, struct2.F2.Contains(test.EnumSimple_ENUM_VALUE_2))
 	assert.EqualValues(t, len(struct2.F3), 2)
 	assert.True(t, struct2.F3.Contains(test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2))
-	assert.True(t, struct2.F3.Contains(test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2|test.FlagsSimple_FLAG_VALUE_3))
+	assert.True(t, struct2.F3.Contains(test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3))
 	assert.EqualValues(t, len(struct2.F4), 2)
 	s1 := *test.NewStructSimple()
 	s1.Uid = 48
@@ -947,7 +974,7 @@ func TestSerializationStructMap(t *testing.T) {
 	assert.Nil(t, struct2.F6[20])
 	assert.EqualValues(t, len(struct2.F7), 2)
 	assert.EqualValues(t, struct2.F7[10], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
-	assert.EqualValues(t, struct2.F7[20], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2|test.FlagsSimple_FLAG_VALUE_3)
+	assert.EqualValues(t, struct2.F7[20], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3)
 	assert.EqualValues(t, len(struct2.F8), 2)
 	assert.EqualValues(t, *struct2.F8[10], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
 	assert.Nil(t, struct2.F8[20])
@@ -995,7 +1022,7 @@ func TestSerializationStructHash(t *testing.T) {
 	assert.Nil(t, struct2.F6["20"])
 	assert.EqualValues(t, len(struct2.F7), 2)
 	assert.EqualValues(t, struct2.F7["10"], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
-	assert.EqualValues(t, struct2.F7["20"], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2|test.FlagsSimple_FLAG_VALUE_3)
+	assert.EqualValues(t, struct2.F7["20"], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3)
 	assert.EqualValues(t, len(struct2.F8), 2)
 	assert.EqualValues(t, *struct2.F8["10"], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
 	assert.Nil(t, struct2.F8["20"])
