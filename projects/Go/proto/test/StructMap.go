@@ -21,12 +21,6 @@ var _ = strconv.FormatInt
 
 // StructMap key
 type StructMapKey struct {
-    value *StructMap
-}
-
-// // Get StructMap value
-func (k *StructMapKey) Value() *StructMap {
-    return k.value
 }
 
 // Convert StructMap flags key to string

@@ -22,12 +22,6 @@ var _ = strconv.FormatInt
 // Account key
 type AccountKey struct {
     Uid int32
-    value *Account
-}
-
-// // Get Account value
-func (k *AccountKey) Value() *Account {
-    return k.value
 }
 
 // Convert Account flags key to string

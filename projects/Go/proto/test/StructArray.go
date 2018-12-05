@@ -21,12 +21,6 @@ var _ = strconv.FormatInt
 
 // StructArray key
 type StructArrayKey struct {
-    value *StructArray
-}
-
-// // Get StructArray value
-func (k *StructArrayKey) Value() *StructArray {
-    return k.value
 }
 
 // Convert StructArray flags key to string

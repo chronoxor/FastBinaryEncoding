@@ -186,7 +186,7 @@ func (fm *FinalModelAccount) GetFields(fbeValue *Account) (int, error) {
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    return fbeCurrentSize, nil
+    return fbeCurrentSize, err
 }
 
 // Set the struct value
@@ -246,5 +246,5 @@ func (fm *FinalModelAccount) SetFields(fbeValue *Account) (int, error) {
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    return fbeCurrentSize, nil
+    return fbeCurrentSize, err
 }

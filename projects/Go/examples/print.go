@@ -68,8 +68,8 @@ func main() {
 	vectorF6 := test.EnumSimple_ENUM_VALUE_1
 	structVector.F6 = append(structVector.F6, &vectorF6)
 	structVector.F6 = append(structVector.F6, nil)
-	structVector.F7 = append(structVector.F7, test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2)
-	structVector.F7 = append(structVector.F7, test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2|test.FlagsSimple_FLAG_VALUE_3)
+	structVector.F7 = append(structVector.F7, test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
+	structVector.F7 = append(structVector.F7, test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2|test.FlagsSimple_FLAG_VALUE_3)
 	vectorF8 := test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2
 	structVector.F8 = append(structVector.F8, &vectorF8)
 	structVector.F8 = append(structVector.F8, nil)
@@ -97,8 +97,8 @@ func main() {
 	listF6 := test.EnumSimple_ENUM_VALUE_1
 	structList.F6 = append(structList.F6, &listF6)
 	structList.F6 = append(structList.F6, nil)
-	structList.F7 = append(structList.F7, test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2)
-	structList.F7 = append(structList.F7, test.FlagsSimple_FLAG_VALUE_1|test.FlagsSimple_FLAG_VALUE_2|test.FlagsSimple_FLAG_VALUE_3)
+	structList.F7 = append(structList.F7, test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
+	structList.F7 = append(structList.F7, test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2|test.FlagsSimple_FLAG_VALUE_3)
 	listF8 := test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2
 	structList.F8 = append(structList.F8, &listF8)
 	structList.F8 = append(structList.F8, nil)

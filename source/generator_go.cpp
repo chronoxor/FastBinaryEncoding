@@ -5142,16 +5142,6 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
         for (const auto& field : s->body->fields)
             if (field->keys)
                 WriteLineIndent(ConvertCase(*field->name) + " " + ConvertTypeName(*field));
-    WriteLineIndent("value *" + struct_name);
-    Indent(-1);
-    WriteLineIndent("}");
-
-    // Generate struct key Value() method
-    WriteLine();
-    WriteLineIndent("// // Get " + struct_name + " value");
-    WriteLineIndent("func (k *" + struct_name + "Key) Value() *" + struct_name + " {");
-    Indent(1);
-    WriteLineIndent("return k.value");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5402,7 +5392,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     WriteLineIndent("return " + struct_name + "Key{");
     Indent(1);
     if (!base_type.empty())
-        WriteLineIndent("s." + ConvertBaseName(base_type) + ".Key(),");
+        WriteLineIndent(ConvertBaseName(base_type) + "Key: s." + ConvertBaseName(base_type) + ".Key(),");
     if (s->body)
         for (const auto& field : s->body->fields)
             if (field->keys)
@@ -6152,7 +6142,12 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
             WriteLine();
             WriteLineIndent("if (fbeCurrentSize + fm." + ConvertCase(*field->name) + ".FBESize()) <= fbeStructSize {");
             Indent(1);
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash || field->optional)
+            if (field->array)
+            {
+                WriteLineIndent("slice, _ := fm." + ConvertCase(*field->name) + ".Get()");
+                WriteLineIndent("copy(fbeValue." + ConvertCase(*field->name) + "[:], slice)");
+            }
+            else if (field->vector || field->list || field->set || field->map || field->hash || field->optional)
                 WriteLineIndent("fbeValue." + ConvertCase(*field->name) + ", _ = fm." + ConvertCase(*field->name) + ".Get()");
             else if (!IsGoType(*field->type))
             {
@@ -6645,7 +6640,9 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
         {
             WriteLine();
             WriteLineIndent("fm." + ConvertCase(*field->name) + ".SetFBEOffset(fbeCurrentOffset)");
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash || field->optional)
+            if (field->array)
+                WriteLineIndent("if slice, size, err := fm." + ConvertCase(*field->name) + ".Get(); err != nil {");
+            else if (field->vector || field->list || field->set || field->map || field->hash || field->optional)
                 WriteLineIndent("if fbeValue." + ConvertCase(*field->name) + ", fbeFieldSize, err = fm." + ConvertCase(*field->name) + ".Get(); err != nil {");
             else if (!IsGoType(*field->type))
                 WriteLineIndent("if fbeFieldSize, err = fm." + ConvertCase(*field->name) + ".GetValue(&fbeValue." + ConvertCase(*field->name) + "); err != nil {");
@@ -6654,13 +6651,21 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
             Indent(1);
             WriteLineIndent("return fbeCurrentSize, err");
             Indent(-1);
+            if (field->array)
+            {
+                WriteLineIndent("} else {");
+                Indent(1);
+                WriteLineIndent("copy(fbeValue." + ConvertCase(*field->name) + "[:], slice)");
+                WriteLineIndent("fbeFieldSize = size");
+                Indent(-1);
+            }
             WriteLineIndent("}");
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
             WriteLineIndent("fbeCurrentSize += fbeFieldSize");
         }
     }
     WriteLine();
-    WriteLineIndent("return fbeCurrentSize, nil");
+    WriteLineIndent("return fbeCurrentSize, err");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -6714,7 +6719,7 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
         }
     }
     WriteLine();
-    WriteLineIndent("return fbeCurrentSize, nil");
+    WriteLineIndent("return fbeCurrentSize, err");
     Indent(-1);
     WriteLineIndent("}");
 

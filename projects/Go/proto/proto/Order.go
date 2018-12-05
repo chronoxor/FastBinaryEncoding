@@ -20,12 +20,6 @@ var _ = strconv.FormatInt
 // Order key
 type OrderKey struct {
     Uid int32
-    value *Order
-}
-
-// // Get Order value
-func (k *OrderKey) Value() *Order {
-    return k.value
 }
 
 // Convert Order flags key to string

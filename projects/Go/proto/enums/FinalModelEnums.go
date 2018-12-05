@@ -1144,7 +1144,7 @@ func (fm *FinalModelEnums) GetFields(fbeValue *Enums) (int, error) {
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    return fbeCurrentSize, nil
+    return fbeCurrentSize, err
 }
 
 // Set the struct value
@@ -1624,5 +1624,5 @@ func (fm *FinalModelEnums) SetFields(fbeValue *Enums) (int, error) {
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    return fbeCurrentSize, nil
+    return fbeCurrentSize, err
 }

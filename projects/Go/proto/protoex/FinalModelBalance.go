@@ -122,7 +122,7 @@ func (fm *FinalModelBalance) GetFields(fbeValue *Balance) (int, error) {
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    return fbeCurrentSize, nil
+    return fbeCurrentSize, err
 }
 
 // Set the struct value
@@ -154,5 +154,5 @@ func (fm *FinalModelBalance) SetFields(fbeValue *Balance) (int, error) {
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    return fbeCurrentSize, nil
+    return fbeCurrentSize, err
 }

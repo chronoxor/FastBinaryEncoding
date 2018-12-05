@@ -22,12 +22,6 @@ var _ = strconv.FormatInt
 // StructSimple key
 type StructSimpleKey struct {
     Uid int32
-    value *StructSimple
-}
-
-// // Get StructSimple value
-func (k *StructSimpleKey) Value() *StructSimple {
-    return k.value
 }
 
 // Convert StructSimple flags key to string

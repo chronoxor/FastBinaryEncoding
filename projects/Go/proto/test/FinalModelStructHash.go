@@ -250,7 +250,7 @@ func (fm *FinalModelStructHash) GetFields(fbeValue *StructHash) (int, error) {
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    return fbeCurrentSize, nil
+    return fbeCurrentSize, err
 }
 
 // Set the struct value
@@ -338,5 +338,5 @@ func (fm *FinalModelStructHash) SetFields(fbeValue *StructHash) (int, error) {
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    return fbeCurrentSize, nil
+    return fbeCurrentSize, err
 }

@@ -22,12 +22,6 @@ var _ = strconv.FormatInt
 // Balance key
 type BalanceKey struct {
     proto.BalanceKey
-    value *Balance
-}
-
-// // Get Balance value
-func (k *BalanceKey) Value() *Balance {
-    return k.value
 }
 
 // Convert Balance flags key to string
@@ -84,7 +78,7 @@ func (s *Balance) Clone() *Balance {
 // Get the struct key
 func (s *Balance) Key() BalanceKey {
     return BalanceKey{
-        s.Balance.Key(),
+        BalanceKey: s.Balance.Key(),
     }
 }
 

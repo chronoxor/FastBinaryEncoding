@@ -184,7 +184,7 @@ func (fm *FinalModelOrder) GetFields(fbeValue *Order) (int, error) {
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    return fbeCurrentSize, nil
+    return fbeCurrentSize, err
 }
 
 // Set the struct value
@@ -244,5 +244,5 @@ func (fm *FinalModelOrder) SetFields(fbeValue *Order) (int, error) {
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    return fbeCurrentSize, nil
+    return fbeCurrentSize, err
 }

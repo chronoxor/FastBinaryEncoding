@@ -22,12 +22,6 @@ var _ = strconv.FormatInt
 // StructOptional key
 type StructOptionalKey struct {
     StructSimpleKey
-    value *StructOptional
-}
-
-// // Get StructOptional value
-func (k *StructOptionalKey) Value() *StructOptional {
-    return k.value
 }
 
 // Convert StructOptional flags key to string
@@ -214,7 +208,7 @@ func (s *StructOptional) Clone() *StructOptional {
 // Get the struct key
 func (s *StructOptional) Key() StructOptionalKey {
     return StructOptionalKey{
-        s.StructSimple.Key(),
+        StructSimpleKey: s.StructSimple.Key(),
     }
 }
 

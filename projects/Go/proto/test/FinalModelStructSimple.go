@@ -810,7 +810,7 @@ func (fm *FinalModelStructSimple) GetFields(fbeValue *StructSimple) (int, error)
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    return fbeCurrentSize, nil
+    return fbeCurrentSize, err
 }
 
 // Set the struct value
@@ -1143,5 +1143,5 @@ func (fm *FinalModelStructSimple) SetFields(fbeValue *StructSimple) (int, error)
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    return fbeCurrentSize, nil
+    return fbeCurrentSize, err
 }

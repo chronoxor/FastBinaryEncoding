@@ -21,12 +21,6 @@ var _ = strconv.FormatInt
 
 // StructBytes key
 type StructBytesKey struct {
-    value *StructBytes
-}
-
-// // Get StructBytes value
-func (k *StructBytesKey) Value() *StructBytes {
-    return k.value
 }
 
 // Convert StructBytes flags key to string

@@ -250,7 +250,7 @@ func (fm *FinalModelStructVector) GetFields(fbeValue *StructVector) (int, error)
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    return fbeCurrentSize, nil
+    return fbeCurrentSize, err
 }
 
 // Set the struct value
@@ -338,5 +338,5 @@ func (fm *FinalModelStructVector) SetFields(fbeValue *StructVector) (int, error)
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    return fbeCurrentSize, nil
+    return fbeCurrentSize, err
 }

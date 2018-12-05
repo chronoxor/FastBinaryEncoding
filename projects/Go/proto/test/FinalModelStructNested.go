@@ -298,7 +298,7 @@ func (fm *FinalModelStructNested) GetFields(fbeValue *StructNested) (int, error)
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    return fbeCurrentSize, nil
+    return fbeCurrentSize, err
 }
 
 // Set the struct value
@@ -407,5 +407,5 @@ func (fm *FinalModelStructNested) SetFields(fbeValue *StructNested) (int, error)
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
 
-    return fbeCurrentSize, nil
+    return fbeCurrentSize, err
 }

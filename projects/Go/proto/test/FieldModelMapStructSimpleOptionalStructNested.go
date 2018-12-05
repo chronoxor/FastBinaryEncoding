@@ -172,8 +172,8 @@ func (fm *FieldModelMapStructSimpleOptionalStructNested) Verify() bool {
 }
 
 // Get the map
-func (fm *FieldModelMapStructSimpleOptionalStructNested) Get() (map[StructSimpleKey]*StructNested, error) {
-    values := make(map[StructSimpleKey]*StructNested)
+func (fm *FieldModelMapStructSimpleOptionalStructNested) Get() (map[StructSimpleKey]struct{key *StructSimple; value *StructNested}, error) {
+    values := make(map[StructSimpleKey]struct{key *StructSimple; value *StructNested})
 
     fbeMapSize := fm.Size()
     if fbeMapSize == 0 {
@@ -194,7 +194,7 @@ func (fm *FieldModelMapStructSimpleOptionalStructNested) Get() (map[StructSimple
         if err != nil {
             return values, err
         }
-        values[key.Key()] = value
+        values[key.Key()] = struct{key *StructSimple; value *StructNested}{key: key, value: value}
         fbeModelKey.FBEShift(fbeModelKey.FBESize() + fbeModelValue.FBESize())
         fbeModelValue.FBEShift(fbeModelKey.FBESize() + fbeModelValue.FBESize())
     }
@@ -203,7 +203,7 @@ func (fm *FieldModelMapStructSimpleOptionalStructNested) Get() (map[StructSimple
 }
 
 // Set the map
-func (fm *FieldModelMapStructSimpleOptionalStructNested) Set(values map[StructSimpleKey]*StructNested) error {
+func (fm *FieldModelMapStructSimpleOptionalStructNested) Set(values map[StructSimpleKey]struct{key *StructSimple; value *StructNested}) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
@@ -213,13 +213,13 @@ func (fm *FieldModelMapStructSimpleOptionalStructNested) Set(values map[StructSi
         return err
     }
 
-    for key, value := range values {
-        err := fbeModelKey.Set(key.Value())
+    for _, value := range values {
+        err := fbeModelKey.Set(value.key)
         if err != nil {
             return err
         }
         fbeModelKey.FBEShift(fbeModelKey.FBESize() + fbeModelValue.FBESize())
-        err = fbeModelValue.Set(value)
+        err = fbeModelValue.Set(value.value)
         if err != nil {
             return err
         }
