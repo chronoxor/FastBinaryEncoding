@@ -33,15 +33,15 @@ func (k *StructHashExKey) String() string {
 
 // StructHashEx struct
 type StructHashEx struct {
-    F1 map[StructSimpleKey]StructNested `json:"f1"`
-    F2 map[StructSimpleKey]*StructNested `json:"f2"`
+    F1 map[StructSimpleKey]struct{Key StructSimple; Value StructNested} `json:"f1"`
+    F2 map[StructSimpleKey]struct{Key StructSimple; Value *StructNested} `json:"f2"`
 }
 
 // Create a new StructHashEx struct
 func NewStructHashEx() *StructHashEx {
     return &StructHashEx{
-        F1: make(map[StructSimpleKey]StructNested),
-        F2: make(map[StructSimpleKey]*StructNested),
+        F1: make(map[StructSimpleKey]struct{Key StructSimple; Value StructNested}),
+        F2: make(map[StructSimpleKey]struct{Key StructSimple; Value *StructNested}),
     }
 }
 
@@ -92,11 +92,11 @@ func (s *StructHashEx) String() string {
     if s.F1 != nil {
         first := true
         sb.WriteString("[" + strconv.FormatInt(int64(len(s.F1)), 10) + "][{")
-        for k, v := range s.F1 {
+        for _, v := range s.F1 {
             if first { sb.WriteString("") } else { sb.WriteString(",") }
-            sb.WriteString(k.String())
+            sb.WriteString(v.Key.String())
             sb.WriteString("->")
-            sb.WriteString(v.String())
+            sb.WriteString(v.Value.String())
             first = false
         }
         sb.WriteString("}]")
@@ -107,12 +107,12 @@ func (s *StructHashEx) String() string {
     if s.F2 != nil {
         first := true
         sb.WriteString("[" + strconv.FormatInt(int64(len(s.F2)), 10) + "][{")
-        for k, v := range s.F2 {
+        for _, v := range s.F2 {
             if first { sb.WriteString("") } else { sb.WriteString(",") }
-            sb.WriteString(k.String())
+            sb.WriteString(v.Key.String())
             sb.WriteString("->")
-            if v != nil { 
-                sb.WriteString(v.String())
+            if v.Value != nil { 
+                sb.WriteString(v.Value.String())
             } else {
                 sb.WriteString("null")
             }

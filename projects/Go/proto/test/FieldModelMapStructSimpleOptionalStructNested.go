@@ -172,8 +172,8 @@ func (fm *FieldModelMapStructSimpleOptionalStructNested) Verify() bool {
 }
 
 // Get the map
-func (fm *FieldModelMapStructSimpleOptionalStructNested) Get() (map[StructSimpleKey]struct{key *StructSimple; value *StructNested}, error) {
-    values := make(map[StructSimpleKey]struct{key *StructSimple; value *StructNested})
+func (fm *FieldModelMapStructSimpleOptionalStructNested) Get() (map[StructSimpleKey]struct{Key StructSimple; Value *StructNested}, error) {
+    values := make(map[StructSimpleKey]struct{Key StructSimple; Value *StructNested})
 
     fbeMapSize := fm.Size()
     if fbeMapSize == 0 {
@@ -194,7 +194,7 @@ func (fm *FieldModelMapStructSimpleOptionalStructNested) Get() (map[StructSimple
         if err != nil {
             return values, err
         }
-        values[key.Key()] = struct{key *StructSimple; value *StructNested}{key: key, value: value}
+        values[key.Key()] = struct{Key StructSimple; Value *StructNested}{*key, value}
         fbeModelKey.FBEShift(fbeModelKey.FBESize() + fbeModelValue.FBESize())
         fbeModelValue.FBEShift(fbeModelKey.FBESize() + fbeModelValue.FBESize())
     }
@@ -203,7 +203,7 @@ func (fm *FieldModelMapStructSimpleOptionalStructNested) Get() (map[StructSimple
 }
 
 // Set the map
-func (fm *FieldModelMapStructSimpleOptionalStructNested) Set(values map[StructSimpleKey]struct{key *StructSimple; value *StructNested}) error {
+func (fm *FieldModelMapStructSimpleOptionalStructNested) Set(values map[StructSimpleKey]struct{Key StructSimple; Value *StructNested}) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
@@ -214,12 +214,12 @@ func (fm *FieldModelMapStructSimpleOptionalStructNested) Set(values map[StructSi
     }
 
     for _, value := range values {
-        err := fbeModelKey.Set(value.key)
+        err := fbeModelKey.Set(&value.Key)
         if err != nil {
             return err
         }
         fbeModelKey.FBEShift(fbeModelKey.FBESize() + fbeModelValue.FBESize())
-        err = fbeModelValue.Set(value.value)
+        err = fbeModelValue.Set(value.Value)
         if err != nil {
             return err
         }

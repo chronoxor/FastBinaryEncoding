@@ -35,11 +35,11 @@ func NewFinalModelMapStructSimpleOptionalStructNested(buffer *fbe.Buffer, offset
 }
 
 // Get the allocation size
-func (fm *FinalModelMapStructSimpleOptionalStructNested) FBEAllocationSize(values map[StructSimpleKey]*StructNested) int {
+func (fm *FinalModelMapStructSimpleOptionalStructNested) FBEAllocationSize(values map[StructSimpleKey]struct{Key StructSimple; Value *StructNested}) int {
     size := 4
-    for key, value := range values {
-        size += fm.modelKey.FBEAllocationSize(key.Value())
-        size += fm.modelValue.FBEAllocationSize(value)
+    for _, value := range values {
+        size += fm.modelKey.FBEAllocationSize(&value.Key)
+        size += fm.modelValue.FBEAllocationSize(value.Value)
     }
     return size
 }
@@ -85,8 +85,8 @@ func (fm *FinalModelMapStructSimpleOptionalStructNested) Verify() int {
 }
 
 // Get the map
-func (fm *FinalModelMapStructSimpleOptionalStructNested) Get() (map[StructSimpleKey]*StructNested, int, error) {
-    values := make(map[StructSimpleKey]*StructNested)
+func (fm *FinalModelMapStructSimpleOptionalStructNested) Get() (map[StructSimpleKey]struct{Key StructSimple; Value *StructNested}, int, error) {
+    values := make(map[StructSimpleKey]struct{Key StructSimple; Value *StructNested})
 
     if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
         return values, 0, errors.New("model is broken")
@@ -115,13 +115,13 @@ func (fm *FinalModelMapStructSimpleOptionalStructNested) Get() (map[StructSimple
         fm.modelKey.FBEShift(offset)
         fm.modelValue.FBEShift(offset)
         size += offset
-        values[key.Key()] = value
+        values[key.Key()] = struct{Key StructSimple; Value *StructNested}{*key, value}
     }
     return values, size, nil
 }
 
 // Set the map
-func (fm *FinalModelMapStructSimpleOptionalStructNested) Set(values map[StructSimpleKey]*StructNested) (int, error) {
+func (fm *FinalModelMapStructSimpleOptionalStructNested) Set(values map[StructSimpleKey]struct{Key StructSimple; Value *StructNested}) (int, error) {
     if (fm.buffer.Offset() + fm.FBEOffset() + 4) > fm.buffer.Size() {
         return 0, errors.New("model is broken")
     }
@@ -131,14 +131,14 @@ func (fm *FinalModelMapStructSimpleOptionalStructNested) Set(values map[StructSi
     size := 4
     fm.modelKey.SetFBEOffset(fm.FBEOffset() + 4)
     fm.modelValue.SetFBEOffset(fm.FBEOffset() + 4)
-    for key, value := range values {
-        offsetKey, err := fm.modelKey.Set(key.Value())
+    for _, value := range values {
+        offsetKey, err := fm.modelKey.Set(&value.Key)
         if err != nil {
             return size, err
         }
         fm.modelKey.FBEShift(offsetKey)
         fm.modelValue.FBEShift(offsetKey)
-        offsetValue, err := fm.modelValue.Set(value)
+        offsetValue, err := fm.modelValue.Set(value.Value)
         if err != nil {
             return size, err
         }

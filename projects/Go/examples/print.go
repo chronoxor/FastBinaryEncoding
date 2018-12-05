@@ -192,11 +192,11 @@ func main() {
 	// Print extended hash struct
 	structHashEx := test.NewStructHashEx()
 	s1.Uid = 48
-	structHashEx.F1[s1.Key()] = *test.NewStructNested()
+	structHashEx.F1[s1.Key()] = struct{Key test.StructSimple; Value test.StructNested}{*s1, *test.NewStructNested()}
 	s2.Uid = 65
-	structHashEx.F1[s2.Key()] = *test.NewStructNested()
-	structHashEx.F2[s1.Key()] = test.NewStructNested()
-	structHashEx.F2[s2.Key()] = nil
+	structHashEx.F1[s2.Key()] = struct{Key test.StructSimple; Value test.StructNested}{*s2, *test.NewStructNested()}
+	structHashEx.F2[s1.Key()] = struct{Key test.StructSimple; Value *test.StructNested}{*s1, test.NewStructNested()}
+	structHashEx.F2[s2.Key()] = struct{Key test.StructSimple; Value *test.StructNested}{*s1, nil}
 	fmt.Println(structHashEx)
 	fmt.Println()
 }

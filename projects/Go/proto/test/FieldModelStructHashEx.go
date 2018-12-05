@@ -184,14 +184,14 @@ func (fm *FieldModelStructHashEx) GetFields(fbeValue *StructHashEx, fbeStructSiz
     if (fbeCurrentSize + fm.F1.FBESize()) <= fbeStructSize {
         fbeValue.F1, _ = fm.F1.Get()
     } else {
-        fbeValue.F1 = make(map[StructSimpleKey]StructNested)
+        fbeValue.F1 = make(map[StructSimpleKey]struct{Key StructSimple; Value StructNested})
     }
     fbeCurrentSize += fm.F1.FBESize()
 
     if (fbeCurrentSize + fm.F2.FBESize()) <= fbeStructSize {
         fbeValue.F2, _ = fm.F2.Get()
     } else {
-        fbeValue.F2 = make(map[StructSimpleKey]*StructNested)
+        fbeValue.F2 = make(map[StructSimpleKey]struct{Key StructSimple; Value *StructNested})
     }
     fbeCurrentSize += fm.F2.FBESize()
 }

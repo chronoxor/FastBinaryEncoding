@@ -172,8 +172,8 @@ func (fm *FieldModelMapStructSimpleStructNested) Verify() bool {
 }
 
 // Get the map
-func (fm *FieldModelMapStructSimpleStructNested) Get() (map[StructSimpleKey]StructNested, error) {
-    values := make(map[StructSimpleKey]StructNested)
+func (fm *FieldModelMapStructSimpleStructNested) Get() (map[StructSimpleKey]struct{Key StructSimple; Value StructNested}, error) {
+    values := make(map[StructSimpleKey]struct{Key StructSimple; Value StructNested})
 
     fbeMapSize := fm.Size()
     if fbeMapSize == 0 {
@@ -194,7 +194,7 @@ func (fm *FieldModelMapStructSimpleStructNested) Get() (map[StructSimpleKey]Stru
         if err != nil {
             return values, err
         }
-        values[key.Key()] = *value
+        values[key.Key()] = struct{Key StructSimple; Value StructNested}{*key, *value}
         fbeModelKey.FBEShift(fbeModelKey.FBESize() + fbeModelValue.FBESize())
         fbeModelValue.FBEShift(fbeModelKey.FBESize() + fbeModelValue.FBESize())
     }
@@ -203,7 +203,7 @@ func (fm *FieldModelMapStructSimpleStructNested) Get() (map[StructSimpleKey]Stru
 }
 
 // Set the map
-func (fm *FieldModelMapStructSimpleStructNested) Set(values map[StructSimpleKey]StructNested) error {
+func (fm *FieldModelMapStructSimpleStructNested) Set(values map[StructSimpleKey]struct{Key StructSimple; Value StructNested}) error {
     if (fm.buffer.Offset() + fm.FBEOffset() + fm.FBESize()) > fm.buffer.Size() {
         return errors.New("model is broken")
     }
@@ -213,13 +213,13 @@ func (fm *FieldModelMapStructSimpleStructNested) Set(values map[StructSimpleKey]
         return err
     }
 
-    for key, value := range values {
-        err := fbeModelKey.Set(key.Value())
+    for _, value := range values {
+        err := fbeModelKey.Set(&value.Key)
         if err != nil {
             return err
         }
         fbeModelKey.FBEShift(fbeModelKey.FBESize() + fbeModelValue.FBESize())
-        err = fbeModelValue.Set(&value)
+        err = fbeModelValue.Set(&value.Value)
         if err != nil {
             return err
         }
