@@ -691,22 +691,97 @@ func TestSerializationFinalStructNested(t *testing.T) {
 	assert.EqualValues(t, struct2.F1006, struct1.F1006)
 	assert.EqualValues(t, struct2.F1007, struct1.F1007)
 }
-/*
-func TestSerializationStructArray(t *testing.T) {
-	// Define a source JSON string
-	json := []byte(`{"f1":[48,65],"f2":[97,null],"f3":["MDAw","QUFB"],"f4":["YWFh",null],"f5":[1,2],"f6":[1,null],"f7":[3,7],"f8":[3,null],"f9":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145986060361000,"f36":"00000000-0000-0000-0000-000000000000","f37":"cedcad98-f0a6-11e8-9f47-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145986060910000,"f36":"00000000-0000-0000-0000-000000000000","f37":"cedcc274-f0a6-11e8-9f47-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}],"f10":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145986061436000,"f36":"00000000-0000-0000-0000-000000000000","f37":"cedcd714-f0a6-11e8-9f47-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},null]}`)
 
-	// Create a new struct from the source JSON string
-	struct1, _ := test.NewStructArrayFromJSON(json)
+func TestSerializationFinalStructBytes(t *testing.T) {
+	// Create a new struct
+	struct1 := test.NewStructBytes()
+	bytesF1 := []byte("ABC")
+	struct1.F1 = bytesF1
+	bytesF2 := []byte("test")
+	struct1.F2 = &bytesF2
 
-	// Serialize the struct to the JSON string
-	json, _ = struct1.JSON()
+	// Serialize the struct to the FBE stream
+	writer := test.NewStructBytesFinalModel(fbe.NewEmptyBuffer())
+	assert.EqualValues(t, writer.Model().FBEType(), 120)
+	serialized, err := writer.Serialize(struct1)
+	assert.Nil(t, err)
+	assert.EqualValues(t, serialized, writer.Buffer().Size())
+	assert.True(t, writer.Verify())
+	writer.Next(serialized)
 
-	// Check the serialized JSON size
-	assert.NotEmpty(t, json)
+	// Check the serialized FBE size
+	assert.EqualValues(t, writer.Buffer().Size(), 25)
 
-	// Deserialize the struct from the JSON string
-	struct2, _ := test.NewStructArrayFromJSON(json)
+	// Deserialize the struct from the FBE stream
+	reader := test.NewStructBytesFinalModel(writer.Buffer())
+	assert.EqualValues(t, reader.Model().FBEType(), 120)
+	assert.True(t, reader.Verify())
+	struct2, deserialized, err := reader.Deserialize()
+	assert.Nil(t, err)
+	assert.EqualValues(t, deserialized, reader.Buffer().Size())
+	reader.Next(deserialized)
+
+	assert.EqualValues(t, len(struct2.F1), 3)
+	assert.EqualValues(t, struct2.F1[0], 65)
+	assert.EqualValues(t, struct2.F1[1], 66)
+	assert.EqualValues(t, struct2.F1[2], 67)
+	assert.NotNil(t, struct2.F2)
+	assert.EqualValues(t, len(*struct2.F2), 4)
+	assert.EqualValues(t, (*struct2.F2)[0], 116)
+	assert.EqualValues(t, (*struct2.F2)[1], 101)
+	assert.EqualValues(t, (*struct2.F2)[2], 115)
+	assert.EqualValues(t, (*struct2.F2)[3], 116)
+	assert.Nil(t, struct2.F3)
+}
+
+func TestSerializationFinalStructArray(t *testing.T) {
+	// Create a new struct
+	struct1 := test.NewStructArray()
+	struct1.F1[0] = 48
+	struct1.F1[1] = 65
+	arrayF2 := byte(97)
+	struct1.F2[0] = &arrayF2
+	struct1.F2[1] = nil
+	struct1.F3[0] = []byte("000")
+	struct1.F3[1] = []byte("AAA")
+	arrayF4 := []byte("aaa")
+	struct1.F4[0] = &arrayF4
+	struct1.F4[1] = nil
+	struct1.F5[0] = test.EnumSimple_ENUM_VALUE_1
+	struct1.F5[1] = test.EnumSimple_ENUM_VALUE_2
+	arrayF6 := test.EnumSimple_ENUM_VALUE_1
+	struct1.F6[0] = &arrayF6
+	struct1.F6[1] = nil
+	struct1.F7[0] = test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2
+	struct1.F7[1] = test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3
+	arrayF8 := test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2
+	struct1.F8[0] = &arrayF8
+	struct1.F8[1] = nil
+	struct1.F9[0] = *test.NewStructSimple()
+	struct1.F9[1] = *test.NewStructSimple()
+	struct1.F10[0] = test.NewStructSimple()
+	struct1.F10[1] = nil
+
+	// Serialize the struct to the FBE stream
+	writer := test.NewStructArrayFinalModel(fbe.NewEmptyBuffer())
+	assert.EqualValues(t, writer.Model().FBEType(), 125)
+	serialized, err := writer.Serialize(struct1)
+	assert.Nil(t, err)
+	assert.EqualValues(t, serialized, writer.Buffer().Size())
+	assert.True(t, writer.Verify())
+	writer.Next(serialized)
+
+	// Check the serialized FBE size
+	assert.EqualValues(t, writer.Buffer().Size(), 954)
+
+	// Deserialize the struct from the FBE stream
+	reader := test.NewStructArrayFinalModel(writer.Buffer())
+	assert.EqualValues(t, reader.Model().FBEType(), 125)
+	assert.True(t, reader.Verify())
+	struct2, deserialized, err := reader.Deserialize()
+	assert.Nil(t, err)
+	assert.EqualValues(t, deserialized, reader.Buffer().Size())
+	reader.Next(deserialized)
 
 	assert.EqualValues(t, len(struct2.F1), 2)
 	assert.EqualValues(t, struct2.F1[0], 48)
@@ -757,86 +832,54 @@ func TestSerializationStructArray(t *testing.T) {
 	assert.Nil(t, struct2.F10[1])
 }
 
-func TestSerializationStructVector(t *testing.T) {
-	// Define a source JSON string
-	json := []byte(`{"f1":[48,65],"f2":[97,null],"f3":["MDAw","QUFB"],"f4":["YWFh",null],"f5":[1,2],"f6":[1,null],"f7":[3,7],"f8":[3,null],"f9":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146157127964000,"f36":"00000000-0000-0000-0000-000000000000","f37":"34d38702-f0a7-11e8-b30e-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146157128572000,"f36":"00000000-0000-0000-0000-000000000000","f37":"34d39c88-f0a7-11e8-b30e-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}],"f10":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146157129063000,"f36":"00000000-0000-0000-0000-000000000000","f37":"34d3b038-f0a7-11e8-b30e-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},null]}`)
+func TestSerializationFinalStructVector(t *testing.T) {
+	// Create a new struct
+	struct1 := test.NewStructVector()
+	struct1.F1 = append(struct1.F1, 48)
+	struct1.F1 = append(struct1.F1, 65)
+	vectorF2 := byte(97)
+	struct1.F2 = append(struct1.F2, &vectorF2)
+	struct1.F2 = append(struct1.F2, nil)
+	struct1.F3 = append(struct1.F3, []byte("000"))
+	struct1.F3 = append(struct1.F3, []byte("AAA"))
+	vectorF4 := []byte("aaa")
+	struct1.F4 = append(struct1.F4, &vectorF4)
+	struct1.F4 = append(struct1.F4, nil)
+	struct1.F5 = append(struct1.F5, test.EnumSimple_ENUM_VALUE_1)
+	struct1.F5 = append(struct1.F5, test.EnumSimple_ENUM_VALUE_2)
+	vectorF6 := test.EnumSimple_ENUM_VALUE_1
+	struct1.F6 = append(struct1.F6, &vectorF6)
+	struct1.F6 = append(struct1.F6, nil)
+	struct1.F7 = append(struct1.F7, test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
+	struct1.F7 = append(struct1.F7, test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3)
+	vectorF8 := test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2
+	struct1.F8 = append(struct1.F8, &vectorF8)
+	struct1.F8 = append(struct1.F8, nil)
+	struct1.F9 = append(struct1.F9, *test.NewStructSimple())
+	struct1.F9 = append(struct1.F9, *test.NewStructSimple())
+	struct1.F10 = append(struct1.F10, test.NewStructSimple())
+	struct1.F10 = append(struct1.F10, nil)
 
-	// Create a new struct from the source JSON string
-	struct1, _ := test.NewStructVectorFromJSON(json)
+	// Serialize the struct to the FBE stream
+	writer := test.NewStructVectorFinalModel(fbe.NewEmptyBuffer())
+	assert.EqualValues(t, writer.Model().FBEType(), 130)
+	serialized, err := writer.Serialize(struct1)
+	assert.Nil(t, err)
+	assert.EqualValues(t, serialized, writer.Buffer().Size())
+	assert.True(t, writer.Verify())
+	writer.Next(serialized)
 
-	// Serialize the struct to the JSON string
-	json, _ = struct1.JSON()
+	// Check the serialized FBE size
+	assert.EqualValues(t, writer.Buffer().Size(), 994)
 
-	// Check the serialized JSON size
-	assert.NotEmpty(t, json)
-
-	// Deserialize the struct from the JSON string
-	struct2, _ := test.NewStructVectorFromJSON(json)
-
-	assert.EqualValues(t, len(struct2.F1), 2)
-	assert.EqualValues(t, struct2.F1[0], 48)
-	assert.EqualValues(t, struct2.F1[1], 65)
-	assert.EqualValues(t, len(struct2.F2), 2)
-	assert.EqualValues(t, *struct2.F2[0], 97)
-	assert.Nil(t, struct2.F2[1])
-	assert.EqualValues(t, len(struct2.F3), 2)
-	assert.EqualValues(t, len(struct2.F3[0]), 3)
-	assert.EqualValues(t, struct2.F3[0][0], 48)
-	assert.EqualValues(t, struct2.F3[0][1], 48)
-	assert.EqualValues(t, struct2.F3[0][2], 48)
-	assert.EqualValues(t, len(struct2.F3[1]), 3)
-	assert.EqualValues(t, struct2.F3[1][0], 65)
-	assert.EqualValues(t, struct2.F3[1][1], 65)
-	assert.EqualValues(t, struct2.F3[1][2], 65)
-	assert.EqualValues(t, len(struct2.F4), 2)
-	assert.NotNil(t, struct2.F4[0])
-	assert.EqualValues(t, len(*struct2.F4[0]), 3)
-	assert.EqualValues(t, (*struct2.F4[0])[0], 97)
-	assert.EqualValues(t, (*struct2.F4[0])[1], 97)
-	assert.EqualValues(t, (*struct2.F4[0])[2], 97)
-	assert.Nil(t, struct2.F4[1])
-	assert.EqualValues(t, len(struct2.F5), 2)
-	assert.EqualValues(t, struct2.F5[0], test.EnumSimple_ENUM_VALUE_1)
-	assert.EqualValues(t, struct2.F5[1], test.EnumSimple_ENUM_VALUE_2)
-	assert.EqualValues(t, len(struct2.F6), 2)
-	assert.EqualValues(t, *struct2.F6[0], test.EnumSimple_ENUM_VALUE_1)
-	assert.Nil(t, struct2.F6[1])
-	assert.EqualValues(t, len(struct2.F7), 2)
-	assert.EqualValues(t, struct2.F7[0], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
-	assert.EqualValues(t, struct2.F7[1], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3)
-	assert.EqualValues(t, len(struct2.F8), 2)
-	assert.EqualValues(t, *struct2.F8[0], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
-	assert.Nil(t, struct2.F8[1])
-	assert.EqualValues(t, len(struct2.F9), 2)
-	assert.EqualValues(t, struct2.F9[0].F2, true)
-	assert.EqualValues(t, struct2.F9[0].F12, 0xFF)
-	assert.EqualValues(t, struct2.F9[0].F32, "Initial string!")
-	assert.EqualValues(t, struct2.F9[1].F2, true)
-	assert.EqualValues(t, struct2.F9[1].F12, 0xFF)
-	assert.EqualValues(t, struct2.F9[1].F32, "Initial string!")
-	assert.EqualValues(t, len(struct2.F10), 2)
-	assert.NotNil(t, struct2.F10[0])
-	assert.EqualValues(t, struct2.F10[0].F2, true)
-	assert.EqualValues(t, struct2.F10[0].F12, 0xFF)
-	assert.EqualValues(t, struct2.F10[0].F32, "Initial string!")
-	assert.Nil(t, struct2.F10[1])
-}
-
-func TestSerializationStructList(t *testing.T) {
-	// Define a source JSON string
-	json := []byte(`{"f1":[48,65],"f2":[97,null],"f3":["MDAw","QUFB"],"f4":["YWFh",null],"f5":[1,2],"f6":[1,null],"f7":[3,7],"f8":[3,null],"f9":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146220253760000,"f36":"00000000-0000-0000-0000-000000000000","f37":"5a73e7fe-f0a7-11e8-89e6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146220255725000,"f36":"00000000-0000-0000-0000-000000000000","f37":"5a741990-f0a7-11e8-89e6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}],"f10":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146220256802000,"f36":"00000000-0000-0000-0000-000000000000","f37":"5a74e4b0-f0a7-11e8-89e6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},null]}`)
-
-	// Create a new struct from the source JSON string
-	struct1, _ := test.NewStructListFromJSON(json)
-
-	// Serialize the struct to the JSON string
-	json, _ = struct1.JSON()
-
-	// Check the serialized JSON size
-	assert.NotEmpty(t, json)
-
-	// Deserialize the struct from the JSON string
-	struct2, _ := test.NewStructListFromJSON(json)
+	// Deserialize the struct from the FBE stream
+	reader := test.NewStructVectorFinalModel(writer.Buffer())
+	assert.EqualValues(t, reader.Model().FBEType(), 130)
+	assert.True(t, reader.Verify())
+	struct2, deserialized, err := reader.Deserialize()
+	assert.Nil(t, err)
+	assert.EqualValues(t, deserialized, reader.Buffer().Size())
+	reader.Next(deserialized)
 
 	assert.EqualValues(t, len(struct2.F1), 2)
 	assert.EqualValues(t, struct2.F1[0], 48)
@@ -887,21 +930,141 @@ func TestSerializationStructList(t *testing.T) {
 	assert.Nil(t, struct2.F10[1])
 }
 
-func TestSerializationStructSet(t *testing.T) {
-	// Define a source JSON string
-	json := []byte(`{"f1":[48,65,97],"f2":[1,2],"f3":[3,7],"f4":[{"uid":48,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146299848353000,"f36":"00000000-0000-0000-0000-000000000000","f37":"89e4edd0-f0a7-11e8-9dde-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},{"uid":65,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146299848966000,"f36":"00000000-0000-0000-0000-000000000000","f37":"89e503f6-f0a7-11e8-9dde-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}]}`)
+func TestSerializationFinalStructList(t *testing.T) {
+	// Create a new struct
+	struct1 := test.NewStructList()
+	struct1.F1 = append(struct1.F1, 48)
+	struct1.F1 = append(struct1.F1, 65)
+	vectorF2 := byte(97)
+	struct1.F2 = append(struct1.F2, &vectorF2)
+	struct1.F2 = append(struct1.F2, nil)
+	struct1.F3 = append(struct1.F3, []byte("000"))
+	struct1.F3 = append(struct1.F3, []byte("AAA"))
+	vectorF4 := []byte("aaa")
+	struct1.F4 = append(struct1.F4, &vectorF4)
+	struct1.F4 = append(struct1.F4, nil)
+	struct1.F5 = append(struct1.F5, test.EnumSimple_ENUM_VALUE_1)
+	struct1.F5 = append(struct1.F5, test.EnumSimple_ENUM_VALUE_2)
+	vectorF6 := test.EnumSimple_ENUM_VALUE_1
+	struct1.F6 = append(struct1.F6, &vectorF6)
+	struct1.F6 = append(struct1.F6, nil)
+	struct1.F7 = append(struct1.F7, test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
+	struct1.F7 = append(struct1.F7, test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3)
+	vectorF8 := test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2
+	struct1.F8 = append(struct1.F8, &vectorF8)
+	struct1.F8 = append(struct1.F8, nil)
+	struct1.F9 = append(struct1.F9, *test.NewStructSimple())
+	struct1.F9 = append(struct1.F9, *test.NewStructSimple())
+	struct1.F10 = append(struct1.F10, test.NewStructSimple())
+	struct1.F10 = append(struct1.F10, nil)
 
-	// Create a new struct from the source JSON string
-	struct1, _ := test.NewStructSetFromJSON(json)
+	// Serialize the struct to the FBE stream
+	writer := test.NewStructListFinalModel(fbe.NewEmptyBuffer())
+	assert.EqualValues(t, writer.Model().FBEType(), 131)
+	serialized, err := writer.Serialize(struct1)
+	assert.Nil(t, err)
+	assert.EqualValues(t, serialized, writer.Buffer().Size())
+	assert.True(t, writer.Verify())
+	writer.Next(serialized)
 
-	// Serialize the struct to the JSON string
-	json, _ = struct1.JSON()
+	// Check the serialized FBE size
+	assert.EqualValues(t, writer.Buffer().Size(), 994)
 
-	// Check the serialized JSON size
-	assert.NotEmpty(t, json)
+	// Deserialize the struct from the FBE stream
+	reader := test.NewStructListFinalModel(writer.Buffer())
+	assert.EqualValues(t, reader.Model().FBEType(), 131)
+	assert.True(t, reader.Verify())
+	struct2, deserialized, err := reader.Deserialize()
+	assert.Nil(t, err)
+	assert.EqualValues(t, deserialized, reader.Buffer().Size())
+	reader.Next(deserialized)
 
-	// Deserialize the struct from the JSON string
-	struct2, _ := test.NewStructSetFromJSON(json)
+	assert.EqualValues(t, len(struct2.F1), 2)
+	assert.EqualValues(t, struct2.F1[0], 48)
+	assert.EqualValues(t, struct2.F1[1], 65)
+	assert.EqualValues(t, len(struct2.F2), 2)
+	assert.EqualValues(t, *struct2.F2[0], 97)
+	assert.Nil(t, struct2.F2[1])
+	assert.EqualValues(t, len(struct2.F3), 2)
+	assert.EqualValues(t, len(struct2.F3[0]), 3)
+	assert.EqualValues(t, struct2.F3[0][0], 48)
+	assert.EqualValues(t, struct2.F3[0][1], 48)
+	assert.EqualValues(t, struct2.F3[0][2], 48)
+	assert.EqualValues(t, len(struct2.F3[1]), 3)
+	assert.EqualValues(t, struct2.F3[1][0], 65)
+	assert.EqualValues(t, struct2.F3[1][1], 65)
+	assert.EqualValues(t, struct2.F3[1][2], 65)
+	assert.EqualValues(t, len(struct2.F4), 2)
+	assert.NotNil(t, struct2.F4[0])
+	assert.EqualValues(t, len(*struct2.F4[0]), 3)
+	assert.EqualValues(t, (*struct2.F4[0])[0], 97)
+	assert.EqualValues(t, (*struct2.F4[0])[1], 97)
+	assert.EqualValues(t, (*struct2.F4[0])[2], 97)
+	assert.Nil(t, struct2.F4[1])
+	assert.EqualValues(t, len(struct2.F5), 2)
+	assert.EqualValues(t, struct2.F5[0], test.EnumSimple_ENUM_VALUE_1)
+	assert.EqualValues(t, struct2.F5[1], test.EnumSimple_ENUM_VALUE_2)
+	assert.EqualValues(t, len(struct2.F6), 2)
+	assert.EqualValues(t, *struct2.F6[0], test.EnumSimple_ENUM_VALUE_1)
+	assert.Nil(t, struct2.F6[1])
+	assert.EqualValues(t, len(struct2.F7), 2)
+	assert.EqualValues(t, struct2.F7[0], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
+	assert.EqualValues(t, struct2.F7[1], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3)
+	assert.EqualValues(t, len(struct2.F8), 2)
+	assert.EqualValues(t, *struct2.F8[0], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
+	assert.Nil(t, struct2.F8[1])
+	assert.EqualValues(t, len(struct2.F9), 2)
+	assert.EqualValues(t, struct2.F9[0].F2, true)
+	assert.EqualValues(t, struct2.F9[0].F12, 0xFF)
+	assert.EqualValues(t, struct2.F9[0].F32, "Initial string!")
+	assert.EqualValues(t, struct2.F9[1].F2, true)
+	assert.EqualValues(t, struct2.F9[1].F12, 0xFF)
+	assert.EqualValues(t, struct2.F9[1].F32, "Initial string!")
+	assert.EqualValues(t, len(struct2.F10), 2)
+	assert.NotNil(t, struct2.F10[0])
+	assert.EqualValues(t, struct2.F10[0].F2, true)
+	assert.EqualValues(t, struct2.F10[0].F12, 0xFF)
+	assert.EqualValues(t, struct2.F10[0].F32, "Initial string!")
+	assert.Nil(t, struct2.F10[1])
+}
+
+func TestSerializationFinalStructSet(t *testing.T) {
+	// Create a new struct
+	struct1 := test.NewStructSet()
+	struct1.F1.Add(48)
+	struct1.F1.Add(65)
+	struct1.F1.Add(97)
+	struct1.F2.Add(test.EnumSimple_ENUM_VALUE_1)
+	struct1.F2.Add(test.EnumSimple_ENUM_VALUE_2)
+	struct1.F3.Add(test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
+	struct1.F3.Add(test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3)
+	s1 := test.NewStructSimple()
+	s1.Uid = 48
+	struct1.F4.Add(*s1)
+	s2 := test.NewStructSimple()
+	s2.Uid = 65
+	struct1.F4.Add(*s2)
+
+	// Serialize the struct to the FBE stream
+	writer := test.NewStructSetFinalModel(fbe.NewEmptyBuffer())
+	assert.EqualValues(t, writer.Model().FBEType(), 132)
+	serialized, err := writer.Serialize(struct1)
+	assert.Nil(t, err)
+	assert.EqualValues(t, serialized, writer.Buffer().Size())
+	assert.True(t, writer.Verify())
+	writer.Next(serialized)
+
+	// Check the serialized FBE size
+	assert.EqualValues(t, writer.Buffer().Size(), 635)
+
+	// Deserialize the struct from the FBE stream
+	reader := test.NewStructSetFinalModel(writer.Buffer())
+	assert.EqualValues(t, reader.Model().FBEType(), 132)
+	assert.True(t, reader.Verify())
+	struct2, deserialized, err := reader.Deserialize()
+	assert.Nil(t, err)
+	assert.EqualValues(t, deserialized, reader.Buffer().Size())
+	reader.Next(deserialized)
 
 	assert.EqualValues(t, len(struct2.F1), 3)
 	assert.True(t, struct2.F1.Contains(48))
@@ -914,29 +1077,64 @@ func TestSerializationStructSet(t *testing.T) {
 	assert.True(t, struct2.F3.Contains(test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2))
 	assert.True(t, struct2.F3.Contains(test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3))
 	assert.EqualValues(t, len(struct2.F4), 2)
-	s1 := *test.NewStructSimple()
 	s1.Uid = 48
-	assert.True(t, struct2.F4.Contains(s1))
-	s2 := *test.NewStructSimple()
+	assert.True(t, struct2.F4.Contains(*s1))
 	s2.Uid = 65
-	assert.True(t, struct2.F4.Contains(s2))
+	assert.True(t, struct2.F4.Contains(*s2))
 }
 
-func TestSerializationStructMap(t *testing.T) {
-	// Define a source JSON string
-	json := []byte(`{"f1":{"10":48,"20":65},"f2":{"10":97,"20":null},"f3":{"10":"MDAw","20":"QUFB"},"f4":{"10":"YWFh","20":null},"f5":{"10":1,"20":2},"f6":{"10":1,"20":null},"f7":{"10":3,"20":7},"f8":{"10":3,"20":null},"f9":{"10":{"uid":48,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146345803483000,"f36":"00000000-0000-0000-0000-000000000000","f37":"a549215e-f0a7-11e8-90f6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"20":{"uid":65,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146345804184000,"f36":"00000000-0000-0000-0000-000000000000","f37":"a54942ce-f0a7-11e8-90f6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}},"f10":{"10":{"uid":48,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146345803483000,"f36":"00000000-0000-0000-0000-000000000000","f37":"a549215e-f0a7-11e8-90f6-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"20":null}}`)
+func TestSerializationFinalStructMap(t *testing.T) {
+	// Create a new struct
+	struct1 := test.NewStructMap()
+	struct1.F1[10] = 48
+	struct1.F1[20] = 65
+	mapF2 := byte(97)
+	struct1.F2[10] = &mapF2
+	struct1.F2[20] = nil
+	struct1.F3[10] = []byte("000")
+	struct1.F3[20] = []byte("AAA")
+	mapF4 := []byte("aaa")
+	struct1.F4[10] = &mapF4
+	struct1.F4[20] = nil
+	struct1.F5[10] = test.EnumSimple_ENUM_VALUE_1
+	struct1.F5[20] = test.EnumSimple_ENUM_VALUE_2
+	mapF6 := test.EnumSimple_ENUM_VALUE_1
+	struct1.F6[10] = &mapF6
+	struct1.F6[20] = nil
+	struct1.F7[10] = test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2
+	struct1.F7[20] = test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3
+	mapF8 := test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2
+	struct1.F8[10] = &mapF8
+	struct1.F8[20] = nil
+	s1 := test.NewStructSimple()
+	s1.Uid = 48
+	struct1.F9[10] = *s1
+	s2 := test.NewStructSimple()
+	s2.Uid = 65
+	struct1.F9[20] = *s2
+	struct1.F10[10] = s1
+	struct1.F10[20] = nil
 
-	// Create a new struct from the source JSON string
-	struct1, _ := test.NewStructMapFromJSON(json)
+	// Serialize the struct to the FBE stream
+	writer := test.NewStructMapFinalModel(fbe.NewEmptyBuffer())
+	assert.EqualValues(t, writer.Model().FBEType(), 140)
+	serialized, err := writer.Serialize(struct1)
+	assert.Nil(t, err)
+	assert.EqualValues(t, serialized, writer.Buffer().Size())
+	assert.True(t, writer.Verify())
+	writer.Next(serialized)
 
-	// Serialize the struct to the JSON string
-	json, _ = struct1.JSON()
+	// Check the serialized FBE size
+	assert.EqualValues(t, writer.Buffer().Size(), 1074)
 
-	// Check the serialized JSON size
-	assert.NotEmpty(t, json)
-
-	// Deserialize the struct from the JSON string
-	struct2, _ := test.NewStructMapFromJSON(json)
+	// Deserialize the struct from the FBE stream
+	reader := test.NewStructMapFinalModel(writer.Buffer())
+	assert.EqualValues(t, reader.Model().FBEType(), 140)
+	assert.True(t, reader.Verify())
+	struct2, deserialized, err := reader.Deserialize()
+	assert.Nil(t, err)
+	assert.EqualValues(t, deserialized, reader.Buffer().Size())
+	reader.Next(deserialized)
 
 	assert.EqualValues(t, len(struct2.F1), 2)
 	assert.EqualValues(t, struct2.F1[10], 48)
@@ -970,21 +1168,58 @@ func TestSerializationStructMap(t *testing.T) {
 	assert.Nil(t, struct2.F10[20])
 }
 
-func TestSerializationStructHash(t *testing.T) {
-	// Define a source JSON string
-	json := []byte(`{"f1":{"10":48,"20":65},"f2":{"10":97,"20":null},"f3":{"10":"MDAw","20":"QUFB"},"f4":{"10":"YWFh","20":null},"f5":{"10":1,"20":2},"f6":{"10":1,"20":null},"f7":{"10":3,"20":7},"f8":{"10":3,"20":null},"f9":{"10":{"uid":48,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146381450913000,"f36":"00000000-0000-0000-0000-000000000000","f37":"ba8885d2-f0a7-11e8-81fa-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"20":{"uid":65,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146381452825000,"f36":"00000000-0000-0000-0000-000000000000","f37":"ba88ced4-f0a7-11e8-81fa-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}},"f10":{"10":{"uid":48,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543146381450913000,"f36":"00000000-0000-0000-0000-000000000000","f37":"ba8885d2-f0a7-11e8-81fa-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},"20":null}}`)
+func TestSerializationFinalStructHash(t *testing.T) {
+	// Create a new struct
+	struct1 := test.NewStructHash()
+	struct1.F1["10"] = 48
+	struct1.F1["20"] = 65
+	hashF2 := byte(97)
+	struct1.F2["10"] = &hashF2
+	struct1.F2["20"] = nil
+	struct1.F3["10"] = []byte("000")
+	struct1.F3["20"] = []byte("AAA")
+	hashF4 := []byte("aaa")
+	struct1.F4["10"] = &hashF4
+	struct1.F4["20"] = nil
+	struct1.F5["10"] = test.EnumSimple_ENUM_VALUE_1
+	struct1.F5["20"] = test.EnumSimple_ENUM_VALUE_2
+	hashF6 := test.EnumSimple_ENUM_VALUE_1
+	struct1.F6["10"] = &hashF6
+	struct1.F6["20"] = nil
+	struct1.F7["10"] = test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2
+	struct1.F7["20"] = test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3
+	hashF8 := test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2
+	struct1.F8["10"] = &hashF8
+	struct1.F8["20"] = nil
+	s1 := test.NewStructSimple()
+	s1.Uid = 48
+	struct1.F9["10"] = *s1
+	s2 := test.NewStructSimple()
+	s2.Uid = 65
+	struct1.F9["20"] = *s2
+	struct1.F10["10"] = s1
+	struct1.F10["20"] = nil
 
-	// Create a new struct from the source JSON string
-	struct1, _ := test.NewStructHashFromJSON(json)
+	// Serialize the struct to the FBE stream
+	writer := test.NewStructHashFinalModel(fbe.NewEmptyBuffer())
+	assert.EqualValues(t, writer.Model().FBEType(), 141)
+	serialized, err := writer.Serialize(struct1)
+	assert.Nil(t, err)
+	assert.EqualValues(t, serialized, writer.Buffer().Size())
+	assert.True(t, writer.Verify())
+	writer.Next(serialized)
 
-	// Serialize the struct to the JSON string
-	json, _ = struct1.JSON()
+	// Check the serialized FBE size
+	assert.EqualValues(t, writer.Buffer().Size(), 1114)
 
-	// Check the serialized JSON size
-	assert.NotEmpty(t, json)
-
-	// Deserialize the struct from the JSON string
-	struct2, _ := test.NewStructHashFromJSON(json)
+	// Deserialize the struct from the FBE stream
+	reader := test.NewStructHashFinalModel(writer.Buffer())
+	assert.EqualValues(t, reader.Model().FBEType(), 141)
+	assert.True(t, reader.Verify())
+	struct2, deserialized, err := reader.Deserialize()
+	assert.Nil(t, err)
+	assert.EqualValues(t, deserialized, reader.Buffer().Size())
+	reader.Next(deserialized)
 
 	assert.EqualValues(t, len(struct2.F1), 2)
 	assert.EqualValues(t, struct2.F1["10"], 48)
@@ -1017,4 +1252,3 @@ func TestSerializationStructHash(t *testing.T) {
 	assert.EqualValues(t, struct2.F10["10"].Uid, 48)
 	assert.Nil(t, struct2.F10["20"])
 }
-*/

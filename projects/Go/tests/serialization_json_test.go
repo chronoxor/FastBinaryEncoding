@@ -650,6 +650,35 @@ func TestSerializationJsonStructNested(t *testing.T) {
 	assert.EqualValues(t, struct2.F1007, struct1.F1007)
 }
 
+func TestSerializationJsonStructBytes(t *testing.T) {
+	// Define a source JSON string
+	json := []byte(`{"f1":"QUJD","f2":"dGVzdA==","f3":null}`)
+
+	// Create a new struct from the source JSON string
+	struct1, _ := test.NewStructBytesFromJSON(json)
+
+	// Serialize the struct to the JSON string
+	json, _ = struct1.JSON()
+
+	// Check the serialized JSON size
+	assert.NotEmpty(t, json)
+
+	// Deserialize the struct from the JSON string
+	struct2, _ := test.NewStructBytesFromJSON(json)
+
+	assert.EqualValues(t, len(struct2.F1), 3)
+	assert.EqualValues(t, struct2.F1[0], 65)
+	assert.EqualValues(t, struct2.F1[1], 66)
+	assert.EqualValues(t, struct2.F1[2], 67)
+	assert.NotNil(t, struct2.F2)
+	assert.EqualValues(t, len(*struct2.F2), 4)
+	assert.EqualValues(t, (*struct2.F2)[0], 116)
+	assert.EqualValues(t, (*struct2.F2)[1], 101)
+	assert.EqualValues(t, (*struct2.F2)[2], 115)
+	assert.EqualValues(t, (*struct2.F2)[3], 116)
+	assert.Nil(t, struct2.F3)
+}
+
 func TestSerializationJsonStructArray(t *testing.T) {
 	// Define a source JSON string
 	json := []byte(`{"f1":[48,65],"f2":[97,null],"f3":["MDAw","QUFB"],"f4":["YWFh",null],"f5":[1,2],"f6":[1,null],"f7":[3,7],"f8":[3,null],"f9":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145986060361000,"f36":"00000000-0000-0000-0000-000000000000","f37":"cedcad98-f0a6-11e8-9f47-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145986060910000,"f36":"00000000-0000-0000-0000-000000000000","f37":"cedcc274-f0a6-11e8-9f47-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}}],"f10":[{"uid":0,"f1":false,"f2":true,"f3":0,"f4":255,"f5":0,"f6":33,"f7":0,"f8":1092,"f9":0,"f10":127,"f11":0,"f12":255,"f13":0,"f14":32767,"f15":0,"f16":65535,"f17":0,"f18":2147483647,"f19":0,"f20":4294967295,"f21":0,"f22":9223372036854775807,"f23":0,"f24":18446744073709551615,"f25":0.0,"f26":123.456,"f27":0.0,"f28":-1.23456e+125,"f29":"0.0","f30":"123456.123456","f31":"","f32":"Initial string!","f33":0,"f34":0,"f35":1543145986061436000,"f36":"00000000-0000-0000-0000-000000000000","f37":"cedcd714-f0a6-11e8-9f47-ac220bcdd8e0","f38":"123e4567-e89b-12d3-a456-426655440000","f39":0,"f40":0,"f41":{"uid":0,"symbol":"","side":0,"type":0,"price":0.0,"volume":0.0},"f42":{"currency":"","amount":0.0},"f43":0,"f44":{"uid":0,"name":"","state":11,"wallet":{"currency":"","amount":0.0},"asset":null,"orders":[]}},null]}`)
