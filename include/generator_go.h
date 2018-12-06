@@ -70,7 +70,7 @@ private:
     void GenerateFBEFinalModelSet(const std::shared_ptr<Package>& p, const std::string& name, const std::string& model, const StructField& field, const CppCommon::Path& path);
     void GenerateFBEFinalModelMap(const std::shared_ptr<Package>& p, const std::string& key_name, const std::string& key_model, const std::string& value_name, const std::string& value_model, const StructField& field, const CppCommon::Path& path);
     void GenerateFBEFinalModelEnumFlags(const std::string& package, const std::string& name, const std::string& type);
-    //void GenerateFBESender();
+    void GenerateFBESender(const std::string& package);
     //void GenerateFBEReceiver();
     void GenerateImports(const std::shared_ptr<Package>& p);
 
@@ -83,13 +83,14 @@ private:
     void GenerateStructModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path);
     void GenerateStructFinalModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path);
     void GenerateStructModelFinal(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path);
-    void GenerateSender(const std::shared_ptr<Package>& p, bool final);
+    void GenerateSender(const std::shared_ptr<Package>& p, const CppCommon::Path& path, bool final);
     void GenerateReceiver(const std::shared_ptr<Package>& p, bool final);
 
     bool IsPrimitiveType(const std::string& type);
     bool IsGoType(const std::string& type);
 
-    std::string ConvertCase(const std::string& type);
+    std::string ConvertToLower(const std::string& type);
+    std::string ConvertToUpper(const std::string& type);
     std::string ConvertEnumBase(const std::string& type);
     std::string ConvertEnumSize(const std::string& type);
     std::string ConvertEnumType(const std::string& type);

@@ -9,9 +9,12 @@ import "math"
 
 // Fast Binary Encoding buffer based on dynamic byte array
 type Buffer struct {
-    data   []byte // Bytes memory buffer
-    size   int    // Bytes memory buffer size
-    offset int    // Bytes memory buffer offset
+    // Bytes memory buffer
+    data   []byte
+    // Bytes memory buffer size
+    size   int
+    // Bytes memory buffer offset
+    offset int
 }
 
 // Create an empty buffer

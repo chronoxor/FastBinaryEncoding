@@ -60,13 +60,11 @@ void GeneratorGo::Generate(const std::shared_ptr<Package>& package)
         GenerateFBEFinalModelBytes("fbe");
         GenerateFBEFinalModelString("fbe");
     }
-    /*
     if (Sender())
     {
-        GenerateFBESender();
-        GenerateFBEReceiver();
+        GenerateFBESender("fbe");
+        //GenerateFBEReceiver();
     }
-    */
 
     GeneratePackage(package);
 }
@@ -470,9 +468,12 @@ import "math"
 
 // Fast Binary Encoding buffer based on dynamic byte array
 type Buffer struct {
-    data   []byte // Bytes memory buffer
-    size   int    // Bytes memory buffer size
-    offset int    // Bytes memory buffer offset
+    // Bytes memory buffer
+    data   []byte
+    // Bytes memory buffer size
+    size   int
+    // Bytes memory buffer offset
+    offset int
 }
 
 // Create an empty buffer
@@ -4284,73 +4285,92 @@ func (fm *FinalModel_NAME_) SetValue(value _NAME_) (int, error) {
     // Close the file
     Close();
 }
-/*
-void GeneratorGo::GenerateFBESender()
+
+void GeneratorGo::GenerateFBESender(const std::string& package)
 {
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / "Sender.go";
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
     std::string code = R"CODE(
+package fbe
 
-# Fast Binary Encoding base sender
-class Sender(object):
-    __slots__ = "_buffer", "_logging", "_final",
+// Fast Binary Encoding base sender
+type Sender struct {
+    // Sender bytes buffer
+    buffer *Buffer
+    // Logging flag
+    logging bool
+    // Final protocol flag
+    final bool
 
-    def __init__(self, buffer=None, logging=False, final=False):
-        if buffer is None:
-            buffer = WriteBuffer()
-        self._buffer = buffer
-        self._logging = logging
-        self._final = final
+    // Send message handler
+    OnSendHandler func(buffer []byte, offset int, size int) (int, error)
+    // Send log message handler
+    OnSendLogHandler func(message string) error
+}
 
-    # Get the bytes buffer
-    @property
-    def buffer(self):
-        return self._buffer
+// Create a new base sender
+func NewSender(buffer *Buffer, logging bool, final bool) *Sender {
+    sender := &Sender{buffer: buffer, logging: logging, final: final}
+    sender.OnSend(func(buffer []byte, offset int, size int) (int, error) { panic("send handler is not provided") })
+    sender.OnSendLog(func(message string) error { return nil })
+    return sender
+}
 
-    # Get the logging flag
-    @property
-    def logging(self):
-        return self._logging
+// Get the bytes buffer
+func (s *Sender) Buffer() *Buffer { return s.buffer }
 
-    # Set the logging flag
-    @logging.setter
-    def logging(self, logging):
-        self._logging = logging
+// Get the logging flag
+func (s *Sender) Logging() bool { return s.logging }
+// Set the logging flag
+func (s *Sender) SetLogging(logging bool) { s.logging = logging }
 
-    # Get the final protocol flag
-    @property
-    def final(self):
-        return self._final
+// Get the final protocol flag
+func (s *Sender) Final() bool { return s.final }
+// Set the final protocol flag
+func (s *Sender) SetFinal(final bool) { s.final = final }
 
-    # Send serialized buffer.
-    # Direct call of the method requires knowledge about internals of FBE models serialization.
-    # Use it with care!
-    def send_serialized(self, serialized):
-        assert (serialized > 0), "Invalid size of the serialized buffer!"
-        if serialized <= 0:
-            return 0
+// Send message handler
+func (s *Sender) OnSend(handler func(buffer []byte, offset int, size int) (int, error)) { s.OnSendHandler = handler }
+// Send log message handler
+func (s *Sender) OnSendLog(handler func(message string) error) { s.OnSendLogHandler = handler }
 
-        # Shift the send buffer
-        self._buffer.shift(serialized)
+// Send serialized buffer.
+// Direct call of the method requires knowledge about internals of FBE models serialization.
+// Use it with care!
+func (s *Sender) SendSerialized(serialized int) (int, error) {
+    if serialized <= 0 {
+        return 0, nil
+    }
 
-        # Send the value
-        sent = self.on_send(self._buffer.buffer, 0, self._buffer.size)
-        self._buffer.remove(0, sent)
-        return sent
+    // Shift the send buffer
+    s.buffer.Shift(serialized)
 
-    # Send message handler
-    def on_send(self, buffer, offset, size):
-        raise NotImplementedError("Abstract method call!")
-
-    # Send log message handler
-    def on_send_log(self, message):
-        pass
+    // Send the value
+    sent, err := s.OnSendHandler(s.buffer.Data(), 0, s.buffer.Size())
+    s.buffer.Remove(0, sent)
+    return sent, err
+}
 )CODE";
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
-}
 
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+/*
 void GeneratorGo::GenerateFBEReceiver()
 {
     std::string code = R"CODE(
@@ -4713,28 +4733,23 @@ void GeneratorGo::GeneratePackage(const std::shared_ptr<Package>& p)
     GenerateContainers(p, path, false);
     if (Final())
         GenerateContainers(p, path, true);
-    /*
+
     // Generate sender & receiver
     if (Sender())
     {
-        GenerateSender(p, false);
-        GenerateReceiver(p, false);
+        GenerateSender(p, path, false);
+        //GenerateReceiver(p, path, false);
         if (Final())
         {
-            GenerateSender(p, true);
-            GenerateReceiver(p, true);
+            GenerateSender(p, path, true);
+            //GenerateReceiver(p, path, true);
         }
     }
-
-    // Generate JSON engine
-    if (JSON())
-        GenerateJson(p);
-    */
 }
 
 void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e, const CppCommon::Path& path)
 {
-    std::string enum_name = ConvertCase(*e->name);
+    std::string enum_name = ConvertToUpper(*e->name);
 
     // Open the output file
     CppCommon::Path output = path / (enum_name + ".go");
@@ -4904,7 +4919,7 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
 
 void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f, const CppCommon::Path& path)
 {
-    std::string flags_name = ConvertCase(*f->name);
+    std::string flags_name = ConvertToUpper(*f->name);
 
     // Open the output file
     CppCommon::Path output = path / (flags_name + ".go");
@@ -5105,7 +5120,7 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::sh
 
 void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path)
 {
-    std::string struct_name = ConvertCase(*s->name);
+    std::string struct_name = ConvertToUpper(*s->name);
 
     // Open the output file
     CppCommon::Path output = path / (struct_name + ".go");
@@ -5143,7 +5158,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     if (s->body)
         for (const auto& field : s->body->fields)
             if (field->keys)
-                WriteLineIndent(ConvertCase(*field->name) + " " + ConvertTypeName(*field));
+                WriteLineIndent(ConvertToUpper(*field->name) + " " + ConvertTypeName(*field));
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5172,8 +5187,8 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                     WriteLineIndent("if true {");
                     Indent(1);
                     WriteLineIndent("first := true");
-                    WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(k." + ConvertCase(*field->name) + ")), 10) + \"][\")");
-                    WriteLineIndent("for _, v := range k." + ConvertCase(*field->name) + " {");
+                    WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(k." + ConvertToUpper(*field->name) + ")), 10) + \"][\")");
+                    WriteLineIndent("for _, v := range k." + ConvertToUpper(*field->name) + " {");
                     Indent(1);
                     WriteOutputStreamValue(*field->type, "v", field->optional, true);
                     WriteLineIndent("first = false");
@@ -5189,11 +5204,11 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                 }
                 else if (field->vector)
                 {
-                    WriteLineIndent("if k." + ConvertCase(*field->name) + " != nil {");
+                    WriteLineIndent("if k." + ConvertToUpper(*field->name) + " != nil {");
                     Indent(1);
                     WriteLineIndent("first := true");
-                    WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(k." + ConvertCase(*field->name) + ")), 10) + \"][\")");
-                    WriteLineIndent("for _, v := range k." + ConvertCase(*field->name) + " {");
+                    WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(k." + ConvertToUpper(*field->name) + ")), 10) + \"][\")");
+                    WriteLineIndent("for _, v := range k." + ConvertToUpper(*field->name) + " {");
                     Indent(1);
                     WriteOutputStreamValue(*field->type, "v", field->optional, true);
                     WriteLineIndent("first = false");
@@ -5209,11 +5224,11 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                 }
                 else if (field->list)
                 {
-                    WriteLineIndent("if k." + ConvertCase(*field->name) + " != nil {");
+                    WriteLineIndent("if k." + ConvertToUpper(*field->name) + " != nil {");
                     Indent(1);
                     WriteLineIndent("first := true");
-                    WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(k." + ConvertCase(*field->name) + ")), 10) + \"]<\")");
-                    WriteLineIndent("for _, v := range k." + ConvertCase(*field->name) + " {");
+                    WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(k." + ConvertToUpper(*field->name) + ")), 10) + \"]<\")");
+                    WriteLineIndent("for _, v := range k." + ConvertToUpper(*field->name) + " {");
                     Indent(1);
                     WriteOutputStreamValue(*field->type, "v", field->optional, true);
                     WriteLineIndent("first = false");
@@ -5229,11 +5244,11 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                 }
                 else if (field->set)
                 {
-                    WriteLineIndent("if k." + ConvertCase(*field->name) + " != nil {");
+                    WriteLineIndent("if k." + ConvertToUpper(*field->name) + " != nil {");
                     Indent(1);
                     WriteLineIndent("first := true");
-                    WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(k." + ConvertCase(*field->name) + ".Size()), 10) + \"]{\")");
-                    WriteLineIndent("for _, v := range k." + ConvertCase(*field->name) + " {");
+                    WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(k." + ConvertToUpper(*field->name) + ".Size()), 10) + \"]{\")");
+                    WriteLineIndent("for _, v := range k." + ConvertToUpper(*field->name) + " {");
                     Indent(1);
                     WriteOutputStreamValue(*field->type, "v", field->optional, true);
                     WriteLineIndent("first = false");
@@ -5249,11 +5264,11 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                 }
                 else if (field->map)
                 {
-                    WriteLineIndent("if k." + ConvertCase(*field->name) + " != nil {");
+                    WriteLineIndent("if k." + ConvertToUpper(*field->name) + " != nil {");
                     Indent(1);
                     WriteLineIndent("first := true");
-                    WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(k." + ConvertCase(*field->name) + ")), 10) + \"]<{\")");
-                    WriteLineIndent("for " + std::string(IsGoType(*field->key) ? "k" : "_") + ", v := range k." + ConvertCase(*field->name) + " {");
+                    WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(k." + ConvertToUpper(*field->name) + ")), 10) + \"]<{\")");
+                    WriteLineIndent("for " + std::string(IsGoType(*field->key) ? "k" : "_") + ", v := range k." + ConvertToUpper(*field->name) + " {");
                     Indent(1);
                     WriteOutputStreamValue(*field->key, (IsGoType(*field->key) ? "k" : "v.Key"), false, true);
                     WriteLineIndent("sb.WriteString(\"->\")");
@@ -5271,11 +5286,11 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                 }
                 else if (field->hash)
                 {
-                    WriteLineIndent("if k." + ConvertCase(*field->name) + " != nil {");
+                    WriteLineIndent("if k." + ConvertToUpper(*field->name) + " != nil {");
                     Indent(1);
                     WriteLineIndent("first := true");
-                    WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(k." + ConvertCase(*field->name) + ")), 10) + \"][{\")");
-                    WriteLineIndent("for " + std::string(IsGoType(*field->key) ? "k" : "_") + ", v := range k." + ConvertCase(*field->name) + " {");
+                    WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(k." + ConvertToUpper(*field->name) + ")), 10) + \"][{\")");
+                    WriteLineIndent("for " + std::string(IsGoType(*field->key) ? "k" : "_") + ", v := range k." + ConvertToUpper(*field->name) + " {");
                     Indent(1);
                     WriteOutputStreamValue(*field->key, (IsGoType(*field->key) ? "k" : "v.Key"), false, true);
                     WriteLineIndent("sb.WriteString(\"->\")");
@@ -5292,7 +5307,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                     WriteLineIndent("}");
                 }
                 else
-                    WriteOutputStreamValue(*field->type, "k." + ConvertCase(*field->name), field->optional, false);
+                    WriteOutputStreamValue(*field->type, "k." + ConvertToUpper(*field->name), field->optional, false);
                 first = false;
             }
         }
@@ -5311,7 +5326,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
         WriteLineIndent(base_type);
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent(ConvertCase(*field->name) + " " + ConvertTypeName(*field) + " `json:\"" + *field->name + "\"`");
+            WriteLineIndent(ConvertToUpper(*field->name) + " " + ConvertTypeName(*field) + " `json:\"" + *field->name + "\"`");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5328,7 +5343,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     {
         for (const auto& field : s->body->fields)
         {
-            WriteIndent(ConvertCase(*field->name) + ": ");
+            WriteIndent(ConvertToUpper(*field->name) + ": ");
             if (field->value)
                 Write(ConvertConstant(*field->type, *field->value, field->optional));
             else
@@ -5398,7 +5413,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     if (s->body)
         for (const auto& field : s->body->fields)
             if (field->keys)
-                WriteLineIndent(ConvertCase(*field->name) + ": s." + ConvertCase(*field->name) + ",");
+                WriteLineIndent(ConvertToUpper(*field->name) + ": s." + ConvertToUpper(*field->name) + ",");
     Indent(-1);
     WriteLineIndent("}");
     Indent(-1);
@@ -5436,8 +5451,8 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                 WriteLineIndent("if true {");
                 Indent(1);
                 WriteLineIndent("first := true");
-                WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(s." + ConvertCase(*field->name) + ")), 10) + \"][\")");
-                WriteLineIndent("for _, v := range s." + ConvertCase(*field->name) + " {");
+                WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(s." + ConvertToUpper(*field->name) + ")), 10) + \"][\")");
+                WriteLineIndent("for _, v := range s." + ConvertToUpper(*field->name) + " {");
                 Indent(1);
                 WriteOutputStreamValue(*field->type, "v", field->optional, true);
                 WriteLineIndent("first = false");
@@ -5453,11 +5468,11 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
             }
             else if (field->vector)
             {
-                WriteLineIndent("if s." + ConvertCase(*field->name) + " != nil {");
+                WriteLineIndent("if s." + ConvertToUpper(*field->name) + " != nil {");
                 Indent(1);
                 WriteLineIndent("first := true");
-                WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(s." + ConvertCase(*field->name) + ")), 10) + \"][\")");
-                WriteLineIndent("for _, v := range s." + ConvertCase(*field->name) + " {");
+                WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(s." + ConvertToUpper(*field->name) + ")), 10) + \"][\")");
+                WriteLineIndent("for _, v := range s." + ConvertToUpper(*field->name) + " {");
                 Indent(1);
                 WriteOutputStreamValue(*field->type, "v", field->optional, true);
                 WriteLineIndent("first = false");
@@ -5473,11 +5488,11 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
             }
             else if (field->list)
             {
-                WriteLineIndent("if s." + ConvertCase(*field->name) + " != nil {");
+                WriteLineIndent("if s." + ConvertToUpper(*field->name) + " != nil {");
                 Indent(1);
                 WriteLineIndent("first := true");
-                WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(s." + ConvertCase(*field->name) + ")), 10) + \"]<\")");
-                WriteLineIndent("for _, v := range s." + ConvertCase(*field->name) + " {");
+                WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(s." + ConvertToUpper(*field->name) + ")), 10) + \"]<\")");
+                WriteLineIndent("for _, v := range s." + ConvertToUpper(*field->name) + " {");
                 Indent(1);
                 WriteOutputStreamValue(*field->type, "v", field->optional, true);
                 WriteLineIndent("first = false");
@@ -5493,11 +5508,11 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
             }
             else if (field->set)
             {
-                WriteLineIndent("if s." + ConvertCase(*field->name) + " != nil {");
+                WriteLineIndent("if s." + ConvertToUpper(*field->name) + " != nil {");
                 Indent(1);
                 WriteLineIndent("first := true");
-                WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(s." + ConvertCase(*field->name) + ".Size()), 10) + \"]{\")");
-                WriteLineIndent("for _, v := range s." + ConvertCase(*field->name) + " {");
+                WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(s." + ConvertToUpper(*field->name) + ".Size()), 10) + \"]{\")");
+                WriteLineIndent("for _, v := range s." + ConvertToUpper(*field->name) + " {");
                 Indent(1);
                 WriteOutputStreamValue(*field->type, "v", field->optional, true);
                 WriteLineIndent("first = false");
@@ -5513,11 +5528,11 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
             }
             else if (field->map)
             {
-                WriteLineIndent("if s." + ConvertCase(*field->name) + " != nil {");
+                WriteLineIndent("if s." + ConvertToUpper(*field->name) + " != nil {");
                 Indent(1);
                 WriteLineIndent("first := true");
-                WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(s." + ConvertCase(*field->name) + ")), 10) + \"]<{\")");
-                WriteLineIndent("for " + std::string(IsGoType(*field->key) ? "k" : "_") + ", v := range s." + ConvertCase(*field->name) + " {");
+                WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(s." + ConvertToUpper(*field->name) + ")), 10) + \"]<{\")");
+                WriteLineIndent("for " + std::string(IsGoType(*field->key) ? "k" : "_") + ", v := range s." + ConvertToUpper(*field->name) + " {");
                 Indent(1);
                 WriteOutputStreamValue(*field->key, (IsGoType(*field->key) ? "k" : "v.Key"), false, true);
                 WriteLineIndent("sb.WriteString(\"->\")");
@@ -5535,11 +5550,11 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
             }
             else if (field->hash)
             {
-                WriteLineIndent("if s." + ConvertCase(*field->name) + " != nil {");
+                WriteLineIndent("if s." + ConvertToUpper(*field->name) + " != nil {");
                 Indent(1);
                 WriteLineIndent("first := true");
-                WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(s." + ConvertCase(*field->name) + ")), 10) + \"][{\")");
-                WriteLineIndent("for " + std::string(IsGoType(*field->key) ? "k" : "_") + ", v := range s." + ConvertCase(*field->name) + " {");
+                WriteLineIndent("sb.WriteString(\"[\" + strconv.FormatInt(int64(len(s." + ConvertToUpper(*field->name) + ")), 10) + \"][{\")");
+                WriteLineIndent("for " + std::string(IsGoType(*field->key) ? "k" : "_") + ", v := range s." + ConvertToUpper(*field->name) + " {");
                 Indent(1);
                 WriteOutputStreamValue(*field->key, (IsGoType(*field->key) ? "k" : "v.Key"), false, true);
                 WriteLineIndent("sb.WriteString(\"->\")");
@@ -5556,7 +5571,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                 WriteLineIndent("}");
             }
             else
-                WriteOutputStreamValue(*field->type, "s." + ConvertCase(*field->name), field->optional, false);
+                WriteOutputStreamValue(*field->type, "s." + ConvertToUpper(*field->name), field->optional, false);
             first = false;
         }
     }
@@ -5585,15 +5600,15 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
             if (field->set)
             {
                 WriteLine();
-                WriteLineIndent("// Set wrapper for the field " + ConvertCase(*field->name));
-                WriteLineIndent("type set" + ConvertCase(*field->name) + " map[" + ConvertKeyName(*field->key) + "]" + ConvertTypeName(*field->type, field->optional));
+                WriteLineIndent("// Set wrapper for the field " + ConvertToUpper(*field->name));
+                WriteLineIndent("type set" + ConvertToUpper(*field->name) + " map[" + ConvertKeyName(*field->key) + "]" + ConvertTypeName(*field->type, field->optional));
 
                 if (JSON())
                 {
                     // Generate set wrapper IsEmpty() method
                     WriteLine();
                     WriteLineIndent("// Is the set empty?");
-                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") IsEmpty() bool {");
+                    WriteLineIndent("func (s set" + ConvertToUpper(*field->name) + ") IsEmpty() bool {");
                     Indent(1);
                     WriteLineIndent("return s.Size() > 0");
                     Indent(-1);
@@ -5602,7 +5617,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                     // Generate set wrapper Size() method
                     WriteLine();
                     WriteLineIndent("// Get the set size");
-                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Size() int {");
+                    WriteLineIndent("func (s set" + ConvertToUpper(*field->name) + ") Size() int {");
                     Indent(1);
                     WriteLineIndent("return len(s)");
                     Indent(-1);
@@ -5611,7 +5626,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                     // Generate set wrapper Add() method
                     WriteLine();
                     WriteLineIndent("// Add the given item to the set");
-                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Add(item " + ConvertTypeName(*field->type, field->optional) + ") {");
+                    WriteLineIndent("func (s set" + ConvertToUpper(*field->name) + ") Add(item " + ConvertTypeName(*field->type, field->optional) + ") {");
                     Indent(1);
                     if (IsGoType(*field->key))
                         WriteLineIndent("s[item] = item");
@@ -5623,7 +5638,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                     // Generate set wrapper Contains() method
                     WriteLine();
                     WriteLineIndent("// Contains the given item in the set?");
-                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Contains(item " + ConvertTypeName(*field->type, field->optional) + ") bool {");
+                    WriteLineIndent("func (s set" + ConvertToUpper(*field->name) + ") Contains(item " + ConvertTypeName(*field->type, field->optional) + ") bool {");
                     Indent(1);
                     if (IsGoType(*field->key))
                         WriteLineIndent("_, exists := s[item]");
@@ -5636,7 +5651,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                     // Generate set wrapper Remove() method
                     WriteLine();
                     WriteLineIndent("// Remove the given item from the set");
-                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Remove(item " + ConvertTypeName(*field->type, field->optional) + ") {");
+                    WriteLineIndent("func (s set" + ConvertToUpper(*field->name) + ") Remove(item " + ConvertTypeName(*field->type, field->optional) + ") {");
                     Indent(1);
                     if (IsGoType(*field->key))
                         WriteLineIndent("delete(s, item)");
@@ -5648,7 +5663,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                     // Generate set wrapper Clear() method
                     WriteLine();
                     WriteLineIndent("// Clear the set");
-                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Clear() {");
+                    WriteLineIndent("func (s set" + ConvertToUpper(*field->name) + ") Clear() {");
                     Indent(1);
                     WriteLineIndent("for i := range s {");
                     Indent(1);
@@ -5661,7 +5676,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                     // Generate set wrapper Enumerate() method
                     WriteLine();
                     WriteLineIndent("// Enumerate the set");
-                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Enumerate() []" + ConvertTypeName(*field->type, field->optional) + " {");
+                    WriteLineIndent("func (s set" + ConvertToUpper(*field->name) + ") Enumerate() []" + ConvertTypeName(*field->type, field->optional) + " {");
                     Indent(1);
                     WriteLineIndent("array := make([]" + ConvertTypeName(*field->type, field->optional) + ", 0)");
                     WriteLineIndent("for _, v := range s {");
@@ -5676,7 +5691,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                     // Generate set wrapper Subset() method
                     WriteLine();
                     WriteLineIndent("// Is the current set a subset of the given set?");
-                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Subset(set set" + ConvertCase(*field->name) + ") bool {");
+                    WriteLineIndent("func (s set" + ConvertToUpper(*field->name) + ") Subset(set set" + ConvertToUpper(*field->name) + ") bool {");
                     Indent(1);
                     WriteLineIndent("result := true");
                     WriteLineIndent("for _, v := range s {");
@@ -5696,9 +5711,9 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                     // Generate set wrapper Union() method
                     WriteLine();
                     WriteLineIndent("// Union of the current set and the given set");
-                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Union(set set" + ConvertCase(*field->name) + ") set" + ConvertCase(*field->name) + " {");
+                    WriteLineIndent("func (s set" + ConvertToUpper(*field->name) + ") Union(set set" + ConvertToUpper(*field->name) + ") set" + ConvertToUpper(*field->name) + " {");
                     Indent(1);
-                    WriteLineIndent("result := make(set" + ConvertCase(*field->name) + ")");
+                    WriteLineIndent("result := make(set" + ConvertToUpper(*field->name) + ")");
                     WriteLineIndent("for _, v := range s {");
                     Indent(1);
                     WriteLineIndent("result.Add(v)");
@@ -5716,9 +5731,9 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                     // Generate set wrapper Intersection() method
                     WriteLine();
                     WriteLineIndent("// Intersection of the current set and the given set");
-                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Intersection(set set" + ConvertCase(*field->name) + ") set" + ConvertCase(*field->name) + " {");
+                    WriteLineIndent("func (s set" + ConvertToUpper(*field->name) + ") Intersection(set set" + ConvertToUpper(*field->name) + ") set" + ConvertToUpper(*field->name) + " {");
                     Indent(1);
-                    WriteLineIndent("result := make(set" + ConvertCase(*field->name) + ")");
+                    WriteLineIndent("result := make(set" + ConvertToUpper(*field->name) + ")");
                     WriteLineIndent("for _, v := range set {");
                     Indent(1);
                     WriteLineIndent("if s.Contains(v) {");
@@ -5735,9 +5750,9 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                     // Generate set wrapper Difference() method
                     WriteLine();
                     WriteLineIndent("// Difference between the current set and the given set");
-                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") Difference(set set" + ConvertCase(*field->name) + ") set" + ConvertCase(*field->name) + " {");
+                    WriteLineIndent("func (s set" + ConvertToUpper(*field->name) + ") Difference(set set" + ConvertToUpper(*field->name) + ") set" + ConvertToUpper(*field->name) + " {");
                     Indent(1);
-                    WriteLineIndent("result := make(set" + ConvertCase(*field->name) + ")");
+                    WriteLineIndent("result := make(set" + ConvertToUpper(*field->name) + ")");
                     WriteLineIndent("for _, v := range set {");
                     Indent(1);
                     WriteLineIndent("if !s.Contains(v) {");
@@ -5763,7 +5778,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                     // Generate set wrapper MarshalJSON() method
                     WriteLine();
                     WriteLineIndent("// Convert set to JSON");
-                    WriteLineIndent("func (s set" + ConvertCase(*field->name) + ") MarshalJSON() ([]byte, error) {");
+                    WriteLineIndent("func (s set" + ConvertToUpper(*field->name) + ") MarshalJSON() ([]byte, error) {");
                     Indent(1);
                     WriteLineIndent("array := make([]" + ConvertTypeName(*field->type, field->optional) + ", 0)");
                     WriteLineIndent("for _, v := range s {");
@@ -5778,7 +5793,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
                     // Generate set wrapper UnmarshalJSON() method
                     WriteLine();
                     WriteLineIndent("// Convert JSON to set");
-                    WriteLineIndent("func (s *set" + ConvertCase(*field->name) + ") UnmarshalJSON(body []byte) error {");
+                    WriteLineIndent("func (s *set" + ConvertToUpper(*field->name) + ") UnmarshalJSON(body []byte) error {");
                     Indent(1);
                     WriteLineIndent("var array []" + ConvertTypeName(*field->type, field->optional));
                     WriteLineIndent("err := fbe.Json.Unmarshal(body, &array)");
@@ -5828,7 +5843,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
 
 void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path)
 {
-    std::string struct_name = ConvertCase(*s->name);
+    std::string struct_name = ConvertToUpper(*s->name);
     std::string field_model_name = "FieldModel" + struct_name;
 
     // Open the output file
@@ -5865,7 +5880,7 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
         WriteLineIndent(base_field_model);
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent(ConvertCase(*field->name) + " *" + ConvertTypeFieldDeclaration(*field, false));
+            WriteLineIndent(ConvertToUpper(*field->name) + " *" + ConvertTypeFieldDeclaration(*field, false));
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5887,9 +5902,9 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
     {
         for (const auto& field : s->body->fields)
         {
-            WriteLineIndent("fbeResult." + ConvertCase(*field->name) + " = " + ConvertTypeFieldInitialization(*field, prev_offset + " + " + prev_size, false));
-            prev_offset = "fbeResult." + ConvertCase(*field->name) + ".FBEOffset()";
-            prev_size = "fbeResult." + ConvertCase(*field->name) + ".FBESize()";
+            WriteLineIndent("fbeResult." + ConvertToUpper(*field->name) + " = " + ConvertTypeFieldInitialization(*field, prev_offset + " + " + prev_size, false));
+            prev_offset = "fbeResult." + ConvertToUpper(*field->name) + ".FBEOffset()";
+            prev_size = "fbeResult." + ConvertToUpper(*field->name) + ".FBESize()";
         }
     }
     WriteLineIndent("return &fbeResult");
@@ -5912,7 +5927,7 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
         WriteLineIndent("fm." + base_field_name + ".FBEBody() - 4 - 4 +");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("fm." + ConvertCase(*field->name) + ".FBESize() +");
+            WriteLineIndent("fm." + ConvertToUpper(*field->name) + ".FBESize() +");
     WriteLineIndent("0");
     Indent(-1);
     WriteLineIndent("return fbeResult");
@@ -5945,7 +5960,7 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
         WriteLineIndent("fm." + base_field_name + ".FBEExtra() + ");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("fm." + ConvertCase(*field->name) + ".FBEExtra() +");
+            WriteLineIndent("fm." + ConvertToUpper(*field->name) + ".FBEExtra() +");
     WriteLineIndent("0");
     Indent(-1);
     WriteLine();
@@ -6043,17 +6058,17 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("if (fbeCurrentSize + fm." + ConvertCase(*field->name) + ".FBESize()) > fbeStructSize {");
+            WriteLineIndent("if (fbeCurrentSize + fm." + ConvertToUpper(*field->name) + ".FBESize()) > fbeStructSize {");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);
             WriteLineIndent("}");
-            WriteLineIndent("if !fm." + ConvertCase(*field->name) + ".Verify() {");
+            WriteLineIndent("if !fm." + ConvertToUpper(*field->name) + ".Verify() {");
             Indent(1);
             WriteLineIndent("return false");
             Indent(-1);
             WriteLineIndent("}");
-            WriteLineIndent("fbeCurrentSize += fm." + ConvertCase(*field->name) + ".FBESize()");
+            WriteLineIndent("fbeCurrentSize += fm." + ConvertToUpper(*field->name) + ".FBESize()");
         }
     }
     WriteLine();
@@ -6142,36 +6157,36 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("if (fbeCurrentSize + fm." + ConvertCase(*field->name) + ".FBESize()) <= fbeStructSize {");
+            WriteLineIndent("if (fbeCurrentSize + fm." + ConvertToUpper(*field->name) + ".FBESize()) <= fbeStructSize {");
             Indent(1);
             if (field->array)
             {
-                WriteLineIndent("slice, _ := fm." + ConvertCase(*field->name) + ".Get()");
-                WriteLineIndent("copy(fbeValue." + ConvertCase(*field->name) + "[:], slice)");
+                WriteLineIndent("slice, _ := fm." + ConvertToUpper(*field->name) + ".Get()");
+                WriteLineIndent("copy(fbeValue." + ConvertToUpper(*field->name) + "[:], slice)");
             }
             else if (field->vector || field->list || field->set || field->map || field->hash || field->optional)
-                WriteLineIndent("fbeValue." + ConvertCase(*field->name) + ", _ = fm." + ConvertCase(*field->name) + ".Get()");
+                WriteLineIndent("fbeValue." + ConvertToUpper(*field->name) + ", _ = fm." + ConvertToUpper(*field->name) + ".Get()");
             else if (!IsGoType(*field->type))
             {
                 if (field->value)
-                    WriteLineIndent("_ = fm." + ConvertCase(*field->name) + ".GetValueDefault(&fbeValue." + ConvertCase(*field->name) + ", " + ConvertConstant(*field->type, *field->value, field->optional) + ")");
+                    WriteLineIndent("_ = fm." + ConvertToUpper(*field->name) + ".GetValueDefault(&fbeValue." + ConvertToUpper(*field->name) + ", " + ConvertConstant(*field->type, *field->value, field->optional) + ")");
                 else
-                    WriteLineIndent("_ = fm." + ConvertCase(*field->name) + ".GetValue(&fbeValue." + ConvertCase(*field->name) + ")");
+                    WriteLineIndent("_ = fm." + ConvertToUpper(*field->name) + ".GetValue(&fbeValue." + ConvertToUpper(*field->name) + ")");
             }
             else
             {
                 if (field->value)
-                    WriteLineIndent("fbeValue." + ConvertCase(*field->name) + ", _ = fm." + ConvertCase(*field->name) + ".GetDefault(" + ConvertConstant(*field->type, *field->value, field->optional) + ")");
+                    WriteLineIndent("fbeValue." + ConvertToUpper(*field->name) + ", _ = fm." + ConvertToUpper(*field->name) + ".GetDefault(" + ConvertConstant(*field->type, *field->value, field->optional) + ")");
                 else
-                    WriteLineIndent("fbeValue." + ConvertCase(*field->name) + ", _ = fm." + ConvertCase(*field->name) + ".Get()");
+                    WriteLineIndent("fbeValue." + ConvertToUpper(*field->name) + ", _ = fm." + ConvertToUpper(*field->name) + ".Get()");
             }
             Indent(-1);
             WriteLineIndent("} else {");
             Indent(1);
-            WriteLineIndent("fbeValue." + ConvertCase(*field->name) + " = " + ConvertDefault(*field));
+            WriteLineIndent("fbeValue." + ConvertToUpper(*field->name) + " = " + ConvertDefault(*field));
             Indent(-1);
             WriteLineIndent("}");
-            WriteLineIndent("fbeCurrentSize += fm." + ConvertCase(*field->name) + ".FBESize()");
+            WriteLineIndent("fbeCurrentSize += fm." + ConvertToUpper(*field->name) + ".FBESize()");
         }
     }
     Indent(-1);
@@ -6246,9 +6261,9 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
         for (const auto& field : s->body->fields)
         {
             if (field->array)
-                WriteLineIndent("if err = fm." + ConvertCase(*field->name) + ".Set(fbeValue." + ConvertCase(*field->name) + "[:]); err != nil {");
+                WriteLineIndent("if err = fm." + ConvertToUpper(*field->name) + ".Set(fbeValue." + ConvertToUpper(*field->name) + "[:]); err != nil {");
             else
-                WriteLineIndent("if err = fm." + ConvertCase(*field->name) + ".Set(" + ((IsGoType(*field->type) || field->vector || field->list || field->set || field->map || field->hash || field->optional) ? "" : "&") + "fbeValue." + ConvertCase(*field->name) + "); err != nil {");
+                WriteLineIndent("if err = fm." + ConvertToUpper(*field->name) + ".Set(" + ((IsGoType(*field->type) || field->vector || field->list || field->set || field->map || field->hash || field->optional) ? "" : "&") + "fbeValue." + ConvertToUpper(*field->name) + "); err != nil {");
             Indent(1);
             WriteLineIndent("return err");
             Indent(-1);
@@ -6268,7 +6283,7 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
 
 void GeneratorGo::GenerateStructModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path)
 {
-    std::string struct_name = ConvertCase(*s->name);
+    std::string struct_name = ConvertToUpper(*s->name);
     std::string model_name = struct_name + "Model";
     std::string field_model_name = "FieldModel" + struct_name;
 
@@ -6434,7 +6449,7 @@ void GeneratorGo::GenerateStructModel(const std::shared_ptr<Package>& p, const s
 
 void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path)
 {
-    std::string struct_name = ConvertCase(*s->name);
+    std::string struct_name = ConvertToUpper(*s->name);
     std::string final_model_name = "FinalModel" + struct_name;
 
     // Open the output file
@@ -6468,7 +6483,7 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
         WriteLineIndent(base_final_model);
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent(ConvertCase(*field->name) + " *" + ConvertTypeFieldDeclaration(*field, true));
+            WriteLineIndent(ConvertToUpper(*field->name) + " *" + ConvertTypeFieldDeclaration(*field, true));
     Indent(-1);
     WriteLineIndent("}");
 
@@ -6482,7 +6497,7 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
         WriteLineIndent("fbeResult." + base_final_name + " = *" + ConvertModelName(*s->base, "NewFinalModel") + "(buffer, 0)");
     if (s->body)
         for (const auto& field : s->body->fields)
-            WriteLineIndent("fbeResult." + ConvertCase(*field->name) + " = " + ConvertTypeFieldInitialization(*field, "0", true));
+            WriteLineIndent("fbeResult." + ConvertToUpper(*field->name) + " = " + ConvertTypeFieldInitialization(*field, "0", true));
     WriteLineIndent("return &fbeResult");
     Indent(-1);
     WriteLineIndent("}");
@@ -6501,13 +6516,13 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
         for (const auto& field : s->body->fields)
         {
             if (field->array)
-                WriteLineIndent("fm." + ConvertCase(*field->name) + ".FBEAllocationSize(fbeValue." + ConvertCase(*field->name) + "[:]) +");
+                WriteLineIndent("fm." + ConvertToUpper(*field->name) + ".FBEAllocationSize(fbeValue." + ConvertToUpper(*field->name) + "[:]) +");
             else if (field->vector || field->list || field->set || field->map || field->hash || field->optional)
-                WriteLineIndent("fm." + ConvertCase(*field->name) + ".FBEAllocationSize(fbeValue." + ConvertCase(*field->name) + ") +");
+                WriteLineIndent("fm." + ConvertToUpper(*field->name) + ".FBEAllocationSize(fbeValue." + ConvertToUpper(*field->name) + ") +");
             else if (!IsGoType(*field->type))
-                WriteLineIndent("fm." + ConvertCase(*field->name) + ".FBEAllocationSize(&fbeValue." + ConvertCase(*field->name) + ") +");
+                WriteLineIndent("fm." + ConvertToUpper(*field->name) + ".FBEAllocationSize(&fbeValue." + ConvertToUpper(*field->name) + ") +");
             else
-                WriteLineIndent("fm." + ConvertCase(*field->name) + ".FBEAllocationSize(fbeValue." + ConvertCase(*field->name) + ") +");
+                WriteLineIndent("fm." + ConvertToUpper(*field->name) + ".FBEAllocationSize(fbeValue." + ConvertToUpper(*field->name) + ") +");
         }
     }
     WriteLineIndent("0");
@@ -6582,8 +6597,8 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("fm." + ConvertCase(*field->name) + ".SetFBEOffset(fbeCurrentOffset)");
-            WriteLineIndent("if fbeFieldSize = fm." + ConvertCase(*field->name) + ".Verify(); fbeFieldSize == fbe.MaxInt {");
+            WriteLineIndent("fm." + ConvertToUpper(*field->name) + ".SetFBEOffset(fbeCurrentOffset)");
+            WriteLineIndent("if fbeFieldSize = fm." + ConvertToUpper(*field->name) + ".Verify(); fbeFieldSize == fbe.MaxInt {");
             Indent(1);
             WriteLineIndent("return fbe.MaxInt");
             Indent(-1);
@@ -6641,15 +6656,15 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("fm." + ConvertCase(*field->name) + ".SetFBEOffset(fbeCurrentOffset)");
+            WriteLineIndent("fm." + ConvertToUpper(*field->name) + ".SetFBEOffset(fbeCurrentOffset)");
             if (field->array)
-                WriteLineIndent("if slice, size, err := fm." + ConvertCase(*field->name) + ".Get(); err != nil {");
+                WriteLineIndent("if slice, size, err := fm." + ConvertToUpper(*field->name) + ".Get(); err != nil {");
             else if (field->vector || field->list || field->set || field->map || field->hash || field->optional)
-                WriteLineIndent("if fbeValue." + ConvertCase(*field->name) + ", fbeFieldSize, err = fm." + ConvertCase(*field->name) + ".Get(); err != nil {");
+                WriteLineIndent("if fbeValue." + ConvertToUpper(*field->name) + ", fbeFieldSize, err = fm." + ConvertToUpper(*field->name) + ".Get(); err != nil {");
             else if (!IsGoType(*field->type))
-                WriteLineIndent("if fbeFieldSize, err = fm." + ConvertCase(*field->name) + ".GetValue(&fbeValue." + ConvertCase(*field->name) + "); err != nil {");
+                WriteLineIndent("if fbeFieldSize, err = fm." + ConvertToUpper(*field->name) + ".GetValue(&fbeValue." + ConvertToUpper(*field->name) + "); err != nil {");
             else
-                WriteLineIndent("if fbeValue." + ConvertCase(*field->name) + ", fbeFieldSize, err = fm." + ConvertCase(*field->name) + ".Get(); err != nil {");
+                WriteLineIndent("if fbeValue." + ConvertToUpper(*field->name) + ", fbeFieldSize, err = fm." + ConvertToUpper(*field->name) + ".Get(); err != nil {");
             Indent(1);
             WriteLineIndent("return fbeCurrentSize, err");
             Indent(-1);
@@ -6657,7 +6672,7 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
             {
                 WriteLineIndent("} else {");
                 Indent(1);
-                WriteLineIndent("copy(fbeValue." + ConvertCase(*field->name) + "[:], slice)");
+                WriteLineIndent("copy(fbeValue." + ConvertToUpper(*field->name) + "[:], slice)");
                 WriteLineIndent("fbeFieldSize = size");
                 Indent(-1);
             }
@@ -6707,11 +6722,11 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
         for (const auto& field : s->body->fields)
         {
             WriteLine();
-            WriteLineIndent("fm." + ConvertCase(*field->name) + ".SetFBEOffset(fbeCurrentOffset)");
+            WriteLineIndent("fm." + ConvertToUpper(*field->name) + ".SetFBEOffset(fbeCurrentOffset)");
             if (field->array)
-                WriteLineIndent("if fbeFieldSize, err = fm." + ConvertCase(*field->name) + ".Set(fbeValue." + ConvertCase(*field->name) + "[:]); err != nil {");
+                WriteLineIndent("if fbeFieldSize, err = fm." + ConvertToUpper(*field->name) + ".Set(fbeValue." + ConvertToUpper(*field->name) + "[:]); err != nil {");
             else
-                WriteLineIndent("if fbeFieldSize, err = fm." + ConvertCase(*field->name) + ".Set(" + ((IsGoType(*field->type) || field->vector || field->list || field->set || field->map || field->hash || field->optional) ? "" : "&") + "fbeValue." + ConvertCase(*field->name) + "); err != nil {");
+                WriteLineIndent("if fbeFieldSize, err = fm." + ConvertToUpper(*field->name) + ".Set(" + ((IsGoType(*field->type) || field->vector || field->list || field->set || field->map || field->hash || field->optional) ? "" : "&") + "fbeValue." + ConvertToUpper(*field->name) + "); err != nil {");
             Indent(1);
             WriteLineIndent("return fbeCurrentSize, err");
             Indent(-1);
@@ -6734,7 +6749,7 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
 
 void GeneratorGo::GenerateStructModelFinal(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path)
 {
-    std::string struct_name = ConvertCase(*s->name);
+    std::string struct_name = ConvertToUpper(*s->name);
     std::string model_name = struct_name + "FinalModel";
     std::string final_model_name = "FinalModel" + struct_name;
 
@@ -6912,154 +6927,164 @@ void GeneratorGo::GenerateStructModelFinal(const std::shared_ptr<Package>& p, co
     // Close the output file
     Close();
 }
-/*
-void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, bool final)
+
+void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, const CppCommon::Path& path, bool final)
 {
-    std::string sender = (final ? "FinalSender" : "Sender");
-    std::string model = (final ? "FinalModel" : "Model");
+    std::string sender_name = std::string(final ? "Final" : "") + "Sender";
 
-    // Generate sender begin
+    // Open the output file
+    CppCommon::Path output = path / (sender_name + ".go");
+    Open(output);
+
+    // Generate header
+    GenerateHeader(CppCommon::Path(_input).filename().string());
+
+    // Generate package
     WriteLine();
+    WriteLineIndent("package " + *p->name);
+
+    // Generate imports
     WriteLine();
-    if (final)
-        WriteLineIndent("# Fast Binary Encoding " + *p->name + " final sender");
-    else
-        WriteLineIndent("# Fast Binary Encoding " + *p->name + " sender");
-    WriteLineIndent("class " + sender + "(fbe.Sender):");
+    WriteLineIndent("import \"errors\"");
+    GenerateImports(p);
+
+    // Generate sender type
+    WriteLine();
+    WriteLineIndent("// Fast Binary Encoding " + *p->name + (final ? " final " : " ") + "sender");
+    WriteLineIndent("type " + sender_name + " struct {");
     Indent(1);
-
-    // Generate sender __slots__
-    WriteIndent("__slots__ = ");
-    if (p->import)
-    {
-        for (const auto& import : p->import->imports)
-            Write("\"_" + CppCommon::StringUtils::ToLower(*import) + "_sender\", ");
-    }
+    WriteLineIndent("fbe.Sender");
     if (p->body)
     {
+        if (p->import)
+            for (const auto& import : p->import->imports)
+                WriteLineIndent(ConvertToLower(*import) + "Sender *" + *import + (final ? ".Final" : ".") + "Sender");
         for (const auto& s : p->body->structs)
-            Write("\"_" + CppCommon::StringUtils::ToLower(*s->name) + "_model\", ");
+            WriteLineIndent(ConvertToLower(*s->name) + "Model *" + ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model");
     }
-    WriteLine();
+    Indent(-1);
+    WriteLineIndent("}");
 
     // Generate sender constructor
     WriteLine();
-    WriteLineIndent("def __init__(self, buffer=None):");
+    WriteLineIndent("// Create a new " + *p->name + (final ? " final " : " ") + "sender");
+    WriteLineIndent("func New" + sender_name + "(buffer *fbe.Buffer) *" + sender_name + " {");
     Indent(1);
-    if (final)
-        WriteLineIndent("super().__init__(buffer, False, True)");
-    else
-        WriteLineIndent("super().__init__(buffer, False, False)");
-    if (p->import)
-    {
-        for (const auto& import : p->import->imports)
-            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*import) + "_sender = " + *import + "." + sender + "(self.buffer)");
-    }
+    WriteLineIndent("return &" + sender_name + "{");
+    Indent(1);
+    WriteLineIndent("*fbe.NewSender(buffer, false, false),");
     if (p->body)
     {
+        if (p->import)
+            for (const auto& import : p->import->imports)
+                WriteLineIndent(*import + ".New" + (final ? "Final" : "") + "Sender(buffer),");
         for (const auto& s : p->body->structs)
-            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + *s->name + model + "(self.buffer)");
+            WriteLineIndent("New" + ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model(buffer),");
     }
     Indent(-1);
+    WriteLineIndent("}");
+    Indent(-1);
+    WriteLineIndent("}");
 
-    // Generate imported senders accessors
+    // Generate sender imported senders
     if (p->import)
     {
         WriteLine();
-        WriteLineIndent("# Imported senders");
+        WriteLineIndent("// Imported senders");
+        WriteLine();
         for (const auto& import : p->import->imports)
-        {
-            WriteLine();
-            WriteLineIndent("@property");
-            WriteLineIndent("def " + CppCommon::StringUtils::ToLower(*import) + "_sender(self):");
-            Indent(1);
-            WriteLineIndent("return self._" + CppCommon::StringUtils::ToLower(*import) + "_sender");
-            Indent(-1);
-        }
+            WriteLineIndent("func (s *" + sender_name + ") " + ConvertToUpper(*import) + "Sender" + "() *" + *import + (final ? ".Final" : ".") + "Sender" + " { return s." + ConvertToLower(*import) + "Sender" + " }");
     }
 
     // Generate sender models accessors
+    WriteLine();
+    WriteLineIndent("// Sender models accessors");
+    WriteLine();
     if (p->body)
-    {
-        WriteLine();
-        WriteLineIndent("# Sender models accessors");
         for (const auto& s : p->body->structs)
-        {
-            WriteLine();
-            WriteLineIndent("@property");
-            WriteLineIndent("def " + CppCommon::StringUtils::ToLower(*s->name) + "_model(self):");
-            Indent(1);
-            WriteLineIndent("return self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model");
-            Indent(-1);
-        }
-    }
+            WriteLineIndent("func (s *" + sender_name + ") " + ConvertToUpper(*s->name) + "Model" + "() *" + ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model" + " { return s." + ConvertToLower(*s->name) + "Model" + " }");
 
     // Generate sender methods
     WriteLine();
-    WriteLineIndent("# Send methods");
+    WriteLineIndent("// Send methods");
     WriteLine();
-    WriteLineIndent("def send(self, value):");
+    WriteLineIndent("func (s *" + sender_name + ") Send(value interface{}) (int, error) {");
     Indent(1);
+    if (p->body)
+    {
+        WriteLineIndent("switch value.(type) {");
+        for (const auto& s : p->body->structs)
+        {
+            WriteLineIndent("case *" + ConvertToUpper(*s->name) + ":");
+            Indent(1);
+            WriteLineIndent("return s.Send" + ConvertToUpper(*s->name) + "(value.(*" + ConvertToUpper(*s->name) + "))");
+            Indent(-1);
+        }
+        WriteLineIndent("}");
+        if (p->import)
+        {
+            for (const auto& import : p->import->imports)
+            {
+                WriteLineIndent("if result, err := s." + ConvertToLower(*import) + "Sender.Send(value); (result > 0) || (err != nil) {");
+                Indent(1);
+                WriteLineIndent("return result, err");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
+        }
+    }
+    WriteLineIndent("return 0, nil");
+    Indent(-1);
+    WriteLineIndent("}");
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
-            WriteLineIndent("if isinstance(value, " + *s->name + "):");
-            Indent(1);
-            WriteLineIndent("return self.send_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
-            Indent(-1);
-        }
-    }
-    if (p->import)
-    {
-        for (const auto& import : p->import->imports)
-        {
-            WriteLineIndent("result = self._" + CppCommon::StringUtils::ToLower(*import) + "_sender.send(value)");
-            WriteLineIndent("if result > 0:");
-            Indent(1);
-            WriteLineIndent("return result");
-            Indent(-1);
-        }
-    }
-    WriteLineIndent("return 0");
-    Indent(-1);
-    if (p->body)
-    {
-        for (const auto& s : p->body->structs)
-        {
             WriteLine();
-            WriteLineIndent("def send_" + CppCommon::StringUtils::ToLower(*s->name) + "(self, value):");
+            WriteLineIndent("func (s *" + sender_name + ") Send" + ConvertToUpper(*s->name) + "(value *" + ConvertToUpper(*s->name) + ") (int, error) {");
             Indent(1);
-            WriteLineIndent("# Serialize the value into the FBE stream");
-            WriteLineIndent("serialized = self." + CppCommon::StringUtils::ToLower(*s->name) + "_model.serialize(value)");
-            WriteLineIndent("assert (serialized > 0), \"" + *p->name + "." + *s->name + " serialization failed!\"");
-            WriteLineIndent("assert self." + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify(), \"" + *p->name + "." + *s->name + " validation failed!\"");
-            WriteLine();
-            WriteLineIndent("# Log the value");
-            WriteLineIndent("if self.logging:");
+            WriteLineIndent("// Serialize the value into the FBE stream");
+            WriteLineIndent("serialized, err := s." + ConvertToLower(*s->name) + "Model.Serialize(value)");
+            WriteLineIndent("if serialized <= 0 {");
             Indent(1);
-            WriteLineIndent("message = str(value)");
-            WriteLineIndent("self.on_send_log(message)");
+            WriteLineIndent("return 0, errors.New(\"" + *p->name + "." + *s->name + " serialization failed\")");
             Indent(-1);
+            WriteLineIndent("}");
+            WriteLineIndent("if err != nil {");
+            Indent(1);
+            WriteLineIndent("return 0, err");
+            Indent(-1);
+            WriteLineIndent("}");
+            WriteLineIndent("if !s." + ConvertToLower(*s->name) + "Model.Verify() {");
+            WriteLineIndent("return 0, errors.New(\"" + *p->name + "." + *s->name + " validation failed\")");
+            WriteLineIndent("}");
             WriteLine();
-            WriteLineIndent("# Send the serialized value");
-            WriteLineIndent("return self.send_serialized(serialized)");
+            WriteLineIndent("// Log the value");
+            WriteLineIndent("if s.Logging() {");
+            Indent(1);
+            WriteLineIndent("message := value.String()");
+            WriteLineIndent("if err := s.OnSendLogHandler(message); err != nil {");
+            Indent(1);
+            WriteLineIndent("return 0, err");
             Indent(-1);
+            WriteLineIndent("}");
+            Indent(-1);
+            WriteLineIndent("}");
+            WriteLine();
+            WriteLineIndent("// Send the serialized value");
+            WriteLineIndent("return s.SendSerialized(serialized)");
+            Indent(-1);
+            WriteLineIndent("}");
         }
     }
 
-    // Generate sender message handler
-    WriteLine();
-    WriteLineIndent("# Send message handler");
-    WriteLineIndent("def on_send(self, buffer, offset, size):");
-    Indent(1);
-    WriteLineIndent("raise NotImplementedError(\"" + *p->name + ".Sender.on_send() not implemented!\")");
-    Indent(-1);
+    // Generate footer
+    GenerateFooter();
 
-    // Generate sender end
-    Indent(-1);
+    // Close the output file
+    Close();
 }
-
+/*
 void GeneratorGo::GenerateReceiver(const std::shared_ptr<Package>& p, bool final)
 {
     std::string receiver = (final ? "FinalReceiver" : "Receiver");
@@ -7217,7 +7242,14 @@ bool GeneratorGo::IsGoType(const std::string& type)
     return IsPrimitiveType(type) || (type == "bytes") || (type == "decimal") || (type == "string") || (type == "timestamp") || (type == "uuid");
 }
 
-std::string GeneratorGo::ConvertCase(const std::string& type)
+std::string GeneratorGo::ConvertToLower(const std::string& type)
+{
+    std::string result = CppCommon::StringUtils::ToTrim(type);
+    result[0] = std::tolower(result[0]);
+    return result;
+}
+
+std::string GeneratorGo::ConvertToUpper(const std::string& type)
 {
     std::string result = CppCommon::StringUtils::ToTrim(type);
     result[0] = std::toupper(result[0]);
@@ -7331,7 +7363,7 @@ std::string GeneratorGo::ConvertEnumConstant(const std::string& value)
         t.assign(t, pos + 1, t.size() - pos);
     }
 
-    return ns + ConvertCase(t) + "_" + v;
+    return ns + ConvertToUpper(t) + "_" + v;
 }
 
 std::string GeneratorGo::ConvertEnumConstant(const std::string& name, const std::string& type, const std::string& value)
@@ -7377,7 +7409,7 @@ std::string GeneratorGo::ConvertBaseName(const std::string& type)
         t.assign(type, pos + 1, type.size() - pos);
     }
 
-    return ConvertCase(t);
+    return ConvertToUpper(t);
 }
 
 std::string GeneratorGo::ConvertKeyName(const std::string& type)
@@ -7395,7 +7427,7 @@ std::string GeneratorGo::ConvertKeyName(const std::string& type)
         t.assign(type, pos + 1, type.size() - pos);
     }
 
-    return ns + ConvertCase(t) + "Key";
+    return ns + ConvertToUpper(t) + "Key";
 }
 
 std::string GeneratorGo::ConvertModelName(const std::string& type, const std::string& model)
@@ -7410,7 +7442,7 @@ std::string GeneratorGo::ConvertModelName(const std::string& type, const std::st
         t.assign(type, pos + 1, type.size() - pos);
     }
 
-    return ns + model + ConvertCase(t);
+    return ns + model + ConvertToUpper(t);
 }
 
 std::string GeneratorGo::ConvertNewName(const std::string& type)
@@ -7425,7 +7457,7 @@ std::string GeneratorGo::ConvertNewName(const std::string& type)
         t.assign(type, pos + 1, type.size() - pos);
     }
 
-    return ns + "New" + ConvertCase(t);
+    return ns + "New" + ConvertToUpper(t);
 }
 
 std::string GeneratorGo::ConvertOptional(const std::string& type)
@@ -7546,7 +7578,7 @@ std::string GeneratorGo::ConvertTypeName(const std::string& type, bool optional)
         t.assign(type, pos + 1, type.size() - pos);
     }
 
-    return opt + ns + ConvertCase(t);
+    return opt + ns + ConvertToUpper(t);
 }
 
 std::string GeneratorGo::ConvertTypeName(const StructField& field)
@@ -7556,7 +7588,7 @@ std::string GeneratorGo::ConvertTypeName(const StructField& field)
     else if ((field.vector) || (field.list))
         return "[]" + ConvertTypeName(*field.type, field.optional);
     else if (field.set)
-        return "set" + ConvertCase(*field.name);
+        return "set" + ConvertToUpper(*field.name);
     else if ((field.set) || (field.map) || (field.hash))
     {
         if (IsGoType(*field.key))
@@ -7620,7 +7652,7 @@ std::string GeneratorGo::ConvertTypeFieldName(const std::string& type)
     }
 
     CppCommon::StringUtils::ReplaceAll(ns, ".", "");
-    return ns + ConvertCase(t);
+    return ns + ConvertToUpper(t);
 }
 
 std::string GeneratorGo::ConvertTypeFieldType(const std::string& type, bool optional)
@@ -7639,7 +7671,7 @@ std::string GeneratorGo::ConvertTypeFieldType(const std::string& type, bool opti
         t.assign(type, pos + 1, type.size() - pos);
     }
 
-    return ns + opt + ConvertCase(t);
+    return ns + opt + ConvertToUpper(t);
 }
 
 std::string GeneratorGo::ConvertTypeFieldDeclaration(const std::string& type, bool optional, bool final)
@@ -7819,7 +7851,7 @@ std::string GeneratorGo::ConvertDefault(const StructField& field)
     else if (field.vector || field.list)
         return "make(" + ConvertTypeName(field) + ", 0)";
     else if (field.set)
-        return "make(set" + ConvertCase(*field.name) + ")";
+        return "make(set" + ConvertToUpper(*field.name) + ")";
     else if (field.map || field.hash)
         return "make(" + ConvertTypeName(field) + ")";
 
