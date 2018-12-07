@@ -32,9 +32,9 @@ func (s *Sender) EnumsModel() *EnumsModel { return s.enumsModel }
 // Send methods
 
 func (s *Sender) Send(value interface{}) (int, error) {
-    switch value.(type) {
+    switch value := value.(type) {
     case *Enums:
-        return s.SendEnums(value.(*Enums))
+        return s.SendEnums(value)
     }
     return 0, nil
 }

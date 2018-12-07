@@ -7038,12 +7038,12 @@ void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, const CppCom
     Indent(1);
     if (p->body)
     {
-        WriteLineIndent("switch value.(type) {");
+        WriteLineIndent("switch value := value.(type) {");
         for (const auto& s : p->body->structs)
         {
             WriteLineIndent("case *" + ConvertToUpper(*s->name) + ":");
             Indent(1);
-            WriteLineIndent("return s.Send" + ConvertToUpper(*s->name) + "(value.(*" + ConvertToUpper(*s->name) + "))");
+            WriteLineIndent("return s.Send" + ConvertToUpper(*s->name) + "(value)");
             Indent(-1);
         }
         WriteLineIndent("}");

@@ -70,29 +70,29 @@ func (s *Sender) StructHashExModel() *StructHashExModel { return s.structHashExM
 // Send methods
 
 func (s *Sender) Send(value interface{}) (int, error) {
-    switch value.(type) {
+    switch value := value.(type) {
     case *StructSimple:
-        return s.SendStructSimple(value.(*StructSimple))
+        return s.SendStructSimple(value)
     case *StructOptional:
-        return s.SendStructOptional(value.(*StructOptional))
+        return s.SendStructOptional(value)
     case *StructNested:
-        return s.SendStructNested(value.(*StructNested))
+        return s.SendStructNested(value)
     case *StructBytes:
-        return s.SendStructBytes(value.(*StructBytes))
+        return s.SendStructBytes(value)
     case *StructArray:
-        return s.SendStructArray(value.(*StructArray))
+        return s.SendStructArray(value)
     case *StructVector:
-        return s.SendStructVector(value.(*StructVector))
+        return s.SendStructVector(value)
     case *StructList:
-        return s.SendStructList(value.(*StructList))
+        return s.SendStructList(value)
     case *StructSet:
-        return s.SendStructSet(value.(*StructSet))
+        return s.SendStructSet(value)
     case *StructMap:
-        return s.SendStructMap(value.(*StructMap))
+        return s.SendStructMap(value)
     case *StructHash:
-        return s.SendStructHash(value.(*StructHash))
+        return s.SendStructHash(value)
     case *StructHashEx:
-        return s.SendStructHashEx(value.(*StructHashEx))
+        return s.SendStructHashEx(value)
     }
     if result, err := s.protoSender.Send(value); (result > 0) || (err != nil) {
         return result, err

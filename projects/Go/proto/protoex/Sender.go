@@ -46,13 +46,13 @@ func (s *Sender) AccountModel() *AccountModel { return s.accountModel }
 // Send methods
 
 func (s *Sender) Send(value interface{}) (int, error) {
-    switch value.(type) {
+    switch value := value.(type) {
     case *Order:
-        return s.SendOrder(value.(*Order))
+        return s.SendOrder(value)
     case *Balance:
-        return s.SendBalance(value.(*Balance))
+        return s.SendBalance(value)
     case *Account:
-        return s.SendAccount(value.(*Account))
+        return s.SendAccount(value)
     }
     if result, err := s.protoSender.Send(value); (result > 0) || (err != nil) {
         return result, err
