@@ -110,13 +110,13 @@ func (s *Sender) SendStructSimple(value *StructSimple) (int, error) {
         return 0, err
     }
     if !s.structSimpleModel.Verify() {
-    return 0, errors.New("test.StructSimple validation failed")
+        return 0, errors.New("test.StructSimple validation failed")
     }
 
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler(message); err != nil {
+        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -135,13 +135,13 @@ func (s *Sender) SendStructOptional(value *StructOptional) (int, error) {
         return 0, err
     }
     if !s.structOptionalModel.Verify() {
-    return 0, errors.New("test.StructOptional validation failed")
+        return 0, errors.New("test.StructOptional validation failed")
     }
 
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler(message); err != nil {
+        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -160,13 +160,13 @@ func (s *Sender) SendStructNested(value *StructNested) (int, error) {
         return 0, err
     }
     if !s.structNestedModel.Verify() {
-    return 0, errors.New("test.StructNested validation failed")
+        return 0, errors.New("test.StructNested validation failed")
     }
 
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler(message); err != nil {
+        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -185,13 +185,13 @@ func (s *Sender) SendStructBytes(value *StructBytes) (int, error) {
         return 0, err
     }
     if !s.structBytesModel.Verify() {
-    return 0, errors.New("test.StructBytes validation failed")
+        return 0, errors.New("test.StructBytes validation failed")
     }
 
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler(message); err != nil {
+        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -210,13 +210,13 @@ func (s *Sender) SendStructArray(value *StructArray) (int, error) {
         return 0, err
     }
     if !s.structArrayModel.Verify() {
-    return 0, errors.New("test.StructArray validation failed")
+        return 0, errors.New("test.StructArray validation failed")
     }
 
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler(message); err != nil {
+        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -235,13 +235,13 @@ func (s *Sender) SendStructVector(value *StructVector) (int, error) {
         return 0, err
     }
     if !s.structVectorModel.Verify() {
-    return 0, errors.New("test.StructVector validation failed")
+        return 0, errors.New("test.StructVector validation failed")
     }
 
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler(message); err != nil {
+        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -260,13 +260,13 @@ func (s *Sender) SendStructList(value *StructList) (int, error) {
         return 0, err
     }
     if !s.structListModel.Verify() {
-    return 0, errors.New("test.StructList validation failed")
+        return 0, errors.New("test.StructList validation failed")
     }
 
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler(message); err != nil {
+        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -285,13 +285,13 @@ func (s *Sender) SendStructSet(value *StructSet) (int, error) {
         return 0, err
     }
     if !s.structSetModel.Verify() {
-    return 0, errors.New("test.StructSet validation failed")
+        return 0, errors.New("test.StructSet validation failed")
     }
 
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler(message); err != nil {
+        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -310,13 +310,13 @@ func (s *Sender) SendStructMap(value *StructMap) (int, error) {
         return 0, err
     }
     if !s.structMapModel.Verify() {
-    return 0, errors.New("test.StructMap validation failed")
+        return 0, errors.New("test.StructMap validation failed")
     }
 
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler(message); err != nil {
+        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -335,13 +335,13 @@ func (s *Sender) SendStructHash(value *StructHash) (int, error) {
         return 0, err
     }
     if !s.structHashModel.Verify() {
-    return 0, errors.New("test.StructHash validation failed")
+        return 0, errors.New("test.StructHash validation failed")
     }
 
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler(message); err != nil {
+        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -360,13 +360,13 @@ func (s *Sender) SendStructHashEx(value *StructHashEx) (int, error) {
         return 0, err
     }
     if !s.structHashExModel.Verify() {
-    return 0, errors.New("test.StructHashEx validation failed")
+        return 0, errors.New("test.StructHashEx validation failed")
     }
 
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler(message); err != nil {
+        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
             return 0, err
         }
     }

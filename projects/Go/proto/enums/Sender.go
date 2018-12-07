@@ -49,13 +49,13 @@ func (s *Sender) SendEnums(value *Enums) (int, error) {
         return 0, err
     }
     if !s.enumsModel.Verify() {
-    return 0, errors.New("enums.Enums validation failed")
+        return 0, errors.New("enums.Enums validation failed")
     }
 
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler(message); err != nil {
+        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
             return 0, err
         }
     }

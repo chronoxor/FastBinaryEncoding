@@ -2,12 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a777d28d-c4fb-4aae-88ff-091d764fff06" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../modules/Catch2" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/Catch2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../modules/CppBenchmark" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppBenchmark" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../modules/CppCommon" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppCommon" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/TestSerialization.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerialization.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/TestSerializationFinal.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerializationFinal.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tests/TestSerializationJson.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/TestSerializationJson.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/enums/FinalSender.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/enums/FinalSender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/enums/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/enums/Sender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/Sender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/FinalSender.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/FinalSender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/Sender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/FinalSender.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/FinalSender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/Sender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/test/FinalSender.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/FinalSender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/test/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/Sender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,39 +20,8 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="2021039068">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="2" />
-          <entry key="project.open.time.6" value="2" />
-          <entry key="project.opened" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="kt" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="Kotlin" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="kt" value="21" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="Kotlin" value="21" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -124,12 +98,6 @@
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="401" />
     <option name="y" value="91" />
@@ -142,6 +110,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -164,8 +134,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -236,7 +204,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestEnums.serializationJsonEnums" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="TestEnums.serializationJsonEnums" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="Kotlin" />
       <extension name="coverage">
         <pattern>
@@ -254,7 +222,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="&lt;default&gt;" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="&lt;default&gt;" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="Kotlin" />
       <option name="PACKAGE_NAME" value="" />
       <option name="TEST_OBJECT" value="PACKAGE" />
@@ -333,6 +301,7 @@
       <workItem from="1543607762613" duration="148000" />
       <workItem from="1543927692407" duration="102000" />
       <workItem from="1543927816297" duration="754000" />
+      <workItem from="1544144130735" duration="25000" />
     </task>
     <servers />
   </component>
@@ -369,7 +338,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="70559000" />
+    <option name="totallyTimeSpent" value="70584000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -383,7 +352,7 @@
   <component name="ToolWindowManager">
     <frame x="401" y="91" width="1709" height="896" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23165555" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23468769" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -419,9 +388,6 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/proto/fbe/FieldModelString.kt">

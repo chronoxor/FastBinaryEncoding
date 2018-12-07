@@ -59,13 +59,13 @@ func (s *Sender) SendOrder(value *Order) (int, error) {
         return 0, err
     }
     if !s.orderModel.Verify() {
-    return 0, errors.New("proto.Order validation failed")
+        return 0, errors.New("proto.Order validation failed")
     }
 
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler(message); err != nil {
+        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -84,13 +84,13 @@ func (s *Sender) SendBalance(value *Balance) (int, error) {
         return 0, err
     }
     if !s.balanceModel.Verify() {
-    return 0, errors.New("proto.Balance validation failed")
+        return 0, errors.New("proto.Balance validation failed")
     }
 
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler(message); err != nil {
+        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -109,13 +109,13 @@ func (s *Sender) SendAccount(value *Account) (int, error) {
         return 0, err
     }
     if !s.accountModel.Verify() {
-    return 0, errors.New("proto.Account validation failed")
+        return 0, errors.New("proto.Account validation failed")
     }
 
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler(message); err != nil {
+        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
             return 0, err
         }
     }

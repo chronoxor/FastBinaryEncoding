@@ -4300,6 +4300,28 @@ void GeneratorGo::GenerateFBESender(const std::string& package)
     std::string code = R"CODE(
 package fbe
 
+// Send message handler
+type OnSendHandler interface {
+    OnSend(buffer []byte, offset int, size int) (int, error)
+}
+
+// Send message handler function
+type OnSendHandlerFunc func(buffer []byte, offset int, size int) (int, error)
+func (f OnSendHandlerFunc) OnSend(buffer []byte, offset int, size int) (int, error) {
+    return f(buffer, offset, size)
+}
+
+// Send log message handler
+type OnSendLogHandler interface {
+    OnSendLog(message string) error
+}
+
+// Send log message handler function
+type OnSendLogHandlerFunc func(message string) error
+func (f OnSendLogHandlerFunc) OnSendLog(message string) error {
+    return f(message)
+}
+
 // Fast Binary Encoding base sender
 type Sender struct {
     // Sender bytes buffer
@@ -4309,17 +4331,17 @@ type Sender struct {
     // Final protocol flag
     final bool
 
-    // Send message handler
-    OnSendHandler func(buffer []byte, offset int, size int) (int, error)
-    // Send log message handler
-    OnSendLogHandler func(message string) error
+    // Send message callback
+    OnSendCallback OnSendHandler
+    // Send log message callback
+    OnSendLogCallback OnSendLogHandler
 }
 
 // Create a new base sender
 func NewSender(buffer *Buffer, logging bool, final bool) *Sender {
     sender := &Sender{buffer: buffer, logging: logging, final: final}
-    sender.OnSend(func(buffer []byte, offset int, size int) (int, error) { panic("send handler is not provided") })
-    sender.OnSendLog(func(message string) error { return nil })
+    sender.OnSendFunc(func(buffer []byte, offset int, size int) (int, error) { panic("send handler is not provided") })
+    sender.OnSendLogFunc(func(message string) error { return nil })
     return sender
 }
 
@@ -4337,9 +4359,13 @@ func (s *Sender) Final() bool { return s.final }
 func (s *Sender) SetFinal(final bool) { s.final = final }
 
 // Send message handler
-func (s *Sender) OnSend(handler func(buffer []byte, offset int, size int) (int, error)) { s.OnSendHandler = handler }
+func (s *Sender) OnSend(handler OnSendHandler) { s.OnSendCallback = handler }
+// Send message handler function
+func (s *Sender) OnSendFunc(function func(buffer []byte, offset int, size int) (int, error)) { s.OnSendCallback = OnSendHandlerFunc(function) }
 // Send log message handler
-func (s *Sender) OnSendLog(handler func(message string) error) { s.OnSendLogHandler = handler }
+func (s *Sender) OnSendLog(handler OnSendLogHandler) { s.OnSendLogCallback = handler }
+// Send log message handler function
+func (s *Sender) OnSendLogFunc(function func(message string) error) { s.OnSendLogCallback = OnSendLogHandlerFunc(function) }
 
 // Send serialized buffer.
 // Direct call of the method requires knowledge about internals of FBE models serialization.
@@ -4353,7 +4379,7 @@ func (s *Sender) SendSerialized(serialized int) (int, error) {
     s.buffer.Shift(serialized)
 
     // Send the value
-    sent, err := s.OnSendHandler(s.buffer.Data(), 0, s.buffer.Size())
+    sent, err := s.OnSendCallback.OnSend(s.buffer.Data(), 0, s.buffer.Size())
     s.buffer.Remove(0, sent)
     return sent, err
 }
@@ -7056,14 +7082,16 @@ void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, const CppCom
             Indent(-1);
             WriteLineIndent("}");
             WriteLineIndent("if !s." + ConvertToLower(*s->name) + "Model.Verify() {");
+            Indent(1);
             WriteLineIndent("return 0, errors.New(\"" + *p->name + "." + *s->name + " validation failed\")");
+            Indent(-1);
             WriteLineIndent("}");
             WriteLine();
             WriteLineIndent("// Log the value");
             WriteLineIndent("if s.Logging() {");
             Indent(1);
             WriteLineIndent("message := value.String()");
-            WriteLineIndent("if err := s.OnSendLogHandler(message); err != nil {");
+            WriteLineIndent("if err := s.OnSendLogCallback.OnSendLog(message); err != nil {");
             Indent(1);
             WriteLineIndent("return 0, err");
             Indent(-1);
