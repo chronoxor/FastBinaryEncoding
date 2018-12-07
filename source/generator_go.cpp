@@ -63,7 +63,7 @@ void GeneratorGo::Generate(const std::shared_ptr<Package>& package)
     if (Sender())
     {
         GenerateFBESender("fbe");
-        //GenerateFBEReceiver();
+        GenerateFBEReceiver("fbe");
     }
 
     GeneratePackage(package);
@@ -469,9 +469,9 @@ import "math"
 // Fast Binary Encoding buffer based on dynamic byte array
 type Buffer struct {
     // Bytes memory buffer
-    data   []byte
+    data []byte
     // Bytes memory buffer size
-    size   int
+    size int
     // Bytes memory buffer offset
     offset int
 }
@@ -487,9 +487,16 @@ func NewCapacityBuffer(capacity int) *Buffer {
 }
 
 // Create a buffer with attached bytes memory buffer
-func NewAttached(buffer []byte, offset int, size int) *Buffer {
+func NewAttached(buffer []byte) *Buffer {
     result := NewEmptyBuffer()
-    result.Attach(buffer, offset, size)
+    result.Attach(buffer)
+    return result
+}
+
+// Create a buffer with attached bytes memory buffer with offset and size
+func NewAttachedBytes(buffer []byte, offset int, size int) *Buffer {
+    result := NewEmptyBuffer()
+    result.AttachBytes(buffer, offset, size)
     return result
 }
 
@@ -525,8 +532,13 @@ func (b *Buffer) AttachCapacity(capacity int) {
     b.offset = 0
 }
 
-// Attach the given memory buffer
-func (b *Buffer) Attach(buffer []byte, offset int, size int) {
+// Attach the given bytes memory buffer
+func (b *Buffer) Attach(buffer []byte) {
+    b.AttachBytes(buffer, 0, len(buffer))
+}
+
+// Attach the given bytes memory buffer with offset and size
+func (b *Buffer) AttachBytes(buffer []byte, offset int, size int) {
     if len(buffer) < size {
         panic("invalid buffer")
     }
@@ -544,7 +556,7 @@ func (b *Buffer) Attach(buffer []byte, offset int, size int) {
 
 // Attach another buffer
 func (b *Buffer) AttachBuffer(buffer *Buffer) {
-    b.Attach(buffer.data, 0, buffer.size)
+    b.AttachBytes(buffer.data, 0, buffer.size)
 }
 
 // Allocate memory in the current write buffer and return offset to the allocated memory block
@@ -4302,13 +4314,13 @@ package fbe
 
 // Send message interface
 type OnSend interface {
-    OnSend(buffer []byte, offset int, size int) (int, error)
+    OnSend(buffer []byte) (int, error)
 }
 
 // Send message function
-type OnSendFunc func(buffer []byte, offset int, size int) (int, error)
-func (f OnSendFunc) OnSend(buffer []byte, offset int, size int) (int, error) {
-    return f(buffer, offset, size)
+type OnSendFunc func(buffer []byte) (int, error)
+func (f OnSendFunc) OnSend(buffer []byte) (int, error) {
+    return f(buffer)
 }
 
 // Send log message interface
@@ -4338,9 +4350,9 @@ type Sender struct {
 }
 
 // Create a new base sender
-func NewSender(buffer *Buffer, logging bool, final bool) *Sender {
-    sender := &Sender{buffer: buffer, logging: logging, final: final}
-    sender.OnSendFunc(func(buffer []byte, offset int, size int) (int, error) { panic("send handler is not provided") })
+func NewSender(buffer *Buffer, final bool) *Sender {
+    sender := &Sender{buffer: buffer, logging: false, final: final}
+    sender.OnSendFunc(func(buffer []byte) (int, error) { panic("send handler is not provided") })
     sender.OnSendLogFunc(func(message string) error { return nil })
     return sender
 }
@@ -4348,20 +4360,18 @@ func NewSender(buffer *Buffer, logging bool, final bool) *Sender {
 // Get the bytes buffer
 func (s *Sender) Buffer() *Buffer { return s.buffer }
 
+// Get the final protocol flag
+func (s *Sender) Final() bool { return s.final }
+
 // Get the logging flag
 func (s *Sender) Logging() bool { return s.logging }
 // Set the logging flag
 func (s *Sender) SetLogging(logging bool) { s.logging = logging }
 
-// Get the final protocol flag
-func (s *Sender) Final() bool { return s.final }
-// Set the final protocol flag
-func (s *Sender) SetFinal(final bool) { s.final = final }
-
 // Send message handler
 func (s *Sender) OnSend(handler OnSend) { s.OnSendHandler = handler }
 // Send message handler function
-func (s *Sender) OnSendFunc(function func(buffer []byte, offset int, size int) (int, error)) { s.OnSendHandler = OnSendFunc(function) }
+func (s *Sender) OnSendFunc(function func(buffer []byte) (int, error)) { s.OnSendHandler = OnSendFunc(function) }
 // Send log message handler
 func (s *Sender) OnSendLog(handler OnSendLog) { s.OnSendLogHandler = handler }
 // Send log message handler function
@@ -4379,7 +4389,7 @@ func (s *Sender) SendSerialized(serialized int) (int, error) {
     s.buffer.Shift(serialized)
 
     // Send the value
-    sent, err := s.OnSendHandler.OnSend(s.buffer.Data(), 0, s.buffer.Size())
+    sent, err := s.OnSendHandler.OnSend(s.buffer.Data()[:s.buffer.Size()])
     s.buffer.Remove(0, sent)
     return sent, err
 }
@@ -4396,267 +4406,104 @@ func (s *Sender) SendSerialized(serialized int) (int, error) {
     // Close the file
     Close();
 }
-/*
-void GeneratorGo::GenerateFBEReceiver()
+
+void GeneratorGo::GenerateFBEReceiver(const std::string& package)
 {
+    CppCommon::Path path = CppCommon::Path(_output) / package;
+
+    // Open the file
+    CppCommon::Path file = path / "Receiver.go";
+    Open(file);
+
+    // Generate headers
+    GenerateHeader("fbe");
+
     std::string code = R"CODE(
+package fbe
 
-# Fast Binary Encoding base receiver
-class Receiver(object):
-    __slots__ = "_buffer", "_logging", "_final",
+// Receive message interface
+type OnReceive interface {
+    OnReceive(fbeType int, buffer []byte) (bool, error)
+}
 
-    def __init__(self, buffer=None, logging=False, final=False):
-        if buffer is None:
-            buffer = WriteBuffer()
-        self._buffer = buffer
-        self._logging = logging
-        self._final = final
+// Receive message function
+type OnReceiveFunc func(fbeType int, buffer []byte) (bool, error)
+func (f OnReceiveFunc) OnReceive(fbeType int, buffer []byte) (bool, error) {
+    return f(fbeType, buffer)
+}
 
-    # Get the bytes buffer
-    @property
-    def buffer(self):
-        return self._buffer
+// Receive log message interface
+type OnReceiveLog interface {
+    OnReceiveLog(message string) error
+}
 
-    # Get the logging flag
-    @property
-    def logging(self):
-        return self._logging
+// Receive log message function
+type OnReceiveLogFunc func(message string) error
+func (f OnReceiveLogFunc) OnReceiveLog(message string) error {
+    return f(message)
+}
 
-    # Set the logging flag
-    @logging.setter
-    def logging(self, logging):
-        self._logging = logging
+// Fast Binary Encoding base receiver
+type Receiver struct {
+    // Receiver bytes buffer
+    buffer *Buffer
+    // Logging flag
+    logging bool
+    // Final protocol flag
+    final bool
 
-    # Get the final protocol flag
-    @property
-    def final(self):
-        return self._final
+    // Receive message handler
+    OnReceiveHandler OnReceive
+    // Receive log message handler
+    OnReceiveLogHandler OnReceiveLog
+}
 
-    # Receive data
-    def receive(self, buffer, offset=0, size=None):
-        assert (buffer is not None), "Invalid buffer!"
-        if buffer is None:
-            raise ValueError("Invalid buffer!")
+// Create a new base receiver
+func NewReceiver(buffer *Buffer, final bool) *Receiver {
+    receiver := &Receiver{buffer: buffer, logging: false, final: final}
+    receiver.OnReceiveFunc(func(fbeType int, buffer []byte) (bool, error) { panic("receive handler is not provided") })
+    receiver.OnReceiveLogFunc(func(message string) error { return nil })
+    return receiver
+}
 
-        if size is None:
-            size = len(buffer)
+// Get the bytes buffer
+func (r *Receiver) Buffer() *Buffer { return r.buffer }
 
-        assert ((offset + size) <= len(buffer)), "Invalid offset & size!"
-        if (offset + size) > len(buffer):
-            raise ValueError("Invalid offset & size!")
+// Get the final protocol flag
+func (r *Receiver) Final() bool { return r.final }
 
-        if size == 0:
-            return
+// Get the logging flag
+func (r *Receiver) Logging() bool { return r.logging }
+// Set the logging flag
+func (r *Receiver) SetLogging(logging bool) { r.logging = logging }
 
-        if isinstance(buffer, ReadBuffer) or isinstance(buffer, WriteBuffer):
-            buffer = buffer.buffer
+// Receive message handler
+func (r *Receiver) OnReceive(handler OnReceive) { r.OnReceiveHandler = handler }
+// Receive message handler function
+func (r *Receiver) OnReceiveFunc(function func(fbeType int, buffer []byte) (bool, error)) { r.OnReceiveHandler = OnReceiveFunc(function) }
+// Receive log message handler
+func (r *Receiver) OnReceiveLog(handler OnReceiveLog) { r.OnReceiveLogHandler = handler }
+// Receive log message handler function
+func (r *Receiver) OnReceiveLogFunc(function func(message string) error) { r.OnReceiveLogHandler = OnReceiveLogFunc(function) }
 
-        # Storage buffer
-        offset0 = self._buffer.offset
-        offset1 = self._buffer.size
-        size1 = self._buffer.size
-
-        # Receive buffer
-        offset2 = 0
-        size2 = size
-
-        # While receive buffer is available to handle...
-        while offset2 < size2:
-            message_buffer = None
-            message_offset = 0
-            message_size = 0
-
-            # Try to receive message size
-            message_size_copied = False
-            message_size_found = False
-            while not message_size_found:
-                # Look into the storage buffer
-                if offset0 < size1:
-                    count = min(size1 - offset0, 4)
-                    if count == 4:
-                        message_size_copied = True
-                        message_size_found = True
-                        message_size = Receiver.read_uint32(self._buffer.buffer, self._buffer.offset + offset0)
-                        offset0 += 4
-                        break
-                    else:
-                        # Fill remaining data from the receive buffer
-                        if offset2 < size2:
-                            count = min(size2 - offset2, 4 - count)
-
-                            # Allocate and refresh the storage buffer
-                            self._buffer.allocate(count)
-                            size1 += count
-
-                            self._buffer.buffer[offset1:offset1 + count] = buffer[offset + offset2:offset + offset2 + count]
-                            offset1 += count
-                            offset2 += count
-                            continue
-                        else:
-                            break
-
-                # Look into the receive buffer
-                if offset2 < size2:
-                    count = min(size2 - offset2, 4)
-                    if count == 4:
-                        message_size_found = True
-                        message_size = Receiver.read_uint32(buffer, offset + offset2)
-                        offset2 += 4
-                        break
-                    else:
-                        # Allocate and refresh the storage buffer
-                        self._buffer.allocate(count)
-                        size1 += count
-
-                        self._buffer.buffer[offset1:offset1 + count] = buffer[offset + offset2:offset + offset2 + count]
-                        offset1 += count
-                        offset2 += count
-                        continue
-                else:
-                    break
-
-            if not message_size_found:
-                return
-
-            # Check the message full size
-            assert (message_size >= (4 + 4 + 4 + 4)), "Invalid receive data!"
-            if message_size < (4 + 4 + 4 + 4):
-                return
-
-            # Try to receive message body
-            message_found = False
-            while not message_found:
-                # Look into the storage buffer
-                if offset0 < size1:
-                    count = min(size1 - offset0, message_size - 4)
-                    if count == (message_size - 4):
-                        message_found = True
-                        message_buffer = self._buffer.buffer
-                        message_offset = offset0 - 4
-                        offset0 += message_size - 4
-                        break
-                    else:
-                        # Fill remaining data from the receive buffer
-                        if offset2 < size2:
-                            # Copy message size into the storage buffer
-                            if not message_size_copied:
-                                # Allocate and refresh the storage buffer
-                                self._buffer.allocate(4)
-                                size1 += 4
-
-                                Receiver.write_uint32(self._buffer.buffer, self._buffer.offset + offset0, message_size)
-                                offset0 += 4
-                                offset1 += 4
-
-                                message_size_copied = True
-
-                            count = min(size2 - offset2, message_size - 4 - count)
-
-                            # Allocate and refresh the storage buffer
-                            self._buffer.allocate(count)
-                            size1 += count
-
-                            self._buffer.buffer[offset1:offset1 + count] = buffer[offset + offset2:offset + offset2 + count]
-                            offset1 += count
-                            offset2 += count
-                            continue
-                        else:
-                            break
-
-                # Look into the receive buffer
-                if offset2 < size2:
-                    count = min(size2 - offset2, message_size - 4)
-                    if not message_size_copied and (count == (message_size - 4)):
-                        message_found = True
-                        message_buffer = buffer
-                        message_offset = offset + offset2 - 4
-                        offset2 += message_size - 4
-                        break
-                    else:
-                        # Copy message size into the storage buffer
-                        if not message_size_copied:
-                            # Allocate and refresh the storage buffer
-                            self._buffer.allocate(4)
-                            size1 += 4
-
-                            Receiver.write_uint32(self._buffer.buffer, self._buffer.offset + offset0, message_size)
-                            offset0 += 4
-                            offset1 += 4
-
-                            message_size_copied = True
-
-                        # Allocate and refresh the storage buffer
-                        self._buffer.allocate(count)
-                        size1 += count
-
-                        self._buffer.buffer[offset1:offset1 + count] = buffer[offset + offset2:offset + offset2 + count]
-                        offset1 += count
-                        offset2 += count
-                        continue
-                else:
-                    break
-
-            if not message_found:
-                # Copy message size into the storage buffer
-                if not message_size_copied:
-                    # Allocate and refresh the storage buffer
-                    self._buffer.allocate(4)
-                    size1 += 4
-
-                    Receiver.write_uint32(self._buffer.buffer, self._buffer.offset + offset0, message_size)
-                    offset0 += 4
-                    offset1 += 4
-
-                    # noinspection PyUnusedLocal
-                    message_size_copied = True
-                return
-
-            # Read the message parameters
-            if self._final:
-                # noinspection PyUnusedLocal
-                fbe_struct_size = Receiver.read_uint32(message_buffer, message_offset)
-                fbe_struct_type = Receiver.read_uint32(message_buffer, message_offset + 4)
-            else:
-                fbe_struct_offset = Receiver.read_uint32(message_buffer, message_offset + 4)
-                # noinspection PyUnusedLocal
-                fbe_struct_size = Receiver.read_uint32(message_buffer, message_offset + fbe_struct_offset)
-                fbe_struct_type = Receiver.read_uint32(message_buffer, message_offset + fbe_struct_offset + 4)
-
-            # Handle the message
-            self.on_receive(fbe_struct_type, message_buffer, message_offset, message_size)
-
-            # Reset the storage buffer
-            self._buffer.reset()
-
-            # Refresh the storage buffer
-            offset1 = self._buffer.offset
-            size1 = self._buffer.size
-
-    # Receive message handler
-    def on_receive(self, fbe_type, buffer, offset, size):
-        raise NotImplementedError("Abstract method call!")
-
-    # Receive log message handler
-    def on_receive_log(self, message):
-        pass
-
-    # Buffer I/O methods
-
-    @staticmethod
-    def read_uint32(buffer, offset):
-        return struct.unpack_from("<I", buffer, offset)[0]
-
-    @staticmethod
-    def write_uint32(buffer, offset, value):
-        return struct.pack_into("<I", buffer, offset, value)
+// Receive data
+func (r *Receiver) Receive(buffer []byte) error {
+    return nil
+}
 )CODE";
 
     // Prepare code template
     code = std::regex_replace(code, std::regex("\n"), EndLine());
 
     Write(code);
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
 }
-*/
+
 void GeneratorGo::GenerateImports(const std::shared_ptr<Package>& p)
 {
     // Generate fbe import
@@ -6998,7 +6845,7 @@ void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, const CppCom
     Indent(1);
     WriteLineIndent("return &" + sender_name + "{");
     Indent(1);
-    WriteLineIndent("*fbe.NewSender(buffer, false, false),");
+    WriteLineIndent("*fbe.NewSender(buffer, " + std::string(final ? "true" : "false") + "),");
     if (p->body)
     {
         if (p->import)

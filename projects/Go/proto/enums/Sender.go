@@ -20,7 +20,7 @@ type Sender struct {
 // Create a new enums sender
 func NewSender(buffer *fbe.Buffer) *Sender {
     return &Sender{
-        *fbe.NewSender(buffer, false, false),
+        *fbe.NewSender(buffer, false),
         NewEnumsModel(buffer),
     }
 }

@@ -19,7 +19,7 @@ func VerifyDecimal(t *testing.T, low uint32, mid uint32, high uint32, negative b
 	fbe.WriteUInt32(buffer, 8, high)
 	fbe.WriteUInt32(buffer, 12, flags)
 
-	readBuffer := fbe.NewAttached(buffer, 0, len(buffer))
+	readBuffer := fbe.NewAttached(buffer)
 
 	model := fbe.NewFieldModelDecimal(readBuffer, 0)
 	value1, _ := model.Get()

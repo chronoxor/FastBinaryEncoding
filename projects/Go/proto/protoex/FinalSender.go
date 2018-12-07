@@ -25,7 +25,7 @@ type FinalSender struct {
 // Create a new protoex final sender
 func NewFinalSender(buffer *fbe.Buffer) *FinalSender {
     return &FinalSender{
-        *fbe.NewSender(buffer, false, false),
+        *fbe.NewSender(buffer, true),
         proto.NewFinalSender(buffer),
         NewOrderFinalModel(buffer),
         NewBalanceFinalModel(buffer),

@@ -33,7 +33,7 @@ type FinalSender struct {
 // Create a new test final sender
 func NewFinalSender(buffer *fbe.Buffer) *FinalSender {
     return &FinalSender{
-        *fbe.NewSender(buffer, false, false),
+        *fbe.NewSender(buffer, true),
         proto.NewFinalSender(buffer),
         NewStructSimpleFinalModel(buffer),
         NewStructOptionalFinalModel(buffer),

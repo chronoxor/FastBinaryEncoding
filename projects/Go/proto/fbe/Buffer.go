@@ -10,9 +10,9 @@ import "math"
 // Fast Binary Encoding buffer based on dynamic byte array
 type Buffer struct {
     // Bytes memory buffer
-    data   []byte
+    data []byte
     // Bytes memory buffer size
-    size   int
+    size int
     // Bytes memory buffer offset
     offset int
 }
@@ -28,9 +28,16 @@ func NewCapacityBuffer(capacity int) *Buffer {
 }
 
 // Create a buffer with attached bytes memory buffer
-func NewAttached(buffer []byte, offset int, size int) *Buffer {
+func NewAttached(buffer []byte) *Buffer {
     result := NewEmptyBuffer()
-    result.Attach(buffer, offset, size)
+    result.Attach(buffer)
+    return result
+}
+
+// Create a buffer with attached bytes memory buffer with offset and size
+func NewAttachedBytes(buffer []byte, offset int, size int) *Buffer {
+    result := NewEmptyBuffer()
+    result.AttachBytes(buffer, offset, size)
     return result
 }
 
@@ -66,8 +73,13 @@ func (b *Buffer) AttachCapacity(capacity int) {
     b.offset = 0
 }
 
-// Attach the given memory buffer
-func (b *Buffer) Attach(buffer []byte, offset int, size int) {
+// Attach the given bytes memory buffer
+func (b *Buffer) Attach(buffer []byte) {
+    b.AttachBytes(buffer, 0, len(buffer))
+}
+
+// Attach the given bytes memory buffer with offset and size
+func (b *Buffer) AttachBytes(buffer []byte, offset int, size int) {
     if len(buffer) < size {
         panic("invalid buffer")
     }
@@ -85,7 +97,7 @@ func (b *Buffer) Attach(buffer []byte, offset int, size int) {
 
 // Attach another buffer
 func (b *Buffer) AttachBuffer(buffer *Buffer) {
-    b.Attach(buffer.data, 0, buffer.size)
+    b.AttachBytes(buffer.data, 0, buffer.size)
 }
 
 // Allocate memory in the current write buffer and return offset to the allocated memory block

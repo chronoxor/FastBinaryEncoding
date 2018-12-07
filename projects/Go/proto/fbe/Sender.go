@@ -7,13 +7,13 @@ package fbe
 
 // Send message interface
 type OnSend interface {
-    OnSend(buffer []byte, offset int, size int) (int, error)
+    OnSend(buffer []byte) (int, error)
 }
 
 // Send message function
-type OnSendFunc func(buffer []byte, offset int, size int) (int, error)
-func (f OnSendFunc) OnSend(buffer []byte, offset int, size int) (int, error) {
-    return f(buffer, offset, size)
+type OnSendFunc func(buffer []byte) (int, error)
+func (f OnSendFunc) OnSend(buffer []byte) (int, error) {
+    return f(buffer)
 }
 
 // Send log message interface
@@ -43,9 +43,9 @@ type Sender struct {
 }
 
 // Create a new base sender
-func NewSender(buffer *Buffer, logging bool, final bool) *Sender {
-    sender := &Sender{buffer: buffer, logging: logging, final: final}
-    sender.OnSendFunc(func(buffer []byte, offset int, size int) (int, error) { panic("send handler is not provided") })
+func NewSender(buffer *Buffer, final bool) *Sender {
+    sender := &Sender{buffer: buffer, logging: false, final: final}
+    sender.OnSendFunc(func(buffer []byte) (int, error) { panic("send handler is not provided") })
     sender.OnSendLogFunc(func(message string) error { return nil })
     return sender
 }
@@ -53,20 +53,18 @@ func NewSender(buffer *Buffer, logging bool, final bool) *Sender {
 // Get the bytes buffer
 func (s *Sender) Buffer() *Buffer { return s.buffer }
 
+// Get the final protocol flag
+func (s *Sender) Final() bool { return s.final }
+
 // Get the logging flag
 func (s *Sender) Logging() bool { return s.logging }
 // Set the logging flag
 func (s *Sender) SetLogging(logging bool) { s.logging = logging }
 
-// Get the final protocol flag
-func (s *Sender) Final() bool { return s.final }
-// Set the final protocol flag
-func (s *Sender) SetFinal(final bool) { s.final = final }
-
 // Send message handler
 func (s *Sender) OnSend(handler OnSend) { s.OnSendHandler = handler }
 // Send message handler function
-func (s *Sender) OnSendFunc(function func(buffer []byte, offset int, size int) (int, error)) { s.OnSendHandler = OnSendFunc(function) }
+func (s *Sender) OnSendFunc(function func(buffer []byte) (int, error)) { s.OnSendHandler = OnSendFunc(function) }
 // Send log message handler
 func (s *Sender) OnSendLog(handler OnSendLog) { s.OnSendLogHandler = handler }
 // Send log message handler function
@@ -84,7 +82,7 @@ func (s *Sender) SendSerialized(serialized int) (int, error) {
     s.buffer.Shift(serialized)
 
     // Send the value
-    sent, err := s.OnSendHandler.OnSend(s.buffer.Data(), 0, s.buffer.Size())
+    sent, err := s.OnSendHandler.OnSend(s.buffer.Data()[:s.buffer.Size()])
     s.buffer.Remove(0, sent)
     return sent, err
 }

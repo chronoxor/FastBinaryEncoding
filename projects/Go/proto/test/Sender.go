@@ -33,7 +33,7 @@ type Sender struct {
 // Create a new test sender
 func NewSender(buffer *fbe.Buffer) *Sender {
     return &Sender{
-        *fbe.NewSender(buffer, false, false),
+        *fbe.NewSender(buffer, false),
         proto.NewSender(buffer),
         NewStructSimpleModel(buffer),
         NewStructOptionalModel(buffer),

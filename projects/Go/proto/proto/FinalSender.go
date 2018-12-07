@@ -22,7 +22,7 @@ type FinalSender struct {
 // Create a new proto final sender
 func NewFinalSender(buffer *fbe.Buffer) *FinalSender {
     return &FinalSender{
-        *fbe.NewSender(buffer, false, false),
+        *fbe.NewSender(buffer, true),
         NewOrderFinalModel(buffer),
         NewBalanceFinalModel(buffer),
         NewAccountFinalModel(buffer),

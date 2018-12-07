@@ -22,7 +22,7 @@ type Sender struct {
 // Create a new proto sender
 func NewSender(buffer *fbe.Buffer) *Sender {
     return &Sender{
-        *fbe.NewSender(buffer, false, false),
+        *fbe.NewSender(buffer, false),
         NewOrderModel(buffer),
         NewBalanceModel(buffer),
         NewAccountModel(buffer),

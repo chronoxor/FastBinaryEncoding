@@ -25,7 +25,7 @@ type Sender struct {
 // Create a new protoex sender
 func NewSender(buffer *fbe.Buffer) *Sender {
     return &Sender{
-        *fbe.NewSender(buffer, false, false),
+        *fbe.NewSender(buffer, false),
         proto.NewSender(buffer),
         NewOrderModel(buffer),
         NewBalanceModel(buffer),

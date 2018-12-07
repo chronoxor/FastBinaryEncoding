@@ -71,7 +71,7 @@ private:
     void GenerateFBEFinalModelMap(const std::shared_ptr<Package>& p, const std::string& key_name, const std::string& key_model, const std::string& value_name, const std::string& value_model, const StructField& field, const CppCommon::Path& path);
     void GenerateFBEFinalModelEnumFlags(const std::string& package, const std::string& name, const std::string& type);
     void GenerateFBESender(const std::string& package);
-    //void GenerateFBEReceiver();
+    void GenerateFBEReceiver(const std::string& package);
     void GenerateImports(const std::shared_ptr<Package>& p);
 
     void GenerateContainers(const std::shared_ptr<Package>& p, const CppCommon::Path& path, bool final);

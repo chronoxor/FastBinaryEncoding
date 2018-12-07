@@ -20,7 +20,7 @@ type FinalSender struct {
 // Create a new enums final sender
 func NewFinalSender(buffer *fbe.Buffer) *FinalSender {
     return &FinalSender{
-        *fbe.NewSender(buffer, false, false),
+        *fbe.NewSender(buffer, true),
         NewEnumsFinalModel(buffer),
     }
 }
