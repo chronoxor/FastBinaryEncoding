@@ -51,9 +51,8 @@ open class FinalReceiver : fbe.Receiver
     private val StructHashModel: StructHashFinalModel
     private val StructHashExModel: StructHashExFinalModel
 
-    constructor()
+    constructor() : super(true)
     {
-        final = true
         protoReceiver = proto.fbe.FinalReceiver(buffer)
         StructSimpleValue = test.StructSimple()
         StructSimpleModel = StructSimpleFinalModel()
@@ -79,9 +78,8 @@ open class FinalReceiver : fbe.Receiver
         StructHashExModel = StructHashExFinalModel()
     }
 
-    constructor(buffer: Buffer) : super(buffer)
+    constructor(buffer: Buffer) : super(buffer, true)
     {
-        final = true
         protoReceiver = proto.fbe.FinalReceiver(buffer)
         StructSimpleValue = test.StructSimple()
         StructSimpleModel = StructSimpleFinalModel()

@@ -19066,7 +19066,7 @@ module Test
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Sender < FBE::Sender
     def initialize(buffer = FBE::WriteBuffer.new)
-      super(buffer, false, false)
+      super(buffer, false)
       @_proto_sender = Proto::Sender.new(self.buffer)
       @_structsimple_model = StructSimpleModel.new(self.buffer)
       @_structoptional_model = StructOptionalModel.new(self.buffer)
@@ -19364,7 +19364,7 @@ module Test
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Receiver < FBE::Receiver
     def initialize(buffer = FBE::WriteBuffer.new)
-      super(buffer, false, false)
+      super(buffer, false)
       @_proto_receiver = Proto::Receiver.new(self.buffer)
       @_structsimple_value = StructSimple.new
       @_structsimple_model = StructSimpleModel.new
@@ -19686,7 +19686,7 @@ module Test
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class FinalSender < FBE::Sender
     def initialize(buffer = FBE::WriteBuffer.new)
-      super(buffer, false, true)
+      super(buffer, true)
       @_proto_sender = Proto::FinalSender.new(self.buffer)
       @_structsimple_model = StructSimpleFinalModel.new(self.buffer)
       @_structoptional_model = StructOptionalFinalModel.new(self.buffer)
@@ -19984,7 +19984,7 @@ module Test
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class FinalReceiver < FBE::Receiver
     def initialize(buffer = FBE::WriteBuffer.new)
-      super(buffer, false, true)
+      super(buffer, true)
       @_proto_receiver = Proto::FinalReceiver.new(self.buffer)
       @_structsimple_value = StructSimple.new
       @_structsimple_model = StructSimpleFinalModel.new

@@ -3779,8 +3779,6 @@ template <class TBuffer>
 class Sender
 {
 public:
-    Sender() : Sender(nullptr) {}
-    Sender(const std::shared_ptr<TBuffer>& buffer) : _logging(false), _final(false) { _buffer = buffer ? buffer : std::make_shared<TBuffer>(); }
     Sender(const Sender&) = default;
     Sender(Sender&&) noexcept = default;
     virtual ~Sender() = default;
@@ -3792,13 +3790,13 @@ public:
     TBuffer& buffer() noexcept { return *_buffer; }
     const TBuffer& buffer() const noexcept { return *_buffer; }
 
+    // Get the final protocol flag
+    bool final() const noexcept { return _final; }
+
     // Get the logging flag
     bool logging() const noexcept { return _logging; }
     // Enable/Disable logging
     void logging(bool enable) noexcept { _logging = enable; }
-
-    // Get the final protocol flag
-    bool final() const noexcept { return _final; }
 
     // Send serialized buffer.
     // Direct call of the method requires knowledge about internals of FBE models serialization.
@@ -3829,6 +3827,9 @@ protected:
     bool _logging;
     bool _final;
 
+    Sender() : Sender(nullptr) {}
+    Sender(const std::shared_ptr<TBuffer>& buffer) : _logging(false), _final(false) { _buffer = buffer ? buffer : std::make_shared<TBuffer>(); }
+
     // Enable/Disable final protocol
     void final(bool enable) noexcept { _final = enable; }
 };
@@ -3838,8 +3839,6 @@ template <class TBuffer>
 class Receiver
 {
 public:
-    Receiver() : Receiver(nullptr) {}
-    Receiver(const std::shared_ptr<TBuffer>& buffer) : _logging(false), _final(false) { _buffer = buffer ? buffer : std::make_shared<TBuffer>(); }
     Receiver(const Receiver&) = default;
     Receiver(Receiver&&) = default;
     virtual ~Receiver() = default;
@@ -3851,13 +3850,13 @@ public:
     TBuffer& buffer() noexcept { return *_buffer; }
     const TBuffer& buffer() const noexcept { return *_buffer; }
 
+    // Get the final protocol flag
+    bool final() const noexcept { return _final; }
+
     // Get the logging flag
     bool logging() const noexcept { return _logging; }
     // Enable/Disable logging
     void logging(bool enable) noexcept { _logging = enable; }
-
-    // Get the final protocol flag
-    bool final() const noexcept { return _final; }
 
     // Receive data
     void receive(const void* data, size_t size)
@@ -4114,6 +4113,9 @@ protected:
     std::shared_ptr<TBuffer> _buffer;
     bool _logging;
     bool _final;
+
+    Receiver() : Receiver(nullptr) {}
+    Receiver(const std::shared_ptr<TBuffer>& buffer) : _logging(false), _final(false) { _buffer = buffer ? buffer : std::make_shared<TBuffer>(); }
 
     // Enable/Disable final protocol
     void final(bool enable) noexcept { _final = enable; }

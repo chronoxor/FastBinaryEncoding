@@ -2964,13 +2964,13 @@ namespace proto {
         public readonly BalanceModel BalanceModel;
         public readonly AccountModel AccountModel;
 
-        public Sender()
+        public Sender() : base(false)
         {
             OrderModel = new OrderModel(Buffer);
             BalanceModel = new BalanceModel(Buffer);
             AccountModel = new AccountModel(Buffer);
         }
-        public Sender(Buffer buffer) : base(buffer)
+        public Sender(Buffer buffer) : base(buffer, false)
         {
             OrderModel = new OrderModel(Buffer);
             BalanceModel = new BalanceModel(Buffer);
@@ -3052,7 +3052,7 @@ namespace proto {
         private readonly BalanceModel BalanceModel;
         private readonly AccountModel AccountModel;
 
-        public Receiver()
+        public Receiver() : base(false)
         {
             OrderValue = global::proto.Order.Default;
             OrderModel = new OrderModel();
@@ -3061,7 +3061,7 @@ namespace proto {
             AccountValue = global::proto.Account.Default;
             AccountModel = new AccountModel();
         }
-        public Receiver(Buffer buffer) : base(buffer)
+        public Receiver(Buffer buffer) : base(buffer, false)
         {
             OrderValue = global::proto.Order.Default;
             OrderModel = new OrderModel();
@@ -3157,16 +3157,14 @@ namespace proto {
         public readonly BalanceFinalModel BalanceModel;
         public readonly AccountFinalModel AccountModel;
 
-        public FinalSender()
+        public FinalSender() : base(true)
         {
-            Final = true;
             OrderModel = new OrderFinalModel(Buffer);
             BalanceModel = new BalanceFinalModel(Buffer);
             AccountModel = new AccountFinalModel(Buffer);
         }
-        public FinalSender(Buffer buffer) : base(buffer)
+        public FinalSender(Buffer buffer) : base(buffer, true)
         {
-            Final = true;
             OrderModel = new OrderFinalModel(Buffer);
             BalanceModel = new BalanceFinalModel(Buffer);
             AccountModel = new AccountFinalModel(Buffer);
@@ -3247,9 +3245,8 @@ namespace proto {
         private readonly BalanceFinalModel BalanceModel;
         private readonly AccountFinalModel AccountModel;
 
-        public FinalReceiver()
+        public FinalReceiver() : base(true)
         {
-            Final = true;
             OrderValue = global::proto.Order.Default;
             OrderModel = new OrderFinalModel();
             BalanceValue = global::proto.Balance.Default;
@@ -3257,9 +3254,8 @@ namespace proto {
             AccountValue = global::proto.Account.Default;
             AccountModel = new AccountFinalModel();
         }
-        public FinalReceiver(Buffer buffer) : base(buffer)
+        public FinalReceiver(Buffer buffer) : base(buffer, true)
         {
-            Final = true;
             OrderValue = global::proto.Order.Default;
             OrderModel = new OrderFinalModel();
             BalanceValue = global::proto.Balance.Default;

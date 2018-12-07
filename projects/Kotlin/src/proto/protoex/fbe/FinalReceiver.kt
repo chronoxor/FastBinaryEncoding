@@ -35,9 +35,8 @@ open class FinalReceiver : fbe.Receiver
     private val BalanceModel: BalanceFinalModel
     private val AccountModel: AccountFinalModel
 
-    constructor()
+    constructor() : super(true)
     {
-        final = true
         protoReceiver = proto.fbe.FinalReceiver(buffer)
         OrderValue = protoex.Order()
         OrderModel = OrderFinalModel()
@@ -47,9 +46,8 @@ open class FinalReceiver : fbe.Receiver
         AccountModel = AccountFinalModel()
     }
 
-    constructor(buffer: Buffer) : super(buffer)
+    constructor(buffer: Buffer) : super(buffer, true)
     {
-        final = true
         protoReceiver = proto.fbe.FinalReceiver(buffer)
         OrderValue = protoex.Order()
         OrderModel = OrderFinalModel()

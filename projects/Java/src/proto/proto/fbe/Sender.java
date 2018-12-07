@@ -27,13 +27,14 @@ public class Sender extends fbe.Sender
 
     public Sender()
     {
+        super(false);
         OrderModel = new OrderModel(getBuffer());
         BalanceModel = new BalanceModel(getBuffer());
         AccountModel = new AccountModel(getBuffer());
     }
     public Sender(Buffer buffer)
     {
-        super(buffer);
+        super(buffer, false);
         OrderModel = new OrderModel(getBuffer());
         BalanceModel = new BalanceModel(getBuffer());
         AccountModel = new AccountModel(getBuffer());

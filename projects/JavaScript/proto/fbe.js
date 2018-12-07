@@ -5046,13 +5046,12 @@ class Sender {
   /**
    * Initialize sender with the given buffer and logging flag
    * @param {!WriteBuffer} buffer Write buffer, defaults is new WriteBuffer()
-   * @param {boolean=} logging Logging flag, defaults is false
    * @param {boolean=} final Final protocol flag, defaults is false
    * @constructor
    */
-  constructor (buffer = new WriteBuffer(), logging = false, final = false) {
+  constructor (buffer = new WriteBuffer(), final = false) {
     this._buffer = buffer
-    this._logging = logging
+    this._logging = false
     this._final = final
   }
 
@@ -5063,6 +5062,15 @@ class Sender {
    */
   get buffer () {
     return this._buffer
+  }
+
+  /**
+   * Get the final protocol flag
+   * @this {!Sender}
+   * @returns {!boolean} Final protocol flag
+   */
+  get final () {
+    return this._final
   }
 
   /**
@@ -5081,15 +5089,6 @@ class Sender {
    */
   set logging (logging) {
     this._logging = logging
-  }
-
-  /**
-   * Get the final protocol flag
-   * @this {!Sender}
-   * @returns {!boolean} Final protocol flag
-   */
-  get final () {
-    return this._final
   }
 
   /**
@@ -5145,13 +5144,12 @@ class Receiver {
   /**
    * Initialize receiver with the given buffer and logging flag
    * @param {!WriteBuffer} buffer Write buffer, defaults is new WriteBuffer()
-   * @param {boolean=} logging Logging flag, defaults is false
    * @param {boolean=} final Final protocol flag, defaults is false
    * @constructor
    */
-  constructor (buffer = new WriteBuffer(), logging = false, final = false) {
+  constructor (buffer = new WriteBuffer(), final = false) {
     this._buffer = buffer
-    this._logging = logging
+    this._logging = false
     this._final = final
   }
 
@@ -5162,6 +5160,15 @@ class Receiver {
    */
   get buffer () {
     return this._buffer
+  }
+
+  /**
+   * Get the final protocol flag
+   * @this {!Sender}
+   * @returns {!boolean} Final protocol flag
+   */
+  get final () {
+    return this._final
   }
 
   /**
@@ -5180,15 +5187,6 @@ class Receiver {
    */
   set logging (logging) {
     this._logging = logging
-  }
-
-  /**
-   * Get the final protocol flag
-   * @this {!Sender}
-   * @returns {!boolean} Final protocol flag
-   */
-  get final () {
-    return this._final
   }
 
   /**

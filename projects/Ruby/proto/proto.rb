@@ -3005,7 +3005,7 @@ module Proto
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Sender < FBE::Sender
     def initialize(buffer = FBE::WriteBuffer.new)
-      super(buffer, false, false)
+      super(buffer, false)
       @_order_model = OrderModel.new(self.buffer)
       @_balance_model = BalanceModel.new(self.buffer)
       @_account_model = AccountModel.new(self.buffer)
@@ -3100,7 +3100,7 @@ module Proto
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Receiver < FBE::Receiver
     def initialize(buffer = FBE::WriteBuffer.new)
-      super(buffer, false, false)
+      super(buffer, false)
       @_order_value = Order.new
       @_order_model = OrderModel.new
       @_balance_value = Balance.new
@@ -3199,7 +3199,7 @@ module Proto
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class FinalSender < FBE::Sender
     def initialize(buffer = FBE::WriteBuffer.new)
-      super(buffer, false, true)
+      super(buffer, true)
       @_order_model = OrderFinalModel.new(self.buffer)
       @_balance_model = BalanceFinalModel.new(self.buffer)
       @_account_model = AccountFinalModel.new(self.buffer)
@@ -3294,7 +3294,7 @@ module Proto
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class FinalReceiver < FBE::Receiver
     def initialize(buffer = FBE::WriteBuffer.new)
-      super(buffer, false, true)
+      super(buffer, true)
       @_order_value = Order.new
       @_order_model = OrderFinalModel.new
       @_balance_value = Balance.new

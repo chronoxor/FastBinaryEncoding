@@ -5746,11 +5746,11 @@ namespace enums {
         // Sender models accessors
         public readonly EnumsModel EnumsModel;
 
-        public Sender()
+        public Sender() : base(false)
         {
             EnumsModel = new EnumsModel(Buffer);
         }
-        public Sender(Buffer buffer) : base(buffer)
+        public Sender(Buffer buffer) : base(buffer, false)
         {
             EnumsModel = new EnumsModel(Buffer);
         }
@@ -5792,12 +5792,12 @@ namespace enums {
         // Receiver models accessors
         private readonly EnumsModel EnumsModel;
 
-        public Receiver()
+        public Receiver() : base(false)
         {
             EnumsValue = global::enums.Enums.Default;
             EnumsModel = new EnumsModel();
         }
-        public Receiver(Buffer buffer) : base(buffer)
+        public Receiver(Buffer buffer) : base(buffer, false)
         {
             EnumsValue = global::enums.Enums.Default;
             EnumsModel = new EnumsModel();
@@ -5847,14 +5847,12 @@ namespace enums {
         // Sender models accessors
         public readonly EnumsFinalModel EnumsModel;
 
-        public FinalSender()
+        public FinalSender() : base(true)
         {
-            Final = true;
             EnumsModel = new EnumsFinalModel(Buffer);
         }
-        public FinalSender(Buffer buffer) : base(buffer)
+        public FinalSender(Buffer buffer) : base(buffer, true)
         {
-            Final = true;
             EnumsModel = new EnumsFinalModel(Buffer);
         }
 
@@ -5895,15 +5893,13 @@ namespace enums {
         // Receiver models accessors
         private readonly EnumsFinalModel EnumsModel;
 
-        public FinalReceiver()
+        public FinalReceiver() : base(true)
         {
-            Final = true;
             EnumsValue = global::enums.Enums.Default;
             EnumsModel = new EnumsFinalModel();
         }
-        public FinalReceiver(Buffer buffer) : base(buffer)
+        public FinalReceiver(Buffer buffer) : base(buffer, true)
         {
-            Final = true;
             EnumsValue = global::enums.Enums.Default;
             EnumsModel = new EnumsFinalModel();
         }

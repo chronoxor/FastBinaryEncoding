@@ -23273,7 +23273,7 @@ class Sender extends fbe.Sender {
    * @constructor
    */
   constructor (buffer = new fbe.WriteBuffer()) {
-    super(buffer, false, false)
+    super(buffer, false)
     this._protoSender = new proto.Sender(this.buffer)
     this._structsimpleModel = new StructSimpleModel(this.buffer)
     this._structoptionalModel = new StructOptionalModel(this.buffer)
@@ -23706,7 +23706,7 @@ class Receiver extends fbe.Receiver {
    * @constructor
    */
   constructor (buffer = new fbe.WriteBuffer()) {
-    super(buffer, false, false)
+    super(buffer, false)
     this._protoReceiver = new proto.Receiver(this.buffer)
     this._structsimpleValue = new StructSimple()
     this._structsimpleModel = new StructSimpleModel()
@@ -24040,7 +24040,7 @@ class FinalSender extends fbe.Sender {
    * @constructor
    */
   constructor (buffer = new fbe.WriteBuffer()) {
-    super(buffer, false, true)
+    super(buffer, true)
     this._protoSender = new proto.FinalSender(this.buffer)
     this._structsimpleModel = new StructSimpleFinalModel(this.buffer)
     this._structoptionalModel = new StructOptionalFinalModel(this.buffer)
@@ -24473,7 +24473,7 @@ class FinalReceiver extends fbe.Receiver {
    * @constructor
    */
   constructor (buffer = new fbe.WriteBuffer()) {
-    super(buffer, false, true)
+    super(buffer, true)
     this._protoReceiver = new proto.FinalReceiver(this.buffer)
     this._structsimpleValue = new StructSimple()
     this._structsimpleModel = new StructSimpleFinalModel()

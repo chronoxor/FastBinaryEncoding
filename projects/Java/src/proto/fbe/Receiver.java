@@ -23,17 +23,17 @@ public abstract class Receiver
 
     // Get the bytes buffer
     public Buffer getBuffer() { return _buffer; }
+
+    // Get the final protocol flag
+    public boolean getFinal() { return _final; }
+
     // Get the logging flag
     public boolean getLogging() { return _logging; }
     // Enable/Disable logging
     public void setLogging(boolean enable) { _logging = enable; }
-    // Get the final protocol flag
-    public boolean getFinal() { return _final; }
-    // Enable/Disable final protocol
-    protected void setFinal(boolean enable) { _final = enable; }
 
-    protected Receiver() { _buffer = new Buffer(); }
-    protected Receiver(Buffer buffer) { _buffer = buffer; }
+    protected Receiver(boolean finalProto) { _buffer = new Buffer(); _final = finalProto; }
+    protected Receiver(Buffer buffer, boolean finalProto) { _buffer = buffer; _final = finalProto; }
 
     // Receive data
     public void receive(Buffer buffer) { receive(buffer.getData(), 0, buffer.getSize()); }

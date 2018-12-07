@@ -38,9 +38,8 @@ open class FinalSender : fbe.Sender
     val StructHashModel: StructHashFinalModel
     val StructHashExModel: StructHashExFinalModel
 
-    constructor()
+    constructor() : super(true)
     {
-        final = true
         protoSender = proto.fbe.FinalSender(buffer)
         StructSimpleModel = StructSimpleFinalModel(buffer)
         StructOptionalModel = StructOptionalFinalModel(buffer)
@@ -55,9 +54,8 @@ open class FinalSender : fbe.Sender
         StructHashExModel = StructHashExFinalModel(buffer)
     }
 
-    constructor(buffer: Buffer) : super(buffer)
+    constructor(buffer: Buffer) : super(buffer, true)
     {
-        final = true
         protoSender = proto.fbe.FinalSender(buffer)
         StructSimpleModel = StructSimpleFinalModel(buffer)
         StructOptionalModel = StructOptionalFinalModel(buffer)

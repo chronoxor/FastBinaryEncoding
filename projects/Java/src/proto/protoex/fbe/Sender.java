@@ -30,6 +30,7 @@ public class Sender extends fbe.Sender
 
     public Sender()
     {
+        super(false);
         protoSender = new proto.fbe.Sender(getBuffer());
         OrderModel = new OrderModel(getBuffer());
         BalanceModel = new BalanceModel(getBuffer());
@@ -37,7 +38,7 @@ public class Sender extends fbe.Sender
     }
     public Sender(Buffer buffer)
     {
-        super(buffer);
+        super(buffer, false);
         protoSender = new proto.fbe.Sender(getBuffer());
         OrderModel = new OrderModel(getBuffer());
         BalanceModel = new BalanceModel(getBuffer());

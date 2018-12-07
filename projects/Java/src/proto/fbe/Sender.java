@@ -23,17 +23,17 @@ public abstract class Sender
 
     // Get the bytes buffer
     public Buffer getBuffer() { return _buffer; }
+
+    // Get the final protocol flag
+    public boolean getFinal() { return _final; }
+
     // Get the logging flag
     public boolean getLogging() { return _logging; }
     // Enable/Disable logging
     public void setLogging(boolean enable) { _logging = enable; }
-    // Get the final protocol flag
-    public boolean getFinal() { return _final; }
-    // Enable/Disable final protocol
-    protected void setFinal(boolean enable) { _final = enable; }
 
-    protected Sender() { _buffer = new Buffer(); }
-    protected Sender(Buffer buffer) { _buffer = buffer; }
+    protected Sender(boolean finalProto) { _buffer = new Buffer(); _final = finalProto; }
+    protected Sender(Buffer buffer, boolean finalProto) { _buffer = buffer; _final = finalProto; }
 
     // Send serialized buffer.
     // Direct call of the method requires knowledge about internals of FBE models serialization.

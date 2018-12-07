@@ -15142,7 +15142,7 @@ namespace test {
         public readonly StructHashModel StructHashModel;
         public readonly StructHashExModel StructHashExModel;
 
-        public Sender()
+        public Sender() : base(false)
         {
             protoSender = new proto.Sender(Buffer);
             StructSimpleModel = new StructSimpleModel(Buffer);
@@ -15157,7 +15157,7 @@ namespace test {
             StructHashModel = new StructHashModel(Buffer);
             StructHashExModel = new StructHashExModel(Buffer);
         }
-        public Sender(Buffer buffer) : base(buffer)
+        public Sender(Buffer buffer) : base(buffer, false)
         {
             protoSender = new proto.Sender(Buffer);
             StructSimpleModel = new StructSimpleModel(Buffer);
@@ -15403,7 +15403,7 @@ namespace test {
         private readonly StructHashModel StructHashModel;
         private readonly StructHashExModel StructHashExModel;
 
-        public Receiver()
+        public Receiver() : base(false)
         {
             protoReceiver = new proto.Receiver(Buffer);
             StructSimpleValue = global::test.StructSimple.Default;
@@ -15429,7 +15429,7 @@ namespace test {
             StructHashExValue = global::test.StructHashEx.Default;
             StructHashExModel = new StructHashExModel();
         }
-        public Receiver(Buffer buffer) : base(buffer)
+        public Receiver(Buffer buffer) : base(buffer, false)
         {
             protoReceiver = new proto.Receiver(Buffer);
             StructSimpleValue = global::test.StructSimple.Default;
@@ -15716,9 +15716,8 @@ namespace test {
         public readonly StructHashFinalModel StructHashModel;
         public readonly StructHashExFinalModel StructHashExModel;
 
-        public FinalSender()
+        public FinalSender() : base(true)
         {
-            Final = true;
             protoSender = new proto.FinalSender(Buffer);
             StructSimpleModel = new StructSimpleFinalModel(Buffer);
             StructOptionalModel = new StructOptionalFinalModel(Buffer);
@@ -15732,9 +15731,8 @@ namespace test {
             StructHashModel = new StructHashFinalModel(Buffer);
             StructHashExModel = new StructHashExFinalModel(Buffer);
         }
-        public FinalSender(Buffer buffer) : base(buffer)
+        public FinalSender(Buffer buffer) : base(buffer, true)
         {
-            Final = true;
             protoSender = new proto.FinalSender(Buffer);
             StructSimpleModel = new StructSimpleFinalModel(Buffer);
             StructOptionalModel = new StructOptionalFinalModel(Buffer);
@@ -15979,9 +15977,8 @@ namespace test {
         private readonly StructHashFinalModel StructHashModel;
         private readonly StructHashExFinalModel StructHashExModel;
 
-        public FinalReceiver()
+        public FinalReceiver() : base(true)
         {
-            Final = true;
             protoReceiver = new proto.FinalReceiver(Buffer);
             StructSimpleValue = global::test.StructSimple.Default;
             StructSimpleModel = new StructSimpleFinalModel();
@@ -16006,9 +16003,8 @@ namespace test {
             StructHashExValue = global::test.StructHashEx.Default;
             StructHashExModel = new StructHashExFinalModel();
         }
-        public FinalReceiver(Buffer buffer) : base(buffer)
+        public FinalReceiver(Buffer buffer) : base(buffer, true)
         {
-            Final = true;
             protoReceiver = new proto.FinalReceiver(Buffer);
             StructSimpleValue = global::test.StructSimple.Default;
             StructSimpleModel = new StructSimpleFinalModel();

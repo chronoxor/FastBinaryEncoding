@@ -3515,10 +3515,10 @@ abstract class Sender
     var logging: Boolean = false
     // Get the final protocol flag
     var final: Boolean = false
-        protected set
+        private set
 
-    protected constructor()
-    protected constructor(buffer: Buffer) { this.buffer = buffer }
+    protected constructor(final: Boolean) { this.final = final }
+    protected constructor(buffer: Buffer, final: Boolean) { this.buffer = buffer; this.final = final }
 
     // Send serialized buffer.
     // Direct call of the method requires knowledge about internals of FBE models serialization.
@@ -3583,10 +3583,10 @@ abstract class Receiver
     var logging: Boolean = false
     // Get the final protocol flag
     var final: Boolean = false
-        protected set
+        private set
 
-    protected constructor()
-    protected constructor(buffer: Buffer) { this.buffer = buffer }
+    protected constructor(final: Boolean) { this.final = final }
+    protected constructor(buffer: Buffer, final: Boolean) { this.buffer = buffer; this.final = final }
 
     // Receive data
     fun receive(buffer: Buffer) { receive(buffer.data, 0, buffer.size) }
@@ -6178,11 +6178,9 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     }
 
     // Generate sender constructors
-    WriteLineIndent("constructor()");
+    WriteLineIndent("constructor() : super(" + std::string(final ? "true" : "false") + ")");
     WriteLineIndent("{");
     Indent(1);
-    if (final)
-        WriteLineIndent("final = true");
     if (p->import)
     {
         for (const auto& import : p->import->imports)
@@ -6196,11 +6194,9 @@ void GeneratorKotlin::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("constructor(buffer: Buffer) : super(buffer)");
+    WriteLineIndent("constructor(buffer: Buffer) : super(buffer, " + std::string(final ? "true" : "false") + ")");
     WriteLineIndent("{");
     Indent(1);
-    if (final)
-        WriteLineIndent("final = true");
     if (p->import)
     {
         for (const auto& import : p->import->imports)
@@ -6323,11 +6319,9 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     }
 
     // Generate receiver constructors
-    WriteLineIndent("constructor()");
+    WriteLineIndent("constructor() : super(" + std::string(final ? "true" : "false") + ")");
     WriteLineIndent("{");
     Indent(1);
-    if (final)
-        WriteLineIndent("final = true");
     if (p->import)
     {
         for (const auto& import : p->import->imports)
@@ -6345,11 +6339,9 @@ void GeneratorKotlin::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("constructor(buffer: Buffer) : super(buffer)");
+    WriteLineIndent("constructor(buffer: Buffer) : super(buffer, " + std::string(final ? "true" : "false") + ")");
     WriteLineIndent("{");
     Indent(1);
-    if (final)
-        WriteLineIndent("final = true");
     if (p->import)
     {
         for (const auto& import : p->import->imports)

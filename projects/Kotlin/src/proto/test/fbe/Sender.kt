@@ -38,7 +38,7 @@ open class Sender : fbe.Sender
     val StructHashModel: StructHashModel
     val StructHashExModel: StructHashExModel
 
-    constructor()
+    constructor() : super(false)
     {
         protoSender = proto.fbe.Sender(buffer)
         StructSimpleModel = StructSimpleModel(buffer)
@@ -54,7 +54,7 @@ open class Sender : fbe.Sender
         StructHashExModel = StructHashExModel(buffer)
     }
 
-    constructor(buffer: Buffer) : super(buffer)
+    constructor(buffer: Buffer) : super(buffer, false)
     {
         protoSender = proto.fbe.Sender(buffer)
         StructSimpleModel = StructSimpleModel(buffer)

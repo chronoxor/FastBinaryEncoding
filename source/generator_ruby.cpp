@@ -3018,15 +3018,20 @@ void GeneratorRuby::GenerateFBESender()
     std::string code = R"CODE(
   # Fast Binary Encoding base sender
   class Sender
-    def initialize(buffer = WriteBuffer.new, logging = false, final = false)
+    def initialize(buffer = WriteBuffer.new, final = false)
       @_buffer = buffer
-      @_logging = logging
+      @_logging = false
       @_final = final
     end
 
     # Get the bytes buffer
     def buffer
       @_buffer
+    end
+
+    # Get the final protocol flag
+    def final?
+      @_final
     end
 
     # Get the logging flag
@@ -3037,11 +3042,6 @@ void GeneratorRuby::GenerateFBESender()
     # Set the logging flag
     def logging=(logging)
       @_logging = logging
-    end
-
-    # Get the final protocol flag
-    def final?
-      @_final
     end
 
     # Send serialized buffer.
@@ -3062,11 +3062,6 @@ void GeneratorRuby::GenerateFBESender()
     end
 
     protected
-
-    # Set the final protocol flag
-    def final=(final)
-      @_final = final
-    end
 
     # Send message handler
     # noinspection RubyUnusedLocalVariable
@@ -3092,15 +3087,20 @@ void GeneratorRuby::GenerateFBEReceiver()
     std::string code = R"CODE(
   # Fast Binary Encoding base receiver
   class Receiver
-    def initialize(buffer = WriteBuffer.new, logging = false, final = false)
+    def initialize(buffer = WriteBuffer.new, final = false)
       @_buffer = buffer
-      @_logging = logging
+      @_logging = false
       @_final = final
     end
 
     # Get the bytes buffer
     def buffer
       @_buffer
+    end
+
+    # Get the final protocol flag
+    def final?
+      @_final
     end
 
     # Get the logging flag
@@ -3111,11 +3111,6 @@ void GeneratorRuby::GenerateFBEReceiver()
     # Set the logging flag
     def logging=(logging)
       @_logging = logging
-    end
-
-    # Get the final protocol flag
-    def final?
-      @_final
     end
 
     # Receive data
@@ -3341,11 +3336,6 @@ void GeneratorRuby::GenerateFBEReceiver()
     end
 
     protected
-
-    # Set the final protocol flag
-    def final=(final)
-      @_final = final
-    end
 
     # Receive message handler
     # noinspection RubyUnusedLocalVariable
@@ -5379,10 +5369,7 @@ void GeneratorRuby::GenerateSender(const std::shared_ptr<Package>& p, bool final
     // Generate sender constructor
     WriteLineIndent("def initialize(buffer = FBE::WriteBuffer.new)");
     Indent(1);
-    if (final)
-        WriteLineIndent("super(buffer, false, true)");
-    else
-        WriteLineIndent("super(buffer, false, false)");
+    WriteLineIndent("super(buffer, " + std::string(final ? "true" : "false") + ")");
     if (p->import)
     {
         for (const auto& import : p->import->imports)
@@ -5522,10 +5509,7 @@ void GeneratorRuby::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     // Generate receiver constructor
     WriteLineIndent("def initialize(buffer = FBE::WriteBuffer.new)");
     Indent(1);
-    if (final)
-        WriteLineIndent("super(buffer, false, true)");
-    else
-        WriteLineIndent("super(buffer, false, false)");
+    WriteLineIndent("super(buffer, " + std::string(final ? "true" : "false") + ")");
     if (p->import)
     {
         for (const auto& import : p->import->imports)

@@ -30,7 +30,7 @@ open class Sender : fbe.Sender
     val BalanceModel: BalanceModel
     val AccountModel: AccountModel
 
-    constructor()
+    constructor() : super(false)
     {
         protoSender = proto.fbe.Sender(buffer)
         OrderModel = OrderModel(buffer)
@@ -38,7 +38,7 @@ open class Sender : fbe.Sender
         AccountModel = AccountModel(buffer)
     }
 
-    constructor(buffer: Buffer) : super(buffer)
+    constructor(buffer: Buffer) : super(buffer, false)
     {
         protoSender = proto.fbe.Sender(buffer)
         OrderModel = OrderModel(buffer)

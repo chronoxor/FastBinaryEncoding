@@ -4010,7 +4010,7 @@ class Sender extends fbe.Sender {
    * @constructor
    */
   constructor (buffer = new fbe.WriteBuffer()) {
-    super(buffer, false, false)
+    super(buffer, false)
     this._protoSender = new proto.Sender(this.buffer)
     this._orderModel = new OrderModel(this.buffer)
     this._balanceModel = new BalanceModel(this.buffer)
@@ -4171,7 +4171,7 @@ class Receiver extends fbe.Receiver {
    * @constructor
    */
   constructor (buffer = new fbe.WriteBuffer()) {
-    super(buffer, false, false)
+    super(buffer, false)
     this._protoReceiver = new proto.Receiver(this.buffer)
     this._orderValue = new Order()
     this._orderModel = new OrderModel()
@@ -4305,7 +4305,7 @@ class FinalSender extends fbe.Sender {
    * @constructor
    */
   constructor (buffer = new fbe.WriteBuffer()) {
-    super(buffer, false, true)
+    super(buffer, true)
     this._protoSender = new proto.FinalSender(this.buffer)
     this._orderModel = new OrderFinalModel(this.buffer)
     this._balanceModel = new BalanceFinalModel(this.buffer)
@@ -4466,7 +4466,7 @@ class FinalReceiver extends fbe.Receiver {
    * @constructor
    */
   constructor (buffer = new fbe.WriteBuffer()) {
-    super(buffer, false, true)
+    super(buffer, true)
     this._protoReceiver = new proto.FinalReceiver(this.buffer)
     this._orderValue = new Order()
     this._orderModel = new OrderFinalModel()

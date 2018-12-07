@@ -9558,10 +9558,10 @@ namespace FBE {
         // Logging flag
         public bool Logging { get; set; }
         // Final protocol flag
-        public bool Final { get; protected set; }
+        public bool Final { get; }
 
-        protected Sender() { Buffer = new Buffer(); }
-        protected Sender(Buffer buffer) { Buffer = buffer; }
+        protected Sender(bool final) { Buffer = new Buffer(); Final = final; }
+        protected Sender(Buffer buffer, bool final) { Buffer = buffer; Final = final; }
 
         // Send serialized buffer.
         // Direct call of the method requires knowledge about internals of FBE models serialization.
@@ -9595,10 +9595,10 @@ namespace FBE {
         // Logging flag
         public bool Logging { get; set; }
         // Final protocol flag
-        public bool Final { get; protected set; }
+        public bool Final { get; }
 
-        protected Receiver() { Buffer = new Buffer(); }
-        protected Receiver(Buffer buffer) { Buffer = buffer; }
+        protected Receiver(bool final) { Buffer = new Buffer(); Final = final; }
+        protected Receiver(Buffer buffer, bool final) { Buffer = buffer; Final = final; }
 
         // Receive data
         public void Receive(Buffer buffer) { Receive(buffer.Data, 0, buffer.Size); }

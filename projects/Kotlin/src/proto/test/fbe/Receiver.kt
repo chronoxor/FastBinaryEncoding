@@ -51,7 +51,7 @@ open class Receiver : fbe.Receiver
     private val StructHashModel: StructHashModel
     private val StructHashExModel: StructHashExModel
 
-    constructor()
+    constructor() : super(false)
     {
         protoReceiver = proto.fbe.Receiver(buffer)
         StructSimpleValue = test.StructSimple()
@@ -78,7 +78,7 @@ open class Receiver : fbe.Receiver
         StructHashExModel = StructHashExModel()
     }
 
-    constructor(buffer: Buffer) : super(buffer)
+    constructor(buffer: Buffer) : super(buffer, false)
     {
         protoReceiver = proto.fbe.Receiver(buffer)
         StructSimpleValue = test.StructSimple()

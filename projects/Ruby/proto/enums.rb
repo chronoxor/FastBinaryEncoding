@@ -6706,7 +6706,7 @@ module Enums
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Sender < FBE::Sender
     def initialize(buffer = FBE::WriteBuffer.new)
-      super(buffer, false, false)
+      super(buffer, false)
       @_enums_model = EnumsModel.new(self.buffer)
     end
 
@@ -6753,7 +6753,7 @@ module Enums
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Receiver < FBE::Receiver
     def initialize(buffer = FBE::WriteBuffer.new)
-      super(buffer, false, false)
+      super(buffer, false)
       @_enums_value = Enums.new
       @_enums_model = EnumsModel.new
     end
@@ -6800,7 +6800,7 @@ module Enums
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class FinalSender < FBE::Sender
     def initialize(buffer = FBE::WriteBuffer.new)
-      super(buffer, false, true)
+      super(buffer, true)
       @_enums_model = EnumsFinalModel.new(self.buffer)
     end
 
@@ -6847,7 +6847,7 @@ module Enums
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class FinalReceiver < FBE::Receiver
     def initialize(buffer = FBE::WriteBuffer.new)
-      super(buffer, false, true)
+      super(buffer, true)
       @_enums_value = Enums.new
       @_enums_model = EnumsFinalModel.new
     end

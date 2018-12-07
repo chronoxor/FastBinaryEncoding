@@ -32,7 +32,7 @@ public class FinalReceiver extends fbe.Receiver
 
     public FinalReceiver()
     {
-        setFinal(true);
+        super(true);
         OrderValue = new proto.Order();
         OrderModel = new OrderFinalModel();
         BalanceValue = new proto.Balance();
@@ -42,8 +42,7 @@ public class FinalReceiver extends fbe.Receiver
     }
     public FinalReceiver(Buffer buffer)
     {
-        super(buffer);
-        setFinal(true);
+        super(buffer, true);
         OrderValue = new proto.Order();
         OrderModel = new OrderFinalModel();
         BalanceValue = new proto.Balance();

@@ -3810,15 +3810,20 @@ module FBE
 
   # Fast Binary Encoding base sender
   class Sender
-    def initialize(buffer = WriteBuffer.new, logging = false, final = false)
+    def initialize(buffer = WriteBuffer.new, final = false)
       @_buffer = buffer
-      @_logging = logging
+      @_logging = false
       @_final = final
     end
 
     # Get the bytes buffer
     def buffer
       @_buffer
+    end
+
+    # Get the final protocol flag
+    def final?
+      @_final
     end
 
     # Get the logging flag
@@ -3829,11 +3834,6 @@ module FBE
     # Set the logging flag
     def logging=(logging)
       @_logging = logging
-    end
-
-    # Get the final protocol flag
-    def final?
-      @_final
     end
 
     # Send serialized buffer.
@@ -3855,11 +3855,6 @@ module FBE
 
     protected
 
-    # Set the final protocol flag
-    def final=(final)
-      @_final = final
-    end
-
     # Send message handler
     # noinspection RubyUnusedLocalVariable
     def on_send(buffer, offset, size)
@@ -3874,15 +3869,20 @@ module FBE
 
   # Fast Binary Encoding base receiver
   class Receiver
-    def initialize(buffer = WriteBuffer.new, logging = false, final = false)
+    def initialize(buffer = WriteBuffer.new, final = false)
       @_buffer = buffer
-      @_logging = logging
+      @_logging = false
       @_final = final
     end
 
     # Get the bytes buffer
     def buffer
       @_buffer
+    end
+
+    # Get the final protocol flag
+    def final?
+      @_final
     end
 
     # Get the logging flag
@@ -3893,11 +3893,6 @@ module FBE
     # Set the logging flag
     def logging=(logging)
       @_logging = logging
-    end
-
-    # Get the final protocol flag
-    def final?
-      @_final
     end
 
     # Receive data
@@ -4123,11 +4118,6 @@ module FBE
     end
 
     protected
-
-    # Set the final protocol flag
-    def final=(final)
-      @_final = final
-    end
 
     # Receive message handler
     # noinspection RubyUnusedLocalVariable

@@ -2378,7 +2378,7 @@ class Sender(fbe.Sender):
     __slots__ = "_order_model", "_balance_model", "_account_model", 
 
     def __init__(self, buffer=None):
-        super().__init__(buffer, False, False)
+        super().__init__(buffer, False)
         self._order_model = OrderModel(self.buffer)
         self._balance_model = BalanceModel(self.buffer)
         self._account_model = AccountModel(self.buffer)
@@ -2460,7 +2460,7 @@ class Receiver(fbe.Receiver):
     __slots__ = "_order_value", "_order_model", "_balance_value", "_balance_model", "_account_value", "_account_model", 
 
     def __init__(self, buffer=None):
-        super().__init__(buffer, False, False)
+        super().__init__(buffer, False)
         self._order_value = Order()
         self._order_model = OrderModel()
         self._balance_value = Balance()
@@ -2537,7 +2537,7 @@ class FinalSender(fbe.Sender):
     __slots__ = "_order_model", "_balance_model", "_account_model", 
 
     def __init__(self, buffer=None):
-        super().__init__(buffer, False, True)
+        super().__init__(buffer, True)
         self._order_model = OrderFinalModel(self.buffer)
         self._balance_model = BalanceFinalModel(self.buffer)
         self._account_model = AccountFinalModel(self.buffer)
@@ -2619,7 +2619,7 @@ class FinalReceiver(fbe.Receiver):
     __slots__ = "_order_value", "_order_model", "_balance_value", "_balance_model", "_account_value", "_account_model", 
 
     def __init__(self, buffer=None):
-        super().__init__(buffer, False, True)
+        super().__init__(buffer, True)
         self._order_value = Order()
         self._order_model = OrderFinalModel()
         self._balance_value = Balance()

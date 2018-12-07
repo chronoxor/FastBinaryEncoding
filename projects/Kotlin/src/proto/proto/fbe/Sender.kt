@@ -27,14 +27,14 @@ open class Sender : fbe.Sender
     val BalanceModel: BalanceModel
     val AccountModel: AccountModel
 
-    constructor()
+    constructor() : super(false)
     {
         OrderModel = OrderModel(buffer)
         BalanceModel = BalanceModel(buffer)
         AccountModel = AccountModel(buffer)
     }
 
-    constructor(buffer: Buffer) : super(buffer)
+    constructor(buffer: Buffer) : super(buffer, false)
     {
         OrderModel = OrderModel(buffer)
         BalanceModel = BalanceModel(buffer)

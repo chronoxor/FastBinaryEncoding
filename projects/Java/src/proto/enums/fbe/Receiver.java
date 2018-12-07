@@ -28,12 +28,13 @@ public class Receiver extends fbe.Receiver
 
     public Receiver()
     {
+        super(false);
         EnumsValue = new enums.Enums();
         EnumsModel = new EnumsModel();
     }
     public Receiver(Buffer buffer)
     {
-        super(buffer);
+        super(buffer, false);
         EnumsValue = new enums.Enums();
         EnumsModel = new EnumsModel();
     }

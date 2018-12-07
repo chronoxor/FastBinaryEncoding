@@ -51,7 +51,7 @@ public class FinalReceiver extends fbe.Receiver
 
     public FinalReceiver()
     {
-        setFinal(true);
+        super(true);
         protoReceiver = new proto.fbe.FinalReceiver(getBuffer());
         StructSimpleValue = new test.StructSimple();
         StructSimpleModel = new StructSimpleFinalModel();
@@ -78,8 +78,7 @@ public class FinalReceiver extends fbe.Receiver
     }
     public FinalReceiver(Buffer buffer)
     {
-        super(buffer);
-        setFinal(true);
+        super(buffer, true);
         protoReceiver = new proto.fbe.FinalReceiver(getBuffer());
         StructSimpleValue = new test.StructSimple();
         StructSimpleModel = new StructSimpleFinalModel();

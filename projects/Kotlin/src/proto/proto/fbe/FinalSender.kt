@@ -27,17 +27,15 @@ open class FinalSender : fbe.Sender
     val BalanceModel: BalanceFinalModel
     val AccountModel: AccountFinalModel
 
-    constructor()
+    constructor() : super(true)
     {
-        final = true
         OrderModel = OrderFinalModel(buffer)
         BalanceModel = BalanceFinalModel(buffer)
         AccountModel = AccountFinalModel(buffer)
     }
 
-    constructor(buffer: Buffer) : super(buffer)
+    constructor(buffer: Buffer) : super(buffer, true)
     {
-        final = true
         OrderModel = OrderFinalModel(buffer)
         BalanceModel = BalanceFinalModel(buffer)
         AccountModel = AccountFinalModel(buffer)

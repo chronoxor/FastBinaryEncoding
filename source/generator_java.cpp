@@ -3694,17 +3694,17 @@ public abstract class Sender
 
     // Get the bytes buffer
     public Buffer getBuffer() { return _buffer; }
+
+    // Get the final protocol flag
+    public boolean getFinal() { return _final; }
+
     // Get the logging flag
     public boolean getLogging() { return _logging; }
     // Enable/Disable logging
     public void setLogging(boolean enable) { _logging = enable; }
-    // Get the final protocol flag
-    public boolean getFinal() { return _final; }
-    // Enable/Disable final protocol
-    protected void setFinal(boolean enable) { _final = enable; }
 
-    protected Sender() { _buffer = new Buffer(); }
-    protected Sender(Buffer buffer) { _buffer = buffer; }
+    protected Sender(boolean finalProto) { _buffer = new Buffer(); _final = finalProto; }
+    protected Sender(Buffer buffer, boolean finalProto) { _buffer = buffer; _final = finalProto; }
 
     // Send serialized buffer.
     // Direct call of the method requires knowledge about internals of FBE models serialization.
@@ -3765,17 +3765,17 @@ public abstract class Receiver
 
     // Get the bytes buffer
     public Buffer getBuffer() { return _buffer; }
+
+    // Get the final protocol flag
+    public boolean getFinal() { return _final; }
+
     // Get the logging flag
     public boolean getLogging() { return _logging; }
     // Enable/Disable logging
     public void setLogging(boolean enable) { _logging = enable; }
-    // Get the final protocol flag
-    public boolean getFinal() { return _final; }
-    // Enable/Disable final protocol
-    protected void setFinal(boolean enable) { _final = enable; }
 
-    protected Receiver() { _buffer = new Buffer(); }
-    protected Receiver(Buffer buffer) { _buffer = buffer; }
+    protected Receiver(boolean finalProto) { _buffer = new Buffer(); _final = finalProto; }
+    protected Receiver(Buffer buffer, boolean finalProto) { _buffer = buffer; _final = finalProto; }
 
     // Receive data
     public void receive(Buffer buffer) { receive(buffer.getData(), 0, buffer.getSize()); }
@@ -6362,8 +6362,7 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
     WriteLineIndent("public " + sender + "()");
     WriteLineIndent("{");
     Indent(1);
-    if (final)
-        WriteLineIndent("setFinal(true);");
+    WriteLineIndent("super(" + std::string(final ? "true" : "false") + ");");
     if (p->import)
     {
         for (const auto& import : p->import->imports)
@@ -6379,9 +6378,7 @@ void GeneratorJava::GenerateSender(const std::shared_ptr<Package>& p, bool final
     WriteLineIndent("public " + sender + "(Buffer buffer)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("super(buffer);");
-    if (final)
-        WriteLineIndent("setFinal(true);");
+    WriteLineIndent("super(buffer, " + std::string(final ? "true" : "false") + ");");
     if (p->import)
     {
         for (const auto& import : p->import->imports)
@@ -6507,8 +6504,7 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     WriteLineIndent("public " + receiver + "()");
     WriteLineIndent("{");
     Indent(1);
-    if (final)
-        WriteLineIndent("setFinal(true);");
+    WriteLineIndent("super(" + std::string(final ? "true" : "false") + ");");
     if (p->import)
     {
         for (const auto& import : p->import->imports)
@@ -6528,9 +6524,7 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     WriteLineIndent("public " + receiver + "(Buffer buffer)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("super(buffer);");
-    if (final)
-        WriteLineIndent("setFinal(true);");
+    WriteLineIndent("super(buffer, " + std::string(final ? "true" : "false") + ");");
     if (p->import)
     {
         for (const auto& import : p->import->imports)

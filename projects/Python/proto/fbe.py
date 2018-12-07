@@ -3050,17 +3050,22 @@ class FinalModelMap(FinalModel):
 class Sender(object):
     __slots__ = "_buffer", "_logging", "_final",
 
-    def __init__(self, buffer=None, logging=False, final=False):
+    def __init__(self, buffer=None, final=False):
         if buffer is None:
             buffer = WriteBuffer()
         self._buffer = buffer
-        self._logging = logging
+        self._logging = False
         self._final = final
 
     # Get the bytes buffer
     @property
     def buffer(self):
         return self._buffer
+
+    # Get the final protocol flag
+    @property
+    def final(self):
+        return self._final
 
     # Get the logging flag
     @property
@@ -3071,11 +3076,6 @@ class Sender(object):
     @logging.setter
     def logging(self, logging):
         self._logging = logging
-
-    # Get the final protocol flag
-    @property
-    def final(self):
-        return self._final
 
     # Send serialized buffer.
     # Direct call of the method requires knowledge about internals of FBE models serialization.
@@ -3106,17 +3106,22 @@ class Sender(object):
 class Receiver(object):
     __slots__ = "_buffer", "_logging", "_final",
 
-    def __init__(self, buffer=None, logging=False, final=False):
+    def __init__(self, buffer=None, final=False):
         if buffer is None:
             buffer = WriteBuffer()
         self._buffer = buffer
-        self._logging = logging
+        self._logging = False
         self._final = final
 
     # Get the bytes buffer
     @property
     def buffer(self):
         return self._buffer
+
+    # Get the final protocol flag
+    @property
+    def final(self):
+        return self._final
 
     # Get the logging flag
     @property
@@ -3127,11 +3132,6 @@ class Receiver(object):
     @logging.setter
     def logging(self, logging):
         self._logging = logging
-
-    # Get the final protocol flag
-    @property
-    def final(self):
-        return self._final
 
     # Receive data
     def receive(self, buffer, offset=0, size=None):

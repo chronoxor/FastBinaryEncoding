@@ -25,13 +25,12 @@ public class FinalSender extends fbe.Sender
 
     public FinalSender()
     {
-        setFinal(true);
+        super(true);
         EnumsModel = new EnumsFinalModel(getBuffer());
     }
     public FinalSender(Buffer buffer)
     {
-        super(buffer);
-        setFinal(true);
+        super(buffer, true);
         EnumsModel = new EnumsFinalModel(getBuffer());
     }
 

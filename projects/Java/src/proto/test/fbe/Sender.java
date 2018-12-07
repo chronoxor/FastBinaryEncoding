@@ -38,6 +38,7 @@ public class Sender extends fbe.Sender
 
     public Sender()
     {
+        super(false);
         protoSender = new proto.fbe.Sender(getBuffer());
         StructSimpleModel = new StructSimpleModel(getBuffer());
         StructOptionalModel = new StructOptionalModel(getBuffer());
@@ -53,7 +54,7 @@ public class Sender extends fbe.Sender
     }
     public Sender(Buffer buffer)
     {
-        super(buffer);
+        super(buffer, false);
         protoSender = new proto.fbe.Sender(getBuffer());
         StructSimpleModel = new StructSimpleModel(getBuffer());
         StructOptionalModel = new StructOptionalModel(getBuffer());

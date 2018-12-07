@@ -4866,7 +4866,7 @@ class Sender(fbe.Sender):
     __slots__ = "_enums_model", 
 
     def __init__(self, buffer=None):
-        super().__init__(buffer, False, False)
+        super().__init__(buffer, False)
         self._enums_model = EnumsModel(self.buffer)
 
     # Sender models accessors
@@ -4906,7 +4906,7 @@ class Receiver(fbe.Receiver):
     __slots__ = "_enums_value", "_enums_model", 
 
     def __init__(self, buffer=None):
-        super().__init__(buffer, False, False)
+        super().__init__(buffer, False)
         self._enums_value = Enums()
         self._enums_model = EnumsModel()
 
@@ -4941,7 +4941,7 @@ class FinalSender(fbe.Sender):
     __slots__ = "_enums_model", 
 
     def __init__(self, buffer=None):
-        super().__init__(buffer, False, True)
+        super().__init__(buffer, True)
         self._enums_model = EnumsFinalModel(self.buffer)
 
     # Sender models accessors
@@ -4981,7 +4981,7 @@ class FinalReceiver(fbe.Receiver):
     __slots__ = "_enums_value", "_enums_model", 
 
     def __init__(self, buffer=None):
-        super().__init__(buffer, False, True)
+        super().__init__(buffer, True)
         self._enums_value = Enums()
         self._enums_model = EnumsFinalModel()
 

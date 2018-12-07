@@ -51,6 +51,7 @@ public class Receiver extends fbe.Receiver
 
     public Receiver()
     {
+        super(false);
         protoReceiver = new proto.fbe.Receiver(getBuffer());
         StructSimpleValue = new test.StructSimple();
         StructSimpleModel = new StructSimpleModel();
@@ -77,7 +78,7 @@ public class Receiver extends fbe.Receiver
     }
     public Receiver(Buffer buffer)
     {
-        super(buffer);
+        super(buffer, false);
         protoReceiver = new proto.fbe.Receiver(getBuffer());
         StructSimpleValue = new test.StructSimple();
         StructSimpleModel = new StructSimpleModel();

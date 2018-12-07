@@ -27,15 +27,14 @@ public class FinalSender extends fbe.Sender
 
     public FinalSender()
     {
-        setFinal(true);
+        super(true);
         OrderModel = new OrderFinalModel(getBuffer());
         BalanceModel = new BalanceFinalModel(getBuffer());
         AccountModel = new AccountFinalModel(getBuffer());
     }
     public FinalSender(Buffer buffer)
     {
-        super(buffer);
-        setFinal(true);
+        super(buffer, true);
         OrderModel = new OrderFinalModel(getBuffer());
         BalanceModel = new BalanceFinalModel(getBuffer());
         AccountModel = new AccountFinalModel(getBuffer());

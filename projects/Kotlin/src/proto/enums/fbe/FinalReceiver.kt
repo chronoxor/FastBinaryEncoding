@@ -28,16 +28,14 @@ open class FinalReceiver : fbe.Receiver
     // Receiver models accessors
     private val EnumsModel: EnumsFinalModel
 
-    constructor()
+    constructor() : super(true)
     {
-        final = true
         EnumsValue = enums.Enums()
         EnumsModel = EnumsFinalModel()
     }
 
-    constructor(buffer: Buffer) : super(buffer)
+    constructor(buffer: Buffer) : super(buffer, true)
     {
-        final = true
         EnumsValue = enums.Enums()
         EnumsModel = EnumsFinalModel()
     }

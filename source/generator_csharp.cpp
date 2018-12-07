@@ -3146,10 +3146,10 @@ void GeneratorCSharp::GenerateFBESender()
         // Logging flag
         public bool Logging { get; set; }
         // Final protocol flag
-        public bool Final { get; protected set; }
+        public bool Final { get; }
 
-        protected Sender() { Buffer = new Buffer(); }
-        protected Sender(Buffer buffer) { Buffer = buffer; }
+        protected Sender(bool final) { Buffer = new Buffer(); Final = final; }
+        protected Sender(Buffer buffer, bool final) { Buffer = buffer; Final = final; }
 
         // Send serialized buffer.
         // Direct call of the method requires knowledge about internals of FBE models serialization.
@@ -3193,10 +3193,10 @@ void GeneratorCSharp::GenerateFBEReceiver()
         // Logging flag
         public bool Logging { get; set; }
         // Final protocol flag
-        public bool Final { get; protected set; }
+        public bool Final { get; }
 
-        protected Receiver() { Buffer = new Buffer(); }
-        protected Receiver(Buffer buffer) { Buffer = buffer; }
+        protected Receiver(bool final) { Buffer = new Buffer(); Final = final; }
+        protected Receiver(Buffer buffer, bool final) { Buffer = buffer; Final = final; }
 
         // Receive data
         public void Receive(Buffer buffer) { Receive(buffer.Data, 0, buffer.Size); }
@@ -6090,11 +6090,9 @@ void GeneratorCSharp::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     }
 
     // Generate sender constructors
-    WriteLineIndent("public " + sender + "()");
+    WriteLineIndent("public " + sender + "() : base(" + std::string(final ? "true" : "false") + ")");
     WriteLineIndent("{");
     Indent(1);
-    if (final)
-        WriteLineIndent("Final = true;");
     if (p->import)
     {
         for (const auto& import : p->import->imports)
@@ -6107,11 +6105,9 @@ void GeneratorCSharp::GenerateSender(const std::shared_ptr<Package>& p, bool fin
     }
     Indent(-1);
     WriteLineIndent("}");
-    WriteLineIndent("public " + sender + "(Buffer buffer) : base(buffer)");
+    WriteLineIndent("public " + sender + "(Buffer buffer) : base(buffer, " + std::string(final ? "true" : "false") + ")");
     WriteLineIndent("{");
     Indent(1);
-    if (final)
-        WriteLineIndent("Final = true;");
     if (p->import)
     {
         for (const auto& import : p->import->imports)
@@ -6219,11 +6215,9 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     }
 
     // Generate receiver constructors
-    WriteLineIndent("public " + receiver + "()");
+    WriteLineIndent("public " + receiver + "() : base(" + std::string(final ? "true" : "false") + ")");
     WriteLineIndent("{");
     Indent(1);
-    if (final)
-        WriteLineIndent("Final = true;");
     if (p->import)
     {
         for (const auto& import : p->import->imports)
@@ -6240,11 +6234,9 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     }
     Indent(-1);
     WriteLineIndent("}");
-    WriteLineIndent("public " + receiver + "(Buffer buffer) : base(buffer)");
+    WriteLineIndent("public " + receiver + "(Buffer buffer) : base(buffer, " + std::string(final ? "true" : "false") + ")");
     WriteLineIndent("{");
     Indent(1);
-    if (final)
-        WriteLineIndent("Final = true;");
     if (p->import)
     {
         for (const auto& import : p->import->imports)

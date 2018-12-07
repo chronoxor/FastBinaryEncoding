@@ -25,11 +25,12 @@ public class Sender extends fbe.Sender
 
     public Sender()
     {
+        super(false);
         EnumsModel = new EnumsModel(getBuffer());
     }
     public Sender(Buffer buffer)
     {
-        super(buffer);
+        super(buffer, false);
         EnumsModel = new EnumsModel(getBuffer());
     }
 

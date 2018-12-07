@@ -32,6 +32,7 @@ public class Receiver extends fbe.Receiver
 
     public Receiver()
     {
+        super(false);
         OrderValue = new proto.Order();
         OrderModel = new OrderModel();
         BalanceValue = new proto.Balance();
@@ -41,7 +42,7 @@ public class Receiver extends fbe.Receiver
     }
     public Receiver(Buffer buffer)
     {
-        super(buffer);
+        super(buffer, false);
         OrderValue = new proto.Order();
         OrderModel = new OrderModel();
         BalanceValue = new proto.Balance();

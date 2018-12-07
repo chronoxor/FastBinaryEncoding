@@ -26,10 +26,10 @@ abstract class Receiver
     var logging: Boolean = false
     // Get the final protocol flag
     var final: Boolean = false
-        protected set
+        private set
 
-    protected constructor()
-    protected constructor(buffer: Buffer) { this.buffer = buffer }
+    protected constructor(final: Boolean) { this.final = final }
+    protected constructor(buffer: Buffer, final: Boolean) { this.buffer = buffer; this.final = final }
 
     // Receive data
     fun receive(buffer: Buffer) { receive(buffer.data, 0, buffer.size) }

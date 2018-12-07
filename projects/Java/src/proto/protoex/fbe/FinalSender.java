@@ -30,7 +30,7 @@ public class FinalSender extends fbe.Sender
 
     public FinalSender()
     {
-        setFinal(true);
+        super(true);
         protoSender = new proto.fbe.FinalSender(getBuffer());
         OrderModel = new OrderFinalModel(getBuffer());
         BalanceModel = new BalanceFinalModel(getBuffer());
@@ -38,8 +38,7 @@ public class FinalSender extends fbe.Sender
     }
     public FinalSender(Buffer buffer)
     {
-        super(buffer);
-        setFinal(true);
+        super(buffer, true);
         protoSender = new proto.fbe.FinalSender(getBuffer());
         OrderModel = new OrderFinalModel(getBuffer());
         BalanceModel = new BalanceFinalModel(getBuffer());

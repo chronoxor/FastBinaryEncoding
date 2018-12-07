@@ -7647,7 +7647,7 @@ class Sender extends fbe.Sender {
    * @constructor
    */
   constructor (buffer = new fbe.WriteBuffer()) {
-    super(buffer, false, false)
+    super(buffer, false)
     this._enumsModel = new EnumsModel(this.buffer)
   }
 
@@ -7724,7 +7724,7 @@ class Receiver extends fbe.Receiver {
    * @constructor
    */
   constructor (buffer = new fbe.WriteBuffer()) {
-    super(buffer, false, false)
+    super(buffer, false)
     this._enumsValue = new Enums()
     this._enumsModel = new EnumsModel()
   }
@@ -7782,7 +7782,7 @@ class FinalSender extends fbe.Sender {
    * @constructor
    */
   constructor (buffer = new fbe.WriteBuffer()) {
-    super(buffer, false, true)
+    super(buffer, true)
     this._enumsModel = new EnumsFinalModel(this.buffer)
   }
 
@@ -7859,7 +7859,7 @@ class FinalReceiver extends fbe.Receiver {
    * @constructor
    */
   constructor (buffer = new fbe.WriteBuffer()) {
-    super(buffer, false, true)
+    super(buffer, true)
     this._enumsValue = new Enums()
     this._enumsModel = new EnumsFinalModel()
   }

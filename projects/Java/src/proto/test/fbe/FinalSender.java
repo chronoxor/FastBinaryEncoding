@@ -38,7 +38,7 @@ public class FinalSender extends fbe.Sender
 
     public FinalSender()
     {
-        setFinal(true);
+        super(true);
         protoSender = new proto.fbe.FinalSender(getBuffer());
         StructSimpleModel = new StructSimpleFinalModel(getBuffer());
         StructOptionalModel = new StructOptionalFinalModel(getBuffer());
@@ -54,8 +54,7 @@ public class FinalSender extends fbe.Sender
     }
     public FinalSender(Buffer buffer)
     {
-        super(buffer);
-        setFinal(true);
+        super(buffer, true);
         protoSender = new proto.fbe.FinalSender(getBuffer());
         StructSimpleModel = new StructSimpleFinalModel(getBuffer());
         StructOptionalModel = new StructOptionalFinalModel(getBuffer());

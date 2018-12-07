@@ -25,12 +25,12 @@ open class Sender : fbe.Sender
     // Sender models accessors
     val EnumsModel: EnumsModel
 
-    constructor()
+    constructor() : super(false)
     {
         EnumsModel = EnumsModel(buffer)
     }
 
-    constructor(buffer: Buffer) : super(buffer)
+    constructor(buffer: Buffer) : super(buffer, false)
     {
         EnumsModel = EnumsModel(buffer)
     }

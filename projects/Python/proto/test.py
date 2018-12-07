@@ -15309,7 +15309,7 @@ class Sender(fbe.Sender):
     __slots__ = "_proto_sender", "_structsimple_model", "_structoptional_model", "_structnested_model", "_structbytes_model", "_structarray_model", "_structvector_model", "_structlist_model", "_structset_model", "_structmap_model", "_structhash_model", "_structhashex_model", 
 
     def __init__(self, buffer=None):
-        super().__init__(buffer, False, False)
+        super().__init__(buffer, False)
         self._proto_sender = proto.Sender(self.buffer)
         self._structsimple_model = StructSimpleModel(self.buffer)
         self._structoptional_model = StructOptionalModel(self.buffer)
@@ -15569,7 +15569,7 @@ class Receiver(fbe.Receiver):
     __slots__ = "_proto_receiver", "_structsimple_value", "_structsimple_model", "_structoptional_value", "_structoptional_model", "_structnested_value", "_structnested_model", "_structbytes_value", "_structbytes_model", "_structarray_value", "_structarray_model", "_structvector_value", "_structvector_model", "_structlist_value", "_structlist_model", "_structset_value", "_structset_model", "_structmap_value", "_structmap_model", "_structhash_value", "_structhash_model", "_structhashex_value", "_structhashex_model", 
 
     def __init__(self, buffer=None):
-        super().__init__(buffer, False, False)
+        super().__init__(buffer, False)
         self._proto_receiver = proto.Receiver(self.buffer)
         self._structsimple_value = StructSimple()
         self._structsimple_model = StructSimpleModel()
@@ -15828,7 +15828,7 @@ class FinalSender(fbe.Sender):
     __slots__ = "_proto_sender", "_structsimple_model", "_structoptional_model", "_structnested_model", "_structbytes_model", "_structarray_model", "_structvector_model", "_structlist_model", "_structset_model", "_structmap_model", "_structhash_model", "_structhashex_model", 
 
     def __init__(self, buffer=None):
-        super().__init__(buffer, False, True)
+        super().__init__(buffer, True)
         self._proto_sender = proto.FinalSender(self.buffer)
         self._structsimple_model = StructSimpleFinalModel(self.buffer)
         self._structoptional_model = StructOptionalFinalModel(self.buffer)
@@ -16088,7 +16088,7 @@ class FinalReceiver(fbe.Receiver):
     __slots__ = "_proto_receiver", "_structsimple_value", "_structsimple_model", "_structoptional_value", "_structoptional_model", "_structnested_value", "_structnested_model", "_structbytes_value", "_structbytes_model", "_structarray_value", "_structarray_model", "_structvector_value", "_structvector_model", "_structlist_value", "_structlist_model", "_structset_value", "_structset_model", "_structmap_value", "_structmap_model", "_structhash_value", "_structhash_model", "_structhashex_value", "_structhashex_model", 
 
     def __init__(self, buffer=None):
-        super().__init__(buffer, False, True)
+        super().__init__(buffer, True)
         self._proto_receiver = proto.FinalReceiver(self.buffer)
         self._structsimple_value = StructSimple()
         self._structsimple_model = StructSimpleFinalModel()

@@ -3160,7 +3160,7 @@ module Protoex
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Sender < FBE::Sender
     def initialize(buffer = FBE::WriteBuffer.new)
-      super(buffer, false, false)
+      super(buffer, false)
       @_proto_sender = Proto::Sender.new(self.buffer)
       @_order_model = OrderModel.new(self.buffer)
       @_balance_model = BalanceModel.new(self.buffer)
@@ -3266,7 +3266,7 @@ module Protoex
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Receiver < FBE::Receiver
     def initialize(buffer = FBE::WriteBuffer.new)
-      super(buffer, false, false)
+      super(buffer, false)
       @_proto_receiver = Proto::Receiver.new(self.buffer)
       @_order_value = Order.new
       @_order_model = OrderModel.new
@@ -3380,7 +3380,7 @@ module Protoex
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class FinalSender < FBE::Sender
     def initialize(buffer = FBE::WriteBuffer.new)
-      super(buffer, false, true)
+      super(buffer, true)
       @_proto_sender = Proto::FinalSender.new(self.buffer)
       @_order_model = OrderFinalModel.new(self.buffer)
       @_balance_model = BalanceFinalModel.new(self.buffer)
@@ -3486,7 +3486,7 @@ module Protoex
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class FinalReceiver < FBE::Receiver
     def initialize(buffer = FBE::WriteBuffer.new)
-      super(buffer, false, true)
+      super(buffer, true)
       @_proto_receiver = Proto::FinalReceiver.new(self.buffer)
       @_order_value = Order.new
       @_order_model = OrderFinalModel.new

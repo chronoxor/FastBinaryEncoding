@@ -28,14 +28,13 @@ public class FinalReceiver extends fbe.Receiver
 
     public FinalReceiver()
     {
-        setFinal(true);
+        super(true);
         EnumsValue = new enums.Enums();
         EnumsModel = new EnumsFinalModel();
     }
     public FinalReceiver(Buffer buffer)
     {
-        super(buffer);
-        setFinal(true);
+        super(buffer, true);
         EnumsValue = new enums.Enums();
         EnumsModel = new EnumsFinalModel();
     }

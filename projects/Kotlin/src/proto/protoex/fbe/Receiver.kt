@@ -35,7 +35,7 @@ open class Receiver : fbe.Receiver
     private val BalanceModel: BalanceModel
     private val AccountModel: AccountModel
 
-    constructor()
+    constructor() : super(false)
     {
         protoReceiver = proto.fbe.Receiver(buffer)
         OrderValue = protoex.Order()
@@ -46,7 +46,7 @@ open class Receiver : fbe.Receiver
         AccountModel = AccountModel()
     }
 
-    constructor(buffer: Buffer) : super(buffer)
+    constructor(buffer: Buffer) : super(buffer, false)
     {
         protoReceiver = proto.fbe.Receiver(buffer)
         OrderValue = protoex.Order()
