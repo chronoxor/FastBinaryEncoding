@@ -65,7 +65,7 @@ func (s *Sender) SendOrder(value *Order) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
+        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -90,7 +90,7 @@ func (s *Sender) SendBalance(value *Balance) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
+        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -115,7 +115,7 @@ func (s *Sender) SendAccount(value *Account) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
+        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
             return 0, err
         }
     }

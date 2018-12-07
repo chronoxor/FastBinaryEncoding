@@ -4300,25 +4300,25 @@ void GeneratorGo::GenerateFBESender(const std::string& package)
     std::string code = R"CODE(
 package fbe
 
-// Send message handler
-type OnSendHandler interface {
+// Send message interface
+type OnSend interface {
     OnSend(buffer []byte, offset int, size int) (int, error)
 }
 
-// Send message handler function
-type OnSendHandlerFunc func(buffer []byte, offset int, size int) (int, error)
-func (f OnSendHandlerFunc) OnSend(buffer []byte, offset int, size int) (int, error) {
+// Send message function
+type OnSendFunc func(buffer []byte, offset int, size int) (int, error)
+func (f OnSendFunc) OnSend(buffer []byte, offset int, size int) (int, error) {
     return f(buffer, offset, size)
 }
 
-// Send log message handler
-type OnSendLogHandler interface {
+// Send log message interface
+type OnSendLog interface {
     OnSendLog(message string) error
 }
 
-// Send log message handler function
-type OnSendLogHandlerFunc func(message string) error
-func (f OnSendLogHandlerFunc) OnSendLog(message string) error {
+// Send log message function
+type OnSendLogFunc func(message string) error
+func (f OnSendLogFunc) OnSendLog(message string) error {
     return f(message)
 }
 
@@ -4331,10 +4331,10 @@ type Sender struct {
     // Final protocol flag
     final bool
 
-    // Send message callback
-    OnSendCallback OnSendHandler
-    // Send log message callback
-    OnSendLogCallback OnSendLogHandler
+    // Send message handler
+    OnSendHandler OnSend
+    // Send log message handler
+    OnSendLogHandler OnSendLog
 }
 
 // Create a new base sender
@@ -4359,13 +4359,13 @@ func (s *Sender) Final() bool { return s.final }
 func (s *Sender) SetFinal(final bool) { s.final = final }
 
 // Send message handler
-func (s *Sender) OnSend(handler OnSendHandler) { s.OnSendCallback = handler }
+func (s *Sender) OnSend(handler OnSend) { s.OnSendHandler = handler }
 // Send message handler function
-func (s *Sender) OnSendFunc(function func(buffer []byte, offset int, size int) (int, error)) { s.OnSendCallback = OnSendHandlerFunc(function) }
+func (s *Sender) OnSendFunc(function func(buffer []byte, offset int, size int) (int, error)) { s.OnSendHandler = OnSendFunc(function) }
 // Send log message handler
-func (s *Sender) OnSendLog(handler OnSendLogHandler) { s.OnSendLogCallback = handler }
+func (s *Sender) OnSendLog(handler OnSendLog) { s.OnSendLogHandler = handler }
 // Send log message handler function
-func (s *Sender) OnSendLogFunc(function func(message string) error) { s.OnSendLogCallback = OnSendLogHandlerFunc(function) }
+func (s *Sender) OnSendLogFunc(function func(message string) error) { s.OnSendLogHandler = OnSendLogFunc(function) }
 
 // Send serialized buffer.
 // Direct call of the method requires knowledge about internals of FBE models serialization.
@@ -4379,7 +4379,7 @@ func (s *Sender) SendSerialized(serialized int) (int, error) {
     s.buffer.Shift(serialized)
 
     // Send the value
-    sent, err := s.OnSendCallback.OnSend(s.buffer.Data(), 0, s.buffer.Size())
+    sent, err := s.OnSendHandler.OnSend(s.buffer.Data(), 0, s.buffer.Size())
     s.buffer.Remove(0, sent)
     return sent, err
 }
@@ -7091,7 +7091,7 @@ void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, const CppCom
             WriteLineIndent("if s.Logging() {");
             Indent(1);
             WriteLineIndent("message := value.String()");
-            WriteLineIndent("if err := s.OnSendLogCallback.OnSendLog(message); err != nil {");
+            WriteLineIndent("if err := s.OnSendLogHandler.OnSendLog(message); err != nil {");
             Indent(1);
             WriteLineIndent("return 0, err");
             Indent(-1);

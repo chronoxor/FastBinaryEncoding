@@ -116,7 +116,7 @@ func (s *FinalSender) SendStructSimple(value *StructSimple) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
+        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -141,7 +141,7 @@ func (s *FinalSender) SendStructOptional(value *StructOptional) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
+        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -166,7 +166,7 @@ func (s *FinalSender) SendStructNested(value *StructNested) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
+        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -191,7 +191,7 @@ func (s *FinalSender) SendStructBytes(value *StructBytes) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
+        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -216,7 +216,7 @@ func (s *FinalSender) SendStructArray(value *StructArray) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
+        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -241,7 +241,7 @@ func (s *FinalSender) SendStructVector(value *StructVector) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
+        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -266,7 +266,7 @@ func (s *FinalSender) SendStructList(value *StructList) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
+        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -291,7 +291,7 @@ func (s *FinalSender) SendStructSet(value *StructSet) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
+        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -316,7 +316,7 @@ func (s *FinalSender) SendStructMap(value *StructMap) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
+        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -341,7 +341,7 @@ func (s *FinalSender) SendStructHash(value *StructHash) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
+        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
             return 0, err
         }
     }
@@ -366,7 +366,7 @@ func (s *FinalSender) SendStructHashEx(value *StructHashEx) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogCallback.OnSendLog(message); err != nil {
+        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
             return 0, err
         }
     }

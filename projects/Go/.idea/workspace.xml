@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ba8f4190-0800-4bce-b2eb-ad8ed5d1197a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/proto/fbe/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/Sender.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/proto/FinalSender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto/FinalSender.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/proto/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto/Sender.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/protoex/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex/Sender.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,7 +15,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/proto/fbe/Sender.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="577">
+            <state relative-caret-position="591">
               <caret line="89" column="1" lean-forward="true" selection-start-line="5" selection-end-line="89" selection-end-column="1" />
             </state>
           </provider>
@@ -28,7 +25,7 @@
         <entry file="file://$PROJECT_DIR$/proto/protoex/Sender.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1802">
-              <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
+              <caret line="136" selection-start-line="136" selection-end-line="136" />
               <folding>
                 <element signature="e#192#241#0" expanded="true" />
               </folding>
@@ -40,7 +37,7 @@
         <entry file="file://$PROJECT_DIR$/proto/protoex/FinalSender.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="608">
-              <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
+              <caret line="136" selection-start-line="136" selection-end-line="136" />
             </state>
           </provider>
         </entry>
@@ -49,7 +46,7 @@
         <entry file="file://$PROJECT_DIR$/proto/proto/Sender.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="289">
-              <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+              <caret line="50" selection-start-line="50" selection-end-line="50" />
               <folding>
                 <element signature="e#188#219#0" expanded="true" />
               </folding>
@@ -61,7 +58,7 @@
         <entry file="file://$PROJECT_DIR$/proto/proto/FinalSender.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="608">
-              <caret line="125" lean-forward="true" selection-start-line="125" selection-end-line="125" />
+              <caret line="125" selection-start-line="125" selection-end-line="125" />
             </state>
           </provider>
         </entry>
@@ -754,7 +751,7 @@
     <entry file="file://$PROJECT_DIR$/proto/protoex/FinalSender.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="608">
-          <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
+          <caret line="136" selection-start-line="136" selection-end-line="136" />
         </state>
       </provider>
     </entry>
@@ -771,7 +768,7 @@
     <entry file="file://$PROJECT_DIR$/proto/proto/Sender.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
-          <caret line="50" lean-forward="true" selection-start-line="50" selection-end-line="50" />
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
           <folding>
             <element signature="e#188#219#0" expanded="true" />
           </folding>
@@ -781,14 +778,14 @@
     <entry file="file://$PROJECT_DIR$/proto/proto/FinalSender.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="608">
-          <caret line="125" lean-forward="true" selection-start-line="125" selection-end-line="125" />
+          <caret line="125" selection-start-line="125" selection-end-line="125" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/proto/protoex/Sender.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1802">
-          <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
+          <caret line="136" selection-start-line="136" selection-end-line="136" />
           <folding>
             <element signature="e#192#241#0" expanded="true" />
           </folding>
@@ -797,7 +794,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/proto/fbe/Sender.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="577">
+        <state relative-caret-position="591">
           <caret line="89" column="1" lean-forward="true" selection-start-line="5" selection-end-line="89" selection-end-column="1" />
         </state>
       </provider>
