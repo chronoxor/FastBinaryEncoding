@@ -84,7 +84,7 @@ private:
     void GenerateStructFinalModel(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path);
     void GenerateStructModelFinal(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path);
     void GenerateSender(const std::shared_ptr<Package>& p, const CppCommon::Path& path, bool final);
-    void GenerateReceiver(const std::shared_ptr<Package>& p, bool final);
+    void GenerateReceiver(const std::shared_ptr<Package>& p, const CppCommon::Path& path, bool final);
 
     bool IsPrimitiveType(const std::string& type);
     bool IsGoType(const std::string& type);

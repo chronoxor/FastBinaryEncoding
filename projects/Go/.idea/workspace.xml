@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba8f4190-0800-4bce-b2eb-ad8ed5d1197a" name="Default Changelist" comment="" />
+    <list default="true" id="ba8f4190-0800-4bce-b2eb-ad8ed5d1197a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../include/generator_go.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_go.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/Receiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/Receiver.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/Sender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/proto/FinalReceiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto/FinalReceiver.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/proto/Receiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto/Receiver.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -9,7 +18,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -18,14 +27,13 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" path="C:/Go" />
+  <component name="GOROOT" path="Z:\soft\Development\Go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/proto/proto/FinalModelVectorOrder.go" />
         <option value="$PROJECT_DIR$/proto/proto/FieldModelAccount.go" />
         <option value="$PROJECT_DIR$/proto/proto/FinalModelAccount.go" />
         <option value="$PROJECT_DIR$/examples/serialization_final.go" />
@@ -68,7 +76,6 @@
         <option value="$PROJECT_DIR$/benchmarks/serialization_final_test.go" />
         <option value="$PROJECT_DIR$/proto/fbe/Sender.go" />
         <option value="$PROJECT_DIR$/proto/fbe/Receiver.go" />
-        <option value="$PROJECT_DIR$/proto/proto/Receiver.go" />
         <option value="$PROJECT_DIR$/examples/send_receive.go" />
         <option value="$PROJECT_DIR$/benchmarks/serialization_json_test.go" />
         <option value="$PROJECT_DIR$/benchmarks/serialization_test.go" />
@@ -76,6 +83,8 @@
         <option value="$PROJECT_DIR$/tests/send_receive.go" />
         <option value="$PROJECT_DIR$/proto/proto/FinalReceiver.go" />
         <option value="$PROJECT_DIR$/tests/send_receive_final_test.go" />
+        <option value="$PROJECT_DIR$/proto/proto/Receiver.go" />
+        <option value="$PROJECT_DIR$/proto/protoex/Receiver.go" />
       </list>
     </option>
   </component>
@@ -151,12 +160,36 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Test.gobench benchmarks">
-    <configuration name="go build send_receive.go (1)" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Go Test.go test tests">
+    <configuration name="go build send_receive.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="Go" />
       <working_directory value="$PROJECT_DIR$/" />
       <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/tests/send_receive.go" />
+      <filePath value="$PROJECT_DIR$/examples/send_receive.go" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build serialization_final.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="Go" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/examples/serialization_final.go" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build serialization.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="Go" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/examples/serialization.go" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build serialization_json.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="Go" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/examples/serialization_json.go" />
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
@@ -189,70 +222,25 @@
       <filePath value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
-    <configuration name="gobench benchmarks" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="Go" />
-      <working_directory value="$PROJECT_DIR$/benchmarks" />
-      <framework value="gobench" />
-      <kind value="DIRECTORY" />
-      <directory value="$PROJECT_DIR$/benchmarks" />
-      <filePath value="$PROJECT_DIR$/" />
-      <method v="2" />
-    </configuration>
-    <configuration name="gobench send_receive_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="Go" />
-      <working_directory value="$PROJECT_DIR$/benchmarks" />
-      <framework value="gobench" />
-      <kind value="FILE" />
-      <directory value="$PROJECT_DIR$/tests" />
-      <filePath value="$PROJECT_DIR$/benchmarks/send_receive_test.go" />
-      <method v="2" />
-    </configuration>
-    <configuration name="send_receive_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="Go" />
-      <working_directory value="$PROJECT_DIR$/tests" />
-      <framework value="gotest" />
-      <kind value="FILE" />
-      <directory value="$PROJECT_DIR$/tests" />
-      <filePath value="$PROJECT_DIR$/tests/send_receive_test.go" />
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Go Test.Tests" />
-      <item itemvalue="Go Test.gobench send_receive_test.go" />
-      <item itemvalue="Go Build.go build send_receive.go (1)" />
-      <item itemvalue="Go Test.send_receive_test.go" />
+      <item itemvalue="Go Build.go build send_receive.go" />
+      <item itemvalue="Go Build.go build serialization.go" />
+      <item itemvalue="Go Build.go build serialization_final.go" />
+      <item itemvalue="Go Build.go build serialization_json.go" />
       <item itemvalue="Go Test.go test tests" />
-      <item itemvalue="Go Test.gobench benchmarks" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Test.gobench benchmarks" />
         <item itemvalue="Go Test.go test tests" />
-        <item itemvalue="Go Test.send_receive_test.go" />
-        <item itemvalue="Go Build.go build send_receive.go (1)" />
-        <item itemvalue="Go Test.gobench send_receive_test.go" />
+        <item itemvalue="Go Build.go build serialization_json.go" />
+        <item itemvalue="Go Build.go build serialization_final.go" />
+        <item itemvalue="Go Build.go build serialization.go" />
+        <item itemvalue="Go Build.go build send_receive.go" />
       </list>
     </recent_temporary>
   </component>
   <component name="TestHistory">
-    <history-entry file="gobench_serialization_test_go - 2018.12.08 at 04h 18m 42s.xml">
-      <configuration name="gobench serialization_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="gobench_serialization_json_test_go - 2018.12.08 at 04h 18m 49s.xml">
-      <configuration name="gobench serialization_json_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="gobench_serialization_test_go - 2018.12.08 at 04h 19m 03s.xml">
-      <configuration name="gobench serialization_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="gobench_serialization_final_test_go - 2018.12.08 at 04h 19m 33s.xml">
-      <configuration name="gobench serialization_final_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="gobench_send_receive_test_go - 2018.12.08 at 04h 19m 46s.xml">
-      <configuration name="gobench send_receive_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="send_receive_test_go - 2018.12.08 at 04h 30m 58s.xml">
-      <configuration name="send_receive_test.go" configurationId="GoTestRunConfiguration" />
-    </history-entry>
     <history-entry file="go_test_tests - 2018.12.08 at 04h 31m 21s.xml">
       <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
     </history-entry>
@@ -265,11 +253,29 @@
     <history-entry file="gobench_benchmarks - 2018.12.08 at 04h 37m 31s.xml">
       <configuration name="gobench benchmarks" configurationId="GoTestRunConfiguration" />
     </history-entry>
+    <history-entry file="go_test_tests - 2018.12.08 at 13h 25m 22s.xml">
+      <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_tests - 2018.12.08 at 14h 03m 27s.xml">
+      <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_tests - 2018.12.08 at 14h 03m 38s.xml">
+      <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_benchmarks - 2018.12.08 at 14h 03m 49s.xml">
+      <configuration name="go test benchmarks" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="gobench_benchmarks - 2018.12.08 at 14h 04m 17s.xml">
+      <configuration name="gobench benchmarks" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_tests - 2018.12.08 at 14h 37m 41s.xml">
+      <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="572" y="135" width="1453" height="1193" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26130652" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26489592" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -352,19 +358,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tests/clone_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
-          <folding>
-            <element signature="e#15#121#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/test/FieldModelMapStringOptionalByte.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/proto/test/FieldModelOptionalTimestamp.go">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -544,9 +537,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proto/protoex/FieldModelAccount.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/proto/protoex/FinalModelBalance.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
@@ -575,51 +565,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proto/protoex/Sender.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="39" selection-start-line="39" selection-end-line="39" />
-          <folding>
-            <element signature="e#192#241#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/extending_test.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
           <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/proto/Sender.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1160">
-          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
-          <folding>
-            <element signature="e#188#219#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/fbe/Sender.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="71" column="1" lean-forward="true" selection-start-line="63" selection-end-line="71" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/fbe/Receiver.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="70" column="5" lean-forward="true" selection-start-line="68" selection-end-line="70" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/proto/Receiver.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="89" lean-forward="true" selection-start-line="89" selection-end-line="89" />
         </state>
       </provider>
     </entry>
@@ -654,13 +603,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/send_receive.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="594">
-          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/send_receive.go" />
     <entry file="file://$PROJECT_DIR$/benchmarks/serialization_test.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="594">
@@ -678,13 +621,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proto/proto/FinalReceiver.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2686">
-          <caret line="159" lean-forward="true" selection-start-line="159" selection-end-line="159" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/send_receive_test.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-255" />
@@ -694,6 +630,78 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-242">
           <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/fbe/Sender.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="370">
+          <caret line="72" selection-start-line="72" selection-end-line="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/fbe/Receiver.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="72" selection-start-line="72" selection-end-line="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/proto/Sender.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="608">
+          <caret line="124" selection-start-line="124" selection-end-line="124" />
+          <folding>
+            <element signature="e#188#219#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/proto/Receiver.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" selection-start-line="12" selection-end-line="12" />
+          <folding>
+            <element signature="e#188#219#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/proto/FinalReceiver.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2686">
+          <caret line="160" selection-start-line="160" selection-end-line="160" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/protoex/Sender.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
+          <folding>
+            <element signature="e#192#241#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/protoex/FieldModelAccount.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="91" column="74" selection-start-line="88" selection-end-line="91" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/protoex/Receiver.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2787">
+          <caret line="211" lean-forward="true" selection-start-line="211" selection-end-line="211" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/protoex/FinalReceiver.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1412">
+          <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
         </state>
       </provider>
     </entry>

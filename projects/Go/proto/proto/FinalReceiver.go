@@ -21,11 +21,11 @@ type FinalReceiver struct {
     accountValue *Account
     accountModel *AccountFinalModel
 
-    // Receive order handler
+    // Receive Order handler
     HandlerOnReceiveOrder OnReceiveOrder
-    // Receive balance handler
+    // Receive Balance handler
     HandlerOnReceiveBalance OnReceiveBalance
-    // Receive account handler
+    // Receive Account handler
     HandlerOnReceiveAccount OnReceiveAccount
 }
 
@@ -57,29 +57,29 @@ func NewFinalReceiverWithBuffer(buffer *fbe.Buffer) *FinalReceiver {
 
 // Setup handlers
 func (r *FinalReceiver) SetupHandlers(handlers interface{}) {
-	r.Receiver.SetupHandlers(handlers)
-	if handler, ok := handlers.(OnReceiveOrder); ok {
-		r.SetupHandlerOnReceiveOrder(handler)
-	}
-	if handler, ok := handlers.(OnReceiveBalance); ok {
-		r.SetupHandlerOnReceiveBalance(handler)
-	}
-	if handler, ok := handlers.(OnReceiveAccount); ok {
-		r.SetupHandlerOnReceiveAccount(handler)
-	}
+    r.Receiver.SetupHandlers(handlers)
+    if handler, ok := handlers.(OnReceiveOrder); ok {
+        r.SetupHandlerOnReceiveOrder(handler)
+    }
+    if handler, ok := handlers.(OnReceiveBalance); ok {
+        r.SetupHandlerOnReceiveBalance(handler)
+    }
+    if handler, ok := handlers.(OnReceiveAccount); ok {
+        r.SetupHandlerOnReceiveAccount(handler)
+    }
 }
 
-// Setup receive order handler
+// Setup receive Order handler
 func (r *FinalReceiver) SetupHandlerOnReceiveOrder(handler OnReceiveOrder) { r.HandlerOnReceiveOrder = handler }
-// Setup receive order handler function
+// Setup receive Order handler function
 func (r *FinalReceiver) SetupHandlerOnReceiveOrderFunc(function func(value *Order)) { r.HandlerOnReceiveOrder = OnReceiveOrderFunc(function) }
-// Setup receive balance handler
+// Setup receive Balance handler
 func (r *FinalReceiver) SetupHandlerOnReceiveBalance(handler OnReceiveBalance) { r.HandlerOnReceiveBalance = handler }
-// Setup receive balance handler function
+// Setup receive Balance handler function
 func (r *FinalReceiver) SetupHandlerOnReceiveBalanceFunc(function func(value *Balance)) { r.HandlerOnReceiveBalance = OnReceiveBalanceFunc(function) }
-// Setup receive account handler
+// Setup receive Account handler
 func (r *FinalReceiver) SetupHandlerOnReceiveAccount(handler OnReceiveAccount) { r.HandlerOnReceiveAccount = handler }
-// Setup receive account handler function
+// Setup receive Account handler function
 func (r *FinalReceiver) SetupHandlerOnReceiveAccountFunc(function func(value *Account)) { r.HandlerOnReceiveAccount = OnReceiveAccountFunc(function) }
 
 // Receive message handler
@@ -155,5 +155,6 @@ func (r *FinalReceiver) OnReceive(fbeType int, buffer []byte) (bool, error) {
         r.HandlerOnReceiveAccount.OnReceiveAccount(r.accountValue)
         return true, nil
     }
+
     return false, nil
 }
