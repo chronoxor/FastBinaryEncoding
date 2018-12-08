@@ -1,50 +1,47 @@
-package main
+package tests
 
-import "fmt"
+import (
+	"testing"
+)
+import "github.com/stretchr/testify/assert"
 import "../proto/proto"
 
-type MySender struct {
-	*proto.Sender
+type MyFinalSender struct {
+	*proto.FinalSender
 }
 
-func NewMySender() *MySender {
-	sender := &MySender{proto.NewSender()}
+func NewMyFinalSender() *MyFinalSender {
+	sender := &MyFinalSender{proto.NewFinalSender()}
 	sender.SetupHandlers(sender)
 	return sender
 }
 
-func (s *MySender) OnSend(buffer []byte) (int, error) {
+func (s *MyFinalSender) OnSend(buffer []byte) (int, error) {
 	// Send nothing...
 	return 0, nil
 }
 
-func (s *MySender) OnSendLog(message string) {
-	fmt.Printf("onSend: %s\n", message)
+type MyFinalReceiver struct {
+	*proto.FinalReceiver
+	order bool
+	balance bool
+	account bool
 }
 
-type MyReceiver struct {
-	*proto.Receiver
-}
-
-func NewMyReceiver() *MyReceiver {
-	receiver := &MyReceiver{proto.NewReceiver()}
+func NewMyFinalReceiver() *MyFinalReceiver {
+	receiver := &MyFinalReceiver{proto.NewFinalReceiver(), false, false, false}
 	receiver.SetupHandlers(receiver)
 	return receiver
 }
 
-func (r *MyReceiver) OnReceiveOrder(value *proto.Order) {}
-func (r *MyReceiver) OnReceiveBalance(value *proto.Balance) {}
-func (r *MyReceiver) OnReceiveAccount(value *proto.Account) {}
+func (r *MyFinalReceiver) Check() bool { return r.order && r.balance && r.account }
 
-func (r *MyReceiver) OnReceiveLog(message string) {
-	fmt.Printf("onReceive: %s\n", message)
-}
+func (r *MyFinalReceiver) OnReceiveOrder(value *proto.Order) { r.order = true }
+func (r *MyFinalReceiver) OnReceiveBalance(value *proto.Balance) { r.balance = true }
+func (r *MyFinalReceiver) OnReceiveAccount(value *proto.Account) { r.account = true }
 
-func main() {
-	sender := NewMySender()
-
-	// Enable logging
-	sender.SetLogging(true)
+func SendAndReceiveFinal(index int) bool {
+	sender := NewMyFinalSender()
 
 	// Create and send a new order
 	order := proto.Order{Uid: 1, Symbol: "EURUSD", Side: proto.OrderSide_buy, Type: proto.OrderType_market, Price: 1.23456, Volume: 1000.0}
@@ -66,11 +63,17 @@ func main() {
 	account.Orders = append(account.Orders, proto.Order{Uid: 3, Symbol: "EURUSD", Side: proto.OrderSide_buy, Type: proto.OrderType_stop, Price: 1.5, Volume: 10.0})
 	_, _ = sender.Send(account)
 
-	receiver := NewMyReceiver()
+	receiver := NewMyFinalReceiver()
 
-	// Enable logging
-	receiver.SetLogging(true)
+	// Receive data from the sender
+	index %= sender.Buffer().Size()
+	_ = receiver.Receive(sender.Buffer().Data()[:index])
+	_ = receiver.Receive(sender.Buffer().Data()[index:])
+	return receiver.Check()
+}
 
-	// Receive all data from the sender
-	_ = receiver.ReceiveBuffer(sender.Buffer())
+func TestSendAndReceiveFinal(t *testing.T) {
+	for i := 0; i < 1000; i++ {
+		assert.True(t, SendAndReceiveFinal(i))
+	}
 }

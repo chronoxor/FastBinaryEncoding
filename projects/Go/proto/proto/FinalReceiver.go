@@ -11,48 +11,15 @@ import "../fbe"
 // Workaround for Go unused imports issue
 var _ = fbe.Version
 
-// Receive order interface
-type OnReceiveOrder interface {
-    OnReceiveOrder(value *Order)
-}
-
-// Receive order function
-type OnReceiveOrderFunc func(value *Order)
-func (f OnReceiveOrderFunc) OnReceiveOrder(value *Order) {
-    f(value)
-}
-
-// Receive balance interface
-type OnReceiveBalance interface {
-    OnReceiveBalance(value *Balance)
-}
-
-// Receive balance function
-type OnReceiveBalanceFunc func(value *Balance)
-func (f OnReceiveBalanceFunc) OnReceiveBalance(value *Balance) {
-    f(value)
-}
-
-// Receive account interface
-type OnReceiveAccount interface {
-    OnReceiveAccount(value *Account)
-}
-
-// Receive account function
-type OnReceiveAccountFunc func(value *Account)
-func (f OnReceiveAccountFunc) OnReceiveAccount(value *Account) {
-    f(value)
-}
-
-// Fast Binary Encoding proto receiver
-type Receiver struct {
+// Fast Binary Encoding proto final receiver
+type FinalReceiver struct {
     *fbe.Receiver
     orderValue *Order
-    orderModel *OrderModel
+    orderModel *OrderFinalModel
     balanceValue *Balance
-    balanceModel *BalanceModel
+    balanceModel *BalanceFinalModel
     accountValue *Account
-    accountModel *AccountModel
+    accountModel *AccountFinalModel
 
     // Receive order handler
     HandlerOnReceiveOrder OnReceiveOrder
@@ -62,21 +29,21 @@ type Receiver struct {
     HandlerOnReceiveAccount OnReceiveAccount
 }
 
-// Create a new proto sender with an empty buffer
-func NewReceiver() *Receiver {
-    return NewReceiverWithBuffer(fbe.NewEmptyBuffer())
+// Create a new proto final receiver with an empty buffer
+func NewFinalReceiver() *FinalReceiver {
+    return NewFinalReceiverWithBuffer(fbe.NewEmptyBuffer())
 }
 
-// Create a new proto receiver with the given buffer
-func NewReceiverWithBuffer(buffer *fbe.Buffer) *Receiver {
-    receiver := &Receiver{
-        fbe.NewReceiver(buffer, false),
+// Create a new proto final receiver with the given buffer
+func NewFinalReceiverWithBuffer(buffer *fbe.Buffer) *FinalReceiver {
+    receiver := &FinalReceiver{
+        fbe.NewReceiver(buffer, true),
         NewOrder(),
-        NewOrderModel(buffer),
+        NewOrderFinalModel(buffer),
         NewBalance(),
-        NewBalanceModel(buffer),
+        NewBalanceFinalModel(buffer),
         NewAccount(),
-        NewAccountModel(buffer),
+        NewAccountFinalModel(buffer),
         nil,
         nil,
         nil,
@@ -89,7 +56,7 @@ func NewReceiverWithBuffer(buffer *fbe.Buffer) *Receiver {
 }
 
 // Setup handlers
-func (r *Receiver) SetupHandlers(handlers interface{}) {
+func (r *FinalReceiver) SetupHandlers(handlers interface{}) {
 	r.Receiver.SetupHandlers(handlers)
 	if handler, ok := handlers.(OnReceiveOrder); ok {
 		r.SetupHandlerOnReceiveOrder(handler)
@@ -103,20 +70,20 @@ func (r *Receiver) SetupHandlers(handlers interface{}) {
 }
 
 // Setup receive order handler
-func (r *Receiver) SetupHandlerOnReceiveOrder(handler OnReceiveOrder) { r.HandlerOnReceiveOrder = handler }
+func (r *FinalReceiver) SetupHandlerOnReceiveOrder(handler OnReceiveOrder) { r.HandlerOnReceiveOrder = handler }
 // Setup receive order handler function
-func (r *Receiver) SetupHandlerOnReceiveOrderFunc(function func(value *Order)) { r.HandlerOnReceiveOrder = OnReceiveOrderFunc(function) }
+func (r *FinalReceiver) SetupHandlerOnReceiveOrderFunc(function func(value *Order)) { r.HandlerOnReceiveOrder = OnReceiveOrderFunc(function) }
 // Setup receive balance handler
-func (r *Receiver) SetupHandlerOnReceiveBalance(handler OnReceiveBalance) { r.HandlerOnReceiveBalance = handler }
+func (r *FinalReceiver) SetupHandlerOnReceiveBalance(handler OnReceiveBalance) { r.HandlerOnReceiveBalance = handler }
 // Setup receive balance handler function
-func (r *Receiver) SetupHandlerOnReceiveBalanceFunc(function func(value *Balance)) { r.HandlerOnReceiveBalance = OnReceiveBalanceFunc(function) }
+func (r *FinalReceiver) SetupHandlerOnReceiveBalanceFunc(function func(value *Balance)) { r.HandlerOnReceiveBalance = OnReceiveBalanceFunc(function) }
 // Setup receive account handler
-func (r *Receiver) SetupHandlerOnReceiveAccount(handler OnReceiveAccount) { r.HandlerOnReceiveAccount = handler }
+func (r *FinalReceiver) SetupHandlerOnReceiveAccount(handler OnReceiveAccount) { r.HandlerOnReceiveAccount = handler }
 // Setup receive account handler function
-func (r *Receiver) SetupHandlerOnReceiveAccountFunc(function func(value *Account)) { r.HandlerOnReceiveAccount = OnReceiveAccountFunc(function) }
+func (r *FinalReceiver) SetupHandlerOnReceiveAccountFunc(function func(value *Account)) { r.HandlerOnReceiveAccount = OnReceiveAccountFunc(function) }
 
 // Receive message handler
-func (r *Receiver) OnReceive(fbeType int, buffer []byte) (bool, error) {
+func (r *FinalReceiver) OnReceive(fbeType int, buffer []byte) (bool, error) {
     switch fbeType {
     case r.orderModel.FBEType():
         // Deserialize the value from the FBE stream

@@ -1,6 +1,9 @@
-package main
+package tests
 
-import "fmt"
+import (
+	"testing"
+)
+import "github.com/stretchr/testify/assert"
 import "../proto/proto"
 
 type MySender struct {
@@ -18,33 +21,27 @@ func (s *MySender) OnSend(buffer []byte) (int, error) {
 	return 0, nil
 }
 
-func (s *MySender) OnSendLog(message string) {
-	fmt.Printf("onSend: %s\n", message)
-}
-
 type MyReceiver struct {
 	*proto.Receiver
+	order bool
+	balance bool
+	account bool
 }
 
 func NewMyReceiver() *MyReceiver {
-	receiver := &MyReceiver{proto.NewReceiver()}
+	receiver := &MyReceiver{proto.NewReceiver(), false, false, false}
 	receiver.SetupHandlers(receiver)
 	return receiver
 }
 
-func (r *MyReceiver) OnReceiveOrder(value *proto.Order) {}
-func (r *MyReceiver) OnReceiveBalance(value *proto.Balance) {}
-func (r *MyReceiver) OnReceiveAccount(value *proto.Account) {}
+func (r *MyReceiver) Check() bool { return r.order && r.balance && r.account }
 
-func (r *MyReceiver) OnReceiveLog(message string) {
-	fmt.Printf("onReceive: %s\n", message)
-}
+func (r *MyReceiver) OnReceiveOrder(value *proto.Order) { r.order = true }
+func (r *MyReceiver) OnReceiveBalance(value *proto.Balance) { r.balance = true }
+func (r *MyReceiver) OnReceiveAccount(value *proto.Account) { r.account = true }
 
-func main() {
+func SendAndReceive(index int) bool {
 	sender := NewMySender()
-
-	// Enable logging
-	sender.SetLogging(true)
 
 	// Create and send a new order
 	order := proto.Order{Uid: 1, Symbol: "EURUSD", Side: proto.OrderSide_buy, Type: proto.OrderType_market, Price: 1.23456, Volume: 1000.0}
@@ -68,9 +65,15 @@ func main() {
 
 	receiver := NewMyReceiver()
 
-	// Enable logging
-	receiver.SetLogging(true)
+	// Receive data from the sender
+	index %= sender.Buffer().Size()
+	_ = receiver.Receive(sender.Buffer().Data()[:index])
+	_ = receiver.Receive(sender.Buffer().Data()[index:])
+	return receiver.Check()
+}
 
-	// Receive all data from the sender
-	_ = receiver.ReceiveBuffer(sender.Buffer())
+func TestSendAndReceive(t *testing.T) {
+	for i := 0; i < 1000; i++ {
+		assert.True(t, SendAndReceive(i))
+	}
 }

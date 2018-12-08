@@ -45,8 +45,8 @@ type Receiver struct {
 // Create a new base receiver
 func NewReceiver(buffer *Buffer, final bool) *Receiver {
     receiver := &Receiver{buffer: buffer, logging: false, final: final}
-    receiver.OnReceiveFunc(func(fbeType int, buffer []byte) (bool, error) { panic("receive handler is not provided") })
-    receiver.OnReceiveLogFunc(func(message string) {})
+    receiver.SetupHandlerOnReceiveFunc(func(fbeType int, buffer []byte) (bool, error) { panic("receive handler is not provided") })
+    receiver.SetupHandlerOnReceiveLogFunc(func(message string) {})
     return receiver
 }
 
@@ -61,14 +61,24 @@ func (r *Receiver) Logging() bool { return r.logging }
 // Set the logging flag
 func (r *Receiver) SetLogging(logging bool) { r.logging = logging }
 
-// Receive message handler
-func (r *Receiver) OnReceiveHandler(handler OnReceive) { r.HandlerOnReceive = handler }
-// Receive message handler function
-func (r *Receiver) OnReceiveFunc(function func(fbeType int, buffer []byte) (bool, error)) { r.HandlerOnReceive = OnReceiveFunc(function) }
-// Receive log message handler
-func (r *Receiver) OnReceiveLogHandler(handler OnReceiveLog) { r.HandlerOnReceiveLog = handler }
-// Receive log message handler function
-func (r *Receiver) OnReceiveLogFunc(function func(message string)) { r.HandlerOnReceiveLog = OnReceiveLogFunc(function) }
+// Setup handlers
+func (r *Receiver) SetupHandlers(handlers interface{}) {
+    if handler, ok := handlers.(OnReceive); ok {
+        r.SetupHandlerOnReceive(handler)
+    }
+    if handler, ok := handlers.(OnReceiveLog); ok {
+        r.SetupHandlerOnReceiveLog(handler)
+    }
+}
+
+// Setup receive message handler
+func (r *Receiver) SetupHandlerOnReceive(handler OnReceive) { r.HandlerOnReceive = handler }
+// Setup receive message handler function
+func (r *Receiver) SetupHandlerOnReceiveFunc(function func(fbeType int, buffer []byte) (bool, error)) { r.HandlerOnReceive = OnReceiveFunc(function) }
+// Setup receive log message handler
+func (r *Receiver) SetupHandlerOnReceiveLog(handler OnReceiveLog) { r.HandlerOnReceiveLog = handler }
+// Setup receive log message handler function
+func (r *Receiver) SetupHandlerOnReceiveLogFunc(function func(message string)) { r.HandlerOnReceiveLog = OnReceiveLogFunc(function) }
 
 // Receive bytes memory buffer
 func (r *Receiver) Receive(buffer []byte) error {

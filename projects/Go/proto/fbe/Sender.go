@@ -45,8 +45,8 @@ type Sender struct {
 // Create a new base sender
 func NewSender(buffer *Buffer, final bool) *Sender {
     sender := &Sender{buffer: buffer, logging: false, final: final}
-    sender.OnSendFunc(func(buffer []byte) (int, error) { panic("send handler is not provided") })
-    sender.OnSendLogFunc(func(message string) {})
+    sender.SetupHandlerOnSendFunc(func(buffer []byte) (int, error) { panic("send handler is not provided") })
+    sender.SetupHandlerOnSendLogFunc(func(message string) {})
     return sender
 }
 
@@ -61,14 +61,24 @@ func (s *Sender) Logging() bool { return s.logging }
 // Set the logging flag
 func (s *Sender) SetLogging(logging bool) { s.logging = logging }
 
-// Send message handler
-func (s *Sender) OnSendHandler(handler OnSend) { s.HandlerOnSend = handler }
-// Send message handler function
-func (s *Sender) OnSendFunc(function func(buffer []byte) (int, error)) { s.HandlerOnSend = OnSendFunc(function) }
-// Send log message handler
-func (s *Sender) OnSendLogHandler(handler OnSendLog) { s.HandlerOnSendLog = handler }
-// Send log message handler function
-func (s *Sender) OnSendLogFunc(function func(message string)) { s.HandlerOnSendLog = OnSendLogFunc(function) }
+// Setup handlers
+func (s *Sender) SetupHandlers(handlers interface{}) {
+    if handler, ok := handlers.(OnSend); ok {
+        s.SetupHandlerOnSend(handler)
+    }
+    if handler, ok := handlers.(OnSendLog); ok {
+        s.SetupHandlerOnSendLog(handler)
+    }
+}
+
+// Setup send message handler
+func (s *Sender) SetupHandlerOnSend(handler OnSend) { s.HandlerOnSend = handler }
+// Setup send message handler function
+func (s *Sender) SetupHandlerOnSendFunc(function func(buffer []byte) (int, error)) { s.HandlerOnSend = OnSendFunc(function) }
+// Setup send log message handler
+func (s *Sender) SetupHandlerOnSendLog(handler OnSendLog) { s.HandlerOnSendLog = handler }
+// Setup send log message handler function
+func (s *Sender) SetupHandlerOnSendLogFunc(function func(message string)) { s.HandlerOnSendLog = OnSendLogFunc(function) }
 
 // Send serialized buffer.
 // Direct call of the method requires knowledge about internals of FBE models serialization.
