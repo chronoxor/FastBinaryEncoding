@@ -2,15 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba8f4190-0800-4bce-b2eb-ad8ed5d1197a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../modules/CppBenchmark" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppBenchmark" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../modules/CppCommon" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppCommon" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../modules/rapidjson" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/rapidjson" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks/serialization_final_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks/serialization_final_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/benchmarks/serialization_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/benchmarks/serialization_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/enums/FinalSender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/enums/FinalSender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/enums/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/enums/Sender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/Receiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/Receiver.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/fbe/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe/Sender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/proto/FinalSender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto/FinalSender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/proto/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto/Sender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/protoex/Balance.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex/Balance.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/protoex/FieldModelBalance.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex/FieldModelBalance.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/protoex/FinalModelBalance.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex/FinalModelBalance.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/protoex/FinalSender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex/FinalSender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/protoex/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex/Sender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test/FieldModelStructNested.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/FieldModelStructNested.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test/FieldModelStructOptional.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/FieldModelStructOptional.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test/FinalModelStructNested.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/FinalModelStructNested.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test/FinalModelStructOptional.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/FinalModelStructOptional.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test/FinalSender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/FinalSender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test/Sender.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/Sender.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test/StructNested.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/StructNested.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test/StructOptional.go" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test/StructOptional.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/extending_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/tests/extending_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/Ruby.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Ruby/proto/enums.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/enums.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Ruby/proto/proto.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/proto.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Ruby/proto/protoex.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/protoex.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Ruby/proto/test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/test.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_ruby.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_ruby.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,7 +41,99 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/proto/protoex/FieldModelBalance.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="486">
+              <caret line="245" selection-start-line="245" selection-end-line="245" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/examples/send_receive.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/proto/test/Sender.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="244">
+              <caret line="41" column="23" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/proto/test/FinalSender.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="244">
+              <caret line="41" column="39" selection-start-line="41" selection-start-column="39" selection-end-line="41" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/proto/protoex/Sender.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="346">
+              <caret line="39" selection-start-line="39" selection-end-line="39" />
+              <folding>
+                <element signature="e#192#241#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/extending_test.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="304">
+              <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/benchmarks/serialization_final_test.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="595">
+              <caret line="85" column="49" lean-forward="true" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/benchmarks/serialization_json_test.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-307" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/benchmarks/serialization_test.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="560">
+              <caret line="85" column="49" selection-start-line="85" selection-start-column="49" selection-end-line="85" selection-end-column="49" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/proto/protoex/FinalModelBalance.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="486">
+              <caret line="158" selection-start-line="158" selection-end-line="158" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -36,13 +149,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/proto/test/FinalModelOptionalInt64.go" />
-        <option value="$PROJECT_DIR$/proto/test/FinalModelOptionalWChar.go" />
-        <option value="$PROJECT_DIR$/proto/test/FieldModelOptionalBool.go" />
-        <option value="$PROJECT_DIR$/proto/test/FieldModelArrayBool.go" />
-        <option value="$PROJECT_DIR$/proto/test/FieldModelArrayEnumSimple.go" />
-        <option value="$PROJECT_DIR$/proto/test/FieldModelArrayStructSimple.go" />
-        <option value="$PROJECT_DIR$/proto/test/FieldModelArrayBytes.go" />
         <option value="$PROJECT_DIR$/proto/test/FinalModelOptionalBool.go" />
         <option value="$PROJECT_DIR$/proto/test/FinalModelArrayByte.go" />
         <option value="$PROJECT_DIR$/proto/test/FieldModelStructBytes.go" />
@@ -53,13 +159,10 @@
         <option value="$PROJECT_DIR$/examples/serialization_final.go" />
         <option value="$PROJECT_DIR$/examples/serialization.go" />
         <option value="$PROJECT_DIR$/benchmarks/serialization_json_test.go" />
-        <option value="$PROJECT_DIR$/benchmarks/serialization_test.go" />
-        <option value="$PROJECT_DIR$/benchmarks/serialization_final_test.go" />
         <option value="$PROJECT_DIR$/examples/create.go" />
         <option value="$PROJECT_DIR$/proto/proto/Order.go" />
         <option value="$PROJECT_DIR$/tests/clone_test.go" />
         <option value="$PROJECT_DIR$/tests/create_test.go" />
-        <option value="$PROJECT_DIR$/tests/extending_test.go" />
         <option value="$PROJECT_DIR$/tests/enums_test.go" />
         <option value="$PROJECT_DIR$/proto/test/FieldModelSetByte.go" />
         <option value="$PROJECT_DIR$/proto/test/FieldModelSetEnumSimple.go" />
@@ -70,7 +173,6 @@
         <option value="$PROJECT_DIR$/proto/test/FieldModelStructArray.go" />
         <option value="$PROJECT_DIR$/proto/proto/Account.go" />
         <option value="$PROJECT_DIR$/proto/test/StructNested.go" />
-        <option value="$PROJECT_DIR$/proto/protoex/Balance.go" />
         <option value="$PROJECT_DIR$/proto/test/StructSet.go" />
         <option value="$PROJECT_DIR$/proto/test/FieldModelMapStructSimpleOptionalStructNested.go" />
         <option value="$PROJECT_DIR$/proto/test/FieldModelMapStructSimpleStructNested.go" />
@@ -82,11 +184,22 @@
         <option value="$PROJECT_DIR$/examples/print.go" />
         <option value="$PROJECT_DIR$/tests/serialization_test.go" />
         <option value="$PROJECT_DIR$/tests/serialization_final_test.go" />
-        <option value="$PROJECT_DIR$/proto/protoex/Sender.go" />
-        <option value="$PROJECT_DIR$/proto/proto/Sender.go" />
-        <option value="$PROJECT_DIR$/proto/fbe/Receiver.go" />
         <option value="$PROJECT_DIR$/tests/decimal_test.go" />
         <option value="$PROJECT_DIR$/proto/fbe/Sender.go" />
+        <option value="$PROJECT_DIR$/proto/proto/FinalSender.go" />
+        <option value="$PROJECT_DIR$/proto/proto/Sender.go" />
+        <option value="$PROJECT_DIR$/proto/fbe/Receiver.go" />
+        <option value="$PROJECT_DIR$/proto/proto/Receiver.go" />
+        <option value="$PROJECT_DIR$/proto/protoex/Balance.go" />
+        <option value="$PROJECT_DIR$/proto/protoex/FieldModelBalance.go" />
+        <option value="$PROJECT_DIR$/proto/protoex/FinalModelBalance.go" />
+        <option value="$PROJECT_DIR$/proto/test/Sender.go" />
+        <option value="$PROJECT_DIR$/proto/test/FinalSender.go" />
+        <option value="$PROJECT_DIR$/proto/protoex/Sender.go" />
+        <option value="$PROJECT_DIR$/tests/extending_test.go" />
+        <option value="$PROJECT_DIR$/benchmarks/serialization_final_test.go" />
+        <option value="$PROJECT_DIR$/benchmarks/serialization_test.go" />
+        <option value="$PROJECT_DIR$/examples/send_receive.go" />
       </list>
     </option>
   </component>
@@ -122,7 +235,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -135,15 +247,11 @@
               <item name="Go" type="462c0819:PsiDirectoryNode" />
               <item name="examples" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="Go" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Go" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -172,7 +280,23 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Test.go test tests">
+  <component name="RunManager" selected="Go Build.go build send_receive.go">
+    <configuration name="go build print_json.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="Go" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/examples/print_json.go" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
+    <configuration name="go build send_receive.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="Go" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/examples/send_receive.go" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build serialization_final.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="Go" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -217,83 +341,66 @@
       <filePath value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
-    <configuration name="go test benchmarks" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="Go" />
-      <working_directory value="$PROJECT_DIR$/benchmarks" />
-      <framework value="gotest" />
-      <kind value="DIRECTORY" />
-      <directory value="$PROJECT_DIR$/benchmarks" />
-      <filePath value="$PROJECT_DIR$/" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go test tests" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="Go" />
-      <working_directory value="$PROJECT_DIR$/tests" />
-      <framework value="gotest" />
-      <kind value="DIRECTORY" />
-      <directory value="$PROJECT_DIR$/tests" />
-      <filePath value="$PROJECT_DIR$/" />
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Go Test.Tests" />
-      <item itemvalue="Go Build.go build serialization.go" />
-      <item itemvalue="Go Build.go build serialization_final.go" />
+      <item itemvalue="Go Build.go build print_json.go" />
       <item itemvalue="Go Build.go build serialization_json.go" />
-      <item itemvalue="Go Test.go test benchmarks" />
-      <item itemvalue="Go Test.go test tests" />
+      <item itemvalue="Go Build.go build serialization_final.go" />
+      <item itemvalue="Go Build.go build serialization.go" />
+      <item itemvalue="Go Build.go build send_receive.go" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Go Test.go test tests" />
-        <item itemvalue="Go Test.go test benchmarks" />
-        <item itemvalue="Go Build.go build serialization_json.go" />
-        <item itemvalue="Go Build.go build serialization_final.go" />
+        <item itemvalue="Go Build.go build send_receive.go" />
         <item itemvalue="Go Build.go build serialization.go" />
+        <item itemvalue="Go Build.go build serialization_final.go" />
+        <item itemvalue="Go Build.go build serialization_json.go" />
+        <item itemvalue="Go Build.go build print_json.go" />
       </list>
     </recent_temporary>
   </component>
   <component name="TestHistory">
-    <history-entry file="go_test_tests - 2018.12.05 at 23h 27m 24s.xml">
+    <history-entry file="go_test_tests - 2018.12.08 at 01h 02m 46s.xml">
       <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="go_test_tests - 2018.12.05 at 23h 28m 15s.xml">
+    <history-entry file="go_test_test - 2018.12.08 at 03h 28m 14s.xml">
+      <configuration name="go test test" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_test - 2018.12.08 at 03h 28m 49s.xml">
+      <configuration name="go test test" configurationId="GoTestRunConfiguration" />
+    </history-entry>
+    <history-entry file="go_test_tests - 2018.12.08 at 03h 29m 04s.xml">
       <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="go_test_tests - 2018.12.05 at 23h 28m 33s.xml">
+    <history-entry file="go_test_tests - 2018.12.08 at 03h 30m 48s.xml">
       <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="go_test_tests - 2018.12.05 at 23h 29m 28s.xml">
+    <history-entry file="go_test_tests - 2018.12.08 at 03h 31m 08s.xml">
       <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="gobench_benchmarks - 2018.12.05 at 23h 30m 06s.xml">
-      <configuration name="gobench benchmarks" configurationId="GoTestRunConfiguration" />
+    <history-entry file="gobench_serialization_final_test_go - 2018.12.08 at 03h 31m 42s.xml">
+      <configuration name="gobench serialization_final_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="go_test_tests - 2018.12.07 at 04h 19m 31s.xml">
-      <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
+    <history-entry file="gobench_serialization_final_test_go - 2018.12.08 at 03h 32m 39s.xml">
+      <configuration name="gobench serialization_final_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="go_test_tests - 2018.12.07 at 17h 27m 49s.xml">
-      <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
+    <history-entry file="gobench_serialization_json_test_go - 2018.12.08 at 03h 32m 51s.xml">
+      <configuration name="gobench serialization_json_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
-    <history-entry file="go_test_tests - 2018.12.07 at 17h 43m 01s.xml">
-      <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="go_test_benchmarks - 2018.12.07 at 17h 43m 34s.xml">
-      <configuration name="go test benchmarks" configurationId="GoTestRunConfiguration" />
-    </history-entry>
-    <history-entry file="go_test_tests - 2018.12.07 at 17h 53m 00s.xml">
-      <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
+    <history-entry file="gobench_serialization_test_go - 2018.12.08 at 03h 33m 09s.xml">
+      <configuration name="gobench serialization_test.go" configurationId="GoTestRunConfiguration" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="498" y="117" width="1453" height="848" extended-state="0" />
+    <frame x="565" y="117" width="1453" height="1193" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26489592" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26130652" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4977109" visible="true" weight="0.28111887" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4977109" visible="true" weight="0.28207546" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3971698" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -371,124 +478,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/proto/test/StructMap.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="31" column="33" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/test/StructMapFinalModel.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/test/StructMapModel.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/test/FinalModelStructArray.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="283" column="1" selection-start-line="283" selection-start-column="1" selection-end-line="283" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/test/FieldModelStructArray.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="294" selection-start-line="294" selection-end-line="294" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/proto/Account.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="174">
-          <caret line="71" selection-start-line="71" selection-end-line="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/proto/Balance.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="82" selection-start-line="82" selection-end-line="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/test/StructOptional.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31">
-          <caret line="210" column="43" selection-start-line="210" selection-start-column="43" selection-end-line="210" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/test/StructNested.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="105" selection-start-line="105" selection-end-line="105" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/protoex/Balance.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="31">
-          <caret line="80" column="5" selection-start-line="80" selection-start-column="5" selection-end-line="80" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/go/src/github.com/json-iterator/go/config.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="38" column="4" selection-start-line="38" selection-start-column="4" selection-end-line="38" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/go/src/github.com/stretchr/testify/assert/assertions.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="327">
-          <caret line="556" selection-start-line="556" selection-end-line="556" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/test/StructSet.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4539">
-          <caret line="535" selection-start-line="535" selection-end-line="535" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/test/FieldModelMapInt32EnumSimple.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="197">
-          <caret line="218" column="22" selection-start-line="218" selection-start-column="22" selection-end-line="218" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/test/StructHash.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="157" column="37" selection-start-line="157" selection-start-column="37" selection-end-line="157" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/test/FieldModelMapStructSimpleStructNested.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="218" column="22" selection-start-line="218" selection-start-column="22" selection-end-line="218" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/test/StructHashEx.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/go/src/github.com/shopspring/decimal/decimal.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-591">
-          <caret line="60" column="8" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/proto/fbe/FieldModelDecimal.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -543,13 +532,6 @@
     <entry file="file://$PROJECT_DIR$/proto/test/FinalModelMapInt32OptionalFlagsSimple.go">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/benchmarks/serialization_test.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="58" selection-start-line="58" selection-end-line="58" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/create.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
@@ -581,7 +563,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://Z:/soft/Development/Go/src/runtime/panic.go" />
     <entry file="file://$PROJECT_DIR$/proto/test/StructHashExModel.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="526">
@@ -638,16 +619,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proto/proto/OrderModel.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/proto/Order.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1360">
-          <caret line="83" selection-start-line="83" selection-end-line="83" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/decimal_test.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
@@ -655,58 +626,194 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proto/fbe/Buffer.go">
+    <entry file="file://$PROJECT_DIR$/proto/protoex/FinalSender.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="240" selection-start-line="240" selection-end-line="240" />
+        <state relative-caret-position="2278">
+          <caret line="136" selection-start-line="136" selection-end-line="136" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proto/fbe/Sender.go">
+    <entry file="file://$PROJECT_DIR$/proto/fbe/FinalModelByte.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="88" selection-start-line="88" selection-end-line="88" />
+        <state relative-caret-position="-459" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/proto/AccountModel.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proto/fbe/Receiver.go">
+    <entry file="file://$PROJECT_DIR$/proto/proto/OrderModel.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-656">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        <state relative-caret-position="196">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/soft/Development/Go/src/runtime/proc.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="153" selection-start-line="153" selection-end-line="153" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Z:/soft/Development/Go/src/runtime/panic.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="203">
+          <caret line="680" selection-start-line="680" selection-end-line="680" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/proto/proto/FinalSender.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        <state relative-caret-position="506">
+          <caret line="118" column="17" selection-start-line="118" selection-start-column="17" selection-end-line="118" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/fbe/Buffer.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="236">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/fbe/FieldModelBool.go">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/proto/Account.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-153" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/proto/Balance.go">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/proto/Order.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="577">
+          <caret line="83" selection-start-line="83" selection-end-line="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/fbe/Sender.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/fbe/Receiver.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="400">
+          <caret line="270" selection-start-line="270" selection-end-line="270" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/proto/proto/Sender.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-999">
-          <caret line="30" selection-start-line="30" selection-end-line="30" />
+        <state relative-caret-position="476">
+          <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
           <folding>
             <element signature="e#188#219#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/proto/proto/Receiver.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-806">
+          <caret line="102" selection-start-line="102" selection-end-line="102" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/protoex/Account.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1078">
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/protoex/Balance.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="104" selection-start-line="104" selection-end-line="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/protoex/FieldModelAccount.go">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/protoex/FinalModelBalance.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="158" selection-start-line="158" selection-end-line="158" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/protoex/FieldModelBalance.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="486">
+          <caret line="245" selection-start-line="245" selection-end-line="245" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/test/Sender.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="41" column="23" selection-start-line="41" selection-start-column="23" selection-end-line="41" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/test/FinalSender.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="41" column="39" selection-start-line="41" selection-start-column="39" selection-end-line="41" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/proto/protoex/Sender.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1217">
-          <caret line="136" selection-start-line="136" selection-end-line="136" />
+        <state relative-caret-position="346">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
           <folding>
             <element signature="e#192#241#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proto/protoex/FinalSender.go">
+    <entry file="file://$PROJECT_DIR$/tests/extending_test.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2278">
-          <caret line="136" selection-start-line="136" selection-end-line="136" />
+        <state relative-caret-position="304">
+          <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/benchmarks/serialization_final_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="85" column="49" lean-forward="true" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/benchmarks/serialization_json_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-307" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/benchmarks/serialization_test.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="85" column="49" selection-start-line="85" selection-start-column="49" selection-end-line="85" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/examples/send_receive.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="80" lean-forward="true" selection-start-line="80" selection-end-line="80" />
         </state>
       </provider>
     </entry>

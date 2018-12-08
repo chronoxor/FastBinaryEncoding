@@ -17,7 +17,7 @@ type FinalModelStructOptional struct {
     buffer *fbe.Buffer  // Final model buffer
     offset int          // Final model buffer offset
 
-    FinalModelStructSimple
+    *FinalModelStructSimple
     F100 *FinalModelOptionalBool
     F101 *FinalModelOptionalBool
     F102 *FinalModelOptionalBool
@@ -89,7 +89,7 @@ type FinalModelStructOptional struct {
 // Create a new StructOptional final model
 func NewFinalModelStructOptional(buffer *fbe.Buffer, offset int) *FinalModelStructOptional {
     fbeResult := FinalModelStructOptional{buffer: buffer, offset: offset}
-    fbeResult.FinalModelStructSimple = *NewFinalModelStructSimple(buffer, 0)
+    fbeResult.FinalModelStructSimple = NewFinalModelStructSimple(buffer, 0)
     fbeResult.F100 = NewFinalModelOptionalBool(buffer, 0)
     fbeResult.F101 = NewFinalModelOptionalBool(buffer, 0)
     fbeResult.F102 = NewFinalModelOptionalBool(buffer, 0)
@@ -162,7 +162,7 @@ func NewFinalModelStructOptional(buffer *fbe.Buffer, offset int) *FinalModelStru
 // Get the allocation size
 func (fm *FinalModelStructOptional) FBEAllocationSize(fbeValue *StructOptional) int {
     fbeResult := 0 +
-        fm.FinalModelStructSimple.FBEAllocationSize(&fbeValue.StructSimple) + 
+        fm.FinalModelStructSimple.FBEAllocationSize(fbeValue.StructSimple) + 
         fm.F100.FBEAllocationSize(fbeValue.F100) +
         fm.F101.FBEAllocationSize(fbeValue.F101) +
         fm.F102.FBEAllocationSize(fbeValue.F102) +
@@ -694,7 +694,7 @@ func (fm *FinalModelStructOptional) GetFields(fbeValue *StructOptional) (int, er
     fbeFieldSize := 0
 
     fm.FinalModelStructSimple.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.FinalModelStructSimple.GetFields(&fbeValue.StructSimple); err != nil {
+    if fbeFieldSize, err = fm.FinalModelStructSimple.GetFields(fbeValue.StructSimple); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
@@ -1181,7 +1181,7 @@ func (fm *FinalModelStructOptional) SetFields(fbeValue *StructOptional) (int, er
     fbeFieldSize := 0
 
     fm.FinalModelStructSimple.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.FinalModelStructSimple.SetFields(&fbeValue.StructSimple); err != nil {
+    if fbeFieldSize, err = fm.FinalModelStructSimple.SetFields(fbeValue.StructSimple); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize

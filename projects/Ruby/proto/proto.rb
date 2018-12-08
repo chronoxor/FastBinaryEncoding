@@ -3108,6 +3108,23 @@ module Proto
       @_account_value = Account.new
       @_account_model = AccountModel.new
     end
+
+    protected
+
+    # Receive handlers
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_order(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_balance(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_account(value)
+    end
+
     def on_receive(fbe_type, buffer, offset, size)
       case fbe_type
       when OrderModel::TYPE
@@ -3176,23 +3193,6 @@ module Proto
 
       false
     end
-
-    protected
-
-    # Receive handlers
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_order(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_balance(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_account(value)
-    end
-
   end
 
   # Fast Binary Encoding Proto final sender
@@ -3302,6 +3302,23 @@ module Proto
       @_account_value = Account.new
       @_account_model = AccountFinalModel.new
     end
+
+    protected
+
+    # Receive handlers
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_order(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_balance(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_account(value)
+    end
+
     def on_receive(fbe_type, buffer, offset, size)
       case fbe_type
       when OrderFinalModel::TYPE
@@ -3370,23 +3387,6 @@ module Proto
 
       false
     end
-
-    protected
-
-    # Receive handlers
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_order(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_balance(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_account(value)
-    end
-
   end
 
 end

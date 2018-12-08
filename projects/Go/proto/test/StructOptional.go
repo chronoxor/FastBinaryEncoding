@@ -35,7 +35,7 @@ func (k *StructOptionalKey) String() string {
 
 // StructOptional struct
 type StructOptional struct {
-    StructSimple
+    *StructSimple
     F100 *bool `json:"f100"`
     F101 *bool `json:"f101"`
     F102 *bool `json:"f102"`
@@ -107,7 +107,7 @@ type StructOptional struct {
 // Create a new StructOptional struct
 func NewStructOptional() *StructOptional {
     return &StructOptional{
-        StructSimple: *NewStructSimple(),
+        StructSimple: NewStructSimple(),
         F100: nil,
         F101: fbe.OptionalBool(true),
         F102: nil,

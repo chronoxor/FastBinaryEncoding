@@ -15,18 +15,23 @@ var _ = proto.Version
 
 // Fast Binary Encoding protoex final sender
 type FinalSender struct {
-    fbe.Sender
+    *fbe.Sender
     protoSender *proto.FinalSender
     orderModel *OrderFinalModel
     balanceModel *BalanceFinalModel
     accountModel *AccountFinalModel
 }
 
-// Create a new protoex final sender
-func NewFinalSender(buffer *fbe.Buffer) *FinalSender {
+// Create a new protoex final sender with an empty buffer
+func NewFinalSender() *FinalSender {
+    return NewFinalSenderWithBuffer(fbe.NewEmptyBuffer())
+}
+
+// Create a new protoex final sender with the given buffer
+func NewFinalSenderWithBuffer(buffer *fbe.Buffer) *FinalSender {
     return &FinalSender{
-        *fbe.NewSender(buffer, true),
-        proto.NewFinalSender(buffer),
+        fbe.NewSender(buffer, true),
+        proto.NewFinalSenderWithBuffer(buffer),
         NewOrderFinalModel(buffer),
         NewBalanceFinalModel(buffer),
         NewAccountFinalModel(buffer),
@@ -76,9 +81,7 @@ func (s *FinalSender) SendOrder(value *Order) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
-            return 0, err
-        }
+        s.HandlerOnSendLog.OnSendLog(message)
     }
 
     // Send the serialized value
@@ -101,9 +104,7 @@ func (s *FinalSender) SendBalance(value *Balance) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
-            return 0, err
-        }
+        s.HandlerOnSendLog.OnSendLog(message)
     }
 
     // Send the serialized value
@@ -126,9 +127,7 @@ func (s *FinalSender) SendAccount(value *Account) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
-            return 0, err
-        }
+        s.HandlerOnSendLog.OnSendLog(message)
     }
 
     // Send the serialized value

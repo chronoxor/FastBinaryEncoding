@@ -35,7 +35,7 @@ func (k *StructNestedKey) String() string {
 
 // StructNested struct
 type StructNested struct {
-    StructOptional
+    *StructOptional
     F1000 EnumSimple `json:"f1000"`
     F1001 *EnumSimple `json:"f1001"`
     F1002 EnumTyped `json:"f1002"`
@@ -53,7 +53,7 @@ type StructNested struct {
 // Create a new StructNested struct
 func NewStructNested() *StructNested {
     return &StructNested{
-        StructOptional: *NewStructOptional(),
+        StructOptional: NewStructOptional(),
         F1000: *NewEnumSimple(),
         F1001: nil,
         F1002: EnumTyped_ENUM_VALUE_2,

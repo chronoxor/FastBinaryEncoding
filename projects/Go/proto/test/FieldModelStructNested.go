@@ -20,7 +20,7 @@ type FieldModelStructNested struct {
     // Field model buffer offset
     offset int
 
-    FieldModelStructOptional
+    *FieldModelStructOptional
     F1000 *FieldModelEnumSimple
     F1001 *FieldModelOptionalEnumSimple
     F1002 *FieldModelEnumTyped
@@ -38,7 +38,7 @@ type FieldModelStructNested struct {
 // Create a new StructNested field model
 func NewFieldModelStructNested(buffer *fbe.Buffer, offset int) *FieldModelStructNested {
     fbeResult := FieldModelStructNested{buffer: buffer, offset: offset}
-    fbeResult.FieldModelStructOptional = *NewFieldModelStructOptional(buffer, 4 + 4)
+    fbeResult.FieldModelStructOptional = NewFieldModelStructOptional(buffer, 4 + 4)
     fbeResult.F1000 = NewFieldModelEnumSimple(buffer, fbeResult.FieldModelStructOptional.FBEOffset() + fbeResult.FieldModelStructOptional.FBEBody() - 4 - 4)
     fbeResult.F1001 = NewFieldModelOptionalEnumSimple(buffer, fbeResult.F1000.FBEOffset() + fbeResult.F1000.FBESize())
     fbeResult.F1002 = NewFieldModelEnumTyped(buffer, fbeResult.F1001.FBEOffset() + fbeResult.F1001.FBESize())
@@ -314,7 +314,7 @@ func (fm *FieldModelStructNested) GetFields(fbeValue *StructNested, fbeStructSiz
     fbeCurrentSize := 4 + 4
 
     if (fbeCurrentSize + fm.FieldModelStructOptional.FBEBody() - 4 - 4) <= fbeStructSize {
-        fm.FieldModelStructOptional.GetFields(&fbeValue.StructOptional, fbeStructSize)
+        fm.FieldModelStructOptional.GetFields(fbeValue.StructOptional, fbeStructSize)
     }
     fbeCurrentSize += fm.FieldModelStructOptional.FBEBody() - 4 - 4
 
@@ -444,7 +444,7 @@ func (fm *FieldModelStructNested) Set(fbeValue *StructNested) error {
 func (fm *FieldModelStructNested) SetFields(fbeValue *StructNested) error {
     var err error = nil
 
-    if err = fm.FieldModelStructOptional.SetFields(&fbeValue.StructOptional); err != nil {
+    if err = fm.FieldModelStructOptional.SetFields(fbeValue.StructOptional); err != nil {
         return err
     }
     if err = fm.F1000.Set(&fbeValue.F1000); err != nil {

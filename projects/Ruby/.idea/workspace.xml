@@ -2,15 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28b38142-73b0-4ddb-b81e-352705299fce" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../modules/CppBenchmark" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppBenchmark" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../modules/CppCommon" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppCommon" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../modules/rapidjson" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/rapidjson" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/fbe/Receiver.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/fbe/Receiver.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Ruby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Ruby.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proto/enums.rb" beforeDir="false" afterPath="$PROJECT_DIR$/proto/enums.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe.rb" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proto/proto.rb" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proto/protoex.rb" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex.rb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proto/test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/enums.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/fbe.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/proto.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/protoex.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/test.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_ruby.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_ruby.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,68 +25,36 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Ruby@test_serialization_struct_simple__Ruby.rcov" NAME="test_serialization_struct_simple: Ruby Coverage Results" MODIFIED="1539907034414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@Run_test__test_enums___Ruby.rcov" NAME="Run test 'test_enums': Ruby Coverage Results" MODIFIED="1539963503993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@test_serialization_final_proto__Ruby.rcov" NAME="test_serialization_final_proto: Ruby Coverage Results" MODIFIED="1539910997835" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@serialization_json.rcov" NAME="serialization_json Coverage Results" MODIFIED="1539984749687" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@print_json.rcov" NAME="print_json Coverage Results" MODIFIED="1539969716501" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@serialization_final.rcov" NAME="serialization_final Coverage Results" MODIFIED="1539984743038" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@test_serialization_final_struct_vector__Ruby.rcov" NAME="test_serialization_final_struct_vector: Ruby Coverage Results" MODIFIED="1539911199173" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@test_serialization_final_struct_simple__Ruby.rcov" NAME="test_serialization_final_struct_simple: Ruby Coverage Results" MODIFIED="1539911046270" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@Run_test__test_clone___Ruby.rcov" NAME="Run test 'test_clone': Ruby Coverage Results" MODIFIED="1539885792313" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@Run_test__test_serialization___Ruby.rcov" NAME="Run test 'test_serialization': Ruby Coverage Results" MODIFIED="1539911384633" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@Run_test__test_serialization_final___Ruby.rcov" NAME="Run test 'test_serialization_final': Ruby Coverage Results" MODIFIED="1539911380679" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@Run_test__test_send_seceive___Ruby.rcov" NAME="Run test 'test_send_seceive': Ruby Coverage Results" MODIFIED="1539902873333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@benchmark_serialization_final.rcov" NAME="benchmark_serialization_final Coverage Results" MODIFIED="1539984610084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@proto.rcov" NAME="proto Coverage Results" MODIFIED="1539804934547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/proto" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@Run_test__test_serialization_json___Ruby.rcov" NAME="Run test 'test_serialization_json': Ruby Coverage Results" MODIFIED="1539969630158" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@enums.rcov" NAME="enums Coverage Results" MODIFIED="1539787605944" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/proto" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@Run_test__test_create___Ruby.rcov" NAME="Run test 'test_create': Ruby Coverage Results" MODIFIED="1539884441267" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@Run_test__test_extending___Ruby.rcov" NAME="Run test 'test_extending': Ruby Coverage Results" MODIFIED="1539898276638" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@print.rcov" NAME="print Coverage Results" MODIFIED="1539969713993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@benchmark_serialization.rcov" NAME="benchmark_serialization Coverage Results" MODIFIED="1539983534279" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@test_serialization_final_struct_nested__Ruby.rcov" NAME="test_serialization_final_struct_nested: Ruby Coverage Results" MODIFIED="1539911222646" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@send_receive.rcov" NAME="send_receive Coverage Results" MODIFIED="1544194361068" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@test_serialization_struct_array__Ruby.rcov" NAME="test_serialization_struct_array: Ruby Coverage Results" MODIFIED="1539908744030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@benchmark_send_receive.rcov" NAME="benchmark_send_receive Coverage Results" MODIFIED="1539986019708" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/Ruby@create.rcov" NAME="create Coverage Results" MODIFIED="1539969711196" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@Run_test__test_decimal___Ruby.rcov" NAME="Run test 'test_decimal': Ruby Coverage Results" MODIFIED="1539867758133" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@All_tests_in_tests__Ruby.rcov" NAME="All tests in tests: Ruby Coverage Results" MODIFIED="1544194350203" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@Run_test__test_enums___Ruby.rcov" NAME="Run test 'test_enums': Ruby Coverage Results" MODIFIED="1539963503993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@benchmark_serialization.rcov" NAME="benchmark_serialization Coverage Results" MODIFIED="1539983534279" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@test_serialization_struct_array__Ruby.rcov" NAME="test_serialization_struct_array: Ruby Coverage Results" MODIFIED="1539908744030" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@Run_test__test_send_seceive___Ruby.rcov" NAME="Run test 'test_send_seceive': Ruby Coverage Results" MODIFIED="1539902873333" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/Ruby@serialization.rcov" NAME="serialization Coverage Results" MODIFIED="1539984739432" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/Ruby@benchmark_serialization_json.rcov" NAME="benchmark_serialization_json Coverage Results" MODIFIED="1539985079092" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@test_serialization_final_struct_vector__Ruby.rcov" NAME="test_serialization_final_struct_vector: Ruby Coverage Results" MODIFIED="1539911199173" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@send_receive.rcov" NAME="send_receive Coverage Results" MODIFIED="1544194361068" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@test_serialization_final_struct_simple__Ruby.rcov" NAME="test_serialization_final_struct_simple: Ruby Coverage Results" MODIFIED="1539911046270" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@proto.rcov" NAME="proto Coverage Results" MODIFIED="1539804934547" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/proto" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@Run_test__test_serialization_final___Ruby.rcov" NAME="Run test 'test_serialization_final': Ruby Coverage Results" MODIFIED="1539911380679" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@Run_test__test_extending___Ruby.rcov" NAME="Run test 'test_extending': Ruby Coverage Results" MODIFIED="1539898276638" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@Run_test__test_clone___Ruby.rcov" NAME="Run test 'test_clone': Ruby Coverage Results" MODIFIED="1539885792313" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@print.rcov" NAME="print Coverage Results" MODIFIED="1539969713993" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@Run_test__test_decimal___Ruby.rcov" NAME="Run test 'test_decimal': Ruby Coverage Results" MODIFIED="1539867758133" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@Run_test__test_create___Ruby.rcov" NAME="Run test 'test_create': Ruby Coverage Results" MODIFIED="1539884441267" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@serialization_final.rcov" NAME="serialization_final Coverage Results" MODIFIED="1539984743038" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@benchmark_serialization_final.rcov" NAME="benchmark_serialization_final Coverage Results" MODIFIED="1539984610084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@serialization_json.rcov" NAME="serialization_json Coverage Results" MODIFIED="1539984749687" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/Ruby@test.rcov" NAME="test Coverage Results" MODIFIED="1539963809463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/proto" MODULE_NAME="Ruby" />
-  </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="1172603075">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="2" />
-          <entry key="project.open.time.3" value="1" />
-          <entry key="project.open.time.6" value="1" />
-          <entry key="project.opened" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="rb" value="3" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="Ruby" value="3" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="rb" value="11" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="Ruby" value="11" />
-        </counts>
-      </usages-collector>
-    </session>
+    <SUITE FILE_PATH="coverage/Ruby@enums.rcov" NAME="enums Coverage Results" MODIFIED="1539787605944" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/proto" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@All_tests_in_tests__Ruby.rcov" NAME="All tests in tests: Ruby Coverage Results" MODIFIED="1544224623539" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@test_serialization_struct_simple__Ruby.rcov" NAME="test_serialization_struct_simple: Ruby Coverage Results" MODIFIED="1539907034414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@benchmark_send_receive.rcov" NAME="benchmark_send_receive Coverage Results" MODIFIED="1539986019708" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@benchmark_serialization_json.rcov" NAME="benchmark_serialization_json Coverage Results" MODIFIED="1539985079092" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@test_serialization_final_proto__Ruby.rcov" NAME="test_serialization_final_proto: Ruby Coverage Results" MODIFIED="1539910997835" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@Run_test__test_serialization___Ruby.rcov" NAME="Run test 'test_serialization': Ruby Coverage Results" MODIFIED="1539911384633" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@print_json.rcov" NAME="print_json Coverage Results" MODIFIED="1539969716501" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@test_serialization_final_struct_nested__Ruby.rcov" NAME="test_serialization_final_struct_nested: Ruby Coverage Results" MODIFIED="1539911222646" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/Ruby@Run_test__test_serialization_json___Ruby.rcov" NAME="Run test 'test_serialization_json': Ruby Coverage Results" MODIFIED="1539969630158" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
   </component>
   <component name="FileEditorManager">
     <leaf />
@@ -123,12 +96,6 @@
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="430" />
     <option name="y" value="180" />
@@ -158,7 +125,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -185,6 +151,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -204,7 +171,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Ruby.send_receive">
+  <component name="RunManager" selected="Test::Unit/Shoulda/Minitest.All tests in tests: Ruby">
     <configuration name="benchmark_send_receive" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
       <module name="Ruby" />
       <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="" />
@@ -262,8 +229,8 @@
       <method v="2" />
     </configuration>
     <configuration name="All tests in tests: Ruby" type="TestUnitRunConfigurationType" factoryName="Test::Unit/Shoulda/Minitest" temporary="true">
-      <predefined_log_file id="RUBY_TESTUNIT" enabled="true" />
       <module name="Ruby" />
+      <predefined_log_file enabled="true" id="RUBY_TESTUNIT" />
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="RUBY_ARGS" VALUE="" />
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="WORK DIR" VALUE="$MODULE_DIR$" />
       <RTEST_RUN_CONFIG_SETTINGS_ID NAME="SHOULD_USE_SDK" VALUE="false" />
@@ -290,13 +257,13 @@
       <item itemvalue="Ruby.serialization_json" />
       <item itemvalue="Ruby.benchmark_serialization_json" />
       <item itemvalue="Ruby.benchmark_send_receive" />
-      <item itemvalue="Test::Unit/Shoulda/Minitest.All tests in tests: Ruby" />
       <item itemvalue="Ruby.send_receive" />
+      <item itemvalue="Test::Unit/Shoulda/Minitest.All tests in tests: Ruby" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Ruby.send_receive" />
         <item itemvalue="Test::Unit/Shoulda/Minitest.All tests in tests: Ruby" />
+        <item itemvalue="Ruby.send_receive" />
         <item itemvalue="Ruby.benchmark_send_receive" />
         <item itemvalue="Ruby.benchmark_serialization_json" />
         <item itemvalue="Ruby.serialization_json" />
@@ -330,13 +297,11 @@
       <workItem from="1543455110641" duration="16000" />
       <workItem from="1543926931308" duration="134000" />
       <workItem from="1544193944224" duration="425000" />
+      <workItem from="1544221669906" duration="638000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Run_test_'test_serialization_json'__Ruby - 2018.10.19 at 20h 20m 17s.xml">
-      <configuration name="Run test 'test_serialization_json': Ruby" configurationId="TestUnitRunConfigurationType" />
-    </history-entry>
     <history-entry file="Run_test_'test_serialization_json'__Ruby - 2018.10.19 at 20h 20m 49s.xml">
       <configuration name="Run test 'test_serialization_json': Ruby" configurationId="TestUnitRunConfigurationType" />
     </history-entry>
@@ -364,19 +329,22 @@
     <history-entry file="All_tests_in_tests__Ruby - 2018.12.07 at 17h 52m 31s.xml">
       <configuration name="All tests in tests: Ruby" configurationId="TestUnitRunConfigurationType" />
     </history-entry>
+    <history-entry file="All_tests_in_tests__Ruby - 2018.12.08 at 01h 28m 16s.xml">
+      <configuration name="All tests in tests: Ruby" configurationId="TestUnitRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="130381000" />
+    <option name="totallyTimeSpent" value="131019000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="430" y="180" width="1636" height="733" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25571066" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25888324" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49873096" weight="0.39398998" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49809644" weight="0.39333335" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.47069767" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -385,7 +353,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32997987" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50126904" side_tool="true" visible="true" weight="0.39398998" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50190353" side_tool="true" visible="true" weight="0.39333335" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -394,9 +362,6 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -4325,13 +4325,13 @@ func (f OnSendFunc) OnSend(buffer []byte) (int, error) {
 
 // Send log message interface
 type OnSendLog interface {
-    OnSendLog(message string) error
+    OnSendLog(message string)
 }
 
 // Send log message function
-type OnSendLogFunc func(message string) error
-func (f OnSendLogFunc) OnSendLog(message string) error {
-    return f(message)
+type OnSendLogFunc func(message string)
+func (f OnSendLogFunc) OnSendLog(message string) {
+    f(message)
 }
 
 // Fast Binary Encoding base sender
@@ -4344,16 +4344,16 @@ type Sender struct {
     final bool
 
     // Send message handler
-    OnSendHandler OnSend
+    HandlerOnSend OnSend
     // Send log message handler
-    OnSendLogHandler OnSendLog
+    HandlerOnSendLog OnSendLog
 }
 
 // Create a new base sender
 func NewSender(buffer *Buffer, final bool) *Sender {
     sender := &Sender{buffer: buffer, logging: false, final: final}
     sender.OnSendFunc(func(buffer []byte) (int, error) { panic("send handler is not provided") })
-    sender.OnSendLogFunc(func(message string) error { return nil })
+    sender.OnSendLogFunc(func(message string) {})
     return sender
 }
 
@@ -4369,13 +4369,13 @@ func (s *Sender) Logging() bool { return s.logging }
 func (s *Sender) SetLogging(logging bool) { s.logging = logging }
 
 // Send message handler
-func (s *Sender) OnSend(handler OnSend) { s.OnSendHandler = handler }
+func (s *Sender) OnSendHandler(handler OnSend) { s.HandlerOnSend = handler }
 // Send message handler function
-func (s *Sender) OnSendFunc(function func(buffer []byte) (int, error)) { s.OnSendHandler = OnSendFunc(function) }
+func (s *Sender) OnSendFunc(function func(buffer []byte) (int, error)) { s.HandlerOnSend = OnSendFunc(function) }
 // Send log message handler
-func (s *Sender) OnSendLog(handler OnSendLog) { s.OnSendLogHandler = handler }
+func (s *Sender) OnSendLogHandler(handler OnSendLog) { s.HandlerOnSendLog = handler }
 // Send log message handler function
-func (s *Sender) OnSendLogFunc(function func(message string) error) { s.OnSendLogHandler = OnSendLogFunc(function) }
+func (s *Sender) OnSendLogFunc(function func(message string)) { s.HandlerOnSendLog = OnSendLogFunc(function) }
 
 // Send serialized buffer.
 // Direct call of the method requires knowledge about internals of FBE models serialization.
@@ -4389,7 +4389,7 @@ func (s *Sender) SendSerialized(serialized int) (int, error) {
     s.buffer.Shift(serialized)
 
     // Send the value
-    sent, err := s.OnSendHandler.OnSend(s.buffer.Data()[:s.buffer.Size()])
+    sent, err := s.HandlerOnSend.OnSend(s.buffer.Data()[:s.buffer.Size()])
     s.buffer.Remove(0, sent)
     return sent, err
 }
@@ -4434,13 +4434,13 @@ func (f OnReceiveFunc) OnReceive(fbeType int, buffer []byte) (bool, error) {
 
 // Receive log message interface
 type OnReceiveLog interface {
-    OnReceiveLog(message string) error
+    OnReceiveLog(message string)
 }
 
 // Receive log message function
-type OnReceiveLogFunc func(message string) error
-func (f OnReceiveLogFunc) OnReceiveLog(message string) error {
-    return f(message)
+type OnReceiveLogFunc func(message string)
+func (f OnReceiveLogFunc) OnReceiveLog(message string) {
+    f(message)
 }
 
 // Fast Binary Encoding base receiver
@@ -4453,16 +4453,16 @@ type Receiver struct {
     final bool
 
     // Receive message handler
-    OnReceiveHandler OnReceive
+    HandlerOnReceive OnReceive
     // Receive log message handler
-    OnReceiveLogHandler OnReceiveLog
+    HandlerOnReceiveLog OnReceiveLog
 }
 
 // Create a new base receiver
 func NewReceiver(buffer *Buffer, final bool) *Receiver {
     receiver := &Receiver{buffer: buffer, logging: false, final: final}
     receiver.OnReceiveFunc(func(fbeType int, buffer []byte) (bool, error) { panic("receive handler is not provided") })
-    receiver.OnReceiveLogFunc(func(message string) error { return nil })
+    receiver.OnReceiveLogFunc(func(message string) {})
     return receiver
 }
 
@@ -4478,17 +4478,237 @@ func (r *Receiver) Logging() bool { return r.logging }
 func (r *Receiver) SetLogging(logging bool) { r.logging = logging }
 
 // Receive message handler
-func (r *Receiver) OnReceive(handler OnReceive) { r.OnReceiveHandler = handler }
+func (r *Receiver) OnReceiveHandler(handler OnReceive) { r.HandlerOnReceive = handler }
 // Receive message handler function
-func (r *Receiver) OnReceiveFunc(function func(fbeType int, buffer []byte) (bool, error)) { r.OnReceiveHandler = OnReceiveFunc(function) }
+func (r *Receiver) OnReceiveFunc(function func(fbeType int, buffer []byte) (bool, error)) { r.HandlerOnReceive = OnReceiveFunc(function) }
 // Receive log message handler
-func (r *Receiver) OnReceiveLog(handler OnReceiveLog) { r.OnReceiveLogHandler = handler }
+func (r *Receiver) OnReceiveLogHandler(handler OnReceiveLog) { r.HandlerOnReceiveLog = handler }
 // Receive log message handler function
-func (r *Receiver) OnReceiveLogFunc(function func(message string) error) { r.OnReceiveLogHandler = OnReceiveLogFunc(function) }
+func (r *Receiver) OnReceiveLogFunc(function func(message string)) { r.HandlerOnReceiveLog = OnReceiveLogFunc(function) }
 
-// Receive data
+// Receive bytes memory buffer
 func (r *Receiver) Receive(buffer []byte) error {
+    size := len(buffer)
+    if size <= 0 {
+        return nil
+    }
+
+    // Storage buffer
+    offset0 := r.buffer.offset
+    offset1 := r.buffer.size
+    size1 := r.buffer.size
+
+    // Receive buffer
+    offset2 := 0
+    size2 := size
+
+    // While receive buffer is available to handle...
+    for offset2 < size2 {
+        var messageBuffer []byte = nil
+        messageOffset := 0
+        messageSize := 0
+
+        // Try to receive message size
+        messageSizeCopied := false
+        messageSizeFound := false
+        for !messageSizeFound {
+            // Look into the storage buffer
+            if offset0 < size1 {
+                count := min(size1 - offset0, 4)
+                if count == 4 {
+                    messageSizeCopied = true
+                    messageSizeFound = true
+                    messageSize = int(ReadUInt32(r.buffer.data, r.buffer.offset + offset0))
+                    offset0 += 4
+                    break
+                } else {
+                    // Fill remaining data from the receive buffer
+                    if offset2 < size2 {
+                        count := min(size2 - offset2, 4 - count)
+
+                        // Allocate and refresh the storage buffer
+                        r.buffer.Allocate(count)
+                        size1 += count
+
+                        copy(r.buffer.data[offset1:offset1 + count], buffer[offset2:offset2 + count])
+
+                        offset1 += count
+                        offset2 += count
+                        continue
+                    } else {
+                        break
+                    }
+                }
+            }
+
+            // Look into the receive buffer
+            if offset2 < size2 {
+                count := min(size2 - offset2, 4)
+                if count == 4 {
+                    messageSizeFound = true
+                    messageSize = int(ReadUInt32(buffer, offset2))
+                    offset2 += 4
+                    break
+                } else {
+                    // Allocate and refresh the storage buffer
+                    r.buffer.Allocate(count)
+                    size1 += count
+
+                    copy(r.buffer.data[offset1:offset1 + count], buffer[offset2:offset2 + count])
+                    offset1 += count
+                    offset2 += count
+                    continue
+                }
+            } else {
+                break
+            }
+        }
+
+        if !messageSizeFound {
+            return nil
+        }
+
+        // Check the message full size
+        if messageSize < (4 + 4 + 4 + 4) {
+            return nil
+        }
+
+        // Try to receive message body
+        messageFound := false
+        for !messageFound {
+            // Look into the storage buffer
+            if offset0 < size1 {
+                count := min(size1 - offset0, messageSize - 4)
+                if count == (messageSize - 4) {
+                    messageFound = true
+                    messageBuffer = r.buffer.data
+                    messageOffset = offset0 - 4
+                    offset0 += messageSize - 4
+                    break
+                } else {
+                    // Fill remaining data from the receive buffer
+                    if offset2 < size2 {
+                        // Copy message size into the storage buffer
+                        if !messageSizeCopied {
+                            // Allocate and refresh the storage buffer
+                            r.buffer.Allocate(4)
+                            size1 += 4
+
+                            WriteUInt32(r.buffer.data, r.buffer.offset + offset0, uint32(messageSize))
+                            offset0 += 4
+                            offset1 += 4
+
+                            messageSizeCopied = true
+                        }
+
+                        count = min(size2 - offset2, messageSize - 4 - count)
+
+                        // Allocate and refresh the storage buffer
+                        r.buffer.Allocate(count)
+                        size1 += count
+
+                        copy(r.buffer.data[offset1:offset1 + count], buffer[offset2:offset2 + count])
+                        offset1 += count
+                        offset2 += count
+                        continue
+                    } else {
+                        break
+                    }
+                }
+            }
+
+            // Look into the receive buffer
+            if offset2 < size2 {
+                count := min(size2 - offset2, messageSize - 4)
+                if !messageSizeCopied && (count == (messageSize - 4)) {
+                    messageFound = true
+                    messageBuffer = buffer
+                    messageOffset = offset2 - 4
+                    offset2 += messageSize - 4
+                    break
+                } else {
+                    // Copy message size into the storage buffer
+                    if !messageSizeCopied {
+                        // Allocate and refresh the storage buffer
+                        r.buffer.Allocate(4)
+                        size1 += 4
+
+                        WriteUInt32(r.buffer.data, r.buffer.offset + offset0, uint32(messageSize))
+                        offset0 += 4
+                        offset1 += 4
+
+                        messageSizeCopied = true
+                    }
+
+                    // Allocate and refresh the storage buffer
+                    r.buffer.Allocate(count)
+                    size1 += count
+
+                    copy(r.buffer.data[offset1:offset1 + count], buffer[offset2:offset2 + count])
+                    offset1 += count
+                    offset2 += count
+                    continue
+                }
+            } else {
+                break
+            }
+        }
+
+        if !messageFound {
+            // Copy message size into the storage buffer
+            if !messageSizeCopied {
+                // Allocate and refresh the storage buffer
+                r.buffer.Allocate(4)
+                size1 += 4
+
+                WriteUInt32(r.buffer.data, r.buffer.offset + offset0, uint32(messageSize))
+                offset0 += 4
+                offset1 += 4
+
+                messageSizeCopied = true
+            }
+            return nil
+        }
+
+        // Read the message parameters
+        var fbeStructSize = 0
+        var fbeStructType = 0
+        if r.final {
+            fbeStructSize = int(ReadUInt32(messageBuffer, messageOffset))
+            fbeStructType = int(ReadUInt32(messageBuffer, messageOffset + 4))
+        } else {
+            fbeStructOffset := int(ReadUInt32(messageBuffer, messageOffset + 4))
+            fbeStructSize = int(ReadUInt32(messageBuffer, messageOffset + fbeStructOffset))
+            fbeStructType = int(ReadUInt32(messageBuffer, messageOffset + fbeStructOffset+ 4))
+        }
+        _ = fbeStructSize
+
+        // Handle the message
+        if _, err := r.HandlerOnReceive.OnReceive(fbeStructType, messageBuffer[messageOffset:messageOffset + messageSize]); err != nil {
+            return err
+        }
+
+        // Reset the storage buffer
+        r.buffer.Reset()
+
+        // Refresh the storage buffer
+        offset1 = r.buffer.offset
+        size1 = r.buffer.size
+    }
     return nil
+}
+
+// Receive buffer
+func (r *Receiver) ReceiveBuffer(buffer *Buffer) error {
+    return r.Receive(buffer.data)
+}
+
+// Min utility function
+func min(a, b int) int {
+    if a < b {
+        return a
+    }
+    return b
 }
 )CODE";
 
@@ -5196,7 +5416,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     WriteLineIndent("type " + struct_name + " struct {");
     Indent(1);
     if (!base_type.empty())
-        WriteLineIndent(base_type);
+        WriteLineIndent("*" + base_type);
     if (s->body)
         for (const auto& field : s->body->fields)
             WriteLineIndent(ConvertToUpper(*field->name) + " " + ConvertTypeName(*field) + " `json:\"" + *field->name + "\"`");
@@ -5211,7 +5431,7 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     WriteLineIndent("return &" + struct_name + "{");
     Indent(1);
     if (!base_type.empty())
-        WriteLineIndent(ConvertBaseName(base_type) + ": *" + ConvertNewName(base_type) + "(),");
+        WriteLineIndent(ConvertBaseName(base_type) + ": " + ConvertNewName(base_type) + "(),");
     if (s->body)
     {
         for (const auto& field : s->body->fields)
@@ -5750,7 +5970,7 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
     WriteLineIndent("offset int");
     WriteLine();
     if (!base_type.empty())
-        WriteLineIndent(base_field_model);
+        WriteLineIndent("*" + base_field_model);
     if (s->body)
         for (const auto& field : s->body->fields)
             WriteLineIndent(ConvertToUpper(*field->name) + " *" + ConvertTypeFieldDeclaration(*field, false));
@@ -5767,7 +5987,7 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
     WriteLineIndent("fbeResult := " + field_model_name + "{buffer: buffer, offset: offset}");
     if (!base_type.empty())
     {
-        WriteLineIndent("fbeResult." + base_field_name + " = *" + ConvertModelName(*s->base, "NewFieldModel") + "(buffer, " + prev_offset + " + " + prev_size + ")");
+        WriteLineIndent("fbeResult." + base_field_name + " = " + ConvertModelName(*s->base, "NewFieldModel") + "(buffer, " + prev_offset + " + " + prev_size + ")");
         prev_offset = "fbeResult." + base_field_name + ".FBEOffset()";
         prev_size = "fbeResult." + base_field_name + ".FBEBody() - 4 - 4";
     }
@@ -6020,7 +6240,7 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
         WriteLine();
         WriteLineIndent("if (fbeCurrentSize + fm." + base_field_name + ".FBEBody() - 4 - 4) <= fbeStructSize {");
         Indent(1);
-        WriteLineIndent("fm." + base_field_name + ".GetFields(&fbeValue." + ConvertBaseName(base_type) + ", fbeStructSize)");
+        WriteLineIndent("fm." + base_field_name + ".GetFields(fbeValue." + ConvertBaseName(base_type) + ", fbeStructSize)");
         Indent(-1);
         WriteLineIndent("}");
         WriteLineIndent("fbeCurrentSize += fm." + base_field_name + ".FBEBody() - 4 - 4");
@@ -6123,7 +6343,7 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
     WriteLine();
     if (!base_type.empty())
     {
-        WriteLineIndent("if err = fm." + base_field_name + ".SetFields(&fbeValue." + ConvertBaseName(base_type) + "); err != nil {");
+        WriteLineIndent("if err = fm." + base_field_name + ".SetFields(fbeValue." + ConvertBaseName(base_type) + "); err != nil {");
         Indent(1);
         WriteLineIndent("return err");
         Indent(-1);
@@ -6353,7 +6573,7 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
     WriteLineIndent("offset int          // Final model buffer offset");
     WriteLine();
     if (!base_type.empty())
-        WriteLineIndent(base_final_model);
+        WriteLineIndent("*" + base_final_model);
     if (s->body)
         for (const auto& field : s->body->fields)
             WriteLineIndent(ConvertToUpper(*field->name) + " *" + ConvertTypeFieldDeclaration(*field, true));
@@ -6367,7 +6587,7 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
     Indent(1);
     WriteLineIndent("fbeResult := " + final_model_name + "{buffer: buffer, offset: offset}");
     if (!base_type.empty())
-        WriteLineIndent("fbeResult." + base_final_name + " = *" + ConvertModelName(*s->base, "NewFinalModel") + "(buffer, 0)");
+        WriteLineIndent("fbeResult." + base_final_name + " = " + ConvertModelName(*s->base, "NewFinalModel") + "(buffer, 0)");
     if (s->body)
         for (const auto& field : s->body->fields)
             WriteLineIndent("fbeResult." + ConvertToUpper(*field->name) + " = " + ConvertTypeFieldInitialization(*field, "0", true));
@@ -6383,7 +6603,7 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
     WriteLineIndent("fbeResult := 0 +");
     Indent(1);
     if (!base_type.empty())
-        WriteLineIndent("fm." + base_final_name + ".FBEAllocationSize(&fbeValue." + ConvertBaseName(base_type) + ") + ");
+        WriteLineIndent("fm." + base_final_name + ".FBEAllocationSize(fbeValue." + ConvertBaseName(base_type) + ") + ");
     if (s->body)
     {
         for (const auto& field : s->body->fields)
@@ -6516,7 +6736,7 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
     {
         WriteLine();
         WriteLineIndent("fm." + base_final_name + ".SetFBEOffset(fbeCurrentOffset)");
-        WriteLineIndent("if fbeFieldSize, err = fm." + base_final_name + ".GetFields(&fbeValue." + ConvertBaseName(base_type) + "); err != nil {");
+        WriteLineIndent("if fbeFieldSize, err = fm." + base_final_name + ".GetFields(fbeValue." + ConvertBaseName(base_type) + "); err != nil {");
         Indent(1);
         WriteLineIndent("return fbeCurrentSize, err");
         Indent(-1);
@@ -6582,7 +6802,7 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
     {
         WriteLine();
         WriteLineIndent("fm." + base_final_name + ".SetFBEOffset(fbeCurrentOffset)");
-        WriteLineIndent("if fbeFieldSize, err = fm." + base_final_name + ".SetFields(&fbeValue." + ConvertBaseName(base_type) + "); err != nil {");
+        WriteLineIndent("if fbeFieldSize, err = fm." + base_final_name + ".SetFields(fbeValue." + ConvertBaseName(base_type) + "); err != nil {");
         Indent(1);
         WriteLineIndent("return fbeCurrentSize, err");
         Indent(-1);
@@ -6826,7 +7046,7 @@ void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, const CppCom
     WriteLineIndent("// Fast Binary Encoding " + *p->name + (final ? " final " : " ") + "sender");
     WriteLineIndent("type " + sender_name + " struct {");
     Indent(1);
-    WriteLineIndent("fbe.Sender");
+    WriteLineIndent("*fbe.Sender");
     if (p->body)
     {
         if (p->import)
@@ -6840,17 +7060,24 @@ void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, const CppCom
 
     // Generate sender constructor
     WriteLine();
-    WriteLineIndent("// Create a new " + *p->name + (final ? " final " : " ") + "sender");
-    WriteLineIndent("func New" + sender_name + "(buffer *fbe.Buffer) *" + sender_name + " {");
+    WriteLineIndent("// Create a new " + *p->name + (final ? " final " : " ") + "sender with an empty buffer");
+    WriteLineIndent("func New" + sender_name + "() *" + sender_name + " {");
+    Indent(1);
+    WriteLineIndent("return New" + sender_name + "WithBuffer(fbe.NewEmptyBuffer())");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("// Create a new " + *p->name + (final ? " final " : " ") + "sender with the given buffer");
+    WriteLineIndent("func New" + sender_name + "WithBuffer(buffer *fbe.Buffer) *" + sender_name + " {");
     Indent(1);
     WriteLineIndent("return &" + sender_name + "{");
     Indent(1);
-    WriteLineIndent("*fbe.NewSender(buffer, " + std::string(final ? "true" : "false") + "),");
+    WriteLineIndent("fbe.NewSender(buffer, " + std::string(final ? "true" : "false") + "),");
     if (p->body)
     {
         if (p->import)
             for (const auto& import : p->import->imports)
-                WriteLineIndent(*import + ".New" + (final ? "Final" : "") + "Sender(buffer),");
+                WriteLineIndent(*import + ".New" + (final ? "Final" : "") + "SenderWithBuffer(buffer),");
         for (const auto& s : p->body->structs)
             WriteLineIndent("New" + ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model(buffer),");
     }
@@ -6938,11 +7165,7 @@ void GeneratorGo::GenerateSender(const std::shared_ptr<Package>& p, const CppCom
             WriteLineIndent("if s.Logging() {");
             Indent(1);
             WriteLineIndent("message := value.String()");
-            WriteLineIndent("if err := s.OnSendLogHandler.OnSendLog(message); err != nil {");
-            Indent(1);
-            WriteLineIndent("return 0, err");
-            Indent(-1);
-            WriteLineIndent("}");
+            WriteLineIndent("s.HandlerOnSendLog.OnSendLog(message)");
             Indent(-1);
             WriteLineIndent("}");
             WriteLine();

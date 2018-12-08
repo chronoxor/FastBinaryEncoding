@@ -35,14 +35,14 @@ func (k *BalanceKey) String() string {
 
 // Balance struct
 type Balance struct {
-    proto.Balance
+    *proto.Balance
     Locked float64 `json:"locked"`
 }
 
 // Create a new Balance struct
 func NewBalance() *Balance {
     return &Balance{
-        Balance: *proto.NewBalance(),
+        Balance: proto.NewBalance(),
         Locked: float64(0.0),
     }
 }

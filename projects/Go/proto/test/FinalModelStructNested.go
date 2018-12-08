@@ -17,7 +17,7 @@ type FinalModelStructNested struct {
     buffer *fbe.Buffer  // Final model buffer
     offset int          // Final model buffer offset
 
-    FinalModelStructOptional
+    *FinalModelStructOptional
     F1000 *FinalModelEnumSimple
     F1001 *FinalModelOptionalEnumSimple
     F1002 *FinalModelEnumTyped
@@ -35,7 +35,7 @@ type FinalModelStructNested struct {
 // Create a new StructNested final model
 func NewFinalModelStructNested(buffer *fbe.Buffer, offset int) *FinalModelStructNested {
     fbeResult := FinalModelStructNested{buffer: buffer, offset: offset}
-    fbeResult.FinalModelStructOptional = *NewFinalModelStructOptional(buffer, 0)
+    fbeResult.FinalModelStructOptional = NewFinalModelStructOptional(buffer, 0)
     fbeResult.F1000 = NewFinalModelEnumSimple(buffer, 0)
     fbeResult.F1001 = NewFinalModelOptionalEnumSimple(buffer, 0)
     fbeResult.F1002 = NewFinalModelEnumTyped(buffer, 0)
@@ -54,7 +54,7 @@ func NewFinalModelStructNested(buffer *fbe.Buffer, offset int) *FinalModelStruct
 // Get the allocation size
 func (fm *FinalModelStructNested) FBEAllocationSize(fbeValue *StructNested) int {
     fbeResult := 0 +
-        fm.FinalModelStructOptional.FBEAllocationSize(&fbeValue.StructOptional) + 
+        fm.FinalModelStructOptional.FBEAllocationSize(fbeValue.StructOptional) + 
         fm.F1000.FBEAllocationSize(&fbeValue.F1000) +
         fm.F1001.FBEAllocationSize(fbeValue.F1001) +
         fm.F1002.FBEAllocationSize(&fbeValue.F1002) +
@@ -208,7 +208,7 @@ func (fm *FinalModelStructNested) GetFields(fbeValue *StructNested) (int, error)
     fbeFieldSize := 0
 
     fm.FinalModelStructOptional.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.FinalModelStructOptional.GetFields(&fbeValue.StructOptional); err != nil {
+    if fbeFieldSize, err = fm.FinalModelStructOptional.GetFields(fbeValue.StructOptional); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
@@ -317,7 +317,7 @@ func (fm *FinalModelStructNested) SetFields(fbeValue *StructNested) (int, error)
     fbeFieldSize := 0
 
     fm.FinalModelStructOptional.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.FinalModelStructOptional.SetFields(&fbeValue.StructOptional); err != nil {
+    if fbeFieldSize, err = fm.FinalModelStructOptional.SetFields(fbeValue.StructOptional); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize

@@ -18,13 +18,13 @@ func (f OnSendFunc) OnSend(buffer []byte) (int, error) {
 
 // Send log message interface
 type OnSendLog interface {
-    OnSendLog(message string) error
+    OnSendLog(message string)
 }
 
 // Send log message function
-type OnSendLogFunc func(message string) error
-func (f OnSendLogFunc) OnSendLog(message string) error {
-    return f(message)
+type OnSendLogFunc func(message string)
+func (f OnSendLogFunc) OnSendLog(message string) {
+    f(message)
 }
 
 // Fast Binary Encoding base sender
@@ -37,16 +37,16 @@ type Sender struct {
     final bool
 
     // Send message handler
-    OnSendHandler OnSend
+    HandlerOnSend OnSend
     // Send log message handler
-    OnSendLogHandler OnSendLog
+    HandlerOnSendLog OnSendLog
 }
 
 // Create a new base sender
 func NewSender(buffer *Buffer, final bool) *Sender {
     sender := &Sender{buffer: buffer, logging: false, final: final}
     sender.OnSendFunc(func(buffer []byte) (int, error) { panic("send handler is not provided") })
-    sender.OnSendLogFunc(func(message string) error { return nil })
+    sender.OnSendLogFunc(func(message string) {})
     return sender
 }
 
@@ -62,13 +62,13 @@ func (s *Sender) Logging() bool { return s.logging }
 func (s *Sender) SetLogging(logging bool) { s.logging = logging }
 
 // Send message handler
-func (s *Sender) OnSend(handler OnSend) { s.OnSendHandler = handler }
+func (s *Sender) OnSendHandler(handler OnSend) { s.HandlerOnSend = handler }
 // Send message handler function
-func (s *Sender) OnSendFunc(function func(buffer []byte) (int, error)) { s.OnSendHandler = OnSendFunc(function) }
+func (s *Sender) OnSendFunc(function func(buffer []byte) (int, error)) { s.HandlerOnSend = OnSendFunc(function) }
 // Send log message handler
-func (s *Sender) OnSendLog(handler OnSendLog) { s.OnSendLogHandler = handler }
+func (s *Sender) OnSendLogHandler(handler OnSendLog) { s.HandlerOnSendLog = handler }
 // Send log message handler function
-func (s *Sender) OnSendLogFunc(function func(message string) error) { s.OnSendLogHandler = OnSendLogFunc(function) }
+func (s *Sender) OnSendLogFunc(function func(message string)) { s.HandlerOnSendLog = OnSendLogFunc(function) }
 
 // Send serialized buffer.
 // Direct call of the method requires knowledge about internals of FBE models serialization.
@@ -82,7 +82,7 @@ func (s *Sender) SendSerialized(serialized int) (int, error) {
     s.buffer.Shift(serialized)
 
     // Send the value
-    sent, err := s.OnSendHandler.OnSend(s.buffer.Data()[:s.buffer.Size()])
+    sent, err := s.HandlerOnSend.OnSend(s.buffer.Data()[:s.buffer.Size()])
     s.buffer.Remove(0, sent)
     return sent, err
 }
