@@ -13,16 +13,21 @@ var _ = fbe.Version
 
 // Fast Binary Encoding proto sender
 type Sender struct {
-    fbe.Sender
+    *fbe.Sender
     orderModel *OrderModel
     balanceModel *BalanceModel
     accountModel *AccountModel
 }
 
-// Create a new proto sender
-func NewSender(buffer *fbe.Buffer) *Sender {
+// Create a new proto sender with an empty buffer
+func NewSender() *Sender {
+    return NewSenderWithBuffer(fbe.NewEmptyBuffer())
+}
+
+// Create a new proto sender with the given buffer
+func NewSenderWithBuffer(buffer *fbe.Buffer) *Sender {
     return &Sender{
-        *fbe.NewSender(buffer, false),
+        fbe.NewSender(buffer, false),
         NewOrderModel(buffer),
         NewBalanceModel(buffer),
         NewAccountModel(buffer),
@@ -65,9 +70,7 @@ func (s *Sender) SendOrder(value *Order) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
-            return 0, err
-        }
+        s.HandlerOnSendLog.OnSendLog(message)
     }
 
     // Send the serialized value
@@ -90,9 +93,7 @@ func (s *Sender) SendBalance(value *Balance) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
-            return 0, err
-        }
+        s.HandlerOnSendLog.OnSendLog(message)
     }
 
     // Send the serialized value
@@ -115,9 +116,7 @@ func (s *Sender) SendAccount(value *Account) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
-            return 0, err
-        }
+        s.HandlerOnSendLog.OnSendLog(message)
     }
 
     // Send the serialized value

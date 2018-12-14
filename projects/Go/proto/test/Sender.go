@@ -15,7 +15,7 @@ var _ = proto.Version
 
 // Fast Binary Encoding test sender
 type Sender struct {
-    fbe.Sender
+    *fbe.Sender
     protoSender *proto.Sender
     structSimpleModel *StructSimpleModel
     structOptionalModel *StructOptionalModel
@@ -30,11 +30,16 @@ type Sender struct {
     structHashExModel *StructHashExModel
 }
 
-// Create a new test sender
-func NewSender(buffer *fbe.Buffer) *Sender {
+// Create a new test sender with an empty buffer
+func NewSender() *Sender {
+    return NewSenderWithBuffer(fbe.NewEmptyBuffer())
+}
+
+// Create a new test sender with the given buffer
+func NewSenderWithBuffer(buffer *fbe.Buffer) *Sender {
     return &Sender{
-        *fbe.NewSender(buffer, false),
-        proto.NewSender(buffer),
+        fbe.NewSender(buffer, false),
+        proto.NewSenderWithBuffer(buffer),
         NewStructSimpleModel(buffer),
         NewStructOptionalModel(buffer),
         NewStructNestedModel(buffer),
@@ -116,9 +121,7 @@ func (s *Sender) SendStructSimple(value *StructSimple) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
-            return 0, err
-        }
+        s.HandlerOnSendLog.OnSendLog(message)
     }
 
     // Send the serialized value
@@ -141,9 +144,7 @@ func (s *Sender) SendStructOptional(value *StructOptional) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
-            return 0, err
-        }
+        s.HandlerOnSendLog.OnSendLog(message)
     }
 
     // Send the serialized value
@@ -166,9 +167,7 @@ func (s *Sender) SendStructNested(value *StructNested) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
-            return 0, err
-        }
+        s.HandlerOnSendLog.OnSendLog(message)
     }
 
     // Send the serialized value
@@ -191,9 +190,7 @@ func (s *Sender) SendStructBytes(value *StructBytes) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
-            return 0, err
-        }
+        s.HandlerOnSendLog.OnSendLog(message)
     }
 
     // Send the serialized value
@@ -216,9 +213,7 @@ func (s *Sender) SendStructArray(value *StructArray) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
-            return 0, err
-        }
+        s.HandlerOnSendLog.OnSendLog(message)
     }
 
     // Send the serialized value
@@ -241,9 +236,7 @@ func (s *Sender) SendStructVector(value *StructVector) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
-            return 0, err
-        }
+        s.HandlerOnSendLog.OnSendLog(message)
     }
 
     // Send the serialized value
@@ -266,9 +259,7 @@ func (s *Sender) SendStructList(value *StructList) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
-            return 0, err
-        }
+        s.HandlerOnSendLog.OnSendLog(message)
     }
 
     // Send the serialized value
@@ -291,9 +282,7 @@ func (s *Sender) SendStructSet(value *StructSet) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
-            return 0, err
-        }
+        s.HandlerOnSendLog.OnSendLog(message)
     }
 
     // Send the serialized value
@@ -316,9 +305,7 @@ func (s *Sender) SendStructMap(value *StructMap) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
-            return 0, err
-        }
+        s.HandlerOnSendLog.OnSendLog(message)
     }
 
     // Send the serialized value
@@ -341,9 +328,7 @@ func (s *Sender) SendStructHash(value *StructHash) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
-            return 0, err
-        }
+        s.HandlerOnSendLog.OnSendLog(message)
     }
 
     // Send the serialized value
@@ -366,9 +351,7 @@ func (s *Sender) SendStructHashEx(value *StructHashEx) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
-            return 0, err
-        }
+        s.HandlerOnSendLog.OnSendLog(message)
     }
 
     // Send the serialized value

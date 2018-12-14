@@ -13,14 +13,19 @@ var _ = fbe.Version
 
 // Fast Binary Encoding enums sender
 type Sender struct {
-    fbe.Sender
+    *fbe.Sender
     enumsModel *EnumsModel
 }
 
-// Create a new enums sender
-func NewSender(buffer *fbe.Buffer) *Sender {
+// Create a new enums sender with an empty buffer
+func NewSender() *Sender {
+    return NewSenderWithBuffer(fbe.NewEmptyBuffer())
+}
+
+// Create a new enums sender with the given buffer
+func NewSenderWithBuffer(buffer *fbe.Buffer) *Sender {
     return &Sender{
-        *fbe.NewSender(buffer, false),
+        fbe.NewSender(buffer, false),
         NewEnumsModel(buffer),
     }
 }
@@ -55,9 +60,7 @@ func (s *Sender) SendEnums(value *Enums) (int, error) {
     // Log the value
     if s.Logging() {
         message := value.String()
-        if err := s.OnSendLogHandler.OnSendLog(message); err != nil {
-            return 0, err
-        }
+        s.HandlerOnSendLog.OnSendLog(message)
     }
 
     // Send the serialized value

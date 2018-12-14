@@ -20,14 +20,14 @@ type FieldModelBalance struct {
     // Field model buffer offset
     offset int
 
-    proto.FieldModelBalance
+    *proto.FieldModelBalance
     Locked *fbe.FieldModelDouble
 }
 
 // Create a new Balance field model
 func NewFieldModelBalance(buffer *fbe.Buffer, offset int) *FieldModelBalance {
     fbeResult := FieldModelBalance{buffer: buffer, offset: offset}
-    fbeResult.FieldModelBalance = *proto.NewFieldModelBalance(buffer, 4 + 4)
+    fbeResult.FieldModelBalance = proto.NewFieldModelBalance(buffer, 4 + 4)
     fbeResult.Locked = fbe.NewFieldModelDouble(buffer, fbeResult.FieldModelBalance.FBEOffset() + fbeResult.FieldModelBalance.FBEBody() - 4 - 4)
     return &fbeResult
 }
@@ -182,7 +182,7 @@ func (fm *FieldModelBalance) GetFields(fbeValue *Balance, fbeStructSize int) {
     fbeCurrentSize := 4 + 4
 
     if (fbeCurrentSize + fm.FieldModelBalance.FBEBody() - 4 - 4) <= fbeStructSize {
-        fm.FieldModelBalance.GetFields(&fbeValue.Balance, fbeStructSize)
+        fm.FieldModelBalance.GetFields(fbeValue.Balance, fbeStructSize)
     }
     fbeCurrentSize += fm.FieldModelBalance.FBEBody() - 4 - 4
 
@@ -235,7 +235,7 @@ func (fm *FieldModelBalance) Set(fbeValue *Balance) error {
 func (fm *FieldModelBalance) SetFields(fbeValue *Balance) error {
     var err error = nil
 
-    if err = fm.FieldModelBalance.SetFields(&fbeValue.Balance); err != nil {
+    if err = fm.FieldModelBalance.SetFields(fbeValue.Balance); err != nil {
         return err
     }
     if err = fm.Locked.Set(fbeValue.Locked); err != nil {

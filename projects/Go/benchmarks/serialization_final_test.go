@@ -83,5 +83,6 @@ func BenchmarkVerifyFinal(b *testing.B) {
 	for n := 0; n < b.N; n++ {
 		// Verify the account
 		_ = writer.Verify()
+		b.SetBytes(int64(writer.Buffer().Size()))
 	}
 }

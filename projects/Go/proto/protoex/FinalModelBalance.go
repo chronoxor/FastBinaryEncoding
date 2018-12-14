@@ -17,14 +17,14 @@ type FinalModelBalance struct {
     buffer *fbe.Buffer  // Final model buffer
     offset int          // Final model buffer offset
 
-    proto.FinalModelBalance
+    *proto.FinalModelBalance
     Locked *fbe.FinalModelDouble
 }
 
 // Create a new Balance final model
 func NewFinalModelBalance(buffer *fbe.Buffer, offset int) *FinalModelBalance {
     fbeResult := FinalModelBalance{buffer: buffer, offset: offset}
-    fbeResult.FinalModelBalance = *proto.NewFinalModelBalance(buffer, 0)
+    fbeResult.FinalModelBalance = proto.NewFinalModelBalance(buffer, 0)
     fbeResult.Locked = fbe.NewFinalModelDouble(buffer, 0)
     return &fbeResult
 }
@@ -32,7 +32,7 @@ func NewFinalModelBalance(buffer *fbe.Buffer, offset int) *FinalModelBalance {
 // Get the allocation size
 func (fm *FinalModelBalance) FBEAllocationSize(fbeValue *Balance) int {
     fbeResult := 0 +
-        fm.FinalModelBalance.FBEAllocationSize(&fbeValue.Balance) + 
+        fm.FinalModelBalance.FBEAllocationSize(fbeValue.Balance) + 
         fm.Locked.FBEAllocationSize(fbeValue.Locked) +
         0
     return fbeResult
@@ -109,7 +109,7 @@ func (fm *FinalModelBalance) GetFields(fbeValue *Balance) (int, error) {
     fbeFieldSize := 0
 
     fm.FinalModelBalance.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.FinalModelBalance.GetFields(&fbeValue.Balance); err != nil {
+    if fbeFieldSize, err = fm.FinalModelBalance.GetFields(fbeValue.Balance); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
@@ -141,7 +141,7 @@ func (fm *FinalModelBalance) SetFields(fbeValue *Balance) (int, error) {
     fbeFieldSize := 0
 
     fm.FinalModelBalance.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.FinalModelBalance.SetFields(&fbeValue.Balance); err != nil {
+    if fbeFieldSize, err = fm.FinalModelBalance.SetFields(fbeValue.Balance); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize

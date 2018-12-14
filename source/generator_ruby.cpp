@@ -5548,7 +5548,25 @@ void GeneratorRuby::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
         }
     }
 
+    WriteLine();
+    WriteLineIndent("protected");
+
+    // Generate receiver handlers
+    if (p->body)
+    {
+        WriteLine();
+        WriteLineIndent("# Receive handlers");
+        for (const auto& s : p->body->structs)
+        {
+            WriteLine();
+            WriteLineIndent("# noinspection RubyUnusedLocalVariable");
+            WriteLineIndent("def on_receive_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
+            WriteLineIndent("end");
+        }
+    }
+
     // Generate receiver message handler
+    WriteLine();
     WriteLineIndent("def on_receive(fbe_type, buffer, offset, size)");
     Indent(1);
     if (p->body)
@@ -5607,23 +5625,6 @@ void GeneratorRuby::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     WriteLineIndent("false");
     Indent(-1);
     WriteLineIndent("end");
-
-    // Generate receiver handlers
-    if (p->body)
-    {
-        WriteLine();
-        WriteLineIndent("protected");
-        WriteLine();
-        WriteLineIndent("# Receive handlers");
-        for (const auto& s : p->body->structs)
-        {
-            WriteLine();
-            WriteLineIndent("# noinspection RubyUnusedLocalVariable");
-            WriteLineIndent("def on_receive_" + CppCommon::StringUtils::ToLower(*s->name) + "(value)");
-            WriteLineIndent("end");
-        }
-        WriteLine();
-    }
 
     // Generate receiver end
     Indent(-1);

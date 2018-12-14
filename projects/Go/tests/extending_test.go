@@ -84,8 +84,8 @@ func TestExtendingNewOld(t *testing.T) {
 	account1.Uid = 1
 	account1.Name = "Test"
 	account1.State = protoex.StateEx_good | protoex.StateEx_happy
-	account1.Wallet = protoex.Balance{Balance: proto.Balance{Currency: "USD", Amount: 1000.0}, Locked: 123.456}
-	account1.Asset = &protoex.Balance{Balance: proto.Balance{Currency: "EUR", Amount: 100.0}, Locked: 12.34}
+	account1.Wallet = protoex.Balance{Balance: &proto.Balance{Currency: "USD", Amount: 1000.0}, Locked: 123.456}
+	account1.Asset = &protoex.Balance{Balance: &proto.Balance{Currency: "EUR", Amount: 100.0}, Locked: 12.34}
 	account1.Orders = append(account1.Orders, protoex.Order{Uid: 1, Symbol: "EURUSD", Side: protoex.OrderSide_buy, Type: protoex.OrderType_market, Price: 1.23456, Volume: 1000.0, Tp: 0.0, Sl: 0.0})
 	account1.Orders = append(account1.Orders, protoex.Order{Uid: 2, Symbol: "EURUSD", Side: protoex.OrderSide_sell, Type: protoex.OrderType_limit, Price: 1.0, Volume: 100.0, Tp: 0.1, Sl: -0.1})
 	account1.Orders = append(account1.Orders, protoex.Order{Uid: 3, Symbol: "EURUSD", Side: protoex.OrderSide_tell, Type: protoex.OrderType_stoplimit, Price: 1.5, Volume: 10.0, Tp: 1.1, Sl: -1.1})

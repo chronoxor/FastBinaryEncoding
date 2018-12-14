@@ -20,7 +20,7 @@ type FieldModelStructOptional struct {
     // Field model buffer offset
     offset int
 
-    FieldModelStructSimple
+    *FieldModelStructSimple
     F100 *FieldModelOptionalBool
     F101 *FieldModelOptionalBool
     F102 *FieldModelOptionalBool
@@ -92,7 +92,7 @@ type FieldModelStructOptional struct {
 // Create a new StructOptional field model
 func NewFieldModelStructOptional(buffer *fbe.Buffer, offset int) *FieldModelStructOptional {
     fbeResult := FieldModelStructOptional{buffer: buffer, offset: offset}
-    fbeResult.FieldModelStructSimple = *NewFieldModelStructSimple(buffer, 4 + 4)
+    fbeResult.FieldModelStructSimple = NewFieldModelStructSimple(buffer, 4 + 4)
     fbeResult.F100 = NewFieldModelOptionalBool(buffer, fbeResult.FieldModelStructSimple.FBEOffset() + fbeResult.FieldModelStructSimple.FBEBody() - 4 - 4)
     fbeResult.F101 = NewFieldModelOptionalBool(buffer, fbeResult.F100.FBEOffset() + fbeResult.F100.FBESize())
     fbeResult.F102 = NewFieldModelOptionalBool(buffer, fbeResult.F101.FBEOffset() + fbeResult.F101.FBESize())
@@ -962,7 +962,7 @@ func (fm *FieldModelStructOptional) GetFields(fbeValue *StructOptional, fbeStruc
     fbeCurrentSize := 4 + 4
 
     if (fbeCurrentSize + fm.FieldModelStructSimple.FBEBody() - 4 - 4) <= fbeStructSize {
-        fm.FieldModelStructSimple.GetFields(&fbeValue.StructSimple, fbeStructSize)
+        fm.FieldModelStructSimple.GetFields(fbeValue.StructSimple, fbeStructSize)
     }
     fbeCurrentSize += fm.FieldModelStructSimple.FBEBody() - 4 - 4
 
@@ -1470,7 +1470,7 @@ func (fm *FieldModelStructOptional) Set(fbeValue *StructOptional) error {
 func (fm *FieldModelStructOptional) SetFields(fbeValue *StructOptional) error {
     var err error = nil
 
-    if err = fm.FieldModelStructSimple.SetFields(&fbeValue.StructSimple); err != nil {
+    if err = fm.FieldModelStructSimple.SetFields(fbeValue.StructSimple); err != nil {
         return err
     }
     if err = fm.F100.Set(fbeValue.F100); err != nil {

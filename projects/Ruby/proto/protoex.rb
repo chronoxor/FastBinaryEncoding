@@ -3285,6 +3285,23 @@ module Protoex
     def proto_receiver=(receiver)
       @_proto_receiver = receiver
     end
+
+    protected
+
+    # Receive handlers
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_order(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_balance(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_account(value)
+    end
+
     def on_receive(fbe_type, buffer, offset, size)
       case fbe_type
       when OrderModel::TYPE
@@ -3357,23 +3374,6 @@ module Protoex
 
       false
     end
-
-    protected
-
-    # Receive handlers
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_order(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_balance(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_account(value)
-    end
-
   end
 
   # Fast Binary Encoding Protoex final sender
@@ -3505,6 +3505,23 @@ module Protoex
     def proto_receiver=(receiver)
       @_proto_receiver = receiver
     end
+
+    protected
+
+    # Receive handlers
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_order(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_balance(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_account(value)
+    end
+
     def on_receive(fbe_type, buffer, offset, size)
       case fbe_type
       when OrderFinalModel::TYPE
@@ -3577,23 +3594,6 @@ module Protoex
 
       false
     end
-
-    protected
-
-    # Receive handlers
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_order(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_balance(value)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_receive_account(value)
-    end
-
   end
 
 end
