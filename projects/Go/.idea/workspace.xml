@@ -288,12 +288,12 @@
   <component name="ToolWindowManager">
     <frame x="498" y="117" width="1453" height="848" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26489592" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26489592" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.4977109" visible="true" weight="0.28111887" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4977109" weight="0.28111887" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3971698" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
