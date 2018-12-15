@@ -75,6 +75,7 @@ Sample projects:
 * [Supported base types (byte, bool, char, wchar, int8, int16, int32, int64, float, double)](documents/FBE.md#base-types)
 * [Supported complex types (bytes, decimal, string, timestamp, uuid)](documents/FBE.md#complex-types)
 * [Supported collections (array, vector, list, map, hash)](documents/FBE.md#collections)
+* [Supported nullable optional types, enums, flags and structs](documents/FBE.md#optional-type)
 * [Serialization/Deserialization to/from binary format](#fbe-serialization)
 * [Serialization/Deserialization to/from JSON](#json-serialization)
 * [Sender/Receiver interfaces for communication protocols](#senderreceiver-protocol)
