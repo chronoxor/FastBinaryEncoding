@@ -8,12 +8,7 @@ import "../proto/protoex"
 
 func TestExtendingOldNew(t *testing.T) {
 	// Create a new account with some orders
-	var account1 = proto.NewAccount()
-	account1.Uid = 1
-	account1.Name = "Test"
-	account1.State = proto.State_good
-	account1.Wallet = proto.Balance{Currency: "USD", Amount: 1000.0}
-	account1.Asset = &proto.Balance{Currency: "EUR", Amount: 100.0}
+	var account1 = proto.NewAccountFromFieldValues(1, "Test", proto.State_good, proto.Balance{Currency: "USD", Amount: 1000.0}, &proto.Balance{Currency: "EUR", Amount: 100.0}, make([]proto.Order, 0))
 	account1.Orders = append(account1.Orders, proto.Order{Uid: 1, Symbol: "EURUSD", Side: proto.OrderSide_buy, Type: proto.OrderType_market, Price: 1.23456, Volume: 1000.0})
 	account1.Orders = append(account1.Orders, proto.Order{Uid: 2, Symbol: "EURUSD", Side: proto.OrderSide_sell, Type: proto.OrderType_limit, Price: 1.0, Volume: 100.0})
 	account1.Orders = append(account1.Orders, proto.Order{Uid: 3, Symbol: "EURUSD", Side: proto.OrderSide_buy, Type: proto.OrderType_stop, Price: 1.5, Volume: 10.0})
@@ -80,12 +75,7 @@ func TestExtendingOldNew(t *testing.T) {
 
 func TestExtendingNewOld(t *testing.T) {
 	// Create a new account with some orders
-	var account1 = protoex.NewAccount()
-	account1.Uid = 1
-	account1.Name = "Test"
-	account1.State = protoex.StateEx_good | protoex.StateEx_happy
-	account1.Wallet = protoex.Balance{Balance: &proto.Balance{Currency: "USD", Amount: 1000.0}, Locked: 123.456}
-	account1.Asset = &protoex.Balance{Balance: &proto.Balance{Currency: "EUR", Amount: 100.0}, Locked: 12.34}
+	var account1 = protoex.NewAccountFromFieldValues(1, "Test", protoex.StateEx_good | protoex.StateEx_happy, protoex.Balance{Balance: &proto.Balance{Currency: "USD", Amount: 1000.0}, Locked: 123.456}, &protoex.Balance{Balance: &proto.Balance{Currency: "EUR", Amount: 100.0}, Locked: 12.34}, make([]protoex.Order, 0))
 	account1.Orders = append(account1.Orders, protoex.Order{Uid: 1, Symbol: "EURUSD", Side: protoex.OrderSide_buy, Type: protoex.OrderType_market, Price: 1.23456, Volume: 1000.0, Tp: 0.0, Sl: 0.0})
 	account1.Orders = append(account1.Orders, protoex.Order{Uid: 2, Symbol: "EURUSD", Side: protoex.OrderSide_sell, Type: protoex.OrderType_limit, Price: 1.0, Volume: 100.0, Tp: 0.1, Sl: -0.1})
 	account1.Orders = append(account1.Orders, protoex.Order{Uid: 3, Symbol: "EURUSD", Side: protoex.OrderSide_tell, Type: protoex.OrderType_stoplimit, Price: 1.5, Volume: 10.0, Tp: 1.1, Sl: -1.1})

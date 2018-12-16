@@ -4948,6 +4948,16 @@ void GeneratorGo::GenerateEnum(const std::shared_ptr<Package>& p, const std::sha
     Indent(-1);
     WriteLineIndent("}");
 
+    // Generate enum constructor from the given value
+    WriteLine();
+    WriteLineIndent("// Create a new " + enum_name + " enum from the given value");
+    WriteLineIndent("func New" + enum_name + "FromValue(value " + ConvertEnumType(enum_type) + ") *" + enum_name + " {");
+    Indent(1);
+    WriteLineIndent("result := " + enum_name + "(value)");
+    WriteLineIndent("return &result");
+    Indent(-1);
+    WriteLineIndent("}");
+
     // Generate enum Key() method
     WriteLine();
     WriteLineIndent("// Get the enum key");
@@ -5104,6 +5114,16 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::sh
     WriteLineIndent("func New" + flags_name + "() *" + flags_name + " {");
     Indent(1);
     WriteLineIndent("return new(" + flags_name + ")");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate flags constructor from the given flags
+    WriteLine();
+    WriteLineIndent("// Create a new " + flags_name + " flags from the given flags");
+    WriteLineIndent("func New" + flags_name + "FromValue(flags " + ConvertEnumType(flags_type) + ") *" + flags_name + " {");
+    Indent(1);
+    WriteLineIndent("result := " + flags_name + "(flags)");
+    WriteLineIndent("return &result");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5466,6 +5486,45 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     }
     Indent(-1);
     WriteLineIndent("}");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate struct constructor from the given field values
+    WriteLine();
+    WriteLineIndent("// Create a new " + struct_name + " struct from the given field values");
+    WriteIndent("func New" + struct_name + "FromFieldValues(");
+    first = true;
+    if (!base_type.empty())
+    {
+        Write("Parent *" + base_type);
+        first = false;
+    }
+    if (s->body)
+    {
+        for (const auto& field : s->body->fields)
+        {
+            Write(std::string(first ? "" : ", ") + ConvertToUpper(*field->name) + " " + ConvertTypeName(*field));
+            first = false;
+        }
+    }
+    WriteLine(") *" + struct_name + " {");
+    Indent(1);
+    WriteIndent("return &" + struct_name + "{");
+    first = true;
+    if (!base_type.empty())
+    {
+        Write("Parent");
+        first = false;
+    }
+    if (s->body)
+    {
+        for (const auto& field : s->body->fields)
+        {
+            Write(std::string(first ? "" : ", ") + ConvertToUpper(*field->name));
+            first = false;
+        }
+    }
+    WriteLine("}");
     Indent(-1);
     WriteLineIndent("}");
 
