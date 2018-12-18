@@ -3942,6 +3942,86 @@ internal class UUIDJson : JsonSerializer<UUID>, JsonDeserializer<UUID>
     }
 }
 
+internal class UByteNullableJson : JsonSerializer<UByte?>, JsonDeserializer<UByte?>
+{
+    override fun serialize(src: UByte?, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    {
+        if (src == null)
+            return JsonNull.INSTANCE
+
+        return JsonPrimitive(src.toLong())
+    }
+
+    @Throws(JsonParseException::class)
+    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): UByte?
+    {
+        if (json.isJsonNull)
+            return null
+
+        return json.asLong.toUByte()
+    }
+}
+
+internal class UShortNullableJson : JsonSerializer<UShort?>, JsonDeserializer<UShort?>
+{
+    override fun serialize(src: UShort?, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    {
+        if (src == null)
+            return JsonNull.INSTANCE
+
+        return JsonPrimitive(src.toLong())
+    }
+
+    @Throws(JsonParseException::class)
+    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): UShort?
+    {
+        if (json.isJsonNull)
+            return null
+
+        return json.asLong.toUShort()
+    }
+}
+
+internal class UIntNullableJson : JsonSerializer<UInt?>, JsonDeserializer<UInt?>
+{
+    override fun serialize(src: UInt?, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    {
+        if (src == null)
+            return JsonNull.INSTANCE
+
+        return JsonPrimitive(src.toLong())
+    }
+
+    @Throws(JsonParseException::class)
+    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): UInt?
+    {
+        if (json.isJsonNull)
+            return null
+
+        return json.asLong.toUInt()
+    }
+}
+
+internal class ULongNullableJson : JsonSerializer<ULong?>, JsonDeserializer<ULong?>
+{
+    override fun serialize(src: ULong?, typeOfSrc: Type, context: JsonSerializationContext): JsonElement
+    {
+        if (src == null)
+            return JsonNull.INSTANCE
+
+        return JsonPrimitive(src.toLong())
+    }
+
+    @Throws(JsonParseException::class)
+    override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): ULong?
+    {
+        if (json.isJsonNull)
+            return null
+
+        return json.asLong.toULong()
+    }
+}
+
 // Fast Binary Encoding base JSON engine
 @Suppress("MemberVisibilityCanBePrivate")
 object Json
@@ -3951,6 +4031,11 @@ object Json
 
     fun register(builder: GsonBuilder): GsonBuilder
     {
+        val ubyte: UByte? = 0u
+        val ushort: UShort? = 0u
+        val uint: UInt? = 0u
+        val ulong: ULong? = 0u
+
         builder.serializeNulls()
         builder.registerTypeAdapter(ByteArray::class.java, BytesJson())
         builder.registerTypeAdapter(Char::class.java, CharacterJson())
@@ -3958,6 +4043,10 @@ object Json
         builder.registerTypeAdapter(Instant::class.java, InstantJson())
         builder.registerTypeAdapter(BigDecimal::class.java, BigDecimalJson())
         builder.registerTypeAdapter(UUID::class.java, UUIDJson())
+        builder.registerTypeAdapter(ubyte!!::class.java, UByteNullableJson())
+        builder.registerTypeAdapter(ushort!!::class.java, UShortNullableJson())
+        builder.registerTypeAdapter(uint!!::class.java, UIntNullableJson())
+        builder.registerTypeAdapter(ulong!!::class.java, ULongNullableJson())
         return builder
     }
 }
