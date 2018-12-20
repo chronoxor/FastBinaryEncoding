@@ -2,55 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="71ac408e-7cf5-4ba9-abad-487f6769318f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../../modules/CppBenchmark" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppBenchmark" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../modules/CppCommon" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppCommon" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../modules/rapidjson" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/rapidjson" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/enums.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/enums.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/fbe.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/fbe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/proto.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/proto.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/protoex.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/protoex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Python.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/enums.py" beforeDir="false" afterPath="$PROJECT_DIR$/proto/enums.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe.py" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/proto.py" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/protoex.py" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/enums.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/enums.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/proto.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/proto.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/protoex.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/protoex.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_javascript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_javascript.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_python.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_python.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_ruby.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_ruby.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Python$benchmark_serialization.coverage" NAME="benchmark_serialization Coverage Results" MODIFIED="1539984262439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" />
+    <SUITE FILE_PATH="coverage/Python$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1544195558305" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Python$Unittests_in_test_enums_py.coverage" NAME="Unittests in test_enums.py Coverage Results" MODIFIED="1543927368286" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Python$print_json.coverage" NAME="print_json Coverage Results" MODIFIED="1543148423705" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/Python$Unittests_in_test_serialization_final_py.coverage" NAME="Unittests in test_serialization_final.py Coverage Results" MODIFIED="1543618253714" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Python$benchmark_send_receive.coverage" NAME="benchmark_send_receive Coverage Results" MODIFIED="1539984486441" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" />
+    <SUITE FILE_PATH="coverage/Python$Unittests_for_test_serialization_final_TestSerializationFinal_test_serialization_final_order.coverage" NAME="Unittests for test_serialization_final.TestSerializationFinal.test_serialization_final_order Coverage Results" MODIFIED="1543618334395" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Python$Unittests_in_test_decimal_py.coverage" NAME="Unittests in test_decimal.py Coverage Results" MODIFIED="1539652256057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Python$test_decimal.coverage" NAME="test_decimal Coverage Results" MODIFIED="1542829880652" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Python$create.coverage" NAME="create Coverage Results" MODIFIED="1543453304071" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
-    <SUITE FILE_PATH="coverage/Python$benchmark_send_receive.coverage" NAME="benchmark_send_receive Coverage Results" MODIFIED="1539984486441" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" />
-    <SUITE FILE_PATH="coverage/Python$Unittests_in_test_serialization_final_py.coverage" NAME="Unittests in test_serialization_final.py Coverage Results" MODIFIED="1543618253714" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/Python$Unittests_in_test_decimal_py.coverage" NAME="Unittests in test_decimal.py Coverage Results" MODIFIED="1539652256057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/Python$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1544195558305" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/Python$print_json.coverage" NAME="print_json Coverage Results" MODIFIED="1543148423705" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
-    <SUITE FILE_PATH="coverage/Python$Unittests_for_test_serialization_final_TestSerializationFinal_test_serialization_final_order.coverage" NAME="Unittests for test_serialization_final.TestSerializationFinal.test_serialization_final_order Coverage Results" MODIFIED="1543618334395" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/Python$print.coverage" NAME="print Coverage Results" MODIFIED="1543453307533" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
-    <SUITE FILE_PATH="coverage/Python$Unittests_in_test_serialization_py.coverage" NAME="Unittests in test_serialization.py Coverage Results" MODIFIED="1539802210026" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Python$benchmark_serialization.coverage" NAME="benchmark_serialization Coverage Results" MODIFIED="1539984262439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" />
+    <SUITE FILE_PATH="coverage/Python$print.coverage" NAME="print Coverage Results" MODIFIED="1545258672652" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/Python$Unittests_in_test_clone_py.coverage" NAME="Unittests in test_clone.py Coverage Results" MODIFIED="1539850329692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/Python$Unittests_in_test_enums_py.coverage" NAME="Unittests in test_enums.py Coverage Results" MODIFIED="1543927368286" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
-    <SUITE FILE_PATH="coverage/Python$Unittests_for_test_enums_TestEnums_test_serialization_json_enums.coverage" NAME="Unittests for test_enums.TestEnums.test_serialization_json_enums Coverage Results" MODIFIED="1543927351924" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Python$Unittests_in_test_serialization_json_py.coverage" NAME="Unittests in test_serialization_json.py Coverage Results" MODIFIED="1543157934168" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Python$Unittests_in_test_serialization_py.coverage" NAME="Unittests in test_serialization.py Coverage Results" MODIFIED="1539802210026" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/Python$Unittests_for_test_enums_TestEnums_test_serialization_json_enums.coverage" NAME="Unittests for test_enums.TestEnums.test_serialization_json_enums Coverage Results" MODIFIED="1543927351924" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
   </component>
   <component name="FileEditorManager">
     <leaf />
@@ -73,15 +50,6 @@
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths />
-  </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="478" />
     <option name="y" value="107" />
@@ -94,6 +62,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -104,24 +73,18 @@
             <path>
               <item name="Python" type="b2602c69:ProjectViewProjectNode" />
               <item name="Python" type="462c0819:PsiDirectoryNode" />
-              <item name="proto" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Python" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Python" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -135,7 +98,51 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in tests">
+  <component name="RunManager" selected="Python.print">
+    <configuration name="create" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Python" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/create.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="print" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="Python" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/print.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Unittests for test_enums.TestEnums.test_serialization_json_enums" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="Python" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -149,6 +156,7 @@
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;test_enums.TestEnums.test_serialization_json_enums&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
     </configuration>
     <configuration name="Unittests in test_enums.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="Python" />
@@ -163,6 +171,7 @@
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/test_enums.py&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
     </configuration>
     <configuration name="Unittests in tests" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="Python" />
@@ -177,14 +186,19 @@
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;$PROJECT_DIR$/tests&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.create" />
+      <item itemvalue="Python.print" />
       <item itemvalue="Python tests.Unittests in tests" />
       <item itemvalue="Python tests.Unittests for test_enums.TestEnums.test_serialization_json_enums" />
       <item itemvalue="Python tests.Unittests in test_enums.py" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.print" />
+        <item itemvalue="Python.create" />
         <item itemvalue="Python tests.Unittests in tests" />
         <item itemvalue="Python tests.Unittests in test_enums.py" />
         <item itemvalue="Python tests.Unittests for test_enums.TestEnums.test_serialization_json_enums" />
@@ -204,6 +218,8 @@
       <workItem from="1543452904781" duration="441000" />
       <workItem from="1543453378874" duration="158000" />
       <workItem from="1543617147971" duration="1101000" />
+      <workItem from="1545258634736" duration="80000" />
+      <workItem from="1545258831795" duration="4000" />
     </task>
     <servers />
   </component>
@@ -240,77 +256,38 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1700000" />
+    <option name="totallyTimeSpent" value="1784000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="478" y="107" width="1534" height="763" extended-state="0" />
     <layout>
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="11" />
-      <window_info anchor="bottom" id="Python Console" order="12" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.40095088" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.275441" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="right" id="Database" order="4" />
-      <window_info anchor="right" id="SciView" order="3" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2835821" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.4" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3961965" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="11" />
+      <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="SciView" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <option name="time" value="1" />
-    </breakpoint-manager>
-  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/proto/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="151725">
-          <caret line="8925" column="13" selection-start-line="8925" selection-start-column="13" selection-end-line="8925" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_clone.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/proto.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18581">
-          <caret line="1093" selection-start-line="1093" selection-end-line="1093" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/fbe.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="44336">
-          <caret line="2608" selection-start-line="2608" selection-end-line="2608" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_serialization_final.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://Y:/Soft/Development/Python/bin/Lib/unittest/case.py" />
     <entry file="file://$PROJECT_DIR$/tests/test_serialization.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -319,12 +296,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_send_seceive_final.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_send_seceive.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_send_seceive_final.py" />
+    <entry file="file://$PROJECT_DIR$/tests/test_send_seceive.py" />
     <entry file="file://$PROJECT_DIR$/tests/test_extending.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
