@@ -2,32 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37e8de49-dfc7-48fd-92cd-e02ddc4fc596" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../../modules/CppBenchmark" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppBenchmark" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../modules/CppCommon" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/CppCommon" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../modules/rapidjson" beforeDir="false" afterPath="$PROJECT_DIR$/../../modules/rapidjson" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/fbe.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/fbe.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/proto.js" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/.idea/Go.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/FastBinaryEncoding.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/FastBinaryEncoding.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/JavaScript.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FastBinaryEncoding.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/Kotlin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/Kotlin.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/libraries/KotlinJavaRuntime.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/.idea/Python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/FastBinaryEncoding.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/enums.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/enums.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/fbe.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/fbe.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/proto.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/proto.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/protoex.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/protoex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/enums.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/enums.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/fbe.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/proto.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/proto.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/protoex.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/protoex.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_python.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_python.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_ruby.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_ruby.cpp" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,40 +46,24 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/int64.js" />
-        <option value="Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/uuid.js" />
-        <option value="Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_int64.js" />
+        <option value="$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/proto/int64.js" />
+        <option value="$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/proto/uuid.js" />
+        <option value="$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_int64.js" />
         <option value="$PROJECT_DIR$/tests/test_send_seceive.js" />
         <option value="$PROJECT_DIR$/tests/test_send_seceive_final.js" />
         <option value="$PROJECT_DIR$/proto/proto.js" />
-        <option value="Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/proto.js" />
-        <option value="Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_serialization_json.js" />
+        <option value="$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/proto/proto.js" />
+        <option value="$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_serialization_json.js" />
         <option value="$PROJECT_DIR$/examples/print.js" />
         <option value="$PROJECT_DIR$/tests/test_enums.js" />
       </list>
     </option>
   </component>
-  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
-  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
-    <package-json value="$PROJECT_DIR$/package.json" />
-  </component>
-  <component name="JsGulpfileManager">
-    <detection-done>true</detection-done>
-    <sorting>DEFINITION_ORDER</sorting>
-  </component>
-  <component name="NodeModulesDirectoryManager">
-    <handled-path value="$PROJECT_DIR$/node_modules" />
-  </component>
-  <component name="NodePackageJsonFileManager">
-    <packageJsonPaths>
-      <path value="$PROJECT_DIR$/package.json" />
-    </packageJsonPaths>
-  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="296" />
-    <option name="y" value="153" />
+    <option name="x" value="307" />
+    <option name="y" value="169" />
     <option name="width" value="1827" />
-    <option name="height" value="754" />
+    <option name="height" value="1031" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -83,28 +71,18 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="JavaScript" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
               <item name="JavaScript" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JavaScript" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JavaScript" type="462c0819:PsiDirectoryNode" />
-              <item name="proto" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="JavaScript" type="b2602c69:ProjectViewProjectNode" />
-              <item name="JavaScript" type="462c0819:PsiDirectoryNode" />
-              <item name="tests" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -132,9 +110,13 @@
     </option>
   </component>
   <component name="RunManager" selected="Node.js.test_enums.js">
-    <configuration name="print_json.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="print_json.js" working-dir="$PROJECT_DIR$/examples" />
-    <configuration name="test_enums.js" type="NodeJSConfigurationType" factoryName="Node.js" temporary="true" nameIsGenerated="true" path-to-js-file="test_enums.js" working-dir="$PROJECT_DIR$/tests" />
-    <configuration name="tests-browser-local" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+    <configuration name="print_json.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="print_json.js" working-dir="$PROJECT_DIR$/examples">
+      <method v="2" />
+    </configuration>
+    <configuration name="test_enums.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="test_enums.js" working-dir="$PROJECT_DIR$/tests">
+      <method v="2" />
+    </configuration>
+    <configuration name="tests-browser-local" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
@@ -142,8 +124,9 @@
       </scripts>
       <node-interpreter value="project" />
       <envs />
+      <method v="2" />
     </configuration>
-    <configuration name="tests-node" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+    <configuration name="tests-node" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
@@ -151,8 +134,9 @@
       </scripts>
       <node-interpreter value="project" />
       <envs />
+      <method v="2" />
     </configuration>
-    <configuration name="tests-standard" type="js.build_tools.npm" factoryName="npm" temporary="true" nameIsGenerated="true">
+    <configuration name="tests-standard" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
       <scripts>
@@ -160,12 +144,13 @@
       </scripts>
       <node-interpreter value="project" />
       <envs />
+      <method v="2" />
     </configuration>
     <list>
       <item itemvalue="Node.js.print_json.js" />
+      <item itemvalue="Node.js.test_enums.js" />
       <item itemvalue="npm.tests-node" />
       <item itemvalue="npm.tests-standard" />
-      <item itemvalue="Node.js.test_enums.js" />
       <item itemvalue="npm.tests-browser-local" />
     </list>
     <recent_temporary>
@@ -203,87 +188,60 @@
       <workItem from="1543454259538" duration="123000" />
       <workItem from="1543927400419" duration="225000" />
       <workItem from="1544195067348" duration="464000" />
+      <workItem from="1545574319163" duration="441000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14183000" />
+    <option name="totallyTimeSpent" value="14624000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="296" y="153" width="1827" height="754" extended-state="0" />
+    <frame x="307" y="169" width="1827" height="1031" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.596463" visible="true" weight="0.27613193" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5957684" visible="true" weight="0.27613193" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="npm" order="2" sideWeight="0.40423164" side_tool="true" visible="true" weight="0.27613193" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32850778" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39871383" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.329582" />
-      <window_info id="npm" order="2" sideWeight="0.40353698" side_tool="true" visible="true" weight="0.27613193" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info id="Favorites" order="3" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.39871383" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_create.js</url>
+          <url>file://$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_create.js</url>
           <line>57</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://Y:/projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_serialization_final.js</url>
+          <url>file://$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_serialization_final.js</url>
           <line>27</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="1" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/int64.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30362">
-          <caret line="1787" column="70" selection-start-line="1787" selection-start-column="70" selection-end-line="1787" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/uuid.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4913">
-          <caret line="290" column="66" selection-start-line="290" selection-start-column="66" selection-end-line="290" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_int64.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="15" selection-start-line="19" selection-start-column="15" selection-end-line="19" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/protoex.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="35088">
-          <caret line="2065" column="36" selection-start-line="2065" selection-start-column="36" selection-end-line="2065" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/proto/int64.js" />
+    <entry file="file://$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/proto/uuid.js" />
+    <entry file="file://$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_int64.js" />
+    <entry file="file://$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/proto/protoex.js" />
     <entry file="file://$PROJECT_DIR$/proto/utf8.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -294,48 +252,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_send_seceive.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1071">
-          <caret line="63" column="10" selection-start-line="63" selection-start-column="10" selection-end-line="63" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_create.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="969">
-          <caret line="57" column="4" selection-start-line="57" selection-start-column="4" selection-end-line="57" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_send_seceive.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1139">
-          <caret line="67" selection-start-line="67" selection-end-line="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_send_seceive_final.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1139">
-          <caret line="67" selection-start-line="67" selection-end-line="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/node_modules/tape/lib/test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1598">
-          <caret line="94" column="9" selection-start-line="94" selection-start-column="9" selection-end-line="94" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_serialization_final.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_send_seceive.js" />
+    <entry file="file://$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_create.js" />
+    <entry file="file://$PROJECT_DIR$/tests/test_send_seceive.js" />
+    <entry file="file://$PROJECT_DIR$/tests/test_send_seceive_final.js" />
+    <entry file="file://$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/node_modules/tape/lib/test.js" />
+    <entry file="file://$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_serialization_final.js" />
     <entry file="file://$PROJECT_DIR$/package-lock.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -371,27 +293,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_serialization_json.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17408">
-          <caret line="1024" selection-start-line="1024" selection-end-line="1024" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/proto.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="13906">
-          <caret line="821" selection-start-line="821" selection-end-line="821" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://Y:/Projects/CppProjects/FastBinaryEncoding/projects/JavaScript/proto/test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="24922">
-          <caret line="1469" selection-start-line="1469" selection-end-line="1469" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/tests/test_serialization_json.js" />
+    <entry file="file://$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/proto/proto.js" />
+    <entry file="file://$PROJECT_DIR$/../../../../CppProjects/FastBinaryEncoding/projects/JavaScript/proto/test.js" />
     <entry file="file://$PROJECT_DIR$/examples/print.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2822">

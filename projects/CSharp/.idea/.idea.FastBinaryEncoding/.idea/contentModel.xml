@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\ivan.shynkarenka\.Rider2018.1\system\resharper-host\local\Transient\ReSharperHost\v12\SolutionCaches\_FastBinaryEncoding.642087070.00" t="ExcludeRecursive" />
-    <e p="Z:\Projects\CppProjects\FastBinaryEncoding\Projects\CSharp" t="IncludeFlat">
+    <e p="C:\Users\chronoxor\.Rider2018.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\chronoxor\.Rider2018.2\system\resharper-host\local\Transient\ReSharperHost\v182\SolutionCaches\_FastBinaryEncoding.-882054674.00" t="ExcludeRecursive" />
+    <e p="Y:\Projects\Projects\FastBinaryEncoding\Projects\CSharp" t="IncludeFlat">
       <e p="Benchmarks" t="IncludeRecursive">
         <e p="app.config" t="Include" />
         <e p="Benchmarks.csproj" t="IncludeRecursive" />
