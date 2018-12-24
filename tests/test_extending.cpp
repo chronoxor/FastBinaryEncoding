@@ -11,7 +11,7 @@ TEST_CASE("Extending: old -> new", "[FBE]")
 {
     // Create a new account with some orders
     proto::Account account1;
-    account1.uid = 1;
+    account1.id = 1;
     account1.name = "Test";
     account1.state = proto::State::good;
     account1.wallet.currency = "USD";
@@ -44,7 +44,7 @@ TEST_CASE("Extending: old -> new", "[FBE]")
     reader.next(deserialized);
     REQUIRE(reader.model.fbe_offset() == (4 + reader.buffer().size()));
 
-    REQUIRE(account2.uid == 1);
+    REQUIRE(account2.id == 1);
     REQUIRE(account2.name == "Test");
     REQUIRE(account2.state == protoex::StateEx::good);
     REQUIRE(std::string(account2.wallet.currency) == "USD");
@@ -55,7 +55,7 @@ TEST_CASE("Extending: old -> new", "[FBE]")
     REQUIRE(account2.asset.value().amount == 100.0);
     REQUIRE(account2.asset.value().locked == 0.0);
     REQUIRE(account2.orders.size() == 3);
-    REQUIRE(account2.orders[0].uid == 1);
+    REQUIRE(account2.orders[0].id == 1);
     REQUIRE(std::string(account2.orders[0].symbol) == "EURUSD");
     REQUIRE(account2.orders[0].side == protoex::OrderSide::buy);
     REQUIRE(account2.orders[0].type == protoex::OrderType::market);
@@ -63,7 +63,7 @@ TEST_CASE("Extending: old -> new", "[FBE]")
     REQUIRE(account2.orders[0].volume == 1000.0);
     REQUIRE(account2.orders[0].tp == 10.0);
     REQUIRE(account2.orders[0].sl == -10.0);
-    REQUIRE(account2.orders[1].uid == 2);
+    REQUIRE(account2.orders[1].id == 2);
     REQUIRE(std::string(account2.orders[1].symbol) == "EURUSD");
     REQUIRE(account2.orders[1].side == protoex::OrderSide::sell);
     REQUIRE(account2.orders[1].type == protoex::OrderType::limit);
@@ -71,7 +71,7 @@ TEST_CASE("Extending: old -> new", "[FBE]")
     REQUIRE(account2.orders[1].volume == 100.0);
     REQUIRE(account2.orders[1].tp == 10.0);
     REQUIRE(account2.orders[1].sl == -10.0);
-    REQUIRE(account2.orders[2].uid == 3);
+    REQUIRE(account2.orders[2].id == 3);
     REQUIRE(std::string(account2.orders[2].symbol) == "EURUSD");
     REQUIRE(account2.orders[2].side == protoex::OrderSide::buy);
     REQUIRE(account2.orders[2].type == protoex::OrderType::stop);
@@ -85,7 +85,7 @@ TEST_CASE("Extending: new -> old", "[FBE]")
 {
     // Create a new account with some orders
     protoex::Account account1;
-    account1.uid = 1;
+    account1.id = 1;
     account1.name = "Test";
     account1.state = protoex::StateEx::good | protoex::StateEx::happy;
     account1.wallet.currency = "USD";
@@ -122,7 +122,7 @@ TEST_CASE("Extending: new -> old", "[FBE]")
     reader.next(deserialized);
     REQUIRE(reader.model.fbe_offset() == (4 + reader.buffer().size()));
 
-    REQUIRE(account2.uid == 1);
+    REQUIRE(account2.id == 1);
     REQUIRE(account2.name == "Test");
     REQUIRE((account2.state | proto::State::good));
     REQUIRE(std::string(account2.wallet.currency) == "USD");
@@ -131,19 +131,19 @@ TEST_CASE("Extending: new -> old", "[FBE]")
     REQUIRE(std::string(account2.asset.value().currency) == "EUR");
     REQUIRE(account2.asset.value().amount == 100.0);
     REQUIRE(account2.orders.size() == 3);
-    REQUIRE(account2.orders[0].uid == 1);
+    REQUIRE(account2.orders[0].id == 1);
     REQUIRE(std::string(account2.orders[0].symbol) == "EURUSD");
     REQUIRE(account2.orders[0].side == proto::OrderSide::buy);
     REQUIRE(account2.orders[0].type == proto::OrderType::market);
     REQUIRE(account2.orders[0].price == 1.23456);
     REQUIRE(account2.orders[0].volume == 1000.0);
-    REQUIRE(account2.orders[1].uid == 2);
+    REQUIRE(account2.orders[1].id == 2);
     REQUIRE(std::string(account2.orders[1].symbol) == "EURUSD");
     REQUIRE(account2.orders[1].side == proto::OrderSide::sell);
     REQUIRE(account2.orders[1].type == proto::OrderType::limit);
     REQUIRE(account2.orders[1].price == 1.0);
     REQUIRE(account2.orders[1].volume == 100.0);
-    REQUIRE(account2.orders[2].uid == 3);
+    REQUIRE(account2.orders[2].id == 3);
     REQUIRE(std::string(account2.orders[2].symbol) == "EURUSD");
     REQUIRE(account2.orders[2].side != proto::OrderSide::buy);
     REQUIRE(account2.orders[2].type != proto::OrderType::market);

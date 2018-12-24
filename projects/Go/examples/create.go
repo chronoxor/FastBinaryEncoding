@@ -9,7 +9,7 @@ func main() {
 	var account = proto.NewAccountModel(fbe.NewEmptyBuffer())
 	modelBegin := account.CreateBegin()
 	accountBegin, _ := account.Model().SetBegin()
-	_ = account.Model().Uid.Set(1)
+	_ = account.Model().Id.Set(1)
 	_ = account.Model().Name.Set("Test")
 	_ = account.Model().State.SetValue(proto.State_good)
 	walletBegin, _ := account.Model().Wallet.SetBegin()
@@ -32,7 +32,7 @@ func main() {
 	}
 
 	accountBegin, _ = access.Model().GetBegin()
-	uid, _ := access.Model().Uid.Get()
+	id, _ := access.Model().Id.Get()
 	name, _ := access.Model().Name.Get()
 	state, _ := access.Model().State.Get()
 	walletBegin, _ = access.Model().Wallet.GetBegin()
@@ -43,7 +43,7 @@ func main() {
 
 	// Show account content
 	fmt.Println()
-	fmt.Printf("account.uid = %v\n", uid)
+	fmt.Printf("account.id = %v\n", id)
 	fmt.Printf("account.name = %v\n", name)
 	fmt.Printf("account.state = %v\n", state)
 	fmt.Printf("account.wallet.currency = %v\n", walletCurrency)

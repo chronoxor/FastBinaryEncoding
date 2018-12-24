@@ -742,7 +742,7 @@ exports.FinalModelStateEx = FinalModelStateEx
 class Order {
   /**
    * Initialize struct
-   * @param {!number=} uid
+   * @param {!number=} id
    * @param {!string=} symbol
    * @param {!OrderSide=} side
    * @param {!OrderType=} type
@@ -752,8 +752,8 @@ class Order {
    * @param {!number=} sl
    * @constructor
    */
-  constructor (uid = 0, symbol = '', side = new OrderSide(), type = new OrderType(), price = 0.0, volume = 0.0, tp = 10.0, sl = -10.0) {
-    this.uid = uid
+  constructor (id = 0, symbol = '', side = new OrderSide(), type = new OrderType(), price = 0.0, volume = 0.0, tp = 10.0, sl = -10.0) {
+    this.id = id
     this.symbol = symbol
     this.side = side
     this.type = type
@@ -770,10 +770,10 @@ class Order {
    * @returns {!Order} This struct
    */
   copy (other) {
-    if (other.uid != null) {
-      this.uid = other.uid
+    if (other.id != null) {
+      this.id = other.id
     } else {
-      this.uid = undefined
+      this.id = undefined
     }
     if (other.symbol != null) {
       this.symbol = other.symbol
@@ -840,7 +840,7 @@ class Order {
       throw new TypeError('Instance of Order is required!')
     }
     // noinspection RedundantIfStatementJS
-    if (this.uid === other.uid) {
+    if (this.id === other.id) {
       return false
     }
     return true
@@ -854,8 +854,8 @@ class Order {
   toString () {
     let result = ''
     result += 'Order('
-    result += 'uid='
-    result += this.uid.toString()
+    result += 'id='
+    result += this.id.toString()
     result += ',symbol='
     if (this.symbol != null) {
       result += '"' + this.symbol.toString() + '"'
@@ -894,7 +894,7 @@ class Order {
    */
   toJSON () {
     return {
-      uid: ((this.uid != null) ? this.uid : null),
+      id: ((this.id != null) ? this.id : null),
       symbol: ((this.symbol != null) ? this.symbol : null),
       side: ((this.side != null) ? this.side : null),
       type: ((this.type != null) ? this.type : null),
@@ -938,8 +938,8 @@ class FieldModelOrder extends fbe.FieldModel {
    */
   constructor (buffer, offset) {
     super(buffer, offset)
-    this._uid = new fbe.FieldModelInt32(buffer, 4 + 4)
-    this._symbol = new fbe.FieldModelString(buffer, this._uid.fbeOffset + this._uid.fbeSize)
+    this._id = new fbe.FieldModelInt32(buffer, 4 + 4)
+    this._symbol = new fbe.FieldModelString(buffer, this._id.fbeOffset + this._id.fbeSize)
     this._side = new FieldModelOrderSide(buffer, this._symbol.fbeOffset + this._symbol.fbeSize)
     this._type = new FieldModelOrderType(buffer, this._side.fbeOffset + this._side.fbeSize)
     this._price = new fbe.FieldModelDouble(buffer, this._type.fbeOffset + this._type.fbeSize)
@@ -949,12 +949,12 @@ class FieldModelOrder extends fbe.FieldModel {
   }
 
   /**
-   * Get the uid field model
+   * Get the id field model
    * @this {!FieldModelOrder}
-   * @returns {!fbe.FieldModelInt32} uid field model
+   * @returns {!fbe.FieldModelInt32} id field model
    */
-  get uid () {
-    return this._uid
+  get id () {
+    return this._id
   }
 
   /**
@@ -1035,7 +1035,7 @@ class FieldModelOrder extends fbe.FieldModel {
    * @returns {!number} Field body size
    */
   get fbeBody () {
-    return 4 + 4 + this.uid.fbeSize + this.symbol.fbeSize + this.side.fbeSize + this.type.fbeSize + this.price.fbeSize + this.volume.fbeSize + this.tp.fbeSize + this.sl.fbeSize
+    return 4 + 4 + this.id.fbeSize + this.symbol.fbeSize + this.side.fbeSize + this.type.fbeSize + this.price.fbeSize + this.volume.fbeSize + this.tp.fbeSize + this.sl.fbeSize
   }
 
   /**
@@ -1055,7 +1055,7 @@ class FieldModelOrder extends fbe.FieldModel {
 
     this._buffer.shift(fbeStructOffset)
 
-    let fbeResult = this.fbeBody + this.uid.fbeExtra + this.symbol.fbeExtra + this.side.fbeExtra + this.type.fbeExtra + this.price.fbeExtra + this.volume.fbeExtra + this.tp.fbeExtra + this.sl.fbeExtra
+    let fbeResult = this.fbeBody + this.id.fbeExtra + this.symbol.fbeExtra + this.side.fbeExtra + this.type.fbeExtra + this.price.fbeExtra + this.volume.fbeExtra + this.tp.fbeExtra + this.sl.fbeExtra
 
     this._buffer.unshift(fbeStructOffset)
 
@@ -1121,14 +1121,14 @@ class FieldModelOrder extends fbe.FieldModel {
   verifyFields (fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.uid.fbeSize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.id.fbeSize) > fbeStructSize) {
       return true
     }
-    if (!this.uid.verify()) {
+    if (!this.id.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uid.fbeSize
+    fbeCurrentSize += this.id.fbeSize
 
     if ((fbeCurrentSize + this.symbol.fbeSize) > fbeStructSize) {
       return true
@@ -1258,13 +1258,13 @@ class FieldModelOrder extends fbe.FieldModel {
   getFields (fbeValue, fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.uid.fbeSize) <= fbeStructSize) {
-      fbeValue.uid = this.uid.get()
+    if ((fbeCurrentSize + this.id.fbeSize) <= fbeStructSize) {
+      fbeValue.id = this.id.get()
     } else {
-      fbeValue.uid = 0
+      fbeValue.id = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uid.fbeSize
+    fbeCurrentSize += this.id.fbeSize
 
     if ((fbeCurrentSize + this.symbol.fbeSize) <= fbeStructSize) {
       fbeValue.symbol = this.symbol.get()
@@ -1379,7 +1379,7 @@ class FieldModelOrder extends fbe.FieldModel {
    * @param {Order} fbeValue Order value
    */
   setFields (fbeValue) {
-    this.uid.set(fbeValue.uid)
+    this.id.set(fbeValue.id)
     this.symbol.set(fbeValue.symbol)
     this.side.set(fbeValue.side)
     this.type.set(fbeValue.type)
@@ -1538,7 +1538,7 @@ class FinalModelOrder extends fbe.FinalModel {
    */
   constructor (buffer, offset) {
     super(buffer, offset)
-    this._uid = new fbe.FinalModelInt32(buffer, 0)
+    this._id = new fbe.FinalModelInt32(buffer, 0)
     this._symbol = new fbe.FinalModelString(buffer, 0)
     this._side = new FinalModelOrderSide(buffer, 0)
     this._type = new FinalModelOrderType(buffer, 0)
@@ -1549,12 +1549,12 @@ class FinalModelOrder extends fbe.FinalModel {
   }
 
   /**
-   * Get the uid final model
+   * Get the id final model
    * @this {!FinalModelOrder}
-   * @returns {!fbe.FinalModelInt32} uid final model
+   * @returns {!fbe.FinalModelInt32} id final model
    */
-  get uid () {
-    return this._uid
+  get id () {
+    return this._id
   }
 
   /**
@@ -1627,7 +1627,7 @@ class FinalModelOrder extends fbe.FinalModel {
    * @returns {!number} Allocation size
    */
   fbeAllocationSize (fbeValue) {
-    return 0 + this.uid.fbeAllocationSize(fbeValue.uid) + this.symbol.fbeAllocationSize(fbeValue.symbol) + this.side.fbeAllocationSize(fbeValue.side) + this.type.fbeAllocationSize(fbeValue.type) + this.price.fbeAllocationSize(fbeValue.price) + this.volume.fbeAllocationSize(fbeValue.volume) + this.tp.fbeAllocationSize(fbeValue.tp) + this.sl.fbeAllocationSize(fbeValue.sl)
+    return 0 + this.id.fbeAllocationSize(fbeValue.id) + this.symbol.fbeAllocationSize(fbeValue.symbol) + this.side.fbeAllocationSize(fbeValue.side) + this.type.fbeAllocationSize(fbeValue.type) + this.price.fbeAllocationSize(fbeValue.price) + this.volume.fbeAllocationSize(fbeValue.volume) + this.tp.fbeAllocationSize(fbeValue.tp) + this.sl.fbeAllocationSize(fbeValue.sl)
   }
 
   /**
@@ -1669,8 +1669,8 @@ class FinalModelOrder extends fbe.FinalModel {
     let fbeCurrentOffset = 0
     let fbeFieldSize
 
-    this.uid.fbeOffset = fbeCurrentOffset
-    fbeFieldSize = this.uid.verify()
+    this.id.fbeOffset = fbeCurrentOffset
+    fbeFieldSize = this.id.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
@@ -1752,9 +1752,9 @@ class FinalModelOrder extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeResult
 
-    this.uid.fbeOffset = fbeCurrentOffset
-    fbeResult = this.uid.get()
-    fbeValue.uid = fbeResult.value
+    this.id.fbeOffset = fbeCurrentOffset
+    fbeResult = this.id.get()
+    fbeValue.id = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
@@ -1835,8 +1835,8 @@ class FinalModelOrder extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeFieldSize
 
-    this.uid.fbeOffset = fbeCurrentOffset
-    fbeFieldSize = this.uid.set(fbeValue.uid)
+    this.id.fbeOffset = fbeCurrentOffset
+    fbeFieldSize = this.id.set(fbeValue.id)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize
@@ -2854,7 +2854,7 @@ exports.BalanceFinalModel = BalanceFinalModel
 class Account {
   /**
    * Initialize struct
-   * @param {!number=} uid
+   * @param {!number=} id
    * @param {!string=} name
    * @param {!StateEx=} state
    * @param {!Balance=} wallet
@@ -2862,8 +2862,8 @@ class Account {
    * @param {!Array=} orders
    * @constructor
    */
-  constructor (uid = 0, name = '', state = new StateEx(StateEx.initialized | StateEx.bad | StateEx.sad), wallet = new Balance(), asset = undefined, orders = []) {
-    this.uid = uid
+  constructor (id = 0, name = '', state = new StateEx(StateEx.initialized | StateEx.bad | StateEx.sad), wallet = new Balance(), asset = undefined, orders = []) {
+    this.id = id
     this.name = name
     this.state = state
     this.wallet = wallet
@@ -2878,10 +2878,10 @@ class Account {
    * @returns {!Account} This struct
    */
   copy (other) {
-    if (other.uid != null) {
-      this.uid = other.uid
+    if (other.id != null) {
+      this.id = other.id
     } else {
-      this.uid = undefined
+      this.id = undefined
     }
     if (other.name != null) {
       this.name = other.name
@@ -2947,7 +2947,7 @@ class Account {
       throw new TypeError('Instance of Account is required!')
     }
     // noinspection RedundantIfStatementJS
-    if (this.uid === other.uid) {
+    if (this.id === other.id) {
       return false
     }
     return true
@@ -2961,8 +2961,8 @@ class Account {
   toString () {
     let result = ''
     result += 'Account('
-    result += 'uid='
-    result += this.uid.toString()
+    result += 'id='
+    result += this.id.toString()
     result += ',name='
     if (this.name != null) {
       result += '"' + this.name.toString() + '"'
@@ -3012,7 +3012,7 @@ class Account {
    */
   toJSON () {
     return {
-      uid: ((this.uid != null) ? this.uid : null),
+      id: ((this.id != null) ? this.id : null),
       name: ((this.name != null) ? this.name : null),
       state: ((this.state != null) ? this.state : null),
       wallet: ((this.wallet != null) ? this.wallet : null),
@@ -3054,8 +3054,8 @@ class FieldModelAccount extends fbe.FieldModel {
    */
   constructor (buffer, offset) {
     super(buffer, offset)
-    this._uid = new fbe.FieldModelInt32(buffer, 4 + 4)
-    this._name = new fbe.FieldModelString(buffer, this._uid.fbeOffset + this._uid.fbeSize)
+    this._id = new fbe.FieldModelInt32(buffer, 4 + 4)
+    this._name = new fbe.FieldModelString(buffer, this._id.fbeOffset + this._id.fbeSize)
     this._state = new FieldModelStateEx(buffer, this._name.fbeOffset + this._name.fbeSize)
     this._wallet = new FieldModelBalance(buffer, this._state.fbeOffset + this._state.fbeSize)
     this._asset = new fbe.FieldModelOptional(new FieldModelBalance(buffer, this._wallet.fbeOffset + this._wallet.fbeSize), buffer, this._wallet.fbeOffset + this._wallet.fbeSize)
@@ -3063,12 +3063,12 @@ class FieldModelAccount extends fbe.FieldModel {
   }
 
   /**
-   * Get the uid field model
+   * Get the id field model
    * @this {!FieldModelAccount}
-   * @returns {!fbe.FieldModelInt32} uid field model
+   * @returns {!fbe.FieldModelInt32} id field model
    */
-  get uid () {
-    return this._uid
+  get id () {
+    return this._id
   }
 
   /**
@@ -3131,7 +3131,7 @@ class FieldModelAccount extends fbe.FieldModel {
    * @returns {!number} Field body size
    */
   get fbeBody () {
-    return 4 + 4 + this.uid.fbeSize + this.name.fbeSize + this.state.fbeSize + this.wallet.fbeSize + this.asset.fbeSize + this.orders.fbeSize
+    return 4 + 4 + this.id.fbeSize + this.name.fbeSize + this.state.fbeSize + this.wallet.fbeSize + this.asset.fbeSize + this.orders.fbeSize
   }
 
   /**
@@ -3151,7 +3151,7 @@ class FieldModelAccount extends fbe.FieldModel {
 
     this._buffer.shift(fbeStructOffset)
 
-    let fbeResult = this.fbeBody + this.uid.fbeExtra + this.name.fbeExtra + this.state.fbeExtra + this.wallet.fbeExtra + this.asset.fbeExtra + this.orders.fbeExtra
+    let fbeResult = this.fbeBody + this.id.fbeExtra + this.name.fbeExtra + this.state.fbeExtra + this.wallet.fbeExtra + this.asset.fbeExtra + this.orders.fbeExtra
 
     this._buffer.unshift(fbeStructOffset)
 
@@ -3217,14 +3217,14 @@ class FieldModelAccount extends fbe.FieldModel {
   verifyFields (fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.uid.fbeSize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.id.fbeSize) > fbeStructSize) {
       return true
     }
-    if (!this.uid.verify()) {
+    if (!this.id.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uid.fbeSize
+    fbeCurrentSize += this.id.fbeSize
 
     if ((fbeCurrentSize + this.name.fbeSize) > fbeStructSize) {
       return true
@@ -3336,13 +3336,13 @@ class FieldModelAccount extends fbe.FieldModel {
   getFields (fbeValue, fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.uid.fbeSize) <= fbeStructSize) {
-      fbeValue.uid = this.uid.get()
+    if ((fbeCurrentSize + this.id.fbeSize) <= fbeStructSize) {
+      fbeValue.id = this.id.get()
     } else {
-      fbeValue.uid = 0
+      fbeValue.id = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uid.fbeSize
+    fbeCurrentSize += this.id.fbeSize
 
     if ((fbeCurrentSize + this.name.fbeSize) <= fbeStructSize) {
       fbeValue.name = this.name.get()
@@ -3441,7 +3441,7 @@ class FieldModelAccount extends fbe.FieldModel {
    * @param {Account} fbeValue Account value
    */
   setFields (fbeValue) {
-    this.uid.set(fbeValue.uid)
+    this.id.set(fbeValue.id)
     this.name.set(fbeValue.name)
     this.state.set(fbeValue.state)
     this.wallet.set(fbeValue.wallet)
@@ -3598,7 +3598,7 @@ class FinalModelAccount extends fbe.FinalModel {
    */
   constructor (buffer, offset) {
     super(buffer, offset)
-    this._uid = new fbe.FinalModelInt32(buffer, 0)
+    this._id = new fbe.FinalModelInt32(buffer, 0)
     this._name = new fbe.FinalModelString(buffer, 0)
     this._state = new FinalModelStateEx(buffer, 0)
     this._wallet = new FinalModelBalance(buffer, 0)
@@ -3607,12 +3607,12 @@ class FinalModelAccount extends fbe.FinalModel {
   }
 
   /**
-   * Get the uid final model
+   * Get the id final model
    * @this {!FinalModelAccount}
-   * @returns {!fbe.FinalModelInt32} uid final model
+   * @returns {!fbe.FinalModelInt32} id final model
    */
-  get uid () {
-    return this._uid
+  get id () {
+    return this._id
   }
 
   /**
@@ -3667,7 +3667,7 @@ class FinalModelAccount extends fbe.FinalModel {
    * @returns {!number} Allocation size
    */
   fbeAllocationSize (fbeValue) {
-    return 0 + this.uid.fbeAllocationSize(fbeValue.uid) + this.name.fbeAllocationSize(fbeValue.name) + this.state.fbeAllocationSize(fbeValue.state) + this.wallet.fbeAllocationSize(fbeValue.wallet) + this.asset.fbeAllocationSize(fbeValue.asset) + this.orders.fbeAllocationSize(fbeValue.orders)
+    return 0 + this.id.fbeAllocationSize(fbeValue.id) + this.name.fbeAllocationSize(fbeValue.name) + this.state.fbeAllocationSize(fbeValue.state) + this.wallet.fbeAllocationSize(fbeValue.wallet) + this.asset.fbeAllocationSize(fbeValue.asset) + this.orders.fbeAllocationSize(fbeValue.orders)
   }
 
   /**
@@ -3709,8 +3709,8 @@ class FinalModelAccount extends fbe.FinalModel {
     let fbeCurrentOffset = 0
     let fbeFieldSize
 
-    this.uid.fbeOffset = fbeCurrentOffset
-    fbeFieldSize = this.uid.verify()
+    this.id.fbeOffset = fbeCurrentOffset
+    fbeFieldSize = this.id.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
@@ -3778,9 +3778,9 @@ class FinalModelAccount extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeResult
 
-    this.uid.fbeOffset = fbeCurrentOffset
-    fbeResult = this.uid.get()
-    fbeValue.uid = fbeResult.value
+    this.id.fbeOffset = fbeCurrentOffset
+    fbeResult = this.id.get()
+    fbeValue.id = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
@@ -3846,8 +3846,8 @@ class FinalModelAccount extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeFieldSize
 
-    this.uid.fbeOffset = fbeCurrentOffset
-    fbeFieldSize = this.uid.set(fbeValue.uid)
+    this.id.fbeOffset = fbeCurrentOffset
+    fbeFieldSize = this.id.set(fbeValue.id)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize

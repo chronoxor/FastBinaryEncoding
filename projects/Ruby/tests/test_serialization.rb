@@ -35,7 +35,7 @@ class TestSerialization < Test::Unit::TestCase
     reader.next(deserialized)
     assert_equal(reader.model.fbe_offset, (4 + reader.buffer.size))
 
-    assert_equal(account2.uid, 1)
+    assert_equal(account2.id, 1)
     assert_equal(account2.name, 'Test')
     assert_true(account2.state.has_flags(Proto::State.good))
     assert_equal(account2.wallet.currency, 'USD')
@@ -44,19 +44,19 @@ class TestSerialization < Test::Unit::TestCase
     assert_equal(account2.asset.currency, 'EUR')
     assert_equal(account2.asset.amount, 100.0)
     assert_equal(account2.orders.length, 3)
-    assert_equal(account2.orders[0].uid, 1)
+    assert_equal(account2.orders[0].id, 1)
     assert_equal(account2.orders[0].symbol, 'EURUSD')
     assert_equal(account2.orders[0].side, Proto::OrderSide.buy)
     assert_equal(account2.orders[0].type, Proto::OrderType.market)
     assert_equal(account2.orders[0].price, 1.23456)
     assert_equal(account2.orders[0].volume, 1000.0)
-    assert_equal(account2.orders[1].uid, 2)
+    assert_equal(account2.orders[1].id, 2)
     assert_equal(account2.orders[1].symbol, 'EURUSD')
     assert_equal(account2.orders[1].side, Proto::OrderSide.sell)
     assert_equal(account2.orders[1].type, Proto::OrderType.limit)
     assert_equal(account2.orders[1].price, 1.0)
     assert_equal(account2.orders[1].volume, 100.0)
-    assert_equal(account2.orders[2].uid, 3)
+    assert_equal(account2.orders[2].id, 3)
     assert_equal(account2.orders[2].symbol, 'EURUSD')
     assert_equal(account2.orders[2].side, Proto::OrderSide.buy)
     assert_equal(account2.orders[2].type, Proto::OrderType.stop)
@@ -1031,10 +1031,10 @@ class TestSerialization < Test::Unit::TestCase
     struct1.f3.add(Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2)
     struct1.f3.add(Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2 | Test::FlagsSimple.FLAG_VALUE_3)
     s1 = Test::StructSimple.new
-    s1.uid = 48
+    s1.id = 48
     struct1.f4.add(s1)
     s2 = Test::StructSimple.new
-    s2.uid = 65
+    s2.id = 65
     struct1.f4.add(s2)
 
     # Serialize the struct to the FBE stream
@@ -1099,10 +1099,10 @@ class TestSerialization < Test::Unit::TestCase
     struct1.f8[10] = Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2
     struct1.f8[20] = nil
     s1 = Test::StructSimple.new
-    s1.uid = 48
+    s1.id = 48
     struct1.f9[10] = s1
     s2 = Test::StructSimple.new
-    s2.uid = 65
+    s2.id = 65
     struct1.f9[20] = s2
     struct1.f10[10] = s1
     struct1.f10[20] = nil
@@ -1158,10 +1158,10 @@ class TestSerialization < Test::Unit::TestCase
     assert_equal(struct2.f8[10], Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2)
     assert_true(struct2.f8[20].nil?)
     assert_equal(struct2.f9.length, 2)
-    assert_equal(struct2.f9[10].uid, 48)
-    assert_equal(struct2.f9[20].uid, 65)
+    assert_equal(struct2.f9[10].id, 48)
+    assert_equal(struct2.f9[20].id, 65)
     assert_equal(struct2.f10.length, 2)
-    assert_equal(struct2.f10[10].uid, 48)
+    assert_equal(struct2.f10[10].id, 48)
     assert_true(struct2.f10[20].nil?)
   end
 
@@ -1186,10 +1186,10 @@ class TestSerialization < Test::Unit::TestCase
     struct1.f8['10'] = Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2
     struct1.f8['20'] = nil
     s1 = Test::StructSimple.new
-    s1.uid = 48
+    s1.id = 48
     struct1.f9['10'] = s1
     s2 = Test::StructSimple.new
-    s2.uid = 65
+    s2.id = 65
     struct1.f9['20'] = s2
     struct1.f10['10'] = s1
     struct1.f10['20'] = nil
@@ -1245,10 +1245,10 @@ class TestSerialization < Test::Unit::TestCase
     assert_equal(struct2.f8['10'], Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2)
     assert_true(struct2.f8['20'].nil?)
     assert_equal(struct2.f9.length, 2)
-    assert_equal(struct2.f9['10'].uid, 48)
-    assert_equal(struct2.f9['20'].uid, 65)
+    assert_equal(struct2.f9['10'].id, 48)
+    assert_equal(struct2.f9['20'].id, 65)
     assert_equal(struct2.f10.length, 2)
-    assert_equal(struct2.f10['10'].uid, 48)
+    assert_equal(struct2.f10['10'].id, 48)
     assert_true(struct2.f10['20'].nil?)
   end
 
@@ -1257,10 +1257,10 @@ class TestSerialization < Test::Unit::TestCase
     # Create a new struct
     struct1 = Test::StructHashEx.new
     s1 = Test::StructSimple.new
-    s1.uid = 48
+    s1.id = 48
     struct1.f1[s1] = Test::StructNested.new
     s2 = Test::StructSimple.new
-    s2.uid = 65
+    s2.id = 65
     struct1.f1[s2] = Test::StructNested.new
     struct1.f2[s1] = Test::StructNested.new
     struct1.f2[s2] = nil

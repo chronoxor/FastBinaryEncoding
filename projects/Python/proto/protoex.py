@@ -391,14 +391,14 @@ class FinalModelStateEx(fbe.FinalModel):
 
 @functools.total_ordering
 class Order(object):
-    __slots__ = "uid", "symbol", "side", "type", "price", "volume", "tp", "sl", 
+    __slots__ = "id", "symbol", "side", "type", "price", "volume", "tp", "sl", 
 
-    def __init__(self, uid=0, symbol="", side=None, type=None, price=float(0.0), volume=float(0.0), tp=float(10.0), sl=float(-10.0)):
+    def __init__(self, id=0, symbol="", side=None, type=None, price=float(0.0), volume=float(0.0), tp=float(10.0), sl=float(-10.0)):
         if side is None:
             side = OrderSide()
         if type is None:
             type = OrderType()
-        self.uid = uid
+        self.id = id
         self.symbol = symbol
         self.side = side
         self.type = type
@@ -409,7 +409,7 @@ class Order(object):
 
     # Struct shallow copy
     def copy(self, other):
-        self.uid = other.uid
+        self.id = other.id
         self.symbol = other.symbol
         self.side = other.side
         self.type = other.type
@@ -433,22 +433,22 @@ class Order(object):
     def __eq__(self, other):
         if not isinstance(self, other.__class__):
             return NotImplemented
-        if not self.uid == other.uid:
+        if not self.id == other.id:
             return False
         return True
 
     def __lt__(self, other):
         if not isinstance(self, other.__class__):
             return NotImplemented
-        if self.uid < other.uid:
+        if self.id < other.id:
             return True
-        if self.uid == other.uid:
+        if self.id == other.id:
             return False
         return False
 
     @property
     def __key__(self):
-        return self.uid, 
+        return self.id, 
 
     def __hash__(self):
         return hash(self.__key__)
@@ -459,8 +459,8 @@ class Order(object):
     def __str__(self):
         sb = list()
         sb.append("Order(")
-        sb.append("uid=")
-        sb.append(str(self.uid))
+        sb.append("id=")
+        sb.append(str(self.id))
         sb.append(",symbol=")
         if self.symbol is not None:
             sb.append("\"" + str(self.symbol) + "\"")
@@ -488,7 +488,7 @@ class Order(object):
     def __to_json__(self):
         result = dict()
         result.update(dict(
-            uid=self.uid, 
+            id=self.id, 
             symbol=self.symbol, 
             side=self.side, 
             type=self.type, 
@@ -509,7 +509,7 @@ class Order(object):
         if fields is None:
             return None
         return Order(
-            None if "uid" not in fields else fields["uid"],
+            None if "id" not in fields else fields["id"],
             None if "symbol" not in fields else fields["symbol"],
             None if "side" not in fields else OrderSide.__from_json__(fields["side"]),
             None if "type" not in fields else OrderType.__from_json__(fields["type"]),
@@ -521,12 +521,12 @@ class Order(object):
 
 
 class FieldModelOrder(fbe.FieldModel):
-    __slots__ = "_uid", "_symbol", "_side", "_type", "_price", "_volume", "_tp", "_sl", 
+    __slots__ = "_id", "_symbol", "_side", "_type", "_price", "_volume", "_tp", "_sl", 
 
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._uid = fbe.FieldModelInt32(buffer, 4 + 4)
-        self._symbol = fbe.FieldModelString(buffer, self._uid.fbe_offset + self._uid.fbe_size)
+        self._id = fbe.FieldModelInt32(buffer, 4 + 4)
+        self._symbol = fbe.FieldModelString(buffer, self._id.fbe_offset + self._id.fbe_size)
         self._side = FieldModelOrderSide(buffer, self._symbol.fbe_offset + self._symbol.fbe_size)
         self._type = FieldModelOrderType(buffer, self._side.fbe_offset + self._side.fbe_size)
         self._price = fbe.FieldModelDouble(buffer, self._type.fbe_offset + self._type.fbe_size)
@@ -535,8 +535,8 @@ class FieldModelOrder(fbe.FieldModel):
         self._sl = fbe.FieldModelDouble(buffer, self._tp.fbe_offset + self._tp.fbe_size)
 
     @property
-    def uid(self):
-        return self._uid
+    def id(self):
+        return self._id
 
     @property
     def symbol(self):
@@ -575,7 +575,7 @@ class FieldModelOrder(fbe.FieldModel):
     @property
     def fbe_body(self):
         fbe_result = 4 + 4 \
-            + self.uid.fbe_size \
+            + self.id.fbe_size \
             + self.symbol.fbe_size \
             + self.side.fbe_size \
             + self.type.fbe_size \
@@ -599,7 +599,7 @@ class FieldModelOrder(fbe.FieldModel):
         self._buffer.shift(fbe_struct_offset)
 
         fbe_result = self.fbe_body \
-            + self.uid.fbe_extra \
+            + self.id.fbe_extra \
             + self.symbol.fbe_extra \
             + self.side.fbe_extra \
             + self.type.fbe_extra \
@@ -645,11 +645,11 @@ class FieldModelOrder(fbe.FieldModel):
     def verify_fields(self, fbe_struct_size):
         fbe_current_size = 4 + 4
 
-        if (fbe_current_size + self.uid.fbe_size) > fbe_struct_size:
+        if (fbe_current_size + self.id.fbe_size) > fbe_struct_size:
             return True
-        if not self.uid.verify():
+        if not self.id.verify():
             return False
-        fbe_current_size += self.uid.fbe_size
+        fbe_current_size += self.id.fbe_size
 
         if (fbe_current_size + self.symbol.fbe_size) > fbe_struct_size:
             return True
@@ -735,11 +735,11 @@ class FieldModelOrder(fbe.FieldModel):
     def get_fields(self, fbe_value, fbe_struct_size):
         fbe_current_size = 4 + 4
 
-        if (fbe_current_size + self.uid.fbe_size) <= fbe_struct_size:
-            fbe_value.uid = self.uid.get()
+        if (fbe_current_size + self.id.fbe_size) <= fbe_struct_size:
+            fbe_value.id = self.id.get()
         else:
-            fbe_value.uid = 0
-        fbe_current_size += self.uid.fbe_size
+            fbe_value.id = 0
+        fbe_current_size += self.id.fbe_size
 
         if (fbe_current_size + self.symbol.fbe_size) <= fbe_struct_size:
             fbe_value.symbol = self.symbol.get()
@@ -817,7 +817,7 @@ class FieldModelOrder(fbe.FieldModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        self.uid.set(fbe_value.uid)
+        self.id.set(fbe_value.id)
         self.symbol.set(fbe_value.symbol)
         self.side.set(fbe_value.side)
         self.type.set(fbe_value.type)
@@ -903,11 +903,11 @@ class OrderModel(fbe.Model):
 
 
 class FinalModelOrder(fbe.FinalModel):
-    __slots__ = "_uid", "_symbol", "_side", "_type", "_price", "_volume", "_tp", "_sl", 
+    __slots__ = "_id", "_symbol", "_side", "_type", "_price", "_volume", "_tp", "_sl", 
 
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._uid = fbe.FinalModelInt32(buffer, 0)
+        self._id = fbe.FinalModelInt32(buffer, 0)
         self._symbol = fbe.FinalModelString(buffer, 0)
         self._side = FinalModelOrderSide(buffer, 0)
         self._type = FinalModelOrderType(buffer, 0)
@@ -917,8 +917,8 @@ class FinalModelOrder(fbe.FinalModel):
         self._sl = fbe.FinalModelDouble(buffer, 0)
 
     @property
-    def uid(self):
-        return self._uid
+    def id(self):
+        return self._id
 
     @property
     def symbol(self):
@@ -951,7 +951,7 @@ class FinalModelOrder(fbe.FinalModel):
     # Get the allocation size
     def fbe_allocation_size(self, fbe_value):
         fbe_result = 0 \
-            + self.uid.fbe_allocation_size(fbe_value.uid) \
+            + self.id.fbe_allocation_size(fbe_value.id) \
             + self.symbol.fbe_allocation_size(fbe_value.symbol) \
             + self.side.fbe_allocation_size(fbe_value.side) \
             + self.type.fbe_allocation_size(fbe_value.type) \
@@ -980,8 +980,8 @@ class FinalModelOrder(fbe.FinalModel):
     def verify_fields(self):
         fbe_current_offset = 0
 
-        self.uid.fbe_offset = fbe_current_offset
-        fbe_field_size = self.uid.verify()
+        self.id.fbe_offset = fbe_current_offset
+        fbe_field_size = self.id.verify()
         if fbe_field_size == sys.maxsize:
             return sys.maxsize
         fbe_current_offset += fbe_field_size
@@ -1045,9 +1045,9 @@ class FinalModelOrder(fbe.FinalModel):
         fbe_current_offset = 0
         fbe_current_size = 0
 
-        self.uid.fbe_offset = fbe_current_offset
-        fbe_result = self.uid.get()
-        fbe_value.uid = fbe_result[0]
+        self.id.fbe_offset = fbe_current_offset
+        fbe_result = self.id.get()
+        fbe_value.id = fbe_result[0]
         fbe_current_offset += fbe_result[1]
         fbe_current_size += fbe_result[1]
 
@@ -1107,8 +1107,8 @@ class FinalModelOrder(fbe.FinalModel):
         fbe_current_offset = 0
         fbe_current_size = 0
 
-        self.uid.fbe_offset = fbe_current_offset
-        fbe_field_size = self.uid.set(fbe_value.uid)
+        self.id.fbe_offset = fbe_current_offset
+        fbe_field_size = self.id.set(fbe_value.id)
         fbe_current_offset += fbe_field_size
         fbe_current_size += fbe_field_size
 
@@ -1749,14 +1749,14 @@ class BalanceFinalModel(fbe.Model):
 
 @functools.total_ordering
 class Account(object):
-    __slots__ = "uid", "name", "state", "wallet", "asset", "orders", 
+    __slots__ = "id", "name", "state", "wallet", "asset", "orders", 
 
-    def __init__(self, uid=0, name="", state=StateEx.initialized | StateEx.bad | StateEx.sad, wallet=None, asset=None, orders=None):
+    def __init__(self, id=0, name="", state=StateEx.initialized | StateEx.bad | StateEx.sad, wallet=None, asset=None, orders=None):
         if wallet is None:
             wallet = Balance()
         if orders is None:
             orders = list()
-        self.uid = uid
+        self.id = id
         self.name = name
         self.state = state
         self.wallet = wallet
@@ -1765,7 +1765,7 @@ class Account(object):
 
     # Struct shallow copy
     def copy(self, other):
-        self.uid = other.uid
+        self.id = other.id
         self.name = other.name
         self.state = other.state
         self.wallet = other.wallet
@@ -1787,22 +1787,22 @@ class Account(object):
     def __eq__(self, other):
         if not isinstance(self, other.__class__):
             return NotImplemented
-        if not self.uid == other.uid:
+        if not self.id == other.id:
             return False
         return True
 
     def __lt__(self, other):
         if not isinstance(self, other.__class__):
             return NotImplemented
-        if self.uid < other.uid:
+        if self.id < other.id:
             return True
-        if self.uid == other.uid:
+        if self.id == other.id:
             return False
         return False
 
     @property
     def __key__(self):
-        return self.uid, 
+        return self.id, 
 
     def __hash__(self):
         return hash(self.__key__)
@@ -1813,8 +1813,8 @@ class Account(object):
     def __str__(self):
         sb = list()
         sb.append("Account(")
-        sb.append("uid=")
-        sb.append(str(self.uid))
+        sb.append("id=")
+        sb.append(str(self.id))
         sb.append(",name=")
         if self.name is not None:
             sb.append("\"" + str(self.name) + "\"")
@@ -1850,7 +1850,7 @@ class Account(object):
     def __to_json__(self):
         result = dict()
         result.update(dict(
-            uid=self.uid, 
+            id=self.id, 
             name=self.name, 
             state=self.state, 
             wallet=self.wallet, 
@@ -1869,7 +1869,7 @@ class Account(object):
         if fields is None:
             return None
         return Account(
-            None if "uid" not in fields else fields["uid"],
+            None if "id" not in fields else fields["id"],
             None if "name" not in fields else fields["name"],
             None if "state" not in fields else StateEx.__from_json__(fields["state"]),
             None if "wallet" not in fields else Balance.__from_json__(fields["wallet"]),
@@ -1879,20 +1879,20 @@ class Account(object):
 
 
 class FieldModelAccount(fbe.FieldModel):
-    __slots__ = "_uid", "_name", "_state", "_wallet", "_asset", "_orders", 
+    __slots__ = "_id", "_name", "_state", "_wallet", "_asset", "_orders", 
 
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._uid = fbe.FieldModelInt32(buffer, 4 + 4)
-        self._name = fbe.FieldModelString(buffer, self._uid.fbe_offset + self._uid.fbe_size)
+        self._id = fbe.FieldModelInt32(buffer, 4 + 4)
+        self._name = fbe.FieldModelString(buffer, self._id.fbe_offset + self._id.fbe_size)
         self._state = FieldModelStateEx(buffer, self._name.fbe_offset + self._name.fbe_size)
         self._wallet = FieldModelBalance(buffer, self._state.fbe_offset + self._state.fbe_size)
         self._asset = fbe.FieldModelOptional(FieldModelBalance(buffer, self._wallet.fbe_offset + self._wallet.fbe_size), buffer, self._wallet.fbe_offset + self._wallet.fbe_size)
         self._orders = fbe.FieldModelVector(FieldModelOrder(buffer, self._asset.fbe_offset + self._asset.fbe_size), buffer, self._asset.fbe_offset + self._asset.fbe_size)
 
     @property
-    def uid(self):
-        return self._uid
+    def id(self):
+        return self._id
 
     @property
     def name(self):
@@ -1923,7 +1923,7 @@ class FieldModelAccount(fbe.FieldModel):
     @property
     def fbe_body(self):
         fbe_result = 4 + 4 \
-            + self.uid.fbe_size \
+            + self.id.fbe_size \
             + self.name.fbe_size \
             + self.state.fbe_size \
             + self.wallet.fbe_size \
@@ -1945,7 +1945,7 @@ class FieldModelAccount(fbe.FieldModel):
         self._buffer.shift(fbe_struct_offset)
 
         fbe_result = self.fbe_body \
-            + self.uid.fbe_extra \
+            + self.id.fbe_extra \
             + self.name.fbe_extra \
             + self.state.fbe_extra \
             + self.wallet.fbe_extra \
@@ -1989,11 +1989,11 @@ class FieldModelAccount(fbe.FieldModel):
     def verify_fields(self, fbe_struct_size):
         fbe_current_size = 4 + 4
 
-        if (fbe_current_size + self.uid.fbe_size) > fbe_struct_size:
+        if (fbe_current_size + self.id.fbe_size) > fbe_struct_size:
             return True
-        if not self.uid.verify():
+        if not self.id.verify():
             return False
-        fbe_current_size += self.uid.fbe_size
+        fbe_current_size += self.id.fbe_size
 
         if (fbe_current_size + self.name.fbe_size) > fbe_struct_size:
             return True
@@ -2067,11 +2067,11 @@ class FieldModelAccount(fbe.FieldModel):
     def get_fields(self, fbe_value, fbe_struct_size):
         fbe_current_size = 4 + 4
 
-        if (fbe_current_size + self.uid.fbe_size) <= fbe_struct_size:
-            fbe_value.uid = self.uid.get()
+        if (fbe_current_size + self.id.fbe_size) <= fbe_struct_size:
+            fbe_value.id = self.id.get()
         else:
-            fbe_value.uid = 0
-        fbe_current_size += self.uid.fbe_size
+            fbe_value.id = 0
+        fbe_current_size += self.id.fbe_size
 
         if (fbe_current_size + self.name.fbe_size) <= fbe_struct_size:
             fbe_value.name = self.name.get()
@@ -2137,7 +2137,7 @@ class FieldModelAccount(fbe.FieldModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        self.uid.set(fbe_value.uid)
+        self.id.set(fbe_value.id)
         self.name.set(fbe_value.name)
         self.state.set(fbe_value.state)
         self.wallet.set(fbe_value.wallet)
@@ -2221,11 +2221,11 @@ class AccountModel(fbe.Model):
 
 
 class FinalModelAccount(fbe.FinalModel):
-    __slots__ = "_uid", "_name", "_state", "_wallet", "_asset", "_orders", 
+    __slots__ = "_id", "_name", "_state", "_wallet", "_asset", "_orders", 
 
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._uid = fbe.FinalModelInt32(buffer, 0)
+        self._id = fbe.FinalModelInt32(buffer, 0)
         self._name = fbe.FinalModelString(buffer, 0)
         self._state = FinalModelStateEx(buffer, 0)
         self._wallet = FinalModelBalance(buffer, 0)
@@ -2233,8 +2233,8 @@ class FinalModelAccount(fbe.FinalModel):
         self._orders = fbe.FinalModelVector(FinalModelOrder(buffer, 0), buffer, 0)
 
     @property
-    def uid(self):
-        return self._uid
+    def id(self):
+        return self._id
 
     @property
     def name(self):
@@ -2259,7 +2259,7 @@ class FinalModelAccount(fbe.FinalModel):
     # Get the allocation size
     def fbe_allocation_size(self, fbe_value):
         fbe_result = 0 \
-            + self.uid.fbe_allocation_size(fbe_value.uid) \
+            + self.id.fbe_allocation_size(fbe_value.id) \
             + self.name.fbe_allocation_size(fbe_value.name) \
             + self.state.fbe_allocation_size(fbe_value.state) \
             + self.wallet.fbe_allocation_size(fbe_value.wallet) \
@@ -2286,8 +2286,8 @@ class FinalModelAccount(fbe.FinalModel):
     def verify_fields(self):
         fbe_current_offset = 0
 
-        self.uid.fbe_offset = fbe_current_offset
-        fbe_field_size = self.uid.verify()
+        self.id.fbe_offset = fbe_current_offset
+        fbe_field_size = self.id.verify()
         if fbe_field_size == sys.maxsize:
             return sys.maxsize
         fbe_current_offset += fbe_field_size
@@ -2339,9 +2339,9 @@ class FinalModelAccount(fbe.FinalModel):
         fbe_current_offset = 0
         fbe_current_size = 0
 
-        self.uid.fbe_offset = fbe_current_offset
-        fbe_result = self.uid.get()
-        fbe_value.uid = fbe_result[0]
+        self.id.fbe_offset = fbe_current_offset
+        fbe_result = self.id.get()
+        fbe_value.id = fbe_result[0]
         fbe_current_offset += fbe_result[1]
         fbe_current_size += fbe_result[1]
 
@@ -2388,8 +2388,8 @@ class FinalModelAccount(fbe.FinalModel):
         fbe_current_offset = 0
         fbe_current_size = 0
 
-        self.uid.fbe_offset = fbe_current_offset
-        fbe_field_size = self.uid.set(fbe_value.uid)
+        self.id.fbe_offset = fbe_current_offset
+        fbe_field_size = self.id.set(fbe_value.id)
         fbe_current_offset += fbe_field_size
         fbe_current_size += fbe_field_size
 

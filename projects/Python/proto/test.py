@@ -563,9 +563,9 @@ class FinalModelFlagsTyped(fbe.FinalModel):
 
 @functools.total_ordering
 class StructSimple(object):
-    __slots__ = "uid", "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10", "f11", "f12", "f13", "f14", "f15", "f16", "f17", "f18", "f19", "f20", "f21", "f22", "f23", "f24", "f25", "f26", "f27", "f28", "f29", "f30", "f31", "f32", "f33", "f34", "f35", "f36", "f37", "f38", "f39", "f40", "f41", "f42", "f43", "f44", 
+    __slots__ = "id", "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10", "f11", "f12", "f13", "f14", "f15", "f16", "f17", "f18", "f19", "f20", "f21", "f22", "f23", "f24", "f25", "f26", "f27", "f28", "f29", "f30", "f31", "f32", "f33", "f34", "f35", "f36", "f37", "f38", "f39", "f40", "f41", "f42", "f43", "f44", 
 
-    def __init__(self, uid=0, f1=False, f2=True, f3=0, f4=int(255), f5='\0', f6='!', f7='\0', f8=chr(0x0444), f9=0, f10=int(127), f11=0, f12=int(255), f13=0, f14=int(32767), f15=0, f16=int(65535), f17=0, f18=int(2147483647), f19=0, f20=int(0xFFFFFFFF), f21=0, f22=int(9223372036854775807), f23=0, f24=int(0xFFFFFFFFFFFFFFFF), f25=0.0, f26=float(123.456), f27=0.0, f28=float(-123.456e+123), f29=decimal.Decimal(0), f30=decimal.Decimal("123456.123456"), f31="", f32="Initial string!", f33=fbe.epoch(), f34=fbe.epoch(), f35=fbe.utc(), f36=uuid.UUID(int=0), f37=uuid.uuid1(), f38=uuid.UUID("123e4567-e89b-12d3-a456-426655440000"), f39=None, f40=None, f41=None, f42=None, f43=None, f44=None):
+    def __init__(self, id=0, f1=False, f2=True, f3=0, f4=int(255), f5='\0', f6='!', f7='\0', f8=chr(0x0444), f9=0, f10=int(127), f11=0, f12=int(255), f13=0, f14=int(32767), f15=0, f16=int(65535), f17=0, f18=int(2147483647), f19=0, f20=int(0xFFFFFFFF), f21=0, f22=int(9223372036854775807), f23=0, f24=int(0xFFFFFFFFFFFFFFFF), f25=0.0, f26=float(123.456), f27=0.0, f28=float(-123.456e+123), f29=decimal.Decimal(0), f30=decimal.Decimal("123456.123456"), f31="", f32="Initial string!", f33=fbe.epoch(), f34=fbe.epoch(), f35=fbe.utc(), f36=uuid.UUID(int=0), f37=uuid.uuid1(), f38=uuid.UUID("123e4567-e89b-12d3-a456-426655440000"), f39=None, f40=None, f41=None, f42=None, f43=None, f44=None):
         if f29 is None:
             f29 = decimal.Decimal(0)
         if f36 is None:
@@ -582,7 +582,7 @@ class StructSimple(object):
             f43 = proto.State()
         if f44 is None:
             f44 = proto.Account()
-        self.uid = uid
+        self.id = id
         self.f1 = f1
         self.f2 = f2
         self.f3 = f3
@@ -630,7 +630,7 @@ class StructSimple(object):
 
     # Struct shallow copy
     def copy(self, other):
-        self.uid = other.uid
+        self.id = other.id
         self.f1 = other.f1
         self.f2 = other.f2
         self.f3 = other.f3
@@ -691,22 +691,22 @@ class StructSimple(object):
     def __eq__(self, other):
         if not isinstance(self, other.__class__):
             return NotImplemented
-        if not self.uid == other.uid:
+        if not self.id == other.id:
             return False
         return True
 
     def __lt__(self, other):
         if not isinstance(self, other.__class__):
             return NotImplemented
-        if self.uid < other.uid:
+        if self.id < other.id:
             return True
-        if self.uid == other.uid:
+        if self.id == other.id:
             return False
         return False
 
     @property
     def __key__(self):
-        return self.uid, 
+        return self.id, 
 
     def __hash__(self):
         return hash(self.__key__)
@@ -717,8 +717,8 @@ class StructSimple(object):
     def __str__(self):
         sb = list()
         sb.append("StructSimple(")
-        sb.append("uid=")
-        sb.append(str(self.uid))
+        sb.append("id=")
+        sb.append(str(self.id))
         sb.append(",f1=")
         sb.append("true" if self.f1 else "false")
         sb.append(",f2=")
@@ -847,7 +847,7 @@ class StructSimple(object):
     def __to_json__(self):
         result = dict()
         result.update(dict(
-            uid=self.uid, 
+            id=self.id, 
             f1=self.f1, 
             f2=self.f2, 
             f3=self.f3, 
@@ -905,7 +905,7 @@ class StructSimple(object):
         if fields is None:
             return None
         return StructSimple(
-            None if "uid" not in fields else fields["uid"],
+            None if "id" not in fields else fields["id"],
             None if "f1" not in fields else fields["f1"],
             None if "f2" not in fields else fields["f2"],
             None if "f3" not in fields else fields["f3"],
@@ -954,12 +954,12 @@ class StructSimple(object):
 
 
 class FieldModelStructSimple(fbe.FieldModel):
-    __slots__ = "_uid", "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", "_f11", "_f12", "_f13", "_f14", "_f15", "_f16", "_f17", "_f18", "_f19", "_f20", "_f21", "_f22", "_f23", "_f24", "_f25", "_f26", "_f27", "_f28", "_f29", "_f30", "_f31", "_f32", "_f33", "_f34", "_f35", "_f36", "_f37", "_f38", "_f39", "_f40", "_f41", "_f42", "_f43", "_f44", 
+    __slots__ = "_id", "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", "_f11", "_f12", "_f13", "_f14", "_f15", "_f16", "_f17", "_f18", "_f19", "_f20", "_f21", "_f22", "_f23", "_f24", "_f25", "_f26", "_f27", "_f28", "_f29", "_f30", "_f31", "_f32", "_f33", "_f34", "_f35", "_f36", "_f37", "_f38", "_f39", "_f40", "_f41", "_f42", "_f43", "_f44", 
 
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._uid = fbe.FieldModelInt32(buffer, 4 + 4)
-        self._f1 = fbe.FieldModelBool(buffer, self._uid.fbe_offset + self._uid.fbe_size)
+        self._id = fbe.FieldModelInt32(buffer, 4 + 4)
+        self._f1 = fbe.FieldModelBool(buffer, self._id.fbe_offset + self._id.fbe_size)
         self._f2 = fbe.FieldModelBool(buffer, self._f1.fbe_offset + self._f1.fbe_size)
         self._f3 = fbe.FieldModelByte(buffer, self._f2.fbe_offset + self._f2.fbe_size)
         self._f4 = fbe.FieldModelByte(buffer, self._f3.fbe_offset + self._f3.fbe_size)
@@ -1005,8 +1005,8 @@ class FieldModelStructSimple(fbe.FieldModel):
         self._f44 = proto.FieldModelAccount(buffer, self._f43.fbe_offset + self._f43.fbe_size)
 
     @property
-    def uid(self):
-        return self._uid
+    def id(self):
+        return self._id
 
     @property
     def f1(self):
@@ -1193,7 +1193,7 @@ class FieldModelStructSimple(fbe.FieldModel):
     @property
     def fbe_body(self):
         fbe_result = 4 + 4 \
-            + self.uid.fbe_size \
+            + self.id.fbe_size \
             + self.f1.fbe_size \
             + self.f2.fbe_size \
             + self.f3.fbe_size \
@@ -1254,7 +1254,7 @@ class FieldModelStructSimple(fbe.FieldModel):
         self._buffer.shift(fbe_struct_offset)
 
         fbe_result = self.fbe_body \
-            + self.uid.fbe_extra \
+            + self.id.fbe_extra \
             + self.f1.fbe_extra \
             + self.f2.fbe_extra \
             + self.f3.fbe_extra \
@@ -1337,11 +1337,11 @@ class FieldModelStructSimple(fbe.FieldModel):
     def verify_fields(self, fbe_struct_size):
         fbe_current_size = 4 + 4
 
-        if (fbe_current_size + self.uid.fbe_size) > fbe_struct_size:
+        if (fbe_current_size + self.id.fbe_size) > fbe_struct_size:
             return True
-        if not self.uid.verify():
+        if not self.id.verify():
             return False
-        fbe_current_size += self.uid.fbe_size
+        fbe_current_size += self.id.fbe_size
 
         if (fbe_current_size + self.f1.fbe_size) > fbe_struct_size:
             return True
@@ -1649,11 +1649,11 @@ class FieldModelStructSimple(fbe.FieldModel):
     def get_fields(self, fbe_value, fbe_struct_size):
         fbe_current_size = 4 + 4
 
-        if (fbe_current_size + self.uid.fbe_size) <= fbe_struct_size:
-            fbe_value.uid = self.uid.get()
+        if (fbe_current_size + self.id.fbe_size) <= fbe_struct_size:
+            fbe_value.id = self.id.get()
         else:
-            fbe_value.uid = 0
-        fbe_current_size += self.uid.fbe_size
+            fbe_value.id = 0
+        fbe_current_size += self.id.fbe_size
 
         if (fbe_current_size + self.f1.fbe_size) <= fbe_struct_size:
             fbe_value.f1 = self.f1.get()
@@ -1953,7 +1953,7 @@ class FieldModelStructSimple(fbe.FieldModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        self.uid.set(fbe_value.uid)
+        self.id.set(fbe_value.id)
         self.f1.set(fbe_value.f1)
         self.f2.set(fbe_value.f2)
         self.f3.set(fbe_value.f3)
@@ -2076,11 +2076,11 @@ class StructSimpleModel(fbe.Model):
 
 
 class FinalModelStructSimple(fbe.FinalModel):
-    __slots__ = "_uid", "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", "_f11", "_f12", "_f13", "_f14", "_f15", "_f16", "_f17", "_f18", "_f19", "_f20", "_f21", "_f22", "_f23", "_f24", "_f25", "_f26", "_f27", "_f28", "_f29", "_f30", "_f31", "_f32", "_f33", "_f34", "_f35", "_f36", "_f37", "_f38", "_f39", "_f40", "_f41", "_f42", "_f43", "_f44", 
+    __slots__ = "_id", "_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10", "_f11", "_f12", "_f13", "_f14", "_f15", "_f16", "_f17", "_f18", "_f19", "_f20", "_f21", "_f22", "_f23", "_f24", "_f25", "_f26", "_f27", "_f28", "_f29", "_f30", "_f31", "_f32", "_f33", "_f34", "_f35", "_f36", "_f37", "_f38", "_f39", "_f40", "_f41", "_f42", "_f43", "_f44", 
 
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
-        self._uid = fbe.FinalModelInt32(buffer, 0)
+        self._id = fbe.FinalModelInt32(buffer, 0)
         self._f1 = fbe.FinalModelBool(buffer, 0)
         self._f2 = fbe.FinalModelBool(buffer, 0)
         self._f3 = fbe.FinalModelByte(buffer, 0)
@@ -2127,8 +2127,8 @@ class FinalModelStructSimple(fbe.FinalModel):
         self._f44 = proto.FinalModelAccount(buffer, 0)
 
     @property
-    def uid(self):
-        return self._uid
+    def id(self):
+        return self._id
 
     @property
     def f1(self):
@@ -2309,7 +2309,7 @@ class FinalModelStructSimple(fbe.FinalModel):
     # Get the allocation size
     def fbe_allocation_size(self, fbe_value):
         fbe_result = 0 \
-            + self.uid.fbe_allocation_size(fbe_value.uid) \
+            + self.id.fbe_allocation_size(fbe_value.id) \
             + self.f1.fbe_allocation_size(fbe_value.f1) \
             + self.f2.fbe_allocation_size(fbe_value.f2) \
             + self.f3.fbe_allocation_size(fbe_value.f3) \
@@ -2375,8 +2375,8 @@ class FinalModelStructSimple(fbe.FinalModel):
     def verify_fields(self):
         fbe_current_offset = 0
 
-        self.uid.fbe_offset = fbe_current_offset
-        fbe_field_size = self.uid.verify()
+        self.id.fbe_offset = fbe_current_offset
+        fbe_field_size = self.id.verify()
         if fbe_field_size == sys.maxsize:
             return sys.maxsize
         fbe_current_offset += fbe_field_size
@@ -2662,9 +2662,9 @@ class FinalModelStructSimple(fbe.FinalModel):
         fbe_current_offset = 0
         fbe_current_size = 0
 
-        self.uid.fbe_offset = fbe_current_offset
-        fbe_result = self.uid.get()
-        fbe_value.uid = fbe_result[0]
+        self.id.fbe_offset = fbe_current_offset
+        fbe_result = self.id.get()
+        fbe_value.id = fbe_result[0]
         fbe_current_offset += fbe_result[1]
         fbe_current_size += fbe_result[1]
 
@@ -2946,8 +2946,8 @@ class FinalModelStructSimple(fbe.FinalModel):
         fbe_current_offset = 0
         fbe_current_size = 0
 
-        self.uid.fbe_offset = fbe_current_offset
-        fbe_field_size = self.uid.set(fbe_value.uid)
+        self.id.fbe_offset = fbe_current_offset
+        fbe_field_size = self.id.set(fbe_value.id)
         fbe_current_offset += fbe_field_size
         fbe_current_size += fbe_field_size
 

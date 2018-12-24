@@ -94,10 +94,10 @@ def main():
     struct_set.f3.add(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2)
     struct_set.f3.add(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3)
     s1 = test.StructSimple()
-    s1.uid = 48
+    s1.id = 48
     struct_set.f4.add(s1)
     s2 = test.StructSimple()
-    s2.uid = 65
+    s2.id = 65
     struct_set.f4.add(s2)
     print(str(struct_set) + '\n')
 
@@ -120,10 +120,10 @@ def main():
     struct_map.f8[10] = test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2
     struct_map.f8[20] = None
     s1 = test.StructSimple()
-    s1.uid = 48
+    s1.id = 48
     struct_map.f9[10] = s1
     s2 = test.StructSimple()
-    s2.uid = 65
+    s2.id = 65
     struct_map.f9[20] = s2
     struct_map.f10[10] = s1
     struct_map.f10[20] = None
@@ -148,10 +148,10 @@ def main():
     struct_hash.f8["10"] = test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2
     struct_hash.f8["20"] = None
     s1 = test.StructSimple()
-    s1.uid = 48
+    s1.id = 48
     struct_hash.f9["10"] = s1
     s2 = test.StructSimple()
-    s2.uid = 65
+    s2.id = 65
     struct_hash.f9["20"] = s2
     struct_hash.f10["10"] = s1
     struct_hash.f10["20"] = None
@@ -160,10 +160,10 @@ def main():
     # Print extended hash struct
     struct_hash_ex = test.StructHashEx()
     s1 = test.StructSimple()
-    s1.uid = 48
+    s1.id = 48
     struct_hash_ex.f1[s1] = test.StructNested()
     s2 = test.StructSimple()
-    s2.uid = 65
+    s2.id = 65
     struct_hash_ex.f1[s2] = test.StructNested()
     struct_hash_ex.f2[s1] = test.StructNested()
     struct_hash_ex.f2[s2] = None

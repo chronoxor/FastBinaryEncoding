@@ -1094,7 +1094,7 @@ namespace test {
 
     public struct StructSimple : IComparable, IComparable<StructSimple>, IEquatable<StructSimple>
     {
-        public int uid;
+        public int id;
         public bool f1;
         public bool f2;
         public byte f3;
@@ -1142,7 +1142,7 @@ namespace test {
 
         public static StructSimple Default => new StructSimple
         {
-            uid = (int)0
+            id = (int)0
             , f1 = false
             , f2 = true
             , f3 = (byte)0U
@@ -1189,9 +1189,9 @@ namespace test {
             , f44 = global::proto.Account.Default
         };
 
-        public StructSimple(int uid, bool f1, bool f2, byte f3, byte f4, char f5, char f6, char f7, char f8, sbyte f9, sbyte f10, byte f11, byte f12, short f13, short f14, ushort f15, ushort f16, int f17, int f18, uint f19, uint f20, long f21, long f22, ulong f23, ulong f24, float f25, float f26, double f27, double f28, decimal f29, decimal f30, string f31, string f32, DateTime f33, DateTime f34, DateTime f35, Guid f36, Guid f37, Guid f38, global::proto.OrderSide f39, global::proto.OrderType f40, global::proto.Order f41, global::proto.Balance f42, global::proto.State f43, global::proto.Account f44)
+        public StructSimple(int id, bool f1, bool f2, byte f3, byte f4, char f5, char f6, char f7, char f8, sbyte f9, sbyte f10, byte f11, byte f12, short f13, short f14, ushort f15, ushort f16, int f17, int f18, uint f19, uint f20, long f21, long f22, ulong f23, ulong f24, float f25, float f26, double f27, double f28, decimal f29, decimal f30, string f31, string f32, DateTime f33, DateTime f34, DateTime f35, Guid f36, Guid f37, Guid f38, global::proto.OrderSide f39, global::proto.OrderType f40, global::proto.Order f41, global::proto.Balance f42, global::proto.State f43, global::proto.Account f44)
         {
-            this.uid = uid;
+            this.id = id;
             this.f1 = f1;
             this.f2 = f2;
             this.f3 = f3;
@@ -1254,7 +1254,7 @@ namespace test {
         public int CompareTo(object other)
         {
             int result = 0;
-            result = uid.CompareTo(((StructSimple)other).uid);
+            result = id.CompareTo(((StructSimple)other).id);
             if (result != 0)
                 return result;
             return result;
@@ -1263,7 +1263,7 @@ namespace test {
         public int CompareTo(StructSimple other)
         {
             int result = 0;
-            result = uid.CompareTo(other.uid);
+            result = id.CompareTo(other.id);
             if (result != 0)
                 return result;
             return result;
@@ -1273,14 +1273,14 @@ namespace test {
         {
             if (!(other is StructSimple))
                 return false;
-            if (!uid.Equals(((StructSimple)other).uid))
+            if (!id.Equals(((StructSimple)other).id))
                 return false;
             return true;
         }
 
         public bool Equals(StructSimple other)
         {
-            if (!uid.Equals(other.uid))
+            if (!id.Equals(other.id))
                 return false;
             return true;
         }
@@ -1288,7 +1288,7 @@ namespace test {
         public override int GetHashCode()
         {
             int hash = 17;
-            hash = hash * 31 + uid.GetHashCode();
+            hash = hash * 31 + id.GetHashCode();
             return hash;
         }
 
@@ -1296,7 +1296,7 @@ namespace test {
         {
             var sb = new StringBuilder();
             sb.Append("StructSimple(");
-            sb.Append("uid="); sb.Append(uid);
+            sb.Append("id="); sb.Append(id);
             sb.Append(",f1="); sb.Append(f1 ? "true" : "false");
             sb.Append(",f2="); sb.Append(f2 ? "true" : "false");
             sb.Append(",f3="); sb.Append(f3);
@@ -1370,7 +1370,7 @@ namespace test {
     // Fast Binary Encoding StructSimple field model
     public class FieldModelStructSimple : FieldModelValueType<StructSimple>
     {
-        public readonly FieldModelValueType<int> uid;
+        public readonly FieldModelValueType<int> id;
         public readonly FieldModelValueType<bool> f1;
         public readonly FieldModelValueType<bool> f2;
         public readonly FieldModelValueType<byte> f3;
@@ -1418,8 +1418,8 @@ namespace test {
 
         public FieldModelStructSimple(Buffer buffer, long offset) : base(buffer, offset)
         {
-            uid = FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, 4 + 4);
-            f1 = FieldModelValueType<bool>.CreateFieldModel(BaseTypes.BOOL, buffer, uid.FBEOffset + uid.FBESize);
+            id = FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, 4 + 4);
+            f1 = FieldModelValueType<bool>.CreateFieldModel(BaseTypes.BOOL, buffer, id.FBEOffset + id.FBESize);
             f2 = FieldModelValueType<bool>.CreateFieldModel(BaseTypes.BOOL, buffer, f1.FBEOffset + f1.FBESize);
             f3 = FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, f2.FBEOffset + f2.FBESize);
             f4 = FieldModelValueType<byte>.CreateFieldModel(BaseTypes.BYTE, buffer, f3.FBEOffset + f3.FBESize);
@@ -1473,7 +1473,7 @@ namespace test {
             get
             {
                 long fbeResult = 4 + 4
-                    + uid.FBESize
+                    + id.FBESize
                     + f1.FBESize
                     + f2.FBESize
                     + f3.FBESize
@@ -1537,7 +1537,7 @@ namespace test {
                 _buffer.Shift(fbeStructOffset);
 
                 long fbeResult = FBEBody
-                    + uid.FBEExtra
+                    + id.FBEExtra
                     + f1.FBEExtra
                     + f2.FBEExtra
                     + f3.FBEExtra
@@ -1626,11 +1626,11 @@ namespace test {
         {
             long fbeCurrentSize = 4 + 4;
 
-            if ((fbeCurrentSize + uid.FBESize) > fbeStructSize)
+            if ((fbeCurrentSize + id.FBESize) > fbeStructSize)
                 return true;
-            if (!uid.Verify())
+            if (!id.Verify())
                 return false;
-            fbeCurrentSize += uid.FBESize;
+            fbeCurrentSize += id.FBESize;
 
             if ((fbeCurrentSize + f1.FBESize) > fbeStructSize)
                 return true;
@@ -1948,11 +1948,11 @@ namespace test {
 
             fbeValue = StructSimple.Default;
 
-            if ((fbeCurrentSize + uid.FBESize) <= fbeStructSize)
-                uid.Get(out fbeValue.uid);
+            if ((fbeCurrentSize + id.FBESize) <= fbeStructSize)
+                id.Get(out fbeValue.id);
             else
-                fbeValue.uid = (int)0;
-            fbeCurrentSize += uid.FBESize;
+                fbeValue.id = (int)0;
+            fbeCurrentSize += id.FBESize;
 
             if ((fbeCurrentSize + f1.FBESize) <= fbeStructSize)
                 f1.Get(out fbeValue.f1);
@@ -2260,7 +2260,7 @@ namespace test {
         // Set the struct fields values
         public void SetFields(StructSimple fbeValue)
         {
-            uid.Set(fbeValue.uid);
+            id.Set(fbeValue.id);
             f1.Set(fbeValue.f1);
             f2.Set(fbeValue.f2);
             f3.Set(fbeValue.f3);
@@ -2407,7 +2407,7 @@ namespace test {
     // Fast Binary Encoding StructSimple final model
     public class FinalModelStructSimple : FinalModelValueType<StructSimple>
     {
-        public readonly FinalModelValueType<int> uid;
+        public readonly FinalModelValueType<int> id;
         public readonly FinalModelValueType<bool> f1;
         public readonly FinalModelValueType<bool> f2;
         public readonly FinalModelValueType<byte> f3;
@@ -2455,7 +2455,7 @@ namespace test {
 
         public FinalModelStructSimple(Buffer buffer, long offset) : base(buffer, offset)
         {
-            uid = FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0);
+            id = FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0);
             f1 = FinalModelValueType<bool>.CreateFinalModel(BaseTypes.BOOL, buffer, 0);
             f2 = FinalModelValueType<bool>.CreateFinalModel(BaseTypes.BOOL, buffer, 0);
             f3 = FinalModelValueType<byte>.CreateFinalModel(BaseTypes.BYTE, buffer, 0);
@@ -2506,7 +2506,7 @@ namespace test {
         public override long FBEAllocationSize(StructSimple fbeValue)
         {
             long fbeResult = 0
-                + uid.FBEAllocationSize(fbeValue.uid)
+                + id.FBEAllocationSize(fbeValue.id)
                 + f1.FBEAllocationSize(fbeValue.f1)
                 + f2.FBEAllocationSize(fbeValue.f2)
                 + f3.FBEAllocationSize(fbeValue.f3)
@@ -2577,8 +2577,8 @@ namespace test {
             long fbeCurrentOffset = 0;
             long fbeFieldSize;
 
-            uid.FBEOffset = fbeCurrentOffset;
-            fbeFieldSize = uid.Verify();
+            id.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = id.Verify();
             if (fbeFieldSize == long.MaxValue)
                 return long.MaxValue;
             fbeCurrentOffset += fbeFieldSize;
@@ -2868,8 +2868,8 @@ namespace test {
 
             fbeValue = StructSimple.Default;
 
-            uid.FBEOffset = fbeCurrentOffset;
-            fbeFieldSize = uid.Get(out fbeValue.uid);
+            id.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = id.Get(out fbeValue.id);
             fbeCurrentOffset += fbeFieldSize;
             fbeCurrentSize += fbeFieldSize;
 
@@ -3112,8 +3112,8 @@ namespace test {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            uid.FBEOffset = fbeCurrentOffset;
-            fbeFieldSize = uid.Set(fbeValue.uid);
+            id.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = id.Set(fbeValue.id);
             fbeCurrentOffset += fbeFieldSize;
             fbeCurrentSize += fbeFieldSize;
 

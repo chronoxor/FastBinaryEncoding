@@ -21,7 +21,7 @@ public class TestClone
         // Clear the source account
         account1 = new proto.Account();
 
-        Assert.assertEquals(account2.uid, 1);
+        Assert.assertEquals(account2.id, 1);
         Assert.assertEquals(account2.name, "Test");
         Assert.assertTrue(account2.state.hasFlags(proto.State.good));
         Assert.assertEquals(account2.wallet.currency, "USD");
@@ -30,19 +30,19 @@ public class TestClone
         Assert.assertEquals(account2.asset.currency, "EUR");
         Assert.assertEquals(account2.asset.amount, 100.0);
         Assert.assertEquals(account2.orders.size(), 3);
-        Assert.assertEquals(account2.orders.get(0).uid, 1);
+        Assert.assertEquals(account2.orders.get(0).id, 1);
         Assert.assertEquals(account2.orders.get(0).symbol, "EURUSD");
         Assert.assertEquals(account2.orders.get(0).side, proto.OrderSide.buy);
         Assert.assertEquals(account2.orders.get(0).type, proto.OrderType.market);
         Assert.assertEquals(account2.orders.get(0).price, 1.23456);
         Assert.assertEquals(account2.orders.get(0).volume, 1000.0);
-        Assert.assertEquals(account2.orders.get(1).uid, 2);
+        Assert.assertEquals(account2.orders.get(1).id, 2);
         Assert.assertEquals(account2.orders.get(1).symbol, "EURUSD");
         Assert.assertEquals(account2.orders.get(1).side, proto.OrderSide.sell);
         Assert.assertEquals(account2.orders.get(1).type, proto.OrderType.limit);
         Assert.assertEquals(account2.orders.get(1).price, 1.0);
         Assert.assertEquals(account2.orders.get(1).volume, 100.0);
-        Assert.assertEquals(account2.orders.get(2).uid, 3);
+        Assert.assertEquals(account2.orders.get(2).id, 3);
         Assert.assertEquals(account2.orders.get(2).symbol, "EURUSD");
         Assert.assertEquals(account2.orders.get(2).side, proto.OrderSide.buy);
         Assert.assertEquals(account2.orders.get(2).type, proto.OrderType.stop);

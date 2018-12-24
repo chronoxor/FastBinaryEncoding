@@ -99,10 +99,10 @@ struct_set.f2.add(Test::EnumSimple.ENUM_VALUE_2)
 struct_set.f3.add(Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2)
 struct_set.f3.add(Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2 | Test::FlagsSimple.FLAG_VALUE_3)
 s1 = Test::StructSimple.new
-s1.uid = 48
+s1.id = 48
 struct_set.f4.add(s1)
 s2 = Test::StructSimple.new
-s2.uid = 65
+s2.id = 65
 struct_set.f4.add(s2)
 puts struct_set
 puts
@@ -126,10 +126,10 @@ struct_map.f7[20] = Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALU
 struct_map.f8[10] = Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2
 struct_map.f8[20] = nil
 s1 = Test::StructSimple.new
-s1.uid = 48
+s1.id = 48
 struct_map.f9[10] = s1
 s2 = Test::StructSimple.new
-s2.uid = 65
+s2.id = 65
 struct_map.f9[20] = s2
 struct_map.f10[10] = s1
 struct_map.f10[20] = nil
@@ -155,10 +155,10 @@ struct_hash.f7['20'] = Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_V
 struct_hash.f8['10'] = Test::FlagsSimple.FLAG_VALUE_1 | Test::FlagsSimple.FLAG_VALUE_2
 struct_hash.f8['20'] = nil
 s1 = Test::StructSimple.new
-s1.uid = 48
+s1.id = 48
 struct_hash.f9['10'] = s1
 s2 = Test::StructSimple.new
-s2.uid = 65
+s2.id = 65
 struct_hash.f9['20'] = s2
 struct_hash.f10['10'] = s1
 struct_hash.f10['20'] = nil
@@ -168,10 +168,10 @@ puts
 # Print extended hash struct
 struct_hash_ex = Test::StructHashEx.new
 s1 = Test::StructSimple.new
-s1.uid = 48
+s1.id = 48
 struct_hash_ex.f1[s1] = Test::StructNested.new
 s2 = Test::StructSimple.new
-s2.uid = 65
+s2.id = 65
 struct_hash_ex.f1[s2] = Test::StructNested.new
 struct_hash_ex.f2[s1] = Test::StructNested.new
 struct_hash_ex.f2[s2] = nil

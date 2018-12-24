@@ -108,10 +108,10 @@ object Print
         structSet.f3.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
         structSet.f3.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value)))
         val s1 = test.StructSimple()
-        s1.uid = 48
+        s1.id = 48
         structSet.f4.add(s1)
         val s2 = test.StructSimple()
-        s2.uid = 65
+        s2.id = 65
         structSet.f4.add(s2)
         println(structSet)
         println()
@@ -134,9 +134,9 @@ object Print
         structMap.f7[20] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value))
         structMap.f8[10] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value))
         structMap.f8[20] = null
-        s1.uid = 48
+        s1.id = 48
         structMap.f9[10] = s1
-        s2.uid = 65
+        s2.id = 65
         structMap.f9[20] = s2
         structMap.f10[10] = s1
         structMap.f10[20] = null
@@ -161,9 +161,9 @@ object Print
         structHash.f7["20"] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value))
         structHash.f8["10"] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value))
         structHash.f8["20"] = null
-        s1.uid = 48
+        s1.id = 48
         structHash.f9["10"] = s1
-        s2.uid = 65
+        s2.id = 65
         structHash.f9["20"] = s2
         structHash.f10["10"] = s1
         structHash.f10["20"] = null
@@ -172,9 +172,9 @@ object Print
 
         // Print extended hash struct
         val structHashEx = test.StructHashEx()
-        s1.uid = 48
+        s1.id = 48
         structHashEx.f1[s1] = test.StructNested()
-        s2.uid = 65
+        s2.id = 65
         structHashEx.f1[s2] = test.StructNested()
         structHashEx.f2[s1] = test.StructNested()
         structHashEx.f2[s2] = null

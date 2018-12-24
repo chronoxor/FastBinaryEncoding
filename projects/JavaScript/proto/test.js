@@ -1057,7 +1057,7 @@ exports.FinalModelFlagsTyped = FinalModelFlagsTyped
 class StructSimple {
   /**
    * Initialize struct
-   * @param {!number=} uid
+   * @param {!number=} id
    * @param {!boolean=} f1
    * @param {!boolean=} f2
    * @param {!number=} f3
@@ -1104,8 +1104,8 @@ class StructSimple {
    * @param {!proto.Account=} f44
    * @constructor
    */
-  constructor (uid = 0, f1 = false, f2 = true, f3 = 0, f4 = 255, f5 = '\0', f6 = '!', f7 = '\0', f8 = String.fromCharCode(0x0444), f9 = 0, f10 = 127, f11 = 0, f12 = 255, f13 = 0, f14 = 32767, f15 = 0, f16 = 65535, f17 = 0, f18 = 2147483647, f19 = 0, f20 = 0xFFFFFFFF, f21 = new Int64(0, 0), f22 = new Int64(4294967295, 2147483647), f23 = new UInt64(0, 0), f24 = new UInt64(4294967295, 4294967295), f25 = 0.0, f26 = 123.456, f27 = 0.0, f28 = -123.456e+123, f29 = new Big(0), f30 = new Big('123456.123456'), f31 = '', f32 = 'Initial string!', f33 = new Date(0), f34 = new Date(0), f35 = new Date(Date.now()), f36 = new UUID(), f37 = UUID.sequential(), f38 = new UUID('123e4567-e89b-12d3-a456-426655440000'), f39 = new proto.OrderSide(), f40 = new proto.OrderType(), f41 = new proto.Order(), f42 = new proto.Balance(), f43 = new proto.State(), f44 = new proto.Account()) {
-    this.uid = uid
+  constructor (id = 0, f1 = false, f2 = true, f3 = 0, f4 = 255, f5 = '\0', f6 = '!', f7 = '\0', f8 = String.fromCharCode(0x0444), f9 = 0, f10 = 127, f11 = 0, f12 = 255, f13 = 0, f14 = 32767, f15 = 0, f16 = 65535, f17 = 0, f18 = 2147483647, f19 = 0, f20 = 0xFFFFFFFF, f21 = new Int64(0, 0), f22 = new Int64(4294967295, 2147483647), f23 = new UInt64(0, 0), f24 = new UInt64(4294967295, 4294967295), f25 = 0.0, f26 = 123.456, f27 = 0.0, f28 = -123.456e+123, f29 = new Big(0), f30 = new Big('123456.123456'), f31 = '', f32 = 'Initial string!', f33 = new Date(0), f34 = new Date(0), f35 = new Date(Date.now()), f36 = new UUID(), f37 = UUID.sequential(), f38 = new UUID('123e4567-e89b-12d3-a456-426655440000'), f39 = new proto.OrderSide(), f40 = new proto.OrderType(), f41 = new proto.Order(), f42 = new proto.Balance(), f43 = new proto.State(), f44 = new proto.Account()) {
+    this.id = id
     this.f1 = f1
     this.f2 = f2
     this.f3 = f3
@@ -1159,10 +1159,10 @@ class StructSimple {
    * @returns {!StructSimple} This struct
    */
   copy (other) {
-    if (other.uid != null) {
-      this.uid = other.uid
+    if (other.id != null) {
+      this.id = other.id
     } else {
-      this.uid = undefined
+      this.id = undefined
     }
     if (other.f1 != null) {
       this.f1 = other.f1
@@ -1442,7 +1442,7 @@ class StructSimple {
       throw new TypeError('Instance of StructSimple is required!')
     }
     // noinspection RedundantIfStatementJS
-    if (this.uid === other.uid) {
+    if (this.id === other.id) {
       return false
     }
     return true
@@ -1456,8 +1456,8 @@ class StructSimple {
   toString () {
     let result = ''
     result += 'StructSimple('
-    result += 'uid='
-    result += this.uid.toString()
+    result += 'id='
+    result += this.id.toString()
     result += ',f1='
     result += this.f1 ? 'true' : 'false'
     result += ',f2='
@@ -1606,7 +1606,7 @@ class StructSimple {
    */
   toJSON () {
     return {
-      uid: ((this.uid != null) ? this.uid : null),
+      id: ((this.id != null) ? this.id : null),
       f1: ((this.f1 != null) ? this.f1 : null),
       f2: ((this.f2 != null) ? this.f2 : null),
       f3: ((this.f3 != null) ? this.f3 : null),
@@ -1687,8 +1687,8 @@ class FieldModelStructSimple extends fbe.FieldModel {
    */
   constructor (buffer, offset) {
     super(buffer, offset)
-    this._uid = new fbe.FieldModelInt32(buffer, 4 + 4)
-    this._f1 = new fbe.FieldModelBool(buffer, this._uid.fbeOffset + this._uid.fbeSize)
+    this._id = new fbe.FieldModelInt32(buffer, 4 + 4)
+    this._f1 = new fbe.FieldModelBool(buffer, this._id.fbeOffset + this._id.fbeSize)
     this._f2 = new fbe.FieldModelBool(buffer, this._f1.fbeOffset + this._f1.fbeSize)
     this._f3 = new fbe.FieldModelByte(buffer, this._f2.fbeOffset + this._f2.fbeSize)
     this._f4 = new fbe.FieldModelByte(buffer, this._f3.fbeOffset + this._f3.fbeSize)
@@ -1735,12 +1735,12 @@ class FieldModelStructSimple extends fbe.FieldModel {
   }
 
   /**
-   * Get the uid field model
+   * Get the id field model
    * @this {!FieldModelStructSimple}
-   * @returns {!fbe.FieldModelInt32} uid field model
+   * @returns {!fbe.FieldModelInt32} id field model
    */
-  get uid () {
-    return this._uid
+  get id () {
+    return this._id
   }
 
   /**
@@ -2154,7 +2154,7 @@ class FieldModelStructSimple extends fbe.FieldModel {
    * @returns {!number} Field body size
    */
   get fbeBody () {
-    return 4 + 4 + this.uid.fbeSize + this.f1.fbeSize + this.f2.fbeSize + this.f3.fbeSize + this.f4.fbeSize + this.f5.fbeSize + this.f6.fbeSize + this.f7.fbeSize + this.f8.fbeSize + this.f9.fbeSize + this.f10.fbeSize + this.f11.fbeSize + this.f12.fbeSize + this.f13.fbeSize + this.f14.fbeSize + this.f15.fbeSize + this.f16.fbeSize + this.f17.fbeSize + this.f18.fbeSize + this.f19.fbeSize + this.f20.fbeSize + this.f21.fbeSize + this.f22.fbeSize + this.f23.fbeSize + this.f24.fbeSize + this.f25.fbeSize + this.f26.fbeSize + this.f27.fbeSize + this.f28.fbeSize + this.f29.fbeSize + this.f30.fbeSize + this.f31.fbeSize + this.f32.fbeSize + this.f33.fbeSize + this.f34.fbeSize + this.f35.fbeSize + this.f36.fbeSize + this.f37.fbeSize + this.f38.fbeSize + this.f39.fbeSize + this.f40.fbeSize + this.f41.fbeSize + this.f42.fbeSize + this.f43.fbeSize + this.f44.fbeSize
+    return 4 + 4 + this.id.fbeSize + this.f1.fbeSize + this.f2.fbeSize + this.f3.fbeSize + this.f4.fbeSize + this.f5.fbeSize + this.f6.fbeSize + this.f7.fbeSize + this.f8.fbeSize + this.f9.fbeSize + this.f10.fbeSize + this.f11.fbeSize + this.f12.fbeSize + this.f13.fbeSize + this.f14.fbeSize + this.f15.fbeSize + this.f16.fbeSize + this.f17.fbeSize + this.f18.fbeSize + this.f19.fbeSize + this.f20.fbeSize + this.f21.fbeSize + this.f22.fbeSize + this.f23.fbeSize + this.f24.fbeSize + this.f25.fbeSize + this.f26.fbeSize + this.f27.fbeSize + this.f28.fbeSize + this.f29.fbeSize + this.f30.fbeSize + this.f31.fbeSize + this.f32.fbeSize + this.f33.fbeSize + this.f34.fbeSize + this.f35.fbeSize + this.f36.fbeSize + this.f37.fbeSize + this.f38.fbeSize + this.f39.fbeSize + this.f40.fbeSize + this.f41.fbeSize + this.f42.fbeSize + this.f43.fbeSize + this.f44.fbeSize
   }
 
   /**
@@ -2174,7 +2174,7 @@ class FieldModelStructSimple extends fbe.FieldModel {
 
     this._buffer.shift(fbeStructOffset)
 
-    let fbeResult = this.fbeBody + this.uid.fbeExtra + this.f1.fbeExtra + this.f2.fbeExtra + this.f3.fbeExtra + this.f4.fbeExtra + this.f5.fbeExtra + this.f6.fbeExtra + this.f7.fbeExtra + this.f8.fbeExtra + this.f9.fbeExtra + this.f10.fbeExtra + this.f11.fbeExtra + this.f12.fbeExtra + this.f13.fbeExtra + this.f14.fbeExtra + this.f15.fbeExtra + this.f16.fbeExtra + this.f17.fbeExtra + this.f18.fbeExtra + this.f19.fbeExtra + this.f20.fbeExtra + this.f21.fbeExtra + this.f22.fbeExtra + this.f23.fbeExtra + this.f24.fbeExtra + this.f25.fbeExtra + this.f26.fbeExtra + this.f27.fbeExtra + this.f28.fbeExtra + this.f29.fbeExtra + this.f30.fbeExtra + this.f31.fbeExtra + this.f32.fbeExtra + this.f33.fbeExtra + this.f34.fbeExtra + this.f35.fbeExtra + this.f36.fbeExtra + this.f37.fbeExtra + this.f38.fbeExtra + this.f39.fbeExtra + this.f40.fbeExtra + this.f41.fbeExtra + this.f42.fbeExtra + this.f43.fbeExtra + this.f44.fbeExtra
+    let fbeResult = this.fbeBody + this.id.fbeExtra + this.f1.fbeExtra + this.f2.fbeExtra + this.f3.fbeExtra + this.f4.fbeExtra + this.f5.fbeExtra + this.f6.fbeExtra + this.f7.fbeExtra + this.f8.fbeExtra + this.f9.fbeExtra + this.f10.fbeExtra + this.f11.fbeExtra + this.f12.fbeExtra + this.f13.fbeExtra + this.f14.fbeExtra + this.f15.fbeExtra + this.f16.fbeExtra + this.f17.fbeExtra + this.f18.fbeExtra + this.f19.fbeExtra + this.f20.fbeExtra + this.f21.fbeExtra + this.f22.fbeExtra + this.f23.fbeExtra + this.f24.fbeExtra + this.f25.fbeExtra + this.f26.fbeExtra + this.f27.fbeExtra + this.f28.fbeExtra + this.f29.fbeExtra + this.f30.fbeExtra + this.f31.fbeExtra + this.f32.fbeExtra + this.f33.fbeExtra + this.f34.fbeExtra + this.f35.fbeExtra + this.f36.fbeExtra + this.f37.fbeExtra + this.f38.fbeExtra + this.f39.fbeExtra + this.f40.fbeExtra + this.f41.fbeExtra + this.f42.fbeExtra + this.f43.fbeExtra + this.f44.fbeExtra
 
     this._buffer.unshift(fbeStructOffset)
 
@@ -2240,14 +2240,14 @@ class FieldModelStructSimple extends fbe.FieldModel {
   verifyFields (fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.uid.fbeSize) > fbeStructSize) {
+    if ((fbeCurrentSize + this.id.fbeSize) > fbeStructSize) {
       return true
     }
-    if (!this.uid.verify()) {
+    if (!this.id.verify()) {
       return false
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uid.fbeSize
+    fbeCurrentSize += this.id.fbeSize
 
     if ((fbeCurrentSize + this.f1.fbeSize) > fbeStructSize) {
       return true
@@ -2710,13 +2710,13 @@ class FieldModelStructSimple extends fbe.FieldModel {
   getFields (fbeValue, fbeStructSize) {
     let fbeCurrentSize = 4 + 4
 
-    if ((fbeCurrentSize + this.uid.fbeSize) <= fbeStructSize) {
-      fbeValue.uid = this.uid.get()
+    if ((fbeCurrentSize + this.id.fbeSize) <= fbeStructSize) {
+      fbeValue.id = this.id.get()
     } else {
-      fbeValue.uid = 0
+      fbeValue.id = 0
     }
     // noinspection JSUnusedAssignment
-    fbeCurrentSize += this.uid.fbeSize
+    fbeCurrentSize += this.id.fbeSize
 
     if ((fbeCurrentSize + this.f1.fbeSize) <= fbeStructSize) {
       fbeValue.f1 = this.f1.get()
@@ -3127,7 +3127,7 @@ class FieldModelStructSimple extends fbe.FieldModel {
    * @param {StructSimple} fbeValue StructSimple value
    */
   setFields (fbeValue) {
-    this.uid.set(fbeValue.uid)
+    this.id.set(fbeValue.id)
     this.f1.set(fbeValue.f1)
     this.f2.set(fbeValue.f2)
     this.f3.set(fbeValue.f3)
@@ -3323,7 +3323,7 @@ class FinalModelStructSimple extends fbe.FinalModel {
    */
   constructor (buffer, offset) {
     super(buffer, offset)
-    this._uid = new fbe.FinalModelInt32(buffer, 0)
+    this._id = new fbe.FinalModelInt32(buffer, 0)
     this._f1 = new fbe.FinalModelBool(buffer, 0)
     this._f2 = new fbe.FinalModelBool(buffer, 0)
     this._f3 = new fbe.FinalModelByte(buffer, 0)
@@ -3371,12 +3371,12 @@ class FinalModelStructSimple extends fbe.FinalModel {
   }
 
   /**
-   * Get the uid final model
+   * Get the id final model
    * @this {!FinalModelStructSimple}
-   * @returns {!fbe.FinalModelInt32} uid final model
+   * @returns {!fbe.FinalModelInt32} id final model
    */
-  get uid () {
-    return this._uid
+  get id () {
+    return this._id
   }
 
   /**
@@ -3782,7 +3782,7 @@ class FinalModelStructSimple extends fbe.FinalModel {
    * @returns {!number} Allocation size
    */
   fbeAllocationSize (fbeValue) {
-    return 0 + this.uid.fbeAllocationSize(fbeValue.uid) + this.f1.fbeAllocationSize(fbeValue.f1) + this.f2.fbeAllocationSize(fbeValue.f2) + this.f3.fbeAllocationSize(fbeValue.f3) + this.f4.fbeAllocationSize(fbeValue.f4) + this.f5.fbeAllocationSize(fbeValue.f5) + this.f6.fbeAllocationSize(fbeValue.f6) + this.f7.fbeAllocationSize(fbeValue.f7) + this.f8.fbeAllocationSize(fbeValue.f8) + this.f9.fbeAllocationSize(fbeValue.f9) + this.f10.fbeAllocationSize(fbeValue.f10) + this.f11.fbeAllocationSize(fbeValue.f11) + this.f12.fbeAllocationSize(fbeValue.f12) + this.f13.fbeAllocationSize(fbeValue.f13) + this.f14.fbeAllocationSize(fbeValue.f14) + this.f15.fbeAllocationSize(fbeValue.f15) + this.f16.fbeAllocationSize(fbeValue.f16) + this.f17.fbeAllocationSize(fbeValue.f17) + this.f18.fbeAllocationSize(fbeValue.f18) + this.f19.fbeAllocationSize(fbeValue.f19) + this.f20.fbeAllocationSize(fbeValue.f20) + this.f21.fbeAllocationSize(fbeValue.f21) + this.f22.fbeAllocationSize(fbeValue.f22) + this.f23.fbeAllocationSize(fbeValue.f23) + this.f24.fbeAllocationSize(fbeValue.f24) + this.f25.fbeAllocationSize(fbeValue.f25) + this.f26.fbeAllocationSize(fbeValue.f26) + this.f27.fbeAllocationSize(fbeValue.f27) + this.f28.fbeAllocationSize(fbeValue.f28) + this.f29.fbeAllocationSize(fbeValue.f29) + this.f30.fbeAllocationSize(fbeValue.f30) + this.f31.fbeAllocationSize(fbeValue.f31) + this.f32.fbeAllocationSize(fbeValue.f32) + this.f33.fbeAllocationSize(fbeValue.f33) + this.f34.fbeAllocationSize(fbeValue.f34) + this.f35.fbeAllocationSize(fbeValue.f35) + this.f36.fbeAllocationSize(fbeValue.f36) + this.f37.fbeAllocationSize(fbeValue.f37) + this.f38.fbeAllocationSize(fbeValue.f38) + this.f39.fbeAllocationSize(fbeValue.f39) + this.f40.fbeAllocationSize(fbeValue.f40) + this.f41.fbeAllocationSize(fbeValue.f41) + this.f42.fbeAllocationSize(fbeValue.f42) + this.f43.fbeAllocationSize(fbeValue.f43) + this.f44.fbeAllocationSize(fbeValue.f44)
+    return 0 + this.id.fbeAllocationSize(fbeValue.id) + this.f1.fbeAllocationSize(fbeValue.f1) + this.f2.fbeAllocationSize(fbeValue.f2) + this.f3.fbeAllocationSize(fbeValue.f3) + this.f4.fbeAllocationSize(fbeValue.f4) + this.f5.fbeAllocationSize(fbeValue.f5) + this.f6.fbeAllocationSize(fbeValue.f6) + this.f7.fbeAllocationSize(fbeValue.f7) + this.f8.fbeAllocationSize(fbeValue.f8) + this.f9.fbeAllocationSize(fbeValue.f9) + this.f10.fbeAllocationSize(fbeValue.f10) + this.f11.fbeAllocationSize(fbeValue.f11) + this.f12.fbeAllocationSize(fbeValue.f12) + this.f13.fbeAllocationSize(fbeValue.f13) + this.f14.fbeAllocationSize(fbeValue.f14) + this.f15.fbeAllocationSize(fbeValue.f15) + this.f16.fbeAllocationSize(fbeValue.f16) + this.f17.fbeAllocationSize(fbeValue.f17) + this.f18.fbeAllocationSize(fbeValue.f18) + this.f19.fbeAllocationSize(fbeValue.f19) + this.f20.fbeAllocationSize(fbeValue.f20) + this.f21.fbeAllocationSize(fbeValue.f21) + this.f22.fbeAllocationSize(fbeValue.f22) + this.f23.fbeAllocationSize(fbeValue.f23) + this.f24.fbeAllocationSize(fbeValue.f24) + this.f25.fbeAllocationSize(fbeValue.f25) + this.f26.fbeAllocationSize(fbeValue.f26) + this.f27.fbeAllocationSize(fbeValue.f27) + this.f28.fbeAllocationSize(fbeValue.f28) + this.f29.fbeAllocationSize(fbeValue.f29) + this.f30.fbeAllocationSize(fbeValue.f30) + this.f31.fbeAllocationSize(fbeValue.f31) + this.f32.fbeAllocationSize(fbeValue.f32) + this.f33.fbeAllocationSize(fbeValue.f33) + this.f34.fbeAllocationSize(fbeValue.f34) + this.f35.fbeAllocationSize(fbeValue.f35) + this.f36.fbeAllocationSize(fbeValue.f36) + this.f37.fbeAllocationSize(fbeValue.f37) + this.f38.fbeAllocationSize(fbeValue.f38) + this.f39.fbeAllocationSize(fbeValue.f39) + this.f40.fbeAllocationSize(fbeValue.f40) + this.f41.fbeAllocationSize(fbeValue.f41) + this.f42.fbeAllocationSize(fbeValue.f42) + this.f43.fbeAllocationSize(fbeValue.f43) + this.f44.fbeAllocationSize(fbeValue.f44)
   }
 
   /**
@@ -3824,8 +3824,8 @@ class FinalModelStructSimple extends fbe.FinalModel {
     let fbeCurrentOffset = 0
     let fbeFieldSize
 
-    this.uid.fbeOffset = fbeCurrentOffset
-    fbeFieldSize = this.uid.verify()
+    this.id.fbeOffset = fbeCurrentOffset
+    fbeFieldSize = this.id.verify()
     if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {
       return Number.MAX_SAFE_INTEGER
     }
@@ -4166,9 +4166,9 @@ class FinalModelStructSimple extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeResult
 
-    this.uid.fbeOffset = fbeCurrentOffset
-    fbeResult = this.uid.get()
-    fbeValue.uid = fbeResult.value
+    this.id.fbeOffset = fbeCurrentOffset
+    fbeResult = this.id.get()
+    fbeValue.id = fbeResult.value
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeResult.size
     fbeCurrentSize += fbeResult.size
@@ -4508,8 +4508,8 @@ class FinalModelStructSimple extends fbe.FinalModel {
     let fbeCurrentSize = 0
     let fbeFieldSize
 
-    this.uid.fbeOffset = fbeCurrentOffset
-    fbeFieldSize = this.uid.set(fbeValue.uid)
+    this.id.fbeOffset = fbeCurrentOffset
+    fbeFieldSize = this.id.set(fbeValue.id)
     // noinspection JSUnusedAssignment
     fbeCurrentOffset += fbeFieldSize
     fbeCurrentSize += fbeFieldSize

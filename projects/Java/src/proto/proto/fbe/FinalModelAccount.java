@@ -20,7 +20,7 @@ import proto.*;
 // Fast Binary Encoding Account final model
 public final class FinalModelAccount extends FinalModel
 {
-    public final FinalModelInt32 uid;
+    public final FinalModelInt32 id;
     public final FinalModelString name;
     public final FinalModelState state;
     public final FinalModelBalance wallet;
@@ -30,7 +30,7 @@ public final class FinalModelAccount extends FinalModel
     public FinalModelAccount(Buffer buffer, long offset)
     {
         super(buffer, offset);
-        uid = new FinalModelInt32(buffer, 0);
+        id = new FinalModelInt32(buffer, 0);
         name = new FinalModelString(buffer, 0);
         state = new FinalModelState(buffer, 0);
         wallet = new FinalModelBalance(buffer, 0);
@@ -42,7 +42,7 @@ public final class FinalModelAccount extends FinalModel
     public long fbeAllocationSize(Account fbeValue)
     {
         long fbeResult = 0
-            + uid.fbeAllocationSize(fbeValue.uid)
+            + id.fbeAllocationSize(fbeValue.id)
             + name.fbeAllocationSize(fbeValue.name)
             + state.fbeAllocationSize(fbeValue.state)
             + wallet.fbeAllocationSize(fbeValue.wallet)
@@ -72,8 +72,8 @@ public final class FinalModelAccount extends FinalModel
         long fbeCurrentOffset = 0;
         long fbeFieldSize = 0;
 
-        uid.fbeOffset(fbeCurrentOffset);
-        fbeFieldSize = uid.verify();
+        id.fbeOffset(fbeCurrentOffset);
+        fbeFieldSize = id.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
@@ -128,8 +128,8 @@ public final class FinalModelAccount extends FinalModel
         long fbeCurrentSize = 0;
         var fbeFieldSize = new Size(0);
 
-        uid.fbeOffset(fbeCurrentOffset);
-        fbeValue.uid = uid.get(fbeFieldSize);
+        id.fbeOffset(fbeCurrentOffset);
+        fbeValue.id = id.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
@@ -177,8 +177,8 @@ public final class FinalModelAccount extends FinalModel
         long fbeCurrentSize = 0;
         var fbeFieldSize = new Size(0);
 
-        uid.fbeOffset(fbeCurrentOffset);
-        fbeFieldSize.value = uid.set(fbeValue.uid);
+        id.fbeOffset(fbeCurrentOffset);
+        fbeFieldSize.value = id.set(fbeValue.id);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 

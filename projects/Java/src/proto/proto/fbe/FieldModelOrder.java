@@ -20,7 +20,7 @@ import proto.*;
 // Fast Binary Encoding Order field model
 public final class FieldModelOrder extends FieldModel
 {
-    public final FieldModelInt32 uid;
+    public final FieldModelInt32 id;
     public final FieldModelString symbol;
     public final FieldModelOrderSide side;
     public final FieldModelOrderType type;
@@ -30,8 +30,8 @@ public final class FieldModelOrder extends FieldModel
     public FieldModelOrder(Buffer buffer, long offset)
     {
         super(buffer, offset);
-        uid = new FieldModelInt32(buffer, 4 + 4);
-        symbol = new FieldModelString(buffer, uid.fbeOffset() + uid.fbeSize());
+        id = new FieldModelInt32(buffer, 4 + 4);
+        symbol = new FieldModelString(buffer, id.fbeOffset() + id.fbeSize());
         side = new FieldModelOrderSide(buffer, symbol.fbeOffset() + symbol.fbeSize());
         type = new FieldModelOrderType(buffer, side.fbeOffset() + side.fbeSize());
         price = new FieldModelDouble(buffer, type.fbeOffset() + type.fbeSize());
@@ -45,7 +45,7 @@ public final class FieldModelOrder extends FieldModel
     public long fbeBody()
     {
         long fbeResult = 4 + 4
-            + uid.fbeSize()
+            + id.fbeSize()
             + symbol.fbeSize()
             + side.fbeSize()
             + type.fbeSize()
@@ -68,7 +68,7 @@ public final class FieldModelOrder extends FieldModel
         _buffer.shift(fbeStructOffset);
 
         long fbeResult = fbeBody()
-            + uid.fbeExtra()
+            + id.fbeExtra()
             + symbol.fbeExtra()
             + side.fbeExtra()
             + type.fbeExtra()
@@ -115,11 +115,11 @@ public final class FieldModelOrder extends FieldModel
     {
         long fbeCurrentSize = 4 + 4;
 
-        if ((fbeCurrentSize + uid.fbeSize()) > fbeStructSize)
+        if ((fbeCurrentSize + id.fbeSize()) > fbeStructSize)
             return true;
-        if (!uid.verify())
+        if (!id.verify())
             return false;
-        fbeCurrentSize += uid.fbeSize();
+        fbeCurrentSize += id.fbeSize();
 
         if ((fbeCurrentSize + symbol.fbeSize()) > fbeStructSize)
             return true;
@@ -199,11 +199,11 @@ public final class FieldModelOrder extends FieldModel
     {
         long fbeCurrentSize = 4 + 4;
 
-        if ((fbeCurrentSize + uid.fbeSize()) <= fbeStructSize)
-            fbeValue.uid = uid.get();
+        if ((fbeCurrentSize + id.fbeSize()) <= fbeStructSize)
+            fbeValue.id = id.get();
         else
-            fbeValue.uid = 0;
-        fbeCurrentSize += uid.fbeSize();
+            fbeValue.id = 0;
+        fbeCurrentSize += id.fbeSize();
 
         if ((fbeCurrentSize + symbol.fbeSize()) <= fbeStructSize)
             fbeValue.symbol = symbol.get();
@@ -277,7 +277,7 @@ public final class FieldModelOrder extends FieldModel
     // Set the struct fields values
     public void setFields(Order fbeValue)
     {
-        uid.set(fbeValue.uid);
+        id.set(fbeValue.id);
         symbol.set(fbeValue.symbol);
         side.set(fbeValue.side);
         type.set(fbeValue.type);

@@ -575,15 +575,15 @@ module Proto
   class Order
     include Comparable
 
-    attr_accessor :uid
+    attr_accessor :id
     attr_accessor :symbol
     attr_accessor :side
     attr_accessor :type
     attr_accessor :price
     attr_accessor :volume
 
-    def initialize(uid = 0, symbol = '', side = OrderSide.new, type = OrderType.new, price = 0.0, volume = 0.0)
-      @uid = uid
+    def initialize(id = 0, symbol = '', side = OrderSide.new, type = OrderType.new, price = 0.0, volume = 0.0)
+      @id = id
       @symbol = symbol
       @side = side
       @type = type
@@ -592,7 +592,7 @@ module Proto
     end
 
     def initialize_copy(other)
-      @uid = other.uid
+      @id = other.id
       @symbol = other.symbol
       @side = other.side
       @type = other.type
@@ -620,7 +620,7 @@ module Proto
 
       # noinspection RubyUnusedLocalVariable
       result = 0
-      result = @uid <=> other.uid
+      result = @id <=> other.id
       if result != 0
         return false
       end
@@ -636,7 +636,7 @@ module Proto
     # Struct keys
     def key
       result = []
-      result.push(@uid)
+      result.push(@id)
       # noinspection RubyUnnecessaryReturnValue
       result
     end
@@ -650,9 +650,9 @@ module Proto
     def to_s
       result = ''
       result << 'Order('
-      result << 'uid='
-      if !@uid.nil?
-        result << @uid.to_s
+      result << 'id='
+      if !@id.nil?
+        result << @id.to_s
       else
         result << 'null'
       end
@@ -714,8 +714,8 @@ module Proto
     # Get struct JSON map (internal method)
     def __to_json_map__
       result = {}
-      key = 'uid'
-      value = (uid.nil? ? nil : uid)
+      key = 'id'
+      value = (id.nil? ? nil : id)
       result.store(key, value)
       key = 'symbol'
       value = (symbol.nil? ? nil : symbol)
@@ -743,8 +743,8 @@ module Proto
     # Get struct map from JSON (internal method)
     def self.__from_json_map__(json)
       result = Order.new
-      value = json.fetch('uid', nil)
-      result.uid = (value.nil? ? nil : value)
+      value = json.fetch('id', nil)
+      result.id = (value.nil? ? nil : value)
       value = json.fetch('symbol', nil)
       result.symbol = (value.nil? ? nil : value)
       value = json.fetch('side', nil)
@@ -763,16 +763,16 @@ module Proto
   class FieldModelOrder < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_uid = FBE::FieldModelInt32.new(self.buffer, 4 + 4)
-      @_symbol = FBE::FieldModelString.new(self.buffer, @_uid.fbe_offset + @_uid.fbe_size)
+      @_id = FBE::FieldModelInt32.new(self.buffer, 4 + 4)
+      @_symbol = FBE::FieldModelString.new(self.buffer, @_id.fbe_offset + @_id.fbe_size)
       @_side = FieldModelOrderSide.new(self.buffer, @_symbol.fbe_offset + @_symbol.fbe_size)
       @_type = FieldModelOrderType.new(self.buffer, @_side.fbe_offset + @_side.fbe_size)
       @_price = FBE::FieldModelDouble.new(self.buffer, @_type.fbe_offset + @_type.fbe_size)
       @_volume = FBE::FieldModelDouble.new(self.buffer, @_price.fbe_offset + @_price.fbe_size)
     end
 
-    def uid
-      @_uid
+    def id
+      @_id
     end
 
     def symbol
@@ -803,7 +803,7 @@ module Proto
     # Get the field body size
     def fbe_body
       4 + 4 \
-        + uid.fbe_size \
+        + id.fbe_size \
         + symbol.fbe_size \
         + side.fbe_size \
         + type.fbe_size \
@@ -825,7 +825,7 @@ module Proto
       @_buffer.shift(fbe_struct_offset)
 
       fbe_result = fbe_body \
-        + uid.fbe_extra \
+        + id.fbe_extra \
         + symbol.fbe_extra \
         + side.fbe_extra \
         + type.fbe_extra \
@@ -880,14 +880,14 @@ module Proto
     def verify_fields(fbe_struct_size)
       fbe_current_size = 4 + 4
 
-      if (fbe_current_size + uid.fbe_size) > fbe_struct_size
+      if (fbe_current_size + id.fbe_size) > fbe_struct_size
         return true
       end
-      unless uid.verify
+      unless id.verify
         return false
       end
       # noinspection RubyUnusedLocalVariable
-      fbe_current_size += uid.fbe_size
+      fbe_current_size += id.fbe_size
 
       if (fbe_current_size + symbol.fbe_size) > fbe_struct_size
         return true
@@ -979,13 +979,13 @@ module Proto
     def get_fields(fbe_value, fbe_struct_size)
       fbe_current_size = 4 + 4
 
-      if (fbe_current_size + uid.fbe_size) <= fbe_struct_size
-        fbe_value.uid = uid.get
+      if (fbe_current_size + id.fbe_size) <= fbe_struct_size
+        fbe_value.id = id.get
       else
-        fbe_value.uid = 0
+        fbe_value.id = 0
       end
       # noinspection RubyUnusedLocalVariable
-      fbe_current_size += uid.fbe_size
+      fbe_current_size += id.fbe_size
 
       if (fbe_current_size + symbol.fbe_size) <= fbe_struct_size
         fbe_value.symbol = symbol.get
@@ -1066,7 +1066,7 @@ module Proto
 
     # Set the struct fields values
     def set_fields(fbe_value)
-      uid.set(fbe_value.uid)
+      id.set(fbe_value.id)
       symbol.set(fbe_value.symbol)
       side.set(fbe_value.side)
       type.set(fbe_value.type)
@@ -1162,7 +1162,7 @@ module Proto
   class FinalModelOrder < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_uid = FBE::FinalModelInt32.new(self.buffer, 0)
+      @_id = FBE::FinalModelInt32.new(self.buffer, 0)
       @_symbol = FBE::FinalModelString.new(self.buffer, 0)
       @_side = FinalModelOrderSide.new(self.buffer, 0)
       @_type = FinalModelOrderType.new(self.buffer, 0)
@@ -1170,8 +1170,8 @@ module Proto
       @_volume = FBE::FinalModelDouble.new(self.buffer, 0)
     end
 
-    def uid
-      @_uid
+    def id
+      @_id
     end
 
     def symbol
@@ -1197,7 +1197,7 @@ module Proto
     # Get the allocation size
     def fbe_allocation_size(fbe_value)
       0 \
-        + uid.fbe_allocation_size(fbe_value.uid) \
+        + id.fbe_allocation_size(fbe_value.id) \
         + symbol.fbe_allocation_size(fbe_value.symbol) \
         + side.fbe_allocation_size(fbe_value.side) \
         + type.fbe_allocation_size(fbe_value.type) \
@@ -1229,8 +1229,8 @@ module Proto
     def verify_fields
       fbe_current_offset = 0
 
-      uid.fbe_offset = fbe_current_offset
-      fbe_field_size = uid.verify
+      id.fbe_offset = fbe_current_offset
+      fbe_field_size = id.verify
       if fbe_field_size == FBE::Integer::MAX
         return FBE::Integer::MAX
       end
@@ -1288,9 +1288,9 @@ module Proto
       fbe_current_offset = 0
       fbe_current_size = 0
 
-      uid.fbe_offset = fbe_current_offset
-      fbe_result = uid.get
-      fbe_value.uid = fbe_result[0]
+      id.fbe_offset = fbe_current_offset
+      fbe_result = id.get
+      fbe_value.id = fbe_result[0]
       # noinspection RubyUnusedLocalVariable
       fbe_current_offset += fbe_result[1]
       fbe_current_size += fbe_result[1]
@@ -1347,8 +1347,8 @@ module Proto
       fbe_current_offset = 0
       fbe_current_size = 0
 
-      uid.fbe_offset = fbe_current_offset
-      fbe_field_size = uid.set(fbe_value.uid)
+      id.fbe_offset = fbe_current_offset
+      fbe_field_size = id.set(fbe_value.id)
       # noinspection RubyUnusedLocalVariable
       fbe_current_offset += fbe_field_size
       fbe_current_size += fbe_field_size
@@ -2101,15 +2101,15 @@ module Proto
   class Account
     include Comparable
 
-    attr_accessor :uid
+    attr_accessor :id
     attr_accessor :name
     attr_accessor :state
     attr_accessor :wallet
     attr_accessor :asset
     attr_accessor :orders
 
-    def initialize(uid = 0, name = '', state = State.initialized | State.bad, wallet = Balance.new, asset = nil, orders = Array.new)
-      @uid = uid
+    def initialize(id = 0, name = '', state = State.initialized | State.bad, wallet = Balance.new, asset = nil, orders = Array.new)
+      @id = id
       @name = name
       @state = state
       @wallet = wallet
@@ -2118,7 +2118,7 @@ module Proto
     end
 
     def initialize_copy(other)
-      @uid = other.uid
+      @id = other.id
       @name = other.name
       @state = other.state
       @wallet = other.wallet
@@ -2146,7 +2146,7 @@ module Proto
 
       # noinspection RubyUnusedLocalVariable
       result = 0
-      result = @uid <=> other.uid
+      result = @id <=> other.id
       if result != 0
         return false
       end
@@ -2162,7 +2162,7 @@ module Proto
     # Struct keys
     def key
       result = []
-      result.push(@uid)
+      result.push(@id)
       # noinspection RubyUnnecessaryReturnValue
       result
     end
@@ -2176,9 +2176,9 @@ module Proto
     def to_s
       result = ''
       result << 'Account('
-      result << 'uid='
-      if !@uid.nil?
-        result << @uid.to_s
+      result << 'id='
+      if !@id.nil?
+        result << @id.to_s
       else
         result << 'null'
       end
@@ -2252,8 +2252,8 @@ module Proto
     # Get struct JSON map (internal method)
     def __to_json_map__
       result = {}
-      key = 'uid'
-      value = (uid.nil? ? nil : uid)
+      key = 'id'
+      value = (id.nil? ? nil : id)
       result.store(key, value)
       key = 'name'
       value = (name.nil? ? nil : name)
@@ -2281,8 +2281,8 @@ module Proto
     # Get struct map from JSON (internal method)
     def self.__from_json_map__(json)
       result = Account.new
-      value = json.fetch('uid', nil)
-      result.uid = (value.nil? ? nil : value)
+      value = json.fetch('id', nil)
+      result.id = (value.nil? ? nil : value)
       value = json.fetch('name', nil)
       result.name = (value.nil? ? nil : value)
       value = json.fetch('state', nil)
@@ -2301,16 +2301,16 @@ module Proto
   class FieldModelAccount < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_uid = FBE::FieldModelInt32.new(self.buffer, 4 + 4)
-      @_name = FBE::FieldModelString.new(self.buffer, @_uid.fbe_offset + @_uid.fbe_size)
+      @_id = FBE::FieldModelInt32.new(self.buffer, 4 + 4)
+      @_name = FBE::FieldModelString.new(self.buffer, @_id.fbe_offset + @_id.fbe_size)
       @_state = FieldModelState.new(self.buffer, @_name.fbe_offset + @_name.fbe_size)
       @_wallet = FieldModelBalance.new(self.buffer, @_state.fbe_offset + @_state.fbe_size)
       @_asset = FBE::FieldModelOptional.new(FieldModelBalance.new(self.buffer, @_wallet.fbe_offset + @_wallet.fbe_size), self.buffer, @_wallet.fbe_offset + @_wallet.fbe_size)
       @_orders = FBE::FieldModelVector.new(FieldModelOrder.new(self.buffer, @_asset.fbe_offset + @_asset.fbe_size), self.buffer, @_asset.fbe_offset + @_asset.fbe_size)
     end
 
-    def uid
-      @_uid
+    def id
+      @_id
     end
 
     def name
@@ -2341,7 +2341,7 @@ module Proto
     # Get the field body size
     def fbe_body
       4 + 4 \
-        + uid.fbe_size \
+        + id.fbe_size \
         + name.fbe_size \
         + state.fbe_size \
         + wallet.fbe_size \
@@ -2363,7 +2363,7 @@ module Proto
       @_buffer.shift(fbe_struct_offset)
 
       fbe_result = fbe_body \
-        + uid.fbe_extra \
+        + id.fbe_extra \
         + name.fbe_extra \
         + state.fbe_extra \
         + wallet.fbe_extra \
@@ -2418,14 +2418,14 @@ module Proto
     def verify_fields(fbe_struct_size)
       fbe_current_size = 4 + 4
 
-      if (fbe_current_size + uid.fbe_size) > fbe_struct_size
+      if (fbe_current_size + id.fbe_size) > fbe_struct_size
         return true
       end
-      unless uid.verify
+      unless id.verify
         return false
       end
       # noinspection RubyUnusedLocalVariable
-      fbe_current_size += uid.fbe_size
+      fbe_current_size += id.fbe_size
 
       if (fbe_current_size + name.fbe_size) > fbe_struct_size
         return true
@@ -2517,13 +2517,13 @@ module Proto
     def get_fields(fbe_value, fbe_struct_size)
       fbe_current_size = 4 + 4
 
-      if (fbe_current_size + uid.fbe_size) <= fbe_struct_size
-        fbe_value.uid = uid.get
+      if (fbe_current_size + id.fbe_size) <= fbe_struct_size
+        fbe_value.id = id.get
       else
-        fbe_value.uid = 0
+        fbe_value.id = 0
       end
       # noinspection RubyUnusedLocalVariable
-      fbe_current_size += uid.fbe_size
+      fbe_current_size += id.fbe_size
 
       if (fbe_current_size + name.fbe_size) <= fbe_struct_size
         fbe_value.name = name.get
@@ -2604,7 +2604,7 @@ module Proto
 
     # Set the struct fields values
     def set_fields(fbe_value)
-      uid.set(fbe_value.uid)
+      id.set(fbe_value.id)
       name.set(fbe_value.name)
       state.set(fbe_value.state)
       wallet.set(fbe_value.wallet)
@@ -2700,7 +2700,7 @@ module Proto
   class FinalModelAccount < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_uid = FBE::FinalModelInt32.new(self.buffer, 0)
+      @_id = FBE::FinalModelInt32.new(self.buffer, 0)
       @_name = FBE::FinalModelString.new(self.buffer, 0)
       @_state = FinalModelState.new(self.buffer, 0)
       @_wallet = FinalModelBalance.new(self.buffer, 0)
@@ -2708,8 +2708,8 @@ module Proto
       @_orders = FBE::FinalModelVector.new(FinalModelOrder.new(self.buffer, 0), self.buffer, 0)
     end
 
-    def uid
-      @_uid
+    def id
+      @_id
     end
 
     def name
@@ -2735,7 +2735,7 @@ module Proto
     # Get the allocation size
     def fbe_allocation_size(fbe_value)
       0 \
-        + uid.fbe_allocation_size(fbe_value.uid) \
+        + id.fbe_allocation_size(fbe_value.id) \
         + name.fbe_allocation_size(fbe_value.name) \
         + state.fbe_allocation_size(fbe_value.state) \
         + wallet.fbe_allocation_size(fbe_value.wallet) \
@@ -2767,8 +2767,8 @@ module Proto
     def verify_fields
       fbe_current_offset = 0
 
-      uid.fbe_offset = fbe_current_offset
-      fbe_field_size = uid.verify
+      id.fbe_offset = fbe_current_offset
+      fbe_field_size = id.verify
       if fbe_field_size == FBE::Integer::MAX
         return FBE::Integer::MAX
       end
@@ -2826,9 +2826,9 @@ module Proto
       fbe_current_offset = 0
       fbe_current_size = 0
 
-      uid.fbe_offset = fbe_current_offset
-      fbe_result = uid.get
-      fbe_value.uid = fbe_result[0]
+      id.fbe_offset = fbe_current_offset
+      fbe_result = id.get
+      fbe_value.id = fbe_result[0]
       # noinspection RubyUnusedLocalVariable
       fbe_current_offset += fbe_result[1]
       fbe_current_size += fbe_result[1]
@@ -2884,8 +2884,8 @@ module Proto
       fbe_current_offset = 0
       fbe_current_size = 0
 
-      uid.fbe_offset = fbe_current_offset
-      fbe_field_size = uid.set(fbe_value.uid)
+      id.fbe_offset = fbe_current_offset
+      fbe_field_size = id.set(fbe_value.id)
       # noinspection RubyUnusedLocalVariable
       fbe_current_offset += fbe_field_size
       fbe_current_size += fbe_field_size

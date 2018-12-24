@@ -17,7 +17,7 @@ type FinalModelAccount struct {
     buffer *fbe.Buffer  // Final model buffer
     offset int          // Final model buffer offset
 
-    Uid *fbe.FinalModelInt32
+    Id *fbe.FinalModelInt32
     Name *fbe.FinalModelString
     State *FinalModelStateEx
     Wallet *FinalModelBalance
@@ -28,7 +28,7 @@ type FinalModelAccount struct {
 // Create a new Account final model
 func NewFinalModelAccount(buffer *fbe.Buffer, offset int) *FinalModelAccount {
     fbeResult := FinalModelAccount{buffer: buffer, offset: offset}
-    fbeResult.Uid = fbe.NewFinalModelInt32(buffer, 0)
+    fbeResult.Id = fbe.NewFinalModelInt32(buffer, 0)
     fbeResult.Name = fbe.NewFinalModelString(buffer, 0)
     fbeResult.State = NewFinalModelStateEx(buffer, 0)
     fbeResult.Wallet = NewFinalModelBalance(buffer, 0)
@@ -40,7 +40,7 @@ func NewFinalModelAccount(buffer *fbe.Buffer, offset int) *FinalModelAccount {
 // Get the allocation size
 func (fm *FinalModelAccount) FBEAllocationSize(fbeValue *Account) int {
     fbeResult := 0 +
-        fm.Uid.FBEAllocationSize(fbeValue.Uid) +
+        fm.Id.FBEAllocationSize(fbeValue.Id) +
         fm.Name.FBEAllocationSize(fbeValue.Name) +
         fm.State.FBEAllocationSize(&fbeValue.State) +
         fm.Wallet.FBEAllocationSize(&fbeValue.Wallet) +
@@ -83,8 +83,8 @@ func (fm *FinalModelAccount) VerifyFields() int {
     fbeFieldSize := 0
 
 
-    fm.Uid.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize = fm.Uid.Verify(); fbeFieldSize == fbe.MaxInt {
+    fm.Id.SetFBEOffset(fbeCurrentOffset)
+    if fbeFieldSize = fm.Id.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
@@ -144,8 +144,8 @@ func (fm *FinalModelAccount) GetFields(fbeValue *Account) (int, error) {
     fbeCurrentSize := 0
     fbeFieldSize := 0
 
-    fm.Uid.SetFBEOffset(fbeCurrentOffset)
-    if fbeValue.Uid, fbeFieldSize, err = fm.Uid.Get(); err != nil {
+    fm.Id.SetFBEOffset(fbeCurrentOffset)
+    if fbeValue.Id, fbeFieldSize, err = fm.Id.Get(); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
@@ -204,8 +204,8 @@ func (fm *FinalModelAccount) SetFields(fbeValue *Account) (int, error) {
     fbeCurrentSize := 0
     fbeFieldSize := 0
 
-    fm.Uid.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.Uid.Set(fbeValue.Uid); err != nil {
+    fm.Id.SetFBEOffset(fbeCurrentOffset)
+    if fbeFieldSize, err = fm.Id.Set(fbeValue.Id); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize

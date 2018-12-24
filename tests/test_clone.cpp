@@ -20,7 +20,7 @@ TEST_CASE("Clone structs", "[FBE]")
     // Clear the source account
     account1 = proto::Account();
 
-    REQUIRE(account2.uid == 1);
+    REQUIRE(account2.id == 1);
     REQUIRE(account2.name == "Test");
     REQUIRE((account2.state | proto::State::good));
     REQUIRE(std::string(account2.wallet.currency) == "USD");
@@ -29,19 +29,19 @@ TEST_CASE("Clone structs", "[FBE]")
     REQUIRE(std::string(account2.asset.value().currency) == "EUR");
     REQUIRE(account2.asset.value().amount == 100.0);
     REQUIRE(account2.orders.size() == 3);
-    REQUIRE(account2.orders[0].uid == 1);
+    REQUIRE(account2.orders[0].id == 1);
     REQUIRE(std::string(account2.orders[0].symbol) == "EURUSD");
     REQUIRE(account2.orders[0].side == proto::OrderSide::buy);
     REQUIRE(account2.orders[0].type == proto::OrderType::market);
     REQUIRE(account2.orders[0].price == 1.23456);
     REQUIRE(account2.orders[0].volume == 1000.0);
-    REQUIRE(account2.orders[1].uid == 2);
+    REQUIRE(account2.orders[1].id == 2);
     REQUIRE(std::string(account2.orders[1].symbol) == "EURUSD");
     REQUIRE(account2.orders[1].side == proto::OrderSide::sell);
     REQUIRE(account2.orders[1].type == proto::OrderType::limit);
     REQUIRE(account2.orders[1].price == 1.0);
     REQUIRE(account2.orders[1].volume == 100.0);
-    REQUIRE(account2.orders[2].uid == 3);
+    REQUIRE(account2.orders[2].id == 3);
     REQUIRE(std::string(account2.orders[2].symbol) == "EURUSD");
     REQUIRE(account2.orders[2].side == proto::OrderSide::buy);
     REQUIRE(account2.orders[2].type == proto::OrderType::stop);

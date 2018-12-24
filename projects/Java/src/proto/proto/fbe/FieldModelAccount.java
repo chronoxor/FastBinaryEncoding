@@ -20,7 +20,7 @@ import proto.*;
 // Fast Binary Encoding Account field model
 public final class FieldModelAccount extends FieldModel
 {
-    public final FieldModelInt32 uid;
+    public final FieldModelInt32 id;
     public final FieldModelString name;
     public final FieldModelState state;
     public final FieldModelBalance wallet;
@@ -30,8 +30,8 @@ public final class FieldModelAccount extends FieldModel
     public FieldModelAccount(Buffer buffer, long offset)
     {
         super(buffer, offset);
-        uid = new FieldModelInt32(buffer, 4 + 4);
-        name = new FieldModelString(buffer, uid.fbeOffset() + uid.fbeSize());
+        id = new FieldModelInt32(buffer, 4 + 4);
+        name = new FieldModelString(buffer, id.fbeOffset() + id.fbeSize());
         state = new FieldModelState(buffer, name.fbeOffset() + name.fbeSize());
         wallet = new FieldModelBalance(buffer, state.fbeOffset() + state.fbeSize());
         asset = new FieldModelOptionalBalance(buffer, wallet.fbeOffset() + wallet.fbeSize());
@@ -45,7 +45,7 @@ public final class FieldModelAccount extends FieldModel
     public long fbeBody()
     {
         long fbeResult = 4 + 4
-            + uid.fbeSize()
+            + id.fbeSize()
             + name.fbeSize()
             + state.fbeSize()
             + wallet.fbeSize()
@@ -68,7 +68,7 @@ public final class FieldModelAccount extends FieldModel
         _buffer.shift(fbeStructOffset);
 
         long fbeResult = fbeBody()
-            + uid.fbeExtra()
+            + id.fbeExtra()
             + name.fbeExtra()
             + state.fbeExtra()
             + wallet.fbeExtra()
@@ -115,11 +115,11 @@ public final class FieldModelAccount extends FieldModel
     {
         long fbeCurrentSize = 4 + 4;
 
-        if ((fbeCurrentSize + uid.fbeSize()) > fbeStructSize)
+        if ((fbeCurrentSize + id.fbeSize()) > fbeStructSize)
             return true;
-        if (!uid.verify())
+        if (!id.verify())
             return false;
-        fbeCurrentSize += uid.fbeSize();
+        fbeCurrentSize += id.fbeSize();
 
         if ((fbeCurrentSize + name.fbeSize()) > fbeStructSize)
             return true;
@@ -199,11 +199,11 @@ public final class FieldModelAccount extends FieldModel
     {
         long fbeCurrentSize = 4 + 4;
 
-        if ((fbeCurrentSize + uid.fbeSize()) <= fbeStructSize)
-            fbeValue.uid = uid.get();
+        if ((fbeCurrentSize + id.fbeSize()) <= fbeStructSize)
+            fbeValue.id = id.get();
         else
-            fbeValue.uid = 0;
-        fbeCurrentSize += uid.fbeSize();
+            fbeValue.id = 0;
+        fbeCurrentSize += id.fbeSize();
 
         if ((fbeCurrentSize + name.fbeSize()) <= fbeStructSize)
             fbeValue.name = name.get();
@@ -277,7 +277,7 @@ public final class FieldModelAccount extends FieldModel
     // Set the struct fields values
     public void setFields(Account fbeValue)
     {
-        uid.set(fbeValue.uid);
+        id.set(fbeValue.id);
         name.set(fbeValue.name);
         state.set(fbeValue.state);
         wallet.set(fbeValue.wallet);

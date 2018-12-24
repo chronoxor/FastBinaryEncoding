@@ -108,10 +108,10 @@ int main(int argc, char** argv)
     struct_set.f3.emplace(test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2);
     struct_set.f3.emplace(test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2 | test::FlagsSimple::FLAG_VALUE_3);
     test::StructSimple s1;
-    s1.uid = 48;
+    s1.id = 48;
     struct_set.f4.emplace(s1);
     test::StructSimple s2;
-    s2.uid = 65;
+    s2.id = 65;
     struct_set.f4.emplace(s2);
     std::cout << struct_set << std::endl << std::endl;
 
@@ -133,9 +133,9 @@ int main(int argc, char** argv)
     struct_map.f7.emplace(20, test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2 | test::FlagsSimple::FLAG_VALUE_3);
     struct_map.f8.emplace(10, test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2);
     struct_map.f8.emplace(20, std::nullopt);
-    s1.uid = 48;
+    s1.id = 48;
     struct_map.f9.emplace(10, s1);
-    s2.uid = 65;
+    s2.id = 65;
     struct_map.f9.emplace(20, s2);
     struct_map.f10.emplace(10, s1);
     struct_map.f10.emplace(20, std::nullopt);
@@ -159,9 +159,9 @@ int main(int argc, char** argv)
     struct_hash.f7.emplace("20", test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2 | test::FlagsSimple::FLAG_VALUE_3);
     struct_hash.f8.emplace("10", test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2);
     struct_hash.f8.emplace("20", std::nullopt);
-    s1.uid = 48;
+    s1.id = 48;
     struct_hash.f9.emplace("10", s1);
-    s2.uid = 65;
+    s2.id = 65;
     struct_hash.f9.emplace("20", s2);
     struct_hash.f10.emplace("10", s1);
     struct_hash.f10.emplace("20", std::nullopt);
@@ -169,9 +169,9 @@ int main(int argc, char** argv)
 
     // Print extended hash struct
     test::StructHashEx struct_hashex;
-    s1.uid = 48;
+    s1.id = 48;
     struct_hashex.f1.emplace(s1, test::StructNested());
-    s2.uid = 65;
+    s2.id = 65;
     struct_hashex.f1.emplace(s2, test::StructNested());
     struct_hashex.f2.emplace(s1, test::StructNested());
     struct_hashex.f2.emplace(s2, std::nullopt);

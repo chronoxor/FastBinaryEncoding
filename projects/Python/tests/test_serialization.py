@@ -40,7 +40,7 @@ class TestSerialization(TestCase):
         reader.next(deserialized)
         self.assertEqual(reader.model.fbe_offset, (4 + reader.buffer.size))
 
-        self.assertEqual(account2.uid, 1)
+        self.assertEqual(account2.id, 1)
         self.assertEqual(account2.name, "Test")
         self.assertTrue(account2.state.has_flags(proto.State.good))
         self.assertEqual(account2.wallet.currency, "USD")
@@ -49,19 +49,19 @@ class TestSerialization(TestCase):
         self.assertEqual(account2.asset.currency, "EUR")
         self.assertEqual(account2.asset.amount, 100.0)
         self.assertEqual(len(account2.orders), 3)
-        self.assertEqual(account2.orders[0].uid, 1)
+        self.assertEqual(account2.orders[0].id, 1)
         self.assertEqual(account2.orders[0].symbol, "EURUSD")
         self.assertEqual(account2.orders[0].side, proto.OrderSide.buy)
         self.assertEqual(account2.orders[0].type, proto.OrderType.market)
         self.assertEqual(account2.orders[0].price, 1.23456)
         self.assertEqual(account2.orders[0].volume, 1000.0)
-        self.assertEqual(account2.orders[1].uid, 2)
+        self.assertEqual(account2.orders[1].id, 2)
         self.assertEqual(account2.orders[1].symbol, "EURUSD")
         self.assertEqual(account2.orders[1].side, proto.OrderSide.sell)
         self.assertEqual(account2.orders[1].type, proto.OrderType.limit)
         self.assertEqual(account2.orders[1].price, 1.0)
         self.assertEqual(account2.orders[1].volume, 100.0)
-        self.assertEqual(account2.orders[2].uid, 3)
+        self.assertEqual(account2.orders[2].id, 3)
         self.assertEqual(account2.orders[2].symbol, "EURUSD")
         self.assertEqual(account2.orders[2].side, proto.OrderSide.buy)
         self.assertEqual(account2.orders[2].type, proto.OrderType.stop)
@@ -1048,10 +1048,10 @@ class TestSerialization(TestCase):
         struct1.f3.add(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2)
         struct1.f3.add(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3)
         s1 = test.StructSimple()
-        s1.uid = 48
+        s1.id = 48
         struct1.f4.add(s1)
         s2 = test.StructSimple()
-        s2.uid = 65
+        s2.id = 65
         struct1.f4.add(s2)
 
         # Serialize the struct to the FBE stream
@@ -1113,10 +1113,10 @@ class TestSerialization(TestCase):
         struct1.f8[10] = test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2
         struct1.f8[20] = None
         s1 = test.StructSimple()
-        s1.uid = 48
+        s1.id = 48
         struct1.f9[10] = s1
         s2 = test.StructSimple()
-        s2.uid = 65
+        s2.id = 65
         struct1.f9[20] = s2
         struct1.f10[10] = s1
         struct1.f10[20] = None
@@ -1171,10 +1171,10 @@ class TestSerialization(TestCase):
         self.assertEqual(struct2.f8[10], test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2)
         self.assertEqual(struct2.f8[20], None)
         self.assertEqual(len(struct2.f9), 2)
-        self.assertEqual(struct2.f9[10].uid, 48)
-        self.assertEqual(struct2.f9[20].uid, 65)
+        self.assertEqual(struct2.f9[10].id, 48)
+        self.assertEqual(struct2.f9[20].id, 65)
         self.assertEqual(len(struct2.f10), 2)
-        self.assertEqual(struct2.f10[10].uid, 48)
+        self.assertEqual(struct2.f10[10].id, 48)
         self.assertEqual(struct2.f10[20], None)
 
     def test_serialization_struct_hash(self):
@@ -1197,10 +1197,10 @@ class TestSerialization(TestCase):
         struct1.f8["10"] = test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2
         struct1.f8["20"] = None
         s1 = test.StructSimple()
-        s1.uid = 48
+        s1.id = 48
         struct1.f9["10"] = s1
         s2 = test.StructSimple()
-        s2.uid = 65
+        s2.id = 65
         struct1.f9["20"] = s2
         struct1.f10["10"] = s1
         struct1.f10["20"] = None
@@ -1255,20 +1255,20 @@ class TestSerialization(TestCase):
         self.assertEqual(struct2.f8["10"], test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2)
         self.assertEqual(struct2.f8["20"], None)
         self.assertEqual(len(struct2.f9), 2)
-        self.assertEqual(struct2.f9["10"].uid, 48)
-        self.assertEqual(struct2.f9["20"].uid, 65)
+        self.assertEqual(struct2.f9["10"].id, 48)
+        self.assertEqual(struct2.f9["20"].id, 65)
         self.assertEqual(len(struct2.f10), 2)
-        self.assertEqual(struct2.f10["10"].uid, 48)
+        self.assertEqual(struct2.f10["10"].id, 48)
         self.assertEqual(struct2.f10["20"], None)
 
     def test_serialization_struct_hash_extended(self):
         # Create a new struct
         struct1 = test.StructHashEx()
         s1 = test.StructSimple()
-        s1.uid = 48
+        s1.id = 48
         struct1.f1[s1] = test.StructNested()
         s2 = test.StructSimple()
-        s2.uid = 65
+        s2.id = 65
         struct1.f1[s2] = test.StructNested()
         struct1.f2[s1] = test.StructNested()
         struct1.f2[s2] = None

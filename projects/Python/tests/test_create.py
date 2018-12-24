@@ -12,7 +12,7 @@ class TestCreate(TestCase):
         self.assertEqual(writer.model.fbe_offset, 4)
         model_begin = writer.create_begin()
         account_begin = writer.model.set_begin()
-        writer.model.uid.set(1)
+        writer.model.id.set(1)
         writer.model.name.set("Test")
         writer.model.state.set(proto.State.good)
         wallet_begin = writer.model.wallet.set_begin()
@@ -27,7 +27,7 @@ class TestCreate(TestCase):
         writer.model.asset.value.set_end(asset_wallet_begin)
         order = writer.model.orders.resize(3)
         order_begin = order.set_begin()
-        order.uid.set(1)
+        order.id.set(1)
         order.symbol.set("EURUSD")
         order.side.set(proto.OrderSide.buy)
         order.type.set(proto.OrderType.market)
@@ -36,7 +36,7 @@ class TestCreate(TestCase):
         order.set_end(order_begin)
         order.fbe_shift(order.fbe_size)
         order_begin = order.set_begin()
-        order.uid.set(2)
+        order.id.set(2)
         order.symbol.set("EURUSD")
         order.side.set(proto.OrderSide.sell)
         order.type.set(proto.OrderType.limit)
@@ -45,7 +45,7 @@ class TestCreate(TestCase):
         order.set_end(order_begin)
         order.fbe_shift(order.fbe_size)
         order_begin = order.set_begin()
-        order.uid.set(3)
+        order.id.set(3)
         order.symbol.set("EURUSD")
         order.side.set(proto.OrderSide.buy)
         order.type.set(proto.OrderType.stop)
@@ -70,8 +70,8 @@ class TestCreate(TestCase):
         self.assertTrue(reader.verify())
 
         account_begin = reader.model.get_begin()
-        uid = reader.model.uid.get()
-        self.assertEqual(uid, 1)
+        id = reader.model.id.get()
+        self.assertEqual(id, 1)
         name = reader.model.name.get()
         self.assertEqual(name, "Test")
         state = reader.model.state.get()
@@ -98,7 +98,7 @@ class TestCreate(TestCase):
 
         o1 = reader.model.orders[0]
         order_begin = o1.get_begin()
-        order_id = o1.uid.get()
+        order_id = o1.id.get()
         self.assertEqual(order_id, 1)
         order_symbol = o1.symbol.get()
         self.assertEqual(order_symbol, "EURUSD")
@@ -114,7 +114,7 @@ class TestCreate(TestCase):
 
         o2 = reader.model.orders[1]
         order_begin = o2.get_begin()
-        order_id = o2.uid.get()
+        order_id = o2.id.get()
         self.assertEqual(order_id, 2)
         order_symbol = o2.symbol.get()
         self.assertEqual(order_symbol, "EURUSD")
@@ -130,7 +130,7 @@ class TestCreate(TestCase):
 
         o3 = reader.model.orders[2]
         order_begin = o3.get_begin()
-        order_id = o3.uid.get()
+        order_id = o3.id.get()
         self.assertEqual(order_id, 3)
         order_symbol = o3.symbol.get()
         self.assertEqual(order_symbol, "EURUSD")

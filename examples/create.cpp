@@ -16,7 +16,7 @@ int main(int argc, char** argv)
     FBE::proto::AccountModel<FBE::WriteBuffer> account;
     size_t model_begin = account.create_begin();
     size_t account_begin = account.model.set_begin();
-    account.model.uid.set(1);
+    account.model.id.set(1);
     account.model.name.set("Test");
     account.model.state.set(proto::State::good);
     size_t wallet_begin = account.model.wallet.set_begin();
@@ -35,14 +35,14 @@ int main(int argc, char** argv)
     access.attach(account.buffer());
     assert(access.verify());
 
-    int32_t uid;
+    int32_t id;
     std::string name;
     proto::State state;
     std::string wallet_currency;
     double wallet_amount;
 
     account_begin = access.model.get_begin();
-    access.model.uid.get(uid);
+    access.model.id.get(id);
     access.model.name.get(name);
     access.model.state.get(state);
     wallet_begin = access.model.wallet.get_begin();
@@ -53,7 +53,7 @@ int main(int argc, char** argv)
 
     // Show account content
     std::cout << std::endl;
-    std::cout << "account.uid = " << uid << std::endl;
+    std::cout << "account.id = " << id << std::endl;
     std::cout << "account.name = " << name << std::endl;
     std::cout << "account.state = " << state << std::endl;
     std::cout << "account.wallet.currency = " << wallet_currency << std::endl;

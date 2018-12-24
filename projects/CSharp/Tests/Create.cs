@@ -15,7 +15,7 @@ namespace Tests
             Assert.That(writer.model.FBEOffset == 4);
             long modelBegin = writer.CreateBegin();
             long accountBegin = writer.model.SetBegin();
-            writer.model.uid.Set(1);
+            writer.model.id.Set(1);
             writer.model.name.Set("Test");
             writer.model.state.Set(proto.State.good);
             long walletBegin = writer.model.wallet.SetBegin();
@@ -30,7 +30,7 @@ namespace Tests
             writer.model.asset.Value.SetEnd(assetWalletBegin);
             var order = writer.model.orders.Resize(3);
             long orderBegin = order.SetBegin();
-            order.uid.Set(1);
+            order.id.Set(1);
             order.symbol.Set("EURUSD");
             order.side.Set(proto.OrderSide.buy);
             order.type.Set(proto.OrderType.market);
@@ -39,7 +39,7 @@ namespace Tests
             order.SetEnd(orderBegin);
             order.FBEShift(order.FBESize);
             orderBegin = order.SetBegin();
-            order.uid.Set(2);
+            order.id.Set(2);
             order.symbol.Set("EURUSD");
             order.side.Set(proto.OrderSide.sell);
             order.type.Set(proto.OrderType.limit);
@@ -48,7 +48,7 @@ namespace Tests
             order.SetEnd(orderBegin);
             order.FBEShift(order.FBESize);
             orderBegin = order.SetBegin();
-            order.uid.Set(3);
+            order.id.Set(3);
             order.symbol.Set("EURUSD");
             order.side.Set(proto.OrderSide.buy);
             order.type.Set(proto.OrderType.stop);
@@ -73,7 +73,7 @@ namespace Tests
             Assert.That(reader.Verify());
 
             accountBegin = reader.model.GetBegin();
-            reader.model.uid.Get(out var id);
+            reader.model.id.Get(out var id);
             Assert.That(id == 1);
             reader.model.name.Get(out var name);
             Assert.That(name == "Test");
@@ -101,8 +101,8 @@ namespace Tests
 
             var o1 = reader.model.orders[0];
             orderBegin = o1.GetBegin();
-            o1.uid.Get(out var orderUId1);
-            Assert.That(orderUId1 == 1);
+            o1.id.Get(out var orderId1);
+            Assert.That(orderId1 == 1);
             o1.symbol.Get(out var orderSymbol1);
             Assert.That(orderSymbol1 == "EURUSD");
             o1.side.Get(out var orderSide1);
@@ -117,8 +117,8 @@ namespace Tests
 
             var o2 = reader.model.orders[1];
             orderBegin = o2.GetBegin();
-            o2.uid.Get(out var orderUId2);
-            Assert.That(orderUId2 == 2);
+            o2.id.Get(out var orderId2);
+            Assert.That(orderId2 == 2);
             o2.symbol.Get(out var orderSymbol2);
             Assert.That(orderSymbol2 == "EURUSD");
             o2.side.Get(out var orderSide2);
@@ -133,8 +133,8 @@ namespace Tests
 
             var o3 = reader.model.orders[2];
             orderBegin = o3.GetBegin();
-            o3.uid.Get(out var orderUId3);
-            Assert.That(orderUId3 == 3);
+            o3.id.Get(out var orderId3);
+            Assert.That(orderId3 == 3);
             o3.symbol.Get(out var orderSymbol3);
             Assert.That(orderSymbol3 == "EURUSD");
             o3.side.Get(out var orderSide3);

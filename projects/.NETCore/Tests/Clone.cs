@@ -12,7 +12,7 @@ namespace Tests
         {
             // Create a new account with some orders
             var account1 = proto.Account.Default;
-            account1.uid = 1;
+            account1.id = 1;
             account1.name = "Test";
             account1.state = proto.State.good;
             account1.wallet.currency = "USD";
@@ -28,7 +28,7 @@ namespace Tests
             // Clear the source account
             account1 = proto.Account.Default;
 
-            Assert.True(account2.uid == 1);
+            Assert.True(account2.id == 1);
             Assert.True(account2.name == "Test");
             Assert.True(account2.state.HasFlags(proto.State.good));
             Assert.True(account2.wallet.currency == "USD");
@@ -37,19 +37,19 @@ namespace Tests
             Assert.True(account2.asset.Value.currency == "EUR");
             Assert.True(account2.asset.Value.amount == 100.0);
             Assert.True(account2.orders.Count == 3);
-            Assert.True(account2.orders[0].uid == 1);
+            Assert.True(account2.orders[0].id == 1);
             Assert.True(account2.orders[0].symbol == "EURUSD");
             Assert.True(account2.orders[0].side == proto.OrderSide.buy);
             Assert.True(account2.orders[0].type == proto.OrderType.market);
             Assert.True(account2.orders[0].price == 1.23456);
             Assert.True(account2.orders[0].volume == 1000.0);
-            Assert.True(account2.orders[1].uid == 2);
+            Assert.True(account2.orders[1].id == 2);
             Assert.True(account2.orders[1].symbol == "EURUSD");
             Assert.True(account2.orders[1].side == proto.OrderSide.sell);
             Assert.True(account2.orders[1].type == proto.OrderType.limit);
             Assert.True(account2.orders[1].price == 1.0);
             Assert.True(account2.orders[1].volume == 100.0);
-            Assert.True(account2.orders[2].uid == 3);
+            Assert.True(account2.orders[2].id == 3);
             Assert.True(account2.orders[2].symbol == "EURUSD");
             Assert.True(account2.orders[2].side == proto.OrderSide.buy);
             Assert.True(account2.orders[2].type == proto.OrderType.stop);

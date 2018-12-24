@@ -11,7 +11,7 @@ namespace Benchmarks
         {
             // Create a new account with some orders
             _account = proto.Account.Default;
-            _account.uid = 1;
+            _account.id = 1;
             _account.name = "Test";
             _account.state = proto.State.good;
             _account.wallet.currency = "USD";

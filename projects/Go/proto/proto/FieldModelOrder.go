@@ -18,7 +18,7 @@ type FieldModelOrder struct {
     // Field model buffer offset
     offset int
 
-    Uid *fbe.FieldModelInt32
+    Id *fbe.FieldModelInt32
     Symbol *fbe.FieldModelString
     Side *FieldModelOrderSide
     Type *FieldModelOrderType
@@ -29,8 +29,8 @@ type FieldModelOrder struct {
 // Create a new Order field model
 func NewFieldModelOrder(buffer *fbe.Buffer, offset int) *FieldModelOrder {
     fbeResult := FieldModelOrder{buffer: buffer, offset: offset}
-    fbeResult.Uid = fbe.NewFieldModelInt32(buffer, 4 + 4)
-    fbeResult.Symbol = fbe.NewFieldModelString(buffer, fbeResult.Uid.FBEOffset() + fbeResult.Uid.FBESize())
+    fbeResult.Id = fbe.NewFieldModelInt32(buffer, 4 + 4)
+    fbeResult.Symbol = fbe.NewFieldModelString(buffer, fbeResult.Id.FBEOffset() + fbeResult.Id.FBESize())
     fbeResult.Side = NewFieldModelOrderSide(buffer, fbeResult.Symbol.FBEOffset() + fbeResult.Symbol.FBESize())
     fbeResult.Type = NewFieldModelOrderType(buffer, fbeResult.Side.FBEOffset() + fbeResult.Side.FBESize())
     fbeResult.Price = fbe.NewFieldModelDouble(buffer, fbeResult.Type.FBEOffset() + fbeResult.Type.FBESize())
@@ -44,7 +44,7 @@ func (fm *FieldModelOrder) FBESize() int { return 4 }
 // Get the field body size
 func (fm *FieldModelOrder) FBEBody() int {
     fbeResult := 4 + 4 +
-        fm.Uid.FBESize() +
+        fm.Id.FBESize() +
         fm.Symbol.FBESize() +
         fm.Side.FBESize() +
         fm.Type.FBESize() +
@@ -68,7 +68,7 @@ func (fm *FieldModelOrder) FBEExtra() int {
     fm.buffer.Shift(fbeStructOffset)
 
     fbeResult := fm.FBEBody() +
-        fm.Uid.FBEExtra() +
+        fm.Id.FBEExtra() +
         fm.Symbol.FBEExtra() +
         fm.Side.FBEExtra() +
         fm.Type.FBEExtra() +
@@ -128,13 +128,13 @@ func (fm *FieldModelOrder) VerifyType(fbeVerifyType bool) bool {
 func (fm *FieldModelOrder) VerifyFields(fbeStructSize int) bool {
     fbeCurrentSize := 4 + 4
 
-    if (fbeCurrentSize + fm.Uid.FBESize()) > fbeStructSize {
+    if (fbeCurrentSize + fm.Id.FBESize()) > fbeStructSize {
         return true
     }
-    if !fm.Uid.Verify() {
+    if !fm.Id.Verify() {
         return false
     }
-    fbeCurrentSize += fm.Uid.FBESize()
+    fbeCurrentSize += fm.Id.FBESize()
 
     if (fbeCurrentSize + fm.Symbol.FBESize()) > fbeStructSize {
         return true
@@ -227,12 +227,12 @@ func (fm *FieldModelOrder) GetValue(fbeValue *Order) error {
 func (fm *FieldModelOrder) GetFields(fbeValue *Order, fbeStructSize int) {
     fbeCurrentSize := 4 + 4
 
-    if (fbeCurrentSize + fm.Uid.FBESize()) <= fbeStructSize {
-        fbeValue.Uid, _ = fm.Uid.Get()
+    if (fbeCurrentSize + fm.Id.FBESize()) <= fbeStructSize {
+        fbeValue.Id, _ = fm.Id.Get()
     } else {
-        fbeValue.Uid = 0
+        fbeValue.Id = 0
     }
-    fbeCurrentSize += fm.Uid.FBESize()
+    fbeCurrentSize += fm.Id.FBESize()
 
     if (fbeCurrentSize + fm.Symbol.FBESize()) <= fbeStructSize {
         fbeValue.Symbol, _ = fm.Symbol.Get()
@@ -311,7 +311,7 @@ func (fm *FieldModelOrder) Set(fbeValue *Order) error {
 func (fm *FieldModelOrder) SetFields(fbeValue *Order) error {
     var err error = nil
 
-    if err = fm.Uid.Set(fbeValue.Uid); err != nil {
+    if err = fm.Id.Set(fbeValue.Id); err != nil {
         return err
     }
     if err = fm.Symbol.Set(fbeValue.Symbol); err != nil {

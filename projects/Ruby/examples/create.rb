@@ -4,7 +4,7 @@ require_relative '../proto/proto'
 account = Proto::AccountModel.new(FBE::WriteBuffer.new)
 model_begin = account.create_begin
 account_begin = account.model.set_begin
-account.model.uid.set(1)
+account.model.id.set(1)
 account.model.name.set('Test')
 account.model.state.set(Proto::State.good)
 wallet_begin = account.model.wallet.set_begin
@@ -24,7 +24,7 @@ access.attach_buffer(account.buffer)
 raise "Verify error!" unless access.verify
 
 account_begin = access.model.get_begin
-uid = access.model.uid.get
+id = access.model.id.get
 name = access.model.name.get
 state = access.model.state.get
 wallet_begin = access.model.wallet.get_begin
@@ -35,7 +35,7 @@ access.model.get_end(account_begin)
 
 # Show account content
 puts
-puts "account.uid = #{uid}"
+puts "account.id = #{id}"
 puts "account.name = #{name}"
 puts "account.state = #{state}"
 puts "account.wallet.currency = #{wallet_currency}"

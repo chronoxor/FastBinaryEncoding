@@ -119,10 +119,10 @@ func main() {
 	structSet.F3.Add(test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
 	structSet.F3.Add(test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3)
 	s1 := test.NewStructSimple()
-	s1.Uid = 48
+	s1.Id = 48
 	structSet.F4.Add(*s1)
 	s2 := test.NewStructSimple()
-	s2.Uid = 65
+	s2.Id = 65
 	structSet.F4.Add(*s2)
 	fmt.Println(structSet)
 	fmt.Println()
@@ -149,9 +149,9 @@ func main() {
 	mapF8 := test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2
 	structMap.F8[10] = &mapF8
 	structMap.F8[20] = nil
-	s1.Uid = 48
+	s1.Id = 48
 	structMap.F9[10] = *s1
-	s2.Uid = 65
+	s2.Id = 65
 	structMap.F9[20] = *s2
 	structMap.F10[10] = s1
 	structMap.F10[20] = nil
@@ -180,9 +180,9 @@ func main() {
 	hashF8 := test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2
 	structHash.F8["10"] = &hashF8
 	structHash.F8["20"] = nil
-	s1.Uid = 48
+	s1.Id = 48
 	structHash.F9["10"] = *s1
-	s2.Uid = 65
+	s2.Id = 65
 	structHash.F9["20"] = *s2
 	structHash.F10["10"] = s1
 	structHash.F10["20"] = nil
@@ -191,9 +191,9 @@ func main() {
 
 	// Print extended hash struct
 	structHashEx := test.NewStructHashEx()
-	s1.Uid = 48
+	s1.Id = 48
 	structHashEx.F1[s1.Key()] = struct{Key test.StructSimple; Value test.StructNested}{*s1, *test.NewStructNested()}
-	s2.Uid = 65
+	s2.Id = 65
 	structHashEx.F1[s2.Key()] = struct{Key test.StructSimple; Value test.StructNested}{*s2, *test.NewStructNested()}
 	structHashEx.F2[s1.Key()] = struct{Key test.StructSimple; Value *test.StructNested}{*s1, test.NewStructNested()}
 	structHashEx.F2[s2.Key()] = struct{Key test.StructSimple; Value *test.StructNested}{*s2, nil}

@@ -17,7 +17,7 @@ type FinalModelStructSimple struct {
     buffer *fbe.Buffer  // Final model buffer
     offset int          // Final model buffer offset
 
-    Uid *fbe.FinalModelInt32
+    Id *fbe.FinalModelInt32
     F1 *fbe.FinalModelBool
     F2 *fbe.FinalModelBool
     F3 *fbe.FinalModelByte
@@ -67,7 +67,7 @@ type FinalModelStructSimple struct {
 // Create a new StructSimple final model
 func NewFinalModelStructSimple(buffer *fbe.Buffer, offset int) *FinalModelStructSimple {
     fbeResult := FinalModelStructSimple{buffer: buffer, offset: offset}
-    fbeResult.Uid = fbe.NewFinalModelInt32(buffer, 0)
+    fbeResult.Id = fbe.NewFinalModelInt32(buffer, 0)
     fbeResult.F1 = fbe.NewFinalModelBool(buffer, 0)
     fbeResult.F2 = fbe.NewFinalModelBool(buffer, 0)
     fbeResult.F3 = fbe.NewFinalModelByte(buffer, 0)
@@ -118,7 +118,7 @@ func NewFinalModelStructSimple(buffer *fbe.Buffer, offset int) *FinalModelStruct
 // Get the allocation size
 func (fm *FinalModelStructSimple) FBEAllocationSize(fbeValue *StructSimple) int {
     fbeResult := 0 +
-        fm.Uid.FBEAllocationSize(fbeValue.Uid) +
+        fm.Id.FBEAllocationSize(fbeValue.Id) +
         fm.F1.FBEAllocationSize(fbeValue.F1) +
         fm.F2.FBEAllocationSize(fbeValue.F2) +
         fm.F3.FBEAllocationSize(fbeValue.F3) +
@@ -200,8 +200,8 @@ func (fm *FinalModelStructSimple) VerifyFields() int {
     fbeFieldSize := 0
 
 
-    fm.Uid.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize = fm.Uid.Verify(); fbeFieldSize == fbe.MaxInt {
+    fm.Id.SetFBEOffset(fbeCurrentOffset)
+    if fbeFieldSize = fm.Id.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
@@ -495,8 +495,8 @@ func (fm *FinalModelStructSimple) GetFields(fbeValue *StructSimple) (int, error)
     fbeCurrentSize := 0
     fbeFieldSize := 0
 
-    fm.Uid.SetFBEOffset(fbeCurrentOffset)
-    if fbeValue.Uid, fbeFieldSize, err = fm.Uid.Get(); err != nil {
+    fm.Id.SetFBEOffset(fbeCurrentOffset)
+    if fbeValue.Id, fbeFieldSize, err = fm.Id.Get(); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
@@ -828,8 +828,8 @@ func (fm *FinalModelStructSimple) SetFields(fbeValue *StructSimple) (int, error)
     fbeCurrentSize := 0
     fbeFieldSize := 0
 
-    fm.Uid.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.Uid.Set(fbeValue.Uid); err != nil {
+    fm.Id.SetFBEOffset(fbeCurrentOffset)
+    if fbeFieldSize, err = fm.Id.Set(fbeValue.Id); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize

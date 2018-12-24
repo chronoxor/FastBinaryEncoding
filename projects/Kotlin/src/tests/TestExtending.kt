@@ -38,7 +38,7 @@ class TestExtending
         reader.next(deserialized)
         assertEquals(reader.model.fbeOffset, 4 + reader.buffer.size)
 
-        assertEquals(account2.uid, 1)
+        assertEquals(account2.id, 1)
         assertEquals(account2.name, "Test")
         assertEquals(account2.state, protoex.StateEx.good)
         assertEquals(account2.wallet.currency, "USD")
@@ -49,7 +49,7 @@ class TestExtending
         assertEquals(account2.asset!!.amount, 100.0)
         assertEquals(account2.asset!!.locked, 0.0)
         assertEquals(account2.orders.size, 3)
-        assertEquals(account2.orders[0].uid, 1)
+        assertEquals(account2.orders[0].id, 1)
         assertEquals(account2.orders[0].symbol, "EURUSD")
         assertEquals(account2.orders[0].side, protoex.OrderSide.buy)
         assertEquals(account2.orders[0].type, protoex.OrderType.market)
@@ -57,7 +57,7 @@ class TestExtending
         assertEquals(account2.orders[0].volume, 1000.0)
         assertEquals(account2.orders[0].tp, 10.0)
         assertEquals(account2.orders[0].sl, -10.0)
-        assertEquals(account2.orders[1].uid, 2)
+        assertEquals(account2.orders[1].id, 2)
         assertEquals(account2.orders[1].symbol, "EURUSD")
         assertEquals(account2.orders[1].side, protoex.OrderSide.sell)
         assertEquals(account2.orders[1].type, protoex.OrderType.limit)
@@ -65,7 +65,7 @@ class TestExtending
         assertEquals(account2.orders[1].volume, 100.0)
         assertEquals(account2.orders[1].tp, 10.0)
         assertEquals(account2.orders[1].sl, -10.0)
-        assertEquals(account2.orders[2].uid, 3)
+        assertEquals(account2.orders[2].id, 3)
         assertEquals(account2.orders[2].symbol, "EURUSD")
         assertEquals(account2.orders[2].side, protoex.OrderSide.buy)
         assertEquals(account2.orders[2].type, protoex.OrderType.stop)
@@ -80,7 +80,7 @@ class TestExtending
     {
         // Create a new account with some orders
         val account1 = protoex.Account()
-        account1.uid = 1
+        account1.id = 1
         account1.name = "Test"
         account1.state = protoex.StateEx.fromSet(EnumSet.of(protoex.StateEx.good.value, protoex.StateEx.happy.value))
         account1.wallet.currency = "USD"
@@ -117,7 +117,7 @@ class TestExtending
         reader.next(deserialized)
         assertEquals(reader.model.fbeOffset, 4 + reader.buffer.size)
 
-        assertEquals(account2.uid, 1)
+        assertEquals(account2.id, 1)
         assertEquals(account2.name, "Test")
         assertTrue(account2.state.hasFlags(proto.State.good))
         assertEquals(account2.wallet.currency, "USD")
@@ -126,19 +126,19 @@ class TestExtending
         assertEquals(account2.asset!!.currency, "EUR")
         assertEquals(account2.asset!!.amount, 100.0)
         assertEquals(account2.orders.size, 3)
-        assertEquals(account2.orders[0].uid, 1)
+        assertEquals(account2.orders[0].id, 1)
         assertEquals(account2.orders[0].symbol, "EURUSD")
         assertEquals(account2.orders[0].side, proto.OrderSide.buy)
         assertEquals(account2.orders[0].type, proto.OrderType.market)
         assertEquals(account2.orders[0].price, 1.23456)
         assertEquals(account2.orders[0].volume, 1000.0)
-        assertEquals(account2.orders[1].uid, 2)
+        assertEquals(account2.orders[1].id, 2)
         assertEquals(account2.orders[1].symbol, "EURUSD")
         assertEquals(account2.orders[1].side, proto.OrderSide.sell)
         assertEquals(account2.orders[1].type, proto.OrderType.limit)
         assertEquals(account2.orders[1].price, 1.0)
         assertEquals(account2.orders[1].volume, 100.0)
-        assertEquals(account2.orders[2].uid, 3)
+        assertEquals(account2.orders[2].id, 3)
         assertEquals(account2.orders[2].symbol, "EURUSD")
         assertNotEquals(account2.orders[2].side, proto.OrderSide.buy)
         assertNotEquals(account2.orders[2].type, proto.OrderType.market)

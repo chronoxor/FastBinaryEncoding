@@ -38,7 +38,7 @@ TEST_CASE("Serialization: domain", "[FBE]")
     reader.next(deserialized);
     REQUIRE(reader.model.fbe_offset() == (4 + reader.buffer().size()));
 
-    REQUIRE(account2.uid == 1);
+    REQUIRE(account2.id == 1);
     REQUIRE(account2.name == "Test");
     REQUIRE((account2.state | proto::State::good));
     REQUIRE(std::string(account2.wallet.currency) == "USD");
@@ -47,19 +47,19 @@ TEST_CASE("Serialization: domain", "[FBE]")
     REQUIRE(std::string(account2.asset.value().currency) == "EUR");
     REQUIRE(account2.asset.value().amount == 100.0);
     REQUIRE(account2.orders.size() == 3);
-    REQUIRE(account2.orders[0].uid == 1);
+    REQUIRE(account2.orders[0].id == 1);
     REQUIRE(std::string(account2.orders[0].symbol) == "EURUSD");
     REQUIRE(account2.orders[0].side == proto::OrderSide::buy);
     REQUIRE(account2.orders[0].type == proto::OrderType::market);
     REQUIRE(account2.orders[0].price == 1.23456);
     REQUIRE(account2.orders[0].volume == 1000.0);
-    REQUIRE(account2.orders[1].uid == 2);
+    REQUIRE(account2.orders[1].id == 2);
     REQUIRE(std::string(account2.orders[1].symbol) == "EURUSD");
     REQUIRE(account2.orders[1].side == proto::OrderSide::sell);
     REQUIRE(account2.orders[1].type == proto::OrderType::limit);
     REQUIRE(account2.orders[1].price == 1.0);
     REQUIRE(account2.orders[1].volume == 100.0);
-    REQUIRE(account2.orders[2].uid == 3);
+    REQUIRE(account2.orders[2].id == 3);
     REQUIRE(std::string(account2.orders[2].symbol) == "EURUSD");
     REQUIRE(account2.orders[2].side == proto::OrderSide::buy);
     REQUIRE(account2.orders[2].type == proto::OrderType::stop);
@@ -1061,10 +1061,10 @@ TEST_CASE("Serialization: struct set", "[FBE]")
     struct1.f3.emplace(test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2);
     struct1.f3.emplace(test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2 | test::FlagsSimple::FLAG_VALUE_3);
     test::StructSimple s1;
-    s1.uid = 48;
+    s1.id = 48;
     struct1.f4.emplace(s1);
     test::StructSimple s2;
-    s2.uid = 65;
+    s2.id = 65;
     struct1.f4.emplace(s2);
 
     // Serialize the struct to the FBE stream
@@ -1128,10 +1128,10 @@ TEST_CASE("Serialization: struct map", "[FBE]")
     struct1.f8.emplace(10, test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2);
     struct1.f8.emplace(20, std::nullopt);
     test::StructSimple s1;
-    s1.uid = 48;
+    s1.id = 48;
     struct1.f9.emplace(10, s1);
     test::StructSimple s2;
-    s2.uid = 65;
+    s2.id = 65;
     struct1.f9.emplace(20, s2);
     struct1.f10.emplace(10, s1);
     struct1.f10.emplace(20, std::nullopt);
@@ -1186,10 +1186,10 @@ TEST_CASE("Serialization: struct map", "[FBE]")
     REQUIRE(struct2.f8.find(10)->second.value() == (test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2));
     REQUIRE(struct2.f8.find(20)->second == std::nullopt);
     REQUIRE(struct2.f9.size() == 2);
-    REQUIRE(struct2.f9.find(10)->second.uid == 48);
-    REQUIRE(struct2.f9.find(20)->second.uid == 65);
+    REQUIRE(struct2.f9.find(10)->second.id == 48);
+    REQUIRE(struct2.f9.find(20)->second.id == 65);
     REQUIRE(struct2.f10.size() == 2);
-    REQUIRE(struct2.f10.find(10)->second.value().uid == 48);
+    REQUIRE(struct2.f10.find(10)->second.value().id == 48);
     REQUIRE(struct2.f10.find(20)->second == std::nullopt);
 }
 
@@ -1214,10 +1214,10 @@ TEST_CASE("Serialization: struct hash", "[FBE]")
     struct1.f8.emplace("10", test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2);
     struct1.f8.emplace("20", std::nullopt);
     test::StructSimple s1;
-    s1.uid = 48;
+    s1.id = 48;
     struct1.f9.emplace("10", s1);
     test::StructSimple s2;
-    s2.uid = 65;
+    s2.id = 65;
     struct1.f9.emplace("20", s2);
     struct1.f10.emplace("10", s1);
     struct1.f10.emplace("20", std::nullopt);
@@ -1272,10 +1272,10 @@ TEST_CASE("Serialization: struct hash", "[FBE]")
     REQUIRE(struct2.f8.find("10")->second.value() == (test::FlagsSimple::FLAG_VALUE_1 | test::FlagsSimple::FLAG_VALUE_2));
     REQUIRE(struct2.f8.find("20")->second == std::nullopt);
     REQUIRE(struct2.f9.size() == 2);
-    REQUIRE(struct2.f9.find("10")->second.uid == 48);
-    REQUIRE(struct2.f9.find("20")->second.uid == 65);
+    REQUIRE(struct2.f9.find("10")->second.id == 48);
+    REQUIRE(struct2.f9.find("20")->second.id == 65);
     REQUIRE(struct2.f10.size() == 2);
-    REQUIRE(struct2.f10.find("10")->second.value().uid == 48);
+    REQUIRE(struct2.f10.find("10")->second.value().id == 48);
     REQUIRE(struct2.f10.find("20")->second == std::nullopt);
 }
 
@@ -1284,10 +1284,10 @@ TEST_CASE("Serialization: struct hash extended", "[FBE]")
     // Create a new struct
     test::StructHashEx struct1;
     test::StructSimple s1;
-    s1.uid = 48;
+    s1.id = 48;
     struct1.f1.emplace(s1, test::StructNested());
     test::StructSimple s2;
-    s2.uid = 65;
+    s2.id = 65;
     struct1.f1.emplace(s2, test::StructNested());
     struct1.f2.emplace(s1, test::StructNested());
     struct1.f2.emplace(s2, std::nullopt);

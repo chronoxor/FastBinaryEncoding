@@ -20,7 +20,7 @@ import test.*;
 // Fast Binary Encoding StructSimple field model
 public final class FieldModelStructSimple extends FieldModel
 {
-    public final FieldModelInt32 uid;
+    public final FieldModelInt32 id;
     public final FieldModelBoolean f1;
     public final FieldModelBoolean f2;
     public final FieldModelByte f3;
@@ -69,8 +69,8 @@ public final class FieldModelStructSimple extends FieldModel
     public FieldModelStructSimple(Buffer buffer, long offset)
     {
         super(buffer, offset);
-        uid = new FieldModelInt32(buffer, 4 + 4);
-        f1 = new FieldModelBoolean(buffer, uid.fbeOffset() + uid.fbeSize());
+        id = new FieldModelInt32(buffer, 4 + 4);
+        f1 = new FieldModelBoolean(buffer, id.fbeOffset() + id.fbeSize());
         f2 = new FieldModelBoolean(buffer, f1.fbeOffset() + f1.fbeSize());
         f3 = new FieldModelByte(buffer, f2.fbeOffset() + f2.fbeSize());
         f4 = new FieldModelByte(buffer, f3.fbeOffset() + f3.fbeSize());
@@ -123,7 +123,7 @@ public final class FieldModelStructSimple extends FieldModel
     public long fbeBody()
     {
         long fbeResult = 4 + 4
-            + uid.fbeSize()
+            + id.fbeSize()
             + f1.fbeSize()
             + f2.fbeSize()
             + f3.fbeSize()
@@ -185,7 +185,7 @@ public final class FieldModelStructSimple extends FieldModel
         _buffer.shift(fbeStructOffset);
 
         long fbeResult = fbeBody()
-            + uid.fbeExtra()
+            + id.fbeExtra()
             + f1.fbeExtra()
             + f2.fbeExtra()
             + f3.fbeExtra()
@@ -271,11 +271,11 @@ public final class FieldModelStructSimple extends FieldModel
     {
         long fbeCurrentSize = 4 + 4;
 
-        if ((fbeCurrentSize + uid.fbeSize()) > fbeStructSize)
+        if ((fbeCurrentSize + id.fbeSize()) > fbeStructSize)
             return true;
-        if (!uid.verify())
+        if (!id.verify())
             return false;
-        fbeCurrentSize += uid.fbeSize();
+        fbeCurrentSize += id.fbeSize();
 
         if ((fbeCurrentSize + f1.fbeSize()) > fbeStructSize)
             return true;
@@ -589,11 +589,11 @@ public final class FieldModelStructSimple extends FieldModel
     {
         long fbeCurrentSize = 4 + 4;
 
-        if ((fbeCurrentSize + uid.fbeSize()) <= fbeStructSize)
-            fbeValue.uid = uid.get();
+        if ((fbeCurrentSize + id.fbeSize()) <= fbeStructSize)
+            fbeValue.id = id.get();
         else
-            fbeValue.uid = 0;
-        fbeCurrentSize += uid.fbeSize();
+            fbeValue.id = 0;
+        fbeCurrentSize += id.fbeSize();
 
         if ((fbeCurrentSize + f1.fbeSize()) <= fbeStructSize)
             fbeValue.f1 = f1.get();
@@ -901,7 +901,7 @@ public final class FieldModelStructSimple extends FieldModel
     // Set the struct fields values
     public void setFields(StructSimple fbeValue)
     {
-        uid.set(fbeValue.uid);
+        id.set(fbeValue.id);
         f1.set(fbeValue.f1);
         f2.set(fbeValue.f2);
         f3.set(fbeValue.f3);

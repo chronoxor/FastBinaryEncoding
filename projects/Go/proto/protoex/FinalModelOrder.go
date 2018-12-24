@@ -17,7 +17,7 @@ type FinalModelOrder struct {
     buffer *fbe.Buffer  // Final model buffer
     offset int          // Final model buffer offset
 
-    Uid *fbe.FinalModelInt32
+    Id *fbe.FinalModelInt32
     Symbol *fbe.FinalModelString
     Side *FinalModelOrderSide
     Type *FinalModelOrderType
@@ -30,7 +30,7 @@ type FinalModelOrder struct {
 // Create a new Order final model
 func NewFinalModelOrder(buffer *fbe.Buffer, offset int) *FinalModelOrder {
     fbeResult := FinalModelOrder{buffer: buffer, offset: offset}
-    fbeResult.Uid = fbe.NewFinalModelInt32(buffer, 0)
+    fbeResult.Id = fbe.NewFinalModelInt32(buffer, 0)
     fbeResult.Symbol = fbe.NewFinalModelString(buffer, 0)
     fbeResult.Side = NewFinalModelOrderSide(buffer, 0)
     fbeResult.Type = NewFinalModelOrderType(buffer, 0)
@@ -44,7 +44,7 @@ func NewFinalModelOrder(buffer *fbe.Buffer, offset int) *FinalModelOrder {
 // Get the allocation size
 func (fm *FinalModelOrder) FBEAllocationSize(fbeValue *Order) int {
     fbeResult := 0 +
-        fm.Uid.FBEAllocationSize(fbeValue.Uid) +
+        fm.Id.FBEAllocationSize(fbeValue.Id) +
         fm.Symbol.FBEAllocationSize(fbeValue.Symbol) +
         fm.Side.FBEAllocationSize(&fbeValue.Side) +
         fm.Type.FBEAllocationSize(&fbeValue.Type) +
@@ -89,8 +89,8 @@ func (fm *FinalModelOrder) VerifyFields() int {
     fbeFieldSize := 0
 
 
-    fm.Uid.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize = fm.Uid.Verify(); fbeFieldSize == fbe.MaxInt {
+    fm.Id.SetFBEOffset(fbeCurrentOffset)
+    if fbeFieldSize = fm.Id.Verify(); fbeFieldSize == fbe.MaxInt {
         return fbe.MaxInt
     }
     fbeCurrentOffset += fbeFieldSize
@@ -162,8 +162,8 @@ func (fm *FinalModelOrder) GetFields(fbeValue *Order) (int, error) {
     fbeCurrentSize := 0
     fbeFieldSize := 0
 
-    fm.Uid.SetFBEOffset(fbeCurrentOffset)
-    if fbeValue.Uid, fbeFieldSize, err = fm.Uid.Get(); err != nil {
+    fm.Id.SetFBEOffset(fbeCurrentOffset)
+    if fbeValue.Id, fbeFieldSize, err = fm.Id.Get(); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize
@@ -236,8 +236,8 @@ func (fm *FinalModelOrder) SetFields(fbeValue *Order) (int, error) {
     fbeCurrentSize := 0
     fbeFieldSize := 0
 
-    fm.Uid.SetFBEOffset(fbeCurrentOffset)
-    if fbeFieldSize, err = fm.Uid.Set(fbeValue.Uid); err != nil {
+    fm.Id.SetFBEOffset(fbeCurrentOffset)
+    if fbeFieldSize, err = fm.Id.Set(fbeValue.Id); err != nil {
         return fbeCurrentSize, err
     }
     fbeCurrentOffset += fbeFieldSize

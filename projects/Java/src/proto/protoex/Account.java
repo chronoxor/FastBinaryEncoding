@@ -19,7 +19,7 @@ import proto.*;
 
 public class Account implements Comparable<Object>
 {
-    public int uid = 0;
+    public int id = 0;
     public String name = "";
     public StateEx state = StateEx.fromSet(EnumSet.of(StateEx.initialized.getEnum(), StateEx.bad.getEnum(), StateEx.sad.getEnum()));
     public Balance wallet = new Balance();
@@ -28,9 +28,9 @@ public class Account implements Comparable<Object>
 
     public Account() {}
 
-    public Account(int uid, String name, StateEx state, Balance wallet, Balance asset, ArrayList<Order> orders)
+    public Account(int id, String name, StateEx state, Balance wallet, Balance asset, ArrayList<Order> orders)
     {
-        this.uid = uid;
+        this.id = id;
         this.name = name;
         this.state = state;
         this.wallet = wallet;
@@ -40,7 +40,7 @@ public class Account implements Comparable<Object>
 
     public Account(Account other)
     {
-        this.uid = other.uid;
+        this.id = other.id;
         this.name = other.name;
         this.state = other.state;
         this.wallet = other.wallet;
@@ -72,7 +72,7 @@ public class Account implements Comparable<Object>
         final Account obj = (Account)other;
 
         int result = 0;
-        result = Integer.compare(uid, obj.uid);
+        result = Integer.compare(id, obj.id);
         if (result != 0)
             return result;
         return result;
@@ -89,7 +89,7 @@ public class Account implements Comparable<Object>
 
         final Account obj = (Account)other;
 
-        if (uid != obj.uid)
+        if (id != obj.id)
             return false;
         return true;
     }
@@ -98,7 +98,7 @@ public class Account implements Comparable<Object>
     public int hashCode()
     {
         int hash = 17;
-        hash = hash * 31 + Integer.hashCode(uid);
+        hash = hash * 31 + Integer.hashCode(id);
         return hash;
     }
 
@@ -107,7 +107,7 @@ public class Account implements Comparable<Object>
     {
         var sb = new StringBuilder();
         sb.append("Account(");
-        sb.append("uid="); sb.append(uid);
+        sb.append("id="); sb.append(id);
         sb.append(",name="); if (name != null) sb.append("\"").append(name).append("\""); else sb.append("null");
         sb.append(",state="); sb.append(state);
         sb.append(",wallet="); sb.append(wallet);

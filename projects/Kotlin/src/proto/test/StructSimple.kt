@@ -21,7 +21,7 @@ import proto.*
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class StructSimple : Comparable<Any?>
 {
-    var uid: Int = 0
+    var id: Int = 0
     var f1: Boolean = false
     var f2: Boolean = true
     var f3: Byte = 0.toByte()
@@ -69,9 +69,9 @@ open class StructSimple : Comparable<Any?>
 
     constructor()
 
-    constructor(uid: Int, f1: Boolean, f2: Boolean, f3: Byte, f4: Byte, f5: Char, f6: Char, f7: Char, f8: Char, f9: Byte, f10: Byte, f11: UByte, f12: UByte, f13: Short, f14: Short, f15: UShort, f16: UShort, f17: Int, f18: Int, f19: UInt, f20: UInt, f21: Long, f22: Long, f23: ULong, f24: ULong, f25: Float, f26: Float, f27: Double, f28: Double, f29: BigDecimal, f30: BigDecimal, f31: String, f32: String, f33: Instant, f34: Instant, f35: Instant, f36: UUID, f37: UUID, f38: UUID, f39: proto.OrderSide, f40: proto.OrderType, f41: proto.Order, f42: proto.Balance, f43: proto.State, f44: proto.Account)
+    constructor(id: Int, f1: Boolean, f2: Boolean, f3: Byte, f4: Byte, f5: Char, f6: Char, f7: Char, f8: Char, f9: Byte, f10: Byte, f11: UByte, f12: UByte, f13: Short, f14: Short, f15: UShort, f16: UShort, f17: Int, f18: Int, f19: UInt, f20: UInt, f21: Long, f22: Long, f23: ULong, f24: ULong, f25: Float, f26: Float, f27: Double, f28: Double, f29: BigDecimal, f30: BigDecimal, f31: String, f32: String, f33: Instant, f34: Instant, f35: Instant, f36: UUID, f37: UUID, f38: UUID, f39: proto.OrderSide, f40: proto.OrderType, f41: proto.Order, f42: proto.Balance, f43: proto.State, f44: proto.Account)
     {
-        this.uid = uid
+        this.id = id
         this.f1 = f1
         this.f2 = f2
         this.f3 = f3
@@ -120,7 +120,7 @@ open class StructSimple : Comparable<Any?>
 
     constructor(other: StructSimple)
     {
-        this.uid = other.uid
+        this.id = other.id
         this.f1 = other.f1
         this.f2 = other.f2
         this.f3 = other.f3
@@ -192,7 +192,7 @@ open class StructSimple : Comparable<Any?>
 
         @Suppress("VARIABLE_WITH_REDUNDANT_INITIALIZER", "CanBeVal", "UnnecessaryVariable")
         var result = 0
-        result = uid.compareTo(obj.uid)
+        result = id.compareTo(obj.id)
         if (result != 0)
             return result
         return result
@@ -209,7 +209,7 @@ open class StructSimple : Comparable<Any?>
         @Suppress("UNUSED_VARIABLE")
         val obj = other as StructSimple? ?: return false
 
-        if (uid != obj.uid)
+        if (id != obj.id)
             return false
         return true
     }
@@ -218,7 +218,7 @@ open class StructSimple : Comparable<Any?>
     {
         @Suppress("CanBeVal", "UnnecessaryVariable")
         var hash = 17
-        hash = hash * 31 + uid.hashCode()
+        hash = hash * 31 + id.hashCode()
         return hash
     }
 
@@ -226,7 +226,7 @@ open class StructSimple : Comparable<Any?>
     {
         val sb = StringBuilder()
         sb.append("StructSimple(")
-        sb.append("uid="); sb.append(uid)
+        sb.append("id="); sb.append(id)
         sb.append(",f1="); sb.append(if (f1) "true" else "false")
         sb.append(",f2="); sb.append(if (f2) "true" else "false")
         sb.append(",f3="); sb.append(f3)

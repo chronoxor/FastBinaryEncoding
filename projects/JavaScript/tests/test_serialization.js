@@ -44,7 +44,7 @@ test('Serialization: domain', function (t) {
   reader.next(deserialized.size)
   t.true(reader.model.fbeOffset, (4 + reader.buffer.size))
 
-  t.equal(account2.uid, 1)
+  t.equal(account2.id, 1)
   t.equal(account2.name, 'Test')
   t.true(account2.state.hasFlags(proto.State.good))
   t.equal(account2.wallet.currency, 'USD')
@@ -53,19 +53,19 @@ test('Serialization: domain', function (t) {
   t.equal(account2.asset.currency, 'EUR')
   t.equal(account2.asset.amount, 100.0)
   t.equal(account2.orders.length, 3)
-  t.equal(account2.orders[0].uid, 1)
+  t.equal(account2.orders[0].id, 1)
   t.equal(account2.orders[0].symbol, 'EURUSD')
   t.true(account2.orders[0].side.eq(proto.OrderSide.buy))
   t.true(account2.orders[0].type.eq(proto.OrderType.market))
   t.equal(account2.orders[0].price, 1.23456)
   t.equal(account2.orders[0].volume, 1000.0)
-  t.equal(account2.orders[1].uid, 2)
+  t.equal(account2.orders[1].id, 2)
   t.equal(account2.orders[1].symbol, 'EURUSD')
   t.true(account2.orders[1].side.eq(proto.OrderSide.sell))
   t.true(account2.orders[1].type.eq(proto.OrderType.limit))
   t.equal(account2.orders[1].price, 1.0)
   t.equal(account2.orders[1].volume, 100.0)
-  t.equal(account2.orders[2].uid, 3)
+  t.equal(account2.orders[2].id, 3)
   t.equal(account2.orders[2].symbol, 'EURUSD')
   t.true(account2.orders[2].side.eq(proto.OrderSide.buy))
   t.true(account2.orders[2].type.eq(proto.OrderType.stop))
@@ -1070,10 +1070,10 @@ test('Serialization: struct set', function (t) {
   struct1.f3.add(prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2))
   struct1.f3.add(prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2 | prototest.FlagsSimple.FLAG_VALUE_3))
   let s1 = new prototest.StructSimple()
-  s1.uid = 48
+  s1.id = 48
   struct1.f4.add(s1)
   let s2 = new prototest.StructSimple()
-  s2.uid = 65
+  s2.id = 65
   struct1.f4.add(s2)
 
   // Serialize the struct to the FBE stream
@@ -1152,10 +1152,10 @@ test('Serialization: struct map', function (t) {
   struct1.f8.set(10, prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2))
   struct1.f8.set(20, undefined)
   let s1 = new prototest.StructSimple()
-  s1.uid = 48
+  s1.id = 48
   struct1.f9.set(10, s1)
   let s2 = new prototest.StructSimple()
-  s2.uid = 65
+  s2.id = 65
   struct1.f9.set(20, s2)
   struct1.f10.set(10, s1)
   struct1.f10.set(20, undefined)
@@ -1210,10 +1210,10 @@ test('Serialization: struct map', function (t) {
   t.true(struct2.f8.get(10).hasFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2))
   t.equal(struct2.f8.get(20), undefined)
   t.equal(struct2.f9.size, 2)
-  t.equal(struct2.f9.get(10).uid, 48)
-  t.equal(struct2.f9.get(20).uid, 65)
+  t.equal(struct2.f9.get(10).id, 48)
+  t.equal(struct2.f9.get(20).id, 65)
   t.equal(struct2.f10.size, 2)
-  t.equal(struct2.f10.get(10).uid, 48)
+  t.equal(struct2.f10.get(10).id, 48)
   t.equal(struct2.f10.get(20), undefined)
   t.end()
 })
@@ -1238,10 +1238,10 @@ test('Serialization: struct hash', function (t) {
   struct1.f8.set('10', prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2))
   struct1.f8.set('20', undefined)
   let s1 = new prototest.StructSimple()
-  s1.uid = 48
+  s1.id = 48
   struct1.f9.set('10', s1)
   let s2 = new prototest.StructSimple()
-  s2.uid = 65
+  s2.id = 65
   struct1.f9.set('20', s2)
   struct1.f10.set('10', s1)
   struct1.f10.set('20', undefined)
@@ -1296,10 +1296,10 @@ test('Serialization: struct hash', function (t) {
   t.true(struct2.f8.get('10').hasFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2))
   t.equal(struct2.f8.get('20'), undefined)
   t.equal(struct2.f9.size, 2)
-  t.equal(struct2.f9.get('10').uid, 48)
-  t.equal(struct2.f9.get('20').uid, 65)
+  t.equal(struct2.f9.get('10').id, 48)
+  t.equal(struct2.f9.get('20').id, 65)
   t.equal(struct2.f10.size, 2)
-  t.equal(struct2.f10.get('10').uid, 48)
+  t.equal(struct2.f10.get('10').id, 48)
   t.equal(struct2.f10.get('20'), undefined)
   t.end()
 })
@@ -1308,10 +1308,10 @@ test('Serialization: struct hash extended', function (t) {
   // Create a new struct
   let struct1 = new prototest.StructHashEx()
   let s1 = new prototest.StructSimple()
-  s1.uid = 48
+  s1.id = 48
   struct1.f1.set(s1, new prototest.StructNested())
   let s2 = new prototest.StructSimple()
-  s2.uid = 65
+  s2.id = 65
   struct1.f1.set(s2, new prototest.StructNested())
   struct1.f2.set(s1, new prototest.StructNested())
   struct1.f2.set(s2, undefined)
@@ -1343,10 +1343,10 @@ test('Serialization: struct hash extended', function (t) {
 
   // Javascript maps are limited to get object key with custom key comparator!
   t.equal(struct2.f1.size, 2)
-  struct2.f1.forEach((value, key) => { if (key.uid === s1.uid) t.true(value.f1002.eq(prototest.EnumTyped.ENUM_VALUE_2)) })
-  struct2.f1.forEach((value, key) => { if (key.uid === s2.uid) t.true(value.f1002.eq(prototest.EnumTyped.ENUM_VALUE_2)) })
+  struct2.f1.forEach((value, key) => { if (key.id === s1.id) t.true(value.f1002.eq(prototest.EnumTyped.ENUM_VALUE_2)) })
+  struct2.f1.forEach((value, key) => { if (key.id === s2.id) t.true(value.f1002.eq(prototest.EnumTyped.ENUM_VALUE_2)) })
   t.equal(struct2.f2.size, 2)
-  struct2.f2.forEach((value, key) => { if (key.uid === s1.uid) t.true(value.f1002.eq(prototest.EnumTyped.ENUM_VALUE_2)) })
-  struct2.f2.forEach((value, key) => { if (key.uid === s2.uid) t.equal(value, undefined) })
+  struct2.f2.forEach((value, key) => { if (key.id === s1.id) t.true(value.f1002.eq(prototest.EnumTyped.ENUM_VALUE_2)) })
+  struct2.f2.forEach((value, key) => { if (key.id === s2.id) t.equal(value, undefined) })
   t.end()
 })

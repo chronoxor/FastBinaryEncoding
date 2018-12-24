@@ -2,24 +2,163 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="71ac408e-7cf5-4ba9-abad-487f6769318f" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/create.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/create.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../examples/print.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/print.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Benchmarks/SendReceive.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/Serialization.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Benchmarks/Serialization.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/SerializationFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Benchmarks/SerializationFinal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/SerializationJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Benchmarks/SerializationJson.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Create/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Examples/Create/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Print/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Examples/Print/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SendReceive/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Examples/SendReceive/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Serialization/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Examples/Serialization/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SerializationFinal/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Examples/SerializationFinal/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SerializationJson/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Examples/SerializationJson/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/protoex.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Clone.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/Clone.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Create.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/Create.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Extending.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/Extending.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SendReceive.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SendReceiveFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SendReceiveFinal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Serialization.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/Serialization.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SerializationFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SerializationFinal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SerializationJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SerializationJson.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/.idea/Go.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/FastBinaryEncoding.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/FastBinaryEncoding.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/FastBinaryEncoding.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/Kotlin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/Kotlin.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/libraries/KotlinJavaRuntime.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Python.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FastBinaryEncoding.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/SendReceive.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/Serialization.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/Serialization.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/SerializationFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/SerializationFinal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/SerializationJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/SerializationJson.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/Create/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/Create/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/Print/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/Print/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SendReceive/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SendReceive/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/Serialization/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/Serialization/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SerializationFinal/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SerializationFinal/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/protoex.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/test.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/Clone.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/Clone.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/Create.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/Create.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/Extending.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/Extending.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SendReceive.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SendReceiveFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SendReceiveFinal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/Serialization.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/Serialization.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SerializationFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SerializationFinal.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SerializationJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SerializationJson.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/benchmarks/send_receive_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/benchmarks/send_receive_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/benchmarks/serialization_final_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/benchmarks/serialization_final_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/benchmarks/serialization_json_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/benchmarks/serialization_json_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/benchmarks/serialization_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/benchmarks/serialization_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/examples/create.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/examples/create.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/examples/print.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/examples/print.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/examples/send_receive.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/examples/send_receive.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/examples/serialization.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/examples/serialization.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/examples/serialization_final.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/examples/serialization_final.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/examples/serialization_json.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/examples/serialization_json.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/Account.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/Account.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/FieldModelAccount.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/FieldModelAccount.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/FieldModelOrder.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/FieldModelOrder.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/FinalModelAccount.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/FinalModelAccount.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/FinalModelOrder.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/FinalModelOrder.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/Order.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/Order.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/Account.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/Account.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/FieldModelAccount.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/FieldModelAccount.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/FieldModelOrder.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/FieldModelOrder.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/FinalModelAccount.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/FinalModelAccount.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/FinalModelOrder.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/FinalModelOrder.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/Order.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/Order.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/test/FieldModelStructSimple.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/FieldModelStructSimple.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/test/FinalModelStructSimple.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/FinalModelStructSimple.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/test/StructSimple.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/StructSimple.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/tests/clone_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/clone_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/tests/create_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/create_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/tests/extending_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/extending_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/tests/send_receive_final_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/send_receive_final_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/tests/send_receive_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/send_receive_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/tests/serialization_final_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/serialization_final_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/tests/serialization_json_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/serialization_json_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/tests/serialization_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/serialization_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FieldModelAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FieldModelAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FieldModelOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FieldModelOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/Account.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FieldModelAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FieldModelAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FieldModelOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FieldModelOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelAccount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/StructSimple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelStructSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelStructSimple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructSimple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/examples/create.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/examples/create.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/examples/print.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/examples/print.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/proto.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/proto.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/protoex.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/protoex.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/test.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_clone.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_clone.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_create.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_create.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_extending.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_extending.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_serialization.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_serialization.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_serialization_final.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_serialization_final.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_serialization_json.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_serialization_json.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/Account.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/Account.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/Order.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/Order.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/fbe/FieldModelAccount.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/fbe/FieldModelAccount.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/fbe/FieldModelOrder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/fbe/FieldModelOrder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/fbe/FinalModelAccount.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/fbe/FinalModelAccount.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/fbe/FinalModelOrder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/fbe/FinalModelOrder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/Account.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/Account.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/Order.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/Order.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/fbe/FieldModelAccount.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/fbe/FieldModelAccount.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/fbe/FieldModelOrder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/fbe/FieldModelOrder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/fbe/FinalModelAccount.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/fbe/FinalModelAccount.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/fbe/FinalModelOrder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/fbe/FinalModelOrder.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructSimple.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructSimple.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/fbe/FieldModelStructSimple.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/fbe/FieldModelStructSimple.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/fbe/FinalModelStructSimple.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/fbe/FinalModelStructSimple.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/create.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/create.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/print.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/print.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/proto.py" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/protoex.py" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proto/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_clone.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_clone.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_create.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_create.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_extending.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_extending.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_serialization.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_serialization.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_serialization_final.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_serialization_final.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_serialization_json.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_serialization_json.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/examples/create.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/examples/create.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/examples/print.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/examples/print.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/proto/proto.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/proto.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/proto/protoex.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/protoex.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/proto/test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/test.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_clone.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_clone.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_create.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_create.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_extending.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_extending.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_serialization.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_serialization.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_serialization_final.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_serialization_final.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Ruby/tests/test_serialization_json.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/tests/test_serialization_json.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/proto.fbe" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto.fbe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/proto.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/protoex.fbe" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/protoex.fbe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/protoex.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/protoex.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/test.fbe" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/test.fbe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/test.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/test.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../tests/test_clone.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../tests/test_clone.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../tests/test_create.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../tests/test_create.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../tests/test_extending.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../tests/test_extending.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../tests/test_serialization.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../tests/test_serialization.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../tests/test_serialization_final.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../tests/test_serialization_final.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../tests/test_serialization_json.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../tests/test_serialization_json.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,14 +168,22 @@
   </component>
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/Python$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1545574212065" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding$send_receive.coverage" NAME="send_receive Coverage Results" MODIFIED="1545682013281" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding$print_json.coverage" NAME="print_json Coverage Results" MODIFIED="1545682010292" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/Python$Unittests_in_test_enums_py.coverage" NAME="Unittests in test_enums.py Coverage Results" MODIFIED="1543927368286" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Python$print_json.coverage" NAME="print_json Coverage Results" MODIFIED="1543148423705" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding$serialization_json.coverage" NAME="serialization_json Coverage Results" MODIFIED="1545682021073" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/Python$Unittests_in_test_serialization_final_py.coverage" NAME="Unittests in test_serialization_final.py Coverage Results" MODIFIED="1543618253714" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Python$benchmark_send_receive.coverage" NAME="benchmark_send_receive Coverage Results" MODIFIED="1539984486441" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" />
     <SUITE FILE_PATH="coverage/Python$Unittests_for_test_serialization_final_TestSerializationFinal_test_serialization_final_order.coverage" NAME="Unittests for test_serialization_final.TestSerializationFinal.test_serialization_final_order Coverage Results" MODIFIED="1543618334395" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding$Unittests_in_tests.coverage" NAME="Unittests in tests Coverage Results" MODIFIED="1545682025406" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding$create.coverage" NAME="create Coverage Results" MODIFIED="1545682005435" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/Python$Unittests_in_test_decimal_py.coverage" NAME="Unittests in test_decimal.py Coverage Results" MODIFIED="1539652256057" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding$serialization.coverage" NAME="serialization Coverage Results" MODIFIED="1545682015899" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding$serialization_final.coverage" NAME="serialization_final Coverage Results" MODIFIED="1545682018790" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/Python$test_decimal.coverage" NAME="test_decimal Coverage Results" MODIFIED="1542829880652" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
     <SUITE FILE_PATH="coverage/Python$create.coverage" NAME="create Coverage Results" MODIFIED="1543453304071" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding$print.coverage" NAME="print Coverage Results" MODIFIED="1545682008020" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/Python$benchmark_serialization.coverage" NAME="benchmark_serialization Coverage Results" MODIFIED="1539984262439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" />
     <SUITE FILE_PATH="coverage/Python$print.coverage" NAME="print Coverage Results" MODIFIED="1545258672652" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" />
     <SUITE FILE_PATH="coverage/Python$Unittests_in_test_clone_py.coverage" NAME="Unittests in test_clone.py Coverage Results" MODIFIED="1539850329692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tests" />
@@ -77,6 +224,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -88,7 +236,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -109,75 +256,7 @@
     </option>
   </component>
   <component name="RunManager" selected="Python tests.Unittests in tests">
-    <configuration default="true" type="DjangoTestsConfigurationType">
-      <module name="FastBinaryEncoding" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="TARGET" value="" />
-      <option name="SETTINGS_FILE" value="" />
-      <option name="CUSTOM_SETTINGS" value="false" />
-      <option name="USE_OPTIONS" value="false" />
-      <option name="OPTIONS" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
-      <module name="FastBinaryEncoding" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="ADDITIONAL_ARGS" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="PyLettuceRunConfigurationType" factoryName="Lettuce">
-      <module name="FastBinaryEncoding" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="ADDITIONAL_ARGS" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <module name="FastBinaryEncoding" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="create" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="send_receive" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="FastBinaryEncoding" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -190,7 +269,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/create.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/send_receive.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -199,7 +278,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="print" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="serialization" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="FastBinaryEncoding" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -212,7 +291,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/print.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/serialization.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -221,59 +300,48 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration default="true" type="Python.FlaskServer" factoryName="Flask server">
+    <configuration name="serialization_final" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="FastBinaryEncoding" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="Tox" factoryName="Tox">
-      <module name="FastBinaryEncoding" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Unittests for test_enums.TestEnums.test_serialization_json_enums" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
-      <module name="FastBinaryEncoding" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_enums.TestEnums.test_serialization_json_enums&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/serialization_final.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="Unittests in test_enums.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+    <configuration name="serialization_json" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="FastBinaryEncoding" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/test_enums.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/serialization_json.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
     <configuration name="Unittests in tests" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
@@ -291,101 +359,20 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
-    <configuration default="true" type="tests" factoryName="Doctests">
-      <module name="FastBinaryEncoding" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Nosetests">
-      <module name="FastBinaryEncoding" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_regexPattern" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Twisted Trial">
-      <module name="FastBinaryEncoding" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Unittests">
-      <module name="FastBinaryEncoding" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="py.test">
-      <module name="FastBinaryEncoding" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_keywords" value="&quot;&quot;" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="Python.create" />
-      <item itemvalue="Python.print" />
+      <item itemvalue="Python.send_receive" />
+      <item itemvalue="Python.serialization" />
+      <item itemvalue="Python.serialization_final" />
+      <item itemvalue="Python.serialization_json" />
       <item itemvalue="Python tests.Unittests in tests" />
-      <item itemvalue="Python tests.Unittests for test_enums.TestEnums.test_serialization_json_enums" />
-      <item itemvalue="Python tests.Unittests in test_enums.py" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python tests.Unittests in tests" />
-        <item itemvalue="Python.print" />
-        <item itemvalue="Python.create" />
-        <item itemvalue="Python tests.Unittests in test_enums.py" />
-        <item itemvalue="Python tests.Unittests for test_enums.TestEnums.test_serialization_json_enums" />
+        <item itemvalue="Python.serialization_json" />
+        <item itemvalue="Python.serialization_final" />
+        <item itemvalue="Python.serialization" />
+        <item itemvalue="Python.send_receive" />
       </list>
     </recent_temporary>
   </component>
@@ -405,16 +392,11 @@
       <workItem from="1545258634736" duration="80000" />
       <workItem from="1545258831795" duration="4000" />
       <workItem from="1545573814492" duration="407000" />
+      <workItem from="1545681989917" duration="41000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_tests - 2018.12.04 at 15h 42m 23s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_for_test_enums_TestEnums_test_serialization_json_enums - 2018.12.04 at 15h 42m 45s.xml">
-      <configuration name="Unittests for test_enums.TestEnums.test_serialization_json_enums" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_in_test_enums_py - 2018.12.04 at 15h 42m 49s.xml">
       <configuration name="Unittests in test_enums.py" configurationId="tests" />
     </history-entry>
@@ -439,14 +421,20 @@
     <history-entry file="Unittests_in_tests - 2018.12.23 at 17h 10m 13s.xml">
       <configuration name="Unittests in tests" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_in_tests - 2018.12.24 at 23h 06m 39s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_tests - 2018.12.24 at 23h 07m 06s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2191000" />
+    <option name="totallyTimeSpent" value="2232000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="491" y="237" width="1534" height="998" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28765264" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2917232" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />

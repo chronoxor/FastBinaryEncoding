@@ -769,7 +769,7 @@ namespace proto {
 
     public struct Order : IComparable, IComparable<Order>, IEquatable<Order>
     {
-        public int uid;
+        public int id;
         public string symbol;
         public OrderSide side;
         public OrderType type;
@@ -778,7 +778,7 @@ namespace proto {
 
         public static Order Default => new Order
         {
-            uid = (int)0
+            id = (int)0
             , symbol = ""
             , side = OrderSide.Default
             , type = OrderType.Default
@@ -786,9 +786,9 @@ namespace proto {
             , volume = (double)0.0D
         };
 
-        public Order(int uid, string symbol, OrderSide side, OrderType type, double price, double volume)
+        public Order(int id, string symbol, OrderSide side, OrderType type, double price, double volume)
         {
-            this.uid = uid;
+            this.id = id;
             this.symbol = symbol;
             this.side = side;
             this.type = type;
@@ -812,7 +812,7 @@ namespace proto {
         public int CompareTo(object other)
         {
             int result = 0;
-            result = uid.CompareTo(((Order)other).uid);
+            result = id.CompareTo(((Order)other).id);
             if (result != 0)
                 return result;
             return result;
@@ -821,7 +821,7 @@ namespace proto {
         public int CompareTo(Order other)
         {
             int result = 0;
-            result = uid.CompareTo(other.uid);
+            result = id.CompareTo(other.id);
             if (result != 0)
                 return result;
             return result;
@@ -831,14 +831,14 @@ namespace proto {
         {
             if (!(other is Order))
                 return false;
-            if (!uid.Equals(((Order)other).uid))
+            if (!id.Equals(((Order)other).id))
                 return false;
             return true;
         }
 
         public bool Equals(Order other)
         {
-            if (!uid.Equals(other.uid))
+            if (!id.Equals(other.id))
                 return false;
             return true;
         }
@@ -846,7 +846,7 @@ namespace proto {
         public override int GetHashCode()
         {
             int hash = 17;
-            hash = hash * 31 + uid.GetHashCode();
+            hash = hash * 31 + id.GetHashCode();
             return hash;
         }
 
@@ -854,7 +854,7 @@ namespace proto {
         {
             var sb = new StringBuilder();
             sb.Append("Order(");
-            sb.Append("uid="); sb.Append(uid);
+            sb.Append("id="); sb.Append(id);
             sb.Append(",symbol="); if (symbol != null) sb.Append("\"").Append(symbol).Append("\""); else sb.Append("null");
             sb.Append(",side="); sb.Append(side);
             sb.Append(",type="); sb.Append(type);
@@ -889,7 +889,7 @@ namespace proto {
     // Fast Binary Encoding Order field model
     public class FieldModelOrder : FieldModelValueType<Order>
     {
-        public readonly FieldModelValueType<int> uid;
+        public readonly FieldModelValueType<int> id;
         public readonly FieldModelReferenceType<string> symbol;
         public readonly FieldModelOrderSide side;
         public readonly FieldModelOrderType type;
@@ -898,8 +898,8 @@ namespace proto {
 
         public FieldModelOrder(Buffer buffer, long offset) : base(buffer, offset)
         {
-            uid = FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, 4 + 4);
-            symbol = FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, uid.FBEOffset + uid.FBESize);
+            id = FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, 4 + 4);
+            symbol = FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, id.FBEOffset + id.FBESize);
             side = new FieldModelOrderSide(buffer, symbol.FBEOffset + symbol.FBESize);
             type = new FieldModelOrderType(buffer, side.FBEOffset + side.FBESize);
             price = FieldModelValueType<double>.CreateFieldModel(BaseTypes.DOUBLE, buffer, type.FBEOffset + type.FBESize);
@@ -914,7 +914,7 @@ namespace proto {
             get
             {
                 long fbeResult = 4 + 4
-                    + uid.FBESize
+                    + id.FBESize
                     + symbol.FBESize
                     + side.FBESize
                     + type.FBESize
@@ -939,7 +939,7 @@ namespace proto {
                 _buffer.Shift(fbeStructOffset);
 
                 long fbeResult = FBEBody
-                    + uid.FBEExtra
+                    + id.FBEExtra
                     + symbol.FBEExtra
                     + side.FBEExtra
                     + type.FBEExtra
@@ -989,11 +989,11 @@ namespace proto {
         {
             long fbeCurrentSize = 4 + 4;
 
-            if ((fbeCurrentSize + uid.FBESize) > fbeStructSize)
+            if ((fbeCurrentSize + id.FBESize) > fbeStructSize)
                 return true;
-            if (!uid.Verify())
+            if (!id.Verify())
                 return false;
-            fbeCurrentSize += uid.FBESize;
+            fbeCurrentSize += id.FBESize;
 
             if ((fbeCurrentSize + symbol.FBESize) > fbeStructSize)
                 return true;
@@ -1077,11 +1077,11 @@ namespace proto {
 
             fbeValue = Order.Default;
 
-            if ((fbeCurrentSize + uid.FBESize) <= fbeStructSize)
-                uid.Get(out fbeValue.uid);
+            if ((fbeCurrentSize + id.FBESize) <= fbeStructSize)
+                id.Get(out fbeValue.id);
             else
-                fbeValue.uid = (int)0;
-            fbeCurrentSize += uid.FBESize;
+                fbeValue.id = (int)0;
+            fbeCurrentSize += id.FBESize;
 
             if ((fbeCurrentSize + symbol.FBESize) <= fbeStructSize)
                 symbol.Get(out fbeValue.symbol);
@@ -1155,7 +1155,7 @@ namespace proto {
         // Set the struct fields values
         public void SetFields(Order fbeValue)
         {
-            uid.Set(fbeValue.uid);
+            id.Set(fbeValue.id);
             symbol.Set(fbeValue.symbol);
             side.Set(fbeValue.side);
             type.Set(fbeValue.type);
@@ -1263,7 +1263,7 @@ namespace proto {
     // Fast Binary Encoding Order final model
     public class FinalModelOrder : FinalModelValueType<Order>
     {
-        public readonly FinalModelValueType<int> uid;
+        public readonly FinalModelValueType<int> id;
         public readonly FinalModelReferenceType<string> symbol;
         public readonly FinalModelOrderSide side;
         public readonly FinalModelOrderType type;
@@ -1272,7 +1272,7 @@ namespace proto {
 
         public FinalModelOrder(Buffer buffer, long offset) : base(buffer, offset)
         {
-            uid = FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0);
+            id = FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0);
             symbol = FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0);
             side = new FinalModelOrderSide(buffer, 0);
             type = new FinalModelOrderType(buffer, 0);
@@ -1284,7 +1284,7 @@ namespace proto {
         public override long FBEAllocationSize(Order fbeValue)
         {
             long fbeResult = 0
-                + uid.FBEAllocationSize(fbeValue.uid)
+                + id.FBEAllocationSize(fbeValue.id)
                 + symbol.FBEAllocationSize(fbeValue.symbol)
                 + side.FBEAllocationSize(fbeValue.side)
                 + type.FBEAllocationSize(fbeValue.type)
@@ -1316,8 +1316,8 @@ namespace proto {
             long fbeCurrentOffset = 0;
             long fbeFieldSize;
 
-            uid.FBEOffset = fbeCurrentOffset;
-            fbeFieldSize = uid.Verify();
+            id.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = id.Verify();
             if (fbeFieldSize == long.MaxValue)
                 return long.MaxValue;
             fbeCurrentOffset += fbeFieldSize;
@@ -1373,8 +1373,8 @@ namespace proto {
 
             fbeValue = Order.Default;
 
-            uid.FBEOffset = fbeCurrentOffset;
-            fbeFieldSize = uid.Get(out fbeValue.uid);
+            id.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = id.Get(out fbeValue.id);
             fbeCurrentOffset += fbeFieldSize;
             fbeCurrentSize += fbeFieldSize;
 
@@ -1422,8 +1422,8 @@ namespace proto {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            uid.FBEOffset = fbeCurrentOffset;
-            fbeFieldSize = uid.Set(fbeValue.uid);
+            id.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = id.Set(fbeValue.id);
             fbeCurrentOffset += fbeFieldSize;
             fbeCurrentSize += fbeFieldSize;
 
@@ -2165,7 +2165,7 @@ namespace proto {
 
     public struct Account : IComparable, IComparable<Account>, IEquatable<Account>
     {
-        public int uid;
+        public int id;
         public string name;
         public State state;
         public Balance wallet;
@@ -2174,7 +2174,7 @@ namespace proto {
 
         public static Account Default => new Account
         {
-            uid = (int)0
+            id = (int)0
             , name = ""
             , state = State.initialized | State.bad
             , wallet = Balance.Default
@@ -2182,9 +2182,9 @@ namespace proto {
             , orders = new List<Order>()
         };
 
-        public Account(int uid, string name, State state, Balance wallet, Balance? asset, List<Order> orders)
+        public Account(int id, string name, State state, Balance wallet, Balance? asset, List<Order> orders)
         {
-            this.uid = uid;
+            this.id = id;
             this.name = name;
             this.state = state;
             this.wallet = wallet;
@@ -2208,7 +2208,7 @@ namespace proto {
         public int CompareTo(object other)
         {
             int result = 0;
-            result = uid.CompareTo(((Account)other).uid);
+            result = id.CompareTo(((Account)other).id);
             if (result != 0)
                 return result;
             return result;
@@ -2217,7 +2217,7 @@ namespace proto {
         public int CompareTo(Account other)
         {
             int result = 0;
-            result = uid.CompareTo(other.uid);
+            result = id.CompareTo(other.id);
             if (result != 0)
                 return result;
             return result;
@@ -2227,14 +2227,14 @@ namespace proto {
         {
             if (!(other is Account))
                 return false;
-            if (!uid.Equals(((Account)other).uid))
+            if (!id.Equals(((Account)other).id))
                 return false;
             return true;
         }
 
         public bool Equals(Account other)
         {
-            if (!uid.Equals(other.uid))
+            if (!id.Equals(other.id))
                 return false;
             return true;
         }
@@ -2242,7 +2242,7 @@ namespace proto {
         public override int GetHashCode()
         {
             int hash = 17;
-            hash = hash * 31 + uid.GetHashCode();
+            hash = hash * 31 + id.GetHashCode();
             return hash;
         }
 
@@ -2250,7 +2250,7 @@ namespace proto {
         {
             var sb = new StringBuilder();
             sb.Append("Account(");
-            sb.Append("uid="); sb.Append(uid);
+            sb.Append("id="); sb.Append(id);
             sb.Append(",name="); if (name != null) sb.Append("\"").Append(name).Append("\""); else sb.Append("null");
             sb.Append(",state="); sb.Append(state);
             sb.Append(",wallet="); sb.Append(wallet);
@@ -2299,7 +2299,7 @@ namespace proto {
     // Fast Binary Encoding Account field model
     public class FieldModelAccount : FieldModelValueType<Account>
     {
-        public readonly FieldModelValueType<int> uid;
+        public readonly FieldModelValueType<int> id;
         public readonly FieldModelReferenceType<string> name;
         public readonly FieldModelState state;
         public readonly FieldModelBalance wallet;
@@ -2308,8 +2308,8 @@ namespace proto {
 
         public FieldModelAccount(Buffer buffer, long offset) : base(buffer, offset)
         {
-            uid = FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, 4 + 4);
-            name = FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, uid.FBEOffset + uid.FBESize);
+            id = FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, 4 + 4);
+            name = FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, id.FBEOffset + id.FBESize);
             state = new FieldModelState(buffer, name.FBEOffset + name.FBESize);
             wallet = new FieldModelBalance(buffer, state.FBEOffset + state.FBESize);
             asset = new FieldModelOptionalValueType<Balance, FieldModelBalance>(new FieldModelBalance(buffer, wallet.FBEOffset + wallet.FBESize), buffer, wallet.FBEOffset + wallet.FBESize);
@@ -2324,7 +2324,7 @@ namespace proto {
             get
             {
                 long fbeResult = 4 + 4
-                    + uid.FBESize
+                    + id.FBESize
                     + name.FBESize
                     + state.FBESize
                     + wallet.FBESize
@@ -2349,7 +2349,7 @@ namespace proto {
                 _buffer.Shift(fbeStructOffset);
 
                 long fbeResult = FBEBody
-                    + uid.FBEExtra
+                    + id.FBEExtra
                     + name.FBEExtra
                     + state.FBEExtra
                     + wallet.FBEExtra
@@ -2399,11 +2399,11 @@ namespace proto {
         {
             long fbeCurrentSize = 4 + 4;
 
-            if ((fbeCurrentSize + uid.FBESize) > fbeStructSize)
+            if ((fbeCurrentSize + id.FBESize) > fbeStructSize)
                 return true;
-            if (!uid.Verify())
+            if (!id.Verify())
                 return false;
-            fbeCurrentSize += uid.FBESize;
+            fbeCurrentSize += id.FBESize;
 
             if ((fbeCurrentSize + name.FBESize) > fbeStructSize)
                 return true;
@@ -2487,11 +2487,11 @@ namespace proto {
 
             fbeValue = Account.Default;
 
-            if ((fbeCurrentSize + uid.FBESize) <= fbeStructSize)
-                uid.Get(out fbeValue.uid);
+            if ((fbeCurrentSize + id.FBESize) <= fbeStructSize)
+                id.Get(out fbeValue.id);
             else
-                fbeValue.uid = (int)0;
-            fbeCurrentSize += uid.FBESize;
+                fbeValue.id = (int)0;
+            fbeCurrentSize += id.FBESize;
 
             if ((fbeCurrentSize + name.FBESize) <= fbeStructSize)
                 name.Get(out fbeValue.name);
@@ -2565,7 +2565,7 @@ namespace proto {
         // Set the struct fields values
         public void SetFields(Account fbeValue)
         {
-            uid.Set(fbeValue.uid);
+            id.Set(fbeValue.id);
             name.Set(fbeValue.name);
             state.Set(fbeValue.state);
             wallet.Set(fbeValue.wallet);
@@ -2673,7 +2673,7 @@ namespace proto {
     // Fast Binary Encoding Account final model
     public class FinalModelAccount : FinalModelValueType<Account>
     {
-        public readonly FinalModelValueType<int> uid;
+        public readonly FinalModelValueType<int> id;
         public readonly FinalModelReferenceType<string> name;
         public readonly FinalModelState state;
         public readonly FinalModelBalance wallet;
@@ -2682,7 +2682,7 @@ namespace proto {
 
         public FinalModelAccount(Buffer buffer, long offset) : base(buffer, offset)
         {
-            uid = FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0);
+            id = FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0);
             name = FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0);
             state = new FinalModelState(buffer, 0);
             wallet = new FinalModelBalance(buffer, 0);
@@ -2694,7 +2694,7 @@ namespace proto {
         public override long FBEAllocationSize(Account fbeValue)
         {
             long fbeResult = 0
-                + uid.FBEAllocationSize(fbeValue.uid)
+                + id.FBEAllocationSize(fbeValue.id)
                 + name.FBEAllocationSize(fbeValue.name)
                 + state.FBEAllocationSize(fbeValue.state)
                 + wallet.FBEAllocationSize(fbeValue.wallet)
@@ -2726,8 +2726,8 @@ namespace proto {
             long fbeCurrentOffset = 0;
             long fbeFieldSize;
 
-            uid.FBEOffset = fbeCurrentOffset;
-            fbeFieldSize = uid.Verify();
+            id.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = id.Verify();
             if (fbeFieldSize == long.MaxValue)
                 return long.MaxValue;
             fbeCurrentOffset += fbeFieldSize;
@@ -2783,8 +2783,8 @@ namespace proto {
 
             fbeValue = Account.Default;
 
-            uid.FBEOffset = fbeCurrentOffset;
-            fbeFieldSize = uid.Get(out fbeValue.uid);
+            id.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = id.Get(out fbeValue.id);
             fbeCurrentOffset += fbeFieldSize;
             fbeCurrentSize += fbeFieldSize;
 
@@ -2832,8 +2832,8 @@ namespace proto {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            uid.FBEOffset = fbeCurrentOffset;
-            fbeFieldSize = uid.Set(fbeValue.uid);
+            id.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = id.Set(fbeValue.id);
             fbeCurrentOffset += fbeFieldSize;
             fbeCurrentSize += fbeFieldSize;
 

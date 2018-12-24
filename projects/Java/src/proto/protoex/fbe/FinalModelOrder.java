@@ -20,7 +20,7 @@ import protoex.*;
 // Fast Binary Encoding Order final model
 public final class FinalModelOrder extends FinalModel
 {
-    public final FinalModelInt32 uid;
+    public final FinalModelInt32 id;
     public final FinalModelString symbol;
     public final FinalModelOrderSide side;
     public final FinalModelOrderType type;
@@ -32,7 +32,7 @@ public final class FinalModelOrder extends FinalModel
     public FinalModelOrder(Buffer buffer, long offset)
     {
         super(buffer, offset);
-        uid = new FinalModelInt32(buffer, 0);
+        id = new FinalModelInt32(buffer, 0);
         symbol = new FinalModelString(buffer, 0);
         side = new FinalModelOrderSide(buffer, 0);
         type = new FinalModelOrderType(buffer, 0);
@@ -46,7 +46,7 @@ public final class FinalModelOrder extends FinalModel
     public long fbeAllocationSize(Order fbeValue)
     {
         long fbeResult = 0
-            + uid.fbeAllocationSize(fbeValue.uid)
+            + id.fbeAllocationSize(fbeValue.id)
             + symbol.fbeAllocationSize(fbeValue.symbol)
             + side.fbeAllocationSize(fbeValue.side)
             + type.fbeAllocationSize(fbeValue.type)
@@ -78,8 +78,8 @@ public final class FinalModelOrder extends FinalModel
         long fbeCurrentOffset = 0;
         long fbeFieldSize = 0;
 
-        uid.fbeOffset(fbeCurrentOffset);
-        fbeFieldSize = uid.verify();
+        id.fbeOffset(fbeCurrentOffset);
+        fbeFieldSize = id.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
@@ -146,8 +146,8 @@ public final class FinalModelOrder extends FinalModel
         long fbeCurrentSize = 0;
         var fbeFieldSize = new Size(0);
 
-        uid.fbeOffset(fbeCurrentOffset);
-        fbeValue.uid = uid.get(fbeFieldSize);
+        id.fbeOffset(fbeCurrentOffset);
+        fbeValue.id = id.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
@@ -205,8 +205,8 @@ public final class FinalModelOrder extends FinalModel
         long fbeCurrentSize = 0;
         var fbeFieldSize = new Size(0);
 
-        uid.fbeOffset(fbeCurrentOffset);
-        fbeFieldSize.value = uid.set(fbeValue.uid);
+        id.fbeOffset(fbeCurrentOffset);
+        fbeFieldSize.value = id.set(fbeValue.id);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 

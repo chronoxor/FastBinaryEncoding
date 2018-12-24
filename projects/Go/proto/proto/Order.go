@@ -19,22 +19,22 @@ var _ = strconv.FormatInt
 
 // Order key
 type OrderKey struct {
-    Uid int32
+    Id int32
 }
 
 // Convert Order flags key to string
 func (k *OrderKey) String() string {
     var sb strings.Builder
     sb.WriteString("OrderKey(")
-    sb.WriteString("uid=")
-    sb.WriteString(strconv.FormatInt(int64(k.Uid), 10))
+    sb.WriteString("id=")
+    sb.WriteString(strconv.FormatInt(int64(k.Id), 10))
     sb.WriteString(")")
     return sb.String()
 }
 
 // Order struct
 type Order struct {
-    Uid int32 `json:"uid"`
+    Id int32 `json:"id"`
     Symbol string `json:"symbol"`
     Side OrderSide `json:"side"`
     Type OrderType `json:"type"`
@@ -45,7 +45,7 @@ type Order struct {
 // Create a new Order struct
 func NewOrder() *Order {
     return &Order{
-        Uid: 0,
+        Id: 0,
         Symbol: "",
         Side: *NewOrderSide(),
         Type: *NewOrderType(),
@@ -55,8 +55,8 @@ func NewOrder() *Order {
 }
 
 // Create a new Order struct from the given field values
-func NewOrderFromFieldValues(Uid int32, Symbol string, Side OrderSide, Type OrderType, Price float64, Volume float64) *Order {
-    return &Order{Uid, Symbol, Side, Type, Price, Volume}
+func NewOrderFromFieldValues(Id int32, Symbol string, Side OrderSide, Type OrderType, Price float64, Volume float64) *Order {
+    return &Order{Id, Symbol, Side, Type, Price, Volume}
 }
 
 // Create a new Order struct from JSON
@@ -90,7 +90,7 @@ func (s *Order) Clone() *Order {
 // Get the struct key
 func (s *Order) Key() OrderKey {
     return OrderKey{
-        Uid: s.Uid,
+        Id: s.Id,
     }
 }
 
@@ -103,8 +103,8 @@ func (s *Order) Optional() *Order {
 func (s *Order) String() string {
     var sb strings.Builder
     sb.WriteString("Order(")
-    sb.WriteString("uid=")
-    sb.WriteString(strconv.FormatInt(int64(s.Uid), 10))
+    sb.WriteString("id=")
+    sb.WriteString(strconv.FormatInt(int64(s.Id), 10))
     sb.WriteString(",symbol=")
     sb.WriteString("\"" + s.Symbol + "\"")
     sb.WriteString(",side=")

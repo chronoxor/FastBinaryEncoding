@@ -20,7 +20,7 @@ type FieldModelAccount struct {
     // Field model buffer offset
     offset int
 
-    Uid *fbe.FieldModelInt32
+    Id *fbe.FieldModelInt32
     Name *fbe.FieldModelString
     State *FieldModelStateEx
     Wallet *FieldModelBalance
@@ -31,8 +31,8 @@ type FieldModelAccount struct {
 // Create a new Account field model
 func NewFieldModelAccount(buffer *fbe.Buffer, offset int) *FieldModelAccount {
     fbeResult := FieldModelAccount{buffer: buffer, offset: offset}
-    fbeResult.Uid = fbe.NewFieldModelInt32(buffer, 4 + 4)
-    fbeResult.Name = fbe.NewFieldModelString(buffer, fbeResult.Uid.FBEOffset() + fbeResult.Uid.FBESize())
+    fbeResult.Id = fbe.NewFieldModelInt32(buffer, 4 + 4)
+    fbeResult.Name = fbe.NewFieldModelString(buffer, fbeResult.Id.FBEOffset() + fbeResult.Id.FBESize())
     fbeResult.State = NewFieldModelStateEx(buffer, fbeResult.Name.FBEOffset() + fbeResult.Name.FBESize())
     fbeResult.Wallet = NewFieldModelBalance(buffer, fbeResult.State.FBEOffset() + fbeResult.State.FBESize())
     fbeResult.Asset = NewFieldModelOptionalBalance(buffer, fbeResult.Wallet.FBEOffset() + fbeResult.Wallet.FBESize())
@@ -46,7 +46,7 @@ func (fm *FieldModelAccount) FBESize() int { return 4 }
 // Get the field body size
 func (fm *FieldModelAccount) FBEBody() int {
     fbeResult := 4 + 4 +
-        fm.Uid.FBESize() +
+        fm.Id.FBESize() +
         fm.Name.FBESize() +
         fm.State.FBESize() +
         fm.Wallet.FBESize() +
@@ -70,7 +70,7 @@ func (fm *FieldModelAccount) FBEExtra() int {
     fm.buffer.Shift(fbeStructOffset)
 
     fbeResult := fm.FBEBody() +
-        fm.Uid.FBEExtra() +
+        fm.Id.FBEExtra() +
         fm.Name.FBEExtra() +
         fm.State.FBEExtra() +
         fm.Wallet.FBEExtra() +
@@ -130,13 +130,13 @@ func (fm *FieldModelAccount) VerifyType(fbeVerifyType bool) bool {
 func (fm *FieldModelAccount) VerifyFields(fbeStructSize int) bool {
     fbeCurrentSize := 4 + 4
 
-    if (fbeCurrentSize + fm.Uid.FBESize()) > fbeStructSize {
+    if (fbeCurrentSize + fm.Id.FBESize()) > fbeStructSize {
         return true
     }
-    if !fm.Uid.Verify() {
+    if !fm.Id.Verify() {
         return false
     }
-    fbeCurrentSize += fm.Uid.FBESize()
+    fbeCurrentSize += fm.Id.FBESize()
 
     if (fbeCurrentSize + fm.Name.FBESize()) > fbeStructSize {
         return true
@@ -229,12 +229,12 @@ func (fm *FieldModelAccount) GetValue(fbeValue *Account) error {
 func (fm *FieldModelAccount) GetFields(fbeValue *Account, fbeStructSize int) {
     fbeCurrentSize := 4 + 4
 
-    if (fbeCurrentSize + fm.Uid.FBESize()) <= fbeStructSize {
-        fbeValue.Uid, _ = fm.Uid.Get()
+    if (fbeCurrentSize + fm.Id.FBESize()) <= fbeStructSize {
+        fbeValue.Id, _ = fm.Id.Get()
     } else {
-        fbeValue.Uid = 0
+        fbeValue.Id = 0
     }
-    fbeCurrentSize += fm.Uid.FBESize()
+    fbeCurrentSize += fm.Id.FBESize()
 
     if (fbeCurrentSize + fm.Name.FBESize()) <= fbeStructSize {
         fbeValue.Name, _ = fm.Name.Get()
@@ -313,7 +313,7 @@ func (fm *FieldModelAccount) Set(fbeValue *Account) error {
 func (fm *FieldModelAccount) SetFields(fbeValue *Account) error {
     var err error = nil
 
-    if err = fm.Uid.Set(fbeValue.Uid); err != nil {
+    if err = fm.Id.Set(fbeValue.Id); err != nil {
         return err
     }
     if err = fm.Name.Set(fbeValue.Name); err != nil {

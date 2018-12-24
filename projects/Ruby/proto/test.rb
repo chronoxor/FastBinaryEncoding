@@ -889,7 +889,7 @@ module Test
   class StructSimple
     include Comparable
 
-    attr_accessor :uid
+    attr_accessor :id
     attr_accessor :f1
     attr_accessor :f2
     attr_accessor :f3
@@ -935,8 +935,8 @@ module Test
     attr_accessor :f43
     attr_accessor :f44
 
-    def initialize(uid = 0, f1 = false, f2 = true, f3 = 0, f4 = 255, f5 = "\0", f6 = '!', f7 = "\0", f8 = 0x0444.chr(Encoding::UTF_8), f9 = 0, f10 = 127, f11 = 0, f12 = 255, f13 = 0, f14 = 32767, f15 = 0, f16 = 65535, f17 = 0, f18 = 2147483647, f19 = 0, f20 = 0xFFFFFFFF, f21 = 0, f22 = 9223372036854775807, f23 = 0, f24 = 0xFFFFFFFFFFFFFFFF, f25 = 0.0, f26 = 123.456, f27 = 0.0, f28 = -123.456e+123, f29 = BigDecimal.new(0), f30 = BigDecimal.new('123456.123456'), f31 = '', f32 = "Initial string!", f33 = Time.utc(1970), f34 = Time.utc(1970), f35 = Time.now.utc, f36 = UUIDTools::UUID.parse_int(0), f37 = UUIDTools::UUID.timestamp_create, f38 = UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000"), f39 = Proto::OrderSide.new, f40 = Proto::OrderType.new, f41 = Proto::Order.new, f42 = Proto::Balance.new, f43 = Proto::State.new, f44 = Proto::Account.new)
-      @uid = uid
+    def initialize(id = 0, f1 = false, f2 = true, f3 = 0, f4 = 255, f5 = "\0", f6 = '!', f7 = "\0", f8 = 0x0444.chr(Encoding::UTF_8), f9 = 0, f10 = 127, f11 = 0, f12 = 255, f13 = 0, f14 = 32767, f15 = 0, f16 = 65535, f17 = 0, f18 = 2147483647, f19 = 0, f20 = 0xFFFFFFFF, f21 = 0, f22 = 9223372036854775807, f23 = 0, f24 = 0xFFFFFFFFFFFFFFFF, f25 = 0.0, f26 = 123.456, f27 = 0.0, f28 = -123.456e+123, f29 = BigDecimal.new(0), f30 = BigDecimal.new('123456.123456'), f31 = '', f32 = "Initial string!", f33 = Time.utc(1970), f34 = Time.utc(1970), f35 = Time.now.utc, f36 = UUIDTools::UUID.parse_int(0), f37 = UUIDTools::UUID.timestamp_create, f38 = UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000"), f39 = Proto::OrderSide.new, f40 = Proto::OrderType.new, f41 = Proto::Order.new, f42 = Proto::Balance.new, f43 = Proto::State.new, f44 = Proto::Account.new)
+      @id = id
       @f1 = f1
       @f2 = f2
       @f3 = f3
@@ -984,7 +984,7 @@ module Test
     end
 
     def initialize_copy(other)
-      @uid = other.uid
+      @id = other.id
       @f1 = other.f1
       @f2 = other.f2
       @f3 = other.f3
@@ -1051,7 +1051,7 @@ module Test
 
       # noinspection RubyUnusedLocalVariable
       result = 0
-      result = @uid <=> other.uid
+      result = @id <=> other.id
       if result != 0
         return false
       end
@@ -1067,7 +1067,7 @@ module Test
     # Struct keys
     def key
       result = []
-      result.push(@uid)
+      result.push(@id)
       # noinspection RubyUnnecessaryReturnValue
       result
     end
@@ -1081,9 +1081,9 @@ module Test
     def to_s
       result = ''
       result << 'StructSimple('
-      result << 'uid='
-      if !@uid.nil?
-        result << @uid.to_s
+      result << 'id='
+      if !@id.nil?
+        result << @id.to_s
       else
         result << 'null'
       end
@@ -1379,8 +1379,8 @@ module Test
     # Get struct JSON map (internal method)
     def __to_json_map__
       result = {}
-      key = 'uid'
-      value = (uid.nil? ? nil : uid)
+      key = 'id'
+      value = (id.nil? ? nil : id)
       result.store(key, value)
       key = 'f1'
       value = (f1.nil? ? nil : f1)
@@ -1525,8 +1525,8 @@ module Test
     # Get struct map from JSON (internal method)
     def self.__from_json_map__(json)
       result = StructSimple.new
-      value = json.fetch('uid', nil)
-      result.uid = (value.nil? ? nil : value)
+      value = json.fetch('id', nil)
+      result.id = (value.nil? ? nil : value)
       value = json.fetch('f1', nil)
       result.f1 = (value.nil? ? nil : value)
       value = json.fetch('f2', nil)
@@ -1623,8 +1623,8 @@ module Test
   class FieldModelStructSimple < FBE::FieldModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_uid = FBE::FieldModelInt32.new(self.buffer, 4 + 4)
-      @_f1 = FBE::FieldModelBool.new(self.buffer, @_uid.fbe_offset + @_uid.fbe_size)
+      @_id = FBE::FieldModelInt32.new(self.buffer, 4 + 4)
+      @_f1 = FBE::FieldModelBool.new(self.buffer, @_id.fbe_offset + @_id.fbe_size)
       @_f2 = FBE::FieldModelBool.new(self.buffer, @_f1.fbe_offset + @_f1.fbe_size)
       @_f3 = FBE::FieldModelByte.new(self.buffer, @_f2.fbe_offset + @_f2.fbe_size)
       @_f4 = FBE::FieldModelByte.new(self.buffer, @_f3.fbe_offset + @_f3.fbe_size)
@@ -1670,8 +1670,8 @@ module Test
       @_f44 = Proto::FieldModelAccount.new(self.buffer, @_f43.fbe_offset + @_f43.fbe_size)
     end
 
-    def uid
-      @_uid
+    def id
+      @_id
     end
 
     def f1
@@ -1858,7 +1858,7 @@ module Test
     # Get the field body size
     def fbe_body
       4 + 4 \
-        + uid.fbe_size \
+        + id.fbe_size \
         + f1.fbe_size \
         + f2.fbe_size \
         + f3.fbe_size \
@@ -1919,7 +1919,7 @@ module Test
       @_buffer.shift(fbe_struct_offset)
 
       fbe_result = fbe_body \
-        + uid.fbe_extra \
+        + id.fbe_extra \
         + f1.fbe_extra \
         + f2.fbe_extra \
         + f3.fbe_extra \
@@ -2013,14 +2013,14 @@ module Test
     def verify_fields(fbe_struct_size)
       fbe_current_size = 4 + 4
 
-      if (fbe_current_size + uid.fbe_size) > fbe_struct_size
+      if (fbe_current_size + id.fbe_size) > fbe_struct_size
         return true
       end
-      unless uid.verify
+      unless id.verify
         return false
       end
       # noinspection RubyUnusedLocalVariable
-      fbe_current_size += uid.fbe_size
+      fbe_current_size += id.fbe_size
 
       if (fbe_current_size + f1.fbe_size) > fbe_struct_size
         return true
@@ -2463,13 +2463,13 @@ module Test
     def get_fields(fbe_value, fbe_struct_size)
       fbe_current_size = 4 + 4
 
-      if (fbe_current_size + uid.fbe_size) <= fbe_struct_size
-        fbe_value.uid = uid.get
+      if (fbe_current_size + id.fbe_size) <= fbe_struct_size
+        fbe_value.id = id.get
       else
-        fbe_value.uid = 0
+        fbe_value.id = 0
       end
       # noinspection RubyUnusedLocalVariable
-      fbe_current_size += uid.fbe_size
+      fbe_current_size += id.fbe_size
 
       if (fbe_current_size + f1.fbe_size) <= fbe_struct_size
         fbe_value.f1 = f1.get
@@ -2862,7 +2862,7 @@ module Test
 
     # Set the struct fields values
     def set_fields(fbe_value)
-      uid.set(fbe_value.uid)
+      id.set(fbe_value.id)
       f1.set(fbe_value.f1)
       f2.set(fbe_value.f2)
       f3.set(fbe_value.f3)
@@ -2997,7 +2997,7 @@ module Test
   class FinalModelStructSimple < FBE::FinalModel
     def initialize(buffer, offset)
       super(buffer, offset)
-      @_uid = FBE::FinalModelInt32.new(self.buffer, 0)
+      @_id = FBE::FinalModelInt32.new(self.buffer, 0)
       @_f1 = FBE::FinalModelBool.new(self.buffer, 0)
       @_f2 = FBE::FinalModelBool.new(self.buffer, 0)
       @_f3 = FBE::FinalModelByte.new(self.buffer, 0)
@@ -3044,8 +3044,8 @@ module Test
       @_f44 = Proto::FinalModelAccount.new(self.buffer, 0)
     end
 
-    def uid
-      @_uid
+    def id
+      @_id
     end
 
     def f1
@@ -3227,7 +3227,7 @@ module Test
     # Get the allocation size
     def fbe_allocation_size(fbe_value)
       0 \
-        + uid.fbe_allocation_size(fbe_value.uid) \
+        + id.fbe_allocation_size(fbe_value.id) \
         + f1.fbe_allocation_size(fbe_value.f1) \
         + f2.fbe_allocation_size(fbe_value.f2) \
         + f3.fbe_allocation_size(fbe_value.f3) \
@@ -3298,8 +3298,8 @@ module Test
     def verify_fields
       fbe_current_offset = 0
 
-      uid.fbe_offset = fbe_current_offset
-      fbe_field_size = uid.verify
+      id.fbe_offset = fbe_current_offset
+      fbe_field_size = id.verify
       if fbe_field_size == FBE::Integer::MAX
         return FBE::Integer::MAX
       end
@@ -3630,9 +3630,9 @@ module Test
       fbe_current_offset = 0
       fbe_current_size = 0
 
-      uid.fbe_offset = fbe_current_offset
-      fbe_result = uid.get
-      fbe_value.uid = fbe_result[0]
+      id.fbe_offset = fbe_current_offset
+      fbe_result = id.get
+      fbe_value.id = fbe_result[0]
       # noinspection RubyUnusedLocalVariable
       fbe_current_offset += fbe_result[1]
       fbe_current_size += fbe_result[1]
@@ -3962,8 +3962,8 @@ module Test
       fbe_current_offset = 0
       fbe_current_size = 0
 
-      uid.fbe_offset = fbe_current_offset
-      fbe_field_size = uid.set(fbe_value.uid)
+      id.fbe_offset = fbe_current_offset
+      fbe_field_size = id.set(fbe_value.id)
       # noinspection RubyUnusedLocalVariable
       fbe_current_offset += fbe_field_size
       fbe_current_size += fbe_field_size

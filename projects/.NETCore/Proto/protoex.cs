@@ -787,7 +787,7 @@ namespace protoex {
 
     public struct Order : IComparable, IComparable<Order>, IEquatable<Order>
     {
-        public int uid;
+        public int id;
         public string symbol;
         public OrderSide side;
         public OrderType type;
@@ -798,7 +798,7 @@ namespace protoex {
 
         public static Order Default => new Order
         {
-            uid = (int)0
+            id = (int)0
             , symbol = ""
             , side = OrderSide.Default
             , type = OrderType.Default
@@ -808,9 +808,9 @@ namespace protoex {
             , sl = (double)-10.0D
         };
 
-        public Order(int uid, string symbol, OrderSide side, OrderType type, double price, double volume, double tp, double sl)
+        public Order(int id, string symbol, OrderSide side, OrderType type, double price, double volume, double tp, double sl)
         {
-            this.uid = uid;
+            this.id = id;
             this.symbol = symbol;
             this.side = side;
             this.type = type;
@@ -836,7 +836,7 @@ namespace protoex {
         public int CompareTo(object other)
         {
             int result = 0;
-            result = uid.CompareTo(((Order)other).uid);
+            result = id.CompareTo(((Order)other).id);
             if (result != 0)
                 return result;
             return result;
@@ -845,7 +845,7 @@ namespace protoex {
         public int CompareTo(Order other)
         {
             int result = 0;
-            result = uid.CompareTo(other.uid);
+            result = id.CompareTo(other.id);
             if (result != 0)
                 return result;
             return result;
@@ -855,14 +855,14 @@ namespace protoex {
         {
             if (!(other is Order))
                 return false;
-            if (!uid.Equals(((Order)other).uid))
+            if (!id.Equals(((Order)other).id))
                 return false;
             return true;
         }
 
         public bool Equals(Order other)
         {
-            if (!uid.Equals(other.uid))
+            if (!id.Equals(other.id))
                 return false;
             return true;
         }
@@ -870,7 +870,7 @@ namespace protoex {
         public override int GetHashCode()
         {
             int hash = 17;
-            hash = hash * 31 + uid.GetHashCode();
+            hash = hash * 31 + id.GetHashCode();
             return hash;
         }
 
@@ -878,7 +878,7 @@ namespace protoex {
         {
             var sb = new StringBuilder();
             sb.Append("Order(");
-            sb.Append("uid="); sb.Append(uid);
+            sb.Append("id="); sb.Append(id);
             sb.Append(",symbol="); if (symbol != null) sb.Append("\"").Append(symbol).Append("\""); else sb.Append("null");
             sb.Append(",side="); sb.Append(side);
             sb.Append(",type="); sb.Append(type);
@@ -915,7 +915,7 @@ namespace protoex {
     // Fast Binary Encoding Order field model
     public class FieldModelOrder : FieldModelValueType<Order>
     {
-        public readonly FieldModelValueType<int> uid;
+        public readonly FieldModelValueType<int> id;
         public readonly FieldModelReferenceType<string> symbol;
         public readonly FieldModelOrderSide side;
         public readonly FieldModelOrderType type;
@@ -926,8 +926,8 @@ namespace protoex {
 
         public FieldModelOrder(Buffer buffer, long offset) : base(buffer, offset)
         {
-            uid = FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, 4 + 4);
-            symbol = FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, uid.FBEOffset + uid.FBESize);
+            id = FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, 4 + 4);
+            symbol = FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, id.FBEOffset + id.FBESize);
             side = new FieldModelOrderSide(buffer, symbol.FBEOffset + symbol.FBESize);
             type = new FieldModelOrderType(buffer, side.FBEOffset + side.FBESize);
             price = FieldModelValueType<double>.CreateFieldModel(BaseTypes.DOUBLE, buffer, type.FBEOffset + type.FBESize);
@@ -944,7 +944,7 @@ namespace protoex {
             get
             {
                 long fbeResult = 4 + 4
-                    + uid.FBESize
+                    + id.FBESize
                     + symbol.FBESize
                     + side.FBESize
                     + type.FBESize
@@ -971,7 +971,7 @@ namespace protoex {
                 _buffer.Shift(fbeStructOffset);
 
                 long fbeResult = FBEBody
-                    + uid.FBEExtra
+                    + id.FBEExtra
                     + symbol.FBEExtra
                     + side.FBEExtra
                     + type.FBEExtra
@@ -1023,11 +1023,11 @@ namespace protoex {
         {
             long fbeCurrentSize = 4 + 4;
 
-            if ((fbeCurrentSize + uid.FBESize) > fbeStructSize)
+            if ((fbeCurrentSize + id.FBESize) > fbeStructSize)
                 return true;
-            if (!uid.Verify())
+            if (!id.Verify())
                 return false;
-            fbeCurrentSize += uid.FBESize;
+            fbeCurrentSize += id.FBESize;
 
             if ((fbeCurrentSize + symbol.FBESize) > fbeStructSize)
                 return true;
@@ -1123,11 +1123,11 @@ namespace protoex {
 
             fbeValue = Order.Default;
 
-            if ((fbeCurrentSize + uid.FBESize) <= fbeStructSize)
-                uid.Get(out fbeValue.uid);
+            if ((fbeCurrentSize + id.FBESize) <= fbeStructSize)
+                id.Get(out fbeValue.id);
             else
-                fbeValue.uid = (int)0;
-            fbeCurrentSize += uid.FBESize;
+                fbeValue.id = (int)0;
+            fbeCurrentSize += id.FBESize;
 
             if ((fbeCurrentSize + symbol.FBESize) <= fbeStructSize)
                 symbol.Get(out fbeValue.symbol);
@@ -1213,7 +1213,7 @@ namespace protoex {
         // Set the struct fields values
         public void SetFields(Order fbeValue)
         {
-            uid.Set(fbeValue.uid);
+            id.Set(fbeValue.id);
             symbol.Set(fbeValue.symbol);
             side.Set(fbeValue.side);
             type.Set(fbeValue.type);
@@ -1323,7 +1323,7 @@ namespace protoex {
     // Fast Binary Encoding Order final model
     public class FinalModelOrder : FinalModelValueType<Order>
     {
-        public readonly FinalModelValueType<int> uid;
+        public readonly FinalModelValueType<int> id;
         public readonly FinalModelReferenceType<string> symbol;
         public readonly FinalModelOrderSide side;
         public readonly FinalModelOrderType type;
@@ -1334,7 +1334,7 @@ namespace protoex {
 
         public FinalModelOrder(Buffer buffer, long offset) : base(buffer, offset)
         {
-            uid = FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0);
+            id = FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0);
             symbol = FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0);
             side = new FinalModelOrderSide(buffer, 0);
             type = new FinalModelOrderType(buffer, 0);
@@ -1348,7 +1348,7 @@ namespace protoex {
         public override long FBEAllocationSize(Order fbeValue)
         {
             long fbeResult = 0
-                + uid.FBEAllocationSize(fbeValue.uid)
+                + id.FBEAllocationSize(fbeValue.id)
                 + symbol.FBEAllocationSize(fbeValue.symbol)
                 + side.FBEAllocationSize(fbeValue.side)
                 + type.FBEAllocationSize(fbeValue.type)
@@ -1382,8 +1382,8 @@ namespace protoex {
             long fbeCurrentOffset = 0;
             long fbeFieldSize;
 
-            uid.FBEOffset = fbeCurrentOffset;
-            fbeFieldSize = uid.Verify();
+            id.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = id.Verify();
             if (fbeFieldSize == long.MaxValue)
                 return long.MaxValue;
             fbeCurrentOffset += fbeFieldSize;
@@ -1451,8 +1451,8 @@ namespace protoex {
 
             fbeValue = Order.Default;
 
-            uid.FBEOffset = fbeCurrentOffset;
-            fbeFieldSize = uid.Get(out fbeValue.uid);
+            id.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = id.Get(out fbeValue.id);
             fbeCurrentOffset += fbeFieldSize;
             fbeCurrentSize += fbeFieldSize;
 
@@ -1510,8 +1510,8 @@ namespace protoex {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            uid.FBEOffset = fbeCurrentOffset;
-            fbeFieldSize = uid.Set(fbeValue.uid);
+            id.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = id.Set(fbeValue.id);
             fbeCurrentOffset += fbeFieldSize;
             fbeCurrentSize += fbeFieldSize;
 
@@ -2269,7 +2269,7 @@ namespace protoex {
 
     public struct Account : IComparable, IComparable<Account>, IEquatable<Account>
     {
-        public int uid;
+        public int id;
         public string name;
         public StateEx state;
         public Balance wallet;
@@ -2278,7 +2278,7 @@ namespace protoex {
 
         public static Account Default => new Account
         {
-            uid = (int)0
+            id = (int)0
             , name = ""
             , state = StateEx.initialized | StateEx.bad | StateEx.sad
             , wallet = Balance.Default
@@ -2286,9 +2286,9 @@ namespace protoex {
             , orders = new List<Order>()
         };
 
-        public Account(int uid, string name, StateEx state, Balance wallet, Balance? asset, List<Order> orders)
+        public Account(int id, string name, StateEx state, Balance wallet, Balance? asset, List<Order> orders)
         {
-            this.uid = uid;
+            this.id = id;
             this.name = name;
             this.state = state;
             this.wallet = wallet;
@@ -2312,7 +2312,7 @@ namespace protoex {
         public int CompareTo(object other)
         {
             int result = 0;
-            result = uid.CompareTo(((Account)other).uid);
+            result = id.CompareTo(((Account)other).id);
             if (result != 0)
                 return result;
             return result;
@@ -2321,7 +2321,7 @@ namespace protoex {
         public int CompareTo(Account other)
         {
             int result = 0;
-            result = uid.CompareTo(other.uid);
+            result = id.CompareTo(other.id);
             if (result != 0)
                 return result;
             return result;
@@ -2331,14 +2331,14 @@ namespace protoex {
         {
             if (!(other is Account))
                 return false;
-            if (!uid.Equals(((Account)other).uid))
+            if (!id.Equals(((Account)other).id))
                 return false;
             return true;
         }
 
         public bool Equals(Account other)
         {
-            if (!uid.Equals(other.uid))
+            if (!id.Equals(other.id))
                 return false;
             return true;
         }
@@ -2346,7 +2346,7 @@ namespace protoex {
         public override int GetHashCode()
         {
             int hash = 17;
-            hash = hash * 31 + uid.GetHashCode();
+            hash = hash * 31 + id.GetHashCode();
             return hash;
         }
 
@@ -2354,7 +2354,7 @@ namespace protoex {
         {
             var sb = new StringBuilder();
             sb.Append("Account(");
-            sb.Append("uid="); sb.Append(uid);
+            sb.Append("id="); sb.Append(id);
             sb.Append(",name="); if (name != null) sb.Append("\"").Append(name).Append("\""); else sb.Append("null");
             sb.Append(",state="); sb.Append(state);
             sb.Append(",wallet="); sb.Append(wallet);
@@ -2403,7 +2403,7 @@ namespace protoex {
     // Fast Binary Encoding Account field model
     public class FieldModelAccount : FieldModelValueType<Account>
     {
-        public readonly FieldModelValueType<int> uid;
+        public readonly FieldModelValueType<int> id;
         public readonly FieldModelReferenceType<string> name;
         public readonly FieldModelStateEx state;
         public readonly FieldModelBalance wallet;
@@ -2412,8 +2412,8 @@ namespace protoex {
 
         public FieldModelAccount(Buffer buffer, long offset) : base(buffer, offset)
         {
-            uid = FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, 4 + 4);
-            name = FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, uid.FBEOffset + uid.FBESize);
+            id = FieldModelValueType<int>.CreateFieldModel(BaseTypes.INT32, buffer, 4 + 4);
+            name = FieldModelReferenceType<string>.CreateFieldModel(BaseTypes.STRING, buffer, id.FBEOffset + id.FBESize);
             state = new FieldModelStateEx(buffer, name.FBEOffset + name.FBESize);
             wallet = new FieldModelBalance(buffer, state.FBEOffset + state.FBESize);
             asset = new FieldModelOptionalValueType<Balance, FieldModelBalance>(new FieldModelBalance(buffer, wallet.FBEOffset + wallet.FBESize), buffer, wallet.FBEOffset + wallet.FBESize);
@@ -2428,7 +2428,7 @@ namespace protoex {
             get
             {
                 long fbeResult = 4 + 4
-                    + uid.FBESize
+                    + id.FBESize
                     + name.FBESize
                     + state.FBESize
                     + wallet.FBESize
@@ -2453,7 +2453,7 @@ namespace protoex {
                 _buffer.Shift(fbeStructOffset);
 
                 long fbeResult = FBEBody
-                    + uid.FBEExtra
+                    + id.FBEExtra
                     + name.FBEExtra
                     + state.FBEExtra
                     + wallet.FBEExtra
@@ -2503,11 +2503,11 @@ namespace protoex {
         {
             long fbeCurrentSize = 4 + 4;
 
-            if ((fbeCurrentSize + uid.FBESize) > fbeStructSize)
+            if ((fbeCurrentSize + id.FBESize) > fbeStructSize)
                 return true;
-            if (!uid.Verify())
+            if (!id.Verify())
                 return false;
-            fbeCurrentSize += uid.FBESize;
+            fbeCurrentSize += id.FBESize;
 
             if ((fbeCurrentSize + name.FBESize) > fbeStructSize)
                 return true;
@@ -2591,11 +2591,11 @@ namespace protoex {
 
             fbeValue = Account.Default;
 
-            if ((fbeCurrentSize + uid.FBESize) <= fbeStructSize)
-                uid.Get(out fbeValue.uid);
+            if ((fbeCurrentSize + id.FBESize) <= fbeStructSize)
+                id.Get(out fbeValue.id);
             else
-                fbeValue.uid = (int)0;
-            fbeCurrentSize += uid.FBESize;
+                fbeValue.id = (int)0;
+            fbeCurrentSize += id.FBESize;
 
             if ((fbeCurrentSize + name.FBESize) <= fbeStructSize)
                 name.Get(out fbeValue.name);
@@ -2669,7 +2669,7 @@ namespace protoex {
         // Set the struct fields values
         public void SetFields(Account fbeValue)
         {
-            uid.Set(fbeValue.uid);
+            id.Set(fbeValue.id);
             name.Set(fbeValue.name);
             state.Set(fbeValue.state);
             wallet.Set(fbeValue.wallet);
@@ -2777,7 +2777,7 @@ namespace protoex {
     // Fast Binary Encoding Account final model
     public class FinalModelAccount : FinalModelValueType<Account>
     {
-        public readonly FinalModelValueType<int> uid;
+        public readonly FinalModelValueType<int> id;
         public readonly FinalModelReferenceType<string> name;
         public readonly FinalModelStateEx state;
         public readonly FinalModelBalance wallet;
@@ -2786,7 +2786,7 @@ namespace protoex {
 
         public FinalModelAccount(Buffer buffer, long offset) : base(buffer, offset)
         {
-            uid = FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0);
+            id = FinalModelValueType<int>.CreateFinalModel(BaseTypes.INT32, buffer, 0);
             name = FinalModelReferenceType<string>.CreateFinalModel(BaseTypes.STRING, buffer, 0);
             state = new FinalModelStateEx(buffer, 0);
             wallet = new FinalModelBalance(buffer, 0);
@@ -2798,7 +2798,7 @@ namespace protoex {
         public override long FBEAllocationSize(Account fbeValue)
         {
             long fbeResult = 0
-                + uid.FBEAllocationSize(fbeValue.uid)
+                + id.FBEAllocationSize(fbeValue.id)
                 + name.FBEAllocationSize(fbeValue.name)
                 + state.FBEAllocationSize(fbeValue.state)
                 + wallet.FBEAllocationSize(fbeValue.wallet)
@@ -2830,8 +2830,8 @@ namespace protoex {
             long fbeCurrentOffset = 0;
             long fbeFieldSize;
 
-            uid.FBEOffset = fbeCurrentOffset;
-            fbeFieldSize = uid.Verify();
+            id.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = id.Verify();
             if (fbeFieldSize == long.MaxValue)
                 return long.MaxValue;
             fbeCurrentOffset += fbeFieldSize;
@@ -2887,8 +2887,8 @@ namespace protoex {
 
             fbeValue = Account.Default;
 
-            uid.FBEOffset = fbeCurrentOffset;
-            fbeFieldSize = uid.Get(out fbeValue.uid);
+            id.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = id.Get(out fbeValue.id);
             fbeCurrentOffset += fbeFieldSize;
             fbeCurrentSize += fbeFieldSize;
 
@@ -2936,8 +2936,8 @@ namespace protoex {
             long fbeCurrentSize = 0;
             long fbeFieldSize;
 
-            uid.FBEOffset = fbeCurrentOffset;
-            fbeFieldSize = uid.Set(fbeValue.uid);
+            id.FBEOffset = fbeCurrentOffset;
+            fbeFieldSize = id.Set(fbeValue.id);
             fbeCurrentOffset += fbeFieldSize;
             fbeCurrentSize += fbeFieldSize;
 

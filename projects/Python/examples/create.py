@@ -8,7 +8,7 @@ def main():
     account = proto.AccountModel(fbe.WriteBuffer())
     model_begin = account.create_begin()
     account_begin = account.model.set_begin()
-    account.model.uid.set(1)
+    account.model.id.set(1)
     account.model.name.set("Test")
     account.model.state.set(proto.State.good)
     wallet_begin = account.model.wallet.set_begin()
@@ -28,7 +28,7 @@ def main():
     assert access.verify()
 
     account_begin = access.model.get_begin()
-    uid = access.model.uid.get()
+    id = access.model.id.get()
     name = access.model.name.get()
     state = access.model.state.get()
     wallet_begin = access.model.wallet.get_begin()
@@ -39,7 +39,7 @@ def main():
 
     # Show account content
     print()
-    print("account.uid = {}".format(uid))
+    print("account.id = {}".format(id))
     print("account.name = {}".format(name))
     print("account.state = {}".format(state))
     print("account.wallet.currency = {}".format(wallet_currency))

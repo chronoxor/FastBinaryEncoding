@@ -59,7 +59,7 @@ flags FlagsTyped : uint64
 // Simple struct declaration
 struct StructSimple(+10)
 {
-    [key] int32 uid;
+    [key] int32 id;
     bool f1;
     bool f2 = true;
     byte f3;

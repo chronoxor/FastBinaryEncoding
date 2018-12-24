@@ -20,7 +20,7 @@ type FieldModelStructSimple struct {
     // Field model buffer offset
     offset int
 
-    Uid *fbe.FieldModelInt32
+    Id *fbe.FieldModelInt32
     F1 *fbe.FieldModelBool
     F2 *fbe.FieldModelBool
     F3 *fbe.FieldModelByte
@@ -70,8 +70,8 @@ type FieldModelStructSimple struct {
 // Create a new StructSimple field model
 func NewFieldModelStructSimple(buffer *fbe.Buffer, offset int) *FieldModelStructSimple {
     fbeResult := FieldModelStructSimple{buffer: buffer, offset: offset}
-    fbeResult.Uid = fbe.NewFieldModelInt32(buffer, 4 + 4)
-    fbeResult.F1 = fbe.NewFieldModelBool(buffer, fbeResult.Uid.FBEOffset() + fbeResult.Uid.FBESize())
+    fbeResult.Id = fbe.NewFieldModelInt32(buffer, 4 + 4)
+    fbeResult.F1 = fbe.NewFieldModelBool(buffer, fbeResult.Id.FBEOffset() + fbeResult.Id.FBESize())
     fbeResult.F2 = fbe.NewFieldModelBool(buffer, fbeResult.F1.FBEOffset() + fbeResult.F1.FBESize())
     fbeResult.F3 = fbe.NewFieldModelByte(buffer, fbeResult.F2.FBEOffset() + fbeResult.F2.FBESize())
     fbeResult.F4 = fbe.NewFieldModelByte(buffer, fbeResult.F3.FBEOffset() + fbeResult.F3.FBESize())
@@ -124,7 +124,7 @@ func (fm *FieldModelStructSimple) FBESize() int { return 4 }
 // Get the field body size
 func (fm *FieldModelStructSimple) FBEBody() int {
     fbeResult := 4 + 4 +
-        fm.Uid.FBESize() +
+        fm.Id.FBESize() +
         fm.F1.FBESize() +
         fm.F2.FBESize() +
         fm.F3.FBESize() +
@@ -187,7 +187,7 @@ func (fm *FieldModelStructSimple) FBEExtra() int {
     fm.buffer.Shift(fbeStructOffset)
 
     fbeResult := fm.FBEBody() +
-        fm.Uid.FBEExtra() +
+        fm.Id.FBEExtra() +
         fm.F1.FBEExtra() +
         fm.F2.FBEExtra() +
         fm.F3.FBEExtra() +
@@ -286,13 +286,13 @@ func (fm *FieldModelStructSimple) VerifyType(fbeVerifyType bool) bool {
 func (fm *FieldModelStructSimple) VerifyFields(fbeStructSize int) bool {
     fbeCurrentSize := 4 + 4
 
-    if (fbeCurrentSize + fm.Uid.FBESize()) > fbeStructSize {
+    if (fbeCurrentSize + fm.Id.FBESize()) > fbeStructSize {
         return true
     }
-    if !fm.Uid.Verify() {
+    if !fm.Id.Verify() {
         return false
     }
-    fbeCurrentSize += fm.Uid.FBESize()
+    fbeCurrentSize += fm.Id.FBESize()
 
     if (fbeCurrentSize + fm.F1.FBESize()) > fbeStructSize {
         return true
@@ -697,12 +697,12 @@ func (fm *FieldModelStructSimple) GetValue(fbeValue *StructSimple) error {
 func (fm *FieldModelStructSimple) GetFields(fbeValue *StructSimple, fbeStructSize int) {
     fbeCurrentSize := 4 + 4
 
-    if (fbeCurrentSize + fm.Uid.FBESize()) <= fbeStructSize {
-        fbeValue.Uid, _ = fm.Uid.Get()
+    if (fbeCurrentSize + fm.Id.FBESize()) <= fbeStructSize {
+        fbeValue.Id, _ = fm.Id.Get()
     } else {
-        fbeValue.Uid = 0
+        fbeValue.Id = 0
     }
-    fbeCurrentSize += fm.Uid.FBESize()
+    fbeCurrentSize += fm.Id.FBESize()
 
     if (fbeCurrentSize + fm.F1.FBESize()) <= fbeStructSize {
         fbeValue.F1, _ = fm.F1.Get()
@@ -1054,7 +1054,7 @@ func (fm *FieldModelStructSimple) Set(fbeValue *StructSimple) error {
 func (fm *FieldModelStructSimple) SetFields(fbeValue *StructSimple) error {
     var err error = nil
 
-    if err = fm.Uid.Set(fbeValue.Uid); err != nil {
+    if err = fm.Id.Set(fbeValue.Id); err != nil {
         return err
     }
     if err = fm.F1.Set(fbeValue.F1); err != nil {

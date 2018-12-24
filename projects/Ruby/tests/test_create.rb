@@ -9,7 +9,7 @@ class TestCreate < Test::Unit::TestCase
     assert_equal(writer.model.fbe_offset, 4)
     model_begin = writer.create_begin
     account_begin = writer.model.set_begin
-    writer.model.uid.set(1)
+    writer.model.id.set(1)
     writer.model.name.set('Test')
     writer.model.state.set(Proto::State.good)
     wallet_begin = writer.model.wallet.set_begin
@@ -24,7 +24,7 @@ class TestCreate < Test::Unit::TestCase
     writer.model.asset.value.set_end(asset_wallet_begin)
     order = writer.model.orders.resize(3)
     order_begin = order.set_begin
-    order.uid.set(1)
+    order.id.set(1)
     order.symbol.set('EURUSD')
     order.side.set(Proto::OrderSide.buy)
     order.type.set(Proto::OrderType.market)
@@ -33,7 +33,7 @@ class TestCreate < Test::Unit::TestCase
     order.set_end(order_begin)
     order.fbe_shift(order.fbe_size)
     order_begin = order.set_begin
-    order.uid.set(2)
+    order.id.set(2)
     order.symbol.set('EURUSD')
     order.side.set(Proto::OrderSide.sell)
     order.type.set(Proto::OrderType.limit)
@@ -42,7 +42,7 @@ class TestCreate < Test::Unit::TestCase
     order.set_end(order_begin)
     order.fbe_shift(order.fbe_size)
     order_begin = order.set_begin
-    order.uid.set(3)
+    order.id.set(3)
     order.symbol.set('EURUSD')
     order.side.set(Proto::OrderSide.buy)
     order.type.set(Proto::OrderType.stop)
@@ -67,8 +67,8 @@ class TestCreate < Test::Unit::TestCase
     assert_true(reader.verify)
 
     account_begin = reader.model.get_begin
-    uid = reader.model.uid.get
-    assert_equal(uid, 1)
+    id = reader.model.id.get
+    assert_equal(id, 1)
     name = reader.model.name.get
     assert_equal(name, 'Test')
     state = reader.model.state.get
@@ -95,7 +95,7 @@ class TestCreate < Test::Unit::TestCase
 
     o1 = reader.model.orders[0]
     order_begin = o1.get_begin
-    order_id = o1.uid.get
+    order_id = o1.id.get
     assert_equal(order_id, 1)
     order_symbol = o1.symbol.get
     assert_equal(order_symbol, 'EURUSD')
@@ -111,7 +111,7 @@ class TestCreate < Test::Unit::TestCase
 
     o2 = reader.model.orders[1]
     order_begin = o2.get_begin
-    order_id = o2.uid.get
+    order_id = o2.id.get
     assert_equal(order_id, 2)
     order_symbol = o2.symbol.get
     assert_equal(order_symbol, 'EURUSD')
@@ -127,7 +127,7 @@ class TestCreate < Test::Unit::TestCase
 
     o3 = reader.model.orders[2]
     order_begin = o3.get_begin
-    order_id = o3.uid.get
+    order_id = o3.id.get
     assert_equal(order_id, 3)
     order_symbol = o3.symbol.get
     assert_equal(order_symbol, 'EURUSD')

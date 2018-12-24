@@ -20,7 +20,7 @@ import fbe.*
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class Order : Comparable<Any?>
 {
-    var uid: Int = 0
+    var id: Int = 0
     var symbol: String = ""
     var side: OrderSide = OrderSide()
     var type: OrderType = OrderType()
@@ -29,9 +29,9 @@ open class Order : Comparable<Any?>
 
     constructor()
 
-    constructor(uid: Int, symbol: String, side: OrderSide, type: OrderType, price: Double, volume: Double)
+    constructor(id: Int, symbol: String, side: OrderSide, type: OrderType, price: Double, volume: Double)
     {
-        this.uid = uid
+        this.id = id
         this.symbol = symbol
         this.side = side
         this.type = type
@@ -41,7 +41,7 @@ open class Order : Comparable<Any?>
 
     constructor(other: Order)
     {
-        this.uid = other.uid
+        this.id = other.id
         this.symbol = other.symbol
         this.side = other.side
         this.type = other.type
@@ -74,7 +74,7 @@ open class Order : Comparable<Any?>
 
         @Suppress("VARIABLE_WITH_REDUNDANT_INITIALIZER", "CanBeVal", "UnnecessaryVariable")
         var result = 0
-        result = uid.compareTo(obj.uid)
+        result = id.compareTo(obj.id)
         if (result != 0)
             return result
         return result
@@ -91,7 +91,7 @@ open class Order : Comparable<Any?>
         @Suppress("UNUSED_VARIABLE")
         val obj = other as Order? ?: return false
 
-        if (uid != obj.uid)
+        if (id != obj.id)
             return false
         return true
     }
@@ -100,7 +100,7 @@ open class Order : Comparable<Any?>
     {
         @Suppress("CanBeVal", "UnnecessaryVariable")
         var hash = 17
-        hash = hash * 31 + uid.hashCode()
+        hash = hash * 31 + id.hashCode()
         return hash
     }
 
@@ -108,7 +108,7 @@ open class Order : Comparable<Any?>
     {
         val sb = StringBuilder()
         sb.append("Order(")
-        sb.append("uid="); sb.append(uid)
+        sb.append("id="); sb.append(id)
         sb.append(",symbol="); sb.append("\"").append(symbol).append("\"")
         sb.append(",side="); sb.append(side)
         sb.append(",type="); sb.append(type)

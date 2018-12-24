@@ -20,7 +20,7 @@ import fbe.*
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods")
 open class Account : Comparable<Any?>
 {
-    var uid: Int = 0
+    var id: Int = 0
     var name: String = ""
     var state: State = State.fromSet(EnumSet.of(State.initialized.value, State.bad.value))
     var wallet: Balance = Balance()
@@ -29,9 +29,9 @@ open class Account : Comparable<Any?>
 
     constructor()
 
-    constructor(uid: Int, name: String, state: State, wallet: Balance, asset: Balance?, orders: ArrayList<Order>)
+    constructor(id: Int, name: String, state: State, wallet: Balance, asset: Balance?, orders: ArrayList<Order>)
     {
-        this.uid = uid
+        this.id = id
         this.name = name
         this.state = state
         this.wallet = wallet
@@ -41,7 +41,7 @@ open class Account : Comparable<Any?>
 
     constructor(other: Account)
     {
-        this.uid = other.uid
+        this.id = other.id
         this.name = other.name
         this.state = other.state
         this.wallet = other.wallet
@@ -74,7 +74,7 @@ open class Account : Comparable<Any?>
 
         @Suppress("VARIABLE_WITH_REDUNDANT_INITIALIZER", "CanBeVal", "UnnecessaryVariable")
         var result = 0
-        result = uid.compareTo(obj.uid)
+        result = id.compareTo(obj.id)
         if (result != 0)
             return result
         return result
@@ -91,7 +91,7 @@ open class Account : Comparable<Any?>
         @Suppress("UNUSED_VARIABLE")
         val obj = other as Account? ?: return false
 
-        if (uid != obj.uid)
+        if (id != obj.id)
             return false
         return true
     }
@@ -100,7 +100,7 @@ open class Account : Comparable<Any?>
     {
         @Suppress("CanBeVal", "UnnecessaryVariable")
         var hash = 17
-        hash = hash * 31 + uid.hashCode()
+        hash = hash * 31 + id.hashCode()
         return hash
     }
 
@@ -108,7 +108,7 @@ open class Account : Comparable<Any?>
     {
         val sb = StringBuilder()
         sb.append("Account(")
-        sb.append("uid="); sb.append(uid)
+        sb.append("id="); sb.append(id)
         sb.append(",name="); sb.append("\"").append(name).append("\"")
         sb.append(",state="); sb.append(state)
         sb.append(",wallet="); sb.append(wallet)

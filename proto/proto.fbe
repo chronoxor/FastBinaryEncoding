@@ -23,7 +23,7 @@ enum OrderType : byte
 // Order declaration
 struct Order(1)
 {
-    [key] int32 uid;
+    [key] int32 id;
     string symbol;
     OrderSide side;
     OrderType type;
@@ -53,7 +53,7 @@ flags State : byte
 // Account declaration
 struct Account(3)
 {
-    [key] int32 uid;
+    [key] int32 id;
     string name;
     State state = State.initialized | State.bad;
     Balance wallet;

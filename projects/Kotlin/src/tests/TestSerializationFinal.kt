@@ -36,7 +36,7 @@ class TestSerializationFinal
         assertEquals(deserialized, reader.buffer.size)
         reader.next(deserialized)
 
-        assertEquals(account2.uid, 1)
+        assertEquals(account2.id, 1)
         assertEquals(account2.name, "Test")
         assertTrue(account2.state.hasFlags(proto.State.good))
         assertEquals(account2.wallet.currency, "USD")
@@ -45,19 +45,19 @@ class TestSerializationFinal
         assertEquals(account2.asset!!.currency, "EUR")
         assertEquals(account2.asset!!.amount, 100.0)
         assertEquals(account2.orders.size, 3)
-        assertEquals(account2.orders[0].uid, 1)
+        assertEquals(account2.orders[0].id, 1)
         assertEquals(account2.orders[0].symbol, "EURUSD")
         assertEquals(account2.orders[0].side, proto.OrderSide.buy)
         assertEquals(account2.orders[0].type, proto.OrderType.market)
         assertEquals(account2.orders[0].price, 1.23456)
         assertEquals(account2.orders[0].volume, 1000.0)
-        assertEquals(account2.orders[1].uid, 2)
+        assertEquals(account2.orders[1].id, 2)
         assertEquals(account2.orders[1].symbol, "EURUSD")
         assertEquals(account2.orders[1].side, proto.OrderSide.sell)
         assertEquals(account2.orders[1].type, proto.OrderType.limit)
         assertEquals(account2.orders[1].price, 1.0)
         assertEquals(account2.orders[1].volume, 100.0)
-        assertEquals(account2.orders[2].uid, 3)
+        assertEquals(account2.orders[2].id, 3)
         assertEquals(account2.orders[2].symbol, "EURUSD")
         assertEquals(account2.orders[2].side, proto.OrderSide.buy)
         assertEquals(account2.orders[2].type, proto.OrderType.stop)
@@ -1040,10 +1040,10 @@ class TestSerializationFinal
         struct1.f3.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
         struct1.f3.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value, test.FlagsSimple.FLAG_VALUE_3.value)))
         val s1 = test.StructSimple()
-        s1.uid = 48
+        s1.id = 48
         struct1.f4.add(s1)
         val s2 = test.StructSimple()
-        s2.uid = 65
+        s2.id = 65
         struct1.f4.add(s2)
 
         // Serialize the struct to the FBE stream
@@ -1104,10 +1104,10 @@ class TestSerializationFinal
         struct1.f8[10] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value))
         struct1.f8[20] = null
         val s1 = test.StructSimple()
-        s1.uid = 48
+        s1.id = 48
         struct1.f9[10] = s1
         val s2 = test.StructSimple()
-        s2.uid = 65
+        s2.id = 65
         struct1.f9[20] = s2
         struct1.f10[10] = s1
         struct1.f10[20] = null
@@ -1158,10 +1158,10 @@ class TestSerializationFinal
         assertEquals(struct2.f8[10], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
         assertEquals(struct2.f8[20], null)
         assertEquals(struct2.f9.size, 2)
-        assertEquals(struct2.f9[10]!!.uid, 48)
-        assertEquals(struct2.f9[20]!!.uid, 65)
+        assertEquals(struct2.f9[10]!!.id, 48)
+        assertEquals(struct2.f9[20]!!.id, 65)
         assertEquals(struct2.f10.size, 2)
-        assertEquals(struct2.f10[10]!!.uid, 48)
+        assertEquals(struct2.f10[10]!!.id, 48)
         assertEquals(struct2.f10[20], null)
     }
 
@@ -1187,10 +1187,10 @@ class TestSerializationFinal
         struct1.f8["10"] = test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value))
         struct1.f8["20"] = null
         val s1 = test.StructSimple()
-        s1.uid = 48
+        s1.id = 48
         struct1.f9["10"] = s1
         val s2 = test.StructSimple()
-        s2.uid = 65
+        s2.id = 65
         struct1.f9["20"] = s2
         struct1.f10["10"] = s1
         struct1.f10["20"] = null
@@ -1241,10 +1241,10 @@ class TestSerializationFinal
         assertEquals(struct2.f8["10"], test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.value, test.FlagsSimple.FLAG_VALUE_2.value)))
         assertEquals(struct2.f8["20"], null)
         assertEquals(struct2.f9.size, 2)
-        assertEquals(struct2.f9["10"]!!.uid, 48)
-        assertEquals(struct2.f9["20"]!!.uid, 65)
+        assertEquals(struct2.f9["10"]!!.id, 48)
+        assertEquals(struct2.f9["20"]!!.id, 65)
         assertEquals(struct2.f10.size, 2)
-        assertEquals(struct2.f10["10"]!!.uid, 48)
+        assertEquals(struct2.f10["10"]!!.id, 48)
         assertEquals(struct2.f10["20"], null)
     }
 
@@ -1254,10 +1254,10 @@ class TestSerializationFinal
         // Create a new struct
         val struct1 = test.StructHashEx()
         val s1 = test.StructSimple()
-        s1.uid = 48
+        s1.id = 48
         struct1.f1[s1] = test.StructNested()
         val s2 = test.StructSimple()
-        s2.uid = 65
+        s2.id = 65
         struct1.f1[s2] = test.StructNested()
         struct1.f2[s1] = test.StructNested()
         struct1.f2[s2] = null

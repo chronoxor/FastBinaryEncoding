@@ -108,10 +108,10 @@ public class Print
         structSet.f3.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
         structSet.f3.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum())));
         var s1 = new test.StructSimple();
-        s1.uid = 48;
+        s1.id = 48;
         structSet.f4.add(s1);
         var s2 = new test.StructSimple();
-        s2.uid = 65;
+        s2.id = 65;
         structSet.f4.add(s2);
         System.out.println(structSet);
         System.out.println();
@@ -134,9 +134,9 @@ public class Print
         structMap.f7.put(20, test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum())));
         structMap.f8.put(10, test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
         structMap.f8.put(20, null);
-        s1.uid = 48;
+        s1.id = 48;
         structMap.f9.put(10, s1);
-        s2.uid = 65;
+        s2.id = 65;
         structMap.f9.put(20, s2);
         structMap.f10.put(10, s1);
         structMap.f10.put(20, null);
@@ -161,9 +161,9 @@ public class Print
         structHash.f7.put("20", test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum())));
         structHash.f8.put("10", test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
         structHash.f8.put("20", null);
-        s1.uid = 48;
+        s1.id = 48;
         structHash.f9.put("10", s1);
-        s2.uid = 65;
+        s2.id = 65;
         structHash.f9.put("20", s2);
         structHash.f10.put("10", s1);
         structHash.f10.put("20", null);
@@ -172,9 +172,9 @@ public class Print
 
         // Print extended hash struct
         var structHashEx = new test.StructHashEx();
-        s1.uid = 48;
+        s1.id = 48;
         structHashEx.f1.put(s1, new test.StructNested());
-        s2.uid = 65;
+        s2.id = 65;
         structHashEx.f1.put(s2, new test.StructNested());
         structHashEx.f2.put(s1, new test.StructNested());
         structHashEx.f2.put(s2, null);

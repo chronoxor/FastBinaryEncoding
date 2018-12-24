@@ -20,7 +20,7 @@ import test.*;
 // Fast Binary Encoding StructSimple final model
 public final class FinalModelStructSimple extends FinalModel
 {
-    public final FinalModelInt32 uid;
+    public final FinalModelInt32 id;
     public final FinalModelBoolean f1;
     public final FinalModelBoolean f2;
     public final FinalModelByte f3;
@@ -69,7 +69,7 @@ public final class FinalModelStructSimple extends FinalModel
     public FinalModelStructSimple(Buffer buffer, long offset)
     {
         super(buffer, offset);
-        uid = new FinalModelInt32(buffer, 0);
+        id = new FinalModelInt32(buffer, 0);
         f1 = new FinalModelBoolean(buffer, 0);
         f2 = new FinalModelBoolean(buffer, 0);
         f3 = new FinalModelByte(buffer, 0);
@@ -120,7 +120,7 @@ public final class FinalModelStructSimple extends FinalModel
     public long fbeAllocationSize(StructSimple fbeValue)
     {
         long fbeResult = 0
-            + uid.fbeAllocationSize(fbeValue.uid)
+            + id.fbeAllocationSize(fbeValue.id)
             + f1.fbeAllocationSize(fbeValue.f1)
             + f2.fbeAllocationSize(fbeValue.f2)
             + f3.fbeAllocationSize(fbeValue.f3)
@@ -189,8 +189,8 @@ public final class FinalModelStructSimple extends FinalModel
         long fbeCurrentOffset = 0;
         long fbeFieldSize = 0;
 
-        uid.fbeOffset(fbeCurrentOffset);
-        fbeFieldSize = uid.verify();
+        id.fbeOffset(fbeCurrentOffset);
+        fbeFieldSize = id.verify();
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE;
         fbeCurrentOffset += fbeFieldSize;
@@ -479,8 +479,8 @@ public final class FinalModelStructSimple extends FinalModel
         long fbeCurrentSize = 0;
         var fbeFieldSize = new Size(0);
 
-        uid.fbeOffset(fbeCurrentOffset);
-        fbeValue.uid = uid.get(fbeFieldSize);
+        id.fbeOffset(fbeCurrentOffset);
+        fbeValue.id = id.get(fbeFieldSize);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 
@@ -723,8 +723,8 @@ public final class FinalModelStructSimple extends FinalModel
         long fbeCurrentSize = 0;
         var fbeFieldSize = new Size(0);
 
-        uid.fbeOffset(fbeCurrentOffset);
-        fbeFieldSize.value = uid.set(fbeValue.uid);
+        id.fbeOffset(fbeCurrentOffset);
+        fbeFieldSize.value = id.set(fbeValue.id);
         fbeCurrentOffset += fbeFieldSize.value;
         fbeCurrentSize += fbeFieldSize.value;
 

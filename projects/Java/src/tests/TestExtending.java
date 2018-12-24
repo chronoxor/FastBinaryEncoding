@@ -38,7 +38,7 @@ public class TestExtending
         reader.next(deserialized);
         Assert.assertEquals(reader.model.fbeOffset(), (4 + reader.getBuffer().getSize()));
 
-        Assert.assertEquals(account2.uid, 1);
+        Assert.assertEquals(account2.id, 1);
         Assert.assertEquals(account2.name, "Test");
         Assert.assertEquals(account2.state, protoex.StateEx.good);
         Assert.assertEquals(account2.wallet.currency, "USD");
@@ -49,7 +49,7 @@ public class TestExtending
         Assert.assertEquals(account2.asset.amount, 100.0);
         Assert.assertEquals(account2.asset.locked, 0.0);
         Assert.assertEquals(account2.orders.size(), 3);
-        Assert.assertEquals(account2.orders.get(0).uid, 1);
+        Assert.assertEquals(account2.orders.get(0).id, 1);
         Assert.assertEquals(account2.orders.get(0).symbol, "EURUSD");
         Assert.assertEquals(account2.orders.get(0).side, protoex.OrderSide.buy);
         Assert.assertEquals(account2.orders.get(0).type, protoex.OrderType.market);
@@ -57,7 +57,7 @@ public class TestExtending
         Assert.assertEquals(account2.orders.get(0).volume, 1000.0);
         Assert.assertEquals(account2.orders.get(0).tp, 10.0);
         Assert.assertEquals(account2.orders.get(0).sl, -10.0);
-        Assert.assertEquals(account2.orders.get(1).uid, 2);
+        Assert.assertEquals(account2.orders.get(1).id, 2);
         Assert.assertEquals(account2.orders.get(1).symbol, "EURUSD");
         Assert.assertEquals(account2.orders.get(1).side, protoex.OrderSide.sell);
         Assert.assertEquals(account2.orders.get(1).type, protoex.OrderType.limit);
@@ -65,7 +65,7 @@ public class TestExtending
         Assert.assertEquals(account2.orders.get(1).volume, 100.0);
         Assert.assertEquals(account2.orders.get(1).tp, 10.0);
         Assert.assertEquals(account2.orders.get(1).sl, -10.0);
-        Assert.assertEquals(account2.orders.get(2).uid, 3);
+        Assert.assertEquals(account2.orders.get(2).id, 3);
         Assert.assertEquals(account2.orders.get(2).symbol, "EURUSD");
         Assert.assertEquals(account2.orders.get(2).side, protoex.OrderSide.buy);
         Assert.assertEquals(account2.orders.get(2).type, protoex.OrderType.stop);
@@ -80,7 +80,7 @@ public class TestExtending
     {
         // Create a new account with some orders
         var account1 = new protoex.Account();
-        account1.uid = 1;
+        account1.id = 1;
         account1.name = "Test";
         account1.state = protoex.StateEx.fromSet(EnumSet.of(protoex.StateEx.good.getEnum(), protoex.StateEx.happy.getEnum()));
         account1.wallet.currency = "USD";
@@ -117,7 +117,7 @@ public class TestExtending
         reader.next(deserialized);
         Assert.assertEquals(reader.model.fbeOffset(), (4 + reader.getBuffer().getSize()));
 
-        Assert.assertEquals(account2.uid, 1);
+        Assert.assertEquals(account2.id, 1);
         Assert.assertEquals(account2.name, "Test");
         Assert.assertTrue(account2.state.hasFlags(proto.State.good));
         Assert.assertEquals(account2.wallet.currency, "USD");
@@ -126,19 +126,19 @@ public class TestExtending
         Assert.assertEquals(account2.asset.currency, "EUR");
         Assert.assertEquals(account2.asset.amount, 100.0);
         Assert.assertEquals(account2.orders.size(), 3);
-        Assert.assertEquals(account2.orders.get(0).uid, 1);
+        Assert.assertEquals(account2.orders.get(0).id, 1);
         Assert.assertEquals(account2.orders.get(0).symbol, "EURUSD");
         Assert.assertEquals(account2.orders.get(0).side, proto.OrderSide.buy);
         Assert.assertEquals(account2.orders.get(0).type, proto.OrderType.market);
         Assert.assertEquals(account2.orders.get(0).price, 1.23456);
         Assert.assertEquals(account2.orders.get(0).volume, 1000.0);
-        Assert.assertEquals(account2.orders.get(1).uid, 2);
+        Assert.assertEquals(account2.orders.get(1).id, 2);
         Assert.assertEquals(account2.orders.get(1).symbol, "EURUSD");
         Assert.assertEquals(account2.orders.get(1).side, proto.OrderSide.sell);
         Assert.assertEquals(account2.orders.get(1).type, proto.OrderType.limit);
         Assert.assertEquals(account2.orders.get(1).price, 1.0);
         Assert.assertEquals(account2.orders.get(1).volume, 100.0);
-        Assert.assertEquals(account2.orders.get(2).uid, 3);
+        Assert.assertEquals(account2.orders.get(2).id, 3);
         Assert.assertEquals(account2.orders.get(2).symbol, "EURUSD");
         Assert.assertNotEquals(account2.orders.get(2).side, proto.OrderSide.buy);
         Assert.assertNotEquals(account2.orders.get(2).type, proto.OrderType.market);

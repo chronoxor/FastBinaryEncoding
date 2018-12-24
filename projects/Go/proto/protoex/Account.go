@@ -21,22 +21,22 @@ var _ = strconv.FormatInt
 
 // Account key
 type AccountKey struct {
-    Uid int32
+    Id int32
 }
 
 // Convert Account flags key to string
 func (k *AccountKey) String() string {
     var sb strings.Builder
     sb.WriteString("AccountKey(")
-    sb.WriteString("uid=")
-    sb.WriteString(strconv.FormatInt(int64(k.Uid), 10))
+    sb.WriteString("id=")
+    sb.WriteString(strconv.FormatInt(int64(k.Id), 10))
     sb.WriteString(")")
     return sb.String()
 }
 
 // Account struct
 type Account struct {
-    Uid int32 `json:"uid"`
+    Id int32 `json:"id"`
     Name string `json:"name"`
     State StateEx `json:"state"`
     Wallet Balance `json:"wallet"`
@@ -47,7 +47,7 @@ type Account struct {
 // Create a new Account struct
 func NewAccount() *Account {
     return &Account{
-        Uid: 0,
+        Id: 0,
         Name: "",
         State: StateEx_initialized | StateEx_bad | StateEx_sad,
         Wallet: *NewBalance(),
@@ -57,8 +57,8 @@ func NewAccount() *Account {
 }
 
 // Create a new Account struct from the given field values
-func NewAccountFromFieldValues(Uid int32, Name string, State StateEx, Wallet Balance, Asset *Balance, Orders []Order) *Account {
-    return &Account{Uid, Name, State, Wallet, Asset, Orders}
+func NewAccountFromFieldValues(Id int32, Name string, State StateEx, Wallet Balance, Asset *Balance, Orders []Order) *Account {
+    return &Account{Id, Name, State, Wallet, Asset, Orders}
 }
 
 // Create a new Account struct from JSON
@@ -92,7 +92,7 @@ func (s *Account) Clone() *Account {
 // Get the struct key
 func (s *Account) Key() AccountKey {
     return AccountKey{
-        Uid: s.Uid,
+        Id: s.Id,
     }
 }
 
@@ -105,8 +105,8 @@ func (s *Account) Optional() *Account {
 func (s *Account) String() string {
     var sb strings.Builder
     sb.WriteString("Account(")
-    sb.WriteString("uid=")
-    sb.WriteString(strconv.FormatInt(int64(s.Uid), 10))
+    sb.WriteString("id=")
+    sb.WriteString(strconv.FormatInt(int64(s.Id), 10))
     sb.WriteString(",name=")
     sb.WriteString("\"" + s.Name + "\"")
     sb.WriteString(",state=")

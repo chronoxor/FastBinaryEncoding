@@ -22,7 +22,7 @@ import proto.*
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FinalModelOrder(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 {
-    val uid: FinalModelInt32 = FinalModelInt32(buffer, 0)
+    val id: FinalModelInt32 = FinalModelInt32(buffer, 0)
     val symbol: FinalModelString = FinalModelString(buffer, 0)
     val side: FinalModelOrderSide = FinalModelOrderSide(buffer, 0)
     val type: FinalModelOrderType = FinalModelOrderType(buffer, 0)
@@ -31,7 +31,7 @@ class FinalModelOrder(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
 
     // Get the allocation size
     fun fbeAllocationSize(fbeValue: Order): Long = (0
-        + uid.fbeAllocationSize(fbeValue.uid)
+        + id.fbeAllocationSize(fbeValue.id)
         + symbol.fbeAllocationSize(fbeValue.symbol)
         + side.fbeAllocationSize(fbeValue.side)
         + type.fbeAllocationSize(fbeValue.type)
@@ -63,8 +63,8 @@ class FinalModelOrder(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
         @Suppress("VARIABLE_WITH_REDUNDANT_INITIALIZER")
         var fbeFieldSize = 0L
 
-        uid.fbeOffset = fbeCurrentOffset
-        fbeFieldSize = uid.verify()
+        id.fbeOffset = fbeCurrentOffset
+        fbeFieldSize = id.verify()
         if (fbeFieldSize == Long.MAX_VALUE)
             return Long.MAX_VALUE
         fbeCurrentOffset += fbeFieldSize
@@ -118,8 +118,8 @@ class FinalModelOrder(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
         var fbeCurrentSize = 0L
         val fbeFieldSize = Size(0)
 
-        uid.fbeOffset = fbeCurrentOffset
-        fbeValue.uid = uid.get(fbeFieldSize)
+        id.fbeOffset = fbeCurrentOffset
+        fbeValue.id = id.get(fbeFieldSize)
         fbeCurrentOffset += fbeFieldSize.value
         fbeCurrentSize += fbeFieldSize.value
 
@@ -167,8 +167,8 @@ class FinalModelOrder(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
         var fbeCurrentSize = 0L
         val fbeFieldSize = Size(0)
 
-        uid.fbeOffset = fbeCurrentOffset
-        fbeFieldSize.value = uid.set(fbeValue.uid)
+        id.fbeOffset = fbeCurrentOffset
+        fbeFieldSize.value = id.set(fbeValue.id)
         fbeCurrentOffset += fbeFieldSize.value
         fbeCurrentSize += fbeFieldSize.value
 

@@ -19,7 +19,7 @@ import proto.*;
 
 public class StructSimple implements Comparable<Object>
 {
-    public int uid = 0;
+    public int id = 0;
     public boolean f1 = false;
     public boolean f2 = true;
     public byte f3 = (byte)0;
@@ -67,9 +67,9 @@ public class StructSimple implements Comparable<Object>
 
     public StructSimple() {}
 
-    public StructSimple(int uid, boolean f1, boolean f2, byte f3, byte f4, char f5, char f6, char f7, char f8, byte f9, byte f10, byte f11, byte f12, short f13, short f14, short f15, short f16, int f17, int f18, int f19, int f20, long f21, long f22, long f23, long f24, float f25, float f26, double f27, double f28, BigDecimal f29, BigDecimal f30, String f31, String f32, Instant f33, Instant f34, Instant f35, UUID f36, UUID f37, UUID f38, proto.OrderSide f39, proto.OrderType f40, proto.Order f41, proto.Balance f42, proto.State f43, proto.Account f44)
+    public StructSimple(int id, boolean f1, boolean f2, byte f3, byte f4, char f5, char f6, char f7, char f8, byte f9, byte f10, byte f11, byte f12, short f13, short f14, short f15, short f16, int f17, int f18, int f19, int f20, long f21, long f22, long f23, long f24, float f25, float f26, double f27, double f28, BigDecimal f29, BigDecimal f30, String f31, String f32, Instant f33, Instant f34, Instant f35, UUID f36, UUID f37, UUID f38, proto.OrderSide f39, proto.OrderType f40, proto.Order f41, proto.Balance f42, proto.State f43, proto.Account f44)
     {
-        this.uid = uid;
+        this.id = id;
         this.f1 = f1;
         this.f2 = f2;
         this.f3 = f3;
@@ -118,7 +118,7 @@ public class StructSimple implements Comparable<Object>
 
     public StructSimple(StructSimple other)
     {
-        this.uid = other.uid;
+        this.id = other.id;
         this.f1 = other.f1;
         this.f2 = other.f2;
         this.f3 = other.f3;
@@ -189,7 +189,7 @@ public class StructSimple implements Comparable<Object>
         final StructSimple obj = (StructSimple)other;
 
         int result = 0;
-        result = Integer.compare(uid, obj.uid);
+        result = Integer.compare(id, obj.id);
         if (result != 0)
             return result;
         return result;
@@ -206,7 +206,7 @@ public class StructSimple implements Comparable<Object>
 
         final StructSimple obj = (StructSimple)other;
 
-        if (uid != obj.uid)
+        if (id != obj.id)
             return false;
         return true;
     }
@@ -215,7 +215,7 @@ public class StructSimple implements Comparable<Object>
     public int hashCode()
     {
         int hash = 17;
-        hash = hash * 31 + Integer.hashCode(uid);
+        hash = hash * 31 + Integer.hashCode(id);
         return hash;
     }
 
@@ -224,7 +224,7 @@ public class StructSimple implements Comparable<Object>
     {
         var sb = new StringBuilder();
         sb.append("StructSimple(");
-        sb.append("uid="); sb.append(uid);
+        sb.append("id="); sb.append(id);
         sb.append(",f1="); sb.append(f1 ? "true" : "false");
         sb.append(",f2="); sb.append(f2 ? "true" : "false");
         sb.append(",f3="); sb.append(f3);

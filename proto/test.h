@@ -432,7 +432,7 @@ namespace test {
 
 struct StructSimple
 {
-    int32_t uid;
+    int32_t id;
     bool f1;
     bool f2;
     uint8_t f3;
@@ -479,7 +479,7 @@ struct StructSimple
     ::proto::Account f44;
 
     StructSimple()
-        : uid((int32_t)0ll)
+        : id((int32_t)0ll)
         , f1(false)
         , f2(true)
         , f3((uint8_t)0u)
@@ -525,8 +525,8 @@ struct StructSimple
         , f43()
         , f44()
     {}
-    StructSimple(int32_t arg_uid, bool arg_f1, bool arg_f2, uint8_t arg_f3, uint8_t arg_f4, char arg_f5, char arg_f6, wchar_t arg_f7, wchar_t arg_f8, int8_t arg_f9, int8_t arg_f10, uint8_t arg_f11, uint8_t arg_f12, int16_t arg_f13, int16_t arg_f14, uint16_t arg_f15, uint16_t arg_f16, int32_t arg_f17, int32_t arg_f18, uint32_t arg_f19, uint32_t arg_f20, int64_t arg_f21, int64_t arg_f22, uint64_t arg_f23, uint64_t arg_f24, float arg_f25, float arg_f26, double arg_f27, double arg_f28, const FBE::decimal_t& arg_f29, const FBE::decimal_t& arg_f30, const std::string& arg_f31, const std::string& arg_f32, uint64_t arg_f33, uint64_t arg_f34, uint64_t arg_f35, const FBE::uuid_t& arg_f36, const FBE::uuid_t& arg_f37, const FBE::uuid_t& arg_f38, const ::proto::OrderSide& arg_f39, const ::proto::OrderType& arg_f40, const ::proto::Order& arg_f41, const ::proto::Balance& arg_f42, const ::proto::State& arg_f43, const ::proto::Account& arg_f44)
-        : uid(arg_uid)
+    StructSimple(int32_t arg_id, bool arg_f1, bool arg_f2, uint8_t arg_f3, uint8_t arg_f4, char arg_f5, char arg_f6, wchar_t arg_f7, wchar_t arg_f8, int8_t arg_f9, int8_t arg_f10, uint8_t arg_f11, uint8_t arg_f12, int16_t arg_f13, int16_t arg_f14, uint16_t arg_f15, uint16_t arg_f16, int32_t arg_f17, int32_t arg_f18, uint32_t arg_f19, uint32_t arg_f20, int64_t arg_f21, int64_t arg_f22, uint64_t arg_f23, uint64_t arg_f24, float arg_f25, float arg_f26, double arg_f27, double arg_f28, const FBE::decimal_t& arg_f29, const FBE::decimal_t& arg_f30, const std::string& arg_f31, const std::string& arg_f32, uint64_t arg_f33, uint64_t arg_f34, uint64_t arg_f35, const FBE::uuid_t& arg_f36, const FBE::uuid_t& arg_f37, const FBE::uuid_t& arg_f38, const ::proto::OrderSide& arg_f39, const ::proto::OrderType& arg_f40, const ::proto::Order& arg_f41, const ::proto::Balance& arg_f42, const ::proto::State& arg_f43, const ::proto::Account& arg_f44)
+        : id(arg_id)
         , f1(arg_f1)
         , f2(arg_f2)
         , f3(arg_f3)
@@ -582,15 +582,15 @@ struct StructSimple
     bool operator==(const StructSimple& other) const noexcept
     {
         return (
-            (uid == other.uid)
+            (id == other.id)
             );
     }
     bool operator!=(const StructSimple& other) const noexcept { return !operator==(other); }
     bool operator<(const StructSimple& other) const noexcept
     {
-        if (uid < other.uid)
+        if (id < other.id)
             return true;
-        if (other.uid < uid)
+        if (other.id < id)
             return false;
         return false;
     }
@@ -611,7 +611,7 @@ struct StructSimple
     void swap(StructSimple& other) noexcept
     {
         using std::swap;
-        swap(uid, other.uid);
+        swap(id, other.id);
         swap(f1, other.f1);
         swap(f2, other.f2);
         swap(f3, other.f3);
@@ -668,7 +668,7 @@ template <class TOutputStream>
 inline TOutputStream& operator<<(TOutputStream& stream, const StructSimple& value)
 {
     stream << "StructSimple(";
-    stream << "uid="; stream << value.uid;
+    stream << "id="; stream << value.id;
     stream << ",f1="; stream << (value.f1 ? "true" : "false");
     stream << ",f2="; stream << (value.f2 ? "true" : "false");
     stream << ",f3="; stream << (int)value.f3;
@@ -730,7 +730,7 @@ struct hash<test::StructSimple>
     result_type operator () (const argument_type& value) const
     {
         result_type result = 17;
-        result = result * 31 + std::hash<decltype(value.uid)>()(value.uid);
+        result = result * 31 + std::hash<decltype(value.id)>()(value.id);
         return result;
     }
 };
@@ -749,7 +749,7 @@ struct ValueWriter<TOutputStream, ::test::StructSimple>
         if (scope)
             if (!writer.StartObject())
                 return false;
-        if (!FBE::JSON::to_json_key(writer, "uid") || !FBE::JSON::to_json(writer, value.uid, true))
+        if (!FBE::JSON::to_json_key(writer, "id") || !FBE::JSON::to_json(writer, value.id, true))
             return false;
         if (!FBE::JSON::to_json_key(writer, "f1") || !FBE::JSON::to_json(writer, value.f1, true))
             return false;
@@ -853,7 +853,7 @@ struct ValueReader<TJson, ::test::StructSimple>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, value.uid, "uid"))
+        if (!FBE::JSON::from_json(json, value.id, "id"))
             return false;
         if (!FBE::JSON::from_json(json, value.f1, "f1"))
             return false;
@@ -959,8 +959,8 @@ class FieldModel<TBuffer, ::test::StructSimple>
 {
 public:
     FieldModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset)
-        , uid(buffer, 4 + 4)
-        , f1(buffer, uid.fbe_offset() + uid.fbe_size())
+        , id(buffer, 4 + 4)
+        , f1(buffer, id.fbe_offset() + id.fbe_size())
         , f2(buffer, f1.fbe_offset() + f1.fbe_size())
         , f3(buffer, f2.fbe_offset() + f2.fbe_size())
         , f4(buffer, f3.fbe_offset() + f3.fbe_size())
@@ -1014,7 +1014,7 @@ public:
     size_t fbe_body() const noexcept
     {
         size_t fbe_result = 4 + 4
-            + uid.fbe_size()
+            + id.fbe_size()
             + f1.fbe_size()
             + f2.fbe_size()
             + f3.fbe_size()
@@ -1075,7 +1075,7 @@ public:
         _buffer.shift(fbe_struct_offset);
 
         size_t fbe_result = fbe_body()
-            + uid.fbe_extra()
+            + id.fbe_extra()
             + f1.fbe_extra()
             + f2.fbe_extra()
             + f3.fbe_extra()
@@ -1163,11 +1163,11 @@ public:
     {
         size_t fbe_current_size = 4 + 4;
 
-        if ((fbe_current_size + uid.fbe_size()) > fbe_struct_size)
+        if ((fbe_current_size + id.fbe_size()) > fbe_struct_size)
             return true;
-        if (!uid.verify())
+        if (!id.verify())
             return false;
-        fbe_current_size += uid.fbe_size();
+        fbe_current_size += id.fbe_size();
 
         if ((fbe_current_size + f1.fbe_size()) > fbe_struct_size)
             return true;
@@ -1479,11 +1479,11 @@ public:
     {
         size_t fbe_current_size = 4 + 4;
 
-        if ((fbe_current_size + uid.fbe_size()) <= fbe_struct_size)
-            uid.get(fbe_value.uid);
+        if ((fbe_current_size + id.fbe_size()) <= fbe_struct_size)
+            id.get(fbe_value.id);
         else
-            fbe_value.uid = (int32_t)0ll;
-        fbe_current_size += uid.fbe_size();
+            fbe_value.id = (int32_t)0ll;
+        fbe_current_size += id.fbe_size();
 
         if ((fbe_current_size + f1.fbe_size()) <= fbe_struct_size)
             f1.get(fbe_value.f1);
@@ -1791,7 +1791,7 @@ public:
     // Set the struct fields values
     void set_fields(const ::test::StructSimple& fbe_value) noexcept
     {
-        uid.set(fbe_value.uid);
+        id.set(fbe_value.id);
         f1.set(fbe_value.f1);
         f2.set(fbe_value.f2);
         f3.set(fbe_value.f3);
@@ -1843,7 +1843,7 @@ private:
     size_t _offset;
 
 public:
-    FieldModel<TBuffer, int32_t> uid;
+    FieldModel<TBuffer, int32_t> id;
     FieldModel<TBuffer, bool> f1;
     FieldModel<TBuffer, bool> f2;
     FieldModel<TBuffer, uint8_t> f3;
@@ -1982,7 +1982,7 @@ class FinalModel<TBuffer, ::test::StructSimple>
 {
 public:
     FinalModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset)
-        , uid(buffer, 0)
+        , id(buffer, 0)
         , f1(buffer, 0)
         , f2(buffer, 0)
         , f3(buffer, 0)
@@ -2033,7 +2033,7 @@ public:
     size_t fbe_allocation_size(const ::test::StructSimple& fbe_value) const noexcept
     {
         size_t fbe_result = 0
-            + uid.fbe_allocation_size(fbe_value.uid)
+            + id.fbe_allocation_size(fbe_value.id)
             + f1.fbe_allocation_size(fbe_value.f1)
             + f2.fbe_allocation_size(fbe_value.f2)
             + f3.fbe_allocation_size(fbe_value.f3)
@@ -2109,8 +2109,8 @@ public:
         size_t fbe_current_offset = 0;
         size_t fbe_field_size;
 
-        uid.fbe_offset(fbe_current_offset);
-        fbe_field_size = uid.verify();
+        id.fbe_offset(fbe_current_offset);
+        fbe_field_size = id.verify();
         if (fbe_field_size == std::numeric_limits<std::size_t>::max())
             return std::numeric_limits<std::size_t>::max();
         fbe_current_offset += fbe_field_size;
@@ -2398,8 +2398,8 @@ public:
         size_t fbe_current_size = 0;
         size_t fbe_field_size;
 
-        uid.fbe_offset(fbe_current_offset);
-        fbe_field_size = uid.get(fbe_value.uid);
+        id.fbe_offset(fbe_current_offset);
+        fbe_field_size = id.get(fbe_value.id);
         fbe_current_offset += fbe_field_size;
         fbe_current_size += fbe_field_size;
 
@@ -2642,8 +2642,8 @@ public:
         size_t fbe_current_size = 0;
         size_t fbe_field_size;
 
-        uid.fbe_offset(fbe_current_offset);
-        fbe_field_size = uid.set(fbe_value.uid);
+        id.fbe_offset(fbe_current_offset);
+        fbe_field_size = id.set(fbe_value.id);
         fbe_current_offset += fbe_field_size;
         fbe_current_size += fbe_field_size;
 
@@ -2875,7 +2875,7 @@ private:
     mutable size_t _offset;
 
 public:
-    FinalModel<TBuffer, int32_t> uid;
+    FinalModel<TBuffer, int32_t> id;
     FinalModel<TBuffer, bool> f1;
     FinalModel<TBuffer, bool> f2;
     FinalModel<TBuffer, uint8_t> f3;

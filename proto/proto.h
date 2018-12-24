@@ -290,7 +290,7 @@ namespace proto {
 
 struct Order
 {
-    int32_t uid;
+    int32_t id;
     std::string symbol;
     ::proto::OrderSide side;
     ::proto::OrderType type;
@@ -298,15 +298,15 @@ struct Order
     double volume;
 
     Order()
-        : uid((int32_t)0ll)
+        : id((int32_t)0ll)
         , symbol()
         , side()
         , type()
         , price((double)0.0)
         , volume((double)0.0)
     {}
-    Order(int32_t arg_uid, const std::string& arg_symbol, const ::proto::OrderSide& arg_side, const ::proto::OrderType& arg_type, double arg_price, double arg_volume)
-        : uid(arg_uid)
+    Order(int32_t arg_id, const std::string& arg_symbol, const ::proto::OrderSide& arg_side, const ::proto::OrderType& arg_type, double arg_price, double arg_volume)
+        : id(arg_id)
         , symbol(arg_symbol)
         , side(arg_side)
         , type(arg_type)
@@ -323,15 +323,15 @@ struct Order
     bool operator==(const Order& other) const noexcept
     {
         return (
-            (uid == other.uid)
+            (id == other.id)
             );
     }
     bool operator!=(const Order& other) const noexcept { return !operator==(other); }
     bool operator<(const Order& other) const noexcept
     {
-        if (uid < other.uid)
+        if (id < other.id)
             return true;
-        if (other.uid < uid)
+        if (other.id < id)
             return false;
         return false;
     }
@@ -352,7 +352,7 @@ struct Order
     void swap(Order& other) noexcept
     {
         using std::swap;
-        swap(uid, other.uid);
+        swap(id, other.id);
         swap(symbol, other.symbol);
         swap(side, other.side);
         swap(type, other.type);
@@ -370,7 +370,7 @@ template <class TOutputStream>
 inline TOutputStream& operator<<(TOutputStream& stream, const Order& value)
 {
     stream << "Order(";
-    stream << "uid="; stream << value.uid;
+    stream << "id="; stream << value.id;
     stream << ",symbol="; stream << "\"" << value.symbol << "\"";
     stream << ",side="; stream << value.side;
     stream << ",type="; stream << value.type;
@@ -393,7 +393,7 @@ struct hash<proto::Order>
     result_type operator () (const argument_type& value) const
     {
         result_type result = 17;
-        result = result * 31 + std::hash<decltype(value.uid)>()(value.uid);
+        result = result * 31 + std::hash<decltype(value.id)>()(value.id);
         return result;
     }
 };
@@ -412,7 +412,7 @@ struct ValueWriter<TOutputStream, ::proto::Order>
         if (scope)
             if (!writer.StartObject())
                 return false;
-        if (!FBE::JSON::to_json_key(writer, "uid") || !FBE::JSON::to_json(writer, value.uid, true))
+        if (!FBE::JSON::to_json_key(writer, "id") || !FBE::JSON::to_json(writer, value.id, true))
             return false;
         if (!FBE::JSON::to_json_key(writer, "symbol") || !FBE::JSON::to_json(writer, value.symbol, true))
             return false;
@@ -438,7 +438,7 @@ struct ValueReader<TJson, ::proto::Order>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, value.uid, "uid"))
+        if (!FBE::JSON::from_json(json, value.id, "id"))
             return false;
         if (!FBE::JSON::from_json(json, value.symbol, "symbol"))
             return false;
@@ -466,8 +466,8 @@ class FieldModel<TBuffer, ::proto::Order>
 {
 public:
     FieldModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset)
-        , uid(buffer, 4 + 4)
-        , symbol(buffer, uid.fbe_offset() + uid.fbe_size())
+        , id(buffer, 4 + 4)
+        , symbol(buffer, id.fbe_offset() + id.fbe_size())
         , side(buffer, symbol.fbe_offset() + symbol.fbe_size())
         , type(buffer, side.fbe_offset() + side.fbe_size())
         , price(buffer, type.fbe_offset() + type.fbe_size())
@@ -482,7 +482,7 @@ public:
     size_t fbe_body() const noexcept
     {
         size_t fbe_result = 4 + 4
-            + uid.fbe_size()
+            + id.fbe_size()
             + symbol.fbe_size()
             + side.fbe_size()
             + type.fbe_size()
@@ -504,7 +504,7 @@ public:
         _buffer.shift(fbe_struct_offset);
 
         size_t fbe_result = fbe_body()
-            + uid.fbe_extra()
+            + id.fbe_extra()
             + symbol.fbe_extra()
             + side.fbe_extra()
             + type.fbe_extra()
@@ -553,11 +553,11 @@ public:
     {
         size_t fbe_current_size = 4 + 4;
 
-        if ((fbe_current_size + uid.fbe_size()) > fbe_struct_size)
+        if ((fbe_current_size + id.fbe_size()) > fbe_struct_size)
             return true;
-        if (!uid.verify())
+        if (!id.verify())
             return false;
-        fbe_current_size += uid.fbe_size();
+        fbe_current_size += id.fbe_size();
 
         if ((fbe_current_size + symbol.fbe_size()) > fbe_struct_size)
             return true;
@@ -635,11 +635,11 @@ public:
     {
         size_t fbe_current_size = 4 + 4;
 
-        if ((fbe_current_size + uid.fbe_size()) <= fbe_struct_size)
-            uid.get(fbe_value.uid);
+        if ((fbe_current_size + id.fbe_size()) <= fbe_struct_size)
+            id.get(fbe_value.id);
         else
-            fbe_value.uid = (int32_t)0ll;
-        fbe_current_size += uid.fbe_size();
+            fbe_value.id = (int32_t)0ll;
+        fbe_current_size += id.fbe_size();
 
         if ((fbe_current_size + symbol.fbe_size()) <= fbe_struct_size)
             symbol.get(fbe_value.symbol);
@@ -713,7 +713,7 @@ public:
     // Set the struct fields values
     void set_fields(const ::proto::Order& fbe_value) noexcept
     {
-        uid.set(fbe_value.uid);
+        id.set(fbe_value.id);
         symbol.set(fbe_value.symbol);
         side.set(fbe_value.side);
         type.set(fbe_value.type);
@@ -726,7 +726,7 @@ private:
     size_t _offset;
 
 public:
-    FieldModel<TBuffer, int32_t> uid;
+    FieldModel<TBuffer, int32_t> id;
     FieldModel<TBuffer, std::string> symbol;
     FieldModel<TBuffer, ::proto::OrderSide> side;
     FieldModel<TBuffer, ::proto::OrderType> type;
@@ -826,7 +826,7 @@ class FinalModel<TBuffer, ::proto::Order>
 {
 public:
     FinalModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset)
-        , uid(buffer, 0)
+        , id(buffer, 0)
         , symbol(buffer, 0)
         , side(buffer, 0)
         , type(buffer, 0)
@@ -838,7 +838,7 @@ public:
     size_t fbe_allocation_size(const ::proto::Order& fbe_value) const noexcept
     {
         size_t fbe_result = 0
-            + uid.fbe_allocation_size(fbe_value.uid)
+            + id.fbe_allocation_size(fbe_value.id)
             + symbol.fbe_allocation_size(fbe_value.symbol)
             + side.fbe_allocation_size(fbe_value.side)
             + type.fbe_allocation_size(fbe_value.type)
@@ -875,8 +875,8 @@ public:
         size_t fbe_current_offset = 0;
         size_t fbe_field_size;
 
-        uid.fbe_offset(fbe_current_offset);
-        fbe_field_size = uid.verify();
+        id.fbe_offset(fbe_current_offset);
+        fbe_field_size = id.verify();
         if (fbe_field_size == std::numeric_limits<std::size_t>::max())
             return std::numeric_limits<std::size_t>::max();
         fbe_current_offset += fbe_field_size;
@@ -930,8 +930,8 @@ public:
         size_t fbe_current_size = 0;
         size_t fbe_field_size;
 
-        uid.fbe_offset(fbe_current_offset);
-        fbe_field_size = uid.get(fbe_value.uid);
+        id.fbe_offset(fbe_current_offset);
+        fbe_field_size = id.get(fbe_value.id);
         fbe_current_offset += fbe_field_size;
         fbe_current_size += fbe_field_size;
 
@@ -979,8 +979,8 @@ public:
         size_t fbe_current_size = 0;
         size_t fbe_field_size;
 
-        uid.fbe_offset(fbe_current_offset);
-        fbe_field_size = uid.set(fbe_value.uid);
+        id.fbe_offset(fbe_current_offset);
+        fbe_field_size = id.set(fbe_value.id);
         fbe_current_offset += fbe_field_size;
         fbe_current_size += fbe_field_size;
 
@@ -1017,7 +1017,7 @@ private:
     mutable size_t _offset;
 
 public:
-    FinalModel<TBuffer, int32_t> uid;
+    FinalModel<TBuffer, int32_t> id;
     FinalModel<TBuffer, std::string> symbol;
     FinalModel<TBuffer, ::proto::OrderSide> side;
     FinalModel<TBuffer, ::proto::OrderType> type;
@@ -1748,7 +1748,7 @@ namespace proto {
 
 struct Account
 {
-    int32_t uid;
+    int32_t id;
     std::string name;
     ::proto::State state;
     ::proto::Balance wallet;
@@ -1756,15 +1756,15 @@ struct Account
     std::vector<::proto::Order> orders;
 
     Account()
-        : uid((int32_t)0ll)
+        : id((int32_t)0ll)
         , name()
         , state(State::initialized | State::bad)
         , wallet()
         , asset()
         , orders()
     {}
-    Account(int32_t arg_uid, const std::string& arg_name, const ::proto::State& arg_state, const ::proto::Balance& arg_wallet, const std::optional<::proto::Balance>& arg_asset, const std::vector<::proto::Order>& arg_orders)
-        : uid(arg_uid)
+    Account(int32_t arg_id, const std::string& arg_name, const ::proto::State& arg_state, const ::proto::Balance& arg_wallet, const std::optional<::proto::Balance>& arg_asset, const std::vector<::proto::Order>& arg_orders)
+        : id(arg_id)
         , name(arg_name)
         , state(arg_state)
         , wallet(arg_wallet)
@@ -1781,15 +1781,15 @@ struct Account
     bool operator==(const Account& other) const noexcept
     {
         return (
-            (uid == other.uid)
+            (id == other.id)
             );
     }
     bool operator!=(const Account& other) const noexcept { return !operator==(other); }
     bool operator<(const Account& other) const noexcept
     {
-        if (uid < other.uid)
+        if (id < other.id)
             return true;
-        if (other.uid < uid)
+        if (other.id < id)
             return false;
         return false;
     }
@@ -1810,7 +1810,7 @@ struct Account
     void swap(Account& other) noexcept
     {
         using std::swap;
-        swap(uid, other.uid);
+        swap(id, other.id);
         swap(name, other.name);
         swap(state, other.state);
         swap(wallet, other.wallet);
@@ -1828,7 +1828,7 @@ template <class TOutputStream>
 inline TOutputStream& operator<<(TOutputStream& stream, const Account& value)
 {
     stream << "Account(";
-    stream << "uid="; stream << value.uid;
+    stream << "id="; stream << value.id;
     stream << ",name="; stream << "\"" << value.name << "\"";
     stream << ",state="; stream << value.state;
     stream << ",wallet="; stream << value.wallet;
@@ -1860,7 +1860,7 @@ struct hash<proto::Account>
     result_type operator () (const argument_type& value) const
     {
         result_type result = 17;
-        result = result * 31 + std::hash<decltype(value.uid)>()(value.uid);
+        result = result * 31 + std::hash<decltype(value.id)>()(value.id);
         return result;
     }
 };
@@ -1879,7 +1879,7 @@ struct ValueWriter<TOutputStream, ::proto::Account>
         if (scope)
             if (!writer.StartObject())
                 return false;
-        if (!FBE::JSON::to_json_key(writer, "uid") || !FBE::JSON::to_json(writer, value.uid, true))
+        if (!FBE::JSON::to_json_key(writer, "id") || !FBE::JSON::to_json(writer, value.id, true))
             return false;
         if (!FBE::JSON::to_json_key(writer, "name") || !FBE::JSON::to_json(writer, value.name, true))
             return false;
@@ -1905,7 +1905,7 @@ struct ValueReader<TJson, ::proto::Account>
     {
         if (key != nullptr)
             return FBE::JSON::from_json_child(json, value, key);
-        if (!FBE::JSON::from_json(json, value.uid, "uid"))
+        if (!FBE::JSON::from_json(json, value.id, "id"))
             return false;
         if (!FBE::JSON::from_json(json, value.name, "name"))
             return false;
@@ -1933,8 +1933,8 @@ class FieldModel<TBuffer, ::proto::Account>
 {
 public:
     FieldModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset)
-        , uid(buffer, 4 + 4)
-        , name(buffer, uid.fbe_offset() + uid.fbe_size())
+        , id(buffer, 4 + 4)
+        , name(buffer, id.fbe_offset() + id.fbe_size())
         , state(buffer, name.fbe_offset() + name.fbe_size())
         , wallet(buffer, state.fbe_offset() + state.fbe_size())
         , asset(buffer, wallet.fbe_offset() + wallet.fbe_size())
@@ -1949,7 +1949,7 @@ public:
     size_t fbe_body() const noexcept
     {
         size_t fbe_result = 4 + 4
-            + uid.fbe_size()
+            + id.fbe_size()
             + name.fbe_size()
             + state.fbe_size()
             + wallet.fbe_size()
@@ -1971,7 +1971,7 @@ public:
         _buffer.shift(fbe_struct_offset);
 
         size_t fbe_result = fbe_body()
-            + uid.fbe_extra()
+            + id.fbe_extra()
             + name.fbe_extra()
             + state.fbe_extra()
             + wallet.fbe_extra()
@@ -2020,11 +2020,11 @@ public:
     {
         size_t fbe_current_size = 4 + 4;
 
-        if ((fbe_current_size + uid.fbe_size()) > fbe_struct_size)
+        if ((fbe_current_size + id.fbe_size()) > fbe_struct_size)
             return true;
-        if (!uid.verify())
+        if (!id.verify())
             return false;
-        fbe_current_size += uid.fbe_size();
+        fbe_current_size += id.fbe_size();
 
         if ((fbe_current_size + name.fbe_size()) > fbe_struct_size)
             return true;
@@ -2102,11 +2102,11 @@ public:
     {
         size_t fbe_current_size = 4 + 4;
 
-        if ((fbe_current_size + uid.fbe_size()) <= fbe_struct_size)
-            uid.get(fbe_value.uid);
+        if ((fbe_current_size + id.fbe_size()) <= fbe_struct_size)
+            id.get(fbe_value.id);
         else
-            fbe_value.uid = (int32_t)0ll;
-        fbe_current_size += uid.fbe_size();
+            fbe_value.id = (int32_t)0ll;
+        fbe_current_size += id.fbe_size();
 
         if ((fbe_current_size + name.fbe_size()) <= fbe_struct_size)
             name.get(fbe_value.name);
@@ -2180,7 +2180,7 @@ public:
     // Set the struct fields values
     void set_fields(const ::proto::Account& fbe_value) noexcept
     {
-        uid.set(fbe_value.uid);
+        id.set(fbe_value.id);
         name.set(fbe_value.name);
         state.set(fbe_value.state);
         wallet.set(fbe_value.wallet);
@@ -2193,7 +2193,7 @@ private:
     size_t _offset;
 
 public:
-    FieldModel<TBuffer, int32_t> uid;
+    FieldModel<TBuffer, int32_t> id;
     FieldModel<TBuffer, std::string> name;
     FieldModel<TBuffer, ::proto::State> state;
     FieldModel<TBuffer, ::proto::Balance> wallet;
@@ -2293,7 +2293,7 @@ class FinalModel<TBuffer, ::proto::Account>
 {
 public:
     FinalModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset)
-        , uid(buffer, 0)
+        , id(buffer, 0)
         , name(buffer, 0)
         , state(buffer, 0)
         , wallet(buffer, 0)
@@ -2305,7 +2305,7 @@ public:
     size_t fbe_allocation_size(const ::proto::Account& fbe_value) const noexcept
     {
         size_t fbe_result = 0
-            + uid.fbe_allocation_size(fbe_value.uid)
+            + id.fbe_allocation_size(fbe_value.id)
             + name.fbe_allocation_size(fbe_value.name)
             + state.fbe_allocation_size(fbe_value.state)
             + wallet.fbe_allocation_size(fbe_value.wallet)
@@ -2342,8 +2342,8 @@ public:
         size_t fbe_current_offset = 0;
         size_t fbe_field_size;
 
-        uid.fbe_offset(fbe_current_offset);
-        fbe_field_size = uid.verify();
+        id.fbe_offset(fbe_current_offset);
+        fbe_field_size = id.verify();
         if (fbe_field_size == std::numeric_limits<std::size_t>::max())
             return std::numeric_limits<std::size_t>::max();
         fbe_current_offset += fbe_field_size;
@@ -2397,8 +2397,8 @@ public:
         size_t fbe_current_size = 0;
         size_t fbe_field_size;
 
-        uid.fbe_offset(fbe_current_offset);
-        fbe_field_size = uid.get(fbe_value.uid);
+        id.fbe_offset(fbe_current_offset);
+        fbe_field_size = id.get(fbe_value.id);
         fbe_current_offset += fbe_field_size;
         fbe_current_size += fbe_field_size;
 
@@ -2446,8 +2446,8 @@ public:
         size_t fbe_current_size = 0;
         size_t fbe_field_size;
 
-        uid.fbe_offset(fbe_current_offset);
-        fbe_field_size = uid.set(fbe_value.uid);
+        id.fbe_offset(fbe_current_offset);
+        fbe_field_size = id.set(fbe_value.id);
         fbe_current_offset += fbe_field_size;
         fbe_current_size += fbe_field_size;
 
@@ -2484,7 +2484,7 @@ private:
     mutable size_t _offset;
 
 public:
-    FinalModel<TBuffer, int32_t> uid;
+    FinalModel<TBuffer, int32_t> id;
     FinalModel<TBuffer, std::string> name;
     FinalModel<TBuffer, ::proto::State> state;
     FinalModel<TBuffer, ::proto::Balance> wallet;

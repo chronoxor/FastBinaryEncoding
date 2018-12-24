@@ -9,9 +9,9 @@ import "../proto/test"
 func TestSerializationFinalDomain(t *testing.T) {
 	// Create a new account with some orders
 	var account = proto.NewAccountFromFieldValues(1, "Test", proto.State_good, proto.Balance{Currency: "USD", Amount: 1000.0}, &proto.Balance{Currency: "EUR", Amount: 100.0}, make([]proto.Order, 0))
-	account.Orders = append(account.Orders, proto.Order{Uid: 1, Symbol: "EURUSD", Side: proto.OrderSide_buy, Type: proto.OrderType_market, Price: 1.23456, Volume: 1000.0})
-	account.Orders = append(account.Orders, proto.Order{Uid: 2, Symbol: "EURUSD", Side: proto.OrderSide_sell, Type: proto.OrderType_limit, Price: 1.0, Volume: 100.0})
-	account.Orders = append(account.Orders, proto.Order{Uid: 3, Symbol: "EURUSD", Side: proto.OrderSide_buy, Type: proto.OrderType_stop, Price: 1.5, Volume: 10.0})
+	account.Orders = append(account.Orders, proto.Order{Id: 1, Symbol: "EURUSD", Side: proto.OrderSide_buy, Type: proto.OrderType_market, Price: 1.23456, Volume: 1000.0})
+	account.Orders = append(account.Orders, proto.Order{Id: 2, Symbol: "EURUSD", Side: proto.OrderSide_sell, Type: proto.OrderType_limit, Price: 1.0, Volume: 100.0})
+	account.Orders = append(account.Orders, proto.Order{Id: 3, Symbol: "EURUSD", Side: proto.OrderSide_buy, Type: proto.OrderType_stop, Price: 1.5, Volume: 10.0})
 
 	// Serialize the struct to the FBE stream
 	writer := proto.NewAccountFinalModel(fbe.NewEmptyBuffer())
@@ -32,7 +32,7 @@ func TestSerializationFinalDomain(t *testing.T) {
 	assert.EqualValues(t, deserialized, reader.Buffer().Size())
 	reader.Next(deserialized)
 
-	assert.EqualValues(t, account2.Uid, 1)
+	assert.EqualValues(t, account2.Id, 1)
 	assert.EqualValues(t, account2.Name, "Test")
 	assert.True(t, account2.State.HasFlags(proto.State_good))
 	assert.EqualValues(t, account2.Wallet.Currency, "USD")
@@ -41,19 +41,19 @@ func TestSerializationFinalDomain(t *testing.T) {
 	assert.EqualValues(t, account2.Asset.Currency, "EUR")
 	assert.EqualValues(t, account2.Asset.Amount, 100.0)
 	assert.EqualValues(t, len(account2.Orders), 3)
-	assert.EqualValues(t, account2.Orders[0].Uid, 1)
+	assert.EqualValues(t, account2.Orders[0].Id, 1)
 	assert.EqualValues(t, account2.Orders[0].Symbol, "EURUSD")
 	assert.EqualValues(t, account2.Orders[0].Side, proto.OrderSide_buy)
 	assert.EqualValues(t, account2.Orders[0].Type, proto.OrderType_market)
 	assert.EqualValues(t, account2.Orders[0].Price, 1.23456)
 	assert.EqualValues(t, account2.Orders[0].Volume, 1000.0)
-	assert.EqualValues(t, account2.Orders[1].Uid, 2)
+	assert.EqualValues(t, account2.Orders[1].Id, 2)
 	assert.EqualValues(t, account2.Orders[1].Symbol, "EURUSD")
 	assert.EqualValues(t, account2.Orders[1].Side, proto.OrderSide_sell)
 	assert.EqualValues(t, account2.Orders[1].Type, proto.OrderType_limit)
 	assert.EqualValues(t, account2.Orders[1].Price, 1.0)
 	assert.EqualValues(t, account2.Orders[1].Volume, 100.0)
-	assert.EqualValues(t, account2.Orders[2].Uid, 3)
+	assert.EqualValues(t, account2.Orders[2].Id, 3)
 	assert.EqualValues(t, account2.Orders[2].Symbol, "EURUSD")
 	assert.EqualValues(t, account2.Orders[2].Side, proto.OrderSide_buy)
 	assert.EqualValues(t, account2.Orders[2].Type, proto.OrderType_stop)
@@ -1034,10 +1034,10 @@ func TestSerializationFinalStructSet(t *testing.T) {
 	struct1.F3.Add(test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
 	struct1.F3.Add(test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3)
 	s1 := test.NewStructSimple()
-	s1.Uid = 48
+	s1.Id = 48
 	struct1.F4.Add(*s1)
 	s2 := test.NewStructSimple()
-	s2.Uid = 65
+	s2.Id = 65
 	struct1.F4.Add(*s2)
 
 	// Serialize the struct to the FBE stream
@@ -1072,9 +1072,9 @@ func TestSerializationFinalStructSet(t *testing.T) {
 	assert.True(t, struct2.F3.Contains(test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2))
 	assert.True(t, struct2.F3.Contains(test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2 | test.FlagsSimple_FLAG_VALUE_3))
 	assert.EqualValues(t, len(struct2.F4), 2)
-	s1.Uid = 48
+	s1.Id = 48
 	assert.True(t, struct2.F4.Contains(*s1))
-	s2.Uid = 65
+	s2.Id = 65
 	assert.True(t, struct2.F4.Contains(*s2))
 }
 
@@ -1102,10 +1102,10 @@ func TestSerializationFinalStructMap(t *testing.T) {
 	struct1.F8[10] = &mapF8
 	struct1.F8[20] = nil
 	s1 := test.NewStructSimple()
-	s1.Uid = 48
+	s1.Id = 48
 	struct1.F9[10] = *s1
 	s2 := test.NewStructSimple()
-	s2.Uid = 65
+	s2.Id = 65
 	struct1.F9[20] = *s2
 	struct1.F10[10] = s1
 	struct1.F10[20] = nil
@@ -1156,10 +1156,10 @@ func TestSerializationFinalStructMap(t *testing.T) {
 	assert.EqualValues(t, *struct2.F8[10], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
 	assert.Nil(t, struct2.F8[20])
 	assert.EqualValues(t, len(struct2.F9), 2)
-	assert.EqualValues(t, struct2.F9[10].Uid, 48)
-	assert.EqualValues(t, struct2.F9[20].Uid, 65)
+	assert.EqualValues(t, struct2.F9[10].Id, 48)
+	assert.EqualValues(t, struct2.F9[20].Id, 65)
 	assert.EqualValues(t, len(struct2.F10), 2)
-	assert.EqualValues(t, struct2.F10[10].Uid, 48)
+	assert.EqualValues(t, struct2.F10[10].Id, 48)
 	assert.Nil(t, struct2.F10[20])
 }
 
@@ -1187,10 +1187,10 @@ func TestSerializationFinalStructHash(t *testing.T) {
 	struct1.F8["10"] = &hashF8
 	struct1.F8["20"] = nil
 	s1 := test.NewStructSimple()
-	s1.Uid = 48
+	s1.Id = 48
 	struct1.F9["10"] = *s1
 	s2 := test.NewStructSimple()
-	s2.Uid = 65
+	s2.Id = 65
 	struct1.F9["20"] = *s2
 	struct1.F10["10"] = s1
 	struct1.F10["20"] = nil
@@ -1241,10 +1241,10 @@ func TestSerializationFinalStructHash(t *testing.T) {
 	assert.EqualValues(t, *struct2.F8["10"], test.FlagsSimple_FLAG_VALUE_1 | test.FlagsSimple_FLAG_VALUE_2)
 	assert.Nil(t, struct2.F8["20"])
 	assert.EqualValues(t, len(struct2.F9), 2)
-	assert.EqualValues(t, struct2.F9["10"].Uid, 48)
-	assert.EqualValues(t, struct2.F9["20"].Uid, 65)
+	assert.EqualValues(t, struct2.F9["10"].Id, 48)
+	assert.EqualValues(t, struct2.F9["20"].Id, 65)
 	assert.EqualValues(t, len(struct2.F10), 2)
-	assert.EqualValues(t, struct2.F10["10"].Uid, 48)
+	assert.EqualValues(t, struct2.F10["10"].Id, 48)
 	assert.Nil(t, struct2.F10["20"])
 }
 
@@ -1252,10 +1252,10 @@ func TestSerializationFinalStructHashEx(t *testing.T) {
 	// Create a new struct
 	struct1 := test.NewStructHashEx()
 	s1 := test.NewStructSimple()
-	s1.Uid = 48
+	s1.Id = 48
 	struct1.F1[s1.Key()] = struct{Key test.StructSimple; Value test.StructNested}{*s1, *test.NewStructNested()}
 	s2 := test.NewStructSimple()
-	s2.Uid = 65
+	s2.Id = 65
 	struct1.F1[s2.Key()] = struct{Key test.StructSimple; Value test.StructNested}{*s2, *test.NewStructNested()}
 	struct1.F2[s1.Key()] = struct{Key test.StructSimple; Value *test.StructNested}{*s1, test.NewStructNested()}
 	struct1.F2[s2.Key()] = struct{Key test.StructSimple; Value *test.StructNested}{*s2, nil}

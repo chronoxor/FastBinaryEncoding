@@ -22,8 +22,8 @@ import protoex.*
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FieldModelOrder(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
-    val uid: FieldModelInt32 = FieldModelInt32(buffer, 4 + 4)
-    val symbol: FieldModelString = FieldModelString(buffer, uid.fbeOffset + uid.fbeSize)
+    val id: FieldModelInt32 = FieldModelInt32(buffer, 4 + 4)
+    val symbol: FieldModelString = FieldModelString(buffer, id.fbeOffset + id.fbeSize)
     val side: FieldModelOrderSide = FieldModelOrderSide(buffer, symbol.fbeOffset + symbol.fbeSize)
     val type: FieldModelOrderType = FieldModelOrderType(buffer, side.fbeOffset + side.fbeSize)
     val price: FieldModelDouble = FieldModelDouble(buffer, type.fbeOffset + type.fbeSize)
@@ -36,7 +36,7 @@ class FieldModelOrder(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 
     // Field body size
     val fbeBody: Long = (4 + 4
-        + uid.fbeSize
+        + id.fbeSize
         + symbol.fbeSize
         + side.fbeSize
         + type.fbeSize
@@ -59,7 +59,7 @@ class FieldModelOrder(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
         _buffer.shift(fbeStructOffset)
 
         val fbeResult = (fbeBody
-            + uid.fbeExtra
+            + id.fbeExtra
             + symbol.fbeExtra
             + side.fbeExtra
             + type.fbeExtra
@@ -111,11 +111,11 @@ class FieldModelOrder(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     {
         var fbeCurrentSize = 4L + 4L
 
-        if ((fbeCurrentSize + uid.fbeSize) > fbeStructSize)
+        if ((fbeCurrentSize + id.fbeSize) > fbeStructSize)
             return true
-        if (!uid.verify())
+        if (!id.verify())
             return false
-        fbeCurrentSize += uid.fbeSize
+        fbeCurrentSize += id.fbeSize
 
         if ((fbeCurrentSize + symbol.fbeSize) > fbeStructSize)
             return true
@@ -206,11 +206,11 @@ class FieldModelOrder(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     {
         var fbeCurrentSize = 4L + 4L
 
-        if ((fbeCurrentSize + uid.fbeSize) <= fbeStructSize)
-            fbeValue.uid = uid.get()
+        if ((fbeCurrentSize + id.fbeSize) <= fbeStructSize)
+            fbeValue.id = id.get()
         else
-            fbeValue.uid = 0
-        fbeCurrentSize += uid.fbeSize
+            fbeValue.id = 0
+        fbeCurrentSize += id.fbeSize
 
         if ((fbeCurrentSize + symbol.fbeSize) <= fbeStructSize)
             fbeValue.symbol = symbol.get()
@@ -296,7 +296,7 @@ class FieldModelOrder(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     // Set the struct fields values
     fun setFields(fbeValue: Order)
     {
-        uid.set(fbeValue.uid)
+        id.set(fbeValue.id)
         symbol.set(fbeValue.symbol)
         side.set(fbeValue.side)
         type.set(fbeValue.type)

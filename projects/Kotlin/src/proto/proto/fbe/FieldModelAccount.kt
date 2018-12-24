@@ -22,8 +22,8 @@ import proto.*
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FieldModelAccount(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
-    val uid: FieldModelInt32 = FieldModelInt32(buffer, 4 + 4)
-    val name: FieldModelString = FieldModelString(buffer, uid.fbeOffset + uid.fbeSize)
+    val id: FieldModelInt32 = FieldModelInt32(buffer, 4 + 4)
+    val name: FieldModelString = FieldModelString(buffer, id.fbeOffset + id.fbeSize)
     val state: FieldModelState = FieldModelState(buffer, name.fbeOffset + name.fbeSize)
     val wallet: FieldModelBalance = FieldModelBalance(buffer, state.fbeOffset + state.fbeSize)
     val asset: FieldModelOptionalBalance = FieldModelOptionalBalance(buffer, wallet.fbeOffset + wallet.fbeSize)
@@ -34,7 +34,7 @@ class FieldModelAccount(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
 
     // Field body size
     val fbeBody: Long = (4 + 4
-        + uid.fbeSize
+        + id.fbeSize
         + name.fbeSize
         + state.fbeSize
         + wallet.fbeSize
@@ -55,7 +55,7 @@ class FieldModelAccount(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
         _buffer.shift(fbeStructOffset)
 
         val fbeResult = (fbeBody
-            + uid.fbeExtra
+            + id.fbeExtra
             + name.fbeExtra
             + state.fbeExtra
             + wallet.fbeExtra
@@ -105,11 +105,11 @@ class FieldModelAccount(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     {
         var fbeCurrentSize = 4L + 4L
 
-        if ((fbeCurrentSize + uid.fbeSize) > fbeStructSize)
+        if ((fbeCurrentSize + id.fbeSize) > fbeStructSize)
             return true
-        if (!uid.verify())
+        if (!id.verify())
             return false
-        fbeCurrentSize += uid.fbeSize
+        fbeCurrentSize += id.fbeSize
 
         if ((fbeCurrentSize + name.fbeSize) > fbeStructSize)
             return true
@@ -188,11 +188,11 @@ class FieldModelAccount(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     {
         var fbeCurrentSize = 4L + 4L
 
-        if ((fbeCurrentSize + uid.fbeSize) <= fbeStructSize)
-            fbeValue.uid = uid.get()
+        if ((fbeCurrentSize + id.fbeSize) <= fbeStructSize)
+            fbeValue.id = id.get()
         else
-            fbeValue.uid = 0
-        fbeCurrentSize += uid.fbeSize
+            fbeValue.id = 0
+        fbeCurrentSize += id.fbeSize
 
         if ((fbeCurrentSize + name.fbeSize) <= fbeStructSize)
             fbeValue.name = name.get()
@@ -266,7 +266,7 @@ class FieldModelAccount(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     // Set the struct fields values
     fun setFields(fbeValue: Account)
     {
-        uid.set(fbeValue.uid)
+        id.set(fbeValue.id)
         name.set(fbeValue.name)
         state.set(fbeValue.state)
         wallet.set(fbeValue.wallet)

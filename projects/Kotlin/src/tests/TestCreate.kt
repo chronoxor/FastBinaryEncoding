@@ -13,7 +13,7 @@ class TestCreate
         assertEquals(writer.model.fbeOffset, 4)
         val modelBegin = writer.createBegin()
         var accountBegin = writer.model.setBegin()
-        writer.model.uid.set(1)
+        writer.model.id.set(1)
         writer.model.name.set("Test")
         writer.model.state.set(proto.State.good)
         var walletBegin = writer.model.wallet.setBegin()
@@ -28,7 +28,7 @@ class TestCreate
         writer.model.asset.value.setEnd(assetWalletBegin)
         val order = writer.model.orders.resize(3)
         var orderBegin = order.setBegin()
-        order.uid.set(1)
+        order.id.set(1)
         order.symbol.set("EURUSD")
         order.side.set(proto.OrderSide.buy)
         order.type.set(proto.OrderType.market)
@@ -37,7 +37,7 @@ class TestCreate
         order.setEnd(orderBegin)
         order.fbeShift(order.fbeSize)
         orderBegin = order.setBegin()
-        order.uid.set(2)
+        order.id.set(2)
         order.symbol.set("EURUSD")
         order.side.set(proto.OrderSide.sell)
         order.type.set(proto.OrderType.limit)
@@ -46,7 +46,7 @@ class TestCreate
         order.setEnd(orderBegin)
         order.fbeShift(order.fbeSize)
         orderBegin = order.setBegin()
-        order.uid.set(3)
+        order.id.set(3)
         order.symbol.set("EURUSD")
         order.side.set(proto.OrderSide.buy)
         order.type.set(proto.OrderType.stop)
@@ -70,7 +70,7 @@ class TestCreate
         reader.attach(writer.buffer)
         assertTrue(reader.verify())
 
-        val uid: Int
+        val id: Int
         val name: String
         val state: proto.State
         val walletCurrency: String
@@ -79,8 +79,8 @@ class TestCreate
         val assetWalletAmount: Double
 
         accountBegin = reader.model.getBegin()
-        uid = reader.model.uid.get()
-        assertEquals(uid, 1)
+        id = reader.model.id.get()
+        assertEquals(id, 1)
         name = reader.model.name.get()
         assertEquals(name, "Test")
         state = reader.model.state.get()
@@ -114,7 +114,7 @@ class TestCreate
 
         val o1 = reader.model.orders.getItem(0)
         orderBegin = o1.getBegin()
-        orderId = o1.uid.get()
+        orderId = o1.id.get()
         assertEquals(orderId, 1)
         orderSymbol = o1.symbol.get()
         assertEquals(orderSymbol, "EURUSD")
@@ -130,7 +130,7 @@ class TestCreate
 
         val o2 = reader.model.orders.getItem(1)
         orderBegin = o2.getBegin()
-        orderId = o2.uid.get()
+        orderId = o2.id.get()
         assertEquals(orderId, 2)
         orderSymbol = o2.symbol.get()
         assertEquals(orderSymbol, "EURUSD")
@@ -146,7 +146,7 @@ class TestCreate
 
         val o3 = reader.model.orders.getItem(2)
         orderBegin = o3.getBegin()
-        orderId = o3.uid.get()
+        orderId = o3.id.get()
         assertEquals(orderId, 3)
         orderSymbol = o3.symbol.get()
         assertEquals(orderSymbol, "EURUSD")

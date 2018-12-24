@@ -96,10 +96,10 @@ structSet.f2.add(prototest.EnumSimple.ENUM_VALUE_2)
 structSet.f3.add(prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2))
 structSet.f3.add(prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2 | prototest.FlagsSimple.FLAG_VALUE_3))
 let s1 = new prototest.StructSimple()
-s1.uid = 48
+s1.id = 48
 structSet.f4.add(s1)
 let s2 = new prototest.StructSimple()
-s2.uid = 65
+s2.id = 65
 structSet.f4.add(s2)
 console.log(structSet + '\n')
 
@@ -121,9 +121,9 @@ structMap.f7.set(10, prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_
 structMap.f7.set(20, prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2 | prototest.FlagsSimple.FLAG_VALUE_3))
 structMap.f8.set(10, prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2))
 structMap.f8.set(20, undefined)
-s1.uid = 48
+s1.id = 48
 structMap.f9.set(10, s1)
-s2.uid = 65
+s2.id = 65
 structMap.f9.set(20, s2)
 structMap.f10.set(10, s1)
 structMap.f10.set(20, undefined)
@@ -147,9 +147,9 @@ structHash.f7.set('10', prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FL
 structHash.f7.set('20', prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2 | prototest.FlagsSimple.FLAG_VALUE_3))
 structHash.f8.set('10', prototest.FlagsSimple.fromFlags(prototest.FlagsSimple.FLAG_VALUE_1 | prototest.FlagsSimple.FLAG_VALUE_2))
 structHash.f8.set('20', undefined)
-s1.uid = 48
+s1.id = 48
 structHash.f9.set('10', s1)
-s2.uid = 65
+s2.id = 65
 structHash.f9.set('20', s2)
 structHash.f10.set('10', s1)
 structHash.f10.set('20', undefined)
@@ -157,9 +157,9 @@ console.log(structHash + '\n')
 
 // Print extended hash struct
 let structHashEx = new prototest.StructHashEx()
-s1.uid = 48
+s1.id = 48
 structHashEx.f1.set(s1, new prototest.StructNested())
-s2.uid = 65
+s2.id = 65
 structHashEx.f1.set(s2, new prototest.StructNested())
 structHashEx.f2.set(s1, new prototest.StructNested())
 structHashEx.f2.set(s2, undefined)

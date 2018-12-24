@@ -22,8 +22,8 @@ import test.*
 @Suppress("MemberVisibilityCanBePrivate", "RemoveRedundantCallsOfConversionMethods", "ReplaceGetOrSet")
 class FieldModelStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
 {
-    val uid: FieldModelInt32 = FieldModelInt32(buffer, 4 + 4)
-    val f1: FieldModelBoolean = FieldModelBoolean(buffer, uid.fbeOffset + uid.fbeSize)
+    val id: FieldModelInt32 = FieldModelInt32(buffer, 4 + 4)
+    val f1: FieldModelBoolean = FieldModelBoolean(buffer, id.fbeOffset + id.fbeSize)
     val f2: FieldModelBoolean = FieldModelBoolean(buffer, f1.fbeOffset + f1.fbeSize)
     val f3: FieldModelByte = FieldModelByte(buffer, f2.fbeOffset + f2.fbeSize)
     val f4: FieldModelByte = FieldModelByte(buffer, f3.fbeOffset + f3.fbeSize)
@@ -73,7 +73,7 @@ class FieldModelStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, 
 
     // Field body size
     val fbeBody: Long = (4 + 4
-        + uid.fbeSize
+        + id.fbeSize
         + f1.fbeSize
         + f2.fbeSize
         + f3.fbeSize
@@ -133,7 +133,7 @@ class FieldModelStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         _buffer.shift(fbeStructOffset)
 
         val fbeResult = (fbeBody
-            + uid.fbeExtra
+            + id.fbeExtra
             + f1.fbeExtra
             + f2.fbeExtra
             + f3.fbeExtra
@@ -222,11 +222,11 @@ class FieldModelStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     {
         var fbeCurrentSize = 4L + 4L
 
-        if ((fbeCurrentSize + uid.fbeSize) > fbeStructSize)
+        if ((fbeCurrentSize + id.fbeSize) > fbeStructSize)
             return true
-        if (!uid.verify())
+        if (!id.verify())
             return false
-        fbeCurrentSize += uid.fbeSize
+        fbeCurrentSize += id.fbeSize
 
         if ((fbeCurrentSize + f1.fbeSize) > fbeStructSize)
             return true
@@ -539,11 +539,11 @@ class FieldModelStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     {
         var fbeCurrentSize = 4L + 4L
 
-        if ((fbeCurrentSize + uid.fbeSize) <= fbeStructSize)
-            fbeValue.uid = uid.get()
+        if ((fbeCurrentSize + id.fbeSize) <= fbeStructSize)
+            fbeValue.id = id.get()
         else
-            fbeValue.uid = 0
-        fbeCurrentSize += uid.fbeSize
+            fbeValue.id = 0
+        fbeCurrentSize += id.fbeSize
 
         if ((fbeCurrentSize + f1.fbeSize) <= fbeStructSize)
             fbeValue.f1 = f1.get()
@@ -851,7 +851,7 @@ class FieldModelStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, 
     // Set the struct fields values
     fun setFields(fbeValue: StructSimple)
     {
-        uid.set(fbeValue.uid)
+        id.set(fbeValue.id)
         f1.set(fbeValue.f1)
         f2.set(fbeValue.f2)
         f3.set(fbeValue.f3)

@@ -15,14 +15,14 @@ namespace Print
 
             Console.WriteLine(test.StructNested.Default);
             Console.WriteLine();
-            
+
             // Print bytes struct
             var structBytes = test.StructBytes.Default;
             structBytes.f1 = new MemoryStream(new [] { (byte)'A', (byte)'B', (byte)'C' }, 0, 3, true, true);
             structBytes.f2 = new MemoryStream(new[] { (byte)'t', (byte)'e', (byte)'s', (byte)'t' }, 0, 4, true, true);
             Console.WriteLine(structBytes);
             Console.WriteLine();
-            
+
             // Print array struct
             var structArray = test.StructArray.Default;
             structArray.f1[0] = 48;
@@ -47,7 +47,7 @@ namespace Print
             structArray.f10[1] = null;
             Console.WriteLine(structArray);
             Console.WriteLine();
-            
+
             // Print vector struct
             var structVector = test.StructVector.Default;
             structVector.f1.Add(48);
@@ -72,7 +72,7 @@ namespace Print
             structVector.f10.Add(null);
             Console.WriteLine(structVector);
             Console.WriteLine();
-            
+
             // Print list struct
             var structList = test.StructList.Default;
             structList.f1.AddLast(48);
@@ -97,7 +97,7 @@ namespace Print
             structList.f10.AddLast((test.StructSimple?)null);
             Console.WriteLine(structList);
             Console.WriteLine();
-            
+
             // Print set struct
             var structSet = test.StructSet.Default;
             structSet.f1.Add(48);
@@ -108,14 +108,14 @@ namespace Print
             structSet.f3.Add(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
             structSet.f3.Add(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3);
             var s1 = test.StructSimple.Default;
-            s1.uid = 48;
+            s1.id = 48;
             structSet.f4.Add(s1);
             var s2 = test.StructSimple.Default;
-            s2.uid = 65;
+            s2.id = 65;
             structSet.f4.Add(s2);
             Console.WriteLine(structSet);
             Console.WriteLine();
-            
+
             // Print map struct
             var structMap = test.StructMap.Default;
             structMap.f1.Add(10, 48);
@@ -134,15 +134,15 @@ namespace Print
             structMap.f7.Add(20, test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3);
             structMap.f8.Add(10, test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
             structMap.f8.Add(20, null);
-            s1.uid = 48;
+            s1.id = 48;
             structMap.f9.Add(10, s1);
-            s2.uid = 65;
+            s2.id = 65;
             structMap.f9.Add(20, s2);
             structMap.f10.Add(10, s1);
             structMap.f10.Add(20, null);
             Console.WriteLine(structMap);
             Console.WriteLine();
-            
+
             // Print hash struct
             var structHash = test.StructHash.Default;
             structHash.f1.Add("10", 48);
@@ -161,25 +161,25 @@ namespace Print
             structHash.f7.Add("20", test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3);
             structHash.f8.Add("10", test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
             structHash.f8.Add("20", null);
-            s1.uid = 48;
+            s1.id = 48;
             structHash.f9.Add("10", s1);
-            s2.uid = 65;
+            s2.id = 65;
             structHash.f9.Add("20", s2);
             structHash.f10.Add("10", s1);
             structHash.f10.Add("20", null);
             Console.WriteLine(structHash);
             Console.WriteLine();
-            
+
             // Print extended hash struct
             var structHashEx = test.StructHashEx.Default;
-            s1.uid = 48;
+            s1.id = 48;
             structHashEx.f1.Add(s1, test.StructNested.Default);
-            s2.uid = 65;
+            s2.id = 65;
             structHashEx.f1.Add(s2, test.StructNested.Default);
             structHashEx.f2.Add(s1, test.StructNested.Default);
             structHashEx.f2.Add(s2, null);
             Console.WriteLine(structHashEx);
-            Console.WriteLine();            
+            Console.WriteLine();
         }
     }
 }

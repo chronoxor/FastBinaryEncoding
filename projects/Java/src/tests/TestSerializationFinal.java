@@ -36,7 +36,7 @@ public class TestSerializationFinal
         Assert.assertEquals(deserialized, reader.getBuffer().getSize());
         reader.next(deserialized);
 
-        Assert.assertEquals(account2.uid, 1);
+        Assert.assertEquals(account2.id, 1);
         Assert.assertEquals(account2.name, "Test");
         Assert.assertTrue(account2.state.hasFlags(proto.State.good));
         Assert.assertEquals(account2.wallet.currency, "USD");
@@ -45,19 +45,19 @@ public class TestSerializationFinal
         Assert.assertEquals(account2.asset.currency, "EUR");
         Assert.assertEquals(account2.asset.amount, 100.0);
         Assert.assertEquals(account2.orders.size(), 3);
-        Assert.assertEquals(account2.orders.get(0).uid, 1);
+        Assert.assertEquals(account2.orders.get(0).id, 1);
         Assert.assertEquals(account2.orders.get(0).symbol, "EURUSD");
         Assert.assertEquals(account2.orders.get(0).side, proto.OrderSide.buy);
         Assert.assertEquals(account2.orders.get(0).type, proto.OrderType.market);
         Assert.assertEquals(account2.orders.get(0).price, 1.23456);
         Assert.assertEquals(account2.orders.get(0).volume, 1000.0);
-        Assert.assertEquals(account2.orders.get(1).uid, 2);
+        Assert.assertEquals(account2.orders.get(1).id, 2);
         Assert.assertEquals(account2.orders.get(1).symbol, "EURUSD");
         Assert.assertEquals(account2.orders.get(1).side, proto.OrderSide.sell);
         Assert.assertEquals(account2.orders.get(1).type, proto.OrderType.limit);
         Assert.assertEquals(account2.orders.get(1).price, 1.0);
         Assert.assertEquals(account2.orders.get(1).volume, 100.0);
-        Assert.assertEquals(account2.orders.get(2).uid, 3);
+        Assert.assertEquals(account2.orders.get(2).id, 3);
         Assert.assertEquals(account2.orders.get(2).symbol, "EURUSD");
         Assert.assertEquals(account2.orders.get(2).side, proto.OrderSide.buy);
         Assert.assertEquals(account2.orders.get(2).type, proto.OrderType.stop);
@@ -1040,10 +1040,10 @@ public class TestSerializationFinal
         struct1.f3.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
         struct1.f3.add(test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum(), test.FlagsSimple.FLAG_VALUE_3.getEnum())));
         var s1 = new test.StructSimple();
-        s1.uid = 48;
+        s1.id = 48;
         struct1.f4.add(s1);
         var s2 = new test.StructSimple();
-        s2.uid = 65;
+        s2.id = 65;
         struct1.f4.add(s2);
 
         // Serialize the struct to the FBE stream
@@ -1104,10 +1104,10 @@ public class TestSerializationFinal
         struct1.f8.put(10, test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
         struct1.f8.put(20, null);
         var s1 = new test.StructSimple();
-        s1.uid = 48;
+        s1.id = 48;
         struct1.f9.put(10, s1);
         var s2 = new test.StructSimple();
-        s2.uid = 65;
+        s2.id = 65;
         struct1.f9.put(20, s2);
         struct1.f10.put(10, s1);
         struct1.f10.put(20, null);
@@ -1158,10 +1158,10 @@ public class TestSerializationFinal
         Assert.assertEquals(struct2.f8.get(10), test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
         Assert.assertEquals(struct2.f8.get(20), null);
         Assert.assertEquals(struct2.f9.size(), 2);
-        Assert.assertEquals(struct2.f9.get(10).uid, 48);
-        Assert.assertEquals(struct2.f9.get(20).uid, 65);
+        Assert.assertEquals(struct2.f9.get(10).id, 48);
+        Assert.assertEquals(struct2.f9.get(20).id, 65);
         Assert.assertEquals(struct2.f10.size(), 2);
-        Assert.assertEquals(struct2.f10.get(10).uid, 48);
+        Assert.assertEquals(struct2.f10.get(10).id, 48);
         Assert.assertEquals(struct2.f10.get(20), null);
     }
 
@@ -1187,10 +1187,10 @@ public class TestSerializationFinal
         struct1.f8.put("10", test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
         struct1.f8.put("20", null);
         var s1 = new test.StructSimple();
-        s1.uid = 48;
+        s1.id = 48;
         struct1.f9.put("10", s1);
         var s2 = new test.StructSimple();
-        s2.uid = 65;
+        s2.id = 65;
         struct1.f9.put("20", s2);
         struct1.f10.put("10", s1);
         struct1.f10.put("20", null);
@@ -1241,10 +1241,10 @@ public class TestSerializationFinal
         Assert.assertEquals(struct2.f8.get("10"), test.FlagsSimple.fromSet(EnumSet.of(test.FlagsSimple.FLAG_VALUE_1.getEnum(), test.FlagsSimple.FLAG_VALUE_2.getEnum())));
         Assert.assertEquals(struct2.f8.get("20"), null);
         Assert.assertEquals(struct2.f9.size(), 2);
-        Assert.assertEquals(struct2.f9.get("10").uid, 48);
-        Assert.assertEquals(struct2.f9.get("20").uid, 65);
+        Assert.assertEquals(struct2.f9.get("10").id, 48);
+        Assert.assertEquals(struct2.f9.get("20").id, 65);
         Assert.assertEquals(struct2.f10.size(), 2);
-        Assert.assertEquals(struct2.f10.get("10").uid, 48);
+        Assert.assertEquals(struct2.f10.get("10").id, 48);
         Assert.assertEquals(struct2.f10.get("20"), null);
     }
 
@@ -1254,10 +1254,10 @@ public class TestSerializationFinal
         // Create a new struct
         var struct1 = new test.StructHashEx();
         var s1 = new test.StructSimple();
-        s1.uid = 48;
+        s1.id = 48;
         struct1.f1.put(s1, new test.StructNested());
         var s2 = new test.StructSimple();
-        s2.uid = 65;
+        s2.id = 65;
         struct1.f1.put(s2, new test.StructNested());
         struct1.f2.put(s1, new test.StructNested());
         struct1.f2.put(s2, null);

@@ -14,7 +14,7 @@ TEST_CASE("Create & access", "[FBE]")
     REQUIRE(writer.model.fbe_offset() == 4);
     size_t model_begin = writer.create_begin();
     size_t account_begin = writer.model.set_begin();
-    writer.model.uid.set(1);
+    writer.model.id.set(1);
     writer.model.name.set(std::string("Test"));
     writer.model.state.set(proto::State::good);
     size_t wallet_begin = writer.model.wallet.set_begin();
@@ -29,7 +29,7 @@ TEST_CASE("Create & access", "[FBE]")
     writer.model.asset.value.set_end(asset_wallet_begin);
     auto order = writer.model.orders.resize(3);
     size_t order_begin = order.set_begin();
-    order.uid.set(1);
+    order.id.set(1);
     order.symbol.set(std::string("EURUSD"));
     order.side.set(proto::OrderSide::buy);
     order.type.set(proto::OrderType::market);
@@ -38,7 +38,7 @@ TEST_CASE("Create & access", "[FBE]")
     order.set_end(order_begin);
     order.fbe_shift(order.fbe_size());
     order_begin = order.set_begin();
-    order.uid.set(2);
+    order.id.set(2);
     order.symbol.set(std::string("EURUSD"));
     order.side.set(proto::OrderSide::sell);
     order.type.set(proto::OrderType::limit);
@@ -47,7 +47,7 @@ TEST_CASE("Create & access", "[FBE]")
     order.set_end(order_begin);
     order.fbe_shift(order.fbe_size());
     order_begin = order.set_begin();
-    order.uid.set(3);
+    order.id.set(3);
     order.symbol.set(std::string("EURUSD"));
     order.side.set(proto::OrderSide::buy);
     order.type.set(proto::OrderType::stop);
@@ -80,7 +80,7 @@ TEST_CASE("Create & access", "[FBE]")
     double asset_wallet_amount;
 
     account_begin = reader.model.get_begin();
-    reader.model.uid.get(id);
+    reader.model.id.get(id);
     REQUIRE(id == 1);
     reader.model.name.get(name);
     REQUIRE(name == "Test");
@@ -115,7 +115,7 @@ TEST_CASE("Create & access", "[FBE]")
 
     auto o1 = reader.model.orders[0];
     order_begin = o1.get_begin();
-    o1.uid.get(order_id);
+    o1.id.get(order_id);
     REQUIRE(order_id == 1);
     o1.symbol.get(order_symbol);
     REQUIRE(order_symbol == "EURUSD");
@@ -131,7 +131,7 @@ TEST_CASE("Create & access", "[FBE]")
 
     auto o2 = reader.model.orders[1];
     order_begin = o2.get_begin();
-    o2.uid.get(order_id);
+    o2.id.get(order_id);
     REQUIRE(order_id == 2);
     o2.symbol.get(order_symbol);
     REQUIRE(order_symbol == "EURUSD");
@@ -147,7 +147,7 @@ TEST_CASE("Create & access", "[FBE]")
 
     auto o3 = reader.model.orders[2];
     order_begin = o3.get_begin();
-    o3.uid.get(order_id);
+    o3.id.get(order_id);
     REQUIRE(order_id == 3);
     o3.symbol.get(order_symbol);
     REQUIRE(order_symbol == "EURUSD");

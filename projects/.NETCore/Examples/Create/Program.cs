@@ -11,7 +11,7 @@ namespace Create
             var account = new FBE.proto.AccountModel();
             long modelBegin = account.CreateBegin();
             long accountBegin = account.model.SetBegin();
-            account.model.uid.Set(1);
+            account.model.id.Set(1);
             account.model.name.Set("Test");
             account.model.state.Set(proto.State.good);
             long walletBegin = account.model.wallet.SetBegin();
@@ -31,7 +31,7 @@ namespace Create
             Debug.Assert(access.Verify());
 
             accountBegin = access.model.GetBegin();
-            access.model.uid.Get(out var uid);
+            access.model.id.Get(out var id);
             access.model.name.Get(out var name);
             access.model.state.Get(out var state);
             walletBegin = access.model.wallet.GetBegin();
@@ -42,7 +42,7 @@ namespace Create
 
             // Show account content
             Console.WriteLine();
-            Console.WriteLine($"account.uid = {uid}");
+            Console.WriteLine($"account.id = {id}");
             Console.WriteLine($"account.name = {name}");
             Console.WriteLine($"account.state = {state}");
             Console.WriteLine($"account.wallet.currency = {walletCurrency}");

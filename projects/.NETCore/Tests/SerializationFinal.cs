@@ -17,7 +17,7 @@ namespace Tests
         {
             // Create a new account with some orders
             var account1 = proto.Account.Default;
-            account1.uid = 1;
+            account1.id = 1;
             account1.name = "Test";
             account1.state = proto.State.good;
             account1.wallet.currency = "USD";
@@ -45,7 +45,7 @@ namespace Tests
             Assert.True(deserialized == reader.Buffer.Size);
             reader.Next(deserialized);
 
-            Assert.True(account2.uid == 1);
+            Assert.True(account2.id == 1);
             Assert.True(account2.name == "Test");
             Assert.True(account2.state.HasFlags(proto.State.good));
             Assert.True(account2.wallet.currency == "USD");
@@ -54,19 +54,19 @@ namespace Tests
             Assert.True(account2.asset.Value.currency == "EUR");
             Assert.True(account2.asset.Value.amount == 100.0);
             Assert.True(account2.orders.Count == 3);
-            Assert.True(account2.orders[0].uid == 1);
+            Assert.True(account2.orders[0].id == 1);
             Assert.True(account2.orders[0].symbol == "EURUSD");
             Assert.True(account2.orders[0].side == proto.OrderSide.buy);
             Assert.True(account2.orders[0].type == proto.OrderType.market);
             Assert.True(account2.orders[0].price == 1.23456);
             Assert.True(account2.orders[0].volume == 1000.0);
-            Assert.True(account2.orders[1].uid == 2);
+            Assert.True(account2.orders[1].id == 2);
             Assert.True(account2.orders[1].symbol == "EURUSD");
             Assert.True(account2.orders[1].side == proto.OrderSide.sell);
             Assert.True(account2.orders[1].type == proto.OrderType.limit);
             Assert.True(account2.orders[1].price == 1.0);
             Assert.True(account2.orders[1].volume == 100.0);
-            Assert.True(account2.orders[2].uid == 3);
+            Assert.True(account2.orders[2].id == 3);
             Assert.True(account2.orders[2].symbol == "EURUSD");
             Assert.True(account2.orders[2].side == proto.OrderSide.buy);
             Assert.True(account2.orders[2].type == proto.OrderType.stop);
@@ -1043,10 +1043,10 @@ namespace Tests
             struct1.f3.Add(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
             struct1.f3.Add(test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2 | test.FlagsSimple.FLAG_VALUE_3);
             var s1 = test.StructSimple.Default;
-            s1.uid = 48;
+            s1.id = 48;
             struct1.f4.Add(s1);
             var s2 = test.StructSimple.Default;
-            s2.uid = 65;
+            s2.id = 65;
             struct1.f4.Add(s2);
 
             // Serialize the struct to the FBE stream
@@ -1106,10 +1106,10 @@ namespace Tests
             struct1.f8.Add(10, test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
             struct1.f8.Add(20, null);
             var s1 = test.StructSimple.Default;
-            s1.uid = 48;
+            s1.id = 48;
             struct1.f9.Add(10, s1);
             var s2 = test.StructSimple.Default;
-            s2.uid = 65;
+            s2.id = 65;
             struct1.f9.Add(20, s2);
             struct1.f10.Add(10, s1);
             struct1.f10.Add(20, null);
@@ -1159,10 +1159,10 @@ namespace Tests
             Assert.True(struct2.f8[10] == (test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2));
             Assert.True(struct2.f8[20] == null);
             Assert.True(struct2.f9.Count == 2);
-            Assert.True(struct2.f9[10].uid == 48);
-            Assert.True(struct2.f9[20].uid == 65);
+            Assert.True(struct2.f9[10].id == 48);
+            Assert.True(struct2.f9[20].id == 65);
             Assert.True(struct2.f10.Count == 2);
-            Assert.True(struct2.f10[10].Value.uid == 48);
+            Assert.True(struct2.f10[10].Value.id == 48);
             Assert.True(struct2.f10[20] == null);
         }
 
@@ -1188,10 +1188,10 @@ namespace Tests
             struct1.f8.Add("10", test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2);
             struct1.f8.Add("20", null);
             var s1 = test.StructSimple.Default;
-            s1.uid = 48;
+            s1.id = 48;
             struct1.f9.Add("10", s1);
             var s2 = test.StructSimple.Default;
-            s2.uid = 65;
+            s2.id = 65;
             struct1.f9.Add("20", s2);
             struct1.f10.Add("10", s1);
             struct1.f10.Add("20", null);
@@ -1241,10 +1241,10 @@ namespace Tests
             Assert.True(struct2.f8["10"] == (test.FlagsSimple.FLAG_VALUE_1 | test.FlagsSimple.FLAG_VALUE_2));
             Assert.True(struct2.f8["20"] == null);
             Assert.True(struct2.f9.Count == 2);
-            Assert.True(struct2.f9["10"].uid == 48);
-            Assert.True(struct2.f9["20"].uid == 65);
+            Assert.True(struct2.f9["10"].id == 48);
+            Assert.True(struct2.f9["20"].id == 65);
             Assert.True(struct2.f10.Count == 2);
-            Assert.True(struct2.f10["10"].Value.uid == 48);
+            Assert.True(struct2.f10["10"].Value.id == 48);
             Assert.True(struct2.f10["20"] == null);
         }
 
@@ -1254,10 +1254,10 @@ namespace Tests
             // Create a new struct
             var struct1 = test.StructHashEx.Default;
             var s1 = test.StructSimple.Default;
-            s1.uid = 48;
+            s1.id = 48;
             struct1.f1.Add(s1, test.StructNested.Default);
             var s2 = test.StructSimple.Default;
-            s2.uid = 65;
+            s2.id = 65;
             struct1.f1.Add(s2, test.StructNested.Default);
             struct1.f2.Add(s1, test.StructNested.Default);
             struct1.f2.Add(s2, null);

@@ -9,7 +9,7 @@ object Create
         val account = proto.fbe.AccountModel()
         val modelBegin = account.createBegin()
         var accountBegin = account.model.setBegin()
-        account.model.uid.set(1)
+        account.model.id.set(1)
         account.model.name.set("Test")
         account.model.state.set(proto.State.good)
         var walletBegin = account.model.wallet.setBegin()
@@ -28,14 +28,14 @@ object Create
         access.attach(account.buffer)
         assert(access.verify())
 
-        val uid: Int
+        val id: Int
         val name: String
         val state: proto.State
         val walletCurrency: String
         val walletAmount: Double
 
         accountBegin = access.model.getBegin()
-        uid = access.model.uid.get()
+        id = access.model.id.get()
         name = access.model.name.get()
         state = access.model.state.get()
         walletBegin = access.model.wallet.getBegin()
@@ -46,7 +46,7 @@ object Create
 
         // Show account content
         println()
-        println("account.uid = $uid")
+        println("account.id = $id")
         println("account.name = $name")
         println("account.state = $state")
         println("account.wallet.currency = $walletCurrency")

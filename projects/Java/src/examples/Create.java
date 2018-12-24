@@ -6,17 +6,17 @@ public class Create
     {
         // Create a new account using FBE model
         var account = new proto.fbe.AccountModel();
-        long model_begin = account.createBegin();
-        long account_begin = account.model.setBegin();
-        account.model.uid.set(1);
+        long modelBegin = account.createBegin();
+        long accountBegin = account.model.setBegin();
+        account.model.id.set(1);
         account.model.name.set("Test");
         account.model.state.set(proto.State.good);
-        long wallet_begin = account.model.wallet.setBegin();
+        long walletBegin = account.model.wallet.setBegin();
         account.model.wallet.currency.set("USD");
         account.model.wallet.amount.set(1000.0);
-        account.model.wallet.setEnd(wallet_begin);
-        account.model.setEnd(account_begin);
-        account.createEnd(model_begin);
+        account.model.wallet.setEnd(walletBegin);
+        account.model.setEnd(accountBegin);
+        account.createEnd(modelBegin);
         assert account.verify();
 
         // Show the serialized FBE size
@@ -27,28 +27,28 @@ public class Create
         access.attach(account.getBuffer());
         assert access.verify();
 
-        int uid;
+        int id;
         String name;
         proto.State state;
-        String wallet_currency;
-        double wallet_amount;
+        String walletCurrency;
+        double walletAmount;
 
-        account_begin = access.model.getBegin();
-        uid = access.model.uid.get();
+        accountBegin = access.model.getBegin();
+        id = access.model.id.get();
         name = access.model.name.get();
         state = access.model.state.get();
-        wallet_begin = access.model.wallet.getBegin();
-        wallet_currency = access.model.wallet.currency.get();
-        wallet_amount = access.model.wallet.amount.get();
-        access.model.wallet.getEnd(wallet_begin);
-        access.model.getEnd(account_begin);
+        walletBegin = access.model.wallet.getBegin();
+        walletCurrency = access.model.wallet.currency.get();
+        walletAmount = access.model.wallet.amount.get();
+        access.model.wallet.getEnd(walletBegin);
+        access.model.getEnd(accountBegin);
 
         // Show account content
         System.out.println();
-        System.out.println("account.uid = " + uid);
+        System.out.println("account.id = " + id);
         System.out.println("account.name = " + name);
         System.out.println("account.state = " + state);
-        System.out.println("account.wallet.currency = " + wallet_currency);
-        System.out.println("account.wallet.amount = " + wallet_amount);
+        System.out.println("account.wallet.currency = " + walletCurrency);
+        System.out.println("account.wallet.amount = " + walletAmount);
     }
 }

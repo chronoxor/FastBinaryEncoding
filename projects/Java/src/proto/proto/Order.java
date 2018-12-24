@@ -18,7 +18,7 @@ import fbe.*;
 
 public class Order implements Comparable<Object>
 {
-    public int uid = 0;
+    public int id = 0;
     public String symbol = "";
     public OrderSide side = new OrderSide();
     public OrderType type = new OrderType();
@@ -27,9 +27,9 @@ public class Order implements Comparable<Object>
 
     public Order() {}
 
-    public Order(int uid, String symbol, OrderSide side, OrderType type, double price, double volume)
+    public Order(int id, String symbol, OrderSide side, OrderType type, double price, double volume)
     {
-        this.uid = uid;
+        this.id = id;
         this.symbol = symbol;
         this.side = side;
         this.type = type;
@@ -39,7 +39,7 @@ public class Order implements Comparable<Object>
 
     public Order(Order other)
     {
-        this.uid = other.uid;
+        this.id = other.id;
         this.symbol = other.symbol;
         this.side = other.side;
         this.type = other.type;
@@ -71,7 +71,7 @@ public class Order implements Comparable<Object>
         final Order obj = (Order)other;
 
         int result = 0;
-        result = Integer.compare(uid, obj.uid);
+        result = Integer.compare(id, obj.id);
         if (result != 0)
             return result;
         return result;
@@ -88,7 +88,7 @@ public class Order implements Comparable<Object>
 
         final Order obj = (Order)other;
 
-        if (uid != obj.uid)
+        if (id != obj.id)
             return false;
         return true;
     }
@@ -97,7 +97,7 @@ public class Order implements Comparable<Object>
     public int hashCode()
     {
         int hash = 17;
-        hash = hash * 31 + Integer.hashCode(uid);
+        hash = hash * 31 + Integer.hashCode(id);
         return hash;
     }
 
@@ -106,7 +106,7 @@ public class Order implements Comparable<Object>
     {
         var sb = new StringBuilder();
         sb.append("Order(");
-        sb.append("uid="); sb.append(uid);
+        sb.append("id="); sb.append(id);
         sb.append(",symbol="); if (symbol != null) sb.append("\"").append(symbol).append("\""); else sb.append("null");
         sb.append(",side="); sb.append(side);
         sb.append(",type="); sb.append(type);

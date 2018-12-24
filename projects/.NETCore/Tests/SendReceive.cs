@@ -40,7 +40,7 @@ namespace Tests
 
             // Create and send a new account with some orders
             var account = proto.Account.Default;
-            account.uid = 1;
+            account.id = 1;
             account.name = "Test";
             account.state = proto.State.good;
             account.wallet.currency = "USD";
