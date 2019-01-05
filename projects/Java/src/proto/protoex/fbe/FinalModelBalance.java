@@ -40,7 +40,7 @@ public final class FinalModelBalance extends FinalModel
         return fbeResult;
     }
 
-    // Get the field type
+    // Get the final type
     public static final long fbeTypeConst = proto.fbe.FinalModelBalance.fbeTypeConst;
     public long fbeType() { return fbeTypeConst; }
 

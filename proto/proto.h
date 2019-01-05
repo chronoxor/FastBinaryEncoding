@@ -848,16 +848,16 @@ public:
         return fbe_result;
     }
 
-    // Get the field offset
+    // Get the final offset
     size_t fbe_offset() const noexcept { return _offset; }
-    // Set the field offset
+    // Set the final offset
     size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
-    // Get the field type
+    // Get the final type
     static constexpr size_t fbe_type() noexcept { return 1; }
 
-    // Shift the current field offset
+    // Shift the current final offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
-    // Unshift the current field offset
+    // Unshift the current final offset
     void fbe_unshift(size_t size) noexcept { _offset -= size; }
 
     // Check if the struct value is valid
@@ -1555,16 +1555,16 @@ public:
         return fbe_result;
     }
 
-    // Get the field offset
+    // Get the final offset
     size_t fbe_offset() const noexcept { return _offset; }
-    // Set the field offset
+    // Set the final offset
     size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
-    // Get the field type
+    // Get the final type
     static constexpr size_t fbe_type() noexcept { return 2; }
 
-    // Shift the current field offset
+    // Shift the current final offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
-    // Unshift the current field offset
+    // Unshift the current final offset
     void fbe_unshift(size_t size) noexcept { _offset -= size; }
 
     // Check if the struct value is valid
@@ -2315,16 +2315,16 @@ public:
         return fbe_result;
     }
 
-    // Get the field offset
+    // Get the final offset
     size_t fbe_offset() const noexcept { return _offset; }
-    // Set the field offset
+    // Set the final offset
     size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
-    // Get the field type
+    // Get the final type
     static constexpr size_t fbe_type() noexcept { return 3; }
 
-    // Shift the current field offset
+    // Shift the current final offset
     void fbe_shift(size_t size) noexcept { _offset += size; }
-    // Unshift the current field offset
+    // Unshift the current final offset
     void fbe_unshift(size_t size) noexcept { _offset -= size; }
 
     // Check if the struct value is valid

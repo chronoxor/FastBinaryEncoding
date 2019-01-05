@@ -10156,9 +10156,9 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
     WriteLineIndent("}");
     WriteLine();
     WriteLineIndent("/**");
-    WriteLineIndent(" * Get the field type");
+    WriteLineIndent(" * Get the final type");
     WriteLineIndent(" * @this {!FinalModel" + *s->name + "}");
-    WriteLineIndent(" * @returns {!number} Field type");
+    WriteLineIndent(" * @returns {!number} Final type");
     WriteLineIndent(" */");
     WriteLineIndent("get fbeType () {");
     Indent(1);
@@ -10167,9 +10167,9 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
     WriteLineIndent("}");
     WriteLine();
     WriteLineIndent("/**");
-    WriteLineIndent(" * Get the field type (static)");
+    WriteLineIndent(" * Get the final type (static)");
     WriteLineIndent(" * @this {!FinalModel" + *s->name + "}");
-    WriteLineIndent(" * @returns {!number} Field type");
+    WriteLineIndent(" * @returns {!number} Final type");
     WriteLineIndent(" */");
     WriteLineIndent("static get fbeType () {");
     Indent(1);

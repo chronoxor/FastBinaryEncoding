@@ -5050,7 +5050,7 @@ void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& 
     Indent(-1);
     WriteLineIndent("end");
     WriteLine();
-    WriteLineIndent("# Get the field type");
+    WriteLineIndent("# Get the final type");
     WriteLineIndent("def fbe_type");
     Indent(1);
     WriteLineIndent("TYPE");

@@ -40,7 +40,7 @@ public final class FinalModelStructHashEx extends FinalModel
         return fbeResult;
     }
 
-    // Get the field type
+    // Get the final type
     public static final long fbeTypeConst = 142;
     public long fbeType() { return fbeTypeConst; }
 

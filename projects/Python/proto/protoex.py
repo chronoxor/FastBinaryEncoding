@@ -962,7 +962,7 @@ class FinalModelOrder(fbe.FinalModel):
 
         return fbe_result
 
-    # Get the field type
+    # Get the final type
     @property
     def fbe_type(self):
         return self.TYPE
@@ -1593,7 +1593,7 @@ class FinalModelBalance(fbe.FinalModel):
 
         return fbe_result
 
-    # Get the field type
+    # Get the final type
     @property
     def fbe_type(self):
         return self.TYPE
@@ -2268,7 +2268,7 @@ class FinalModelAccount(fbe.FinalModel):
 
         return fbe_result
 
-    # Get the field type
+    # Get the final type
     @property
     def fbe_type(self):
         return self.TYPE

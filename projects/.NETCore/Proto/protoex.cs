@@ -1360,7 +1360,7 @@ namespace protoex {
             return fbeResult;
         }
 
-        // Get the field type
+        // Get the final type
         public const long FBETypeConst = 1;
         public long FBEType => FBETypeConst;
 
@@ -2080,7 +2080,7 @@ namespace protoex {
             return fbeResult;
         }
 
-        // Get the field type
+        // Get the final type
         public const long FBETypeConst = proto.FinalModelBalance.FBETypeConst;
         public long FBEType => FBETypeConst;
 
@@ -2808,7 +2808,7 @@ namespace protoex {
             return fbeResult;
         }
 
-        // Get the field type
+        // Get the final type
         public const long FBETypeConst = 3;
         public long FBEType => FBETypeConst;
 

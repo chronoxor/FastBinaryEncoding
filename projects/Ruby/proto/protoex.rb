@@ -1332,7 +1332,7 @@ module Protoex
         + sl.fbe_allocation_size(fbe_value.sl) \
     end
 
-    # Get the field type
+    # Get the final type
     def fbe_type
       TYPE
     end
@@ -2074,7 +2074,7 @@ module Protoex
         + locked.fbe_allocation_size(fbe_value.locked) \
     end
 
-    # Get the field type
+    # Get the final type
     def fbe_type
       TYPE
     end
@@ -2898,7 +2898,7 @@ module Protoex
         + orders.fbe_allocation_size(fbe_value.orders) \
     end
 
-    # Get the field type
+    # Get the final type
     def fbe_type
       TYPE
     end

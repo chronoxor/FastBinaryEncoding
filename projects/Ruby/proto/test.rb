@@ -3274,7 +3274,7 @@ module Test
         + f44.fbe_allocation_size(fbe_value.f44) \
     end
 
-    # Get the field type
+    # Get the final type
     def fbe_type
       TYPE
     end
@@ -7681,7 +7681,7 @@ module Test
         + f165.fbe_allocation_size(fbe_value.f165) \
     end
 
-    # Get the field type
+    # Get the final type
     def fbe_type
       TYPE
     end
@@ -10097,7 +10097,7 @@ module Test
         + f1011.fbe_allocation_size(fbe_value.f1011) \
     end
 
-    # Get the field type
+    # Get the final type
     def fbe_type
       TYPE
     end
@@ -10989,7 +10989,7 @@ module Test
         + f3.fbe_allocation_size(fbe_value.f3) \
     end
 
-    # Get the field type
+    # Get the final type
     def fbe_type
       TYPE
     end
@@ -12117,7 +12117,7 @@ module Test
         + f10.fbe_allocation_size(fbe_value.f10) \
     end
 
-    # Get the field type
+    # Get the final type
     def fbe_type
       TYPE
     end
@@ -13375,7 +13375,7 @@ module Test
         + f10.fbe_allocation_size(fbe_value.f10) \
     end
 
-    # Get the field type
+    # Get the final type
     def fbe_type
       TYPE
     end
@@ -14633,7 +14633,7 @@ module Test
         + f10.fbe_allocation_size(fbe_value.f10) \
     end
 
-    # Get the field type
+    # Get the final type
     def fbe_type
       TYPE
     end
@@ -15549,7 +15549,7 @@ module Test
         + f4.fbe_allocation_size(fbe_value.f4) \
     end
 
-    # Get the field type
+    # Get the final type
     def fbe_type
       TYPE
     end
@@ -16753,7 +16753,7 @@ module Test
         + f10.fbe_allocation_size(fbe_value.f10) \
     end
 
-    # Get the field type
+    # Get the final type
     def fbe_type
       TYPE
     end
@@ -18071,7 +18071,7 @@ module Test
         + f10.fbe_allocation_size(fbe_value.f10) \
     end
 
-    # Get the field type
+    # Get the final type
     def fbe_type
       TYPE
     end
@@ -18885,7 +18885,7 @@ module Test
         + f2.fbe_allocation_size(fbe_value.f2) \
     end
 
-    # Get the field type
+    # Get the final type
     def fbe_type
       TYPE
     end

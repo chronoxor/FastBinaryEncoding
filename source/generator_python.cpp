@@ -4265,7 +4265,7 @@ void GeneratorPython::GenerateStructFinalModel(const std::shared_ptr<StructType>
     WriteLineIndent("return fbe_result");
     Indent(-1);
     WriteLine();
-    WriteLineIndent("# Get the field type");
+    WriteLineIndent("# Get the final type");
     WriteLineIndent("@property");
     WriteLineIndent("def fbe_type(self):");
     Indent(1);

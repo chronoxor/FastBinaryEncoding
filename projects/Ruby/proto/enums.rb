@@ -5243,7 +5243,7 @@ module Enums
         + uint64b5.fbe_allocation_size(fbe_value.uint64b5) \
     end
 
-    # Get the field type
+    # Get the final type
     def fbe_type
       TYPE
     end

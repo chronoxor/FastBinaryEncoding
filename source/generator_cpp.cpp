@@ -7100,19 +7100,19 @@ void GeneratorCpp::GenerateStructFinalModel(const std::shared_ptr<Package>& p, c
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("// Get the field offset");
+    WriteLineIndent("// Get the final offset");
     WriteLineIndent("size_t fbe_offset() const noexcept { return _offset; }");
-    WriteLineIndent("// Set the field offset");
+    WriteLineIndent("// Set the final offset");
     WriteLineIndent("size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }");
-    WriteLineIndent("// Get the field type");
+    WriteLineIndent("// Get the final type");
     if (s->base && !s->base->empty() && (s->type == 0))
         WriteLineIndent("static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, " + ConvertTypeName(*p->name, *s->base, false) + ">::fbe_type(); }");
     else
         WriteLineIndent("static constexpr size_t fbe_type() noexcept { return " + std::to_string(s->type) + "; }");
     WriteLine();
-    WriteLineIndent("// Shift the current field offset");
+    WriteLineIndent("// Shift the current final offset");
     WriteLineIndent("void fbe_shift(size_t size) noexcept { _offset += size; }");
-    WriteLineIndent("// Unshift the current field offset");
+    WriteLineIndent("// Unshift the current final offset");
     WriteLineIndent("void fbe_unshift(size_t size) noexcept { _offset -= size; }");
 
     // Generate struct final model verify() method

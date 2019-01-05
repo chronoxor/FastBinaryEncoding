@@ -2357,7 +2357,7 @@ class FinalModelStructSimple(fbe.FinalModel):
 
         return fbe_result
 
-    # Get the field type
+    # Get the final type
     @property
     def fbe_type(self):
         return self.TYPE
@@ -5895,7 +5895,7 @@ class FinalModelStructOptional(fbe.FinalModel):
 
         return fbe_result
 
-    # Get the field type
+    # Get the final type
     @property
     def fbe_type(self):
         return self.TYPE
@@ -7906,7 +7906,7 @@ class FinalModelStructNested(fbe.FinalModel):
 
         return fbe_result
 
-    # Get the field type
+    # Get the final type
     @property
     def fbe_type(self):
         return self.TYPE
@@ -8658,7 +8658,7 @@ class FinalModelStructBytes(fbe.FinalModel):
 
         return fbe_result
 
-    # Get the field type
+    # Get the final type
     @property
     def fbe_type(self):
         return self.TYPE
@@ -9588,7 +9588,7 @@ class FinalModelStructArray(fbe.FinalModel):
 
         return fbe_result
 
-    # Get the field type
+    # Get the final type
     @property
     def fbe_type(self):
         return self.TYPE
@@ -10627,7 +10627,7 @@ class FinalModelStructVector(fbe.FinalModel):
 
         return fbe_result
 
-    # Get the field type
+    # Get the final type
     @property
     def fbe_type(self):
         return self.TYPE
@@ -11666,7 +11666,7 @@ class FinalModelStructList(fbe.FinalModel):
 
         return fbe_result
 
-    # Get the field type
+    # Get the final type
     @property
     def fbe_type(self):
         return self.TYPE
@@ -12423,7 +12423,7 @@ class FinalModelStructSet(fbe.FinalModel):
 
         return fbe_result
 
-    # Get the field type
+    # Get the final type
     @property
     def fbe_type(self):
         return self.TYPE
@@ -13380,7 +13380,7 @@ class FinalModelStructMap(fbe.FinalModel):
 
         return fbe_result
 
-    # Get the field type
+    # Get the final type
     @property
     def fbe_type(self):
         return self.TYPE
@@ -14473,7 +14473,7 @@ class FinalModelStructHash(fbe.FinalModel):
 
         return fbe_result
 
-    # Get the field type
+    # Get the final type
     @property
     def fbe_type(self):
         return self.TYPE
@@ -15151,7 +15151,7 @@ class FinalModelStructHashEx(fbe.FinalModel):
 
         return fbe_result
 
-    # Get the field type
+    # Get the final type
     @property
     def fbe_type(self):
         return self.TYPE

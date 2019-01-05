@@ -52,7 +52,7 @@ public final class FinalModelAccount extends FinalModel
         return fbeResult;
     }
 
-    // Get the field type
+    // Get the final type
     public static final long fbeTypeConst = 3;
     public long fbeType() { return fbeTypeConst; }
 

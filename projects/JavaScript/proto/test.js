@@ -3786,18 +3786,18 @@ class FinalModelStructSimple extends fbe.FinalModel {
   }
 
   /**
-   * Get the field type
+   * Get the final type
    * @this {!FinalModelStructSimple}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   get fbeType () {
     return FinalModelStructSimple.fbeType
   }
 
   /**
-   * Get the field type (static)
+   * Get the final type (static)
    * @this {!FinalModelStructSimple}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   static get fbeType () {
     return 110
@@ -8914,18 +8914,18 @@ class FinalModelStructOptional extends fbe.FinalModel {
   }
 
   /**
-   * Get the field type
+   * Get the final type
    * @this {!FinalModelStructOptional}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   get fbeType () {
     return FinalModelStructOptional.fbeType
   }
 
   /**
-   * Get the field type (static)
+   * Get the final type (static)
    * @this {!FinalModelStructOptional}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   static get fbeType () {
     return 111
@@ -11613,18 +11613,18 @@ class FinalModelStructNested extends fbe.FinalModel {
   }
 
   /**
-   * Get the field type
+   * Get the final type
    * @this {!FinalModelStructNested}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   get fbeType () {
     return FinalModelStructNested.fbeType
   }
 
   /**
-   * Get the field type (static)
+   * Get the final type (static)
    * @this {!FinalModelStructNested}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   static get fbeType () {
     return 112
@@ -12756,18 +12756,18 @@ class FinalModelStructBytes extends fbe.FinalModel {
   }
 
   /**
-   * Get the field type
+   * Get the final type
    * @this {!FinalModelStructBytes}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   get fbeType () {
     return FinalModelStructBytes.fbeType
   }
 
   /**
-   * Get the field type (static)
+   * Get the final type (static)
    * @this {!FinalModelStructBytes}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   static get fbeType () {
     return 120
@@ -14249,18 +14249,18 @@ class FinalModelStructArray extends fbe.FinalModel {
   }
 
   /**
-   * Get the field type
+   * Get the final type
    * @this {!FinalModelStructArray}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   get fbeType () {
     return FinalModelStructArray.fbeType
   }
 
   /**
-   * Get the field type (static)
+   * Get the final type (static)
    * @this {!FinalModelStructArray}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   static get fbeType () {
     return 125
@@ -15872,18 +15872,18 @@ class FinalModelStructVector extends fbe.FinalModel {
   }
 
   /**
-   * Get the field type
+   * Get the final type
    * @this {!FinalModelStructVector}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   get fbeType () {
     return FinalModelStructVector.fbeType
   }
 
   /**
-   * Get the field type (static)
+   * Get the final type (static)
    * @this {!FinalModelStructVector}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   static get fbeType () {
     return 130
@@ -17495,18 +17495,18 @@ class FinalModelStructList extends fbe.FinalModel {
   }
 
   /**
-   * Get the field type
+   * Get the final type
    * @this {!FinalModelStructList}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   get fbeType () {
     return FinalModelStructList.fbeType
   }
 
   /**
-   * Get the field type (static)
+   * Get the final type (static)
    * @this {!FinalModelStructList}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   static get fbeType () {
     return 131
@@ -18670,18 +18670,18 @@ class FinalModelStructSet extends fbe.FinalModel {
   }
 
   /**
-   * Get the field type
+   * Get the final type
    * @this {!FinalModelStructSet}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   get fbeType () {
     return FinalModelStructSet.fbeType
   }
 
   /**
-   * Get the field type (static)
+   * Get the final type (static)
    * @this {!FinalModelStructSet}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   static get fbeType () {
     return 132
@@ -20233,18 +20233,18 @@ class FinalModelStructMap extends fbe.FinalModel {
   }
 
   /**
-   * Get the field type
+   * Get the final type
    * @this {!FinalModelStructMap}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   get fbeType () {
     return FinalModelStructMap.fbeType
   }
 
   /**
-   * Get the field type (static)
+   * Get the final type (static)
    * @this {!FinalModelStructMap}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   static get fbeType () {
     return 140
@@ -21960,18 +21960,18 @@ class FinalModelStructHash extends fbe.FinalModel {
   }
 
   /**
-   * Get the field type
+   * Get the final type
    * @this {!FinalModelStructHash}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   get fbeType () {
     return FinalModelStructHash.fbeType
   }
 
   /**
-   * Get the field type (static)
+   * Get the final type (static)
    * @this {!FinalModelStructHash}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   static get fbeType () {
     return 141
@@ -23015,18 +23015,18 @@ class FinalModelStructHashEx extends fbe.FinalModel {
   }
 
   /**
-   * Get the field type
+   * Get the final type
    * @this {!FinalModelStructHashEx}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   get fbeType () {
     return FinalModelStructHashEx.fbeType
   }
 
   /**
-   * Get the field type (static)
+   * Get the final type (static)
    * @this {!FinalModelStructHashEx}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   static get fbeType () {
     return 142

@@ -235,7 +235,7 @@ public final class FinalModelStructOptional extends FinalModel
         return fbeResult;
     }
 
-    // Get the field type
+    // Get the final type
     public static final long fbeTypeConst = 111;
     public long fbeType() { return fbeTypeConst; }
 

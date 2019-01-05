@@ -6107,18 +6107,18 @@ class FinalModelEnums extends fbe.FinalModel {
   }
 
   /**
-   * Get the field type
+   * Get the final type
    * @this {!FinalModelEnums}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   get fbeType () {
     return FinalModelEnums.fbeType
   }
 
   /**
-   * Get the field type (static)
+   * Get the final type (static)
    * @this {!FinalModelEnums}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   static get fbeType () {
     return 1

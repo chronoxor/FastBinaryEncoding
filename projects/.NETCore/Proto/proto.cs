@@ -1294,7 +1294,7 @@ namespace proto {
             return fbeResult;
         }
 
-        // Get the field type
+        // Get the final type
         public const long FBETypeConst = 1;
         public long FBEType => FBETypeConst;
 
@@ -1976,7 +1976,7 @@ namespace proto {
             return fbeResult;
         }
 
-        // Get the field type
+        // Get the final type
         public const long FBETypeConst = 2;
         public long FBEType => FBETypeConst;
 
@@ -2704,7 +2704,7 @@ namespace proto {
             return fbeResult;
         }
 
-        // Get the field type
+        // Get the final type
         public const long FBETypeConst = 3;
         public long FBEType => FBETypeConst;
 

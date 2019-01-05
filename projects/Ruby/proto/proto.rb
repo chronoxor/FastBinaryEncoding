@@ -1205,7 +1205,7 @@ module Proto
         + volume.fbe_allocation_size(fbe_value.volume) \
     end
 
-    # Get the field type
+    # Get the final type
     def fbe_type
       TYPE
     end
@@ -1918,7 +1918,7 @@ module Proto
         + amount.fbe_allocation_size(fbe_value.amount) \
     end
 
-    # Get the field type
+    # Get the final type
     def fbe_type
       TYPE
     end
@@ -2743,7 +2743,7 @@ module Proto
         + orders.fbe_allocation_size(fbe_value.orders) \
     end
 
-    # Get the field type
+    # Get the final type
     def fbe_type
       TYPE
     end

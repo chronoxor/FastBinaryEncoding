@@ -169,7 +169,7 @@ public final class FinalModelStructSimple extends FinalModel
         return fbeResult;
     }
 
-    // Get the field type
+    // Get the final type
     public static final long fbeTypeConst = 110;
     public long fbeType() { return fbeTypeConst; }
 

@@ -1510,18 +1510,18 @@ class FinalModelOrder extends fbe.FinalModel {
   }
 
   /**
-   * Get the field type
+   * Get the final type
    * @this {!FinalModelOrder}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   get fbeType () {
     return FinalModelOrder.fbeType
   }
 
   /**
-   * Get the field type (static)
+   * Get the final type (static)
    * @this {!FinalModelOrder}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   static get fbeType () {
     return 1
@@ -2447,18 +2447,18 @@ class FinalModelBalance extends fbe.FinalModel {
   }
 
   /**
-   * Get the field type
+   * Get the final type
    * @this {!FinalModelBalance}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   get fbeType () {
     return FinalModelBalance.fbeType
   }
 
   /**
-   * Get the field type (static)
+   * Get the final type (static)
    * @this {!FinalModelBalance}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   static get fbeType () {
     return 2
@@ -3520,18 +3520,18 @@ class FinalModelAccount extends fbe.FinalModel {
   }
 
   /**
-   * Get the field type
+   * Get the final type
    * @this {!FinalModelAccount}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   get fbeType () {
     return FinalModelAccount.fbeType
   }
 
   /**
-   * Get the field type (static)
+   * Get the final type (static)
    * @this {!FinalModelAccount}
-   * @returns {!number} Field type
+   * @returns {!number} Final type
    */
   static get fbeType () {
     return 3

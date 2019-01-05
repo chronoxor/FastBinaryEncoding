@@ -43,7 +43,7 @@ public final class FinalModelStructBytes extends FinalModel
         return fbeResult;
     }
 
-    // Get the field type
+    // Get the final type
     public static final long fbeTypeConst = 120;
     public long fbeType() { return fbeTypeConst; }
 

@@ -2555,7 +2555,7 @@ namespace test {
             return fbeResult;
         }
 
-        // Get the field type
+        // Get the final type
         public const long FBETypeConst = 110;
         public long FBEType => FBETypeConst;
 
@@ -5427,7 +5427,7 @@ namespace test {
             return fbeResult;
         }
 
-        // Get the field type
+        // Get the final type
         public const long FBETypeConst = 111;
         public long FBEType => FBETypeConst;
 
@@ -7355,7 +7355,7 @@ namespace test {
             return fbeResult;
         }
 
-        // Get the field type
+        // Get the final type
         public const long FBETypeConst = 112;
         public long FBEType => FBETypeConst;
 
@@ -8162,7 +8162,7 @@ namespace test {
             return fbeResult;
         }
 
-        // Get the field type
+        // Get the final type
         public const long FBETypeConst = 120;
         public long FBEType => FBETypeConst;
 
@@ -9117,7 +9117,7 @@ namespace test {
             return fbeResult;
         }
 
-        // Get the field type
+        // Get the final type
         public const long FBETypeConst = 125;
         public long FBEType => FBETypeConst;
 
@@ -10184,7 +10184,7 @@ namespace test {
             return fbeResult;
         }
 
-        // Get the field type
+        // Get the final type
         public const long FBETypeConst = 130;
         public long FBEType => FBETypeConst;
 
@@ -11251,7 +11251,7 @@ namespace test {
             return fbeResult;
         }
 
-        // Get the field type
+        // Get the final type
         public const long FBETypeConst = 131;
         public long FBEType => FBETypeConst;
 
@@ -12090,7 +12090,7 @@ namespace test {
             return fbeResult;
         }
 
-        // Get the field type
+        // Get the final type
         public const long FBETypeConst = 132;
         public long FBEType => FBETypeConst;
 
@@ -13081,7 +13081,7 @@ namespace test {
             return fbeResult;
         }
 
-        // Get the field type
+        // Get the final type
         public const long FBETypeConst = 140;
         public long FBEType => FBETypeConst;
 
@@ -14168,7 +14168,7 @@ namespace test {
             return fbeResult;
         }
 
-        // Get the field type
+        // Get the final type
         public const long FBETypeConst = 141;
         public long FBEType => FBETypeConst;
 
@@ -14935,7 +14935,7 @@ namespace test {
             return fbeResult;
         }
 
-        // Get the field type
+        // Get the final type
         public const long FBETypeConst = 142;
         public long FBEType => FBETypeConst;
 

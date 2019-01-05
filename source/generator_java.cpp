@@ -5999,7 +5999,7 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     Indent(-1);
     WriteLineIndent("}");
     WriteLine();
-    WriteLineIndent("// Get the field type");
+    WriteLineIndent("// Get the final type");
     if (s->base && !s->base->empty() && (s->type == 0))
         WriteLineIndent("public static final long fbeTypeConst = " + ConvertBaseFieldName(*s->base, true) + ".fbeTypeConst;");
     else

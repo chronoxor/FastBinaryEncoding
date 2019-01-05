@@ -64,7 +64,7 @@ public final class FinalModelStructMap extends FinalModel
         return fbeResult;
     }
 
-    // Get the field type
+    // Get the final type
     public static final long fbeTypeConst = 140;
     public long fbeType() { return fbeTypeConst; }
 
