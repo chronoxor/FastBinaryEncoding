@@ -1,58 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a777d28d-c4fb-4aae-88ff-091d764fff06" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/enums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/protoex.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/enums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/protoex.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/test.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FinalModelEnums.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FinalModelEnums.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelBalance.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelBalance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelBalance.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelBalance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructArray.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructArray.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructBytes.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructBytes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructHash.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructHash.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructHashEx.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructHashEx.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructList.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructList.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructNested.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructNested.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructOptional.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructOptional.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructSet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructSimple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructVector.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructVector.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/enums.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/enums.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/proto.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/proto.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/protoex.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/protoex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/enums.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/enums.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/proto.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/proto.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/protoex.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/protoex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/enums.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/enums.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/proto.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/proto.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/protoex.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/protoex.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/enums.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/enums.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/proto.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/protoex.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/protoex.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/test.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/test.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_cpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_cpp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_csharp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_csharp.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_java.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_java.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_javascript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_javascript.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_python.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_python.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_ruby.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_ruby.cpp" afterDir="false" />
-    </list>
+    <list default="true" id="a777d28d-c4fb-4aae-88ff-091d764fff06" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,6 +98,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -165,8 +116,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -340,6 +289,7 @@
       <workItem from="1545683593403" duration="724000" />
       <workItem from="1546472888286" duration="92000" />
       <workItem from="1546712279070" duration="13000" />
+      <workItem from="1547662117692" duration="609000" />
     </task>
     <servers />
   </component>
@@ -376,7 +326,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="77851000" />
+    <option name="totallyTimeSpent" value="78460000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -390,7 +340,7 @@
   <component name="ToolWindowManager">
     <frame x="410" y="273" width="1709" height="896" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21649484" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21892056" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
