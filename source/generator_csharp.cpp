@@ -155,7 +155,7 @@ void GeneratorCSharp::GenerateFBEUuidGenerator()
 void GeneratorCSharp::GenerateFBEBuffer()
 {
     std::string code = R"CODE(
-    // Fast Binary Encoding buffer based on MemoryStream
+    // Fast Binary Encoding dynamic bytes buffer
     public class Buffer
     {
         private byte[] _data;

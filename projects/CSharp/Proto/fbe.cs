@@ -90,7 +90,7 @@ namespace FBE {
         public static Guid Random() { return Guid.NewGuid(); }
     }
 
-    // Fast Binary Encoding buffer based on MemoryStream
+    // Fast Binary Encoding dynamic bytes buffer
     public class Buffer
     {
         private byte[] _data;
