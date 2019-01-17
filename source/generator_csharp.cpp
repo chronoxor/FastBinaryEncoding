@@ -173,15 +173,15 @@ void GeneratorCSharp::GenerateFBEBuffer()
         // Bytes memory buffer offset
         public long Offset => _offset;
 
-        // Initializes buffer with an expandable capacity initialized to zero
+        // Initialize a new expandable buffer with zero capacity
         public Buffer() { Attach(); }
-        // Initializes a new buffer with an expandable capacity initialized as specified
+        // Initialize a new expandable buffer with the given capacity
         public Buffer(long capacity) { Attach(capacity); }
-        // Initializes a new buffer based on the specified byte array
+        // Initialize a new buffer based on the specified byte array
         public Buffer(byte[] buffer) { Attach(buffer); }
-        // Initializes a new buffer based on the specified region (offset) of a byte array
+        // Initialize a new buffer based on the specified region (offset) of a byte array
         public Buffer(byte[] buffer, long offset) { Attach(buffer, offset); }
-        // Initializes a new buffer based on the specified region (size and offset) of a byte array
+        // Initialize a new buffer based on the specified region (size and offset) of a byte array
         public Buffer(byte[] buffer, long size, long offset) { Attach(buffer, size, offset); }
 
         #region Attach memory buffer methods
@@ -196,7 +196,7 @@ void GeneratorCSharp::GenerateFBEBuffer()
 
         #region Memory buffer methods
 
-        // Allocate memory in the current write buffer and return offset to the allocated memory block
+        // Allocate memory in the current buffer and return offset to the allocated memory block
         public long Allocate(long size)
         {
             Debug.Assert((size >= 0), "Invalid allocation size!");
@@ -221,7 +221,7 @@ void GeneratorCSharp::GenerateFBEBuffer()
             return offset;
         }
 
-        // Remove some memory of the given size from the current write buffer
+        // Remove some memory of the given size from the current buffer
         public void Remove(long offset, long size)
         {
             Debug.Assert(((offset + size) <= Size), "Invalid offset & size!");
@@ -240,7 +240,7 @@ void GeneratorCSharp::GenerateFBEBuffer()
             }
         }
 
-        // Reserve memory of the given capacity in the current write buffer
+        // Reserve memory of the given capacity in the current buffer
         public void Reserve(long capacity)
         {
             Debug.Assert((capacity >= 0), "Invalid reserve capacity!");
@@ -255,7 +255,7 @@ void GeneratorCSharp::GenerateFBEBuffer()
             }
         }
 
-        // Resize the current write buffer
+        // Resize the current buffer
         public void Resize(long size)
         {
             Reserve(size);
@@ -264,16 +264,16 @@ void GeneratorCSharp::GenerateFBEBuffer()
                 _offset = _size;
         }
 
-        // Reset the current write buffer and its offset
+        // Reset the current buffer and its offset
         public void Reset()
         {
             _size = 0;
             _offset = 0;
         }
 
-        // Shift the current write buffer offset
+        // Shift the current buffer offset
         public void Shift(long offset) { _offset += offset; }
-        // Unshift the current write buffer offset
+        // Unshift the current buffer offset
         public void Unshift(long offset) { _offset -= offset; }
 
         #endregion

@@ -32,15 +32,15 @@ public class Buffer
     // Get bytes memory buffer offset
     public long getOffset() { return _offset; }
 
-    // Initializes buffer with an expandable capacity initialized to zero
+    // Initialize a new expandable buffer with zero capacity
     public Buffer() { attach(); }
-    // Initializes a new buffer with an expandable capacity initialized as specified
+    // Initialize a new expandable buffer with the given capacity
     public Buffer(long capacity) { attach(capacity); }
-    // Initializes a new buffer based on the specified byte array
+    // Initialize a new buffer based on the specified byte array
     public Buffer(byte[] buffer) { attach(buffer); }
-    // Initializes a new buffer based on the specified region (offset) of a byte array
+    // Initialize a new buffer based on the specified region (offset) of a byte array
     public Buffer(byte[] buffer, long offset) { attach(buffer, offset); }
-    // Initializes a new buffer based on the specified region (size and offset) of a byte array
+    // Initialize a new buffer based on the specified region (size and offset) of a byte array
     public Buffer(byte[] buffer, long size, long offset) { attach(buffer, size, offset); }
 
     // Attach memory buffer methods

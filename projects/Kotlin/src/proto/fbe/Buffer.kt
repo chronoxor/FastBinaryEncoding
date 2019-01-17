@@ -34,15 +34,15 @@ class Buffer
     var offset: Long = 0
         private set
 
-    // Initializes buffer with an expandable capacity initialized to zero
+    // Initialize a new expandable buffer with zero capacity
     constructor()
-    // Initializes a new buffer with an expandable capacity initialized as specified
+    // Initialize a new expandable buffer with the given capacity
     constructor(capacity: Long) { attach(capacity) }
-    // Initializes a new buffer based on the specified byte array
+    // Initialize a new buffer based on the specified byte array
     constructor(buffer: ByteArray) { attach(buffer) }
-    // Initializes a new buffer based on the specified region (offset) of a byte array
+    // Initialize a new buffer based on the specified region (offset) of a byte array
     constructor(buffer: ByteArray, offset: Long) { attach(buffer, offset) }
-    // Initializes a new buffer based on the specified region (size and offset) of a byte array
+    // Initialize a new buffer based on the specified region (size and offset) of a byte array
     constructor(buffer: ByteArray, size: Long, offset: Long) { attach(buffer, size, offset) }
 
     // Attach memory buffer methods
