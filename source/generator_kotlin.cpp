@@ -4031,11 +4031,6 @@ object Json
 
     fun register(builder: GsonBuilder): GsonBuilder
     {
-        val ubyte: UByte? = 0u
-        val ushort: UShort? = 0u
-        val uint: UInt? = 0u
-        val ulong: ULong? = 0u
-
         builder.serializeNulls()
         builder.registerTypeAdapter(ByteArray::class.java, BytesJson())
         builder.registerTypeAdapter(Char::class.java, CharacterJson())
@@ -4043,10 +4038,10 @@ object Json
         builder.registerTypeAdapter(Instant::class.java, InstantJson())
         builder.registerTypeAdapter(BigDecimal::class.java, BigDecimalJson())
         builder.registerTypeAdapter(UUID::class.java, UUIDJson())
-        builder.registerTypeAdapter(ubyte!!::class.java, UByteNullableJson())
-        builder.registerTypeAdapter(ushort!!::class.java, UShortNullableJson())
-        builder.registerTypeAdapter(uint!!::class.java, UIntNullableJson())
-        builder.registerTypeAdapter(ulong!!::class.java, ULongNullableJson())
+        builder.registerTypeAdapter(kotlin.UByte::class.java, UByteNullableJson())
+        builder.registerTypeAdapter(kotlin.UShort::class.java, UShortNullableJson())
+        builder.registerTypeAdapter(kotlin.UInt::class.java, UIntNullableJson())
+        builder.registerTypeAdapter(kotlin.ULong::class.java, ULongNullableJson())
         return builder
     }
 }
