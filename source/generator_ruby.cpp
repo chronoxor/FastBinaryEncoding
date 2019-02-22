@@ -921,7 +921,7 @@ void GeneratorRuby::GenerateFBEFieldModelBase()
 
     def read_timestamp(offset)
       nanoseconds = read_uint64(offset)
-      Time.at(nanoseconds / 1000000000, (nanoseconds % 1000000000) / 1000.0)
+      Time.at(nanoseconds / 1000000000, (nanoseconds % 1000000000) / 1000.0).utc
     end
 
     def read_uuid(offset)
@@ -1095,7 +1095,7 @@ void GeneratorRuby::GenerateFBEFieldModelDecimal()
     end
 
     # Get the decimal value
-    def get(defaults = BigDecimal.new(0))
+    def get(defaults = BigDecimal(0))
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return defaults
       end
@@ -1109,9 +1109,9 @@ void GeneratorRuby::GenerateFBEFieldModelDecimal()
       # Calculate decimal value
       negative = (flags & 0x80000000) != 0
       scale = (flags & 0x7FFFFFFF) >> 16
-      result = BigDecimal.new(high) * 18446744073709551616
-      result += BigDecimal.new(mid) * 4294967296
-      result += BigDecimal.new(low)
+      result = BigDecimal(high) * 18446744073709551616
+      result += BigDecimal(mid) * 4294967296
+      result += BigDecimal(low)
       result /= 10 ** scale
       result = -result if negative
 
@@ -2281,7 +2281,7 @@ void GeneratorRuby::GenerateFBEFinalModelDecimal()
     # Get the decimal value
     def get
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return [BigDecimal.new(0), 0]
+        return [BigDecimal(0), 0]
       end
 
       # Read decimal parts
@@ -2293,9 +2293,9 @@ void GeneratorRuby::GenerateFBEFinalModelDecimal()
       # Calculate decimal value
       negative = (flags & 0x80000000) != 0
       scale = (flags & 0x7FFFFFFF) >> 16
-      result = BigDecimal.new(high) * 18446744073709551616
-      result += BigDecimal.new(mid) * 4294967296
-      result += BigDecimal.new(low)
+      result = BigDecimal(high) * 18446744073709551616
+      result += BigDecimal(mid) * 4294967296
+      result += BigDecimal(low)
       result /= 10 ** scale
       result = -result if negative
 
@@ -5889,7 +5889,7 @@ std::string GeneratorRuby::ConvertConstant(const std::string& type, const std::s
     else if ((type == "wchar") && !CppCommon::StringUtils::StartsWith(value, "'"))
         return value + ".chr(Encoding::UTF_8)";
     else if (type == "decimal")
-        return "BigDecimal.new('" + value + "')";
+        return "BigDecimal('" + value + "')";
     else if (type == "uuid")
         return "UUIDTools::UUID.parse(" + value + ")";
 
@@ -5914,7 +5914,7 @@ std::string GeneratorRuby::ConvertDefault(const std::string& type, bool optional
     else if ((type == "float") || (type == "double"))
         return "0.0";
     else if (type == "decimal")
-        return "BigDecimal.new(0)";
+        return "BigDecimal(0)";
     else if (type == "timestamp")
         return "Time.utc(1970)";
     else if (type == "string")
@@ -5963,9 +5963,9 @@ std::string GeneratorRuby::ConvertValueFromJson(const std::string& type, const s
     else if (type == "bytes")
         return "(" + value + ".nil? ? nil : Base64.decode64(" + value + "))";
     else if (type == "decimal")
-        return "(" + value + ".nil? ? nil : BigDecimal.new(" + value + "))";
+        return "(" + value + ".nil? ? nil : BigDecimal(" + value + "))";
     else if (type == "timestamp")
-        return "(" + value + ".nil? ? nil : Time.at(" + value + " / 1000000000, (" + value + " % 1000000000) / 1000.0))";
+        return "(" + value + ".nil? ? nil : Time.at(" + value + " / 1000000000, (" + value + " % 1000000000) / 1000.0).utc)";
     else if (type == "uuid")
         return "(" + value + ".nil? ? nil : UUIDTools::UUID.parse(" + value + "))";
     else if (IsRubyType(type))
@@ -5985,9 +5985,9 @@ std::string GeneratorRuby::ConvertKeyFromJson(const std::string& type, const std
     if ((type == "float") || (type == "double"))
         return value + ".to_f";
     else if (type == "decimal")
-        return "BigDecimal.new(" + value + ")";
+        return "BigDecimal(" + value + ")";
     else if (type == "timestamp")
-        return "Time.at(" + value + ".to_i / 1000000000, (" + value + ".to_i % 1000000000) / 1000.0)";
+        return "Time.at(" + value + ".to_i / 1000000000, (" + value + ".to_i % 1000000000) / 1000.0).utc";
     else if (type == "uuid")
         return "UUIDTools::UUID.parse(" + value + ")";
     else

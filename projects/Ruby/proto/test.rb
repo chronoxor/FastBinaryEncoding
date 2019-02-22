@@ -935,7 +935,7 @@ module Test
     attr_accessor :f43
     attr_accessor :f44
 
-    def initialize(id = 0, f1 = false, f2 = true, f3 = 0, f4 = 255, f5 = "\0", f6 = '!', f7 = "\0", f8 = 0x0444.chr(Encoding::UTF_8), f9 = 0, f10 = 127, f11 = 0, f12 = 255, f13 = 0, f14 = 32767, f15 = 0, f16 = 65535, f17 = 0, f18 = 2147483647, f19 = 0, f20 = 0xFFFFFFFF, f21 = 0, f22 = 9223372036854775807, f23 = 0, f24 = 0xFFFFFFFFFFFFFFFF, f25 = 0.0, f26 = 123.456, f27 = 0.0, f28 = -123.456e+123, f29 = BigDecimal.new(0), f30 = BigDecimal.new('123456.123456'), f31 = '', f32 = "Initial string!", f33 = Time.utc(1970), f34 = Time.utc(1970), f35 = Time.now.utc, f36 = UUIDTools::UUID.parse_int(0), f37 = UUIDTools::UUID.timestamp_create, f38 = UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000"), f39 = Proto::OrderSide.new, f40 = Proto::OrderType.new, f41 = Proto::Order.new, f42 = Proto::Balance.new, f43 = Proto::State.new, f44 = Proto::Account.new)
+    def initialize(id = 0, f1 = false, f2 = true, f3 = 0, f4 = 255, f5 = "\0", f6 = '!', f7 = "\0", f8 = 0x0444.chr(Encoding::UTF_8), f9 = 0, f10 = 127, f11 = 0, f12 = 255, f13 = 0, f14 = 32767, f15 = 0, f16 = 65535, f17 = 0, f18 = 2147483647, f19 = 0, f20 = 0xFFFFFFFF, f21 = 0, f22 = 9223372036854775807, f23 = 0, f24 = 0xFFFFFFFFFFFFFFFF, f25 = 0.0, f26 = 123.456, f27 = 0.0, f28 = -123.456e+123, f29 = BigDecimal(0), f30 = BigDecimal('123456.123456'), f31 = '', f32 = "Initial string!", f33 = Time.utc(1970), f34 = Time.utc(1970), f35 = Time.now.utc, f36 = UUIDTools::UUID.parse_int(0), f37 = UUIDTools::UUID.timestamp_create, f38 = UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000"), f39 = Proto::OrderSide.new, f40 = Proto::OrderType.new, f41 = Proto::Order.new, f42 = Proto::Balance.new, f43 = Proto::State.new, f44 = Proto::Account.new)
       @id = id
       @f1 = f1
       @f2 = f2
@@ -1584,19 +1584,19 @@ module Test
       value = json.fetch('f28', nil)
       result.f28 = (value.nil? ? nil : value)
       value = json.fetch('f29', nil)
-      result.f29 = (value.nil? ? nil : BigDecimal.new(value))
+      result.f29 = (value.nil? ? nil : BigDecimal(value))
       value = json.fetch('f30', nil)
-      result.f30 = (value.nil? ? nil : BigDecimal.new(value))
+      result.f30 = (value.nil? ? nil : BigDecimal(value))
       value = json.fetch('f31', nil)
       result.f31 = (value.nil? ? nil : value)
       value = json.fetch('f32', nil)
       result.f32 = (value.nil? ? nil : value)
       value = json.fetch('f33', nil)
-      result.f33 = (value.nil? ? nil : Time.at(value / 1000000000, (value % 1000000000) / 1000.0))
+      result.f33 = (value.nil? ? nil : Time.at(value / 1000000000, (value % 1000000000) / 1000.0).utc)
       value = json.fetch('f34', nil)
-      result.f34 = (value.nil? ? nil : Time.at(value / 1000000000, (value % 1000000000) / 1000.0))
+      result.f34 = (value.nil? ? nil : Time.at(value / 1000000000, (value % 1000000000) / 1000.0).utc)
       value = json.fetch('f35', nil)
-      result.f35 = (value.nil? ? nil : Time.at(value / 1000000000, (value % 1000000000) / 1000.0))
+      result.f35 = (value.nil? ? nil : Time.at(value / 1000000000, (value % 1000000000) / 1000.0).utc)
       value = json.fetch('f36', nil)
       result.f36 = (value.nil? ? nil : UUIDTools::UUID.parse(value))
       value = json.fetch('f37', nil)
@@ -2698,15 +2698,15 @@ module Test
       if (fbe_current_size + f29.fbe_size) <= fbe_struct_size
         fbe_value.f29 = f29.get
       else
-        fbe_value.f29 = BigDecimal.new(0)
+        fbe_value.f29 = BigDecimal(0)
       end
       # noinspection RubyUnusedLocalVariable
       fbe_current_size += f29.fbe_size
 
       if (fbe_current_size + f30.fbe_size) <= fbe_struct_size
-        fbe_value.f30 = f30.get(BigDecimal.new('123456.123456'))
+        fbe_value.f30 = f30.get(BigDecimal('123456.123456'))
       else
-        fbe_value.f30 = BigDecimal.new('123456.123456')
+        fbe_value.f30 = BigDecimal('123456.123456')
       end
       # noinspection RubyUnusedLocalVariable
       fbe_current_size += f30.fbe_size
@@ -4384,7 +4384,7 @@ module Test
     attr_accessor :f164
     attr_accessor :f165
 
-    def initialize(parent = StructSimple.new, f100 = nil, f101 = true, f102 = nil, f103 = nil, f104 = 255, f105 = nil, f106 = nil, f107 = '!', f108 = nil, f109 = nil, f110 = 0x0444.chr(Encoding::UTF_8), f111 = nil, f112 = nil, f113 = 127, f114 = nil, f115 = nil, f116 = 255, f117 = nil, f118 = nil, f119 = 32767, f120 = nil, f121 = nil, f122 = 65535, f123 = nil, f124 = nil, f125 = 2147483647, f126 = nil, f127 = nil, f128 = 0xFFFFFFFF, f129 = nil, f130 = nil, f131 = 9223372036854775807, f132 = nil, f133 = nil, f134 = 0xFFFFFFFFFFFFFFFF, f135 = nil, f136 = nil, f137 = 123.456, f138 = nil, f139 = nil, f140 = -123.456e+123, f141 = nil, f142 = nil, f143 = BigDecimal.new('123456.123456'), f144 = nil, f145 = nil, f146 = "Initial string!", f147 = nil, f148 = nil, f149 = Time.now.utc, f150 = nil, f151 = nil, f152 = UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000"), f153 = nil, f154 = nil, f155 = nil, f156 = nil, f157 = nil, f158 = nil, f159 = nil, f160 = nil, f161 = nil, f162 = nil, f163 = nil, f164 = nil, f165 = nil)
+    def initialize(parent = StructSimple.new, f100 = nil, f101 = true, f102 = nil, f103 = nil, f104 = 255, f105 = nil, f106 = nil, f107 = '!', f108 = nil, f109 = nil, f110 = 0x0444.chr(Encoding::UTF_8), f111 = nil, f112 = nil, f113 = 127, f114 = nil, f115 = nil, f116 = 255, f117 = nil, f118 = nil, f119 = 32767, f120 = nil, f121 = nil, f122 = 65535, f123 = nil, f124 = nil, f125 = 2147483647, f126 = nil, f127 = nil, f128 = 0xFFFFFFFF, f129 = nil, f130 = nil, f131 = 9223372036854775807, f132 = nil, f133 = nil, f134 = 0xFFFFFFFFFFFFFFFF, f135 = nil, f136 = nil, f137 = 123.456, f138 = nil, f139 = nil, f140 = -123.456e+123, f141 = nil, f142 = nil, f143 = BigDecimal('123456.123456'), f144 = nil, f145 = nil, f146 = "Initial string!", f147 = nil, f148 = nil, f149 = Time.now.utc, f150 = nil, f151 = nil, f152 = UUIDTools::UUID.parse("123e4567-e89b-12d3-a456-426655440000"), f153 = nil, f154 = nil, f155 = nil, f156 = nil, f157 = nil, f158 = nil, f159 = nil, f160 = nil, f161 = nil, f162 = nil, f163 = nil, f164 = nil, f165 = nil)
       method(:initialize_copy).super_method.call(parent)
       @f100 = f100
       @f101 = f101
@@ -5295,11 +5295,11 @@ module Test
       value = json.fetch('f141', nil)
       result.f141 = (value.nil? ? nil : value)
       value = json.fetch('f142', nil)
-      result.f142 = (value.nil? ? nil : BigDecimal.new(value))
+      result.f142 = (value.nil? ? nil : BigDecimal(value))
       value = json.fetch('f143', nil)
-      result.f143 = (value.nil? ? nil : BigDecimal.new(value))
+      result.f143 = (value.nil? ? nil : BigDecimal(value))
       value = json.fetch('f144', nil)
-      result.f144 = (value.nil? ? nil : BigDecimal.new(value))
+      result.f144 = (value.nil? ? nil : BigDecimal(value))
       value = json.fetch('f145', nil)
       result.f145 = (value.nil? ? nil : value)
       value = json.fetch('f146', nil)
@@ -5307,11 +5307,11 @@ module Test
       value = json.fetch('f147', nil)
       result.f147 = (value.nil? ? nil : value)
       value = json.fetch('f148', nil)
-      result.f148 = (value.nil? ? nil : Time.at(value / 1000000000, (value % 1000000000) / 1000.0))
+      result.f148 = (value.nil? ? nil : Time.at(value / 1000000000, (value % 1000000000) / 1000.0).utc)
       value = json.fetch('f149', nil)
-      result.f149 = (value.nil? ? nil : Time.at(value / 1000000000, (value % 1000000000) / 1000.0))
+      result.f149 = (value.nil? ? nil : Time.at(value / 1000000000, (value % 1000000000) / 1000.0).utc)
       value = json.fetch('f150', nil)
-      result.f150 = (value.nil? ? nil : Time.at(value / 1000000000, (value % 1000000000) / 1000.0))
+      result.f150 = (value.nil? ? nil : Time.at(value / 1000000000, (value % 1000000000) / 1000.0).utc)
       value = json.fetch('f151', nil)
       result.f151 = (value.nil? ? nil : UUIDTools::UUID.parse(value))
       value = json.fetch('f152', nil)
@@ -6893,9 +6893,9 @@ module Test
       fbe_current_size += f142.fbe_size
 
       if (fbe_current_size + f143.fbe_size) <= fbe_struct_size
-        fbe_value.f143 = f143.get(BigDecimal.new('123456.123456'))
+        fbe_value.f143 = f143.get(BigDecimal('123456.123456'))
       else
-        fbe_value.f143 = BigDecimal.new('123456.123456')
+        fbe_value.f143 = BigDecimal('123456.123456')
       end
       # noinspection RubyUnusedLocalVariable
       fbe_current_size += f143.fbe_size

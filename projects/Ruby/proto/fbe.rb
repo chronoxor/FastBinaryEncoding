@@ -716,7 +716,7 @@ module FBE
 
     def read_timestamp(offset)
       nanoseconds = read_uint64(offset)
-      Time.at(nanoseconds / 1000000000, (nanoseconds % 1000000000) / 1000.0)
+      Time.at(nanoseconds / 1000000000, (nanoseconds % 1000000000) / 1000.0).utc
     end
 
     def read_uuid(offset)
@@ -1306,7 +1306,7 @@ module FBE
     end
 
     # Get the decimal value
-    def get(defaults = BigDecimal.new(0))
+    def get(defaults = BigDecimal(0))
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
         return defaults
       end
@@ -1320,9 +1320,9 @@ module FBE
       # Calculate decimal value
       negative = (flags & 0x80000000) != 0
       scale = (flags & 0x7FFFFFFF) >> 16
-      result = BigDecimal.new(high) * 18446744073709551616
-      result += BigDecimal.new(mid) * 4294967296
-      result += BigDecimal.new(low)
+      result = BigDecimal(high) * 18446744073709551616
+      result += BigDecimal(mid) * 4294967296
+      result += BigDecimal(low)
       result /= 10 ** scale
       result = -result if negative
 
@@ -3153,7 +3153,7 @@ module FBE
     # Get the decimal value
     def get
       if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
-        return [BigDecimal.new(0), 0]
+        return [BigDecimal(0), 0]
       end
 
       # Read decimal parts
@@ -3165,9 +3165,9 @@ module FBE
       # Calculate decimal value
       negative = (flags & 0x80000000) != 0
       scale = (flags & 0x7FFFFFFF) >> 16
-      result = BigDecimal.new(high) * 18446744073709551616
-      result += BigDecimal.new(mid) * 4294967296
-      result += BigDecimal.new(low)
+      result = BigDecimal(high) * 18446744073709551616
+      result += BigDecimal(mid) * 4294967296
+      result += BigDecimal(low)
       result /= 10 ** scale
       result = -result if negative
 
