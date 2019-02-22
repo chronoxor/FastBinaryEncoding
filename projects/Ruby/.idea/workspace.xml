@@ -2,154 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28b38142-73b0-4ddb-b81e-352705299fce" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../../examples/create.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/create.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../examples/print.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../examples/print.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Benchmarks/SendReceive.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/Serialization.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Benchmarks/Serialization.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/SerializationFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Benchmarks/SerializationFinal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Benchmarks/SerializationJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Benchmarks/SerializationJson.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Create/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Examples/Create/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Print/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Examples/Print/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SendReceive/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Examples/SendReceive/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/Serialization/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Examples/Serialization/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SerializationFinal/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Examples/SerializationFinal/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Examples/SerializationJson/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Examples/SerializationJson/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/protoex.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Clone.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/Clone.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Create.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/Create.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Extending.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/Extending.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SendReceive.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SendReceiveFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SendReceiveFinal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/Serialization.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/Serialization.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SerializationFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SerializationFinal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Tests/SerializationJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Tests/SerializationJson.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/SendReceive.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/Serialization.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/Serialization.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/SerializationFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/SerializationFinal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Benchmarks/SerializationJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Benchmarks/SerializationJson.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/Create/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/Create/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/Print/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/Print/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SendReceive/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SendReceive/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/Serialization/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/Serialization/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SerializationFinal/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SerializationFinal/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Examples/SerializationJson/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/protoex.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/test.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/Clone.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/Clone.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/Create.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/Create.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/Extending.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/Extending.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SendReceive.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SendReceive.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SendReceiveFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SendReceiveFinal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/Serialization.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/Serialization.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SerializationFinal.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SerializationFinal.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Tests/SerializationJson.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Tests/SerializationJson.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/benchmarks/send_receive_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/benchmarks/send_receive_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/benchmarks/serialization_final_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/benchmarks/serialization_final_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/benchmarks/serialization_json_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/benchmarks/serialization_json_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/benchmarks/serialization_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/benchmarks/serialization_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/examples/create.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/examples/create.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/examples/print.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/examples/print.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/examples/send_receive.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/examples/send_receive.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/examples/serialization.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/examples/serialization.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/examples/serialization_final.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/examples/serialization_final.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/examples/serialization_json.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/examples/serialization_json.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/Account.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/Account.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/FieldModelAccount.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/FieldModelAccount.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/FieldModelOrder.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/FieldModelOrder.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/FinalModelAccount.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/FinalModelAccount.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/FinalModelOrder.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/FinalModelOrder.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/Order.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/Order.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/Account.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/Account.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/FieldModelAccount.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/FieldModelAccount.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/FieldModelOrder.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/FieldModelOrder.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/FinalModelAccount.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/FinalModelAccount.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/FinalModelOrder.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/FinalModelOrder.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/Order.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/Order.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/test/FieldModelStructSimple.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/FieldModelStructSimple.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/test/FinalModelStructSimple.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/FinalModelStructSimple.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/test/StructSimple.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/StructSimple.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/tests/clone_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/clone_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/tests/create_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/create_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/tests/extending_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/extending_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/tests/send_receive_final_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/send_receive_final_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/tests/send_receive_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/send_receive_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/tests/serialization_final_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/serialization_final_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/tests/serialization_json_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/serialization_json_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/tests/serialization_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/tests/serialization_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FieldModelAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FieldModelAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FieldModelOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FieldModelOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalModelOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FieldModelAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FieldModelAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FieldModelOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FieldModelOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelAccount.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelAccount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalModelOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/StructSimple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelStructSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FieldModelStructSimple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructSimple.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalModelStructSimple.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/examples/create.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/examples/create.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/examples/print.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/examples/print.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/proto.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/proto.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/protoex.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/protoex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_clone.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_clone.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_create.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_create.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_extending.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_extending.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_serialization.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_serialization.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_serialization_final.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_serialization_final.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/tests/test_serialization_json.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/tests/test_serialization_json.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/Account.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/Account.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/Order.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/Order.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/fbe/FieldModelAccount.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/fbe/FieldModelAccount.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/fbe/FieldModelOrder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/fbe/FieldModelOrder.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/fbe/FinalModelAccount.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/fbe/FinalModelAccount.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/proto/fbe/FinalModelOrder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/proto/fbe/FinalModelOrder.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/Account.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/Account.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/Order.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/Order.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/fbe/FieldModelAccount.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/fbe/FieldModelAccount.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/fbe/FieldModelOrder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/fbe/FieldModelOrder.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/fbe/FinalModelAccount.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/fbe/FinalModelAccount.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/fbe/FinalModelOrder.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/protoex/fbe/FinalModelOrder.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructSimple.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/StructSimple.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/fbe/FieldModelStructSimple.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/fbe/FieldModelStructSimple.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Kotlin/src/proto/test/fbe/FinalModelStructSimple.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../Kotlin/src/proto/test/fbe/FinalModelStructSimple.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/proto.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/proto.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/protoex.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/protoex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/create.rb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/create.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/examples/print.rb" beforeDir="false" afterPath="$PROJECT_DIR$/examples/print.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/proto.rb" beforeDir="false" afterPath="$PROJECT_DIR$/proto/proto.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/proto/protoex.rb" beforeDir="false" afterPath="$PROJECT_DIR$/proto/protoex.rb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Ruby.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Ruby.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proto/test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/proto/test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_clone.rb" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_clone.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_create.rb" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_create.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_extending.rb" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_extending.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_serialization.rb" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_serialization.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_serialization_final.rb" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_serialization_final.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_serialization_json.rb" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_serialization_json.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/proto.fbe" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto.fbe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/proto.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/protoex.fbe" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/protoex.fbe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/protoex.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/protoex.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/test.fbe" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/test.fbe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/test.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/test.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../tests/test_clone.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../tests/test_clone.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../tests/test_create.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../tests/test_create.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../tests/test_extending.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../tests/test_extending.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../tests/test_serialization.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../tests/test_serialization.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../tests/test_serialization_final.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../tests/test_serialization_final.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../tests/test_serialization_json.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../tests/test_serialization_json.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -183,7 +46,7 @@
     <SUITE FILE_PATH="coverage/Ruby@serialization_final.rcov" NAME="serialization_final Coverage Results" MODIFIED="1539984743038" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/Ruby@benchmark_serialization_final.rcov" NAME="benchmark_serialization_final Coverage Results" MODIFIED="1539984610084" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/benchmarks" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/Ruby@serialization_json.rcov" NAME="serialization_json Coverage Results" MODIFIED="1539984749687" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
-    <SUITE FILE_PATH="coverage/FastBinaryEncoding@print.rcov" NAME="print Coverage Results" MODIFIED="1545681732423" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
+    <SUITE FILE_PATH="coverage/FastBinaryEncoding@print.rcov" NAME="print Coverage Results" MODIFIED="1550793504692" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/examples" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/Ruby@test.rcov" NAME="test Coverage Results" MODIFIED="1539963809463" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/proto" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/Ruby@enums.rcov" NAME="enums Coverage Results" MODIFIED="1539787605944" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/proto" MODULE_NAME="Ruby" />
     <SUITE FILE_PATH="coverage/Ruby@All_tests_in_tests__Ruby.rcov" NAME="All tests in tests: Ruby Coverage Results" MODIFIED="1545573623389" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
@@ -198,7 +61,26 @@
     <SUITE FILE_PATH="coverage/Ruby@Run_test__test_serialization_json___Ruby.rcov" NAME="Run test 'test_serialization_json': Ruby Coverage Results" MODIFIED="1539969630158" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="Ruby" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/proto/test.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="172">
+              <caret line="937" selection-start-line="937" selection-end-line="937" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://Y:/Soft/Development/Ruby/lib/ruby/gems/2.6.0/gems/uuidtools-2.1.5/lib/uuidtools.rb">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="172">
+              <caret line="231" selection-start-line="231" selection-end-line="231" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -222,7 +104,6 @@
         <option value="$PROJECT_DIR$/tests/test_send_seceive.rb" />
         <option value="$PROJECT_DIR$/tests/test_serialization.rb" />
         <option value="$PROJECT_DIR$/tests/test_serialization_final.rb" />
-        <option value="$PROJECT_DIR$/proto/test.rb" />
         <option value="$PROJECT_DIR$/proto/fbe.rb" />
         <option value="$PROJECT_DIR$/examples/print.rb" />
         <option value="$PROJECT_DIR$/proto/proto.rb" />
@@ -234,6 +115,7 @@
         <option value="$PROJECT_DIR$/benchmarks/benchmark_serialization.rb" />
         <option value="$PROJECT_DIR$/benchmarks/benchmark_send_receive.rb" />
         <option value="$PROJECT_DIR$/tests/test_enums.rb" />
+        <option value="$PROJECT_DIR$/proto/test.rb" />
       </list>
     </option>
   </component>
@@ -303,7 +185,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.ruby.settings.RubyModuleStructureConfigurable" />
+    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.ruby.settings.RubyActiveModuleSdkConfigurable" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -317,8 +199,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Ruby.serialization_json">
-    <configuration name="print_json" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
+  <component name="RunManager" selected="Ruby.print">
+    <configuration name="print" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
       <module name="Ruby" />
       <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="" />
       <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$/examples" />
@@ -328,7 +210,7 @@
       <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
       <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
       <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" />
-      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/examples/print_json.rb" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/examples/print.rb" />
       <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
       <method v="2" />
     </configuration>
@@ -390,18 +272,18 @@
     </configuration>
     <list>
       <item itemvalue="Ruby.send_receive" />
-      <item itemvalue="Ruby.print_json" />
       <item itemvalue="Ruby.serialization" />
       <item itemvalue="Ruby.serialization_final" />
       <item itemvalue="Ruby.serialization_json" />
+      <item itemvalue="Ruby.print" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Ruby.print" />
         <item itemvalue="Ruby.serialization_json" />
         <item itemvalue="Ruby.serialization_final" />
         <item itemvalue="Ruby.serialization" />
         <item itemvalue="Ruby.send_receive" />
-        <item itemvalue="Ruby.print_json" />
       </list>
     </recent_temporary>
   </component>
@@ -436,6 +318,7 @@
       <workItem from="1545573579976" duration="100000" />
       <workItem from="1545574812456" duration="11000" />
       <workItem from="1545681708273" duration="42000" />
+      <workItem from="1550793337068" duration="240000" />
     </task>
     <servers />
   </component>
@@ -472,17 +355,18 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="131172000" />
+    <option name="totallyTimeSpent" value="131412000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="439" y="199" width="1636" height="1070" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26840103" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2715736" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49682742" weight="0.39274278" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4961929" weight="0.39274278" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.47069767" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -491,7 +375,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="10" weight="0.32997987" />
-      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5031726" side_tool="true" visible="true" weight="0.39274278" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5038071" side_tool="true" visible="true" weight="0.39274278" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -672,13 +556,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proto/test.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="15749" lean-forward="true" selection-start-line="15749" selection-end-line="15749" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://Y:/Soft/Development/Ruby/lib/ruby/gems/2.5.0/gems/ruby-debug-ide-0.7.0.beta6/lib/ruby-debug-ide.rb" />
     <entry file="file://$PROJECT_DIR$/benchmarks/benchmark_serialization.rb">
       <provider selected="true" editor-type-id="text-editor">
@@ -726,6 +603,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-6257">
           <caret line="2914" selection-start-line="2914" selection-end-line="2914" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/test.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="937" selection-start-line="937" selection-end-line="937" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://Y:/Soft/Development/Ruby/lib/ruby/gems/2.6.0/gems/uuidtools-2.1.5/lib/uuidtools.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="231" selection-start-line="231" selection-end-line="231" />
         </state>
       </provider>
     </entry>

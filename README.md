@@ -296,7 +296,6 @@ dependencies that worth to be mentioned:
   language does;
 * JSON serialization is implemented using [Gson](https://github.com/google/gson) package.
   Therefore it should be imported using Maven;
-* JSON serialization of UByte?, UShort? UInt?, ULong? types has bug [Gson: Invalid JSON serialization of nullable unsigned integer property](https://youtrack.jetbrains.com/issue/KT-28420)
 
 ### Python
 * Python 3.7 is required because of [time.time_ns()](https://docs.python.org/3/library/time.html#time.time_ns);
