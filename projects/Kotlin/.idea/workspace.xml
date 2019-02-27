@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a777d28d-c4fb-4aae-88ff-091d764fff06" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/libraries/org_testng_testng_Latest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/libraries/org_testng_testng_Latest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proto/fbe/Json.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/proto/fbe/Json.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,7 +11,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tests/TestSerializationJson.kt">
           <provider selected="true" editor-type-id="text-editor">
@@ -29,7 +24,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/proto/fbe/Json.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="141">
+            <state relative-caret-position="877">
               <caret line="179" column="29" selection-start-line="179" selection-start-column="29" selection-end-line="179" selection-end-column="29" />
               <folding>
                 <element signature="e#222#393#0" expanded="true" />
@@ -116,10 +111,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="410" />
-    <option name="y" value="273" />
-    <option name="width" value="1709" />
-    <option name="height" value="896" />
+    <option name="x" value="587" />
+    <option name="y" value="335" />
+    <option name="width" value="1561" />
+    <option name="height" value="941" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -127,22 +122,21 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="Kotlin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
               <item name="Kotlin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Kotlin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
               <item name="Kotlin" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Kotlin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
               <item name="Kotlin" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="examples" type="462c0819:PsiDirectoryNode" />
@@ -151,6 +145,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -163,7 +158,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2838785" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -247,9 +242,9 @@
     <list>
       <item itemvalue="Kotlin.examples.SerializationFinal" />
       <item itemvalue="Kotlin.examples.SerializationJson" />
-      <item itemvalue="TestNG.&lt;default&gt;" />
       <item itemvalue="Kotlin.examples.Print" />
       <item itemvalue="Kotlin.examples.PrintJson" />
+      <item itemvalue="TestNG.&lt;default&gt;" />
     </list>
     <recent_temporary>
       <list>
@@ -327,6 +322,8 @@
       <workItem from="1547662117692" duration="609000" />
       <workItem from="1550790343810" duration="5000" />
       <workItem from="1550791111616" duration="1148000" />
+      <workItem from="1550925681170" duration="406000" />
+      <workItem from="1551301809588" duration="28000" />
     </task>
     <servers />
   </component>
@@ -363,7 +360,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79613000" />
+    <option name="totallyTimeSpent" value="80047000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -375,9 +372,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="410" y="273" width="1709" height="896" extended-state="0" />
+    <frame x="587" y="335" width="1561" height="941" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22377199" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24916722" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -393,7 +390,7 @@
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49909034" weight="0.32891247" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32891247" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.43784112" side_tool="true" visible="true" weight="0.4180865" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.43784112" side_tool="true" visible="true" weight="0.39480197" />
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="JProfiler" order="11" />
       <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.3990297" weight="0.19134994" />
@@ -719,7 +716,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/proto/fbe/Json.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
+        <state relative-caret-position="877">
           <caret line="179" column="29" selection-start-line="179" selection-start-column="29" selection-end-line="179" selection-end-column="29" />
           <folding>
             <element signature="e#222#393#0" expanded="true" />
@@ -767,7 +764,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>Kotlin SDK</last-edited>
+          <last-edited>11</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
