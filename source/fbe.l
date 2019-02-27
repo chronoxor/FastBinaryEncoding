@@ -169,7 +169,6 @@ int main(int argc, char** argv)
 {
     auto parser = optparse::OptionParser().version(FBE::version);
 
-    parser.add_option("-h", "--help").help("Show help");
     parser.add_option("-i", "--input").help("Input path");
     parser.add_option("-o", "--output").help("Output path");
     parser.add_option("-q", "--quiet").action("store_true").help("Launch in quiet mode. No progress will be shown!");
