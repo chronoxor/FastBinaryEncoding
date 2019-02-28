@@ -383,6 +383,29 @@ public:
 private:
     double _value;
 };
+
+} // namespace FBE
+
+namespace std {
+
+template <>
+struct hash<FBE::decimal_t>
+{
+    typedef FBE::decimal_t argument_type;
+    typedef size_t result_type;
+
+    result_type operator () (const argument_type& value) const
+    {
+        result_type result = 17;
+        result = result * 31 + std::hash<double>()((double)value);
+        return result;
+    }
+};
+
+} // namespace std
+
+namespace FBE {
+
 )CODE";
 
     // Prepare code template
@@ -761,6 +784,31 @@ private:
             return 255;
     }
 };
+
+} // namespace FBE
+
+namespace std {
+
+template <>
+struct hash<FBE::uuid_t>
+{
+    typedef FBE::uuid_t argument_type;
+    typedef size_t result_type;
+
+    result_type operator () (const argument_type& value) const
+    {
+        result_type result = 17;
+        std::hash<uint8_t> hash;
+        for (size_t i = 0; i < value.data().size(); ++i)
+            result = result * 31 + hash(value.data()[i]);
+        return result;
+    }
+};
+
+} // namespace std
+
+namespace FBE {
+
 )CODE";
 
     // Prepare code template
