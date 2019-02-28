@@ -5841,6 +5841,50 @@ namespace enums {
 namespace FBE {
 namespace enums {
 
+    // Fast Binary Encoding enums proxy
+    public class Proxy : FBE.Receiver
+    {
+        // Proxy models accessors
+        private readonly EnumsModel EnumsModel;
+
+        public Proxy() : base(false)
+        {
+            EnumsModel = new EnumsModel();
+        }
+        public Proxy(Buffer buffer) : base(buffer, false)
+        {
+            EnumsModel = new EnumsModel();
+        }
+
+        // Proxy handlers
+        protected virtual void OnProxy(EnumsModel model, long type, byte[] buffer, long offset, long size) {}
+
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
+        {
+            switch (type)
+            {
+                case EnumsModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    EnumsModel.Attach(buffer, offset);
+                    Debug.Assert(EnumsModel.Verify(), "enums.Enums validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(EnumsModel, type, buffer, offset, size);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
+} // namespace enums
+} // namespace FBE
+
+namespace FBE {
+namespace enums {
+
     // Fast Binary Encoding enums final sender
     public class FinalSender : FBE.Sender
     {
@@ -5928,6 +5972,50 @@ namespace enums {
 
                     // Call receive handler with deserialized value
                     OnReceive(EnumsValue);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
+} // namespace enums
+} // namespace FBE
+
+namespace FBE {
+namespace enums {
+
+    // Fast Binary Encoding enums final proxy
+    public class FinalProxy : FBE.Receiver
+    {
+        // Proxy models accessors
+        private readonly EnumsFinalModel EnumsModel;
+
+        public FinalProxy() : base(true)
+        {
+            EnumsModel = new EnumsFinalModel();
+        }
+        public FinalProxy(Buffer buffer) : base(buffer, true)
+        {
+            EnumsModel = new EnumsFinalModel();
+        }
+
+        // Proxy handlers
+        protected virtual void OnProxy(EnumsFinalModel model, long type, byte[] buffer, long offset, long size) {}
+
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
+        {
+            switch (type)
+            {
+                case EnumsFinalModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    EnumsModel.Attach(buffer, offset);
+                    Debug.Assert(EnumsModel.Verify(), "enums.Enums validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(EnumsModel, type, buffer, offset, size);
                     return true;
                 }
             }

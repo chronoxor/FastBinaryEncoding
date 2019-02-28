@@ -15697,6 +15697,198 @@ namespace test {
 namespace FBE {
 namespace test {
 
+    // Fast Binary Encoding test proxy
+    public class Proxy : FBE.Receiver
+    {
+        // Imported proxys
+        public proto.Proxy protoProxy;
+
+        // Proxy models accessors
+        private readonly StructSimpleModel StructSimpleModel;
+        private readonly StructOptionalModel StructOptionalModel;
+        private readonly StructNestedModel StructNestedModel;
+        private readonly StructBytesModel StructBytesModel;
+        private readonly StructArrayModel StructArrayModel;
+        private readonly StructVectorModel StructVectorModel;
+        private readonly StructListModel StructListModel;
+        private readonly StructSetModel StructSetModel;
+        private readonly StructMapModel StructMapModel;
+        private readonly StructHashModel StructHashModel;
+        private readonly StructHashExModel StructHashExModel;
+
+        public Proxy() : base(false)
+        {
+            protoProxy = new proto.Proxy(Buffer);
+            StructSimpleModel = new StructSimpleModel();
+            StructOptionalModel = new StructOptionalModel();
+            StructNestedModel = new StructNestedModel();
+            StructBytesModel = new StructBytesModel();
+            StructArrayModel = new StructArrayModel();
+            StructVectorModel = new StructVectorModel();
+            StructListModel = new StructListModel();
+            StructSetModel = new StructSetModel();
+            StructMapModel = new StructMapModel();
+            StructHashModel = new StructHashModel();
+            StructHashExModel = new StructHashExModel();
+        }
+        public Proxy(Buffer buffer) : base(buffer, false)
+        {
+            protoProxy = new proto.Proxy(Buffer);
+            StructSimpleModel = new StructSimpleModel();
+            StructOptionalModel = new StructOptionalModel();
+            StructNestedModel = new StructNestedModel();
+            StructBytesModel = new StructBytesModel();
+            StructArrayModel = new StructArrayModel();
+            StructVectorModel = new StructVectorModel();
+            StructListModel = new StructListModel();
+            StructSetModel = new StructSetModel();
+            StructMapModel = new StructMapModel();
+            StructHashModel = new StructHashModel();
+            StructHashExModel = new StructHashExModel();
+        }
+
+        // Proxy handlers
+        protected virtual void OnProxy(StructSimpleModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructOptionalModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructNestedModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructBytesModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructArrayModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructVectorModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructListModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructSetModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructMapModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructHashModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructHashExModel model, long type, byte[] buffer, long offset, long size) {}
+
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
+        {
+            switch (type)
+            {
+                case StructSimpleModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructSimpleModel.Attach(buffer, offset);
+                    Debug.Assert(StructSimpleModel.Verify(), "test.StructSimple validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructSimpleModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructOptionalModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructOptionalModel.Attach(buffer, offset);
+                    Debug.Assert(StructOptionalModel.Verify(), "test.StructOptional validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructOptionalModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructNestedModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructNestedModel.Attach(buffer, offset);
+                    Debug.Assert(StructNestedModel.Verify(), "test.StructNested validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructNestedModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructBytesModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructBytesModel.Attach(buffer, offset);
+                    Debug.Assert(StructBytesModel.Verify(), "test.StructBytes validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructBytesModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructArrayModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructArrayModel.Attach(buffer, offset);
+                    Debug.Assert(StructArrayModel.Verify(), "test.StructArray validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructArrayModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructVectorModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructVectorModel.Attach(buffer, offset);
+                    Debug.Assert(StructVectorModel.Verify(), "test.StructVector validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructVectorModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructListModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructListModel.Attach(buffer, offset);
+                    Debug.Assert(StructListModel.Verify(), "test.StructList validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructListModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructSetModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructSetModel.Attach(buffer, offset);
+                    Debug.Assert(StructSetModel.Verify(), "test.StructSet validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructSetModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructMapModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructMapModel.Attach(buffer, offset);
+                    Debug.Assert(StructMapModel.Verify(), "test.StructMap validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructMapModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructHashModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructHashModel.Attach(buffer, offset);
+                    Debug.Assert(StructHashModel.Verify(), "test.StructHash validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructHashModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructHashExModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructHashExModel.Attach(buffer, offset);
+                    Debug.Assert(StructHashExModel.Verify(), "test.StructHashEx validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructHashExModel, type, buffer, offset, size);
+                    return true;
+                }
+            }
+
+            if ((protoProxy != null) && protoProxy.OnReceive(type, buffer, offset, size))
+                return true;
+
+            return false;
+        }
+    }
+
+} // namespace test
+} // namespace FBE
+
+namespace FBE {
+namespace test {
+
     // Fast Binary Encoding test final sender
     public class FinalSender : FBE.Sender
     {
@@ -16259,6 +16451,198 @@ namespace test {
             }
 
             if ((protoReceiver != null) && protoReceiver.OnReceive(type, buffer, offset, size))
+                return true;
+
+            return false;
+        }
+    }
+
+} // namespace test
+} // namespace FBE
+
+namespace FBE {
+namespace test {
+
+    // Fast Binary Encoding test final proxy
+    public class FinalProxy : FBE.Receiver
+    {
+        // Imported proxys
+        public proto.FinalProxy protoProxy;
+
+        // Proxy models accessors
+        private readonly StructSimpleFinalModel StructSimpleModel;
+        private readonly StructOptionalFinalModel StructOptionalModel;
+        private readonly StructNestedFinalModel StructNestedModel;
+        private readonly StructBytesFinalModel StructBytesModel;
+        private readonly StructArrayFinalModel StructArrayModel;
+        private readonly StructVectorFinalModel StructVectorModel;
+        private readonly StructListFinalModel StructListModel;
+        private readonly StructSetFinalModel StructSetModel;
+        private readonly StructMapFinalModel StructMapModel;
+        private readonly StructHashFinalModel StructHashModel;
+        private readonly StructHashExFinalModel StructHashExModel;
+
+        public FinalProxy() : base(true)
+        {
+            protoProxy = new proto.FinalProxy(Buffer);
+            StructSimpleModel = new StructSimpleFinalModel();
+            StructOptionalModel = new StructOptionalFinalModel();
+            StructNestedModel = new StructNestedFinalModel();
+            StructBytesModel = new StructBytesFinalModel();
+            StructArrayModel = new StructArrayFinalModel();
+            StructVectorModel = new StructVectorFinalModel();
+            StructListModel = new StructListFinalModel();
+            StructSetModel = new StructSetFinalModel();
+            StructMapModel = new StructMapFinalModel();
+            StructHashModel = new StructHashFinalModel();
+            StructHashExModel = new StructHashExFinalModel();
+        }
+        public FinalProxy(Buffer buffer) : base(buffer, true)
+        {
+            protoProxy = new proto.FinalProxy(Buffer);
+            StructSimpleModel = new StructSimpleFinalModel();
+            StructOptionalModel = new StructOptionalFinalModel();
+            StructNestedModel = new StructNestedFinalModel();
+            StructBytesModel = new StructBytesFinalModel();
+            StructArrayModel = new StructArrayFinalModel();
+            StructVectorModel = new StructVectorFinalModel();
+            StructListModel = new StructListFinalModel();
+            StructSetModel = new StructSetFinalModel();
+            StructMapModel = new StructMapFinalModel();
+            StructHashModel = new StructHashFinalModel();
+            StructHashExModel = new StructHashExFinalModel();
+        }
+
+        // Proxy handlers
+        protected virtual void OnProxy(StructSimpleFinalModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructOptionalFinalModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructNestedFinalModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructBytesFinalModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructArrayFinalModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructVectorFinalModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructListFinalModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructSetFinalModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructMapFinalModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructHashFinalModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructHashExFinalModel model, long type, byte[] buffer, long offset, long size) {}
+
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
+        {
+            switch (type)
+            {
+                case StructSimpleFinalModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructSimpleModel.Attach(buffer, offset);
+                    Debug.Assert(StructSimpleModel.Verify(), "test.StructSimple validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructSimpleModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructOptionalFinalModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructOptionalModel.Attach(buffer, offset);
+                    Debug.Assert(StructOptionalModel.Verify(), "test.StructOptional validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructOptionalModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructNestedFinalModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructNestedModel.Attach(buffer, offset);
+                    Debug.Assert(StructNestedModel.Verify(), "test.StructNested validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructNestedModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructBytesFinalModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructBytesModel.Attach(buffer, offset);
+                    Debug.Assert(StructBytesModel.Verify(), "test.StructBytes validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructBytesModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructArrayFinalModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructArrayModel.Attach(buffer, offset);
+                    Debug.Assert(StructArrayModel.Verify(), "test.StructArray validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructArrayModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructVectorFinalModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructVectorModel.Attach(buffer, offset);
+                    Debug.Assert(StructVectorModel.Verify(), "test.StructVector validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructVectorModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructListFinalModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructListModel.Attach(buffer, offset);
+                    Debug.Assert(StructListModel.Verify(), "test.StructList validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructListModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructSetFinalModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructSetModel.Attach(buffer, offset);
+                    Debug.Assert(StructSetModel.Verify(), "test.StructSet validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructSetModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructMapFinalModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructMapModel.Attach(buffer, offset);
+                    Debug.Assert(StructMapModel.Verify(), "test.StructMap validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructMapModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructHashFinalModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructHashModel.Attach(buffer, offset);
+                    Debug.Assert(StructHashModel.Verify(), "test.StructHash validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructHashModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructHashExFinalModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructHashExModel.Attach(buffer, offset);
+                    Debug.Assert(StructHashExModel.Verify(), "test.StructHashEx validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructHashExModel, type, buffer, offset, size);
+                    return true;
+                }
+            }
+
+            if ((protoProxy != null) && protoProxy.OnReceive(type, buffer, offset, size))
                 return true;
 
             return false;

@@ -3149,6 +3149,78 @@ namespace proto {
 namespace FBE {
 namespace proto {
 
+    // Fast Binary Encoding proto proxy
+    public class Proxy : FBE.Receiver
+    {
+        // Proxy models accessors
+        private readonly OrderModel OrderModel;
+        private readonly BalanceModel BalanceModel;
+        private readonly AccountModel AccountModel;
+
+        public Proxy() : base(false)
+        {
+            OrderModel = new OrderModel();
+            BalanceModel = new BalanceModel();
+            AccountModel = new AccountModel();
+        }
+        public Proxy(Buffer buffer) : base(buffer, false)
+        {
+            OrderModel = new OrderModel();
+            BalanceModel = new BalanceModel();
+            AccountModel = new AccountModel();
+        }
+
+        // Proxy handlers
+        protected virtual void OnProxy(OrderModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(BalanceModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(AccountModel model, long type, byte[] buffer, long offset, long size) {}
+
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
+        {
+            switch (type)
+            {
+                case OrderModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    OrderModel.Attach(buffer, offset);
+                    Debug.Assert(OrderModel.Verify(), "proto.Order validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(OrderModel, type, buffer, offset, size);
+                    return true;
+                }
+                case BalanceModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    BalanceModel.Attach(buffer, offset);
+                    Debug.Assert(BalanceModel.Verify(), "proto.Balance validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(BalanceModel, type, buffer, offset, size);
+                    return true;
+                }
+                case AccountModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    AccountModel.Attach(buffer, offset);
+                    Debug.Assert(AccountModel.Verify(), "proto.Account validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(AccountModel, type, buffer, offset, size);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
+} // namespace proto
+} // namespace FBE
+
+namespace FBE {
+namespace proto {
+
     // Fast Binary Encoding proto final sender
     public class FinalSender : FBE.Sender
     {
@@ -3328,6 +3400,78 @@ namespace proto {
 
                     // Call receive handler with deserialized value
                     OnReceive(AccountValue);
+                    return true;
+                }
+            }
+
+            return false;
+        }
+    }
+
+} // namespace proto
+} // namespace FBE
+
+namespace FBE {
+namespace proto {
+
+    // Fast Binary Encoding proto final proxy
+    public class FinalProxy : FBE.Receiver
+    {
+        // Proxy models accessors
+        private readonly OrderFinalModel OrderModel;
+        private readonly BalanceFinalModel BalanceModel;
+        private readonly AccountFinalModel AccountModel;
+
+        public FinalProxy() : base(true)
+        {
+            OrderModel = new OrderFinalModel();
+            BalanceModel = new BalanceFinalModel();
+            AccountModel = new AccountFinalModel();
+        }
+        public FinalProxy(Buffer buffer) : base(buffer, true)
+        {
+            OrderModel = new OrderFinalModel();
+            BalanceModel = new BalanceFinalModel();
+            AccountModel = new AccountFinalModel();
+        }
+
+        // Proxy handlers
+        protected virtual void OnProxy(OrderFinalModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(BalanceFinalModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(AccountFinalModel model, long type, byte[] buffer, long offset, long size) {}
+
+        internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
+        {
+            switch (type)
+            {
+                case OrderFinalModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    OrderModel.Attach(buffer, offset);
+                    Debug.Assert(OrderModel.Verify(), "proto.Order validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(OrderModel, type, buffer, offset, size);
+                    return true;
+                }
+                case BalanceFinalModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    BalanceModel.Attach(buffer, offset);
+                    Debug.Assert(BalanceModel.Verify(), "proto.Balance validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(BalanceModel, type, buffer, offset, size);
+                    return true;
+                }
+                case AccountFinalModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    AccountModel.Attach(buffer, offset);
+                    Debug.Assert(AccountModel.Verify(), "proto.Account validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(AccountModel, type, buffer, offset, size);
                     return true;
                 }
             }

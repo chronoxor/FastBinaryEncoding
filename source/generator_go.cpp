@@ -4852,10 +4852,12 @@ void GeneratorGo::GeneratePackage(const std::shared_ptr<Package>& p)
     {
         GenerateSender(p, path, false);
         GenerateReceiver(p, path, false);
+        GenerateProxy(p, path, false);
         if (Final())
         {
             GenerateSender(p, path, true);
             GenerateReceiver(p, path, true);
+            GenerateProxy(p, path, true);
         }
     }
 }
@@ -7485,6 +7487,229 @@ void GeneratorGo::GenerateReceiver(const std::shared_ptr<Package>& p, const CppC
             WriteLineIndent("if r." + ConvertToLower(*import) + "Receiver != nil {");
             Indent(1);
             WriteLineIndent("if ok, err := r." + ConvertToLower(*import) + "Receiver.OnReceive(fbeType, buffer); ok {");
+            Indent(1);
+            WriteLineIndent("return ok, err");
+            Indent(-1);
+            WriteLineIndent("}");
+            Indent(-1);
+            WriteLineIndent("}");
+        }
+    }
+    WriteLine();
+    WriteLineIndent("return false, nil");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the output file
+    Close();
+}
+
+void GeneratorGo::GenerateProxy(const std::shared_ptr<Package>& p, const CppCommon::Path& path, bool final)
+{
+    std::string proxy_name = std::string(final ? "Final" : "") + "Proxy";
+
+    // Open the output file
+    CppCommon::Path output = path / (proxy_name + ".go");
+    Open(output);
+
+    // Generate header
+    GenerateHeader(CppCommon::Path(_input).filename().string());
+
+    // Generate package
+    WriteLine();
+    WriteLineIndent("package " + *p->name);
+
+    // Generate imports
+    WriteLine();
+    WriteLineIndent("import \"errors\"");
+    GenerateImports(p);
+
+    // Generate proxy interfaces
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_name = ConvertToUpper(*s->name);
+            std::string struct_model = ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model";
+
+            WriteLine();
+            WriteLineIndent("// Proxy " + *s->name + " interface");
+            WriteLineIndent("type OnProxy" + std::string(final ? "Final" : "") + struct_name + " interface {");
+            Indent(1);
+            WriteLineIndent("OnProxy" + struct_name + "(model *" + struct_model + ", fbeType int, buffer []byte)");
+            Indent(-1);
+            WriteLineIndent("}");
+            WriteLine();
+            WriteLineIndent("// Proxy " + *s->name + " function");
+            WriteLineIndent("type OnProxy" + std::string(final ? "Final" : "") + struct_name + "Func func(model *" + struct_model + ", fbeType int, buffer []byte)");
+            WriteLineIndent("func (f OnProxy" + std::string(final ? "Final" : "") + struct_name + "Func) OnProxy" + struct_name + "(model *" + struct_model + ", fbeType int, buffer []byte) {");
+            Indent(1);
+            WriteLineIndent("f(model, fbeType, buffer)");
+            Indent(-1);
+            WriteLineIndent("}");
+        }
+    }
+
+    // Generate proxy type
+    WriteLine();
+    WriteLineIndent("// Fast Binary Encoding " + *p->name + (final ? " final " : " ") + "proxy");
+    WriteLineIndent("type " + proxy_name + " struct {");
+    Indent(1);
+    WriteLineIndent("*fbe.Receiver");
+    if (p->import)
+        for (const auto& import : p->import->imports)
+            WriteLineIndent(ConvertToLower(*import) + "Proxy *" + *import + (final ? ".Final" : ".") + "Proxy");
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+            WriteLineIndent(ConvertToLower(*s->name) + "Model *" + ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model");
+
+        WriteLine();
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_name = ConvertToUpper(*s->name);
+
+            WriteLineIndent("// Proxy " + *s->name + " handler");
+            WriteLineIndent("HandlerOnProxy" + struct_name + " OnProxy" + std::string(final ? "Final" : "") + struct_name);
+        }
+    }
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate proxy constructor
+    WriteLine();
+    WriteLineIndent("// Create a new " + *p->name + (final ? " final " : " ") + "proxy with an empty buffer");
+    WriteLineIndent("func New" + proxy_name + "() *" + proxy_name + " {");
+    Indent(1);
+    WriteLineIndent("return New" + proxy_name + "WithBuffer(fbe.NewEmptyBuffer())");
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+    WriteLineIndent("// Create a new " + *p->name + (final ? " final " : " ") + "proxy with the given buffer");
+    WriteLineIndent("func New" + proxy_name + "WithBuffer(buffer *fbe.Buffer) *" + proxy_name + " {");
+    Indent(1);
+    WriteLineIndent("proxy := &" + proxy_name + "{");
+    Indent(1);
+    WriteLineIndent("fbe.NewReceiver(buffer, " + std::string(final ? "true" : "false") + "),");
+    if (p->import)
+        for (const auto& import : p->import->imports)
+            WriteLineIndent(*import + ".New" + (final ? "Final" : "") + "ProxyWithBuffer(buffer),");
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+            WriteLineIndent("New" + ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model(buffer),");
+        for (size_t i = 0; i < p->body->structs.size(); ++i)
+            WriteLineIndent("nil,");
+    }
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLineIndent("proxy.SetupHandlerOnReceive(proxy)");
+    for (const auto& s : p->body->structs)
+    {
+        std::string struct_model = ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model";
+
+        WriteLineIndent("proxy.SetupHandlerOnProxy" + ConvertToUpper(*s->name) + "Func(func(model *" + struct_model + ", fbeType int, buffer []byte) {})");
+    }
+    WriteLineIndent("return proxy");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    if (p->import)
+    {
+        // Generate proxy imports
+        WriteLine();
+        WriteLineIndent("// Imported proxy");
+        WriteLine();
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent("// Get the " + *import + " proxy");
+            WriteLineIndent("func (p *" + proxy_name + ") " + ConvertToUpper(*import) + "Proxy() *" + *import + (final ? ".Final" : ".") + "Proxy { return p." + ConvertToLower(*import) + "Proxy }");
+            WriteLineIndent("// Set the " + *import + " proxy");
+            WriteLineIndent("func (p *" + proxy_name + ") Set" + ConvertToUpper(*import) + "Proxy(proxy *" + *import + (final ? ".Final" : ".") + "Proxy) { p." + ConvertToLower(*import) + "Proxy = proxy }");
+        }
+    }
+
+    // Generate proxy setup handlers
+    WriteLine();
+    WriteLineIndent("// Setup handlers");
+    WriteLineIndent("func (p *" + proxy_name + ") SetupHandlers(handlers interface{}) {");
+    Indent(1);
+    WriteLineIndent("p.Receiver.SetupHandlers(handlers)");
+    if (p->import)
+        for (const auto& import : p->import->imports)
+            WriteLineIndent("p." + ConvertToLower(*import) + "Proxy.SetupHandlers(handlers)");
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_name = ConvertToUpper(*s->name);
+
+            WriteLineIndent("if handler, ok := handlers.(OnProxy" + std::string(final ? "Final" : "") + struct_name + "); ok {");
+            Indent(1);
+            WriteLineIndent("p.SetupHandlerOnProxy" + struct_name + "(handler)");
+            Indent(-1);
+            WriteLineIndent("}");
+        }
+    }
+    Indent(-1);
+    WriteLineIndent("}");
+    if (p->body)
+    {
+        WriteLine();
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_name = ConvertToUpper(*s->name);
+            std::string struct_model = ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model";
+
+            WriteLineIndent("// Setup proxy " + *s->name + " handler");
+            WriteLineIndent("func (p *" + proxy_name + ") SetupHandlerOnProxy" + struct_name + "(handler OnProxy" + std::string(final ? "Final" : "") + struct_name + ") { p.HandlerOnProxy" + struct_name + " = handler }");
+            WriteLineIndent("// Setup proxy " + *s->name + " handler function");
+            WriteLineIndent("func (p *" + proxy_name + ") SetupHandlerOnProxy" + struct_name + "Func(function func(model *" + struct_model + ", fbeType int, buffer []byte)) { p.HandlerOnProxy" + struct_name + " = OnProxy" + std::string(final ? "Final" : "") + struct_name + "Func(function) }");
+        }
+    }
+
+
+    // Generate proxy message handler
+    WriteLine();
+    WriteLineIndent("// Receive message handler");
+    WriteLineIndent("func (p *" + proxy_name + ") OnReceive(fbeType int, buffer []byte) (bool, error) {");
+    Indent(1);
+    if (p->body)
+    {
+        WriteLineIndent("switch fbeType {");
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_name = ConvertToUpper(*s->name);
+            std::string struct_model = ConvertToLower(*s->name) + "Model";
+
+            WriteLineIndent("case p." + struct_model + ".FBEType():");
+            Indent(1);
+            WriteLineIndent("// Attach the FBE stream to the proxy model");
+            WriteLineIndent("p." + struct_model + ".Buffer().Attach(buffer)");
+            WriteLineIndent("if !p." + struct_model + ".Verify() {");
+            Indent(1);
+            WriteLineIndent("return false, errors.New(\"" + *p->name + "." + *s->name + " validation failed\")");
+            Indent(-1);
+            WriteLineIndent("}");
+            WriteLine();
+            WriteLineIndent("// Call proxy handler");
+            WriteLineIndent("p.HandlerOnProxy" + struct_name + ".OnProxy" + struct_name + "(p." + struct_model + ", fbeType, buffer)");
+            WriteLineIndent("return true, nil");
+            Indent(-1);
+        }
+        WriteLineIndent("}");
+    }
+    if (p->import)
+    {
+        WriteLine();
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent("if p." + ConvertToLower(*import) + "Proxy != nil {");
+            Indent(1);
+            WriteLineIndent("if ok, err := p." + ConvertToLower(*import) + "Proxy.OnReceive(fbeType, buffer); ok {");
             Indent(1);
             WriteLineIndent("return ok, err");
             Indent(-1);

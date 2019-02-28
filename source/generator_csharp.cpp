@@ -3951,10 +3951,12 @@ void GeneratorCSharp::GeneratePackage(const std::shared_ptr<Package>& p)
     {
         GenerateSender(p, false);
         GenerateReceiver(p, false);
+        GenerateProxy(p, false);
         if (Final())
         {
             GenerateSender(p, true);
             GenerateReceiver(p, true);
+            GenerateProxy(p, true);
         }
     }
 
@@ -6322,6 +6324,144 @@ void GeneratorCSharp::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     WriteLineIndent("}");
 
     // Generate receiver end
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate namespace end
+    Indent(-1);
+    WriteLine();
+    WriteLineIndent("} // namespace " + *p->name);
+    WriteLineIndent("} // namespace FBE");
+}
+
+void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
+{
+    // Generate namespace begin
+    WriteLine();
+    WriteLineIndent("namespace FBE {");
+    WriteLineIndent("namespace " + *p->name + " {");
+    Indent(1);
+
+    std::string proxy = (final ? "FinalProxy" : "Proxy");
+    std::string model = (final ? "FinalModel" : "Model");
+
+    // Generate proxy begin
+    WriteLine();
+    if (final)
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final proxy");
+    else
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " proxy");
+    WriteLineIndent("public class " + proxy + " : FBE.Receiver");
+    WriteLineIndent("{");
+    Indent(1);
+
+    // Generate imported proxy accessors
+    if (p->import)
+    {
+        WriteLineIndent("// Imported proxys");
+        for (const auto& import : p->import->imports)
+            WriteLineIndent("public " + *import + "." + proxy + " " + *import + "Proxy;");
+        WriteLine();
+    }
+
+    // Generate proxy models accessors
+    if (p->body)
+    {
+        WriteLineIndent("// Proxy models accessors");
+        for (const auto& s : p->body->structs)
+            WriteLineIndent("private readonly " + *s->name + model + " " + *s->name + "Model;");
+        WriteLine();
+    }
+
+    // Generate proxy constructors
+    WriteLineIndent("public " + proxy + "() : base(" + std::string(final ? "true" : "false") + ")");
+    WriteLineIndent("{");
+    Indent(1);
+    if (p->import)
+    {
+        for (const auto& import : p->import->imports)
+            WriteLineIndent(*import + "Proxy = new " + *import + "." + proxy + "(Buffer);");
+    }
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+            WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
+    }
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLineIndent("public " + proxy + "(Buffer buffer) : base(buffer, " + std::string(final ? "true" : "false") + ")");
+    WriteLineIndent("{");
+    Indent(1);
+    if (p->import)
+    {
+        for (const auto& import : p->import->imports)
+            WriteLineIndent(*import + "Proxy = new " + *import + "." + proxy + "(Buffer);");
+    }
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+            WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
+    }
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+
+    // Generate proxy handlers
+    if (p->body)
+    {
+        WriteLineIndent("// Proxy handlers");
+        for (const auto& s : p->body->structs)
+        {
+            std::string model_name = *s->name + model;
+            WriteLineIndent("protected virtual void OnProxy(" + model_name + " model, long type, byte[] buffer, long offset, long size) {}");
+        }
+        WriteLine();
+    }
+
+    // Generate proxy message handler
+    WriteLineIndent("internal override bool OnReceive(long type, byte[] buffer, long offset, long size)");
+    WriteLineIndent("{");
+    Indent(1);
+    if (p->body)
+    {
+        WriteLineIndent("switch (type)");
+        WriteLineIndent("{");
+        Indent(1);
+        for (const auto& s : p->body->structs)
+        {
+            WriteLineIndent("case " + *s->name + model + ".FBETypeConst:");
+            WriteLineIndent("{");
+            Indent(1);
+            WriteLineIndent("// Attach the FBE stream to the proxy model");
+            WriteLineIndent(*s->name + "Model.Attach(buffer, offset);");
+            WriteLineIndent("Debug.Assert(" + *s->name + "Model.Verify(), \"" + *p->name + "." + *s->name + " validation failed!\");");
+            WriteLine();
+            WriteLineIndent("// Call proxy handler");
+            WriteLineIndent("OnProxy(" + *s->name + "Model, type, buffer, offset, size);");
+            WriteLineIndent("return true;");
+            Indent(-1);
+            WriteLineIndent("}");
+        }
+        Indent(-1);
+        WriteLineIndent("}");
+    }
+    if (p->import)
+    {
+        WriteLine();
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent("if ((" + *import + "Proxy != null) && " + *import + "Proxy.OnReceive(type, buffer, offset, size))");
+            Indent(1);
+            WriteLineIndent("return true;");
+            Indent(-1);
+        }
+    }
+    WriteLine();
+    WriteLineIndent("return false;");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate proxy end
     Indent(-1);
     WriteLineIndent("}");
 

@@ -2,13 +2,61 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba8f4190-0800-4bce-b2eb-ad8ed5d1197a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../include/generator_cpp.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_cpp.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/generator_csharp.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_csharp.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/generator_go.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_go.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/enums.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/protoex.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/enums.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/protoex.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/test.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/enums.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/enums.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/proto.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/protoex.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/protoex.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/test.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/test.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_cpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_cpp.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_csharp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_csharp.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/proto/proto/Proxy.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1232">
+              <caret line="23" selection-start-line="23" selection-end-line="23" />
+              <folding>
+                <element signature="e#188#219#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/proto/proto/FinalProxy.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-212">
+              <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
+              <folding>
+                <element signature="e#188#219#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -24,8 +72,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/proto/proto/FieldModelAccount.go" />
-        <option value="$PROJECT_DIR$/proto/proto/FinalModelAccount.go" />
         <option value="$PROJECT_DIR$/examples/serialization_final.go" />
         <option value="$PROJECT_DIR$/examples/serialization.go" />
         <option value="$PROJECT_DIR$/examples/create.go" />
@@ -75,13 +121,15 @@
         <option value="$PROJECT_DIR$/tests/send_receive_final_test.go" />
         <option value="$PROJECT_DIR$/proto/proto/Receiver.go" />
         <option value="$PROJECT_DIR$/proto/protoex/Receiver.go" />
+        <option value="$PROJECT_DIR$/proto/proto/Proxy.go" />
+        <option value="$PROJECT_DIR$/proto/proto/FinalProxy.go" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="572" />
     <option name="y" value="135" />
-    <option name="width" value="1453" />
+    <option name="width" value="1596" />
     <option name="height" value="1193" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -110,6 +158,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -117,11 +166,15 @@
               <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
               <item name="Go" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="FastBinaryEncoding" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Go" type="462c0819:PsiDirectoryNode" />
+              <item name="examples" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -150,7 +203,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Go Test.go test tests">
+  <component name="RunManager" selected="Go Build.go build send_receive.go">
     <configuration name="go build print.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="FastBinaryEncoding" />
       <working_directory value="$PROJECT_DIR$/" />
@@ -159,19 +212,19 @@
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
+    <configuration name="go build send_receive.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="FastBinaryEncoding" />
+      <working_directory value="$PROJECT_DIR$/" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/examples/send_receive.go" />
+      <directory value="$PROJECT_DIR$/" />
+      <method v="2" />
+    </configuration>
     <configuration name="go build serialization_final.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="FastBinaryEncoding" />
       <working_directory value="$PROJECT_DIR$/" />
       <kind value="FILE" />
       <filePath value="$PROJECT_DIR$/examples/serialization_final.go" />
-      <directory value="$PROJECT_DIR$/" />
-      <method v="2" />
-    </configuration>
-    <configuration name="go build serialization.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
-      <module name="FastBinaryEncoding" />
-      <working_directory value="$PROJECT_DIR$/" />
-      <kind value="FILE" />
-      <filePath value="$PROJECT_DIR$/examples/serialization.go" />
       <directory value="$PROJECT_DIR$/" />
       <method v="2" />
     </configuration>
@@ -213,27 +266,24 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Go Build.go build serialization.go" />
       <item itemvalue="Go Build.go build serialization_final.go" />
       <item itemvalue="Go Build.go build serialization_json.go" />
       <item itemvalue="Go Build.go build print.go" />
       <item itemvalue="Go Test.Tests" />
       <item itemvalue="Go Test.go test tests" />
+      <item itemvalue="Go Build.go build send_receive.go" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Build.go build send_receive.go" />
         <item itemvalue="Go Test.go test tests" />
         <item itemvalue="Go Build.go build print.go" />
         <item itemvalue="Go Build.go build serialization_json.go" />
         <item itemvalue="Go Build.go build serialization_final.go" />
-        <item itemvalue="Go Build.go build serialization.go" />
       </list>
     </recent_temporary>
   </component>
   <component name="TestHistory">
-    <history-entry file="go_test_tests - 2018.12.08 at 13h 25m 22s.xml">
-      <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
-    </history-entry>
     <history-entry file="go_test_tests - 2018.12.08 at 14h 03m 27s.xml">
       <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
     </history-entry>
@@ -261,11 +311,14 @@
     <history-entry file="go_test_tests - 2019.02.22 at 01h 38m 18s.xml">
       <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
     </history-entry>
+    <history-entry file="go_test_tests - 2019.03.01 at 00h 14m 59s.xml">
+      <configuration name="go test tests" configurationId="GoTestRunConfiguration" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="572" y="135" width="1453" height="1193" extended-state="0" />
+    <frame x="572" y="135" width="1596" height="1193" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2713568" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24934895" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -348,12 +401,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/proto/test/FieldModelOptionalTimestamp.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/proto/test/FinalModelMapInt32OptionalFlagsSimple.go">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/examples/create.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="544">
@@ -692,6 +739,26 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1412">
           <caret line="60" lean-forward="true" selection-start-line="60" selection-end-line="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/proto/Proxy.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1232">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+          <folding>
+            <element signature="e#188#219#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proto/proto/FinalProxy.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-212">
+          <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
+          <folding>
+            <element signature="e#188#219#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

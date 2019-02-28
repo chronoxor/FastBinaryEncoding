@@ -5651,10 +5651,12 @@ void GeneratorCpp::GeneratePackage(const std::shared_ptr<Package>& p)
     {
         GenerateSender(p, false);
         GenerateReceiver(p, false);
+        GenerateProxy(p, false);
         if (Final())
         {
             GenerateSender(p, true);
             GenerateReceiver(p, true);
+            GenerateProxy(p, true);
         }
     }
 
@@ -7735,6 +7737,144 @@ void GeneratorCpp::GenerateReceiver(const std::shared_ptr<Package>& p, bool fina
     }
 
     // Generate receiver end
+    Indent(-1);
+    WriteLineIndent("};");
+
+    // Generate namespace end
+    WriteLine();
+    WriteLineIndent("} // namespace " + *p->name);
+    WriteLineIndent("} // namespace FBE");
+}
+
+void GeneratorCpp::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
+{
+    // Generate namespace begin
+    WriteLine();
+    WriteLineIndent("namespace FBE {");
+    WriteLineIndent("namespace " + *p->name + " {");
+
+    std::string proxy = (final ? "FinalProxy" : "Proxy");
+    std::string model = (final ? "FinalModel" : "Model");
+
+    // Generate proxy begin
+    WriteLine();
+    if (final)
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final proxy");
+    else
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " proxy");
+    WriteLineIndent("template <class TBuffer>");
+    WriteLineIndent("class " + proxy + " : public virtual FBE::Receiver<TBuffer>");
+    if (p->import)
+    {
+        Indent(1);
+        for (const auto& import : p->import->imports)
+            WriteLineIndent(", public " + *import + "::" + proxy + "<TBuffer>");
+        Indent(-1);
+        WriteLine();
+    }
+    WriteLineIndent("{");
+    WriteLineIndent("public:");
+    Indent(1);
+
+    // Generate proxy constructors
+    if (p->import)
+    {
+        WriteLineIndent(proxy + "()");
+        Indent(1);
+        bool first = true;
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent((first ? ": " : ", ") + *import + "::" + proxy + "<TBuffer>(this->_buffer)");
+            first = false;
+        }
+        Indent(-1);
+        WriteLineIndent("{" + std::string(final ? " this->final(true); " : "") + "}");
+    }
+    else
+        WriteLineIndent(proxy + "() {" + std::string(final ? " this->final(true); " : "") + "}");
+    WriteLineIndent(proxy + "(const " + proxy + "&) = default;");
+    WriteLineIndent(proxy + "(" + proxy + "&&) = default;");
+    WriteLineIndent("virtual ~" + proxy + "() = default;");
+
+    // Generate proxy operators
+    WriteLine();
+    WriteLineIndent(proxy + "& operator=(const " + proxy + "&) = default;");
+    WriteLineIndent(proxy + "& operator=(" + proxy + "&&) = default;");
+
+    // Generate proxy handlers
+    if (p->body)
+    {
+        WriteLine();
+        Indent(-1);
+        WriteLineIndent("protected:");
+        Indent(1);
+        WriteLineIndent("// Proxy handlers");
+        for (const auto& s : p->body->structs)
+        {
+            std::string model_name = "FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer>";
+            WriteLineIndent("virtual void onProxy(" + model_name + "& model, size_t type, const void* data, size_t size) {}");
+        }
+    }
+
+    // Generate proxy message handler
+    WriteLine();
+    WriteLineIndent("// Receive message handler");
+    WriteLineIndent("bool onReceive(size_t type, const void* data, size_t size) override");
+    WriteLineIndent("{");
+    Indent(1);
+    if (p->body)
+    {
+        WriteLineIndent("switch (type)");
+        WriteLineIndent("{");
+        Indent(1);
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_name = "::" + *p->name + "::" + *s->name;
+            WriteLineIndent("case FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer>::fbe_type():");
+            WriteLineIndent("{");
+            Indent(1);
+            WriteLineIndent("// Attach the FBE stream to the proxy model");
+            WriteLineIndent(*s->name + "Model.attach(data, size);");
+            WriteLineIndent("assert(" + *s->name + "Model.verify() && \"" + *p->name + "::" + *s->name + " validation failed!\");");
+            WriteLine();
+            WriteLineIndent("// Call proxy handler");
+            WriteLineIndent("onProxy(" + *s->name + "Model, type, data, size);");
+            WriteLineIndent("return true;");
+            Indent(-1);
+            WriteLineIndent("}");
+        }
+        Indent(-1);
+        WriteLineIndent("}");
+    }
+    if (p->import)
+    {
+        WriteLine();
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent("if (" + *import + "::" + proxy + "<TBuffer>::onReceive(type, data, size))");
+            Indent(1);
+            WriteLineIndent("return true;");
+            Indent(-1);
+        }
+    }
+    WriteLine();
+    WriteLineIndent("return false;");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate proxy models accessors
+    if (p->body)
+    {
+        Indent(-1);
+        WriteLine();
+        WriteLineIndent("private:");
+        Indent(1);
+        WriteLineIndent("// Proxy models accessors");
+        for (const auto& s : p->body->structs)
+            WriteLineIndent("FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer> " + *s->name + "Model;");
+    }
+
+    // Generate proxy end
     Indent(-1);
     WriteLineIndent("};");
 

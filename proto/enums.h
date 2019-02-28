@@ -4546,6 +4546,54 @@ private:
 namespace FBE {
 namespace enums {
 
+// Fast Binary Encoding enums proxy
+template <class TBuffer>
+class Proxy : public virtual FBE::Receiver<TBuffer>
+{
+public:
+    Proxy() {}
+    Proxy(const Proxy&) = default;
+    Proxy(Proxy&&) = default;
+    virtual ~Proxy() = default;
+
+    Proxy& operator=(const Proxy&) = default;
+    Proxy& operator=(Proxy&&) = default;
+
+protected:
+    // Proxy handlers
+    virtual void onProxy(FBE::enums::EnumsModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
+
+    // Receive message handler
+    bool onReceive(size_t type, const void* data, size_t size) override
+    {
+        switch (type)
+        {
+            case FBE::enums::EnumsModel<ReadBuffer>::fbe_type():
+            {
+                // Attach the FBE stream to the proxy model
+                EnumsModel.attach(data, size);
+                assert(EnumsModel.verify() && "enums::Enums validation failed!");
+
+                // Call proxy handler
+                onProxy(EnumsModel, type, data, size);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+private:
+    // Proxy models accessors
+    FBE::enums::EnumsModel<ReadBuffer> EnumsModel;
+};
+
+} // namespace enums
+} // namespace FBE
+
+namespace FBE {
+namespace enums {
+
 // Fast Binary Encoding enums final sender
 template <class TBuffer>
 class FinalSender : public virtual FBE::Sender<TBuffer>
@@ -4641,6 +4689,54 @@ private:
     ::enums::Enums EnumsValue;
 
     // Receiver models accessors
+    FBE::enums::EnumsFinalModel<ReadBuffer> EnumsModel;
+};
+
+} // namespace enums
+} // namespace FBE
+
+namespace FBE {
+namespace enums {
+
+// Fast Binary Encoding enums final proxy
+template <class TBuffer>
+class FinalProxy : public virtual FBE::Receiver<TBuffer>
+{
+public:
+    FinalProxy() { this->final(true); }
+    FinalProxy(const FinalProxy&) = default;
+    FinalProxy(FinalProxy&&) = default;
+    virtual ~FinalProxy() = default;
+
+    FinalProxy& operator=(const FinalProxy&) = default;
+    FinalProxy& operator=(FinalProxy&&) = default;
+
+protected:
+    // Proxy handlers
+    virtual void onProxy(FBE::enums::EnumsFinalModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
+
+    // Receive message handler
+    bool onReceive(size_t type, const void* data, size_t size) override
+    {
+        switch (type)
+        {
+            case FBE::enums::EnumsFinalModel<ReadBuffer>::fbe_type():
+            {
+                // Attach the FBE stream to the proxy model
+                EnumsModel.attach(data, size);
+                assert(EnumsModel.verify() && "enums::Enums validation failed!");
+
+                // Call proxy handler
+                onProxy(EnumsModel, type, data, size);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+private:
+    // Proxy models accessors
     FBE::enums::EnumsFinalModel<ReadBuffer> EnumsModel;
 };
 

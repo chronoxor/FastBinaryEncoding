@@ -2,14 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2e46b070-39ae-4a9c-ad72-9d071bc18831" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/generator_cpp.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_cpp.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../include/generator_csharp.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../include/generator_csharp.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/enums.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/protoex.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proto/enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/enums.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/proto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/protoex.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Proto/test.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/enums.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/enums.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/proto.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/protoex.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/protoex.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../proto/test.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/test.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_cpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_cpp.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../source/generator_csharp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_csharp.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,7 +68,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="FileSystemExplorer" />
+      <pane id="AssemblyExplorer" />
       <pane id="SolutionExplorer">
         <subPane>
           <expand>
@@ -77,7 +86,7 @@
         </subPane>
         <option name="show-all-files" value="false" />
       </pane>
-      <pane id="AssemblyExplorer" />
+      <pane id="FileSystemExplorer" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -250,11 +259,12 @@
       <workItem from="1545680776065" duration="44000" />
       <workItem from="1550793142520" duration="33000" />
       <workItem from="1550793185758" duration="10000" />
+      <workItem from="1551385954338" duration="30000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20479000" />
+    <option name="totallyTimeSpent" value="20509000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -268,7 +278,7 @@
   <component name="ToolWindowManager">
     <frame x="383" y="211" width="1735" height="1157" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17373134" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17552239" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
@@ -284,10 +294,10 @@
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Unit Tests" order="11" sideWeight="0.6525373" weight="0.45214844" />
+      <window_info active="true" anchor="bottom" id="Unit Tests" order="11" sideWeight="0.6519403" visible="true" weight="0.45214844" />
       <window_info anchor="bottom" id="Terminal" order="12" />
-      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.50925374" side_tool="true" visible="true" weight="0.32617188" />
-      <window_info anchor="bottom" id="Build" order="14" sideWeight="0.4877612" weight="0.32617188" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.3480597" side_tool="true" visible="true" weight="0.45214844" />
+      <window_info anchor="bottom" id="Build" order="14" sideWeight="0.48716417" weight="0.32617188" />
       <window_info anchor="bottom" id="Performance Profiler" order="15" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
