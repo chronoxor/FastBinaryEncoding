@@ -194,7 +194,7 @@ enum class StateEx : uint8_t
     good = initialized | calculated,
     bad = unknown | invalid | broken,
 };
-ENUM_FLAGS(StateEx)
+FBE_ENUM_FLAGS(StateEx)
 
 template <class TOutputStream>
 inline TOutputStream& operator<<(TOutputStream& stream, StateEx value)

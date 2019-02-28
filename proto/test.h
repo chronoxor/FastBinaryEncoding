@@ -201,7 +201,7 @@ enum class FlagsSimple
     FLAG_VALUE_4 = FLAG_VALUE_3,
     FLAG_VALUE_5 = FLAG_VALUE_1 | FLAG_VALUE_3,
 };
-ENUM_FLAGS(FlagsSimple)
+FBE_ENUM_FLAGS(FlagsSimple)
 
 template <class TOutputStream>
 inline TOutputStream& operator<<(TOutputStream& stream, FlagsSimple value)
@@ -312,7 +312,7 @@ enum class FlagsTyped : uint64_t
     FLAG_VALUE_8 = FLAG_VALUE_7,
     FLAG_VALUE_9 = FLAG_VALUE_2 | FLAG_VALUE_4 | FLAG_VALUE_6,
 };
-ENUM_FLAGS(FlagsTyped)
+FBE_ENUM_FLAGS(FlagsTyped)
 
 template <class TOutputStream>
 inline TOutputStream& operator<<(TOutputStream& stream, FlagsTyped value)

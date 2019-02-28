@@ -395,7 +395,7 @@ void GeneratorCpp::GenerateFlagsWrapper()
 {
     std::string code = R"CODE(
 // Register a new enum-based flags macro
-#define ENUM_FLAGS(type)\
+#define FBE_ENUM_FLAGS(type)\
 inline FBE::Flags<type> operator|(type f1, type f2) noexcept { return FBE::Flags<type>(f1) | FBE::Flags<type>(f2); }\
 inline FBE::Flags<type> operator&(type f1, type f2) noexcept { return FBE::Flags<type>(f1) & FBE::Flags<type>(f2); }\
 inline FBE::Flags<type> operator^(type f1, type f2) noexcept { return FBE::Flags<type>(f1) ^ FBE::Flags<type>(f2); }
@@ -5852,7 +5852,7 @@ void GeneratorCpp::GenerateFlags(const std::shared_ptr<Package>& p, const std::s
     // Generate flags end
     Indent(-1);
     WriteLineIndent("};");
-    WriteLineIndent("ENUM_FLAGS(" + *f->name + ")");
+    WriteLineIndent("FBE_ENUM_FLAGS(" + *f->name + ")");
 
     // Generate flags output stream
     GenerateFlagsOutputStream(f);

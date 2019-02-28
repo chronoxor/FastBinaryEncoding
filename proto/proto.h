@@ -185,7 +185,7 @@ enum class State : uint8_t
     good = initialized | calculated,
     bad = unknown | invalid | broken,
 };
-ENUM_FLAGS(State)
+FBE_ENUM_FLAGS(State)
 
 template <class TOutputStream>
 inline TOutputStream& operator<<(TOutputStream& stream, State value)
