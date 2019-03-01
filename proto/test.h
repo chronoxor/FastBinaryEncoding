@@ -15252,8 +15252,7 @@ class Sender : public virtual FBE::Sender<TBuffer>
 {
 public:
     Sender()
-        : proto::Sender<TBuffer>(this->_buffer)
-        , StructSimpleModel(this->_buffer)
+        : StructSimpleModel(this->_buffer)
         , StructOptionalModel(this->_buffer)
         , StructNestedModel(this->_buffer)
         , StructBytesModel(this->_buffer)
@@ -15498,9 +15497,7 @@ class Receiver : public virtual FBE::Receiver<TBuffer>
 
 {
 public:
-    Receiver()
-        : proto::Receiver<TBuffer>(this->_buffer)
-    {}
+    Receiver() {}
     Receiver(const Receiver&) = default;
     Receiver(Receiver&&) = default;
     virtual ~Receiver() = default;
@@ -15785,9 +15782,7 @@ class Proxy : public virtual FBE::Receiver<TBuffer>
 
 {
 public:
-    Proxy()
-        : proto::Proxy<TBuffer>(this->_buffer)
-    {}
+    Proxy() {}
     Proxy(const Proxy&) = default;
     Proxy(Proxy&&) = default;
     virtual ~Proxy() = default;
@@ -15961,8 +15956,7 @@ class FinalSender : public virtual FBE::Sender<TBuffer>
 {
 public:
     FinalSender()
-        : proto::FinalSender<TBuffer>(this->_buffer)
-        , StructSimpleModel(this->_buffer)
+        : StructSimpleModel(this->_buffer)
         , StructOptionalModel(this->_buffer)
         , StructNestedModel(this->_buffer)
         , StructBytesModel(this->_buffer)
@@ -16207,9 +16201,7 @@ class FinalReceiver : public virtual FBE::Receiver<TBuffer>
 
 {
 public:
-    FinalReceiver()
-        : proto::FinalReceiver<TBuffer>(this->_buffer)
-    { this->final(true); }
+    FinalReceiver() { this->final(true); }
     FinalReceiver(const FinalReceiver&) = default;
     FinalReceiver(FinalReceiver&&) = default;
     virtual ~FinalReceiver() = default;
@@ -16494,9 +16486,7 @@ class FinalProxy : public virtual FBE::Receiver<TBuffer>
 
 {
 public:
-    FinalProxy()
-        : proto::FinalProxy<TBuffer>(this->_buffer)
-    { this->final(true); }
+    FinalProxy() { this->final(true); }
     FinalProxy(const FinalProxy&) = default;
     FinalProxy(FinalProxy&&) = default;
     virtual ~FinalProxy() = default;

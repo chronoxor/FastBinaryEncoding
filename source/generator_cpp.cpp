@@ -7507,16 +7507,6 @@ void GeneratorCpp::GenerateSender(const std::shared_ptr<Package>& p, bool final)
     // Generate sender constructors
     WriteLineIndent(sender + "()");
     bool first = true;
-    if (p->import)
-    {
-        Indent(1);
-        for (const auto& import : p->import->imports)
-        {
-            WriteLineIndent((first ? ": " : ", ") + *import + "::" + sender + "<TBuffer>(this->_buffer)");
-            first = false;
-        }
-        Indent(-1);
-    }
     if (p->body)
     {
         Indent(1);
@@ -7621,21 +7611,7 @@ void GeneratorCpp::GenerateReceiver(const std::shared_ptr<Package>& p, bool fina
     Indent(1);
 
     // Generate receiver constructors
-    if (p->import)
-    {
-        WriteLineIndent(receiver + "()");
-        Indent(1);
-        bool first = true;
-        for (const auto& import : p->import->imports)
-        {
-            WriteLineIndent((first ? ": " : ", ") + *import + "::" + receiver + "<TBuffer>(this->_buffer)");
-            first = false;
-        }
-        Indent(-1);
-        WriteLineIndent("{" + std::string(final ? " this->final(true); " : "") + "}");
-    }
-    else
-        WriteLineIndent(receiver + "() {" + std::string(final ? " this->final(true); " : "") + "}");
+    WriteLineIndent(receiver + "() {" + std::string(final ? " this->final(true); " : "") + "}");
     WriteLineIndent(receiver + "(const " + receiver + "&) = default;");
     WriteLineIndent(receiver + "(" + receiver + "&&) = default;");
     WriteLineIndent("virtual ~" + receiver + "() = default;");
@@ -7777,21 +7753,7 @@ void GeneratorCpp::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
     Indent(1);
 
     // Generate proxy constructors
-    if (p->import)
-    {
-        WriteLineIndent(proxy + "()");
-        Indent(1);
-        bool first = true;
-        for (const auto& import : p->import->imports)
-        {
-            WriteLineIndent((first ? ": " : ", ") + *import + "::" + proxy + "<TBuffer>(this->_buffer)");
-            first = false;
-        }
-        Indent(-1);
-        WriteLineIndent("{" + std::string(final ? " this->final(true); " : "") + "}");
-    }
-    else
-        WriteLineIndent(proxy + "() {" + std::string(final ? " this->final(true); " : "") + "}");
+    WriteLineIndent(proxy + "() {" + std::string(final ? " this->final(true); " : "") + "}");
     WriteLineIndent(proxy + "(const " + proxy + "&) = default;");
     WriteLineIndent(proxy + "(" + proxy + "&&) = default;");
     WriteLineIndent("virtual ~" + proxy + "() = default;");
