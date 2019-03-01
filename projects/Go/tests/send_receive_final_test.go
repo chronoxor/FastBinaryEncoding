@@ -5,13 +5,14 @@ import (
 )
 import "github.com/stretchr/testify/assert"
 import "../proto/proto"
+import "../proto/protoex"
 
 type MyFinalSender struct {
-	*proto.FinalSender
+	*protoex.FinalSender
 }
 
 func NewMyFinalSender() *MyFinalSender {
-	sender := &MyFinalSender{proto.NewFinalSender()}
+	sender := &MyFinalSender{protoex.NewFinalSender()}
 	sender.SetupHandlers(sender)
 	return sender
 }
@@ -22,40 +23,40 @@ func (s *MyFinalSender) OnSend(buffer []byte) (int, error) {
 }
 
 type MyFinalReceiver struct {
-	*proto.FinalReceiver
+	*protoex.FinalReceiver
 	order bool
 	balance bool
 	account bool
 }
 
 func NewMyFinalReceiver() *MyFinalReceiver {
-	receiver := &MyFinalReceiver{proto.NewFinalReceiver(), false, false, false}
+	receiver := &MyFinalReceiver{protoex.NewFinalReceiver(), false, false, false}
 	receiver.SetupHandlers(receiver)
 	return receiver
 }
 
 func (r *MyFinalReceiver) Check() bool { return r.order && r.balance && r.account }
 
-func (r *MyFinalReceiver) OnReceiveOrder(value *proto.Order) { r.order = true }
-func (r *MyFinalReceiver) OnReceiveBalance(value *proto.Balance) { r.balance = true }
-func (r *MyFinalReceiver) OnReceiveAccount(value *proto.Account) { r.account = true }
+func (r *MyFinalReceiver) OnReceiveOrder(value *protoex.Order) { r.order = true }
+func (r *MyFinalReceiver) OnReceiveBalance(value *protoex.Balance) { r.balance = true }
+func (r *MyFinalReceiver) OnReceiveAccount(value *protoex.Account) { r.account = true }
 
 func SendAndReceiveFinal(index int) bool {
 	sender := NewMyFinalSender()
 
 	// Create and send a new order
-	order := proto.Order{Id: 1, Symbol: "EURUSD", Side: proto.OrderSide_buy, Type: proto.OrderType_market, Price: 1.23456, Volume: 1000.0}
+	order := protoex.Order{Id: 1, Symbol: "EURUSD", Side: protoex.OrderSide_buy, Type: protoex.OrderType_market, Price: 1.23456, Volume: 1000.0, Sl: 0.0, Tp: 0.0}
 	_, _ = sender.Send(&order)
 
 	// Create and send a new balance wallet
-	balance := proto.Balance{Currency: "USD", Amount: 1000.0}
+	balance := protoex.Balance{Balance: &proto.Balance{Currency: "USD", Amount: 1000.0}, Locked: 100.0}
 	_, _ = sender.Send(&balance)
 
 	// Create and send a new account with some orders
-	var account = proto.NewAccountFromFieldValues(1, "Test", proto.State_good, proto.Balance{Currency: "USD", Amount: 1000.0}, &proto.Balance{Currency: "EUR", Amount: 100.0}, make([]proto.Order, 0))
-	account.Orders = append(account.Orders, proto.Order{Id: 1, Symbol: "EURUSD", Side: proto.OrderSide_buy, Type: proto.OrderType_market, Price: 1.23456, Volume: 1000.0})
-	account.Orders = append(account.Orders, proto.Order{Id: 2, Symbol: "EURUSD", Side: proto.OrderSide_sell, Type: proto.OrderType_limit, Price: 1.0, Volume: 100.0})
-	account.Orders = append(account.Orders, proto.Order{Id: 3, Symbol: "EURUSD", Side: proto.OrderSide_buy, Type: proto.OrderType_stop, Price: 1.5, Volume: 10.0})
+	var account = protoex.NewAccountFromFieldValues(1, "Test", protoex.StateEx_good, protoex.Balance{Balance: &proto.Balance{Currency: "USD", Amount: 1000.0}, Locked: 100.0}, &protoex.Balance{Balance: &proto.Balance{Currency: "EUR", Amount: 100.0}, Locked: 0.0}, make([]protoex.Order, 0))
+	account.Orders = append(account.Orders, protoex.Order{Id: 1, Symbol: "EURUSD", Side: protoex.OrderSide_buy, Type: protoex.OrderType_market, Price: 1.23456, Volume: 1000.0, Sl: 0.0, Tp: 0.0})
+	account.Orders = append(account.Orders, protoex.Order{Id: 2, Symbol: "EURUSD", Side: protoex.OrderSide_sell, Type: protoex.OrderType_limit, Price: 1.0, Volume: 100.0, Sl: 0.0, Tp: 0.0})
+	account.Orders = append(account.Orders, protoex.Order{Id: 3, Symbol: "EURUSD", Side: protoex.OrderSide_buy, Type: protoex.OrderType_stop, Price: 1.5, Volume: 10.0, Sl: 0.0, Tp: 0.0})
 	_, _ = sender.Send(account)
 
 	receiver := NewMyFinalReceiver()

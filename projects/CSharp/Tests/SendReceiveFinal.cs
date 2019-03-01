@@ -2,7 +2,7 @@
 
 namespace Tests
 {
-    public class MyFinalSender : FBE.proto.FinalSender
+    public class MyFinalSender : FBE.protoex.FinalSender
     {
         protected override long OnSend(byte[] buffer, long offset, long size)
         {
@@ -11,7 +11,7 @@ namespace Tests
         }
     }
 
-    public class MyFinalReceiver : FBE.proto.FinalReceiver
+    public class MyFinalReceiver : FBE.protoex.FinalReceiver
     {
         private bool _order;
         private bool _balance;
@@ -19,9 +19,9 @@ namespace Tests
 
         public bool Check() { return _order && _balance && _account; }
 
-        protected override void OnReceive(proto.Order value) { _order = true; }
-        protected override void OnReceive(proto.Balance value) { _balance = true; }
-        protected override void OnReceive(proto.Account value) { _account = true; }
+        protected override void OnReceive(protoex.Order value) { _order = true; }
+        protected override void OnReceive(protoex.Balance value) { _balance = true; }
+        protected override void OnReceive(protoex.Account value) { _account = true; }
     }
 
     [TestFixture]
@@ -32,24 +32,24 @@ namespace Tests
             var sender = new MyFinalSender();
 
             // Create and send a new order
-            var order = new proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0);
+            var order = new protoex.Order(1, "EURUSD", protoex.OrderSide.buy, protoex.OrderType.market, 1.23456, 1000.0, 0.0, 0.0);
             sender.Send(order);
 
             // Create and send a new balance wallet
-            var balance = new proto.Balance("USD", 1000.0);
+            var balance = new protoex.Balance(new proto.Balance("USD", 1000.0), 100.0);
             sender.Send(balance);
 
             // Create and send a new account with some orders
-            var account = proto.Account.Default;
+            var account = protoex.Account.Default;
             account.id = 1;
             account.name = "Test";
-            account.state = proto.State.good;
-            account.wallet.currency = "USD";
-            account.wallet.amount = 1000.0;
-            account.asset = new proto.Balance("EUR", 100.0);
-            account.orders.Add(new proto.Order(1, "EURUSD", proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0));
-            account.orders.Add(new proto.Order(2, "EURUSD", proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0));
-            account.orders.Add(new proto.Order(3, "EURUSD", proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0));
+            account.state = protoex.StateEx.good;
+            account.wallet.parent.currency = "USD";
+            account.wallet.parent.amount = 1000.0;
+            account.asset = new protoex.Balance(new proto.Balance("EUR", 100.0), 100.0);
+            account.orders.Add(new protoex.Order(1, "EURUSD", protoex.OrderSide.buy, protoex.OrderType.market, 1.23456, 1000.0, 0.0, 0.0));
+            account.orders.Add(new protoex.Order(2, "EURUSD", protoex.OrderSide.sell, protoex.OrderType.limit, 1.0, 100.0, 0.0, 0.0));
+            account.orders.Add(new protoex.Order(3, "EURUSD", protoex.OrderSide.buy, protoex.OrderType.stop, 1.5, 10.0, 0.0, 0.0));
             sender.Send(account);
 
             var receiver = new MyFinalReceiver();
