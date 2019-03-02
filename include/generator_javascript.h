@@ -93,6 +93,7 @@ private:
     void GenerateStructModelFinal(const std::shared_ptr<StructType>& s);
     void GenerateSender(const std::shared_ptr<Package>& p, bool final);
     void GenerateReceiver(const std::shared_ptr<Package>& p, bool final);
+    void GenerateProxy(const std::shared_ptr<Package>& p, bool final);
 
     bool IsPrimitiveType(const std::string& type);
     bool IsJavaScriptType(const std::string& type);

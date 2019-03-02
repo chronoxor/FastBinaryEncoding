@@ -15639,9 +15639,9 @@ class Receiver(fbe.Receiver):
     def on_receive_structhashex(self, value):
         pass
 
-    def on_receive(self, fbe_type, buffer, offset, size):
+    def on_receive(self, type, buffer, offset, size):
 
-        if fbe_type == StructSimpleModel.TYPE:
+        if type == StructSimpleModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structsimple_model.attach_buffer(buffer, offset)
             assert self._structsimple_model.verify(), "test.StructSimple validation failed!"
@@ -15657,7 +15657,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_structsimple(self._structsimple_value)
             return True
 
-        if fbe_type == StructOptionalModel.TYPE:
+        if type == StructOptionalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structoptional_model.attach_buffer(buffer, offset)
             assert self._structoptional_model.verify(), "test.StructOptional validation failed!"
@@ -15673,7 +15673,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_structoptional(self._structoptional_value)
             return True
 
-        if fbe_type == StructNestedModel.TYPE:
+        if type == StructNestedModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structnested_model.attach_buffer(buffer, offset)
             assert self._structnested_model.verify(), "test.StructNested validation failed!"
@@ -15689,7 +15689,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_structnested(self._structnested_value)
             return True
 
-        if fbe_type == StructBytesModel.TYPE:
+        if type == StructBytesModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structbytes_model.attach_buffer(buffer, offset)
             assert self._structbytes_model.verify(), "test.StructBytes validation failed!"
@@ -15705,7 +15705,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_structbytes(self._structbytes_value)
             return True
 
-        if fbe_type == StructArrayModel.TYPE:
+        if type == StructArrayModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structarray_model.attach_buffer(buffer, offset)
             assert self._structarray_model.verify(), "test.StructArray validation failed!"
@@ -15721,7 +15721,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_structarray(self._structarray_value)
             return True
 
-        if fbe_type == StructVectorModel.TYPE:
+        if type == StructVectorModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structvector_model.attach_buffer(buffer, offset)
             assert self._structvector_model.verify(), "test.StructVector validation failed!"
@@ -15737,7 +15737,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_structvector(self._structvector_value)
             return True
 
-        if fbe_type == StructListModel.TYPE:
+        if type == StructListModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structlist_model.attach_buffer(buffer, offset)
             assert self._structlist_model.verify(), "test.StructList validation failed!"
@@ -15753,7 +15753,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_structlist(self._structlist_value)
             return True
 
-        if fbe_type == StructSetModel.TYPE:
+        if type == StructSetModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structset_model.attach_buffer(buffer, offset)
             assert self._structset_model.verify(), "test.StructSet validation failed!"
@@ -15769,7 +15769,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_structset(self._structset_value)
             return True
 
-        if fbe_type == StructMapModel.TYPE:
+        if type == StructMapModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structmap_model.attach_buffer(buffer, offset)
             assert self._structmap_model.verify(), "test.StructMap validation failed!"
@@ -15785,7 +15785,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_structmap(self._structmap_value)
             return True
 
-        if fbe_type == StructHashModel.TYPE:
+        if type == StructHashModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structhash_model.attach_buffer(buffer, offset)
             assert self._structhash_model.verify(), "test.StructHash validation failed!"
@@ -15801,7 +15801,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_structhash(self._structhash_value)
             return True
 
-        if fbe_type == StructHashExModel.TYPE:
+        if type == StructHashExModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structhashex_model.attach_buffer(buffer, offset)
             assert self._structhashex_model.verify(), "test.StructHashEx validation failed!"
@@ -15818,6 +15818,177 @@ class Receiver(fbe.Receiver):
             return True
 
         if (self.proto_receiver is not None) and self.proto_receiver.on_receive(type, buffer, offset, size):
+            return True
+
+        return False
+
+
+# Fast Binary Encoding test proxy
+class Proxy(fbe.Receiver):
+    __slots__ = "_proto_proxy", "_structsimple_model", "_structoptional_model", "_structnested_model", "_structbytes_model", "_structarray_model", "_structvector_model", "_structlist_model", "_structset_model", "_structmap_model", "_structhash_model", "_structhashex_model", 
+
+    def __init__(self, buffer=None):
+        super().__init__(buffer, False)
+        self._proto_proxy = proto.Proxy(self.buffer)
+        self._structsimple_model = StructSimpleModel()
+        self._structoptional_model = StructOptionalModel()
+        self._structnested_model = StructNestedModel()
+        self._structbytes_model = StructBytesModel()
+        self._structarray_model = StructArrayModel()
+        self._structvector_model = StructVectorModel()
+        self._structlist_model = StructListModel()
+        self._structset_model = StructSetModel()
+        self._structmap_model = StructMapModel()
+        self._structhash_model = StructHashModel()
+        self._structhashex_model = StructHashExModel()
+
+    # Imported proxy
+
+    @property
+    def proto_proxy(self):
+        return self._proto_proxy
+
+    @proto_proxy.setter
+    def proto_proxy(self, proxy):
+        self._proto_proxy = proxy
+
+    # Receive handlers
+
+    def on_proxy_structsimple(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structoptional(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structnested(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structbytes(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structarray(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structvector(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structlist(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structset(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structmap(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structhash(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structhashex(self, model, type, buffer, offset, size):
+        pass
+
+    def on_receive(self, type, buffer, offset, size):
+
+        if type == StructSimpleModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structsimple_model.attach_buffer(buffer, offset)
+            assert self._structsimple_model.verify(), "test.StructSimple validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structsimple(self._structsimple_model, type, buffer, offset, size)
+            return True
+
+        if type == StructOptionalModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structoptional_model.attach_buffer(buffer, offset)
+            assert self._structoptional_model.verify(), "test.StructOptional validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structoptional(self._structoptional_model, type, buffer, offset, size)
+            return True
+
+        if type == StructNestedModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structnested_model.attach_buffer(buffer, offset)
+            assert self._structnested_model.verify(), "test.StructNested validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structnested(self._structnested_model, type, buffer, offset, size)
+            return True
+
+        if type == StructBytesModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structbytes_model.attach_buffer(buffer, offset)
+            assert self._structbytes_model.verify(), "test.StructBytes validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structbytes(self._structbytes_model, type, buffer, offset, size)
+            return True
+
+        if type == StructArrayModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structarray_model.attach_buffer(buffer, offset)
+            assert self._structarray_model.verify(), "test.StructArray validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structarray(self._structarray_model, type, buffer, offset, size)
+            return True
+
+        if type == StructVectorModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structvector_model.attach_buffer(buffer, offset)
+            assert self._structvector_model.verify(), "test.StructVector validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structvector(self._structvector_model, type, buffer, offset, size)
+            return True
+
+        if type == StructListModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structlist_model.attach_buffer(buffer, offset)
+            assert self._structlist_model.verify(), "test.StructList validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structlist(self._structlist_model, type, buffer, offset, size)
+            return True
+
+        if type == StructSetModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structset_model.attach_buffer(buffer, offset)
+            assert self._structset_model.verify(), "test.StructSet validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structset(self._structset_model, type, buffer, offset, size)
+            return True
+
+        if type == StructMapModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structmap_model.attach_buffer(buffer, offset)
+            assert self._structmap_model.verify(), "test.StructMap validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structmap(self._structmap_model, type, buffer, offset, size)
+            return True
+
+        if type == StructHashModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structhash_model.attach_buffer(buffer, offset)
+            assert self._structhash_model.verify(), "test.StructHash validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structhash(self._structhash_model, type, buffer, offset, size)
+            return True
+
+        if type == StructHashExModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structhashex_model.attach_buffer(buffer, offset)
+            assert self._structhashex_model.verify(), "test.StructHashEx validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structhashex(self._structhashex_model, type, buffer, offset, size)
+            return True
+
+        if (self.proto_proxy is not None) and self.proto_proxy.on_receive(type, buffer, offset, size):
             return True
 
         return False
@@ -16158,9 +16329,9 @@ class FinalReceiver(fbe.Receiver):
     def on_receive_structhashex(self, value):
         pass
 
-    def on_receive(self, fbe_type, buffer, offset, size):
+    def on_receive(self, type, buffer, offset, size):
 
-        if fbe_type == StructSimpleFinalModel.TYPE:
+        if type == StructSimpleFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structsimple_model.attach_buffer(buffer, offset)
             assert self._structsimple_model.verify(), "test.StructSimple validation failed!"
@@ -16176,7 +16347,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structsimple(self._structsimple_value)
             return True
 
-        if fbe_type == StructOptionalFinalModel.TYPE:
+        if type == StructOptionalFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structoptional_model.attach_buffer(buffer, offset)
             assert self._structoptional_model.verify(), "test.StructOptional validation failed!"
@@ -16192,7 +16363,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structoptional(self._structoptional_value)
             return True
 
-        if fbe_type == StructNestedFinalModel.TYPE:
+        if type == StructNestedFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structnested_model.attach_buffer(buffer, offset)
             assert self._structnested_model.verify(), "test.StructNested validation failed!"
@@ -16208,7 +16379,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structnested(self._structnested_value)
             return True
 
-        if fbe_type == StructBytesFinalModel.TYPE:
+        if type == StructBytesFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structbytes_model.attach_buffer(buffer, offset)
             assert self._structbytes_model.verify(), "test.StructBytes validation failed!"
@@ -16224,7 +16395,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structbytes(self._structbytes_value)
             return True
 
-        if fbe_type == StructArrayFinalModel.TYPE:
+        if type == StructArrayFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structarray_model.attach_buffer(buffer, offset)
             assert self._structarray_model.verify(), "test.StructArray validation failed!"
@@ -16240,7 +16411,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structarray(self._structarray_value)
             return True
 
-        if fbe_type == StructVectorFinalModel.TYPE:
+        if type == StructVectorFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structvector_model.attach_buffer(buffer, offset)
             assert self._structvector_model.verify(), "test.StructVector validation failed!"
@@ -16256,7 +16427,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structvector(self._structvector_value)
             return True
 
-        if fbe_type == StructListFinalModel.TYPE:
+        if type == StructListFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structlist_model.attach_buffer(buffer, offset)
             assert self._structlist_model.verify(), "test.StructList validation failed!"
@@ -16272,7 +16443,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structlist(self._structlist_value)
             return True
 
-        if fbe_type == StructSetFinalModel.TYPE:
+        if type == StructSetFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structset_model.attach_buffer(buffer, offset)
             assert self._structset_model.verify(), "test.StructSet validation failed!"
@@ -16288,7 +16459,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structset(self._structset_value)
             return True
 
-        if fbe_type == StructMapFinalModel.TYPE:
+        if type == StructMapFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structmap_model.attach_buffer(buffer, offset)
             assert self._structmap_model.verify(), "test.StructMap validation failed!"
@@ -16304,7 +16475,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structmap(self._structmap_value)
             return True
 
-        if fbe_type == StructHashFinalModel.TYPE:
+        if type == StructHashFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structhash_model.attach_buffer(buffer, offset)
             assert self._structhash_model.verify(), "test.StructHash validation failed!"
@@ -16320,7 +16491,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structhash(self._structhash_value)
             return True
 
-        if fbe_type == StructHashExFinalModel.TYPE:
+        if type == StructHashExFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._structhashex_model.attach_buffer(buffer, offset)
             assert self._structhashex_model.verify(), "test.StructHashEx validation failed!"
@@ -16337,6 +16508,177 @@ class FinalReceiver(fbe.Receiver):
             return True
 
         if (self.proto_receiver is not None) and self.proto_receiver.on_receive(type, buffer, offset, size):
+            return True
+
+        return False
+
+
+# Fast Binary Encoding test final proxy
+class FinalProxy(fbe.Receiver):
+    __slots__ = "_proto_proxy", "_structsimple_model", "_structoptional_model", "_structnested_model", "_structbytes_model", "_structarray_model", "_structvector_model", "_structlist_model", "_structset_model", "_structmap_model", "_structhash_model", "_structhashex_model", 
+
+    def __init__(self, buffer=None):
+        super().__init__(buffer, True)
+        self._proto_proxy = proto.FinalProxy(self.buffer)
+        self._structsimple_model = StructSimpleFinalModel()
+        self._structoptional_model = StructOptionalFinalModel()
+        self._structnested_model = StructNestedFinalModel()
+        self._structbytes_model = StructBytesFinalModel()
+        self._structarray_model = StructArrayFinalModel()
+        self._structvector_model = StructVectorFinalModel()
+        self._structlist_model = StructListFinalModel()
+        self._structset_model = StructSetFinalModel()
+        self._structmap_model = StructMapFinalModel()
+        self._structhash_model = StructHashFinalModel()
+        self._structhashex_model = StructHashExFinalModel()
+
+    # Imported proxy
+
+    @property
+    def proto_proxy(self):
+        return self._proto_proxy
+
+    @proto_proxy.setter
+    def proto_proxy(self, proxy):
+        self._proto_proxy = proxy
+
+    # Receive handlers
+
+    def on_proxy_structsimple(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structoptional(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structnested(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structbytes(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structarray(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structvector(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structlist(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structset(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structmap(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structhash(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structhashex(self, model, type, buffer, offset, size):
+        pass
+
+    def on_receive(self, type, buffer, offset, size):
+
+        if type == StructSimpleFinalModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structsimple_model.attach_buffer(buffer, offset)
+            assert self._structsimple_model.verify(), "test.StructSimple validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structsimple(self._structsimple_model, type, buffer, offset, size)
+            return True
+
+        if type == StructOptionalFinalModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structoptional_model.attach_buffer(buffer, offset)
+            assert self._structoptional_model.verify(), "test.StructOptional validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structoptional(self._structoptional_model, type, buffer, offset, size)
+            return True
+
+        if type == StructNestedFinalModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structnested_model.attach_buffer(buffer, offset)
+            assert self._structnested_model.verify(), "test.StructNested validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structnested(self._structnested_model, type, buffer, offset, size)
+            return True
+
+        if type == StructBytesFinalModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structbytes_model.attach_buffer(buffer, offset)
+            assert self._structbytes_model.verify(), "test.StructBytes validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structbytes(self._structbytes_model, type, buffer, offset, size)
+            return True
+
+        if type == StructArrayFinalModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structarray_model.attach_buffer(buffer, offset)
+            assert self._structarray_model.verify(), "test.StructArray validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structarray(self._structarray_model, type, buffer, offset, size)
+            return True
+
+        if type == StructVectorFinalModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structvector_model.attach_buffer(buffer, offset)
+            assert self._structvector_model.verify(), "test.StructVector validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structvector(self._structvector_model, type, buffer, offset, size)
+            return True
+
+        if type == StructListFinalModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structlist_model.attach_buffer(buffer, offset)
+            assert self._structlist_model.verify(), "test.StructList validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structlist(self._structlist_model, type, buffer, offset, size)
+            return True
+
+        if type == StructSetFinalModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structset_model.attach_buffer(buffer, offset)
+            assert self._structset_model.verify(), "test.StructSet validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structset(self._structset_model, type, buffer, offset, size)
+            return True
+
+        if type == StructMapFinalModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structmap_model.attach_buffer(buffer, offset)
+            assert self._structmap_model.verify(), "test.StructMap validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structmap(self._structmap_model, type, buffer, offset, size)
+            return True
+
+        if type == StructHashFinalModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structhash_model.attach_buffer(buffer, offset)
+            assert self._structhash_model.verify(), "test.StructHash validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structhash(self._structhash_model, type, buffer, offset, size)
+            return True
+
+        if type == StructHashExFinalModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structhashex_model.attach_buffer(buffer, offset)
+            assert self._structhashex_model.verify(), "test.StructHashEx validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structhashex(self._structhashex_model, type, buffer, offset, size)
+            return True
+
+        if (self.proto_proxy is not None) and self.proto_proxy.on_receive(type, buffer, offset, size):
             return True
 
         return False

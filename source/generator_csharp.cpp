@@ -6358,7 +6358,7 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
     // Generate imported proxy accessors
     if (p->import)
     {
-        WriteLineIndent("// Imported proxys");
+        WriteLineIndent("// Imported proxy");
         for (const auto& import : p->import->imports)
             WriteLineIndent("public " + *import + "." + proxy + " " + *import + "Proxy;");
         WriteLine();
@@ -6412,8 +6412,8 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
         WriteLineIndent("// Proxy handlers");
         for (const auto& s : p->body->structs)
         {
-            std::string model_name = *s->name + model;
-            WriteLineIndent("protected virtual void OnProxy(" + model_name + " model, long type, byte[] buffer, long offset, long size) {}");
+            std::string struct_model = *s->name + model;
+            WriteLineIndent("protected virtual void OnProxy(" + struct_model + " model, long type, byte[] buffer, long offset, long size) {}");
         }
         WriteLine();
     }

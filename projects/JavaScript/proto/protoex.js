@@ -4296,6 +4296,128 @@ class Receiver extends fbe.Receiver {
 exports.Receiver = Receiver
 
 /**
+ * Fast Binary Encoding protoex proxy
+ */
+class Proxy extends fbe.Receiver {
+  /**
+   * Initialize protoex proxy with the given buffer
+   * @param {!fbe.WriteBuffer} buffer Write buffer, defaults is new WriteBuffer()
+   * @constructor
+   */
+  constructor (buffer = new fbe.WriteBuffer()) {
+    super(buffer, false)
+    this._protoProxy = new proto.Proxy(this.buffer)
+    this._orderModel = new OrderModel()
+    this._balanceModel = new BalanceModel()
+    this._accountModel = new AccountModel()
+  }
+
+  // Imported proxy
+
+  /**
+   * Get imported proto proxy
+   * @this {!Proxy}
+   * @returns {Proxy} proto proxy
+   */
+  get protoProxy () {
+    return this._protoProxy
+  }
+
+  /**
+   * Set imported proto proxy
+   * @this {!Proxy}
+   * @param {Proxy} proxy proto proxy
+   */
+  set protoProxy (proxy) {
+    this._protoProxy = proxy
+  }
+
+  // Proxy handlers
+
+  /**
+   * Order proxy handler
+   * @this {!Proxy}
+   * @param {!Order} model Order model
+   * @param {!number} type Message type
+   * @param {!Uint8Array} buffer Buffer to send
+   * @param {!number} offset Buffer offset
+   * @param {!number} size Buffer size
+   */
+  onProxy_order (model, type, buffer, offset, size) {}  // eslint-disable-line
+
+  /**
+   * Balance proxy handler
+   * @this {!Proxy}
+   * @param {!Balance} model Balance model
+   * @param {!number} type Message type
+   * @param {!Uint8Array} buffer Buffer to send
+   * @param {!number} offset Buffer offset
+   * @param {!number} size Buffer size
+   */
+  onProxy_balance (model, type, buffer, offset, size) {}  // eslint-disable-line
+
+  /**
+   * Account proxy handler
+   * @this {!Proxy}
+   * @param {!Account} model Account model
+   * @param {!number} type Message type
+   * @param {!Uint8Array} buffer Buffer to send
+   * @param {!number} offset Buffer offset
+   * @param {!number} size Buffer size
+   */
+  onProxy_account (model, type, buffer, offset, size) {}  // eslint-disable-line
+
+  /**
+   * protoex receive message handler
+   * @this {!Proxy}
+   * @param {!number} type Message type
+   * @param {!Uint8Array} buffer Buffer to send
+   * @param {!number} offset Buffer offset
+   * @param {!number} size Buffer size
+   * @returns {!boolean} Success flag
+   */
+  onReceive (type, buffer, offset, size) {
+    switch (type) {
+      case OrderModel.fbeType: {
+        // Attach the FBE stream to the proxy model
+        this._orderModel.attachBuffer(buffer, offset)
+        console.assert(this._orderModel.verify(), 'protoex.Order validation failed!')
+
+        // Call proxy handler
+        this.onProxy_order(this._orderModel, type, buffer, offset, size)
+        return true
+      }
+      case BalanceModel.fbeType: {
+        // Attach the FBE stream to the proxy model
+        this._balanceModel.attachBuffer(buffer, offset)
+        console.assert(this._balanceModel.verify(), 'protoex.Balance validation failed!')
+
+        // Call proxy handler
+        this.onProxy_balance(this._balanceModel, type, buffer, offset, size)
+        return true
+      }
+      case AccountModel.fbeType: {
+        // Attach the FBE stream to the proxy model
+        this._accountModel.attachBuffer(buffer, offset)
+        console.assert(this._accountModel.verify(), 'protoex.Account validation failed!')
+
+        // Call proxy handler
+        this.onProxy_account(this._accountModel, type, buffer, offset, size)
+        return true
+      }
+    }
+    // noinspection RedundantIfStatementJS
+    if ((this.protoProxy != null) && this.protoProxy.onReceive(type, buffer, offset, size)) {
+      return true
+    }
+
+    return false
+  }
+}
+
+exports.Proxy = Proxy
+
+/**
  * Fast Binary Encoding protoex final sender
  */
 class FinalSender extends fbe.Sender {
@@ -4589,3 +4711,125 @@ class FinalReceiver extends fbe.Receiver {
 }
 
 exports.FinalReceiver = FinalReceiver
+
+/**
+ * Fast Binary Encoding protoex final proxy
+ */
+class FinalProxy extends fbe.Receiver {
+  /**
+   * Initialize protoex proxy with the given buffer
+   * @param {!fbe.WriteBuffer} buffer Write buffer, defaults is new WriteBuffer()
+   * @constructor
+   */
+  constructor (buffer = new fbe.WriteBuffer()) {
+    super(buffer, true)
+    this._protoProxy = new proto.FinalProxy(this.buffer)
+    this._orderModel = new OrderFinalModel()
+    this._balanceModel = new BalanceFinalModel()
+    this._accountModel = new AccountFinalModel()
+  }
+
+  // Imported proxy
+
+  /**
+   * Get imported proto proxy
+   * @this {!FinalProxy}
+   * @returns {FinalProxy} proto proxy
+   */
+  get protoProxy () {
+    return this._protoProxy
+  }
+
+  /**
+   * Set imported proto proxy
+   * @this {!FinalProxy}
+   * @param {FinalProxy} proxy proto proxy
+   */
+  set protoProxy (proxy) {
+    this._protoProxy = proxy
+  }
+
+  // Proxy handlers
+
+  /**
+   * Order proxy handler
+   * @this {!FinalProxy}
+   * @param {!Order} model Order model
+   * @param {!number} type Message type
+   * @param {!Uint8Array} buffer Buffer to send
+   * @param {!number} offset Buffer offset
+   * @param {!number} size Buffer size
+   */
+  onProxy_order (model, type, buffer, offset, size) {}  // eslint-disable-line
+
+  /**
+   * Balance proxy handler
+   * @this {!FinalProxy}
+   * @param {!Balance} model Balance model
+   * @param {!number} type Message type
+   * @param {!Uint8Array} buffer Buffer to send
+   * @param {!number} offset Buffer offset
+   * @param {!number} size Buffer size
+   */
+  onProxy_balance (model, type, buffer, offset, size) {}  // eslint-disable-line
+
+  /**
+   * Account proxy handler
+   * @this {!FinalProxy}
+   * @param {!Account} model Account model
+   * @param {!number} type Message type
+   * @param {!Uint8Array} buffer Buffer to send
+   * @param {!number} offset Buffer offset
+   * @param {!number} size Buffer size
+   */
+  onProxy_account (model, type, buffer, offset, size) {}  // eslint-disable-line
+
+  /**
+   * protoex receive message handler
+   * @this {!FinalProxy}
+   * @param {!number} type Message type
+   * @param {!Uint8Array} buffer Buffer to send
+   * @param {!number} offset Buffer offset
+   * @param {!number} size Buffer size
+   * @returns {!boolean} Success flag
+   */
+  onReceive (type, buffer, offset, size) {
+    switch (type) {
+      case OrderFinalModel.fbeType: {
+        // Attach the FBE stream to the proxy model
+        this._orderModel.attachBuffer(buffer, offset)
+        console.assert(this._orderModel.verify(), 'protoex.Order validation failed!')
+
+        // Call proxy handler
+        this.onProxy_order(this._orderModel, type, buffer, offset, size)
+        return true
+      }
+      case BalanceFinalModel.fbeType: {
+        // Attach the FBE stream to the proxy model
+        this._balanceModel.attachBuffer(buffer, offset)
+        console.assert(this._balanceModel.verify(), 'protoex.Balance validation failed!')
+
+        // Call proxy handler
+        this.onProxy_balance(this._balanceModel, type, buffer, offset, size)
+        return true
+      }
+      case AccountFinalModel.fbeType: {
+        // Attach the FBE stream to the proxy model
+        this._accountModel.attachBuffer(buffer, offset)
+        console.assert(this._accountModel.verify(), 'protoex.Account validation failed!')
+
+        // Call proxy handler
+        this.onProxy_account(this._accountModel, type, buffer, offset, size)
+        return true
+      }
+    }
+    // noinspection RedundantIfStatementJS
+    if ((this.protoProxy != null) && this.protoProxy.onReceive(type, buffer, offset, size)) {
+      return true
+    }
+
+    return false
+  }
+}
+
+exports.FinalProxy = FinalProxy

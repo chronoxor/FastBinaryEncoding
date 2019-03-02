@@ -4258,10 +4258,12 @@ void GeneratorJava::GeneratePackage(const std::shared_ptr<Package>& p)
     {
         GenerateSender(p, false);
         GenerateReceiver(p, false);
+        GenerateProxy(p, false);
         if (Final())
         {
             GenerateSender(p, true);
             GenerateReceiver(p, true);
+            GenerateProxy(p, true);
         }
     }
 
@@ -6611,6 +6613,161 @@ void GeneratorJava::GenerateReceiver(const std::shared_ptr<Package>& p, bool fin
     WriteLineIndent("}");
 
     // Generate receiver end
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate footer
+    GenerateFooter();
+
+    // Close the file
+    Close();
+}
+
+void GeneratorJava::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
+{
+    std::string package = *p->name;
+
+    CppCommon::Path path = (CppCommon::Path(_output) / package) / "fbe";
+
+    // Create package path
+    CppCommon::Directory::CreateTree(path);
+
+    std::string proxy = (final ? "FinalProxy" : "Proxy");
+    std::string model = (final ? "FinalModel" : "Model");
+
+    // Open the file
+    CppCommon::Path file = path / (proxy + ".java");
+    Open(file);
+
+    // Generate headers
+    GenerateHeader(CppCommon::Path(_input).filename().string());
+    GenerateImports(package + ".fbe");
+
+    // Generate custom import
+    WriteLine();
+    WriteLineIndent("import fbe.*;");
+    WriteLineIndent("import " + package + ".*;");
+
+    // Generate proxy begin
+    WriteLine();
+    if (final)
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final proxy");
+    else
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " proxy");
+    WriteLineIndent("public class " + proxy + " extends fbe.Receiver");
+    WriteLineIndent("{");
+    Indent(1);
+
+    // Generate imported proxy accessors
+    if (p->import)
+    {
+        WriteLineIndent("// Imported proxy");
+        for (const auto& import : p->import->imports)
+            WriteLineIndent("public " + *import + ".fbe." + proxy + " " + *import + "Proxy;");
+        WriteLine();
+    }
+
+    // Generate proxy models accessors
+    if (p->body)
+    {
+        WriteLineIndent("// Proxy models accessors");
+        for (const auto& s : p->body->structs)
+            WriteLineIndent("private final " + *s->name + model + " " + *s->name + "Model;");
+        WriteLine();
+    }
+
+    // Generate proxy constructors
+    WriteLineIndent("public " + proxy + "()");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("super(" + std::string(final ? "true" : "false") + ");");
+    if (p->import)
+    {
+        for (const auto& import : p->import->imports)
+            WriteLineIndent(*import + "Proxy = new " + *import + ".fbe." + proxy + "(getBuffer());");
+    }
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+            WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
+    }
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLineIndent("public " + proxy + "(Buffer buffer)");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("super(buffer, " + std::string(final ? "true" : "false") + ");");
+    if (p->import)
+    {
+        for (const auto& import : p->import->imports)
+            WriteLineIndent(*import + "Proxy = new " + *import + ".fbe." + proxy + "(getBuffer());");
+    }
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+            WriteLineIndent(*s->name + "Model = new " + *s->name + model + "();");
+    }
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLine();
+
+    // Generate proxy handlers
+    if (p->body)
+    {
+        WriteLineIndent("// Proxy handlers");
+        for (const auto& s : p->body->structs)
+        {
+            std::string struct_model = *s->name + model;
+            WriteLineIndent("protected void onProxy(" + struct_model + " model, long type, byte[] buffer, long offset, long size) {}");
+        }
+        WriteLine();
+    }
+
+    // Generate proxy message handler
+    WriteLineIndent("@Override");
+    WriteLineIndent("public boolean onReceive(long type, byte[] buffer, long offset, long size)");
+    WriteLineIndent("{");
+    Indent(1);
+    if (p->body)
+    {
+        WriteLineIndent("switch ((int)type)");
+        WriteLineIndent("{");
+        Indent(1);
+        for (const auto& s : p->body->structs)
+        {
+            WriteLineIndent("case (int)" + package + ".fbe." + *s->name + model + ".fbeTypeConst:");
+            WriteLineIndent("{");
+            Indent(1);
+            WriteLineIndent("// Attach the FBE stream to the proxy model");
+            WriteLineIndent(*s->name + "Model.attach(buffer, offset);");
+            WriteLineIndent("assert " + *s->name + "Model.verify() : \"" + *p->name + "." + *s->name + " validation failed!\";");
+            WriteLine();
+            WriteLineIndent("// Call proxy handler");
+            WriteLineIndent("onProxy(" + *s->name + "Model, type, buffer, offset, size);");
+            WriteLineIndent("return true;");
+            Indent(-1);
+            WriteLineIndent("}");
+        }
+        Indent(-1);
+        WriteLineIndent("}");
+    }
+    if (p->import)
+    {
+        WriteLine();
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent("if ((" + *import + "Proxy != null) && " + *import + "Proxy.onReceive(type, buffer, offset, size))");
+            Indent(1);
+            WriteLineIndent("return true;");
+            Indent(-1);
+        }
+    }
+    WriteLine();
+    WriteLineIndent("return false;");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate proxy end
     Indent(-1);
     WriteLineIndent("}");
 

@@ -2617,9 +2617,9 @@ class Receiver(fbe.Receiver):
     def on_receive_account(self, value):
         pass
 
-    def on_receive(self, fbe_type, buffer, offset, size):
+    def on_receive(self, type, buffer, offset, size):
 
-        if fbe_type == OrderModel.TYPE:
+        if type == OrderModel.TYPE:
             # Deserialize the value from the FBE stream
             self._order_model.attach_buffer(buffer, offset)
             assert self._order_model.verify(), "protoex.Order validation failed!"
@@ -2635,7 +2635,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_order(self._order_value)
             return True
 
-        if fbe_type == BalanceModel.TYPE:
+        if type == BalanceModel.TYPE:
             # Deserialize the value from the FBE stream
             self._balance_model.attach_buffer(buffer, offset)
             assert self._balance_model.verify(), "protoex.Balance validation failed!"
@@ -2651,7 +2651,7 @@ class Receiver(fbe.Receiver):
             self.on_receive_balance(self._balance_value)
             return True
 
-        if fbe_type == AccountModel.TYPE:
+        if type == AccountModel.TYPE:
             # Deserialize the value from the FBE stream
             self._account_model.attach_buffer(buffer, offset)
             assert self._account_model.verify(), "protoex.Account validation failed!"
@@ -2668,6 +2668,73 @@ class Receiver(fbe.Receiver):
             return True
 
         if (self.proto_receiver is not None) and self.proto_receiver.on_receive(type, buffer, offset, size):
+            return True
+
+        return False
+
+
+# Fast Binary Encoding protoex proxy
+class Proxy(fbe.Receiver):
+    __slots__ = "_proto_proxy", "_order_model", "_balance_model", "_account_model", 
+
+    def __init__(self, buffer=None):
+        super().__init__(buffer, False)
+        self._proto_proxy = proto.Proxy(self.buffer)
+        self._order_model = OrderModel()
+        self._balance_model = BalanceModel()
+        self._account_model = AccountModel()
+
+    # Imported proxy
+
+    @property
+    def proto_proxy(self):
+        return self._proto_proxy
+
+    @proto_proxy.setter
+    def proto_proxy(self, proxy):
+        self._proto_proxy = proxy
+
+    # Receive handlers
+
+    def on_proxy_order(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_balance(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_account(self, model, type, buffer, offset, size):
+        pass
+
+    def on_receive(self, type, buffer, offset, size):
+
+        if type == OrderModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._order_model.attach_buffer(buffer, offset)
+            assert self._order_model.verify(), "protoex.Order validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_order(self._order_model, type, buffer, offset, size)
+            return True
+
+        if type == BalanceModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._balance_model.attach_buffer(buffer, offset)
+            assert self._balance_model.verify(), "protoex.Balance validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_balance(self._balance_model, type, buffer, offset, size)
+            return True
+
+        if type == AccountModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._account_model.attach_buffer(buffer, offset)
+            assert self._account_model.verify(), "protoex.Account validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_account(self._account_model, type, buffer, offset, size)
+            return True
+
+        if (self.proto_proxy is not None) and self.proto_proxy.on_receive(type, buffer, offset, size):
             return True
 
         return False
@@ -2800,9 +2867,9 @@ class FinalReceiver(fbe.Receiver):
     def on_receive_account(self, value):
         pass
 
-    def on_receive(self, fbe_type, buffer, offset, size):
+    def on_receive(self, type, buffer, offset, size):
 
-        if fbe_type == OrderFinalModel.TYPE:
+        if type == OrderFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._order_model.attach_buffer(buffer, offset)
             assert self._order_model.verify(), "protoex.Order validation failed!"
@@ -2818,7 +2885,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_order(self._order_value)
             return True
 
-        if fbe_type == BalanceFinalModel.TYPE:
+        if type == BalanceFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._balance_model.attach_buffer(buffer, offset)
             assert self._balance_model.verify(), "protoex.Balance validation failed!"
@@ -2834,7 +2901,7 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_balance(self._balance_value)
             return True
 
-        if fbe_type == AccountFinalModel.TYPE:
+        if type == AccountFinalModel.TYPE:
             # Deserialize the value from the FBE stream
             self._account_model.attach_buffer(buffer, offset)
             assert self._account_model.verify(), "protoex.Account validation failed!"
@@ -2851,6 +2918,73 @@ class FinalReceiver(fbe.Receiver):
             return True
 
         if (self.proto_receiver is not None) and self.proto_receiver.on_receive(type, buffer, offset, size):
+            return True
+
+        return False
+
+
+# Fast Binary Encoding protoex final proxy
+class FinalProxy(fbe.Receiver):
+    __slots__ = "_proto_proxy", "_order_model", "_balance_model", "_account_model", 
+
+    def __init__(self, buffer=None):
+        super().__init__(buffer, True)
+        self._proto_proxy = proto.FinalProxy(self.buffer)
+        self._order_model = OrderFinalModel()
+        self._balance_model = BalanceFinalModel()
+        self._account_model = AccountFinalModel()
+
+    # Imported proxy
+
+    @property
+    def proto_proxy(self):
+        return self._proto_proxy
+
+    @proto_proxy.setter
+    def proto_proxy(self, proxy):
+        self._proto_proxy = proxy
+
+    # Receive handlers
+
+    def on_proxy_order(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_balance(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_account(self, model, type, buffer, offset, size):
+        pass
+
+    def on_receive(self, type, buffer, offset, size):
+
+        if type == OrderFinalModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._order_model.attach_buffer(buffer, offset)
+            assert self._order_model.verify(), "protoex.Order validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_order(self._order_model, type, buffer, offset, size)
+            return True
+
+        if type == BalanceFinalModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._balance_model.attach_buffer(buffer, offset)
+            assert self._balance_model.verify(), "protoex.Balance validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_balance(self._balance_model, type, buffer, offset, size)
+            return True
+
+        if type == AccountFinalModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._account_model.attach_buffer(buffer, offset)
+            assert self._account_model.verify(), "protoex.Account validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_account(self._account_model, type, buffer, offset, size)
+            return True
+
+        if (self.proto_proxy is not None) and self.proto_proxy.on_receive(type, buffer, offset, size):
             return True
 
         return False

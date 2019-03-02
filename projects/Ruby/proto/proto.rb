@@ -3125,8 +3125,10 @@ module Proto
     def on_receive_account(value)
     end
 
-    def on_receive(fbe_type, buffer, offset, size)
-      case fbe_type
+    public
+
+    def on_receive(type, buffer, offset, size)
+      case type
       when OrderModel::TYPE
         # Deserialize the value from the FBE stream
         @_order_model.attach_buffer(buffer, offset)
@@ -3186,6 +3188,74 @@ module Proto
 
         # Call receive handler with deserialized value
         on_receive_account(@_account_value)
+        true
+      else
+        # Do nothing here...
+      end
+
+      false
+    end
+  end
+
+  # Fast Binary Encoding Proto proxy
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class Proxy < FBE::Receiver
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer, false)
+      @_order_model = OrderModel.new
+      @_balance_model = BalanceModel.new
+      @_account_model = AccountModel.new
+    end
+
+    protected
+
+    # Receive handlers
+
+    # noinspection RubyUnusedLocalVariable
+    def on_proxy_order(model, type, buffer, offset, size)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_proxy_balance(model, type, buffer, offset, size)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_proxy_account(model, type, buffer, offset, size)
+    end
+
+    public
+
+    def on_receive(type, buffer, offset, size)
+      case type
+      when OrderModel::TYPE
+        # Attach the FBE stream to the proxy model
+        @_order_model.attach_buffer(buffer, offset)
+        unless @_order_model.verify
+          return false
+        end
+
+        # Call proxy handler
+        on_proxy_order(@_order_model, type, buffer, offset, size)
+        true
+      when BalanceModel::TYPE
+        # Attach the FBE stream to the proxy model
+        @_balance_model.attach_buffer(buffer, offset)
+        unless @_balance_model.verify
+          return false
+        end
+
+        # Call proxy handler
+        on_proxy_balance(@_balance_model, type, buffer, offset, size)
+        true
+      when AccountModel::TYPE
+        # Attach the FBE stream to the proxy model
+        @_account_model.attach_buffer(buffer, offset)
+        unless @_account_model.verify
+          return false
+        end
+
+        # Call proxy handler
+        on_proxy_account(@_account_model, type, buffer, offset, size)
         true
       else
         # Do nothing here...
@@ -3319,8 +3389,10 @@ module Proto
     def on_receive_account(value)
     end
 
-    def on_receive(fbe_type, buffer, offset, size)
-      case fbe_type
+    public
+
+    def on_receive(type, buffer, offset, size)
+      case type
       when OrderFinalModel::TYPE
         # Deserialize the value from the FBE stream
         @_order_model.attach_buffer(buffer, offset)
@@ -3380,6 +3452,74 @@ module Proto
 
         # Call receive handler with deserialized value
         on_receive_account(@_account_value)
+        true
+      else
+        # Do nothing here...
+      end
+
+      false
+    end
+  end
+
+  # Fast Binary Encoding Proto final proxy
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalProxy < FBE::Receiver
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer, true)
+      @_order_model = OrderFinalModel.new
+      @_balance_model = BalanceFinalModel.new
+      @_account_model = AccountFinalModel.new
+    end
+
+    protected
+
+    # Receive handlers
+
+    # noinspection RubyUnusedLocalVariable
+    def on_proxy_order(model, type, buffer, offset, size)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_proxy_balance(model, type, buffer, offset, size)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_proxy_account(model, type, buffer, offset, size)
+    end
+
+    public
+
+    def on_receive(type, buffer, offset, size)
+      case type
+      when OrderFinalModel::TYPE
+        # Attach the FBE stream to the proxy model
+        @_order_model.attach_buffer(buffer, offset)
+        unless @_order_model.verify
+          return false
+        end
+
+        # Call proxy handler
+        on_proxy_order(@_order_model, type, buffer, offset, size)
+        true
+      when BalanceFinalModel::TYPE
+        # Attach the FBE stream to the proxy model
+        @_balance_model.attach_buffer(buffer, offset)
+        unless @_balance_model.verify
+          return false
+        end
+
+        # Call proxy handler
+        on_proxy_balance(@_balance_model, type, buffer, offset, size)
+        true
+      when AccountFinalModel::TYPE
+        # Attach the FBE stream to the proxy model
+        @_account_model.attach_buffer(buffer, offset)
+        unless @_account_model.verify
+          return false
+        end
+
+        # Call proxy handler
+        on_proxy_account(@_account_model, type, buffer, offset, size)
         true
       else
         # Do nothing here...

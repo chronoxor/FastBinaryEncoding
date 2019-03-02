@@ -8139,10 +8139,12 @@ void GeneratorJavaScript::GeneratePackage(const std::shared_ptr<Package>& p)
     {
         GenerateSender(p, false);
         GenerateReceiver(p, false);
+        GenerateProxy(p, false);
         if (Final())
         {
             GenerateSender(p, true);
             GenerateReceiver(p, true);
+            GenerateProxy(p, true);
         }
     }
 
@@ -10855,9 +10857,160 @@ void GeneratorJavaScript::GenerateReceiver(const std::shared_ptr<Package>& p, bo
     Indent(-1);
     WriteLineIndent("}");
 
-    // Generate sender exports
+    // Generate receiver exports
     WriteLine();
     WriteLineIndent("exports." + receiver + " = " + receiver + "");
+}
+
+void GeneratorJavaScript::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
+{
+    std::string proxy = (final ? "FinalProxy" : "Proxy");
+    std::string model = (final ? "FinalModel" : "Model");
+
+    // Generate proxy begin
+    WriteLine();
+    WriteLineIndent("/**");
+    if (final)
+        WriteLineIndent(" * Fast Binary Encoding " + *p->name + " final proxy");
+    else
+        WriteLineIndent(" * Fast Binary Encoding " + *p->name + " proxy");
+    WriteLineIndent(" */");
+    WriteLineIndent("class " + proxy + " extends fbe.Receiver {");
+    Indent(1);
+
+    // Generate proxy constructor
+    WriteLineIndent("/**");
+    WriteLineIndent(" * Initialize " + *p->name + " proxy with the given buffer");
+    WriteLineIndent(" * @param {!fbe.WriteBuffer} buffer Write buffer, defaults is new WriteBuffer()");
+    WriteLineIndent(" * @constructor");
+    WriteLineIndent(" */");
+    WriteLineIndent("constructor (buffer = new fbe.WriteBuffer()) {");
+    Indent(1);
+    WriteLineIndent("super(buffer, " + std::string(final ? "true" : "false") + ")");
+    if (p->import)
+    {
+        for (const auto& import : p->import->imports)
+            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Proxy = new " + *import + "." + proxy + "(this.buffer)");
+    }
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model = new " + *s->name + model + "()");
+    }
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate imported proxy accessors
+    if (p->import)
+    {
+        WriteLine();
+        WriteLineIndent("// Imported proxy");
+        for (const auto& import : p->import->imports)
+        {
+            WriteLine();
+            WriteLineIndent("/**");
+            WriteLineIndent(" * Get imported " + *import + " proxy");
+            WriteLineIndent(" * @this {!" + proxy + "}");
+            WriteLineIndent(" * @returns {" + proxy + "} " + *import + " proxy");
+            WriteLineIndent(" */");
+            WriteLineIndent("get " + CppCommon::StringUtils::ToLower(*import) + "Proxy () {");
+            Indent(1);
+            WriteLineIndent("return this._" + CppCommon::StringUtils::ToLower(*import) + "Proxy");
+            Indent(-1);
+            WriteLineIndent("}");
+            WriteLine();
+            WriteLineIndent("/**");
+            WriteLineIndent(" * Set imported " + *import + " proxy");
+            WriteLineIndent(" * @this {!" + proxy + "}");
+            WriteLineIndent(" * @param {" + proxy + "} proxy " + *import + " proxy");
+            WriteLineIndent(" */");
+            WriteLineIndent("set " + CppCommon::StringUtils::ToLower(*import) + "Proxy (proxy) {");
+            Indent(1);
+            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*import) + "Proxy = proxy");
+            Indent(-1);
+            WriteLineIndent("}");
+        }
+    }
+
+    // Generate proxy handlers
+    if (p->body)
+    {
+        WriteLine();
+        WriteLineIndent("// Proxy handlers");
+        for (const auto& s : p->body->structs)
+        {
+            WriteLine();
+            WriteLineIndent("/**");
+            WriteLineIndent(" * " + *s->name + " proxy handler");
+            WriteLineIndent(" * @this {!" + proxy + "}");
+            WriteLineIndent(" * @param {!" + *s->name + "} model " + *s->name + " model");
+            WriteLineIndent(" * @param {!number} type Message type");
+            WriteLineIndent(" * @param {!Uint8Array} buffer Buffer to send");
+            WriteLineIndent(" * @param {!number} offset Buffer offset");
+            WriteLineIndent(" * @param {!number} size Buffer size");
+            WriteLineIndent(" */");
+            WriteLineIndent("onProxy_" + CppCommon::StringUtils::ToLower(*s->name) + " (model, type, buffer, offset, size) {}  // eslint-disable-line");
+        }
+        WriteLine();
+    }
+
+    // Generate proxy message handler
+    WriteLineIndent("/**");
+    WriteLineIndent(" * " + *p->name + " receive message handler");
+    WriteLineIndent(" * @this {!" + proxy + "}");
+    WriteLineIndent(" * @param {!number} type Message type");
+    WriteLineIndent(" * @param {!Uint8Array} buffer Buffer to send");
+    WriteLineIndent(" * @param {!number} offset Buffer offset");
+    WriteLineIndent(" * @param {!number} size Buffer size");
+    WriteLineIndent(" * @returns {!boolean} Success flag");
+    WriteLineIndent(" */");
+    WriteLineIndent("onReceive (type, buffer, offset, size) {");
+    Indent(1);
+    if (p->body)
+    {
+        WriteLineIndent("switch (type) {");
+        Indent(1);
+        for (const auto& s : p->body->structs)
+        {
+            WriteLineIndent("case " + *s->name + model + ".fbeType: {");
+            Indent(1);
+            WriteLineIndent("// Attach the FBE stream to the proxy model");
+            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model.attachBuffer(buffer, offset)");
+            WriteLineIndent("console.assert(this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
+            WriteLine();
+            WriteLineIndent("// Call proxy handler");
+            WriteLineIndent("this.onProxy_" + CppCommon::StringUtils::ToLower(*s->name) + "(this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model, type, buffer, offset, size)");
+            WriteLineIndent("return true");
+            Indent(-1);
+            WriteLineIndent("}");
+        }
+        Indent(-1);
+        WriteLineIndent("}");
+    }
+    if (p->import)
+    {
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent("// noinspection RedundantIfStatementJS");
+            WriteLineIndent("if ((this." + CppCommon::StringUtils::ToLower(*import) + "Proxy != null) && this." + CppCommon::StringUtils::ToLower(*import) + "Proxy.onReceive(type, buffer, offset, size)) {");
+            Indent(1);
+            WriteLineIndent("return true");
+            Indent(-1);
+            WriteLineIndent("}");
+        }
+        WriteLine();
+    }
+    WriteLineIndent("return false");
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate proxy end
+    Indent(-1);
+    WriteLineIndent("}");
+
+    // Generate proxy exports
+    WriteLine();
+    WriteLineIndent("exports." + proxy + " = " + proxy + "");
 }
 
 bool GeneratorJavaScript::IsPrimitiveType(const std::string& type)

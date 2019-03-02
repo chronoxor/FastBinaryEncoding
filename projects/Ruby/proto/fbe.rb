@@ -4121,7 +4121,7 @@ module FBE
 
     # Receive message handler
     # noinspection RubyUnusedLocalVariable
-    def on_receive(fbe_type, buffer, offset, size)
+    def on_receive(type, buffer, offset, size)
       raise NotImplementedError, "Abstract method call!"
     end
 

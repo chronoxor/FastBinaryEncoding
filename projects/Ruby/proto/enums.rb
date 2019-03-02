@@ -6766,8 +6766,10 @@ module Enums
     def on_receive_enums(value)
     end
 
-    def on_receive(fbe_type, buffer, offset, size)
-      case fbe_type
+    public
+
+    def on_receive(type, buffer, offset, size)
+      case type
       when EnumsModel::TYPE
         # Deserialize the value from the FBE stream
         @_enums_model.attach_buffer(buffer, offset)
@@ -6787,6 +6789,44 @@ module Enums
 
         # Call receive handler with deserialized value
         on_receive_enums(@_enums_value)
+        true
+      else
+        # Do nothing here...
+      end
+
+      false
+    end
+  end
+
+  # Fast Binary Encoding Enums proxy
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class Proxy < FBE::Receiver
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer, false)
+      @_enums_model = EnumsModel.new
+    end
+
+    protected
+
+    # Receive handlers
+
+    # noinspection RubyUnusedLocalVariable
+    def on_proxy_enums(model, type, buffer, offset, size)
+    end
+
+    public
+
+    def on_receive(type, buffer, offset, size)
+      case type
+      when EnumsModel::TYPE
+        # Attach the FBE stream to the proxy model
+        @_enums_model.attach_buffer(buffer, offset)
+        unless @_enums_model.verify
+          return false
+        end
+
+        # Call proxy handler
+        on_proxy_enums(@_enums_model, type, buffer, offset, size)
         true
       else
         # Do nothing here...
@@ -6860,8 +6900,10 @@ module Enums
     def on_receive_enums(value)
     end
 
-    def on_receive(fbe_type, buffer, offset, size)
-      case fbe_type
+    public
+
+    def on_receive(type, buffer, offset, size)
+      case type
       when EnumsFinalModel::TYPE
         # Deserialize the value from the FBE stream
         @_enums_model.attach_buffer(buffer, offset)
@@ -6881,6 +6923,44 @@ module Enums
 
         # Call receive handler with deserialized value
         on_receive_enums(@_enums_value)
+        true
+      else
+        # Do nothing here...
+      end
+
+      false
+    end
+  end
+
+  # Fast Binary Encoding Enums final proxy
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalProxy < FBE::Receiver
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer, true)
+      @_enums_model = EnumsFinalModel.new
+    end
+
+    protected
+
+    # Receive handlers
+
+    # noinspection RubyUnusedLocalVariable
+    def on_proxy_enums(model, type, buffer, offset, size)
+    end
+
+    public
+
+    def on_receive(type, buffer, offset, size)
+      case type
+      when EnumsFinalModel::TYPE
+        # Attach the FBE stream to the proxy model
+        @_enums_model.attach_buffer(buffer, offset)
+        unless @_enums_model.verify
+          return false
+        end
+
+        # Call proxy handler
+        on_proxy_enums(@_enums_model, type, buffer, offset, size)
         true
       else
         # Do nothing here...

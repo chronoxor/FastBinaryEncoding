@@ -3334,7 +3334,7 @@ class Receiver(object):
             size1 = self._buffer.size
 
     # Receive message handler
-    def on_receive(self, fbe_type, buffer, offset, size):
+    def on_receive(self, type, buffer, offset, size):
         raise NotImplementedError("Abstract method call!")
 
     # Receive log message handler

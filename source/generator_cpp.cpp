@@ -7773,8 +7773,8 @@ void GeneratorCpp::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
         WriteLineIndent("// Proxy handlers");
         for (const auto& s : p->body->structs)
         {
-            std::string model_name = "FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer>";
-            WriteLineIndent("virtual void onProxy(" + model_name + "& model, size_t type, const void* data, size_t size) {}");
+            std::string struct_model = "FBE::" + *p->name + "::" + *s->name + model + "<ReadBuffer>";
+            WriteLineIndent("virtual void onProxy(" + struct_model + "& model, size_t type, const void* data, size_t size) {}");
         }
     }
 

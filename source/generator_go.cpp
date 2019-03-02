@@ -7290,7 +7290,6 @@ void GeneratorGo::GenerateReceiver(const std::shared_ptr<Package>& p, const CppC
         for (const auto& s : p->body->structs)
         {
             std::string struct_name = ConvertToUpper(*s->name);
-
             WriteLine();
             WriteLineIndent("// Receive " + *s->name + " interface");
             WriteLineIndent("type OnReceive" + struct_name + " interface {");
@@ -7330,7 +7329,6 @@ void GeneratorGo::GenerateReceiver(const std::shared_ptr<Package>& p, const CppC
         for (const auto& s : p->body->structs)
         {
             std::string struct_name = ConvertToUpper(*s->name);
-
             WriteLineIndent("// Receive " + *s->name + " handler");
             WriteLineIndent("HandlerOnReceive" + struct_name + " OnReceive" + struct_name);
         }
@@ -7404,7 +7402,6 @@ void GeneratorGo::GenerateReceiver(const std::shared_ptr<Package>& p, const CppC
         for (const auto& s : p->body->structs)
         {
             std::string struct_name = ConvertToUpper(*s->name);
-
             WriteLineIndent("if handler, ok := handlers.(OnReceive" + struct_name + "); ok {");
             Indent(1);
             WriteLineIndent("r.SetupHandlerOnReceive" + struct_name + "(handler)");
@@ -7420,7 +7417,6 @@ void GeneratorGo::GenerateReceiver(const std::shared_ptr<Package>& p, const CppC
         for (const auto& s : p->body->structs)
         {
             std::string struct_name = ConvertToUpper(*s->name);
-
             WriteLineIndent("// Setup receive " + *s->name + " handler");
             WriteLineIndent("func (r *" + receiver_name + ") SetupHandlerOnReceive" + struct_name + "(handler OnReceive" + struct_name + ") { r.HandlerOnReceive" + struct_name + " = handler }");
             WriteLineIndent("// Setup receive " + *s->name + " handler function");
@@ -7442,7 +7438,6 @@ void GeneratorGo::GenerateReceiver(const std::shared_ptr<Package>& p, const CppC
             std::string struct_name = ConvertToUpper(*s->name);
             std::string struct_model = ConvertToLower(*s->name) + "Model";
             std::string struct_value = ConvertToLower(*s->name) + "Value";
-
             WriteLineIndent("case r." + struct_model + ".FBEType():");
             Indent(1);
             WriteLineIndent("// Deserialize the value from the FBE stream");
@@ -7534,7 +7529,6 @@ void GeneratorGo::GenerateProxy(const std::shared_ptr<Package>& p, const CppComm
         {
             std::string struct_name = ConvertToUpper(*s->name);
             std::string struct_model = ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model";
-
             WriteLine();
             WriteLineIndent("// Proxy " + *s->name + " interface");
             WriteLineIndent("type OnProxy" + std::string(final ? "Final" : "") + struct_name + " interface {");
@@ -7610,7 +7604,6 @@ void GeneratorGo::GenerateProxy(const std::shared_ptr<Package>& p, const CppComm
     for (const auto& s : p->body->structs)
     {
         std::string struct_model = ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model";
-
         WriteLineIndent("proxy.SetupHandlerOnProxy" + ConvertToUpper(*s->name) + "Func(func(model *" + struct_model + ", fbeType int, buffer []byte) {})");
     }
     WriteLineIndent("return proxy");
@@ -7646,7 +7639,6 @@ void GeneratorGo::GenerateProxy(const std::shared_ptr<Package>& p, const CppComm
         for (const auto& s : p->body->structs)
         {
             std::string struct_name = ConvertToUpper(*s->name);
-
             WriteLineIndent("if handler, ok := handlers.(OnProxy" + std::string(final ? "Final" : "") + struct_name + "); ok {");
             Indent(1);
             WriteLineIndent("p.SetupHandlerOnProxy" + struct_name + "(handler)");
@@ -7663,7 +7655,6 @@ void GeneratorGo::GenerateProxy(const std::shared_ptr<Package>& p, const CppComm
         {
             std::string struct_name = ConvertToUpper(*s->name);
             std::string struct_model = ConvertToUpper(*s->name) + (final ? "Final" : "") + "Model";
-
             WriteLineIndent("// Setup proxy " + *s->name + " handler");
             WriteLineIndent("func (p *" + proxy_name + ") SetupHandlerOnProxy" + struct_name + "(handler OnProxy" + std::string(final ? "Final" : "") + struct_name + ") { p.HandlerOnProxy" + struct_name + " = handler }");
             WriteLineIndent("// Setup proxy " + *s->name + " handler function");
@@ -7684,7 +7675,6 @@ void GeneratorGo::GenerateProxy(const std::shared_ptr<Package>& p, const CppComm
         {
             std::string struct_name = ConvertToUpper(*s->name);
             std::string struct_model = ConvertToLower(*s->name) + "Model";
-
             WriteLineIndent("case p." + struct_model + ".FBEType():");
             Indent(1);
             WriteLineIndent("// Attach the FBE stream to the proxy model");

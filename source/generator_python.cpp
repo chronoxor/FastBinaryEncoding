@@ -2711,7 +2711,7 @@ class Receiver(object):
             size1 = self._buffer.size
 
     # Receive message handler
-    def on_receive(self, fbe_type, buffer, offset, size):
+    def on_receive(self, type, buffer, offset, size):
         raise NotImplementedError("Abstract method call!")
 
     # Receive log message handler
@@ -2801,10 +2801,12 @@ void GeneratorPython::GeneratePackage(const std::shared_ptr<Package>& p)
     {
         GenerateSender(p, false);
         GenerateReceiver(p, false);
+        GenerateProxy(p, false);
         if (Final())
         {
             GenerateSender(p, true);
             GenerateReceiver(p, true);
+            GenerateProxy(p, true);
         }
     }
 
@@ -4775,14 +4777,14 @@ void GeneratorPython::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     }
 
     // Generate receiver message handler
-    WriteLineIndent("def on_receive(self, fbe_type, buffer, offset, size):");
+    WriteLineIndent("def on_receive(self, type, buffer, offset, size):");
     Indent(1);
     if (p->body)
     {
         for (const auto& s : p->body->structs)
         {
             WriteLine();
-            WriteLineIndent("if fbe_type == " + *s->name + model + ".TYPE:");
+            WriteLineIndent("if type == " + *s->name + model + ".TYPE:");
             Indent(1);
             WriteLineIndent("# Deserialize the value from the FBE stream");
             WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.attach_buffer(buffer, offset)");
@@ -4819,6 +4821,129 @@ void GeneratorPython::GenerateReceiver(const std::shared_ptr<Package>& p, bool f
     Indent(-1);
 
     // Generate receiver end
+    Indent(-1);
+}
+
+void GeneratorPython::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
+{
+    std::string proxy = (final ? "FinalProxy" : "Proxy");
+    std::string model = (final ? "FinalModel" : "Model");
+
+    // Generate proxy begin
+    WriteLine();
+    WriteLine();
+    if (final)
+        WriteLineIndent("# Fast Binary Encoding " + *p->name + " final proxy");
+    else
+        WriteLineIndent("# Fast Binary Encoding " + *p->name + " proxy");
+    WriteLineIndent("class " + proxy + "(fbe.Receiver):");
+    Indent(1);
+
+    // Generate proxy __slots__
+    WriteIndent("__slots__ = ");
+    if (p->import)
+    {
+        for (const auto& import : p->import->imports)
+            Write("\"_" + CppCommon::StringUtils::ToLower(*import) + "_proxy\", ");
+    }
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+            Write("\"_" + CppCommon::StringUtils::ToLower(*s->name) + "_model\", ");
+    }
+    WriteLine();
+
+    // Generate proxy constructor
+    WriteLine();
+    WriteLineIndent("def __init__(self, buffer=None):");
+    Indent(1);
+    WriteLineIndent("super().__init__(buffer, " + std::string(final ? "True" : "False") + ")");
+    if (p->import)
+    {
+        for (const auto& import : p->import->imports)
+            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*import) + "_proxy = " + *import + "." + proxy + "(self.buffer)");
+    }
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model = " + *s->name + model + "()");
+    }
+    Indent(-1);
+
+    // Generate imported proxy accessors
+    if (p->import)
+    {
+        WriteLine();
+        WriteLineIndent("# Imported proxy");
+        for (const auto& import : p->import->imports)
+        {
+            WriteLine();
+            WriteLineIndent("@property");
+            WriteLineIndent("def " + CppCommon::StringUtils::ToLower(*import) + "_proxy(self):");
+            Indent(1);
+            WriteLineIndent("return self._" + CppCommon::StringUtils::ToLower(*import) + "_proxy");
+            Indent(-1);
+            WriteLine();
+            WriteLineIndent("@" + CppCommon::StringUtils::ToLower(*import) + "_proxy.setter");
+            WriteLineIndent("def " + CppCommon::StringUtils::ToLower(*import) + "_proxy(self, proxy):");
+            Indent(1);
+            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*import) + "_proxy = proxy");
+            Indent(-1);
+        }
+    }
+
+    // Generate proxy handlers
+    if (p->body)
+    {
+        WriteLine();
+        WriteLineIndent("# Receive handlers");
+        for (const auto& s : p->body->structs)
+        {
+            WriteLine();
+            WriteLineIndent("def on_proxy_" + CppCommon::StringUtils::ToLower(*s->name) + "(self, model, type, buffer, offset, size):");
+            Indent(1);
+            WriteLineIndent("pass");
+            Indent(-1);
+        }
+        WriteLine();
+    }
+
+    // Generate proxy message handler
+    WriteLineIndent("def on_receive(self, type, buffer, offset, size):");
+    Indent(1);
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            WriteLine();
+            WriteLineIndent("if type == " + *s->name + model + ".TYPE:");
+            Indent(1);
+            WriteLineIndent("# Attach the FBE stream to the proxy model");
+            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.attach_buffer(buffer, offset)");
+            WriteLineIndent("assert self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify(), \"" + *p->name + "." + *s->name + " validation failed!\"");
+            WriteLine();
+            WriteLineIndent("# Call proxy handler");
+            WriteLineIndent("self.on_proxy_" + CppCommon::StringUtils::ToLower(*s->name) + "(self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model, type, buffer, offset, size)");
+            WriteLineIndent("return True");
+            Indent(-1);
+        }
+    }
+    if (p->import)
+    {
+        WriteLine();
+        for (const auto& import : p->import->imports)
+        {
+            WriteLineIndent("if (self." + CppCommon::StringUtils::ToLower(*import) + "_proxy is not None) and self." + CppCommon::StringUtils::ToLower(*import) + "_proxy.on_receive(type, buffer, offset, size):");
+            Indent(1);
+            WriteLineIndent("return True");
+            Indent(-1);
+        }
+    }
+    WriteLine();
+    WriteLineIndent("return False");
+    Indent(-1);
+
+    // Generate proxy end
     Indent(-1);
 }
 

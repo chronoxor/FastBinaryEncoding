@@ -3269,7 +3269,7 @@ namespace protoex {
     // Fast Binary Encoding protoex proxy
     public class Proxy : FBE.Receiver
     {
-        // Imported proxys
+        // Imported proxy
         public proto.Proxy protoProxy;
 
         // Proxy models accessors
@@ -3555,7 +3555,7 @@ namespace protoex {
     // Fast Binary Encoding protoex final proxy
     public class FinalProxy : FBE.Receiver
     {
-        // Imported proxys
+        // Imported proxy
         public proto.FinalProxy protoProxy;
 
         // Proxy models accessors

@@ -3,8 +3,9 @@
 const test = require('tape')
 
 const proto = require('../proto/proto')
+const protoex = require('../proto/protoex')
 
-class MyFinalSender extends proto.FinalSender {
+class MyFinalSender extends protoex.FinalSender {
   // noinspection JSUnusedLocalSymbols
   onSend (buffer, offset, size) {
     //  Send nothing...
@@ -12,7 +13,7 @@ class MyFinalSender extends proto.FinalSender {
   }
 }
 
-class MyFinalReceiver extends proto.FinalReceiver {
+class MyFinalReceiver extends protoex.FinalReceiver {
   constructor () {
     super()
     this._order = false
@@ -36,18 +37,18 @@ function sendAndReceiveFinal (index) {
   let sender = new MyFinalSender()
 
   // Create and send a new order
-  let order = new proto.Order(1, 'EURUSD', proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0)
+  let order = new protoex.Order(1, 'EURUSD', protoex.OrderSide.buy, protoex.OrderType.market, 1.23456, 1000.0, 100.0)
   sender.send(order)
 
   // Create and send a new balance wallet
-  let balance = new proto.Balance('USD', 1000.0)
+  let balance = new protoex.Balance(new proto.Balance('USD', 1000.0), 100.0)
   sender.send(balance)
 
   // Create and send a new account with some orders
-  let account = new proto.Account(1, 'Test', proto.State.good, new proto.Balance('USD', 1000.0), new proto.Balance('EUR', 100.0))
-  account.orders.push(new proto.Order(1, 'EURUSD', proto.OrderSide.buy, proto.OrderType.market, 1.23456, 1000.0))
-  account.orders.push(new proto.Order(2, 'EURUSD', proto.OrderSide.sell, proto.OrderType.limit, 1.0, 100.0))
-  account.orders.push(new proto.Order(3, 'EURUSD', proto.OrderSide.buy, proto.OrderType.stop, 1.5, 10.0))
+  let account = new protoex.Account(1, 'Test', protoex.StateEx.good, new protoex.Balance(new proto.Balance('USD', 1000.0), 100.0), new protoex.Balance(new proto.Balance('EUR', 100.0), 10.0))
+  account.orders.push(new protoex.Order(1, 'EURUSD', protoex.OrderSide.buy, protoex.OrderType.market, 1.23456, 1000.0, 0.0, 0.0))
+  account.orders.push(new protoex.Order(2, 'EURUSD', protoex.OrderSide.sell, protoex.OrderType.limit, 1.0, 100.0, 0.0, 0.0))
+  account.orders.push(new protoex.Order(3, 'EURUSD', protoex.OrderSide.buy, protoex.OrderType.stop, 1.5, 10.0, 0.0, 0.0))
   sender.send(account)
 
   let receiver = new MyFinalReceiver()

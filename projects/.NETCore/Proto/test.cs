@@ -15700,7 +15700,7 @@ namespace test {
     // Fast Binary Encoding test proxy
     public class Proxy : FBE.Receiver
     {
-        // Imported proxys
+        // Imported proxy
         public proto.Proxy protoProxy;
 
         // Proxy models accessors
@@ -16466,7 +16466,7 @@ namespace test {
     // Fast Binary Encoding test final proxy
     public class FinalProxy : FBE.Receiver
     {
-        // Imported proxys
+        // Imported proxy
         public proto.FinalProxy protoProxy;
 
         // Proxy models accessors
