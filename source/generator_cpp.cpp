@@ -75,6 +75,7 @@ void GeneratorCpp::GenerateImports()
 #include <windows.h>
 #undef max
 #undef min
+#undef uuid_t
 #endif
 )CODE";
 

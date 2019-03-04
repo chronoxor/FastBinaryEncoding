@@ -40,6 +40,7 @@
 #include <windows.h>
 #undef max
 #undef min
+#undef uuid_t
 #endif
 
 #define RAPIDJSON_HAS_STDSTRING 1
