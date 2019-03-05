@@ -26,6 +26,7 @@ class FinalModelBalance(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     val amount: FinalModelDouble = FinalModelDouble(buffer, 0)
 
     // Get the allocation size
+    @Suppress("UNUSED_PARAMETER")
     fun fbeAllocationSize(fbeValue: Balance): Long = (0
         + currency.fbeAllocationSize(fbeValue.currency)
         + amount.fbeAllocationSize(fbeValue.amount)
@@ -80,6 +81,7 @@ class FinalModelBalance(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     }
 
     // Get the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun getFields(fbeValue: Balance): Long
     {
         var fbeCurrentOffset = 0L
@@ -109,6 +111,7 @@ class FinalModelBalance(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     }
 
     // Set the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun setFields(fbeValue: Balance): Long
     {
         var fbeCurrentOffset = 0L

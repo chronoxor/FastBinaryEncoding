@@ -37,6 +37,7 @@ open class Proxy : fbe.Receiver
     private val StructMapModel: StructMapModel
     private val StructHashModel: StructHashModel
     private val StructHashExModel: StructHashExModel
+    private val StructEmptyModel: StructEmptyModel
 
     constructor() : super(false)
     {
@@ -52,6 +53,7 @@ open class Proxy : fbe.Receiver
         StructMapModel = StructMapModel()
         StructHashModel = StructHashModel()
         StructHashExModel = StructHashExModel()
+        StructEmptyModel = StructEmptyModel()
     }
 
     constructor(buffer: Buffer) : super(buffer, false)
@@ -68,6 +70,7 @@ open class Proxy : fbe.Receiver
         StructMapModel = StructMapModel()
         StructHashModel = StructHashModel()
         StructHashExModel = StructHashExModel()
+        StructEmptyModel = StructEmptyModel()
     }
 
     // Proxy handlers
@@ -82,6 +85,7 @@ open class Proxy : fbe.Receiver
     protected open fun onProxy(model: StructMapModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
     protected open fun onProxy(model: StructHashModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
     protected open fun onProxy(model: StructHashExModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
+    protected open fun onProxy(model: StructEmptyModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
 
     override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
@@ -195,6 +199,16 @@ open class Proxy : fbe.Receiver
 
                 // Call proxy handler
                 onProxy(StructHashExModel, type, buffer, offset, size)
+                return true
+            }
+            test.fbe.StructEmptyModel.fbeTypeConst ->
+            {
+                // Attach the FBE stream to the proxy model
+                StructEmptyModel.attach(buffer, offset)
+                assert(StructEmptyModel.verify()) { "test.StructEmpty validation failed!" }
+
+                // Call proxy handler
+                onProxy(StructEmptyModel, type, buffer, offset, size)
                 return true
             }
         }

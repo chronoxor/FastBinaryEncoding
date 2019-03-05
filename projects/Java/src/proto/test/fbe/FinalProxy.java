@@ -35,6 +35,7 @@ public class FinalProxy extends fbe.Receiver
     private final StructMapFinalModel StructMapModel;
     private final StructHashFinalModel StructHashModel;
     private final StructHashExFinalModel StructHashExModel;
+    private final StructEmptyFinalModel StructEmptyModel;
 
     public FinalProxy()
     {
@@ -51,6 +52,7 @@ public class FinalProxy extends fbe.Receiver
         StructMapModel = new StructMapFinalModel();
         StructHashModel = new StructHashFinalModel();
         StructHashExModel = new StructHashExFinalModel();
+        StructEmptyModel = new StructEmptyFinalModel();
     }
     public FinalProxy(Buffer buffer)
     {
@@ -67,6 +69,7 @@ public class FinalProxy extends fbe.Receiver
         StructMapModel = new StructMapFinalModel();
         StructHashModel = new StructHashFinalModel();
         StructHashExModel = new StructHashExFinalModel();
+        StructEmptyModel = new StructEmptyFinalModel();
     }
 
     // Proxy handlers
@@ -81,6 +84,7 @@ public class FinalProxy extends fbe.Receiver
     protected void onProxy(StructMapFinalModel model, long type, byte[] buffer, long offset, long size) {}
     protected void onProxy(StructHashFinalModel model, long type, byte[] buffer, long offset, long size) {}
     protected void onProxy(StructHashExFinalModel model, long type, byte[] buffer, long offset, long size) {}
+    protected void onProxy(StructEmptyFinalModel model, long type, byte[] buffer, long offset, long size) {}
 
     @Override
     public boolean onReceive(long type, byte[] buffer, long offset, long size)
@@ -195,6 +199,16 @@ public class FinalProxy extends fbe.Receiver
 
                 // Call proxy handler
                 onProxy(StructHashExModel, type, buffer, offset, size);
+                return true;
+            }
+            case (int)test.fbe.StructEmptyFinalModel.fbeTypeConst:
+            {
+                // Attach the FBE stream to the proxy model
+                StructEmptyModel.attach(buffer, offset);
+                assert StructEmptyModel.verify() : "test.StructEmpty validation failed!";
+
+                // Call proxy handler
+                onProxy(StructEmptyModel, type, buffer, offset, size);
                 return true;
             }
         }

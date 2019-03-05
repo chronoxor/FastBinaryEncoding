@@ -140,8 +140,8 @@ func (fm *FinalModelAccount) GetValue(fbeValue *Account) (int, error) {
 // Get the struct fields values
 func (fm *FinalModelAccount) GetFields(fbeValue *Account) (int, error) {
     var err error = nil
-    fbeCurrentOffset := 0
     fbeCurrentSize := 0
+    fbeCurrentOffset := 0
     fbeFieldSize := 0
 
     fm.Id.SetFBEOffset(fbeCurrentOffset)
@@ -200,8 +200,8 @@ func (fm *FinalModelAccount) Set(fbeValue *Account) (int, error) {
 // Set the struct fields values
 func (fm *FinalModelAccount) SetFields(fbeValue *Account) (int, error) {
     var err error = nil
-    fbeCurrentOffset := 0
     fbeCurrentSize := 0
+    fbeCurrentOffset := 0
     fbeFieldSize := 0
 
     fm.Id.SetFBEOffset(fbeCurrentOffset)

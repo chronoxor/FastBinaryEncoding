@@ -34,6 +34,7 @@ class FinalModelStructArray(buffer: Buffer, offset: Long) : FinalModel(buffer, o
     val f10: FinalModelArrayOptionalStructSimple = FinalModelArrayOptionalStructSimple(buffer, 0, 2)
 
     // Get the allocation size
+    @Suppress("UNUSED_PARAMETER")
     fun fbeAllocationSize(fbeValue: StructArray): Long = (0
         + f1.fbeAllocationSize(fbeValue.f1)
         + f2.fbeAllocationSize(fbeValue.f2)
@@ -144,6 +145,7 @@ class FinalModelStructArray(buffer: Buffer, offset: Long) : FinalModel(buffer, o
     }
 
     // Get the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun getFields(fbeValue: StructArray): Long
     {
         var fbeCurrentOffset = 0L
@@ -213,6 +215,7 @@ class FinalModelStructArray(buffer: Buffer, offset: Long) : FinalModel(buffer, o
     }
 
     // Set the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun setFields(fbeValue: StructArray): Long
     {
         var fbeCurrentOffset = 0L

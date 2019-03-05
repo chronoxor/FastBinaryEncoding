@@ -26,6 +26,7 @@ class FinalModelStructHashEx(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     val f2: FinalModelMapStructSimpleOptionalStructNested = FinalModelMapStructSimpleOptionalStructNested(buffer, 0)
 
     // Get the allocation size
+    @Suppress("UNUSED_PARAMETER")
     fun fbeAllocationSize(fbeValue: StructHashEx): Long = (0
         + f1.fbeAllocationSize(fbeValue.f1)
         + f2.fbeAllocationSize(fbeValue.f2)
@@ -80,6 +81,7 @@ class FinalModelStructHashEx(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Get the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun getFields(fbeValue: StructHashEx): Long
     {
         var fbeCurrentOffset = 0L
@@ -109,6 +111,7 @@ class FinalModelStructHashEx(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Set the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun setFields(fbeValue: StructHashEx): Long
     {
         var fbeCurrentOffset = 0L

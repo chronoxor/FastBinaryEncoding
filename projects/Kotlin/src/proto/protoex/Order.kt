@@ -44,6 +44,7 @@ open class Order : Comparable<Any?>
         this.sl = sl
     }
 
+    @Suppress("UNUSED_PARAMETER")
     constructor(other: Order)
     {
         this.id = other.id

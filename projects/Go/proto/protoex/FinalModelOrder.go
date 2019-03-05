@@ -158,8 +158,8 @@ func (fm *FinalModelOrder) GetValue(fbeValue *Order) (int, error) {
 // Get the struct fields values
 func (fm *FinalModelOrder) GetFields(fbeValue *Order) (int, error) {
     var err error = nil
-    fbeCurrentOffset := 0
     fbeCurrentSize := 0
+    fbeCurrentOffset := 0
     fbeFieldSize := 0
 
     fm.Id.SetFBEOffset(fbeCurrentOffset)
@@ -232,8 +232,8 @@ func (fm *FinalModelOrder) Set(fbeValue *Order) (int, error) {
 // Set the struct fields values
 func (fm *FinalModelOrder) SetFields(fbeValue *Order) (int, error) {
     var err error = nil
-    fbeCurrentOffset := 0
     fbeCurrentSize := 0
+    fbeCurrentOffset := 0
     fbeFieldSize := 0
 
     fm.Id.SetFBEOffset(fbeCurrentOffset)

@@ -39,6 +39,8 @@ type FinalReceiver struct {
     structHashModel *StructHashFinalModel
     structHashExValue *StructHashEx
     structHashExModel *StructHashExFinalModel
+    structEmptyValue *StructEmpty
+    structEmptyModel *StructEmptyFinalModel
 
     // Receive StructSimple handler
     HandlerOnReceiveStructSimple OnReceiveStructSimple
@@ -62,6 +64,8 @@ type FinalReceiver struct {
     HandlerOnReceiveStructHash OnReceiveStructHash
     // Receive StructHashEx handler
     HandlerOnReceiveStructHashEx OnReceiveStructHashEx
+    // Receive StructEmpty handler
+    HandlerOnReceiveStructEmpty OnReceiveStructEmpty
 }
 
 // Create a new test final receiver with an empty buffer
@@ -96,6 +100,9 @@ func NewFinalReceiverWithBuffer(buffer *fbe.Buffer) *FinalReceiver {
         NewStructHashFinalModel(buffer),
         NewStructHashEx(),
         NewStructHashExFinalModel(buffer),
+        NewStructEmpty(),
+        NewStructEmptyFinalModel(buffer),
+        nil,
         nil,
         nil,
         nil,
@@ -120,6 +127,7 @@ func NewFinalReceiverWithBuffer(buffer *fbe.Buffer) *FinalReceiver {
     receiver.SetupHandlerOnReceiveStructMapFunc(func(value *StructMap) {})
     receiver.SetupHandlerOnReceiveStructHashFunc(func(value *StructHash) {})
     receiver.SetupHandlerOnReceiveStructHashExFunc(func(value *StructHashEx) {})
+    receiver.SetupHandlerOnReceiveStructEmptyFunc(func(value *StructEmpty) {})
     return receiver
 }
 
@@ -167,6 +175,9 @@ func (r *FinalReceiver) SetupHandlers(handlers interface{}) {
     if handler, ok := handlers.(OnReceiveStructHashEx); ok {
         r.SetupHandlerOnReceiveStructHashEx(handler)
     }
+    if handler, ok := handlers.(OnReceiveStructEmpty); ok {
+        r.SetupHandlerOnReceiveStructEmpty(handler)
+    }
 }
 
 // Setup receive StructSimple handler
@@ -213,6 +224,10 @@ func (r *FinalReceiver) SetupHandlerOnReceiveStructHashFunc(function func(value 
 func (r *FinalReceiver) SetupHandlerOnReceiveStructHashEx(handler OnReceiveStructHashEx) { r.HandlerOnReceiveStructHashEx = handler }
 // Setup receive StructHashEx handler function
 func (r *FinalReceiver) SetupHandlerOnReceiveStructHashExFunc(function func(value *StructHashEx)) { r.HandlerOnReceiveStructHashEx = OnReceiveStructHashExFunc(function) }
+// Setup receive StructEmpty handler
+func (r *FinalReceiver) SetupHandlerOnReceiveStructEmpty(handler OnReceiveStructEmpty) { r.HandlerOnReceiveStructEmpty = handler }
+// Setup receive StructEmpty handler function
+func (r *FinalReceiver) SetupHandlerOnReceiveStructEmptyFunc(function func(value *StructEmpty)) { r.HandlerOnReceiveStructEmpty = OnReceiveStructEmptyFunc(function) }
 
 // Receive message handler
 func (r *FinalReceiver) OnReceive(fbeType int, buffer []byte) (bool, error) {
@@ -469,6 +484,29 @@ func (r *FinalReceiver) OnReceive(fbeType int, buffer []byte) (bool, error) {
 
         // Call receive handler with deserialized value
         r.HandlerOnReceiveStructHashEx.OnReceiveStructHashEx(r.structHashExValue)
+        return true, nil
+    case r.structEmptyModel.FBEType():
+        // Deserialize the value from the FBE stream
+        r.structEmptyModel.Buffer().Attach(buffer)
+        if !r.structEmptyModel.Verify() {
+            return false, errors.New("test.StructEmpty validation failed")
+        }
+        deserialized, err := r.structEmptyModel.DeserializeValue(r.structEmptyValue)
+        if deserialized <= 0 {
+            return false, errors.New("test.StructEmpty deserialization failed")
+        }
+        if err != nil {
+            return false, err
+        }
+
+        // Log the value
+        if r.Logging() {
+            message := r.structEmptyValue.String()
+            r.HandlerOnReceiveLog.OnReceiveLog(message)
+        }
+
+        // Call receive handler with deserialized value
+        r.HandlerOnReceiveStructEmpty.OnReceiveStructEmpty(r.structEmptyValue)
         return true, nil
     }
 

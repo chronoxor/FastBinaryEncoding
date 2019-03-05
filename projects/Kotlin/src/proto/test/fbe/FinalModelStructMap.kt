@@ -34,6 +34,7 @@ class FinalModelStructMap(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     val f10: FinalModelMapInt32OptionalStructSimple = FinalModelMapInt32OptionalStructSimple(buffer, 0)
 
     // Get the allocation size
+    @Suppress("UNUSED_PARAMETER")
     fun fbeAllocationSize(fbeValue: StructMap): Long = (0
         + f1.fbeAllocationSize(fbeValue.f1)
         + f2.fbeAllocationSize(fbeValue.f2)
@@ -144,6 +145,7 @@ class FinalModelStructMap(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     }
 
     // Get the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun getFields(fbeValue: StructMap): Long
     {
         var fbeCurrentOffset = 0L
@@ -213,6 +215,7 @@ class FinalModelStructMap(buffer: Buffer, offset: Long) : FinalModel(buffer, off
     }
 
     // Set the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun setFields(fbeValue: StructMap): Long
     {
         var fbeCurrentOffset = 0L

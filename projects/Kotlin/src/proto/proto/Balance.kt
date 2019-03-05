@@ -31,6 +31,7 @@ open class Balance : Comparable<Any?>
         this.amount = amount
     }
 
+    @Suppress("UNUSED_PARAMETER")
     constructor(other: Balance)
     {
         this.currency = other.currency

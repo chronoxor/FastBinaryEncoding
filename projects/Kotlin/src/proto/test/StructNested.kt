@@ -52,6 +52,7 @@ open class StructNested : StructOptional
         this.f1011 = f1011
     }
 
+    @Suppress("UNUSED_PARAMETER")
     constructor(other: StructNested): super(other)
     {
         this.f1000 = other.f1000

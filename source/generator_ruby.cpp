@@ -3462,11 +3462,11 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
     WriteLineIndent("class Enum");
     Indent(1);
     WriteLineIndent("include FBE::Enum");
-    WriteLine();
 
     // Generate enum class body
-    if (e->body)
+    if (e->body && !e->body->values.empty())
     {
+        WriteLine();
         int index = 0;
         std::string last = ConvertEnumConstant("int32", "0", false);
         for (const auto& value : e->body->values)
@@ -3491,10 +3491,10 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
                 Write(last + " + " + std::to_string(index++));
             WriteLine();
         }
+        WriteLine();
     }
 
     // Generate enum initialize method
-    WriteLine();
     WriteLineIndent("def initialize(value = 0)");
     Indent(1);
     WriteLineIndent("@value = value.is_a?(Enum) ? value.value : value");
@@ -3576,10 +3576,12 @@ void GeneratorRuby::GenerateEnum(const std::shared_ptr<EnumType>& e)
     WriteLineIndent("end");
 
     // Generate enum module class attributes
-    WriteLine();
-    if (e->body)
+    if (e->body && !e->body->values.empty())
+    {
+        WriteLine();
         for (auto it = e->body->values.begin(); it != e->body->values.end(); ++it)
             WriteLineIndent("self." + *(*it)->name + " = Enum.new(Enum." + *(*it)->name + ")");
+    }
 
     // Generate enum module class constructor
     WriteLine();
@@ -3741,11 +3743,11 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     WriteLineIndent("class Flags");
     Indent(1);
     WriteLineIndent("include FBE::Flags");
-    WriteLine();
 
     // Generate flags class body
-    if (f->body)
+    if (f->body && !f->body->values.empty())
     {
+        WriteLine();
         for (const auto& value : f->body->values)
         {
             WriteIndent("define :" + *value->name + ", ");
@@ -3758,10 +3760,10 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
             }
             WriteLine();
         }
+        WriteLine();
     }
 
     // Generate flags initialize method
-    WriteLine();
     WriteLineIndent("def initialize(value = 0)");
     Indent(1);
     WriteLineIndent("@value = value.is_a?(Flags) ? value.value : value");
@@ -3842,9 +3844,9 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     WriteLineIndent("def to_s");
     Indent(1);
     WriteLineIndent("result = ''");
-    WriteLineIndent("first = true");
-    if (f->body)
+    if (f->body && !f->body->values.empty())
     {
+        WriteLineIndent("first = true");
         for (auto it = f->body->values.begin(); it != f->body->values.end(); ++it)
         {
             WriteLineIndent("if ((@value & Flags." + *(*it)->name + ") != 0) && ((@value & Flags." + *(*it)->name + ") == Flags." + *(*it)->name + ")");
@@ -3892,10 +3894,12 @@ void GeneratorRuby::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     WriteLineIndent("end");
 
     // Generate flags module class attributes
-    WriteLine();
-    if (f->body)
+    if (f->body && !f->body->values.empty())
+    {
+        WriteLine();
         for (auto it = f->body->values.begin(); it != f->body->values.end(); ++it)
             WriteLineIndent("self." + *(*it)->name + " = Flags.new(Flags." + *(*it)->name + ")");
+    }
 
     // Generate flags module class constructor
     WriteLine();
@@ -4061,15 +4065,15 @@ void GeneratorRuby::GenerateStruct(const std::shared_ptr<StructType>& s)
     WriteLineIndent("include Comparable");
 
     // Generate struct accessors
-    if (s->body)
+    if (s->body && !s->body->fields.empty())
     {
         WriteLine();
         for (const auto& field : s->body->fields)
             WriteLineIndent("attr_accessor :" + *field->name);
+        WriteLine();
     }
 
     // Generate struct constructor
-    WriteLine();
     WriteIndent("def initialize(");
     bool first = true;
     if (s->base && !s->base->empty())
@@ -4631,43 +4635,46 @@ void GeneratorRuby::GenerateStructFieldModel(const std::shared_ptr<StructType>& 
     WriteLineIndent("# Check if the struct fields are valid");
     WriteLineIndent("def verify_fields(fbe_struct_size)");
     Indent(1);
-    WriteLineIndent("fbe_current_size = 4 + 4");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("if (fbe_current_size + parent.fbe_body - 4 - 4) > fbe_struct_size");
-        Indent(1);
-        WriteLineIndent("return true");
-        Indent(-1);
-        WriteLineIndent("end");
-        WriteLineIndent("unless parent.verify_fields(fbe_struct_size)");
-        Indent(1);
-        WriteLineIndent("return false");
-        Indent(-1);
-        WriteLineIndent("end");
-        WriteLineIndent("# noinspection RubyUnusedLocalVariable");
-        WriteLineIndent("fbe_current_size += parent.fbe_body - 4 - 4");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("fbe_current_size = 4 + 4");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent("if (fbe_current_size + " + *field->name + ".fbe_size) > fbe_struct_size");
+            WriteLineIndent("if (fbe_current_size + parent.fbe_body - 4 - 4) > fbe_struct_size");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);
             WriteLineIndent("end");
-            WriteLineIndent("unless " + *field->name + ".verify");
+            WriteLineIndent("unless parent.verify_fields(fbe_struct_size)");
             Indent(1);
             WriteLineIndent("return false");
             Indent(-1);
             WriteLineIndent("end");
             WriteLineIndent("# noinspection RubyUnusedLocalVariable");
-            WriteLineIndent("fbe_current_size += " + *field->name + ".fbe_size");
+            WriteLineIndent("fbe_current_size += parent.fbe_body - 4 - 4");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("if (fbe_current_size + " + *field->name + ".fbe_size) > fbe_struct_size");
+                Indent(1);
+                WriteLineIndent("return true");
+                Indent(-1);
+                WriteLineIndent("end");
+                WriteLineIndent("unless " + *field->name + ".verify");
+                Indent(1);
+                WriteLineIndent("return false");
+                Indent(-1);
+                WriteLineIndent("end");
+                WriteLineIndent("# noinspection RubyUnusedLocalVariable");
+                WriteLineIndent("fbe_current_size += " + *field->name + ".fbe_size");
+            }
+        }
+        WriteLine();
     }
-    WriteLine();
     WriteLineIndent("true");
     Indent(-1);
     WriteLineIndent("end");
@@ -4735,40 +4742,43 @@ void GeneratorRuby::GenerateStructFieldModel(const std::shared_ptr<StructType>& 
     WriteLineIndent("# Get the struct fields values");
     WriteLineIndent("def get_fields(fbe_value, fbe_struct_size)");
     Indent(1);
-    WriteLineIndent("fbe_current_size = 4 + 4");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("if (fbe_current_size + parent.fbe_body - 4 - 4) <= fbe_struct_size");
-        Indent(1);
-        WriteLineIndent("parent.get_fields(fbe_value, fbe_struct_size)");
-        Indent(-1);
-        WriteLineIndent("end");
-        WriteLineIndent("# noinspection RubyUnusedLocalVariable");
-        WriteLineIndent("fbe_current_size += parent.fbe_body - 4 - 4");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("fbe_current_size = 4 + 4");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent("if (fbe_current_size + " + *field->name + ".fbe_size) <= fbe_struct_size");
+            WriteLineIndent("if (fbe_current_size + parent.fbe_body - 4 - 4) <= fbe_struct_size");
             Indent(1);
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent(*field->name + ".get(fbe_value." + *field->name + ")");
-            else
-                WriteLineIndent("fbe_value." + *field->name + " = " + *field->name + ".get" + (field->value ? ("(" + ConvertConstant(*field->type, *field->value, field->optional) + ")") : ""));
-            Indent(-1);
-            WriteLineIndent("else");
-            Indent(1);
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent("fbe_value." + *field->name + ".clear");
-            else
-                WriteLineIndent("fbe_value." + *field->name + " = " + ConvertDefault(*field));
+            WriteLineIndent("parent.get_fields(fbe_value, fbe_struct_size)");
             Indent(-1);
             WriteLineIndent("end");
             WriteLineIndent("# noinspection RubyUnusedLocalVariable");
-            WriteLineIndent("fbe_current_size += " + *field->name + ".fbe_size");
+            WriteLineIndent("fbe_current_size += parent.fbe_body - 4 - 4");
+        }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("if (fbe_current_size + " + *field->name + ".fbe_size) <= fbe_struct_size");
+                Indent(1);
+                if (field->array || field->vector || field->list || field->set || field->map || field->hash)
+                    WriteLineIndent(*field->name + ".get(fbe_value." + *field->name + ")");
+                else
+                    WriteLineIndent("fbe_value." + *field->name + " = " + *field->name + ".get" + (field->value ? ("(" + ConvertConstant(*field->type, *field->value, field->optional) + ")") : ""));
+                Indent(-1);
+                WriteLineIndent("else");
+                Indent(1);
+                if (field->array || field->vector || field->list || field->set || field->map || field->hash)
+                    WriteLineIndent("fbe_value." + *field->name + ".clear");
+                else
+                    WriteLineIndent("fbe_value." + *field->name + " = " + ConvertDefault(*field));
+                Indent(-1);
+                WriteLineIndent("end");
+                WriteLineIndent("# noinspection RubyUnusedLocalVariable");
+                WriteLineIndent("fbe_current_size += " + *field->name + ".fbe_size");
+            }
         }
     }
     Indent(-1);
@@ -4833,11 +4843,14 @@ void GeneratorRuby::GenerateStructFieldModel(const std::shared_ptr<StructType>& 
     WriteLineIndent("# Set the struct fields values");
     WriteLineIndent("def set_fields(fbe_value)");
     Indent(1);
-    if (s->base && !s->base->empty())
-        WriteLineIndent("parent.set_fields(fbe_value)");
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            WriteLineIndent(*field->name + ".set(fbe_value." + *field->name + ")");
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
+    {
+        if (s->base && !s->base->empty())
+            WriteLineIndent("parent.set_fields(fbe_value)");
+        if (s->body)
+            for (const auto& field : s->body->fields)
+                WriteLineIndent(*field->name + ".set(fbe_value." + *field->name + ")");
+    }
     Indent(-1);
     WriteLineIndent("end");
 
@@ -5090,26 +5103,14 @@ void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& 
     WriteLineIndent("# Check if the struct fields are valid");
     WriteLineIndent("def verify_fields");
     Indent(1);
-    WriteLineIndent("fbe_current_offset = 0");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("parent.fbe_offset = fbe_current_offset");
-        WriteLineIndent("fbe_field_size = parent.verify_fields");
-        WriteLineIndent("if fbe_field_size == FBE::Integer::MAX");
-        Indent(1);
-        WriteLineIndent("return FBE::Integer::MAX");
-        Indent(-1);
-        WriteLineIndent("end");
-        WriteLineIndent("fbe_current_offset += fbe_field_size");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("fbe_current_offset = 0");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent(*field->name + ".fbe_offset = fbe_current_offset");
-            WriteLineIndent("fbe_field_size = " + *field->name + ".verify");
+            WriteLineIndent("parent.fbe_offset = fbe_current_offset");
+            WriteLineIndent("fbe_field_size = parent.verify_fields");
             WriteLineIndent("if fbe_field_size == FBE::Integer::MAX");
             Indent(1);
             WriteLineIndent("return FBE::Integer::MAX");
@@ -5117,10 +5118,27 @@ void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& 
             WriteLineIndent("end");
             WriteLineIndent("fbe_current_offset += fbe_field_size");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent(*field->name + ".fbe_offset = fbe_current_offset");
+                WriteLineIndent("fbe_field_size = " + *field->name + ".verify");
+                WriteLineIndent("if fbe_field_size == FBE::Integer::MAX");
+                Indent(1);
+                WriteLineIndent("return FBE::Integer::MAX");
+                Indent(-1);
+                WriteLineIndent("end");
+                WriteLineIndent("fbe_current_offset += fbe_field_size");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("# noinspection RubyUnnecessaryReturnValue");
+        WriteLineIndent("fbe_current_offset");
     }
-    WriteLine();
-    WriteLineIndent("# noinspection RubyUnnecessaryReturnValue");
-    WriteLineIndent("fbe_current_offset");
+    else
+        WriteLineIndent("0");
     Indent(-1);
     WriteLineIndent("end");
 
@@ -5141,38 +5159,43 @@ void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& 
     WriteLineIndent("# Get the struct fields values");
     WriteLineIndent("def get_fields(fbe_value)");
     Indent(1);
-    WriteLineIndent("fbe_current_offset = 0");
-    WriteLineIndent("fbe_current_size = 0");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("parent.fbe_offset = fbe_current_offset");
-        WriteLineIndent("fbe_result = parent.get_fields(fbe_value)");
-        WriteLineIndent("# noinspection RubyUnusedLocalVariable");
-        WriteLineIndent("fbe_current_offset += fbe_result");
-        WriteLineIndent("fbe_current_size += fbe_result");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("fbe_current_offset = 0");
+        WriteLineIndent("fbe_current_size = 0");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent(*field->name + ".fbe_offset = fbe_current_offset");
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent("fbe_result = " + *field->name + ".get(fbe_value." + *field->name + ")");
-            else
-            {
-                WriteLineIndent("fbe_result = " + *field->name + ".get");
-                WriteLineIndent("fbe_value." + *field->name + " = fbe_result[0]");
-            }
+            WriteLineIndent("parent.fbe_offset = fbe_current_offset");
+            WriteLineIndent("fbe_result = parent.get_fields(fbe_value)");
             WriteLineIndent("# noinspection RubyUnusedLocalVariable");
-            WriteLineIndent("fbe_current_offset += fbe_result[1]");
-            WriteLineIndent("fbe_current_size += fbe_result[1]");
+            WriteLineIndent("fbe_current_offset += fbe_result");
+            WriteLineIndent("fbe_current_size += fbe_result");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent(*field->name + ".fbe_offset = fbe_current_offset");
+                if (field->array || field->vector || field->list || field->set || field->map || field->hash)
+                    WriteLineIndent("fbe_result = " + *field->name + ".get(fbe_value." + *field->name + ")");
+                else
+                {
+                    WriteLineIndent("fbe_result = " + *field->name + ".get");
+                    WriteLineIndent("fbe_value." + *field->name + " = fbe_result[0]");
+                }
+                WriteLineIndent("# noinspection RubyUnusedLocalVariable");
+                WriteLineIndent("fbe_current_offset += fbe_result[1]");
+                WriteLineIndent("fbe_current_size += fbe_result[1]");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("# noinspection RubyUnnecessaryReturnValue");
+        WriteLineIndent("fbe_current_size");
     }
-    WriteLine();
-    WriteLineIndent("# noinspection RubyUnnecessaryReturnValue");
-    WriteLineIndent("fbe_current_size");
+    else
+        WriteLineIndent("0");
     Indent(-1);
     WriteLineIndent("end");
 
@@ -5193,32 +5216,37 @@ void GeneratorRuby::GenerateStructFinalModel(const std::shared_ptr<StructType>& 
     WriteLineIndent("# Set the struct fields values");
     WriteLineIndent("def set_fields(fbe_value)");
     Indent(1);
-    WriteLineIndent("fbe_current_offset = 0");
-    WriteLineIndent("fbe_current_size = 0");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("parent.fbe_offset = fbe_current_offset");
-        WriteLineIndent("fbe_field_size = parent.set_fields(fbe_value)");
-        WriteLineIndent("# noinspection RubyUnusedLocalVariable");
-        WriteLineIndent("fbe_current_offset += fbe_field_size");
-        WriteLineIndent("fbe_current_size += fbe_field_size");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("fbe_current_offset = 0");
+        WriteLineIndent("fbe_current_size = 0");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent(*field->name + ".fbe_offset = fbe_current_offset");
-            WriteLineIndent("fbe_field_size = " + *field->name + ".set(fbe_value." + *field->name + ")");
+            WriteLineIndent("parent.fbe_offset = fbe_current_offset");
+            WriteLineIndent("fbe_field_size = parent.set_fields(fbe_value)");
             WriteLineIndent("# noinspection RubyUnusedLocalVariable");
             WriteLineIndent("fbe_current_offset += fbe_field_size");
             WriteLineIndent("fbe_current_size += fbe_field_size");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent(*field->name + ".fbe_offset = fbe_current_offset");
+                WriteLineIndent("fbe_field_size = " + *field->name + ".set(fbe_value." + *field->name + ")");
+                WriteLineIndent("# noinspection RubyUnusedLocalVariable");
+                WriteLineIndent("fbe_current_offset += fbe_field_size");
+                WriteLineIndent("fbe_current_size += fbe_field_size");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("# noinspection RubyUnnecessaryReturnValue");
+        WriteLineIndent("fbe_current_size");
     }
-    WriteLine();
-    WriteLineIndent("# noinspection RubyUnnecessaryReturnValue");
-    WriteLineIndent("fbe_current_size");
+    else
+        WriteLineIndent("0");
     Indent(-1);
     WriteLineIndent("end");
 

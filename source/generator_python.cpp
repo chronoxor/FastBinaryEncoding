@@ -3028,7 +3028,7 @@ void GeneratorPython::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     std::string enum_type = (f->base && !f->base->empty()) ? *f->base : "int32";
 
     // Generate flags body
-    if (f->body)
+    if (f->body && !f->body->values.empty())
     {
         for (const auto& value : f->body->values)
         {
@@ -3042,10 +3042,10 @@ void GeneratorPython::GenerateFlags(const std::shared_ptr<FlagsType>& f)
             }
             WriteLine();
         }
+        WriteLine();
     }
 
     // Generate flags __slots__
-    WriteLine();
     WriteLineIndent("__slots__ = ()");
 
     // Generate flags has_flags() method
@@ -3245,14 +3245,16 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
     Indent(1);
 
     // Generate struct __slots__
-    WriteIndent("__slots__ = ");
-    if (s->body)
+    if (s->body && !s->body->fields.empty())
+    {
+        WriteIndent("__slots__ = ");
         for (const auto& field : s->body->fields)
             Write("\"" + *field->name + "\", ");
-    WriteLine();
+        WriteLine();
+        WriteLine();
+    }
 
     // Generate struct constructor
-    WriteLine();
     WriteIndent("def __init__(self");
     if (s->base && !s->base->empty())
         Write(", parent=None");
@@ -3296,6 +3298,12 @@ void GeneratorPython::GenerateStruct(const std::shared_ptr<StructType>& s)
             WriteLineIndent("self." + *field->name + " = " + *field->name);
     }
     Indent(-1);
+    if ((!s->base || s->base->empty()) && (!s->body || s->body->fields.empty()))
+    {
+        Indent(1);
+        WriteLineIndent("pass");
+        Indent(-1);
+    }
 
     // Generate struct copy() method
     WriteLine();
@@ -3701,16 +3709,19 @@ void GeneratorPython::GenerateStructFieldModel(const std::shared_ptr<StructType>
     Indent(1);
 
     // Generate struct field model __slots__
-    WriteIndent("__slots__ = ");
-    if (s->base && !s->base->empty())
-        Write("\"_parent\", ");
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            Write("\"_" + *field->name + "\", ");
-    WriteLine();
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
+    {
+        WriteIndent("__slots__ = ");
+        if (s->base && !s->base->empty())
+            Write("\"_parent\", ");
+        if (s->body)
+            for (const auto& field : s->body->fields)
+                Write("\"_" + *field->name + "\", ");
+        WriteLine();
+        WriteLine();
+    }
 
     // Generate struct field model constructor
-    WriteLine();
     WriteLineIndent("def __init__(self, buffer, offset):");
     Indent(1);
     WriteLineIndent("super().__init__(buffer, offset)");
@@ -3865,37 +3876,40 @@ void GeneratorPython::GenerateStructFieldModel(const std::shared_ptr<StructType>
     WriteLineIndent("# Check if the struct fields are valid");
     WriteLineIndent("def verify_fields(self, fbe_struct_size):");
     Indent(1);
-    WriteLineIndent("fbe_current_size = 4 + 4");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("if (fbe_current_size + self.parent.fbe_body - 4 - 4) > fbe_struct_size:");
-        Indent(1);
-        WriteLineIndent("return True");
-        Indent(-1);
-        WriteLineIndent("if not self.parent.verify_fields(fbe_struct_size):");
-        Indent(1);
-        WriteLineIndent("return False");
-        Indent(-1);
-        WriteLineIndent("fbe_current_size += self.parent.fbe_body - 4 - 4");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("fbe_current_size = 4 + 4");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent("if (fbe_current_size + self." + *field->name + ".fbe_size) > fbe_struct_size:");
+            WriteLineIndent("if (fbe_current_size + self.parent.fbe_body - 4 - 4) > fbe_struct_size:");
             Indent(1);
             WriteLineIndent("return True");
             Indent(-1);
-            WriteLineIndent("if not self." + *field->name + ".verify():");
+            WriteLineIndent("if not self.parent.verify_fields(fbe_struct_size):");
             Indent(1);
             WriteLineIndent("return False");
             Indent(-1);
-            WriteLineIndent("fbe_current_size += self." + *field->name + ".fbe_size");
+            WriteLineIndent("fbe_current_size += self.parent.fbe_body - 4 - 4");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("if (fbe_current_size + self." + *field->name + ".fbe_size) > fbe_struct_size:");
+                Indent(1);
+                WriteLineIndent("return True");
+                Indent(-1);
+                WriteLineIndent("if not self." + *field->name + ".verify():");
+                Indent(1);
+                WriteLineIndent("return False");
+                Indent(-1);
+                WriteLineIndent("fbe_current_size += self." + *field->name + ".fbe_size");
+            }
+        }
+        WriteLine();
     }
-    WriteLine();
     WriteLineIndent("return True");
     Indent(-1);
 
@@ -3962,38 +3976,43 @@ void GeneratorPython::GenerateStructFieldModel(const std::shared_ptr<StructType>
     WriteLineIndent("# Get the struct fields values");
     WriteLineIndent("def get_fields(self, fbe_value, fbe_struct_size):");
     Indent(1);
-    WriteLineIndent("fbe_current_size = 4 + 4");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("if (fbe_current_size + self.parent.fbe_body - 4 - 4) <= fbe_struct_size:");
-        Indent(1);
-        WriteLineIndent("self.parent.get_fields(fbe_value, fbe_struct_size)");
-        Indent(-1);
-        WriteLineIndent("fbe_current_size += self.parent.fbe_body - 4 - 4");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("fbe_current_size = 4 + 4");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent("if (fbe_current_size + self." + *field->name + ".fbe_size) <= fbe_struct_size:");
+            WriteLineIndent("if (fbe_current_size + self.parent.fbe_body - 4 - 4) <= fbe_struct_size:");
             Indent(1);
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent("self." + *field->name + ".get(fbe_value." + *field->name + ")");
-            else
-                WriteLineIndent("fbe_value." + *field->name + " = self." + *field->name + ".get(" + (field->value ? ConvertConstant(*field->type, *field->value, field->optional) : "") + ")");
+            WriteLineIndent("self.parent.get_fields(fbe_value, fbe_struct_size)");
             Indent(-1);
-            WriteLineIndent("else:");
-            Indent(1);
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent("fbe_value." + *field->name + ".clear()");
-            else
-                WriteLineIndent("fbe_value." + *field->name + " = " + ConvertDefault(*field));
-            Indent(-1);
-            WriteLineIndent("fbe_current_size += self." + *field->name + ".fbe_size");
+            WriteLineIndent("fbe_current_size += self.parent.fbe_body - 4 - 4");
+        }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("if (fbe_current_size + self." + *field->name + ".fbe_size) <= fbe_struct_size:");
+                Indent(1);
+                if (field->array || field->vector || field->list || field->set || field->map || field->hash)
+                    WriteLineIndent("self." + *field->name + ".get(fbe_value." + *field->name + ")");
+                else
+                    WriteLineIndent("fbe_value." + *field->name + " = self." + *field->name + ".get(" + (field->value ? ConvertConstant(*field->type, *field->value, field->optional) : "") + ")");
+                Indent(-1);
+                WriteLineIndent("else:");
+                Indent(1);
+                if (field->array || field->vector || field->list || field->set || field->map || field->hash)
+                    WriteLineIndent("fbe_value." + *field->name + ".clear()");
+                else
+                    WriteLineIndent("fbe_value." + *field->name + " = " + ConvertDefault(*field));
+                Indent(-1);
+                WriteLineIndent("fbe_current_size += self." + *field->name + ".fbe_size");
+            }
         }
     }
+    else
+        WriteLineIndent("pass");
     Indent(-1);
 
     // Generate struct field model set_begin() method
@@ -4051,11 +4070,16 @@ void GeneratorPython::GenerateStructFieldModel(const std::shared_ptr<StructType>
     WriteLineIndent("# Set the struct fields values");
     WriteLineIndent("def set_fields(self, fbe_value):");
     Indent(1);
-    if (s->base && !s->base->empty())
-        WriteLineIndent("self.parent.set_fields(fbe_value)");
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            WriteLineIndent("self." + *field->name + ".set(fbe_value." + *field->name + ")");
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
+    {
+        if (s->base && !s->base->empty())
+            WriteLineIndent("self.parent.set_fields(fbe_value)");
+        if (s->body)
+            for (const auto& field : s->body->fields)
+                WriteLineIndent("self." + *field->name + ".set(fbe_value." + *field->name + ")");
+    }
+    else
+        WriteLineIndent("pass");
     Indent(-1);
 
     // Generate struct field model end
@@ -4207,16 +4231,19 @@ void GeneratorPython::GenerateStructFinalModel(const std::shared_ptr<StructType>
     Indent(1);
 
     // Generate struct final model __slots__
-    WriteIndent("__slots__ = ");
-    if (s->base && !s->base->empty())
-        Write("\"_parent\", ");
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            Write("\"_" + *field->name + "\", ");
-    WriteLine();
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
+    {
+        WriteIndent("__slots__ = ");
+        if (s->base && !s->base->empty())
+            Write("\"_parent\", ");
+        if (s->body)
+            for (const auto& field : s->body->fields)
+                Write("\"_" + *field->name + "\", ");
+        WriteLine();
+        WriteLine();
+    }
 
     // Generate struct final model constructor
-    WriteLine();
     WriteLineIndent("def __init__(self, buffer, offset):");
     Indent(1);
     WriteLineIndent("super().__init__(buffer, offset)");
@@ -4297,34 +4324,39 @@ void GeneratorPython::GenerateStructFinalModel(const std::shared_ptr<StructType>
     WriteLineIndent("# Check if the struct fields are valid");
     WriteLineIndent("def verify_fields(self):");
     Indent(1);
-    WriteLineIndent("fbe_current_offset = 0");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("self.parent.fbe_offset = fbe_current_offset");
-        WriteLineIndent("fbe_field_size = self.parent.verify_fields()");
-        WriteLineIndent("if fbe_field_size == sys.maxsize:");
-        Indent(1);
-        WriteLineIndent("return sys.maxsize");
-        Indent(-1);
-        WriteLineIndent("fbe_current_offset += fbe_field_size");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("fbe_current_offset = 0");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent("self." + *field->name + ".fbe_offset = fbe_current_offset");
-            WriteLineIndent("fbe_field_size = self." + *field->name + ".verify()");
+            WriteLineIndent("self.parent.fbe_offset = fbe_current_offset");
+            WriteLineIndent("fbe_field_size = self.parent.verify_fields()");
             WriteLineIndent("if fbe_field_size == sys.maxsize:");
             Indent(1);
             WriteLineIndent("return sys.maxsize");
             Indent(-1);
             WriteLineIndent("fbe_current_offset += fbe_field_size");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("self." + *field->name + ".fbe_offset = fbe_current_offset");
+                WriteLineIndent("fbe_field_size = self." + *field->name + ".verify()");
+                WriteLineIndent("if fbe_field_size == sys.maxsize:");
+                Indent(1);
+                WriteLineIndent("return sys.maxsize");
+                Indent(-1);
+                WriteLineIndent("fbe_current_offset += fbe_field_size");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("return fbe_current_offset");
     }
-    WriteLine();
-    WriteLineIndent("return fbe_current_offset");
+    else
+        WriteLineIndent("return 0");
     Indent(-1);
 
     // Generate struct final model get() method
@@ -4348,35 +4380,40 @@ void GeneratorPython::GenerateStructFinalModel(const std::shared_ptr<StructType>
     WriteLineIndent("# Get the struct fields values");
     WriteLineIndent("def get_fields(self, fbe_value):");
     Indent(1);
-    WriteLineIndent("fbe_current_offset = 0");
-    WriteLineIndent("fbe_current_size = 0");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("self.parent.fbe_offset = fbe_current_offset");
-        WriteLineIndent("fbe_result = self.parent.get_fields(fbe_value)");
-        WriteLineIndent("fbe_current_offset += fbe_result");
-        WriteLineIndent("fbe_current_size += fbe_result");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("fbe_current_offset = 0");
+        WriteLineIndent("fbe_current_size = 0");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent("self." + *field->name + ".fbe_offset = fbe_current_offset");
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent("fbe_result = self." + *field->name + ".get(fbe_value." + *field->name + ")");
-            else
-            {
-                WriteLineIndent("fbe_result = self." + *field->name + ".get()");
-                WriteLineIndent("fbe_value." + *field->name + " = fbe_result[0]");
-            }
-            WriteLineIndent("fbe_current_offset += fbe_result[1]");
-            WriteLineIndent("fbe_current_size += fbe_result[1]");
+            WriteLineIndent("self.parent.fbe_offset = fbe_current_offset");
+            WriteLineIndent("fbe_result = self.parent.get_fields(fbe_value)");
+            WriteLineIndent("fbe_current_offset += fbe_result");
+            WriteLineIndent("fbe_current_size += fbe_result");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("self." + *field->name + ".fbe_offset = fbe_current_offset");
+                if (field->array || field->vector || field->list || field->set || field->map || field->hash)
+                    WriteLineIndent("fbe_result = self." + *field->name + ".get(fbe_value." + *field->name + ")");
+                else
+                {
+                    WriteLineIndent("fbe_result = self." + *field->name + ".get()");
+                    WriteLineIndent("fbe_value." + *field->name + " = fbe_result[0]");
+                }
+                WriteLineIndent("fbe_current_offset += fbe_result[1]");
+                WriteLineIndent("fbe_current_size += fbe_result[1]");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("return fbe_current_size");
     }
-    WriteLine();
-    WriteLineIndent("return fbe_current_size");
+    else
+        WriteLineIndent("return 0");
     Indent(-1);
 
     // Generate struct final model set() method
@@ -4395,29 +4432,34 @@ void GeneratorPython::GenerateStructFinalModel(const std::shared_ptr<StructType>
     WriteLineIndent("# Set the struct fields values");
     WriteLineIndent("def set_fields(self, fbe_value):");
     Indent(1);
-    WriteLineIndent("fbe_current_offset = 0");
-    WriteLineIndent("fbe_current_size = 0");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("self.parent.fbe_offset = fbe_current_offset");
-        WriteLineIndent("fbe_field_size = self.parent.set_fields(fbe_value)");
-        WriteLineIndent("fbe_current_offset += fbe_field_size");
-        WriteLineIndent("fbe_current_size += fbe_field_size");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("fbe_current_offset = 0");
+        WriteLineIndent("fbe_current_size = 0");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent("self." + *field->name + ".fbe_offset = fbe_current_offset");
-            WriteLineIndent("fbe_field_size = self." + *field->name + ".set(fbe_value." + *field->name + ")");
+            WriteLineIndent("self.parent.fbe_offset = fbe_current_offset");
+            WriteLineIndent("fbe_field_size = self.parent.set_fields(fbe_value)");
             WriteLineIndent("fbe_current_offset += fbe_field_size");
             WriteLineIndent("fbe_current_size += fbe_field_size");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("self." + *field->name + ".fbe_offset = fbe_current_offset");
+                WriteLineIndent("fbe_field_size = self." + *field->name + ".set(fbe_value." + *field->name + ")");
+                WriteLineIndent("fbe_current_offset += fbe_field_size");
+                WriteLineIndent("fbe_current_size += fbe_field_size");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("return fbe_current_size");
     }
-    WriteLine();
-    WriteLineIndent("return fbe_current_size");
+    else
+        WriteLineIndent("return 0");
     Indent(-1);
 
     // Generate struct final model end

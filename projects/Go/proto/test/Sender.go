@@ -28,6 +28,7 @@ type Sender struct {
     structMapModel *StructMapModel
     structHashModel *StructHashModel
     structHashExModel *StructHashExModel
+    structEmptyModel *StructEmptyModel
 }
 
 // Create a new test sender with an empty buffer
@@ -51,6 +52,7 @@ func NewSenderWithBuffer(buffer *fbe.Buffer) *Sender {
         NewStructMapModel(buffer),
         NewStructHashModel(buffer),
         NewStructHashExModel(buffer),
+        NewStructEmptyModel(buffer),
     }
 }
 
@@ -71,6 +73,7 @@ func (s *Sender) StructSetModel() *StructSetModel { return s.structSetModel }
 func (s *Sender) StructMapModel() *StructMapModel { return s.structMapModel }
 func (s *Sender) StructHashModel() *StructHashModel { return s.structHashModel }
 func (s *Sender) StructHashExModel() *StructHashExModel { return s.structHashExModel }
+func (s *Sender) StructEmptyModel() *StructEmptyModel { return s.structEmptyModel }
 
 // Send methods
 
@@ -98,6 +101,8 @@ func (s *Sender) Send(value interface{}) (int, error) {
         return s.SendStructHash(value)
     case *StructHashEx:
         return s.SendStructHashEx(value)
+    case *StructEmpty:
+        return s.SendStructEmpty(value)
     }
     if result, err := s.protoSender.Send(value); (result > 0) || (err != nil) {
         return result, err
@@ -346,6 +351,29 @@ func (s *Sender) SendStructHashEx(value *StructHashEx) (int, error) {
     }
     if !s.structHashExModel.Verify() {
         return 0, errors.New("test.StructHashEx validation failed")
+    }
+
+    // Log the value
+    if s.Logging() {
+        message := value.String()
+        s.HandlerOnSendLog.OnSendLog(message)
+    }
+
+    // Send the serialized value
+    return s.SendSerialized(serialized)
+}
+
+func (s *Sender) SendStructEmpty(value *StructEmpty) (int, error) {
+    // Serialize the value into the FBE stream
+    serialized, err := s.structEmptyModel.Serialize(value)
+    if serialized <= 0 {
+        return 0, errors.New("test.StructEmpty serialization failed")
+    }
+    if err != nil {
+        return 0, err
+    }
+    if !s.structEmptyModel.Verify() {
+        return 0, errors.New("test.StructEmpty validation failed")
     }
 
     // Log the value

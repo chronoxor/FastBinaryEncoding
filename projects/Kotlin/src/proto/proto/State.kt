@@ -32,6 +32,7 @@ class State : Comparable<State>
 
         fun fromSet(set: EnumSet<StateEnum>): State
         {
+            @Suppress("CanBeVal")
             var result = 0
             if (set.contains(unknown.value!!))
             {

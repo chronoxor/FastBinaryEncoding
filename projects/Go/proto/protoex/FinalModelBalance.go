@@ -104,8 +104,8 @@ func (fm *FinalModelBalance) GetValue(fbeValue *Balance) (int, error) {
 // Get the struct fields values
 func (fm *FinalModelBalance) GetFields(fbeValue *Balance) (int, error) {
     var err error = nil
-    fbeCurrentOffset := 0
     fbeCurrentSize := 0
+    fbeCurrentOffset := 0
     fbeFieldSize := 0
 
     fm.FinalModelBalance.SetFBEOffset(fbeCurrentOffset)
@@ -136,8 +136,8 @@ func (fm *FinalModelBalance) Set(fbeValue *Balance) (int, error) {
 // Set the struct fields values
 func (fm *FinalModelBalance) SetFields(fbeValue *Balance) (int, error) {
     var err error = nil
-    fbeCurrentOffset := 0
     fbeCurrentSize := 0
+    fbeCurrentOffset := 0
     fbeFieldSize := 0
 
     fm.FinalModelBalance.SetFBEOffset(fbeCurrentOffset)

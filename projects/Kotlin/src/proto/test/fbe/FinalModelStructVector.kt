@@ -34,6 +34,7 @@ class FinalModelStructVector(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     val f10: FinalModelVectorOptionalStructSimple = FinalModelVectorOptionalStructSimple(buffer, 0)
 
     // Get the allocation size
+    @Suppress("UNUSED_PARAMETER")
     fun fbeAllocationSize(fbeValue: StructVector): Long = (0
         + f1.fbeAllocationSize(fbeValue.f1)
         + f2.fbeAllocationSize(fbeValue.f2)
@@ -144,6 +145,7 @@ class FinalModelStructVector(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Get the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun getFields(fbeValue: StructVector): Long
     {
         var fbeCurrentOffset = 0L
@@ -213,6 +215,7 @@ class FinalModelStructVector(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Set the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun setFields(fbeValue: StructVector): Long
     {
         var fbeCurrentOffset = 0L

@@ -4613,9 +4613,9 @@ void GeneratorKotlin::GenerateFlags(const std::shared_ptr<Package>& p, const std
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("val sb = StringBuilder()");
-    WriteLineIndent("var first = true");
-    if (f->body)
+    if (f->body && !f->body->values.empty())
     {
+        WriteLineIndent("var first = true");
         for (const auto& value : f->body->values)
         {
             WriteLineIndent("if (hasFlags(" + *value->name + "))");
@@ -4709,14 +4709,20 @@ void GeneratorKotlin::GenerateFlagsClass(const std::shared_ptr<Package>& p, cons
         WriteLineIndent("companion object");
         WriteLineIndent("{");
         Indent(1);
-        for (const auto& value : f->body->values)
-            WriteLineIndent("val " + *value->name + " = " + flags_name + "(" + flags_type_name + "." + *value->name + ")");
+        if (!f->body->values.empty())
+        {
+            for (const auto& value : f->body->values)
+                WriteLineIndent("val " + *value->name + " = " + flags_name + "(" + flags_type_name + "." + *value->name + ")");
+            WriteLine();
+        }
 
         // Generate flags class fromSet() method
-        WriteLine();
+        if (f->body->values.empty())
+            WriteLineIndent("@Suppress(\"UNUSED_PARAMETER\")");
         WriteLineIndent("fun fromSet(set: EnumSet<" + flags_type_name + ">): " + flags_name);
         WriteLineIndent("{");
         Indent(1);
+        WriteLineIndent("@Suppress(\"CanBeVal\")");
         WriteLineIndent("var result = " + ConvertEnumConstant(flags_type, flags_type, "0", false));
         if (f->body)
         {
@@ -4846,9 +4852,9 @@ void GeneratorKotlin::GenerateFlagsClass(const std::shared_ptr<Package>& p, cons
     WriteLineIndent("{");
     Indent(1);
     WriteLineIndent("val sb = StringBuilder()");
-    WriteLineIndent("var first = true");
-    if (f->body)
+    if (f->body && !f->body->values.empty())
     {
+        WriteLineIndent("var first = true");
         for (const auto& value : f->body->values)
         {
             WriteLineIndent("if (hasFlags(" + *value->name + ".raw))");
@@ -4944,6 +4950,8 @@ void GeneratorKotlin::GenerateFlagsJson(const std::shared_ptr<Package>& p, const
 
 void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path)
 {
+    bool first;
+
     // Open the output file
     CppCommon::Path output = path / (*s->name + ".kt");
     Open(output);
@@ -4965,46 +4973,52 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
     Indent(1);
 
     // Generate struct body
-    if (s->body)
+    if (s->body && !s->body->fields.empty())
+    {
         for (const auto& field : s->body->fields)
             WriteLineIndent("var " + *field->name + ": " + ConvertTypeName(*field, false) + " = " + ConvertDefault(*field));
+        WriteLine();
+    }
 
     // Generate struct default constructor
-    WriteLine();
     WriteLineIndent("constructor()");
 
     // Generate struct initialization constructor
-    bool first = true;
-    WriteLine();
-    WriteIndent("constructor(");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        Write("parent: " + ConvertTypeName(*s->base, false));
-        first = false;
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        first = true;
+        WriteLine();
+        WriteIndent("constructor(");
+        if (s->base && !s->base->empty())
         {
-            Write(std::string(first ? "" : ", ") + *field->name + ": " + ConvertTypeName(*field, false));
+            Write("parent: " + ConvertTypeName(*s->base, false));
             first = false;
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                Write(std::string(first ? "" : ", ") + *field->name + ": " + ConvertTypeName(*field, false));
+                first = false;
+            }
+        }
+        Write(")");
+        if (s->base && !s->base->empty())
+            WriteLine(": super(parent)");
+        else
+            WriteLine();
+        WriteLineIndent("{");
+        Indent(1);
+        if (s->body)
+            for (const auto& field : s->body->fields)
+                WriteLineIndent("this." + *field->name + " = " + *field->name);
+        Indent(-1);
+        WriteLineIndent("}");
     }
-    Write(")");
-    if (s->base && !s->base->empty())
-        WriteLine(": super(parent)");
-    else
-        WriteLine();
-    WriteLineIndent("{");
-    Indent(1);
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            WriteLineIndent("this." + *field->name + " = " + *field->name);
-    Indent(-1);
-    WriteLineIndent("}");
 
     // Generate struct copy constructor
     WriteLine();
+    WriteLineIndent("@Suppress(\"UNUSED_PARAMETER\")");
     WriteIndent("constructor(other: " + *s->name + ")");
     if (s->base && !s->base->empty())
         WriteLine(": super(other)");
@@ -5459,40 +5473,44 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     // Generate struct field model verifyFields() method
     WriteLine();
     WriteLineIndent("// Check if the struct fields are valid");
+    WriteLineIndent("@Suppress(\"UNUSED_PARAMETER\")");
     WriteLineIndent("fun verifyFields(fbeStructSize: Long): Boolean");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("var fbeCurrentSize = 4L + 4L");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("if ((fbeCurrentSize + parent.fbeBody - 4 - 4) > fbeStructSize)");
-        Indent(1);
-        WriteLineIndent("return true");
-        Indent(-1);
-        WriteLineIndent("if (!parent.verifyFields(fbeStructSize))");
-        Indent(1);
-        WriteLineIndent("return false");
-        Indent(-1);
-        WriteLineIndent("fbeCurrentSize += parent.fbeBody - 4 - 4");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("var fbeCurrentSize = 4L + 4L");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".fbeSize) > fbeStructSize)");
+            WriteLineIndent("if ((fbeCurrentSize + parent.fbeBody - 4 - 4) > fbeStructSize)");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);
-            WriteLineIndent("if (!" + *field->name + ".verify())");
+            WriteLineIndent("if (!parent.verifyFields(fbeStructSize))");
             Indent(1);
             WriteLineIndent("return false");
             Indent(-1);
-            WriteLineIndent("fbeCurrentSize += " + *field->name + ".fbeSize");
+            WriteLineIndent("fbeCurrentSize += parent.fbeBody - 4 - 4");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".fbeSize) > fbeStructSize)");
+                Indent(1);
+                WriteLineIndent("return true");
+                Indent(-1);
+                WriteLineIndent("if (!" + *field->name + ".verify())");
+                Indent(1);
+                WriteLineIndent("return false");
+                Indent(-1);
+                WriteLineIndent("fbeCurrentSize += " + *field->name + ".fbeSize");
+            }
+        }
+        WriteLine();
     }
-    WriteLine();
     WriteLineIndent("return true");
     Indent(-1);
     WriteLineIndent("}");
@@ -5559,39 +5577,43 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     // Generate struct field model getFields() method
     WriteLine();
     WriteLineIndent("// Get the struct fields values");
+    WriteLineIndent("@Suppress(\"UNUSED_PARAMETER\")");
     WriteLineIndent("fun getFields(fbeValue: " + *s->name + ", fbeStructSize: Long)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("var fbeCurrentSize = 4L + 4L");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("if ((fbeCurrentSize + parent.fbeBody - 4 - 4) <= fbeStructSize)");
-        Indent(1);
-        WriteLineIndent("parent.getFields(fbeValue, fbeStructSize)");
-        Indent(-1);
-        WriteLineIndent("fbeCurrentSize += parent.fbeBody - 4 - 4");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("var fbeCurrentSize = 4L + 4L");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".fbeSize) <= fbeStructSize)");
+            WriteLineIndent("if ((fbeCurrentSize + parent.fbeBody - 4 - 4) <= fbeStructSize)");
             Indent(1);
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent(*field->name + ".get(fbeValue." + *field->name + ")");
-            else
-                WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(" + (field->value ? ConvertConstant(*field->type, *field->value, field->optional) : "") + ")");
+            WriteLineIndent("parent.getFields(fbeValue, fbeStructSize)");
             Indent(-1);
-            WriteLineIndent("else");
-            Indent(1);
-            if (field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent("fbeValue." + *field->name + ".clear()");
-            else
-                WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field));
-            Indent(-1);
-            WriteLineIndent("fbeCurrentSize += " + *field->name + ".fbeSize");
+            WriteLineIndent("fbeCurrentSize += parent.fbeBody - 4 - 4");
+        }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".fbeSize) <= fbeStructSize)");
+                Indent(1);
+                if (field->array || field->vector || field->list || field->set || field->map || field->hash)
+                    WriteLineIndent(*field->name + ".get(fbeValue." + *field->name + ")");
+                else
+                    WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(" + (field->value ? ConvertConstant(*field->type, *field->value, field->optional) : "") + ")");
+                Indent(-1);
+                WriteLineIndent("else");
+                Indent(1);
+                if (field->vector || field->list || field->set || field->map || field->hash)
+                    WriteLineIndent("fbeValue." + *field->name + ".clear()");
+                else
+                    WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field));
+                Indent(-1);
+                WriteLineIndent("fbeCurrentSize += " + *field->name + ".fbeSize");
+            }
         }
     }
     Indent(-1);
@@ -5656,14 +5678,18 @@ void GeneratorKotlin::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     // Generate struct field model setFields() method
     WriteLine();
     WriteLineIndent("// Set the struct fields values");
+    WriteLineIndent("@Suppress(\"UNUSED_PARAMETER\")");
     WriteLineIndent("fun setFields(fbeValue: " + *s->name + ")");
     WriteLineIndent("{");
     Indent(1);
-    if (s->base && !s->base->empty())
-        WriteLineIndent("parent.setFields(fbeValue)");
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            WriteLineIndent(*field->name + ".set(fbeValue." + *field->name + ")");
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
+    {
+        if (s->base && !s->base->empty())
+            WriteLineIndent("parent.setFields(fbeValue)");
+        if (s->body)
+            for (const auto& field : s->body->fields)
+                WriteLineIndent(*field->name + ".set(fbeValue." + *field->name + ")");
+    }
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5879,6 +5905,7 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     // Generate struct final model FBE properties
     WriteLine();
     WriteLineIndent("// Get the allocation size");
+    WriteLineIndent("@Suppress(\"UNUSED_PARAMETER\")");
     WriteLineIndent("fun fbeAllocationSize(fbeValue: " + *s->name + "): Long = (0");
     Indent(1);
     if (s->base && !s->base->empty())
@@ -5921,36 +5948,41 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     WriteLineIndent("fun verifyFields(): Long");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("var fbeCurrentOffset = 0L");
-    WriteLineIndent("@Suppress(\"VARIABLE_WITH_REDUNDANT_INITIALIZER\")");
-    WriteLineIndent("var fbeFieldSize = 0L");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("parent.fbeOffset = fbeCurrentOffset");
-        WriteLineIndent("fbeFieldSize = parent.verifyFields()");
-        WriteLineIndent("if (fbeFieldSize == Long.MAX_VALUE)");
-        Indent(1);
-        WriteLineIndent("return Long.MAX_VALUE");
-        Indent(-1);
-        WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("var fbeCurrentOffset = 0L");
+        WriteLineIndent("@Suppress(\"VARIABLE_WITH_REDUNDANT_INITIALIZER\")");
+        WriteLineIndent("var fbeFieldSize = 0L");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent(*field->name + ".fbeOffset = fbeCurrentOffset");
-            WriteLineIndent("fbeFieldSize = " + *field->name + ".verify()");
+            WriteLineIndent("parent.fbeOffset = fbeCurrentOffset");
+            WriteLineIndent("fbeFieldSize = parent.verifyFields()");
             WriteLineIndent("if (fbeFieldSize == Long.MAX_VALUE)");
             Indent(1);
             WriteLineIndent("return Long.MAX_VALUE");
             Indent(-1);
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent(*field->name + ".fbeOffset = fbeCurrentOffset");
+                WriteLineIndent("fbeFieldSize = " + *field->name + ".verify()");
+                WriteLineIndent("if (fbeFieldSize == Long.MAX_VALUE)");
+                Indent(1);
+                WriteLineIndent("return Long.MAX_VALUE");
+                Indent(-1);
+                WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("return fbeCurrentOffset");
     }
-    WriteLine();
-    WriteLineIndent("return fbeCurrentOffset");
+    else
+        WriteLineIndent("return 0L");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5970,36 +6002,42 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     // Generate struct final model getFields() method
     WriteLine();
     WriteLineIndent("// Get the struct fields values");
+    WriteLineIndent("@Suppress(\"UNUSED_PARAMETER\")");
     WriteLineIndent("fun getFields(fbeValue: " + *s->name + "): Long");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("var fbeCurrentOffset = 0L");
-    WriteLineIndent("var fbeCurrentSize = 0L");
-    WriteLineIndent("val fbeFieldSize = Size(0)");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("parent.fbeOffset = fbeCurrentOffset");
-        WriteLineIndent("fbeFieldSize.value = parent.getFields(fbeValue)");
-        WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value");
-        WriteLineIndent("fbeCurrentSize += fbeFieldSize.value");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("var fbeCurrentOffset = 0L");
+        WriteLineIndent("var fbeCurrentSize = 0L");
+        WriteLineIndent("val fbeFieldSize = Size(0)");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent(*field->name + ".fbeOffset = fbeCurrentOffset");
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent("fbeFieldSize.value = " + *field->name + ".get(fbeValue." + *field->name + ")");
-            else
-                WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(fbeFieldSize)");
+            WriteLineIndent("parent.fbeOffset = fbeCurrentOffset");
+            WriteLineIndent("fbeFieldSize.value = parent.getFields(fbeValue)");
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value");
             WriteLineIndent("fbeCurrentSize += fbeFieldSize.value");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent(*field->name + ".fbeOffset = fbeCurrentOffset");
+                if (field->array || field->vector || field->list || field->set || field->map || field->hash)
+                    WriteLineIndent("fbeFieldSize.value = " + *field->name + ".get(fbeValue." + *field->name + ")");
+                else
+                    WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(fbeFieldSize)");
+                WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value");
+                WriteLineIndent("fbeCurrentSize += fbeFieldSize.value");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("return fbeCurrentSize");
     }
-    WriteLine();
-    WriteLineIndent("return fbeCurrentSize");
+    else
+        WriteLineIndent("return 0L");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -6019,33 +6057,39 @@ void GeneratorKotlin::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     // Generate struct final model setFields() method
     WriteLine();
     WriteLineIndent("// Set the struct fields values");
+    WriteLineIndent("@Suppress(\"UNUSED_PARAMETER\")");
     WriteLineIndent("fun setFields(fbeValue: " + *s->name + "): Long");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("var fbeCurrentOffset = 0L");
-    WriteLineIndent("var fbeCurrentSize = 0L");
-    WriteLineIndent("val fbeFieldSize = Size(0)");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("parent.fbeOffset = fbeCurrentOffset");
-        WriteLineIndent("fbeFieldSize.value = parent.setFields(fbeValue)");
-        WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value");
-        WriteLineIndent("fbeCurrentSize += fbeFieldSize.value");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("var fbeCurrentOffset = 0L");
+        WriteLineIndent("var fbeCurrentSize = 0L");
+        WriteLineIndent("val fbeFieldSize = Size(0)");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent(*field->name + ".fbeOffset = fbeCurrentOffset");
-            WriteLineIndent("fbeFieldSize.value = " + *field->name + ".set(fbeValue." + *field->name + ")");
+            WriteLineIndent("parent.fbeOffset = fbeCurrentOffset");
+            WriteLineIndent("fbeFieldSize.value = parent.setFields(fbeValue)");
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value");
             WriteLineIndent("fbeCurrentSize += fbeFieldSize.value");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent(*field->name + ".fbeOffset = fbeCurrentOffset");
+                WriteLineIndent("fbeFieldSize.value = " + *field->name + ".set(fbeValue." + *field->name + ")");
+                WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value");
+                WriteLineIndent("fbeCurrentSize += fbeFieldSize.value");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("return fbeCurrentSize");
     }
-    WriteLine();
-    WriteLineIndent("return fbeCurrentSize");
+    else
+        WriteLineIndent("return 0L");
     Indent(-1);
     WriteLineIndent("}");
 

@@ -104,8 +104,8 @@ func (fm *FinalModelStructHashEx) GetValue(fbeValue *StructHashEx) (int, error) 
 // Get the struct fields values
 func (fm *FinalModelStructHashEx) GetFields(fbeValue *StructHashEx) (int, error) {
     var err error = nil
-    fbeCurrentOffset := 0
     fbeCurrentSize := 0
+    fbeCurrentOffset := 0
     fbeFieldSize := 0
 
     fm.F1.SetFBEOffset(fbeCurrentOffset)
@@ -136,8 +136,8 @@ func (fm *FinalModelStructHashEx) Set(fbeValue *StructHashEx) (int, error) {
 // Set the struct fields values
 func (fm *FinalModelStructHashEx) SetFields(fbeValue *StructHashEx) (int, error) {
     var err error = nil
-    fbeCurrentOffset := 0
     fbeCurrentSize := 0
+    fbeCurrentOffset := 0
     fbeFieldSize := 0
 
     fm.F1.SetFBEOffset(fbeCurrentOffset)

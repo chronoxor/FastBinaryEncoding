@@ -367,6 +367,139 @@ module Test
     end
   end
 
+  module EnumEmpty
+    class Enum
+      include FBE::Enum
+      def initialize(value = 0)
+        @value = value.is_a?(Enum) ? value.value : value
+      end
+
+      # Enum compare operators
+      def ==(value) @value == value.value end
+      def !=(value) @value != value.value end
+
+      # Enum equals
+      def eql?(other)
+        self == other
+      end
+
+      # Enum hash code
+      def hash
+        @value.hash
+      end
+
+      # Get enum integer value
+      def to_i
+        @value
+      end
+
+      # Get enum string value
+      def to_s
+        '<unknown>'
+      end
+
+      # Get enum JSON value
+      def __to_json_map__
+        @value
+      end
+    end
+
+    class << self
+    end
+
+    def self.new(value = 0)
+      Enum.new(value)
+    end
+
+    # Get enum value from JSON
+    def self.__from_json_map__(json)
+      Enum.new(json)
+    end
+  end
+
+  EnumEmpty.freeze
+
+  # Fast Binary Encoding EnumEmpty field model
+  class FieldModelEnumEmpty < FBE::FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the value
+    def get(defaults = EnumEmpty.new)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      EnumEmpty.new(read_int32(fbe_offset))
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_int32(fbe_offset, value.value)
+    end
+  end
+
+  # Fast Binary Encoding EnumEmpty final model
+  class FinalModelEnumEmpty < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      4
+    end
+
+    # Is the enum value valid?
+    def valid?
+      verify
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return FBE::Integer::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [EnumEmpty.new, 0]
+      end
+
+      [EnumEmpty.new(read_int32(fbe_offset)), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_int32(fbe_offset, value.value)
+      fbe_size
+    end
+  end
+
   module FlagsSimple
     class Flags
       include FBE::Flags
@@ -881,6 +1014,165 @@ module Test
       end
 
       write_uint64(fbe_offset, value.value)
+      fbe_size
+    end
+  end
+
+  module FlagsEmpty
+    class Flags
+      include FBE::Flags
+      def initialize(value = 0)
+        @value = value.is_a?(Flags) ? value.value : value
+      end
+
+      # Flags compare operators
+      def ==(flags) @value == flags.value end
+      def !=(flags) @value != flags.value end
+
+      # Flags bit operators
+      def ~
+        Flags.new(~@value)
+      end
+      def &(flags) Flags.new(@value & flags.value) end
+      def |(flags) Flags.new(@value | flags.value) end
+      def ^(flags) Flags.new(@value ^ flags.value) end
+
+      # Flags equals
+      def eql?(other)
+        self == other
+      end
+
+      # Flags hash code
+      def hash
+        @value.hash
+      end
+
+      # Is flags set?
+      def has_flags(flags)
+        ((@value & flags.value) != 0) && ((@value & flags.value) == flags.value)
+      end
+
+      # Set flags
+      def set_flags(flags)
+        @value |= flags.value
+        self
+      end
+
+      # Remove flags
+      def remove_flags(flags)
+        @value &= ~flags.value
+        self
+      end
+
+      # Get flags integer value
+      def to_i
+        @value
+      end
+
+      # Get flags string value
+      def to_s
+        result = ''
+        result
+      end
+
+      # Get flags JSON value
+      def __to_json_map__
+        @value
+      end
+    end
+
+    class << self
+    end
+
+    def self.new(value = 0)
+      Flags.new(value)
+    end
+
+    # Get flags value from JSON
+    def self.__from_json_map__(json)
+      Flags.new(json)
+    end
+  end
+
+  FlagsEmpty.freeze
+
+  # Fast Binary Encoding FlagsEmpty field model
+  class FieldModelFlagsEmpty < FBE::FieldModel
+    def initialize(buffer, offset)
+        super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the value
+    def get(defaults = FlagsEmpty.new)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return defaults
+      end
+
+      FlagsEmpty.new(read_int32(fbe_offset))
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return
+      end
+
+      write_int32(fbe_offset, value.value)
+    end
+  end
+
+  # Fast Binary Encoding FlagsEmpty final model
+  class FinalModelFlagsEmpty < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    # noinspection RubyUnusedLocalVariable
+    def fbe_allocation_size(value)
+      fbe_size
+    end
+
+    # Get the final size
+    def fbe_size
+      4
+    end
+
+    # Is the flags value valid?
+    def valid?
+      verify
+    end
+
+    # Check if the value is valid
+    def verify
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return FBE::Integer::MAX
+      end
+
+      fbe_size
+    end
+
+    # Get the value
+    def get
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return [FlagsEmpty.new, 0]
+      end
+
+      [FlagsEmpty.new(read_int32(fbe_offset)), fbe_size]
+    end
+
+    # Set the value
+    def set(value)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      write_int32(fbe_offset, value.value)
       fbe_size
     end
   end
@@ -19062,6 +19354,488 @@ module Test
     end
   end
 
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class StructEmpty
+    include Comparable
+    def initialize()
+    end
+
+    def initialize_copy(other)
+    end
+
+    # Struct shallow copy
+    def copy(other)
+      initialize_copy(other)
+      self
+    end
+
+    # Struct deep clone
+    def clone
+      data = Marshal.dump(self)
+      clone = Marshal.load(data)
+      clone.freeze if frozen?
+      clone
+    end
+
+    # Struct compare operators
+    def <=>(other)
+      return nil unless other.is_a?(StructEmpty)
+
+      # noinspection RubyUnusedLocalVariable
+      result = 0
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    # Struct equals
+    def eql?(other)
+      self == other
+    end
+
+    # Struct keys
+    def key
+      result = []
+      # noinspection RubyUnnecessaryReturnValue
+      result
+    end
+
+    # Struct hash code
+    def hash
+      key.hash
+    end
+
+    # Get struct string value
+    def to_s
+      result = ''
+      result << 'StructEmpty('
+      result << ')'
+      result
+    end
+
+    # Dump the struct
+    def marshal_dump
+      # Serialize the struct to the FBE stream
+      writer = StructEmptyModel.new(FBE::WriteBuffer.new)
+      writer.serialize(self)
+      writer.buffer
+    end
+
+    # Load the struct
+    def marshal_load(data)
+      # Deserialize the struct from the FBE stream
+      reader = StructEmptyModel.new(FBE::ReadBuffer.new)
+      reader.attach_buffer(data)
+      initialize_copy(reader.deserialize[0])
+    end
+
+    # Get struct JSON value
+    def to_json
+      JSON.generate(__to_json_map__)
+    end
+
+    # Get struct JSON map (internal method)
+    def __to_json_map__
+      result = {}
+      result
+    end
+
+    # Get struct from JSON
+    def self.from_json(json)
+      __from_json_map__(JSON.parse(json))
+    end
+
+    # Get struct map from JSON (internal method)
+    def self.__from_json_map__(json)
+      result = StructEmpty.new
+      result
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FieldModelStructEmpty < FBE::FieldModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the field size
+    def fbe_size
+      4
+    end
+
+    # Get the field body size
+    def fbe_body
+      4 + 4 \
+    end
+
+    # Get the field extra size
+    def fbe_extra
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4) > @_buffer.size)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+
+      fbe_result = fbe_body \
+
+      @_buffer.unshift(fbe_struct_offset)
+
+      fbe_result
+    end
+
+    # Get the field type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 143
+
+    # Is the struct value valid?
+    def valid?
+      verify
+    end
+
+    # Check if the struct value is valid
+    def verify(fbe_verify_type = true)
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return true
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return false
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return false
+      end
+
+      fbe_struct_type = read_uint32(fbe_struct_offset + 4)
+      if fbe_verify_type && (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_result = verify_fields(fbe_struct_size)
+      @_buffer.unshift(fbe_struct_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields(fbe_struct_size)
+      true
+    end
+
+    # Get the struct value (begin phase)
+    def get_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_offset = read_uint32(fbe_offset)
+      if (fbe_struct_offset == 0) || ((@_buffer.offset + fbe_struct_offset + 4 + 4) > @_buffer.size)
+        return 0
+      end
+
+      fbe_struct_size = read_uint32(fbe_struct_offset)
+      if fbe_struct_size < (4 + 4)
+        return 0
+      end
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Get the struct value (end phase)
+    def get_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructEmpty.new)
+      fbe_begin = get_begin
+      if fbe_begin == 0
+        return fbe_value
+      end
+
+      fbe_struct_size = read_uint32(0)
+      get_fields(fbe_value, fbe_struct_size)
+      get_end(fbe_begin)
+      fbe_value
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value, fbe_struct_size)
+    end
+
+    # Set the struct value (begin phase)
+    def set_begin
+      if (@_buffer.offset + fbe_offset + fbe_size) > @_buffer.size
+        return 0
+      end
+
+      fbe_struct_size = fbe_body
+      fbe_struct_offset = @_buffer.allocate(fbe_struct_size) - @_buffer.offset
+      if (fbe_struct_offset <= 0) || ((@_buffer.offset + fbe_struct_offset + fbe_struct_size) > @_buffer.size)
+        return 0
+      end
+
+      write_uint32(fbe_offset, fbe_struct_offset)
+      write_uint32(fbe_struct_offset, fbe_struct_size)
+      write_uint32(fbe_struct_offset + 4, fbe_type)
+
+      @_buffer.shift(fbe_struct_offset)
+      fbe_struct_offset
+    end
+
+    # Set the struct value (end phase)
+    def set_end(fbe_begin)
+      @_buffer.unshift(fbe_begin)
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      fbe_begin = set_begin
+      if fbe_begin == 0
+        return
+      end
+
+      set_fields(fbe_value)
+      set_end(fbe_begin)
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+    end
+  end
+
+  # Fast Binary Encoding StructEmpty model
+  class StructEmptyModel < FBE::Model
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer)
+      @_model = FieldModelStructEmpty.new(self.buffer, 4)
+    end
+
+    def model
+      @_model
+    end
+
+    # Get the model size
+    def fbe_size
+      @_model.fbe_size + @_model.fbe_extra
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FieldModelStructEmpty::TYPE
+
+    # Is the struct value valid?
+    def valid?
+      verify
+    end
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        return false
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        return false
+      end
+
+      @_model.verify
+    end
+
+    # Create a new model (begin phase)
+    def create_begin
+      buffer.allocate(4 + @_model.fbe_size)
+    end
+
+    # Create a new model (end phase)
+    def create_end(fbe_begin)
+      fbe_end = buffer.size
+      fbe_full_size = fbe_end - fbe_begin
+      write_uint32(@_model.fbe_offset - 4, fbe_full_size)
+      fbe_full_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_begin = create_begin
+      @_model.set(value)
+      create_end(fbe_begin)
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructEmpty.new)
+      if (buffer.offset + @_model.fbe_offset - 4) > buffer.size
+        [StructEmpty.new, 0]
+      end
+
+      fbe_full_size = read_uint32(@_model.fbe_offset - 4)
+      if fbe_full_size < @_model.fbe_size
+        [StructEmpty.new, 0]
+      end
+
+      @_model.get(value)
+      [value, fbe_full_size]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
+  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
+  class FinalModelStructEmpty < FBE::FinalModel
+    def initialize(buffer, offset)
+      super(buffer, offset)
+    end
+
+    # Get the allocation size
+    def fbe_allocation_size(fbe_value)
+      0 \
+    end
+
+    # Get the final type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = 143
+
+    # Is the struct value valid?
+    def valid?
+      verify
+    end
+
+    # Check if the struct value is valid
+    def verify
+      @_buffer.shift(fbe_offset)
+      fbe_result = verify_fields
+      @_buffer.unshift(fbe_offset)
+      fbe_result
+    end
+
+    # Check if the struct fields are valid
+    def verify_fields
+      0
+    end
+
+    # Get the struct value
+    def get(fbe_value = StructEmpty.new)
+      @_buffer.shift(fbe_offset)
+      fbe_size = get_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      [fbe_value, fbe_size]
+    end
+
+    # Get the struct fields values
+    def get_fields(fbe_value)
+      0
+    end
+
+    # Set the struct value
+    def set(fbe_value)
+      @_buffer.shift(fbe_offset)
+      fbe_size = set_fields(fbe_value)
+      @_buffer.unshift(fbe_offset)
+      fbe_size
+    end
+
+    # Set the struct fields values
+    def set_fields(fbe_value)
+      0
+    end
+  end
+
+  # Fast Binary Encoding StructEmpty final model
+  class StructEmptyFinalModel < FBE::Model
+    def initialize(buffer = FBE::WriteBuffer.new)
+      super(buffer)
+      @_model = FinalModelStructEmpty.new(self.buffer, 8)
+    end
+
+    # Get the model type
+    def fbe_type
+      TYPE
+    end
+
+    TYPE = FinalModelStructEmpty::TYPE
+
+    # Is the struct value valid?
+    def valid?
+      verify
+    end
+
+    # Check if the struct value is valid
+    def verify
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        return false
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) or (fbe_struct_type != fbe_type)
+        return false
+      end
+
+      (8 + @_model.verify) == fbe_struct_size
+    end
+
+    # Serialize the struct value
+    def serialize(value)
+      fbe_initial_size = buffer.size
+
+      fbe_struct_type = fbe_type
+      fbe_struct_size = 8 + @_model.fbe_allocation_size(value)
+      fbe_struct_offset = buffer.allocate(fbe_struct_size) - buffer.offset
+      if (buffer.offset + fbe_struct_offset + fbe_struct_size) > buffer.size
+        return 0
+      end
+
+      fbe_struct_size = 8 + @_model.set(value)
+      buffer.resize(fbe_initial_size + fbe_struct_size)
+
+      write_uint32(@_model.fbe_offset - 8, fbe_struct_size)
+      write_uint32(@_model.fbe_offset - 4, fbe_struct_type)
+
+      fbe_struct_size
+    end
+
+    # Deserialize the struct value
+    def deserialize(value = StructEmpty.new)
+      if (buffer.offset + @_model.fbe_offset) > buffer.size
+        [StructEmpty.new, 0]
+      end
+
+      fbe_struct_size = read_uint32(@_model.fbe_offset - 8)
+      fbe_struct_type = read_uint32(@_model.fbe_offset - 4)
+      if (fbe_struct_size <= 0) || (fbe_struct_type != fbe_type)
+        [StructEmpty.new, 8]
+      end
+
+      fbe_result = @_model.get(value)
+      [fbe_result[0], (8 + fbe_result[1])]
+    end
+
+    # Move to the next struct value
+    def next(prev)
+      @_model.fbe_shift(prev)
+    end
+  end
+
   # Fast Binary Encoding Test sender
   # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
   class Sender < FBE::Sender
@@ -19079,6 +19853,7 @@ module Test
       @_structmap_model = StructMapModel.new(self.buffer)
       @_structhash_model = StructHashModel.new(self.buffer)
       @_structhashex_model = StructHashExModel.new(self.buffer)
+      @_structempty_model = StructEmptyModel.new(self.buffer)
     end
 
     # Imported senders
@@ -19133,6 +19908,10 @@ module Test
       @_structhashex_model
     end
 
+    def structempty_model
+      @_structempty_model
+    end
+
     # Send methods
 
     def send(value)
@@ -19168,6 +19947,9 @@ module Test
       end
       if value.is_a?(StructHashEx)
         return send_structhashex(value)
+      end
+      if value.is_a?(StructEmpty)
+        return send_structempty(value)
       end
       result = @_proto_sender.send(value)
       if result > 0
@@ -19341,6 +20123,22 @@ module Test
       serialized = structhashex_model.serialize(value)
       raise RuntimeError, "Test.StructHashEx serialization failed!" if serialized <= 0
       raise RuntimeError, "Test.StructHashEx validation failed!" unless structhashex_model.verify
+
+      # Log the value
+      if logging?
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
+    def send_structempty(value)
+      # Serialize the value into the FBE stream
+      serialized = structempty_model.serialize(value)
+      raise RuntimeError, "Test.StructEmpty serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructEmpty validation failed!" unless structempty_model.verify
 
       # Log the value
       if logging?
@@ -19388,6 +20186,8 @@ module Test
       @_structhash_model = StructHashModel.new
       @_structhashex_value = StructHashEx.new
       @_structhashex_model = StructHashExModel.new
+      @_structempty_value = StructEmpty.new
+      @_structempty_model = StructEmptyModel.new
     end
 
     # Imported receivers
@@ -19446,6 +20246,10 @@ module Test
 
     # noinspection RubyUnusedLocalVariable
     def on_receive_structhashex(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structempty(value)
     end
 
     public
@@ -19672,6 +20476,26 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structhashex(@_structhashex_value)
         true
+      when StructEmptyModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structempty_model.attach_buffer(buffer, offset)
+        unless @_structempty_model.verify
+          return false
+        end
+        _, deserialized = @_structempty_model.deserialize(@_structempty_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging?
+          message = @_structempty_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structempty(@_structempty_value)
+        true
       else
         # Do nothing here...
       end
@@ -19701,6 +20525,7 @@ module Test
       @_structmap_model = StructMapModel.new
       @_structhash_model = StructHashModel.new
       @_structhashex_model = StructHashExModel.new
+      @_structempty_model = StructEmptyModel.new
     end
 
     # Imported proxy
@@ -19759,6 +20584,10 @@ module Test
 
     # noinspection RubyUnusedLocalVariable
     def on_proxy_structhashex(model, type, buffer, offset, size)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_proxy_structempty(model, type, buffer, offset, size)
     end
 
     public
@@ -19875,6 +20704,16 @@ module Test
         # Call proxy handler
         on_proxy_structhashex(@_structhashex_model, type, buffer, offset, size)
         true
+      when StructEmptyModel::TYPE
+        # Attach the FBE stream to the proxy model
+        @_structempty_model.attach_buffer(buffer, offset)
+        unless @_structempty_model.verify
+          return false
+        end
+
+        # Call proxy handler
+        on_proxy_structempty(@_structempty_model, type, buffer, offset, size)
+        true
       else
         # Do nothing here...
       end
@@ -19904,6 +20743,7 @@ module Test
       @_structmap_model = StructMapFinalModel.new(self.buffer)
       @_structhash_model = StructHashFinalModel.new(self.buffer)
       @_structhashex_model = StructHashExFinalModel.new(self.buffer)
+      @_structempty_model = StructEmptyFinalModel.new(self.buffer)
     end
 
     # Imported senders
@@ -19958,6 +20798,10 @@ module Test
       @_structhashex_model
     end
 
+    def structempty_model
+      @_structempty_model
+    end
+
     # Send methods
 
     def send(value)
@@ -19993,6 +20837,9 @@ module Test
       end
       if value.is_a?(StructHashEx)
         return send_structhashex(value)
+      end
+      if value.is_a?(StructEmpty)
+        return send_structempty(value)
       end
       result = @_proto_sender.send(value)
       if result > 0
@@ -20177,6 +21024,22 @@ module Test
       send_serialized(serialized)
     end
 
+    def send_structempty(value)
+      # Serialize the value into the FBE stream
+      serialized = structempty_model.serialize(value)
+      raise RuntimeError, "Test.StructEmpty serialization failed!" if serialized <= 0
+      raise RuntimeError, "Test.StructEmpty validation failed!" unless structempty_model.verify
+
+      # Log the value
+      if logging?
+        message = value.to_s
+        on_send_log(message)
+      end
+
+      # Send the serialized value
+      send_serialized(serialized)
+    end
+
     protected
 
     # Send message handler
@@ -20213,6 +21076,8 @@ module Test
       @_structhash_model = StructHashFinalModel.new
       @_structhashex_value = StructHashEx.new
       @_structhashex_model = StructHashExFinalModel.new
+      @_structempty_value = StructEmpty.new
+      @_structempty_model = StructEmptyFinalModel.new
     end
 
     # Imported receivers
@@ -20271,6 +21136,10 @@ module Test
 
     # noinspection RubyUnusedLocalVariable
     def on_receive_structhashex(value)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_receive_structempty(value)
     end
 
     public
@@ -20497,6 +21366,26 @@ module Test
         # Call receive handler with deserialized value
         on_receive_structhashex(@_structhashex_value)
         true
+      when StructEmptyFinalModel::TYPE
+        # Deserialize the value from the FBE stream
+        @_structempty_model.attach_buffer(buffer, offset)
+        unless @_structempty_model.verify
+          return false
+        end
+        _, deserialized = @_structempty_model.deserialize(@_structempty_value)
+        if deserialized <= 0
+          return false
+        end
+
+        # Log the value
+        if logging?
+          message = @_structempty_value.to_s
+          on_receive_log(message)
+        end
+
+        # Call receive handler with deserialized value
+        on_receive_structempty(@_structempty_value)
+        true
       else
         # Do nothing here...
       end
@@ -20526,6 +21415,7 @@ module Test
       @_structmap_model = StructMapFinalModel.new
       @_structhash_model = StructHashFinalModel.new
       @_structhashex_model = StructHashExFinalModel.new
+      @_structempty_model = StructEmptyFinalModel.new
     end
 
     # Imported proxy
@@ -20584,6 +21474,10 @@ module Test
 
     # noinspection RubyUnusedLocalVariable
     def on_proxy_structhashex(model, type, buffer, offset, size)
+    end
+
+    # noinspection RubyUnusedLocalVariable
+    def on_proxy_structempty(model, type, buffer, offset, size)
     end
 
     public
@@ -20699,6 +21593,16 @@ module Test
 
         # Call proxy handler
         on_proxy_structhashex(@_structhashex_model, type, buffer, offset, size)
+        true
+      when StructEmptyFinalModel::TYPE
+        # Attach the FBE stream to the proxy model
+        @_structempty_model.attach_buffer(buffer, offset)
+        unless @_structempty_model.verify
+          return false
+        end
+
+        # Call proxy handler
+        on_proxy_structempty(@_structempty_model, type, buffer, offset, size)
         true
       else
         # Do nothing here...

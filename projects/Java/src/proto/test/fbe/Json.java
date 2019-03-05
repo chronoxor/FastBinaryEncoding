@@ -40,8 +40,10 @@ public final class Json
         proto.fbe.Json.register(builder);
         builder.registerTypeAdapter(EnumSimple.class, new EnumSimpleJson());
         builder.registerTypeAdapter(EnumTyped.class, new EnumTypedJson());
+        builder.registerTypeAdapter(EnumEmpty.class, new EnumEmptyJson());
         builder.registerTypeAdapter(FlagsSimple.class, new FlagsSimpleJson());
         builder.registerTypeAdapter(FlagsTyped.class, new FlagsTypedJson());
+        builder.registerTypeAdapter(FlagsEmpty.class, new FlagsEmptyJson());
         return builder;
     }
 }

@@ -30,6 +30,11 @@ enum EnumTyped : char
     ENUM_VALUE_5 = ENUM_VALUE_3;
 }
 
+// Empty enum declaration
+enum EnumEmpty
+{
+}
+
 // Simple flags declaration
 flags FlagsSimple
 {
@@ -54,6 +59,11 @@ flags FlagsTyped : uint64
     FLAG_VALUE_7 = 0x40;
     FLAG_VALUE_8 = FLAG_VALUE_7;
     FLAG_VALUE_9 = FLAG_VALUE_2 | FLAG_VALUE_4 | FLAG_VALUE_6;
+}
+
+// Empty flags declaration
+flags FlagsEmpty
+{
 }
 
 // Simple struct declaration
@@ -293,4 +303,9 @@ struct StructHashEx
 {
     StructNested{StructSimple} f1;
     StructNested?{StructSimple} f2;
+}
+
+// Empty struct declaration
+struct StructEmpty
+{
 }

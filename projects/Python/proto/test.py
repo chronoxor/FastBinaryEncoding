@@ -231,6 +231,96 @@ class FinalModelEnumTyped(fbe.FinalModel):
         return self.fbe_size
 
 
+class EnumEmpty(enum.IntEnum, metaclass=fbe.DefaultEnumMeta):
+    unknown = ~0
+
+    __slots__ = ()
+
+    def __format__(self, format_spec):
+        return self.__str__()
+
+    def __str__(self):
+        return "<unknown>"
+
+    @classmethod
+    def _missing_(cls, value):
+        return EnumEmpty.unknown
+
+    @staticmethod
+    def __from_json__(value):
+        if value is None:
+            return None
+        return EnumEmpty(value)
+
+
+# Fast Binary Encoding EnumEmpty field model
+class FieldModelEnumEmpty(fbe.FieldModel):
+    def __init__(self, buffer, offset):
+        super().__init__(buffer, offset)
+
+    # Get the field size
+    @property
+    def fbe_size(self):
+        return 4
+
+    # Get the value
+    def get(self, defaults=None):
+        if defaults is None:
+            defaults = EnumEmpty()
+
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return defaults
+
+        return EnumEmpty(self.read_int32(self.fbe_offset))
+
+    # Set the value
+    def set(self, value):
+        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return
+
+        self.write_int32(self.fbe_offset, value)
+
+
+# Fast Binary Encoding EnumEmpty final model
+class FinalModelEnumEmpty(fbe.FinalModel):
+    def __init__(self, buffer, offset):
+        super().__init__(buffer, offset)
+
+    # Get the allocation size
+    # noinspection PyUnusedLocal
+    def fbe_allocation_size(self, value):
+        return self.fbe_size
+
+    # Get the final size
+    @property
+    def fbe_size(self):
+        return 4
+
+    # Check if the value is valid
+    def verify(self):
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return sys.maxsize
+
+        return self.fbe_size
+
+    # Get the value
+    def get(self):
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return EnumEmpty(), 0
+
+        return EnumEmpty(self.read_int32(self.fbe_offset)), self.fbe_size
+
+    # Set the value
+    def set(self, value):
+        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return 0
+
+        self.write_int32(self.fbe_offset, value)
+        return self.fbe_size
+
+
 class FlagsSimple(enum.IntFlag, metaclass=fbe.DefaultEnumMeta):
     FLAG_VALUE_0 = int(0x0)
     FLAG_VALUE_1 = int(0x1)
@@ -558,6 +648,106 @@ class FinalModelFlagsTyped(fbe.FinalModel):
             return 0
 
         self.write_uint64(self.fbe_offset, value)
+        return self.fbe_size
+
+
+class FlagsEmpty(enum.IntFlag, metaclass=fbe.DefaultEnumMeta):
+    __slots__ = ()
+
+    # Is flags set?
+    def has_flags(self, flags):
+        return ((self.value & flags.value) != 0) and ((self.value & flags.value) == flags.value)
+
+    # Set flags
+    def set_flags(self, flags):
+        self.value |= flags.value
+        return self
+
+    # Remove flags
+    def remove_flags(self, flags):
+        self.value &= ~flags.value
+        return self
+
+    def __format__(self, format_spec):
+        return self.__str__()
+
+    def __str__(self):
+        sb = list()
+        first = True
+        return "".join(sb)
+
+    @staticmethod
+    def __from_json__(value):
+        if value is None:
+            return None
+        return FlagsEmpty(value)
+
+
+# Fast Binary Encoding FlagsEmpty field model
+class FieldModelFlagsEmpty(fbe.FieldModel):
+    def __init__(self, buffer, offset):
+        super().__init__(buffer, offset)
+
+    # Get the field size
+    @property
+    def fbe_size(self):
+        return 4
+
+    # Get the value
+    def get(self, defaults=None):
+        if defaults is None:
+            defaults = FlagsEmpty()
+
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return defaults
+
+        return FlagsEmpty(self.read_int32(self.fbe_offset))
+
+    # Set the value
+    def set(self, value):
+        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return
+
+        self.write_int32(self.fbe_offset, value)
+
+
+# Fast Binary Encoding FlagsEmpty final model
+class FinalModelFlagsEmpty(fbe.FinalModel):
+    def __init__(self, buffer, offset):
+        super().__init__(buffer, offset)
+
+    # Get the allocation size
+    # noinspection PyUnusedLocal
+    def fbe_allocation_size(self, value):
+        return self.fbe_size
+
+    # Get the final size
+    @property
+    def fbe_size(self):
+        return 4
+
+    # Check if the value is valid
+    def verify(self):
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return sys.maxsize
+
+        return self.fbe_size
+
+    # Get the value
+    def get(self):
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return FlagsEmpty(), 0
+
+        return FlagsEmpty(self.read_int32(self.fbe_offset)), self.fbe_size
+
+    # Set the value
+    def set(self, value):
+        assert ((self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size), "Model is broken!"
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return 0
+
+        self.write_int32(self.fbe_offset, value)
         return self.fbe_size
 
 
@@ -15304,9 +15494,420 @@ class StructHashExFinalModel(fbe.Model):
         self._model.fbe_shift(prev)
 
 
+@functools.total_ordering
+class StructEmpty(object):
+    def __init__(self):
+        pass
+
+    # Struct shallow copy
+    def copy(self, other):
+        return self
+
+    # Struct deep clone
+    def clone(self):
+        # Serialize the struct to the FBE stream
+        writer = StructEmptyModel(fbe.WriteBuffer())
+        writer.serialize(self)
+
+        # Deserialize the struct from the FBE stream
+        reader = StructEmptyModel(fbe.ReadBuffer())
+        reader.attach_buffer(writer.buffer)
+        return reader.deserialize()[0]
+
+    def __eq__(self, other):
+        if not isinstance(self, other.__class__):
+            return NotImplemented
+        return True
+
+    def __lt__(self, other):
+        if not isinstance(self, other.__class__):
+            return NotImplemented
+        return False
+
+    @property
+    def __key__(self):
+        return ()
+
+    def __hash__(self):
+        return hash(self.__key__)
+
+    def __format__(self, format_spec):
+        return self.__str__()
+
+    def __str__(self):
+        sb = list()
+        sb.append("StructEmpty(")
+        sb.append(")")
+        return "".join(sb)
+
+    # Get struct JSON value
+    def to_json(self):
+        return json.dumps(self.__to_json__(), cls=fbe.JSONEncoder, separators=(',', ':'))
+
+    def __to_json__(self):
+        result = dict()
+        result.update(dict(
+        ))
+        return result
+
+    # Create struct from JSON value
+    @staticmethod
+    def from_json(document):
+        return StructEmpty.__from_json__(json.loads(document))
+
+    @staticmethod
+    def __from_json__(fields):
+        if fields is None:
+            return None
+        return StructEmpty(
+        )
+
+
+class FieldModelStructEmpty(fbe.FieldModel):
+    def __init__(self, buffer, offset):
+        super().__init__(buffer, offset)
+
+    # Get the field size
+    @property
+    def fbe_size(self):
+        return 4
+
+    # Get the field body size
+    @property
+    def fbe_body(self):
+        fbe_result = 4 + 4 \
+
+        return fbe_result
+
+    # Get the field extra size
+    @property
+    def fbe_extra(self):
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return 0
+
+        fbe_struct_offset = self.read_uint32(self.fbe_offset)
+        if (fbe_struct_offset == 0) or ((self._buffer.offset + fbe_struct_offset + 4) > self._buffer.size):
+            return 0
+
+        self._buffer.shift(fbe_struct_offset)
+
+        fbe_result = self.fbe_body \
+
+        self._buffer.unshift(fbe_struct_offset)
+
+        return fbe_result
+
+    # Get the field type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 143
+
+    # Check if the struct value is valid
+    def verify(self, fbe_verify_type=True):
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return True
+
+        fbe_struct_offset = self.read_uint32(self.fbe_offset)
+        if (fbe_struct_offset == 0) or ((self._buffer.offset + fbe_struct_offset + 4 + 4) > self._buffer.size):
+            return False
+
+        fbe_struct_size = self.read_uint32(fbe_struct_offset)
+        if fbe_struct_size < (4 + 4):
+            return False
+
+        fbe_struct_type = self.read_uint32(fbe_struct_offset + 4)
+        if fbe_verify_type and (fbe_struct_type != self.fbe_type):
+            return False
+
+        self._buffer.shift(fbe_struct_offset)
+        fbe_result = self.verify_fields(fbe_struct_size)
+        self._buffer.unshift(fbe_struct_offset)
+        return fbe_result
+
+    # Check if the struct fields are valid
+    def verify_fields(self, fbe_struct_size):
+        return True
+
+    # Get the struct value (begin phase)
+    def get_begin(self):
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return 0
+
+        fbe_struct_offset = self.read_uint32(self.fbe_offset)
+        assert (fbe_struct_offset > 0) and ((self._buffer.offset + fbe_struct_offset + 4 + 4) <= self._buffer.size), "Model is broken!"
+        if (fbe_struct_offset == 0) or ((self._buffer.offset + fbe_struct_offset + 4 + 4) > self._buffer.size):
+            return 0
+
+        fbe_struct_size = self.read_uint32(fbe_struct_offset)
+        assert (fbe_struct_size >= (4 + 4)), "Model is broken!"
+        if fbe_struct_size < (4 + 4):
+            return 0
+
+        self._buffer.shift(fbe_struct_offset)
+        return fbe_struct_offset
+
+    # Get the struct value (end phase)
+    def get_end(self, fbe_begin):
+        self._buffer.unshift(fbe_begin)
+
+    # Get the struct value
+    def get(self, fbe_value=None):
+        if fbe_value is None:
+            fbe_value = StructEmpty()
+
+        fbe_begin = self.get_begin()
+        if fbe_begin == 0:
+            return fbe_value
+
+        fbe_struct_size = self.read_uint32(0)
+        self.get_fields(fbe_value, fbe_struct_size)
+        self.get_end(fbe_begin)
+        return fbe_value
+
+    # Get the struct fields values
+    def get_fields(self, fbe_value, fbe_struct_size):
+        pass
+
+    # Set the struct value (begin phase)
+    def set_begin(self):
+        assert (self._buffer.offset + self.fbe_offset + self.fbe_size) <= self._buffer.size, "Model is broken!"
+        if (self._buffer.offset + self.fbe_offset + self.fbe_size) > self._buffer.size:
+            return 0
+
+        fbe_struct_size = self.fbe_body
+        fbe_struct_offset = self._buffer.allocate(fbe_struct_size) - self._buffer.offset
+        assert (fbe_struct_offset > 0) and ((self._buffer.offset + fbe_struct_offset + fbe_struct_size) <= self._buffer.size), "Model is broken!"
+        if (fbe_struct_offset <= 0) or ((self._buffer.offset + fbe_struct_offset + fbe_struct_size) > self._buffer.size):
+            return 0
+
+        self.write_uint32(self.fbe_offset, fbe_struct_offset)
+        self.write_uint32(fbe_struct_offset, fbe_struct_size)
+        self.write_uint32(fbe_struct_offset + 4, self.fbe_type)
+
+        self._buffer.shift(fbe_struct_offset)
+        return fbe_struct_offset
+
+    # Set the struct value (end phase)
+    def set_end(self, fbe_begin):
+        self._buffer.unshift(fbe_begin)
+
+    # Set the struct value
+    def set(self, fbe_value):
+        fbe_begin = self.set_begin()
+        if fbe_begin == 0:
+            return
+
+        self.set_fields(fbe_value)
+        self.set_end(fbe_begin)
+
+    # Set the struct fields values
+    def set_fields(self, fbe_value):
+        pass
+
+
+# Fast Binary Encoding StructEmpty model
+class StructEmptyModel(fbe.Model):
+    __slots__ = "_model",
+
+    def __init__(self, buffer=None):
+        super().__init__(buffer)
+        self._model = FieldModelStructEmpty(self.buffer, 4)
+
+    @property
+    def model(self):
+        return self._model
+
+    # Get the model size
+    def fbe_size(self):
+        return self._model.fbe_size + self._model.fbe_extra
+
+    # Get the model type
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = FieldModelStructEmpty.TYPE
+
+    # Check if the struct value is valid
+    def verify(self):
+        if (self.buffer.offset + self._model.fbe_offset - 4) > self.buffer.size:
+            return False
+
+        fbe_full_size = self.read_uint32(self._model.fbe_offset - 4)
+        if fbe_full_size < self._model.fbe_size:
+            return False
+
+        return self._model.verify()
+
+    # Create a new model (begin phase)
+    def create_begin(self):
+        fbe_begin = self.buffer.allocate(4 + self._model.fbe_size)
+        return fbe_begin
+
+    # Create a new model (end phase)
+    def create_end(self, fbe_begin):
+        fbe_end = self.buffer.size
+        fbe_full_size = fbe_end - fbe_begin
+        self.write_uint32(self._model.fbe_offset - 4, fbe_full_size)
+        return fbe_full_size
+
+    # Serialize the struct value
+    def serialize(self, value):
+        fbe_begin = self.create_begin()
+        self._model.set(value)
+        fbe_full_size = self.create_end(fbe_begin)
+        return fbe_full_size
+
+    # Deserialize the struct value
+    def deserialize(self, value=None):
+        if value is None:
+            value = StructEmpty()
+
+        if (self.buffer.offset + self._model.fbe_offset - 4) > self.buffer.size:
+            value = StructEmpty()
+            return value, 0
+
+        fbe_full_size = self.read_uint32(self._model.fbe_offset - 4)
+        assert (fbe_full_size >= self._model.fbe_size), "Model is broken!"
+        if fbe_full_size < self._model.fbe_size:
+            value = StructEmpty()
+            return value, 0
+
+        self._model.get(value)
+        return value, fbe_full_size
+
+    # Move to the next struct value
+    def next(self, prev):
+        self._model.fbe_shift(prev)
+
+
+class FinalModelStructEmpty(fbe.FinalModel):
+    def __init__(self, buffer, offset):
+        super().__init__(buffer, offset)
+
+    # Get the allocation size
+    def fbe_allocation_size(self, fbe_value):
+        fbe_result = 0 \
+
+        return fbe_result
+
+    # Get the final type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = 143
+
+    # Check if the struct value is valid
+    def verify(self):
+        self._buffer.shift(self.fbe_offset)
+        fbe_result = self.verify_fields()
+        self._buffer.unshift(self.fbe_offset)
+        return fbe_result
+
+    # Check if the struct fields are valid
+    def verify_fields(self):
+        return 0
+
+    # Get the struct value
+    def get(self, fbe_value=None):
+        if fbe_value is None:
+            fbe_value = StructEmpty()
+
+        self._buffer.shift(self.fbe_offset)
+        fbe_size = self.get_fields(fbe_value)
+        self._buffer.unshift(self.fbe_offset)
+        return fbe_value, fbe_size
+
+    # Get the struct fields values
+    def get_fields(self, fbe_value):
+        return 0
+
+    # Set the struct value
+    def set(self, fbe_value):
+        self._buffer.shift(self.fbe_offset)
+        fbe_size = self.set_fields(fbe_value)
+        self._buffer.unshift(self.fbe_offset)
+        return fbe_size
+
+    # Set the struct fields values
+    def set_fields(self, fbe_value):
+        return 0
+
+
+# Fast Binary Encoding StructEmpty final model
+class StructEmptyFinalModel(fbe.Model):
+    __slots__ = "_model",
+
+    def __init__(self, buffer=None):
+        super().__init__(buffer)
+        self._model = FinalModelStructEmpty(self.buffer, 8)
+
+    # Get the model type
+    @property
+    def fbe_type(self):
+        return self.TYPE
+
+    TYPE = FinalModelStructEmpty.TYPE
+
+    # Check if the struct value is valid
+    def verify(self):
+        if (self.buffer.offset + self._model.fbe_offset) > self.buffer.size:
+            return False
+
+        fbe_struct_size = self.read_uint32(self._model.fbe_offset - 8)
+        fbe_struct_type = self.read_uint32(self._model.fbe_offset - 4)
+        if (fbe_struct_size <= 0) or (fbe_struct_type != self.fbe_type):
+            return False
+
+        return (8 + self._model.verify()) == fbe_struct_size
+
+    # Serialize the struct value
+    def serialize(self, value):
+        fbe_initial_size = self.buffer.size
+
+        fbe_struct_type = self.fbe_type
+        fbe_struct_size = 8 + self._model.fbe_allocation_size(value)
+        fbe_struct_offset = self.buffer.allocate(fbe_struct_size) - self.buffer.offset
+        assert ((self.buffer.offset + fbe_struct_offset + fbe_struct_size) <= self.buffer.size), "Model is broken!"
+        if (self.buffer.offset + fbe_struct_offset + fbe_struct_size) > self.buffer.size:
+            return 0
+
+        fbe_struct_size = 8 + self._model.set(value)
+        self.buffer.resize(fbe_initial_size + fbe_struct_size)
+
+        self.write_uint32(self._model.fbe_offset - 8, fbe_struct_size)
+        self.write_uint32(self._model.fbe_offset - 4, fbe_struct_type)
+
+        return fbe_struct_size
+
+    # Deserialize the struct value
+    def deserialize(self, value=None):
+        if value is None:
+            value = StructEmpty()
+
+        assert ((self.buffer.offset + self._model.fbe_offset) <= self.buffer.size), "Model is broken!"
+        if (self.buffer.offset + self._model.fbe_offset) > self.buffer.size:
+            return StructEmpty(), 0
+
+        fbe_struct_size = self.read_uint32(self._model.fbe_offset - 8)
+        fbe_struct_type = self.read_uint32(self._model.fbe_offset - 4)
+        assert ((fbe_struct_size > 0) and (fbe_struct_type == self.fbe_type)), "Model is broken!"
+        if (fbe_struct_size <= 0) or (fbe_struct_type != self.fbe_type):
+            return StructEmpty(), 8
+
+        fbe_result = self._model.get(value)
+        return fbe_result[0], (8 + fbe_result[1])
+
+    # Move to the next struct value
+    def next(self, prev):
+        self._model.fbe_shift(prev)
+
+
 # Fast Binary Encoding test sender
 class Sender(fbe.Sender):
-    __slots__ = "_proto_sender", "_structsimple_model", "_structoptional_model", "_structnested_model", "_structbytes_model", "_structarray_model", "_structvector_model", "_structlist_model", "_structset_model", "_structmap_model", "_structhash_model", "_structhashex_model", 
+    __slots__ = "_proto_sender", "_structsimple_model", "_structoptional_model", "_structnested_model", "_structbytes_model", "_structarray_model", "_structvector_model", "_structlist_model", "_structset_model", "_structmap_model", "_structhash_model", "_structhashex_model", "_structempty_model", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, False)
@@ -15322,6 +15923,7 @@ class Sender(fbe.Sender):
         self._structmap_model = StructMapModel(self.buffer)
         self._structhash_model = StructHashModel(self.buffer)
         self._structhashex_model = StructHashExModel(self.buffer)
+        self._structempty_model = StructEmptyModel(self.buffer)
 
     # Imported senders
 
@@ -15375,6 +15977,10 @@ class Sender(fbe.Sender):
     def structhashex_model(self):
         return self._structhashex_model
 
+    @property
+    def structempty_model(self):
+        return self._structempty_model
+
     # Send methods
 
     def send(self, value):
@@ -15400,6 +16006,8 @@ class Sender(fbe.Sender):
             return self.send_structhash(value)
         if isinstance(value, StructHashEx):
             return self.send_structhashex(value)
+        if isinstance(value, StructEmpty):
+            return self.send_structempty(value)
         result = self._proto_sender.send(value)
         if result > 0:
             return result
@@ -15559,6 +16167,20 @@ class Sender(fbe.Sender):
         # Send the serialized value
         return self.send_serialized(serialized)
 
+    def send_structempty(self, value):
+        # Serialize the value into the FBE stream
+        serialized = self.structempty_model.serialize(value)
+        assert (serialized > 0), "test.StructEmpty serialization failed!"
+        assert self.structempty_model.verify(), "test.StructEmpty validation failed!"
+
+        # Log the value
+        if self.logging:
+            message = str(value)
+            self.on_send_log(message)
+
+        # Send the serialized value
+        return self.send_serialized(serialized)
+
     # Send message handler
     def on_send(self, buffer, offset, size):
         raise NotImplementedError("test.Sender.on_send() not implemented!")
@@ -15566,7 +16188,7 @@ class Sender(fbe.Sender):
 
 # Fast Binary Encoding test receiver
 class Receiver(fbe.Receiver):
-    __slots__ = "_proto_receiver", "_structsimple_value", "_structsimple_model", "_structoptional_value", "_structoptional_model", "_structnested_value", "_structnested_model", "_structbytes_value", "_structbytes_model", "_structarray_value", "_structarray_model", "_structvector_value", "_structvector_model", "_structlist_value", "_structlist_model", "_structset_value", "_structset_model", "_structmap_value", "_structmap_model", "_structhash_value", "_structhash_model", "_structhashex_value", "_structhashex_model", 
+    __slots__ = "_proto_receiver", "_structsimple_value", "_structsimple_model", "_structoptional_value", "_structoptional_model", "_structnested_value", "_structnested_model", "_structbytes_value", "_structbytes_model", "_structarray_value", "_structarray_model", "_structvector_value", "_structvector_model", "_structlist_value", "_structlist_model", "_structset_value", "_structset_model", "_structmap_value", "_structmap_model", "_structhash_value", "_structhash_model", "_structhashex_value", "_structhashex_model", "_structempty_value", "_structempty_model", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, False)
@@ -15593,6 +16215,8 @@ class Receiver(fbe.Receiver):
         self._structhash_model = StructHashModel()
         self._structhashex_value = StructHashEx()
         self._structhashex_model = StructHashExModel()
+        self._structempty_value = StructEmpty()
+        self._structempty_model = StructEmptyModel()
 
     # Imported receivers
 
@@ -15637,6 +16261,9 @@ class Receiver(fbe.Receiver):
         pass
 
     def on_receive_structhashex(self, value):
+        pass
+
+    def on_receive_structempty(self, value):
         pass
 
     def on_receive(self, type, buffer, offset, size):
@@ -15817,6 +16444,22 @@ class Receiver(fbe.Receiver):
             self.on_receive_structhashex(self._structhashex_value)
             return True
 
+        if type == StructEmptyModel.TYPE:
+            # Deserialize the value from the FBE stream
+            self._structempty_model.attach_buffer(buffer, offset)
+            assert self._structempty_model.verify(), "test.StructEmpty validation failed!"
+            (_, deserialized) = self._structempty_model.deserialize(self._structempty_value)
+            assert (deserialized > 0), "test.StructEmpty deserialization failed!"
+
+            # Log the value
+            if self.logging:
+                message = str(self._structempty_value)
+                self.on_receive_log(message)
+
+            # Call receive handler with deserialized value
+            self.on_receive_structempty(self._structempty_value)
+            return True
+
         if (self.proto_receiver is not None) and self.proto_receiver.on_receive(type, buffer, offset, size):
             return True
 
@@ -15825,7 +16468,7 @@ class Receiver(fbe.Receiver):
 
 # Fast Binary Encoding test proxy
 class Proxy(fbe.Receiver):
-    __slots__ = "_proto_proxy", "_structsimple_model", "_structoptional_model", "_structnested_model", "_structbytes_model", "_structarray_model", "_structvector_model", "_structlist_model", "_structset_model", "_structmap_model", "_structhash_model", "_structhashex_model", 
+    __slots__ = "_proto_proxy", "_structsimple_model", "_structoptional_model", "_structnested_model", "_structbytes_model", "_structarray_model", "_structvector_model", "_structlist_model", "_structset_model", "_structmap_model", "_structhash_model", "_structhashex_model", "_structempty_model", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, False)
@@ -15841,6 +16484,7 @@ class Proxy(fbe.Receiver):
         self._structmap_model = StructMapModel()
         self._structhash_model = StructHashModel()
         self._structhashex_model = StructHashExModel()
+        self._structempty_model = StructEmptyModel()
 
     # Imported proxy
 
@@ -15885,6 +16529,9 @@ class Proxy(fbe.Receiver):
         pass
 
     def on_proxy_structhashex(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structempty(self, model, type, buffer, offset, size):
         pass
 
     def on_receive(self, type, buffer, offset, size):
@@ -15988,6 +16635,15 @@ class Proxy(fbe.Receiver):
             self.on_proxy_structhashex(self._structhashex_model, type, buffer, offset, size)
             return True
 
+        if type == StructEmptyModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structempty_model.attach_buffer(buffer, offset)
+            assert self._structempty_model.verify(), "test.StructEmpty validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structempty(self._structempty_model, type, buffer, offset, size)
+            return True
+
         if (self.proto_proxy is not None) and self.proto_proxy.on_receive(type, buffer, offset, size):
             return True
 
@@ -15996,7 +16652,7 @@ class Proxy(fbe.Receiver):
 
 # Fast Binary Encoding test final sender
 class FinalSender(fbe.Sender):
-    __slots__ = "_proto_sender", "_structsimple_model", "_structoptional_model", "_structnested_model", "_structbytes_model", "_structarray_model", "_structvector_model", "_structlist_model", "_structset_model", "_structmap_model", "_structhash_model", "_structhashex_model", 
+    __slots__ = "_proto_sender", "_structsimple_model", "_structoptional_model", "_structnested_model", "_structbytes_model", "_structarray_model", "_structvector_model", "_structlist_model", "_structset_model", "_structmap_model", "_structhash_model", "_structhashex_model", "_structempty_model", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, True)
@@ -16012,6 +16668,7 @@ class FinalSender(fbe.Sender):
         self._structmap_model = StructMapFinalModel(self.buffer)
         self._structhash_model = StructHashFinalModel(self.buffer)
         self._structhashex_model = StructHashExFinalModel(self.buffer)
+        self._structempty_model = StructEmptyFinalModel(self.buffer)
 
     # Imported senders
 
@@ -16065,6 +16722,10 @@ class FinalSender(fbe.Sender):
     def structhashex_model(self):
         return self._structhashex_model
 
+    @property
+    def structempty_model(self):
+        return self._structempty_model
+
     # Send methods
 
     def send(self, value):
@@ -16090,6 +16751,8 @@ class FinalSender(fbe.Sender):
             return self.send_structhash(value)
         if isinstance(value, StructHashEx):
             return self.send_structhashex(value)
+        if isinstance(value, StructEmpty):
+            return self.send_structempty(value)
         result = self._proto_sender.send(value)
         if result > 0:
             return result
@@ -16249,6 +16912,20 @@ class FinalSender(fbe.Sender):
         # Send the serialized value
         return self.send_serialized(serialized)
 
+    def send_structempty(self, value):
+        # Serialize the value into the FBE stream
+        serialized = self.structempty_model.serialize(value)
+        assert (serialized > 0), "test.StructEmpty serialization failed!"
+        assert self.structempty_model.verify(), "test.StructEmpty validation failed!"
+
+        # Log the value
+        if self.logging:
+            message = str(value)
+            self.on_send_log(message)
+
+        # Send the serialized value
+        return self.send_serialized(serialized)
+
     # Send message handler
     def on_send(self, buffer, offset, size):
         raise NotImplementedError("test.Sender.on_send() not implemented!")
@@ -16256,7 +16933,7 @@ class FinalSender(fbe.Sender):
 
 # Fast Binary Encoding test final receiver
 class FinalReceiver(fbe.Receiver):
-    __slots__ = "_proto_receiver", "_structsimple_value", "_structsimple_model", "_structoptional_value", "_structoptional_model", "_structnested_value", "_structnested_model", "_structbytes_value", "_structbytes_model", "_structarray_value", "_structarray_model", "_structvector_value", "_structvector_model", "_structlist_value", "_structlist_model", "_structset_value", "_structset_model", "_structmap_value", "_structmap_model", "_structhash_value", "_structhash_model", "_structhashex_value", "_structhashex_model", 
+    __slots__ = "_proto_receiver", "_structsimple_value", "_structsimple_model", "_structoptional_value", "_structoptional_model", "_structnested_value", "_structnested_model", "_structbytes_value", "_structbytes_model", "_structarray_value", "_structarray_model", "_structvector_value", "_structvector_model", "_structlist_value", "_structlist_model", "_structset_value", "_structset_model", "_structmap_value", "_structmap_model", "_structhash_value", "_structhash_model", "_structhashex_value", "_structhashex_model", "_structempty_value", "_structempty_model", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, True)
@@ -16283,6 +16960,8 @@ class FinalReceiver(fbe.Receiver):
         self._structhash_model = StructHashFinalModel()
         self._structhashex_value = StructHashEx()
         self._structhashex_model = StructHashExFinalModel()
+        self._structempty_value = StructEmpty()
+        self._structempty_model = StructEmptyFinalModel()
 
     # Imported receivers
 
@@ -16327,6 +17006,9 @@ class FinalReceiver(fbe.Receiver):
         pass
 
     def on_receive_structhashex(self, value):
+        pass
+
+    def on_receive_structempty(self, value):
         pass
 
     def on_receive(self, type, buffer, offset, size):
@@ -16507,6 +17189,22 @@ class FinalReceiver(fbe.Receiver):
             self.on_receive_structhashex(self._structhashex_value)
             return True
 
+        if type == StructEmptyFinalModel.TYPE:
+            # Deserialize the value from the FBE stream
+            self._structempty_model.attach_buffer(buffer, offset)
+            assert self._structempty_model.verify(), "test.StructEmpty validation failed!"
+            (_, deserialized) = self._structempty_model.deserialize(self._structempty_value)
+            assert (deserialized > 0), "test.StructEmpty deserialization failed!"
+
+            # Log the value
+            if self.logging:
+                message = str(self._structempty_value)
+                self.on_receive_log(message)
+
+            # Call receive handler with deserialized value
+            self.on_receive_structempty(self._structempty_value)
+            return True
+
         if (self.proto_receiver is not None) and self.proto_receiver.on_receive(type, buffer, offset, size):
             return True
 
@@ -16515,7 +17213,7 @@ class FinalReceiver(fbe.Receiver):
 
 # Fast Binary Encoding test final proxy
 class FinalProxy(fbe.Receiver):
-    __slots__ = "_proto_proxy", "_structsimple_model", "_structoptional_model", "_structnested_model", "_structbytes_model", "_structarray_model", "_structvector_model", "_structlist_model", "_structset_model", "_structmap_model", "_structhash_model", "_structhashex_model", 
+    __slots__ = "_proto_proxy", "_structsimple_model", "_structoptional_model", "_structnested_model", "_structbytes_model", "_structarray_model", "_structvector_model", "_structlist_model", "_structset_model", "_structmap_model", "_structhash_model", "_structhashex_model", "_structempty_model", 
 
     def __init__(self, buffer=None):
         super().__init__(buffer, True)
@@ -16531,6 +17229,7 @@ class FinalProxy(fbe.Receiver):
         self._structmap_model = StructMapFinalModel()
         self._structhash_model = StructHashFinalModel()
         self._structhashex_model = StructHashExFinalModel()
+        self._structempty_model = StructEmptyFinalModel()
 
     # Imported proxy
 
@@ -16575,6 +17274,9 @@ class FinalProxy(fbe.Receiver):
         pass
 
     def on_proxy_structhashex(self, model, type, buffer, offset, size):
+        pass
+
+    def on_proxy_structempty(self, model, type, buffer, offset, size):
         pass
 
     def on_receive(self, type, buffer, offset, size):
@@ -16676,6 +17378,15 @@ class FinalProxy(fbe.Receiver):
 
             # Call proxy handler
             self.on_proxy_structhashex(self._structhashex_model, type, buffer, offset, size)
+            return True
+
+        if type == StructEmptyFinalModel.TYPE:
+            # Attach the FBE stream to the proxy model
+            self._structempty_model.attach_buffer(buffer, offset)
+            assert self._structempty_model.verify(), "test.StructEmpty validation failed!"
+
+            # Call proxy handler
+            self.on_proxy_structempty(self._structempty_model, type, buffer, offset, size)
             return True
 
         if (self.proto_proxy is not None) and self.proto_proxy.on_receive(type, buffer, offset, size):

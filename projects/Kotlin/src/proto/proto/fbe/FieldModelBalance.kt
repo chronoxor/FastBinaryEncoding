@@ -89,6 +89,7 @@ class FieldModelBalance(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     }
 
     // Check if the struct fields are valid
+    @Suppress("UNUSED_PARAMETER")
     fun verifyFields(fbeStructSize: Long): Boolean
     {
         var fbeCurrentSize = 4L + 4L
@@ -148,6 +149,7 @@ class FieldModelBalance(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     }
 
     // Get the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun getFields(fbeValue: Balance, fbeStructSize: Long)
     {
         var fbeCurrentSize = 4L + 4L
@@ -204,6 +206,7 @@ class FieldModelBalance(buffer: Buffer, offset: Long) : FieldModel(buffer, offse
     }
 
     // Set the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun setFields(fbeValue: Balance)
     {
         currency.set(fbeValue.currency)

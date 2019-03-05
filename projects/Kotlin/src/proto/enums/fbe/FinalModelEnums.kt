@@ -90,6 +90,7 @@ class FinalModelEnums(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     val uint64b5: FinalModelEnumUInt64 = FinalModelEnumUInt64(buffer, 0)
 
     // Get the allocation size
+    @Suppress("UNUSED_PARAMETER")
     fun fbeAllocationSize(fbeValue: Enums): Long = (0
         + byte0.fbeAllocationSize(fbeValue.byte0)
         + byte1.fbeAllocationSize(fbeValue.byte1)
@@ -592,6 +593,7 @@ class FinalModelEnums(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     }
 
     // Get the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun getFields(fbeValue: Enums): Long
     {
         var fbeCurrentOffset = 0L
@@ -941,6 +943,7 @@ class FinalModelEnums(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     }
 
     // Set the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun setFields(fbeValue: Enums): Long
     {
         var fbeCurrentOffset = 0L

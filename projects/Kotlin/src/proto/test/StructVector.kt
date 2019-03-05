@@ -48,6 +48,7 @@ open class StructVector : Comparable<Any?>
         this.f10 = f10
     }
 
+    @Suppress("UNUSED_PARAMETER")
     constructor(other: StructVector)
     {
         this.f1 = other.f1

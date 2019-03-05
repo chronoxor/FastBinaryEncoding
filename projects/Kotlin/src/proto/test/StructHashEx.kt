@@ -32,6 +32,7 @@ open class StructHashEx : Comparable<Any?>
         this.f2 = f2
     }
 
+    @Suppress("UNUSED_PARAMETER")
     constructor(other: StructHashEx)
     {
         this.f1 = other.f1

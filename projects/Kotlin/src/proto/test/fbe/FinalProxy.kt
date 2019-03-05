@@ -37,6 +37,7 @@ open class FinalProxy : fbe.Receiver
     private val StructMapModel: StructMapFinalModel
     private val StructHashModel: StructHashFinalModel
     private val StructHashExModel: StructHashExFinalModel
+    private val StructEmptyModel: StructEmptyFinalModel
 
     constructor() : super(true)
     {
@@ -52,6 +53,7 @@ open class FinalProxy : fbe.Receiver
         StructMapModel = StructMapFinalModel()
         StructHashModel = StructHashFinalModel()
         StructHashExModel = StructHashExFinalModel()
+        StructEmptyModel = StructEmptyFinalModel()
     }
 
     constructor(buffer: Buffer) : super(buffer, true)
@@ -68,6 +70,7 @@ open class FinalProxy : fbe.Receiver
         StructMapModel = StructMapFinalModel()
         StructHashModel = StructHashFinalModel()
         StructHashExModel = StructHashExFinalModel()
+        StructEmptyModel = StructEmptyFinalModel()
     }
 
     // Proxy handlers
@@ -82,6 +85,7 @@ open class FinalProxy : fbe.Receiver
     protected open fun onProxy(model: StructMapFinalModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
     protected open fun onProxy(model: StructHashFinalModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
     protected open fun onProxy(model: StructHashExFinalModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
+    protected open fun onProxy(model: StructEmptyFinalModel, type: Long, buffer: ByteArray, offset: Long, size: Long) {}
 
     override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
@@ -195,6 +199,16 @@ open class FinalProxy : fbe.Receiver
 
                 // Call proxy handler
                 onProxy(StructHashExModel, type, buffer, offset, size)
+                return true
+            }
+            test.fbe.StructEmptyFinalModel.fbeTypeConst ->
+            {
+                // Attach the FBE stream to the proxy model
+                StructEmptyModel.attach(buffer, offset)
+                assert(StructEmptyModel.verify()) { "test.StructEmpty validation failed!" }
+
+                // Call proxy handler
+                onProxy(StructEmptyModel, type, buffer, offset, size)
                 return true
             }
         }

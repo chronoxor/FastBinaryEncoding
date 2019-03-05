@@ -166,6 +166,7 @@ class FieldModelEnumByte extends fbe.FieldModel {
     this.writeByte(this.fbeOffset, value.value)
   }
 }
+
 exports.FieldModelEnumByte = FieldModelEnumByte
 
 /**
@@ -386,6 +387,7 @@ class FieldModelEnumChar extends fbe.FieldModel {
     this.writeUInt8(this.fbeOffset, value.value)
   }
 }
+
 exports.FieldModelEnumChar = FieldModelEnumChar
 
 /**
@@ -606,6 +608,7 @@ class FieldModelEnumWChar extends fbe.FieldModel {
     this.writeUInt32(this.fbeOffset, value.value)
   }
 }
+
 exports.FieldModelEnumWChar = FieldModelEnumWChar
 
 /**
@@ -826,6 +829,7 @@ class FieldModelEnumInt8 extends fbe.FieldModel {
     this.writeInt8(this.fbeOffset, value.value)
   }
 }
+
 exports.FieldModelEnumInt8 = FieldModelEnumInt8
 
 /**
@@ -1046,6 +1050,7 @@ class FieldModelEnumUInt8 extends fbe.FieldModel {
     this.writeUInt8(this.fbeOffset, value.value)
   }
 }
+
 exports.FieldModelEnumUInt8 = FieldModelEnumUInt8
 
 /**
@@ -1266,6 +1271,7 @@ class FieldModelEnumInt16 extends fbe.FieldModel {
     this.writeInt16(this.fbeOffset, value.value)
   }
 }
+
 exports.FieldModelEnumInt16 = FieldModelEnumInt16
 
 /**
@@ -1486,6 +1492,7 @@ class FieldModelEnumUInt16 extends fbe.FieldModel {
     this.writeUInt16(this.fbeOffset, value.value)
   }
 }
+
 exports.FieldModelEnumUInt16 = FieldModelEnumUInt16
 
 /**
@@ -1706,6 +1713,7 @@ class FieldModelEnumInt32 extends fbe.FieldModel {
     this.writeInt32(this.fbeOffset, value.value)
   }
 }
+
 exports.FieldModelEnumInt32 = FieldModelEnumInt32
 
 /**
@@ -1926,6 +1934,7 @@ class FieldModelEnumUInt32 extends fbe.FieldModel {
     this.writeUInt32(this.fbeOffset, value.value)
   }
 }
+
 exports.FieldModelEnumUInt32 = FieldModelEnumUInt32
 
 /**
@@ -2146,6 +2155,7 @@ class FieldModelEnumInt64 extends fbe.FieldModel {
     this.writeInt64(this.fbeOffset, Int64.fromNumber(value.value))
   }
 }
+
 exports.FieldModelEnumInt64 = FieldModelEnumInt64
 
 /**
@@ -2366,6 +2376,7 @@ class FieldModelEnumUInt64 extends fbe.FieldModel {
     this.writeUInt64(this.fbeOffset, UInt64.fromNumber(value.value))
   }
 }
+
 exports.FieldModelEnumUInt64 = FieldModelEnumUInt64
 
 /**

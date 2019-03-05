@@ -69,6 +69,7 @@ class FinalModelStructSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     val f44: proto.fbe.FinalModelAccount = proto.fbe.FinalModelAccount(buffer, 0)
 
     // Get the allocation size
+    @Suppress("UNUSED_PARAMETER")
     fun fbeAllocationSize(fbeValue: StructSimple): Long = (0
         + id.fbeAllocationSize(fbeValue.id)
         + f1.fbeAllocationSize(fbeValue.f1)
@@ -424,6 +425,7 @@ class FinalModelStructSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Get the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun getFields(fbeValue: StructSimple): Long
     {
         var fbeCurrentOffset = 0L
@@ -668,6 +670,7 @@ class FinalModelStructSimple(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Set the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun setFields(fbeValue: StructSimple): Long
     {
         var fbeCurrentOffset = 0L

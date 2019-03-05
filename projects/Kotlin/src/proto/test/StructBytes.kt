@@ -34,6 +34,7 @@ open class StructBytes : Comparable<Any?>
         this.f3 = f3
     }
 
+    @Suppress("UNUSED_PARAMETER")
     constructor(other: StructBytes)
     {
         this.f1 = other.f1

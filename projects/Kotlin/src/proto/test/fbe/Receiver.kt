@@ -37,6 +37,7 @@ open class Receiver : fbe.Receiver
     private val StructMapValue: test.StructMap
     private val StructHashValue: test.StructHash
     private val StructHashExValue: test.StructHashEx
+    private val StructEmptyValue: test.StructEmpty
 
     // Receiver models accessors
     private val StructSimpleModel: StructSimpleModel
@@ -50,6 +51,7 @@ open class Receiver : fbe.Receiver
     private val StructMapModel: StructMapModel
     private val StructHashModel: StructHashModel
     private val StructHashExModel: StructHashExModel
+    private val StructEmptyModel: StructEmptyModel
 
     constructor() : super(false)
     {
@@ -76,6 +78,8 @@ open class Receiver : fbe.Receiver
         StructHashModel = StructHashModel()
         StructHashExValue = test.StructHashEx()
         StructHashExModel = StructHashExModel()
+        StructEmptyValue = test.StructEmpty()
+        StructEmptyModel = StructEmptyModel()
     }
 
     constructor(buffer: Buffer) : super(buffer, false)
@@ -103,6 +107,8 @@ open class Receiver : fbe.Receiver
         StructHashModel = StructHashModel()
         StructHashExValue = test.StructHashEx()
         StructHashExModel = StructHashExModel()
+        StructEmptyValue = test.StructEmpty()
+        StructEmptyModel = StructEmptyModel()
     }
 
     // Receive handlers
@@ -117,6 +123,7 @@ open class Receiver : fbe.Receiver
     protected open fun onReceive(value: test.StructMap) {}
     protected open fun onReceive(value: test.StructHash) {}
     protected open fun onReceive(value: test.StructHashEx) {}
+    protected open fun onReceive(value: test.StructEmpty) {}
 
     override fun onReceive(type: Long, buffer: ByteArray, offset: Long, size: Long): Boolean
     {
@@ -329,6 +336,25 @@ open class Receiver : fbe.Receiver
 
                 // Call receive handler with deserialized value
                 onReceive(StructHashExValue)
+                return true
+            }
+            test.fbe.StructEmptyModel.fbeTypeConst ->
+            {
+                // Deserialize the value from the FBE stream
+                StructEmptyModel.attach(buffer, offset)
+                assert(StructEmptyModel.verify()) { "test.StructEmpty validation failed!" }
+                val deserialized = StructEmptyModel.deserialize(StructEmptyValue)
+                assert(deserialized > 0) { "test.StructEmpty deserialization failed!" }
+
+                // Log the value
+                if (logging)
+                {
+                    val message = StructEmptyValue.toString()
+                    onReceiveLog(message)
+                }
+
+                // Call receive handler with deserialized value
+                onReceive(StructEmptyValue)
                 return true
             }
         }

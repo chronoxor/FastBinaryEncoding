@@ -40,6 +40,7 @@ open class Account : Comparable<Any?>
         this.orders = orders
     }
 
+    @Suppress("UNUSED_PARAMETER")
     constructor(other: Account)
     {
         this.id = other.id

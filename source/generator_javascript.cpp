@@ -8293,7 +8293,7 @@ void GeneratorJavaScript::GenerateEnum(const std::shared_ptr<EnumType>& e)
     WriteLineIndent("}");
 
     // Generate enum values
-    if (e->body)
+    if (e->body && !e->body->values.empty())
     {
         WriteLine();
         int index = 0;
@@ -8380,6 +8380,7 @@ class FieldModel_ENUM_NAME_ extends fbe.FieldModel {
     this.write_ENUM_TYPE_(this.fbeOffset, _ENUM_WRITE_PREFIX_value.value_ENUM_WRITE_SUFFIX_)
   }
 }
+
 exports.FieldModel_ENUM_NAME_ = FieldModel_ENUM_NAME_
 )CODE";
 
@@ -8654,7 +8655,7 @@ void GeneratorJavaScript::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     WriteLineIndent("toString () {");
     Indent(1);
     WriteLineIndent("let result = ''");
-    if (f->body)
+    if (f->body && !f->body->values.empty())
     {
         WriteLineIndent("let first = true");
         for (auto it = f->body->values.begin(); it != f->body->values.end(); ++it)
@@ -8729,7 +8730,7 @@ void GeneratorJavaScript::GenerateFlags(const std::shared_ptr<FlagsType>& f)
     WriteLineIndent("}");
 
     // Generate flags values
-    if (f->body)
+    if (f->body && !f->body->values.empty())
     {
         WriteLine();
         for (const auto& value : f->body->values)
@@ -8944,6 +8945,8 @@ exports.FinalModel_FLAGS_NAME_ = FinalModel_FLAGS_NAME_
 
 void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
 {
+    bool first;
+
     // Generate struct begin
     WriteLine();
     WriteLineIndent("/**");
@@ -8956,45 +8959,48 @@ void GeneratorJavaScript::GenerateStruct(const std::shared_ptr<StructType>& s)
     Indent(1);
 
     // Generate struct constructor
-    bool first = true;
-    WriteLineIndent("/**");
-    WriteLineIndent(" * Initialize struct");
-    if (s->base && !s->base->empty())
-        WriteLineIndent(" * @param {!" + ConvertTypeName(*s->base, false) + "=} parent");
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            WriteLineIndent(" * @param {" + std::string(field->optional ? "" : "!") + ConvertTypeName(*field) + "=} " + *field->name);
-    WriteLineIndent(" * @constructor");
-    WriteLineIndent(" */");
-    WriteIndent("constructor (");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        Write("parent = new " + ConvertTypeName(*s->base, false) + "()");
-        first = false;
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        first = true;
+        WriteLineIndent("/**");
+        WriteLineIndent(" * Initialize struct");
+        if (s->base && !s->base->empty())
+            WriteLineIndent(" * @param {!" + ConvertTypeName(*s->base, false) + "=} parent");
+        if (s->body)
+            for (const auto& field : s->body->fields)
+                WriteLineIndent(" * @param {" + std::string(field->optional ? "" : "!") + ConvertTypeName(*field) + "=} " + *field->name);
+        WriteLineIndent(" * @constructor");
+        WriteLineIndent(" */");
+        WriteIndent("constructor (");
+        if (s->base && !s->base->empty())
         {
-            Write(std::string(first ? "" : ", ") + *field->name + " = " + ConvertDefault(*field));
+            Write("parent = new " + ConvertTypeName(*s->base, false) + "()");
             first = false;
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                Write(std::string(first ? "" : ", ") + *field->name + " = " + ConvertDefault(*field));
+                first = false;
+            }
+        }
+        WriteLine(") {");
+        Indent(1);
+        if (s->base && !s->base->empty())
+        {
+            WriteLineIndent("super()");
+            WriteLineIndent("super.copy(parent)");
+        }
+        if (s->body)
+            for (const auto& field : s->body->fields)
+                WriteLineIndent("this." + *field->name + " = " + *field->name);
+        Indent(-1);
+        WriteLineIndent("}");
+        WriteLine();
     }
-    WriteLine(") {");
-    Indent(1);
-    if (s->base && !s->base->empty())
-    {
-        WriteLineIndent("super()");
-        WriteLineIndent("super.copy(parent)");
-    }
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            WriteLineIndent("this." + *field->name + " = " + *field->name);
-    Indent(-1);
-    WriteLineIndent("}");
 
     // Generate struct copy() method
-    WriteLine();
     WriteLineIndent("/**");
     WriteLineIndent(" * Copy struct (shallow copy)");
     WriteLineIndent(" * @this {!" + *s->name + "}");
@@ -9415,39 +9421,42 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     Indent(1);
 
     // Generate struct field model constructor
-    WriteLineIndent("/**");
-    WriteLineIndent(" * Initialize field model with the given buffer and offset");
-    WriteLineIndent(" * @param {!fbe.ReadBuffer|!fbe.WriteBuffer} buffer Buffer");
-    WriteLineIndent(" * @param {!number} offset Offset");
-    WriteLineIndent(" * @constructor");
-    WriteLineIndent(" */");
-    WriteLineIndent("constructor (buffer, offset) {");
-    Indent(1);
-    WriteLineIndent("super(buffer, offset)");
-    std::string prev_offset("4");
-    std::string prev_size("4");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLineIndent("this._parent = new " + ConvertTypeFieldName(*s->base, false) + "(buffer, " + prev_offset + " + " + prev_size + ")");
-        prev_offset = "this._parent.fbeOffset";
-        prev_size = "this._parent.fbeBody - 4 - 4";
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("/**");
+        WriteLineIndent(" * Initialize field model with the given buffer and offset");
+        WriteLineIndent(" * @param {!fbe.ReadBuffer|!fbe.WriteBuffer} buffer Buffer");
+        WriteLineIndent(" * @param {!number} offset Offset");
+        WriteLineIndent(" * @constructor");
+        WriteLineIndent(" */");
+        WriteLineIndent("constructor (buffer, offset) {");
+        Indent(1);
+        WriteLineIndent("super(buffer, offset)");
+        std::string prev_offset("4");
+        std::string prev_size("4");
+        if (s->base && !s->base->empty())
         {
-            WriteLineIndent("this._" + *field->name + " = new " + ConvertTypeFieldInitialization(*field, prev_offset + " + " + prev_size, false));
-            prev_offset = "this._" + *field->name + ".fbeOffset";
-            prev_size = "this._" + *field->name + ".fbeSize";
+            WriteLineIndent("this._parent = new " + ConvertTypeFieldName(*s->base, false) + "(buffer, " + prev_offset + " + " + prev_size + ")");
+            prev_offset = "this._parent.fbeOffset";
+            prev_size = "this._parent.fbeBody - 4 - 4";
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLineIndent("this._" + *field->name + " = new " + ConvertTypeFieldInitialization(*field, prev_offset + " + " + prev_size, false));
+                prev_offset = "this._" + *field->name + ".fbeOffset";
+                prev_size = "this._" + *field->name + ".fbeSize";
+            }
+        }
+        Indent(-1);
+        WriteLineIndent("}");
+        WriteLine();
     }
-    Indent(-1);
-    WriteLineIndent("}");
 
     // Generate struct field model accessors
     if (s->base && !s->base->empty())
     {
-        WriteLine();
         WriteLineIndent("/**");
         WriteLineIndent(" * Get the " + *s->base + " field model");
         WriteLineIndent(" * @this {!FieldModel" + *s->name + "}");
@@ -9458,12 +9467,12 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
         WriteLineIndent("return this._parent");
         Indent(-1);
         WriteLineIndent("}");
+        WriteLine();
     }
     if (s->body)
     {
         for (const auto& field : s->body->fields)
         {
-            WriteLine();
             WriteLineIndent("/**");
             WriteLineIndent(" * Get the " + *field->name + " field model");
             WriteLineIndent(" * @this {!FieldModel" + *s->name + "}");
@@ -9474,11 +9483,11 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
             WriteLineIndent("return this._" + *field->name);
             Indent(-1);
             WriteLineIndent("}");
+            WriteLine();
         }
     }
 
     // Generate struct field model FBE properties
-    WriteLine();
     WriteLineIndent("/**");
     WriteLineIndent(" * Get the field size");
     WriteLineIndent(" * @this {!FieldModel" + *s->name + "}");
@@ -9624,43 +9633,46 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     WriteLineIndent(" */");
     WriteLineIndent("verifyFields (fbeStructSize) {");
     Indent(1);
-    WriteLineIndent("let fbeCurrentSize = 4 + 4");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("if ((fbeCurrentSize + this.parent.fbeBody - 4 - 4) > fbeStructSize) {");
-        Indent(1);
-        WriteLineIndent("return true");
-        Indent(-1);
-        WriteLineIndent("}");
-        WriteLineIndent("if (!this.parent.verifyFields(fbeStructSize)) {");
-        Indent(1);
-        WriteLineIndent("return false");
-        Indent(-1);
-        WriteLineIndent("}");
-        WriteLineIndent("// noinspection JSUnusedAssignment");
-        WriteLineIndent("fbeCurrentSize += this.parent.fbeBody - 4 - 4");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("let fbeCurrentSize = 4 + 4");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent("if ((fbeCurrentSize + this." + *field->name + ".fbeSize) > fbeStructSize) {");
+            WriteLineIndent("if ((fbeCurrentSize + this.parent.fbeBody - 4 - 4) > fbeStructSize) {");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);
             WriteLineIndent("}");
-            WriteLineIndent("if (!this." + *field->name + ".verify()) {");
+            WriteLineIndent("if (!this.parent.verifyFields(fbeStructSize)) {");
             Indent(1);
             WriteLineIndent("return false");
             Indent(-1);
             WriteLineIndent("}");
             WriteLineIndent("// noinspection JSUnusedAssignment");
-            WriteLineIndent("fbeCurrentSize += this." + *field->name + ".fbeSize");
+            WriteLineIndent("fbeCurrentSize += this.parent.fbeBody - 4 - 4");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("if ((fbeCurrentSize + this." + *field->name + ".fbeSize) > fbeStructSize) {");
+                Indent(1);
+                WriteLineIndent("return true");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("if (!this." + *field->name + ".verify()) {");
+                Indent(1);
+                WriteLineIndent("return false");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("// noinspection JSUnusedAssignment");
+                WriteLineIndent("fbeCurrentSize += this." + *field->name + ".fbeSize");
+            }
+        }
+        WriteLine();
     }
-    WriteLine();
     WriteLineIndent("return true");
     Indent(-1);
     WriteLineIndent("}");
@@ -9748,42 +9760,45 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     WriteLineIndent(" */");
     WriteLineIndent("getFields (fbeValue, fbeStructSize) {");
     Indent(1);
-    WriteLineIndent("let fbeCurrentSize = 4 + 4");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("if ((fbeCurrentSize + this.parent.fbeBody - 4 - 4) <= fbeStructSize) {");
-        Indent(1);
-        WriteLineIndent("this.parent.getFields(fbeValue, fbeStructSize)");
-        Indent(-1);
-        WriteLineIndent("}");
-        WriteLineIndent("// noinspection JSUnusedAssignment");
-        WriteLineIndent("fbeCurrentSize += this.parent.fbeBody - 4 - 4");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("let fbeCurrentSize = 4 + 4");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent("if ((fbeCurrentSize + this." + *field->name + ".fbeSize) <= fbeStructSize) {");
+            WriteLineIndent("if ((fbeCurrentSize + this.parent.fbeBody - 4 - 4) <= fbeStructSize) {");
             Indent(1);
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent("this." + *field->name + ".get(fbeValue." + *field->name + ")");
-            else
-                WriteLineIndent("fbeValue." + *field->name + " = this." + *field->name + ".get(" + (field->value ? ConvertConstant(*field->type, *field->value, field->optional) : "") + ")");
-            Indent(-1);
-            WriteLineIndent("} else {");
-            Indent(1);
-            if (field->array || field->vector || field->list)
-                WriteLineIndent("fbeValue." + *field->name + ".length = 0");
-            else if (field->set || field->map || field->hash)
-                WriteLineIndent("fbeValue." + *field->name + ".clear()");
-            else
-                WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field));
+            WriteLineIndent("this.parent.getFields(fbeValue, fbeStructSize)");
             Indent(-1);
             WriteLineIndent("}");
             WriteLineIndent("// noinspection JSUnusedAssignment");
-            WriteLineIndent("fbeCurrentSize += this." + *field->name + ".fbeSize");
+            WriteLineIndent("fbeCurrentSize += this.parent.fbeBody - 4 - 4");
+        }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("if ((fbeCurrentSize + this." + *field->name + ".fbeSize) <= fbeStructSize) {");
+                Indent(1);
+                if (field->array || field->vector || field->list || field->set || field->map || field->hash)
+                    WriteLineIndent("this." + *field->name + ".get(fbeValue." + *field->name + ")");
+                else
+                    WriteLineIndent("fbeValue." + *field->name + " = this." + *field->name + ".get(" + (field->value ? ConvertConstant(*field->type, *field->value, field->optional) : "") + ")");
+                Indent(-1);
+                WriteLineIndent("} else {");
+                Indent(1);
+                if (field->array || field->vector || field->list)
+                    WriteLineIndent("fbeValue." + *field->name + ".length = 0");
+                else if (field->set || field->map || field->hash)
+                    WriteLineIndent("fbeValue." + *field->name + ".clear()");
+                else
+                    WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field));
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("// noinspection JSUnusedAssignment");
+                WriteLineIndent("fbeCurrentSize += this." + *field->name + ".fbeSize");
+            }
         }
     }
     Indent(-1);
@@ -9866,11 +9881,14 @@ void GeneratorJavaScript::GenerateStructFieldModel(const std::shared_ptr<StructT
     WriteLineIndent(" */");
     WriteLineIndent("setFields (fbeValue) {");
     Indent(1);
-    if (s->base && !s->base->empty())
-        WriteLineIndent("this.parent.setFields(fbeValue)");
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            WriteLineIndent("this." + *field->name + ".set(fbeValue." + *field->name + ")");
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
+    {
+        if (s->base && !s->base->empty())
+            WriteLineIndent("this.parent.setFields(fbeValue)");
+        if (s->body)
+            for (const auto& field : s->body->fields)
+                WriteLineIndent("this." + *field->name + ".set(fbeValue." + *field->name + ")");
+    }
     Indent(-1);
     WriteLineIndent("}");
 
@@ -10087,27 +10105,30 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
     Indent(1);
 
     // Generate struct final model constructor
-    WriteLineIndent("/**");
-    WriteLineIndent(" * Initialize final model with the given buffer and offset");
-    WriteLineIndent(" * @param {!fbe.ReadBuffer|!fbe.WriteBuffer} buffer Buffer");
-    WriteLineIndent(" * @param {!number} offset Offset");
-    WriteLineIndent(" * @constructor");
-    WriteLineIndent(" */");
-    WriteLineIndent("constructor (buffer, offset) {");
-    Indent(1);
-    WriteLineIndent("super(buffer, offset)");
-    if (s->base && !s->base->empty())
-        WriteLineIndent("this._parent = new " + ConvertTypeFieldName(*s->base, true) + "(buffer, 0)");
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            WriteLineIndent("this._" + *field->name + " = new " + ConvertTypeFieldInitialization(*field, "0", true));
-    Indent(-1);
-    WriteLineIndent("}");
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
+    {
+        WriteLineIndent("/**");
+        WriteLineIndent(" * Initialize final model with the given buffer and offset");
+        WriteLineIndent(" * @param {!fbe.ReadBuffer|!fbe.WriteBuffer} buffer Buffer");
+        WriteLineIndent(" * @param {!number} offset Offset");
+        WriteLineIndent(" * @constructor");
+        WriteLineIndent(" */");
+        WriteLineIndent("constructor (buffer, offset) {");
+        Indent(1);
+        WriteLineIndent("super(buffer, offset)");
+        if (s->base && !s->base->empty())
+            WriteLineIndent("this._parent = new " + ConvertTypeFieldName(*s->base, true) + "(buffer, 0)");
+        if (s->body)
+            for (const auto& field : s->body->fields)
+                WriteLineIndent("this._" + *field->name + " = new " + ConvertTypeFieldInitialization(*field, "0", true));
+        Indent(-1);
+        WriteLineIndent("}");
+        WriteLine();
+    }
 
     // Generate struct final model accessors
     if (s->base && !s->base->empty())
     {
-        WriteLine();
         WriteLineIndent("/**");
         WriteLineIndent(" * Get the " + *s->base + " final model");
         WriteLineIndent(" * @this {!FinalModel" + *s->name + "}");
@@ -10118,12 +10139,12 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
         WriteLineIndent("return this._parent");
         Indent(-1);
         WriteLineIndent("}");
+        WriteLine();
     }
     if (s->body)
     {
         for (const auto& field : s->body->fields)
         {
-            WriteLine();
             WriteLineIndent("/**");
             WriteLineIndent(" * Get the " + *field->name + " final model");
             WriteLineIndent(" * @this {!FinalModel" + *s->name + "}");
@@ -10134,11 +10155,11 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
             WriteLineIndent("return this._" + *field->name);
             Indent(-1);
             WriteLineIndent("}");
+            WriteLine();
         }
     }
 
     // Generate struct final model FBE properties
-    WriteLine();
     WriteLineIndent("/**");
     WriteLineIndent(" * Get the allocation size");
     WriteLineIndent(" * @this {!FinalModel" + *s->name + "}");
@@ -10207,27 +10228,15 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
     WriteLineIndent(" */");
     WriteLineIndent("verifyFields () {");
     Indent(1);
-    WriteLineIndent("let fbeCurrentOffset = 0");
-    WriteLineIndent("let fbeFieldSize");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("this.parent.fbeOffset = fbeCurrentOffset");
-        WriteLineIndent("fbeFieldSize = this.parent.verifyFields()");
-        WriteLineIndent("if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {");
-        Indent(1);
-        WriteLineIndent("return Number.MAX_SAFE_INTEGER");
-        Indent(-1);
-        WriteLineIndent("}");
-        WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("let fbeCurrentOffset = 0");
+        WriteLineIndent("let fbeFieldSize");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent("this." + *field->name + ".fbeOffset = fbeCurrentOffset");
-            WriteLineIndent("fbeFieldSize = this." + *field->name + ".verify()");
+            WriteLineIndent("this.parent.fbeOffset = fbeCurrentOffset");
+            WriteLineIndent("fbeFieldSize = this.parent.verifyFields()");
             WriteLineIndent("if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {");
             Indent(1);
             WriteLineIndent("return Number.MAX_SAFE_INTEGER");
@@ -10235,9 +10244,26 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
             WriteLineIndent("}");
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("this." + *field->name + ".fbeOffset = fbeCurrentOffset");
+                WriteLineIndent("fbeFieldSize = this." + *field->name + ".verify()");
+                WriteLineIndent("if (fbeFieldSize === Number.MAX_SAFE_INTEGER) {");
+                Indent(1);
+                WriteLineIndent("return Number.MAX_SAFE_INTEGER");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("return fbeCurrentOffset");
     }
-    WriteLine();
-    WriteLineIndent("return fbeCurrentOffset");
+    else
+        WriteLineIndent("return 0");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -10268,38 +10294,43 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
     WriteLineIndent(" */");
     WriteLineIndent("getFields (fbeValue) {");
     Indent(1);
-    WriteLineIndent("let fbeCurrentOffset = 0");
-    WriteLineIndent("let fbeCurrentSize = 0");
-    WriteLineIndent("let fbeResult");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("this.parent.fbeOffset = fbeCurrentOffset");
-        WriteLineIndent("fbeResult = this.parent.getFields(fbeValue)");
-        WriteLineIndent("// noinspection JSUnusedAssignment");
-        WriteLineIndent("fbeCurrentOffset += fbeResult");
-        WriteLineIndent("fbeCurrentSize += fbeResult");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("let fbeCurrentOffset = 0");
+        WriteLineIndent("let fbeCurrentSize = 0");
+        WriteLineIndent("let fbeResult");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent("this." + *field->name + ".fbeOffset = fbeCurrentOffset");
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent("fbeResult = this." + *field->name + ".get(fbeValue." + *field->name + ")");
-            else
-            {
-                WriteLineIndent("fbeResult = this." + *field->name + ".get()");
-                WriteLineIndent("fbeValue." + *field->name + " = fbeResult.value");
-            }
+            WriteLineIndent("this.parent.fbeOffset = fbeCurrentOffset");
+            WriteLineIndent("fbeResult = this.parent.getFields(fbeValue)");
             WriteLineIndent("// noinspection JSUnusedAssignment");
-            WriteLineIndent("fbeCurrentOffset += fbeResult.size");
-            WriteLineIndent("fbeCurrentSize += fbeResult.size");
+            WriteLineIndent("fbeCurrentOffset += fbeResult");
+            WriteLineIndent("fbeCurrentSize += fbeResult");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("this." + *field->name + ".fbeOffset = fbeCurrentOffset");
+                if (field->array || field->vector || field->list || field->set || field->map || field->hash)
+                    WriteLineIndent("fbeResult = this." + *field->name + ".get(fbeValue." + *field->name + ")");
+                else
+                {
+                    WriteLineIndent("fbeResult = this." + *field->name + ".get()");
+                    WriteLineIndent("fbeValue." + *field->name + " = fbeResult.value");
+                }
+                WriteLineIndent("// noinspection JSUnusedAssignment");
+                WriteLineIndent("fbeCurrentOffset += fbeResult.size");
+                WriteLineIndent("fbeCurrentSize += fbeResult.size");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("return fbeCurrentSize");
     }
-    WriteLine();
-    WriteLineIndent("return fbeCurrentSize");
+    else
+        WriteLineIndent("return 0");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -10330,32 +10361,37 @@ void GeneratorJavaScript::GenerateStructFinalModel(const std::shared_ptr<StructT
     WriteLineIndent(" */");
     WriteLineIndent("setFields (fbeValue) {");
     Indent(1);
-    WriteLineIndent("let fbeCurrentOffset = 0");
-    WriteLineIndent("let fbeCurrentSize = 0");
-    WriteLineIndent("let fbeFieldSize");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("this.parent.fbeOffset = fbeCurrentOffset");
-        WriteLineIndent("fbeFieldSize = this.parent.setFields(fbeValue)");
-        WriteLineIndent("// noinspection JSUnusedAssignment");
-        WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
-        WriteLineIndent("fbeCurrentSize += fbeFieldSize");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("let fbeCurrentOffset = 0");
+        WriteLineIndent("let fbeCurrentSize = 0");
+        WriteLineIndent("let fbeFieldSize");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent("this." + *field->name + ".fbeOffset = fbeCurrentOffset");
-            WriteLineIndent("fbeFieldSize = this." + *field->name + ".set(fbeValue." + *field->name + ")");
+            WriteLineIndent("this.parent.fbeOffset = fbeCurrentOffset");
+            WriteLineIndent("fbeFieldSize = this.parent.setFields(fbeValue)");
             WriteLineIndent("// noinspection JSUnusedAssignment");
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
             WriteLineIndent("fbeCurrentSize += fbeFieldSize");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("this." + *field->name + ".fbeOffset = fbeCurrentOffset");
+                WriteLineIndent("fbeFieldSize = this." + *field->name + ".set(fbeValue." + *field->name + ")");
+                WriteLineIndent("// noinspection JSUnusedAssignment");
+                WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
+                WriteLineIndent("fbeCurrentSize += fbeFieldSize");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("return fbeCurrentSize");
     }
-    WriteLine();
-    WriteLineIndent("return fbeCurrentSize");
+    else
+        WriteLineIndent("return 0");
     Indent(-1);
     WriteLineIndent("}");
 

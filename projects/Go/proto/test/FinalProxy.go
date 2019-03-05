@@ -134,6 +134,17 @@ func (f OnProxyFinalStructHashExFunc) OnProxyStructHashEx(model *StructHashExFin
     f(model, fbeType, buffer)
 }
 
+// Proxy StructEmpty interface
+type OnProxyFinalStructEmpty interface {
+    OnProxyStructEmpty(model *StructEmptyFinalModel, fbeType int, buffer []byte)
+}
+
+// Proxy StructEmpty function
+type OnProxyFinalStructEmptyFunc func(model *StructEmptyFinalModel, fbeType int, buffer []byte)
+func (f OnProxyFinalStructEmptyFunc) OnProxyStructEmpty(model *StructEmptyFinalModel, fbeType int, buffer []byte) {
+    f(model, fbeType, buffer)
+}
+
 // Fast Binary Encoding test final proxy
 type FinalProxy struct {
     *fbe.Receiver
@@ -149,6 +160,7 @@ type FinalProxy struct {
     structMapModel *StructMapFinalModel
     structHashModel *StructHashFinalModel
     structHashExModel *StructHashExFinalModel
+    structEmptyModel *StructEmptyFinalModel
 
     // Proxy StructSimple handler
     HandlerOnProxyStructSimple OnProxyFinalStructSimple
@@ -172,6 +184,8 @@ type FinalProxy struct {
     HandlerOnProxyStructHash OnProxyFinalStructHash
     // Proxy StructHashEx handler
     HandlerOnProxyStructHashEx OnProxyFinalStructHashEx
+    // Proxy StructEmpty handler
+    HandlerOnProxyStructEmpty OnProxyFinalStructEmpty
 }
 
 // Create a new test final proxy with an empty buffer
@@ -195,6 +209,8 @@ func NewFinalProxyWithBuffer(buffer *fbe.Buffer) *FinalProxy {
         NewStructMapFinalModel(buffer),
         NewStructHashFinalModel(buffer),
         NewStructHashExFinalModel(buffer),
+        NewStructEmptyFinalModel(buffer),
+        nil,
         nil,
         nil,
         nil,
@@ -219,6 +235,7 @@ func NewFinalProxyWithBuffer(buffer *fbe.Buffer) *FinalProxy {
     proxy.SetupHandlerOnProxyStructMapFunc(func(model *StructMapFinalModel, fbeType int, buffer []byte) {})
     proxy.SetupHandlerOnProxyStructHashFunc(func(model *StructHashFinalModel, fbeType int, buffer []byte) {})
     proxy.SetupHandlerOnProxyStructHashExFunc(func(model *StructHashExFinalModel, fbeType int, buffer []byte) {})
+    proxy.SetupHandlerOnProxyStructEmptyFunc(func(model *StructEmptyFinalModel, fbeType int, buffer []byte) {})
     return proxy
 }
 
@@ -266,6 +283,9 @@ func (p *FinalProxy) SetupHandlers(handlers interface{}) {
     if handler, ok := handlers.(OnProxyFinalStructHashEx); ok {
         p.SetupHandlerOnProxyStructHashEx(handler)
     }
+    if handler, ok := handlers.(OnProxyFinalStructEmpty); ok {
+        p.SetupHandlerOnProxyStructEmpty(handler)
+    }
 }
 
 // Setup proxy StructSimple handler
@@ -312,6 +332,10 @@ func (p *FinalProxy) SetupHandlerOnProxyStructHashFunc(function func(model *Stru
 func (p *FinalProxy) SetupHandlerOnProxyStructHashEx(handler OnProxyFinalStructHashEx) { p.HandlerOnProxyStructHashEx = handler }
 // Setup proxy StructHashEx handler function
 func (p *FinalProxy) SetupHandlerOnProxyStructHashExFunc(function func(model *StructHashExFinalModel, fbeType int, buffer []byte)) { p.HandlerOnProxyStructHashEx = OnProxyFinalStructHashExFunc(function) }
+// Setup proxy StructEmpty handler
+func (p *FinalProxy) SetupHandlerOnProxyStructEmpty(handler OnProxyFinalStructEmpty) { p.HandlerOnProxyStructEmpty = handler }
+// Setup proxy StructEmpty handler function
+func (p *FinalProxy) SetupHandlerOnProxyStructEmptyFunc(function func(model *StructEmptyFinalModel, fbeType int, buffer []byte)) { p.HandlerOnProxyStructEmpty = OnProxyFinalStructEmptyFunc(function) }
 
 // Receive message handler
 func (p *FinalProxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
@@ -425,6 +449,16 @@ func (p *FinalProxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
 
         // Call proxy handler
         p.HandlerOnProxyStructHashEx.OnProxyStructHashEx(p.structHashExModel, fbeType, buffer)
+        return true, nil
+    case p.structEmptyModel.FBEType():
+        // Attach the FBE stream to the proxy model
+        p.structEmptyModel.Buffer().Attach(buffer)
+        if !p.structEmptyModel.Verify() {
+            return false, errors.New("test.StructEmpty validation failed")
+        }
+
+        // Call proxy handler
+        p.HandlerOnProxyStructEmpty.OnProxyStructEmpty(p.structEmptyModel, fbeType, buffer)
         return true, nil
     }
 

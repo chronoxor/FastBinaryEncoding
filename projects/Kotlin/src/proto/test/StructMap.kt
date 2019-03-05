@@ -48,6 +48,7 @@ open class StructMap : Comparable<Any?>
         this.f10 = f10
     }
 
+    @Suppress("UNUSED_PARAMETER")
     constructor(other: StructMap)
     {
         this.f1 = other.f1

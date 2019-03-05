@@ -123,7 +123,7 @@ enum_type
     ;
 
 enum_body
-    :
+    :                                                                           { $$ = new FBE::EnumBody(); }
     | enum_value                                                                { $$ = new FBE::EnumBody(); $$->AddValue($1); }
     | enum_body enum_value                                                      { $$ = $1; $$->AddValue($2); }
 
@@ -156,7 +156,7 @@ flags_type
     ;
 
 flags_body
-    :
+    :                                                                           { $$ = new FBE::FlagsBody(); }
     | flags_value                                                               { $$ = new FBE::FlagsBody(); $$->AddValue($1); }
     | flags_body flags_value                                                    { $$ = $1; $$->AddValue($2); }
     ;
@@ -182,7 +182,7 @@ struct
     ;
 
 struct_body
-    :
+    :                                                                           { $$ = new FBE::StructBody(); }
     | struct_field                                                              { $$ = new FBE::StructBody(); $$->AddField($1); }
     | struct_body struct_field                                                  { $$ = $1; $$->AddField($2); }
     ;

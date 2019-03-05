@@ -5183,7 +5183,7 @@ void GeneratorGo::GenerateFlags(const std::shared_ptr<Package>& p, const std::sh
     WriteLineIndent("func (f " + flags_name + ") String() string {");
     Indent(1);
     WriteLineIndent("var sb strings.Builder");
-    if (f->body)
+    if (f->body && !f->body->values.empty())
     {
         WriteLineIndent("first := true");
         for (auto it = f->body->values.begin(); it != f->body->values.end(); ++it)
@@ -6049,12 +6049,15 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
     WriteLineIndent("buffer *fbe.Buffer");
     WriteLineIndent("// Field model buffer offset");
     WriteLineIndent("offset int");
-    WriteLine();
-    if (!base_type.empty())
-        WriteLineIndent("*" + base_field_model);
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            WriteLineIndent(ConvertToUpper(*field->name) + " *" + ConvertTypeFieldDeclaration(*field, false));
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
+    {
+        WriteLine();
+        if (!base_type.empty())
+            WriteLineIndent("*" + base_field_model);
+        if (s->body)
+            for (const auto& field : s->body->fields)
+                WriteLineIndent(ConvertToUpper(*field->name) + " *" + ConvertTypeFieldDeclaration(*field, false));
+    }
     Indent(-1);
     WriteLineIndent("}");
 
@@ -6211,41 +6214,44 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
     WriteLineIndent("// // Check if the struct value fields are valid");
     WriteLineIndent("func (fm *" + field_model_name + ") VerifyFields(fbeStructSize int) bool {");
     Indent(1);
-    WriteLineIndent("fbeCurrentSize := 4 + 4");
-    if (!base_type.empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("if (fbeCurrentSize + fm." + base_field_name + ".FBEBody() - 4 - 4) > fbeStructSize {");
-        Indent(1);
-        WriteLineIndent("return true");
-        Indent(-1);
-        WriteLineIndent("}");
-        WriteLineIndent("if !fm." + base_field_name + ".VerifyFields(fbeStructSize) {");
-        Indent(1);
-        WriteLineIndent("return false");
-        Indent(-1);
-        WriteLineIndent("}");
-        WriteLineIndent("fbeCurrentSize += fm." + base_field_name + ".FBEBody() - 4 - 4");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("fbeCurrentSize := 4 + 4");
+        if (!base_type.empty())
         {
             WriteLine();
-            WriteLineIndent("if (fbeCurrentSize + fm." + ConvertToUpper(*field->name) + ".FBESize()) > fbeStructSize {");
+            WriteLineIndent("if (fbeCurrentSize + fm." + base_field_name + ".FBEBody() - 4 - 4) > fbeStructSize {");
             Indent(1);
             WriteLineIndent("return true");
             Indent(-1);
             WriteLineIndent("}");
-            WriteLineIndent("if !fm." + ConvertToUpper(*field->name) + ".Verify() {");
+            WriteLineIndent("if !fm." + base_field_name + ".VerifyFields(fbeStructSize) {");
             Indent(1);
             WriteLineIndent("return false");
             Indent(-1);
             WriteLineIndent("}");
-            WriteLineIndent("fbeCurrentSize += fm." + ConvertToUpper(*field->name) + ".FBESize()");
+            WriteLineIndent("fbeCurrentSize += fm." + base_field_name + ".FBEBody() - 4 - 4");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("if (fbeCurrentSize + fm." + ConvertToUpper(*field->name) + ".FBESize()) > fbeStructSize {");
+                Indent(1);
+                WriteLineIndent("return true");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("if !fm." + ConvertToUpper(*field->name) + ".Verify() {");
+                Indent(1);
+                WriteLineIndent("return false");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("fbeCurrentSize += fm." + ConvertToUpper(*field->name) + ".FBESize()");
+            }
+        }
+        WriteLine();
     }
-    WriteLine();
     WriteLineIndent("return true");
     Indent(-1);
     WriteLineIndent("}");
@@ -6315,52 +6321,55 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
     WriteLineIndent("// Get the struct fields values");
     WriteLineIndent("func (fm *" + field_model_name + ") GetFields(fbeValue *" + struct_name + ", fbeStructSize int) {");
     Indent(1);
-    WriteLineIndent("fbeCurrentSize := 4 + 4");
-    if (!base_type.empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("if (fbeCurrentSize + fm." + base_field_name + ".FBEBody() - 4 - 4) <= fbeStructSize {");
-        Indent(1);
-        WriteLineIndent("fm." + base_field_name + ".GetFields(fbeValue." + ConvertBaseName(base_type) + ", fbeStructSize)");
-        Indent(-1);
-        WriteLineIndent("}");
-        WriteLineIndent("fbeCurrentSize += fm." + base_field_name + ".FBEBody() - 4 - 4");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("fbeCurrentSize := 4 + 4");
+        if (!base_type.empty())
         {
             WriteLine();
-            WriteLineIndent("if (fbeCurrentSize + fm." + ConvertToUpper(*field->name) + ".FBESize()) <= fbeStructSize {");
+            WriteLineIndent("if (fbeCurrentSize + fm." + base_field_name + ".FBEBody() - 4 - 4) <= fbeStructSize {");
             Indent(1);
-            if (field->array)
-            {
-                WriteLineIndent("slice, _ := fm." + ConvertToUpper(*field->name) + ".Get()");
-                WriteLineIndent("copy(fbeValue." + ConvertToUpper(*field->name) + "[:], slice)");
-            }
-            else if (field->vector || field->list || field->set || field->map || field->hash || field->optional)
-                WriteLineIndent("fbeValue." + ConvertToUpper(*field->name) + ", _ = fm." + ConvertToUpper(*field->name) + ".Get()");
-            else if (!IsGoType(*field->type))
-            {
-                if (field->value)
-                    WriteLineIndent("_ = fm." + ConvertToUpper(*field->name) + ".GetValueDefault(&fbeValue." + ConvertToUpper(*field->name) + ", " + ConvertConstant(*field->type, *field->value, field->optional) + ")");
-                else
-                    WriteLineIndent("_ = fm." + ConvertToUpper(*field->name) + ".GetValue(&fbeValue." + ConvertToUpper(*field->name) + ")");
-            }
-            else
-            {
-                if (field->value)
-                    WriteLineIndent("fbeValue." + ConvertToUpper(*field->name) + ", _ = fm." + ConvertToUpper(*field->name) + ".GetDefault(" + ConvertConstant(*field->type, *field->value, field->optional) + ")");
-                else
-                    WriteLineIndent("fbeValue." + ConvertToUpper(*field->name) + ", _ = fm." + ConvertToUpper(*field->name) + ".Get()");
-            }
-            Indent(-1);
-            WriteLineIndent("} else {");
-            Indent(1);
-            WriteLineIndent("fbeValue." + ConvertToUpper(*field->name) + " = " + ConvertDefault(*field));
+            WriteLineIndent("fm." + base_field_name + ".GetFields(fbeValue." + ConvertBaseName(base_type) + ", fbeStructSize)");
             Indent(-1);
             WriteLineIndent("}");
-            WriteLineIndent("fbeCurrentSize += fm." + ConvertToUpper(*field->name) + ".FBESize()");
+            WriteLineIndent("fbeCurrentSize += fm." + base_field_name + ".FBEBody() - 4 - 4");
+        }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("if (fbeCurrentSize + fm." + ConvertToUpper(*field->name) + ".FBESize()) <= fbeStructSize {");
+                Indent(1);
+                if (field->array)
+                {
+                    WriteLineIndent("slice, _ := fm." + ConvertToUpper(*field->name) + ".Get()");
+                    WriteLineIndent("copy(fbeValue." + ConvertToUpper(*field->name) + "[:], slice)");
+                }
+                else if (field->vector || field->list || field->set || field->map || field->hash || field->optional)
+                    WriteLineIndent("fbeValue." + ConvertToUpper(*field->name) + ", _ = fm." + ConvertToUpper(*field->name) + ".Get()");
+                else if (!IsGoType(*field->type))
+                {
+                    if (field->value)
+                        WriteLineIndent("_ = fm." + ConvertToUpper(*field->name) + ".GetValueDefault(&fbeValue." + ConvertToUpper(*field->name) + ", " + ConvertConstant(*field->type, *field->value, field->optional) + ")");
+                    else
+                        WriteLineIndent("_ = fm." + ConvertToUpper(*field->name) + ".GetValue(&fbeValue." + ConvertToUpper(*field->name) + ")");
+                }
+                else
+                {
+                    if (field->value)
+                        WriteLineIndent("fbeValue." + ConvertToUpper(*field->name) + ", _ = fm." + ConvertToUpper(*field->name) + ".GetDefault(" + ConvertConstant(*field->type, *field->value, field->optional) + ")");
+                    else
+                        WriteLineIndent("fbeValue." + ConvertToUpper(*field->name) + ", _ = fm." + ConvertToUpper(*field->name) + ".Get()");
+                }
+                Indent(-1);
+                WriteLineIndent("} else {");
+                Indent(1);
+                WriteLineIndent("fbeValue." + ConvertToUpper(*field->name) + " = " + ConvertDefault(*field));
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("fbeCurrentSize += fm." + ConvertToUpper(*field->name) + ".FBESize()");
+            }
         }
     }
     Indent(-1);
@@ -6420,31 +6429,36 @@ void GeneratorGo::GenerateStructFieldModel(const std::shared_ptr<Package>& p, co
     WriteLineIndent("// Set the struct fields values");
     WriteLineIndent("func (fm *" + field_model_name + ") SetFields(fbeValue *" + struct_name + ") error {");
     Indent(1);
-    WriteLineIndent("var err error = nil");
-    WriteLine();
-    if (!base_type.empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLineIndent("if err = fm." + base_field_name + ".SetFields(fbeValue." + ConvertBaseName(base_type) + "); err != nil {");
-        Indent(1);
-        WriteLineIndent("return err");
-        Indent(-1);
-        WriteLineIndent("}");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("var err error = nil");
+        WriteLine();
+        if (!base_type.empty())
         {
-            if (field->array)
-                WriteLineIndent("if err = fm." + ConvertToUpper(*field->name) + ".Set(fbeValue." + ConvertToUpper(*field->name) + "[:]); err != nil {");
-            else
-                WriteLineIndent("if err = fm." + ConvertToUpper(*field->name) + ".Set(" + ((IsGoType(*field->type) || field->vector || field->list || field->set || field->map || field->hash || field->optional) ? "" : "&") + "fbeValue." + ConvertToUpper(*field->name) + "); err != nil {");
+            WriteLineIndent("if err = fm." + base_field_name + ".SetFields(fbeValue." + ConvertBaseName(base_type) + "); err != nil {");
             Indent(1);
             WriteLineIndent("return err");
             Indent(-1);
             WriteLineIndent("}");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                if (field->array)
+                    WriteLineIndent("if err = fm." + ConvertToUpper(*field->name) + ".Set(fbeValue." + ConvertToUpper(*field->name) + "[:]); err != nil {");
+                else
+                    WriteLineIndent("if err = fm." + ConvertToUpper(*field->name) + ".Set(" + ((IsGoType(*field->type) || field->vector || field->list || field->set || field->map || field->hash || field->optional) ? "" : "&") + "fbeValue." + ConvertToUpper(*field->name) + "); err != nil {");
+                Indent(1);
+                WriteLineIndent("return err");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
+        }
+        WriteLineIndent("return err");
     }
-    WriteLineIndent("return err");
+    else
+        WriteLineIndent("return nil");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -6652,12 +6666,15 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
     Indent(1);
     WriteLineIndent("buffer *fbe.Buffer  // Final model buffer");
     WriteLineIndent("offset int          // Final model buffer offset");
-    WriteLine();
-    if (!base_type.empty())
-        WriteLineIndent("*" + base_final_model);
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            WriteLineIndent(ConvertToUpper(*field->name) + " *" + ConvertTypeFieldDeclaration(*field, true));
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
+    {
+        WriteLine();
+        if (!base_type.empty())
+            WriteLineIndent("*" + base_final_model);
+        if (s->body)
+            for (const auto& field : s->body->fields)
+                WriteLineIndent(ConvertToUpper(*field->name) + " *" + ConvertTypeFieldDeclaration(*field, true));
+    }
     Indent(-1);
     WriteLineIndent("}");
 
@@ -6752,36 +6769,41 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
     WriteLineIndent("// Check if the struct fields are valid");
     WriteLineIndent("func (fm *" + final_model_name + ") VerifyFields() int {");
     Indent(1);
-    WriteLineIndent("fbeCurrentOffset := 0");
-    WriteLineIndent("fbeFieldSize := 0");
-    WriteLine();
-    if (!base_type.empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
+        WriteLineIndent("fbeCurrentOffset := 0");
+        WriteLineIndent("fbeFieldSize := 0");
         WriteLine();
-        WriteLineIndent("fm." + base_final_name + ".SetFBEOffset(fbeCurrentOffset)");
-        WriteLineIndent("if fbeFieldSize = fm." + base_final_name + ".VerifyFields(); fbeFieldSize == fbe.MaxInt {");
-        Indent(1);
-        WriteLineIndent("return fbe.MaxInt");
-        Indent(-1);
-        WriteLineIndent("}");
-        WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        if (!base_type.empty())
         {
             WriteLine();
-            WriteLineIndent("fm." + ConvertToUpper(*field->name) + ".SetFBEOffset(fbeCurrentOffset)");
-            WriteLineIndent("if fbeFieldSize = fm." + ConvertToUpper(*field->name) + ".Verify(); fbeFieldSize == fbe.MaxInt {");
+            WriteLineIndent("fm." + base_final_name + ".SetFBEOffset(fbeCurrentOffset)");
+            WriteLineIndent("if fbeFieldSize = fm." + base_final_name + ".VerifyFields(); fbeFieldSize == fbe.MaxInt {");
             Indent(1);
             WriteLineIndent("return fbe.MaxInt");
             Indent(-1);
             WriteLineIndent("}");
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("fm." + ConvertToUpper(*field->name) + ".SetFBEOffset(fbeCurrentOffset)");
+                WriteLineIndent("if fbeFieldSize = fm." + ConvertToUpper(*field->name) + ".Verify(); fbeFieldSize == fbe.MaxInt {");
+                Indent(1);
+                WriteLineIndent("return fbe.MaxInt");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("return fbeCurrentOffset");
     }
-    WriteLine();
-    WriteLineIndent("return fbeCurrentOffset");
+    else
+        WriteLineIndent("return 0");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -6809,54 +6831,59 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
     WriteLineIndent("// Get the struct fields values");
     WriteLineIndent("func (fm *" + final_model_name + ") GetFields(fbeValue *" + struct_name + ") (int, error) {");
     Indent(1);
-    WriteLineIndent("var err error = nil");
-    WriteLineIndent("fbeCurrentOffset := 0");
-    WriteLineIndent("fbeCurrentSize := 0");
-    WriteLineIndent("fbeFieldSize := 0");
-    if (!base_type.empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("fm." + base_final_name + ".SetFBEOffset(fbeCurrentOffset)");
-        WriteLineIndent("if fbeFieldSize, err = fm." + base_final_name + ".GetFields(fbeValue." + ConvertBaseName(base_type) + "); err != nil {");
-        Indent(1);
-        WriteLineIndent("return fbeCurrentSize, err");
-        Indent(-1);
-        WriteLineIndent("}");
-        WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
-        WriteLineIndent("fbeCurrentSize += fbeFieldSize");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("var err error = nil");
+        WriteLineIndent("fbeCurrentSize := 0");
+        WriteLineIndent("fbeCurrentOffset := 0");
+        WriteLineIndent("fbeFieldSize := 0");
+        if (!base_type.empty())
         {
             WriteLine();
-            WriteLineIndent("fm." + ConvertToUpper(*field->name) + ".SetFBEOffset(fbeCurrentOffset)");
-            if (field->array)
-                WriteLineIndent("if slice, size, err := fm." + ConvertToUpper(*field->name) + ".Get(); err != nil {");
-            else if (field->vector || field->list || field->set || field->map || field->hash || field->optional)
-                WriteLineIndent("if fbeValue." + ConvertToUpper(*field->name) + ", fbeFieldSize, err = fm." + ConvertToUpper(*field->name) + ".Get(); err != nil {");
-            else if (!IsGoType(*field->type))
-                WriteLineIndent("if fbeFieldSize, err = fm." + ConvertToUpper(*field->name) + ".GetValue(&fbeValue." + ConvertToUpper(*field->name) + "); err != nil {");
-            else
-                WriteLineIndent("if fbeValue." + ConvertToUpper(*field->name) + ", fbeFieldSize, err = fm." + ConvertToUpper(*field->name) + ".Get(); err != nil {");
+            WriteLineIndent("fm." + base_final_name + ".SetFBEOffset(fbeCurrentOffset)");
+            WriteLineIndent("if fbeFieldSize, err = fm." + base_final_name + ".GetFields(fbeValue." + ConvertBaseName(base_type) + "); err != nil {");
             Indent(1);
             WriteLineIndent("return fbeCurrentSize, err");
             Indent(-1);
-            if (field->array)
-            {
-                WriteLineIndent("} else {");
-                Indent(1);
-                WriteLineIndent("copy(fbeValue." + ConvertToUpper(*field->name) + "[:], slice)");
-                WriteLineIndent("fbeFieldSize = size");
-                Indent(-1);
-            }
             WriteLineIndent("}");
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
             WriteLineIndent("fbeCurrentSize += fbeFieldSize");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("fm." + ConvertToUpper(*field->name) + ".SetFBEOffset(fbeCurrentOffset)");
+                if (field->array)
+                    WriteLineIndent("if slice, size, err := fm." + ConvertToUpper(*field->name) + ".Get(); err != nil {");
+                else if (field->vector || field->list || field->set || field->map || field->hash || field->optional)
+                    WriteLineIndent("if fbeValue." + ConvertToUpper(*field->name) + ", fbeFieldSize, err = fm." + ConvertToUpper(*field->name) + ".Get(); err != nil {");
+                else if (!IsGoType(*field->type))
+                    WriteLineIndent("if fbeFieldSize, err = fm." + ConvertToUpper(*field->name) + ".GetValue(&fbeValue." + ConvertToUpper(*field->name) + "); err != nil {");
+                else
+                    WriteLineIndent("if fbeValue." + ConvertToUpper(*field->name) + ", fbeFieldSize, err = fm." + ConvertToUpper(*field->name) + ".Get(); err != nil {");
+                Indent(1);
+                WriteLineIndent("return fbeCurrentSize, err");
+                Indent(-1);
+                if (field->array)
+                {
+                    WriteLineIndent("} else {");
+                    Indent(1);
+                    WriteLineIndent("copy(fbeValue." + ConvertToUpper(*field->name) + "[:], slice)");
+                    WriteLineIndent("fbeFieldSize = size");
+                    Indent(-1);
+                }
+                WriteLineIndent("}");
+                WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
+                WriteLineIndent("fbeCurrentSize += fbeFieldSize");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("return fbeCurrentSize, err");
     }
-    WriteLine();
-    WriteLineIndent("return fbeCurrentSize, err");
+    else
+        WriteLineIndent("return 0, nil");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -6875,32 +6902,17 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
     WriteLineIndent("// Set the struct fields values");
     WriteLineIndent("func (fm *" + final_model_name + ") SetFields(fbeValue *" + struct_name + ") (int, error) {");
     Indent(1);
-    WriteLineIndent("var err error = nil");
-    WriteLineIndent("fbeCurrentOffset := 0");
-    WriteLineIndent("fbeCurrentSize := 0");
-    WriteLineIndent("fbeFieldSize := 0");
-    if (!base_type.empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("fm." + base_final_name + ".SetFBEOffset(fbeCurrentOffset)");
-        WriteLineIndent("if fbeFieldSize, err = fm." + base_final_name + ".SetFields(fbeValue." + ConvertBaseName(base_type) + "); err != nil {");
-        Indent(1);
-        WriteLineIndent("return fbeCurrentSize, err");
-        Indent(-1);
-        WriteLineIndent("}");
-        WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
-        WriteLineIndent("fbeCurrentSize += fbeFieldSize");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("var err error = nil");
+        WriteLineIndent("fbeCurrentSize := 0");
+        WriteLineIndent("fbeCurrentOffset := 0");
+        WriteLineIndent("fbeFieldSize := 0");
+        if (!base_type.empty())
         {
             WriteLine();
-            WriteLineIndent("fm." + ConvertToUpper(*field->name) + ".SetFBEOffset(fbeCurrentOffset)");
-            if (field->array)
-                WriteLineIndent("if fbeFieldSize, err = fm." + ConvertToUpper(*field->name) + ".Set(fbeValue." + ConvertToUpper(*field->name) + "[:]); err != nil {");
-            else
-                WriteLineIndent("if fbeFieldSize, err = fm." + ConvertToUpper(*field->name) + ".Set(" + ((IsGoType(*field->type) || field->vector || field->list || field->set || field->map || field->hash || field->optional) ? "" : "&") + "fbeValue." + ConvertToUpper(*field->name) + "); err != nil {");
+            WriteLineIndent("fm." + base_final_name + ".SetFBEOffset(fbeCurrentOffset)");
+            WriteLineIndent("if fbeFieldSize, err = fm." + base_final_name + ".SetFields(fbeValue." + ConvertBaseName(base_type) + "); err != nil {");
             Indent(1);
             WriteLineIndent("return fbeCurrentSize, err");
             Indent(-1);
@@ -6908,9 +6920,29 @@ void GeneratorGo::GenerateStructFinalModel(const std::shared_ptr<Package>& p, co
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
             WriteLineIndent("fbeCurrentSize += fbeFieldSize");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("fm." + ConvertToUpper(*field->name) + ".SetFBEOffset(fbeCurrentOffset)");
+                if (field->array)
+                    WriteLineIndent("if fbeFieldSize, err = fm." + ConvertToUpper(*field->name) + ".Set(fbeValue." + ConvertToUpper(*field->name) + "[:]); err != nil {");
+                else
+                    WriteLineIndent("if fbeFieldSize, err = fm." + ConvertToUpper(*field->name) + ".Set(" + ((IsGoType(*field->type) || field->vector || field->list || field->set || field->map || field->hash || field->optional) ? "" : "&") + "fbeValue." + ConvertToUpper(*field->name) + "); err != nil {");
+                Indent(1);
+                WriteLineIndent("return fbeCurrentSize, err");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("fbeCurrentOffset += fbeFieldSize");
+                WriteLineIndent("fbeCurrentSize += fbeFieldSize");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("return fbeCurrentSize, err");
     }
-    WriteLine();
-    WriteLineIndent("return fbeCurrentSize, err");
+    else
+        WriteLineIndent("return 0, nil");
     Indent(-1);
     WriteLineIndent("}");
 

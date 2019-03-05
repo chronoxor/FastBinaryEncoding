@@ -27,6 +27,7 @@ class FinalModelStructBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, o
     val f3: FinalModelOptionalBytes = FinalModelOptionalBytes(buffer, 0)
 
     // Get the allocation size
+    @Suppress("UNUSED_PARAMETER")
     fun fbeAllocationSize(fbeValue: StructBytes): Long = (0
         + f1.fbeAllocationSize(fbeValue.f1)
         + f2.fbeAllocationSize(fbeValue.f2)
@@ -88,6 +89,7 @@ class FinalModelStructBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, o
     }
 
     // Get the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun getFields(fbeValue: StructBytes): Long
     {
         var fbeCurrentOffset = 0L
@@ -122,6 +124,7 @@ class FinalModelStructBytes(buffer: Buffer, offset: Long) : FinalModel(buffer, o
     }
 
     // Set the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun setFields(fbeValue: StructBytes): Long
     {
         var fbeCurrentOffset = 0L

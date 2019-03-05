@@ -491,8 +491,8 @@ func (fm *FinalModelStructSimple) GetValue(fbeValue *StructSimple) (int, error) 
 // Get the struct fields values
 func (fm *FinalModelStructSimple) GetFields(fbeValue *StructSimple) (int, error) {
     var err error = nil
-    fbeCurrentOffset := 0
     fbeCurrentSize := 0
+    fbeCurrentOffset := 0
     fbeFieldSize := 0
 
     fm.Id.SetFBEOffset(fbeCurrentOffset)
@@ -824,8 +824,8 @@ func (fm *FinalModelStructSimple) Set(fbeValue *StructSimple) (int, error) {
 // Set the struct fields values
 func (fm *FinalModelStructSimple) SetFields(fbeValue *StructSimple) (int, error) {
     var err error = nil
-    fbeCurrentOffset := 0
     fbeCurrentSize := 0
+    fbeCurrentOffset := 0
     fbeFieldSize := 0
 
     fm.Id.SetFBEOffset(fbeCurrentOffset)

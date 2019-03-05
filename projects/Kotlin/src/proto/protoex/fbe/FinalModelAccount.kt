@@ -30,6 +30,7 @@ class FinalModelAccount(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     val orders: FinalModelVectorOrder = FinalModelVectorOrder(buffer, 0)
 
     // Get the allocation size
+    @Suppress("UNUSED_PARAMETER")
     fun fbeAllocationSize(fbeValue: Account): Long = (0
         + id.fbeAllocationSize(fbeValue.id)
         + name.fbeAllocationSize(fbeValue.name)
@@ -112,6 +113,7 @@ class FinalModelAccount(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     }
 
     // Get the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun getFields(fbeValue: Account): Long
     {
         var fbeCurrentOffset = 0L
@@ -161,6 +163,7 @@ class FinalModelAccount(buffer: Buffer, offset: Long) : FinalModel(buffer, offse
     }
 
     // Set the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun setFields(fbeValue: Account): Long
     {
         var fbeCurrentOffset = 0L

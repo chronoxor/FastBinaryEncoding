@@ -36,6 +36,7 @@ open class StructSet : Comparable<Any?>
         this.f4 = f4
     }
 
+    @Suppress("UNUSED_PARAMETER")
     constructor(other: StructSet)
     {
         this.f1 = other.f1

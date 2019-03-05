@@ -37,6 +37,7 @@ class FinalModelStructNested(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     val f1011: FinalModelOptionalStructOptional = FinalModelOptionalStructOptional(buffer, 0)
 
     // Get the allocation size
+    @Suppress("UNUSED_PARAMETER")
     fun fbeAllocationSize(fbeValue: StructNested): Long = (0
         + parent.fbeAllocationSize(fbeValue)
         + f1000.fbeAllocationSize(fbeValue.f1000)
@@ -168,6 +169,7 @@ class FinalModelStructNested(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Get the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun getFields(fbeValue: StructNested): Long
     {
         var fbeCurrentOffset = 0L
@@ -252,6 +254,7 @@ class FinalModelStructNested(buffer: Buffer, offset: Long) : FinalModel(buffer, 
     }
 
     // Set the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun setFields(fbeValue: StructNested): Long
     {
         var fbeCurrentOffset = 0L

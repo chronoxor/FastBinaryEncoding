@@ -4511,9 +4511,9 @@ void GeneratorCSharp::GenerateFlags(const std::shared_ptr<Package>& p, const std
     Indent(1);
     WriteLineIndent("var value = new " + *f->name + "(Value);");
     WriteLineIndent("var sb = new StringBuilder();");
-    WriteLineIndent("bool first = true;");
-    if (f->body)
+    if (f->body && !f->body->values.empty())
     {
+        WriteLineIndent("bool first = true;");
         for (const auto& value : f->body->values)
         {
             WriteLineIndent("if (HasFlags(" + *value->name + "))");
@@ -4751,32 +4751,35 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
     WriteLineIndent("};");
 
     // Generate struct initialization constructor
-    first = true;
-    WriteLine();
-    WriteIndent("public " + *s->name + "(");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        Write(ConvertTypeName(*s->base, false) + " parent");
-        first = false;
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        first = true;
+        WriteLine();
+        WriteIndent("public " + *s->name + "(");
+        if (s->base && !s->base->empty())
         {
-            Write(std::string(first ? "" : ", ") + ConvertTypeName(*field) + " " + *field->name);
+            Write(ConvertTypeName(*s->base, false) + " parent");
             first = false;
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                Write(std::string(first ? "" : ", ") + ConvertTypeName(*field) + " " + *field->name);
+                first = false;
+            }
+        }
+        WriteLine(")");
+        WriteLineIndent("{");
+        Indent(1);
+        if (s->base && !s->base->empty())
+            WriteLineIndent("this.parent = parent;");
+        if (s->body)
+            for (const auto& field : s->body->fields)
+                WriteLineIndent("this." + *field->name + " = " + *field->name + ";");
+        Indent(-1);
+        WriteLineIndent("}");
     }
-    WriteLine(")");
-    WriteLineIndent("{");
-    Indent(1);
-    if (s->base && !s->base->empty())
-        WriteLineIndent("this.parent = parent;");
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            WriteLineIndent("this." + *field->name + " = " + *field->name + ";");
-    Indent(-1);
-    WriteLineIndent("}");
 
     // Generate struct Clone() method
     WriteLine();
@@ -5329,37 +5332,40 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     WriteLineIndent("public bool VerifyFields(long fbeStructSize)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeCurrentSize = 4 + 4;");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("if ((fbeCurrentSize + parent.FBEBody - 4 - 4) > fbeStructSize)");
-        Indent(1);
-        WriteLineIndent("return true;");
-        Indent(-1);
-        WriteLineIndent("if (!parent.VerifyFields(fbeStructSize))");
-        Indent(1);
-        WriteLineIndent("return false;");
-        Indent(-1);
-        WriteLineIndent("fbeCurrentSize += parent.FBEBody - 4 - 4;");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("long fbeCurrentSize = 4 + 4;");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".FBESize) > fbeStructSize)");
+            WriteLineIndent("if ((fbeCurrentSize + parent.FBEBody - 4 - 4) > fbeStructSize)");
             Indent(1);
             WriteLineIndent("return true;");
             Indent(-1);
-            WriteLineIndent("if (!" + *field->name + ".Verify())");
+            WriteLineIndent("if (!parent.VerifyFields(fbeStructSize))");
             Indent(1);
             WriteLineIndent("return false;");
             Indent(-1);
-            WriteLineIndent("fbeCurrentSize += " + *field->name + ".FBESize;");
+            WriteLineIndent("fbeCurrentSize += parent.FBEBody - 4 - 4;");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".FBESize) > fbeStructSize)");
+                Indent(1);
+                WriteLineIndent("return true;");
+                Indent(-1);
+                WriteLineIndent("if (!" + *field->name + ".Verify())");
+                Indent(1);
+                WriteLineIndent("return false;");
+                Indent(-1);
+                WriteLineIndent("fbeCurrentSize += " + *field->name + ".FBESize;");
+            }
+        }
+        WriteLine();
     }
-    WriteLine();
     WriteLineIndent("return true;");
     Indent(-1);
     WriteLineIndent("}");
@@ -5432,38 +5438,41 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     WriteLineIndent("public void GetFields(out " + *s->name + " fbeValue, long fbeStructSize)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeCurrentSize = 4 + 4;");
-    WriteLine();
-    WriteLineIndent("fbeValue = " + *s->name + ".Default;");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
+        WriteLineIndent("long fbeCurrentSize = 4 + 4;");
         WriteLine();
-        WriteLineIndent("if ((fbeCurrentSize + parent.FBEBody - 4 - 4) <= fbeStructSize)");
-        Indent(1);
-        WriteLineIndent("parent.GetFields(out fbeValue.parent, fbeStructSize);");
-        Indent(-1);
-        WriteLineIndent("fbeCurrentSize += parent.FBEBody - 4 - 4;");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("fbeValue = " + *s->name + ".Default;");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".FBESize) <= fbeStructSize)");
+            WriteLineIndent("if ((fbeCurrentSize + parent.FBEBody - 4 - 4) <= fbeStructSize)");
             Indent(1);
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent(*field->name + ".Get(ref fbeValue." + *field->name + ");");
-            else
-                WriteLineIndent(*field->name + ".Get(out fbeValue." + *field->name + (field->value ? (", " + ConvertConstant(*field->type, *field->value, field->optional)) : "") + ");");
+            WriteLineIndent("parent.GetFields(out fbeValue.parent, fbeStructSize);");
             Indent(-1);
-            WriteLineIndent("else");
-            Indent(1);
-            if (field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent("fbeValue." + *field->name + ".Clear();");
-            else
-                WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field) + ";");
-            Indent(-1);
-            WriteLineIndent("fbeCurrentSize += " + *field->name + ".FBESize;");
+            WriteLineIndent("fbeCurrentSize += parent.FBEBody - 4 - 4;");
+        }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".FBESize) <= fbeStructSize)");
+                Indent(1);
+                if (field->array || field->vector || field->list || field->set || field->map || field->hash)
+                    WriteLineIndent(*field->name + ".Get(ref fbeValue." + *field->name + ");");
+                else
+                    WriteLineIndent(*field->name + ".Get(out fbeValue." + *field->name + (field->value ? (", " + ConvertConstant(*field->type, *field->value, field->optional)) : "") + ");");
+                Indent(-1);
+                WriteLineIndent("else");
+                Indent(1);
+                if (field->vector || field->list || field->set || field->map || field->hash)
+                    WriteLineIndent("fbeValue." + *field->name + ".Clear();");
+                else
+                    WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field) + ";");
+                Indent(-1);
+                WriteLineIndent("fbeCurrentSize += " + *field->name + ".FBESize;");
+            }
         }
     }
     Indent(-1);
@@ -5531,11 +5540,14 @@ void GeneratorCSharp::GenerateStructFieldModel(const std::shared_ptr<Package>& p
     WriteLineIndent("public void SetFields(" + *s->name + " fbeValue)");
     WriteLineIndent("{");
     Indent(1);
-    if (s->base && !s->base->empty())
-        WriteLineIndent("parent.SetFields(fbeValue.parent);");
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            WriteLineIndent(*field->name + ".Set(fbeValue." + *field->name + ");");
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
+    {
+        if (s->base && !s->base->empty())
+            WriteLineIndent("parent.SetFields(fbeValue.parent);");
+        if (s->body)
+            for (const auto& field : s->body->fields)
+                WriteLineIndent(*field->name + ".Set(fbeValue." + *field->name + ");");
+    }
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5782,35 +5794,40 @@ void GeneratorCSharp::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     WriteLineIndent("public long VerifyFields()");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeCurrentOffset = 0;");
-    WriteLineIndent("long fbeFieldSize;");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("parent.FBEOffset = fbeCurrentOffset;");
-        WriteLineIndent("fbeFieldSize = parent.VerifyFields();");
-        WriteLineIndent("if (fbeFieldSize == long.MaxValue)");
-        Indent(1);
-        WriteLineIndent("return long.MaxValue;");
-        Indent(-1);
-        WriteLineIndent("fbeCurrentOffset += fbeFieldSize;");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("long fbeCurrentOffset = 0;");
+        WriteLineIndent("long fbeFieldSize;");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent(*field->name + ".FBEOffset = fbeCurrentOffset;");
-            WriteLineIndent("fbeFieldSize = " + *field->name + ".Verify();");
+            WriteLineIndent("parent.FBEOffset = fbeCurrentOffset;");
+            WriteLineIndent("fbeFieldSize = parent.VerifyFields();");
             WriteLineIndent("if (fbeFieldSize == long.MaxValue)");
             Indent(1);
             WriteLineIndent("return long.MaxValue;");
             Indent(-1);
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize;");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent(*field->name + ".FBEOffset = fbeCurrentOffset;");
+                WriteLineIndent("fbeFieldSize = " + *field->name + ".Verify();");
+                WriteLineIndent("if (fbeFieldSize == long.MaxValue)");
+                Indent(1);
+                WriteLineIndent("return long.MaxValue;");
+                Indent(-1);
+                WriteLineIndent("fbeCurrentOffset += fbeFieldSize;");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("return fbeCurrentOffset;");
     }
-    WriteLine();
-    WriteLineIndent("return fbeCurrentOffset;");
+    else
+        WriteLineIndent("return 0;");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5833,32 +5850,37 @@ void GeneratorCSharp::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     WriteLineIndent("public long GetFields(out " + *s->name + " fbeValue)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeCurrentOffset = 0;");
-    WriteLineIndent("long fbeCurrentSize = 0;");
-    WriteLineIndent("long fbeFieldSize;");
-    WriteLine();
-    WriteLineIndent("fbeValue = " + *s->name + ".Default;");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
+        WriteLineIndent("long fbeCurrentOffset = 0;");
+        WriteLineIndent("long fbeCurrentSize = 0;");
+        WriteLineIndent("long fbeFieldSize;");
         WriteLine();
-        WriteLineIndent("parent.FBEOffset = fbeCurrentOffset;");
-        WriteLineIndent("fbeFieldSize = parent.GetFields(out fbeValue.parent);");
-        WriteLineIndent("fbeCurrentOffset += fbeFieldSize;");
-        WriteLineIndent("fbeCurrentSize += fbeFieldSize;");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("fbeValue = " + *s->name + ".Default;");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent(*field->name + ".FBEOffset = fbeCurrentOffset;");
-            WriteLineIndent("fbeFieldSize = " + *field->name + ".Get(out fbeValue." + *field->name + ");");
+            WriteLineIndent("parent.FBEOffset = fbeCurrentOffset;");
+            WriteLineIndent("fbeFieldSize = parent.GetFields(out fbeValue.parent);");
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize;");
             WriteLineIndent("fbeCurrentSize += fbeFieldSize;");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent(*field->name + ".FBEOffset = fbeCurrentOffset;");
+                WriteLineIndent("fbeFieldSize = " + *field->name + ".Get(out fbeValue." + *field->name + ");");
+                WriteLineIndent("fbeCurrentOffset += fbeFieldSize;");
+                WriteLineIndent("fbeCurrentSize += fbeFieldSize;");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("return fbeCurrentSize;");
     }
-    WriteLine();
-    WriteLineIndent("return fbeCurrentSize;");
+    else
+        WriteLineIndent("return 0;");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -5881,30 +5903,35 @@ void GeneratorCSharp::GenerateStructFinalModel(const std::shared_ptr<Package>& p
     WriteLineIndent("public long SetFields(" + *s->name + " fbeValue)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeCurrentOffset = 0;");
-    WriteLineIndent("long fbeCurrentSize = 0;");
-    WriteLineIndent("long fbeFieldSize;");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("parent.FBEOffset = fbeCurrentOffset;");
-        WriteLineIndent("fbeFieldSize = parent.SetFields(fbeValue.parent);");
-        WriteLineIndent("fbeCurrentOffset += fbeFieldSize;");
-        WriteLineIndent("fbeCurrentSize += fbeFieldSize;");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("long fbeCurrentOffset = 0;");
+        WriteLineIndent("long fbeCurrentSize = 0;");
+        WriteLineIndent("long fbeFieldSize;");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent(*field->name + ".FBEOffset = fbeCurrentOffset;");
-            WriteLineIndent("fbeFieldSize = " + *field->name + ".Set(fbeValue." + *field->name + ");");
+            WriteLineIndent("parent.FBEOffset = fbeCurrentOffset;");
+            WriteLineIndent("fbeFieldSize = parent.SetFields(fbeValue.parent);");
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize;");
             WriteLineIndent("fbeCurrentSize += fbeFieldSize;");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent(*field->name + ".FBEOffset = fbeCurrentOffset;");
+                WriteLineIndent("fbeFieldSize = " + *field->name + ".Set(fbeValue." + *field->name + ");");
+                WriteLineIndent("fbeCurrentOffset += fbeFieldSize;");
+                WriteLineIndent("fbeCurrentSize += fbeFieldSize;");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("return fbeCurrentSize;");
     }
-    WriteLine();
-    WriteLineIndent("return fbeCurrentSize;");
+    else
+        WriteLineIndent("return 0;");
     Indent(-1);
     WriteLineIndent("}");
 

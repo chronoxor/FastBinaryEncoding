@@ -48,6 +48,7 @@ open class StructArray : Comparable<Any?>
         this.f10 = f10
     }
 
+    @Suppress("UNUSED_PARAMETER")
     constructor(other: StructArray)
     {
         this.f1 = other.f1

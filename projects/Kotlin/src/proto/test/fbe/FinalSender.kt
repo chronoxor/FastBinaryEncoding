@@ -37,6 +37,7 @@ open class FinalSender : fbe.Sender
     val StructMapModel: StructMapFinalModel
     val StructHashModel: StructHashFinalModel
     val StructHashExModel: StructHashExFinalModel
+    val StructEmptyModel: StructEmptyFinalModel
 
     constructor() : super(true)
     {
@@ -52,6 +53,7 @@ open class FinalSender : fbe.Sender
         StructMapModel = StructMapFinalModel(buffer)
         StructHashModel = StructHashFinalModel(buffer)
         StructHashExModel = StructHashExFinalModel(buffer)
+        StructEmptyModel = StructEmptyFinalModel(buffer)
     }
 
     constructor(buffer: Buffer) : super(buffer, true)
@@ -68,6 +70,7 @@ open class FinalSender : fbe.Sender
         StructMapModel = StructMapFinalModel(buffer)
         StructHashModel = StructHashFinalModel(buffer)
         StructHashExModel = StructHashExFinalModel(buffer)
+        StructEmptyModel = StructEmptyFinalModel(buffer)
     }
 
     fun send(value: test.StructSimple): Long
@@ -246,6 +249,23 @@ open class FinalSender : fbe.Sender
         val serialized = StructHashExModel.serialize(value)
         assert(serialized > 0) { "test.StructHashEx serialization failed!" }
         assert(StructHashExModel.verify()) { "test.StructHashEx validation failed!" }
+
+        // Log the value
+        if (logging)
+        {
+            val message = value.toString()
+            onSendLog(message)
+        }
+
+        // Send the serialized value
+        return sendSerialized(serialized)
+    }
+    fun send(value: test.StructEmpty): Long
+    {
+        // Serialize the value into the FBE stream
+        val serialized = StructEmptyModel.serialize(value)
+        assert(serialized > 0) { "test.StructEmpty serialization failed!" }
+        assert(StructEmptyModel.verify()) { "test.StructEmpty validation failed!" }
 
         // Log the value
         if (logging)

@@ -488,6 +488,226 @@ namespace test {
 
 #if UTF8JSON
 
+    public class EnumEmptyConverter : IJsonFormatter<EnumEmpty>
+    {
+        public void Serialize(ref JsonWriter writer, EnumEmpty value, IJsonFormatterResolver jsonFormatterResolver)
+        {
+            writer.WriteInt32(value.Value);
+        }
+
+        public EnumEmpty Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
+        {
+            var result = EnumEmpty.Default;
+            result.Value = reader.ReadInt32();
+            return result;
+        }
+    }
+
+    [JsonFormatter(typeof(EnumEmptyConverter))]
+#else
+
+    public class EnumEmptyConverter : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            return objectType == typeof(EnumEmpty);
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((EnumEmpty)value).Value);
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.Value == null)
+                return null;
+
+            var value = EnumEmpty.Default;
+            switch (reader.Value)
+            {
+                case long longValue:
+                    value.Value = (int)longValue;
+                    return value;
+                case BigInteger bigValue:
+                    value.Value = (int)bigValue;
+                    return value;
+                default:
+                    return null;
+            }
+        }
+    }
+
+    [JsonConverter(typeof(EnumEmptyConverter))]
+#endif
+
+    public struct EnumEmpty : IComparable, IComparable<EnumEmpty>, IEquatable<EnumEmpty>
+    {
+        public int Value { get; internal set; }
+
+        private EnumEmpty(int value) : this()
+        {
+            Value = value;
+        }
+
+        public EnumEmpty(EnumEmpty value) : this()
+        {
+            Value = value.Value;
+        }
+
+        public int CompareTo(object other)
+        {
+            return Value.CompareTo(((EnumEmpty)other).Value);
+        }
+
+        public int CompareTo(EnumEmpty other)
+        {
+            return Value.CompareTo(other.Value);
+        }
+
+        public override bool Equals(object other)
+        {
+            return (other is EnumEmpty value) && Value.Equals(value.Value);
+        }
+
+        public bool Equals(EnumEmpty other)
+        {
+            return Value.Equals(other.Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public static bool operator==(EnumEmpty value1, EnumEmpty value2)
+        {
+            return value1.Value == value2.Value;
+        }
+
+        public static bool operator!=(EnumEmpty value1, EnumEmpty value2)
+        {
+            return value1.Value != value2.Value;
+        }
+
+        public static EnumEmpty Default => new EnumEmpty();
+
+        public static FBE.FieldModelValueType<EnumEmpty> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelEnumEmpty(buffer, offset); }
+
+
+        public override string ToString()
+        {
+            return "<unknown>";
+        }
+    }
+
+} // namespace test
+
+namespace FBE {
+namespace test {
+
+    using global::test;
+
+    // Fast Binary Encoding EnumEmpty field model
+    public class FieldModelEnumEmpty : FieldModelValueType<EnumEmpty>
+    {
+        public FieldModelEnumEmpty(Buffer buffer, long offset) : base(buffer, offset) {}
+
+        // Get the field size
+        public override long FBESize => 4;
+
+        // Clone the field model
+        public override FieldModelValueType<EnumEmpty> Clone() { return new FieldModelEnumEmpty(_buffer, _offset); }
+
+        // Get the value
+        public override void Get(out EnumEmpty value) { Get(out value, EnumEmpty.Default); }
+        public override void Get(out EnumEmpty value, EnumEmpty defaults)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+            {
+                value = defaults;
+                return;
+            }
+
+            value = EnumEmpty.Default;
+            value.Value = (int)ReadInt32(FBEOffset);
+        }
+
+        // Set the value
+        public override void Set(EnumEmpty value)
+        {
+            Debug.Assert(((_buffer.Offset + FBEOffset + FBESize) <= _buffer.Size), "Model is broken!");
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                return;
+
+            Write(FBEOffset, value.Value);
+        }
+    }
+
+} // namespace test
+} // namespace FBE
+
+namespace FBE {
+namespace test {
+
+    using global::test;
+
+    // Fast Binary Encoding EnumEmpty final model
+    public class FinalModelEnumEmpty : FinalModelValueType<EnumEmpty>
+    {
+        public FinalModelEnumEmpty(Buffer buffer, long offset) : base(buffer, offset) {}
+
+        // Get the allocation size
+        public override long FBEAllocationSize(EnumEmpty value) { return FBESize; }
+
+        // Get the final size
+        public override long FBESize => 4;
+
+        // Clone the final model
+        public override FinalModelValueType<EnumEmpty> Clone() { return new FinalModelEnumEmpty(_buffer, _offset); }
+
+        // Check if the value is valid
+        public override long Verify()
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                return long.MaxValue;
+
+            return FBESize;
+        }
+
+        // Get the value
+        public override long Get(out EnumEmpty value)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+            {
+                value = EnumEmpty.Default;
+                return 0;
+            }
+
+            value = EnumEmpty.Default;
+            value.Value = (int)ReadInt32(FBEOffset);
+            return FBESize;
+        }
+
+        // Set the value
+        public override long Set(EnumEmpty value)
+        {
+            Debug.Assert(((_buffer.Offset + FBEOffset + FBESize) <= _buffer.Size), "Model is broken!");
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                return 0;
+
+            Write(FBEOffset, value.Value);
+            return FBESize;
+        }
+    }
+
+} // namespace test
+} // namespace FBE
+
+namespace test {
+
+#if UTF8JSON
+
     public class FlagsSimpleConverter : IJsonFormatter<FlagsSimple>
     {
         public void Serialize(ref JsonWriter writer, FlagsSimple value, IJsonFormatterResolver jsonFormatterResolver)
@@ -1077,6 +1297,260 @@ namespace test {
 
         // Set the value
         public override long Set(FlagsTyped value)
+        {
+            Debug.Assert(((_buffer.Offset + FBEOffset + FBESize) <= _buffer.Size), "Model is broken!");
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                return 0;
+
+            Write(FBEOffset, value.Value);
+            return FBESize;
+        }
+    }
+
+} // namespace test
+} // namespace FBE
+
+namespace test {
+
+#if UTF8JSON
+
+    public class FlagsEmptyConverter : IJsonFormatter<FlagsEmpty>
+    {
+        public void Serialize(ref JsonWriter writer, FlagsEmpty value, IJsonFormatterResolver jsonFormatterResolver)
+        {
+            writer.WriteInt32(value.Value);
+        }
+
+        public FlagsEmpty Deserialize(ref JsonReader reader, IJsonFormatterResolver jsonFormatterResolver)
+        {
+            var result = FlagsEmpty.Default;
+            result.Value = reader.ReadInt32();
+            return result;
+        }
+    }
+
+    [JsonFormatter(typeof(FlagsEmptyConverter))]
+#else
+
+    public class FlagsEmptyConverter : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            return objectType == typeof(FlagsEmpty);
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            writer.WriteValue(((FlagsEmpty)value).Value);
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            if (reader.Value == null)
+                return null;
+
+            var value = FlagsEmpty.Default;
+            switch (reader.Value)
+            {
+                case long longValue:
+                    value.Value = (int)longValue;
+                    return value;
+                case BigInteger bigValue:
+                    value.Value = (int)bigValue;
+                    return value;
+                default:
+                    return null;
+            }
+        }
+    }
+
+    [JsonConverter(typeof(FlagsEmptyConverter))]
+#endif
+
+    public struct FlagsEmpty : IComparable, IComparable<FlagsEmpty>, IEquatable<FlagsEmpty>
+    {
+        public int Value { get; internal set; }
+
+        private FlagsEmpty(int value) : this()
+        {
+            Value = value;
+        }
+
+        public FlagsEmpty(FlagsEmpty value) : this()
+        {
+            Value = value.Value;
+        }
+
+        public bool HasFlags(FlagsEmpty flags)
+        {
+            return (((Value & flags.Value) != 0) && ((Value & flags.Value) == flags.Value));
+        }
+
+        public FlagsEmpty SetFlags(FlagsEmpty flags)
+        {
+            Value |= flags.Value;
+            return this;
+        }
+
+        public FlagsEmpty RemoveFlags(FlagsEmpty flags)
+        {
+            Value &= (byte)~flags.Value;
+            return this;
+        }
+
+        public int CompareTo(object other)
+        {
+            return Value.CompareTo(((FlagsEmpty)other).Value);
+        }
+
+        public int CompareTo(FlagsEmpty other)
+        {
+            return Value.CompareTo(other.Value);
+        }
+
+        public override bool Equals(object other)
+        {
+            return (other is FlagsEmpty value) && Value.Equals(value.Value);
+        }
+
+        public bool Equals(FlagsEmpty other)
+        {
+            return Value.Equals(other.Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public static bool operator==(FlagsEmpty flags1, FlagsEmpty flags2)
+        {
+            return flags1.Value == flags2.Value;
+        }
+
+        public static bool operator!=(FlagsEmpty flags1, FlagsEmpty flags2)
+        {
+            return flags1.Value != flags2.Value;
+        }
+
+        public static FlagsEmpty operator&(FlagsEmpty flags1, FlagsEmpty flags2)
+        {
+            return new FlagsEmpty((byte)(flags1.Value & flags2.Value));
+        }
+
+        public static FlagsEmpty operator|(FlagsEmpty flags1, FlagsEmpty flags2)
+        {
+            return new FlagsEmpty((byte)(flags1.Value | flags2.Value));
+        }
+
+        public static FlagsEmpty operator^(FlagsEmpty flags1, FlagsEmpty flags2)
+        {
+            return new FlagsEmpty((byte)(flags1.Value ^ flags2.Value));
+        }
+
+        public static FlagsEmpty Default => new FlagsEmpty();
+
+        public static FBE.FieldModelValueType<FlagsEmpty> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelFlagsEmpty(buffer, offset); }
+
+
+        public override string ToString()
+        {
+            var value = new FlagsEmpty(Value);
+            var sb = new StringBuilder();
+            return sb.ToString();
+        }
+    }
+
+} // namespace test
+
+namespace FBE {
+namespace test {
+
+    using global::test;
+
+    // Fast Binary Encoding FlagsEmpty field model
+    public class FieldModelFlagsEmpty : FieldModelValueType<FlagsEmpty>
+    {
+        public FieldModelFlagsEmpty(Buffer buffer, long offset) : base(buffer, offset) {}
+
+        // Get the field size
+        public override long FBESize => 4;
+
+        // Clone the field model
+        public override FieldModelValueType<FlagsEmpty> Clone() { return new FieldModelFlagsEmpty(_buffer, _offset); }
+
+        // Get the value
+        public override void Get(out FlagsEmpty value) { Get(out value, FlagsEmpty.Default); }
+        public override void Get(out FlagsEmpty value, FlagsEmpty defaults)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+            {
+                value = defaults;
+                return;
+            }
+
+            value = FlagsEmpty.Default;
+            value.Value = (int)ReadInt32(FBEOffset);
+        }
+
+        // Set the value
+        public override void Set(FlagsEmpty value)
+        {
+            Debug.Assert(((_buffer.Offset + FBEOffset + FBESize) <= _buffer.Size), "Model is broken!");
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                return;
+
+            Write(FBEOffset, value.Value);
+        }
+    }
+
+} // namespace test
+} // namespace FBE
+
+namespace FBE {
+namespace test {
+
+    using global::test;
+
+    // Fast Binary Encoding FlagsEmpty final model
+    public class FinalModelFlagsEmpty : FinalModelValueType<FlagsEmpty>
+    {
+        public FinalModelFlagsEmpty(Buffer buffer, long offset) : base(buffer, offset) {}
+
+        // Get the allocation size
+        public override long FBEAllocationSize(FlagsEmpty value) { return FBESize; }
+
+        // Get the final size
+        public override long FBESize => 4;
+
+        // Clone the final model
+        public override FinalModelValueType<FlagsEmpty> Clone() { return new FinalModelFlagsEmpty(_buffer, _offset); }
+
+        // Check if the value is valid
+        public override long Verify()
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                return long.MaxValue;
+
+            return FBESize;
+        }
+
+        // Get the value
+        public override long Get(out FlagsEmpty value)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+            {
+                value = FlagsEmpty.Default;
+                return 0;
+            }
+
+            value = FlagsEmpty.Default;
+            value.Value = (int)ReadInt32(FBEOffset);
+            return FBESize;
+        }
+
+        // Set the value
+        public override long Set(FlagsEmpty value)
         {
             Debug.Assert(((_buffer.Offset + FBEOffset + FBESize) <= _buffer.Size), "Model is broken!");
             if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
@@ -15120,6 +15594,511 @@ namespace test {
 } // namespace test
 } // namespace FBE
 
+namespace test {
+
+    public struct StructEmpty : IComparable, IComparable<StructEmpty>, IEquatable<StructEmpty>
+    {
+
+        public static StructEmpty Default => new StructEmpty
+        {
+        };
+
+        public StructEmpty Clone()
+        {
+            // Serialize the struct to the FBE stream
+            var writer = new FBE.test.StructEmptyModel();
+            writer.Serialize(this);
+
+            // Deserialize the struct from the FBE stream
+            var reader = new FBE.test.StructEmptyModel();
+            reader.Attach(writer.Buffer);
+            reader.Deserialize(out var result);
+            return result;
+        }
+
+        public int CompareTo(object other)
+        {
+            int result = 0;
+            return result;
+        }
+
+        public int CompareTo(StructEmpty other)
+        {
+            int result = 0;
+            return result;
+        }
+
+        public override bool Equals(object other)
+        {
+            if (!(other is StructEmpty))
+                return false;
+            return true;
+        }
+
+        public bool Equals(StructEmpty other)
+        {
+            return true;
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 17;
+            return hash;
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+            sb.Append("StructEmpty(");
+            sb.Append(")");
+            return sb.ToString();
+        }
+
+        public string ToJson()
+        {
+            var json = FBE.Json.ToJson(this);
+            return json;
+        }
+
+        public static StructEmpty FromJson(string json)
+        {
+            var result = FBE.Json.FromJson<StructEmpty>(json);
+            return result;
+        }
+
+        public static FBE.FieldModelValueType<StructEmpty> CreateFieldModel(FBE.Buffer buffer, long offset) { return new FBE.test.FieldModelStructEmpty(buffer, offset); }
+    }
+
+} // namespace test
+
+namespace FBE {
+namespace test {
+
+    using global::test;
+
+    // Fast Binary Encoding StructEmpty field model
+    public class FieldModelStructEmpty : FieldModelValueType<StructEmpty>
+    {
+
+        public FieldModelStructEmpty(Buffer buffer, long offset) : base(buffer, offset)
+        {
+        }
+
+        // Get the field size
+        public override long FBESize => 4;
+        // Get the field body size
+        public long FBEBody
+        {
+            get
+            {
+                long fbeResult = 4 + 4
+                    ;
+                return fbeResult;
+            }
+        }
+        // Get the field extra size
+        public override long FBEExtra
+        {
+            get
+            {
+                if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                    return 0;
+
+                uint fbeStructOffset = ReadUInt32(FBEOffset);
+                if ((fbeStructOffset == 0) || ((_buffer.Offset + fbeStructOffset + 4) > _buffer.Size))
+                    return 0;
+
+                _buffer.Shift(fbeStructOffset);
+
+                long fbeResult = FBEBody
+                    ;
+
+                _buffer.Unshift(fbeStructOffset);
+
+                return fbeResult;
+            }
+        }
+        // Get the field type
+        public const long FBETypeConst = 143;
+        public long FBEType => FBETypeConst;
+
+        // Clone the field model
+        public override FieldModelValueType<StructEmpty> Clone() { return new FieldModelStructEmpty(_buffer, _offset); }
+
+        // Check if the struct value is valid
+        public override bool Verify() { return Verify(true); }
+        public bool Verify(bool fbeVerifyType)
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                return true;
+
+            uint fbeStructOffset = ReadUInt32(FBEOffset);
+            if ((fbeStructOffset == 0) || ((_buffer.Offset + fbeStructOffset + 4 + 4) > _buffer.Size))
+                return false;
+
+            uint fbeStructSize = ReadUInt32(fbeStructOffset);
+            if (fbeStructSize < (4 + 4))
+                return false;
+
+            uint fbeStructType = ReadUInt32(fbeStructOffset + 4);
+            if (fbeVerifyType && (fbeStructType != FBEType))
+                return false;
+
+            _buffer.Shift(fbeStructOffset);
+            bool fbeResult = VerifyFields(fbeStructSize);
+            _buffer.Unshift(fbeStructOffset);
+            return fbeResult;
+        }
+
+        // Check if the struct fields are valid
+        public bool VerifyFields(long fbeStructSize)
+        {
+            return true;
+        }
+
+        // Get the struct value (begin phase)
+        public long GetBegin()
+        {
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                return 0;
+
+            uint fbeStructOffset = ReadUInt32(FBEOffset);
+            Debug.Assert(((fbeStructOffset > 0) && ((_buffer.Offset + fbeStructOffset + 4 + 4) <= _buffer.Size)), "Model is broken!");
+            if ((fbeStructOffset == 0) || ((_buffer.Offset + fbeStructOffset + 4 + 4) > _buffer.Size))
+                return 0;
+
+            uint fbeStructSize = ReadUInt32(fbeStructOffset);
+            Debug.Assert((fbeStructSize >= (4 + 4)), "Model is broken!");
+            if (fbeStructSize < (4 + 4))
+                return 0;
+
+            _buffer.Shift(fbeStructOffset);
+            return fbeStructOffset;
+        }
+
+        // Get the struct value (end phase)
+        public void GetEnd(long fbeBegin)
+        {
+            _buffer.Unshift(fbeBegin);
+        }
+
+        // Get the struct value
+        public override void Get(out StructEmpty fbeValue) { Get(out fbeValue, StructEmpty.Default); }
+        public override void Get(out StructEmpty fbeValue, StructEmpty defaults)
+        {
+            long fbeBegin = GetBegin();
+            if (fbeBegin == 0)
+            {
+                fbeValue = defaults;
+                return;
+            }
+
+            uint fbeStructSize = ReadUInt32(0);
+            GetFields(out fbeValue, fbeStructSize);
+            GetEnd(fbeBegin);
+        }
+
+        // Get the struct fields values
+        public void GetFields(out StructEmpty fbeValue, long fbeStructSize)
+        {
+        }
+
+        // Set the struct value (begin phase)
+        public long SetBegin()
+        {
+            Debug.Assert(((_buffer.Offset + FBEOffset + FBESize) <= _buffer.Size), "Model is broken!");
+            if ((_buffer.Offset + FBEOffset + FBESize) > _buffer.Size)
+                return 0;
+
+            uint fbeStructSize = (uint)FBEBody;
+            uint fbeStructOffset = (uint)(_buffer.Allocate(fbeStructSize) - _buffer.Offset);
+            Debug.Assert(((fbeStructOffset > 0) && ((_buffer.Offset + fbeStructOffset + fbeStructSize) <= _buffer.Size)), "Model is broken!");
+            if ((fbeStructOffset == 0) || ((_buffer.Offset + fbeStructOffset + fbeStructSize) > _buffer.Size))
+                return 0;
+
+            Write(FBEOffset, fbeStructOffset);
+            Write(fbeStructOffset, fbeStructSize);
+            Write(fbeStructOffset + 4, (uint)FBEType);
+
+            _buffer.Shift(fbeStructOffset);
+            return fbeStructOffset;
+        }
+
+        // Set the struct value (end phase)
+        public void SetEnd(long fbeBegin)
+        {
+            _buffer.Unshift(fbeBegin);
+        }
+
+        // Set the struct value
+        public override void Set(StructEmpty fbeValue)
+        {
+            long fbeBegin = SetBegin();
+            if (fbeBegin == 0)
+                return;
+
+            SetFields(fbeValue);
+            SetEnd(fbeBegin);
+        }
+
+        // Set the struct fields values
+        public void SetFields(StructEmpty fbeValue)
+        {
+        }
+    }
+
+} // namespace test
+} // namespace FBE
+
+namespace FBE {
+namespace test {
+
+    using global::test;
+
+    // Fast Binary Encoding StructEmpty model
+    public class StructEmptyModel : Model
+    {
+        public readonly FieldModelStructEmpty model;
+
+        public StructEmptyModel() { model = new FieldModelStructEmpty(Buffer, 4); }
+        public StructEmptyModel(Buffer buffer) : base(buffer) { model = new FieldModelStructEmpty(Buffer, 4); }
+
+        // Get the model size
+        public long FBESize => model.FBESize + model.FBEExtra;
+        // Get the model type
+        public const long FBETypeConst = FieldModelStructEmpty.FBETypeConst;
+        public long FBEType => FBETypeConst;
+
+        // Check if the struct value is valid
+        public bool Verify()
+        {
+            if ((Buffer.Offset + model.FBEOffset - 4) > Buffer.Size)
+                return false;
+
+            uint fbeFullSize = ReadUInt32(model.FBEOffset - 4);
+            if (fbeFullSize < model.FBESize)
+                return false;
+
+            return model.Verify();
+        }
+
+        // Create a new model (begin phase)
+        public long CreateBegin()
+        {
+            long fbeBegin = Buffer.Allocate(4 + model.FBESize);
+            return fbeBegin;
+        }
+
+        // Create a new model (end phase)
+        public long CreateEnd(long fbeBegin)
+        {
+            long fbeEnd = Buffer.Size;
+            uint fbeFullSize = (uint)(fbeEnd - fbeBegin);
+            Write(model.FBEOffset - 4, fbeFullSize);
+            return fbeFullSize;
+        }
+
+        // Serialize the struct value
+        public long Serialize(StructEmpty value)
+        {
+            long fbeBegin = CreateBegin();
+            model.Set(value);
+            long fbeFullSize = CreateEnd(fbeBegin);
+            return fbeFullSize;
+        }
+
+        // Deserialize the struct value
+        public long Deserialize(out StructEmpty value)
+        {
+            if ((Buffer.Offset + model.FBEOffset - 4) > Buffer.Size)
+            {
+                value = StructEmpty.Default;
+                return 0;
+            }
+
+            uint fbeFullSize = ReadUInt32(model.FBEOffset - 4);
+            Debug.Assert((fbeFullSize >= model.FBESize), "Model is broken!");
+            if (fbeFullSize < model.FBESize)
+            {
+                value = StructEmpty.Default;
+                return 0;
+            }
+
+            model.Get(out value);
+            return fbeFullSize;
+        }
+
+        // Move to the next struct value
+        public void Next(long prev)
+        {
+            model.FBEShift(prev);
+        }
+    }
+
+} // namespace test
+} // namespace FBE
+
+namespace FBE {
+namespace test {
+
+    using global::test;
+
+    // Fast Binary Encoding StructEmpty final model
+    public class FinalModelStructEmpty : FinalModelValueType<StructEmpty>
+    {
+
+        public FinalModelStructEmpty(Buffer buffer, long offset) : base(buffer, offset)
+        {
+        }
+
+        // Get the allocation size
+        public override long FBEAllocationSize(StructEmpty fbeValue)
+        {
+            long fbeResult = 0
+                ;
+            return fbeResult;
+        }
+
+        // Get the final type
+        public const long FBETypeConst = 143;
+        public long FBEType => FBETypeConst;
+
+        // Clone the final model
+        public override FinalModelValueType<StructEmpty> Clone() { return new FinalModelStructEmpty(_buffer, _offset); }
+
+        // Check if the struct value is valid
+        public override long Verify()
+        {
+            _buffer.Shift(FBEOffset);
+            long fbeResult = VerifyFields();
+            _buffer.Unshift(FBEOffset);
+            return fbeResult;
+        }
+
+        // Check if the struct fields are valid
+        public long VerifyFields()
+        {
+            return 0;
+        }
+
+        // Get the struct value
+        public override long Get(out StructEmpty fbeValue)
+        {
+            _buffer.Shift(FBEOffset);
+            long fbeSize = GetFields(out fbeValue);
+            _buffer.Unshift(FBEOffset);
+            return fbeSize;
+        }
+
+        // Get the struct fields values
+        public long GetFields(out StructEmpty fbeValue)
+        {
+            return 0;
+        }
+
+        // Set the struct value
+        public override long Set(StructEmpty fbeValue)
+        {
+            _buffer.Shift(FBEOffset);
+            long fbeResult = SetFields(fbeValue);
+            _buffer.Unshift(FBEOffset);
+            return fbeResult;
+        }
+
+        // Set the struct fields values
+        public long SetFields(StructEmpty fbeValue)
+        {
+            return 0;
+        }
+    }
+
+} // namespace test
+} // namespace FBE
+
+namespace FBE {
+namespace test {
+
+    using global::test;
+
+    // Fast Binary Encoding StructEmpty final model
+    public class StructEmptyFinalModel : Model
+    {
+        private readonly FinalModelStructEmpty _model;
+
+        public StructEmptyFinalModel() { _model = new FinalModelStructEmpty(Buffer, 8); }
+        public StructEmptyFinalModel(Buffer buffer) : base(buffer) { _model = new FinalModelStructEmpty(Buffer, 8); }
+
+        // Get the model type
+        public const long FBETypeConst = FinalModelStructEmpty.FBETypeConst;
+        public long FBEType => FBETypeConst;
+
+        // Check if the struct value is valid
+        public bool Verify()
+        {
+            if ((Buffer.Offset + _model.FBEOffset) > Buffer.Size)
+                return false;
+
+            long fbeStructSize = ReadUInt32(_model.FBEOffset - 8);
+            long fbeStructType = ReadUInt32(_model.FBEOffset - 4);
+            if ((fbeStructSize <= 0) || (fbeStructType != FBEType))
+                return false;
+
+            return ((8 + _model.Verify()) == fbeStructSize);
+        }
+
+        // Serialize the struct value
+        public long Serialize(StructEmpty value)
+        {
+            long fbeInitialSize = Buffer.Size;
+
+            uint fbeStructType = (uint)FBEType;
+            uint fbeStructSize = (uint)(8 + _model.FBEAllocationSize(value));
+            uint fbeStructOffset = (uint)(Buffer.Allocate(fbeStructSize) - Buffer.Offset);
+            Debug.Assert(((Buffer.Offset + fbeStructOffset + fbeStructSize) <= Buffer.Size), "Model is broken!");
+            if ((Buffer.Offset + fbeStructOffset + fbeStructSize) > Buffer.Size)
+                return 0;
+
+            fbeStructSize = (uint)(8 + _model.Set(value));
+            Buffer.Resize(fbeInitialSize + fbeStructSize);
+
+            Write(_model.FBEOffset - 8, fbeStructSize);
+            Write(_model.FBEOffset - 4, fbeStructType);
+
+            return fbeStructSize;
+        }
+
+        // Deserialize the struct value
+        public long Deserialize(out StructEmpty value)
+        {
+            Debug.Assert(((Buffer.Offset + _model.FBEOffset) <= Buffer.Size), "Model is broken!");
+            if ((Buffer.Offset + _model.FBEOffset) > Buffer.Size)
+            {
+                value = StructEmpty.Default;
+                return 0;
+            }
+
+            long fbeStructSize = ReadUInt32(_model.FBEOffset - 8);
+            long fbeStructType = ReadUInt32(_model.FBEOffset - 4);
+            Debug.Assert(((fbeStructSize > 0) && (fbeStructType == FBEType)), "Model is broken!");
+            if ((fbeStructSize <= 0) || (fbeStructType != FBEType))
+            {
+                value = StructEmpty.Default;
+                return 8;
+            }
+
+            return 8 + _model.Get(out value);
+        }
+
+        // Move to the next struct value
+        public void Next(long prev)
+        {
+            _model.FBEShift(prev);
+        }
+    }
+
+} // namespace test
+} // namespace FBE
+
 namespace FBE {
 namespace test {
 
@@ -15141,6 +16120,7 @@ namespace test {
         public readonly StructMapModel StructMapModel;
         public readonly StructHashModel StructHashModel;
         public readonly StructHashExModel StructHashExModel;
+        public readonly StructEmptyModel StructEmptyModel;
 
         public Sender() : base(false)
         {
@@ -15156,6 +16136,7 @@ namespace test {
             StructMapModel = new StructMapModel(Buffer);
             StructHashModel = new StructHashModel(Buffer);
             StructHashExModel = new StructHashExModel(Buffer);
+            StructEmptyModel = new StructEmptyModel(Buffer);
         }
         public Sender(Buffer buffer) : base(buffer, false)
         {
@@ -15171,6 +16152,7 @@ namespace test {
             StructMapModel = new StructMapModel(Buffer);
             StructHashModel = new StructHashModel(Buffer);
             StructHashExModel = new StructHashExModel(Buffer);
+            StructEmptyModel = new StructEmptyModel(Buffer);
         }
 
         public long Send(global::test.StructSimple value)
@@ -15349,6 +16331,23 @@ namespace test {
             long serialized = StructHashExModel.Serialize(value);
             Debug.Assert((serialized > 0), "test.StructHashEx serialization failed!");
             Debug.Assert(StructHashExModel.Verify(), "test.StructHashEx validation failed!");
+
+            // Log the value
+            if (Logging)
+            {
+                string message = value.ToString();
+                OnSendLog(message);
+            }
+
+            // Send the serialized value
+            return SendSerialized(serialized);
+        }
+        public long Send(global::test.StructEmpty value)
+        {
+            // Serialize the value into the FBE stream
+            long serialized = StructEmptyModel.Serialize(value);
+            Debug.Assert((serialized > 0), "test.StructEmpty serialization failed!");
+            Debug.Assert(StructEmptyModel.Verify(), "test.StructEmpty validation failed!");
 
             // Log the value
             if (Logging)
@@ -15389,6 +16388,7 @@ namespace test {
         private global::test.StructMap StructMapValue;
         private global::test.StructHash StructHashValue;
         private global::test.StructHashEx StructHashExValue;
+        private global::test.StructEmpty StructEmptyValue;
 
         // Receiver models accessors
         private readonly StructSimpleModel StructSimpleModel;
@@ -15402,6 +16402,7 @@ namespace test {
         private readonly StructMapModel StructMapModel;
         private readonly StructHashModel StructHashModel;
         private readonly StructHashExModel StructHashExModel;
+        private readonly StructEmptyModel StructEmptyModel;
 
         public Receiver() : base(false)
         {
@@ -15428,6 +16429,8 @@ namespace test {
             StructHashModel = new StructHashModel();
             StructHashExValue = global::test.StructHashEx.Default;
             StructHashExModel = new StructHashExModel();
+            StructEmptyValue = global::test.StructEmpty.Default;
+            StructEmptyModel = new StructEmptyModel();
         }
         public Receiver(Buffer buffer) : base(buffer, false)
         {
@@ -15454,6 +16457,8 @@ namespace test {
             StructHashModel = new StructHashModel();
             StructHashExValue = global::test.StructHashEx.Default;
             StructHashExModel = new StructHashExModel();
+            StructEmptyValue = global::test.StructEmpty.Default;
+            StructEmptyModel = new StructEmptyModel();
         }
 
         // Receive handlers
@@ -15468,6 +16473,7 @@ namespace test {
         protected virtual void OnReceive(global::test.StructMap value) {}
         protected virtual void OnReceive(global::test.StructHash value) {}
         protected virtual void OnReceive(global::test.StructHashEx value) {}
+        protected virtual void OnReceive(global::test.StructEmpty value) {}
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
         {
@@ -15682,6 +16688,25 @@ namespace test {
                     OnReceive(StructHashExValue);
                     return true;
                 }
+                case StructEmptyModel.FBETypeConst:
+                {
+                    // Deserialize the value from the FBE stream
+                    StructEmptyModel.Attach(buffer, offset);
+                    Debug.Assert(StructEmptyModel.Verify(), "test.StructEmpty validation failed!");
+                    long deserialized = StructEmptyModel.Deserialize(out StructEmptyValue);
+                    Debug.Assert((deserialized > 0), "test.StructEmpty deserialization failed!");
+
+                    // Log the value
+                    if (Logging)
+                    {
+                        string message = StructEmptyValue.ToString();
+                        OnReceiveLog(message);
+                    }
+
+                    // Call receive handler with deserialized value
+                    OnReceive(StructEmptyValue);
+                    return true;
+                }
             }
 
             if ((protoReceiver != null) && protoReceiver.OnReceive(type, buffer, offset, size))
@@ -15715,6 +16740,7 @@ namespace test {
         private readonly StructMapModel StructMapModel;
         private readonly StructHashModel StructHashModel;
         private readonly StructHashExModel StructHashExModel;
+        private readonly StructEmptyModel StructEmptyModel;
 
         public Proxy() : base(false)
         {
@@ -15730,6 +16756,7 @@ namespace test {
             StructMapModel = new StructMapModel();
             StructHashModel = new StructHashModel();
             StructHashExModel = new StructHashExModel();
+            StructEmptyModel = new StructEmptyModel();
         }
         public Proxy(Buffer buffer) : base(buffer, false)
         {
@@ -15745,6 +16772,7 @@ namespace test {
             StructMapModel = new StructMapModel();
             StructHashModel = new StructHashModel();
             StructHashExModel = new StructHashExModel();
+            StructEmptyModel = new StructEmptyModel();
         }
 
         // Proxy handlers
@@ -15759,6 +16787,7 @@ namespace test {
         protected virtual void OnProxy(StructMapModel model, long type, byte[] buffer, long offset, long size) {}
         protected virtual void OnProxy(StructHashModel model, long type, byte[] buffer, long offset, long size) {}
         protected virtual void OnProxy(StructHashExModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructEmptyModel model, long type, byte[] buffer, long offset, long size) {}
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
         {
@@ -15874,6 +16903,16 @@ namespace test {
                     OnProxy(StructHashExModel, type, buffer, offset, size);
                     return true;
                 }
+                case StructEmptyModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructEmptyModel.Attach(buffer, offset);
+                    Debug.Assert(StructEmptyModel.Verify(), "test.StructEmpty validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructEmptyModel, type, buffer, offset, size);
+                    return true;
+                }
             }
 
             if ((protoProxy != null) && protoProxy.OnReceive(type, buffer, offset, size))
@@ -15907,6 +16946,7 @@ namespace test {
         public readonly StructMapFinalModel StructMapModel;
         public readonly StructHashFinalModel StructHashModel;
         public readonly StructHashExFinalModel StructHashExModel;
+        public readonly StructEmptyFinalModel StructEmptyModel;
 
         public FinalSender() : base(true)
         {
@@ -15922,6 +16962,7 @@ namespace test {
             StructMapModel = new StructMapFinalModel(Buffer);
             StructHashModel = new StructHashFinalModel(Buffer);
             StructHashExModel = new StructHashExFinalModel(Buffer);
+            StructEmptyModel = new StructEmptyFinalModel(Buffer);
         }
         public FinalSender(Buffer buffer) : base(buffer, true)
         {
@@ -15937,6 +16978,7 @@ namespace test {
             StructMapModel = new StructMapFinalModel(Buffer);
             StructHashModel = new StructHashFinalModel(Buffer);
             StructHashExModel = new StructHashExFinalModel(Buffer);
+            StructEmptyModel = new StructEmptyFinalModel(Buffer);
         }
 
         public long Send(global::test.StructSimple value)
@@ -16126,6 +17168,23 @@ namespace test {
             // Send the serialized value
             return SendSerialized(serialized);
         }
+        public long Send(global::test.StructEmpty value)
+        {
+            // Serialize the value into the FBE stream
+            long serialized = StructEmptyModel.Serialize(value);
+            Debug.Assert((serialized > 0), "test.StructEmpty serialization failed!");
+            Debug.Assert(StructEmptyModel.Verify(), "test.StructEmpty validation failed!");
+
+            // Log the value
+            if (Logging)
+            {
+                string message = value.ToString();
+                OnSendLog(message);
+            }
+
+            // Send the serialized value
+            return SendSerialized(serialized);
+        }
 
         // Send message handler
         protected override long OnSend(byte[] buffer, long offset, long size) { throw new NotImplementedException("FBE.test.Sender.OnSend() not implemented!"); }
@@ -16155,6 +17214,7 @@ namespace test {
         private global::test.StructMap StructMapValue;
         private global::test.StructHash StructHashValue;
         private global::test.StructHashEx StructHashExValue;
+        private global::test.StructEmpty StructEmptyValue;
 
         // Receiver models accessors
         private readonly StructSimpleFinalModel StructSimpleModel;
@@ -16168,6 +17228,7 @@ namespace test {
         private readonly StructMapFinalModel StructMapModel;
         private readonly StructHashFinalModel StructHashModel;
         private readonly StructHashExFinalModel StructHashExModel;
+        private readonly StructEmptyFinalModel StructEmptyModel;
 
         public FinalReceiver() : base(true)
         {
@@ -16194,6 +17255,8 @@ namespace test {
             StructHashModel = new StructHashFinalModel();
             StructHashExValue = global::test.StructHashEx.Default;
             StructHashExModel = new StructHashExFinalModel();
+            StructEmptyValue = global::test.StructEmpty.Default;
+            StructEmptyModel = new StructEmptyFinalModel();
         }
         public FinalReceiver(Buffer buffer) : base(buffer, true)
         {
@@ -16220,6 +17283,8 @@ namespace test {
             StructHashModel = new StructHashFinalModel();
             StructHashExValue = global::test.StructHashEx.Default;
             StructHashExModel = new StructHashExFinalModel();
+            StructEmptyValue = global::test.StructEmpty.Default;
+            StructEmptyModel = new StructEmptyFinalModel();
         }
 
         // Receive handlers
@@ -16234,6 +17299,7 @@ namespace test {
         protected virtual void OnReceive(global::test.StructMap value) {}
         protected virtual void OnReceive(global::test.StructHash value) {}
         protected virtual void OnReceive(global::test.StructHashEx value) {}
+        protected virtual void OnReceive(global::test.StructEmpty value) {}
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
         {
@@ -16448,6 +17514,25 @@ namespace test {
                     OnReceive(StructHashExValue);
                     return true;
                 }
+                case StructEmptyFinalModel.FBETypeConst:
+                {
+                    // Deserialize the value from the FBE stream
+                    StructEmptyModel.Attach(buffer, offset);
+                    Debug.Assert(StructEmptyModel.Verify(), "test.StructEmpty validation failed!");
+                    long deserialized = StructEmptyModel.Deserialize(out StructEmptyValue);
+                    Debug.Assert((deserialized > 0), "test.StructEmpty deserialization failed!");
+
+                    // Log the value
+                    if (Logging)
+                    {
+                        string message = StructEmptyValue.ToString();
+                        OnReceiveLog(message);
+                    }
+
+                    // Call receive handler with deserialized value
+                    OnReceive(StructEmptyValue);
+                    return true;
+                }
             }
 
             if ((protoReceiver != null) && protoReceiver.OnReceive(type, buffer, offset, size))
@@ -16481,6 +17566,7 @@ namespace test {
         private readonly StructMapFinalModel StructMapModel;
         private readonly StructHashFinalModel StructHashModel;
         private readonly StructHashExFinalModel StructHashExModel;
+        private readonly StructEmptyFinalModel StructEmptyModel;
 
         public FinalProxy() : base(true)
         {
@@ -16496,6 +17582,7 @@ namespace test {
             StructMapModel = new StructMapFinalModel();
             StructHashModel = new StructHashFinalModel();
             StructHashExModel = new StructHashExFinalModel();
+            StructEmptyModel = new StructEmptyFinalModel();
         }
         public FinalProxy(Buffer buffer) : base(buffer, true)
         {
@@ -16511,6 +17598,7 @@ namespace test {
             StructMapModel = new StructMapFinalModel();
             StructHashModel = new StructHashFinalModel();
             StructHashExModel = new StructHashExFinalModel();
+            StructEmptyModel = new StructEmptyFinalModel();
         }
 
         // Proxy handlers
@@ -16525,6 +17613,7 @@ namespace test {
         protected virtual void OnProxy(StructMapFinalModel model, long type, byte[] buffer, long offset, long size) {}
         protected virtual void OnProxy(StructHashFinalModel model, long type, byte[] buffer, long offset, long size) {}
         protected virtual void OnProxy(StructHashExFinalModel model, long type, byte[] buffer, long offset, long size) {}
+        protected virtual void OnProxy(StructEmptyFinalModel model, long type, byte[] buffer, long offset, long size) {}
 
         internal override bool OnReceive(long type, byte[] buffer, long offset, long size)
         {
@@ -16638,6 +17727,16 @@ namespace test {
 
                     // Call proxy handler
                     OnProxy(StructHashExModel, type, buffer, offset, size);
+                    return true;
+                }
+                case StructEmptyFinalModel.FBETypeConst:
+                {
+                    // Attach the FBE stream to the proxy model
+                    StructEmptyModel.Attach(buffer, offset);
+                    Debug.Assert(StructEmptyModel.Verify(), "test.StructEmpty validation failed!");
+
+                    // Call proxy handler
+                    OnProxy(StructEmptyModel, type, buffer, offset, size);
                     return true;
                 }
             }

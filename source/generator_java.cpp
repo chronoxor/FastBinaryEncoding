@@ -4996,6 +4996,8 @@ void GeneratorJava::GenerateFlagsJson(const std::shared_ptr<Package>& p, const s
 
 void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s, const CppCommon::Path& path)
 {
+    bool first;
+
     // Open the output file
     CppCommon::Path output = path / (*s->name + ".java");
     Open(output);
@@ -5016,41 +5018,46 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
     Indent(1);
 
     // Generate struct body
-    if (s->body)
+    if (s->body && !s->body->fields.empty())
+    {
         for (const auto& field : s->body->fields)
             WriteLineIndent("public " + ConvertTypeName(*field) + " " + *field->name + " = " + ConvertDefault(*field) + ";");
+        WriteLine();
+    }
 
     // Generate struct default constructor
-    WriteLine();
     WriteLineIndent("public " + *s->name + "() {}");
 
     // Generate struct initialization constructor
-    bool first = true;
-    WriteLine();
-    WriteIndent("public " + *s->name + "(");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        Write(ConvertTypeName(*s->base, false) + " parent");
-        first = false;
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        first = true;
+        WriteLine();
+        WriteIndent("public " + *s->name + "(");
+        if (s->base && !s->base->empty())
         {
-            Write(std::string(first ? "" : ", ") + ConvertTypeName(*field) + " " + *field->name);
+            Write(ConvertTypeName(*s->base, false) + " parent");
             first = false;
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                Write(std::string(first ? "" : ", ") + ConvertTypeName(*field) + " " + *field->name);
+                first = false;
+            }
+        }
+        WriteLine(")");
+        WriteLineIndent("{");
+        Indent(1);
+        if (s->base && !s->base->empty())
+            WriteLineIndent("super(parent);");
+        if (s->body)
+            for (const auto& field : s->body->fields)
+                WriteLineIndent("this." + *field->name + " = " + *field->name + ";");
+        Indent(-1);
+        WriteLineIndent("}");
     }
-    WriteLine(")");
-    WriteLineIndent("{");
-    Indent(1);
-    if (s->base && !s->base->empty())
-        WriteLineIndent("super(parent);");
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            WriteLineIndent("this." + *field->name + " = " + *field->name + ";");
-    Indent(-1);
-    WriteLineIndent("}");
 
     // Generate struct copy constructor
     WriteLine();
@@ -5561,37 +5568,40 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     WriteLineIndent("public boolean verifyFields(long fbeStructSize)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeCurrentSize = 4 + 4;");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("if ((fbeCurrentSize + parent.fbeBody() - 4 - 4) > fbeStructSize)");
-        Indent(1);
-        WriteLineIndent("return true;");
-        Indent(-1);
-        WriteLineIndent("if (!parent.verifyFields(fbeStructSize))");
-        Indent(1);
-        WriteLineIndent("return false;");
-        Indent(-1);
-        WriteLineIndent("fbeCurrentSize += parent.fbeBody() - 4 - 4;");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("long fbeCurrentSize = 4 + 4;");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".fbeSize()) > fbeStructSize)");
+            WriteLineIndent("if ((fbeCurrentSize + parent.fbeBody() - 4 - 4) > fbeStructSize)");
             Indent(1);
             WriteLineIndent("return true;");
             Indent(-1);
-            WriteLineIndent("if (!" + *field->name + ".verify())");
+            WriteLineIndent("if (!parent.verifyFields(fbeStructSize))");
             Indent(1);
             WriteLineIndent("return false;");
             Indent(-1);
-            WriteLineIndent("fbeCurrentSize += " + *field->name + ".fbeSize();");
+            WriteLineIndent("fbeCurrentSize += parent.fbeBody() - 4 - 4;");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".fbeSize()) > fbeStructSize)");
+                Indent(1);
+                WriteLineIndent("return true;");
+                Indent(-1);
+                WriteLineIndent("if (!" + *field->name + ".verify())");
+                Indent(1);
+                WriteLineIndent("return false;");
+                Indent(-1);
+                WriteLineIndent("fbeCurrentSize += " + *field->name + ".fbeSize();");
+            }
+        }
+        WriteLine();
     }
-    WriteLine();
     WriteLineIndent("return true;");
     Indent(-1);
     WriteLineIndent("}");
@@ -5662,36 +5672,39 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     WriteLineIndent("public void getFields(" + *s->name + " fbeValue, long fbeStructSize)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeCurrentSize = 4 + 4;");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("if ((fbeCurrentSize + parent.fbeBody() - 4 - 4) <= fbeStructSize)");
-        Indent(1);
-        WriteLineIndent("parent.getFields(fbeValue, fbeStructSize);");
-        Indent(-1);
-        WriteLineIndent("fbeCurrentSize += parent.fbeBody() - 4 - 4;");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("long fbeCurrentSize = 4 + 4;");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".fbeSize()) <= fbeStructSize)");
+            WriteLineIndent("if ((fbeCurrentSize + parent.fbeBody() - 4 - 4) <= fbeStructSize)");
             Indent(1);
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent(*field->name + ".get(fbeValue." + *field->name + ");");
-            else
-                WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(" + (field->value ? ConvertConstant(*field->type, *field->value, field->optional) : "") + ");");
+            WriteLineIndent("parent.getFields(fbeValue, fbeStructSize);");
             Indent(-1);
-            WriteLineIndent("else");
-            Indent(1);
-            if (field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent("fbeValue." + *field->name + ".clear();");
-            else
-                WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field) + ";");
-            Indent(-1);
-            WriteLineIndent("fbeCurrentSize += " + *field->name + ".fbeSize();");
+            WriteLineIndent("fbeCurrentSize += parent.fbeBody() - 4 - 4;");
+        }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent("if ((fbeCurrentSize + " + *field->name + ".fbeSize()) <= fbeStructSize)");
+                Indent(1);
+                if (field->array || field->vector || field->list || field->set || field->map || field->hash)
+                    WriteLineIndent(*field->name + ".get(fbeValue." + *field->name + ");");
+                else
+                    WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(" + (field->value ? ConvertConstant(*field->type, *field->value, field->optional) : "") + ");");
+                Indent(-1);
+                WriteLineIndent("else");
+                Indent(1);
+                if (field->vector || field->list || field->set || field->map || field->hash)
+                    WriteLineIndent("fbeValue." + *field->name + ".clear();");
+                else
+                    WriteLineIndent("fbeValue." + *field->name + " = " + ConvertDefault(*field) + ";");
+                Indent(-1);
+                WriteLineIndent("fbeCurrentSize += " + *field->name + ".fbeSize();");
+            }
         }
     }
     Indent(-1);
@@ -5759,11 +5772,14 @@ void GeneratorJava::GenerateStructFieldModel(const std::shared_ptr<Package>& p, 
     WriteLineIndent("public void setFields(" + *s->name + " fbeValue)");
     WriteLineIndent("{");
     Indent(1);
-    if (s->base && !s->base->empty())
-        WriteLineIndent("parent.setFields(fbeValue);");
-    if (s->body)
-        for (const auto& field : s->body->fields)
-            WriteLineIndent(*field->name + ".set(fbeValue." + *field->name + ");");
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
+    {
+        if (s->base && !s->base->empty())
+            WriteLineIndent("parent.setFields(fbeValue);");
+        if (s->body)
+            for (const auto& field : s->body->fields)
+                WriteLineIndent(*field->name + ".set(fbeValue." + *field->name + ");");
+    }
     Indent(-1);
     WriteLineIndent("}");
 
@@ -6028,35 +6044,40 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     WriteLineIndent("public long verifyFields()");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeCurrentOffset = 0;");
-    WriteLineIndent("long fbeFieldSize = 0;");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("parent.fbeOffset(fbeCurrentOffset);");
-        WriteLineIndent("fbeFieldSize = parent.verifyFields();");
-        WriteLineIndent("if (fbeFieldSize == Long.MAX_VALUE)");
-        Indent(1);
-        WriteLineIndent("return Long.MAX_VALUE;");
-        Indent(-1);
-        WriteLineIndent("fbeCurrentOffset += fbeFieldSize;");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("long fbeCurrentOffset = 0;");
+        WriteLineIndent("long fbeFieldSize = 0;");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent(*field->name + ".fbeOffset(fbeCurrentOffset);");
-            WriteLineIndent("fbeFieldSize = " + *field->name + ".verify();");
+            WriteLineIndent("parent.fbeOffset(fbeCurrentOffset);");
+            WriteLineIndent("fbeFieldSize = parent.verifyFields();");
             WriteLineIndent("if (fbeFieldSize == Long.MAX_VALUE)");
             Indent(1);
             WriteLineIndent("return Long.MAX_VALUE;");
             Indent(-1);
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize;");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent(*field->name + ".fbeOffset(fbeCurrentOffset);");
+                WriteLineIndent("fbeFieldSize = " + *field->name + ".verify();");
+                WriteLineIndent("if (fbeFieldSize == Long.MAX_VALUE)");
+                Indent(1);
+                WriteLineIndent("return Long.MAX_VALUE;");
+                Indent(-1);
+                WriteLineIndent("fbeCurrentOffset += fbeFieldSize;");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("return fbeCurrentOffset;");
     }
-    WriteLine();
-    WriteLineIndent("return fbeCurrentOffset;");
+    else
+        WriteLineIndent("return 0;");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -6080,33 +6101,38 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     WriteLineIndent("public long getFields(" + *s->name + " fbeValue)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeCurrentOffset = 0;");
-    WriteLineIndent("long fbeCurrentSize = 0;");
-    WriteLineIndent("var fbeFieldSize = new Size(0);");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("parent.fbeOffset(fbeCurrentOffset);");
-        WriteLineIndent("fbeFieldSize.value = parent.getFields(fbeValue);");
-        WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value;");
-        WriteLineIndent("fbeCurrentSize += fbeFieldSize.value;");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("long fbeCurrentOffset = 0;");
+        WriteLineIndent("long fbeCurrentSize = 0;");
+        WriteLineIndent("var fbeFieldSize = new Size(0);");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent(*field->name + ".fbeOffset(fbeCurrentOffset);");
-            if (field->array || field->vector || field->list || field->set || field->map || field->hash)
-                WriteLineIndent("fbeFieldSize.value = " + *field->name + ".get(fbeValue." + *field->name + ");");
-            else
-                WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(fbeFieldSize);");
+            WriteLineIndent("parent.fbeOffset(fbeCurrentOffset);");
+            WriteLineIndent("fbeFieldSize.value = parent.getFields(fbeValue);");
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value;");
             WriteLineIndent("fbeCurrentSize += fbeFieldSize.value;");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent(*field->name + ".fbeOffset(fbeCurrentOffset);");
+                if (field->array || field->vector || field->list || field->set || field->map || field->hash)
+                    WriteLineIndent("fbeFieldSize.value = " + *field->name + ".get(fbeValue." + *field->name + ");");
+                else
+                    WriteLineIndent("fbeValue." + *field->name + " = " + *field->name + ".get(fbeFieldSize);");
+                WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value;");
+                WriteLineIndent("fbeCurrentSize += fbeFieldSize.value;");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("return fbeCurrentSize;");
     }
-    WriteLine();
-    WriteLineIndent("return fbeCurrentSize;");
+    else
+        WriteLineIndent("return 0;");
     Indent(-1);
     WriteLineIndent("}");
 
@@ -6129,30 +6155,35 @@ void GeneratorJava::GenerateStructFinalModel(const std::shared_ptr<Package>& p, 
     WriteLineIndent("public long setFields(" + *s->name + " fbeValue)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("long fbeCurrentOffset = 0;");
-    WriteLineIndent("long fbeCurrentSize = 0;");
-    WriteLineIndent("var fbeFieldSize = new Size(0);");
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
-        WriteLine();
-        WriteLineIndent("parent.fbeOffset(fbeCurrentOffset);");
-        WriteLineIndent("fbeFieldSize.value = parent.setFields(fbeValue);");
-        WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value;");
-        WriteLineIndent("fbeCurrentSize += fbeFieldSize.value;");
-    }
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
+        WriteLineIndent("long fbeCurrentOffset = 0;");
+        WriteLineIndent("long fbeCurrentSize = 0;");
+        WriteLineIndent("var fbeFieldSize = new Size(0);");
+        if (s->base && !s->base->empty())
         {
             WriteLine();
-            WriteLineIndent(*field->name + ".fbeOffset(fbeCurrentOffset);");
-            WriteLineIndent("fbeFieldSize.value = " + *field->name + ".set(fbeValue." + *field->name + ");");
+            WriteLineIndent("parent.fbeOffset(fbeCurrentOffset);");
+            WriteLineIndent("fbeFieldSize.value = parent.setFields(fbeValue);");
             WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value;");
             WriteLineIndent("fbeCurrentSize += fbeFieldSize.value;");
         }
+        if (s->body)
+        {
+            for (const auto& field : s->body->fields)
+            {
+                WriteLine();
+                WriteLineIndent(*field->name + ".fbeOffset(fbeCurrentOffset);");
+                WriteLineIndent("fbeFieldSize.value = " + *field->name + ".set(fbeValue." + *field->name + ");");
+                WriteLineIndent("fbeCurrentOffset += fbeFieldSize.value;");
+                WriteLineIndent("fbeCurrentSize += fbeFieldSize.value;");
+            }
+        }
+        WriteLine();
+        WriteLineIndent("return fbeCurrentSize;");
     }
-    WriteLine();
-    WriteLineIndent("return fbeCurrentSize;");
+    else
+        WriteLineIndent("return 0;");
     Indent(-1);
     WriteLineIndent("}");
 

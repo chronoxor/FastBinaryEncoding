@@ -159,6 +159,7 @@ open class Enums : Comparable<Any?>
         this.uint64b5 = uint64b5
     }
 
+    @Suppress("UNUSED_PARAMETER")
     constructor(other: Enums)
     {
         this.byte0 = other.byte0

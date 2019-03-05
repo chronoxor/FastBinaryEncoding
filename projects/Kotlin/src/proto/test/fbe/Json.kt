@@ -33,8 +33,10 @@ object Json
         proto.fbe.Json.register(builder)
         builder.registerTypeAdapter(EnumSimple::class.java, EnumSimpleJson())
         builder.registerTypeAdapter(EnumTyped::class.java, EnumTypedJson())
+        builder.registerTypeAdapter(EnumEmpty::class.java, EnumEmptyJson())
         builder.registerTypeAdapter(FlagsSimple::class.java, FlagsSimpleJson())
         builder.registerTypeAdapter(FlagsTyped::class.java, FlagsTypedJson())
+        builder.registerTypeAdapter(FlagsEmpty::class.java, FlagsEmptyJson())
         return builder
     }
 }

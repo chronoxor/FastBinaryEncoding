@@ -118,6 +118,7 @@ open class StructSimple : Comparable<Any?>
         this.f44 = f44
     }
 
+    @Suppress("UNUSED_PARAMETER")
     constructor(other: StructSimple)
     {
         this.id = other.id

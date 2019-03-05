@@ -91,6 +91,7 @@ class FinalModelStructOptional(buffer: Buffer, offset: Long) : FinalModel(buffer
     val f165: FinalModelOptionalprotoAccount = FinalModelOptionalprotoAccount(buffer, 0)
 
     // Get the allocation size
+    @Suppress("UNUSED_PARAMETER")
     fun fbeAllocationSize(fbeValue: StructOptional): Long = (0
         + parent.fbeAllocationSize(fbeValue)
         + f100.fbeAllocationSize(fbeValue.f100)
@@ -600,6 +601,7 @@ class FinalModelStructOptional(buffer: Buffer, offset: Long) : FinalModel(buffer
     }
 
     // Get the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun getFields(fbeValue: StructOptional): Long
     {
         var fbeCurrentOffset = 0L
@@ -954,6 +956,7 @@ class FinalModelStructOptional(buffer: Buffer, offset: Long) : FinalModel(buffer
     }
 
     // Set the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun setFields(fbeValue: StructOptional): Long
     {
         var fbeCurrentOffset = 0L

@@ -101,6 +101,7 @@ class FieldModelOrder(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     }
 
     // Check if the struct fields are valid
+    @Suppress("UNUSED_PARAMETER")
     fun verifyFields(fbeStructSize: Long): Boolean
     {
         var fbeCurrentSize = 4L + 4L
@@ -184,6 +185,7 @@ class FieldModelOrder(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     }
 
     // Get the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun getFields(fbeValue: Order, fbeStructSize: Long)
     {
         var fbeCurrentSize = 4L + 4L
@@ -264,6 +266,7 @@ class FieldModelOrder(buffer: Buffer, offset: Long) : FieldModel(buffer, offset)
     }
 
     // Set the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun setFields(fbeValue: Order)
     {
         id.set(fbeValue.id)

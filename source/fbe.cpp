@@ -95,7 +95,7 @@ void Statements::AddEnum(std::shared_ptr<EnumType>& e)
         yyerror("Enum is null!");
     if (e->name->empty())
         yyerror("Enum name is invalid!");
-    if (!e->body || (e->body->values.size() == 0))
+    if (!e->body)
         yyerror("Enum is empty - " + *e->name.get());
 
     // Check for duplicates
@@ -112,7 +112,7 @@ void Statements::AddFlags(std::shared_ptr<FlagsType>& f)
         yyerror("Flags is null!");
     if (f->name->empty())
         yyerror("Flags name is invalid!");
-    if (!f->body || (f->body->values.size() == 0))
+    if (!f->body)
         yyerror("Flags is empty - " + *f->name.get());
 
     // Check for duplicates
@@ -129,14 +129,14 @@ void Statements::AddStruct(std::shared_ptr<StructType>& s)
         yyerror("Struct is null!");
     if (s->name->empty())
         yyerror("Struct name is invalid!");
-    if (!s->body || (s->body->fields.size() == 0))
+    if (!s->body)
         yyerror("Struct is empty - " + *s->name.get());
 
     // Check for duplicates
     auto it = std::find_if(structs.begin(), structs.end(), [&s](auto item)->bool { return *item->name.get() == *s->name.get(); });
     if (it != structs.end())
         yyerror("Duplicate struct name " + *s->name.get());
-    it = std::find_if(structs.begin(), structs.end(), [&s](auto item)->bool { return item->type == s->type; });
+    it = std::find_if(structs.begin(), structs.end(), [&s](auto item)->bool { return (item->type == s->type) && item->fixed && s->fixed; });
     if (it != structs.end())
         yyerror("Duplicate struct type " + std::to_string(s->type));
 

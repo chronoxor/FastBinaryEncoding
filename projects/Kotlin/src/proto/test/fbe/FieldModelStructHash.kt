@@ -113,6 +113,7 @@ class FieldModelStructHash(buffer: Buffer, offset: Long) : FieldModel(buffer, of
     }
 
     // Check if the struct fields are valid
+    @Suppress("UNUSED_PARAMETER")
     fun verifyFields(fbeStructSize: Long): Boolean
     {
         var fbeCurrentSize = 4L + 4L
@@ -220,6 +221,7 @@ class FieldModelStructHash(buffer: Buffer, offset: Long) : FieldModel(buffer, of
     }
 
     // Get the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun getFields(fbeValue: StructHash, fbeStructSize: Long)
     {
         var fbeCurrentSize = 4L + 4L
@@ -324,6 +326,7 @@ class FieldModelStructHash(buffer: Buffer, offset: Long) : FieldModel(buffer, of
     }
 
     // Set the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun setFields(fbeValue: StructHash)
     {
         f1.set(fbeValue.f1)

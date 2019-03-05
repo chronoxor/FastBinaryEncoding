@@ -113,8 +113,8 @@ func (fm *FinalModelStructBytes) GetValue(fbeValue *StructBytes) (int, error) {
 // Get the struct fields values
 func (fm *FinalModelStructBytes) GetFields(fbeValue *StructBytes) (int, error) {
     var err error = nil
-    fbeCurrentOffset := 0
     fbeCurrentSize := 0
+    fbeCurrentOffset := 0
     fbeFieldSize := 0
 
     fm.F1.SetFBEOffset(fbeCurrentOffset)
@@ -152,8 +152,8 @@ func (fm *FinalModelStructBytes) Set(fbeValue *StructBytes) (int, error) {
 // Set the struct fields values
 func (fm *FinalModelStructBytes) SetFields(fbeValue *StructBytes) (int, error) {
     var err error = nil
-    fbeCurrentOffset := 0
     fbeCurrentSize := 0
+    fbeCurrentOffset := 0
     fbeFieldSize := 0
 
     fm.F1.SetFBEOffset(fbeCurrentOffset)

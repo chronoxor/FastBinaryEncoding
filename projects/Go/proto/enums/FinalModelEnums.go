@@ -678,8 +678,8 @@ func (fm *FinalModelEnums) GetValue(fbeValue *Enums) (int, error) {
 // Get the struct fields values
 func (fm *FinalModelEnums) GetFields(fbeValue *Enums) (int, error) {
     var err error = nil
-    fbeCurrentOffset := 0
     fbeCurrentSize := 0
+    fbeCurrentOffset := 0
     fbeFieldSize := 0
 
     fm.Byte0.SetFBEOffset(fbeCurrentOffset)
@@ -1158,8 +1158,8 @@ func (fm *FinalModelEnums) Set(fbeValue *Enums) (int, error) {
 // Set the struct fields values
 func (fm *FinalModelEnums) SetFields(fbeValue *Enums) (int, error) {
     var err error = nil
-    fbeCurrentOffset := 0
     fbeCurrentSize := 0
+    fbeCurrentOffset := 0
     fbeFieldSize := 0
 
     fm.Byte0.SetFBEOffset(fbeCurrentOffset)

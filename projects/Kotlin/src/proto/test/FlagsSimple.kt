@@ -32,6 +32,7 @@ class FlagsSimple : Comparable<FlagsSimple>
 
         fun fromSet(set: EnumSet<FlagsSimpleEnum>): FlagsSimple
         {
+            @Suppress("CanBeVal")
             var result = 0
             if (set.contains(FLAG_VALUE_0.value!!))
             {

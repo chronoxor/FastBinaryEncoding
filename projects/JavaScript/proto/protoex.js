@@ -152,6 +152,7 @@ class FieldModelOrderSide extends fbe.FieldModel {
     this.writeByte(this.fbeOffset, value.value)
   }
 }
+
 exports.FieldModelOrderSide = FieldModelOrderSide
 
 /**
@@ -362,6 +363,7 @@ class FieldModelOrderType extends fbe.FieldModel {
     this.writeByte(this.fbeOffset, value.value)
   }
 }
+
 exports.FieldModelOrderType = FieldModelOrderType
 
 /**

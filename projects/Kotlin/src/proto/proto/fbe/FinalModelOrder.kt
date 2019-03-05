@@ -30,6 +30,7 @@ class FinalModelOrder(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     val volume: FinalModelDouble = FinalModelDouble(buffer, 0)
 
     // Get the allocation size
+    @Suppress("UNUSED_PARAMETER")
     fun fbeAllocationSize(fbeValue: Order): Long = (0
         + id.fbeAllocationSize(fbeValue.id)
         + symbol.fbeAllocationSize(fbeValue.symbol)
@@ -112,6 +113,7 @@ class FinalModelOrder(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     }
 
     // Get the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun getFields(fbeValue: Order): Long
     {
         var fbeCurrentOffset = 0L
@@ -161,6 +163,7 @@ class FinalModelOrder(buffer: Buffer, offset: Long) : FinalModel(buffer, offset)
     }
 
     // Set the struct fields values
+    @Suppress("UNUSED_PARAMETER")
     fun setFields(fbeValue: Order): Long
     {
         var fbeCurrentOffset = 0L

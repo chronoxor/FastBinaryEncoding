@@ -35,6 +35,7 @@ public class Sender extends fbe.Sender
     public final StructMapModel StructMapModel;
     public final StructHashModel StructHashModel;
     public final StructHashExModel StructHashExModel;
+    public final StructEmptyModel StructEmptyModel;
 
     public Sender()
     {
@@ -51,6 +52,7 @@ public class Sender extends fbe.Sender
         StructMapModel = new StructMapModel(getBuffer());
         StructHashModel = new StructHashModel(getBuffer());
         StructHashExModel = new StructHashExModel(getBuffer());
+        StructEmptyModel = new StructEmptyModel(getBuffer());
     }
     public Sender(Buffer buffer)
     {
@@ -67,6 +69,7 @@ public class Sender extends fbe.Sender
         StructMapModel = new StructMapModel(getBuffer());
         StructHashModel = new StructHashModel(getBuffer());
         StructHashExModel = new StructHashExModel(getBuffer());
+        StructEmptyModel = new StructEmptyModel(getBuffer());
     }
 
     public long send(test.StructSimple value)
@@ -245,6 +248,23 @@ public class Sender extends fbe.Sender
         long serialized = StructHashExModel.serialize(value);
         assert (serialized > 0) : "test.StructHashEx serialization failed!";
         assert StructHashExModel.verify() : "test.StructHashEx validation failed!";
+
+        // Log the value
+        if (getLogging())
+        {
+            String message = value.toString();
+            onSendLog(message);
+        }
+
+        // Send the serialized value
+        return sendSerialized(serialized);
+    }
+    public long send(test.StructEmpty value)
+    {
+        // Serialize the value into the FBE stream
+        long serialized = StructEmptyModel.serialize(value);
+        assert (serialized > 0) : "test.StructEmpty serialization failed!";
+        assert StructEmptyModel.verify() : "test.StructEmpty validation failed!";
 
         // Log the value
         if (getLogging())

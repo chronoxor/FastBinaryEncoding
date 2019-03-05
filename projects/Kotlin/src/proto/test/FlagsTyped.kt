@@ -36,6 +36,7 @@ class FlagsTyped : Comparable<FlagsTyped>
 
         fun fromSet(set: EnumSet<FlagsTypedEnum>): FlagsTyped
         {
+            @Suppress("CanBeVal")
             var result = 0uL
             if (set.contains(FLAG_VALUE_0.value!!))
             {

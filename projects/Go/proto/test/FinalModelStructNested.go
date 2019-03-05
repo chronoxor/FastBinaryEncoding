@@ -203,8 +203,8 @@ func (fm *FinalModelStructNested) GetValue(fbeValue *StructNested) (int, error) 
 // Get the struct fields values
 func (fm *FinalModelStructNested) GetFields(fbeValue *StructNested) (int, error) {
     var err error = nil
-    fbeCurrentOffset := 0
     fbeCurrentSize := 0
+    fbeCurrentOffset := 0
     fbeFieldSize := 0
 
     fm.FinalModelStructOptional.SetFBEOffset(fbeCurrentOffset)
@@ -312,8 +312,8 @@ func (fm *FinalModelStructNested) Set(fbeValue *StructNested) (int, error) {
 // Set the struct fields values
 func (fm *FinalModelStructNested) SetFields(fbeValue *StructNested) (int, error) {
     var err error = nil
-    fbeCurrentOffset := 0
     fbeCurrentSize := 0
+    fbeCurrentOffset := 0
     fbeFieldSize := 0
 
     fm.FinalModelStructOptional.SetFBEOffset(fbeCurrentOffset)

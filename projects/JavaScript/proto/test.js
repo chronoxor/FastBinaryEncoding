@@ -167,6 +167,7 @@ class FieldModelEnumSimple extends fbe.FieldModel {
     this.writeInt32(this.fbeOffset, value.value)
   }
 }
+
 exports.FieldModelEnumSimple = FieldModelEnumSimple
 
 /**
@@ -387,6 +388,7 @@ class FieldModelEnumTyped extends fbe.FieldModel {
     this.writeUInt8(this.fbeOffset, value.value)
   }
 }
+
 exports.FieldModelEnumTyped = FieldModelEnumTyped
 
 /**
@@ -456,6 +458,196 @@ class FinalModelEnumTyped extends fbe.FinalModel {
 }
 
 exports.FinalModelEnumTyped = FinalModelEnumTyped
+
+/**
+ * EnumEmpty enum
+ */
+class EnumEmpty {
+  /**
+   * Initialize enum with a given value
+   * @param {EnumEmpty|number|Int64|UInt64=} value Enum value, defaults is 0
+   * @constructor
+   */
+  constructor (value = 0) {
+    if (value instanceof EnumEmpty) {
+      this.value = value.value
+    } else {
+      this.value = value
+    }
+  }
+
+  /**
+   * Is this enum equal to other one?
+   * @this {!EnumEmpty}
+   * @param {!EnumEmpty} other Other enum
+   * @returns {boolean} Equal result
+   */
+  eq (other) {
+    if (!(other instanceof EnumEmpty)) {
+      throw new TypeError('Instance of EnumEmpty is required!')
+    }
+    return this.value === other.value
+  }
+
+  /**
+   * Get enum value
+   * @this {!EnumEmpty}
+   * @returns {!number|!Int64|!UInt64} Enum value
+   */
+  valueOf () {
+    return this.value
+  }
+
+  /**
+   * Convert enum to string
+   * @this {!EnumEmpty}
+   * @returns {!string} Enum value string
+   */
+  toString () {
+    return '<unknown>'
+  }
+
+  /**
+   * Inspect enum
+   * @this {!EnumEmpty}
+   * @returns {!string} Enum value string
+   */
+  [util.inspect.custom] () {
+    return this.toString()
+  }
+
+  /**
+   * Convert enum to JSON
+   * @this {!EnumEmpty}
+   * @returns {!number} Enum value for JSON
+   */
+  toJSON () {
+    return this.value
+  }
+
+  /**
+   * Create enum from object value
+   * @param {!number} other Object value
+   * @returns {!EnumEmpty} Created enum
+   */
+  static fromObject (other) {
+    return new EnumEmpty(other)
+  }
+}
+
+exports.EnumEmpty = EnumEmpty
+
+/**
+ * Fast Binary Encoding EnumEmpty field model
+ */
+class FieldModelEnumEmpty extends fbe.FieldModel {
+  /**
+   * Get the field size
+   * @this {!FieldModelEnumEmpty}
+   * @returns {!number} Field size
+   */
+  get fbeSize () {
+    return 4
+  }
+
+  /**
+   * Get the value
+   * @this {!FieldModelEnumEmpty}
+   * @param {EnumEmpty=} defaults Default value, defaults is new EnumEmpty()
+   * @returns {!EnumEmpty} Result value
+   */
+  get (defaults = new EnumEmpty()) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return defaults
+    }
+
+    return new EnumEmpty(this.readInt32(this.fbeOffset))
+  }
+
+  /**
+   * Set the value
+   * @this {!FieldModelEnumEmpty}
+   * @param {!EnumEmpty} value Value
+   */
+  set (value) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return
+    }
+
+    this.writeInt32(this.fbeOffset, value.value)
+  }
+}
+
+exports.FieldModelEnumEmpty = FieldModelEnumEmpty
+
+/**
+ * Fast Binary Encoding EnumEmpty final model
+ */
+class FinalModelEnumEmpty extends fbe.FinalModel {
+  /**
+   * Get the allocation size
+   * @this {!FinalModelEnumEmpty}
+   * @param {!EnumEmpty} value Value
+   * @returns {!number} Allocation size
+   */
+  fbeAllocationSize (value) {
+    return this.fbeSize
+  }
+
+  /**
+   * Get the final size
+   * @this {!FieldModelEnumEmpty}
+   * @returns {!number} Final size
+   */
+  get fbeSize () {
+    return 4
+  }
+
+  /**
+   * Check if the value is valid
+   * @this {!FinalModelEnumEmpty}
+   * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
+   */
+  verify () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return Number.MAX_SAFE_INTEGER
+    }
+
+    return this.fbeSize
+  }
+
+  /**
+   * Get the value
+   * @this {!FieldModelEnumEmpty}
+   * @returns {!object} Result value and its size
+   */
+  get () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return { value: new EnumEmpty(), size: 0 }
+    }
+
+    return { value: new EnumEmpty(this.readInt32(this.fbeOffset)), size: this.fbeSize }
+  }
+
+  /**
+   * Set the value
+   * @this {!FieldModelEnumEmpty}
+   * @param {!EnumEmpty} value Value
+   * @returns {!number} Final model size
+   */
+  set (value) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return 0
+    }
+
+    this.writeInt32(this.fbeOffset, value.value)
+    return this.fbeSize
+  }
+}
+
+exports.FinalModelEnumEmpty = FinalModelEnumEmpty
 
 /**
  * FlagsSimple flags
@@ -1050,6 +1242,245 @@ class FinalModelFlagsTyped extends fbe.FinalModel {
 }
 
 exports.FinalModelFlagsTyped = FinalModelFlagsTyped
+
+/**
+ * FlagsEmpty flags
+ */
+class FlagsEmpty {
+  /**
+   * Initialize flags with a given value
+   * @param {FlagsEmpty|number|Int64|UInt64=} value Flags value, defaults is 0
+   * @constructor
+   */
+  constructor (value = 0) {
+    if (value instanceof FlagsEmpty) {
+      this.value = value.value
+    } else {
+      this.value = value
+    }
+  }
+
+  /**
+   * Check for the given flags set state
+   * @this {!FlagsEmpty}
+   * @param {!FlagsEmpty|!number|!Int64|!UInt64} flags Flags
+   * @returns {!boolean} Flags set state
+   */
+  hasFlags (flags) {
+    if (flags instanceof FlagsEmpty) {
+      flags = flags.value
+    }
+    return ((this.value & flags) !== 0) && ((this.value & flags) === flags)
+  }
+
+  /**
+   * Set the given flags
+   * @this {!FlagsEmpty}
+   * @param {!FlagsEmpty|!number|!Int64|!UInt64} flags Flags
+   */
+  setFlags (flags) {
+    if (flags instanceof FlagsEmpty) {
+      flags = flags.value
+    }
+    this.value |= flags
+    return this
+  }
+
+  /**
+   * Remove the given flags
+   * @this {!FlagsEmpty}
+   * @param {!FlagsEmpty|!number|!Int64|!UInt64} flags Flags
+   */
+  removeFlags (flags) {
+    if (flags instanceof FlagsEmpty) {
+      flags = flags.value
+    }
+    this.value &= ~flags
+    return this
+  }
+
+  /**
+   * Is this flags equal to other one?
+   * @this {!FlagsEmpty}
+   * @param {!FlagsEmpty} other Other flags
+   * @returns {boolean} Equal result
+   */
+  eq (other) {
+    if (!(other instanceof FlagsEmpty)) {
+      throw new TypeError('Instance of FlagsEmpty is required!')
+    }
+    return this.value === other.value
+  }
+
+  /**
+   * Get flags value
+   * @this {!FlagsEmpty}
+   * @returns {!number|!Int64|!UInt64} Flags value
+   */
+  valueOf () {
+    return this.value
+  }
+
+  /**
+   * Convert flags to string
+   * @this {!FlagsEmpty}
+   * @returns {!string} Flags value string
+   */
+  toString () {
+    let result = ''
+    return result
+  }
+
+  /**
+   * Inspect flags
+   * @this {!FlagsEmpty}
+   * @returns {!string} Flags value string
+   */
+  [util.inspect.custom] () {
+    return this.toString()
+  }
+
+  /**
+   * Convert flags to JSON
+   * @this {!FlagsEmpty}
+   * @returns {!number} Flags value for JSON
+   */
+  toJSON () {
+    return this.value
+  }
+
+  /**
+   * Create flags from number flags representation
+   * @param {!number} flags Number flags representation
+   * @returns {!FlagsEmpty} Created flags
+   */
+  static fromFlags (flags) {
+    return new FlagsEmpty(flags)
+  }
+
+  /**
+   * Create flags from object value
+   * @param {!number} other Object value
+   * @returns {!FlagsEmpty} Created flags
+   */
+  static fromObject (other) {
+    return new FlagsEmpty(other)
+  }
+}
+
+exports.FlagsEmpty = FlagsEmpty
+
+/**
+ * Fast Binary Encoding FlagsEmpty field model
+ */
+class FieldModelFlagsEmpty extends fbe.FieldModel {
+  /**
+   * Get the field size
+   * @this {!FieldModelFlagsEmpty}
+   * @returns {!number} Field size
+   */
+  get fbeSize () {
+    return 4
+  }
+
+  /**
+   * Get the value
+   * @this {!FieldModelFlagsEmpty}
+   * @param {FlagsEmpty=} defaults Default value, defaults is new FlagsEmpty()
+   * @returns {!FlagsEmpty} Result value
+   */
+  get (defaults = new FlagsEmpty()) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return defaults
+    }
+
+    return new FlagsEmpty(this.readInt32(this.fbeOffset))
+  }
+
+  /**
+   * Set the value
+   * @this {!FieldModelFlagsEmpty}
+   * @param {!FlagsEmpty} value Value
+   */
+  set (value) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return
+    }
+
+    this.writeInt32(this.fbeOffset, value.value)
+  }
+}
+
+exports.FieldModelFlagsEmpty = FieldModelFlagsEmpty
+
+/**
+ * Fast Binary Encoding FlagsEmpty final model
+ */
+class FinalModelFlagsEmpty extends fbe.FinalModel {
+  /**
+   * Get the allocation size
+   * @this {!FinalModelFlagsEmpty}
+   * @param {!FlagsEmpty} value Value
+   * @returns {!number} Allocation size
+   */
+  fbeAllocationSize (value) {
+    return this.fbeSize
+  }
+
+  /**
+   * Get the final size
+   * @this {!FieldModelFlagsEmpty}
+   * @returns {!number} Final size
+   */
+  get fbeSize () {
+    return 4
+  }
+
+  /**
+   * Check if the value is valid
+   * @this {!FinalModelFlagsEmpty}
+   * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
+   */
+  verify () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return Number.MAX_SAFE_INTEGER
+    }
+
+    return this.fbeSize
+  }
+
+  /**
+   * Get the value
+   * @this {!FieldModelFlagsEmpty}
+   * @returns {!object} Result value and its size
+   */
+  get () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return { value: new FlagsEmpty(), size: 0 }
+    }
+
+    return { value: new FlagsEmpty(this.readInt32(this.fbeOffset)), size: this.fbeSize }
+  }
+
+  /**
+   * Set the value
+   * @this {!FieldModelFlagsEmpty}
+   * @param {!FlagsEmpty} value Value
+   * @returns {!number} Final model size
+   */
+  set (value) {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return 0
+    }
+
+    this.writeInt32(this.fbeOffset, value.value)
+    return this.fbeSize
+  }
+}
+
+exports.FinalModelFlagsEmpty = FinalModelFlagsEmpty
 
 /**
  * StructSimple struct
@@ -23264,6 +23695,678 @@ class StructHashExFinalModel extends fbe.Model {
 exports.StructHashExFinalModel = StructHashExFinalModel
 
 /**
+ * StructEmpty struct
+ */
+class StructEmpty {
+  /**
+   * Copy struct (shallow copy)
+   * @this {!StructEmpty}
+   * @param {!StructEmpty} other Other struct
+   * @returns {!StructEmpty} This struct
+   */
+  copy (other) {
+    return this
+  }
+
+  /**
+   * Clone struct (deep clone)
+   * @this {!StructEmpty}
+   * @returns {!StructEmpty} Cloned struct
+   */
+  clone () {
+    // Serialize the struct to the FBE stream
+    let writer = new StructEmptyModel(new fbe.WriteBuffer())
+    writer.serialize(this)
+
+    // Deserialize the struct from the FBE stream
+    let reader = new StructEmptyModel(new fbe.ReadBuffer())
+    reader.attachBuffer(writer.buffer)
+    return reader.deserialize().value
+  }
+
+  /**
+   * Is this struct equal to other one?
+   * @this {!StructEmpty}
+   * @param {!StructEmpty} other Other struct
+   * @returns {boolean} Equal result
+   */
+  eq (other) {
+    if (!(other instanceof StructEmpty)) {
+      throw new TypeError('Instance of StructEmpty is required!')
+    }
+    return true
+  }
+
+  /**
+   * Convert struct to string
+   * @this {!StructEmpty}
+   * @returns {!string} Struct value string
+   */
+  toString () {
+    let result = ''
+    result += 'StructEmpty('
+    result += ')'
+    return result
+  }
+
+  /**
+   * Inspect struct
+   * @this {!StructEmpty}
+   * @returns {!string} Struct value string
+   */
+  [util.inspect.custom] () {
+    return this.toString()
+  }
+
+  /**
+   * Convert struct to JSON
+   * @this {!StructEmpty}
+   * @returns {!object} Struct value for JSON
+   */
+  toJSON () {
+    return {
+    }
+  }
+
+  /**
+   * Convert JSON to struct
+   * @param {!string} json JSON string
+   * @returns {!object} Struct value for JSON
+   */
+  static fromJSON (json) {
+    return StructEmpty.fromObject(JSON.parse(json))
+  }
+
+  /**
+   * Create struct from object value
+   * @param {!StructEmpty} other Object value
+   * @returns {!StructEmpty} Created struct
+   */
+  static fromObject (other) {
+    return new StructEmpty().copy(other)
+  }
+}
+
+exports.StructEmpty = StructEmpty
+
+/**
+ * Fast Binary Encoding StructEmpty field model
+ */
+class FieldModelStructEmpty extends fbe.FieldModel {
+  /**
+   * Get the field size
+   * @this {!FieldModelStructEmpty}
+   * @returns {!number} Field size
+   */
+  get fbeSize () {
+    return 4
+  }
+
+  /**
+   * Get the field body size
+   * @this {!FieldModelStructEmpty}
+   * @returns {!number} Field body size
+   */
+  get fbeBody () {
+    return 4 + 4
+  }
+
+  /**
+   * Get the field extra size
+   * @this {!FieldModelStructEmpty}
+   * @returns {!number} Field extra size
+   */
+  get fbeExtra () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return 0
+    }
+
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
+    if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4) > this._buffer.size)) {
+      return 0
+    }
+
+    this._buffer.shift(fbeStructOffset)
+
+    let fbeResult = this.fbeBody
+
+    this._buffer.unshift(fbeStructOffset)
+
+    return fbeResult
+  }
+
+  /**
+   * Get the field type
+   * @this {!FieldModelStructEmpty}
+   * @returns {!number} Field type
+   */
+  get fbeType () {
+    return FieldModelStructEmpty.fbeType
+  }
+
+  /**
+   * Get the field type (static)
+   * @this {!FieldModelStructEmpty}
+   * @returns {!number} Field type
+   */
+  static get fbeType () {
+    return 143
+  }
+
+  /**
+   * Check if the struct value is valid
+   * @this {!FieldModelStructEmpty}
+   * @param {!boolean} fbeVerifyType Verify model type flag, defaults is true
+   * @returns {!boolean} Field model valid state
+   */
+  verify (fbeVerifyType = true) {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return true
+    }
+
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
+    if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
+      return false
+    }
+
+    let fbeStructSize = this.readUInt32(fbeStructOffset)
+    if (fbeStructSize < (4 + 4)) {
+      return false
+    }
+
+    let fbeStructType = this.readUInt32(fbeStructOffset + 4)
+    if (fbeVerifyType && (fbeStructType !== this.fbeType)) {
+      return false
+    }
+
+    this._buffer.shift(fbeStructOffset)
+    let fbeResult = this.verifyFields(fbeStructSize)
+    this._buffer.unshift(fbeStructOffset)
+    return fbeResult
+  }
+
+  /**
+   * Check if the struct fields are valid
+   * @this {!FieldModelStructEmpty}
+   * @param {!number} fbeStructSize FBE struct size
+   * @returns {!boolean} Field model valid state
+   */
+  verifyFields (fbeStructSize) {
+    return true
+  }
+
+  /**
+   * Get the struct value (begin phase)
+   * @this {!FieldModelStructEmpty}
+   * @returns {!number} Field model begin offset
+   */
+  getBegin () {
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return 0
+    }
+
+    let fbeStructOffset = this.readUInt32(this.fbeOffset)
+    console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + 4 + 4) <= this._buffer.size), 'Model is broken!')
+    if ((fbeStructOffset === 0) || ((this._buffer.offset + fbeStructOffset + 4 + 4) > this._buffer.size)) {
+      return 0
+    }
+
+    let fbeStructSize = this.readUInt32(fbeStructOffset)
+    console.assert((fbeStructSize >= (4 + 4)), 'Model is broken!')
+    if (fbeStructSize < (4 + 4)) {
+      return 0
+    }
+
+    this._buffer.shift(fbeStructOffset)
+    return fbeStructOffset
+  }
+
+  /**
+   * Get the struct value (end phase)
+   * @this {!FieldModelStructEmpty}
+   * @param {!number} fbeBegin Field model begin offset
+   */
+  getEnd (fbeBegin) {
+    this._buffer.unshift(fbeBegin)
+  }
+
+  /**
+   * Get the struct value
+   * @this {!FieldModelStructEmpty}
+   * @param {!StructEmpty} fbeValue Default value, defaults is new StructEmpty()
+   * @returns {!StructEmpty} StructEmpty value
+   */
+  get (fbeValue = new StructEmpty()) {
+    let fbeBegin = this.getBegin()
+    if (fbeBegin === 0) {
+      return fbeValue
+    }
+
+    let fbeStructSize = this.readUInt32(0)
+    this.getFields(fbeValue, fbeStructSize)
+    this.getEnd(fbeBegin)
+    return fbeValue
+  }
+
+  /**
+   * Get the struct fields values
+   * @this {!FieldModelStructEmpty}
+   * @param {!StructEmpty} fbeValue StructEmpty value
+   * @param {!number} fbeStructSize Struct size
+   */
+  getFields (fbeValue, fbeStructSize) {
+  }
+
+  /**
+   * Set the struct value (begin phase)
+   * @this {!FieldModelStructEmpty}
+   * @returns {!number} Field model begin offset
+   */
+  setBegin () {
+    console.assert(((this._buffer.offset + this.fbeOffset + this.fbeSize) <= this._buffer.size), 'Model is broken!')
+    if ((this._buffer.offset + this.fbeOffset + this.fbeSize) > this._buffer.size) {
+      return 0
+    }
+
+    let fbeStructSize = this.fbeBody
+    let fbeStructOffset = this._buffer.allocate(fbeStructSize) - this._buffer.offset
+    console.assert((fbeStructOffset > 0) && ((this._buffer.offset + fbeStructOffset + fbeStructSize) <= this._buffer.size), 'Model is broken!')
+    if ((fbeStructOffset <= 0) || ((this._buffer.offset + fbeStructOffset + fbeStructSize) > this._buffer.size)) {
+      return 0
+    }
+
+    this.writeUInt32(this.fbeOffset, fbeStructOffset)
+    this.writeUInt32(fbeStructOffset, fbeStructSize)
+    this.writeUInt32(fbeStructOffset + 4, this.fbeType)
+
+    this._buffer.shift(fbeStructOffset)
+    return fbeStructOffset
+  }
+
+  /**
+   * Set the struct value (end phase)
+   * @this {!FieldModelStructEmpty}
+   * @param {!number} fbeBegin Field model begin offset
+   */
+  setEnd (fbeBegin) {
+    this._buffer.unshift(fbeBegin)
+  }
+
+  /**
+   * Set the struct value
+   * @this {!FieldModelStructEmpty}
+   * @param {!StructEmpty} fbeValue StructEmpty value
+   */
+  set (fbeValue) {
+    let fbeBegin = this.setBegin()
+    if (fbeBegin === 0) {
+      return
+    }
+
+    this.setFields(fbeValue)
+    this.setEnd(fbeBegin)
+  }
+
+  /**
+   * Set the struct fields values
+   * @this {!FieldModelStructEmpty}
+   * @param {StructEmpty} fbeValue StructEmpty value
+   */
+  setFields (fbeValue) {
+  }
+}
+
+exports.FieldModelStructEmpty = FieldModelStructEmpty
+
+/**
+ * Fast Binary Encoding StructEmpty model
+ */
+class StructEmptyModel extends fbe.Model {
+  /**
+   * Initialize model with the given buffer
+   * @param {!fbe.ReadBuffer|!fbe.WriteBuffer} buffer Read/Write buffer, defaults is new fbe.WriteBuffer()
+   * @constructor
+   */
+  constructor (buffer = new fbe.WriteBuffer()) {
+    super(buffer)
+    this._model = new FieldModelStructEmpty(this.buffer, 4)
+  }
+
+  /**
+   * Get the StructEmpty model
+   * @this {!StructEmptyModel}
+   * @returns {!FieldModelStructEmpty} model StructEmpty model
+   */
+  get model () {
+    return this._model
+  }
+
+  /**
+   * Get the model size
+   * @this {!StructEmptyModel}
+   * @returns {!number} Model size
+   */
+  get fbeSize () {
+    return this.model.fbeSize + this.model.fbeExtra
+  }
+
+  /**
+   * Get the model type
+   * @this {!StructEmptyModel}
+   * @returns {!number} Model type
+   */
+  get fbeType () {
+    return StructEmptyModel.fbeType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructEmptyModel}
+   * @returns {!number} Model type
+   */
+  static get fbeType () {
+    return FieldModelStructEmpty.fbeType
+  }
+
+  /**
+   * Check if the struct value is valid
+   * @this {!StructEmptyModel}
+   * @returns {!boolean} Model valid state
+   */
+  verify () {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
+      return false
+    }
+
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    if (fbeFullSize < this.model.fbeSize) {
+      return false
+    }
+
+    return this.model.verify()
+  }
+
+  /**
+   * Create a new model (begin phase)
+   * @this {!StructEmptyModel}
+   * @returns {!number} Model begin offset
+   */
+  createBegin () {
+    return this.buffer.allocate(4 + this.model.fbeSize)
+  }
+
+  /**
+   * Create a new model (end phase)
+   * @this {!StructEmptyModel}
+   * @param {!number} fbeBegin Model begin offset
+   */
+  createEnd (fbeBegin) {
+    let fbeEnd = this.buffer.size
+    let fbeFullSize = fbeEnd - fbeBegin
+    this.writeUInt32(this.model.fbeOffset - 4, fbeFullSize)
+    return fbeFullSize
+  }
+
+  /**
+   * Serialize the struct value
+   * @this {!StructEmptyModel}
+   * @param {!StructEmpty} value StructEmpty value
+   * @return {!number} Model begin offset
+   */
+  serialize (value) {
+    let fbeBegin = this.createBegin()
+    this.model.set(value)
+    return this.createEnd(fbeBegin)
+  }
+
+  /**
+   * Deserialize the struct value
+   * @this {!StructEmptyModel}
+   * @param {!StructEmpty} value StructEmpty value, defaults is new StructEmpty()
+   * @return {!object} Deserialized StructEmpty value and its size
+   */
+  deserialize (value = new StructEmpty()) {
+    if ((this.buffer.offset + this.model.fbeOffset - 4) > this.buffer.size) {
+      return { value: new StructEmpty(), size: 0 }
+    }
+
+    let fbeFullSize = this.readUInt32(this.model.fbeOffset - 4)
+    console.assert((fbeFullSize >= this.model.fbeSize), 'Model is broken!')
+    if (fbeFullSize < this.model.fbeSize) {
+      return { value: new StructEmpty(), size: 0 }
+    }
+
+    this.model.get(value)
+    return { value: value, size: fbeFullSize }
+  }
+
+  /**
+   * Move to the next struct value
+   * @this {!StructEmptyModel}
+   * @param {!number} prev Previous StructEmpty model size
+   */
+  next (prev) {
+    this.model.fbeShift(prev)
+  }
+}
+
+exports.StructEmptyModel = StructEmptyModel
+
+/**
+ * Fast Binary Encoding StructEmpty final model
+ */
+class FinalModelStructEmpty extends fbe.FinalModel {
+  /**
+   * Get the allocation size
+   * @this {!FinalModelStructEmpty}
+   * @param {!StructEmpty} fbeValue StructEmpty value
+   * @returns {!number} Allocation size
+   */
+  fbeAllocationSize (fbeValue) {
+    return 0
+  }
+
+  /**
+   * Get the final type
+   * @this {!FinalModelStructEmpty}
+   * @returns {!number} Final type
+   */
+  get fbeType () {
+    return FinalModelStructEmpty.fbeType
+  }
+
+  /**
+   * Get the final type (static)
+   * @this {!FinalModelStructEmpty}
+   * @returns {!number} Final type
+   */
+  static get fbeType () {
+    return 143
+  }
+
+  /**
+   * Check if the struct value is valid
+   * @this {!FinalModelStructEmpty}
+   * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
+   */
+  verify () {
+    this._buffer.shift(this.fbeOffset)
+    let fbeResult = this.verifyFields()
+    this._buffer.unshift(this.fbeOffset)
+    return fbeResult
+  }
+
+  /**
+   * Check if the struct fields are valid
+   * @this {!FinalModelStructEmpty}
+   * @returns {!number} Final model size or Number.MAX_SAFE_INTEGER in case of any error
+   */
+  verifyFields () {
+    return 0
+  }
+
+  /**
+   * Get the struct value
+   * @this {!FinalModelStructEmpty}
+   * @param {!StructEmpty} fbeValue StructEmpty value, defaults is new StructEmpty()
+   * @returns {!object} Result struct value and its size
+   */
+  get (fbeValue = new StructEmpty()) {
+    this._buffer.shift(this.fbeOffset)
+    let fbeSize = this.getFields(fbeValue)
+    this._buffer.unshift(this.fbeOffset)
+    return { value: fbeValue, size: fbeSize }
+  }
+
+  /**
+   * Get the struct fields values
+   * @this {!FinalModelStructEmpty}
+   * @param {!StructEmpty} fbeValue StructEmpty value
+   * @returns {!number} Struct size
+   */
+  getFields (fbeValue) {
+    return 0
+  }
+
+  /**
+   * Set the struct value
+   * @this {!FinalModelStructEmpty}
+   * @param {!StructEmpty} fbeValue StructEmpty value
+   * @returns {!number} Final model size
+   */
+  set (fbeValue) {
+    this._buffer.shift(this.fbeOffset)
+    let fbeSize = this.setFields(fbeValue)
+    this._buffer.unshift(this.fbeOffset)
+    return fbeSize
+  }
+
+  /**
+   * Set the struct fields values
+   * @this {!FinalModelStructEmpty}
+   * @param {StructEmpty} fbeValue StructEmpty value
+   * @returns {!number} Final model size
+   */
+  setFields (fbeValue) {
+    return 0
+  }
+}
+
+exports.FinalModelStructEmpty = FinalModelStructEmpty
+
+/**
+ * Fast Binary Encoding StructEmpty final model
+ */
+class StructEmptyFinalModel extends fbe.Model {
+  /**
+   * Initialize final model with the given buffer
+   * @param {!fbe.ReadBuffer|!fbe.WriteBuffer} buffer Read/Write buffer, defaults is new fbe.WriteBuffer()
+   * @constructor
+   */
+  constructor (buffer = new fbe.WriteBuffer()) {
+    super(buffer)
+    this._model = new FinalModelStructEmpty(this.buffer, 8)
+  }
+
+  /**
+   * Get the model type
+   * @this {!StructEmptyFinalModel}
+   * @returns {!number} Model type
+   */
+  get fbeType () {
+    return StructEmptyFinalModel.fbeType
+  }
+
+  /**
+   * Get the model type (static)
+   * @this {!StructEmptyFinalModel}
+   * @returns {!number} Model type
+   */
+  static get fbeType () {
+    return FinalModelStructEmpty.fbeType
+  }
+
+  /**
+   * Check if the struct value is valid
+   * @this {!StructEmptyFinalModel}
+   * @returns {!boolean} Model valid state
+   */
+  verify () {
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
+      return false
+    }
+
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
+    if ((fbeStructSize <= 0) || (fbeStructType !== this.fbeType)) {
+      return false
+    }
+
+    return ((8 + this._model.verify()) === fbeStructSize)
+  }
+
+  /**
+   * Serialize the struct value
+   * @this {!StructEmptyFinalModel}
+   * @param {!StructEmpty} value StructEmpty value
+   * @return {!number} Struct size
+   */
+  serialize (value) {
+    let fbeInitialSize = this.buffer.size
+
+    let fbeStructType = this.fbeType
+    let fbeStructSize = 8 + this._model.fbeAllocationSize(value)
+    let fbeStructOffset = this.buffer.allocate(fbeStructSize) - this.buffer.offset
+    console.assert(((this.buffer.offset + fbeStructOffset + fbeStructSize) <= this.buffer.size), 'Model is broken!')
+    if ((this.buffer.offset + fbeStructOffset + fbeStructSize) > this.buffer.size) {
+      return 0
+    }
+
+    fbeStructSize = 8 + this._model.set(value)
+    this.buffer.resize(fbeInitialSize + fbeStructSize)
+
+    this.writeUInt32(this._model.fbeOffset - 8, fbeStructSize)
+    this.writeUInt32(this._model.fbeOffset - 4, fbeStructType)
+
+    return fbeStructSize
+  }
+
+  /**
+   * Deserialize the struct value
+   * @this {!StructEmptyFinalModel}
+   * @param {!StructEmpty} value StructEmpty value, defaults is new StructEmpty()
+   * @return {!object} Deserialized StructEmpty value and its size
+   */
+  deserialize (value = new StructEmpty()) {
+    console.assert(((this.buffer.offset + this._model.fbeOffset) <= this.buffer.size), 'Model is broken!')
+    if ((this.buffer.offset + this._model.fbeOffset) > this.buffer.size) {
+      return { value: new StructEmpty(), size: 0 }
+    }
+
+    let fbeStructSize = this.readUInt32(this._model.fbeOffset - 8)
+    let fbeStructType = this.readUInt32(this._model.fbeOffset - 4)
+    console.assert(((fbeStructSize > 0) && (fbeStructType === this.fbeType)), 'Model is broken!')
+    if ((fbeStructSize <= 0) || (fbeStructType !== this.fbeType)) {
+      return { value: new StructEmpty(), size: 8 }
+    }
+
+    let fbeResult = this._model.get(value)
+    return { value: fbeResult.value, size: (8 + fbeResult.size) }
+  }
+
+  /**
+   * Move to the next struct value
+   * @this {!StructEmptyFinalModel}
+   * @param {!number} prev Previous StructEmpty model size
+   */
+  next (prev) {
+    this._model.fbeShift(prev)
+  }
+}
+
+exports.StructEmptyFinalModel = StructEmptyFinalModel
+
+/**
  * Fast Binary Encoding test sender
  */
 class Sender extends fbe.Sender {
@@ -23286,6 +24389,7 @@ class Sender extends fbe.Sender {
     this._structmapModel = new StructMapModel(this.buffer)
     this._structhashModel = new StructHashModel(this.buffer)
     this._structhashexModel = new StructHashExModel(this.buffer)
+    this._structemptyModel = new StructEmptyModel(this.buffer)
   }
 
   // Imported senders
@@ -23400,6 +24504,15 @@ class Sender extends fbe.Sender {
     return this._structhashexModel
   }
 
+  /**
+   * Get StructEmpty model
+   * @this {!Sender}
+   * @returns {!StructEmptyModel} StructEmpty model
+   */
+  get structemptyModel () {
+    return this._structemptyModel
+  }
+
   // Send methods
 
   /**
@@ -23441,6 +24554,9 @@ class Sender extends fbe.Sender {
     }
     if (value instanceof StructHashEx) {
       return this.send_structhashex(value)
+    }
+    if (value instanceof StructEmpty) {
+      return this.send_structempty(value)
     }
     let result = this._protoSender.send(value)
     if (result > 0) {
@@ -23681,6 +24797,27 @@ class Sender extends fbe.Sender {
   }
 
   /**
+   * Send StructEmpty value
+   * @this {!Sender}
+   * @param {!StructEmpty} value StructEmpty value to send
+   * @returns {!number} Sent bytes
+   */
+  send_structempty (value) { // eslint-disable-line
+    // Serialize the value into the FBE stream
+    let serialized = this.structemptyModel.serialize(value)
+    console.assert((serialized > 0), 'test.StructEmpty serialization failed!')
+    console.assert(this.structemptyModel.verify(), 'test.StructEmpty validation failed!')
+
+    // Log the value
+    if (this.logging) {
+      this.onSendLog(value.toString())
+    }
+
+    // Send the serialized value
+    return this.sendSerialized(serialized)
+  }
+
+  /**
    * Send message handler
    * @this {!Sender}
    * @param {!Uint8Array} buffer Buffer to send
@@ -23730,6 +24867,8 @@ class Receiver extends fbe.Receiver {
     this._structhashModel = new StructHashModel()
     this._structhashexValue = new StructHashEx()
     this._structhashexModel = new StructHashExModel()
+    this._structemptyValue = new StructEmpty()
+    this._structemptyModel = new StructEmptyModel()
   }
 
   // Imported receivers
@@ -23830,6 +24969,13 @@ class Receiver extends fbe.Receiver {
    * @param {!StructHashEx} value StructHashEx received value
    */
   onReceive_structhashex (value) {}  // eslint-disable-line
+
+  /**
+   * StructEmpty receive handler
+   * @this {!Receiver}
+   * @param {!StructEmpty} value StructEmpty received value
+   */
+  onReceive_structempty (value) {}  // eslint-disable-line
 
   /**
    * test receive message handler
@@ -24018,6 +25164,22 @@ class Receiver extends fbe.Receiver {
         this.onReceive_structhashex(this._structhashexValue)
         return true
       }
+      case StructEmptyModel.fbeType: {
+        // Deserialize the value from the FBE stream
+        this._structemptyModel.attachBuffer(buffer, offset)
+        console.assert(this._structemptyModel.verify(), 'test.StructEmpty validation failed!')
+        let deserialized = this._structemptyModel.deserialize(this._structemptyValue)
+        console.assert((deserialized.size > 0), 'test.StructEmpty deserialization failed!')
+
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structemptyValue.toString())
+        }
+
+        // Call receive handler with deserialized value
+        this.onReceive_structempty(this._structemptyValue)
+        return true
+      }
     }
     // noinspection RedundantIfStatementJS
     if ((this.protoReceiver != null) && this.protoReceiver.onReceive(type, buffer, offset, size)) {
@@ -24053,6 +25215,7 @@ class Proxy extends fbe.Receiver {
     this._structmapModel = new StructMapModel()
     this._structhashModel = new StructHashModel()
     this._structhashexModel = new StructHashExModel()
+    this._structemptyModel = new StructEmptyModel()
   }
 
   // Imported proxy
@@ -24199,6 +25362,17 @@ class Proxy extends fbe.Receiver {
   onProxy_structhashex (model, type, buffer, offset, size) {}  // eslint-disable-line
 
   /**
+   * StructEmpty proxy handler
+   * @this {!Proxy}
+   * @param {!StructEmpty} model StructEmpty model
+   * @param {!number} type Message type
+   * @param {!Uint8Array} buffer Buffer to send
+   * @param {!number} offset Buffer offset
+   * @param {!number} size Buffer size
+   */
+  onProxy_structempty (model, type, buffer, offset, size) {}  // eslint-disable-line
+
+  /**
    * test receive message handler
    * @this {!Proxy}
    * @param {!number} type Message type
@@ -24308,6 +25482,15 @@ class Proxy extends fbe.Receiver {
         this.onProxy_structhashex(this._structhashexModel, type, buffer, offset, size)
         return true
       }
+      case StructEmptyModel.fbeType: {
+        // Attach the FBE stream to the proxy model
+        this._structemptyModel.attachBuffer(buffer, offset)
+        console.assert(this._structemptyModel.verify(), 'test.StructEmpty validation failed!')
+
+        // Call proxy handler
+        this.onProxy_structempty(this._structemptyModel, type, buffer, offset, size)
+        return true
+      }
     }
     // noinspection RedundantIfStatementJS
     if ((this.protoProxy != null) && this.protoProxy.onReceive(type, buffer, offset, size)) {
@@ -24343,6 +25526,7 @@ class FinalSender extends fbe.Sender {
     this._structmapModel = new StructMapFinalModel(this.buffer)
     this._structhashModel = new StructHashFinalModel(this.buffer)
     this._structhashexModel = new StructHashExFinalModel(this.buffer)
+    this._structemptyModel = new StructEmptyFinalModel(this.buffer)
   }
 
   // Imported senders
@@ -24457,6 +25641,15 @@ class FinalSender extends fbe.Sender {
     return this._structhashexModel
   }
 
+  /**
+   * Get StructEmpty model
+   * @this {!FinalSender}
+   * @returns {!StructEmptyModel} StructEmpty model
+   */
+  get structemptyModel () {
+    return this._structemptyModel
+  }
+
   // Send methods
 
   /**
@@ -24498,6 +25691,9 @@ class FinalSender extends fbe.Sender {
     }
     if (value instanceof StructHashEx) {
       return this.send_structhashex(value)
+    }
+    if (value instanceof StructEmpty) {
+      return this.send_structempty(value)
     }
     let result = this._protoSender.send(value)
     if (result > 0) {
@@ -24738,6 +25934,27 @@ class FinalSender extends fbe.Sender {
   }
 
   /**
+   * Send StructEmpty value
+   * @this {!FinalSender}
+   * @param {!StructEmpty} value StructEmpty value to send
+   * @returns {!number} Sent bytes
+   */
+  send_structempty (value) { // eslint-disable-line
+    // Serialize the value into the FBE stream
+    let serialized = this.structemptyModel.serialize(value)
+    console.assert((serialized > 0), 'test.StructEmpty serialization failed!')
+    console.assert(this.structemptyModel.verify(), 'test.StructEmpty validation failed!')
+
+    // Log the value
+    if (this.logging) {
+      this.onSendLog(value.toString())
+    }
+
+    // Send the serialized value
+    return this.sendSerialized(serialized)
+  }
+
+  /**
    * Send message handler
    * @this {!FinalSender}
    * @param {!Uint8Array} buffer Buffer to send
@@ -24787,6 +26004,8 @@ class FinalReceiver extends fbe.Receiver {
     this._structhashModel = new StructHashFinalModel()
     this._structhashexValue = new StructHashEx()
     this._structhashexModel = new StructHashExFinalModel()
+    this._structemptyValue = new StructEmpty()
+    this._structemptyModel = new StructEmptyFinalModel()
   }
 
   // Imported receivers
@@ -24887,6 +26106,13 @@ class FinalReceiver extends fbe.Receiver {
    * @param {!StructHashEx} value StructHashEx received value
    */
   onReceive_structhashex (value) {}  // eslint-disable-line
+
+  /**
+   * StructEmpty receive handler
+   * @this {!FinalReceiver}
+   * @param {!StructEmpty} value StructEmpty received value
+   */
+  onReceive_structempty (value) {}  // eslint-disable-line
 
   /**
    * test receive message handler
@@ -25075,6 +26301,22 @@ class FinalReceiver extends fbe.Receiver {
         this.onReceive_structhashex(this._structhashexValue)
         return true
       }
+      case StructEmptyFinalModel.fbeType: {
+        // Deserialize the value from the FBE stream
+        this._structemptyModel.attachBuffer(buffer, offset)
+        console.assert(this._structemptyModel.verify(), 'test.StructEmpty validation failed!')
+        let deserialized = this._structemptyModel.deserialize(this._structemptyValue)
+        console.assert((deserialized.size > 0), 'test.StructEmpty deserialization failed!')
+
+        // Log the value
+        if (this.logging) {
+          this.onReceiveLog(this._structemptyValue.toString())
+        }
+
+        // Call receive handler with deserialized value
+        this.onReceive_structempty(this._structemptyValue)
+        return true
+      }
     }
     // noinspection RedundantIfStatementJS
     if ((this.protoReceiver != null) && this.protoReceiver.onReceive(type, buffer, offset, size)) {
@@ -25110,6 +26352,7 @@ class FinalProxy extends fbe.Receiver {
     this._structmapModel = new StructMapFinalModel()
     this._structhashModel = new StructHashFinalModel()
     this._structhashexModel = new StructHashExFinalModel()
+    this._structemptyModel = new StructEmptyFinalModel()
   }
 
   // Imported proxy
@@ -25256,6 +26499,17 @@ class FinalProxy extends fbe.Receiver {
   onProxy_structhashex (model, type, buffer, offset, size) {}  // eslint-disable-line
 
   /**
+   * StructEmpty proxy handler
+   * @this {!FinalProxy}
+   * @param {!StructEmpty} model StructEmpty model
+   * @param {!number} type Message type
+   * @param {!Uint8Array} buffer Buffer to send
+   * @param {!number} offset Buffer offset
+   * @param {!number} size Buffer size
+   */
+  onProxy_structempty (model, type, buffer, offset, size) {}  // eslint-disable-line
+
+  /**
    * test receive message handler
    * @this {!FinalProxy}
    * @param {!number} type Message type
@@ -25363,6 +26617,15 @@ class FinalProxy extends fbe.Receiver {
 
         // Call proxy handler
         this.onProxy_structhashex(this._structhashexModel, type, buffer, offset, size)
+        return true
+      }
+      case StructEmptyFinalModel.fbeType: {
+        // Attach the FBE stream to the proxy model
+        this._structemptyModel.attachBuffer(buffer, offset)
+        console.assert(this._structemptyModel.verify(), 'test.StructEmpty validation failed!')
+
+        // Call proxy handler
+        this.onProxy_structempty(this._structemptyModel, type, buffer, offset, size)
         return true
       }
     }

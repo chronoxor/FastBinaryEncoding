@@ -192,6 +192,76 @@ public:
 
 namespace test {
 
+enum class EnumEmpty
+{
+};
+
+template <class TOutputStream>
+inline TOutputStream& operator<<(TOutputStream& stream, EnumEmpty value)
+{
+    stream << "<unknown>";
+    return stream;
+}
+
+} // namespace test
+
+namespace FBE {
+
+namespace JSON {
+
+template <class TOutputStream>
+struct ValueWriter<TOutputStream, ::test::EnumEmpty>
+{
+    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::test::EnumEmpty& value, bool scope = true)
+    {
+        return FBE::JSON::to_json(writer, (int32_t)value);
+    }
+};
+
+template <class TJson>
+struct ValueReader<TJson, ::test::EnumEmpty>
+{
+    static bool from_json(const TJson& json, ::test::EnumEmpty& value)
+    {
+        int32_t raw;
+        if (!FBE::JSON::from_json(json, raw))
+            return false;
+
+        value = (::test::EnumEmpty)raw;
+        return true;
+    }
+};
+
+} // namespace JSON
+
+} // namespace FBE
+
+namespace FBE {
+
+// Fast Binary Encoding ::test::EnumEmpty field model
+template <class TBuffer>
+class FieldModel<TBuffer, ::test::EnumEmpty> : public FieldModelBase<TBuffer, ::test::EnumEmpty, int32_t>
+{
+public:
+    using FieldModelBase<TBuffer, ::test::EnumEmpty, int32_t>::FieldModelBase;
+};
+
+} // namespace FBE
+
+namespace FBE {
+
+// Fast Binary Encoding ::test::EnumEmpty final model
+template <class TBuffer>
+class FinalModel<TBuffer, ::test::EnumEmpty> : public FinalModelBase<TBuffer, ::test::EnumEmpty, int32_t>
+{
+public:
+    using FinalModelBase<TBuffer, ::test::EnumEmpty, int32_t>::FinalModelBase;
+};
+
+} // namespace FBE
+
+namespace test {
+
 enum class FlagsSimple
 {
     FLAG_VALUE_0 = (int32_t)0x0ll,
@@ -424,6 +494,77 @@ class FinalModel<TBuffer, ::test::FlagsTyped> : public FinalModelBase<TBuffer, :
 {
 public:
     using FinalModelBase<TBuffer, ::test::FlagsTyped, uint64_t>::FinalModelBase;
+};
+
+} // namespace FBE
+
+namespace test {
+
+enum class FlagsEmpty
+{
+};
+FBE_ENUM_FLAGS(FlagsEmpty)
+
+template <class TOutputStream>
+inline TOutputStream& operator<<(TOutputStream& stream, FlagsEmpty value)
+{
+    bool first = true;
+    return stream;
+}
+
+} // namespace test
+
+namespace FBE {
+
+namespace JSON {
+
+template <class TOutputStream>
+struct ValueWriter<TOutputStream, ::test::FlagsEmpty>
+{
+    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::test::FlagsEmpty& value, bool scope = true)
+    {
+        return FBE::JSON::to_json(writer, (int32_t)value);
+    }
+};
+
+template <class TJson>
+struct ValueReader<TJson, ::test::FlagsEmpty>
+{
+    static bool from_json(const TJson& json, ::test::FlagsEmpty& value)
+    {
+        int32_t raw;
+        if (!FBE::JSON::from_json(json, raw))
+            return false;
+
+        value = (::test::FlagsEmpty)raw;
+        return true;
+    }
+};
+
+} // namespace JSON
+
+} // namespace FBE
+
+namespace FBE {
+
+// Fast Binary Encoding ::test::FlagsEmpty field model
+template <class TBuffer>
+class FieldModel<TBuffer, ::test::FlagsEmpty> : public FieldModelBase<TBuffer, ::test::FlagsEmpty, int32_t>
+{
+public:
+    using FieldModelBase<TBuffer, ::test::FlagsEmpty, int32_t>::FieldModelBase;
+};
+
+} // namespace FBE
+
+namespace FBE {
+
+// Fast Binary Encoding ::test::FlagsEmpty final model
+template <class TBuffer>
+class FinalModel<TBuffer, ::test::FlagsEmpty> : public FinalModelBase<TBuffer, ::test::FlagsEmpty, int32_t>
+{
+public:
+    using FinalModelBase<TBuffer, ::test::FlagsEmpty, int32_t>::FinalModelBase;
 };
 
 } // namespace FBE
@@ -15241,6 +15382,534 @@ private:
 } // namespace test
 } // namespace FBE
 
+namespace test {
+
+struct StructEmpty
+{
+
+    StructEmpty()
+    {}
+    StructEmpty(const StructEmpty& other) = default;
+    StructEmpty(StructEmpty&& other) = default;
+    ~StructEmpty() = default;
+
+    StructEmpty& operator=(const StructEmpty& other) = default;
+    StructEmpty& operator=(StructEmpty&& other) = default;
+
+    bool operator==(const StructEmpty& other) const noexcept
+    {
+        return (
+            true
+            );
+    }
+    bool operator!=(const StructEmpty& other) const noexcept { return !operator==(other); }
+    bool operator<(const StructEmpty& other) const noexcept
+    {
+        return false;
+    }
+    bool operator<=(const StructEmpty& other) const noexcept { return operator<(other) || operator==(other); }
+    bool operator>(const StructEmpty& other) const noexcept { return !operator<=(other); }
+    bool operator>=(const StructEmpty& other) const noexcept { return !operator<(other); }
+
+    std::string string() const
+    {
+        std::stringstream ss;
+        ss << *this;
+        return ss.str();
+    }
+
+    template <class TOutputStream>
+    friend TOutputStream& operator<<(TOutputStream& stream, const StructEmpty& other);
+
+    void swap(StructEmpty& other) noexcept
+    {
+        using std::swap;
+    }
+
+    friend void swap(StructEmpty& value1, StructEmpty& value2) noexcept
+    {
+        value1.swap(value2);
+    }
+};
+
+template <class TOutputStream>
+inline TOutputStream& operator<<(TOutputStream& stream, const StructEmpty& value)
+{
+    stream << "StructEmpty(";
+    stream << ")";
+    return stream;
+}
+
+} // namespace test
+
+namespace std {
+
+template<>
+struct hash<test::StructEmpty>
+{
+    typedef test::StructEmpty argument_type;
+    typedef size_t result_type;
+
+    result_type operator () (const argument_type& value) const
+    {
+        result_type result = 17;
+        return result;
+    }
+};
+
+} // namespace std
+
+namespace FBE {
+
+namespace JSON {
+
+template <class TOutputStream>
+struct ValueWriter<TOutputStream, ::test::StructEmpty>
+{
+    static bool to_json(rapidjson::Writer<TOutputStream>& writer, const ::test::StructEmpty& value, bool scope = true)
+    {
+        if (scope)
+            if (!writer.StartObject())
+                return false;
+        if (scope)
+            if (!writer.EndObject())
+                return false;
+        return true;
+    }
+};
+
+template <class TJson>
+struct ValueReader<TJson, ::test::StructEmpty>
+{
+    static bool from_json(const TJson& json, ::test::StructEmpty& value, const char* key = nullptr)
+    {
+        if (key != nullptr)
+            return FBE::JSON::from_json_child(json, value, key);
+        return true;
+    }
+};
+
+} // namespace JSON
+
+} // namespace FBE
+
+namespace FBE {
+
+// Fast Binary Encoding ::test::StructEmpty field model
+template <class TBuffer>
+class FieldModel<TBuffer, ::test::StructEmpty>
+{
+public:
+    FieldModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset)
+    {}
+
+    // Get the field offset
+    size_t fbe_offset() const noexcept { return _offset; }
+    // Get the field size
+    size_t fbe_size() const noexcept { return 4; }
+    // Get the field body size
+    size_t fbe_body() const noexcept
+    {
+        size_t fbe_result = 4 + 4
+            ;
+        return fbe_result;
+    }
+    // Get the field extra size
+    size_t fbe_extra() const noexcept
+    {
+        if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
+            return 0;
+
+        uint32_t fbe_struct_offset = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_offset()));
+        if ((fbe_struct_offset == 0) || ((_buffer.offset() + fbe_struct_offset + 4) > _buffer.size()))
+            return 0;
+
+        _buffer.shift(fbe_struct_offset);
+
+        size_t fbe_result = fbe_body()
+            ;
+
+        _buffer.unshift(fbe_struct_offset);
+
+        return fbe_result;
+    }
+    // Get the field type
+    static constexpr size_t fbe_type() noexcept { return 143; }
+
+    // Shift the current field offset
+    void fbe_shift(size_t size) noexcept { _offset += size; }
+    // Unshift the current field offset
+    void fbe_unshift(size_t size) noexcept { _offset -= size; }
+
+    // Check if the struct value is valid
+    bool verify(bool fbe_verify_type = true) const noexcept
+    {
+        if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
+            return true;
+
+        uint32_t fbe_struct_offset = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_offset()));
+        if ((fbe_struct_offset == 0) || ((_buffer.offset() + fbe_struct_offset + 4 + 4) > _buffer.size()))
+            return false;
+
+        uint32_t fbe_struct_size = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset));
+        if (fbe_struct_size < (4 + 4))
+            return false;
+
+        uint32_t fbe_struct_type = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset + 4));
+        if (fbe_verify_type && (fbe_struct_type != fbe_type()))
+            return false;
+
+        _buffer.shift(fbe_struct_offset);
+        bool fbe_result = verify_fields(fbe_struct_size);
+        _buffer.unshift(fbe_struct_offset);
+        return fbe_result;
+    }
+
+    // Check if the struct fields are valid
+    bool verify_fields(size_t fbe_struct_size) const noexcept
+    {
+        return true;
+    }
+
+    // Get the struct value (begin phase)
+    size_t get_begin() const noexcept
+    {
+        if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
+            return 0;
+
+        uint32_t fbe_struct_offset = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_offset()));
+        assert(((fbe_struct_offset > 0) && ((_buffer.offset() + fbe_struct_offset + 4 + 4) <= _buffer.size())) && "Model is broken!");
+        if ((fbe_struct_offset == 0) || ((_buffer.offset() + fbe_struct_offset + 4 + 4) > _buffer.size()))
+            return 0;
+
+        uint32_t fbe_struct_size = *((const uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset));
+        assert((fbe_struct_size >= (4 + 4)) && "Model is broken!");
+        if (fbe_struct_size < (4 + 4))
+            return 0;
+
+        _buffer.shift(fbe_struct_offset);
+        return fbe_struct_offset;
+    }
+
+    // Get the struct value (end phase)
+    void get_end(size_t fbe_begin) const noexcept
+    {
+        _buffer.unshift(fbe_begin);
+    }
+
+    // Get the struct value
+    void get(::test::StructEmpty& fbe_value) const noexcept
+    {
+        size_t fbe_begin = get_begin();
+        if (fbe_begin == 0)
+            return;
+
+        uint32_t fbe_struct_size = *((const uint32_t*)(_buffer.data() + _buffer.offset()));
+        get_fields(fbe_value, fbe_struct_size);
+        get_end(fbe_begin);
+    }
+
+    // Get the struct fields values
+    void get_fields(::test::StructEmpty& fbe_value, size_t fbe_struct_size) const noexcept
+    {
+    }
+
+    // Set the struct value (begin phase)
+    size_t set_begin()
+    {
+        assert(((_buffer.offset() + fbe_offset() + fbe_size()) <= _buffer.size()) && "Model is broken!");
+        if ((_buffer.offset() + fbe_offset() + fbe_size()) > _buffer.size())
+            return 0;
+
+        uint32_t fbe_struct_size = (uint32_t)fbe_body();
+        uint32_t fbe_struct_offset = (uint32_t)(_buffer.allocate(fbe_struct_size) - _buffer.offset());
+        assert(((fbe_struct_offset > 0) && ((_buffer.offset() + fbe_struct_offset + fbe_struct_size) <= _buffer.size())) && "Model is broken!");
+        if ((fbe_struct_offset == 0) || ((_buffer.offset() + fbe_struct_offset + fbe_struct_size) > _buffer.size()))
+            return 0;
+
+        *((uint32_t*)(_buffer.data() + _buffer.offset() + fbe_offset())) = fbe_struct_offset;
+        *((uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset)) = fbe_struct_size;
+        *((uint32_t*)(_buffer.data() + _buffer.offset() + fbe_struct_offset + 4)) = (uint32_t)fbe_type();
+
+        _buffer.shift(fbe_struct_offset);
+        return fbe_struct_offset;
+    }
+
+    // Set the struct value (end phase)
+    void set_end(size_t fbe_begin)
+    {
+        _buffer.unshift(fbe_begin);
+    }
+
+    // Set the struct value
+    void set(const ::test::StructEmpty& fbe_value) noexcept
+    {
+        size_t fbe_begin = set_begin();
+        if (fbe_begin == 0)
+            return;
+
+        set_fields(fbe_value);
+        set_end(fbe_begin);
+    }
+
+    // Set the struct fields values
+    void set_fields(const ::test::StructEmpty& fbe_value) noexcept
+    {
+    }
+
+private:
+    TBuffer& _buffer;
+    size_t _offset;
+
+public:
+};
+
+} // namespace FBE
+
+namespace FBE {
+namespace test {
+
+// Fast Binary Encoding StructEmpty model
+template <class TBuffer>
+class StructEmptyModel : public FBE::Model<TBuffer>
+{
+public:
+    StructEmptyModel() : model(this->buffer(), 4) {}
+    StructEmptyModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), model(this->buffer(), 4) {}
+
+    // Get the model size
+    size_t fbe_size() const noexcept { return model.fbe_size() + model.fbe_extra(); }
+    // Get the model type
+    static constexpr size_t fbe_type() noexcept { return FieldModel<TBuffer, ::test::StructEmpty>::fbe_type(); }
+
+    // Check if the struct value is valid
+    bool verify()
+    {
+        if ((this->buffer().offset() + model.fbe_offset() - 4) > this->buffer().size())
+            return false;
+
+        uint32_t fbe_full_size = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + model.fbe_offset() - 4));
+        if (fbe_full_size < model.fbe_size())
+            return false;
+
+        return model.verify();
+    }
+
+    // Create a new model (begin phase)
+    size_t create_begin()
+    {
+        size_t fbe_begin = this->buffer().allocate(4 + model.fbe_size());
+        return fbe_begin;
+    }
+
+    // Create a new model (end phase)
+    size_t create_end(size_t fbe_begin)
+    {
+        size_t fbe_end = this->buffer().size();
+        uint32_t fbe_full_size = (uint32_t)(fbe_end - fbe_begin);
+        *((uint32_t*)(this->buffer().data() + this->buffer().offset() + model.fbe_offset() - 4)) = fbe_full_size;
+        return fbe_full_size;
+    }
+
+    // Serialize the struct value
+    size_t serialize(const ::test::StructEmpty& value)
+    {
+        size_t fbe_begin = create_begin();
+        model.set(value);
+        size_t fbe_full_size = create_end(fbe_begin);
+        return fbe_full_size;
+    }
+
+    // Deserialize the struct value
+    size_t deserialize(::test::StructEmpty& value) const noexcept
+    {
+        if ((this->buffer().offset() + model.fbe_offset() - 4) > this->buffer().size())
+            return 0;
+
+        uint32_t fbe_full_size = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + model.fbe_offset() - 4));
+        assert((fbe_full_size >= model.fbe_size()) && "Model is broken!");
+        if (fbe_full_size < model.fbe_size())
+            return 0;
+
+        model.get(value);
+        return fbe_full_size;
+    }
+
+    // Move to the next struct value
+    void next(size_t prev) noexcept
+    {
+        model.fbe_shift(prev);
+    }
+
+public:
+    FieldModel<TBuffer, ::test::StructEmpty> model;
+};
+
+} // namespace test
+} // namespace FBE
+
+namespace FBE {
+
+// Fast Binary Encoding ::test::StructEmpty final model
+template <class TBuffer>
+class FinalModel<TBuffer, ::test::StructEmpty>
+{
+public:
+    FinalModel(TBuffer& buffer, size_t offset) noexcept : _buffer(buffer), _offset(offset)
+    {}
+
+    // Get the allocation size
+    size_t fbe_allocation_size(const ::test::StructEmpty& fbe_value) const noexcept
+    {
+        size_t fbe_result = 0
+            ;
+        return fbe_result;
+    }
+
+    // Get the final offset
+    size_t fbe_offset() const noexcept { return _offset; }
+    // Set the final offset
+    size_t fbe_offset(size_t offset) const noexcept { return _offset = offset; }
+    // Get the final type
+    static constexpr size_t fbe_type() noexcept { return 143; }
+
+    // Shift the current final offset
+    void fbe_shift(size_t size) noexcept { _offset += size; }
+    // Unshift the current final offset
+    void fbe_unshift(size_t size) noexcept { _offset -= size; }
+
+    // Check if the struct value is valid
+    size_t verify() const noexcept
+    {
+        _buffer.shift(fbe_offset());
+        size_t fbe_result = verify_fields();
+        _buffer.unshift(fbe_offset());
+        return fbe_result;
+    }
+
+    // Check if the struct fields are valid
+    size_t verify_fields() const noexcept
+    {
+        return 0;
+    }
+
+    // Get the struct value
+    size_t get(::test::StructEmpty& fbe_value) const noexcept
+    {
+        _buffer.shift(fbe_offset());
+        size_t fbe_result = get_fields(fbe_value);
+        _buffer.unshift(fbe_offset());
+        return fbe_result;
+    }
+
+    // Get the struct fields values
+    size_t get_fields(::test::StructEmpty& fbe_value) const noexcept
+    {
+        return 0;
+    }
+
+    // Set the struct value
+    size_t set(const ::test::StructEmpty& fbe_value) noexcept
+    {
+        _buffer.shift(fbe_offset());
+        size_t fbe_result = set_fields(fbe_value);
+        _buffer.unshift(fbe_offset());
+        return fbe_result;
+    }
+
+    // Set the struct fields values
+    size_t set_fields(const ::test::StructEmpty& fbe_value) noexcept
+    {
+        return 0;
+    }
+
+private:
+    TBuffer& _buffer;
+    mutable size_t _offset;
+
+public:
+};
+
+} // namespace FBE
+
+namespace FBE {
+namespace test {
+
+// Fast Binary Encoding StructEmpty final model
+template <class TBuffer>
+class StructEmptyFinalModel : public FBE::Model<TBuffer>
+{
+public:
+    StructEmptyFinalModel() : _model(this->buffer(), 8) {}
+    StructEmptyFinalModel(const std::shared_ptr<TBuffer>& buffer) : FBE::Model<TBuffer>(buffer), _model(this->buffer(), 8) {}
+
+    // Get the model type
+    static constexpr size_t fbe_type() noexcept { return FinalModel<TBuffer, ::test::StructEmpty>::fbe_type(); }
+
+    // Check if the struct value is valid
+    bool verify()
+    {
+        if ((this->buffer().offset() + _model.fbe_offset()) > this->buffer().size())
+            return false;
+
+        size_t fbe_struct_size = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 8));
+        size_t fbe_struct_type = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 4));
+        if ((fbe_struct_size == 0) || (fbe_struct_type != fbe_type()))
+            return false;
+
+        return ((8 + _model.verify()) == fbe_struct_size);
+    }
+
+    // Serialize the struct value
+    size_t serialize(const ::test::StructEmpty& value)
+    {
+        size_t fbe_initial_size = this->buffer().size();
+
+        uint32_t fbe_struct_type = (uint32_t)fbe_type();
+        uint32_t fbe_struct_size = (uint32_t)(8 + _model.fbe_allocation_size(value));
+        uint32_t fbe_struct_offset = (uint32_t)(this->buffer().allocate(fbe_struct_size) - this->buffer().offset());
+        assert(((this->buffer().offset() + fbe_struct_offset + fbe_struct_size) <= this->buffer().size()) && "Model is broken!");
+        if ((this->buffer().offset() + fbe_struct_offset + fbe_struct_size) > this->buffer().size())
+            return 0;
+
+        fbe_struct_size = (uint32_t)(8 + _model.set(value));
+        this->buffer().resize(fbe_initial_size + fbe_struct_size);
+
+        *((uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 8)) = fbe_struct_size;
+        *((uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 4)) = fbe_struct_type;
+
+        return fbe_struct_size;
+    }
+
+    // Deserialize the struct value
+    size_t deserialize(::test::StructEmpty& value) const noexcept
+    {
+        assert(((this->buffer().offset() + _model.fbe_offset()) <= this->buffer().size()) && "Model is broken!");
+        if ((this->buffer().offset() + _model.fbe_offset()) > this->buffer().size())
+            return 0;
+
+        size_t fbe_struct_size = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 8));
+        size_t fbe_struct_type = *((const uint32_t*)(this->buffer().data() + this->buffer().offset() + _model.fbe_offset() - 4));
+        assert(((fbe_struct_size > 0) && (fbe_struct_type == fbe_type())) && "Model is broken!");
+        if ((fbe_struct_size == 0) || (fbe_struct_type != fbe_type()))
+            return 8;
+
+        return 8 + _model.get(value);
+    }
+
+    // Move to the next struct value
+    void next(size_t prev) noexcept
+    {
+        _model.fbe_shift(prev);
+    }
+
+private:
+    FinalModel<TBuffer, ::test::StructEmpty> _model;
+};
+
+} // namespace test
+} // namespace FBE
+
 namespace FBE {
 namespace test {
 
@@ -15263,6 +15932,7 @@ public:
         , StructMapModel(this->_buffer)
         , StructHashModel(this->_buffer)
         , StructHashExModel(this->_buffer)
+        , StructEmptyModel(this->_buffer)
     {}
     Sender(const Sender&) = default;
     Sender(Sender&&) noexcept = default;
@@ -15469,6 +16139,24 @@ public:
         return this->send_serialized(serialized);
     }
 
+    size_t send(const ::test::StructEmpty& value)
+    {
+        // Serialize the value into the FBE stream
+        size_t serialized = StructEmptyModel.serialize(value);
+        assert((serialized > 0) && "test::StructEmpty serialization failed!");
+        assert(StructEmptyModel.verify() && "test::StructEmpty validation failed!");
+
+        // Log the value
+        if (this->_logging)
+        {
+            std::string message = value.string();
+            this->onSendLog(message);
+        }
+
+        // Send the serialized value
+        return this->send_serialized(serialized);
+    }
+
 public:
     // Sender models accessors
     FBE::test::StructSimpleModel<TBuffer> StructSimpleModel;
@@ -15482,6 +16170,7 @@ public:
     FBE::test::StructMapModel<TBuffer> StructMapModel;
     FBE::test::StructHashModel<TBuffer> StructHashModel;
     FBE::test::StructHashExModel<TBuffer> StructHashExModel;
+    FBE::test::StructEmptyModel<TBuffer> StructEmptyModel;
 };
 
 } // namespace test
@@ -15518,6 +16207,7 @@ protected:
     virtual void onReceive(const ::test::StructMap& value) {}
     virtual void onReceive(const ::test::StructHash& value) {}
     virtual void onReceive(const ::test::StructHashEx& value) {}
+    virtual void onReceive(const ::test::StructEmpty& value) {}
 
     // Receive message handler
     bool onReceive(size_t type, const void* data, size_t size) override
@@ -15733,6 +16423,25 @@ protected:
                 onReceive(StructHashExValue);
                 return true;
             }
+            case FBE::test::StructEmptyModel<ReadBuffer>::fbe_type():
+            {
+                // Deserialize the value from the FBE stream
+                StructEmptyModel.attach(data, size);
+                assert(StructEmptyModel.verify() && "test::StructEmpty validation failed!");
+                [[maybe_unused]] size_t deserialized = StructEmptyModel.deserialize(StructEmptyValue);
+                assert((deserialized > 0) && "test::StructEmpty deserialization failed!");
+
+                // Log the value
+                if (this->_logging)
+                {
+                    std::string message = StructEmptyValue.string();
+                    this->onReceiveLog(message);
+                }
+
+                // Call receive handler with deserialized value
+                onReceive(StructEmptyValue);
+                return true;
+            }
         }
 
         if (proto::Receiver<TBuffer>::onReceive(type, data, size))
@@ -15754,6 +16463,7 @@ private:
     ::test::StructMap StructMapValue;
     ::test::StructHash StructHashValue;
     ::test::StructHashEx StructHashExValue;
+    ::test::StructEmpty StructEmptyValue;
 
     // Receiver models accessors
     FBE::test::StructSimpleModel<ReadBuffer> StructSimpleModel;
@@ -15767,6 +16477,7 @@ private:
     FBE::test::StructMapModel<ReadBuffer> StructMapModel;
     FBE::test::StructHashModel<ReadBuffer> StructHashModel;
     FBE::test::StructHashExModel<ReadBuffer> StructHashExModel;
+    FBE::test::StructEmptyModel<ReadBuffer> StructEmptyModel;
 };
 
 } // namespace test
@@ -15803,6 +16514,7 @@ protected:
     virtual void onProxy(FBE::test::StructMapModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
     virtual void onProxy(FBE::test::StructHashModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
     virtual void onProxy(FBE::test::StructHashExModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
+    virtual void onProxy(FBE::test::StructEmptyModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
 
     // Receive message handler
     bool onReceive(size_t type, const void* data, size_t size) override
@@ -15919,6 +16631,16 @@ protected:
                 onProxy(StructHashExModel, type, data, size);
                 return true;
             }
+            case FBE::test::StructEmptyModel<ReadBuffer>::fbe_type():
+            {
+                // Attach the FBE stream to the proxy model
+                StructEmptyModel.attach(data, size);
+                assert(StructEmptyModel.verify() && "test::StructEmpty validation failed!");
+
+                // Call proxy handler
+                onProxy(StructEmptyModel, type, data, size);
+                return true;
+            }
         }
 
         if (proto::Proxy<TBuffer>::onReceive(type, data, size))
@@ -15940,6 +16662,7 @@ private:
     FBE::test::StructMapModel<ReadBuffer> StructMapModel;
     FBE::test::StructHashModel<ReadBuffer> StructHashModel;
     FBE::test::StructHashExModel<ReadBuffer> StructHashExModel;
+    FBE::test::StructEmptyModel<ReadBuffer> StructEmptyModel;
 };
 
 } // namespace test
@@ -15967,6 +16690,7 @@ public:
         , StructMapModel(this->_buffer)
         , StructHashModel(this->_buffer)
         , StructHashExModel(this->_buffer)
+        , StructEmptyModel(this->_buffer)
     { this->final(true); }
     FinalSender(const FinalSender&) = default;
     FinalSender(FinalSender&&) noexcept = default;
@@ -16173,6 +16897,24 @@ public:
         return this->send_serialized(serialized);
     }
 
+    size_t send(const ::test::StructEmpty& value)
+    {
+        // Serialize the value into the FBE stream
+        size_t serialized = StructEmptyModel.serialize(value);
+        assert((serialized > 0) && "test::StructEmpty serialization failed!");
+        assert(StructEmptyModel.verify() && "test::StructEmpty validation failed!");
+
+        // Log the value
+        if (this->_logging)
+        {
+            std::string message = value.string();
+            this->onSendLog(message);
+        }
+
+        // Send the serialized value
+        return this->send_serialized(serialized);
+    }
+
 public:
     // Sender models accessors
     FBE::test::StructSimpleFinalModel<TBuffer> StructSimpleModel;
@@ -16186,6 +16928,7 @@ public:
     FBE::test::StructMapFinalModel<TBuffer> StructMapModel;
     FBE::test::StructHashFinalModel<TBuffer> StructHashModel;
     FBE::test::StructHashExFinalModel<TBuffer> StructHashExModel;
+    FBE::test::StructEmptyFinalModel<TBuffer> StructEmptyModel;
 };
 
 } // namespace test
@@ -16222,6 +16965,7 @@ protected:
     virtual void onReceive(const ::test::StructMap& value) {}
     virtual void onReceive(const ::test::StructHash& value) {}
     virtual void onReceive(const ::test::StructHashEx& value) {}
+    virtual void onReceive(const ::test::StructEmpty& value) {}
 
     // Receive message handler
     bool onReceive(size_t type, const void* data, size_t size) override
@@ -16437,6 +17181,25 @@ protected:
                 onReceive(StructHashExValue);
                 return true;
             }
+            case FBE::test::StructEmptyFinalModel<ReadBuffer>::fbe_type():
+            {
+                // Deserialize the value from the FBE stream
+                StructEmptyModel.attach(data, size);
+                assert(StructEmptyModel.verify() && "test::StructEmpty validation failed!");
+                [[maybe_unused]] size_t deserialized = StructEmptyModel.deserialize(StructEmptyValue);
+                assert((deserialized > 0) && "test::StructEmpty deserialization failed!");
+
+                // Log the value
+                if (this->_logging)
+                {
+                    std::string message = StructEmptyValue.string();
+                    this->onReceiveLog(message);
+                }
+
+                // Call receive handler with deserialized value
+                onReceive(StructEmptyValue);
+                return true;
+            }
         }
 
         if (proto::FinalReceiver<TBuffer>::onReceive(type, data, size))
@@ -16458,6 +17221,7 @@ private:
     ::test::StructMap StructMapValue;
     ::test::StructHash StructHashValue;
     ::test::StructHashEx StructHashExValue;
+    ::test::StructEmpty StructEmptyValue;
 
     // Receiver models accessors
     FBE::test::StructSimpleFinalModel<ReadBuffer> StructSimpleModel;
@@ -16471,6 +17235,7 @@ private:
     FBE::test::StructMapFinalModel<ReadBuffer> StructMapModel;
     FBE::test::StructHashFinalModel<ReadBuffer> StructHashModel;
     FBE::test::StructHashExFinalModel<ReadBuffer> StructHashExModel;
+    FBE::test::StructEmptyFinalModel<ReadBuffer> StructEmptyModel;
 };
 
 } // namespace test
@@ -16507,6 +17272,7 @@ protected:
     virtual void onProxy(FBE::test::StructMapFinalModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
     virtual void onProxy(FBE::test::StructHashFinalModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
     virtual void onProxy(FBE::test::StructHashExFinalModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
+    virtual void onProxy(FBE::test::StructEmptyFinalModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
 
     // Receive message handler
     bool onReceive(size_t type, const void* data, size_t size) override
@@ -16623,6 +17389,16 @@ protected:
                 onProxy(StructHashExModel, type, data, size);
                 return true;
             }
+            case FBE::test::StructEmptyFinalModel<ReadBuffer>::fbe_type():
+            {
+                // Attach the FBE stream to the proxy model
+                StructEmptyModel.attach(data, size);
+                assert(StructEmptyModel.verify() && "test::StructEmpty validation failed!");
+
+                // Call proxy handler
+                onProxy(StructEmptyModel, type, data, size);
+                return true;
+            }
         }
 
         if (proto::FinalProxy<TBuffer>::onReceive(type, data, size))
@@ -16644,6 +17420,7 @@ private:
     FBE::test::StructMapFinalModel<ReadBuffer> StructMapModel;
     FBE::test::StructHashFinalModel<ReadBuffer> StructHashModel;
     FBE::test::StructHashExFinalModel<ReadBuffer> StructHashExModel;
+    FBE::test::StructEmptyFinalModel<ReadBuffer> StructEmptyModel;
 };
 
 } // namespace test

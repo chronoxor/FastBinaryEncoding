@@ -35,6 +35,7 @@ public class Proxy extends fbe.Receiver
     private final StructMapModel StructMapModel;
     private final StructHashModel StructHashModel;
     private final StructHashExModel StructHashExModel;
+    private final StructEmptyModel StructEmptyModel;
 
     public Proxy()
     {
@@ -51,6 +52,7 @@ public class Proxy extends fbe.Receiver
         StructMapModel = new StructMapModel();
         StructHashModel = new StructHashModel();
         StructHashExModel = new StructHashExModel();
+        StructEmptyModel = new StructEmptyModel();
     }
     public Proxy(Buffer buffer)
     {
@@ -67,6 +69,7 @@ public class Proxy extends fbe.Receiver
         StructMapModel = new StructMapModel();
         StructHashModel = new StructHashModel();
         StructHashExModel = new StructHashExModel();
+        StructEmptyModel = new StructEmptyModel();
     }
 
     // Proxy handlers
@@ -81,6 +84,7 @@ public class Proxy extends fbe.Receiver
     protected void onProxy(StructMapModel model, long type, byte[] buffer, long offset, long size) {}
     protected void onProxy(StructHashModel model, long type, byte[] buffer, long offset, long size) {}
     protected void onProxy(StructHashExModel model, long type, byte[] buffer, long offset, long size) {}
+    protected void onProxy(StructEmptyModel model, long type, byte[] buffer, long offset, long size) {}
 
     @Override
     public boolean onReceive(long type, byte[] buffer, long offset, long size)
@@ -195,6 +199,16 @@ public class Proxy extends fbe.Receiver
 
                 // Call proxy handler
                 onProxy(StructHashExModel, type, buffer, offset, size);
+                return true;
+            }
+            case (int)test.fbe.StructEmptyModel.fbeTypeConst:
+            {
+                // Attach the FBE stream to the proxy model
+                StructEmptyModel.attach(buffer, offset);
+                assert StructEmptyModel.verify() : "test.StructEmpty validation failed!";
+
+                // Call proxy handler
+                onProxy(StructEmptyModel, type, buffer, offset, size);
                 return true;
             }
         }

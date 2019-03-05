@@ -35,6 +35,7 @@ public class FinalReceiver extends fbe.Receiver
     private final test.StructMap StructMapValue;
     private final test.StructHash StructHashValue;
     private final test.StructHashEx StructHashExValue;
+    private final test.StructEmpty StructEmptyValue;
 
     // Receiver models accessors
     private final StructSimpleFinalModel StructSimpleModel;
@@ -48,6 +49,7 @@ public class FinalReceiver extends fbe.Receiver
     private final StructMapFinalModel StructMapModel;
     private final StructHashFinalModel StructHashModel;
     private final StructHashExFinalModel StructHashExModel;
+    private final StructEmptyFinalModel StructEmptyModel;
 
     public FinalReceiver()
     {
@@ -75,6 +77,8 @@ public class FinalReceiver extends fbe.Receiver
         StructHashModel = new StructHashFinalModel();
         StructHashExValue = new test.StructHashEx();
         StructHashExModel = new StructHashExFinalModel();
+        StructEmptyValue = new test.StructEmpty();
+        StructEmptyModel = new StructEmptyFinalModel();
     }
     public FinalReceiver(Buffer buffer)
     {
@@ -102,6 +106,8 @@ public class FinalReceiver extends fbe.Receiver
         StructHashModel = new StructHashFinalModel();
         StructHashExValue = new test.StructHashEx();
         StructHashExModel = new StructHashExFinalModel();
+        StructEmptyValue = new test.StructEmpty();
+        StructEmptyModel = new StructEmptyFinalModel();
     }
 
     // Receive handlers
@@ -116,6 +122,7 @@ public class FinalReceiver extends fbe.Receiver
     protected void onReceive(test.StructMap value) {}
     protected void onReceive(test.StructHash value) {}
     protected void onReceive(test.StructHashEx value) {}
+    protected void onReceive(test.StructEmpty value) {}
 
     @Override
     public boolean onReceive(long type, byte[] buffer, long offset, long size)
@@ -329,6 +336,25 @@ public class FinalReceiver extends fbe.Receiver
 
                 // Call receive handler with deserialized value
                 onReceive(StructHashExValue);
+                return true;
+            }
+            case (int)test.fbe.StructEmptyFinalModel.fbeTypeConst:
+            {
+                // Deserialize the value from the FBE stream
+                StructEmptyModel.attach(buffer, offset);
+                assert StructEmptyModel.verify() : "test.StructEmpty validation failed!";
+                long deserialized = StructEmptyModel.deserialize(StructEmptyValue);
+                assert (deserialized > 0) : "test.StructEmpty deserialization failed!";
+
+                // Log the value
+                if (getLogging())
+                {
+                    String message = StructEmptyValue.toString();
+                    onReceiveLog(message);
+                }
+
+                // Call receive handler with deserialized value
+                onReceive(StructEmptyValue);
                 return true;
             }
         }

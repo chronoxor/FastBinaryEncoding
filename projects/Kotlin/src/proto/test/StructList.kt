@@ -48,6 +48,7 @@ open class StructList : Comparable<Any?>
         this.f10 = f10
     }
 
+    @Suppress("UNUSED_PARAMETER")
     constructor(other: StructList)
     {
         this.f1 = other.f1
