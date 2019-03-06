@@ -7834,7 +7834,9 @@ void GeneratorCpp::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
             WriteLineIndent("assert(" + *s->name + "Model.verify() && \"" + *p->name + "::" + *s->name + " validation failed!\");");
             WriteLine();
             WriteLineIndent("// Call proxy handler");
+            WriteLineIndent("size_t fbe_begin = " + *s->name + "Model.get_begin();");
             WriteLineIndent("onProxy(" + *s->name + "Model, type, data, size);");
+            WriteLineIndent(*s->name + "Model.get_end(fbe_begin);");
             WriteLineIndent("return true;");
             Indent(-1);
             WriteLineIndent("}");

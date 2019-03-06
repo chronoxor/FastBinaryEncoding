@@ -2794,7 +2794,9 @@ protected:
                 assert(OrderModel.verify() && "proto::Order validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = OrderModel.get_begin();
                 onProxy(OrderModel, type, data, size);
+                OrderModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::proto::BalanceModel<ReadBuffer>::fbe_type():
@@ -2804,7 +2806,9 @@ protected:
                 assert(BalanceModel.verify() && "proto::Balance validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = BalanceModel.get_begin();
                 onProxy(BalanceModel, type, data, size);
+                BalanceModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::proto::AccountModel<ReadBuffer>::fbe_type():
@@ -2814,7 +2818,9 @@ protected:
                 assert(AccountModel.verify() && "proto::Account validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = AccountModel.get_begin();
                 onProxy(AccountModel, type, data, size);
+                AccountModel.get_end(fbe_begin);
                 return true;
             }
         }
@@ -3054,7 +3060,9 @@ protected:
                 assert(OrderModel.verify() && "proto::Order validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = OrderModel.get_begin();
                 onProxy(OrderModel, type, data, size);
+                OrderModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::proto::BalanceFinalModel<ReadBuffer>::fbe_type():
@@ -3064,7 +3072,9 @@ protected:
                 assert(BalanceModel.verify() && "proto::Balance validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = BalanceModel.get_begin();
                 onProxy(BalanceModel, type, data, size);
+                BalanceModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::proto::AccountFinalModel<ReadBuffer>::fbe_type():
@@ -3074,7 +3084,9 @@ protected:
                 assert(AccountModel.verify() && "proto::Account validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = AccountModel.get_begin();
                 onProxy(AccountModel, type, data, size);
+                AccountModel.get_end(fbe_begin);
                 return true;
             }
         }

@@ -16528,7 +16528,9 @@ protected:
                 assert(StructSimpleModel.verify() && "test::StructSimple validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructSimpleModel.get_begin();
                 onProxy(StructSimpleModel, type, data, size);
+                StructSimpleModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructOptionalModel<ReadBuffer>::fbe_type():
@@ -16538,7 +16540,9 @@ protected:
                 assert(StructOptionalModel.verify() && "test::StructOptional validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructOptionalModel.get_begin();
                 onProxy(StructOptionalModel, type, data, size);
+                StructOptionalModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructNestedModel<ReadBuffer>::fbe_type():
@@ -16548,7 +16552,9 @@ protected:
                 assert(StructNestedModel.verify() && "test::StructNested validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructNestedModel.get_begin();
                 onProxy(StructNestedModel, type, data, size);
+                StructNestedModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructBytesModel<ReadBuffer>::fbe_type():
@@ -16558,7 +16564,9 @@ protected:
                 assert(StructBytesModel.verify() && "test::StructBytes validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructBytesModel.get_begin();
                 onProxy(StructBytesModel, type, data, size);
+                StructBytesModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructArrayModel<ReadBuffer>::fbe_type():
@@ -16568,7 +16576,9 @@ protected:
                 assert(StructArrayModel.verify() && "test::StructArray validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructArrayModel.get_begin();
                 onProxy(StructArrayModel, type, data, size);
+                StructArrayModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructVectorModel<ReadBuffer>::fbe_type():
@@ -16578,7 +16588,9 @@ protected:
                 assert(StructVectorModel.verify() && "test::StructVector validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructVectorModel.get_begin();
                 onProxy(StructVectorModel, type, data, size);
+                StructVectorModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructListModel<ReadBuffer>::fbe_type():
@@ -16588,7 +16600,9 @@ protected:
                 assert(StructListModel.verify() && "test::StructList validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructListModel.get_begin();
                 onProxy(StructListModel, type, data, size);
+                StructListModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructSetModel<ReadBuffer>::fbe_type():
@@ -16598,7 +16612,9 @@ protected:
                 assert(StructSetModel.verify() && "test::StructSet validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructSetModel.get_begin();
                 onProxy(StructSetModel, type, data, size);
+                StructSetModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructMapModel<ReadBuffer>::fbe_type():
@@ -16608,7 +16624,9 @@ protected:
                 assert(StructMapModel.verify() && "test::StructMap validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructMapModel.get_begin();
                 onProxy(StructMapModel, type, data, size);
+                StructMapModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructHashModel<ReadBuffer>::fbe_type():
@@ -16618,7 +16636,9 @@ protected:
                 assert(StructHashModel.verify() && "test::StructHash validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructHashModel.get_begin();
                 onProxy(StructHashModel, type, data, size);
+                StructHashModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructHashExModel<ReadBuffer>::fbe_type():
@@ -16628,7 +16648,9 @@ protected:
                 assert(StructHashExModel.verify() && "test::StructHashEx validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructHashExModel.get_begin();
                 onProxy(StructHashExModel, type, data, size);
+                StructHashExModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructEmptyModel<ReadBuffer>::fbe_type():
@@ -16638,7 +16660,9 @@ protected:
                 assert(StructEmptyModel.verify() && "test::StructEmpty validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructEmptyModel.get_begin();
                 onProxy(StructEmptyModel, type, data, size);
+                StructEmptyModel.get_end(fbe_begin);
                 return true;
             }
         }
@@ -17286,7 +17310,9 @@ protected:
                 assert(StructSimpleModel.verify() && "test::StructSimple validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructSimpleModel.get_begin();
                 onProxy(StructSimpleModel, type, data, size);
+                StructSimpleModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructOptionalFinalModel<ReadBuffer>::fbe_type():
@@ -17296,7 +17322,9 @@ protected:
                 assert(StructOptionalModel.verify() && "test::StructOptional validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructOptionalModel.get_begin();
                 onProxy(StructOptionalModel, type, data, size);
+                StructOptionalModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructNestedFinalModel<ReadBuffer>::fbe_type():
@@ -17306,7 +17334,9 @@ protected:
                 assert(StructNestedModel.verify() && "test::StructNested validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructNestedModel.get_begin();
                 onProxy(StructNestedModel, type, data, size);
+                StructNestedModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructBytesFinalModel<ReadBuffer>::fbe_type():
@@ -17316,7 +17346,9 @@ protected:
                 assert(StructBytesModel.verify() && "test::StructBytes validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructBytesModel.get_begin();
                 onProxy(StructBytesModel, type, data, size);
+                StructBytesModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructArrayFinalModel<ReadBuffer>::fbe_type():
@@ -17326,7 +17358,9 @@ protected:
                 assert(StructArrayModel.verify() && "test::StructArray validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructArrayModel.get_begin();
                 onProxy(StructArrayModel, type, data, size);
+                StructArrayModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructVectorFinalModel<ReadBuffer>::fbe_type():
@@ -17336,7 +17370,9 @@ protected:
                 assert(StructVectorModel.verify() && "test::StructVector validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructVectorModel.get_begin();
                 onProxy(StructVectorModel, type, data, size);
+                StructVectorModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructListFinalModel<ReadBuffer>::fbe_type():
@@ -17346,7 +17382,9 @@ protected:
                 assert(StructListModel.verify() && "test::StructList validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructListModel.get_begin();
                 onProxy(StructListModel, type, data, size);
+                StructListModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructSetFinalModel<ReadBuffer>::fbe_type():
@@ -17356,7 +17394,9 @@ protected:
                 assert(StructSetModel.verify() && "test::StructSet validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructSetModel.get_begin();
                 onProxy(StructSetModel, type, data, size);
+                StructSetModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructMapFinalModel<ReadBuffer>::fbe_type():
@@ -17366,7 +17406,9 @@ protected:
                 assert(StructMapModel.verify() && "test::StructMap validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructMapModel.get_begin();
                 onProxy(StructMapModel, type, data, size);
+                StructMapModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructHashFinalModel<ReadBuffer>::fbe_type():
@@ -17376,7 +17418,9 @@ protected:
                 assert(StructHashModel.verify() && "test::StructHash validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructHashModel.get_begin();
                 onProxy(StructHashModel, type, data, size);
+                StructHashModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructHashExFinalModel<ReadBuffer>::fbe_type():
@@ -17386,7 +17430,9 @@ protected:
                 assert(StructHashExModel.verify() && "test::StructHashEx validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructHashExModel.get_begin();
                 onProxy(StructHashExModel, type, data, size);
+                StructHashExModel.get_end(fbe_begin);
                 return true;
             }
             case FBE::test::StructEmptyFinalModel<ReadBuffer>::fbe_type():
@@ -17396,7 +17442,9 @@ protected:
                 assert(StructEmptyModel.verify() && "test::StructEmpty validation failed!");
 
                 // Call proxy handler
+                size_t fbe_begin = StructEmptyModel.get_begin();
                 onProxy(StructEmptyModel, type, data, size);
+                StructEmptyModel.get_end(fbe_begin);
                 return true;
             }
         }
