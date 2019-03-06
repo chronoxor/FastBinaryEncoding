@@ -80,6 +80,9 @@ func (s *Sender) SetupHandlerOnSendLog(handler OnSendLog) { s.HandlerOnSendLog =
 // Setup send log message handler function
 func (s *Sender) SetupHandlerOnSendLogFunc(function func(message string)) { s.HandlerOnSendLog = OnSendLogFunc(function) }
 
+// Reset the sender buffer
+func (s *Sender) Reset() { s.buffer.Reset() }
+
 // Send serialized buffer.
 // Direct call of the method requires knowledge about internals of FBE models serialization.
 // Use it with care!

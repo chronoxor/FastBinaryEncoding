@@ -2444,6 +2444,10 @@ class Sender(object):
     def logging(self, logging):
         self._logging = logging
 
+    # Reset the sender buffer
+    def reset(self):
+        self._buffer.reset()
+
     # Send serialized buffer.
     # Direct call of the method requires knowledge about internals of FBE models serialization.
     # Use it with care!
@@ -2509,6 +2513,10 @@ class Receiver(object):
     @logging.setter
     def logging(self, logging):
         self._logging = logging
+
+    # Reset the receiver buffer
+    def reset(self):
+        self._buffer.reset()
 
     # Receive data
     def receive(self, buffer, offset=0, size=None):

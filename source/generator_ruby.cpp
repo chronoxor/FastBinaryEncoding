@@ -3044,6 +3044,11 @@ void GeneratorRuby::GenerateFBESender()
       @_logging = logging
     end
 
+    # Reset the sender buffer
+    def reset
+        @_buffer.reset
+    end
+
     # Send serialized buffer.
     # Direct call of the method requires knowledge about internals of FBE models serialization.
     # Use it with care!
@@ -3111,6 +3116,11 @@ void GeneratorRuby::GenerateFBEReceiver()
     # Set the logging flag
     def logging=(logging)
       @_logging = logging
+    end
+
+    # Reset the receiver buffer
+    def reset
+        @_buffer.reset
     end
 
     # Receive data

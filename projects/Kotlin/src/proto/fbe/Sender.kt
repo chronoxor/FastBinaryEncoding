@@ -31,6 +31,9 @@ abstract class Sender
     protected constructor(final: Boolean) { this.final = final }
     protected constructor(buffer: Buffer, final: Boolean) { this.buffer = buffer; this.final = final }
 
+    // Reset the sender buffer
+    fun reset() { buffer.reset() }
+
     // Send serialized buffer.
     // Direct call of the method requires knowledge about internals of FBE models serialization.
     // Use it with care!

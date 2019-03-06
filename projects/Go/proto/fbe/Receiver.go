@@ -80,6 +80,9 @@ func (r *Receiver) SetupHandlerOnReceiveLog(handler OnReceiveLog) { r.HandlerOnR
 // Setup receive log message handler function
 func (r *Receiver) SetupHandlerOnReceiveLogFunc(function func(message string)) { r.HandlerOnReceiveLog = OnReceiveLogFunc(function) }
 
+// Reset the receiver buffer
+func (r *Receiver) Reset() { r.buffer.Reset() }
+
 // Receive bytes memory buffer
 func (r *Receiver) Receive(buffer []byte) error {
     size := len(buffer)

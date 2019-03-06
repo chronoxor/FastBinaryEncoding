@@ -3151,6 +3151,9 @@ void GeneratorCSharp::GenerateFBESender()
         protected Sender(bool final) { Buffer = new Buffer(); Final = final; }
         protected Sender(Buffer buffer, bool final) { Buffer = buffer; Final = final; }
 
+        // Reset the sender buffer
+        public void Reset() { Buffer.Reset(); }
+
         // Send serialized buffer.
         // Direct call of the method requires knowledge about internals of FBE models serialization.
         // Use it with care!
@@ -3197,6 +3200,9 @@ void GeneratorCSharp::GenerateFBEReceiver()
 
         protected Receiver(bool final) { Buffer = new Buffer(); Final = final; }
         protected Receiver(Buffer buffer, bool final) { Buffer = buffer; Final = final; }
+
+        // Reset the receiver buffer
+        public void Reset() { Buffer.Reset(); }
 
         // Receive data
         public void Receive(Buffer buffer) { Receive(buffer.Data, 0, buffer.Size); }

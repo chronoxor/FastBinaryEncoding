@@ -35,6 +35,9 @@ public abstract class Sender
     protected Sender(boolean finalProto) { _buffer = new Buffer(); _final = finalProto; }
     protected Sender(Buffer buffer, boolean finalProto) { _buffer = buffer; _final = finalProto; }
 
+    // Reset the sender buffer
+    public void reset() { _buffer.reset(); }
+
     // Send serialized buffer.
     // Direct call of the method requires knowledge about internals of FBE models serialization.
     // Use it with care!

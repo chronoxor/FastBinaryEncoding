@@ -7590,6 +7590,14 @@ class Sender {
   }
 
   /**
+   * Reset the sender buffer
+   * @this {!Sender}
+   */
+  reset () {
+    this._buffer.reset()
+  }
+
+  /**
    * Send serialized buffer.
    * Direct call of the method requires knowledge about internals of FBE models serialization.
    * Use it with care!
@@ -7695,6 +7703,14 @@ class Receiver {
    */
   set logging (logging) {
     this._logging = logging
+  }
+
+  /**
+   * Reset the receiver buffer
+   * @this {!Receiver}
+   */
+  reset () {
+    this._buffer.reset()
   }
 
   /**

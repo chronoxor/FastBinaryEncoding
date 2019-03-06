@@ -31,6 +31,9 @@ abstract class Receiver
     protected constructor(final: Boolean) { this.final = final }
     protected constructor(buffer: Buffer, final: Boolean) { this.buffer = buffer; this.final = final }
 
+    // Reset the receiver buffer
+    fun reset() { buffer.reset() }
+
     // Receive data
     fun receive(buffer: Buffer) { receive(buffer.data, 0, buffer.size) }
     fun receive(buffer: ByteArray, offset: Long = 0, size: Long = buffer.size.toLong())

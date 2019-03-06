@@ -3836,6 +3836,11 @@ module FBE
       @_logging = logging
     end
 
+    # Reset the sender buffer
+    def reset
+        @_buffer.reset
+    end
+
     # Send serialized buffer.
     # Direct call of the method requires knowledge about internals of FBE models serialization.
     # Use it with care!
@@ -3893,6 +3898,11 @@ module FBE
     # Set the logging flag
     def logging=(logging)
       @_logging = logging
+    end
+
+    # Reset the receiver buffer
+    def reset
+        @_buffer.reset
     end
 
     # Receive data
