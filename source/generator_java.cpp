@@ -4269,7 +4269,6 @@ void GeneratorJava::GeneratePackage(const std::shared_ptr<Package>& p)
         {
             GenerateSender(p, true);
             GenerateReceiver(p, true);
-            GenerateProxy(p, true);
         }
     }
 
@@ -6779,8 +6778,14 @@ void GeneratorJava::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
             WriteLineIndent(*s->name + "Model.attach(buffer, offset);");
             WriteLineIndent("assert " + *s->name + "Model.verify() : \"" + *p->name + "." + *s->name + " validation failed!\";");
             WriteLine();
+            WriteLineIndent("long fbeBegin = " + *s->name + "Model.model.getBegin();");
+            WriteLineIndent("if (fbeBegin == 0)");
+            Indent(1);
+            WriteLineIndent("return false;");
+            Indent(-1);
             WriteLineIndent("// Call proxy handler");
             WriteLineIndent("onProxy(" + *s->name + "Model, type, buffer, offset, size);");
+            WriteLineIndent(*s->name + "Model.model.getEnd(fbeBegin);");
             WriteLineIndent("return true;");
             Indent(-1);
             WriteLineIndent("}");

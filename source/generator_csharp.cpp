@@ -3962,7 +3962,6 @@ void GeneratorCSharp::GeneratePackage(const std::shared_ptr<Package>& p)
         {
             GenerateSender(p, true);
             GenerateReceiver(p, true);
-            GenerateProxy(p, true);
         }
     }
 
@@ -6469,8 +6468,12 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
             WriteLineIndent(*s->name + "Model.Attach(buffer, offset);");
             WriteLineIndent("Debug.Assert(" + *s->name + "Model.Verify(), \"" + *p->name + "." + *s->name + " validation failed!\");");
             WriteLine();
-            WriteLineIndent("// Call proxy handler");
             WriteLineIndent("long fbeBegin = " + *s->name + "Model.model.GetBegin();");
+            WriteLineIndent("if (fbeBegin == 0)");
+            Indent(1);
+            WriteLineIndent("return false;");
+            Indent(-1);
+            WriteLineIndent("// Call proxy handler");
             WriteLineIndent("OnProxy(" + *s->name + "Model, type, buffer, offset, size);");
             WriteLineIndent(*s->name + "Model.model.GetEnd(fbeBegin);");
             WriteLineIndent("return true;");

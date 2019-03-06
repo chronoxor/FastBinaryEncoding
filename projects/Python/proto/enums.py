@@ -4956,8 +4956,12 @@ class Proxy(fbe.Receiver):
             self._enums_model.attach_buffer(buffer, offset)
             assert self._enums_model.verify(), "enums.Enums validation failed!"
 
+            fbe_begin = self._enums_model.model.get_begin()
+            if fbe_begin == 0:
+                return False
             # Call proxy handler
             self.on_proxy_enums(self._enums_model, type, buffer, offset, size)
+            self._enums_model.model.get_end(fbe_begin)
             return True
 
         return False
@@ -5033,33 +5037,6 @@ class FinalReceiver(fbe.Receiver):
 
             # Call receive handler with deserialized value
             self.on_receive_enums(self._enums_value)
-            return True
-
-        return False
-
-
-# Fast Binary Encoding enums final proxy
-class FinalProxy(fbe.Receiver):
-    __slots__ = "_enums_model", 
-
-    def __init__(self, buffer=None):
-        super().__init__(buffer, True)
-        self._enums_model = EnumsFinalModel()
-
-    # Receive handlers
-
-    def on_proxy_enums(self, model, type, buffer, offset, size):
-        pass
-
-    def on_receive(self, type, buffer, offset, size):
-
-        if type == EnumsFinalModel.TYPE:
-            # Attach the FBE stream to the proxy model
-            self._enums_model.attach_buffer(buffer, offset)
-            assert self._enums_model.verify(), "enums.Enums validation failed!"
-
-            # Call proxy handler
-            self.on_proxy_enums(self._enums_model, type, buffer, offset, size)
             return True
 
         return False

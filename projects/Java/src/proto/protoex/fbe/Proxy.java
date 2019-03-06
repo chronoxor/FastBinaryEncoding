@@ -61,8 +61,12 @@ public class Proxy extends fbe.Receiver
                 OrderModel.attach(buffer, offset);
                 assert OrderModel.verify() : "protoex.Order validation failed!";
 
+                long fbeBegin = OrderModel.model.getBegin();
+                if (fbeBegin == 0)
+                    return false;
                 // Call proxy handler
                 onProxy(OrderModel, type, buffer, offset, size);
+                OrderModel.model.getEnd(fbeBegin);
                 return true;
             }
             case (int)protoex.fbe.BalanceModel.fbeTypeConst:
@@ -71,8 +75,12 @@ public class Proxy extends fbe.Receiver
                 BalanceModel.attach(buffer, offset);
                 assert BalanceModel.verify() : "protoex.Balance validation failed!";
 
+                long fbeBegin = BalanceModel.model.getBegin();
+                if (fbeBegin == 0)
+                    return false;
                 // Call proxy handler
                 onProxy(BalanceModel, type, buffer, offset, size);
+                BalanceModel.model.getEnd(fbeBegin);
                 return true;
             }
             case (int)protoex.fbe.AccountModel.fbeTypeConst:
@@ -81,8 +89,12 @@ public class Proxy extends fbe.Receiver
                 AccountModel.attach(buffer, offset);
                 assert AccountModel.verify() : "protoex.Account validation failed!";
 
+                long fbeBegin = AccountModel.model.getBegin();
+                if (fbeBegin == 0)
+                    return false;
                 // Call proxy handler
                 onProxy(AccountModel, type, buffer, offset, size);
+                AccountModel.model.getEnd(fbeBegin);
                 return true;
             }
         }

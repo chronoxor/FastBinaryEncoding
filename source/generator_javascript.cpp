@@ -8160,7 +8160,6 @@ void GeneratorJavaScript::GeneratePackage(const std::shared_ptr<Package>& p)
         {
             GenerateSender(p, true);
             GenerateReceiver(p, true);
-            GenerateProxy(p, true);
         }
     }
 
@@ -11030,8 +11029,15 @@ void GeneratorJavaScript::GenerateProxy(const std::shared_ptr<Package>& p, bool 
             WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model.attachBuffer(buffer, offset)");
             WriteLineIndent("console.assert(this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model.verify(), '" + *p->name + "." + *s->name + " validation failed!')");
             WriteLine();
+            WriteLineIndent("let fbeBegin = this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model.model.getBegin()");
+            WriteLineIndent("if (fbeBegin === 0) {");
+            Indent(1);
+            WriteLineIndent("return false");
+            Indent(-1);
+            WriteLineIndent("}");
             WriteLineIndent("// Call proxy handler");
             WriteLineIndent("this.onProxy_" + CppCommon::StringUtils::ToLower(*s->name) + "(this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model, type, buffer, offset, size)");
+            WriteLineIndent("this._" + CppCommon::StringUtils::ToLower(*s->name) + "Model.model.getEnd(fbeBegin)");
             WriteLineIndent("return true");
             Indent(-1);
             WriteLineIndent("}");

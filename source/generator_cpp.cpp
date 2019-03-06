@@ -5663,7 +5663,6 @@ void GeneratorCpp::GeneratePackage(const std::shared_ptr<Package>& p)
         {
             GenerateSender(p, true);
             GenerateReceiver(p, true);
-            GenerateProxy(p, true);
         }
     }
 
@@ -7833,8 +7832,12 @@ void GeneratorCpp::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
             WriteLineIndent(*s->name + "Model.attach(data, size);");
             WriteLineIndent("assert(" + *s->name + "Model.verify() && \"" + *p->name + "::" + *s->name + " validation failed!\");");
             WriteLine();
-            WriteLineIndent("// Call proxy handler");
             WriteLineIndent("size_t fbe_begin = " + *s->name + "Model.model.get_begin();");
+            WriteLineIndent("if (fbe_begin == 0)");
+            Indent(1);
+            WriteLineIndent("return false;");
+            Indent(-1);
+            WriteLineIndent("// Call proxy handler");
             WriteLineIndent("onProxy(" + *s->name + "Model, type, data, size);");
             WriteLineIndent(*s->name + "Model.model.get_end(fbe_begin);");
             WriteLineIndent("return true;");

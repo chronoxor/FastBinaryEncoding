@@ -48,8 +48,12 @@ open class Proxy : fbe.Receiver
                 EnumsModel.attach(buffer, offset)
                 assert(EnumsModel.verify()) { "enums.Enums validation failed!" }
 
+                val fbeBegin = EnumsModel.model.getBegin()
+                if (fbeBegin == 0L)
+                    return false
                 // Call proxy handler
                 onProxy(EnumsModel, type, buffer, offset, size)
+                EnumsModel.model.getEnd(fbeBegin)
                 return true
             }
         }

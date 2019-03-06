@@ -20601,8 +20601,13 @@ module Test
           return false
         end
 
+        fbe_begin = @_structsimple_model.model.get_begin
+        if fbe_begin == 0
+          return false
+        end
         # Call proxy handler
         on_proxy_structsimple(@_structsimple_model, type, buffer, offset, size)
+        @_structsimple_model.model.get_end(fbe_begin)
         true
       when StructOptionalModel::TYPE
         # Attach the FBE stream to the proxy model
@@ -20611,8 +20616,13 @@ module Test
           return false
         end
 
+        fbe_begin = @_structoptional_model.model.get_begin
+        if fbe_begin == 0
+          return false
+        end
         # Call proxy handler
         on_proxy_structoptional(@_structoptional_model, type, buffer, offset, size)
+        @_structoptional_model.model.get_end(fbe_begin)
         true
       when StructNestedModel::TYPE
         # Attach the FBE stream to the proxy model
@@ -20621,8 +20631,13 @@ module Test
           return false
         end
 
+        fbe_begin = @_structnested_model.model.get_begin
+        if fbe_begin == 0
+          return false
+        end
         # Call proxy handler
         on_proxy_structnested(@_structnested_model, type, buffer, offset, size)
+        @_structnested_model.model.get_end(fbe_begin)
         true
       when StructBytesModel::TYPE
         # Attach the FBE stream to the proxy model
@@ -20631,8 +20646,13 @@ module Test
           return false
         end
 
+        fbe_begin = @_structbytes_model.model.get_begin
+        if fbe_begin == 0
+          return false
+        end
         # Call proxy handler
         on_proxy_structbytes(@_structbytes_model, type, buffer, offset, size)
+        @_structbytes_model.model.get_end(fbe_begin)
         true
       when StructArrayModel::TYPE
         # Attach the FBE stream to the proxy model
@@ -20641,8 +20661,13 @@ module Test
           return false
         end
 
+        fbe_begin = @_structarray_model.model.get_begin
+        if fbe_begin == 0
+          return false
+        end
         # Call proxy handler
         on_proxy_structarray(@_structarray_model, type, buffer, offset, size)
+        @_structarray_model.model.get_end(fbe_begin)
         true
       when StructVectorModel::TYPE
         # Attach the FBE stream to the proxy model
@@ -20651,8 +20676,13 @@ module Test
           return false
         end
 
+        fbe_begin = @_structvector_model.model.get_begin
+        if fbe_begin == 0
+          return false
+        end
         # Call proxy handler
         on_proxy_structvector(@_structvector_model, type, buffer, offset, size)
+        @_structvector_model.model.get_end(fbe_begin)
         true
       when StructListModel::TYPE
         # Attach the FBE stream to the proxy model
@@ -20661,8 +20691,13 @@ module Test
           return false
         end
 
+        fbe_begin = @_structlist_model.model.get_begin
+        if fbe_begin == 0
+          return false
+        end
         # Call proxy handler
         on_proxy_structlist(@_structlist_model, type, buffer, offset, size)
+        @_structlist_model.model.get_end(fbe_begin)
         true
       when StructSetModel::TYPE
         # Attach the FBE stream to the proxy model
@@ -20671,8 +20706,13 @@ module Test
           return false
         end
 
+        fbe_begin = @_structset_model.model.get_begin
+        if fbe_begin == 0
+          return false
+        end
         # Call proxy handler
         on_proxy_structset(@_structset_model, type, buffer, offset, size)
+        @_structset_model.model.get_end(fbe_begin)
         true
       when StructMapModel::TYPE
         # Attach the FBE stream to the proxy model
@@ -20681,8 +20721,13 @@ module Test
           return false
         end
 
+        fbe_begin = @_structmap_model.model.get_begin
+        if fbe_begin == 0
+          return false
+        end
         # Call proxy handler
         on_proxy_structmap(@_structmap_model, type, buffer, offset, size)
+        @_structmap_model.model.get_end(fbe_begin)
         true
       when StructHashModel::TYPE
         # Attach the FBE stream to the proxy model
@@ -20691,8 +20736,13 @@ module Test
           return false
         end
 
+        fbe_begin = @_structhash_model.model.get_begin
+        if fbe_begin == 0
+          return false
+        end
         # Call proxy handler
         on_proxy_structhash(@_structhash_model, type, buffer, offset, size)
+        @_structhash_model.model.get_end(fbe_begin)
         true
       when StructHashExModel::TYPE
         # Attach the FBE stream to the proxy model
@@ -20701,8 +20751,13 @@ module Test
           return false
         end
 
+        fbe_begin = @_structhashex_model.model.get_begin
+        if fbe_begin == 0
+          return false
+        end
         # Call proxy handler
         on_proxy_structhashex(@_structhashex_model, type, buffer, offset, size)
+        @_structhashex_model.model.get_end(fbe_begin)
         true
       when StructEmptyModel::TYPE
         # Attach the FBE stream to the proxy model
@@ -20711,8 +20766,13 @@ module Test
           return false
         end
 
+        fbe_begin = @_structempty_model.model.get_begin
+        if fbe_begin == 0
+          return false
+        end
         # Call proxy handler
         on_proxy_structempty(@_structempty_model, type, buffer, offset, size)
+        @_structempty_model.model.get_end(fbe_begin)
         true
       else
         # Do nothing here...
@@ -21391,224 +21451,6 @@ module Test
       end
 
       if !proto_receiver.nil? && proto_receiver.on_receive(type, buffer, offset, size)
-        return true
-      end
-
-      false
-    end
-  end
-
-  # Fast Binary Encoding Test final proxy
-  # noinspection RubyResolve, RubyScope, RubyTooManyInstanceVariablesInspection, RubyTooManyMethodsInspection
-  class FinalProxy < FBE::Receiver
-    def initialize(buffer = FBE::WriteBuffer.new)
-      super(buffer, true)
-      @_proto_proxy = Proto::FinalProxy.new(self.buffer)
-      @_structsimple_model = StructSimpleFinalModel.new
-      @_structoptional_model = StructOptionalFinalModel.new
-      @_structnested_model = StructNestedFinalModel.new
-      @_structbytes_model = StructBytesFinalModel.new
-      @_structarray_model = StructArrayFinalModel.new
-      @_structvector_model = StructVectorFinalModel.new
-      @_structlist_model = StructListFinalModel.new
-      @_structset_model = StructSetFinalModel.new
-      @_structmap_model = StructMapFinalModel.new
-      @_structhash_model = StructHashFinalModel.new
-      @_structhashex_model = StructHashExFinalModel.new
-      @_structempty_model = StructEmptyFinalModel.new
-    end
-
-    # Imported proxy
-
-    def proto_proxy
-      @_proto_proxy
-    end
-
-    def proto_proxy=(proxy)
-      @_proto_proxy = proxy
-    end
-
-    protected
-
-    # Receive handlers
-
-    # noinspection RubyUnusedLocalVariable
-    def on_proxy_structsimple(model, type, buffer, offset, size)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_proxy_structoptional(model, type, buffer, offset, size)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_proxy_structnested(model, type, buffer, offset, size)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_proxy_structbytes(model, type, buffer, offset, size)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_proxy_structarray(model, type, buffer, offset, size)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_proxy_structvector(model, type, buffer, offset, size)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_proxy_structlist(model, type, buffer, offset, size)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_proxy_structset(model, type, buffer, offset, size)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_proxy_structmap(model, type, buffer, offset, size)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_proxy_structhash(model, type, buffer, offset, size)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_proxy_structhashex(model, type, buffer, offset, size)
-    end
-
-    # noinspection RubyUnusedLocalVariable
-    def on_proxy_structempty(model, type, buffer, offset, size)
-    end
-
-    public
-
-    def on_receive(type, buffer, offset, size)
-      case type
-      when StructSimpleFinalModel::TYPE
-        # Attach the FBE stream to the proxy model
-        @_structsimple_model.attach_buffer(buffer, offset)
-        unless @_structsimple_model.verify
-          return false
-        end
-
-        # Call proxy handler
-        on_proxy_structsimple(@_structsimple_model, type, buffer, offset, size)
-        true
-      when StructOptionalFinalModel::TYPE
-        # Attach the FBE stream to the proxy model
-        @_structoptional_model.attach_buffer(buffer, offset)
-        unless @_structoptional_model.verify
-          return false
-        end
-
-        # Call proxy handler
-        on_proxy_structoptional(@_structoptional_model, type, buffer, offset, size)
-        true
-      when StructNestedFinalModel::TYPE
-        # Attach the FBE stream to the proxy model
-        @_structnested_model.attach_buffer(buffer, offset)
-        unless @_structnested_model.verify
-          return false
-        end
-
-        # Call proxy handler
-        on_proxy_structnested(@_structnested_model, type, buffer, offset, size)
-        true
-      when StructBytesFinalModel::TYPE
-        # Attach the FBE stream to the proxy model
-        @_structbytes_model.attach_buffer(buffer, offset)
-        unless @_structbytes_model.verify
-          return false
-        end
-
-        # Call proxy handler
-        on_proxy_structbytes(@_structbytes_model, type, buffer, offset, size)
-        true
-      when StructArrayFinalModel::TYPE
-        # Attach the FBE stream to the proxy model
-        @_structarray_model.attach_buffer(buffer, offset)
-        unless @_structarray_model.verify
-          return false
-        end
-
-        # Call proxy handler
-        on_proxy_structarray(@_structarray_model, type, buffer, offset, size)
-        true
-      when StructVectorFinalModel::TYPE
-        # Attach the FBE stream to the proxy model
-        @_structvector_model.attach_buffer(buffer, offset)
-        unless @_structvector_model.verify
-          return false
-        end
-
-        # Call proxy handler
-        on_proxy_structvector(@_structvector_model, type, buffer, offset, size)
-        true
-      when StructListFinalModel::TYPE
-        # Attach the FBE stream to the proxy model
-        @_structlist_model.attach_buffer(buffer, offset)
-        unless @_structlist_model.verify
-          return false
-        end
-
-        # Call proxy handler
-        on_proxy_structlist(@_structlist_model, type, buffer, offset, size)
-        true
-      when StructSetFinalModel::TYPE
-        # Attach the FBE stream to the proxy model
-        @_structset_model.attach_buffer(buffer, offset)
-        unless @_structset_model.verify
-          return false
-        end
-
-        # Call proxy handler
-        on_proxy_structset(@_structset_model, type, buffer, offset, size)
-        true
-      when StructMapFinalModel::TYPE
-        # Attach the FBE stream to the proxy model
-        @_structmap_model.attach_buffer(buffer, offset)
-        unless @_structmap_model.verify
-          return false
-        end
-
-        # Call proxy handler
-        on_proxy_structmap(@_structmap_model, type, buffer, offset, size)
-        true
-      when StructHashFinalModel::TYPE
-        # Attach the FBE stream to the proxy model
-        @_structhash_model.attach_buffer(buffer, offset)
-        unless @_structhash_model.verify
-          return false
-        end
-
-        # Call proxy handler
-        on_proxy_structhash(@_structhash_model, type, buffer, offset, size)
-        true
-      when StructHashExFinalModel::TYPE
-        # Attach the FBE stream to the proxy model
-        @_structhashex_model.attach_buffer(buffer, offset)
-        unless @_structhashex_model.verify
-          return false
-        end
-
-        # Call proxy handler
-        on_proxy_structhashex(@_structhashex_model, type, buffer, offset, size)
-        true
-      when StructEmptyFinalModel::TYPE
-        # Attach the FBE stream to the proxy model
-        @_structempty_model.attach_buffer(buffer, offset)
-        unless @_structempty_model.verify
-          return false
-        end
-
-        # Call proxy handler
-        on_proxy_structempty(@_structempty_model, type, buffer, offset, size)
-        true
-      else
-        # Do nothing here...
-      end
-
-      if !proto_proxy.nil? && proto_proxy.on_receive(type, buffer, offset, size)
         return true
       end
 

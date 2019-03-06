@@ -97,8 +97,12 @@ public class Proxy extends fbe.Receiver
                 StructSimpleModel.attach(buffer, offset);
                 assert StructSimpleModel.verify() : "test.StructSimple validation failed!";
 
+                long fbeBegin = StructSimpleModel.model.getBegin();
+                if (fbeBegin == 0)
+                    return false;
                 // Call proxy handler
                 onProxy(StructSimpleModel, type, buffer, offset, size);
+                StructSimpleModel.model.getEnd(fbeBegin);
                 return true;
             }
             case (int)test.fbe.StructOptionalModel.fbeTypeConst:
@@ -107,8 +111,12 @@ public class Proxy extends fbe.Receiver
                 StructOptionalModel.attach(buffer, offset);
                 assert StructOptionalModel.verify() : "test.StructOptional validation failed!";
 
+                long fbeBegin = StructOptionalModel.model.getBegin();
+                if (fbeBegin == 0)
+                    return false;
                 // Call proxy handler
                 onProxy(StructOptionalModel, type, buffer, offset, size);
+                StructOptionalModel.model.getEnd(fbeBegin);
                 return true;
             }
             case (int)test.fbe.StructNestedModel.fbeTypeConst:
@@ -117,8 +125,12 @@ public class Proxy extends fbe.Receiver
                 StructNestedModel.attach(buffer, offset);
                 assert StructNestedModel.verify() : "test.StructNested validation failed!";
 
+                long fbeBegin = StructNestedModel.model.getBegin();
+                if (fbeBegin == 0)
+                    return false;
                 // Call proxy handler
                 onProxy(StructNestedModel, type, buffer, offset, size);
+                StructNestedModel.model.getEnd(fbeBegin);
                 return true;
             }
             case (int)test.fbe.StructBytesModel.fbeTypeConst:
@@ -127,8 +139,12 @@ public class Proxy extends fbe.Receiver
                 StructBytesModel.attach(buffer, offset);
                 assert StructBytesModel.verify() : "test.StructBytes validation failed!";
 
+                long fbeBegin = StructBytesModel.model.getBegin();
+                if (fbeBegin == 0)
+                    return false;
                 // Call proxy handler
                 onProxy(StructBytesModel, type, buffer, offset, size);
+                StructBytesModel.model.getEnd(fbeBegin);
                 return true;
             }
             case (int)test.fbe.StructArrayModel.fbeTypeConst:
@@ -137,8 +153,12 @@ public class Proxy extends fbe.Receiver
                 StructArrayModel.attach(buffer, offset);
                 assert StructArrayModel.verify() : "test.StructArray validation failed!";
 
+                long fbeBegin = StructArrayModel.model.getBegin();
+                if (fbeBegin == 0)
+                    return false;
                 // Call proxy handler
                 onProxy(StructArrayModel, type, buffer, offset, size);
+                StructArrayModel.model.getEnd(fbeBegin);
                 return true;
             }
             case (int)test.fbe.StructVectorModel.fbeTypeConst:
@@ -147,8 +167,12 @@ public class Proxy extends fbe.Receiver
                 StructVectorModel.attach(buffer, offset);
                 assert StructVectorModel.verify() : "test.StructVector validation failed!";
 
+                long fbeBegin = StructVectorModel.model.getBegin();
+                if (fbeBegin == 0)
+                    return false;
                 // Call proxy handler
                 onProxy(StructVectorModel, type, buffer, offset, size);
+                StructVectorModel.model.getEnd(fbeBegin);
                 return true;
             }
             case (int)test.fbe.StructListModel.fbeTypeConst:
@@ -157,8 +181,12 @@ public class Proxy extends fbe.Receiver
                 StructListModel.attach(buffer, offset);
                 assert StructListModel.verify() : "test.StructList validation failed!";
 
+                long fbeBegin = StructListModel.model.getBegin();
+                if (fbeBegin == 0)
+                    return false;
                 // Call proxy handler
                 onProxy(StructListModel, type, buffer, offset, size);
+                StructListModel.model.getEnd(fbeBegin);
                 return true;
             }
             case (int)test.fbe.StructSetModel.fbeTypeConst:
@@ -167,8 +195,12 @@ public class Proxy extends fbe.Receiver
                 StructSetModel.attach(buffer, offset);
                 assert StructSetModel.verify() : "test.StructSet validation failed!";
 
+                long fbeBegin = StructSetModel.model.getBegin();
+                if (fbeBegin == 0)
+                    return false;
                 // Call proxy handler
                 onProxy(StructSetModel, type, buffer, offset, size);
+                StructSetModel.model.getEnd(fbeBegin);
                 return true;
             }
             case (int)test.fbe.StructMapModel.fbeTypeConst:
@@ -177,8 +209,12 @@ public class Proxy extends fbe.Receiver
                 StructMapModel.attach(buffer, offset);
                 assert StructMapModel.verify() : "test.StructMap validation failed!";
 
+                long fbeBegin = StructMapModel.model.getBegin();
+                if (fbeBegin == 0)
+                    return false;
                 // Call proxy handler
                 onProxy(StructMapModel, type, buffer, offset, size);
+                StructMapModel.model.getEnd(fbeBegin);
                 return true;
             }
             case (int)test.fbe.StructHashModel.fbeTypeConst:
@@ -187,8 +223,12 @@ public class Proxy extends fbe.Receiver
                 StructHashModel.attach(buffer, offset);
                 assert StructHashModel.verify() : "test.StructHash validation failed!";
 
+                long fbeBegin = StructHashModel.model.getBegin();
+                if (fbeBegin == 0)
+                    return false;
                 // Call proxy handler
                 onProxy(StructHashModel, type, buffer, offset, size);
+                StructHashModel.model.getEnd(fbeBegin);
                 return true;
             }
             case (int)test.fbe.StructHashExModel.fbeTypeConst:
@@ -197,8 +237,12 @@ public class Proxy extends fbe.Receiver
                 StructHashExModel.attach(buffer, offset);
                 assert StructHashExModel.verify() : "test.StructHashEx validation failed!";
 
+                long fbeBegin = StructHashExModel.model.getBegin();
+                if (fbeBegin == 0)
+                    return false;
                 // Call proxy handler
                 onProxy(StructHashExModel, type, buffer, offset, size);
+                StructHashExModel.model.getEnd(fbeBegin);
                 return true;
             }
             case (int)test.fbe.StructEmptyModel.fbeTypeConst:
@@ -207,8 +251,12 @@ public class Proxy extends fbe.Receiver
                 StructEmptyModel.attach(buffer, offset);
                 assert StructEmptyModel.verify() : "test.StructEmpty validation failed!";
 
+                long fbeBegin = StructEmptyModel.model.getBegin();
+                if (fbeBegin == 0)
+                    return false;
                 // Call proxy handler
                 onProxy(StructEmptyModel, type, buffer, offset, size);
+                StructEmptyModel.model.getEnd(fbeBegin);
                 return true;
             }
         }

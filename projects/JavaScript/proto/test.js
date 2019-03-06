@@ -25388,8 +25388,13 @@ class Proxy extends fbe.Receiver {
         this._structsimpleModel.attachBuffer(buffer, offset)
         console.assert(this._structsimpleModel.verify(), 'test.StructSimple validation failed!')
 
+        let fbeBegin = this._structsimpleModel.model.getBegin()
+        if (fbeBegin === 0) {
+          return false
+        }
         // Call proxy handler
         this.onProxy_structsimple(this._structsimpleModel, type, buffer, offset, size)
+        this._structsimpleModel.model.getEnd(fbeBegin)
         return true
       }
       case StructOptionalModel.fbeType: {
@@ -25397,8 +25402,13 @@ class Proxy extends fbe.Receiver {
         this._structoptionalModel.attachBuffer(buffer, offset)
         console.assert(this._structoptionalModel.verify(), 'test.StructOptional validation failed!')
 
+        let fbeBegin = this._structoptionalModel.model.getBegin()
+        if (fbeBegin === 0) {
+          return false
+        }
         // Call proxy handler
         this.onProxy_structoptional(this._structoptionalModel, type, buffer, offset, size)
+        this._structoptionalModel.model.getEnd(fbeBegin)
         return true
       }
       case StructNestedModel.fbeType: {
@@ -25406,8 +25416,13 @@ class Proxy extends fbe.Receiver {
         this._structnestedModel.attachBuffer(buffer, offset)
         console.assert(this._structnestedModel.verify(), 'test.StructNested validation failed!')
 
+        let fbeBegin = this._structnestedModel.model.getBegin()
+        if (fbeBegin === 0) {
+          return false
+        }
         // Call proxy handler
         this.onProxy_structnested(this._structnestedModel, type, buffer, offset, size)
+        this._structnestedModel.model.getEnd(fbeBegin)
         return true
       }
       case StructBytesModel.fbeType: {
@@ -25415,8 +25430,13 @@ class Proxy extends fbe.Receiver {
         this._structbytesModel.attachBuffer(buffer, offset)
         console.assert(this._structbytesModel.verify(), 'test.StructBytes validation failed!')
 
+        let fbeBegin = this._structbytesModel.model.getBegin()
+        if (fbeBegin === 0) {
+          return false
+        }
         // Call proxy handler
         this.onProxy_structbytes(this._structbytesModel, type, buffer, offset, size)
+        this._structbytesModel.model.getEnd(fbeBegin)
         return true
       }
       case StructArrayModel.fbeType: {
@@ -25424,8 +25444,13 @@ class Proxy extends fbe.Receiver {
         this._structarrayModel.attachBuffer(buffer, offset)
         console.assert(this._structarrayModel.verify(), 'test.StructArray validation failed!')
 
+        let fbeBegin = this._structarrayModel.model.getBegin()
+        if (fbeBegin === 0) {
+          return false
+        }
         // Call proxy handler
         this.onProxy_structarray(this._structarrayModel, type, buffer, offset, size)
+        this._structarrayModel.model.getEnd(fbeBegin)
         return true
       }
       case StructVectorModel.fbeType: {
@@ -25433,8 +25458,13 @@ class Proxy extends fbe.Receiver {
         this._structvectorModel.attachBuffer(buffer, offset)
         console.assert(this._structvectorModel.verify(), 'test.StructVector validation failed!')
 
+        let fbeBegin = this._structvectorModel.model.getBegin()
+        if (fbeBegin === 0) {
+          return false
+        }
         // Call proxy handler
         this.onProxy_structvector(this._structvectorModel, type, buffer, offset, size)
+        this._structvectorModel.model.getEnd(fbeBegin)
         return true
       }
       case StructListModel.fbeType: {
@@ -25442,8 +25472,13 @@ class Proxy extends fbe.Receiver {
         this._structlistModel.attachBuffer(buffer, offset)
         console.assert(this._structlistModel.verify(), 'test.StructList validation failed!')
 
+        let fbeBegin = this._structlistModel.model.getBegin()
+        if (fbeBegin === 0) {
+          return false
+        }
         // Call proxy handler
         this.onProxy_structlist(this._structlistModel, type, buffer, offset, size)
+        this._structlistModel.model.getEnd(fbeBegin)
         return true
       }
       case StructSetModel.fbeType: {
@@ -25451,8 +25486,13 @@ class Proxy extends fbe.Receiver {
         this._structsetModel.attachBuffer(buffer, offset)
         console.assert(this._structsetModel.verify(), 'test.StructSet validation failed!')
 
+        let fbeBegin = this._structsetModel.model.getBegin()
+        if (fbeBegin === 0) {
+          return false
+        }
         // Call proxy handler
         this.onProxy_structset(this._structsetModel, type, buffer, offset, size)
+        this._structsetModel.model.getEnd(fbeBegin)
         return true
       }
       case StructMapModel.fbeType: {
@@ -25460,8 +25500,13 @@ class Proxy extends fbe.Receiver {
         this._structmapModel.attachBuffer(buffer, offset)
         console.assert(this._structmapModel.verify(), 'test.StructMap validation failed!')
 
+        let fbeBegin = this._structmapModel.model.getBegin()
+        if (fbeBegin === 0) {
+          return false
+        }
         // Call proxy handler
         this.onProxy_structmap(this._structmapModel, type, buffer, offset, size)
+        this._structmapModel.model.getEnd(fbeBegin)
         return true
       }
       case StructHashModel.fbeType: {
@@ -25469,8 +25514,13 @@ class Proxy extends fbe.Receiver {
         this._structhashModel.attachBuffer(buffer, offset)
         console.assert(this._structhashModel.verify(), 'test.StructHash validation failed!')
 
+        let fbeBegin = this._structhashModel.model.getBegin()
+        if (fbeBegin === 0) {
+          return false
+        }
         // Call proxy handler
         this.onProxy_structhash(this._structhashModel, type, buffer, offset, size)
+        this._structhashModel.model.getEnd(fbeBegin)
         return true
       }
       case StructHashExModel.fbeType: {
@@ -25478,8 +25528,13 @@ class Proxy extends fbe.Receiver {
         this._structhashexModel.attachBuffer(buffer, offset)
         console.assert(this._structhashexModel.verify(), 'test.StructHashEx validation failed!')
 
+        let fbeBegin = this._structhashexModel.model.getBegin()
+        if (fbeBegin === 0) {
+          return false
+        }
         // Call proxy handler
         this.onProxy_structhashex(this._structhashexModel, type, buffer, offset, size)
+        this._structhashexModel.model.getEnd(fbeBegin)
         return true
       }
       case StructEmptyModel.fbeType: {
@@ -25487,8 +25542,13 @@ class Proxy extends fbe.Receiver {
         this._structemptyModel.attachBuffer(buffer, offset)
         console.assert(this._structemptyModel.verify(), 'test.StructEmpty validation failed!')
 
+        let fbeBegin = this._structemptyModel.model.getBegin()
+        if (fbeBegin === 0) {
+          return false
+        }
         // Call proxy handler
         this.onProxy_structempty(this._structemptyModel, type, buffer, offset, size)
+        this._structemptyModel.model.getEnd(fbeBegin)
         return true
       }
     }
@@ -26328,314 +26388,3 @@ class FinalReceiver extends fbe.Receiver {
 }
 
 exports.FinalReceiver = FinalReceiver
-
-/**
- * Fast Binary Encoding test final proxy
- */
-class FinalProxy extends fbe.Receiver {
-  /**
-   * Initialize test proxy with the given buffer
-   * @param {!fbe.WriteBuffer} buffer Write buffer, defaults is new WriteBuffer()
-   * @constructor
-   */
-  constructor (buffer = new fbe.WriteBuffer()) {
-    super(buffer, true)
-    this._protoProxy = new proto.FinalProxy(this.buffer)
-    this._structsimpleModel = new StructSimpleFinalModel()
-    this._structoptionalModel = new StructOptionalFinalModel()
-    this._structnestedModel = new StructNestedFinalModel()
-    this._structbytesModel = new StructBytesFinalModel()
-    this._structarrayModel = new StructArrayFinalModel()
-    this._structvectorModel = new StructVectorFinalModel()
-    this._structlistModel = new StructListFinalModel()
-    this._structsetModel = new StructSetFinalModel()
-    this._structmapModel = new StructMapFinalModel()
-    this._structhashModel = new StructHashFinalModel()
-    this._structhashexModel = new StructHashExFinalModel()
-    this._structemptyModel = new StructEmptyFinalModel()
-  }
-
-  // Imported proxy
-
-  /**
-   * Get imported proto proxy
-   * @this {!FinalProxy}
-   * @returns {FinalProxy} proto proxy
-   */
-  get protoProxy () {
-    return this._protoProxy
-  }
-
-  /**
-   * Set imported proto proxy
-   * @this {!FinalProxy}
-   * @param {FinalProxy} proxy proto proxy
-   */
-  set protoProxy (proxy) {
-    this._protoProxy = proxy
-  }
-
-  // Proxy handlers
-
-  /**
-   * StructSimple proxy handler
-   * @this {!FinalProxy}
-   * @param {!StructSimple} model StructSimple model
-   * @param {!number} type Message type
-   * @param {!Uint8Array} buffer Buffer to send
-   * @param {!number} offset Buffer offset
-   * @param {!number} size Buffer size
-   */
-  onProxy_structsimple (model, type, buffer, offset, size) {}  // eslint-disable-line
-
-  /**
-   * StructOptional proxy handler
-   * @this {!FinalProxy}
-   * @param {!StructOptional} model StructOptional model
-   * @param {!number} type Message type
-   * @param {!Uint8Array} buffer Buffer to send
-   * @param {!number} offset Buffer offset
-   * @param {!number} size Buffer size
-   */
-  onProxy_structoptional (model, type, buffer, offset, size) {}  // eslint-disable-line
-
-  /**
-   * StructNested proxy handler
-   * @this {!FinalProxy}
-   * @param {!StructNested} model StructNested model
-   * @param {!number} type Message type
-   * @param {!Uint8Array} buffer Buffer to send
-   * @param {!number} offset Buffer offset
-   * @param {!number} size Buffer size
-   */
-  onProxy_structnested (model, type, buffer, offset, size) {}  // eslint-disable-line
-
-  /**
-   * StructBytes proxy handler
-   * @this {!FinalProxy}
-   * @param {!StructBytes} model StructBytes model
-   * @param {!number} type Message type
-   * @param {!Uint8Array} buffer Buffer to send
-   * @param {!number} offset Buffer offset
-   * @param {!number} size Buffer size
-   */
-  onProxy_structbytes (model, type, buffer, offset, size) {}  // eslint-disable-line
-
-  /**
-   * StructArray proxy handler
-   * @this {!FinalProxy}
-   * @param {!StructArray} model StructArray model
-   * @param {!number} type Message type
-   * @param {!Uint8Array} buffer Buffer to send
-   * @param {!number} offset Buffer offset
-   * @param {!number} size Buffer size
-   */
-  onProxy_structarray (model, type, buffer, offset, size) {}  // eslint-disable-line
-
-  /**
-   * StructVector proxy handler
-   * @this {!FinalProxy}
-   * @param {!StructVector} model StructVector model
-   * @param {!number} type Message type
-   * @param {!Uint8Array} buffer Buffer to send
-   * @param {!number} offset Buffer offset
-   * @param {!number} size Buffer size
-   */
-  onProxy_structvector (model, type, buffer, offset, size) {}  // eslint-disable-line
-
-  /**
-   * StructList proxy handler
-   * @this {!FinalProxy}
-   * @param {!StructList} model StructList model
-   * @param {!number} type Message type
-   * @param {!Uint8Array} buffer Buffer to send
-   * @param {!number} offset Buffer offset
-   * @param {!number} size Buffer size
-   */
-  onProxy_structlist (model, type, buffer, offset, size) {}  // eslint-disable-line
-
-  /**
-   * StructSet proxy handler
-   * @this {!FinalProxy}
-   * @param {!StructSet} model StructSet model
-   * @param {!number} type Message type
-   * @param {!Uint8Array} buffer Buffer to send
-   * @param {!number} offset Buffer offset
-   * @param {!number} size Buffer size
-   */
-  onProxy_structset (model, type, buffer, offset, size) {}  // eslint-disable-line
-
-  /**
-   * StructMap proxy handler
-   * @this {!FinalProxy}
-   * @param {!StructMap} model StructMap model
-   * @param {!number} type Message type
-   * @param {!Uint8Array} buffer Buffer to send
-   * @param {!number} offset Buffer offset
-   * @param {!number} size Buffer size
-   */
-  onProxy_structmap (model, type, buffer, offset, size) {}  // eslint-disable-line
-
-  /**
-   * StructHash proxy handler
-   * @this {!FinalProxy}
-   * @param {!StructHash} model StructHash model
-   * @param {!number} type Message type
-   * @param {!Uint8Array} buffer Buffer to send
-   * @param {!number} offset Buffer offset
-   * @param {!number} size Buffer size
-   */
-  onProxy_structhash (model, type, buffer, offset, size) {}  // eslint-disable-line
-
-  /**
-   * StructHashEx proxy handler
-   * @this {!FinalProxy}
-   * @param {!StructHashEx} model StructHashEx model
-   * @param {!number} type Message type
-   * @param {!Uint8Array} buffer Buffer to send
-   * @param {!number} offset Buffer offset
-   * @param {!number} size Buffer size
-   */
-  onProxy_structhashex (model, type, buffer, offset, size) {}  // eslint-disable-line
-
-  /**
-   * StructEmpty proxy handler
-   * @this {!FinalProxy}
-   * @param {!StructEmpty} model StructEmpty model
-   * @param {!number} type Message type
-   * @param {!Uint8Array} buffer Buffer to send
-   * @param {!number} offset Buffer offset
-   * @param {!number} size Buffer size
-   */
-  onProxy_structempty (model, type, buffer, offset, size) {}  // eslint-disable-line
-
-  /**
-   * test receive message handler
-   * @this {!FinalProxy}
-   * @param {!number} type Message type
-   * @param {!Uint8Array} buffer Buffer to send
-   * @param {!number} offset Buffer offset
-   * @param {!number} size Buffer size
-   * @returns {!boolean} Success flag
-   */
-  onReceive (type, buffer, offset, size) {
-    switch (type) {
-      case StructSimpleFinalModel.fbeType: {
-        // Attach the FBE stream to the proxy model
-        this._structsimpleModel.attachBuffer(buffer, offset)
-        console.assert(this._structsimpleModel.verify(), 'test.StructSimple validation failed!')
-
-        // Call proxy handler
-        this.onProxy_structsimple(this._structsimpleModel, type, buffer, offset, size)
-        return true
-      }
-      case StructOptionalFinalModel.fbeType: {
-        // Attach the FBE stream to the proxy model
-        this._structoptionalModel.attachBuffer(buffer, offset)
-        console.assert(this._structoptionalModel.verify(), 'test.StructOptional validation failed!')
-
-        // Call proxy handler
-        this.onProxy_structoptional(this._structoptionalModel, type, buffer, offset, size)
-        return true
-      }
-      case StructNestedFinalModel.fbeType: {
-        // Attach the FBE stream to the proxy model
-        this._structnestedModel.attachBuffer(buffer, offset)
-        console.assert(this._structnestedModel.verify(), 'test.StructNested validation failed!')
-
-        // Call proxy handler
-        this.onProxy_structnested(this._structnestedModel, type, buffer, offset, size)
-        return true
-      }
-      case StructBytesFinalModel.fbeType: {
-        // Attach the FBE stream to the proxy model
-        this._structbytesModel.attachBuffer(buffer, offset)
-        console.assert(this._structbytesModel.verify(), 'test.StructBytes validation failed!')
-
-        // Call proxy handler
-        this.onProxy_structbytes(this._structbytesModel, type, buffer, offset, size)
-        return true
-      }
-      case StructArrayFinalModel.fbeType: {
-        // Attach the FBE stream to the proxy model
-        this._structarrayModel.attachBuffer(buffer, offset)
-        console.assert(this._structarrayModel.verify(), 'test.StructArray validation failed!')
-
-        // Call proxy handler
-        this.onProxy_structarray(this._structarrayModel, type, buffer, offset, size)
-        return true
-      }
-      case StructVectorFinalModel.fbeType: {
-        // Attach the FBE stream to the proxy model
-        this._structvectorModel.attachBuffer(buffer, offset)
-        console.assert(this._structvectorModel.verify(), 'test.StructVector validation failed!')
-
-        // Call proxy handler
-        this.onProxy_structvector(this._structvectorModel, type, buffer, offset, size)
-        return true
-      }
-      case StructListFinalModel.fbeType: {
-        // Attach the FBE stream to the proxy model
-        this._structlistModel.attachBuffer(buffer, offset)
-        console.assert(this._structlistModel.verify(), 'test.StructList validation failed!')
-
-        // Call proxy handler
-        this.onProxy_structlist(this._structlistModel, type, buffer, offset, size)
-        return true
-      }
-      case StructSetFinalModel.fbeType: {
-        // Attach the FBE stream to the proxy model
-        this._structsetModel.attachBuffer(buffer, offset)
-        console.assert(this._structsetModel.verify(), 'test.StructSet validation failed!')
-
-        // Call proxy handler
-        this.onProxy_structset(this._structsetModel, type, buffer, offset, size)
-        return true
-      }
-      case StructMapFinalModel.fbeType: {
-        // Attach the FBE stream to the proxy model
-        this._structmapModel.attachBuffer(buffer, offset)
-        console.assert(this._structmapModel.verify(), 'test.StructMap validation failed!')
-
-        // Call proxy handler
-        this.onProxy_structmap(this._structmapModel, type, buffer, offset, size)
-        return true
-      }
-      case StructHashFinalModel.fbeType: {
-        // Attach the FBE stream to the proxy model
-        this._structhashModel.attachBuffer(buffer, offset)
-        console.assert(this._structhashModel.verify(), 'test.StructHash validation failed!')
-
-        // Call proxy handler
-        this.onProxy_structhash(this._structhashModel, type, buffer, offset, size)
-        return true
-      }
-      case StructHashExFinalModel.fbeType: {
-        // Attach the FBE stream to the proxy model
-        this._structhashexModel.attachBuffer(buffer, offset)
-        console.assert(this._structhashexModel.verify(), 'test.StructHashEx validation failed!')
-
-        // Call proxy handler
-        this.onProxy_structhashex(this._structhashexModel, type, buffer, offset, size)
-        return true
-      }
-      case StructEmptyFinalModel.fbeType: {
-        // Attach the FBE stream to the proxy model
-        this._structemptyModel.attachBuffer(buffer, offset)
-        console.assert(this._structemptyModel.verify(), 'test.StructEmpty validation failed!')
-
-        // Call proxy handler
-        this.onProxy_structempty(this._structemptyModel, type, buffer, offset, size)
-        return true
-      }
-    }
-    // noinspection RedundantIfStatementJS
-    if ((this.protoProxy != null) && this.protoProxy.onReceive(type, buffer, offset, size)) {
-      return true
-    }
-
-    return false
-  }
-}
-
-exports.FinalProxy = FinalProxy

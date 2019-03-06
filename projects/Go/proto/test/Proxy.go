@@ -347,11 +347,11 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
             return false, errors.New("test.StructSimple validation failed")
         }
 
-        // Call proxy handler
         fbeBegin, err := p.structSimpleModel.model.GetBegin()
         if fbeBegin == 0 {
             return false, err
         }
+        // Call proxy handler
         p.HandlerOnProxyStructSimple.OnProxyStructSimple(p.structSimpleModel, fbeType, buffer)
         p.structSimpleModel.model.GetEnd(fbeBegin)
         return true, nil
@@ -362,11 +362,11 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
             return false, errors.New("test.StructOptional validation failed")
         }
 
-        // Call proxy handler
         fbeBegin, err := p.structOptionalModel.model.GetBegin()
         if fbeBegin == 0 {
             return false, err
         }
+        // Call proxy handler
         p.HandlerOnProxyStructOptional.OnProxyStructOptional(p.structOptionalModel, fbeType, buffer)
         p.structOptionalModel.model.GetEnd(fbeBegin)
         return true, nil
@@ -377,11 +377,11 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
             return false, errors.New("test.StructNested validation failed")
         }
 
-        // Call proxy handler
         fbeBegin, err := p.structNestedModel.model.GetBegin()
         if fbeBegin == 0 {
             return false, err
         }
+        // Call proxy handler
         p.HandlerOnProxyStructNested.OnProxyStructNested(p.structNestedModel, fbeType, buffer)
         p.structNestedModel.model.GetEnd(fbeBegin)
         return true, nil
@@ -392,11 +392,11 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
             return false, errors.New("test.StructBytes validation failed")
         }
 
-        // Call proxy handler
         fbeBegin, err := p.structBytesModel.model.GetBegin()
         if fbeBegin == 0 {
             return false, err
         }
+        // Call proxy handler
         p.HandlerOnProxyStructBytes.OnProxyStructBytes(p.structBytesModel, fbeType, buffer)
         p.structBytesModel.model.GetEnd(fbeBegin)
         return true, nil
@@ -407,11 +407,11 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
             return false, errors.New("test.StructArray validation failed")
         }
 
-        // Call proxy handler
         fbeBegin, err := p.structArrayModel.model.GetBegin()
         if fbeBegin == 0 {
             return false, err
         }
+        // Call proxy handler
         p.HandlerOnProxyStructArray.OnProxyStructArray(p.structArrayModel, fbeType, buffer)
         p.structArrayModel.model.GetEnd(fbeBegin)
         return true, nil
@@ -422,11 +422,11 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
             return false, errors.New("test.StructVector validation failed")
         }
 
-        // Call proxy handler
         fbeBegin, err := p.structVectorModel.model.GetBegin()
         if fbeBegin == 0 {
             return false, err
         }
+        // Call proxy handler
         p.HandlerOnProxyStructVector.OnProxyStructVector(p.structVectorModel, fbeType, buffer)
         p.structVectorModel.model.GetEnd(fbeBegin)
         return true, nil
@@ -437,11 +437,11 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
             return false, errors.New("test.StructList validation failed")
         }
 
-        // Call proxy handler
         fbeBegin, err := p.structListModel.model.GetBegin()
         if fbeBegin == 0 {
             return false, err
         }
+        // Call proxy handler
         p.HandlerOnProxyStructList.OnProxyStructList(p.structListModel, fbeType, buffer)
         p.structListModel.model.GetEnd(fbeBegin)
         return true, nil
@@ -452,11 +452,11 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
             return false, errors.New("test.StructSet validation failed")
         }
 
-        // Call proxy handler
         fbeBegin, err := p.structSetModel.model.GetBegin()
         if fbeBegin == 0 {
             return false, err
         }
+        // Call proxy handler
         p.HandlerOnProxyStructSet.OnProxyStructSet(p.structSetModel, fbeType, buffer)
         p.structSetModel.model.GetEnd(fbeBegin)
         return true, nil
@@ -467,11 +467,11 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
             return false, errors.New("test.StructMap validation failed")
         }
 
-        // Call proxy handler
         fbeBegin, err := p.structMapModel.model.GetBegin()
         if fbeBegin == 0 {
             return false, err
         }
+        // Call proxy handler
         p.HandlerOnProxyStructMap.OnProxyStructMap(p.structMapModel, fbeType, buffer)
         p.structMapModel.model.GetEnd(fbeBegin)
         return true, nil
@@ -482,11 +482,11 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
             return false, errors.New("test.StructHash validation failed")
         }
 
-        // Call proxy handler
         fbeBegin, err := p.structHashModel.model.GetBegin()
         if fbeBegin == 0 {
             return false, err
         }
+        // Call proxy handler
         p.HandlerOnProxyStructHash.OnProxyStructHash(p.structHashModel, fbeType, buffer)
         p.structHashModel.model.GetEnd(fbeBegin)
         return true, nil
@@ -497,11 +497,11 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
             return false, errors.New("test.StructHashEx validation failed")
         }
 
-        // Call proxy handler
         fbeBegin, err := p.structHashExModel.model.GetBegin()
         if fbeBegin == 0 {
             return false, err
         }
+        // Call proxy handler
         p.HandlerOnProxyStructHashEx.OnProxyStructHashEx(p.structHashExModel, fbeType, buffer)
         p.structHashExModel.model.GetEnd(fbeBegin)
         return true, nil
@@ -512,11 +512,11 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
             return false, errors.New("test.StructEmpty validation failed")
         }
 
-        // Call proxy handler
         fbeBegin, err := p.structEmptyModel.model.GetBegin()
         if fbeBegin == 0 {
             return false, err
         }
+        // Call proxy handler
         p.HandlerOnProxyStructEmpty.OnProxyStructEmpty(p.structEmptyModel, fbeType, buffer)
         p.structEmptyModel.model.GetEnd(fbeBegin)
         return true, nil

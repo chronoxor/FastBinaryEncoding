@@ -16527,8 +16527,10 @@ protected:
                 StructSimpleModel.attach(data, size);
                 assert(StructSimpleModel.verify() && "test::StructSimple validation failed!");
 
-                // Call proxy handler
                 size_t fbe_begin = StructSimpleModel.model.get_begin();
+                if (fbe_begin == 0)
+                    return false;
+                // Call proxy handler
                 onProxy(StructSimpleModel, type, data, size);
                 StructSimpleModel.model.get_end(fbe_begin);
                 return true;
@@ -16539,8 +16541,10 @@ protected:
                 StructOptionalModel.attach(data, size);
                 assert(StructOptionalModel.verify() && "test::StructOptional validation failed!");
 
-                // Call proxy handler
                 size_t fbe_begin = StructOptionalModel.model.get_begin();
+                if (fbe_begin == 0)
+                    return false;
+                // Call proxy handler
                 onProxy(StructOptionalModel, type, data, size);
                 StructOptionalModel.model.get_end(fbe_begin);
                 return true;
@@ -16551,8 +16555,10 @@ protected:
                 StructNestedModel.attach(data, size);
                 assert(StructNestedModel.verify() && "test::StructNested validation failed!");
 
-                // Call proxy handler
                 size_t fbe_begin = StructNestedModel.model.get_begin();
+                if (fbe_begin == 0)
+                    return false;
+                // Call proxy handler
                 onProxy(StructNestedModel, type, data, size);
                 StructNestedModel.model.get_end(fbe_begin);
                 return true;
@@ -16563,8 +16569,10 @@ protected:
                 StructBytesModel.attach(data, size);
                 assert(StructBytesModel.verify() && "test::StructBytes validation failed!");
 
-                // Call proxy handler
                 size_t fbe_begin = StructBytesModel.model.get_begin();
+                if (fbe_begin == 0)
+                    return false;
+                // Call proxy handler
                 onProxy(StructBytesModel, type, data, size);
                 StructBytesModel.model.get_end(fbe_begin);
                 return true;
@@ -16575,8 +16583,10 @@ protected:
                 StructArrayModel.attach(data, size);
                 assert(StructArrayModel.verify() && "test::StructArray validation failed!");
 
-                // Call proxy handler
                 size_t fbe_begin = StructArrayModel.model.get_begin();
+                if (fbe_begin == 0)
+                    return false;
+                // Call proxy handler
                 onProxy(StructArrayModel, type, data, size);
                 StructArrayModel.model.get_end(fbe_begin);
                 return true;
@@ -16587,8 +16597,10 @@ protected:
                 StructVectorModel.attach(data, size);
                 assert(StructVectorModel.verify() && "test::StructVector validation failed!");
 
-                // Call proxy handler
                 size_t fbe_begin = StructVectorModel.model.get_begin();
+                if (fbe_begin == 0)
+                    return false;
+                // Call proxy handler
                 onProxy(StructVectorModel, type, data, size);
                 StructVectorModel.model.get_end(fbe_begin);
                 return true;
@@ -16599,8 +16611,10 @@ protected:
                 StructListModel.attach(data, size);
                 assert(StructListModel.verify() && "test::StructList validation failed!");
 
-                // Call proxy handler
                 size_t fbe_begin = StructListModel.model.get_begin();
+                if (fbe_begin == 0)
+                    return false;
+                // Call proxy handler
                 onProxy(StructListModel, type, data, size);
                 StructListModel.model.get_end(fbe_begin);
                 return true;
@@ -16611,8 +16625,10 @@ protected:
                 StructSetModel.attach(data, size);
                 assert(StructSetModel.verify() && "test::StructSet validation failed!");
 
-                // Call proxy handler
                 size_t fbe_begin = StructSetModel.model.get_begin();
+                if (fbe_begin == 0)
+                    return false;
+                // Call proxy handler
                 onProxy(StructSetModel, type, data, size);
                 StructSetModel.model.get_end(fbe_begin);
                 return true;
@@ -16623,8 +16639,10 @@ protected:
                 StructMapModel.attach(data, size);
                 assert(StructMapModel.verify() && "test::StructMap validation failed!");
 
-                // Call proxy handler
                 size_t fbe_begin = StructMapModel.model.get_begin();
+                if (fbe_begin == 0)
+                    return false;
+                // Call proxy handler
                 onProxy(StructMapModel, type, data, size);
                 StructMapModel.model.get_end(fbe_begin);
                 return true;
@@ -16635,8 +16653,10 @@ protected:
                 StructHashModel.attach(data, size);
                 assert(StructHashModel.verify() && "test::StructHash validation failed!");
 
-                // Call proxy handler
                 size_t fbe_begin = StructHashModel.model.get_begin();
+                if (fbe_begin == 0)
+                    return false;
+                // Call proxy handler
                 onProxy(StructHashModel, type, data, size);
                 StructHashModel.model.get_end(fbe_begin);
                 return true;
@@ -16647,8 +16667,10 @@ protected:
                 StructHashExModel.attach(data, size);
                 assert(StructHashExModel.verify() && "test::StructHashEx validation failed!");
 
-                // Call proxy handler
                 size_t fbe_begin = StructHashExModel.model.get_begin();
+                if (fbe_begin == 0)
+                    return false;
+                // Call proxy handler
                 onProxy(StructHashExModel, type, data, size);
                 StructHashExModel.model.get_end(fbe_begin);
                 return true;
@@ -16659,8 +16681,10 @@ protected:
                 StructEmptyModel.attach(data, size);
                 assert(StructEmptyModel.verify() && "test::StructEmpty validation failed!");
 
-                // Call proxy handler
                 size_t fbe_begin = StructEmptyModel.model.get_begin();
+                if (fbe_begin == 0)
+                    return false;
+                // Call proxy handler
                 onProxy(StructEmptyModel, type, data, size);
                 StructEmptyModel.model.get_end(fbe_begin);
                 return true;
@@ -17248,215 +17272,6 @@ private:
     ::test::StructEmpty StructEmptyValue;
 
     // Receiver models accessors
-    FBE::test::StructSimpleFinalModel<ReadBuffer> StructSimpleModel;
-    FBE::test::StructOptionalFinalModel<ReadBuffer> StructOptionalModel;
-    FBE::test::StructNestedFinalModel<ReadBuffer> StructNestedModel;
-    FBE::test::StructBytesFinalModel<ReadBuffer> StructBytesModel;
-    FBE::test::StructArrayFinalModel<ReadBuffer> StructArrayModel;
-    FBE::test::StructVectorFinalModel<ReadBuffer> StructVectorModel;
-    FBE::test::StructListFinalModel<ReadBuffer> StructListModel;
-    FBE::test::StructSetFinalModel<ReadBuffer> StructSetModel;
-    FBE::test::StructMapFinalModel<ReadBuffer> StructMapModel;
-    FBE::test::StructHashFinalModel<ReadBuffer> StructHashModel;
-    FBE::test::StructHashExFinalModel<ReadBuffer> StructHashExModel;
-    FBE::test::StructEmptyFinalModel<ReadBuffer> StructEmptyModel;
-};
-
-} // namespace test
-} // namespace FBE
-
-namespace FBE {
-namespace test {
-
-// Fast Binary Encoding test final proxy
-template <class TBuffer>
-class FinalProxy : public virtual FBE::Receiver<TBuffer>
-    , public proto::FinalProxy<TBuffer>
-
-{
-public:
-    FinalProxy() { this->final(true); }
-    FinalProxy(const FinalProxy&) = default;
-    FinalProxy(FinalProxy&&) = default;
-    virtual ~FinalProxy() = default;
-
-    FinalProxy& operator=(const FinalProxy&) = default;
-    FinalProxy& operator=(FinalProxy&&) = default;
-
-protected:
-    // Proxy handlers
-    virtual void onProxy(FBE::test::StructSimpleFinalModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
-    virtual void onProxy(FBE::test::StructOptionalFinalModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
-    virtual void onProxy(FBE::test::StructNestedFinalModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
-    virtual void onProxy(FBE::test::StructBytesFinalModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
-    virtual void onProxy(FBE::test::StructArrayFinalModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
-    virtual void onProxy(FBE::test::StructVectorFinalModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
-    virtual void onProxy(FBE::test::StructListFinalModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
-    virtual void onProxy(FBE::test::StructSetFinalModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
-    virtual void onProxy(FBE::test::StructMapFinalModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
-    virtual void onProxy(FBE::test::StructHashFinalModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
-    virtual void onProxy(FBE::test::StructHashExFinalModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
-    virtual void onProxy(FBE::test::StructEmptyFinalModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
-
-    // Receive message handler
-    bool onReceive(size_t type, const void* data, size_t size) override
-    {
-        switch (type)
-        {
-            case FBE::test::StructSimpleFinalModel<ReadBuffer>::fbe_type():
-            {
-                // Attach the FBE stream to the proxy model
-                StructSimpleModel.attach(data, size);
-                assert(StructSimpleModel.verify() && "test::StructSimple validation failed!");
-
-                // Call proxy handler
-                size_t fbe_begin = StructSimpleModel.model.get_begin();
-                onProxy(StructSimpleModel, type, data, size);
-                StructSimpleModel.model.get_end(fbe_begin);
-                return true;
-            }
-            case FBE::test::StructOptionalFinalModel<ReadBuffer>::fbe_type():
-            {
-                // Attach the FBE stream to the proxy model
-                StructOptionalModel.attach(data, size);
-                assert(StructOptionalModel.verify() && "test::StructOptional validation failed!");
-
-                // Call proxy handler
-                size_t fbe_begin = StructOptionalModel.model.get_begin();
-                onProxy(StructOptionalModel, type, data, size);
-                StructOptionalModel.model.get_end(fbe_begin);
-                return true;
-            }
-            case FBE::test::StructNestedFinalModel<ReadBuffer>::fbe_type():
-            {
-                // Attach the FBE stream to the proxy model
-                StructNestedModel.attach(data, size);
-                assert(StructNestedModel.verify() && "test::StructNested validation failed!");
-
-                // Call proxy handler
-                size_t fbe_begin = StructNestedModel.model.get_begin();
-                onProxy(StructNestedModel, type, data, size);
-                StructNestedModel.model.get_end(fbe_begin);
-                return true;
-            }
-            case FBE::test::StructBytesFinalModel<ReadBuffer>::fbe_type():
-            {
-                // Attach the FBE stream to the proxy model
-                StructBytesModel.attach(data, size);
-                assert(StructBytesModel.verify() && "test::StructBytes validation failed!");
-
-                // Call proxy handler
-                size_t fbe_begin = StructBytesModel.model.get_begin();
-                onProxy(StructBytesModel, type, data, size);
-                StructBytesModel.model.get_end(fbe_begin);
-                return true;
-            }
-            case FBE::test::StructArrayFinalModel<ReadBuffer>::fbe_type():
-            {
-                // Attach the FBE stream to the proxy model
-                StructArrayModel.attach(data, size);
-                assert(StructArrayModel.verify() && "test::StructArray validation failed!");
-
-                // Call proxy handler
-                size_t fbe_begin = StructArrayModel.model.get_begin();
-                onProxy(StructArrayModel, type, data, size);
-                StructArrayModel.model.get_end(fbe_begin);
-                return true;
-            }
-            case FBE::test::StructVectorFinalModel<ReadBuffer>::fbe_type():
-            {
-                // Attach the FBE stream to the proxy model
-                StructVectorModel.attach(data, size);
-                assert(StructVectorModel.verify() && "test::StructVector validation failed!");
-
-                // Call proxy handler
-                size_t fbe_begin = StructVectorModel.model.get_begin();
-                onProxy(StructVectorModel, type, data, size);
-                StructVectorModel.model.get_end(fbe_begin);
-                return true;
-            }
-            case FBE::test::StructListFinalModel<ReadBuffer>::fbe_type():
-            {
-                // Attach the FBE stream to the proxy model
-                StructListModel.attach(data, size);
-                assert(StructListModel.verify() && "test::StructList validation failed!");
-
-                // Call proxy handler
-                size_t fbe_begin = StructListModel.model.get_begin();
-                onProxy(StructListModel, type, data, size);
-                StructListModel.model.get_end(fbe_begin);
-                return true;
-            }
-            case FBE::test::StructSetFinalModel<ReadBuffer>::fbe_type():
-            {
-                // Attach the FBE stream to the proxy model
-                StructSetModel.attach(data, size);
-                assert(StructSetModel.verify() && "test::StructSet validation failed!");
-
-                // Call proxy handler
-                size_t fbe_begin = StructSetModel.model.get_begin();
-                onProxy(StructSetModel, type, data, size);
-                StructSetModel.model.get_end(fbe_begin);
-                return true;
-            }
-            case FBE::test::StructMapFinalModel<ReadBuffer>::fbe_type():
-            {
-                // Attach the FBE stream to the proxy model
-                StructMapModel.attach(data, size);
-                assert(StructMapModel.verify() && "test::StructMap validation failed!");
-
-                // Call proxy handler
-                size_t fbe_begin = StructMapModel.model.get_begin();
-                onProxy(StructMapModel, type, data, size);
-                StructMapModel.model.get_end(fbe_begin);
-                return true;
-            }
-            case FBE::test::StructHashFinalModel<ReadBuffer>::fbe_type():
-            {
-                // Attach the FBE stream to the proxy model
-                StructHashModel.attach(data, size);
-                assert(StructHashModel.verify() && "test::StructHash validation failed!");
-
-                // Call proxy handler
-                size_t fbe_begin = StructHashModel.model.get_begin();
-                onProxy(StructHashModel, type, data, size);
-                StructHashModel.model.get_end(fbe_begin);
-                return true;
-            }
-            case FBE::test::StructHashExFinalModel<ReadBuffer>::fbe_type():
-            {
-                // Attach the FBE stream to the proxy model
-                StructHashExModel.attach(data, size);
-                assert(StructHashExModel.verify() && "test::StructHashEx validation failed!");
-
-                // Call proxy handler
-                size_t fbe_begin = StructHashExModel.model.get_begin();
-                onProxy(StructHashExModel, type, data, size);
-                StructHashExModel.model.get_end(fbe_begin);
-                return true;
-            }
-            case FBE::test::StructEmptyFinalModel<ReadBuffer>::fbe_type():
-            {
-                // Attach the FBE stream to the proxy model
-                StructEmptyModel.attach(data, size);
-                assert(StructEmptyModel.verify() && "test::StructEmpty validation failed!");
-
-                // Call proxy handler
-                size_t fbe_begin = StructEmptyModel.model.get_begin();
-                onProxy(StructEmptyModel, type, data, size);
-                StructEmptyModel.model.get_end(fbe_begin);
-                return true;
-            }
-        }
-
-        if (proto::FinalProxy<TBuffer>::onReceive(type, data, size))
-            return true;
-
-        return false;
-    }
-
-private:
-    // Proxy models accessors
     FBE::test::StructSimpleFinalModel<ReadBuffer> StructSimpleModel;
     FBE::test::StructOptionalFinalModel<ReadBuffer> StructOptionalModel;
     FBE::test::StructNestedFinalModel<ReadBuffer> StructNestedModel;

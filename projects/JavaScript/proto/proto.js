@@ -4171,8 +4171,13 @@ class Proxy extends fbe.Receiver {
         this._orderModel.attachBuffer(buffer, offset)
         console.assert(this._orderModel.verify(), 'proto.Order validation failed!')
 
+        let fbeBegin = this._orderModel.model.getBegin()
+        if (fbeBegin === 0) {
+          return false
+        }
         // Call proxy handler
         this.onProxy_order(this._orderModel, type, buffer, offset, size)
+        this._orderModel.model.getEnd(fbeBegin)
         return true
       }
       case BalanceModel.fbeType: {
@@ -4180,8 +4185,13 @@ class Proxy extends fbe.Receiver {
         this._balanceModel.attachBuffer(buffer, offset)
         console.assert(this._balanceModel.verify(), 'proto.Balance validation failed!')
 
+        let fbeBegin = this._balanceModel.model.getBegin()
+        if (fbeBegin === 0) {
+          return false
+        }
         // Call proxy handler
         this.onProxy_balance(this._balanceModel, type, buffer, offset, size)
+        this._balanceModel.model.getEnd(fbeBegin)
         return true
       }
       case AccountModel.fbeType: {
@@ -4189,8 +4199,13 @@ class Proxy extends fbe.Receiver {
         this._accountModel.attachBuffer(buffer, offset)
         console.assert(this._accountModel.verify(), 'proto.Account validation failed!')
 
+        let fbeBegin = this._accountModel.model.getBegin()
+        if (fbeBegin === 0) {
+          return false
+        }
         // Call proxy handler
         this.onProxy_account(this._accountModel, type, buffer, offset, size)
+        this._accountModel.model.getEnd(fbeBegin)
         return true
       }
     }
@@ -4452,99 +4467,3 @@ class FinalReceiver extends fbe.Receiver {
 }
 
 exports.FinalReceiver = FinalReceiver
-
-/**
- * Fast Binary Encoding proto final proxy
- */
-class FinalProxy extends fbe.Receiver {
-  /**
-   * Initialize proto proxy with the given buffer
-   * @param {!fbe.WriteBuffer} buffer Write buffer, defaults is new WriteBuffer()
-   * @constructor
-   */
-  constructor (buffer = new fbe.WriteBuffer()) {
-    super(buffer, true)
-    this._orderModel = new OrderFinalModel()
-    this._balanceModel = new BalanceFinalModel()
-    this._accountModel = new AccountFinalModel()
-  }
-
-  // Proxy handlers
-
-  /**
-   * Order proxy handler
-   * @this {!FinalProxy}
-   * @param {!Order} model Order model
-   * @param {!number} type Message type
-   * @param {!Uint8Array} buffer Buffer to send
-   * @param {!number} offset Buffer offset
-   * @param {!number} size Buffer size
-   */
-  onProxy_order (model, type, buffer, offset, size) {}  // eslint-disable-line
-
-  /**
-   * Balance proxy handler
-   * @this {!FinalProxy}
-   * @param {!Balance} model Balance model
-   * @param {!number} type Message type
-   * @param {!Uint8Array} buffer Buffer to send
-   * @param {!number} offset Buffer offset
-   * @param {!number} size Buffer size
-   */
-  onProxy_balance (model, type, buffer, offset, size) {}  // eslint-disable-line
-
-  /**
-   * Account proxy handler
-   * @this {!FinalProxy}
-   * @param {!Account} model Account model
-   * @param {!number} type Message type
-   * @param {!Uint8Array} buffer Buffer to send
-   * @param {!number} offset Buffer offset
-   * @param {!number} size Buffer size
-   */
-  onProxy_account (model, type, buffer, offset, size) {}  // eslint-disable-line
-
-  /**
-   * proto receive message handler
-   * @this {!FinalProxy}
-   * @param {!number} type Message type
-   * @param {!Uint8Array} buffer Buffer to send
-   * @param {!number} offset Buffer offset
-   * @param {!number} size Buffer size
-   * @returns {!boolean} Success flag
-   */
-  onReceive (type, buffer, offset, size) {
-    switch (type) {
-      case OrderFinalModel.fbeType: {
-        // Attach the FBE stream to the proxy model
-        this._orderModel.attachBuffer(buffer, offset)
-        console.assert(this._orderModel.verify(), 'proto.Order validation failed!')
-
-        // Call proxy handler
-        this.onProxy_order(this._orderModel, type, buffer, offset, size)
-        return true
-      }
-      case BalanceFinalModel.fbeType: {
-        // Attach the FBE stream to the proxy model
-        this._balanceModel.attachBuffer(buffer, offset)
-        console.assert(this._balanceModel.verify(), 'proto.Balance validation failed!')
-
-        // Call proxy handler
-        this.onProxy_balance(this._balanceModel, type, buffer, offset, size)
-        return true
-      }
-      case AccountFinalModel.fbeType: {
-        // Attach the FBE stream to the proxy model
-        this._accountModel.attachBuffer(buffer, offset)
-        console.assert(this._accountModel.verify(), 'proto.Account validation failed!')
-
-        // Call proxy handler
-        this.onProxy_account(this._accountModel, type, buffer, offset, size)
-        return true
-      }
-    }
-    return false
-  }
-}
-
-exports.FinalProxy = FinalProxy

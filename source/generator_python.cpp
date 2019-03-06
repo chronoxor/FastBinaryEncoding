@@ -2814,7 +2814,6 @@ void GeneratorPython::GeneratePackage(const std::shared_ptr<Package>& p)
         {
             GenerateSender(p, true);
             GenerateReceiver(p, true);
-            GenerateProxy(p, true);
         }
     }
 
@@ -4972,8 +4971,14 @@ void GeneratorPython::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
             WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.attach_buffer(buffer, offset)");
             WriteLineIndent("assert self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.verify(), \"" + *p->name + "." + *s->name + " validation failed!\"");
             WriteLine();
+            WriteLineIndent("fbe_begin = self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.model.get_begin()");
+            WriteLineIndent("if fbe_begin == 0:");
+            Indent(1);
+            WriteLineIndent("return False");
+            Indent(-1);
             WriteLineIndent("# Call proxy handler");
             WriteLineIndent("self.on_proxy_" + CppCommon::StringUtils::ToLower(*s->name) + "(self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model, type, buffer, offset, size)");
+            WriteLineIndent("self._" + CppCommon::StringUtils::ToLower(*s->name) + "_model.model.get_end(fbe_begin)");
             WriteLineIndent("return True");
             Indent(-1);
         }

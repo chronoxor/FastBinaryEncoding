@@ -7826,8 +7826,13 @@ class Proxy extends fbe.Receiver {
         this._enumsModel.attachBuffer(buffer, offset)
         console.assert(this._enumsModel.verify(), 'enums.Enums validation failed!')
 
+        let fbeBegin = this._enumsModel.model.getBegin()
+        if (fbeBegin === 0) {
+          return false
+        }
         // Call proxy handler
         this.onProxy_enums(this._enumsModel, type, buffer, offset, size)
+        this._enumsModel.model.getEnd(fbeBegin)
         return true
       }
     }
@@ -7971,57 +7976,3 @@ class FinalReceiver extends fbe.Receiver {
 }
 
 exports.FinalReceiver = FinalReceiver
-
-/**
- * Fast Binary Encoding enums final proxy
- */
-class FinalProxy extends fbe.Receiver {
-  /**
-   * Initialize enums proxy with the given buffer
-   * @param {!fbe.WriteBuffer} buffer Write buffer, defaults is new WriteBuffer()
-   * @constructor
-   */
-  constructor (buffer = new fbe.WriteBuffer()) {
-    super(buffer, true)
-    this._enumsModel = new EnumsFinalModel()
-  }
-
-  // Proxy handlers
-
-  /**
-   * Enums proxy handler
-   * @this {!FinalProxy}
-   * @param {!Enums} model Enums model
-   * @param {!number} type Message type
-   * @param {!Uint8Array} buffer Buffer to send
-   * @param {!number} offset Buffer offset
-   * @param {!number} size Buffer size
-   */
-  onProxy_enums (model, type, buffer, offset, size) {}  // eslint-disable-line
-
-  /**
-   * enums receive message handler
-   * @this {!FinalProxy}
-   * @param {!number} type Message type
-   * @param {!Uint8Array} buffer Buffer to send
-   * @param {!number} offset Buffer offset
-   * @param {!number} size Buffer size
-   * @returns {!boolean} Success flag
-   */
-  onReceive (type, buffer, offset, size) {
-    switch (type) {
-      case EnumsFinalModel.fbeType: {
-        // Attach the FBE stream to the proxy model
-        this._enumsModel.attachBuffer(buffer, offset)
-        console.assert(this._enumsModel.verify(), 'enums.Enums validation failed!')
-
-        // Call proxy handler
-        this.onProxy_enums(this._enumsModel, type, buffer, offset, size)
-        return true
-      }
-    }
-    return false
-  }
-}
-
-exports.FinalProxy = FinalProxy

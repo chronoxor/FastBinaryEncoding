@@ -2909,8 +2909,10 @@ protected:
                 OrderModel.attach(data, size);
                 assert(OrderModel.verify() && "protoex::Order validation failed!");
 
-                // Call proxy handler
                 size_t fbe_begin = OrderModel.model.get_begin();
+                if (fbe_begin == 0)
+                    return false;
+                // Call proxy handler
                 onProxy(OrderModel, type, data, size);
                 OrderModel.model.get_end(fbe_begin);
                 return true;
@@ -2921,8 +2923,10 @@ protected:
                 BalanceModel.attach(data, size);
                 assert(BalanceModel.verify() && "protoex::Balance validation failed!");
 
-                // Call proxy handler
                 size_t fbe_begin = BalanceModel.model.get_begin();
+                if (fbe_begin == 0)
+                    return false;
+                // Call proxy handler
                 onProxy(BalanceModel, type, data, size);
                 BalanceModel.model.get_end(fbe_begin);
                 return true;
@@ -2933,8 +2937,10 @@ protected:
                 AccountModel.attach(data, size);
                 assert(AccountModel.verify() && "protoex::Account validation failed!");
 
-                // Call proxy handler
                 size_t fbe_begin = AccountModel.model.get_begin();
+                if (fbe_begin == 0)
+                    return false;
+                // Call proxy handler
                 onProxy(AccountModel, type, data, size);
                 AccountModel.model.get_end(fbe_begin);
                 return true;
@@ -3144,89 +3150,6 @@ private:
     ::protoex::Account AccountValue;
 
     // Receiver models accessors
-    FBE::protoex::OrderFinalModel<ReadBuffer> OrderModel;
-    FBE::protoex::BalanceFinalModel<ReadBuffer> BalanceModel;
-    FBE::protoex::AccountFinalModel<ReadBuffer> AccountModel;
-};
-
-} // namespace protoex
-} // namespace FBE
-
-namespace FBE {
-namespace protoex {
-
-// Fast Binary Encoding protoex final proxy
-template <class TBuffer>
-class FinalProxy : public virtual FBE::Receiver<TBuffer>
-    , public proto::FinalProxy<TBuffer>
-
-{
-public:
-    FinalProxy() { this->final(true); }
-    FinalProxy(const FinalProxy&) = default;
-    FinalProxy(FinalProxy&&) = default;
-    virtual ~FinalProxy() = default;
-
-    FinalProxy& operator=(const FinalProxy&) = default;
-    FinalProxy& operator=(FinalProxy&&) = default;
-
-protected:
-    // Proxy handlers
-    virtual void onProxy(FBE::protoex::OrderFinalModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
-    virtual void onProxy(FBE::protoex::BalanceFinalModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
-    virtual void onProxy(FBE::protoex::AccountFinalModel<ReadBuffer>& model, size_t type, const void* data, size_t size) {}
-
-    // Receive message handler
-    bool onReceive(size_t type, const void* data, size_t size) override
-    {
-        switch (type)
-        {
-            case FBE::protoex::OrderFinalModel<ReadBuffer>::fbe_type():
-            {
-                // Attach the FBE stream to the proxy model
-                OrderModel.attach(data, size);
-                assert(OrderModel.verify() && "protoex::Order validation failed!");
-
-                // Call proxy handler
-                size_t fbe_begin = OrderModel.model.get_begin();
-                onProxy(OrderModel, type, data, size);
-                OrderModel.model.get_end(fbe_begin);
-                return true;
-            }
-            case FBE::protoex::BalanceFinalModel<ReadBuffer>::fbe_type():
-            {
-                // Attach the FBE stream to the proxy model
-                BalanceModel.attach(data, size);
-                assert(BalanceModel.verify() && "protoex::Balance validation failed!");
-
-                // Call proxy handler
-                size_t fbe_begin = BalanceModel.model.get_begin();
-                onProxy(BalanceModel, type, data, size);
-                BalanceModel.model.get_end(fbe_begin);
-                return true;
-            }
-            case FBE::protoex::AccountFinalModel<ReadBuffer>::fbe_type():
-            {
-                // Attach the FBE stream to the proxy model
-                AccountModel.attach(data, size);
-                assert(AccountModel.verify() && "protoex::Account validation failed!");
-
-                // Call proxy handler
-                size_t fbe_begin = AccountModel.model.get_begin();
-                onProxy(AccountModel, type, data, size);
-                AccountModel.model.get_end(fbe_begin);
-                return true;
-            }
-        }
-
-        if (proto::FinalProxy<TBuffer>::onReceive(type, data, size))
-            return true;
-
-        return false;
-    }
-
-private:
-    // Proxy models accessors
     FBE::protoex::OrderFinalModel<ReadBuffer> OrderModel;
     FBE::protoex::BalanceFinalModel<ReadBuffer> BalanceModel;
     FBE::protoex::AccountFinalModel<ReadBuffer> AccountModel;

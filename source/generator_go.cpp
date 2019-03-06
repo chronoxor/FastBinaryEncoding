@@ -4863,7 +4863,6 @@ void GeneratorGo::GeneratePackage(const std::shared_ptr<Package>& p)
         {
             GenerateSender(p, path, true);
             GenerateReceiver(p, path, true);
-            GenerateProxy(p, path, true);
         }
     }
 }
@@ -7723,13 +7722,13 @@ void GeneratorGo::GenerateProxy(const std::shared_ptr<Package>& p, const CppComm
             Indent(-1);
             WriteLineIndent("}");
             WriteLine();
-            WriteLineIndent("// Call proxy handler");
             WriteLineIndent("fbeBegin, err := p." + struct_model + ".model.GetBegin()");
             WriteLineIndent("if fbeBegin == 0 {");
             Indent(1);
             WriteLineIndent("return false, err");
             Indent(-1);
             WriteLineIndent("}");
+            WriteLineIndent("// Call proxy handler");
             WriteLineIndent("p.HandlerOnProxy" + struct_name + ".OnProxy" + struct_name + "(p." + struct_model + ", fbeType, buffer)");
             WriteLineIndent("p." + struct_model + ".model.GetEnd(fbeBegin)");
             WriteLineIndent("return true, nil");

@@ -3442,7 +3442,6 @@ void GeneratorRuby::GeneratePackage(const std::shared_ptr<Package>& p)
         {
             GenerateSender(p, true);
             GenerateReceiver(p, true);
-            GenerateProxy(p, true);
         }
     }
 
@@ -5768,8 +5767,15 @@ void GeneratorRuby::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
             Indent(-1);
             WriteLineIndent("end");
             WriteLine();
+            WriteLineIndent("fbe_begin = @_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.model.get_begin");
+            WriteLineIndent("if fbe_begin == 0");
+            Indent(1);
+            WriteLineIndent("return false");
+            Indent(-1);
+            WriteLineIndent("end");
             WriteLineIndent("# Call proxy handler");
             WriteLineIndent("on_proxy_" + CppCommon::StringUtils::ToLower(*s->name) + "(@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model, type, buffer, offset, size)");
+            WriteLineIndent("@_" + CppCommon::StringUtils::ToLower(*s->name) + "_model.model.get_end(fbe_begin)");
             WriteLineIndent("true");
             Indent(-1);
         }
