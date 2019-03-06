@@ -3848,7 +3848,7 @@ public:
     void logging(bool enable) noexcept { _logging = enable; }
 
     // Reset the sender buffer
-    void reset() noexcept { _buffer->clear(); }
+    void reset() noexcept { _buffer->reset(); }
 
     // Send serialized buffer.
     // Direct call of the method requires knowledge about internals of FBE models serialization.
@@ -3911,7 +3911,7 @@ public:
     void logging(bool enable) noexcept { _logging = enable; }
 
     // Reset the receiver buffer
-    void reset() noexcept { _buffer->clear(); }
+    void reset() noexcept { _buffer->reset(); }
 
     // Receive data
     void receive(const void* data, size_t size)
