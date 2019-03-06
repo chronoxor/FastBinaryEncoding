@@ -120,7 +120,12 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
         }
 
         // Call proxy handler
+        fbeBegin, err := p.orderModel.model.GetBegin()
+        if fbeBegin == 0 {
+            return false, err
+        }
         p.HandlerOnProxyOrder.OnProxyOrder(p.orderModel, fbeType, buffer)
+        p.orderModel.model.GetEnd(fbeBegin)
         return true, nil
     case p.balanceModel.FBEType():
         // Attach the FBE stream to the proxy model
@@ -130,7 +135,12 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
         }
 
         // Call proxy handler
+        fbeBegin, err := p.balanceModel.model.GetBegin()
+        if fbeBegin == 0 {
+            return false, err
+        }
         p.HandlerOnProxyBalance.OnProxyBalance(p.balanceModel, fbeType, buffer)
+        p.balanceModel.model.GetEnd(fbeBegin)
         return true, nil
     case p.accountModel.FBEType():
         // Attach the FBE stream to the proxy model
@@ -140,7 +150,12 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
         }
 
         // Call proxy handler
+        fbeBegin, err := p.accountModel.model.GetBegin()
+        if fbeBegin == 0 {
+            return false, err
+        }
         p.HandlerOnProxyAccount.OnProxyAccount(p.accountModel, fbeType, buffer)
+        p.accountModel.model.GetEnd(fbeBegin)
         return true, nil
     }
 

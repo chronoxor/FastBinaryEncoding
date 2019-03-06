@@ -348,7 +348,12 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
         }
 
         // Call proxy handler
+        fbeBegin, err := p.structSimpleModel.model.GetBegin()
+        if fbeBegin == 0 {
+            return false, err
+        }
         p.HandlerOnProxyStructSimple.OnProxyStructSimple(p.structSimpleModel, fbeType, buffer)
+        p.structSimpleModel.model.GetEnd(fbeBegin)
         return true, nil
     case p.structOptionalModel.FBEType():
         // Attach the FBE stream to the proxy model
@@ -358,7 +363,12 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
         }
 
         // Call proxy handler
+        fbeBegin, err := p.structOptionalModel.model.GetBegin()
+        if fbeBegin == 0 {
+            return false, err
+        }
         p.HandlerOnProxyStructOptional.OnProxyStructOptional(p.structOptionalModel, fbeType, buffer)
+        p.structOptionalModel.model.GetEnd(fbeBegin)
         return true, nil
     case p.structNestedModel.FBEType():
         // Attach the FBE stream to the proxy model
@@ -368,7 +378,12 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
         }
 
         // Call proxy handler
+        fbeBegin, err := p.structNestedModel.model.GetBegin()
+        if fbeBegin == 0 {
+            return false, err
+        }
         p.HandlerOnProxyStructNested.OnProxyStructNested(p.structNestedModel, fbeType, buffer)
+        p.structNestedModel.model.GetEnd(fbeBegin)
         return true, nil
     case p.structBytesModel.FBEType():
         // Attach the FBE stream to the proxy model
@@ -378,7 +393,12 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
         }
 
         // Call proxy handler
+        fbeBegin, err := p.structBytesModel.model.GetBegin()
+        if fbeBegin == 0 {
+            return false, err
+        }
         p.HandlerOnProxyStructBytes.OnProxyStructBytes(p.structBytesModel, fbeType, buffer)
+        p.structBytesModel.model.GetEnd(fbeBegin)
         return true, nil
     case p.structArrayModel.FBEType():
         // Attach the FBE stream to the proxy model
@@ -388,7 +408,12 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
         }
 
         // Call proxy handler
+        fbeBegin, err := p.structArrayModel.model.GetBegin()
+        if fbeBegin == 0 {
+            return false, err
+        }
         p.HandlerOnProxyStructArray.OnProxyStructArray(p.structArrayModel, fbeType, buffer)
+        p.structArrayModel.model.GetEnd(fbeBegin)
         return true, nil
     case p.structVectorModel.FBEType():
         // Attach the FBE stream to the proxy model
@@ -398,7 +423,12 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
         }
 
         // Call proxy handler
+        fbeBegin, err := p.structVectorModel.model.GetBegin()
+        if fbeBegin == 0 {
+            return false, err
+        }
         p.HandlerOnProxyStructVector.OnProxyStructVector(p.structVectorModel, fbeType, buffer)
+        p.structVectorModel.model.GetEnd(fbeBegin)
         return true, nil
     case p.structListModel.FBEType():
         // Attach the FBE stream to the proxy model
@@ -408,7 +438,12 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
         }
 
         // Call proxy handler
+        fbeBegin, err := p.structListModel.model.GetBegin()
+        if fbeBegin == 0 {
+            return false, err
+        }
         p.HandlerOnProxyStructList.OnProxyStructList(p.structListModel, fbeType, buffer)
+        p.structListModel.model.GetEnd(fbeBegin)
         return true, nil
     case p.structSetModel.FBEType():
         // Attach the FBE stream to the proxy model
@@ -418,7 +453,12 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
         }
 
         // Call proxy handler
+        fbeBegin, err := p.structSetModel.model.GetBegin()
+        if fbeBegin == 0 {
+            return false, err
+        }
         p.HandlerOnProxyStructSet.OnProxyStructSet(p.structSetModel, fbeType, buffer)
+        p.structSetModel.model.GetEnd(fbeBegin)
         return true, nil
     case p.structMapModel.FBEType():
         // Attach the FBE stream to the proxy model
@@ -428,7 +468,12 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
         }
 
         // Call proxy handler
+        fbeBegin, err := p.structMapModel.model.GetBegin()
+        if fbeBegin == 0 {
+            return false, err
+        }
         p.HandlerOnProxyStructMap.OnProxyStructMap(p.structMapModel, fbeType, buffer)
+        p.structMapModel.model.GetEnd(fbeBegin)
         return true, nil
     case p.structHashModel.FBEType():
         // Attach the FBE stream to the proxy model
@@ -438,7 +483,12 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
         }
 
         // Call proxy handler
+        fbeBegin, err := p.structHashModel.model.GetBegin()
+        if fbeBegin == 0 {
+            return false, err
+        }
         p.HandlerOnProxyStructHash.OnProxyStructHash(p.structHashModel, fbeType, buffer)
+        p.structHashModel.model.GetEnd(fbeBegin)
         return true, nil
     case p.structHashExModel.FBEType():
         // Attach the FBE stream to the proxy model
@@ -448,7 +498,12 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
         }
 
         // Call proxy handler
+        fbeBegin, err := p.structHashExModel.model.GetBegin()
+        if fbeBegin == 0 {
+            return false, err
+        }
         p.HandlerOnProxyStructHashEx.OnProxyStructHashEx(p.structHashExModel, fbeType, buffer)
+        p.structHashExModel.model.GetEnd(fbeBegin)
         return true, nil
     case p.structEmptyModel.FBEType():
         // Attach the FBE stream to the proxy model
@@ -458,7 +513,12 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
         }
 
         // Call proxy handler
+        fbeBegin, err := p.structEmptyModel.model.GetBegin()
+        if fbeBegin == 0 {
+            return false, err
+        }
         p.HandlerOnProxyStructEmpty.OnProxyStructEmpty(p.structEmptyModel, fbeType, buffer)
+        p.structEmptyModel.model.GetEnd(fbeBegin)
         return true, nil
     }
 

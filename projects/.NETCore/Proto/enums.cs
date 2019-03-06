@@ -5870,7 +5870,9 @@ namespace enums {
                     Debug.Assert(EnumsModel.Verify(), "enums.Enums validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = EnumsModel.model.GetBegin();
                     OnProxy(EnumsModel, type, buffer, offset, size);
+                    EnumsModel.model.GetEnd(fbeBegin);
                     return true;
                 }
             }
@@ -6015,7 +6017,9 @@ namespace enums {
                     Debug.Assert(EnumsModel.Verify(), "enums.Enums validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = EnumsModel.model.GetBegin();
                     OnProxy(EnumsModel, type, buffer, offset, size);
+                    EnumsModel.model.GetEnd(fbeBegin);
                     return true;
                 }
             }

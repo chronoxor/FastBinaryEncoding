@@ -3308,7 +3308,9 @@ namespace protoex {
                     Debug.Assert(OrderModel.Verify(), "protoex.Order validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = OrderModel.model.GetBegin();
                     OnProxy(OrderModel, type, buffer, offset, size);
+                    OrderModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case BalanceModel.FBETypeConst:
@@ -3318,7 +3320,9 @@ namespace protoex {
                     Debug.Assert(BalanceModel.Verify(), "protoex.Balance validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = BalanceModel.model.GetBegin();
                     OnProxy(BalanceModel, type, buffer, offset, size);
+                    BalanceModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case AccountModel.FBETypeConst:
@@ -3328,7 +3332,9 @@ namespace protoex {
                     Debug.Assert(AccountModel.Verify(), "protoex.Account validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = AccountModel.model.GetBegin();
                     OnProxy(AccountModel, type, buffer, offset, size);
+                    AccountModel.model.GetEnd(fbeBegin);
                     return true;
                 }
             }
@@ -3594,7 +3600,9 @@ namespace protoex {
                     Debug.Assert(OrderModel.Verify(), "protoex.Order validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = OrderModel.model.GetBegin();
                     OnProxy(OrderModel, type, buffer, offset, size);
+                    OrderModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case BalanceFinalModel.FBETypeConst:
@@ -3604,7 +3612,9 @@ namespace protoex {
                     Debug.Assert(BalanceModel.Verify(), "protoex.Balance validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = BalanceModel.model.GetBegin();
                     OnProxy(BalanceModel, type, buffer, offset, size);
+                    BalanceModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case AccountFinalModel.FBETypeConst:
@@ -3614,7 +3624,9 @@ namespace protoex {
                     Debug.Assert(AccountModel.Verify(), "protoex.Account validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = AccountModel.model.GetBegin();
                     OnProxy(AccountModel, type, buffer, offset, size);
+                    AccountModel.model.GetEnd(fbeBegin);
                     return true;
                 }
             }

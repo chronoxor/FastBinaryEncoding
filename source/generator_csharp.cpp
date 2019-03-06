@@ -6470,7 +6470,9 @@ void GeneratorCSharp::GenerateProxy(const std::shared_ptr<Package>& p, bool fina
             WriteLineIndent("Debug.Assert(" + *s->name + "Model.Verify(), \"" + *p->name + "." + *s->name + " validation failed!\");");
             WriteLine();
             WriteLineIndent("// Call proxy handler");
+            WriteLineIndent("long fbeBegin = " + *s->name + "Model.model.GetBegin();");
             WriteLineIndent("OnProxy(" + *s->name + "Model, type, buffer, offset, size);");
+            WriteLineIndent(*s->name + "Model.model.GetEnd(fbeBegin);");
             WriteLineIndent("return true;");
             Indent(-1);
             WriteLineIndent("}");

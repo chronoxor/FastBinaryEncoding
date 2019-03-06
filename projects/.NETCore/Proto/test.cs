@@ -16800,7 +16800,9 @@ namespace test {
                     Debug.Assert(StructSimpleModel.Verify(), "test.StructSimple validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructSimpleModel.model.GetBegin();
                     OnProxy(StructSimpleModel, type, buffer, offset, size);
+                    StructSimpleModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructOptionalModel.FBETypeConst:
@@ -16810,7 +16812,9 @@ namespace test {
                     Debug.Assert(StructOptionalModel.Verify(), "test.StructOptional validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructOptionalModel.model.GetBegin();
                     OnProxy(StructOptionalModel, type, buffer, offset, size);
+                    StructOptionalModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructNestedModel.FBETypeConst:
@@ -16820,7 +16824,9 @@ namespace test {
                     Debug.Assert(StructNestedModel.Verify(), "test.StructNested validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructNestedModel.model.GetBegin();
                     OnProxy(StructNestedModel, type, buffer, offset, size);
+                    StructNestedModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructBytesModel.FBETypeConst:
@@ -16830,7 +16836,9 @@ namespace test {
                     Debug.Assert(StructBytesModel.Verify(), "test.StructBytes validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructBytesModel.model.GetBegin();
                     OnProxy(StructBytesModel, type, buffer, offset, size);
+                    StructBytesModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructArrayModel.FBETypeConst:
@@ -16840,7 +16848,9 @@ namespace test {
                     Debug.Assert(StructArrayModel.Verify(), "test.StructArray validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructArrayModel.model.GetBegin();
                     OnProxy(StructArrayModel, type, buffer, offset, size);
+                    StructArrayModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructVectorModel.FBETypeConst:
@@ -16850,7 +16860,9 @@ namespace test {
                     Debug.Assert(StructVectorModel.Verify(), "test.StructVector validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructVectorModel.model.GetBegin();
                     OnProxy(StructVectorModel, type, buffer, offset, size);
+                    StructVectorModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructListModel.FBETypeConst:
@@ -16860,7 +16872,9 @@ namespace test {
                     Debug.Assert(StructListModel.Verify(), "test.StructList validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructListModel.model.GetBegin();
                     OnProxy(StructListModel, type, buffer, offset, size);
+                    StructListModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructSetModel.FBETypeConst:
@@ -16870,7 +16884,9 @@ namespace test {
                     Debug.Assert(StructSetModel.Verify(), "test.StructSet validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructSetModel.model.GetBegin();
                     OnProxy(StructSetModel, type, buffer, offset, size);
+                    StructSetModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructMapModel.FBETypeConst:
@@ -16880,7 +16896,9 @@ namespace test {
                     Debug.Assert(StructMapModel.Verify(), "test.StructMap validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructMapModel.model.GetBegin();
                     OnProxy(StructMapModel, type, buffer, offset, size);
+                    StructMapModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructHashModel.FBETypeConst:
@@ -16890,7 +16908,9 @@ namespace test {
                     Debug.Assert(StructHashModel.Verify(), "test.StructHash validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructHashModel.model.GetBegin();
                     OnProxy(StructHashModel, type, buffer, offset, size);
+                    StructHashModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructHashExModel.FBETypeConst:
@@ -16900,7 +16920,9 @@ namespace test {
                     Debug.Assert(StructHashExModel.Verify(), "test.StructHashEx validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructHashExModel.model.GetBegin();
                     OnProxy(StructHashExModel, type, buffer, offset, size);
+                    StructHashExModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructEmptyModel.FBETypeConst:
@@ -16910,7 +16932,9 @@ namespace test {
                     Debug.Assert(StructEmptyModel.Verify(), "test.StructEmpty validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructEmptyModel.model.GetBegin();
                     OnProxy(StructEmptyModel, type, buffer, offset, size);
+                    StructEmptyModel.model.GetEnd(fbeBegin);
                     return true;
                 }
             }
@@ -17626,7 +17650,9 @@ namespace test {
                     Debug.Assert(StructSimpleModel.Verify(), "test.StructSimple validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructSimpleModel.model.GetBegin();
                     OnProxy(StructSimpleModel, type, buffer, offset, size);
+                    StructSimpleModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructOptionalFinalModel.FBETypeConst:
@@ -17636,7 +17662,9 @@ namespace test {
                     Debug.Assert(StructOptionalModel.Verify(), "test.StructOptional validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructOptionalModel.model.GetBegin();
                     OnProxy(StructOptionalModel, type, buffer, offset, size);
+                    StructOptionalModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructNestedFinalModel.FBETypeConst:
@@ -17646,7 +17674,9 @@ namespace test {
                     Debug.Assert(StructNestedModel.Verify(), "test.StructNested validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructNestedModel.model.GetBegin();
                     OnProxy(StructNestedModel, type, buffer, offset, size);
+                    StructNestedModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructBytesFinalModel.FBETypeConst:
@@ -17656,7 +17686,9 @@ namespace test {
                     Debug.Assert(StructBytesModel.Verify(), "test.StructBytes validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructBytesModel.model.GetBegin();
                     OnProxy(StructBytesModel, type, buffer, offset, size);
+                    StructBytesModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructArrayFinalModel.FBETypeConst:
@@ -17666,7 +17698,9 @@ namespace test {
                     Debug.Assert(StructArrayModel.Verify(), "test.StructArray validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructArrayModel.model.GetBegin();
                     OnProxy(StructArrayModel, type, buffer, offset, size);
+                    StructArrayModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructVectorFinalModel.FBETypeConst:
@@ -17676,7 +17710,9 @@ namespace test {
                     Debug.Assert(StructVectorModel.Verify(), "test.StructVector validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructVectorModel.model.GetBegin();
                     OnProxy(StructVectorModel, type, buffer, offset, size);
+                    StructVectorModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructListFinalModel.FBETypeConst:
@@ -17686,7 +17722,9 @@ namespace test {
                     Debug.Assert(StructListModel.Verify(), "test.StructList validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructListModel.model.GetBegin();
                     OnProxy(StructListModel, type, buffer, offset, size);
+                    StructListModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructSetFinalModel.FBETypeConst:
@@ -17696,7 +17734,9 @@ namespace test {
                     Debug.Assert(StructSetModel.Verify(), "test.StructSet validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructSetModel.model.GetBegin();
                     OnProxy(StructSetModel, type, buffer, offset, size);
+                    StructSetModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructMapFinalModel.FBETypeConst:
@@ -17706,7 +17746,9 @@ namespace test {
                     Debug.Assert(StructMapModel.Verify(), "test.StructMap validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructMapModel.model.GetBegin();
                     OnProxy(StructMapModel, type, buffer, offset, size);
+                    StructMapModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructHashFinalModel.FBETypeConst:
@@ -17716,7 +17758,9 @@ namespace test {
                     Debug.Assert(StructHashModel.Verify(), "test.StructHash validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructHashModel.model.GetBegin();
                     OnProxy(StructHashModel, type, buffer, offset, size);
+                    StructHashModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructHashExFinalModel.FBETypeConst:
@@ -17726,7 +17770,9 @@ namespace test {
                     Debug.Assert(StructHashExModel.Verify(), "test.StructHashEx validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructHashExModel.model.GetBegin();
                     OnProxy(StructHashExModel, type, buffer, offset, size);
+                    StructHashExModel.model.GetEnd(fbeBegin);
                     return true;
                 }
                 case StructEmptyFinalModel.FBETypeConst:
@@ -17736,7 +17782,9 @@ namespace test {
                     Debug.Assert(StructEmptyModel.Verify(), "test.StructEmpty validation failed!");
 
                     // Call proxy handler
+                    long fbeBegin = StructEmptyModel.model.GetBegin();
                     OnProxy(StructEmptyModel, type, buffer, offset, size);
+                    StructEmptyModel.model.GetEnd(fbeBegin);
                     return true;
                 }
             }

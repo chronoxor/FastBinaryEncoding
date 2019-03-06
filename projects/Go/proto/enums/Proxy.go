@@ -72,7 +72,12 @@ func (p *Proxy) OnReceive(fbeType int, buffer []byte) (bool, error) {
         }
 
         // Call proxy handler
+        fbeBegin, err := p.enumsModel.model.GetBegin()
+        if fbeBegin == 0 {
+            return false, err
+        }
         p.HandlerOnProxyEnums.OnProxyEnums(p.enumsModel, fbeType, buffer)
+        p.enumsModel.model.GetEnd(fbeBegin)
         return true, nil
     }
 
