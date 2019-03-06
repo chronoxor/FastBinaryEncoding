@@ -4575,9 +4575,9 @@ protected:
                 assert(EnumsModel.verify() && "enums::Enums validation failed!");
 
                 // Call proxy handler
-                size_t fbe_begin = EnumsModel.get_begin();
+                size_t fbe_begin = EnumsModel.model.get_begin();
                 onProxy(EnumsModel, type, data, size);
-                EnumsModel.get_end(fbe_begin);
+                EnumsModel.model.get_end(fbe_begin);
                 return true;
             }
         }
@@ -4729,9 +4729,9 @@ protected:
                 assert(EnumsModel.verify() && "enums::Enums validation failed!");
 
                 // Call proxy handler
-                size_t fbe_begin = EnumsModel.get_begin();
+                size_t fbe_begin = EnumsModel.model.get_begin();
                 onProxy(EnumsModel, type, data, size);
-                EnumsModel.get_end(fbe_begin);
+                EnumsModel.model.get_end(fbe_begin);
                 return true;
             }
         }
