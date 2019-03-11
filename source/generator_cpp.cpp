@@ -73,8 +73,10 @@ void GeneratorCpp::GenerateImports()
 #include <uuid/uuid.h>
 #elif defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
-#undef max
+#undef ERROR
+#undef Yield
 #undef min
+#undef max
 #undef uuid_t
 #endif
 )CODE";
