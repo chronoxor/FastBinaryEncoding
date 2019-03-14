@@ -61,22 +61,6 @@ func NewStructArray() *StructArray {
     }
 }
 
-// Create a new StructArray struct from the given copy value
-func NewStructArrayFromCopy(Other *StructArray) *StructArray {
-    return &StructArray{
-        F1: Other.F1,
-        F2: Other.F2,
-        F3: Other.F3,
-        F4: Other.F4,
-        F5: Other.F5,
-        F6: Other.F6,
-        F7: Other.F7,
-        F8: Other.F8,
-        F9: Other.F9,
-        F10: Other.F10,
-    }
-}
-
 // Create a new StructArray struct from the given field values
 func NewStructArrayFromFieldValues(F1 [2]byte, F2 [2]*byte, F3 [2][]byte, F4 [2]*[]byte, F5 [2]EnumSimple, F6 [2]*EnumSimple, F7 [2]FlagsSimple, F8 [2]*FlagsSimple, F9 [2]StructSimple, F10 [2]*StructSimple) *StructArray {
     return &StructArray{F1, F2, F3, F4, F5, F6, F7, F8, F9, F10}

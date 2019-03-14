@@ -45,14 +45,6 @@ func NewStructHashEx() *StructHashEx {
     }
 }
 
-// Create a new StructHashEx struct from the given copy value
-func NewStructHashExFromCopy(Other *StructHashEx) *StructHashEx {
-    return &StructHashEx{
-        F1: Other.F1,
-        F2: Other.F2,
-    }
-}
-
 // Create a new StructHashEx struct from the given field values
 func NewStructHashExFromFieldValues(F1 map[StructSimpleKey]struct{Key StructSimple; Value StructNested}, F2 map[StructSimpleKey]struct{Key StructSimple; Value *StructNested}) *StructHashEx {
     return &StructHashEx{F1, F2}

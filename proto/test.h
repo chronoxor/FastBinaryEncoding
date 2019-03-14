@@ -3352,12 +3352,10 @@ struct StructOptional : public ::test::StructSimple
         , f164(arg_f164)
         , f165(arg_f165)
     {}
-    StructOptional(const ::test::StructSimple& base) : ::test::StructSimple(base) {}
     StructOptional(const StructOptional& other) = default;
     StructOptional(StructOptional&& other) = default;
     ~StructOptional() = default;
 
-    StructOptional& operator=(const ::test::StructSimple& base) { ::test::StructSimple::operator=(base); return *this; }
     StructOptional& operator=(const StructOptional& other) = default;
     StructOptional& operator=(StructOptional&& other) = default;
 
@@ -6754,12 +6752,10 @@ struct StructNested : public ::test::StructOptional
         , f1010(arg_f1010)
         , f1011(arg_f1011)
     {}
-    StructNested(const ::test::StructOptional& base) : ::test::StructOptional(base) {}
     StructNested(const StructNested& other) = default;
     StructNested(StructNested&& other) = default;
     ~StructNested() = default;
 
-    StructNested& operator=(const ::test::StructOptional& base) { ::test::StructOptional::operator=(base); return *this; }
     StructNested& operator=(const StructNested& other) = default;
     StructNested& operator=(StructNested&& other) = default;
 

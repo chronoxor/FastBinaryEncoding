@@ -46,14 +46,6 @@ func NewBalance() *Balance {
     }
 }
 
-// Create a new Balance struct from the given copy value
-func NewBalanceFromCopy(Other *Balance) *Balance {
-    return &Balance{
-        Currency: Other.Currency,
-        Amount: Other.Amount,
-    }
-}
-
 // Create a new Balance struct from the given field values
 func NewBalanceFromFieldValues(Currency string, Amount float64) *Balance {
     return &Balance{Currency, Amount}

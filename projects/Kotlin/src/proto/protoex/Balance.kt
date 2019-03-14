@@ -30,10 +30,6 @@ open class Balance : proto.Balance
         this.locked = locked
     }
 
-    constructor(parent: proto.Balance): super(parent)
-    {
-    }
-
     @Suppress("UNUSED_PARAMETER")
     constructor(other: Balance): super(other)
     {

@@ -1228,12 +1228,10 @@ struct Balance : public ::proto::Balance
         : ::proto::Balance(base)
         , locked(arg_locked)
     {}
-    Balance(const ::proto::Balance& base) : ::proto::Balance(base) {}
     Balance(const Balance& other) = default;
     Balance(Balance&& other) = default;
     ~Balance() = default;
 
-    Balance& operator=(const ::proto::Balance& base) { ::proto::Balance::operator=(base); return *this; }
     Balance& operator=(const Balance& other) = default;
     Balance& operator=(Balance&& other) = default;
 

@@ -61,22 +61,6 @@ func NewStructMap() *StructMap {
     }
 }
 
-// Create a new StructMap struct from the given copy value
-func NewStructMapFromCopy(Other *StructMap) *StructMap {
-    return &StructMap{
-        F1: Other.F1,
-        F2: Other.F2,
-        F3: Other.F3,
-        F4: Other.F4,
-        F5: Other.F5,
-        F6: Other.F6,
-        F7: Other.F7,
-        F8: Other.F8,
-        F9: Other.F9,
-        F10: Other.F10,
-    }
-}
-
 // Create a new StructMap struct from the given field values
 func NewStructMapFromFieldValues(F1 map[int32]byte, F2 map[int32]*byte, F3 map[int32][]byte, F4 map[int32]*[]byte, F5 map[int32]EnumSimple, F6 map[int32]*EnumSimple, F7 map[int32]FlagsSimple, F8 map[int32]*FlagsSimple, F9 map[int32]StructSimple, F10 map[int32]*StructSimple) *StructMap {
     return &StructMap{F1, F2, F3, F4, F5, F6, F7, F8, F9, F10}

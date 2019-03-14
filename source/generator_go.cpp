@@ -5496,65 +5496,6 @@ void GeneratorGo::GenerateStruct(const std::shared_ptr<Package>& p, const std::s
     Indent(-1);
     WriteLineIndent("}");
 
-    // Generate struct constructor from the given parent value
-    if (!base_type.empty())
-    {
-        WriteLine();
-        WriteLineIndent("// Create a new " + struct_name + " struct from the given parent value");
-        WriteLineIndent("func New" + struct_name + "FromParent(Parent *" + base_type + ") *" + struct_name + " {");
-        Indent(1);
-        WriteLineIndent("return &" + struct_name + "{");
-        Indent(1);
-        WriteLineIndent(ConvertBaseName(base_type) + ": " + ConvertNewName(base_type) + "FromCopy(Parent),");
-        if (s->body)
-        {
-            for (const auto& field : s->body->fields)
-            {
-                WriteIndent(ConvertToUpper(*field->name) + ": ");
-                if (field->value)
-                    Write(ConvertConstant(*field->type, *field->value, field->optional));
-                else
-                    Write(ConvertDefault(*field));
-                WriteLine(",");
-            }
-        }
-        Indent(-1);
-        WriteLineIndent("}");
-        Indent(-1);
-        WriteLineIndent("}");
-    }
-
-    // Generate struct copy constructor
-    WriteLine();
-    WriteLineIndent("// Create a new " + struct_name + " struct from the given copy value");
-    WriteLineIndent("func New" + struct_name + "FromCopy(Other *" + struct_name + ") *" + struct_name + " {");
-    Indent(1);
-    WriteLineIndent("return &" + struct_name + "{");
-    Indent(1);
-    if (!base_type.empty())
-        WriteLineIndent(ConvertBaseName(base_type) + ": " + ConvertNewName(base_type) + "FromCopy(Other." + ConvertBaseName(base_type) + "),");
-    if (s->body)
-    {
-        for (const auto& field : s->body->fields)
-        {
-            WriteIndent(ConvertToUpper(*field->name) + ": ");
-            if (!base_type.empty())
-            {
-                if (field->value)
-                    Write(ConvertConstant(*field->type, *field->value, field->optional));
-                else
-                    Write(ConvertDefault(*field));
-            }
-            else
-                Write("Other." + ConvertToUpper(*field->name));
-            WriteLine(",");
-        }
-    }
-    Indent(-1);
-    WriteLineIndent("}");
-    Indent(-1);
-    WriteLineIndent("}");
-
     // Generate struct constructor from the given field values
     WriteLine();
     WriteLineIndent("// Create a new " + struct_name + " struct from the given field values");

@@ -41,12 +41,6 @@ func NewStructEmpty() *StructEmpty {
     }
 }
 
-// Create a new StructEmpty struct from the given copy value
-func NewStructEmptyFromCopy(Other *StructEmpty) *StructEmpty {
-    return &StructEmpty{
-    }
-}
-
 // Create a new StructEmpty struct from the given field values
 func NewStructEmptyFromFieldValues() *StructEmpty {
     return &StructEmpty{}

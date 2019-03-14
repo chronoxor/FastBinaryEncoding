@@ -49,16 +49,6 @@ func NewStructSet() *StructSet {
     }
 }
 
-// Create a new StructSet struct from the given copy value
-func NewStructSetFromCopy(Other *StructSet) *StructSet {
-    return &StructSet{
-        F1: Other.F1,
-        F2: Other.F2,
-        F3: Other.F3,
-        F4: Other.F4,
-    }
-}
-
 // Create a new StructSet struct from the given field values
 func NewStructSetFromFieldValues(F1 setF1, F2 setF2, F3 setF3, F4 setF4) *StructSet {
     return &StructSet{F1, F2, F3, F4}

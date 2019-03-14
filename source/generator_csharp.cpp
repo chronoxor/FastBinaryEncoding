@@ -4755,20 +4755,6 @@ void GeneratorCSharp::GenerateStruct(const std::shared_ptr<Package>& p, const st
     Indent(-1);
     WriteLineIndent("};");
 
-    // Generate struct parent initialization constructor
-    if ((s->base && !s->base->empty()) && (s->body && !s->body->fields.empty()))
-    {
-        WriteLine();
-        WriteLineIndent("public " + *s->name + "(" + ConvertTypeName(*s->base, false) + " parent)");
-        WriteLineIndent("{");
-        Indent(1);
-        WriteLineIndent("this.parent = parent;");
-        for (const auto& field : s->body->fields)
-            WriteLineIndent("this." + *field->name + " = " + ConvertDefault(*field) + ";");
-        Indent(-1);
-        WriteLineIndent("}");
-    }
-
     // Generate struct initialization constructor
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {

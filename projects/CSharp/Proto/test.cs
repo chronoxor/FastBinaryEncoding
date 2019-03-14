@@ -4050,77 +4050,6 @@ namespace test {
             , f165 = null
         };
 
-        public StructOptional(StructSimple parent)
-        {
-            this.parent = parent;
-            this.f100 = null;
-            this.f101 = true;
-            this.f102 = null;
-            this.f103 = null;
-            this.f104 = (byte)255U;
-            this.f105 = null;
-            this.f106 = null;
-            this.f107 = (char)'!';
-            this.f108 = null;
-            this.f109 = null;
-            this.f110 = (char)0x0444;
-            this.f111 = null;
-            this.f112 = null;
-            this.f113 = (sbyte)127;
-            this.f114 = null;
-            this.f115 = null;
-            this.f116 = (byte)255U;
-            this.f117 = null;
-            this.f118 = null;
-            this.f119 = (short)32767;
-            this.f120 = null;
-            this.f121 = null;
-            this.f122 = (ushort)65535U;
-            this.f123 = null;
-            this.f124 = null;
-            this.f125 = (int)2147483647;
-            this.f126 = null;
-            this.f127 = null;
-            this.f128 = (uint)0xFFFFFFFFU;
-            this.f129 = null;
-            this.f130 = null;
-            this.f131 = (long)9223372036854775807L;
-            this.f132 = null;
-            this.f133 = null;
-            this.f134 = (ulong)0xFFFFFFFFFFFFFFFFUL;
-            this.f135 = null;
-            this.f136 = null;
-            this.f137 = (float)123.456F;
-            this.f138 = null;
-            this.f139 = null;
-            this.f140 = (double)-123.456e+123D;
-            this.f141 = null;
-            this.f142 = null;
-            this.f143 = (decimal)123456.123456M;
-            this.f144 = null;
-            this.f145 = null;
-            this.f146 = "Initial string!";
-            this.f147 = null;
-            this.f148 = null;
-            this.f149 = DateTime.UtcNow;
-            this.f150 = null;
-            this.f151 = null;
-            this.f152 = Guid.Parse("123e4567-e89b-12d3-a456-426655440000");
-            this.f153 = null;
-            this.f154 = null;
-            this.f155 = null;
-            this.f156 = null;
-            this.f157 = null;
-            this.f158 = null;
-            this.f159 = null;
-            this.f160 = null;
-            this.f161 = null;
-            this.f162 = null;
-            this.f163 = null;
-            this.f164 = null;
-            this.f165 = null;
-        }
-
         public StructOptional(StructSimple parent, bool? f100, bool? f101, bool? f102, byte? f103, byte? f104, byte? f105, char? f106, char? f107, char? f108, char? f109, char? f110, char? f111, sbyte? f112, sbyte? f113, sbyte? f114, byte? f115, byte? f116, byte? f117, short? f118, short? f119, short? f120, ushort? f121, ushort? f122, ushort? f123, int? f124, int? f125, int? f126, uint? f127, uint? f128, uint? f129, long? f130, long? f131, long? f132, ulong? f133, ulong? f134, ulong? f135, float? f136, float? f137, float? f138, double? f139, double? f140, double? f141, decimal? f142, decimal? f143, decimal? f144, string f145, string f146, string f147, DateTime? f148, DateTime? f149, DateTime? f150, Guid? f151, Guid? f152, Guid? f153, global::proto.OrderSide? f154, global::proto.OrderSide? f155, global::proto.OrderType? f156, global::proto.OrderType? f157, global::proto.Order? f158, global::proto.Order? f159, global::proto.Balance? f160, global::proto.Balance? f161, global::proto.State? f162, global::proto.State? f163, global::proto.Account? f164, global::proto.Account? f165)
         {
             this.parent = parent;
@@ -7236,23 +7165,6 @@ namespace test {
             , f1010 = StructOptional.Default
             , f1011 = null
         };
-
-        public StructNested(StructOptional parent)
-        {
-            this.parent = parent;
-            this.f1000 = EnumSimple.Default;
-            this.f1001 = null;
-            this.f1002 = EnumTyped.ENUM_VALUE_2;
-            this.f1003 = null;
-            this.f1004 = FlagsSimple.Default;
-            this.f1005 = null;
-            this.f1006 = FlagsTyped.FLAG_VALUE_2 | FlagsTyped.FLAG_VALUE_4 | FlagsTyped.FLAG_VALUE_6;
-            this.f1007 = null;
-            this.f1008 = StructSimple.Default;
-            this.f1009 = null;
-            this.f1010 = StructOptional.Default;
-            this.f1011 = null;
-        }
 
         public StructNested(StructOptional parent, EnumSimple f1000, EnumSimple? f1001, EnumTyped f1002, EnumTyped? f1003, FlagsSimple f1004, FlagsSimple? f1005, FlagsTyped f1006, FlagsTyped? f1007, StructSimple f1008, StructSimple? f1009, StructOptional f1010, StructOptional? f1011)
         {

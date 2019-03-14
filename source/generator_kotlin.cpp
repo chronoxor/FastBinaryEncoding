@@ -5021,16 +5021,6 @@ void GeneratorKotlin::GenerateStruct(const std::shared_ptr<Package>& p, const st
         WriteLineIndent("}");
     }
 
-    // Generate struct copy parent constructor
-    if (s->base && !s->base->empty())
-    {
-        WriteLine();
-        WriteIndent("constructor(parent: " + ConvertTypeName(*s->base, false) + ")");
-        WriteLine(": super(parent)");
-        WriteLineIndent("{");
-        WriteLineIndent("}");
-    }
-
     // Generate struct copy constructor
     WriteLine();
     WriteLineIndent("@Suppress(\"UNUSED_PARAMETER\")");

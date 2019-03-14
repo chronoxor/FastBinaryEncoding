@@ -160,10 +160,6 @@ open class StructOptional : StructSimple
         this.f165 = f165
     }
 
-    constructor(parent: StructSimple): super(parent)
-    {
-    }
-
     @Suppress("UNUSED_PARAMETER")
     constructor(other: StructOptional): super(other)
     {

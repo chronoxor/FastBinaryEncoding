@@ -1659,12 +1659,6 @@ namespace protoex {
             , locked = (double)0.0D
         };
 
-        public Balance(global::proto.Balance parent)
-        {
-            this.parent = parent;
-            this.locked = (double)0.0D;
-        }
-
         public Balance(global::proto.Balance parent, double locked)
         {
             this.parent = parent;

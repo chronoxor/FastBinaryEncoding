@@ -61,22 +61,6 @@ func NewStructVector() *StructVector {
     }
 }
 
-// Create a new StructVector struct from the given copy value
-func NewStructVectorFromCopy(Other *StructVector) *StructVector {
-    return &StructVector{
-        F1: Other.F1,
-        F2: Other.F2,
-        F3: Other.F3,
-        F4: Other.F4,
-        F5: Other.F5,
-        F6: Other.F6,
-        F7: Other.F7,
-        F8: Other.F8,
-        F9: Other.F9,
-        F10: Other.F10,
-    }
-}
-
 // Create a new StructVector struct from the given field values
 func NewStructVectorFromFieldValues(F1 []byte, F2 []*byte, F3 [][]byte, F4 []*[]byte, F5 []EnumSimple, F6 []*EnumSimple, F7 []FlagsSimple, F8 []*FlagsSimple, F9 []StructSimple, F10 []*StructSimple) *StructVector {
     return &StructVector{F1, F2, F3, F4, F5, F6, F7, F8, F9, F10}

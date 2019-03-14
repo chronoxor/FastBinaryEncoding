@@ -51,11 +51,6 @@ public class StructNested extends StructOptional
         this.f1011 = f1011;
     }
 
-    public StructNested(StructOptional parent)
-    {
-        super(parent);
-    }
-
     public StructNested(StructNested other)
     {
         super(other);
