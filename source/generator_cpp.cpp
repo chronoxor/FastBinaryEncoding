@@ -6160,7 +6160,7 @@ void GeneratorCpp::GenerateStruct(const std::shared_ptr<Package>& p, const std::
     }
 
     // Generate struct copy/mode constructor, destructor and assign operators
-    if (s->base && !s->base->empty())
+    if ((s->base && !s->base->empty()) && (s->body && !s->body->fields.empty()))
         WriteLineIndent(*s->name + "(const " + ConvertTypeName(*p->name, *s->base, false) + "& base) : " + ConvertTypeName(*p->name, *s->base, false) + "(base) {}");
     WriteLineIndent(*s->name + "(const " + *s->name + "& other) = default;");
     WriteLineIndent(*s->name + "(" + *s->name + "&& other) = default;");
