@@ -159,6 +159,11 @@ public class StructOptional extends StructSimple
         this.f165 = f165;
     }
 
+    public StructOptional(StructSimple parent)
+    {
+        super(parent);
+    }
+
     public StructOptional(StructOptional other)
     {
         super(other);

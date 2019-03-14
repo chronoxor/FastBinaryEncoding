@@ -2,70 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a777d28d-c4fb-4aae-88ff-091d764fff06" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/enums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/proto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/protoex.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../.NETCore/Proto/test.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/.idea/.idea.FastBinaryEncoding/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/enums.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/enums.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/proto.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CSharp/Proto/protoex.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/protoex.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CSharp/Proto/test.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../CSharp/Proto/test.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/enums/FinalProxy.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/enums/Proxy.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/enums/Proxy.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/FinalProxy.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/proto/Proxy.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/proto/Proxy.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/FinalProxy.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/Proxy.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/Proxy.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/test/FieldModelArrayBool.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/test/FinalProxy.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Go/proto/test/Proxy.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/Proxy.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/protoex/Balance.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/protoex/Balance.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/test/StructNested.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/StructNested.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Go/proto/test/StructOptional.go" beforeDir="false" afterPath="$PROJECT_DIR$/../Go/proto/test/StructOptional.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Java/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/FinalProxy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/Proxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/enums/fbe/Proxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/FinalProxy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/Proxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/proto/fbe/Proxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/FinalProxy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/Proxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/fbe/Proxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/FinalProxy.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/fbe/Proxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/fbe/Proxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/enums.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/enums.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/proto.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/proto.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/protoex.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/protoex.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../JavaScript/proto/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/../JavaScript/proto/test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/FinalProxy.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proto/enums/fbe/Proxy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/proto/enums/fbe/Proxy.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/FinalProxy.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proto/proto/fbe/Proxy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/proto/proto/fbe/Proxy.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/FinalProxy.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proto/protoex/fbe/Proxy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/proto/protoex/fbe/Proxy.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/FinalProxy.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/proto/test/fbe/Proxy.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/proto/test/fbe/Proxy.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/enums.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/enums.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/proto.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/proto.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/protoex.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/protoex.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python/proto/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python/proto/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/enums.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/enums.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/proto.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/proto.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/protoex.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/protoex.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Ruby/proto/test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/../Ruby/proto/test.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/enums.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/enums.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../proto/proto.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/proto.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/protoex/Balance.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/protoex/Balance.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructNested.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/StructNested.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Java/src/proto/test/StructOptional.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Java/src/proto/test/StructOptional.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/protoex/Balance.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/proto/protoex/Balance.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructNested.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/proto/test/StructNested.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/proto/test/StructOptional.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/proto/test/StructOptional.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../proto/protoex.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/protoex.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../proto/test.h" beforeDir="false" afterPath="$PROJECT_DIR$/../../proto/test.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_cpp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_cpp.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_csharp.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_csharp.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_go.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_go.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_java.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_java.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_javascript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_javascript.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_kotlin.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_python.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_python.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../source/generator_ruby.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../../source/generator_ruby.cpp" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -164,7 +121,6 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -181,6 +137,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -189,7 +146,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551896411982" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552521505137" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -364,13 +321,11 @@
       <workItem from="1551807255993" duration="107000" />
       <workItem from="1551874816019" duration="125000" />
       <workItem from="1551896070846" duration="364000" />
+      <workItem from="1552521339965" duration="182000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="_default_ - 2019.02.22 at 02h 32m 37s.xml">
-      <configuration name="&lt;default&gt;" configurationId="TestNG" />
-    </history-entry>
     <history-entry file="_default_ - 2019.02.22 at 02h 37m 27s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
@@ -398,9 +353,12 @@
     <history-entry file="_default_ - 2019.03.06 at 21h 20m 05s.xml">
       <configuration name="&lt;default&gt;" configurationId="TestNG" />
     </history-entry>
+    <history-entry file="_default_ - 2019.03.14 at 02h 58m 33s.xml">
+      <configuration name="&lt;default&gt;" configurationId="TestNG" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83047000" />
+    <option name="totallyTimeSpent" value="83229000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -414,7 +372,7 @@
   <component name="ToolWindowManager">
     <frame x="470" y="225" width="1564" height="944" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2706117" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27393618" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -423,14 +381,14 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.55851066" weight="0.41553637" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.5578458" weight="0.41553637" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4912068" weight="0.39711663" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49909034" weight="0.32891247" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32891247" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.44148937" side_tool="true" visible="true" weight="0.41553637" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.44215426" side_tool="true" visible="true" weight="0.41553637" />
       <window_info anchor="bottom" id="Version Control" order="10" show_stripe_button="false" />
       <window_info anchor="bottom" id="JProfiler" order="11" />
       <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.39613122" weight="0.34621578" />

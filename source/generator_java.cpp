@@ -5064,6 +5064,18 @@ void GeneratorJava::GenerateStruct(const std::shared_ptr<Package>& p, const std:
         WriteLineIndent("}");
     }
 
+    // Generate struct copy parent constructor
+    if (s->base && !s->base->empty())
+    {
+        WriteLine();
+        WriteLineIndent("public " + *s->name + "(" + ConvertTypeName(*s->base, false) +" parent)");
+        WriteLineIndent("{");
+        Indent(1);
+        WriteLineIndent("super(parent);");
+        Indent(-1);
+        WriteLineIndent("}");
+    }
+
     // Generate struct copy constructor
     WriteLine();
     WriteLineIndent("public " + *s->name + "(" + *s->name +" other)");

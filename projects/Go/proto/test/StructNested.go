@@ -69,6 +69,44 @@ func NewStructNested() *StructNested {
     }
 }
 
+// Create a new StructNested struct from the given parent value
+func NewStructNestedFromParent(Parent *StructOptional) *StructNested {
+    return &StructNested{
+        StructOptional: NewStructOptionalFromCopy(Parent),
+        F1000: *NewEnumSimple(),
+        F1001: nil,
+        F1002: EnumTyped_ENUM_VALUE_2,
+        F1003: nil,
+        F1004: *NewFlagsSimple(),
+        F1005: nil,
+        F1006: FlagsTyped_FLAG_VALUE_2 | FlagsTyped_FLAG_VALUE_4 | FlagsTyped_FLAG_VALUE_6,
+        F1007: nil,
+        F1008: *NewStructSimple(),
+        F1009: nil,
+        F1010: *NewStructOptional(),
+        F1011: nil,
+    }
+}
+
+// Create a new StructNested struct from the given copy value
+func NewStructNestedFromCopy(Other *StructNested) *StructNested {
+    return &StructNested{
+        StructOptional: NewStructOptionalFromCopy(Other.StructOptional),
+        F1000: *NewEnumSimple(),
+        F1001: nil,
+        F1002: EnumTyped_ENUM_VALUE_2,
+        F1003: nil,
+        F1004: *NewFlagsSimple(),
+        F1005: nil,
+        F1006: FlagsTyped_FLAG_VALUE_2 | FlagsTyped_FLAG_VALUE_4 | FlagsTyped_FLAG_VALUE_6,
+        F1007: nil,
+        F1008: *NewStructSimple(),
+        F1009: nil,
+        F1010: *NewStructOptional(),
+        F1011: nil,
+    }
+}
+
 // Create a new StructNested struct from the given field values
 func NewStructNestedFromFieldValues(Parent *StructOptional, F1000 EnumSimple, F1001 *EnumSimple, F1002 EnumTyped, F1003 *EnumTyped, F1004 FlagsSimple, F1005 *FlagsSimple, F1006 FlagsTyped, F1007 *FlagsTyped, F1008 StructSimple, F1009 *StructSimple, F1010 StructOptional, F1011 *StructOptional) *StructNested {
     return &StructNested{Parent, F1000, F1001, F1002, F1003, F1004, F1005, F1006, F1007, F1008, F1009, F1010, F1011}

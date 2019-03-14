@@ -47,6 +47,15 @@ func NewStructBytes() *StructBytes {
     }
 }
 
+// Create a new StructBytes struct from the given copy value
+func NewStructBytesFromCopy(Other *StructBytes) *StructBytes {
+    return &StructBytes{
+        F1: Other.F1,
+        F2: Other.F2,
+        F3: Other.F3,
+    }
+}
+
 // Create a new StructBytes struct from the given field values
 func NewStructBytesFromFieldValues(F1 []byte, F2 *[]byte, F3 *[]byte) *StructBytes {
     return &StructBytes{F1, F2, F3}

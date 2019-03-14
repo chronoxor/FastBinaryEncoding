@@ -134,6 +134,57 @@ func NewStructSimple() *StructSimple {
     }
 }
 
+// Create a new StructSimple struct from the given copy value
+func NewStructSimpleFromCopy(Other *StructSimple) *StructSimple {
+    return &StructSimple{
+        Id: Other.Id,
+        F1: Other.F1,
+        F2: Other.F2,
+        F3: Other.F3,
+        F4: Other.F4,
+        F5: Other.F5,
+        F6: Other.F6,
+        F7: Other.F7,
+        F8: Other.F8,
+        F9: Other.F9,
+        F10: Other.F10,
+        F11: Other.F11,
+        F12: Other.F12,
+        F13: Other.F13,
+        F14: Other.F14,
+        F15: Other.F15,
+        F16: Other.F16,
+        F17: Other.F17,
+        F18: Other.F18,
+        F19: Other.F19,
+        F20: Other.F20,
+        F21: Other.F21,
+        F22: Other.F22,
+        F23: Other.F23,
+        F24: Other.F24,
+        F25: Other.F25,
+        F26: Other.F26,
+        F27: Other.F27,
+        F28: Other.F28,
+        F29: Other.F29,
+        F30: Other.F30,
+        F31: Other.F31,
+        F32: Other.F32,
+        F33: Other.F33,
+        F34: Other.F34,
+        F35: Other.F35,
+        F36: Other.F36,
+        F37: Other.F37,
+        F38: Other.F38,
+        F39: Other.F39,
+        F40: Other.F40,
+        F41: Other.F41,
+        F42: Other.F42,
+        F43: Other.F43,
+        F44: Other.F44,
+    }
+}
+
 // Create a new StructSimple struct from the given field values
 func NewStructSimpleFromFieldValues(Id int32, F1 bool, F2 bool, F3 byte, F4 byte, F5 rune, F6 rune, F7 rune, F8 rune, F9 int8, F10 int8, F11 uint8, F12 uint8, F13 int16, F14 int16, F15 uint16, F16 uint16, F17 int32, F18 int32, F19 uint32, F20 uint32, F21 int64, F22 int64, F23 uint64, F24 uint64, F25 float32, F26 float32, F27 float64, F28 float64, F29 fbe.Decimal, F30 fbe.Decimal, F31 string, F32 string, F33 fbe.Timestamp, F34 fbe.Timestamp, F35 fbe.Timestamp, F36 fbe.UUID, F37 fbe.UUID, F38 fbe.UUID, F39 proto.OrderSide, F40 proto.OrderType, F41 proto.Order, F42 proto.Balance, F43 proto.State, F44 proto.Account) *StructSimple {
     return &StructSimple{Id, F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12, F13, F14, F15, F16, F17, F18, F19, F20, F21, F22, F23, F24, F25, F26, F27, F28, F29, F30, F31, F32, F33, F34, F35, F36, F37, F38, F39, F40, F41, F42, F43, F44}

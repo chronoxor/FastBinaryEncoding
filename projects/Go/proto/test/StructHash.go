@@ -61,6 +61,22 @@ func NewStructHash() *StructHash {
     }
 }
 
+// Create a new StructHash struct from the given copy value
+func NewStructHashFromCopy(Other *StructHash) *StructHash {
+    return &StructHash{
+        F1: Other.F1,
+        F2: Other.F2,
+        F3: Other.F3,
+        F4: Other.F4,
+        F5: Other.F5,
+        F6: Other.F6,
+        F7: Other.F7,
+        F8: Other.F8,
+        F9: Other.F9,
+        F10: Other.F10,
+    }
+}
+
 // Create a new StructHash struct from the given field values
 func NewStructHashFromFieldValues(F1 map[string]byte, F2 map[string]*byte, F3 map[string][]byte, F4 map[string]*[]byte, F5 map[string]EnumSimple, F6 map[string]*EnumSimple, F7 map[string]FlagsSimple, F8 map[string]*FlagsSimple, F9 map[string]StructSimple, F10 map[string]*StructSimple) *StructHash {
     return &StructHash{F1, F2, F3, F4, F5, F6, F7, F8, F9, F10}

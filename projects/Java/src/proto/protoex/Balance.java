@@ -29,6 +29,11 @@ public class Balance extends proto.Balance
         this.locked = locked;
     }
 
+    public Balance(proto.Balance parent)
+    {
+        super(parent);
+    }
+
     public Balance(Balance other)
     {
         super(other);

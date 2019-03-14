@@ -47,6 +47,22 @@ func NewBalance() *Balance {
     }
 }
 
+// Create a new Balance struct from the given parent value
+func NewBalanceFromParent(Parent *proto.Balance) *Balance {
+    return &Balance{
+        Balance: proto.NewBalanceFromCopy(Parent),
+        Locked: float64(0.0),
+    }
+}
+
+// Create a new Balance struct from the given copy value
+func NewBalanceFromCopy(Other *Balance) *Balance {
+    return &Balance{
+        Balance: proto.NewBalanceFromCopy(Other.Balance),
+        Locked: float64(0.0),
+    }
+}
+
 // Create a new Balance struct from the given field values
 func NewBalanceFromFieldValues(Parent *proto.Balance, Locked float64) *Balance {
     return &Balance{Parent, Locked}

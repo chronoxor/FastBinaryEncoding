@@ -56,6 +56,18 @@ func NewAccount() *Account {
     }
 }
 
+// Create a new Account struct from the given copy value
+func NewAccountFromCopy(Other *Account) *Account {
+    return &Account{
+        Id: Other.Id,
+        Name: Other.Name,
+        State: Other.State,
+        Wallet: Other.Wallet,
+        Asset: Other.Asset,
+        Orders: Other.Orders,
+    }
+}
+
 // Create a new Account struct from the given field values
 func NewAccountFromFieldValues(Id int32, Name string, State StateEx, Wallet Balance, Asset *Balance, Orders []Order) *Account {
     return &Account{Id, Name, State, Wallet, Asset, Orders}

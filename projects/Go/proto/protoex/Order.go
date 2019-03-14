@@ -60,6 +60,20 @@ func NewOrder() *Order {
     }
 }
 
+// Create a new Order struct from the given copy value
+func NewOrderFromCopy(Other *Order) *Order {
+    return &Order{
+        Id: Other.Id,
+        Symbol: Other.Symbol,
+        Side: Other.Side,
+        Type: Other.Type,
+        Price: Other.Price,
+        Volume: Other.Volume,
+        Tp: Other.Tp,
+        Sl: Other.Sl,
+    }
+}
+
 // Create a new Order struct from the given field values
 func NewOrderFromFieldValues(Id int32, Symbol string, Side OrderSide, Type OrderType, Price float64, Volume float64, Tp float64, Sl float64) *Order {
     return &Order{Id, Symbol, Side, Type, Price, Volume, Tp, Sl}
