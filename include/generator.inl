@@ -20,7 +20,8 @@ inline Generator::Generator(const std::string& input, const std::string& output,
 inline void Generator::Open(const CppCommon::Path& filename)
 {
     // Take a write file-lock
-    _lock = filename + ".lock";
+    while (!_lock.Assign(filename + ".lock"))
+        CppCommon::Thread::Yield();
     _lock.LockWrite();
 
     _cursor = 0;

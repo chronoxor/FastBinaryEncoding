@@ -15916,7 +15916,7 @@ namespace test {
 // Fast Binary Encoding test sender
 template <class TBuffer>
 class Sender : public virtual FBE::Sender<TBuffer>
-    , public proto::Sender<TBuffer>
+    , public virtual proto::Sender<TBuffer>
 
 {
 public:
@@ -15940,6 +15940,9 @@ public:
 
     Sender& operator=(const Sender&) = default;
     Sender& operator=(Sender&&) noexcept = default;
+    // Imported senders
+    proto::Sender<TBuffer>& proto() noexcept { return *this; }
+
 
     size_t send(const ::test::StructSimple& value)
     {
@@ -16182,7 +16185,7 @@ namespace test {
 // Fast Binary Encoding test receiver
 template <class TBuffer>
 class Receiver : public virtual FBE::Receiver<TBuffer>
-    , public proto::Receiver<TBuffer>
+    , public virtual proto::Receiver<TBuffer>
 
 {
 public:
@@ -16489,7 +16492,7 @@ namespace test {
 // Fast Binary Encoding test proxy
 template <class TBuffer>
 class Proxy : public virtual FBE::Receiver<TBuffer>
-    , public proto::Proxy<TBuffer>
+    , public virtual proto::Proxy<TBuffer>
 
 {
 public:
@@ -16722,7 +16725,7 @@ namespace test {
 // Fast Binary Encoding test final sender
 template <class TBuffer>
 class FinalSender : public virtual FBE::Sender<TBuffer>
-    , public proto::FinalSender<TBuffer>
+    , public virtual proto::FinalSender<TBuffer>
 
 {
 public:
@@ -16746,6 +16749,9 @@ public:
 
     FinalSender& operator=(const FinalSender&) = default;
     FinalSender& operator=(FinalSender&&) noexcept = default;
+    // Imported senders
+    proto::FinalSender<TBuffer>& proto() noexcept { return *this; }
+
 
     size_t send(const ::test::StructSimple& value)
     {
@@ -16988,7 +16994,7 @@ namespace test {
 // Fast Binary Encoding test final receiver
 template <class TBuffer>
 class FinalReceiver : public virtual FBE::Receiver<TBuffer>
-    , public proto::FinalReceiver<TBuffer>
+    , public virtual proto::FinalReceiver<TBuffer>
 
 {
 public:
