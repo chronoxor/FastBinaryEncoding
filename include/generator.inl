@@ -19,6 +19,10 @@ inline Generator::Generator(const std::string& input, const std::string& output,
 
 inline void Generator::Open(const CppCommon::Path& filename)
 {
+    // Take a write file-lock
+    _lock = filename + ".lock";
+    _lock.LockWrite();
+
     _cursor = 0;
     _file = filename;
     _file.OpenOrCreate(false, true, true);
@@ -62,6 +66,10 @@ inline void Generator::WriteLineIndent(const std::string& str)
 inline void Generator::Close()
 {
     _file.Close();
+
+    // Release the write file-lock
+    _lock.UnlockWrite();
+    _lock.Reset();
 }
 
 inline void Generator::Indent(int count)

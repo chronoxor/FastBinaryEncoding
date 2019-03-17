@@ -22,6 +22,7 @@ public:
 
 protected:
     CppCommon::File _file;
+    CppCommon::FileLock _lock;
     std::string _input;
     std::string _output;
     int _cursor;
