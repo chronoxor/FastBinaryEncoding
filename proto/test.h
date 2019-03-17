@@ -15940,9 +15940,9 @@ public:
 
     Sender& operator=(const Sender&) = default;
     Sender& operator=(Sender&&) noexcept = default;
-    // Imported senders
-    proto::Sender<TBuffer>& proto() noexcept { return *this; }
 
+    // Imported senders
+    proto::Sender<TBuffer>& proto_sender() noexcept { return *this; }
 
     size_t send(const ::test::StructSimple& value)
     {
@@ -16749,9 +16749,9 @@ public:
 
     FinalSender& operator=(const FinalSender&) = default;
     FinalSender& operator=(FinalSender&&) noexcept = default;
-    // Imported senders
-    proto::FinalSender<TBuffer>& proto() noexcept { return *this; }
 
+    // Imported senders
+    proto::FinalSender<TBuffer>& proto_sender() noexcept { return *this; }
 
     size_t send(const ::test::StructSimple& value)
     {

@@ -17,7 +17,6 @@
 #include "system/environment.h"
 #include "system/stream.h"
 #include "threads/file_lock.h"
-#include "threads/thread.h"
 
 #include <algorithm>
 #include <cstdint>

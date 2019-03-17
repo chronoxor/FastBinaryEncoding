@@ -7566,10 +7566,10 @@ void GeneratorCpp::GenerateSender(const std::shared_ptr<Package>& p, bool final)
     // Generate imported senders accessors
     if (p->import)
     {
+        WriteLine();
         WriteLineIndent("// Imported senders");
         for (const auto& import : p->import->imports)
-            WriteLineIndent(*import + "::" + sender + "<TBuffer>& " + *import + "() noexcept { return *this; }");
-        WriteLine();
+            WriteLineIndent(*import + "::" + sender + "<TBuffer>& " + *import + "_sender() noexcept { return *this; }");
     }
 
     // Generate send() methods
