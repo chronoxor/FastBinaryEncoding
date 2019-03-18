@@ -144,14 +144,14 @@ vs.bat
 ```
 
 # Create domain model
-The first step you should perform to use Fast Binary Encoding is to provide
-a domain model (aka business objects). Domain model is a set of enums, flags
-and structures that related to each other and might be aggregated in some
+To use Fast Binary Encoding you should provide
+a domain model (aka business objects). A domain model is a set of enums, flags
+and structures that relate to each other and might be aggregated in some
 hierarchy.
 
 [Fast Binary Encoding (FBE) format specification](documents/FBE.md)
 
-There is an [sample domain model](https://github.com/chronoxor/FastBinaryEncoding/blob/master/proto/proto.fbe)
+There is a [sample domain model](https://github.com/chronoxor/FastBinaryEncoding/blob/master/proto/proto.fbe)
 which describes Account-Balance-Orders relation of some abstract trading
 platform:
 
@@ -255,9 +255,9 @@ Options:
 ```
 
 # Build domain model
-Generated domain model is represented with source code for particular language.
-Just add it to your project and build it. However there are several issues and
-dependencies that worth to be mentioned:
+Generated domain model is represented with source code for the particular language.
+Just add it to your project and build it. 
+There are several issues and dependencies that should be mentioned:
 
 ### C++
 * C++ standard is limited to C++17 in order to have the implementation of
