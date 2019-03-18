@@ -67,13 +67,16 @@ public:
 
     buffer_t() = default;
     buffer_t(size_t capacity) { reserve(capacity); }
-    buffer_t(size_t size, uint8_t value) { resize(size, value); }
+    buffer_t(const std::string& str) { assign(str); }
+    buffer_t(size_t size, uint8_t value) { assign(size, value); }
+    buffer_t(const uint8_t* data, size_t size) { assign(data, size); }
     buffer_t(const std::vector<uint8_t>& other) : _data(other) {}
     buffer_t(std::vector<uint8_t>&& other) : _data(std::move(other)) {}
     buffer_t(const buffer_t& other) = default;
     buffer_t(buffer_t&& other) = default;
     ~buffer_t() = default;
 
+    buffer_t& operator=(const std::string& str) { assign(str); return *this; }
     buffer_t& operator=(const std::vector<uint8_t>& other) { _data = other; return *this; }
     buffer_t& operator=(std::vector<uint8_t>&& other) { _data = std::move(other); return *this; }
     buffer_t& operator=(const buffer_t& other) = default;
@@ -102,11 +105,15 @@ public:
     void resize(size_t size, uint8_t value = 0) { _data.resize(size, value); }
     void shrink_to_fit() { _data.shrink_to_fit(); }
 
+    void assign(const std::string& str) { assign((const uint8_t*)str.c_str(), str.size()); }
+    void assign(size_t size, uint8_t value) { _data.assign(size, value); }
+    void assign(const uint8_t* data, size_t size) { _data.assign(data, data + size); }
     template <class InputIterator>
     void assign(InputIterator first, InputIterator last) { _data.assign(first, last); }
-    void assign(size_t size, uint8_t value) { _data.assign(size, value); }
     iterator insert(const_iterator position, uint8_t value) { return _data.insert(position, value); }
+    iterator insert(const_iterator position, const std::string& str) { return insert(position, (const uint8_t*)str.c_str(), str.size()); }
     iterator insert(const_iterator position, size_t size, uint8_t value) { return _data.insert(position, size, value); }
+    iterator insert(const_iterator position, const uint8_t* data, size_t size) { return _data.insert(position, data, data + size); }
     template <class InputIterator>
     iterator insert(const_iterator position, InputIterator first, InputIterator last) { return _data.insert(position, first, last); }
     iterator erase(const_iterator position) { return _data.erase(position); }
