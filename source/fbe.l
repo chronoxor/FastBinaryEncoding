@@ -169,22 +169,22 @@ int main(int argc, char** argv)
 {
     auto parser = optparse::OptionParser().version(FBE::version);
 
-    parser.add_option("-i", "--input").help("Input path");
-    parser.add_option("-o", "--output").help("Output path");
-    parser.add_option("-q", "--quiet").action("store_true").help("Launch in quiet mode. No progress will be shown!");
-    parser.add_option("-n", "--indent").action("store").type("int").set_default(0).help("Format indent. Default: %default");
-    parser.add_option("-t", "--tabs").action("store_true").set_default(0).help("Format with tabs. Default: off");
-    parser.add_option("--cpp").action("store_true").set_default(0).help("Generate C++ code");
-    parser.add_option("--csharp").action("store_true").set_default(0).help("Generate C# code");
-    parser.add_option("--go").action("store_true").set_default(0).help("Generate Go code");
-    parser.add_option("--java").action("store_true").set_default(0).help("Generate Java code");
-    parser.add_option("--javascript").action("store_true").set_default(0).help("Generate JavaScript code");
-    parser.add_option("--kotlin").action("store_true").set_default(0).help("Generate Kotlin code");
-    parser.add_option("--python").action("store_true").set_default(0).help("Generate Python code");
-    parser.add_option("--ruby").action("store_true").set_default(0).help("Generate Ruby code");
-    parser.add_option("--final").action("store_true").set_default(0).help("Generate Final protocol code");
-    parser.add_option("--json").action("store_true").set_default(0).help("Generate JSON protocol code");
-    parser.add_option("--sender").action("store_true").set_default(0).help("Generate Sender/Receiver protocol code");
+    parser.add_option("-i", "--input").dest("input").help("Input path");
+    parser.add_option("-o", "--output").dest("output").help("Output path");
+    parser.add_option("-q", "--quiet").dest("quiet").action("store_true").help("Launch in quiet mode. No progress will be shown!");
+    parser.add_option("-n", "--indent").dest("indent").action("store").type("int").set_default(0).help("Format indent. Default: %default");
+    parser.add_option("-t", "--tabs").dest("tabs").action("store_true").set_default(0).help("Format with tabs. Default: off");
+    parser.add_option("--cpp").dest("cpp").action("store_true").set_default(0).help("Generate C++ code");
+    parser.add_option("--csharp").dest("csharp").action("store_true").set_default(0).help("Generate C# code");
+    parser.add_option("--go").dest("go").action("store_true").set_default(0).help("Generate Go code");
+    parser.add_option("--java").dest("java").action("store_true").set_default(0).help("Generate Java code");
+    parser.add_option("--javascript").dest("javascript").action("store_true").set_default(0).help("Generate JavaScript code");
+    parser.add_option("--kotlin").dest("kotlin").action("store_true").set_default(0).help("Generate Kotlin code");
+    parser.add_option("--python").dest("python").action("store_true").set_default(0).help("Generate Python code");
+    parser.add_option("--ruby").dest("ruby").action("store_true").set_default(0).help("Generate Ruby code");
+    parser.add_option("--final").dest("final").action("store_true").set_default(0).help("Generate Final protocol code");
+    parser.add_option("--json").dest("json").action("store_true").set_default(0).help("Generate JSON protocol code");
+    parser.add_option("--sender").dest("sender").action("store_true").set_default(0).help("Generate Sender/Receiver protocol code");
 
     optparse::Values options = parser.parse_args(argc, argv);
 
