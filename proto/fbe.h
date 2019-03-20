@@ -143,6 +143,14 @@ public:
     const_reverse_iterator rend() const noexcept { return _data.rend(); }
     const_reverse_iterator crend() const noexcept { return _data.crend(); }
 
+    //! Get the string equivalent from the bytes buffer
+    std::string string() const { return std::string(_data.begin(), _data.end()); }
+
+    //! Encode the Base64 string from the bytes buffer
+    std::string base64encode() const;
+    //! Decode the bytes buffer from the Base64 string
+    static buffer_t base64decode(const std::string& str);
+
     //! Swap two instances
     void swap(buffer_t& value) noexcept
     { using std::swap; swap(_data, value._data); }
@@ -152,6 +160,60 @@ public:
 private:
     std::vector<uint8_t> _data;
 };
+
+inline std::string buffer_t::base64encode() const
+{
+    std::string result;
+
+    int val = 0;
+    int valb = -6;
+    for (auto c : _data)
+    {
+        val = (val << 8) + c;
+        valb += 8;
+        while (valb >= 0)
+        {
+            result.push_back("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"[(val >> valb) & 0x3F]);
+            valb -= 6;
+        }
+    }
+
+    if (valb > -6)
+        result.push_back("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"[((val << 8) >> (valb + 8)) & 0x3F]);
+
+    while (result.size() % 4)
+        result.push_back('=');
+
+    return result;
+}
+
+inline buffer_t buffer_t::base64decode(const std::string& str)
+{
+    buffer_t result;
+
+    std::vector<int> T(256,-1);
+    for (int i=0; i < 64; ++i)
+        T["ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"[i]] = i;
+
+    int val = 0;
+    int valb = -8;
+    for (auto c : str)
+    {
+        if (T[c] == -1)
+            break;
+
+        val = (val << 6) + T[c];
+        valb += 6;
+
+        if (valb >= 0)
+        {
+            result.push_back((uint8_t)((val >> valb) & 0xFF));
+            valb -= 8;
+        }
+    }
+
+    return result;
+}
 
 //! Decimal type
 /*!
@@ -4426,28 +4488,7 @@ struct ValueWriter<TOutputStream, buffer_t>
 {
     static bool to_json(rapidjson::Writer<TOutputStream>& writer, const buffer_t& values, bool scope = true)
     {
-        std::string base64;
-
-        int val = 0;
-        int valb = -6;
-        for (auto c : values)
-        {
-            val = (val << 8) + c;
-            valb += 8;
-            while (valb >= 0)
-            {
-                base64.push_back("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"[(val >> valb) & 0x3F]);
-                valb -= 6;
-            }
-        }
-
-        if (valb > -6)
-            base64.push_back("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"[((val << 8) >> (valb + 8)) & 0x3F]);
-
-        while (base64.size() % 4)
-            base64.push_back('=');
-
-        return writer.String(base64);
+        return writer.String(values.base64encode());
     }
 };
 
@@ -4948,35 +4989,12 @@ struct ValueReader<TJson, buffer_t>
 {
     static bool from_json(const TJson& json, buffer_t& value)
     {
-        value.clear();
-
         // Schema validation
         if (json.IsNull() || !json.IsString())
             return false;
 
-        std::string base64(json.GetString(), (size_t)json.GetStringLength());
-
-        std::vector<int> T(256,-1);
-        for (int i=0; i < 64; ++i)
-            T["ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"[i]] = i;
-
-        int val = 0;
-        int valb = -8;
-        for (auto c : base64)
-        {
-            if (T[c] == -1)
-                break;
-
-            val = (val << 6) + T[c];
-            valb += 6;
-
-            if (valb >= 0)
-            {
-                value.push_back((uint8_t)((val >> valb) & 0xFF));
-                valb -= 8;
-            }
-        }
-
+        std::string str(json.GetString(), (size_t)json.GetStringLength());
+        value = buffer_t::base64decode(str);
         return true;
     }
 };
