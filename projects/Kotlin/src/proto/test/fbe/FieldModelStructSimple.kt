@@ -566,9 +566,9 @@ class FieldModelStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         fbeCurrentSize += f3.fbeSize
 
         if ((fbeCurrentSize + f4.fbeSize) <= fbeStructSize)
-            fbeValue.f4 = f4.get(255.toByte())
+            fbeValue.f4 = f4.get(UByte.MAX_VALUE)
         else
-            fbeValue.f4 = 255.toByte()
+            fbeValue.f4 = UByte.MAX_VALUE
         fbeCurrentSize += f4.fbeSize
 
         if ((fbeCurrentSize + f5.fbeSize) <= fbeStructSize)
@@ -602,21 +602,21 @@ class FieldModelStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         fbeCurrentSize += f9.fbeSize
 
         if ((fbeCurrentSize + f10.fbeSize) <= fbeStructSize)
-            fbeValue.f10 = f10.get(127)
+            fbeValue.f10 = f10.get(Byte.MAX_VALUE)
         else
-            fbeValue.f10 = 127
+            fbeValue.f10 = Byte.MAX_VALUE
         fbeCurrentSize += f10.fbeSize
 
         if ((fbeCurrentSize + f11.fbeSize) <= fbeStructSize)
-            fbeValue.f11 = f11.get()
+            fbeValue.f11 = f11.get(UByte.MIN_VALUE)
         else
-            fbeValue.f11 = 0.toUByte()
+            fbeValue.f11 = UByte.MIN_VALUE
         fbeCurrentSize += f11.fbeSize
 
         if ((fbeCurrentSize + f12.fbeSize) <= fbeStructSize)
-            fbeValue.f12 = f12.get(255u)
+            fbeValue.f12 = f12.get(UByte.MAX_VALUE)
         else
-            fbeValue.f12 = 255u
+            fbeValue.f12 = UByte.MAX_VALUE
         fbeCurrentSize += f12.fbeSize
 
         if ((fbeCurrentSize + f13.fbeSize) <= fbeStructSize)
@@ -626,21 +626,21 @@ class FieldModelStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         fbeCurrentSize += f13.fbeSize
 
         if ((fbeCurrentSize + f14.fbeSize) <= fbeStructSize)
-            fbeValue.f14 = f14.get(32767)
+            fbeValue.f14 = f14.get(Short.MAX_VALUE)
         else
-            fbeValue.f14 = 32767
+            fbeValue.f14 = Short.MAX_VALUE
         fbeCurrentSize += f14.fbeSize
 
         if ((fbeCurrentSize + f15.fbeSize) <= fbeStructSize)
-            fbeValue.f15 = f15.get()
+            fbeValue.f15 = f15.get(UShort.MIN_VALUE)
         else
-            fbeValue.f15 = 0.toUShort()
+            fbeValue.f15 = UShort.MIN_VALUE
         fbeCurrentSize += f15.fbeSize
 
         if ((fbeCurrentSize + f16.fbeSize) <= fbeStructSize)
-            fbeValue.f16 = f16.get(65535u)
+            fbeValue.f16 = f16.get(UShort.MAX_VALUE)
         else
-            fbeValue.f16 = 65535u
+            fbeValue.f16 = UShort.MAX_VALUE
         fbeCurrentSize += f16.fbeSize
 
         if ((fbeCurrentSize + f17.fbeSize) <= fbeStructSize)
@@ -650,21 +650,21 @@ class FieldModelStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         fbeCurrentSize += f17.fbeSize
 
         if ((fbeCurrentSize + f18.fbeSize) <= fbeStructSize)
-            fbeValue.f18 = f18.get(2147483647)
+            fbeValue.f18 = f18.get(Int.MAX_VALUE)
         else
-            fbeValue.f18 = 2147483647
+            fbeValue.f18 = Int.MAX_VALUE
         fbeCurrentSize += f18.fbeSize
 
         if ((fbeCurrentSize + f19.fbeSize) <= fbeStructSize)
-            fbeValue.f19 = f19.get()
+            fbeValue.f19 = f19.get(UInt.MIN_VALUE)
         else
-            fbeValue.f19 = 0u
+            fbeValue.f19 = UInt.MIN_VALUE
         fbeCurrentSize += f19.fbeSize
 
         if ((fbeCurrentSize + f20.fbeSize) <= fbeStructSize)
-            fbeValue.f20 = f20.get(0xFFFFFFFFu)
+            fbeValue.f20 = f20.get(UInt.MAX_VALUE)
         else
-            fbeValue.f20 = 0xFFFFFFFFu
+            fbeValue.f20 = UInt.MAX_VALUE
         fbeCurrentSize += f20.fbeSize
 
         if ((fbeCurrentSize + f21.fbeSize) <= fbeStructSize)
@@ -674,21 +674,21 @@ class FieldModelStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         fbeCurrentSize += f21.fbeSize
 
         if ((fbeCurrentSize + f22.fbeSize) <= fbeStructSize)
-            fbeValue.f22 = f22.get(9223372036854775807L)
+            fbeValue.f22 = f22.get(Long.MAX_VALUE)
         else
-            fbeValue.f22 = 9223372036854775807L
+            fbeValue.f22 = Long.MAX_VALUE
         fbeCurrentSize += f22.fbeSize
 
         if ((fbeCurrentSize + f23.fbeSize) <= fbeStructSize)
-            fbeValue.f23 = f23.get()
+            fbeValue.f23 = f23.get(ULong.MIN_VALUE)
         else
-            fbeValue.f23 = 0uL
+            fbeValue.f23 = ULong.MIN_VALUE
         fbeCurrentSize += f23.fbeSize
 
         if ((fbeCurrentSize + f24.fbeSize) <= fbeStructSize)
-            fbeValue.f24 = f24.get(0xFFFFFFFFFFFFFFFFuL)
+            fbeValue.f24 = f24.get(ULong.MAX_VALUE)
         else
-            fbeValue.f24 = 0xFFFFFFFFFFFFFFFFuL
+            fbeValue.f24 = ULong.MAX_VALUE
         fbeCurrentSize += f24.fbeSize
 
         if ((fbeCurrentSize + f25.fbeSize) <= fbeStructSize)

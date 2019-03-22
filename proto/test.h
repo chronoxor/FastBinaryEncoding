@@ -640,11 +640,11 @@ struct StructSimple
         , f17((int32_t)0ll)
         , f18((int32_t)2147483647ll)
         , f19((uint32_t)0ull)
-        , f20((uint32_t)0xFFFFFFFFull)
+        , f20((uint32_t)4294967295ull)
         , f21((int64_t)0ll)
         , f22((int64_t)9223372036854775807ll)
         , f23((uint64_t)0ull)
-        , f24((uint64_t)0xFFFFFFFFFFFFFFFFull)
+        , f24((uint64_t)18446744073709551615ull)
         , f25(0.0f)
         , f26((float)123.456f)
         , f27(0.0)
@@ -1687,7 +1687,7 @@ public:
         fbe_current_size += f10.fbe_size();
 
         if ((fbe_current_size + f11.fbe_size()) <= fbe_struct_size)
-            f11.get(fbe_value.f11);
+            f11.get(fbe_value.f11, (uint8_t)0u);
         else
             fbe_value.f11 = (uint8_t)0u;
         fbe_current_size += f11.fbe_size();
@@ -1711,7 +1711,7 @@ public:
         fbe_current_size += f14.fbe_size();
 
         if ((fbe_current_size + f15.fbe_size()) <= fbe_struct_size)
-            f15.get(fbe_value.f15);
+            f15.get(fbe_value.f15, (uint16_t)0u);
         else
             fbe_value.f15 = (uint16_t)0u;
         fbe_current_size += f15.fbe_size();
@@ -1735,15 +1735,15 @@ public:
         fbe_current_size += f18.fbe_size();
 
         if ((fbe_current_size + f19.fbe_size()) <= fbe_struct_size)
-            f19.get(fbe_value.f19);
+            f19.get(fbe_value.f19, (uint32_t)0ull);
         else
             fbe_value.f19 = (uint32_t)0ull;
         fbe_current_size += f19.fbe_size();
 
         if ((fbe_current_size + f20.fbe_size()) <= fbe_struct_size)
-            f20.get(fbe_value.f20, (uint32_t)0xFFFFFFFFull);
+            f20.get(fbe_value.f20, (uint32_t)4294967295ull);
         else
-            fbe_value.f20 = (uint32_t)0xFFFFFFFFull;
+            fbe_value.f20 = (uint32_t)4294967295ull;
         fbe_current_size += f20.fbe_size();
 
         if ((fbe_current_size + f21.fbe_size()) <= fbe_struct_size)
@@ -1759,15 +1759,15 @@ public:
         fbe_current_size += f22.fbe_size();
 
         if ((fbe_current_size + f23.fbe_size()) <= fbe_struct_size)
-            f23.get(fbe_value.f23);
+            f23.get(fbe_value.f23, (uint64_t)0ull);
         else
             fbe_value.f23 = (uint64_t)0ull;
         fbe_current_size += f23.fbe_size();
 
         if ((fbe_current_size + f24.fbe_size()) <= fbe_struct_size)
-            f24.get(fbe_value.f24, (uint64_t)0xFFFFFFFFFFFFFFFFull);
+            f24.get(fbe_value.f24, (uint64_t)18446744073709551615ull);
         else
-            fbe_value.f24 = (uint64_t)0xFFFFFFFFFFFFFFFFull;
+            fbe_value.f24 = (uint64_t)18446744073709551615ull;
         fbe_current_size += f24.fbe_size();
 
         if ((fbe_current_size + f25.fbe_size()) <= fbe_struct_size)
@@ -3244,13 +3244,13 @@ struct StructOptional : public ::test::StructSimple
         , f125((int32_t)2147483647ll)
         , f126(std::nullopt)
         , f127()
-        , f128((uint32_t)0xFFFFFFFFull)
+        , f128((uint32_t)4294967295ull)
         , f129(std::nullopt)
         , f130()
         , f131((int64_t)9223372036854775807ll)
         , f132(std::nullopt)
         , f133()
-        , f134((uint64_t)0xFFFFFFFFFFFFFFFFull)
+        , f134((uint64_t)18446744073709551615ull)
         , f135(std::nullopt)
         , f136()
         , f137((float)123.456f)
@@ -4763,9 +4763,9 @@ public:
         fbe_current_size += f127.fbe_size();
 
         if ((fbe_current_size + f128.fbe_size()) <= fbe_struct_size)
-            f128.get(fbe_value.f128, (uint32_t)0xFFFFFFFFull);
+            f128.get(fbe_value.f128, (uint32_t)4294967295ull);
         else
-            fbe_value.f128 = (uint32_t)0xFFFFFFFFull;
+            fbe_value.f128 = (uint32_t)4294967295ull;
         fbe_current_size += f128.fbe_size();
 
         if ((fbe_current_size + f129.fbe_size()) <= fbe_struct_size)
@@ -4799,9 +4799,9 @@ public:
         fbe_current_size += f133.fbe_size();
 
         if ((fbe_current_size + f134.fbe_size()) <= fbe_struct_size)
-            f134.get(fbe_value.f134, (uint64_t)0xFFFFFFFFFFFFFFFFull);
+            f134.get(fbe_value.f134, (uint64_t)18446744073709551615ull);
         else
-            fbe_value.f134 = (uint64_t)0xFFFFFFFFFFFFFFFFull;
+            fbe_value.f134 = (uint64_t)18446744073709551615ull;
         fbe_current_size += f134.fbe_size();
 
         if ((fbe_current_size + f135.fbe_size()) <= fbe_struct_size)

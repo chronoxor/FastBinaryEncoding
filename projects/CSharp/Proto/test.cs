@@ -1620,27 +1620,27 @@ namespace test {
             , f1 = false
             , f2 = true
             , f3 = (byte)0U
-            , f4 = (byte)255U
+            , f4 = Byte.MaxValue
             , f5 = '\0'
             , f6 = (char)'!'
             , f7 = '\0'
             , f8 = (char)0x0444
             , f9 = (sbyte)0
-            , f10 = (sbyte)127
-            , f11 = (byte)0U
-            , f12 = (byte)255U
+            , f10 = SByte.MaxValue
+            , f11 = Byte.MinValue
+            , f12 = Byte.MaxValue
             , f13 = (short)0
-            , f14 = (short)32767
-            , f15 = (ushort)0U
-            , f16 = (ushort)65535U
+            , f14 = Int16.MaxValue
+            , f15 = UInt16.MinValue
+            , f16 = UInt16.MaxValue
             , f17 = (int)0
-            , f18 = (int)2147483647
-            , f19 = (uint)0U
-            , f20 = (uint)0xFFFFFFFFU
+            , f18 = Int32.MaxValue
+            , f19 = UInt32.MinValue
+            , f20 = UInt32.MaxValue
             , f21 = (long)0L
-            , f22 = (long)9223372036854775807L
-            , f23 = (ulong)0UL
-            , f24 = (ulong)0xFFFFFFFFFFFFFFFFUL
+            , f22 = Int64.MaxValue
+            , f23 = UInt64.MinValue
+            , f24 = UInt64.MaxValue
             , f25 = 0.0F
             , f26 = (float)123.456F
             , f27 = 0.0D
@@ -2447,9 +2447,9 @@ namespace test {
             fbeCurrentSize += f3.FBESize;
 
             if ((fbeCurrentSize + f4.FBESize) <= fbeStructSize)
-                f4.Get(out fbeValue.f4, (byte)255U);
+                f4.Get(out fbeValue.f4, Byte.MaxValue);
             else
-                fbeValue.f4 = (byte)255U;
+                fbeValue.f4 = Byte.MaxValue;
             fbeCurrentSize += f4.FBESize;
 
             if ((fbeCurrentSize + f5.FBESize) <= fbeStructSize)
@@ -2483,21 +2483,21 @@ namespace test {
             fbeCurrentSize += f9.FBESize;
 
             if ((fbeCurrentSize + f10.FBESize) <= fbeStructSize)
-                f10.Get(out fbeValue.f10, (sbyte)127);
+                f10.Get(out fbeValue.f10, SByte.MaxValue);
             else
-                fbeValue.f10 = (sbyte)127;
+                fbeValue.f10 = SByte.MaxValue;
             fbeCurrentSize += f10.FBESize;
 
             if ((fbeCurrentSize + f11.FBESize) <= fbeStructSize)
-                f11.Get(out fbeValue.f11);
+                f11.Get(out fbeValue.f11, Byte.MinValue);
             else
-                fbeValue.f11 = (byte)0U;
+                fbeValue.f11 = Byte.MinValue;
             fbeCurrentSize += f11.FBESize;
 
             if ((fbeCurrentSize + f12.FBESize) <= fbeStructSize)
-                f12.Get(out fbeValue.f12, (byte)255U);
+                f12.Get(out fbeValue.f12, Byte.MaxValue);
             else
-                fbeValue.f12 = (byte)255U;
+                fbeValue.f12 = Byte.MaxValue;
             fbeCurrentSize += f12.FBESize;
 
             if ((fbeCurrentSize + f13.FBESize) <= fbeStructSize)
@@ -2507,21 +2507,21 @@ namespace test {
             fbeCurrentSize += f13.FBESize;
 
             if ((fbeCurrentSize + f14.FBESize) <= fbeStructSize)
-                f14.Get(out fbeValue.f14, (short)32767);
+                f14.Get(out fbeValue.f14, Int16.MaxValue);
             else
-                fbeValue.f14 = (short)32767;
+                fbeValue.f14 = Int16.MaxValue;
             fbeCurrentSize += f14.FBESize;
 
             if ((fbeCurrentSize + f15.FBESize) <= fbeStructSize)
-                f15.Get(out fbeValue.f15);
+                f15.Get(out fbeValue.f15, UInt16.MinValue);
             else
-                fbeValue.f15 = (ushort)0U;
+                fbeValue.f15 = UInt16.MinValue;
             fbeCurrentSize += f15.FBESize;
 
             if ((fbeCurrentSize + f16.FBESize) <= fbeStructSize)
-                f16.Get(out fbeValue.f16, (ushort)65535U);
+                f16.Get(out fbeValue.f16, UInt16.MaxValue);
             else
-                fbeValue.f16 = (ushort)65535U;
+                fbeValue.f16 = UInt16.MaxValue;
             fbeCurrentSize += f16.FBESize;
 
             if ((fbeCurrentSize + f17.FBESize) <= fbeStructSize)
@@ -2531,21 +2531,21 @@ namespace test {
             fbeCurrentSize += f17.FBESize;
 
             if ((fbeCurrentSize + f18.FBESize) <= fbeStructSize)
-                f18.Get(out fbeValue.f18, (int)2147483647);
+                f18.Get(out fbeValue.f18, Int32.MaxValue);
             else
-                fbeValue.f18 = (int)2147483647;
+                fbeValue.f18 = Int32.MaxValue;
             fbeCurrentSize += f18.FBESize;
 
             if ((fbeCurrentSize + f19.FBESize) <= fbeStructSize)
-                f19.Get(out fbeValue.f19);
+                f19.Get(out fbeValue.f19, UInt32.MinValue);
             else
-                fbeValue.f19 = (uint)0U;
+                fbeValue.f19 = UInt32.MinValue;
             fbeCurrentSize += f19.FBESize;
 
             if ((fbeCurrentSize + f20.FBESize) <= fbeStructSize)
-                f20.Get(out fbeValue.f20, (uint)0xFFFFFFFFU);
+                f20.Get(out fbeValue.f20, UInt32.MaxValue);
             else
-                fbeValue.f20 = (uint)0xFFFFFFFFU;
+                fbeValue.f20 = UInt32.MaxValue;
             fbeCurrentSize += f20.FBESize;
 
             if ((fbeCurrentSize + f21.FBESize) <= fbeStructSize)
@@ -2555,21 +2555,21 @@ namespace test {
             fbeCurrentSize += f21.FBESize;
 
             if ((fbeCurrentSize + f22.FBESize) <= fbeStructSize)
-                f22.Get(out fbeValue.f22, (long)9223372036854775807L);
+                f22.Get(out fbeValue.f22, Int64.MaxValue);
             else
-                fbeValue.f22 = (long)9223372036854775807L;
+                fbeValue.f22 = Int64.MaxValue;
             fbeCurrentSize += f22.FBESize;
 
             if ((fbeCurrentSize + f23.FBESize) <= fbeStructSize)
-                f23.Get(out fbeValue.f23);
+                f23.Get(out fbeValue.f23, UInt64.MinValue);
             else
-                fbeValue.f23 = (ulong)0UL;
+                fbeValue.f23 = UInt64.MinValue;
             fbeCurrentSize += f23.FBESize;
 
             if ((fbeCurrentSize + f24.FBESize) <= fbeStructSize)
-                f24.Get(out fbeValue.f24, (ulong)0xFFFFFFFFFFFFFFFFUL);
+                f24.Get(out fbeValue.f24, UInt64.MaxValue);
             else
-                fbeValue.f24 = (ulong)0xFFFFFFFFFFFFFFFFUL;
+                fbeValue.f24 = UInt64.MaxValue;
             fbeCurrentSize += f24.FBESize;
 
             if ((fbeCurrentSize + f25.FBESize) <= fbeStructSize)
@@ -3986,7 +3986,7 @@ namespace test {
             , f101 = true
             , f102 = null
             , f103 = null
-            , f104 = (byte)255U
+            , f104 = Byte.MaxValue
             , f105 = null
             , f106 = null
             , f107 = (char)'!'
@@ -3995,28 +3995,28 @@ namespace test {
             , f110 = (char)0x0444
             , f111 = null
             , f112 = null
-            , f113 = (sbyte)127
+            , f113 = SByte.MaxValue
             , f114 = null
             , f115 = null
-            , f116 = (byte)255U
+            , f116 = Byte.MaxValue
             , f117 = null
             , f118 = null
-            , f119 = (short)32767
+            , f119 = Int16.MaxValue
             , f120 = null
             , f121 = null
-            , f122 = (ushort)65535U
+            , f122 = UInt16.MaxValue
             , f123 = null
             , f124 = null
-            , f125 = (int)2147483647
+            , f125 = Int32.MaxValue
             , f126 = null
             , f127 = null
-            , f128 = (uint)0xFFFFFFFFU
+            , f128 = UInt32.MaxValue
             , f129 = null
             , f130 = null
-            , f131 = (long)9223372036854775807L
+            , f131 = Int64.MaxValue
             , f132 = null
             , f133 = null
-            , f134 = (ulong)0xFFFFFFFFFFFFFFFFUL
+            , f134 = UInt64.MaxValue
             , f135 = null
             , f136 = null
             , f137 = (float)123.456F
@@ -5105,9 +5105,9 @@ namespace test {
             fbeCurrentSize += f103.FBESize;
 
             if ((fbeCurrentSize + f104.FBESize) <= fbeStructSize)
-                f104.Get(out fbeValue.f104, (byte)255U);
+                f104.Get(out fbeValue.f104, Byte.MaxValue);
             else
-                fbeValue.f104 = (byte)255U;
+                fbeValue.f104 = Byte.MaxValue;
             fbeCurrentSize += f104.FBESize;
 
             if ((fbeCurrentSize + f105.FBESize) <= fbeStructSize)
@@ -5159,9 +5159,9 @@ namespace test {
             fbeCurrentSize += f112.FBESize;
 
             if ((fbeCurrentSize + f113.FBESize) <= fbeStructSize)
-                f113.Get(out fbeValue.f113, (sbyte)127);
+                f113.Get(out fbeValue.f113, SByte.MaxValue);
             else
-                fbeValue.f113 = (sbyte)127;
+                fbeValue.f113 = SByte.MaxValue;
             fbeCurrentSize += f113.FBESize;
 
             if ((fbeCurrentSize + f114.FBESize) <= fbeStructSize)
@@ -5177,9 +5177,9 @@ namespace test {
             fbeCurrentSize += f115.FBESize;
 
             if ((fbeCurrentSize + f116.FBESize) <= fbeStructSize)
-                f116.Get(out fbeValue.f116, (byte)255U);
+                f116.Get(out fbeValue.f116, Byte.MaxValue);
             else
-                fbeValue.f116 = (byte)255U;
+                fbeValue.f116 = Byte.MaxValue;
             fbeCurrentSize += f116.FBESize;
 
             if ((fbeCurrentSize + f117.FBESize) <= fbeStructSize)
@@ -5195,9 +5195,9 @@ namespace test {
             fbeCurrentSize += f118.FBESize;
 
             if ((fbeCurrentSize + f119.FBESize) <= fbeStructSize)
-                f119.Get(out fbeValue.f119, (short)32767);
+                f119.Get(out fbeValue.f119, Int16.MaxValue);
             else
-                fbeValue.f119 = (short)32767;
+                fbeValue.f119 = Int16.MaxValue;
             fbeCurrentSize += f119.FBESize;
 
             if ((fbeCurrentSize + f120.FBESize) <= fbeStructSize)
@@ -5213,9 +5213,9 @@ namespace test {
             fbeCurrentSize += f121.FBESize;
 
             if ((fbeCurrentSize + f122.FBESize) <= fbeStructSize)
-                f122.Get(out fbeValue.f122, (ushort)65535U);
+                f122.Get(out fbeValue.f122, UInt16.MaxValue);
             else
-                fbeValue.f122 = (ushort)65535U;
+                fbeValue.f122 = UInt16.MaxValue;
             fbeCurrentSize += f122.FBESize;
 
             if ((fbeCurrentSize + f123.FBESize) <= fbeStructSize)
@@ -5231,9 +5231,9 @@ namespace test {
             fbeCurrentSize += f124.FBESize;
 
             if ((fbeCurrentSize + f125.FBESize) <= fbeStructSize)
-                f125.Get(out fbeValue.f125, (int)2147483647);
+                f125.Get(out fbeValue.f125, Int32.MaxValue);
             else
-                fbeValue.f125 = (int)2147483647;
+                fbeValue.f125 = Int32.MaxValue;
             fbeCurrentSize += f125.FBESize;
 
             if ((fbeCurrentSize + f126.FBESize) <= fbeStructSize)
@@ -5249,9 +5249,9 @@ namespace test {
             fbeCurrentSize += f127.FBESize;
 
             if ((fbeCurrentSize + f128.FBESize) <= fbeStructSize)
-                f128.Get(out fbeValue.f128, (uint)0xFFFFFFFFU);
+                f128.Get(out fbeValue.f128, UInt32.MaxValue);
             else
-                fbeValue.f128 = (uint)0xFFFFFFFFU;
+                fbeValue.f128 = UInt32.MaxValue;
             fbeCurrentSize += f128.FBESize;
 
             if ((fbeCurrentSize + f129.FBESize) <= fbeStructSize)
@@ -5267,9 +5267,9 @@ namespace test {
             fbeCurrentSize += f130.FBESize;
 
             if ((fbeCurrentSize + f131.FBESize) <= fbeStructSize)
-                f131.Get(out fbeValue.f131, (long)9223372036854775807L);
+                f131.Get(out fbeValue.f131, Int64.MaxValue);
             else
-                fbeValue.f131 = (long)9223372036854775807L;
+                fbeValue.f131 = Int64.MaxValue;
             fbeCurrentSize += f131.FBESize;
 
             if ((fbeCurrentSize + f132.FBESize) <= fbeStructSize)
@@ -5285,9 +5285,9 @@ namespace test {
             fbeCurrentSize += f133.FBESize;
 
             if ((fbeCurrentSize + f134.FBESize) <= fbeStructSize)
-                f134.Get(out fbeValue.f134, (ulong)0xFFFFFFFFFFFFFFFFUL);
+                f134.Get(out fbeValue.f134, UInt64.MaxValue);
             else
-                fbeValue.f134 = (ulong)0xFFFFFFFFFFFFFFFFUL;
+                fbeValue.f134 = UInt64.MaxValue;
             fbeCurrentSize += f134.FBESize;
 
             if ((fbeCurrentSize + f135.FBESize) <= fbeStructSize)

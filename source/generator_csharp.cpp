@@ -6920,6 +6920,54 @@ std::string GeneratorCSharp::ConvertConstant(const std::string& type, const std:
         return "false";
     else if (value == "null")
         return "null";
+    else if (value == "min")
+    {
+        if (type == "byte")
+            return "Byte.MinValue";
+        else if (type == "int8")
+            return "SByte.MinValue";
+        else if (type == "uint8")
+            return "Byte.MinValue";
+        else if (type == "int16")
+            return "Int16.MinValue";
+        else if (type == "uint16")
+            return "UInt16.MinValue";
+        else if (type == "int32")
+            return "Int32.MinValue";
+        else if (type == "uint32")
+            return "UInt32.MinValue";
+        else if (type == "int64")
+            return "Int64.MinValue";
+        else if (type == "uint64")
+            return "UInt64.MinValue";
+
+        yyerror("Unsupported type " + type + " for 'min' constant");
+        return "";
+    }
+    else if (value == "max")
+    {
+        if (type == "byte")
+            return "Byte.MaxValue";
+        else if (type == "int8")
+            return "SByte.MaxValue";
+        else if (type == "uint8")
+            return "Byte.MaxValue";
+        else if (type == "int16")
+            return "Int16.MaxValue";
+        else if (type == "uint16")
+            return "UInt16.MaxValue";
+        else if (type == "int32")
+            return "Int32.MaxValue";
+        else if (type == "uint32")
+            return "UInt32.MaxValue";
+        else if (type == "int64")
+            return "Int64.MaxValue";
+        else if (type == "uint64")
+            return "UInt64.MaxValue";
+
+        yyerror("Unsupported type " + type + " for 'max' constant");
+        return "";
+    }
     else if (value == "epoch")
         return "new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)";
     else if (value == "utc")

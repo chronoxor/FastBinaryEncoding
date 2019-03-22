@@ -755,7 +755,7 @@ class FinalModelFlagsEmpty(fbe.FinalModel):
 class StructSimple(object):
     __slots__ = "id", "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8", "f9", "f10", "f11", "f12", "f13", "f14", "f15", "f16", "f17", "f18", "f19", "f20", "f21", "f22", "f23", "f24", "f25", "f26", "f27", "f28", "f29", "f30", "f31", "f32", "f33", "f34", "f35", "f36", "f37", "f38", "f39", "f40", "f41", "f42", "f43", "f44", 
 
-    def __init__(self, id=0, f1=False, f2=True, f3=0, f4=int(255), f5='\0', f6='!', f7='\0', f8=chr(0x0444), f9=0, f10=int(127), f11=0, f12=int(255), f13=0, f14=int(32767), f15=0, f16=int(65535), f17=0, f18=int(2147483647), f19=0, f20=int(0xFFFFFFFF), f21=0, f22=int(9223372036854775807), f23=0, f24=int(0xFFFFFFFFFFFFFFFF), f25=0.0, f26=float(123.456), f27=0.0, f28=float(-123.456e+123), f29=decimal.Decimal(0), f30=decimal.Decimal("123456.123456"), f31="", f32="Initial string!", f33=fbe.epoch(), f34=fbe.epoch(), f35=fbe.utc(), f36=uuid.UUID(int=0), f37=uuid.uuid1(), f38=uuid.UUID("123e4567-e89b-12d3-a456-426655440000"), f39=None, f40=None, f41=None, f42=None, f43=None, f44=None):
+    def __init__(self, id=0, f1=False, f2=True, f3=0, f4=255, f5='\0', f6='!', f7='\0', f8=chr(0x0444), f9=0, f10=127, f11=0, f12=255, f13=0, f14=32767, f15=0, f16=65535, f17=0, f18=2147483647, f19=0, f20=4294967295, f21=0, f22=9223372036854775807, f23=0, f24=18446744073709551615, f25=0.0, f26=float(123.456), f27=0.0, f28=float(-123.456e+123), f29=decimal.Decimal(0), f30=decimal.Decimal("123456.123456"), f31="", f32="Initial string!", f33=fbe.epoch(), f34=fbe.epoch(), f35=fbe.utc(), f36=uuid.UUID(int=0), f37=uuid.uuid1(), f38=uuid.UUID("123e4567-e89b-12d3-a456-426655440000"), f39=None, f40=None, f41=None, f42=None, f43=None, f44=None):
         if f29 is None:
             f29 = decimal.Decimal(0)
         if f36 is None:
@@ -1864,9 +1864,9 @@ class FieldModelStructSimple(fbe.FieldModel):
         fbe_current_size += self.f3.fbe_size
 
         if (fbe_current_size + self.f4.fbe_size) <= fbe_struct_size:
-            fbe_value.f4 = self.f4.get(int(255))
+            fbe_value.f4 = self.f4.get(255)
         else:
-            fbe_value.f4 = int(255)
+            fbe_value.f4 = 255
         fbe_current_size += self.f4.fbe_size
 
         if (fbe_current_size + self.f5.fbe_size) <= fbe_struct_size:
@@ -1900,21 +1900,21 @@ class FieldModelStructSimple(fbe.FieldModel):
         fbe_current_size += self.f9.fbe_size
 
         if (fbe_current_size + self.f10.fbe_size) <= fbe_struct_size:
-            fbe_value.f10 = self.f10.get(int(127))
+            fbe_value.f10 = self.f10.get(127)
         else:
-            fbe_value.f10 = int(127)
+            fbe_value.f10 = 127
         fbe_current_size += self.f10.fbe_size
 
         if (fbe_current_size + self.f11.fbe_size) <= fbe_struct_size:
-            fbe_value.f11 = self.f11.get()
+            fbe_value.f11 = self.f11.get(0)
         else:
             fbe_value.f11 = 0
         fbe_current_size += self.f11.fbe_size
 
         if (fbe_current_size + self.f12.fbe_size) <= fbe_struct_size:
-            fbe_value.f12 = self.f12.get(int(255))
+            fbe_value.f12 = self.f12.get(255)
         else:
-            fbe_value.f12 = int(255)
+            fbe_value.f12 = 255
         fbe_current_size += self.f12.fbe_size
 
         if (fbe_current_size + self.f13.fbe_size) <= fbe_struct_size:
@@ -1924,21 +1924,21 @@ class FieldModelStructSimple(fbe.FieldModel):
         fbe_current_size += self.f13.fbe_size
 
         if (fbe_current_size + self.f14.fbe_size) <= fbe_struct_size:
-            fbe_value.f14 = self.f14.get(int(32767))
+            fbe_value.f14 = self.f14.get(32767)
         else:
-            fbe_value.f14 = int(32767)
+            fbe_value.f14 = 32767
         fbe_current_size += self.f14.fbe_size
 
         if (fbe_current_size + self.f15.fbe_size) <= fbe_struct_size:
-            fbe_value.f15 = self.f15.get()
+            fbe_value.f15 = self.f15.get(0)
         else:
             fbe_value.f15 = 0
         fbe_current_size += self.f15.fbe_size
 
         if (fbe_current_size + self.f16.fbe_size) <= fbe_struct_size:
-            fbe_value.f16 = self.f16.get(int(65535))
+            fbe_value.f16 = self.f16.get(65535)
         else:
-            fbe_value.f16 = int(65535)
+            fbe_value.f16 = 65535
         fbe_current_size += self.f16.fbe_size
 
         if (fbe_current_size + self.f17.fbe_size) <= fbe_struct_size:
@@ -1948,21 +1948,21 @@ class FieldModelStructSimple(fbe.FieldModel):
         fbe_current_size += self.f17.fbe_size
 
         if (fbe_current_size + self.f18.fbe_size) <= fbe_struct_size:
-            fbe_value.f18 = self.f18.get(int(2147483647))
+            fbe_value.f18 = self.f18.get(2147483647)
         else:
-            fbe_value.f18 = int(2147483647)
+            fbe_value.f18 = 2147483647
         fbe_current_size += self.f18.fbe_size
 
         if (fbe_current_size + self.f19.fbe_size) <= fbe_struct_size:
-            fbe_value.f19 = self.f19.get()
+            fbe_value.f19 = self.f19.get(0)
         else:
             fbe_value.f19 = 0
         fbe_current_size += self.f19.fbe_size
 
         if (fbe_current_size + self.f20.fbe_size) <= fbe_struct_size:
-            fbe_value.f20 = self.f20.get(int(0xFFFFFFFF))
+            fbe_value.f20 = self.f20.get(4294967295)
         else:
-            fbe_value.f20 = int(0xFFFFFFFF)
+            fbe_value.f20 = 4294967295
         fbe_current_size += self.f20.fbe_size
 
         if (fbe_current_size + self.f21.fbe_size) <= fbe_struct_size:
@@ -1972,21 +1972,21 @@ class FieldModelStructSimple(fbe.FieldModel):
         fbe_current_size += self.f21.fbe_size
 
         if (fbe_current_size + self.f22.fbe_size) <= fbe_struct_size:
-            fbe_value.f22 = self.f22.get(int(9223372036854775807))
+            fbe_value.f22 = self.f22.get(9223372036854775807)
         else:
-            fbe_value.f22 = int(9223372036854775807)
+            fbe_value.f22 = 9223372036854775807
         fbe_current_size += self.f22.fbe_size
 
         if (fbe_current_size + self.f23.fbe_size) <= fbe_struct_size:
-            fbe_value.f23 = self.f23.get()
+            fbe_value.f23 = self.f23.get(0)
         else:
             fbe_value.f23 = 0
         fbe_current_size += self.f23.fbe_size
 
         if (fbe_current_size + self.f24.fbe_size) <= fbe_struct_size:
-            fbe_value.f24 = self.f24.get(int(0xFFFFFFFFFFFFFFFF))
+            fbe_value.f24 = self.f24.get(18446744073709551615)
         else:
-            fbe_value.f24 = int(0xFFFFFFFFFFFFFFFF)
+            fbe_value.f24 = 18446744073709551615
         fbe_current_size += self.f24.fbe_size
 
         if (fbe_current_size + self.f25.fbe_size) <= fbe_struct_size:
@@ -3437,7 +3437,7 @@ class StructSimpleFinalModel(fbe.Model):
 class StructOptional(StructSimple):
     __slots__ = "f100", "f101", "f102", "f103", "f104", "f105", "f106", "f107", "f108", "f109", "f110", "f111", "f112", "f113", "f114", "f115", "f116", "f117", "f118", "f119", "f120", "f121", "f122", "f123", "f124", "f125", "f126", "f127", "f128", "f129", "f130", "f131", "f132", "f133", "f134", "f135", "f136", "f137", "f138", "f139", "f140", "f141", "f142", "f143", "f144", "f145", "f146", "f147", "f148", "f149", "f150", "f151", "f152", "f153", "f154", "f155", "f156", "f157", "f158", "f159", "f160", "f161", "f162", "f163", "f164", "f165", 
 
-    def __init__(self, parent=None, f100=None, f101=True, f102=None, f103=None, f104=int(255), f105=None, f106=None, f107='!', f108=None, f109=None, f110=chr(0x0444), f111=None, f112=None, f113=int(127), f114=None, f115=None, f116=int(255), f117=None, f118=None, f119=int(32767), f120=None, f121=None, f122=int(65535), f123=None, f124=None, f125=int(2147483647), f126=None, f127=None, f128=int(0xFFFFFFFF), f129=None, f130=None, f131=int(9223372036854775807), f132=None, f133=None, f134=int(0xFFFFFFFFFFFFFFFF), f135=None, f136=None, f137=float(123.456), f138=None, f139=None, f140=float(-123.456e+123), f141=None, f142=None, f143=decimal.Decimal("123456.123456"), f144=None, f145=None, f146="Initial string!", f147=None, f148=None, f149=fbe.utc(), f150=None, f151=None, f152=uuid.UUID("123e4567-e89b-12d3-a456-426655440000"), f153=None, f154=None, f155=None, f156=None, f157=None, f158=None, f159=None, f160=None, f161=None, f162=None, f163=None, f164=None, f165=None):
+    def __init__(self, parent=None, f100=None, f101=True, f102=None, f103=None, f104=255, f105=None, f106=None, f107='!', f108=None, f109=None, f110=chr(0x0444), f111=None, f112=None, f113=127, f114=None, f115=None, f116=255, f117=None, f118=None, f119=32767, f120=None, f121=None, f122=65535, f123=None, f124=None, f125=2147483647, f126=None, f127=None, f128=4294967295, f129=None, f130=None, f131=9223372036854775807, f132=None, f133=None, f134=18446744073709551615, f135=None, f136=None, f137=float(123.456), f138=None, f139=None, f140=float(-123.456e+123), f141=None, f142=None, f143=decimal.Decimal("123456.123456"), f144=None, f145=None, f146="Initial string!", f147=None, f148=None, f149=fbe.utc(), f150=None, f151=None, f152=uuid.UUID("123e4567-e89b-12d3-a456-426655440000"), f153=None, f154=None, f155=None, f156=None, f157=None, f158=None, f159=None, f160=None, f161=None, f162=None, f163=None, f164=None, f165=None):
         super().__init__()
         if parent is None:
             parent = StructSimple()
@@ -5122,9 +5122,9 @@ class FieldModelStructOptional(fbe.FieldModel):
         fbe_current_size += self.f103.fbe_size
 
         if (fbe_current_size + self.f104.fbe_size) <= fbe_struct_size:
-            fbe_value.f104 = self.f104.get(int(255))
+            fbe_value.f104 = self.f104.get(255)
         else:
-            fbe_value.f104 = int(255)
+            fbe_value.f104 = 255
         fbe_current_size += self.f104.fbe_size
 
         if (fbe_current_size + self.f105.fbe_size) <= fbe_struct_size:
@@ -5176,9 +5176,9 @@ class FieldModelStructOptional(fbe.FieldModel):
         fbe_current_size += self.f112.fbe_size
 
         if (fbe_current_size + self.f113.fbe_size) <= fbe_struct_size:
-            fbe_value.f113 = self.f113.get(int(127))
+            fbe_value.f113 = self.f113.get(127)
         else:
-            fbe_value.f113 = int(127)
+            fbe_value.f113 = 127
         fbe_current_size += self.f113.fbe_size
 
         if (fbe_current_size + self.f114.fbe_size) <= fbe_struct_size:
@@ -5194,9 +5194,9 @@ class FieldModelStructOptional(fbe.FieldModel):
         fbe_current_size += self.f115.fbe_size
 
         if (fbe_current_size + self.f116.fbe_size) <= fbe_struct_size:
-            fbe_value.f116 = self.f116.get(int(255))
+            fbe_value.f116 = self.f116.get(255)
         else:
-            fbe_value.f116 = int(255)
+            fbe_value.f116 = 255
         fbe_current_size += self.f116.fbe_size
 
         if (fbe_current_size + self.f117.fbe_size) <= fbe_struct_size:
@@ -5212,9 +5212,9 @@ class FieldModelStructOptional(fbe.FieldModel):
         fbe_current_size += self.f118.fbe_size
 
         if (fbe_current_size + self.f119.fbe_size) <= fbe_struct_size:
-            fbe_value.f119 = self.f119.get(int(32767))
+            fbe_value.f119 = self.f119.get(32767)
         else:
-            fbe_value.f119 = int(32767)
+            fbe_value.f119 = 32767
         fbe_current_size += self.f119.fbe_size
 
         if (fbe_current_size + self.f120.fbe_size) <= fbe_struct_size:
@@ -5230,9 +5230,9 @@ class FieldModelStructOptional(fbe.FieldModel):
         fbe_current_size += self.f121.fbe_size
 
         if (fbe_current_size + self.f122.fbe_size) <= fbe_struct_size:
-            fbe_value.f122 = self.f122.get(int(65535))
+            fbe_value.f122 = self.f122.get(65535)
         else:
-            fbe_value.f122 = int(65535)
+            fbe_value.f122 = 65535
         fbe_current_size += self.f122.fbe_size
 
         if (fbe_current_size + self.f123.fbe_size) <= fbe_struct_size:
@@ -5248,9 +5248,9 @@ class FieldModelStructOptional(fbe.FieldModel):
         fbe_current_size += self.f124.fbe_size
 
         if (fbe_current_size + self.f125.fbe_size) <= fbe_struct_size:
-            fbe_value.f125 = self.f125.get(int(2147483647))
+            fbe_value.f125 = self.f125.get(2147483647)
         else:
-            fbe_value.f125 = int(2147483647)
+            fbe_value.f125 = 2147483647
         fbe_current_size += self.f125.fbe_size
 
         if (fbe_current_size + self.f126.fbe_size) <= fbe_struct_size:
@@ -5266,9 +5266,9 @@ class FieldModelStructOptional(fbe.FieldModel):
         fbe_current_size += self.f127.fbe_size
 
         if (fbe_current_size + self.f128.fbe_size) <= fbe_struct_size:
-            fbe_value.f128 = self.f128.get(int(0xFFFFFFFF))
+            fbe_value.f128 = self.f128.get(4294967295)
         else:
-            fbe_value.f128 = int(0xFFFFFFFF)
+            fbe_value.f128 = 4294967295
         fbe_current_size += self.f128.fbe_size
 
         if (fbe_current_size + self.f129.fbe_size) <= fbe_struct_size:
@@ -5284,9 +5284,9 @@ class FieldModelStructOptional(fbe.FieldModel):
         fbe_current_size += self.f130.fbe_size
 
         if (fbe_current_size + self.f131.fbe_size) <= fbe_struct_size:
-            fbe_value.f131 = self.f131.get(int(9223372036854775807))
+            fbe_value.f131 = self.f131.get(9223372036854775807)
         else:
-            fbe_value.f131 = int(9223372036854775807)
+            fbe_value.f131 = 9223372036854775807
         fbe_current_size += self.f131.fbe_size
 
         if (fbe_current_size + self.f132.fbe_size) <= fbe_struct_size:
@@ -5302,9 +5302,9 @@ class FieldModelStructOptional(fbe.FieldModel):
         fbe_current_size += self.f133.fbe_size
 
         if (fbe_current_size + self.f134.fbe_size) <= fbe_struct_size:
-            fbe_value.f134 = self.f134.get(int(0xFFFFFFFFFFFFFFFF))
+            fbe_value.f134 = self.f134.get(18446744073709551615)
         else:
-            fbe_value.f134 = int(0xFFFFFFFFFFFFFFFF)
+            fbe_value.f134 = 18446744073709551615
         fbe_current_size += self.f134.fbe_size
 
         if (fbe_current_size + self.f135.fbe_size) <= fbe_struct_size:

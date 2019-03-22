@@ -614,9 +614,9 @@ public final class FieldModelStructSimple extends FieldModel
         fbeCurrentSize += f3.fbeSize();
 
         if ((fbeCurrentSize + f4.fbeSize()) <= fbeStructSize)
-            fbeValue.f4 = f4.get((byte)255);
+            fbeValue.f4 = f4.get((byte)0xFF);
         else
-            fbeValue.f4 = (byte)255;
+            fbeValue.f4 = (byte)0xFF;
         fbeCurrentSize += f4.fbeSize();
 
         if ((fbeCurrentSize + f5.fbeSize()) <= fbeStructSize)
@@ -656,15 +656,15 @@ public final class FieldModelStructSimple extends FieldModel
         fbeCurrentSize += f10.fbeSize();
 
         if ((fbeCurrentSize + f11.fbeSize()) <= fbeStructSize)
-            fbeValue.f11 = f11.get();
+            fbeValue.f11 = f11.get((byte)0);
         else
             fbeValue.f11 = (byte)0;
         fbeCurrentSize += f11.fbeSize();
 
         if ((fbeCurrentSize + f12.fbeSize()) <= fbeStructSize)
-            fbeValue.f12 = f12.get((byte)255);
+            fbeValue.f12 = f12.get((byte)0xFF);
         else
-            fbeValue.f12 = (byte)255;
+            fbeValue.f12 = (byte)0xFF;
         fbeCurrentSize += f12.fbeSize();
 
         if ((fbeCurrentSize + f13.fbeSize()) <= fbeStructSize)
@@ -680,15 +680,15 @@ public final class FieldModelStructSimple extends FieldModel
         fbeCurrentSize += f14.fbeSize();
 
         if ((fbeCurrentSize + f15.fbeSize()) <= fbeStructSize)
-            fbeValue.f15 = f15.get();
+            fbeValue.f15 = f15.get((short)0);
         else
             fbeValue.f15 = (short)0;
         fbeCurrentSize += f15.fbeSize();
 
         if ((fbeCurrentSize + f16.fbeSize()) <= fbeStructSize)
-            fbeValue.f16 = f16.get((short)65535);
+            fbeValue.f16 = f16.get((short)0xFFFF);
         else
-            fbeValue.f16 = (short)65535;
+            fbeValue.f16 = (short)0xFFFF;
         fbeCurrentSize += f16.fbeSize();
 
         if ((fbeCurrentSize + f17.fbeSize()) <= fbeStructSize)
@@ -704,9 +704,9 @@ public final class FieldModelStructSimple extends FieldModel
         fbeCurrentSize += f18.fbeSize();
 
         if ((fbeCurrentSize + f19.fbeSize()) <= fbeStructSize)
-            fbeValue.f19 = f19.get();
+            fbeValue.f19 = f19.get((int)0);
         else
-            fbeValue.f19 = 0;
+            fbeValue.f19 = (int)0;
         fbeCurrentSize += f19.fbeSize();
 
         if ((fbeCurrentSize + f20.fbeSize()) <= fbeStructSize)
@@ -728,9 +728,9 @@ public final class FieldModelStructSimple extends FieldModel
         fbeCurrentSize += f22.fbeSize();
 
         if ((fbeCurrentSize + f23.fbeSize()) <= fbeStructSize)
-            fbeValue.f23 = f23.get();
+            fbeValue.f23 = f23.get((long)0);
         else
-            fbeValue.f23 = 0L;
+            fbeValue.f23 = (long)0;
         fbeCurrentSize += f23.fbeSize();
 
         if ((fbeCurrentSize + f24.fbeSize()) <= fbeStructSize)

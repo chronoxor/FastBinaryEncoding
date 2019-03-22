@@ -6047,6 +6047,46 @@ std::string GeneratorRuby::ConvertConstant(const std::string& type, const std::s
         return "false";
     else if (value == "null")
         return "nil";
+    else if (value == "min")
+    {
+        if ((type == "byte") || (type == "uint8") || (type == "uint16") || (type == "uint32") || (type == "uint64"))
+            return "0";
+        else if (type == "int8")
+            return "-128";
+        else if (type == "int16")
+            return "-32768";
+        else if (type == "int32")
+            return "-2147483648";
+        else if (type == "int64")
+            return "-9223372036854775808";
+
+        yyerror("Unsupported type " + type + " for 'min' constant");
+        return "";
+    }
+    else if (value == "max")
+    {
+        if (type == "byte")
+            return "255";
+        else if (type == "int8")
+            return "127";
+        else if (type == "uint8")
+            return "255";
+        else if (type == "int16")
+            return "32767";
+        else if (type == "uint16")
+            return "65535";
+        else if (type == "int32")
+            return "2147483647";
+        else if (type == "uint32")
+            return "4294967295";
+        else if (type == "int64")
+            return "9223372036854775807";
+        else if (type == "uint64")
+            return "18446744073709551615";
+
+        yyerror("Unsupported type " + type + " for 'max' constant");
+        return "";
+    }
     else if (value == "epoch")
         return "Time.utc(1970)";
     else if (value == "utc")

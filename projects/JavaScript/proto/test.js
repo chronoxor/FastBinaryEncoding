@@ -1535,7 +1535,7 @@ class StructSimple {
    * @param {!proto.Account=} f44
    * @constructor
    */
-  constructor (id = 0, f1 = false, f2 = true, f3 = 0, f4 = 255, f5 = '\0', f6 = '!', f7 = '\0', f8 = String.fromCharCode(0x0444), f9 = 0, f10 = 127, f11 = 0, f12 = 255, f13 = 0, f14 = 32767, f15 = 0, f16 = 65535, f17 = 0, f18 = 2147483647, f19 = 0, f20 = 0xFFFFFFFF, f21 = new Int64(0, 0), f22 = new Int64(4294967295, 2147483647), f23 = new UInt64(0, 0), f24 = new UInt64(4294967295, 4294967295), f25 = 0.0, f26 = 123.456, f27 = 0.0, f28 = -123.456e+123, f29 = new Big(0), f30 = new Big('123456.123456'), f31 = '', f32 = 'Initial string!', f33 = new Date(0), f34 = new Date(0), f35 = new Date(Date.now()), f36 = new UUID(), f37 = UUID.sequential(), f38 = new UUID('123e4567-e89b-12d3-a456-426655440000'), f39 = new proto.OrderSide(), f40 = new proto.OrderType(), f41 = new proto.Order(), f42 = new proto.Balance(), f43 = new proto.State(), f44 = new proto.Account()) {
+  constructor (id = 0, f1 = false, f2 = true, f3 = 0, f4 = 255, f5 = '\0', f6 = '!', f7 = '\0', f8 = String.fromCharCode(0x0444), f9 = 0, f10 = 127, f11 = 0, f12 = 255, f13 = 0, f14 = 32767, f15 = 0, f16 = 65535, f17 = 0, f18 = 2147483647, f19 = 0, f20 = 4294967295, f21 = new Int64(0, 0), f22 = new Int64(4294967295, 2147483647), f23 = 0, f24 = new UInt64(4294967295, 4294967295), f25 = 0.0, f26 = 123.456, f27 = 0.0, f28 = -123.456e+123, f29 = new Big(0), f30 = new Big('123456.123456'), f31 = '', f32 = 'Initial string!', f33 = new Date(0), f34 = new Date(0), f35 = new Date(Date.now()), f36 = new UUID(), f37 = UUID.sequential(), f38 = new UUID('123e4567-e89b-12d3-a456-426655440000'), f39 = new proto.OrderSide(), f40 = new proto.OrderType(), f41 = new proto.Order(), f42 = new proto.Balance(), f43 = new proto.State(), f44 = new proto.Account()) {
     this.id = id
     this.f1 = f1
     this.f2 = f2
@@ -3230,7 +3230,7 @@ class FieldModelStructSimple extends fbe.FieldModel {
     fbeCurrentSize += this.f10.fbeSize
 
     if ((fbeCurrentSize + this.f11.fbeSize) <= fbeStructSize) {
-      fbeValue.f11 = this.f11.get()
+      fbeValue.f11 = this.f11.get(0)
     } else {
       fbeValue.f11 = 0
     }
@@ -3262,7 +3262,7 @@ class FieldModelStructSimple extends fbe.FieldModel {
     fbeCurrentSize += this.f14.fbeSize
 
     if ((fbeCurrentSize + this.f15.fbeSize) <= fbeStructSize) {
-      fbeValue.f15 = this.f15.get()
+      fbeValue.f15 = this.f15.get(0)
     } else {
       fbeValue.f15 = 0
     }
@@ -3294,7 +3294,7 @@ class FieldModelStructSimple extends fbe.FieldModel {
     fbeCurrentSize += this.f18.fbeSize
 
     if ((fbeCurrentSize + this.f19.fbeSize) <= fbeStructSize) {
-      fbeValue.f19 = this.f19.get()
+      fbeValue.f19 = this.f19.get(0)
     } else {
       fbeValue.f19 = 0
     }
@@ -3302,9 +3302,9 @@ class FieldModelStructSimple extends fbe.FieldModel {
     fbeCurrentSize += this.f19.fbeSize
 
     if ((fbeCurrentSize + this.f20.fbeSize) <= fbeStructSize) {
-      fbeValue.f20 = this.f20.get(0xFFFFFFFF)
+      fbeValue.f20 = this.f20.get(4294967295)
     } else {
-      fbeValue.f20 = 0xFFFFFFFF
+      fbeValue.f20 = 4294967295
     }
     // noinspection JSUnusedAssignment
     fbeCurrentSize += this.f20.fbeSize
@@ -3326,9 +3326,9 @@ class FieldModelStructSimple extends fbe.FieldModel {
     fbeCurrentSize += this.f22.fbeSize
 
     if ((fbeCurrentSize + this.f23.fbeSize) <= fbeStructSize) {
-      fbeValue.f23 = this.f23.get()
+      fbeValue.f23 = this.f23.get(0)
     } else {
-      fbeValue.f23 = new UInt64(0, 0)
+      fbeValue.f23 = 0
     }
     // noinspection JSUnusedAssignment
     fbeCurrentSize += this.f23.fbeSize
@@ -5402,7 +5402,7 @@ class StructOptional extends StructSimple {
    * @param {proto.Account=} f165
    * @constructor
    */
-  constructor (parent = new StructSimple(), f100 = undefined, f101 = true, f102 = undefined, f103 = undefined, f104 = 255, f105 = undefined, f106 = undefined, f107 = '!', f108 = undefined, f109 = undefined, f110 = String.fromCharCode(0x0444), f111 = undefined, f112 = undefined, f113 = 127, f114 = undefined, f115 = undefined, f116 = 255, f117 = undefined, f118 = undefined, f119 = 32767, f120 = undefined, f121 = undefined, f122 = 65535, f123 = undefined, f124 = undefined, f125 = 2147483647, f126 = undefined, f127 = undefined, f128 = 0xFFFFFFFF, f129 = undefined, f130 = undefined, f131 = new Int64(4294967295, 2147483647), f132 = undefined, f133 = undefined, f134 = new UInt64(4294967295, 4294967295), f135 = undefined, f136 = undefined, f137 = 123.456, f138 = undefined, f139 = undefined, f140 = -123.456e+123, f141 = undefined, f142 = undefined, f143 = new Big('123456.123456'), f144 = undefined, f145 = undefined, f146 = 'Initial string!', f147 = undefined, f148 = undefined, f149 = new Date(Date.now()), f150 = undefined, f151 = undefined, f152 = new UUID('123e4567-e89b-12d3-a456-426655440000'), f153 = undefined, f154 = undefined, f155 = undefined, f156 = undefined, f157 = undefined, f158 = undefined, f159 = undefined, f160 = undefined, f161 = undefined, f162 = undefined, f163 = undefined, f164 = undefined, f165 = undefined) {
+  constructor (parent = new StructSimple(), f100 = undefined, f101 = true, f102 = undefined, f103 = undefined, f104 = 255, f105 = undefined, f106 = undefined, f107 = '!', f108 = undefined, f109 = undefined, f110 = String.fromCharCode(0x0444), f111 = undefined, f112 = undefined, f113 = 127, f114 = undefined, f115 = undefined, f116 = 255, f117 = undefined, f118 = undefined, f119 = 32767, f120 = undefined, f121 = undefined, f122 = 65535, f123 = undefined, f124 = undefined, f125 = 2147483647, f126 = undefined, f127 = undefined, f128 = 4294967295, f129 = undefined, f130 = undefined, f131 = new Int64(4294967295, 2147483647), f132 = undefined, f133 = undefined, f134 = new UInt64(4294967295, 4294967295), f135 = undefined, f136 = undefined, f137 = 123.456, f138 = undefined, f139 = undefined, f140 = -123.456e+123, f141 = undefined, f142 = undefined, f143 = new Big('123456.123456'), f144 = undefined, f145 = undefined, f146 = 'Initial string!', f147 = undefined, f148 = undefined, f149 = new Date(Date.now()), f150 = undefined, f151 = undefined, f152 = new UUID('123e4567-e89b-12d3-a456-426655440000'), f153 = undefined, f154 = undefined, f155 = undefined, f156 = undefined, f157 = undefined, f158 = undefined, f159 = undefined, f160 = undefined, f161 = undefined, f162 = undefined, f163 = undefined, f164 = undefined, f165 = undefined) {
     super()
     super.copy(parent)
     this.f100 = f100
@@ -8084,9 +8084,9 @@ class FieldModelStructOptional extends fbe.FieldModel {
     fbeCurrentSize += this.f127.fbeSize
 
     if ((fbeCurrentSize + this.f128.fbeSize) <= fbeStructSize) {
-      fbeValue.f128 = this.f128.get(0xFFFFFFFF)
+      fbeValue.f128 = this.f128.get(4294967295)
     } else {
-      fbeValue.f128 = 0xFFFFFFFF
+      fbeValue.f128 = 4294967295
     }
     // noinspection JSUnusedAssignment
     fbeCurrentSize += this.f128.fbeSize

@@ -997,7 +997,7 @@ func (fm *FieldModelStructOptional) GetFields(fbeValue *StructOptional, fbeStruc
     if (fbeCurrentSize + fm.F104.FBESize()) <= fbeStructSize {
         fbeValue.F104, _ = fm.F104.Get()
     } else {
-        fbeValue.F104 = fbe.OptionalByte(byte(255))
+        fbeValue.F104 = fbe.OptionalByte(255)
     }
     fbeCurrentSize += fm.F104.FBESize()
 
@@ -1060,7 +1060,7 @@ func (fm *FieldModelStructOptional) GetFields(fbeValue *StructOptional, fbeStruc
     if (fbeCurrentSize + fm.F113.FBESize()) <= fbeStructSize {
         fbeValue.F113, _ = fm.F113.Get()
     } else {
-        fbeValue.F113 = fbe.OptionalInt8(int8(127))
+        fbeValue.F113 = fbe.OptionalInt8(127)
     }
     fbeCurrentSize += fm.F113.FBESize()
 
@@ -1081,7 +1081,7 @@ func (fm *FieldModelStructOptional) GetFields(fbeValue *StructOptional, fbeStruc
     if (fbeCurrentSize + fm.F116.FBESize()) <= fbeStructSize {
         fbeValue.F116, _ = fm.F116.Get()
     } else {
-        fbeValue.F116 = fbe.OptionalUInt8(uint8(255))
+        fbeValue.F116 = fbe.OptionalUInt8(255)
     }
     fbeCurrentSize += fm.F116.FBESize()
 
@@ -1102,7 +1102,7 @@ func (fm *FieldModelStructOptional) GetFields(fbeValue *StructOptional, fbeStruc
     if (fbeCurrentSize + fm.F119.FBESize()) <= fbeStructSize {
         fbeValue.F119, _ = fm.F119.Get()
     } else {
-        fbeValue.F119 = fbe.OptionalInt16(int16(32767))
+        fbeValue.F119 = fbe.OptionalInt16(32767)
     }
     fbeCurrentSize += fm.F119.FBESize()
 
@@ -1123,7 +1123,7 @@ func (fm *FieldModelStructOptional) GetFields(fbeValue *StructOptional, fbeStruc
     if (fbeCurrentSize + fm.F122.FBESize()) <= fbeStructSize {
         fbeValue.F122, _ = fm.F122.Get()
     } else {
-        fbeValue.F122 = fbe.OptionalUInt16(uint16(65535))
+        fbeValue.F122 = fbe.OptionalUInt16(65535)
     }
     fbeCurrentSize += fm.F122.FBESize()
 
@@ -1144,7 +1144,7 @@ func (fm *FieldModelStructOptional) GetFields(fbeValue *StructOptional, fbeStruc
     if (fbeCurrentSize + fm.F125.FBESize()) <= fbeStructSize {
         fbeValue.F125, _ = fm.F125.Get()
     } else {
-        fbeValue.F125 = fbe.OptionalInt32(int32(2147483647))
+        fbeValue.F125 = fbe.OptionalInt32(2147483647)
     }
     fbeCurrentSize += fm.F125.FBESize()
 
@@ -1165,7 +1165,7 @@ func (fm *FieldModelStructOptional) GetFields(fbeValue *StructOptional, fbeStruc
     if (fbeCurrentSize + fm.F128.FBESize()) <= fbeStructSize {
         fbeValue.F128, _ = fm.F128.Get()
     } else {
-        fbeValue.F128 = fbe.OptionalUInt32(uint32(0xFFFFFFFF))
+        fbeValue.F128 = fbe.OptionalUInt32(4294967295)
     }
     fbeCurrentSize += fm.F128.FBESize()
 
@@ -1186,7 +1186,7 @@ func (fm *FieldModelStructOptional) GetFields(fbeValue *StructOptional, fbeStruc
     if (fbeCurrentSize + fm.F131.FBESize()) <= fbeStructSize {
         fbeValue.F131, _ = fm.F131.Get()
     } else {
-        fbeValue.F131 = fbe.OptionalInt64(int64(9223372036854775807))
+        fbeValue.F131 = fbe.OptionalInt64(9223372036854775807)
     }
     fbeCurrentSize += fm.F131.FBESize()
 
@@ -1207,7 +1207,7 @@ func (fm *FieldModelStructOptional) GetFields(fbeValue *StructOptional, fbeStruc
     if (fbeCurrentSize + fm.F134.FBESize()) <= fbeStructSize {
         fbeValue.F134, _ = fm.F134.Get()
     } else {
-        fbeValue.F134 = fbe.OptionalUInt64(uint64(0xFFFFFFFFFFFFFFFF))
+        fbeValue.F134 = fbe.OptionalUInt64(18446744073709551615)
     }
     fbeCurrentSize += fm.F134.FBESize()
 

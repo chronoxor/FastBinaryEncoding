@@ -768,9 +768,9 @@ class FieldModelStructOptional(buffer: Buffer, offset: Long) : FieldModel(buffer
         fbeCurrentSize += f103.fbeSize
 
         if ((fbeCurrentSize + f104.fbeSize) <= fbeStructSize)
-            fbeValue.f104 = f104.get(255.toByte())
+            fbeValue.f104 = f104.get(UByte.MAX_VALUE)
         else
-            fbeValue.f104 = 255.toByte()
+            fbeValue.f104 = UByte.MAX_VALUE
         fbeCurrentSize += f104.fbeSize
 
         if ((fbeCurrentSize + f105.fbeSize) <= fbeStructSize)
@@ -822,9 +822,9 @@ class FieldModelStructOptional(buffer: Buffer, offset: Long) : FieldModel(buffer
         fbeCurrentSize += f112.fbeSize
 
         if ((fbeCurrentSize + f113.fbeSize) <= fbeStructSize)
-            fbeValue.f113 = f113.get(127)
+            fbeValue.f113 = f113.get(Byte.MAX_VALUE)
         else
-            fbeValue.f113 = 127
+            fbeValue.f113 = Byte.MAX_VALUE
         fbeCurrentSize += f113.fbeSize
 
         if ((fbeCurrentSize + f114.fbeSize) <= fbeStructSize)
@@ -840,9 +840,9 @@ class FieldModelStructOptional(buffer: Buffer, offset: Long) : FieldModel(buffer
         fbeCurrentSize += f115.fbeSize
 
         if ((fbeCurrentSize + f116.fbeSize) <= fbeStructSize)
-            fbeValue.f116 = f116.get(255u)
+            fbeValue.f116 = f116.get(UByte.MAX_VALUE)
         else
-            fbeValue.f116 = 255u
+            fbeValue.f116 = UByte.MAX_VALUE
         fbeCurrentSize += f116.fbeSize
 
         if ((fbeCurrentSize + f117.fbeSize) <= fbeStructSize)
@@ -858,9 +858,9 @@ class FieldModelStructOptional(buffer: Buffer, offset: Long) : FieldModel(buffer
         fbeCurrentSize += f118.fbeSize
 
         if ((fbeCurrentSize + f119.fbeSize) <= fbeStructSize)
-            fbeValue.f119 = f119.get(32767)
+            fbeValue.f119 = f119.get(Short.MAX_VALUE)
         else
-            fbeValue.f119 = 32767
+            fbeValue.f119 = Short.MAX_VALUE
         fbeCurrentSize += f119.fbeSize
 
         if ((fbeCurrentSize + f120.fbeSize) <= fbeStructSize)
@@ -876,9 +876,9 @@ class FieldModelStructOptional(buffer: Buffer, offset: Long) : FieldModel(buffer
         fbeCurrentSize += f121.fbeSize
 
         if ((fbeCurrentSize + f122.fbeSize) <= fbeStructSize)
-            fbeValue.f122 = f122.get(65535u)
+            fbeValue.f122 = f122.get(UShort.MAX_VALUE)
         else
-            fbeValue.f122 = 65535u
+            fbeValue.f122 = UShort.MAX_VALUE
         fbeCurrentSize += f122.fbeSize
 
         if ((fbeCurrentSize + f123.fbeSize) <= fbeStructSize)
@@ -894,9 +894,9 @@ class FieldModelStructOptional(buffer: Buffer, offset: Long) : FieldModel(buffer
         fbeCurrentSize += f124.fbeSize
 
         if ((fbeCurrentSize + f125.fbeSize) <= fbeStructSize)
-            fbeValue.f125 = f125.get(2147483647)
+            fbeValue.f125 = f125.get(Int.MAX_VALUE)
         else
-            fbeValue.f125 = 2147483647
+            fbeValue.f125 = Int.MAX_VALUE
         fbeCurrentSize += f125.fbeSize
 
         if ((fbeCurrentSize + f126.fbeSize) <= fbeStructSize)
@@ -912,9 +912,9 @@ class FieldModelStructOptional(buffer: Buffer, offset: Long) : FieldModel(buffer
         fbeCurrentSize += f127.fbeSize
 
         if ((fbeCurrentSize + f128.fbeSize) <= fbeStructSize)
-            fbeValue.f128 = f128.get(0xFFFFFFFFu)
+            fbeValue.f128 = f128.get(UInt.MAX_VALUE)
         else
-            fbeValue.f128 = 0xFFFFFFFFu
+            fbeValue.f128 = UInt.MAX_VALUE
         fbeCurrentSize += f128.fbeSize
 
         if ((fbeCurrentSize + f129.fbeSize) <= fbeStructSize)
@@ -930,9 +930,9 @@ class FieldModelStructOptional(buffer: Buffer, offset: Long) : FieldModel(buffer
         fbeCurrentSize += f130.fbeSize
 
         if ((fbeCurrentSize + f131.fbeSize) <= fbeStructSize)
-            fbeValue.f131 = f131.get(9223372036854775807L)
+            fbeValue.f131 = f131.get(Long.MAX_VALUE)
         else
-            fbeValue.f131 = 9223372036854775807L
+            fbeValue.f131 = Long.MAX_VALUE
         fbeCurrentSize += f131.fbeSize
 
         if ((fbeCurrentSize + f132.fbeSize) <= fbeStructSize)
@@ -948,9 +948,9 @@ class FieldModelStructOptional(buffer: Buffer, offset: Long) : FieldModel(buffer
         fbeCurrentSize += f133.fbeSize
 
         if ((fbeCurrentSize + f134.fbeSize) <= fbeStructSize)
-            fbeValue.f134 = f134.get(0xFFFFFFFFFFFFFFFFuL)
+            fbeValue.f134 = f134.get(ULong.MAX_VALUE)
         else
-            fbeValue.f134 = 0xFFFFFFFFFFFFFFFFuL
+            fbeValue.f134 = ULong.MAX_VALUE
         fbeCurrentSize += f134.fbeSize
 
         if ((fbeCurrentSize + f135.fbeSize) <= fbeStructSize)

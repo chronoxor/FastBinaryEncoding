@@ -23,7 +23,7 @@ public class StructOptional extends StructSimple
     public Boolean f101 = true;
     public Boolean f102 = null;
     public Byte f103 = null;
-    public Byte f104 = (byte)255;
+    public Byte f104 = (byte)0xFF;
     public Byte f105 = null;
     public Character f106 = null;
     public Character f107 = (char)'!';
@@ -35,13 +35,13 @@ public class StructOptional extends StructSimple
     public Byte f113 = (byte)127;
     public Byte f114 = null;
     public Byte f115 = null;
-    public Byte f116 = (byte)255;
+    public Byte f116 = (byte)0xFF;
     public Byte f117 = null;
     public Short f118 = null;
     public Short f119 = (short)32767;
     public Short f120 = null;
     public Short f121 = null;
-    public Short f122 = (short)65535;
+    public Short f122 = (short)0xFFFF;
     public Short f123 = null;
     public Integer f124 = null;
     public Integer f125 = (int)2147483647;

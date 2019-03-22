@@ -8068,6 +8068,46 @@ std::string GeneratorCpp::ConvertConstant(const std::string& type, const std::st
         return "false";
     else if (value == "null")
         return optional ? "std::nullopt" : "std::nullptr";
+    else if (value == "min")
+    {
+        if ((type == "byte") || (type == "uint8") || (type == "uint16") || (type == "uint32") || (type == "uint64"))
+            return ConvertConstantPrefix(type) + "0" + ConvertConstantSuffix(type);
+        else if (type == "int8")
+            return ConvertConstantPrefix(type) + "-128" + ConvertConstantSuffix(type);
+        else if (type == "int16")
+            return ConvertConstantPrefix(type) + "-32768" + ConvertConstantSuffix(type);
+        else if (type == "int32")
+            return ConvertConstantPrefix(type) + "-2147483648ll" + ConvertConstantSuffix(type);
+        else if (type == "int64")
+            return ConvertConstantPrefix(type) + "-9223372036854775808ll" + ConvertConstantSuffix(type);
+
+        yyerror("Unsupported type " + type + " for 'min' constant");
+        return "";
+    }
+    else if (value == "max")
+    {
+        if (type == "byte")
+            return ConvertConstantPrefix(type) + "255" + ConvertConstantSuffix(type);
+        else if (type == "int8")
+            return ConvertConstantPrefix(type) + "127" + ConvertConstantSuffix(type);
+        else if (type == "uint8")
+            return ConvertConstantPrefix(type) + "255" + ConvertConstantSuffix(type);
+        else if (type == "int16")
+            return ConvertConstantPrefix(type) + "32767" + ConvertConstantSuffix(type);
+        else if (type == "uint16")
+            return ConvertConstantPrefix(type) + "65535" + ConvertConstantSuffix(type);
+        else if (type == "int32")
+            return ConvertConstantPrefix(type) + "2147483647" + ConvertConstantSuffix(type);
+        else if (type == "uint32")
+            return ConvertConstantPrefix(type) + "4294967295" + ConvertConstantSuffix(type);
+        else if (type == "int64")
+            return ConvertConstantPrefix(type) + "9223372036854775807" + ConvertConstantSuffix(type);
+        else if (type == "uint64")
+            return ConvertConstantPrefix(type) + "18446744073709551615" + ConvertConstantSuffix(type);
+
+        yyerror("Unsupported type " + type + " for 'max' constant");
+        return "";
+    }
     else if (value == "epoch")
         return "FBE::epoch()";
     else if (value == "utc")

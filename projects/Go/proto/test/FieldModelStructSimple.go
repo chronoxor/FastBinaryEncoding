@@ -726,9 +726,9 @@ func (fm *FieldModelStructSimple) GetFields(fbeValue *StructSimple, fbeStructSiz
     fbeCurrentSize += fm.F3.FBESize()
 
     if (fbeCurrentSize + fm.F4.FBESize()) <= fbeStructSize {
-        fbeValue.F4, _ = fm.F4.GetDefault(byte(255))
+        fbeValue.F4, _ = fm.F4.GetDefault(255)
     } else {
-        fbeValue.F4 = byte(255)
+        fbeValue.F4 = 255
     }
     fbeCurrentSize += fm.F4.FBESize()
 
@@ -768,23 +768,23 @@ func (fm *FieldModelStructSimple) GetFields(fbeValue *StructSimple, fbeStructSiz
     fbeCurrentSize += fm.F9.FBESize()
 
     if (fbeCurrentSize + fm.F10.FBESize()) <= fbeStructSize {
-        fbeValue.F10, _ = fm.F10.GetDefault(int8(127))
+        fbeValue.F10, _ = fm.F10.GetDefault(127)
     } else {
-        fbeValue.F10 = int8(127)
+        fbeValue.F10 = 127
     }
     fbeCurrentSize += fm.F10.FBESize()
 
     if (fbeCurrentSize + fm.F11.FBESize()) <= fbeStructSize {
-        fbeValue.F11, _ = fm.F11.Get()
+        fbeValue.F11, _ = fm.F11.GetDefault(0)
     } else {
         fbeValue.F11 = 0
     }
     fbeCurrentSize += fm.F11.FBESize()
 
     if (fbeCurrentSize + fm.F12.FBESize()) <= fbeStructSize {
-        fbeValue.F12, _ = fm.F12.GetDefault(uint8(255))
+        fbeValue.F12, _ = fm.F12.GetDefault(255)
     } else {
-        fbeValue.F12 = uint8(255)
+        fbeValue.F12 = 255
     }
     fbeCurrentSize += fm.F12.FBESize()
 
@@ -796,23 +796,23 @@ func (fm *FieldModelStructSimple) GetFields(fbeValue *StructSimple, fbeStructSiz
     fbeCurrentSize += fm.F13.FBESize()
 
     if (fbeCurrentSize + fm.F14.FBESize()) <= fbeStructSize {
-        fbeValue.F14, _ = fm.F14.GetDefault(int16(32767))
+        fbeValue.F14, _ = fm.F14.GetDefault(32767)
     } else {
-        fbeValue.F14 = int16(32767)
+        fbeValue.F14 = 32767
     }
     fbeCurrentSize += fm.F14.FBESize()
 
     if (fbeCurrentSize + fm.F15.FBESize()) <= fbeStructSize {
-        fbeValue.F15, _ = fm.F15.Get()
+        fbeValue.F15, _ = fm.F15.GetDefault(0)
     } else {
         fbeValue.F15 = 0
     }
     fbeCurrentSize += fm.F15.FBESize()
 
     if (fbeCurrentSize + fm.F16.FBESize()) <= fbeStructSize {
-        fbeValue.F16, _ = fm.F16.GetDefault(uint16(65535))
+        fbeValue.F16, _ = fm.F16.GetDefault(65535)
     } else {
-        fbeValue.F16 = uint16(65535)
+        fbeValue.F16 = 65535
     }
     fbeCurrentSize += fm.F16.FBESize()
 
@@ -824,23 +824,23 @@ func (fm *FieldModelStructSimple) GetFields(fbeValue *StructSimple, fbeStructSiz
     fbeCurrentSize += fm.F17.FBESize()
 
     if (fbeCurrentSize + fm.F18.FBESize()) <= fbeStructSize {
-        fbeValue.F18, _ = fm.F18.GetDefault(int32(2147483647))
+        fbeValue.F18, _ = fm.F18.GetDefault(2147483647)
     } else {
-        fbeValue.F18 = int32(2147483647)
+        fbeValue.F18 = 2147483647
     }
     fbeCurrentSize += fm.F18.FBESize()
 
     if (fbeCurrentSize + fm.F19.FBESize()) <= fbeStructSize {
-        fbeValue.F19, _ = fm.F19.Get()
+        fbeValue.F19, _ = fm.F19.GetDefault(0)
     } else {
         fbeValue.F19 = 0
     }
     fbeCurrentSize += fm.F19.FBESize()
 
     if (fbeCurrentSize + fm.F20.FBESize()) <= fbeStructSize {
-        fbeValue.F20, _ = fm.F20.GetDefault(uint32(0xFFFFFFFF))
+        fbeValue.F20, _ = fm.F20.GetDefault(4294967295)
     } else {
-        fbeValue.F20 = uint32(0xFFFFFFFF)
+        fbeValue.F20 = 4294967295
     }
     fbeCurrentSize += fm.F20.FBESize()
 
@@ -852,23 +852,23 @@ func (fm *FieldModelStructSimple) GetFields(fbeValue *StructSimple, fbeStructSiz
     fbeCurrentSize += fm.F21.FBESize()
 
     if (fbeCurrentSize + fm.F22.FBESize()) <= fbeStructSize {
-        fbeValue.F22, _ = fm.F22.GetDefault(int64(9223372036854775807))
+        fbeValue.F22, _ = fm.F22.GetDefault(9223372036854775807)
     } else {
-        fbeValue.F22 = int64(9223372036854775807)
+        fbeValue.F22 = 9223372036854775807
     }
     fbeCurrentSize += fm.F22.FBESize()
 
     if (fbeCurrentSize + fm.F23.FBESize()) <= fbeStructSize {
-        fbeValue.F23, _ = fm.F23.Get()
+        fbeValue.F23, _ = fm.F23.GetDefault(0)
     } else {
         fbeValue.F23 = 0
     }
     fbeCurrentSize += fm.F23.FBESize()
 
     if (fbeCurrentSize + fm.F24.FBESize()) <= fbeStructSize {
-        fbeValue.F24, _ = fm.F24.GetDefault(uint64(0xFFFFFFFFFFFFFFFF))
+        fbeValue.F24, _ = fm.F24.GetDefault(18446744073709551615)
     } else {
-        fbeValue.F24 = uint64(0xFFFFFFFFFFFFFFFF)
+        fbeValue.F24 = 18446744073709551615
     }
     fbeCurrentSize += fm.F24.FBESize()
 

@@ -7375,6 +7375,54 @@ std::string GeneratorKotlin::ConvertConstant(const std::string& type, const std:
         return "false";
     else if (value == "null")
         return "null";
+    else if (value == "min")
+    {
+        if (type == "byte")
+            return "UByte.MIN_VALUE";
+        else if (type == "int8")
+            return "Byte.MIN_VALUE";
+        else if (type == "uint8")
+            return "UByte.MIN_VALUE";
+        else if (type == "int16")
+            return "Short.MIN_VALUE";
+        else if (type == "uint16")
+            return "UShort.MIN_VALUE";
+        else if (type == "int32")
+            return "Int.MIN_VALUE";
+        else if (type == "uint32")
+            return "UInt.MIN_VALUE";
+        else if (type == "int64")
+            return "Long.MIN_VALUE";
+        else if (type == "uint64")
+            return "ULong.MIN_VALUE";
+
+        yyerror("Unsupported type " + type + " for 'min' constant");
+        return "";
+    }
+    else if (value == "max")
+    {
+        if (type == "byte")
+            return "UByte.MAX_VALUE";
+        else if (type == "int8")
+            return "Byte.MAX_VALUE";
+        else if (type == "uint8")
+            return "UByte.MAX_VALUE";
+        else if (type == "int16")
+            return "Short.MAX_VALUE";
+        else if (type == "uint16")
+            return "UShort.MAX_VALUE";
+        else if (type == "int32")
+            return "Int.MAX_VALUE";
+        else if (type == "uint32")
+            return "UInt.MAX_VALUE";
+        else if (type == "int64")
+            return "Long.MAX_VALUE";
+        else if (type == "uint64")
+            return "ULong.MAX_VALUE";
+
+        yyerror("Unsupported type " + type + " for 'max' constant");
+        return "";
+    }
     else if (value == "epoch")
         return "Instant.EPOCH";
     else if (value == "utc")

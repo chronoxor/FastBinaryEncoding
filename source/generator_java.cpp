@@ -7453,6 +7453,46 @@ std::string GeneratorJava::ConvertConstant(const std::string& type, const std::s
         return "false";
     else if (value == "null")
         return "null";
+    else if (value == "min")
+    {
+        if ((type == "byte") || (type == "uint8") || (type == "uint16") || (type == "uint32") || (type == "uint64"))
+            return ConvertConstantPrefix(type) + "0";
+        else if (type == "int8")
+            return ConvertConstantPrefix(type) + "-128" + ConvertConstantSuffix(type);
+        else if (type == "int16")
+            return ConvertConstantPrefix(type) + "-32768" + ConvertConstantSuffix(type);
+        else if (type == "int32")
+            return ConvertConstantPrefix(type) + "-2147483648" + ConvertConstantSuffix(type);
+        else if (type == "int64")
+            return ConvertConstantPrefix(type) + "-9223372036854775808" + ConvertConstantSuffix(type);
+
+        yyerror("Unsupported type " + type + " for 'min' constant");
+        return "";
+    }
+    else if (value == "max")
+    {
+        if (type == "byte")
+            return ConvertConstantPrefix(type) + "0xFF" + ConvertConstantSuffix(type);
+        else if (type == "int8")
+            return ConvertConstantPrefix(type) + "127" + ConvertConstantSuffix(type);
+        else if (type == "uint8")
+            return ConvertConstantPrefix(type) + "0xFF" + ConvertConstantSuffix(type);
+        else if (type == "int16")
+            return ConvertConstantPrefix(type) + "32767" + ConvertConstantSuffix(type);
+        else if (type == "uint16")
+            return ConvertConstantPrefix(type) + "0xFFFF" + ConvertConstantSuffix(type);
+        else if (type == "int32")
+            return ConvertConstantPrefix(type) + "2147483647" + ConvertConstantSuffix(type);
+        else if (type == "uint32")
+            return ConvertConstantPrefix(type) + "0xFFFFFFFF" + ConvertConstantSuffix(type);
+        else if (type == "int64")
+            return ConvertConstantPrefix(type) + "9223372036854775807" + ConvertConstantSuffix(type);
+        else if (type == "uint64")
+            return ConvertConstantPrefix(type) + "0xFFFFFFFFFFFFFFFF" + ConvertConstantSuffix(type);
+
+        yyerror("Unsupported type " + type + " for 'max' constant");
+        return "";
+    }
     else if (value == "epoch")
         return "Instant.EPOCH";
     else if (value == "utc")
