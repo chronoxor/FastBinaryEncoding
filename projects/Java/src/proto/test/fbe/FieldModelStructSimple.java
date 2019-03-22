@@ -728,9 +728,9 @@ public final class FieldModelStructSimple extends FieldModel
         fbeCurrentSize += f22.fbeSize();
 
         if ((fbeCurrentSize + f23.fbeSize()) <= fbeStructSize)
-            fbeValue.f23 = f23.get((long)0);
+            fbeValue.f23 = f23.get((long)0L);
         else
-            fbeValue.f23 = (long)0;
+            fbeValue.f23 = (long)0L;
         fbeCurrentSize += f23.fbeSize();
 
         if ((fbeCurrentSize + f24.fbeSize()) <= fbeStructSize)

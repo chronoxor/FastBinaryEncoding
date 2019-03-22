@@ -25,7 +25,7 @@ open class StructOptional : StructSimple
     var f101: Boolean? = true
     var f102: Boolean? = null
     var f103: Byte? = null
-    var f104: Byte? = UByte.MAX_VALUE
+    var f104: Byte? = 0xFF.toByte()
     var f105: Byte? = null
     var f106: Char? = null
     var f107: Char? = '!'.toChar()

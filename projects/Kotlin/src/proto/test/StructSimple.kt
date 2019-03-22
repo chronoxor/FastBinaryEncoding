@@ -25,7 +25,7 @@ open class StructSimple : Comparable<Any?>
     var f1: Boolean = false
     var f2: Boolean = true
     var f3: Byte = 0.toByte()
-    var f4: Byte = UByte.MAX_VALUE
+    var f4: Byte = 0xFF.toByte()
     var f5: Char = '\u0000'
     var f6: Char = '!'.toChar()
     var f7: Char = '\u0000'

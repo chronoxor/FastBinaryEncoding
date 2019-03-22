@@ -7456,7 +7456,7 @@ std::string GeneratorJava::ConvertConstant(const std::string& type, const std::s
     else if (value == "min")
     {
         if ((type == "byte") || (type == "uint8") || (type == "uint16") || (type == "uint32") || (type == "uint64"))
-            return ConvertConstantPrefix(type) + "0";
+            return ConvertConstantPrefix(type) + "0" + ConvertConstantSuffix(type);
         else if (type == "int8")
             return ConvertConstantPrefix(type) + "-128" + ConvertConstantSuffix(type);
         else if (type == "int16")

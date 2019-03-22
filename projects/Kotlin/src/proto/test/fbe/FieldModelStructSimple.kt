@@ -566,9 +566,9 @@ class FieldModelStructSimple(buffer: Buffer, offset: Long) : FieldModel(buffer, 
         fbeCurrentSize += f3.fbeSize
 
         if ((fbeCurrentSize + f4.fbeSize) <= fbeStructSize)
-            fbeValue.f4 = f4.get(UByte.MAX_VALUE)
+            fbeValue.f4 = f4.get(0xFF.toByte())
         else
-            fbeValue.f4 = UByte.MAX_VALUE
+            fbeValue.f4 = 0xFF.toByte()
         fbeCurrentSize += f4.fbeSize
 
         if ((fbeCurrentSize + f5.fbeSize) <= fbeStructSize)

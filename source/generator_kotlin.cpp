@@ -7378,7 +7378,7 @@ std::string GeneratorKotlin::ConvertConstant(const std::string& type, const std:
     else if (value == "min")
     {
         if (type == "byte")
-            return "UByte.MIN_VALUE";
+            return ConvertConstantPrefix(type) + "0" + ConvertConstantSuffix(type);
         else if (type == "int8")
             return "Byte.MIN_VALUE";
         else if (type == "uint8")
@@ -7402,7 +7402,7 @@ std::string GeneratorKotlin::ConvertConstant(const std::string& type, const std:
     else if (value == "max")
     {
         if (type == "byte")
-            return "UByte.MAX_VALUE";
+            return ConvertConstantPrefix(type) + "0xFF" + ConvertConstantSuffix(type);
         else if (type == "int8")
             return "Byte.MAX_VALUE";
         else if (type == "uint8")

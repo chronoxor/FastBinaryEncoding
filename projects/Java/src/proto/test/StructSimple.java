@@ -42,7 +42,7 @@ public class StructSimple implements Comparable<Object>
     public int f20 = (int)0xFFFFFFFF;
     public long f21 = 0L;
     public long f22 = (long)9223372036854775807L;
-    public long f23 = (long)0;
+    public long f23 = (long)0L;
     public long f24 = (long)0xFFFFFFFFFFFFFFFFL;
     public float f25 = 0.0f;
     public float f26 = (float)123.456f;
