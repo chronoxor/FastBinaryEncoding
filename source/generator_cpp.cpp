@@ -5815,6 +5815,7 @@ void GeneratorCpp::GenerateEnumLoggingStream(const std::shared_ptr<EnumType>& e)
 {
     // Generate enum logging stream operator begin
     WriteLine();
+    WriteLineIndent("#if defined(LOGGING_PROTOCOL)");
     WriteLineIndent("inline CppLogging::Record& operator<<(CppLogging::Record& record, " + *e->name + " value)");
     WriteLineIndent("{");
     Indent(1);
@@ -5830,6 +5831,7 @@ void GeneratorCpp::GenerateEnumLoggingStream(const std::shared_ptr<EnumType>& e)
     // Generate enum logging stream operator end
     Indent(-1);
     WriteLineIndent("}");
+    WriteLineIndent("#endif");
 }
 
 void GeneratorCpp::GenerateEnumJson(const std::shared_ptr<Package>& p, const std::shared_ptr<EnumType>& e)
@@ -6047,6 +6049,7 @@ void GeneratorCpp::GenerateFlagsLoggingStream(const std::shared_ptr<FlagsType>& 
 {
     // Generate flags logging stream operator begin
     WriteLine();
+    WriteLineIndent("#if defined(LOGGING_PROTOCOL)");
     WriteLineIndent("inline CppLogging::Record& operator<<(CppLogging::Record& record, " + *f->name + " value)");
     WriteLineIndent("{");
     Indent(1);
@@ -6055,6 +6058,7 @@ void GeneratorCpp::GenerateFlagsLoggingStream(const std::shared_ptr<FlagsType>& 
     WriteLineIndent("return record.StoreCustomFormat(\"{}\", stream.str());");
     Indent(-1);
     WriteLineIndent("}");
+    WriteLineIndent("#endif");
 }
 
 void GeneratorCpp::GenerateFlagsJson(const std::shared_ptr<Package>& p, const std::shared_ptr<FlagsType>& f)
@@ -6378,6 +6382,10 @@ void GeneratorCpp::GenerateStruct(const std::shared_ptr<Package>& p, const std::
     // Generate struct output stream
     GenerateStructOutputStream(p, s);
 
+    // Generate struct logging stream
+    if (Logging())
+        GenerateStructLoggingStream(p, s);
+
     // Generate namespace end
     WriteLine();
     WriteLineIndent("} // namespace " + *p->name);
@@ -6540,6 +6548,148 @@ void GeneratorCpp::GenerateStructOutputStream(const std::shared_ptr<Package>& p,
     // Generate struct output stream operator end
     Indent(-1);
     WriteLineIndent("}");
+}
+
+void GeneratorCpp::GenerateStructLoggingStream(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
+{
+    // Generate struct logging stream operator begin
+    WriteLine();
+    WriteLineIndent("#if defined(LOGGING_PROTOCOL)");
+    WriteLineIndent("inline CppLogging::Record& operator<<(CppLogging::Record& record, const " + *s->name + "& value)");
+    WriteLineIndent("{");
+    Indent(1);
+
+    // Generate struct output stream operator body
+    WriteLineIndent("stream << \"" + *s->name + "(\";");
+    bool first = true;
+    if (s->base && !s->base->empty())
+    {
+        WriteLineIndent("stream << (const " + ConvertTypeName(*p->name, *s->base, false) + "&)value;");
+        first = false;
+    }
+    if (s->body)
+    {
+        // Generate fields output stream operator calls
+        for (const auto& field : s->body->fields)
+        {
+            if (field->array)
+            {
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("bool first = true;");
+                WriteLineIndent("stream << \"" + std::string(first ? "" : ",") + *field->name + "=[" + std::to_string(field->N) + "][\"" + ";");
+                WriteLineIndent("for (size_t i = 0; i < " + std::to_string(field->N) + "; ++i)");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "value." + *field->name + "[i]", field->optional, true));
+                WriteLineIndent("first = false;");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("stream << \"]\";");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
+            else if (field->vector)
+            {
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("bool first = true;");
+                WriteLineIndent("stream << \"" + std::string(first ? "" : ",") + *field->name + "=[\" << " + "value." + *field->name + ".size()" + " << \"][\"" + ";");
+                WriteLineIndent("for (auto const& it : value." + *field->name + ")");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "it", field->optional, true));
+                WriteLineIndent("first = false;");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("stream << \"]\";");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
+            else if (field->list)
+            {
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("bool first = true;");
+                WriteLineIndent("stream << \"" + std::string(first ? "" : ",") + *field->name + "=[\" << " + "value." + *field->name + ".size()" + "<< \"]<\"" + ";");
+                WriteLineIndent("for (auto const& it : value." + *field->name + ")");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "it", field->optional, true));
+                WriteLineIndent("first = false;");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("stream << \">\";");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
+            else if (field->set)
+            {
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("bool first = true;");
+                WriteLineIndent("stream << \"" + std::string(first ? "" : ",") + *field->name + "=[\" << " + "value." + *field->name + ".size()" + "<< \"]{\"" + ";");
+                WriteLineIndent("for (auto const& it : value." + *field->name + ")");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "it", field->optional, true));
+                WriteLineIndent("first = false;");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("stream << \"}\";");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
+            else if (field->map)
+            {
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("bool first = true;");
+                WriteLineIndent("stream << \"" + std::string(first ? "" : ",") + *field->name + "=[\" << " + "value." + *field->name + ".size()" + "<< \"]<{\"" + ";");
+                WriteLineIndent("for (auto const& it : value." + *field->name + ")");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent(ConvertOutputStreamValue(*field->key, "it.first", false, true));
+                WriteLineIndent("stream << \"->\";");
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "it.second", field->optional, false));
+                WriteLineIndent("first = false;");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("stream << \"}>\";");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
+            else if (field->hash)
+            {
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent("bool first = true;");
+                WriteLineIndent("stream << \"" + std::string(first ? "" : ",") + *field->name + "=[\" << " + "value." + *field->name + ".size()" + "<< \"][{\"" + ";");
+                WriteLineIndent("for (auto const& it : value." + *field->name + ")");
+                WriteLineIndent("{");
+                Indent(1);
+                WriteLineIndent(ConvertOutputStreamValue(*field->key, "it.first", false, true));
+                WriteLineIndent("stream << \"->\";");
+                WriteLineIndent(ConvertOutputStreamValue(*field->type, "it.second", field->optional, false));
+                WriteLineIndent("first = false;");
+                Indent(-1);
+                WriteLineIndent("}");
+                WriteLineIndent("stream << \"}]\";");
+                Indent(-1);
+                WriteLineIndent("}");
+            }
+            else
+                WriteLineIndent("stream << \"" + std::string(first ? "" : ",") + *field->name + "=\"; " + ConvertOutputStreamValue(*field->type, "value." + *field->name, field->optional, false));
+            first = false;
+        }
+    }
+    WriteLineIndent("stream << \")\";");
+    WriteLineIndent("return stream;");
+
+    // Generate struct logging stream operator end
+    Indent(-1);
+    WriteLineIndent("}");
+    WriteLineIndent("#endif");
 }
 
 void GeneratorCpp::GenerateStructHash(const std::shared_ptr<Package>& p, const std::shared_ptr<StructType>& s)
@@ -8318,6 +8468,32 @@ std::string GeneratorCpp::ConvertOutputStreamValue(const std::string& type, cons
         return "if (" + name + ") stream " + comma + "<< " + ConvertOutputStreamType(type, name, true) + "; else stream " + comma + "<< \"null\";";
     else
         return "stream " + comma + "<< " + ConvertOutputStreamType(type, name, false) + ";";
+}
+
+std::string GeneratorCpp::ConvertLoggingStreamType(const std::string& type, const std::string& name, bool optional)
+{
+    if (type == "bool")
+        return "(" + std::string(optional ? "*" : "") + name + " ? \"true\" : \"false\"" + ")";
+    else if ((type == "byte") || (type == "int8") || (type == "uint8"))
+        return "(int)" + std::string(optional ? "*" : "") + name;
+    else if (type == "bytes")
+        return "\"bytes[\" << " + name + std::string(optional ? "->" : ".") + "size() << \"]\"";
+    else if ((type == "char") || (type == "wchar"))
+        return "\"'\" << " + std::string(optional ? "*" : "") + name + " << \"'\"";
+    else if ((type == "string") || (type == "uuid"))
+        return "\"\\\"\" << " + std::string(optional ? "*" : "") + name + " << \"\\\"\"";
+    else
+        return std::string(optional ? "*" : "") + name;
+}
+
+std::string GeneratorCpp::ConvertLoggingStreamValue(const std::string& type, const std::string& name, bool optional, bool separate)
+{
+    std::string comma = separate ? "<< std::string(first ? \"\" : \",\") " : "";
+
+    if (optional)
+        return "if (" + name + ") stream " + comma + "<< " + ConvertLoggingStreamType(type, name, true) + "; else stream " + comma + "<< \"null\";";
+    else
+        return "stream " + comma + "<< " + ConvertLoggingStreamType(type, name, false) + ";";
 }
 
 } // namespace FBE
