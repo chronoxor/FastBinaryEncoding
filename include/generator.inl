@@ -11,7 +11,6 @@ namespace FBE {
 inline Generator::Generator(const std::string& input, const std::string& output, int indent, char space)
     : _input(input),
       _output(output),
-      _cursor(0),
       _indent(indent),
       _space(space)
 {

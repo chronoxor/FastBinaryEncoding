@@ -362,7 +362,7 @@ public:
 #if defined(LOGGING_PROTOCOL)
     //! Store logging format
     friend CppLogging::Record& operator<<(CppLogging::Record& record, const decimal_t& value)
-    { return record.StoreCustomFormat("{}", _value); }
+    { return record.StoreCustom(value._value); }
 #endif
 
     //! Swap two instances
@@ -728,9 +728,28 @@ public:
     //! Store logging format
     friend CppLogging::Record& operator<<(CppLogging::Record& record, const uuid_t& uuid)
     {
-        return record.StoreCustomFormat(
-            "{:x}{:x}{:x}{:x}-{:x}{:x}-{:x}{:x}-{:x}{:x}-{:x}{:x}{:x}{:x}{:x}{:x}",
-            _data[0], _data[1], _data[2], _data[3], _data[4], _data[5], _data[6], _data[7], _data[8], _data[9], _data[10], _data[11], _data[12], _data[13], _data[14], _data[15]);
+        const size_t begin = record.StoreListBegin();
+        record.StoreListNext("{:x}", uuid._data[0]);
+        record.StoreListNext("{:x}", uuid._data[1]);
+        record.StoreListNext("{:x}", uuid._data[2]);
+        record.StoreListNext("{:x}", uuid._data[3]);
+        record.StoreListNext('-');
+        record.StoreListNext("{:x}", uuid._data[4]);
+        record.StoreListNext("{:x}", uuid._data[5]);
+        record.StoreListNext('-');
+        record.StoreListNext("{:x}", uuid._data[6]);
+        record.StoreListNext("{:x}", uuid._data[7]);
+        record.StoreListNext('-');
+        record.StoreListNext("{:x}", uuid._data[8]);
+        record.StoreListNext("{:x}", uuid._data[9]);
+        record.StoreListNext('-');
+        record.StoreListNext("{:x}", uuid._data[10]);
+        record.StoreListNext("{:x}", uuid._data[11]);
+        record.StoreListNext("{:x}", uuid._data[12]);
+        record.StoreListNext("{:x}", uuid._data[13]);
+        record.StoreListNext("{:x}", uuid._data[14]);
+        record.StoreListNext("{:x}", uuid._data[15]);
+        return record.StoreListEnd(begin);
     }
 #endif
 

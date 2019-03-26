@@ -747,7 +747,7 @@ struct StructSimple
     }
 
     template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructSimple& other);
+    friend TOutputStream& operator<<(TOutputStream& stream, const StructSimple& value);
 
     void swap(StructSimple& other) noexcept
     {
@@ -3387,7 +3387,7 @@ struct StructOptional : public ::test::StructSimple
     }
 
     template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructOptional& other);
+    friend TOutputStream& operator<<(TOutputStream& stream, const StructOptional& value);
 
     void swap(StructOptional& other) noexcept
     {
@@ -6787,7 +6787,7 @@ struct StructNested : public ::test::StructOptional
     }
 
     template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructNested& other);
+    friend TOutputStream& operator<<(TOutputStream& stream, const StructNested& value);
 
     void swap(StructNested& other) noexcept
     {
@@ -7885,7 +7885,7 @@ struct StructBytes
     }
 
     template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructBytes& other);
+    friend TOutputStream& operator<<(TOutputStream& stream, const StructBytes& value);
 
     void swap(StructBytes& other) noexcept
     {
@@ -8585,7 +8585,7 @@ struct StructArray
     }
 
     template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructArray& other);
+    friend TOutputStream& operator<<(TOutputStream& stream, const StructArray& value);
 
     void swap(StructArray& other) noexcept
     {
@@ -9659,7 +9659,7 @@ struct StructVector
     }
 
     template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructVector& other);
+    friend TOutputStream& operator<<(TOutputStream& stream, const StructVector& value);
 
     void swap(StructVector& other) noexcept
     {
@@ -10743,7 +10743,7 @@ struct StructList
     }
 
     template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructList& other);
+    friend TOutputStream& operator<<(TOutputStream& stream, const StructList& value);
 
     void swap(StructList& other) noexcept
     {
@@ -11809,7 +11809,7 @@ struct StructSet
     }
 
     template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructSet& other);
+    friend TOutputStream& operator<<(TOutputStream& stream, const StructSet& value);
 
     void swap(StructSet& other) noexcept
     {
@@ -12587,7 +12587,7 @@ struct StructMap
     }
 
     template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructMap& other);
+    friend TOutputStream& operator<<(TOutputStream& stream, const StructMap& value);
 
     void swap(StructMap& other) noexcept
     {
@@ -13691,7 +13691,7 @@ struct StructHash
     }
 
     template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructHash& other);
+    friend TOutputStream& operator<<(TOutputStream& stream, const StructHash& value);
 
     void swap(StructHash& other) noexcept
     {
@@ -14771,7 +14771,7 @@ struct StructHashEx
     }
 
     template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructHashEx& other);
+    friend TOutputStream& operator<<(TOutputStream& stream, const StructHashEx& value);
 
     void swap(StructHashEx& other) noexcept
     {
@@ -15419,7 +15419,7 @@ struct StructEmpty
     }
 
     template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const StructEmpty& other);
+    friend TOutputStream& operator<<(TOutputStream& stream, const StructEmpty& value);
 
     void swap(StructEmpty& other) noexcept
     {

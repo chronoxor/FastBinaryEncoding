@@ -16,7 +16,7 @@ namespace FBE {
 class GeneratorJavaScript : public Generator
 {
 public:
-    GeneratorJavaScript(const std::string& input, const std::string& output, int indent, char space);
+    using Generator::Generator;
 
     // Final protocol code generation
     bool Final() const noexcept { return _final; }
@@ -33,9 +33,9 @@ public:
     void Generate(const std::shared_ptr<Package>& package) override;
 
 private:
-    bool _final;
-    bool _json;
-    bool _sender;
+    bool _final{false};
+    bool _json{false};
+    bool _sender{false};
 
     void GenerateHeader(const std::string& source);
     void GenerateFooter();
@@ -122,7 +122,5 @@ private:
 };
 
 } // namespace FBE
-
-#include "generator_javascript.inl"
 
 #endif // GENERATOR_JAVASCRIPT_H

@@ -1162,7 +1162,7 @@ struct Enums
     }
 
     template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const Enums& other);
+    friend TOutputStream& operator<<(TOutputStream& stream, const Enums& value);
 
     void swap(Enums& other) noexcept
     {

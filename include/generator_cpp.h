@@ -16,7 +16,7 @@ namespace FBE {
 class GeneratorCpp : public Generator
 {
 public:
-    GeneratorCpp(const std::string& input, const std::string& output, int indent, char space);
+    using Generator::Generator;
 
     // Final protocol code generation
     bool Final() const noexcept { return _final; }
@@ -37,10 +37,10 @@ public:
     void Generate(const std::shared_ptr<Package>& package) override;
 
 private:
-    bool _final;
-    bool _json;
-    bool _sender;
-    bool _logging;
+    bool _final{false};
+    bool _json{false};
+    bool _sender{false};
+    bool _logging{false};
 
     void GenerateHeader(const std::string& source);
     void GenerateFooter();
@@ -124,7 +124,5 @@ private:
 };
 
 } // namespace FBE
-
-#include "generator_cpp.inl"
 
 #endif // GENERATOR_CPP_H

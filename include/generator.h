@@ -25,7 +25,7 @@ protected:
     CppCommon::FileLock _lock;
     std::string _input;
     std::string _output;
-    int _cursor;
+    int _cursor{0};
     int _indent;
     char _space;
 

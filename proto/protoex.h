@@ -372,7 +372,7 @@ struct Order
     }
 
     template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const Order& other);
+    friend TOutputStream& operator<<(TOutputStream& stream, const Order& value);
 
     void swap(Order& other) noexcept
     {
@@ -1263,7 +1263,7 @@ struct Balance : public ::proto::Balance
     }
 
     template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const Balance& other);
+    friend TOutputStream& operator<<(TOutputStream& stream, const Balance& value);
 
     void swap(Balance& other) noexcept
     {
@@ -1912,7 +1912,7 @@ struct Account
     }
 
     template <class TOutputStream>
-    friend TOutputStream& operator<<(TOutputStream& stream, const Account& other);
+    friend TOutputStream& operator<<(TOutputStream& stream, const Account& value);
 
     void swap(Account& other) noexcept
     {
