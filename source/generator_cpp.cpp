@@ -460,7 +460,7 @@ public:
 #if defined(LOGGING_PROTOCOL)
     //! Store logging format
     friend CppLogging::Record& operator<<(CppLogging::Record& record, const decimal_t& value)
-    { return record.StoreCustom(_value); }
+    { return record.StoreCustom(value._value); }
 #endif
 
     //! Swap two instances
@@ -857,26 +857,26 @@ public:
     friend CppLogging::Record& operator<<(CppLogging::Record& record, const uuid_t& uuid)
     {
         const size_t begin = record.StoreListBegin();
-        record.StoreListNext("{:x}", _data[0]);
-        record.StoreListNext("{:x}", _data[1]);
-        record.StoreListNext("{:x}", _data[2]);
-        record.StoreListNext("{:x}", _data[3]);
+        record.StoreListNext("{:x}", uuid._data[0]);
+        record.StoreListNext("{:x}", uuid._data[1]);
+        record.StoreListNext("{:x}", uuid._data[2]);
+        record.StoreListNext("{:x}", uuid._data[3]);
         record.StoreListNext('-');
-        record.StoreListNext("{:x}", _data[4]);
-        record.StoreListNext("{:x}", _data[5]);
+        record.StoreListNext("{:x}", uuid._data[4]);
+        record.StoreListNext("{:x}", uuid._data[5]);
         record.StoreListNext('-');
-        record.StoreListNext("{:x}", _data[6]);
-        record.StoreListNext("{:x}", _data[7]);
+        record.StoreListNext("{:x}", uuid._data[6]);
+        record.StoreListNext("{:x}", uuid._data[7]);
         record.StoreListNext('-');
-        record.StoreListNext("{:x}", _data[8]);
-        record.StoreListNext("{:x}", _data[9]);
+        record.StoreListNext("{:x}", uuid._data[8]);
+        record.StoreListNext("{:x}", uuid._data[9]);
         record.StoreListNext('-');
-        record.StoreListNext("{:x}", _data[10]);
-        record.StoreListNext("{:x}", _data[11]);
-        record.StoreListNext("{:x}", _data[12]);
-        record.StoreListNext("{:x}", _data[13]);
-        record.StoreListNext("{:x}", _data[14]);
-        record.StoreListNext("{:x}", _data[15]);
+        record.StoreListNext("{:x}", uuid._data[10]);
+        record.StoreListNext("{:x}", uuid._data[11]);
+        record.StoreListNext("{:x}", uuid._data[12]);
+        record.StoreListNext("{:x}", uuid._data[13]);
+        record.StoreListNext("{:x}", uuid._data[14]);
+        record.StoreListNext("{:x}", uuid._data[15]);
         return record.StoreListEnd(begin);
     }
 #endif
@@ -6083,8 +6083,7 @@ void GeneratorCpp::GenerateFlagsLoggingStream(const std::shared_ptr<FlagsType>& 
             WriteLineIndent("if ((value & " + *f->name + "::" + *(*it)->name + ") && ((value & " + *f->name + "::" + *(*it)->name + ") == " + *f->name + "::" + *(*it)->name + "))");
             WriteLineIndent("{");
             Indent(1);
-            WriteLineIndent("record.StoreListNext((first ? \"\" : \"|\"));");
-            WriteLineIndent("record.StoreListNext(\"" + *(*it)->name + "\");");
+            WriteLineIndent("record.StoreListNext((first ? \"\" : \"|\")).StoreListNext(\"" + *(*it)->name + "\");");
             WriteLineIndent("first = false;");
             Indent(-1);
             WriteLineIndent("}");
@@ -6389,7 +6388,16 @@ void GeneratorCpp::GenerateStruct(const std::shared_ptr<Package>& p, const std::
     // Generate struct output stream operator
     WriteLine();
     WriteLineIndent("template <class TOutputStream>");
-    WriteLineIndent("friend TOutputStream& operator<<(TOutputStream& stream, const " + *s->name + "& other);");
+    WriteLineIndent("friend TOutputStream& operator<<(TOutputStream& stream, const " + *s->name + "& value);");
+
+    // Generate struct output stream operator
+    if (Logging())
+    {
+        WriteLine();
+        WriteLineIndent("#if defined(LOGGING_PROTOCOL)");
+        WriteLineIndent("friend CppLogging::Record& operator<<(CppLogging::Record& record, const " + *s->name + "& value);");
+        WriteLineIndent("#endif");
+    }
 
     // Generate struct swap methods
     WriteLine();
@@ -6597,11 +6605,12 @@ void GeneratorCpp::GenerateStructLoggingStream(const std::shared_ptr<Package>& p
     Indent(1);
 
     // Generate struct output stream operator body
-    WriteLineIndent("stream << \"" + *s->name + "(\";");
+    WriteLineIndent("const size_t begin = record.StoreListBegin();");
+    WriteLineIndent("record.StoreListNext(\"" + *s->name + "(\");");
     bool first = true;
     if (s->base && !s->base->empty())
     {
-        WriteLineIndent("stream << (const " + ConvertTypeName(*p->name, *s->base, false) + "&)value;");
+        WriteLineIndent("record.StoreListNext((const " + ConvertTypeName(*p->name, *s->base, false) + "&)value);");
         first = false;
     }
     if (s->body)
@@ -6614,15 +6623,15 @@ void GeneratorCpp::GenerateStructLoggingStream(const std::shared_ptr<Package>& p
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("bool first = true;");
-                WriteLineIndent("stream << \"" + std::string(first ? "" : ",") + *field->name + "=[" + std::to_string(field->N) + "][\"" + ";");
+                WriteLineIndent("record.StoreListNext(\"" + std::string(first ? "" : ",") + *field->name + "=[" + std::to_string(field->N) + "][\");");
                 WriteLineIndent("for (size_t i = 0; i < " + std::to_string(field->N) + "; ++i)");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamValue(*field->type, "value." + *field->name + "[i]", field->optional, true));
+                WriteLineIndent(ConvertLoggingStreamValue(*field->type, "value." + *field->name + "[i]", field->optional, true));
                 WriteLineIndent("first = false;");
                 Indent(-1);
                 WriteLineIndent("}");
-                WriteLineIndent("stream << \"]\";");
+                WriteLineIndent("record.StoreListNext(\"]\");");
                 Indent(-1);
                 WriteLineIndent("}");
             }
@@ -6631,15 +6640,15 @@ void GeneratorCpp::GenerateStructLoggingStream(const std::shared_ptr<Package>& p
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("bool first = true;");
-                WriteLineIndent("stream << \"" + std::string(first ? "" : ",") + *field->name + "=[\" << " + "value." + *field->name + ".size()" + " << \"][\"" + ";");
+                WriteLineIndent("record.StoreListNext(\"" + std::string(first ? "" : ",") + *field->name + "=[\").StoreListNext(value." + *field->name + ".size()).StoreListNext(\"][\");");
                 WriteLineIndent("for (auto const& it : value." + *field->name + ")");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamValue(*field->type, "it", field->optional, true));
+                WriteLineIndent(ConvertLoggingStreamValue(*field->type, "it", field->optional, true));
                 WriteLineIndent("first = false;");
                 Indent(-1);
                 WriteLineIndent("}");
-                WriteLineIndent("stream << \"]\";");
+                WriteLineIndent("record.StoreListNext(\"]\");");
                 Indent(-1);
                 WriteLineIndent("}");
             }
@@ -6648,15 +6657,15 @@ void GeneratorCpp::GenerateStructLoggingStream(const std::shared_ptr<Package>& p
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("bool first = true;");
-                WriteLineIndent("stream << \"" + std::string(first ? "" : ",") + *field->name + "=[\" << " + "value." + *field->name + ".size()" + "<< \"]<\"" + ";");
+                WriteLineIndent("record.StoreListNext(\"" + std::string(first ? "" : ",") + *field->name + "=[\").StoreListNext(value." + *field->name + ".size()).StoreListNext(\"]<\");");
                 WriteLineIndent("for (auto const& it : value." + *field->name + ")");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamValue(*field->type, "it", field->optional, true));
+                WriteLineIndent(ConvertLoggingStreamValue(*field->type, "it", field->optional, true));
                 WriteLineIndent("first = false;");
                 Indent(-1);
                 WriteLineIndent("}");
-                WriteLineIndent("stream << \">\";");
+                WriteLineIndent("record.StoreListNext(\">\");");
                 Indent(-1);
                 WriteLineIndent("}");
             }
@@ -6665,15 +6674,15 @@ void GeneratorCpp::GenerateStructLoggingStream(const std::shared_ptr<Package>& p
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("bool first = true;");
-                WriteLineIndent("stream << \"" + std::string(first ? "" : ",") + *field->name + "=[\" << " + "value." + *field->name + ".size()" + "<< \"]{\"" + ";");
+                WriteLineIndent("record.StoreListNext(\"" + std::string(first ? "" : ",") + *field->name + "=[\").StoreListNext(value." + *field->name + ".size()).StoreListNext(\"]{\");");
                 WriteLineIndent("for (auto const& it : value." + *field->name + ")");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamValue(*field->type, "it", field->optional, true));
+                WriteLineIndent(ConvertLoggingStreamValue(*field->type, "it", field->optional, true));
                 WriteLineIndent("first = false;");
                 Indent(-1);
                 WriteLineIndent("}");
-                WriteLineIndent("stream << \"}\";");
+                WriteLineIndent("record.StoreListNext(\"}\");");
                 Indent(-1);
                 WriteLineIndent("}");
             }
@@ -6682,17 +6691,17 @@ void GeneratorCpp::GenerateStructLoggingStream(const std::shared_ptr<Package>& p
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("bool first = true;");
-                WriteLineIndent("stream << \"" + std::string(first ? "" : ",") + *field->name + "=[\" << " + "value." + *field->name + ".size()" + "<< \"]<{\"" + ";");
+                WriteLineIndent("record.StoreListNext(\"" + std::string(first ? "" : ",") + *field->name + "=[\").StoreListNext(value." + *field->name + ".size()).StoreListNext(\"]<{\");");
                 WriteLineIndent("for (auto const& it : value." + *field->name + ")");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamValue(*field->key, "it.first", false, true));
-                WriteLineIndent("stream << \"->\";");
-                WriteLineIndent(ConvertOutputStreamValue(*field->type, "it.second", field->optional, false));
+                WriteLineIndent(ConvertLoggingStreamValue(*field->key, "it.first", false, true));
+                WriteLineIndent("record.StoreListNext(\"->\");");
+                WriteLineIndent(ConvertLoggingStreamValue(*field->type, "it.second", field->optional, false));
                 WriteLineIndent("first = false;");
                 Indent(-1);
                 WriteLineIndent("}");
-                WriteLineIndent("stream << \"}>\";");
+                WriteLineIndent("record.StoreListNext(\"}>\");");
                 Indent(-1);
                 WriteLineIndent("}");
             }
@@ -6701,27 +6710,27 @@ void GeneratorCpp::GenerateStructLoggingStream(const std::shared_ptr<Package>& p
                 WriteLineIndent("{");
                 Indent(1);
                 WriteLineIndent("bool first = true;");
-                WriteLineIndent("stream << \"" + std::string(first ? "" : ",") + *field->name + "=[\" << " + "value." + *field->name + ".size()" + "<< \"][{\"" + ";");
+                WriteLineIndent("record.StoreListNext(\"" + std::string(first ? "" : ",") + *field->name + "=[\").StoreListNext(value." + *field->name + ".size()).StoreListNext(\"][{\");");
                 WriteLineIndent("for (auto const& it : value." + *field->name + ")");
                 WriteLineIndent("{");
                 Indent(1);
-                WriteLineIndent(ConvertOutputStreamValue(*field->key, "it.first", false, true));
-                WriteLineIndent("stream << \"->\";");
-                WriteLineIndent(ConvertOutputStreamValue(*field->type, "it.second", field->optional, false));
+                WriteLineIndent(ConvertLoggingStreamValue(*field->key, "it.first", false, true));
+                WriteLineIndent("record.StoreListNext(\"->\");");
+                WriteLineIndent(ConvertLoggingStreamValue(*field->type, "it.second", field->optional, false));
                 WriteLineIndent("first = false;");
                 Indent(-1);
                 WriteLineIndent("}");
-                WriteLineIndent("stream << \"}]\";");
+                WriteLineIndent("record.StoreListNext(\"}]\");");
                 Indent(-1);
                 WriteLineIndent("}");
             }
             else
-                WriteLineIndent("stream << \"" + std::string(first ? "" : ",") + *field->name + "=\"; " + ConvertOutputStreamValue(*field->type, "value." + *field->name, field->optional, false));
+                WriteLineIndent("record.StoreListNext(\"" + std::string(first ? "" : ",") + *field->name + "=\"); " + ConvertLoggingStreamValue(*field->type, "value." + *field->name, field->optional, false));
             first = false;
         }
     }
-    WriteLineIndent("stream << \")\";");
-    WriteLineIndent("return stream;");
+    WriteLineIndent("record.StoreListNext(\")\");");
+    WriteLineIndent("return record.StoreListEnd(begin);");
 
     // Generate struct logging stream operator end
     Indent(-1);
@@ -8510,27 +8519,27 @@ std::string GeneratorCpp::ConvertOutputStreamValue(const std::string& type, cons
 std::string GeneratorCpp::ConvertLoggingStreamType(const std::string& type, const std::string& name, bool optional)
 {
     if (type == "bool")
-        return "(" + std::string(optional ? "*" : "") + name + " ? \"true\" : \"false\"" + ")";
+        return "StoreListNext(" + std::string(optional ? "*" : "") + name + " ? \"true\" : \"false\"" + ")";
     else if ((type == "byte") || (type == "int8") || (type == "uint8"))
-        return "(int)" + std::string(optional ? "*" : "") + name;
+        return "StoreListNext(((int)" + std::string(optional ? "*" : "") + name + ")";
     else if (type == "bytes")
-        return "\"bytes[\" << " + name + std::string(optional ? "->" : ".") + "size() << \"]\"";
+        return "StoreListNext(\"bytes[\").StoreListNext(" + name + std::string(optional ? "->" : ".") + "size()).StoreListNext(\"]\")";
     else if ((type == "char") || (type == "wchar"))
-        return "\"'\" << " + std::string(optional ? "*" : "") + name + " << \"'\"";
+        return "StoreListNext(\"'\").StoreListNext(" + std::string(optional ? "*" : "") + name + ").StoreListNext(\"'\")";
     else if ((type == "string") || (type == "uuid"))
-        return "\"\\\"\" << " + std::string(optional ? "*" : "") + name + " << \"\\\"\"";
+        return "StoreListNext(\"\\\"\").StoreListNext(" + std::string(optional ? "*" : "") + name + ").StoreListNext(\"\\\"\")";
     else
-        return std::string(optional ? "*" : "") + name;
+        return "StoreListNext(" + std::string(optional ? "*" : "") + name + ")";
 }
 
 std::string GeneratorCpp::ConvertLoggingStreamValue(const std::string& type, const std::string& name, bool optional, bool separate)
 {
-    std::string comma = separate ? "<< std::string(first ? \"\" : \",\") " : "";
+    std::string comma = separate ? "StoreListNext(first ? \"\" : \",\")." : "";
 
     if (optional)
-        return "if (" + name + ") stream " + comma + "<< " + ConvertLoggingStreamType(type, name, true) + "; else stream " + comma + "<< \"null\";";
+        return "if (" + name + ") record." + comma + ConvertLoggingStreamType(type, name, true) + "; else record." + comma + "StoreListNext(\"null\");";
     else
-        return "stream " + comma + "<< " + ConvertLoggingStreamType(type, name, false) + ";";
+        return "record." + comma + ConvertLoggingStreamType(type, name, false) + ";";
 }
 
 } // namespace FBE
