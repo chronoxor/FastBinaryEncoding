@@ -599,9 +599,9 @@ public:
     //! Get string from the current UUID in format "00000000-0000-0000-0000-000000000000"
     std::string string() const
     {
-        std::string result(36, '0');
-
         const char* digits = "0123456789abcdef";
+
+        std::string result(36, '0');
 
         int index = 0;
         for (auto value : _data)
@@ -728,28 +728,20 @@ public:
     //! Store logging format
     friend CppLogging::Record& operator<<(CppLogging::Record& record, const uuid_t& uuid)
     {
-        const size_t begin = record.StoreListBegin();
-        record.StoreListFormat("{:02x}", uuid._data[0]);
-        record.StoreListFormat("{:02x}", uuid._data[1]);
-        record.StoreListFormat("{:02x}", uuid._data[2]);
-        record.StoreListFormat("{:02x}", uuid._data[3]);
-        record.StoreList('-');
-        record.StoreListFormat("{:02x}", uuid._data[4]);
-        record.StoreListFormat("{:02x}", uuid._data[5]);
-        record.StoreList('-');
-        record.StoreListFormat("{:02x}", uuid._data[6]);
-        record.StoreListFormat("{:02x}", uuid._data[7]);
-        record.StoreList('-');
-        record.StoreListFormat("{:02x}", uuid._data[8]);
-        record.StoreListFormat("{:02x}", uuid._data[9]);
-        record.StoreList('-');
-        record.StoreListFormat("{:02x}", uuid._data[10]);
-        record.StoreListFormat("{:02x}", uuid._data[11]);
-        record.StoreListFormat("{:02x}", uuid._data[12]);
-        record.StoreListFormat("{:02x}", uuid._data[13]);
-        record.StoreListFormat("{:02x}", uuid._data[14]);
-        record.StoreListFormat("{:02x}", uuid._data[15]);
-        return record.StoreListEnd(begin);
+        const char* digits = "0123456789abcdef";
+
+        std::array<char, 36> result;
+
+        int index = 0;
+        for (auto value : uuid.data())
+        {
+            result[index++] = digits[(value >> 4) & 0x0F];
+            result[index++] = digits[(value >> 0) & 0x0F];
+            if ((index == 8) || (index == 13) || (index == 18) || (index == 23))
+                result[index++] = '-';
+        }
+
+        return record.StoreCustom(std::string_view(result.data(), result.size()));
     }
 #endif
 
