@@ -729,26 +729,26 @@ public:
     friend CppLogging::Record& operator<<(CppLogging::Record& record, const uuid_t& uuid)
     {
         const size_t begin = record.StoreListBegin();
-        record.StoreListNext("{:x}", uuid._data[0]);
-        record.StoreListNext("{:x}", uuid._data[1]);
-        record.StoreListNext("{:x}", uuid._data[2]);
-        record.StoreListNext("{:x}", uuid._data[3]);
-        record.StoreListNext('-');
-        record.StoreListNext("{:x}", uuid._data[4]);
-        record.StoreListNext("{:x}", uuid._data[5]);
-        record.StoreListNext('-');
-        record.StoreListNext("{:x}", uuid._data[6]);
-        record.StoreListNext("{:x}", uuid._data[7]);
-        record.StoreListNext('-');
-        record.StoreListNext("{:x}", uuid._data[8]);
-        record.StoreListNext("{:x}", uuid._data[9]);
-        record.StoreListNext('-');
-        record.StoreListNext("{:x}", uuid._data[10]);
-        record.StoreListNext("{:x}", uuid._data[11]);
-        record.StoreListNext("{:x}", uuid._data[12]);
-        record.StoreListNext("{:x}", uuid._data[13]);
-        record.StoreListNext("{:x}", uuid._data[14]);
-        record.StoreListNext("{:x}", uuid._data[15]);
+        record.StoreListFormat("{:02x}", uuid._data[0]);
+        record.StoreListFormat("{:02x}", uuid._data[1]);
+        record.StoreListFormat("{:02x}", uuid._data[2]);
+        record.StoreListFormat("{:02x}", uuid._data[3]);
+        record.StoreList('-');
+        record.StoreListFormat("{:02x}", uuid._data[4]);
+        record.StoreListFormat("{:02x}", uuid._data[5]);
+        record.StoreList('-');
+        record.StoreListFormat("{:02x}", uuid._data[6]);
+        record.StoreListFormat("{:02x}", uuid._data[7]);
+        record.StoreList('-');
+        record.StoreListFormat("{:02x}", uuid._data[8]);
+        record.StoreListFormat("{:02x}", uuid._data[9]);
+        record.StoreList('-');
+        record.StoreListFormat("{:02x}", uuid._data[10]);
+        record.StoreListFormat("{:02x}", uuid._data[11]);
+        record.StoreListFormat("{:02x}", uuid._data[12]);
+        record.StoreListFormat("{:02x}", uuid._data[13]);
+        record.StoreListFormat("{:02x}", uuid._data[14]);
+        record.StoreListFormat("{:02x}", uuid._data[15]);
         return record.StoreListEnd(begin);
     }
 #endif
