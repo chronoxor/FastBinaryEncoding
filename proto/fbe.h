@@ -359,6 +359,12 @@ public:
     friend std::ostream& operator<<(std::ostream& os, const decimal_t& value)
     { os << value.string(); return os; }
 
+#if defined(LOGGING_PROTOCOL)
+    //! Store logging format
+    friend CppLogging::Record& operator<<(CppLogging::Record& record, const decimal_t& value)
+    { return record.StoreCustomFormat("{}", _value); }
+#endif
+
     //! Swap two instances
     void swap(decimal_t& value) noexcept
     { using std::swap; swap(_value, value._value); }
@@ -717,6 +723,16 @@ public:
     //! Output instance into the given output stream
     friend std::ostream& operator<<(std::ostream& os, const uuid_t& uuid)
     { os << uuid.string(); return os; }
+
+#if defined(LOGGING_PROTOCOL)
+    //! Store logging format
+    friend CppLogging::Record& operator<<(CppLogging::Record& record, const uuid_t& uuid)
+    {
+        return record.StoreCustomFormat(
+            "{:x}{:x}{:x}{:x}-{:x}{:x}-{:x}{:x}-{:x}{:x}-{:x}{:x}{:x}{:x}{:x}{:x}",
+            _data[0], _data[1], _data[2], _data[3], _data[4], _data[5], _data[6], _data[7], _data[8], _data[9], _data[10], _data[11], _data[12], _data[13], _data[14], _data[15]);
+    }
+#endif
 
     //! Swap two instances
     void swap(uuid_t& uuid) noexcept

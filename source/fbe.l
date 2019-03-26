@@ -175,6 +175,7 @@ int main(int argc, char** argv)
     parser.add_option("-n", "--indent").dest("indent").action("store").type("int").set_default(0).help("Format indent. Default: %default");
     parser.add_option("-t", "--tabs").dest("tabs").action("store_true").set_default(0).help("Format with tabs. Default: off");
     parser.add_option("--cpp").dest("cpp").action("store_true").set_default(0).help("Generate C++ code");
+    parser.add_option("--cpp-logging").dest("cpp-logging").action("store_true").set_default(0).help("Generate C++ logging protocol code");
     parser.add_option("--csharp").dest("csharp").action("store_true").set_default(0).help("Generate C# code");
     parser.add_option("--go").dest("go").action("store_true").set_default(0).help("Generate Go code");
     parser.add_option("--java").dest("java").action("store_true").set_default(0).help("Generate Java code");
@@ -203,6 +204,7 @@ int main(int argc, char** argv)
     bool tabs = options.get("tabs");
     bool quiet = options.get("quiet");
     bool cpp = options.get("cpp");
+    bool cpp_logging = options.get("cpp-logging");
     bool csharp = options.get("csharp");
     bool go = options.get("go");
     bool java = options.get("java");
@@ -269,7 +271,7 @@ int main(int argc, char** argv)
     if (cpp)
     {
         if (!quiet) std::cout << "Generating C++ code...";
-        FBE::GeneratorCpp(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Generate(FBE::Package::root);
+        FBE::GeneratorCpp(input, output, (indent ? indent : 4), space).Final(final).JSON(json).Sender(sender).Logging(cpp_logging).Generate(FBE::Package::root);
         if (!quiet) std::cout << "Done!" << std::endl;
     }
     if (csharp)

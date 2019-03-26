@@ -95,6 +95,14 @@ void GeneratorCpp::GenerateImports()
         WriteLineIndent("#include <rapidjson/document.h>");
         WriteLineIndent("#include <rapidjson/writer.h>");
     }
+
+    // Generate logging protocol definitions
+    if (Logging())
+    {
+        WriteLine();
+        WriteLineIndent("#define LOGGING_PROTOCOL 1");
+        WriteLineIndent("#include <logging/logger.h>");
+    }
 }
 
 void GeneratorCpp::GenerateImports(const std::shared_ptr<Package>& p)
@@ -448,6 +456,12 @@ public:
     //! Output instance into the given output stream
     friend std::ostream& operator<<(std::ostream& os, const decimal_t& value)
     { os << value.string(); return os; }
+
+#if defined(LOGGING_PROTOCOL)
+    //! Store logging format
+    friend CppLogging::Record& operator<<(CppLogging::Record& record, const decimal_t& value)
+    { return record.StoreCustomFormat("{}", _value); }
+#endif
 
     //! Swap two instances
     void swap(decimal_t& value) noexcept
@@ -837,6 +851,16 @@ public:
     //! Output instance into the given output stream
     friend std::ostream& operator<<(std::ostream& os, const uuid_t& uuid)
     { os << uuid.string(); return os; }
+
+#if defined(LOGGING_PROTOCOL)
+    //! Store logging format
+    friend CppLogging::Record& operator<<(CppLogging::Record& record, const uuid_t& uuid)
+    {
+        return record.StoreCustomFormat(
+            "{:x}{:x}{:x}{:x}-{:x}{:x}-{:x}{:x}-{:x}{:x}-{:x}{:x}{:x}{:x}{:x}{:x}",
+            _data[0], _data[1], _data[2], _data[3], _data[4], _data[5], _data[6], _data[7], _data[8], _data[9], _data[10], _data[11], _data[12], _data[13], _data[14], _data[15]);
+    }
+#endif
 
     //! Swap two instances
     void swap(uuid_t& uuid) noexcept
@@ -5744,6 +5768,10 @@ void GeneratorCpp::GenerateEnum(const std::shared_ptr<Package>& p, const std::sh
     // Generate enum output stream
     GenerateEnumOutputStream(e);
 
+    // Generate enum logging stream
+    if (Logging())
+        GenerateEnumLoggingStream(e);
+
     // Generate namespace end
     WriteLine();
     WriteLineIndent("} // namespace " + *p->name);
@@ -5779,6 +5807,27 @@ void GeneratorCpp::GenerateEnumOutputStream(const std::shared_ptr<EnumType>& e)
     WriteLineIndent("return stream;");
 
     // Generate enum output stream operator end
+    Indent(-1);
+    WriteLineIndent("}");
+}
+
+void GeneratorCpp::GenerateEnumLoggingStream(const std::shared_ptr<EnumType>& e)
+{
+    // Generate enum logging stream operator begin
+    WriteLine();
+    WriteLineIndent("inline CppLogging::Record& operator<<(CppLogging::Record& record, " + *e->name + " value)");
+    WriteLineIndent("{");
+    Indent(1);
+
+    // Generate enum logging stream operator body
+    if (e->body)
+    {
+        for (auto it = e->body->values.begin(); it != e->body->values.end(); ++it)
+            WriteLineIndent("if (value == " + *e->name + "::" + *(*it)->name + ")" + " { return record.StoreCustomFormat(\"{}\", \"" + *(*it)->name + "\"); }");
+    }
+    WriteLineIndent("return record.StoreCustomFormat(\"{}\", \"<unknown>\");");
+
+    // Generate enum logging stream operator end
     Indent(-1);
     WriteLineIndent("}");
 }
@@ -5943,6 +5992,10 @@ void GeneratorCpp::GenerateFlags(const std::shared_ptr<Package>& p, const std::s
     // Generate flags output stream
     GenerateFlagsOutputStream(f);
 
+    // Generate flags logging stream
+    if (Logging())
+        GenerateFlagsLoggingStream(f);
+
     // Generate namespace end
     WriteLine();
     WriteLineIndent("} // namespace " + *p->name);
@@ -5986,6 +6039,20 @@ void GeneratorCpp::GenerateFlagsOutputStream(const std::shared_ptr<FlagsType>& f
     WriteLineIndent("return stream;");
 
     // Generate flags output stream operator end
+    Indent(-1);
+    WriteLineIndent("}");
+}
+
+void GeneratorCpp::GenerateFlagsLoggingStream(const std::shared_ptr<FlagsType>& f)
+{
+    // Generate flags logging stream operator begin
+    WriteLine();
+    WriteLineIndent("inline CppLogging::Record& operator<<(CppLogging::Record& record, " + *f->name + " value)");
+    WriteLineIndent("{");
+    Indent(1);
+    WriteLineIndent("std::stringstream stream;");
+    WriteLineIndent("stream << value;");
+    WriteLineIndent("return record.StoreCustomFormat(\"{}\", stream.str());");
     Indent(-1);
     WriteLineIndent("}");
 }
