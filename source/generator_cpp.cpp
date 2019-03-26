@@ -460,7 +460,7 @@ public:
 #if defined(LOGGING_PROTOCOL)
     //! Store logging format
     friend CppLogging::Record& operator<<(CppLogging::Record& record, const decimal_t& value)
-    { return record.StoreCustomFormat("{}", _value); }
+    { return record.StoreCustom(_value); }
 #endif
 
     //! Swap two instances
@@ -856,9 +856,28 @@ public:
     //! Store logging format
     friend CppLogging::Record& operator<<(CppLogging::Record& record, const uuid_t& uuid)
     {
-        return record.StoreCustomFormat(
-            "{:x}{:x}{:x}{:x}-{:x}{:x}-{:x}{:x}-{:x}{:x}-{:x}{:x}{:x}{:x}{:x}{:x}",
-            _data[0], _data[1], _data[2], _data[3], _data[4], _data[5], _data[6], _data[7], _data[8], _data[9], _data[10], _data[11], _data[12], _data[13], _data[14], _data[15]);
+        const size_t begin = record.StoreListBegin();
+        record.StoreListNext("{:x}", _data[0]);
+        record.StoreListNext("{:x}", _data[1]);
+        record.StoreListNext("{:x}", _data[2]);
+        record.StoreListNext("{:x}", _data[3]);
+        record.StoreListNext('-');
+        record.StoreListNext("{:x}", _data[4]);
+        record.StoreListNext("{:x}", _data[5]);
+        record.StoreListNext('-');
+        record.StoreListNext("{:x}", _data[6]);
+        record.StoreListNext("{:x}", _data[7]);
+        record.StoreListNext('-');
+        record.StoreListNext("{:x}", _data[8]);
+        record.StoreListNext("{:x}", _data[9]);
+        record.StoreListNext('-');
+        record.StoreListNext("{:x}", _data[10]);
+        record.StoreListNext("{:x}", _data[11]);
+        record.StoreListNext("{:x}", _data[12]);
+        record.StoreListNext("{:x}", _data[13]);
+        record.StoreListNext("{:x}", _data[14]);
+        record.StoreListNext("{:x}", _data[15]);
+        return record.StoreListEnd(begin);
     }
 #endif
 
@@ -5824,9 +5843,9 @@ void GeneratorCpp::GenerateEnumLoggingStream(const std::shared_ptr<EnumType>& e)
     if (e->body)
     {
         for (auto it = e->body->values.begin(); it != e->body->values.end(); ++it)
-            WriteLineIndent("if (value == " + *e->name + "::" + *(*it)->name + ")" + " { return record.StoreCustomFormat(\"{}\", \"" + *(*it)->name + "\"); }");
+            WriteLineIndent("if (value == " + *e->name + "::" + *(*it)->name + ")" + " { return record.StoreCustom(\"" + *(*it)->name + "\"); }");
     }
-    WriteLineIndent("return record.StoreCustomFormat(\"{}\", \"<unknown>\");");
+    WriteLineIndent("return record.StoreCustom(\"<unknown>\");");
 
     // Generate enum logging stream operator end
     Indent(-1);
@@ -6053,9 +6072,27 @@ void GeneratorCpp::GenerateFlagsLoggingStream(const std::shared_ptr<FlagsType>& 
     WriteLineIndent("inline CppLogging::Record& operator<<(CppLogging::Record& record, " + *f->name + " value)");
     WriteLineIndent("{");
     Indent(1);
-    WriteLineIndent("std::stringstream stream;");
-    WriteLineIndent("stream << value;");
-    WriteLineIndent("return record.StoreCustomFormat(\"{}\", stream.str());");
+
+    // Generate flags output stream operator body
+    WriteLineIndent("const size_t begin = record.StoreListBegin();");
+    if (f->body)
+    {
+        WriteLineIndent("bool first = true;");
+        for (auto it = f->body->values.begin(); it != f->body->values.end(); ++it)
+        {
+            WriteLineIndent("if ((value & " + *f->name + "::" + *(*it)->name + ") && ((value & " + *f->name + "::" + *(*it)->name + ") == " + *f->name + "::" + *(*it)->name + "))");
+            WriteLineIndent("{");
+            Indent(1);
+            WriteLineIndent("record.StoreListNext((first ? \"\" : \"|\"));");
+            WriteLineIndent("record.StoreListNext(\"" + *(*it)->name + "\");");
+            WriteLineIndent("first = false;");
+            Indent(-1);
+            WriteLineIndent("}");
+        }
+    }
+    WriteLineIndent("return record.StoreListEnd(begin);");
+
+    // Generate flags logging stream operator end
     Indent(-1);
     WriteLineIndent("}");
     WriteLineIndent("#endif");
