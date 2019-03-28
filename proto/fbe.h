@@ -4525,7 +4525,7 @@ struct ValueWriter<TOutputStream, std::array<T, N>>
     static bool to_json(rapidjson::Writer<TOutputStream>& writer, const std::array<T, N>& values, bool scope = true)
     {
         writer.StartArray();
-        for (auto const& value : values)
+        for (const auto& value : values)
             if (!ValueWriter<TOutputStream, T>::to_json(writer, value, true))
                 return false;
         writer.EndArray();
@@ -4539,7 +4539,7 @@ struct ValueWriter<TOutputStream, std::vector<T>>
     static bool to_json(rapidjson::Writer<TOutputStream>& writer, const std::vector<T>& values, bool scope = true)
     {
         writer.StartArray();
-        for (auto const& value : values)
+        for (const auto& value : values)
             if (!FBE::JSON::to_json(writer, value, true))
                 return false;
         writer.EndArray();
@@ -4553,7 +4553,7 @@ struct ValueWriter<TOutputStream, std::list<T>>
     static bool to_json(rapidjson::Writer<TOutputStream>& writer, const std::list<T>& values, bool scope = true)
     {
         writer.StartArray();
-        for (auto const& value : values)
+        for (const auto& value : values)
             if (!FBE::JSON::to_json(writer, value, true))
                 return false;
         writer.EndArray();
@@ -4567,7 +4567,7 @@ struct ValueWriter<TOutputStream, std::set<T>>
     static bool to_json(rapidjson::Writer<TOutputStream>& writer, const std::set<T>& values, bool scope = true)
     {
         writer.StartArray();
-        for (auto const& value : values)
+        for (const auto& value : values)
             if (!FBE::JSON::to_json(writer, value, true))
                 return false;
         writer.EndArray();
@@ -4581,7 +4581,7 @@ struct ValueWriter<TOutputStream, std::map<TKey, TValue>>
     static bool to_json(rapidjson::Writer<TOutputStream>& writer, const std::map<TKey, TValue>& values, bool scope = true)
     {
         writer.StartObject();
-        for (auto const& value : values)
+        for (const auto& value : values)
         {
             if (!FBE::JSON::to_json_key(writer, value.first))
                 return false;
@@ -4599,7 +4599,7 @@ struct ValueWriter<TOutputStream, std::unordered_map<TKey, TValue>>
     static bool to_json(rapidjson::Writer<TOutputStream>& writer, const std::unordered_map<TKey, TValue>& values, bool scope = true)
     {
         writer.StartObject();
-        for (auto const& value : values)
+        for (const auto& value : values)
         {
             if (!FBE::JSON::to_json_key(writer, value.first))
                 return false;
@@ -5057,7 +5057,7 @@ struct ValueReader<TJson, std::vector<T>>
 
         // Collect vector items
         values.reserve(json.GetArray().Size());
-        for (auto const& item : json.GetArray())
+        for (const auto& item : json.GetArray())
         {
             T temp = T();
             if (!FBE::JSON::from_json(item, temp))
@@ -5080,7 +5080,7 @@ struct ValueReader<TJson, std::list<T>>
             return false;
 
         // Collect list items
-        for (auto const& item : json.GetArray())
+        for (const auto& item : json.GetArray())
         {
             T temp = T();
             if (!FBE::JSON::from_json(item, temp))
@@ -5103,7 +5103,7 @@ struct ValueReader<TJson, std::set<T>>
             return false;
 
         // Collect set items
-        for (auto const& item : json.GetArray())
+        for (const auto& item : json.GetArray())
         {
             T temp = T();
             if (!FBE::JSON::from_json(item, temp))

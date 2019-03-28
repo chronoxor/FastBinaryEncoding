@@ -1943,7 +1943,7 @@ inline TOutputStream& operator<<(TOutputStream& stream, const Account& value)
     {
         bool first = true;
         stream << ",orders=[" << value.orders.size() << "][";
-        for (auto const& it : value.orders)
+        for (const auto& it : value.orders)
         {
             stream << std::string(first ? "" : ",") << it;
             first = false;
