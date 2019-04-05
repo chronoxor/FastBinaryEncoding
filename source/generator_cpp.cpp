@@ -8513,7 +8513,7 @@ std::string GeneratorCpp::ConvertLoggingStreamType(const std::string& type, cons
     if (type == "bool")
         return "StoreList(" + std::string(optional ? "*" : "") + name + " ? \"true\" : \"false\"" + ")";
     else if ((type == "byte") || (type == "int8") || (type == "uint8"))
-        return "StoreList(((int)" + std::string(optional ? "*" : "") + name + ")";
+        return "StoreList((int)" + std::string(optional ? "*" : "") + name + ")";
     else if (type == "bytes")
         return "StoreList(\"bytes[\").StoreList(" + name + std::string(optional ? "->" : ".") + "size()).StoreList(\"]\")";
     else if ((type == "char") || (type == "wchar"))
