@@ -7246,7 +7246,7 @@ namespace FBE {
                 return 4;
             }
 
-            values = new HashSet<T>();
+            values = new HashSet<T>((int)fbeVectorSize);
 
             long size = 4;
             _model.FBEOffset = FBEOffset + 4;
@@ -7465,7 +7465,7 @@ namespace FBE {
                 return 4;
             }
 
-            values = new HashSet<T>();
+            values = new HashSet<T>((int)fbeVectorSize);
 
             long size = 4;
             _model.FBEOffset = FBEOffset + 4;
@@ -7684,7 +7684,7 @@ namespace FBE {
                 return 4;
             }
 
-            values = new HashSet<T?>();
+            values = new HashSet<T?>((int)fbeVectorSize);
 
             long size = 4;
             _model.FBEOffset = FBEOffset + 4;
@@ -7903,7 +7903,7 @@ namespace FBE {
                 return 4;
             }
 
-            values = new HashSet<T>();
+            values = new HashSet<T>((int)fbeVectorSize);
 
             long size = 4;
             _model.FBEOffset = FBEOffset + 4;

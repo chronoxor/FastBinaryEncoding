@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>PrintJson</RootNamespace>
     <AssemblyName>PrintJson</AssemblyName>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
