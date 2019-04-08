@@ -2812,7 +2812,7 @@ void GeneratorCSharp::GenerateFBEFinalModelVector(bool valueType, bool optional)
                 return 4;
             }
 
-            values = new HashSet<_ARGS_>((int)fbeVectorSize);
+            values = new HashSet<_ARGS_>();
 
             long size = 4;
             _model.FBEOffset = FBEOffset + 4;
