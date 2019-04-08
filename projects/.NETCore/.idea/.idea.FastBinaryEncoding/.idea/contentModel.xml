@@ -1,18 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\chronoxor\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.reporters.netcoreapp10.dll" t="Include" />
-    <e p="C:\Users\chronoxor\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.utility.netcoreapp10.dll" t="Include" />
-    <e p="C:\Users\chronoxor\.nuget\packages\xunit.runner.visualstudio\2.4.0\build\netcoreapp1.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
-    <e p="C:\Users\chronoxor\.Rider2018.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\chronoxor\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_FastBinaryEncoding.1813380614.00" t="ExcludeRecursive" />
+    <e p="C:\Users\chron\.nuget\packages\microsoft.net.test.sdk\16.0.1\build\netcoreapp1.0" t="Include">
+      <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
+    </e>
+    <e p="C:\Users\chron\.nuget\packages\xunit.runner.visualstudio\2.4.1\build\netcoreapp1.0\xunit.runner.reporters.netcoreapp10.dll" t="Include" />
+    <e p="C:\Users\chron\.nuget\packages\xunit.runner.visualstudio\2.4.1\build\netcoreapp1.0\xunit.runner.utility.netcoreapp10.dll" t="Include" />
+    <e p="C:\Users\chron\.nuget\packages\xunit.runner.visualstudio\2.4.1\build\netcoreapp1.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
+    <e p="C:\Users\chron\.Rider2018.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\chron\.Rider2018.3\system\resharper-host\local\Transient\ReSharperHost\v183\SolutionCaches\_FastBinaryEncoding.1813380614.00" t="ExcludeRecursive" />
     <e p="Z:\Projects\Projects\FastBinaryEncoding\Projects\.NETCore" t="IncludeFlat">
       <e p="Benchmarks" t="IncludeRecursive">
         <e p="Benchmarks.csproj" t="IncludeRecursive" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="netcoreapp2.0" t="Include">
+            <e p="netcoreapp2.1" t="Include">
               <e p="Benchmarks.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
@@ -29,7 +32,7 @@
           <e p="Create.csproj" t="IncludeRecursive" />
           <e p="obj" t="ExcludeRecursive">
             <e p="Debug" t="Include">
-              <e p="netcoreapp2.0" t="Include">
+              <e p="netcoreapp2.1" t="Include">
                 <e p="Create.AssemblyInfo.cs" t="Include" />
               </e>
             </e>
@@ -40,7 +43,7 @@
           <e p="bin" t="ExcludeRecursive" />
           <e p="obj" t="ExcludeRecursive">
             <e p="Debug" t="Include">
-              <e p="netcoreapp2.0" t="Include">
+              <e p="netcoreapp2.1" t="Include">
                 <e p="Print.AssemblyInfo.cs" t="Include" />
               </e>
             </e>
@@ -52,7 +55,7 @@
           <e p="bin" t="ExcludeRecursive" />
           <e p="obj" t="ExcludeRecursive">
             <e p="Debug" t="Include">
-              <e p="netcoreapp2.0" t="Include">
+              <e p="netcoreapp2.1" t="Include">
                 <e p="PrintJson.AssemblyInfo.cs" t="Include" />
               </e>
             </e>
@@ -64,7 +67,7 @@
           <e p="bin" t="ExcludeRecursive" />
           <e p="obj" t="ExcludeRecursive">
             <e p="Debug" t="Include">
-              <e p="netcoreapp2.0" t="Include">
+              <e p="netcoreapp2.1" t="Include">
                 <e p="SendReceive.AssemblyInfo.cs" t="Include" />
               </e>
             </e>
@@ -76,7 +79,7 @@
           <e p="bin" t="ExcludeRecursive" />
           <e p="obj" t="ExcludeRecursive">
             <e p="Debug" t="Include">
-              <e p="netcoreapp2.0" t="Include">
+              <e p="netcoreapp2.1" t="Include">
                 <e p="Serialization.AssemblyInfo.cs" t="Include" />
               </e>
             </e>
@@ -88,7 +91,7 @@
           <e p="bin" t="ExcludeRecursive" />
           <e p="obj" t="ExcludeRecursive">
             <e p="Debug" t="Include">
-              <e p="netcoreapp2.0" t="Include">
+              <e p="netcoreapp2.1" t="Include">
                 <e p="SerializationFinal.AssemblyInfo.cs" t="Include" />
               </e>
             </e>
@@ -100,7 +103,7 @@
           <e p="bin" t="ExcludeRecursive" />
           <e p="obj" t="ExcludeRecursive">
             <e p="Debug" t="Include">
-              <e p="netcoreapp2.0" t="Include">
+              <e p="netcoreapp2.1" t="Include">
                 <e p="SerializationJson.AssemblyInfo.cs" t="Include" />
               </e>
             </e>
@@ -140,9 +143,8 @@
         <e p="Extending.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="netcoreapp2.0" t="Include">
+            <e p="netcoreapp2.1" t="Include">
               <e p="Tests.AssemblyInfo.cs" t="Include" />
-              <e p="Tests.Program.cs" t="Include" />
             </e>
           </e>
         </e>
