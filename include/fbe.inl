@@ -8,19 +8,6 @@
 
 namespace FBE {
 
-inline StructField::StructField()
-    : keys(false),
-      optional(false),
-      array(false),
-      vector(false),
-      list(false),
-      set(false),
-      map(false),
-      hash(false),
-      N(0)
-{
-}
-
 inline void StructField::SetArraySize(int size)
 {
     if (size <= 0)

@@ -34,7 +34,7 @@ int yyerror(const std::string& msg);
 }
 
 // Define our terminal symbols (tokens)
-%token <token>  PACKAGE OFFSET IMPORT ENUM FLAGS STRUCT BASE KEY
+%token <token>  PACKAGE OFFSET IMPORT ENUM FLAGS STRUCT BASE ID KEY
 %token <string> BOOL BYTE BYTES CHAR WCHAR INT8 UINT8 INT16 UINT16 INT32 UINT32 INT64 UINT64 FLOAT DOUBLE DECIMAL STRING USTRING TIMESTAMP UUID
 %token <string> CONST_TRUE CONST_FALSE CONST_NULL CONST_EPOCH CONST_UTC CONST_UUID0 CONST_UUID1 CONST_UUID4 CONST_CHAR CONST_INT CONST_FLOAT CONST_STRING
 %token <string> IDENTIFIER
@@ -190,6 +190,8 @@ struct_body
 struct_field
     : struct_field_type type_name ';'                                           { $$ = $1; $$->name.reset($2); }
     | struct_field_type type_name '=' struct_field_value ';'                    { $$ = $1; $$->name.reset($2); $$->value.reset($4); }
+    | '[' ID ']' struct_field_type type_name ';'                                { $$ = $4; $$->id = true; $$->name.reset($5); }
+    | '[' ID ']' struct_field_type type_name '=' struct_field_value ';'         { $$ = $4; $$->id = true; $$->name.reset($5); $$->value.reset($7); }
     | '[' KEY ']' struct_field_type type_name ';'                               { $$ = $4; $$->keys = true; $$->name.reset($5); }
     | '[' KEY ']' struct_field_type type_name '=' struct_field_value ';'        { $$ = $4; $$->keys = true; $$->name.reset($5); $$->value.reset($7); }
     ;

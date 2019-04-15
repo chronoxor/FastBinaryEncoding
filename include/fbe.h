@@ -111,17 +111,16 @@ struct StructField
     std::shared_ptr<std::string> key;
     std::shared_ptr<std::string> type;
     std::shared_ptr<std::string> value;
-    bool keys;
-    bool optional;
-    bool array;
-    bool vector;
-    bool list;
-    bool set;
-    bool map;
-    bool hash;
-    int N;
-
-    StructField();
+    bool id{false};
+    bool keys{false};
+    bool optional{false};
+    bool array{false};
+    bool vector{false};
+    bool list{false};
+    bool set{false};
+    bool map{false};
+    bool hash{false};
+    int N{0};
 
     void SetArraySize(int size);
 };
@@ -137,7 +136,8 @@ struct StructType
 {
     int type;
     bool fixed;
-    bool keys;
+    bool id{false};
+    bool keys{false};
     std::shared_ptr<std::string> name;
     std::shared_ptr<std::string> base;
     std::shared_ptr<StructBody> body;

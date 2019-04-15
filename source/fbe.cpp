@@ -145,7 +145,7 @@ void Statements::AddStruct(std::shared_ptr<StructType>& s)
 
 int StructType::stype = 0;
 
-StructType::StructType(int t, bool f) : type(t), fixed(f), keys(false)
+StructType::StructType(int t, bool f) : type(t), fixed(f)
 {
     if (type < 0)
         yyerror("Struct type should not be negative!");
@@ -182,11 +182,14 @@ void Package::initialize()
             {
                 for (const auto& field : child_s->body->fields)
                 {
-                    if (field->keys)
+                    if (field->id)
                     {
-                        child_s->keys = true;
-                        break;
+                        if (child_s->id)
+                            yyerror("Struct " + *child_s->name.get() + " must have only one [id] field!");
+                        child_s->id = true;
                     }
+                    if (field->keys)
+                        child_s->keys = true;
                 }
             }
         }
