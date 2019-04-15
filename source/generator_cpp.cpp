@@ -7816,7 +7816,6 @@ void GeneratorCpp::GenerateSender(const std::shared_ptr<Package>& p, bool final)
         for (const auto& import : p->import->imports)
             WriteLineIndent(", public virtual " + *import + "::" + sender + "<TBuffer>");
         Indent(-1);
-        WriteLine();
     }
     WriteLineIndent("{");
     WriteLineIndent("public:");
@@ -7931,7 +7930,6 @@ void GeneratorCpp::GenerateReceiver(const std::shared_ptr<Package>& p, bool fina
         for (const auto& import : p->import->imports)
             WriteLineIndent(", public virtual " + *import + "::" + receiver + "<TBuffer>");
         Indent(-1);
-        WriteLine();
     }
     WriteLineIndent("{");
     WriteLineIndent("public:");
@@ -8073,7 +8071,6 @@ void GeneratorCpp::GenerateProxy(const std::shared_ptr<Package>& p, bool final)
         for (const auto& import : p->import->imports)
             WriteLineIndent(", public virtual " + *import + "::" + proxy + "<TBuffer>");
         Indent(-1);
-        WriteLine();
     }
     WriteLineIndent("{");
     WriteLineIndent("public:");

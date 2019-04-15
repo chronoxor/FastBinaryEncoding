@@ -15917,7 +15917,6 @@ namespace test {
 template <class TBuffer>
 class Sender : public virtual FBE::Sender<TBuffer>
     , public virtual proto::Sender<TBuffer>
-
 {
 public:
     Sender()
@@ -16186,7 +16185,6 @@ namespace test {
 template <class TBuffer>
 class Receiver : public virtual FBE::Receiver<TBuffer>
     , public virtual proto::Receiver<TBuffer>
-
 {
 public:
     Receiver() {}
@@ -16493,7 +16491,6 @@ namespace test {
 template <class TBuffer>
 class Proxy : public virtual FBE::Receiver<TBuffer>
     , public virtual proto::Proxy<TBuffer>
-
 {
 public:
     Proxy() {}
@@ -16726,7 +16723,6 @@ namespace test {
 template <class TBuffer>
 class FinalSender : public virtual FBE::Sender<TBuffer>
     , public virtual proto::FinalSender<TBuffer>
-
 {
 public:
     FinalSender()
@@ -16995,7 +16991,6 @@ namespace test {
 template <class TBuffer>
 class FinalReceiver : public virtual FBE::Receiver<TBuffer>
     , public virtual proto::FinalReceiver<TBuffer>
-
 {
 public:
     FinalReceiver() { this->final(true); }
