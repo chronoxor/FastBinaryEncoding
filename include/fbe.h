@@ -13,6 +13,7 @@
 
 #include "filesystem/directory.h"
 #include "filesystem/file.h"
+#include "memory/memory_leaks.h"
 #include "string/string_utils.h"
 #include "system/environment.h"
 #include "system/stream.h"
@@ -29,29 +30,6 @@ int yyerror(const char* msg);
 int yyerror(const std::string& msg);
 
 namespace FBE {
-
-struct Statements;
-
-struct Import
-{
-    std::vector<std::shared_ptr<std::string>> imports;
-
-    void AddImport(std::string* i);
-};
-
-struct Package
-{
-    int offset;
-    std::shared_ptr<std::string> name;
-    std::shared_ptr<Import> import;
-    std::shared_ptr<Statements> body;
-
-    static std::shared_ptr<Package> root;
-
-    Package(int o);
-
-    void initialize();
-};
 
 struct EnumConst
 {
@@ -132,6 +110,22 @@ struct StructBody
     void AddField(StructField* field);
 };
 
+struct StructRequest
+{
+};
+
+struct StructResponse
+{
+    std::shared_ptr<std::string> response;
+};
+
+struct StructRejects
+{
+    std::vector<std::shared_ptr<std::string>> rejects;
+
+    void AddReject(std::string* r);
+};
+
 struct StructType
 {
     int type;
@@ -140,6 +134,9 @@ struct StructType
     bool keys{false};
     std::shared_ptr<std::string> name;
     std::shared_ptr<std::string> base;
+    std::shared_ptr<StructRequest> request;
+    std::shared_ptr<StructResponse> response;
+    std::shared_ptr<StructRejects> rejects;
     std::shared_ptr<StructBody> body;
 
     static int stype;
@@ -165,6 +162,27 @@ struct Statements
     void AddEnum(std::shared_ptr<EnumType>& e);
     void AddFlags(std::shared_ptr<FlagsType>& f);
     void AddStruct(std::shared_ptr<StructType>& s);
+};
+
+struct Import
+{
+    std::vector<std::shared_ptr<std::string>> imports;
+
+    void AddImport(std::string* i);
+};
+
+struct Package
+{
+    int offset;
+    std::shared_ptr<std::string> name;
+    std::shared_ptr<Import> import;
+    std::shared_ptr<Statements> body;
+
+    static std::shared_ptr<Package> root;
+
+    Package(int o);
+
+    void initialize();
 };
 
 } // namespace FBE

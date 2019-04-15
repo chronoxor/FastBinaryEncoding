@@ -29,12 +29,15 @@ int yyerror(const std::string& msg);
     FBE::FlagsValue* flags_value;
     FBE::FlagsConst* flags_const;
     FBE::StructType* struct_type;
+    FBE::StructRequest* struct_request;
+    FBE::StructResponse* struct_response;
+    FBE::StructRejects* struct_rejects;
     FBE::StructBody* struct_body;
     FBE::StructField* struct_field;
 }
 
 // Define our terminal symbols (tokens)
-%token <token>  PACKAGE OFFSET IMPORT ENUM FLAGS STRUCT BASE ID KEY
+%token <token>  PACKAGE OFFSET IMPORT ENUM FLAGS STRUCT BASE ID KEY REQ RES REJ
 %token <string> BOOL BYTE BYTES CHAR WCHAR INT8 UINT8 INT16 UINT16 INT32 UINT32 INT64 UINT64 FLOAT DOUBLE DECIMAL STRING USTRING TIMESTAMP UUID
 %token <string> CONST_TRUE CONST_FALSE CONST_NULL CONST_EPOCH CONST_UTC CONST_UUID0 CONST_UUID1 CONST_UUID4 CONST_CHAR CONST_INT CONST_FLOAT CONST_STRING
 %token <string> IDENTIFIER
@@ -55,6 +58,10 @@ int yyerror(const std::string& msg);
 %type <flags_value> flags_value
 %type <flags_const> flags_const
 %type <struct_type> struct
+%type <struct_request> struct_request
+%type <struct_response> struct_response
+%type <struct_rejects> struct_rejects
+%type <struct_rejects> struct_reject
 %type <struct_body> struct_body
 %type <struct_field> struct_field
 %type <struct_field> struct_field_type
@@ -101,6 +108,7 @@ statement
     : enum                                                                      { $$ = new FBE::Statement(); $$->e.reset($1); }
     | flags                                                                     { $$ = new FBE::Statement(); $$->f.reset($1); }
     | struct                                                                    { $$ = new FBE::Statement(); $$->s.reset($1); }
+    | struct_request struct_response struct_rejects struct                      { $$ = new FBE::Statement(); $$->s.reset($4); $$->s->request.reset($1); $$->s->response.reset($2); $$->s->rejects.reset($3); }
     ;
 
 enum
@@ -171,6 +179,23 @@ flags_const
     | IDENTIFIER '|' flags_const                                                { $$ = $3; *$$->reference = *$1 + " | " + *$3->reference; delete $1; }
     ;
 
+struct_request
+    : '[' REQ ']'                                                               { $$ = new FBE::StructRequest(); }
+    ;
+
+struct_response
+    : '[' RES '(' type_name ')' ']'                                             { $$ = new FBE::StructResponse(); $$->response.reset($4); }
+    ;
+
+struct_rejects
+    : '[' REJ '(' struct_reject ')' ']'                                         { $$ = $4; }
+    ;
+
+struct_reject
+    : type_name                                                                 { $$ = new FBE::StructRejects(); $$->AddReject($1); }
+    | struct_reject type_name                                                   { $$ = $1; $$->AddReject($2); }
+    ;
+
 struct
     : STRUCT IDENTIFIER '{' struct_body '}'                                     { $$ = new FBE::StructType(0, false); $$->name.reset($2); $$->body.reset($4); }
     | STRUCT IDENTIFIER ':' type_name '{' struct_body '}'                       { $$ = new FBE::StructType(0, false); $$->name.reset($2); $$->base.reset($4); $$->body.reset($6); }
@@ -190,10 +215,10 @@ struct_body
 struct_field
     : struct_field_type type_name ';'                                           { $$ = $1; $$->name.reset($2); }
     | struct_field_type type_name '=' struct_field_value ';'                    { $$ = $1; $$->name.reset($2); $$->value.reset($4); }
-    | '[' ID ']' struct_field_type type_name ';'                                { $$ = $4; $$->id = true; $$->name.reset($5); }
-    | '[' ID ']' struct_field_type type_name '=' struct_field_value ';'         { $$ = $4; $$->id = true; $$->name.reset($5); $$->value.reset($7); }
-    | '[' KEY ']' struct_field_type type_name ';'                               { $$ = $4; $$->keys = true; $$->name.reset($5); }
-    | '[' KEY ']' struct_field_type type_name '=' struct_field_value ';'        { $$ = $4; $$->keys = true; $$->name.reset($5); $$->value.reset($7); }
+    | ID struct_field_type type_name ';'                                        { $$ = $2; $$->id = true; $$->name.reset($3); }
+    | ID struct_field_type type_name '=' struct_field_value ';'                 { $$ = $2; $$->id = true; $$->name.reset($3); $$->value.reset($5); }
+    | KEY struct_field_type type_name ';'                                       { $$ = $2; $$->keys = true; $$->name.reset($3); }
+    | KEY struct_field_type type_name '=' struct_field_value ';'                { $$ = $2; $$->keys = true; $$->name.reset($3); $$->value.reset($5); }
     ;
 
 struct_field_type

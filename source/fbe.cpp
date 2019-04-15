@@ -10,21 +10,6 @@
 
 namespace FBE {
 
-void Import::AddImport(std::string* i)
-{
-    if (i == nullptr)
-        yyerror("Import is null!");
-    if (i->empty())
-        yyerror("Import package is invalid!");
-
-    // Check for duplicates
-    auto it = std::find_if(imports.begin(), imports.end(), [i](auto item)->bool { return *item.get() == *i; });
-    if (it != imports.end())
-        yyerror("Duplicate import package " + *i);
-
-    imports.push_back(std::shared_ptr<std::string>(i));
-}
-
 void EnumBody::AddValue(EnumValue* v)
 {
     if (v == nullptr)
@@ -72,6 +57,37 @@ void StructBody::AddField(StructField* f)
         yyerror("Duplicate struct field name " + *f->name.get());
 
     fields.push_back(std::shared_ptr<StructField>(f));
+}
+
+void StructRejects::AddReject(std::string* r)
+{
+    if (r == nullptr)
+        yyerror("Reject is null!");
+    if (r->empty())
+        yyerror("Reject is invalid!");
+
+    // Check for duplicates
+    auto it = std::find_if(rejects.begin(), rejects.end(), [r](auto item)->bool { return *item.get() == *r; });
+    if (it != rejects.end())
+        yyerror("Duplicate reject " + *r);
+
+    rejects.push_back(std::shared_ptr<std::string>(r));
+}
+
+int StructType::stype = 0;
+
+StructType::StructType(int t, bool f) : type(t), fixed(f)
+{
+    if (type < 0)
+        yyerror("Struct type should not be negative!");
+
+    if (!fixed)
+    {
+        if (type == 0)
+            type = ++stype;
+        else
+            stype = type;
+    }
 }
 
 void Statements::AddStatement(Statement* st)
@@ -143,20 +159,19 @@ void Statements::AddStruct(std::shared_ptr<StructType>& s)
     structs.push_back(s);
 }
 
-int StructType::stype = 0;
-
-StructType::StructType(int t, bool f) : type(t), fixed(f)
+void Import::AddImport(std::string* i)
 {
-    if (type < 0)
-        yyerror("Struct type should not be negative!");
+    if (i == nullptr)
+        yyerror("Import is null!");
+    if (i->empty())
+        yyerror("Import package is invalid!");
 
-    if (!fixed)
-    {
-        if (type == 0)
-            type = ++stype;
-        else
-            stype = type;
-    }
+    // Check for duplicates
+    auto it = std::find_if(imports.begin(), imports.end(), [i](auto item)->bool { return *item.get() == *i; });
+    if (it != imports.end())
+        yyerror("Duplicate import package " + *i);
+
+    imports.push_back(std::shared_ptr<std::string>(i));
 }
 
 std::shared_ptr<Package> Package::root = std::make_shared<Package>(0);
