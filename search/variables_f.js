@@ -7,6 +7,9 @@ var searchData=
   ['string',['string',['../union_y_y_s_t_y_p_e.html#aa194a6d7eb96a0154e5628da125c97a6',1,'YYSTYPE']]],
   ['struct_5fbody',['struct_body',['../union_y_y_s_t_y_p_e.html#ab5f7b539d0d419062f7c3b299870842e',1,'YYSTYPE']]],
   ['struct_5ffield',['struct_field',['../union_y_y_s_t_y_p_e.html#a45a06cce0fa5c56eab54fd69ffbb72e7',1,'YYSTYPE']]],
+  ['struct_5frejects',['struct_rejects',['../union_y_y_s_t_y_p_e.html#ab3110286c5f679f9a400dbbf0dad8099',1,'YYSTYPE']]],
+  ['struct_5frequest',['struct_request',['../union_y_y_s_t_y_p_e.html#ade6560d5c753a0a813f2b5f01e4fe1cf',1,'YYSTYPE']]],
+  ['struct_5fresponse',['struct_response',['../union_y_y_s_t_y_p_e.html#a51b4be8f1e2cb9600765113d52801c1c',1,'YYSTYPE']]],
   ['struct_5ftype',['struct_type',['../union_y_y_s_t_y_p_e.html#a4cdb03ab3e314f68cebbfc61e1ba7ee5',1,'YYSTYPE']]],
   ['structs',['structs',['../struct_f_b_e_1_1_statements.html#a3edb282ba76785797f6a99c8f15f5631',1,'FBE::Statements']]],
   ['stype',['stype',['../struct_f_b_e_1_1_struct_type.html#a054cbbeb3544e3f05fac058980a62bb6',1,'FBE::StructType']]]
