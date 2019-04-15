@@ -279,7 +279,7 @@ There are several issues and dependencies that should be mentioned:
 * Assert testing is based on [stretchr/testify](https://github.com/stretchr/testify) package (`go get github.com/stretchr/testify`);
 * JSON serialization is based on [jsoniter](https://github.com/json-iterator/go) package (`go get github.com/json-iterator/go`);
 * Decimal type is based on [shopspring/decimal](https://github.com/shopspring/decimal) package (`go get github.com/shopspring/decimal`);
-* UUID type is based on [goolge/uuid](https://github.com/google/uuid) package (`go get github.com/google/uuid`);
+* UUID type is based on [google/uuid](https://github.com/google/uuid) package (`go get github.com/google/uuid`);
 
 ### Java
 * JSON serialization is implemented using [Gson](https://github.com/google/gson) package.
