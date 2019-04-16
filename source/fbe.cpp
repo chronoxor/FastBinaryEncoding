@@ -192,7 +192,7 @@ void Package::initialize()
             if (!child_s->fixed)
                 child_s->type += offset;
 
-            // Find structs with key flag
+            // Find structs with id & key flags
             if (child_s->body)
             {
                 for (const auto& field : child_s->body->fields)
@@ -202,6 +202,7 @@ void Package::initialize()
                         if (child_s->id)
                             yyerror("Struct " + *child_s->name.get() + " must have only one [id] field!");
                         child_s->id = true;
+                        field->keys = true;
                     }
                     if (field->keys)
                         child_s->keys = true;
