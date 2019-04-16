@@ -8189,11 +8189,6 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     }
                 }
             }
-            else
-            {
-                std::string struct_name = "::" + *p->name + "::" + *s->name;
-                WriteLineIndent("void onReceive(const " + struct_name + "& value) override { Receiver::onReceive(value); }");
-            }
         }
     }
 
@@ -8229,57 +8224,68 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
             }
 
             std::set<std::string> responses;
-            for (const auto& s : p->body->structs)
+            if (p->body)
             {
-                if (s->request)
+                for (const auto& s : p->body->structs)
                 {
-                    std::string response_name = (s->response) ? ConvertTypeName(*p->name, *s->response->response, false) : "";
-                    std::string response_field = (s->response) ? *s->response->response : "";
-                    CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
-
-                    if ((response.first == response_name) && !response_field.empty() && (responses.find(response_field) == responses.end()))
+                    if (s->request)
                     {
+                        std::string response_name = (s->response) ? ConvertTypeName(*p->name, *s->response->response, false) : "";
+                        std::string response_field = (s->response) ? *s->response->response : "";
+                        CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+
+                        if ((response.first == response_name) && !response_field.empty() && (responses.find(response_field) == responses.end()))
+                        {
+                            if (!first_inner)
+                                WriteLine();
+                            first_inner = false;
+                            WriteLineIndent("auto it_" + response_field + " = _requests_by_id_" + response_field + ".find(value.id);");
+                            WriteLineIndent("if (it_" + response_field + " != _requests_by_id_" + response_field + ".end())");
+                            WriteLineIndent("{");
+                            Indent(1);
+                            WriteLineIndent("auto timestamp = it_" + response_field + "->second.first;");
+                            WriteLineIndent("auto& promise = it_" + response_field + "->second.second;");
+                            WriteLineIndent("promise.set_value(value);");
+                            WriteLineIndent("_requests_by_id_" + response_field + ".erase(value.id);");
+                            WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
+                            responses.insert(response_field);
+                            Indent(-1);
+                            WriteLineIndent("}");
+                        }
+
+                        if (s->rejects)
+                        {
+                            for (const auto& reject : s->rejects->rejects)
+                            {
+                                std::string reject_name = ConvertTypeName(*p->name, *reject, false);
+                                if ((response.first == reject_name) && !response_field.empty() && (responses.find(response_field) == responses.end()))
+                                {
+                                    if (!first_inner)
+                                        WriteLine();
+                                    first_inner = false;
+                                    WriteLineIndent("auto it_" + response_field + " = _requests_by_id_" + response_field + ".find(value.id);");
+                                    WriteLineIndent("if (it_" + response_field + " != _requests_by_id_" + response_field + ".end())");
+                                    WriteLineIndent("{");
+                                    Indent(1);
+                                    WriteLineIndent("auto timestamp = it_" + response_field + "->second.first;");
+                                    WriteLineIndent("auto& promise = it_" + response_field + "->second.second;");
+                                    WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::exception(value.string().c_str())));");
+                                    WriteLineIndent("_requests_by_id_" + response_field + ".erase(value.id);");
+                                    WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
+                                    responses.insert(response_field);
+                                    Indent(-1);
+                                    WriteLineIndent("}");
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        std::string struct_name = "::" + *p->name + "::" + *s->name;
                         if (!first_inner)
                             WriteLine();
                         first_inner = false;
-                        WriteLineIndent("auto it_" + response_field + " = _requests_by_id_" + response_field + ".find(value.id);");
-                        WriteLineIndent("if (it_" + response_field + " != _requests_by_id_" + response_field + ".end())");
-                        WriteLineIndent("{");
-                        Indent(1);
-                        WriteLineIndent("auto timestamp = it_" + response_field + "->second.first;");
-                        WriteLineIndent("auto& promise = it_" + response_field + "->second.second;");
-                        WriteLineIndent("promise.set_value(value);");
-                        WriteLineIndent("_requests_by_id_" + response_field + ".erase(value.id);");
-                        WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
-                        responses.insert(response_field);
-                        Indent(-1);
-                        WriteLineIndent("}");
-                    }
-
-                    if (s->rejects)
-                    {
-                        for (const auto& reject : s->rejects->rejects)
-                        {
-                            std::string reject_name = ConvertTypeName(*p->name, *reject, false);
-                            if ((response.first == reject_name) && !response_field.empty() && (responses.find(response_field) == responses.end()))
-                            {
-                                if (!first_inner)
-                                    WriteLine();
-                                first_inner = false;
-                                WriteLineIndent("auto it_" + response_field + " = _requests_by_id_" + response_field + ".find(value.id);");
-                                WriteLineIndent("if (it_" + response_field + " != _requests_by_id_" + response_field + ".end())");
-                                WriteLineIndent("{");
-                                Indent(1);
-                                WriteLineIndent("auto timestamp = it_" + response_field + "->second.first;");
-                                WriteLineIndent("auto& promise = it_" + response_field + "->second.second;");
-                                WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::exception(value.string().c_str())));");
-                                WriteLineIndent("_requests_by_id_" + response_field + ".erase(value.id);");
-                                WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
-                                responses.insert(response_field);
-                                Indent(-1);
-                                WriteLineIndent("}");
-                            }
-                        }
+                        WriteLineIndent("void onReceive(const " + struct_name + "& value) override { Receiver::onReceive(value); }");
                     }
                 }
             }
