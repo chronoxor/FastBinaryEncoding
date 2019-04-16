@@ -6216,6 +6216,18 @@ void GeneratorCpp::GenerateStruct(const std::shared_ptr<Package>& p, const std::
     WriteLine();
     WriteLineIndent("namespace " + *p->name + " {");
 
+    // Generate struct response forward declaration
+    if (s->response)
+    {
+        std::string response = *s->response->response;
+        bool imported = CppCommon::StringUtils::ReplaceAll(response, ".", "");
+        if (!imported)
+        {
+            WriteLine();
+            WriteIndent("struct " + response + ";");
+        }
+    }
+
     // Generate struct begin
     WriteLine();
     WriteIndent("struct " + *s->name);
@@ -6224,6 +6236,15 @@ void GeneratorCpp::GenerateStruct(const std::shared_ptr<Package>& p, const std::
     WriteLine();
     WriteLineIndent("{");
     Indent(1);
+
+    // Generate struct response type definition
+    if (s->response)
+    {
+        std::string response = *s->response->response;
+        CppCommon::StringUtils::ReplaceAll(response, ".", "::");
+        WriteIndent("typedef " + response + " Response;");
+        WriteLine();
+    }
 
     // Generate struct body
     if (s->body)
