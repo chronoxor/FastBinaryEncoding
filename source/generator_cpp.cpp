@@ -8189,6 +8189,11 @@ void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
                     }
                 }
             }
+            else
+            {
+                std::string struct_name = "::" + *p->name + "::" + *s->name;
+                WriteLineIndent("void onReceive(const " + struct_name + "& value) override { Receiver::onReceive(value); }");
+            }
         }
     }
 
