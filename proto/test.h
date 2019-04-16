@@ -16487,6 +16487,30 @@ private:
 namespace FBE {
 namespace test {
 
+// Fast Binary Encoding test client
+template <class TBuffer>
+class Client : protected Sender<TBuffer>, protected Receiver<TBuffer>
+    , public virtual proto::Client<TBuffer>
+{
+public:
+    Client() = default;
+    Client(const Client&) = default;
+    Client(Client&&) noexcept = default;
+    virtual ~Client() = default;
+
+    Client& operator=(const Client&) = default;
+    Client& operator=(Client&&) noexcept = default;
+
+    // Asynchronous sender
+    Sender<TBuffer>& sender() noexcept { return *this; }
+};
+
+} // namespace test
+} // namespace FBE
+
+namespace FBE {
+namespace test {
+
 // Fast Binary Encoding test proxy
 template <class TBuffer>
 class Proxy : public virtual FBE::Receiver<TBuffer>
@@ -17285,6 +17309,30 @@ private:
     FBE::test::StructHashFinalModel<ReadBuffer> StructHashModel;
     FBE::test::StructHashExFinalModel<ReadBuffer> StructHashExModel;
     FBE::test::StructEmptyFinalModel<ReadBuffer> StructEmptyModel;
+};
+
+} // namespace test
+} // namespace FBE
+
+namespace FBE {
+namespace test {
+
+// Fast Binary Encoding test final client
+template <class TBuffer>
+class FinalClient : protected FinalSender<TBuffer>, protected FinalReceiver<TBuffer>
+    , public virtual proto::FinalClient<TBuffer>
+{
+public:
+    FinalClient() = default;
+    FinalClient(const FinalClient&) = default;
+    FinalClient(FinalClient&&) noexcept = default;
+    virtual ~FinalClient() = default;
+
+    FinalClient& operator=(const FinalClient&) = default;
+    FinalClient& operator=(FinalClient&&) noexcept = default;
+
+    // Asynchronous sender
+    FinalSender<TBuffer>& sender() noexcept { return *this; }
 };
 
 } // namespace test

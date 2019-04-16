@@ -2763,6 +2763,32 @@ private:
 namespace FBE {
 namespace proto {
 
+// Fast Binary Encoding proto client
+template <class TBuffer>
+class Client : protected Sender<TBuffer>, protected Receiver<TBuffer>
+{
+public:
+    Client() = default;
+    Client(const Client&) = default;
+    Client(Client&&) noexcept = default;
+    virtual ~Client() = default;
+
+    Client& operator=(const Client&) = default;
+    Client& operator=(Client&&) noexcept = default;
+
+    // Asynchronous sender
+    Sender<TBuffer>& sender() noexcept { return *this; }
+
+protected:
+    uint64_t _timestamp{0};
+};
+
+} // namespace proto
+} // namespace FBE
+
+namespace FBE {
+namespace proto {
+
 // Fast Binary Encoding proto proxy
 template <class TBuffer>
 class Proxy : public virtual FBE::Receiver<TBuffer>
@@ -3027,6 +3053,32 @@ private:
     FBE::proto::OrderFinalModel<ReadBuffer> OrderModel;
     FBE::proto::BalanceFinalModel<ReadBuffer> BalanceModel;
     FBE::proto::AccountFinalModel<ReadBuffer> AccountModel;
+};
+
+} // namespace proto
+} // namespace FBE
+
+namespace FBE {
+namespace proto {
+
+// Fast Binary Encoding proto final client
+template <class TBuffer>
+class FinalClient : protected FinalSender<TBuffer>, protected FinalReceiver<TBuffer>
+{
+public:
+    FinalClient() = default;
+    FinalClient(const FinalClient&) = default;
+    FinalClient(FinalClient&&) noexcept = default;
+    virtual ~FinalClient() = default;
+
+    FinalClient& operator=(const FinalClient&) = default;
+    FinalClient& operator=(FinalClient&&) noexcept = default;
+
+    // Asynchronous sender
+    FinalSender<TBuffer>& sender() noexcept { return *this; }
+
+protected:
+    uint64_t _timestamp{0};
 };
 
 } // namespace proto

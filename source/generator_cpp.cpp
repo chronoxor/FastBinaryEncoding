@@ -54,6 +54,7 @@ void GeneratorCpp::GenerateImports()
 #include <cmath>
 #include <cstring>
 #include <cctype>
+#include <future>
 #include <iomanip>
 #include <limits>
 #include <list>
@@ -5723,11 +5724,13 @@ void GeneratorCpp::GeneratePackage(const std::shared_ptr<Package>& p)
     {
         GenerateSender(p, false);
         GenerateReceiver(p, false);
+        GenerateClient(p, false);
         GenerateProxy(p, false);
         if (Final())
         {
             GenerateSender(p, true);
             GenerateReceiver(p, true);
+            GenerateClient(p, true);
         }
     }
 
@@ -6252,7 +6255,12 @@ void GeneratorCpp::GenerateStruct(const std::shared_ptr<Package>& p, const std::
     if ((s->base && !s->base->empty()) || (s->body && !s->body->fields.empty()))
     {
         first = true;
-        WriteIndent(*s->name + "(");
+        size_t args = 0;
+        if (s->base && !s->base->empty())
+            ++args;
+        if (s->body && !s->body->fields.empty())
+            args += s->body->fields.size();
+        WriteIndent(((args <= 1) ? "explicit " : "") + *s->name + "(");
         if (s->base && !s->base->empty())
         {
             Write("const " + ConvertTypeName(*p->name, *s->base, false) + "& base");
@@ -8038,6 +8046,257 @@ void GeneratorCpp::GenerateReceiver(const std::shared_ptr<Package>& p, bool fina
     }
 
     // Generate receiver end
+    Indent(-1);
+    WriteLineIndent("};");
+
+    // Generate namespace end
+    WriteLine();
+    WriteLineIndent("} // namespace " + *p->name);
+    WriteLineIndent("} // namespace FBE");
+}
+
+void GeneratorCpp::GenerateClient(const std::shared_ptr<Package>& p, bool final)
+{
+    // Generate namespace begin
+    WriteLine();
+    WriteLineIndent("namespace FBE {");
+    WriteLineIndent("namespace " + *p->name + " {");
+
+    std::string client = (final ? "FinalClient" : "Client");
+    std::string sender = (final ? "FinalSender" : "Sender");
+    std::string receiver = (final ? "FinalReceiver" : "Receiver");
+
+    // Generate client begin
+    WriteLine();
+    if (final)
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " final client");
+    else
+        WriteLineIndent("// Fast Binary Encoding " + *p->name + " client");
+    WriteLineIndent("template <class TBuffer>");
+    WriteLineIndent("class " + client + " : protected " + sender + "<TBuffer>, protected " + receiver + "<TBuffer>");
+    if (p->import)
+    {
+        Indent(1);
+        for (const auto& import : p->import->imports)
+            WriteLineIndent(", public virtual " + *import + "::" + client + "<TBuffer>");
+        Indent(-1);
+    }
+    WriteLineIndent("{");
+    WriteLineIndent("public:");
+    Indent(1);
+
+    // Generate client constructors
+    WriteLineIndent(client + "() = default;");
+    WriteLineIndent(client + "(const " + client + "&) = default;");
+    WriteLineIndent(client + "(" + client + "&&) noexcept = default;");
+    WriteLineIndent("virtual ~" + client + "() = default;");
+
+    // Generate client operators
+    WriteLine();
+    WriteLineIndent(client + "& operator=(const " + client + "&) = default;");
+    WriteLineIndent(client + "& operator=(" + client + "&&) noexcept = default;");
+
+    // Generate sender accessor
+    WriteLine();
+    WriteLineIndent("// Asynchronous sender");
+    WriteLineIndent(sender + "<TBuffer>& sender() noexcept { return *this; }");
+
+    std::map<std::string, bool> received;
+
+    // Generate send() methods
+    if (p->body)
+    {
+        for (const auto& s : p->body->structs)
+        {
+            if (s->request)
+            {
+                std::string request_name = "::" + *p->name + "::" + *s->name;
+                std::string response_name = (s->response) ? ConvertTypeName(*p->name, *s->response->response, false) : "";
+                std::string response_field = (s->response) ? *s->response->response : "";
+                bool imported = CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+
+                WriteLine();
+                if (response_name.empty())
+                {
+                    WriteLineIndent("void send(const " + request_name + "& value)");
+                    WriteLineIndent("{");
+                    Indent(1);
+                    WriteLineIndent("// Send the request message");
+                    WriteLineIndent("size_t serialized = Sender::send(value);");
+                    WriteLineIndent("if (serialized > 0)");
+                    Indent(1);
+                    WriteLineIndent("return;");
+                    Indent(-1);
+                    WriteLineIndent("else");
+                    Indent(1);
+                    WriteLineIndent("throw std::exception(\"Serialization failed!\");");
+                    Indent(-1);
+                    Indent(-1);
+                    WriteLineIndent("}");
+                }
+                else
+                {
+                    WriteLineIndent("std::future<" + response_name + "> send(const " + request_name + "& value)");
+                    WriteLineIndent("{");
+                    Indent(1);
+                    WriteLineIndent("std::promise<" + response_name + "> promise;");
+                    WriteLineIndent("std::future<" + response_name + "> future = promise.get_future();");
+                    WriteLine();
+                    WriteLineIndent("uint64_t current = CppCommon::Timestamp::utc();");
+                    WriteLine();
+                    WriteLineIndent("// Calculate unique timestamp");
+                    WriteLineIndent("_timestamp = (current <= _timestamp) ? _timestamp + 1 : current;");
+                    WriteLine();
+                    WriteLineIndent("// Send the request message");
+                    WriteLineIndent("size_t serialized = Sender::send(value);");
+                    WriteLineIndent("if (serialized > 0)");
+                    WriteLineIndent("{");
+                    Indent(1);
+                    WriteLineIndent("// Register the request");
+                    WriteLineIndent("_requests_by_id_" + response_field + ".insert(std::make_pair(value.id, std::make_pair(current, std::move(promise))));");
+                    WriteLineIndent("_requests_by_timestamp_" + response_field + ".insert(std::make_pair(_timestamp, value.id));");
+                    Indent(-1);
+                    WriteLineIndent("}");
+                    WriteLineIndent("else");
+                    Indent(1);
+                    WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::exception(\"Serialization failed!\")));");
+                    Indent(-1);
+                    WriteLine();
+                    WriteLineIndent("return future;");
+                    Indent(-1);
+                    WriteLineIndent("}");
+
+                    // Update received map
+                    received[response_name] = imported;
+                    if (s->rejects)
+                    {
+                        for (const auto& reject : s->rejects->rejects)
+                        {
+                            std::string reject_name = ConvertTypeName(*p->name, *reject, false);
+                            received[reject_name] = imported;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Generate client protected fields
+    if (!p->import || !received.empty())
+    {
+        bool first = true;
+        Indent(-1);
+        WriteLine();
+        WriteLineIndent("protected:");
+        Indent(1);
+        if (!p->import)
+        {
+            WriteLineIndent("uint64_t _timestamp{0};");
+            first = false;
+        }
+
+        // Generate received client handlers
+        for (const auto& response : received)
+        {
+            if (!first)
+                WriteLine();
+            first = false;
+            WriteLineIndent("void onReceive(const " + response.first + "& value) override");
+            WriteLineIndent("{");
+            Indent(1);
+            bool first_inner = true;
+            if (response.second)
+            {
+                WriteLineIndent("// Call the base imported handler");
+                WriteLineIndent(receiver + "::onReceive(value);");
+                first_inner = false;
+            }
+            for (const auto& s : p->body->structs)
+            {
+                if (s->request)
+                {
+                    std::string response_name = (s->response) ? ConvertTypeName(*p->name, *s->response->response, false) : "";
+                    std::string response_field = (s->response) ? *s->response->response : "";
+                    CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+
+                    if (response.first == response_name)
+                    {
+                        if (!first_inner)
+                            WriteLine();
+                        first_inner = false;
+                        WriteLineIndent("auto it = _requests_by_id_" + response_field + ".find(value.id);");
+                        WriteLineIndent("if (it != _requests_by_id_" + response_field + ".end())");
+                        WriteLineIndent("{");
+                        Indent(1);
+                        WriteLineIndent("auto timestamp = it->second.first;");
+                        WriteLineIndent("auto& promise = it->second.second;");
+                        WriteLineIndent("promise.set_value(value);");
+                        WriteLineIndent("_requests_by_id_" + response_field + ".erase(value.id);");
+                        WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
+                        Indent(-1);
+                        WriteLineIndent("}");
+                    }
+
+                    if (s->rejects)
+                    {
+                        for (const auto& reject : s->rejects->rejects)
+                        {
+                            std::string reject_name = ConvertTypeName(*p->name, *reject, false);
+                            if (response.first == reject_name)
+                            {
+                                if (!first_inner)
+                                    WriteLine();
+                                first_inner = false;
+                                WriteLineIndent("auto it = _requests_by_id_" + response_field + ".find(value.id);");
+                                WriteLineIndent("if (it != _requests_by_id_" + response_field + ".end())");
+                                WriteLineIndent("{");
+                                Indent(1);
+                                WriteLineIndent("auto timestamp = it->second.first;");
+                                WriteLineIndent("auto& promise = it->second.second;");
+                                WriteLineIndent("promise.set_exception(std::make_exception_ptr(std::exception(value.string().c_str())));");
+                                WriteLineIndent("_requests_by_id_" + response_field + ".erase(value.id);");
+                                WriteLineIndent("_requests_by_timestamp_" + response_field + ".erase(timestamp);");
+                                Indent(-1);
+                                WriteLineIndent("}");
+                            }
+                        }
+                    }
+                }
+            }
+            Indent(-1);
+            WriteLineIndent("}");
+        }
+    }
+
+    // Generate client private fields
+    if (!received.empty())
+    {
+        Indent(-1);
+        WriteLine();
+        WriteLineIndent("private:");
+        Indent(1);
+        if (p->body)
+        {
+            for (const auto& s : p->body->structs)
+            {
+                if (s->request)
+                {
+                    std::string request_name = "::" + *p->name + "::" + *s->name;
+                    std::string response_name = (s->response) ? ConvertTypeName(*p->name, *s->response->response, false) : "";
+                    std::string response_field = (s->response) ? *s->response->response : "";
+                    CppCommon::StringUtils::ReplaceAll(response_field, ".", "");
+
+                    if (!response_name.empty())
+                    {
+                        WriteLineIndent("std::unordered_map<FBE::uuid_t, std::pair<uint64_t, std::promise<" + response_name + ">>> _requests_by_id_" + response_field + ";");
+                        WriteLineIndent("std::map<uint64_t, FBE::uuid_t> _requests_by_timestamp_" + response_field + ";");
+                    }
+                }
+            }
+        }
+    }
+
+    // Generate client end
     Indent(-1);
     WriteLineIndent("};");
 

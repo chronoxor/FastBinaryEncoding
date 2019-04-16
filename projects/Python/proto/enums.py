@@ -1204,11 +1204,144 @@ class FinalModelEnumUInt64(fbe.FinalModel):
 
 @functools.total_ordering
 class Enums(object):
-    def __init__(self):
-        pass
+    __slots__ = "byte0", "byte1", "byte2", "byte3", "byte4", "byte5", "char0", "char1", "char2", "char3", "char4", "char5", "wchar0", "wchar1", "wchar2", "wchar3", "wchar4", "wchar5", "int8b0", "int8b1", "int8b2", "int8b3", "int8b4", "int8b5", "uint8b0", "uint8b1", "uint8b2", "uint8b3", "uint8b4", "uint8b5", "int16b0", "int16b1", "int16b2", "int16b3", "int16b4", "int16b5", "uint16b0", "uint16b1", "uint16b2", "uint16b3", "uint16b4", "uint16b5", "int32b0", "int32b1", "int32b2", "int32b3", "int32b4", "int32b5", "uint32b0", "uint32b1", "uint32b2", "uint32b3", "uint32b4", "uint32b5", "int64b0", "int64b1", "int64b2", "int64b3", "int64b4", "int64b5", "uint64b0", "uint64b1", "uint64b2", "uint64b3", "uint64b4", "uint64b5", 
+
+    def __init__(self, byte0=EnumByte.ENUM_VALUE_0, byte1=EnumByte.ENUM_VALUE_1, byte2=EnumByte.ENUM_VALUE_2, byte3=EnumByte.ENUM_VALUE_3, byte4=EnumByte.ENUM_VALUE_4, byte5=EnumByte.ENUM_VALUE_5, char0=EnumChar.ENUM_VALUE_0, char1=EnumChar.ENUM_VALUE_1, char2=EnumChar.ENUM_VALUE_2, char3=EnumChar.ENUM_VALUE_3, char4=EnumChar.ENUM_VALUE_4, char5=EnumChar.ENUM_VALUE_5, wchar0=EnumWChar.ENUM_VALUE_0, wchar1=EnumWChar.ENUM_VALUE_1, wchar2=EnumWChar.ENUM_VALUE_2, wchar3=EnumWChar.ENUM_VALUE_3, wchar4=EnumWChar.ENUM_VALUE_4, wchar5=EnumWChar.ENUM_VALUE_5, int8b0=EnumInt8.ENUM_VALUE_0, int8b1=EnumInt8.ENUM_VALUE_1, int8b2=EnumInt8.ENUM_VALUE_2, int8b3=EnumInt8.ENUM_VALUE_3, int8b4=EnumInt8.ENUM_VALUE_4, int8b5=EnumInt8.ENUM_VALUE_5, uint8b0=EnumUInt8.ENUM_VALUE_0, uint8b1=EnumUInt8.ENUM_VALUE_1, uint8b2=EnumUInt8.ENUM_VALUE_2, uint8b3=EnumUInt8.ENUM_VALUE_3, uint8b4=EnumUInt8.ENUM_VALUE_4, uint8b5=EnumUInt8.ENUM_VALUE_5, int16b0=EnumInt16.ENUM_VALUE_0, int16b1=EnumInt16.ENUM_VALUE_1, int16b2=EnumInt16.ENUM_VALUE_2, int16b3=EnumInt16.ENUM_VALUE_3, int16b4=EnumInt16.ENUM_VALUE_4, int16b5=EnumInt16.ENUM_VALUE_5, uint16b0=EnumUInt16.ENUM_VALUE_0, uint16b1=EnumUInt16.ENUM_VALUE_1, uint16b2=EnumUInt16.ENUM_VALUE_2, uint16b3=EnumUInt16.ENUM_VALUE_3, uint16b4=EnumUInt16.ENUM_VALUE_4, uint16b5=EnumUInt16.ENUM_VALUE_5, int32b0=EnumInt32.ENUM_VALUE_0, int32b1=EnumInt32.ENUM_VALUE_1, int32b2=EnumInt32.ENUM_VALUE_2, int32b3=EnumInt32.ENUM_VALUE_3, int32b4=EnumInt32.ENUM_VALUE_4, int32b5=EnumInt32.ENUM_VALUE_5, uint32b0=EnumUInt32.ENUM_VALUE_0, uint32b1=EnumUInt32.ENUM_VALUE_1, uint32b2=EnumUInt32.ENUM_VALUE_2, uint32b3=EnumUInt32.ENUM_VALUE_3, uint32b4=EnumUInt32.ENUM_VALUE_4, uint32b5=EnumUInt32.ENUM_VALUE_5, int64b0=EnumInt64.ENUM_VALUE_0, int64b1=EnumInt64.ENUM_VALUE_1, int64b2=EnumInt64.ENUM_VALUE_2, int64b3=EnumInt64.ENUM_VALUE_3, int64b4=EnumInt64.ENUM_VALUE_4, int64b5=EnumInt64.ENUM_VALUE_5, uint64b0=EnumUInt64.ENUM_VALUE_0, uint64b1=EnumUInt64.ENUM_VALUE_1, uint64b2=EnumUInt64.ENUM_VALUE_2, uint64b3=EnumUInt64.ENUM_VALUE_3, uint64b4=EnumUInt64.ENUM_VALUE_4, uint64b5=EnumUInt64.ENUM_VALUE_5):
+        self.byte0 = byte0
+        self.byte1 = byte1
+        self.byte2 = byte2
+        self.byte3 = byte3
+        self.byte4 = byte4
+        self.byte5 = byte5
+        self.char0 = char0
+        self.char1 = char1
+        self.char2 = char2
+        self.char3 = char3
+        self.char4 = char4
+        self.char5 = char5
+        self.wchar0 = wchar0
+        self.wchar1 = wchar1
+        self.wchar2 = wchar2
+        self.wchar3 = wchar3
+        self.wchar4 = wchar4
+        self.wchar5 = wchar5
+        self.int8b0 = int8b0
+        self.int8b1 = int8b1
+        self.int8b2 = int8b2
+        self.int8b3 = int8b3
+        self.int8b4 = int8b4
+        self.int8b5 = int8b5
+        self.uint8b0 = uint8b0
+        self.uint8b1 = uint8b1
+        self.uint8b2 = uint8b2
+        self.uint8b3 = uint8b3
+        self.uint8b4 = uint8b4
+        self.uint8b5 = uint8b5
+        self.int16b0 = int16b0
+        self.int16b1 = int16b1
+        self.int16b2 = int16b2
+        self.int16b3 = int16b3
+        self.int16b4 = int16b4
+        self.int16b5 = int16b5
+        self.uint16b0 = uint16b0
+        self.uint16b1 = uint16b1
+        self.uint16b2 = uint16b2
+        self.uint16b3 = uint16b3
+        self.uint16b4 = uint16b4
+        self.uint16b5 = uint16b5
+        self.int32b0 = int32b0
+        self.int32b1 = int32b1
+        self.int32b2 = int32b2
+        self.int32b3 = int32b3
+        self.int32b4 = int32b4
+        self.int32b5 = int32b5
+        self.uint32b0 = uint32b0
+        self.uint32b1 = uint32b1
+        self.uint32b2 = uint32b2
+        self.uint32b3 = uint32b3
+        self.uint32b4 = uint32b4
+        self.uint32b5 = uint32b5
+        self.int64b0 = int64b0
+        self.int64b1 = int64b1
+        self.int64b2 = int64b2
+        self.int64b3 = int64b3
+        self.int64b4 = int64b4
+        self.int64b5 = int64b5
+        self.uint64b0 = uint64b0
+        self.uint64b1 = uint64b1
+        self.uint64b2 = uint64b2
+        self.uint64b3 = uint64b3
+        self.uint64b4 = uint64b4
+        self.uint64b5 = uint64b5
 
     # Struct shallow copy
     def copy(self, other):
+        self.byte0 = other.byte0
+        self.byte1 = other.byte1
+        self.byte2 = other.byte2
+        self.byte3 = other.byte3
+        self.byte4 = other.byte4
+        self.byte5 = other.byte5
+        self.char0 = other.char0
+        self.char1 = other.char1
+        self.char2 = other.char2
+        self.char3 = other.char3
+        self.char4 = other.char4
+        self.char5 = other.char5
+        self.wchar0 = other.wchar0
+        self.wchar1 = other.wchar1
+        self.wchar2 = other.wchar2
+        self.wchar3 = other.wchar3
+        self.wchar4 = other.wchar4
+        self.wchar5 = other.wchar5
+        self.int8b0 = other.int8b0
+        self.int8b1 = other.int8b1
+        self.int8b2 = other.int8b2
+        self.int8b3 = other.int8b3
+        self.int8b4 = other.int8b4
+        self.int8b5 = other.int8b5
+        self.uint8b0 = other.uint8b0
+        self.uint8b1 = other.uint8b1
+        self.uint8b2 = other.uint8b2
+        self.uint8b3 = other.uint8b3
+        self.uint8b4 = other.uint8b4
+        self.uint8b5 = other.uint8b5
+        self.int16b0 = other.int16b0
+        self.int16b1 = other.int16b1
+        self.int16b2 = other.int16b2
+        self.int16b3 = other.int16b3
+        self.int16b4 = other.int16b4
+        self.int16b5 = other.int16b5
+        self.uint16b0 = other.uint16b0
+        self.uint16b1 = other.uint16b1
+        self.uint16b2 = other.uint16b2
+        self.uint16b3 = other.uint16b3
+        self.uint16b4 = other.uint16b4
+        self.uint16b5 = other.uint16b5
+        self.int32b0 = other.int32b0
+        self.int32b1 = other.int32b1
+        self.int32b2 = other.int32b2
+        self.int32b3 = other.int32b3
+        self.int32b4 = other.int32b4
+        self.int32b5 = other.int32b5
+        self.uint32b0 = other.uint32b0
+        self.uint32b1 = other.uint32b1
+        self.uint32b2 = other.uint32b2
+        self.uint32b3 = other.uint32b3
+        self.uint32b4 = other.uint32b4
+        self.uint32b5 = other.uint32b5
+        self.int64b0 = other.int64b0
+        self.int64b1 = other.int64b1
+        self.int64b2 = other.int64b2
+        self.int64b3 = other.int64b3
+        self.int64b4 = other.int64b4
+        self.int64b5 = other.int64b5
+        self.uint64b0 = other.uint64b0
+        self.uint64b1 = other.uint64b1
+        self.uint64b2 = other.uint64b2
+        self.uint64b3 = other.uint64b3
+        self.uint64b4 = other.uint64b4
+        self.uint64b5 = other.uint64b5
         return self
 
     # Struct deep clone
@@ -1245,6 +1378,138 @@ class Enums(object):
     def __str__(self):
         sb = list()
         sb.append("Enums(")
+        sb.append("byte0=")
+        sb.append(str(self.byte0))
+        sb.append(",byte1=")
+        sb.append(str(self.byte1))
+        sb.append(",byte2=")
+        sb.append(str(self.byte2))
+        sb.append(",byte3=")
+        sb.append(str(self.byte3))
+        sb.append(",byte4=")
+        sb.append(str(self.byte4))
+        sb.append(",byte5=")
+        sb.append(str(self.byte5))
+        sb.append(",char0=")
+        sb.append(str(self.char0))
+        sb.append(",char1=")
+        sb.append(str(self.char1))
+        sb.append(",char2=")
+        sb.append(str(self.char2))
+        sb.append(",char3=")
+        sb.append(str(self.char3))
+        sb.append(",char4=")
+        sb.append(str(self.char4))
+        sb.append(",char5=")
+        sb.append(str(self.char5))
+        sb.append(",wchar0=")
+        sb.append(str(self.wchar0))
+        sb.append(",wchar1=")
+        sb.append(str(self.wchar1))
+        sb.append(",wchar2=")
+        sb.append(str(self.wchar2))
+        sb.append(",wchar3=")
+        sb.append(str(self.wchar3))
+        sb.append(",wchar4=")
+        sb.append(str(self.wchar4))
+        sb.append(",wchar5=")
+        sb.append(str(self.wchar5))
+        sb.append(",int8b0=")
+        sb.append(str(self.int8b0))
+        sb.append(",int8b1=")
+        sb.append(str(self.int8b1))
+        sb.append(",int8b2=")
+        sb.append(str(self.int8b2))
+        sb.append(",int8b3=")
+        sb.append(str(self.int8b3))
+        sb.append(",int8b4=")
+        sb.append(str(self.int8b4))
+        sb.append(",int8b5=")
+        sb.append(str(self.int8b5))
+        sb.append(",uint8b0=")
+        sb.append(str(self.uint8b0))
+        sb.append(",uint8b1=")
+        sb.append(str(self.uint8b1))
+        sb.append(",uint8b2=")
+        sb.append(str(self.uint8b2))
+        sb.append(",uint8b3=")
+        sb.append(str(self.uint8b3))
+        sb.append(",uint8b4=")
+        sb.append(str(self.uint8b4))
+        sb.append(",uint8b5=")
+        sb.append(str(self.uint8b5))
+        sb.append(",int16b0=")
+        sb.append(str(self.int16b0))
+        sb.append(",int16b1=")
+        sb.append(str(self.int16b1))
+        sb.append(",int16b2=")
+        sb.append(str(self.int16b2))
+        sb.append(",int16b3=")
+        sb.append(str(self.int16b3))
+        sb.append(",int16b4=")
+        sb.append(str(self.int16b4))
+        sb.append(",int16b5=")
+        sb.append(str(self.int16b5))
+        sb.append(",uint16b0=")
+        sb.append(str(self.uint16b0))
+        sb.append(",uint16b1=")
+        sb.append(str(self.uint16b1))
+        sb.append(",uint16b2=")
+        sb.append(str(self.uint16b2))
+        sb.append(",uint16b3=")
+        sb.append(str(self.uint16b3))
+        sb.append(",uint16b4=")
+        sb.append(str(self.uint16b4))
+        sb.append(",uint16b5=")
+        sb.append(str(self.uint16b5))
+        sb.append(",int32b0=")
+        sb.append(str(self.int32b0))
+        sb.append(",int32b1=")
+        sb.append(str(self.int32b1))
+        sb.append(",int32b2=")
+        sb.append(str(self.int32b2))
+        sb.append(",int32b3=")
+        sb.append(str(self.int32b3))
+        sb.append(",int32b4=")
+        sb.append(str(self.int32b4))
+        sb.append(",int32b5=")
+        sb.append(str(self.int32b5))
+        sb.append(",uint32b0=")
+        sb.append(str(self.uint32b0))
+        sb.append(",uint32b1=")
+        sb.append(str(self.uint32b1))
+        sb.append(",uint32b2=")
+        sb.append(str(self.uint32b2))
+        sb.append(",uint32b3=")
+        sb.append(str(self.uint32b3))
+        sb.append(",uint32b4=")
+        sb.append(str(self.uint32b4))
+        sb.append(",uint32b5=")
+        sb.append(str(self.uint32b5))
+        sb.append(",int64b0=")
+        sb.append(str(self.int64b0))
+        sb.append(",int64b1=")
+        sb.append(str(self.int64b1))
+        sb.append(",int64b2=")
+        sb.append(str(self.int64b2))
+        sb.append(",int64b3=")
+        sb.append(str(self.int64b3))
+        sb.append(",int64b4=")
+        sb.append(str(self.int64b4))
+        sb.append(",int64b5=")
+        sb.append(str(self.int64b5))
+        sb.append(",uint64b0=")
+        sb.append(str(self.uint64b0))
+        sb.append(",uint64b1=")
+        sb.append(str(self.uint64b1))
+        sb.append(",uint64b2=")
+        sb.append(str(self.uint64b2))
+        sb.append(",uint64b3=")
+        sb.append(str(self.uint64b3))
+        sb.append(",uint64b4=")
+        sb.append(str(self.uint64b4))
+        sb.append(",uint64b5=")
+        sb.append(str(self.uint64b5))
         sb.append(")")
         return "".join(sb)
 
@@ -1254,6 +1519,74 @@ class Enums(object):
 
     def __to_json__(self):
         result = dict()
+        result.update(dict(
+            byte0=self.byte0, 
+            byte1=self.byte1, 
+            byte2=self.byte2, 
+            byte3=self.byte3, 
+            byte4=self.byte4, 
+            byte5=self.byte5, 
+            char0=self.char0, 
+            char1=self.char1, 
+            char2=self.char2, 
+            char3=self.char3, 
+            char4=self.char4, 
+            char5=self.char5, 
+            wchar0=self.wchar0, 
+            wchar1=self.wchar1, 
+            wchar2=self.wchar2, 
+            wchar3=self.wchar3, 
+            wchar4=self.wchar4, 
+            wchar5=self.wchar5, 
+            int8b0=self.int8b0, 
+            int8b1=self.int8b1, 
+            int8b2=self.int8b2, 
+            int8b3=self.int8b3, 
+            int8b4=self.int8b4, 
+            int8b5=self.int8b5, 
+            uint8b0=self.uint8b0, 
+            uint8b1=self.uint8b1, 
+            uint8b2=self.uint8b2, 
+            uint8b3=self.uint8b3, 
+            uint8b4=self.uint8b4, 
+            uint8b5=self.uint8b5, 
+            int16b0=self.int16b0, 
+            int16b1=self.int16b1, 
+            int16b2=self.int16b2, 
+            int16b3=self.int16b3, 
+            int16b4=self.int16b4, 
+            int16b5=self.int16b5, 
+            uint16b0=self.uint16b0, 
+            uint16b1=self.uint16b1, 
+            uint16b2=self.uint16b2, 
+            uint16b3=self.uint16b3, 
+            uint16b4=self.uint16b4, 
+            uint16b5=self.uint16b5, 
+            int32b0=self.int32b0, 
+            int32b1=self.int32b1, 
+            int32b2=self.int32b2, 
+            int32b3=self.int32b3, 
+            int32b4=self.int32b4, 
+            int32b5=self.int32b5, 
+            uint32b0=self.uint32b0, 
+            uint32b1=self.uint32b1, 
+            uint32b2=self.uint32b2, 
+            uint32b3=self.uint32b3, 
+            uint32b4=self.uint32b4, 
+            uint32b5=self.uint32b5, 
+            int64b0=self.int64b0, 
+            int64b1=self.int64b1, 
+            int64b2=self.int64b2, 
+            int64b3=self.int64b3, 
+            int64b4=self.int64b4, 
+            int64b5=self.int64b5, 
+            uint64b0=self.uint64b0, 
+            uint64b1=self.uint64b1, 
+            uint64b2=self.uint64b2, 
+            uint64b3=self.uint64b3, 
+            uint64b4=self.uint64b4, 
+            uint64b5=self.uint64b5, 
+        ))
         return result
 
     # Create struct from JSON value
@@ -1266,12 +1599,410 @@ class Enums(object):
         if fields is None:
             return None
         return Enums(
+            None if "byte0" not in fields else EnumByte.__from_json__(fields["byte0"]),
+            None if "byte1" not in fields else EnumByte.__from_json__(fields["byte1"]),
+            None if "byte2" not in fields else EnumByte.__from_json__(fields["byte2"]),
+            None if "byte3" not in fields else EnumByte.__from_json__(fields["byte3"]),
+            None if "byte4" not in fields else EnumByte.__from_json__(fields["byte4"]),
+            None if "byte5" not in fields else EnumByte.__from_json__(fields["byte5"]),
+            None if "char0" not in fields else EnumChar.__from_json__(fields["char0"]),
+            None if "char1" not in fields else EnumChar.__from_json__(fields["char1"]),
+            None if "char2" not in fields else EnumChar.__from_json__(fields["char2"]),
+            None if "char3" not in fields else EnumChar.__from_json__(fields["char3"]),
+            None if "char4" not in fields else EnumChar.__from_json__(fields["char4"]),
+            None if "char5" not in fields else EnumChar.__from_json__(fields["char5"]),
+            None if "wchar0" not in fields else EnumWChar.__from_json__(fields["wchar0"]),
+            None if "wchar1" not in fields else EnumWChar.__from_json__(fields["wchar1"]),
+            None if "wchar2" not in fields else EnumWChar.__from_json__(fields["wchar2"]),
+            None if "wchar3" not in fields else EnumWChar.__from_json__(fields["wchar3"]),
+            None if "wchar4" not in fields else EnumWChar.__from_json__(fields["wchar4"]),
+            None if "wchar5" not in fields else EnumWChar.__from_json__(fields["wchar5"]),
+            None if "int8b0" not in fields else EnumInt8.__from_json__(fields["int8b0"]),
+            None if "int8b1" not in fields else EnumInt8.__from_json__(fields["int8b1"]),
+            None if "int8b2" not in fields else EnumInt8.__from_json__(fields["int8b2"]),
+            None if "int8b3" not in fields else EnumInt8.__from_json__(fields["int8b3"]),
+            None if "int8b4" not in fields else EnumInt8.__from_json__(fields["int8b4"]),
+            None if "int8b5" not in fields else EnumInt8.__from_json__(fields["int8b5"]),
+            None if "uint8b0" not in fields else EnumUInt8.__from_json__(fields["uint8b0"]),
+            None if "uint8b1" not in fields else EnumUInt8.__from_json__(fields["uint8b1"]),
+            None if "uint8b2" not in fields else EnumUInt8.__from_json__(fields["uint8b2"]),
+            None if "uint8b3" not in fields else EnumUInt8.__from_json__(fields["uint8b3"]),
+            None if "uint8b4" not in fields else EnumUInt8.__from_json__(fields["uint8b4"]),
+            None if "uint8b5" not in fields else EnumUInt8.__from_json__(fields["uint8b5"]),
+            None if "int16b0" not in fields else EnumInt16.__from_json__(fields["int16b0"]),
+            None if "int16b1" not in fields else EnumInt16.__from_json__(fields["int16b1"]),
+            None if "int16b2" not in fields else EnumInt16.__from_json__(fields["int16b2"]),
+            None if "int16b3" not in fields else EnumInt16.__from_json__(fields["int16b3"]),
+            None if "int16b4" not in fields else EnumInt16.__from_json__(fields["int16b4"]),
+            None if "int16b5" not in fields else EnumInt16.__from_json__(fields["int16b5"]),
+            None if "uint16b0" not in fields else EnumUInt16.__from_json__(fields["uint16b0"]),
+            None if "uint16b1" not in fields else EnumUInt16.__from_json__(fields["uint16b1"]),
+            None if "uint16b2" not in fields else EnumUInt16.__from_json__(fields["uint16b2"]),
+            None if "uint16b3" not in fields else EnumUInt16.__from_json__(fields["uint16b3"]),
+            None if "uint16b4" not in fields else EnumUInt16.__from_json__(fields["uint16b4"]),
+            None if "uint16b5" not in fields else EnumUInt16.__from_json__(fields["uint16b5"]),
+            None if "int32b0" not in fields else EnumInt32.__from_json__(fields["int32b0"]),
+            None if "int32b1" not in fields else EnumInt32.__from_json__(fields["int32b1"]),
+            None if "int32b2" not in fields else EnumInt32.__from_json__(fields["int32b2"]),
+            None if "int32b3" not in fields else EnumInt32.__from_json__(fields["int32b3"]),
+            None if "int32b4" not in fields else EnumInt32.__from_json__(fields["int32b4"]),
+            None if "int32b5" not in fields else EnumInt32.__from_json__(fields["int32b5"]),
+            None if "uint32b0" not in fields else EnumUInt32.__from_json__(fields["uint32b0"]),
+            None if "uint32b1" not in fields else EnumUInt32.__from_json__(fields["uint32b1"]),
+            None if "uint32b2" not in fields else EnumUInt32.__from_json__(fields["uint32b2"]),
+            None if "uint32b3" not in fields else EnumUInt32.__from_json__(fields["uint32b3"]),
+            None if "uint32b4" not in fields else EnumUInt32.__from_json__(fields["uint32b4"]),
+            None if "uint32b5" not in fields else EnumUInt32.__from_json__(fields["uint32b5"]),
+            None if "int64b0" not in fields else EnumInt64.__from_json__(fields["int64b0"]),
+            None if "int64b1" not in fields else EnumInt64.__from_json__(fields["int64b1"]),
+            None if "int64b2" not in fields else EnumInt64.__from_json__(fields["int64b2"]),
+            None if "int64b3" not in fields else EnumInt64.__from_json__(fields["int64b3"]),
+            None if "int64b4" not in fields else EnumInt64.__from_json__(fields["int64b4"]),
+            None if "int64b5" not in fields else EnumInt64.__from_json__(fields["int64b5"]),
+            None if "uint64b0" not in fields else EnumUInt64.__from_json__(fields["uint64b0"]),
+            None if "uint64b1" not in fields else EnumUInt64.__from_json__(fields["uint64b1"]),
+            None if "uint64b2" not in fields else EnumUInt64.__from_json__(fields["uint64b2"]),
+            None if "uint64b3" not in fields else EnumUInt64.__from_json__(fields["uint64b3"]),
+            None if "uint64b4" not in fields else EnumUInt64.__from_json__(fields["uint64b4"]),
+            None if "uint64b5" not in fields else EnumUInt64.__from_json__(fields["uint64b5"]),
         )
 
 
 class FieldModelEnums(fbe.FieldModel):
+    __slots__ = "_byte0", "_byte1", "_byte2", "_byte3", "_byte4", "_byte5", "_char0", "_char1", "_char2", "_char3", "_char4", "_char5", "_wchar0", "_wchar1", "_wchar2", "_wchar3", "_wchar4", "_wchar5", "_int8b0", "_int8b1", "_int8b2", "_int8b3", "_int8b4", "_int8b5", "_uint8b0", "_uint8b1", "_uint8b2", "_uint8b3", "_uint8b4", "_uint8b5", "_int16b0", "_int16b1", "_int16b2", "_int16b3", "_int16b4", "_int16b5", "_uint16b0", "_uint16b1", "_uint16b2", "_uint16b3", "_uint16b4", "_uint16b5", "_int32b0", "_int32b1", "_int32b2", "_int32b3", "_int32b4", "_int32b5", "_uint32b0", "_uint32b1", "_uint32b2", "_uint32b3", "_uint32b4", "_uint32b5", "_int64b0", "_int64b1", "_int64b2", "_int64b3", "_int64b4", "_int64b5", "_uint64b0", "_uint64b1", "_uint64b2", "_uint64b3", "_uint64b4", "_uint64b5", 
+
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
+        self._byte0 = FieldModelEnumByte(buffer, 4 + 4)
+        self._byte1 = FieldModelEnumByte(buffer, self._byte0.fbe_offset + self._byte0.fbe_size)
+        self._byte2 = FieldModelEnumByte(buffer, self._byte1.fbe_offset + self._byte1.fbe_size)
+        self._byte3 = FieldModelEnumByte(buffer, self._byte2.fbe_offset + self._byte2.fbe_size)
+        self._byte4 = FieldModelEnumByte(buffer, self._byte3.fbe_offset + self._byte3.fbe_size)
+        self._byte5 = FieldModelEnumByte(buffer, self._byte4.fbe_offset + self._byte4.fbe_size)
+        self._char0 = FieldModelEnumChar(buffer, self._byte5.fbe_offset + self._byte5.fbe_size)
+        self._char1 = FieldModelEnumChar(buffer, self._char0.fbe_offset + self._char0.fbe_size)
+        self._char2 = FieldModelEnumChar(buffer, self._char1.fbe_offset + self._char1.fbe_size)
+        self._char3 = FieldModelEnumChar(buffer, self._char2.fbe_offset + self._char2.fbe_size)
+        self._char4 = FieldModelEnumChar(buffer, self._char3.fbe_offset + self._char3.fbe_size)
+        self._char5 = FieldModelEnumChar(buffer, self._char4.fbe_offset + self._char4.fbe_size)
+        self._wchar0 = FieldModelEnumWChar(buffer, self._char5.fbe_offset + self._char5.fbe_size)
+        self._wchar1 = FieldModelEnumWChar(buffer, self._wchar0.fbe_offset + self._wchar0.fbe_size)
+        self._wchar2 = FieldModelEnumWChar(buffer, self._wchar1.fbe_offset + self._wchar1.fbe_size)
+        self._wchar3 = FieldModelEnumWChar(buffer, self._wchar2.fbe_offset + self._wchar2.fbe_size)
+        self._wchar4 = FieldModelEnumWChar(buffer, self._wchar3.fbe_offset + self._wchar3.fbe_size)
+        self._wchar5 = FieldModelEnumWChar(buffer, self._wchar4.fbe_offset + self._wchar4.fbe_size)
+        self._int8b0 = FieldModelEnumInt8(buffer, self._wchar5.fbe_offset + self._wchar5.fbe_size)
+        self._int8b1 = FieldModelEnumInt8(buffer, self._int8b0.fbe_offset + self._int8b0.fbe_size)
+        self._int8b2 = FieldModelEnumInt8(buffer, self._int8b1.fbe_offset + self._int8b1.fbe_size)
+        self._int8b3 = FieldModelEnumInt8(buffer, self._int8b2.fbe_offset + self._int8b2.fbe_size)
+        self._int8b4 = FieldModelEnumInt8(buffer, self._int8b3.fbe_offset + self._int8b3.fbe_size)
+        self._int8b5 = FieldModelEnumInt8(buffer, self._int8b4.fbe_offset + self._int8b4.fbe_size)
+        self._uint8b0 = FieldModelEnumUInt8(buffer, self._int8b5.fbe_offset + self._int8b5.fbe_size)
+        self._uint8b1 = FieldModelEnumUInt8(buffer, self._uint8b0.fbe_offset + self._uint8b0.fbe_size)
+        self._uint8b2 = FieldModelEnumUInt8(buffer, self._uint8b1.fbe_offset + self._uint8b1.fbe_size)
+        self._uint8b3 = FieldModelEnumUInt8(buffer, self._uint8b2.fbe_offset + self._uint8b2.fbe_size)
+        self._uint8b4 = FieldModelEnumUInt8(buffer, self._uint8b3.fbe_offset + self._uint8b3.fbe_size)
+        self._uint8b5 = FieldModelEnumUInt8(buffer, self._uint8b4.fbe_offset + self._uint8b4.fbe_size)
+        self._int16b0 = FieldModelEnumInt16(buffer, self._uint8b5.fbe_offset + self._uint8b5.fbe_size)
+        self._int16b1 = FieldModelEnumInt16(buffer, self._int16b0.fbe_offset + self._int16b0.fbe_size)
+        self._int16b2 = FieldModelEnumInt16(buffer, self._int16b1.fbe_offset + self._int16b1.fbe_size)
+        self._int16b3 = FieldModelEnumInt16(buffer, self._int16b2.fbe_offset + self._int16b2.fbe_size)
+        self._int16b4 = FieldModelEnumInt16(buffer, self._int16b3.fbe_offset + self._int16b3.fbe_size)
+        self._int16b5 = FieldModelEnumInt16(buffer, self._int16b4.fbe_offset + self._int16b4.fbe_size)
+        self._uint16b0 = FieldModelEnumUInt16(buffer, self._int16b5.fbe_offset + self._int16b5.fbe_size)
+        self._uint16b1 = FieldModelEnumUInt16(buffer, self._uint16b0.fbe_offset + self._uint16b0.fbe_size)
+        self._uint16b2 = FieldModelEnumUInt16(buffer, self._uint16b1.fbe_offset + self._uint16b1.fbe_size)
+        self._uint16b3 = FieldModelEnumUInt16(buffer, self._uint16b2.fbe_offset + self._uint16b2.fbe_size)
+        self._uint16b4 = FieldModelEnumUInt16(buffer, self._uint16b3.fbe_offset + self._uint16b3.fbe_size)
+        self._uint16b5 = FieldModelEnumUInt16(buffer, self._uint16b4.fbe_offset + self._uint16b4.fbe_size)
+        self._int32b0 = FieldModelEnumInt32(buffer, self._uint16b5.fbe_offset + self._uint16b5.fbe_size)
+        self._int32b1 = FieldModelEnumInt32(buffer, self._int32b0.fbe_offset + self._int32b0.fbe_size)
+        self._int32b2 = FieldModelEnumInt32(buffer, self._int32b1.fbe_offset + self._int32b1.fbe_size)
+        self._int32b3 = FieldModelEnumInt32(buffer, self._int32b2.fbe_offset + self._int32b2.fbe_size)
+        self._int32b4 = FieldModelEnumInt32(buffer, self._int32b3.fbe_offset + self._int32b3.fbe_size)
+        self._int32b5 = FieldModelEnumInt32(buffer, self._int32b4.fbe_offset + self._int32b4.fbe_size)
+        self._uint32b0 = FieldModelEnumUInt32(buffer, self._int32b5.fbe_offset + self._int32b5.fbe_size)
+        self._uint32b1 = FieldModelEnumUInt32(buffer, self._uint32b0.fbe_offset + self._uint32b0.fbe_size)
+        self._uint32b2 = FieldModelEnumUInt32(buffer, self._uint32b1.fbe_offset + self._uint32b1.fbe_size)
+        self._uint32b3 = FieldModelEnumUInt32(buffer, self._uint32b2.fbe_offset + self._uint32b2.fbe_size)
+        self._uint32b4 = FieldModelEnumUInt32(buffer, self._uint32b3.fbe_offset + self._uint32b3.fbe_size)
+        self._uint32b5 = FieldModelEnumUInt32(buffer, self._uint32b4.fbe_offset + self._uint32b4.fbe_size)
+        self._int64b0 = FieldModelEnumInt64(buffer, self._uint32b5.fbe_offset + self._uint32b5.fbe_size)
+        self._int64b1 = FieldModelEnumInt64(buffer, self._int64b0.fbe_offset + self._int64b0.fbe_size)
+        self._int64b2 = FieldModelEnumInt64(buffer, self._int64b1.fbe_offset + self._int64b1.fbe_size)
+        self._int64b3 = FieldModelEnumInt64(buffer, self._int64b2.fbe_offset + self._int64b2.fbe_size)
+        self._int64b4 = FieldModelEnumInt64(buffer, self._int64b3.fbe_offset + self._int64b3.fbe_size)
+        self._int64b5 = FieldModelEnumInt64(buffer, self._int64b4.fbe_offset + self._int64b4.fbe_size)
+        self._uint64b0 = FieldModelEnumUInt64(buffer, self._int64b5.fbe_offset + self._int64b5.fbe_size)
+        self._uint64b1 = FieldModelEnumUInt64(buffer, self._uint64b0.fbe_offset + self._uint64b0.fbe_size)
+        self._uint64b2 = FieldModelEnumUInt64(buffer, self._uint64b1.fbe_offset + self._uint64b1.fbe_size)
+        self._uint64b3 = FieldModelEnumUInt64(buffer, self._uint64b2.fbe_offset + self._uint64b2.fbe_size)
+        self._uint64b4 = FieldModelEnumUInt64(buffer, self._uint64b3.fbe_offset + self._uint64b3.fbe_size)
+        self._uint64b5 = FieldModelEnumUInt64(buffer, self._uint64b4.fbe_offset + self._uint64b4.fbe_size)
+
+    @property
+    def byte0(self):
+        return self._byte0
+
+    @property
+    def byte1(self):
+        return self._byte1
+
+    @property
+    def byte2(self):
+        return self._byte2
+
+    @property
+    def byte3(self):
+        return self._byte3
+
+    @property
+    def byte4(self):
+        return self._byte4
+
+    @property
+    def byte5(self):
+        return self._byte5
+
+    @property
+    def char0(self):
+        return self._char0
+
+    @property
+    def char1(self):
+        return self._char1
+
+    @property
+    def char2(self):
+        return self._char2
+
+    @property
+    def char3(self):
+        return self._char3
+
+    @property
+    def char4(self):
+        return self._char4
+
+    @property
+    def char5(self):
+        return self._char5
+
+    @property
+    def wchar0(self):
+        return self._wchar0
+
+    @property
+    def wchar1(self):
+        return self._wchar1
+
+    @property
+    def wchar2(self):
+        return self._wchar2
+
+    @property
+    def wchar3(self):
+        return self._wchar3
+
+    @property
+    def wchar4(self):
+        return self._wchar4
+
+    @property
+    def wchar5(self):
+        return self._wchar5
+
+    @property
+    def int8b0(self):
+        return self._int8b0
+
+    @property
+    def int8b1(self):
+        return self._int8b1
+
+    @property
+    def int8b2(self):
+        return self._int8b2
+
+    @property
+    def int8b3(self):
+        return self._int8b3
+
+    @property
+    def int8b4(self):
+        return self._int8b4
+
+    @property
+    def int8b5(self):
+        return self._int8b5
+
+    @property
+    def uint8b0(self):
+        return self._uint8b0
+
+    @property
+    def uint8b1(self):
+        return self._uint8b1
+
+    @property
+    def uint8b2(self):
+        return self._uint8b2
+
+    @property
+    def uint8b3(self):
+        return self._uint8b3
+
+    @property
+    def uint8b4(self):
+        return self._uint8b4
+
+    @property
+    def uint8b5(self):
+        return self._uint8b5
+
+    @property
+    def int16b0(self):
+        return self._int16b0
+
+    @property
+    def int16b1(self):
+        return self._int16b1
+
+    @property
+    def int16b2(self):
+        return self._int16b2
+
+    @property
+    def int16b3(self):
+        return self._int16b3
+
+    @property
+    def int16b4(self):
+        return self._int16b4
+
+    @property
+    def int16b5(self):
+        return self._int16b5
+
+    @property
+    def uint16b0(self):
+        return self._uint16b0
+
+    @property
+    def uint16b1(self):
+        return self._uint16b1
+
+    @property
+    def uint16b2(self):
+        return self._uint16b2
+
+    @property
+    def uint16b3(self):
+        return self._uint16b3
+
+    @property
+    def uint16b4(self):
+        return self._uint16b4
+
+    @property
+    def uint16b5(self):
+        return self._uint16b5
+
+    @property
+    def int32b0(self):
+        return self._int32b0
+
+    @property
+    def int32b1(self):
+        return self._int32b1
+
+    @property
+    def int32b2(self):
+        return self._int32b2
+
+    @property
+    def int32b3(self):
+        return self._int32b3
+
+    @property
+    def int32b4(self):
+        return self._int32b4
+
+    @property
+    def int32b5(self):
+        return self._int32b5
+
+    @property
+    def uint32b0(self):
+        return self._uint32b0
+
+    @property
+    def uint32b1(self):
+        return self._uint32b1
+
+    @property
+    def uint32b2(self):
+        return self._uint32b2
+
+    @property
+    def uint32b3(self):
+        return self._uint32b3
+
+    @property
+    def uint32b4(self):
+        return self._uint32b4
+
+    @property
+    def uint32b5(self):
+        return self._uint32b5
+
+    @property
+    def int64b0(self):
+        return self._int64b0
+
+    @property
+    def int64b1(self):
+        return self._int64b1
+
+    @property
+    def int64b2(self):
+        return self._int64b2
+
+    @property
+    def int64b3(self):
+        return self._int64b3
+
+    @property
+    def int64b4(self):
+        return self._int64b4
+
+    @property
+    def int64b5(self):
+        return self._int64b5
+
+    @property
+    def uint64b0(self):
+        return self._uint64b0
+
+    @property
+    def uint64b1(self):
+        return self._uint64b1
+
+    @property
+    def uint64b2(self):
+        return self._uint64b2
+
+    @property
+    def uint64b3(self):
+        return self._uint64b3
+
+    @property
+    def uint64b4(self):
+        return self._uint64b4
+
+    @property
+    def uint64b5(self):
+        return self._uint64b5
 
     # Get the field size
     @property
@@ -1282,6 +2013,72 @@ class FieldModelEnums(fbe.FieldModel):
     @property
     def fbe_body(self):
         fbe_result = 4 + 4 \
+            + self.byte0.fbe_size \
+            + self.byte1.fbe_size \
+            + self.byte2.fbe_size \
+            + self.byte3.fbe_size \
+            + self.byte4.fbe_size \
+            + self.byte5.fbe_size \
+            + self.char0.fbe_size \
+            + self.char1.fbe_size \
+            + self.char2.fbe_size \
+            + self.char3.fbe_size \
+            + self.char4.fbe_size \
+            + self.char5.fbe_size \
+            + self.wchar0.fbe_size \
+            + self.wchar1.fbe_size \
+            + self.wchar2.fbe_size \
+            + self.wchar3.fbe_size \
+            + self.wchar4.fbe_size \
+            + self.wchar5.fbe_size \
+            + self.int8b0.fbe_size \
+            + self.int8b1.fbe_size \
+            + self.int8b2.fbe_size \
+            + self.int8b3.fbe_size \
+            + self.int8b4.fbe_size \
+            + self.int8b5.fbe_size \
+            + self.uint8b0.fbe_size \
+            + self.uint8b1.fbe_size \
+            + self.uint8b2.fbe_size \
+            + self.uint8b3.fbe_size \
+            + self.uint8b4.fbe_size \
+            + self.uint8b5.fbe_size \
+            + self.int16b0.fbe_size \
+            + self.int16b1.fbe_size \
+            + self.int16b2.fbe_size \
+            + self.int16b3.fbe_size \
+            + self.int16b4.fbe_size \
+            + self.int16b5.fbe_size \
+            + self.uint16b0.fbe_size \
+            + self.uint16b1.fbe_size \
+            + self.uint16b2.fbe_size \
+            + self.uint16b3.fbe_size \
+            + self.uint16b4.fbe_size \
+            + self.uint16b5.fbe_size \
+            + self.int32b0.fbe_size \
+            + self.int32b1.fbe_size \
+            + self.int32b2.fbe_size \
+            + self.int32b3.fbe_size \
+            + self.int32b4.fbe_size \
+            + self.int32b5.fbe_size \
+            + self.uint32b0.fbe_size \
+            + self.uint32b1.fbe_size \
+            + self.uint32b2.fbe_size \
+            + self.uint32b3.fbe_size \
+            + self.uint32b4.fbe_size \
+            + self.uint32b5.fbe_size \
+            + self.int64b0.fbe_size \
+            + self.int64b1.fbe_size \
+            + self.int64b2.fbe_size \
+            + self.int64b3.fbe_size \
+            + self.int64b4.fbe_size \
+            + self.int64b5.fbe_size \
+            + self.uint64b0.fbe_size \
+            + self.uint64b1.fbe_size \
+            + self.uint64b2.fbe_size \
+            + self.uint64b3.fbe_size \
+            + self.uint64b4.fbe_size \
+            + self.uint64b5.fbe_size \
 
         return fbe_result
 
@@ -1298,6 +2095,72 @@ class FieldModelEnums(fbe.FieldModel):
         self._buffer.shift(fbe_struct_offset)
 
         fbe_result = self.fbe_body \
+            + self.byte0.fbe_extra \
+            + self.byte1.fbe_extra \
+            + self.byte2.fbe_extra \
+            + self.byte3.fbe_extra \
+            + self.byte4.fbe_extra \
+            + self.byte5.fbe_extra \
+            + self.char0.fbe_extra \
+            + self.char1.fbe_extra \
+            + self.char2.fbe_extra \
+            + self.char3.fbe_extra \
+            + self.char4.fbe_extra \
+            + self.char5.fbe_extra \
+            + self.wchar0.fbe_extra \
+            + self.wchar1.fbe_extra \
+            + self.wchar2.fbe_extra \
+            + self.wchar3.fbe_extra \
+            + self.wchar4.fbe_extra \
+            + self.wchar5.fbe_extra \
+            + self.int8b0.fbe_extra \
+            + self.int8b1.fbe_extra \
+            + self.int8b2.fbe_extra \
+            + self.int8b3.fbe_extra \
+            + self.int8b4.fbe_extra \
+            + self.int8b5.fbe_extra \
+            + self.uint8b0.fbe_extra \
+            + self.uint8b1.fbe_extra \
+            + self.uint8b2.fbe_extra \
+            + self.uint8b3.fbe_extra \
+            + self.uint8b4.fbe_extra \
+            + self.uint8b5.fbe_extra \
+            + self.int16b0.fbe_extra \
+            + self.int16b1.fbe_extra \
+            + self.int16b2.fbe_extra \
+            + self.int16b3.fbe_extra \
+            + self.int16b4.fbe_extra \
+            + self.int16b5.fbe_extra \
+            + self.uint16b0.fbe_extra \
+            + self.uint16b1.fbe_extra \
+            + self.uint16b2.fbe_extra \
+            + self.uint16b3.fbe_extra \
+            + self.uint16b4.fbe_extra \
+            + self.uint16b5.fbe_extra \
+            + self.int32b0.fbe_extra \
+            + self.int32b1.fbe_extra \
+            + self.int32b2.fbe_extra \
+            + self.int32b3.fbe_extra \
+            + self.int32b4.fbe_extra \
+            + self.int32b5.fbe_extra \
+            + self.uint32b0.fbe_extra \
+            + self.uint32b1.fbe_extra \
+            + self.uint32b2.fbe_extra \
+            + self.uint32b3.fbe_extra \
+            + self.uint32b4.fbe_extra \
+            + self.uint32b5.fbe_extra \
+            + self.int64b0.fbe_extra \
+            + self.int64b1.fbe_extra \
+            + self.int64b2.fbe_extra \
+            + self.int64b3.fbe_extra \
+            + self.int64b4.fbe_extra \
+            + self.int64b5.fbe_extra \
+            + self.uint64b0.fbe_extra \
+            + self.uint64b1.fbe_extra \
+            + self.uint64b2.fbe_extra \
+            + self.uint64b3.fbe_extra \
+            + self.uint64b4.fbe_extra \
+            + self.uint64b5.fbe_extra \
 
         self._buffer.unshift(fbe_struct_offset)
 
@@ -1334,6 +2197,404 @@ class FieldModelEnums(fbe.FieldModel):
 
     # Check if the struct fields are valid
     def verify_fields(self, fbe_struct_size):
+        fbe_current_size = 4 + 4
+
+        if (fbe_current_size + self.byte0.fbe_size) > fbe_struct_size:
+            return True
+        if not self.byte0.verify():
+            return False
+        fbe_current_size += self.byte0.fbe_size
+
+        if (fbe_current_size + self.byte1.fbe_size) > fbe_struct_size:
+            return True
+        if not self.byte1.verify():
+            return False
+        fbe_current_size += self.byte1.fbe_size
+
+        if (fbe_current_size + self.byte2.fbe_size) > fbe_struct_size:
+            return True
+        if not self.byte2.verify():
+            return False
+        fbe_current_size += self.byte2.fbe_size
+
+        if (fbe_current_size + self.byte3.fbe_size) > fbe_struct_size:
+            return True
+        if not self.byte3.verify():
+            return False
+        fbe_current_size += self.byte3.fbe_size
+
+        if (fbe_current_size + self.byte4.fbe_size) > fbe_struct_size:
+            return True
+        if not self.byte4.verify():
+            return False
+        fbe_current_size += self.byte4.fbe_size
+
+        if (fbe_current_size + self.byte5.fbe_size) > fbe_struct_size:
+            return True
+        if not self.byte5.verify():
+            return False
+        fbe_current_size += self.byte5.fbe_size
+
+        if (fbe_current_size + self.char0.fbe_size) > fbe_struct_size:
+            return True
+        if not self.char0.verify():
+            return False
+        fbe_current_size += self.char0.fbe_size
+
+        if (fbe_current_size + self.char1.fbe_size) > fbe_struct_size:
+            return True
+        if not self.char1.verify():
+            return False
+        fbe_current_size += self.char1.fbe_size
+
+        if (fbe_current_size + self.char2.fbe_size) > fbe_struct_size:
+            return True
+        if not self.char2.verify():
+            return False
+        fbe_current_size += self.char2.fbe_size
+
+        if (fbe_current_size + self.char3.fbe_size) > fbe_struct_size:
+            return True
+        if not self.char3.verify():
+            return False
+        fbe_current_size += self.char3.fbe_size
+
+        if (fbe_current_size + self.char4.fbe_size) > fbe_struct_size:
+            return True
+        if not self.char4.verify():
+            return False
+        fbe_current_size += self.char4.fbe_size
+
+        if (fbe_current_size + self.char5.fbe_size) > fbe_struct_size:
+            return True
+        if not self.char5.verify():
+            return False
+        fbe_current_size += self.char5.fbe_size
+
+        if (fbe_current_size + self.wchar0.fbe_size) > fbe_struct_size:
+            return True
+        if not self.wchar0.verify():
+            return False
+        fbe_current_size += self.wchar0.fbe_size
+
+        if (fbe_current_size + self.wchar1.fbe_size) > fbe_struct_size:
+            return True
+        if not self.wchar1.verify():
+            return False
+        fbe_current_size += self.wchar1.fbe_size
+
+        if (fbe_current_size + self.wchar2.fbe_size) > fbe_struct_size:
+            return True
+        if not self.wchar2.verify():
+            return False
+        fbe_current_size += self.wchar2.fbe_size
+
+        if (fbe_current_size + self.wchar3.fbe_size) > fbe_struct_size:
+            return True
+        if not self.wchar3.verify():
+            return False
+        fbe_current_size += self.wchar3.fbe_size
+
+        if (fbe_current_size + self.wchar4.fbe_size) > fbe_struct_size:
+            return True
+        if not self.wchar4.verify():
+            return False
+        fbe_current_size += self.wchar4.fbe_size
+
+        if (fbe_current_size + self.wchar5.fbe_size) > fbe_struct_size:
+            return True
+        if not self.wchar5.verify():
+            return False
+        fbe_current_size += self.wchar5.fbe_size
+
+        if (fbe_current_size + self.int8b0.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int8b0.verify():
+            return False
+        fbe_current_size += self.int8b0.fbe_size
+
+        if (fbe_current_size + self.int8b1.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int8b1.verify():
+            return False
+        fbe_current_size += self.int8b1.fbe_size
+
+        if (fbe_current_size + self.int8b2.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int8b2.verify():
+            return False
+        fbe_current_size += self.int8b2.fbe_size
+
+        if (fbe_current_size + self.int8b3.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int8b3.verify():
+            return False
+        fbe_current_size += self.int8b3.fbe_size
+
+        if (fbe_current_size + self.int8b4.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int8b4.verify():
+            return False
+        fbe_current_size += self.int8b4.fbe_size
+
+        if (fbe_current_size + self.int8b5.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int8b5.verify():
+            return False
+        fbe_current_size += self.int8b5.fbe_size
+
+        if (fbe_current_size + self.uint8b0.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint8b0.verify():
+            return False
+        fbe_current_size += self.uint8b0.fbe_size
+
+        if (fbe_current_size + self.uint8b1.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint8b1.verify():
+            return False
+        fbe_current_size += self.uint8b1.fbe_size
+
+        if (fbe_current_size + self.uint8b2.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint8b2.verify():
+            return False
+        fbe_current_size += self.uint8b2.fbe_size
+
+        if (fbe_current_size + self.uint8b3.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint8b3.verify():
+            return False
+        fbe_current_size += self.uint8b3.fbe_size
+
+        if (fbe_current_size + self.uint8b4.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint8b4.verify():
+            return False
+        fbe_current_size += self.uint8b4.fbe_size
+
+        if (fbe_current_size + self.uint8b5.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint8b5.verify():
+            return False
+        fbe_current_size += self.uint8b5.fbe_size
+
+        if (fbe_current_size + self.int16b0.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int16b0.verify():
+            return False
+        fbe_current_size += self.int16b0.fbe_size
+
+        if (fbe_current_size + self.int16b1.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int16b1.verify():
+            return False
+        fbe_current_size += self.int16b1.fbe_size
+
+        if (fbe_current_size + self.int16b2.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int16b2.verify():
+            return False
+        fbe_current_size += self.int16b2.fbe_size
+
+        if (fbe_current_size + self.int16b3.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int16b3.verify():
+            return False
+        fbe_current_size += self.int16b3.fbe_size
+
+        if (fbe_current_size + self.int16b4.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int16b4.verify():
+            return False
+        fbe_current_size += self.int16b4.fbe_size
+
+        if (fbe_current_size + self.int16b5.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int16b5.verify():
+            return False
+        fbe_current_size += self.int16b5.fbe_size
+
+        if (fbe_current_size + self.uint16b0.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint16b0.verify():
+            return False
+        fbe_current_size += self.uint16b0.fbe_size
+
+        if (fbe_current_size + self.uint16b1.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint16b1.verify():
+            return False
+        fbe_current_size += self.uint16b1.fbe_size
+
+        if (fbe_current_size + self.uint16b2.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint16b2.verify():
+            return False
+        fbe_current_size += self.uint16b2.fbe_size
+
+        if (fbe_current_size + self.uint16b3.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint16b3.verify():
+            return False
+        fbe_current_size += self.uint16b3.fbe_size
+
+        if (fbe_current_size + self.uint16b4.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint16b4.verify():
+            return False
+        fbe_current_size += self.uint16b4.fbe_size
+
+        if (fbe_current_size + self.uint16b5.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint16b5.verify():
+            return False
+        fbe_current_size += self.uint16b5.fbe_size
+
+        if (fbe_current_size + self.int32b0.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int32b0.verify():
+            return False
+        fbe_current_size += self.int32b0.fbe_size
+
+        if (fbe_current_size + self.int32b1.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int32b1.verify():
+            return False
+        fbe_current_size += self.int32b1.fbe_size
+
+        if (fbe_current_size + self.int32b2.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int32b2.verify():
+            return False
+        fbe_current_size += self.int32b2.fbe_size
+
+        if (fbe_current_size + self.int32b3.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int32b3.verify():
+            return False
+        fbe_current_size += self.int32b3.fbe_size
+
+        if (fbe_current_size + self.int32b4.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int32b4.verify():
+            return False
+        fbe_current_size += self.int32b4.fbe_size
+
+        if (fbe_current_size + self.int32b5.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int32b5.verify():
+            return False
+        fbe_current_size += self.int32b5.fbe_size
+
+        if (fbe_current_size + self.uint32b0.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint32b0.verify():
+            return False
+        fbe_current_size += self.uint32b0.fbe_size
+
+        if (fbe_current_size + self.uint32b1.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint32b1.verify():
+            return False
+        fbe_current_size += self.uint32b1.fbe_size
+
+        if (fbe_current_size + self.uint32b2.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint32b2.verify():
+            return False
+        fbe_current_size += self.uint32b2.fbe_size
+
+        if (fbe_current_size + self.uint32b3.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint32b3.verify():
+            return False
+        fbe_current_size += self.uint32b3.fbe_size
+
+        if (fbe_current_size + self.uint32b4.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint32b4.verify():
+            return False
+        fbe_current_size += self.uint32b4.fbe_size
+
+        if (fbe_current_size + self.uint32b5.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint32b5.verify():
+            return False
+        fbe_current_size += self.uint32b5.fbe_size
+
+        if (fbe_current_size + self.int64b0.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int64b0.verify():
+            return False
+        fbe_current_size += self.int64b0.fbe_size
+
+        if (fbe_current_size + self.int64b1.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int64b1.verify():
+            return False
+        fbe_current_size += self.int64b1.fbe_size
+
+        if (fbe_current_size + self.int64b2.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int64b2.verify():
+            return False
+        fbe_current_size += self.int64b2.fbe_size
+
+        if (fbe_current_size + self.int64b3.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int64b3.verify():
+            return False
+        fbe_current_size += self.int64b3.fbe_size
+
+        if (fbe_current_size + self.int64b4.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int64b4.verify():
+            return False
+        fbe_current_size += self.int64b4.fbe_size
+
+        if (fbe_current_size + self.int64b5.fbe_size) > fbe_struct_size:
+            return True
+        if not self.int64b5.verify():
+            return False
+        fbe_current_size += self.int64b5.fbe_size
+
+        if (fbe_current_size + self.uint64b0.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint64b0.verify():
+            return False
+        fbe_current_size += self.uint64b0.fbe_size
+
+        if (fbe_current_size + self.uint64b1.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint64b1.verify():
+            return False
+        fbe_current_size += self.uint64b1.fbe_size
+
+        if (fbe_current_size + self.uint64b2.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint64b2.verify():
+            return False
+        fbe_current_size += self.uint64b2.fbe_size
+
+        if (fbe_current_size + self.uint64b3.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint64b3.verify():
+            return False
+        fbe_current_size += self.uint64b3.fbe_size
+
+        if (fbe_current_size + self.uint64b4.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint64b4.verify():
+            return False
+        fbe_current_size += self.uint64b4.fbe_size
+
+        if (fbe_current_size + self.uint64b5.fbe_size) > fbe_struct_size:
+            return True
+        if not self.uint64b5.verify():
+            return False
+        fbe_current_size += self.uint64b5.fbe_size
+
         return True
 
     # Get the struct value (begin phase)
@@ -1374,7 +2635,403 @@ class FieldModelEnums(fbe.FieldModel):
 
     # Get the struct fields values
     def get_fields(self, fbe_value, fbe_struct_size):
-        pass
+        fbe_current_size = 4 + 4
+
+        if (fbe_current_size + self.byte0.fbe_size) <= fbe_struct_size:
+            fbe_value.byte0 = self.byte0.get(EnumByte.ENUM_VALUE_0)
+        else:
+            fbe_value.byte0 = EnumByte.ENUM_VALUE_0
+        fbe_current_size += self.byte0.fbe_size
+
+        if (fbe_current_size + self.byte1.fbe_size) <= fbe_struct_size:
+            fbe_value.byte1 = self.byte1.get(EnumByte.ENUM_VALUE_1)
+        else:
+            fbe_value.byte1 = EnumByte.ENUM_VALUE_1
+        fbe_current_size += self.byte1.fbe_size
+
+        if (fbe_current_size + self.byte2.fbe_size) <= fbe_struct_size:
+            fbe_value.byte2 = self.byte2.get(EnumByte.ENUM_VALUE_2)
+        else:
+            fbe_value.byte2 = EnumByte.ENUM_VALUE_2
+        fbe_current_size += self.byte2.fbe_size
+
+        if (fbe_current_size + self.byte3.fbe_size) <= fbe_struct_size:
+            fbe_value.byte3 = self.byte3.get(EnumByte.ENUM_VALUE_3)
+        else:
+            fbe_value.byte3 = EnumByte.ENUM_VALUE_3
+        fbe_current_size += self.byte3.fbe_size
+
+        if (fbe_current_size + self.byte4.fbe_size) <= fbe_struct_size:
+            fbe_value.byte4 = self.byte4.get(EnumByte.ENUM_VALUE_4)
+        else:
+            fbe_value.byte4 = EnumByte.ENUM_VALUE_4
+        fbe_current_size += self.byte4.fbe_size
+
+        if (fbe_current_size + self.byte5.fbe_size) <= fbe_struct_size:
+            fbe_value.byte5 = self.byte5.get(EnumByte.ENUM_VALUE_5)
+        else:
+            fbe_value.byte5 = EnumByte.ENUM_VALUE_5
+        fbe_current_size += self.byte5.fbe_size
+
+        if (fbe_current_size + self.char0.fbe_size) <= fbe_struct_size:
+            fbe_value.char0 = self.char0.get(EnumChar.ENUM_VALUE_0)
+        else:
+            fbe_value.char0 = EnumChar.ENUM_VALUE_0
+        fbe_current_size += self.char0.fbe_size
+
+        if (fbe_current_size + self.char1.fbe_size) <= fbe_struct_size:
+            fbe_value.char1 = self.char1.get(EnumChar.ENUM_VALUE_1)
+        else:
+            fbe_value.char1 = EnumChar.ENUM_VALUE_1
+        fbe_current_size += self.char1.fbe_size
+
+        if (fbe_current_size + self.char2.fbe_size) <= fbe_struct_size:
+            fbe_value.char2 = self.char2.get(EnumChar.ENUM_VALUE_2)
+        else:
+            fbe_value.char2 = EnumChar.ENUM_VALUE_2
+        fbe_current_size += self.char2.fbe_size
+
+        if (fbe_current_size + self.char3.fbe_size) <= fbe_struct_size:
+            fbe_value.char3 = self.char3.get(EnumChar.ENUM_VALUE_3)
+        else:
+            fbe_value.char3 = EnumChar.ENUM_VALUE_3
+        fbe_current_size += self.char3.fbe_size
+
+        if (fbe_current_size + self.char4.fbe_size) <= fbe_struct_size:
+            fbe_value.char4 = self.char4.get(EnumChar.ENUM_VALUE_4)
+        else:
+            fbe_value.char4 = EnumChar.ENUM_VALUE_4
+        fbe_current_size += self.char4.fbe_size
+
+        if (fbe_current_size + self.char5.fbe_size) <= fbe_struct_size:
+            fbe_value.char5 = self.char5.get(EnumChar.ENUM_VALUE_5)
+        else:
+            fbe_value.char5 = EnumChar.ENUM_VALUE_5
+        fbe_current_size += self.char5.fbe_size
+
+        if (fbe_current_size + self.wchar0.fbe_size) <= fbe_struct_size:
+            fbe_value.wchar0 = self.wchar0.get(EnumWChar.ENUM_VALUE_0)
+        else:
+            fbe_value.wchar0 = EnumWChar.ENUM_VALUE_0
+        fbe_current_size += self.wchar0.fbe_size
+
+        if (fbe_current_size + self.wchar1.fbe_size) <= fbe_struct_size:
+            fbe_value.wchar1 = self.wchar1.get(EnumWChar.ENUM_VALUE_1)
+        else:
+            fbe_value.wchar1 = EnumWChar.ENUM_VALUE_1
+        fbe_current_size += self.wchar1.fbe_size
+
+        if (fbe_current_size + self.wchar2.fbe_size) <= fbe_struct_size:
+            fbe_value.wchar2 = self.wchar2.get(EnumWChar.ENUM_VALUE_2)
+        else:
+            fbe_value.wchar2 = EnumWChar.ENUM_VALUE_2
+        fbe_current_size += self.wchar2.fbe_size
+
+        if (fbe_current_size + self.wchar3.fbe_size) <= fbe_struct_size:
+            fbe_value.wchar3 = self.wchar3.get(EnumWChar.ENUM_VALUE_3)
+        else:
+            fbe_value.wchar3 = EnumWChar.ENUM_VALUE_3
+        fbe_current_size += self.wchar3.fbe_size
+
+        if (fbe_current_size + self.wchar4.fbe_size) <= fbe_struct_size:
+            fbe_value.wchar4 = self.wchar4.get(EnumWChar.ENUM_VALUE_4)
+        else:
+            fbe_value.wchar4 = EnumWChar.ENUM_VALUE_4
+        fbe_current_size += self.wchar4.fbe_size
+
+        if (fbe_current_size + self.wchar5.fbe_size) <= fbe_struct_size:
+            fbe_value.wchar5 = self.wchar5.get(EnumWChar.ENUM_VALUE_5)
+        else:
+            fbe_value.wchar5 = EnumWChar.ENUM_VALUE_5
+        fbe_current_size += self.wchar5.fbe_size
+
+        if (fbe_current_size + self.int8b0.fbe_size) <= fbe_struct_size:
+            fbe_value.int8b0 = self.int8b0.get(EnumInt8.ENUM_VALUE_0)
+        else:
+            fbe_value.int8b0 = EnumInt8.ENUM_VALUE_0
+        fbe_current_size += self.int8b0.fbe_size
+
+        if (fbe_current_size + self.int8b1.fbe_size) <= fbe_struct_size:
+            fbe_value.int8b1 = self.int8b1.get(EnumInt8.ENUM_VALUE_1)
+        else:
+            fbe_value.int8b1 = EnumInt8.ENUM_VALUE_1
+        fbe_current_size += self.int8b1.fbe_size
+
+        if (fbe_current_size + self.int8b2.fbe_size) <= fbe_struct_size:
+            fbe_value.int8b2 = self.int8b2.get(EnumInt8.ENUM_VALUE_2)
+        else:
+            fbe_value.int8b2 = EnumInt8.ENUM_VALUE_2
+        fbe_current_size += self.int8b2.fbe_size
+
+        if (fbe_current_size + self.int8b3.fbe_size) <= fbe_struct_size:
+            fbe_value.int8b3 = self.int8b3.get(EnumInt8.ENUM_VALUE_3)
+        else:
+            fbe_value.int8b3 = EnumInt8.ENUM_VALUE_3
+        fbe_current_size += self.int8b3.fbe_size
+
+        if (fbe_current_size + self.int8b4.fbe_size) <= fbe_struct_size:
+            fbe_value.int8b4 = self.int8b4.get(EnumInt8.ENUM_VALUE_4)
+        else:
+            fbe_value.int8b4 = EnumInt8.ENUM_VALUE_4
+        fbe_current_size += self.int8b4.fbe_size
+
+        if (fbe_current_size + self.int8b5.fbe_size) <= fbe_struct_size:
+            fbe_value.int8b5 = self.int8b5.get(EnumInt8.ENUM_VALUE_5)
+        else:
+            fbe_value.int8b5 = EnumInt8.ENUM_VALUE_5
+        fbe_current_size += self.int8b5.fbe_size
+
+        if (fbe_current_size + self.uint8b0.fbe_size) <= fbe_struct_size:
+            fbe_value.uint8b0 = self.uint8b0.get(EnumUInt8.ENUM_VALUE_0)
+        else:
+            fbe_value.uint8b0 = EnumUInt8.ENUM_VALUE_0
+        fbe_current_size += self.uint8b0.fbe_size
+
+        if (fbe_current_size + self.uint8b1.fbe_size) <= fbe_struct_size:
+            fbe_value.uint8b1 = self.uint8b1.get(EnumUInt8.ENUM_VALUE_1)
+        else:
+            fbe_value.uint8b1 = EnumUInt8.ENUM_VALUE_1
+        fbe_current_size += self.uint8b1.fbe_size
+
+        if (fbe_current_size + self.uint8b2.fbe_size) <= fbe_struct_size:
+            fbe_value.uint8b2 = self.uint8b2.get(EnumUInt8.ENUM_VALUE_2)
+        else:
+            fbe_value.uint8b2 = EnumUInt8.ENUM_VALUE_2
+        fbe_current_size += self.uint8b2.fbe_size
+
+        if (fbe_current_size + self.uint8b3.fbe_size) <= fbe_struct_size:
+            fbe_value.uint8b3 = self.uint8b3.get(EnumUInt8.ENUM_VALUE_3)
+        else:
+            fbe_value.uint8b3 = EnumUInt8.ENUM_VALUE_3
+        fbe_current_size += self.uint8b3.fbe_size
+
+        if (fbe_current_size + self.uint8b4.fbe_size) <= fbe_struct_size:
+            fbe_value.uint8b4 = self.uint8b4.get(EnumUInt8.ENUM_VALUE_4)
+        else:
+            fbe_value.uint8b4 = EnumUInt8.ENUM_VALUE_4
+        fbe_current_size += self.uint8b4.fbe_size
+
+        if (fbe_current_size + self.uint8b5.fbe_size) <= fbe_struct_size:
+            fbe_value.uint8b5 = self.uint8b5.get(EnumUInt8.ENUM_VALUE_5)
+        else:
+            fbe_value.uint8b5 = EnumUInt8.ENUM_VALUE_5
+        fbe_current_size += self.uint8b5.fbe_size
+
+        if (fbe_current_size + self.int16b0.fbe_size) <= fbe_struct_size:
+            fbe_value.int16b0 = self.int16b0.get(EnumInt16.ENUM_VALUE_0)
+        else:
+            fbe_value.int16b0 = EnumInt16.ENUM_VALUE_0
+        fbe_current_size += self.int16b0.fbe_size
+
+        if (fbe_current_size + self.int16b1.fbe_size) <= fbe_struct_size:
+            fbe_value.int16b1 = self.int16b1.get(EnumInt16.ENUM_VALUE_1)
+        else:
+            fbe_value.int16b1 = EnumInt16.ENUM_VALUE_1
+        fbe_current_size += self.int16b1.fbe_size
+
+        if (fbe_current_size + self.int16b2.fbe_size) <= fbe_struct_size:
+            fbe_value.int16b2 = self.int16b2.get(EnumInt16.ENUM_VALUE_2)
+        else:
+            fbe_value.int16b2 = EnumInt16.ENUM_VALUE_2
+        fbe_current_size += self.int16b2.fbe_size
+
+        if (fbe_current_size + self.int16b3.fbe_size) <= fbe_struct_size:
+            fbe_value.int16b3 = self.int16b3.get(EnumInt16.ENUM_VALUE_3)
+        else:
+            fbe_value.int16b3 = EnumInt16.ENUM_VALUE_3
+        fbe_current_size += self.int16b3.fbe_size
+
+        if (fbe_current_size + self.int16b4.fbe_size) <= fbe_struct_size:
+            fbe_value.int16b4 = self.int16b4.get(EnumInt16.ENUM_VALUE_4)
+        else:
+            fbe_value.int16b4 = EnumInt16.ENUM_VALUE_4
+        fbe_current_size += self.int16b4.fbe_size
+
+        if (fbe_current_size + self.int16b5.fbe_size) <= fbe_struct_size:
+            fbe_value.int16b5 = self.int16b5.get(EnumInt16.ENUM_VALUE_5)
+        else:
+            fbe_value.int16b5 = EnumInt16.ENUM_VALUE_5
+        fbe_current_size += self.int16b5.fbe_size
+
+        if (fbe_current_size + self.uint16b0.fbe_size) <= fbe_struct_size:
+            fbe_value.uint16b0 = self.uint16b0.get(EnumUInt16.ENUM_VALUE_0)
+        else:
+            fbe_value.uint16b0 = EnumUInt16.ENUM_VALUE_0
+        fbe_current_size += self.uint16b0.fbe_size
+
+        if (fbe_current_size + self.uint16b1.fbe_size) <= fbe_struct_size:
+            fbe_value.uint16b1 = self.uint16b1.get(EnumUInt16.ENUM_VALUE_1)
+        else:
+            fbe_value.uint16b1 = EnumUInt16.ENUM_VALUE_1
+        fbe_current_size += self.uint16b1.fbe_size
+
+        if (fbe_current_size + self.uint16b2.fbe_size) <= fbe_struct_size:
+            fbe_value.uint16b2 = self.uint16b2.get(EnumUInt16.ENUM_VALUE_2)
+        else:
+            fbe_value.uint16b2 = EnumUInt16.ENUM_VALUE_2
+        fbe_current_size += self.uint16b2.fbe_size
+
+        if (fbe_current_size + self.uint16b3.fbe_size) <= fbe_struct_size:
+            fbe_value.uint16b3 = self.uint16b3.get(EnumUInt16.ENUM_VALUE_3)
+        else:
+            fbe_value.uint16b3 = EnumUInt16.ENUM_VALUE_3
+        fbe_current_size += self.uint16b3.fbe_size
+
+        if (fbe_current_size + self.uint16b4.fbe_size) <= fbe_struct_size:
+            fbe_value.uint16b4 = self.uint16b4.get(EnumUInt16.ENUM_VALUE_4)
+        else:
+            fbe_value.uint16b4 = EnumUInt16.ENUM_VALUE_4
+        fbe_current_size += self.uint16b4.fbe_size
+
+        if (fbe_current_size + self.uint16b5.fbe_size) <= fbe_struct_size:
+            fbe_value.uint16b5 = self.uint16b5.get(EnumUInt16.ENUM_VALUE_5)
+        else:
+            fbe_value.uint16b5 = EnumUInt16.ENUM_VALUE_5
+        fbe_current_size += self.uint16b5.fbe_size
+
+        if (fbe_current_size + self.int32b0.fbe_size) <= fbe_struct_size:
+            fbe_value.int32b0 = self.int32b0.get(EnumInt32.ENUM_VALUE_0)
+        else:
+            fbe_value.int32b0 = EnumInt32.ENUM_VALUE_0
+        fbe_current_size += self.int32b0.fbe_size
+
+        if (fbe_current_size + self.int32b1.fbe_size) <= fbe_struct_size:
+            fbe_value.int32b1 = self.int32b1.get(EnumInt32.ENUM_VALUE_1)
+        else:
+            fbe_value.int32b1 = EnumInt32.ENUM_VALUE_1
+        fbe_current_size += self.int32b1.fbe_size
+
+        if (fbe_current_size + self.int32b2.fbe_size) <= fbe_struct_size:
+            fbe_value.int32b2 = self.int32b2.get(EnumInt32.ENUM_VALUE_2)
+        else:
+            fbe_value.int32b2 = EnumInt32.ENUM_VALUE_2
+        fbe_current_size += self.int32b2.fbe_size
+
+        if (fbe_current_size + self.int32b3.fbe_size) <= fbe_struct_size:
+            fbe_value.int32b3 = self.int32b3.get(EnumInt32.ENUM_VALUE_3)
+        else:
+            fbe_value.int32b3 = EnumInt32.ENUM_VALUE_3
+        fbe_current_size += self.int32b3.fbe_size
+
+        if (fbe_current_size + self.int32b4.fbe_size) <= fbe_struct_size:
+            fbe_value.int32b4 = self.int32b4.get(EnumInt32.ENUM_VALUE_4)
+        else:
+            fbe_value.int32b4 = EnumInt32.ENUM_VALUE_4
+        fbe_current_size += self.int32b4.fbe_size
+
+        if (fbe_current_size + self.int32b5.fbe_size) <= fbe_struct_size:
+            fbe_value.int32b5 = self.int32b5.get(EnumInt32.ENUM_VALUE_5)
+        else:
+            fbe_value.int32b5 = EnumInt32.ENUM_VALUE_5
+        fbe_current_size += self.int32b5.fbe_size
+
+        if (fbe_current_size + self.uint32b0.fbe_size) <= fbe_struct_size:
+            fbe_value.uint32b0 = self.uint32b0.get(EnumUInt32.ENUM_VALUE_0)
+        else:
+            fbe_value.uint32b0 = EnumUInt32.ENUM_VALUE_0
+        fbe_current_size += self.uint32b0.fbe_size
+
+        if (fbe_current_size + self.uint32b1.fbe_size) <= fbe_struct_size:
+            fbe_value.uint32b1 = self.uint32b1.get(EnumUInt32.ENUM_VALUE_1)
+        else:
+            fbe_value.uint32b1 = EnumUInt32.ENUM_VALUE_1
+        fbe_current_size += self.uint32b1.fbe_size
+
+        if (fbe_current_size + self.uint32b2.fbe_size) <= fbe_struct_size:
+            fbe_value.uint32b2 = self.uint32b2.get(EnumUInt32.ENUM_VALUE_2)
+        else:
+            fbe_value.uint32b2 = EnumUInt32.ENUM_VALUE_2
+        fbe_current_size += self.uint32b2.fbe_size
+
+        if (fbe_current_size + self.uint32b3.fbe_size) <= fbe_struct_size:
+            fbe_value.uint32b3 = self.uint32b3.get(EnumUInt32.ENUM_VALUE_3)
+        else:
+            fbe_value.uint32b3 = EnumUInt32.ENUM_VALUE_3
+        fbe_current_size += self.uint32b3.fbe_size
+
+        if (fbe_current_size + self.uint32b4.fbe_size) <= fbe_struct_size:
+            fbe_value.uint32b4 = self.uint32b4.get(EnumUInt32.ENUM_VALUE_4)
+        else:
+            fbe_value.uint32b4 = EnumUInt32.ENUM_VALUE_4
+        fbe_current_size += self.uint32b4.fbe_size
+
+        if (fbe_current_size + self.uint32b5.fbe_size) <= fbe_struct_size:
+            fbe_value.uint32b5 = self.uint32b5.get(EnumUInt32.ENUM_VALUE_5)
+        else:
+            fbe_value.uint32b5 = EnumUInt32.ENUM_VALUE_5
+        fbe_current_size += self.uint32b5.fbe_size
+
+        if (fbe_current_size + self.int64b0.fbe_size) <= fbe_struct_size:
+            fbe_value.int64b0 = self.int64b0.get(EnumInt64.ENUM_VALUE_0)
+        else:
+            fbe_value.int64b0 = EnumInt64.ENUM_VALUE_0
+        fbe_current_size += self.int64b0.fbe_size
+
+        if (fbe_current_size + self.int64b1.fbe_size) <= fbe_struct_size:
+            fbe_value.int64b1 = self.int64b1.get(EnumInt64.ENUM_VALUE_1)
+        else:
+            fbe_value.int64b1 = EnumInt64.ENUM_VALUE_1
+        fbe_current_size += self.int64b1.fbe_size
+
+        if (fbe_current_size + self.int64b2.fbe_size) <= fbe_struct_size:
+            fbe_value.int64b2 = self.int64b2.get(EnumInt64.ENUM_VALUE_2)
+        else:
+            fbe_value.int64b2 = EnumInt64.ENUM_VALUE_2
+        fbe_current_size += self.int64b2.fbe_size
+
+        if (fbe_current_size + self.int64b3.fbe_size) <= fbe_struct_size:
+            fbe_value.int64b3 = self.int64b3.get(EnumInt64.ENUM_VALUE_3)
+        else:
+            fbe_value.int64b3 = EnumInt64.ENUM_VALUE_3
+        fbe_current_size += self.int64b3.fbe_size
+
+        if (fbe_current_size + self.int64b4.fbe_size) <= fbe_struct_size:
+            fbe_value.int64b4 = self.int64b4.get(EnumInt64.ENUM_VALUE_4)
+        else:
+            fbe_value.int64b4 = EnumInt64.ENUM_VALUE_4
+        fbe_current_size += self.int64b4.fbe_size
+
+        if (fbe_current_size + self.int64b5.fbe_size) <= fbe_struct_size:
+            fbe_value.int64b5 = self.int64b5.get(EnumInt64.ENUM_VALUE_5)
+        else:
+            fbe_value.int64b5 = EnumInt64.ENUM_VALUE_5
+        fbe_current_size += self.int64b5.fbe_size
+
+        if (fbe_current_size + self.uint64b0.fbe_size) <= fbe_struct_size:
+            fbe_value.uint64b0 = self.uint64b0.get(EnumUInt64.ENUM_VALUE_0)
+        else:
+            fbe_value.uint64b0 = EnumUInt64.ENUM_VALUE_0
+        fbe_current_size += self.uint64b0.fbe_size
+
+        if (fbe_current_size + self.uint64b1.fbe_size) <= fbe_struct_size:
+            fbe_value.uint64b1 = self.uint64b1.get(EnumUInt64.ENUM_VALUE_1)
+        else:
+            fbe_value.uint64b1 = EnumUInt64.ENUM_VALUE_1
+        fbe_current_size += self.uint64b1.fbe_size
+
+        if (fbe_current_size + self.uint64b2.fbe_size) <= fbe_struct_size:
+            fbe_value.uint64b2 = self.uint64b2.get(EnumUInt64.ENUM_VALUE_2)
+        else:
+            fbe_value.uint64b2 = EnumUInt64.ENUM_VALUE_2
+        fbe_current_size += self.uint64b2.fbe_size
+
+        if (fbe_current_size + self.uint64b3.fbe_size) <= fbe_struct_size:
+            fbe_value.uint64b3 = self.uint64b3.get(EnumUInt64.ENUM_VALUE_3)
+        else:
+            fbe_value.uint64b3 = EnumUInt64.ENUM_VALUE_3
+        fbe_current_size += self.uint64b3.fbe_size
+
+        if (fbe_current_size + self.uint64b4.fbe_size) <= fbe_struct_size:
+            fbe_value.uint64b4 = self.uint64b4.get(EnumUInt64.ENUM_VALUE_4)
+        else:
+            fbe_value.uint64b4 = EnumUInt64.ENUM_VALUE_4
+        fbe_current_size += self.uint64b4.fbe_size
+
+        if (fbe_current_size + self.uint64b5.fbe_size) <= fbe_struct_size:
+            fbe_value.uint64b5 = self.uint64b5.get(EnumUInt64.ENUM_VALUE_5)
+        else:
+            fbe_value.uint64b5 = EnumUInt64.ENUM_VALUE_5
+        fbe_current_size += self.uint64b5.fbe_size
 
     # Set the struct value (begin phase)
     def set_begin(self):
@@ -1410,7 +3067,72 @@ class FieldModelEnums(fbe.FieldModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        pass
+        self.byte0.set(fbe_value.byte0)
+        self.byte1.set(fbe_value.byte1)
+        self.byte2.set(fbe_value.byte2)
+        self.byte3.set(fbe_value.byte3)
+        self.byte4.set(fbe_value.byte4)
+        self.byte5.set(fbe_value.byte5)
+        self.char0.set(fbe_value.char0)
+        self.char1.set(fbe_value.char1)
+        self.char2.set(fbe_value.char2)
+        self.char3.set(fbe_value.char3)
+        self.char4.set(fbe_value.char4)
+        self.char5.set(fbe_value.char5)
+        self.wchar0.set(fbe_value.wchar0)
+        self.wchar1.set(fbe_value.wchar1)
+        self.wchar2.set(fbe_value.wchar2)
+        self.wchar3.set(fbe_value.wchar3)
+        self.wchar4.set(fbe_value.wchar4)
+        self.wchar5.set(fbe_value.wchar5)
+        self.int8b0.set(fbe_value.int8b0)
+        self.int8b1.set(fbe_value.int8b1)
+        self.int8b2.set(fbe_value.int8b2)
+        self.int8b3.set(fbe_value.int8b3)
+        self.int8b4.set(fbe_value.int8b4)
+        self.int8b5.set(fbe_value.int8b5)
+        self.uint8b0.set(fbe_value.uint8b0)
+        self.uint8b1.set(fbe_value.uint8b1)
+        self.uint8b2.set(fbe_value.uint8b2)
+        self.uint8b3.set(fbe_value.uint8b3)
+        self.uint8b4.set(fbe_value.uint8b4)
+        self.uint8b5.set(fbe_value.uint8b5)
+        self.int16b0.set(fbe_value.int16b0)
+        self.int16b1.set(fbe_value.int16b1)
+        self.int16b2.set(fbe_value.int16b2)
+        self.int16b3.set(fbe_value.int16b3)
+        self.int16b4.set(fbe_value.int16b4)
+        self.int16b5.set(fbe_value.int16b5)
+        self.uint16b0.set(fbe_value.uint16b0)
+        self.uint16b1.set(fbe_value.uint16b1)
+        self.uint16b2.set(fbe_value.uint16b2)
+        self.uint16b3.set(fbe_value.uint16b3)
+        self.uint16b4.set(fbe_value.uint16b4)
+        self.uint16b5.set(fbe_value.uint16b5)
+        self.int32b0.set(fbe_value.int32b0)
+        self.int32b1.set(fbe_value.int32b1)
+        self.int32b2.set(fbe_value.int32b2)
+        self.int32b3.set(fbe_value.int32b3)
+        self.int32b4.set(fbe_value.int32b4)
+        self.int32b5.set(fbe_value.int32b5)
+        self.uint32b0.set(fbe_value.uint32b0)
+        self.uint32b1.set(fbe_value.uint32b1)
+        self.uint32b2.set(fbe_value.uint32b2)
+        self.uint32b3.set(fbe_value.uint32b3)
+        self.uint32b4.set(fbe_value.uint32b4)
+        self.uint32b5.set(fbe_value.uint32b5)
+        self.int64b0.set(fbe_value.int64b0)
+        self.int64b1.set(fbe_value.int64b1)
+        self.int64b2.set(fbe_value.int64b2)
+        self.int64b3.set(fbe_value.int64b3)
+        self.int64b4.set(fbe_value.int64b4)
+        self.int64b5.set(fbe_value.int64b5)
+        self.uint64b0.set(fbe_value.uint64b0)
+        self.uint64b1.set(fbe_value.uint64b1)
+        self.uint64b2.set(fbe_value.uint64b2)
+        self.uint64b3.set(fbe_value.uint64b3)
+        self.uint64b4.set(fbe_value.uint64b4)
+        self.uint64b5.set(fbe_value.uint64b5)
 
 
 # Fast Binary Encoding Enums model
@@ -1489,12 +3211,410 @@ class EnumsModel(fbe.Model):
 
 
 class FinalModelEnums(fbe.FinalModel):
+    __slots__ = "_byte0", "_byte1", "_byte2", "_byte3", "_byte4", "_byte5", "_char0", "_char1", "_char2", "_char3", "_char4", "_char5", "_wchar0", "_wchar1", "_wchar2", "_wchar3", "_wchar4", "_wchar5", "_int8b0", "_int8b1", "_int8b2", "_int8b3", "_int8b4", "_int8b5", "_uint8b0", "_uint8b1", "_uint8b2", "_uint8b3", "_uint8b4", "_uint8b5", "_int16b0", "_int16b1", "_int16b2", "_int16b3", "_int16b4", "_int16b5", "_uint16b0", "_uint16b1", "_uint16b2", "_uint16b3", "_uint16b4", "_uint16b5", "_int32b0", "_int32b1", "_int32b2", "_int32b3", "_int32b4", "_int32b5", "_uint32b0", "_uint32b1", "_uint32b2", "_uint32b3", "_uint32b4", "_uint32b5", "_int64b0", "_int64b1", "_int64b2", "_int64b3", "_int64b4", "_int64b5", "_uint64b0", "_uint64b1", "_uint64b2", "_uint64b3", "_uint64b4", "_uint64b5", 
+
     def __init__(self, buffer, offset):
         super().__init__(buffer, offset)
+        self._byte0 = FinalModelEnumByte(buffer, 0)
+        self._byte1 = FinalModelEnumByte(buffer, 0)
+        self._byte2 = FinalModelEnumByte(buffer, 0)
+        self._byte3 = FinalModelEnumByte(buffer, 0)
+        self._byte4 = FinalModelEnumByte(buffer, 0)
+        self._byte5 = FinalModelEnumByte(buffer, 0)
+        self._char0 = FinalModelEnumChar(buffer, 0)
+        self._char1 = FinalModelEnumChar(buffer, 0)
+        self._char2 = FinalModelEnumChar(buffer, 0)
+        self._char3 = FinalModelEnumChar(buffer, 0)
+        self._char4 = FinalModelEnumChar(buffer, 0)
+        self._char5 = FinalModelEnumChar(buffer, 0)
+        self._wchar0 = FinalModelEnumWChar(buffer, 0)
+        self._wchar1 = FinalModelEnumWChar(buffer, 0)
+        self._wchar2 = FinalModelEnumWChar(buffer, 0)
+        self._wchar3 = FinalModelEnumWChar(buffer, 0)
+        self._wchar4 = FinalModelEnumWChar(buffer, 0)
+        self._wchar5 = FinalModelEnumWChar(buffer, 0)
+        self._int8b0 = FinalModelEnumInt8(buffer, 0)
+        self._int8b1 = FinalModelEnumInt8(buffer, 0)
+        self._int8b2 = FinalModelEnumInt8(buffer, 0)
+        self._int8b3 = FinalModelEnumInt8(buffer, 0)
+        self._int8b4 = FinalModelEnumInt8(buffer, 0)
+        self._int8b5 = FinalModelEnumInt8(buffer, 0)
+        self._uint8b0 = FinalModelEnumUInt8(buffer, 0)
+        self._uint8b1 = FinalModelEnumUInt8(buffer, 0)
+        self._uint8b2 = FinalModelEnumUInt8(buffer, 0)
+        self._uint8b3 = FinalModelEnumUInt8(buffer, 0)
+        self._uint8b4 = FinalModelEnumUInt8(buffer, 0)
+        self._uint8b5 = FinalModelEnumUInt8(buffer, 0)
+        self._int16b0 = FinalModelEnumInt16(buffer, 0)
+        self._int16b1 = FinalModelEnumInt16(buffer, 0)
+        self._int16b2 = FinalModelEnumInt16(buffer, 0)
+        self._int16b3 = FinalModelEnumInt16(buffer, 0)
+        self._int16b4 = FinalModelEnumInt16(buffer, 0)
+        self._int16b5 = FinalModelEnumInt16(buffer, 0)
+        self._uint16b0 = FinalModelEnumUInt16(buffer, 0)
+        self._uint16b1 = FinalModelEnumUInt16(buffer, 0)
+        self._uint16b2 = FinalModelEnumUInt16(buffer, 0)
+        self._uint16b3 = FinalModelEnumUInt16(buffer, 0)
+        self._uint16b4 = FinalModelEnumUInt16(buffer, 0)
+        self._uint16b5 = FinalModelEnumUInt16(buffer, 0)
+        self._int32b0 = FinalModelEnumInt32(buffer, 0)
+        self._int32b1 = FinalModelEnumInt32(buffer, 0)
+        self._int32b2 = FinalModelEnumInt32(buffer, 0)
+        self._int32b3 = FinalModelEnumInt32(buffer, 0)
+        self._int32b4 = FinalModelEnumInt32(buffer, 0)
+        self._int32b5 = FinalModelEnumInt32(buffer, 0)
+        self._uint32b0 = FinalModelEnumUInt32(buffer, 0)
+        self._uint32b1 = FinalModelEnumUInt32(buffer, 0)
+        self._uint32b2 = FinalModelEnumUInt32(buffer, 0)
+        self._uint32b3 = FinalModelEnumUInt32(buffer, 0)
+        self._uint32b4 = FinalModelEnumUInt32(buffer, 0)
+        self._uint32b5 = FinalModelEnumUInt32(buffer, 0)
+        self._int64b0 = FinalModelEnumInt64(buffer, 0)
+        self._int64b1 = FinalModelEnumInt64(buffer, 0)
+        self._int64b2 = FinalModelEnumInt64(buffer, 0)
+        self._int64b3 = FinalModelEnumInt64(buffer, 0)
+        self._int64b4 = FinalModelEnumInt64(buffer, 0)
+        self._int64b5 = FinalModelEnumInt64(buffer, 0)
+        self._uint64b0 = FinalModelEnumUInt64(buffer, 0)
+        self._uint64b1 = FinalModelEnumUInt64(buffer, 0)
+        self._uint64b2 = FinalModelEnumUInt64(buffer, 0)
+        self._uint64b3 = FinalModelEnumUInt64(buffer, 0)
+        self._uint64b4 = FinalModelEnumUInt64(buffer, 0)
+        self._uint64b5 = FinalModelEnumUInt64(buffer, 0)
+
+    @property
+    def byte0(self):
+        return self._byte0
+
+    @property
+    def byte1(self):
+        return self._byte1
+
+    @property
+    def byte2(self):
+        return self._byte2
+
+    @property
+    def byte3(self):
+        return self._byte3
+
+    @property
+    def byte4(self):
+        return self._byte4
+
+    @property
+    def byte5(self):
+        return self._byte5
+
+    @property
+    def char0(self):
+        return self._char0
+
+    @property
+    def char1(self):
+        return self._char1
+
+    @property
+    def char2(self):
+        return self._char2
+
+    @property
+    def char3(self):
+        return self._char3
+
+    @property
+    def char4(self):
+        return self._char4
+
+    @property
+    def char5(self):
+        return self._char5
+
+    @property
+    def wchar0(self):
+        return self._wchar0
+
+    @property
+    def wchar1(self):
+        return self._wchar1
+
+    @property
+    def wchar2(self):
+        return self._wchar2
+
+    @property
+    def wchar3(self):
+        return self._wchar3
+
+    @property
+    def wchar4(self):
+        return self._wchar4
+
+    @property
+    def wchar5(self):
+        return self._wchar5
+
+    @property
+    def int8b0(self):
+        return self._int8b0
+
+    @property
+    def int8b1(self):
+        return self._int8b1
+
+    @property
+    def int8b2(self):
+        return self._int8b2
+
+    @property
+    def int8b3(self):
+        return self._int8b3
+
+    @property
+    def int8b4(self):
+        return self._int8b4
+
+    @property
+    def int8b5(self):
+        return self._int8b5
+
+    @property
+    def uint8b0(self):
+        return self._uint8b0
+
+    @property
+    def uint8b1(self):
+        return self._uint8b1
+
+    @property
+    def uint8b2(self):
+        return self._uint8b2
+
+    @property
+    def uint8b3(self):
+        return self._uint8b3
+
+    @property
+    def uint8b4(self):
+        return self._uint8b4
+
+    @property
+    def uint8b5(self):
+        return self._uint8b5
+
+    @property
+    def int16b0(self):
+        return self._int16b0
+
+    @property
+    def int16b1(self):
+        return self._int16b1
+
+    @property
+    def int16b2(self):
+        return self._int16b2
+
+    @property
+    def int16b3(self):
+        return self._int16b3
+
+    @property
+    def int16b4(self):
+        return self._int16b4
+
+    @property
+    def int16b5(self):
+        return self._int16b5
+
+    @property
+    def uint16b0(self):
+        return self._uint16b0
+
+    @property
+    def uint16b1(self):
+        return self._uint16b1
+
+    @property
+    def uint16b2(self):
+        return self._uint16b2
+
+    @property
+    def uint16b3(self):
+        return self._uint16b3
+
+    @property
+    def uint16b4(self):
+        return self._uint16b4
+
+    @property
+    def uint16b5(self):
+        return self._uint16b5
+
+    @property
+    def int32b0(self):
+        return self._int32b0
+
+    @property
+    def int32b1(self):
+        return self._int32b1
+
+    @property
+    def int32b2(self):
+        return self._int32b2
+
+    @property
+    def int32b3(self):
+        return self._int32b3
+
+    @property
+    def int32b4(self):
+        return self._int32b4
+
+    @property
+    def int32b5(self):
+        return self._int32b5
+
+    @property
+    def uint32b0(self):
+        return self._uint32b0
+
+    @property
+    def uint32b1(self):
+        return self._uint32b1
+
+    @property
+    def uint32b2(self):
+        return self._uint32b2
+
+    @property
+    def uint32b3(self):
+        return self._uint32b3
+
+    @property
+    def uint32b4(self):
+        return self._uint32b4
+
+    @property
+    def uint32b5(self):
+        return self._uint32b5
+
+    @property
+    def int64b0(self):
+        return self._int64b0
+
+    @property
+    def int64b1(self):
+        return self._int64b1
+
+    @property
+    def int64b2(self):
+        return self._int64b2
+
+    @property
+    def int64b3(self):
+        return self._int64b3
+
+    @property
+    def int64b4(self):
+        return self._int64b4
+
+    @property
+    def int64b5(self):
+        return self._int64b5
+
+    @property
+    def uint64b0(self):
+        return self._uint64b0
+
+    @property
+    def uint64b1(self):
+        return self._uint64b1
+
+    @property
+    def uint64b2(self):
+        return self._uint64b2
+
+    @property
+    def uint64b3(self):
+        return self._uint64b3
+
+    @property
+    def uint64b4(self):
+        return self._uint64b4
+
+    @property
+    def uint64b5(self):
+        return self._uint64b5
 
     # Get the allocation size
     def fbe_allocation_size(self, fbe_value):
         fbe_result = 0 \
+            + self.byte0.fbe_allocation_size(fbe_value.byte0) \
+            + self.byte1.fbe_allocation_size(fbe_value.byte1) \
+            + self.byte2.fbe_allocation_size(fbe_value.byte2) \
+            + self.byte3.fbe_allocation_size(fbe_value.byte3) \
+            + self.byte4.fbe_allocation_size(fbe_value.byte4) \
+            + self.byte5.fbe_allocation_size(fbe_value.byte5) \
+            + self.char0.fbe_allocation_size(fbe_value.char0) \
+            + self.char1.fbe_allocation_size(fbe_value.char1) \
+            + self.char2.fbe_allocation_size(fbe_value.char2) \
+            + self.char3.fbe_allocation_size(fbe_value.char3) \
+            + self.char4.fbe_allocation_size(fbe_value.char4) \
+            + self.char5.fbe_allocation_size(fbe_value.char5) \
+            + self.wchar0.fbe_allocation_size(fbe_value.wchar0) \
+            + self.wchar1.fbe_allocation_size(fbe_value.wchar1) \
+            + self.wchar2.fbe_allocation_size(fbe_value.wchar2) \
+            + self.wchar3.fbe_allocation_size(fbe_value.wchar3) \
+            + self.wchar4.fbe_allocation_size(fbe_value.wchar4) \
+            + self.wchar5.fbe_allocation_size(fbe_value.wchar5) \
+            + self.int8b0.fbe_allocation_size(fbe_value.int8b0) \
+            + self.int8b1.fbe_allocation_size(fbe_value.int8b1) \
+            + self.int8b2.fbe_allocation_size(fbe_value.int8b2) \
+            + self.int8b3.fbe_allocation_size(fbe_value.int8b3) \
+            + self.int8b4.fbe_allocation_size(fbe_value.int8b4) \
+            + self.int8b5.fbe_allocation_size(fbe_value.int8b5) \
+            + self.uint8b0.fbe_allocation_size(fbe_value.uint8b0) \
+            + self.uint8b1.fbe_allocation_size(fbe_value.uint8b1) \
+            + self.uint8b2.fbe_allocation_size(fbe_value.uint8b2) \
+            + self.uint8b3.fbe_allocation_size(fbe_value.uint8b3) \
+            + self.uint8b4.fbe_allocation_size(fbe_value.uint8b4) \
+            + self.uint8b5.fbe_allocation_size(fbe_value.uint8b5) \
+            + self.int16b0.fbe_allocation_size(fbe_value.int16b0) \
+            + self.int16b1.fbe_allocation_size(fbe_value.int16b1) \
+            + self.int16b2.fbe_allocation_size(fbe_value.int16b2) \
+            + self.int16b3.fbe_allocation_size(fbe_value.int16b3) \
+            + self.int16b4.fbe_allocation_size(fbe_value.int16b4) \
+            + self.int16b5.fbe_allocation_size(fbe_value.int16b5) \
+            + self.uint16b0.fbe_allocation_size(fbe_value.uint16b0) \
+            + self.uint16b1.fbe_allocation_size(fbe_value.uint16b1) \
+            + self.uint16b2.fbe_allocation_size(fbe_value.uint16b2) \
+            + self.uint16b3.fbe_allocation_size(fbe_value.uint16b3) \
+            + self.uint16b4.fbe_allocation_size(fbe_value.uint16b4) \
+            + self.uint16b5.fbe_allocation_size(fbe_value.uint16b5) \
+            + self.int32b0.fbe_allocation_size(fbe_value.int32b0) \
+            + self.int32b1.fbe_allocation_size(fbe_value.int32b1) \
+            + self.int32b2.fbe_allocation_size(fbe_value.int32b2) \
+            + self.int32b3.fbe_allocation_size(fbe_value.int32b3) \
+            + self.int32b4.fbe_allocation_size(fbe_value.int32b4) \
+            + self.int32b5.fbe_allocation_size(fbe_value.int32b5) \
+            + self.uint32b0.fbe_allocation_size(fbe_value.uint32b0) \
+            + self.uint32b1.fbe_allocation_size(fbe_value.uint32b1) \
+            + self.uint32b2.fbe_allocation_size(fbe_value.uint32b2) \
+            + self.uint32b3.fbe_allocation_size(fbe_value.uint32b3) \
+            + self.uint32b4.fbe_allocation_size(fbe_value.uint32b4) \
+            + self.uint32b5.fbe_allocation_size(fbe_value.uint32b5) \
+            + self.int64b0.fbe_allocation_size(fbe_value.int64b0) \
+            + self.int64b1.fbe_allocation_size(fbe_value.int64b1) \
+            + self.int64b2.fbe_allocation_size(fbe_value.int64b2) \
+            + self.int64b3.fbe_allocation_size(fbe_value.int64b3) \
+            + self.int64b4.fbe_allocation_size(fbe_value.int64b4) \
+            + self.int64b5.fbe_allocation_size(fbe_value.int64b5) \
+            + self.uint64b0.fbe_allocation_size(fbe_value.uint64b0) \
+            + self.uint64b1.fbe_allocation_size(fbe_value.uint64b1) \
+            + self.uint64b2.fbe_allocation_size(fbe_value.uint64b2) \
+            + self.uint64b3.fbe_allocation_size(fbe_value.uint64b3) \
+            + self.uint64b4.fbe_allocation_size(fbe_value.uint64b4) \
+            + self.uint64b5.fbe_allocation_size(fbe_value.uint64b5) \
 
         return fbe_result
 
@@ -1514,7 +3634,405 @@ class FinalModelEnums(fbe.FinalModel):
 
     # Check if the struct fields are valid
     def verify_fields(self):
-        return 0
+        fbe_current_offset = 0
+
+        self.byte0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.byte0.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.byte1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.byte1.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.byte2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.byte2.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.byte3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.byte3.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.byte4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.byte4.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.byte5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.byte5.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.char0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.char0.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.char1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.char1.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.char2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.char2.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.char3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.char3.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.char4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.char4.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.char5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.char5.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.wchar0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.wchar0.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.wchar1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.wchar1.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.wchar2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.wchar2.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.wchar3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.wchar3.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.wchar4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.wchar4.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.wchar5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.wchar5.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int8b0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int8b0.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int8b1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int8b1.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int8b2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int8b2.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int8b3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int8b3.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int8b4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int8b4.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int8b5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int8b5.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint8b0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint8b0.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint8b1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint8b1.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint8b2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint8b2.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint8b3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint8b3.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint8b4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint8b4.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint8b5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint8b5.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int16b0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int16b0.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int16b1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int16b1.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int16b2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int16b2.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int16b3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int16b3.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int16b4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int16b4.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int16b5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int16b5.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint16b0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint16b0.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint16b1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint16b1.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint16b2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint16b2.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint16b3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint16b3.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint16b4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint16b4.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint16b5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint16b5.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int32b0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int32b0.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int32b1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int32b1.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int32b2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int32b2.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int32b3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int32b3.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int32b4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int32b4.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int32b5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int32b5.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint32b0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint32b0.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint32b1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint32b1.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint32b2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint32b2.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint32b3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint32b3.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint32b4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint32b4.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint32b5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint32b5.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int64b0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int64b0.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int64b1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int64b1.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int64b2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int64b2.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int64b3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int64b3.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int64b4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int64b4.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.int64b5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int64b5.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint64b0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint64b0.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint64b1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint64b1.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint64b2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint64b2.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint64b3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint64b3.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint64b4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint64b4.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        self.uint64b5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint64b5.verify()
+        if fbe_field_size == sys.maxsize:
+            return sys.maxsize
+        fbe_current_offset += fbe_field_size
+
+        return fbe_current_offset
 
     # Get the struct value
     def get(self, fbe_value=None):
@@ -1528,7 +4046,406 @@ class FinalModelEnums(fbe.FinalModel):
 
     # Get the struct fields values
     def get_fields(self, fbe_value):
-        return 0
+        fbe_current_offset = 0
+        fbe_current_size = 0
+
+        self.byte0.fbe_offset = fbe_current_offset
+        fbe_result = self.byte0.get()
+        fbe_value.byte0 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.byte1.fbe_offset = fbe_current_offset
+        fbe_result = self.byte1.get()
+        fbe_value.byte1 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.byte2.fbe_offset = fbe_current_offset
+        fbe_result = self.byte2.get()
+        fbe_value.byte2 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.byte3.fbe_offset = fbe_current_offset
+        fbe_result = self.byte3.get()
+        fbe_value.byte3 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.byte4.fbe_offset = fbe_current_offset
+        fbe_result = self.byte4.get()
+        fbe_value.byte4 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.byte5.fbe_offset = fbe_current_offset
+        fbe_result = self.byte5.get()
+        fbe_value.byte5 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.char0.fbe_offset = fbe_current_offset
+        fbe_result = self.char0.get()
+        fbe_value.char0 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.char1.fbe_offset = fbe_current_offset
+        fbe_result = self.char1.get()
+        fbe_value.char1 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.char2.fbe_offset = fbe_current_offset
+        fbe_result = self.char2.get()
+        fbe_value.char2 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.char3.fbe_offset = fbe_current_offset
+        fbe_result = self.char3.get()
+        fbe_value.char3 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.char4.fbe_offset = fbe_current_offset
+        fbe_result = self.char4.get()
+        fbe_value.char4 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.char5.fbe_offset = fbe_current_offset
+        fbe_result = self.char5.get()
+        fbe_value.char5 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.wchar0.fbe_offset = fbe_current_offset
+        fbe_result = self.wchar0.get()
+        fbe_value.wchar0 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.wchar1.fbe_offset = fbe_current_offset
+        fbe_result = self.wchar1.get()
+        fbe_value.wchar1 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.wchar2.fbe_offset = fbe_current_offset
+        fbe_result = self.wchar2.get()
+        fbe_value.wchar2 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.wchar3.fbe_offset = fbe_current_offset
+        fbe_result = self.wchar3.get()
+        fbe_value.wchar3 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.wchar4.fbe_offset = fbe_current_offset
+        fbe_result = self.wchar4.get()
+        fbe_value.wchar4 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.wchar5.fbe_offset = fbe_current_offset
+        fbe_result = self.wchar5.get()
+        fbe_value.wchar5 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int8b0.fbe_offset = fbe_current_offset
+        fbe_result = self.int8b0.get()
+        fbe_value.int8b0 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int8b1.fbe_offset = fbe_current_offset
+        fbe_result = self.int8b1.get()
+        fbe_value.int8b1 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int8b2.fbe_offset = fbe_current_offset
+        fbe_result = self.int8b2.get()
+        fbe_value.int8b2 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int8b3.fbe_offset = fbe_current_offset
+        fbe_result = self.int8b3.get()
+        fbe_value.int8b3 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int8b4.fbe_offset = fbe_current_offset
+        fbe_result = self.int8b4.get()
+        fbe_value.int8b4 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int8b5.fbe_offset = fbe_current_offset
+        fbe_result = self.int8b5.get()
+        fbe_value.int8b5 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint8b0.fbe_offset = fbe_current_offset
+        fbe_result = self.uint8b0.get()
+        fbe_value.uint8b0 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint8b1.fbe_offset = fbe_current_offset
+        fbe_result = self.uint8b1.get()
+        fbe_value.uint8b1 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint8b2.fbe_offset = fbe_current_offset
+        fbe_result = self.uint8b2.get()
+        fbe_value.uint8b2 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint8b3.fbe_offset = fbe_current_offset
+        fbe_result = self.uint8b3.get()
+        fbe_value.uint8b3 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint8b4.fbe_offset = fbe_current_offset
+        fbe_result = self.uint8b4.get()
+        fbe_value.uint8b4 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint8b5.fbe_offset = fbe_current_offset
+        fbe_result = self.uint8b5.get()
+        fbe_value.uint8b5 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int16b0.fbe_offset = fbe_current_offset
+        fbe_result = self.int16b0.get()
+        fbe_value.int16b0 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int16b1.fbe_offset = fbe_current_offset
+        fbe_result = self.int16b1.get()
+        fbe_value.int16b1 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int16b2.fbe_offset = fbe_current_offset
+        fbe_result = self.int16b2.get()
+        fbe_value.int16b2 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int16b3.fbe_offset = fbe_current_offset
+        fbe_result = self.int16b3.get()
+        fbe_value.int16b3 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int16b4.fbe_offset = fbe_current_offset
+        fbe_result = self.int16b4.get()
+        fbe_value.int16b4 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int16b5.fbe_offset = fbe_current_offset
+        fbe_result = self.int16b5.get()
+        fbe_value.int16b5 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint16b0.fbe_offset = fbe_current_offset
+        fbe_result = self.uint16b0.get()
+        fbe_value.uint16b0 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint16b1.fbe_offset = fbe_current_offset
+        fbe_result = self.uint16b1.get()
+        fbe_value.uint16b1 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint16b2.fbe_offset = fbe_current_offset
+        fbe_result = self.uint16b2.get()
+        fbe_value.uint16b2 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint16b3.fbe_offset = fbe_current_offset
+        fbe_result = self.uint16b3.get()
+        fbe_value.uint16b3 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint16b4.fbe_offset = fbe_current_offset
+        fbe_result = self.uint16b4.get()
+        fbe_value.uint16b4 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint16b5.fbe_offset = fbe_current_offset
+        fbe_result = self.uint16b5.get()
+        fbe_value.uint16b5 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int32b0.fbe_offset = fbe_current_offset
+        fbe_result = self.int32b0.get()
+        fbe_value.int32b0 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int32b1.fbe_offset = fbe_current_offset
+        fbe_result = self.int32b1.get()
+        fbe_value.int32b1 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int32b2.fbe_offset = fbe_current_offset
+        fbe_result = self.int32b2.get()
+        fbe_value.int32b2 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int32b3.fbe_offset = fbe_current_offset
+        fbe_result = self.int32b3.get()
+        fbe_value.int32b3 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int32b4.fbe_offset = fbe_current_offset
+        fbe_result = self.int32b4.get()
+        fbe_value.int32b4 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int32b5.fbe_offset = fbe_current_offset
+        fbe_result = self.int32b5.get()
+        fbe_value.int32b5 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint32b0.fbe_offset = fbe_current_offset
+        fbe_result = self.uint32b0.get()
+        fbe_value.uint32b0 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint32b1.fbe_offset = fbe_current_offset
+        fbe_result = self.uint32b1.get()
+        fbe_value.uint32b1 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint32b2.fbe_offset = fbe_current_offset
+        fbe_result = self.uint32b2.get()
+        fbe_value.uint32b2 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint32b3.fbe_offset = fbe_current_offset
+        fbe_result = self.uint32b3.get()
+        fbe_value.uint32b3 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint32b4.fbe_offset = fbe_current_offset
+        fbe_result = self.uint32b4.get()
+        fbe_value.uint32b4 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint32b5.fbe_offset = fbe_current_offset
+        fbe_result = self.uint32b5.get()
+        fbe_value.uint32b5 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int64b0.fbe_offset = fbe_current_offset
+        fbe_result = self.int64b0.get()
+        fbe_value.int64b0 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int64b1.fbe_offset = fbe_current_offset
+        fbe_result = self.int64b1.get()
+        fbe_value.int64b1 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int64b2.fbe_offset = fbe_current_offset
+        fbe_result = self.int64b2.get()
+        fbe_value.int64b2 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int64b3.fbe_offset = fbe_current_offset
+        fbe_result = self.int64b3.get()
+        fbe_value.int64b3 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int64b4.fbe_offset = fbe_current_offset
+        fbe_result = self.int64b4.get()
+        fbe_value.int64b4 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.int64b5.fbe_offset = fbe_current_offset
+        fbe_result = self.int64b5.get()
+        fbe_value.int64b5 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint64b0.fbe_offset = fbe_current_offset
+        fbe_result = self.uint64b0.get()
+        fbe_value.uint64b0 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint64b1.fbe_offset = fbe_current_offset
+        fbe_result = self.uint64b1.get()
+        fbe_value.uint64b1 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint64b2.fbe_offset = fbe_current_offset
+        fbe_result = self.uint64b2.get()
+        fbe_value.uint64b2 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint64b3.fbe_offset = fbe_current_offset
+        fbe_result = self.uint64b3.get()
+        fbe_value.uint64b3 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint64b4.fbe_offset = fbe_current_offset
+        fbe_result = self.uint64b4.get()
+        fbe_value.uint64b4 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        self.uint64b5.fbe_offset = fbe_current_offset
+        fbe_result = self.uint64b5.get()
+        fbe_value.uint64b5 = fbe_result[0]
+        fbe_current_offset += fbe_result[1]
+        fbe_current_size += fbe_result[1]
+
+        return fbe_current_size
 
     # Set the struct value
     def set(self, fbe_value):
@@ -1539,7 +4456,340 @@ class FinalModelEnums(fbe.FinalModel):
 
     # Set the struct fields values
     def set_fields(self, fbe_value):
-        return 0
+        fbe_current_offset = 0
+        fbe_current_size = 0
+
+        self.byte0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.byte0.set(fbe_value.byte0)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.byte1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.byte1.set(fbe_value.byte1)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.byte2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.byte2.set(fbe_value.byte2)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.byte3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.byte3.set(fbe_value.byte3)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.byte4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.byte4.set(fbe_value.byte4)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.byte5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.byte5.set(fbe_value.byte5)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.char0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.char0.set(fbe_value.char0)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.char1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.char1.set(fbe_value.char1)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.char2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.char2.set(fbe_value.char2)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.char3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.char3.set(fbe_value.char3)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.char4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.char4.set(fbe_value.char4)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.char5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.char5.set(fbe_value.char5)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.wchar0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.wchar0.set(fbe_value.wchar0)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.wchar1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.wchar1.set(fbe_value.wchar1)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.wchar2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.wchar2.set(fbe_value.wchar2)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.wchar3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.wchar3.set(fbe_value.wchar3)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.wchar4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.wchar4.set(fbe_value.wchar4)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.wchar5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.wchar5.set(fbe_value.wchar5)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int8b0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int8b0.set(fbe_value.int8b0)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int8b1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int8b1.set(fbe_value.int8b1)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int8b2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int8b2.set(fbe_value.int8b2)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int8b3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int8b3.set(fbe_value.int8b3)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int8b4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int8b4.set(fbe_value.int8b4)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int8b5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int8b5.set(fbe_value.int8b5)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint8b0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint8b0.set(fbe_value.uint8b0)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint8b1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint8b1.set(fbe_value.uint8b1)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint8b2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint8b2.set(fbe_value.uint8b2)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint8b3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint8b3.set(fbe_value.uint8b3)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint8b4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint8b4.set(fbe_value.uint8b4)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint8b5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint8b5.set(fbe_value.uint8b5)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int16b0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int16b0.set(fbe_value.int16b0)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int16b1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int16b1.set(fbe_value.int16b1)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int16b2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int16b2.set(fbe_value.int16b2)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int16b3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int16b3.set(fbe_value.int16b3)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int16b4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int16b4.set(fbe_value.int16b4)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int16b5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int16b5.set(fbe_value.int16b5)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint16b0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint16b0.set(fbe_value.uint16b0)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint16b1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint16b1.set(fbe_value.uint16b1)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint16b2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint16b2.set(fbe_value.uint16b2)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint16b3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint16b3.set(fbe_value.uint16b3)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint16b4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint16b4.set(fbe_value.uint16b4)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint16b5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint16b5.set(fbe_value.uint16b5)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int32b0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int32b0.set(fbe_value.int32b0)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int32b1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int32b1.set(fbe_value.int32b1)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int32b2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int32b2.set(fbe_value.int32b2)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int32b3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int32b3.set(fbe_value.int32b3)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int32b4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int32b4.set(fbe_value.int32b4)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int32b5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int32b5.set(fbe_value.int32b5)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint32b0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint32b0.set(fbe_value.uint32b0)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint32b1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint32b1.set(fbe_value.uint32b1)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint32b2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint32b2.set(fbe_value.uint32b2)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint32b3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint32b3.set(fbe_value.uint32b3)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint32b4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint32b4.set(fbe_value.uint32b4)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint32b5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint32b5.set(fbe_value.uint32b5)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int64b0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int64b0.set(fbe_value.int64b0)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int64b1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int64b1.set(fbe_value.int64b1)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int64b2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int64b2.set(fbe_value.int64b2)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int64b3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int64b3.set(fbe_value.int64b3)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int64b4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int64b4.set(fbe_value.int64b4)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.int64b5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.int64b5.set(fbe_value.int64b5)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint64b0.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint64b0.set(fbe_value.uint64b0)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint64b1.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint64b1.set(fbe_value.uint64b1)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint64b2.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint64b2.set(fbe_value.uint64b2)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint64b3.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint64b3.set(fbe_value.uint64b3)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint64b4.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint64b4.set(fbe_value.uint64b4)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        self.uint64b5.fbe_offset = fbe_current_offset
+        fbe_field_size = self.uint64b5.set(fbe_value.uint64b5)
+        fbe_current_offset += fbe_field_size
+        fbe_current_size += fbe_field_size
+
+        return fbe_current_size
 
 
 # Fast Binary Encoding Enums final model

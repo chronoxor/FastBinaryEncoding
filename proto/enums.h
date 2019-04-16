@@ -4546,6 +4546,32 @@ private:
 namespace FBE {
 namespace enums {
 
+// Fast Binary Encoding enums client
+template <class TBuffer>
+class Client : protected Sender<TBuffer>, protected Receiver<TBuffer>
+{
+public:
+    Client() = default;
+    Client(const Client&) = default;
+    Client(Client&&) noexcept = default;
+    virtual ~Client() = default;
+
+    Client& operator=(const Client&) = default;
+    Client& operator=(Client&&) noexcept = default;
+
+    // Asynchronous sender
+    Sender<TBuffer>& sender() noexcept { return *this; }
+
+protected:
+    uint64_t _timestamp{0};
+};
+
+} // namespace enums
+} // namespace FBE
+
+namespace FBE {
+namespace enums {
+
 // Fast Binary Encoding enums proxy
 template <class TBuffer>
 class Proxy : public virtual FBE::Receiver<TBuffer>
@@ -4694,6 +4720,32 @@ private:
 
     // Receiver models accessors
     FBE::enums::EnumsFinalModel<ReadBuffer> EnumsModel;
+};
+
+} // namespace enums
+} // namespace FBE
+
+namespace FBE {
+namespace enums {
+
+// Fast Binary Encoding enums final client
+template <class TBuffer>
+class FinalClient : protected FinalSender<TBuffer>, protected FinalReceiver<TBuffer>
+{
+public:
+    FinalClient() = default;
+    FinalClient(const FinalClient&) = default;
+    FinalClient(FinalClient&&) noexcept = default;
+    virtual ~FinalClient() = default;
+
+    FinalClient& operator=(const FinalClient&) = default;
+    FinalClient& operator=(FinalClient&&) noexcept = default;
+
+    // Asynchronous sender
+    FinalSender<TBuffer>& sender() noexcept { return *this; }
+
+protected:
+    uint64_t _timestamp{0};
 };
 
 } // namespace enums

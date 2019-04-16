@@ -90,6 +90,7 @@ int yyerror(const std::string& msg);
 
 {L}({L}|{D})*           { yycount(); return yystring(IDENTIFIER); }
 
+","                     { yycount(); return yychar(','); }
 "."                     { yycount(); return yychar('.'); }
 ":"                     { yycount(); return yychar(':'); }
 ";"                     { yycount(); return yychar(';'); }

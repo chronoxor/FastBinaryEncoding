@@ -19,6 +19,7 @@
 #include <cmath>
 #include <cstring>
 #include <cctype>
+#include <future>
 #include <iomanip>
 #include <limits>
 #include <list>

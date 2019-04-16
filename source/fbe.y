@@ -184,16 +184,18 @@ struct_request
     ;
 
 struct_response
-    : '[' RES '(' type_name ')' ']'                                             { $$ = new FBE::StructResponse(); $$->response.reset($4); }
+    :                                                                           { $$ = nullptr; }
+    | '[' RES '(' type_name ')' ']'                                             { $$ = new FBE::StructResponse(); $$->response.reset($4); }
     ;
 
 struct_rejects
-    : '[' REJ '(' struct_reject ')' ']'                                         { $$ = $4; }
+    :                                                                           { $$ = nullptr; }
+    | '[' REJ '(' struct_reject ')' ']'                                         { $$ = $4; }
     ;
 
 struct_reject
     : type_name                                                                 { $$ = new FBE::StructRejects(); $$->AddReject($1); }
-    | struct_reject type_name                                                   { $$ = $1; $$->AddReject($2); }
+    | struct_reject ',' type_name                                               { $$ = $1; $$->AddReject($3); }
     ;
 
 struct
@@ -215,8 +217,8 @@ struct_body
 struct_field
     : struct_field_type type_name ';'                                           { $$ = $1; $$->name.reset($2); }
     | struct_field_type type_name '=' struct_field_value ';'                    { $$ = $1; $$->name.reset($2); $$->value.reset($4); }
-    | ID struct_field_type type_name ';'                                        { $$ = $2; $$->id = true; $$->name.reset($3); }
-    | ID struct_field_type type_name '=' struct_field_value ';'                 { $$ = $2; $$->id = true; $$->name.reset($3); $$->value.reset($5); }
+    | struct_field_type ID ';'                                                  { $$ = $1; $$->id = true; $$->name = std::make_shared<std::string>("id"); }
+    | struct_field_type ID '=' struct_field_value ';'                           { $$ = $1; $$->id = true; $$->name = std::make_shared<std::string>("id"); $$->value.reset($4); }
     | KEY struct_field_type type_name ';'                                       { $$ = $2; $$->keys = true; $$->name.reset($3); }
     | KEY struct_field_type type_name '=' struct_field_value ';'                { $$ = $2; $$->keys = true; $$->name.reset($3); $$->value.reset($5); }
     ;
